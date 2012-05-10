@@ -1,0 +1,31 @@
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<iscomment>
+Prints a message about the product's availability. The messages to be displayed are defined as resources.
+</iscomment>
+<isif condition="${pdict.Product!=null && pdict.Product.availabilityModel != null}">	
+	<isset name="availabilityModel" value="${pdict.Product.availabilityModel}" scope="PAGE"/>
+	<isset name="availabilityStatus" value="${pdict.Product.availabilityModel.availabilityStatus}" scope="PAGE"/>
+	<isset name="inventoryRecord" value="${pdict.Product.availabilityModel.inventoryRecord}" scope="PAGE"/>
+	
+	<isif condition="${availabilityStatus == dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER}">
+		<isif condition="${pdict.Product.availabilityModel.inventoryRecord != null && pdict.Product.availabilityModel.inventoryRecord.inStockDate != null}">
+			<span class="availability-status">${availabilityStatus}</span><br/>
+			<span class="availability-msg">${StringUtils.format(Resource.msg('global.inStockDate','locale',null), pdict.Product.availabilityModel.inventoryRecord.inStockDate.toDateString())}</span>
+		<iselse>
+			<span class="availability-msg">${StringUtils.format(Resource.msg('global.allpreorder','locale',null))}</span>
+		</isif>
+	<iselseif condition="${availabilityStatus == dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER}">
+		<isif condition="${pdict.Product.availabilityModel.inventoryRecord != null && (pdict.Product.availabilityModel.inventoryRecord.inStockDate != null && pdict.Product.availabilityModel.inventoryRecord.inStockDate>new Date())}">
+			<span class="availability-status">${availabilityStatus}</span><br/>
+			<span class="availability-msg">${StringUtils.format(Resource.msg('global.inStockDate','locale',null), pdict.Product.availabilityModel.inventoryRecord.inStockDate.toDateString())}</span>
+		<iselse>
+			<span class="availability-msg">${StringUtils.format(Resource.msg('global.allbackorder','locale',null))}</span>
+		</isif>
+	<iselseif condition="${!pdict.available}">
+		<span class="availability-msg notavailable">${Resource.msg('global.allnotavailable','locale',null)}</span>
+	<iselseif condition="${availabilityStatus == dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK && inventoryRecord != null && inventoryRecord.stockLevel.available}">
+		<span class="availability-msg">${StringUtils.format(Resource.msg('global.instock','locale',null))}</span>			
+	<iselse>
+		<span class="availability-msg notavailable">${Resource.msg('global.allnotavailable','locale',null)}</span>				
+	</isif>	
+</isif>
