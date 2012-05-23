@@ -30,9 +30,9 @@
 						<td class="city">
 							<isif condition="${ProductList.object.shippingAddress != null}">
 								<isprint value="${empty(ProductList.object.shippingAddress)?'':ProductList.object.shippingAddress.city + ", " + ProductList.object.shippingAddress.stateCode }"/>
-							<iselseif condition="${ProductList.object.owner.profile.addressBook.preferredAddress != null}">
-								<isprint value="${empty(ProductList.object.owner.profile.addressBook.preferredAddress)?'':ProductList.object.owner.profile.addressBook.preferredAddress.city + ", " + ProductList.object.owner.profile.addressBook.preferredAddress.stateCode }"/>
-							</isif>
+								<iselse>
+									<isprint value="${Resource.msg('wishlist.nolocationtoshow','account',null)}"/>
+							</isif>							
 						</td>
 						<td class="view">
 							<a href="${URLUtils.url('Wishlist-ShowOther','WishListID',ProductList.object.ID)}">
