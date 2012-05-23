@@ -27,7 +27,11 @@
 			rangeEnd = Math.min( rangeBegin + 2*lr, maxPage );
 		}
 	</isscript>
-
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		app.responsive.toggleGridWideTileView();
+});
+</script>
 <div class="pagination">
 
 	<div class="results-hits">

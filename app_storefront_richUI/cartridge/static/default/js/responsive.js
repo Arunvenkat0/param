@@ -102,6 +102,19 @@
 				$cache.homepageSlider.find('#homepage-slides').css( {'left':'0','width': ($cache.wrapper.width() * $cache.homepageSlider.find('#homepage-slides li').size()) });
 				homeCarousel.reload();
 			}
+		},
+		
+		toggleGridWideTileView : function(){
+			
+			/*	toggle grid/wide tile	*/
+			if(jQuery('.toggle-grid').length == 0)
+			{
+				jQuery('.results-hits').prepend('<a class="toggle-grid">+</a>');
+				jQuery('.toggle-grid').click(function(){
+					jQuery('.search-result-content').toggleClass('wide-tiles');
+				});
+			}
+			
 		}
 
 	}
@@ -111,12 +124,6 @@
 	
 	$(document).ready(function(){
 		
-		/*	demo of toggle grid/wide tile	*/
-		jQuery('.results-hits').prepend('<a class="toggle-grid">+</a>');
-		jQuery('.toggle-grid').click(function(){
-			jQuery('.search-result-content').toggleClass('wide-tiles');
-		});
-
 		app.responsive.init();
 		
 		// set up listener so we can update DOM if page grows/shrinks, only on bigger platforms
