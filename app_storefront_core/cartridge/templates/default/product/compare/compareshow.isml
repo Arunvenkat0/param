@@ -68,7 +68,7 @@
 						</form>
 			        </div>					
 			        
-			        <isif condition="${!compareProduct.master}">
+			       <isif condition="${!compareProduct.master}">
 				        <iscomment>wish list</iscomment>			        
 				        <div class="add-to-wishlist">
 				        	<a href="${URLUtils.https('Wishlist-Add','pid',compareProduct.ID)}">${Resource.msg('global.addtowishlist', 'locale', null)}</a>
@@ -78,6 +78,39 @@
 				        <div class="add-to-gift-registry">
 				        	<a href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', compareProduct.ID)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
 				        </div>
+				    <iselse>
+							<isscript>
+								var product : dw.catalog.Product = compareProduct;
+								var varID : String; 
+								var variants : dw.util.Collection = product.variants;
+								if(variants != null)
+								{
+									var iter : dw.util.Iterator = variants.iterator();
+								
+								    while(iter.hasNext())
+								    {
+								    	var aVariant : dw.catalog.Product = iter.next();
+								    	if(aVariant.available && aVariant.online)
+								    	{
+								    		varID = aVariant.ID;
+								    		break;
+								    	}
+								    }
+									
+								}
+							</isscript>
+							<isif condition = "${varID != null}">
+								 <iscomment>wish list</iscomment>			        
+							        <div class="add-to-wishlist">
+							        	<a href="${URLUtils.https('Wishlist-Add','pid',varID)}">${Resource.msg('global.addtowishlist', 'locale', null)}</a>
+							        </div>			       
+				
+							        <iscomment>gift registry</iscomment>
+							        <div class="add-to-gift-registry">
+							        	<a href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', varID)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
+							        </div>
+							</isif>  
+						
 		         	</isif>
 				</td>
 			</isloop>
