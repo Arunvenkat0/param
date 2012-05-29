@@ -63,6 +63,7 @@ var app = (function (app, $) {
 			
 			$(this).next('div.char-count').find('.char-remain-count').html(charsRemain);
 		});
+		
 
 		//initialize search suggestions
 		app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
@@ -2076,12 +2077,31 @@ var app = (function (app, $) {
 
 			if (!url) { return; }
 			
+			var form = jQuery(this).parents('form');
+			
 			// if this is a content link, update url from Page-Show to Page-Include
 			if ($(this).hasClass("attributecontentlink")) {
 				var uri = app.util.getUri(url);
 				url = app.urls.pageInclude+uri.query;
 			}
-
+			if (form.attr("method").toUpperCase() == "POST") 
+			{
+		         var postData = form.serialize() + "&"+ jQuery(this).attr("name") + "=submit";
+		    } 
+			else 
+			{
+		         if (url.indexOf('?') == -1 ) 
+		         {
+		          url+='?';
+		         } 
+		         else 
+		         {
+		          url += '&'
+		         }
+		         url += form.serialize();
+		         url = app.util.appendParamToURL(url, jQuery(this).attr('name'), "submit");
+			}
+			
 			var dlg = app.dialog.create({target:dlgAction.target, options : dlgOptions});
 
 			app.ajax.load({
@@ -2089,7 +2109,9 @@ var app = (function (app, $) {
 				target:dlg, callback: function () {
 					dlg.dialog("open");	// open after load to ensure dialog is centered
 					app.validator.init(); // re-init validator
-				}
+				},
+				data : !$(actionSource).attr("href") ? postData : null
+				
 			});
 		},
 
@@ -2610,7 +2632,7 @@ var app = (function (app, $) {
 			app.dialog.close();
 			app.page.refresh();
 		})
-		.on("click", ".cancel-button", function(e){
+		.on("click", ".cancel-button, .close-button", function(e){
 			e.preventDefault();
 			app.dialog.close();
 		})
