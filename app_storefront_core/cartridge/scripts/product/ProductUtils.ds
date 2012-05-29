@@ -200,7 +200,7 @@ ProductUtils.getAvailability = function(item : Product, quantity : Object) {
 	availability.inStockMsg = Resource.msgf('global.quantityinstock','locale',"", avmLevels.inStock.value.toFixed());
 	availability.preOrderMsg = Resource.msgf('global.quantitypreorder','locale',"", avmLevels.preorder.value.toFixed());
 	availability.backOrderMsg = Resource.msgf('global.quantitybackorder','locale',"", avmLevels.backorder.value.toFixed());
-	if (!empty(avm.inventoryRecord.inStockDate)) {
+	if (avm && avm.inventoryRecord && !empty(avm.inventoryRecord.inStockDate)) {
 		availability.inStockDateMsg = Resource.msgf('global.inStockDate','locale',"", avm.inventoryRecord.inStockDate.toDateString());
 	}
 	
