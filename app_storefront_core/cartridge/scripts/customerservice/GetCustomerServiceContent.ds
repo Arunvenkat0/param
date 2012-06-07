@@ -15,7 +15,10 @@ function execute( pdict : PipelineDictionary ) : Number
 {
 	// get the customer service folder
 	var content : Folder = ContentMgr.getFolder(pdict.FolderID);
-
+	if ( empty(content) ) {
+		return PIPELET_NEXT;
+	}
+	
 	var customerServiceFolders : Collection = content.getOnlineSubFolders();
 
 	var folders : Iterator = customerServiceFolders.iterator();
