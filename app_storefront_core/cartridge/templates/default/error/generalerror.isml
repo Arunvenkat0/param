@@ -28,13 +28,13 @@
 			</form>
 		</div>
 		
+		<isscript>
+			var instanceType = dw.system.System.getInstanceType();
+			var production = dw.system.System.PRODUCTION_SYSTEM;
+			var staging = dw.system.System.STAGING_SYSTEM;
+		</isscript>
 		<div class="error-page-tech-details" <isif condition="${instanceType == production || instanceType == staging}">style="display:none"</isif>>
 			
-			<isscript>
-				var instanceType = dw.system.System.getInstanceType();
-				var production = dw.system.System.PRODUCTION_SYSTEM;
-				var staging = dw.system.System.STAGING_SYSTEM;
-			</isscript>
 			
 			<isif condition="${'PipelineName' in pdict || 'CurrentStartNodeName' in pdict}">			
 				<p>${Resource.msg('generalerror.request','error',null)}</p>
