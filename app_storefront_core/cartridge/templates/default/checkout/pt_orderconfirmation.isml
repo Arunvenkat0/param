@@ -9,7 +9,7 @@
 	<isinclude template="util/modules"/>
 	
 	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
-	<isscript>pdict.pageContext={title:"Order Confirmation", type:"orderconfirmation", ns:"orderconfirmation"};</isscript>
+	<isset name="pageContext" value="${ {title:'Order Confirmation', type:'orderconfirmation', ns:'orderconfirmation'} }" scope="pdict" />
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="checkout/pt_orderconfirmation_UI"/>
 	

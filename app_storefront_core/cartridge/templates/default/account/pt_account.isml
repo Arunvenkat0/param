@@ -6,10 +6,7 @@
 
 <head>
 
-	<isscript>
-				
-		pdict.pageContext={title:"My Account", type:"MyAccount", ns:"account"};
-	</isscript>
+	<isset name="pageContext" value="${ new Object({title:'My Account', type:'MyAccount', ns:'account'}) }" scope="pdict" />
 	<isinclude template="util/modules"/>
 	
 	<isinclude template="components/header/htmlhead"/>

@@ -6,7 +6,7 @@
 
 <head>
 
-	<isscript>pdict.pageContext={title:"Compare",type:"compare",ns:"compare"};</isscript>
+	<isset name="pageContext" value="${ {title:'Compare',type:'compare',ns:'compare'} }" scope="pdict" />
 	<isinclude template="util/modules"/>
 	
 	<isinclude template="components/header/htmlhead"/>

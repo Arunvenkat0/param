@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 
-	<isscript>pdict.pageContext={title:"Product Search Results", type:"search", ns:"search"};</isscript>
+	<isset name="pageContext" scope="pdict" value="${ {title:'Product Search Results', type:'search', ns:'search'} }" />
 	<isinclude template="util/modules"/>	
 	<iscomment>
 		Please mind that the productsearchrefinebar contains price information that is subject to personalization.

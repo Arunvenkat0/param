@@ -6,7 +6,7 @@
 
 <head>
 
-	<isscript>pdict.pageContext={title:"Order History", type:"OrderHistory", ns:"account"};</isscript>
+	<isset name="pageContext" value="${ {title:'Order History', type:'OrderHistory', ns:'account'} }" scope="pdict" />
 	<isinclude template="util/modules"/>
 
 	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>

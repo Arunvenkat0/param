@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 
-	<isscript>pdict.pageContext={title:"Storefront",type:"storefront",ns:"storefront"};</isscript>
+	<isset name="pageContext" value="${ {title:'Storefront',type:'storefront',ns:'storefront'} }" scope="pdict" />
 	<isinclude template="util/modules"/>
 
 	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>

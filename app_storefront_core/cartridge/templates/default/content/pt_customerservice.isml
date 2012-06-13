@@ -6,7 +6,7 @@
 
 <head>
 
-	<isscript>pdict.pageContext={title:"Customer Service", type:"customerservice",ns:"account"};</isscript>
+	<isset name="pageContext" value="${ {title:'Customer Service', type:'customerservice',ns:'account'} }" scope="pdict" />
 	<isinclude template="util/modules"/>
 	
 	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
