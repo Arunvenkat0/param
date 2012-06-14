@@ -6,7 +6,7 @@
 
 <head>
 
-	<isset name="pageContext" value="${ new Object({title:'My Account', type:'MyAccount', ns:'account'}) }" scope="pdict" />
+	<isscript>var pageContext={title:'My Account', type:'MyAccount', ns:'account'};</isscript>
 	<isinclude template="util/modules"/>
 	
 	<isinclude template="components/header/htmlhead"/>

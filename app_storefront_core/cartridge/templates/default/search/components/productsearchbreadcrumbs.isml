@@ -10,9 +10,14 @@
 	<h1>
 
 	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+		<isif condition="${empty(pagingModel)}">
+			<isset name="breadcrumbHref" value="${URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase)}" scope="page" />
+		<iselse/>
+			<isset name="breadcrumbHref" value="${pagingModel.appendPaging(URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase), 0)}" scope="page" />
+		</isif>
 		<span class="breadcrumb-result-text">
 			${Resource.msg('searchbreadcrumbs.resultstext','search',null)}
-			&quot;<a href="${pagingModel.appendPaging(URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase), 0)}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>&quot;
+			&quot;<a href="${breadcrumbHref}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>&quot;
 		</span>
 	</isif>
 
@@ -89,7 +94,12 @@
 					<isprint value="${pdict.ProductSearchResult.priceMax}"/>
 				</isif>
 				
-				<a class="breadcrumb-relax" href="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), 0)}">
+				<isif condition="${empty(pagingModel)}">
+					<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxPrice('Search-Show')}" scope="page" />
+				<iselse/>
+					<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
+				</isif>
+				<a class="breadcrumb-relax" href="${breadcrumbHref}">
 					<img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/>
 				</a>
 				
@@ -120,7 +130,12 @@
 
 						<span class="breadcrumb-refinement-value">
 							<isprint value="${value.displayValue}"/>
-							<a class="breadcrumb-relax" href="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}">
+							<isif condition="${empty(pagingModel)}">
+								<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
+							<iselse/>
+								<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
+							</isif>
+							<a class="breadcrumb-relax" href="${breadcrumbHref}">
 								<img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/>
 								<isif condition="${!values.last}">,</isif>
 							</a>

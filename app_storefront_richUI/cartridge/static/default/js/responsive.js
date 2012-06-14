@@ -109,9 +109,10 @@
 			/*	toggle grid/wide tile	*/
 			if(jQuery('.toggle-grid').length == 0)
 			{
-				jQuery('.results-hits').prepend('<a class="toggle-grid">+</a>');
+				jQuery('.results-hits').prepend('<a class="toggle-grid" href="'+location.href+'">+</a>');
 				jQuery('.toggle-grid').click(function(){
 					jQuery('.search-result-content').toggleClass('wide-tiles');
+					return false;
 				});
 			}
 			

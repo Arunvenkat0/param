@@ -5,8 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 
 <head>
-
-	<isset name="pageContext" value="${ {title:'Content Search Results',type:'search',ns:'search'} }" scope="pdict" />
+	<isscript>var pageContext={title:'Content Search Results',type:'search',ns:'search'};</isscript>
 	<isinclude template="util/modules"/>
 	
 	<isinclude template="components/header/htmlhead"/>

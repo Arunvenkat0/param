@@ -6,7 +6,7 @@
 
 <head>
 
-	<isset name="pageContext" value="${ {title:pdict.Product.name || 'Product Detail', type:'product',ns:'product'} }" scope="pdict" />
+	<isscript>var pageContext={title:(pdict.Product.name || 'Product Detail'), type:'product', ns:'product'};</isscript>
 	<isinclude template="components/header/htmlhead"/>
 
 	<isinclude template="product/pt_productdetails_UI"/>

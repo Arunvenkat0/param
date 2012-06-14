@@ -131,18 +131,21 @@
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">									
 												<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
+												<isset name="swImage" value="${VV.getImage('swatch')}" scope="page"/>
 												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
 												<isset name="swatchClass" value="${isSelected ? 'selected' : 'emptyswatch'}" scope="page"/>
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>											
 												<isif condition="${isSelected}">												
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 													<isscript>selectedVariants.push(VA.ID+"-"+VV.value);</isscript>
+												<iselse/>
+													<isset name="selectedSwatchValue" scope="page" value="${''}" />
 												</isif>										
 												<li class="${swatchClass}">												
 													<a href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}"
 													   title="${displayValue}"
 													   class="swatchanchor"
-													   style="background: url(${VV.getImage('swatch').getURL()}) repeat-y;"										   
+													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
 													   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${VV.getImage('hi-res').getURL()}"}'>										   
 													   	<isprint value="${displayValue}">
 													</a>
@@ -167,6 +170,8 @@
 												<isif condition="${isSelected}">
 													<isscript>var selectedVariant = VA.ID+"-"+VV.value;</isscript>
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
+												<iselse/>
+													<isset name="selectedSwatchValue" scope="page" value="${''}" />
 												</isif>																		
 												<li class="${swatchClass}">																								
 													<isif condition="${selectable}">

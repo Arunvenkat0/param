@@ -6,7 +6,7 @@
 
 <head>
 
-	<isset name="pageContext" value="${ {title:'Gift Registry', type:'GiftRegistry', ns:'registry'} }" scope="pdict" />
+	<isscript>var pageContext={title:'Gift Registry', type:'GiftRegistry', ns:'registry'};</isscript>
 	<isinclude template="util/modules"/>
 
 	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>

@@ -7,7 +7,7 @@
 <head>
 	<iscomment>This page must never be cached!! This page tries to avoid having too much logic or includes to avoid any followup errors!!</iscomment>	
 	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
-	<isset name="pageContext" value="${ {title:'General Error', type:'error' ,ns:'error'} }" scope="pdict" />
+	<isscript>var pageContext={title:'General Error', type:'error' ,ns:'error'};</isscript>
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="error/pt_error_UI"/>
 	

@@ -10,7 +10,10 @@
 <script src="//s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4ea5d98601c1dc84&domready=1" type="text/javascript"></script>
 <script src="${URLUtils.url('Resources-Load', 't', 'appresources')}"></script>
 <script src="${URLUtils.staticURL('/js/app.js')}"></script>
-<script>app.page.setContext(<isprint value="${JSON.stringify(pdict.pageContext || new Object())}" encoding="off"/>);</script>
+<isif condition="${!('pageContext' in this) || empty(pageContext)}">
+	pageContext = new Object();
+</isif>
+<script>app.page.setContext(<isprint value="${JSON.stringify(pageContext)}" encoding="off"/>);</script>
 <script>
 var meta = "${pdict.CurrentPageMetaData.description}";
 var keywords = "${pdict.CurrentPageMetaData.keywords}";
