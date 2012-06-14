@@ -411,7 +411,7 @@ ProductUtils.getQueryString = function(map: dw.web.HttpParameterMap, fields : Ar
 		if(empty(parm) || parm.stringValue.length==0) { continue;	}
 				
 		// only get here if we have a match
-		parms.push(key+"="+	parm.stringValue);
+		parms.push(encodeURIComponent(key)+"="+	encodeURIComponent(parm.stringValue));
 	}
 	var qs = parms.length==0 ? "" : parms.join("&"); 
 	return 	qs;
