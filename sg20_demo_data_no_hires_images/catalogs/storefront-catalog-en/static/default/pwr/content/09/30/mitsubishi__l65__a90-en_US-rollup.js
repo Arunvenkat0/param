@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/09/30/mitsubishi__l65__a90-en_US-rollup.js'] = {rollup:{r:null,i:null,d:3,a:3,n:3,w:"2011-10-17",o:"2009-04-11",v:true,p:false,b:0.67,g:null,ar:null}};

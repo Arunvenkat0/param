@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/02/56/contents.js'] = {"locales":{"en_US":{"pnamco__we__ski__wii":{"reviews":{"review_count":1,"avg":"4"}}}}};

@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/08/63/apple__ipod__classic-en_US-meta.js'] = {metadata:[{rid:6981426,date:20090408,rating:5,helpfulScore:0,expertLevel:0,batch:1,images:0}]};

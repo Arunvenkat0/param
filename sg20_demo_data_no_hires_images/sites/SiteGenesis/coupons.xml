@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coupons xmlns="http://www.demandware.com/xml/impex/coupon/2008-06-17">
+    <coupon coupon-id="BN_Shipping">
+        <enabled-flag>true</enabled-flag>
+        <single-code>bnshipping</single-code>
+    </coupon>
+
+    <coupon coupon-id="DEMO2">
+        <enabled-flag>true</enabled-flag>
+        <redemption-limits>
+            <limit-per-code>1</limit-per-code>
+        </redemption-limits>
+        <system-codes>
+            <max-number-of-codes>50000</max-number-of-codes>
+            <code-prefix>ECC</code-prefix>
+        </system-codes>
+    </coupon>
+
+    <coupon coupon-id="OU812">
+        <enabled-flag>true</enabled-flag>
+        <redemption-limits>
+            <limit-per-code>1</limit-per-code>
+            <limit-per-customer>1</limit-per-customer>
+        </redemption-limits>
+        <single-code>OU812</single-code>
+    </coupon>
+
+    <coupon coupon-id="shipping">
+        <description>coupon used with shipping promotions</description>
+        <enabled-flag>false</enabled-flag>
+        <single-code>shipping</single-code>
+    </coupon>
+
+</coupons>

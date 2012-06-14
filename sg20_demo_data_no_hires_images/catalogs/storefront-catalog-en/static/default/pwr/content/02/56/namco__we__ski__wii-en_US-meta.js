@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/02/56/namco__we__ski__wii-en_US-meta.js'] = {metadata:[{rid:6991166,date:20090409,rating:4,helpfulScore:0,expertLevel:0,batch:1,images:0}]};

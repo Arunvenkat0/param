@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/08/88/CCSW0032DS-en_US-meta.js'] = {metadata:[{rid:20140634,date:20110816,rating:5,helpfulScore:0,oid:26003876,batch:1,images:0}]};

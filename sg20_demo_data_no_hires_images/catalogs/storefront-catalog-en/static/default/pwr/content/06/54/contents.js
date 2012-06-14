@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/06/54/contents.js'] = {"locales":{"en_US":{"psamsung__ln46a950":{"reviews":{"review_count":3,"avg":"4"}}}}};

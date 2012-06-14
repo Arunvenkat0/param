@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/02/56/namco__we__ski__wii-en_US-rollup.js'] = {rollup:{d:4,a:4,n:1,w:"2009-04-09",o:"2009-04-09",v:false,p:false,e:false,s:false,t:false,i:false,g:null}};

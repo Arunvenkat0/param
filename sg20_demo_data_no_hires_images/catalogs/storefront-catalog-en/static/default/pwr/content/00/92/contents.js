@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/00/92/contents.js'] = {"locales":{"en_US":{"psony__ps3__bundle":{"reviews":{"review_count":1,"avg":"5"}},"p22204":{"reviews":{"review_count":1,"avg":"5"}}}}};

@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/06/54/samsung__ln46a950-en_US-rollup.js'] = {rollup:{d:4,a:4,n:3,w:"2009-04-09",o:"2009-04-07",v:true,p:false,e:false,s:false,t:false,i:false,g:null}};

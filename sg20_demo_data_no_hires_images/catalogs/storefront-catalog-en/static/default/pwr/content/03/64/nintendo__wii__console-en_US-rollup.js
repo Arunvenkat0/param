@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/03/64/nintendo__wii__console-en_US-rollup.js'] = {rollup:{r:null,d:5,a:5,n:1,w:"2009-04-21",o:"2009-04-21",v:false,p:false,g:null,ar:null}};

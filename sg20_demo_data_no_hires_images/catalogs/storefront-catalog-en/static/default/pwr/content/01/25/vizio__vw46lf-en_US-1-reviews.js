@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/01/25/vizio__vw46lf-en_US-1-reviews.js'] = [{r:{id:6990983,v:0,t:0,r:4,h:"great tv",n:"patricia",l:"en_US",w:"MA",o:"w",d:"4/9/2009",p:"great tv, bought it just a few days ago and love it!"}}];

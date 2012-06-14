@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/01/37/nikon__sl16-en_US-rollup.js'] = {rollup:{r:null,d:5,a:5,n:1,w:"2009-04-11",o:"2009-04-11",v:true,p:false,g:null,ar:null}};

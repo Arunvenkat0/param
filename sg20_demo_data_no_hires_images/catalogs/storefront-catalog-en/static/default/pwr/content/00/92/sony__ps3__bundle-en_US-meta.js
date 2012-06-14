@@ -1,0 +1,1 @@
+POWERREVIEWS.common.gResult['content/00/92/sony__ps3__bundle-en_US-meta.js'] = {metadata:[{rid:6991712,date:20090409,rating:5,helpfulScore:0,expertLevel:0,batch:1,images:0}]};
