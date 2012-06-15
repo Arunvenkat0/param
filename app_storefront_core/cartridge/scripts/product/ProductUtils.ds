@@ -5,6 +5,10 @@ importPackage( dw.util );
 importPackage( dw.value );
 importPackage( dw.web );
 
+function sanitize(inS : String) {
+	return inS.replace(/\W/g,'');
+}
+
 function ProductUtils(pdict : PipelineDictionary) {
 	var _product = Product = pdict.Product || null;
 	var _httpMap = dw.web.HttpParameterMap = pdict.CurrentHttpParameterMap;
@@ -411,7 +415,7 @@ ProductUtils.getQueryString = function(map: dw.web.HttpParameterMap, fields : Ar
 		if(empty(parm) || parm.stringValue.length==0) { continue;	}
 				
 		// only get here if we have a match
-		parms.push(encodeURIComponent(key)+"="+	encodeURIComponent(parm.stringValue));
+		parms.push(sanitize(key)+"="+sanitize(parm.stringValue));
 	}
 	var qs = parms.length==0 ? "" : parms.join("&"); 
 	return 	qs;
