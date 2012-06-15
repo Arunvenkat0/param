@@ -50,6 +50,7 @@
                       <copy todir="${project.build.directory}/sg-resources">
                         <fileset dir="${project.basedir}">
                           <include name="app_storefront_*/**" />
+                          <include name="sg20_demo_data_no_hires_images/**" />
                         </fileset>
                       </copy>
                     </tasks>
