@@ -109,16 +109,6 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="account-banner" context="global" configuration-id="TestQA" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">this is global content slot 'account-banner'</body>
-            </html>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="error-promo" context="global" configuration-id="Zune Promo Image" assigned-to-site="true">
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>

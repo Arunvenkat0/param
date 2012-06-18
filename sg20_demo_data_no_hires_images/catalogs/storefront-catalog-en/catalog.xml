@@ -1520,14 +1520,6 @@
         </refinement-definitions>
     </category>
 
-    <category category-id="summersuits">
-        <display-name xml:lang="x-default">Summer Suits</display-name>
-        <online-flag>true</online-flag>
-        <parent>mens-clothing-suits</parent>
-        <template/>
-        <page-attributes/>
-    </category>
-
     <category category-id="mens-clothing-jackets">
         <display-name xml:lang="x-default">Jackets &amp; Coats</display-name>
         <online-flag>true</online-flag>
@@ -5234,46 +5226,6 @@
     <category-assignment category-id="sale-womens-dresses" product-id="25589481"/>
 
     <category-assignment category-id="sale-womens-dresses" product-id="25591426"/>
-
-    <category-assignment category-id="summersuits" product-id="008884303989">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884303996">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304009">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304016">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304023">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304030">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304047">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304054">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304061">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="summersuits" product-id="008884304078">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
 
     <category-assignment category-id="top-seller" product-id="25553417">
         <variation-assignments>
