@@ -40,10 +40,14 @@
 					<isbreak/>
 				</isif>					
 				<isset name="lgImage" value="${pdict.Product.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
-				<isset name="hi_res" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
+				<isif condition="${!empty(pdict.Product.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
+					<isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
+				<iselse/>
+					<isset name="hi_res" scope="page" value="${''}" />
+				</isif>
 				<li class="thumb${imgSmStatus.first ? ' selected' : ''}">
-					<a href="${hi_res.getURL()}" target="_blank" class="thumbnail-link">
-						<img class="productthumbnail" src="${img.getURL()}" alt="${img.alt}" title="${pdict.Product.name}${img.title}" data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hi_res.getURL()}"}'/>								 
+					<a href="${hi_res}" target="_blank" class="thumbnail-link">
+						<img class="productthumbnail" src="${img.getURL()}" alt="${img.alt}" title="${pdict.Product.name}${img.title}" data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hi_res}"}'/>								 
 					</a>
 				</li>										
 			</isloop>					

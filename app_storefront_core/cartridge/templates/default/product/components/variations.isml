@@ -140,7 +140,12 @@
 													<isscript>selectedVariants.push(VA.ID+"-"+VV.value);</isscript>
 												<iselse/>
 													<isset name="selectedSwatchValue" scope="page" value="${''}" />
-												</isif>										
+												</isif>
+												<isif condition="${!empty(VV.getImage('hi-res'))}">
+													<isset name="hiResURL" scope="page" value="${VV.getImage('hi-res').getURL()}" />
+												<iselse/>
+													<isset name="hiResURL" scope="page" value="${''}" />
+												</isif>
 												<li class="${swatchClass}">												
 													<a href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}"
 													   title="${displayValue}"
