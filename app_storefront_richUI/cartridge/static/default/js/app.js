@@ -336,7 +336,11 @@ var app = (function (app, $) {
 			hideEffect: 'fadeout'
 		};
 
-		$cache.pdpMain.find("a.main-image").removeData("jqzoom").jqzoom(options);
+		// Added to prevent empty hires zoom feature (if images don't exist)
+		var mainImage = $cache.pdpMain.find("a.main-image");
+		if( mainImage.href != '' && mainImage.href.indexOf('noimagelarge')<0 ) {
+			mainImage.removeData("jqzoom").jqzoom(options);
+		}
 	}
 
 	function replaceImages() {		
@@ -359,7 +363,10 @@ var app = (function (app, $) {
 		}
 	}
 	
-
+	function removeImageZoom() {
+		$cache.pdpMain.find("a.main-image").removeClass("image-zoom");
+	}
+	
 	function initializeDom() {
 		$cache.pdpMain.find('div.product-detail .product-tabs').tabs();
 		if($('#pwrwritediv').length > 0) {
@@ -465,9 +472,13 @@ var app = (function (app, $) {
 			$(this).closest("li").addClass("selected");
 
 			setMainImage(lgImg);
-			setMainImageLink();
 			// load zoom if not quick view
-			loadZoom();
+			if( lgImg.hires != '' && lgImg.hires.indexOf('noimagelarge')<0 ){
+				setMainImageLink();
+				loadZoom();
+			} else {
+				removeImageZoom();
+			}
 		});
 
 		// dropdown variations
