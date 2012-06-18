@@ -9,6 +9,10 @@ function sanitize(inS : String) {
 	return inS.replace(/\W/g,'');
 }
 
+function unsanitizeOR( anURL ) {
+	return anURL.toString().replace('%7c','|','g');	
+}
+
 function ProductUtils(pdict : PipelineDictionary) {
 	var _product = Product = pdict.Product || null;
 	var _httpMap = dw.web.HttpParameterMap = pdict.CurrentHttpParameterMap;
