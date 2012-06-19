@@ -98,10 +98,10 @@
 			<isset name="disabledAttr" value="${pdict.available ? '' : ' disabled="disabled"'}" scope="page"/>	
 			<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
 			
-			<div class="availability">
+			<div class="availability"><isif condition="${!pdict.Product.master}">
 				<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>				
 				<span class="value"><isinclude template="product/components/availability"/></span>								
-			</div>
+			</isif></div>
 			
 			</fieldset>
 		</form>
