@@ -2,7 +2,7 @@
 <isif condition="${!empty(pdict.nodecorator) && pdict.nodecorator == true}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
-
+<isstatus value="404" />
 <isdecorate template="${DecoratorTemplate}">
 <isinclude template="util/modules"/>
 
