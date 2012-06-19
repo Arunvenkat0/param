@@ -338,7 +338,7 @@ var app = (function (app, $) {
 
 		// Added to prevent empty hires zoom feature (if images don't exist)
 		var mainImage = $cache.pdpMain.find("a.main-image");
-		if( mainImage.href != '' && mainImage.href.indexOf('noimagelarge')<0 ) {
+		if( mainImage[0].href != '' && mainImage[0].href.indexOf('noimagelarge')<0 ) {
 			mainImage.removeData("jqzoom").jqzoom(options);
 		}
 	}
@@ -502,11 +502,11 @@ var app = (function (app, $) {
 					Quantity : isNaN(qty) ? "1" : qty,
 					format : "ajax"
 				};
-			
+						
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
-			
+
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
@@ -537,7 +537,7 @@ var app = (function (app, $) {
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl(this.href, params);
 			app.progress.show($cache.pdpMain);		
-			
+						
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
@@ -2089,13 +2089,14 @@ var app = (function (app, $) {
 			if (!url) { return; }
 			
 			var form = jQuery(this).parents('form');
+			var method = form.attr("method")||"POST";
 			
 			// if this is a content link, update url from Page-Show to Page-Include
 			if ($(this).hasClass("attributecontentlink")) {
 				var uri = app.util.getUri(url);
 				url = app.urls.pageInclude+uri.query;
 			}
-			if (form.attr("method").toUpperCase() == "POST") 
+			if (method == "POST") 
 			{
 		         var postData = form.serialize() + "&"+ jQuery(this).attr("name") + "=submit";
 		    } 
