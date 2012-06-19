@@ -52,46 +52,6 @@
         </test-segments>
     </ab-test>
 
-    <ab-test test-id="homepage-productscroller">
-        <description>Displaying electronics verse apparel products on the homepage</description>
-        <tags>
-            <tag>scroller</tag>
-            <tag>homepage</tag>
-        </tags>
-        <enabled-flag>true</enabled-flag>
-        <schedule>
-            <start-date>2011-06-15T00:00:00.000Z</start-date>
-            <end-date>2011-06-22T00:00:00.000Z</end-date>
-        </schedule>
-        <key-metric>revenue</key-metric>
-        <participation>
-            <trigger>
-                <immediately/>
-            </trigger>
-            <expiration>session</expiration>
-        </participation>
-        <customer-groups>
-            <customer-group group-id="Everyone"/>
-        </customer-groups>
-        <test-segments>
-            <control-segment>
-                <allocation-percent>20</allocation-percent>
-            </control-segment>
-            <test-segment segment-id="Test Segment B">
-                <allocation-percent>40</allocation-percent>
-                <experiences>
-                    <slot-configuration slot-id="home-right" slot-context="global" slot-configuration-id="electronics-products"/>
-                </experiences>
-            </test-segment>
-            <test-segment segment-id="Test Segment A">
-                <allocation-percent>40</allocation-percent>
-                <experiences>
-                    <slot-configuration slot-id="home-right" slot-context="global" slot-configuration-id="apparel-products"/>
-                </experiences>
-            </test-segment>
-        </test-segments>
-    </ab-test>
-
     <ab-test test-id="mens-sortingrules">
         <description>Testing default Sorting Rules for all Mens categories.</description>
         <tags>
