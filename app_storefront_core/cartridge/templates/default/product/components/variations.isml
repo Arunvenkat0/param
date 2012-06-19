@@ -23,7 +23,6 @@
 		selectedAtts = pdict.Product.isVariant() ? ProductUtils.getSelectedAttributes(currentPvm) : {},
 		swatchAttributes = ["color","size","width","waist","length"];	
 </isscript>
-
 	<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
 			<isif condition="${pdict.CurrentVariationModel != null}">
 				<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE">
@@ -166,8 +165,7 @@
 												<isscript>													
 													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
 												</isscript>
-												
-												<isset name="selectable" value="${isAvailable && PVM.getFilteredValues(VA).contains(VV)}" scope="page" />											
+												<isset name="selectable" value="${ isAvailable && (pdict.Product.master || PVM.getFilteredValues(VA).contains(VV))}" scope="page" />											
 												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
