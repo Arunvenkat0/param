@@ -46,7 +46,6 @@
 							<isdisplayvariationvalues product="${pdict.Product}"/>
 							<isloop iterator="${pdict.ProductOptionModel.options}" alias="productOption">
 								<isset name="selectedOptionValue" value="${pdict.ProductOptionModel.getSelectedOptionValue(productOption)}" scope="page"/>					
-								<isprint value="${selectedOptionValue.ID}"/>
 								<isprint value="${productOption.displayName}"/>: 
 								<isprint value="${selectedOptionValue.displayValue}"/>			
 							</isloop>

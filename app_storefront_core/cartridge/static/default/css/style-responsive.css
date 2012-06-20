@@ -163,6 +163,8 @@
 	.cart-order-totals td{width: 50%;}
 	
   #cart-table .item-total .promo-adjustment{width:auto;}
+  .pdp-main .product-col-1{margin-left:0;}
+  
 	
 	/* Checkout */
 	/* ------------------------------------- */
@@ -279,7 +281,7 @@
 	ul.level-1 a{font-size:1em;padding:10px 5px;}
 	ul.search-result-items .new-row{clear:none;}
 	ul.search-result-items .grid-tile{width:41.5%;}
-	.pdp-main .product-name {width:40%;}
+	.pdp-main .product-name {width:39%;}
 	.pdp-main .product-add-to-cart .product-price {font-size: 18px;margin-top:12px;}
 	.pdp-main .product-add-to-cart button {font-size: 18px;margin-top:20px;}
 	.pdp-main .recommendations {width:275px;}

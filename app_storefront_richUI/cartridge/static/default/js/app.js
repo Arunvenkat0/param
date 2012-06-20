@@ -428,23 +428,91 @@ var app = (function (app, $) {
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change", "form.pdpForm input[name='Quantity']", function (e) {
-			app.product.getAvailability($cache.productId.val(),
-										$(this).val(),
-										function (data) {
-											if (!data || data.isAvailable) {
-												$cache.addToCart.removeAttr("disabled");
-												availabilityContainer.find(".availability-qty-available").hide();
-												availabilityContainer.find(".availability-msg").show();
-												return;
-											}
-											$cache.addToCart.attr("disabled", "disabled");
-											availabilityContainer.find(".availability-msg").hide();
-											var avQtyMsg = availabilityContainer.find(".availability-qty-available");
-											if (avQtyMsg.length===0) {
-												avQtyMsg = $("<span/>").addClass("availability-qty-available").appendTo(availabilityContainer);
-											}
-											avQtyMsg.text(data.inStockMsg).show();
-										});
+			app.product.getAvailability(
+				$cache.productId.val(),
+				$(this).val(),
+				function (data) {
+					if (!data) {
+						$cache.addToCart.removeAttr("disabled");
+						availabilityContainer.find(".availability-qty-available").html();
+						availabilityContainer.find(".availability-msg").show();
+						return;
+					}else{
+						var avMsg = null;
+						var avRoot = availabilityContainer.find(".availability-msg").html('');
+						
+						// Look through levels ... if msg is not empty, then create span el
+						if( data.levels.IN_STOCK> 0 ) {
+							avMsg = avRoot.find(".in-stock-msg");
+							if (avMsg.length===0) {
+								avMsg = $("<p/>").addClass("in-stock-msg").appendTo(avRoot);
+							}
+							if( data.levels.PREORDER==0 && data.levels.BACKORDER==0 && data.levels.NOT_AVAILABLE==0 ) {
+								// Just in stock
+								avMsg.text(app.resources.IN_STOCK);
+							} else {
+								// In stock with conditions ...
+								avMsg.text(data.inStockMsg);
+							}
+						}
+						if( data.levels.PREORDER> 0 ) {
+							avMsg = avRoot.find(".preorder-msg");
+							if (avMsg.length===0) {
+								avMsg = $("<p/>").addClass("preorder-msg").appendTo(avRoot);
+							}
+							if( data.levels.IN_STOCK==0 && data.levels.BACKORDER==0 && data.levels.NOT_AVAILABLE==0 ) {
+								// Just in stock
+								avMsg.text(app.resources.PREORDER);
+							} else {
+								avMsg.text(data.preOrderMsg);
+							}
+						}
+						if( data.levels.BACKORDER> 0 ) {
+							avMsg = avRoot.find(".backorder-msg");
+							if (avMsg.length===0) {
+								avMsg = $("<p/>").addClass("backorder-msg").appendTo(avRoot);
+							}
+							if( data.levels.IN_STOCK==0 && data.levels.PREORDER==0 && data.levels.NOT_AVAILABLE==0 ) {
+								// Just in stock
+								avMsg.text(app.resources.BACKORDER);
+							} else {
+								avMsg.text(data.backOrderMsg);
+							}
+						}
+						if( data.inStockDate != '' ) {
+							avMsg = avRoot.find(".in-stock-date-msg");
+							if (avMsg.length===0) {
+								avMsg = $("<p/>").addClass("in-stock-date-msg").appendTo(avRoot);
+							}
+							avMsg.text(String.format(app.resources.IN_STOCK_DATE,data.inStockDate));
+						}
+						if( data.levels.NOT_AVAILABLE> 0 ) {
+							avMsg = avRoot.find(".not-available-msg");
+							if (avMsg.length===0) {
+								avMsg = $("<p/>").addClass("not-available-msg").appendTo(avRoot);
+							}
+							if( data.levels.PREORDER==0 && data.levels.BACKORDER==0 && data.levels.IN_STOCK==0 ) {
+								avMsg.text(app.resources.NOT_AVAILABLE);
+							} else {
+								avMsg.text(app.resources.REMAIN_NOT_AVAILABLE);
+							}
+						}
+						return;
+					}
+					$cache.addToCart.attr("disabled", "disabled");
+					availabilityContainer.find(".availability-msg").hide();
+					var avQtyMsg = availabilityContainer.find(".availability-qty-available");
+					if (avQtyMsg.length===0) {
+						avQtyMsg = $("<span/>").addClass("availability-qty-available").appendTo(availabilityContainer);
+					}
+					avQtyMsg.text(data.inStockMsg).show();
+					
+					var avQtyMsg = availabilityContainer.find(".availability-qty-available");
+					if (avQtyMsg.length===0) {
+						avQtyMsg = $("<span/>").addClass("availability-qty-available").appendTo(availabilityContainer);
+					}
+					avQtyMsg.text(data.backorderMsg).show();
+				});
 
 		});
 		$cache.pdpMain.on("click", "a.wl-action", function (e) {
@@ -1097,7 +1165,8 @@ var app = (function (app, $) {
 		init : function () {
 			$cache = {
 				form: $("#send-to-friend-form"),
-				dialog: $("#send-to-friend-dialog")
+				dialog: $("#send-to-friend-dialog"),
+				pdpForm: $("form.pdpForm")
 			};			
 			initializeEvents();
 		},
@@ -1114,8 +1183,15 @@ var app = (function (app, $) {
 					}
 				}});
 
+				var data = app.util.getQueryStringParams($("form.pdpForm").serialize());
+				if (data.cartAction) {
+					delete data.cartAction;
+				}
+				var url = app.util.appendParamsToUrl(this.href, data);
+				url = this.protocol + "//" + this.hostname + ((url.charAt(0)==="/") ? url : ("/"+url));
+
 				app.ajax.load({
-					url:app.util.ajaxUrl(this.href),
+					url:app.util.ajaxUrl(url),
 					target:dlg,
 					callback: function () {
 						dlg.dialog("open");	 // open after load to ensure dialog is centered

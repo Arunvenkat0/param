@@ -484,7 +484,7 @@ body .review-image{float:left;margin:0 20px;}
 #product-nav-container .divided span{border-right:1px solid #E0E0E0;padding-right:5px;}
 .pdp-main ul{list-style:none outside none;margin:0;padding:0;}
 .pdp-main label{padding:0;text-align:left;text-transform:uppercase;width:auto;}
-.pdp-main .product-col-1{float:left;width:37%;}
+.pdp-main .product-col-1{float:left;width:37%;margin-left:1%;}
 .pdp-main .product-primary-image{max-width:100%;padding:1em 0 0;text-align:center;}
 .primary-image{max-width:100%;}
 .pdp-main .product-thumbnails{clear:both;display:inline-block;padding:0px 0.5em;}
@@ -528,14 +528,21 @@ body .review-image{float:left;margin:0 20px;}
 .pdp-main .product-add-to-cart .inventory input{margin:0.7em 0;width:56px;}
 .pdp-main .product-add-to-cart .product-price{float:left;font-size:2.4em;margin:0;padding-top:18px;text-align:right;width:47%;}
 .pdp-main .product-add-to-cart button{float:right;margin-top:0.5em;width:37%;}
-.pdp-main .product-add-to-cart .availability{clear:both;float:left;padding:20px 0;}
+.pdp-main .product-add-to-cart .availability{position:relative;clear:both;float:left;padding:20px 0 20px 70px;}
+.pdp-main .product-add-to-cart .availability .label{position:absolute;left:0px;}
+.availability .availability-msg p {margin-top:0px;}
+.availability .in-stock-msg {color:black}
+.availability .not-available-msg {color:red}
+.availability .preorder-msg {color:blue}
+.availability .backorder-msg {color:green}
+.availability .in-stock-date-msg {color:red}
 .pdp-main .product-actions{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;clear:both;overflow:hidden;padding:1.5em 0;}
 .pdp-main .product-actions li{margin:0 1em 0 0;}
 .pdp-main .product-actions .social-actions{float:right;}
 .pdp-main .product-actions .social-actions li{margin:0 0.2em;}
 .pdp-main .product-actions .addthis_toolbox{float:right;}
 .pdp-main .recommendations{clear:left;padding:2em 0;width:350px;}
-.pdp-main .recommendations h2{font-family:Georgia;font-size:2em;font-style:italic;font-weight:400;}
+.pdp-main .recommendations h2{font-family:Georgia;font-size:2em;font-style:italic;font-weight:400;margin-left:14px;}
 .pdp-main .recommendations li{float:left;width:100px;}
 .pdp-main .recommendations .product-tile{padding:0 0.5em;}
 .pdp-main .recommendations .product-image{height:90px;}

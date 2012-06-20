@@ -84,11 +84,17 @@
               </pipelet-node>
               <node-display x="2" y="1"/>
             </node>
-            <transition target-connector="in1" target-path="../+1">
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="2"/>
-              </transition-display>
-            </transition>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="UpdateProductOptionSelections" pipelet-set-identifier="bc_api">
+                <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
+                <key-binding alias="Product" key="Product"/>
+                <key-binding alias="null" key="CustomFormPrefix"/>
+                <key-binding alias="null" key="ProductOptionModels"/>
+              </pipelet-node>
+              <node-display x="-1" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
           </segment>
         </branch>
       </node>

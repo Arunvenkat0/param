@@ -3,7 +3,7 @@
 <isscript>
 	var sourceHash = {
 		productdetail: {
-			link: pdict.CurrentHttpParameterMap.pid.stringValue ? dw.web.URLUtils.http('Product-Show','pid', pdict.CurrentHttpParameterMap.pid.stringValue).toString() : "",
+			link: empty(pdict.ProductOptionModel) ? '' : pdict.ProductOptionModel.url('Product-Show'),
 			subject: dw.web.Resource.msg('product.sendfriendemailsubject','product',null)
 		},
 		wishlist: {
@@ -133,6 +133,7 @@
 									<span class="value">
 										<isprint value="${selectedOptionValue.displayValue}"/>
 									</span>
+									<input type="hidden" name="dwopt_${pdict.Product.ID}_${productOption.ID}" value="${selectedOptionValue.ID}" />
 								</isloop>
 							</isif>
 							<isif condition="${pdict.Product.shortDescription!=null}">
@@ -216,7 +217,7 @@
 							</isloop>
 				
 						</isif>
-						
+
 					<isif condition="${!empty(productOptionModel)}">
 					
 						<isloop iterator="${productOptionModel.options}" alias="productOption">
@@ -225,7 +226,7 @@
 							
 							<dt><isprint value="${productOption.displayName}"/><dt>
 							<dd><isprint value="${selectedOptionValue.displayValue}"/></dd>
-							
+							<input type="hidden" name="dwopt_${product.ID}_${productOption.ID}" value="${selectedOptionValue.ID}" />
 						</isloop>
 						
 					</isif>

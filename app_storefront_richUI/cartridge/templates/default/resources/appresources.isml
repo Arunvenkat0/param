@@ -79,7 +79,8 @@
 		TITLE_GIFTREGISTRY				: Resource.msg('forms.title.giftregistry', 'forms', null),
 		TITLE_ADDRESS					: Resource.msg('forms.title.address', 'forms', null),
 		TITLE_CREDITCARD				: Resource.msg('forms.title.creditcard', 'forms', null),
-		SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection','locale','Server connection failed!')
+		SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection','locale','Server connection failed!'),
+		IN_STOCK_DATE				: Resource.msg('global.inStockDate', 'locale', null)
 	};
 	
 	// additional resources 
