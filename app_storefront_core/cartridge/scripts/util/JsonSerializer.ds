@@ -28,8 +28,8 @@ JsonSerializer.getSimpleObject  = function(o : Object, args : Object) : Object {
 	
 	// if this is an extensible object, get the attributes
 	if (o.describe) {
-		var oDesc :  ObjectTypeDefinition = o.describe();	
-		var attDefs = oDesc.getProductVariationAttributes();
+		var oDesc : ObjectTypeDefinition = o.describe();	
+		var attDefs = oDesc.getAttributeDefinitions();
 		
 		// get attributes and values
 		for (var i=0,len=attDefs.length;i<len;i++) {
