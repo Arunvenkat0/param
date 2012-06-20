@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>dw.maventools</groupId>
+        <artifactId>project-pom</artifactId>
+        <version>12.3.0.1</version>
+    </parent>
+    
+    <scm>
+        <connection>scm:git:git@github.com:Demandware/Site-Genesis.git</connection>
+        <developerConnection>scm:git:git@github.com:Demandware/Site-Genesis.git</developerConnection>
+    </scm>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dw.ecom</groupId>
+    <artifactId>refapp2</artifactId>
+    <name>SiteGenesis2</name>
+    <packaging>pom</packaging>
+    <version>12.5.0.6-SNAPSHOT</version>
+    <description>the new refapp</description>
+
+    <properties>
+        <dw.site.name>sitegenesis2</dw.site.name>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-antrun-plugin</artifactId>
+              <version>1.1</version>
+              <executions>
+                <execution>
+                  <id>echodir</id>
+                  <goals>
+                    <goal>run</goal>
+                  </goals>
+                  <phase>compile</phase>
+                  <inherited>false</inherited>
+                  <configuration>
+                    <tasks>
+                      <copy todir="${project.build.directory}/sg-resources">
+                        <fileset dir="${project.basedir}">
+                          <include name="app_storefront_*/**" />
+                          <include name="sg20_demo_data_no_hires_images/**" />
+                        </fileset>
+                      </copy>
+                    </tasks>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <id>cdecelles</id>
+            <name>Chris Decelles</name>
+            <email>cdecelles@demandware.com</email>
+            <timezone>EST</timezone>
+        </developer>
+    </developers>
+
+</project>
