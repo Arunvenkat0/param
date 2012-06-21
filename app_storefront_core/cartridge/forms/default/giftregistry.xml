@@ -180,6 +180,7 @@
 		<action formid="addItemToCart" valid-form="false" label="forms.addtocart"/>
 		<action formid="setItemPublic" valid-form="false" label="productlist.setpublic"/>
 		<action formid="setItemPrivate" valid-form="false" label="productlist.setprivate"/>
+		<action formid="addGiftCertificate" valid-form="false" label="forms.giftregistry.addgiftcertificate"/>
 	</list>
 		
 	<list formid="purchases" binding="purchases">
