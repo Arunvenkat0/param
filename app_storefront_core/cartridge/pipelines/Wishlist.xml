@@ -520,6 +520,20 @@
               </pipelet-node>
               <node-display x="1" y="4"/>
             </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="productlist/MakeItemsPrivate.ds"/>
+                <key-binding alias="null" key="ScriptLog"/>
+                <key-binding alias="ProductList" key="ProductList"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../b5.4"/>
+              </branch>
+            </node>
             <transition target-connector="in2" target-path="../b5.4"/>
           </segment>
         </branch>
@@ -555,6 +569,20 @@
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
               <node-display x="0" y="4"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="productlist/MakeItemsPublic.ds"/>
+                <key-binding alias="null" key="ScriptLog"/>
+                <key-binding alias="ProductList" key="ProductList"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../b5.3"/>
+              </branch>
             </node>
             <transition target-connector="in2" target-path="../b5.3"/>
           </segment>
@@ -902,7 +930,6 @@
           <transition target-connector="in2" target-path="./+1">
             <transition-display>
               <bend-point relative-to="source" x="3" y="0"/>
-              <bend-point relative-to="source" x="3" y="5"/>
               <bend-point relative-to="target" x="3" y="0"/>
             </transition-display>
           </transition>
@@ -953,8 +980,35 @@
           <key-binding alias="Product" key="Product"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="1" key="Quantity"/>
-          <key-binding alias="null" key="ProductListItem"/>
+          <key-binding alias="ProductListItem" key="ProductListItem"/>
           <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <key-binding alias="ProductList.public" key="From_0"/>
+          <key-binding alias="ProductListItem.public" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
