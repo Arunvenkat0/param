@@ -99,6 +99,11 @@
 	.search-result-options .pagination {margin:0;}
 	.search-result-options .pagination .results-hits {display:none;}
 	.product-tile {height:auto !important;}
+	.wide-tiles .product-tile .product-image{width:41%;}
+	.wide-tiles .product-tile .product-name, .wide-tiles .product-tile .product-pricing, .wide-tiles .product-tile .product-promo, .wide-tiles .product-tile .pr_stars, .wide-tiles .product-tile .product-swatches {
+float: right;}
+	.wide-tiles .product-tile .product-name h2 { margin-top:0px}
+	
 	.product-tile .product-swatches .swatch img {height:2em;width: 2em;}
 	.product-listing-1x4 ul.search-result-items .grid-tile {margin:2%; width: 92%;}
 	.product-compare,.compareitems {display:none !important;}
@@ -249,6 +254,11 @@
 
 @media screen and ( min-width:480px) and (max-width:767px){
 	#wrapper {width:480px; }
+	
+	.product-tile .pr_stars {left:40px}
+	
+	.wide-tiles .product-tile .product-name h2 {margin-top:10px;}
+	.wide-tiles .product-tile .product-image {width:38%}
 }
 
 /* 768px layout: make minor adjustments from full layout. None of the mobile styles above used, based on media queries */

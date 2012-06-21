@@ -54,9 +54,9 @@ header {position:relative;margin-left:10px;margin-right:10px;}
 /* form components */
 /* ------------------------------------- */
 
-.button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.7em 2em 0.4em;text-align:center;}
-button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.7em 2em 0.4em;text-align:center;}
-input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.7em 2em 0.4em;text-align:center;}
+.button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 button[disabled],input[disabled]{color:#CCCCCC;}
 .button-fancy-small{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1em;font-weight:400;text-transform:uppercase;}
 .button-fancy-medium{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-weight:400;text-transform:uppercase;}
@@ -355,27 +355,30 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 /* product tiles */
 /* ------------------------------------- */
 
-.product-tile{color:#999999;padding-bottom:30px;position:relative;text-align:center;}
+.product-tile{color:#999999;padding-bottom:35px;position:relative;text-align:center;}
 .product-tile img{max-width:100%;}
 .product-tile .product-image{height:195px;position:relative;}
-.product-tile .product-name{font-family:Georgia,sans-serif;font-size:1.2em;font-style:italic;margin:25px 0 2px;}
-.product-tile .product-name h2{font-size:1.1em !important;font-weight:normal;}
+.product-tile .product-name{font-family:Georgia,sans-serif;font-size:1.2em;font-style:italic;margin:13px 0 2px;}
+.product-tile .product-name h2{font-size:1.1em !important;font-weight:normal;margin-bottom:5px;}
 .product-tile .product-pricing .product-standard-price{text-decoration:line-through;}
-.product-tile .product-swatches{bottom:0;position:absolute;right:0;}
+.product-tile .product-swatches{bottom:-9px;position:absolute;right:0;}
 .product-tile .product-swatches-all{cursor:pointer;font-size:0.9em;}
 .product-tile .product-swatches ul{list-style:none outside none;margin:0;overflow:hidden;padding:0;}
 .product-tile .product-swatches ul.swatch-toggle{background:none repeat scroll 0 0 #FFFFFF;display:none;position:absolute;}
 .product-tile .product-swatches:hover ul.swatch-toggle{display:block;}
 .product-tile .product-swatches li{float:right;}
-.product-tile .product-swatches .swatch{display:block;}
+.product-tile .product-swatches .swatch{display:block;width:16px;}
 .product-tile .product-swatches .swatch img{border:1px solid #FFFFFF;height:12px;padding:1px;width:12px;}
 .product-tile .product-swatches .selected img{border-color:#12ABE7;}
 .product-tile .product-swatches img:hover{border-color:#12ABE7;}
 .product-tile .product-promo{font-size:0.8em;margin:6px 0;text-transform:uppercase;}
-.product-tile .product-compare{bottom:0;left:0;position:absolute;width:40px;}
+.product-tile .product-compare{bottom:-5px;left:5px;position:absolute;width:40px;line-height:11px;}
 .product-tile .product-compare label{float:right;font-weight:400;padding:0;width:50%;}
 .product-tile .product-compare input{float:left;margin:0;}
-.product-tile .pr_stars{height:30px;}
+.product-tile .pr_stars{height:auto;position:relative;left:8px;}
+.product-tile .prSnippetTitle {float:left;}
+.product-tile .prSnippetRatingUnclickable {float:left;}
+.product-tile .prSnippetNumberOfRatingsText {display:none;}
 .product-tile .pr-snippet-review-count{display:none;}
 .product-tile .pr-snippet-read-write{display:none;}
 .product-tile .pr-snippet-social-bar{display:none;}
@@ -425,10 +428,12 @@ ul.folder-content-list .content-title{display:block;}
 .wide-tiles ul.search-result-items .grid-tile{width:91%;}
 .wide-tiles .product-tile{height:166px !important;}
 .wide-tiles .product-tile .product-image{float:left;width:40%;}
-.wide-tiles .product-tile .product-name,.wide-tiles .product-tile .product-pricing,.wide-tiles .product-tile .product-promo,.wide-tiles .product-tile .pr_stars,.wide-tiles .product-tile .product-swatches{float:right;text-align:left;width:60%;}
+.wide-tiles .product-tile .product-name,.wide-tiles .product-tile .product-pricing,.wide-tiles .product-tile .product-promo,.wide-tiles .product-tile .pr_stars,.wide-tiles .product-tile .product-swatches{float:left;text-align:left;width:55%;margin-bottom:5px;}
+.wide-tiles .product-tile .product-name {margin-top:0px;}
 .wide-tiles .product-tile .pr-snippet-stars{margin:0;}
-.wide-tiles .product-tile .product-compare{left:auto;right:0;width:120px;}
-.wide-tiles .product-tile .product-swatches{bottom:auto;left:auto;position:relative;right:auto;}
+.wide-tiles .product-tile .pr_stars{left:-5px;}
+.wide-tiles .product-tile .product-compare{left:40.5%;width:32px;bottom:5px;line-height:12px;}
+.wide-tiles .product-tile .product-swatches{bottom:auto;left:auto;position:relative;right:auto;margin-top:5px;}
 .wide-tiles .product-tile .product-swatches li{float:left;}
 
 /* compare tools */

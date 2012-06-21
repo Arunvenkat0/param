@@ -101,7 +101,7 @@
 	</isif>
 
 	<a class="thumb-link" href="${URLUtils.url('Product-Show','pid', Product.ID)}" title="${Product.name}">
-		<img src="${thumbnailUrl}" alt="${imageAlt}" title="${imageTitle}" />
+		<img src="${thumbnailUrl}" alt="${imageAlt}" title="${imageTitle}" height='195' width='195' />
 	</a>
 </div>
 		
