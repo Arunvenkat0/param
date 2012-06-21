@@ -211,7 +211,6 @@
 									<label for="va-${vaId}">
 										<isprint value="${VA.displayName}"/>:
 									</label>		
-									
 									<select class="variation-select" id="va-${vaId}" name="${'dwvar_' + pdict.Product.variationModel.master.ID + '_' + vaId}">
 										<isif condition="${Valength > 1}">
 											<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>
@@ -222,8 +221,7 @@
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
-													var isAvailable = pUtil.isVariantAvailable(VA.ID+"-"+VV.value, selectedVariants) 
-																	  && PVM.getFilteredValues(VA).contains(VV);
+													var isAvailable = PVM.getFilteredValues(VA).contains(VV);
 												</isscript>
 												<isif condition="${isAvailable}">
 													<isscript>

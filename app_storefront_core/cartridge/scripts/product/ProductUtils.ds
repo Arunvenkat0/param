@@ -65,7 +65,7 @@ function ProductUtils(pdict : PipelineDictionary) {
 	}
 	
 	var getVariantAvailability = function(current : String, selected : Array) {
-		var arr = [];
+		var arr = [], att = null;
 				
 		var vh = getVariantHierarchy();
 		if (selected.length==0) {
