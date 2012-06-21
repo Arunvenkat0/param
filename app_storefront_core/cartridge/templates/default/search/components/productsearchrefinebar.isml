@@ -101,7 +101,7 @@
 						<isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
 							
 							<isset name="swatchID" value="${'swatch-' + cleanupID(RefinementValue.getDisplayValue())}" scope="page"/>
-							<isif condition="${RefinementDefinition.attributeID.equals('refinementColor')}">
+							<isif condition="${RefinementDefinition.attributeID.equals('refinementColor') && !empty(RefinementValue.getPresentationID())}">
 								<isset name="swatchID" value="${'swatch-' + cleanupID(RefinementValue.getPresentationID())}" scope="page"/>
 							</isif>
 							
