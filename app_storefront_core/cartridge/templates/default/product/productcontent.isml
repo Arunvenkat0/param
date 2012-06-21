@@ -13,7 +13,7 @@
 		pdict.available = avm.availability>0;
 						
 		var availableCount = "0";
-		if (pdict.available) {						
+		if (pdict.available && !empty(avm.inventoryRecord)) {						
 			availableCount = avm.inventoryRecord.perpetual ? "999" : avm.inventoryRecord.ATS.value.toFixed().toString();
 		}
 	</isscript>

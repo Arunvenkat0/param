@@ -150,7 +150,7 @@
 													   title="${displayValue}"
 													   class="swatchanchor"
 													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
-													   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${VV.getImage('hi-res').getURL()}"}'>										   
+													   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'>										   
 													   	<isprint value="${displayValue}">
 													</a>
 												</li>									
@@ -160,6 +160,7 @@
 									</ul>							
 								<iselse>
 									<ul class="swatches ${vaId.toLowerCase()}">							
+										<isset name="selectedSwatchValue" scope="page" value="${''}" />
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>													
@@ -173,8 +174,6 @@
 												<isif condition="${isSelected}">
 													<isscript>var selectedVariant = VA.ID+"-"+VV.value;</isscript>
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
-												<iselse/>
-													<isset name="selectedSwatchValue" scope="page" value="${''}" />
 												</isif>																		
 												<li class="${swatchClass}">																								
 													<isif condition="${selectable}">
