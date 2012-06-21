@@ -54,6 +54,11 @@
                         <presentation-id>blue</presentation-id>
                     </attribute-bucket>
                     <attribute-bucket>
+                        <display-name xml:lang="x-default">Navy</display-name>
+                        <value-list xml:lang="x-default">navy</value-list>
+                        <presentation-id>navy</presentation-id>
+                    </attribute-bucket>
+                    <attribute-bucket>
                         <display-name xml:lang="x-default">Brown</display-name>
                         <value-list xml:lang="x-default">brown</value-list>
                         <presentation-id>brown</presentation-id>

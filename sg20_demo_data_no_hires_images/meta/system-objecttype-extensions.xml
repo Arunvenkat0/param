@@ -2639,6 +2639,10 @@
                         <display xml:lang="x-default">Brown</display>
                         <value>brown</value>
                     </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Navy</display>
+                        <value>navy</value>
+                    </value-definition>
                 </value-definitions>
             </attribute-definition>
             <attribute-definition attribute-id="resolution">
