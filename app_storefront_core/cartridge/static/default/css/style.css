@@ -643,9 +643,9 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .cart-promo .bonus-item-actions{font-size:1em !important;text-align:right;vertical-align:middle;}
 .cart-footer{margin:10px 0;overflow:hidden;}
 .cart-coupon-code{float:left;width:50%;}
-.cart-coupon-code label{float:none;font-size:1.1em;text-align:left;text-transform:uppercase;width:auto;}
+.cart-coupon-code label{float:none;font-size:1.1em;text-align:left;text-transform:uppercase;width:auto;line-height:2em;text-indent:0.5em;padding-top:0px;}
 .cart-coupon-code .input-text{margin:2px 10px 0 0;width:55%;}
-.cart-order-totals{float:right;width:40%;}
+.cart-order-totals{float:right;width:40%;margin-top:26px;}
 .cart-order-totals button{float:right;}
 .order-totals-table th{display:none;}
 .order-totals-table td{padding:5px 0;text-align:right !important;}
