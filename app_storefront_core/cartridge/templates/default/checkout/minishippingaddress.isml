@@ -30,8 +30,7 @@
 		</div><!-- END:street -->
 		<div class="location">
 			<isif condition="${ShippingAddress.city != null}">
-				<span class="city"><isprint value="${ShippingAddress.city}"/></span>
-				<span class="statedivider">,&nbsp;</span>
+				<span class="city"><isprint value="${ShippingAddress.city}"/><span class="statedivider">,&nbsp;</span></span>
 			</isif>
 			<span class="state"><isprint value="${ShippingAddress.stateCode}"/>&nbsp;</span>
 			<span class="zip"><isprint value="${ShippingAddress.postalCode}"/></span>

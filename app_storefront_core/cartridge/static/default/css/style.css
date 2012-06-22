@@ -71,8 +71,8 @@ label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
 .form-row-button{margin-left:24.5%;width:62%;}
-input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 2%;text-indent:2%;width:49.5966%;}
-select{height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.6em 2%;width:54%;}
+input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 2%;text-indent:0%;width:49.5966%;}
+select{text-indent:1.5%;height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.6em 2%;width:54%;}
 input[type="checkbox"]{margin:1em 2%;}
 input[type="radio"]{margin:1em 2%;}
 .label-inline label{display:inline-block;float:none;font-size:1em;font-weight:400;text-align:left;width:90%;}
@@ -220,7 +220,7 @@ td.item-dashboard .option-add-to-cart input{padding:0.8em 0.3em 0.7em;width:50px
 .menu-utility li.last{border:0 none;}
 .menu-utility-user li.last{border:0 none;}
 .header-search{position:absolute;right:5px;top:12px;z-index:21;}
-.header-search input[type="text"]{background:none repeat scroll 0 0 #666666;border:0 none;color:#FFFFFF;height:16px;margin:0;padding:8px 0;width:180px;}
+.header-search input[type="text"]{background:none repeat scroll 0 0 #666666;border:0 none;color:#FFFFFF;height:16px;margin:0;padding:8px 0;text-indent:8px;width:180px;}
 .header-search input[type="submit"]{background:url("../images/interface/icon-search.png") no-repeat scroll center center transparent;border:0 none;height:32px;padding:8px 0;text-indent:-999em;width:32px;}
 .header-search legend{background:none repeat scroll 0 0 transparent;}
 
@@ -725,7 +725,17 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .summary .edit {position: absolute;text-transform: uppercase;right: 10px;font-size: 0.9em;line-height: 1.5em;}
 .pt_checkout #main {padding: 0 14px;}
 .pt_cart #main {padding: 0 14px;}
+.pt_order-confirmation #main {padding: 0 14px;}
 .pt_cart .breadcrumb {padding-left:0}
+.pt_order-confirmation .order-confirmation-details .content-header {margin:7px 0 !important;}
+.order-shipment-details .shipping-method { padding-left:0px;}
+.order-shipment-details .label { position:absolute;width:150px;text-align:right;font-weight:bold}
+.order-shipment-details .value { margin-left:155px;}
+.order-shipment-details .order-shipment-address { width:240px;}
+
+.order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
+.order-shipment-gift-message {font-size: 1.1em;}
+
 /* account */
 /* ------------------------------------- */
 
