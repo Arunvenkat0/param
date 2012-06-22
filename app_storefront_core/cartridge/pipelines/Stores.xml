@@ -215,10 +215,41 @@
           <transition target-connector="in"/>
           <segment>
             <node>
-              <decision-node condition-key="CurrentForms.storelocator.address.states.state.value != null &amp;&amp; CurrentForms.storelocator.address.states.state.value != ''" condition-operator="expr"/>
+              <pipelet-node custom-name="CurrentForms.store" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="From_0"/>
+                <key-binding alias="stateCode" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
               <node-display x="0" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <decision-node condition-key="!empty(stateCode)" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="yes">
-                <transition target-connector="in"/>
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="target" x="0" y="-1"/>
+                  </transition-display>
+                </transition>
                 <segment>
                   <node>
                     <pipelet-node custom-name="Search stores by state" pipelet-name="SearchSystemObject" pipelet-set-identifier="bc_api">
@@ -238,9 +269,9 @@
                       <key-binding alias="null" key="SortBy3"/>
                       <key-binding alias="null" key="SortBy3Direction"/>
                       <key-binding alias="null" key="Search1Key"/>
-                      <key-binding alias="CurrentForms.storelocator.address.states.state.value" key="Search1Value"/>
+                      <key-binding alias="CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="Search1Value"/>
                     </pipelet-node>
-                    <node-display x="0" y="3"/>
+                    <node-display x="0" y="2"/>
                   </node>
                   <simple-transition>
                     <transition-display>
@@ -260,7 +291,7 @@
                         <node>
                           <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
-                            <key-binding alias="&quot;State &quot; + CurrentForms.storelocator.address.states.state.value" key="From_0"/>
+                            <key-binding alias="&quot;State &quot; + CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="From_0"/>
                             <key-binding alias="SearchString" key="To_0"/>
                             <key-binding alias="null" key="From_2"/>
                             <key-binding alias="null" key="From_3"/>
@@ -335,7 +366,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display orientation="horizontal" x="2" y="0"/>
+              <node-display orientation="horizontal" x="2" y="-1"/>
             </node>
             <transition target-connector="in1" target-path="../b2.3"/>
           </segment>

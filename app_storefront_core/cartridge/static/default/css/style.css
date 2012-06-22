@@ -240,7 +240,8 @@ div.level-2{background:none repeat scroll 0 0 #EFEFEF;box-shadow:6px 8px 5px -6p
 div.level-2 .menu-wrapper{background:none repeat scroll 0 0 #FFFFFF;box-shadow:6px 8px 5px -6px rgba(66,66,66,0.5);overflow:hidden;}
 div.level-2 ul.level-2{float:left;margin:0;padding:0;}
 div.level-2 ul.level-2 li{float:none;min-width:130px;padding:7px 5px;}
-div.level-2 ul.level-2 a{color:#323232;font-size:1em;font-weight:700;padding:0;}
+div.level-2 ul.level-2 a{line-height:18px;color:#323232;font-size:1em;font-weight:700;padding:0;}
+div.level-2 ul.level-2 .level-3 a{line-height:normal;}
 div.level-2 .custom{float:right;text-align:center;}
 div.level-2 .custom img{height:auto !important;width:auto !important;}
 div.level-2.menu-horizontal ul.level-2{float:none;}
@@ -270,7 +271,7 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 /* ------------------------------------- */
 
 .primary-content a{color:#3EBAEA;}
-.primary-content h1,#secondary h1{font-family:Georgia,serif;font-size:1.75em;font-style:italic;font-weight:400;margin:0 14px 14px;}
+.primary-content h1,#secondary h1{font-family:Georgia,serif;font-size:1.75em;font-style:italic;font-weight:400;margin:0 0 14px;}
 .primary-content h2{font-size:1.3em;}
 .primary-content h3{font-size:1.15em;}
 .primary-content dl{clear:both;overflow:hidden;}
