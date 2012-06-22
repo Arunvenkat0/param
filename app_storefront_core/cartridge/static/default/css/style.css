@@ -810,7 +810,7 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .gift-cert-balance input{margin-top:0;width:90%;}
 .gift-cert-balance .form-caption{margin-left:0;}
 .gift-cert-balance-submit{clear:none;float:left;}
-
+.gift-cert-balance .label {display:none;}
 /* login pages */
 /* ------------------------------------- */
 
