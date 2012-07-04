@@ -5,3 +5,4 @@
   var pr_zip_location = "${URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '')}";
   var pr_merchant_id = "6690"; //THIS IS FOR STAGING/TEST ONLY! REPLACE WITH CLIENT SPECIFIC ID. 
 </script>
+<iscomment>Adding a comment for bug#543</iscomment>
