@@ -2172,7 +2172,7 @@ var app = (function (app, $) {
 				var uri = app.util.getUri(url);
 				url = app.urls.pageInclude+uri.query;
 			}
-			if (method == "POST") 
+			if (method && method.toUpperCase() == "POST") 
 			{
 		         var postData = form.serialize() + "&"+ jQuery(this).attr("name") + "=submit";
 		    } 
