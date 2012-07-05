@@ -2,10 +2,13 @@
 
 	<iscache type="relative" minute="30"/>
 	<isinclude template="util/modules"/>
+	
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
 	
-	<isslot id="noresult-banner" description="Banner for searches with no hits" context="global"/>
+	<div class="no-hits-banner">
+		<isslot id="noresult-banner" description="Banner for searches with no hits" context="global"/>
+	</div>
 
 	<h1>${Resource.msg('nohits.header','search',null)}</h1>
 
