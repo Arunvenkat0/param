@@ -95,7 +95,7 @@
 			</isif>			
 			<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
 			<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
-			<isset name="disabledAttr" value="${pdict.available ? '' : ' disabled="disabled"'}" scope="page"/>	
+			<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master ? '' : ' disabled="disabled"'}" scope="page"/>	
 			<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
 			
 			<div class="availability"><isif condition="${!pdict.Product.master}">
