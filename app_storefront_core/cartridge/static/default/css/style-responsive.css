@@ -135,7 +135,10 @@ float: right;}
 	.pdp-main .product-set-list .block-add-to-cart .inventory {margin:0; width:23%;}
 	.pdp-main .product-set-list .block-add-to-cart .product-price {font-size: 1em;width:44%;}
 	.pdp-main .product-set-list .block-add-to-cart button {font-size: .7em;}
-
+	.pdp-main .product-review-links {margin-left:6%;}
+	.pdp-main .prSnippetTitle {float:left;}
+	.pdp-main .prSnippetRatingUnclickable {float:left;}
+	
 	/* size chart */
 	/* ------------------------------------- */
 	
