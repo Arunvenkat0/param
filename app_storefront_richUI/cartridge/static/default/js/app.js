@@ -427,7 +427,7 @@ var app = (function (app, $) {
 		
 		// add or update shopping cart line item
 		app.product.initAddToCart();
-		$cache.pdpMain.on("change", "form.pdpForm input[name='Quantity']", function (e) {
+		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
 			app.product.getAvailability(
 				$cache.productId.val(),
 				$(this).val(),
