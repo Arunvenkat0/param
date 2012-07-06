@@ -172,7 +172,7 @@
 			<li>
 				<a class="send-to-friend" 
 				   title="${Resource.msg('product.sendfriend','product',null)}"
-				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
+				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.ProductSet.ID, 'source', 'productdetail')}">
 				   ${Resource.msg('product.sendfriend','product',null)}
 				</a>
 			</li>

@@ -20,6 +20,12 @@
 			<h2 class="visually-hidden">Additional Information</h2>
 			
 			<isset name="vags" value="${pam.getVisibleAttributeGroups()}" scope="page"/>
+			<isset name="showAttributes" value="${false}" scope="page"/>
+			<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
+				<isif condition="${AttributeGroup.ID != 'mainAttributes'}">
+					<isset name="showAttributes" value="${true}" scope="page"/>
+				</isif>
+			</isloop>
 
 			<ul class="tabs-menu">
 				<isif condition="${! empty(pdict.Product.shortDescription) && pdict.Product.shortDescription.markup.length > 0}">
@@ -28,7 +34,7 @@
 				<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
 					<li><a href="#tab2">${Resource.msg('product.tab2','product',null)}</a></li>
 				</isif>				
-				<isif condition="${vags.length > 0}">
+				<isif condition="${showAttributes}">
 					<li><a href="#tab3">${Resource.msg('product.tab3','product',null)}</a></li>
 				</isif>				
 				<li><a href="#tab4">${Resource.msg('product.tab4','product',null)}</a></li>
@@ -44,7 +50,7 @@
 					<isprint value="${pdict.Product.longDescription}" encoding="off"/>
 				</div>
 			</isif>				
-			<isif condition="${vags.length > 0}">
+			<isif condition="${showAttributes}">
 				<div id="tab3" class="tab-content">
 					<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
 						<isif condition="${AttributeGroup.ID != 'mainAttributes'}">
@@ -55,11 +61,9 @@
 					</isloop>
 				</div>
 			</isif>
-			<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">					
-				<div id="tab4" class="tab-content">
-					<isinclude template="product/components/reviews"/>
-				</div>
-			</isif>
+			<div id="tab4" class="tab-content">
+				<isinclude template="product/components/reviews"/>
+			</div>
 		</div>
 	</isif>
 

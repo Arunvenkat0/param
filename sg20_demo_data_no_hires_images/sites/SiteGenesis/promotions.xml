@@ -90,37 +90,6 @@
         </global-excluded-products>
     </global-promotion-settings>
 
-    <promotion promotion-id="10%offVIP">
-        <enabled-flag>true</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>no</exclusivity>
-        <name xml:lang="x-default">10% off VIP</name>
-        <order-promotion-rule>
-            <excluded-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>newarrivals</category-id>
-                            <category-id>hidden</category-id>
-                            <category-id>top-seller</category-id>
-                            <category-id>gift-certificates</category-id>
-                            <category-id>electronics</category-id>
-                            <category-id>mens</category-id>
-                            <category-id>womens</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </excluded-products>
-            <discount-only-qualifying-products>true</discount-only-qualifying-products>
-            <discounts condition-type="order-total">
-                <discount>
-                    <threshold>0.01</threshold>
-                    <percentage>10.0</percentage>
-                </discount>
-            </discounts>
-        </order-promotion-rule>
-    </promotion>
-
     <promotion promotion-id="10%offordersover150">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>

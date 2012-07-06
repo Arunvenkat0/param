@@ -740,7 +740,6 @@
 		
 				<div class="cart-footer">
 		
-					<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 					<input type="hidden" name="${pdict.CurrentForms.cart.updateCart.htmlName}" value="${pdict.CurrentForms.cart.updateCart.htmlName}"/>
 					<div class="cart-order-totals">
 						<button type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
@@ -770,6 +769,9 @@
 							</div>
 						</isif>							
 					</div>
+				</div>
+				<div class="cart-footer">
+					<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 				</div>
 			</fieldset>
 		</form>
