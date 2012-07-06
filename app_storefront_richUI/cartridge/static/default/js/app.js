@@ -1746,6 +1746,7 @@ var app = (function (app, $) {
 					// update the summary
 					updateSummary();
 					app.progress.hide();
+					app.tooltips.init();
 				});
 			}
 		});
