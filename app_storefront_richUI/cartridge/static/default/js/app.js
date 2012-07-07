@@ -2709,17 +2709,38 @@ var app = (function (app, $) {
 		var form = $("#edit-address-form");
 		
 		form.find("input[name='format']").remove();
+		app.tooltips.init();
 		//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
 		
 		form.on("click", ".apply-button", function(e) {
+			e.preventDefault();
 			var addressId = form.find("input[name$='_addressid']");
 			addressId.val(addressId.val().replace(/[^\w+-]/g, "-"));
 			if (!form.valid()) {
 				return false; 
 			}
-						
-			app.dialog.close();
-			app.page.refresh();
+			var url = app.util.appendParamsToUrl(form.attr('action'),{format:"ajax"});
+			var applyName = form.find('.apply-button').attr('name');
+			var options = {
+				url: url,
+				data: form.serialize()+"&"+applyName+'=x',
+				type: "POST"
+			};
+			$.ajax( options ).done(function(data){
+				if( typeof(data)!=='string' ) {
+					if ( data.success ) {
+						app.dialog.close();
+						app.page.refresh();
+					} else {
+						alert(data.message);
+						return false;
+					}
+				} else {
+					$('#dialog-container').html(data);
+					app.account.init();
+					app.tooltips.init();
+				}
+			});
 		})
 		.on("click", ".cancel-button, .close-button", function(e){
 			e.preventDefault();
