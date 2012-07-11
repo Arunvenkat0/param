@@ -29,7 +29,7 @@
 </isif>
 
 <isif condition="${!empty(paymentInstruments)}">
-	<iscomment>render a box per payment instrument</iscomment>
+	<iscomment>render dynamically a box per payment instrument</iscomment>
 	<isloop items="${paymentInstruments}" var="paymentInstr" status="loopstate">
 		<div class="mini-payment-instrument  order-component-block <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 

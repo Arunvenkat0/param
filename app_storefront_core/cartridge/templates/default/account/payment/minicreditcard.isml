@@ -1,7 +1,8 @@
 <iscomment>
 	Creates a mini credit card display.
 	If p_card is given the second parameter is ignored.
-
+	Only shown if Owner, Type and Number are not empty.
+	
 	Parameter:
 	p_card	       : the PaymentInstrument object to display
 	p_cc_formfield : a credit card formfield element

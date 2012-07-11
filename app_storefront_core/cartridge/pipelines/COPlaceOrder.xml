@@ -729,7 +729,7 @@
     <segment>
       <node>
         <text-node>
-          <description>A Pipeline is being dynamically called based on the current Payment-Processor</description>
+          <description>A Pipeline is being dynamically called based on the current Payment-Processor.</description>
         </text-node>
         <node-display x="8" y="7"/>
       </node>

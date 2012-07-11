@@ -2507,7 +2507,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <text-node>
-          <description>A Pipeline is being dynamically called based on the current Payment-Processor</description>
+          <description>A Pipeline is being dynamically called based on the current Payment-Processor.</description>
         </text-node>
         <node-display x="9" y="28"/>
       </node>
