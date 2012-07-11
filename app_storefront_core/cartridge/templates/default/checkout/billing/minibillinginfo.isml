@@ -42,11 +42,15 @@
 				<iscomment>
 					render the detail section depending on the type of the payment instrument
 				</iscomment>
-				<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
-				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>						
-				<div>
-					${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/>
-				</div><!-- END: payment-amount -->
+				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
+					<div>${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}: <isprint value="${paymentInstr.maskedGiftCertificateCode}"/></div>
+				<iselse>	
+					<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
+					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>						
+					<div>
+						${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/>
+					</div><!-- END: payment-amount -->
+				</isif>
 			</div>
 		</div>
 	</isloop>

@@ -54,16 +54,27 @@
 			<isminiaddress p_address="${Order.billingAddress}"/>
 		</td>
 		
-		<isset name="activePaymentMethods" value="${dw.order.PaymentMgr.getActivePaymentMethods()}" scope="page"></isset>
+		
 		
 		<td class="order-payment-instruments">
 			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
-				<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
-				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
-				<div class="payment-amount">
-					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
-					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-				</div><!-- END: payment-amount -->
+				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
+				   <div class="orderpaymentinstrumentsgc">
+						   <span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
+				           <span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
+				           <span class="payment-amount">
+				              <span class="label">${Resource.msg('global.amount','locale',null)}:</span>
+				              <span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+				           </span>
+				    </div> 
+				<iselse> 
+					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>         
+					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
+					<div class="payment-amount">
+						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
+						<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+					</div><!-- END: payment-amount -->
+				</isif>
 			</isloop>
 		</td>
 		<td class="order-payment-summary">

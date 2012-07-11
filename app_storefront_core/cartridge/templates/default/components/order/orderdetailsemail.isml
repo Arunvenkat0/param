@@ -41,8 +41,11 @@
 			</isif>
 			
 			<iscomment>Render Payment Instrument</iscomment>
-			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
-				<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
+			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">			
+				<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
+				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
+					<isprint value="${paymentInstr.maskedGiftCertificateCode}"/><br />
+				</isif>	
 				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
 				<div>
 					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
