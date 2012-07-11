@@ -1,4 +1,4 @@
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="pdict"/>	
+<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
 <isset name="ProductSet" value="${pdict.Product}" scope="pdict"/>
 <isset name="ProductSetList" value="${new dw.util.ArrayList()}" scope="pdict" />
 <isset name="isBundle" value="${pdict.Product.bundle}" scope="pdict"/>
@@ -98,7 +98,7 @@
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.Product.ID }"/></span>
 	</div>
 
-	<isif condition="${pdict.isQuickView}">
+	<isif condition="${isQuickView}">
 		<!-- shown only in quick view -->
 		<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
 	</isif>	

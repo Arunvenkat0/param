@@ -7,6 +7,7 @@
 	</isscript>	
 	<isinclude url="${url}"/>
 <iselse/>
+	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
 	<isscript>		
 		var masterId = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID; 
 		var avm = pdict.Product.availabilityModel;
@@ -28,8 +29,7 @@
 	<div class="product-number">
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
-	
-	<isif condition="${pdict.isQuickView}">
+	<isif condition="${isQuickView}">
 		<!-- shown only in quick view -->
 		<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
 	</isif>	
@@ -41,7 +41,7 @@
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
 	
-	<isif condition="${!pdict.isQuickView}">
+	<isif condition="${!isQuickView}">
 		<div class="product-review-links">
 		   	<isinclude template="product/components/reviewsmini"/>
 		</div>
@@ -74,7 +74,7 @@
 			
 			<div class="inventory">
 				<div class="quantity">
-					<label for="Quantity">${pdict.isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.quantity','locale',null) }</label>					
+					<label for="Quantity">${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.quantity','locale',null) }</label>					
 					<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 				</div>
 			</div>
