@@ -2433,6 +2433,9 @@ var app = (function (app, $) {
 			$.extend(app.page, o);
 		},
 		params : app.util.getQueryStringParams(window.location.search.substr(1)),
+		redirect : function(newURL) {
+			var t=setTimeout("window.location.href='"+newURL+"'",0);
+		},
 		refresh : function() {
 			var t=setTimeout("window.location.assign(window.location.href);",500);
 			
@@ -2807,13 +2810,13 @@ var app = (function (app, $) {
 					dataType:"json"
 				}).done(function(data){
 					if (data.status.toLowerCase()==="ok") {
-						app.page.refresh();
+						app.page.redirect(app.urls.addressesList);	
 					}
 					else if (data.message.length>0) {
 						alert(data.message);
 					}
 					else {
-						app.page.refresh();
+						app.page.refresh();	
 					}
 				});
 			}
@@ -2837,7 +2840,7 @@ var app = (function (app, $) {
 				data: data
 			})
 			.done(function(response) {
-				app.page.refresh();	
+				app.page.redirect(app.urls.paymentsList);	
 			});
 		});
 	}
@@ -2864,11 +2867,19 @@ var app = (function (app, $) {
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 		});
+		$cache.wishlistTable.on("click", ".item-edit-details a", function (e) {
+			e.preventDefault();
+			app.quickView.show({
+				url : e.target.href,
+				source : "cart"
+			});
+		})
 	}
 
 	app.wishlist = {
 		init : function () {
 			$cache.editAddress = $('#editAddress');
+			$cache.wishlistTable = $('.pt_wish-list .item-list');
 			app.product.initAddToCart();
 			initializeEvents();
 			

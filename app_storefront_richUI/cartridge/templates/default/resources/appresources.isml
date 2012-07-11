@@ -105,6 +105,8 @@
 		minicart					: URLUtils.url('Cart-MiniAddProduct').toString(),
 		cartShow 					: URLUtils.url('Cart-Show').toString(),
 		giftRegAdd					: URLUtils.https('Address-GetAddressDetails', 'addressID', '').toString(),
+		paymentsList				: URLUtils.https('PaymentInstruments-List').toString(),
+		addressesList				: URLUtils.https('Address-List').toString(),
 		wishlistAddress				: URLUtils.https('Wishlist-SetShippingAddress').toString(),
 		deleteAddress				: URLUtils.url('Address-Delete').toString(),
 		getProductUrl 				: URLUtils.url('Product-Show').toString(),
