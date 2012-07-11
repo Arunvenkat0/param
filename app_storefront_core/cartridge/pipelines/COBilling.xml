@@ -2017,7 +2017,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <node>
         <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="'COBilling-Handle' + dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
+          <key-binding alias="'COBilling-Handle_' + dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
           <key-binding alias="HandlePipeline" key="To_0"/>
           <key-binding alias="null" key="From_1"/>
           <key-binding alias="null" key="To_1"/>
@@ -2435,7 +2435,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <start-node call-mode="private" name="HandleBillingAddress" secure="false"/>
-        <node-display x="6" y="28"/>
+        <node-display x="5" y="28"/>
       </node>
       <simple-transition/>
       <node>
@@ -2507,9 +2507,13 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <text-node>
-          <description>A Pipeline is being dynamically called based on the current Payment-Processor.</description>
+          <description>The Handle Pipeline is being dynamically called based on a concatenation of a constant preamble (COBilling-Handle_) and the current Payment-Processor.
+
+For example:
+Credit Cards processor ID = BASIC_CREDIT
+Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
         </text-node>
-        <node-display x="9" y="28"/>
+        <node-display width="2" x="8" y="28"/>
       </node>
     </segment>
   </branch>
@@ -2651,10 +2655,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandleBASIC_CREDIT">
+  <branch basename="Handle_BASIC_CREDIT">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandleBASIC_CREDIT" secure="false"/>
+        <start-node call-mode="private" name="Handle_BASIC_CREDIT" secure="false"/>
         <node-display x="6" y="36"/>
       </node>
       <simple-transition>
@@ -2887,10 +2891,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandlePAYPAL_EXPRESS">
+  <branch basename="Handle_PAYPAL_EXPRESS">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandlePAYPAL_EXPRESS" secure="false"/>
+        <start-node call-mode="private" name="Handle_PAYPAL_EXPRESS" secure="false"/>
         <node-display x="14" y="36"/>
       </node>
       <simple-transition/>
@@ -2928,10 +2932,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandleCYBERSOURCE_BML">
+  <branch basename="Handle_CYBERSOURCE_BML">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandleCYBERSOURCE_BML" secure="false"/>
+        <start-node call-mode="private" name="Handle_CYBERSOURCE_BML" secure="false"/>
         <node-display x="17" y="36"/>
       </node>
       <simple-transition/>

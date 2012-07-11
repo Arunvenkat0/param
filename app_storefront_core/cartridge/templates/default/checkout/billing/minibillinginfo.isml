@@ -29,7 +29,7 @@
 </isif>
 
 <isif condition="${!empty(paymentInstruments)}">
-	<iscomment>render dynamically a box per payment instrument</iscomment>
+	<iscomment>render a box per payment instrument</iscomment>
 	<isloop items="${paymentInstruments}" var="paymentInstr" status="loopstate">
 		<div class="mini-payment-instrument  order-component-block <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 
@@ -40,7 +40,7 @@
 
 			<div class="details">
 				<iscomment>
-					render the detail section depending on the type of the payment instrument
+					dynamically render the detail section depending on the type of the payment instrument
 				</iscomment>
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div>${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}: <isprint value="${paymentInstr.maskedGiftCertificateCode}"/></div>

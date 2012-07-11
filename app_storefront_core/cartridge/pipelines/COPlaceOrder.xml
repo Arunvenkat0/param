@@ -59,7 +59,7 @@
                   <node>
                     <pipelet-node custom-name="Authorization Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
-                      <key-binding alias="'COPlaceOrder-Authorize' + dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID" key="From_0"/>
+                      <key-binding alias="'COPlaceOrder-Authorize_' + dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID" key="From_0"/>
                       <key-binding alias="AuthorizationPipeline" key="To_0"/>
                       <key-binding alias="null" key="From_1"/>
                       <key-binding alias="null" key="To_1"/>
@@ -729,9 +729,13 @@
     <segment>
       <node>
         <text-node>
-          <description>A Pipeline is being dynamically called based on the current Payment-Processor.</description>
+          <description>An Authorization Pipeline is being dynamically called based on a concatenation of a constant preamble (COPlaceOrder-Authorize_) and the current Payment-Processor.
+
+For example:
+Credit Cards processor ID = BASIC_CREDIT
+Authorization Pipeline = COPlaceOrder-Authorize_BASIC_CREDIT</description>
         </text-node>
-        <node-display x="8" y="7"/>
+        <node-display width="3" x="8" y="7"/>
       </node>
     </segment>
   </branch>
@@ -872,10 +876,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeBASIC_GIFT_CERTIFICATE">
+  <branch basename="Authorize_BASIC_GIFT_CERTIFICATE">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeBASIC_GIFT_CERTIFICATE" secure="false"/>
+        <start-node call-mode="private" name="Authorize_BASIC_GIFT_CERTIFICATE" secure="false"/>
         <node-display x="6" y="14"/>
       </node>
       <simple-transition/>
@@ -976,10 +980,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeBASIC_CREDIT">
+  <branch basename="Authorize_BASIC_CREDIT">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeBASIC_CREDIT" secure="false"/>
+        <start-node call-mode="private" name="Authorize_BASIC_CREDIT" secure="false"/>
         <node-display x="9" y="14"/>
       </node>
       <simple-transition/>
@@ -1063,10 +1067,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizePAYPAL_EXPRESS">
+  <branch basename="Authorize_PAYPAL_EXPRESS">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizePAYPAL_EXPRESS" secure="false"/>
+        <start-node call-mode="private" name="Authorize_PAYPAL_EXPRESS" secure="false"/>
         <node-display x="12" y="14"/>
       </node>
       <simple-transition>
@@ -1134,10 +1138,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeCYBERSOURCE_BML">
+  <branch basename="Authorize_CYBERSOURCE_BML">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeCYBERSOURCE_BML" secure="false"/>
+        <start-node call-mode="private" name="Authorize_CYBERSOURCE_BML" secure="false"/>
         <node-display x="15" y="14"/>
       </node>
       <simple-transition>
