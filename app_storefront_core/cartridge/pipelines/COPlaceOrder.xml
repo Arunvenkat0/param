@@ -57,156 +57,67 @@
                 </transition>
                 <segment>
                   <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)" condition-operator="expr"/>
+                    <pipelet-node custom-name="Authorization Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="'COPlaceOrder-Authorize' + dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID" key="From_0"/>
+                      <key-binding alias="AuthorizationPipeline" key="To_0"/>
+                      <key-binding alias="null" key="From_1"/>
+                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="null" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
                     <node-display x="0" y="1"/>
-                    <branch basename="b2" source-connector="yes">
-                      <transition target-connector="in"/>
-                      <segment>
-                        <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeGiftCertificate"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in1" target-path="../b3.1/b2.1">
-                              <transition-display>
-                                <bend-point relative-to="target" x="-2" y="0"/>
-                              </transition-display>
-                            </transition>
-                          </branch>
-                        </node>
-                        <transition target-connector="in1" target-path="../b5.4"/>
-                      </segment>
-                    </branch>
                   </node>
                   <simple-transition>
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
+                      <bend-point relative-to="source" x="0" y="1"/>
                     </transition-display>
                   </simple-transition>
                   <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b3" source-connector="yes">
-                      <transition target-connector="in"/>
+                    <call-node start-name-key="AuthorizationPipeline"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="target" x="-1" y="0"/>
+                        </transition-display>
+                      </transition>
                       <segment>
                         <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeCreditCard"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2"/>
-                            <segment>
-                              <node>
-                                <join-node/>
-                                <node-display x="1" y="2"/>
-                              </node>
-                              <transition target-connector="in1" target-path="../../b4.1/b2.1"/>
-                            </segment>
-                          </branch>
+                          <end-node name="error"/>
+                          <node-display orientation="horizontal" x="1" y="1"/>
                         </node>
-                        <transition target-connector="in1" target-path="../b5.3"/>
                       </segment>
                     </branch>
                   </node>
-                  <simple-transition>
-                    <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
-                    </transition-display>
-                  </simple-transition>
-                  <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_BML)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b4" source-connector="yes">
-                      <transition target-connector="in"/>
-                      <segment>
-                        <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeBML"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2"/>
-                            <segment>
-                              <node>
-                                <join-node/>
-                                <node-display x="1" y="2"/>
-                              </node>
-                              <transition target-connector="in1" target-path="../../+1"/>
-                            </segment>
-                          </branch>
-                        </node>
-                        <transition target-connector="in1" target-path="../b5.2"/>
-                      </segment>
-                    </branch>
-                  </node>
-                  <simple-transition>
-                    <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
-                    </transition-display>
-                  </simple-transition>
-                  <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(&quot;PayPal&quot;)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b5" source-connector="yes">
-                      <transition target-connector="in"/>
-                      <segment>
-                        <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizePayPal"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2" target-path="../+1"/>
-                          </branch>
-                        </node>
-                        <transition target-connector="in3" target-path="./+1">
-                          <transition-display>
-                            <bend-point relative-to="source" x="0" y="2"/>
-                          </transition-display>
-                        </transition>
-                      </segment>
-                      <segment>
-                        <node>
-                          <join-node/>
-                          <node-display x="-1" y="1"/>
-                        </node>
-                        <transition target-connector="in3" target-path="./+1"/>
-                      </segment>
-                      <segment>
-                        <node>
-                          <join-node/>
-                          <node-display x="-1" y="0"/>
-                        </node>
-                        <transition target-connector="in3" target-path="./+1"/>
-                      </segment>
-                      <segment>
-                        <node>
-                          <join-node/>
-                          <node-display x="-1" y="0"/>
-                        </node>
-                        <transition target-connector="loop" target-path="../..">
-                          <transition-display>
-                            <bend-point relative-to="source" x="-1" y="0"/>
-                            <bend-point relative-to="source" x="-1" y="-1"/>
-                            <bend-point relative-to="target" x="-1" y="0"/>
-                          </transition-display>
-                        </transition>
-                      </segment>
-                    </branch>
-                  </node>
-                  <transition target-connector="in1" target-path="./+1">
-                    <transition-display>
-                      <bend-point relative-to="source" x="2" y="0"/>
-                    </transition-display>
-                  </transition>
+                  <transition target-connector="in1" target-path="./+1"/>
                 </segment>
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="1" y="3"/>
+                    <node-display x="0" y="1"/>
                   </node>
-                  <simple-transition/>
-                  <node>
-                    <end-node name="error"/>
-                    <node-display orientation="horizontal" x="1" y="0"/>
-                  </node>
+                  <transition target-connector="loop" target-path="..">
+                    <transition-display>
+                      <bend-point relative-to="source" x="-1" y="0"/>
+                      <bend-point relative-to="source" x="-1" y="-1"/>
+                      <bend-point relative-to="target" x="-1" y="0"/>
+                    </transition-display>
+                  </transition>
                 </segment>
               </branch>
             </node>
@@ -814,6 +725,16 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_9">
+    <segment>
+      <node>
+        <text-node>
+          <description>A Pipeline is being dynamically called based on the current Payment-Processor</description>
+        </text-node>
+        <node-display x="8" y="7"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="CreateOrder">
     <segment>
       <node>
@@ -901,7 +822,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_11">
+  <branch basename="_ANONYMOUS_BRANCH_12">
     <segment>
       <node>
         <text-node>
@@ -911,7 +832,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_12">
+  <branch basename="_ANONYMOUS_BRANCH_13">
     <segment>
       <node>
         <text-node>
@@ -921,7 +842,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_13">
+  <branch basename="_ANONYMOUS_BRANCH_14">
     <segment>
       <node>
         <text-node>
@@ -931,7 +852,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_14">
+  <branch basename="_ANONYMOUS_BRANCH_15">
     <segment>
       <node>
         <text-node>
@@ -941,7 +862,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_15">
+  <branch basename="_ANONYMOUS_BRANCH_16">
     <segment>
       <node>
         <text-node>
@@ -951,10 +872,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeGiftCertificate">
+  <branch basename="AuthorizeBASIC_GIFT_CERTIFICATE">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeGiftCertificate" secure="false"/>
+        <start-node call-mode="private" name="AuthorizeBASIC_GIFT_CERTIFICATE" secure="false"/>
         <node-display x="6" y="14"/>
       </node>
       <simple-transition/>
@@ -1045,7 +966,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_17">
+  <branch basename="_ANONYMOUS_BRANCH_18">
     <segment>
       <node>
         <text-node>
@@ -1055,10 +976,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeCreditCard">
+  <branch basename="AuthorizeBASIC_CREDIT">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeCreditCard" secure="false"/>
+        <start-node call-mode="private" name="AuthorizeBASIC_CREDIT" secure="false"/>
         <node-display x="9" y="14"/>
       </node>
       <simple-transition/>
@@ -1122,7 +1043,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
+  <branch basename="_ANONYMOUS_BRANCH_20">
     <segment>
       <node>
         <text-node>
@@ -1132,7 +1053,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_20">
+  <branch basename="_ANONYMOUS_BRANCH_21">
     <segment>
       <node>
         <text-node>
@@ -1142,10 +1063,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizePayPal">
+  <branch basename="AuthorizePAYPAL_EXPRESS">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizePayPal" secure="false"/>
+        <start-node call-mode="private" name="AuthorizePAYPAL_EXPRESS" secure="false"/>
         <node-display x="12" y="14"/>
       </node>
       <simple-transition>
@@ -1213,10 +1134,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="AuthorizeBML">
+  <branch basename="AuthorizeCYBERSOURCE_BML">
     <segment>
       <node>
-        <start-node call-mode="private" name="AuthorizeBML" secure="false"/>
+        <start-node call-mode="private" name="AuthorizeCYBERSOURCE_BML" secure="false"/>
         <node-display x="15" y="14"/>
       </node>
       <simple-transition>
@@ -1284,7 +1205,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1294,7 +1215,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
         <text-node>
@@ -1304,7 +1225,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1314,7 +1235,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>
@@ -1324,7 +1245,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
+  <branch basename="_ANONYMOUS_BRANCH_28">
     <segment>
       <node>
         <text-node>
@@ -1421,7 +1342,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1470,7 +1391,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_31">
+  <branch basename="_ANONYMOUS_BRANCH_32">
     <segment>
       <node>
         <text-node>
@@ -1480,7 +1401,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_32">
+  <branch basename="_ANONYMOUS_BRANCH_33">
     <segment>
       <node>
         <text-node>
@@ -1490,7 +1411,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_33">
+  <branch basename="_ANONYMOUS_BRANCH_34">
     <segment>
       <node>
         <text-node>
@@ -1500,7 +1421,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_34">
+  <branch basename="_ANONYMOUS_BRANCH_35">
     <segment>
       <node>
         <text-node>
@@ -1510,7 +1431,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_35">
+  <branch basename="_ANONYMOUS_BRANCH_36">
     <segment>
       <node>
         <text-node>

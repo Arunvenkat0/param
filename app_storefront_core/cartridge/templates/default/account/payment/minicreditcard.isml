@@ -30,8 +30,9 @@
 		ccOwner  = pdict.p_cc_formfield.owner.htmlValue;
 	}
 </isscript>
-
-<isprint value="${ccOwner}"/><br />
-<isprint value="${ccType}"/><br />
-<isprint value="${ccNumber}"/><br />
-${Resource.msg('minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/>
+<isif condition="${!empty(ccOwner) && !empty(ccType) && !empty(ccNumber)}">
+	<isprint value="${ccOwner}"/><br />
+	<isprint value="${ccType}"/><br />
+	<isprint value="${ccNumber}"/><br />
+	${Resource.msg('minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/>
+</isif>

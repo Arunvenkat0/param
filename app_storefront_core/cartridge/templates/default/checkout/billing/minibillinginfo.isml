@@ -42,26 +42,11 @@
 				<iscomment>
 					render the detail section depending on the type of the payment instrument
 				</iscomment>
-				<isif condition="${dw.order.PaymentInstrument.METHOD_CREDIT_CARD.equals(paymentInstr.paymentMethod)}">
-					<iscomment>a credit card</iscomment>
-					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>
-					<div>${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/></div>
-				<iselseif condition="${dw.order.PaymentInstrument.METHOD_BML.equals(paymentInstr.paymentMethod)}"/>
-					<iscomment>bill me later</iscomment>
-					${Resource.msg('minibillinginfo.bml','checkout',null)}
-					<div>${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/></div>
-				<iselseif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}"/>
-					<iscomment>gift certificate</iscomment>
-					<div>${Resource.msg('minibillinginfo.giftcertificate','checkout',null)}: <isprint value="${paymentInstr.maskedGiftCertificateCode}"/></div>
-					<div>${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/></div>
-				<iselseif condition="${'PayPal'.equals(paymentInstr.paymentMethod)}"/>
-					<iscomment>pay pal</iscomment>
-					<div>${Resource.msg('minibillinginfo.paypal','checkout',null)}</div>
-					<div>${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/></div>
-				<iselse/>
-					<iscomment>n/a</iscomment>
-					Unknown payment method
-				</isif>
+				<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
+				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>						
+				<div>
+					${Resource.msg('minibillinginfo.amount','checkout',null)}: <isprint value="${paymentInstr.paymentTransaction.amount}"/>
+				</div><!-- END: payment-amount -->
 			</div>
 		</div>
 	</isloop>

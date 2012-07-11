@@ -2013,134 +2013,64 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           </segment>
         </branch>
       </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="'COBilling-Handle' + dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
+          <key-binding alias="HandlePipeline" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
       <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="0" y="1"/>
-          <bend-point relative-to="target" x="-1" y="0"/>
+          <bend-point relative-to="target" x="-1" y="1"/>
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value.equals(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)" condition-operator="expr"/>
-        <node-display orientation="horizontal" x="0" y="1"/>
-        <branch basename="b4" source-connector="yes">
+        <call-node start-name-key="HandlePipeline"/>
+        <node-display orientation="horizontal" x="2" y="0"/>
+        <branch basename="b4" source-connector="error">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="COBilling-HandleCreditCard"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <end-node name="error"/>
-                    <node-display orientation="horizontal" x="1" y="1"/>
-                  </node>
-                </segment>
-              </branch>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="1" y="0"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node name="ok"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
+              <end-node name="error"/>
+              <node-display orientation="horizontal" x="1" y="1"/>
             </node>
           </segment>
         </branch>
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="target" x="0" y="-1"/>
-          <bend-point relative-to="target" x="-1" y="0"/>
+          <bend-point relative-to="source" x="1" y="0"/>
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value.equals(&quot;PayPal&quot;)" condition-operator="expr"/>
-        <node-display orientation="horizontal" x="0" y="2"/>
-        <branch basename="b5" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <call-node start-name-ref="COBilling-HandlePayPal"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <end-node name="error"/>
-                    <node-display orientation="horizontal" x="1" y="1"/>
-                  </node>
-                </segment>
-              </branch>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="ok"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-          <bend-point relative-to="target" x="0" y="-1"/>
-          <bend-point relative-to="target" x="-1" y="0"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <decision-node condition-key="CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value.equals(dw.order.PaymentInstrument.METHOD_BML)" condition-operator="expr"/>
-        <node-display orientation="horizontal" x="0" y="2"/>
-        <branch basename="b6" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <call-node start-name-ref="COBilling-HandleBML"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <end-node name="error"/>
-                    <node-display orientation="horizontal" x="1" y="1"/>
-                  </node>
-                </segment>
-              </branch>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="ok"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="error"/>
-        <node-display x="0" y="1"/>
+        <end-node name="ok"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
     </segment>
   </branch>
@@ -2577,13 +2507,23 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <text-node>
+          <description>A Pipeline is being dynamically called based on the current Payment-Processor</description>
+        </text-node>
+        <node-display x="9" y="28"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_47">
+    <segment>
+      <node>
+        <text-node>
           <description>Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields. If the verification was successful a credit card payment instrument is created.</description>
         </text-node>
         <node-display width="2" x="6" y="35"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_47">
+  <branch basename="_ANONYMOUS_BRANCH_48">
     <segment>
       <node>
         <text-node>
@@ -2593,7 +2533,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_48">
+  <branch basename="_ANONYMOUS_BRANCH_49">
     <segment>
       <node>
         <text-node>
@@ -2603,7 +2543,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_49">
+  <branch basename="_ANONYMOUS_BRANCH_50">
     <segment>
       <node>
         <text-node>
@@ -2613,7 +2553,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_50">
+  <branch basename="_ANONYMOUS_BRANCH_51">
     <segment>
       <node>
         <text-node>
@@ -2623,7 +2563,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_51">
+  <branch basename="_ANONYMOUS_BRANCH_52">
     <segment>
       <node>
         <text-node>
@@ -2633,7 +2573,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_52">
+  <branch basename="_ANONYMOUS_BRANCH_53">
     <segment>
       <node>
         <text-node>
@@ -2711,10 +2651,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandleCreditCard">
+  <branch basename="HandleBASIC_CREDIT">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandleCreditCard" secure="false"/>
+        <start-node call-mode="private" name="HandleBASIC_CREDIT" secure="false"/>
         <node-display x="6" y="36"/>
       </node>
       <simple-transition>
@@ -2947,10 +2887,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandlePayPal">
+  <branch basename="HandlePAYPAL_EXPRESS">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandlePayPal" secure="false"/>
+        <start-node call-mode="private" name="HandlePAYPAL_EXPRESS" secure="false"/>
         <node-display x="14" y="36"/>
       </node>
       <simple-transition/>
@@ -2988,10 +2928,10 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="HandleBML">
+  <branch basename="HandleCYBERSOURCE_BML">
     <segment>
       <node>
-        <start-node call-mode="private" name="HandleBML" secure="false"/>
+        <start-node call-mode="private" name="HandleCYBERSOURCE_BML" secure="false"/>
         <node-display x="17" y="36"/>
       </node>
       <simple-transition/>
@@ -3580,7 +3520,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_61">
+  <branch basename="_ANONYMOUS_BRANCH_62">
     <segment>
       <node>
         <text-node>
@@ -3718,7 +3658,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_63">
+  <branch basename="_ANONYMOUS_BRANCH_64">
     <segment>
       <node>
         <text-node>
@@ -3771,7 +3711,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_65">
+  <branch basename="_ANONYMOUS_BRANCH_66">
     <segment>
       <node>
         <text-node>
