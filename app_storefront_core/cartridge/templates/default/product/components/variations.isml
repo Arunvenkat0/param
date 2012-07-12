@@ -221,20 +221,14 @@
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
-													var isAvailable = pdict.Product.isMaster() || PVM.getFilteredValues(VA).contains(VV);
+													var selected = (PVM.isSelectedAttributeValue(VA, VV) || Valength == 1) ? 'selected="selected"' : '';
+													if (selected.length > 0) {
+														selectedVariant = VA.ID+"-"+VV.value;
+													}
 												</isscript>
-												<isif condition="${isAvailable}">
-													<isscript>
-														var selected = (PVM.isSelectedAttributeValue(VA, VV) || Valength == 1) ? 'selected="selected"' : '';
-														if (selected.length > 0) {
-															selectedVariant = VA.ID+"-"+VV.value;
-														}
-													</isscript>
-													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
-														<isprint value="${VV.displayValue||VV.value}"/>
-													</option>
-	
-												</isif>
+												<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
+													<isprint value="${VV.displayValue||VV.value}"/>
+												</option>
 											</isif>
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>

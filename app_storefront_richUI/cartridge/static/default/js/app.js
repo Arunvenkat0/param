@@ -285,7 +285,7 @@ var app = (function (app, $) {
 	 */
 	function setMainImage(atts) {
 		var imgZoom = $cache.pdpMain.find("a.main-image");
-		if (imgZoom.length>0) {
+		if (imgZoom.length>0 && atts.hires && atts.hires!='') {
 			imgZoom.attr("href", atts.hires);
 		}
 
@@ -338,7 +338,8 @@ var app = (function (app, $) {
 
 		// Added to prevent empty hires zoom feature (if images don't exist)
 		var mainImage = $cache.pdpMain.find("a.main-image");
-		if( mainImage[0].href != '' && mainImage[0].href.indexOf('noimagelarge')<0 ) {
+		var hiresImageSrc = mainImage.attr("href");
+		if( hiresImageSrc && hiresImageSrc != '' && hiresImageSrc.indexOf('noimagelarge')<0 ) {
 			mainImage.removeData("jqzoom").jqzoom(options);
 		}
 	}
