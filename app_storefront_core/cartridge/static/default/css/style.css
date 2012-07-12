@@ -73,6 +73,7 @@ label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;
 .form-row-button{margin-left:24.5%;width:62%;}
 input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 2%;text-indent:0%;width:49.5966%;}
 select{text-indent:1.5%;height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.6em 2%;width:54%;}
+.search-result-options select {height:auto;}
 input[type="checkbox"]{margin:1em 2%;}
 input[type="radio"]{margin:1em 2%;}
 .label-inline label{display:inline-block;float:none;font-size:1em;font-weight:400;text-align:left;width:90%;}
@@ -367,7 +368,8 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 .product-tile .product-swatches ul{list-style:none outside none;margin:0;overflow:hidden;padding:0;}
 .product-tile .product-swatches ul.swatch-toggle{background:none repeat scroll 0 0 #FFFFFF;display:none;position:absolute;}
 .product-tile .product-swatches:hover ul.swatch-toggle{display:block;}
-.product-tile .product-swatches li{float:right;}
+.product-tile .product-swatches {float:right;}
+.product-tile .product-swatches li{float:left;}
 .product-tile .product-swatches .swatch{display:block;width:16px;}
 .product-tile .product-swatches .swatch img{border:1px solid #FFFFFF;height:12px;padding:1px;width:12px;}
 .product-tile .product-swatches .selected img{border-color:#12ABE7;}

@@ -23,13 +23,13 @@
 	
 			if( varAttrColor != null )
 			{
-				selectableColors = Product.variationModel.getAllValues( varAttrColor );
+				selectableColors = Product.variationModel.getFilteredValues( varAttrColor );
 				
 			}
 		}
 		
 		var firstProduct : dw.catalog.Product = pdict.FirstProduct;
-		if( firstProduct.variant && varAttrColor != null )
+		if( firstProduct && firstProduct.variant && varAttrColor != null )
 		{
 			selectedColor = firstProduct.variationModel.getSelectedValue( varAttrColor );
 		}

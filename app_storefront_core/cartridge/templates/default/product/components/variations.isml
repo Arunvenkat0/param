@@ -221,7 +221,7 @@
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
-													var isAvailable = PVM.getFilteredValues(VA).contains(VV);
+													var isAvailable = pdict.Product.isMaster() || PVM.getFilteredValues(VA).contains(VV);
 												</isscript>
 												<isif condition="${isAvailable}">
 													<isscript>
