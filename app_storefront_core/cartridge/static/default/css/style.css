@@ -631,7 +631,6 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 #cart-table .item-user-actions{width:100px;}
 #cart-table .item-user-actions a{display:block;font-size:0.9em;}
 #cart-table .item-user-actions button{display:block;font-size:0.9em;}
-#cart-table .price-promotion{min-width:115px;}
 #cart-table .price-promotion .price-sales{color:#990000;}
 #cart-table .price-promotion .price-standard{margin:0 1em 0 0;text-decoration:line-through;}
 #cart-table .item-total{font-weight:700;text-align:right;word-wrap:break-word;}
