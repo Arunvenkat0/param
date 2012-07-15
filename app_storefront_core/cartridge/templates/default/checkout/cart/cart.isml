@@ -729,7 +729,7 @@
 									<div>
 										<span class="label">${Resource.msg('summary.orderdiscount','checkout',null)}</span>
 										<span class="value">
-											<isprint value="${priceAdjustment.lineItemText}" />
+											<isprint value="${priceAdjustment.promotion.calloutMsg}" />
 										</span>
 									</div>
 								</td>
@@ -758,7 +758,6 @@
 						<button type="submit" value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon">
 							${Resource.msg('global.apply','locale',null)}
 						</button>
-						
 						<isif condition="${pdict.CouponError && pdict.CouponError=='COUPON_CODE_MISSING'}">
 							<div class="error">
 								${Resource.msg('cart.COUPON_CODE_MISSING','checkout', null)}
@@ -769,9 +768,6 @@
 							</div>
 						</isif>							
 					</div>
-				</div>
-				<div class="cart-footer">
-					<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 				</div>
 			</fieldset>
 		</form>
@@ -810,6 +806,9 @@
 
 		</div>
 
+		<div class="cart-footer">
+			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
+		</div>
 	</isif>
 
 </isdecorate>

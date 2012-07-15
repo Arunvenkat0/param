@@ -148,8 +148,6 @@
 					<div class="error">
 						<span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatusCode.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
 					</div>
-				<iselse/>
-					<span class="error">${Resource.msg('billing.couponinvalid','checkout',null)}</span>
 				</isif>
 			</div>
 
