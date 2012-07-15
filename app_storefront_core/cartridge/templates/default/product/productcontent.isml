@@ -65,7 +65,7 @@
 	<div class="product-add-to-cart">		
 		<h2 class="visually-hidden">Product Actions</h2>
 		
-		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
+		<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
 			<fieldset>
 			
 			<legend class="visually-hidden">Add to cart options</legend>
