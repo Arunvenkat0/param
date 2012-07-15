@@ -46,7 +46,6 @@
 						Otherwise hasOrderableVariants() would use currently selected values resulting in a too narrow selection of variants.
 					</iscomment>
 					<isset name="cleanPVM" value="${(pdict.Product.variant ? pdict.Product.masterProduct.variationModel : pdict.Product.variationModel)}" scope="page"/>
-	
 					<ul>
 					
 					<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
@@ -137,15 +136,13 @@
 												<isif condition="${isSelected}">												
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 													<isscript>selectedVariants.push(VA.ID+"-"+VV.value);</isscript>
-												<iselse/>
-													<isset name="selectedSwatchValue" scope="page" value="${''}" />
 												</isif>
 												<isif condition="${!empty(VV.getImage('hi-res'))}">
 													<isset name="hiResURL" scope="page" value="${VV.getImage('hi-res').getURL()}" />
 												<iselse/>
 													<isset name="hiResURL" scope="page" value="${''}" />
 												</isif>
-												<li class="${swatchClass}">												
+												<li class="${swatchClass}">
 													<a href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}"
 													   title="${displayValue}"
 													   class="swatchanchor"
@@ -156,11 +153,15 @@
 												</li>									
 											</isif>
 										</isloop>
-										<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>								
+										<li class="selected-value">
+											<isif condition="${selectedSwatchValue}">
+												<isprint value="${selectedSwatchValue}"/>
+											</isif>
+										</li>								
 									</ul>							
 								<iselse>
 									<ul class="swatches ${vaId.toLowerCase()}">							
-										<isset name="selectedSwatchValue" scope="page" value="${''}" />
+										<isset name="selectedSwatchValue" scope="page" value="${null}" />
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>													
@@ -175,7 +176,7 @@
 													<isscript>var selectedVariant = VA.ID+"-"+VV.value;</isscript>
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 												</isif>																		
-												<li class="${swatchClass}">																								
+												<li class="${swatchClass}">																						
 													<isif condition="${selectable}">
 														<a title="${displayValue}" class="swatchanchor"	href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}">
 															<isprint value="${displayValue}"/>
@@ -189,7 +190,11 @@
 											</isif>
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>									
-										<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>
+										<li class="selected-value">
+											<isif condition="${selectedSwatchValue}">
+												<isprint value="${selectedSwatchValue}"/>
+											</isif>
+										</li>
 								
 										<isif condition="${!empty(sizeChartID)}">
 											<li class="size-chart-link">

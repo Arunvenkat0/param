@@ -1133,7 +1133,7 @@ var app = (function (app, $) {
 		if (initialized) {return; }			
 		$cache.dialog.on("click", ".preview-button, .send-button, .edit-button", function (e) {
 			e.preventDefault();
-			//$cache.form.validate();
+			$cache.form.validate();
 			if (!$cache.form.valid()) {
 				return false;
 			}

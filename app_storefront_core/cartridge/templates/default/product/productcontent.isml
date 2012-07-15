@@ -1,4 +1,4 @@
-<isif condition="${pdict.resetAttributes}">
+<isif condition="${false&&pdict.resetAttributes}">
 	<isscript>
 		importScript("product/ProductUtils.ds"); 
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
@@ -114,17 +114,10 @@
 	
 	<div class="product-actions">		
 		<ul class="menu">
-			<isif condition="${pdict.available}">
-				<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
-				<iselse>
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
-				</isif>
-				<isif condition="${!(pdict.Product.bundle)}">
-					<li><a class="wl-action" href="${wishlistUrl}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
-					<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
-				</isif>	
-			</isif>
+			<isif condition="${pdict.available && !pdict.Product.bundle && !pdict.Product.master}">
+				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
+				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
+			</isif>	
 			<li><a class="send-to-friend" 
 				   title="${Resource.msg('product.sendfriend','product',null)}" 
 				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
