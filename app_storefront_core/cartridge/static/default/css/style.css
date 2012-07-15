@@ -357,7 +357,7 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 /* product tiles */
 /* ------------------------------------- */
 
-.product-tile{color:#999999;padding-bottom:35px;position:relative;text-align:center;}
+.product-tile{color:#999999;position:relative;text-align:center;}
 .product-tile img{max-width:100%;}
 .product-tile .product-image{height:195px;position:relative;}
 .product-tile .product-name{font-family:Georgia,sans-serif;font-size:1.2em;font-style:italic;margin:13px 0 2px;}
@@ -864,7 +864,7 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .home-bottom-right{clear:both;margin:0;width:auto;}
 .home-bottom-right h2{background:url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;border-bottom:2px solid #01A4E5;height:54px;padding:30px 0;text-indent:-999em;}
 .home-bottom-right .vertical-carousel{margin:0;padding:0;}
-.home-bottom-right .vertical-carousel li{float:left;list-style:none outside none;padding:20px 0;width:25%;}
+.home-bottom-right .vertical-carousel li{float:left;list-style:none outside none;padding:0;width:25%;}
 .home-bottom-right .vertical-carousel li .capture-product-id{display:none;}
 .home-bottom-right .vertical-carousel li .product-price .product-standard-price{text-decoration:line-through;}
 .home-bottom-right .product-tile{border:0 none;margin:auto;min-height:255px;width:90%;}
