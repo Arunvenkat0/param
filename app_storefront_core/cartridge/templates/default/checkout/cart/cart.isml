@@ -227,7 +227,7 @@
 															<isif condition="${lineItem.quantityValue > 1 && lineItem.quantityValue != pa.quantity}">
 																<isprint value="${pa.quantity}" /> x 
 															</isif>
-															<isprint value="${pa.promotion.name}" />
+															<isprint value="${pa.promotion.calloutMsg}" />
 														</div>
 													</isloop>
 												
