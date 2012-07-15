@@ -2638,9 +2638,11 @@ var app = (function (app, $) {
 			itemVisibleInCallback : app.captureCarouselRecommendations
 		},
 		init : function () {
+			setTimeout(function(){
 			// renders horizontal/vertical carousels for product slots
-			$('#horizontal-carousel').jcarousel(app.components.carouselSettings);
 			$('#vertical-carousel').jcarousel($.extend({vertical : true}, app.components.carouselSettings));
+			$('#horizontal-carousel').jcarousel(app.components.carouselSettings);
+			}, 1000);
 		}
 	};
 }(window.app = window.app || {}, window.dw, jQuery));
