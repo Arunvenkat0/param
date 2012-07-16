@@ -410,7 +410,8 @@ var app = (function (app, $) {
 
 			}
 		}
-
+		
+		app.tooltips.init();
 	}
 
 	function initializeCache() {
@@ -596,7 +597,8 @@ var app = (function (app, $) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
-					$("update-images").remove();				
+					$("update-images").remove();
+					app.tooltips.init();
 				}
 			});
 		});
@@ -629,7 +631,8 @@ var app = (function (app, $) {
 					app.product.initAddToCart();
 					if (isColor) {
 						replaceImages();
-					}					
+					}
+					app.tooltips.init();
 				}
 			});
 		});
@@ -660,7 +663,7 @@ var app = (function (app, $) {
 				}
 				
 				app.product.initAddToCart(ic);
-
+				app.tooltips.init();
 			});
 		});
 
