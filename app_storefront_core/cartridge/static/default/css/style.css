@@ -72,7 +72,7 @@ label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;
 .form-row{clear:both;margin:0 0 1em;}
 .form-row-button{margin-left:24.5%;width:62%;}
 input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 0.5em;text-indent:0;width:49.5966%;}
-select{text-indent:1.5%;height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.6em 2%;width:54%;}
+select{text-indent:0;height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 0.3em;width:51.6%;}
 .search-result-options select {height:auto;}
 input[type="checkbox"]{margin:1em 2%;}
 input[type="radio"]{margin:1em 2%;}
@@ -143,6 +143,7 @@ td.item-dashboard .option-priority label{color:#333333;font-weight:700;}
 td.item-dashboard .option-add-to-cart .label{color:#333333;font-size:1.1em;font-weight:700;text-transform:uppercase;}
 td.item-dashboard .option-add-to-cart label{color:#333333;font-size:1.1em;font-weight:700;text-transform:uppercase;}
 td.item-dashboard .option-add-to-cart input{padding:0.8em 0.3em 0.7em;width:50px;}
+td.item-dashboard .option-quantity-purchased span.exceeded {color:#ff0000}
 
 /* base tool tip */
 /* ------------------------------------- */
@@ -282,7 +283,7 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 .col-2{float:right;margin:4px 0;width:48%;}
 .content-header{font-family:Georgia,serif;font-size:1.75em;font-style:italic;font-weight:400;margin:0 0 14px !important;}
 .content-header span{font-size:0.75em;font-style:normal;font-weight:400;}
-.section-header{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1px solid #FFFFFF;font-size:1.1em !important;font-weight:700;margin:0;padding:1em 35% 1em 1em;position:relative;text-transform:uppercase;}
+.section-header{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1px solid #FFFFFF;font-size:1.1em !important;font-weight:700;margin:0;padding:1em;position:relative;text-transform:uppercase;}
 .section-header-note{font-size:0.9em;font-weight:400;position:absolute;right:1em;text-transform:none;}
 .back{display:block;margin:0 0 10px;}
 
@@ -569,6 +570,7 @@ body .review-image{float:left;margin:0 20px;}
 .pdp-main .promotion .promotion-title{color:#999999;display:inline-block;font-size:1.5em;line-height:1em;text-transform:uppercase;vertical-align:top;width:20%;}
 .pdp-main .promotion .promotion-callout{display:inline-block;line-height:1em;vertical-align:top;width:77%;}
 .pdp-main .product-tabs{border:0 none;margin:25px 0 0;}
+.print-page {cursor:pointer;}
 .pdp-main .product-tabs .print-page {float:right}
 .list-table-header .print-page {font-size: 13.2px;float:right;}
 .pt_gift-registry .list-table-header .print-page {margin-top:-0.5em;}

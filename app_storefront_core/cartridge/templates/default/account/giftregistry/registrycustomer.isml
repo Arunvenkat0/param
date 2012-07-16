@@ -83,15 +83,19 @@
 								</div>
 								
 								<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
-									
+									<isif condition="${item.purchasedQuantity.value>item.quantity.value}">
+										<isset name="exceededClass" value="${' exceeded'}" scope="page" />
+									<iselse/>
+										<isset name="exceededClass" value="${''}" scope="page" />
+									</isif>
 									<div class="item-option option-quantity-desired">
 										<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span> 
-										<span class="value"><isprint value="${item.quantity.value}" formatter="#"/></span>
+										<span class="value${exceededClass}"><isprint value="${item.quantity.value}" formatter="#"/></span>
 									</div>
 									
 									<div class="item-option option-quantity-purchased">
 										<span class="label">${Resource.msg('productlist.qtypurchased','account',null)}</span> 
-										<span class="value"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></span>
+										<span class="value${exceededClass}"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></span>
 									</div> 
 									
 								</isif>
