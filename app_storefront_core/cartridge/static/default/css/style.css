@@ -747,6 +747,12 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 /* account */
 /* ------------------------------------- */
 
+#PasswordResetForm fieldset { position: relative; }
+#PasswordResetForm button {
+	float: right;
+position: absolute;
+top: 0px;
+left: 63%;}
 h1 .account-logout{font-size:0.6em;}
 .registration-selection input,.registration-selection label{display:inline;float:none;}
 ul.address-list{padding:0;}
