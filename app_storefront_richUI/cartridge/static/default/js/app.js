@@ -1725,7 +1725,7 @@ var app = (function (app, $) {
 	 * the UI.
 	 */
 	function updateShippingMethodList() {
-		if ($cache.shippingMethodList.length === 0) { return; }
+		if (!$cache.shippingMethodList || $cache.shippingMethodList.length === 0) { return; }
 		var url = getShippingMethodURL(app.urls.shippingMethodsJSON);
 
 		 app.ajax.getJson({
@@ -1885,6 +1885,8 @@ var app = (function (app, $) {
 
 	//loads billing address, Gift Certificates, Coupon and Payment methods
 	function billingLoad() {
+		if( !$cache.paymentMethodId ) return;
+		
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
 			
