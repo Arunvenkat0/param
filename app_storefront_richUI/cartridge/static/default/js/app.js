@@ -1204,7 +1204,6 @@ var app = (function (app, $) {
 				}
 				var url = app.util.appendParamsToUrl(this.href, data);
 				url = this.protocol + "//" + this.hostname + ((url.charAt(0)==="/") ? url : ("/"+url));
-
 				app.ajax.load({
 					url:app.util.ajaxUrl(url),
 					target:dlg,
