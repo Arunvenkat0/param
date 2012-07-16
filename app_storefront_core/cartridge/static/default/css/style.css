@@ -71,7 +71,7 @@ label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
 .form-row-button{margin-left:24.5%;width:62%;}
-input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 2%;text-indent:0%;width:49.5966%;}
+input[type="text"],input[type="password"],textarea{border:1px solid #AAAAAA;margin-left:2%;padding:0.7em 0.5em;text-indent:0;width:49.5966%;}
 select{text-indent:1.5%;height:3em;border:1px solid #AAAAAA;margin-left:2%;padding:0.6em 2%;width:54%;}
 .search-result-options select {height:auto;}
 input[type="checkbox"]{margin:1em 2%;}
@@ -221,7 +221,7 @@ td.item-dashboard .option-add-to-cart input{padding:0.8em 0.3em 0.7em;width:50px
 .menu-utility li.last{border:0 none;}
 .menu-utility-user li.last{border:0 none;}
 .header-search{position:absolute;right:5px;top:12px;z-index:21;}
-.header-search input[type="text"]{background:none repeat scroll 0 0 #666666;border:0 none;color:#FFFFFF;height:16px;margin:0;padding:8px 0;text-indent:8px;width:180px;}
+.header-search input[type="text"]{background:none repeat scroll 0 0 #666666;border:0 none;color:#FFFFFF;height:16px;margin:0;width:180px;}
 .header-search input[type="submit"]{background:url("../images/interface/icon-search.png") no-repeat scroll center center transparent;border:0 none;height:32px;padding:8px 0;text-indent:-999em;width:32px;}
 .header-search legend{background:none repeat scroll 0 0 transparent;}
 
@@ -570,6 +570,8 @@ body .review-image{float:left;margin:0 20px;}
 .pdp-main .promotion .promotion-callout{display:inline-block;line-height:1em;vertical-align:top;width:77%;}
 .pdp-main .product-tabs{border:0 none;margin:25px 0 0;}
 .pdp-main .product-tabs .print-page {float:right}
+.list-table-header .print-page {font-size: 13.2px;float:right;}
+.pt_gift-registry .list-table-header .print-page {margin-top:-0.5em;}
 .pdp-main .product-tabs .tab-content {min-height:100px;}
 .pdp-main .product-set-list{border-top:1px solid #D9D9D9;margin:0 0 0 6px;}
 .pdp-main .product-set-list .product-set-item{border-bottom:1px solid #D9D9D9;clear:both;margin:1em 0;overflow:hidden;padding:1em 0 0;}

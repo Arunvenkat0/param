@@ -1,9 +1,13 @@
-/*
- * All java script logic for the application.
- *
- * The code relies on the jQuery JS library to
- * be also loaded. 
- */
+//    app.js 2.0.0
+//    (c) 2009-2012 Demandware Inc.
+//    Subject to standard usage terms and conditions
+//    Relies on jQuery, jQuery UI, jQuery validate, ...
+//    For all details and documentation:
+//    https://github.com/Demandware/Site-Genesis
+
+// All java script logic for the application.
+// The code relies on the jQuery JS library to be also loaded. 
+
 // semi-colon to assure functionality upon script concatenation and minification
 ; 
 
@@ -15,6 +19,8 @@ if (!window.jQuery) {
 	document.getElementsByTagName('head')[0].appendChild(s);
 }
 
+// Application singleton and namespace object
+// ------------------------------------------
 var app = (function (app, $) {
 	document.cookie="dw=1";
 	/******** private functions & vars **********/
@@ -165,6 +171,9 @@ var app = (function (app, $) {
 	return $.extend(app, _app);
 }(window.app = window.app || {}, jQuery));
 
+// Home page (Storefront) singleton and namespace object
+// -----------------------------------------------------
+
 // app.storefront
 (function (app, $) {
 	var $cache = {};
@@ -218,7 +227,10 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-//app.tooltips
+// Tooltips singleton and namespace object
+// ---------------------------------------
+
+// app.tooltips
 (function (app, $) {
 	var $cache = {};
 	app.tooltips = {
@@ -2143,6 +2155,8 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 // app.util
+//
+//
 (function (app, $) {
 
 	// sub namespace app.util.* contains utility functions
