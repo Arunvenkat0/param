@@ -893,7 +893,7 @@
             <simple-transition/>
             <node>
               <interaction-node transaction-required="false">
-                <template buffered="true" dynamic="false" name="account/components/sendtofrienddialogsuccess"/>
+                <template buffered="true" dynamic="false" name="account/password/requestpasswordreset_confirm"/>
               </interaction-node>
               <node-display x="0" y="2"/>
             </node>
