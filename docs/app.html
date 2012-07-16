@@ -319,7 +319,8 @@ one or more of the specified selectors</p>             </td>             <td cla
 
 			<span class="p">}</span>
 		<span class="p">}</span>
-
+		
+		<span class="nx">app</span><span class="p">.</span><span class="nx">tooltips</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 	<span class="p">}</span>
 
 	<span class="kd">function</span> <span class="nx">initializeCache</span><span class="p">()</span> <span class="p">{</span>
@@ -476,7 +477,8 @@ one or more of the specified selectors</p>             </td>             <td cla
 					<span class="nx">target</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 					<span class="nx">app</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">initAddThis</span><span class="p">();</span>
 					<span class="nx">app</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">initAddToCart</span><span class="p">();</span>
-					<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;update-images&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>				
+					<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;update-images&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+					<span class="nx">app</span><span class="p">.</span><span class="nx">tooltips</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 				<span class="p">}</span>
 			<span class="p">});</span>
 		<span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-49">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-49">&#182;</a>               </div>               <p>swatch anchor onclick()</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">$cache</span><span class="p">.</span><span class="nx">pdpMain</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;div.product-detail a[href].swatchanchor&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -506,7 +508,8 @@ one or more of the specified selectors</p>             </td>             <td cla
 					<span class="nx">app</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">initAddToCart</span><span class="p">();</span>
 					<span class="k">if</span> <span class="p">(</span><span class="nx">isColor</span><span class="p">)</span> <span class="p">{</span>
 						<span class="nx">replaceImages</span><span class="p">();</span>
-					<span class="p">}</span>					
+					<span class="p">}</span>
+					<span class="nx">app</span><span class="p">.</span><span class="nx">tooltips</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 				<span class="p">}</span>
 			<span class="p">});</span>
 		<span class="p">});</span>
@@ -529,7 +532,7 @@ one or more of the specified selectors</p>             </td>             <td cla
 				<span class="p">}</span>
 				
 				<span class="nx">app</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">initAddToCart</span><span class="p">(</span><span class="nx">ic</span><span class="p">);</span>
-
+				<span class="nx">app</span><span class="p">.</span><span class="nx">tooltips</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 			<span class="p">});</span>
 		<span class="p">});</span>
 
@@ -990,7 +993,6 @@ app.progress.show(app.ui.primary);</p>             </td>             <td class="
 				<span class="p">}</span>
 				<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">appendParamsToUrl</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 				<span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">+</span> <span class="p">((</span><span class="nx">url</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">===</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">url</span> <span class="o">:</span> <span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">url</span><span class="p">));</span>
-
 				<span class="nx">app</span><span class="p">.</span><span class="nx">ajax</span><span class="p">.</span><span class="nx">load</span><span class="p">({</span>
 					<span class="nx">url</span><span class="o">:</span><span class="nx">app</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">ajaxUrl</span><span class="p">(</span><span class="nx">url</span><span class="p">),</span>
 					<span class="nx">target</span><span class="o">:</span><span class="nx">dlg</span><span class="p">,</span>
@@ -1423,7 +1425,7 @@ if some promotions were applied</p>             </td>             <td class="cod
 <span class="cm">	 * the UI.</span>
 <span class="cm">	 */</span>
 	<span class="kd">function</span> <span class="nx">updateShippingMethodList</span><span class="p">()</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">$cache</span><span class="p">.</span><span class="nx">shippingMethodList</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$cache</span><span class="p">.</span><span class="nx">shippingMethodList</span> <span class="o">||</span> <span class="nx">$cache</span><span class="p">.</span><span class="nx">shippingMethodList</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
 		<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">getShippingMethodURL</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">urls</span><span class="p">.</span><span class="nx">shippingMethodsJSON</span><span class="p">);</span>
 
 		 <span class="nx">app</span><span class="p">.</span><span class="nx">ajax</span><span class="p">.</span><span class="nx">getJson</span><span class="p">({</span>
@@ -1530,6 +1532,8 @@ checkout gift message counter</p>             </td>             <td class="code"
 			<span class="p">}</span>
 		<span class="p">});</span>
 	<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-139">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-139">&#182;</a>               </div>               <p>loads billing address, Gift Certificates, Coupon and Payment methods</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="kd">function</span> <span class="nx">billingLoad</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">$cache</span><span class="p">.</span><span class="nx">paymentMethodId</span> <span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+		
 		<span class="nx">$cache</span><span class="p">.</span><span class="nx">paymentMethodId</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
 			<span class="nx">changePaymentMethod</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">());</span>
 			
@@ -2646,7 +2650,8 @@ name-value pair in the string.</p>             </td>             <td class="code
 		<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">trim</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span>
 		<span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
 	<span class="p">},</span> <span class="s2">&quot;&quot;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-218">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-218">&#182;</a>               </div>               <p>"" should be replaced with error message if needed</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">$</span><span class="p">.</span><span class="nx">validator</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nx">required</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$1</span><span class="p">,</span> <span class="nx">ele</span><span class="p">,</span> <span class="nx">$3</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">requiredText</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">ele</span><span class="p">).</span><span class="nx">parents</span><span class="p">(</span><span class="s1">&#39;.form-row&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-required-text&#39;</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nx">requiredText</span><span class="o">||</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 	<span class="p">};</span>
 
 	<span class="nx">app</span><span class="p">.</span><span class="nx">validator</span> <span class="o">=</span> <span class="p">{</span>
