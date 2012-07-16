@@ -61,6 +61,10 @@ button[disabled],input[disabled]{color:#CCCCCC;}
 .button-fancy-small{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1em;font-weight:400;text-transform:uppercase;}
 .button-fancy-medium{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-weight:400;text-transform:uppercase;}
 .button-fancy-large{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1.75em;font-weight:400;padding:0.5em 1em;text-transform:uppercase;}
+.button-fancy-small[disabled]{opacity:0.5}
+.button-fancy-medium[disabled]{opacity:0.5}
+.button-fancy-large[disabled]{opacity:0.5}
+
 .button-text{background:none repeat scroll 0 0 transparent;border:0 none;font-weight:400;padding:0;}
 .button-full-width{padding-left:0;padding-right:0;text-align:center;width:100%;}
 .js button.simple-submit{display:none;}
@@ -88,6 +92,7 @@ input[type="radio"]{margin:1em 2%;}
 .form-indent{margin-left:24%;}
 .form-indent .form-caption{margin-left:0;}
 .form-caption{display:block;margin:1% 0 1% 24%;width:auto;}
+.error-message {background-color:#F1E6E6;border:2px solid #990000;padding:10px;color:#990000;margin-bottom:10px;}
 .error{background-color:#F1E6E6;border-color:#990000;color:#990000;}
 span.error{background:none repeat scroll 0 0 transparent;display:block;margin:1% 2% 2% 24%;}
 div.error{background:none repeat scroll 0 0 transparent;}
