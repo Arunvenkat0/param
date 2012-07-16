@@ -3201,7 +3201,8 @@ var app = (function (app, $) {
 	// "" should be replaced with error message if needed
 
 	$.validator.messages.required = function ($1, ele, $3) {
-		return "";
+		var requiredText = $(ele).parents('.form-row').attr('data-required-text');
+		return requiredText||"";
 	};
 
 	app.validator = {
