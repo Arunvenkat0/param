@@ -724,7 +724,7 @@ Expects Product instance</description>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="CurrentHttpParameterMap.get(&quot;dwvar_&quot;+Product.ID+&quot;_color&quot;).value" key="colorId"/>
                       <key-binding alias="Product" key="Prod"/>
-                      <key-binding alias="Product" key="newProduct"/>
+                      <key-binding alias="DefaultVariant" key="newProduct"/>
                       <key-binding alias="CurrentVariationModel" key="PVM"/>
                       <key-binding alias="CurrentVariationModel" key="CurrentVariationModel"/>
                     </pipelet-node>

@@ -29,7 +29,7 @@
 			<iselse>
 				<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE">
 			</isif>
-					
+
 			<div class="product-variations" data-current="${JSON.stringify(selectedAtts)}">
 				
 				<h2 class="visually-hidden">Variations</h2>
@@ -184,7 +184,7 @@
 														<a title="${displayValue}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
 														</a>
-													</isif>											
+													</isif>									
 												</li>											
 											</isif>
 										</isloop>

@@ -32,8 +32,8 @@
 
 <div class="product-primary-image">
 	<h2 class="visually-hidden">Images</h2>			
-	<isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>0}">
-		<isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[0].getURL().toString()}" />
+	<isif condition="${!empty(imageProduct.getImages('hi-res')) && imageProduct.getImages('hi-res').length>0}">
+		<isset name="hi_res" scope="page" value="${imageProduct.getImages('hi-res')[0].getURL().toString()}" />
 		<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
 	<iselse/>
 		<isset name="hi_res" scope="page" value="${''}" />

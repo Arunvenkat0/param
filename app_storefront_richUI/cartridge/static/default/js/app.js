@@ -516,8 +516,9 @@ var app = (function (app, $) {
 				});
 
 		});
+		
+		// Add to Wishlist and Add to Gift Registry links behaviors
 		$cache.pdpMain.on("click", "a.wl-action", function (e) {
-			// work around for bundle products. options dropdown not included within form.
 			e.preventDefault();
 			
 			var data = app.util.getQueryStringParams($cache.pdpForm.serialize());
@@ -563,6 +564,7 @@ var app = (function (app, $) {
 		$cache.pdpMain.on("click", ".thumbnail-link, .addthis_toolbox a", false);
 		$cache.pdpMain.on("click", "li.unselectable a", false);
 		
+		// handle drop down variation attribute value selection event
 		$cache.pdpMain.on("change", ".variation-select", function(e){
 			if ($(this).val().length===0) {return;}
 			var qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
@@ -2309,10 +2311,10 @@ var app = (function (app, $) {
 		getQueryStringParams : function (qs) {
 			if(!qs || qs.length === 0) { return {}; }
 
-			var params = {};
+			var params = {}, unescapedQS = unescape(qs);
 			// Use the String::replace method to iterate over each
 			// name-value pair in the string.
-			qs.replace( new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+			unescapedQS.replace( new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
 						function ( $0, $1, $2, $3 ) {	params[ $1 ] = $3; }
 			);
 			return params;
@@ -2870,11 +2872,11 @@ var app = (function (app, $) {
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 		});
-		$cache.wishlistTable.on("click", ".item-edit-details a", function (e) {
+		$cache.wishlistTable.on("click", ".item-details a", function (e) {
 			e.preventDefault();
 			app.quickView.show({
 				url : e.target.href,
-				source : "cart"
+				source : "wishlist"
 			});
 		})
 	}
