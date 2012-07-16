@@ -462,8 +462,10 @@ ul.folder-content-list .content-title{display:block;}
 .compare-print{float:right;margin:0 0 10px;}
 #compare-table td{-moz-border-bottom-colors:none;-moz-border-image:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;border-color:-moz-use-text-color #D9D9D9 #D9D9D9;border-style:none solid solid;border-width:0 1px 1px;}
 #compare-table tr.evenattributerow{background:none repeat scroll 0 0 #F3F3F3;}
-#compare-table td .product-tile{font-size:0.9em;width:100px;}
+#compare-table td .product-tile{font-size:0.9em;width:100px;margin-bottom:12px;padding-bottom:12px;}
 #compare-table td .product-tile .product-image{height:100px;}
+#compare-table td .product-tile .product-image img{height:100px;}
+#compare-table td .product-tile .product-swatches {float:none;}
 #compare-table td.product button{font-size:0.9em;}
 #compare-table .section-header{font-size:0.9em;padding:1em;text-transform:none;}
 #compare-table .selectcategory label{display:block;font-size:0.9em;margin:1em 0;text-transform:none;}
