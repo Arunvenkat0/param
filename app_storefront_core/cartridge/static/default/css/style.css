@@ -713,7 +713,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .place-order-totals .order-totals-table{float:right;width:50%;}
 .place-order-totals .content-asset{}
 .order-component-block{margin:20px 0;}
-.order-component-block .section-header a{float:right;font-weight:normal;text-transform:lowercase;}
+.order-component-block .section-header a{float:right;font-weight:normal;}
 .order-component-block .details{background:none repeat scroll 0 0 #E8E8E8;color:#A3A3A3;padding:0.5em 1em;}
 .order-summary-footer{position:relative;}
 .order-summary-footer h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
