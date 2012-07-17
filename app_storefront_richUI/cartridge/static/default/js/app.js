@@ -1650,6 +1650,15 @@ var app = (function (app, $) {
 					}
 				});
 			} else {
+				form.find('span.error').hide();
+				for( id in response.errors.FormErrors ) {
+					var error_el = $('#'+id).addClass('error').removeClass('valid').next('.error');
+					if( !error_el || error_el.length===0 ) {
+						error_el = $('<span for="'+id+'" generated="true" class="error" style=""></span>');
+						$('#'+id).after(error_el);
+					}
+					error_el.text(response.errors.FormErrors[id].replace(/\\'/g,"'")).show();
+				}
 				console.log(JSON.stringify(response.errors));
 			}
 		}).fail(function (xhr, textStatus) {
