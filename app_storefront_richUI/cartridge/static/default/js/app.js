@@ -119,7 +119,6 @@ var app = (function (app, $) {
 		$('html').addClass('js');
 
 		// load js specific styles
-		app.util.loadCssFile(app.util.staticUrl("/css/js-style.css"));		
 		app.util.limitCharacters();
 	}
 
