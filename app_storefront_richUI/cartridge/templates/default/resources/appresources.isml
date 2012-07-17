@@ -101,6 +101,8 @@
 		pageInclude					: URLUtils.url('Page-Include').toString(),
 		continueUrl 				: request.isHttpSecure() ? URLUtils.httpsContinue().toString() : URLUtils.httpContinue().toString(),
 		staticPath					: URLUtils.staticURL("/").toString(),
+		addGiftCert					: URLUtils.url('GiftCert-Purchase').toString(),		
+		minicartGC					: URLUtils.url('GiftCert-ShowMiniCart').toString(),		
 		addProduct					: URLUtils.url('Cart-AddProduct').toString(),		
 		minicart					: URLUtils.url('Cart-MiniAddProduct').toString(),
 		cartShow 					: URLUtils.url('Cart-Show').toString(),
