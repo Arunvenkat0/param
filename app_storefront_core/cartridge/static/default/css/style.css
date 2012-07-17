@@ -139,7 +139,7 @@ td.item-dashboard label{display:inline;float:none;font-size:1em;font-weight:400;
 td.item-dashboard .input-text{margin:0;text-align:center;}
 td.item-dashboard .input-select{margin:0;padding:8px;width:auto !important;}
 td.item-dashboard .input-checkbox{margin:0 5px;}
-td.item-dashboard .item-option{clear:both;font-size:1em;margin:0 0 0.5em;text-align:right;}
+td.item-dashboard .item-option{clear:both;font-size:1em;margin:0 0 0.5em;}
 td.item-dashboard .item-option .form-row{display:inline;}
 td.item-dashboard .option-date-added .value{color:#333333;font-weight:700;}
 td.item-dashboard .option-quantity-desired input{padding:0;width:20px;}
