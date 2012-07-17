@@ -1788,6 +1788,7 @@ var app = (function (app, $) {
 
 		// gift message character limitation
 		initGiftMessageBox();
+		updateShippingMethodList();
 		return null;
 	}	
 
@@ -2024,7 +2025,6 @@ var app = (function (app, $) {
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
 		$cache.addToAddressBook = $cache.checkoutForm.find("input[name$='_addToAddressBook']");
-
 		if ($cache.checkoutForm.hasClass("checkout-shipping")) {
 			// shipping only
 			$cache.useForBilling = $cache.checkoutForm.find("input[name$='_useAsBillingAddress']");
