@@ -1,4 +1,6 @@
 <isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
+<!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
+
 <isset name="ProductSet" value="${pdict.Product}" scope="pdict"/>
 <isset name="ProductSetList" value="${new dw.util.ArrayList()}" scope="pdict" />
 <isset name="isBundle" value="${pdict.Product.bundle}" scope="pdict"/>
