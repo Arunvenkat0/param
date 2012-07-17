@@ -12,7 +12,7 @@
 <isset name="p_email" value="${pdict.p_email}" scope="page"/>
 
 <isif condition="${p_productli.type == p_productli.TYPE_GIFT_CERTIFICATE}">										
-	<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${Resource.msg('global.giftcertificate','locale',null)}" />
+	<img src="${URLUtils.httpStatic('/images/gift_cert.gif')}" alt="${Resource.msg('global.giftcertificate','locale',null)}" />
 <iselse>
 	<isif condition="${p_productli.product != null}">
 		<isset name="imageSize" value="${(empty(pdict.p_size) ? 'medium' : pdict.p_size)}" scope="page" />
