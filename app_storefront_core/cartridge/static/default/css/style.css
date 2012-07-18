@@ -530,6 +530,7 @@ body .review-image{float:left;margin:0 20px;}
 .pdp-main .swatches li:hover a,.pdp-main .swatches li.selected a{border-color:#00A4E4;}
 .pdp-main .swatches li.unselectable a{opacity:0.5;}
 .pdp-main .swatches li.unselectable:hover a{border-color:#E0E0E0;}
+.pdp-main .swatches li.unselectable:hover{border-color:#E0E0E0;}
 .pdp-main .swatches li a{-moz-border-bottom-colors:none;-moz-border-image:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;border-color:#E0E0E0;border-radius:5px 5px 5px 5px;border-style:solid;border-width:1px 1px 3px;display:block;margin:0 0.3em 0.3em 0.2em;padding:0.3em 0.6em;}
 .pdp-main .Color li{border:2px solid #FFFFFF;border-radius:5px 5px 5px 5px;}
 .pdp-main .Color li:hover,.pdp-main .Color li.selected{border-color:#00A4E4;}

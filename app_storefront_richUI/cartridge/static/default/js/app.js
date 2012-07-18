@@ -606,9 +606,12 @@ var app = (function (app, $) {
 		$cache.pdpMain.on("click", "div.product-detail a[href].swatchanchor", function (e) {
 			e.preventDefault();
 			
-			var isColor = $(this).closest("ul.swatches").hasClass("Color");
+			var el = $(this);
+			if( el.parents('li').hasClass('unselectable') ) return;
+			
+			var isColor = el.closest("ul.swatches").hasClass("Color");
 						
-			var anchor = $(this),
+			var anchor = el,
 				qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
 				productSet = $(anchor).closest('.subProduct'),
 				params = {
