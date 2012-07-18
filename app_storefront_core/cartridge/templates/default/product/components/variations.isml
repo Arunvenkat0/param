@@ -133,8 +133,10 @@
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>											
+												<isset name="linkURL" value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}" scope="page"/>
 												<isif condition="${isSelected}">												
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
+													<isset name="linkURL" value="${PVM.urlUnselectVariationValue('Product-Variation', VA)}" scope="page"/>
 													<isscript>selectedVariants.push(VA.ID+"-"+VV.value);</isscript>
 												</isif>
 												<isif condition="${!empty(VV.getImage('hi-res'))}">
@@ -143,7 +145,7 @@
 													<isset name="hiResURL" scope="page" value="${''}" />
 												</isif>
 												<li class="${swatchClass}">
-													<a href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}"
+													<a href="${linkURL+qsAppend}"
 													   title="${displayValue}"
 													   class="swatchanchor"
 													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
@@ -171,13 +173,15 @@
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
-												<isif condition="${isSelected}">
+												<isset name="linkURL" value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}" scope="page"/>
+												<isif condition="${isSelected}">												
 													<isscript>var selectedVariant = VA.ID+"-"+VV.value;</isscript>
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
+													<isset name="linkURL" value="${PVM.urlUnselectVariationValue('Product-Variation', VA)}" scope="page"/>
 												</isif>																		
 												<li class="${swatchClass}">																						
 													<isif condition="${selectable}">
-														<a title="${displayValue}" class="swatchanchor"	href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}">
+														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
 															<isprint value="${displayValue}"/>
 														</a>
 													<iselse/>
@@ -224,6 +228,7 @@
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
 													var selected = PVM.isSelectedAttributeValue(VA, VV) ? 'selected="selected"' : '';
+													var linkURL = selected ? PVM.urlUnselectVariationValue('Product-Variation', VA) : PVM.urlSelectVariationValue('Product-Variation', VA, VV);
 													if (selected.length > 0) {
 														selectedVariant = VA.ID+"-"+VV.value;
 													}

@@ -605,9 +605,6 @@ var app = (function (app, $) {
 		// swatch anchor onclick()
 		$cache.pdpMain.on("click", "div.product-detail a[href].swatchanchor", function (e) {
 			e.preventDefault();
-			if ($(this).parent("li").hasClass("selected")) {
-				return;
-			}
 			
 			var isColor = $(this).closest("ul.swatches").hasClass("Color");
 						
