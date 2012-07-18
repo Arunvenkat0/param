@@ -1930,17 +1930,6 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         </folder-links>
     </content>
 
-    <content content-id="gear-guides">
-        <display-name xml:lang="x-default">Gear Guides</display-name>
-        <online-flag>false</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <template>contentpageleftnav</template>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="giggle"/>
-        </folder-links>
-    </content>
-
     <content content-id="gift-additional-details">
         <display-name xml:lang="x-default">Gift Certificate Additonal Details</display-name>
         <description xml:lang="x-default">Gift Certificate Additional Details</description>
