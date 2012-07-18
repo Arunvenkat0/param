@@ -980,6 +980,12 @@
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
             </record>
 
+            <record product-id="25585429">
+                <allocation>0.0</allocation>
+                <perpetual>false</perpetual>
+                <preorder-backorder-handling>none</preorder-backorder-handling>
+            </record>
+
             <record product-id="25585429-1">
                 <allocation>0</allocation>
                 <perpetual>false</perpetual>
