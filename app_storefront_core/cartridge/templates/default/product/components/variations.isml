@@ -31,7 +31,6 @@
 			</isif>
 
 			<div class="product-variations" data-current="${JSON.stringify(selectedAtts)}">
-				
 				<h2 class="visually-hidden">Variations</h2>
 	
 					<isscript>
@@ -130,8 +129,9 @@
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">									
 												<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
 												<isset name="swImage" value="${VV.getImage('swatch')}" scope="page"/>
-												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
-												<isset name="swatchClass" value="${isSelected ? 'selected' : 'emptyswatch'}" scope="page"/>
+												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
+												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
+												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>											
 												<isif condition="${isSelected}">												
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
@@ -167,8 +167,8 @@
 												<isscript>													
 													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
 												</isscript>
-												<isset name="selectable" value="${ isAvailable || pdict.Product.master }" scope="page" />											
-												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
+												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
+												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
 												<isif condition="${isSelected}">
@@ -216,16 +216,14 @@
 										<isprint value="${VA.displayName}"/>:
 									</label>		
 									<select class="variation-select" id="va-${vaId}" name="${'dwvar_' + pdict.Product.variationModel.master.ID + '_' + vaId}">
-										<isif condition="${Valength > 1}">
-											<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>
-										</isif>
+										<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>
 										<isscript>var selectedVariant = null</isscript>
 										<isloop items="${VAVALS}" var="VV">
 											<iscomment>filter out unorderable variation attribute values</iscomment>						
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
-													var selected = (PVM.isSelectedAttributeValue(VA, VV) || Valength == 1) ? 'selected="selected"' : '';
+													var selected = PVM.isSelectedAttributeValue(VA, VV) ? 'selected="selected"' : '';
 													if (selected.length > 0) {
 														selectedVariant = VA.ID+"-"+VV.value;
 													}

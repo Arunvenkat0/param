@@ -71,8 +71,8 @@
 .js .home-bottom-right .jcarousel-clip {height: 282px; overflow:hidden;}
 .js .home-bottom-right .vertical-carousel li {height: 282px;float:none; width:300px;}
 .js .home-bottom-right .product-tile {min-height: 0;}
-.js .home-bottom-right .jcarousel-prev {background:url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:0;right:0;width:52px;z-index:999;}
-.js .home-bottom-right .jcarousel-next {background:url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:20px;right:0;width:52px;z-index:999;}
+.js .home-bottom-right .jcarousel-prev {background:url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:20;right:0;width:52px;z-index:999;}
+.js .home-bottom-right .jcarousel-next {background:url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:0px;right:0;width:52px;z-index:999;}
 .js .home-bottom-right .jcarousel-prev-disabled, .home-bottom-right .jcarousel-next-disabled {display:none !important;}
 
 .js button.select {display:none}
