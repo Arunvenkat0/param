@@ -669,6 +669,7 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .order-totals-item{width:60%;}
 .order-totals-value{width:40%;}
 .order-subtotal{font-weight:700;}
+#secondary .order-totals-table .order-shipping a {display:none;}
 .cart-action-checkout{float:right;}
 .cart-action-continue-shopping{float:right;}
 .cart-action-continue-shopping button.button-text{line-height:50px;padding-right:1em;}
