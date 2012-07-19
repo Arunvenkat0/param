@@ -199,24 +199,6 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-accessories-hats" configuration-id="banner-kids-accessories-hats" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-accessories-hats"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-accessories-other" configuration-id="banner-kids-accessories-other" default="true" assigned-to-site="true">
-        <template>slots/html/gift_certificates.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html/>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="electronics-digital-cameras" configuration-id="banners-electronics-digital-cameras" default="true" assigned-to-site="true">
         <template>slots/category/categorysub_banners.isml</template>
         <enabled-flag>true</enabled-flag>
@@ -234,56 +216,6 @@
             <html>
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="Link to Television Buying Guide" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-accessories" configuration-id="banners-kids-accessories" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-accessories"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-clothing" configuration-id="banners-kids-clothing" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-clothing"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-clothing-outerwear" configuration-id="banners-kids-clothing-outerwear" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="139" width="754" src="images/slot/sub_banners/kids_storelocator.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-footwear" configuration-id="banners-kids-footwear" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-footwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-footwear-boots" configuration-id="banners-kids-footwear-boots" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-footwear-boots"/>
-            </categories>
         </content>
     </slot-configuration>
 
@@ -353,16 +285,6 @@
         <content>
             <categories>
                 <category category-id="womens-accessories-hats"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-footwear-shoes" configuration-id="banners-womens-clothing" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-footwear-shoes"/>
             </categories>
         </content>
     </slot-configuration>
@@ -554,38 +476,6 @@
             <content-assets>
                 <content-asset content-id="home-cycle"/>
             </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="kids" configuration-id="kids-footwear-tops-accessories" default="true" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-footwear"/>
-                <category category-id="kids-clothing-tops"/>
-                <category category-id="kids-accessories"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="kids" configuration-id="kids-hoodies" default="true" assigned-to-site="true">
-        <template>slots/category/catlandingslotbanner.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-clothing"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="kids-clothing-tops" configuration-id="kids-kids-clothing-tops" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="kids-clothing-tops"/>
-            </categories>
         </content>
     </slot-configuration>
 
