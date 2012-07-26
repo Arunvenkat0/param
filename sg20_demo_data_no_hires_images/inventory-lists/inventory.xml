@@ -647,7 +647,7 @@
             </record>
 
             <record product-id="013742003314">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -738,7 +738,7 @@
             </record>
 
             <record product-id="029407331289">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -763,13 +763,13 @@
             </record>
 
             <record product-id="061492215594">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
 
             <record product-id="061492215617">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
@@ -3528,7 +3528,7 @@
             </record>
 
             <record product-id="701642838777">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -13407,7 +13407,7 @@
             </record>
 
             <record product-id="701643698127">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -23132,7 +23132,7 @@
             </record>
 
             <record product-id="708141676206">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -23840,7 +23840,7 @@
             </record>
 
             <record product-id="740357447157">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -24284,7 +24284,7 @@
             </record>
 
             <record product-id="750518703435">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
@@ -24467,7 +24467,7 @@
             </record>
 
             <record product-id="78916783-2">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
@@ -27281,13 +27281,13 @@
             </record>
 
             <record product-id="apple-ipod-shuffle-red-1g">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
 
             <record product-id="apple-ipod-shuffle-red-2g">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
@@ -27395,7 +27395,7 @@
             </record>
 
             <record product-id="easports-fight-night-round-3-xbox360">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
@@ -27712,7 +27712,7 @@
             </record>
 
             <record product-id="nintendo-ds-console">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
@@ -27988,7 +27988,7 @@
             </record>
 
             <record product-id="sony-xel-1">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
             </record>
