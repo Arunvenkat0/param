@@ -533,7 +533,7 @@ var app = (function (app, $) {
 		$cache.pdpMain.on("click", "a.wl-action", function (e) {
 			e.preventDefault();
 			
-			var data = app.util.getQueryStringParams($cache.pdpForm.serialize());
+			var data = app.util.getQueryStringParams($("form.pdpForm").serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
