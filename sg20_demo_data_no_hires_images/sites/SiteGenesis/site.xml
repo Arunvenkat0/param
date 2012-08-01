@@ -3,6 +3,6 @@
     <name>Site Genesis</name>
     <currency>USD</currency>
     <taxation>net</taxation>
-    <custom-cartridges>app_storefront_richUI:app_storefront_core</custom-cartridges>
+    <custom-cartridges>sitegenesis_storefront_richUI:sitegenesis_storefront_core</custom-cartridges>
 </site>
 
