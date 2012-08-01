@@ -77,14 +77,18 @@
 			<isloop items="${pdict.ProductSetList}" var="product" status="loopstatus">				
 				<isset name="lgImage" value="${product.getImages('large')[0]}" scope="page" />
 				<isset name="hi_res" value="${product.getImages('hi-res')[0]}" scope="page" />
+				<isset name="href" value="${''}" scope="page" />
+				<isif condition="${!empty(hi_res)}">
+					<isset name="href" value="${hi_res.getURL()}" scope="page" />
+				</isif>
 				<isset name="smImage" value="${product.getImages('small')[0]}" scope="page" />
 				<li class="thumb ${loopstatus.first ? 'selected' : ''}">					
-					<a href="${hi_res.getURL()}" target="_blank" class="thumbnail-link">
+					<a href="${href}" target="_blank" class="thumbnail-link">
 						<img class="productthumbnail" 
 							 src="${smImage.getURL()}" 
 							 alt="${smImage.alt}" 
 							 title="${smImage.title}"
-							 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hi_res.getURL()}"}'/>
+							 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${href}"}'/>
 					</a>
 				</li>	
 			</isloop>
