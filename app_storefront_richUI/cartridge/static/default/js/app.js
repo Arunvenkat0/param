@@ -433,16 +433,15 @@ var app = (function (app, $) {
 	}
 
 	function initializeEvents() {
-		
-		var availabilityContainer = $cache.pdpMain.find("div.availability");
-		
+				
 		app.product.initAddThis();
 		
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
+			var availabilityContainer = $cache.pdpMain.find("div.availability");
 			app.product.getAvailability(
-				$cache.productId.val(),
+				$("#pid").val(),
 				$(this).val(),
 				function (data) {
 					if (!data) {
