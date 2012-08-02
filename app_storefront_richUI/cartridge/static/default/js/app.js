@@ -748,6 +748,10 @@ var app = (function (app, $) {
 			initializeEvents();
 			loadZoom();
 		},
+		readReviews : function(){
+			$('.product-tabs').tabs('select','#tab4');
+			$('body').scrollTop($('#tab4').offset().top);
+		},
 		get : function (options) {
 			// loads a product into a given container div
 			// params
