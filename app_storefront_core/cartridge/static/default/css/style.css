@@ -386,6 +386,7 @@ a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font
 .product-tile .product-compare input{float:left;margin:0;}
 .product-tile .pr_stars{height:auto;position:relative;left:8px;}
 .product-tile .prSnippetTitle {float:left;}
+.product-tile .prSnippetReadReviews {display:none;}
 .product-tile .prSnippetRatingUnclickable {float:left;}
 .product-tile .prSnippetNumberOfRatingsText {display:none;}
 .product-tile .pr-snippet-review-count{display:none;}
