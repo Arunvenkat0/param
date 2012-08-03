@@ -84,7 +84,17 @@
 			<isscript>
 				var updateSources = ["cart", "giftregistry", "wishlist"];
 				var source = pdict.CurrentHttpParameterMap.source.stringValue;
-				var buttonTitle = (empty(source) || updateSources.indexOf(source)<0) ?	dw.web.Resource.msg('global.addtocart','locale','Add to Cart') : dw.web.Resource.msg('global.update','locale','Update');			
+				var buttonTitle = dw.web.Resource.msg('global.addtocart','locale','Add to Cart');
+				var plid = null;
+				if( updateSources.indexOf(source)>-1 ){
+					buttonTitle = dw.web.Resource.msg('global.update','locale','Update');
+					if( pdict.CurrentHttpParameterMap.productlistid && pdict.CurrentHttpParameterMap.productlistid.stringValue ) {
+						plid = pdict.CurrentHttpParameterMap.productlistid.stringValue;
+					}
+				} else {
+					// Only pass on white-listed sources
+					source = null; 
+				}		
 			</isscript>
 			
 			<isset name="cartAction" value="add" scope="page"/>
@@ -92,7 +102,13 @@
 			<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">	
 				<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
 				<isset name="cartAction" value="update" scope="page"/>
-			</isif>			
+			</isif>
+			<isif condition="${source}">
+				<input type="hidden" name="source" id="source" value="${source}" />
+			</isif>		
+			<isif condition="${plid}">
+				<input type="hidden" name="productlistid" id="productlistid" value="${plid}" />
+			</isif>		
 			<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
 			<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
 			<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master ? '' : ' disabled="disabled"'}" scope="page"/>	
