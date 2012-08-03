@@ -296,7 +296,7 @@ var app = (function (app, $) {
 	 */
 	function setMainImage(atts) {
 		var imgZoom = $cache.pdpMain.find("a.main-image");
-		if (imgZoom.length>0 && atts.hires && atts.hires!='') {
+		if (imgZoom.length>0 && atts.hires && atts.hires!='' && atts.hires!='null') {
 			imgZoom.attr("href", atts.hires);
 		}
 
