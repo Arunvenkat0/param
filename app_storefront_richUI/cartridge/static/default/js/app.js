@@ -579,12 +579,13 @@ var app = (function (app, $) {
 		$cache.pdpMain.on("change", ".variation-select", function(e){
 			if ($(this).val().length===0) {return;}
 			var qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
+				listid = $cache.pdpForm.find("input[name='productlistid']").first().val(),
 				productSet = $(this).closest('.subProduct'),
 				params = {
 					Quantity : isNaN(qty) ? "1" : qty,
 					format : "ajax"
 				};
-						
+			if( listid ) params.productlistid = listid;
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
@@ -612,11 +613,13 @@ var app = (function (app, $) {
 						
 			var anchor = el,
 				qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
+				listid = $cache.pdpForm.find("input[name='productlistid']").first().val(),
 				productSet = $(anchor).closest('.subProduct'),
 				params = {
 					Quantity : isNaN(qty) ? "1" : qty
 				};
-			
+			if( listid ) params.productlistid = listid;
+
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl(this.href, params);
 			app.progress.show($cache.pdpMain);		
@@ -762,10 +765,14 @@ var app = (function (app, $) {
 			//		id - id of the product to get, is optional only used when url is empty
 			var target = options.target || app.quickView.init();
 			var source = options.source || "";
+			var productListID = options.productlistid || "";
 
 			var productUrl = options.url || app.util.appendParamToURL(app.urls.getProductUrl, "pid", options.id);
 			if(source.length > 0) {
 				productUrl = app.util.appendParamToURL(productUrl, "source", source);
+			}			
+			if(productListID.length > 0) {
+				productUrl = app.util.appendParamToURL(productUrl, "productlistid", productListID);
 			}			
 
 			// show small loading image
@@ -2633,6 +2640,7 @@ var app = (function (app, $) {
 	function initializeCache() {
 		$cache = {
 			registryForm : $("form[name$='_giftregistry']"),
+			registryItemsTable : $("form[name$='_giftregistry_items']"),
 			registryTable : $("#registry-results")
 		};
 		$cache.copyAddress = $cache.registryForm.find("input[name$='_copyAddress']");
@@ -2687,6 +2695,16 @@ var app = (function (app, $) {
 				copyBeforeAddress();
 				$cache.addressAfterFields.filter("[name$='_country']").trigger("change");
 			}
+		});
+		
+		$cache.registryItemsTable.on("click", ".item-details a", function (e) {
+			e.preventDefault();
+			var productListID = $('input[name=productListID]').val();
+			app.quickView.show({
+				url : e.target.href,
+				source : "giftregistry",
+				productlistid : productListID
+			});
 		});
 	}
 
@@ -2988,7 +3006,7 @@ var app = (function (app, $) {
 				url : e.target.href,
 				source : "wishlist"
 			});
-		})
+		});
 	}
 
 	app.wishlist = {

@@ -1490,7 +1490,7 @@ Expects: AddressID</description>
           <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
           <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>
           <key-binding alias="ProductList" key="ProductList"/>
-          <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="plid"/>
+          <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
           <key-binding alias="WishList" key="UpdatedProductList"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
