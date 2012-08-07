@@ -45,10 +45,10 @@
 			<ul>
 				<isif condition="${(currentPage > 0) && (maxPage > 4)}">
 					<li class="first-last">
-						<a class="page-first" href="${pdict.pagingmodel.appendPaging( pageURL, 0)}"><span>&lt;&lt;</span></a>
+						<a class="page-first" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><span>&lt;&lt;</span></a>
 					</li>
 					<li class="first-last">
-						<a class="page-previous" href="${pdict.pagingmodel.appendPaging( pageURL, current - pageSize)}"><span>&lt;</span></a>
+						<a class="page-previous" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><span>&lt;</span></a>
 					</li>
 				</isif>
 
@@ -57,7 +57,7 @@
 						<isif condition="${i.index != currentPage}">
 							<li>
 								<iscomment>This long line is needed to avoid extra whitespaces in the link text</iscomment>
-								<a class="page-<isprint value="${i.index + 1}" style="0"/>" href="${pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize)}"><isprint value="${i.index + 1}" style="0"/></a>
+								<a class="page-<isprint value="${i.index + 1}" style="0"/>" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
 							</li>
 						<iselse>
 							<li class="current-page">
@@ -68,10 +68,10 @@
 
 					<isif condition="${(current < totalCount - pageSize) && (maxPage > 4)}">
 						<li class="first-last">
-							<a class="page-next" href="${pdict.pagingmodel.appendPaging( pageURL, current + pageSize)}"><span>&gt;</span></a>
+							<a class="page-next" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><span>&gt;</span></a>
 						</li>
 						<li class="first-last">
-							<a class="page-last" href="${pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize)}"><span>&gt;&gt;</span></a>
+							<a class="page-last" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><span>&gt;&gt;</span></a>
 						</li>
 					</isif>
 				</isif>
