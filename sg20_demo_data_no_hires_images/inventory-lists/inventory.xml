@@ -3584,7 +3584,7 @@
             </record>
 
             <record product-id="701642838890">
-                <allocation>0</allocation>
+                <allocation>100</allocation>
                 <perpetual>false</perpetual>
                 <preorder-backorder-handling>none</preorder-backorder-handling>
                 <preorder-backorder-allocation>0</preorder-backorder-allocation>
