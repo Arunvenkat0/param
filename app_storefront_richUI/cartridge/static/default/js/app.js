@@ -1313,8 +1313,11 @@ var app = (function (app, $) {
 			if($(this).parent().hasClass("unselectable")) { return; }
 			var uri = app.util.getUri(this);
 
-			var refineUrl = uri.query.length > 1 ? uri.query.substr(1) : "";
-			window.location.hash = encodeURI(refineUrl);
+			if( uri.query.length > 1 ) {
+				window.location.hash = encodeURI(uri.query.substring(1));
+			} else {
+				window.location.href = encodeURI(this.href);
+			}
 			return false;
 		});
 
