@@ -48,7 +48,7 @@
 							<td class="item-dashboard">
 								<div class="item-option delete-registry">
 									<a id="${item.object.ID}" href="${URLUtils.url('GiftRegistry-Delete', 'ProductListID', item.object.UUID)}" alt="${Resource.msg('global.delete','locale',null)}" class="delete">
-										<img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.delete','locale',null)}" />
+										${Resource.msg('global.delete','locale',null)}
 									</a>
 								</div>
 							</td>

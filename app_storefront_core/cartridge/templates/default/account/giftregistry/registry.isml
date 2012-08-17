@@ -62,7 +62,7 @@
 		
 		<isset name="formID" value="${pdict.CurrentForms.giftregistry.items.htmlName}" scope="page"/>
 	
-		<form action="${URLUtils.continueURL()}" method="post" id="${formID}">
+		<form action="${URLUtils.continueURL()}" method="post" id="${formID}" name="${formID}">
 			
 			<fieldset>
 			
@@ -114,7 +114,7 @@
 							<isif condition="${item.object.type != item.object.TYPE_GIFT_CERTIFICATE && item.object.product != null}">
 								<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
 									<div class="item-edit-details">
-										<a name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed())}" title="" >
+										<a name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'uuid',item.object.UUID)}" title="" >
 											${Resource.msg('global.editdetails','locale',null)}
 										</a>
 									</div>

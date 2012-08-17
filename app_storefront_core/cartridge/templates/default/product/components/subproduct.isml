@@ -83,7 +83,7 @@
 								 src="${img.getURL()}" 
 								 alt="${img.alt}" 
 								 title="${img.title}"
-								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"#"}'/>										
+								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${'#'}"}'/>										
 						</isloop>
 					</isif>
 				<iselse/>
@@ -102,7 +102,7 @@
 								 src="${img.getURL()}" 
 								 alt="${img.alt}" 
 								 title="${img.title}" 
-								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"#"}'/>
+								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${'#'}"}'/>
 										
 						</isloop>
 					</isif>

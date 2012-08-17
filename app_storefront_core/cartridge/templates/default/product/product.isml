@@ -10,29 +10,6 @@
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 
-<isdecorate template="${DecoratorTemplate}">	
-	<isscript>				
-		var detailUrl = URLUtils.url('Product-Detail', 'pid', pdict.Product.ID);
-					
-		// append query string params for call to Product-Detail pipelet
-		importScript("product/ProductUtils.ds"); 	
-		var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ["source", "uuid", "Quantity"]);		
-		if (qs && qs.length>0) { detailUrl+="&"+qs; }	
-		
-		if (pdict.Product.optionProduct && pdict.CurrentOptionModel!=null && !empty(pdict.CurrentOptionModel.options)) {
-			var pom = pdict.CurrentOptionModel;
-			for (var i=0,il=pom.options.length;i<il;i++) {
-				var option = pom.options[i];
-				var vals = pom.getOptionValues(option);
-				for (var x=0,xl=vals.length;x<xl;x++) {
-					var optionValue = vals[x];
-					if (pom.isSelectedOptionValue(option, optionValue)) {
-						detailUrl+="&"+option.htmlName+"="+optionValue.ID;
-						break;
-					}
-				}
-			}
-		}			
-	</isscript>	
-	<isinclude url="${detailUrl}"/>	
+<isdecorate template="${DecoratorTemplate}">
+	<isinclude template="product/productdetail"/>
 </isdecorate>

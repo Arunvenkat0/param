@@ -53,13 +53,13 @@
 				
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.yourname}" type="input"/>
 		
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.youremail}" type="input" xhtmlclass="email"/>
+				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.youremail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
 		
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsname}" type="input"/>
+				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsname}" type="input" requiredtext="${Resource.msg('forms.sendtofriend.friendsName.missing-error','forms',null)}"/>
+
+				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
 		
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsemail}" type="input" xhtmlclass="email"/>
-		
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.confirmfriendsemail}" type="input" xhtmlclass="email"/>
+				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.confirmfriendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
 		
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 		
