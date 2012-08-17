@@ -74,8 +74,7 @@
 				 		{'name':'email'},
 				 		{'name':'phone','description':'Phone Number Format: 333-333-3333', 'type':'text'},
 				 		{'name':'password'}]" 
-				 	redirect-uri="${URLUtils.https('Account-Connect')}"
-				 	onvalidate="validate">
+				 	redirect-uri="${URLUtils.https('Account-Connect')}">
 				</fb:registration>
 			</div>
 		</isif>
