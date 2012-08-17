@@ -250,7 +250,8 @@ float: right;}
 	#email-alert-signup label {text-align:center;width: 100%;}
 	#email-alert-signup input[type="text"] {float:none;margin:0;width:50%;}
 	#email-alert-signup input[type="image"] {float:none;vertical-align: bottom;}
-	
+	.facebook-registration {left:-3px;}
+	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100.7% !important;}
 }
 
 /* Bump up to a min-480 viewport */
@@ -262,6 +263,9 @@ float: right;}
 	
 	.wide-tiles .product-tile .product-name h2 {margin-top:10px;}
 	.wide-tiles .product-tile .product-image {width:38%}
+	
+	.facebook-registration {left:0px;}
+	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100% !important;}
 }
 
 /* 768px layout: make minor adjustments from full layout. None of the mobile styles above used, based on media queries */
@@ -316,4 +320,7 @@ float: right;}
 	#email-alert-signup label{float: none;display: block;text-align:center;width: 100%;}
 	#email-alert-signup input[type="text"] {width: 73%;}
 	
+	.facebook-registration {left:0px;}
+	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100% !important;}
+
 }

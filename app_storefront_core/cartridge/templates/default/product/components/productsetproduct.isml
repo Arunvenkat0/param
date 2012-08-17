@@ -5,11 +5,8 @@
 					&& avm.inventoryRecord.stockLevel.available;
 </isscript>	
 	<div class="product-set-image">
-		<isset name="hi_res" value="${pdict.Product.getImages('hi-res')[0]}" scope="page" />
 		<isset name="smImg" value="${pdict.Product.getImages('small')[0]}" scope="page" />
-		<a href="${hi_res.getURL()}" class="image-link" target="_blank">
-			<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}" title="${smImg.title}" />
-		</a>
+		<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}" title="${smImg.title}" />
 	</div>
 	
 	<div class="product-set-details">
