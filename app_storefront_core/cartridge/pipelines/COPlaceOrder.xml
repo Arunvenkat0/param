@@ -790,9 +790,11 @@ For example:
 Credit Cards processor ID = BASIC_CREDIT
 Authorization Pipeline = BASIC_CREDIT-Authorize
 
-The authorization pipeline must end in a named &quot;error&quot; end node to communicate any authorization error back to this pipeline.</description>
+The authorization pipeline must end in a named &quot;error&quot; end node to communicate any authorization error back to this pipeline.
+
+Additionally the authorization pipeline may put a dw.system.Status object into the pipeline dictonary under key PlaceOrderError, which contains provider specific error messages.</description>
         </text-node>
-        <node-display height="2" width="2" x="9" y="7"/>
+        <node-display height="3" width="2" x="9" y="7"/>
       </node>
     </segment>
   </branch>
