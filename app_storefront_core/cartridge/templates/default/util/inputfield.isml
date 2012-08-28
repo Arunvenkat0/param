@@ -91,7 +91,7 @@
 	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used 
 </iscomment>
 if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
-	additionalClass = ' ' + pdict.formfield.formId;
+	additionalClass += ' ' + pdict.formfield.formId;
 }
 
 	<iscomment> used for client side validation DO NOT remove it! otherwise client side validation won't work!!!</iscomment>
