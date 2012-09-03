@@ -12,10 +12,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="Handle_CYBERSOURCE_BML">
+  <branch basename="Handle">
     <segment>
       <node>
-        <start-node call-mode="private" name="Handle_CYBERSOURCE_BML" secure="false"/>
+        <start-node call-mode="private" name="Handle" secure="false"/>
         <node-display x="1" y="2"/>
       </node>
       <simple-transition/>
@@ -85,10 +85,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="Authorize_CYBERSOURCE_BML">
+  <branch basename="Authorize">
     <segment>
       <node>
-        <start-node call-mode="private" name="Authorize_CYBERSOURCE_BML" secure="false"/>
+        <start-node call-mode="private" name="Authorize" secure="false"/>
         <node-display x="4" y="2"/>
       </node>
       <simple-transition>

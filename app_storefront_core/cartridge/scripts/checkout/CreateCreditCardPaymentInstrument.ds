@@ -31,7 +31,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	}
 
 	// remove existing credit cards from the basket
-	removeExistingCreditCards( basket );
+	removeExistingPaymentInstruments( basket, PaymentInstrument.METHOD_CREDIT_CARD );
 
 	// calculate the amount to be charged for the credit card
 	var amount = calculateNonGiftCertificateAmount( basket );
@@ -48,23 +48,4 @@ function execute( pdict : PipelineDictionary ) : Number
 
 	pdict.PaymentInstrument = paymentInstr;
     return PIPELET_NEXT;
-}
-
-/** 
- * Determines if the basket already contains a credit card payment 
- * instrument and removes it from the basket.
- */
-function removeExistingCreditCards( basket : Basket )
-{
-	// get all credit card payment instruments
-	var ccPaymentInstrs : Collection = basket.getPaymentInstruments( PaymentInstrument.METHOD_CREDIT_CARD );
-	var iter : Iterator = ccPaymentInstrs.iterator();
-	var existingPI : OrderPaymentInstrument = null;
-
-	// remove them
-	while( iter.hasNext() )
-	{
-		existingPI = iter.next();
-		basket.removePaymentInstrument( existingPI );
-	}
 }
