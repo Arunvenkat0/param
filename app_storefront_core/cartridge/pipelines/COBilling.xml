@@ -2017,7 +2017,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <node>
         <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="'COBilling-Handle_' + dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
+          <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID + '-Handle'" key="From_0"/>
           <key-binding alias="HandlePipeline" key="To_0"/>
           <key-binding alias="null" key="From_1"/>
           <key-binding alias="null" key="To_1"/>
@@ -2043,34 +2043,33 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="0" y="1"/>
-          <bend-point relative-to="target" x="-1" y="1"/>
         </transition-display>
       </simple-transition>
       <node>
         <call-node start-name-key="HandlePipeline"/>
-        <node-display orientation="horizontal" x="2" y="0"/>
+        <node-display x="0" y="1"/>
         <branch basename="b4" source-connector="error">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="-1" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
               <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="1"/>
+              <node-display x="1" y="1"/>
             </node>
           </segment>
         </branch>
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="source" x="0" y="1"/>
         </transition-display>
       </simple-transition>
       <node>
         <end-node name="ok"/>
-        <node-display orientation="horizontal" x="1" y="0"/>
+        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>
@@ -2507,27 +2506,19 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <text-node>
-          <description>The Handle Pipeline is being dynamically called based on a concatenation of a constant preamble (COBilling-Handle_) and the current Payment-Processor.
+          <description>The Handle Pipeline is being dynamically called based on a concatenation of the current Payment-Processor and a constant suffix(-Handle).
 
 For example:
 Credit Cards processor ID = BASIC_CREDIT
-Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
+Handle Pipeline = BASIC_CREDIT-Handle
+
+The handle pipeline is responsible for payment provider / payment method specific form validation and payment instrument creation.</description>
         </text-node>
-        <node-display width="2" x="8" y="28"/>
+        <node-display height="2" width="2" x="8" y="28"/>
       </node>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_47">
-    <segment>
-      <node>
-        <text-node>
-          <description>Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields. If the verification was successful a credit card payment instrument is created.</description>
-        </text-node>
-        <node-display width="2" x="6" y="35"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_48">
     <segment>
       <node>
         <text-node>
@@ -2537,27 +2528,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_49">
-    <segment>
-      <node>
-        <text-node>
-          <description>This is where additional PayPal integration would go. The current implementation simply creates a PaymentInstrument and returns 'success'.</description>
-        </text-node>
-        <node-display width="2" x="14" y="35"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_50">
-    <segment>
-      <node>
-        <text-node>
-          <description>This is where additional BillMeLaterl integration would go. The current implementation simply creates a payment method and returns 'success'.</description>
-        </text-node>
-        <node-display width="2" x="17" y="35"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_51">
+  <branch basename="_ANONYMOUS_BRANCH_48">
     <segment>
       <node>
         <text-node>
@@ -2567,7 +2538,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_52">
+  <branch basename="_ANONYMOUS_BRANCH_49">
     <segment>
       <node>
         <text-node>
@@ -2577,7 +2548,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_53">
+  <branch basename="_ANONYMOUS_BRANCH_50">
     <segment>
       <node>
         <text-node>
@@ -2651,97 +2622,6 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
         <interaction-node transaction-required="false">
           <template buffered="true" dynamic="false" name="account/payment/creditcarddeletedjson"/>
         </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="Handle_BASIC_CREDIT">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="Handle_BASIC_CREDIT" secure="false"/>
-        <node-display x="6" y="36"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="VerifyPaymentCard" pipelet-set-identifier="bc_api">
-          <config-property key="VerifySecurityCode" value="true"/>
-          <key-binding alias="dw.order.PaymentMgr.getPaymentCard(CurrentForms.billing.paymentMethods.creditCard.type.value)" key="PaymentCard"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.number.value" key="CardNumber"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.month.value" key="ExpirationMonth"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.year.value" key="ExpirationYear"/>
-          <key-binding alias="CreditCardStatus" key="Status"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.cvn.value" key="CardSecurityCode"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="2" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
-                <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/InvalidatePaymentCardFormElements.ds"/>
-                <key-binding alias="null" key="ScriptLog"/>
-                <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="CreditCardForm"/>
-                <key-binding alias="CreditCardStatus" key="CreditCardStatus"/>
-                <key-binding alias="CreditCardStatus" key="Status"/>
-              </pipelet-node>
-              <node-display x="1" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b3.1">
-                  <transition-display>
-                    <bend-point relative-to="source" x="1" y="0"/>
-                    <bend-point relative-to="target" x="1" y="0"/>
-                  </transition-display>
-                </transition>
-              </branch>
-            </node>
-            <transition target-connector="in1" target-path="../b3.1"/>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/CreateCreditCardPaymentInstrument.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="CreditCardForm"/>
-          <key-binding alias="CreditCardPaymentInstrument" key="PaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="2"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="0"/>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="error"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="ok"/>
         <node-display x="0" y="1"/>
       </node>
     </segment>
@@ -2887,110 +2767,6 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </simple-transition>
       <node>
         <end-node/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="Handle_PAYPAL_EXPRESS">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="Handle_PAYPAL_EXPRESS" secure="false"/>
-        <node-display x="14" y="36"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/CreatePaymentInstrument.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="&quot;PayPal&quot;" key="PaymentType"/>
-          <key-binding alias="true" key="RemoveExisting"/>
-          <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="2" y="0"/>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display x="1" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <end-node name="success"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="Handle_CYBERSOURCE_BML">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="Handle_CYBERSOURCE_BML" secure="false"/>
-        <node-display x="17" y="36"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="CurrentForms.billing.paymentMethods.bml.termsandconditions.checked" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="true"/>
-                <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/CreatePaymentInstrument.ds"/>
-                <key-binding alias="null" key="ScriptLog"/>
-                <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="dw.order.PaymentInstrument.METHOD_BML" key="PaymentType"/>
-                <key-binding alias="true" key="RemoveExisting"/>
-                <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
-              </pipelet-node>
-              <node-display x="0" y="2"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../+1"/>
-              </branch>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="success"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="2" y="0"/>
-          <bend-point relative-to="target" x="0" y="-1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
-          <key-binding alias="CurrentForms.billing.paymentMethods.bml.termsandconditions" key="FormElement"/>
-        </pipelet-node>
-        <node-display x="1" y="1"/>
-      </node>
-      <transition target-connector="in2" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <end-node name="error"/>
         <node-display x="0" y="1"/>
       </node>
     </segment>
@@ -3524,7 +3300,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_62">
+  <branch basename="_ANONYMOUS_BRANCH_56">
     <segment>
       <node>
         <text-node>
@@ -3662,7 +3438,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_64">
+  <branch basename="_ANONYMOUS_BRANCH_58">
     <segment>
       <node>
         <text-node>
@@ -3715,7 +3491,7 @@ Handle Pipeline = COBilling-Authorize_BASIC_CREDIT</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_66">
+  <branch basename="_ANONYMOUS_BRANCH_60">
     <segment>
       <node>
         <text-node>
