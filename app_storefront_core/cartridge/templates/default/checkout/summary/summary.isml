@@ -65,8 +65,7 @@
 							
 							<td class="item-details">
 								<iscomment>Display product line and product using module</iscomment>
-								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
-								<a href="${URLUtils.url('Cart-Show')}">${Resource.msg('global.editdetails','locale',null)}</a>
+								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${true}"/>
 							</td>
 							
 							<td class="item-quantity">

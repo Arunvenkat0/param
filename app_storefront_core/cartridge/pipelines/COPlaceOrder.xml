@@ -27,9 +27,9 @@
     <segment>
       <node>
         <text-node>
-          <description>Responsible for payment handling. This pipeline calls the specific authorization pipelines for each individual payment type. It ends on an named &quot;error&quot; end node if either any of the authorizations failed or a payment instrument is of an unknown payment method.</description>
+          <description>Responsible for payment handling. This pipeline calls the specific authorization pipelines for each individual payment type. It ends on an named &quot;error&quot; end node if either any of the authorizations failed or a payment instrument is of an unknown payment method. If a payment method has no payment processor assigned, the payment is deemed as authorized.</description>
         </text-node>
-        <node-display width="2" x="6" y="2"/>
+        <node-display width="3" x="6" y="2"/>
       </node>
     </segment>
   </branch>
@@ -50,162 +50,130 @@
               <loop-node element-key="PaymentInstrument" iterator-key="Basket.paymentInstruments"/>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="do">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="source" x="0" y="1"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in"/>
                 <segment>
                   <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)" condition-operator="expr"/>
+                    <decision-node condition-key="dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor == null" condition-operator="expr"/>
                     <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="yes">
-                      <transition target-connector="in"/>
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="source" x="0" y="1"/>
+                        </transition-display>
+                      </transition>
                       <segment>
                         <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeGiftCertificate"/>
+                          <pipelet-node custom-name="Just set transaction ID if processor is unknown" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="true"/>
+                            <key-binding alias="null" key="From_3"/>
+                            <key-binding alias="null" key="To_3"/>
+                            <key-binding alias="null" key="From_4"/>
+                            <key-binding alias="null" key="To_4"/>
+                            <key-binding alias="null" key="From_5"/>
+                            <key-binding alias="null" key="To_5"/>
+                            <key-binding alias="null" key="From_6"/>
+                            <key-binding alias="null" key="To_6"/>
+                            <key-binding alias="null" key="From_7"/>
+                            <key-binding alias="null" key="To_7"/>
+                            <key-binding alias="null" key="From_8"/>
+                            <key-binding alias="null" key="To_8"/>
+                            <key-binding alias="null" key="From_9"/>
+                            <key-binding alias="null" key="To_9"/>
+                            <key-binding alias="OrderNo" key="From_0"/>
+                            <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
+                          </pipelet-node>
                           <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in1" target-path="../b3.1/b2.1">
-                              <transition-display>
-                                <bend-point relative-to="target" x="-2" y="0"/>
-                              </transition-display>
-                            </transition>
-                          </branch>
                         </node>
-                        <transition target-connector="in1" target-path="../b5.4"/>
+                        <transition target-connector="in1" target-path="../b4.1"/>
                       </segment>
                     </branch>
                   </node>
                   <simple-transition>
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
+                      <bend-point relative-to="source" x="2" y="0"/>
                       <bend-point relative-to="target" x="0" y="-1"/>
                     </transition-display>
                   </simple-transition>
                   <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b3" source-connector="yes">
-                      <transition target-connector="in"/>
-                      <segment>
-                        <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeCreditCard"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2"/>
-                            <segment>
-                              <node>
-                                <join-node/>
-                                <node-display x="1" y="2"/>
-                              </node>
-                              <transition target-connector="in1" target-path="../../b4.1/b2.1"/>
-                            </segment>
-                          </branch>
-                        </node>
-                        <transition target-connector="in1" target-path="../b5.3"/>
-                      </segment>
-                    </branch>
+                    <pipelet-node custom-name="Authorization Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID + '-Authorize'" key="From_0"/>
+                      <key-binding alias="AuthorizationPipeline" key="To_0"/>
+                      <key-binding alias="null" key="From_1"/>
+                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="null" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                    </pipelet-node>
+                    <node-display x="1" y="1"/>
                   </node>
                   <simple-transition>
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
+                      <bend-point relative-to="source" x="0" y="1"/>
                     </transition-display>
                   </simple-transition>
                   <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(dw.order.PaymentInstrument.METHOD_BML)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b4" source-connector="yes">
-                      <transition target-connector="in"/>
+                    <call-node start-name-key="AuthorizationPipeline"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="error">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="target" x="0" y="-2"/>
+                          <bend-point relative-to="target" x="0" y="-1"/>
+                        </transition-display>
+                      </transition>
                       <segment>
                         <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizeBML"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2"/>
-                            <segment>
-                              <node>
-                                <join-node/>
-                                <node-display x="1" y="2"/>
-                              </node>
-                              <transition target-connector="in1" target-path="../../+1"/>
-                            </segment>
-                          </branch>
+                          <end-node name="error"/>
+                          <node-display x="1" y="2"/>
                         </node>
-                        <transition target-connector="in1" target-path="../b5.2"/>
                       </segment>
                     </branch>
-                  </node>
-                  <simple-transition>
-                    <transition-display>
-                      <bend-point relative-to="source" x="1" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
-                    </transition-display>
-                  </simple-transition>
-                  <node>
-                    <decision-node condition-key="PaymentInstrument.paymentMethod.equals(&quot;PayPal&quot;)" condition-operator="expr"/>
-                    <node-display x="1" y="0"/>
-                    <branch basename="b5" source-connector="yes">
-                      <transition target-connector="in"/>
-                      <segment>
-                        <node>
-                          <call-node start-name-ref="COPlaceOrder-AuthorizePayPal"/>
-                          <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="error">
-                            <transition target-connector="in2" target-path="../+1"/>
-                          </branch>
-                        </node>
-                        <transition target-connector="in3" target-path="./+1">
-                          <transition-display>
-                            <bend-point relative-to="source" x="0" y="2"/>
-                          </transition-display>
-                        </transition>
-                      </segment>
+                    <branch basename="b4" source-connector="authorized">
+                      <transition target-connector="in1">
+                        <transition-display>
+                          <bend-point relative-to="target" x="1" y="0"/>
+                        </transition-display>
+                      </transition>
                       <segment>
                         <node>
                           <join-node/>
                           <node-display x="-1" y="1"/>
                         </node>
-                        <transition target-connector="in3" target-path="./+1"/>
-                      </segment>
-                      <segment>
-                        <node>
-                          <join-node/>
-                          <node-display x="-1" y="0"/>
-                        </node>
-                        <transition target-connector="in3" target-path="./+1"/>
-                      </segment>
-                      <segment>
-                        <node>
-                          <join-node/>
-                          <node-display x="-1" y="0"/>
-                        </node>
                         <transition target-connector="loop" target-path="../..">
                           <transition-display>
                             <bend-point relative-to="source" x="-1" y="0"/>
-                            <bend-point relative-to="source" x="-1" y="-1"/>
                             <bend-point relative-to="target" x="-1" y="0"/>
                           </transition-display>
                         </transition>
                       </segment>
                     </branch>
-                  </node>
-                  <transition target-connector="in1" target-path="./+1">
-                    <transition-display>
-                      <bend-point relative-to="source" x="2" y="0"/>
-                    </transition-display>
-                  </transition>
-                </segment>
-                <segment>
-                  <node>
-                    <join-node/>
-                    <node-display x="1" y="3"/>
-                  </node>
-                  <simple-transition/>
-                  <node>
-                    <end-node name="error"/>
-                    <node-display orientation="horizontal" x="1" y="0"/>
+                    <branch basename="b5" source-connector="not_supported">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="target" x="0" y="-1"/>
+                        </transition-display>
+                      </transition>
+                      <segment>
+                        <node>
+                          <end-node name="error"/>
+                          <node-display x="0" y="2"/>
+                        </node>
+                      </segment>
+                    </branch>
                   </node>
                 </segment>
               </branch>
@@ -562,12 +530,9 @@
                 </transition>
                 <segment>
                   <node>
-                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                    <pipelet-node custom-name="Construct error status, use either preset status from payment authorization which may contain provider specific error message, or create generic error status" pipelet-name="Assign" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
-                      <key-binding alias="new dw.system.Status(dw.system.Status.ERROR, &quot;confirm.error.declined&quot;)" key="From_0"/>
                       <key-binding alias="PlaceOrderError" key="To_0"/>
-                      <key-binding alias="null" key="From_1"/>
-                      <key-binding alias="null" key="To_1"/>
                       <key-binding alias="null" key="From_2"/>
                       <key-binding alias="null" key="To_2"/>
                       <key-binding alias="null" key="From_3"/>
@@ -584,6 +549,7 @@
                       <key-binding alias="null" key="To_8"/>
                       <key-binding alias="null" key="From_9"/>
                       <key-binding alias="null" key="To_9"/>
+                      <key-binding alias="PlaceOrderError != null ? PlaceOrderError : new dw.system.Status(dw.system.Status.ERROR, &quot;confirm.error.declined&quot;)" key="From_0"/>
                     </pipelet-node>
                     <node-display orientation="horizontal" x="1" y="-1"/>
                   </node>
@@ -814,6 +780,24 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_9">
+    <segment>
+      <node>
+        <text-node>
+          <description>An Authorization Pipeline is being dynamically called based on a concatenation of the current Payment-Processor and a constant suffix (-Authorize).
+
+For example:
+Credit Cards processor ID = BASIC_CREDIT
+Authorization Pipeline = BASIC_CREDIT-Authorize
+
+The authorization pipeline must end in a named &quot;error&quot; end node to communicate any authorization error back to this pipeline.
+
+Additionally the authorization pipeline may put a dw.system.Status object into the pipeline dictonary under key PlaceOrderError, which contains provider specific error messages.</description>
+        </text-node>
+        <node-display height="3" width="2" x="9" y="7"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="CreateOrder">
     <segment>
       <node>
@@ -901,7 +885,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_11">
+  <branch basename="_ANONYMOUS_BRANCH_12">
     <segment>
       <node>
         <text-node>
@@ -911,23 +895,13 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_12">
+  <branch basename="_ANONYMOUS_BRANCH_13">
     <segment>
       <node>
         <text-node>
           <description>Make sure, the billing step has been fulfilled, otherwise restart checkout.</description>
         </text-node>
         <node-display x="1" y="11"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_13">
-    <segment>
-      <node>
-        <text-node>
-          <description>These pipelines contain the payment authorization logic specific to each distinct payment method offered.</description>
-        </text-node>
-        <node-display width="3" x="6" y="11"/>
       </node>
     </segment>
   </branch>
@@ -945,356 +919,13 @@
     <segment>
       <node>
         <text-node>
-          <description>Authorizes a payment using a gift certificate. The payment is authorized by redeeming the gift certificate and simply setting the order no as transaction ID.</description>
-        </text-node>
-        <node-display width="2" x="6" y="13"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="AuthorizeGiftCertificate">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="AuthorizeGiftCertificate" secure="false"/>
-        <node-display x="6" y="14"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="GetPaymentProcessor" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;BASIC_GIFT_CERTIFICATE&quot;" key="ID"/>
-          <key-binding alias="PaymentProcessor" key="PaymentProcessor"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="false"/>
-          <key-binding alias="PaymentProcessor" key="From_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.paymentProcessor" key="To_0"/>
-          <key-binding alias="OrderNo" key="From_1"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_1"/>
-          <key-binding alias="null" key="From_2"/>
-          <key-binding alias="null" key="To_2"/>
-          <key-binding alias="null" key="From_3"/>
-          <key-binding alias="null" key="To_3"/>
-          <key-binding alias="null" key="From_4"/>
-          <key-binding alias="null" key="To_4"/>
-          <key-binding alias="null" key="From_5"/>
-          <key-binding alias="null" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
-          <key-binding alias="null" key="From_7"/>
-          <key-binding alias="null" key="To_7"/>
-          <key-binding alias="null" key="From_8"/>
-          <key-binding alias="null" key="To_8"/>
-          <key-binding alias="null" key="From_9"/>
-          <key-binding alias="null" key="To_9"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="RedeemGiftCertificate" pipelet-set-identifier="bc_api">
-          <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
-          <key-binding alias="Status" key="Status"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="authorized"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_17">
-    <segment>
-      <node>
-        <text-node>
-          <description>Authorizes a payment using a credit card. The payment is authorized by using the BASIC_CREDIT processor only and setting the order no as the transaction ID. Customizations may use other processors and custom logic to authorize credit card payment.</description>
-        </text-node>
-        <node-display width="2" x="9" y="13"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="AuthorizeCreditCard">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="AuthorizeCreditCard" secure="false"/>
-        <node-display x="9" y="14"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="GetPaymentProcessor" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;BASIC_CREDIT&quot;" key="ID"/>
-          <key-binding alias="PaymentProcessor" key="PaymentProcessor"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node custom-name="Just set transaction ID and processor" pipelet-name="Assign" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="null" key="From_3"/>
-          <key-binding alias="null" key="To_3"/>
-          <key-binding alias="null" key="From_4"/>
-          <key-binding alias="null" key="To_4"/>
-          <key-binding alias="null" key="From_5"/>
-          <key-binding alias="null" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
-          <key-binding alias="null" key="From_7"/>
-          <key-binding alias="null" key="To_7"/>
-          <key-binding alias="null" key="From_8"/>
-          <key-binding alias="null" key="To_8"/>
-          <key-binding alias="null" key="From_9"/>
-          <key-binding alias="null" key="To_9"/>
-          <key-binding alias="OrderNo" key="From_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.paymentProcessor" key="To_1"/>
-          <key-binding alias="PaymentProcessor" key="From_1"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="authorized"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
-    <segment>
-      <node>
-        <text-node>
-          <description>Authorizes a payment using a credit card. The payment is authorized by using the PAYPAL_EXPRESS processor only and setting the order no as the transaction ID. Customizations may use other processors and custom logic to authorize credit card payment.</description>
-        </text-node>
-        <node-display width="2" x="12" y="13"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_20">
-    <segment>
-      <node>
-        <text-node>
-          <description>Authorizes a payment using a credit card. The payment is authorized by using the CYBERSOURCE_BML processor only and setting the order no as the transaction ID. Customizations may use other processors and custom logic to authorize credit card payment.</description>
-        </text-node>
-        <node-display width="2" x="15" y="13"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="AuthorizePayPal">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="AuthorizePayPal" secure="false"/>
-        <node-display x="12" y="14"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="GetPaymentProcessor" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;PAYPAL_EXPRESS&quot;" key="ID"/>
-          <key-binding alias="PaymentProcessor" key="PaymentProcessor"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node custom-name="Just set transaction ID and processor" pipelet-name="Assign" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="null" key="From_3"/>
-          <key-binding alias="null" key="To_3"/>
-          <key-binding alias="null" key="From_4"/>
-          <key-binding alias="null" key="To_4"/>
-          <key-binding alias="null" key="From_5"/>
-          <key-binding alias="null" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
-          <key-binding alias="null" key="From_7"/>
-          <key-binding alias="null" key="To_7"/>
-          <key-binding alias="null" key="From_8"/>
-          <key-binding alias="null" key="To_8"/>
-          <key-binding alias="null" key="From_9"/>
-          <key-binding alias="null" key="To_9"/>
-          <key-binding alias="OrderNo" key="From_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.paymentProcessor" key="To_1"/>
-          <key-binding alias="PaymentProcessor" key="From_1"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="authorized"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="AuthorizeBML">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="AuthorizeBML" secure="false"/>
-        <node-display x="15" y="14"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="GetPaymentProcessor" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;CYBERSOURCE_BML&quot;" key="ID"/>
-          <key-binding alias="PaymentProcessor" key="PaymentProcessor"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node custom-name="Just set transaction ID and processor" pipelet-name="Assign" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="null" key="From_3"/>
-          <key-binding alias="null" key="To_3"/>
-          <key-binding alias="null" key="From_4"/>
-          <key-binding alias="null" key="To_4"/>
-          <key-binding alias="null" key="From_5"/>
-          <key-binding alias="null" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
-          <key-binding alias="null" key="From_7"/>
-          <key-binding alias="null" key="To_7"/>
-          <key-binding alias="null" key="From_8"/>
-          <key-binding alias="null" key="To_8"/>
-          <key-binding alias="null" key="From_9"/>
-          <key-binding alias="null" key="To_9"/>
-          <key-binding alias="OrderNo" key="From_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.transactionID" key="To_0"/>
-          <key-binding alias="PaymentInstrument.paymentTransaction.paymentProcessor" key="To_1"/>
-          <key-binding alias="PaymentProcessor" key="From_1"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="authorized"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
-    <segment>
-      <node>
-        <text-node>
           <description>Recalculate the payments.  If there is only gift certificates, make sure it covers the order total, if not back to billing page.</description>
         </text-node>
         <node-display x="1" y="16"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_16">
     <segment>
       <node>
         <text-node>
@@ -1304,7 +935,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
         <text-node>
@@ -1314,7 +945,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
+  <branch basename="_ANONYMOUS_BRANCH_18">
     <segment>
       <node>
         <text-node>
@@ -1324,7 +955,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
+  <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
         <text-node>
@@ -1421,7 +1052,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_21">
     <segment>
       <node>
         <text-node>
@@ -1470,7 +1101,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_31">
+  <branch basename="_ANONYMOUS_BRANCH_23">
     <segment>
       <node>
         <text-node>
@@ -1480,7 +1111,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_32">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1490,7 +1121,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_33">
+  <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
         <text-node>
@@ -1500,7 +1131,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_34">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1510,7 +1141,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_35">
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>

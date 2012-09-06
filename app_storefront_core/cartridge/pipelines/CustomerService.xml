@@ -208,7 +208,7 @@
                 <key-binding alias="CurrentForms.contactus.email.value" key="MailFrom"/>
                 <key-binding alias="&quot;mail/contactus&quot;" key="MailTemplate"/>
                 <key-binding alias="CurrentForms.contactus.email.value" key="MailTo"/>
-                <key-binding alias="CurrentForms.contactus.subject.value" key="MailSubject"/>
+                <key-binding alias="CurrentForms.contactus.myquestion.value" key="MailSubject"/>
                 <key-binding alias="null" key="LocaleID"/>
                 <key-binding alias="null" key="MailCC"/>
                 <key-binding alias="null" key="MailBCC"/>
