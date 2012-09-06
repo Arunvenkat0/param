@@ -23,8 +23,8 @@
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main">
-			<isinclude template="components/browsertoolscheck"/>
 			<isreplace/>
+			<isinclude template="components/browsertoolscheck"/>
 		</div>
 
 	    <isinclude template="components/footer/footer"/>

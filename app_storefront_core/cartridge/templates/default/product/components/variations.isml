@@ -29,9 +29,8 @@
 			<iselse>
 				<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE">
 			</isif>
-					
+
 			<div class="product-variations" data-current="${JSON.stringify(selectedAtts)}">
-				
 				<h2 class="visually-hidden">Variations</h2>
 	
 					<isscript>
@@ -46,7 +45,6 @@
 						Otherwise hasOrderableVariants() would use currently selected values resulting in a too narrow selection of variants.
 					</iscomment>
 					<isset name="cleanPVM" value="${(pdict.Product.variant ? pdict.Product.masterProduct.variationModel : pdict.Product.variationModel)}" scope="page"/>
-	
 					<ul>
 					
 					<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
@@ -131,22 +129,23 @@
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">									
 												<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
 												<isset name="swImage" value="${VV.getImage('swatch')}" scope="page"/>
-												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
-												<isset name="swatchClass" value="${isSelected ? 'selected' : 'emptyswatch'}" scope="page"/>
+												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
+												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
+												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>											
+												<isset name="linkURL" value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}" scope="page"/>
 												<isif condition="${isSelected}">												
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
+													<isset name="linkURL" value="${PVM.urlUnselectVariationValue('Product-Variation', VA)}" scope="page"/>
 													<isscript>selectedVariants.push(VA.ID+"-"+VV.value);</isscript>
-												<iselse/>
-													<isset name="selectedSwatchValue" scope="page" value="${''}" />
 												</isif>
 												<isif condition="${!empty(VV.getImage('hi-res'))}">
 													<isset name="hiResURL" scope="page" value="${VV.getImage('hi-res').getURL()}" />
 												<iselse/>
 													<isset name="hiResURL" scope="page" value="${''}" />
 												</isif>
-												<li class="${swatchClass}">												
-													<a href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}"
+												<li class="${swatchClass}">
+													<a href="${linkURL+qsAppend}"
 													   title="${displayValue}"
 													   class="swatchanchor"
 													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
@@ -156,40 +155,49 @@
 												</li>									
 											</isif>
 										</isloop>
-										<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>								
+										<li class="selected-value">
+											<isif condition="${selectedSwatchValue}">
+												<isprint value="${selectedSwatchValue}"/>
+											</isif>
+										</li>								
 									</ul>							
 								<iselse>
 									<ul class="swatches ${vaId.toLowerCase()}">							
-										<isset name="selectedSwatchValue" scope="page" value="${''}" />
+										<isset name="selectedSwatchValue" scope="page" value="${null}" />
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>													
 													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
 												</isscript>
-												<isset name="selectable" value="${ isAvailable && (pdict.Product.master || PVM.getFilteredValues(VA).contains(VV))}" scope="page" />											
-												<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
+												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
+												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 												<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
-												
-												<isif condition="${isSelected}">
+												<isset name="linkURL" value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}" scope="page"/>
+												<isif condition="${isSelected}">												
 													<isscript>var selectedVariant = VA.ID+"-"+VV.value;</isscript>
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
+													<isset name="linkURL" value="${PVM.urlUnselectVariationValue('Product-Variation', VA)}" scope="page"/>
 												</isif>																		
-												<li class="${swatchClass}">																								
+												<li class="${swatchClass}">																						
 													<isif condition="${selectable}">
-														<a title="${displayValue}" class="swatchanchor"	href="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)+qsAppend}">
+														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
 															<isprint value="${displayValue}"/>
 														</a>
 													<iselse/>
 														<a title="${displayValue}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
 														</a>
-													</isif>											
+													</isif>									
 												</li>											
 											</isif>
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>									
-										<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>
+										<li class="selected-value">
+											<isif condition="${selectedSwatchValue}">
+												<isprint value="${selectedSwatchValue}"/>
+											</isif>
+										</li>
 								
 										<isif condition="${!empty(sizeChartID)}">
 											<li class="size-chart-link">
@@ -212,29 +220,22 @@
 										<isprint value="${VA.displayName}"/>:
 									</label>		
 									<select class="variation-select" id="va-${vaId}" name="${'dwvar_' + pdict.Product.variationModel.master.ID + '_' + vaId}">
-										<isif condition="${Valength > 1}">
-											<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>
-										</isif>
+										<option value="">${Resource.msg('global.select','locale',null)} <isprint value="${VA.displayName}"/></option>
 										<isscript>var selectedVariant = null</isscript>
 										<isloop items="${VAVALS}" var="VV">
 											<iscomment>filter out unorderable variation attribute values</iscomment>						
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 												<isscript>
-													var isAvailable = PVM.getFilteredValues(VA).contains(VV);
+													var selected = PVM.isSelectedAttributeValue(VA, VV) ? 'selected="selected"' : '';
+													var linkURL = selected ? PVM.urlUnselectVariationValue('Product-Variation', VA) : PVM.urlSelectVariationValue('Product-Variation', VA, VV);
+													if (selected.length > 0) {
+														selectedVariant = VA.ID+"-"+VV.value;
+													}
 												</isscript>
-												<isif condition="${isAvailable}">
-													<isscript>
-														var selected = (PVM.isSelectedAttributeValue(VA, VV) || Valength == 1) ? 'selected="selected"' : '';
-														if (selected.length > 0) {
-															selectedVariant = VA.ID+"-"+VV.value;
-														}
-													</isscript>
-													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
-														<isprint value="${VV.displayValue||VV.value}"/>
-													</option>
-	
-												</isif>
+												<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
+													<isprint value="${VV.displayValue||VV.value}"/>
+												</option>
 											</isif>
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>
