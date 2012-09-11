@@ -724,7 +724,7 @@ Expects Product instance</description>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="CurrentHttpParameterMap.get(&quot;dwvar_&quot;+Product.ID+&quot;_color&quot;).value" key="colorId"/>
                       <key-binding alias="Product" key="Prod"/>
-                      <key-binding alias="Product" key="newProduct"/>
+                      <key-binding alias="DefaultVariant" key="newProduct"/>
                       <key-binding alias="CurrentVariationModel" key="PVM"/>
                       <key-binding alias="CurrentVariationModel" key="CurrentVariationModel"/>
                     </pipelet-node>
@@ -743,7 +743,7 @@ Expects Product instance</description>
                   <node>
                     <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
-                      <key-binding alias="true" key="From_0"/>
+                      <key-binding alias="false" key="From_0"/>
                       <key-binding alias="resetAttributes" key="To_0"/>
                       <key-binding alias="null" key="From_1"/>
                       <key-binding alias="null" key="To_1"/>

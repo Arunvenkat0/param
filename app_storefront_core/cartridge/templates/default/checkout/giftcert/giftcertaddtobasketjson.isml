@@ -13,7 +13,7 @@
 		o.errors.GeneralErrors = [];		
 		var errorSet = pdict.FormErrors.entrySet();
 		for(var i=0,len=errorSet.length;i<len;i++) {
-			o.errors.FormErrors[errorSet.getKey()] = errorSet.getValue();
+			o.errors.FormErrors[errorSet[i].getKey()] = errorSet[i].getValue();
 		}
 		if (!empty(pdict.GeneralError)) {
 			o.errors.GeneralErrors.push(pdict.GeneralError);

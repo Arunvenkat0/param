@@ -16,10 +16,9 @@
 	
 	<iselse/>
 	
-		<h2><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}"/></h2>
-		
-		<a class="print-page">${Resource.msg('global.print','locale',null)}</a>
-				
+	<div class="list-table-header">
+		<h2><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}"/><a class="button print-page">${Resource.msg('global.print','locale',null)}</a></h2>
+	</div>			
 				<h3>User Information</h3>
 				
 				<dl class="event-information-user-info">	
@@ -84,15 +83,19 @@
 								</div>
 								
 								<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
-									
+									<isif condition="${item.purchasedQuantity.value>item.quantity.value}">
+										<isset name="exceededClass" value="${' exceeded'}" scope="page" />
+									<iselse/>
+										<isset name="exceededClass" value="${''}" scope="page" />
+									</isif>
 									<div class="item-option option-quantity-desired">
 										<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span> 
-										<span class="value"><isprint value="${item.quantity.value}" formatter="#"/></span>
+										<span class="value${exceededClass}"><isprint value="${item.quantity.value}" formatter="#"/></span>
 									</div>
 									
 									<div class="item-option option-quantity-purchased">
 										<span class="label">${Resource.msg('productlist.qtypurchased','account',null)}</span> 
-										<span class="value"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></span>
+										<span class="value${exceededClass}"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></span>
 									</div> 
 									
 								</isif>

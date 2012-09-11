@@ -247,6 +247,7 @@
 	attribute="value2"
 	attribute="attribute3"
 	attribute="value3"
+	attribute="requiredtext"
 />
 
 <iscomment>renders a progress indicator for checkout</iscomment>
