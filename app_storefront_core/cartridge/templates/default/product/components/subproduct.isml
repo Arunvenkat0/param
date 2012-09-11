@@ -78,7 +78,7 @@
 							
 							<isset name="lgImage" value="${pdict.Product.getImages('large')[imgSmStatus.index.toFixed(0)]}" scope="page"/>
 											
-							<!-- ${imgSmStatus.index.toFixed(0)} -->
+							<!-- ${imgSmStatus.index.toFixed(0)}  -->
 							<img class="productthumbnail" 
 								 src="${img.getURL()}" 
 								 alt="${img.alt}" 
