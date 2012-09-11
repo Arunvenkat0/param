@@ -1,3 +1,5 @@
+# Version: 12.6.x
+
 # Demo Storefront Data
 
 ## Creating a data installation
