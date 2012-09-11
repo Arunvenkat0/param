@@ -117,13 +117,12 @@
 			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
 
 				<isif condition="${pdict.ProductSearchResult.refinedByPrice}">
-					<span class="attribute-devider">
+					<span class="attribute-divider">
 						${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}
 					</span>
 				</isif>
 
 				<span class="breadcrumb-refinement-name">
-					<isif condition="${hasAttributes}">and</isif>
 					<isprint value="${definition.displayName}"/>
 				</span>
 				<isset name="hasAttributes" value="${true}" scope="page" />

@@ -1,6 +1,6 @@
 <iscomment>In the product pipeline, if a product was not found for the selected attributes, we need to refresh the ProductVariationModel using the default selected variant</iscomment>
 
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="pdict"/>	
+<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
 
 <!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
 
@@ -42,16 +42,19 @@
 			
 			<isif condition="${! empty(pdict.Product.shortDescription) && pdict.Product.shortDescription.markup.length > 0}">
 				<div id="tab1" class="tab-content">
+					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 					<isprint value="${pdict.Product.shortDescription}" encoding="off"/>
 				</div>
 			</isif>			
 			<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
 				<div id="tab2" class="tab-content" itemprop="description">
+					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 					<isprint value="${pdict.Product.longDescription}" encoding="off"/>
 				</div>
 			</isif>				
 			<isif condition="${showAttributes}">
 				<div id="tab3" class="tab-content">
+					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 					<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
 						<isif condition="${AttributeGroup.ID != 'mainAttributes'}">
 							<isset name="group" value="${AttributeGroup}" scope="page"/>
@@ -62,6 +65,7 @@
 				</div>
 			</isif>
 			<div id="tab4" class="tab-content">
+				<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 				<isinclude template="product/components/reviews"/>
 			</div>
 		</div>

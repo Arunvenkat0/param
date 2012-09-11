@@ -32,10 +32,10 @@
 			
 		</isloop>
 	</ul>
-	<isif condition="${contentCount>6}">
+	<isif condition="${pdict.ContentSearchResult.count>6}">
 		<form action="${pdict.ContentSearchResult.url('Search-ShowContent')}" method="get">
 			<div class="form-row" style="text-align:center;">
-				<button type="submit" value="${Resource.msgf('topcontenthits.viewall','search',null,pdict.ContentSearchResult.count)}"><span>${Resource.msg('topcontenthits.viewall','search',null)} (${contentCount})</span></button>
+				<button type="submit" value="${Resource.msgf('topcontenthits.viewall','search',null,pdict.ContentSearchResult.count.toFixed(0))}"><span>${Resource.msg('topcontenthits.viewall','search',null)} (${pdict.ContentSearchResult.count.toFixed(0)})</span></button>
 			</div>
 			<input type="hidden" name="q" value="${pdict.ContentSearchResult.searchPhrase}" />
 		</form>

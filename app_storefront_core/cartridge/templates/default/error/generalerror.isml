@@ -28,25 +28,27 @@
 			</form>
 		</div>
 		
-		<isscript>
-			var instanceType = dw.system.System.getInstanceType();
-			var production = dw.system.System.PRODUCTION_SYSTEM;
-			var staging = dw.system.System.STAGING_SYSTEM;
-		</isscript>
-		<div class="error-page-tech-details" <isif condition="${instanceType == production || instanceType == staging}">style="display:none"</isif>>
-			
-			
-			<isif condition="${'PipelineName' in pdict || 'CurrentStartNodeName' in pdict}">			
-				<p>${Resource.msg('generalerror.request','error',null)}</p>
-				<p><code><isprint value="${pdict.PipelineName}">-<isprint value="${pdict.CurrentStartNodeName}"></code></p>
-			</isif>
-			
-			<isif condition="${'ErrorText' in pdict}">			
-				<p>${Resource.msg('generalerror.errortext','error',null)}</strong></p>
-				<p><code><isprint value="${pdict.ErrorText}"></code></p>
-			</isif>
-						
-		</div>
+		<iscomment>
+			<isscript>
+				var instanceType = dw.system.System.getInstanceType();
+				var production = dw.system.System.PRODUCTION_SYSTEM;
+				var staging = dw.system.System.STAGING_SYSTEM;
+			</isscript>
+			<div class="error-page-tech-details" <isif condition="${instanceType == production || instanceType == staging}">style="display:none"</isif>>
+				
+				
+				<isif condition="${'PipelineName' in pdict || 'CurrentStartNodeName' in pdict}">			
+					<p>${Resource.msg('generalerror.request','error',null)}</p>
+					<p><code><isprint value="${pdict.PipelineName}">-<isprint value="${pdict.CurrentStartNodeName}"></code></p>
+				</isif>
+				
+				<isif condition="${'ErrorText' in pdict}">			
+					<p>${Resource.msg('generalerror.errortext','error',null)}</strong></p>
+					<p><code><isprint value="${pdict.ErrorText}"></code></p>
+				</isif>
+							
+			</div>
+		</iscomment>
 		
 		<div class="error-page-footer">
 		

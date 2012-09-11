@@ -227,3 +227,22 @@ function removeShippingAddress( shippingAddress : Object )
 
 	return;
 }
+
+/** 
+ * Determines if the basket already contains payment 
+ * instruments of the given payment method and removes them from the basket.
+ */
+function removeExistingPaymentInstruments( basket : Basket, method : String )
+{
+	// get all credit card payment instruments
+	var ccPaymentInstrs : Collection = basket.getPaymentInstruments( method );
+	var iter : Iterator = ccPaymentInstrs.iterator();
+	var existingPI : OrderPaymentInstrument = null;
+
+	// remove them
+	while( iter.hasNext() )
+	{
+		existingPI = iter.next();
+		basket.removePaymentInstrument( existingPI );
+	}
+}

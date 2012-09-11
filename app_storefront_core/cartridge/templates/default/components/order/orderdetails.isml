@@ -49,47 +49,28 @@
 				<span class="value"><isprint value="${Order.orderNo}"/></span>	
 			</div>
 		</td>
-		
 		<td class="order-billing">
 			<isminiaddress p_address="${Order.billingAddress}"/>
 		</td>
-		
 		<td class="order-payment-instruments">
-			<iscomment>Render Credit Card</iscomment>
-			<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)}" var="paymentInstr" status="piloopstate">
-				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
-				<div class="payment-amount">
-					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
-					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-				</div><!-- END: payment-amount -->
-			</isloop>
-			<iscomment>Render BML</iscomment>
-			<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_BML)}" var="paymentInstr" status="piloopstate">
-				<div class="payment-type">${Resource.msg('orderdetails.paymentmethod.bml','components',null)}</div>
-				<div class="payment-amount">
-					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
-					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-				</div><!-- END: payment-amount -->
-			</isloop>
-			<iscomment>Render Pay Pal</iscomment>
-			<isloop items="${Order.getPaymentInstruments('PayPal')}" var="paymentInstr" status="piloopstate">
-				<div class="payment-type">${Resource.msg('orderdetails.paymentmethod.paypal','components',null)}</div>
-				<div class="payment-amount">
-					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
-					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-				</div><!-- END: payment-amount -->
-			</isloop>
-
-			<iscomment>Render gift certs</iscomment>
-			<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)}" var="paymentInstr" status="piloopstate">
-				<div class="orderpaymentinstrumentsgc">
-					<span class="label">${Resource.msg('global.giftcertificate','locale',null)}</span>
-					<span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
-					<span class="payment-amount">
+			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
+				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
+				   <div class="orderpaymentinstrumentsgc">
+						   <span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
+				           <span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
+				           <span class="payment-amount">
+				              <span class="label">${Resource.msg('global.amount','locale',null)}:</span>
+				              <span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+				           </span>
+				    </div> 
+				<iselse> 
+					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>         
+					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
+					<div class="payment-amount">
 						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 						<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-					</span>
-				</div>
+					</div><!-- END: payment-amount -->
+				</isif>
 			</isloop>
 		</td>
 		<td class="order-payment-summary">

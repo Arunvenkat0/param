@@ -39,6 +39,7 @@ function execute( pdict : PipelineDictionary  ) : Number
 		if (profile != null) 
 		{
 			pdict["RegistrationStatus"] = new Status(Status.ERROR, "CustomerAlreadyExistError");
+			return PIPELET_ERROR;
 		}
 			
 		return PIPELET_NEXT;

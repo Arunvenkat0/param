@@ -1,9 +1,13 @@
-/*
- * All java script logic for the application.
- *
- * The code relies on the jQuery JS library to
- * be also loaded. 
- */
+//    app.js 2.0.0
+//    (c) 2009-2012 Demandware Inc.
+//    Subject to standard usage terms and conditions
+//    Relies on jQuery, jQuery UI, jQuery validate, ...
+//    For all details and documentation:
+//    https://github.com/Demandware/Site-Genesis
+
+// All java script logic for the application.
+// The code relies on the jQuery JS library to be also loaded. 
+
 // semi-colon to assure functionality upon script concatenation and minification
 ; 
 
@@ -15,6 +19,8 @@ if (!window.jQuery) {
 	document.getElementsByTagName('head')[0].appendChild(s);
 }
 
+// Application singleton and namespace object
+// ------------------------------------------
 var app = (function (app, $) {
 	document.cookie="dw=1";
 	/******** private functions & vars **********/
@@ -113,7 +119,6 @@ var app = (function (app, $) {
 		$('html').addClass('js');
 
 		// load js specific styles
-		app.util.loadCssFile(app.util.staticUrl("/css/js-style.css"));		
 		app.util.limitCharacters();
 	}
 
@@ -164,6 +169,9 @@ var app = (function (app, $) {
 
 	return $.extend(app, _app);
 }(window.app = window.app || {}, jQuery));
+
+// Home page (Storefront) singleton and namespace object
+// -----------------------------------------------------
 
 // app.storefront
 (function (app, $) {
@@ -218,7 +226,10 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-//app.tooltips
+// Tooltips singleton and namespace object
+// ---------------------------------------
+
+// app.tooltips
 (function (app, $) {
 	var $cache = {};
 	app.tooltips = {
@@ -285,7 +296,7 @@ var app = (function (app, $) {
 	 */
 	function setMainImage(atts) {
 		var imgZoom = $cache.pdpMain.find("a.main-image");
-		if (imgZoom.length>0) {
+		if (imgZoom.length>0 && atts.hires && atts.hires!='' && atts.hires!='null') {
 			imgZoom.attr("href", atts.hires);
 		}
 
@@ -338,7 +349,8 @@ var app = (function (app, $) {
 
 		// Added to prevent empty hires zoom feature (if images don't exist)
 		var mainImage = $cache.pdpMain.find("a.main-image");
-		if( mainImage[0].href != '' && mainImage[0].href.indexOf('noimagelarge')<0 ) {
+		var hiresImageSrc = mainImage.attr("href");
+		if( hiresImageSrc && hiresImageSrc != '' && hiresImageSrc.indexOf('noimagelarge')<0 ) {
 			mainImage.removeData("jqzoom").jqzoom(options);
 		}
 	}
@@ -397,7 +409,8 @@ var app = (function (app, $) {
 
 			}
 		}
-
+		
+		app.tooltips.init();
 	}
 
 	function initializeCache() {
@@ -420,16 +433,15 @@ var app = (function (app, $) {
 	}
 
 	function initializeEvents() {
-		
-		var availabilityContainer = $cache.pdpMain.find("div.availability");
-		
+				
 		app.product.initAddThis();
 		
 		// add or update shopping cart line item
 		app.product.initAddToCart();
-		$cache.pdpMain.on("change", "form.pdpForm input[name='Quantity']", function (e) {
+		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
+			var availabilityContainer = $cache.pdpMain.find("div.availability");
 			app.product.getAvailability(
-				$cache.productId.val(),
+				$("#pid").val(),
 				$(this).val(),
 				function (data) {
 					if (!data) {
@@ -515,11 +527,12 @@ var app = (function (app, $) {
 				});
 
 		});
+		
+		// Add to Wishlist and Add to Gift Registry links behaviors
 		$cache.pdpMain.on("click", "a.wl-action", function (e) {
-			// work around for bundle products. options dropdown not included within form.
 			e.preventDefault();
 			
-			var data = app.util.getQueryStringParams($cache.pdpForm.serialize());
+			var data = app.util.getQueryStringParams($("form.pdpForm").serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
@@ -562,15 +575,17 @@ var app = (function (app, $) {
 		$cache.pdpMain.on("click", ".thumbnail-link, .addthis_toolbox a", false);
 		$cache.pdpMain.on("click", "li.unselectable a", false);
 		
+		// handle drop down variation attribute value selection event
 		$cache.pdpMain.on("change", ".variation-select", function(e){
 			if ($(this).val().length===0) {return;}
 			var qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
+				listid = $cache.pdpForm.find("input[name='productlistid']").first().val(),
 				productSet = $(this).closest('.subProduct'),
 				params = {
 					Quantity : isNaN(qty) ? "1" : qty,
 					format : "ajax"
 				};
-						
+			if( listid ) params.productlistid = listid;
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
@@ -581,7 +596,8 @@ var app = (function (app, $) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
-					$("update-images").remove();				
+					$("update-images").remove();
+					app.tooltips.init();
 				}
 			});
 		});
@@ -589,19 +605,21 @@ var app = (function (app, $) {
 		// swatch anchor onclick()
 		$cache.pdpMain.on("click", "div.product-detail a[href].swatchanchor", function (e) {
 			e.preventDefault();
-			if ($(this).parent("li").hasClass("selected")) {
-				return;
-			}
 			
-			var isColor = $(this).closest("ul.swatches").hasClass("Color");
+			var el = $(this);
+			if( el.parents('li').hasClass('unselectable') ) return;
+			
+			var isColor = el.closest("ul.swatches").hasClass("Color");
 						
-			var anchor = $(this),
+			var anchor = el,
 				qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
+				listid = $cache.pdpForm.find("input[name='productlistid']").first().val(),
 				productSet = $(anchor).closest('.subProduct'),
 				params = {
 					Quantity : isNaN(qty) ? "1" : qty
 				};
-			
+			if( listid ) params.productlistid = listid;
+
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl(this.href, params);
 			app.progress.show($cache.pdpMain);		
@@ -614,7 +632,8 @@ var app = (function (app, $) {
 					app.product.initAddToCart();
 					if (isColor) {
 						replaceImages();
-					}					
+					}
+					app.tooltips.init();
 				}
 			});
 		});
@@ -645,7 +664,7 @@ var app = (function (app, $) {
 				}
 				
 				app.product.initAddToCart(ic);
-
+				app.tooltips.init();
 			});
 		});
 
@@ -732,6 +751,10 @@ var app = (function (app, $) {
 			initializeEvents();
 			loadZoom();
 		},
+		readReviews : function(){
+			$('.product-tabs').tabs('select','#tab4');
+			$('body').scrollTop($('#tab4').offset().top);
+		},
 		get : function (options) {
 			// loads a product into a given container div
 			// params
@@ -742,10 +765,14 @@ var app = (function (app, $) {
 			//		id - id of the product to get, is optional only used when url is empty
 			var target = options.target || app.quickView.init();
 			var source = options.source || "";
+			var productListID = options.productlistid || "";
 
 			var productUrl = options.url || app.util.appendParamToURL(app.urls.getProductUrl, "pid", options.id);
 			if(source.length > 0) {
 				productUrl = app.util.appendParamToURL(productUrl, "source", source);
+			}			
+			if(productListID.length > 0) {
+				productUrl = app.util.appendParamToURL(productUrl, "productlistid", productListID);
 			}			
 
 			// show small loading image
@@ -805,6 +832,17 @@ var app = (function (app, $) {
 
 	function initializeEvents() {
 		app.quickView.initializeButton($cache.container, ".product-image");
+		$cache.container.on("mouseleave", ".swatch-list", function(e){
+			// Restore current thumb image
+			var tile = $(this).closest(".grid-tile");
+			var thumb = tile.find(".product-image a.thumb-link img").filter(":first");
+			var data = thumb.data("current");
+			thumb.attr({
+				src : data.src,
+				alt : data.alt,
+				title : data.title
+			});
+		});
 		$cache.container.on("click", ".swatch-list a.swatch", function (e) {
 			e.preventDefault();
 			if ($(this).hasClass("selected")) { return; }
@@ -814,28 +852,40 @@ var app = (function (app, $) {
 			$(this).addClass("selected");
 			tile.find("a.thumb-link").attr("href", $(this).attr("href"));
 			tile.find("a.name-link").attr("href", $(this).attr("href"));
-		}).on("hover", ".swatch-list a.swatch", function (e) {
-			if ($(this).hasClass("selected")) { return; }
+
+			var swatchImg = $(this).children("img").filter(":first");			
+			var data = swatchImg.data("thumb");			
+			var thumb = tile.find(".product-image a.thumb-link img").filter(":first");
+			var currentAtts = {
+				src : data.src,
+				alt : data.alt,
+				title : data.title
+			};
+			thumb.attr(currentAtts);
+			thumb.data("current", currentAtts);
+		}).on("mouseenter", ".swatch-list a.swatch", function (e) {
+			//if ($(this).hasClass("selected")) { return; }
 			
 			// get current thumb details
 			var tile = $(this).closest(".grid-tile");
 			var thumb = tile.find(".product-image a.thumb-link img").filter(":first");
 			var swatchImg = $(this).children("img").filter(":first");			
 			var data = swatchImg.data("thumb");			
+			var current = thumb.data('current');
 			
-			var currentAtts = {
-				src : thumb.attr("src"),
-				alt : thumb.attr("alt"),
-				title : thumb.attr("title")
-			}
+			// If this is the first time, then record the current img
+			if(!current) {
+			    thumb.data('current',{src:thumb[0].src, alt:thumb[0].alt, title:thumb[0].title});    
+			}			
 			
+			// Set the tile image to the values provided on the swatch data attributes
 			thumb.attr({
 				src : data.src,
 				alt : data.alt,
 				title : data.title
 			});
 			
-			swatchImg.data("thumb", currentAtts);			
+			//swatchImg.data("thumb", currentAtts);			
 		});
 	}
 
@@ -1132,7 +1182,7 @@ var app = (function (app, $) {
 		if (initialized) {return; }			
 		$cache.dialog.on("click", ".preview-button, .send-button, .edit-button", function (e) {
 			e.preventDefault();
-			//$cache.form.validate();
+			$cache.form.validate();
 			if (!$cache.form.valid()) {
 				return false;
 			}
@@ -1189,7 +1239,6 @@ var app = (function (app, $) {
 				}
 				var url = app.util.appendParamsToUrl(this.href, data);
 				url = this.protocol + "//" + this.hostname + ((url.charAt(0)==="/") ? url : ("/"+url));
-
 				app.ajax.load({
 					url:app.util.ajaxUrl(url),
 					target:dlg,
@@ -1264,8 +1313,11 @@ var app = (function (app, $) {
 			if($(this).parent().hasClass("unselectable")) { return; }
 			var uri = app.util.getUri(this);
 
-			var refineUrl = uri.query.length > 1 ? uri.query.substr(1) : "";
-			window.location.hash = encodeURI(refineUrl);
+			if( uri.query.length > 1 ) {
+				window.location.hash = encodeURI(uri.query.substring(1));
+			} else {
+				window.location.href = encodeURI(this.href);
+			}
 			return false;
 		});
 
@@ -1608,14 +1660,79 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.giftcard
+//app.giftcert
+(function (app, $) {
+	var $cache;
+
+	function setAddToCartHandler(e) {
+		e.preventDefault();
+		var form = $(this).closest("form");
+		
+		var options = { 
+			url : app.util.ajaxUrl(form.attr('action')),
+			method : 'POST',
+			cache: false,
+			contentType : 'application/json',
+			data : form.serialize()
+		};
+		$.ajax(options).done(function (response) {
+			if( response.success ) {
+				app.ajax.load({
+					url : app.urls.minicartGC,
+					data :{lineItemId : response.result.lineItemId},
+					callback : function(response){
+						app.minicart.show(response);
+						form.find('input,textarea').val('');
+					}
+				});
+			} else {
+				form.find('span.error').hide();
+				for( id in response.errors.FormErrors ) {
+					var error_el = $('#'+id).addClass('error').removeClass('valid').next('.error');
+					if( !error_el || error_el.length===0 ) {
+						error_el = $('<span for="'+id+'" generated="true" class="error" style=""></span>');
+						$('#'+id).after(error_el);
+					}
+					error_el.text(response.errors.FormErrors[id].replace(/\\'/g,"'")).show();
+				}
+				console.log(JSON.stringify(response.errors));
+			}
+		}).fail(function (xhr, textStatus) {
+			// failed
+			if(textStatus === "parsererror") {
+				window.alert(app.resources.BAD_RESPONSE);
+			} else {
+				window.alert(app.resources.SERVER_CONNECTION_ERROR);
+			}
+		});
+	}
+	
+	function initializeCache() {
+		$cache = {
+			addToCart : $("#AddToBasketButton"),
+		};
+	}
+
+	function initializeEvents() {
+		$cache.addToCart.on('click', setAddToCartHandler);
+	}
+		
+	app.giftcert = {
+		init : function(){
+			initializeCache();
+			initializeEvents();
+		}
+	};
+}(window.app = window.app || {}, jQuery));
+
+//app.giftcard
 (function (app, $) {
 	
 	app.giftcard = {
 		checkBalance : function (id, callback) {
 			// load gift certificate details
 			var url = app.util.appendParamToURL(app.urls.giftCardCheckBalance, "giftCertificateID", id);
-
+	
 			app.ajax.getJson({
 				url: url,
 				callback: callback
@@ -1710,7 +1827,7 @@ var app = (function (app, $) {
 	 * the UI.
 	 */
 	function updateShippingMethodList() {
-		if ($cache.shippingMethodList.length === 0) { return; }
+		if (!$cache.shippingMethodList || $cache.shippingMethodList.length === 0) { return; }
 		var url = getShippingMethodURL(app.urls.shippingMethodsJSON);
 
 		 app.ajax.getJson({
@@ -1746,6 +1863,7 @@ var app = (function (app, $) {
 					// update the summary
 					updateSummary();
 					app.progress.hide();
+					app.tooltips.init();
 				});
 			}
 		});
@@ -1770,6 +1888,7 @@ var app = (function (app, $) {
 
 		// gift message character limitation
 		initGiftMessageBox();
+		updateShippingMethodList();
 		return null;
 	}	
 
@@ -1869,6 +1988,8 @@ var app = (function (app, $) {
 
 	//loads billing address, Gift Certificates, Coupon and Payment methods
 	function billingLoad() {
+		if( !$cache.paymentMethodId ) return;
+		
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
 			
@@ -2004,7 +2125,6 @@ var app = (function (app, $) {
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
 		$cache.addToAddressBook = $cache.checkoutForm.find("input[name$='_addToAddressBook']");
-
 		if ($cache.checkoutForm.hasClass("checkout-shipping")) {
 			// shipping only
 			$cache.useForBilling = $cache.checkoutForm.find("input[name$='_useAsBillingAddress']");
@@ -2139,6 +2259,8 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 // app.util
+//
+//
 (function (app, $) {
 
 	// sub namespace app.util.* contains utility functions
@@ -2307,10 +2429,10 @@ var app = (function (app, $) {
 		getQueryStringParams : function (qs) {
 			if(!qs || qs.length === 0) { return {}; }
 
-			var params = {};
+			var params = {}, unescapedQS = unescape(qs);
 			// Use the String::replace method to iterate over each
 			// name-value pair in the string.
-			qs.replace( new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+			unescapedQS.replace( new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
 						function ( $0, $1, $2, $3 ) {	params[ $1 ] = $3; }
 			);
 			return params;
@@ -2432,6 +2554,9 @@ var app = (function (app, $) {
 			$.extend(app.page, o);
 		},
 		params : app.util.getQueryStringParams(window.location.search.substr(1)),
+		redirect : function(newURL) {
+			var t=setTimeout("window.location.href='"+newURL+"'",0);
+		},
 		refresh : function() {
 			var t=setTimeout("window.location.assign(window.location.href);",500);
 			
@@ -2518,6 +2643,7 @@ var app = (function (app, $) {
 	function initializeCache() {
 		$cache = {
 			registryForm : $("form[name$='_giftregistry']"),
+			registryItemsTable : $("form[name$='_giftregistry_items']"),
 			registryTable : $("#registry-results")
 		};
 		$cache.copyAddress = $cache.registryForm.find("input[name$='_copyAddress']");
@@ -2572,6 +2698,16 @@ var app = (function (app, $) {
 				copyBeforeAddress();
 				$cache.addressAfterFields.filter("[name$='_country']").trigger("change");
 			}
+		});
+		
+		$cache.registryItemsTable.on("click", ".item-details a", function (e) {
+			e.preventDefault();
+			var productListID = $('input[name=productListID]').val();
+			app.quickView.show({
+				url : e.target.href,
+				source : "giftregistry",
+				productlistid : productListID
+			});
 		});
 	}
 
@@ -2633,9 +2769,11 @@ var app = (function (app, $) {
 			itemVisibleInCallback : app.captureCarouselRecommendations
 		},
 		init : function () {
+			setTimeout(function(){
 			// renders horizontal/vertical carousels for product slots
-			$('#horizontal-carousel').jcarousel(app.components.carouselSettings);
 			$('#vertical-carousel').jcarousel($.extend({vertical : true}, app.components.carouselSettings));
+			$('#horizontal-carousel').jcarousel(app.components.carouselSettings);
+			}, 1000);
 		}
 	};
 }(window.app = window.app || {}, window.dw, jQuery));
@@ -2708,17 +2846,38 @@ var app = (function (app, $) {
 		var form = $("#edit-address-form");
 		
 		form.find("input[name='format']").remove();
+		app.tooltips.init();
 		//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
 		
 		form.on("click", ".apply-button", function(e) {
+			e.preventDefault();
 			var addressId = form.find("input[name$='_addressid']");
 			addressId.val(addressId.val().replace(/[^\w+-]/g, "-"));
 			if (!form.valid()) {
 				return false; 
 			}
-						
-			app.dialog.close();
-			app.page.refresh();
+			var url = app.util.appendParamsToUrl(form.attr('action'),{format:"ajax"});
+			var applyName = form.find('.apply-button').attr('name');
+			var options = {
+				url: url,
+				data: form.serialize()+"&"+applyName+'=x',
+				type: "POST"
+			};
+			$.ajax( options ).done(function(data){
+				if( typeof(data)!=='string' ) {
+					if ( data.success ) {
+						app.dialog.close();
+						app.page.refresh();
+					} else {
+						alert(data.message);
+						return false;
+					}
+				} else {
+					$('#dialog-container').html(data);
+					app.account.init();
+					app.tooltips.init();
+				}
+			});
 		})
 		.on("click", ".cancel-button, .close-button", function(e){
 			e.preventDefault();
@@ -2785,13 +2944,13 @@ var app = (function (app, $) {
 					dataType:"json"
 				}).done(function(data){
 					if (data.status.toLowerCase()==="ok") {
-						app.page.refresh();
+						app.page.redirect(app.urls.addressesList);	
 					}
 					else if (data.message.length>0) {
 						alert(data.message);
 					}
 					else {
-						app.page.refresh();
+						app.page.refresh();	
 					}
 				});
 			}
@@ -2815,7 +2974,7 @@ var app = (function (app, $) {
 				data: data
 			})
 			.done(function(response) {
-				app.page.refresh();	
+				app.page.redirect(app.urls.paymentsList);	
 			});
 		});
 	}
@@ -2829,6 +2988,8 @@ var app = (function (app, $) {
 	app.account = {
 		init : function () {			
 			initializeEvents();
+			
+			app.giftcert.init();
 		}
 	};
 }(window.app = window.app || {}, jQuery));
@@ -2842,11 +3003,19 @@ var app = (function (app, $) {
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 		});
+		$cache.wishlistTable.on("click", ".item-details a", function (e) {
+			e.preventDefault();
+			app.quickView.show({
+				url : e.target.href,
+				source : "wishlist"
+			});
+		});
 	}
 
 	app.wishlist = {
 		init : function () {
 			$cache.editAddress = $('#editAddress');
+			$cache.wishlistTable = $('.pt_wish-list .item-list');
 			app.product.initAddToCart();
 			initializeEvents();
 			
@@ -3148,7 +3317,8 @@ var app = (function (app, $) {
 	// "" should be replaced with error message if needed
 
 	$.validator.messages.required = function ($1, ele, $3) {
-		return "";
+		var requiredText = $(ele).parents('.form-row').attr('data-required-text');
+		return requiredText||"";
 	};
 
 	app.validator = {
