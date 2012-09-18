@@ -163,7 +163,7 @@
 			<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 		</isif>
 		
-		<isif condition="${!empty(OrgProduct)}">
+		<isif condition="${'OrgProduct' in this && !empty(OrgProduct)}">
 			<iscomment>Restore current product instance</iscomment>
 			<isset name="Product" value="${OrgProduct}" scope="page"/>
 			<isset name="OrgProduct" value="${null}" scope="page"/>
