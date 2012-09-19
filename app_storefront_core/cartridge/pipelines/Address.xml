@@ -307,7 +307,9 @@ Input:
         </transition-display>
       </simple-transition>
       <node>
-        <end-node/>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="util/successjson"/>
+        </interaction-node>
         <node-display x="1" y="1"/>
       </node>
     </segment>
