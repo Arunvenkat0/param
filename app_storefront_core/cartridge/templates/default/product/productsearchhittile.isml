@@ -7,6 +7,7 @@
 
 	<iscomment>Set the product of the product search hit locally for reuse</iscomment>
 	<isset name="Product" value="${pdict.Product}" scope="page"/>
+	<isset name="OrgProduct" value="${null}" scope="page"/>
 	
 	<iscomment>
 		Get the colors selectable from the current product master or variant range if we
@@ -163,7 +164,7 @@
 			<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 		</isif>
 		
-		<isif condition="${'OrgProduct' in this && !empty(OrgProduct)}">
+		<isif condition="${!empty(OrgProduct)}">
 			<iscomment>Restore current product instance</iscomment>
 			<isset name="Product" value="${OrgProduct}" scope="page"/>
 			<isset name="OrgProduct" value="${null}" scope="page"/>
