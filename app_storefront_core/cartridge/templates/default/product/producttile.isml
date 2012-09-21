@@ -12,6 +12,7 @@
 
 <iscomment>set the product for local reuse</iscomment>
 <isset name="Product" value="${pdict.product}" scope="page"/>
+<isset name="OrgProduct" value="${null}" scope="page"/>
 
 <iscomment>set default values</iscomment>
 <isset name="showswatches" value="${false}" scope="page"/>
