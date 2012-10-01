@@ -2015,12 +2015,30 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
       <simple-transition/>
       <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="common/libStringUtilsExt.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="StringUtilsExt" key="StringUtilsExt"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b4" source-connector="error">
+          <transition target-connector="in2" target-path="./b5.1">
+            <transition-display>
+              <bend-point relative-to="source" x="4" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
         <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID + '-Handle'" key="From_0"/>
+          <key-binding alias="StringUtilsExt.classify(dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID)" key="From_0"/>
           <key-binding alias="HandlePipeline" key="To_0"/>
-          <key-binding alias="null" key="From_1"/>
-          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="'PP' + HandlePipeline + '-Handle'" key="From_1"/>
+          <key-binding alias="HandlePipelineAction" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
           <key-binding alias="null" key="To_2"/>
           <key-binding alias="null" key="From_3"/>
@@ -2046,18 +2064,23 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         </transition-display>
       </simple-transition>
       <node>
-        <call-node start-name-key="HandlePipeline"/>
+        <call-node start-name-key="HandlePipelineAction"/>
         <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+        <branch basename="b5" source-connector="error">
+          <transition target-connector="in1"/>
           <segment>
             <node>
+              <join-node/>
+              <node-display x="2" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <end-node name="error"/>
-              <node-display x="1" y="1"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -2510,11 +2533,15 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
 
 For example:
 Credit Cards processor ID = BASIC_CREDIT
-Handle Pipeline = BASIC_CREDIT-Handle
+Handle Pipeline = PPBasicCredit-Handle
 
-The handle pipeline is responsible for payment provider / payment method specific form validation and payment instrument creation.</description>
+The handle pipeline is responsible for payment provider / payment method specific form validation and payment instrument creation.
+
+Note that the IDs are capitalized and camelcased, based on underscores, in order to improve readability and consistency.
+
+Also, the Pipeline action is prefixed with 'PP' to namespace and group PaymentProcessor related pipelines.</description>
         </text-node>
-        <node-display height="2" width="2" x="8" y="28"/>
+        <node-display height="3" width="2" x="8" y="28"/>
       </node>
     </segment>
   </branch>
