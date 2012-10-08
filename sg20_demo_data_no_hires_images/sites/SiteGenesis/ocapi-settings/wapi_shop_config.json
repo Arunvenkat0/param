@@ -204,7 +204,8 @@
         {
           "resource_id":"/site",
           "read_attributes":"(**)",
-          "write_attributes":"(**)"
+          "write_attributes":"(**)",
+          "cache_time":900
         }
       ]
     }
