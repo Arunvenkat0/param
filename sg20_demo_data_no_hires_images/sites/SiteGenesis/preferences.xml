@@ -9,11 +9,6 @@
             <preference preference-id="ContentPriority">0.5</preference>
             <preference preference-id="CouponGeneratorIncludeDashes">true</preference>
             <preference preference-id="CouponGeneratorIncludeVowels">true</preference>
-            <preference preference-id="CustomerLockoutEffectivePeriod">30</preference>
-            <preference preference-id="CustomerLockoutEnabled">false</preference>
-            <preference preference-id="CustomerLoginAttemptResetTime">30</preference>
-            <preference preference-id="CustomerMaxFailedLogins">10</preference>
-            <preference preference-id="EnableSiteCustomerNumbers">false</preference>
             <preference preference-id="EnableSiteOrderNumbers">false</preference>
             <preference preference-id="MaxURLsPerFile">5000</preference>
             <preference preference-id="OrderEditExportDelay">30</preference>
@@ -24,6 +19,7 @@
             <preference preference-id="ProductChangeFrequency">daily</preference>
             <preference preference-id="ProductPriority">0.5</preference>
             <preference preference-id="SiteCatalog">storefront-catalog-en</preference>
+	    <preference preference-id="SiteCustomerList">SiteGenesis</preference>            
             <preference preference-id="SiteDefaultLocale">default</preference>
             <preference preference-id="SiteInventoryList">inventory</preference>
             <preference preference-id="SiteLocales">default</preference>
