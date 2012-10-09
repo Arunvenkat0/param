@@ -156,7 +156,7 @@
 											</isif>
 										</isloop>
 										<li class="selected-value">
-											<isif condition="${selectedSwatchValue}">
+											<isif condition="${typeof selectedSwatchValue !== 'undefined' && selectedSwatchValue}">
 												<isprint value="${selectedSwatchValue}"/>
 											</isif>
 										</li>								
@@ -194,7 +194,7 @@
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>									
 										<li class="selected-value">
-											<isif condition="${selectedSwatchValue}">
+											<isif condition="${typeof selectedSwatchValue !== 'undefined' && selectedSwatchValue}">
 												<isprint value="${selectedSwatchValue}"/>
 											</isif>
 										</li>
