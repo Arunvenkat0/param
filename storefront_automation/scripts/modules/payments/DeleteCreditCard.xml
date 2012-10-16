@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Deletes a creditCard by its position (=number)</description>
+  <parameter name="PositionNb"/>
+  <command name="waitForElementPresent" target="id=creditcards_@{PositionNb}"/>
+  <command name="click" target="xpath=id('creditcards_1')//button[@value='Delete Card']"/>
+  <command name="waitForNotElementPresent" target="id=creditcards_@{PositionNb}"/>
+</scriptmodule>

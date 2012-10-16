@@ -1,0 +1,751 @@
+<div id="container" class="simple">
+
+h1. XLT Script Developer - Script Samples
+
+<div id="toc"></div>
+<div id="content">
+
+h2. Introduction
+
+h3. About this document
+
+p. This document provides information about the sample testcases created for testing the Demandware sample online shop _SiteGenesis_ using XLT Script Developer (XLT SD). The purpose of this documentation is to provide you an insight about these sample test cases and explain how to manage them inside XLT SD. For this purpose a few sample test scripts were created, all described with preconditions, short description and the possibilities of customizing the script in order to use the script in another context.
+
+p. All Scripts were created for testing the Demandware sample online shop _SiteGenesis_.
+
+bq(information). Normally all scripts should be able to run. Sometimes some products are not available on your _SiteGenesis_ instance and you have to customize the script.
+
+h3. General information about the scripts
+
+p. All scripts are self-contained, this means they start and end at the same point. Our initial point is the home page. In most cases the internal state of _SiteGenesis_ will change back to the initial state after finishing the test (e.g. added addresses were deleted at the end of the testcase).
+
+p. Exceptions are:
+
+* *Testcases within the testcases.myaccount-package* / *TPurchaseAsRegisteredUser*- _SiteGenesis_ does not allow the deleting of registered users.
+* *TPurchaseAsGuest / TPurchaseAsRegisteredUser* - Ordered products reduce the product inventory of _SiteGenesis_.
+
+p. To avoid an unnecessary amount of changes, computed prices are checked for the correct format via _regular expressions_. Exceptions are also discussed in the chapter of individual test case as well.
+
+p. 
+
+h4(#EmptyModules). Manage Test Data
+
+p. Most scripts can be maintained by using _Manage Test Data_. In general there is a strict separation between test data that can be customized and shop data that are implemented within the script. 
+
+p. Usually the following information can be changed in _Manage Test Data_:
+* product related information (product name, price, etc.)
+* user related informationen (address, payment data, etc.)
+
+p. Within this example test suite shop related data are implemented within the scripts:
+* menu texts (e.g. "Store Locator") 
+* static texts that appear on pages (e.g. "My Account Login")
+* button texts (e.g. "Create an account now")
+
+p. If your shop texts are subject to frequent changes or if you want to implement your scripts independently from the shop language you should consider to maintain these data in _Manage Test Data_ as well. 
+
+
+bq(information). Special products (e.g. discounts) could provoke unexpected termination of the script. Please make sure that you use standard products unless it is described in another way.
+
+h3. About the testcase structure
+
+p. To ensure a good overview over all testcases are structured into separate packages:  
+
+|<_. Package|<_. Description|
+|testcases.catalog    	|Contains testcases that mostly validate catalog features, such as sorting, product images, etc.|
+|testcases.myaccount    |Testcases that are related to user management, address- and payment data are stored in this package.|
+|testcases.purchase     |Order flow testcases can be found here.|
+|testcases.search    	|Contains several testcases covering the search feature.|
+|testcases.staticpages  |Testcases for the validation of static pages.|
+
+p. There are similar package structures for script modules. 
+
+h3. What's your test purpose?
+
+p. All scripts are written to demonstrate different features of XLT SD and with different levels of complexity. The testsuite contains a variety from simple tests to more complex scenarios with dynamic data that is generated during runtime. 
+
+p. To ensure you can find easily what you are looking for the following overview gives some information about the complexity and purpose of different testcases. 
+
+h4. Validate static pages and page structures
+
+p. Some tests are responsible to make sure, pages are opened correctly and the page structure is displayed as intended. For such tests usually the page is opened and validations for characteristic elements are performed. Within these simple tests usually no parameters are used, all validations are performed with static elements. 
+
+p. Example testcases: 
+
+# "TValidateHomepage":#TValidateHomepage - opens the homepage and validates characteristic for homepage elements
+# "TValidateStoreLocatorPage":#TValidateStoreLocatorPage - opens the store locate page and validates for characteristic page elements
+
+p. Validations for certain pages can be found in several modules, e.g. ValidateLoginPageStructure.
+
+h4. Tests for certain shop features
+
+Several testcases are written to make sure that certain atomic shop features are working correctly. Examples for such testcases are:
+
+# "TSearchSimpleProduct":#TSearchSimpleProduct - searches for a simple product and validates the result page
+# "TCheckCatalogSorting":#TCheckCatalogSorting - opens a catalog page and validates the sorting feature
+# "TCheckQuickView":#TCheckQuickView - opens a catalog page and validates the behaviour of the quickview dialog
+
+p. Many of the features are used in other testcases as well (e.g. searching for products within the purchase testcases), but are tested here independently.
+
+h4. Test of complex flows
+
+p. Usually many testcases cover flows on the webpage that consist of many steps and external data. There are several testcases within the example suite that belong to this category, e.g.:
+
+# "TRegisterUser":#TRegisterUser - simple flow that registers a new user, logs out and tests the newly created account afterwards
+# "TPurchaseAsRegisteredUser":#TPurchaseAsRegisteredUser - more complex flow that registers a new user, adds address and payment data into the account and places an order
+# "TChangePaymentData":#TChangePaymentData - flow that registers a new user and adds and deletes payment data
+
+h4. Tests that contain certain features
+
+There are several features that are used in many scenarios repeatedly. Some of these and suitable examples for relevant testcases or modules are listed below:
+
+*Form validation:*
+Form validation is a common task when testing websites. Some examples can be found here:
+# "TPurchaseGiftCertificates":#TPurchaseGiftCertificates - several modules that are validating mandatory fields and correct entries
+# Module @EnterRegisterInformation@ - enters wrong data in a first step and validates the result
+
+*Dynamic data:*
+XLT SD allows to generate or store data dynamically and use them in later steps of the script. See the "XLT documentation":http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html#CommandsThatStoreData for details. 
+# "TRegisterUser":#TRegisterUser - email address and password are generated dynamically at runtime of the script
+# "TPurchaseAsGuest":#TPurchaseAsGuest - Just a product ID has to be maintained within the test data set. Product name, price and quantity are either generated dynamically or taken from the result page at runtime. This reduces the maintenance effort when product catalogs change. This testcase is an example for using the _store_-commands. Other testcases are still using the way of defining all product data externally in _Manage test data_.  
+
+
+h2. Sample Testcases
+
+p. This chapter introduces the sample testcases. Each chapter is divided into 3 subcategories:
+
+# *Precondition* - To run the testcase you have to meet the individual preconditions. They are listed in this section.
+# *Description* - A short description which actions are done in the individual testcase.
+# *What to change?* - For easy customization you need to know which parts of the script you have to change. In this paragraph you can read which parameters are editable and which modules can be added or deleted. 
+
+h3. TValidateHomepage
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. This simple testcase opens the homepage and checks for the most important elements. Besides homepage specific elements the presence of standard elements of header, footer and main navigation menu is validated.
+
+h4. What to change?
+
+_Manage Test Data_ can be used to change the titles of items within the main navigation menu. 
+
+|<_. Parameter|<_. Description|
+|MainNavigationItems                   |Titles of the main navigation item separated by an *.|
+
+h3. TValidateStoreLocatorPage
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. This simple testcase opens the page for the store locator and checks for the most important elements. Besides page specific elements the presence of standard elements of header, footer and main navigation menu is validated.
+
+h4. What to change?
+
+There are no customizable elements.
+
+
+h3. TCheckAddressManagement
+
+h4. Preconditions
+
+* no preconditions
+
+h4. Description
+
+p. Following steps are performed to test the address saving functionality in _MyAccount_.
+# *Register user* - XLT SD needs to create a new user. Therefore the given first and last name are used. Email and password are generated dynamically during runtime. 
+# *Create address* - Create a new address.
+# *Edit address* - Edit the newly created address. 
+# *Create second address* - Create the second address.
+# *Validate addresses* - Validate the elements of each address. 
+# *Delete one address* - Delete one of the addresses.
+# *Try to delete default address* - Tries to delete the remaining address, which is not allowed.
+
+p. In order to use as less address data to maintain as possible, the script just uses one data set for creation of addresses and one data set for changes. All entered information is checked.
+
+p. Last but not least XLT SD has to logout to ensure the aspect of self-containment.
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. 
+
+p. To reach the border conditions and enable the login, the parameters listed in paragraph _Login_ can be customized. In order to change the provided addresses please refer to paragraph _Addresses_. Both address data sets have the same parameter names. The only difference is the postfix _2_ at the second address (e.g. _Title_ for create-address, _Title2_ for change-address). The following table lists all important attributes: 
+
+|<_. Parameter|<_. Description|
+|\2<>. **Login**|
+|FirstName    |First name of the logged in user. Also see: Addresses|
+|LastName     |Last name of the logged in user. Also see: Addresses|
+|\2<>. **Addresses**|
+|Title        |Name of the saved address data set.|
+|FirstName    |First name used in the address. Also used for login (see: Login).|
+|LastName     |Last name used in the address. Also used for login (see: Login).|
+|Address      |Street and house number.|
+|City         |City for the address (e.g. Boston).|
+|State        |State for the address (e.g. Massachusetts).|
+|StateShort   |Short form of _State_ (e.g. MA).|
+|ZIP          |Postal code of the location.|
+|Country      |USA, Canada, Germany,...|
+|Phone        |Phone number to call back.|
+
+p. All values must be valid. If you enter invalid values the script will fail. Checking for invalid values and their error messages is done automatically.
+ 
+h3. TChangePaymentData
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. To test the address saving functionality in _MyAccount_, XLT SD needs to create a new user account first. Therefore it uses the provided first and last name and generates email address and its belonging password dynamically. 
+
+p. After creating the account XLT SD adds the following four credit cards and deletes them afterwards:
+
+# Visa
+# American Express (short: Amex)
+# Master Card (short: Master)
+# Discovery
+
+p. All entered information is validated.
+
+p. Last but not least XLT SD has to logout to ensure the aspect of self-containment.
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data.
+
+p. To reach the border conditions and enable the login the parameters listed in paragraph _Login_ can be customized. In order to change the provided credit cards please refer to paragraph _Credit Cards_. All credit cards use the same name as owner. It is the same name that belongs to the user account. Also the expiry date is the same for all credit cards. Credit card number and type must be defined individually for each credit card. You can distinguish them from each other by their postfix. The following table lists all important attributes: 
+
+|<_. Parameter|<_. Description|
+|\2<>. **Login**|
+|FirstName               |First name of the logged in user. Also see: Credit Cards|
+|LastName                |Last name of the logged in user. Also see: Credit Cards|
+|\2<>. **Credit Cards**|
+|CreditCardType                   |Credit card type (e.g. Visa, American Express,...).|
+|CreditCardType_Short             |Short form of the credit card type (e.g. Visa, Amex, ...).|
+|CreditCardNumber                 |Credit card number.|
+|CreditCardNumberLastFour         |Last four digits of the credit card number.|
+|CreditCardExpireDateMonth        |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpireDateMonthNumber  |Month of the date when the credit card expires as a number (e.g. 01, 02, ...).|
+|CreditCardExpireDateYear         |Year of the date when the credit card expires.|
+
+p. All values must be valid. If you enter invalid values the script will fail. Checking for invalid values and their error messages is done automatically.
+
+p. All four possible credit card types are used. If you want to check only one type, you only have to delete/disable the others.
+
+h3. TChangePersonalData
+
+h4. Preconditions
+
+* no preconditions
+
+h4. Description
+
+This testcase was created to check the editing functionality of _Personal Data_ in _MyAccount_. Therefore a new user is created and the following data are changed afterwards:
+
+* first name
+* last name
+* email address
+* password
+
+To validate these changed attributes XLT SD logs out and logs in again with new credentials. The welcome message is used to check first and last name.
+
+Afterwards the personal data are reseted to the initial state.
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. 
+
+p. The following table lists all attributes that are used in this script: 
+
+|<_. Parameter|<_. Description|
+|FirstName        |Initial first name.|
+|LastName         |Initial last name.|
+|ChangedFirstName |The first name @FirstName@ is changed to.|
+|ChangedLastName  |The last name @LastName@ is changed to.|
+
+p. Data for email and password are generated dynamically during runtime of the script and don't have to be provided.
+
+
+h3. TCheckCartManagement
+
+bq(information). In all of our testcases we are either searching for a product via it's complete id (generated after a product is added to cart i.e. all required attributes are selected) or using a product whose required attributes are either already selected by default or no attribute selection is required in order to add that product to cart.
+
+h4. Preconditions
+
+* second product needs a color attribute
+* products must be available
+
+h4. Description
+
+The goal of this testcase is to validate the cart and the minicart. For this purpose two products are searched via their respective _id's_ and are added to cart, their particulars are checked inside the minicart as well as in the cart. In detail the steps are as follows:
+
+# search and adds product 1
+#* checks the automatic appearance of the minicart
+#* checks name, price, total price and quantity in the minicart
+# search and adds product 2
+#* checks the automatic appearance of the minicart
+#* checks name, price, total price and quantity in the minicart
+# tries two ways of navigating to the cart
+#* via minicart
+#* via cart link
+# checks both products in the cart for name, price, total price and quantity
+# changes the color and the quantity via the _QuickView_ (product details in the cart)
+# changes the quantity in the cart
+# deletes both products
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. For each product was defined a own paragraph in Manage Test Data. The following table lists all attributes:
+
+|<_. Parameter|<_. Description|
+|\2<>. **Product 1**|
+|FirstProductID            |Unique id of product 1.|
+|FirstProductName          |Name of product 1.|
+|FirstProductPrice         |Single price of product 1.|
+|FirstProductQuantity      |Number of items of product 1.|
+|FirstProductTotalPrice    |@FirstProductQuantity@ multiplied with @FirstProductPrice@. Must be calculated manually.|
+|\2<>. **Product 2**|
+|SecondProductID            		|Unique id of product 2.|
+|SecondProductName          		|Name of product 2.|
+|SecondProductPrice         		|Single price of product 2.|
+|SecondProductQuantityInitital    	|Number of items of product 2 ( _initial value_ ).|
+|SecondProductTotalPriceInitial 	|@SecondProductQuantityInitital@ multiplied with @SecondProductPrice@. Must be calculated manually.|
+|SecondProductQuantityVariation1    |Number of items of product 2 ( _changed value_ ).|
+|SecondProductTotalPriceVariation1 	|@SecondProductQuantityVariation1@ multiplied with @SecondProductPrice@. Must be calculated manually.|
+|SecondProductQuantityVariation2    |Number of items of product 2 ( _final value_ ).|
+|SecondProductTotalPriceVariation2 	|@SecondProductQuantityVariation2@ multiplied with @SecondProductPrice@. Must be calculated manually.|
+|SecondProductFirstColor       		|Color of product 2 ( _initial color_ ).|
+|SecondProductSecondColor       	|Color of product 2 ( _final color_ ).|
+
+p. All values must be valid. If you enter invalid values the script will fail.
+  
+h3. TPurchaseAsGuest
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+* products must be in stock
+
+h4. Description
+
+In this testcase two products are added to the cart and ordered via _Guest Checkout_ using dynamic data generated at runtime. The following steps were performed:
+
+# adds two products
+# moves to the cart
+# _Guest Checkout_
+# enters shipping method and shipping address
+# enters billing method and validates billing address (same as shipping address)
+# validates order summary
+# places order
+
+p. This testcase uses dynamic data you don't have to provide in Manage Test Data. After providing the ID of the two products, the product quantity is generated dynamically. Product name and price are extracted from the product's detail page, the total price is calculated at runtime. These dynamic information are validated later on. 
+
+p. On all pages the products, addresses and personal information are checked. The billing address equals the shipping address in order to test the _useAsBillingAddress_ functionality.
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. All parameters are explained in the table below and can be edited:
+
+|<_. Parameter|<_. Description|
+|\2<>. **Product data**|
+|FirstProductID                |Id of the first product.|
+|SecondProductID               |Id of the second product.|
+|\2<>. **Shipping data**|
+|ShippingFirstName             |First name in the used address. Used for shipping and billing.|
+|ShippingLastName              |Last name in the used address. Used for shipping and billing.|
+|ShippingAddress               |Street and house number in the used address. Used for shipping and billing.|
+|ShippingCity                  |City in the used address (e.g. Boston). Used for shipping and billing.|
+|ShippingState                 |State in the used address (e.g. Massachusetts). Used for shipping and billing.|
+|ShippingStateShortName        |Short form of @ShippingState@ (e.g. MA). Used for shipping and billing.|
+|ShippingZipCode               |Postal code in the used address. Used for shipping and billing.|
+|ShippingCountry               |Country in the used address (e.g. United States). Used for shipping and billing.|
+|ShippingPhone                 |Phone number in the used address. Used for shipping and billing.|
+|ShippingMethodName            |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber          |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Payment data**|
+|CreditCardFirstName           |First name of the credit card owner.|
+|CreditCardLastName            |Last name of the credit card owner.|
+|CreditCardType                |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort           |Short form of @CreditCardType@ (e.g. Amex).|
+|CreditCardNumber              |Number of the credit card.|
+|CreditCardNumberLast4Digits   |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName     |Month of the date when the credit card expires as a word(e.g. January, February, ...).|
+|CreditCardExpiryMonthShortName |Month of the date when the credit card expries as short title (e.g. Jan, Feb, ...).|       
+|CreditCardExpiryMonthNumber    |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|        
+|CreditCardExpiryYear			|Year of the date when the credit card expires.|
+|CreditCardSecurityCode         |Security code of the credit card.|
+
+h3. TPurchaseAsRegisteredUser
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+* product must be in stock
+
+h4. Description
+
+p. In the order process of the testcase saved addresses (shipping and billing) and saved credit card information are used. Therefore this information is created after registering a new user. After the order was placed at the end of the script one of the addresses and the credit card information deleted.
+
+p. The testcase in detail runs as follows:
+
+# registeres a new user
+# adds one product to the cart
+# checkout
+# uses saved shipping address, chooses shipping method
+# uses saved billing address, uses saved credit card information
+# validates order summary
+# places order
+# deletes unnecessary information from _MyAccount_ (one address, credit card information)
+# logs out
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. Their parameters are explained in the table below:
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Shipping address**|
+|ShippingAddressTitle               |Title of the shipping address. Is used to select the correct address.|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+
+h3. TRegisterUser
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. To test the registration mechanism a new user must be registered. Afterwards the logout and login functionality is tested by checking the welcome message. During the registration process a random email address and password are generated automatically. Although very unlikely, the random email address could already be used in an existing account leading the testcase to fail.  
+
+p. This testcase is not self-contained because once a user was registered you can't delete him without the Business Manager.
+
+h4. What to change?
+
+To enter a new user you can use Manage Test Data. These are the attributes to change:
+
+|<_. Parameter|<_. Description|
+|FirstName |First name of the new user.|
+|LastName  |Last name of the new user.|
+
+
+h3. TCheckSearchFeature
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. This test case checks the search functionality of the application using all possible search queries which are:
+
+# *Search by complete id* - Searches for a product using the complete product id and leads directly to its _Product Detail Page_.
+# *Search by complete name* - Searches for a product using its complete name and leads directly to its _Product Detail Page_.
+# *Search by keyword* - Searches for a product using a keyword and displays all the products matching that keyword inside a result catalog page.
+# *Invalid search phrase (no result)* - Validates the behavior of the application when the search yields no result.
+
+bq(information). Complete id means the variation number and not the master id of the product (all of the product's required attributes are selected). Since entering an initially shown item number may lead you to a catalog result page.
+
+h4. What to change?
+
+p. Inside Manage Test Data you can change the following fields if you plan to search for different products. 
+
+|<_. Parameter      |<_. Description|
+|\2<>. **Search By ID**|
+|SearchByIDProductID     |Complete product id.|
+|SearchByIDProductName   |Product name.|
+|SearchByIDProductPrice   |Product's sale price.|
+|\2<>. **Search By Name**|
+|SearchByNameProductName |Complete product name.|
+|SearchByNameProductPrice |Product's sale price.|
+|\2<>. **Search By Keyword**|
+|SearchByKeyword  |Any keyword to search for a product (e.g. a brand name _Nikon_, _Apple_ etc.).|
+|\2<>. **No Result**|
+|InvalidSearchEntry |An invalid search string which leads to a no result page.|
+
+p. Make sure to enter valid search phrases. An invalid search entry (wrong/incomplete product id/name/keyword) may cause the test case to fail.
+
+p. After searching for product name or ID the structure of the result pages are validated, hence the search phrases must belong to simple products and not to product sets or bundles. 
+
+h3. TSearchSimpleProduct
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. Inside this test case we search for a product using it's complete ID  which leads directly to that particular _Product Detail Page_. The page structure is validated by checking for the presence of the expected elements.
+
+h4. What to change?
+
+p. Inside manage test data you can easily change the test information by editing:
+
+|<_. Parameter|<_. Description|
+|ID           |Complete product ID.|
+|Name         |Product name.|
+|Price        |Product's sale price.|
+
+p. A complete product id is required to search for a product since an incomplete one may lead to either no result or to a search catalog page.
+
+h3. TSearchProductBundle
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. Inside this test case we search for a product bundle using it's complete ID  which leads directly to that particular _Product Detail Page_. The page structure is validated by checking for the presence of the expected elements.
+
+h4. What to change?
+
+p. Inside manage test data you can easily change the test information by editing:
+
+|<_. Parameter|<_. Description|
+|ID           |Complete product ID.|
+|Name         |Product bundle name.|
+|Price        |Product bundle's sale price.|
+
+h3. TCheckCatalogNavigation
+
+h4. Preconditions
+
+p. Product category with at least 5 pages displayed initially.
+
+h4. Description
+
+p. This testcase validates the behaviour of the navigation within the product catalog. Pagination elements both on catalog and on product detail pages are checked. To run this testcase make sure you choose a subcategory with more than 5 pages, so all navigation elements are displayed.  
+
+h4. What to change?
+
+p. Inside manage test data you can easily change the test information by editing:
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber		|The number of the main category that is navigated to.|
+|MainCategoryName       |The name of the main category that is navigated to.|
+|SubCategoryName        |The subcategory the pagination is checked for.|
+|FirstProductName       |Name of the first product displayed on the catalog page.|
+|SecondProductName		|Name of the second product. The product details page is opened via the next-link on the first product page.|
+|LastProductName		|Name of the last product of the desired category.|
+|LastPageNumber			|Number of the last page.|
+|MiddlePageNumber		|Random number in between to check the next-/previous-feature.|
+
+
+h3. TCheckItemsPerPage
+
+h4. Preconditions
+
+p. Product category with at least 3 pages displayed initially.
+
+h4. Description
+
+p. This testcase opens a catalog page and selects different values of the dropdown list, that controls the displayed number of products per page. To run this test correctly you will have to choose a category which displays at least 3 pages initially. 
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. Within the testcase three options for items per page are selected. You will have to provide details for all variants including the "View all"-option:
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber						|The number of the main category that is navigated to.|
+|MainCategoryName       				|The name of the main category that is navigated to.|
+|SubCategoryName        				|The subcategory that is used for this testcase.|
+|DefaultCatalogSortMethod       		|Default sort method within the given category, e.g. Top Sellers|
+|LastPageNumber							|Last page number of the given category.|
+|CatalogMaxItems						|Number of search results for this category.|
+|DefaultItemsPerPage					|Default number of items per page.|
+|ItemsPerPageOption1					|Option 1: First value that is selected from the dropdown list.|
+|ItemsPerPageOption1FirstItem			|Option 1: Name of the first product displayed on the first catalog page.|
+|ItemsPerPageOption1LastItem			|Option 1: Name of the last product displayed on last category page.|
+|ItemsPerPageOption1LastPageNumber		|Option 1: Number of the last page.|
+|ItemsPerPageOption1LastPageItemNumber	|Option 1: Number of the first item displayed on the last page.|
+|ItemsPerPageOption2					|Option 2: Second value that is selected from the dropdown list.|
+|ItemsPerPageOption2FirstItem			|Option 2: Name of the first product displayed on the first catalog page.|
+|ItemsPerPageOption2LastItem			|Option 2: Name of the last product displayed on last category page.|
+|ItemsPerPageOption2LastPageNumber		|Option 2: Number of the last page.|
+|ItemsPerPageOption2LastPageItemNumber	|Option 2: Number of the first item displayed on the last page.|
+|ItemsPerPageOptionViewAllFirstItem		|Option 3: Name of the first product displayed on the first catalog page when selecting "View all" |
+|ItemsPerPageOptionViewAllLastItem		|Option 3: Name of the last product displayed on last category page when selecting "View all"|
+
+h3. TCatalogSorting
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. The catalog is sorted using all available options. Validation is performed by checking the very first and the very last item of each sorting method. The search result container elements are also validated for each sorting method. 
+
+p. After sorting the following validations are performed:
+# the selected option is active within the dropdown list
+# there is no change in number of hits
+# there is no change in number of items per page
+# there is no change in number of paginations
+# the correct first and last products are displayed
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. Eight different sort methods are tested. For each you will have to provide the method name and the first and last product name. The parameter names for the different search methods differ only by the number of the search method.
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|DefaultCatalogSortMethod   |Default sort method within the given category (e.g. Top Sellers) |
+|DefaultItemsPerPage		|Default number of items per page.|
+|ShownProducts				|Number of displayed products on the first page (e.g. 1-12) |
+|MaxItems					|Number of search results for this category.|
+|LastPageNumber				|Last page number of the chosen category.|
+|SortMethod1				|Name of the sort method (e.g. Top Sellers)
+|SortMethod1FirstItem		|Name of the first product displayed on the catalog page. |
+|SortMethod1LastItem		|Name of the last product on the last catalog page. |
+
+h3. TCheckColorSwatch
+
+h4. Preconditions
+
+p. Product with at least two different colors available.
+
+h4. Description
+
+p. Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. 
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|SwatchProductName   		|Name of the product for which the color swatch is being tested. |
+|SwatchDefaultColor			|Name of the default color of the chosen product. |
+|SwatchAvailableColor2		|Name of the alternative color. |
+
+h3. TCheckProductPerspectives
+
+h4. Preconditions
+
+p. Product with at least two images available.
+
+h4. Description
+
+p. This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. 
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|ProductName   				|Name of the product for which the product images are being tested. |
+|ImageNumber1				|Name of the first product image that is displayed (e.g. "12345.jpg") |
+|ImageNumber2				|Name of the second product image that is displayed (e.g. "12345.jpg") |
+
+h3. TCheckProductPerspectives
+
+h4. Preconditions
+
+p. Product with color and size attribute which is in stock.
+
+h4. Description
+
+p. This testcase checks the behaviour of the quickview. After hovering over a product image inside the catalog the quickview is opened. After selecting color and size the cart-button is enabled. In a last step the product details page is opened from the link within the quickview.
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. 
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|ProductName   				|Name of the product for which the quickview is being tested. |
+|ProductPrice				|Price of the product. |
+|ProductColor				|Color that is selected during runtime. |
+|ProductSize				|Size that is selected during runtime. |
+
+
+h4. Preconditions
+
+p. Product with at least two images available.
+
+h4. Description
+
+p. This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. 
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|ProductName   				|Name of the product for which the product images are being tested. |
+|ImageNumber1				|Name of the first product image that is displayed (e.g. "12345.jpg") |
+|ImageNumber2				|Name of the second product image that is displayed (e.g. "12345.jpg") |
+
+
+h2. How to customize the documentation?
+
+p. This sample project provides all needed information to customize this documentation. First you need to install the program _Eclipse in the Java Enterprise Edition_ ("Java EE":http://www.eclipse.org/downloads/moreinfo/jee.php). After adding this sample project to the project library in Eclipse (see _user manual_) you can generate the documentation HTML files by yourself.
+
+p. *The advantage of this:* You are able to add new paragraphs or simply add some annotations. This way you can create your own documentation. Therefore you have to modify the @*.textile@ file in the @doc@ folder. This format follows the the _WikiText_ documentation standard.
+
+p. Now you can run the ant script (@create_doc.xml@) in the doc folder via the context menu of the ant file. _Eclipse_ will generate the new HTML file considering its CSS and Java Script files (folder @css@ and @js@) to integrate the design of _Xceptance_.
+
+bq(information). You also can create your own textile files. The ant script transforms all textile files in the doc folder to HTML files.
+
+</div>
+</div>

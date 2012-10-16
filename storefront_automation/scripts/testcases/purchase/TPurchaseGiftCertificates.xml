@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>ordering giftcertificates checkout</tags>
+  <description>Purchases gift certificates:
+ 
+- logs on as customer
+- adds new address
+- adds new credit card
+- adds and submit a gift certificate
+- deletes the address
+- deletes credit card
+- logoff</description>
+  <action name="OpenStartPage"/>
+  <command name="open" value="${shopURL}"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="${shopURL}"/>
+  <action name="GoToGiftCertificates"/>
+  <command name="waitForElementPresent" target="link=Gift Certificates"/>
+  <command name="clickAndWait" target="link=Gift Certificates"/>
+  <action name="CheckCertificateForm"/>
+  <module name="modules.giftcertificate.ValidateFormForGiftCertificates">
+    <comment>The Gift Certificates form needs to be checked for functionality</comment>
+    <parameter name="Donor" value="${Donor}"/>
+    <parameter name="FriendName" value="${FriendsName}"/>
+    <parameter name="Email" value="${FriendsEmail}"/>
+    <parameter name="Message" value="${Message}"/>
+    <parameter name="Amount" value="${Amount}"/>
+  </module>
+  <action name="FillCertificate_Form"/>
+  <module name="modules.giftcertificate.FillGiftCertificatesFormAndAddToCart">
+    <parameter name="Donor" value="${Donor}"/>
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="Email" value="${FriendsEmail}"/>
+    <parameter name="Message" value="${Message}"/>
+    <parameter name="Amount" value="${Amount}"/>
+  </module>
+  <module name="modules.cart.GotoCart"/>
+  <module name="modules.giftcertificate.ValidateCartForGiftCertificates">
+    <parameter name="Donor" value="${Donor}"/>
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="FriendsEmail_Hidden" value="${FriendsEmail_Hidden}"/>
+    <parameter name="Amount" value="${Amount}"/>
+  </module>
+  <action name="CheckoutAsGuest"/>
+  <command name="clickAndWait" target="name=dwfrm_cart_unregistered"/>
+  <action name="EnterBillingAndPaymentData"/>
+  <module name="modules.giftcertificate.ValidateShippingDataInSideBarGiftCertificates">
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="FriendsEmail_Hidden" value="${FriendsEmail_Hidden}"/>
+  </module>
+  <module name="modules.checkout.billing.ValidateRequiredAddressFieldsForBilling"/>
+  <module name="modules.checkout.billing.EnterBillingAddress">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+    <parameter name="Address1" value="${Address1}"/>
+    <parameter name="Address2" value="${Address2}"/>
+    <parameter name="Country" value="${Country}"/>
+    <parameter name="State" value="${State}"/>
+    <parameter name="City" value="${City}"/>
+    <parameter name="ZipCode" value="${ZipCode}"/>
+    <parameter name="Phone" value="${Phone}"/>
+    <parameter name="Email" value="${DonorsEmail}"/>
+  </module>
+  <module name="modules.checkout.billing.ValidateRequiredPaymentFields"/>
+  <module name="modules.checkout.billing.SelectCreditCardAndEnterData">
+    <parameter name="CardName" value="${CC_Name}"/>
+    <parameter name="Type" value="${CC_Type}"/>
+    <parameter name="Number" value="${CC_Number}"/>
+    <parameter name="ExpireMonth" value="${CC_ExpiryMonth}"/>
+    <parameter name="ExpireYear" value="${CC_ExpiryYear}"/>
+    <parameter name="SecurityCode" value="${CC_SecurityCode}"/>
+  </module>
+  <action name="PlaceOrder"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <module name="modules.giftcertificate.PlaceOrderForGiftCertificates">
+    <parameter name="Donor" value="${Donor}"/>
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="FriendsEmail_Hidden" value="${FriendsEmail_Hidden}"/>
+    <parameter name="Amount" value="${Amount}"/>
+  </module>
+  <module name="modules.giftcertificate.ValidateShippingDataInSideBarGiftCertificates">
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="FriendsEmail_Hidden" value="${FriendsEmail_Hidden}"/>
+  </module>
+  <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Address" value="${Address1}"/>
+    <parameter name="City" value="${City}"/>
+    <parameter name="State_Short" value="${State_Short}"/>
+    <parameter name="ZipCode" value="${ZipCode}"/>
+    <parameter name="Country" value="${Country}"/>
+  </module>
+  <module name="modules.checkout.billing.ValidatePaymentCreditCardInSidebar">
+    <parameter name="Name" value="${CC_Name}"/>
+    <parameter name="Type" value="${CC_Type}"/>
+    <parameter name="NumberLast4" value="${CC_Number_Last4}"/>
+    <parameter name="ExpireMonthShort" value="${CC_ExpiryMonth_Number}"/>
+    <parameter name="ExpireYear" value="${CC_ExpiryYear}"/>
+  </module>
+  <action name="Guest_Receipt"/>
+  <command name="clickAndWait" target="name=submit"/>
+  <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
+  <command name="assertText" target="css=.order-date .label" value="Order Placed*"/>
+  <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Address" value="${Address1}"/>
+    <parameter name="City" value="${City}"/>
+    <parameter name="StateShort" value="${State_Short}"/>
+    <parameter name="ZipCode" value="${ZipCode}"/>
+    <parameter name="Country" value="${Country}"/>
+  </module>
+  <module name="modules.checkout.summary.ValidatePaymentCreditCardSummaryPage">
+    <parameter name="Type" value="${CC_Type}"/>
+    <parameter name="Last4" value="${CC_Number_Last4}"/>
+    <parameter name="ExpireMonthNumber" value="${CC_ExpiryMonth_Number}"/>
+    <parameter name="Expire_Year" value="${CC_ExpiryYear}"/>
+  </module>
+  <module name="modules.giftcertificate.ValidateTotalPricesOnSummaryPage">
+    <parameter name="Amount" value="$$${Amount}.00"/>
+  </module>
+  <module name="modules.giftcertificate.ValidateGiftCertificateDataOnSummaryPage">
+    <parameter name="Donor" value="${Donor}"/>
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="Email_Hidden" value="${FriendsEmail_Hidden}"/>
+    <parameter name="Message" value="${Message}"/>
+    <parameter name="Amount" value="\$\s*${Amount}.00"/>
+  </module>
+  <module name="modules.giftcertificate.ValidateShippingDataForGiftCertificatesOnSummaryPage">
+    <parameter name="FriendsName" value="${FriendsName}"/>
+    <parameter name="FriendsEmail_Hidden" value="${FriendsEmail_Hidden}"/>
+  </module>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

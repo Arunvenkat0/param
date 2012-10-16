@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks billing address data within the sidebar.
+- Name
+- Address
+- City / State / ZIP
+- Country
+
+PS: Works only for one address line</description>
+  <parameter name="Name"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="State_Short"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Country"/>
+  <command name="assertText" target="css=.mini-billing-address h3" value="*Billing Address"/>
+  <command name="assertText" target="css=.mini-billing-address .details div:first-child" value="@{Name}">
+    <comment>Validate Address Name</comment>
+  </command>
+  <command name="assertText" target="css=.mini-billing-address .details div:nth-child(2)" value="@{Address}">
+    <comment>Validate Billing Address</comment>
+  </command>
+  <command name="assertText" target="css=.mini-billing-address .details div:nth-child(3)" value="@{City}, @{State_Short} @{ZipCode}">
+    <comment>Validate City State and ZipCode</comment>
+  </command>
+  <command name="assertText" target="css=.mini-billing-address .details div:nth-child(4)" value="@{Country}">
+    <comment>Validate Billing Country Name</comment>
+  </command>
+</scriptmodule>
