@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <MainCategoryName>Womens</MainCategoryName>
+  <SubCategoryName>Clothing</SubCategoryName>
+  <FirstProductName>Cowl Neck Top</FirstProductName>
+  <SecondProductName>Sleeveless Shell.</SecondProductName>
+  <LastProductName>Drape Neck Tank with Buckles. This is a test of a very long product name that wraps beyond two lines does the product name wrap gracefully? Truncated?</LastProductName>
+  <LastPageNumber>42</LastPageNumber>
+  <MiddlePageNumber>5</MiddlePageNumber>
+  <MainCategoryNumber>2</MainCategoryNumber>
+</data>

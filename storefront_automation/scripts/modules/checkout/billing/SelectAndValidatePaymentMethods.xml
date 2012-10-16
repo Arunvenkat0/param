@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validate the elements of all possible payments methods,</description>
+  <command name="waitForElementPresent" target="xpath=id('dwfrm_billing')/fieldset[3]//div[@class='payment-method-options']">
+    <comment>Validate payment method page elements</comment>
+  </command>
+  <command name="assertElementPresent" target="id=is-CREDIT_CARD"/>
+  <command name="assertChecked" target="id=is-CREDIT_CARD"/>
+  <command name="assertElementPresent" target="id=PaymentMethod_CREDIT_CARD"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_month"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_year"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_cvn"/>
+  <command name="waitForElementPresent" target="xpath=id('dwfrm_billing')/fieldset[3]//div[@class='payment-method-options']">
+    <comment>Validate payment method page elements</comment>
+  </command>
+  <command name="assertElementPresent" target="id=is-BML"/>
+  <command name="check" target="id=is-BML">
+    <comment>Select BML as Payment Option</comment>
+  </command>
+  <command name="waitForElementPresent" target="id=PaymentMethod_BML"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_year">
+    <comment>BML Elements Validation</comment>
+  </command>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_month"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_day"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_ssn"/>
+  <command name="assertElementPresent" target="xpath=//div[contains(@class, 'bml-terms-and-conditions ')]"/>
+  <command name="assertText" target="xpath=id('PaymentMethod_BML')/div[contains(@class,'bml-terms-and-conditions')]" value="glob:*Bill Me Later® E-Sign Consent*"/>
+  <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
+  <command name="assertText" target="xpath=id('PaymentMethod_BML')//label[@for='dwfrm_billing_paymentMethods_bml_termsandconditions']" value="I have read and agree to the terms above"/>
+</scriptmodule>

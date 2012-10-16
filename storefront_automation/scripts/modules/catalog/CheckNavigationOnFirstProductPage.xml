@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the naviagation elements of very first product detail page within the catalog.</description>
+  <parameter name="FirstProductName"/>
+  <parameter name="NextProductName"/>
+  <action name="SelectFirstProduct"/>
+  <command name="assertText" target="css=.grid-tile:first-child .name-link" value="@{FirstProductName}"/>
+  <command name="clickAndWait" target="css=.grid-tile:first-child .name-link"/>
+  <command name="assertText" target="css=.breadcrumb .last" value="@{FirstProductName}"/>
+  <command name="assertText" target="css=h1.product-name" value="@{FirstProductName}"/>
+  <command name="assertNotElementPresent" target="css=.product-previous a"/>
+  <command name="waitForElementPresent" target="css=.product-next a"/>
+  <action name="SelectNextProduct"/>
+  <command name="clickAndWait" target="css=.product-next a">
+    <comment>Validation of Next Navigation Working</comment>
+  </command>
+  <command name="assertText" target="css=.breadcrumb .last" value="@{NextProductName}"/>
+  <command name="assertText" target="css=h1.product-name" value="@{NextProductName}"/>
+</scriptmodule>

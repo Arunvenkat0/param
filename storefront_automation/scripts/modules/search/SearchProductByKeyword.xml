@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Search for products using a keyword.
+
+@ Parameters
+Keyword : Any keyword to search for products. .</description>
+  <parameter name="KeyWord"/>
+  <module name="modules.search.InsertSearchText">
+    <parameter name="SearchText" value="@{KeyWord}"/>
+  </module>
+  <command name="assertText" target="css=.refinement-header" value="Refine Search"/>
+  <command name="assertText" target="css=.breadcrumb-result-text" value="*@{KeyWord}*"/>
+  <command name="assertElementPresent" target="css=.grid-tile .product-image">
+    <comment>Is there at least one product</comment>
+  </command>
+  <command name="assertTextPresent" value="@{KeyWord}*"/>
+</scriptmodule>

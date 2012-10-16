@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <FirstProductID>799927335059-1</FirstProductID>
+  <SecondProductID>25697133</SecondProductID>
+  <ShippingFirstName>Las Miranda</ShippingFirstName>
+  <ShippingLastName>den Sevilla</ShippingLastName>
+  <ShippingAddress>Marketplace 1a</ShippingAddress>
+  <ShippingCity>Boston</ShippingCity>
+  <ShippingState>Massachusetts</ShippingState>
+  <ShippingStateShortName>MA</ShippingStateShortName>
+  <ShippingZipCode>79462</ShippingZipCode>
+  <ShippingCountry>United States</ShippingCountry>
+  <ShippingPhone>781-391-6666</ShippingPhone>
+  <ShippingMethodName>2-Day Express</ShippingMethodName>
+  <ShippingMethodNumber>2</ShippingMethodNumber>
+  <CreditCardFirstName>Mr C. C.</CreditCardFirstName>
+  <CreditCardLastName>Tester</CreditCardLastName>
+  <CreditCardType>Visa</CreditCardType>
+  <CreditCardTypeShort>Visa</CreditCardTypeShort>
+  <CreditCardNumber>4111111111111111</CreditCardNumber>
+  <CreditCardNumberLast4Digits>1111</CreditCardNumberLast4Digits>
+  <CreditCardExpiryMonthName>October</CreditCardExpiryMonthName>
+  <CreditCardExpiryMonthShortName>Oct</CreditCardExpiryMonthShortName>
+  <CreditCardExpiryMonthNumber>10</CreditCardExpiryMonthNumber>
+  <CreditCardExpiryYear>2015</CreditCardExpiryYear>
+  <CreditCardSecurityCode>111</CreditCardSecurityCode>
+  <RandomEmailAddress>${RANDOM.String(6)}@varmail.de</RandomEmailAddress>
+</data>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Check the presence of navigation elements for the last product detail page within the catalog.</description>
+  <parameter name="LastProductName"/>
+  <command name="assertElementPresent" target="css=.grid-tile:last-child .product-name a">
+    <comment>Validate Last Product Presence</comment>
+  </command>
+  <command name="clickAndWait" target="css=.grid-tile:last-child .product-name a">
+    <comment>Go to Last Product</comment>
+  </command>
+  <command name="waitForText" target="css=.breadcrumb .last" value="@{LastProductName}"/>
+  <command name="assertText" target="css=h1.product-name" value="@{LastProductName}"/>
+  <command name="waitForElementPresent" target="css=.product-previous a"/>
+  <command name="assertNotElementPresent" target="css=.product-next a"/>
+</scriptmodule>

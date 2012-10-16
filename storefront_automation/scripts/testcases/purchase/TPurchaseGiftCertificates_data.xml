@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <Donor>Heinz</Donor>
+  <FriendsEmail>abc@varmail.de</FriendsEmail>
+  <FriendsEmail_Hidden>ail.de</FriendsEmail_Hidden>
+  <Message>This is a message for your gift certificate.</Message>
+  <Amount>100</Amount>
+  <FirstName>Horst</FirstName>
+  <LastName>Schlemmer</LastName>
+  <Address1>Marketplace 13</Address1>
+  <City>Jena</City>
+  <State>Non-US/Other</State>
+  <State_Short>OTHER</State_Short>
+  <ZipCode>01234</ZipCode>
+  <Country>Germany</Country>
+  <Phone>786-546-4545</Phone>
+  <DonorsEmail>pthaele@demandware.com</DonorsEmail>
+  <CC_Name>Any Name</CC_Name>
+  <CC_Type>Visa</CC_Type>
+  <CC_Type_Short>Visa</CC_Type_Short>
+  <CC_Number>4111111111111111</CC_Number>
+  <CC_Number_Last4>1111</CC_Number_Last4>
+  <CC_ExpiryMonth>January</CC_ExpiryMonth>
+  <CC_ExpiryMonth_Short>Jan</CC_ExpiryMonth_Short>
+  <CC_ExpiryMonth_Number>01</CC_ExpiryMonth_Number>
+  <CC_ExpiryYear>2015</CC_ExpiryYear>
+  <CC_SecurityCode>111</CC_SecurityCode>
+  <FriendsName>Monday TMonday</FriendsName>
+  <Address2>*</Address2>
+</data>
