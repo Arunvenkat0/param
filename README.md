@@ -28,9 +28,10 @@ Upload the resulting file to your site and import it.
     
 ## Storefront test automation
 
-Within the folder `storefront_automation` you can find a complete testsuite of automated storefront tests created with the Firefox Addon XLT Script Developer. 
-Find more [information](http://www.xceptance.com/products/xlt/what-is-xlt.html "XLT information") 
-and [download](http://www.xceptance.com/products/xlt/download.html "XLT download") about XLT on <http://www.xceptance.com>. Find more information about the testsuite itself under 
-`storefront_automation\doc\testcases_manual.html`.
-    
-## Profit
+Within the folder `storefront_automation` you can find a complete testsuite of automated storefront tests 
+created with the XLT Script Developer Firefox Addon.
+
+The documentation of the test suite can be found in *storefront_automation/doc/testcases_manual.html*.
+
+For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can 
+download the tool for free and browse the [documentation](http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html "XLT Documentation") online.
