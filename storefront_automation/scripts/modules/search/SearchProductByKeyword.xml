@@ -8,7 +8,7 @@ Keyword : Any keyword to search for products. .</description>
   <module name="modules.search.InsertSearchText">
     <parameter name="SearchText" value="@{KeyWord}"/>
   </module>
-  <command name="assertText" target="css=.refinement-header" value="Refine Search"/>
+  <command name="assertText" target="css=.refinement-header" value="regexpi:Refine Search"/>
   <command name="assertText" target="css=.breadcrumb-result-text" value="*@{KeyWord}*"/>
   <command name="assertElementPresent" target="css=.grid-tile .product-image">
     <comment>Is there at least one product</comment>

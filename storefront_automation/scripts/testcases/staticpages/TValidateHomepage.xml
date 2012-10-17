@@ -5,7 +5,6 @@
   <command name="open" value="${shopURL}"/>
   <command name="deleteAllVisibleCookies"/>
   <command name="open" value="${shopURL}"/>
-  <command name="open" value="${shopURL}"/>
   <module name="modules.staticelements.ValidateStandardPageElements"/>
   <module name="modules.staticelements.ValidateHomepageElements"/>
 </testcase>
