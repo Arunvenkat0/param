@@ -108,6 +108,50 @@ XLT SD allows to generate or store data dynamically and use them in later steps 
 # "TRegisterUser":#TRegisterUser - email address and password are generated dynamically at runtime of the script
 # "TPurchaseAsGuest":#TPurchaseAsGuest - Just a product ID has to be maintained within the test data set. Product name, price and quantity are either generated dynamically or taken from the result page at runtime. This reduces the maintenance effort when product catalogs change. This testcase is an example for using the _store_-commands. Other testcases are still using the way of defining all product data externally in _Manage test data_.  
 
+h2. Best practices for creating tests
+
+*Think*
+It's a good idea to have a specific idea in advance about the content of the testcase. Make some notes and think about the steps your testcase will contain. It will save a lot of time when creating the testcases when you're sure what you want.
+
+*Record*
+Of couse you are allowed to create your testcase from scratch by inserting commands manually. However it's often a good start to record your steps with XLT SD. That gives you a good starting point for editing the commands, insert additional ones or extracting modules.
+
+*Use modules*
+Many steps are repeated in several testcases. Validating or entering data into forms is a good example. Create reusable modules for such steps so in case changes are needed you only have to change at one place. 
+
+*Use CSS selectors*
+Using CSS selectors instead of xPath expressions leads in many cases to much easier expressions. They both are easier to create and to read afterwards. See some examples from the demo testsuite:
+
+|<_. xPath selector |<_. CSS selector|
+|@//div[@@class='product producttile']/div[@@class='name']/a[@@title="@@{Product_Name}"]@    |@.product-name a[title="@@{ProductName}"]@|
+|@//div[@@class='product producttile']/div[@@class='name']/a[@@title="@@{Product_Name}"]<br>/../..//a[@@class='swatch selected'][@@title='@@{Default_Color}']@     |@.swatch.selected img[title="@@{ProductName}, @@{DefaultColor}"]@|
+|@//input[contains(@@id, 'owner')][contains(@@class, 'required')]@	|	@input[id*="owner"].required@ |
+|@//*[@@id='pdpMain']/div[3]/div[8]/div[1]@ | @.add-to-cart@ |
+
+*Use appropriate selectors*
+This chapter does not disprove the previous one but will add some information about choosing the right selector. If certain attributes are present it might be a better idea to use alternative selectors:
+
+|<_. element information |<_. example |<_. selector in XLT SD |<_. comment|
+|element has an id attribute  | @id="foo"@	| id=foo	| the most unique and fastest selector you can use
+|element has a name attribute  | @name="foo"@	| name=foo	| keep in mind that more than one element can use the specified name
+|the element is a link  | @<a href="foo">bar</a>@	| link=bar	| keep in mind that more than one link can use the specified name
+
+Try to locate your element as specific as possible but keep in mind the HTML code can change from time to time. Locating by ID or certain classes might be more useful instead of using xPath expressions that depend on the HTML structure. 
+
+Example:
+* @xpath=id('product-content')/div[4]/ul/li/span@ - locating the element depends on the @span@ element inside of a @li@ etc.
+* @css=.product-col-2.product-detail .product-variations@ .label - this way using CSS selectors is much more flexible but specific enough to locate the correct element
+
+
+*Solve timing problems*
+Timing is a common problem when creating automated tests, especially on pages with heavy use of Javascript to add elements dynamically and build up the page step by step. A command like @assertElementPresent@ might fail at one point but would pass only a few milliseconds later. It might be a good idea to use waitFor-commands instead, e.g. @waitForElementPresent@. According to the command title it will wait for the specified element to be present. You can define a timeout for waitFor-commands wihtin the Script Developer settings. By default commands will wait for 30 seconds.
+
+*Create standalone testcases*
+Testcases should be able to run indepenendtly from each other. Testcases that require the run of another testcase as a prerequisite are difficult to handle in the daily work. it seems to be a little bit of more work at first, e.g. as you have to register a new user in several testcases and not only in one. But you can use modules for such repeating tasks and will be happy to be able to run your testcases without any dependency in single or batch mode.
+
+*Comment*
+It's always a lot of work and often seems to be a waste of time to comment all the steps of your testcase. However you will be grateful afterwards if you try to edit your testsuite after some time or several team members are working on the testcases. In the end it will save time. Really. 
+
 
 h2. Sample Testcases
 
@@ -455,6 +499,58 @@ p. All important changes without touching the structure can be made in Manage Te
 |CreditCardExpiryYear               |Year of the date when the credit card expires.|
 |CreditCardSecurityCode             |Pin on the credit card.|
 
+h3. TPurchaseGiftCertificates
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+
+h4. Description
+
+p. This testcase covers the purchase of gift certificates. 
+
+p. The testcase in detail runs as follows:
+
+# navigate to gift certificates and validate the form
+# fill the form and add to cart
+# checkout as guest
+
+h4. What to change?
+
+p. All important changes without touching the structure can be made in Manage Test Data. Their parameters are explained in the table below:
+
+|<_. Parameter|<_. Description|
+|\2<>. **Gift certificate information**|
+|Donor              	   		|Name of the donor|
+|FriendsName      				|Name of the recipient of the gift certificate|
+|FriendsEmail              	   	|Email of the recipient.|
+|FriendsEmailHidden             |Last letters of recipient큦 email address.|
+|Message              			|Message on the gift certificate.|
+|Amount     					|Amount of the gift certificate.|
+|\2<>. **Address information**|
+|FirstName            			|Donor큦 first name.|
+|LastName						|Donor큦 last name.|
+|Address1             			|Donor큦 first address line.|
+|Address2              			|Donor큦 second address line.|
+|City          					|City in the used address (e.g. Boston).|
+|State           				|State in the used address (e.g. Massachusetts).|
+|StateShort              		|Short form of @State@ (e.g. MA).|
+|ZipCode               			|Postal code in the used address.|
+|Country             			|Country of the used address (e.g. United States).|
+|Phone      					|Phone number.|
+|DonorsEmail            		|Donor큦 email address|
+|\2<>. **Payment information**|
+|CreditCardName           		|Name of the credit card owner.|
+|CreditCardType              	|Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort            |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber              	|Number of the credit card.|
+|CreditCardNumberLast4Digits	|Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonth          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort     |Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber    |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear           |Year of the date when the credit card expires.|
+|CreditCardSecurityCode         |Pin on the credit card.|
+
 h3. TRegisterUser
 
 h4. Preconditions
@@ -614,7 +710,7 @@ p. Inside Manage Test Data you can easily change the test information. Within th
 |ItemsPerPageOptionViewAllFirstItem		|Option 3: Name of the first product displayed on the first catalog page when selecting "View all" |
 |ItemsPerPageOptionViewAllLastItem		|Option 3: Name of the last product displayed on last category page when selecting "View all"|
 
-h3. TCatalogSorting
+h3. TCheckCatalogSorting
 
 h4. Preconditions
 
@@ -692,7 +788,7 @@ p. Inside Manage Test Data you can easily change the test information.
 |ImageNumber1				|Name of the first product image that is displayed (e.g. "12345.jpg") |
 |ImageNumber2				|Name of the second product image that is displayed (e.g. "12345.jpg") |
 
-h3. TCheckProductPerspectives
+h3. TCheckQuickView
 
 h4. Preconditions
 
