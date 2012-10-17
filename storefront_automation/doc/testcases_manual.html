@@ -231,6 +231,138 @@
 				<em>Manage test data</em>.  
 			</li>
 		</ol>
+		<h2 id="Bestpracticesforcreatingtests">Best practices for creating tests</h2>
+		<p>
+			<strong>Think</strong>
+			<br/>It&#8217;s a good idea to have a specific idea in advance about the content of the testcase. Make some notes and think about the steps your testcase will contain. It will save a lot of time when creating the testcases when you&#8217;re sure what you want.
+		</p>
+		<p>
+			<strong>Record</strong>
+			<br/>Of couse you are allowed to create your testcase from scratch by inserting commands manually. However it&#8217;s often a good start to record your steps with XLT SD. That gives you a good starting point for editing the commands, insert additional ones or extracting modules.
+		</p>
+		<p>
+			<strong>Use modules</strong>
+			<br/>Many steps are repeated in several testcases. Validating or entering data into forms is a good example. Create reusable modules for such steps so in case changes are needed you only have to change at one place. 
+		</p>
+		<p>
+			<strong>Use CSS selectors</strong>
+			<br/>Using CSS selectors instead of xPath expressions leads in many cases to much easier expressions. They both are easier to create and to read afterwards. See some examples from the demo testsuite:
+		</p>
+		<table>
+			<tr>
+				<th style="text-align: left;">xPath selector </th>
+				<th style="text-align: left;">CSS selector</th>
+			</tr>
+			<tr>
+				<td>
+					<code>//div[</code>
+					<code>class='product producttile']/div[</code>
+					<code>class='name']/a[</code>
+					<code>title="</code>
+					<code style="Product_Name">"]</code>    
+				</td>
+				<td>
+					<code>.product-name a[title="</code>
+					<code style="ProductName">"]</code>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<code>//div[</code>
+					<code>class='product producttile']/div[</code>
+					<code>class='name']/a[</code>
+					<code>title="</code>
+					<code style="Product_Name">"]&lt;br&gt;/../..//a[</code>
+					<code>class='swatch selected'][</code>
+					<code>title='</code>
+					<code style="Default_Color">']</code>     
+				</td>
+				<td>
+					<code>.swatch.selected img[title="</code>@{ProductName}, @@{DefaultColor}"]@
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<code>//input[contains(</code>
+					<code>id, 'owner')][contains(</code>
+					<code>class, 'required')]</code>	
+				</td>
+				<td>
+					<code>input[id*="owner"].required</code> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<code>//*[</code>
+					<code>id='pdpMain']/div[3]/div[8]/div[1]</code> 
+				</td>
+				<td>
+					<code>.add-to-cart</code> 
+				</td>
+			</tr>
+		</table>
+		<p>
+			<strong>Use appropriate selectors</strong>
+			<br/>This chapter does not disprove the previous one but will add some information about choosing the right selector. If certain attributes are present it might be a better idea to use alternative selectors:
+		</p>
+		<table>
+			<tr>
+				<th style="text-align: left;">element information </th>
+				<th style="text-align: left;">example </th>
+				<th style="text-align: left;">selector in XLT SD </th>
+				<th style="text-align: left;">comment</th>
+			</tr>
+			<tr>
+				<td>element has an id attribute  </td>
+				<td>
+					<code>id="foo"</code>	
+				</td>
+				<td>id=foo	</td>
+				<td>the most unique and fastest selector you can use</td>
+			</tr>
+			<tr>
+				<td>element has a name attribute  </td>
+				<td>
+					<code>name="foo"</code>	
+				</td>
+				<td>name=foo	</td>
+				<td>keep in mind that more than one element can use the specified name</td>
+			</tr>
+			<tr>
+				<td>the element is a link  </td>
+				<td>
+					<code>&lt;a href="foo"&gt;bar&lt;/a&gt;</code>	
+				</td>
+				<td>link=bar	</td>
+				<td>keep in mind that more than one link can use the specified name</td>
+			</tr>
+		</table>
+		<p>Try to locate your element as specific as possible but keep in mind the HTML code can change from time to time. Locating by ID or certain classes might be more useful instead of using xPath expressions that depend on the HTML structure. </p>
+		<p>Example:</p>
+		<ul>
+			<li>
+				<code>xpath=id('product-content')/div[4]/ul/li/span</code> - locating the element depends on the 
+				<code>span</code> element inside of a 
+				<code>li</code> etc.
+			</li>
+			<li>
+				<code>css=.product-col-2.product-detail .product-variations</code> .label &#8211; this way using CSS selectors is much more flexible but specific enough to locate the correct element
+			</li>
+		</ul>
+		<p>
+			<strong>Solve timing problems</strong>
+			<br/>Timing is a common problem when creating automated tests, especially on pages with heavy use of Javascript to add elements dynamically and build up the page step by step. A command like 
+			<code>assertElementPresent</code> might fail at one point but would pass only a few milliseconds later. It might be a good idea to use waitFor-commands instead, e.g. 
+			<code>waitForElementPresent</code>. According to the command title it will wait for the specified element to be present. You can define a timeout for waitFor-commands wihtin the Script Developer settings. By default commands will wait for 30 seconds.
+		</p>
+		<p>
+			<strong>Create standalone testcases</strong>
+			<br/>Testcases should be able to run indepenendtly from each other. Testcases that require the run of another testcase as a prerequisite are difficult to handle in the daily work. it seems to be a little bit of more work at first, e.g. as you have to register a new user in several testcases and not only in one. But you can use modules for such repeating tasks and will be happy to be able to run your testcases without any dependency in single or batch mode.
+		</p>
+		<p>
+			<strong>Comment</strong>
+			<br/>It&#8217;s always a lot of work and often seems to be a waste of time to comment all the steps of your testcase. However you will be grateful afterwards if you try to edit your testsuite after some time or several team members are working on the testcases. In the end it will save time. Really. 
+		</p>
 		<h2 id="SampleTestcases">Sample Testcases</h2>
 		<p>This chapter introduces the sample testcases. Each chapter is divided into 3 subcategories:</p>
 		<ol>
@@ -1030,15 +1162,163 @@
 				<td>Pin on the credit card.</td>
 			</tr>
 		</table>
-		<h3 id="TRegisterUser">TRegisterUser</h3>
+		<h3 id="TPurchaseGiftCertificates">TPurchaseGiftCertificates</h3>
 		<h4 id="Preconditions9">Preconditions</h4>
+		<ul>
+			<li>perform the test on test environment to avoid real orders</li>
+		</ul>
+		<h4 id="Description9">Description</h4>
+		<p>This testcase covers the purchase of gift certificates. </p>
+		<p>The testcase in detail runs as follows:</p>
+		<ol>
+			<li>navigate to gift certificates and validate the form</li>
+			<li>fill the form and add to cart</li>
+			<li>checkout as guest</li>
+		</ol>
+		<h4 id="Whattochange9">What to change?</h4>
+		<p>All important changes without touching the structure can be made in Manage Test Data. Their parameters are explained in the table below:</p>
+		<table>
+			<tr>
+				<th style="text-align: left;">Parameter</th>
+				<th style="text-align: left;">Description</th>
+			</tr>
+			<tr>
+				<td style="text-align: center;" colspan="2">
+					<b>Gift certificate information</b>
+				</td>
+			</tr>
+			<tr>
+				<td>Donor              	   		</td>
+				<td>Name of the donor</td>
+			</tr>
+			<tr>
+				<td>FriendsName      				</td>
+				<td>Name of the recipient of the gift certificate</td>
+			</tr>
+			<tr>
+				<td>FriendsEmail              	   	</td>
+				<td>Email of the recipient.</td>
+			</tr>
+			<tr>
+				<td>FriendsEmailHidden             </td>
+				<td>Last letters of recipient�s email address.</td>
+			</tr>
+			<tr>
+				<td>Message              			</td>
+				<td>Message on the gift certificate.</td>
+			</tr>
+			<tr>
+				<td>Amount     					</td>
+				<td>Amount of the gift certificate.</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;" colspan="2">
+					<b>Address information</b>
+				</td>
+			</tr>
+			<tr>
+				<td>FirstName            			</td>
+				<td>Donor�s first name.</td>
+			</tr>
+			<tr>
+				<td>LastName						</td>
+				<td>Donor�s last name.</td>
+			</tr>
+			<tr>
+				<td>Address1             			</td>
+				<td>Donor�s first address line.</td>
+			</tr>
+			<tr>
+				<td>Address2              			</td>
+				<td>Donor�s second address line.</td>
+			</tr>
+			<tr>
+				<td>City          					</td>
+				<td>City in the used address (e.g. Boston).</td>
+			</tr>
+			<tr>
+				<td>State           				</td>
+				<td>State in the used address (e.g. Massachusetts).</td>
+			</tr>
+			<tr>
+				<td>StateShort              		</td>
+				<td>Short form of 
+					<code>State</code> (e.g. MA).
+				</td>
+			</tr>
+			<tr>
+				<td>ZipCode               			</td>
+				<td>Postal code in the used address.</td>
+			</tr>
+			<tr>
+				<td>Country             			</td>
+				<td>Country of the used address (e.g. United States).</td>
+			</tr>
+			<tr>
+				<td>Phone      					</td>
+				<td>Phone number.</td>
+			</tr>
+			<tr>
+				<td>DonorsEmail            		</td>
+				<td>Donor�s email address</td>
+			</tr>
+			<tr>
+				<td style="text-align: center;" colspan="2">
+					<b>Payment information</b>
+				</td>
+			</tr>
+			<tr>
+				<td>CreditCardName           		</td>
+				<td>Name of the credit card owner.</td>
+			</tr>
+			<tr>
+				<td>CreditCardType              	</td>
+				<td>Type of the credit card (e.g. American Express).</td>
+			</tr>
+			<tr>
+				<td>CreditCardTypeShort            </td>
+				<td>Short form of @CreditCardType @ (e.g. Amex).</td>
+			</tr>
+			<tr>
+				<td>CreditCardNumber              	</td>
+				<td>Number of the credit card.</td>
+			</tr>
+			<tr>
+				<td>CreditCardNumberLast4Digits	</td>
+				<td>Last 4 digits of 
+					<code>CreditCardNumber</code> (Needed for validation).
+				</td>
+			</tr>
+			<tr>
+				<td>CreditCardExpiryMonth          </td>
+				<td>Month of the date when the credit card expires as a word (e.g. January, February, ...).</td>
+			</tr>
+			<tr>
+				<td>CreditCardExpiryMonthShort     </td>
+				<td>Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).</td>
+			</tr>
+			<tr>
+				<td>CreditCardExpiryMonthNumber    </td>
+				<td>Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).</td>
+			</tr>
+			<tr>
+				<td>CreditCardExpiryYear           </td>
+				<td>Year of the date when the credit card expires.</td>
+			</tr>
+			<tr>
+				<td>CreditCardSecurityCode         </td>
+				<td>Pin on the credit card.</td>
+			</tr>
+		</table>
+		<h3 id="TRegisterUser">TRegisterUser</h3>
+		<h4 id="Preconditions10">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description9">Description</h4>
+		<h4 id="Description10">Description</h4>
 		<p>To test the registration mechanism a new user must be registered. Afterwards the logout and login functionality is tested by checking the welcome message. During the registration process a random email address and password are generated automatically. Although very unlikely, the random email address could already be used in an existing account leading the testcase to fail.  </p>
 		<p>This testcase is not self-contained because once a user was registered you can&#8217;t delete him without the Business Manager.</p>
-		<h4 id="Whattochange9">What to change?</h4>
+		<h4 id="Whattochange10">What to change?</h4>
 		<p>To enter a new user you can use Manage Test Data. These are the attributes to change:</p>
 		<table>
 			<tr>
@@ -1055,9 +1335,9 @@
 			</tr>
 		</table>
 		<h3 id="TCheckSearchFeature">TCheckSearchFeature</h3>
-		<h4 id="Preconditions10">Preconditions</h4>
+		<h4 id="Preconditions11">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description10">Description</h4>
+		<h4 id="Description11">Description</h4>
 		<p>This test case checks the search functionality of the application using all possible search queries which are:</p>
 		<ol>
 			<li>
@@ -1078,7 +1358,7 @@
 		<blockquote class="information">
 			<p>Complete id means the variation number and not the master id of the product (all of the product&#8217;s required attributes are selected). Since entering an initially shown item number may lead you to a catalog result page.</p>
 		</blockquote>
-		<h4 id="Whattochange10">What to change?</h4>
+		<h4 id="Whattochange11">What to change?</h4>
 		<p>Inside Manage Test Data you can change the following fields if you plan to search for different products. </p>
 		<table>
 			<tr>
@@ -1140,13 +1420,13 @@
 		<p>Make sure to enter valid search phrases. An invalid search entry (wrong/incomplete product id/name/keyword) may cause the test case to fail.</p>
 		<p>After searching for product name or ID the structure of the result pages are validated, hence the search phrases must belong to simple products and not to product sets or bundles. </p>
 		<h3 id="TSearchSimpleProduct">TSearchSimpleProduct</h3>
-		<h4 id="Preconditions11">Preconditions</h4>
+		<h4 id="Preconditions12">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description11">Description</h4>
+		<h4 id="Description12">Description</h4>
 		<p>Inside this test case we search for a product using it&#8217;s complete ID  which leads directly to that particular 
 			<em>Product Detail Page</em>. The page structure is validated by checking for the presence of the expected elements.
 		</p>
-		<h4 id="Whattochange11">What to change?</h4>
+		<h4 id="Whattochange12">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1168,13 +1448,13 @@
 		</table>
 		<p>A complete product id is required to search for a product since an incomplete one may lead to either no result or to a search catalog page.</p>
 		<h3 id="TSearchProductBundle">TSearchProductBundle</h3>
-		<h4 id="Preconditions12">Preconditions</h4>
+		<h4 id="Preconditions13">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description12">Description</h4>
+		<h4 id="Description13">Description</h4>
 		<p>Inside this test case we search for a product bundle using it&#8217;s complete ID  which leads directly to that particular 
 			<em>Product Detail Page</em>. The page structure is validated by checking for the presence of the expected elements.
 		</p>
-		<h4 id="Whattochange12">What to change?</h4>
+		<h4 id="Whattochange13">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1195,11 +1475,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckCatalogNavigation">TCheckCatalogNavigation</h3>
-		<h4 id="Preconditions13">Preconditions</h4>
+		<h4 id="Preconditions14">Preconditions</h4>
 		<p>Product category with at least 5 pages displayed initially.</p>
-		<h4 id="Description13">Description</h4>
+		<h4 id="Description14">Description</h4>
 		<p>This testcase validates the behaviour of the navigation within the product catalog. Pagination elements both on catalog and on product detail pages are checked. To run this testcase make sure you choose a subcategory with more than 5 pages, so all navigation elements are displayed.  </p>
-		<h4 id="Whattochange13">What to change?</h4>
+		<h4 id="Whattochange14">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1240,11 +1520,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckItemsPerPage">TCheckItemsPerPage</h3>
-		<h4 id="Preconditions14">Preconditions</h4>
+		<h4 id="Preconditions15">Preconditions</h4>
 		<p>Product category with at least 3 pages displayed initially.</p>
-		<h4 id="Description14">Description</h4>
+		<h4 id="Description15">Description</h4>
 		<p>This testcase opens a catalog page and selects different values of the dropdown list, that controls the displayed number of products per page. To run this test correctly you will have to choose a category which displays at least 3 pages initially. </p>
-		<h4 id="Whattochange14">What to change?</h4>
+		<h4 id="Whattochange15">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. Within the testcase three options for items per page are selected. You will have to provide details for all variants including the &#8222;View all&#8221;-option:</p>
 		<table>
 			<tr>
@@ -1328,10 +1608,10 @@
 				<td>Option 3: Name of the last product displayed on last category page when selecting "View all"</td>
 			</tr>
 		</table>
-		<h3 id="TCatalogSorting">TCatalogSorting</h3>
-		<h4 id="Preconditions15">Preconditions</h4>
+		<h3 id="TCheckCatalogSorting">TCheckCatalogSorting</h3>
+		<h4 id="Preconditions16">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description15">Description</h4>
+		<h4 id="Description16">Description</h4>
 		<p>The catalog is sorted using all available options. Validation is performed by checking the very first and the very last item of each sorting method. The search result container elements are also validated for each sorting method. </p>
 		<p>After sorting the following validations are performed:</p>
 		<ol>
@@ -1341,7 +1621,7 @@
 			<li>there is no change in number of paginations</li>
 			<li>the correct first and last products are displayed</li>
 		</ol>
-		<h4 id="Whattochange15">What to change?</h4>
+		<h4 id="Whattochange16">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. Eight different sort methods are tested. For each you will have to provide the method name and the first and last product name. The parameter names for the different search methods differ only by the number of the search method.</p>
 		<table>
 			<tr>
@@ -1394,11 +1674,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckColorSwatch">TCheckColorSwatch</h3>
-		<h4 id="Preconditions16">Preconditions</h4>
+		<h4 id="Preconditions17">Preconditions</h4>
 		<p>Product with at least two different colors available.</p>
-		<h4 id="Description16">Description</h4>
+		<h4 id="Description17">Description</h4>
 		<p>Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.</p>
-		<h4 id="Whattochange16">What to change?</h4>
+		<h4 id="Whattochange17">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -1431,11 +1711,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckProductPerspectives">TCheckProductPerspectives</h3>
-		<h4 id="Preconditions17">Preconditions</h4>
+		<h4 id="Preconditions18">Preconditions</h4>
 		<p>Product with at least two images available.</p>
-		<h4 id="Description17">Description</h4>
+		<h4 id="Description18">Description</h4>
 		<p>This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.</p>
-		<h4 id="Whattochange17">What to change?</h4>
+		<h4 id="Whattochange18">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -1467,12 +1747,12 @@
 				<td>Name of the second product image that is displayed (e.g. &#8222;12345.jpg&#8221;) </td>
 			</tr>
 		</table>
-		<h3 id="TCheckProductPerspectives2">TCheckProductPerspectives</h3>
-		<h4 id="Preconditions18">Preconditions</h4>
+		<h3 id="TCheckQuickView">TCheckQuickView</h3>
+		<h4 id="Preconditions19">Preconditions</h4>
 		<p>Product with color and size attribute which is in stock.</p>
-		<h4 id="Description18">Description</h4>
+		<h4 id="Description19">Description</h4>
 		<p>This testcase checks the behaviour of the quickview. After hovering over a product image inside the catalog the quickview is opened. After selecting color and size the cart-button is enabled. In a last step the product details page is opened from the link within the quickview.</p>
-		<h4 id="Whattochange18">What to change?</h4>
+		<h4 id="Whattochange19">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -1508,11 +1788,11 @@
 				<td>Size that is selected during runtime. </td>
 			</tr>
 		</table>
-		<h4 id="Preconditions19">Preconditions</h4>
+		<h4 id="Preconditions20">Preconditions</h4>
 		<p>Product with at least two images available.</p>
-		<h4 id="Description19">Description</h4>
+		<h4 id="Description20">Description</h4>
 		<p>This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.</p>
-		<h4 id="Whattochange19">What to change?</h4>
+		<h4 id="Whattochange20">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
