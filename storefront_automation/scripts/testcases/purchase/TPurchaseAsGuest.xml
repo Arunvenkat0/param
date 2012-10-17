@@ -31,7 +31,7 @@
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="FirstProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
-  <command name="storeEval" target="&quot;$&quot; + (${FirstProductQuantity}*parseFloat('${FirstProductPrice}'.substring(1))).toFixed(2)" value="FirstProductTotalPrice">
+  <command name="storeEval" target="'$' + (${FirstProductQuantity}*parseFloat('${FirstProductPrice}'.substring(1))).toFixed(2)" value="FirstProductTotalPrice">
     <comment>Calculate the total price and store the result.</comment>
   </command>
   <module name="modules.cart.AddProductToCart">
