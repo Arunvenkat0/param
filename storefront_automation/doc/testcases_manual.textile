@@ -524,21 +524,21 @@ p. All important changes without touching the structure can be made in Manage Te
 |Donor              	   		|Name of the donor|
 |FriendsName      				|Name of the recipient of the gift certificate|
 |FriendsEmail              	   	|Email of the recipient.|
-|FriendsEmailHidden             |Last letters of recipient큦 email address.|
+|FriendsEmailHidden             |Last letters of recipient's email address.|
 |Message              			|Message on the gift certificate.|
 |Amount     					|Amount of the gift certificate.|
 |\2<>. **Address information**|
-|FirstName            			|Donor큦 first name.|
-|LastName						|Donor큦 last name.|
-|Address1             			|Donor큦 first address line.|
-|Address2              			|Donor큦 second address line.|
+|FirstName            			|Donor's first name.|
+|LastName						|Donor's last name.|
+|Address1             			|Donor's first address line.|
+|Address2              			|Donor's second address line.|
 |City          					|City in the used address (e.g. Boston).|
 |State           				|State in the used address (e.g. Massachusetts).|
 |StateShort              		|Short form of @State@ (e.g. MA).|
 |ZipCode               			|Postal code in the used address.|
 |Country             			|Country of the used address (e.g. United States).|
 |Phone      					|Phone number.|
-|DonorsEmail            		|Donor큦 email address|
+|DonorsEmail            		|Donor's email address|
 |\2<>. **Payment information**|
 |CreditCardName           		|Name of the credit card owner.|
 |CreditCardType              	|Type of the credit card (e.g. American Express).|
