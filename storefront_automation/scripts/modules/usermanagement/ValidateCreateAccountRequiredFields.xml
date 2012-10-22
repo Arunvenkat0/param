@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks if mandatory fields are marked as required on the page for creating a new user account.</description>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_firstname.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_lastname.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_email.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_emailconfirm.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_password.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_login_passwordconfirm.required"/>
+</scriptmodule>

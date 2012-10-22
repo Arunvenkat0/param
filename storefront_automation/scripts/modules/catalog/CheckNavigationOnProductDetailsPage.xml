@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>In the detail product view you can switch to the product before and to the product next. Exceptions are:
+- there is no product before
+- there is no product next
+
+Approach:
+- First Product (check only navigation next exists)
+- Second Product (check next and previous nav exists)
+- Back to product list and navigate to last product (check no next but previous)</description>
+  <parameter name="FirstProductName"/>
+  <parameter name="SecondProductName"/>
+  <parameter name="LastProductName"/>
+  <parameter name="SubCategoryName"/>
+  <module name="modules.catalog.CheckNavigationOnFirstProductPage">
+    <parameter name="FirstProductName" value="@{FirstProductName}"/>
+    <parameter name="NextProductName" value="@{SecondProductName}"/>
+  </module>
+  <module name="modules.catalog.CheckNavigationOnMiddleProductPage">
+    <parameter name="NavigateToProduct" value="previous"/>
+    <parameter name="ProductName" value="@{FirstProductName}"/>
+  </module>
+  <command name="clickAndWait" target="link=@{SubCategoryName}">
+    <comment>Open subcategory again - first page.</comment>
+  </command>
+  <command name="waitForElementPresent" target="css=.page-last"/>
+  <command name="click" target="css=.page-last">
+    <comment>Click last page link.</comment>
+  </command>
+  <command name="waitForElementPresent" target="css=.page-first"/>
+  <module name="modules.catalog.CheckNavigationOnLastProductPage">
+    <parameter name="LastProductName" value="@{LastProductName}"/>
+  </module>
+</scriptmodule>

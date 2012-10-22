@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Tries to delete the default address. Checks if the number of addresses is equal before and after clicking the delete link.</description>
+  <command name="storeXpathCount" target="id('primary')/div/ul/li" value="AddressCount"/>
+  <command name="clickAndWait" target="link=Delete"/>
+  <command name="assertXpathCount" target="id('primary')/div/ul/li" value="${AddressCount}"/>
+</scriptmodule>

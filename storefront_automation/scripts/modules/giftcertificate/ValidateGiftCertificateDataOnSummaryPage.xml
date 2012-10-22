@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>This module checks the gift certificate details in the section 'Thank you for your order'</description>
+  <parameter name="Donor"/>
+  <parameter name="FriendsName"/>
+  <parameter name="Email_Hidden"/>
+  <parameter name="Message"/>
+  <parameter name="Amount"/>
+  <command name="waitForText" target="css=.order-gift-cert-attributes .label" value="Gift Certificate"/>
+  <command name="waitForText" target="css=.order-gift-cert-attributes .order-gift-cert-to .value" value="regexp:@{FriendsName}\s*\**@{Email_Hidden}"/>
+  <command name="waitForText" target="css=.order-gift-cert-attributes .order-gift-cert-from .value" value="@{Donor}"/>
+  <command name="waitForText" target="css=.order-gift-cert-attributes + td" value="regexp:@{Amount}"/>
+  <command name="waitForText" target="css=.order-shipment-gift-message-header" value="glob:Gift Message:"/>
+  <command name="waitForText" target="css=.order-shipment-gift-message" value="@{Message}"/>
+</scriptmodule>

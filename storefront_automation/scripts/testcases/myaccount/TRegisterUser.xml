@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>customer registration</tags>
+  <description>Registers a new customer.
+Checks if the new user can login by logging out and logging in again.</description>
+  <action name="OpenStartPage"/>
+  <command name="open" value="${shopURL}"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="${shopURL}"/>
+  <action name="RegisterUser"/>
+  <module name="modules.usermanagement.RegisterNewUser">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+  </module>
+  <action name="Logout">
+    <comment>Logout and check if user is directed to the login page.</comment>
+  </action>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <module name="modules.usermanagement.ValidateLoginPageStructure"/>
+  <action name="LoginRegisteredUser">
+    <comment>Login again with the created account and check if the user is directed to the welcome page.</comment>
+  </action>
+  <module name="modules.usermanagement.LoginOnLoginPage">
+    <parameter name="Email" value="${Email}"/>
+    <parameter name="Password" value="${Password}"/>
+  </module>
+  <module name="modules.usermanagement.ValidateWelcomePage">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+  </module>
+  <action name="LogoutAgain">
+    <comment>Logout again.</comment>
+  </action>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <module name="modules.usermanagement.ValidateLoginPageStructure"/>
+  <action name="Return2Home">
+    <comment>Go back to homepage.</comment>
+  </action>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

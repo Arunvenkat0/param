@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>This module checks if the confirm email must equal the email.</description>
+  <parameter name="Email"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="nomatch@demandware.com"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="waitForText" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail + span" value="The email address doesn't match your friend's email."/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
+</scriptmodule>

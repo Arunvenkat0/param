@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Registeres a user by creating a new account. During the registration process email and password are generated automatically.</description>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <action name="ClickRegisterLink">
+    <comment>Click the register link and check if all elements are present for creating an account.</comment>
+  </action>
+  <command name="clickAndWait" target="link=Register">
+    <comment>Open the register link within the page header.</comment>
+  </command>
+  <module name="modules.usermanagement.ValidateCreateAccountPageStructure"/>
+  <module name="modules.usermanagement.ValidateCreateAccountRequiredFields"/>
+  <action name="CreateAccount">
+    <comment>Generates email and password, enters account information and creates account.</comment>
+  </action>
+  <command name="store" target="${RANDOM.String(8)}@varmail.de" value="Email">
+    <comment>Generates a random email address.</comment>
+  </command>
+  <command name="store" target="${RANDOM.String(7)}" value="Password">
+    <comment>Generates a random password.</comment>
+  </command>
+  <module name="modules.usermanagement.EnterRegisterInformation">
+    <parameter name="FirstName" value="@{FirstName}"/>
+    <parameter name="LastName" value="@{LastName}"/>
+    <parameter name="EmailWrong" value="abcde.de"/>
+    <parameter name="EmailCorrect" value="${Email}"/>
+    <parameter name="PasswordTooShort" value="pass"/>
+    <parameter name="PasswordCorrect" value="${Password}"/>
+  </module>
+  <module name="modules.usermanagement.ValidateWelcomePage">
+    <parameter name="FirstName" value="@{FirstName}"/>
+    <parameter name="LastName" value="@{LastName}"/>
+  </module>
+</scriptmodule>

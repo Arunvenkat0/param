@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Logs a customer out using the logout-link on the welcome page. Checks if the customer name disappears within the page header.</description>
+  <command name="waitForElementPresent" target="link=Logout"/>
+  <command name="clickAndWait" target="link=Logout"/>
+  <command name="assertText" target="css=.user-login" value="Login"/>
+  <command name="assertText" target="css=.user-register" value="Register"/>
+</scriptmodule>

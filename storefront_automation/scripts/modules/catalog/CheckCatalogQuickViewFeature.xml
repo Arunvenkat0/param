@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the quickview behaviour:
+- window is opened when hovering over the product image on catalog pages
+- product name and price is displayed correctly
+- cart-button is disabled initially
+- default color is selected
+- size is selected
+- cart button is enabled</description>
+  <parameter name="ProductName"/>
+  <parameter name="ProductColor"/>
+  <parameter name="ProductSize"/>
+  <parameter name="ProductPrice"/>
+  <action name="OpenQuickview"/>
+  <module name="modules.catalog.OpenQuickView">
+    <parameter name="ProductName" value="@{ProductName}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductInQuickView">
+    <parameter name="ProductName" value="@{ProductName}"/>
+    <parameter name="ProductPrice" value="@{ProductPrice}"/>
+  </module>
+  <action name="SelectSize"/>
+  <module name="modules.catalog.CheckQuickviewAndAddToCartButton">
+    <parameter name="Color" value="@{ProductColor}"/>
+    <parameter name="Size" value="@{ProductSize}"/>
+  </module>
+  <action name="SwitchToDetails"/>
+  <module name="modules.catalog.QuickViewSwitchToDetailsPage">
+    <parameter name="ProductName" value="@{ProductName}"/>
+  </module>
+</scriptmodule>

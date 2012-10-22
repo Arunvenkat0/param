@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the mandatory fields of the gift certificates form.</description>
+  <parameter name="Donor"/>
+  <parameter name="FriendName"/>
+  <parameter name="Email"/>
+  <parameter name="Message"/>
+  <parameter name="Amount"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_from.input-text.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipient.input-text.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipientEmail.input-text.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail.input-text.required"/>
+  <command name="assertElementPresent" target="id=dwfrm_giftcert_purchase_message"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_amount.input-text.required"/>
+  <action name="LeaveAllEntryFieldsEmptyAndSubmit"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_from.input-text.required.error"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipient.input-text.required.error"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipientEmail.input-text.required.error"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail.input-text.required.error"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_amount.input-text.required.error"/>
+  <action name="LeaveDonorNameEmpty"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipient" value="@{FriendName}"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipientEmail" value="@{Email}"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_message" value="@{Message}"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_amount" value="@{Amount}"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="waitForElementPresent" target="css=#dwfrm_giftcert_purchase_from.input-text.required.error"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_from" value="@{Donor}"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_from.input-text.required"/>
+  <action name="LeaveRecipientNameEmpty"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipient" value=""/>
+  <command name="click" target="id=dwfrm_giftcert_purchase_message"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipient.input-text.required.error"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipient" value="@{FriendName}"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipient.input-text.required"/>
+  <action name="LeaveRecipientEmailEmpty"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipientEmail" value=""/>
+  <command name="click" target="id=dwfrm_giftcert_purchase_message"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipientEmail.input-text.required.error"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_recipientEmail" value="@{Email}"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipientEmail.input-text.required"/>
+  <action name="LeaveRecipientConfirmationEmailEmpty"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value=""/>
+  <command name="click" target="id=dwfrm_giftcert_purchase_message"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail.input-text.required.error"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail.input-text.required"/>
+  <action name="LeaveAmountEmpty"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_amount" value=""/>
+  <command name="click" target="id=dwfrm_giftcert_purchase_message"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_amount.input-text.required.error"/>
+  <command name="click" target="id=AddToBasketButton"/>
+  <command name="type" target="id=dwfrm_giftcert_purchase_amount" value="@{Amount}"/>
+  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_amount.input-text.required"/>
+</scriptmodule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Enters address data into the entry fields.</description>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <parameter name="Address1"/>
+  <parameter name="Address2"/>
+  <parameter name="Country"/>
+  <parameter name="State"/>
+  <parameter name="City"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Phone"/>
+  <command name="type" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]" value="@{FirstName}"/>
+  <command name="type" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')]" value="@{LastName}"/>
+  <command name="type" target="xpath=//input[contains(@id, 'address1')]" value="@{Address1}"/>
+  <command name="select" target="xpath=//select[contains(@id, 'country')]" value="label=@{Country}"/>
+  <command name="select" target="xpath=//select[contains(@id, 'state')]" value="label=@{State}"/>
+  <command name="type" target="xpath=//input[contains(@id, 'city')]" value="@{City}"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="@{ZipCode}"/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="@{Phone}"/>
+</scriptmodule>

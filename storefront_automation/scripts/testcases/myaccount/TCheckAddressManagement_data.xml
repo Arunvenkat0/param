@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <AddressTitle>Home address</AddressTitle>
+  <FirstName>Horst</FirstName>
+  <LastName>Schlemmer</LastName>
+  <Address>5 Wall Street</Address>
+  <City>Burlington</City>
+  <State>Massachusetts</State>
+  <StateShort>MA</StateShort>
+  <ZIP>01803</ZIP>
+  <Country>United States</Country>
+  <Phone>978-555-5555</Phone>
+  <AddressTitle2>Office address</AddressTitle2>
+  <FirstName2>Anneliese</FirstName2>
+  <LastName2>Schmidt</LastName2>
+  <Address2>1 Broadway</Address2>
+  <City2>Cambridge</City2>
+  <State2>Massachusetts</State2>
+  <StateShort2>MA</StateShort2>
+  <ZIP2>02142</ZIP2>
+  <Country2>United States</Country2>
+  <Phone2>781-555-5555</Phone2>
+</data>
