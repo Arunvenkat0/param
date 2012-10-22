@@ -29,7 +29,7 @@ Upload the resulting file to your site and import it.
 ## Storefront test automation
 
 Within the folder `storefront_automation` you can find a complete testsuite of automated storefront tests 
-created with the XLT Script Developer Firefox Addon.
+created with the XLT Script Developer Firefox Addon. Watch this [screencast](http://youtu.be/Ykx4DcKo-mc) for a quick start.
 
 The documentation of the test suite can be found in `storefront_automation/doc/testcases_manual.html`. It also explains how to create a new
 version of the documentation based on your latest changes.
