@@ -60,15 +60,6 @@
         </preferences>
     </payment-processor>
 
-    <payment-processor processor-id="TNSI">
-        <preferences>
-            <all-instances/>
-            <development/>
-            <staging/>
-            <production/>
-        </preferences>
-    </payment-processor>
-
     <payment-processor processor-id="VERISIGN_CREDIT">
         <description>Verisign online credit card authorization (test and production systems).</description>
         <preferences>
