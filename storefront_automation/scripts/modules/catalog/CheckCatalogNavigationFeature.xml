@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks navigation feature in pagination of category pages and on product detail pages.
+
+@Parameter
+MainCategoryName: name of the main category to open
+SubCategoryName: name of the sub category to open
+FirstProductName: name of the first product displayed within the sub category
+SecondProductName: name of the second product displayed within the sub category
+LastProductName: name of the last product displayed within the sub category
+LastPageNumber: number of the last page of this category
+MiddlePageNumber: number of the middle page to test navigation elements</description>
+  <parameter name="MainCategoryName"/>
+  <parameter name="SubCategoryName"/>
+  <parameter name="FirstProductName"/>
+  <parameter name="SecondProductName"/>
+  <parameter name="LastProductName"/>
+  <parameter name="LastPageNumber"/>
+  <parameter name="MiddlePageNumber"/>
+  <command name="clickAndWait" target="link=@{MainCategoryName}"/>
+  <command name="click" target="link=@{SubCategoryName}">
+    <comment>Page with more navigation elements</comment>
+  </command>
+  <module name="modules.catalog.CheckCatalogNavigationOnCategoryPage">
+    <parameter name="SubCategoryName" value="@{SubCategoryName}"/>
+    <parameter name="LastPageNumber" value="@{LastPageNumber}"/>
+    <parameter name="MiddlePageNumber" value="@{MiddlePageNumber}"/>
+  </module>
+  <module name="modules.catalog.CheckNavigationOnProductDetailsPage">
+    <parameter name="FirstProductName" value="@{FirstProductName}"/>
+    <parameter name="SecondProductName" value="@{SecondProductName}"/>
+    <parameter name="LastProductName" value="@{LastProductName}"/>
+    <parameter name="SubCategoryName" value="@{SubCategoryName}"/>
+  </module>
+</scriptmodule>

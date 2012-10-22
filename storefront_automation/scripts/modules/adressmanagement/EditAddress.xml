@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Updates a previously defined address. Checks for required fields and enters ne data.</description>
+  <parameter name="Position"/>
+  <parameter name="Title"/>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="State"/>
+  <parameter name="Zip"/>
+  <parameter name="Country"/>
+  <parameter name="Phone"/>
+  <action name="AddressManagement_EditAddress"/>
+  <command name="clickAndWait" target="link=Edit"/>
+  <command name="waitForText" target="//*[@id='editprofile']/h3" value="Edit an Address (* = required)"/>
+  <command name="waitForElementPresent" target="xpath=id('dwfrm_profile_address_addressid')"/>
+  <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses"/>
+  <command name="type" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
+  <module name="modules.adressmanagement.EnterAddressData">
+    <parameter name="FirstName" value="@{FirstName}"/>
+    <parameter name="LastName" value="@{LastName}"/>
+    <parameter name="Address1" value="@{Address}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="@{Country}"/>
+    <parameter name="State" value="@{State}"/>
+    <parameter name="City" value="@{City}"/>
+    <parameter name="ZipCode" value="@{Zip}"/>
+    <parameter name="Phone" value="@{Phone}"/>
+  </module>
+  <action name="AddressManagement_Apply"/>
+  <command name="clickAndWait" target="id=applyBtnEdit"/>
+</scriptmodule>
