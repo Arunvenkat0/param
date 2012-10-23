@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the credit card information on summary page for responsive design:
+Type
+Last4 = Number with hidden digits
+Expire Month as Number
+Expire Year</description>
+  <parameter name="Type"/>
+  <parameter name="Last4"/>
+  <parameter name="ExpireMonthNumber"/>
+  <parameter name="ExpireYear"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="*@{Type}*"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="*@{Last4}*"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="*Exp.@{ExpireMonthNumber}.@{ExpireYear}*"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>
+</scriptmodule>
