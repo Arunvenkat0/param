@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the page structure of the login page in responsive design.</description>
+  <command name="assertElementPresent" target="css=.secondary-navigation">
+    <comment>Validates the presence of the left navigation element.</comment>
+  </command>
+  <command name="assertText" target="css=#primary h1" value="Checkout Login">
+    <comment>Validates the headline.</comment>
+  </command>
+  <command name="assertXpathCount" target="id('primary')//div[contains(@class, 'login-box')]" value="6">
+    <comment>Validates the correct number of containers/boxes.</comment>
+  </command>
+</scriptmodule>
