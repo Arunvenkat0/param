@@ -13,11 +13,11 @@
 			
 			<fieldset>
 			
-				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" maxlength="40" size="40"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" maxlength="40" size="40" attribute1="autocomplete" value1="off"/>
 				
 				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.type}" type="select"/>
 				
-				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" p_dynamic="true" type="input" maxlength="16" size="17"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" p_dynamic="true" type="input" maxlength="16" size="17" attribute1="autocomplete" value1="off"/>
 				
 				<div class="form-label-text">
 					${Resource.msg('paymentinstrumentdetails.expires','account',null)}

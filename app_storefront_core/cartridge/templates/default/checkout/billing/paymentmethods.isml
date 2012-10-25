@@ -77,11 +77,11 @@
 				
 			</isif>
 	
-	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off"/>
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select"/>
 	    	
-	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/>
 	
 			<span class="form-label-text"><span class="required-indicator">•</span>Expiration Date:</span>
 			
@@ -89,7 +89,7 @@
 			
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
 	
-	   		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn"/>
+	   		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off"/>
 		    
 		    <div class="form-field-tooltip cvn-tip">
 		    	(<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
