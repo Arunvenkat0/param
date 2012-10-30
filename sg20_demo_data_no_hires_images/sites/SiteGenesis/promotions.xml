@@ -36,6 +36,24 @@
         </global-excluded-products>
     </global-promotion-settings>
 
+    <promotion promotion-id="10%offordersover150">
+        <enabled-flag>false</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">Get 10% Off Orders when Spending $150</name>
+        <callout-msg xml:lang="x-default">Get 10% Off Orders when Spending $150</callout-msg>
+        <order-promotion-rule>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>150.0</threshold>
+                    <percentage>10.0</percentage>
+                </discount>
+            </discounts>
+            <enable-upsells>true</enable-upsells>
+            <upsell-threshold>25.0</upsell-threshold>
+        </order-promotion-rule>
+    </promotion>
+
     <promotion promotion-id="10off-InStyle">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
