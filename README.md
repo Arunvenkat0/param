@@ -36,3 +36,4 @@ version of the documentation based on your latest changes.
 
 For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can 
 download the tool for free and browse the [documentation](http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html "XLT Documentation") online.
+

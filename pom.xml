@@ -14,10 +14,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dw.ecom</groupId>
     <artifactId>refapp2</artifactId>
-    <name>SiteGenesis</name>
+    <name>SiteGenesis2</name>
     <packaging>pom</packaging>
-    <version>13.1.0.1-SNAPSHOT</version>
-    <description>SiteGenesis</description>
+    <version>12.6.2.3-SNAPSHOT</version>
+    <description>the new refapp</description>
 
     <properties>
         <dw.site.name>sitegenesis2</dw.site.name>
@@ -60,5 +60,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <developers>
+        <developer>
+            <id>cdecelles</id>
+            <name>Chris Decelles</name>
+            <email>cdecelles@demandware.com</email>
+            <timezone>EST</timezone>
+        </developer>
+    </developers>
 
 </project>
