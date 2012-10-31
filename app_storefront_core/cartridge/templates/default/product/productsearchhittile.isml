@@ -7,6 +7,7 @@
 
 	<iscomment>Set the product of the product search hit locally for reuse</iscomment>
 	<isset name="Product" value="${pdict.Product}" scope="page"/>
+	<isset name="OrgProduct" value="${null}" scope="page"/>
 	
 	<iscomment>
 		Get the colors selectable from the current product master or variant range if we

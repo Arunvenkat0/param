@@ -84,23 +84,39 @@
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                         </node>
-                        <transition target-connector="in1" target-path="../b4.1"/>
+                        <transition target-connector="in1" target-path="../b5.1"/>
                       </segment>
                     </branch>
                   </node>
                   <simple-transition>
                     <transition-display>
                       <bend-point relative-to="source" x="2" y="0"/>
-                      <bend-point relative-to="target" x="0" y="-1"/>
                     </transition-display>
                   </simple-transition>
                   <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="ScriptFile" value="common/libStringUtilsExt.ds"/>
+                      <key-binding alias="null" key="ScriptLog"/>
+                      <key-binding alias="StringUtilsExt" key="StringUtilsExt"/>
+                    </pipelet-node>
+                    <node-display x="1" y="2"/>
+                    <branch basename="b3" source-connector="error">
+                      <transition target-connector="in2" target-path="./b4.1">
+                        <transition-display>
+                          <bend-point relative-to="source" x="2" y="0"/>
+                        </transition-display>
+                      </transition>
+                    </branch>
+                  </node>
+                  <simple-transition/>
+                  <node>
                     <pipelet-node custom-name="Authorization Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
-                      <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID + '-Authorize'" key="From_0"/>
                       <key-binding alias="AuthorizationPipeline" key="To_0"/>
-                      <key-binding alias="null" key="From_1"/>
-                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="'PP' + AuthorizationPipeline + '-Authorize'" key="From_1"/>
+                      <key-binding alias="AuthorizationPipelineAction" key="To_1"/>
                       <key-binding alias="null" key="From_2"/>
                       <key-binding alias="null" key="To_2"/>
                       <key-binding alias="null" key="From_3"/>
@@ -117,8 +133,9 @@
                       <key-binding alias="null" key="To_8"/>
                       <key-binding alias="null" key="From_9"/>
                       <key-binding alias="null" key="To_9"/>
+                      <key-binding alias="StringUtilsExt.classify(dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID)" key="From_0"/>
                     </pipelet-node>
-                    <node-display x="1" y="1"/>
+                    <node-display x="0" y="1"/>
                   </node>
                   <simple-transition>
                     <transition-display>
@@ -126,23 +143,23 @@
                     </transition-display>
                   </simple-transition>
                   <node>
-                    <call-node start-name-key="AuthorizationPipeline"/>
+                    <call-node start-name-key="AuthorizationPipelineAction"/>
                     <node-display x="0" y="1"/>
-                    <branch basename="b3" source-connector="error">
-                      <transition target-connector="in">
-                        <transition-display>
-                          <bend-point relative-to="target" x="0" y="-2"/>
-                          <bend-point relative-to="target" x="0" y="-1"/>
-                        </transition-display>
-                      </transition>
+                    <branch basename="b4" source-connector="error">
+                      <transition target-connector="in1"/>
                       <segment>
                         <node>
+                          <join-node/>
+                          <node-display x="1" y="1"/>
+                        </node>
+                        <simple-transition/>
+                        <node>
                           <end-node name="error"/>
-                          <node-display x="1" y="2"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>
-                    <branch basename="b4" source-connector="authorized">
+                    <branch basename="b5" source-connector="authorized">
                       <transition target-connector="in1">
                         <transition-display>
                           <bend-point relative-to="target" x="1" y="0"/>
@@ -151,7 +168,7 @@
                       <segment>
                         <node>
                           <join-node/>
-                          <node-display x="-1" y="1"/>
+                          <node-display x="-1" y="-1"/>
                         </node>
                         <transition target-connector="loop" target-path="../..">
                           <transition-display>
@@ -161,7 +178,7 @@
                         </transition>
                       </segment>
                     </branch>
-                    <branch basename="b5" source-connector="not_supported">
+                    <branch basename="b6" source-connector="not_supported">
                       <transition target-connector="in">
                         <transition-display>
                           <bend-point relative-to="target" x="0" y="-1"/>
@@ -788,7 +805,11 @@
 
 For example:
 Credit Cards processor ID = BASIC_CREDIT
-Authorization Pipeline = BASIC_CREDIT-Authorize
+Authorization Pipeline = PPBasicCredit-Authorize
+
+Note that the IDs are capitalized and camelcased, based on underscores, in order to improve readability and consistency.
+
+Also, the Pipeline action is prefixed with 'PP' to namespace and group PaymentProcessor related pipelines.
 
 The authorization pipeline must end in a named &quot;error&quot; end node to communicate any authorization error back to this pipeline.
 
