@@ -772,7 +772,7 @@
 				
 				<isif condition="${!enableCheckout}">
 					<div class="error-message">
-						Limited: 
+						${Resource.msg('cart.limited','checkout',null)}: 
 						${Resource.msg('cart.limitedQuantity','checkout',null)}
 					</div>
 				</isif>
