@@ -180,37 +180,6 @@
         </product-promotion-rule>
     </promotion>
 
-    <promotion promotion-id="20off-accessories">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>no</exclusivity>
-        <name xml:lang="x-default">20% of womens accessories category</name>
-        <callout-msg xml:lang="x-default">20% of womens accessories category</callout-msg>
-        <details xml:lang="x-default">20% of womens accessories category</details>
-        <product-promotion-rule>
-            <qualifying-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>womens-jewelry</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </qualifying-products>
-            <discounts condition-type="product-quantity">
-                <discount>
-                    <threshold>3</threshold>
-                    <percentage>10.0</percentage>
-                </discount>
-                <discount>
-                    <threshold>5</threshold>
-                    <percentage>20.0</percentage>
-                </discount>
-            </discounts>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
     <promotion promotion-id="20off-gamewconsole">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
@@ -247,127 +216,6 @@
                 <percentage>20.0</percentage>
                 <eligible-quantity>1</eligible-quantity>
             </bogo>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="20off-pants">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% off on pants category</name>
-        <callout-msg xml:lang="x-default">20% off on pants category</callout-msg>
-        <details xml:lang="x-default">20% off on pants category</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>mens-clothing-pants</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>20.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="20off-select-clothing">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% off select womens clothing</name>
-        <callout-msg xml:lang="x-default">20% off select womens clothing</callout-msg>
-        <details xml:lang="x-default">20% off select womens clothing</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>008884304047</product-id>
-                            <product-id>008884304030</product-id>
-                            <product-id>008884304023</product-id>
-                            <product-id>008884304016</product-id>
-                            <product-id>008884304009</product-id>
-                            <product-id>008884303996</product-id>
-                            <product-id>008884304054</product-id>
-                            <product-id>008884304061</product-id>
-                            <product-id>008885004571</product-id>
-                            <product-id>008885004564</product-id>
-                            <product-id>008885004557</product-id>
-                            <product-id>008885004540</product-id>
-                            <product-id>008885004533</product-id>
-                            <product-id>008885004526</product-id>
-                            <product-id>008885004519</product-id>
-                            <product-id>008884304108</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>20.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="20off-select-jackets">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% Off Select Jackets</name>
-        <callout-msg xml:lang="x-default">20% Off Select Jackets</callout-msg>
-        <details xml:lang="x-default">20% Off Select Jackets</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>25589545</product-id>
-                            <product-id>25589500</product-id>
-                            <product-id>25589489</product-id>
-                            <product-id>25589040</product-id>
-                            <product-id>25589100</product-id>
-                            <product-id>25589128</product-id>
-                            <product-id>25588985</product-id>
-                            <product-id>25565100</product-id>
-                            <product-id>25564754</product-id>
-                            <product-id>25518447</product-id>
-                            <product-id>25502154</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>20.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="20off-shoes">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% of womens shoes category</name>
-        <callout-msg xml:lang="x-default">20% of womens shoes category</callout-msg>
-        <details xml:lang="x-default">20% of womens shoes category</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>womens-accessories-shoes</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>20.0</percentage>
-            </simple-discount>
             <max-applications>1</max-applications>
         </product-promotion-rule>
     </promotion>
@@ -419,76 +267,6 @@
         </product-promotion-rule>
     </promotion>
 
-    <promotion promotion-id="40off-select-clothing">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">40% off select womens clothing</name>
-        <callout-msg xml:lang="x-default">40% off select womens clothing</callout-msg>
-        <details xml:lang="x-default">40% off select womens clothing</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>008885005172</product-id>
-                            <product-id>008885005165</product-id>
-                            <product-id>008885005158</product-id>
-                            <product-id>008885005141</product-id>
-                            <product-id>008885004892</product-id>
-                            <product-id>008885004885</product-id>
-                            <product-id>008885535549</product-id>
-                            <product-id>008885535532</product-id>
-                            <product-id>008885535525</product-id>
-                            <product-id>008885535518</product-id>
-                            <product-id>008885535501</product-id>
-                            <product-id>008885538465</product-id>
-                            <product-id>008885538458</product-id>
-                            <product-id>008885538441</product-id>
-                            <product-id>008885538434</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>40.0</percentage>
-            </simple-discount>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="40off-select-jackets">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">40% Off Select Jackets</name>
-        <callout-msg xml:lang="x-default">40% Off Select Jackets</callout-msg>
-        <details xml:lang="x-default">40% Off Select Jackets</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>11736753</product-id>
-                            <product-id>25564754</product-id>
-                            <product-id>25565082</product-id>
-                            <product-id>25565100</product-id>
-                            <product-id>25588985</product-id>
-                            <product-id>25589128</product-id>
-                            <product-id>25589100</product-id>
-                            <product-id>25589048</product-id>
-                            <product-id>25589040</product-id>
-                            <product-id>25589500</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>40.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>  
-
     <promotion promotion-id="buy3dsgames-75">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
@@ -514,48 +292,6 @@
                     <eligible-quantity>3</eligible-quantity>
                 </discount>
             </total-discounts>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="buyJacketGetTieforFree">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>global</exclusivity>
-        <name xml:lang="x-default">Buy any Sport Jacket or Coat and Get a Tie for Free</name>
-        <callout-msg xml:lang="x-default">Buy any Sport Jacket or Coat and Get a Tie for Free</callout-msg>
-        <product-promotion-rule>
-            <qualifying-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>mens-clothing-jackets</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </qualifying-products>
-            <discounts condition-type="product-quantity">
-                <discount>
-                    <threshold>1</threshold>
-                    <bonus-choice>
-                        <bonus-products>
-                            <bonus-product product-id="25752986">
-                                <bonus-product-price>0</bonus-product-price>
-                            </bonus-product>
-                            <bonus-product product-id="25752981">
-                                <bonus-product-price>0</bonus-product-price>
-                            </bonus-product>
-                            <bonus-product product-id="25752218">
-                                <bonus-product-price>0</bonus-product-price>
-                            </bonus-product>
-                            <bonus-product product-id="25752235">
-                                <bonus-product-price>0</bonus-product-price>
-                            </bonus-product>
-                        </bonus-products>
-                        <max-bonus-items>1</max-bonus-items>
-                    </bonus-choice>
-                </discount>
-            </discounts>
-            <max-applications>1</max-applications>
         </product-promotion-rule>
     </promotion>
 
@@ -659,14 +395,6 @@
         </product-promotion-rule>
     </promotion>
    
-    <promotion-campaign-assignment promotion-id="10%offVIP" campaign-id="VIP Promo">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
     <promotion-campaign-assignment promotion-id="15off-gps" campaign-id="electronics-promotions">
         <qualifiers match-mode="any">
             <coupons/>
@@ -722,95 +450,6 @@
             <coupons/>
         </qualifiers>
         <rank>10</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="10%offordersover150" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20ff-dress-shirts" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-accessories" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-pants" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-select-clothing" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-select-jackets" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-shoes" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>40</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="40off-select-clothing" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>10</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="40off-select-jackets" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>20</rank>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="buyJacketGetTieforFree" campaign-id="test campaign for site genesis">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-        <rank>30</rank>
     </promotion-campaign-assignment>
 
 </promotions>
