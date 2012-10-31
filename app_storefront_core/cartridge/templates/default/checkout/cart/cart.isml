@@ -769,19 +769,17 @@
 						</isif>							
 					</div>
 				</div>
-				<div class="cart-footer">
-					<isslot id="cart-footer" description="Footer for Cart page" context="global" />
-				</div>
+				
+				<isif condition="${!enableCheckout}">
+					<div class="error-message">
+						Limited: 
+						${Resource.msg('cart.limitedQuantity','checkout',null)}
+					</div>
+				</isif>
+				
 			</fieldset>
 		</form>
 		
-		<isif condition="${!enableCheckout}">
-			<div class="error-message">
-				Limited: 
-				${Resource.msg('cart.limitedQuantity','checkout',null)}
-			</div>
-		</isif>
-
 		<div class="cart-actions">
 
 			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
@@ -807,11 +805,11 @@
 				</fieldset>
 			</form>
 
-		</div>
-
+		</div>				
+				
 		<div class="cart-footer">
 			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
-		</div>
+		</div>		
 	</isif>
 
 </isdecorate>
