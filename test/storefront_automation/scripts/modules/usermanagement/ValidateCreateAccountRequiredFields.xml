@@ -5,6 +5,6 @@
   <command name="assertElementPresent" target="css=#dwfrm_profile_customer_lastname.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_profile_customer_email.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_profile_customer_emailconfirm.required"/>
-  <command name="assertElementPresent" target="css=#dwfrm_profile_customer_password.required"/>
+  <command name="assertElementPresent" target="css=#dwfrm_profile_login_password.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_profile_login_passwordconfirm.required"/>
 </scriptmodule>
