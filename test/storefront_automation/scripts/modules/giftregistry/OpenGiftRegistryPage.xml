@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Opens the gift registry page and validates the result.
+Parameters:
+LinkText - link to click on to get to gift registry page
+Headline - main page headline of the gift registry page</description>
+  <parameter name="LinkText"/>
+  <parameter name="Headline"/>
+  <command name="clickAndWait" target="link=@{LinkText}"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
+  <command name="assertText" target="css=#primary h1" value="@{Headline}"/>
+  <command name="assertElementPresent" target="id=dwfrm_productlists_search_registrantLastName"/>
+  <command name="assertElementPresent" target="id=dwfrm_productlists_search_registrantFirstName"/>
+  <command name="assertElementPresent" target="id=dwfrm_productlists_search_eventType"/>
+  <command name="assertElementPresent" target="id=dwfrm_productlists_search"/>
+  <command name="assertElementPresent" target="name=dwfrm_productlists_search_search value=Find"/>
+</scriptmodule>
