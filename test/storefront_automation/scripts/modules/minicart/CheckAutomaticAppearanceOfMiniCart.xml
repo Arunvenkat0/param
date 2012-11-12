@@ -4,7 +4,7 @@
   <command name="waitForElementPresent" target="css=.mini-cart-content">
     <comment>Wait for Cart Window to Appear (Windows is displayed only for a short time)</comment>
   </command>
-  <command name="waitForElementPresent" target="xpath=id('mini-cart')/div[@class='mini-cart-content' and @style='display: none;']">
+  <command name="waitForNotVisible" target="css=.mini-cart-content">
     <comment>Wait for Cart Window to Disappear (Since windows is displayed only for a small time)</comment>
   </command>
 </scriptmodule>
