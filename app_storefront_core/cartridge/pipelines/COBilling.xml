@@ -2015,29 +2015,11 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="false"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="common/libStringUtilsExt.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="StringUtilsExt" key="StringUtilsExt"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in2" target-path="./b5.1">
-            <transition-display>
-              <bend-point relative-to="source" x="4" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
         <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="StringUtilsExt.classify(dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID)" key="From_0"/>
+          <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
           <key-binding alias="HandlePipeline" key="To_0"/>
-          <key-binding alias="'PP' + HandlePipeline + '-Handle'" key="From_1"/>
+          <key-binding alias="HandlePipeline + '-Handle'" key="From_1"/>
           <key-binding alias="HandlePipelineAction" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
           <key-binding alias="null" key="To_2"/>
@@ -2056,7 +2038,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -2066,7 +2048,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <node>
         <call-node start-name-key="HandlePipelineAction"/>
         <node-display x="0" y="1"/>
-        <branch basename="b5" source-connector="error">
+        <branch basename="b4" source-connector="error">
           <transition target-connector="in1"/>
           <segment>
             <node>
