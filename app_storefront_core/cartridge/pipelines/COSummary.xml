@@ -87,6 +87,11 @@
       </node>
       <simple-transition/>
       <node>
+        <call-node start-name-ref="Cart-Calculate"/>
+        <node-display x="0" y="2"/>
+      </node>
+      <simple-transition/>
+      <node>
         <pipelet-node pipelet-name="UpdatePageMetaData" pipelet-set-identifier="bc_api">
           <key-binding alias="null" key="DefaultKeywords"/>
           <key-binding alias="null" key="DefaultDescription"/>
@@ -94,7 +99,7 @@
           <key-binding alias="null" key="Category"/>
           <key-binding alias="&quot;SiteGenesis Checkout&quot;" key="DefaultTitle"/>
         </pipelet-node>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
