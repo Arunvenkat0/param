@@ -74,7 +74,7 @@
   <action name="GoToWelcomePage"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
   <command name="clickAndWait" target="css=.user-account"/>
-  <action name="LogoutAndGoToHomepage"/>
+  <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="LoginAgain"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
@@ -145,6 +145,9 @@
   </command>
   <action name="ViewTheWishlist"/>
   <command name="clickAndWait" target="css=.wish-list-results-table tr:nth-child(2) .view a"/>
+  <command name="assertXpathCount" target="id('primary')//table[@class='item-list']/tbody/tr" value="2">
+    <comment>Product row + header row</comment>
+  </command>
   <module name="modules.wishlist.ValidatePublicWishlistPageStructure">
     <parameter name="FirstName" value="${UserFirstName}"/>
     <parameter name="LastName" value="${UserLastName}"/>
