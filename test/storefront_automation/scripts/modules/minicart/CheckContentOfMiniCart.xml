@@ -20,7 +20,7 @@
   <command name="mouseOver" target="css=.mini-cart-content">
     <comment>Shift Mouse focus to an item inside Mini Cart</comment>
   </command>
-  <command name="assertText" target="css=.mini-cart-product:first-child .mini-cart-name" value="@{Name}">
+  <command name="waitForText" target="css=.mini-cart-product:first-child .mini-cart-name" value="@{Name}">
     <comment>Checks the correct product name in mini cart</comment>
   </command>
   <command name="assertText" target="css=.mini-cart-product:first-child .mini-cart-pricing .value" value="@{Quantity}">
