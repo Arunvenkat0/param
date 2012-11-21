@@ -16,7 +16,7 @@
     <artifactId>refapp2</artifactId>
     <name>SiteGenesis2</name>
     <packaging>pom</packaging>
-    <version>12.6.2.3-SNAPSHOT</version>
+    <version>13.1.0.1</version>
     <description>the new refapp</description>
 
     <properties>
