@@ -13,14 +13,16 @@ importPackage( dw.value );
  * Calculates the amount to be payed by a non-gift certificate payment instrument based 
  * on the given basket. The method subtracts the amount of all redeemed gift certificates 
  * from the order total and returns this value.
+ *
+ * PJP-2000: Modified logic to use LineItemCtnr (to support both Basket and Order)
  */
-function calculateNonGiftCertificateAmount( basket : Basket ) 
+function calculateNonGiftCertificateAmount( lineItemCtnr : LineItemCtnr ) 
 {
 	// the total redemption amount of all gift certificate payment instruments in the basket
-	var giftCertTotal : Money = new Money( 0.0, basket.currencyCode );
+	var giftCertTotal : Money = new Money( 0.0, lineItemCtnr.currencyCode );
 
 	// get the list of all gift certificate payment instruments 
-	var gcPaymentInstrs : Collection = basket.getGiftCertificatePaymentInstruments();
+	var gcPaymentInstrs : Collection = lineItemCtnr.getGiftCertificatePaymentInstruments();
 	var iter : Iterator = gcPaymentInstrs.iterator();
 	var orderPI : OrderPaymentInstrument = null;
 
@@ -32,7 +34,7 @@ function calculateNonGiftCertificateAmount( basket : Basket )
 	}
 
 	// get the order total
-	var orderTotal : Money = basket.totalGrossPrice;
+	var orderTotal : Money = lineItemCtnr.totalGrossPrice;
 
 	// calculate the amount to charge for the payment instrument
 	// this is the remaining open order total which has to be paid
@@ -232,10 +234,10 @@ function removeShippingAddress( shippingAddress : Object )
  * Determines if the basket already contains payment 
  * instruments of the given payment method and removes them from the basket.
  */
-function removeExistingPaymentInstruments( basket : Basket, method : String )
+function removeExistingPaymentInstruments( lineItemCtnr : LineItemCtnr, method : String )
 {
 	// get all credit card payment instruments
-	var ccPaymentInstrs : Collection = basket.getPaymentInstruments( method );
+	var ccPaymentInstrs : Collection = lineItemCtnr.getPaymentInstruments( method );
 	var iter : Iterator = ccPaymentInstrs.iterator();
 	var existingPI : OrderPaymentInstrument = null;
 
@@ -243,6 +245,6 @@ function removeExistingPaymentInstruments( basket : Basket, method : String )
 	while( iter.hasNext() )
 	{
 		existingPI = iter.next();
-		basket.removePaymentInstrument( existingPI );
+		lineItemCtnr.removePaymentInstrument( existingPI );
 	}
 }

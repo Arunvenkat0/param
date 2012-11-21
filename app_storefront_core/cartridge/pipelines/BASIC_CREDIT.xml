@@ -76,6 +76,7 @@
           <key-binding alias="dw.order.PaymentInstrument.METHOD_CREDIT_CARD" key="PaymentType"/>
           <key-binding alias="true" key="RemoveExisting"/>
           <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
+          <key-binding alias="Basket" key="LineItemCtnr"/>
         </pipelet-node>
         <node-display x="0" y="2"/>
         <branch basename="b3" source-connector="error">

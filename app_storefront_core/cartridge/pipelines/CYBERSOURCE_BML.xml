@@ -35,6 +35,7 @@
                 <key-binding alias="dw.order.PaymentInstrument.METHOD_BML" key="PaymentType"/>
                 <key-binding alias="true" key="RemoveExisting"/>
                 <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
+                <key-binding alias="Basket" key="LineItemCtnr"/>
               </pipelet-node>
               <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="error">

@@ -16,9 +16,14 @@
     <segment>
       <node>
         <start-node name="Show" secure="false"/>
-        <node-display x="1" y="1"/>
+        <node-display orientation="horizontal" x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
@@ -43,7 +48,7 @@
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
+        <node-display x="1" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
