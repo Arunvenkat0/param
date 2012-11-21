@@ -2515,13 +2515,9 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
 
 For example:
 Credit Cards processor ID = BASIC_CREDIT
-Handle Pipeline = PPBasicCredit-Handle
+Handle Pipeline = BASIC_CREDIT-Handle
 
-The handle pipeline is responsible for payment provider / payment method specific form validation and payment instrument creation.
-
-Note that the IDs are capitalized and camelcased, based on underscores, in order to improve readability and consistency.
-
-Also, the Pipeline action is prefixed with 'PP' to namespace and group PaymentProcessor related pipelines.</description>
+The handle pipeline is responsible for payment provider / payment method specific form validation and payment instrument creation.</description>
         </text-node>
         <node-display height="3" width="2" x="8" y="28"/>
       </node>

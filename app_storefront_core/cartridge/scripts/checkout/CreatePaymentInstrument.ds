@@ -7,7 +7,9 @@
  * If only one payment instrument is allowed, any existing payment instrument may be
  * removed by using the RemoveExisting input parameter and passing a Boolean true.
  *
- * @input Basket : dw.order.Basket The basket.
+ * PJP-2000: Modified logic to reference LineItemCtnr (to work for both Order and Basket)
+ *
+ * @input LineItemCtnr : dw.order.LineItemCtnr The basket.
  * @input PaymentType : String the payment method of the payment instrument to create.
  * @input RemoveExisting : Boolean if true, removes any other payment instruments of the same payment method
  * @output PaymentInstrument : dw.order.PaymentInstrument The created payment instrument.
@@ -22,12 +24,12 @@ importScript("checkout/Utils.ds");
 
 function execute( pdict : PipelineDictionary ) : Number
 {
-    var basket : Basket = pdict.Basket;
+    var lineItemCtnr : LineItemCtnr = pdict.LineItemCtnr;
 	var paymentType : String = pdict.PaymentType;
 	var removeExisting : Boolean = pdict.RemoveExisting;
 
 	// validate pipelet input parameters
-	if( basket == null || paymentType == null || removeExisting == null)
+	if( lineItemCtnr == null || paymentType == null || removeExisting == null)
 	{
 		return PIPELET_ERROR;
 	}
@@ -35,14 +37,14 @@ function execute( pdict : PipelineDictionary ) : Number
 	// remove existing payment instruments from the basket
 	if (removeExisting)
 	{
-		removeExistingPaymentInstruments( basket,  paymentType );
+		removeExistingPaymentInstruments( lineItemCtnr,  paymentType );
 	}
 
 	// calculate the amount to be reflected by this payment instrument
-	var amount = calculateNonGiftCertificateAmount( basket );
+	var amount = calculateNonGiftCertificateAmount( lineItemCtnr );
 
 	// create a payment instrument
-	var paymentInstr : PaymentInstrument = basket.createPaymentInstrument( paymentType, amount );
+	var paymentInstr : PaymentInstrument = lineItemCtnr.createPaymentInstrument( paymentType, amount );
 
 	pdict.PaymentInstrument = paymentInstr;
     return PIPELET_NEXT;
