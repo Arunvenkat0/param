@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
     <folder folder-id="root">
         <online-flag>true</online-flag>
@@ -503,7 +503,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
 &lt;p&gt;Customer Service&lt;br /&gt;&#13;
 Monday to Friday&lt;br /&gt;&#13;
 8 AM to 8 PM&lt;br /&gt;&#13;
-1 (888) 553 9216&lt;/p&gt;</custom-attribute>
+1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="my-account"/>
@@ -1628,7 +1628,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (888-555-1212) Monday - Friday, 8AM - 8PM</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (888-555-XXXX) Monday - Friday, 8AM - 8PM</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -1757,7 +1757,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help? &lt;span&gt;888-553-9216&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
