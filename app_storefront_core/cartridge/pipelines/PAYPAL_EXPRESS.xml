@@ -64,10 +64,10 @@
       </node>
     </segment>
   </branch>
-  <branch basename="Authorize_PAYPAL_EXPRESS">
+  <branch basename="Authorize">
     <segment>
       <node>
-        <start-node call-mode="private" name="Authorize_PAYPAL_EXPRESS" secure="false"/>
+        <start-node call-mode="private" name="Authorize" secure="false"/>
         <node-display x="4" y="2"/>
       </node>
       <simple-transition>
