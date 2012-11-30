@@ -62,9 +62,9 @@
 	.mini-cart-item-word,
 	.mini-cart-total-label{display:none;}
 	.header-search{left:1%;top: -36px;width:98%;}
-	.header-search input[type="text"]{width:81%;}
-	.header-search input[type="submit"]{float:right;width:17%;}
-	
+	.header-search input[type="text"]{width:81%;height:15px;}
+	.header-search input[type="submit"]{float: right;height: 34px;position: absolute;right: 0;width: 16%;top:0px;}
+
 	/* Navigation adjusted, stacked so it's easier to use */
 	/* ------------------------------------- */
 	
@@ -323,4 +323,10 @@ float: right;}
 	.facebook-registration {left:0px;}
 	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100% !important;}
 
+}
+
+@media screen and (max-width:480px){
+	#navigation h1 {top:2px}
+	.header-search input[type="submit"]{height: 37px;width: 15%;}
+	input[type="text"]{border:1px solid #AAAAAA;margin-left:2%;padding:0.8em 0.5em;text-indent:0;width:49.5966%;}
 }
