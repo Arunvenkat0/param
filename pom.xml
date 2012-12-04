@@ -16,8 +16,8 @@
     <artifactId>refapp2</artifactId>
     <name>SiteGenesis2</name>
     <packaging>pom</packaging>
-    <version>13.1.0.2-SNAPSHOT</version>
-    <description>the new refapp</description>
+    <version>13.2.0.1-SNAPSHOT</version>
+    <description>SiteGenesis</description>
 
     <properties>
         <dw.site.name>sitegenesis2</dw.site.name>
