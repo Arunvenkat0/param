@@ -3596,7 +3596,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="facebookConnectEnabled">
                 <display-name xml:lang="x-default">Facebook Connect Enabled</display-name>
-                <description xml:lang="x-default">This check box will be used to determine if the Facebook part of the registration form can communicate with face book when registering customers in the storefront</description>
+                <description xml:lang="x-default">The check box used to determine if the Facebook part of the registration form can communicate with Facebook when registering customers in the storefront.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
