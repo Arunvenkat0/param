@@ -3586,7 +3586,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="facebookAppID">
                 <display-name xml:lang="x-default">Facebook App ID</display-name>
-                <description xml:lang="x-default">This is the App ID that will be used with Facebook Connect</description>
+                <description xml:lang="x-default">The application ID that will be used with Facebook Connect.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -3596,14 +3596,14 @@
             </attribute-definition>
             <attribute-definition attribute-id="facebookConnectEnabled">
                 <display-name xml:lang="x-default">Facebook Connect Enabled</display-name>
-                <description xml:lang="x-default">This check box will be used to determine if the Facebook part of the registration form can communicate with face book when registering customers in the storefront</description>
+                <description xml:lang="x-default">The check box used to determine if the Facebook part of the registration form can communicate with Facebook when registering customers in the storefront.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
             <attribute-definition attribute-id="facebookURI">
-                <display-name xml:lang="x-default">Facebook URI</display-name>
-                <description xml:lang="x-default">The pipeline that will be used to redirect back to from Facebook (Account-Connect), used in the template facebookregistration.isml.</description>
+                <display-name xml:lang="x-default">Facebook URI Pipeline</display-name>
+                <description xml:lang="x-default">The pipeline used to redirect from Facebook to an internal pipeline - used in the facebookregistration.isml template.  This is a pipeline, the format needs to be &lt;pipeline&gt;-&lt;subpipeline&gt;, e.g. (Account-Connect).</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
