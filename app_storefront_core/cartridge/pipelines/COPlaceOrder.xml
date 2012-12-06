@@ -1291,7 +1291,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="SubmitPaymentsImpl12_6">
     <segment>
       <node>
-        <start-node name="SubmitPaymentsImpl12_6" secure="false"/>
+        <start-node call-mode="private" name="SubmitPaymentsImpl12_6" secure="true"/>
         <node-display orientation="horizontal" x="1" y="19"/>
       </node>
       <transition target-connector="in2" target-path="/Start.2/b2.2"/>
@@ -1310,7 +1310,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="SubmitPaymentsImpl">
     <segment>
       <node>
-        <start-node name="SubmitPaymentsImpl" secure="false"/>
+        <start-node call-mode="private" name="SubmitPaymentsImpl" secure="true"/>
         <node-display orientation="horizontal" x="1" y="21"/>
       </node>
       <transition target-connector="in2" target-path="/Start.2/b2.3"/>
@@ -1329,7 +1329,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="SubmitImpl">
     <segment>
       <node>
-        <start-node name="SubmitImpl" secure="false"/>
+        <start-node call-mode="private" name="SubmitImpl" secure="true"/>
         <node-display x="1" y="24"/>
       </node>
       <transition target-connector="in1" target-path="/Start.2/b2.4"/>
@@ -1384,7 +1384,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <node>
         <call-node start-name-ref="COPlaceOrder-GetOrder"/>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="next1">
+        <branch basename="b2" source-connector="error">
           <transition target-connector="in1" target-path="./b3.1"/>
         </branch>
       </node>
@@ -1542,7 +1542,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="FaultsJSON">
     <segment>
       <node>
-        <start-node name="FaultsJSON" secure="true"/>
+        <start-node call-mode="private" name="FaultsJSON" secure="true"/>
         <node-display x="15" y="25"/>
       </node>
       <simple-transition>
@@ -1725,7 +1725,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
             </node>
             <simple-transition/>
             <node>
-              <jump-node start-name-ref="Error-Start"/>
+              <jump-node start-name-ref="COSummary-Start"/>
               <node-display orientation="horizontal" x="1" y="0"/>
             </node>
           </segment>
