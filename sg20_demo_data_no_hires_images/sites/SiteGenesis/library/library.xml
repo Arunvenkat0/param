@@ -138,7 +138,7 @@
         <page-attributes/>
     </folder>
 
-    <folder folder-id="shipping">
+    <folder folder-id="shippinginfo">
         <display-name xml:lang="x-default">Shipping</display-name>
         <online-flag>true</online-flag>
         <parent>customer-service</parent>
@@ -195,7 +195,7 @@
         <page-attributes/>
     </folder>
 
-    <folder folder-id="home">
+    <folder folder-id="home-page">
         <display-name xml:lang="x-default">Home Page</display-name>
         <online-flag>false</online-flag>
         <parent>page-includes</parent>
@@ -286,7 +286,7 @@
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -1926,7 +1926,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 &lt;p class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -2073,7 +2073,7 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
 &lt;/form&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -2172,7 +2172,7 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -3253,7 +3253,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;As soon as the goods are delivered to you, you are responsible for them.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>1.0</position>
             </classification-link>
         </folder-links>
@@ -3306,7 +3306,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All Televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>2.0</position>
             </classification-link>
         </folder-links>
@@ -3334,7 +3334,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All video games have a $1.00 shipping surcharge fee for super saver shipping.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>3.0</position>
             </classification-link>
         </folder-links>

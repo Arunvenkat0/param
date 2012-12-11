@@ -1277,7 +1277,7 @@
             <page-title xml:lang="x-default">Women's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop womens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
-            <page-url xml:lang="x-default">accessories</page-url>
+            <page-url xml:lang="x-default">Womens Accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1785,7 +1785,7 @@
             <page-title xml:lang="x-default">Men's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop mens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
-            <page-url xml:lang="x-default">accessories</page-url>
+            <page-url xml:lang="x-default">Mens Accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2410,7 +2410,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Electronics Accessories</page-title>
-            <page-url xml:lang="x-default">accessories</page-url>
+            <page-url xml:lang="x-default">Electronics Accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
