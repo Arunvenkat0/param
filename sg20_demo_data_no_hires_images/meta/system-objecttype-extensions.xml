@@ -3603,7 +3603,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="facebookURI">
                 <display-name xml:lang="x-default">Facebook URI Pipeline</display-name>
-                <description xml:lang="x-default">The pipeline used to redirect from Facebook to an internal pipeline - used in the facebookregistration.isml template.  This is a pipeline, the format needs to be &lt;pipeline&gt;-&lt;subpipeline&gt;, e.g. (Account-Connect).</description>
+                <description xml:lang="x-default">The pipeline used to redirect from Facebook to an internal pipeline - used in the facebookregistration.isml template.  This is a pipeline, so the format must be &lt;pipeline&gt;-&lt;subpipeline&gt;, for example, Account-Connect.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
