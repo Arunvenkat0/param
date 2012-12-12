@@ -204,7 +204,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Respsonsible for creating the order, set the order confirmation status</description>
+          <description>Responsible for creating the order, set the order status to 'Created'</description>
         </text-node>
         <node-display x="12" y="3"/>
       </node>
@@ -224,7 +224,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Respsonsible for creating the order, set the order confirmation status</description>
+          <description>Responsible for placing the order and set the order status to 'New'</description>
         </text-node>
         <node-display x="17" y="3"/>
       </node>
@@ -868,6 +868,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <node>
         <pipelet-node pipelet-name="CreateOrder" pipelet-set-identifier="bc_api">
           <config-property key="CreateCustomerNo" value="true"/>
+          <config-property key="PlaceOrder" value="false"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="Order" key="Order"/>
           <key-binding alias="null" key="OrderNo"/>
@@ -1164,7 +1165,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
                 <key-binding alias="GiftCertificateLineItem.senderName" key="SenderName"/>
                 <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
                 <key-binding alias="GiftCertificateLineItem.message" key="Message"/>
-                <key-binding alias="OrderNo" key="OrderNo"/>
+                <key-binding alias="Order.orderNo" key="OrderNo"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
@@ -1301,7 +1302,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
-          <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will result in an &quot;Open&quot; Order.</description>
+          <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will create a new Order with status 'Created'.</description>
         </text-node>
         <node-display width="2" x="0" y="20"/>
       </node>
@@ -1339,7 +1340,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
-          <description>Create the order.</description>
+          <description>Sets the Order status to 'New'.</description>
         </text-node>
         <node-display x="1" y="26"/>
       </node>
