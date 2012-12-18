@@ -831,31 +831,15 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <start-node call-mode="private" name="CreateOrder" secure="false"/>
         <node-display x="12" y="4"/>
       </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ReserveInventoryForOrder" pipelet-set-identifier="bc_api">
-          <key-binding alias="Basket" key="Basket"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="-1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display orientation="horizontal" x="2" y="0"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="!empty(Order)" condition-operator="expr"/>
         <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="yes">
+        <branch basename="b2" source-connector="yes">
           <transition target-connector="in1" target-path="./+1"/>
         </branch>
       </node>
@@ -866,15 +850,14 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         </transition-display>
       </simple-transition>
       <node>
-        <pipelet-node pipelet-name="CreateOrder" pipelet-set-identifier="bc_api">
+        <pipelet-node pipelet-name="CreateOrder2" pipelet-set-identifier="bc_api">
           <config-property key="CreateCustomerNo" value="true"/>
-          <config-property key="PlaceOrder" value="false"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="Order" key="Order"/>
           <key-binding alias="null" key="OrderNo"/>
         </pipelet-node>
         <node-display x="1" y="1"/>
-        <branch basename="b4" source-connector="error">
+        <branch basename="b3" source-connector="error">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="source" x="1" y="0"/>
@@ -899,7 +882,11 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <join-node/>
         <node-display x="-1" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node/>
         <node-display x="0" y="1"/>
