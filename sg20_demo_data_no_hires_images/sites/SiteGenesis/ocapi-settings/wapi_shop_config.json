@@ -1,5 +1,5 @@
 {
-  "_v":"12.6",
+  "_v":"13.1",
   "clients":
   [ 
     {
@@ -82,6 +82,11 @@
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
+        {
+          "resource_id":"/basket/{id}/checkout/submit",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        }, 
         {
           "resource_id":"/categories/{id}",
           "read_attributes":"(**)",
