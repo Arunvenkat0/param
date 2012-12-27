@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <url-rules xmlns="http://www.demandware.com/xml/impex/urlrules/2012-12-01">
     <general-settings>
-        <lower-case-urls>false</lower-case-urls>
-        <blank-substitute>-</blank-substitute>
+        <lower-case-urls>true</lower-case-urls>
+        <blank-substitute>%20</blank-substitute>
     </general-settings>
-    <category-rule>[ attribute, displayName ]</category-rule>
+    <category-rule>[ category-path, [ attribute, displayName ], / ]</category-rule>
     <category-page-url-override>true</category-page-url-override>
     <category-trailing-slash>true</category-trailing-slash>
-    <product-rule/>
+    <product-rule>[ category ]</product-rule>
     <product-page-url-override>true</product-page-url-override>
     <product-id-separator>/</product-id-separator>
-    <folder-rule>[ attribute, ID ]</folder-rule>
+    <folder-rule>[ folder-path, [ attribute, displayName, noname ], / ]</folder-rule>
     <folder-page-url-override>true</folder-page-url-override>
     <folder-trailing-slash>true</folder-trailing-slash>
-    <content-rule/>
+    <content-rule>[ folder ]</content-rule>
     <content-page-url-override>true</content-page-url-override>
     <content-id-separator>/</content-id-separator>
     <pipeline-aliases>
