@@ -13,7 +13,7 @@
   <command name="waitForText" target="css=.Color .selected-value" value="@{Color}">
     <comment>Wait for the color title to appear next to the swatches.</comment>
   </command>
-  <command name="assertNotElementPresent" target="css=.size .selected">
+  <command name="assertElementPresent" target="css=.size .selected">
     <comment>Check if no color is selected yet.</comment>
   </command>
   <action name="SelectSize"/>

@@ -38,6 +38,9 @@ Static Elements are:
   <command name="assertText" target="css=.grid-tile:first-child .product-name" value="@{FirstItem}">
     <comment>Checks for the correct first product.</comment>
   </command>
+  <command name="assertText" target="css=.grid-tile:last-child .product-name" value="@{LastItem}">
+    <comment>Check for the correct last product.</comment>
+  </command>
   <action name="SelectLastPage"/>
   <command name="click" target="link=@{LastPageNumber}">
     <comment>Switch to last page.</comment>
@@ -53,7 +56,4 @@ Static Elements are:
     <parameter name="CurrentPage" value="@{LastPageNumber}"/>
     <parameter name="NumberOfPages" value="@{LastPageNumber}"/>
   </module>
-  <command name="assertText" target="css=.grid-tile:last-child .product-name" value="@{LastItem}">
-    <comment>Check for the correct last product.</comment>
-  </command>
 </scriptmodule>
