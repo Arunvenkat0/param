@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <ProductSetName>Winter Look</ProductSetName>
+  <FirstProductName>Quilted Jacket</FirstProductName>
+  <SecondProductName>Pull On Pant</SecondProductName>
+  <NumberOfProductsInSet>2</NumberOfProductsInSet>
+</data>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the content of a product set page.</description>
+  <parameter name="NumberOfProducts"/>
+  <parameter name="ProductSetName"/>
+  <parameter name="FirstProductName"/>
+  <parameter name="SecondProductName"/>
+  <command name="assertText" target="css=.breadcrumb .last" value="@{ProductSetName}"/>
+  <command name="assertText" target="css=h1.product-name" value="@{ProductSetName}"/>
+  <command name="assertElementPresent" target="css=.product-primary-image"/>
+  <command name="assertXpathCount" target="id('product-set-list')/div[@class='product-set-item']" value="@{NumberOfProducts}"/>
+  <module name="modules.catalog.ValidateSingleProductOnProductSetPage">
+    <comment>Validate the first product</comment>
+    <parameter name="NumberOfProduct" value="1"/>
+    <parameter name="ProductName" value="${FirstProductName}"/>
+  </module>
+  <module name="modules.catalog.ValidateSingleProductOnProductSetPage">
+    <comment>Validate the second product</comment>
+    <parameter name="NumberOfProduct" value="2"/>
+    <parameter name="ProductName" value="${SecondProductName}"/>
+  </module>
+  <command name="assertElementPresent" target="id=add-all-to-cart"/>
+  <command name="assertText" target="css=.product-actions .menu" value="*Send to a Friend"/>
+  <command name="assertElementPresent" target="css=.addthis_toolbox"/>
+</scriptmodule>
