@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <promotions xmlns="http://www.demandware.com/xml/impex/promotion/2008-01-31">
+    <campaign campaign-id="Payment-promo">
+        <description>$50 off on selecting Visa</description>
+        <enabled-flag>false</enabled-flag>
+        <customer-groups>
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>
+    
     <campaign campaign-id="electronics-promotions">
         <description>Electronics Product Promotions</description>
         <enabled-flag>false</enabled-flag>
@@ -266,6 +274,37 @@
             </simple-discount>
         </product-promotion-rule>
     </promotion>
+    
+    <promotion promotion-id="Payment-Promo">
+        <enabled-flag>false</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">50-off-using-visa</name>
+        <callout-msg xml:lang="x-default">$50 off using Visa CC</callout-msg>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-en">
+                            <category-id>newarrivals</category-id>
+                            <category-id>mens</category-id>
+                            <category-id>womens</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <payment-methods>
+                <method-id>CREDIT_CARD.Visa</method-id>
+            </payment-methods>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>0.0</threshold>
+                    <amount>50.0</amount>
+                </discount>
+            </discounts>
+        </order-promotion-rule>
+    </promotion>
 
     <promotion promotion-id="buy3dsgames-75">
         <enabled-flag>false</enabled-flag>
@@ -394,7 +433,15 @@
             <max-applications>1</max-applications>
         </product-promotion-rule>
     </promotion>
-   
+
+    <promotion-campaign-assignment promotion-id="Payment-Promo" campaign-id="Payment-promo">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
     <promotion-campaign-assignment promotion-id="15off-gps" campaign-id="electronics-promotions">
         <qualifiers match-mode="any">
             <coupons/>
