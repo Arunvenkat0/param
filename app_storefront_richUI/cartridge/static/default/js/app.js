@@ -1309,8 +1309,13 @@ var app = (function (app, $) {
 
 		// handle events for updating grid
 		$cache.main.on("click", ".refinements a, .pagination a, .breadcrumb-refinement-value a", function (e) {
-			e.preventDefault();
+
 			if($(this).parent().hasClass("unselectable")) { return; }
+			var catparent = $(this).parents('.category-refinement');
+			if(catparent.length > 0){
+				return true;
+			}
+			e.preventDefault();
 			var uri = app.util.getUri(this);
 
 			if( uri.query.length > 1 ) {
