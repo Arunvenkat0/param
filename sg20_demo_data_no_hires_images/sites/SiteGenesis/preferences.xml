@@ -24,7 +24,7 @@
             <preference preference-id="SiteInventoryList">inventory</preference>
             <preference preference-id="SiteLocales">default</preference>
             <preference preference-id="SitePriceBooks">usd-list-prices:usd-sale-prices</preference>
-            <preference preference-id="StorefrontURLsEnabled">true</preference>
+            <preference preference-id="StorefrontURLsEnabled">false</preference>
         </all-instances>
         <development>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
