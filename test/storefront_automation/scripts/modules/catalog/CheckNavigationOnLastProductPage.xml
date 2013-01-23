@@ -10,6 +10,6 @@
   </command>
   <command name="waitForText" target="css=.breadcrumb .last" value="@{LastProductName}"/>
   <command name="assertText" target="css=h1.product-name" value="@{LastProductName}"/>
-  <command name="waitForElementPresent" target="css=.product-previous a"/>
-  <command name="assertNotElementPresent" target="css=.product-next a"/>
+  <command name="waitForElementPresent" disabled="true" target="css=.product-previous a"/>
+  <command name="assertNotElementPresent" disabled="true" target="css=.product-next a"/>
 </scriptmodule>

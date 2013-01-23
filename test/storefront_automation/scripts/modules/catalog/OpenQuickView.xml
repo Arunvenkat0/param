@@ -5,6 +5,7 @@
   <command name="waitForElementPresent" target="xpath=//div[@class='product-name']//a[@title=&quot;@{ProductName}&quot;]">
     <comment>Validate Product Presence</comment>
   </command>
+  <command name="pause" value="500"/>
   <command name="mouseOver" target="xpath=//div[@class='product-image']/a[@title='@{ProductName}']"/>
   <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[@title='@{ProductName}']"/>
   <command name="click" target="xpath=id('quickviewbutton')[@title='@{ProductName}']"/>

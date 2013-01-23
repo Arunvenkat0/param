@@ -4,7 +4,7 @@
   <parameter name="FirstProductName"/>
   <parameter name="NextProductName"/>
   <action name="SelectFirstProduct"/>
-  <command name="assertText" target="css=.grid-tile:first-child .name-link" value="@{FirstProductName}"/>
+  <command name="waitForText" target="css=.grid-tile:first-child .name-link" value="@{FirstProductName}"/>
   <command name="clickAndWait" target="css=.grid-tile:first-child .name-link"/>
   <command name="assertText" target="css=.breadcrumb .last" value="@{FirstProductName}"/>
   <command name="assertText" target="css=h1.product-name" value="@{FirstProductName}"/>
