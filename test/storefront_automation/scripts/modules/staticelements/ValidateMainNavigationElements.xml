@@ -2,7 +2,7 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the presence of all main menu items.</description>
   <command name="assertElementPresent" target="id=navigation"/>
-  <command name="assertText" target="xpath=id('navigation')/nav/ul" value="glob:${MainNavigationItems}"/>
+  <command name="assertXpathCount" target="id('navigation')/nav/ul/li/a[@class='level-1']" value="6"/>
   <command name="assertElementPresent" target="id=q">
     <comment>Searches for the search input field</comment>
   </command>

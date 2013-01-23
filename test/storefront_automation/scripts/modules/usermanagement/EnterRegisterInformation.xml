@@ -21,8 +21,8 @@ To check the validity rules for email and password wrong data are entered in a f
   <command name="assertText" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
   <command name="assertText" target="css=#dwfrm_profile_customer_email + span" value="The email address is invalid."/>
   <command name="assertText" target="css=#dwfrm_profile_customer_emailconfirm + span" value="The email address is invalid."/>
-  <command name="assertText" target="css=#dwfrm_profile_login_password + span" value="5 - 20 characters"/>
-  <command name="assertText" target="css=#dwfrm_profile_login_passwordconfirm + span" value="5 - 20 characters&#xA;"/>
+  <command name="assertText" target="css=#dwfrm_profile_login_password + span" value="8 - 255 characters"/>
+  <command name="assertText" target="css=#dwfrm_profile_login_passwordconfirm + span" value="8 - 255 characters&#xA;"/>
   <action name="EnterCorrectData">
     <comment>Password, Email</comment>
   </action>

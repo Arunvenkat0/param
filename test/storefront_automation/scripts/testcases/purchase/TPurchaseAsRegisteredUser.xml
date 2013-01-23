@@ -185,14 +185,14 @@
     <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
     <parameter name="Country" value="${ShippingAddressCountry}"/>
   </module>
-  <module name="modules.checkout.billing.ValidateBillingAddressInSidebar" disabled="true">
+  <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
     <comment>Validate Billing Address</comment>
     <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
     <parameter name="Address" value="${BillingAddressStreet}"/>
     <parameter name="City" value="${BillingAddressCity}"/>
     <parameter name="State_Short" value="${BillingAddressStateShort}"/>
     <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${Country}"/>
+    <parameter name="Country" value="${BillingAddressCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage">
     <comment>Validate Order's total amounts and different charges</comment>
@@ -232,7 +232,7 @@
     <parameter name="ShippingMethod" value="${ShippingMethodName}"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
-  <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage" disabled="true">
+  <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage">
     <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
     <parameter name="Address" value="${BillingAddressStreet}"/>
     <parameter name="City" value="${BillingAddressCity}"/>

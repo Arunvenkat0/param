@@ -13,7 +13,7 @@
   <parameter name="MaxItems"/>
   <parameter name="NumberOfPages"/>
   <command name="assertText" target="css=.breadcrumb-last" value="@{CategoryName}"/>
-  <command name="assertText" target="css=#category-level-1 .active" value="@{CategoryName}"/>
+  <command name="waitForText" target="css=#category-level-1 .active" value="@{CategoryName}"/>
   <command name="assertElementPresent" target="css=.product-tile">
     <comment>Check if at least one product is present.</comment>
   </command>
