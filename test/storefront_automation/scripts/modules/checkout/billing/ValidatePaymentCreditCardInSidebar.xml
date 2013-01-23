@@ -14,7 +14,7 @@ Amount</description>
   <parameter name="ExpireMonthShort"/>
   <parameter name="ExpireYear"/>
   <command name="assertText" target="css=.mini-payment-instrument span" value="*Payment Method"/>
-  <command name="assertText" target="css=.mini-payment-instrument .details" value="glob:@{Name}*">
+  <command name="assertText" target="css=.mini-payment-instrument .details" value="glob:*@{Name}*">
     <comment>Validate Complete Name on CC</comment>
   </command>
   <command name="assertText" target="css=.mini-payment-instrument .details" value="glob:*@{Type}*">

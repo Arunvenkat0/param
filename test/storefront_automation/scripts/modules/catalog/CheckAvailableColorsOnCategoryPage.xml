@@ -13,6 +13,7 @@ Mouse over each color and validate respective procut image</description>
   <command name="assertElementPresent" target="css=.swatch.selected img[title=&quot;@{ProductName}, @{DefaultColor}&quot;]">
     <comment>Validate the presence of default color</comment>
   </command>
+  <command name="pause" value="500"/>
   <command name="mouseOver" target="css=.swatch img[title=&quot;@{ProductName}, @{AvailableColor2}&quot;]"/>
   <command name="waitForElementPresent" target="css=.product-image img[title=&quot;@{ProductName}, @{AvailableColor2}&quot;]"/>
   <command name="mouseOut" target="css=.swatch img[title=&quot;@{ProductName}, @{AvailableColor2}&quot;]"/>
