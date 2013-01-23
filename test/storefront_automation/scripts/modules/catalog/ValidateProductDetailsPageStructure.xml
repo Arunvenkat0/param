@@ -19,10 +19,10 @@
   <command name="assertElementPresent" target="id=add-to-cart">
     <comment>Checks if the order button is displayed.</comment>
   </command>
-  <command name="assertXpathCount" target="id('product-content')/div[@class='product-actions']//li" value="3">
+  <command name="assertXpathCount" disabled="true" target="id('product-content')/div[@class='product-actions']//li" value="3">
     <comment>Checks if 3 tab controls are displayed</comment>
   </command>
-  <command name="assertText" target="css=.product-actions .menu" value="Add to Wishlist*Add to Gift Registry*Send to a Friend"/>
+  <command name="assertText" disabled="true" target="css=.product-actions .menu" value="Add to Wishlist*Add to Gift Registry*Send to a Friend"/>
   <command name="assertElementPresent" target="css=.addthis_toolbox">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>
