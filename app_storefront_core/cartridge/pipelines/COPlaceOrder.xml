@@ -1034,7 +1034,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="!empty(CurrentHttpParameterMap.order_id.stringValue)" condition-operator="expr"/>
+        <decision-node condition-key="false &amp;&amp; !empty(CurrentHttpParameterMap.order_id.stringValue)" condition-operator="expr"/>
         <node-display x="1" y="1"/>
         <branch basename="b3" source-connector="yes">
           <transition target-connector="in">
@@ -1050,7 +1050,17 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in2" target-path="../b4.1"/>
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="1" y="0"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display orientation="horizontal" x="1" y="0"/>
+                  </node>
+                </segment>
               </branch>
             </node>
             <simple-transition>
@@ -1065,42 +1075,29 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
           </segment>
         </branch>
       </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="Cart-GetExistingBasket"/>
-        <node-display x="1" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="empty(Basket)" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="yes">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="error"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-2"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
         </transition-display>
       </simple-transition>
       <node>
         <end-node/>
-        <node-display orientation="horizontal" x="1" y="0"/>
+        <node-display x="2" y="1"/>
       </node>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_18">
+    <segment>
+      <node>
+        <text-node>
+          <description>This needs to be switched on manually to enable ocapi checkout.  Consult with your DW representative for more details.</description>
+        </text-node>
+        <node-display width="3" x="19" y="10"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
         <text-node>
@@ -1110,7 +1107,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
+  <branch basename="_ANONYMOUS_BRANCH_20">
     <segment>
       <node>
         <text-node>
@@ -1207,7 +1204,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_21">
+  <branch basename="_ANONYMOUS_BRANCH_22">
     <segment>
       <node>
         <text-node>
@@ -1256,7 +1253,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1266,7 +1263,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
         <text-node>
@@ -1274,15 +1271,6 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         </text-node>
         <node-display x="1" y="18"/>
       </node>
-    </segment>
-  </branch>
-  <branch basename="SubmitPaymentsImpl12_6">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="SubmitPaymentsImpl12_6" secure="true"/>
-        <node-display orientation="horizontal" x="1" y="19"/>
-      </node>
-      <transition target-connector="in2" target-path="/Start.2/b2.2"/>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_26">
@@ -1295,10 +1283,10 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="SubmitPaymentsImpl">
+  <branch basename="SubmitPaymentImpl">
     <segment>
       <node>
-        <start-node call-mode="private" name="SubmitPaymentsImpl" secure="true"/>
+        <start-node call-mode="private" name="SubmitPaymentImpl" secure="true"/>
         <node-display orientation="horizontal" x="1" y="21"/>
       </node>
       <transition target-connector="in2" target-path="/Start.2/b2.3"/>
@@ -1318,7 +1306,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <start-node call-mode="private" name="SubmitImpl" secure="true"/>
-        <node-display x="1" y="24"/>
+        <node-display orientation="horizontal" x="1" y="25"/>
       </node>
       <transition target-connector="in1" target-path="/Start.2/b2.4"/>
     </segment>
@@ -1346,7 +1334,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="FailImpl">
     <segment>
       <node>
-        <start-node name="FailImpl" secure="false"/>
+        <start-node call-mode="private" name="FailImpl" secure="true"/>
         <node-display x="6" y="25"/>
       </node>
       <transition target-connector="in1" target-path="/Start.2/b2.4/b2.2"/>
@@ -1390,7 +1378,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="COPlaceOrder-SubmitPaymentsImpl"/>
+        <call-node start-name-ref="COPlaceOrder-SubmitPaymentImpl"/>
         <node-display x="0" y="1"/>
         <branch basename="b4" source-connector="error">
           <transition target-connector="in1"/>
@@ -1569,7 +1557,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
+        <call-node start-name-ref="Cart-GetExistingBasket"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
           <transition target-connector="in1" target-path="./b3.1">
@@ -1631,7 +1619,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
+        <call-node start-name-ref="Cart-GetExistingBasket"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
           <transition target-connector="in1" target-path="./b3.1">
