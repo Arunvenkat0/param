@@ -1362,70 +1362,10 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="SubmitJSON">
+  <branch basename="SubmitPaymentJSON">
     <segment>
       <node>
-        <start-node name="SubmitJSON" secure="true"/>
-        <node-display x="9" y="25"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="./b3.1"/>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-SubmitImpl"/>
-        <node-display x="0" y="2"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="2"/>
-            </node>
-            <transition target-connector="in1" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="2" y="0"/>
-            </node>
-            <transition target-connector="in1" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="2" y="0"/>
-            </node>
-            <simple-transition/>
-            <node>
-              <jump-node start-name-ref="COPlaceOrder-FaultsJSON"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="checkout/components/payment_methods_success"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="SubmitPaymentsJSON">
-    <segment>
-      <node>
-        <start-node name="SubmitPaymentsJSON" secure="true"/>
+        <start-node name="SubmitPaymentJSON" secure="true"/>
         <node-display x="11" y="25"/>
       </node>
       <simple-transition>
@@ -1437,7 +1377,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <call-node start-name-ref="COPlaceOrder-GetOrder"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="/SubmitJSON.1/b3.2"/>
+          <transition target-connector="in1" target-path="./b4.1"/>
         </branch>
       </node>
       <simple-transition/>
@@ -1445,7 +1385,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <call-node start-name-ref="COPlaceOrder-CopyPaymentInfo"/>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
-          <transition target-connector="in1" target-path="/SubmitJSON.1/b3.2"/>
+          <transition target-connector="in1" target-path="./b4.1"/>
         </branch>
       </node>
       <simple-transition/>
@@ -1453,65 +1393,18 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <call-node start-name-ref="COPlaceOrder-SubmitPaymentsImpl"/>
         <node-display x="0" y="1"/>
         <branch basename="b4" source-connector="error">
-          <transition target-connector="in1" target-path="/SubmitJSON.1/b3.2"/>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="checkout/components/payment_methods_success"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="SubmitPayments12_6JSON">
-    <segment>
-      <node>
-        <start-node name="SubmitPayments12_6JSON" secure="true"/>
-        <node-display x="13" y="24"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="/SubmitJSON.1/b3.3">
-            <transition-display>
-              <bend-point relative-to="source" x="2" y="1"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-CopyPaymentInfo"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in1" target-path="/SubmitJSON.1/b3.3"/>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="AcceptForm" pipelet-set-identifier="bc_api">
-          <key-binding alias="CurrentForms.billing.paymentMethods" key="Form"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-SubmitPaymentsImpl12_6"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in2" target-path="/SubmitJSON.1/b3.3"/>
+          <transition target-connector="in1"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <jump-node start-name-ref="COPlaceOrder-FaultsJSON"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
         </branch>
       </node>
       <simple-transition>
@@ -1618,7 +1511,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
+  <branch basename="_ANONYMOUS_BRANCH_37">
     <segment>
       <node>
         <text-node>
@@ -1628,7 +1521,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_40">
+  <branch basename="_ANONYMOUS_BRANCH_38">
     <segment>
       <node>
         <text-node>
@@ -1638,7 +1531,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_41">
+  <branch basename="_ANONYMOUS_BRANCH_39">
     <segment>
       <node>
         <text-node>
@@ -1648,7 +1541,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_42">
+  <branch basename="_ANONYMOUS_BRANCH_40">
     <segment>
       <node>
         <text-node>
@@ -1658,7 +1551,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_43">
+  <branch basename="_ANONYMOUS_BRANCH_41">
     <segment>
       <node>
         <text-node>
@@ -1774,7 +1667,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_46">
+  <branch basename="_ANONYMOUS_BRANCH_44">
     <segment>
       <node>
         <text-node>
