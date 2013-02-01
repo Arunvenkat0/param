@@ -1312,18 +1312,24 @@ var app = (function (app, $) {
 
 			if($(this).parent().hasClass("unselectable")) { return; }
 			var catparent = $(this).parents('.category-refinement');
-			if(catparent.length > 0){
+			var folderparent = $(this).parents('.folder-refinement');
+			
+			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url		
+			//else handle the encoding for the url		
+			if(catparent.length > 0 || folderparent.length > 0 ){
+				
 				return true;
+			}else{ 
+				e.preventDefault();
+				var uri = app.util.getUri(this);
+	
+				if( uri.query.length > 1 ) {
+					window.location.hash = encodeURI(decodeURIComponent(uri.query.substring(1)));
+				} else {
+					window.location.href = encodeURI(this.href);
+				}
+				return false;
 			}
-			e.preventDefault();
-			var uri = app.util.getUri(this);
-
-			if( uri.query.length > 1 ) {
-				window.location.hash = encodeURI(decodeURIComponent(uri.query.substring(1)));
-			} else {
-				window.location.href = encodeURI(this.href);
-			}
-			return false;
 		});
 
 		// handle events item click. append params.
