@@ -1,5 +1,5 @@
 <iscontent type="text/javascript" charset="UTF-8" compact="true"/>
-<iscache type="relative" hour="24">
+
 <isscript>
 	importPackage( dw.system );
 	importPackage( dw.catalog );

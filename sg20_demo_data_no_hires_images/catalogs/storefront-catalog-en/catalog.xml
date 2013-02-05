@@ -192,7 +192,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women and Mens New Arrivals in Clothing, Jewlery, Accessories &amp; More</page-title>
             <page-description xml:lang="x-default">Shop all new arrivals including women and mens clothing, jewelry, accessories, suits &amp; more at Demandware</page-description>
-            <page-url xml:lang="x-default">newarrivals</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -230,7 +229,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">New Arrivals in Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-description xml:lang="x-default">New Arrivals in womens fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
-            <page-url xml:lang="x-default">newarrivals-women</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -248,7 +246,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">New Arrivals in Men's Clothing, Suits &amp; Accessories</page-title>
             <page-description xml:lang="x-default">New Arrivals in Mens  jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
-            <page-url xml:lang="x-default">newarrivals-mens</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -265,7 +262,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Shop New Arrivals in Electronics Including Televisions, Digital Cameras, iPods &amp; More</page-title>
             <page-description xml:lang="x-default">Shop New Arrivals in Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware.</page-description>
-            <page-url xml:lang="x-default">newarrivals-electronics</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -283,7 +279,6 @@
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-description xml:lang="x-default">Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, wome sandals, womens clothing, womens apparel, womens jackets</page-keywords>
-            <page-url xml:lang="x-default">womens</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -307,7 +302,6 @@
             <page-title xml:lang="x-default">Womens Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
-            <page-url xml:lang="x-default">womens-clothing</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -696,7 +690,6 @@
             <page-title xml:lang="x-default">Women's Tops including Short &amp; Long Sleeve, Casual, Classic &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's Shirts. Short and long sleeve, Oxford, smart, casual and classic styles for unbeatable comfort from your desk to the great outdoors at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens shirt, womens dress shirt, womens woven shirt, womens office shirt, womens casual shirt</page-keywords>
-            <page-url xml:lang="x-default">tops</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -847,7 +840,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Dresses for all Occasions</page-title>
             <page-description xml:lang="x-default">Shop Women's dresses for all occasions including formal, evening and casual in a variety of colors at Demandware</page-description>
-            <page-url xml:lang="x-default">dresses</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -866,7 +858,6 @@
             <page-title xml:lang="x-default">Women's Bottoms Including Khakis, Cargos, Trousers, Jeans &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Timberland's famous rugged, long-lasting trousers, jeans, cargo pants and more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens pants, womens khaki pants, womens cargo pants, combat trousers, combat pants, combats, womens casual pants, womens jeans, womens denim jeans</page-keywords>
-            <page-url xml:lang="x-default">bottoms</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1031,7 +1022,6 @@
             <page-title xml:lang="x-default">Women's Outerwear Including Jackets &amp; Collections</page-title>
             <page-description xml:lang="x-default">Shop Women's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens jackets, womens coats, womens leather jackets, womens waterproof jackets, womens insulated jackets, womens vests, womens water resistant jackets</page-keywords>
-            <page-url xml:lang="x-default">outerwear</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1181,7 +1171,6 @@
             <page-title xml:lang="x-default">Womens Clothing All in Red</page-title>
             <page-description xml:lang="x-default">Shop our Women's Red Store. Shirts, sweaters, knits &amp; more all in red.</page-description>
             <page-keywords xml:lang="x-default">red, clothing</page-keywords>
-            <page-url xml:lang="x-default">feeling-red</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1202,7 +1191,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Jewelry including Earrings, Bracelets and Necklaces.</page-title>
             <page-description xml:lang="x-default">Shop Women's jewelery including earrings, bracelets and necklaces in a variety of colors and sizes</page-description>
-            <page-url xml:lang="x-default">jewelry</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1223,7 +1211,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Earrings including Button Clip-on, Curved &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's earrings in a variety of colors and styles including button, clip on and curved at Demandware.</page-description>
-            <page-url xml:lang="x-default">earrings</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1240,7 +1227,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Bracelets including Stretched, Cuff, Beaded &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's bracelets in a variety of colors and styles including stretched, beaded, cuff &amp; more at Demandware.</page-description>
-            <page-url xml:lang="x-default">bracelets</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1258,7 +1244,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Necklaces including Drop, Dangle &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's neclaces in a variety of colors and styles including drop, dangled &amp; more at Demandware.</page-description>
-            <page-url xml:lang="x-default">necklaces</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1277,7 +1262,6 @@
             <page-title xml:lang="x-default">Women's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop womens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
-            <page-url xml:lang="x-default">accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1400,7 +1384,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Scarves</page-title>
             <page-description xml:lang="x-default">Shop Women's Scarves inclduing tweed, pale, basket and spin all at Demandware.</page-description>
-            <page-url xml:lang="x-default">scarves</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1418,7 +1401,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels</page-title>
             <page-description xml:lang="x-default">Shop for womens shoes including casual, flat, mid heel and high heels for any occassion at Demandware</page-description>
-            <page-url xml:lang="x-default">shoes</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1437,7 +1419,6 @@
             <page-title xml:lang="x-default">Men's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-description xml:lang="x-default">Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
             <page-keywords xml:lang="x-default">mens boots, mens shoes, mens clothing, mens apparel, mens jackets</page-keywords>
-            <page-url xml:lang="x-default">mens</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -1461,7 +1442,6 @@
             <page-title xml:lang="x-default">Mens Clothing Including Suits, Tops, Bottoms &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Men's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
-            <page-url xml:lang="x-default">clothing</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1479,7 +1459,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Mens Suits for Business and Casual</page-title>
             <page-description xml:lang="x-default">Shop Men's suits for business or pleasure. Enjoy from a variety of different styles and cuts at Demandware.</page-description>
-            <page-url xml:lang="x-default">suits</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1536,7 +1515,6 @@
             <page-title xml:lang="x-default">Men's Jackets Including Jackets &amp; Blazzers</page-title>
             <page-description xml:lang="x-default">Shop Men's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens jackets, mens coats, mens leather jackets, mens waterproof jackets, mens insulated jackets, mens vests, mens water resistant jackets</page-keywords>
-            <page-url xml:lang="x-default">jackets-coats</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1627,7 +1605,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Dress Shirts including Striped, Button Down, Non-Iron &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Men's dress shirts in a variety of colors and styles including striped, button down, non-iron &amp; more at Demandware</page-description>
-            <page-url xml:lang="x-default">dress-shirts</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -1655,7 +1632,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Spring Shorts</page-title>
             <page-description xml:lang="x-default">Shop Men's spring shorts in cotton. Variety of different fits at Demandware</page-description>
-            <page-url xml:lang="x-default">shorts</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1707,7 +1683,6 @@
             <page-title xml:lang="x-default">Men's Pants Including Khakis, Cargos, Trousers, Jeans &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Men's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Demandware's famous rugged, long-lasting trousers, jeans, cargo pants and more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens pants, mens khaki pants, mens cargo pants, combat trousers, combat pants, combats, mens casual pants, mens jeans, mens denim jeans</page-keywords>
-            <page-url xml:lang="x-default">pants</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1785,7 +1760,6 @@
             <page-title xml:lang="x-default">Men's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop mens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
-            <page-url xml:lang="x-default">accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1803,7 +1777,6 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Casual and Business Ties</page-title>
             <page-description xml:lang="x-default">Shop Mens's Ties for all occasions including business or casual at Demandware</page-description>
-            <page-url xml:lang="x-default">ties</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1821,7 +1794,6 @@
             <page-title xml:lang="x-default">Men's Gloves</page-title>
             <page-description xml:lang="x-default">Shop Men'sGloves . Versatile, commuter, boot, oxford, deer and resolve gloves. All with famous long-lasting quality at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gloves, commuter gloves, boot gloves, oxford gloves, deer gloves, resolve gloves</page-keywords>
-            <page-url xml:lang="x-default">gloves</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1840,7 +1812,6 @@
             <page-title xml:lang="x-default">Men's Wheeled Luggage</page-title>
             <page-description xml:lang="x-default">Shop Men's Wheeled Luggage. Versatile, rugged suitcases, baggage, holdalls and shoulder bags. All with famous long-lasting quality at Demandware.</page-description>
             <page-keywords xml:lang="x-default">suitcase with wheels, wheeled luggage</page-keywords>
-            <page-url xml:lang="x-default">luggage</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1858,7 +1829,6 @@
             <page-title xml:lang="x-default">Shop Electronics Including Televisions, Digital Cameras, iPods &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware</page-description>
             <page-keywords xml:lang="x-default">televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS, gaming</page-keywords>
-            <page-url xml:lang="x-default">electronics</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -1896,7 +1866,6 @@
             <page-title xml:lang="x-default">Televisions Including LCD, Plasma &amp; More in High Definition</page-title>
             <page-description xml:lang="x-default">Shop the latest Televisions including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">televisions, tvs, LCD, plasma, flat screen, high definition, HDTV, projection</page-keywords>
-            <page-url xml:lang="x-default">televisions</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -1930,7 +1899,6 @@
             <page-title xml:lang="x-default">LCD &amp; Plasma High Definition Flat Screen Televisions</page-title>
             <page-description xml:lang="x-default">Shop all Flat Screen Televisions including the latest in LCD and Plasma technology from all the latest brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">flat screen, flat screen television, LCD, plasma, HDTV</page-keywords>
-            <page-url xml:lang="x-default">televisions-flat-screen</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1948,7 +1916,6 @@
             <page-title xml:lang="x-default">Projection High Definition Televisions</page-title>
             <page-description xml:lang="x-default">Shop all Projection Televisions from all the latest brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">projection, projection televisions, HDTV</page-keywords>
-            <page-url xml:lang="x-default">televisions-projection</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1966,7 +1933,6 @@
             <page-title xml:lang="x-default">TV &amp; DVD Combo Televisions</page-title>
             <page-description xml:lang="x-default">Shop all TV and DVD combos from all the latest brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">tv, dvd, tv dvd combo, HDTV</page-keywords>
-            <page-url xml:lang="x-default">televisions-tv-dvd-combo</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1985,7 +1951,6 @@
             <page-title xml:lang="x-default">Digital Cameras</page-title>
             <page-description xml:lang="x-default">Shop the latest digital cameras from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">cameras, digital camerasm point and shoot, slr</page-keywords>
-            <page-url xml:lang="x-default">digital-cameras</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -2116,7 +2081,6 @@
             <page-title xml:lang="x-default">Camcorders</page-title>
             <page-description xml:lang="x-default">Shop the latest digital camcorders from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">camcorders, high definition camcorders</page-keywords>
-            <page-url xml:lang="x-default">camcorders</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2135,7 +2099,6 @@
             <page-title xml:lang="x-default">iPod &amp; MP3 Digital Media Players</page-title>
             <page-description xml:lang="x-default">Shop Digital Media Players including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mp3, iPods, mp3 players</page-keywords>
-            <page-url xml:lang="x-default">digital-media-players</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -2213,7 +2176,6 @@
             <page-title xml:lang="x-default">Mobile Phones</page-title>
             <page-description xml:lang="x-default">Shop the latest mobile phones from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">phones, mobile phones, cell, cell phones</page-keywords>
-            <page-url xml:lang="x-default">mobile-phones</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2232,7 +2194,6 @@
             <page-title xml:lang="x-default">GPS Units</page-title>
             <page-description xml:lang="x-default">Shop the latest in GPS units from Garmin and Tom Tom along with other brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gps, gps units, garmin, tom tom</page-keywords>
-            <page-url xml:lang="x-default">gps-units</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -2356,7 +2317,6 @@
             <page-title xml:lang="x-default">Gaming</page-title>
             <page-description xml:lang="x-default">Shop games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
-            <page-url xml:lang="x-default">gaming</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -2375,7 +2335,6 @@
             <page-title xml:lang="x-default">Video Game Consoles</page-title>
             <page-description xml:lang="x-default">Shop game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
-            <page-url xml:lang="x-default">game-consoles</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2394,7 +2353,6 @@
             <page-title xml:lang="x-default">Video Games</page-title>
             <page-description xml:lang="x-default">Shop video games from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
             <page-keywords xml:lang="x-default">games, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
-            <page-url xml:lang="x-default">games</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2410,7 +2368,6 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Electronics Accessories</page-title>
-            <page-url xml:lang="x-default">accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2436,7 +2393,7 @@
     </category>
 
     <category category-id="top-seller">
-        <display-name xml:lang="x-default">Sale</display-name>
+        <display-name xml:lang="x-default">Top Seller</display-name>
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>14.0</position>
@@ -2473,7 +2430,6 @@
             <page-title xml:lang="x-default">Men's, Women's, Kid's and Electronics Sales</page-title>
             <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, Kid's and Electronics departments at Demandware.</page-description>
             <page-keywords xml:lang="x-default">sale, sales. mens, womens, kids, electronics</page-keywords>
-            <page-url xml:lang="x-default">sale</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2491,7 +2447,6 @@
             <page-title xml:lang="x-default">Men's Sale on Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-description xml:lang="x-default">Sale on Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
             <page-keywords xml:lang="x-default">sale, mens boots, mens shoes, mens clothing, mens apparel, mens jackets</page-keywords>
-            <page-url xml:lang="x-default">sale-mens</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2512,7 +2467,6 @@
             <page-title xml:lang="x-default">Mens Footwear Sales Including Shoes, Boots, Sandals &amp; More</page-title>
             <page-description xml:lang="x-default">Shop for Sales Men's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
             <page-keywords xml:lang="x-default">Mens boots, mens shoes, mens sandals, mens sport shoes, mens dress shoes, mens waterproof boots, mens custom boots</page-keywords>
-            <page-url xml:lang="x-default">sale-mens-footwear</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2855,7 +2809,6 @@
             <page-title xml:lang="x-default">Mens Sales on Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Men's Sales on Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
-            <page-url xml:lang="x-default">sale-mens-clothing</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2907,7 +2860,6 @@
             <page-title xml:lang="x-default">Men's Accessories Sales on Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop mens accessories on sale including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
-            <page-url xml:lang="x-default">sale-mens-accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2967,7 +2919,6 @@
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories Sales</page-title>
             <page-description xml:lang="x-default">Sale on Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, wome sandals, womens clothing, womens apparel, womens jackets</page-keywords>
-            <page-url xml:lang="x-default">sale-womens</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3018,7 +2969,6 @@
             <page-title xml:lang="x-default">Womens Footwear Sales Including Shoes, Boots, Sandals &amp; More</page-title>
             <page-description xml:lang="x-default">Shop for Sales Women's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, womens sandals, womens sport shoes, womens dress shoes, womens waterproof boots, womens custom boots</page-keywords>
-            <page-url xml:lang="x-default">sale-womens-footwear</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3141,7 +3091,6 @@
             <page-title xml:lang="x-default">Womens Clothing Sales Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Women's Clothing Sales. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
-            <page-url xml:lang="x-default">sale-womens-clothing</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3256,7 +3205,6 @@
             <page-title xml:lang="x-default">Women's Accessories Sales Including Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-description xml:lang="x-default">Shop womens accessories sales including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
-            <page-url xml:lang="x-default">sale-womens-accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3313,7 +3261,6 @@
             <page-title xml:lang="x-default">Shop Electronics Sales Including Televisions, Digital Cameras, iPods &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Electronics sales including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware</page-description>
             <page-keywords xml:lang="x-default">televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS, gaming</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3340,7 +3287,6 @@
             <page-title xml:lang="x-default">Televisions Sales Including LCD, Plasma &amp; More in High Definition</page-title>
             <page-description xml:lang="x-default">Shop the latest Televisions sales including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">televisions, tvs, LCD, plasma, flat screen, high definition, HDTV, projection</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-tv</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3374,7 +3320,6 @@
             <page-title xml:lang="x-default">Sale on Camcorders</page-title>
             <page-description xml:lang="x-default">Shop the latest digital camcorders sales from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">camcorders, high definition camcorders</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-camcorders</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3392,7 +3337,6 @@
             <page-title xml:lang="x-default">Sale on Digital Cameras</page-title>
             <page-description xml:lang="x-default">Shop the latest digital cameras sales from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">cameras, digital camerasm point and shoot, slr</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-digital</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3447,7 +3391,6 @@
             <page-title xml:lang="x-default">Sale on GPS Units</page-title>
             <page-description xml:lang="x-default">Shop the latest sales on GPS units from Garmin and Tom Tom along with other brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gps, gps units, garmin, tom tom</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-gps</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3495,7 +3438,6 @@
             <page-title xml:lang="x-default">Sale on Gaming</page-title>
             <page-description xml:lang="x-default">Shop sales on games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-gaming</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3513,7 +3455,6 @@
             <page-title xml:lang="x-default">Sale on Mobile Phones</page-title>
             <page-description xml:lang="x-default">Shop the latest sales on mobile phones from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">phones, mobile phones, cell, cell phones</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-mobile</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3531,7 +3472,6 @@
             <page-title xml:lang="x-default">Sale on Digital Portable Audio Players</page-title>
             <page-description xml:lang="x-default">Shop Digital Media Players sales including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Demandware.</page-description>
             <page-keywords xml:lang="x-default">mp3, iPods, mp3 players</page-keywords>
-            <page-url xml:lang="x-default">sale-electronics-portable-audio</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3577,7 +3517,6 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Electronics Accessories</page-title>
-            <page-url xml:lang="x-default">sale-electronics-accessories</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>

@@ -43,7 +43,7 @@
 	
 		<isloop items="${Refinements.refinementDefinitions}" var="RefinementDefinition" status="refinementsLoopState">
 					
-			<div class="refinement ${RefinementDefinition.displayName}">
+			<div class="refinement ${RefinementDefinition.displayName}<isif condition="${RefinementDefinition.isCategoryRefinement()}"> category-refinement</isif>">
 			
 			<iscomment>CATEGORY REFINEMENTS</iscomment>
 			<isif condition="${RefinementDefinition.isCategoryRefinement()}">
