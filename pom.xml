@@ -13,15 +13,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>dw.ecom</groupId>
-    <artifactId>refapp2</artifactId>
-    <name>SiteGenesis2</name>
+    <artifactId>sitegen</artifactId>
+    <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>13.1.2.3-SNAPSHOT</version>
+    <version>13.2.0.1-SNAPSHOT</version>
     <description>SiteGenesis</description>
-
-    <properties>
-        <dw.site.name>sitegenesis2</dw.site.name>
-    </properties>
 
     <build>
         <plugins>
