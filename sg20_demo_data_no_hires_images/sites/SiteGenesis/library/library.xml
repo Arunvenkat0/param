@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
     <folder folder-id="root">
         <online-flag>true</online-flag>
@@ -138,7 +138,7 @@
         <page-attributes/>
     </folder>
 
-    <folder folder-id="shipping">
+    <folder folder-id="shippinginfo">
         <display-name xml:lang="x-default">Shipping</display-name>
         <online-flag>true</online-flag>
         <parent>customer-service</parent>
@@ -195,7 +195,7 @@
         <page-attributes/>
     </folder>
 
-    <folder folder-id="home">
+    <folder folder-id="home-page">
         <display-name xml:lang="x-default">Home Page</display-name>
         <online-flag>false</online-flag>
         <parent>page-includes</parent>
@@ -286,7 +286,7 @@
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -503,7 +503,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
 &lt;p&gt;Customer Service&lt;br /&gt;&#13;
 Monday to Friday&lt;br /&gt;&#13;
 8 AM to 8 PM&lt;br /&gt;&#13;
-1 (888) 553 9216&lt;/p&gt;</custom-attribute>
+1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="my-account"/>
@@ -1628,7 +1628,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (888-555-1212) Monday - Friday, 8AM - 8PM</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (888-555-XXXX) Monday - Friday, 8AM - 8PM</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -1757,7 +1757,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help? &lt;span&gt;888-553-9216&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
@@ -1773,7 +1773,6 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
             <page-title xml:lang="x-default">Customer Servive</page-title>
             <page-description xml:lang="x-default">Here you will find answers to your questions about shopping at our online store, your order, payment options and more. Simply select from the categories below for you complete information.</page-description>
             <page-keywords xml:lang="x-default">service, help</page-keywords>
-            <page-url xml:lang="x-default">customer-service</page-url>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Welcome to Customer Service&lt;/h1&gt;</custom-attribute>
@@ -1926,7 +1925,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 &lt;p class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -2073,7 +2072,7 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
 &lt;/form&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -2172,7 +2171,7 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <folder-links>
-            <classification-link folder-id="home"/>
+            <classification-link folder-id="home-page"/>
         </folder-links>
     </content>
 
@@ -3253,7 +3252,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;As soon as the goods are delivered to you, you are responsible for them.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>1.0</position>
             </classification-link>
         </folder-links>
@@ -3306,7 +3305,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All Televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>2.0</position>
             </classification-link>
         </folder-links>
@@ -3334,7 +3333,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All video games have a $1.00 shipping surcharge fee for super saver shipping.&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
-            <classification-link folder-id="shipping">
+            <classification-link folder-id="shippinginfo">
                 <position>3.0</position>
             </classification-link>
         </folder-links>

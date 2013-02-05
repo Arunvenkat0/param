@@ -204,7 +204,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Respsonsible for creating the order, set the order confirmation status</description>
+          <description>Responsible for creating the order, set the order status to 'Created'</description>
         </text-node>
         <node-display x="12" y="3"/>
       </node>
@@ -224,7 +224,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Respsonsible for creating the order, set the order confirmation status</description>
+          <description>Responsible for placing the order and set the order status to 'New'</description>
         </text-node>
         <node-display x="17" y="3"/>
       </node>
@@ -464,15 +464,18 @@
                 </segment>
               </branch>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="target" x="0" y="-1"/>
-              </transition-display>
-            </simple-transition>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="COPlaceOrder-CreateOrder"/>
-              <node-display x="0" y="2"/>
-              <branch basename="b6" source-connector="error">
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="target" x="-1" y="0"/>
@@ -517,15 +520,18 @@
                 </segment>
               </branch>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="target" x="0" y="-1"/>
-              </transition-display>
-            </simple-transition>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="COPlaceOrder-HandlePayments"/>
-              <node-display x="0" y="2"/>
-              <branch basename="b7" source-connector="error">
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="target" x="-1" y="0"/>
@@ -573,7 +579,7 @@
                   <transition target-connector="in1" target-path="../+1/b2.2"/>
                 </segment>
               </branch>
-              <branch basename="b8" source-connector="missingPaymentInfo">
+              <branch basename="b3" source-connector="missingPaymentInfo">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="target" x="-1" y="0"/>
@@ -606,7 +612,7 @@
                     </pipelet-node>
                     <node-display orientation="horizontal" x="1" y="2"/>
                   </node>
-                  <transition target-connector="in2" target-path="../b7.3"/>
+                  <transition target-connector="in2" target-path="../b2.3"/>
                 </segment>
               </branch>
             </node>
@@ -825,7 +831,11 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <start-node call-mode="private" name="CreateOrder" secure="false"/>
         <node-display x="12" y="4"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="!empty(Order)" condition-operator="expr"/>
         <node-display x="0" y="1"/>
@@ -840,9 +850,8 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         </transition-display>
       </simple-transition>
       <node>
-        <pipelet-node pipelet-name="CreateOrder" pipelet-set-identifier="bc_api">
+        <pipelet-node pipelet-name="CreateOrder2" pipelet-set-identifier="bc_api">
           <config-property key="CreateCustomerNo" value="true"/>
-          <config-property key="PlaceOrder" value="false"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="Order" key="Order"/>
           <key-binding alias="null" key="OrderNo"/>
@@ -873,7 +882,11 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <join-node/>
         <node-display x="-1" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node/>
         <node-display x="0" y="1"/>
@@ -990,87 +1003,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="GetOrder">
-    <segment>
-      <node>
-        <start-node call-mode="private" name="GetOrder" secure="true"/>
-        <node-display x="17" y="9"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <decision-node condition-key="!empty(Order)" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <end-node/>
-              <node-display x="0" y="3"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="2" y="0"/>
-          <bend-point relative-to="target" x="0" y="-1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <decision-node condition-key="!empty(CurrentHttpParameterMap.order_id.stringValue)" condition-operator="expr"/>
-        <node-display x="1" y="1"/>
-        <branch basename="b3" source-connector="yes">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="GetOrder" pipelet-set-identifier="bc_api">
-                <key-binding alias="CurrentHttpParameterMap.order_id.stringValue" key="OrderNo"/>
-                <key-binding alias="Order" key="Order"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in2" target-path="../+1"/>
-              </branch>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <transition target-connector="in1" target-path="./+1">
-        <transition-display>
-          <bend-point relative-to="source" x="2" y="0"/>
-        </transition-display>
-      </transition>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="1" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <end-node name="error"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
+  <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
         <text-node>
@@ -1080,7 +1013,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
+  <branch basename="_ANONYMOUS_BRANCH_18">
     <segment>
       <node>
         <text-node>
@@ -1122,7 +1055,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
                 <key-binding alias="GiftCertificateLineItem.senderName" key="SenderName"/>
                 <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
                 <key-binding alias="GiftCertificateLineItem.message" key="Message"/>
-                <key-binding alias="OrderNo" key="OrderNo"/>
+                <key-binding alias="Order.orderNo" key="OrderNo"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
@@ -1177,7 +1110,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_21">
+  <branch basename="_ANONYMOUS_BRANCH_20">
     <segment>
       <node>
         <text-node>
@@ -1226,6 +1159,134 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
+  <branch basename="GetOrder">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="GetOrder" secure="false"/>
+        <node-display x="18" y="14"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="!empty(Order)" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node/>
+              <node-display x="0" y="2"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="!empty(CurrentHttpParameterMap.order_id.stringValue)" condition-operator="expr"/>
+        <node-display x="1" y="1"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="GetOrder" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentHttpParameterMap.order_id.stringValue" key="OrderNo"/>
+                <key-binding alias="Order" key="Order"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="./+1">
+                  <transition-display>
+                    <bend-point relative-to="target" x="0" y="-2"/>
+                  </transition-display>
+                </transition>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
+              <decision-node condition-key="CurrentHttpParameterMap.order_token.stringValue == Order.getOrderToken()" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b3" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <end-node/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in2" target-path="./+1">
+              <description>error</description>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="2" y="0"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="null" key="From_0"/>
+                <key-binding alias="Order" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <end-node name="error"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="-2"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node name="error"/>
+        <node-display x="3" y="1"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="_ANONYMOUS_BRANCH_23">
     <segment>
       <node>
@@ -1250,13 +1311,22 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
-          <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will result in an &quot;Open&quot; Order.</description>
+          <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will create a new Order with status 'Created'.</description>
         </text-node>
         <node-display width="2" x="0" y="20"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
+  <branch basename="SubmitPaymentImpl">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="SubmitPaymentImpl" secure="true"/>
+        <node-display orientation="horizontal" x="1" y="21"/>
+      </node>
+      <transition target-connector="in2" target-path="/Start.2/b2.3"/>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>
@@ -1266,124 +1336,59 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
+  <branch basename="SubmitImpl">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="SubmitImpl" secure="true"/>
+        <node-display orientation="horizontal" x="1" y="25"/>
+      </node>
+      <transition target-connector="in1" target-path="/Start.2/b2.4"/>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_29">
     <segment>
       <node>
         <text-node>
-          <description>Create the order.</description>
+          <description>Sets the Order status to 'New'.</description>
         </text-node>
         <node-display x="1" y="26"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_28">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
           <description>Asynchronous Callback Pipeline Actions (private actions).  Public API for these will wrap with a format appropriate output (HTML or JSON output)</description>
         </text-node>
-        <node-display width="3" x="5" y="24"/>
+        <node-display width="2" x="5" y="24"/>
       </node>
-    </segment>
-  </branch>
-  <branch basename="SubmitImpl">
-    <segment>
-      <node>
-        <start-node name="SubmitImpl" secure="false"/>
-        <node-display x="5" y="25"/>
-      </node>
-      <transition target-connector="in2" target-path="/Start.2/b2.2"/>
     </segment>
   </branch>
   <branch basename="FailImpl">
     <segment>
       <node>
-        <start-node name="FailImpl" secure="false"/>
+        <start-node call-mode="private" name="FailImpl" secure="true"/>
         <node-display x="6" y="25"/>
       </node>
-      <transition target-connector="in1" target-path="/Start.2/b2.2/b2.2"/>
-    </segment>
-  </branch>
-  <branch basename="CancelImpl">
-    <segment>
-      <node>
-        <start-node name="CancelImpl" secure="false"/>
-        <node-display x="7" y="25"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="CancelOrder" pipelet-set-identifier="bc_api">
-          <key-binding alias="CancelOrderStatus" key="CancelOrderStatus"/>
-          <key-binding alias="CancelCode" key="CancelCode"/>
-          <key-binding alias="CancelDescription" key="CancelDescription"/>
-          <key-binding alias="Order" key="Order"/>
-        </pipelet-node>
-        <node-display x="0" y="2"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="2" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <end-node name="error"/>
-              <node-display x="1" y="2"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <end-node name="order_cancelled"/>
-        <node-display x="0" y="2"/>
-      </node>
+      <transition target-connector="in1" target-path="/Start.2/b2.4/b2.2"/>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_32">
     <segment>
       <node>
         <text-node>
-          <description>Asynchronous Callbacks for OCAPI.  These functions result in a JSON response.</description>
+          <description>Asynchronous Callbacks for OCAPI. These functions result in a JSON response.</description>
         </text-node>
-        <node-display width="5" x="9" y="24"/>
+        <node-display width="3" x="10" y="24"/>
       </node>
     </segment>
   </branch>
-  <branch basename="SubmitJSON">
+  <branch basename="SubmitPaymentJSON">
     <segment>
       <node>
-        <start-node name="SubmitJSON" secure="true"/>
-        <node-display x="9" y="25"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-SubmitImpl"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="FailJSON">
-    <segment>
-      <node>
-        <start-node name="FailJSON" secure="true"/>
-        <node-display x="11" y="25"/>
+        <start-node name="SubmitPaymentJSON" secure="false"/>
+        <node-display x="10" y="25"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -1393,6 +1398,9 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <node>
         <call-node start-name-ref="COPlaceOrder-GetOrder"/>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./b4.1"/>
+        </branch>
       </node>
       <simple-transition>
         <transition-display>
@@ -1400,8 +1408,34 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         </transition-display>
       </simple-transition>
       <node>
-        <call-node start-name-ref="COPlaceOrder-FailImpl"/>
+        <call-node start-name-ref="COPlaceOrder-CopyPaymentInfo"/>
         <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1" target-path="./b4.1"/>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="COPlaceOrder-SubmitPaymentImpl"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b4" source-connector="error">
+          <transition target-connector="in1"/>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="2" y="-1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <jump-node start-name-ref="COPlaceOrder-FaultsJSON"/>
+              <node-display x="0" y="2"/>
+            </node>
+          </segment>
+        </branch>
       </node>
       <simple-transition>
         <transition-display>
@@ -1410,27 +1444,17 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </simple-transition>
       <node>
         <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false"/>
+          <template buffered="true" dynamic="false" name="checkout/components/payment_methods_success"/>
         </interaction-node>
         <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>
-  <branch basename="CancelJSON">
+  <branch basename="FaultsJSON">
     <segment>
       <node>
-        <start-node name="CancelJSON" secure="true"/>
-        <node-display x="13" y="25"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-CancelImpl"/>
-        <node-display x="0" y="1"/>
+        <start-node call-mode="private" name="FaultsJSON" secure="true"/>
+        <node-display x="15" y="25"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -1439,9 +1463,81 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </simple-transition>
       <node>
         <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false"/>
+          <template buffered="true" dynamic="false" name="checkout/components/faults"/>
         </interaction-node>
         <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CopyPaymentInfo">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CopyPaymentInfo" secure="false"/>
+        <node-display x="16" y="25"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.billing.paymentMethods" key="FormElement"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="checkout/CopyPaymentMethodsFromOCAPIRequest.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="CurrentForms.billing.paymentMethods" key="PaymentMethodsForm"/>
+          <key-binding alias="CurrentHttpParameterMap" key="HttpParamMap"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in2" target-path="./+1"/>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="COBilling-HandlePaymentSelection"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="error"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="ok">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <end-node/>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
       </node>
     </segment>
   </branch>
@@ -1479,9 +1575,19 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
+          <description>Mark order as EXPORT_STATUS_READY.</description>
+        </text-node>
+        <node-display x="1" y="33"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_40">
+    <segment>
+      <node>
+        <text-node>
           <description>Asynchronous Callbacks for SiteGenesis</description>
         </text-node>
-        <node-display width="5" x="9" y="29"/>
+        <node-display width="4" x="9" y="32"/>
       </node>
     </segment>
   </branch>
@@ -1489,7 +1595,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <start-node name="Submit" secure="true"/>
-        <node-display x="9" y="30"/>
+        <node-display x="9" y="33"/>
       </node>
       <simple-transition/>
       <node>
@@ -1528,16 +1634,9 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
               <join-node/>
               <node-display x="2" y="0"/>
             </node>
-            <transition target-connector="in1" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="2" y="0"/>
-            </node>
             <simple-transition/>
             <node>
-              <jump-node start-name-ref="Error-Start"/>
+              <jump-node start-name-ref="COSummary-Start"/>
               <node-display orientation="horizontal" x="1" y="0"/>
             </node>
           </segment>
@@ -1558,7 +1657,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <start-node name="Fail" secure="true"/>
-        <node-display x="11" y="30"/>
+        <node-display x="11" y="33"/>
       </node>
       <simple-transition/>
       <node>
@@ -1598,61 +1697,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="Cancel">
-    <segment>
-      <node>
-        <start-node call-mode="public" name="Cancel" secure="true"/>
-        <node-display x="13" y="30"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-GetOrder"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="./b3.1">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COPlaceOrder-CancelImpl"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in2"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="1"/>
-            </node>
-            <transition target-connector="in2" target-path="/Submit.1/b3.4"/>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <jump-node start-name-ref="COSummary-Start"/>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="_ANONYMOUS_BRANCH_43">
-    <segment>
-      <node>
-        <text-node>
-          <description>Mark order as EXPORT_STATUS_READY.</description>
-        </text-node>
-        <node-display x="1" y="33"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_44">
     <segment>
       <node>
         <text-node>
