@@ -793,6 +793,7 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 
 .pt_wish-list .list-table-header{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;overflow:hidden;padding:2em;}
 .pt_wish-list .list-table-header p{color:#999999;float:right;margin:0;overflow:hidden;width:37%;}
+.pt_wish-list .primary-content .list-table-header h2{float: left;}
 
 /* gift registry */
 /* ------------------------------------- */
@@ -815,6 +816,7 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .gift-registry-advanced .toggle-content {overflow:hidden;padding:10px;}
 .gift-registry-advanced .event-month {clear: both;}
 .gift-registry-advanced .event-city {clear: both;}
+.pt_gift-registry .primary-content .list-table-header h2{float:left;}
 
 /* gift certificates */
 /* ------------------------------------- */
