@@ -76,7 +76,9 @@
 		<ul>
 			<isloop items="${pdict.ProductSetList}" var="product" status="loopstatus">				
 				<isset name="lgImage" value="${product.getImages('large')[0]}" scope="page" />
-				<isset name="hi_res" value="${product.getImages('hi-res')[0]}" scope="page" />
+				<isif condition="${!empty(imageProduct.getImage('hi-res', 0))}">
+					<isset name="hi_res" value="${product.getImages('hi-res')[0]}" scope="page" />
+				</isif>
 				<isset name="href" value="${''}" scope="page" />
 				<isif condition="${!empty(hi_res)}">
 					<isset name="href" value="${hi_res.getURL()}" scope="page" />
