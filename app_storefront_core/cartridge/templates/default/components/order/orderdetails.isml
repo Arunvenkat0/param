@@ -206,7 +206,7 @@
 								<span class="label">${Resource.msg('orderdetails.giftcertfrom','components',null)}</span>
 								<span class="value">
 									<isprint value="${giftCertificateLineItem.senderName}"/><br />
-									<ismask p_string="${giftCertificateLineItem.senderEmail}" p_maskchars="${6}"/>
+									<ismask p_string="${Order.customerEmail}" p_maskchars="${6}"/>
 								</span>
 							</div>
 						</td>
