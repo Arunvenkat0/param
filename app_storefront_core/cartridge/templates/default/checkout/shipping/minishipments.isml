@@ -38,7 +38,7 @@
 					<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
 						<isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
 							<div><isprint value="${giftCertLI.recipientName}"/></div>
-							<div>(<ismask p_string="${giftCertLI.recipientEmail}" p_maskchars="${6}"/>)</div>
+							<div>(<isprint value="${giftCertLI.recipientEmail}"/>)</div>
 						</isloop>
 					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
 						<isset name="address" value="${shipment.shippingAddress}" scope="page"/>

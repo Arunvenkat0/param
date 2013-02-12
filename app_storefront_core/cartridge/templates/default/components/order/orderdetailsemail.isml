@@ -180,12 +180,12 @@
 							<div>
 								${Resource.msg('orderdetails.giftcertto','components',null)}
 									<isprint value="${giftCertificateLineItem.recipientName}"/><br />
-									<ismask p_string="${giftCertificateLineItem.recipientEmail}" p_maskchars="${6}"/>
+									<isprint value="${giftCertificateLineItem.recipientEmail}"/>
 							</div>
 							<div>
 								${Resource.msg('orderdetails.giftcertfrom','components',null)}
 									<isprint value="${giftCertificateLineItem.senderName}"/><br />
-									<ismask p_string="${Order.customerEmail}" p_maskchars="${6}"/>									
+									<isprint value="${Order.customerEmail}"/>									
 							</div>
 						</td>
 						<td style="${Resource.msg('email.tablecell','email',null)}">
@@ -196,7 +196,7 @@
 					    		${Resource.msg('orderdetails.giftcertshippingaddress','components',null)}
 					    		<div>
 									<isprint value="${giftCertificateLineItem.recipientName}"/>
-									<ismask p_string="${giftCertificateLineItem.recipientEmail}" p_maskchars="${6}"/>
+									<isprint value="${giftCertificateLineItem.recipientEmail}"/>
 								</div>
 					    	</div>
 							<div>
