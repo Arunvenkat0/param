@@ -9,7 +9,7 @@
 		if (folder != null)	{
 			while( folder.parent != null ) {
 				if( folder.online && ('customCSSFile' in folder.custom) && !empty(folder.custom.customCSSFile))	{
-					folderCustomCSS.push(folder.custom.customCSSFile.getURL());					
+					folderCustomCSS.push(folder.custom.customCSSFile.getURL().toString());					
 				}
 				folder = folder.parent;
 			}
@@ -22,5 +22,5 @@
 jQuery(document).ready(function() {
 app.util.clearDynamicCss();
 app.util.loadDynamicCss(<isprint value="${ojson}" encoding="off"/>);
-}
+});
 </script>

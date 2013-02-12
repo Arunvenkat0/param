@@ -114,7 +114,7 @@
 									<span class="label">${Resource.msg('global.to','locale',null)}:</span>
 									<span class="value">
 										<isprint value="${giftCertificateLineItem.recipientName}"/> 
-										(<ismask p_string="${giftCertificateLineItem.recipientEmail}" p_maskchars="${6}"/>)
+										(<isprint value="${giftCertificateLineItem.recipientEmail}"/>) 
 									</span>
 								</div>
 								<div class="gift-certificate-from">

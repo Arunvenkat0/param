@@ -199,14 +199,14 @@
 								<span class="label">${Resource.msg('orderdetails.giftcertto','components',null)}</span>
 								<span class="value">
 									<isprint value="${giftCertificateLineItem.recipientName}"/><br />
-									<ismask p_string="${giftCertificateLineItem.recipientEmail}" p_maskchars="${6}"/>
+									<isprint value="${giftCertificateLineItem.recipientEmail}"/>
 								</span>
 							</div>
 							<div class="order-gift-cert-from">
 								<span class="label">${Resource.msg('orderdetails.giftcertfrom','components',null)}</span>
 								<span class="value">
 									<isprint value="${giftCertificateLineItem.senderName}"/><br />
-									<ismask p_string="${giftCertificateLineItem.senderEmail}" p_maskchars="${6}"/>
+									<isprint value="${Order.customerEmail}"/>
 								</span>
 							</div>
 						</td>
@@ -218,7 +218,7 @@
 					    		<span class="label">${Resource.msg('orderdetails.giftcertshippingaddress','components',null)}</span>
 					    		<div class="order-gift-cert-to">
 									<span class="value"><isprint value="${giftCertificateLineItem.recipientName}"/></span>
-									<span class="value"><ismask p_string="${giftCertificateLineItem.recipientEmail}" p_maskchars="${6}"/></span>
+									<span class="value"><isprint value="${giftCertificateLineItem.recipientEmail}"/></span>
 								</div>
 					    	</div>
 							<div class="shipping-method">

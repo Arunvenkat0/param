@@ -383,10 +383,9 @@
 												<span class="label">
 													${Resource.msg('global.to','locale',null)}:
 												</span>
-												<iscomment>Due to security and privacy concerns, email address is masked, see APP-12356 jira issue for more details</iscomment>
 												<span class="value">
 													<isprint value="${GiftCertificate.object.recipientName}" />, 
-													<ismask p_string="${GiftCertificate.object.recipientEmail}" p_maskchars="${6}" />
+													<isprint value="${GiftCertificate.object.recipientEmail}" />
 												</span>											
 											</isif>
 										</div>
