@@ -107,7 +107,7 @@
 		toggleGridWideTileView : function(){
 			
 			/*	toggle grid/wide tile	*/
-			if(jQuery('.toggle-grid').length == 0)
+			if(jQuery('.toggle-grid').length == 0 && (jQuery('.pt_order').length == 0) && (jQuery('.pt_content-search-result').length == 0))
 			{
 				jQuery('.results-hits').prepend('<a class="toggle-grid" href="'+location.href+'">+</a>');
 				jQuery('.toggle-grid').click(function(){
