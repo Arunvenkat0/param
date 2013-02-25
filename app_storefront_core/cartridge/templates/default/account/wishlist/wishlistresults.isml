@@ -48,15 +48,15 @@
 			<p>${Resource.msg('searchresult.emptymessage','account',null)}
 			
 			<isif condition="${pdict.SearchLastName != null}">
-				<isprint value="${pdict.SearchLastName}">
+				<isprint value="${pdict.SearchLastName}"/>
 			</isif>
 			
 			<isif condition="${pdict.SearchFirstName != null}">
-				<isprint value="${pdict.SearchFirstName}">
+				<isprint value="${pdict.SearchFirstName}"/>
 			</isif>
 			
 			<isif condition="${pdict.SearchEmail != null}">
-				<isprint value="${pdict.SearchEmail}">
+				<isprint value="${pdict.SearchEmail}"/>
 			</isif>
 			
 			${Resource.msg('searchresult.emptymessage2','account',null)}</p>

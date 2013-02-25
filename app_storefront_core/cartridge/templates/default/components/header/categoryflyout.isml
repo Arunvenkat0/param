@@ -16,7 +16,7 @@
 			
 			<li ${subcatstatus.first ? 'class=first' : ''} ${subcatstatus.last ? 'class=last' : ''}>
 	
-				<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(subCat)}" encoding="off">" class="level-2">
+				<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(subCat)}" encoding="off"/>" class="level-2">
 					<isprint value="${subCat.getDisplayName()}"/>
 				</a>
 				

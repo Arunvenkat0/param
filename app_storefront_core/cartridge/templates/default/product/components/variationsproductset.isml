@@ -144,7 +144,7 @@
 										   title="${displayValue}" 
 										   style="background: url(${VV.getImage('swatch').getURL()}) repeat-y;" 
 										   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}" <isif condition="${!empty(imageProduct.getImage("hi-res", 0))}">, "hires":"${VV.getImage("hi-res").getURL()}"</isif>}'>
-										   	<isprint value="${displayValue}">
+										   	<isprint value="${displayValue}"/>
 										</a>
 									</li>									
 								</isloop>
