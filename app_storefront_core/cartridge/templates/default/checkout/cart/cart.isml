@@ -62,7 +62,7 @@
 			<div class="error-form ">
 				<isif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='CouponError'}">
 					${Resource.msg('cart.cartcouponinvalid','checkout',null)}
-				<iselseif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='TaxError'}"/>
+				<iselseif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='TaxError'}">
 					${Resource.msg('cart.taxinvalid','checkout',null)} 
 				<iselse>
 					Error: ${pdict.BasketStatus.code}
@@ -409,7 +409,7 @@
 													<a href="${URLUtils.url('Wishlist-ShowOther','WishListID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.wishlistitem','checkout',null)}">
 														${Resource.msg('cart.wishlistitem','checkout',null)}
 													</a>
-												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}"/>
+												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 													<a href="${URLUtils.url('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
 														${Resource.msg('cart.registryitem','checkout',null)}
 													</a>
@@ -761,7 +761,7 @@
 							<div class="error">
 								${Resource.msg('cart.COUPON_CODE_MISSING','checkout', null)}
 							</div>
-						<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}"/>
+						<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 							<div class="error">
 								${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}
 							</div>

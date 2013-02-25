@@ -111,7 +111,7 @@
 										<isprint value="${RefinementValue.getDisplayValue()}">
 									</a>
 								</li>
-							<iselseif condition="${RefinementValue.hitCount == 0}"/>
+							<iselseif condition="${RefinementValue.hitCount == 0}">
 								<li class="unselectable ${swatchID}">
 									<a id="${swatchID}" title="${RefinementValue.getDisplayValue()}">
 										<isprint value="${RefinementValue.getDisplayValue()}"/>
@@ -186,7 +186,7 @@
 </isloop>
 
 	
-	<iselseif condition="${pdict.ProductSearchResult.count == 0}"/>
+	<iselseif condition="${pdict.ProductSearchResult.count == 0}">
 		<isinclude template="search/components/categoryrefinebar"/>
 	</isif>
 </isif>

@@ -143,7 +143,7 @@
 						    		<span class="label">${Resource.msg('orderdetails.shippingstatus','components',null)}</span>
 				    				<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
 				    					<span class="value">${Resource.msg('orderdetails.notshipped','components',null)}</span>
-				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}"/>
+				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
 				    					<span class="value">${Resource.msg('orderdetails.shipped','components',null)}</span>
 				    				<iselse>
 				    					<span class="value">${Resource.msg('orderdetails.notknown','components',null)}</span>

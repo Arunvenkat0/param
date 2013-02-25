@@ -22,17 +22,17 @@
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
 			<isset name="step4state" value="inactive" scope="page"/>
-		<iselseif condition="${pdict.step == '2'}"/>
+		<iselseif condition="${pdict.step == '2'}">
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="active"   scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
 			<isset name="step4state" value="inactive" scope="page"/>
-		<iselseif condition="${pdict.step == '3'}"/>
+		<iselseif condition="${pdict.step == '3'}">
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="active"   scope="page"/>
 			<isset name="step4state" value="inactive" scope="page"/>
-		<iselseif condition="${pdict.step == '4'}"/>
+		<iselseif condition="${pdict.step == '4'}">
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
@@ -101,11 +101,11 @@
 			<isset name="step1state" value="active"   scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
-		<iselseif condition="${pdict.step == '2'}"/>
+		<iselseif condition="${pdict.step == '2'}">
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="active"   scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
-		<iselseif condition="${pdict.step == '3'}"/>
+		<iselseif condition="${pdict.step == '3'}">
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="active"   scope="page"/>

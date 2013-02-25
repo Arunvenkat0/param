@@ -61,7 +61,7 @@
 				<div class="form-row error">
 					<isprint value="${pdict.ErrorMsg}"/>
 				</div>
-			<iselseif condition="${pdict.GiftCertificate != null}"/>
+			<iselseif condition="${pdict.GiftCertificate != null}">
 				<div class="form-row error">
 					${Resource.msg('giftcertpurchase.balancealert', 'checkout', null)} <isprint value="${pdict.GiftCertificate.balance}"/>
 				</div>
