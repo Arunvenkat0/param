@@ -128,7 +128,7 @@
 			<iscomment>Product set pricing</iscomment>
 			<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
 		
-		<iselseif condition="${Product.master && Product.priceModel.isPriceRange()}"/>
+		<iselseif condition="${Product.master && Product.priceModel.isPriceRange()}">
 			
 			<iscomment>Product master price range depending on the variants</iscomment>
 			<isprint value="${Product.priceModel.minPrice}"/> - <isprint value="${Product.priceModel.maxPrice}"/>

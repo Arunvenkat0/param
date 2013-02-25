@@ -127,7 +127,7 @@
 		<iscomment>Product set pricing</iscomment>
 		<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
 		
-	<iselseif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true'}"/>
+	<iselseif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true'}">
 		<iscomment>Product master price range depending on the represented variants</iscomment>	
 		<span class="product-sales-price">$<isprint value="${pdict.CurrentHttpParameterMap.minprice.stringValue}"/> - $<isprint value="${pdict.CurrentHttpParameterMap.maxprice.stringValue}"/></span>
 	<iselse>						

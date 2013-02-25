@@ -24,7 +24,7 @@
 				<h3 class="section-header">
 					<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
 						${Resource.msg('minishipments.shipping','checkout',null)} <span>${Resource.msg('minishipments.giftcertdelivery','checkout',null)}</span>
-					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
+					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}">
 						<a href="${editUrl}"  class="section-header-note">${Resource.msg('global.edit','locale',null)}</a>
 						${Resource.msg('minishipments.shippingaddress','checkout',null)}
 					</isif>
@@ -40,7 +40,7 @@
 							<div><isprint value="${giftCertLI.recipientName}"/></div>
 							<div>(<isprint value="${giftCertLI.recipientEmail}"/>)</div>
 						</isloop>
-					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
+					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}">
 						<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
 						<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
 						<div><isprint value="${address.address1}"/></div>

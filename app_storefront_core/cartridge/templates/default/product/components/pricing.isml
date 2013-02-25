@@ -83,7 +83,7 @@
 				<div class="salesprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetSalesPrice, pdict.CurrencyCode))}" /></div>
 			</isif>
 			
-		<iselseif condition="${pdict.Product.master && pdict.Product.priceModel.isPriceRange()}" />
+		<iselseif condition="${pdict.Product.master && pdict.Product.priceModel.isPriceRange()}" >
 			<iscomment>Product master price range depending on the variants</iscomment>
 			<div>			
 				<isprint value="${pdict.Product.priceModel.minPrice}"/> - <isprint value="${pdict.Product.priceModel.maxPrice}"/>

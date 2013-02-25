@@ -125,7 +125,7 @@
 						    		${Resource.msg('orderdetails.shippingstatus','components',null)}
 				    				<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
 				    					${Resource.msg('orderdetails.notshipped','components',null)}
-				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}"/>
+				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
 				    					${Resource.msg('orderdetails.shipped','components',null)}
 				    				<iselse>
 				    					${Resource.msg('orderdetails.notknown','components',null)}
