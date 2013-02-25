@@ -34,7 +34,7 @@
 					<button type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
 						${Resource.msg('giftregistry.makeregprivate','account',null)}
 					</button>
-				<iselse/>
+				<iselse>
 					<button type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
 						${Resource.msg('giftregistry.makeregpublic','account',null)}
 					</button>
@@ -77,7 +77,7 @@
 				<p>${Resource.msg('giftregistry.giftregnoitems','account',null)}</p>
 				<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('giftregistry.emptyadd','account',null)}</a>
 			
-			<iselse/>
+			<iselse>
 			
 				<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 					<span class="form-error">

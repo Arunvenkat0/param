@@ -27,7 +27,7 @@
 				<iscomment>render shipping method selection based on type of shipment (physical or gift certificate)</iscomment>
 				<isif condition="${shipment.giftCertificateLineItems.size() > 0 && shipment.shippingAddress == null}">
 					${Resource.msg('multishippingshipments.gcshipment','checkout',null)}
-				<iselse/>
+				<iselse>
 					
 					<iscomment>shipping promotions for this shipment</iscomment>
 					<div class="shippingpromotions">
@@ -77,7 +77,7 @@
 									<isloop items="${productLI.product.variationModel.getProductVariationAttributes()}" var="varAttr" status="vaLoopstatus">
 										<isset name="selectedVarValue" value="${productLI.product.variationModel.getSelectedValue(varAttr)}" scope="page"/>
 										<isprint value="${varAttr.displayName}"/>:
-										<isif condition="${selectedVarValue != null}"><isprint value="${selectedVarValue.displayValue}"/><iselse/> - </isif><isif condition="${!vaLoopstatus.last}">, </isif>
+										<isif condition="${selectedVarValue != null}"><isprint value="${selectedVarValue.displayValue}"/><iselse> - </isif><isif condition="${!vaLoopstatus.last}">, </isif>
 									</isloop>
 								</isif>
 							</td>

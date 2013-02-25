@@ -147,7 +147,7 @@ if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
 						</isscript>
 						<isif condition="${option.selected}">
 							<option class="select-option" label="${label}" value="${option.value||''}" selected="selected"><isprint value="${displayValue}" encoding="off"/></option>
-						<iselse/>
+						<iselse>
 							<option class="select-option" label="${label}" value="${option.value||''}"><isprint value="${displayValue}" encoding="off"/></option>
 						</isif>
 					</isloop>
@@ -184,7 +184,7 @@ if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
 					<isif condition="${!empty(pdict.formfield.description)}">
 						<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
 					</isif>
-				<iselse/>
+				<iselse>
 					<isif condition="${!empty(pdict.formfield.error)}">
 						<span class="form-caption error-message"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
 					<iselseif condition="${!empty(pdict.formfield.description)}"/>
@@ -209,7 +209,7 @@ if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
 			 	<isscript>/* to prevent HTML encoding */
 					aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" checked="checked" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes +'/>';
 			 	</isscript>
-			<iselse/>
+			<iselse>
 			 	<isscript>/* to prevent HTML encoding */
 					aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
 			 	</isscript>
@@ -226,7 +226,7 @@ if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
 				<isif condition="${!empty(pdict.formfield.description)}">
 					<span class="form-caption"><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
 				</isif>
-			<iselse/>
+			<iselse>
 				<isif condition="${!empty(pdict.formfield.error)}">
 					<span class="form-caption error-message"><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
 				<iselseif condition="${!empty(pdict.formfield.description)}"/>

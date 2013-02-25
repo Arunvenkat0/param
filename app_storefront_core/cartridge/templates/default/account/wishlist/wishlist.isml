@@ -75,7 +75,7 @@
 					<button type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPrivate.htmlName}">
 						${Resource.msg('wishlist.listprivate','account',null)}
 					</button>
-				<iselse/>
+				<iselse>
 					<button type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPublic.htmlName}">
 						${Resource.msg('wishlist.listpublic','account',null)}
 					</button>
@@ -98,7 +98,7 @@
 			
 			</form>
 				
-		<iselse/>
+		<iselse>
 		
 			<h2>
 				<isprint value="${pdict.ProductList.owner.profile.firstName}"/> 
@@ -115,7 +115,7 @@
 			<h2>${Resource.msg('wishlist.empty','account',null)}</h2>
 			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('wishlist.emptyadd','account',null)}</a>
 				
-		<iselse/>
+		<iselse>
 		
 			
 

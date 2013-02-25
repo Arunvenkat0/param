@@ -51,7 +51,7 @@
 				
 				<isif condition="${!empty(VAVALS) && VAVALS.length>1}">			
 					<li class="attribute">
-				<iselse/>
+				<iselse>
 					<li class="attribute" >
 				</isif>	
 
@@ -165,7 +165,7 @@
 											<a title="${displayValue}" class="swatchanchor" href="${PVM.urlSelectVariationValue('Product-VariationPS', VA, VV)}">
 												<isprint value="${displayValue}"/>
 											</a>
-										<iselse/>
+										<iselse>
 											<a title="${displayValue}" class="swatchanchor">
 												<isprint value="${displayValue}"/>
 											</a>

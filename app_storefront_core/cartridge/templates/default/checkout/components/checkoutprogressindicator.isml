@@ -37,7 +37,7 @@
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
 			<isset name="step4state" value="active"   scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
@@ -50,7 +50,7 @@
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}
 				</a>
-			<iselse/>
+			<iselse>
 				<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}
 			</isif>
@@ -62,7 +62,7 @@
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}
 				</a>
-			<iselse/>
+			<iselse>
 				<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}
 			</isif>
@@ -75,7 +75,7 @@
 					<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 				</a>
-			<iselse/>
+			<iselse>
 				<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 			</isif>
@@ -88,7 +88,7 @@
 					<span>${Resource.msg('checkoutprogressindicator.step4','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 				</a>
-			<iselse/>
+			<iselse>
 				<span>${Resource.msg('checkoutprogressindicator.step4','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 			</isif>
@@ -109,7 +109,7 @@
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="active"   scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="step1state" value="inactive" scope="page"/>
 			<isset name="step2state" value="inactive" scope="page"/>
 			<isset name="step3state" value="inactive" scope="page"/>
@@ -124,7 +124,7 @@
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}
 					</a>
-				<iselse/>
+				<iselse>
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}
 				</isif>
@@ -136,7 +136,7 @@
 						<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 					</a>
-				<iselse/>
+				<iselse>
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 				</isif>
@@ -148,13 +148,13 @@
 						<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 					</a>
-				<iselse/>
+				<iselse>
 					<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 				</isif>
 			</div><!-- END: step3 -->
 			
-		<iselse/>
+		<iselse>
 		
 			<iscomment>render steps without shipping (labels are adjusted)</iscomment>
 			
@@ -164,7 +164,7 @@
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 					</a>
-				<iselse/>
+				<iselse>
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 				</isif>
@@ -176,7 +176,7 @@
 						<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 					</a>
-				<iselse/>
+				<iselse>
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
 				</isif>

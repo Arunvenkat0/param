@@ -26,7 +26,7 @@
 		
 		<isif condition="${pdict.ContentSearchResult.folderSearch}">
 			<h2 class="refinement-header"><isprint value="${path.get(0).displayName}"/></h2>
-		<iselse/>
+		<iselse>
 			<h2 class="refinement-header">${Resource.msg('searchrefinebar.searchresults','search',null)}</h2>
 		</isif>
 
@@ -52,7 +52,7 @@
 						
 						<isfolderrefinementvalues searchmodel="${pdict.ContentSearchResult}" folder="${path.get(0)}" folderpath="${path}" folderlevel="1"/>
 						
-					<iselse/>
+					<iselse>
 					
 						<h3>
 							<isprint value="${RefinementDefinition.displayName}"/>
@@ -85,7 +85,7 @@
 								<li class="selected">
 									<a title="${RefinementValue.getDisplayValue()}" href="${pdict.ContentSearchResult.urlRelaxAttributeValue('Search-ShowContent',RefinementValue.getID(),RefinementValue.getValue())}" ><isprint value="${RefinementValue.getDisplayValue()}"/></a>
 								</li>
-							<iselse/>
+							<iselse>
 								<li>
 									<a title="${RefinementValue.getDisplayValue()}" href="${pdict.ContentSearchResult.urlRefineAttributeValue('Search-ShowContent',RefinementValue.getID(),RefinementValue.getValue())}" ><isprint value="${RefinementValue.getDisplayValue()}"/></a>
 								</li>

@@ -156,7 +156,7 @@
 				
 				<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.sendtofriend.message}" type="textarea" attribute3="data-character-limit" value3="250" />
 		
-			<iselse/> 
+			<iselse> 
 			
 				<iscomment>This is a request for send to friend preview</iscomment>
 					
@@ -174,7 +174,7 @@
 						<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 					   	<isset name="imageAlt" value="${image.alt}" scope="page"/>
 					   	<isset name="imageTitle" value="${image.title}" scope="page"/>
-					<iselse/>
+					<iselse>
 					  	<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 					  	<isset name="imageTitle" value="${item.object.product.name}" scope="page"/>
 					 	<isset name="imageAlt" value="${item.object.product.name}" scope="page"/>

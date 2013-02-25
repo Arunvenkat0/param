@@ -25,7 +25,7 @@
 		<th class="section-header">
 			<isif condition="${Order.paymentInstruments.length == 1}">
 				${Resource.msg('orderdetails.paymentmethod','components',null)}
-			<iselse/>
+			<iselse>
 				${Resource.msg('orderdetails.paymentmethods','components',null)}
 			</isif>
 		</th>
@@ -114,7 +114,7 @@
 					    	<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 					    	<isif condition="${productLineItem.bonusProductLineItem}">
 					    		<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
-					    	<iselse/>
+					    	<iselse>
 				            	<isprint value="${productLineItem.adjustedPrice}"/>				    						            
 					            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 									<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
@@ -135,7 +135,7 @@
 						    		<span class="label">${Resource.msg('orderdetails.shippingmethod','components',null)}</span>
 					    			<isif condition="${!empty(shipment.shippingMethod)}">
 						               <span class="value"><isprint value="${shipment.shippingMethod.displayName}"/></span>
-									<iselse/>
+									<iselse>
 						               <span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
 									</isif>
 						    	</div>
@@ -145,7 +145,7 @@
 				    					<span class="value">${Resource.msg('orderdetails.notshipped','components',null)}</span>
 				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}"/>
 				    					<span class="value">${Resource.msg('orderdetails.shipped','components',null)}</span>
-				    				<iselse/>
+				    				<iselse>
 				    					<span class="value">${Resource.msg('orderdetails.notknown','components',null)}</span>
 				    				</isif>
 						    	</div>
@@ -170,7 +170,7 @@
 					<td colspan="4" class="order-shipment-gift-message">
 						<isif condition="${!empty(shipment.giftMessage)}">
 							<isprint value="${shipment.giftMessage}"/>
-						<iselse/>
+						<iselse>
 							&nbsp;
 						</isif>
 					</td>
@@ -241,18 +241,18 @@
 						<td colspan="4" class="order-shipment-gift-message">
 							<isif condition="${!empty(shipment.giftMessage)}">
 								<isprint value="${shipment.giftMessage}"/>
-							<iselse/>
+							<iselse>
 								&nbsp;
 							</isif>
 						</td>
 					</tr>
-				<iselse/>
+				<iselse>
 					<tr>
 						<td colspan="4" class="order-shipment-gift-message">
 							<isset name="theGiftCert" value="${shipment.giftCertificateLineItems.iterator().next()}" scope="page"/>
 							<isif condition="${!empty(theGiftCert.message)}">
 								<isprint value="${theGiftCert.message}"/>
-							<iselse/>
+							<iselse>
 								&nbsp;
 							</isif>
 						</td>

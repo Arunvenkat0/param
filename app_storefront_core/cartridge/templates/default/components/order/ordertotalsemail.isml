@@ -59,14 +59,14 @@
 						<td style="${Resource.msg('email.tablecell','email',null)} padding:2px 0;">
 							<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 								<isprint value="${Shipment.shippingTotalPrice}"/>
-							<iselse/>
+							<iselse>
 								${Resource.msg('ordersummary.nodata','components',null)}
 							</isif>
 						</td>
 					</tr>
 					</isif>
 				</isloop>
-			<iselse/>
+			<iselse>
 				<tr>
 					<td style="${Resource.msg('email.tablecell','email',null)} padding:2px 0;">
 						${Resource.msg('ordersummary.ordershipping','components',null)}
@@ -79,7 +79,7 @@
 					<td style="${Resource.msg('email.tablecell','email',null)} padding:2px 0;">
 						<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 							<isprint value="${LineItemCtnr.shippingTotalPrice}"/>
-						<iselse/>
+						<iselse>
 							${Resource.msg('ordersummary.nodata','components',null)}
 						</isif>
 					</td>
@@ -98,7 +98,7 @@
 						<td style="${Resource.msg('email.tablecell','email',null)} ${Resource.msg('email.error','email',null)} padding:2px 0;">${Resource.msg('ordersummary.ordershippingdiscount','components',null)}</td>
 						<td style="${Resource.msg('email.tablecell','email',null)} ${Resource.msg('email.error','email',null)} padding:2px 0;">- <isprint value="${shippingDiscount}"/></td>
 					</tr>
-				<iselse/>
+				<iselse>
 					<tr>
 						<td style="${Resource.msg('email.tablecell','email',null)} ${Resource.msg('email.error','email',null)} padding:2px 0;">${Resource.msg('ordersummary.ordershippingdiscount','components',null)}</td>
 						<td style="${Resource.msg('email.tablecell','email',null)} ${Resource.msg('email.error','email',null)} padding:2px 0;">- <isprint value="${shippingDiscount}"/></td>
@@ -112,7 +112,7 @@
 				<td style="${Resource.msg('email.tablecell','email',null)} padding:2px 0;">
 					<isif condition="${LineItemCtnr.totalTax.available}">
 						<isprint value="${LineItemCtnr.totalTax}"/>
-					<iselse/>
+					<iselse>
 						${Resource.msg('ordersummary.nodata','components',null)}
 					</isif>
 				</td>
@@ -122,7 +122,7 @@
 			<tr>
 				<isif condition="${LineItemCtnr.totalGrossPrice.available}">
 				 	<isset name="orderTotalValue" value="${LineItemCtnr.totalGrossPrice}" scope="page"/>
-				<iselse/>
+				<iselse>
 					<isset name="orderTotalValue" value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)}" scope="page"/>
 				</isif>
 	

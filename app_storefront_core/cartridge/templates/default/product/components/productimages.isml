@@ -26,7 +26,7 @@
 
 <isif condition="${!empty(imageProduct.getImage('hi-res', 0))}">
 	<isset name="imageUrlHiRes" value="${imageProduct.getImage('hi-res', 0).getURL()}" scope="page"/>
-<iselse/>
+<iselse>
 	<isset name="imageUrlHiRes" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 </isif>
 
@@ -35,7 +35,7 @@
 	<isif condition="${!empty(imageProduct.getImages('hi-res')) && imageProduct.getImages('hi-res').length>0}">
 		<isset name="hi_res" scope="page" value="${imageProduct.getImages('hi-res')[0].getURL().toString()}" />
 		<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
-	<iselse/>
+	<iselse>
 		<isset name="hi_res" scope="page" value="${''}" />
 		<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 	</isif>
@@ -60,7 +60,7 @@
 				<isif condition="${!empty(imageProduct.getImages('hi-res')) && pdict.Product.getImages('hi-res').length>imgSmStatus.index}">
 					<isset name="hi_res" scope="page" value="${pdict.Product.getImages('hi-res')[imgSmStatus.index.toFixed(0)].getURL()}" />
 					<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
-				<iselse/>
+				<iselse>
 					<isset name="hi_res" scope="page" value="${''}" />
 					<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 				</isif>

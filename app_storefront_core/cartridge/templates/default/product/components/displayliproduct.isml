@@ -18,7 +18,7 @@
 			<iscomment>${Resource.msg('cart.removeditem','checkout',null)}</iscomment>
 		</span>
 		<div class="name"><isprint value="${productLineItem.productName}"/></div>
-	<iselse/>
+	<iselse>
 		<div class="name">
 			<iscomment>
 				Item has a category context, forward this category context
@@ -28,7 +28,7 @@
 			</iscomment>
 			<isif condition="${productLineItem.categoryID != null}">
 				<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="${productLineItem.productName}"><isprint value="${productLineItem.lineItemText}"/></a>
-			<iselse/>
+			<iselse>
 				<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID)}" title="${productLineItem.productName}"><isprint value="${productLineItem.lineItemText}"/></a>
 			</isif>
 		</div>
@@ -46,7 +46,7 @@
 		<isif condition="${productLineItem.shippingLineItem.surcharge}">
 			<div class="promo"><isprint value="${Resource.msg('displayliproduct.surcharge','product',null)}"/></div>
 		</isif>
-	<iselse/>
+	<iselse>
 		<isscript>
 			var defaultMethod : dw.order.ShippingMethod = dw.order.ShippingMgr.getDefaultShippingMethod();
 			var shippingModel : dw.order.ProductShippingModel = dw.order.ShippingMgr.getProductShippingModel(productLineItem.getProduct());

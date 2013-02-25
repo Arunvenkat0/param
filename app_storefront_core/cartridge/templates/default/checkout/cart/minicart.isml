@@ -29,7 +29,7 @@
 		</isscript>
 		<isif condition="${cartQty > 1}">
 			<isset name="item_word" value="${Resource.msg('minicart.items','checkout',null)}" scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="item_word" value="${Resource.msg('minicart.item','checkout',null)}" scope="page"/>
 		</isif>
 		<a href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}" class="mini-cart-link">
@@ -38,7 +38,7 @@
 			<span class="mini-cart-item-word"><isprint value="${item_word}"/></span>
 			<span class="mini-cart-total-label">${Resource.msg('minicart.total','checkout',null)} <isprint value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(true).add(pdict.Basket.giftCertificateTotalPrice)}"/></span>
 		</a>
-	<iselse/>
+	<iselse>
 		<span class="mini-cart-label">${Resource.msg('minicart.label','checkout',null)}</span><span class="mini-cart-empty">${Resource.msg('minicart.emptycart','checkout',null)}</span>
 	</isif>
 </div>

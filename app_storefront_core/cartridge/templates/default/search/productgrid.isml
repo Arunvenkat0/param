@@ -69,7 +69,7 @@
 				<iscomment><!-- Self contained product information. Can be cached separately even if search finds in different categories or positions within the grid  --></iscomment>
 				<isif condition="${!empty(pdict.category)}">
 					<isinclude url="${URLUtils.url('Product-HitTile', 'pid',  LoopProductHit.product.ID, 'vpid', LoopProductHit.firstRepresentedProduct.ID, 'maxprice', LoopProductHit.maxPrice, 'minprice', LoopProductHit.minPrice,  'pricerange', LoopProductHit.priceRange,  'cgid', pdict.category.ID)}"/>
-				<iselse/>
+				<iselse>
 					<isinclude url="${URLUtils.url('Product-HitTile', 'pid',  LoopProductHit.product.ID, 'vpid', LoopProductHit.firstRepresentedProduct.ID, 'maxprice', LoopProductHit.maxPrice, 'minprice', LoopProductHit.minPrice,  'pricerange', LoopProductHit.priceRange)}"/>
 				</isif>
 			</isobject>

@@ -88,7 +88,7 @@
 			<div>			
 				<isprint value="${pdict.Product.priceModel.minPrice}"/> - <isprint value="${pdict.Product.priceModel.maxPrice}"/>
 			</div>		
-		<iselse/>	
+		<iselse>	
 			<isif condition="${ShowStandardPrice}">
 				<span class="price-standard"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse>${Resource.msg('pricing.noprice','product',null)}</isif></span>
 			</isif>
