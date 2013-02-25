@@ -2,6 +2,6 @@
 <isif condition="${!empty(pdict.TargetPipelineParams) && pdict.TargetPipelineParams != '/'}">
 	<isredirect location="${URLUtils.https(pdict.TargetPipeline) + '?' + pdict.TargetPipelineParams}"/>
 <iselse>
-	<isredirect location="${URLUtils.https(pdict.TargetPipeline)}">
+	<isredirect location="${URLUtils.https(pdict.TargetPipeline)}"/>
 </isif>
 
