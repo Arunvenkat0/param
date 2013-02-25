@@ -26,7 +26,7 @@
 
 	<isif condition="${!empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null}">
 	
-		<isactivedatacontext category="${pdict.ProductSearchResult.category}">
+		<isactivedatacontext category="${pdict.ProductSearchResult.category}"/>
 	
 		<isscript>
 			importScript

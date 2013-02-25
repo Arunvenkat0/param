@@ -35,7 +35,7 @@
    	<iscomment>if we have any category context, we show it</iscomment>
   	<isif condition="${category != null && category.online}">
 
-		<isactivedatacontext category="${category}">
+		<isactivedatacontext category="${category}"/>
 		
 		<isscript>
 			var path : dw.util.Collection = new dw.util.ArrayList();
