@@ -1,6 +1,6 @@
 <!-- redirect to the default home page -->
 <isset scope="page" name="Location" value="${URLUtils.httpHome()}"/>
-<isredirect location="${Location}">
+<isredirect location="${Location}"/>
 
 <iscomment>a page with a meta refresh in case the browser doesn't follow the redirect</iscomment>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
