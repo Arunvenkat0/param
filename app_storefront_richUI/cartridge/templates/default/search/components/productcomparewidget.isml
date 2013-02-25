@@ -29,7 +29,7 @@
 		<div class="comparebar">				
 			<div id="compare-items-panel" class="compareitemspanel">				
 				<isloop items="${products}" var="item" status="Status">					
-	 				<div <isif condition="${!empty(item.uuid)}">id="ci-${item.uuid}"</isif> class="compare-item compare-item-<isprint value="${Status.index}"> <isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>						 						 					
+	 				<div <isif condition="${!empty(item.uuid)}">id="ci-${item.uuid}"</isif> class="compare-item compare-item-<isprint value="${Status.index}"/> <isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>						 						 					
 	 					<img class="compareproduct" src="${item.imgSrc}" alt="${item.imgAlt}"/>
 
 	 					<div class="compareitemremove">

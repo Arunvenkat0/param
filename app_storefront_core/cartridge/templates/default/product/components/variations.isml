@@ -150,7 +150,7 @@
 													   class="swatchanchor"
 													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
 													   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'>										   
-													   	<isprint value="${displayValue}">
+													   	<isprint value="${displayValue}"/>
 													</a>
 												</li>									
 											</isif>

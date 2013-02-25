@@ -39,12 +39,12 @@
 				
 				<isif condition="${'PipelineName' in pdict || 'CurrentStartNodeName' in pdict}">			
 					<p>${Resource.msg('generalerror.request','error',null)}</p>
-					<p><code><isprint value="${pdict.PipelineName}">-<isprint value="${pdict.CurrentStartNodeName}"></code></p>
+					<p><code><isprint value="${pdict.PipelineName}"/>-<isprint value="${pdict.CurrentStartNodeName}"/></code></p>
 				</isif>
 				
 				<isif condition="${'ErrorText' in pdict}">			
 					<p>${Resource.msg('generalerror.errortext','error',null)}</strong></p>
-					<p><code><isprint value="${pdict.ErrorText}"></code></p>
+					<p><code><isprint value="${pdict.ErrorText}"/></code></p>
 				</isif>
 							
 			</div>

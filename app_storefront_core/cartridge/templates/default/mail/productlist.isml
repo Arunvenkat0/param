@@ -97,9 +97,9 @@ ul li.onorder {color:red;}
 					<isdisplayproductavailability p_productli="${item}"/>
 				</td>
 				<td style="margin:0 5px 0 0;padding:5px 10px 0 0;text-align:right;">
-					<div>${Resource.msg('wishlist.dateadded','account',null)} <isprint value="${item.creationDate}"></div>
+					<div>${Resource.msg('wishlist.dateadded','account',null)} <isprint value="${item.creationDate}"/></div>
 					<isif condition="${item.type == item.TYPE_PRODUCT}">
-						<div><b>${Resource.msg('productlist.qtydesired','account',null)}</b> <isprint value="${item.quantity.value}" formatter="#"></div>
+						<div><b>${Resource.msg('productlist.qtydesired','account',null)}</b> <isprint value="${item.quantity.value}" formatter="#"/></div>
 					<iselseif condition="${item.type == item.TYPE_GIFT_CERTIFICATE}">
 						<!-- Gift Cetificate Qty Message -->
 					</isif>

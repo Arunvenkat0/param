@@ -129,7 +129,7 @@
 					 	otherwise show it based on effective price
 					</iscomment>
 					<isprint value="${PriceTable.getPrice(Quantity)}"/>
-					(<isif condition="${ShowStandardPrice}"><isprint value="${PriceTable.getPrice(Quantity).percentLessThan(StandardPrice)}" formatter="#"/><iselse><isprint value="${PriceTable.getPercentage(Quantity)}" formatter="#"></isif>${Resource.msg('pricing.off','product',null)})
+					(<isif condition="${ShowStandardPrice}"><isprint value="${PriceTable.getPrice(Quantity).percentLessThan(StandardPrice)}" formatter="#"/><iselse><isprint value="${PriceTable.getPercentage(Quantity)}" formatter="#"/></isif>${Resource.msg('pricing.off','product',null)})
 				</div>
 			</isif>
 		</isloop>
