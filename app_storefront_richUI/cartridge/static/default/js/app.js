@@ -1,13 +1,13 @@
-//    app.js 2.0.0
-//    (c) 2009-2012 Demandware Inc.
-//    Subject to standard usage terms and conditions
-//    Relies on jQuery, jQuery UI, jQuery validate, ...
-//    For all details and documentation:
-//    https://github.com/Demandware/Site-Genesis
-
-// All java script logic for the application.
-// The code relies on the jQuery JS library to be also loaded.
-
+/**
+ * 
+ * All java script logic for the application.
+ *    (c) 2009-2012 Demandware Inc.
+ *    Subject to standard usage terms and conditions
+ * The code relies on the jQuery JS library to
+ * be also loaded. 
+ *    For all details and documentation:
+ *    https://github.com/Demandware/Site-Genesis 
+ */
 // semi-colon to assure functionality upon script concatenation and minification
 ;
 
@@ -18,15 +18,17 @@ if (!window.jQuery) {
 	s.setAttribute('type', 'text/javascript');
 	document.getElementsByTagName('head')[0].appendChild(s);
 }
-
-// Application singleton and namespace object
-// ------------------------------------------
+/** @namespace */
 var app = (function (app, $) {
+	//allows the use of $ within this function without conflicting with other JavaScript libraries which are using it (JQuery extension)
 	document.cookie="dw=1";
 	/******** private functions & vars **********/
 
-	// cache dom elements accessed multiple times
-	// app.ui holds globally available elements
+	/**
+	 * @private
+	 * @function
+	 * @description Cache dom elements which are being accessed multiple times.<br/>app.ui holds globally available elements.
+	 */
 	function initUiCache() {
 		app.ui = {
 			searchContainer : $("#navigation .header-search"),
@@ -41,11 +43,15 @@ var app = (function (app, $) {
 			}
 		};
 	}
-
+	
+	/**
+	 * @private
+	 * @function
+	 * @description Apply dialogify event handler to all elements that match one or more of the specified selectors.
+	 */
 	function initializeEvents() {
 		var controlKeys = ["8", "13", "46", "45", "36", "35", "38", "37", "40", "39"];
-		// apply dialogify event handler to all elements that match
-		// one or more of the specified selectors
+
 		$("body").on("click", ".dialogify, [data-dlg-options], [data-dlg-action]", app.util.setDialogify)
 		.on("keydown", "textarea[data-character-limit]", function(e) {
 			var text = $.trim($(this).val()),
@@ -113,7 +119,11 @@ var app = (function (app, $) {
 			});
 		}
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Adds class ('js') to html for css targeting and loads js specific styles.
+	 */
 	function initializeDom() {
 		// add class to html for css targeting
 		$('html').addClass('js');
@@ -123,8 +133,9 @@ var app = (function (app, $) {
 	}
 
 
-	// _app object
-	// "inherits" app object via $.extend() at the end of this seaf (Self-Executing Anonymous Function
+	/**
+	 * @property {Object} _app "inherits" app object via $.extend() at the end of this seaf (Self-Executing Anonymous Function)
+	 */
 	var _app = {
 		containerId		: "content",
 		ProductCache	: null,  // app.Product object ref to the current/main product
@@ -170,10 +181,9 @@ var app = (function (app, $) {
 	return $.extend(app, _app);
 }(window.app = window.app || {}, jQuery));
 
-// Home page (Storefront) singleton and namespace object
-// -----------------------------------------------------
-
-// app.storefront
+/**
+@class app.storefront
+*/
 (function (app, $) {
 	var $cache = {};
 	app.storefront = {
@@ -184,7 +194,11 @@ var app = (function (app, $) {
 				wrapper : $('#wrapper')
 			};
 
-
+			/**
+			 * @function
+			 * @description Triggers the scroll event on a carousel element
+			 * @param {Object} carousel
+			 */
 			function slideCarousel_initCallback(carousel) {
 
 				// create navigation for slideshow
@@ -204,7 +218,14 @@ var app = (function (app, $) {
 			   $cache.slide.width($cache.wrapper.width());
 
 			}
-
+			/**
+			 * @function
+			 * @description Activates the visibility of the next element in the carousel 
+			 * @param {Object} carousel -- necessity needs TBD!
+			 * @param {Object} item --  necessity needs TBD!
+			 * @param {Number} idx Index of the item which should be activated
+			 * @param {Object} state --  necessity needs TBD!
+			 */
 			function slideCarousel_itemVisible(carousel, item, idx, state) {
 			    //alert('Item #' + idx + ' is visible');
 				$('.jcarousel-control a').removeClass('active');
@@ -226,14 +247,16 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-// Tooltips singleton and namespace object
-// ---------------------------------------
-
-// app.tooltips
+/**
+@class app.tooltip
+*/
 (function (app, $) {
 	var $cache = {};
 	app.tooltips = {
-
+		/**
+		 * @function
+		 * @description Initializes the tooltip-content and layout
+		 */	
 		init : function () {
 
 			$('.tooltip').tooltip({
@@ -262,6 +285,12 @@ var app = (function (app, $) {
 	var $cache;
 
 	/*************** app.product private vars and functions ***************/
+
+	/**
+	 * @private
+	 * @function
+	 * @description Loads product's navigation on the product detail page
+	 */
 	function loadProductNavigation() {
 		var pidInput = $cache.pdpForm.find("input[name='pid']").last();
 		var navContainer = $("#product-nav-container");
@@ -280,7 +309,11 @@ var app = (function (app, $) {
 		app.ajax.load({url:url, target: navContainer});
 	}
 
-	//creates product recommendation carousel using jQuery jcarousel plugin
+	/**
+	 * @private
+	 * @function
+	 * @description Creates product recommendation carousel using jQuery jcarousel plugin
+	 */
 	function loadRecommendations() {
 		var carousel = $("#carousel-recomendations");
 		if(!carousel || carousel.length === 0 || carousel.children().length === 0) {
@@ -291,8 +324,9 @@ var app = (function (app, $) {
 	}
 
 	/**
-	 @description Sets the main image attributes and the href for the surrounding <a> tag
-	 @param {Object} atts Simple object with url, alt, title and hires properties
+	 * @function
+	 * @description Sets the main image attributes and the href for the surrounding <a> tag
+	 * @param {Object} atts Simple object with url, alt, title and hires properties
 	 */
 	function setMainImage(atts) {
 		var imgZoom = $cache.pdpMain.find("a.main-image");
@@ -308,8 +342,9 @@ var app = (function (app, $) {
 	}
 
 	/**
-	 @description helper function for swapping main image on swatch hover
-	 @param {Element} element DOM element with custom data-lgimg attribute
+	 * @function
+	 * @description helper function for swapping main image on swatch hover
+	 * @param {Element} element DOM element with custom data-lgimg attribute
 	 */
 	function swapImage(element) {
 		var lgImg = $(element).data("lgimg");
@@ -329,7 +364,10 @@ var app = (function (app, $) {
 	}
 
 
-
+	/**
+	 * @function
+	 * @description Enables the zoom viewer on the product detail page
+	 */
 	function loadZoom() {
 		if(app.quickView.isActive() || !app.zoomViewerEnabled) { return; }
 
@@ -354,7 +392,10 @@ var app = (function (app, $) {
 			mainImage.removeData("jqzoom").jqzoom(options);
 		}
 	}
-
+	/**
+	 * @function
+	 * @description replaces the images in the image container. for example when a different color was clicked. 
+	 */
 	function replaceImages() {
 		var newImages = $("#update-images");
 		var imageContainer = $cache.pdpMain.find("div.product-image-container");
@@ -365,7 +406,10 @@ var app = (function (app, $) {
 
 		loadZoom();
 	}
-
+	/**
+	 * @function
+	 * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
+	 */
 	function setMainImageLink() {
 		if (app.quickView.isActive() || app.isMobileUserAgent) {
 			$cache.pdpMain.find("a.main-image").removeAttr("href");
@@ -374,11 +418,19 @@ var app = (function (app, $) {
 			$cache.pdpMain.find("a.main-image").addClass("image-zoom");
 		}
 	}
-
+	/**
+	 * @function
+	 * @description Removes css class (image-zoom) from the main product image in order to deactivate the zoom viewer on the product detail page.
+	 */
 	function removeImageZoom() {
 		$cache.pdpMain.find("a.main-image").removeClass("image-zoom");
 	}
 
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the DOM of the product detail page (images, reviews, recommendation and product-navigation).
+	 */
 	function initializeDom() {
 		$cache.pdpMain.find('div.product-detail .product-tabs').tabs();
 		if($('#pwrwritediv').length > 0) {
@@ -412,7 +464,11 @@ var app = (function (app, $) {
 
 		app.tooltips.init();
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the cache on the product detail page.
+	 */
 	function initializeCache() {
 		$cache = {
 			productId : $("#pid"),
@@ -432,6 +488,17 @@ var app = (function (app, $) {
 		$cache.mainImage = $cache.mainImageAnchor.find("img.primary-image");
 	}
 
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes events on the product detail page for the following elements:<br/>
+	 * <p>availability message</p>
+	 * <p>add to cart functionality</p>
+	 * <p>images and swatches</p>
+	 * <p>variation selection</p>
+	 * <p>option selection</p>
+	 * <p>send to friend functionality</p>
+	 */
 	function initializeEvents() {
 
 		app.product.initAddThis();
@@ -716,7 +783,11 @@ var app = (function (app, $) {
 
 		$cache.pdpMain.find("button.add-to-cart[disabled]").attr('title', $cache.pdpMain.find(".availability-msg").html() );
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Event handler to handle the add to cart event
+	 */
 	function setAddToCartHandler(e) {
 		e.preventDefault();
 		var form = $(this).closest("form");
@@ -755,14 +826,17 @@ var app = (function (app, $) {
 			$('.product-tabs').tabs('select','#tab4');
 			$('body').scrollTop($('#tab4').offset().top);
 		},
+		/**
+		 * @function
+		 * @description Loads a product into a given container div
+		 * @param {Object} options An object with the following properties:</br>
+		 * <p>containerId - id of the container div, if empty then global app.containerId is used</p>
+		 * <p>source - source string e.g. search, cart etc.</p>
+		 * <p>label - label for the add to cart button, default is Add to Cart</p>
+		 * <p>url - url to get the product</p>
+		 * <p>id - id of the product to get, is optional only used when url is empty</p>
+		 */		
 		get : function (options) {
-			// loads a product into a given container div
-			// params
-			//		containerId - id of the container div, if empty then global app.containerId is used
-			//		source - source string e.g. search, cart etc.
-			//		label - label for the add to cart button, default is Add to Cart
-			//		url - url to get the product
-			//		id - id of the product to get, is optional only used when url is empty
 			var target = options.target || app.quickView.init();
 			var source = options.source || "";
 			var productListID = options.productlistid || "";
@@ -785,12 +859,20 @@ var app = (function (app, $) {
 				callback : options.callback || app.product.init
 			});
 		},
+		/**
+		 * @function
+		 * @description Gets the availability to given product and quantity
+		 */
 		getAvailability : function (pid, quantity, callback) {
 			app.ajax.getJson({
 				url: app.util.appendParamsToUrl(app.urls.getAvailability, {pid:pid, Quantity:quantity}),
 				callback: callback
 			});
 		},
+		/**
+		 * @function
+		 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
+		 */
 		initAddThis : function () {
 			var addThisServices = ["compact","facebook","myspace","google","twitter"],
 				addThisToolbox = $(".addthis_toolbox"),
@@ -807,6 +889,11 @@ var app = (function (app, $) {
 			addThisToolbox.html(addThisLinks);
 			addthis.toolbox(".addthis_toolbox");
 		},
+		/**
+		 * @function
+		 * @description Binds the click event to a given target for the add-to-cart handling
+		 * @param {Element} target The target on which an add to cart event-handler will be set 
+		 */
 		initAddToCart : function (target) {
 			if (target) {
 				target.on("click", ".add-to-cart", setAddToCartHandler);
@@ -818,18 +905,30 @@ var app = (function (app, $) {
 	};
 
 }(window.app = window.app || {}, jQuery));
-
-// app.product.tile
+ 
+/**
+ * @class app.product.tile
+ */
 (function (app, $) {
 	var $cache = {};
 
+	/**
+	 * @function
+	 * @description Initializes the DOM of the Product Detail Page
+	 */
 	function initializeDom() {
 		var tiles = $cache.container.find(".product-tile");
 		if (tiles.length===0) { return; }
 		$cache.container.find(".product-tile").syncHeight()
 												.each(function (idx) {$(this).data("idx",idx);});
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes events on the product-tile for the following elements:<br/>
+	 * <p>swatches</p>
+	 * <p>thumbnails</p>
+	 */
 	function initializeEvents() {
 		app.quickView.initializeButton($cache.container, ".product-image");
 		$cache.container.on("mouseleave", ".swatch-list", function(e){
@@ -891,6 +990,10 @@ var app = (function (app, $) {
 
 	/*************** app.product.tile public object ***************/
 	app.product.tile = {
+		/**
+		 * @function
+		 * @description Cache, events and initialization
+		 */	
 		init : function () {
 			$cache = {
 				container : $(".tiles-container")
@@ -902,7 +1005,9 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.product.compare
+/**
+ * @class app.product.compare
+ */
 (function (app, $) {
 	var $cache = {},
 		_currentCategory = "",
@@ -910,7 +1015,11 @@ var app = (function (app, $) {
 		MAX_ACTIVE = 6,
 		CI_PREFIX = "ci-";
 
-	/************** private ****************/
+	/**
+	 * @private
+	 * @function
+	 * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
+	 */
 	function refreshContainer() {
 		if (_isClearing) { return; }
 
@@ -933,7 +1042,11 @@ var app = (function (app, $) {
 		$cache.compareContainer.toggle(ac > 0);
 
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Adds an item to the compare container and refreshes it
+	 */
 	function addToList(data) {
 		// get the first compare-item not currently active
 		var item = $cache.compareContainer.find(".compare-item").not(".active").first();
@@ -961,7 +1074,11 @@ var app = (function (app, $) {
 		// ensure that the associated checkbox is checked
 		tile.find(".compare-check")[0].checked = true;
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * description Removes an item from the compare container and refreshes it
+	 */
 	function removeFromList(uuid) {
 		var item = $("#"+CI_PREFIX+uuid);
 		if (item.length===0) { return; }
@@ -987,7 +1104,11 @@ var app = (function (app, $) {
 
 		tile.find(".compare-check")[0].checked = false;
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * description Initializes the cache of compare container 
+	 */
 	function initializeCache() {
 		$cache = {
 			primaryContent : $("#primary"),
@@ -997,7 +1118,11 @@ var app = (function (app, $) {
 			comparePanel : $("#compare-items-panel")
 		};
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the DOM-Object of the compare container
+	 */
 	function initializeDom() {
 		_currentCategory = $cache.compareContainer.data("category") || "";
 		var active = $cache.compareContainer.find(".compare-item").filter(".active");
@@ -1011,7 +1136,11 @@ var app = (function (app, $) {
 		// set container state
 		refreshContainer();
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the events on the compare container
+	 */
 	function initializeEvents() {
 		// add event to buttons to remove products
 		$cache.primaryContent.on("click", ".compare-item-remove", function (e, async) {
@@ -1046,12 +1175,20 @@ var app = (function (app, $) {
 
 	/*************** app.product.compare public object ***************/
 	app.product.compare = {
+		/**
+		 * @function
+		 * @description Cache, events and initialization
+		 */		
 		init : function () {
 			initializeCache();
 			initializeDom();
 			initializeEvents();
 		},
 		initCache : initializeCache,
+		/**
+		 * @function
+		 * @description Adds product to the compare table
+		 */ 
 		addProduct : function (args) {
 			var items = $cache.compareContainer.find(".compare-item");
 			var cb = $(args.cb);
@@ -1095,7 +1232,10 @@ var app = (function (app, $) {
 				}
 			});
 		},
-
+		/**
+		 * @function
+		 * @description Removes product from the compare table
+		 */	
 		removeProduct : function (args) {
 			if (!args.itemid) { return; }
 			var cb = args.cb ? $(args.cb) : null;
@@ -1120,21 +1260,35 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.compare
+/**
+ * @class app.compare
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the cache on the compare table
+	 */
 	function initializeCache() {
 		$cache = {
 			compareTable : $("#compare-table"),
 			categoryList : $("#compare-category-list")
 		};
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the DOM on the product tile
+	 */
 	function initializeDom() {
 		app.product.tile.init();
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds the click events to the remove-link and quick-view button
+	 */
 	function initializeEvents() {
 		$cache.compareTable.on("click", ".remove-link", function (e) {
 			e.preventDefault();
@@ -1162,6 +1316,10 @@ var app = (function (app, $) {
 
 	/*************** app.compare public object ***************/
 	app.compare = {
+		/**
+		 * @function
+		 * @description Initializing of Cache, DOM and events
+		 */
 		init : function () {
 			initializeCache();
 			initializeDom();
@@ -1173,10 +1331,17 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// send to friend
+/**
+ * @class app.sendToFriend
+ */
 (function (app, $) {
 	var $cache = {},
 		initialized=false;
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the events (preview, send, edit, cancel and close) on the send to friend form
+	 */
 	function initializeEvents() {
 		app.util.limitCharacters();
 		if (initialized) {return; }
@@ -1220,6 +1385,11 @@ var app = (function (app, $) {
 			};
 			initializeEvents();
 		},
+		
+		/**
+		 * @function
+		 * @description 
+		 */
 		initializeDialog : function (eventDelegate, eventTarget) {
 			$(eventDelegate).on("click", eventTarget, function (e) {
 				e.preventDefault();
@@ -1253,12 +1423,16 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-// app.search
+/**
+ * @class app.search
+ */
 (function (app, $) {
 	var $cache = {};
 
 	/**
-	 *  replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
+	 * @private
+	 * @function
+	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
 	 */
 	function updateProductListing(isHashChange) {
 		var hash = window.location.hash;
@@ -1282,7 +1456,15 @@ var app = (function (app, $) {
 
 		});
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes events for the following elements:<br/>
+	 * <p>refinement blocks</p>
+	 * <p>updating grid: refinements, pagination, breadcrumb</p>
+	 * <p>item click</p>
+	 * <p>sorting changes</p>
+	 */
 	function initializeEvents() {
 
 		// compare checked
@@ -1375,7 +1557,7 @@ var app = (function (app, $) {
 			updateProductListing(true);
 		});
 	}
-
+	/******* app.search public object ********/
 	app.search = {
 		init : function () {
 			$cache = {
@@ -1393,14 +1575,19 @@ var app = (function (app, $) {
 	};
 
 }(window.app = window.app || {}, jQuery));
-
-// app.bonusProductsView
+/**
+ * @class app.bonusProductsView
+ */
 (function (app, $) {
 	var $cache = {};
 	var selectedList = [];
 	var maxItems = 1;
 	var bliUUID = "";
-
+	/**
+	 * @private
+	 * @function
+	 * description Gets a list of bonus products related to a promoted product
+	 */
 	function getBonusProducts() {
 		var o = {};
 		o.bonusproducts = [];
@@ -1417,7 +1604,11 @@ var app = (function (app, $) {
 		}
 		return o;
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Updates the summary page with the selected bonus product
+	 */
 	function updateSummary() {
 		if (selectedList.length===0) {
 			$cache.bonusProductList.find("li.selected-bonus-item").remove();
@@ -1460,12 +1651,20 @@ var app = (function (app, $) {
 	}
 	/********* public app.bonusProductsView object *********/
 	app.bonusProductsView = {
+		/**
+		 * @function
+		 * @description Initializes the bonus product dialog
+		 */		
 		init : function () {
 			$cache = {
 				bonusProduct : $("#bonus-product-dialog"),
 				resultArea : $("#product-result-area")
 			};
 		},
+		/**
+		 * @function
+		 * @description Opens the bonus product quick view dialog
+		 */		
 		show : function (url) {
 			// add element to cache if it does not already exist
 			if(!$cache.bonusProduct) {
@@ -1493,10 +1692,17 @@ var app = (function (app, $) {
 			});
 
 		},
-		// close the quick view dialog
+		/**
+		 * @function
+		 * @description Closes the bonus product quick view dialog
+		 */
 		close : function () {
 			$cache.bonusProduct.dialog('close');
 		},
+		/**
+		 * @function
+		 * @description Loads the list of bonus products into quick view dialog
+		 */		
 		loadBonusOption : function () {
 			$cache.bonusDiscountContainer = $(".bonus-discount-container");
 			if ($cache.bonusDiscountContainer.length===0) { return; }
@@ -1528,6 +1734,11 @@ var app = (function (app, $) {
 				$cache.bonusDiscountContainer.dialog('close');
 			});
 		},
+
+		/**
+		 * @function
+		 * @description 
+		 */		
 		initializeGrid : function () {
 			$cache.bonusProductList = $("#bonus-product-list"),
 				bliData = $cache.bonusProductList.data("line-item-detail");
@@ -1671,7 +1882,10 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-//app.giftcert
+/**
+ * @class app.giftcert
+ * @description Loads gift certificate details
+ */
 (function (app, $) {
 	var $cache;
 
@@ -1736,10 +1950,19 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-//app.giftcard
+/**
+ * @class app.giftcard
+ * @description Loads gift certificate details
+ */
 (function (app, $) {
 
 	app.giftcard = {
+		/**
+		 * @function
+		 * @description Load details to a given gift certificate
+		 * @param {String} id The ID of the gift certificate
+		 * @param {Function} callback A function to called 
+		 */
 		checkBalance : function (id, callback) {
 			// load gift certificate details
 			var url = app.util.appendParamToURL(app.urls.giftCardCheckBalance, "giftCertificateID", id);
@@ -1752,14 +1975,17 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.checkout
+/**
+ * @class app.checkout
+ */
 (function (app, $) {
 	var $cache = {},
 		isShipping = false,
 		shippingMethods = null;
 
 	/**
-	 * Helper method which constructs a URL for an AJAX request using the
+	 * @function
+	 * @description Helper method which constructs a URL for an AJAX request using the
 	 * entered address information as URL request parameters.
 	 */
 	function getShippingMethodURL(url) {
@@ -1774,8 +2000,10 @@ var app = (function (app, $) {
 		return newUrl;
 	}
 
-	//updates the order summary based on a possibly recalculated
-	//basket after a shipping promotion has been applied
+	/**
+	 * @function 
+	 * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
+	 */
 	function updateSummary() {
 		var url = app.urls.summaryRefreshURL;
 		var summary = $("#secondary.summary");
@@ -1790,9 +2018,11 @@ var app = (function (app, $) {
 			summary.find('.order-totals-table .order-shipping .label a').hide();
 		});
 	}
-
-	//selects a shipping method for the default shipment
-	//and updates the summary section on the right hand side
+	/**
+	 * @function
+	 * @description selects a shipping method for the default shipment and updates the summary section on the right hand side
+	 * @param  
+	 */
 	function selectShippingMethod(shippingMethodID) {
 		// nothing entered
 		if(!shippingMethodID) {
@@ -1830,7 +2060,8 @@ var app = (function (app, $) {
 	}
 
 	/**
-	 * Make an AJAX request to the server to retrieve the list of applicable shipping methods
+	 * @function
+	 * @description Make an AJAX request to the server to retrieve the list of applicable shipping methods
 	 * based on the merchandise in the cart and the currently entered shipping address
 	 * (the address may be only partially entered).  If the list of applicable shipping methods
 	 * has changed because new address information has been entered, then issue another AJAX
@@ -1882,12 +2113,19 @@ var app = (function (app, $) {
 
 	//shipping page logic
 	//checkout gift message counter
+	/**
+	 * @function
+	 * @description Initializes gift message box, if shipment is gift 
+	 */	
 	function initGiftMessageBox() {
 		// show gift message box, if shipment is gift
 		$cache.giftMessage.toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
 
 	}
-
+	/**
+	 * @function
+	 * @description shows gift message box, if shipment is gift
+	 */
 	function shippingLoad() {
 		$cache.checkoutForm.on("click", "#is-gift-yes, #is-gift-no", function (e) {
 			$cache.checkoutForm.find(".gift-message-text").toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
@@ -1902,7 +2140,10 @@ var app = (function (app, $) {
 		updateShippingMethodList();
 		return null;
 	}
-
+	/**
+	 * @function
+	 * @description Selects the first address from the list of addresses
+	 */
 	function addressLoad() {
 		// select address from list
 		$cache.addressList.on("change", function () {
@@ -1935,7 +2176,11 @@ var app = (function (app, $) {
 		});
 	}
 
-	//changes the payment method form
+	/**
+	 * @function
+	 * @description Changes the payment method form depending on the passed paymentMethodID
+	 * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to    
+	 */
 	function changePaymentMethod(paymentMethodID) {
 		$cache.paymentMethods.removeClass("payment-method-expanded");
 		var pmc = $cache.paymentMethods.filter("#PaymentMethod_"+paymentMethodID);
@@ -1962,9 +2207,12 @@ var app = (function (app, $) {
 		}
 		app.validator.init();
 	}
-
+	/**
+	 * @function
+	 * @description Fills the Credit Card form with the passed data-parameter and clears the former cvn input
+	 * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
+	 */
 	function setCCFields(data) {
-		// fill the form / clear the former cvn input
 		$cache.ccOwner.val(data.holder);
 		$cache.ccType.val(data.type);
 		$cache.ccNum.val(data.maskedNumber);
@@ -1980,7 +2228,11 @@ var app = (function (app, $) {
 		$cache.ccContainer.find(".errorlabel").toggleClass("errorlabel");
 	}
 
-	//updates the credit card form with the attributes of a given card
+	/**
+	 * @function
+	 * @description Updates the credit card form with the attributes of a given card
+	 * @param {String} cardID the credit card ID of a given card
+	 */
 	function populateCreditCardForm(cardID) {
 		// load card details
 		var url = app.util.appendParamToURL(app.urls.billingSelectCC, "creditCardUUID", cardID);
@@ -1997,7 +2249,10 @@ var app = (function (app, $) {
 		});
 	}
 
-	//loads billing address, Gift Certificates, Coupon and Payment methods
+	/**
+	 * @function
+	 * @description loads billing address, Gift Certificates, Coupon and Payment methods
+	 */
 	function billingLoad() {
 		if( !$cache.paymentMethodId ) return;
 
@@ -2117,12 +2372,20 @@ var app = (function (app, $) {
 			});
 		});
 	}
-
+	
+	/**
+	 * @function
+	 * @description Sets a boolean variable (isShipping) to determine the checkout stage
+	 */
 	function initializeDom() {
 		isShipping = $(".checkout-shipping").length > 0;
 
 	}
 
+	/**
+	 * @function
+	 * @description Initializes the cache of the checkout UI
+	 */
 	function initializeCache() {
 		$cache.checkoutForm = $("form.address");
 		$cache.addressList = $cache.checkoutForm.find(".select-address select[id$='_addressList']");
@@ -2163,7 +2426,9 @@ var app = (function (app, $) {
 
 		}
 	}
-
+	/**
+	 * @function Initializes the page events depending on the checkout stage (shipping/billing)
+	 */
 	function initializeEvents() {
 		addressLoad();
 		if (isShipping) {
@@ -2185,10 +2450,15 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-// app.quickview
+/**
+ * @class app.quickview
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @function
+	 * @description Binds a 'click'-event to the quick view button 
+	 */
 	function bindQvButton() {
 		$cache.qvButton.one("click", function (e) {
 			e.preventDefault();
@@ -2199,8 +2469,12 @@ var app = (function (app, $) {
 		});
 	}
 
-
+	/******* app.quickView public object ********/
 	app.quickView = {
+		/**
+		 * @function
+		 * @description 
+		 */				
 		initializeButton : function (container, target) {
 			// quick view button
 			$(container).on("mouseenter", target, function (e) {
@@ -2227,6 +2501,10 @@ var app = (function (app, $) {
 		// show quick view dialog and send request to the server to get the product
 		// options.source - source of the dialog i.e. search/cart
 		// options.url - product url
+		/**
+		 * @function
+		 * @description 
+		 */		
 		show : function (options) {
 			options.target = app.quickView.init();
 			options.callback = function () {
@@ -2269,20 +2547,26 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.util
-//
-//
+/**
+ * @class app.util
+ */
 (function (app, $) {
 
 	// sub namespace app.util.* contains utility functions
 	app.util = {
-
-		// trims a prefix from a given string, this can be used to trim
-		// a certain prefix from DOM element IDs for further processing on the ID
+		/**
+		 * @function
+		 * @description trims a prefix from a given string, this can be used to trim
+		 * a certain prefix from DOM element IDs for further processing on the ID 
+		 */
 		trimPrefix : function (str, prefix) {
 			return str.substring(prefix.length);
 		},
-
+		
+		/**
+		 * @function
+		 * @description 
+		 */
 		setDialogify : function (e) {
 			e.preventDefault();
 			var actionSource = $(this),
@@ -2335,7 +2619,13 @@ var app = (function (app, $) {
 
 			});
 		},
-
+		/**
+		 * @function
+		 * @description Appends a character to the left side of a numeric string (normally ' ')
+		 * @param {String} str the original string
+		 * @param {String} padChar the character which will be appended to the original string
+		 * @param {Number} len the length of the end string
+		 */
 		padLeft : function (str, padChar, len) {
 			var digs = len || 10;
 			var s = str.toString();
@@ -2346,8 +2636,14 @@ var app = (function (app, $) {
 			}
 			return s;
 		},
-		// appends the parameter with the given name and
-		// value to the given url and returns the changed url
+		
+		/**
+		 * @function
+		 * @description appends the parameter with the given name and value to the given url and returns the changed url
+		 * @param {String} url the url to which the parameter will be added
+		 * @param {String} name the name of the parameter
+		 * @param {String} value the value of the parameter
+		 */
 		appendParamToURL : function (url, name, value) {
 			var c = "?";
 			if(url.indexOf(c) !== -1) {
@@ -2355,7 +2651,12 @@ var app = (function (app, $) {
 			}
 			return url + c + name + "=" + encodeURIComponent(value);
 		},
-
+		/**
+		 * @function
+		 * @description appends the parameters to the given url and returns the changed url
+		 * @param {String} url the url to which the parameters will be added
+		 * @param {String} params a JSON string with the parameters 
+		 */
 		appendParamsToUrl : function (url, params) {
 			var uri = app.util.getUri(url),
 				includeHash = arguments.length < 3 ? false : arguments[2];
@@ -2371,7 +2672,12 @@ var app = (function (app, $) {
 
 			return result;
 		},
-
+		/**
+		 * @function
+		 * @description removes the parameter with the given name from the given url and returns the changed url
+		 * @param {String} url the url from which the parameter will be removed
+		 * @param {String} name the name of the parameter
+		 */
 		removeParamFromURL : function (url, parameter) {
 			var urlparts = url.split('?');
 
@@ -2391,7 +2697,12 @@ var app = (function (app, $) {
 			}
 			return url;
 		},
-
+		
+		/**
+		 * @function
+		 * @description Returns the static url for a specific relative path 
+		 * @param {String} path the relative path
+		 */
 		staticUrl : function (path) {
 			if(!path || $.trim(path).length === 0) {
 				return app.urls.staticPath;
@@ -2399,18 +2710,31 @@ var app = (function (app, $) {
 
 			return app.urls.staticPath + (path.charAt(0) === "/" ? path.substr(1) : path );
 		},
-
+		/**
+		 * @function
+		 * @description Appends the parameter 'format=ajax' to a given path   
+		 * @param {String} path the relative path
+		 */
 		ajaxUrl : function (path) {
 			return app.util.appendParamToURL(path, "format", "ajax");
 		},
-
+		
+		/**
+		 * @function
+		 * @description 
+		 * @param {String} url
+		 */
 		toAbsoluteUrl : function (url) {
 			if (url.indexOf("http")!==0 && url.charAt(0)!=="/") {
 				url = "/"+url;
 			}
 			return url;
 		},
-
+		/**
+		 * @function
+		 * @description Loads css dynamically from given urls
+		 * @param {Array} urls Array of urls from which css will be dynamically loaded.   
+		 */
 		loadDynamicCss : function (urls) {
 			var i, len=urls.length;
 			for(i=0; i < len; i++) {
@@ -2418,7 +2742,11 @@ var app = (function (app, $) {
 			}
 		},
 
-		// dynamically loads a CSS file
+		/**
+		 * @function
+		 * @description Loads css file dynamically from given url
+		 * @param {String} url The url from which css file will be dynamically loaded.   
+		 */
 		loadCssFile : function (url) {
 			return $("<link/>").appendTo($("head")).attr({
 				type : "text/css",
@@ -2428,7 +2756,10 @@ var app = (function (app, $) {
 		// array to keep track of the dynamically loaded CSS files
 		loadedCssFiles : [],
 
-		// removes all dynamically loaded CSS files
+		/**
+		 * @function
+		 * @description Removes all css files which were dynamically loaded   
+		 */
 		clearDynamicCss : function () {
 			var i = app.util.loadedCssFiles.length;
 			while(0 > i--) {
@@ -2436,7 +2767,11 @@ var app = (function (app, $) {
 			}
 			app.util.loadedCssFiles = [];
 		},
-
+		/**
+		 * @function
+		 * @description Extracts all parameters from a given query string into an object
+		 * @param {String} qs The query string from which the parameters will be extracted
+		 */
 		getQueryStringParams : function (qs) {
 			if(!qs || qs.length === 0) { return {}; }
 
@@ -2448,7 +2783,21 @@ var app = (function (app, $) {
 			);
 			return params;
 		},
-
+		/**
+		 * @function
+		 * @description Returns an URI-Object from a given element with the following properties:<br/>
+		 * <p>protocol</p>
+		 * <p>host</p>
+		 * <p>hostname</p>
+		 * <p>port</p>
+		 * <p>path</p>
+		 * <p>query</p>
+		 * <p>queryParams</p>
+		 * <p>hash</p>
+		 * <p>url</p>
+		 * <p>urlWithQuery</p>
+		 * @param {Object} o The HTML-Element
+		 */
 		getUri : function (o) {
 			var a;
 			if (o.tagName && $(o).attr("href")) {
@@ -2475,7 +2824,13 @@ var app = (function (app, $) {
 				urlWithQuery : a.protocol+ "//" + a.host + a.port + a.pathname + a.search
 			};
 		},
-
+		/**
+		 * @function
+		 * @description Appends a form-element with given arguments to a body-element and submits it
+		 * @param {Object} args The arguments which will be attached to the form-element:<br/>
+		 * <p>url</p>
+		 * <p>fields - an Object containing the query-string parameters</p>   
+		 */
 		postForm : function (args) {
 			var form = $("<form>").attr({action:args.url,method:"post"}).appendTo("body");
 			var p;
@@ -2484,7 +2839,13 @@ var app = (function (app, $) {
 			}
 			form.submit();
 		},
-
+		/**
+		 * @function
+		 * @description  Returns a JSON-Structure of a specific key-value pair from a given resource bundle
+		 * @param {String} key The key in a given Resource bundle
+		 * @param {String} bundleName The resource bundle name 
+		 * @param {Object} A callback function to be called 
+		 */
 		getMessage : function (key, bundleName, callback) {
 			if (!callback || !key || key.length===0) {
 				return;
@@ -2496,7 +2857,11 @@ var app = (function (app, $) {
 			var url = app.util.appendParamsToUrl(app.urls.appResources, params);
 			$.getJSON(url, callback);
 		},
-
+		/**
+		 * @function
+		 * @description Updates the states options to a given country
+		 * @param {String} countrySelect The selected country
+		 */
 		updateStateOptions : function(countrySelect) {
 			var country = $(countrySelect);
 			if (country.length===0 || !app.countries[country.val()]) {
@@ -2525,7 +2890,11 @@ var app = (function (app, $) {
 			stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
 			stateField[0].selectedIndex=0;
 		},
-
+		/**
+		 * @function
+		 * @description Updates the number of the remaining character 
+		 * based on the character limit in a text area  
+		 */
 		limitCharacters : function () {
 			$('form').find('textarea[data-character-limit]').each(function(){
 				var characterLimit = $(this).data("character-limit");
@@ -2541,13 +2910,23 @@ var app = (function (app, $) {
 				$(this).change();
 			});
 		},
-
+		/**
+		 * @function
+		 * @description Binds the onclick-event to a delete button on a given container, 
+		 * which opens a confirmation box with a given message  
+		 * @param {String} container The name of element to which the function will be bind
+		 * @param {String} message The message the will be shown upon a click 
+		 */
 		setDeleteConfirmation : function(container, message) {
 			$(container).on("click", ".delete", function(e){
 				return confirm(message);
 			});
 		},
-
+		/**
+		 * @function
+		 * @description Scrolls a browser window to a given x point
+		 * @param {String} The x coordinate 
+		 */
 		scrollBrowser : function (xLocation) {
 			$('html, body').animate({ scrollTop: xLocation }, 500);
 		}
@@ -2555,7 +2934,9 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.page
+/**
+ * @class app.page
+ */
 (function (app, $) {
 
 	app.page = {
@@ -2575,10 +2956,16 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.registry
+/**
+ * @class app.registry
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @function
+	 * @description Loads address details to a given address and fills the "Pre-Event-Shipping" address form
+	 * @param {String} addressID The ID of the address to which data will be loaded
+	 */
 	function populateBeforeAddressForm(addressID) {
 		// load address details
 		var url = app.urls.giftRegAdd + addressID;
@@ -2605,7 +2992,11 @@ var app = (function (app, $) {
 		});
 	}
 
-	//updates the after address form with the attributes of a given address
+	/**
+	 * @function
+	 * @description Loads address details to a given address and fills the "Post-Event-Shipping" address form
+	 * @param {String} addressID The ID of the address to which data will be loaded
+	 */
 	function populateAfterAddressForm(addressID) {
 		// load address details
 		var url = app.urls.giftRegAdd + addressID;
@@ -2631,8 +3022,10 @@ var app = (function (app, $) {
 			}
 		});
 	}
-
-	//copy address before fields to address after fields
+	/**
+	 * @function
+	 * @description copy pre-event address fields to post-event address fields
+	 */
 	function copyBeforeAddress() {
 		$cache.addressBeforeFields.each(function () {
 			var fieldName = $(this).attr("name");
@@ -2640,8 +3033,12 @@ var app = (function (app, $) {
 			afterField.val($(this).val());
 		});
 	}
-
-	// disable the address after fields
+	
+	/**
+	 * @function
+	 * @description Disables or enables the post-event address fields depending on a given boolean
+	 * @param {Boolean} disabled True to disable; False to enables 
+	 */
 	function setAfterAddressDisabled(disabled) {
 		if (disabled) {
 			$cache.addressAfterFields.attr("disabled", "disabled");
@@ -2650,7 +3047,11 @@ var app = (function (app, $) {
 			$cache.addressAfterFields.removeAttr("disabled");
 		}
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Cache initialization of the gift registration 
+	 */
 	function initializeCache() {
 		$cache = {
 			registryForm : $("form[name$='_giftregistry']"),
@@ -2661,7 +3062,11 @@ var app = (function (app, $) {
 		$cache.addressBeforeFields = $cache.registryForm.find("fieldset[name='address-before'] input:not(:checkbox), fieldset[name='address-before'] select");
 		$cache.addressAfterFields = $cache.registryForm.find("fieldset[name='address-after'] input:not(:checkbox), fieldset[name='address-after'] select");
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description DOM-Object initialization of the gift registration 
+	 */
 	function initializeDom() {
 		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
 		$cache.addressAfterFields.filter("[name$='_country']").data("stateField", $cache.addressAfterFields.filter("[name$='_state']"));
@@ -2672,7 +3077,11 @@ var app = (function (app, $) {
 			setAfterAddressDisabled(true);
 		}
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes events for the gift registration
+	 */
 	function initializeEvents() {
 		app.sendToFriend.initializeDialog("div.list-table-header", ".send-to-friend");
 		app.util.setDeleteConfirmation("table.item-list", String.format(app.resources.CONFIRM_DELETE, app.resources.TITLE_GIFTREGISTRY));
@@ -2722,7 +3131,7 @@ var app = (function (app, $) {
 		});
 	}
 
-
+	/******* app.registry public object ********/
 	app.registry = {
 		init : function () {
 			initializeCache();
@@ -2736,10 +3145,17 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.progress
+/**
+ * @class app.progress
+ */
 (function (app, $) {
 	var loader;
 	app.progress = {
+		/**
+		 * @function
+		 * @description Shows an AJAX-loader on top of a given container
+		 * @param {Element} container The Element on top of which the AJAX-Loader will be shown
+		 */	
 		show: function (container) {
 			var target = (!container || $(container).length===0) ? $("body") : $(container);
 			loader = loader || $(".loader");
@@ -2751,16 +3167,28 @@ var app = (function (app, $) {
 			}
 			return loader.appendTo(target).show();
 		},
+		/**
+		 * @function
+		 * @description Hides an AJAX-loader
+		 */		
 		hide: function () {
 			if (loader) { loader.hide(); }
 		}
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.components
+/**
+ * @class app.components
+ */
 (function (app, dw, $) {
-	// capture recommendation of each product when it becomes visible in the carousel
-
+	/**
+	 * @function
+	 * @description capture recommendation of each product when it becomes visible in the carousel
+	 * @param c TBD
+	 * @param {Element} li The visible product element in the carousel
+	 * @param index TBD
+	 * @param state TBD 
+	 */
 	function captureCarouselRecommendations(c, li, index, state) {
 		if (!dw) { return; }
 
@@ -2772,7 +3200,7 @@ var app = (function (app, $) {
 		});
 	}
 
-
+	/******* app.components public object ********/
 	app.components = {
 		carouselSettings : {
 			scroll : 1,
@@ -2789,15 +3217,27 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, window.dw, jQuery));
 
-// app.cart
+/**
+ * @class app.cart
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @private
+	 * @function
+	 * @description Updates the cart with new data
+	 * @param {Object} postdata An Object representing the the new or uptodate data
+	 * @param {Object} A callback function to be called 
+	 */
 	function updateCart(postdata, callback) {
 		var url = app.util.ajaxUrl(app.urls.addProduct);
 		$.post(url, postdata, callback || app.cart.refresh);
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Cache initialization of the cart page 
+	 */
 	function initializeCache() {
 		$cache = {
 			cartTable : $("#cart-table"),
@@ -2806,7 +3246,11 @@ var app = (function (app, $) {
 			couponCode : $("form input[name$='_couponCode']")
 		};
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry ) 
+	 */
 	function initializeEvents() {
 		$cache.cartTable.on("click", ".item-edit-details a", function (e) {
 			e.preventDefault();
@@ -2825,21 +3269,46 @@ var app = (function (app, $) {
 			if (e.which === 13 && $(this).val().length===0) { return false; }
 		});
 	}
-
+	/******* app.cart public object ********/
 	app.cart = {
+		/**
+		 * @function
+		 * @description Adds new item to the cart
+		 * @param {Object} postdata An Object representing the the new or uptodate data
+		 * @param {Object} A callback function to be called 
+		 */	
 		add : function (postdata, callback) {
 			updateCart(postdata, callback);
 		},
+		/**
+		 * @function
+		 * @description Hook for removing item from the cart 
+		 * 
+		 */		
 		remove : function () {
 			return;
 		},
+		/**
+		 * @function
+		 * @description Updates the cart with new data
+		 * @param {Object} postdata An Object representing the the new or uptodate data
+		 * @param {Object} A callback function to be called 
+		 */		
 		update : function (postdata, callback) {
 			updateCart(postdata, callback);
 		},
+		/**
+		 * @function
+		 * @description Refreshes the cart without posting
+		 */		
 		refresh : function () {
 			// refresh without posting
 			app.page.refresh();
 		},
+		/**
+		 * @function
+		 * @description Initializes the functionality on the cart
+		 */		
 		init : function () {
 			// edit shopping cart line item
 			initializeCache();
@@ -2849,10 +3318,17 @@ var app = (function (app, $) {
 
 }(window.app = window.app || {}, jQuery));
 
-// app.account
+/**
+ * @class app.account
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @private
+	 * @function
+	 * @description Initializes the events on the address form (apply, cancel, delete)
+	 * @param {Element} form The form which will be initialized
+	 */
 	function initializeAddressForm(form) {
 		var form = $("#edit-address-form");
 
@@ -2926,7 +3402,11 @@ var app = (function (app, $) {
 
 		app.validator.init();
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Toggles the list of Orders
+	 */
 	function toggleFullOrder () {
 		$('.order-items')
 			.find('li.hidden:first')
@@ -2938,7 +3418,11 @@ var app = (function (app, $) {
 							$(this).remove();
 						});
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds the events on the address form (edit, create, delete)
+	 */
 	function initAddressEvents() {
 		var addresses = $("#addresses");
 		if (addresses.length===0) { return; }
@@ -2967,6 +3451,11 @@ var app = (function (app, $) {
 			}
 		});
 	}
+	/**
+	 * @private
+	 * @function
+	 * @description Binds the events of the payment methods list (delete card)
+	 */	
 	function initPaymentEvents() {
 		var paymentList = $(".payment-list");
 		if (paymentList.length===0) { return; }
@@ -2989,14 +3478,23 @@ var app = (function (app, $) {
 			});
 		});
 	}
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds the events of the order, address and payment pages
+	 */
 	function initializeEvents() {
 		toggleFullOrder();
 		initAddressEvents();
 		initPaymentEvents();
 	}
 
+	/******* app.account public object ********/
 	app.account = {
+		/**
+		 * @function
+		 * @description Binds the events of the order, address and payment pages
+		 */		
 		init : function () {
 			initializeEvents();
 
@@ -3005,10 +3503,16 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.wishlist
+/**
+ * @class app.wishlist
+ */
 (function (app, $) {
 	var $cache = {};
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds the send to friend and address changed events to the wishlist page
+	 */
 	function initializeEvents() {
 		app.sendToFriend.initializeDialog("div.list-table-header", ".send-to-friend");
 		$cache.editAddress.on('change', function () {
@@ -3022,8 +3526,12 @@ var app = (function (app, $) {
 			});
 		});
 	}
-
+	/******* app.wishlist public object ********/
 	app.wishlist = {
+		/**
+		 * @function
+		 * @description Binds events to the wishlist page
+		 */		
 		init : function () {
 			$cache.editAddress = $('#editAddress');
 			$cache.wishlistTable = $('.pt_wish-list .item-list');
@@ -3034,7 +3542,9 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.minicart
+/**
+ * @class app.minicart
+ */
 (function (app, $) {
 	// sub name space app.minicart.* provides functionality around the mini cart
 
@@ -3053,11 +3563,14 @@ var app = (function (app, $) {
 			timer.id = setTimeout(app.minicart.close, duration);
 		}
 	};
-
+	/******* app.minicart public object ********/
 	app.minicart = {
 		url : "", // during page loading, the Demandware URL is stored here
 
-		// initializations
+		/**
+		 * @function
+		 * @description Cache initializations and event binding to the mimcart
+		 */ 
 		init : function () {
 			$cache.minicart = $("#mini-cart");
 			$cache.mcTotal = $cache.minicart.find(".mini-cart-total");
@@ -3089,8 +3602,12 @@ var app = (function (app, $) {
 			$cache.mcProductList.toggledList({toggleClass : "collapsed", triggerSelector:".mini-cart-toggler", eventName:"click"});
 
 			initialized = true;
-		},
-		// shows the given content in the mini cart
+		}, 
+		/**
+		 * @function
+		 * @description Shows the given content in the mini cart
+		 * @param {String} A HTML string with the content which will be shown
+		 */
 		show : function (html) {
 			$cache.minicart.html(html);
 			app.util.scrollBrowser(0);
@@ -3098,7 +3615,10 @@ var app = (function (app, $) {
 			app.minicart.slide();
 			app.bonusProductsView.loadBonusOption();
 		},
-		// slide down and show the contents of the mini cart
+		/**
+		 * @function
+		 * @description Slides down and show the contents of the mini cart
+		 */ 
 		slide : function () {
 			if(!initialized) {
 				app.minicart.init();
@@ -3116,26 +3636,41 @@ var app = (function (app, $) {
 			// after a time out automatically close it
 			timer.start(6000);
 		},
-		// closes the mini cart with given delay
+		/**
+		 * @function
+		 * @description Closes the mini cart with given delay
+		 * @param {Number} delay The delay in milliseconds
+		 */ 
 		close : function (delay) {
 			timer.clear();
 			$cache.mcContent.slideUp();
 		},
-		// hook which can be replaced by individual pages/page types (e.g. cart)
-		suppressSlideDown : function () {
+		/**
+		 * @function
+		 * @description Hook which can be replaced by individual pages/page types (e.g. cart)
+		 */
+			suppressSlideDown : function () {
 			return false;
 		}
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.dialog
+/**
+ * @class app.dialog
+ */
 (function (app, $) {
 	// private
 
 	var $cache = {};
 	// end private
 
+	/******* app.dialog public object ********/
 	app.dialog = {
+		/**
+		 * @function
+		 * @description Appends a dialog to a given container (target)
+		 * @param {Object} params  params.target can be an id selector or an jquery object
+		 */	
 		create : function (params) {
 			// options.target can be an id selector or an jquery object
 			var target = $(params.target || "#dialog-container");
@@ -3153,8 +3688,11 @@ var app = (function (app, $) {
 			$cache.container.dialog($.extend(true, {}, app.dialog.settings, params.options || {}));
 			return $cache.container;
 		},
-
-		// opens a dialog using the given url
+		/**
+		 * @function
+		 * @description Opens a dialog using the given url (params.url)
+		 * @param {Object} params.url should contain the url 
+		 */
 		open : function (params) {
 			if (!params.url || params.url.length===0) { return; }
 
@@ -3173,34 +3711,54 @@ var app = (function (app, $) {
 			});
 
 		},
-		// closes the dialog and triggers the "close" event for the dialog
+		/**
+		 * @function
+		 * @description Closes the dialog and triggers the "close" event for the dialog
+		 */
 		close : function () {
 			if(!$cache.container) {
 				return;
 			}
 			$cache.container.dialog("close");
 		},
-		// triggers the "apply" event for the dialog
+		/**
+		 * @function
+		 * @description Triggers the "apply" event for the dialog
+		 */
 		triggerApply : function () {
 			$(this).trigger("dialogApplied");
 		},
-		// attaches the given callback function upon dialog "apply" event
+		/**
+		 * @function
+		 * @description Attaches the given callback function upon dialog "apply" event
+		 */
 		onApply : function (callback) {
 			if(callback) {
 				$(this).bind("dialogApplied", callback);
 			}
 		},
-		// triggers the "delete" event for the dialog
+		/**
+		 * @function
+		 * @description Triggers the "delete" event for the dialog
+		 */
 		triggerDelete : function () {
 			$(this).trigger("dialogDeleted");
 		},
-		// attaches the given callback function upon dialog "delete" event
+		/**
+		 * @function
+		 * @description Attaches the given callback function upon dialog "delete" event
+		 * @param {String} The callback function to be called
+		 */
 		onDelete : function (callback) {
 			if(callback) {
 				$(this).bind("dialogDeleted", callback);
 			}
 		},
-		// submits the dialog form with the given action
+		/**
+		 * @function
+		 * @description Submits the dialog form with the given action
+		 * @param {String} The action which will be triggered upon form submit
+		 */
 		submit : function (action) {
 			var form = $cache.container.find("form:first");
 			// set the action
@@ -3241,6 +3799,10 @@ var app = (function (app, $) {
 				opacity : 0.5,
 				background : "black"
 			},
+			/**
+			 * @function
+			 * @description The close event 
+			 */			
 			close : function (event, ui) {
 				$(this).dialog("destroy");
 			}
@@ -3248,7 +3810,9 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.validator
+/**
+ * @class app.validator
+ */
 (function (app, $) {
 
 	var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -3275,7 +3839,12 @@ var app = (function (app, $) {
 				}
 			}
 		};
-
+	/**
+	 * @function
+	 * @description Validates a given phone number against the countries phone regex
+	 * @param {String} value The phone number which will be validated
+	 * @param {String} el The input field
+	 */
 	function validatePhone(value, el) {
 		var country = $(el).closest("form").find(".country");
 		if(country.length === 0 || country.val().length === 0 || !regex.phone[country.val().toLowerCase()]) {
@@ -3288,7 +3857,12 @@ var app = (function (app, $) {
 
 		return isOptional || isValid;
 	}
-
+	/**
+	 * @function
+	 * @description Validates a given email
+	 * @param {String} value The email which will be validated
+	 * @param {String} el The input field
+	 */
 	function validateEmail(value, el) {
 		var isOptional = this.optional(el);
 		var isValid = regex.email.test($.trim(value));
@@ -3332,6 +3906,7 @@ var app = (function (app, $) {
 		return requiredText||"";
 	};
 
+	/******* app.validator public object ********/
 	app.validator = {
 		regex : regex,
 		settings : settings,
@@ -3348,7 +3923,9 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.ajax
+/**
+ * @class app.ajax
+ */
 (function (app, $) {
 
 	var currentRequests = [];
@@ -3356,11 +3933,14 @@ var app = (function (app, $) {
 
 	// sub namespace app.ajax.* contains application specific ajax components
 	app.ajax = {
-		// ajax request to get json response
-		// @param - async - boolean - asynchronous or not
-		// @param - url - String - uri for the request
-		// @param - data - name/value pair data request
-		// @param - callback - function - callback function to be called
+		/**
+		 * @function
+		 * @description Ajax request to get json response
+		 * @param {Boolean} async  Asynchronous or not
+		 * @param {String} url URI for the request
+		 * @param {Object} data Name/Value pair data request
+		 * @param {Function} callback  Callback function to be called
+		 */	
 		getJson : function (options) {
 			options.url = app.util.toAbsoluteUrl(options.url);
 			// return if no url exists or url matches a current request
@@ -3400,12 +3980,14 @@ var app = (function (app, $) {
 				}
 			});
 		},
-		// ajax request to load html response in a given container
-
-		// @param - url - String - uri for the request
-		// @param - data - name/value pair data request
-		// @param - callback - function - callback function to be called
-		// @param - target - Object - Selector or element that will receive content
+		/**
+		 * @function
+		 * @description ajax request to load html response in a given container
+		 * @param {String} url URI for the request
+		 * @param {Object} data Name/Value pair data request
+		 * @param {Function} callback  Callback function to be called
+		 * @param {Object} target Selector or element that will receive content
+		 */	
 		load : function (options) {
 			options.url = app.util.toAbsoluteUrl(options.url);
 			// return if no url exists or url matches a current request
@@ -3449,7 +4031,9 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.searchsuggest
+/**
+ * @class app.searchsuggest
+ */
 (function (app, $) {
 	var qlen = 0,
 		listTotal = -1,
@@ -3461,7 +4045,11 @@ var app = (function (app, $) {
 		$searchField,
 		$searchContainer,
 		$resultsContainer;
-
+	/**
+	 * @function
+	 * @description Handles keyboard's arrow keys
+	 * @param keyCode Code of an arrow key to be handled
+	 */
 	function handleArrowKeys(keyCode) {
 		switch (keyCode) {
 			case 38:
@@ -3483,8 +4071,12 @@ var app = (function (app, $) {
 		return true;
 	}
 
+	/******* app.searchsuggest public object ********/
 	app.searchsuggest = {
-		// configuration parameters and required object instances
+		/**
+		 * @function
+		 * @description Configures parameters and required object instances
+		 */	
 		init : function (container, defaultValue) {
 			// initialize vars
 			$searchContainer = $(container);
@@ -3546,7 +4138,12 @@ var app = (function (app, $) {
 				window.location = app.util.appendParamToURL($(this).attr("action"), "q", searchTerm);
 			});
 		},
-		// trigger suggest action
+		
+		/**
+		 * @function
+		 * @description trigger suggest action
+		 * @param lastValue
+		 */
 		suggest : function (lastValue) {
 			// get the field value
 			var part = $searchField.val();
@@ -3599,6 +4196,10 @@ var app = (function (app, $) {
 				});
 			});
 		},
+		/**
+		 * @function
+		 * @description 
+		 */		
 		clearResults : function () {
 			if (!$resultsContainer) { return; }
 			$resultsContainer.empty().hide();
@@ -3606,9 +4207,15 @@ var app = (function (app, $) {
 	};
 }(window.app = window.app || {}, jQuery));
 
-// app.searchplaceholder
+/**
+ * @class app.searchplaceholder
+ */
 (function (app, $) {
-
+	/**
+	 * @private
+	 * @function
+	 * @description Binds event to the place holder (.blur) 
+	 */
 	function initializeEvents() {
 		$('#q').focus(function () {
 			var input = $(this);
@@ -3624,8 +4231,13 @@ var app = (function (app, $) {
 		})
 		.blur();
 	}
-
+	
+	/******* app.searchplaceholder public object ********/
 	app.searchplaceholder = {
+		/**
+		 * @function
+		 * @description Binds event to the place holder (.blur) 
+		 */		
 		init : function () {
 			initializeEvents();
 		}
