@@ -136,7 +136,7 @@
     		
 		</isloop>					
 
-	<iselse/>
+	<iselse>
 		<div class="no-shipping-methods">${Resource.msg('singleshipping.noshippingmethods','checkout',null)}</div><!-- END: noshippingmethods -->
 	</isif>
 

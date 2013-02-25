@@ -52,7 +52,7 @@
 	
 	<isif condition="${!empty(imageProduct.getImage('hi-res', 0))}">
 		<isset name="imageUrlHiRes" value="${imageProduct.getImage('hi-res', 0).getURL()}" scope="page"/>
-	<iselse/>
+	<iselse>
 		<isset name="imageUrlHiRes" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 	</isif>
 	
@@ -62,7 +62,7 @@
 		<isif condition="${!empty(imageProduct.getImages('hi-res')) && imageProduct.getImages('hi-res').length>0}">
 			<isset name="hi_res" scope="page" value="${imageProduct.getImages('hi-res')[0].getURL().toString()}" />
 			<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
-		<iselse/>
+		<iselse>
 			<isset name="hi_res" scope="page" value="${''}" />
 			<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 		</isif>
@@ -149,7 +149,7 @@
 					<button id="add-all-to-cart" type="submit" value="${Resource.msg('global.addalltocart','locale',null)}" class="button-fancy-large add-all-to-cart"${disabledText}>
 						${Resource.msg('global.addalltocart','locale',null)}
 					</button>
-				<iselse/>
+				<iselse>
 					<isscript>
 						var updateSources = ["cart", "giftregistry", "wishlist"];
 						var source = pdict.CurrentHttpParameterMap.source.stringValue;

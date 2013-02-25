@@ -7,7 +7,7 @@
 				<p>${Resource.msg('forms.contactus.messagesent','forms',null)}</p> 
 				<p>${Resource.msg('forms.contactus.messagerequires','forms',null)}</p>
 			</div>
-		<iselse/>
+		<iselse>
 		
 			<h1>${Resource.msg('global.contactus','locale',null)}</h1>
 				

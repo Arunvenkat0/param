@@ -144,9 +144,9 @@
 			${Resource.msg('billing.custompaymentmethod','checkout',null)}
 		</div>
 	</fieldset>
-<iselse/>
+<iselse>
 	<div class="gift-cert-used form-indent">
-		<isif condition="${pdict.gcPITotal>0}">${Resource.msg('billing.giftcertnomethod','checkout',null)}<iselse/>${Resource.msg('billing.zerobalance','checkout',null)}</isif>
+		<isif condition="${pdict.gcPITotal>0}">${Resource.msg('billing.giftcertnomethod','checkout',null)}<iselse>${Resource.msg('billing.zerobalance','checkout',null)}</isif>
 		<input type="hidden" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE}" />
 		<input type="hidden" id="noPaymentNeeded" name="noPaymentNeeded" value="true" />
 	</div>	

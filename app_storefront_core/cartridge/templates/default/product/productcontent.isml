@@ -6,7 +6,7 @@
 		if (qs && qs.length>0) { url+="&"+qs; }		
 	</isscript>	
 	<isinclude url="${url}"/>
-<iselse/>
+<iselse>
 	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
 	<isscript>		
 		var masterId = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID; 

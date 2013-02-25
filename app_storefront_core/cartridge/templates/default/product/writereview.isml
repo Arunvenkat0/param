@@ -21,7 +21,7 @@
 	<isif condition="${!empty(image)}">
 		<isset name="imageUrl" value="${image.getURL()}" scope="page"/>
 		<isset name="imageAlt" value="${image.alt}" scope="page"/>
-	<iselse/>
+	<iselse>
 		<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagemedium.png')}" scope="page"/>
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
 	</isif>

@@ -37,7 +37,7 @@
 					
 					<div class="form-row form-row-button">
 						<button type="submit" class="button-fancy-medium" id="AddToBasketButton">
-							<isif condition="${pdict.GiftCertificateLineItem == null}">${Resource.msg('global.addtocart', 'locale', null)}<iselse/>${Resource.msg('global.updatecart', 'locale', null)}</isif>
+							<isif condition="${pdict.GiftCertificateLineItem == null}">${Resource.msg('global.addtocart', 'locale', null)}<iselse>${Resource.msg('global.updatecart', 'locale', null)}</isif>
 						</button>
 					</div>
 					

@@ -141,7 +141,7 @@
 												</isif>
 												<isif condition="${!empty(VV.getImage('hi-res'))}">
 													<isset name="hiResURL" scope="page" value="${VV.getImage('hi-res').getURL()}" />
-												<iselse/>
+												<iselse>
 													<isset name="hiResURL" scope="page" value="${''}" />
 												</isif>
 												<li class="${swatchClass}">
@@ -184,7 +184,7 @@
 														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
 															<isprint value="${displayValue}"/>
 														</a>
-													<iselse/>
+													<iselse>
 														<a title="${displayValue}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
 														</a>
@@ -213,7 +213,7 @@
 								</isif>						
 								</div>
 							</li>
-							<iselse/>
+							<iselse>
 								<iscomment>Drop down list</iscomment>
 								<li class="attribute variant-dropdown">							
 									<label for="va-${vaId}">

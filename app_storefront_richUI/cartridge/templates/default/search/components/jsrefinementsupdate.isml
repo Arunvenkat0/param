@@ -62,7 +62,7 @@
 	<iscomment>update the category ID</iscomment>
 	<isif condition="${!empty(pdict.ProductSearchResult.categoryID)}">
 		app.search.result.categoryID = "${pdict.ProductSearchResult.categoryID}";
-	<iselse/>
+	<iselse>
 		app.search.result.categoryID = null;
 	</isif>
 
@@ -137,13 +137,13 @@
 								"${RefinementValue.getDisplayValue()}",
 								"${appendPaging(pdict.ProductSearchResult.urlRefineCategory('Search-Show',RefinementValue.getValue()), pagingModel)}",
 								"${appendPaging(pdict.ProductSearchResult.urlRelaxCategory('Search-Show'), pagingModel)}",
-								<isif condition="${pdict.ProductSearchResult.categoryID != null && pdict.ProductSearchResult.categoryID == RefinementValue.getValue()}">true<iselse/>false</isif>,
+								<isif condition="${pdict.ProductSearchResult.categoryID != null && pdict.ProductSearchResult.categoryID == RefinementValue.getValue()}">true<iselse>false</isif>,
 								true,
-								<isif condition="${Refinements.getNextLevelCategoryRefinementValues(valueCategory).size() > 0}">true<iselse/>false</isif>,
+								<isif condition="${Refinements.getNextLevelCategoryRefinementValues(valueCategory).size() > 0}">true<iselse>false</isif>,
 								${nodeloop.count},
-								<isif condition="${path.contains(valueCategory)}">true<iselse/>false</isif>);
+								<isif condition="${path.contains(valueCategory)}">true<iselse>false</isif>);
 						</isloop>
-					<iselse/>
+					<iselse>
 						<isloop items="${categoryNode.onlineSubCategories}" var="SubCategory">
 							${JSIdentifier}.add(
 								null,
@@ -157,15 +157,15 @@
 								</isif>
 								"${refineLinkUrl}",
 								"${appendPaging(pdict.ProductSearchResult.urlRelaxCategory('Search-Show'), pagingModel)}",
-								<isif condition="${pdict.ProductSearchResult.categoryID != null && pdict.ProductSearchResult.categoryID == SubCategory.ID}">true<iselse/>false</isif>,
+								<isif condition="${pdict.ProductSearchResult.categoryID != null && pdict.ProductSearchResult.categoryID == SubCategory.ID}">true<iselse>false</isif>,
 								true,
-								<isif condition="${SubCategory.onlineSubCategories.size() > 0}">true<iselse/>false</isif>,
+								<isif condition="${SubCategory.onlineSubCategories.size() > 0}">true<iselse>false</isif>,
 								${nodeloop.count},
-								<isif condition="${path.contains(SubCategory)}">true<iselse/>false</isif>);
+								<isif condition="${path.contains(SubCategory)}">true<iselse>false</isif>);
 						</isloop>
 					</isif>
 				</isloop>
-			<iselse/>
+			<iselse>
 				<iscomment>register values for top categories only</iscomment>
 				<isloop items="${Refinements.getNextLevelCategoryRefinementValues(pdict.ProductSearchResult.category)}" var="RefinementValue">
 					<iscomment>get the category object per refinement value</iscomment>
@@ -178,11 +178,11 @@
 						"${RefinementValue.getDisplayValue()}",
 						"${appendPaging(pdict.ProductSearchResult.urlRefineCategory('Search-Show',RefinementValue.getValue()), pagingModel)}",
 						"${appendPaging(pdict.ProductSearchResult.urlRelaxCategory('Search-Show'), pagingModel)}",
-						<isif condition="${pdict.ProductSearchResult.categoryID != null && RefinementValue.getValue().equals(pdict.ProductSearchResult.categoryID)}">true<iselse/>false</isif>,
+						<isif condition="${pdict.ProductSearchResult.categoryID != null && RefinementValue.getValue().equals(pdict.ProductSearchResult.categoryID)}">true<iselse>false</isif>,
 						true,
-						<isif condition="${Refinements.getNextLevelCategoryRefinementValues(valueCategory).size() > 0}">true<iselse/>false</isif>,
+						<isif condition="${Refinements.getNextLevelCategoryRefinementValues(valueCategory).size() > 0}">true<iselse>false</isif>,
 						1,
-						<isif condition="${path.contains(valueCategory)}">true<iselse/>false</isif>);
+						<isif condition="${path.contains(valueCategory)}">true<iselse>false</isif>);
 				</isloop>
 			</isif>
 
@@ -195,12 +195,12 @@
 				${JSIdentifier}.add(
 					"${RefinementValue.getID()}",
 					"${RefinementValue.getValue()}",
-					<isif condition="${!empty(RefinementValue.getPresentationID())}">"${RefinementValue.getPresentationID()}"<iselse/>null</isif>,
+					<isif condition="${!empty(RefinementValue.getPresentationID())}">"${RefinementValue.getPresentationID()}"<iselse>null</isif>,
 					"${RefinementValue.getDisplayValue()}",
 					"${appendPaging(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()), pagingModel)}",
 					"${appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()), pagingModel)}",
-					<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">true<iselse/>false</isif>,
-					<isif condition="${RefinementValue.hitCount == 0}">false<iselse/>true</isif>,
+					<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">true<iselse>false</isif>,
+					<isif condition="${RefinementValue.hitCount == 0}">false<iselse>true</isif>,
 					false,
 					null,
 					false);
@@ -218,8 +218,8 @@
 					"${RefinementValue.getDisplayValue()}",
 					"${appendPaging(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()), pagingModel)}",
 					"${appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), pagingModel)}",
-					<isif condition="${pdict.ProductSearchResult.isRefinedByPriceRange(RefinementValue.valueFrom,RefinementValue.valueTo)}">true<iselse/>false</isif>,
-					<isif condition="${RefinementValue.hitCount == 0}">false<iselse/>true</isif>,
+					<isif condition="${pdict.ProductSearchResult.isRefinedByPriceRange(RefinementValue.valueFrom,RefinementValue.valueTo)}">true<iselse>false</isif>,
+					<isif condition="${RefinementValue.hitCount == 0}">false<iselse>true</isif>,
 					false,
 					null,
 					false);

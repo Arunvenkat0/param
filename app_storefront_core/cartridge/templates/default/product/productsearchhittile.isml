@@ -47,7 +47,7 @@
 		<iscomment>if we have a selected color, this color is highlighted otherwise the first selectable color is hightlighted</iscomment>
 		<isif condition="${!empty(selectedColor)}">
 			<isset name="firstColorVariation" value="${selectedColor}" scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="firstColorVariation" value="${selectableColors.get(0)}" scope="page"/>
 		</isif>
 		<isif condition="${!empty(varAttrColor)}">
@@ -84,7 +84,7 @@
 			<isset name="image" value="${firstColorVariation.getImage('medium')}" scope="page"/>
 			
 			
-		<iselse/>
+		<iselse>
 			<isset name="image" value="${Product.getImage('medium',0)}" scope="page"/>
 		</isif>
 		
@@ -93,7 +93,7 @@
 			<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 			<isset name="thumbnailAlt" value="${image.alt}" scope="page"/>
 			<isset name="thumbnailTitle" value="${image.title}" scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagemedium.png')}" scope="page"/>
 			<isset name="thumbnailAlt" value="${Product.name}" scope="page"/>
 			<isset name="thumbnailTitle" value="${Product.name}" scope="page"/>
@@ -130,7 +130,7 @@
 	<iselseif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true'}"/>
 		<iscomment>Product master price range depending on the represented variants</iscomment>	
 		<span class="product-sales-price">$<isprint value="${pdict.CurrentHttpParameterMap.minprice.stringValue}"/> - $<isprint value="${pdict.CurrentHttpParameterMap.maxprice.stringValue}"/></span>
-	<iselse/>						
+	<iselse>						
 		<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
 		<isif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true'}"/>
 			<iscomment>Preserve current product instance</iscomment>
@@ -143,7 +143,7 @@
 		</iscomment>
 		<isif condition="${Product.optionProduct}">
 			<isset name="PriceModel" value="${Product.getPriceModel(Product.getOptionModel())}" scope="page"/>
-		<iselse/>
+		<iselse>
 			<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
 		</isif>
 
@@ -160,7 +160,7 @@
 				<span class="product-standard-price" title="Regular Price"><isprint value="${StandardPrice}"/></span>
 				<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 			</div>
-		<iselse/>
+		<iselse>
 			<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 		</isif>
 		
@@ -281,7 +281,7 @@
 					<isset name="swatchUrl" value="${colorSwatch.getURL()}" scope="page"/>
 					<isset name="swatchAlt" value="${colorSwatch.alt}" scope="page"/>
 					<isset name="swatchTitle" value="${colorSwatch.title}" scope="page"/>
-				<iselse/>
+				<iselse>
 					<isset name="swatchUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 					<isset name="swatchAlt" value="${colorValue.displayValue}" scope="page"/>
 					<isset name="swatchTitle" value="${colorValue.displayValue}" scope="page"/>
@@ -290,7 +290,7 @@
 					<isset name="thumbnailUrl" value="${colorThumbnail.getURL()}" scope="page"/>
 					<isset name="thumbnailAlt" value="${colorThumbnail.alt}" scope="page"/>
 					<isset name="thumbnailTitle" value="${colorThumbnail.title}" scope="page"/>
-				<iselse/>
+				<iselse>
 					<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 					<isset name="thumbnailAlt" value="${colorValue.displayValue}" scope="page"/>
 					<isset name="thumbnailTitle" value="${colorValue.displayValue}" scope="page"/>

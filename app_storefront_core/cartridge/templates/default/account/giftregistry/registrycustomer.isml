@@ -14,7 +14,7 @@
 		
 		<div class="registrynone">${Resource.msgf('registrycustomer.' + pdict.Status.code, 'account',null, pdict.Status.parameters)}</div><!-- END: registrynone -->
 	
-	<iselse/>
+	<iselse>
 	
 	<div class="list-table-header">
 		<h2><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}"/></h2>
@@ -86,7 +86,7 @@
 								<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
 									<isif condition="${item.purchasedQuantity.value>item.quantity.value}">
 										<isset name="exceededClass" value="${' exceeded'}" scope="page" />
-									<iselse/>
+									<iselse>
 										<isset name="exceededClass" value="${''}" scope="page" />
 									</isif>
 									<div class="item-option option-quantity-desired">

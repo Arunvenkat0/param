@@ -55,7 +55,7 @@
 				</isloop>
 			</ul>
 		</isif>
-	<iselse/>
+	<iselse>
 		<iscomment>display the online sub categories for the given category</iscomment>
 		<isif condition="${Category.onlineSubCategories.size() > 0}">
 			<ul id="category-level-${CategoryLevel.toFixed()}">

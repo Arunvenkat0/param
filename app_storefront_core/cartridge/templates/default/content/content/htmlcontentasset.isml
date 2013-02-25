@@ -11,7 +11,7 @@
 		<div class="content-asset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
 			<isprint value="${pdict.Content.custom.body}" encoding="off"/>
 		</div> <!-- End content-asset -->
-	<iselse/>
+	<iselse>
 		${Resource.msg('global.nocontent','locale',null)}
 	</isif>
 </isif>
