@@ -5,7 +5,7 @@
 <iscache type="relative" hour="24"/>
 
 <iscomment>410 is one of the few error codes, for which pages are cached in the WebAdapter</iscomment>
-<isstatus value="410">
+<isstatus value="410"/>
 
 <iscomment>This page should be static or only have limited dynamic parts. </iscomment>
 <head>
