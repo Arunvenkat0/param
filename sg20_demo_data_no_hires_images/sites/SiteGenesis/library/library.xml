@@ -519,7 +519,7 @@ Monday to Friday&lt;br /&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;span class="toggle"&gt;Account Settings&lt;/span&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-	&lt;li&gt;&lt;a title="Show or update your personal information" href="$httpsUrl(Account-StartRegister)$"&gt;Create an Account&lt;/a&gt;&lt;/li&gt;&#13;
+	&lt;li&gt;&lt;a title="Create an Account" href="$httpsUrl(Account-StartRegister)$"&gt;Create an Account&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
 $include(Page-Include, cid, account-nav-service)$</custom-attribute>
