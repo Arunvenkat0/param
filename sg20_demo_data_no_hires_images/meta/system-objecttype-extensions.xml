@@ -3584,6 +3584,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
+            <attribute-definition attribute-id="enableInfiniteScroll">
+                <display-name xml:lang="x-default">Enable Infinite Scroll</display-name>
+                <description xml:lang="x-default">This Boolean toggles the option for infinite scrolling or pagination from within the search grid.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="facebookAppID">
                 <display-name xml:lang="x-default">Facebook App ID</display-name>
                 <description xml:lang="x-default">The application ID that will be used with Facebook Connect.</description>
@@ -3752,6 +3760,7 @@
                 <attribute attribute-id="facebookConnectEnabled"/>
                 <attribute attribute-id="facebookURI"/>
                 <attribute attribute-id="facebookAppID"/>
+                <attribute attribute-id="enableInfiniteScroll"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
