@@ -35,12 +35,12 @@
 <div class="pagination">
 
 	<div class="results-hits">
-	Showing <isprint value="${StringUtils.formatInteger(showingStart)}"/> - <isprint value="${StringUtils.formatInteger(showingEnd)}"/> of 
+		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}"><span class="current-page-label"></isif>${Resource.msg('pagecomponents.paginginformation.showing','pagecomponents',null)} <isprint value="${StringUtils.formatInteger(showingStart)}"/> - <isprint value="${StringUtils.formatInteger(showingEnd)}"/> ${Resource.msg('paginginformation.of','search',null)} <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}"></span></isif> 
 		<isprint value="${pdict.pagingmodel.count}"/> ${Resource.msg('paginginformation.results','search',null)}
 	</div>
 	
 	<iscomment>Avoid empty paging div or empty div with empty ul</iscomment>
-	<isif condition="${pdict.pagingmodel.pageCount > 1}">
+	<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && pdict.pagingmodel.pageCount > 1}">
 
 			<ul>
 				<isif condition="${(currentPage > 0) && (maxPage > 4)}">

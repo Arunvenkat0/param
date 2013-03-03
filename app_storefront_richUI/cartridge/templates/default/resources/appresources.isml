@@ -19,6 +19,11 @@
 		}
 		return isMobile;
 	}
+
+	var clientcache = {
+		LISTING_INFINITE_SCROLL : (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
+		LISTING_REFINE_SORT : true
+	};	
 	
 	
 	// application constants
@@ -80,7 +85,8 @@
 		TITLE_ADDRESS					: Resource.msg('forms.title.address', 'forms', null),
 		TITLE_CREDITCARD				: Resource.msg('forms.title.creditcard', 'forms', null),
 		SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection','locale','Server connection failed!'),
-		IN_STOCK_DATE				: Resource.msg('global.inStockDate', 'locale', null)
+		IN_STOCK_DATE					: Resource.msg('global.inStockDate', 'locale', null),
+		INIFINITESCROLL					: Resource.msg('paginginformation.infinite-scroll','search',null)
 	};
 	
 	// additional resources 
@@ -146,4 +152,5 @@
 	app.constants = <isprint value="${JSON.stringify(constants)}" encoding="off"/>;
 	app.resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;	
 	app.urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	
+	app.clientcache = <isprint value="${JSON.stringify(clientcache)}" encoding="off"/>;
 }(window.app = window.app || {}));

@@ -447,6 +447,14 @@ ul.folder-content-list .content-title{display:block;}
 .wide-tiles .product-tile .product-swatches{bottom:auto;left:auto;position:relative;right:auto;margin-top:5px;}
 .wide-tiles .product-tile .product-swatches li{float:left;}
 
+/* infinite scroll amendments */
+/* ------------------------------------- */
+.infinite-scroll .pagination ul{display:none}
+.infinite-scroll .pagination .current-page-label{display:none}
+.infinite-scroll .items-per-page {display:none}
+.infinite-scroll div.search-result-content .infinite-scroll-loading {text-align: center;  background: url("../images/infinite-loading-indicator.gif") center no-repeat; height: 35px; width: 100%} 
+.disable-infinite-scroll div.search-result-content .page-element {display:none} 
+
 /* compare tools */
 /* ------------------------------------- */
 
