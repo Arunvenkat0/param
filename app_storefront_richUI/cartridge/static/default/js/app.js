@@ -127,7 +127,9 @@ var app = (function (app, $) {
 	function initializeDom() {
 		// add class to html for css targeting
 		$('html').addClass('js');
-
+		if (app.clientcache.LISTING_INFINITE_SCROLL){
+			$('html').addClass('infinite-scroll');
+		}
 		// load js specific styles
 		app.util.limitCharacters();
 	}
@@ -1453,7 +1455,63 @@ var app = (function (app, $) {
 			app.product.compare.init();
 			app.product.tile.init();
 			app.progress.hide();
-
+			if (app.clientcache.LISTING_INFINITE_SCROLL){
+				jQuery(document).trigger('grid-update');
+			}
+		});
+	}
+	/** 
+	 * @private 
+	 * @function 
+	 * @description 
+	 */ 
+	function initInfiniteScroll() {
+		
+		jQuery(document).bind('scroll ready grid-update',function(e) {
+			// getting the hidden div, which is the placeholder for the next page
+			var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
+			if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
+				// switch state to 'loading' 
+				// - switches state, so the above selector is only matching once
+				// - shows loading indicator
+				loadingPlaceHolder.attr('data-loading-state','loading');
+				loadingPlaceHolder.addClass('infinite-scroll-loading');
+				
+				// get url hidden in DOM
+				var gridUrl = loadingPlaceHolder.attr('data-grid-url');
+				
+				/**
+				 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
+				 */
+				var fillEndlessScrollChunk = function (html) {
+					loadingPlaceHolder.removeClass('infinite-scroll-loading');
+					loadingPlaceHolder.attr('data-loading-state','loaded');
+					jQuery('div.search-result-content').append(html);
+					jQuery(document).trigger('grid-update');
+				};
+				if (app.clientcache.LISTING_INFINITE_SCROLL && 'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]) {
+					// if we hit the cache 
+					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
+				} else {	
+					// else do query via ajax 
+					jQuery.ajax({
+						type: "GET",
+						dataType: 'html',
+						url: gridUrl, 
+						success: function(response) {
+							// put response into cache 
+							try {
+								sessionStorage["scroll-cache_" + gridUrl] = response;
+							} catch (e) {
+								// nothing to catch in case of out of memory of session storage
+								// it will fall back to load via ajax
+							}
+							// update UI
+							fillEndlessScrollChunk(response);		
+						}
+					});
+				}
+			}
 		});
 	}
 	/**
@@ -1547,8 +1605,15 @@ var app = (function (app, $) {
 		})
 		.on("change", ".items-per-page select", function (e) {
 			var refineUrl = $(this).find('option:selected').val();
-			var uri = app.util.getUri(refineUrl);
-			window.location.hash = uri.query.substr(1);
+			if (refineUrl == "INFINITE_SCROLL") {
+				jQuery('html').addClass('infinite-scroll');
+				jQuery('html').removeClass('disable-infinite-scroll');
+			} else {
+				jQuery('html').addClass('disable-infinite-scroll');
+				jQuery('html').removeClass('infinite-scroll');
+				var uri = app.util.getUri(refineUrl);
+				window.location.hash = uri.query.substr(1);
+			}
 			return false;
 		});
 
@@ -1569,6 +1634,9 @@ var app = (function (app, $) {
 				app.product.compare.init();
 			//}
 			updateProductListing(false);
+			if (app.clientcache.LISTING_INFINITE_SCROLL){
+				initInfiniteScroll();
+			}
 			app.product.tile.init();
 			initializeEvents();
 		}
@@ -2650,6 +2718,35 @@ var app = (function (app, $) {
 				c = "&";
 			}
 			return url + c + name + "=" + encodeURIComponent(value);
+		},
+		/** 
+		 * @function 
+		 * @description 
+		 * @param {String} 
+		 * @param {String} 
+		 */
+		elementInViewport: function (el, offsetToTop) {
+			var top = el.offsetTop,
+				left = el.offsetLeft,
+				width = el.offsetWidth,
+				height = el.offsetHeight;
+
+			while (el.offsetParent) {
+				el = el.offsetParent;
+				top += el.offsetTop;
+				left += el.offsetLeft;
+			}
+
+			if (typeof(offsetToTop) != 'undefined') {
+				top -= offsetToTop;
+			}
+			
+			return (
+					top < (window.pageYOffset + window.innerHeight) &&
+					left < (window.pageXOffset + window.innerWidth) &&
+					(top + height) > window.pageYOffset &&
+					(left + width) > window.pageXOffset
+			);
 		},
 		/**
 		 * @function
