@@ -1,5 +1,5 @@
 <isscript>
-	importScript('app_storefront_core:/search/ProductGridUtils.ds');
+	importScript('search/ProductGridUtils.ds');
 </isscript>
 <iscomment><!--Display the remaining products as list--></iscomment>
 
