@@ -1,5 +1,5 @@
 /**
-importScript('app_storefront_core:/search/ProductGridUtils.ds');
+importScript('search/ProductGridUtils.ds');
 */
 importPackage ( dw.system );
 importPackage ( dw.util );
