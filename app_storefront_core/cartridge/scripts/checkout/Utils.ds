@@ -8,6 +8,8 @@ importPackage( dw.order );
 importPackage( dw.system );
 importPackage( dw.util );
 importPackage( dw.value );
+importPackage( dw.web );
+importPackage( dw.catalog );
 
 /**
  * Calculates the amount to be payed by a non-gift certificate payment instrument based 
@@ -140,6 +142,51 @@ function ShippingAddress()
 		this.stateCode = fromAddress.stateCode;
 		this.countryCode = fromAddress.countryCode;
 		this.phone = fromAddress.phone;
+		
+		if (fromAddress.countryCode.value != null){
+			this.countryCode = fromAddress.countryCode.value;
+		} else {
+			this.countryCode = fromAddress.countryCode;
+		}
+		
+		// if we copy from a customer address, we set the address ID and UUID
+		if( fromAddress instanceof CustomerAddress || (fromAddress.ID != null && fromAddress.UUID != null)){
+			this.ID = fromAddress.ID;
+			this.referenceAddressUUID = fromAddress.UUID;
+		}
+		
+		if (fromAddress.referenceAddressUUID != null){
+			this.referenceAddressUUID = fromAddress.referenceAddressUUID;
+		}
+	}
+	
+	/**
+	*	New function for multi-shipping checkout
+	*	Checks if the address already exists in an array of addresses
+	*/
+	this.addressExists = function (addresses : Array) : Boolean
+	{
+		for each (var address : Object in addresses){
+			if (this.referenceAddressUUID != null && (address.referenceAddressUUID != null)){
+				if (this.referenceAddressUUID.equals(address.referenceAddressUUID)){
+					return true;
+				}
+			} else {
+				if (this.firstName == address.firstName &&
+					this.lastName == address.lastName &&
+					this.address1 == address.address1 &&
+					this.address2 == address.address2 &&
+					this.city == address.city &&
+					this.postalCode == address.postalCode &&
+					this.stateCode == address.stateCode &&
+					this.countryCode == address.countryCode &&
+					this.phone == address.phone){
+						return true;
+					}
+			}
+		}
+		
+		return false;
 	}
 }
 
@@ -247,4 +294,114 @@ function removeExistingPaymentInstruments( lineItemCtnr : LineItemCtnr, method :
 		existingPI = iter.next();
 		lineItemCtnr.removePaymentInstrument( existingPI );
 	}
+}
+
+/**
+*	New function for multi-shipping checkout
+*	Adds a new address to the JSON object of the sessionAddressBook attribute
+*/
+function addAddressToJSON(jsonAddressBook : String, referenceAddress : Object) : String {
+	var address : Object = new ShippingAddress();
+	var jsonObj : Object = new Object();
+	var log : Log = Logger.getLogger("multishipping");
+	
+	if (referenceAddress != null){
+		// Try to parse incoming JSON string
+		try {
+			if (jsonAddressBook != null){
+				jsonObj = JSON.parse(jsonAddressBook);
+			}
+		} catch (error){
+			log.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+		}
+		
+		// Check if JSON object already has addresses
+		if (!(jsonObj.addresses instanceof Array)){
+			jsonObj.addresses = new Array();
+		}
+		
+		address.UUID = UUIDUtils.createUUID();
+		address.copyFrom(referenceAddress);
+		
+		// Add address if not already existing
+		if (!address.addressExists(jsonObj.addresses)){
+			jsonObj.addresses.push(address);
+		}
+	}
+	
+	return JSON.stringify(jsonObj);
+}
+
+/**
+*	New function for multi-shipping checkout
+*	Updates an address in the JSON sessionAddressBookAttribute
+*/
+function updateAddressInJSON(jsonAddressBook : String, referenceAddress : Object, originalUUID : String) : String {
+	var newAddress : Object = new ShippingAddress();
+	var jsonObj : Object = new Object();
+	var addresses : Array = new Array();
+	var log : Log = Logger.getLogger("multishipping");
+	
+	if (referenceAddress != null && jsonAddressBook != null && originalUUID != null){
+		try {
+			jsonObj = JSON.parse(jsonAddressBook);
+		} catch (error){
+			log.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+			return jsonAddressBook;
+		}
+		
+		newAddress.copyFrom(referenceAddress);
+		addresses = jsonObj.addresses;
+		
+		for (var i = 0; i < addresses.length; i++){
+			if (addresses[i].UUID == originalUUID){
+				newAddress.UUID = addresses[i].UUID;
+				newAddress.ID = addresses[i].ID;
+				newAddress.referenceAddressUUID = addresses[i].referenceAddressUUID;
+				jsonObj.addresses[i] = newAddress;
+			}
+		}
+		
+		return JSON.stringify(jsonObj);
+	}
+}
+
+/**
+*	Returns the addresses stored in the sessionAddressBook attribute as ArrayList.
+*/
+function getSessionAddresses(basket : Basket) : ArrayList {
+	var sessionAddressBookObj : Object = new Object();
+	var sessionAddressBook : String = new String();
+	var sessionAddresses : ArrayList = new ArrayList();
+	var log : Log = Logger.getLogger("multishipping");
+	
+	if (!empty(basket.describe().getCustomAttributeDefinition('sessionAddressBook'))){
+		sessionAddressBook = basket.custom.sessionAddressBook;
+	
+		// Session addresses availability check
+		if (sessionAddressBook != null){
+			try {
+				sessionAddressBookObj = JSON.parse(sessionAddressBook);
+				sessionAddresses.add(sessionAddressBookObj.addresses);
+			} catch (error){
+				log.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+				return null;
+			}
+		}
+		
+		return sessionAddresses;
+	}
+	
+	return null;
+}
+
+/**
+*	Helper object to store ProductLineItem information for each quantity.
+*	Used in Multi-Shipping Checkout to save creation of new PLIs for each quantity.
+*/
+function QuantityLineItem(){
+	var product : Product = null;
+	var lineItemText : String = null;
+	var quantity : Quantity = null;
+	var pliUUID : String = null;
 }

@@ -762,6 +762,20 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
 .order-shipment-gift-message {font-size: 1.1em;}
 
+
+/* multishipping elements */
+/* ------------------------------------- */
+.selectbox {width: 100%;}
+.editaddress {padding-left: 2%;}
+.multi-address-footer {border-top: 1px solid #D9D9D9;}
+.formactions {margin-top:20px;text-align: right;}
+table.item-list .multi-shipment-row {border-bottom: none;}
+.minishipments-method {padding-top: 10px;}
+.multishipprogress div, .multishipprogress .step-3 {background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;display: inline;padding: 1em;}
+.multishipprogress .step-4 {background: none repeat scroll 0 0 transparent;padding-right: 0;}
+.checkout-progress-indicator {font-size:1em;}
+.checkout-progress-indicator div{padding: 20px;}
+
 /* account */
 /* ------------------------------------- */
 

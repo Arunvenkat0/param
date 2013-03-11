@@ -9,12 +9,12 @@
 		<!-- flag indicating whether this checkout step is fulfilled -->
 		<field formid="fulfilled" type="boolean" default-value="false"/>
 
-		<!-- list of product line items to differentiate by shipping address -->
-		<list formid="productLineItems">
+		<!-- list of quantity line items to differentiate by shipping address -->
+		<list formid="quantityLineItems">
 			<field formid="lineItemUUID" binding="UUID" type="string"/>
 			
 			<field formid="addressList" type="string" mandatory="true">
-				<options optionid-binding="UUID" value-binding="UUID" />
+				<options optionid-binding="UUID" value-binding="UUID" label-binding="ID"/>
 			</field>
 		</list>
 	
@@ -43,6 +43,21 @@
 
 		<!-- action for saving the properties -->
 		<action formid="save" valid-form="true"/>
+	</group>
+	
+	<group formid="editAddress" form-error="forms.address.invalid">
+		<field formid="addressList" type="string" mandatory="true">
+			<options optionid-binding="UUID" value-binding="UUID" label-binding="ID" />
+		</field>
+		
+		<!-- use fields from shipping address definition -->
+		<include formid="addressFields" name="shippingaddress"/>
+	
+		<field formid="addToAddressBook" label="forms.checkout.addtoaddressbook" type="boolean" mandatory="false" />
+	
+		<action formid="selectAddress" valid-form="false"/>
+		<action formid="save" valid-form="true"/>
+		<action formid="cancel" valid-form="false"/>
 	</group>
 
 </form>
