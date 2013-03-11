@@ -49,6 +49,12 @@
 						</isif>
 						<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
 						<div><isprint value="${address.countryCode}"/></div>
+						<isif condition="${!empty(shipment.shippingMethod)}">
+							<div class="minishipments-method">
+								<span>${Resource.msg('orderdetails.shippingmethod','components',null)}</span>
+						    	<span><isprint value="${shipment.shippingMethod.displayName}"/></span>
+							</div>
+						</isif>
 					</isif>
 				</div>
 	

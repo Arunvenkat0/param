@@ -11,7 +11,7 @@
     <isset name="rendershipping" value="${pdict.rendershipping}" scope="page"/>
 </isif>
 
-<div class="checkout-progress-indicator">
+<div class="checkout-progress-indicator${pdict.multishipping == 'true' ? ' multishipprogress' : ''}">
 
 	<iscomment>render progress indicator based on current single or multi shipping</iscomment>
 	<isif condition="${pdict.multishipping == 'true'}">

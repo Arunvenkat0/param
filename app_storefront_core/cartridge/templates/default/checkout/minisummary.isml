@@ -25,7 +25,7 @@
 			<isif condition="${pdict.Basket.productLineItems.size() == 0 && pdict.Basket.giftCertificateLineItems.size() == 1}">
 				<isset name="editUrl" value="${URLUtils.url('GiftCert-Edit','GiftCertificateLineItemID', pdict.Basket.giftCertificateLineItems[0].UUID)}" scope="page"/>
 			</isif>
-			Order Summary <a class="section-header-note" href="${editUrl}">${Resource.msg('global.edit','locale',null)}</a>
+			${Resource.msg('summary.title','checkout',null)} <a class="section-header-note" href="${editUrl}">${Resource.msg('global.edit','locale',null)}</a>
 		</h3>
 		
 		<div class="checkout-mini-cart">			
@@ -44,8 +44,10 @@
 		</isif>
 	</div>
 
-	<iscomment>render single shipment boxes</iscomment>	
-	<isinclude template="checkout/shipping/minishipments"/>
+	<iscomment>render single shipment boxes</iscomment>
+	<isif condition="${pdict.CurrentForms.multishipping.entered != true}">
+		<isinclude template="checkout/shipping/minishipments"/>
+	</isif>
 	
 
 	<iscomment>render billing information: billing address and payment instruments</iscomment>	

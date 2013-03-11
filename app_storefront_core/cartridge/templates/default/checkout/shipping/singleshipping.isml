@@ -34,10 +34,10 @@
 			</legend>
 
 			<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
-			<isif condition="${pdict.Basket.productLineItems.size() > 1 && false}">
+			<isif condition="${pdict.Basket.productQuantityTotal > 1 && dw.system.Site.getCurrent().getPreferences().getCustom()['enableMultiShipping']}">
 				<div class="ship-to-multiple">
 					${Resource.msg('singleshipping.multiple','checkout',null)} 
-					<button class="shiptomultiplebutton textbutton" type="submit" name="${pdict.CurrentForms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
+					<button class="shiptomultiplebutton button-fancy-medium cancel" type="submit" name="${pdict.CurrentForms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
 						${Resource.msg('global.yes','locale',null)}
 					</button>
 				</div>
