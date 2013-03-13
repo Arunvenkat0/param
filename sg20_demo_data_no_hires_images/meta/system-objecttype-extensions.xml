@@ -3592,6 +3592,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
+             <attribute-definition attribute-id="enableMultiShipping">
+                 <display-name xml:lang="x-default">Enable MultiShipping</display-name>
+                 <description xml:lang="x-default">The attribute is used to enable/disable Multi-Shipment Checkout for each site via BM.</description>
+                 <type>boolean</type>
+                 <mandatory-flag>false</mandatory-flag>
+                 <externally-managed-flag>false</externally-managed-flag>
+                 <default-value>false</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="facebookAppID">
                 <display-name xml:lang="x-default">Facebook App ID</display-name>
                 <description xml:lang="x-default">The application ID that will be used with Facebook Connect.</description>
@@ -3761,6 +3769,7 @@
                 <attribute attribute-id="facebookURI"/>
                 <attribute attribute-id="facebookAppID"/>
                 <attribute attribute-id="enableInfiniteScroll"/>
+                <attribute attribute-id="enableMultiShipping"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
