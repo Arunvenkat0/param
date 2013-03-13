@@ -75,7 +75,11 @@
 		</td>
 		<td class="order-payment-summary">
 			<div class="order-detail-summary">
+			<isif condition="${Order.shipments.length > 1}">
+				<isordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
+			<iselse>
 				<isordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
+			</isif>
 			</div>
 		</td>
 	</tr>
