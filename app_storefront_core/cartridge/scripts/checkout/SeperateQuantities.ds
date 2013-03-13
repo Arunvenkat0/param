@@ -35,7 +35,7 @@ function execute( args : PipelineDictionary ) : Number
 		var qli : Object = new QuantityLineItem();
 		qli.quantity = new Quantity(1, pli.quantity.getUnit());
 		qli.lineItemText = pli.lineItemText;
-		qli.product = pli.product;
+		qli.productID = pli.productID;
 		qli.pliUUID = pli.UUID;
 		
 		quantityLineItems.add(qli);

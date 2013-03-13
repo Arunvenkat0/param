@@ -41,7 +41,7 @@ function execute( args : PipelineDictionary ) : Number
 	*/
 	for each (var qli : FormListItem in qliList){
 		var selectedAddress : String = qli.addressList.selectedOptionObject;
-		var productID : String = qli.object.product.ID;
+		var productID : String = qli.object.productID;
 		
 		if (selectedAddress == null){
 			return PIPELET_ERROR;

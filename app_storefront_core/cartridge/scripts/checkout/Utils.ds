@@ -155,7 +155,7 @@ function ShippingAddress()
 			this.referenceAddressUUID = fromAddress.UUID;
 		}
 		
-		if (fromAddress.referenceAddressUUID != null){
+		if ('referenceAddressUUID' in fromAddress && fromAddress.referenceAddressUUID != null){
 			this.referenceAddressUUID = fromAddress.referenceAddressUUID;
 		}
 	}
@@ -400,7 +400,7 @@ function getSessionAddresses(basket : Basket) : ArrayList {
 *	Used in Multi-Shipping Checkout to save creation of new PLIs for each quantity.
 */
 function QuantityLineItem(){
-	var product : Product = null;
+	var productID : String = null;
 	var lineItemText : String = null;
 	var quantity : Quantity = null;
 	var pliUUID : String = null;
