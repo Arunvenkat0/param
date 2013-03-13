@@ -60,7 +60,7 @@
 			<iselse>
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
 				<br />			
-			</isif>
+			</isif> 
 		</td>
 
 	</tr>
