@@ -383,7 +383,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetSessionAddresses.ds"/>
-          <key-binding alias="Log" key="ScriptLog"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
         </pipelet-node>
@@ -525,7 +524,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/InitSessionAddressBook.ds"/>
-          <key-binding alias="Logger" key="ScriptLog"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="CurrentCustomer" key="CCustomer"/>
           <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
@@ -760,7 +758,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetSessionAddresses.ds"/>
-          <key-binding alias="Log" key="ScriptLog"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="Addresses" key="SessionAddresses"/>
         </pipelet-node>
@@ -872,7 +869,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="checkout/AddAddressToSessionAddressBook.ds"/>
-                <key-binding alias="Log" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.multishipping.editAddress.addToAddressBook.checked" key="AddToAddressBook"/>
                 <key-binding alias="Basket" key="CBasket"/>
                 <key-binding alias="NewAddress" key="FormAddress"/>
@@ -1004,7 +1000,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/MergeQuantities.ds"/>
-          <key-binding alias="Log" key="ScriptLog"/>
           <key-binding alias="CurrentForms.multishipping.addressSelection.quantityLineItems" key="QuantityLineItems"/>
           <key-binding alias="Basket" key="CBasket"/>
         </pipelet-node>

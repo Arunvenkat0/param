@@ -16,7 +16,7 @@ importPackage( dw.web );
 importPackage( dw.customer );
 
 importScript("checkout/Utils.ds");
-importScript("app_storefront_core:account/Utils.ds");
+importScript("account/Utils.ds");
 
 function execute( args : PipelineDictionary ) : Number {
 
