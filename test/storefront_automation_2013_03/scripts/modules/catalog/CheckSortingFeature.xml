@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the sorting method for:
+- functional correctness
+- no changes in number of hits
+- no changes in number of items per page
+- no changes in number of paginations
+- the correct first and last products to be displayed
+
+@Parameter
+SortMethod: sort method that is selected
+FirstItemName: product name of the first product
+LastItemName: product name of the last product
+LastPageNumber: Number of pages
+ItemsPerPage: number of Items that are displayed
+ShownProducts: range of products that is displayed (e.g. 1-12)
+MaxItems: the complete amont of search results</description>
+  <parameter name="SortMethod"/>
+  <parameter name="ItemsPerPage"/>
+  <parameter name="ShownProducts"/>
+  <action name="SelectSortingMethod"/>
+  <command name="waitForElementPresent" target="name=Product-Sorting-Options">
+    <comment>Wait for the dropdown.</comment>
+  </command>
+  <action name="SelectSortionOption"/>
+  <command name="select" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
+    <comment>Select a sorting method.</comment>
+  </command>
+  <command name="waitForText" target="css=.search-result-options:nth-child(4) .sort-by option[selected]" value="@{SortMethod}">
+    <comment>Wait for the selected sorting method.</comment>
+  </command>
+  <module name="modules.catalog.CompareSearchResultContainers">
+    <parameter name="SortMethod" value="@{SortMethod}"/>
+    <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
+  </module>
+  <action name="SelectLastPage"/>
+  <command name="click" target="css=.pagination li:last-child a">
+    <comment>Select the last page.</comment>
+  </command>
+  <command name="waitForElementPresent" target="css=.page-1"/>
+  <command name="waitForElementPresent" target="css=.search-result-content">
+    <comment>waits for productlist before validating them</comment>
+  </command>
+</scriptmodule>

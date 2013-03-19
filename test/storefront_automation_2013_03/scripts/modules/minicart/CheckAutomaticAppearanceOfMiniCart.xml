@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>This modul tests if the minicart appears and disappears after some time.</description>
+  <command name="waitForElementPresent" target="css=.mini-cart-content">
+    <comment>Wait for Cart Window to Appear (Windows is displayed only for a short time)</comment>
+  </command>
+  <command name="waitForNotVisible" target="css=.mini-cart-content">
+    <comment>Wait for Cart Window to Disappear (Since windows is displayed only for a small time)</comment>
+  </command>
+</scriptmodule>

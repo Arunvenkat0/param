@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>On category pages with more than 5 pagination elements you can use arrows:
+- one step forward / backward
+- get to the end / beginning
+
+@Parameters
+SubCategoryName: name of the subcategory you are working on
+LastPageNumber: Last category page 
+MiddlePageNumber : Page number on which you will validate next/previous</description>
+  <parameter name="SubCategoryName"/>
+  <parameter name="MiddlePageNumber"/>
+  <module name="modules.catalog.ValidateCatalogNavigationFirstPage"/>
+  <action name="OpenLastPage"/>
+  <command name="click" target="css=.page-last"/>
+  <module name="modules.catalog.ValidateCatalogNaviagationLastPage"/>
+  <action name="OpenFirstPage"/>
+  <command name="click" target="css=.page-first"/>
+  <command name="waitForElementPresent" target="css=.page-@{MiddlePageNumber}"/>
+  <action name="OpenLastPageBeforePaging"/>
+  <command name="click" target="css=.page-@{MiddlePageNumber}"/>
+  <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
+  <action name="OpenPreviousPage"/>
+  <command name="click" target="css=.page-previous"/>
+  <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
+  <action name="OpenNextPage"/>
+  <command name="click" target="css=.page-next"/>
+  <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
+  <action name="ClickSubcategoryInBreadcrumb"/>
+  <command name="clickAndWait" target="link=@{SubCategoryName}">
+    <comment>Page with more navigation elements</comment>
+  </command>
+</scriptmodule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Check the presence of navigation elements on first page.</description>
+  <command name="waitForElementPresent" target="css=.pagination .page-last"/>
+  <command name="storeText" target="css=.current-page" value="FirstPage"/>
+  <command name="assertText" target="css=.current-page" value="${FirstPage}"/>
+  <command name="assertElementPresent" target="css=.page-next"/>
+  <command name="assertElementPresent" target="css=.page-last"/>
+  <command name="assertNotElementPresent" target="css=page-previous"/>
+  <command name="assertNotElementPresent" target="css=.page-first"/>
+</scriptmodule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>This module validates the product detail page for correct name and price
+of the displayed product.
+
+@Parameters:
+Name: Product name
+Price: Single product price</description>
+  <parameter name="Name"/>
+  <parameter name="Price"/>
+  <command name="waitForElementPresent" target="id=main">
+    <comment>Validate Product Image</comment>
+  </command>
+  <command name="waitForText" target="css=h1.product-name" value="@{Name}">
+    <comment>Checks for the correct product name to be displayed.</comment>
+  </command>
+  <command name="waitForText" target="css=.breadcrumb .last" value="@{Name}">
+    <comment>Checks for the product name as last element in breadcrumb navigation.</comment>
+  </command>
+  <command name="assertText" target="css=#pdpMain .price-sales" value="@{Price}">
+    <comment>Checks for the correct displayed price.</comment>
+  </command>
+</scriptmodule>

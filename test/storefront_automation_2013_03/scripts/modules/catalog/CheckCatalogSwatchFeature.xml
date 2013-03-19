@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Some products offer to change there color (swatches):
+- hover -&gt; change of color -&gt; mouseOut -&gt; initial color
+- click -&gt; permanent change
+- permanently changed colors appear in details and quickview</description>
+  <parameter name="SubCategoryName"/>
+  <command name="storeEval" target="document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0].getAttribute('title').split(&quot;,&quot;,1)" value="ProductName"/>
+  <command name="storeEval" target=" document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
+  <command name="storeEval" target="document.getElementsByClassName('swatch')[1].getAttribute('title')" value="AvailableColor2"/>
+  <action name="CheckAvailableColors"/>
+  <module name="modules.catalog.CheckAvailableColorsOnCategoryPage"/>
+  <action name="SelectAlternativeColorAndCheckResult"/>
+  <command name="click" target="xpath=(//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]/../../..//a)[contains(concat(' ',@class,' '), ' swatch ') and @title='${AvailableColor2}']"/>
+  <module name="modules.catalog.ValidateSwatchColorChange">
+    <parameter name="SelectedColor" value="${AvailableColor2}"/>
+  </module>
+  <action name="SelectDefaultColorAndCheckResult"/>
+  <command name="clickAndWait" target="link=@{SubCategoryName}"/>
+  <module name="modules.catalog.ValidateSwatchColorChange">
+    <parameter name="SelectedColor" value="${DefaultColor}"/>
+  </module>
+</scriptmodule>
