@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the billing information summary page for responsive design:
+- Name
+- Address
+- City / State / ZIP
+- Country</description>
+  <parameter name="Name"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="StateShort"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Country"/>
+  <command name="assertText" target="css=.order-billing .mini-address-name" value="@{Name}"/>
+  <command name="assertText" target="css=.order-billing .mini-address-location" value="glob:@{Address}*"/>
+  <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{City}*"/>
+  <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{StateShort}*"/>
+  <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{ZipCode}*"/>
+  <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{Country}*"/>
+</scriptmodule>

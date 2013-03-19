@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Navigates to a main category catalog page via the main navigation menu.
+
+@Parameters
+MainCategoryNumber: location of the category inside menu e.g. 1,2,3 etc.
+MainCategoryName: Main Menu Name</description>
+  <parameter name="MainCategoryNumber"/>
+  <parameter name="MainCategoryName"/>
+  <action name="OpenMainCategoryPage"/>
+  <command name="waitForElementPresent" target="xpath=id('navigation')//ul/li[@{MainCategoryNumber}]/a[@class='level-1']"/>
+  <command name="clickAndWait" target="link=@{MainCategoryName}"/>
+  <action name="ValidateMainCategoryPage"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="@{MainCategoryName}"/>
+  <command name="assertText" target="css=.refinement-header" value="*@{MainCategoryName}"/>
+  <command name="assertElementPresent" target="id=primary"/>
+</scriptmodule>

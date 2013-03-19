@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <SearchByIDProductID>easports-monopoly-ps3</SearchByIDProductID>
+  <SearchByIDProductName>Monopoly Here and Now: The World Edition (for Sony PS3)</SearchByIDProductName>
+  <SearchByIDProductPrice>$59.99</SearchByIDProductPrice>
+  <SearchByNameProductName>Dangle Hoop Earring</SearchByNameProductName>
+  <SearchByNameProductPrice>$26.00</SearchByNameProductPrice>
+  <SearchByKeyword>DLP</SearchByKeyword>
+  <InvalidSearchEntry>xyz</InvalidSearchEntry>
+</data>

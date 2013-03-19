@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <command name="assertElementPresent" target="id=navigation"/>
+  <command name="assertText" target="css=.navigation-header" value="Catalog Navigation"/>
+  <action name="OpenCategoryNavigation"/>
+  <command name="click" target="css=.navigation-header">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="assertXpathCount" target="id('navigation')/nav//a[@class='level-1']" value="6"/>
+  <action name="CloseCategoryNavigation"/>
+  <command name="click" target="css=.navigation-header">
+    <comment>close the main navigation menu</comment>
+  </command>
+  <command name="assertElementPresent" target="id=q">
+    <comment>Searches for the search input field</comment>
+  </command>
+</scriptmodule>

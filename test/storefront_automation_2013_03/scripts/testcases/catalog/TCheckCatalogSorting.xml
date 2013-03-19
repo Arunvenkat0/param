@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Opens a subcategory page and checks all available sort methods. For each method the correctness of the resuls is checked by validating the first and last search result.</description>
+  <action name="OpenStartPage"/>
+  <command name="open" value="${shopURL}"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="${shopURL}"/>
+  <action name="OpenMainCategoryPage"/>
+  <module name="modules.catalog.OpenMainCategoryPage">
+    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
+    <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
+    <parameter name="MainCategoryName" value="${MainCategoryName}"/>
+  </module>
+  <action name="OpenSubCategoryPage"/>
+  <module name="modules.catalog.OpenSubCategoryPage">
+    <parameter name="SubCategoryName" value="${SubCategoryName}"/>
+  </module>
+  <module name="modules.catalog.ValidateCategoryInitView">
+    <parameter name="CategoryName" value="${SubCategoryName}"/>
+    <parameter name="SortMethod" value="${DefaultSortMethod}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <action name="CheckCatalogSorting"/>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod1}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod2}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod3}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod4}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod5}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod6}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod7}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <module name="modules.catalog.CheckSortingFeature">
+    <parameter name="SortMethod" value="${SortMethod8}"/>
+    <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
+    <parameter name="ShownProducts" value="${ShownProducts}"/>
+  </module>
+  <action name="BackToHome"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

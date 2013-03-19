@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Enters the given search text into the search entry field.</description>
+  <parameter name="SearchText"/>
+  <command name="waitForElementPresent" target="name=simpleSearch">
+    <comment>Wait for the search field</comment>
+  </command>
+  <command name="type" target="id=q" value="@{SearchText}">
+    <comment>Type search phrase into the search entry field</comment>
+  </command>
+  <action name="SubmitSearch"/>
+  <command name="clickAndWait" target="css=input[value='go']">
+    <comment>Start searching using the search button</comment>
+  </command>
+</scriptmodule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="2" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.Verify_Registry">
+    <parameter name="RegistryID" value="${ID}"/>
+    <parameter name="RegistryName" value="${Name}"/>
+  </module>
+</scriptmodule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Deletes the last address. Checks if the  given number of addresses are still available after deleting the last entry.</description>
+  <parameter name="AddressCount"/>
+  <action name="DeleteLastAddress"/>
+  <command name="clickAndWait" target="css=.address-list .last .delete"/>
+  <command name="waitForXpathCount" target="id('addresses')/ul[@class='address-list']/li" value="@{AddressCount}"/>
+</scriptmodule>

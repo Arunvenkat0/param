@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the content of a category page for:
+- at least one product
+- SortMethod (e.g. Best Match)
+- Items per page 
+- ShownProducts (e.g. 1-12)
+- Pagination</description>
+  <parameter name="CategoryName"/>
+  <parameter name="SortMethod"/>
+  <parameter name="ItemsPerPage"/>
+  <parameter name="ShownProducts"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="@{CategoryName}"/>
+  <command name="assertElementPresent" target="css=.product-tile">
+    <comment>Check if at least one product is present.</comment>
+  </command>
+  <command name="waitForElementPresent" target="css=.results-hits a"/>
+  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+  <module name="modules.catalog.CompareSearchResultContainers">
+    <parameter name="SortMethod" value="@{SortMethod}"/>
+    <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
+  </module>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+</scriptmodule>
