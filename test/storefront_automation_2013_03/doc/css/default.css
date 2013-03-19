@@ -1,0 +1,456 @@
+html
+{
+    margin:0;
+    padding:0;
+}
+
+body
+{
+    margin:1px;
+    padding:0;
+    font-family:Helvetica,Arial,sans-serif;
+    font-size: .9em;
+	background-color: #eee;
+}
+
+#globalNavigation
+{
+    background-color:White;
+    margin: 5px 40px 5px 40px;
+    padding: 1px;
+    
+    /* 
+        This is not 100% standard conform, but gives us
+        rounded corners for CSS 3 and in some supporting browsers 
+        even before that. Will fall back to standard corners
+        in all other browsers.
+    */
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+}
+	#globalNavigation ul
+	{
+		margin: 5px auto;
+		text-align: center;
+		padding: 0px;
+	}
+		#globalNavigation ul li
+		{
+			display: inline;
+		    padding: 0px;
+		}
+		#globalNavigation ul li.current
+		{
+			font-weight:bold;
+		}
+			#globalNavigation ul li .separator
+			{
+				margin-left: 10px;
+				margin-right:10px;
+				color: #aaa;
+			}
+
+#container
+{
+    background-color:White;
+    margin: 5px 40px;
+    padding: 10px;
+    
+    /* 
+        This is not 100% standard conform, but gives us
+        rounded corners for CSS 3 and in some supporting browsers 
+        even before that. Will fall back to standard corners
+        in all other browsers.
+    */
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+}
+
+#content
+{
+	padding:0;
+	margin:0;
+	margin-right:320px;
+}
+
+/* special handling for the index page */
+.index #content
+{
+	margin:0px 100px;
+}
+
+a
+{
+	text-decoration:none;
+	color:#980905;
+}
+
+a:hover
+{
+	text-decoration:underline;
+}
+
+h1
+{
+    margin:0 auto 20px 0;
+    text-align: center;
+    border-bottom: 3px solid #aaa; 
+    padding:0 .5em 0 .5em;
+    font-size:350%;
+    font-weight:bold;
+    color:#a00;
+}
+
+	h1 img
+	{
+	    margin-right: 10px;
+	    vertical-align: -10%;
+	}
+
+h2
+{
+    border-bottom: 3px solid #aaa;
+    margin: 60px 0px 15px 0px;
+    padding: 0px 0px;
+    color: #aa0000;
+
+    font-size:250%;
+    font-weight:bold;
+
+}
+    .manual h2 span.numbering:before
+    {
+        content: "Chapter ";
+    }
+    .index h2 
+    {
+        margin-top: 20px;
+    }
+    h2 span.numbering
+    {
+        display: none;
+    }
+
+    .manual h2 span.numbering
+    {
+        display: block;
+        text-align: right;
+        margin-right: 0;
+    
+        line-height: .7em;
+        letter-spacing: 0.2em;
+        
+        font-style: italic;
+        font-size: 50%;
+        color: #999;
+        font-weight: normal;
+    }
+
+h3
+{
+	margin:2ex 0px .5ex 0px;
+    padding:0;
+    font-size:175%;
+    font-weight:bold;
+    border-bottom: 2px solid #aaa;
+}
+
+
+h4
+{
+	margin:3ex 0px .5ex 0px;
+	padding:1px 0 0 0;
+	font-size:125%;
+	font-weight:bold;
+    
+    border-bottom: 1px dotted #aaa;
+}
+
+h5
+{
+	margin:20px 0px 0px 0px;
+	padding:0;
+	font-size:100%;
+	font-weight:bold;
+}
+
+ol
+{
+    margin: 15px 10px;
+    padding: 0 1em 0 2em;
+    text-align: justify;
+}
+
+ul
+{
+    list-style-image: url(square-gray.png);
+    margin: 15px 10px;
+    padding: 0 1em 0 2em;
+    text-align: justify;
+}
+
+p
+{
+	text-align:justify;
+	margin: 1.5ex 0px 1ex 0px;
+	padding:0;
+}
+    p.abstract
+    {
+        margin:20px 50px;
+        padding:10px 20px;
+        background-color: #eee;
+		border-left: 8px solid #bbb;
+	}
+    p.footnote
+    {
+        border-top: 1px solid #aaa;
+        margin-top: 20px;
+        width: 80%;
+
+        font-size: 80%;
+        color: #666;
+    }
+        p.footnote sup
+        {
+            margin-right: 0.2em;
+        }
+p.illustration
+{
+    text-align: center;
+    margin-top:15px;
+    margin-bottom:15px;
+    padding-top: 10px;
+}
+    p.illustration img
+    {
+        padding: 4px;
+        margin: 0px 0px;
+        border: 1px solid #eee;
+    }
+    p.illustration .caption
+    {
+        display: block;
+        font-size: .8em;
+        margin-top: 3px;
+        color: #666;
+    }
+
+/* the index page has a special sub p */
+.index p.description
+{
+    text-align: right;
+}
+
+pre
+{
+}
+
+.syntaxhighlighter
+{
+}
+
+/*
+    Let the navigation float
+*/
+#toc
+{
+  font-size: 100%;
+  line-height:1.3em;
+  float:right;
+  width:280px;
+  z-index:100;
+  margin:0;
+  padding: 10px;
+  border:1px solid #eee;
+  background-color:White;
+}
+
+#toc ul
+{
+    list-style:none;
+    padding: .5em;
+    margin: 0;
+    text-align: left;
+}
+	#toc ul li
+	{
+		font-weight: bold;
+		padding: 0 0 0 0;
+	}
+		#toc ul li ul li
+		{
+			font-size: 100%;
+		}
+			#toc ul li ul li ul li
+			{
+                font-weight: normal;
+				font-size:  90%;
+			}
+			#toc ul li ul li ul li .numbering
+			{
+				font-style: normal;
+			}
+
+pre.shell,pre.java,pre.plain,pre.xml
+{
+  width:100%;
+}
+
+blockquote
+{
+  text-align:justify;
+  margin:20px 50px;
+  padding:10px 20px;
+  font-style:italic;
+}
+
+blockquote p
+{
+  margin:5px 0;
+  padding:0;
+}
+
+blockquote.information
+{
+  background-color:#D5E9F6;
+  font-style:normal;
+  border-left: 8px solid #a5b9f6;
+}
+
+blockquote.warning
+{
+  background-color:#EFE0E0;
+  font-style:normal;
+  border-left: 8px solid #efb0b0;
+}
+
+blockquote.note
+{
+  background-color:#FFF9D8;
+  font-style:normal;
+  border-left: 8px solid #EEEF59;
+}
+
+span.numbering
+{
+    margin-right: 0.5em;
+}
+
+#copyright
+{
+    margin-top: 25px;
+
+    font-size: 80%;
+    color: #666;
+    text-align: center;
+}
+
+/* 
+  This will mark a section as todo. 
+  Can be added to everything.
+ */
+.todo
+{
+    background-color: Yellow !important;
+}
+
+table
+{
+	margin: 2ex 0;
+	border: 1px solid #eee;
+	font-size: 90%;
+}
+	table th
+	{
+		background-color: #eee;
+		padding: 2px 3px;
+	font-weight: bold;
+	}
+	table td
+	{
+		padding: 2px 3px;
+	}
+		table tr.odd td
+		{
+			background-color: #f6f6f6;
+		}
+		table tr.even td
+		{
+			/* no color set */
+		}
+	table tr:hover td
+	{
+		background-color: #f0f0f0;
+	}
+	
+/*
+	Index page formatting
+*/
+.index
+{
+}
+	.index #content
+	{
+		width: 800px;
+		margin: 0 auto;
+	}
+
+	.index .infobox
+	{
+		margin: 10px;
+		height: 110px;
+		width: 350px;
+		padding: 10px;
+		border: 1px solid #eee;
+        float: left;
+
+	    /* 
+	        This is not 100% standard conform, but gives us
+	        rounded corners for CSS 3 and in some supporting browsers 
+	        even before that. Will fall back to standard corners
+	        in all other browsers.
+	    */
+	    border-radius: 5px;
+    	-moz-border-radius: 5px;
+    	-webkit-border-radius: 5px;
+    	-khtml-border-radius: 5px;
+    }
+		.index .infobox .icon
+		{
+			float: left;
+		}
+		.index .infobox h2
+		{
+			font-size: 18px;
+			border-bottom: none;
+			text-align: left;
+			padding-left: 0px;
+			margin: 0px 10px 5px 110px;
+		}
+		.index .infobox p.description
+		{
+			text-align: left;
+			margin-left: 110px;
+		}
+
+code.emph
+{
+	color: #008888;
+}
+
+/*
+	Something to clear
+*/	
+.clear
+{
+	clear: left;
+}
+	.clear .blind
+	{
+		display: none;
+	}				

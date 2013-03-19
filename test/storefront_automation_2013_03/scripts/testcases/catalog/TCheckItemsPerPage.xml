@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Opens a category page and changes the number of items to be displayed. Validates the correctness of the result.</description>
+  <action name="OpenStartPage"/>
+  <command name="open" value="${shopURL}"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="${shopURL}"/>
+  <action name="OpenMainCategoryPage"/>
+  <module name="modules.catalog.OpenMainCategoryPage">
+    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
+    <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
+    <parameter name="MainCategoryName" value="${MainCategoryName}"/>
+  </module>
+  <action name="OpenSubCategoryPage"/>
+  <module name="modules.catalog.OpenSubCategoryPage">
+    <parameter name="SubCategoryName" value="${SubCategoryName}"/>
+  </module>
+  <action name="CheckItemsPerPageFeature"/>
+  <module name="modules.catalog.CheckItemsPerPageFeature">
+    <parameter name="ItemsPerPage" value="${ItemsPerPageOption1}"/>
+    <parameter name="SortMethod" value="${DefaultCatalogSortMethod}"/>
+    <parameter name="ShownProductsFirstPage" value="1 - ${ItemsPerPageOption1}"/>
+  </module>
+  <module name="modules.catalog.CheckItemsPerPageFeature">
+    <parameter name="ItemsPerPage" value="${ItemsPerPageOption2}"/>
+    <parameter name="SortMethod" value="${DefaultCatalogSortMethod}"/>
+    <parameter name="ShownProductsFirstPage" value="1 - ${ItemsPerPageOption2}"/>
+  </module>
+  <module name="modules.catalog.CheckItemsPerPageFeatureViewAll"/>
+  <action name="BackToHome"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

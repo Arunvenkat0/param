@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>This module checks the payment total details for gift certificates in the section 'Thank you for your order.'</description>
+  <parameter name="Amount"/>
+  <command name="waitForText" target="css=.order-subtotal" value="Subtotal*@{Amount}"/>
+  <command name="waitForText" target="css=.order-shipping" value="Shipping*$0.00"/>
+  <command name="waitForText" target="css=.order-sales-tax" value="Sales Tax*$0.00"/>
+  <command name="waitForText" target="css=.order-total" value="glob:Order Total:*@{Amount}"/>
+</scriptmodule>

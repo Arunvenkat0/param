@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the shipping information on summary page:
+- Name
+- Address
+- City / State / ZIP
+- Country
+- ShippingMethod
+- ShippingStatus</description>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="StateShort"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Country"/>
+  <parameter name="ShippingMethod"/>
+  <parameter name="ShippingStatus"/>
+  <command name="assertText" target="css=.order-shipment-table th:nth-child(4)" value="Shipping To"/>
+  <command name="assertText" target="css=.order-shipment-address .firstname" value="@{FirstName}"/>
+  <command name="assertText" target="css=.order-shipment-address .lastname" value="@{LastName}"/>
+  <command name="assertText" target="css=.order-shipment-address .street" value="@{Address}"/>
+  <command name="assertText" target="css=.order-shipment-address .city" value="@{City},"/>
+  <command name="assertText" target="css=.order-shipment-address .state" value="@{StateShort}*"/>
+  <command name="assertText" target="css=.order-shipment-address .zip" value="@{ZipCode}"/>
+  <command name="assertText" target="css=.order-shipment-address .country" value="@{Country}"/>
+  <command name="assertText" target="css=.shipping-method .label" value="glob:Method:"/>
+  <command name="assertText" target="css=.shipping-method .value" value="@{ShippingMethod}"/>
+  <command name="assertText" target="css=.shipping-status .label" value="glob:Shipping Status:"/>
+  <command name="assertText" target="css=.shipping-status .value" value="@{ShippingStatus}"/>
+</scriptmodule>
