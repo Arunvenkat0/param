@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" default="all" basedir=".">
+
+	<!-- read configuration from build.properties -->
+	<property file="create_doc.properties" />
+
+	<!-- register the wikitext-to-html Ant task -->
+	<path id="wikitext.classpath">
+		<fileset dir="${tools.dir}">
+			<include name="org.eclipse.mylyn.wikitext.*.jar" />
+		</fileset>
+	</path>
+	<taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties" />
+
+	<!-- remove files generated previously -->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- create documentation -->
+	<target name="generate-html">
+		<!-- copy all files >
+		<copy todir="${build.doc.dir}">
+			<fileset dir="${doc.dir}" />
+		</copy-->
+
+		<!-- convert all textile files to html -->
+		<wikitext-to-html markupLanguage="Textile" formatOutput="true" sourceEncoding="UTF-8">
+			<fileset dir="${doc.dir}" includes="*.textile" />
+			<stylesheet url="css/default.css" />
+		</wikitext-to-html>
+
+		<!-- get the javascript and css included -->
+		<replace dir="${doc.dir}">
+			<include name="**/*.html" />
+
+			<replacetoken><![CDATA[<head>]]></replacetoken>
+			<replacevalue>
+				<![CDATA[<head>
+				<link type="text/css" rel="stylesheet" href="css/shCore.css" />
+				<link type="text/css" rel="stylesheet" href="css/shThemeDefault.css" />
+
+				<link type="text/css" rel="stylesheet" href="css/default.css" media="all"/>
+				<link type="text/css" rel="stylesheet" href="css/print.css" media="print"/>
+
+				<link type="text/css" rel="stylesheet" href="css/prettyPhoto.css" />
+
+				<script type="text/javascript" src="js/jquery-1.3.2.min.js">
+				</script>
+				<script type="text/javascript" src="js/shCore.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushJScript.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushBash.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushJava.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushCss.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushPlain.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushXml.js">
+				</script>
+				<script type="text/javascript" src="js/shBrushRuby.js">
+				</script>
+
+				<script type="text/javascript" src="js/beautyOfCode.js">
+				</script>
+
+				<script type="text/javascript" src="js/jquery.toc-1.1.0.js">
+				</script>
+
+				<script type="text/javascript" src="js/jquery.prettyPhoto.js">
+				</script>
+
+				<script type="text/javascript">
+				$(document).ready(
+					function () 
+					{
+                        $.beautyOfCode.init('js/clipboard.swf');
+						$('pre.java code').beautifyCode('java',  {gutter: true, wrapLines: true});
+						$('pre.java-nolines code').beautifyCode('java',  {gutter: false, wrapLines: true});
+						$('pre.shell code').beautifyCode('bash', {gutter: false, wrapLines: false});
+						$('pre.javascript code').beautifyCode('javascript', {gutter: true, wrapLines: true});
+						$('pre.plain code').beautifyCode('plain', {gutter: false, wrapLines: false});
+						$('pre.xml code').beautifyCode('xml', {gutter: false, wrapLines: true});
+						$('pre.css code').beautifyCode('css', {gutter: true, wrapLines: true});
+						$('pre.ruby code').beautifyCode('ruby', {gutter: true, wrapLines: true});
+		
+						// build the TOC
+						$('#toc').toc({exclude: 'h1, h4, h5, h6'});
+                        
+                        // apply the lightbox effect
+                        $('p.illustration a').prettyPhoto({allowresize: false});
+		
+						// strip our tables
+						$("table tr:even").addClass("even");
+						$("table tr:odd").addClass("odd");
+					});
+				</script>
+				]]>
+			</replacevalue>
+		</replace>
+
+		<!-- remove textile files from the target dir >
+		<delete dir="${build.doc.dir}" includes="*.textile" /-->
+		
+		<!-- remove ant script and properties from the target dir >
+	    <delete dir="${build.doc.dir}" includes="*.xml" />
+		<delete dir="${build.doc.dir}" includes="*.properties" /-->
+		
+		<!-- remove folder tools >
+		<delete dir="${build.doc.tools.dir}" /-->
+	</target>
+
+	<!-- Create all documentation. -->
+	<target name="all" depends="clean, generate-html" />
+
+</project>

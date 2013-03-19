@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Uses a saved address for shipping while placing an order.</description>
+  <parameter name="AddressName"/>
+  <command name="select" target="id=dwfrm_singleshipping_addressList" value="label=(@{AddressName})*">
+    <comment>Select Address from List</comment>
+  </command>
+  <command name="waitForSelectedLabel" target="id=dwfrm_singleshipping_addressList" value="(@{AddressName})*"/>
+</scriptmodule>

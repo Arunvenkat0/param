@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the page structure of the wishlist page for a logged in user.</description>
+  <command name="assertText" target="css=.breadcrumb-last" value="Wish List"/>
+  <command name="assertText" target="xpath=id('primary')/h1[1]" value="glob:Find Someone's Wish List:"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_search"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_search_lastname"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_search_firstname"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_search_email"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_shipping"/>
+  <command name="assertElementPresent" target="id=dwfrm_wishlist_share"/>
+</scriptmodule>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>checks the most important address fields where a input is required:
+- FirstName
+- LastName
+- Address
+- Country
+- State
+- City
+- ZipCode</description>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'address1')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//select[contains(@id, 'country')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//select[contains(@id, 'state')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'city')][contains(@class, 'required')]"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'zip')][contains(@class, 'required')]"/>
+</scriptmodule>

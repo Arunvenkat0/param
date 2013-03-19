@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Enters shipping data into fields when creating a new gift registry.</description>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_firstname" value="${ShippingAddressFirstName}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_lastname" value="${ShippingAddressLastName}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_address1" value="${ShippingAddressStreet}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_address1" value="${ShippingAddressStreet}"/>
+  <command name="select" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_country" value="label=${ShippingAddressCountry}"/>
+  <command name="select" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_states_state" value="label=${ShippingAddressState}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_city" value="${ShippingAddressCity}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_zip" value="${ShippingAddressZipCode}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_phone" value="${ShippingAddressPhone}"/>
+  <command name="check" target="id=dwfrm_giftregistry_copyAddress"/>
+</scriptmodule>

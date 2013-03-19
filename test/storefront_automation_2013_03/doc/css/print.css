@@ -1,0 +1,22 @@
+#toc
+{
+  font-size:.9em;
+  line-height:1.3em;
+  z-index:100;
+  float: none;
+  width: 100%;
+  margin:0px;
+  border:1px solid #eee;
+  background-color:White;
+}
+
+#content
+{
+    margin-right: 0;
+}
+
+h2
+{
+    page-break-before:always;
+}
+

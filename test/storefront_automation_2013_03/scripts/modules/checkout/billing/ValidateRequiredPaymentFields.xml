@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks if the entry fields are required (attribute 'class' contains the word 'required').</description>
+  <module name="modules.payments.ValidateCreditCardRequiredFields"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'cvn')][contains(@class, 'required')]"/>
+</scriptmodule>
