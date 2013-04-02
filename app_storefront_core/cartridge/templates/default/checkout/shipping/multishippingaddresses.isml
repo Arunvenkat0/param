@@ -57,7 +57,7 @@
 										e.g. order confirmation email, links inside it are wrong i.e. host name is missing because 
 										URLUtils.url api returns relative url!!
 									</iscomment>
-									<isif condition="${quantityLIproduct.primaryCategory.ID != null}">
+									<isif condition="${!empty(quantityLIproduct.primaryCategory) && quantityLIproduct.primaryCategory.ID != null}">
 										<a href="${URLUtils.http('Product-Show','pid', quantityLIproduct.ID, 'cgid', quantityLIproduct.primaryCategory.ID)}" title="${quantityLIproduct.name}"><isprint value="${quantityLI.lineItemText}"/></a>
 									<iselse/>
 										<a href="${URLUtils.http('Product-Show','pid', quantityLIproduct.ID)}" title="${quantityLIproduct.name}"><isprint value="${quantityLI.lineItemText}"/></a>
