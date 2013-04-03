@@ -55,7 +55,7 @@
 		</td>
 		<td style="${Resource.msg('email.tablecell','email',null)}">
 			<b>${Resource.msg('orderdetails.paymenttotal','components',null)}</b>
-			<isif condition="${Order.shipments.length > 1 && false}">
+			<isif condition="${Order.shipments.length > 1}">
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
 			<iselse>
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
