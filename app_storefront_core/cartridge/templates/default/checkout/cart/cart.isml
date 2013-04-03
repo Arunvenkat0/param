@@ -745,7 +745,7 @@
 							${Resource.msg('global.updatecart','locale',null)}
 						</button>
 
-						<isordertotals p_lineitemctnr="${pdict.Basket}" p_totallabel="Estimated Total" />						
+						<isordertotals p_lineitemctnr="${pdict.Basket}" p_totallabel="${Resource.msg('global.estimatedtotal','locale',null)}" />						
 					</div>
 					<div class="cart-coupon-code">		
 						<label for="${pdict.CurrentForms.cart.couponCode.htmlName}">

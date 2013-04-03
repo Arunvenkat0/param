@@ -25,9 +25,9 @@
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
 			<isif condition="${!empty(pdict.bctext2)}">
-				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account" bctext2="${pdict.bctext2}"/>
+				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${pdict.bctext2}"/>
 			<iselse>
-				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account"/>
+				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}"/>
 			</isif>
 		
 			<div id="primary" class="primary-content">
