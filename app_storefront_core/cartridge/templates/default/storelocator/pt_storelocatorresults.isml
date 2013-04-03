@@ -22,7 +22,7 @@
 		
 		<div id="main" role="main" class="page-content clearfix">
 
-			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account" bcurl2="${URLUtils.https('Stores-Find')}" bctext2="Store Locator" bctext3="Results"/>
+			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bcurl2="${URLUtils.https('Stores-Find')}" bctext2="${Resource.msg('header.storelocator','components',null)}" bctext3="${Resource.msg('search.results','search',null)}"/>
 
 			<div id="primary" class="primary-content">
 				<isreplace/>

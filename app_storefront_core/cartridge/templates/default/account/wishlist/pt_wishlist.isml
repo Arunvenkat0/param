@@ -20,7 +20,7 @@
 		
 		<div id="main" role="main" class="page-content clearfix">
 
-			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account" bctext2="Wish List"/>
+			<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('account.wishlist','account',null)}"/>
 			
 			<div id="primary" class="primary-content">
 				<isreplace/>
