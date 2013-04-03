@@ -11,14 +11,14 @@
 			description="forms.giftcert.purchase.recipient.description"
 			missing-error="forms.giftcert.purchase.recipient.missing-error"
 			binding="recipient"/>
-		<field formid="recipientEmail" label="forms.giftcert.purchase.recipientemail.label" type="string" mandatory="true" masked="6"
+		<field formid="recipientEmail" label="forms.giftcert.purchase.recipientemail.label" type="string" mandatory="true"
 			description="forms.giftcert.purchase.recipientemail.description"
 			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" 
 			binding="recipientEmail"
 			parse-error="forms.giftcert.purchase.recipientemail.parse-error"
 			missing-error="forms.giftcert.purchase.recipientemail.missing-error"
 			value-error="forms.giftcert.purchase.recipientemail.value-error"/>
-		<field formid="confirmRecipientEmail" label="forms.giftcert.purchase.confirmrecipientemail.label" type="string" mandatory="true"  masked="6"
+		<field formid="confirmRecipientEmail" label="forms.giftcert.purchase.confirmrecipientemail.label" type="string" mandatory="true"
 			description="forms.giftcert.purchase.confirmrecipientemail.description"
 			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" 
 			binding="confirmRecipientEmail"
