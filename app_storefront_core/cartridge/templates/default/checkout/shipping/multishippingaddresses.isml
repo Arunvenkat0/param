@@ -112,7 +112,7 @@
 					<tr class="rowgiftcert">
 						<td class="detailscolumn"><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - <isprint value="${gcLI.price}"/> ${Resource.msg('global.deliveredviaemail','locale',null)}</td>
 						<td class="quantitycolumn">1</td>
-						<td class="shippingaddress"><ismask p_string="${gcLI.recipientEmail}" p_maskchars="${6}"/></td>
+						<td class="shippingaddress">${gcLI.recipientEmail}</td>
 					</tr>
 				</isloop>
 			</tbody>
