@@ -2049,6 +2049,7 @@ var app = (function (app, $) {
 (function (app, $) {
 	var $cache = {},
 		isShipping = false,
+		isMultiShipping = false,
 		shippingMethods = null;
 
 	/**
@@ -2192,6 +2193,29 @@ var app = (function (app, $) {
 	}
 	/**
 	 * @function
+	 * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
+	 */	
+	function initMultiGiftMessageBox() {
+		$.each( $("table.item-list"), function(){
+			
+			//handle initial load
+			if($(this).find(".js-isgiftyes").is(':checked')){
+				$(this).find(".gift-message-text").css('display','block')
+			}
+			
+			//set event listeners
+			$(this).bind('change', function(){
+				if($(this).find(".js-isgiftyes").is(':checked')){
+					$(this).find(".gift-message-text").css('display','block');
+				}else if($(this).find(".js-isgiftno").is(':checked')){
+					$(this).find(".gift-message-text").css('display','none');
+				}
+			});
+			
+		});
+	}	
+	/**
+	 * @function
 	 * @description shows gift message box, if shipment is gift
 	 */
 	function shippingLoad() {
@@ -2244,6 +2268,15 @@ var app = (function (app, $) {
 		});
 	}
 
+	/**
+	 * @function
+	 * @description shows gift message box in multiship
+	 */
+	function multishippingLoad() {
+		initMultiGiftMessageBox();
+		return null;
+	}	
+	
 	/**
 	 * @function
 	 * @description Changes the payment method form depending on the passed paymentMethodID
@@ -2447,7 +2480,7 @@ var app = (function (app, $) {
 	 */
 	function initializeDom() {
 		isShipping = $(".checkout-shipping").length > 0;
-
+		isMultiShipping = $(".checkout-multi-shipping").length > 0;
 	}
 
 	/**
@@ -2502,7 +2535,10 @@ var app = (function (app, $) {
 		if (isShipping) {
 			shippingLoad();
 		}
-		else {
+		else if(isMultiShipping){
+			multishippingLoad();
+		}
+		else{
 			billingLoad();
 		}
 	}
