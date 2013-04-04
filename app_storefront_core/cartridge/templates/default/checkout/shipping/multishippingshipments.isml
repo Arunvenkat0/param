@@ -18,11 +18,11 @@
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="2" multishipping="true"/>
 	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
-	<form action="${URLUtils.continueURL()}" method="post">
+	<form action="${URLUtils.continueURL()}" method="post" class="checkout-multi-shipping address">
 		<div class="checkoutmultishipping">
 			<isloop items="${pdict.CurrentForms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">
 				<isset name="shipment" value="${shipmentItem.object}" scope="page"/>
-				<table class="item-list" id="cart-table" cellspacing="0">
+				<table class="item-list"  cellspacing="0">
 					<thead>
 						<tr>
 							<th class="section-header"  colspan="4">${Resource.msg('multishippingshipments.shipment','checkout',null)} ${'#' + shipmentloop.count}</th>

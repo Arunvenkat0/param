@@ -13,9 +13,9 @@
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="1" multishipping="true"/>
    	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
-	<form action="${URLUtils.continueURL()}" method="post">
+	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.multishipping.addressSelection.htmlName}" class="checkout-multi-shipping address">
 	<div class="checkoutmultishipping">
-		<table class="item-list" id="cart-table" cellspacing="0">
+		<table class="item-list"  cellspacing="0">
 			<thead>
 				<tr>
 					<th class="section-header"  colspan="2">${Resource.msg('global.product','locale',null)}</th>
