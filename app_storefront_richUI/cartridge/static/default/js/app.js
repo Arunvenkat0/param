@@ -1564,9 +1564,9 @@ var app = (function (app, $) {
 				var uri = app.util.getUri(this);
 	
 				if( uri.query.length > 1 ) {
-					window.location.hash = encodeURI(decodeURIComponent(uri.query.substring(1)));
+					window.location.hash = encodeURI(decodeURI(uri.query.substring(1)));
 				} else {
-					window.location.href = encodeURI(this.href);
+					window.location.href = encodeURI(decodeURI(this.href));
 				}
 				return false;
 			}
