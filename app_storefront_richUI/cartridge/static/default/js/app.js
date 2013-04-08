@@ -1437,7 +1437,7 @@ var app = (function (app, $) {
 	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
 	 */
 	function updateProductListing(isHashChange) {
-		var hash = window.location.hash;
+		var hash = encodeURI(decodeURI(window.location.hash));
 		if(hash==='#results-content' || hash==='#results-products') { return; }
 
 		var refineUrl = null;
