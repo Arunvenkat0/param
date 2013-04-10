@@ -1566,7 +1566,7 @@ var app = (function (app, $) {
 				if( uri.query.length > 1 ) {
 					window.location.hash = encodeURI(decodeURI(uri.query.substring(1)));
 				} else {
-					window.location.href = encodeURI(decodeURI(this.href));
+					window.location.href = this.href;
 				}
 				return false;
 			}
