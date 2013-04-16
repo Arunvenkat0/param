@@ -21,6 +21,10 @@ function execute( pdict : PipelineDictionary ) : Number
 				// product detail page click
 				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // hack to change product url if it was viewed from search
 				return PIPELET_NEXT;
+			case "Product-ShowShowInCategory":
+				// product detail page click
+				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // hack to change product url if it was viewed from search
+				return PIPELET_NEXT;
 			case "Search-Show":
 				// catalog related click
 				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // avoid showing product grid only
