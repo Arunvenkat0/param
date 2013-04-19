@@ -69,7 +69,7 @@
 											just a Gift Certificate, we want to render the email address of the recipient</iscomment>
 										<isif condition="${Shipment.giftCertificateLineItems.size() == 1}">
 											<isset name="theGiftCert" value="${Shipment.giftCertificateLineItems.iterator().next()}" scope="page"/>
-											<span class="value"><ismask p_string="${theGiftCert.recipientEmail}" p_maskchars="${6}"/></span>
+											<span class="value">${theGiftCert.recipientEmail}</span>
 										<iselse>
 											<span class="value"><isprint value="${Shipment.shippingAddress.fullName}" /></span>
 										</isif>
