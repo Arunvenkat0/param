@@ -11,7 +11,7 @@
 <script type="text/javascript"><isinclude template="resources/appresources"/></script>
 <script src="${URLUtils.staticURL('/js/app.js')}"></script>
 <isif condition="${!('pageContext' in this) || empty(pageContext)}">
-	pageContext = new Object();
+<isscript>pageContext = new Object();</isscript>
 </isif>
 <script>app.page.setContext(<isprint value="${JSON.stringify(pageContext)}" encoding="off"/>);</script>
 <script>
