@@ -150,7 +150,7 @@ function ShippingAddress()
 		}
 		
 		// if we copy from a customer address, we set the address ID and UUID
-		if( fromAddress instanceof CustomerAddress || (fromAddress.ID != null && fromAddress.UUID != null)){
+		if(('ID' in fromAddress) && (fromAddress instanceof CustomerAddress || (fromAddress.ID != null && fromAddress.UUID != null)) ){
 			this.ID = fromAddress.ID;
 			this.referenceAddressUUID = fromAddress.UUID;
 		}
