@@ -3650,15 +3650,11 @@ var app = (function (app, $) {
 		app.sendToFriend.initializeDialog("div.list-table-header", ".send-to-friend");
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
-		});
-		$cache.wishlistTable.on("click", ".item-details a", function (e) {
-			e.preventDefault();
-			app.quickView.show({
-				url : e.target.href,
-				source : "wishlist"
-			});
+		
 		});
 	}
+	
+	
 	/******* app.wishlist public object ********/
 	app.wishlist = {
 		/**
