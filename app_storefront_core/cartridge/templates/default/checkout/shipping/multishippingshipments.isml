@@ -33,6 +33,28 @@
 							<tr class="cart-row">
 								<td colspan="4">${Resource.msg('multishippingshipments.gcshipment','checkout',null)}</td>
 							</tr>
+							<tr class="cart-row">
+								<td colspan="2">${Resource.msg('global.product','locale',null)}</td>
+								<td>${Resource.msg('global.quantity','locale',null)}</td>
+								<td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
+							</tr>
+							<tr class="cart-row">
+								<isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
+									<td class="item-image">
+										<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" />
+									</td>
+									<td class="detailscolumn">
+										<div><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - (<isprint value="${giftCertLI.getPrice()}"/>)</div>
+										<div><isprint value="${giftCertLI.recipientName}"/> - (<isprint value="${giftCertLI.recipientEmail}"/>)</div>
+									</td>
+									<td class="item-quantity">
+										1
+									</td>
+									<td class="item-quantity-details" >
+										${Resource.msg('global.deliveredviaemail','locale',null)}
+									</td>					
+								</isloop>								
+							</tr>
 						<iselse/>
 						
 							<iscomment>shipping promotions for this shipment</iscomment>
@@ -63,15 +85,14 @@
 								</td>
 							</tr>
 						</isif>
-						
+						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
+						<isif condition="${pliloopstate.first}">
 						<tr class="cart-row">
 							<td colspan="2">${Resource.msg('global.product','locale',null)}</td>
 							<td>${Resource.msg('global.quantity','locale',null)}</td>
 							<td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
 						</tr>
-						
-						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
-						
+						</isif>
 						<tr class="cart-row">
 							
 							<td class="item-image">
@@ -125,12 +146,14 @@
 						</isif>
 					</tbody>
 					<tfoot>
-						<tr <isif condition="${!shipmentloop.last}">class="multi-shipment-row"</isif>>
-							<td colspan="4" class="multi-address-footer"><!-- MULTI SHIPPING FOOTER --></td>
-						</tr>
+
 					</tfoot>
 				</table>
 			</isloop>
+			
+			
+			
+			
 		</div>
 
 		<div class="formactions">
