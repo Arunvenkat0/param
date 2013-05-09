@@ -15,12 +15,8 @@
     <groupId>dw.ecom</groupId>
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
-    <packaging>pom</packaging>
-<<<<<<< HEAD
+       <packaging>pom</packaging>
     <version>13.4.0.1-SNAPSHOT</version>
-=======
-    <version>13.3.0.21-SNAPSHOT</version>
->>>>>>> 203fedb174d48d66f2edb1b93b721620100da2fd
     <description>SiteGenesis</description>
 
     <build>
