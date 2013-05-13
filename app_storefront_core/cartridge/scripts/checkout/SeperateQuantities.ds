@@ -38,6 +38,16 @@ function execute( args : PipelineDictionary ) : Number
 		qli.productID = pli.productID;
 		qli.pliUUID = pli.UUID;
 		
+		//persisting the optionID, if the product does not have an option is set to 'na'
+		if(pli.optionProductLineItems.size() > 0){
+			for (var iter : Iterator = pli.optionProductLineItems.iterator(); iter.hasNext(); ) {
+				var item = iter.next();
+				qli.optionID = item.optionValueID;	
+			}
+		}else{
+			qli.optionID = 'na';
+		}
+		
 		quantityLineItems.add(qli);
 	}
 	

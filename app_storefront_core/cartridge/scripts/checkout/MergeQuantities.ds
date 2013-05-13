@@ -43,6 +43,9 @@ function execute( args : PipelineDictionary ) : Number
 		var selectedAddress : String = qli.addressList.selectedOptionObject;
 		var productID : String = qli.object.productID;
 		
+		var productOptionID : String = qli.object.optionID;
+		productID = productID+'.'+productOptionID;
+		
 		if (selectedAddress == null){
 			return PIPELET_ERROR;
 		}
@@ -94,10 +97,45 @@ function execute( args : PipelineDictionary ) : Number
 		
 		var productRelations : HashMap = addressRelations.get(address);
 		var products : Set = productRelations.keySet();
-		
+		var product_ID = '';
+		var optionID = '';
+				
 		for each (var product : String in products){
-			var pli : ProductLineItem = basket.createProductLineItem(product, shipment);
+
+			var splitarray = product.split('.');
+			product_ID = splitarray[0];
+			optionID = splitarray[1];
+		
+
+			var pli : ProductLineItem = basket.createProductLineItem(product_ID, shipment);
 			pli.setQuantityValue(productRelations.get(product));
+			
+			//re-assign the option product based on the optionID
+			if(optionID != 'na'){
+				var productOptionModel : dw.catalog.ProductOptionModel = pli.product.getOptionModel();
+				var productOptions : dw.catalog.ProductOption =  productOptionModel.getOptions();
+				var productOptionsiter = productOptions.iterator();
+				var pliOptionArrayList : dw.util.ArrayList = new dw.util.ArrayList(productOptions);
+				var productOption = pliOptionArrayList[0];
+				
+		        var options : Iterator = productOptionModel.getOptionValues(productOption).iterator();
+		    	while(options.hasNext()){
+				
+					var optionValue = options.next();	
+					
+					// if the option id equals the selection option id, set the selected option		
+					if (optionValue.getID() == optionID)
+					{
+						
+						var pliOptionProdcuts : ArrayList = new ArrayList(pli.optionProductLineItems);
+						
+						for each(pliOptionProdcutsObject in pliOptionProdcuts)
+						{
+							pliOptionProdcutsObject.updateOptionValue(optionValue);
+						}
+					}
+				}
+			}
 		}
 	}
 	
