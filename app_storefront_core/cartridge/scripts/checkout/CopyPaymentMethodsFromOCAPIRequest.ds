@@ -23,14 +23,21 @@ function execute( args : PipelineDictionary ) : Number
 	for( var requestObjectItem in requestObject ) {
 		asyncPaymentMethodResponse = requestObject[requestObjectItem];
 		
-		terms = requestObjcetFragment.split('_');
-		if( terms.length==3 ) {
-			form[terms[0]][terms[1]][terms[2]].setValue(asyncPaymentMethodResponse);	
-		} else if( terms.length==2 ) {
-			form[terms[0]][terms[1]].setValue(asyncPaymentMethodResponse);	
-		} else if( terms.length==1 ) {
-			form[terms[0]].setValue(asyncPaymentMethodResponse);	
-		}
+		terms = requestObjectItem.split('_');
+		if (terms[0] == "creditCard" && terms[1] == "number")
+			form["creditCard"]["number"].setValue(asyncPaymentMethodResponse);
+		else if (terms[0] == "creditCard" && terms[1] == "cvn")
+			form["creditCard"]["cvn"].setValue(asyncPaymentMethodResponse);
+		else if (terms[0] == "creditCard" && terms[1] == "month")
+			form["creditCard"]["month"].setValue(Number(asyncPaymentMethodResponse));
+		else if (terms[0] == "creditCard" && terms[1] == "year")
+			form["creditCard"]["year"].setValue(Number(asyncPaymentMethodResponse));
+		else if (terms[0] == "creditCard" && terms[1] == "owner")
+			form["creditCard"]["owner"].setValue(asyncPaymentMethodResponse);
+		else if (terms[0] == "creditCard" && terms[1] == "type")
+			form["creditCard"]["type"].setValue(asyncPaymentMethodResponse);
+		else if (terms[0] == "selectedPaymentMethodID")
+			form["selectedPaymentMethodID"].setValue(asyncPaymentMethodResponse);
 	}
 
     return PIPELET_NEXT;
