@@ -68,7 +68,8 @@ function execute( args : PipelineDictionary ) : Number
 	}
 	
 	for each (var shipment : Shipment in basket.getShipments()){
-		if (!shipment.isDefault()){
+		//if the shipment is for a gift certificate or the default shipment, it will not be removed from the cart
+		if (!shipment.isDefault() && !(shipment.giftCertificateLineItems.length > 0)){
 			basket.removeShipment(shipment);
 		}
 	}
