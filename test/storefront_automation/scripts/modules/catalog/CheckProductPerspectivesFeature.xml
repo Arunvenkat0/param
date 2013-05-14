@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the presence of two different product images in quickview and on product details page.</description>
-  <parameter name="ProductName"/>
-  <parameter name="ImageNumber1"/>
-  <parameter name="ImageNumber2"/>
-  <module name="modules.catalog.OpenQuickView">
-    <parameter name="ProductName" value="@{ProductName}"/>
-  </module>
-  <module name="modules.catalog.ValidateProductPerspectivesImages">
-    <parameter name="ImageNumber1" value="@{ImageNumber1}"/>
-    <parameter name="ImageNumber2" value="@{ImageNumber2}"/>
-  </module>
+  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
+  <module name="modules.catalog.OpenQuickView"/>
+  <module name="modules.catalog.ValidateProductPerspectivesImages"/>
   <action name="Perspectives_Details"/>
   <command name="clickAndWait" target="link=View Full Details"/>
-  <module name="modules.catalog.ValidateProductPerspectivesImages">
-    <parameter name="ImageNumber1" value="@{ImageNumber1}"/>
-    <parameter name="ImageNumber2" value="@{ImageNumber2}"/>
-  </module>
+  <module name="modules.catalog.ValidateProductPerspectivesImages"/>
 </scriptmodule>

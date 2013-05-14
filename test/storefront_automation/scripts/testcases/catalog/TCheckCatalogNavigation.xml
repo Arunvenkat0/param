@@ -9,10 +9,6 @@
   <module name="modules.catalog.CheckCatalogNavigationFeature">
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
-    <parameter name="FirstProductName" value="${FirstProductName}"/>
-    <parameter name="SecondProductName" value="${SecondProductName}"/>
-    <parameter name="LastProductName" value="${LastProductName}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="MiddlePageNumber" value="${MiddlePageNumber}"/>
   </module>
   <action name="BackToHome"/>

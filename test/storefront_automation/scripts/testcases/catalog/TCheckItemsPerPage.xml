@@ -19,28 +19,14 @@
   <module name="modules.catalog.CheckItemsPerPageFeature">
     <parameter name="ItemsPerPage" value="${ItemsPerPageOption1}"/>
     <parameter name="SortMethod" value="${DefaultCatalogSortMethod}"/>
-    <parameter name="LastPageNumber" value="${ItemsPerPageOption1LastPageNumber}"/>
-    <parameter name="FirstItem" value="${ItemsPerPageOption1FirstItem}"/>
-    <parameter name="LastItem" value="${ItemsPerPageOption1LastItem}"/>
-    <parameter name="MaxItems" value="${CatalogMaxItems}"/>
     <parameter name="ShownProductsFirstPage" value="1 - ${ItemsPerPageOption1}"/>
-    <parameter name="ShownProductsLastPage" value="${ItemsPerPageOption1LastPageItemNumber} - ${CatalogMaxItems}"/>
   </module>
   <module name="modules.catalog.CheckItemsPerPageFeature">
     <parameter name="ItemsPerPage" value="${ItemsPerPageOption2}"/>
     <parameter name="SortMethod" value="${DefaultCatalogSortMethod}"/>
-    <parameter name="LastPageNumber" value="${ItemsPerPageOption2LastPageNumber}"/>
-    <parameter name="FirstItem" value="${ItemsPerPageOption2FirstItem}"/>
-    <parameter name="LastItem" value="${ItemsPerPageOption2LastItem}"/>
-    <parameter name="MaxItems" value="${CatalogMaxItems}"/>
     <parameter name="ShownProductsFirstPage" value="1 - ${ItemsPerPageOption2}"/>
-    <parameter name="ShownProductsLastPage" value="${ItemsPerPageOption2LastPageItemNumber} - ${CatalogMaxItems}"/>
   </module>
-  <module name="modules.catalog.CheckItemsPerPageFeatureViewAll">
-    <parameter name="MaxItems" value="${CatalogMaxItems}"/>
-    <parameter name="FirstItem" value="${ItemsPerPageOptionViewAllFirstItem}"/>
-    <parameter name="LastItem" value="${ItemsPerPageOptionViewAllLastItem}"/>
-  </module>
+  <module name="modules.catalog.CheckItemsPerPageFeatureViewAll"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

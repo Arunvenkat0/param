@@ -17,12 +17,7 @@
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="CheckQuickview"/>
-  <module name="modules.catalog.CheckCatalogQuickViewFeature">
-    <parameter name="ProductName" value="${ProductName}"/>
-    <parameter name="ProductColor" value="${ProductColor}"/>
-    <parameter name="ProductSize" value="${ProductSize}"/>
-    <parameter name="ProductPrice" value="${ProductPrice}"/>
-  </module>
+  <module name="modules.catalog.CheckCatalogQuickViewFeature"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

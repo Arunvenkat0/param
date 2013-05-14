@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the selected shipping methods for the shipping addresses.</description>
+  <parameter name="Position"/>
+  <parameter name="ShippingMethodName"/>
+  <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')][@{Position}]//div[@class='minishipments-method']/span[2]" value="@{ShippingMethodName}"/>
+</scriptmodule>

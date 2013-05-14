@@ -54,5 +54,6 @@ During the testcase email and password information are generated dynamically.</d
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

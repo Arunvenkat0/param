@@ -16,11 +16,7 @@
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="CheckProductPrespectives"/>
-  <module name="modules.catalog.CheckProductPerspectivesFeature">
-    <parameter name="ProductName" value="${ProductName}"/>
-    <parameter name="ImageNumber1" value="${ImageNumber1}"/>
-    <parameter name="ImageNumber2" value="${ImageNumber2}"/>
-  </module>
+  <module name="modules.catalog.CheckProductPerspectivesFeature"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

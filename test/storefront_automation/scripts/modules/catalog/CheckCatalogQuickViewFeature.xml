@@ -7,25 +7,13 @@
 - default color is selected
 - size is selected
 - cart button is enabled</description>
-  <parameter name="ProductName"/>
-  <parameter name="ProductColor"/>
-  <parameter name="ProductSize"/>
-  <parameter name="ProductPrice"/>
+  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
+  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
   <action name="OpenQuickview"/>
-  <module name="modules.catalog.OpenQuickView">
-    <parameter name="ProductName" value="@{ProductName}"/>
-  </module>
-  <module name="modules.catalog.ValidateProductInQuickView">
-    <parameter name="ProductName" value="@{ProductName}"/>
-    <parameter name="ProductPrice" value="@{ProductPrice}"/>
-  </module>
+  <module name="modules.catalog.OpenQuickView"/>
+  <module name="modules.catalog.ValidateProductInQuickView"/>
   <action name="SelectSize"/>
-  <module name="modules.catalog.CheckQuickviewAndAddToCartButton">
-    <parameter name="Color" value="@{ProductColor}"/>
-    <parameter name="Size" value="@{ProductSize}"/>
-  </module>
+  <module name="modules.catalog.CheckQuickviewAndAddToCartButton"/>
   <action name="SwitchToDetails"/>
-  <module name="modules.catalog.QuickViewSwitchToDetailsPage">
-    <parameter name="ProductName" value="@{ProductName}"/>
-  </module>
+  <module name="modules.catalog.QuickViewSwitchToDetailsPage"/>
 </scriptmodule>

@@ -11,28 +11,16 @@ CurrentPage: number of the page currently displayed
 NumberOfPages: checks the number of pages</description>
   <parameter name="SortMethod"/>
   <parameter name="ItemsPerPage"/>
-  <parameter name="ShownProducts"/>
-  <parameter name="MaxItems"/>
-  <parameter name="CurrentPage"/>
-  <parameter name="NumberOfPages"/>
   <module name="modules.catalog.ValidateSearchResultContainer">
     <parameter name="Location" value=".search-result-options:nth-child(2)"/>
     <parameter name="LocationNumber" value="1"/>
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="ShownProducts" value="@{ShownProducts}"/>
-    <parameter name="CurrentPage" value="@{CurrentPage}"/>
-    <parameter name="NumberOfPages" value="@{NumberOfPages}"/>
   </module>
   <module name="modules.catalog.ValidateSearchResultContainer">
     <parameter name="Location" value=".search-result-options:nth-child(4)"/>
     <parameter name="LocationNumber" value="2"/>
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="ShownProducts" value="@{ShownProducts}"/>
-    <parameter name="CurrentPage" value="@{CurrentPage}"/>
-    <parameter name="NumberOfPages" value="@{NumberOfPages}"/>
   </module>
 </scriptmodule>

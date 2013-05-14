@@ -64,12 +64,14 @@
   <command name="store" target="${RANDOM.Number(1,5)}" value="FirstProductPriority"/>
   <command name="type" target="id=dwfrm_wishlist_items_i0_quantity" value="${FirstProductQuantity}"/>
   <command name="select" target="id=dwfrm_wishlist_items_i0_priority" value="value=${FirstProductPriority}"/>
+  <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i0_updateItem']"/>
   <action name="ChangeWishlistAttributesSecondProduct"/>
   <command name="store" target="${RANDOM.Number(1,10)}" value="SecondProductQuantity"/>
   <command name="store" target="${RANDOM.Number(1,5)}" value="SecondProductPriority"/>
   <command name="type" target="id=dwfrm_wishlist_items_i1_quantity" value="${SecondProductQuantity}"/>
   <command name="select" target="id=dwfrm_wishlist_items_i1_priority" value="value=${SecondProductPriority}"/>
+  <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i1_updateItem']"/>
   <action name="GoToWelcomePage"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
@@ -126,6 +128,7 @@
   <command name="clickAndWait" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHome"/>
   <module name="modules.staticelements.Return2Home"/>
   <action name="OpenWishlistPage"/>
   <command name="clickAndWait" target="link=Wish List"/>
@@ -134,6 +137,7 @@
   <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
   <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
   <command name="type" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
+  <action name="SubmitWishlistSearch"/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
   </command>

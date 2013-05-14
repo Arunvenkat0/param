@@ -56,13 +56,14 @@
     <parameter name="SearchText" value="${SecondProductID}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <action name="SelectColorAndSize"/>
+  <action name="SelectColor"/>
   <command name="click" target="css=.Color .emptyswatch a">
     <comment>Select a random color by clicking a color link.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.Color .selected">
     <comment>Wait for the color to be selected.</comment>
   </command>
+  <action name="SelectSize"/>
   <command name="click" target="css=.size .emptyswatch a">
     <comment>Select a random size by clicking one of the size options.</comment>
   </command>
