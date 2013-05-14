@@ -2,8 +2,7 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>This module checks the shipping. GiftCertificates are dilivered via email.</description>
   <parameter name="FriendsName"/>
-  <parameter name="FriendsEmail_Hidden"/>
-  <command name="waitForText" target="css=.order-shipment-details .order-gift-cert-to " value="@{FriendsName}*@{FriendsEmail_Hidden}"/>
+  <command name="waitForText" target="css=.order-shipment-details .order-gift-cert-to " value="@{FriendsName}*${FriendsEmail}"/>
   <command name="waitForText" target="css=.shipping-method .label" value="glob:Method:"/>
   <command name="waitForText" target="css=.shipping-method .value" value="Delivery Via Email"/>
 </scriptmodule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Selects a shipping method for each item during the multiple shipment checkout.
+
+Shipping discount was not considered.
+This module only works without shipping discount (ex. Free Ground Shipping Over $150).
+
+Position: starts with 0 and increases for each item
+Shipping Method Name: gets the Shipping Method Name from the Global Test Data</description>
+  <parameter name="Position"/>
+  <parameter name="ShippingMethodName"/>
+  <command name="select" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID" value="@{ShippingMethodName}*"/>
+</scriptmodule>

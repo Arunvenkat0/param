@@ -9,13 +9,14 @@ To check the validity rules for email and password wrong data are entered in a f
   <parameter name="EmailCorrect"/>
   <parameter name="PasswordTooShort"/>
   <parameter name="PasswordCorrect"/>
-  <action name="EnterIncorrectDataAndCheckResult"/>
+  <action name="EnterIncorrectData"/>
   <command name="type" target="id=dwfrm_profile_customer_firstname" value="@{FirstName}"/>
   <command name="type" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
   <command name="type" target="id=dwfrm_profile_customer_email" value="@{EmailWrong}"/>
   <command name="type" target="id=dwfrm_profile_customer_emailconfirm" value="@{EmailWrong}"/>
   <command name="type" target="id=dwfrm_profile_login_password" value="@{PasswordTooShort}"/>
   <command name="type" target="id=dwfrm_profile_login_passwordconfirm" value="@{PasswordTooShort}"/>
+  <action name="AndCheckResult"/>
   <command name="clickAndWait" target="name=dwfrm_profile_confirm value=Apply"/>
   <command name="assertText" target="id=dwfrm_profile_customer_firstname" value="@{FirstName}"/>
   <command name="assertText" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
@@ -30,5 +31,6 @@ To check the validity rules for email and password wrong data are entered in a f
   <command name="type" target="id=dwfrm_profile_customer_emailconfirm" value="@{EmailCorrect}"/>
   <command name="type" target="id=dwfrm_profile_login_password" value="@{PasswordCorrect}"/>
   <command name="type" target="id=dwfrm_profile_login_passwordconfirm" value="@{PasswordCorrect}"/>
+  <action name="AndCheckResult"/>
   <command name="clickAndWait" target="name=dwfrm_profile_confirm value=Apply"/>
 </scriptmodule>

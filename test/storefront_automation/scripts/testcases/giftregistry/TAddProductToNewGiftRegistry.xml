@@ -69,8 +69,9 @@
   <command name="clickAndWait" target="name=dwfrm_giftregistry_setPublic"/>
   <command name="assertElementPresent" target="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
   <command name="assertElementPresent" target="css=a.send-to-friend"/>
-  <action name="GoToWelcomePage"/>
+  <action name="WaitForAccountLink"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
+  <action name="GoToWelcomePage"/>
   <command name="clickAndWait" target="css=.user-account"/>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
@@ -79,7 +80,7 @@
     <parameter name="LinkText" value="Gift Registry"/>
     <parameter name="Headline" value="Gift Registry Login"/>
   </module>
-  <action name="SearchForGiftRegistryAndValidateResult"/>
+  <action name="SearchForGiftRegistry"/>
   <module name="modules.giftregistry.SearchForGiftRegistryAndValidateResult"/>
   <action name="ViewDetails"/>
   <command name="clickAndWait" target="css=.event-view a"/>

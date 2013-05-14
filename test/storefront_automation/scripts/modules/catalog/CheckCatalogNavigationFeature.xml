@@ -12,24 +12,18 @@ LastPageNumber: number of the last page of this category
 MiddlePageNumber: number of the middle page to test navigation elements</description>
   <parameter name="MainCategoryName"/>
   <parameter name="SubCategoryName"/>
-  <parameter name="FirstProductName"/>
-  <parameter name="SecondProductName"/>
-  <parameter name="LastProductName"/>
-  <parameter name="LastPageNumber"/>
   <parameter name="MiddlePageNumber"/>
+  <action name="OpenCategory"/>
   <command name="clickAndWait" target="link=@{MainCategoryName}"/>
+  <action name="OpenSubcategory"/>
   <command name="click" target="link=@{SubCategoryName}">
     <comment>Page with more navigation elements</comment>
   </command>
   <module name="modules.catalog.CheckCatalogNavigationOnCategoryPage">
     <parameter name="SubCategoryName" value="@{SubCategoryName}"/>
-    <parameter name="LastPageNumber" value="@{LastPageNumber}"/>
     <parameter name="MiddlePageNumber" value="@{MiddlePageNumber}"/>
   </module>
   <module name="modules.catalog.CheckNavigationOnProductDetailsPage">
-    <parameter name="FirstProductName" value="@{FirstProductName}"/>
-    <parameter name="SecondProductName" value="@{SecondProductName}"/>
-    <parameter name="LastProductName" value="@{LastProductName}"/>
     <parameter name="SubCategoryName" value="@{SubCategoryName}"/>
   </module>
 </scriptmodule>

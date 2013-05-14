@@ -13,6 +13,7 @@
   <command name="waitForElementPresent" target="css=.mini-cart-link">
     <comment>Shift Mouse focus to Mini Cart Icon to Display Cart Windows</comment>
   </command>
+  <action name="OpenMiniCart"/>
   <command name="mouseOver" target="css=.mini-cart-link">
     <comment>Shift Mouse focus to Mini Cart Icon to Display Cart Windows</comment>
   </command>

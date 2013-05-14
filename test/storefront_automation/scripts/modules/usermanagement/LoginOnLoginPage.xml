@@ -6,5 +6,6 @@
   <command name="pause" value="5000"/>
   <command name="type" target="css=.email-input" value="@{Email}"/>
   <command name="type" target="css=.password-input" value="@{Password}"/>
+  <action name="SubmitLogin"/>
   <command name="clickAndWait" target="name=dwfrm_login_login"/>
 </scriptmodule>

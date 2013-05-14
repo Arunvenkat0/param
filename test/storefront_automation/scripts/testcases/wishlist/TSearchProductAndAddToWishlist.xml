@@ -30,5 +30,6 @@
   <command name="clickAndWait" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

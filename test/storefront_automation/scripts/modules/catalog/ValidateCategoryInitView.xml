@@ -10,19 +10,16 @@
   <parameter name="SortMethod"/>
   <parameter name="ItemsPerPage"/>
   <parameter name="ShownProducts"/>
-  <parameter name="MaxItems"/>
-  <parameter name="NumberOfPages"/>
   <command name="assertText" target="css=.breadcrumb-last" value="@{CategoryName}"/>
-  <command name="waitForText" target="css=#category-level-1 .active" value="@{CategoryName}"/>
   <command name="assertElementPresent" target="css=.product-tile">
     <comment>Check if at least one product is present.</comment>
   </command>
+  <command name="waitForElementPresent" target="css=.results-hits a"/>
+  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="ShownProducts" value="@{ShownProducts}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="CurrentPage" value="1"/>
-    <parameter name="NumberOfPages" value="@{NumberOfPages}"/>
   </module>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
 </scriptmodule>

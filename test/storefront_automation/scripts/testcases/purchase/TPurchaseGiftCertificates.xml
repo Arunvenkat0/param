@@ -38,7 +38,7 @@
   <module name="modules.giftcertificate.ValidateCartForGiftCertificates">
     <parameter name="Donor" value="${Donor}"/>
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="FriendsEmail_Hidden" value="${FriendsEmailHidden}"/>
+    <parameter name="FriendsEmail" value="${FriendsEmail}"/>
     <parameter name="Amount" value="${Amount}"/>
   </module>
   <action name="CheckoutAsGuest"/>
@@ -46,7 +46,6 @@
   <action name="EnterBillingAndPaymentData"/>
   <module name="modules.giftcertificate.ValidateShippingDataInSideBarGiftCertificates">
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="FriendsEmail_Hidden" value="${FriendsEmailHidden}"/>
   </module>
   <module name="modules.checkout.billing.ValidateRequiredAddressFieldsForBilling"/>
   <module name="modules.checkout.billing.EnterBillingAddress">
@@ -75,12 +74,10 @@
   <module name="modules.giftcertificate.PlaceOrderForGiftCertificates">
     <parameter name="Donor" value="${Donor}"/>
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="FriendsEmail_Hidden" value="${FriendsEmailHidden}"/>
     <parameter name="Amount" value="${Amount}"/>
   </module>
   <module name="modules.giftcertificate.ValidateShippingDataInSideBarGiftCertificates">
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="FriendsEmail_Hidden" value="${FriendsEmailHidden}"/>
   </module>
   <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
@@ -121,13 +118,12 @@
   <module name="modules.giftcertificate.ValidateGiftCertificateDataOnSummaryPage">
     <parameter name="Donor" value="${Donor}"/>
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="Email_Hidden" value="${FriendsEmailHidden}"/>
     <parameter name="Message" value="${Message}"/>
     <parameter name="Amount" value="\$\s*${Amount}.00"/>
   </module>
   <module name="modules.giftcertificate.ValidateShippingDataForGiftCertificatesOnSummaryPage">
     <parameter name="FriendsName" value="${FriendsName}"/>
-    <parameter name="FriendsEmail_Hidden" value="${FriendsEmailHidden}"/>
   </module>
+  <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

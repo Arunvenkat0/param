@@ -17,11 +17,9 @@
   </module>
   <action name="CheckColorSwatch"/>
   <module name="modules.catalog.CheckCatalogSwatchFeature">
-    <parameter name="ProductName" value="${SwatchProductName}"/>
-    <parameter name="DefaultColor" value="${SwatchDefaultColor}"/>
-    <parameter name="AvailableColor2" value="${SwatchAvailableColor2}"/>
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
+  <action name="ClickCategoryInBreadcrumb"/>
   <command name="clickAndWait" target="link=${SubCategoryName}"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>

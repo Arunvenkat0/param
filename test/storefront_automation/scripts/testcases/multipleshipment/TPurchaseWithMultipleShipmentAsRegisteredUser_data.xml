@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <FirstName>John</FirstName>
   <LastName>Doe</LastName>
-  <ProductID>garmin-etrex-h</ProductID>
-  <ProductName>Garmin eTrex® H Portable GPS Unit</ProductName>
+  <ProductID>sony-nwz-s616f</ProductID>
+  <ProductName>Sony Walkman® 5GB Digital Media Player</ProductName>
   <ProductQuantity>2</ProductQuantity>
-  <ProductPrice>$139.99</ProductPrice>
-  <ProductTotalPrice>$279.98</ProductTotalPrice>
+  <ProductPrice>$179.99</ProductPrice>
+  <ProductTotalPrice>$359.98</ProductTotalPrice>
   <ShippingAddressTitle>Office</ShippingAddressTitle>
   <ShippingAddressFirstName>Las Miranda</ShippingAddressFirstName>
   <ShippingAddressLastName>den Sevilla</ShippingAddressLastName>
@@ -17,8 +17,8 @@
   <ShippingAddressZipCode>02142</ShippingAddressZipCode>
   <ShippingAddressCountry>United States</ShippingAddressCountry>
   <ShippingAddressPhone>781-391-6666</ShippingAddressPhone>
-  <ShippingMethodName>2-Day Express*</ShippingMethodName>
-  <ShippingMethodNumber>2</ShippingMethodNumber>
+  <ShippingMethodName>2-Day Express</ShippingMethodName>
+ <ShippingMethodName2>Overnight</ShippingMethodName2> <ShippingMethodNumber>2</ShippingMethodNumber>
   <BillingAddressTitle>Home</BillingAddressTitle>
   <BillingAddressFirstName>Maria</BillingAddressFirstName>
   <BillingAddressLastName>Musterfrau</BillingAddressLastName>
@@ -40,4 +40,5 @@
   <CreditCardExpiryMonthNumber>04</CreditCardExpiryMonthNumber>
   <CreditCardExpiryYear>2014</CreditCardExpiryYear>
   <CreditCardSecurityCode>1234</CreditCardSecurityCode>
+  
 </data>

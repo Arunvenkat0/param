@@ -272,6 +272,7 @@ The steps in detail:
   <action name="SearchForOrder"/>
   <command name="type" target="id=dwfrm_ordertrack_orderNumber" value="${OrderNumber}"/>
   <command name="type" target="id=dwfrm_ordertrack_postalCode" value="${BillingAddressZipCode}"/>
+  <action name="SubmitOrderSearchAndValidate"/>
   <command name="clickAndWait" target="css=#dwfrm_ordertrack button[name='dwfrm_ordertrack_findorder']"/>
   <command name="assertText" target="css=.breadcrumb-last" value="${OrderNumber}"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
