@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Test with placing an order from a wishlist:
 Tests the public wishlist feature.
@@ -7,11 +7,8 @@ Tests the public wishlist feature.
 - register new user
 - add the product to cart directly from the wishlist
 - complete order process
-- validate for the text "This is a wishlist item" on checkout pages</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+- validate for the text &quot;This is a wishlist item&quot; on checkout pages</description>
+  <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for first product</comment>

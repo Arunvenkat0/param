@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>account</tags>
   <description>Personal data account management. Creates a new user and changes the following information afterwards:
@@ -8,11 +8,7 @@
 - Password
 The user is logged out and loggid in again to proof the changes have been stored correctly. All changes are reverted to the initial state.
 During the testcase email and password information are generated dynamically.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
-  <action name="RegisterUser"/>
+  <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
