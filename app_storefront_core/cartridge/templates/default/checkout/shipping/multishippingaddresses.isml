@@ -28,7 +28,7 @@
 				<isloop items="${pdict.CurrentForms.multishipping.addressSelection.quantityLineItems}" var="listItem" status="loopstate">
 					<isset name="quantityLI" value="${listItem.object}" scope="page"/>
 					<isset name="quantityLIproduct" value="${dw.catalog.ProductMgr.getProduct(listItem.object.productID)}" scope="page"/>
-					<tr class="cart-row <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
+					<tr class="cart-row <isif condition="${loopstate.first}"> first </isif>">
 					
 						<td class="item-image">
 							<isif condition="${quantityLIproduct != null && quantityLIproduct.getImage('small',0) != null}">
@@ -85,6 +85,7 @@
 							<iscomment>display select box with available addresses</iscomment>
 							<isif condition="${listItem.addressList.options.optionsCount > 0}">
 								<select class="selectbox" name="${listItem.addressList.htmlName}">
+									<option value="">${Resource.msg('global.selectaddressmessage','locale',null)}</option>
 									<isloop items="${listItem.addressList.options}" var="option">
 										<isset name="address" value="${option.object}" scope="page"/>
 										<isif condition="${!empty(address.ID)}">
@@ -110,6 +111,7 @@
 				<iscomment>Gift certificate line items</iscomment>
 				<isloop items="${pdict.Basket.giftCertificateLineItems}" var="gcLI">
 					<tr class="rowgiftcert">
+						<td class="item-image"><img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" /></td>					
 						<td class="detailscolumn"><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - <isprint value="${gcLI.price}"/> ${Resource.msg('global.deliveredviaemail','locale',null)}</td>
 						<td class="quantitycolumn">1</td>
 						<td class="shippingaddress">${gcLI.recipientEmail}</td>
@@ -117,9 +119,6 @@
 				</isloop>
 			</tbody>
 			<tfoot>
-				<tr>
-					<td colspan="4" class="multi-address-footer"><!-- PLACE ORDER FOOTER --></td>
-				</tr>
 			</tfoot>	
 		</table>
 		<div class="formactions">
