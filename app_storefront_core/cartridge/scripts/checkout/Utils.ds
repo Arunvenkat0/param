@@ -404,4 +404,5 @@ function QuantityLineItem(){
 	var lineItemText : String = null;
 	var quantity : Quantity = null;
 	var pliUUID : String = null;
+	var optionID : String = null;
 }
