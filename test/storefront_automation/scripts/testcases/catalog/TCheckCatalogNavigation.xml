@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Tests the navigation feature of the product catalog both on category and product details pages.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="CheckCatalogNavigation"/>
   <module name="modules.catalog.CheckCatalogNavigationFeature">
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>

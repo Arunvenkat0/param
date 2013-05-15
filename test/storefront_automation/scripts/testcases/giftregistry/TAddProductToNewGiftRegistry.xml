@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Creates a gift registry for a new user. Performs the following steps:
 - register a new user
@@ -8,11 +8,7 @@
 - log out 
 - search for the gift registry
 - validate results</description>
-  <action name="OpenPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
-  <action name="RegisterUser"/>
+  <module name="modules.staticelements.Homepage"/>
   <command name="store" target="${UserFirstName} ${RANDOM.String(7)}" value="UserFirstName"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${UserFirstName}"/>
