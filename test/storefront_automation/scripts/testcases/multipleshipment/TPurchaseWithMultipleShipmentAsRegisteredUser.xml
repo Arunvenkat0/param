@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>checkout order multi-shipping shipping</tags>
+  <description>Validates the multi-shipping checkout. 
+
+Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).</description>
   <action name="OpenPage"/>
   <command name="open" value="${shopURL}"/>
   <command name="deleteAllVisibleCookies"/>
