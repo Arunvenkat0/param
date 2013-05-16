@@ -1387,7 +1387,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="SubmitPaymentJSON">
     <segment>
       <node>
-        <start-node name="SubmitPaymentJSON" secure="false"/>
+        <start-node name="SubmitPaymentJSON" secure="true"/>
         <node-display x="10" y="25"/>
       </node>
       <simple-transition>
