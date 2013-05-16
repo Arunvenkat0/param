@@ -775,6 +775,7 @@ table.item-list .multi-shipment-row {border-bottom: none;}
 .checkout-progress-indicator {font-size:1em;}
 .checkout-progress-indicator div{padding: 20px;}
 .checkout-multi-shipping .cart-row .gift-message-text{display:none;}
+.pt_checkout #cart-table .cart-row .shipment-label{font-weight: 700;margin-top:35px; font-size: 1.4em;}
 
 /* account */
 /* ------------------------------------- */
