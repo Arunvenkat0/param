@@ -1,5 +1,5 @@
 {
-  "_v":"13.1",
+  "_v":"13.3",
   "clients":
   [ 
     {
@@ -208,6 +208,24 @@
         },
         {
           "resource_id":"/site",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)",
+          "cache_time":900
+        },
+        {
+          "resource_id":"/folders/{id}",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)",
+          "cache_time":900
+        },
+        {
+          "resource_id":"/content_search",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)",
+          "cache_time":900
+        },        
+        {
+          "resource_id":"/content/{id}",
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900

@@ -197,9 +197,7 @@
 				
 			</isloop>
 			
-				<tr>
-					<td colspan="5" class="place-order-footer"><!-- PLACE ORDER FOOTER --></td>
-				</tr>
+
 			
 			</tfoot>	
 			

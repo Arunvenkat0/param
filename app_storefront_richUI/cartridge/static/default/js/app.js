@@ -2215,6 +2215,67 @@ var app = (function (app, $) {
 		});
 	}	
 	/**
+	* @function
+	* @description this function inits the form so that uses client side validation before submitting to the server
+	*/  
+	function initmultishipshipaddress() {
+	//init the continue button as disabled
+		var selectvalue = new Array();  
+	    $(this).removeClass('error');
+	          
+	    $("select option:selected").each(function () {
+	    	selectvalue.push(this.value)
+	            
+     	});
+	          
+	    //if we found a empty value disable the button
+	    if(selectvalue.indexOf('') == -1){
+	    	$('.formactions button').removeAttr('disabled');
+	    }else{
+	    	$('.formactions button').attr('disabled','disabled');
+	              
+	    }
+
+	    //add error classes to selects that don't have an address associated with them  when the button is clicked
+	    $('.formactions').bind('click',function(){
+	    	$.each( $(".cart-row .shippingaddress select.selectbox"), function(){
+	        	if(this.value == ''){
+	          		$(this).addClass('error');
+	        	}else{
+	          		$(this).removeClass('error');
+	        	};
+	      	});      
+	    });
+	    	    
+	    //add listeners to the selects to enable the continue button
+	    $.each( $(".cart-row .shippingaddress select.selectbox"), function(){
+	    	$(this).bind('change', function(){
+	        	if(this.value == ''){ 
+	          		$('.formactions button').attr('disabled','disabled');
+	          		$(this).addClass('error');
+	        	}else{
+	          		//check to see if any select box has a empty vlaue
+	          		var selectvalues = new Array();  
+	          		$(this).removeClass('error');
+	          
+	            	$("select option:selected").each(function () {
+	              		selectvalues.push(this.value)
+	              
+	           	 	});
+	          
+	            	//if we found a empty value disable the button
+	            	if(selectvalues.indexOf('') == -1){
+	              		$('.formactions button').removeAttr('disabled');
+	            	}else{
+	              		$('.formactions button').attr('disabled','disabled');
+	              
+	            	}
+	        	}
+	      	});
+	      
+	    });
+	}	
+	/**
 	 * @function
 	 * @description shows gift message box, if shipment is gift
 	 */
@@ -2270,10 +2331,13 @@ var app = (function (app, $) {
 
 	/**
 	 * @function
-	 * @description shows gift message box in multiship
+	 * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form 
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
+		if($(".cart-row .shippingaddress select.selectbox").length>0){
+			initmultishipshipaddress();
+		}
 		return null;
 	}	
 	
