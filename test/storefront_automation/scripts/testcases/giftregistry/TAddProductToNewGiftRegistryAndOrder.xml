@@ -171,8 +171,11 @@
   <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
     <comment>Use the same address for billing by ticking the checkbox.</comment>
   </command>
-  <command name="check" target="id=shipping-method-00${ShippingMethodNumber}">
-    <comment>Select Shipping Method</comment>
+  <command name="check" target="xpath=//label[contains(., '${ShippingMethodName}')]/following-sibling::input">
+    <comment>Select Shipping Method, select by text instead of position number. Only works with xpath.</comment>
+  </command>
+  <command name="waitForText" target="css=.order-totals-table .order-shipping.first td:first-child" value="glob:*${ShippingMethodName}*">
+    <comment>Have to wait till the background sync finished.</comment>
   </command>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <action name="GuestCheckoutBilling">
