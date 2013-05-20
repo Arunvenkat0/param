@@ -117,32 +117,13 @@
 />
 
 <iscomment>
-	Creates a grid with infinite scroll of product search result hits with given row and column count.
-
+	Creates a grid of product search result hits
 	producthits : the product iterator
 
-</iscomment>
-<ismodule template="search/productgridiscroll"
-	name="productgridiscroll"
-	attribute="category"
-	attribute="pagingmodel"
-/>
-
-<iscomment>
-	Creates a grid of product search result hits with given row and column count.
-
-	producthits : the product iterator
-	productstoskip : how many products should be skipped before starting
-	productsperrow : how many products per row
-	productrows    : how many rows of productlistings
-	pagingmodel    : current search result paging model information
 </iscomment>
 <ismodule template="search/productgrid"
 	name="productgrid"
-	attribute="producthits"
-	attribute="productstoskip"
-	attribute="productsperrow"
-	attribute="productrows"
+	attribute="category"
 	attribute="pagingmodel"
 />
 

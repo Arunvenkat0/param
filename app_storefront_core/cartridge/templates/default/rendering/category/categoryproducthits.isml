@@ -84,11 +84,7 @@
 		</div>
 		
 		<div class="search-result-content">				
-			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
-	    		<isproductgridiscroll pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}"/>			
-			<iselse>
-		    	<isproductgrid producthits="${pdict.ProductPagingModel.pageElements}" productrows="${1000}" productstoskip="${0}" productsperrow="${3}" pagingmodel="${pdict.ProductPagingModel}" scope="search" category="${pdict.ProductSearchResult.category}"/>	
-			</isif>
+			<isproductgrid pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}"/>
 		</div>
 
         <div class="search-result-options">
