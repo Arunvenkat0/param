@@ -29,7 +29,9 @@
 		</h3>
 		
 		<div class="checkout-mini-cart">			
-			<isminilineitems p_lineitemctnr="${pdict.Basket}"/>
+      		<isif condition="${checkoutstep  != 5}">
+        		<isminilineitems p_lineitemctnr="${pdict.Basket}"/>
+      		</isif>
 			
 		</div>
 		
