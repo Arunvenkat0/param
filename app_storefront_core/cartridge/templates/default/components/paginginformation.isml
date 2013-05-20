@@ -15,7 +15,7 @@
 	}
 	
 </isscript>
-<isif condition="${true==true && !empty(pdict.pageurl) && !pdict.pagingmodel.empty}">
+<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && !empty(pdict.pageurl) && !pdict.pagingmodel.empty}">
 	<isif condition="${pdict.pagingmodel.count > 12}">
 		
 		<div class="items-per-page">
