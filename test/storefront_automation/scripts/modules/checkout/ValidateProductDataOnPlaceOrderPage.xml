@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the most important data of a product in the specified row:
-Position -&gt; row of the product
+Position -> row of the product
 Name
 Quantity
 Price</description>
@@ -9,13 +9,10 @@ Price</description>
   <parameter name="Name"/>
   <parameter name="Quantity"/>
   <parameter name="PriceTotal"/>
-  <command name="assertText" target="css=.cart-row:nth-child(@{Position}) .name" value="@{Name}">
+  <command name="assertText" target="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}">
     <comment>Validate Product Name</comment>
   </command>
-  <command name="assertText" target="css=.cart-row:nth-child(@{Position}) .item-quantity" value="@{Quantity}">
-    <comment>Validate Product Quantity</comment>
-  </command>
-  <command name="assertText" target="css=.cart-row:nth-child(@{Position}) .item-total" value="@{PriceTotal}">
-    <comment>Validate total price for that paticular product</comment>
+  <command name="assertText" target="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-pricing" value="glob:Qty: @{Quantity} @{PriceTotal}">
+    <comment>Verify details such as quantity and price</comment>
   </command>
 </scriptmodule>

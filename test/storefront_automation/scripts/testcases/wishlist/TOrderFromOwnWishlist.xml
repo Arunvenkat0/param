@@ -129,7 +129,9 @@ Tests the public wishlist feature.
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="PriceTotal" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.product-list-item .item-links" value="This is a Wish List Item"/>
+  <command name="assertText" disabled="true" target="css=.product-list-item .item-links" value="This is a Wish List Item">
+    <comment>Does not seem to be part of the checkout minicart view anymore.</comment>
+  </command>
   <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
     <comment>Shipping Address Validation</comment>
     <parameter name="Name" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>
