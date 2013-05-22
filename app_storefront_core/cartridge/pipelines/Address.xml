@@ -175,7 +175,14 @@ Input:
           <template buffered="true" dynamic="false" name="account/addressbook/addressdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="create">
+        <branch basename="b2" source-connector="cancel">
+          <transition target-connector="in2" target-path="./+1/b5.1">
+            <transition-display>
+              <bend-point relative-to="target" x="-2" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+        <branch basename="b3" source-connector="create">
           <transition target-connector="in1" target-path="./+1"/>
         </branch>
       </node>
@@ -187,7 +194,7 @@ Input:
       <node>
         <decision-node condition-key="!CurrentForms.profile.address.valid" condition-operator="expr"/>
         <node-display orientation="horizontal" x="1" y="1"/>
-        <branch basename="b3" source-connector="yes">
+        <branch basename="b4" source-connector="yes">
           <transition target-connector="in1" target-path="./+1/b4.3"/>
         </branch>
       </node>
@@ -291,8 +298,13 @@ Input:
         <decision-node condition-key="CurrentHttpParameterMap.format.stringValue != 'ajax'" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b5" source-connector="yes">
-          <transition target-connector="in"/>
+          <transition target-connector="in1"/>
           <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <jump-node start-name-ref="Address-List"/>
               <node-display x="0" y="1"/>
@@ -1055,7 +1067,7 @@ Input:
     <segment>
       <node>
         <start-node call-mode="private" name="DeleteAddress" secure="false"/>
-        <node-display x="4" y="15"/>
+        <node-display x="4" y="16"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -1112,13 +1124,13 @@ Input:
         <branch basename="b2" source-connector="error">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
             <node>
               <end-node name="failed"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
+              <node-display orientation="horizontal" x="1" y="-1"/>
             </node>
           </segment>
         </branch>
@@ -1137,7 +1149,7 @@ Input:
         <branch basename="b3" source-connector="error">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
@@ -1165,7 +1177,7 @@ Input:
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display orientation="horizontal" x="1" y="0"/>
+              <node-display orientation="horizontal" x="1" y="-1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -1195,13 +1207,13 @@ Input:
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-2"/>
           <bend-point relative-to="target" x="0" y="-1"/>
         </transition-display>
       </simple-transition>
       <node>
         <end-node name="ok"/>
-        <node-display x="1" y="1"/>
+        <node-display x="1" y="0"/>
       </node>
     </segment>
   </branch>
