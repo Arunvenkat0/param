@@ -278,14 +278,14 @@
     <parameter name="Quantity" value="1"/>
     <parameter name="PriceTotal" value="${ProductPrice}"/>
   </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
+  <module name="modules.checkout.ValidateProductDataInSidebar" disabled="true">
     <comment>Validate First Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="1"/>
     <parameter name="Name" value="${ProductName}"/>
     <parameter name="Quantity" value="1"/>
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
+  <module name="modules.checkout.ValidateProductDataInSidebar" disabled="true">
     <comment>Validate Second Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="2"/>
     <parameter name="Name" value="${ProductName}"/>

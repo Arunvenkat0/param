@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <FirstName>John</FirstName>
   <LastName>Doe</LastName>
@@ -18,7 +18,8 @@
   <ShippingAddressCountry>United States</ShippingAddressCountry>
   <ShippingAddressPhone>781-391-6666</ShippingAddressPhone>
   <ShippingMethodName>2-Day Express</ShippingMethodName>
- <ShippingMethodName2>Overnight</ShippingMethodName2> <ShippingMethodNumber>2</ShippingMethodNumber>
+  <ShippingMethodName2>Overnight</ShippingMethodName2>
+  <ShippingMethodNumber>2</ShippingMethodNumber>
   <BillingAddressTitle>Home</BillingAddressTitle>
   <BillingAddressFirstName>Maria</BillingAddressFirstName>
   <BillingAddressLastName>Musterfrau</BillingAddressLastName>
@@ -40,5 +41,4 @@
   <CreditCardExpiryMonthNumber>04</CreditCardExpiryMonthNumber>
   <CreditCardExpiryYear>2014</CreditCardExpiryYear>
   <CreditCardSecurityCode>1234</CreditCardSecurityCode>
-  
 </data>
