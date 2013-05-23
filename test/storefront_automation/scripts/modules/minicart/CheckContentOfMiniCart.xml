@@ -32,7 +32,7 @@
     <comment>Checks the correct format of the subtotal line</comment>
   </command>
   <action name="CloseMiniCart"/>
-  <command name="mouseOver" target="css=h1.primary-logo">
+  <command name="mouseOut" target="css=.mini-cart-content">
     <comment>Move the cursor to the title logo to close the mini cart and free the mini cart area of the mouse to permit later opening of it again.</comment>
   </command>
   <command name="waitForNotVisible" target="css=.mini-cart-content"/>
