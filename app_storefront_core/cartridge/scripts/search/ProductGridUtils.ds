@@ -33,13 +33,16 @@ ProductGridUtils.getRepresentedVariationValueIDs = function (productHit : Produc
 * 	Use with care, as this is essential to the caching strategy. It should just use parameters gathered from the search hit. 
 * 	@param  productHit 				the product search hit, given by the Scripting API
 */
-ProductGridUtils.buildHitTileURL = function (productHit : ProductSearchHit) {
+ProductGridUtils.buildHitTileURL = function (productHit : ProductSearchHit,  cgidValue : String) {
 	var productHitURL : URL = URLUtils.url('Product-HitTile');
 	if (productHit.product.isVariant()) {
 		productHitURL.append('pid',  productHit.product.masterProduct.ID);	
 	} else {
 		productHitURL.append('pid',  productHit.product.ID);
 	}
+	if(!empty(cgidValue)){
+		productHitURL.append('cgid',  cgidValue);
+	}	
 	productHitURL.append('vpid', productHit.firstRepresentedProduct.ID);
 	productHitURL.append('maxprice', productHit.maxPrice);
 	productHitURL.append('minprice', productHit.minPrice);
