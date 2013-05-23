@@ -2,7 +2,7 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package com.sitegenesis.testcases.search;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -15,6 +15,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.search.TCheckSearchFeature")
-public class TCheckSearchFeature extends AbstractScriptTestCase
+public class TCheckSearchFeature extends AbstractBrowserScriptTestCase
 {
 }

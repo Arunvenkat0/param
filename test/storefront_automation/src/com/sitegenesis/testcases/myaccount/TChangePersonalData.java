@@ -3,7 +3,8 @@
  */
 package com.sitegenesis.testcases.myaccount;
 import org.junit.Ignore;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -19,6 +20,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 @ScriptName
 ("testcases.myaccount.TChangePersonalData")
 @Ignore
-public class TChangePersonalData extends AbstractScriptTestCase
+public class TChangePersonalData extends AbstractBrowserScriptTestCase
 {
 }
