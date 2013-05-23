@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks some basic features of the quickview. Checks if the add-to-cart-button is disabled initially and is enabled after selecting color and size.</description>
   <command name="assertElementPresent" target="css=#add-to-cart[disabled]">
@@ -6,7 +6,7 @@
   </command>
   <command name="storeText" target="css= .size .emptyswatch:first-child .swatchanchor" value="ProductSize"/>
   <action name="CheckSelectedColor"/>
-  <command name="storeText" target="css=.Color .selected:first-child .swatchanchor" value="ProductColor"/>
+  <command name="storeText" target="css=.Color .selected .swatchanchor" value="ProductColor"/>
   <command name="click" disabled="true" target="css=.attribute .selected:first-child .swatchanchor">
     <comment>Select size.</comment>
   </command>
