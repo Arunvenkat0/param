@@ -3,7 +3,9 @@
   <tags>checkout order multi-shipping shipping</tags>
   <description>Validates the multi-shipping checkout. 
 
-Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).</description>
+Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).
+
+Sidebar checks for cart have been removed, because sidebar does not show the cart anymore.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
