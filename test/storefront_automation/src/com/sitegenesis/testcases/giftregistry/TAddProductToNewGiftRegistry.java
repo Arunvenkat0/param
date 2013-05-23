@@ -2,7 +2,7 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package com.sitegenesis.testcases.giftregistry;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -18,6 +18,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.giftregistry.TAddProductToNewGiftRegistry")
-public class TAddProductToNewGiftRegistry extends AbstractScriptTestCase
+public class TAddProductToNewGiftRegistry extends AbstractBrowserScriptTestCase
 {
 }
