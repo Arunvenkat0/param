@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks consequences for changing items per page:
 - no changes in SortBy
@@ -19,11 +19,7 @@ Static Elements are:
   <command name="select" target="css=.search-result-options .items-per-page select" value="label=@{ItemsPerPage}">
     <comment>Select the desired amount of items per page.</comment>
   </command>
-  <command name="pause" value="3000"/>
-  <command name="waitForElementPresent" target="css=.search-result-options .items-per-page option[selected]">
-    <comment>Waits for the result.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.results-hits"/>
+  <command name="waitForText" target="css=.pagination .results-hits" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
   <command name="storeText" target="css=.results-hits" value="PaginationText"/>
   <command name="storeText" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
