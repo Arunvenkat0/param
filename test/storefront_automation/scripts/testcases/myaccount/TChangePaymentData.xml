@@ -16,7 +16,6 @@
   <action name="OpenPaymentSettings"/>
   <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
   <action name="AddVisa"/>
-  <command name="pause" value="1000"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
     <parameter name="Type" value="${CreditCardType1}"/>
@@ -36,7 +35,6 @@
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="AddAmericanExpress"/>
-  <command name="pause" value="1000"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
     <parameter name="Type" value="${CreditCardType2}"/>
@@ -56,7 +54,6 @@
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="AddMasterCard"/>
-  <command name="pause" value="1000"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
     <parameter name="Type" value="${CreditCardType3}"/>
@@ -76,7 +73,6 @@
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="AddDiscoveryCard"/>
-  <command name="pause" value="1000"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
     <parameter name="Type" value="${CreditCardType4}"/>
