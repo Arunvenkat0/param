@@ -26,7 +26,7 @@
 			
 				<legend>
 					${Resource.msg('registration.name','account',null)}
-					<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+					<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 				</legend>
 				
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
@@ -39,7 +39,7 @@
 			
 				<legend>
 					${Resource.msg('registration.logininfo','account',null)}
-					<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+					<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 				</legend>
 				
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
