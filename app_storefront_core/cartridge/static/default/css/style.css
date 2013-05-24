@@ -71,6 +71,7 @@ button[disabled],input[disabled]{color:#CCCCCC;}
 legend{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1em solid #FFFFFF;font-size:1.1em;font-weight:700;margin:0;padding:14px 2% 10px;position:relative;text-transform:uppercase;width:96%;}
 .ie7 legend{width:94%;}
 legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
+legend span em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}

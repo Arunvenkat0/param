@@ -40,7 +40,7 @@
 
 		<legend>
 			${Resource.msg('billing.addressheader','checkout',null)}
-			<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)} </em></span>
+			<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 		</legend>
 
 		<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
