@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the presence of different product images in quickview and product details page.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>
@@ -16,11 +13,7 @@
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="CheckProductPrespectives"/>
-  <module name="modules.catalog.CheckProductPerspectivesFeature">
-    <parameter name="ProductName" value="${ProductName}"/>
-    <parameter name="ImageNumber1" value="${ImageNumber1}"/>
-    <parameter name="ImageNumber2" value="${ImageNumber2}"/>
-  </module>
+  <module name="modules.catalog.CheckProductPerspectivesFeature"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

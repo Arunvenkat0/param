@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates splitted product details at the multiple shipping page during the checkout process:
+
+@Parameters:
+Name: Name of the product
+Quantity: Quantity of the product</description>
+  <parameter name="Position"/>
+  <parameter name="Name"/>
+  <parameter name="Quantity"/>
+  <parameter name="Position2"/>
+  <parameter name="AddressName"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="StateShort"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Country"/>
+  <command name="assertElementPresent" target="//tr[contains(@class,'cart-row')]"/>
+  <command name="waitForText" target="css=.checkoutmultishipping .item-list:nth-child(@{Position}) .product-list-item .name" value="@{Name}">
+    <comment>Validate the product name (Wait since prodcut summary get's refreshed after each selection option available on page)</comment>
+  </command>
+  <command name="waitForText" target="css=.checkoutmultishipping .item-list:nth-child(@{Position}) .item-quantity" value="@{Quantity}">
+    <comment>Validate the product quantity (Wait since prodcut summary get's refreshed after each selection option available on page)</comment>
+  </command>
+  <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position2}_shippingMethodID"/>
+  <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position2}_isGift"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[1][.='@{AddressName}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[2][.='@{Address}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[3][.='@{City}, @{StateShort} @{ZipCode}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[4][.='@{Country}']"/>
+</scriptmodule>

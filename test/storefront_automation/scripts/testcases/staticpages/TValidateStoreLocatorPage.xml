@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the page structure of the store locator page.</description>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="OpenStoreLocator"/>
   <command name="clickAndWait" target="link=Store Locator"/>
   <command name="waitForText" target="css=.breadcrumb-last" value="Store Locator"/>
   <command name="assertText" target="css=#primary h1" value="Find a Store Near You"/>

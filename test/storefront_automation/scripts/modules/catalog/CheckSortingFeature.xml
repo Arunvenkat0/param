@@ -16,16 +16,13 @@ ItemsPerPage: number of Items that are displayed
 ShownProducts: range of products that is displayed (e.g. 1-12)
 MaxItems: the complete amont of search results</description>
   <parameter name="SortMethod"/>
-  <parameter name="FirstItemName"/>
-  <parameter name="LastItemName"/>
-  <parameter name="LastPageNumber"/>
   <parameter name="ItemsPerPage"/>
   <parameter name="ShownProducts"/>
-  <parameter name="MaxItems"/>
   <action name="SelectSortingMethod"/>
   <command name="waitForElementPresent" target="name=Product-Sorting-Options">
     <comment>Wait for the dropdown.</comment>
   </command>
+  <action name="SelectSortionOption"/>
   <command name="select" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
     <comment>Select a sorting method.</comment>
   </command>
@@ -35,23 +32,13 @@ MaxItems: the complete amont of search results</description>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="ShownProducts" value="@{ShownProducts}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="CurrentPage" value="1"/>
-    <parameter name="NumberOfPages" value="@{LastPageNumber}"/>
   </module>
-  <command name="assertText" target="css=.grid-tile:first-child .product-name" value="@{FirstItemName}">
-    <comment>Check for the correct first product.</comment>
-  </command>
   <action name="SelectLastPage"/>
-  <command name="click" target="link=@{LastPageNumber}">
+  <command name="click" target="css=.pagination li:last-child a">
     <comment>Select the last page.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-1"/>
   <command name="waitForElementPresent" target="css=.search-result-content">
     <comment>waits for productlist before validating them</comment>
-  </command>
-  <command name="assertText" target="css=.grid-tile:last-child .product-name" value="@{LastItemName}">
-    <comment>Check for the correct last product.</comment>
   </command>
 </scriptmodule>

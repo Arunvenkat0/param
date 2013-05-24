@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks consequences for changing items per page:
 - no changes in SortBy
@@ -12,48 +12,31 @@ Static Elements are:
 - MaxItems</description>
   <parameter name="ItemsPerPage"/>
   <parameter name="SortMethod"/>
-  <parameter name="LastPageNumber"/>
-  <parameter name="FirstItem"/>
-  <parameter name="LastItem"/>
-  <parameter name="MaxItems"/>
   <parameter name="ShownProductsFirstPage"/>
-  <parameter name="ShownProductsLastPage"/>
   <action name="SelectItemsPerPage"/>
   <command name="waitForElementPresent" target="name=Product-Paging-Options"/>
+  <action name="SelectPagingOption"/>
   <command name="select" target="css=.search-result-options .items-per-page select" value="label=@{ItemsPerPage}">
     <comment>Select the desired amount of items per page.</comment>
   </command>
-  <command name="pause" value="1500"/>
-  <command name="waitForText" target="css=.search-result-options .items-per-page option[selected]" value="@{ItemsPerPage}">
-    <comment>Waits for the result.</comment>
-  </command>
+  <command name="waitForText" target="css=.pagination .results-hits" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
+  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="ShownProducts" value="@{ShownProductsFirstPage}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="CurrentPage" value="1"/>
-    <parameter name="NumberOfPages" value="@{LastPageNumber}"/>
   </module>
-  <command name="assertText" target="css=.grid-tile:first-child .product-name" value="@{FirstItem}">
-    <comment>Checks for the correct first product.</comment>
-  </command>
-  <command name="assertText" target="css=.grid-tile:last-child .product-name" value="@{LastItem}">
-    <comment>Check for the correct last product.</comment>
-  </command>
   <action name="SelectLastPage"/>
-  <command name="click" target="link=@{LastPageNumber}">
+  <command name="click" target="css=.pagination li:last-child a">
     <comment>Switch to last page.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-1">
     <comment>Wait for the page switch (link to fist page is visible).</comment>
   </command>
+  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
+  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
-    <parameter name="ShownProducts" value="@{ShownProductsLastPage}"/>
-    <parameter name="MaxItems" value="@{MaxItems}"/>
-    <parameter name="CurrentPage" value="@{LastPageNumber}"/>
-    <parameter name="NumberOfPages" value="@{LastPageNumber}"/>
   </module>
 </scriptmodule>
