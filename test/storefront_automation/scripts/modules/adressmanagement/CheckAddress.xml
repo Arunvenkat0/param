@@ -22,5 +22,6 @@
   <parameter name="Phone"/>
   <command name="waitForText" target="css=.address-list li:nth-child(@{Position}) .mini-address-title" value="@{Title}"/>
   <command name="assertText" target="css=.address-list li:nth-child(@{Position}) .mini-address-name" value="@{FirstName} @{LastName}"/>
+  <command name="waitForElementPresent" target="css=.mini-address-location"/>
   <command name="assertText" target="css=.address-list li:nth-child(@{Position}) .mini-address-location" value="glob:@{Address} @{City}, @{StateShort} @{Zip} @{Country} Phone: @{Phone} "/>
 </scriptmodule>

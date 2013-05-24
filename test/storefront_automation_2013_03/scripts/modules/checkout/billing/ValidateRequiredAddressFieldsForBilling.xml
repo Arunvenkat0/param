@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Checks if the entry fields are required (attribute 'class' contains the word 'required').</description>
-  <command name="assertText" target="css=#dwfrm_billing legend" value="glob:Select or Enter a Billing Address*"/>
-  <module name="modules.adressmanagement.ValidateGlobalRequiredFieldsForAddresses"/>
-  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
-</scriptmodule>

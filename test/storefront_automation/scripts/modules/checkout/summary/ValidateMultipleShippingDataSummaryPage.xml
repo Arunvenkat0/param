@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the multiple shipping information on summary page:
+- Name
+- Address
+- City / State / ZIP
+- Country
+- ShippingMethod
+- ShippingStatus</description>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <parameter name="Address"/>
+  <parameter name="City"/>
+  <parameter name="StateShort"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Country"/>
+  <parameter name="ShippingMethod"/>
+  <parameter name="ShippingStatus"/>
+  <command name="assertText" target="css= .order-shipment-table th:nth-child(4)" value="Shipping To"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//span[@class='firstname'][.='@{FirstName}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//span[@class='lastname'][.='@{LastName}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//div[@class='street']/div[@class='line1'][.='@{Address}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//div[@class='location']/span[@class='city'][starts-with(.,'@{City}')]"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//div[@class='location']/span[@class='state'][starts-with(.,'@{StateShort}')]"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//div[@class='location']/span[@class='zip'][.='@{ZipCode}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='order-shipment-address']//div[@class='country'][.='@{Country}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='shipping-method']//span[@class='label'][.='Method:'] "/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='shipping-method']//span[@class='value'][.='@{ShippingMethod}']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='shipping-status']//span[@class='label'][.='Shipping Status:']"/>
+  <command name="assertElementPresent" target="xpath= //table[@class='order-shipment-table'] //div[@class='shipping-status']//span[@class='value'][.='@{ShippingStatus}'] "/>
+</scriptmodule>

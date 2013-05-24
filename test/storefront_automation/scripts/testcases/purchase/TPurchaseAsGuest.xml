@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>ordering guest checkout</tags>
   <description>Guest checkout: 
@@ -8,14 +8,9 @@
 * Guest checkout
 * Enter Shipping Method /Address
 * Enter Billing Method / Address
-* Summary -&gt; Edit
+* Summary -> Edit
 * Place Offer</description>
-  <action name="OpenStartPage">
-    <comment>This trick removed all our cookies from the past run and makes it clear for a new pass.</comment>
-  </action>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${FirstProductID}"/>
@@ -56,13 +51,14 @@
     <parameter name="SearchText" value="${SecondProductID}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <action name="SelectColorAndSize"/>
+  <action name="SelectColor"/>
   <command name="click" target="css=.Color .emptyswatch a">
     <comment>Select a random color by clicking a color link.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.Color .selected">
     <comment>Wait for the color to be selected.</comment>
   </command>
+  <action name="SelectSize"/>
   <command name="click" target="css=.size .emptyswatch a">
     <comment>Select a random size by clicking one of the size options.</comment>
   </command>

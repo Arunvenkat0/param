@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the product data on summary page.
 Name
@@ -10,5 +10,5 @@ Price</description>
   <parameter name="Price"/>
   <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) .product-list-item .name" value="@{Name}"/>
   <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) td:nth-child(2)" value="@{Quantity}"/>
-  <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) td:nth-child(3)" value="glob:*@{Price}*"/>
+  <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) td:nth-child(3)" value="@{Price}*"/>
 </scriptmodule>

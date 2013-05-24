@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Selects a product inside a catalog and opens it's quick view dialoge.</description>
-  <parameter name="ProductName"/>
-  <command name="waitForElementPresent" target="xpath=//div[@class='product-name']//a[@title=&quot;@{ProductName}&quot;]">
+  <command name="waitForElementPresent" target="xpath=//div[@class='product-name']//a[starts-with(@title,'${ProductName}')]">
     <comment>Validate Product Presence</comment>
   </command>
   <command name="pause" value="500"/>
-  <command name="mouseOver" target="xpath=//div[@class='product-image']/a[@title='@{ProductName}']"/>
-  <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[@title='@{ProductName}']"/>
-  <command name="click" target="xpath=id('quickviewbutton')[@title='@{ProductName}']"/>
+  <command name="mouseOver" target="xpath=//div[@class='product-image']/a[starts-with(@title,'${ProductName}')]"/>
+  <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  <action name="ClickQuickViewLink"/>
+  <command name="click" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
-  <command name="waitForText" target="css=.ui-dialog .product-name" value="@{ProductName}"/>
+  <command name="waitForText" target="css=.ui-dialog .product-name" value="${ProductName}"/>
 </scriptmodule>

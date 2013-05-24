@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Navigates to a main category catalog page via the main navigation menu.
 
@@ -9,7 +9,7 @@ MainCategoryName: Main Menu Name</description>
   <parameter name="MainCategoryName"/>
   <action name="OpenMainCategoryPage"/>
   <command name="waitForElementPresent" target="xpath=id('navigation')//ul/li[@{MainCategoryNumber}]/a[@class='level-1']"/>
-  <command name="clickAndWait" target="link=@{MainCategoryName}"/>
+  <command name="clickAndWait" target="link=regexpi:@{MainCategoryName}"/>
   <action name="ValidateMainCategoryPage"/>
   <command name="assertText" target="css=.breadcrumb-last" value="@{MainCategoryName}"/>
   <command name="assertText" target="css=.refinement-header" value="*@{MainCategoryName}"/>
