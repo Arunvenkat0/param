@@ -71,6 +71,7 @@ button[disabled],input[disabled]{color:#CCCCCC;}
 legend{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1em solid #FFFFFF;font-size:1.1em;font-weight:700;margin:0;padding:14px 2% 10px;position:relative;text-transform:uppercase;width:96%;}
 .ie7 legend{width:94%;}
 legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
+legend span em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
@@ -92,7 +93,7 @@ input[type="radio"]{margin:1em 2%;}
 .form-indent{margin-left:24%;}
 .form-indent .form-caption{margin-left:0;}
 .form-caption{display:block;margin:1% 0 1% 24%;width:auto;}
-.error-message {background-color:#F1E6E6;border:2px solid #990000;padding:10px;color:#990000;margin-bottom:10px;}
+.error-message {border:2px solid #990000;background-color:#F1E6E6;padding:0.7em 0.5em;text-indent:0;width:49.5966%;
 .error{background-color:#F1E6E6;border-color:#990000;color:#990000;}
 span.error{background:none repeat scroll 0 0 transparent;display:block;margin:1% 2% 2% 24%;}
 div.error{background:none repeat scroll 0 0 transparent;}

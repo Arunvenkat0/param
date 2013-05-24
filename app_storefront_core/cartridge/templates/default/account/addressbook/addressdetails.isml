@@ -17,7 +17,7 @@
 		<fieldset>
 			<legend>
 				Address Details
-				<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)} </em></span>
+				<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 			</legend>
 			
 			
