@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the selected color inside quick view and product details page
 
@@ -17,7 +17,7 @@ Validate it remains the selected color (on product details page)</description>
     <comment>Check if the correct swatch is selected.</comment>
   </command>
   <action name="CloseQuickview"/>
-  <command name="click" target="link=close"/>
+  <command name="click" target="css=.ui-dialog-titlebar-close"/>
   <action name="ValidateSwatchResultOnProductPage"/>
   <command name="clickAndWait" target="xpath=//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]"/>
   <command name="waitForText" target="css=.breadcrumb .last" value="${ProductName}"/>
