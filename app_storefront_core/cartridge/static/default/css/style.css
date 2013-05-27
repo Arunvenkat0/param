@@ -93,7 +93,7 @@ input[type="radio"]{margin:1em 2%;}
 .form-indent{margin-left:24%;}
 .form-indent .form-caption{margin-left:0;}
 .form-caption{display:block;margin:1% 0 1% 24%;width:auto;}
-.error-message {border:2px solid #990000;background-color:#F1E6E6;padding:0.7em 0.5em;text-indent:0;width:49.5966%;
+.error-message {border:2px solid #990000;background-color:#F1E6E6;padding:0.7em 0.5em;text-indent:0;width:49.5966%;}
 .error{background-color:#F1E6E6;border-color:#990000;color:#990000;}
 span.error{background:none repeat scroll 0 0 transparent;display:block;margin:1% 2% 2% 24%;}
 div.error{background:none repeat scroll 0 0 transparent;}
