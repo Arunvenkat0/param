@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the page elements on the login page. Checks ia all boxes for loggin in are available.</description>
   <command name="assertText" target="xpath=id('primary')/h1" value="My Account Login"/>
   <command name="assertText" target="css=.breadcrumb-last" value="My Account"/>
-  <command name="assertText" target="css=.login-account h2" value="Returning Customers"/>
-  <command name="assertText" target="css=.login-create-account h2" value="New Customers"/>
-  <command name="assertText" target="css=.login-order-track h2" value="Check An Order"/>
+  <command name="assertText" target="css=.login-account h2" value="regexpi:Returning Customers"/>
+  <command name="assertText" target="css=.login-create-account h2" value="regexpi:New Customers"/>
+  <command name="assertText" target="css=.login-order-track h2" value="regexpi:Check An Order"/>
 </scriptmodule>
