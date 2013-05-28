@@ -11,7 +11,7 @@ This module only works without shipping discount (ex. Free Ground Shipping Over 
     <comment>This might turn up later due to background Ajax, so wait for it.</comment>
   </command>
   <command name="check" target="id=shipping-method-001"/>
-  <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label" value="glob:Ground:*"/>
+  <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label" value="glob:Ground:*"/>
   <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label/span" value="regexp:^\$\s*([0-9]|([1-9][0-9]{0,2}))\.99$"/>
   <command name="storeText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label/span" value="Shipping_Costs"/>
   <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="glob:*Ground*"/>
