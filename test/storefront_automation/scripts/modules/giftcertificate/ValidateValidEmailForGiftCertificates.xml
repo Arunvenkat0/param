@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks if valid email addresses are required.</description>
   <parameter name="Email"/>
@@ -13,5 +13,5 @@
   <action name="Try2Add2Basket"/>
   <command name="click" target="id=AddToBasketButton"/>
   <command name="waitForText" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail + span" value="The email address is invalid."/>
-  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
+  <command name="type" disabled="true" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
 </scriptmodule>
