@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+import com.xceptance.xlt.api.util.XltLogger;
 import com.xceptance.xlt.api.util.XltProperties;
 
 public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase 
@@ -41,6 +42,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 		}
 		else
 		{
+			XltLogger.runTimeLogger.error("No webdriver could be determined. Not setting one, so this will now fail.");
 			webDriver = null;
 		}
 
