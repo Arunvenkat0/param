@@ -3,7 +3,7 @@
 </isscript>
 <iscomment><!--Display the remaining products as list--></iscomment>
 
-<ul class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(pdict.CurrentHttpParameterMap.format.value) ? (pdict.CurrentHttpParameterMap.format.value) : ''}">
+<ul id="search-result-items" class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(pdict.CurrentHttpParameterMap.format.value) ? (pdict.CurrentHttpParameterMap.format.value) : ''}">
 	<isloop items="${pdict.pagingmodel.pageElements}" var="LoopProductHit" status="loopstate">
 
 		<li class="grid-tile ${(loopstate.index % 3 == 0) ? 'new-row' : ''}"  data-colors-to-show="${ProductGridUtils.getRepresentedVariationValueIDs(LoopProductHit,'color').join(',')}">
