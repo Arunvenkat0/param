@@ -60,7 +60,7 @@ Tests the public wishlist feature.
     <parameter name="StepNumber" value="1"/>
     <parameter name="StepText" value="Shipping"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="glob:Select or Enter a Shipping Address*"/>
+  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>

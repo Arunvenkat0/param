@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validate the selected product details inside quickview</description>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
-  <command name="assertText" target="css=.ui-dialog-title" value="Product Quickview"/>
+  <command name="assertText" target="css=.ui-dialog-title" value="regexpi:Product Quickview"/>
   <command name="waitForText" target="css=.ui-dialog .product-name" value="${ProductName}"/>
   <command name="assertElementPresent" target="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
   <command name="assertText" target="css=.price-sales" value="${ProductPrice}"/>

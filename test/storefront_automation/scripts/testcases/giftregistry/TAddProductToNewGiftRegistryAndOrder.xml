@@ -23,7 +23,7 @@
   <action name="ClickNewRegistry"/>
   <command name="clickAndWait" target="name=dwfrm_giftregistry_create"/>
   <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
-  <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="Event Information*"/>
+  <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
   <action name="EnterEventAndParticipantData"/>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
   <action name="EnterShippingData"/>

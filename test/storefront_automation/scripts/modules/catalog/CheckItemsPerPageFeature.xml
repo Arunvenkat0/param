@@ -19,6 +19,9 @@ Static Elements are:
   <command name="select" target="css=.search-result-options .items-per-page select" value="label=@{ItemsPerPage}">
     <comment>Select the desired amount of items per page.</comment>
   </command>
+  <command name="pause" value="500">
+    <comment>We have to give JQuery a moment to do its magic.</comment>
+  </command>
   <command name="waitForText" target="css=.pagination .results-hits" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
   <command name="storeText" target="css=.results-hits" value="PaginationText"/>
   <command name="storeText" target="css= .current-page" value="CurrentPage"/>
