@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the address information that was added on the previous shipping page.</description>
   <parameter name="Name"/>
@@ -7,7 +7,7 @@
   <parameter name="StateShort"/>
   <parameter name="ZipCode"/>
   <parameter name="Country"/>
-  <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3" value="*Shipping Address"/>
+  <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3" value="regexpi:.*Shipping Address"/>
   <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/div/div[1]" value="@{Name}">
     <comment>Validate Address Name</comment>
   </command>

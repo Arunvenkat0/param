@@ -61,7 +61,7 @@ The steps in detail:
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="glob:Select or Enter a Shipping Address*"/>
+  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
@@ -263,7 +263,7 @@ The steps in detail:
   <command name="clickAndWait" target="css=.user-account"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="ClickOnCheckOrderStatus"/>
-  <command name="clickAndWait" target="link=Check Order"/>
+  <command name="clickAndWait" target="link=regexpi:Check Order"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="SearchForOrder"/>
   <command name="type" target="id=dwfrm_ordertrack_orderNumber" value="${OrderNumber}"/>

@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Some products offer to change there color (swatches):
-- hover -&gt; change of color -&gt; mouseOut -&gt; initial color
-- click -&gt; permanent change
+- hover -> change of color -> mouseOut -> initial color
+- click -> permanent change
 - permanently changed colors appear in details and quickview</description>
   <parameter name="SubCategoryName"/>
+  <command name="pause" value="500">
+    <comment>Give JQuery a moment.</comment>
+  </command>
   <command name="storeEval" target="document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0].getAttribute('title').split(&quot;,&quot;,1)" value="ProductName"/>
-  <command name="storeEval" target=" document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
+  <command name="storeEval" target="document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
   <command name="storeEval" target="document.getElementsByClassName('swatch')[1].getAttribute('title')" value="AvailableColor2"/>
   <action name="CheckAvailableColors"/>
   <module name="modules.catalog.CheckAvailableColorsOnCategoryPage"/>

@@ -16,7 +16,7 @@
   <parameter name="Country"/>
   <parameter name="ShippingMethod"/>
   <parameter name="ShippingStatus"/>
-  <command name="assertText" target="css=.order-shipment-table th:nth-child(4)" value="Shipping To"/>
+  <command name="assertText" target="css=.order-shipment-table th:nth-child(4)" value="regexpi:Shipping To"/>
   <command name="assertText" target="css=.order-shipment-address .firstname" value="@{FirstName}"/>
   <command name="assertText" target="css=.order-shipment-address .lastname" value="@{LastName}"/>
   <command name="assertText" target="css=.order-shipment-address .street" value="@{Address}"/>
