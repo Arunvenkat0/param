@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Performs the following steps:
 - search for a product
@@ -6,10 +6,7 @@
 - register new user
 - validate product data on the wishlist
 - send this wishlist to a friend</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for first product</comment>
@@ -28,7 +25,7 @@
   </module>
   <action name="SendWishlistToFriend"/>
   <command name="click" target="id=send-to-friend"/>
-  <command name="waitForText" target="id=ui-dialog-title-send-to-friend-dialog" value="Send to a Friend"/>
+  <command name="waitForText" target="id=ui-dialog-title-send-to-friend-dialog" value="regexpi:Send to a Friend"/>
   <command name="assertValue" target="id=dwfrm_sendtofriend_yourname" value="${UserFirstName} ${UserLastName}"/>
   <command name="assertValue" target="id=dwfrm_sendtofriend_youremail" value="${Email}"/>
   <action name="EnterFormData"/>

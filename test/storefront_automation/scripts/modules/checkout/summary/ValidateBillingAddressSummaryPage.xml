@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the billing information summary page:
 - Name
@@ -11,7 +11,7 @@
   <parameter name="StateShort"/>
   <parameter name="ZipCode"/>
   <parameter name="Country"/>
-  <command name="assertText" target="css=.item-list th:nth-child(2)" value="Billing Address"/>
+  <command name="assertText" target="css=.item-list th:nth-child(2)" value="regexpi:Billing Address"/>
   <command name="assertText" target="css=.order-billing .mini-address-name" value="@{Name}"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="glob:@{Address}*"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{City}*"/>

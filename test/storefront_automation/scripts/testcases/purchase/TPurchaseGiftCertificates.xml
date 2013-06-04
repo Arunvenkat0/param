@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>ordering giftcertificates checkout</tags>
   <description>Purchases gift certificates:
@@ -10,13 +10,9 @@
 - deletes the address
 - deletes credit card
 - logoff</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="GoToGiftCertificates"/>
-  <command name="waitForElementPresent" target="link=Gift Certificates"/>
-  <command name="clickAndWait" target="link=Gift Certificates"/>
+  <command name="clickAndWait" target="link=regexpi:Gift Certificates"/>
   <action name="CheckCertificateForm"/>
   <module name="modules.giftcertificate.ValidateFormForGiftCertificates">
     <comment>The Gift Certificates form needs to be checked for functionality</comment>
@@ -113,7 +109,7 @@
     <parameter name="Expire_Year" value="${CreditCardExpiryYear}"/>
   </module>
   <module name="modules.giftcertificate.ValidateTotalPricesOnSummaryPage">
-    <parameter name="Amount" value="$$${Amount}.00"/>
+    <parameter name="Amount" value="${Amount}.00"/>
   </module>
   <module name="modules.giftcertificate.ValidateGiftCertificateDataOnSummaryPage">
     <parameter name="Donor" value="${Donor}"/>
