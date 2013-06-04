@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Adds a credit card to the Payment Settings</description>
   <parameter name="Name"/>
@@ -7,6 +7,9 @@
   <parameter name="ExpireDateMonth"/>
   <parameter name="ExpireDateYear"/>
   <action name="ClickLinkToAddCreditCard"/>
+  <command name="pause" value="500">
+    <comment>Wait a moment to allow JQuery to finish the DOM tree enrichment. If not, it won't open a dialog popup but follow the link.</comment>
+  </command>
   <command name="waitForElementPresent" target="link=Add a Credit Card"/>
   <command name="click" target="link=Add a Credit Card"/>
   <command name="waitForText" target="css=#dialog-container h1" value="Add a Credit Card"/>

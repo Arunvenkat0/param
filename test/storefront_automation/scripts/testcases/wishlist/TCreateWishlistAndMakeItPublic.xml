@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Tests the public wishlist feature.
 - search for a product
@@ -7,10 +7,7 @@
 - make the wishlist public
 - log out 
 - search for the public wishlist</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for first product</comment>
@@ -44,7 +41,7 @@
   <action name="GoToHome"/>
   <module name="modules.staticelements.Return2Home"/>
   <action name="OpenWishlistPage"/>
-  <command name="clickAndWait" target="link=Wish List"/>
+  <command name="clickAndWait" target="link=regexpi:Wish List"/>
   <module name="modules.usermanagement.ValidateWishlistLoginPageStructure"/>
   <action name="FindAWishlist"/>
   <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
