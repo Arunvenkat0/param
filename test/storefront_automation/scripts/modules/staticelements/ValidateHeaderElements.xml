@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the presence of all header elements.</description>
   <command name="assertElementPresent" target="xpath=id('header')/header/h1/a/img">
@@ -7,12 +7,12 @@
   <command name="assertText" target="xpath=id('header')/header/h1/a/span" value="${shopName}"/>
   <command name="assertElementPresent" target="id=mini-cart"/>
   <command name="assertElementPresent" target="css=.menu-utility-user"/>
-  <command name="assertText" target="css=.user-login" value="Login"/>
-  <command name="assertText" target="css=.user-register" value="Register"/>
-  <command name="assertText" target="css=.mini-cart-label" value="Cart"/>
+  <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
+  <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
+  <command name="assertText" target="css=.mini-cart-label" value="regexpi:Cart"/>
   <command name="assertElementPresent" target="css=.mini-cart-empty"/>
-  <command name="assertText" target="css=.menu-utility li:nth-child(1)" value="Wish List"/>
-  <command name="assertText" target="css=.menu-utility li:nth-child(2)" value="Gift Registry"/>
-  <command name="assertText" target="css=.menu-utility li:nth-child(3)" value="Store Locator"/>
-  <command name="assertText" target="css=.menu-utility li:nth-child(4)" value="Help"/>
+  <command name="assertText" target="css=.menu-utility li:nth-child(1)" value="regexpi:Wish List"/>
+  <command name="assertText" target="css=.menu-utility li:nth-child(2)" value="regexpi:Gift Registry"/>
+  <command name="assertText" target="css=.menu-utility li:nth-child(3)" value="regexpi:Store Locator"/>
+  <command name="assertText" target="css=.menu-utility li:nth-child(4)" value="regexpi:Help"/>
 </scriptmodule>

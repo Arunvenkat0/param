@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <ProductID>garmin--gpsmap-696</ProductID>
   <ProductName>Garmin GPSMAP® 696 Portable GPS Unit</ProductName>
@@ -38,6 +38,6 @@
   <CreditCardExpiryMonthName>April</CreditCardExpiryMonthName>
   <CreditCardExpiryMonthShort>Apr</CreditCardExpiryMonthShort>
   <CreditCardExpiryMonthNumber>04</CreditCardExpiryMonthNumber>
-  <CreditCardExpiryYear>2013</CreditCardExpiryYear>
+  <CreditCardExpiryYear>2016</CreditCardExpiryYear>
   <CreditCardSecurityCode>1234</CreditCardSecurityCode>
 </data>

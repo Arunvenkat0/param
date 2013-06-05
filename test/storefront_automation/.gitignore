@@ -1,2 +1,4 @@
 /classes
-/src
+/results
+/chromedriver.log
+/libpeerconnection.log

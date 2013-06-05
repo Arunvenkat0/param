@@ -45,7 +45,7 @@
 		<mkdir dir="${test.classes.dir}" />
 		<javac srcdir="${test.src.dir}" destdir="${test.classes.dir}" debug="on" optimize="off" deprecation="on">
 			<classpath refid="test.suite.class.path" />
-			<include name="com/xceptance/**/*.java" />
+			<include name="**/*.java" />
 		</javac>
 		<copy todir="${test.classes.dir}">
 			<fileset dir="${test.src.dir}">
@@ -75,29 +75,9 @@
 
 			<!-- execute all configured tests -->
 			<batchtest fork="yes" todir="${test.results.dir}">
-				<fileset dir="${test.src.dir}" includes="${test.cases.java}" excludes="**/regression/**" />
+				<fileset dir="${test.src.dir}" includes="${test.cases.java}" />
 			</batchtest>
 		</junit>
-	</target>
-
-	<!-- 
-        Performs a functional test by running the configured Ruby test cases. 
-    -->
-	<target name="test.ruby" depends="compile">
-		<fileset id="tests" dir="${test.classes.dir}" includes="${test.cases.ruby}" />
-
-		<pathconvert pathsep=" " property="ruby.tests" refid="tests">
-			<map from="${test.classes.dir}${file.separator}" to="" />
-		</pathconvert>
-
-		<condition property="jruby.command" value="jruby.cmd" else="jruby.sh">
-			<os family="windows" />
-		</condition>
-
-		<exec executable="${xlt.bin.dir}/${jruby.command}" dir="${basedir}">
-			<arg line="${ruby.tests}" />
-			<arg value="-X${test.results.dir}" />
-		</exec>
 	</target>
 
 	<!-- 
@@ -145,7 +125,7 @@
 	<!-- 
         Performs all the functional tests and creates a JUnit test report.  
     -->
-	<target name="test" depends="test.java, test.ruby, test.script">
+	<target name="test" depends="test.java, test.script">
 		<!-- 
             Create a test report from the test results. 
         -->

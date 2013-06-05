@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Gift Certificates are dilivered via email. we just have to check the Friends Name</description>
   <parameter name="FriendsName"/>
-  <parameter name="FriendsEmail_Hidden"/>
-  <command name="waitForText" target="css=.mini-shipment" value="Shipping - Delivery Via Email*"/>
+  <command name="waitForText" target="css=.mini-shipment" value="regexpi:Shipping - Delivery Via Email.*"/>
   <command name="waitForText" target="css=.mini-shipment .details div:first-child" value="@{FriendsName}"/>
-  <command name="waitForText" target="css=.mini-shipment .details div:nth-child(2)" value="regexp:\(\s*\**@{FriendsEmail_Hidden}\s*\)"/>
+  <command name="waitForText" target="css=.mini-shipment .details div:nth-child(2)" value="(${FriendsEmail})"/>
 </scriptmodule>

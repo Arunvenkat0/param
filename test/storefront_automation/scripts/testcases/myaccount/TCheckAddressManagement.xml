@@ -1,19 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>account address</tags>
   <description>Account address management: 
-=&gt; adds two addresses 
-=&gt; edits one
-=&gt; deletes both</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}">
-    <comment>Open Homepage</comment>
-  </command>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}">
-    <comment>Open Homepage</comment>
-  </command>
-  <action name="RegisterUser"/>
+=> adds two addresses 
+=> edits one
+=> deletes both</description>
+  <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
@@ -119,6 +111,8 @@
   <module name="modules.adressmanagement.DeleteDefaultAddress"/>
   <action name="ReturnToMain"/>
   <command name="clickAndWait" target="css=.user-account"/>
+  <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

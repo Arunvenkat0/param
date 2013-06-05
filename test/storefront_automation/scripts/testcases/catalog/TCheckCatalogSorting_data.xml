@@ -1,35 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <MainCategoryNumber>4</MainCategoryNumber>
   <MainCategoryName>Electronics</MainCategoryName>
-  <SubCategoryName>Digital Cameras</SubCategoryName>
+  <SubCategoryName>Televisions</SubCategoryName>
   <DefaultSortMethod>Top Sellers</DefaultSortMethod>
   <DefaultItemsPerPage>12</DefaultItemsPerPage>
   <ShownProducts>1 - 12</ShownProducts>
-  <MaxItems>27</MaxItems>
-  <LastPageNumber>3</LastPageNumber>
   <SortMethod1>Best Matches</SortMethod1>
-  <SortMethod1FirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</SortMethod1FirstItem>
-  <SortMethod1LastItem>Nikon F700 Digital SLR Camera (body only)</SortMethod1LastItem>
   <SortMethod2>Price High To Low</SortMethod2>
-  <SortMethod2FirstItem>Sony Alpha 900 Digital SLR Camera (body only)</SortMethod2FirstItem>
-  <SortMethod2LastItem>Nikon Coolpix L16 Digital Point and Shoot Camera</SortMethod2LastItem>
   <SortMethod3>Price Low To High</SortMethod3>
-  <SortMethod3FirstItem>Nikon Coolpix L16 Digital Point and Shoot Camera</SortMethod3FirstItem>
-  <SortMethod3LastItem>Sony Alpha 900 Digital SLR Camera (body only)</SortMethod3LastItem>
   <SortMethod4>Product Name A - Z</SortMethod4>
-  <SortMethod4FirstItem>Canon EOS 50D Digital SLR Camera (body only)</SortMethod4FirstItem>
-  <SortMethod4LastItem>Sony Cyber-shot® W120 Digital Point and Shoot Camera</SortMethod4LastItem>
   <SortMethod5>Product Name Z - A</SortMethod5>
-  <SortMethod5FirstItem>Sony Cyber-shot® W120 Digital Point and Shoot Camera</SortMethod5FirstItem>
-  <SortMethod5LastItem>Canon EOS 50D Digital SLR Camera (body only)</SortMethod5LastItem>
   <SortMethod6>Brand</SortMethod6>
-  <SortMethod6FirstItem>Canon EOS Rebel XS Digital SLR w/18-55mm Lens</SortMethod6FirstItem>
-  <SortMethod6LastItem>Sony Alpha 900 Digital SLR Camera (body only)</SortMethod6LastItem>
   <SortMethod7>Most Popular</SortMethod7>
-  <SortMethod7FirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</SortMethod7FirstItem>
-  <SortMethod7LastItem>Canon EOS Rebel XS Digital SLR w/18-55mm Lens</SortMethod7LastItem>
   <SortMethod8>Top Sellers</SortMethod8>
-  <SortMethod8FirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</SortMethod8FirstItem>
-  <SortMethod8LastItem>Canon EOS Rebel XS Digital SLR w/18-55mm Lens</SortMethod8LastItem>
 </data>

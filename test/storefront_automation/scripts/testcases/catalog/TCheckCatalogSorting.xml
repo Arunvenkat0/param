@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Opens a subcategory page and checks all available sort methods. For each method the correctness of the resuls is checked by validating the first and last search result.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>
@@ -20,81 +17,47 @@
     <parameter name="SortMethod" value="${DefaultSortMethod}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
-    <parameter name="NumberOfPages" value="${LastPageNumber}"/>
   </module>
   <action name="CheckCatalogSorting"/>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod1}"/>
-    <parameter name="FirstItemName" value="${SortMethod1FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod1LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod2}"/>
-    <parameter name="FirstItemName" value="${SortMethod2FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod2LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod3}"/>
-    <parameter name="FirstItemName" value="${SortMethod3FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod3LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod4}"/>
-    <parameter name="FirstItemName" value="${SortMethod4FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod4LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod5}"/>
-    <parameter name="FirstItemName" value="${SortMethod5FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod5LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod6}"/>
-    <parameter name="FirstItemName" value="${SortMethod6FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod6LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod7}"/>
-    <parameter name="FirstItemName" value="${SortMethod7FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod7LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <module name="modules.catalog.CheckSortingFeature">
     <parameter name="SortMethod" value="${SortMethod8}"/>
-    <parameter name="FirstItemName" value="${SortMethod8FirstItem}"/>
-    <parameter name="LastItemName" value="${SortMethod8LastItem}"/>
-    <parameter name="LastPageNumber" value="${LastPageNumber}"/>
     <parameter name="ItemsPerPage" value="${DefaultItemsPerPage}"/>
     <parameter name="ShownProducts" value="${ShownProducts}"/>
-    <parameter name="MaxItems" value="${MaxItems}"/>
   </module>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>

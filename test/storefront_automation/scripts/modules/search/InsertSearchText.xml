@@ -8,6 +8,7 @@
   <command name="type" target="id=q" value="@{SearchText}">
     <comment>Type search phrase into the search entry field</comment>
   </command>
+  <action name="SubmitSearch"/>
   <command name="clickAndWait" target="css=input[value='go']">
     <comment>Start searching using the search button</comment>
   </command>

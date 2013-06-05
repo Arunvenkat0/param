@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>cart</tags>
+  <tags>cart broken</tags>
   <description>Adds two products to the cart and modifies the quantities:
 product1: quantitiy = 1, no discount
 product2: quantitiy = 2, no discount
@@ -9,11 +9,10 @@ product2: quantitiy = 2, no discount
 - checks Quickinfo in header (number of items, total price)
 - checks cart
 
-- modifies the cart (Read, Update, Delete)</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+- modifies the cart (Read, Update, Delete)
+
+This is broken in 13.4. RAP-2396</description>
+  <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${FirstProductID}"/>

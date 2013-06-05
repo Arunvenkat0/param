@@ -17,6 +17,7 @@
     <comment>Validate payment method page elements</comment>
   </command>
   <command name="assertElementPresent" target="id=is-BML"/>
+  <action name="SelectAnotherPaymentMethod"/>
   <command name="check" target="id=is-BML">
     <comment>Select BML as Payment Option</comment>
   </command>
