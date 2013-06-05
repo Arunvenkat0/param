@@ -8,27 +8,21 @@ Approach:
 - First Product (check only navigation next exists)
 - Second Product (check next and previous nav exists)
 - Back to product list and navigate to last product (check no next but previous)</description>
-  <parameter name="FirstProductName"/>
-  <parameter name="SecondProductName"/>
-  <parameter name="LastProductName"/>
   <parameter name="SubCategoryName"/>
-  <module name="modules.catalog.CheckNavigationOnFirstProductPage">
-    <parameter name="FirstProductName" value="@{FirstProductName}"/>
-    <parameter name="NextProductName" value="@{SecondProductName}"/>
-  </module>
+  <module name="modules.catalog.CheckNavigationOnFirstProductPage"/>
   <module name="modules.catalog.CheckNavigationOnMiddleProductPage">
     <parameter name="NavigateToProduct" value="previous"/>
-    <parameter name="ProductName" value="@{FirstProductName}"/>
   </module>
+  <action name="ClickSubcategoryInBreadcrumb"/>
   <command name="clickAndWait" target="link=@{SubCategoryName}">
     <comment>Open subcategory again - first page.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-last"/>
+  <action name="OpenLastPage"/>
   <command name="click" target="css=.page-last">
     <comment>Click last page link.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-first"/>
-  <module name="modules.catalog.CheckNavigationOnLastProductPage">
-    <parameter name="LastProductName" value="@{LastProductName}"/>
-  </module>
+  <command name="storeEval" target="document.getElementsByClassName('product-name').item(document.getElementsByClassName('product-name').length-1).textContent.trim()" value="LastProductName"/>
+  <module name="modules.catalog.CheckNavigationOnLastProductPage"/>
 </scriptmodule>

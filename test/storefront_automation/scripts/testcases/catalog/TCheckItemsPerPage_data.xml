@@ -1,21 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <MainCategoryNumber>4</MainCategoryNumber>
   <MainCategoryName>Electronics</MainCategoryName>
   <SubCategoryName>Digital Cameras</SubCategoryName>
-  <CatalogMaxItems>27</CatalogMaxItems>
   <DefaultItemsPerPage>12</DefaultItemsPerPage>
   <ItemsPerPageOption1>12</ItemsPerPageOption1>
-  <ItemsPerPageOption1FirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</ItemsPerPageOption1FirstItem>
-  <ItemsPerPageOption1LastItem>Kodak EasyShare C1013 Digital Point and Shoot Camera</ItemsPerPageOption1LastItem>
-  <ItemsPerPageOption1LastPageNumber>3</ItemsPerPageOption1LastPageNumber>
-  <ItemsPerPageOption1LastPageItemNumber>25</ItemsPerPageOption1LastPageItemNumber>
   <ItemsPerPageOption2>24</ItemsPerPageOption2>
-  <ItemsPerPageOption2FirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</ItemsPerPageOption2FirstItem>
-  <ItemsPerPageOption2LastItem>Kodak EasyShare V1273 Digital Point and Shoot Camera</ItemsPerPageOption2LastItem>
-  <ItemsPerPageOption2LastPageNumber>2</ItemsPerPageOption2LastPageNumber>
-  <ItemsPerPageOption2LastPageItemNumber>25</ItemsPerPageOption2LastPageItemNumber>
-  <ItemsPerPageOptionViewAllFirstItem>Sony Cyber-shot® T77 Digital Point and Shoot Camera</ItemsPerPageOptionViewAllFirstItem>
-  <ItemsPerPageOptionViewAllLastItem>Canon EOS Rebel XS Digital SLR w/18-55mm Lens</ItemsPerPageOptionViewAllLastItem>
   <DefaultCatalogSortMethod>Top Sellers</DefaultCatalogSortMethod>
 </data>

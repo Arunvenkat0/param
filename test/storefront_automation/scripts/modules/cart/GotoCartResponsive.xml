@@ -4,6 +4,7 @@
   <command name="waitForElementPresent" target="css=.mini-cart-link">
     <comment>Wait for the cart link.</comment>
   </command>
+  <action name="GoToCart"/>
   <command name="clickAndWait" target="css=.mini-cart-link">
     <comment>Click the cart link.</comment>
   </command>

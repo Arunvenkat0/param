@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Purchases a product as registered user and checks the order review feature.
 The steps in detail:
@@ -11,11 +11,7 @@ The steps in detail:
 - logout
 - use the check-order-feature as guest
 - validate details of the placed order</description>
-  <action name="OpenPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
-  <action name="RegisterUser"/>
+  <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
@@ -65,7 +61,7 @@ The steps in detail:
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="glob:Select or Enter a Shipping Address*"/>
+  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
@@ -267,11 +263,12 @@ The steps in detail:
   <command name="clickAndWait" target="css=.user-account"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="ClickOnCheckOrderStatus"/>
-  <command name="clickAndWait" target="link=Check Order"/>
+  <command name="clickAndWait" target="link=regexpi:Check Order"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="SearchForOrder"/>
   <command name="type" target="id=dwfrm_ordertrack_orderNumber" value="${OrderNumber}"/>
   <command name="type" target="id=dwfrm_ordertrack_postalCode" value="${BillingAddressZipCode}"/>
+  <action name="SubmitOrderSearchAndValidate"/>
   <command name="clickAndWait" target="css=#dwfrm_ordertrack button[name='dwfrm_ordertrack_findorder']"/>
   <command name="assertText" target="css=.breadcrumb-last" value="${OrderNumber}"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">

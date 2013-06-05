@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Uses an already saved billing address while placing an order</description>
-  <parameter name="AddressName"/>
-  <command name="select" target="id=dwfrm_billing_addressList" value="label=(@{AddressName})*">
-    <comment>Select Address Name</comment>
-  </command>
-  <command name="waitForSelectedLabel" target="id=dwfrm_billing_addressList" value="(@{AddressName})*"/>
-</scriptmodule>

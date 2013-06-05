@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies"/>
-  <command name="open" value="${shopURL}"/>
+  <tags>broken</tags>
+  <description>Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.
+
+This is broken in 13.4. RAP-2406</description>
+  <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>
@@ -17,11 +17,9 @@
   </module>
   <action name="CheckColorSwatch"/>
   <module name="modules.catalog.CheckCatalogSwatchFeature">
-    <parameter name="ProductName" value="${SwatchProductName}"/>
-    <parameter name="DefaultColor" value="${SwatchDefaultColor}"/>
-    <parameter name="AvailableColor2" value="${SwatchAvailableColor2}"/>
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
+  <action name="ClickCategoryInBreadcrumb"/>
   <command name="clickAndWait" target="link=${SubCategoryName}"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>

@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <MainCategoryNumber>2</MainCategoryNumber>
   <MainCategoryName>Womens</MainCategoryName>
   <SubCategoryName>Clothing</SubCategoryName>
-  <ProductName>Scoop Neck Tee With Applique</ProductName>
-  <ImageNumber1>PG.10236198.JJGG3XX.PZ.jpg</ImageNumber1>
-  <ImageNumber2>PG.10236198.JJGG3XX.BZ.jpg</ImageNumber2>
 </data>

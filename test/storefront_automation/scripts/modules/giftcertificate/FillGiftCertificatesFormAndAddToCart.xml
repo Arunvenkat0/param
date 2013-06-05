@@ -13,5 +13,6 @@
   <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
   <command name="type" target="id=dwfrm_giftcert_purchase_message" value="@{Message}"/>
   <command name="type" target="id=dwfrm_giftcert_purchase_amount" value="@{Amount}"/>
+  <action name="Add2Basket"/>
   <command name="click" target="id=AddToBasketButton"/>
 </scriptmodule>
