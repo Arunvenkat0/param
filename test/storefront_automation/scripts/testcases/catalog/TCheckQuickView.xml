@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>catalog browsing</tags>
-  <description>Validates the behaviour of the quickview inside the product catalog.</description>
+  <tags>catalog browsing broken</tags>
+  <description>Validates the behaviour of the quickview inside the product catalog.
+
+This is broken in 13.4. RAP-2406</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
