@@ -264,7 +264,7 @@
 
 		<iscomment>render a link to the palette and hide the actual palette if there are more than five colors contained</iscomment>
 		<isif condition="${selectableColors.size() > 5}">
-			<a class="product-swatches-all">${Resource.msg('productresultarea.viewallcolors','search',null)}</a> (<isprint value="${selectableColors.size()}"/>)
+			<div class="product-swatches-all">${Resource.msg('productresultarea.viewallcolors','search',null)} (<isprint value="${selectableColors.size()}"/>)</div>
 		</isif>
 
 		<iscomment>render the palette, the first swatch is always preselected</iscomment>
