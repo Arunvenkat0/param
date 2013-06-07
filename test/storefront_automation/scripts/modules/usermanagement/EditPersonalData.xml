@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Changes Name, Password and Phone</description>
   <parameter name="First_Name"/>
@@ -17,5 +17,5 @@
     <parameter name="PasswordCorrect" value="@{Password}"/>
   </module>
   <action name="SubmitRegistration"/>
-  <command name="submitAndWait" target="id=RegistrationForm"/>
+  <command name="submitAndWait" disabled="true" target="id=RegistrationForm"/>
 </scriptmodule>
