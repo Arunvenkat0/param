@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>account</tags>
   <description>Personal data account management. Creates a new user and changes the following information afterwards:
 
 - FirstName
 - LastName
 - Email
-- Password
+
 
 The user is logged out and loggid in again to proof the changes have been stored correctly. All changes are reverted to the initial state.
 
 During the testcase email and password information are generated dynamically.
 
-Disabled because it fails in 13.3</description>
+Disabled because it fails in 13.3 at line 136 > wrong breadcrumb RAP-2412</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -20,12 +20,12 @@ Disabled because it fails in 13.3</description>
   </module>
   <action name="ChangePersonalData"/>
   <command name="store" target="${RANDOM.String(6)}@varmail.de" value="ChangedEmail"/>
-  <command name="store" target="${RANDOM.String(9)}" value="ChangedPassword"/>
+  <command name="store" disabled="true" target="${RANDOM.String(9)}" value="ChangedPassword"/>
   <module name="modules.usermanagement.EditPersonalData">
     <parameter name="First_Name" value="${ChangedFirstName}"/>
     <parameter name="Last_Name" value="${ChangedLastName}"/>
     <parameter name="Email" value="${ChangedEmail}"/>
-    <parameter name="Password" value="${ChangedPassword}"/>
+    <parameter name="Password" value="${Password}"/>
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
@@ -34,7 +34,7 @@ Disabled because it fails in 13.3</description>
   </action>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${ChangedEmail}"/>
-    <parameter name="Password" value="${ChangedPassword}"/>
+    <parameter name="Password" value="${Password}"/>
   </module>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${ChangedFirstName}"/>
