@@ -379,7 +379,7 @@ h4. Preconditions
 h4. Description
 
 p. Purchases a product as registered user and checks the order review feature.
-p. The steps in detail:
+The steps in detail:
 
 # register a new user
 # enter a credit card
@@ -634,7 +634,7 @@ h4. Preconditions
 h4. Description
 
 p. Validates the multi-shipping checkout.
-p. The testcase in detail runs as follows:
+The testcase in detail runs as follows:
 
 # create new user with addresses and credit card
 # add product with quantity 2 to cart
