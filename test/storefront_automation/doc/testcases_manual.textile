@@ -1367,7 +1367,7 @@ p. *The advantage of this:* You are able to add new paragraphs or simply add som
 
 p. Now you can run the ant script (@create_doc.xml@) in the doc folder via the context menu of the ant file. _Eclipse_ will generate the new HTML file considering its CSS and Java Script files (folder @css@ and @js@) to integrate the design of _Xceptance_.
 
-bq(information). You also can create your own textile files. The ant script transforms all textile files in the doc folder to HTML files.
+bq(information). You also can create your own textile files. The ant script transforms all textile files in the doc folder to HTML files. Just update the textile file in a editor, save it and enter the command @ant -f create_doc.xml@ into your command line.
 
 </div>
 </div>
