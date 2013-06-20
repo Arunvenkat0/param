@@ -146,7 +146,7 @@
 												</isif>
 												<li class="${swatchClass}">
 													<a href="${linkURL+qsAppend}"
-													   title="${displayValue}"
+													   title="${selectable ? displayValue : Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}"
 													   class="swatchanchor"
 													   <isif condition="${!empty(swImage)}">style="background: url(${swImage.getURL()}) repeat-y;"</isif>										   
 													   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'>										   
@@ -179,13 +179,13 @@
 													<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 													<isset name="linkURL" value="${PVM.urlUnselectVariationValue('Product-Variation', VA)}" scope="page"/>
 												</isif>																		
-												<li class="${swatchClass}">																						
+												<li class="${swatchClass}">																														 																					
 													<isif condition="${selectable}">
 														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
 															<isprint value="${displayValue}"/>
 														</a>
 													<iselse>
-														<a title="${displayValue}" class="swatchanchor">
+														<a title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
 														</a>
 													</isif>									
