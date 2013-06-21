@@ -89,8 +89,11 @@
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
 	
 	   		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off"/>
-		    
+		    <isif condition="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn.error == null}">
 		    <div class="form-field-tooltip cvn-tip">
+		    <iselse>
+		    <div class="form-field-tooltip cvn-tip-error">
+		    </isif>
 		    	(<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
 		    		${Resource.msg('billing.linkcvn','checkout',null)}
 		    		<div class="tooltip-content" data-layout="small tooltip-cvn">
