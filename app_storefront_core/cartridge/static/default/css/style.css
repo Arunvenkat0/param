@@ -717,6 +717,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .payment-method{clear:both;display:none;}
 .payment-method-expanded{display:block;}
 .cvn-tip{float:left;margin:-38px 0 0 40%;width:auto;}
+.cvn-tip-error{float:left;margin:-78px 0 0 40%;width:auto;}
 .month,.year,.day{clear:none;float:left;margin:0 0 2% 2%;}
 .month select,.year select,.day select{margin:0;width:auto;}
 .month .form-caption{margin-left:0;}
