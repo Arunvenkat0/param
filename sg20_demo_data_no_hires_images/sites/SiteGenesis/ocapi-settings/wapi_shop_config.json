@@ -1,5 +1,5 @@
 {
-  "_v":"13.3",
+  "_v":"13.4",
   "clients":
   [ 
     {
@@ -229,7 +229,19 @@
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
-        }
+        },
+        {
+          "resource_id":"/stores",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)",
+          "cache_time":900
+        },
+        {
+          "resource_id":"/stores/{id}",
+          "read_attributes":"(**)",
+          "write_attributes":"(**)",
+          "cache_time":900
+        }        
       ]
     }
   ]
