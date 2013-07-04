@@ -5,7 +5,7 @@
 			<ul id="horizontal-carousel">
 			<isloop items="${pdict.LastVisitedProducts}" var="product" begin="0" end="2">
 				<li>
-					<isproducttile product="${product}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
+					<isproducttile product="${product}" showswatches="${false}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
 				</li>
 			</isloop>
 			</ul>
