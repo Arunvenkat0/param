@@ -2,7 +2,7 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 	<list formid="items">
 		<field formid="public" label="forms.wishlist.makepublic"  type="boolean" binding="public" />
-		<field formid="quantity" label="forms.wishlist.quantitydesired"  type="integer" mandatory="true" 
+		<field formid="quantity" label="forms.wishlist.quantitydesired"  type="integer" 
 			binding="quantityValue"
 			min-length="1"
 			max-length="5"
