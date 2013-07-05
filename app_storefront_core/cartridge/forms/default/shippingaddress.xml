@@ -6,7 +6,7 @@
 	<field formid="address1" label="forms.address1" type="string" mandatory="true" binding="address1" max-length="50" missing-error="forms.addresserror" range-error="forms.address.field.invalid" />
 	<field formid="address2" label="forms.address2" type="string" mandatory="false" binding="address2" max-length="50" range-error="forms.address.field.invalid" />
 	<field formid="city" label="forms.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50" missing-error="forms.address.city.missing" range-error="forms.address.field.invalid" />
-	<field formid="zip" label="forms.zippostalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="^(\d{5})(-\d{4})?$" binding="postalCode" missing-error="forms.errorzip" range-error="forms.address.field.invalid" parse-error="forms.address.field.invalid" />
+	<field formid="zip" label="forms.zippostalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$)" binding="postalCode" missing-error="forms.errorzip" range-error="forms.address.field.invalid" parse-error="forms.address.field.invalid" />
 
 	<!-- use set of supported shipping countries -->
 	<field formid="country" label="forms.country" type="string" mandatory="true" binding="countryCode" missing-error="forms.address.country.missing" value-error="forms.address.field.invalid">

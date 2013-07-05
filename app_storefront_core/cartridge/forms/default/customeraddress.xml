@@ -18,7 +18,7 @@
 	<!-- use global state list -->
 	<include formid="states" name="states"/>
 
-	<field formid="zip" label="forms.zippostalcode" type="string" mandatory="true" min-length="5" max-length="10" binding="postalCode"
+	<field formid="zip" label="forms.zippostalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$)" binding="postalCode"
 		missing-error="forms.errorzip"/>
 		
 	<field formid="country" label="forms.country" type="string" mandatory="true" binding="countryCode"
