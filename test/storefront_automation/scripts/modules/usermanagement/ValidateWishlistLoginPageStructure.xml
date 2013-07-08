@@ -2,7 +2,7 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <command name="assertText" target="xpath=id('primary')/h1" value="My Account Login"/>
   <command name="assertText" target="css=.breadcrumb-last" value="Wish List"/>
-  <command name="assertText" target="css=.login-account h2" value="regexpi:Returning Customers"/>
+  <command name="assertText" target="css=.login-account h2" value="regexpi:Returning Customers • required"/>
   <command name="assertText" target="css=.login-create-account h2" value="regexpi:Create a Wish List"/>
   <command name="assertText" target="css=.login-general h2" value="regexpi:Find Someone's Wish List"/>
 </scriptmodule>
