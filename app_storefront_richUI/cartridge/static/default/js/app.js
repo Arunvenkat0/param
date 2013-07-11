@@ -889,7 +889,11 @@ var app = (function (app, $) {
 			if (addThisLinks.length===0) { return; }
 
 			addThisToolbox.html(addThisLinks);
-			addthis.toolbox(".addthis_toolbox");
+			try{
+				addthis.toolbox(".addthis_toolbox");
+			} catch(e) {
+				return;
+			}
 		},
 		/**
 		 * @function
