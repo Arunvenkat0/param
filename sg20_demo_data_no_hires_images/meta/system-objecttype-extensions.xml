@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
     <type-extension type-id="Basket">
         <system-attribute-definitions>
@@ -3576,41 +3576,7 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="addThisConnectEnabled">
-                <display-name xml:lang="x-default">AddThis Connect Enabled</display-name>
-                <description xml:lang="x-default">The check box used to determine if the AddThis Widget should be visible in the storefront.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisDomready">
-                <display-name xml:lang="x-default">AddThis DomReady</display-name>
-                <description xml:lang="x-default">If defined, the AddThis script will assume it's been added to the page after the DOM is ready. Useful when dynamically adding AddThis to a page after the latter has finished loading.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisPubID">
-                <display-name xml:lang="x-default">AddThis PubID</display-name>
-                <description xml:lang="x-default">The application ID that will be used with AddThis Connect.</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>xa-4ea5d98601c1dc84</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisVersion">
-                <display-name xml:lang="x-default">AddThis Version</display-name>
-                <description xml:lang="x-default">Version of addThis</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>250</default-value>
-            </attribute-definition>
-			<attribute-definition attribute-id="buildNotificationEmailList">
+            <attribute-definition attribute-id="buildNotificationEmailList">
                 <display-name xml:lang="x-default">Build Notification Email List</display-name>
                 <description xml:lang="x-default">Semi colon separated list</description>
                 <type>string</type>
@@ -3668,39 +3634,14 @@
                 <min-length>0</min-length>
                 <field-length>0</field-length>
                 <default-value>Account-Connect</default-value>
-            </attribute-definition>     
-            <attribute-definition attribute-id="addThisConnectEnabled">
-                <display-name xml:lang="x-default">AddThis Connect Enabled</display-name>
-                <description xml:lang="x-default">The check box used to determine if the AddThis Widget should be visible in the storefront.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-            </attribute-definition>
-			<attribute-definition attribute-id="addThisPubID">
-                <display-name xml:lang="x-default">AddThis PubID</display-name>
-                <description xml:lang="x-default">The application ID that will be used with AddThis Connect.</description>
+            </attribute-definition>            
+            <attribute-definition attribute-id="listPriceDefault">
+                <display-name xml:lang="x-default">Default List Price Book ID</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>xa-4ea5d98601c1dc84</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisVersion">
-                <display-name xml:lang="x-default">AddThis Version</display-name>
-                <description xml:lang="x-default">Version of addThis</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>250</default-value>
-            </attribute-definition>     			
-            <attribute-definition attribute-id="addThisDomready">
-                <display-name xml:lang="x-default">Domready</display-name>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>usd-list-prices</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="slideshoweffect">
                 <display-name xml:lang="x-default">Slide Slow effect</display-name>
@@ -3835,10 +3776,6 @@
                 <attribute attribute-id="facebookConnectEnabled"/>
                 <attribute attribute-id="facebookURI"/>
                 <attribute attribute-id="facebookAppID"/>
-                <attribute attribute-id="addThisConnectEnabled"/>
-                <attribute attribute-id="addThisVersion"/>
-                <attribute attribute-id="addThisPubID"/>
-                <attribute attribute-id="addThisDomready"/>
                 <attribute attribute-id="enableInfiniteScroll"/>
                 <attribute attribute-id="enableMultiShipping"/>
             </attribute-group>
