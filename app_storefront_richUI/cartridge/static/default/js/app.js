@@ -1058,7 +1058,9 @@ var app = (function (app, $) {
 		var item = $cache.compareContainer.find(".compare-item").not(".active").first();
 		var tile = $("#"+data.uuid);
 		if (item.length===0) { 
-			tile.find(".compare-check")[0].checked = false;
+			if(tile.length > 0) {
+				tile.find(".compare-check")[0].checked = false;
+			}
 			window.alert(app.resources.COMPARE_ADD_FAIL)
 			return;
 		} // safety only
@@ -1079,7 +1081,6 @@ var app = (function (app, $) {
 		// refresh container state
 		refreshContainer();
 
-		var tile = $("#"+data.uuid);
 		if (tile.length===0) { return; }
 
 		// ensure that the associated checkbox is checked
