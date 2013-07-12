@@ -1056,7 +1056,12 @@ var app = (function (app, $) {
 	function addToList(data) {
 		// get the first compare-item not currently active
 		var item = $cache.compareContainer.find(".compare-item").not(".active").first();
-		if (item.length===0) { return; } // safety only
+		var tile = $("#"+data.uuid);
+		if (item.length===0) { 
+			tile.find(".compare-check")[0].checked = false;
+			window.alert(app.resources.COMPARE_ADD_FAIL)
+			return;
+		} // safety only
 
 		// if already added somehow, return
 		if ($("#"+CI_PREFIX+data.uuid).length > 0) {
@@ -1228,7 +1233,7 @@ var app = (function (app, $) {
 				callback : function (response) {
 					if (!response || !response.success) {
 						// response failed. uncheck the checkbox return
-						cb.checked = false;
+						cb[0].checked = false;
 						window.alert(app.resources.COMPARE_ADD_FAIL);
 						return;
 					}
@@ -1248,7 +1253,6 @@ var app = (function (app, $) {
 			app.ajax.getJson({
 				url : app.urls.compareRemove,
 				data : { 'pid' : args.itemid, 'category' : _currentCategory },
-				async: args.async,
 				callback : function (response) {
 					if (!response || !response.success) {
 						// response failed. uncheck the checkbox return
@@ -1539,7 +1543,8 @@ var app = (function (app, $) {
 			func({
 				itemid : tile.data("itemid"),
 				uuid : tile[0].id,
-				img : itemImg
+				img : itemImg,
+				cb : cb
 			});
 
 		});
