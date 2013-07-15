@@ -166,6 +166,7 @@ td.item-dashboard .option-quantity-purchased span.exceeded {color:#ff0000}
 #tooltip .small{width:300px;}
 #tooltip .medium{width:500px;}
 #tooltip .recommendation-tooltip-header{background:none repeat scroll 0 0 #CCCCCC;font-size:1.2em;font-weight:bold;padding:10px;}
+#tooltip .recommendation-tooltip-header .product-price .price-standard{color:#999999;text-decoration:line-through;}
 #tooltip .recommendation-tooltip-description{padding:10px;}
 #tooltip .recommendation-tooltip-attributes{padding:10px;}
 
