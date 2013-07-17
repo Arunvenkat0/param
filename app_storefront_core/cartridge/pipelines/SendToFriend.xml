@@ -156,60 +156,39 @@
         <join-node/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="CurrentCustomer.authenticated" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
-                <key-binding alias="CurrentCustomer.profile.firstName + &quot; &quot; + CurrentCustomer.profile.lastName" key="From_0"/>
-                <key-binding alias="CurrentForms.sendtofriend.yourname.htmlValue" key="To_0"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
-                <key-binding alias="null" key="From_5"/>
-                <key-binding alias="null" key="To_5"/>
-                <key-binding alias="null" key="From_6"/>
-                <key-binding alias="null" key="To_6"/>
-                <key-binding alias="null" key="From_7"/>
-                <key-binding alias="null" key="To_7"/>
-                <key-binding alias="null" key="From_8"/>
-                <key-binding alias="null" key="To_8"/>
-                <key-binding alias="null" key="From_9"/>
-                <key-binding alias="null" key="To_9"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-            </node>
-            <transition target-connector="in1" target-path="../+2"/>
-          </segment>
-        </branch>
-      </node>
-      <transition target-connector="in2" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="1" y="0"/>
-      </node>
-      <transition target-connector="in1" target-path="./+1">
+      <simple-transition>
         <transition-display>
-          <bend-point relative-to="target" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
         </transition-display>
-      </transition>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="CurrentCustomer.profile.firstName + &quot; &quot; + CurrentCustomer.profile.lastName" key="From_0"/>
+          <key-binding alias="CurrentForms.sendtofriend.yourname.htmlValue" key="To_0"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="2"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="-1" y="2"/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -638,7 +617,11 @@
         <join-node/>
         <node-display x="0" y="-6"/>
       </node>
-      <transition target-connector="in1" target-path="./-8"/>
+      <transition target-connector="in1" target-path="./-7">
+        <transition-display>
+          <bend-point relative-to="target" x="4" y="0"/>
+        </transition-display>
+      </transition>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_3">
