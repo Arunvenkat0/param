@@ -229,13 +229,13 @@
 					while (pIt.hasNext()) {
 						productId = pIt.next();									
 						if (productId == Product.ID) {
-							checkedStr = 'checked=true';
+							checkedStr = 'checked="checked"';
 							break;
 						}
 					}
 				}		    				
    			</isscript>			
-			<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" ${checkedStr}/>				
+			<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>				
 			<label for="${'cc-'+Product.UUID}">Compare</label>				
 		</isif>
 	</div>
