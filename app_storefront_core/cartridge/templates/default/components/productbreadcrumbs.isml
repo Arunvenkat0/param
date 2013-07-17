@@ -19,6 +19,17 @@
 			category = pdict.ProductSearchResult.category;
 		}
 		
+		// get category from parameters
+		if( category == null && pdict.CurrentHttpParameterMap.cgid != null) 
+		{
+			category = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
+			// check if category is assigned to product
+			if(category != null && !pdict.Product.isAssignedToCategory(category) && !pdict.Product.variationModel.master.isAssignedToCategory(category) ) 
+			{
+				category = null;
+			}	
+		}
+		
 		if( category == null )
 		{
 			// get category from products primary category
@@ -27,11 +38,11 @@
 			// get category from product master if not set at variant
 			if( category == null && pdict.Product.variant )
 			{
-				category = pdict.Product.masterProduct.primaryCategory;
+				category = pdict.Product.variationModel.master.primaryCategory;
 			}
 		}
 	</isscript>
-
+	
    	<iscomment>if we have any category context, we show it</iscomment>
   	<isif condition="${category != null && category.online}">
 
