@@ -1777,10 +1777,33 @@
 				<td>Last name of the new user.</td>
 			</tr>
 		</table>
-		<h3 id="TCheckSearchFeature">TCheckSearchFeature</h3>
+		<h3 id="TCheckDidYouMeanSearch">TCheckDidYouMeanSearch</h3>
 		<h4 id="Preconditions13">Preconditions</h4>
 		<p>No preconditions.</p>
 		<h4 id="Description13">Description</h4>
+		<p>This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
+			<br/>p. Afterwards is the did you mean term clicked and the result page (product grid) is validated.
+		</p>
+		<h4 id="Whattochange13">What to change?</h4>
+		<p>You can change the following parameters at the modules.</p>
+		<table>
+			<tr>
+				<th style="text-align: left;">Parameter      </th>
+				<th style="text-align: left;">Description</th>
+			</tr>
+			<tr>
+				<td>InvalidSearchEntry	</td>
+				<td>Search entry which triggers the Did You Mean search.</td>
+			</tr>
+			<tr>
+				<td>KeyWord			</td>
+				<td>Did You Mean suggestion which will be clicked and triggers a new search.</td>
+			</tr>
+		</table>
+		<h3 id="TCheckSearchFeature">TCheckSearchFeature</h3>
+		<h4 id="Preconditions14">Preconditions</h4>
+		<p>No preconditions.</p>
+		<h4 id="Description14">Description</h4>
 		<p>This test case checks the search functionality of the application using all possible search queries which are:</p>
 		<ol>
 			<li>
@@ -1801,7 +1824,7 @@
 		<blockquote class="information">
 			<p>Complete id means the variation number and not the master id of the product (all of the product&#8217;s required attributes are selected). Since entering an initially shown item number may lead you to a catalog result page.</p>
 		</blockquote>
-		<h4 id="Whattochange13">What to change?</h4>
+		<h4 id="Whattochange14">What to change?</h4>
 		<p>Inside Manage Test Data you can change the following fields if you plan to search for different products. </p>
 		<table>
 			<tr>
@@ -1863,13 +1886,13 @@
 		<p>Make sure to enter valid search phrases. An invalid search entry (wrong/incomplete product id/name/keyword) may cause the test case to fail.</p>
 		<p>After searching for product name or ID the structure of the result pages are validated, hence the search phrases must belong to simple products and not to product sets or bundles. </p>
 		<h3 id="TSearchSimpleProduct">TSearchSimpleProduct</h3>
-		<h4 id="Preconditions14">Preconditions</h4>
+		<h4 id="Preconditions15">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description14">Description</h4>
+		<h4 id="Description15">Description</h4>
 		<p>Inside this test case we search for a product using it&#8217;s complete ID  which leads directly to that particular 
 			<em>Product Detail Page</em>. The page structure is validated by checking for the presence of the expected elements.
 		</p>
-		<h4 id="Whattochange14">What to change?</h4>
+		<h4 id="Whattochange15">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1891,13 +1914,13 @@
 		</table>
 		<p>A complete product id is required to search for a product since an incomplete one may lead to either no result or to a search catalog page.</p>
 		<h3 id="TSearchProductBundle">TSearchProductBundle</h3>
-		<h4 id="Preconditions15">Preconditions</h4>
+		<h4 id="Preconditions16">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description15">Description</h4>
+		<h4 id="Description16">Description</h4>
 		<p>Inside this test case we search for a product bundle using it&#8217;s complete ID  which leads directly to that particular 
 			<em>Product Detail Page</em>. The page structure is validated by checking for the presence of the expected elements.
 		</p>
-		<h4 id="Whattochange15">What to change?</h4>
+		<h4 id="Whattochange16">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1918,13 +1941,13 @@
 			</tr>
 		</table>
 		<h3 id="TSearchProductSet">TSearchProductSet</h3>
-		<h4 id="Preconditions16">Preconditions</h4>
+		<h4 id="Preconditions17">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description16">Description</h4>
+		<h4 id="Description17">Description</h4>
 		<p>Inside this test case we search for a product set using it&#8217;s complete ID  which leads directly to that particular 
 			<em>Product Detail Page</em>. The page structure is validated by checking for the presence of the expected elements.
 		</p>
-		<h4 id="Whattochange16">What to change?</h4>
+		<h4 id="Whattochange17">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -1948,11 +1971,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckCatalogNavigation">TCheckCatalogNavigation</h3>
-		<h4 id="Preconditions17">Preconditions</h4>
+		<h4 id="Preconditions18">Preconditions</h4>
 		<p>Product category with at least 5 pages displayed initially.</p>
-		<h4 id="Description17">Description</h4>
+		<h4 id="Description18">Description</h4>
 		<p>This testcase validates the behaviour of the navigation within the product catalog. Pagination elements both on catalog and on product detail pages are checked. To run this testcase make sure you choose a subcategory with more than 5 pages, so all navigation elements are displayed.  </p>
-		<h4 id="Whattochange17">What to change?</h4>
+		<h4 id="Whattochange18">What to change?</h4>
 		<p>Inside manage test data you can easily change the test information by editing:</p>
 		<table>
 			<tr>
@@ -1993,11 +2016,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckItemsPerPage">TCheckItemsPerPage</h3>
-		<h4 id="Preconditions18">Preconditions</h4>
+		<h4 id="Preconditions19">Preconditions</h4>
 		<p>Product category with at least 3 pages displayed initially.</p>
-		<h4 id="Description18">Description</h4>
+		<h4 id="Description19">Description</h4>
 		<p>This testcase opens a catalog page and selects different values of the dropdown list, that controls the displayed number of products per page. To run this test correctly you will have to choose a category which displays at least 3 pages initially. </p>
-		<h4 id="Whattochange18">What to change?</h4>
+		<h4 id="Whattochange19">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. Within the testcase three options for items per page are selected. You will have to provide details for all variants including the &#8222;View all&#8221;-option:</p>
 		<table>
 			<tr>
@@ -2082,9 +2105,9 @@
 			</tr>
 		</table>
 		<h3 id="TCheckCatalogSorting">TCheckCatalogSorting</h3>
-		<h4 id="Preconditions19">Preconditions</h4>
+		<h4 id="Preconditions20">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description19">Description</h4>
+		<h4 id="Description20">Description</h4>
 		<p>The catalog is sorted using all available options. Validation is performed by checking the very first and the very last item of each sorting method. The search result container elements are also validated for each sorting method. </p>
 		<p>After sorting the following validations are performed:</p>
 		<ol>
@@ -2094,7 +2117,7 @@
 			<li>there is no change in number of paginations</li>
 			<li>the correct first and last products are displayed</li>
 		</ol>
-		<h4 id="Whattochange19">What to change?</h4>
+		<h4 id="Whattochange20">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. Eight different sort methods are tested. For each you will have to provide the method name and the first and last product name. The parameter names for the different search methods differ only by the number of the search method.</p>
 		<table>
 			<tr>
@@ -2147,11 +2170,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckColorSwatch">TCheckColorSwatch</h3>
-		<h4 id="Preconditions20">Preconditions</h4>
+		<h4 id="Preconditions21">Preconditions</h4>
 		<p>Product with at least two different colors available.</p>
-		<h4 id="Description20">Description</h4>
+		<h4 id="Description21">Description</h4>
 		<p>Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.</p>
-		<h4 id="Whattochange20">What to change?</h4>
+		<h4 id="Whattochange21">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -2184,11 +2207,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckProductPerspectives">TCheckProductPerspectives</h3>
-		<h4 id="Preconditions21">Preconditions</h4>
+		<h4 id="Preconditions22">Preconditions</h4>
 		<p>Product with at least two images available.</p>
-		<h4 id="Description21">Description</h4>
+		<h4 id="Description22">Description</h4>
 		<p>This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.</p>
-		<h4 id="Whattochange21">What to change?</h4>
+		<h4 id="Whattochange22">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -2221,11 +2244,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckQuickView">TCheckQuickView</h3>
-		<h4 id="Preconditions22">Preconditions</h4>
+		<h4 id="Preconditions23">Preconditions</h4>
 		<p>Product with color and size attribute which is in stock.</p>
-		<h4 id="Description22">Description</h4>
+		<h4 id="Description23">Description</h4>
 		<p>This testcase checks the behaviour of the quickview. After hovering over a product image inside the catalog the quickview is opened. After selecting color and size the cart-button is enabled. In a last step the product details page is opened from the link within the quickview.</p>
-		<h4 id="Whattochange22">What to change?</h4>
+		<h4 id="Whattochange23">What to change?</h4>
 		<p>Inside Manage Test Data you can easily change the test information. </p>
 		<table>
 			<tr>
@@ -2262,11 +2285,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckPriceRange">TCheckPriceRange</h3>
-		<h4 id="Preconditions23">Preconditions</h4>
+		<h4 id="Preconditions24">Preconditions</h4>
 		<p>Product with a range price.</p>
-		<h4 id="Description23">Description</h4>
+		<h4 id="Description24">Description</h4>
 		<p>Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page (first product) and validated against the price at the quickview and the product detail page.</p>
-		<h4 id="Whattochange23">What to change?</h4>
+		<h4 id="Whattochange24">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2278,11 +2301,11 @@
 			</tr>
 		</table>
 		<h3 id="TValidateHomepageResponsive">TValidateHomepageResponsive</h3>
-		<h4 id="Preconditions24">Preconditions</h4>
+		<h4 id="Preconditions25">Preconditions</h4>
 		<p>Enable responsive design in Business Manager.</p>
-		<h4 id="Description24">Description</h4>
+		<h4 id="Description25">Description</h4>
 		<p>Validates the homepage for responsive design.</p>
-		<h4 id="Whattochange24">What to change?</h4>
+		<h4 id="Whattochange25">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2294,11 +2317,11 @@
 			</tr>
 		</table>
 		<h3 id="TPurchaseAsGuestResponsive">TPurchaseAsGuestResponsive</h3>
-		<h4 id="Preconditions25">Preconditions</h4>
+		<h4 id="Preconditions26">Preconditions</h4>
 		<p>Enable responsive design in Business Manager.</p>
-		<h4 id="Description25">Description</h4>
+		<h4 id="Description26">Description</h4>
 		<p>Validates the checkout process for responsive design as a guest user.</p>
-		<h4 id="Whattochange25">What to change?</h4>
+		<h4 id="Whattochange26">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2428,11 +2451,11 @@
 			</tr>
 		</table>
 		<h3 id="TAddProductToNewGiftRegistry">TAddProductToNewGiftRegistry</h3>
-		<h4 id="Preconditions26">Preconditions</h4>
+		<h4 id="Preconditions27">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description26">Description</h4>
+		<h4 id="Description27">Description</h4>
 		<p>Creates a gift registry for a new user. Performs the following steps:</p>
 		<ol>
 			<li>register a new user</li>
@@ -2443,7 +2466,7 @@
 			<li>search for the gift registry</li>
 			<li>validate results</li>
 		</ol>
-		<h4 id="Whattochange26">What to change?</h4>
+		<h4 id="Whattochange27">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2569,11 +2592,11 @@
 			</tr>
 		</table>
 		<h3 id="TAddProductToNewGiftRegistryAndOrder">TAddProductToNewGiftRegistryAndOrder</h3>
-		<h4 id="Preconditions27">Preconditions</h4>
+		<h4 id="Preconditions28">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description27">Description</h4>
+		<h4 id="Description28">Description</h4>
 		<p>Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:</p>
 		<ol>
 			<li>register a new user</li>
@@ -2585,7 +2608,7 @@
 			<li>search for the gift registry again</li>
 			<li>validate if the &#8222;quantity purchased&#8221; of the first product has changed</li>
 		</ol>
-		<h4 id="Whattochange27">What to change?</h4>
+		<h4 id="Whattochange28">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2829,11 +2852,11 @@
 			</tr>
 		</table>
 		<h3 id="TCheckWishlistProductAttributes">TCheckWishlistProductAttributes</h3>
-		<h4 id="Preconditions28">Preconditions</h4>
+		<h4 id="Preconditions29">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description28">Description</h4>
+		<h4 id="Description29">Description</h4>
 		<p>Checks for changing priority and quanity of wishlist items.</p>
 		<ol>
 			<li>search for a product</li>
@@ -2849,7 +2872,7 @@
 			<li>search for the wishlist</li>
 			<li>validate the first product</li>
 		</ol>
-		<h4 id="Whattochange28">What to change?</h4>
+		<h4 id="Whattochange29">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2899,11 +2922,11 @@
 			</tr>
 		</table>
 		<h3 id="TCreateWishlistAndMakeItPublic">TCreateWishlistAndMakeItPublic</h3>
-		<h4 id="Preconditions29">Preconditions</h4>
+		<h4 id="Preconditions30">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description29">Description</h4>
+		<h4 id="Description30">Description</h4>
 		<p>Tests the public wishlist feature.</p>
 		<ol>
 			<li>search for a product</li>
@@ -2913,7 +2936,7 @@
 			<li>logout</li>
 			<li>search for the public wishlist</li>
 		</ol>
-		<h4 id="Whattochange29">What to change?</h4>
+		<h4 id="Whattochange30">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2951,11 +2974,11 @@
 			</tr>
 		</table>
 		<h3 id="TOrderFromOwnWishlist">TOrderFromOwnWishlist</h3>
-		<h4 id="Preconditions30">Preconditions</h4>
+		<h4 id="Preconditions31">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description30">Description</h4>
+		<h4 id="Description31">Description</h4>
 		<p>Test with placing an order from a wishlist:</p>
 		<ol>
 			<li>search for a product</li>
@@ -2965,7 +2988,7 @@
 			<li>complete order process</li>
 			<li>validate for the text &#8222;This is a wishlist item&#8221; on checkout pages</li>
 		</ol>
-		<h4 id="Whattochange30">What to change?</h4>
+		<h4 id="Whattochange31">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3167,11 +3190,11 @@
 			</tr>
 		</table>
 		<h3 id="TSearchProductAndAddToWishlist">TSearchProductAndAddToWishlist</h3>
-		<h4 id="Preconditions31">Preconditions</h4>
+		<h4 id="Preconditions32">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description31">Description</h4>
+		<h4 id="Description32">Description</h4>
 		<p>Test for searching a product an adding it to a wishlist.</p>
 		<ol>
 			<li>search for a product</li>
@@ -3179,7 +3202,7 @@
 			<li>register new user</li>
 			<li>validate product data on the wishlist</li>
 		</ol>
-		<h4 id="Whattochange31">What to change?</h4>
+		<h4 id="Whattochange32">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3217,11 +3240,11 @@
 			</tr>
 		</table>
 		<h3 id="TSendWishlistToFriend">TSendWishlistToFriend</h3>
-		<h4 id="Preconditions32">Preconditions</h4>
+		<h4 id="Preconditions33">Preconditions</h4>
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description32">Description</h4>
+		<h4 id="Description33">Description</h4>
 		<p>Sends a wishlist to a friend and performs the following steps:</p>
 		<ol>
 			<li>search for a product</li>
@@ -3230,7 +3253,7 @@
 			<li>validate product data on the wishlist</li>
 			<li>send this wishlist to a friend</li>
 		</ol>
-		<h4 id="Whattochange32">What to change?</h4>
+		<h4 id="Whattochange33">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
