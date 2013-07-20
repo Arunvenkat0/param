@@ -86,7 +86,19 @@
 		TITLE_CREDITCARD				: Resource.msg('forms.title.creditcard', 'forms', null),
 		SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection','locale','Server connection failed!'),
 		IN_STOCK_DATE					: Resource.msg('global.inStockDate', 'locale', null),
-		INIFINITESCROLL					: Resource.msg('paginginformation.infinite-scroll','search',null)
+		INIFINITESCROLL					: Resource.msg('paginginformation.infinite-scroll','search',null),
+		STORE_NEAR_YOU					: Resource.msg('storelist.lightbox.whatsavailable','storepickup','What\'s available at a store near you'),
+		SELECT_STORE					: Resource.msg('storelist.lightbox.selectstore','storepickup',null),
+		SELECTED_STORE					: Resource.msg('storelist.lightbox.selectedstore','storepickup',null),
+		PREFERRED_STORE					: Resource.msg('storelist.lightbox.preferredstore','storepickup',null),
+		SET_PREFERRED_STORE				: Resource.msg('storelist.lightbox.setpreferredstore','storepickup',null),
+		ENTER_ZIP						: Resource.msg('storelist.lightbox.enterzip','storepickup',null),
+		SEARCH							: Resource.msg('storelist.lightbox.search','storepickup',null),
+		CHANGE_LOCATION					: Resource.msg('storelist.lightbox.changelocation','storepickup',null),
+		CONTINUE_WITH_STORE				: Resource.msg('storelist.lightbox.continuewithstore','storepickup',null),
+		CONTINUE						: Resource.msg('storelist.lightbox.continue','storepickup',null),
+		SEE_MORE						: Resource.msg('storelist.lightbox.seemore','storepickup',null),
+		SEE_LESS						: Resource.msg('storelist.lightbox.seeless','storepickup',null)
 	};
 	
 	// additional resources 
@@ -141,9 +153,20 @@
 		giftCardCheckBalance		: URLUtils.https('COBilling-GetGiftCertificateBalance').toString(),
 		addCoupon					: URLUtils.https('Cart-AddCoupon').toString(),	
 		powerReviewsFullJs			: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '/pwr/engine/js/full.js').toString(),
-		powerReviewsZip				: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '').toString()
+		powerReviewsZip				: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '').toString(),
+		storeLocatorPage   			: URLUtils.https('StoreInventory-Find').toString(),
+		storesInventory				: URLUtils.https('StoreInventory-Inventory').toString(),
+		storesLookup				: URLUtils.https('StoreInventory-Lookup').toString(),
+		setPreferredStore			: URLUtils.url('StoreInventory-SetPreferredStore').toString(),
+		getPreferredStore			: URLUtils.url('StoreInventory-GetPreferredStore').toString(),
+		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
+		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString()		
 	};
 	
+	userSettings = {
+		zip : pdict.CurrentSession.custom.zipcode=="null"?null:pdict.CurrentSession.custom.zipcode,
+		storeId : pdict.CurrentSession.custom.storeId=="null"?null:pdict.CurrentSession.custom.storeId
+	};
 	var isMobileUserAgent = isMobile();
 </isscript>
 (function(app){
@@ -153,4 +176,6 @@
 	app.resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;	
 	app.urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	
 	app.clientcache = <isprint value="${JSON.stringify(clientcache)}" encoding="off"/>;
+	app.user = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
+	app.enabledStorePickup = ${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')};
 }(window.app = window.app || {}));

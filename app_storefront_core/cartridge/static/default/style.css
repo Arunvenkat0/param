@@ -72,10 +72,6 @@ legend{background:url("../images/interface/icon-double-line-header.png") repeat-
 .ie7 legend{width:94%;}
 legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
 legend span em{color:#333333;}
-h2 span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
-h2 span em{color:#333333;}
-h1 span{font-size:0.6em;position:absolute;right:15em;text-transform:none;top:0em;}
-h1 span em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
@@ -166,7 +162,6 @@ td.item-dashboard .option-quantity-purchased span.exceeded {color:#ff0000}
 #tooltip .small{width:300px;}
 #tooltip .medium{width:500px;}
 #tooltip .recommendation-tooltip-header{background:none repeat scroll 0 0 #CCCCCC;font-size:1.2em;font-weight:bold;padding:10px;}
-#tooltip .recommendation-tooltip-header .product-price .price-standard{color:#999999;text-decoration:line-through;}
 #tooltip .recommendation-tooltip-description{padding:10px;}
 #tooltip .recommendation-tooltip-attributes{padding:10px;}
 
@@ -640,9 +635,7 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .send-to-friend-product .product-description h2{font-family:Georgia;font-size:1.2em;font-style:italic;}
 .send-to-friend-product .product-description dt {clear:both;float:left; margin:10px 0 0 0;width: 100px;}
 .send-to-friend-product .product-description dd {float:left;margin:10px 0 0 0; width: 200px;}
-#send-to-friend-main .send-to-friend-sender-label{padding-top:0;}
-#send-to-friend-main .send-to-friend-sender{margin-left: 2%;padding: 0.7em 0.5em;text-indent: 0;width: 49.5966%;}
-#send-to-friend-dialog .send-to-friend-login-message{padding: 2em 0em 2em;}
+
 /* size charts */
 /* ------------------------------------- */
 
@@ -724,7 +717,6 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .payment-method{clear:both;display:none;}
 .payment-method-expanded{display:block;}
 .cvn-tip{float:left;margin:-38px 0 0 40%;width:auto;}
-.cvn-tip-error{float:left;margin:-78px 0 0 40%;width:auto;}
 .month,.year,.day{clear:none;float:left;margin:0 0 2% 2%;}
 .month select,.year select,.day select{margin:0;width:auto;}
 .month .form-caption{margin-left:0;}
@@ -1013,6 +1005,8 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .js .home-bottom-right .jcarousel-prev-disabled, .home-bottom-right .jcarousel-next-disabled {display:none !important;}
 
 .js button.select {display:none}
+
+
 /* Multi Inventory */
 /* --------------------------------------------------------------------------------------- */
 .ui-dialog #listings-nav {float: right;}
@@ -1051,9 +1045,8 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .store-stock .In-Stock .store-tile-status {left: 13px;}
 .store-stock .store-tile .store-tile-map-this {display: none;}
 .store-stock .store-tile .select-store-button {display: none;}
-.more-stores {color: #0167AF;cursor: pointer;font-size: 0.8em;margin: 0 0 0 2px;padding: 0 0 0 12px;}
-/*.more-stores {background: url("../images/interface/icon-ui-tabs-active-link-down.png") no-repeat scroll left center transparent;color: #0167AF;cursor: pointer;font-size: 0.8em;margin: 0 0 0 2px;padding: 0 0 0 12px;}
-.more-stores.active {background: url("../images/interface/icon-ui-tabs-active-link.png") no-repeat scroll left center transparent;}*/
+.more-stores {background: url("../images/interface/icon-ui-tabs-active-link-down.png") no-repeat scroll left center transparent;color: #0167AF;cursor: pointer;font-size: 0.8em;margin: 0 0 0 2px;padding: 0 0 0 12px;}
+.more-stores.active {background: url("../images/interface/icon-ui-tabs-active-link.png") no-repeat scroll left center transparent;}
 .checkout-progress-indicator {font-size:1em;}
 .checkout-progress-indicator div{padding: 20px;}
 .multishipprogress div, .multishipprogress .step-3 {background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;display: inline;padding: 1em;}
@@ -1091,3 +1084,4 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .set-preferred-store {cursor: pointer;}
 .radio-url {display: inline;}
 .label-inline input {float:left;margin:0;}
+
