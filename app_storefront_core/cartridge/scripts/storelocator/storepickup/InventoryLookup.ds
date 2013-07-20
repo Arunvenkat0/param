@@ -1,0 +1,36 @@
+/**
+* Demandware Script File
+* To lookup store inventory the product:
+*
+*
+*  @input product : dw.catalog.Product
+*  @input stores : dw.util.Set
+*  @output storeAvailability : dw.util.HashMap
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.util );
+
+importScript("storelocator/storepickup/Utils.ds");
+
+function execute( args : PipelineDictionary ) : Number
+{
+	
+	var product : Product = args.product;
+	var stores : Set = args.stores; 
+	var storesItr : dw.util.Iterator = stores.iterator();
+	var store : Store = null;
+	var storeAvailabilityMessage : String = "";
+	var storeAvailabilityMap : HashMap = new HashMap();
+	
+	while (storesItr.hasNext()) {
+		
+		store = storesItr.next();
+		storeAvailabilityMessage = getStoreAvailabilityMessage(store, product);
+		storeAvailabilityMap.put(store.ID, storeAvailabilityMessage);
+	}
+	
+	args.storeAvailability = storeAvailabilityMap;
+    return PIPELET_NEXT;
+}
