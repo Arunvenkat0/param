@@ -27,6 +27,12 @@
 	<isif condition="${pdict.ApplicableShippingMethods.size() > 0}">
 
 		<isloop items="${pdict.ApplicableShippingMethods}" var="shippingMethod" status="loopstate">
+
+		<iscomment>exclude the shipming method '005', instore shipming method</iscomment>
+		<isif condition="${shippingMethod.ID == '005'}">
+			<iscontinue>
+		</isif>
+
 		<isset name="shippingCost" value="${pdict.ShippingCosts.get(shippingMethod.ID)}" scope="page"/>
 			
 			<div class="form-row form-indent label-inline">

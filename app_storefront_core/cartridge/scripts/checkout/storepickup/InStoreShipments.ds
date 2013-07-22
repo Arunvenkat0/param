@@ -1,0 +1,89 @@
+/**
+* Demandware Script File
+* This script scans the basket and consildates items that are going to the same store
+* it also creates shipmets with shipment type and method for the rest of checkout
+*
+*
+*
+* For example:
+* 	@input Basket : dw.order.Basket The basket 
+*-   @input ExampleIn : String This is a sample comment.
+*-   @output ExampleOut : Number
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.web );
+importPackage( dw.catalog );
+
+importScript("storelocator/storepickup/Utils.ds");
+importScript("checkout/Utils.ds");
+
+function execute( args : PipelineDictionary ) : Number
+{
+
+	var basket : Basket = args.Basket;
+	var sliArrayList : ArrayList = new ArrayList();
+	
+	var test = 0;
+	for each (var pli : ProductLineItem in basket.allProductLineItems){
+		if(pli.custom.fromStoreId == null || pli.shipment.shippingMethodID == '005'){
+			//skip none instore pli's
+			continue;
+		}	
+		
+		//check to see if we are creating a new shipment or adding to an existing one
+		if(sliArrayList.contains(pli.custom.fromStoreId)){
+			//add the pli to the existing shipment
+			//loop through to find the shipment with the storeid and set it as the shipent for the pli 
+			//var shipment : Shipment = null; 
+			for each (var instoreshipment : shipment in basket.shipments){
+				if(instoreshipment.custom.fromStoreId != null && (pli.custom.fromStoreId == instoreshipment.custom.fromStoreId)){
+					//we have found an existing shipment that has the correct address
+					var xx = 0;
+					pli.setShipment(instoreshipment);
+				}
+				
+			}
+			
+			var x = 0;
+		}else{
+			//create a new shipment to put this pli in 
+			var shipment : Shipment = null;
+			shipment = basket.createShipment(UUIDUtils.createUUID());			
+			shipment.custom.fromStoreId =  pli.custom.fromStoreId;
+			shipment.custom.shipmentType =  'instore';
+			
+			var inStoreShippingMethod : ShippingMethod = null;
+			//loop over the shipping methods and pick the instore one
+			
+			var shippingMethods : ArrayList =  new ArrayList(ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods());
+			for each(var shippingMethod in shippingMethods){
+				var tttt = 0;
+				if(shippingMethod.ID == '005'){
+					shipment.shippingMethod = shippingMethod;
+				}
+				
+			}
+			var tttt = 0;
+
+			
+			
+			var shippingAddress : Object = new ShippingAddress();
+			var storeObject = getStoreObject(pli.custom.fromStoreId);
+			var orderAddress = shipment.createShippingAddress();			
+			shippingAddress.storeAddressTo(orderAddress,storeObject);
+			pli.setShipment(shipment);
+			
+			var x = 1;
+		}
+		
+		sliArrayList.add(pli.custom.fromStoreId);
+		test++;
+	}
+
+
+	var stop =0;
+   return PIPELET_NEXT;
+}
