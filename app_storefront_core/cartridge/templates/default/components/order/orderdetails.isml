@@ -99,7 +99,11 @@
 						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
 						<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
 						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
-						<th class="section-header">${Resource.msg('orderdetails.shippingto','components',null)}</th>
+						<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
+							<th class="section-header">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>							
+						<iselse>
+							<th class="section-header">${Resource.msg('orderdetails.shippingto','components',null)}</th>
+						</isif>
 					</tr>
 				</thead>
 				<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
