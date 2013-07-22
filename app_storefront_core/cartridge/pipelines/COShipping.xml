@@ -1339,7 +1339,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
       <simple-transition/>
       <node>
-        <decision-node condition-key="!empty(PhysicalShipments) &amp;&amp; PhysicalShipments.size() &gt; 1" condition-operator="expr"/>
+        <decision-node condition-key="!empty(PhysicalShipments) &amp;&amp; PhysicalShipments.size() &gt; 1 &amp;&amp; dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in"/>
