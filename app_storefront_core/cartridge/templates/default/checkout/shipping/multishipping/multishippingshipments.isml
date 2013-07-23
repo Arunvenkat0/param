@@ -14,11 +14,11 @@
 <isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
 
 
-<div class="checkout">
+<div class="checkout multiship">
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="2" multishipping="true"/>
 	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
-	<form action="${URLUtils.continueURL()}" method="post" class="checkout-multi-shipping address">
+	<form action="${URLUtils.continueURL()}" method="post" class="address checkout-multi-shipping address">
 		<div class="checkoutmultishipping">
 			<isloop items="${pdict.CurrentForms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">
 				<isset name="shipment" value="${shipmentItem.object}" scope="page"/>
@@ -76,12 +76,29 @@
 							<tr class="cart-row">
 								<td><b>${Resource.msg('multishippingshipments.selectmethod','checkout',null)}</b></td>
 								<td colspan="3">
-									<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
+
+						
+								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getPreferences().getCustom()['enableStorePickUp']}">
+									${Resource.msg('cart.store.instorepickup','storepickup',null)}
+									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
 											<isset name="shippingMethod" value="${option.object}" scope="page"/>
+											<isif condition=${shippingMethod.ID == '005'}>
+											<div class="instore-shipping-option"><isprint value="${shippingMethod.displayName}"/>: <isprint value="${shippingModel.getShippingCost(shippingMethod).getAmount()}"/> (<isprint value="${shippingMethod.description}"/>)</div>
+											</isif>
+										</isloop>
+								<iselse>
+										${Resource.msg('cart.store.homedelivery','storepickup',null)} ${Resource.msg('multishippingshipments.shipment','checkout',null)} ${'#' + shipmentloop.count}
+										<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
+										<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
+										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
+											<isset name="shippingMethod" value="${option.object}" scope="page"/>
+											<isif condition=${shippingMethod.ID != '005'}>
 											<option value="${shippingMethod.ID}" <isif condition="${option.selected}">selected="selected"</isif>><isprint value="${shippingMethod.displayName}"/>: <isprint value="${shippingModel.getShippingCost(shippingMethod).getAmount()}"/> (<isprint value="${shippingMethod.description}"/>)</option>
+											</isif>
 										</isloop>
 									</select>
+								</isif>	
 								</td>
 							</tr>
 						</isif>

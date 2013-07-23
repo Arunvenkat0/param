@@ -39,10 +39,10 @@ function execute( args : PipelineDictionary ) : Number {
 		}
 	}
 	
-	// Load addresses from Shipments
+	// Load addresses from Shipments excluding instore shipments
 	if (shipments != null){
 		for each (var shipment : Shipment in shipments){
-			if (shipment.shippingAddress != null){
+			if (shipment.shippingAddress != null && shipment.custom.shipmentType != 'instore'){
 				sessionAddressBook = addAddressToJSON(sessionAddressBook, shipment.shippingAddress);
 			}
 		}

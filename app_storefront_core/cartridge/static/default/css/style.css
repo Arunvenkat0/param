@@ -1091,3 +1091,4 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .set-preferred-store {cursor: pointer;}
 .radio-url {display: inline;}
 .label-inline input {float:left;margin:0;}
+.instore-shipping-option{width:100%;}
