@@ -67,12 +67,14 @@ function execute( args : PipelineDictionary ) : Number
 	
 	//Remove all ProductLineItems and Shipments to create new ones
 	for each (var pli : ProductLineItem in basket.getProductLineItems()){
-		basket.removeProductLineItem(pli);
+		if(empty(pli.custom.fromStoreId)){
+			basket.removeProductLineItem(pli);
+		}
 	}
 	
 	for each (var shipment : Shipment in basket.getShipments()){
 		//if the shipment is for a gift certificate or the default shipment, it will not be removed from the cart
-		if (!shipment.isDefault() && !(shipment.giftCertificateLineItems.length > 0)){
+		if (!shipment.isDefault() && !(shipment.giftCertificateLineItems.length > 0) && shipment.custom.shipmentType != 'instore'){
 			basket.removeShipment(shipment);
 		}
 	}
