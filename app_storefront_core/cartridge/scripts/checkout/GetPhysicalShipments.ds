@@ -23,7 +23,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	while( iter != null && iter.hasNext() )
 	{
 		var shipment : Shipment = iter.next();
-		if( !shipment.getProductLineItems().isEmpty())
+		if( !shipment.getProductLineItems().isEmpty() && shipment.custom.shipmentType != 'instore')
 		{
 			physicalShipments.add( shipment );
 		}
