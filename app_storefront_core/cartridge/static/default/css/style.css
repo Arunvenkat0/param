@@ -74,8 +74,10 @@ legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:
 legend span em{color:#333333;}
 h2 span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
 h2 span em{color:#333333;}
-h1 span{font-size:0.6em;position:absolute;right:15em;text-transform:none;top:0em;}
+h1 span{font-size:0.6em;position:absolute;right:.001em;text-transform:none;top:0em;}
 h1 span em{color:#333333;}
+.dialog-required{font-weight:400;position:absolute;right:.25em;text-transform:none;top:.85em;}
+.dialog-required em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
