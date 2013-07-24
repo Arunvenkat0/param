@@ -172,8 +172,6 @@
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="CurrentCustomer.profile.firstName + &quot; &quot; + CurrentCustomer.profile.lastName" key="From_0"/>
                 <key-binding alias="CurrentForms.sendtofriend.yourname.htmlValue" key="To_0"/>
-                <key-binding alias="CurrentCustomer.profile.email" key="From_1"/>
-                <key-binding alias="CurrentForms.sendtofriend.youremail.htmlValue" key="To_1"/>
                 <key-binding alias="null" key="From_3"/>
                 <key-binding alias="null" key="To_3"/>
                 <key-binding alias="null" key="From_4"/>
@@ -402,7 +400,7 @@
                 <segment>
                   <node>
                     <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                      <key-binding alias="CurrentForms.sendtofriend.youremail.value" key="MailFrom"/>
+                      <key-binding alias="CurrentCustomer.profile.email" key="MailFrom"/>
                       <key-binding alias="&quot;mail/productlist&quot;" key="MailTemplate"/>
                       <key-binding alias="CurrentForms.sendtofriend.friendsemail.value" key="MailTo"/>
                       <key-binding alias="CurrentForms.sendtofriend.subject.value" key="MailSubject"/>
@@ -483,7 +481,7 @@
                   </simple-transition>
                   <node>
                     <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                      <key-binding alias="CurrentForms.sendtofriend.youremail.value" key="MailFrom"/>
+                      <key-binding alias="CurrentCustomer.profile.email" key="MailFrom"/>
                       <key-binding alias="&quot;mail/product&quot;" key="MailTemplate"/>
                       <key-binding alias="CurrentForms.sendtofriend.friendsemail.value" key="MailTo"/>
                       <key-binding alias="CurrentForms.sendtofriend.subject.value" key="MailSubject"/>
@@ -711,13 +709,192 @@
     <segment>
       <node>
         <text-node>
+          <description>This pipeline is used to ensure that storefront users using the send to a friend feature are logged in</description>
+        </text-node>
+        <node-display width="2" x="12" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="Login">
+    <segment>
+      <node>
+        <start-node name="Login" secure="true"/>
+        <node-display x="12" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="&quot;Product-Show&quot;" key="From_0"/>
+          <key-binding alias="TargetPipeline" key="To_0"/>
+          <key-binding alias="CurrentHttpParameterMap.pid" key="From_1"/>
+          <key-binding alias="RedirectParams" key="To_1"/>
+          <key-binding alias="&quot;pid=&quot;+CurrentHttpParameterMap.pid" key="From_2"/>
+          <key-binding alias="TargetPipelineParams" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.login" key="FormElement"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="UpdatePageMetaData" pipelet-set-identifier="bc_api">
+          <key-binding alias="null" key="DefaultKeywords"/>
+          <key-binding alias="null" key="DefaultDescription"/>
+          <key-binding alias="null" key="Product"/>
+          <key-binding alias="null" key="Category"/>
+          <key-binding alias="dw.content.ContentMgr.getContent(&quot;myaccount-login&quot;)" key="Content"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="null" key="From_0"/>
+          <key-binding alias="null" key="To_0"/>
+          <key-binding alias="false" key="From_1"/>
+          <key-binding alias="RegistrationStatus" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <interaction-continue-node secure="true" start-name="submitForm" transaction-required="false">
+          <template buffered="true" dynamic="false" name="account/login/accountlogin"/>
+        </interaction-continue-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="login">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="Login-Process"/>
+              <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="login_failed">
+                <transition target-connector="in1" target-path="..">
+                  <transition-display>
+                    <bend-point relative-to="source" x="-3" y="-3"/>
+                    <bend-point relative-to="target" x="-3" y="0"/>
+                  </transition-display>
+                </transition>
+              </branch>
+              <branch basename="b3" source-connector="login_succeeded">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="target" x="0" y="-1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <jump-node start-name-ref="Login-Redirect"/>
+                    <node-display x="0" y="2"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="register">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="Account-Register"/>
+              <node-display x="2" y="2"/>
+              <branch basename="b2" source-connector="ok">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="target" x="0" y="-1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <jump-node start-name-ref="Login-Redirect"/>
+                    <node-display x="0" y="2"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in2" target-path=".">
+        <transition-display>
+          <bend-point relative-to="source" x="-3" y="1"/>
+          <bend-point relative-to="source" x="-3" y="1"/>
+          <bend-point relative-to="target" x="-3" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
           <description>Product List Email</description>
         </text-node>
         <node-display x="0" y="11"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_6">
+  <branch basename="_ANONYMOUS_BRANCH_8">
     <segment>
       <node>
         <text-node>
@@ -727,7 +904,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_7">
+  <branch basename="_ANONYMOUS_BRANCH_9">
     <segment>
       <node>
         <text-node>
