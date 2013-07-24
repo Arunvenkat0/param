@@ -168,6 +168,7 @@ td.item-dashboard .option-quantity-purchased span.exceeded {color:#ff0000}
 #tooltip .small{width:300px;}
 #tooltip .medium{width:500px;}
 #tooltip .recommendation-tooltip-header{background:none repeat scroll 0 0 #CCCCCC;font-size:1.2em;font-weight:bold;padding:10px;}
+#tooltip .recommendation-tooltip-header .product-price .price-standard{color:#999999;text-decoration:line-through;}
 #tooltip .recommendation-tooltip-description{padding:10px;}
 #tooltip .recommendation-tooltip-attributes{padding:10px;}
 
@@ -641,7 +642,9 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .send-to-friend-product .product-description h2{font-family:Georgia;font-size:1.2em;font-style:italic;}
 .send-to-friend-product .product-description dt {clear:both;float:left; margin:10px 0 0 0;width: 100px;}
 .send-to-friend-product .product-description dd {float:left;margin:10px 0 0 0; width: 200px;}
-
+#send-to-friend-main .send-to-friend-sender-label{padding-top:0;}
+#send-to-friend-main .send-to-friend-sender{margin-left: 2%;padding: 0.7em 0.5em;text-indent: 0;width: 49.5966%;}
+#send-to-friend-dialog .send-to-friend-login-message{padding: 2em 0em 2em;}
 /* size charts */
 /* ------------------------------------- */
 
