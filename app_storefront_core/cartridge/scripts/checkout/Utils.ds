@@ -132,7 +132,7 @@ function ShippingAddress()
 		toAddress.setCity( storeObject.city );
 		toAddress.setPostalCode( storeObject.postalCode );
 		toAddress.setStateCode( storeObject.stateCode );
-		toAddress.setCountryCode( 'US' );
+		toAddress.setCountryCode( storeObject.custom.countryCodeValue );
 		toAddress.setPhone( storeObject.phone );
 	}
 
