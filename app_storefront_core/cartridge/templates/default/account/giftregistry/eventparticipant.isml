@@ -23,7 +23,7 @@
 
 				<legend>
 					${Resource.msg('eventparticipant.eventinfo','account',null)}
-					<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>	
+					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>	
 				</legend>
 				
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.type}" type="select"/>
@@ -44,7 +44,7 @@
 
 				<legend>
 					${Resource.msg('eventparticipant.participants','account',null)}
-					<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 
 				<h2>${Resource.msg('eventparticipant.first','account',null)}</h2>
