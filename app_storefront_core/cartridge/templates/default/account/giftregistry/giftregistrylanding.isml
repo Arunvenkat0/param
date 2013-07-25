@@ -9,7 +9,9 @@
 		
 		<div class="login-box login-search-gift clearfix">	
 
-			<h2 class="section-header">${Resource.msg('giftregistry.searchheader','account',null)}</h2>			
+			<h2 class="section-header">${Resource.msg('giftregistry.searchheader','account',null)}
+			<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+			</h2>			
 		
 			<div class="login-box-content">	
 			

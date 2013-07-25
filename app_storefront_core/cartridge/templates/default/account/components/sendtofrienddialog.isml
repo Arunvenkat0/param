@@ -41,7 +41,7 @@
 
 
 <isdecorate template="${DecoratorTemplate}">
-
+<isif condition="${pdict.CurrentCustomer.registered}">
 <form action="${URLUtils.continueURL()}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 	<div id="send-to-friend-main">
 		<isif condition="${IsRegistry || IsWishList || IsProductDetail}">
@@ -53,8 +53,14 @@
 				
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.yourname}" type="input"/>
 		
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.youremail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
-		
+				<div class="form-row">
+					<span class="send-to-friend-sender">
+						<label class="send-to-friend-sender-label">			
+							<span>${dw.web.Resource.msg('forms.sendtofriend.yourEmail','forms',null)}</span>
+						</label>
+ 						${pdict.CurrentCustomer.profile.email}
+ 					</span>
+				</div>
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsname}" type="input" requiredtext="${Resource.msg('forms.sendtofriend.friendsName.missing-error','forms',null)}"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
@@ -295,4 +301,19 @@
 					
 	</div>
 </form>
+</isif>
+<isif condition="${!pdict.CurrentCustomer.registered}">
+	<div class="send-to-friend-login-message">
+		<span>
+			${Resource.msg('sendtoafrienddialog.unregistereduser','account',null)}
+		</span>
+	</div>
+	<button class="">
+		<a href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('sendtoafrienddialog.unregistereduser.button','account',null)}</a>
+	</button>	
+	<button class="cancel cancel-button">
+		${Resource.msg('global.cancel','locale',null)}
+	</button>				
+</isif>
+
 </isdecorate>

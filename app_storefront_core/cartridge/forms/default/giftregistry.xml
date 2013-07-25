@@ -151,7 +151,7 @@
 
 	<list formid="items" binding="items">
 		<field formid="public" label="forms.giftregistry.items.makepublic"  type="boolean" binding="public" />
-		<field formid="quantity" label="forms.giftregistry.items.quantity"  type="integer" mandatory="true" 
+		<field formid="quantity" label="forms.giftregistry.items.quantity"  type="integer"  
 			binding="quantityValue"
 			min-length="1"
 			max-length="5"

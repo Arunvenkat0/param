@@ -368,6 +368,78 @@ p. All important changes without touching the structure can be made in Manage Te
 |SecondProductSecondColor       	|Color of product 2 ( _final color_ ).|
 
 p. All values must be valid. If you enter invalid values the script will fail.
+
+h3. TPurchaseAndReviewOrder
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+* products must be in stock
+
+h4. Description
+
+p. Purchases a product as registered user and checks the order review feature.
+The steps in detail:
+
+# register a new user
+# enter a credit card
+# search for a product and put it into the cart
+# perform checkout and place the order
+# go to my account - orders
+# validate details of the placed order
+# logout
+# use the check-order-feature as guest
+# validate details of the placed order
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Shipping address**|
+|ShippingAddressTitle               |Title of the shipping address. Is used to select the correct address.|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+  
   
 h3. TPurchaseAsGuest
 
@@ -551,6 +623,77 @@ p. All important changes without touching the structure can be made in Manage Te
 |CreditCardExpiryYear           |Year of the date when the credit card expires.|
 |CreditCardSecurityCode         |Pin on the credit card.|
 
+h3. TPurchaseWithMultipleShipmentAsRegisteredUser
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+* products must be in stock
+* multiple shipment must be enabled in Business Manager
+
+h4. Description
+
+p. Validates the multi-shipping checkout.
+The testcase in detail runs as follows:
+
+# create new user with addresses and credit card
+# add product with quantity 2 to cart
+# open cart
+# start multiple checkout
+# check that procut line item is splittet in two line items
+# ship products to different addresses with different shipping methods
+# place order
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Shipping address**|
+|ShippingAddressTitle               |Title of the shipping address. Is used to select the correct address.|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+
+
 h3. TRegisterUser
 
 h4. Preconditions
@@ -571,6 +714,24 @@ To enter a new user you can use Manage Test Data. These are the attributes to ch
 |FirstName |First name of the new user.|
 |LastName  |Last name of the new user.|
 
+h3. TCheckDidYouMeanSearch
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
+p. Afterwards is the did you mean term clicked and the result page (product grid) is validated.
+
+h4. What to change?
+
+p. You can change the following parameters at the modules.
+
+|<_. Parameter      |<_. Description|
+|InvalidSearchEntry	|Search entry which triggers the Did You Mean search.|
+|KeyWord			|Did You Mean suggestion which will be clicked and triggers a new search.|
 
 h3. TCheckSearchFeature
 
@@ -649,6 +810,24 @@ p. Inside manage test data you can easily change the test information by editing
 |ID           |Complete product ID.|
 |Name         |Product bundle name.|
 |Price        |Product bundle's sale price.|
+
+h3. TSearchProductSet
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. Inside this test case we search for a product set using it's complete ID  which leads directly to that particular _Product Detail Page_. The page structure is validated by checking for the presence of the expected elements.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|ProductSetName    	|Name of the product set.|
+|FirstProductName  	|Name of the first product of the set.|
+|SecondProductName 	|Name of the second product of the set.|
+|NumberOfProductsInSet  |Number of the products which are part of the product set.|
 
 h3. TCheckCatalogNavigation
 
@@ -811,26 +990,391 @@ p. Inside Manage Test Data you can easily change the test information.
 |ProductColor				|Color that is selected during runtime. |
 |ProductSize				|Size that is selected during runtime. |
 
+h3. TCheckPriceRange
 
 h4. Preconditions
 
-p. Product with at least two images available.
+p. Product with a range price.
 
 h4. Description
 
-p. This testcase checks the presence of different product images in quickview and on product details page. For validation the name of the image file within the URL is compared with the test data you provide.
+p. Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page (first product) and validated against the price at the quickview and the product detail page.
 
 h4. What to change?
 
-p. Inside Manage Test Data you can easily change the test information. 
+|<_. Parameter|<_. Description|
+|SearchText	|Search text to get a product grid with at least one product which has a price range.|
+
+h3. TValidateHomepageResponsive
+
+h4. Preconditions
+
+p. Enable responsive design in Business Manager.
+
+h4. Description
+
+p. Validates the homepage for responsive design.
+
+h4. What to change?
 
 |<_. Parameter|<_. Description|
-|MainCategoryNumber			|The number of the main category that is navigated to.|
-|MainCategoryName       	|The name of the main category that is navigated to.|
-|SubCategoryName        	|The subcategory that is used for this testcase.|
-|ProductName   				|Name of the product for which the product images are being tested. |
-|ImageNumber1				|Name of the first product image that is displayed (e.g. "12345.jpg") |
-|ImageNumber2				|Name of the second product image that is displayed (e.g. "12345.jpg") |
+|MainNavigationItems	|Titles of the main navigation item separated by an *.|
+
+h3. TPurchaseAsGuestResponsive
+
+h4. Preconditions
+
+p. Enable responsive design in Business Manager.
+
+h4. Description
+
+p. Validates the checkout process for responsive design as a guest user.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|RandomEmailAddress          |Random email address created by random string.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|\2<>. **Shipping address**|
+|ShippingFirstName           |First name in the used address.|
+|ShippingLastName            |Last name in the used address.|
+|ShippingStreet              |Street and house number in the used address.|
+|ShippingCity                |City in the used address (e.g. Boston).|
+|ShippingState               |State in the used address (e.g. Massachusetts).|
+|ShippingStateShortName     	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingZipCode             |Postal code in the used address.|
+|ShippingCountry             |Country in the used address (e.g. United States).|
+|ShippingPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+
+h3. TAddProductToNewGiftRegistry
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Creates a gift registry for a new user. Performs the following steps:
+
+# register a new user
+# create a gift registry
+# make this gift registry public
+# add a product
+# log out 
+# search for the gift registry
+# validate results
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|FirstParticipantRole				|Role of the user.|
+|SecondParticipantFirstName			|First name of second the user|
+|SecondParticipantName				|Last name of second the user.|
+|SecondParticipantRole				|Role of the second user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
+|\2<>. **Event Information**|
+|EventType			|Type of the event (e.g. Wedding).|
+|EventName			|Name of the event (e.g. Mia&#39;s and Tom&#39;s Wedding).|
+|EventDate			|Date of the event in the format mm/dd/yy (e.g. 12/12/12).|
+|EventCountry			|Country where the event will be (e.g. United States).|
+|EventState			|Short of the State where the event will be (e.g. MA).|
+|EventCity			|City where the event will be (e.g. Cambridge).|
+|\2<>. **Shipping address**|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+
+h3. TAddProductToNewGiftRegistryAndOrder
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:
+
+# register a new user
+# create a gift registry
+# add two products
+# log out 
+# search for the gift registry
+# order the first product, guest checkout
+# search for the gift registry again
+# validate if the "quantity purchased" of the first product has changed
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|FirstParticipantRole				|Role of the user.|
+|SecondParticipantFirstName			|First name of second the user|
+|SecondParticipantName				|Last name of second the user.|
+|SecondParticipantRole				|Role of the second user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
+|SecondProductID                   		|Id of the second product.|
+|SecondProductName               		|Name of the second product.|
+|SecondProductPrice             		|Single price of the second product.|
+|\2<>. **Event Information**|
+|EventType			|Type of the event (e.g. Wedding).|
+|EventName			|Name of the event (e.g. Mia&#39;s and Tom&#39;s Wedding).|
+|EventDate			|Date of the event in the format mm/dd/yy (e.g. 12/12/12).|
+|EventCountry			|Country where the event will be (e.g. United States).|
+|EventState			|Short of the State where the event will be (e.g. MA).|
+|EventCity			|City where the event will be (e.g. Cambridge).|
+|\2<>. **Shipping address**|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+
+h3. TCheckWishlistProductAttributes
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Checks for changing priority and quanity of wishlist items.
+
+# search for a product
+# add to wishlist
+# register new user
+# search for a second product and add it to the wisthlist
+# change priority and quantity for each product on the wishlist
+# logout and login again
+# validate the priority and quantity changes
+# make the wishlist public
+# leave the second product private
+# logout
+# search for the wishlist
+# validate the first product
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   			|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
+|SecondProductID                   		|Id of the second product.|
+|SecondProductName               		|Name of the second product.|
+|SecondProductPrice             		|Single price of the second product.|
+
+h3. TCreateWishlistAndMakeItPublic
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Tests the public wishlist feature.
+
+# search for a product
+# add to wishlist
+# register new user
+# make the wishlist public
+# logout
+# search for the public wishlist
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   			|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
+
+h3. TOrderFromOwnWishlist
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Test with placing an order from a wishlist:
+
+# search for a product
+# add to wishlist
+# register new user
+# add the product to cart directly from the wishlist
+# complete order process
+# validate for the text "This is a wishlist item" on checkout pages
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   			|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 				|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Shipping address**|
+|ShippingAddressTitle               |Title of the shipping address. Is used to select the correct address.|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort		|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
+
+h3. TSearchProductAndAddToWishlist
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Test for searching a product an adding it to a wishlist.
+
+# search for a product
+# add to wishlist
+# register new user
+# validate product data on the wishlist
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   			|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
+
+h3. TSendWishlistToFriend
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Sends a wishlist to a friend and performs the following steps:
+
+# search for a product
+# add to wishlist
+# register new user
+# validate product data on the wishlist
+# send this wishlist to a friend
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|FriendsName               	   		|Name of the Friend which will receive the wish list.|
+|\2<>. **Product information**|
+|ProductID                   			|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductPrice             			|Single price of the product.|
 
 
 h2. How to customize the documentation?
@@ -841,7 +1385,7 @@ p. *The advantage of this:* You are able to add new paragraphs or simply add som
 
 p. Now you can run the ant script (@create_doc.xml@) in the doc folder via the context menu of the ant file. _Eclipse_ will generate the new HTML file considering its CSS and Java Script files (folder @css@ and @js@) to integrate the design of _Xceptance_.
 
-bq(information). You also can create your own textile files. The ant script transforms all textile files in the doc folder to HTML files.
+bq(information). You also can create your own textile files. The ant script transforms all textile files in the doc folder to HTML files. Just update the textile file in a editor, save it and enter the command @ant -f create_doc.xml@ into your command line.
 
 </div>
 </div>

@@ -25,7 +25,7 @@
 		<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
 			<p>
 				${Resource.msg('nohits.didyoumean','search',null)}
-				<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="Search-Show?q=<isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/>">
+				<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}">
 					<isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/>
 				</a>
 				?
