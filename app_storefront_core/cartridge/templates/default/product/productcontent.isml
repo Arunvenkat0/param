@@ -159,7 +159,7 @@
 			</isif>	
 			<li><a class="send-to-friend" 
 				   title="${Resource.msg('product.sendfriend','product',null)}" 
-				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
+				   href="${URLUtils.url('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
 				   ${Resource.msg('product.sendfriend','product',null)}
 				   </a>
 			</li>

@@ -4,6 +4,7 @@
 <div id="breadcrumb_left" class="breadcrumb breadcrumb_left">
 
 	<iscomment>bread crumb home link</iscomment>
+	<li><a href="${URLUtils.httpHome()}">${Resource.msg('pagecomponents.breadcrumbs.home','pagecomponents',null)}</a></li>
 
 	<iscomment>
 		the category context is determined based on the product search
@@ -18,6 +19,17 @@
 			category = pdict.ProductSearchResult.category;
 		}
 		
+		// get category from parameters
+		if( category == null && pdict.CurrentHttpParameterMap.cgid != null) 
+		{
+			category = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
+			// check if category is assigned to product
+			if(category != null && !pdict.Product.isAssignedToCategory(category) && !pdict.Product.variationModel.master.isAssignedToCategory(category) ) 
+			{
+				category = null;
+			}	
+		}
+		
 		if( category == null )
 		{
 			// get category from products primary category
@@ -26,7 +38,7 @@
 			// get category from product master if not set at variant
 			if( category == null && pdict.Product.variant )
 			{
-				category = pdict.Product.masterProduct.primaryCategory;
+				category = pdict.Product.variationModel.master.primaryCategory;
 			}
 		}
 	</isscript>

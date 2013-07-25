@@ -233,9 +233,15 @@
 														selectedVariant = VA.ID+"-"+VV.value;
 													}
 												</isscript>
-												<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
-													<isprint value="${VV.displayValue||VV.value}"/>
-												</option>
+												<isscript>													
+													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
+													var displayValue = (VV.displayValue||VV.value);
+												</isscript>
+												<isif condition="${isAvailable}">
+													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
+														<isprint value="${(VV.displayValue||VV.value)}"/>
+													</option>
+												</isif>
 											</isif>
 										</isloop>
 										<isscript>if (selectedVariant && selectedVariant.length>0) {selectedVariants.push(selectedVariant);}</isscript>

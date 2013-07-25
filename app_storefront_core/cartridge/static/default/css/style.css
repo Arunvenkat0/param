@@ -72,6 +72,10 @@ legend{background:url("../images/interface/icon-double-line-header.png") repeat-
 .ie7 legend{width:94%;}
 legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
 legend span em{color:#333333;}
+h2 span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
+h2 span em{color:#333333;}
+h1 span{font-size:0.6em;position:absolute;right:15em;text-transform:none;top:0em;}
+h1 span em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
@@ -162,6 +166,7 @@ td.item-dashboard .option-quantity-purchased span.exceeded {color:#ff0000}
 #tooltip .small{width:300px;}
 #tooltip .medium{width:500px;}
 #tooltip .recommendation-tooltip-header{background:none repeat scroll 0 0 #CCCCCC;font-size:1.2em;font-weight:bold;padding:10px;}
+#tooltip .recommendation-tooltip-header .product-price .price-standard{color:#999999;text-decoration:line-through;}
 #tooltip .recommendation-tooltip-description{padding:10px;}
 #tooltip .recommendation-tooltip-attributes{padding:10px;}
 
@@ -635,7 +640,9 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .send-to-friend-product .product-description h2{font-family:Georgia;font-size:1.2em;font-style:italic;}
 .send-to-friend-product .product-description dt {clear:both;float:left; margin:10px 0 0 0;width: 100px;}
 .send-to-friend-product .product-description dd {float:left;margin:10px 0 0 0; width: 200px;}
-
+#send-to-friend-main .send-to-friend-sender-label{padding-top:0;}
+#send-to-friend-main .send-to-friend-sender{margin-left: 2%;padding: 0.7em 0.5em;text-indent: 0;width: 49.5966%;}
+#send-to-friend-dialog .send-to-friend-login-message{padding: 2em 0em 2em;}
 /* size charts */
 /* ------------------------------------- */
 
