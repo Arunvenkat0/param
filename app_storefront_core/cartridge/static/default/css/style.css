@@ -1092,3 +1092,8 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .radio-url {display: inline;}
 .label-inline input {float:left;margin:0;}
 .instore-shipping-option{width:100%;}
+.pt_checkout div.instore-shipment-header {width:100%;}
+.pt_checkout div.instore-shipment-method {width:100%;padding: 1em;}
+.pt_checkout div.instore-shipment-method span {font-weight:bold;}
+.pt_checkout div.instore-shipment-address {width:40%;float:left;padding-left: 1em;}
+.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;} 
