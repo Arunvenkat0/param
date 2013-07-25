@@ -153,7 +153,11 @@
 		</div>
 		
 		<fieldset>
-
+		
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+				<isinclude template="checkout/shipping/storepickup/instoremessages"/>
+			</isif>
+		
 			<div class="form-row form-row-button">
 				<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 			</div>
