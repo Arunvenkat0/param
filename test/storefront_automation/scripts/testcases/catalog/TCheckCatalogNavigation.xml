@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>broken</tags>
   <description>Tests the navigation feature of the product catalog both on category and product details pages.
 
