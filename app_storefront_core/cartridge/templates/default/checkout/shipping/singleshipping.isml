@@ -25,7 +25,7 @@
 	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.singleshipping.shippingAddress.htmlName}" class="checkout-shipping address">
 		
 		<fieldset>
-			
+<isif condition="${pdict.HomeDeliveries}">	
 		<iscomment>shipping address area</iscomment>
 
 			<legend>
@@ -151,7 +151,7 @@
 		<div id="shipping-method-list">
 			<isinclude url="${URLUtils.https('COShipping-UpdateShippingMethodList')}"/>
 		</div>
-		
+</isif>		
 		<fieldset>
 		
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
