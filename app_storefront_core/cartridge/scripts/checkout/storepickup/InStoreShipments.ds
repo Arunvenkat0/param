@@ -7,8 +7,7 @@
 *
 * For example:
 * 	@input Basket : dw.order.Basket The basket 
-*-   @input ExampleIn : String This is a sample comment.
-*-   @output ExampleOut : Number
+*   @output homedeliveries : Boolean used to show the shipping form fields if there is a home delivery found in the basket
 *
 */
 importPackage( dw.system );
@@ -25,11 +24,13 @@ function execute( args : PipelineDictionary ) : Number
 
 	var basket : Basket = args.Basket;
 	var sliArrayList : ArrayList = new ArrayList();
+	var homedeliveries : Boolean = false;
 	
 	var test = 0;
 	for each (var pli : ProductLineItem in basket.allProductLineItems){
 		if(pli.custom.fromStoreId == null || pli.shipment.shippingMethodID == '005'){
 			//skip none instore pli's
+			homedeliveries = true;
 			continue;
 		}	
 		
@@ -85,5 +86,6 @@ function execute( args : PipelineDictionary ) : Number
 
 
 	var stop =0;
+	args.homedeliveries = homedeliveries;
    return PIPELET_NEXT;
 }
