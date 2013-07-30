@@ -40,7 +40,6 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
-          <key-binding alias="logs" key="ScriptLog"/>
           <key-binding alias="CurrentSession.custom.storeId" key="storeId"/>
           <key-binding alias="Basket" key="basket"/>
           <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="productId"/>
@@ -365,13 +364,20 @@
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
-          <key-binding alias="logs" key="ScriptLog"/>
           <key-binding alias="Stores" key="stores"/>
           <key-binding alias="CurrentHttpParameterMap.pid.value" key="productId"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="/ShowSelectedStoreCore.2">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
       </node>
       <transition target-connector="in1" target-path="/ShowSelectedStoreCore.2"/>
     </segment>
@@ -648,7 +654,6 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
-          <key-binding alias="logs" key="ScriptLog"/>
           <key-binding alias="CurrentSession.custom.storeId" key="storeId"/>
           <key-binding alias="Basket" key="basket"/>
           <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="productId"/>
@@ -774,7 +779,6 @@
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
-          <key-binding alias="logs" key="ScriptLog"/>
           <key-binding alias="Stores" key="stores"/>
           <key-binding alias="CurrentHttpParameterMap.pid.value" key="productId"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
