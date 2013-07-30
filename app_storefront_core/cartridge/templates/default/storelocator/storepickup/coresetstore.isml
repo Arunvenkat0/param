@@ -8,18 +8,26 @@
 
 
 	<isloop items="${pdict.Stores}" var="Store" status="loopstate">
+		<isif condition="${pdict.CurrentSession.custom.storeId == Store.ID}"><br />${Resource.msg('storelist.lightbox.selectedstore','storepickup',null)}</isif>
 		<br />		${Store.name};
 		<br />		${Store.address1};
 		<isif condition="${Store.address2}"><br />${Store.address2}</isif>
 		<br />		${Store.city}, ${Store.stateCode}
 		<br />		${Store.postalCode} ${Store.countryCode.displayValue}
 		<br />		${Store.phone}
-		<br / > ${pdict.storeAvailabilityMap.get(Store.ID)}
+		<br / > 	${pdict.storeAvailabilityMap.get(Store.ID)}
+		<br /> 
 	<div>
-		<isif condition="${!empty(pdict.CurrentHttpParameterMap.pid)}">
-			<a href="${URLUtils.url('StoreInventory-ShowSelectedStoreCore', 'storeId', Store.ID, 'pid', pdict.CurrentHttpParameterMap.pid)}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+		<isif condition="${!empty(pdict.CurrentHttpParameterMap.fromCart) && pdict.CurrentHttpParameterMap.fromCart =='true'}">
+			<isif condition="${pdict.storeAvailabilityMap.get(Store.ID) == 'In Stock'}">
+				<a href="${URLUtils.url('StoreInventory-SetStoreCore', 'storeid', Store.ID, 'plid', pdict.CurrentHttpParameterMap.pid, 'zipCode', pdict.CurrentHttpParameterMap.zipCode,'storepickup','true')}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+			
+				<isif condition="${pdict.CurrentHttpParameterMap.storeid == Store.ID}">
+					<a href="${URLUtils.url('StoreInventory-SetStoreCore', 'storeid', Store.ID, 'plid', pdict.CurrentHttpParameterMap.pid, 'zipCode', pdict.CurrentHttpParameterMap.zipCode,'storepickup','false')}">${Resource.msg('storelist.changetohd','storepickup',null)}</a>
+				</isif>
+			</isif>		
 		<iselse>
-			cart[HC] <a href="${URLUtils.url('StoreInventory-ShowSelectedStoreCore', 'storeId', Store.ID, 'pid', pdict.CurrentHttpParameterMap.pliid)}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+			<a href="${URLUtils.url('StoreInventory-ShowSelectedStoreCore', 'storeId', Store.ID, 'pid', pdict.CurrentHttpParameterMap.pid, 'zipCode', pdict.CurrentHttpParameterMap.zipCode )}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 		</isif>
 
 

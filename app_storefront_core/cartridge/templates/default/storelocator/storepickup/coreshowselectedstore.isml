@@ -18,9 +18,7 @@
 	<br />
 	
 	<isif condition="${!empty(pdict.CurrentHttpParameterMap.pid)}">
-		<a href="${URLUtils.url('Product-Show','pid', pdict.CurrentHttpParameterMap.pid)}">${Resource.msg('global.continue','locale',null)}</a>
-	
-	<iselse>
-		Should link to cart [hc]
+		<a href="${URLUtils.url('Product-Show','pid', pdict.CurrentHttpParameterMap.pid)}">${Resource.msg('storelist.backtopdp','storepickup',null)}</a>
+		<br /><a href="${URLUtils.url('Cart-Show')}">${Resource.msg('pt_cart.breadcrumb','checkout',null)}</a>		
 	</isif>
 </div>
