@@ -1,8 +1,11 @@
 <div class="form-row label-inline">
 
-	<isif condition="${empty(lineItem.custom.fromStoreId)}">
-		<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','storepickup',null)}</label>
+	<isif condition="${lineItem.product.custom.availableForInStorePickup}">
+		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-home" name="${lineItem.getUUID()}" 
+				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=false" value="home"
+				<isif condition="${lineItem.custom.fromStoreId == null}">checked</isif>/>
 	</isif>
+	<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','storepickup',null)}</label>
 
 	<iscomment>Product Existence and Product Availability</iscomment>
 	<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
@@ -38,6 +41,10 @@
 	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline">
 	
 		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
+		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store" name="${lineItem.getUUID()}" 
+				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=true" value="store"
+				<isif condition="${typeof storeinventoryATS == 'undefined' || empty(storeinventoryATS) || storeinventoryATS < lineItem.quantityValue}">disabled </isif> 
+				<isif condition="${lineItem.custom.fromStoreId != null}">checked</isif>/>
 	
 		<iscomment>Store Address</iscomment>
 		<input type="hidden" class="storeid" name="${lineItem.getUUID()}-store" value="${!empty(store) ? store.ID : ''}">	
@@ -57,17 +64,7 @@
 		</isif>
 		</div>
 		<div class="form-row label-inline select-store" id="${lineItem.UUID}">
-			<span class="set-preferred-store">
-				<isif condition="${pdict.CurrentSession.custom.zipcode != null}">
-					<isif condition="${lineItem.custom.fromStoreId != null}">
-						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode,'storeid',lineItem.custom.fromStoreId)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
-					<iselse>
-						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
-					</isif>
-				<iselse>
-					<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'cart', 'true')}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
-				</isif>
-			</span>
+			<span class="set-preferred-store"><a>${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a></span>
 		</div>
 										
 	</div>

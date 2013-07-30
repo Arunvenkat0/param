@@ -2,6 +2,14 @@
 <?demandware-pipeline version="2.0"?>
 
 <pipeline group="StoreCheckout" type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="1" y="1"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="SetStore">
     <segment>
       <node>
@@ -97,6 +105,14 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_3">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="4" y="1"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="LookupByZipCode">
     <segment>
       <node>
@@ -186,13 +202,13 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
+  <branch basename="_ANONYMOUS_BRANCH_5">
     <segment>
       <node>
         <text-node>
-          <description>This pipeline is only for use if the UI cartridge is not in the cartridge path</description>
+          <description>These pipelines is only for when the UI cartridge is not in the cartridge path</description>
         </text-node>
-        <node-display width="4" x="9" y="1"/>
+        <node-display width="12" x="9" y="0"/>
       </node>
     </segment>
   </branch>
@@ -200,7 +216,7 @@
     <segment>
       <node>
         <start-node name="ShowSelectedStoreCore" secure="false"/>
-        <node-display x="9" y="2"/>
+        <node-display x="9" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -209,7 +225,7 @@
       </simple-transition>
       <node>
         <call-node start-name-ref="StoreInventory-SetPreferredStoreCore"/>
-        <node-display x="0" y="6"/>
+        <node-display x="0" y="7"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -290,7 +306,14 @@
     <segment>
       <node>
         <start-node name="ShowAvailableStores" secure="false"/>
-        <node-display x="10" y="2"/>
+        <node-display x="10" y="1"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -353,40 +376,87 @@
       <transition target-connector="in1" target-path="/ShowSelectedStoreCore.2"/>
     </segment>
   </branch>
-  <branch basename="SetZipCodeCore">
+  <branch basename="CartSetZipCodeCore">
     <segment>
       <node>
-        <start-node name="SetZipCodeCore" secure="false"/>
-        <node-display x="12" y="2"/>
+        <start-node name="CartSetZipCodeCore" secure="false"/>
+        <node-display x="11" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="CurrentSession.custom.zipcode != null" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="null" key="From_0"/>
+                <key-binding alias="null" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in3" target-path="/ShowAvailableStores.2">
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+                <bend-point relative-to="source" x="-1" y="1"/>
+                <bend-point relative-to="target" x="1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in3" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="0"/>
       </node>
       <transition target-connector="in1" target-path="/ShowSelectedStoreCore.3"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_7">
+  <branch basename="SetZipCodeCore">
     <segment>
       <node>
-        <text-node>
-          <description>need to clean up empty shipments</description>
-        </text-node>
-        <node-display x="0" y="4"/>
+        <start-node name="SetZipCodeCore" secure="false"/>
+        <node-display x="12" y="1"/>
       </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_8">
-    <segment>
-      <node>
-        <text-node>
-          <description>This pipeline is only for use if the UI cartridge is not in the cartridge path</description>
-        </text-node>
-        <node-display width="5" x="14" y="6"/>
-      </node>
+      <transition target-connector="in1" target-path="/CartSetZipCodeCore.2"/>
     </segment>
   </branch>
   <branch basename="SetPreferredStoreCore">
     <segment>
       <node>
         <start-node call-mode="private" name="SetPreferredStoreCore" secure="false"/>
-        <node-display x="14" y="7"/>
+        <node-display x="15" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -433,8 +503,8 @@
   <branch basename="SetZipCodeSubmission">
     <segment>
       <node>
-        <start-node name="SetZipCodeSubmission" secure="false"/>
-        <node-display x="15" y="7"/>
+        <start-node call-mode="private" name="SetZipCodeSubmission" secure="false"/>
+        <node-display x="16" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -456,7 +526,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetZipCodeValueCore" secure="false"/>
-        <node-display x="16" y="7"/>
+        <node-display x="17" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -504,7 +574,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetStoreIdValueCore" secure="false"/>
-        <node-display x="18" y="7"/>
+        <node-display x="18" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -548,13 +618,112 @@
       </node>
     </segment>
   </branch>
+  <branch basename="SetStoreCore">
+    <segment>
+      <node>
+        <start-node call-mode="public" name="SetStoreCore" secure="false"/>
+        <node-display x="20" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="Cart-GetExistingBasket"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="-1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="Cart-Show"/>
+              <node-display orientation="horizontal" x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
+          <key-binding alias="logs" key="ScriptLog"/>
+          <key-binding alias="CurrentSession.custom.storeId" key="storeId"/>
+          <key-binding alias="Basket" key="basket"/>
+          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="productId"/>
+          <key-binding alias="CurrentHttpParameterMap.storepickup.stringValue" key="storepickup"/>
+          <key-binding alias="Product" key="product"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="LineItemUUID"/>
+          <key-binding alias="CurrentHttpParameterMap.storeid.stringValue" key="StoreId"/>
+          <key-binding alias="ErrorCode" key="ErrorCode"/>
+          <key-binding alias="CurrentHttpParameterMap.storepickup.stringValue" key="StorePickup"/>
+        </pipelet-node>
+        <node-display x="0" y="2"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1" target-path="./b4.1"/>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="checkout/RemoveEmptyShipments.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+        </pipelet-node>
+        <node-display x="0" y="2"/>
+        <branch basename="b4" source-connector="error">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="-2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <jump-node start-name-ref="Cart-Show"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <jump-node start-name-ref="Cart-Show"/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_15">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="1" y="10"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="Inventory">
     <segment>
       <node>
         <start-node name="Inventory" secure="false">
           <description>Sample URL to call ....Stores-Inventory?pid=2239622&amp;zipCode=01803</description>
         </start-node>
-        <node-display x="1" y="9"/>
+        <node-display x="1" y="11"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -637,11 +806,19 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_17">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="4" y="10"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="GetProductFromLineItem">
     <segment>
       <node>
         <start-node call-mode="private" name="GetProductFromLineItem" secure="false"/>
-        <node-display x="4" y="9"/>
+        <node-display x="4" y="11"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -745,11 +922,19 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="1" y="20"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="SetPreferredStore">
     <segment>
       <node>
         <start-node name="SetPreferredStore" secure="false"/>
-        <node-display x="1" y="19"/>
+        <node-display x="1" y="21"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -806,7 +991,7 @@
     <segment>
       <node>
         <start-node name="GetPreferredStore" secure="false"/>
-        <node-display x="2" y="19"/>
+        <node-display x="2" y="21"/>
       </node>
       <transition target-connector="in1" target-path="/SetPreferredStore.2">
         <transition-display>
@@ -815,11 +1000,19 @@
       </transition>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_22">
+    <segment>
+      <node>
+        <text-node/>
+        <node-display width="2" x="4" y="20"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="SetZipCode">
     <segment>
       <node>
         <start-node name="SetZipCode" secure="false"/>
-        <node-display x="4" y="19"/>
+        <node-display x="4" y="21"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -872,7 +1065,7 @@
     <segment>
       <node>
         <start-node name="GetZipCode" secure="false"/>
-        <node-display x="5" y="19"/>
+        <node-display x="5" y="21"/>
       </node>
       <transition target-connector="in3" target-path="/SetZipCode.2">
         <transition-display>
