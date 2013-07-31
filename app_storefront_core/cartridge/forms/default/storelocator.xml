@@ -2,7 +2,7 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
  <field formid="countryCode" type="string" mandatory="false" />
  <field formid="distanceUnit" type="string" mandatory="false" />
- <field formid="postalCode" label="forms.zippostalcode" type="string" mandatory="true" binding="postalCode" parse-error="storelocator.ziperror" missing-error="storelocator.ziperror" regexp="(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$)" value-error="forms.errorzip"/>
+ <field formid="postalCode" label="forms.zippostalcode" type="string" mandatory="true" binding="postalCode" parse-error="storelocator.ziperror" missing-error="storelocator.ziperror" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" value-error="forms.errorzip"/>
  <field formid="maxdistance" label="storelocator.distancelabel" type="number" mandatory="false" binding="maxdistance">
 	<options>	
 		<option optionid="15" label="storelocator.distanceoption1" value="15"/>
