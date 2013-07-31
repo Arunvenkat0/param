@@ -714,6 +714,24 @@ To enter a new user you can use Manage Test Data. These are the attributes to ch
 |FirstName |First name of the new user.|
 |LastName  |Last name of the new user.|
 
+h3. TCheckDidYouMeanSearch
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
+p. Afterwards is the did you mean term clicked and the result page (product grid) is validated.
+
+h4. What to change?
+
+p. You can change the following parameters at the modules.
+
+|<_. Parameter      |<_. Description|
+|InvalidSearchEntry	|Search entry which triggers the Did You Mean search.|
+|KeyWord			|Did You Mean suggestion which will be clicked and triggers a new search.|
 
 h3. TCheckSearchFeature
 
