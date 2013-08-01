@@ -382,7 +382,7 @@
                   </node>
                   <simple-transition/>
                   <node>
-                    <decision-node condition-key="FoundOrder.billingAddress.postalCode.equals(CurrentForms.ordertrack.postalCode.value)" condition-operator="expr"/>
+                    <decision-node condition-key="FoundOrder.billingAddress.postalCode.toUpperCase().equals(CurrentForms.ordertrack.postalCode.value.toUpperCase())" condition-operator="expr"/>
                     <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="yes">
                       <transition target-connector="in"/>
