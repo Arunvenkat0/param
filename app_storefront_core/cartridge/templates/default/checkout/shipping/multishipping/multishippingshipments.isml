@@ -78,7 +78,7 @@
 								<td colspan="3">
 
 						
-								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getPreferences().getCustom()['enableStorePickUp']}">
+								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 									${Resource.msg('cart.store.instorepickup','storepickup',null)}
 									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
@@ -160,7 +160,7 @@
 						<isif condition="${shipment.productLineItems.size() > 0}">
 							<tr class="cart-row">
 								<td colspan="4">
-								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getPreferences().getCustom()['enableStorePickUp']}">
+								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 									<div class="form-row">
 										<isinputfield rowclass="store-pickup-message-text" formfield="${shipmentItem.storePickupMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
 									</div>
