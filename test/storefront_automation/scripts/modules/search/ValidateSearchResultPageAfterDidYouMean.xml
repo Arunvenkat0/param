@@ -2,7 +2,7 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>After the suggested Did You Mean term is cliked a product grid page is shown. This module validtes the basic elements shown at this grid.
 
-The sugegsted KeyWord is entere din a parameter.</description>
+The sugegsted KeyWord is entered in a parameter.</description>
   <parameter name="KeyWord"/>
   <command name="assertText" target="css=.refinement-header" value="regexpi:Refine Search"/>
   <command name="assertText" target="css=.breadcrumb-result-text" value="*@{KeyWord}*"/>
