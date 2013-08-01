@@ -144,6 +144,13 @@
 										</isif>
 										<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
 										<div><isprint value="${address.countryCode}"/></div>
+										<div>
+											<isif condition="${shipment.custom.shipmentType == 'instore'}">
+												<a href="${URLUtils.https('Cart-Show')}">${Resource.msg('global.edit','locale',null)}</a>	
+											<iselse>
+												<a href="${URLUtils.https('COShippingMultiple-Start')}">${Resource.msg('global.edit','locale',null)}</a>	
+											</isif>
+										</div>
 									</isif>
 							    </td>
 							 </isif>							
