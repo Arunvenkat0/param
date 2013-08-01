@@ -16,7 +16,7 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
        <packaging>pom</packaging>
-    <version>13.7.XI.3</version>
+    <version>13.8.XI.4-SNAPSHOT</version>
     <description>SiteGenesis</description>
 
     <build>
