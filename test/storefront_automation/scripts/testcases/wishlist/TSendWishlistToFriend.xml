@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>broken</tags>
   <description>Performs the following steps:
 - search for a product
 - add to wishlist
 - register new user
 - validate product data on the wishlist
-- send this wishlist to a friend</description>
+- send this wishlist to a friend
+
+Preview Overlay Validation broken by RAP-2485</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -27,7 +30,7 @@
   <command name="click" target="id=send-to-friend"/>
   <command name="waitForText" target="id=ui-dialog-title-send-to-friend-dialog" value="regexpi:Send to a Friend"/>
   <command name="assertValue" target="id=dwfrm_sendtofriend_yourname" value="${UserFirstName} ${UserLastName}"/>
-  <command name="assertValue" target="id=dwfrm_sendtofriend_youremail" value="${Email}"/>
+  <command name="assertTextPresent" value="${Email}"/>
   <action name="EnterFormData"/>
   <command name="type" target="id=dwfrm_sendtofriend_friendsname" value="${FriendsName}"/>
   <command name="store" target="${RANDOM.String(8)}@varmail.de" value="FriendsEmail"/>
