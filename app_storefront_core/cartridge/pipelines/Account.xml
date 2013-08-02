@@ -248,6 +248,8 @@
                             <description>Sets a special reporting marker to indicate a successful registration. This flag will later be evaluate in the template and reset to avoid double reporting of a registration.</description>
                             <key-binding alias="&quot;true&quot;" key="From_0"/>
                             <key-binding alias="ReportingMarker_SuccessfulRegistration" key="To_0"/>
+                            <key-binding alias="&quot;registration=true&quot;" key="From_1"/>
+                            <key-binding alias="TargetPipelineParams" key="To_1"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                         </node>
