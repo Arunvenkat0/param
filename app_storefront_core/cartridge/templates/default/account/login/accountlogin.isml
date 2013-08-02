@@ -10,11 +10,11 @@
 		<div class="login-box login-order-track">	
 			
 			<h2 class="section-header">${Resource.msg('accountlogin.orderheader','account',null)}
-			<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+			<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</h2>	
 		
 			<div class="login-box-content clearfix">			
-		
+								
 				<p>${Resource.msg('accountlogin.checkmessage','account',null)}</p>				
 		
 				<iscomment>Order Not Found Error Message</iscomment>

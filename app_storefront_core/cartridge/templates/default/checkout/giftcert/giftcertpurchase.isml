@@ -8,22 +8,24 @@
 		<iscontentasset aid="gift-details"/>
 							
 		<isif condition="${pdict.GiftCertificateLineItem == null}">
+		
 			<form method="post" id="GiftCertificateForm" action="${URLUtils.url('GiftCert-AddToBasket')}">
 		<iselse>
 			<form method="post" id="GiftCertificateForm" action="${URLUtils.url('GiftCert-Update')}">
 		</isif>
 				
-				<fieldset>
+			
 				
+				<fieldset>
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.lineItemId}" type="hidden"/>
 					
 					<isif condition="${!pdict.CurrentHttpParameterMap.plid.empty}">
 						<input type="hidden" name="plid" value="${pdict.CurrentHttpParameterMap.plid}"/>
 					</isif>
-					
+			
+					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>			
 		
-					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.from}" type="input" rowClass="label-above"/>
-					
+					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.from}" type="input" rowClass="label-above"/>					
 					
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.recipient}" type="input" rowClass="label-above"/>
 					
