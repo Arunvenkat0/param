@@ -22,12 +22,12 @@
 		// get category from parameters
 		if( category == null && pdict.CurrentHttpParameterMap.cgid != null) 
 		{
-			category = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
+			categoryTmp = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
 			// check if category is assigned to product
-			if(category != null && !pdict.Product.isAssignedToCategory(category) && !pdict.Product.variationModel.master.isAssignedToCategory(category) ) 
+			if(categoryTmp != null && (pdict.Product.isAssignedToCategory(categoryTmp) ? true : pdict.Product.variationModel.master != null ? pdict.Product.variationModel.master.isAssignedToCategory(categoryTmp) : false) ) 
 			{
-				category = null;
-			}	
+				category = categoryTmp;
+			}		
 		}
 		
 		if( category == null )
