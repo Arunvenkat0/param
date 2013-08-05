@@ -69,16 +69,3 @@ function getStoreAvailabilityMessage(store : dw.catalog.Store, product : dw.cata
 	
     return availabilityMessage;
 }
-
-
-/**
- * Transient representation line item that is destined for a store address
- */
-function StoreLineItem()
-{
-	var storeID : String = null;
-	var productID : String = null;
-	var optionID  : String = null;
-	var quantity : Number = 0;
-		
-}

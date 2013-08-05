@@ -5,7 +5,10 @@
   <branch basename="_ANONYMOUS_BRANCH_1">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Sets the store for s given line item
+(requires rich_UI cartrdige)</description>
+        </text-node>
         <node-display width="2" x="1" y="1"/>
       </node>
     </segment>
@@ -107,7 +110,9 @@
   <branch basename="_ANONYMOUS_BRANCH_3">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Looks up stores based on the zipcode given and the site prefernces that refer the the radius and units of distance</description>
+        </text-node>
         <node-display width="2" x="4" y="1"/>
       </node>
     </segment>
@@ -205,9 +210,9 @@
     <segment>
       <node>
         <text-node>
-          <description>These pipelines is only for when the UI cartridge is not in the cartridge path</description>
+          <description>These pipelines are used when the UI cartridge is not in the cartridge path.</description>
         </text-node>
-        <node-display width="12" x="9" y="0"/>
+        <node-display width="10" x="9" y="0"/>
       </node>
     </segment>
   </branch>
@@ -462,7 +467,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetPreferredStoreCore" secure="false"/>
-        <node-display x="15" y="1"/>
+        <node-display x="14" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -510,7 +515,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetZipCodeSubmission" secure="false"/>
-        <node-display x="16" y="1"/>
+        <node-display x="15" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -532,7 +537,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetZipCodeValueCore" secure="false"/>
-        <node-display x="17" y="1"/>
+        <node-display x="16" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -580,7 +585,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="SetStoreIdValueCore" secure="false"/>
-        <node-display x="18" y="1"/>
+        <node-display x="17" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -628,7 +633,7 @@
     <segment>
       <node>
         <start-node call-mode="public" name="SetStoreCore" secure="false"/>
-        <node-display x="20" y="1"/>
+        <node-display x="18" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -717,7 +722,10 @@
   <branch basename="_ANONYMOUS_BRANCH_15">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Gets a list of stores with the given product, or product line item's availibity to sell (requires rich_UI cartri
+dge)</description>
+        </text-node>
         <node-display width="2" x="1" y="10"/>
       </node>
     </segment>
@@ -813,7 +821,9 @@
   <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Assumes that the pid refers to a product line item instead of a product object for determining products availability.</description>
+        </text-node>
         <node-display width="2" x="4" y="10"/>
       </node>
     </segment>
@@ -929,7 +939,9 @@
   <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Gets/Sets the preferred store for the session object</description>
+        </text-node>
         <node-display width="2" x="1" y="20"/>
       </node>
     </segment>
@@ -1007,7 +1019,9 @@
   <branch basename="_ANONYMOUS_BRANCH_22">
     <segment>
       <node>
-        <text-node/>
+        <text-node>
+          <description>Gets/Sets the users zip code for the session object</description>
+        </text-node>
         <node-display width="2" x="4" y="20"/>
       </node>
     </segment>
