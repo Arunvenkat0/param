@@ -1022,28 +1022,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
               <join-node/>
               <node-display x="1" y="0"/>
             </node>
-            <transition target-connector="in1" target-path="../b4.1"/>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/storepickup/InStoreShipments.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="HomeDeliveries" key="homedeliveries"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in2"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="0"/>
-            </node>
             <simple-transition/>
             <node>
               <end-node name="error"/>
@@ -1052,12 +1030,20 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           </segment>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <call-node start-name-ref="COShipping-InStoreFormInit"/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node/>
         <node-display x="0" y="1"/>
@@ -1070,7 +1056,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         <text-node>
           <description>Mark step as fulfilled.</description>
         </text-node>
-        <node-display x="2" y="19"/>
+        <node-display x="3" y="20"/>
       </node>
     </segment>
   </branch>
@@ -1549,6 +1535,26 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       <transition target-connector="in1" target-path="/EditAddress.2"/>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_29">
+    <segment>
+      <node>
+        <text-node>
+          <description>Binds the store message from the user to the shipment.</description>
+        </text-node>
+        <node-display x="9" y="29"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_30">
+    <segment>
+      <node>
+        <text-node>
+          <description>Used to initialize the single shipping form with instore pick up shipments</description>
+        </text-node>
+        <node-display x="11" y="29"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="UpdateInStoreMessage">
     <segment>
       <node>
@@ -1619,6 +1625,27 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <transition target-connector="in"/>
           <segment>
             <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="checkout/storepickup/InStoreShipments.ds"/>
+                <key-binding alias="null" key="ScriptLog"/>
+                <key-binding alias="Basket" key="Basket"/>
+                <key-binding alias="HomeDeliveries" key="homedeliveries"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display orientation="horizontal" x="2" y="0"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
               <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.singleshipping.inStoreShipments.shipments" key="FormElement"/>
               </pipelet-node>
@@ -1637,9 +1664,39 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           </segment>
         </branch>
       </node>
-      <transition target-connector="in2" target-path="./+1">
+      <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="true" key="From_0"/>
+          <key-binding alias="HomeDeliveries" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="1" y="2"/>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
           <bend-point relative-to="target" x="2" y="0"/>
         </transition-display>
       </transition>
@@ -1647,7 +1704,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="3"/>
+        <node-display x="-1" y="2"/>
       </node>
       <simple-transition/>
       <node>

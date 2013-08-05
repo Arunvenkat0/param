@@ -1652,7 +1652,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="availableForInStorePickup">
                 <display-name xml:lang="x-default">availableForInStorePickup</display-name>
-                <description xml:lang="x-default">availableForInStorePickup</description>
+                <description xml:lang="x-default">Signals if there are inventory lists for stores (brick and mortar) associated with this product.</description>
                 <type>boolean</type>
                 <site-specific-flag>false</site-specific-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -3215,7 +3215,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="fromStoreId">
                 <display-name xml:lang="x-default">From Store Id</display-name>
-                <description xml:lang="x-default">From Store Id</description>
+                <description xml:lang="x-default">Links the store to the productlineitem for grouping shipments in the checkout process.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -3559,7 +3559,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="fromStoreId">
                 <display-name xml:lang="x-default">Pickup Store ID</display-name>
-                <description xml:lang="x-default">Pickup Store ID</description>
+                <description xml:lang="x-default">Used to map the shipment to a  brick and mortar store.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -3567,7 +3567,7 @@
                 <field-length>0</field-length>
             </attribute-definition>
             <attribute-definition attribute-id="shipmentType">
-                <display-name xml:lang="x-default">Shipment Type</display-name>
+                <display-name xml:lang="x-default">When this attribute equals 'instore', the checkout flow will assign the shipping method (005) which has a no shipping charge.</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -3575,7 +3575,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="storePickupMessage">
                 <display-name xml:lang="x-default">Store Pickup Message</display-name>
-                <description xml:lang="x-default">Store Pickup Message</description>
+                <description xml:lang="x-default">This is text used by the end user when sending a message to the brick and mortar store about the shipment.  This is reflected in the order export.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -3907,7 +3907,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="storeLookupUnit">
                 <display-name xml:lang="x-default">Store Lookup Unit</display-name>
-                <description xml:lang="x-default">Store Lookup Unit</description>
+                <description xml:lang="x-default">Used in finding the store near the zip code specified in the store front by the end user.</description>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>

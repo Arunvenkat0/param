@@ -13,7 +13,4 @@
 		</form>
 		<isif condition="${!empty(pdict.CurrentHttpParameterMap.pid)}">
 			<a href="${URLUtils.url('Product-Show','pid', pdict.CurrentHttpParameterMap.pid)}">${Resource.msg('global.cancel','locale',null)}</a>
-
-		<iselse>
-			Should link to cart [hc]
 		</isif>
