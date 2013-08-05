@@ -83,11 +83,10 @@
 					<thead>
 						<tr>
 							<th class="section-header" colspan="2">${Resource.msg('global.product','locale',null)}</th>
-							
-							<th class="section-header">${Resource.msg('cart.store.deliveryoptions','storepickup',null)}</th>
 							<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-							<th class="section-header" colspan="2">${Resource.msg('global.qty','locale',null)}</th>
+							<th class="section-header">${Resource.msg('cart.store.deliveryoptions','storepickup',null)}</th>
 							</isif>
+							<th class="section-header" colspan="2">${Resource.msg('global.qty','locale',null)}</th>
 							<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
 							<th class="section-header header-total-price">${Resource.msg('global.totalprice','locale',null)}</th>
 						</tr>
