@@ -255,7 +255,7 @@
 					<dt>${Resource.msg('global.from','locale',null)}:</dt>
 					<dd>
 						<isprint value="${pdict.CurrentForms.sendtofriend.yourname.htmlValue}"/><br />
-						<isprint value="${pdict.CurrentForms.sendtofriend.youremail.htmlValue}"/>
+						<isprint value="${pdict.CurrentUser.profile.email}"/>
 					</dd>
 					
 					<dt>${Resource.msg('sendtoafrienddialog.subject','account',null)}</dt>
