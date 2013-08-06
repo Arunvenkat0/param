@@ -2,10 +2,11 @@
 <div class="login-box login-account">
 	
 	<h2 class="section-header">${Resource.msg('logininclude.customersheader','account',null)}
-		<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+	<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 	</h2>	
 	
 	<div class="login-box-content returning-customers clearfix">
+				
 		
 		<p>${Resource.msg('logininclude.registered','account',null)}</p>		
 		

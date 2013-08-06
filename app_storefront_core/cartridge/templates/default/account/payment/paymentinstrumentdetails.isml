@@ -7,6 +7,8 @@
 
 <isdecorate template="${DecoratorTemplate}">
 	
+	<div class="dialog-required"> <span class="required-indicator">&#8226;</span> <em>${Resource.msg('global.requiredfield','locale',null)}</em></div>
+	
 	<h1>${Resource.msg('paymentinstrumentlist.addcard','account',null)}</h1>
 
 		<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.httpsContinue()}"  method="post" id="newcreditcard">
