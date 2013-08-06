@@ -10,7 +10,7 @@
 		<iselse>
 		
 			<h1>${Resource.msg('global.contactus','locale',null)}
-			<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+			<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</h1>
 				
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
