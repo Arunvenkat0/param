@@ -34,13 +34,23 @@
 					</legend>
 		
 					<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
-					<isif condition="${pdict.Basket.productQuantityTotal > 1 && dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')}">
-						<div class="ship-to-multiple">
-							${Resource.msg('singleshipping.multiple','checkout',null)} 
-							<button class="shiptomultiplebutton button-fancy-medium cancel" type="submit" name="${pdict.CurrentForms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
-								${Resource.msg('global.yes','locale',null)}
-							</button>
-						</div>
+					<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')}">
+						<isscript>
+							var plicount = 0;
+							for each (var pli : ProductLineItem in pdict.Basket.allProductLineItems){
+								if(pli.custom.fromStoreId == null ){
+									plicount += pli.quantityValue; 
+								}
+							}		
+						</isscript>
+						<isif condition="${plicount > 1 }">
+							<div class="ship-to-multiple">
+								${Resource.msg('singleshipping.multiple','checkout',null)} 
+								<button class="shiptomultiplebutton button-fancy-medium cancel" type="submit" name="${pdict.CurrentForms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
+									${Resource.msg('global.yes','locale',null)}
+								</button>
+							</div>
+						</isif>
 					</isif>
 					
 					

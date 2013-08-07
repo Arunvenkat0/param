@@ -28,11 +28,14 @@ function execute( args : PipelineDictionary ) : Number
 	
 	for each (var pli : ProductLineItem in basket.allProductLineItems){
 		
-		if(pli.custom.fromStoreId == null || pli.shipment.shippingMethodID == '005'){
+		if(pli.custom.fromStoreId == null){
 			//skip none instore pli's
 			homedeliveries = true;
 			continue;
 		}	
+		if(pli.shipment.shippingMethodID == '005'){
+			continue;
+		}
 		
 		//check to see if we are creating a new shipment or adding to an existing one
 		if(sliArrayList.contains(pli.custom.fromStoreId)){

@@ -16,6 +16,9 @@
 	<isset name="shipmentCount" value="${0}" scope="page"/>
 	<isloop items="${Shipments}" var="shipment" status="loopstate">
 		<isif condition="${((shipment.giftCertificateLineItems.size() > 0 || shipment.custom.shipmentType == 'instore') && shipment.shippingAddress == null) || shipment.shippingAddress != null}">
+			<isif condition="${shipment.custom.shipmentType != 'instore' && shipment.shippingAddress.address1 != ''}">
+				<iscontinue/>
+			</isif>
 			<isset name="shipmentCount" value="${shipmentCount+1}" scope="page"/>
 			<div class="mini-shipment order-component-block <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 				<iscomment>omit the shipment name, if there is just one shipment</iscomment>
