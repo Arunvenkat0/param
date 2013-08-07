@@ -1018,8 +1018,6 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .ui-dialog #listings-nav {float: right;}
 .ui-dialog #listings-nav a {cursor: pointer;display: inline-block;margin: 0 5px;}
 .ui-dialog #listings-nav a.active {font-weight: bold;}
-.pdp-main .product-add-to-cart .availability .label {position: relative;}
-.pdp-main .product-add-to-cart .availability {padding: 20px 0 20px 0px;width: 80%;}
 .pdp-main .product-add-to-cart .online-stock span {float: left;}
 .pdp-main .product-add-to-cart .store-stock {display: block;clear: left;}
 .update-location {color:#22B0E8;padding-left: 10px;cursor: pointer;}	

@@ -140,21 +140,16 @@
 			<div class="availability-block">
 				<div class="availability">
 				<isif condition="${!pdict.Product.master}">
-					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
-						<div class="availability-results online-stock">
-							<span class="label">${Resource.msg('storelist.online','storepickup',null)}: </span>
-							<span class="value"><isinclude template="product/components/availability"/></span>
-						</div>
+					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>				
+					<span class="value"><isinclude template="product/components/availability"/></span>								
 					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 						<div  id="${pdict.Product.ID}"  class="availability-results store-stock">
 							<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
-							<span class="value"></span>
 						</div>
 					</isif>
 				</isif>
 				</div>
 			</div>
-			
 			</fieldset>
 		</form>
 	</div><!--  end details block -->
