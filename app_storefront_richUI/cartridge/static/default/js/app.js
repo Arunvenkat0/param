@@ -4735,7 +4735,7 @@ var app = (function (app, $) {
  				// append close button for pdp
  				if(currentTemplate !== "cart") {
 	 				if(app.user.storeId !== null) {
-	 					$cache.preferredStorePanel.append("<button class='close button-style-1'>" + app.resources.CONTINUE_WITH_STORE + "</button>");
+	 					$cache.preferredStorePanel.append("<button class='close button-style-1  set-preferred-store'>" + app.resources.CONTINUE_WITH_STORE + "</button>");
 	 				}
 	 				else if(app.user.zip !== null) {
 	 					$cache.preferredStorePanel.append("<button class='close button-style-1'>" + app.resources.CONTINUE + "</button>");
@@ -4758,7 +4758,7 @@ var app = (function (app, $) {
  				
  				//remove the continue button if selecting a zipcode
  				if(app.user.zip === null || app.user.zip === "") {
- 				jQuery('.button-style-1').last().remove();
+ 					jQuery('.set-preferred-store').last().remove();
  				}
 
  		},
