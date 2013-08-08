@@ -4755,6 +4755,11 @@ var app = (function (app, $) {
  				jQuery('button.close').click(function(){
  					$cache.preferredStorePanel.dialog("close");
  				});
+ 				
+ 				//remove the continue button if selecting a zipcode
+ 				if(app.user.zip === null || app.user.zip === "") {
+ 				jQuery('.button-style-1').last().remove();
+ 				}
 
  		},
  		
