@@ -34,7 +34,24 @@ function execute( args : PipelineDictionary ) : Number
 			continue;
 		}	
 		if(pli.shipment.shippingMethodID == '005'){
-			continue;
+			//check to see if the storeid has changed
+			if(pli.custom.fromStoreId == pli.shipment.custom.fromStoreId){
+				continue;
+			}else{
+				var storeObject = getStoreObject(pli.custom.fromStoreId);
+				//change the shipment address to reflect the new store address
+				pli.shipment.shippingAddress.setFirstName( '');				
+				pli.shipment.shippingAddress.setLastName( storeObject.name );
+				pli.shipment.shippingAddress.setAddress1( storeObject.address1 );
+				pli.shipment.shippingAddress.setAddress2( storeObject.address2 );
+				pli.shipment.shippingAddress.setCity( storeObject.city );
+				pli.shipment.shippingAddress.setPostalCode( storeObject.postalCode );
+				pli.shipment.shippingAddress.setStateCode( storeObject.stateCode );
+				pli.shipment.shippingAddress.setCountryCode( storeObject.custom.countryCodeValue );																								
+				pli.shipment.shippingAddress.setPhone( storeObject.phone );	
+				pli.shipment.custom.fromStoreId =  pli.custom.fromStoreId;	
+				continue;
+			}
 		}
 		
 		//check to see if we are creating a new shipment or adding to an existing one
@@ -61,7 +78,6 @@ function execute( args : PipelineDictionary ) : Number
 			
 			var shippingMethods : ArrayList =  new ArrayList(ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods());
 			for each(var shippingMethod in shippingMethods){
-				var tttt = 0;
 				if(shippingMethod.ID == '005'){
 					shipment.shippingMethod = shippingMethod;
 				}

@@ -1022,10 +1022,17 @@ This pipeline implements the logic for the default (single) shipping scenario. I
               <join-node/>
               <node-display x="1" y="0"/>
             </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
             <simple-transition/>
             <node>
               <end-node name="error"/>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -1629,7 +1636,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="checkout/storepickup/InStoreShipments.ds"/>
-                <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="HomeDeliveries" key="homedeliveries"/>
               </pipelet-node>
@@ -1638,7 +1644,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                 <transition target-connector="in"/>
                 <segment>
                   <node>
-                    <end-node name="error"/>
+                    <jump-node start-name-ref="Cart-Show"/>
                     <node-display orientation="horizontal" x="2" y="0"/>
                   </node>
                 </segment>
