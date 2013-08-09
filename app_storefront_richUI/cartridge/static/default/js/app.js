@@ -4716,7 +4716,9 @@ var app = (function (app, $) {
  										app.storeinventory.loadPreferredStorePanel(pid); 
  									} else {
  										//bad zip
- 										jQuery('#preferred-store-panel div').append('<div class="error-message">'+app.resources.INVALID_ZIP+'</div>');
+ 										if(jQuery('#preferred-store-panel div .error-message').length == 0){
+ 											jQuery('#preferred-store-panel div').append('<div class="error-message">'+app.resources.INVALID_ZIP+'</div>');
+ 										}
  									}
  								});
  					$cache
