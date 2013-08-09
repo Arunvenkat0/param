@@ -4690,15 +4690,33 @@ var app = (function (app, $) {
  						.append('<div><input type="text" id="userZip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
  							.find('#set-user-zip')
  								.click(function(){
- 									var zipCodePattern = /^\d{5}$/;
  									var enteredZip = jQuery('#userZip').val();
- 									if( zipCodePattern.test(enteredZip) ) {
+ 									var regexObj = {
+ 											canada 		: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i ,
+ 											usa    		: /^\d{5}(-\d{4})?$/ 
+ 									};
+ 									
+ 									var validZipEntry = false;
+ 									
+ 									//check Canadian postal code 
+ 									var regexp     = new RegExp(regexObj.canada);
+ 									if( regexp.test(enteredZip) ) {
+ 										validZipEntry = true;
+ 									} 
+ 									
+ 									//check us zip codes
+ 									var regexp     = new RegExp(regexObj.usa);
+ 									if( regexp.test(enteredZip) ) {									
+ 										validZipEntry = true;
+ 									} 
+ 									
+ 									if( validZipEntry ) {
  										//good zip
  										app.storeinventory.setUserZip(enteredZip);
- 										app.storeinventory.loadPreferredStorePanel(pid);
- 									}
- 									else {
+ 										app.storeinventory.loadPreferredStorePanel(pid); 
+ 									} else {
  										//bad zip
+ 										jQuery('#preferred-store-panel div').append('<div class="error-message">'+app.resources.INVALID_ZIP+'</div>');
  									}
  								});
  					$cache
