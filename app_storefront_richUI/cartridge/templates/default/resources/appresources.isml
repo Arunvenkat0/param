@@ -93,6 +93,7 @@
 		PREFERRED_STORE					: Resource.msg('storelist.lightbox.preferredstore','storepickup',null),
 		SET_PREFERRED_STORE				: Resource.msg('storelist.lightbox.setpreferredstore','storepickup',null),
 		ENTER_ZIP						: Resource.msg('storelist.lightbox.enterzip','storepickup',null),
+		INVALID_ZIP						: Resource.msg('storelist.lightbox.invalidpostalcode','storepickup',null),
 		SEARCH							: Resource.msg('storelist.lightbox.search','storepickup',null),
 		CHANGE_LOCATION					: Resource.msg('storelist.lightbox.changelocation','storepickup',null),
 		CONTINUE_WITH_STORE				: Resource.msg('storelist.lightbox.continuewithstore','storepickup',null),
