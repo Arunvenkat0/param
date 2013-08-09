@@ -4580,7 +4580,7 @@ var app = (function (app, $) {
  					var numListings = listings.find('li').size();
  					var listingsNav = jQuery('<div id="listings-nav"/>');
  					for(var i = 0, link = 1; i <= numListings; i++){
- 						if(numListings >= i) { listingsNav.append('<a data-index="'+ i +'">'+link+'</a>'); }
+ 						if(numListings >  i) { listingsNav.append('<a data-index="'+ i +'">'+link+'</a>'); }
  					    	link++;
  					    	i = i + 2;
  					}		    	
