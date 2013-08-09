@@ -4778,7 +4778,7 @@ var app = (function (app, $) {
  				
  				//remove the continue button if selecting a zipcode
  				if(app.user.zip === null || app.user.zip === "") {
- 					jQuery('.set-preferred-store').last().remove();
+ 					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
  				}
 
  		},
