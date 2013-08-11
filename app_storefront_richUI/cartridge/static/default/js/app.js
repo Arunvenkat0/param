@@ -1254,6 +1254,7 @@ var app = (function (app, $) {
 			app.ajax.getJson({
 				url : app.urls.compareRemove,
 				data : { 'pid' : args.itemid, 'category' : _currentCategory },
+				async: args.async,
 				callback : function (response) {
 					if (!response || !response.success) {
 						// response failed. uncheck the checkbox return
