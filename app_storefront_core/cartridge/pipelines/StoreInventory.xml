@@ -749,6 +749,31 @@ dge)</description>
       </node>
       <simple-transition/>
       <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="PLI" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
         <pipelet-node pipelet-name="GetProduct" pipelet-set-identifier="bc_api">
           <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="ProductID"/>
           <key-binding alias="Product" key="Product"/>
@@ -758,7 +783,6 @@ dge)</description>
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="source" x="2" y="0"/>
-              <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
@@ -774,7 +798,11 @@ dge)</description>
           </segment>
         </branch>
       </node>
-      <transition target-connector="in1" target-path="./+1"/>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="2"/>
+        </transition-display>
+      </transition>
     </segment>
     <segment>
       <node>
@@ -791,10 +819,12 @@ dge)</description>
           <key-binding alias="CurrentHttpParameterMap.pid.value" key="productId"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>
+          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>
+          <key-binding alias="PLI" key="pli"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
+          <transition target-connector="in3" target-path="./+1">
             <transition-display>
               <bend-point relative-to="source" x="1" y="0"/>
               <bend-point relative-to="target" x="1" y="0"/>
@@ -882,8 +912,8 @@ dge)</description>
                       <config-property key="Transactional" value="false"/>
                       <key-binding alias="LineItem.product" key="From_0"/>
                       <key-binding alias="Product" key="To_0"/>
-                      <key-binding alias="null" key="From_1"/>
-                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="LineItem" key="From_1"/>
+                      <key-binding alias="PLI" key="To_1"/>
                       <key-binding alias="null" key="From_2"/>
                       <key-binding alias="null" key="To_2"/>
                       <key-binding alias="null" key="From_3"/>
