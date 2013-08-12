@@ -4733,6 +4733,7 @@ var app = (function (app, $) {
 
  					// clear any on-page results
  					jQuery('div.store-stock ul.store-list').remove();
+ 					jQuery('.availability .more-stores').remove();
  
  				}
  				// zip is set, build list
