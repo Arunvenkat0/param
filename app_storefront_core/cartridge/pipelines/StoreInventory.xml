@@ -32,12 +32,16 @@
           <segment>
             <node>
               <jump-node start-name-ref="Cart-Show"/>
-              <node-display orientation="horizontal" x="1" y="1"/>
+              <node-display orientation="horizontal" x="2" y="0"/>
             </node>
           </segment>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
@@ -54,12 +58,20 @@
           <key-binding alias="ErrorCode" key="ErrorCode"/>
           <key-binding alias="CurrentHttpParameterMap.storepickup.stringValue" key="StorePickup"/>
         </pipelet-node>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
-          <transition target-connector="in1" target-path="./b4.1"/>
+          <transition target-connector="in1" target-path="./b4.1">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+            </transition-display>
+          </transition>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
@@ -68,17 +80,13 @@
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
         </pipelet-node>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
         <branch basename="b4" source-connector="error">
-          <transition target-connector="in1">
-            <transition-display>
-              <bend-point relative-to="source" x="2" y="0"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in1"/>
           <segment>
             <node>
               <join-node/>
-              <node-display x="1" y="-2"/>
+              <node-display x="1" y="0"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -99,6 +107,56 @@
           <bend-point relative-to="source" x="0" y="1"/>
         </transition-display>
       </simple-transition>
+      <node>
+        <decision-node condition-key="!empty(CurrentSession.custom.storeId) &amp;&amp; !empty(CurrentHttpParameterMap.storeid)" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b5" source-connector="yes">
+          <transition target-connector="in1" target-path="./+1"/>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="CurrentHttpParameterMap.storeid.value" key="From_0"/>
+          <key-binding alias="CurrentSession.custom.storeId" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="1" y="1"/>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="2"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="-1" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <interaction-node transaction-required="false">
           <template buffered="true" dynamic="false" name="util/successjson"/>
@@ -724,7 +782,7 @@
       <node>
         <text-node>
           <description>Gets a list of stores with the given product, or product line item's availibity to sell (requires rich_UI cartri
-dge)</description>
+dge), if the storeID is not set it will be set within the session object.</description>
         </text-node>
         <node-display width="2" x="1" y="10"/>
       </node>
