@@ -4498,7 +4498,16 @@ var app = (function (app, $) {
   			});
   					
   			if(jQuery(".checkout-shipping").length > 0) app.storeinventory.shippingLoad();
-  					
+  				
+  			//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
+  			jQuery('.item-delivery-options').each(function(){
+  				if((jQuery(this).children(".instore-delivery").children("input").attr('disabled')=='disabled') 
+  						&&  (jQuery(this).children('.instore-delivery').children('.selected-store-availability').children('.store-error').length > 0)
+  							&& (jQuery(this).children(".instore-delivery").children("input").attr('checked')=='checked') 
+  				){
+  					jQuery('.cart-action-checkout button').attr("disabled", "disabled");
+  				}
+  			});		
  		},
  				
 		setLineItemStore: function(radio) {
@@ -4516,6 +4525,26 @@ var app = (function (app, $) {
 
 				}
 			});
+			
+			//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
+			var countplis = 0;
+			jQuery('.item-delivery-options').each(function(){
+  				
+  				if((jQuery(this).children(".instore-delivery").children("input").attr('disabled')=='disabled') 
+  						&&  (jQuery(this).children('.instore-delivery').children('.selected-store-availability').children('.store-error').length > 0)
+  							&& (jQuery(this).children(".instore-delivery").children("input").attr('checked')=='checked') 
+  				){
+  					jQuery('.cart-action-checkout button').attr("disabled", "disabled");
+  				}else{
+  					countplis++;
+  				}
+  			});
+  			if(countplis > 0 && jQuery('.error-message').length == 0){
+  				jQuery('.cart-action-checkout button').removeAttr("disabled", "disabled")
+  				
+  			}
+			
+			
 		},
 
  		buildStoreList: function(pid) {

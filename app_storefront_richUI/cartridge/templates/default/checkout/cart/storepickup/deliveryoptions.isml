@@ -1,4 +1,4 @@
-<div class="form-row label-inline">
+<div class="form-row label-inline home-delivery">
 
 	<isif condition="${lineItem.product.custom.availableForInStorePickup}">
 		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-home" name="${lineItem.getUUID()}" 
@@ -38,7 +38,7 @@
 		</isif>
 	</isif>
 
-	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline">
+	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline instore-delivery">
 	
 		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
 		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store" name="${lineItem.getUUID()}" 
