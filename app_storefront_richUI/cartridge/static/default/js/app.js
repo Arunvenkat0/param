@@ -4691,6 +4691,15 @@ var app = (function (app, $) {
 	 						}
 
  						}
+						//if there is a dialog box open in the cart for editing a pli and the user selected a new store
+						//add an event to for a page refresh on the cart page if the update button has not been clicked
+						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.  
+						//when the update button is clicked it forces a refresh.
+						if(jQuery('#cart-table').length > 0 && jQuery('.select-store-button').length > 0){
+ 							jQuery('.ui-dialog .ui-icon-closethick:first').bind( "click", function(){
+ 								window.location.reload(); 						
+ 							});
+						}
 
  					});
 
