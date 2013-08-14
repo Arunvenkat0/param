@@ -16,7 +16,7 @@
 	<isset name="shipmentCount" value="${0}" scope="page"/>
 	<isloop items="${Shipments}" var="shipment" status="loopstate">
 		<isif condition="${(shipment.giftCertificateLineItems.size() > 0 && shipment.shippingAddress == null) || shipment.shippingAddress != null}">
-			<isif condition="${shipment.custom.shipmentType == null && shipment.UUID==pdict.Basket.defaultShipment.UUID && shipment.shippingAddress.address1 == null}">
+			<isif condition="${shipment.custom.shipmentType == null && shipment.UUID==pdict.Basket.defaultShipment.UUID && shipment.shippingAddress.address1 == null || shipment.productLineItems.length <= 0}">
 				<iscontinue/>
 			</isif>
 			<isset name="shipmentCount" value="${shipmentCount+1}" scope="page"/>
