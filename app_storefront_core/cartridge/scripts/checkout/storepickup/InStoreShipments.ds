@@ -36,7 +36,16 @@ function execute( args : PipelineDictionary ) : Number
 		if(pli.shipment.shippingMethodID == '005'){
 			//check to see if the storeid has changed
 			if(pli.custom.fromStoreId == pli.shipment.custom.fromStoreId){
-				continue;
+				if(pli.shipment.shippingAddress != null){
+					continue;
+				}else{
+					//create the shipment address to reflect the new store address
+					var shippingAddress : Object = new ShippingAddress();
+					var storeObject = getStoreObject(pli.custom.fromStoreId);
+					var orderAddress = pli.shipment.createShippingAddress();			
+					shippingAddress.storeAddressTo(orderAddress,storeObject);
+					continue;
+				}
 			}else{
 				var storeObject = getStoreObject(pli.custom.fromStoreId);
 				//change the shipment address to reflect the new store address
