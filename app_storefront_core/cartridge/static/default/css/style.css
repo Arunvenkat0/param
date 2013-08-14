@@ -1094,4 +1094,6 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .pt_checkout div.instore-shipment-method {width:100%;padding: 1em;}
 .pt_checkout div.instore-shipment-method span {font-weight:bold;}
 .pt_checkout div.instore-shipment-address {width:40%;float:left;padding-left: 1em;}
-.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;} 
+.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;}
+.ui-dialog #preferred-store-panel button#set-user-zip{margin-left: 3%;}
+.ui-dialog #preferred-store-panel #userZip{margin-left: 12%;margin-top: 5%;}
