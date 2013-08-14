@@ -34,7 +34,8 @@
 			<!-- gift options -->
 			<field formid="isGift" label="forms.checkout.shipment.isgift" type="boolean" default-value="false" binding="gift" mandatory="false" />
 			<field formid="giftMessage" label="forms.checkout.shipment.giftmessage" type="string" binding="giftMessage" mandatory="false" />
-	
+			<field formid="storePickupMessage" label="forms.store.storemessage" type="string" binding="custom.storePickupMessage" mandatory="false" />	
+
 			<!-- shipping method selection -->
 			<field formid="shippingMethodID" type="string" mandatory="true" binding="shippingMethodID">
 				<options optionid-binding="UUID" value-binding="ID" />

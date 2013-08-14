@@ -121,6 +121,22 @@ function ShippingAddress()
 	}
 
 	/**
+	 * Copies the attributes of a store's address to the given order address.
+	 */ 
+	this.storeAddressTo = function(toAddress : OrderAddress , storeObject : dw.catalog.Store )
+	{
+		toAddress.setFirstName( '' );
+		toAddress.setLastName( storeObject.name );
+		toAddress.setAddress1( storeObject.address1 );
+		toAddress.setAddress2( storeObject.address2 );
+		toAddress.setCity( storeObject.city );
+		toAddress.setPostalCode( storeObject.postalCode );
+		toAddress.setStateCode( storeObject.stateCode );
+		toAddress.setCountryCode( storeObject.custom.countryCodeValue );
+		toAddress.setPhone( storeObject.phone );
+	}
+
+	/**
 	 * Copies the attributes from the given customer address or
 	 * order address to this address. The function supports both
 	 * copying from CustomerAddress as well as from OrderAddress.
