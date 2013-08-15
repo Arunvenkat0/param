@@ -1100,3 +1100,4 @@ ul.store-list .selected {background-color: #DDF0DF;}
 #preferred-store-panel div.store-list{margin-top: 1%;}
 #preferred-store-panel button.set-preferred-store{margin-top: 2%;}
 #preferred-store-panel button.close{margin-top: 2%;}
+.checkout-shipping fieldset .instore-continue-button{margin-left:61.5%}

@@ -8,7 +8,7 @@
 	var storeObject = null;
 	
 </isscript>	
-
+	
 <isloop items="${pdict.CurrentForms.singleshipping.inStoreShipments.shipments}" var="shipment" status="shipmentloopstatus">
 
 	<iscomment></iscomment>
@@ -20,7 +20,7 @@
 		storeID = shipment.object.custom.fromStoreId;
 		storeObject = StoreMgr.getStore(storeID)
 	</isscript>
-
+	<isset name="instoreShipmentsExistst" value="${true}" scope="page"/>
 <div class="instore-shipment-message">
 
 	<div class="instore-shipment-header">
