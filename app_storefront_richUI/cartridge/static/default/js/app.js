@@ -4719,6 +4719,10 @@ var app = (function (app, $) {
 
  		loadPreferredStorePanel : function(pid) {
 
+			//clear error messages from other product tiles if they exists in the dom
+ 			if(jQuery('#preferred-store-panel div .error-message').length > 0){
+ 				jQuery('#preferred-store-panel div .error-message').remove();
+ 			}
  			// clear any previous results
  			$cache.preferredStorePanel.empty();
 
@@ -4750,6 +4754,7 @@ var app = (function (app, $) {
 
  									if( validZipEntry ) {
  										//good zip
+ 										jQuery('#preferred-store-panel div .error-message').remove();
  										app.storeinventory.setUserZip(enteredZip);
  										app.storeinventory.loadPreferredStorePanel(pid);
  									} else {
