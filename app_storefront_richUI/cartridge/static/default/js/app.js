@@ -4486,6 +4486,12 @@ var app = (function (app, $) {
   				e.preventDefault();
  				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
   			});
+  			
+  			//disable the radio button for home deliveries if the store inventory is out of stock
+  			jQuery('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
+  				jQuery(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+  			});
+  			
 
   			jQuery('body').on('click', '#pdpMain .set-preferred-store', function(e){
  				e.stopImmediatePropagation();
