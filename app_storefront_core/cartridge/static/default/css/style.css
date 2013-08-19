@@ -42,7 +42,7 @@ header {position:relative;margin-left:10px;margin-right:10px;}
 .ui-dialog .ui-dialog-titlebar-close{border:0 none;border-radius:0 0 0 0;height:32px;margin:0;padding:0;right:0;top:0;width:32px;}
 .ui-dialog .ui-dialog-titlebar-close span{margin:0;padding:0;}
 .ui-dialog h1,.ui-dialog h2{font-family:Georgia;font-size:1.8em;font-style:italic;font-weight:400;margin:5px 158px 5px 0;}
-.ui-dialog .dialog-required{display:block;text-align:right;}
+.ui-dialog .dialog-required{font-weight:400;position:relative;text-transform:none;}
 .ui-accordion .ui-accordion-content{padding:0;}
 .ui-tabs .ui-tabs-nav{background:none repeat scroll 0 0 transparent;border:0 none;height:2.45em;padding:0;}
 .ui-tabs .ui-tabs-nav li{-moz-border-bottom-colors:none;-moz-border-image:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background:none repeat scroll 0 0 #EFEFEF;border-color:#D9D9D9 #D9D9D9 #FFFFFF;border-style:solid;border-width:1px;font-family:georgia;font-style:italic;list-style:none outside none !important;margin:0 1em -1px 0;}
@@ -70,12 +70,15 @@ button[disabled],input[disabled]{color:#CCCCCC;}
 .js button.simple-submit{display:none;}
 legend{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1em solid #FFFFFF;font-size:1.1em;font-weight:700;margin:0;padding:14px 2% 10px;position:relative;text-transform:uppercase;width:96%;}
 .ie7 legend{width:94%;}
-legend span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
+legend span{font-size:12px;font-weight:400;position:relative;text-transform:none;padding:0 .5;}
 legend span em{color:#333333;}
-h2 span{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
+span em{color:#333333;}
+h2 span{font-size:12px;font-weight:400;position:relative;text-transform:none;float:right;padding:0 0;}
 h2 span em{color:#333333;}
-h1 span{font-size:0.6em;position:absolute;right:15em;text-transform:none;top:0em;}
+h1 span{font-size:12px;font-weight:400;position:relative;text-transform:none;float:right;padding:2px 0px;}
 h1 span em{color:#333333;}
+.dialog-required{font-size:12px;font-weight:400;position:relative;float:right;padding:2px 0;}
+.dialog-required em{color:#333333;}
 label,.form-label-text{display:block;float:left;font-size:1.1em;font-weight:700;padding:0.75em 0 0;text-align:right;width:22%;}
 .form-label-text span{margin-right:5px;}
 .form-row{clear:both;margin:0 0 1em;}
@@ -119,6 +122,7 @@ div.error{background:none repeat scroll 0 0 transparent;}
 .login-box-content .form-row-button{margin-left:0;width:auto;}
 .row-inline{display:inline;}
 .row-inline label{width:auto;}
+.require-dialog{font-weight:400;position:absolute;right:1em;text-transform:none;top:1em;}
 .required-indicator{color:#3EBAEA;}
 .form-field-tooltip{float:right;margin:-36px 0 0;width:21%;}
 .with-helper-text{margin-top:-59px;}
@@ -563,7 +567,8 @@ body .review-image{float:left;margin:0 20px;}
 .pdp-main .product-add-to-cart button{float:right;margin-top:0.5em;width:37%;}
 .pdp-main .product-add-to-cart .availability{position:relative;clear:both;float:left;padding:20px 0 20px 70px;}
 .pdp-main .product-add-to-cart .availability .label{position:absolute;left:0px;}
-.availability .availability-msg p {margin-top:0px;}
+.availability .availability-msg p {margin-top:0px; display:inline;}
+.availability .availability-msg{display:inline;}
 .availability .in-stock-msg {color:black}
 .availability .not-available-msg {color:red}
 .availability .preorder-msg {color:blue}
@@ -1013,3 +1018,89 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .js .home-bottom-right .jcarousel-prev-disabled, .home-bottom-right .jcarousel-next-disabled {display:none !important;}
 
 .js button.select {display:none}
+/* Multi Inventory */
+/* --------------------------------------------------------------------------------------- */
+.ui-dialog #listings-nav {float: right;margin-top: 2%;}
+.ui-dialog #listings-nav a {cursor: pointer;display: inline-block;margin: 0 5px;}
+.ui-dialog #listings-nav a.active {font-weight: bold;}
+.pdp-main .product-add-to-cart .availability .label {position: relative;}
+.pdp-main .product-add-to-cart .availability {padding: 20px 0 20px 0px;width: 80%;}
+.pdp-main .product-add-to-cart .online-stock span {float: left;}
+.pdp-main .product-add-to-cart .store-stock {display: block;clear: left;}
+.update-location {color:#22B0E8;padding-left: 10px;cursor: pointer;}	
+div.store-list {border-color: #CCCCCC;border-style: dashed;border-width: 1px 0;height: 150px;overflow: hidden;padding: 0;position: relative;}
+div.store-list ul.store-list {position: absolute;width: 1920px;}
+ul.store-list {list-style: none outside none;margin: 0;padding: 0;}
+ul.store-list .selected {background-color: #DDF0DF;}
+.store-tile {border-left: 1px dashed #CCCCCC;border-right: 1px dashed #CCCCCC;float: left;height: 134px;list-style: none outside none;margin: 0 2px;padding: 8px;position: relative;width: 154px;}
+.store-tile .store-tile-address {display: block;}
+.store-tile .store-tile-city {margin: 0 5px 0 0;}
+.store-tile .store-tile-state {margin: 0 5px 0 0;}
+.store-tile .store-tile-postalCode {display: block;}
+.store-tile .store-tile-status {display: block;font-size: 0.9em;margin: 5px 0;}
+.not-available .store-tile-status, .out-of-stock .store-tile-status {color: #990000;}
+.In-Stock .store-tile-status {color: #019328;}
+.store-tile .store-tile-map-this {display: block;font-size: 0.9em;margin: 5px 0;}
+.store-tile .select-store-button {bottom: 5px;left: 6px;position: absolute;}
+.store-stock ul.expanded {height: auto;}
+.store-stock ul.store-list {margin: 20px 0 5px;}
+.store-stock ul.store-list .extended-list {display: none;}
+.store-stock ul.expanded .extended-list {display: block;}
+.store-stock ul.store-list .selected {background-color: #FFFFFF;font-weight: bold;}
+.store-stock .store-tile {border-color: #CEBDB3;border-style: dotted;border-width: 1px 0 0;clear: both;float: none;font-size: 0.9em;height: auto;line-height: 1.5em;overflow: hidden;padding: 5px 0 5px 55%;text-align: right;width: auto;}
+.store-stock .store-tile .store-tile-address {color: #0167AF;display: inline-block;margin: 0 0px 0 0;}
+.store-stock .store-tile .store-tile-city {color: #0167AF;margin: 0 3px 0 0;}
+.store-stock .store-tile .store-tile-state {color: #0167AF;}
+.store-stock .store-tile .store-tile-postalCode {display: none;}
+.store-stock .store-tile .store-tile-status {left: 0;margin: 0;position: absolute;text-align: left;top: 3px;width: 80px;}
+.store-stock .In-Stock .store-tile-status {left: 13px;}
+.store-stock .store-tile .store-tile-map-this {display: none;}
+.store-stock .store-tile .select-store-button {display: none;}
+.more-stores {color: #0167AF;cursor: pointer;font-size: 0.8em;margin: 0 0 0 2px;padding: 0 0 0 12px;}
+.multishipprogress div, .multishipprogress .step-3 {background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;display: inline;padding: 1em;}
+.multishipprogress .step-4 {background: none repeat scroll 0 0 transparent;padding-right: 0;}
+.multishipaddressestable {margin: 9px 0px 20px 0px;width: 706px;}
+.multi-ship-shipments-table {margin: 0 0 20px;width: 706px;}
+.multi-ship-shipments-table th.section-header {font-size: 10px;font-weight: bold;padding: 9px 6px 11px;}
+.multi-ship-shipments-table .shipping-address .details {padding: 0 10px 0 22px;}
+.multi-ship-shipments-table .gift-options label {float: left;padding: 0;}
+.multi-ship-shipments-table .gift-options input {margin: 0 10px;}
+.multi-shipping-addresses {margin-bottom: 20px !important;margin-left: 0;margin-right: 0;margin-top: 0;}
+.multi-shipping-addresses .shipping-address {text-align: right;}
+.multi-shipping-addresses .shipping-address select {margin: 4px 0 0;width: 260px;}
+.header-product-shipping {width: 276px;}
+.header-qty-shipping {width: 45px;}
+.header-location-shipping {text-indent: 70px;width: 307px;}
+.header-shipment-index {width: 409px;}
+.header-shipment-qty {width: 27px;}
+.header-shipment-details {text-indent: 22px;}
+.multi-shipping-methods {position: absolute;top: 30px;}
+.multi-shipping-methods .shipping-methods .form-row {clear: none;float: left;display: none;}
+.multi-shipping-methods .shipping-methods select {width: 250px;margin: -5px 0 0 15px;}
+.multi-shipping-option {border-bottom: 2px dotted #CEBDB3;left: 0;padding: 0 0 12px;position: absolute;text-indent: 10px;top: 48px;width: 95%;}
+.multi-shipping-addresses .shipping-qty, .multi-ship-shipments-table .shipping-qty {background: none repeat scroll 0 0 #E9E9E9;}
+.multiship span.label {font-weight: bold;}
+.hide {display: none;}
+.loading {background: url("../images/loading-progress-98x22.gif") no-repeat scroll left center transparent;}
+.store-in-stock {color: #019328;}
+#cart-table .item-delivery-options .store-in-stock {color: #333333;font-family: Arial,sans-serif;font-size: 12px;}
+.store-error {color: #FF0000;}
+#cart-table .item-delivery-options {padding: 1em 0 1em 0;width: 100px;}
+.selected-store-address, .set-preferred-store, .selected-store-availability {font-size: 0.8em;font-weight: 400;margin-left: 0px;}
+.set-preferred-store {cursor: pointer;}
+#cart-table .form-row .radio-url {display: inline;}
+.label-inline input {float:left;margin:0;}
+.instore-shipping-option{width:100%;}
+.pt_checkout div.instore-shipment-header {width:100%;}
+.pt_checkout div.instore-shipment-method {width:100%;padding: 1em;}
+.pt_checkout div.instore-shipment-method span {font-weight:bold;}
+.pt_checkout div.instore-shipment-address {width:40%;float:left;padding-left: 1em;}
+.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;}
+.ui-dialog #preferred-store-panel button#set-user-zip{margin-left: 3%;}
+.ui-dialog #preferred-store-panel #userZip{margin-left: 12%;margin-top: 5%;}
+.ui-dialog #preferred-store-panel .error-message{margin-left: 12%;margin-top: 1%;}
+#preferred-store-panel div.store-list{margin-top: 1%;}
+#preferred-store-panel button.set-preferred-store{margin-top: 2%;}
+#preferred-store-panel button.close{margin-top: 2%;}
+.checkout-shipping fieldset .instore-continue-button{margin-left:61.5%}
+#cart-table .item-delivery-options label{display: inline;margin-left: 2%;}

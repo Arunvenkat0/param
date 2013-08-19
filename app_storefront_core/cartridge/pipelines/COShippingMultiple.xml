@@ -1187,7 +1187,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="checkout/multishipping/SeperateQuantities.ds"/>
-                <key-binding alias="Log" key="ScriptLog"/>
                 <key-binding alias="Basket" key="CBasket"/>
                 <key-binding alias="PLI" key="ProductLineItem"/>
                 <key-binding alias="QuantityLineItems" key="QuantityLineItemsOut"/>

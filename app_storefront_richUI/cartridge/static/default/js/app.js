@@ -1,12 +1,12 @@
 /**
- * 
+ *
  * All java script logic for the application.
  *    (c) 2009-2012 Demandware Inc.
  *    Subject to standard usage terms and conditions
  * The code relies on the jQuery JS library to
- * be also loaded. 
+ * be also loaded.
  *    For all details and documentation:
- *    https://github.com/Demandware/Site-Genesis 
+ *    https://github.com/Demandware/Site-Genesis
  */
 // semi-colon to assure functionality upon script concatenation and minification
 ;
@@ -43,7 +43,7 @@ var app = (function (app, $) {
 			}
 		};
 	}
-	
+
 	/**
 	 * @private
 	 * @function
@@ -222,7 +222,7 @@ var app = (function (app, $) {
 			}
 			/**
 			 * @function
-			 * @description Activates the visibility of the next element in the carousel 
+			 * @description Activates the visibility of the next element in the carousel
 			 * @param {Object} carousel -- necessity needs TBD!
 			 * @param {Object} item --  necessity needs TBD!
 			 * @param {Number} idx Index of the item which should be activated
@@ -258,7 +258,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Initializes the tooltip-content and layout
-		 */	
+		 */
 		init : function () {
 
 			$('.tooltip').tooltip({
@@ -396,7 +396,7 @@ var app = (function (app, $) {
 	}
 	/**
 	 * @function
-	 * @description replaces the images in the image container. for example when a different color was clicked. 
+	 * @description replaces the images in the image container. for example when a different color was clicked.
 	 */
 	function replaceImages() {
 		var newImages = $("#update-images");
@@ -823,6 +823,9 @@ var app = (function (app, $) {
 			initializeDom();
 			initializeEvents();
 			loadZoom();
+			if(app.enabledStorePickup){
+				app.storeinventory.init();
+			}
 		},
 		readReviews : function(){
 			$('.product-tabs').tabs('select','#tab4');
@@ -837,7 +840,7 @@ var app = (function (app, $) {
 		 * <p>label - label for the add to cart button, default is Add to Cart</p>
 		 * <p>url - url to get the product</p>
 		 * <p>id - id of the product to get, is optional only used when url is empty</p>
-		 */		
+		 */
 		get : function (options) {
 			var target = options.target || app.quickView.init();
 			var source = options.source || "";
@@ -898,7 +901,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Binds the click event to a given target for the add-to-cart handling
-		 * @param {Element} target The target on which an add to cart event-handler will be set 
+		 * @param {Element} target The target on which an add to cart event-handler will be set
 		 */
 		initAddToCart : function (target) {
 			if (target) {
@@ -911,7 +914,7 @@ var app = (function (app, $) {
 	};
 
 }(window.app = window.app || {}, jQuery));
- 
+
 /**
  * @class app.product.tile
  */
@@ -999,7 +1002,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Cache, events and initialization
-		 */	
+		 */
 		init : function () {
 			$cache = {
 				container : $(".tiles-container")
@@ -1057,7 +1060,7 @@ var app = (function (app, $) {
 		// get the first compare-item not currently active
 		var item = $cache.compareContainer.find(".compare-item").not(".active").first();
 		var tile = $("#"+data.uuid);
-		if (item.length===0) { 
+		if (item.length===0) {
 			if(tile.length > 0) {
 				tile.find(".compare-check")[0].checked = false;
 			}
@@ -1119,7 +1122,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * description Initializes the cache of compare container 
+	 * description Initializes the cache of compare container
 	 */
 	function initializeCache() {
 		$cache = {
@@ -1190,7 +1193,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Cache, events and initialization
-		 */		
+		 */
 		init : function () {
 			initializeCache();
 			initializeDom();
@@ -1200,7 +1203,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Adds product to the compare table
-		 */ 
+		 */
 		addProduct : function (args) {
 			var items = $cache.compareContainer.find(".compare-item");
 			var cb = $(args.cb);
@@ -1247,7 +1250,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Removes product from the compare table
-		 */	
+		 */
 		removeProduct : function (args) {
 			if (!args.itemid) { return; }
 			var cb = args.cb ? $(args.cb) : null;
@@ -1396,10 +1399,10 @@ var app = (function (app, $) {
 			};
 			initializeEvents();
 		},
-		
+
 		/**
 		 * @function
-		 * @description 
+		 * @description
 		 */
 		initializeDialog : function (eventDelegate, eventTarget) {
 			$(eventDelegate).on("click", eventTarget, function (e) {
@@ -1469,26 +1472,26 @@ var app = (function (app, $) {
 			}
 		});
 	}
-	/** 
-	 * @private 
-	 * @function 
-	 * @description 
-	 */ 
+	/**
+	 * @private
+	 * @function
+	 * @description
+	 */
 	function initInfiniteScroll() {
-		
+
 		jQuery(document).bind('scroll ready grid-update',function(e) {
 			// getting the hidden div, which is the placeholder for the next page
 			var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
 			if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-				// switch state to 'loading' 
+				// switch state to 'loading'
 				// - switches state, so the above selector is only matching once
 				// - shows loading indicator
 				loadingPlaceHolder.attr('data-loading-state','loading');
 				loadingPlaceHolder.addClass('infinite-scroll-loading');
-				
+
 				// get url hidden in DOM
 				var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-				
+
 				/**
 				 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
 				 */
@@ -1499,16 +1502,16 @@ var app = (function (app, $) {
 					jQuery(document).trigger('grid-update');
 				};
 				if (app.clientcache.LISTING_INFINITE_SCROLL && 'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]) {
-					// if we hit the cache 
+					// if we hit the cache
 					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-				} else {	
-					// else do query via ajax 
+				} else {
+					// else do query via ajax
 					jQuery.ajax({
 						type: "GET",
 						dataType: 'html',
-						url: gridUrl, 
+						url: gridUrl,
 						success: function(response) {
-							// put response into cache 
+							// put response into cache
 							try {
 								sessionStorage["scroll-cache_" + gridUrl] = response;
 							} catch (e) {
@@ -1516,7 +1519,7 @@ var app = (function (app, $) {
 								// it will fall back to load via ajax
 							}
 							// update UI
-							fillEndlessScrollChunk(response);		
+							fillEndlessScrollChunk(response);
 						}
 					});
 				}
@@ -1563,16 +1566,16 @@ var app = (function (app, $) {
 			if($(this).parent().hasClass("unselectable")) { return; }
 			var catparent = $(this).parents('.category-refinement');
 			var folderparent = $(this).parents('.folder-refinement');
-			
-			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url		
-			//else handle the encoding for the url		
+
+			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
+			//else handle the encoding for the url
 			if(catparent.length > 0 || folderparent.length > 0 ){
-				
+
 				return true;
-			}else{ 
+			}else{
 				e.preventDefault();
 				var uri = app.util.getUri(this);
-	
+
 				if( uri.query.length > 1 ) {
 					window.location.hash = encodeURI(decodeURI(uri.query.substring(1)));
 				} else {
@@ -1732,7 +1735,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Initializes the bonus product dialog
-		 */		
+		 */
 		init : function () {
 			$cache = {
 				bonusProduct : $("#bonus-product-dialog"),
@@ -1742,7 +1745,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Opens the bonus product quick view dialog
-		 */		
+		 */
 		show : function (url) {
 			// add element to cache if it does not already exist
 			if(!$cache.bonusProduct) {
@@ -1780,7 +1783,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Loads the list of bonus products into quick view dialog
-		 */		
+		 */
 		loadBonusOption : function () {
 			$cache.bonusDiscountContainer = $(".bonus-discount-container");
 			if ($cache.bonusDiscountContainer.length===0) { return; }
@@ -1815,8 +1818,8 @@ var app = (function (app, $) {
 
 		/**
 		 * @function
-		 * @description 
-		 */		
+		 * @description
+		 */
 		initializeGrid : function () {
 			$cache.bonusProductList = $("#bonus-product-list"),
 				bliData = $cache.bonusProductList.data("line-item-detail");
@@ -2039,7 +2042,7 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Load details to a given gift certificate
 		 * @param {String} id The ID of the gift certificate
-		 * @param {Function} callback A function to called 
+		 * @param {Function} callback A function to called
 		 */
 		checkBalance : function (id, callback) {
 			// load gift certificate details
@@ -2080,7 +2083,7 @@ var app = (function (app, $) {
 	}
 
 	/**
-	 * @function 
+	 * @function
 	 * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
 	 */
 	function updateSummary() {
@@ -2100,7 +2103,7 @@ var app = (function (app, $) {
 	/**
 	 * @function
 	 * @description selects a shipping method for the default shipment and updates the summary section on the right hand side
-	 * @param  
+	 * @param
 	 */
 	function selectShippingMethod(shippingMethodID) {
 		// nothing entered
@@ -2194,8 +2197,8 @@ var app = (function (app, $) {
 	//checkout gift message counter
 	/**
 	 * @function
-	 * @description Initializes gift message box, if shipment is gift 
-	 */	
+	 * @description Initializes gift message box, if shipment is gift
+	 */
 	function initGiftMessageBox() {
 		// show gift message box, if shipment is gift
 		$cache.giftMessage.toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
@@ -2204,15 +2207,15 @@ var app = (function (app, $) {
 	/**
 	 * @function
 	 * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
-	 */	
+	 */
 	function initMultiGiftMessageBox() {
 		$.each( $("table.item-list"), function(){
-			
+
 			//handle initial load
 			if($(this).find(".js-isgiftyes").is(':checked')){
 				$(this).find(".gift-message-text").css('display','block')
 			}
-			
+
 			//set event listeners
 			$(this).bind('change', function(){
 				if($(this).find(".js-isgiftyes").is(':checked')){
@@ -2221,29 +2224,29 @@ var app = (function (app, $) {
 					$(this).find(".gift-message-text").css('display','none');
 				}
 			});
-			
+
 		});
-	}	
+	}
 	/**
 	* @function
 	* @description this function inits the form so that uses client side validation before submitting to the server
-	*/  
+	*/
 	function initmultishipshipaddress() {
 	//init the continue button as disabled
-		var selectvalue = new Array();  
+		var selectvalue = new Array();
 	    $(this).removeClass('error');
-	          
+
 	    $("select option:selected").each(function () {
 	    	selectvalue.push(this.value)
-	            
+
      	});
-	          
+
 	    //if we found a empty value disable the button
 	    if(selectvalue.indexOf('') == -1){
 	    	$('.formactions button').removeAttr('disabled');
 	    }else{
 	    	$('.formactions button').attr('disabled','disabled');
-	              
+
 	    }
 
 	    //add error classes to selects that don't have an address associated with them  when the button is clicked
@@ -2254,37 +2257,37 @@ var app = (function (app, $) {
 	        	}else{
 	          		$(this).removeClass('error');
 	        	};
-	      	});      
+	      	});
 	    });
-	    	    
+
 	    //add listeners to the selects to enable the continue button
 	    $.each( $(".cart-row .shippingaddress select.selectbox"), function(){
 	    	$(this).bind('change', function(){
-	        	if(this.value == ''){ 
+	        	if(this.value == ''){
 	          		$('.formactions button').attr('disabled','disabled');
 	          		$(this).addClass('error');
 	        	}else{
 	          		//check to see if any select box has a empty vlaue
-	          		var selectvalues = new Array();  
+	          		var selectvalues = new Array();
 	          		$(this).removeClass('error');
-	          
+
 	            	$("select option:selected").each(function () {
 	              		selectvalues.push(this.value)
-	              
+
 	           	 	});
-	          
+
 	            	//if we found a empty value disable the button
 	            	if(selectvalues.indexOf('') == -1){
 	              		$('.formactions button').removeAttr('disabled');
 	            	}else{
 	              		$('.formactions button').attr('disabled','disabled');
-	              
+
 	            	}
 	        	}
 	      	});
-	      
+
 	    });
-	}	
+	}
 	/**
 	 * @function
 	 * @description shows gift message box, if shipment is gift
@@ -2341,7 +2344,7 @@ var app = (function (app, $) {
 
 	/**
 	 * @function
-	 * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form 
+	 * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
@@ -2349,12 +2352,12 @@ var app = (function (app, $) {
 			initmultishipshipaddress();
 		}
 		return null;
-	}	
-	
+	}
+
 	/**
 	 * @function
 	 * @description Changes the payment method form depending on the passed paymentMethodID
-	 * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to    
+	 * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to
 	 */
 	function changePaymentMethod(paymentMethodID) {
 		$cache.paymentMethods.removeClass("payment-method-expanded");
@@ -2547,7 +2550,7 @@ var app = (function (app, $) {
 			});
 		});
 	}
-	
+
 	/**
 	 * @function
 	 * @description Sets a boolean variable (isShipping) to determine the checkout stage
@@ -2635,7 +2638,7 @@ var app = (function (app, $) {
 	var $cache = {};
 	/**
 	 * @function
-	 * @description Binds a 'click'-event to the quick view button 
+	 * @description Binds a 'click'-event to the quick view button
 	 */
 	function bindQvButton() {
 		$cache.qvButton.one("click", function (e) {
@@ -2651,8 +2654,8 @@ var app = (function (app, $) {
 	app.quickView = {
 		/**
 		 * @function
-		 * @description 
-		 */				
+		 * @description
+		 */
 		initializeButton : function (container, target) {
 			// quick view button
 			$(container).on("mouseenter", target, function (e) {
@@ -2681,8 +2684,8 @@ var app = (function (app, $) {
 		// options.url - product url
 		/**
 		 * @function
-		 * @description 
-		 */		
+		 * @description
+		 */
 		show : function (options) {
 			options.target = app.quickView.init();
 			options.callback = function () {
@@ -2735,15 +2738,15 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description trims a prefix from a given string, this can be used to trim
-		 * a certain prefix from DOM element IDs for further processing on the ID 
+		 * a certain prefix from DOM element IDs for further processing on the ID
 		 */
 		trimPrefix : function (str, prefix) {
 			return str.substring(prefix.length);
 		},
-		
+
 		/**
 		 * @function
-		 * @description 
+		 * @description
 		 */
 		setDialogify : function (e) {
 			e.preventDefault();
@@ -2814,7 +2817,7 @@ var app = (function (app, $) {
 			}
 			return s;
 		},
-		
+
 		/**
 		 * @function
 		 * @description appends the parameter with the given name and value to the given url and returns the changed url
@@ -2829,11 +2832,11 @@ var app = (function (app, $) {
 			}
 			return url + c + name + "=" + encodeURIComponent(value);
 		},
-		/** 
-		 * @function 
-		 * @description 
-		 * @param {String} 
-		 * @param {String} 
+		/**
+		 * @function
+		 * @description
+		 * @param {String}
+		 * @param {String}
 		 */
 		elementInViewport: function (el, offsetToTop) {
 			var top = el.offsetTop,
@@ -2850,7 +2853,7 @@ var app = (function (app, $) {
 			if (typeof(offsetToTop) != 'undefined') {
 				top -= offsetToTop;
 			}
-			
+
 			return (
 					top < (window.pageYOffset + window.innerHeight) &&
 					left < (window.pageXOffset + window.innerWidth) &&
@@ -2862,7 +2865,7 @@ var app = (function (app, $) {
 		 * @function
 		 * @description appends the parameters to the given url and returns the changed url
 		 * @param {String} url the url to which the parameters will be added
-		 * @param {String} params a JSON string with the parameters 
+		 * @param {String} params a JSON string with the parameters
 		 */
 		appendParamsToUrl : function (url, params) {
 			var uri = app.util.getUri(url),
@@ -2904,10 +2907,10 @@ var app = (function (app, $) {
 			}
 			return url;
 		},
-		
+
 		/**
 		 * @function
-		 * @description Returns the static url for a specific relative path 
+		 * @description Returns the static url for a specific relative path
 		 * @param {String} path the relative path
 		 */
 		staticUrl : function (path) {
@@ -2919,16 +2922,16 @@ var app = (function (app, $) {
 		},
 		/**
 		 * @function
-		 * @description Appends the parameter 'format=ajax' to a given path   
+		 * @description Appends the parameter 'format=ajax' to a given path
 		 * @param {String} path the relative path
 		 */
 		ajaxUrl : function (path) {
 			return app.util.appendParamToURL(path, "format", "ajax");
 		},
-		
+
 		/**
 		 * @function
-		 * @description 
+		 * @description
 		 * @param {String} url
 		 */
 		toAbsoluteUrl : function (url) {
@@ -2940,7 +2943,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Loads css dynamically from given urls
-		 * @param {Array} urls Array of urls from which css will be dynamically loaded.   
+		 * @param {Array} urls Array of urls from which css will be dynamically loaded.
 		 */
 		loadDynamicCss : function (urls) {
 			var i, len=urls.length;
@@ -2952,7 +2955,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Loads css file dynamically from given url
-		 * @param {String} url The url from which css file will be dynamically loaded.   
+		 * @param {String} url The url from which css file will be dynamically loaded.
 		 */
 		loadCssFile : function (url) {
 			return $("<link/>").appendTo($("head")).attr({
@@ -2965,7 +2968,7 @@ var app = (function (app, $) {
 
 		/**
 		 * @function
-		 * @description Removes all css files which were dynamically loaded   
+		 * @description Removes all css files which were dynamically loaded
 		 */
 		clearDynamicCss : function () {
 			var i = app.util.loadedCssFiles.length;
@@ -3036,7 +3039,7 @@ var app = (function (app, $) {
 		 * @description Appends a form-element with given arguments to a body-element and submits it
 		 * @param {Object} args The arguments which will be attached to the form-element:<br/>
 		 * <p>url</p>
-		 * <p>fields - an Object containing the query-string parameters</p>   
+		 * <p>fields - an Object containing the query-string parameters</p>
 		 */
 		postForm : function (args) {
 			var form = $("<form>").attr({action:args.url,method:"post"}).appendTo("body");
@@ -3050,8 +3053,8 @@ var app = (function (app, $) {
 		 * @function
 		 * @description  Returns a JSON-Structure of a specific key-value pair from a given resource bundle
 		 * @param {String} key The key in a given Resource bundle
-		 * @param {String} bundleName The resource bundle name 
-		 * @param {Object} A callback function to be called 
+		 * @param {String} bundleName The resource bundle name
+		 * @param {Object} A callback function to be called
 		 */
 		getMessage : function (key, bundleName, callback) {
 			if (!callback || !key || key.length===0) {
@@ -3099,8 +3102,8 @@ var app = (function (app, $) {
 		},
 		/**
 		 * @function
-		 * @description Updates the number of the remaining character 
-		 * based on the character limit in a text area  
+		 * @description Updates the number of the remaining character
+		 * based on the character limit in a text area
 		 */
 		limitCharacters : function () {
 			$('form').find('textarea[data-character-limit]').each(function(){
@@ -3119,10 +3122,10 @@ var app = (function (app, $) {
 		},
 		/**
 		 * @function
-		 * @description Binds the onclick-event to a delete button on a given container, 
-		 * which opens a confirmation box with a given message  
+		 * @description Binds the onclick-event to a delete button on a given container,
+		 * which opens a confirmation box with a given message
 		 * @param {String} container The name of element to which the function will be bind
-		 * @param {String} message The message the will be shown upon a click 
+		 * @param {String} message The message the will be shown upon a click
 		 */
 		setDeleteConfirmation : function(container, message) {
 			$(container).on("click", ".delete", function(e){
@@ -3132,7 +3135,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Scrolls a browser window to a given x point
-		 * @param {String} The x coordinate 
+		 * @param {String} The x coordinate
 		 */
 		scrollBrowser : function (xLocation) {
 			$('html, body').animate({ scrollTop: xLocation }, 500);
@@ -3240,11 +3243,11 @@ var app = (function (app, $) {
 			afterField.val($(this).val());
 		});
 	}
-	
+
 	/**
 	 * @function
 	 * @description Disables or enables the post-event address fields depending on a given boolean
-	 * @param {Boolean} disabled True to disable; False to enables 
+	 * @param {Boolean} disabled True to disable; False to enables
 	 */
 	function setAfterAddressDisabled(disabled) {
 		if (disabled) {
@@ -3257,7 +3260,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * @description Cache initialization of the gift registration 
+	 * @description Cache initialization of the gift registration
 	 */
 	function initializeCache() {
 		$cache = {
@@ -3272,7 +3275,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * @description DOM-Object initialization of the gift registration 
+	 * @description DOM-Object initialization of the gift registration
 	 */
 	function initializeDom() {
 		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
@@ -3362,7 +3365,7 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Shows an AJAX-loader on top of a given container
 		 * @param {Element} container The Element on top of which the AJAX-Loader will be shown
-		 */	
+		 */
 		show: function (container) {
 			var target = (!container || $(container).length===0) ? $("body") : $(container);
 			loader = loader || $(".loader");
@@ -3377,7 +3380,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Hides an AJAX-loader
-		 */		
+		 */
 		hide: function () {
 			if (loader) { loader.hide(); }
 		}
@@ -3394,7 +3397,7 @@ var app = (function (app, $) {
 	 * @param c TBD
 	 * @param {Element} li The visible product element in the carousel
 	 * @param index TBD
-	 * @param state TBD 
+	 * @param state TBD
 	 */
 	function captureCarouselRecommendations(c, li, index, state) {
 		if (!dw) { return; }
@@ -3434,7 +3437,7 @@ var app = (function (app, $) {
 	 * @function
 	 * @description Updates the cart with new data
 	 * @param {Object} postdata An Object representing the the new or uptodate data
-	 * @param {Object} A callback function to be called 
+	 * @param {Object} A callback function to be called
 	 */
 	function updateCart(postdata, callback) {
 		var url = app.util.ajaxUrl(app.urls.addProduct);
@@ -3443,7 +3446,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * @description Cache initialization of the cart page 
+	 * @description Cache initialization of the cart page
 	 */
 	function initializeCache() {
 		$cache = {
@@ -3456,7 +3459,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry ) 
+	 * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry )
 	 */
 	function initializeEvents() {
 		$cache.cartTable.on("click", ".item-edit-details a", function (e) {
@@ -3482,16 +3485,16 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Adds new item to the cart
 		 * @param {Object} postdata An Object representing the the new or uptodate data
-		 * @param {Object} A callback function to be called 
-		 */	
+		 * @param {Object} A callback function to be called
+		 */
 		add : function (postdata, callback) {
 			updateCart(postdata, callback);
 		},
 		/**
 		 * @function
-		 * @description Hook for removing item from the cart 
-		 * 
-		 */		
+		 * @description Hook for removing item from the cart
+		 *
+		 */
 		remove : function () {
 			return;
 		},
@@ -3499,15 +3502,15 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Updates the cart with new data
 		 * @param {Object} postdata An Object representing the the new or uptodate data
-		 * @param {Object} A callback function to be called 
-		 */		
+		 * @param {Object} A callback function to be called
+		 */
 		update : function (postdata, callback) {
 			updateCart(postdata, callback);
 		},
 		/**
 		 * @function
 		 * @description Refreshes the cart without posting
-		 */		
+		 */
 		refresh : function () {
 			// refresh without posting
 			app.page.refresh();
@@ -3515,11 +3518,14 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Initializes the functionality on the cart
-		 */		
+		 */
 		init : function () {
 			// edit shopping cart line item
 			initializeCache();
 			initializeEvents();
+			if(app.enabledStorePickup){
+				app.storeinventory.init();
+			}
 		}
 	};
 
@@ -3662,7 +3668,7 @@ var app = (function (app, $) {
 	 * @private
 	 * @function
 	 * @description Binds the events of the payment methods list (delete card)
-	 */	
+	 */
 	function initPaymentEvents() {
 		var paymentList = $(".payment-list");
 		if (paymentList.length===0) { return; }
@@ -3701,7 +3707,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Binds the events of the order, address and payment pages
-		 */		
+		 */
 		init : function () {
 			initializeEvents();
 
@@ -3724,17 +3730,17 @@ var app = (function (app, $) {
 		app.sendToFriend.initializeDialog("div.list-table-header", ".send-to-friend");
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
-		
+
 		});
 	}
-	
-	
+
+
 	/******* app.wishlist public object ********/
 	app.wishlist = {
 		/**
 		 * @function
 		 * @description Binds events to the wishlist page
-		 */		
+		 */
 		init : function () {
 			$cache.editAddress = $('#editAddress');
 			$cache.wishlistTable = $('.pt_wish-list .item-list');
@@ -3773,7 +3779,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Cache initializations and event binding to the mimcart
-		 */ 
+		 */
 		init : function () {
 			$cache.minicart = $("#mini-cart");
 			$cache.mcTotal = $cache.minicart.find(".mini-cart-total");
@@ -3805,7 +3811,7 @@ var app = (function (app, $) {
 			$cache.mcProductList.toggledList({toggleClass : "collapsed", triggerSelector:".mini-cart-toggler", eventName:"click"});
 
 			initialized = true;
-		}, 
+		},
 		/**
 		 * @function
 		 * @description Shows the given content in the mini cart
@@ -3821,7 +3827,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Slides down and show the contents of the mini cart
-		 */ 
+		 */
 		slide : function () {
 			if(!initialized) {
 				app.minicart.init();
@@ -3843,7 +3849,7 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Closes the mini cart with given delay
 		 * @param {Number} delay The delay in milliseconds
-		 */ 
+		 */
 		close : function (delay) {
 			timer.clear();
 			$cache.mcContent.slideUp();
@@ -3873,7 +3879,7 @@ var app = (function (app, $) {
 		 * @function
 		 * @description Appends a dialog to a given container (target)
 		 * @param {Object} params  params.target can be an id selector or an jquery object
-		 */	
+		 */
 		create : function (params) {
 			// options.target can be an id selector or an jquery object
 			var target = $(params.target || "#dialog-container");
@@ -3894,7 +3900,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Opens a dialog using the given url (params.url)
-		 * @param {Object} params.url should contain the url 
+		 * @param {Object} params.url should contain the url
 		 */
 		open : function (params) {
 			if (!params.url || params.url.length===0) { return; }
@@ -4004,8 +4010,8 @@ var app = (function (app, $) {
 			},
 			/**
 			 * @function
-			 * @description The close event 
-			 */			
+			 * @description The close event
+			 */
 			close : function (event, ui) {
 				$(this).dialog("destroy");
 			}
@@ -4143,7 +4149,7 @@ var app = (function (app, $) {
 		 * @param {String} url URI for the request
 		 * @param {Object} data Name/Value pair data request
 		 * @param {Function} callback  Callback function to be called
-		 */	
+		 */
 		getJson : function (options) {
 			options.url = app.util.toAbsoluteUrl(options.url);
 			// return if no url exists or url matches a current request
@@ -4190,7 +4196,7 @@ var app = (function (app, $) {
 		 * @param {Object} data Name/Value pair data request
 		 * @param {Function} callback  Callback function to be called
 		 * @param {Object} target Selector or element that will receive content
-		 */	
+		 */
 		load : function (options) {
 			options.url = app.util.toAbsoluteUrl(options.url);
 			// return if no url exists or url matches a current request
@@ -4279,7 +4285,7 @@ var app = (function (app, $) {
 		/**
 		 * @function
 		 * @description Configures parameters and required object instances
-		 */	
+		 */
 		init : function (container, defaultValue) {
 			// initialize vars
 			$searchContainer = $(container);
@@ -4341,7 +4347,7 @@ var app = (function (app, $) {
 				window.location = app.util.appendParamToURL($(this).attr("action"), "q", searchTerm);
 			});
 		},
-		
+
 		/**
 		 * @function
 		 * @description trigger suggest action
@@ -4401,8 +4407,8 @@ var app = (function (app, $) {
 		},
 		/**
 		 * @function
-		 * @description 
-		 */		
+		 * @description
+		 */
 		clearResults : function () {
 			if (!$resultsContainer) { return; }
 			$resultsContainer.empty().hide();
@@ -4417,7 +4423,7 @@ var app = (function (app, $) {
 	/**
 	 * @private
 	 * @function
-	 * @description Binds event to the place holder (.blur) 
+	 * @description Binds event to the place holder (.blur)
 	 */
 	function initializeEvents() {
 		$('#q').focus(function () {
@@ -4434,18 +4440,435 @@ var app = (function (app, $) {
 		})
 		.blur();
 	}
-	
+
 	/******* app.searchplaceholder public object ********/
 	app.searchplaceholder = {
 		/**
 		 * @function
-		 * @description Binds event to the place holder (.blur) 
-		 */		
+		 * @description Binds event to the place holder (.blur)
+		 */
 		init : function () {
 			initializeEvents();
 		}
 	};
 }(window.app = window.app || {}, jQuery));
+
+/**
+ * @class app.storeinventory
+ */
+(function (app, $) {
+
+	var $cache = {};
+	var pid = null;
+	var currentTemplate = jQuery('#wrapper.pt_cart').length ? "cart" : "pdp";
+
+	/******* app.storeinventory public object ********/
+	app.storeinventory = {
+		/**
+		 * @function
+		 * @description
+		 */
+	 	init : function(){
+			app.storeinventory.initializeCache();
+			app.storeinventory.initializeDom();
+		},
+
+	 	initializeCache : function () {
+ 			$cache = {
+ 				preferredStorePanel : jQuery('<div id="preferred-store-panel"/> '),
+ 				storeList : jQuery('<div class="store-list"/>')
+ 			};
+ 		},
+
+  		initializeDom: function(){
+  			// check for items that trigger dialog
+  			jQuery('#cart-table .set-preferred-store').on('click', function(e){
+  				e.preventDefault();
+ 				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
+  			});
+  			
+  			//disable the radio button for home deliveries if the store inventory is out of stock
+  			jQuery('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
+  				jQuery(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+  			});
+  			
+
+  			jQuery('body').on('click', '#pdpMain .set-preferred-store', function(e){
+ 				e.stopImmediatePropagation();
+  				e.preventDefault();
+ 				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
+  			});
+
+  			jQuery('.item-delivery-options input.radio-url').click(function(){
+  				app.storeinventory.setLineItemStore(jQuery(this));
+  			});
+
+  			if(jQuery(".checkout-shipping").length > 0) app.storeinventory.shippingLoad();
+
+  			//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
+  			jQuery('.item-delivery-options').each(function(){
+  				if((jQuery(this).children(".instore-delivery").children("input").attr('disabled')=='disabled')
+  						&&  (jQuery(this).children('.instore-delivery').children('.selected-store-availability').children('.store-error').length > 0)
+  							&& (jQuery(this).children(".instore-delivery").children("input").attr('checked')=='checked')
+  				){
+  					jQuery('.cart-action-checkout button').attr("disabled", "disabled");
+  				}
+  			});
+ 		},
+
+		setLineItemStore: function(radio) {
+
+			jQuery(radio).parent().parent().children().toggleClass('hide');
+			jQuery(radio).parent().parent().toggleClass('loading');
+
+			app.ajax.getJson({
+				url: app.util.appendParamsToUrl(jQuery(radio).attr('data-url') , {storeid : jQuery(radio).siblings('.storeid').attr('value')}),
+				callback: function(data){
+
+					jQuery(radio).attr('checked','checked');
+					jQuery(radio).parent().parent().toggleClass('loading');
+					jQuery(radio).parent().parent().children().toggleClass('hide');
+
+				}
+			});
+
+			//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
+			var countplis = 0;
+			jQuery('.item-delivery-options').each(function(){
+
+  				if((jQuery(this).children(".instore-delivery").children("input").attr('disabled')=='disabled')
+  						&&  (jQuery(this).children('.instore-delivery').children('.selected-store-availability').children('.store-error').length > 0)
+  							&& (jQuery(this).children(".instore-delivery").children("input").attr('checked')=='checked')
+  				){
+  					jQuery('.cart-action-checkout button').attr("disabled", "disabled");
+  				}else{
+  					countplis++;
+  				}
+  			});
+  			if(countplis > 0 && jQuery('.error-message').length == 0){
+  				jQuery('.cart-action-checkout button').removeAttr("disabled", "disabled")
+
+  			}
+
+
+		},
+
+ 		buildStoreList: function(pid) {
+
+ 			// request results from server
+ 			app.ajax.getJson({
+ 				url: app.util.appendParamsToUrl(app.urls.storesInventory , {pid:pid, zipCode:app.user.zip}),
+ 				callback: function(data){
+
+ 					// clear any previous results, then build new
+ 					$cache.storeList.empty();
+ 					var listings = jQuery("<ul class='store-list'/>");
+ 					if(data && data.length > 0) {
+ 						for (var i=0; i < 10 && i < data.length; i++) {
+ 							var item=data[i];
+
+ 							//Disable button if there is no stock for item
+ 							if(item.statusclass == "store-in-stock"){
+						    		var displayButton = '<button value="'+ item.storeId +'" class="button-style-1 select-store-button" data-stock-status="'+item.status+'">' + app.resources.SELECT_STORE + '</button>';
+						    	}
+						    	else
+						    	{
+						    		var displayButton = '<button value="'+ item.storeId +'" class="button-style-1 select-store-button" data-stock-status="'+item.status+'" disabled="disabled">' + app.resources.SELECT_STORE + '</button>';
+						    	}
+
+							// list item for cart
+							if(currentTemplate === 'cart') {
+
+								listings.append('<li class="store-' +item.storeId + item.status.replace(/ /g,'-') + ' store-tile">' +
+							    		'<span class="store-tile-address ">' + item.address1 + ',</span>' +
+								    	'<span class="store-tile-city ">' + item.city + '</span>' +
+								    	'<span class="store-tile-state ">' + item.stateCode + '</span>' +
+								    	'<span class="store-tile-postalCode ">' + item.postalCode + '</span>' +
+								    	'<span class="store-tile-status ' + item.statusclass + '">' + item.status + '</span>' +
+								    	displayButton +
+								    	'</li>');
+							}
+
+							// list item for pdp
+							else {
+								listings.append('<li class="store-' +item.storeId +' ' + item.status.replace(/ /g,'-') + ' store-tile">' +
+							    		'<span class="store-tile-address ">' + item.address1 + ',</span>' +
+								    	'<span class="store-tile-city ">' + item.city + '</span>' +
+								    	'<span class="store-tile-state ">' + item.stateCode + '</span>' +
+								    	'<span class="store-tile-postalCode ">' + item.postalCode + '</span>' +
+								    	'<span class="store-tile-status ' + item.statusclass + '">' + item.status + '</span>' +
+								    	displayButton +
+								    	'</li>');
+							}
+ 						}
+ 					}
+
+ 					// no records
+ 					else {
+ 						if(app.user.zip){
+ 							$cache.storeList.append("<div class='no-results'>No Results</div>");
+ 						}
+ 					}
+
+ 					// set up pagination for results
+ 					var storeTileWidth = 176;
+ 					var numListings = listings.find('li').size();
+ 					var listingsNav = jQuery('<div id="listings-nav"/>');
+ 					for(var i = 0, link = 1; i <= numListings; i++){
+ 						if(numListings >  i) { listingsNav.append('<a data-index="'+ i +'">'+link+'</a>'); }
+ 					    	link++;
+ 					    	i = i + 2;
+ 					}
+ 					listingsNav.find('a').click(function(){
+ 						jQuery(this).siblings().removeClass('active');
+ 					    	jQuery(this).addClass('active');
+ 					    	jQuery('ul.store-list').animate({'left' : (storeTileWidth * jQuery(this).data('index') * -1) },1000);
+ 					}).first().addClass('active');
+ 					$cache.storeList.after(listingsNav);
+
+ 					// check for preferred store id, highlight, move to top
+ 					if(currentTemplate === 'cart'){
+ 					    var selectedButtonText = app.resources.SELECTED_STORE;
+ 					}
+ 					else {
+ 						var selectedButtonText = app.resources.PREFERRED_STORE;
+ 					}
+ 					listings.find('li.store-'+app.user.storeId).addClass('selected').find('button.select-store-button ').text(selectedButtonText);
+
+ 					app.storeinventory.bubbleStoreUp(listings,app.user.storeId);
+
+ 					// if there is a block to show results on page (pdp)
+ 					if( currentTemplate !== 'cart' ) {
+
+ 						var onPageList = listings.clone();
+ 					    	var thisDiv = jQuery('div#' + pid);
+
+ 					    	thisDiv.find('ul.store-list').remove();
+ 					    	thisDiv.append(onPageList);
+
+ 					    	if( onPageList.find('li').size() > 1 ){
+ 					    		thisDiv.find('li:gt(0)').each(function(){
+ 					    			jQuery(this).addClass('extended-list');
+ 					    		});
+ 					    		jQuery('.more-stores').remove();
+ 					    		thisDiv.after('<span class="more-stores">' + app.resources.SEE_MORE + '</span>');
+ 						    	thisDiv.parent().find('.more-stores').click(function(){
+ 						    		if( jQuery(this).text() ===  app.resources.SEE_MORE) {
+ 						    			jQuery(this).text(app.resources.SEE_LESS).addClass('active');
+ 						    		}
+ 						    		else {
+ 						    			jQuery(this).text(app.resources.SEE_MORE).removeClass('active');
+ 						    		}
+ 						    		thisDiv.find(' ul.store-list').toggleClass('expanded');
+
+ 						    	});
+ 					    	}
+
+ 					}
+
+ 					// update panel with new list
+ 					listings.width(numListings * storeTileWidth).appendTo($cache.storeList);
+
+ 					// set up 'set preferred store' action on new elements
+ 					listings.find('button.select-store-button').click(function(e){
+
+ 						var selectedStoreId = jQuery(this).val();
+
+ 						if(currentTemplate === 'cart') {
+
+ 							//update selected store and set the lineitem
+ 							var liuuid = jQuery('#preferred-store-panel').find('.srcitem').attr('value');
+ 							jQuery('div[name="'+liuuid+'-sp"] .selected-store-address').html(jQuery(this).siblings('.store-tile-address').text()+' <br />'+jQuery(this).siblings('.store-tile-city').text()+' , '+jQuery(this).siblings('.store-tile-state').text()+' '+jQuery(this).siblings('.store-tile-postalCode').text());
+ 							jQuery('div[name="'+liuuid+'-sp"] .storeid').val(jQuery(this).val());
+ 							jQuery('div[name="'+liuuid+'-sp"] .selected-store-availability').html(jQuery(this).siblings('.store-tile-status'));
+ 							jQuery('div[name="'+liuuid+'-sp"] .radio-url').removeAttr('disabled');
+ 							jQuery('div[name="'+liuuid+'-sp"] .radio-url').click();
+ 							$cache.preferredStorePanel.dialog("close");
+
+ 						}else{
+
+	 						if( app.user.storeId !== selectedStoreId ) {
+
+	 							// set as selected
+	 							app.storeinventory.setPreferredStore(selectedStoreId);
+	 							app.storeinventory.bubbleStoreUp (onPageList, selectedStoreId);
+	 							jQuery('.store-list li.selected').removeClass('selected').find('button.select-store-button').text(app.resources.SELECT_STORE);
+	 							jQuery('.store-list li.store-'+selectedStoreId+' button.select-store-button').text(app.resources.PREFERRED_STORE).parent().addClass('selected');
+	 						}
+
+ 						}
+						//if there is a dialog box open in the cart for editing a pli and the user selected a new store
+						//add an event to for a page refresh on the cart page if the update button has not been clicked
+						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.  
+						//when the update button is clicked it forces a refresh.
+						if(jQuery('#cart-table').length > 0 && jQuery('.select-store-button').length > 0){
+ 							jQuery('.ui-dialog .ui-icon-closethick:first').bind( "click", function(){
+ 								window.location.reload(); 						
+ 							});
+						}
+
+ 					});
+
+ 				} // end ajax callback
+ 			});
+ 		},
+
+ 		bubbleStoreUp : function(list, id) {
+
+ 			var preferredEntry = list.find('li.store-'+id).clone();
+ 			preferredEntry.removeClass('extended-list');
+ 			list.find('.store-tile').not('extended-list').addClass('extended-list');
+ 			list.find('li.store-'+id).remove();
+ 			list.prepend(preferredEntry);
+
+ 		},
+
+ 		loadPreferredStorePanel : function(pid) {
+
+			//clear error messages from other product tiles if they exists in the dom
+ 			if(jQuery('#preferred-store-panel div .error-message').length > 0){
+ 				jQuery('#preferred-store-panel div .error-message').remove();
+ 			}
+ 			// clear any previous results
+ 			$cache.preferredStorePanel.empty();
+
+ 			// show form if no zip set
+ 				if(app.user.zip === null || app.user.zip === "") {
+ 					$cache.preferredStorePanel
+ 						.append('<div><input type="text" id="userZip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
+ 							.find('#set-user-zip')
+ 								.click(function(){
+ 									var enteredZip = jQuery('#userZip').val();
+ 									var regexObj = {
+ 											canada 		: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i ,
+ 											usa    		: /^\d{5}(-\d{4})?$/
+ 									};
+
+ 									var validZipEntry = false;
+
+ 									//check Canadian postal code
+ 									var regexp     = new RegExp(regexObj.canada);
+ 									if( regexp.test(enteredZip) ) {
+ 										validZipEntry = true;
+ 									}
+
+ 									//check us zip codes
+ 									var regexp     = new RegExp(regexObj.usa);
+ 									if( regexp.test(enteredZip) ) {
+ 										validZipEntry = true;
+ 									}
+
+ 									if( validZipEntry ) {
+ 										//good zip
+ 										jQuery('#preferred-store-panel div .error-message').remove();
+ 										app.storeinventory.setUserZip(enteredZip);
+ 										app.storeinventory.loadPreferredStorePanel(pid);
+ 									} else {
+ 										//bad zip
+ 										if(jQuery('#preferred-store-panel div .error-message').length == 0){
+ 											jQuery('#preferred-store-panel div').append('<div class="error-message">'+app.resources.INVALID_ZIP+'</div>');
+ 										}
+ 									}
+ 								});
+ 					$cache
+ 						.preferredStorePanel
+ 							.find('#userZip')
+ 								.keypress(function(e) {
+ 									code = e.keyCode ? e.keyCode : e.which;
+ 									if(code.toString() == 13) {
+ 										$cache.preferredStorePanel.find('#set-user-zip').trigger('click');
+ 									}
+ 					});
+
+ 					// clear any on-page results
+ 					jQuery('div.store-stock ul.store-list').remove();
+ 					jQuery('.availability .more-stores').remove();
+
+ 				}
+ 				// zip is set, build list
+ 				else {
+ 					app.storeinventory.buildStoreList(pid);
+ 					$cache
+ 						.preferredStorePanel
+ 						.append("<div>For " + app.user.zip + " <span class='update-location'>" + app.resources.CHANGE_LOCATION + "</span></div>" )
+ 						.append($cache.storeList);
+ 					$cache
+ 						.preferredStorePanel
+ 							.find('span.update-location')
+ 								.click(function(){
+ 									app.storeinventory.setUserZip(null);
+ 									app.storeinventory.loadPreferredStorePanel(pid);
+ 					});
+
+ 				}
+
+ 				// append close button for pdp
+ 				if(currentTemplate !== "cart") {
+	 				if(app.user.storeId !== null) {
+	 					$cache.preferredStorePanel.append("<button class='close button-style-1  set-preferred-store'>" + app.resources.CONTINUE_WITH_STORE + "</button>");
+	 				}
+	 				else if(app.user.zip !== null) {
+	 					$cache.preferredStorePanel.append("<button class='close button-style-1'>" + app.resources.CONTINUE + "</button>");
+	 				}
+ 				}else{
+ 					$cache.preferredStorePanel.append("<input type='hidden' class='srcitem' value='" + pid + "'>");
+ 				}
+
+ 				// open the dialog
+ 				$cache.preferredStorePanel.dialog({
+ 					width: 550,
+ 					modal: true,
+ 					title: app.resources.STORE_NEAR_YOU
+ 				});
+
+ 				// action for close/continue
+ 				jQuery('button.close').click(function(){
+ 					$cache.preferredStorePanel.dialog("close");
+ 				});
+
+ 				//remove the continue button if selecting a zipcode
+ 				if(app.user.zip === null || app.user.zip === "") {
+ 					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
+ 				}
+
+ 		},
+
+ 		setUserZip : function(zip) {
+
+ 			app.user.zip = zip;
+ 			jQuery.ajax({
+ 				type: "POST",
+ 				url: app.urls.setZipCode,
+ 				data: { zipCode : zip }
+ 			}).fail(function() {
+
+ 			});
+
+ 		},
+
+ 		setPreferredStore : function(id) {
+
+ 			app.user.storeId = id;
+ 			jQuery.post(app.urls.setPreferredStore, { storeId : id }, function(data) {
+ 				jQuery('.selected-store-availability').html(data);
+ 			});
+
+ 		},
+
+ 		shippingLoad : function() {
+ 			$cache.checkoutForm = jQuery("form.address");
+ 			$cache.checkoutForm.off("click");
+ 			$cache.checkoutForm.on("click", ".is-gift-yes, .is-gift-no", function (e) {
+ 				jQuery(this).parent().siblings(".gift-message-text").toggle(jQuery(this).checked);
+ 			});
+ 			return null;
+ 		}
+
+	};
+}(window.app = window.app || {}, jQuery));
+
+
+
 
 // jquery extensions
 (function ($) {

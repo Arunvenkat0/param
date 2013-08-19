@@ -26,7 +26,7 @@
 
 			<legend>
 				${Resource.msg('global.selectaddressmessage','locale',null)}:
-				<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+				<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</legend>
 			
 			<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
@@ -115,7 +115,7 @@
 			
 				<legend>
 					${Resource.msg('global.selectaddressmessage','locale',null)}:
-					<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 				
 				<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">

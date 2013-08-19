@@ -18,8 +18,7 @@
 <fieldset>
 
 	<legend>
-		${Resource.msg('singleshipping.shippingmethodheader','checkout',null)}
-		<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
+		${Resource.msg('singleshipping.shippingmethodheader','checkout',null)}		
 	</legend>
 	
 
@@ -27,6 +26,12 @@
 	<isif condition="${pdict.ApplicableShippingMethods.size() > 0}">
 
 		<isloop items="${pdict.ApplicableShippingMethods}" var="shippingMethod" status="loopstate">
+
+		<iscomment>exclude the shipming method '005', instore shipming method</iscomment>
+		<isif condition="${shippingMethod.ID == '005'}">
+			<iscontinue>
+		</isif>
+
 		<isset name="shippingCost" value="${pdict.ShippingCosts.get(shippingMethod.ID)}" scope="page"/>
 			
 			<div class="form-row form-indent label-inline">
