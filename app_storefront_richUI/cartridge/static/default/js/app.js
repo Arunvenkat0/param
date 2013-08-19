@@ -504,7 +504,7 @@ var app = (function (app, $) {
 	function initializeEvents() {
 
 		app.product.initAddThis();
-
+		if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
@@ -699,6 +699,7 @@ var app = (function (app, $) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
+					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 					if (isColor) {
 						replaceImages();
 					}
