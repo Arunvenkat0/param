@@ -30,7 +30,7 @@
 			
 				<legend>
 					${Resource.msg('registration.logininfo','account',null)}
-					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 				
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
