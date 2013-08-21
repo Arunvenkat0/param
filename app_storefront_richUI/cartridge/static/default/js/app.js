@@ -2073,6 +2073,8 @@ var app = (function (app, $) {
 	function getShippingMethodURL(url) {
 		var newUrl = app.util.appendParamsToUrl(url,
 												{
+													address1:$cache.address1.val(),
+													address2:$cache.address2.val(),
 													countryCode:$cache.countryCode.val(),
 												 	stateCode:$cache.stateCode.val(),
 												 	postalCode:$cache.postalCode.val(),
@@ -2112,7 +2114,9 @@ var app = (function (app, $) {
 		}
 		// attempt to set shipping method
 		var url = app.util.appendParamsToUrl(app.urls.selectShippingMethodsList,
-											 { countryCode:$cache.countryCode.val(),
+											 { address1:$cache.address1.val(),
+											   address2:$cache.address2.val(),
+											   countryCode:$cache.countryCode.val(),
 											   stateCode:$cache.stateCode.val(),
 											   postalCode:$cache.postalCode.val(),
 											   city:$cache.city.val(),
@@ -2297,7 +2301,7 @@ var app = (function (app, $) {
 			$cache.checkoutForm.find(".gift-message-text").toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
 		})
 		.on("change",
-			"input[name$='_addressFields_state'], input[name$='_addressFields_city'], input[name$='_addressFields_zip']",
+			"input[name$='_addressFields_address1'], input[name$='_addressFields_address2'], input[name$='_addressFields_state'], input[name$='_addressFields_city'], input[name$='_addressFields_zip']",
 			updateShippingMethodList
 		);
 
