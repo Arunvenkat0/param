@@ -30,7 +30,7 @@
 		
 					<legend>
 						${Resource.msg('singleshipping.enteraddress','checkout',null)}
-						<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+						<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 					</legend>
 		
 					<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
@@ -166,9 +166,17 @@
 		
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 				<isinclude template="checkout/shipping/storepickup/instoremessages"/>
+			<iselse>
+				<isset name="instoreShipmentsExistst" value="${false}" scope="page"/>		
 			</isif>
 		
-			<div class="form-row form-row-button">
+			
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExistst}">
+				<div class="form-row form-row-button instore-continue-button">
+			<iselse>
+				<div class="form-row form-row-button">
+			</isif>
+			
 				<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 			</div>
 			

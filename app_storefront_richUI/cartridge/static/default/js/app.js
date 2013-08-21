@@ -504,7 +504,7 @@ var app = (function (app, $) {
 	function initializeEvents() {
 
 		app.product.initAddThis();
-
+		if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
@@ -699,6 +699,7 @@ var app = (function (app, $) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
+					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 					if (isColor) {
 						replaceImages();
 					}
@@ -4490,6 +4491,12 @@ var app = (function (app, $) {
   				e.preventDefault();
  				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
   			});
+  			
+  			//disable the radio button for home deliveries if the store inventory is out of stock
+  			jQuery('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
+  				jQuery(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+  			});
+  			
 
   			jQuery('body').on('click', '#pdpMain .set-preferred-store', function(e){
  				e.stopImmediatePropagation();
@@ -4695,6 +4702,15 @@ var app = (function (app, $) {
 	 						}
 
  						}
+						//if there is a dialog box open in the cart for editing a pli and the user selected a new store
+						//add an event to for a page refresh on the cart page if the update button has not been clicked
+						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.  
+						//when the update button is clicked it forces a refresh.
+						if(jQuery('#cart-table').length > 0 && jQuery('.select-store-button').length > 0){
+ 							jQuery('.ui-dialog .ui-icon-closethick:first').bind( "click", function(){
+ 								window.location.reload(); 						
+ 							});
+						}
 
  					});
 
@@ -4714,16 +4730,20 @@ var app = (function (app, $) {
 
  		loadPreferredStorePanel : function(pid) {
 
+			//clear error messages from other product tiles if they exists in the dom
+ 			if(jQuery('#preferred-store-panel div .error-message').length > 0){
+ 				jQuery('#preferred-store-panel div .error-message').remove();
+ 			}
  			// clear any previous results
  			$cache.preferredStorePanel.empty();
 
  			// show form if no zip set
  				if(app.user.zip === null || app.user.zip === "") {
  					$cache.preferredStorePanel
- 						.append('<div><input type="text" id="userZip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
+ 						.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
  							.find('#set-user-zip')
  								.click(function(){
- 									var enteredZip = jQuery('#userZip').val();
+ 									var enteredZip = jQuery('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
  									var regexObj = {
  											canada 		: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i ,
  											usa    		: /^\d{5}(-\d{4})?$/
@@ -4745,6 +4765,7 @@ var app = (function (app, $) {
 
  									if( validZipEntry ) {
  										//good zip
+ 										jQuery('#preferred-store-panel div .error-message').remove();
  										app.storeinventory.setUserZip(enteredZip);
  										app.storeinventory.loadPreferredStorePanel(pid);
  									} else {

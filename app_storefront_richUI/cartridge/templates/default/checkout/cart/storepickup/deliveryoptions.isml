@@ -40,12 +40,14 @@
 
 	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline instore-delivery">
 	
-		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
+		
 		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store" name="${lineItem.getUUID()}" 
 				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=true" value="store"
 				<isif condition="${typeof storeinventoryATS == 'undefined' || empty(storeinventoryATS) || storeinventoryATS < lineItem.quantityValue}">disabled </isif> 
 				<isif condition="${lineItem.custom.fromStoreId != null}">checked</isif>/>
-	
+		
+		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
+		
 		<iscomment>Store Address</iscomment>
 		<input type="hidden" class="storeid" name="${lineItem.getUUID()}-store" value="${!empty(store) ? store.ID : ''}">	
 		<div class="selected-store-address">
