@@ -1,4 +1,5 @@
 <!--- TEMPLATENAME: coreshowselectedstore.isml --->
+<iscache type="relative" hour="0" />
 <isscript>
 	var store : Store = dw.catalog.StoreMgr.getStore(pdict.CurrentHttpParameterMap.storeId);
 </isscript>

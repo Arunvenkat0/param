@@ -30,7 +30,7 @@
 		
 					<legend>
 						${Resource.msg('singleshipping.enteraddress','checkout',null)}
-						<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+						<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 					</legend>
 		
 					<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
