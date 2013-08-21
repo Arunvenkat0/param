@@ -504,7 +504,7 @@ var app = (function (app, $) {
 	function initializeEvents() {
 
 		app.product.initAddThis();
-
+		if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
@@ -699,6 +699,7 @@ var app = (function (app, $) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
+					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
 					if (isColor) {
 						replaceImages();
 					}
@@ -4735,10 +4736,10 @@ var app = (function (app, $) {
  			// show form if no zip set
  				if(app.user.zip === null || app.user.zip === "") {
  					$cache.preferredStorePanel
- 						.append('<div><input type="text" id="userZip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
+ 						.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' + app.resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + app.resources.SEARCH + '</button></div>')
  							.find('#set-user-zip')
  								.click(function(){
- 									var enteredZip = jQuery('#userZip').val();
+ 									var enteredZip = jQuery('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
  									var regexObj = {
  											canada 		: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i ,
  											usa    		: /^\d{5}(-\d{4})?$/
