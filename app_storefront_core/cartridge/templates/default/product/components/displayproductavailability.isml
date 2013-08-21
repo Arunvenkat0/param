@@ -67,6 +67,20 @@
 			</ul>
 		</isif>
 		
+	<iselseif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && p_productli.custom.fromStoreId != null}">
+		<iscomment>base the display of the instock messaging on the store inventory</iscomment>
+		<isscript>
+			var store : Store = dw.catalog.StoreMgr.getStore(p_productli.custom.fromStoreId);
+			var storeinventory : ProductInventoryList = dw.catalog.ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
+		</isscript>
+				
+		<isif condition="${(!empty(storeinventory.getRecord(p_productli.productID)) && (storeinventory.getRecord(p_productli.productID).ATS.value >= p_productli.quantityValue))}">
+			<isif condition="${empty(pdict.p_displayinstock) || pdict.p_displayinstock}">
+				<ul class="product-availability-list"><li class="is-in-stock">${Resource.msg('global.instock','locale',null)}</li></ul>
+			</isif>		
+		<iselse>
+			<ul class="product-availability-list"><li class="notavailable">${Resource.msg('global.allnotavailable','locale',null)}</li></ul>
+		</isif>
 	<iselse>
 	
 		<ul class="product-availability-list"><li class="notavailable">${Resource.msg('global.allnotavailable','locale',null)}</li></ul>

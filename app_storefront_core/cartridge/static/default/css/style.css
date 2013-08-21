@@ -1020,7 +1020,7 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .js button.select {display:none}
 /* Multi Inventory */
 /* --------------------------------------------------------------------------------------- */
-.ui-dialog #listings-nav {float: right;}
+.ui-dialog #listings-nav {float: right;margin-top: 2%;}
 .ui-dialog #listings-nav a {cursor: pointer;display: inline-block;margin: 0 5px;}
 .ui-dialog #listings-nav a.active {font-weight: bold;}
 .pdp-main .product-add-to-cart .availability .label {position: relative;}
@@ -1083,7 +1083,9 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .hide {display: none;}
 .loading {background: url("../images/loading-progress-98x22.gif") no-repeat scroll left center transparent;}
 .store-in-stock {color: #019328;}
+#cart-table .item-delivery-options .store-in-stock {color: #333333;font-family: Arial,sans-serif;font-size: 12px;}
 .store-error {color: #FF0000;}
+#cart-table .item-delivery-options .store-error {color: #990000;}
 #cart-table .item-delivery-options {padding: 1em 0 1em 0;width: 100px;}
 .selected-store-address, .set-preferred-store, .selected-store-availability {font-size: 0.8em;font-weight: 400;margin-left: 0px;}
 .set-preferred-store {cursor: pointer;}
@@ -1094,4 +1096,12 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .pt_checkout div.instore-shipment-method {width:100%;padding: 1em;}
 .pt_checkout div.instore-shipment-method span {font-weight:bold;}
 .pt_checkout div.instore-shipment-address {width:40%;float:left;padding-left: 1em;}
-.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;} 
+.pt_checkout div.instore-shipment-messagetxt {width:50%;float:right;}
+.ui-dialog #preferred-store-panel button#set-user-zip{margin-left: 3%;}
+.ui-dialog #preferred-store-panel #userZip{margin-left: 12%;margin-top: 5%;}
+.ui-dialog #preferred-store-panel .error-message{margin-left: 12%;margin-top: 1%;}
+#preferred-store-panel div.store-list{margin-top: 1%;}
+#preferred-store-panel button.set-preferred-store{margin-top: 2%;}
+#preferred-store-panel button.close{margin-top: 2%;}
+.checkout-shipping fieldset .instore-continue-button{margin-left:61.5%}
+#cart-table .item-delivery-options label{display: inline;margin-left: 2%;}
