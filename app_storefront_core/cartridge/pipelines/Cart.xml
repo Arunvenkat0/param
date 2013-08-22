@@ -2717,6 +2717,11 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
         <call-node start-name-ref="Cart-Calculate"/>
         <node-display x="0" y="1"/>
       </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="Cart-CheckInStoreProducts"/>
+        <node-display x="0" y="1"/>
+      </node>
       <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="0" y="1"/>
@@ -3227,6 +3232,75 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       <node>
         <end-node/>
         <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_45">
+    <segment>
+      <node>
+        <text-node>
+          <description>This Pipeline will check the instore qty against the store inventory in the case that the pli's qtyt has been updated.</description>
+        </text-node>
+        <node-display width="2" x="13" y="55"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CheckInStoreProducts">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CheckInStoreProducts" secure="false"/>
+        <node-display x="13" y="56"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="cart/storepickup/CheckStoreInLineItem.ds"/>
+                <key-binding alias="null" key="ScriptLog"/>
+                <key-binding alias="Basket" key="Basket"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../+1"/>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../+2"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="1"/>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="2"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="-1" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>

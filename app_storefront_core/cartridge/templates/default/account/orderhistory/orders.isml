@@ -50,13 +50,21 @@
 								<iscomment>display order total in first row only</iscomment>						
 								<isif condition="${shipmentloopstate.first}">
 									<tr>
-										<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</td>
+										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+										<iselse>
+											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</td>
+										</isif>	
 										<th class="order-items">${Resource.msg('orders.items','account',null)}</td>
 										<th class="order-total-price">${Resource.msg('orders.ordertotal','account',null)}</td>
 									</tr>
 								<iselse>
 									<tr>
-										<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</th>
+										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+										<iselse>									
+											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</th>
+										</isif>						
 										<th class="order-items">${Resource.msg('orders.items','account',null)}</th>
 										<th></th>
 									</tr>

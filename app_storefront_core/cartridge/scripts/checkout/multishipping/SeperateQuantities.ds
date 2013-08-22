@@ -47,8 +47,11 @@ function execute( args : PipelineDictionary ) : Number
 		}else{
 			qli.optionID = 'na';
 		}
-
-		quantityLineItems.add(qli);
+		
+		//skipping plis that are using the instore pick up shipping method
+		if(empty(pli.custom.fromStoreId)){
+			quantityLineItems.add(qli);
+		}	
 	}
 	
 	args.QuantityLineItemsOut = quantityLineItems;
