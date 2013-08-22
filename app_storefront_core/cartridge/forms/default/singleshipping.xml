@@ -35,7 +35,15 @@
 		
 
 	</group>
-
+	
+	<group formid="inStoreShipments">
+		<!-- list of shipments to set properties for (gift settings and shipping method) -->
+		<list formid="shipments">	
+			<!-- store message -->
+			<field formid="storePickupMessage" label="forms.store.storemessage" type="string" binding="custom.storePickupMessage" mandatory="false" />	
+		</list>
+	</group>
+	
 	<!-- general actions -->
 	<action formid="shipToMultiple" valid-form="false"/>
 

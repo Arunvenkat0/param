@@ -7,6 +7,10 @@
         <postal-code>07743</postal-code>
         <country-code>DE</country-code>
         <store-hours xml:lang="x-default">Closed Sundays.</store-hours>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">DE</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_german_store</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store1">
@@ -24,6 +28,10 @@ All Men's T-shirts are 2 for $40!&lt;br /&gt;</store-events>
 Sun: 12pm - 6pm</store-hours>
         <latitude>81.0</latitude>
         <longitude>90.0</longitude>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store1</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store10">
@@ -35,6 +43,10 @@ Sun: 12pm - 6pm</store-hours>
         <country-code>US</country-code>
         <email>contact@downtowntvshop.com</email>
         <phone>+1-617-695-1565</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store10</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store11">
@@ -46,6 +58,10 @@ Sun: 12pm - 6pm</store-hours>
         <country-code>US</country-code>
         <email>store1@company.com</email>
         <phone>+1-203-965-7014</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store11</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store2">
@@ -57,6 +73,10 @@ Sun: 12pm - 6pm</store-hours>
         <country-code>US</country-code>
         <email>store2@company.com</email>
         <phone>+1-401-312-6284</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store2</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store3">
@@ -68,6 +88,10 @@ Sun: 12pm - 6pm</store-hours>
         <country-code>US</country-code>
         <email>store3@company.com</email>
         <phone>+1-617-318-2860</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store3</custom-attribute>
+        </custom-attributes>
     </store>
 
     <store store-id="store4">
@@ -79,6 +103,10 @@ Sun: 12pm - 6pm</store-hours>
         <country-code>US</country-code>
         <email>store4@company.com</email>
         <phone>+1-617-714-2640</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store4</custom-attribute>
+        </custom-attributes>
     </store>
 
     <store store-id="store5">
@@ -89,6 +117,10 @@ Sun: 12pm - 6pm</store-hours>
         <state-code>MA</state-code>
         <country-code>US</country-code>
         <phone>+1-617-888-7276</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store5</custom-attribute>
+        </custom-attributes>        
     </store>
 
     <store store-id="store6">
@@ -99,6 +131,10 @@ Sun: 12pm - 6pm</store-hours>
         <state-code>MA</state-code>
         <country-code>US</country-code>
         <phone>+1-978-580-2704</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store6</custom-attribute>
+        </custom-attributes>
     </store>
 
     <store store-id="store7">
@@ -109,6 +145,10 @@ Sun: 12pm - 6pm</store-hours>
         <state-code>ME</state-code>
         <country-code>US</country-code>
         <phone>+1-207-599-5467</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store7</custom-attribute>
+        </custom-attributes>       
     </store>
 
     <store store-id="store8">
@@ -119,6 +159,10 @@ Sun: 12pm - 6pm</store-hours>
         <state-code>NH</state-code>
         <country-code>US</country-code>
         <phone>+1-603-715-9773</phone>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store8</custom-attribute>
+        </custom-attributes>  
     </store>
 
     <store store-id="store9">
@@ -131,6 +175,10 @@ Sun: 12pm - 6pm</store-hours>
         <phone>+1-413-413-6916</phone>
         <store-events xml:lang="x-default">Here are some store events.</store-events>
         <store-hours xml:lang="x-default">Here are the store hours</store-hours>
+        <custom-attributes>
+            <custom-attribute attribute-id="countryCodeValue">US</custom-attribute>        
+            <custom-attribute attribute-id="inventoryListId">inventory_store_store9</custom-attribute>
+        </custom-attributes>
     </store>
 
 </stores>
