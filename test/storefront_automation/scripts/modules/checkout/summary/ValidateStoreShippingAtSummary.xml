@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks the store information on summary page:
+- store address
+- ShippingMethod
+- ShippingStatus</description>
   <parameter name="ShippingMethod"/>
   <parameter name="ShippingStatus"/>
   <command name="assertText" target="css=.order-shipment-table th:nth-child(4)" value="regexpi:In Store Pickup"/>
