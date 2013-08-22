@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="MainNavigation"/>
+  <parameter name="SubNavagation"/>
+  <parameter name="ElementToVerify"/>
+  <parameter name="TitleToVerify"/>
+  <parameter name="previousPageLink"/>
+  <command name="click" target="css=.navigation-header">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="click" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li/a[contains(text(),'@{MainNavigation}')]">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="clickAndWait" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li//div[(contains(@class,'level-2') and (contains(@style,'display: block')))]//a[contains(text(),'@{SubNavagation}')]">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="assertTitle" value="@{TitleToVerify}"/>
+  <command name="assertElementPresent" target="@{ElementToVerify}"/>
+  <command name="open" value="@{previousPageLink}"/>
+</scriptmodule>
