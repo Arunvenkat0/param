@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks at a instore product PDP the existence of the store link. And also the other product details like name and price.</description>
   <command name="assertElementPresent" target="css=.breadcrumb">
     <comment>Checks if breadcrumb navigation is displayed.</comment>
   </command>
