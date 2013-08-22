@@ -116,7 +116,7 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <module name="testcases.purchase.ValidateStorePickUpShippingPage"/>
+  <module name="modules.checkout.shipping.ValidateStorePickUpShippingPage"/>
   <command name="storeText" target="css=.instore-shipment-address" value="storeAddress"/>
   <action name="CheckoutBilling"/>
   <command name="clickAndWait" target="css=.instore-continue-button button[value='Continue >']"/>
@@ -127,7 +127,7 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <module name="testcases.purchase.ValidateStoreShippingAddress"/>
+  <module name="modules.checkout.shipping.ValidateStoreShippingAddress"/>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage">
     <comment>Validate Order's total amounts and different charges Inside Price Summary tabel</comment>
   </module>
@@ -152,7 +152,7 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="PriceTotal" value="${ProductTotalPrice}"/>
   </module>
-  <module name="testcases.purchase.ValidateStoreShippingAddress"/>
+  <module name="modules.checkout.shipping.ValidateStoreShippingAddress"/>
   <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
     <comment>Validate Billing Address</comment>
     <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
@@ -208,7 +208,7 @@
   </module>
   <action name="Logout"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
-  <module name="testcases.purchase.ValidateStoreShippingAtSummary">
+  <module name="modules.checkout.summary.ValidateStoreShippingAtSummary">
     <parameter name="ShippingMethod" value="Store Pickup"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
