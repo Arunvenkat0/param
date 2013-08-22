@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="ZipCodeStore1"/>
+  <parameter name="ZipCodeStore2"/>
+  <action name="OpenStoreSelectionOverlay"/>
+  <command name="click" target="link=Select Store"/>
+  <command name="type" target="id=userZip" value="@{ZipCodeStore1}"/>
+  <action name="SearchForStoreZipCode1"/>
+  <command name="click" target="id=set-user-zip"/>
+  <command name="assertTextPresent" value="@{ZipCodeStore1}"/>
+  <command name="assertElementPresent" target="css=.update-location"/>
+  <command name="assertElementPresent" target="css=.store-list .store-tile"/>
+  <command name="assertElementPresent" target="css=.select-store-button"/>
+  <command name="assertElementPresent" target="css=#listings-nav"/>
+  <action name="SelectPickUpStore1"/>
+  <command name="click" target="css=.select-store-button"/>
+  <command name="waitForElementPresent" target="css=.selected-store-address"/>
+  <command name="waitForElementPresent" target="link=Select Store"/>
+  <action name="OpenStoreSelectionOverlayAgain"/>
+  <command name="click" target="link=Select Store"/>
+  <command name="click" target="css=.update-location"/>
+  <command name="type" target="id=userZip" value="@{ZipCodeStore2}"/>
+  <action name="SearchForStoreZipCode2"/>
+  <command name="click" target="id=set-user-zip"/>
+  <command name="assertTextPresent" value="@{ZipCodeStore2}"/>
+  <command name="assertElementPresent" target="css=.update-location"/>
+  <command name="assertElementPresent" target="css=.store-list .store-tile"/>
+  <command name="assertElementPresent" target="css=.select-store-button"/>
+  <command name="assertElementPresent" target="css=#listings-nav"/>
+  <action name="SelectPickUpStore2"/>
+  <command name="click" target="css=.select-store-button"/>
+  <command name="waitForElementPresent" target="css=.selected-store-address"/>
+</scriptmodule>
