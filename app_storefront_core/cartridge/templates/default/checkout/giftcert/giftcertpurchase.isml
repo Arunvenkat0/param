@@ -23,7 +23,7 @@
 						<input type="hidden" name="plid" value="${pdict.CurrentHttpParameterMap.plid}"/>
 					</isif>
 			
-					<div class="dialog-required"> <span class="required-indicator">&#8226;<em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>			
+					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>			
 		
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.from}" type="input" rowClass="label-above"/>					
 					
