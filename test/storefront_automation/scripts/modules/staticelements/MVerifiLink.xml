@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="LinkToClick"/>
+  <parameter name="ElementToVerify"/>
+  <parameter name="UrlToPreviousPage"/>
+  <parameter name="CheckTitle"/>
+  <command name="waitForElementPresent" target="@{LinkToClick}"/>
+  <command name="clickAndWait" target="@{LinkToClick}"/>
+  <command name="assertTitle" value="@{CheckTitle}"/>
+  <command name="assertText" disabled="true" target="//div[contains(@id,'primary')]/h1" value="My Account Login"/>
+  <command name="assertElementPresent" target="@{ElementToVerify}"/>
+  <command name="clickAndWait" disabled="true" target="//div[@id='main']/ol/li[1]/a"/>
+  <command name="open" value="@{UrlToPreviousPage}"/>
+</scriptmodule>
