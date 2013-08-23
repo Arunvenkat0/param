@@ -607,7 +607,7 @@ Expects Product instance</description>
           <key-binding alias="CurrentHttpParameterMap.pmax.doubleValue" key="PriceMax"/>
           <key-binding alias="null" key="RefineBy5Name"/>
           <key-binding alias="null" key="RefineBy5Phrase"/>
-          <key-binding alias="CurrentHttpParameterMap.cgid.value" key="CategoryID"/>
+          <key-binding alias="!empty(CurrentHttpParameterMap.cgid.value) ? CurrentHttpParameterMap.cgid.value : Product.categoryAssignments[0].category.ID" key="CategoryID"/>
           <key-binding alias="ProductSearchResult" key="ProductSearchModel"/>
           <key-binding alias="CurrentHttpParameterMap.cid.value" key="ContentID"/>
           <key-binding alias="CurrentHttpParameterMap.fdid.value" key="FolderID"/>

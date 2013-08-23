@@ -265,6 +265,7 @@ float: right;}
 	
 	.facebook-registration {left:0px;}
 	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100% !important;}
+	#preferred-store-panel input[type="text"] {width:49.5966%;}
 }
 
 /* 768px layout: make minor adjustments from full layout. None of the mobile styles above used, based on media queries */
@@ -329,5 +330,6 @@ float: right;}
 	.header-search input[type="submit"]{height: 37px;width: 15%;}
 	input[type="text"]{border:1px solid #AAAAAA;margin-left:2%;padding:0.8em 0.5em;text-indent:0;width:49.5966%;}
 	div#wrapper.pt_gift-registry{font-size:12px;}
+	#preferred-store-panel input[type="text"] {width:49.5966%;}
 }
 	
