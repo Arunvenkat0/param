@@ -26,7 +26,7 @@
   <command name="click" target="id=set-user-zip"/>
   <command name="assertTextPresent" value="${ZipCode1}"/>
   <command name="assertElementPresent" target="css=.update-location"/>
-  <command name="assertElementPresent" target="css=.store-list .store-tile"/>
+  <command name="waitForElementPresent" target="css=.store-list .store-tile"/>
   <command name="assertElementPresent" target="css=.select-store-button"/>
   <command name="assertElementPresent" target="css=#listings-nav"/>
   <action name="SelectPickUpStore1"/>
@@ -47,7 +47,7 @@
   <command name="click" target="id=set-user-zip"/>
   <command name="assertTextPresent" value="${ZipCode2}"/>
   <command name="assertElementPresent" target="css=.update-location"/>
-  <command name="assertElementPresent" target="css=.store-list .store-tile"/>
+  <command name="waitForElementPresent" target="css=.store-list .store-tile"/>
   <command name="assertElementPresent" target="css=.select-store-button"/>
   <command name="assertElementPresent" target="css=#listings-nav"/>
   <action name="OpenNextPage"/>
@@ -61,9 +61,31 @@
     <comment>//div[@id='preferred-store-panel']/div[2]/ul/li[1]/button</comment>
   </command>
   <command name="assertText" target="css=#preferred-store-panel .store-list .store-store3 button" value="Preferred Store"/>
-  <action name="CloseOverlay"/>
+  <command name="storeText" target="css=.store-list .store-store3 .store-tile-city" value="storeCity"/>
+  <command name="storeText" target="css=.store-list .store-tile-state" value="storeState"/>
+  <command name="storeText" target="css=.store-list .store-store3 .store-tile-postalCode" value="storeZip"/>
+  <action name="CloseOverlayAndCheckPreferedStore"/>
   <command name="click" target="css=#preferred-store-panel .close">
     <comment>//*[@id='preferred-store-panel']/button[contains(@class,'close') and contains(@class,'button-style-1')][1]</comment>
   </command>
   <command name="waitForElementPresent" target="link=Check store availability"/>
+  <command name="assertText" target="css=.store-list li(1).In-Stock .store-tile-status" value="In Stock"/>
+  <command name="assertElementPresent" target="css=.store-list .store-tile-address"/>
+  <command name="assertElementPresent" target="css=.more-stores"/>
+  <action name="OpenStoreList"/>
+  <command name="click" target="css=.more-stores"/>
+  <command name="assertElementPresent" target="css=.store-list .store-tile-status"/>
+  <command name="assertElementPresent" target="css=.store-list .store-tile-address"/>
+  <command name="assertElementPresent" target="css=.availability .active"/>
+  <action name="CloseStoreList"/>
+  <command name="click" target="css=.availability .active"/>
+  <action name="AddStoreProduct2Cart"/>
+  <command name="click" target="id=add-to-cart"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <command name="assertTextPresent" value="${storeCity}"/>
+  <command name="assertTextPresent" value="${storeState}"/>
+  <command name="assertTextPresent" value="${storeZip}"/>
+  <command name="assertElementPresent" target="css=.store-in-stock"/>
 </testcase>
