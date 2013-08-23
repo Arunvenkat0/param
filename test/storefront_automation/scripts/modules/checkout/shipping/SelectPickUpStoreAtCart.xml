@@ -13,7 +13,7 @@ Another zip code is used for the second search.
   <command name="click" target="id=set-user-zip"/>
   <command name="assertTextPresent" value="@{ZipCodeStore1}"/>
   <command name="assertElementPresent" target="css=.update-location"/>
-  <command name="assertElementPresent" target="css=.store-list .store-tile"/>
+  <command name="waitForElementPresent" target="css=.store-list .store-tile"/>
   <command name="assertElementPresent" target="css=.select-store-button"/>
   <command name="assertElementPresent" target="css=#listings-nav"/>
   <action name="SelectPickUpStore1"/>
