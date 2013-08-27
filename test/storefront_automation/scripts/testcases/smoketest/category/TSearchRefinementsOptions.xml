@@ -11,4 +11,5 @@ at 1. The page displays all the products under that particular sub-category of t
 at 2. Product grid refreshes based on the selection.
 at 3. The sort is persistent.
 at 4. This causes the first result page to appear.</description>
+  <module name="modules.staticelements.Homepage"/>
 </testcase>
