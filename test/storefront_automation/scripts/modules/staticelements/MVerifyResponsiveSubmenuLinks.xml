@@ -5,6 +5,7 @@
   <parameter name="ElementToVerify"/>
   <parameter name="TitleToVerify"/>
   <parameter name="previousPageLink"/>
+  <parameter name="ElementToClickForPreviousPage"/>
   <command name="click" target="css=.navigation-header">
     <comment>open the main navigation menu</comment>
   </command>
@@ -16,5 +17,6 @@
   </command>
   <command name="assertTitle" value="@{TitleToVerify}"/>
   <command name="assertElementPresent" target="@{ElementToVerify}"/>
-  <command name="open" value="@{previousPageLink}"/>
+  <command name="clickAndWait" target="@{ElementToClickForPreviousPage}"/>
+  <command name="open" disabled="true" value="@{previousPageLink}"/>
 </scriptmodule>
