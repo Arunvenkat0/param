@@ -62,6 +62,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'Gift Certificates')]"/>
     <parameter name="UrlToPreviousPage" value="${shopURL}"/>
     <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <action name="To-Be-Done-Top-Sellers"/>
   <action name="New-Arrivials"/>
@@ -71,6 +72,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Womens') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="New Arrivals in Women's Footwear, Outerwear, Clothing &amp; Accessories"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="New Arrivals"/>
@@ -78,6 +80,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Mens') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="New Arrivals in Men's Clothing, Suits &amp; Accessories"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="New Arrivals"/>
@@ -85,6 +88,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Electronics') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Shop New Arrivals in Electronics Including Televisions, Digital Cameras, iPods &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <action name="Womens"/>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
@@ -93,6 +97,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Clothing') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Womens Clothing Including Outerwear, Tops, Bottoms &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -100,6 +105,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Outfits') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="outfits"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -107,6 +113,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Tops') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Tops including Short &amp; Long Sleeve, Casual, Classic &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -114,6 +121,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Dresses') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Dresses for all Occasions"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -121,6 +129,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Bottoms') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Bottoms Including Khakis, Cargos, Trousers, Jeans &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -128,6 +137,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Jackets &amp; Coats') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Outerwear Including Jackets &amp; Collections"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -135,6 +145,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Feeling Red') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Womens Clothing All in Red"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -142,6 +153,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Jewelry') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Jewelry including Earrings, Bracelets and Necklaces."/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -149,6 +161,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Accessories') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -156,6 +169,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Earrings') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Earrings including Button Clip-on, Curved &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -163,6 +177,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Bracelets') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Bracelets including Stretched, Cuff, Beaded &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -170,6 +185,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Necklaces') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Necklaces including Drop, Dangle &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -177,6 +193,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Scarves') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Women's Scarves"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Womens"/>
@@ -184,6 +201,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <action name="Mens"/>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
@@ -192,6 +210,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Clothing') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Mens Clothing Including Suits, Tops, Bottoms &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -199,6 +218,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Accessories') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -206,6 +226,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Suits') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Mens Suits for Business and Casual"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -213,6 +234,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Jackets &amp; Coats') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Jackets Including Jackets &amp; Blazzers"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -220,6 +242,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Dress Shirts') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Dress Shirts including Striped, Button Down, Non-Iron &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -227,6 +250,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shorts') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Spring Shorts"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -234,6 +258,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Pants') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Pants Including Khakis, Cargos, Trousers, Jeans &amp; More"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -241,6 +266,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Ties') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Casual and Business Ties"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -248,6 +274,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Gloves') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Gloves"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Mens"/>
@@ -255,6 +282,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Luggage') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Men's Wheeled Luggage"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <action name="Electronics"/>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
@@ -263,6 +291,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Televisions') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Televisions Including LCD, Plasma &amp; More in High Definition"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Electronics"/>
@@ -270,6 +299,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Digital Cameras') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Digital Cameras"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Electronics"/>
@@ -277,6 +307,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'iPod &amp; MP3 Players') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="iPod &amp; MP3 Digital Media Players"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Electronics"/>
@@ -284,6 +315,7 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'GPS Navigation') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="GPS Units"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifyResponsiveSubmenuLinks">
     <parameter name="MainNavigation" value="Electronics"/>
@@ -291,10 +323,10 @@ Text is correct.</description>
     <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Gaming') and (contains(@class,'breadcrumb-last')))]"/>
     <parameter name="TitleToVerify" value="Gaming"/>
     <parameter name="previousPageLink" value="${shopURL}"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <action name="Next-Previous-section"/>
   <module name="modules.smoketest.MHomePageNextPreviousSection"/>
   <action name="shop-shoes"/>
   <module name="modules.smoketest.MHomePageShopShoes"/>
-  <action name="THomepageGeneral-0"/>
 </testcase>
