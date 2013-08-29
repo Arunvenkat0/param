@@ -12,6 +12,8 @@
  * @input State : String
  * @input PostalCode : String
  * @input City : String
+ * @input Address1 : String
+ * @input Address2 : String
  * @output ShippingMethods : Object The shipping methods.
  */
 
@@ -67,12 +69,26 @@ function execute( pdict : PipelineDictionary ) : Number
 	if (city != null)
 	{
 		city = StringUtils.trim(city);  // no need for defaults
+	}	
+	
+	// address1
+	var address1 : String = pdict.Address1;
+	if (address1 != null)
+	{
+		address1 = StringUtils.trim(address1);  // no need for defaults
 	}
 	
-	
+	// address2
+	var address2 : String = pdict.Address2;
+	if (address2 != null)
+	{
+		address2 = StringUtils.trim(address2);  // no need for defaults
+	}
 	
 	// Construct an address from request parameters.
 	var addressObj = new Object();
+	addressObj.address1 = address1;
+	addressObj.address2 = address2;
 	addressObj.countryCode = countryCode;
 	addressObj.stateCode = stateCode;
 	addressObj.postalCode = postalCode;
