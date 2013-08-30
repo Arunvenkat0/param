@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Checks at a instore product PDP the existence of the store link. And also the other product details like name and price.</description>
+  <command name="assertElementPresent" target="css=.breadcrumb">
+    <comment>Checks if breadcrumb navigation is displayed.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=h1.product-name">
+    <comment>Checks if a headline is displayed.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=.product-primary-image img">
+    <comment>Checks if a product image is displayed.</comment>
+  </command>
+  <command name="assertXpathCount" target="id('product-content')//div[@class='product-price']" value="2">
+    <comment>Checks if the price information is displayed twice.</comment>
+  </command>
+  <command name="assertElementPresent" target="id=Quantity">
+    <comment>Checks if the quantity input field is displayed.</comment>
+  </command>
+  <command name="assertElementPresent" target="id=add-to-cart">
+    <comment>Checks if the order button is displayed.</comment>
+  </command>
+  <command name="assertElementPresent" target="link=Check store availability"/>
+  <command name="assertElementPresent" target="css=.addthis_toolbox">
+    <comment>Checks if the social toolbox is displayed.</comment>
+  </command>
+  <command name="assertXpathCount" target="id('pdpMain')//div[contains(@class,'product-tabs')]/ul/li" value="3">
+    <comment>Checks if 3 tab controls are displayed.</comment>
+  </command>
+  <command name="assertText" target="css=.product-tabs ul" value="Description*Reviews"/>
+</scriptmodule>
