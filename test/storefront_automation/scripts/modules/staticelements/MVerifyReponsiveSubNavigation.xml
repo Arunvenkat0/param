@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="SubMenuToClick"/>
+  <parameter name="SubMenuCount"/>
+  <command name="click" target="css=.navigation-header">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="click" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li/a[contains(text(),'@{SubMenuToClick}')]">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="assertElementPresent" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li/div[contains(@style,'display: block')]"/>
+  <command name="assertXpathCount" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li/div[contains(@style,'display: block')]//ul[contains(@class,'level-2')]/li" value="@{SubMenuCount}"/>
+  <command name="click" target="//ul[(contains(@class,'menu-category level-1') and (contains(@style,'display: block')))]/li/a[contains(text(),'@{SubMenuToClick}')]/span">
+    <comment>open the main navigation menu</comment>
+  </command>
+  <command name="click" target="css=.navigation-header">
+    <comment>open the main navigation menu</comment>
+  </command>
+</scriptmodule>
