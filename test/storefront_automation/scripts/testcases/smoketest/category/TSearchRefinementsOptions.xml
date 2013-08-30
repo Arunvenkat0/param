@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84781</tags>
+  <description>Steps
+Homepage -> Select a category and its sub category
+Select all the sort options in the dropdown one by one.
+Page through the results.
+Change the sort order.
+Expected Results
+at 1. The page displays all the products under that particular sub-category of that category.
+at 2. Product grid refreshes based on the selection.
+at 3. The sort is persistent.
+at 4. This causes the first result page to appear.</description>
+  <command name="open" value="${BMurl}"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="${BMurl}"/>
+  <command name="waitForElementPresent" target="//input[@name='LoginForm_Login']"/>
+  <command name="type" target="//input[@name='LoginForm_Login']" value="${bmlogin}
+"/>
+  <command name="waitForElementPresent" target="//input[@name='LoginForm_Password']"/>
+  <command name="type" target="//input[@name='LoginForm_Password']" value="${BM}"/>
+  <command name="clickAndWait" target="//input[contains(@type,'submit')]"/>
+  <command name="waitForElementPresent" target="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
+  <command name="clickAndWait" target="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
+  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='Site Genesis']"/>
+  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='Site Genesis']"/>
+  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='Products and Catalogs']"/>
+  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='Products and Catalogs']"/>
+  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='Catalogs']"/>
+  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='Catalogs']"/>
+  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='storefront-catalog-en']"/>
+  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='storefront-catalog-en']"/>
+  <command name="waitForElementPresent" target="//tr[td[contains(@class,'table_detail4')]//a[text()='${category}']]/td//a[text()='Edit']"/>
+  <command name="clickAndWait" target="//tr[td[contains(@class,'table_detail4')]//a[text()='${category}']]/td//a[text()='Edit']"/>
+  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='Search Refinement Definitions']"/>
+  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='Search Refinement Definitions']"/>
+  <command name="storeXpathCount" disabled="true" target="//tr[td[contains(@class,'table_detail')]//a[text()='Block']]" value="BlockCount"/>
+  <command name="assertXpathCount" disabled="true" target="//tr[td[contains(@class,'table_detail')]//a[text()='Block']]" value="${BlockCount}"/>
+  <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][1]/td[3]" value="text1"/>
+  <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][2]/td[3]" value="text2"/>
+  <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][3]/td[3]" value="text3"/>
+  <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][4]/td[3]" value="text4"/>
+  <command name="assertText" disabled="true" target="//tr[td[contains(@class,'table_detail')]//a[text()='Block']][4]/td[3]" value="${text1}"/>
+  <module name="modules.staticelements.Homepage"/>
+  <command name="clickAndWait" target="link=regexpi:${category}"/>
+  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text1}')]"/>
+  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text2}')]"/>
+  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text3}')]"/>
+  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text4}')]"/>
+</testcase>

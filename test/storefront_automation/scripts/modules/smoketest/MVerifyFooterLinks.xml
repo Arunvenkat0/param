@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Home')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'homepage-slider')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="SiteGenesis Online Store"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'My Account')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Check Order')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Help')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Welcome to Customer Service')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Contact Us')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Contact Us')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'About Us')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'About Us')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="About Us"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Terms')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Terms &amp; Conditions of Sale')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Terms &amp; Conditions of Sale"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Privacy')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Privacy Policy')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="eCommerce Solutions On-Demand | Demandware Privacy Policy"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Site Map')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Demandware SiteGenesis')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Jobs')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Careers at Demandware')]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Jobs Landing Page"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+</scriptmodule>
