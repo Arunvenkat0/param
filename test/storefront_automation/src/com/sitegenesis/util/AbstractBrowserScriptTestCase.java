@@ -28,7 +28,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 		
 		if (driverName.equalsIgnoreCase("chrome"))
 		{
-			System.setProperty("webdriver.chrome.driver", "/home/rschwietzke/projects/demandware/sitegenesis-testautomation/chromedriver");
+			System.setProperty("webdriver.chrome.driver", XltProperties.getInstance().getProperty("webdriver.chrome.binary.location"));
 
 			final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 

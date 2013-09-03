@@ -1,5 +1,4 @@
 <!--- TEMPLATENAME: corezipcode.isml --->
-<iscache type="relative" hour="0" />
 	 	<form action="${URLUtils.url('StoreInventory-ShowAvailableStores')}" method="post">
 			<fieldset>
 				<div class="form-row label-above">

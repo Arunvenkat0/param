@@ -693,6 +693,69 @@ h4. What to change?
 |CreditCardExpiryYear               |Year of the date when the credit card expires.|
 |CreditCardSecurityCode             |Pin on the credit card.|
 
+h3. TPurchaseInStorePickUpProductAsRegisteredUser
+
+h4. Preconditions
+
+* perform the test on test environment to avoid real orders
+* products must be in stock
+* InStore feature must be enabled in Business Manager
+* available products with InStore inventory
+
+h4. Description
+
+p. Validates the InStore feature during the a registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. 
+After putting a in store pickup product into the cart these data are used during the checkout process.
+The instore function is checked at the cart and at the special store shipping page.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Shipping address**|
+|ShippingAddressTitle               |Title of the shipping address. Is used to select the correct address.|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+|ShippingMethodName                 |Method how the products are shipped (Ground, 2-Day Express or Overnight).|
+|ShippingMethodNumber               |Number to choose the @ShippingMethodName@ (1=Ground, 2=2-Day Express, 3=Overnight).|
+|\2<>. **Billing address**|
+|BillingAddressTitle                |Title of the billing address. Is used to select the correct address.|
+|BillingAddressFirstName            |First name in the used address.|
+|BillingAddressLastName             |Last name in the used address.|
+|BillingAddressStreet               |Street and house number in the used address.|
+|BillingAddressCity                 |City in the used address (e.g. Boston).|
+|BillingAddressState                |State in the used address (e.g. Massachusetts).|
+|BillingAddressStateShort       	|Short form of @BillingAddressState @ (e.g. MA).|
+|BillingAddressZipCode              |Postal code in the used address.|
+|BillingAddressCountry              |Country in the used address (e.g. United States).|
+|BillingAddressPhone                |Phone number in the used address.|
+|\2<>. **Payment data**|
+|CreditCardFirstName                |First name of the credit card owner.|
+|CreditCardLastName                 |Last name of the credit card owner.|
+|CreditCardType                     |Type of the credit card (e.g. American Express).|
+|CreditCardTypeShort                |Short form of @CreditCardType @ (e.g. Amex).|
+|CreditCardNumber                   |Number of the credit card.|
+|CreditCardNumberLast4Digits        |Last 4 digits of @CreditCardNumber@ (Needed for validation).|
+|CreditCardExpiryMonthName          |Month of the date when the credit card expires as a word (e.g. January, February, ...).|
+|CreditCardExpiryMonthShort			|Month of the date when the credit card expires in a short form (e.g. Jan, Feb, ...).|
+|CreditCardExpiryMonthNumber        |Month of the date when the credit card expires as a number with two digits (e.g. 01, 02, ...).|
+|CreditCardExpiryYear               |Year of the date when the credit card expires.|
+|CreditCardSecurityCode             |Pin on the credit card.|
 
 h3. TRegisterUser
 
@@ -944,6 +1007,34 @@ p. Inside Manage Test Data you can easily change the test information.
 |SwatchProductName   		|Name of the product for which the color swatch is being tested. |
 |SwatchDefaultColor			|Name of the default color of the chosen product. |
 |SwatchAvailableColor2		|Name of the alternative color. |
+
+h3. TCheckInStoreFeature
+
+h4. Preconditions
+
+p. Enabled InStore Feature in Storefront Settings.
+
+h4. Description
+
+p. Checks the InStore feature at the PDP. 
+Validates the search field including the error handling.
+# searches for a Store
+# pages through the store results
+# selects a store
+# changes the location
+# selects another store
+# adds product to cart and verifies that the selected store is set at the cart page
+
+h4. What to change?
+
+p. Inside Manage Test Data you can easily change the test information. 
+
+|<_. Parameter|<_. Description|
+|ProductID			|Id of the product.|
+|ProductName       	|Name of the product for which the store search is tested.|
+|ProductPrice       |Price of the product.|
+|ZipCode1   		|Zip Code for the first store search. |
+|ZipCode2			|Zip Code for the second store search. |
 
 h3. TCheckProductPerspectives
 
