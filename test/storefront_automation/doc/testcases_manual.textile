@@ -369,6 +369,59 @@ p. All important changes without touching the structure can be made in Manage Te
 
 p. All values must be valid. If you enter invalid values the script will fail.
 
+h3. TCheckBundleInCart
+
+h4. Preconditions
+
+p. Bundle Product
+
+h4. Description
+
+Validates a bundle product in the cart and has the following steps:
+
+# open PDP of Bundle
+# add bundle to cart
+# checks that price is only shown at the top level, not by each individual line item
+# checks that quantity is only at the top level editable, not by each individual line item
+# adds bundle to wish list
+# adds bundle to gift registry
+# clicks each product name to verify that PDP of the product is shown
+# removes bundle from cart
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|FirstParticipantRole				|Role of the user.|
+|SecondParticipantFirstName			|First name of second the user|
+|SecondParticipantName				|Last name of second the user.|
+|SecondParticipantRole				|Role of the second user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Event Information**|
+|EventType							|Type of the event (e.g. Wedding).|
+|EventName							|Name of the event (e.g. Mia&#39;s and Tom&#39;s Wedding).|
+|EventDate							|Date of the event in the format mm/dd/yy (e.g. 12/12/12).|
+|EventCountry						|Country where the event will be (e.g. United States).|
+|EventState							|Short of the State where the event will be (e.g. MA).|
+|EventCity							|City where the event will be (e.g. Cambridge).|
+|\2<>. **Shipping address**|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+
 h3. TPurchaseAndReviewOrder
 
 h4. Preconditions
