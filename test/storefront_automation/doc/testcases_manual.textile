@@ -1096,6 +1096,45 @@ h4. What to change?
 |<_. Parameter|<_. Description|
 |SearchText	|Search text to get a product grid with at least one product which has a price range.|
 
+h3. TSendToFriendFromPDP
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. This test validates the Send to a Friend overlay which is opened from a PDP. It is doing the following steps:
+
+# open category, subcategory, first product
+# open staf overlay and close it with x and with cancel
+# clicks the login button at the staf overlay
+# created a new user
+# goes back to the pdp of the first product
+# opens the staf overlay
+# left mandatory fields empty and clicks preview
+# checks for error messages
+# fills all fields and opens the preview
+# validates the data at the preview
+# clicks the edit button
+# changes friends email address and message
+# opens preview again
+# validates new data at preview
+# sends the recommendation
+# closes the confirmation overlay
+# logout
+# back to the homepage
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|FirstName					|Firstname of the current user.|
+|LastName					|Lastname of the current user.|
+|FriendsName				|Name of the friend who receives the recommendation.|
+
 h3. TValidateHomepageResponsive
 
 h4. Preconditions
