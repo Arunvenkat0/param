@@ -422,6 +422,43 @@ h4. What to change?
 |ShippingAddressCountry             |Country in the used address (e.g. United States).|
 |ShippingAddressPhone               |Phone number in the used address.|
 
+h3. TCheckQuantityChangeInCart
+
+h4. Preconditions
+
+p. no conditions
+
+h4. Description
+
+p. Validates the quantity update function.
+
+# adds two products to the cart
+# opens cart
+# changes quantity of both products
+# updates cart
+# checks if changes are correct
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **Product 1**|
+|FirstProductID            |Unique id of product 1.|
+|FirstProductName          |Name of product 1.|
+|FirstProductPrice         |Single price of product 1.|
+|FirstProductQuantity      |Number of items of product 1.|
+|FirstProductTotalPrice    |@FirstProductQuantity@ multiplied with @FirstProductPrice@. Must be calculated manually.|
+|FirstProductQuantityNew   |Quantity value which is used to update quantity of the product.	|
+|FirstProductTotalPriceNew |@FirstProductQuantityNew@ multiplied with @FirstProductPrice@. Must be calculated manually.		|
+|\2<>. **Product 2**|
+|SecondProductID            		|Unique id of product 2.|
+|SecondProductName          		|Name of product 2.|
+|SecondProductPrice         		|Single price of product 2.|
+|SecondProductQuantityInitital    	|Number of items of product 2 ( _initial value_ ).|
+|SecondProductTotalPriceInitial 	|@SecondProductQuantityInitital@ multiplied with @SecondProductPrice@. Must be calculated manually.|
+|SecondProductQuantityNew   		|Quantity value which is used to update quantity of the product.	|
+|SecondProductTotalPriceNew 		|@SecondProductQuantityNew@ multiplied with @SecondProductPrice@. Must be calculated manually.		|
+
+
 h3. TPurchaseAndReviewOrder
 
 h4. Preconditions
