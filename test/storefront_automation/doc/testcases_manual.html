@@ -2817,12 +2817,45 @@
 				<td>Size that is selected during runtime. </td>
 			</tr>
 		</table>
+		<h3 id="TCheckAdd2CartFromQV">TCheckAdd2CartFromQV</h3>
+		<h4 id="Precondition">Precondition</h4>
+		<p>no precondition</p>
+		<h4 id="Description29">Description</h4>
+		<p>Checks the add to cart behaviour at the quickview overlay.</p>
+		<ol>
+			<li>opens the quick view of the first product of a product grid</li>
+			<li>checks that add2cart button is disabled</li>
+			<li>selects color and size</li>
+			<li>checks that add2cart button is enabled</li>
+			<li>clicks the add2cart button</li>
+			<li>checks the mini cart behaviour</li>
+			<li>opens quick view of the last product at a grid page</li>
+			<li>verifies this as well</li>
+			<li>adds the product to the cart </li>
+			<li>in view mode you can see if the page scrolls up to see the mini cart</li>
+			<li>checks the mini cart</li>
+		</ol>
+		<h4 id="Whattochange29">What to change?</h4>
+		<table>
+			<tr>
+				<td>MainCategoryNumber			</td>
+				<td>The number of the main category that is navigated to.</td>
+			</tr>
+			<tr>
+				<td>MainCategoryName       	</td>
+				<td>The name of the main category that is navigated to.</td>
+			</tr>
+			<tr>
+				<td>SubCategoryName        	</td>
+				<td>The subcategory that is used for this testcase.</td>
+			</tr>
+		</table>
 		<h3 id="TCheckPriceRange">TCheckPriceRange</h3>
 		<h4 id="Preconditions29">Preconditions</h4>
 		<p>Product with a range price.</p>
-		<h4 id="Description29">Description</h4>
+		<h4 id="Description30">Description</h4>
 		<p>Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page (first product) and validated against the price at the quickview and the product detail page.</p>
-		<h4 id="Whattochange29">What to change?</h4>
+		<h4 id="Whattochange30">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2836,7 +2869,7 @@
 		<h3 id="TSendToFriendFromPDP">TSendToFriendFromPDP</h3>
 		<h4 id="Preconditions30">Preconditions</h4>
 		<p>No preconditions.</p>
-		<h4 id="Description30">Description</h4>
+		<h4 id="Description31">Description</h4>
 		<p>This test validates the Send to a Friend overlay which is opened from a PDP. It is doing the following steps:</p>
 		<ol>
 			<li>open category, subcategory, first product</li>
@@ -2858,7 +2891,7 @@
 			<li>logout</li>
 			<li>back to the homepage</li>
 		</ol>
-		<h4 id="Whattochange30">What to change?</h4>
+		<h4 id="Whattochange31">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2892,9 +2925,9 @@
 		<h3 id="TValidateHomepageResponsive">TValidateHomepageResponsive</h3>
 		<h4 id="Preconditions31">Preconditions</h4>
 		<p>Enable responsive design in Business Manager.</p>
-		<h4 id="Description31">Description</h4>
+		<h4 id="Description32">Description</h4>
 		<p>Validates the homepage for responsive design.</p>
-		<h4 id="Whattochange31">What to change?</h4>
+		<h4 id="Whattochange32">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -2908,9 +2941,9 @@
 		<h3 id="TPurchaseAsGuestResponsive">TPurchaseAsGuestResponsive</h3>
 		<h4 id="Preconditions32">Preconditions</h4>
 		<p>Enable responsive design in Business Manager.</p>
-		<h4 id="Description32">Description</h4>
+		<h4 id="Description33">Description</h4>
 		<p>Validates the checkout process for responsive design as a guest user.</p>
-		<h4 id="Whattochange32">What to change?</h4>
+		<h4 id="Whattochange33">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3044,7 +3077,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description33">Description</h4>
+		<h4 id="Description34">Description</h4>
 		<p>Creates a gift registry for a new user. Performs the following steps:</p>
 		<ol>
 			<li>register a new user</li>
@@ -3055,7 +3088,7 @@
 			<li>search for the gift registry</li>
 			<li>validate results</li>
 		</ol>
-		<h4 id="Whattochange33">What to change?</h4>
+		<h4 id="Whattochange34">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3185,7 +3218,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description34">Description</h4>
+		<h4 id="Description35">Description</h4>
 		<p>Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:</p>
 		<ol>
 			<li>register a new user</li>
@@ -3197,7 +3230,7 @@
 			<li>search for the gift registry again</li>
 			<li>validate if the &#8222;quantity purchased&#8221; of the first product has changed</li>
 		</ol>
-		<h4 id="Whattochange34">What to change?</h4>
+		<h4 id="Whattochange35">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3445,7 +3478,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description35">Description</h4>
+		<h4 id="Description36">Description</h4>
 		<p>Checks for changing priority and quanity of wishlist items.</p>
 		<ol>
 			<li>search for a product</li>
@@ -3461,7 +3494,7 @@
 			<li>search for the wishlist</li>
 			<li>validate the first product</li>
 		</ol>
-		<h4 id="Whattochange35">What to change?</h4>
+		<h4 id="Whattochange36">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3515,7 +3548,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description36">Description</h4>
+		<h4 id="Description37">Description</h4>
 		<p>Tests the public wishlist feature.</p>
 		<ol>
 			<li>search for a product</li>
@@ -3525,7 +3558,7 @@
 			<li>logout</li>
 			<li>search for the public wishlist</li>
 		</ol>
-		<h4 id="Whattochange36">What to change?</h4>
+		<h4 id="Whattochange37">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3567,7 +3600,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description37">Description</h4>
+		<h4 id="Description38">Description</h4>
 		<p>Test with placing an order from a wishlist:</p>
 		<ol>
 			<li>search for a product</li>
@@ -3577,7 +3610,7 @@
 			<li>complete order process</li>
 			<li>validate for the text &#8222;This is a wishlist item&#8221; on checkout pages</li>
 		</ol>
-		<h4 id="Whattochange37">What to change?</h4>
+		<h4 id="Whattochange38">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3783,7 +3816,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description38">Description</h4>
+		<h4 id="Description39">Description</h4>
 		<p>Test for searching a product an adding it to a wishlist.</p>
 		<ol>
 			<li>search for a product</li>
@@ -3791,7 +3824,7 @@
 			<li>register new user</li>
 			<li>validate product data on the wishlist</li>
 		</ol>
-		<h4 id="Whattochange38">What to change?</h4>
+		<h4 id="Whattochange39">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
@@ -3833,7 +3866,7 @@
 		<ul>
 			<li>none</li>
 		</ul>
-		<h4 id="Description39">Description</h4>
+		<h4 id="Description40">Description</h4>
 		<p>Sends a wishlist to a friend and performs the following steps:</p>
 		<ol>
 			<li>search for a product</li>
@@ -3842,7 +3875,7 @@
 			<li>validate product data on the wishlist</li>
 			<li>send this wishlist to a friend</li>
 		</ol>
-		<h4 id="Whattochange39">What to change?</h4>
+		<h4 id="Whattochange40">What to change?</h4>
 		<table>
 			<tr>
 				<th style="text-align: left;">Parameter</th>
