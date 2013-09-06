@@ -192,6 +192,22 @@ h4. What to change?
 
 There are no customizable elements.
 
+h3. TCheckContactUsForm
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Validates the contact us form and fills it with no data, invalid data and valid data to send it.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|FirstName    |First name of the logged in user. Also see: Addresses|
+|LastName     |Last name of the logged in user. Also see: Addresses|
+|EmailWrong	  |Wrong Email address for the email field check.|
 
 h3. TCheckAddressManagement
 
