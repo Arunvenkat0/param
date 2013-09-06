@@ -1270,6 +1270,23 @@ h4. What to change?
 |LastName					|Lastname of the current user.|
 |FriendsName				|Name of the friend who receives the recommendation.|
 
+h3. TCheckSTAFFromQV
+
+h4. Preconditions
+
+p. no precondition
+
+h4. Description
+
+p. Opens the STAF overlay from the quickview and closes it afterwards. The STAF form is validated in TSendToFriendFromPDP.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+
 h3. TValidateHomepageResponsive
 
 h4. Preconditions
