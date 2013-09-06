@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <action name="OpenMainCategoryPage"/>
+  <module name="modules.catalog.OpenMainCategoryPage">
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
+    <parameter name="MainCategoryName" value="${MainCategoryName}"/>
+  </module>
+  <action name="OpenSubCategoryPage"/>
+  <module name="modules.catalog.OpenSubCategoryPage">
+    <parameter name="SubCategoryName" value="${SubCategoryName}"/>
+  </module>
+  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
+  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
+  <action name="OpenQuickview"/>
+  <module name="modules.catalog.OpenQuickView"/>
+  <module name="modules.catalog.ValidateProductInQuickView"/>
+  <action name="OpenSTAFOverlay"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <command name="click" target="link=Send to a Friend"/>
+  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <action name="CloseSTAFWithCancel"/>
+  <command name="click" target="css= .cancel-button"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="CloseQV"/>
+  <command name="click" target="css=.ui-icon-closethick"/>
+  <action name="GoToHome"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>
