@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <command name="assertElementPresent" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Heels')]"/>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Heels')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <command name="assertElementPresent" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Flats')]"/>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Flats')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <command name="assertElementPresent" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Open Toe')]"/>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Open Toe')]"/>
+    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+</scriptmodule>

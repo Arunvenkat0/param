@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: 0px')))]"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-next')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -282px')))]"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-next')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -564px')))]"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-next')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -846px')))]"/>
+  <command name="waitForElementPresent" target="//div[(contains(@class,'jcarousel-next') and (contains(@disabled,'disabled')))]"/>
+  <action name="Previous-section"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-prev')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -564px')))]"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-prev')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -282px')))]"/>
+  <command name="click" target="//div[contains(@class,'jcarousel-prev')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: 0px')))]"/>
+  <command name="waitForElementPresent" target="//div[(contains(@class,'jcarousel-prev') and (contains(@disabled,'disabled')))]"/>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-1-vertical')]//a[contains(text(),'Classic Pant')]"/>
+    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Classic Pant') and (contains(@class,'last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Classic Pant"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-2-vertical')]//a[contains(text(),'Pink Quartz Hoop Earring')]"/>
+    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Pink Quartz Hoop Earring') and (contains(@class,'last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Pink Quartz Hoop Earring"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-3-vertical')]//a[contains(text(),'Classic Shell')]"/>
+    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Classic Shell') and (contains(@class,'last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Classic Shell"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+  <module name="modules.staticelements.MVerifiLink">
+    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-4-vertical')]//a[contains(text(),'Charcoal Single Pleat Wool Suit')]"/>
+    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Charcoal Single Pleat Wool Suit') and (contains(@class,'last')))]"/>
+    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
+    <parameter name="CheckTitle" value="Charcoal Single Pleat Wool Suit"/>
+    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
+  </module>
+</scriptmodule>
