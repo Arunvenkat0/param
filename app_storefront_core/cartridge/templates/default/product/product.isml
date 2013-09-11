@@ -11,5 +11,5 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue)}"/>
+	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue)}"/>
 </isdecorate>
