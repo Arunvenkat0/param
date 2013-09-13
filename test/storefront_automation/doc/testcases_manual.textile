@@ -192,6 +192,22 @@ h4. What to change?
 
 There are no customizable elements.
 
+h3. TCheckContactUsForm
+
+h4. Preconditions
+
+* none
+
+h4. Description
+
+p. Validates the contact us form and fills it with no data, invalid data and valid data to send it.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|FirstName    |First name of the logged in user. Also see: Addresses|
+|LastName     |Last name of the logged in user. Also see: Addresses|
+|EmailWrong	  |Wrong Email address for the email field check.|
 
 h3. TCheckAddressManagement
 
@@ -368,6 +384,96 @@ p. All important changes without touching the structure can be made in Manage Te
 |SecondProductSecondColor       	|Color of product 2 ( _final color_ ).|
 
 p. All values must be valid. If you enter invalid values the script will fail.
+
+h3. TCheckBundleInCart
+
+h4. Preconditions
+
+p. Bundle Product
+
+h4. Description
+
+Validates a bundle product in the cart and has the following steps:
+
+# open PDP of Bundle
+# add bundle to cart
+# checks that price is only shown at the top level, not by each individual line item
+# checks that quantity is only at the top level editable, not by each individual line item
+# adds bundle to wish list
+# adds bundle to gift registry
+# clicks each product name to verify that PDP of the product is shown
+# removes bundle from cart
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **User information**|
+|FirstName               	   		|First name of the user.|
+|LastName               	   		|Last name of the user.|
+|FirstParticipantRole				|Role of the user.|
+|SecondParticipantFirstName			|First name of second the user|
+|SecondParticipantName				|Last name of second the user.|
+|SecondParticipantRole				|Role of the second user.|
+|\2<>. **Product information**|
+|ProductID                   		|Id of the product.|
+|ProductName               			|Name of the product.|
+|ProductQuantity       				|Number of items the virtual customer wants to buy from product.|
+|ProductPrice             			|Single price of the product.|
+|ProductTotalPrice 					|@ProductQuantity@ multiplied with @ProductPrice@. This must be calculated manually.|
+|\2<>. **Event Information**|
+|EventType							|Type of the event (e.g. Wedding).|
+|EventName							|Name of the event (e.g. Mia&#39;s and Tom&#39;s Wedding).|
+|EventDate							|Date of the event in the format mm/dd/yy (e.g. 12/12/12).|
+|EventCountry						|Country where the event will be (e.g. United States).|
+|EventState							|Short of the State where the event will be (e.g. MA).|
+|EventCity							|City where the event will be (e.g. Cambridge).|
+|\2<>. **Shipping address**|
+|ShippingAddressFirstName           |First name in the used address.|
+|ShippingAddressLastName            |Last name in the used address.|
+|ShippingAddressStreet              |Street and house number in the used address.|
+|ShippingAddressCity                |City in the used address (e.g. Boston).|
+|ShippingAddressState               |State in the used address (e.g. Massachusetts).|
+|ShippingAddressStateShort      	|Short form of @ShippingAddressState@ (e.g. MA).|
+|ShippingAddressZipCode             |Postal code in the used address.|
+|ShippingAddressCountry             |Country in the used address (e.g. United States).|
+|ShippingAddressPhone               |Phone number in the used address.|
+
+h3. TCheckQuantityChangeInCart
+
+h4. Preconditions
+
+p. no conditions
+
+h4. Description
+
+p. Validates the quantity update function.
+
+# adds two products to the cart
+# opens cart
+# changes quantity of both products
+# updates cart
+# checks if changes are correct
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|\2<>. **Product 1**|
+|FirstProductID            |Unique id of product 1.|
+|FirstProductName          |Name of product 1.|
+|FirstProductPrice         |Single price of product 1.|
+|FirstProductQuantity      |Number of items of product 1.|
+|FirstProductTotalPrice    |@FirstProductQuantity@ multiplied with @FirstProductPrice@. Must be calculated manually.|
+|FirstProductQuantityNew   |Quantity value which is used to update quantity of the product.	|
+|FirstProductTotalPriceNew |@FirstProductQuantityNew@ multiplied with @FirstProductPrice@. Must be calculated manually.		|
+|\2<>. **Product 2**|
+|SecondProductID            		|Unique id of product 2.|
+|SecondProductName          		|Name of product 2.|
+|SecondProductPrice         		|Single price of product 2.|
+|SecondProductQuantityInitital    	|Number of items of product 2 ( _initial value_ ).|
+|SecondProductTotalPriceInitial 	|@SecondProductQuantityInitital@ multiplied with @SecondProductPrice@. Must be calculated manually.|
+|SecondProductQuantityNew   		|Quantity value which is used to update quantity of the product.	|
+|SecondProductTotalPriceNew 		|@SecondProductQuantityNew@ multiplied with @SecondProductPrice@. Must be calculated manually.		|
+
 
 h3. TPurchaseAndReviewOrder
 
@@ -1081,6 +1187,35 @@ p. Inside Manage Test Data you can easily change the test information.
 |ProductColor				|Color that is selected during runtime. |
 |ProductSize				|Size that is selected during runtime. |
 
+h3. TCheckAdd2CartFromQV
+
+h4. Precondition
+
+p. no precondition
+
+h4. Description
+
+p. Checks the add to cart behaviour at the quickview overlay.
+
+# opens the quick view of the first product of a product grid
+# checks that add2cart button is disabled
+# selects color and size
+# checks that add2cart button is enabled
+# clicks the add2cart button
+# checks the mini cart behaviour
+# opens quick view of the last product at a grid page
+# verifies this as well
+# adds the product to the cart 
+# in view mode you can see if the page scrolls up to see the mini cart
+# checks the mini cart
+
+h4. What to change?
+
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+
+
 h3. TCheckPriceRange
 
 h4. Preconditions
@@ -1095,6 +1230,62 @@ h4. What to change?
 
 |<_. Parameter|<_. Description|
 |SearchText	|Search text to get a product grid with at least one product which has a price range.|
+
+h3. TSendToFriendFromPDP
+
+h4. Preconditions
+
+p. No preconditions.
+
+h4. Description
+
+p. This test validates the Send to a Friend overlay which is opened from a PDP. It is doing the following steps:
+
+# open category, subcategory, first product
+# open staf overlay and close it with x and with cancel
+# clicks the login button at the staf overlay
+# created a new user
+# goes back to the pdp of the first product
+# opens the staf overlay
+# left mandatory fields empty and clicks preview
+# checks for error messages
+# fills all fields and opens the preview
+# validates the data at the preview
+# clicks the edit button
+# changes friends email address and message
+# opens preview again
+# validates new data at preview
+# sends the recommendation
+# closes the confirmation overlay
+# logout
+# back to the homepage
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
+|FirstName					|Firstname of the current user.|
+|LastName					|Lastname of the current user.|
+|FriendsName				|Name of the friend who receives the recommendation.|
+
+h3. TCheckSTAFFromQV
+
+h4. Preconditions
+
+p. no precondition
+
+h4. Description
+
+p. Opens the STAF overlay from the quickview and closes it afterwards. The STAF form is validated in TSendToFriendFromPDP.
+
+h4. What to change?
+
+|<_. Parameter|<_. Description|
+|MainCategoryNumber			|The number of the main category that is navigated to.|
+|MainCategoryName       	|The name of the main category that is navigated to.|
+|SubCategoryName        	|The subcategory that is used for this testcase.|
 
 h3. TValidateHomepageResponsive
 
