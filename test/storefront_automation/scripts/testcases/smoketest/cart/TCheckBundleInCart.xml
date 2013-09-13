@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="3">
+  <tags>smoketest cart bundle</tags>
+  <description>Validates a bundle product in the cart and has the following steps:
+
+- open PDP of Bundle
+- add bundle to cart
+- checks that price is only shown at the top level, not by each individual line item
+- checks that quantity is only at the top level editable, not by each individual line item
+- adds bundle to wish list
+- adds bundle to gift registry
+- clicks each product name to verify that PDP of the product is shown
+- removes bundle from cart</description>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="SearchProduct"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for first product</comment>
+    <parameter name="SearchText" value="${ProductID}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductBundlePageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="Price" value="${ProductPrice}"/>
+  </module>
+  <action name="StoreNameOfEachProduct"/>
+  <command name="storeText" target="//div[@id='product-set-list']/div[1]//h1/a" value="ProductName1"/>
+  <command name="storeText" target="//div[@id='product-set-list']/div[2]//h1/a" value="ProductName2"/>
+  <command name="storeText" target="//div[@id='product-set-list']/div[3]//h1/a" value="ProductName3"/>
+  <command name="storeText" target="//div[@id='product-set-list']/div[4]//h1/a" value="ProductName4"/>
+  <action name="AddToCart"/>
+  <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
+    <comment>Wait for enable add-to-cart button</comment>
+  </command>
+  <command name="click" target="id=add-to-cart">
+    <comment>Add product to cart.</comment>
+  </command>
+  <action name="CheckMiniCart">
+    <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
+  </action>
+  <module name="modules.minicart.CheckAutomaticAppearanceOfMiniCart"/>
+  <module name="modules.minicart.CheckContentOfMiniCart">
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="PriceProduct" value="${ProductPrice}"/>
+    <parameter name="Position" value="1"/>
+  </module>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <module name="modules.cart.ValidateCartContentForProduct">
+    <comment>Validate carted product particulars</comment>
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="SinglePrice" value="${ProductPrice}"/>
+    <parameter name="TotalPriceProduct" value="${ProductTotalPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="TableRow" value="1"/>
+  </module>
+  <module name="modules.cart.ValidateCartBundleData"/>
+  <action name="AddBundleToWishlist"/>
+  <command name="clickAndWait" target="name=dwfrm_cart_shipments_i0_items_i0_addToWishList"/>
+  <module name="modules.usermanagement.ValidateWishlistLoginPageStructure"/>
+  <action name="ClickCreateAccount"/>
+  <command name="clickAndWait" target="css=#dwfrm_login_register button"/>
+  <module name="modules.usermanagement.ValidateCreateAccountPageStructure"/>
+  <module name="modules.usermanagement.ValidateCreateAccountRequiredFields"/>
+  <action name="CreateAccount">
+    <comment>Generates email and password, enters account information and creates account.</comment>
+  </action>
+  <command name="store" target="${RANDOM.String(8)}@varmail.de" value="Email">
+    <comment>Generates a random email address.</comment>
+  </command>
+  <command name="store" target="${RANDOM.String(9)}" value="Password">
+    <comment>Generates a random password.</comment>
+  </command>
+  <module name="modules.usermanagement.EnterRegisterInformation">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+    <parameter name="EmailWrong" value="abcde.de"/>
+    <parameter name="EmailCorrect" value="${Email}"/>
+    <parameter name="PasswordTooShort" value="pass"/>
+    <parameter name="PasswordCorrect" value="${Password}"/>
+  </module>
+  <module name="modules.cart.ValidateCartContentForProduct">
+    <comment>Validate carted product particulars</comment>
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="SinglePrice" value="${ProductPrice}"/>
+    <parameter name="TotalPriceProduct" value="${ProductTotalPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="TableRow" value="1"/>
+  </module>
+  <module name="modules.cart.ValidateCartBundleData"/>
+  <action name="ValidateProductIsAtWishlist"/>
+  <command name="assertNotElementPresent" target="name=dwfrm_cart_shipments_i0_items_i0_addToWishList"/>
+  <command name="assertElementPresent" target="css=.in-wishlist"/>
+  <command name="assertText" target="css=.in-wishlist" value="This item has been added to your Wish List."/>
+  <action name="AddBundleToGiftRegistry"/>
+  <command name="clickAndWait" target="name=dwfrm_cart_shipments_i0_items_i0_addToGiftRegistry"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
+  <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
+  <action name="EnterEventAndParticipantData"/>
+  <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
+  <action name="EnterShippingData"/>
+  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm value=Continue"/>
+  <module name="modules.giftregistry.GiftRegistryEnterShippingData"/>
+  <action name="ValidateGiftRegistryData"/>
+  <command name="clickAndWait" target="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
+  <command name="assertTextPresent" value="glob:*${FirstName} ${LastName}*,* ${SecondParticipantFirstName} ${SecondParticipantLastName}*${EventType}*${EventDate}"/>
+  <command name="assertTextPresent">
+    <value>glob:*${ShippingAddressFirstName} ${ShippingAddressLastName}*${ShippingAddressStreet} ${ShippingAddressCity}*${ShippingAddressZipCode}</value>
+  </command>
+  <action name="SubmitGiftRegistry"/>
+  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm"/>
+  <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
+    <parameter name="EventName" value="${EventName}"/>
+    <parameter name="EventDate" value="${EventDate}"/>
+  </module>
+  <command name="assertXpathCount" target="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr" value="2">
+    <comment>Number of products plus 1 header row</comment>
+  </command>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <module name="modules.cart.ValidateCartContentForProduct">
+    <comment>Validate carted product particulars</comment>
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="SinglePrice" value="${ProductPrice}"/>
+    <parameter name="TotalPriceProduct" value="${ProductTotalPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="TableRow" value="1"/>
+  </module>
+  <module name="modules.cart.ValidateCartBundleData"/>
+  <action name="OpenBundle"/>
+  <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[1]/td[2]/div[1]//a"/>
+  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName}"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <action name="OpenProduct1"/>
+  <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[2]/td[2]/div[1]//a"/>
+  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName1}"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <action name="OpenProduct2"/>
+  <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[3]/td[2]/div[1]//a"/>
+  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName2}"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <action name="OpenProduct3"/>
+  <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[4]/td[2]/div[1]//a"/>
+  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName3}"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <action name="OpenProduct4"/>
+  <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[5]/td[2]/div[1]//a"/>
+  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName4}"/>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <action name="RemoveBundleFromCart"/>
+  <module name="modules.cart.RemoveProductFromCart">
+    <parameter name="TableRow" value="1"/>
+  </module>
+  <command name="assertText" target="css=#primary h1" value="Your Shopping Cart"/>
+  <command name="assertText" target="css=.cart-empty" value="Your Shopping Cart is Empty">
+    <comment>Validate message for empty cart.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=.mini-cart-empty">
+    <comment>Validate the empty mini cart.</comment>
+  </command>
+  <action name="Logout"/>
+  <command name="waitForElementPresent" target="css=.user-account"/>
+  <command name="clickAndWait" target="css=.user-account"/>
+  <action name="LogoutFromWelcomePage"/>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHomepage"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>
