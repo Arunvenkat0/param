@@ -54,8 +54,8 @@ header {position:relative;margin-left:10px;margin-right:10px;}
 /* form components */
 /* ------------------------------------- */
 
-.button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
-button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+.button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 button[disabled],input[disabled]{color:#CCCCCC;}
 .button-fancy-small{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1em;font-weight:400;text-transform:uppercase;}
