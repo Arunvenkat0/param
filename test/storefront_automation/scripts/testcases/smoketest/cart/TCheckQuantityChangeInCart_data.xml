@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <FirstProductID>gpx-ml638b</FirstProductID>
+  <FirstProductName>GPX ML638 Digital Media Player</FirstProductName>
+  <FirstProductPrice>$53.99</FirstProductPrice>
+  <FirstProductQuantity>1</FirstProductQuantity>
+  <FirstProductTotalPrice>$53.99</FirstProductTotalPrice>
+  <SecondProductID>799927757387</SecondProductID>
+  <SecondProductName>Floral Luxe Scarf</SecondProductName>
+  <SecondProductPrice>$34.00</SecondProductPrice>
+  <SecondProductQuantityInitital>2</SecondProductQuantityInitital>
+  <SecondProductTotalPriceInitial>$68.00</SecondProductTotalPriceInitial>
+  <FirstProductQuantityNew>3</FirstProductQuantityNew>
+  <SecondProductTotalPriceNew>$34.00</SecondProductTotalPriceNew>
+  <SecondProductQuantityNew>1</SecondProductQuantityNew>
+  <FirstProductTotalPriceNew>$161.97</FirstProductTotalPriceNew>
+</data>

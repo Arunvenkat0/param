@@ -308,9 +308,9 @@
 			${Resource.msg('sendtoafrienddialog.unregistereduser','account',null)}
 		</span>
 	</div>
-	<button class="">
-		<a href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('sendtoafrienddialog.unregistereduser.button','account',null)}</a>
-	</button>	
+	
+	<a class="buttonstyle" href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('sendtoafrienddialog.unregistereduser.button','account',null)}</a>
+	
 	<button class="cancel cancel-button">
 		${Resource.msg('global.cancel','locale',null)}
 	</button>				

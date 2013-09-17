@@ -1,5 +1,5 @@
 {
-  "_v":"13.4",
+  "_v":"13.6",
   "clients":
   [ 
     {
@@ -109,12 +109,19 @@
           "resource_id":"/products/{id}/availability",
           "read_attributes":"(**)",
           "write_attributes":"(**)",
+          "config":{
+            "product.inventory.ats.max_threshold" : "99",
+            "product.inventory.stock_level.max_threshold" : "99"
+          },
           "cache_time":60
         },
         {
           "resource_id":"/products/{id}/prices",
           "read_attributes":"(**)",
           "write_attributes":"(**)",
+          "config":{
+            "product.prices.price_book_ids":"usd-sale-prices,usd-list-prices"
+          },
           "cache_time":300
         },
         {

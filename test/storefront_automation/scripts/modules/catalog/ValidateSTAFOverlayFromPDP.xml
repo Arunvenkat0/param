@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Validates the STAF overlay which is opened from PDP. Validated the following information:
+
+- user name
+- user email
+- product name
+- product id
+- product image
+- product description
+- privacy policy link</description>
+  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <command name="waitForElementPresent" target="id=dwfrm_sendtofriend_yourname"/>
+  <command name="assertValue" target="id=dwfrm_sendtofriend_yourname" value="${FirstName} ${LastName}"/>
+  <command name="assertTextPresent" value="${Email}"/>
+  <command name="assertElementPresent" target="link=See Privacy Policy"/>
+  <command name="assertTextPresent" value="${ProductName}">
+    <comment>Checks for the correct product name to be displayed.</comment>
+  </command>
+  <command name="assertText" target="xpath=//div[contains(@class,'send-to-friend-product')]//div[contains(@class,'product-number')]/span[2]" value="${ProductID}">
+    <comment>Checks for the correct displayed price.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=.send-to-friend-product .product-image img"/>
+  <command name="assertElementPresent" target="css=.product-description p"/>
+</scriptmodule>
