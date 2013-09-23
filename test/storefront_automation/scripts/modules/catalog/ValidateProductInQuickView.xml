@@ -5,5 +5,5 @@
   <command name="assertText" target="css=.ui-dialog-title" value="regexpi:Product Quickview"/>
   <command name="waitForText" target="css=.ui-dialog .product-name" value="${ProductName}"/>
   <command name="assertElementPresent" target="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
-  <command name="assertText" target="css=.price-sales" value="${ProductPrice}"/>
+  <command name="assertText" target="css=.product-price" value="${ProductPrice}"/>
 </scriptmodule>
