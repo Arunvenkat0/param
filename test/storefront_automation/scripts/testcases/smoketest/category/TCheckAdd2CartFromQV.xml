@@ -32,6 +32,7 @@
   <module name="modules.catalog.ValidateProductInQuickView"/>
   <action name="SelectSize"/>
   <module name="modules.catalog.CheckQuickviewAndAddToCartButton"/>
+  <command name="storeText" target="css=#product-content .product-price" value="ProductPrice"/>
   <command name="click" target="id=add-to-cart"/>
   <command name="waitForNotElementPresent" target="css=.quickview"/>
   <action name="CheckMiniCart">
