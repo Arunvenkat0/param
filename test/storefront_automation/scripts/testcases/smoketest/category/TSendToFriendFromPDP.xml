@@ -60,7 +60,8 @@
   <command name="click" target="link=Send to a Friend"/>
   <action name="ClickLoginNEEDSTOBEUPDATEDAFTERRap2541"/>
   <command name="click" disabled="true" target="//*[@id='send-to-friend-dialog']/button[1]"/>
-  <command name="clickAndWait" target="link=Login"/>
+  <command name="waitForElementPresent" target="link=Login or Create an Account"/>
+  <command name="clickAndWait" target="link=Login or Create an Account"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="RegisterUser"/>
   <command name="clickAndWait" target="name=dwfrm_login_register value=Create an Account"/>
@@ -83,6 +84,7 @@
     <parameter name="PasswordTooShort" value="abcd"/>
     <parameter name="PasswordCorrect" value="${Password}"/>
   </module>
+  <command name="clickAndWait" target="link=Max Smith"/>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
