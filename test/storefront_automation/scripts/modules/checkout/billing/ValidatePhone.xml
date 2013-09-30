@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Test with foreign addresses as well: check the telephone field with valid foreign numbers (which will be formatted differently and have different numbers of digits than US)</description>
+  <action name="NegativePhoneNumbers"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'phone')]"/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="-0001"/>
+  <command name="click" target="xpath=//input[contains(@id, 'email')]"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="-0001"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="1234-"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="1234-"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="432.434.3243"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="432.434.3243"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="940 455 5555"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="940 455 5555"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="123-4E6-7890"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="123-4E6-7890"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="123 456 7890"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="123 456 7890"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="9404@"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="9404@"/>
+  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <action name="ValidatePhoneNumber"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'phone')]"/>
+  <command name="type" target="xpath=//input[contains(@id, 'phone')]" value="800-565-2254"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="800-565-2254"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertNotElementPresent" target="xpath=//input[contains(@id, 'phone')]"/>
+  <command name="clickAndWait" target="css=.mini-billing-address .section-header-note"/>
+</scriptmodule>

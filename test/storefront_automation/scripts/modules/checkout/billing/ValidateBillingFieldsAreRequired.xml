@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Test form validation: make sure user cannot leave required fields blank and can leave optional fields blank.</description>
+  <command name="click" target="name=dwfrm_billing_save value=Continue >"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName') and contains(@class, 'error')]" value=""/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName') and contains(@class, 'error')]" value=""/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'address1')  and contains(@class, 'error')]" value=""/>
+  <command name="assertText" target="xpath=//select[contains(@id, 'country')  and contains(@class, 'error')]" value="regexp:Select...*"/>
+  <command name="assertText" target="xpath=//select[contains(@id, 'state')  and contains(@class, 'error')]" value="regexp:Select...*"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'city')  and contains(@class, 'error')]" value=""/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')  and contains(@class, 'error')]" value=""/>
+</scriptmodule>

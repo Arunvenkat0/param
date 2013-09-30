@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Test with foreign addresses as well: the zip code field is the biggest problem here. Make sure it is not restricted to accepting US zip codes. Common problems are Canada/UK (letters, numbers, space) and Australia (only four digits). US zip code should be accepted as 12345 or 12345-6789.</description>
+  <action name="NegativeZipCodes"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="-0001"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="-0001"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertText" target="css=.error-message" value="Please enter a valid value"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="1234-"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="1234-"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertText" target="css=.error-message" value="Please enter a valid value"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="1234"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="1234"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertText" target="css=.error-message" value="Please enter a valid value"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="9404e"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="9404e"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertText" target="css=.error-message" value="Please enter a valid value"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="9404@"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="9404@"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertText" target="css=.error-message" value="Please enter a valid value"/>
+  <action name="ValidateCanadaZipCode"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="B4V 2K4"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="B4V 2K4"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertNotElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
+  <command name="assertText" target="css=.mini-billing-address .details" value="glob:*B4V 2K4*"/>
+  <command name="clickAndWait" target="css=.mini-billing-address .section-header-note"/>
+  <action name="ValidateUSZipCode"/>
+  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
+  <command name="type" target="xpath=//input[contains(@id, 'zip')]" value="12345-6789"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="12345-6789"/>
+  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <command name="assertNotElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
+  <command name="assertText" target="css=.mini-billing-address .details" value="glob:*12345-6789*"/>
+  <command name="clickAndWait" target="css=.mini-billing-address .section-header-note"/>
+</scriptmodule>
