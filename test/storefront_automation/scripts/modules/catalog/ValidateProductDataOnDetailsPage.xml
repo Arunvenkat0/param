@@ -17,7 +17,7 @@ Price: Single product price</description>
   <command name="waitForText" target="css=.breadcrumb .last" value="@{Name}">
     <comment>Checks for the product name as last element in breadcrumb navigation.</comment>
   </command>
-  <command name="assertText" target="css=.product-price" value="@{Price}">
+  <command name="assertText" target="css=.price-sales" value="@{Price}">
     <comment>Checks for the correct displayed price.</comment>
   </command>
 </scriptmodule>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Check that user who has saved addresses and  choose one from the dropdown, and this fills in the fields.</description>
+  <parameter name="FirstName"/>
+  <parameter name="LastName"/>
+  <parameter name="Street"/>
+  <parameter name="Country"/>
+  <parameter name="State"/>
+  <parameter name="City"/>
+  <parameter name="ZipCode"/>
+  <parameter name="Phone"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]" value="@{FirstName}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')]" value="@{LastName}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'address1')]" value="@{Street}"/>
+  <command name="assertSelectedLabel" target="xpath=//select[contains(@id, 'country')]" value="@{Country}"/>
+  <command name="assertSelectedLabel" target="xpath=//select[contains(@id, 'state')]" value="@{State}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'city')]" value="@{City}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="@{ZipCode}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="@{Phone}"/>
+</scriptmodule>
