@@ -21,6 +21,7 @@
   <command name="click" target="link=Send to a Friend"/>
   <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
   <action name="CloseSTAFWithCancel"/>
+  <command name="waitForElementPresent" target="css= .cancel-button"/>
   <command name="click" target="css= .cancel-button"/>
   <command name="waitForElementPresent" target="css=.send-to-friend"/>
   <action name="CloseQV"/>
