@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <action name="Product-1"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductID1}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName1}"/>
+    <parameter name="Price" value="${ProductPrice1}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductToEmptyCart">
+    <parameter name="Quantity" value="${ProductQuantity1}"/>
+    <parameter name="Name" value="${ProductName1}"/>
+    <parameter name="PriceProduct" value="${ProductPrice1}"/>
+  </module>
+  <action name="Product-2"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductName2}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName2}"/>
+    <parameter name="Price" value="${ProductPrice2}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductToCart">
+    <parameter name="Quantity" value="${ProductQuantity2}"/>
+    <parameter name="Name" value="${ProductName2}"/>
+    <parameter name="PriceProduct" value="${ProductPrice2}"/>
+  </module>
+  <action name="Product-3"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductName3}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName3}"/>
+    <parameter name="Price" value="${ProductPrice3}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductToCart">
+    <parameter name="Quantity" value="${ProductQuantity3}"/>
+    <parameter name="Name" value="${ProductName3}"/>
+    <parameter name="PriceProduct" value="${ProductPrice3}"/>
+  </module>
+  <action name="Product-4"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductName4}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName4}"/>
+    <parameter name="Price" value="${ProductPrice4}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductToCart">
+    <parameter name="Quantity" value="${ProductQuantity4}"/>
+    <parameter name="Name" value="${ProductName4}"/>
+    <parameter name="PriceProduct" value="${ProductPrice4}"/>
+  </module>
+  <action name="Product-Bundle"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductName5}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductBundlePageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName5}"/>
+    <parameter name="Price" value="${ProductPrice5}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName5}"/>
+    <parameter name="Price" value="${ProductPrice5}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductBundle">
+    <parameter name="Name" value="${ProductName5}"/>
+    <parameter name="PriceProduct" value="${ProductPrice5}"/>
+    <parameter name="Quantity" value="${ProductQuantity5}"/>
+  </module>
+  <action name="AddProductSet"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for the product set</comment>
+    <parameter name="SearchText" value="${ProductSetName}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductSetPage">
+    <parameter name="NumberOfProducts" value="${NumberOfProductsInSet}"/>
+    <parameter name="ProductSetName" value="${ProductSetName}"/>
+    <parameter name="FirstProductName" value="${FirstProductName}"/>
+    <parameter name="SecondProductName" value="${SecondProductName}"/>
+  </module>
+  <module name="testcases.smoketest.minicart.MAddProductSet"/>
+  <module name="modules.minicart.CheckContentOfMiniCart">
+    <parameter name="Name" value="${ThirdProductName}"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="PriceProduct" value="${ThirdProductPrice}"/>
+    <parameter name="Position" value="1"/>
+  </module>
+  <module name="modules.minicart.CheckContentOfMiniCart">
+    <parameter name="Name" value="${FirstProductName}"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="PriceProduct" value="${FirstProductPrice}"/>
+    <parameter name="Position" value="3"/>
+  </module>
+  <module name="modules.minicart.CheckContentOfMiniCart">
+    <parameter name="Name" value="${SecondProductName}"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="PriceProduct" value="${SecondProductPrice}"/>
+    <parameter name="Position" value="2"/>
+  </module>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="TProductDisplay1-0"/>
+</testcase>
