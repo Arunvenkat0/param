@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="3">
-  <tags>smoketest cart bundle</tags>
-  <description>Validates a bundle product in the cart and has the following steps:
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84766</tags>
+  <description>smoketest cart bundle
+Validates a bundle product in the cart and has the following steps:
 
 - open PDP of Bundle
 - add bundle to cart

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>quick view broken RAP-2406</tags>
-  <description>Checks the add to cart behaviour at the quickview overlay.
+  <tags>C84767</tags>
+  <description>quick view broken RAP-2406
+Checks the add to cart behaviour at the quickview overlay.
 
 - opens the quick view of the first product of a product grid
 - checks that add2cart button is disabled
