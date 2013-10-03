@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="3">
+  <tags>cart bundle</tags>
+  <description>Checks that each product which is part of the bundle is shown in the cart.
+Verifies that price is only shown at the top level, not by each individual line item. Also checks that the quantity is just at the top level editable.</description>
+  <action name="ValidateProductNamesAtCart"/>
+  <command name="waitForTextPresent" value="${ProductName1}">
+    <comment>Validate product name within the cart.</comment>
+  </command>
+  <command name="waitForTextPresent" value="${ProductName2}">
+    <comment>Validate product name within the cart.</comment>
+  </command>
+  <command name="waitForTextPresent" value="${ProductName3}">
+    <comment>Validate product name within the cart.</comment>
+  </command>
+  <command name="waitForTextPresent" value="${ProductName4}">
+    <comment>Validate product name within the cart.</comment>
+  </command>
+  <action name="CheckThatQtyAndPriceIsNotSet"/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[2]/td[@class='item-price']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[3]/td[@class='item-price']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[4]/td[@class='item-price']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[5]/td[@class='item-price']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[2]/td[@class='item-total']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[3]/td[@class='item-total']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[4]/td[@class='item-total']" value=""/>
+  <command name="assertValue" target="//table[@id='cart-table']/tbody/tr[5]/td[@class='item-total']" value=""/>
+  <command name="assertXpathCount" target="//span[contains(@class,'bundleqtyincluded')]" value="4"/>
+</scriptmodule>
