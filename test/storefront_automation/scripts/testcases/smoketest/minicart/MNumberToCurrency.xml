@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="price"/>
+  <command name="storeEval" target="'$'+'@{price}'.replace(/\B(?=(\d{3})+(?!\d))/g, &quot;,&quot;)" value="price">
+    <comment>Calculate the total price and store the result.</comment>
+  </command>
+</scriptmodule>
