@@ -238,7 +238,11 @@
 													var displayValue = (VV.displayValue||VV.value);
 												</isscript>
 												<isif condition="${isAvailable}">
+												<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">
 													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}" <isprint value="${selected}" encoding="off"/>>
+												<iselse>
+													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
+												</isif>
 														<isprint value="${(VV.displayValue||VV.value)}"/>
 													</option>
 												</isif>
