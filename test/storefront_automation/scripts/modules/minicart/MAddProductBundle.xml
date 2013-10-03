@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <parameter name="Quantity"/>
   <parameter name="Name"/>
   <parameter name="PriceProduct"/>
+  <parameter name="Quantity"/>
   <command name="storeText" target="css=.mini-cart-total-label" value="CartSubTotal"/>
   <command name="storeEval" target="'${CartSubTotal}'.replace(/[^0-9\.]+/g,&quot;&quot;)" value="CartSubTotal">
     <comment>Calculate the total price and store the result.</comment>
   </command>
-  <action name="add-product-to-empty-cart"/>
-  <module name="testcases.smoketest.minicart.MEnterQuantity">
-    <parameter name="Quantity" value="@{Quantity}"/>
-  </module>
   <action name="AddToCart"/>
   <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
     <comment>Wait for enable add-to-cart button</comment>
@@ -39,23 +35,23 @@
   <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="@{Quantity}">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
-  <module name="testcases.smoketest.minicart.MCurrencyToNumber">
+  <module name="modules.minicart.MCurrencyToNumber">
     <parameter name="price" value="@{PriceProduct}"/>
   </module>
   <command name="storeEval" target="parseFloat(${price}*@{Quantity}).toFixed(2)" value="price">
     <comment>Calculate the total price and store the result.</comment>
   </command>
-  <module name="testcases.smoketest.minicart.MNumberToCurrency">
+  <module name="modules.minicart.MNumberToCurrency">
     <parameter name="price" value="${price}"/>
   </module>
   <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-price" value="${price}"/>
-  <module name="testcases.smoketest.minicart.MCurrencyToNumber">
+  <module name="modules.minicart.MCurrencyToNumber">
     <parameter name="price" value="${price}"/>
   </module>
   <command name="storeEval" target="parseFloat(${price}+${CartSubTotal}).toFixed(2)" value="price">
     <comment>Calculate the total price and store the result.</comment>
   </command>
-  <module name="testcases.smoketest.minicart.MNumberToCurrency">
+  <module name="modules.minicart.MNumberToCurrency">
     <parameter name="price" value="${price}"/>
   </module>
   <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>

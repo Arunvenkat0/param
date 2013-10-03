@@ -10,7 +10,7 @@
     <parameter name="Name" value="${ProductName1}"/>
     <parameter name="Price" value="${ProductPrice1}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductToEmptyCart">
+  <module name="modules.minicart.MAddProductToEmptyCart">
     <parameter name="Quantity" value="${ProductQuantity1}"/>
     <parameter name="Name" value="${ProductName1}"/>
     <parameter name="PriceProduct" value="${ProductPrice1}"/>
@@ -24,7 +24,7 @@
     <parameter name="Name" value="${ProductName2}"/>
     <parameter name="Price" value="${ProductPrice2}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductToCart">
+  <module name="modules.minicart.MAddProductToCart">
     <parameter name="Quantity" value="${ProductQuantity2}"/>
     <parameter name="Name" value="${ProductName2}"/>
     <parameter name="PriceProduct" value="${ProductPrice2}"/>
@@ -38,7 +38,7 @@
     <parameter name="Name" value="${ProductName3}"/>
     <parameter name="Price" value="${ProductPrice3}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductToCart">
+  <module name="modules.minicart.MAddProductToCart">
     <parameter name="Quantity" value="${ProductQuantity3}"/>
     <parameter name="Name" value="${ProductName3}"/>
     <parameter name="PriceProduct" value="${ProductPrice3}"/>
@@ -52,7 +52,7 @@
     <parameter name="Name" value="${ProductName4}"/>
     <parameter name="Price" value="${ProductPrice4}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductToCart">
+  <module name="modules.minicart.MAddProductToCart">
     <parameter name="Quantity" value="${ProductQuantity4}"/>
     <parameter name="Name" value="${ProductName4}"/>
     <parameter name="PriceProduct" value="${ProductPrice4}"/>
@@ -70,7 +70,7 @@
     <parameter name="Name" value="${ProductName5}"/>
     <parameter name="Price" value="${ProductPrice5}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductBundle">
+  <module name="modules.minicart.MAddProductBundle">
     <parameter name="Name" value="${ProductName5}"/>
     <parameter name="PriceProduct" value="${ProductPrice5}"/>
     <parameter name="Quantity" value="${ProductQuantity5}"/>
@@ -86,7 +86,7 @@
     <parameter name="FirstProductName" value="${FirstProductName}"/>
     <parameter name="SecondProductName" value="${SecondProductName}"/>
   </module>
-  <module name="testcases.smoketest.minicart.MAddProductSet"/>
+  <module name="modules.minicart.MAddProductSet"/>
   <module name="modules.minicart.CheckContentOfMiniCart">
     <parameter name="Name" value="${ThirdProductName}"/>
     <parameter name="Quantity" value="1"/>
