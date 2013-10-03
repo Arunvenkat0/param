@@ -1,17 +1,9 @@
 <isif condition="${pdict.Product.master && pdict.CurrentVariationModel}">
-	<isset name="colorVA" value="${pdict.CurrentVariationModel.getProductVariationAttribute('color')}" scope="page"/>
-	<isif condition="${colorVA && pdict.CurrentVariationModel.getSelectedValue(colorVA)}">
-		<isset name="imageProduct" value="${pdict.CurrentVariationModel.getSelectedValue(colorVA)}" scope="page"/>
-	<iselseif condition="${pdict.CurrentVariationModel.defaultVariant}">
-		<isset name="imageProduct" value="${pdict.CurrentVariationModel.defaultVariant}" scope="page"/>
-	<iselseif condition="${pdict.CurrentVariationModel.variants.size() > 0}">
-		<isset name="imageProduct" value="${pdict.CurrentVariationModel.variants[0]}" scope="page"/>
-	</isif>
-	<isif condition="${!imageProduct}">
-		<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
-	</isif>
+    <isset name="imageProduct" value="${pdict.CurrentVariationModel}" scope="page"/>
+<iselseif condition="${pdict.Product.VariationModel}">
+    <isset name="imageProduct" value="${pdict.Product.VariationModel}" scope="page"/>
 <iselse>
-	<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
+    <isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 </isif>
 
 <isif condition="${!empty(imageProduct.getImage('large', 0))}">

@@ -350,19 +350,20 @@ var app = (function (app, $) {
 	 */
 	function swapImage(element) {
 		var lgImg = $(element).data("lgimg");
-
-		var newImg = $.extend({}, lgImg);
-		var imgZoom = $cache.pdpMain.find("a.main-image");
-		var mainImage = imgZoom.find("img.primary-image");
-		// store current image info
-		lgImg.hires = imgZoom.attr("href");
-		lgImg.url = mainImage.attr("src");
-		lgImg.alt = mainImage.attr("alt");
-		lgImg.title = mainImage.attr("title");
-		// reset element's lgimg data attribute
-		$(element).data(lgImg);
-		// set the main image
-		setMainImage(newImg);
+        if (lgImg) {
+			var newImg = $.extend({}, lgImg);
+			var imgZoom = $cache.pdpMain.find("a.main-image");
+			var mainImage = imgZoom.find("img.primary-image");
+			// store current image info
+			lgImg.hires = imgZoom.attr("href");
+			lgImg.url = mainImage.attr("src");
+			lgImg.alt = mainImage.attr("alt");
+			lgImg.title = mainImage.attr("title");
+			// reset element's lgimg data attribute
+			$(element).data(lgImg);
+			// set the main image
+			setMainImage(newImg);
+        }
 	}
 
 
@@ -610,7 +611,7 @@ var app = (function (app, $) {
 			window.location.href = url;
 		});
 
-		$cache.pdpMain.on("hover", "ul.Color a.swatchanchor", function () {
+		$cache.pdpMain.on("hover", "ul.swatches a.swatchanchor", function () {
 			swapImage(this);
 		});
 		// productthumbnail.onclick()
@@ -678,7 +679,7 @@ var app = (function (app, $) {
 			var el = $(this);
 			if( el.parents('li').hasClass('unselectable') ) return;
 
-			var isColor = el.closest("ul.swatches").hasClass("Color");
+			var hasSwapImage = (el.attr("data-lgimg") !== null);
 
 			var anchor = el,
 				qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
@@ -700,7 +701,7 @@ var app = (function (app, $) {
 					app.product.initAddThis();
 					app.product.initAddToCart();
 					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
-					if (isColor) {
+					if (hasSwapImage) {
 						replaceImages();
 					}
 					app.tooltips.init();

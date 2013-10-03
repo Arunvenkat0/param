@@ -127,7 +127,7 @@
 									<ul class="swatches Color">
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">									
-												<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isset name="swImage" value="${VV.getImage('swatch')}" scope="page"/>
 												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
@@ -169,6 +169,7 @@
 												<isscript>													
 													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
 												</isscript>
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
@@ -181,9 +182,13 @@
 												</isif>																		
 												<li class="${swatchClass}">																														 																					
 													<isif condition="${selectable}">
-														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
-															<isprint value="${displayValue}"/>
-														</a>
+                                                        <a title="${displayValue}" class="swatchanchor" href="${linkURL+qsAppend}"
+                                                           <isif condition="${!empty(lgImage) && swatchAttributes.indexOf(vaId)>=0}">
+                                                                data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'
+                                                           </isif>
+                                                         >
+                                                            <isprint value="${displayValue}"/>
+                                                        </a>
 													<iselse>
 														<a title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
