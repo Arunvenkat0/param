@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>cart quantity update</tags>
-  <description>Validates the quantity update function.
+  <tags>C84763</tags>
+  <description>cart quantity update
+Validates the quantity update function.
 
 - adds two products to the cart
 - opens cart
