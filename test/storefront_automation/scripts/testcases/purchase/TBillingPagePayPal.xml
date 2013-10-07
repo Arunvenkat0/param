@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Expected Results
+  <description>Preconditions
 
-    Confirm that an anonymous user does not see a dropdown to select saved addresses.
-    The address fields on this page are blank unless user chose on the shipping page to use that as the billing address.</description>
+Note:
+
+SG is not integrated with PayPal so orders cannot actually be placed using this payment method. This just tests the form on the billing page.
+Expected Results
+
+    Choosing the PayPal payment method hides the CC field or whatever other payment method field was displayed and shows PayPal information instead.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -133,21 +137,12 @@
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <action name="GuestCheckoutBilling">
-    <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
-  </action>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
-  <module name="modules.checkout.billing.ValidateBillingAddressBlankFields"/>
-  <command name="assertNotElementPresent" target="css=.select-address">
-    <comment>A user who has not saved an address yet does not see a dropdown.</comment>
-  </command>
-  <action name="GoBackToShipping"/>
-  <command name="clickAndWait" target="css=.mini-shipment a"/>
   <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
     <comment>Use the same address for billing by ticking the checkbox.</comment>
   </command>
+  <action name="GuestCheckoutBilling">
+    <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
+  </action>
   <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
     <comment>Proceed to billing.</comment>
   </command>
@@ -189,17 +184,7 @@
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
-  <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
-    <comment>Validate All Payment Methods available on page</comment>
-  </module>
-  <module name="modules.checkout.billing.SelectCreditCardAndEnterData">
-    <parameter name="CardName" value="${CreditCardFirstName} ${CreditCardLastName}"/>
-    <parameter name="Type" value="${CreditCardType}"/>
-    <parameter name="Number" value="${CreditCardNumber}"/>
-    <parameter name="ExpireMonth" value="${CreditCardExpiryMonthName}"/>
-    <parameter name="ExpireYear" value="${CreditCardExpiryYear}"/>
-    <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
-  </module>
+  <module name="modules.checkout.billing.SelectPayPalForBilling"/>
   <action name="GuestCheckoutPlaceOrder">
     <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
   </action>
@@ -238,14 +223,7 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
-  <module name="modules.checkout.billing.ValidatePaymentCreditCardInSidebar">
-    <parameter name="Name" value="${CreditCardFirstName} ${CreditCardLastName}"/>
-    <parameter name="Type" value="${CreditCardTypeShort}"/>
-    <parameter name="NumberLast4" value="${CreditCardNumberLast4Digits}"/>
-    <parameter name="ExpireMonthShort" value="${CreditCardExpiryMonthNumber}"/>
-    <parameter name="ExpireYear" value="${CreditCardExpiryYear}"/>
-  </module>
-  <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
+  <module name="modules.checkout.billing.ValidatePaymentPayPalInSidebar"/>
   <action name="GuestSubmitOrder"/>
   <command name="clickAndWait" target="name=submit">
     <comment>Place the order by clicking the button.</comment>
@@ -285,12 +263,7 @@
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <module name="modules.checkout.summary.ValidatePaymentCreditCardSummaryPage">
-    <parameter name="Type" value="${CreditCardTypeShort}"/>
-    <parameter name="Last4" value="${CreditCardNumberLast4Digits}"/>
-    <parameter name="ExpireMonthNumber" value="${CreditCardExpiryMonthNumber}"/>
-    <parameter name="Expire_Year" value="${CreditCardExpiryYear}"/>
-  </module>
+  <module name="modules.checkout.summary.ValidatePaymentPayPalSummaryPage"/>
   <action name="GuestReturn2Home"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>
