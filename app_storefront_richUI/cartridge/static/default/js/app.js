@@ -2541,6 +2541,8 @@ var app = (function (app, $) {
 				}
 				else if (!data.success) {
 					msg = data.message;
+					msg = msg.split('<').join('&lt;');
+					msg = msg.split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
