@@ -28,10 +28,13 @@
 					${Resource.msg('registration.name','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
-		
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
+				<iselse>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
+				</isif>
 			</fieldset>
 			
 			
@@ -41,15 +44,14 @@
 					${Resource.msg('registration.logininfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
-				
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-				
-				<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
-				
-				<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
-				
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
+				<iselse>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
+				</isif>					
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 				
 				<div class="form-caption">

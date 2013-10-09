@@ -7,7 +7,7 @@
 	
 	<div class="login-box-content returning-customers clearfix">
 				
-		
+		<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 		<p>${Resource.msg('logininclude.registered','account',null)}</p>		
 		
 		<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${pdict.CurrentForms.login.htmlName}">
@@ -45,6 +45,8 @@
 			</fieldset>
 			
 		</form>
+		</isif>
+		<isinclude template="account/login/oauthlogininclude"/>
 	
 	</div>
 	
