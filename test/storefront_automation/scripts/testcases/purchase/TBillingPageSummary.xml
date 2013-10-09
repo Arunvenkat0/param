@@ -7,8 +7,7 @@
 -address
    Click EDIT by the shipping address: this takes user back to Step 1, Shipping.
     Edit something on the shipping address and return to the billing page. Confirm the address information on the billing page has been updated.
-    Confirm all information entered so far is displaying correctly in the order summary.
-   </description>
+    Confirm all information entered so far is displaying correctly in the order summary.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -81,7 +80,7 @@
     <parameter name="Quantity" value="${SecondProductQuantity}"/>
     <parameter name="ProductName" value="${SecondProductName}"/>
     <parameter name="ProductPrice" value="${SecondProductTotalPrice}"/>
-    <parameter name="Position" value="2"/>
+    <parameter name="Position" value="1"/>
   </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
