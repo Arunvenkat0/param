@@ -76,7 +76,7 @@
     <parameter name="Quantity" value="${SecondProductQuantity}"/>
     <parameter name="ProductName" value="${SecondProductName}"/>
     <parameter name="ProductPrice" value="${SecondProductTotalPrice}"/>
-    <parameter name="Position" value="2"/>
+    <parameter name="Position" value="1"/>
   </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
