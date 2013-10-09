@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Choosing the Bill Me Later payment method opens form with BML fields.</description>
+  <parameter name="Year"/>
+  <parameter name="Month"/>
+  <parameter name="Day"/>
+  <parameter name="Snn"/>
+  <command name="check" target="id=is-BML">
+    <comment>Select PAyPal as Pament Method</comment>
+  </command>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_month"/>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_year"/>
+  <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_cvn"/>
+  <command name="assertElementPresent" target="id=PaymentMethod_BML"/>
+  <command name="select" target="id=dwfrm_billing_paymentMethods_bml_year" value="label=@{Year}"/>
+  <command name="select" target="id=dwfrm_billing_paymentMethods_bml_month" value="label=@{Month}"/>
+  <command name="select" target="id=dwfrm_billing_paymentMethods_bml_day" value="label=@{Day}"/>
+  <command name="type" target="id=dwfrm_billing_paymentMethods_bml_ssn" value="@{Snn}"/>
+  <command name="check" target="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
+</scriptmodule>
