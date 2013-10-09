@@ -1229,7 +1229,8 @@ var app = (function (app, $) {
 				app.product.compare.removeProduct({
 					itemid: item.data("itemid"),
 					uuid: uuid,
-					cb: $("#"+uuid).find(".compare-check")
+					cb: $("#"+uuid).find(".compare-check"),
+					ajaxCall: false
 				});
 			}
 
@@ -1256,21 +1257,42 @@ var app = (function (app, $) {
 		removeProduct : function (args) {
 			if (!args.itemid) { return; }
 			var cb = args.cb ? $(args.cb) : null;
-			app.ajax.getJson({
-				url : app.urls.compareRemove,
-				data : { 'pid' : args.itemid, 'category' : _currentCategory },
-				callback : function (response) {
-					if (!response || !response.success) {
-						// response failed. uncheck the checkbox return
-						if (cb && cb.length > 0) { cb[0].checked = true; }
-						window.alert(app.resources.COMPARE_REMOVE_FAIL);
-						return;
-					}
+			var ajaxCall = args.ajaxCall ? $(args.ajaxCall) : true;
+			if(ajaxCall) {
+				app.ajax.getJson({
+					url : app.urls.compareRemove,
+					data : { 'pid' : args.itemid, 'category' : _currentCategory },
+					callback : function (response) {
+						if (!response || !response.success) {
+							// response failed. uncheck the checkbox return
+							if (cb && cb.length > 0) { cb[0].checked = true; }
+							window.alert(app.resources.COMPARE_REMOVE_FAIL);
+							return;
+						}
 
-					// item successfully removed session, now remove from to list...
-					removeFromList(args.uuid);
-				}
-			});
+						// item successfully removed session, now remove from to list...
+						removeFromList(args.uuid);
+					}
+				});
+			} else {
+				app.ajax.getJson({
+					url : app.urls.compareRemove,
+			        async: false,
+					data : { 'pid' : args.itemid, 'category' : _currentCategory },
+					callback : function (response) {
+						if (!response || !response.success) {
+							// response failed. uncheck the checkbox return
+							if (cb && cb.length > 0) { cb[0].checked = true; }
+							window.alert(app.resources.COMPARE_REMOVE_FAIL);
+							return;
+						}
+
+						// item successfully removed session, now remove from to list...
+						removeFromList(args.uuid);
+					}
+				});
+			}
+				
 		}
 	};
 
@@ -2541,6 +2563,8 @@ var app = (function (app, $) {
 				}
 				else if (!data.success) {
 					msg = data.message;
+					msg = msg.split('<').join('&lt;');
+					msg = msg.split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
