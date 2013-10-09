@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <command name="assertText" target="css=.item-list th:nth-child(3)" value="regexpi:Payment Method"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="*Bill Me Later*"/>
+  <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>
+</scriptmodule>
