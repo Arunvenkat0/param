@@ -32,7 +32,7 @@ Validates the quantity update function.
     <parameter name="Quantity" value="${SecondProductQuantityInitital}"/>
     <parameter name="ProductName" value="${SecondProductName}"/>
     <parameter name="ProductPrice" value="${SecondProductTotalPriceInitial}"/>
-    <parameter name="Position" value="2"/>
+    <parameter name="Position" value="1"/>
   </module>
   <module name="modules.cart.GotoCartViaMiniCart"/>
   <module name="modules.cart.ValidateCartContentForProduct">
