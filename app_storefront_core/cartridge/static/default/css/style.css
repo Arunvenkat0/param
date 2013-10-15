@@ -603,7 +603,8 @@ body .review-image{float:left;margin:0 20px;}
 .list-table-header .print-page {font-size: 13.2px;float:right;}
 .pt_gift-registry .list-table-header .print-page {margin-top:-0.5em;}
 .pdp-main .product-tabs .tab-content {min-height:100px;}
-.pdp-main .product-tabs .tab-content ul{list-style-type: disc;margin-left: 2em;}
+.pdp-main .product-tabs .tab-content ul{list-style-type:disc;margin-left: 2em;}
+.pdp-main .product-tabs .tab-content ol{list-style-type: decimal;margin-left: 2em;padding: 0px;}
 .pdp-main .product-set-list{border-top:1px solid #D9D9D9;margin:0 0 0 6px;}
 .pdp-main .product-set-list .product-set-item{border-bottom:1px solid #D9D9D9;clear:both;margin:1em 0;overflow:hidden;padding:1em 0 0;}
 .pdp-main .product-set-list .product-set-image{float:left;width:22%;}
