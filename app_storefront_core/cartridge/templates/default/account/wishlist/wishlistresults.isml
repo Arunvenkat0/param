@@ -13,9 +13,9 @@
 
 			<table class="wish-list-results-table">
 				<tr>
-					<th>Last Name</th>			
-					<th>First Name</th>
-					<th>Location</th>
+					<th>${Resource.msg('wishlistresult.lastname','account',null)}</th>			
+					<th>${Resource.msg('wishlistresult.firstname','account',null)}</th>
+					<th>${Resource.msg('wishlistresult.location','account',null)}</th>
 					<th><!-- empty --></th>
 				</tr>
 				
@@ -36,7 +36,7 @@
 						</td>
 						<td class="view">
 							<a href="${URLUtils.url('Wishlist-ShowOther','WishListID',ProductList.object.ID)}">
-								<span>View</span>
+								<span>${Resource.msg('wishlistresult.view','account',null)}</span>
 							</a>
 						</td>
 					</tr>

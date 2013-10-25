@@ -82,7 +82,7 @@
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/>
 	
-			<span class="form-label-text"><span class="required-indicator">•</span>Expiration Date:</span>
+			<span class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate','checkout',null)}</span>
 			
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month label-removed"/>
 			

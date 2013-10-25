@@ -20,17 +20,17 @@
 						
 							<p style="font-family:georgia;font-size:20px;">Demandware</p>
 							
-							<p>Name = <isprint value="${pdict.CurrentForms.contactus.firstname.value}"/> <isprint value="${pdict.CurrentForms.contactus.lastname.value}"/></p>
+							<p>${Resource.msg('contactus.name','email',null)} <isprint value="${pdict.CurrentForms.contactus.firstname.value}"/> <isprint value="${pdict.CurrentForms.contactus.lastname.value}"/></p>
 							
-							<p>Email = <isprint value="${pdict.CurrentForms.contactus.email.value}"/></p>	
+							<p>${Resource.msg('contactus.email','email',null)} <isprint value="${pdict.CurrentForms.contactus.email.value}"/></p>	
 							
-							<p>Phone = <isprint value="${pdict.CurrentForms.contactus.phone.value}"/></p>	
+							<p>${Resource.msg('contactus.phone','email',null)} <isprint value="${pdict.CurrentForms.contactus.phone.value}"/></p>	
 							
-							<p>Order Number =<isprint value="${pdict.CurrentForms.contactus.ordernumber.value}"/></p>
+							<p>${Resource.msg('contactus.ordernumber','email',null)}<isprint value="${pdict.CurrentForms.contactus.ordernumber.value}"/></p>
 							
-							<p>My Question = <isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></p>
+							<p>${Resource.msg('contactus.myquestion','email',null)}<isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></p>
 							
-							<p>Comment = <isprint value="${pdict.CurrentForms.contactus.comment.value}"/></p>
+							<p>${Resource.msg('contactus.comment','email',null)}<isprint value="${pdict.CurrentForms.contactus.comment.value}"/></p>
 
 						</td>
 					</tr>
