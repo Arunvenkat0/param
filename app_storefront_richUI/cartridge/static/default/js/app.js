@@ -659,13 +659,18 @@ var app = (function (app, $) {
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
-
+			
+			var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
+			
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
+					if (hasSwapImage) {
+						replaceImages();
+					}
 					$("update-images").remove();
 					app.tooltips.init();
 				}

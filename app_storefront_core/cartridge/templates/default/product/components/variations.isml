@@ -231,6 +231,7 @@
 											<iscomment>filter out unorderable variation attribute values</iscomment>						
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isscript>
 													var selected = PVM.isSelectedAttributeValue(VA, VV) ? 'selected="selected"' : '';
 													var linkURL = selected ? PVM.urlUnselectVariationValue('Product-Variation', VA) : PVM.urlSelectVariationValue('Product-Variation', VA, VV);
@@ -243,12 +244,10 @@
 													var displayValue = (VV.displayValue||VV.value);
 												</isscript>
 												<isif condition="${isAvailable}">
-												<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">
-													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}" <isprint value="${selected}" encoding="off"/>>
-												<iselse>
-													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}" <isprint value="${selected}" encoding="off"/>>
-												</isif>
-														<isprint value="${(VV.displayValue||VV.value)}"/>
+													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" 
+												    	<isif condition="${!empty(lgImage)}">data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'</isif>
+														<isprint value="${selected}" encoding="off"/>>
+															<isprint value="${(VV.displayValue||VV.value)}"/>
 													</option>
 												</isif>
 											</isif>
