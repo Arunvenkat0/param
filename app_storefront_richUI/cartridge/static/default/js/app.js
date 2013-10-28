@@ -4905,7 +4905,32 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-
+(function(app){
+	
+	function isMobile() {
+		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"];
+		var	idx = 0;
+		var	item = null;
+		var isMobile = false;
+		var userAgent = (navigator.userAgent).toLowerCase();
+				
+		while (mobileAgentHash[idx] && !isMobile) {
+			isMobile = (userAgent.indexOf(mobileAgentHash[idx]) >= 0);
+			idx++;
+		}
+		return isMobile;
+	}
+	
+	isMobileUserAgent : function() 
+	{
+		isMobile();
+	},
+	
+	zoomViewerEnabled : function()
+	{
+		!isMobile();
+	};
+}(window.app = window.app || {}));
 
 // jquery extensions
 (function ($) {
