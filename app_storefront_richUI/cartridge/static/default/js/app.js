@@ -2734,8 +2734,15 @@ var app = (function (app, $) {
 			this.btnNext.click(this.navigateQuickview.bind(this));
 			this.btnPrev.click(this.navigateQuickview.bind(this));
 
+			var productLinksUrl = "";
 			for ( var i = 0; i < this.productLinks.length; i++) {
-				if (qvUrl == this.productLinks[i]) {
+				
+				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+				if(productLinksUrl == ""){
+					productLinksUrl = this.productLinks[i].href;
+				}
+				
+				if (qvUrl == productLinksUrl) {
 					this.productLinkIndex = i;
 				}
 			}
