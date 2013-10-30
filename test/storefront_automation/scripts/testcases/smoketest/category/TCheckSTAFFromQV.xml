@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84770</tags>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
