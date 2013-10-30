@@ -18,16 +18,15 @@ function execute( pdict : PipelineDictionary ) : Number
 		switch( click.pipelineName )
 		{
 			case "Product-Show":
-				// product detail page click
-				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // hack to change product url if it was viewed from search
-				return PIPELET_NEXT;
-			case "Product-ShowShowInCategory":
-				// product detail page click
-				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // hack to change product url if it was viewed from search
+			case "Product-ShowInCategory":
+				// product detail page click(s)
+				// replace well-known http parameter names "source" and "format" to avoid loading partial page markup only
+				pdict.Location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=");
 				return PIPELET_NEXT;
 			case "Search-Show":
 				// catalog related click
-				pdict.Location = click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt="); // avoid showing product grid only
+				// replace well-known http parameter names "source" and "format" to avoid loading partial page markup only
+				pdict.Location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=");
 				return PIPELET_NEXT;
 		}
 	}
