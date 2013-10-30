@@ -671,7 +671,7 @@ var app = (function (app, $) {
 					if (hasSwapImage) {
 						replaceImages();
 					}
-					$("update-images").remove();
+					$("#update-images").remove();
 					app.tooltips.init();
 				}
 			});
