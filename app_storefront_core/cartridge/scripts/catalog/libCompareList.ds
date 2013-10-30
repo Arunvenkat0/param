@@ -9,8 +9,6 @@ importPackage( dw.object );
 importPackage( dw.system );
 importPackage( dw.util );
 
-importScript( "common/libJson.ds" );
-
 /** Returns the product compare list, possibly restored using JSON data from the session. */
 function GetProductCompareList()
 {
