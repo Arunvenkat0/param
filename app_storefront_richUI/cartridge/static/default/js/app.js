@@ -3728,6 +3728,28 @@ var app = (function (app, $) {
 			});
 		});
 	}
+	/** 
+	 * @private 
+	 * @function 
+	 * @description init events for the loginPage
+	 */
+	function initLoginPage() {
+		
+		//o-auth binding for which icon is clicked
+		$('.oAuthIcon').bind( "click", function() {
+			$('#OAuthProvider').val(this.id);
+		});	
+		
+		//toggle the value of the rememberme checkbox
+		$( "#dwfrm_login_rememberme" ).bind( "change", function() {
+			if($('#dwfrm_login_rememberme').attr('checked')){
+				$('#rememberme').val('true')
+			}else{
+				$('#rememberme').val('false')
+			}
+		});	
+				
+	}
 	/**
 	 * @private
 	 * @function
@@ -3737,6 +3759,7 @@ var app = (function (app, $) {
 		toggleFullOrder();
 		initAddressEvents();
 		initPaymentEvents();
+		initLoginPage();
 	}
 
 	/******* app.account public object ********/
