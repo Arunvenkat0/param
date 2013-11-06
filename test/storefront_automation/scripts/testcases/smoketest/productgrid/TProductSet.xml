@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for the product set</comment>
+    <parameter name="SearchText" value="${ProductID1}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductSetPage">
+    <parameter name="NumberOfProducts" value="${NumberOfProductsInSet}"/>
+    <parameter name="ProductSetName" value="${ProductSetName}"/>
+    <parameter name="FirstProductName" value="${FirstProductName}"/>
+    <parameter name="SecondProductName" value="${SecondProductName}"/>
+  </module>
+  <module name="modules.catalog.ValidateSingleProductOnProductSetPage">
+    <comment>Validate the second product</comment>
+    <parameter name="NumberOfProduct" value="3"/>
+    <parameter name="ProductName" value="${ThirdProductName}"/>
+  </module>
+</testcase>
