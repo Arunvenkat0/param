@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductID1}"/>
+  </module>
+  <module name="modules.catalog.MValidateProductDetailsPageStructure">
+    <parameter name="TabCount" value="4"/>
+  </module>
+  <module name="modules.catalog.MValidateProductOnSaleDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName1}"/>
+    <parameter name="StandardPrice" value="${StandardProductPrice1}"/>
+    <parameter name="ActualPrice" value="${ProductPrice1}"/>
+  </module>
+  <command name="assertElementPresent" target="//button[contains(@class,'add-to-cart')]"/>
+</testcase>

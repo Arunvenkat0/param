@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="Name"/>
+  <parameter name="StandardPrice"/>
+  <parameter name="ActualPrice"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="@{Name}"/>
+    <parameter name="Price" value="@{ActualPrice}"/>
+  </module>
+  <command name="assertText" target="css=.price-standard" value="@{StandardPrice}">
+    <comment>Checks for the correct displayed price.</comment>
+  </command>
+</scriptmodule>
