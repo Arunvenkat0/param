@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84681</tags>
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductID1}"/>
+  </module>
+  <module name="modules.catalog.MValidateProductDetailsPageStructure">
+    <parameter name="TabCount" value="3"/>
+  </module>
+  <command name="waitForElementPresent" target="id=main">
+    <comment>Validate Product Image</comment>
+  </command>
+  <command name="waitForText" target="css=h1.product-name" value="${ProductName1}">
+    <comment>Checks for the correct product name to be displayed.</comment>
+  </command>
+  <command name="waitForText" target="css=.breadcrumb .last" value="${ProductName1}">
+    <comment>Checks for the product name as last element in breadcrumb navigation.</comment>
+  </command>
+  <command name="assertText" target="css=.product-price" value="${ProductPrice1}">
+    <comment>Checks for the correct displayed price.</comment>
+  </command>
+  <command name="assertElementPresent" target="//button[contains(@class,'add-to-cart')]"/>
+</testcase>
