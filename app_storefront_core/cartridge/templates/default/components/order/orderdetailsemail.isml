@@ -71,7 +71,7 @@
 
 	<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
 		
-		<p><b>Shipment ${'#' + shipmentloopstate.count}</b></p>
+		<p><b>${(Resource.msg('order.orderconfirmation-email.shipmentnumber','order',null)) + shipmentloopstate.count}</b></p>
 
 		<isif condition="${shipment.productLineItems.size() > 0}">
 

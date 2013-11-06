@@ -8,7 +8,7 @@
 	Each tag is to be specified max. once. Multiple email address can be separated by "," (see RFC2822).
 </iscomment>
 <to>${pdict.Order.customerEmail}</to>
-<from>noreply@demandware.net</from>
+<from>${Resource.msg('orderconfirmation.from','email',null)}</from>
 
 <head>
 

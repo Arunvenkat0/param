@@ -1,7 +1,7 @@
 <isif condition="${pdict.Product.master && pdict.CurrentVariationModel}">
     <isset name="imageProduct" value="${pdict.CurrentVariationModel}" scope="page"/>
-<iselseif condition="${pdict.Product.VariationModel}">
-    <isset name="imageProduct" value="${pdict.Product.VariationModel}" scope="page"/>
+<iselseif condition="${pdict.Product.variant && !empty(pdict.Product.getVariationModel())}">
+    <isset name="imageProduct" value="${pdict.Product.getVariationModel()}" scope="page"/>
 <iselse>
     <isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 </isif>
