@@ -13,12 +13,12 @@
 		<fieldset>
 		
 			<select  name="OAuthProvider" id="OAuthProvider" >
-				<option value="">Select a provider then click matching icon</option>
-				<option value="Google">Google</option>
-				<option value="LinkedIn">LinkedIn</option>
-				<option value="Microsoft">Microsoft</option>
-				<option value="Facebook">Facebook</option>
-				<option value="GitHub">GitHub</option>
+				<option value="">${Resource.msgf('logininclude.oauthselect','account',"")}</option>
+				<option value="Google">${Resource.msgf('logininclude.oauthGoogle','account',"")}</option>
+				<option value="LinkedIn">${Resource.msgf('logininclude.oauthLinkedIn','account',"")}</option>
+				<option value="Microsoft">${Resource.msgf('logininclude.oauthMicrosoft','account',"")}</option>
+				<option value="Facebook">${Resource.msgf('logininclude.oauthFacebook','account',"")}</option>
+				<option value="GitHub">${Resource.msgf('logininclude.oauthGitHub','account',"")}</option>
 			</select>
 		
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('Google' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
