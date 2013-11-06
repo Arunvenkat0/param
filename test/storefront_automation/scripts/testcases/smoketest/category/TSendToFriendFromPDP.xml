@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>broken RAP-2541</tags>
+  <tags>C84770</tags>
   <description>This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
 
 - open category, subcategory, first product

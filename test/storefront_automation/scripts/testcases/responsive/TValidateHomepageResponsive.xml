@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85031</tags>
   <description>Validates the homepage for responsive design</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.staticelements.ValidateHeaderElements"/>

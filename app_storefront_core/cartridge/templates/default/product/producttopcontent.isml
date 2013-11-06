@@ -1,6 +1,13 @@
 <iscomment>In the product pipeline, if a product was not found for the selected attributes, we need to refresh the ProductVariationModel using the default selected variant</iscomment>
 
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>	
+<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+
+<isif condition="${isQuickView}">	
+	<div class="quick-view-navigation">
+		<button class="quickview-prev">< ${Resource.msg('global.previous','locale',null)}</button>
+		<button class="quickview-next" style="float:right">${Resource.msg('global.next','locale',null)} ></button>	
+	</div>
+</isif>	
 
 <!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
 

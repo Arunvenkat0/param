@@ -50,7 +50,7 @@
 				</div>
 					
 				<div class="form-row form-row-button">
-					<button class="dialogify cancel" name="${pdict.CurrentForms.multishipping.editAddress.selectAddress.htmlName}" type="submit" value="Go" data-dlg-action='{"isForm": true}'>Select</button>
+					<button class="dialogify cancel" name="${pdict.CurrentForms.multishipping.editAddress.selectAddress.htmlName}" type="submit" value="Go" data-dlg-action='{"isForm": true}'>${Resource.msg('multishippingaddresses.select','checkout',null)}</button>
 				</div>
 				
 			</div>

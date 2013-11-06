@@ -6,7 +6,7 @@
 <isreportcheckout checkoutstep="${1}" checkoutname="${'CheckoutMethod'}"/>
 
 			
-	<h1>Checkout Login</h1>
+	<h1>${Resource.msg('checkoutlogin.checkoutlogin','checkout',null)}</h1>
 	
 	<div class="col-1">
 	
