@@ -2723,8 +2723,18 @@ var app = (function (app, $) {
 		},
 		
 		initializeQuickViewNav : function(qvUrl) {
+			
+			//from the url of the product in the quickview
+			qvUrlTail = qvUrl.substring(qvUrl.indexOf('?'));
+			qvUrlPidParam = qvUrlTail.substring(0,qvUrlTail.indexOf('&'));
 			qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
+			
+			if(qvUrlPidParam.indexOf('pid') > 0){
+				//if storefront urls are turned off
+				//append the pid to the url
+				qvUrl = qvUrl+qvUrlPidParam;
+			}
+			
 			this.searchesultsContainer = $('#search-result-items').parent();
 			this.productLinks = this.searchesultsContainer.find('.thumb-link');
 
@@ -2736,8 +2746,19 @@ var app = (function (app, $) {
 
 			var productLinksUrl = "";
 			for ( var i = 0; i < this.productLinks.length; i++) {
+
+				productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
+				productLinksUrlPidParam = productLinksUrlTail.substring(0,qvUrlTail.indexOf('&'));
+				if(productLinksUrlPidParam.indexOf('pid') > 0){
+					//append the pid to the url
+					//if storefront urls are turned off
+					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+					productLinksUrl = productLinksUrl+productLinksUrlPidParam;
 				
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+				}else{
+					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+				}
+			
 				if(productLinksUrl == ""){
 					productLinksUrl = this.productLinks[i].href;
 				}
