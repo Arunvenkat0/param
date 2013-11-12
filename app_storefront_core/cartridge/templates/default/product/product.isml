@@ -4,6 +4,29 @@
 	render sub product details.
 </iscomment>
 
+<isscript>
+
+	//two attirbutes needed to pass along the selected color to the pdp/quickview
+	var colorAttributeID = 'dwvar_'+pdict.Product.ID+'_color';
+	var productColorValue = '';
+	
+	//helper variables 
+	var requestQueryStringArray = pdict.CurrentRequest.getHttpHeaders().get("x-is-query_string").split('&');
+	var x = 0;
+	var PMapValue = '';
+	
+	
+	for(x = 0; x<requestQueryStringArray.length ;x++){
+	
+		PMapValue = requestQueryStringArray[x];
+		
+		if(PMapValue.indexOf('color') != -1){
+			productColorValue = PMapValue.split('=')[1];
+		}
+	}
+
+</isscript>
+
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
 <iscomment>pwr = power review write</iscomment>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
@@ -11,5 +34,5 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue)}"/>
+	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue, colorAttributeID, productColorValue)}"/>
 </isdecorate>
