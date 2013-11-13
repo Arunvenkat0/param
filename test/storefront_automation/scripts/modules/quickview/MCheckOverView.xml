@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <command name="assertNotElementPresent" target="css=.product-actions .menu .wl-action">
+    <comment>Check for the disabled add to cart button.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=#add-to-cart[disabled]">
+    <comment>Check for the disabled add to cart button.</comment>
+  </command>
+  <command name="storeText" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
+  <command name="assertNotElementPresent" target="css=.Color .selected .swatchanchor"/>
+  <command name="assertNotElementPresent" target="css=.value .selected .swatchanchor"/>
+  <command name="storeText" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
+    <comment>Select size.</comment>
+  </command>
+  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
+    <comment>Select size.</comment>
+  </command>
+  <command name="waitForElementPresent" target="//li[contains(text(),'${ColorSelected}') ]"/>
+  <command name="assertText" target="css=.product-variations .attribute:first-child .value .swatches .selected-value" value="${ColorSelected}"/>
+  <command name="storeText" target="css=.value .emptyswatch .swatchanchor" value="SizeSelected">
+    <comment>Select size.</comment>
+  </command>
+  <command name="click" target="css=.value .emptyswatch .swatchanchor">
+    <comment>Select size.</comment>
+  </command>
+  <command name="waitForElementPresent" target="//li[contains(text(),'${SizeSelected}') ]"/>
+  <command name="assertNotElementPresent" target="css=#add-to-cart[disabled]">
+    <comment>Check for the disabled add to cart button.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=.product-actions .menu .wl-action">
+    <comment>Check for the disabled add to cart button.</comment>
+  </command>
+  <command name="assertElementPresent" target="css=#add-to-cart">
+    <comment>Check for the disabled add to cart button.</comment>
+  </command>
+</scriptmodule>
