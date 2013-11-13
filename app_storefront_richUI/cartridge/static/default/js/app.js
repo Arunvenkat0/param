@@ -3643,6 +3643,7 @@ var app = (function (app, $) {
 			if(app.enabledStorePickup){
 				app.storeinventory.init();
 			}
+			app.account.initCartLogin();
 		}
 	};
 
@@ -3852,6 +3853,9 @@ var app = (function (app, $) {
 			initializeEvents();
 
 			app.giftcert.init();
+		},
+		initCartLogin : function () {
+			initLoginPage();
 		}
 	};
 }(window.app = window.app || {}, jQuery));
