@@ -2775,6 +2775,13 @@ var app = (function (app, $) {
 			if (this.productLinkIndex == 0) {
 				this.btnPrev.hide();
 			}
+
+			//hide the buttons on the compare page
+			if($('.compareremovecell').length > 0){
+				this.btnNext.hide();
+				this.btnPrev.hide();
+			}
+			
 		},
 
 		navigateQuickview : function(event) {
