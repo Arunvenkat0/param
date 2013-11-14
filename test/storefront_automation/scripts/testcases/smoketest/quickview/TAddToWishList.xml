@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.catalog.OpenMainCategoryPage">
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
+    <parameter name="MainCategoryName" value="${MainCategoryName}"/>
+  </module>
+  <module name="modules.catalog.OpenSubCategoryPage">
+    <parameter name="SubCategoryName" value="${SubCategoryName}"/>
+  </module>
+  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
+  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
+  <action name="OpenQuickview"/>
+  <module name="modules.catalog.OpenQuickView"/>
+  <module name="modules.catalog.ValidateProductInQuickView"/>
+  <module name="modules.quickview.MCheckOverView"/>
+  <command name="clickAndWait" target="//a[contains(text(),'Add to Wishlist')]"/>
+  <command name="assertElementPresent" target="css=.user-login"/>
+  <command name="assertElementPresent" target="css=.user-register"/>
+  <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
+  <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
+  <module name="modules.usermanagement.MCreateAnAccount">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+  </module>
+  <command name="assertText" target="css=.breadcrumb-last" value="Wish List">
+    <comment>Validates correct breadcrumb text.</comment>
+  </command>
+  <command name="assertElementPresent" target="//table[contains(@class,'item-list')]"/>
+  <command name="assertText" target="css=.product-list-item .name" value="${ProductName}"/>
+  <command name="assertXpathCount" target="//table[contains(@class,'item-list')]//tr[(not(contains(@class,'headings')))]" value="1"/>
+</testcase>
