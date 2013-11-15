@@ -40,5 +40,6 @@
   <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | ( Not ${FirstName} ? )">
     <comment>Validates first name within logout link in page header.</comment>
   </command>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="TUserInformation-0"/>
 </testcase>
