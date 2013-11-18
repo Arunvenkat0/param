@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84768</tags>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
     <comment>Navigate to Mens --> Footwear catalog page</comment>
