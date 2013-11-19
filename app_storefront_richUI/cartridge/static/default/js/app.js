@@ -4910,7 +4910,6 @@ var app = (function (app, $) {
 	function isMobile() {
 		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"];
 		var	idx = 0;
-		var	item = null;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
 				
@@ -4921,14 +4920,14 @@ var app = (function (app, $) {
 		return isMobile;
 	}
 	
-	isMobileUserAgent : function() 
+	app.isMobileUserAgent = function() 
 	{
-		isMobile();
-	},
+		return isMobile();
+	};
 	
-	zoomViewerEnabled : function()
+	app.zoomViewerEnabled = function()
 	{
-		!isMobile();
+		return (!isMobile());
 	};
 }(window.app = window.app || {}));
 
