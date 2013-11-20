@@ -12,8 +12,8 @@
   <module name="modules.catalog.OpenSubCategoryPage">
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
-  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
-  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
+  <command name="storeText" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
+  <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
   <action name="OpenQuickview"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>
