@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84782,C84783</tags>
   <description>Opens a category page and changes the number of items to be displayed. Validates the correctness of the result.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>

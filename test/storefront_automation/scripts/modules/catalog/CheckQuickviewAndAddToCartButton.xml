@@ -5,12 +5,12 @@
     <comment>Check for the disabled add to cart button.</comment>
   </command>
   <command name="storeText" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
+  <command name="storeText" target="css=.Color:first-child :not(.unselectable) .swatchanchor" value="ProductColor"/>
   <action name="CheckSelectedColor"/>
-  <command name="waitForElementPresent" target="css=.Color .selected .swatchanchor"/>
-  <command name="storeText" target="css=.Color .selected .swatchanchor" value="ProductColor"/>
-  <command name="click" disabled="true" target="css=.attribute .selected:first-child .swatchanchor">
-    <comment>Select size.</comment>
+  <command name="click" target="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']">
+    <comment>Pick a size.</comment>
   </command>
+  <command name="waitForElementPresent" target="css=.Color .selected .swatchanchor"/>
   <command name="waitForText" target="css=.Color .selected-value" value="${ProductColor}">
     <comment>Wait for the color title to appear next to the swatches.</comment>
   </command>

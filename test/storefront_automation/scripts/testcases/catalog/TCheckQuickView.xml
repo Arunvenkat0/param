@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>catalog browsing broken</tags>
+  <tags>C85042</tags>
   <description>Validates the behaviour of the quickview inside the product catalog.
 
 This is broken in 13.4. RAP-2406</description>
