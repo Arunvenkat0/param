@@ -33,9 +33,9 @@
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="GetDataFromFirstProductAndOpenIt"/>
-  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
-  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
-  <command name="clickAndWait" target="css=.grid-tile:first-child .name-link"/>
+  <command name="storeText" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
+  <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
+  <command name="clickAndWait" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
   <command name="storeText" target="xpath=id('product-content')/div[contains(@class,'product-number')]/span" value="ProductID"/>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <module name="modules.catalog.ValidateProductDataOnDetailsPage">
