@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84770</tags>
+  <description>This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
+
+- open category, subcategory, first product
+- open staf overlay and close it with x and with cancel
+- clicks the login button at the staf overlay
+- created a new user
+- goes back to the pdp of the first product
+- opens the staf overlay
+- left mandatory fields empty and clicks preview
+- checks for error messages
+- fills all fields and opens the preview
+- validates the data at the preview
+- clicks the edit button
+- changes friends email address and message
+- opens preview again
+- validates new data at preview
+- sends the recommendation
+- closes the confirmation overlay
+- logout
+- back to the homepage</description>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="OpenMainCategoryPage"/>
+  <module name="modules.catalog.OpenMainCategoryPage">
+    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
+    <parameter name="MainCategoryName" value="${MainCategoryName}"/>
+  </module>
+  <action name="OpenSubCategoryPage"/>
+  <module name="modules.catalog.OpenSubCategoryPage">
+    <parameter name="SubCategoryName" value="${SubCategoryName}"/>
+  </module>
+  <action name="GetDataFromFirstProductAndOpenIt"/>
+  <command name="storeText" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
+  <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
+  <command name="clickAndWait" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
+  <command name="storeText" target="xpath=id('product-content')/div[contains(@class,'product-number')]/span" value="ProductID"/>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="Price" value="${ProductPrice}"/>
+  </module>
+  <action name="OpenSTAFOverlay"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <command name="click" target="link=Send to a Friend"/>
+  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <action name="CloseSTAFWithX"/>
+  <command name="click" target="css=.ui-icon-closethick"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="OpenSTAFOverlayAgain"/>
+  <command name="click" target="link=Send to a Friend"/>
+  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <action name="CloseSTAFWithCancel"/>
+  <command name="click" target="css= .cancel-button"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="OpenSTAFOverlayAndLogin"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <command name="click" target="link=Send to a Friend"/>
+  <action name="ClickLoginNEEDSTOBEUPDATEDAFTERRap2541"/>
+  <command name="click" disabled="true" target="//*[@id='send-to-friend-dialog']/button[1]"/>
+  <command name="waitForElementPresent" target="link=Login or Create an Account"/>
+  <command name="clickAndWait" target="link=Login or Create an Account"/>
+  <module name="modules.usermanagement.ValidateLoginPageStructure"/>
+  <action name="RegisterUser"/>
+  <command name="clickAndWait" target="name=dwfrm_login_register value=Create an Account"/>
+  <module name="modules.usermanagement.ValidateCreateAccountPageStructure"/>
+  <module name="modules.usermanagement.ValidateCreateAccountRequiredFields"/>
+  <action name="CreateAccount">
+    <comment>Generates email and password, enters account information and creates account.</comment>
+  </action>
+  <command name="store" target="${RANDOM.String(8)}@varmail.de" value="Email">
+    <comment>Generates a random email address.</comment>
+  </command>
+  <command name="store" target="${RANDOM.String(9)}" value="Password">
+    <comment>Generates a random password.</comment>
+  </command>
+  <module name="modules.usermanagement.EnterRegisterInformation">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+    <parameter name="EmailWrong" value="abcd"/>
+    <parameter name="EmailCorrect" value="${Email}"/>
+    <parameter name="PasswordTooShort" value="abcd"/>
+    <parameter name="PasswordCorrect" value="${Password}"/>
+  </module>
+  <command name="clickAndWait" target="link=Max Smith"/>
+  <module name="modules.usermanagement.ValidateWelcomePage">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+  </module>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductID}"/>
+  </module>
+  <action name="OpenSTAFOverlay"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <command name="click" target="link=Send to a Friend"/>
+  <module name="modules.catalog.ValidateSTAFOverlayFromPDP"/>
+  <action name="OpenPrivacyPolicy"/>
+  <command name="click" target="link=See Privacy Policy"/>
+  <command name="assertTextPresent" value="See Privacy Policy"/>
+  <action name="ClosePrivacyPolicy"/>
+  <command name="click" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
+  <module name="modules.catalog.ValidateSTAFForms"/>
+  <action name="SendMessage"/>
+  <command name="click" target="css=#send-to-friend-dialog .send-button"/>
+  <command name="waitForTextPresent" value="Your message has been sent."/>
+  <action name="CloseConfirmationDialog"/>
+  <command name="click" target="css=.close-button"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="GoToWelcomePage"/>
+  <command name="waitForElementPresent" target="css=.user-account"/>
+  <command name="clickAndWait" target="css=.user-account"/>
+  <action name="LogoutAndGoToHomepage"/>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHome"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

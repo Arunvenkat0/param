@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <ProductID1>winter-look</ProductID1>
+  <ProductSetName>Winter Look</ProductSetName>
+  <ProductSetPrice>$278.99</ProductSetPrice>
+  <NumberOfProductsInSet>3</NumberOfProductsInSet>
+  <FirstProductName>Quilted Jacket</FirstProductName>
+  <SecondProductName>Pull On Pant</SecondProductName>
+  <ThirdProductName>Zerrick</ThirdProductName>
+</data>

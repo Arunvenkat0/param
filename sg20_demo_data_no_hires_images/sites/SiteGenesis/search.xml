@@ -13,12 +13,6 @@
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
-        <index index-id="redirect" xml:lang="x-default">
-            <settings>
-                <stemmer>English</stemmer>
-                <indexing-mode>production</indexing-mode>
-            </settings>
-        </index>
         <index index-id="synonym" xml:lang="x-default">
             <settings>
                 <stemmer>English</stemmer>
@@ -49,12 +43,6 @@
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
-        <index index-id="redirect" xml:lang="en">
-            <settings>
-                <stemmer>English</stemmer>
-                <indexing-mode>production</indexing-mode>
-            </settings>
-        </index>
         <index index-id="synonym" xml:lang="en">
             <settings>
                 <stemmer>English</stemmer>
@@ -80,12 +68,6 @@
             </settings>
         </index>
         <index index-id="content" xml:lang="en-US">
-            <settings>
-                <stemmer>English</stemmer>
-                <indexing-mode>production</indexing-mode>
-            </settings>
-        </index>
-        <index index-id="redirect" xml:lang="en-US">
             <settings>
                 <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>

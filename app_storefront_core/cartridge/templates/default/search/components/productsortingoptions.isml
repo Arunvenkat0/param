@@ -55,7 +55,7 @@
 						</isloop>
 					</select>
 						
-					<button class="sort-Go-Button simple-submit" type="submit" value="Go" >Go</button>
+					<button class="sort-Go-Button simple-submit" type="submit" value="${Resource.msg('productsortingoptions.go','search',null)}">${Resource.msg('productsortingoptions.go','search',null)}</button>
 		
 			</fieldset>
 		</form>

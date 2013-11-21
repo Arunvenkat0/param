@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="Quantity"/>
+  <parameter name="Name"/>
+  <parameter name="PriceProduct"/>
+  <action name="add-product-to-empty-cart"/>
+  <module name="modules.minicart.MEnterQuantity">
+    <parameter name="Quantity" value="@{Quantity}"/>
+  </module>
+  <action name="AddToCart"/>
+  <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
+    <comment>Wait for enable add-to-cart button</comment>
+  </command>
+  <command name="click" target="id=add-to-cart">
+    <comment>Add product to cart.</comment>
+  </command>
+  <action name="CheckMiniCart">
+    <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
+  </action>
+  <module name="modules.minicart.CheckAutomaticAppearanceOfMiniCart"/>
+  <command name="waitForElementPresent" target="css=.mini-cart-link">
+    <comment>Shift Mouse focus to Mini Cart Icon to Display Cart Windows</comment>
+  </command>
+  <action name="OpenMiniCart"/>
+  <command name="mouseOver" target="css=.mini-cart-link">
+    <comment>Shift Mouse focus to Mini Cart Icon to Display Cart Windows</comment>
+  </command>
+  <command name="waitForVisible" target="css=.mini-cart-content"/>
+  <command name="mouseOver" target="css=.mini-cart-content">
+    <comment>Shift Mouse focus to an item inside Mini Cart</comment>
+  </command>
+  <command name="waitForText" target="css=.mini-cart-product:nth-child(1) .mini-cart-name" value="@{Name}">
+    <comment>Checks the correct product name in mini cart</comment>
+  </command>
+  <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="@{Quantity}">
+    <comment>Checks the correct quantity in mini cart</comment>
+  </command>
+  <module name="modules.minicart.MCurrencyToNumber">
+    <parameter name="price" value="@{PriceProduct}"/>
+  </module>
+  <command name="storeEval" target="parseFloat(${price}*@{Quantity}).toFixed(2)" value="price">
+    <comment>Calculate the total price and store the result.</comment>
+  </command>
+  <module name="modules.minicart.MNumberToCurrency">
+    <parameter name="price" value="${price}"/>
+  </module>
+  <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-price" value="${price}"/>
+  <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
+</scriptmodule>

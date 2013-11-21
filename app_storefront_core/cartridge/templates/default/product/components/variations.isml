@@ -127,7 +127,7 @@
 									<ul class="swatches Color">
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">									
-												<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isset name="swImage" value="${VV.getImage('swatch')}" scope="page"/>
 												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
@@ -169,6 +169,7 @@
 												<isscript>													
 													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
 												</isscript>
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 												<isset name="swatchClass" value="${(selectable && isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
@@ -181,9 +182,13 @@
 												</isif>																		
 												<li class="${swatchClass}">																														 																					
 													<isif condition="${selectable}">
-														<a title="${displayValue}" class="swatchanchor"	href="${linkURL+qsAppend}">
-															<isprint value="${displayValue}"/>
-														</a>
+                                                        <a title="${displayValue}" class="swatchanchor" href="${linkURL+qsAppend}"
+                                                           <isif condition="${!empty(lgImage) && swatchAttributes.indexOf(vaId)>=0}">
+                                                                data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'
+                                                           </isif>
+                                                         >
+                                                            <isprint value="${displayValue}"/>
+                                                        </a>
 													<iselse>
 														<a title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
@@ -226,6 +231,7 @@
 											<iscomment>filter out unorderable variation attribute values</iscomment>						
 											
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
+												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isscript>
 													var selected = PVM.isSelectedAttributeValue(VA, VV) ? 'selected="selected"' : '';
 													var linkURL = selected ? PVM.urlUnselectVariationValue('Product-Variation', VA) : PVM.urlSelectVariationValue('Product-Variation', VA, VV);
@@ -238,8 +244,10 @@
 													var displayValue = (VV.displayValue||VV.value);
 												</isscript>
 												<isif condition="${isAvailable}">
-													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}" <isprint value="${selected}" encoding="off"/>>
-														<isprint value="${(VV.displayValue||VV.value)}"/>
+													<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" 
+												    	<isif condition="${!empty(lgImage)}">data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiResURL}"}'</isif>
+														<isprint value="${selected}" encoding="off"/>>
+															<isprint value="${(VV.displayValue||VV.value)}"/>
 													</option>
 												</isif>
 											</isif>

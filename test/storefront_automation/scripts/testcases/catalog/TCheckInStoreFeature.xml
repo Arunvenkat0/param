@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85056</tags>
   <description>Checks the InStore feature at the PDP. 
 Validates the search field including the error handling.
 - searches for a Store

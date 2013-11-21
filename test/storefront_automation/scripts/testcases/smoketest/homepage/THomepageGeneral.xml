@@ -10,48 +10,6 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
   <module name="modules.staticelements.ValidateStandardPageElements"/>
   <action name="Header-links"/>
   <module name="modules.smoketest.MVerifyHeaderLinks"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Login"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Register"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'Create Account')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Wish List"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Gift Registry"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'Gift Registry Login')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Store Locator"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'Find a Store Near You')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Site Genesis Store Locator"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="link=Help"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Welcome to Customer Service')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
   <action name="navigation-level-1"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//div[contains(@id,'navigation')]//a[(contains(text(),'New Arrivals') and (contains(@class,'level-1')))]"/>
@@ -345,122 +303,8 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
   </module>
   <action name="Footer-links"/>
   <module name="modules.smoketest.MVerifyFooterLinks"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Home')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'homepage-slider')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="SiteGenesis Online Store"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'My Account')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Check Order')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]/h1[contains(text(),'My Account Login')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="My SiteGenesis Account Login"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Help')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Welcome to Customer Service')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Contact Us')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Contact Us')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'About Us')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'About Us')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="About Us"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Terms')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Terms &amp; Conditions of Sale')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Terms &amp; Conditions of Sale"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Privacy')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Privacy Policy')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="eCommerce Solutions On-Demand | Demandware Privacy Policy"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Site Map')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Demandware SiteGenesis')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Sites-SiteGenesis-Site"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Jobs')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Careers at Demandware')]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Jobs Landing Page"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
   <action name="Next-Previous-section"/>
   <module name="modules.smoketest.MHomePageNextPreviousSection"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: 0px')))]"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-next')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -282px')))]"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-next')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -564px')))]"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-next')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -846px')))]"/>
-  <command name="waitForElementPresent" disabled="true" target="//div[(contains(@class,'jcarousel-next') and (contains(@disabled,'disabled')))]"/>
-  <action name="Previous-section" disabled="true"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-prev')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -564px')))]"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-prev')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: -282px')))]"/>
-  <command name="click" disabled="true" target="//div[contains(@class,'jcarousel-prev')]"/>
-  <command name="waitForElementPresent" disabled="true" target="//ul[(contains(@id,'vertical-carousel') and (contains(@style,'top: 0px')))]"/>
-  <command name="waitForElementPresent" disabled="true" target="//div[(contains(@class,'jcarousel-prev') and (contains(@disabled,'disabled')))]"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-1-vertical')]//a[contains(text(),'Classic Pant')]"/>
-    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Classic Pant') and (contains(@class,'last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Classic Pant"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-2-vertical')]//a[contains(text(),'Pink Quartz Hoop Earring')]"/>
-    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Pink Quartz Hoop Earring') and (contains(@class,'last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Pink Quartz Hoop Earring"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-3-vertical')]//a[contains(text(),'Classic Shell')]"/>
-    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Classic Shell') and (contains(@class,'last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Classic Shell"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//li[contains(@class,'jcarousel-item-4-vertical')]//a[contains(text(),'Charcoal Single Pleat Wool Suit')]"/>
-    <parameter name="ElementToVerify" value="//ol[contains(@class,'breadcrumb')]/li/span[(contains(text(),'Charcoal Single Pleat Wool Suit') and (contains(@class,'last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Charcoal Single Pleat Wool Suit"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
   <action name="carousel-horizontal"/>
   <command name="click" target="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-1')]"/>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'homepage-slides') and (contains(@style,'left: 0px')))]"/>
@@ -519,28 +363,4 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
   </module>
   <action name="shop-shoes"/>
   <module name="modules.smoketest.MHomePageShopShoes"/>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Heels')]"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Heels')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Flats')]"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Flats')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Open Toe')]"/>
-  <module name="modules.staticelements.MVerifiLink" disabled="true">
-    <parameter name="LinkToClick" value="//div[contains(@id,'home-promo-shop-shoes')]//a[contains(text(),'Open Toe')]"/>
-    <parameter name="ElementToVerify" value="//div[contains(@class,'breadcrumb')]//h1/a[(contains(text(),'Shoes') and (contains(@class,'breadcrumb-last')))]"/>
-    <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels"/>
-    <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
-  </module>
 </testcase>

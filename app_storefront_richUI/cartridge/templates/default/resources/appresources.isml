@@ -7,19 +7,6 @@
 	importPackage( dw.value );
 	importPackage( dw.web );
 	
-	function isMobile() {
-		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"],
-			idx = 0,
-			item = null,
-			isMobile : Boolean = false,
-			userAgent : String = request.httpUserAgent.toLowerCase();
-				
-		while (item = mobileAgentHash[idx++] && !isMobile) {
-			isMobile = (userAgent.indexOf(mobileAgentHash[idx]) >= 0);
-		}
-		return isMobile;
-	}
-
 	var clientcache = {
 		LISTING_INFINITE_SCROLL : (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
 		LISTING_REFINE_SORT : true
@@ -168,11 +155,8 @@
 		zip : pdict.CurrentSession.custom.zipcode=="null"?null:pdict.CurrentSession.custom.zipcode,
 		storeId : pdict.CurrentSession.custom.storeId=="null"?null:pdict.CurrentSession.custom.storeId
 	};
-	var isMobileUserAgent = isMobile();
 </isscript>
-(function(app){
-	app.isMobileUserAgent = ${isMobileUserAgent};
-	app.zoomViewerEnabled = ${!isMobileUserAgent};	
+(function(app){	
 	app.constants = <isprint value="${JSON.stringify(constants)}" encoding="off"/>;
 	app.resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;	
 	app.urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	

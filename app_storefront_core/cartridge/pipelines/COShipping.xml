@@ -448,8 +448,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <key-binding alias="CurrentHttpParameterMap.countryCode.stringValue" key="Country"/>
           <key-binding alias="CurrentHttpParameterMap.postalCode.stringValue" key="PostalCode"/>
           <key-binding alias="CurrentHttpParameterMap.stateCode.stringValue" key="State"/>
-          <key-binding alias="CurrentHttpParameterMap.address1.stringValue" key="Address1"/>
-          <key-binding alias="CurrentHttpParameterMap.address2.stringValue" key="Address2"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
@@ -547,7 +545,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
+          <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetApplicableShippingMethods.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
@@ -559,8 +557,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <key-binding alias="CurrentHttpParameterMap.countryCode.stringValue" key="Country"/>
           <key-binding alias="CurrentHttpParameterMap.postalCode.stringValue" key="PostalCode"/>
           <key-binding alias="CurrentHttpParameterMap.stateCode.stringValue" key="State"/>
-          <key-binding alias="CurrentHttpParameterMap.address1.stringValue" key="Address1"/>
-          <key-binding alias="CurrentHttpParameterMap.address2.stringValue" key="Address2"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
@@ -610,12 +606,12 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
-      <transition target-connector="in" target-path="./+1"/>
+      <transition target-connector="in" target-path="./+1" transaction-control="begin"/>
     </segment>
     <segment>
       <node>
         <loop-node element-key="Method" iterator-key="ApplicableShippingMethods"/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
         <branch basename="b2" source-connector="do">
           <transition target-connector="in">
             <transition-display>
@@ -714,7 +710,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           </segment>
         </branch>
       </node>
-      <simple-transition>
+      <simple-transition transaction-control="rollback">
         <transition-display>
           <bend-point relative-to="target" x="0" y="-2"/>
         </transition-display>
@@ -802,7 +798,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="true"/>
+          <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetApplicableShippingMethods.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
@@ -814,8 +810,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <key-binding alias="CurrentHttpParameterMap.countryCode.stringValue" key="Country"/>
           <key-binding alias="CurrentHttpParameterMap.postalCode.stringValue" key="PostalCode"/>
           <key-binding alias="CurrentHttpParameterMap.stateCode.stringValue" key="State"/>
-          <key-binding alias="CurrentHttpParameterMap.address1.stringValue" key="Address1"/>
-          <key-binding alias="CurrentHttpParameterMap.address2.stringValue" key="Address2"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
@@ -861,6 +855,16 @@ This pipeline implements the logic for the default (single) shipping scenario. I
     <segment>
       <node>
         <text-node>
+          <description>Transaction controls are for fine tuning  the performance of the data base interactions when calculating shipping methods</description>
+        </text-node>
+        <node-display x="16" y="9"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_15">
+    <segment>
+      <node>
+        <text-node>
           <description>Go to billing step, if we have no product line items, but only gift certificates in the basket. Shipping step is not required.</description>
         </text-node>
         <node-display x="1" y="12"/>
@@ -881,7 +885,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </transition>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_16">
+  <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
         <text-node>
@@ -977,7 +981,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
+  <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
         <text-node>
@@ -1063,7 +1067,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_20">
+  <branch basename="_ANONYMOUS_BRANCH_21">
     <segment>
       <node>
         <text-node>
@@ -1073,7 +1077,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_21">
+  <branch basename="_ANONYMOUS_BRANCH_22">
     <segment>
       <node>
         <text-node>
@@ -1255,7 +1259,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       <transition target-connector="in2" target-path="./-1"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1333,7 +1337,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1548,7 +1552,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       <transition target-connector="in1" target-path="/EditAddress.2"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1558,7 +1562,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_30">
+  <branch basename="_ANONYMOUS_BRANCH_31">
     <segment>
       <node>
         <text-node>
