@@ -51,7 +51,7 @@ ProductGridUtils.buildHitTileURL = function (productHit : ProductSearchHit,  cgi
 	 	See script API doc @ProductSearchHit.product
 	*/
 	productHitURL.append('showswatches', productHit.product.isMaster());
-	productHitURL.append('pricerange', productHit.product.priceModel.isPriceRange());
+	productHitURL.append('pricerange', productHit.isPriceRange());
 	return productHitURL;
 }
 /*
