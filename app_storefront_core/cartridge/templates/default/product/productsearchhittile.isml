@@ -207,7 +207,6 @@
 				// in the current comparison list for the current category
 				
 				importScript( "catalog/libCompareList.ds" );
-				importScript( "common/libJson.ds" );
 
 				var comparison = GetProductCompareList();
 				// Set the category

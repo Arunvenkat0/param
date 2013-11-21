@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84778</tags>
+  <description>customer service contact us
+Validates the contact us form and fills it with no data, invalid data and valid data to send it.</description>
+  <module name="modules.staticelements.Homepage"/>
+  <command name="waitForElementPresent" target="link=Contact Us"/>
+  <action name="ClickContactUsLinkInFooter"/>
+  <command name="clickAndWait" target="link=Contact Us"/>
+  <command name="assertElementPresent" target="link=Customer Service"/>
+  <command name="assertText" target="css=.primary-content h1" value="Contact Us • required"/>
+  <module name="modules.staticelements.ValidateContactUsForm"/>
+  <action name="GoToHomepage"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>

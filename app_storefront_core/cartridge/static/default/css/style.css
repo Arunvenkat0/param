@@ -54,8 +54,8 @@ header {position:relative;margin-left:10px;margin-right:10px;}
 /* form components */
 /* ------------------------------------- */
 
-.button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
-button{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+.button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 button[disabled],input[disabled]{color:#CCCCCC;}
 .button-fancy-small{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1em;font-weight:400;text-transform:uppercase;}
@@ -603,6 +603,8 @@ body .review-image{float:left;margin:0 20px;}
 .list-table-header .print-page {font-size: 13.2px;float:right;}
 .pt_gift-registry .list-table-header .print-page {margin-top:-0.5em;}
 .pdp-main .product-tabs .tab-content {min-height:100px;}
+.pdp-main .product-tabs .tab-content ul{list-style-type:disc;margin-left: 2em;}
+.pdp-main .product-tabs .tab-content ol{list-style-type: decimal;margin-left: 2em;padding: 0px;}
 .pdp-main .product-set-list{border-top:1px solid #D9D9D9;margin:0 0 0 6px;}
 .pdp-main .product-set-list .product-set-item{border-bottom:1px solid #D9D9D9;clear:both;margin:1em 0;overflow:hidden;padding:1em 0 0;}
 .pdp-main .product-set-list .product-set-image{float:left;width:22%;}
@@ -881,6 +883,8 @@ ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:1
 .login-box{background:none repeat scroll 0 0 #E8E8E8;margin:0 0 2em;}
 .login-box h3{margin:0;}
 .login-box-content{padding:0.5em 1.5em;}
+
+.login-box #dwfrm_oauthlogin select#OAuthProvider{display: block;margin-bottom: 1em;width: 80%;}
 
 /* category landing page */
 /* ------------------------------------- */

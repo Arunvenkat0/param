@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+# XLT Script Developer project specific settings.
+# This file was automatically generated. DO NOT EDIT.
+extensions.xlt-scriptdeveloper.replay.delay = 11
+extensions.xlt-scriptdeveloper.generator.packagePrefix = de.xceptance.sitegenesis
+extensions.xlt-scriptdeveloper.generator.apiType = action
+extensions.xlt-scriptdeveloper.general.lineNoShown = true
+=======
+# XLT Script Developer project specific settings.
+# This file was automatically generated. DO NOT EDIT.
+extensions.xlt-scriptdeveloper.replay.delay = 11
+extensions.xlt-scriptdeveloper.generator.generateClass = true
+extensions.xlt-scriptdeveloper.generator.packagePrefix = de.xceptance.sitegenesis
+extensions.xlt-scriptdeveloper.generator.apiType = action
+extensions.xlt-scriptdeveloper.general.lineNoShown = true
+>>>>>>> 16c72b0ea0c570685cf29ce26aef951fba945018

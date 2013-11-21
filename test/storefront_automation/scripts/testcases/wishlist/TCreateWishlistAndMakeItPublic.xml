@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84738,C84740</tags>
   <description>Tests the public wishlist feature.
 - search for a product
 - add to wishlist
@@ -69,6 +70,16 @@
     <parameter name="ProductID" value="${ProductID}"/>
     <parameter name="ProductPrice" value="${ProductPrice}"/>
   </module>
+  <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${ILastName}"/>
+  <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${IFirstName}"/>
+  <command name="type" target="id=dwfrm_wishlist_search_email" value=""/>
+  <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
+    <comment>Click the search button.</comment>
+  </command>
+  <command name="assertXpathCount" target="id('primary')/table[@class='wish-list-results-table']//tr" value="0">
+    <comment>Checks if 2 table rows are present (result row + header row).</comment>
+  </command>
+  <command name="assertText" target="//div[contains(@id,'primary')]/p" value="No Wish List has been found for ${ILastName} ${IFirstName} , please try again above."/>
   <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

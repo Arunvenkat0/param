@@ -350,19 +350,20 @@ var app = (function (app, $) {
 	 */
 	function swapImage(element) {
 		var lgImg = $(element).data("lgimg");
-
-		var newImg = $.extend({}, lgImg);
-		var imgZoom = $cache.pdpMain.find("a.main-image");
-		var mainImage = imgZoom.find("img.primary-image");
-		// store current image info
-		lgImg.hires = imgZoom.attr("href");
-		lgImg.url = mainImage.attr("src");
-		lgImg.alt = mainImage.attr("alt");
-		lgImg.title = mainImage.attr("title");
-		// reset element's lgimg data attribute
-		$(element).data(lgImg);
-		// set the main image
-		setMainImage(newImg);
+        if (lgImg) {
+			var newImg = $.extend({}, lgImg);
+			var imgZoom = $cache.pdpMain.find("a.main-image");
+			var mainImage = imgZoom.find("img.primary-image");
+			// store current image info
+			lgImg.hires = imgZoom.attr("href");
+			lgImg.url = mainImage.attr("src");
+			lgImg.alt = mainImage.attr("alt");
+			lgImg.title = mainImage.attr("title");
+			// reset element's lgimg data attribute
+			$(element).data(lgImg);
+			// set the main image
+			setMainImage(newImg);
+        }
 	}
 
 
@@ -610,7 +611,7 @@ var app = (function (app, $) {
 			window.location.href = url;
 		});
 
-		$cache.pdpMain.on("hover", "ul.Color a.swatchanchor", function () {
+		$cache.pdpMain.on("hover", "ul.swatches a.swatchanchor", function () {
 			swapImage(this);
 		});
 		// productthumbnail.onclick()
@@ -658,14 +659,19 @@ var app = (function (app, $) {
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
-
+			
+			var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
+			
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
-					$("update-images").remove();
+					if (hasSwapImage) {
+						replaceImages();
+					}
+					$("#update-images").remove();
 					app.tooltips.init();
 				}
 			});
@@ -678,7 +684,7 @@ var app = (function (app, $) {
 			var el = $(this);
 			if( el.parents('li').hasClass('unselectable') ) return;
 
-			var isColor = el.closest("ul.swatches").hasClass("Color");
+			var hasSwapImage = (el.attr("data-lgimg") !== null);
 
 			var anchor = el,
 				qty = $cache.pdpForm.find("input[name='Quantity']").first().val(),
@@ -700,7 +706,7 @@ var app = (function (app, $) {
 					app.product.initAddThis();
 					app.product.initAddToCart();
 					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
-					if (isColor) {
+					if (hasSwapImage) {
 						replaceImages();
 					}
 					app.tooltips.init();
@@ -1228,7 +1234,8 @@ var app = (function (app, $) {
 				app.product.compare.removeProduct({
 					itemid: item.data("itemid"),
 					uuid: uuid,
-					cb: $("#"+uuid).find(".compare-check")
+					cb: $("#"+uuid).find(".compare-check"),
+					ajaxCall: false
 				});
 			}
 
@@ -1255,21 +1262,42 @@ var app = (function (app, $) {
 		removeProduct : function (args) {
 			if (!args.itemid) { return; }
 			var cb = args.cb ? $(args.cb) : null;
-			app.ajax.getJson({
-				url : app.urls.compareRemove,
-				data : { 'pid' : args.itemid, 'category' : _currentCategory },
-				callback : function (response) {
-					if (!response || !response.success) {
-						// response failed. uncheck the checkbox return
-						if (cb && cb.length > 0) { cb[0].checked = true; }
-						window.alert(app.resources.COMPARE_REMOVE_FAIL);
-						return;
-					}
+			var ajaxCall = args.ajaxCall ? $(args.ajaxCall) : true;
+			if(ajaxCall) {
+				app.ajax.getJson({
+					url : app.urls.compareRemove,
+					data : { 'pid' : args.itemid, 'category' : _currentCategory },
+					callback : function (response) {
+						if (!response || !response.success) {
+							// response failed. uncheck the checkbox return
+							if (cb && cb.length > 0) { cb[0].checked = true; }
+							window.alert(app.resources.COMPARE_REMOVE_FAIL);
+							return;
+						}
 
-					// item successfully removed session, now remove from to list...
-					removeFromList(args.uuid);
-				}
-			});
+						// item successfully removed session, now remove from to list...
+						removeFromList(args.uuid);
+					}
+				});
+			} else {
+				app.ajax.getJson({
+					url : app.urls.compareRemove,
+			        async: false,
+					data : { 'pid' : args.itemid, 'category' : _currentCategory },
+					callback : function (response) {
+						if (!response || !response.success) {
+							// response failed. uncheck the checkbox return
+							if (cb && cb.length > 0) { cb[0].checked = true; }
+							window.alert(app.resources.COMPARE_REMOVE_FAIL);
+							return;
+						}
+
+						// item successfully removed session, now remove from to list...
+						removeFromList(args.uuid);
+					}
+				});
+			}
+				
 		}
 	};
 
@@ -2540,6 +2568,8 @@ var app = (function (app, $) {
 				}
 				else if (!data.success) {
 					msg = data.message;
+					msg = msg.split('<').join('&lt;');
+					msg = msg.split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
@@ -2623,6 +2653,13 @@ var app = (function (app, $) {
 		else{
 			billingLoad();
 		}
+		
+		//if on the order review page and there are products that are not available diable the submit order button
+		if($('.order-summary-footer').length > 0){
+			if($('.notavailable').length > 0){
+				$('.order-summary-footer .submit-order .button-fancy-large').attr( 'disabled', 'disabled' );
+			}
+		}
 	}
 
 	/******* app.checkout public object ********/
@@ -2684,6 +2721,86 @@ var app = (function (app, $) {
 			$cache.quickView = $("<div/>").attr("id", "#QuickViewDialog").appendTo(document.body);
 			return $cache.quickView;
 		},
+		
+		initializeQuickViewNav : function(qvUrl) {
+			
+			//from the url of the product in the quickview
+			qvUrlTail = qvUrl.substring(qvUrl.indexOf('?'));
+			qvUrlPidParam = qvUrlTail.substring(0,qvUrlTail.indexOf('&'));
+			qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
+			
+			if(qvUrlPidParam.indexOf('pid') > 0){
+				//if storefront urls are turned off
+				//append the pid to the url
+				qvUrl = qvUrl+qvUrlPidParam;
+			}
+			
+			this.searchesultsContainer = $('#search-result-items').parent();
+			this.productLinks = this.searchesultsContainer.find('.thumb-link');
+
+			this.btnNext = $('.quickview-next');
+			this.btnPrev = $('.quickview-prev');
+
+			this.btnNext.click(this.navigateQuickview.bind(this));
+			this.btnPrev.click(this.navigateQuickview.bind(this));
+
+			var productLinksUrl = "";
+			for ( var i = 0; i < this.productLinks.length; i++) {
+
+				productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
+				productLinksUrlPidParam = productLinksUrlTail.substring(0,qvUrlTail.indexOf('&'));
+				if(productLinksUrlPidParam.indexOf('pid') > 0){
+					//append the pid to the url
+					//if storefront urls are turned off
+					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+					productLinksUrl = productLinksUrl+productLinksUrlPidParam;
+				
+				}else{
+					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
+				}
+			
+				if(productLinksUrl == ""){
+					productLinksUrl = this.productLinks[i].href;
+				}
+				
+				if (qvUrl == productLinksUrl) {
+					this.productLinkIndex = i;
+				}
+			}
+
+			if (this.productLinkIndex == this.productLinks.length - 1) {
+				this.btnNext.hide();
+			}
+
+			if (this.productLinkIndex == 0) {
+				this.btnPrev.hide();
+			}
+
+			//hide the buttons on the compare page
+			if($('.compareremovecell').length > 0){
+				this.btnNext.hide();
+				this.btnPrev.hide();
+			}
+			
+		},
+
+		navigateQuickview : function(event) {
+			var button = $(event.currentTarget);
+
+			if (button.hasClass('quickview-next')) {
+				this.productLinkIndex++;
+			} else {
+				this.productLinkIndex--;
+			}
+
+			app.quickView.show({
+				url : this.productLinks[this.productLinkIndex].href,
+				source : 'quickview'
+			});
+
+			event.preventDefault();
+		},
+		
 		// show quick view dialog and send request to the server to get the product
 		// options.source - source of the dialog i.e. search/cart
 		// options.url - product url
@@ -2710,6 +2827,8 @@ var app = (function (app, $) {
 					}
 				});
 				$cache.quickView.dialog('open');
+				
+				app.quickView.initializeQuickViewNav(this.url);
 			};
 			app.product.get(options);
 
@@ -3531,6 +3650,7 @@ var app = (function (app, $) {
 			if(app.enabledStorePickup){
 				app.storeinventory.init();
 			}
+			app.account.initCartLogin();
 		}
 	};
 
@@ -3696,6 +3816,28 @@ var app = (function (app, $) {
 			});
 		});
 	}
+	/** 
+	 * @private 
+	 * @function 
+	 * @description init events for the loginPage
+	 */
+	function initLoginPage() {
+		
+		//o-auth binding for which icon is clicked
+		$('.oAuthIcon').bind( "click", function() {
+			$('#OAuthProvider').val(this.id);
+		});	
+		
+		//toggle the value of the rememberme checkbox
+		$( "#dwfrm_login_rememberme" ).bind( "change", function() {
+			if($('#dwfrm_login_rememberme').attr('checked')){
+				$('#rememberme').val('true')
+			}else{
+				$('#rememberme').val('false')
+			}
+		});	
+				
+	}
 	/**
 	 * @private
 	 * @function
@@ -3705,6 +3847,7 @@ var app = (function (app, $) {
 		toggleFullOrder();
 		initAddressEvents();
 		initPaymentEvents();
+		initLoginPage();
 	}
 
 	/******* app.account public object ********/
@@ -3717,6 +3860,9 @@ var app = (function (app, $) {
 			initializeEvents();
 
 			app.giftcert.init();
+		},
+		initCartLogin : function () {
+			initLoginPage();
 		}
 	};
 }(window.app = window.app || {}, jQuery));
@@ -4873,7 +5019,31 @@ var app = (function (app, $) {
 }(window.app = window.app || {}, jQuery));
 
 
-
+(function(app){
+	
+	function isMobile() {
+		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"];
+		var	idx = 0;
+		var isMobile = false;
+		var userAgent = (navigator.userAgent).toLowerCase();
+				
+		while (mobileAgentHash[idx] && !isMobile) {
+			isMobile = (userAgent.indexOf(mobileAgentHash[idx]) >= 0);
+			idx++;
+		}
+		return isMobile;
+	}
+	
+	app.isMobileUserAgent = function() 
+	{
+		return isMobile();
+	};
+	
+	app.zoomViewerEnabled = function()
+	{
+		return (!isMobile());
+	};
+}(window.app = window.app || {}));
 
 // jquery extensions
 (function ($) {

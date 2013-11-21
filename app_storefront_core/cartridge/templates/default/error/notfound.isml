@@ -4,7 +4,7 @@
 
 
 
-<h1>Page Not Found</h1>
+<h1>${Resource.msg('notfound.pagenotfound','error',null)}</h1>
 
 	<isslot id="404-banner" description="Banner for error pages" context="global"/>
 
