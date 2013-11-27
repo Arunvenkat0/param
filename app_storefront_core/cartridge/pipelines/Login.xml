@@ -219,7 +219,7 @@
                 <segment>
                   <node>
                     <pipelet-node custom-name="Notify that account is now locked." pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                      <key-binding alias="dw.web.Resource.msg('defaultemail.sender','email',null)" key="MailFrom"/>
+                      <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
                       <key-binding alias="&quot;mail/lockoutemail&quot;" key="MailTemplate"/>
                       <key-binding alias="TempCustomer.profile.email" key="MailTo"/>
                       <key-binding alias="&quot;Your Account&quot;" key="MailSubject"/>
