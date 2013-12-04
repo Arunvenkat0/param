@@ -2646,6 +2646,11 @@ var app = (function (app, $) {
 		addressLoad();
 		if (isShipping) {
 			shippingLoad();
+
+			//on the single shipping page, update the list of shipping methods when the state feild changes
+			$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
+				updateShippingMethodList();
+			});	
 		}
 		else if(isMultiShipping){
 			multishippingLoad();
