@@ -3888,6 +3888,11 @@ var app = (function (app, $) {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 
 		});
+		
+		//add js logic to remove the , from the qty feild to pass regex expression on client side
+		jQuery('.option-quantity-desired div input').focusout(function(){		
+			$(this).val($(this).val().replace(',',''));	
+		});
 	}
 
 
