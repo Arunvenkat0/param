@@ -463,7 +463,7 @@ We seem to have misplaced this page result in an unfortunate error: (Page or Fil
 &lt;span class="toggle"&gt;Wish List&lt;/span&gt;&#13;
 &lt;ul&gt;&#13;
 &lt;li&gt;&lt;a title="Modify your wish list" href="$httpsUrl(Wishlist-Show)$"&gt;Modify Wish List&lt;/a&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;a title="Search for wish lists" href="$httpsUrl(Wishlist-Show)$"&gt;Search Wish Lists&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a title="Search for wish lists" href="$httpsUrl(Wishlist-Search)$"&gt;Search Wish Lists&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
 &lt;span class="toggle"&gt;Gift Registries&lt;/span&gt;&#13;
