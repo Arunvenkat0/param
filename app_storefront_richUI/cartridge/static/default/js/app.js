@@ -2044,7 +2044,7 @@ var app = (function (app, $) {
 
 	function initializeCache() {
 		$cache = {
-			addToCart : $("#AddToBasketButton"),
+			addToCart : $("#AddToBasketButton")
 		};
 	}
 
