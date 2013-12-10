@@ -2646,6 +2646,11 @@ var app = (function (app, $) {
 		addressLoad();
 		if (isShipping) {
 			shippingLoad();
+
+			//on the single shipping page, update the list of shipping methods when the state feild changes
+			$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
+				updateShippingMethodList();
+			});	
 		}
 		else if(isMultiShipping){
 			multishippingLoad();
@@ -3882,6 +3887,11 @@ var app = (function (app, $) {
 		$cache.editAddress.on('change', function () {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 
+		});
+		
+		//add js logic to remove the , from the qty feild to pass regex expression on client side
+		jQuery('.option-quantity-desired div input').focusout(function(){		
+			$(this).val($(this).val().replace(',',''));	
 		});
 	}
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
     <type-extension type-id="Basket">
         <system-attribute-definitions>
@@ -3679,6 +3679,15 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="customerServiceEmail">
+                <display-name xml:lang="x-default">Customer Service Email</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <default-value>noreply@demandware.com</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="disableResponsiveDesign">
                 <display-name xml:lang="x-default">Disable Responsive Design</display-name>
                 <description xml:lang="x-default">Disable Responsive Design for Storefront</description>
@@ -3952,6 +3961,7 @@
                 <attribute attribute-id="addThisVersion"/>
                 <attribute attribute-id="addThisPubID"/>
                 <attribute attribute-id="addThisDomready"/>
+                <attribute attribute-id="customerServiceEmail"/>     
             </attribute-group>
         </group-definitions>
     </type-extension>
