@@ -755,7 +755,7 @@
             </simple-transition>
             <node>
               <pipelet-node custom-name="Send order confirmation email" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="&quot;noreply@demandware.net&quot;" key="MailFrom"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
                 <key-binding alias="&quot;mail/orderconfirmation&quot;" key="MailTemplate"/>
                 <key-binding alias="Order.customerEmail" key="MailTo"/>
                 <key-binding alias="&quot;Your order with Demandware online store&quot;" key="MailSubject"/>
@@ -1103,7 +1103,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
                 <key-binding alias="null" key="LocaleID"/>
                 <key-binding alias="null" key="MailCC"/>
                 <key-binding alias="null" key="MailBCC"/>
-                <key-binding alias="&quot;noreply@demandware.net&quot;" key="MailFrom"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
