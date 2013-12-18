@@ -3,7 +3,8 @@
  */
 package com.sitegenesis.testcases.smoketest.category;
 import org.junit.Ignore;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -22,6 +23,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 @ScriptName
 ("testcases.smoketest.category.TSearchRefinementsOptions")
 @Ignore
-public class TSearchRefinementsOptions extends AbstractScriptTestCase
+public class TSearchRefinementsOptions extends AbstractBrowserScriptTestCase
 {
 }
