@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for the product set</comment>
+    <parameter name="SearchText" value="${searchID}"/>
+  </module>
+  <command name="assertText" target="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]" value="$949.99"/>
+  <command name="assertElementPresent" target="//select[@id='dwopt_samsung-ln37a330_tvWarranty']"/>
+  <command name="select" target="//select[@id='dwopt_samsung-ln37a330_tvWarranty']" value="[$49.99] 1 Year Warranty"/>
+  <command name="assertText" target="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]" value="$999.98"/>
+</testcase>
