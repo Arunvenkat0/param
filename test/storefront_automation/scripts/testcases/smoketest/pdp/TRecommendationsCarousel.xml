@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84711</tags>
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for the product set</comment>
+    <parameter name="SearchText" value="${searchID}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.productdetails.MRecomendationsStructure">
+    <parameter name="RecomendationsCount" value="4"/>
+  </module>
+  <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
+  <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
+  <command name="click" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-next')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
+  <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
+  <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
+  <command name="click" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-prev')]"/>
+  <command name="waitForElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
+  <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
+  <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
+  <command name="mouseOver" target="//li[contains(@class,'jcarousel-item-1')]//div[(contains(@class,'product-name') and (contains(text(),'${selecteRecomemdation}')))]"/>
+  <command name="assertElementPresent" target="//div[@id='tooltip']"/>
+  <command name="waitForElementPresent" target="//div[@id='tooltip']//div[(contains(@class,'product-name') and (contains(text(),'${selecteRecomemdation}')))]"/>
+  <command name="waitForElementPresent" target="//div[@id='tooltip']//div[contains(@class,'product-price')]/div[contains(text(),'${selectedprice}')]"/>
+  <command name="assertText" disabled="true" target="//div[@id='tooltip']//div[contains(@class,'product-price')]/div" value="$130.00 - $135.00"/>
+  <command name="mouseOut" target="//li[contains(@class,'jcarousel-item-1')]//div[(contains(@class,'product-name') and (contains(text(),'${selecteRecomemdation}')))]"/>
+  <command name="clickAndWait" target="//li[contains(@class,'jcarousel-item-1')]//div[contains(@class,'product-name')]/a[contains(text(),'${selecteRecomemdation}')]"/>
+  <command name="assertElementPresent" target="css=h1.product-name">
+    <comment>Checks if a headline is displayed.</comment>
+  </command>
+  <command name="assertText" target="css=h1.product-name" value="${selecteRecomemdation}">
+    <comment>Checks if a headline is displayed.</comment>
+  </command>
+</testcase>
