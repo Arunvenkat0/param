@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="CategoryName"/>
+  <parameter name="SortMethod"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="@{CategoryName}"/>
+  <command name="assertElementPresent" target="css=.product-tile">
+    <comment>Check if at least one product is present.</comment>
+  </command>
+  <command name="storeXpathCount" target="//ul[contains(@id,'search-result-items')]/li" value="SearchResultCount"/>
+  <command name="waitForElementPresent" target="css=.results-hits"/>
+  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
+  <command name="assertText" target="css=.search-result-options:nth-child(2) .sort-by option[selected]" value="@{SortMethod}"/>
+  <command name="assertText" target="css=.search-result-options:nth-child(4) .sort-by option[selected]" value="@{SortMethod}"/>
+  <command name="assertElementPresent" target="css=.product-tile">
+    <comment>Check if at least one product is present.</comment>
+  </command>
+</scriptmodule>

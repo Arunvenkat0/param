@@ -44,14 +44,16 @@ Works.</description>
   <command name="assertElementPresent" target="//input[(contains(@class,'error') and (contains(@id,'dwfrm_storelocator_postalCode')))]"/>
   <command name="type" target="//input[contains(@id,'dwfrm_storelocator_postalCode')]" value="${invalidZip}"/>
   <command name="click" target="//button[contains(@name,'dwfrm_storelocator_findbyzip')]"/>
-  <command name="assertElementPresent" target="//span[contains(@class,'form-caption error-message')]"/>
-  <command name="assertText" target="//span[contains(@class,'form-caption error-message')]" value="${ErrorMessage}"/>
+  <command name="waitForElementPresent" target="//span[contains(@class, 'form-caption error-message')]"/>
+  <command name="assertElementPresent" disabled="true" target="//span[contains(@class, 'form-caption error-message')]"/>
+  <command name="assertText" target="//span[contains(@class, 'form-caption error-message')]" value="${ErrorMessage}"/>
   <command name="type" target="//input[contains(@id,'dwfrm_storelocator_postalCode')]" value="${ZipCode}"/>
   <command name="click" target="//button[contains(@name,'dwfrm_storelocator_findbyzip')]"/>
+  <command name="waitForElementPresent" target="//div[contains(@class,'store-locator-no-results')]/p"/>
   <command name="assertText" target="//div[contains(@class,'store-locator-no-results')]/p" value="${NoStoresMessage}"/>
   <command name="type" target="//input[contains(@id,'dwfrm_storelocator_postalCode')]" value="${ZipCodeR}"/>
   <command name="click" target="//button[contains(@name,'dwfrm_storelocator_findbyzip')]"/>
-  <command name="assertElementPresent" target="//table[contains(@id,'store-location-results')]"/>
+  <command name="waitForElementPresent" target="//table[contains(@id,'store-location-results')]"/>
   <command name="clickAndWait" target="link=regexpi:Store Locator"/>
   <action name="Search-0"/>
 </testcase>

@@ -29,7 +29,7 @@
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
   </module>
-  <command name="close"/>
+  <command name="close" disabled="true"/>
   <command name="open" value="${shopURL}"/>
   <command name="waitForText" target="css=.user-account" value="regexpi:${FirstName} ${LastName}">
     <comment>Validates first and last name inside page header.</comment>
