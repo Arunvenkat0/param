@@ -28,6 +28,10 @@ Validates the quantity update function.
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <action name="AddSecondProductToCart"/>
+  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
+    <comment>Select size.</comment>
+  </command>
+  <command name="pause" value="1000"/>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${SecondProductQuantityInitital}"/>
     <parameter name="ProductName" value="${SecondProductName}"/>
