@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>search</tags>
   <description>This testcase validates the search feature. Four searches are performed and the results validated:
 1. Search for product by ID - validation of product details page

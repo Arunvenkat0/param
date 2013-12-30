@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
 Afterwards is the did you mean term clicked an dthe result page (product grid) is validated.
 
