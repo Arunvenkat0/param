@@ -2,22 +2,23 @@
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <FirstName>John</FirstName>
   <LastName>Doe</LastName>
-  <ProductID>73910432</ProductID>
-  <ProductName>Microcheck Straight Leg Trousers</ProductName>
-  <ProductQuantity>2</ProductQuantity>
-  <ProductPrice>$195.00</ProductPrice>
-  <ProductTotalPrice>$390.00</ProductTotalPrice>
+  <ProductID>creative-zen-v</ProductID>
+  <ProductName>Creative ZEN V Digital Media Player</ProductName>
+  <ProductQuantity>3</ProductQuantity>
+  <ProductPrice>$71.99</ProductPrice>
+  <ProductTotalPrice>$215.97</ProductTotalPrice>
   <ShippingAddressTitle>Office</ShippingAddressTitle>
   <ShippingAddressFirstName>Las Miranda</ShippingAddressFirstName>
   <ShippingAddressLastName>den Sevilla</ShippingAddressLastName>
   <ShippingAddressStreet>1 Broadway</ShippingAddressStreet>
-  <ShippingAddressCity>Cambridge</ShippingAddressCity>
-  <ShippingAddressState>Massachusetts</ShippingAddressState>
-  <ShippingAddressStateShort>MA</ShippingAddressStateShort>
+  <ShippingAddressCity>Ontario</ShippingAddressCity>
+  <ShippingAddressState>Ontario</ShippingAddressState>
+  <ShippingAddressStateShort>ON</ShippingAddressStateShort>
   <ShippingAddressZipCode>02142</ShippingAddressZipCode>
-  <ShippingAddressCountry>United States</ShippingAddressCountry>
+  <ShippingAddressCountry>Canada</ShippingAddressCountry>
   <ShippingAddressPhone>781-391-6666</ShippingAddressPhone>
-  <ShippingMethodName>2-Day Express*</ShippingMethodName>
+  <ShippingMethodName>Foreign</ShippingMethodName>
+  <ShippingMethodName2>Ground</ShippingMethodName2>
   <ShippingMethodNumber>2</ShippingMethodNumber>
   <BillingAddressTitle>Home</BillingAddressTitle>
   <BillingAddressFirstName>Maria</BillingAddressFirstName>

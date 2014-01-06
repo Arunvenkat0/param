@@ -30,6 +30,12 @@ This is broken in 13.4. RAP-2396</description>
     <parameter name="SearchText" value="${SecondProductID}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <command name="click" target="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]">
+    <comment>Select a random color by clicking a color link.</comment>
+  </command>
+  <command name="waitForElementPresent" target="css=.Color .selected">
+    <comment>Wait for the color to be selected.</comment>
+  </command>
   <action name="AddSecondProductToCart"/>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${SecondProductQuantityInitital}"/>

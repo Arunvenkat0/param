@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Expected Results
-
-   On the right-hand side, the information entered on the shipping page is summarized:
--name
--address
-   Click EDIT by the shipping address: this takes user back to Step 1, Shipping.
-    Edit something on the shipping address and return to the billing page. Confirm the address information on the billing page has been updated.
-    Confirm all information entered so far is displaying correctly in the order summary.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -136,7 +128,7 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
+  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
     <comment>Use the same address for billing by ticking the checkbox.</comment>
   </command>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
@@ -154,7 +146,18 @@
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
   </module>
-  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage">
+  <module name="modules.adressmanagement.EnterAddressData">
+    <parameter name="FirstName" value="${ShippingFirstName}"/>
+    <parameter name="LastName" value="${ShippingLastName}"/>
+    <parameter name="Address1" value="${ShippingAddress}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${ShippingCountry}"/>
+    <parameter name="State" value="${ShippingState}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
+    <parameter name="Phone" value="${ShippingPhone}"/>
+  </module>
+  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage" disabled="true">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address" value="${ShippingAddress}"/>
@@ -187,50 +190,6 @@
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <command name="clickAndWait" target="css=.mini-shipment a"/>
-  <module name="modules.adressmanagement.EnterAddressData">
-    <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
-    <parameter name="LastName" value="${ShippingLastNameEdit}"/>
-    <parameter name="Address1" value="${ShippingAddressEdit}"/>
-    <parameter name="Address2" value=""/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
-    <parameter name="State" value="${ShippingStateEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-    <parameter name="Phone" value="${ShippingPhoneEdit}"/>
-  </module>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
-  <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
-    <parameter name="ShippingMethodNumber" value="${ShippingMethodNumberEdit}"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodNameEdit}"/>
-  </module>
-  <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
-  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage">
-    <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
-    <parameter name="LastName" value="${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
-    <parameter name="State" value="${ShippingStateEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
-    <comment>Shipping Address Validation</comment>
-    <parameter name="Name" value="${ShippingFirstNameEdit} ${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="StateShort" value="${ShippingStateShortNameEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
-  </module>
-  <module name="modules.checkout.ValidateNumberFormatsCheckoutPage">
-    <comment>Validate Order's total amounts and different charges</comment>
-  </module>
   <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
   <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
     <comment>Validate All Payment Methods available on page</comment>
@@ -266,19 +225,19 @@
     <parameter name="PriceTotal" value="${SecondProductTotalPrice}"/>
   </module>
   <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
-    <parameter name="Name" value="${ShippingFirstNameEdit} ${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="StateShort" value="${ShippingStateShortNameEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
+    <parameter name="Name" value="${ShippingFirstName} ${ShippingLastName}"/>
+    <parameter name="Address" value="${ShippingAddress}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="StateShort" value="${ShippingStateShortName}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
+    <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
-    <parameter name="Name" value="${ShippingFirstNameEdit} ${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="State_Short" value="${ShippingStateShortNameEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
+    <parameter name="Name" value="${ShippingFirstName} ${ShippingLastName}"/>
+    <parameter name="Address" value="${ShippingAddress}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="State_Short" value="${ShippingStateShortName}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.billing.ValidatePaymentCreditCardInSidebar">
@@ -296,24 +255,36 @@
   <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
   <command name="assertText" target="css=.order-date span:first-child" value="Order Placed"/>
   <command name="assertText" target="css=#main .order-total td:first-child" value="glob:Order Total:"/>
+  <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
+    <parameter name="Position" value="1"/>
+    <parameter name="Name" value="${FirstProductName}"/>
+    <parameter name="Quantity" value="${FirstProductQuantity}"/>
+    <parameter name="Price" value="${FirstProductTotalPrice}"/>
+  </module>
+  <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
+    <parameter name="Position" value="2"/>
+    <parameter name="Name" value="${SecondProductName}"/>
+    <parameter name="Quantity" value="${SecondProductQuantity}"/>
+    <parameter name="Price" value="${SecondProductTotalPrice}"/>
+  </module>
   <module name="modules.checkout.summary.ValidateShippingDataSummaryPage">
-    <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
-    <parameter name="LastName" value="${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="StateShort" value="${ShippingStateShortNameEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
-    <parameter name="ShippingMethod" value="${ShippingMethodNameEdit}"/>
+    <parameter name="FirstName" value="${ShippingFirstName}"/>
+    <parameter name="LastName" value="${ShippingLastName}"/>
+    <parameter name="Address" value="${ShippingAddress}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="StateShort" value="${ShippingStateShortName}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
+    <parameter name="Country" value="${ShippingCountry}"/>
+    <parameter name="ShippingMethod" value="${ShippingMethodName}"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
   <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage">
-    <parameter name="Name" value="${ShippingFirstNameEdit} ${ShippingLastNameEdit}"/>
-    <parameter name="Address" value="${ShippingAddressEdit}"/>
-    <parameter name="City" value="${ShippingCityEdit}"/>
-    <parameter name="StateShort" value="${ShippingStateShortNameEdit}"/>
-    <parameter name="ZipCode" value="${ShippingZipCodeEdit}"/>
-    <parameter name="Country" value="${ShippingCountryEdit}"/>
+    <parameter name="Name" value="${ShippingFirstName} ${ShippingLastName}"/>
+    <parameter name="Address" value="${ShippingAddress}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="StateShort" value="${ShippingStateShortName}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
+    <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <module name="modules.checkout.summary.ValidatePaymentCreditCardSummaryPage">
