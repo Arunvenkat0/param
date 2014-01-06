@@ -7,11 +7,9 @@
     <comment>Check if at least one product is present.</comment>
   </command>
   <command name="storeXpathCount" target="//ul[contains(@id,'search-result-items')]/li" value="SearchResultCount"/>
-<<<<<<< HEAD
+
   <command name="waitForElementPresent" target="css=.results-hits"/>
-=======
-  <command name="waitForElementPresent" target="css=.results-hits a"/>
->>>>>>> 3ef7dc2bdea972d0bbd887e5db122a68977b6dd7
+
   <command name="storeText" target="css=.results-hits" value="PaginationText"/>
   <command name="assertText" target="css=.search-result-options:nth-child(2) .sort-by option[selected]" value="@{SortMethod}"/>
   <command name="assertText" target="css=.search-result-options:nth-child(4) .sort-by option[selected]" value="@{SortMethod}"/>
