@@ -7,16 +7,16 @@
     <comment>Check for the disabled add to cart button.</comment>
   </command>
   <command name="storeText" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
-  <command name="assertNotElementPresent" target="css=.Color .selected .swatchanchor"/>
-  <command name="assertNotElementPresent" target="css=.value .selected .swatchanchor"/>
-  <command name="storeText" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
+  <command name="assertNotElementPresent" disabled="true" target="css=.Color .selected .swatchanchor"/>
+  <command name="assertNotElementPresent" disabled="true" target="css=.value .selected .swatchanchor"/>
+  <command name="storeText" disabled="true" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
     <comment>Select size.</comment>
   </command>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
+  <command name="click" disabled="true" target="css=.Color .emptyswatch .swatchanchor">
     <comment>Select size.</comment>
   </command>
-  <command name="waitForElementPresent" target="//li[contains(text(),'${ColorSelected}') ]"/>
-  <command name="assertText" target="css=.product-variations .attribute:first-child .value .swatches .selected-value" value="${ColorSelected}"/>
+  <command name="waitForElementPresent" disabled="true" target="//li[contains(text(),'${ColorSelected}') ]"/>
+  <command name="assertText" disabled="true" target="css=.product-variations .attribute:first-child .value .swatches .selected-value" value="${ColorSelected}"/>
   <command name="storeText" target="css=.value .emptyswatch .swatchanchor" value="SizeSelected">
     <comment>Select size.</comment>
   </command>

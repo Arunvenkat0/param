@@ -15,9 +15,7 @@ Note: This module only works for products with color attributes.</description>
   <command name="assertText" target="css=.cart-row:nth-child(@{TableRow}) .attribute .value" value="@{ColorStart}">
     <comment>Validate the corret initial color.</comment>
   </command>
-  <command name="click" target="css=.cart-row:nth-child(@{TableRow}) .item-edit-details a">
-    <comment>Click the &quot;Edit Details&quot; link.</comment>
-  </command>
+  <command name="click" target="//div[contains(@class,'item-edit-details')]/a"/>
   <command name="waitForElementPresent" target="css=.ui-dialog-title">
     <comment>Wait for the dialog to be opened.</comment>
   </command>
