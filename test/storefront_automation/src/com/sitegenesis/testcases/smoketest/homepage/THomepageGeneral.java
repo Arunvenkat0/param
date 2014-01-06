@@ -8,6 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 /**
  * 1.All is working and linked as expected.
+ 
  2.Text is correct.
  
  Automation Test does not cover the testing of hover feature in menu.
