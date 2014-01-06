@@ -2,7 +2,7 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package com.sitegenesis.testcases.responsive;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -16,6 +16,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.responsive.THomepageGeneral")
-public class THomepageGeneral extends AbstractScriptTestCase
+public class THomepageGeneral extends AbstractBrowserScriptTestCase
 {
 }
