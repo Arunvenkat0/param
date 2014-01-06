@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<<<<<<< HEAD
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-=======
 <testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
->>>>>>> 3ef7dc2bdea972d0bbd887e5db122a68977b6dd7
   <tags>C84781 (incomplete)</tags>
   <description>Steps
 Homepage -> Select a category and its sub category

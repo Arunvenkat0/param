@@ -9,7 +9,7 @@
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for first product</comment>
-    <parameter name="SearchText" value="${ProductID}"/>
+    <parameter name="SearchText" value="${ProductName}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <module name="modules.catalog.ValidateProductDataOnDetailsPage">

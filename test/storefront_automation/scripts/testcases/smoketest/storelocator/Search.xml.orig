@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+=======
 <testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+>>>>>>> 3ef7dc2bdea972d0bbd887e5db122a68977b6dd7
   <description>Preconditions
 Store data has to be configured in the Business Manager (Sites > Online Marketing > Stores).
 Steps
