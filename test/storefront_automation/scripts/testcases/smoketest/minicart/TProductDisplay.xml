@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84773,C84725,C84726,C84727</tags>
   <module name="modules.staticelements.Homepage"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-empty" value="(0)">
     <comment>Checks the correct quantity in mini cart</comment>
