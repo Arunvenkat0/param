@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84757</tags>
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84757,C84776</tags>
   <description>1.All is working and linked as expected.
+
 2.Text is correct.
 
 Automation Test does not cover the testing of hover feature in menu.</description>
