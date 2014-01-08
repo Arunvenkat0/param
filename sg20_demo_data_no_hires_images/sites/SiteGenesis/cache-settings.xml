@@ -55,7 +55,7 @@
             </pipelines>
         </page-cache-partition>
         <page-cache-partition partition-id="SlotsContent">
-            <name>Content Slots &amp; Content Assets</name>
+            <name>Content Slots &amp; Assets</name>
             <pipelines>
                 <pipeline>Page-Show</pipeline>
                 <pipeline>Page-Include</pipeline>
