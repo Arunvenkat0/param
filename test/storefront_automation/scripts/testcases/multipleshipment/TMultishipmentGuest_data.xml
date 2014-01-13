@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <FirstName>John</FirstName>
+  <LastName>Doe</LastName>
+  <ProductID>creative-zen-v</ProductID>
+  <ProductName>Creative ZEN V Digital Media Player</ProductName>
+  <ProductQuantity>3</ProductQuantity>
+  <ProductPrice>$71.99</ProductPrice>
+  <ProductTotalPrice>$215.97</ProductTotalPrice>
+  <ShippingAddressTitle>Office</ShippingAddressTitle>
+  <ShippingAddressFirstName>Las Miranda</ShippingAddressFirstName>
+  <ShippingAddressLastName>den Sevilla</ShippingAddressLastName>
+  <ShippingAddressStreet>1 Broadway</ShippingAddressStreet>
+  <ShippingAddressCity>Ontario</ShippingAddressCity>
+  <ShippingAddressState>Ontario</ShippingAddressState>
+  <ShippingAddressStateShort>ON</ShippingAddressStateShort>
+  <ShippingAddressZipCode>02142</ShippingAddressZipCode>
+  <ShippingAddressCountry>Canada</ShippingAddressCountry>
+  <ShippingAddressPhone>781-391-6666</ShippingAddressPhone>
+  <ShippingMethodName>Foreign</ShippingMethodName>
+  <ShippingMethodName2>Ground</ShippingMethodName2>
+  <ShippingMethodNumber>2</ShippingMethodNumber>
+  <BillingAddressTitle>Home</BillingAddressTitle>
+  <BillingAddressFirstName>Maria</BillingAddressFirstName>
+  <BillingAddressLastName>Musterfrau</BillingAddressLastName>
+  <BillingAddressStreet>5 Wall Street</BillingAddressStreet>
+  <BillingAddressCity>Burlington</BillingAddressCity>
+  <BillingAddressState>Massachusetts</BillingAddressState>
+  <BillingAddressStateShort>MA</BillingAddressStateShort>
+  <BillingAddressZipCode>01803</BillingAddressZipCode>
+  <BillingAddressPhone>781-391-5555</BillingAddressPhone>
+  <BillingAddressCountry>United States</BillingAddressCountry>
+  <CreditCardFirstName>Mr C. C.</CreditCardFirstName>
+  <CreditCardLastName>Tester</CreditCardLastName>
+  <CreditCardType>American Express</CreditCardType>
+  <CreditCardTypeShort>Amex</CreditCardTypeShort>
+  <CreditCardNumber>340000000000009</CreditCardNumber>
+  <CreditCardNumberLast4Digits>0009</CreditCardNumberLast4Digits>
+  <CreditCardExpiryMonthName>April</CreditCardExpiryMonthName>
+  <CreditCardExpiryMonthShort>Apr</CreditCardExpiryMonthShort>
+  <CreditCardExpiryMonthNumber>04</CreditCardExpiryMonthNumber>
+  <CreditCardExpiryYear>2014</CreditCardExpiryYear>
+  <CreditCardSecurityCode>1234</CreditCardSecurityCode>
+</data>
