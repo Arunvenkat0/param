@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84737 account payment</tags>
+  <description>Payment data account management:
+=> adds credit cards:
+- Visa
+- American Express
+- Master Card
+- Discovery
+=> removes credit cards</description>
+  <module name="modules.staticelements.Homepage"/>
+  <module name="modules.usermanagement.RegisterNewUser">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
+  </module>
+  <action name="OpenPaymentSettings"/>
+  <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
+  <action name="AddVisa"/>
+  <module name="modules.payments.AddCreditCard">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Type" value="${CreditCardType1}"/>
+    <parameter name="Number" value="${CreditCardNumber1}"/>
+    <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.ValidateCreditCardData">
+    <parameter name="Position" value="1"/>
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="TypeShort" value="${CreditCardTypeShort1}"/>
+    <parameter name="NumberLastFour" value="${CreditCardNumberLastFour1}"/>
+    <parameter name="ExpireDateMonthNumber" value="${CreditCardExpireDateMonthNumber}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.DeleteCreditCard">
+    <parameter name="PositionNb" value="1"/>
+  </module>
+  <action name="AddAmericanExpress"/>
+  <module name="modules.payments.AddCreditCard">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Type" value="${CreditCardType2}"/>
+    <parameter name="Number" value="${CreditCardNumber2}"/>
+    <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.ValidateCreditCardData">
+    <parameter name="Position" value="1"/>
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="TypeShort" value="${CreditCardTypeShort2}"/>
+    <parameter name="NumberLastFour" value="${CreditCardNumberLastFour2}"/>
+    <parameter name="ExpireDateMonthNumber" value="${CreditCardExpireDateMonthNumber}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.DeleteCreditCard">
+    <parameter name="PositionNb" value="1"/>
+  </module>
+  <action name="AddMasterCard"/>
+  <module name="modules.payments.AddCreditCard">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Type" value="${CreditCardType3}"/>
+    <parameter name="Number" value="${CreditCardNumber3}"/>
+    <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.ValidateCreditCardData">
+    <parameter name="Position" value="1"/>
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="TypeShort" value="${CreditCardTypeShort3}"/>
+    <parameter name="NumberLastFour" value="${CreditCardNumberLastFour3}"/>
+    <parameter name="ExpireDateMonthNumber" value="${CreditCardExpireDateMonthNumber}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.DeleteCreditCard">
+    <parameter name="PositionNb" value="1"/>
+  </module>
+  <action name="AddDiscoveryCard"/>
+  <module name="modules.payments.AddCreditCard">
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="Type" value="${CreditCardType4}"/>
+    <parameter name="Number" value="${CreditCardNumber4}"/>
+    <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.ValidateCreditCardData">
+    <parameter name="Position" value="1"/>
+    <parameter name="Name" value="${FirstName} ${LastName}"/>
+    <parameter name="TypeShort" value="${CreditCardTypeShort4}"/>
+    <parameter name="NumberLastFour" value="${CreditCardNumberLastFour4}"/>
+    <parameter name="ExpireDateMonthNumber" value="${CreditCardExpireDateMonthNumber}"/>
+    <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+  </module>
+  <module name="modules.payments.DeleteCreditCard">
+    <parameter name="PositionNb" value="1"/>
+  </module>
+  <action name="GoToWelcomePage"/>
+  <command name="waitForElementPresent" target="css=.user-account"/>
+  <command name="clickAndWait" target="css=.user-account"/>
+  <action name="LogoutAndGoToHomepage"/>
+  <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="GoToHomepage"/>
+  <module name="modules.staticelements.Return2Home"/>
+</testcase>
