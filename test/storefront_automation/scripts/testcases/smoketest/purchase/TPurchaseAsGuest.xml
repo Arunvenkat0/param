@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85047 C84683 ordering guest checkout</tags>
+  <description>Guest checkout: 
+
+* Add some products
+* View cart
+* Guest checkout
+* Enter Shipping Method /Address
+* Enter Billing Method / Address
+* Summary -> Edit
+* Place Offer</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -128,7 +138,7 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
+  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
     <comment>Use the same address for billing by ticking the checkbox.</comment>
   </command>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
@@ -146,18 +156,7 @@
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
-    <parameter name="FirstName" value="${ShippingFirstName}"/>
-    <parameter name="LastName" value="${ShippingLastName}"/>
-    <parameter name="Address1" value="${ShippingAddress}"/>
-    <parameter name="Address2" value=""/>
-    <parameter name="Country" value="${ShippingCountry}"/>
-    <parameter name="State" value="${ShippingState}"/>
-    <parameter name="City" value="${ShippingCity}"/>
-    <parameter name="ZipCode" value="${ShippingZipCode}"/>
-    <parameter name="Phone" value="${ShippingPhone}"/>
-  </module>
-  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage" disabled="true">
+  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address" value="${ShippingAddress}"/>

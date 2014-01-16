@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85048 ordering registered checkout</tags>
+  <description>Registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. After putting one product into the cart these data are used during the checkout process.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -111,9 +113,22 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertElementPresent" target="name=dwfrm_singleshipping_shipToMultiple value=Yes"/>
-  <action name="SelectMultiShipping"/>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shipToMultiple value=Yes"/>
+  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
+  <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
+    <comment>Shipping Required Fields Validation</comment>
+  </module>
+  <module name="modules.checkout.shipping.SelectSavedAddressForShipping">
+    <comment>Select Adress and Shipping Method</comment>
+    <parameter name="AddressName" value="${ShippingAddressTitle}"/>
+  </module>
+  <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
+    <comment>All available Shipping Methods Validation</comment>
+    <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
+    <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
+  </module>
+  <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
+  <action name="CheckoutBilling"/>
+  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>
@@ -121,128 +136,14 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <module name="modules.checkout.shipping.ValidateSplittedProductDataOnMultipleShippingAddressPage">
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
-  </module>
-  <action name="SelectShippingAddressForItem1"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i0_addressList" value="label=(${ShippingAddressTitle})*"/>
-  <action name="SelectShippingAddressForItem2"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i1_addressList" value="label=(${BillingAddressTitle})*"/>
-  <action name="SelectShippingAddressForItem2"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i2_addressList" value="label=(${BillingAddressTitle})*"/>
-  <command name="assertElementPresent" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
-  <action name="GoToShippingMethodPage"/>
-  <command name="clickAndWait" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
-    <comment>Validate First Product's Details Inside Product Summary table</comment>
-    <parameter name="Position" value="1"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
-  </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
-    <comment>Validate Second Product's Details Inside Product Summary table</comment>
-    <parameter name="Position" value="2"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="Price" value="$143.98"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate second shipping address</comment>
+  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
+    <comment>Shipping Address Validation</comment>
     <parameter name="Name" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>
     <parameter name="Address" value="${ShippingAddressStreet}"/>
     <parameter name="City" value="${ShippingAddressCity}"/>
     <parameter name="StateShort" value="${ShippingAddressStateShort}"/>
     <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
     <parameter name="Country" value="${ShippingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate first shipping address</comment>
-    <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
-    <parameter name="Address" value="${BillingAddressStreet}"/>
-    <parameter name="City" value="${BillingAddressCity}"/>
-    <parameter name="StateShort" value="${BillingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${BillingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateSplittedProductDataOnMultipleShippingMethodPage">
-    <parameter name="Position" value="1"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Position2" value="0"/>
-    <parameter name="AddressName" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>
-    <parameter name="Address" value="${ShippingAddressStreet}"/>
-    <parameter name="City" value="${ShippingAddressCity}"/>
-    <parameter name="StateShort" value="${ShippingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
-    <parameter name="Country" value="${ShippingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateSplittedProductDataOnMultipleShippingMethodPage">
-    <parameter name="Position" value="2"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="Position2" value="1"/>
-    <parameter name="AddressName" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
-    <parameter name="Address" value="${BillingAddressStreet}"/>
-    <parameter name="City" value="${BillingAddressCity}"/>
-    <parameter name="StateShort" value="${BillingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${BillingAddressCountry}"/>
-  </module>
-  <action name="SelectShippingMethodForItem1"/>
-  <module name="modules.checkout.shipping.SelectShippingMethodOnMultipleShippingMethodPage">
-    <parameter name="Position" value="0"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
-  </module>
-  <action name="SelectShippingMethodForItem2"/>
-  <module name="modules.checkout.shipping.SelectShippingMethodOnMultipleShippingMethodPage">
-    <parameter name="Position" value="1"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName2}"/>
-  </module>
-  <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_save value=Continue >"/>
-  <action name="GoToBillingPage"/>
-  <command name="clickAndWait" target="name=dwfrm_multishipping_shippingOptions_save value=Continue >"/>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
-    <comment>Validate First Product's Details Inside Product Summary table</comment>
-    <parameter name="Position" value="1"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
-  </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar">
-    <comment>Validate Second Product's Details Inside Product Summary table</comment>
-    <parameter name="Position" value="2"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="Price" value=" $143.98"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate second shipping address</comment>
-    <parameter name="Name" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>
-    <parameter name="Address" value="${ShippingAddressStreet}"/>
-    <parameter name="City" value="${ShippingAddressCity}"/>
-    <parameter name="StateShort" value="${ShippingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
-    <parameter name="Country" value="${ShippingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate first shipping address</comment>
-    <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
-    <parameter name="Address" value="${BillingAddressStreet}"/>
-    <parameter name="City" value="${BillingAddressCity}"/>
-    <parameter name="StateShort" value="${BillingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${BillingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingMethodInSidebarForMultipleShipment">
-    <parameter name="Position" value="1"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingMethodInSidebarForMultipleShipment">
-    <parameter name="Position" value="2"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName2}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage">
     <comment>Validate Order's total amounts and different charges Inside Price Summary tabel</comment>
@@ -253,68 +154,32 @@
   <module name="modules.checkout.billing.SelectSavedAddressForBilling">
     <parameter name="AddressName" value="${BillingAddressTitle}"/>
   </module>
-  <module name="modules.checkout.billing.ValidateRequiredPaymentFields"/>
   <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
     <comment>Validate All Payment Methods available on page</comment>
   </module>
+  <module name="modules.checkout.billing.ValidateRequiredPaymentFields"/>
   <module name="modules.checkout.billing.SelectSavedCreditCardForBilling">
     <comment>Select Billign Address and Credit Card</comment>
     <parameter name="CreditCardType" value="${CreditCardTypeShort}"/>
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
-  <action name="GoToOrderReviewPage"/>
+  <action name="CheckoutPlaceOrder"/>
   <command name="clickAndWait" target="css=.button-fancy-large"/>
-  <module name="modules.checkout.ValidateSplittedProductDataOnPlaceOrderPage">
-    <parameter name="Position" value="2"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="PriceTotal" value="${ProductPrice}"/>
-  </module>
-  <module name="modules.checkout.ValidateSplittedProductDataOnPlaceOrderPage">
-    <parameter name="Position" value="4"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="PriceTotal" value=" $143.98"/>
-  </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar" disabled="true">
-    <comment>Validate First Product's Details Inside Product Summary table</comment>
+  <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
+    <comment>Validate First Product's Details on Place Order page</comment>
     <parameter name="Position" value="1"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="PriceTotal" value="${ProductTotalPrice}"/>
   </module>
-  <module name="modules.checkout.ValidateProductDataInSidebar" disabled="true">
-    <comment>Validate Second Product's Details Inside Product Summary table</comment>
-    <parameter name="Position" value="2"/>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate second shipping address</comment>
+  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
+    <comment>Shipping Address Validation</comment>
     <parameter name="Name" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>
     <parameter name="Address" value="${ShippingAddressStreet}"/>
     <parameter name="City" value="${ShippingAddressCity}"/>
     <parameter name="StateShort" value="${ShippingAddressStateShort}"/>
     <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
     <parameter name="Country" value="${ShippingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
-    <comment>validate first shipping address</comment>
-    <parameter name="Name" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
-    <parameter name="Address" value="${BillingAddressStreet}"/>
-    <parameter name="City" value="${BillingAddressCity}"/>
-    <parameter name="StateShort" value="${BillingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${BillingAddressCountry}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingMethodInSidebarForMultipleShipment">
-    <parameter name="Position" value="1"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
-  </module>
-  <module name="modules.checkout.shipping.ValidateShippingMethodInSidebarForMultipleShipment">
-    <parameter name="Position" value="2"/>
-    <parameter name="ShippingMethodName" value="${ShippingMethodName2}"/>
   </module>
   <module name="modules.checkout.billing.ValidateBillingAddressInSidebar">
     <comment>Validate Billing Address</comment>
@@ -348,10 +213,11 @@
     <comment>Validate First Product Datail</comment>
     <parameter name="Position" value="1"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="1"/>
-    <parameter name="Price" value="${ProductPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <module name="modules.checkout.summary.ValidateMultipleShippingDataSummaryPage">
+  <module name="modules.checkout.summary.ValidateShippingDataSummaryPage">
+    <comment>Validate Shipping Details</comment>
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address" value="${ShippingAddressStreet}"/>
@@ -360,17 +226,6 @@
     <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
     <parameter name="Country" value="${ShippingAddressCountry}"/>
     <parameter name="ShippingMethod" value="${ShippingMethodName}"/>
-    <parameter name="ShippingStatus" value="Not Shipped"/>
-  </module>
-  <module name="modules.checkout.summary.ValidateMultipleShippingDataSummaryPage">
-    <parameter name="FirstName" value="${BillingAddressFirstName}"/>
-    <parameter name="LastName" value="${BillingAddressLastName}"/>
-    <parameter name="Address" value="${BillingAddressStreet}"/>
-    <parameter name="City" value="${BillingAddressCity}"/>
-    <parameter name="StateShort" value="${BillingAddressStateShort}"/>
-    <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
-    <parameter name="Country" value="${BillingAddressCountry}"/>
-    <parameter name="ShippingMethod" value="${ShippingMethodName2}"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
   <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage">
@@ -390,6 +245,22 @@
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage">
     <comment>Validate Oder'S total amonts and various charges</comment>
+  </module>
+  <action name="DeleteAddress"/>
+  <command name="clickAndWait" target="css=.user-account"/>
+  <action name="ConfirmDeleteMessage"/>
+  <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
+  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <command name="assertText" target="css=#addresses h1" value="Addresses"/>
+  <module name="modules.adressmanagement.DeleteLastAddress">
+    <parameter name="AddressCount" value="1"/>
+  </module>
+  <action name="DeleteCreditCard"/>
+  <command name="clickAndWait" target="css=.user-account"/>
+  <action name="ConfirmDeleteMessage"/>
+  <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
+  <module name="modules.payments.DeleteCreditCard">
+    <parameter name="PositionNb" value="1"/>
   </module>
   <action name="Logout"/>
   <command name="waitForElementPresent" target="css=.user-account"/>

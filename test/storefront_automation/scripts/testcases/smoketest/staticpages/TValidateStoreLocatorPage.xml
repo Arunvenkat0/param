@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85035</tags>
+  <description>Validates the page structure of the store locator page.</description>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="OpenStoreLocator"/>
+  <command name="clickAndWait" target="link=regexpi:Store Locator"/>
+  <command name="waitForText" target="css=.breadcrumb-last" value="Store Locator"/>
+  <command name="assertText" target="css=#primary h1" value="Find a Store Near You"/>
+  <command name="assertXpathCount" target="//div[@class=&quot;login-box&quot;]" value="2"/>
+  <command name="assertElementPresent" target="id=dwfrm_storelocator_postalCode"/>
+  <command name="assertElementPresent" target="id=dwfrm_storelocator_maxdistance"/>
+  <command name="assertElementPresent" target="id=dwfrm_storelocator_address_states_stateUSCA"/>
+  <command name="assertElementPresent" target="id=dwfrm_storelocator_address_country"/>
+</testcase>

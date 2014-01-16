@@ -1,41 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85045</tags>
+  <description>Validates the multi-shipping checkout. 
+
+Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).
+
+Sidebar checks for cart have been removed, because sidebar does not show the cart anymore.</description>
   <module name="modules.staticelements.Homepage"/>
-  <action name="SearchAndAddProduct"/>
-  <module name="modules.search.SearchProductByIDOrName">
-    <parameter name="SearchText" value="${ProductID}"/>
+  <module name="modules.usermanagement.RegisterNewUser">
+    <parameter name="FirstName" value="${FirstName}"/>
+    <parameter name="LastName" value="${LastName}"/>
   </module>
-  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Price" value="${ProductPrice}"/>
-  </module>
-  <module name="modules.cart.AddProductToCart">
-    <parameter name="Quantity" value="${ProductQuantity}"/>
-    <parameter name="ProductName" value="${ProductName}"/>
-    <parameter name="ProductPrice" value="${ProductTotalPrice}"/>
-    <parameter name="Position" value="1"/>
-  </module>
-  <module name="modules.cart.GotoCart">
-    <comment>Go to Cart View</comment>
-  </module>
-  <module name="modules.cart.ValidateCartContentForProduct">
-    <comment>Validate carted product particulars</comment>
-    <parameter name="Name" value="${ProductName}"/>
-    <parameter name="SinglePrice" value="${ProductPrice}"/>
-    <parameter name="TotalPriceProduct" value="${ProductTotalPrice}"/>
-    <parameter name="Quantity" value="${ProductQuantity}"/>
-    <parameter name="TableRow" value="1"/>
-  </module>
-  <command name="clickAndWait" target="// button[contains(@class,'checkout-as-guest')]"/>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shipToMultiple value=Yes"/>
-  <command name="click" target="//div[@class='checkoutmultishipping']//tr[1]//div[@class='editaddress']/a"/>
-  <action name="SelectShippingAddressForItem1"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i0_addressList" value="label=(${ShippingAddressTitle})*"/>
-  <action name="SelectShippingAddressForItem2"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i1_addressList" value="label=(${BillingAddressTitle})*"/>
-  <action name="SelectShippingAddressForItem2"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i2_addressList" value="label=(${BillingAddressTitle})*"/>
   <action name="NavigateToAddressManagement"/>
   <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
   <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
@@ -107,6 +82,32 @@
     <parameter name="ExpireDateYear" value="${CreditCardExpiryYear}"/>
   </module>
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
+  <action name="SearchAndAddProduct"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <parameter name="SearchText" value="${ProductID}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
+  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="Price" value="${ProductPrice}"/>
+  </module>
+  <module name="modules.cart.AddProductToCart">
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="ProductName" value="${ProductName}"/>
+    <parameter name="ProductPrice" value="${ProductTotalPrice}"/>
+    <parameter name="Position" value="1"/>
+  </module>
+  <module name="modules.cart.GotoCart">
+    <comment>Go to Cart View</comment>
+  </module>
+  <module name="modules.cart.ValidateCartContentForProduct">
+    <comment>Validate carted product particulars</comment>
+    <parameter name="Name" value="${ProductName}"/>
+    <parameter name="SinglePrice" value="${ProductPrice}"/>
+    <parameter name="TotalPriceProduct" value="${ProductTotalPrice}"/>
+    <parameter name="Quantity" value="${ProductQuantity}"/>
+    <parameter name="TableRow" value="1"/>
+  </module>
   <action name="CheckOutShipping"/>
   <command name="clickAndWait" target="css=.cart-actions button[value='Checkout']"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
@@ -135,8 +136,6 @@
   <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i0_addressList" value="label=(${ShippingAddressTitle})*"/>
   <action name="SelectShippingAddressForItem2"/>
   <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i1_addressList" value="label=(${BillingAddressTitle})*"/>
-  <action name="SelectShippingAddressForItem2"/>
-  <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i2_addressList" value="label=(${BillingAddressTitle})*"/>
   <command name="assertElementPresent" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
   <action name="GoToShippingMethodPage"/>
   <command name="clickAndWait" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
@@ -151,8 +150,8 @@
     <comment>Validate Second Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="2"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="Price" value="$143.98"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
     <comment>validate second shipping address</comment>
@@ -187,7 +186,7 @@
   <module name="modules.checkout.shipping.ValidateSplittedProductDataOnMultipleShippingMethodPage">
     <parameter name="Position" value="2"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
+    <parameter name="Quantity" value="1"/>
     <parameter name="Position2" value="1"/>
     <parameter name="AddressName" value="${BillingAddressFirstName} ${BillingAddressLastName}"/>
     <parameter name="Address" value="${BillingAddressStreet}"/>
@@ -220,8 +219,8 @@
     <comment>Validate Second Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="2"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="Price" value=" $143.98"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <module name="modules.checkout.shipping.ValidateShippingAddressInSidebarForMultipleShipment">
     <comment>validate second shipping address</comment>
@@ -278,8 +277,8 @@
   <module name="modules.checkout.ValidateSplittedProductDataOnPlaceOrderPage">
     <parameter name="Position" value="4"/>
     <parameter name="Name" value="${ProductName}"/>
-    <parameter name="Quantity" value="2"/>
-    <parameter name="PriceTotal" value=" $143.98"/>
+    <parameter name="Quantity" value="1"/>
+    <parameter name="PriceTotal" value="${ProductPrice}"/>
   </module>
   <module name="modules.checkout.ValidateProductDataInSidebar" disabled="true">
     <comment>Validate First Product's Details Inside Product Summary table</comment>
