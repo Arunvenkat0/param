@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C85050</tags>
+  <description>Validates the search functionality for a product set:
+- Search item by name
+- Validate the result page
+
+Disabled because fails in 13.3.</description>
+  <module name="modules.staticelements.Homepage"/>
+  <action name="SearchProduct"/>
+  <module name="modules.search.SearchProductByIDOrName">
+    <comment>Search for the product set</comment>
+    <parameter name="SearchText" value="${ProductSetName}"/>
+  </module>
+  <module name="modules.catalog.ValidateProductSetPage">
+    <parameter name="NumberOfProducts" value="${NumberOfProductsInSet}"/>
+    <parameter name="ProductSetName" value="${ProductSetName}"/>
+    <parameter name="FirstProductName" value="${SecondProductName}"/>
+    <parameter name="SecondProductName" value="${SecondProductName}"/>
+  </module>
+  <action name="Return2Home"/>
+  <module name="modules.staticelements.Return2Home">
+    <comment>Back to Homepage</comment>
+  </module>
+</testcase>

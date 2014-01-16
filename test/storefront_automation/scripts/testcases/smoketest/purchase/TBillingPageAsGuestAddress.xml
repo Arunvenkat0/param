@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>C84698</tags>
+  <description>Expected Results
+
+    Confirm that an anonymous user does not see a dropdown to select saved addresses.
+    The address fields on this page are blank unless user chose on the shipping page to use that as the billing address.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -22,7 +27,7 @@
   <command name="click" target="css=.Color .emptyswatch .swatchanchor">
     <comment>Select size.</comment>
   </command>
-  <command name="pause" value="100"/>
+  <command name="pause" value="1000"/>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${FirstProductQuantity}"/>
     <parameter name="ProductName" value="${FirstProductName}"/>
@@ -128,9 +133,6 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
@@ -142,22 +144,23 @@
   <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
     <comment>Proceed to billing.</comment>
   </command>
+  <module name="modules.checkout.billing.ValidateBillingAddressBlankFields"/>
+  <command name="assertNotElementPresent" target="css=.select-address">
+    <comment>A user who has not saved an address yet does not see a dropdown.</comment>
+  </command>
+  <action name="GoBackToShipping"/>
+  <command name="clickAndWait" target="css=.mini-shipment a"/>
+  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
+    <comment>Use the same address for billing by ticking the checkbox.</comment>
+  </command>
+  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
+    <comment>Proceed to billing.</comment>
+  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
-    <parameter name="FirstName" value="${ShippingFirstName}"/>
-    <parameter name="LastName" value="${ShippingLastName}"/>
-    <parameter name="Address1" value="${ShippingAddress}"/>
-    <parameter name="Address2" value=""/>
-    <parameter name="Country" value="${ShippingCountry}"/>
-    <parameter name="State" value="${ShippingState}"/>
-    <parameter name="City" value="${ShippingCity}"/>
-    <parameter name="ZipCode" value="${ShippingZipCode}"/>
-    <parameter name="Phone" value="${ShippingPhone}"/>
-  </module>
-  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage" disabled="true">
+  <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address" value="${ShippingAddress}"/>
