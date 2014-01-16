@@ -17,4 +17,4 @@ If you are not using the build cartridge the comments can be safely removed.
 <![endif]-->
 
 <iscomment>Demandware active data scripts</iscomment>
-<isactivedatahead />
+<isactivedatahead/>
