@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-
   <tags>C84710</tags>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -36,7 +34,8 @@
   <command name="assertVisible" target="id=at3wincontent"/>
   <command name="waitForElementPresent" target="css=.at3winwrapper"/>
   <command name="click" target="id=at3winheaderclose"/>
-  <command name="waitForNotVisible" target="id=at3wincontent"/>
+  <command name="waitForNotVisible" disabled="true" target="id=at3wincontent"/>
+  <command name="waitForElementPresent" target="css=.addthis_button_facebook"/>
   <command name="assertElementPresent" target="css=.addthis_button_facebook">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>
