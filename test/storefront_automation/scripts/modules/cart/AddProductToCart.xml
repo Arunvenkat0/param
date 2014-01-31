@@ -14,6 +14,8 @@ Position:</description>
   <parameter name="ProductPrice"/>
   <parameter name="Position"/>
   <action name="EnterQuantity"/>
+  <command name="waitForElementPresent" target="id=Quantity"/>
+  <command name="click" target="id=Quantity"/>
   <command name="type" target="id=Quantity" value="@{Quantity}">
     <comment>Enter desired quantity.</comment>
   </command>
