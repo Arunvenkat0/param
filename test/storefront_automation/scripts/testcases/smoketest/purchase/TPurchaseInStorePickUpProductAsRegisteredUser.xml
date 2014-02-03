@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85057 ordering registered checkout instore pickup</tags>
-  <description>DISABLED:  Requires &quot;In Store&quot; configuration.
-
+  <description>Test Case ID:() 
 Registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. 
 After putting a in store pickup product into the cart these data are used during the checkout process.
 The instore function is checked at the cart and at the special store shipping page.</description>

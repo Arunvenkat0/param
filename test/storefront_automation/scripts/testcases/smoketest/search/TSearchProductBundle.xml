@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85049</tags>
-  <description>Validates the search functionality for a product bundle:
+  <description>Test Case ID:() 
+Validates the search functionality for a product bundle:
 - Search item by ID
 - Validate the result page</description>
   <module name="modules.staticelements.Homepage"/>

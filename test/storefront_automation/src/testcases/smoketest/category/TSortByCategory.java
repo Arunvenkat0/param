@@ -2,13 +2,12 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package testcases.smoketest.category;
-import org.junit.Ignore;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED - test is incomplete.
+ * Test Case ID:() 
  Steps
  Homepage -> Select a category and its sub category
  Select all the sort options in the dropdown one by one.
@@ -22,7 +21,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.category.TSortByCategory")
-@Ignore
 public class TSortByCategory extends AbstractScriptTestCase
 {
 }

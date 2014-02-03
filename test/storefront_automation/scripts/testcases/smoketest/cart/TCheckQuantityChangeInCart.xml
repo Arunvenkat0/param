@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84763</tags>
-  <description>cart quantity update
+  <description>Test Case ID:(C84763)  
+
+cart quantity update
 Validates the quantity update function.
 
 - adds two products to the cart

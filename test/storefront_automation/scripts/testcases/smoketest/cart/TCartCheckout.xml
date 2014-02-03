@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <tags>?</tags>
+  <description>Test Case ID:(?) </description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
@@ -72,7 +74,6 @@
   <command name="assertElementPresent" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   <command name="assertTextPresent" value="Select or Enter a Shipping Address"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.email-input"/>
   <command name="type" target="css=.email-input" value="${Email}"/>
   <command name="type" target="css=.password-input" value="${Password}"/>
   <command name="clickAndWait" target="name=dwfrm_login_login value=Login"/>

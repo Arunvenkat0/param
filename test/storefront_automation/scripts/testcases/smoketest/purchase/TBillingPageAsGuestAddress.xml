@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84698</tags>
-  <description>Expected Results
+  <description>Test Case ID:() 
+Expected Results
 
     Confirm that an anonymous user does not see a dropdown to select saved addresses.
     The address fields on this page are blank unless user chose on the shipping page to use that as the billing address.</description>
