@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84706</tags>
-  <description>Expected Results
+  <description>Test Case ID:() 
+Expected Results
 
    On the right-hand side, the information entered on the shipping page is summarized:
 -name

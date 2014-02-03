@@ -7,7 +7,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
+ * Test Case ID:() 
+ This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
  
  - open category, subcategory, first product
  - open staf overlay and close it with x and with cancel

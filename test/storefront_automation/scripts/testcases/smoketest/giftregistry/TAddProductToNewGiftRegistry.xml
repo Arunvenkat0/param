@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85043</tags>
-  <description>Creates a gift registry for a new user. Performs the following steps:
+  <description>Test Case ID:() 
+Creates a gift registry for a new user. Performs the following steps:
 - register a new user
 - create a gift registry
 - make this gift registry public

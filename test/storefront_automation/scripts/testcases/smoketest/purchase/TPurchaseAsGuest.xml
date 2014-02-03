@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C85047 C84683 ordering guest checkout</tags>
-  <description>Guest checkout: 
+  <tags>C85047 C84683</tags>
+  <description>Test Case ID:() 
+Guest checkout: 
 
 * Add some products
 * View cart

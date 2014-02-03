@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84767</tags>
-  <description>quick view broken RAP-2406
+  <description>Test Case ID:() 
+
 Checks the add to cart behaviour at the quickview overlay.
 
 - opens the quick view of the first product of a product grid

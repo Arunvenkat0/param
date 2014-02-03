@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C85033 search</tags>
-  <description>This testcase validates the search feature. Four searches are performed and the results validated:
+  <tags>C85033</tags>
+  <description>Test Case ID:() 
+This testcase validates the search feature. Four searches are performed and the results validated:
 1. Search for product by ID - validation of product details page
 2. Search for product by complete name  - validation of product details page
 3. Search for products keyword - validation of overview page with search results

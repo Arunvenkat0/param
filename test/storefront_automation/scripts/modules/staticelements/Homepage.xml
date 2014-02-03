@@ -2,15 +2,18 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>homepage</tags>
   <description>Goes to the start url of the store and resets the cookies, effectivly cleaning the session state and reseting the browser environment for the test run.</description>
+  <module name="library.function.FOpenURLAndRemoveCookies">
+    <parameter name="URL" value="${shopURL}"/>
+  </module>
   <action name="FirstOpenHomePage">
     <comment>First open to get the context for later cookie cleaning.</comment>
   </action>
-  <command name="open" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies">
+  <command name="open" disabled="true" value="${shopURL}"/>
+  <command name="deleteAllVisibleCookies" disabled="true">
     <comment>Cleans all cookies in the current domain context.</comment>
   </command>
   <action name="SecondOpenHomePage">
     <comment>We have to open the page again to get a new page with fresh cookies.</comment>
   </action>
-  <command name="open" value="${shopURL}"/>
+  <command name="open" disabled="true" value="${shopURL}"/>
 </scriptmodule>

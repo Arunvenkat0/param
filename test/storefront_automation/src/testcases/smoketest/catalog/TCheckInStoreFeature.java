@@ -2,14 +2,12 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package testcases.smoketest.catalog;
-import org.junit.Ignore;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED:  Requires "In Store" configuration.
- 
+ * Test Case ID:() 
  Checks the InStore feature at the PDP.
  Validates the search field including the error handling.
  - searches for a Store
@@ -21,7 +19,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckInStoreFeature")
-@Ignore
 public class TCheckInStoreFeature extends AbstractScriptTestCase
 {
 }

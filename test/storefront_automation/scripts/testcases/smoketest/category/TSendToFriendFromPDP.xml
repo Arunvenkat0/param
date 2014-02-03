@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84770</tags>
-  <description>This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
+  <description>Test Case ID:() 
+This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
 
 - open category, subcategory, first product
 - open staf overlay and close it with x and with cancel
@@ -100,13 +101,7 @@
   <command name="click" target="link=See Privacy Policy"/>
   <command name="assertTextPresent" value="See Privacy Policy"/>
   <action name="ClosePrivacyPolicy"/>
-  <command name="click" target="css=.ui-icon-closethick">
-    <comment>Close privacy policy pop-up reader using 'X'</comment>
-  </command>
-  <action name="OpenSTAFOverlay"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
+  <command name="click" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
   <module name="modules.catalog.ValidateSTAFForms"/>
   <action name="SendMessage"/>
   <command name="click" target="css=#send-to-friend-dialog .send-button"/>
@@ -114,8 +109,6 @@
   <action name="CloseConfirmationDialog"/>
   <command name="click" target="css=.close-button"/>
   <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <action name="ClosePrivacyPolicy"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
   <action name="GoToWelcomePage"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
   <command name="clickAndWait" target="css=.user-account"/>
