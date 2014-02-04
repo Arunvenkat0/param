@@ -21,6 +21,7 @@
   <command name="click" target="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']">
     <comment>Pick a size.</comment>
   </command>
+  <command name="pause" value="1000"/>
   <command name="waitForElementPresent" target="css=.size .selected-value">
     <comment>Check if size has been selected.</comment>
   </command>
