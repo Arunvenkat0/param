@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85048</tags>
-  <description>Test Case ID:() 
+  <description>Test Case ID:(C85048) 
 Registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. After putting one product into the cart these data are used during the checkout process.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">

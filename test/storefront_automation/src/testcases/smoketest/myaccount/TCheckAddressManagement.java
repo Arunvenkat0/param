@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84708) 
  Account address management:
  => adds two addresses
  => edits one

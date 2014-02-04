@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84778</tags>
-  <description>Test Case ID:() 
+  <description>Test Case ID:(C84778) 
 customer service contact us
 Validates the contact us form and fills it with no data, invalid data and valid data to send it.</description>
   <module name="modules.staticelements.Homepage"/>

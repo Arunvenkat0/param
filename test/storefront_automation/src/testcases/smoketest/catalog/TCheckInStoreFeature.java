@@ -8,7 +8,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * DISABLED: Needs In Store Configuration.
+ Test Case ID:(C85056)
  Checks the InStore feature at the PDP.
  Validates the search field including the error handling.
  - searches for a Store

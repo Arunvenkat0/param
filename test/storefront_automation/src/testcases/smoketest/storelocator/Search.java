@@ -8,7 +8,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * DISABLED: Store data has to be configured in the Business Manager 
+ Test Case ID:(?)
  Preconditions
  Store data has to be configured in the Business Manager (Sites > Online Marketing > Stores).
  Steps

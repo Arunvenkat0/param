@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84698) 
  Expected Results
  
  Confirm that an anonymous user does not see a dropdown to select saved addresses.

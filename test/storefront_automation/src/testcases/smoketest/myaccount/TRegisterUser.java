@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84722) 
  Registers a new customer.
  Checks if the new user can login by logging out and logging in again.
  */

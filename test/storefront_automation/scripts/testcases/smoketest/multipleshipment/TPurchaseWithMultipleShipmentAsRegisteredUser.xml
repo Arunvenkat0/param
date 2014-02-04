@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85045</tags>
-  <description>Test Case ID:() 
+  <description>DISABLED: Requires Multi-shipment preference enabled.
+Test Case ID:(C85045) 
 Validates the multi-shipping checkout. 
 
 Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).

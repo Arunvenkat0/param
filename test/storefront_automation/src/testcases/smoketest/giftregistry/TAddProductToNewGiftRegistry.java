@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85043) 
  Creates a gift registry for a new user. Performs the following steps:
  - register a new user
  - create a gift registry

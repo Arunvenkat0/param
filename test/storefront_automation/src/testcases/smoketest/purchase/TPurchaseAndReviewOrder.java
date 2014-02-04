@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85046) 
  Purchases a product as registered user and checks the order review feature.
  The steps in detail:
  - register a new user

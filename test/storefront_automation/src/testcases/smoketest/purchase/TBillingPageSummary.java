@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84706) 
  Expected Results
  
  On the right-hand side, the information entered on the shipping page is summarized:

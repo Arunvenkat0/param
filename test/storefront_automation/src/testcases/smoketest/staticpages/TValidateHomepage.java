@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() Validates the homepage
+ * Test Case ID:(C85051) Validates the homepage
  */
 @ScriptName
 ("testcases.smoketest.staticpages.TValidateHomepage")
