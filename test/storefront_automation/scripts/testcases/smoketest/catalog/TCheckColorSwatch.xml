@@ -3,7 +3,7 @@
   <tags>C84682</tags>
   <description>Test Case ID:(C84682) Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.
 
-This is broken in 13.4. RAP-2406</description>
+</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">

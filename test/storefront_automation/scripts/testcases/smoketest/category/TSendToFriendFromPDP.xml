@@ -101,7 +101,10 @@ This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ
   <command name="click" target="link=See Privacy Policy"/>
   <command name="assertTextPresent" value="See Privacy Policy"/>
   <action name="ClosePrivacyPolicy"/>
-  <command name="click" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
+  <command name="click" target="css=.ui-icon-closethick"/>
+  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <command name="click" target="css=.send-to-friend"/>
+  <command name="click" disabled="true" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
   <module name="modules.catalog.ValidateSTAFForms"/>
   <action name="SendMessage"/>
   <command name="click" target="css=#send-to-friend-dialog .send-button"/>
@@ -109,6 +112,8 @@ This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ
   <action name="CloseConfirmationDialog"/>
   <command name="click" target="css=.close-button"/>
   <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="ClosePrivacyPolicyPopup"/>
+  <command name="click" target="css=.ui-icon-closethick"/>
   <action name="GoToWelcomePage"/>
   <command name="waitForElementPresent" target="css=.user-account"/>
   <command name="clickAndWait" target="css=.user-account"/>
