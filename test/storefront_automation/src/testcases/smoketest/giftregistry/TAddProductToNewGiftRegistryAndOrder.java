@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85044) 
  Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:
  - register a new user
  - create a new giftregistry

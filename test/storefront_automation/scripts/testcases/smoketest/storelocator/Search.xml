@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Test Case ID:() 
+  <tags>?</tags>
+  <description>DISABLED: Store data has to be configured in the Business Manager 
+Test Case ID:(?) 
 Preconditions
 Store data has to be configured in the Business Manager (Sites > Online Marketing > Stores).
 Steps

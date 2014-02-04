@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84782,C84783) 
  Opens a category page and changes the number of items to be displayed. Validates the correctness of the result.
  */
 @ScriptName

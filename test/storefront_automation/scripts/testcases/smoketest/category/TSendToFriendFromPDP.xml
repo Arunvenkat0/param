@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84770</tags>
-  <description>Test Case ID:() 
+  <description>Test Case ID:(C84770) 
 This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
 
 - open category, subcategory, first product

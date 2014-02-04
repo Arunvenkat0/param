@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85033) 
  This testcase validates the search feature. Four searches are performed and the results validated:
  1. Search for product by ID - validation of product details page
  2. Search for product by complete name  - validation of product details page

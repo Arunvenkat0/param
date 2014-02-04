@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85029) 
  Checks the presence of different product images in quickview and product details page.
  */
 @ScriptName

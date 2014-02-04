@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84757,C84776) 
  1.All is working and linked as expected.
  
  2.Text is correct.

@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85055 C84762) 
  Adds two products to the cart and modifies the quantities:
  product1: quantitiy = 1, no discount
  product2: quantitiy = 2, no discount

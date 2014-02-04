@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C85042) 
  Validates the behaviour of the quickview inside the product catalog.
  
  This is broken in 13.4. RAP-2406

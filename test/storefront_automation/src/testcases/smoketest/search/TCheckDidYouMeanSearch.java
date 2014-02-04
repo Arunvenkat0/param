@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:() 
+ * Test Case ID:(C84772 C85032) 
  This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated.
  Afterwards is the did you mean term clicked an dthe result page (product grid) is validated.
  

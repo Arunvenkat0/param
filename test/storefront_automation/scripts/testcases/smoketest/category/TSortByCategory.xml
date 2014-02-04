@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84781 (incomplete)</tags>
-  <description>Test Case ID:() 
+  <description>DISABLED This test is not complete.
+Test Case ID:(C84781) 
+
 Steps
 Homepage -> Select a category and its sub category
 Select all the sort options in the dropdown one by one.
