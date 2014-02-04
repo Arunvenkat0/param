@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85057 ordering registered checkout instore pickup</tags>
   <description>Test Case ID:() 
 Registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. 

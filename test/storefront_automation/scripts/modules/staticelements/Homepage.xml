@@ -5,15 +5,4 @@
   <module name="library.function.FOpenURLAndRemoveCookies">
     <parameter name="URL" value="${shopURL}"/>
   </module>
-  <action name="FirstOpenHomePage">
-    <comment>First open to get the context for later cookie cleaning.</comment>
-  </action>
-  <command name="open" disabled="true" value="${shopURL}"/>
-  <command name="deleteAllVisibleCookies" disabled="true">
-    <comment>Cleans all cookies in the current domain context.</comment>
-  </command>
-  <action name="SecondOpenHomePage">
-    <comment>We have to open the page again to get a new page with fresh cookies.</comment>
-  </action>
-  <command name="open" disabled="true" value="${shopURL}"/>
 </scriptmodule>
