@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84702</tags>
-  <description>Preconditions
+  <description>Test Case ID:(C84702) 
+Preconditions
 
 NOTE:
 
@@ -64,7 +65,8 @@ Expected Results
     <comment>Wait for the color to be selected.</comment>
   </command>
   <action name="SelectSize"/>
-  <command name="click" target="css=.size .emptyswatch a">
+  <command name="click" target="css=.size .emptyswatch a[title=S]"/>
+  <command name="click" disabled="true" target="css=.size .emptyswatch a">
     <comment>Select a random size by clicking one of the size options.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.size .selected">

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Executes FOpenURL 'URL'.  2 Deletes cookies.  3. Executes FOpenURL 'URL' again.</description>
+  <parameter name="URL"/>
+  <module name="library.function.FOpenURL">
+    <parameter name="URL" value="@{URL}"/>
+  </module>
+  <command name="deleteAllVisibleCookies"/>
+  <module name="library.function.FOpenURL">
+    <parameter name="URL" value="@{URL}"/>
+  </module>
+</scriptmodule>

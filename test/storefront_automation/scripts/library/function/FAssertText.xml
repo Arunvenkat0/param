@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Waits for the 'textElement' to exist.  2. Asserts that the 'textElement' matches the 'textPattern'.</description>
+  <parameter name="textElement"/>
+  <parameter name="textPattern"/>
+  <command name="waitForElementPresent" target="@{textElement}"/>
+  <command name="assertText" target="@{textElement}" value="@{textPattern}"/>
+</scriptmodule>

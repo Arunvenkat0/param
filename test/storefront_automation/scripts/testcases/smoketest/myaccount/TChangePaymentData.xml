@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84737 account payment</tags>
-  <description>Payment data account management:
+  <tags>C84737</tags>
+  <description>Test Case ID:(C84737) 
+Payment data account management:
 => adds credit cards:
 - Visa
 - American Express

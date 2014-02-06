@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Executes FType 'typeElement' 'inputString'  2.  Waits to verify that the 'typeElement' matches the the 'inputString' text.</description>
+  <parameter name="typeElement"/>
+  <parameter name="inputString"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="@{typeElement}"/>
+    <parameter name="inputString" value="@{inputElement}"/>
+  </module>
+  <command name="waitForText" target="@{typeElement}" value="@{inputString}">
+    <comment>Waits for the 'typeElement' to contain the 'inputString' text. This allows for input display lag.</comment>
+  </command>
+</scriptmodule>

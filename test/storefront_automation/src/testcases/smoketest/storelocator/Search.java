@@ -2,12 +2,15 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package testcases.smoketest.storelocator;
+import org.junit.Ignore;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Preconditions
+ * DISABLED: Store data has to be configured in the Business Manager 
+ Test Case ID:(?)
+ Preconditions
  Store data has to be configured in the Business Manager (Sites > Online Marketing > Stores).
  Steps
  Homepage -> STORE LOCATOR
@@ -42,6 +45,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.storelocator.Search")
+@Ignore
 public class Search extends AbstractScriptTestCase
 {
 }

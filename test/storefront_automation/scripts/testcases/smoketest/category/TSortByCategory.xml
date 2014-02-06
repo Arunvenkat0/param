@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84781 (incomplete)</tags>
-  <description>DISABLED - test is incomplete.
+  <description>DISABLED This test is not complete.
+Test Case ID:(C84781) 
+
 Steps
 Homepage -> Select a category and its sub category
 Select all the sort options in the dropdown one by one.
@@ -33,17 +35,11 @@ at 4. This causes the first result page to appear.</description>
   <module name="testcases.smoketest.category.MChangeSortTypeNoPagination">
     <parameter name="SortMethod" value="Price High To Low"/>
   </module>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-name')]/h2/a"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-name')]/h2/a" value="Name1"/>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[2]//div[contains(@class,'product-name')]/h2/a"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[2]//div[contains(@class,'product-name')]/h2/a" value="Name2"/>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[3]//div[contains(@class,'product-name')]/h2/a"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[3]//div[contains(@class,'product-name')]/h2/a" value="Name3"/>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[4]//div[contains(@class,'product-name')]/h2/a"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[4]//div[contains(@class,'product-name')]/h2/a" value="Name4"/>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[5]//div[contains(@class,'product-name')]/h2/a"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[5]//div[contains(@class,'product-name')]/h2/a" value="Name5"/>
-  <command name="waitForElementPresent" target="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-pricing')]/span"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-pricing')]/span" value="Price1"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[2]//div[contains(@class,'product-pricing')]/span" value="Price2"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[3]//div[contains(@class,'product-pricing')]/span" value="Price3"/>

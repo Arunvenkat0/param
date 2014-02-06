@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Waits for the 'typeElement' to exist. 2 Types the 'inputString' to the 'typeElement'.</description>
+  <parameter name="typeElement"/>
+  <parameter name="inputString"/>
+  <command name="waitForElementPresent" target="@{typeElement}"/>
+  <command name="type" target="@{typeElement}" value="@{inputString}"/>
+</scriptmodule>

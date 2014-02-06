@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Executes FClick 'clickElement'  2. Waits for the 'waitForElement' to exist</description>
+  <parameter name="clickElement"/>
+  <parameter name="waitForElement"/>
+  <module name="library.function.FClick">
+    <comment>1. Waits for the 'clickElement' to exist.  2. Clicks the 'clickElement'.</comment>
+    <parameter name="clickElement" value="@{clickElement}"/>
+  </module>
+  <command name="waitForElementPresent" target="@{waitForElement}"/>
+</scriptmodule>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C85055 C84762 cart broken</tags>
-  <description>Adds two products to the cart and modifies the quantities:
+  <tags>C85055 C84762</tags>
+  <description>Test Case ID:(C85055 C84762) 
+Adds two products to the cart and modifies the quantities:
 product1: quantitiy = 1, no discount
 product2: quantitiy = 2, no discount
 
