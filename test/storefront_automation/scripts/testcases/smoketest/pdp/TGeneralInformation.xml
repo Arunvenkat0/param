@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84710</tags>
+  <description>Test Case ID:(C84710)</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for the product set</comment>
@@ -35,14 +36,15 @@
   <command name="waitForElementPresent" target="css=.at3winwrapper"/>
   <command name="click" target="id=at3winheaderclose"/>
   <command name="waitForNotVisible" disabled="true" target="id=at3wincontent"/>
-  <command name="waitForElementPresent" target="css=.addthis_button_facebook"/>
-  <command name="assertElementPresent" target="css=.addthis_button_facebook">
+  <command name="waitForElementPresent" target="css=.addthis_button_facebook">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>
   <command name="click" target="css=.addthis_button_facebook">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>
   <command name="waitForPopUp"/>
+  <command name="pause" value="2000"/>
   <command name="selectWindow" target="title=Facebook"/>
+  <command name="click" target="name=cancel"/>
   <command name="close"/>
 </testcase>

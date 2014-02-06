@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85046</tags>
-  <description>Purchases a product as registered user and checks the order review feature.
+  <description>Test Case ID:(C85046) 
+Purchases a product as registered user and checks the order review feature.
 The steps in detail:
 - register a new user
 - enter a credit card

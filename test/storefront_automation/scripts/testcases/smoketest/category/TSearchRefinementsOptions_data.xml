@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <category>Mens</category>
-  <BMurl>http://dev03.lab02b.dw.demandware.net/on/demandware.store/Sites-Site</BMurl>
-  <bmlogin>admin</bmlogin>
-  <BM>new pw for automated tests</BM>
   <BlockCount>0</BlockCount>
 </data>

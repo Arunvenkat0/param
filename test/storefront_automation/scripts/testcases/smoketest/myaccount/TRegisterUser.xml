@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84722 customer registration</tags>
-  <description>Registers a new customer.
+  <tags>C84722</tags>
+  <description>Test Case ID:(C84722) 
+Registers a new customer.
 Checks if the new user can login by logging out and logging in again.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">

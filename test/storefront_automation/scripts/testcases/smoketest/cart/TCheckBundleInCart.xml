@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84766</tags>
-  <description>smoketest cart bundle
-Validates a bundle product in the cart and has the following steps:
-
-- open PDP of Bundle
-- add bundle to cart
-- checks that price is only shown at the top level, not by each individual line item
-- checks that quantity is only at the top level editable, not by each individual line item
-- adds bundle to wish list
-- adds bundle to gift registry
-- clicks each product name to verify that PDP of the product is shown
-- removes bundle from cart</description>
+  <description>Test Case ID: (C84766)  Smoke Test » Cart » Bundle 
+</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">

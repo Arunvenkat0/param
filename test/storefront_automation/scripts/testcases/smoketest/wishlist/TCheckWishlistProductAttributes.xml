@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85052</tags>
-  <description>Checks for changing priority and quanity of wishlist items.
+  <description>Test Case ID:(C85052)
+
+Checks for changing priority and quanity of wishlist items.
 - search for a product
 - add to wishlist
 - register new user

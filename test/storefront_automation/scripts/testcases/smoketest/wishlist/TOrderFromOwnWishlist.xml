@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85036</tags>
-  <description>Test with placing an order from a wishlist:
+  <description>Test Case ID:(C85036) 
+Test with placing an order from a wishlist:
 Tests the public wishlist feature.
 - search for a product
 - add to wishlist

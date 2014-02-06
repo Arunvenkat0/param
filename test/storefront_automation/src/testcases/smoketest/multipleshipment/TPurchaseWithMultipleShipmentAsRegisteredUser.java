@@ -8,9 +8,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED NOTE: This requires the Multi Shipment preference to be turned on.  It is NOT on by default.
- 
- 
+ * DISABLED: Requires Multi-shipment preference enabled.
+ Test Case ID:(C85045)
  Validates the multi-shipping checkout.
  
  Do not forget to set the custom preference for the site to activate it (Storefront Configuration > Enable MultiShipping).

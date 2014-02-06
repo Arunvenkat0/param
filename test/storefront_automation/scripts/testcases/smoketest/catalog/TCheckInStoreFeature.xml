@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85056</tags>
-  <description>DISABLED:  Requires &quot;In Store&quot; configuration.
-
+  <description>DISABLED: Needs In Store Configuration.
+Test Case ID:(C85056) 
 Checks the InStore feature at the PDP. 
 Validates the search field including the error handling.
 - searches for a Store
