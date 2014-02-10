@@ -9,14 +9,15 @@
     <scm>
         <connection>scm:git:git@github.com:Demandware/Site-Genesis.git</connection>
         <developerConnection>scm:git:git@github.com:Demandware/Site-Genesis.git</developerConnection>
-    </scm>
+      <tag>sitegen-14.3.0.2</tag>
+  </scm>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>dw.ecom</groupId>
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>14.3.0.2-SNAPSHOT</version>
+    <version>14.3.0.2</version>
     <description>SiteGenesis Source</description>
 
 	<!--<modules>
