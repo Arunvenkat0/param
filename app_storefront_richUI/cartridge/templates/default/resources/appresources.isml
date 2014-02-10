@@ -9,7 +9,8 @@
 	
 	var clientcache = {
 		LISTING_INFINITE_SCROLL : (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
-		LISTING_REFINE_SORT : true
+		LISTING_REFINE_SORT : true,
+		LISTING_SEARCHSUGGEST_LEGACY : (dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? true : false)
 	};	
 	
 	
