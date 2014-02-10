@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>dw.maventools</groupId>
+        <groupId>com.demandware.maventools</groupId>
         <artifactId>project-pom</artifactId>
-        <version>12.3.0.1</version>
+        <version>14.3.0.5</version>
     </parent>
     
     <scm>
@@ -15,10 +15,14 @@
     <groupId>dw.ecom</groupId>
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
-       <packaging>pom</packaging>
+    <packaging>pom</packaging>
     <version>14.3.0.2-SNAPSHOT</version>
-    <description>SiteGenesis</description>
+    <description>SiteGenesis Source</description>
 
+	<modules>
+		<module>storefront_refapp</module>
+    </modules>
+	
     <build>
         <plugins>
             <plugin>
