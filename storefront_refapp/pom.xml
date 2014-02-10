@@ -24,8 +24,8 @@
         </dependencies>
     </dependencyManagement>
     
-	<properties>
-		<jdk.artifactId>jdk-windows-server-x64</jdk.artifactId>
+    <properties>
+
 		<dw.dependencies.jdk>1.7.0.51_24</dw.dependencies.jdk>
     </properties>
     
