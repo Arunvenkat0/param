@@ -76,19 +76,9 @@
             <regexpmapper from="[^/]*(.*)" to="\1"  handledirsep="yes" />
         </move>
 
-        <antcall target="make.jdk.executable" />
         <delete dir="${cartridge.dist}/jdk.unpack" />
     </target>
 	
-    <target name="make.jdk.executable" if="os.family.unix">
-        <antcall target="dwbuild.lib.unix.make.executable">
-            <param name="target.dir" value="${dw.instance.java.home}/bin"/>
-        </antcall>
-       <antcall target="dwbuild.lib.unix.make.executable">
-           <param name="target.dir" value="${dw.instance.java.home}/jre/bin"/>
-       </antcall>
-    </target>
-
 </project>
 
 
