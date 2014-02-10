@@ -4,6 +4,16 @@
     <property name="app.name" value="project_${cartridge.name}" />
     <property name="refapp.data" value="sg20_demo_data_no_hires_images" />
     
+    <condition property="jdk.artifactId" value="jdk-linux-i586">
+        <isset property="os.family.linux" />
+    </condition>
+    <condition property="jdk.artifactId" value="jdk-windows-server-x64">
+        <isset property="os.family.windows" />
+    </condition>
+    <condition property="jdk.artifactId" value="jdk-macosx-x64">
+        <isset property="os.family.mac" />
+    </condition>
+
     <include file="${dw.antlib}/cartridgebuild.generate.xml"/>
     
     <target name="precopy"/>
