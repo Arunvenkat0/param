@@ -21,14 +21,23 @@
   <command name="mouseOver" target="css=.mini-cart-content">
     <comment>Shift Mouse focus to an item inside Mini Cart</comment>
   </command>
-  <command name="waitForText" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}">
+  <command name="waitForElementPresent" disabled="true" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-name"/>
+  <action name="CheckName"/>
+  <command name="waitForElementPresent" target="css=.mini-cart-product:nth-child(@{Position}) .mini-cart-name"/>
+  <command name="waitForText" target="css=.mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}"/>
+  <command name="waitForText" disabled="true" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}">
     <comment>Checks the correct product name in mini cart</comment>
   </command>
-  <command name="assertText" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-pricing .value" value="@{Quantity}">
+  <action name="CheckQuantity"/>
+  <command name="assertText" target="css=.mini-cart-product:nth-child(@{Position})  .mini-cart-pricing .value" value="@{Quantity}"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-pricing .value" value="@{Quantity}">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
-  <command name="assertText" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-price" value="@{PriceProduct}"/>
-  <command name="assertText" target="css=.mini-cart-subtotals .value" value="regexp:^-?\$\s*([0-9]|(([1-9][0-9]{0,2})(,[0-9]{3})*))\.[0-9]{2}$">
+  <action name="CheckCost"/>
+  <command name="assertText" target="css=.mini-cart-product:nth-child(@{Position}) .mini-cart-price" value="@{PriceProduct}"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-product:.mini-cart-product:nth-child(@{Position}) .mini-cart-price" value="@{PriceProduct}"/>
+  <action name="CheckTotal"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-subtotals .value" value="regexpi:^-?\$\s*([0-9]|(([1-9][0-9]{0,2})(,[0-9]{3})*))\.[0-9]{2}$">
     <comment>Checks the correct format of the subtotal line</comment>
   </command>
   <action name="CloseMiniCart"/>
