@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84781)  Opens a subcategory page and checks all available sort methods. For each method the correctness of the resuls is checked by validating the first and last search result.
+ * [Test Case ID:(C84781) partial ]  Smoke Test » Search Results » Results » Search Results Page: Sort By
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckCatalogSorting")

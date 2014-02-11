@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85044</tags>
-  <description>Test Case ID:(C85044) 
-Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:
-- register a new user
-- create a new giftregistry
-- add two products
-- log out
-- search for the gift registry
-- order the first product, guest checkout
-- search for the gift registry again
-- validate if the &quot;quantity purchased&quot; of the first product has changed</description>
+  <description>Test Case ID:(C85044) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry and Order </description>
   <module name="modules.staticelements.Homepage"/>
   <command name="store" target="${RANDOM.String(8)}" value="UserFirstName"/>
   <module name="modules.usermanagement.RegisterNewUser">

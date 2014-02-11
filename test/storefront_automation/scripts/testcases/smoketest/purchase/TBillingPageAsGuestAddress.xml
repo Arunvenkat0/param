@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84698</tags>
-  <description>Test Case ID:(C84698) 
-Expected Results
-
-    Confirm that an anonymous user does not see a dropdown to select saved addresses.
-    The address fields on this page are blank unless user chose on the shipping page to use that as the billing address.</description>
+  <description>Test Case ID:(C84698) Smoke Test » Checkout - Retuning Customer » Billing » Guest User: Address </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

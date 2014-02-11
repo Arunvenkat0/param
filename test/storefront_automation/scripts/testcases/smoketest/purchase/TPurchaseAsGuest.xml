@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85047 C84683</tags>
-  <description>Test Case ID:(C85047 C84683) 
-Guest checkout: 
-
-* Add some products
-* View cart
-* Guest checkout
-* Enter Shipping Method /Address
-* Enter Billing Method / Address
-* Summary -> Edit
-* Place Offer</description>
+  <description>Test Case ID:(C85047 C84683) (C85047) Smoke Test » Checkout - Retuning Customer » Purchase as Guest   (C84683) Smoke Test » Checkout - Retuning Customer » Starting Checkout » Login Intercept Between Cart and Checkout </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

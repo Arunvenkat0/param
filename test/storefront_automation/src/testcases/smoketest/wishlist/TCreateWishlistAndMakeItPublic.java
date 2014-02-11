@@ -7,14 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85053  C84738 C84740) 
- Tests the public wishlist feature.
- - search for a product
- - add to wishlist
- - register new user
- - make the wishlist public
- - log out
- - search for the public wishlist
+ * Test Case ID:(C85053  C84738 C84740) (C85053 ) Smoke Test » My Account - Returning Customer » Wish List » Public View (C84738 ) Test Suites & Cases » Smoke Test » My Account - Returning Customer » Wish List » Login page (C84740) Smoke Test » My Account - Returning Customer » Wish List » Search Results 
  */
 @ScriptName
 ("testcases.smoketest.wishlist.TCreateWishlistAndMakeItPublic")

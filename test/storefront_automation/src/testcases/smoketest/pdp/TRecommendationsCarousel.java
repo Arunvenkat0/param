@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84711)
+ * Test Case ID:(C84711)  Smoke Test » Product Details » PDP: Recommendations Carousel 
  */
 @ScriptName
 ("testcases.smoketest.pdp.TRecommendationsCarousel")

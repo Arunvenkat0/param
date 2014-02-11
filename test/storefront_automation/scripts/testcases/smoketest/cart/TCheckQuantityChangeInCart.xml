@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84763</tags>
-  <description>Test Case ID:(C84763)  
-
-cart quantity update
-Validates the quantity update function.
-
-- adds two products to the cart
-- opens cart
-- changes quantity of both products
-- updates cart
-- checks if changes are correct</description>
+  <description>Test Case ID:(C84763)  Smoke Test » Cart » Updates </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

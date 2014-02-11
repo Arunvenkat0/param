@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84702</tags>
-  <description>Test Case ID:(C84702) 
-Preconditions
-
-NOTE:
-
-SG is not integrated with BML so orders cannot actually be placed using this payment method. This just tests the form on the billing page.
-Expected Results
-
-    Choosing the Bill Me Later payment method opens form with BML fields.
-    User is asked to enter date of birth and last four digits of SSN, sees terms and conditions and is asked to check box agreeing to T and C. DoB, SSN and checkbox are all required.
-    User sees error message if any of these BML required fields are not filled out and cannot proceed to the next step of checkout.</description>
+  <description>Test Case ID:(C84702) Smoke Test » Checkout - Retuning Customer » Billing » Bill Me Later as Payment Method </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

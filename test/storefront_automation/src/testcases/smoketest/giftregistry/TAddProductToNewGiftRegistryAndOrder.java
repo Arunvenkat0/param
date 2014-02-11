@@ -7,16 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85044) 
- Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:
- - register a new user
- - create a new giftregistry
- - add two products
- - log out
- - search for the gift registry
- - order the first product, guest checkout
- - search for the gift registry again
- - validate if the "quantity purchased" of the first product has changed
+ * Test Case ID:(C85044) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry and Order 
  */
 @ScriptName
 ("testcases.smoketest.giftregistry.TAddProductToNewGiftRegistryAndOrder")

@@ -7,21 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85052)
- 
- Checks for changing priority and quanity of wishlist items.
- - search for a product
- - add to wishlist
- - register new user
- - search for a second product and add it to the wisthlist
- - change priority and quantity for each product on the wishlist
- - logout and login again
- - validate the priority and quantity changes
- - make the wishlist public
- - leave the second product private
- - logout
- - search for the wishlist
- - validate the first product
+ * Test Case ID:(C85052) Smoke Test » My Account - Returning Customer » Wish List » Check Wishlist Product Attributes 
  */
 @ScriptName
 ("testcases.smoketest.wishlist.TCheckWishlistProductAttributes")
