@@ -75,7 +75,7 @@
             <fileset dir="${cartridge.dist}/jdk.unpack" includes="**" />
             <regexpmapper from="[^/]*(.*)" to="\1"  handledirsep="yes" />
         </move>
-
+        <chmod file="${dw.instance.java.home}/bin/*" perm="755"/>
         <delete dir="${cartridge.dist}/jdk.unpack" />
     </target>
 	
