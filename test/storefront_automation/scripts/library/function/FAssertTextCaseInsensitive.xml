@@ -5,5 +5,8 @@
   <parameter name="element"/>
   <parameter name="matchString"/>
   <command name="waitForElementPresent" target="@{element}"/>
-  <command name="assertText" target="@{element}" value="regexpi:@{matchString}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="@{element}"/>
+    <parameter name="textPattern" value="regexpi:@{matchString}"/>
+  </module>
 </scriptmodule>

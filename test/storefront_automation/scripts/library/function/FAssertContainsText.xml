@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <parameter name="textElement"/>
+  <parameter name="string"/>
+  <command name="waitForElementPresent" target="@{textElement}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="@{textElement}"/>
+    <parameter name="textPattern" value="regexpi:^*@{string}*$"/>
+  </module>
+</scriptmodule>
