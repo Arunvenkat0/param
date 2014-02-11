@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84781) 
+ * [Test Case ID:(C84781?) ] Partial Coverage of Smoke Test » Category Landing Page » Search Refinements 
  Steps
  Homepage -> Select a category and its sub category
  Select all the sort options in the dropdown one by one.

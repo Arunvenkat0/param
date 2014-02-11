@@ -7,27 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84770) 
- This test validates the Send to a Friend overlay which is opened from a PDP. It´s doing the following steps:
- 
- - open category, subcategory, first product
- - open staf overlay and close it with x and with cancel
- - clicks the login button at the staf overlay
- - created a new user
- - goes back to the pdp of the first product
- - opens the staf overlay
- - left mandatory fields empty and clicks preview
- - checks for error messages
- - fills all fields and opens the preview
- - validates the data at the preview
- - clicks the edit button
- - changes friends email address and message
- - opens preview again
- - validates new data at preview
- - sends the recommendation
- - closes the confirmation overlay
- - logout
- - back to the homepage
+ * Test Case ID: (C84770,C84745,C84746) (C84745)  Smoke Test » Send to a Friend » Send to a Friend Overlay (C84746) Smoke Test » Send to a Friend » Send to a Friend Review 
  */
 @ScriptName
 ("testcases.smoketest.category.TSendToFriendFromPDP")

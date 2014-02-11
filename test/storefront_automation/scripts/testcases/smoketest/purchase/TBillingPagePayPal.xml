@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84703</tags>
-  <description>Test Case ID:(C84703) 
-Preconditions
-
-Note:
-
-SG is not integrated with PayPal so orders cannot actually be placed using this payment method. This just tests the form on the billing page.
-Expected Results
-
-    Choosing the PayPal payment method hides the CC field or whatever other payment method field was displayed and shows PayPal information instead.</description>
+  <description>Test Case ID:(C84703) Smoke Test » Checkout - Retuning Customer » Billing » PayPal as Payment Method </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

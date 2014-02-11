@@ -7,15 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84703) 
- Preconditions
- 
- Note:
- 
- SG is not integrated with PayPal so orders cannot actually be placed using this payment method. This just tests the form on the billing page.
- Expected Results
- 
- Choosing the PayPal payment method hides the CC field or whatever other payment method field was displayed and shows PayPal information instead.
+ * Test Case ID:(C84703) Smoke Test » Checkout - Retuning Customer » Billing » PayPal as Payment Method 
  */
 @ScriptName
 ("testcases.smoketest.purchase.TBillingPagePayPal")

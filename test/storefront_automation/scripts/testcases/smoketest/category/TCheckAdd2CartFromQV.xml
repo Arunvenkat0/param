@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84767</tags>
-  <description>Test Case ID:(C84767) 
-
-Checks the add to cart behaviour at the quickview overlay.
-
-- opens the quick view of the first product of a product grid
-- checks that add2cart button is disabled
-- selects color and size
-- checks that add2cart button is enabled
-- clicks the add2cart button
-- checks the mini cart behaviour
-- opens quick view of the last product at a grid page
-- verifies this as well
-- adds the product to the cart 
-- in view mode you can see if the page scrolls up to see the mini cart
-- checks the mini cart</description>
+  <description>Test Case ID:(C84767) Smoke Test » Quickview » QuickView: Add to Cart </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">

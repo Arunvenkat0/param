@@ -10,9 +10,6 @@ Validate it remains the selected color (on product details page)</description>
   <parameter name="SelectedColor"/>
   <action name="ValidateSwatchResultInQuickView"/>
   <module name="modules.catalog.OpenQuickView"/>
-  <command name="waitForText" disabled="true" target="css=.Color .selected-value" value="@{SelectedColor}">
-    <comment>Title of the color is not displayed for all products and colors - so command is disabled right now.</comment>
-  </command>
   <command name="assertElementPresent" target="css=.swatchanchor[title=&quot;@{SelectedColor}&quot;]">
     <comment>Check if the correct swatch is selected.</comment>
   </command>

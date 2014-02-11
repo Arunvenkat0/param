@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84737</tags>
-  <description>Test Case ID:(C84737) 
-Payment data account management:
-=> adds credit cards:
-- Visa
-- American Express
-- Master Card
-- Discovery
-=> removes credit cards</description>
+  <description>[ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card </description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>

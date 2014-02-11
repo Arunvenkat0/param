@@ -7,10 +7,10 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84770) 
+ * Test Case ID:(C84770)  Smoke Test » Quickview » QuickView: Send to a Friend 
  */
 @ScriptName
-("testcases.smoketest.category.TCheckSTAFFromQV")
-public class TCheckSTAFFromQV extends AbstractScriptTestCase
+("testcases.smoketest.category.TCheckSendToAFriendFromQuickView")
+public class TCheckSendToAFriendFromQuickView extends AbstractScriptTestCase
 {
 }

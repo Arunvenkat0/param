@@ -9,15 +9,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 /**
  * DISABLED: Needs In Store Configuration.
- Test Case ID:(C85056)
- Checks the InStore feature at the PDP.
- Validates the search field including the error handling.
- - searches for a Store
- - pages through the store results
- - selects a store
- - changes the location
- - selects another store
- - adds product to cart and verifies that the selected store is set at the cart page
+ Test Case ID:(C85056) Smoke Test » Product Details » PDP: InStore Feature
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckInStoreFeature")

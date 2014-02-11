@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85034</tags>
-  <description>Test Case ID:(C85034) 
-Validates the search functionality:
-- Search item by ID
-- Validate the result page</description>
+  <description>Test Case ID:(C85034)  Smoke Test » Search Results » Results » Search Simple Product </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84781</tags>
-  <description>Test Case ID:(C84781) 
+  <tags>[C84781?]</tags>
+  <description>[Test Case ID:(C84781?) ] Partial Coverage of Smoke Test » Category Landing Page » Search Refinements 
 Steps
 Homepage -> Select a category and its sub category
 Select all the sort options in the dropdown one by one.

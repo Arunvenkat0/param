@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84708</tags>
-  <description>Test Case ID:(C84708) 
-Account address management: 
-=> adds two addresses 
-=> edits one
-=> deletes both</description>
+  <description>Test Case ID:(C84708) Smoke Test » My Account - Returning Customer » Addresses » Add Address </description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>

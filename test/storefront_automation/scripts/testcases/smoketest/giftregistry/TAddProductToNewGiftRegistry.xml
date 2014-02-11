@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85043</tags>
-  <description>Test Case ID:(C85043) 
-Creates a gift registry for a new user. Performs the following steps:
-- register a new user
-- create a gift registry
-- make this gift registry public
-- add a product
-- log out 
-- search for the gift registry
-- validate results</description>
+  <description>Test Case ID:(C85043) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry </description>
   <module name="modules.staticelements.Homepage"/>
   <command name="store" target="${UserFirstName} ${RANDOM.String(7)}" value="UserFirstName"/>
   <module name="modules.usermanagement.RegisterNewUser">
