@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Waits for the 'element' to be present.
+  2. Verifies that the given 'element'  text matches the given case insensitive 'matchString' (may be a regular expression).</description>
+  <parameter name="element"/>
+  <parameter name="matchString"/>
+  <command name="waitForElementPresent" target="@{element}"/>
+  <command name="assertText" target="@{element}" value="regexpi:@{matchString}"/>
+</scriptmodule>
