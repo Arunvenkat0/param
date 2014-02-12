@@ -26,7 +26,7 @@
     <comment>Check if size has been selected.</comment>
   </command>
   <command name="waitForText" target="css=.size .selected-value" value="${ProductSize}"/>
-  <command name="assertNotElementPresent" target="css=#add-to-cart[disabled]">
+  <command name="waitForNotElementPresent" target="css=#add-to-cart[disabled]">
     <comment>Check for the enabled add to cart button.</comment>
   </command>
 </scriptmodule>

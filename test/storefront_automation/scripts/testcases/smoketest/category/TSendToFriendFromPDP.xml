@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84770 C84745 C84746</tags>
-  <description>Test Case ID: (C84770,C84745,C84746) (C84745)  Smoke Test » Send to a Friend » Send to a Friend Overlay (C84746) Smoke Test » Send to a Friend » Send to a Friend Review </description>
+  <description>Test Case ID: (C84770,C84745,C84746) (C84745)  Smoke Test » Send to a Friend » Send to a Friend Overlay (C84746) Smoke Test » Send to a Friend » Send to a Friend Review</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
@@ -30,17 +30,19 @@
   <action name="CloseSTAFWithX"/>
   <command name="click" target="css=.ui-icon-closethick"/>
   <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <action name="OpenSTAFOverlayAgain"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
-  <action name="CloseSTAFWithCancel"/>
-  <command name="click" target="css= .cancel-button"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <action name="OpenSTAFOverlayAgain" disabled="true"/>
+  <command name="click" disabled="true" target="link=Send to a Friend"/>
+  <command name="waitForElementPresent" disabled="true" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <action name="CloseSTAFWithCancel" disabled="true"/>
+  <module name="library.function.FClick" disabled="true">
+    <parameter name="clickElement" value="css= .cancel"/>
+  </module>
+  <command name="pause" disabled="true" value="4000"/>
   <action name="OpenSTAFOverlayAndLogin"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <action name="ClickLoginNEEDSTOBEUPDATEDAFTERRap2541"/>
-  <command name="click" disabled="true" target="//*[@id='send-to-friend-dialog']/button[1]"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=Send to a Friend"/>
+  </module>
+  <action name="ClickLogin"/>
   <command name="waitForElementPresent" target="link=Login or Create an Account"/>
   <command name="clickAndWait" target="link=Login or Create an Account"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
@@ -65,7 +67,9 @@
     <parameter name="PasswordTooShort" value="abcd"/>
     <parameter name="PasswordCorrect" value="${Password}"/>
   </module>
-  <command name="clickAndWait" target="link=Max Smith"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
@@ -81,10 +85,11 @@
   <command name="click" target="link=See Privacy Policy"/>
   <command name="assertTextPresent" value="See Privacy Policy"/>
   <action name="ClosePrivacyPolicy"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
+  </module>
   <command name="waitForElementPresent" target="css=.send-to-friend"/>
   <command name="click" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
   <module name="modules.catalog.ValidateSTAFForms"/>
   <action name="SendMessage"/>
   <command name="click" target="css=#send-to-friend-dialog .send-button"/>
