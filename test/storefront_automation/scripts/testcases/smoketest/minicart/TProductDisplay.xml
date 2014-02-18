@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84773,C84725,C84726,C84727</tags>
-  <description>Test Case ID:(C84773,C84725,C84726,C84727)  (C84773) Smoke Test » Header | Global Navigation | Footer » Cart in Header,  (C84725) Smoke Test » Mini-Cart » Mini-Cart: Opening and Closing </description>
+  <description>Test Case ID:(C84773,C84725,C84726,C84727)  (C84773) Smoke Test » Header | Global Navigation | Footer » Cart in Header,  (C84725) Smoke Test » Mini-Cart » Mini-Cart: Opening and Closing</description>
   <module name="modules.staticelements.Homepage"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-empty" value="(0)">
     <comment>Checks the correct quantity in mini cart</comment>
@@ -20,9 +20,23 @@
     <parameter name="Name" value="${ProductName1}"/>
     <parameter name="PriceProduct" value="${ProductPrice1}"/>
   </module>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${ProductQuantity1}) *">
+  <command name="storeText" target="css=.mini-cart-total .mini-cart-link" value="TestText"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="regexp:^*CART*"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="glob:CART (2) ITEMS, TOTAL: $359.98"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="regexp:CART \(2\) ITEMS, TOTAL: \$359.98"/>
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(2\) ITEMS, TOTAL: \$359.98$"/>
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\) ITEMS, TOTAL: \$359.98$"/>
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^CART \(2\).*$
+
+"/>
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\).*$"/>
+  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="Cart (${ProductQuantity1})*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
+  <action name="DismissQuickViewUsingMouseOver-MouseOut"/>
+  <command name="mouseOver" target="css=div.mini-cart-content"/>
+  <command name="mouseOut" target="css=div.mini-cart-content"/>
+  <command name="waitForNotVisible" target="css=.mini-cart-product:nth-child(1) .mini-cart-name"/>
   <action name="Product-2"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductName2}"/>
