@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates at the cart page the additional column with the delivery options.</description>
-  <command name="waitForTextPresent" value="Delivery Options"/>
-  <command name="assertElementPresent" target="css=.cart-row:nth-child(1) .item-delivery-options .home-delivery"/>
-  <command name="assertElementPresent" target="css=.cart-row:nth-child(1) .item-delivery-options .instore-delivery"/>
-  <command name="assertElementPresent" target="link=Select Store"/>
+  <module name="library.function.FAssertCaseInsensitiveTextOnPage">
+    <parameter name="text" value="Delivery Options"/>
+  </module>
+  <command name="waitForTextPresent" disabled="true" value="Delivery Options"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.cart-row:nth-child(1) .item-delivery-options .home-delivery"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.cart-row:nth-child(1) .item-delivery-options .home-delivery"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.cart-row:nth-child(1) .item-delivery-options .instore-delivery"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.cart-row:nth-child(1) .item-delivery-options .instore-delivery"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="link=Select Store"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="link=Select Store"/>
 </scriptmodule>

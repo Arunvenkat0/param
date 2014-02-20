@@ -4,10 +4,22 @@
   <command name="assertElementPresent" target="css=#add-to-cart[disabled]">
     <comment>Check for the disabled add to cart button.</comment>
   </command>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css= .size:first-child :not(.unselectable) .swatchanchor"/>
+  </module>
   <command name="storeText" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=.Color:first-child :not(.unselectable) .swatchanchor"/>
+  </module>
   <command name="storeText" target="css=.Color:first-child :not(.unselectable) .swatchanchor" value="ProductColor"/>
   <action name="CheckSelectedColor"/>
-  <command name="click" target="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']">
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
+  </module>
+  <command name="click" disabled="true" target="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']">
     <comment>Pick a size.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.Color .selected .swatchanchor"/>
@@ -18,14 +30,21 @@
     <comment>Check if no size is selected yet.</comment>
   </command>
   <action name="SelectSize"/>
-  <command name="click" target="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']"/>
+  </module>
+  <command name="click" disabled="true" target="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']">
     <comment>Pick a size.</comment>
   </command>
-  <command name="pause" value="1000"/>
-  <command name="waitForElementPresent" target="css=.size .selected-value">
+  <command name="pause" disabled="true" value="1000"/>
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="css=.size .selected-value"/>
+    <parameter name="plainString" value="${ProductSize}"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.size .selected-value">
     <comment>Check if size has been selected.</comment>
   </command>
-  <command name="waitForText" target="css=.size .selected-value" value="${ProductSize}"/>
+  <command name="waitForText" disabled="true" target="css=.size .selected-value" value="${ProductSize}"/>
   <command name="waitForNotElementPresent" target="css=#add-to-cart[disabled]">
     <comment>Check for the enabled add to cart button.</comment>
   </command>

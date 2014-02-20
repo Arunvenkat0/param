@@ -17,14 +17,21 @@
   </command>
   <command name="waitForElementPresent" disabled="true" target="//li[contains(text(),'${ColorSelected}') ]"/>
   <command name="assertText" disabled="true" target="css=.product-variations .attribute:first-child .value .swatches .selected-value" value="${ColorSelected}"/>
-  <command name="storeText" target="css=.value .emptyswatch .swatchanchor" value="SizeSelected">
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=ul.swatches.size li:nth-child(1) a:nth-child(1)"/>
+  </module>
+  <command name="storeText" target="css=ul.swatches.size li:nth-child(1) a:nth-child(1)" value="SizeSelected"/>
+  <command name="storeText" disabled="true" target="css=ul.swatches.size li:nth-child(1) a:nth-child(1)" value="SizeSelected">
     <comment>Select size.</comment>
   </command>
-  <command name="click" target="css=.value .emptyswatch .swatchanchor">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=ul.swatches.size li:nth-child(1) a:nth-child(1)"/>
+  </module>
+  <command name="click" disabled="true" target="css=.value .emptyswatch .swatchanchor">
     <comment>Select size.</comment>
   </command>
   <command name="waitForElementPresent" target="//li[contains(text(),'${SizeSelected}') ]"/>
-  <command name="assertNotElementPresent" target="css=#add-to-cart[disabled]">
+  <command name="waitForNotElementPresent" target="css=#add-to-cart[disabled]">
     <comment>Check for the disabled add to cart button.</comment>
   </command>
   <command name="assertElementPresent" target="css=.product-actions .menu .wl-action">

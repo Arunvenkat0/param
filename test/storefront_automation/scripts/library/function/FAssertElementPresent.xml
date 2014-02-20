@@ -2,5 +2,7 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>1. Waits for the element to be present.  Prevents false negative results from lagging update  &amp; display.</description>
   <parameter name="assertedElement"/>
-  <command name="waitForElementPresent" target="@{assertedElement}"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="@{assertedElement}"/>
+  </module>
 </scriptmodule>

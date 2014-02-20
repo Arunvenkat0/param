@@ -12,46 +12,83 @@ Note: This module only works for products with color attributes.</description>
   <parameter name="QuantityEnd"/>
   <parameter name="TableRow"/>
   <action name="OpenDetailsAndCheckInitialColor"/>
-  <command name="assertText" target="css=.cart-row:nth-child(@{TableRow}) .attribute .value" value="@{ColorStart}">
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .attribute .value"/>
+    <parameter name="plainString" value="@{ColorStart}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .attribute .value" value="@{ColorStart}">
     <comment>Validate the corret initial color.</comment>
   </command>
-  <command name="click" target="//div[contains(@class,'item-edit-details')]/a"/>
-  <command name="waitForElementPresent" target="css=.ui-dialog-title">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[contains(@class,'item-edit-details')]/a"/>
+  </module>
+  <command name="click" disabled="true" target="//div[contains(@class,'item-edit-details')]/a"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.ui-dialog-title"/>
+    <parameter name="plainString" value="PRODUCT QUICKVIEW"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.ui-dialog-title">
     <comment>Wait for the dialog to be opened.</comment>
   </command>
-  <command name="assertText" target="css=.ui-dialog-title" value="regexpi:PRODUCT QUICKVIEW">
+  <command name="assertText" disabled="true" target="css=.ui-dialog-title" value="regexpi:PRODUCT QUICKVIEW">
     <comment>Evaluate the text. This is regexpi, because WebDriver and Script Developer (4.2.X) have a different opinion.</comment>
   </command>
-  <command name="waitForText" target="css=.Color .selected-value" value="@{ColorStart}">
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.Color .selected-value"/>
+    <parameter name="plainString" value="@{ColorStart}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.Color .selected-value" value="@{ColorStart}">
     <comment>Validate the correct initial color text.</comment>
   </command>
-  <command name="assertElementPresent" target="css=.Color .selected a[title=&quot;@{ColorStart}&quot;]">
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.Color .selected a[title=&quot;@{ColorStart}&quot;]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.Color .selected a[title=&quot;@{ColorStart}&quot;]">
     <comment>Validate the correct initial color link.</comment>
   </command>
   <action name="ChangeColor"/>
-  <command name="click" target="link=@{ColorEnd}">
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="link=@{ColorEnd}"/>
+    <parameter name="waitForElement" value="css=.Color .selected a[title=&quot;@{ColorEnd}&quot;]"/>
+  </module>
+  <command name="click" disabled="true" target="link=@{ColorEnd}">
     <comment>Change color by clicking the alternative color image.</comment>
   </command>
-  <command name="waitForElementPresent" target="css=.Color .selected a[title=&quot;@{ColorEnd}&quot;]">
+  <command name="waitForElementPresent" disabled="true" target="css=.Color .selected a[title=&quot;@{ColorEnd}&quot;]">
     <comment>Validates the alternative color link.</comment>
   </command>
   <action name="ChangeQuantity"/>
   <command name="waitForValue" target="id=Quantity" value="@{QuantityStart}">
     <comment>Validate the initial quantity.</comment>
   </command>
-  <command name="type" target="id=Quantity" value="@{QuantityEnd}">
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=Quantity"/>
+    <parameter name="inputString" value="@{QuantityEnd}"/>
+  </module>
+  <command name="type" disabled="true" target="id=Quantity" value="@{QuantityEnd}">
     <comment>Change the quantity.</comment>
   </command>
   <action name="CloseQuickViewAndValidateCart">
     <comment>CommitsChanges</comment>
   </action>
-  <command name="click" target="id=add-to-cart">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=add-to-cart"/>
+  </module>
+  <command name="click" disabled="true" target="id=add-to-cart">
     <comment>Update the cart using the button.</comment>
   </command>
-  <command name="waitForText" target="css=.cart-row:nth-child(@{TableRow}) .attribute .value" value="@{ColorEnd}">
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .attribute .value"/>
+    <parameter name="plainString" value="@{ColorEnd}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .attribute .value" value="@{ColorEnd}">
     <comment>Validate the alternative color.</comment>
   </command>
-  <command name="waitForText" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{QuantityEnd}">
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .item-quantity input"/>
+    <parameter name="plainString" value="@{QuantityEnd}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{QuantityEnd}">
     <comment>Validate the alternative quantity.</comment>
   </command>
 </scriptmodule>

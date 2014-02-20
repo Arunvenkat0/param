@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>1. Waits for the 'element' to be present.
-  2. Verifies that the given 'element'  text matches the given case insensitive 'matchString' (may be a regular expression).</description>
-  <parameter name="element"/>
-  <parameter name="matchString"/>
-  <command name="waitForElementPresent" target="@{element}"/>
-  <module name="library.function.FAssertText">
+  <description>1. Calls FWaitForTextCaseInsensitive 'textElement' 'plainElement'.  This is done to ensure the 'textElement' exists before the text is verified.</description>
+  <parameter name="textElement"/>
+  <parameter name="plainString"/>
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="@{textElement}"/>
+    <parameter name="plainString" value="@{plainString}"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="@{textElement}"/>
+  <module name="library.function.FStringToRegexStore" disabled="true">
+    <parameter name="plainString" value="@{matchString}"/>
+    <parameter name="regexVarName" value="REGEX_VAR"/>
+  </module>
+  <command name="storeEval" disabled="true" target="'@{plainString}'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&amp;')" value="REGEX_VAR"/>
+  <command name="storeEval" disabled="true" target="'@{plainString}'.replace(/[$-\/?[-^{|}(|)]/g, '\\$&amp;')" value="REGEX_VAR"/>
+  <module name="library.function.FAssertText" disabled="true">
     <parameter name="textElement" value="@{element}"/>
-    <parameter name="textPattern" value="regexpi:@{matchString}"/>
+    <parameter name="textPattern" value="regexpi:${REGEX_VAR}"/>
   </module>
 </scriptmodule>

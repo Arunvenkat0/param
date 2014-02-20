@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Updates the quantity in the given table row:
 
@@ -7,11 +7,18 @@ TableRow: given table row
 Quantity: new quantity</description>
   <parameter name="TableRow"/>
   <parameter name="Quantity"/>
-  <command name="type" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{Quantity}">
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=.cart-row:nth-child(@{TableRow}) .item-quantity input"/>
+    <parameter name="inputString" value="@{Quantity}"/>
+  </module>
+  <command name="type" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{Quantity}">
     <comment>Enter new quantity.</comment>
   </command>
   <action name="Update_CommitChanges"/>
-  <command name="clickAndWait" target="id=update-cart">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="id=update-cart"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="id=update-cart">
     <comment>Update the cart by clicking the button.</comment>
   </command>
 </scriptmodule>
