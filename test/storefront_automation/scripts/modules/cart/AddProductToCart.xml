@@ -14,17 +14,27 @@ Position:</description>
   <parameter name="ProductPrice"/>
   <parameter name="Position"/>
   <action name="EnterQuantity"/>
-  <command name="waitForElementPresent" target="id=Quantity"/>
-  <command name="click" target="id=Quantity"/>
-  <command name="type" target="id=Quantity" value="@{Quantity}">
+  <module name="library.function.FTypeAndVerifyInput">
+    <parameter name="typeElement" value="id=Quantity"/>
+    <parameter name="inputString" value="@{Quantity}"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="id=Quantity"/>
+  <command name="click" disabled="true" target="id=Quantity"/>
+  <command name="type" disabled="true" target="id=Quantity" value="@{Quantity}">
     <comment>Enter desired quantity.</comment>
   </command>
-  <command name="waitForText" target="id=Quantity" value="@{Quantity}"/>
+  <command name="waitForText" disabled="true" target="id=Quantity" value="@{Quantity}"/>
   <action name="AddToCart"/>
-  <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="xpath=id('add-to-cart')[not(@disabled='disabled')]"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
     <comment>Wait for enable add-to-cart button</comment>
   </command>
-  <command name="click" target="id=add-to-cart">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=add-to-cart"/>
+  </module>
+  <command name="click" disabled="true" target="id=add-to-cart">
     <comment>Add product to cart.</comment>
   </command>
   <action name="CheckMiniCart">

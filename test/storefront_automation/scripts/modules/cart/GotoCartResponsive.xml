@@ -1,12 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Navigates to the cart view using the cart link within the page header. Adapted to responsive design.</description>
   <command name="waitForElementPresent" target="css=.mini-cart-link">
     <comment>Wait for the cart link.</comment>
   </command>
   <action name="GoToCart"/>
-  <command name="clickAndWait" target="css=.mini-cart-link">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.mini-cart-link"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.mini-cart-link">
     <comment>Click the cart link.</comment>
   </command>
-  <command name="assertText" target="xpath=id('primary')/h1" value="Your Shopping Cart"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="xpath=id('primary')/h1"/>
+    <parameter name="plainString" value="Your Shopping Cart"/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=id('primary')/h1" value="Your Shopping Cart"/>
 </scriptmodule>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Updates a previously defined address. Checks for required fields and enters ne data.</description>
   <parameter name="Position"/>
@@ -12,11 +12,25 @@
   <parameter name="Country"/>
   <parameter name="Phone"/>
   <action name="AddressManagement_EditAddress"/>
-  <command name="clickAndWait" target="link=Edit"/>
-  <command name="waitForText" target="//*[@id='editprofile']/h3" value="Edit an Address (* = required)"/>
-  <command name="waitForElementPresent" target="xpath=id('dwfrm_profile_address_addressid')"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Edit"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=Edit"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="//*[@id='editprofile']/h3"/>
+    <parameter name="plainString" value="Edit an Address \(\* = required\)"/>
+  </module>
+  <command name="waitForText" disabled="true" target="//*[@id='editprofile']/h3" value="Edit an Address (* = required)"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="xpath=id('dwfrm_profile_address_addressid')"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="xpath=id('dwfrm_profile_address_addressid')"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses"/>
-  <command name="type" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_address_addressid"/>
+    <parameter name="inputString" value="@{Title}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
   <module name="modules.adressmanagement.EnterAddressData">
     <parameter name="FirstName" value="@{FirstName}"/>
     <parameter name="LastName" value="@{LastName}"/>
@@ -29,5 +43,8 @@
     <parameter name="Phone" value="@{Phone}"/>
   </module>
   <action name="AddressManagement_Apply"/>
-  <command name="clickAndWait" target="id=applyBtnEdit"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="id=applyBtnEdit"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="id=applyBtnEdit"/>
 </scriptmodule>

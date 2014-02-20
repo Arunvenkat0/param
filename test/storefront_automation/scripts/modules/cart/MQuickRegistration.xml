@@ -8,11 +8,38 @@
   <command name="store" target="${RANDOM.String(9)}" value="Password">
     <comment>Generates a random password.</comment>
   </command>
-  <command name="type" target="id=dwfrm_profile_customer_firstname" value="@{FirstName}"/>
-  <command name="type" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
-  <command name="type" target="id=dwfrm_profile_customer_email" value="${Email}"/>
-  <command name="type" target="id=dwfrm_profile_customer_emailconfirm" value="${Email}"/>
-  <command name="type" target="id=dwfrm_profile_login_password" value="${Password}"/>
-  <command name="type" target="id=dwfrm_profile_login_passwordconfirm" value="${Password}"/>
-  <command name="clickAndWait" target="name=dwfrm_profile_confirm value=Apply"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_customer_firstname"/>
+    <parameter name="inputString" value="@{FirstName}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_customer_firstname" value="@{FirstName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_customer_lastname"/>
+    <parameter name="inputString" value="@{LastName}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_customer_email"/>
+    <parameter name="inputString" value="${Email}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_customer_email" value="${Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_customer_emailconfirm"/>
+    <parameter name="inputString" value="${Email}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_customer_emailconfirm" value="${Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_login_password"/>
+    <parameter name="inputString" value="${Password}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_login_password" value="${Password}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_login_passwordconfirm"/>
+    <parameter name="inputString" value="${Password}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_login_passwordconfirm" value="${Password}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_profile_confirm value=Apply"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="name=dwfrm_profile_confirm value=Apply"/>
 </scriptmodule>

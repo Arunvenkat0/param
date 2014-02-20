@@ -2,8 +2,7 @@
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85028 partial</tags>
   <description>[Test Case ID:(C85028 partial ) ] Smoke Test » Category Landing Page » Price Range  
-Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page and validated against the price at the quickview and the product detail page. 
-</description>
+Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page and validated against the price at the quickview and the product detail page.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="ipod"/>
@@ -11,8 +10,16 @@ Checks the correct behaviour of the price range. Therefore a product price is ta
   <command name="waitForElementPresent" target="xpath=id('search-result-items')/li[1]">
     <comment>Is there at least one product</comment>
   </command>
-  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
-  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.grid-tile:first-child .name-link"/>
+    <parameter name="textStoreVariableName" value="ProductName"/>
+  </module>
+  <command name="storeText" disabled="true" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.grid-tile:first-child .product-sales-price"/>
+    <parameter name="textStoreVariableName" value="ProductPrice"/>
+  </module>
+  <command name="storeText" disabled="true" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidatePriceInQuickView"/>
   <action name="SwitchToDetailPage"/>
