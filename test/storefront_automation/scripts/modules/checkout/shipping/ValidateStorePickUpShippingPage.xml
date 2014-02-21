@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <command name="assertText" target="css=.address legend" value="regexpi:In Store Shipment Message*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.address legend"/>
+    <parameter name="textPattern" value="regexpi:In Store Shipment Message*"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.address legend" value="regexpi:In Store Shipment Message*"/>
   <command name="assertText" target="css=.instore-shipment-method" value="glob:Shipping Method : Store Pickup $0.00 (Store Pickup)"/>
   <command name="assertElementPresent" target="css=.instore-shipment-address"/>
   <command name="assertElementPresent" target="css=.instore-message-text"/>
   <command name="assertText" target="css=.char-count" value="You have 250 characters left out of 250"/>
   <command name="assertElementPresent" target="css=.instore-continue-button button[value='Continue >']"/>
   <action name="EnterStorePickupMessage"/>
-  <command name="click" target="css=.instore-message-text .input-textarea"/>
-  <command name="type" target="css=.instore-message-text .input-textarea" value="lorem ipsum my in store pickup message text"/>
-  <command name="assertText" target="css=.char-count" value="You have 207 characters left out of 250"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.instore-message-text .input-textarea"/>
+  </module>
+  <command name="click" disabled="true" target="css=.instore-message-text .input-textarea"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=.instore-message-text .input-textarea"/>
+    <parameter name="inputString" value="lorem ipsum my in store pickup message text"/>
+  </module>
+  <command name="type" disabled="true" target="css=.instore-message-text .input-textarea" value="lorem ipsum my in store pickup message text"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.char-count"/>
+    <parameter name="textPattern" value="You have 207 characters left out of 250"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.char-count" value="You have 207 characters left out of 250"/>
 </scriptmodule>

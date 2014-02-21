@@ -2,8 +2,19 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validate the selected product details inside quickview</description>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
-  <command name="assertText" target="css=.ui-dialog-title" value="regexpi:Product Quickview"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.ui-dialog-title"/>
+    <parameter name="textPattern" value="regexpi:Product Quickview"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.ui-dialog-title" value="regexpi:Product Quickview"/>
   <command name="waitForText" target="css=.ui-dialog .product-name" value="${ProductName}"/>
-  <command name="assertElementPresent" target="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
-  <command name="assertText" target="css=.product-price" value="${ProductPrice}"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.product-price"/>
+    <parameter name="textPattern" value="${ProductPrice}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.product-price" value="${ProductPrice}"/>
 </scriptmodule>

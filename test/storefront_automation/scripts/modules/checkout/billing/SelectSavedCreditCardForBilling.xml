@@ -1,25 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Uses an already saved credit card while placing an order.</description>
   <parameter name="CreditCardType"/>
   <parameter name="SecurityCode"/>
   <command name="waitForElementPresent" target="css=.payment-method-options"/>
-  <command name="check" target="id=is-CREDIT_CARD">
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=is-CREDIT_CARD"/>
+  </module>
+  <command name="check" disabled="true" target="id=is-CREDIT_CARD">
     <comment>Select CC as Pament Method</comment>
   </command>
   <command name="waitForElementPresent" target="id=PaymentMethod_CREDIT_CARD"/>
   <command name="assertElementPresent" target="id=creditCardList">
     <comment>Credit Card Required Fields Validation</comment>
   </command>
-  <command name="select" target="id=creditCardList" value="label=(@{CreditCardType}) *">
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="id=creditCardList"/>
+    <parameter name="selectLabel" value="label=(@{CreditCardType}) *"/>
+    <parameter name="labelValue" value="(@{CreditCardType}) *"/>
+  </module>
+  <command name="select" disabled="true" target="id=creditCardList" value="label=(@{CreditCardType}) *">
     <comment>Seelct CC from List</comment>
   </command>
-  <command name="waitForSelectedLabel" target="id=creditCardList" value="(@{CreditCardType}) *"/>
-  <command name="pause" value="1500"/>
-  <command name="waitForElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_cvn">
+  <command name="waitForSelectedLabel" disabled="true" target="id=creditCardList" value="(@{CreditCardType}) *"/>
+  <command name="pause" disabled="true" value="1500"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_paymentMethods_creditCard_cvn"/>
+    <parameter name="inputString" value="@{SecurityCode}"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_cvn">
     <comment>Wait for Security Code field to appear</comment>
   </command>
-  <command name="type" target="id=dwfrm_billing_paymentMethods_creditCard_cvn" value="@{SecurityCode}">
+  <command name="type" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_cvn" value="@{SecurityCode}">
     <comment>Enter Security Code</comment>
   </command>
 </scriptmodule>

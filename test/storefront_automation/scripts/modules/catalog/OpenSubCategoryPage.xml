@@ -2,7 +2,10 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Opens the page of a subcategory which is linked from the current main category page.</description>
   <parameter name="SubCategoryName"/>
-  <command name="clickAndWait" target="link=@{SubCategoryName}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=@{SubCategoryName}"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=@{SubCategoryName}"/>
   <command name="waitForElementPresent" target="xpath=id('search-result-items')/li[1]">
     <comment>Is there at least one product</comment>
   </command>

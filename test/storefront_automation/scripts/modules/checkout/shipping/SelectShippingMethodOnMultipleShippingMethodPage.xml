@@ -9,5 +9,9 @@ Position: starts with 0 and increases for each item
 Shipping Method Name: gets the Shipping Method Name from the Global Test Data</description>
   <parameter name="Position"/>
   <parameter name="ShippingMethodName"/>
-  <command name="select" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID" value="@{ShippingMethodName}*"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID"/>
+    <parameter name="selection" value="@{ShippingMethodName}*"/>
+  </module>
+  <command name="select" disabled="true" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID" value="@{ShippingMethodName}*"/>
 </scriptmodule>

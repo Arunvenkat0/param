@@ -1,13 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>This module checks if the amount lies into its boundaries.
 $5 &lt;= x &lt;= $5000</description>
-  <command name="type" target="id=dwfrm_giftcert_purchase_amount" value="5001"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_amount"/>
+    <parameter name="inputString" value="5001"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_giftcert_purchase_amount" value="5001"/>
   <action name="Try2Add2Basekt"/>
-  <command name="click" target="id=AddToBasketButton"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=AddToBasketButton"/>
+  </module>
+  <command name="click" disabled="true" target="id=AddToBasketButton"/>
   <command name="waitForText" target="css=#dwfrm_giftcert_purchase_amount + span" value="Gift Certificate can only be purchased with a minimum of $5 and maximum of $5000"/>
-  <command name="type" target="id=dwfrm_giftcert_purchase_amount" value="4"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_amount"/>
+    <parameter name="inputString" value="4"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_giftcert_purchase_amount" value="4"/>
   <action name="Try2Add2Basket"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=AddToBasketButton"/>
+  </module>
   <command name="click" target="id=AddToBasketButton"/>
-  <command name="waitForText" target="css=#dwfrm_giftcert_purchase_amount + span" value="Gift Certificate can only be purchased with a minimum of $5 and maximum of $5000"/>
+  <command name="waitForText" disabled="true" target="css=#dwfrm_giftcert_purchase_amount + span" value="Gift Certificate can only be purchased with a minimum of $5 and maximum of $5000"/>
 </scriptmodule>

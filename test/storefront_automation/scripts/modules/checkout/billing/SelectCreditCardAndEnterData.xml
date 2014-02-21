@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Enters the required credit card information.</description>
   <parameter name="CardName"/>
@@ -7,14 +7,41 @@
   <parameter name="ExpireMonth"/>
   <parameter name="ExpireYear"/>
   <parameter name="SecurityCode"/>
-  <command name="check" target="id=is-CREDIT_CARD">
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=is-CREDIT_CARD"/>
+  </module>
+  <command name="check" disabled="true" target="id=is-CREDIT_CARD">
     <comment>Select CC as Pament Method</comment>
   </command>
-  <command name="waitForElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
-  <command name="type" target="id=dwfrm_billing_paymentMethods_creditCard_owner" value="@{CardName}"/>
-  <command name="select" target="id=dwfrm_billing_paymentMethods_creditCard_type" value="label=@{Type}"/>
-  <command name="type" target="id=dwfrm_billing_paymentMethods_creditCard_number" value="@{Number}"/>
-  <command name="select" target="id=dwfrm_billing_paymentMethods_creditCard_month" value="label=@{ExpireMonth}"/>
-  <command name="select" target="id=dwfrm_billing_paymentMethods_creditCard_year" value="label=@{ExpireYear}"/>
-  <command name="type" target="id=dwfrm_billing_paymentMethods_creditCard_cvn" value="@{SecurityCode}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
+    <parameter name="inputString" value="@{CardName}"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
+  <command name="type" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_owner" value="@{CardName}"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="id=dwfrm_billing_paymentMethods_creditCard_type"/>
+    <parameter name="selection" value="label=@{Type}"/>
+  </module>
+  <command name="select" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_type" value="label=@{Type}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_paymentMethods_creditCard_number"/>
+    <parameter name="inputString" value="@{Number}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_number" value="@{Number}"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="id=dwfrm_billing_paymentMethods_creditCard_month"/>
+    <parameter name="selection" value="label=@{ExpireMonth}"/>
+  </module>
+  <command name="select" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_month" value="label=@{ExpireMonth}"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="id=dwfrm_billing_paymentMethods_creditCard_year"/>
+    <parameter name="selection" value="label=@{ExpireYear}"/>
+  </module>
+  <command name="select" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_year" value="label=@{ExpireYear}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_paymentMethods_creditCard_cvn"/>
+    <parameter name="inputString" value="@{SecurityCode}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_billing_paymentMethods_creditCard_cvn" value="@{SecurityCode}"/>
 </scriptmodule>

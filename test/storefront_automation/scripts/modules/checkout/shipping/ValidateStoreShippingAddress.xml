@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3" value="regexpi:.*In Store Pickup"/>
-  <command name="assertText" target="css=.mini-shipment .details" value="${storeAddress}*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3"/>
+    <parameter name="textPattern" value="regexpi:.*In Store Pickup"/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3" value="regexpi:.*In Store Pickup"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-shipment .details"/>
+    <parameter name="textPattern" value="${storeAddress}*"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.mini-shipment .details" value="${storeAddress}*"/>
 </scriptmodule>

@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the correct state of the checkout progress bar.</description>
   <parameter name="StepNumber"/>
   <parameter name="StepText"/>
-  <command name="assertElementPresent" target="css=.step-@{StepNumber}.active">
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.step-@{StepNumber}.active"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.step-@{StepNumber}.active">
     <comment>Check if the correct step is marked as active step.</comment>
   </command>
   <command name="assertText" target="css=.step-@{StepNumber}" value="*@{StepText}">

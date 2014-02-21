@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates product details the sidebar during the checkout process:
 
@@ -11,7 +11,11 @@ Position: Position of the product within the cart</description>
   <parameter name="Name"/>
   <parameter name="Quantity"/>
   <parameter name="Price"/>
-  <command name="waitForText" target="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}">
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-name"/>
+    <parameter name="text" value="@{Name}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-name" value="@{Name}">
     <comment>Validate the product name (Wait since prodcut summary get's refreshed after each selection option available on page)</comment>
   </command>
   <command name="waitForText" target="css=.checkout-mini-cart .mini-cart-product:nth-child(@{Position}) .mini-cart-pricing .value" value="@{Quantity}">

@@ -1,13 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validate the presence of aviailable swatch colors for a product on the category page.
 
 Steps:
 Validate Colors avaiable
 Mouse over each color and validate respective procut image</description>
-  <command name="assertElementPresent" target="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
-  <command name="assertElementPresent" target="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
-  <command name="assertElementPresent" target="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]">
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]">
     <comment>Validate the presence of default color</comment>
   </command>
   <command name="pause" value="500"/>

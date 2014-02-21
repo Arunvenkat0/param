@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>checks for expected required fields in the form</description>
-  <command name="assertElementPresent" target="css=input[id*=&quot;owner&quot;].required"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=input[id*=&quot;owner&quot;].required"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=input[id*=&quot;owner&quot;].required"/>
   <command name="assertElementPresent" target="css=select[id*=&quot;type&quot;].required"/>
   <command name="assertElementPresent" target="css=input[id*=&quot;number&quot;].required"/>
   <command name="assertElementPresent" target="css=select[id*=&quot;month&quot;].required"/>

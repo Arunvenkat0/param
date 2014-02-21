@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Calls FSelect 'selectElement' 'selectLabel' .   2. Waits for the selected label 'labelValue'</description>
+  <parameter name="selectElement"/>
+  <parameter name="selectLabel"/>
+  <parameter name="labelValue"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="@{selectElement}"/>
+    <parameter name="selection" value="@{selectLabel}"/>
+  </module>
+  <command name="waitForSelectedLabel" target="@{selectElement}" value="@{labelValue}"/>
+</scriptmodule>

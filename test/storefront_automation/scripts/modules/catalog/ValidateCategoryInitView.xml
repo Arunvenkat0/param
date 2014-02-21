@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the content of a category page for:
 - at least one product
@@ -10,16 +10,35 @@
   <parameter name="SortMethod"/>
   <parameter name="ItemsPerPage"/>
   <parameter name="ShownProducts"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="@{CategoryName}"/>
-  <command name="assertElementPresent" target="css=.product-tile">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="@{CategoryName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="@{CategoryName}"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.product-tile"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.product-tile">
     <comment>Check if at least one product is present.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.results-hits a"/>
-  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
-  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.results-hits"/>
+    <parameter name="textStoreVariableName" value="PaginationText"/>
+  </module>
+  <command name="storeText" disabled="true" target="css=.results-hits" value="PaginationText"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css= .current-page"/>
+    <parameter name="textStoreVariableName" value="CurrentPage"/>
+  </module>
+  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
   </module>
-  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css= .current-page"/>
+    <parameter name="textStoreVariableName" value="CurrentPage"/>
+  </module>
+  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
 </scriptmodule>
