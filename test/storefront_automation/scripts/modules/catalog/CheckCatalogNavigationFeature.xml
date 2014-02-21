@@ -14,9 +14,15 @@ MiddlePageNumber: number of the middle page to test navigation elements</descrip
   <parameter name="SubCategoryName"/>
   <parameter name="MiddlePageNumber"/>
   <action name="OpenCategory"/>
-  <command name="clickAndWait" target="link=regexpi:@{MainCategoryName}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=regexpi:@{MainCategoryName}"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=regexpi:@{MainCategoryName}"/>
   <action name="OpenSubcategory"/>
-  <command name="click" target="link=@{SubCategoryName}">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=@{SubCategoryName}"/>
+  </module>
+  <command name="click" disabled="true" target="link=@{SubCategoryName}">
     <comment>Page with more navigation elements</comment>
   </command>
   <module name="modules.catalog.CheckCatalogNavigationOnCategoryPage">

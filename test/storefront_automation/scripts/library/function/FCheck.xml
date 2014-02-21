@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>1. Waits for 'checkElement' to exist.  2. Checks the 'checkElement'.</description>
+  <parameter name="checkElement"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="@{checkElement}"/>
+  </module>
+  <command name="check" target="@{checkElement}"/>
+</scriptmodule>

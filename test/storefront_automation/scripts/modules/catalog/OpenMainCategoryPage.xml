@@ -19,6 +19,13 @@ MainCategoryName: Main Menu Name</description>
     <parameter name="plainString" value="@{MainCategoryName}"/>
   </module>
   <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="@{MainCategoryName}"/>
-  <command name="assertText" target="css=.refinement-header" value="regexpi:.*@{MainCategoryName}"/>
-  <command name="assertElementPresent" target="id=primary"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.refinement-header"/>
+    <parameter name="textPattern" value="regexpi:.*@{MainCategoryName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.refinement-header" value="regexpi:.*@{MainCategoryName}"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=primary"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="id=primary"/>
 </scriptmodule>

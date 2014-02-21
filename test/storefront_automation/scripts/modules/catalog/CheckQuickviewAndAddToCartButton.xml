@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks some basic features of the quickview. Checks if the add-to-cart-button is disabled initially and is enabled after selecting color and size.</description>
-  <command name="assertElementPresent" target="css=#add-to-cart[disabled]">
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=#add-to-cart[disabled]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=#add-to-cart[disabled]">
     <comment>Check for the disabled add to cart button.</comment>
   </command>
   <module name="library.function.FWaitForElement">
@@ -23,7 +26,11 @@
     <comment>Pick a size.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.Color .selected .swatchanchor"/>
-  <command name="waitForText" target="css=.Color .selected-value" value="${ProductColor}">
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.Color .selected-value"/>
+    <parameter name="text" value="${ProductColor}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.Color .selected-value" value="${ProductColor}">
     <comment>Wait for the color title to appear next to the swatches.</comment>
   </command>
   <command name="assertNotElementPresent" target="css=.size .selected">

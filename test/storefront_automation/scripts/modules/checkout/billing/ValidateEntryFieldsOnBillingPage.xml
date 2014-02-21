@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>On the page 'Shipping' is a checkbox 'Use as Billing Address'.
 This module validates the entered paramameters:
@@ -16,7 +16,10 @@ This module validates the entered paramameters:
   <parameter name="State"/>
   <parameter name="City"/>
   <parameter name="ZipCode"/>
-  <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_firstName')[@value='@{FirstName}']"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="xpath=id('dwfrm_billing_billingAddress_addressFields_firstName')[@value='@{FirstName}']"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="xpath=id('dwfrm_billing_billingAddress_addressFields_firstName')[@value='@{FirstName}']"/>
   <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_lastName')[@value='@{LastName}']"/>
   <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_address1')[@value='@{Address}']"/>
   <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_country')/option[@selected='selected'][@label='@{Country}']"/>

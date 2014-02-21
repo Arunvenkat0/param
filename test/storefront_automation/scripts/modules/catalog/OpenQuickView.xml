@@ -7,7 +7,14 @@
   <command name="mouseOver" target="xpath=//div[@class='product-image']/a[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <action name="ClickQuickViewLink"/>
-  <command name="click" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  </module>
+  <command name="click" disabled="true" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
-  <command name="waitForText" target="css=.ui-dialog .product-name" value="${ProductName}"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.ui-dialog .product-name"/>
+    <parameter name="text" value="${ProductName}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.ui-dialog .product-name" value="${ProductName}"/>
 </scriptmodule>

@@ -13,7 +13,11 @@ Amount</description>
   <parameter name="NumberLast4"/>
   <parameter name="ExpireMonthShort"/>
   <parameter name="ExpireYear"/>
-  <command name="assertText" target="css=.mini-payment-instrument span" value="regexpi:.*Payment Method"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-payment-instrument span"/>
+    <parameter name="textPattern" value="regexpi:.*Payment Method"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.mini-payment-instrument span" value="regexpi:.*Payment Method"/>
   <command name="assertText" target="css=.mini-payment-instrument .details" value="glob:*@{Name}*">
     <comment>Validate Complete Name on CC</comment>
   </command>

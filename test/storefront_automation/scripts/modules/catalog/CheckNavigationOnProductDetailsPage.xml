@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>In the detail product view you can switch to the product before and to the product next. Exceptions are:
 - there is no product before
@@ -14,12 +14,18 @@ Approach:
     <parameter name="NavigateToProduct" value="previous"/>
   </module>
   <action name="ClickSubcategoryInBreadcrumb"/>
-  <command name="clickAndWait" target="link=@{SubCategoryName}">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=@{SubCategoryName}"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=@{SubCategoryName}">
     <comment>Open subcategory again - first page.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-last"/>
   <action name="OpenLastPage"/>
-  <command name="click" target="css=.page-last">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.page-last"/>
+  </module>
+  <command name="click" disabled="true" target="css=.page-last">
     <comment>Click last page link.</comment>
   </command>
   <command name="waitForElementPresent" target="css=.page-first"/>

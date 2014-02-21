@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the credit card information on summary page for responsive design:
 Type
@@ -9,7 +9,11 @@ Expire Year</description>
   <parameter name="Last4"/>
   <parameter name="ExpireMonthNumber"/>
   <parameter name="ExpireYear"/>
-  <command name="assertText" target="css=.order-payment-instruments" value="*@{Type}*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-payment-instruments"/>
+    <parameter name="textPattern" value="*@{Type}*"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.order-payment-instruments" value="*@{Type}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*@{Last4}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*Exp.@{ExpireMonthNumber}.@{ExpireYear}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>

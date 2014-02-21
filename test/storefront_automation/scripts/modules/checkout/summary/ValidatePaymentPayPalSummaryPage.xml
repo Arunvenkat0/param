@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the PayPal information on summary page:</description>
-  <command name="assertText" target="css=.item-list th:nth-child(3)" value="regexpi:Payment Method"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.item-list th:nth-child(3)"/>
+    <parameter name="textPattern" value="regexpi:Payment Method"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.item-list th:nth-child(3)" value="regexpi:Payment Method"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*Pay Pal*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>
 </scriptmodule>

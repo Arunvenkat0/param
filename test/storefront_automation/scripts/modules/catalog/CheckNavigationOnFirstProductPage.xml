@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the naviagation elements of very first product detail page within the catalog.</description>
   <action name="SelectFirstProduct"/>
@@ -6,15 +6,37 @@
   <command name="storeEval" target="document.getElementsByClassName('grid-tile')[0].getElementsByClassName('name-link')[0].getAttribute('title')" value="FirstProductName"/>
   <command name="storeEval" target="document.getElementsByClassName('grid-tile')[1].getElementsByClassName('name-link')[0].getAttribute('title')" value="NextProductName"/>
   <action name="ClickFirstProductInGrid"/>
-  <command name="clickAndWait" target="css=.grid-tile:first-child .name-link"/>
-  <command name="assertText" target="css=.breadcrumb .last" value="${FirstProductName}"/>
-  <command name="assertText" target="css=h1.product-name" value="${FirstProductName}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.grid-tile:first-child .name-link"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.grid-tile:first-child .name-link"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb .last"/>
+    <parameter name="textPattern" value="${FirstProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb .last" value="${FirstProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textPattern" value="${FirstProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=h1.product-name" value="${FirstProductName}"/>
   <command name="assertNotElementPresent" target="css=.product-previous a"/>
   <command name="waitForElementPresent" target="css=.product-next a"/>
   <action name="NavigateToNextProduct"/>
-  <command name="clickAndWait" target="css=.product-next a">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.product-next a"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.product-next a">
     <comment>Validation of Next Navigation Working</comment>
   </command>
-  <command name="assertText" target="css=.breadcrumb .last" value="${NextProductName}"/>
-  <command name="assertText" target="css=h1.product-name" value="${NextProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb .last"/>
+    <parameter name="textPattern" value="${NextProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb .last" value="${NextProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textPattern" value="${NextProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=h1.product-name" value="${NextProductName}"/>
 </scriptmodule>

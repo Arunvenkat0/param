@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Switch to product full details page while inside the quick view</description>
-  <command name="clickAndWait" target="link=View Full Details"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=View Full Details"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=View Full Details"/>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <command name="assertText" target="css=.product-name" value="${ProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.product-name"/>
+    <parameter name="textPattern" value="${ProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.product-name" value="${ProductName}"/>
 </scriptmodule>

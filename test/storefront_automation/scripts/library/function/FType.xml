@@ -6,6 +6,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="@{typeElement}"/>
   </module>
-  <command name="waitForElementPresent" target="@{typeElement}"/>
+  <command name="waitForElementPresent" disabled="true" target="@{typeElement}"/>
   <command name="type" target="@{typeElement}" value="@{inputString}"/>
 </scriptmodule>

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Test form validation: make sure user cannot leave required fields blank and can leave optional fields blank.</description>
-  <command name="click" target="name=dwfrm_billing_save value=Continue >"/>
-  <command name="assertText" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName') and contains(@class, 'error')]" value=""/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="name=dwfrm_billing_save value=Continue >"/>
+  </module>
+  <command name="click" disabled="true" target="name=dwfrm_billing_save value=Continue >"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName') and contains(@class, 'error')]"/>
+    <parameter name="textPattern" value=""/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName') and contains(@class, 'error')]" value=""/>
   <command name="assertText" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName') and contains(@class, 'error')]" value=""/>
   <command name="assertText" target="xpath=//input[contains(@id, 'address1')  and contains(@class, 'error')]" value=""/>
   <command name="assertText" target="xpath=//select[contains(@id, 'country')  and contains(@class, 'error')]" value="regexp:Select...*"/>

@@ -3,6 +3,10 @@
   <description>Validates the search result page where a Did You Mean hint is shown.
 Since the used search term is shown at the page this word is saved in the parameter InvalidSearchEntry.</description>
   <parameter name="InvalidSearchEntry"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[@id='primary']/div[2]/p[1]"/>
+    <parameter name="textPattern" value="glob:We're sorry, no products were found for your search:*"/>
+  </module>
   <command name="assertText" target="//div[@id='primary']/div[2]/p[1]" value="glob:We're sorry, no products were found for your search:*"/>
   <command name="assertText" target="//*[@id='primary']//span[contains(@class,'no-hits-search-term')]" value="@{InvalidSearchEntry}"/>
   <command name="assertText" target="//*[@id='primary']//p[2]" value="glob:did you mean:*"/>

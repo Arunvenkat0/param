@@ -3,8 +3,16 @@
   <description>Enters login information and clicks on login button.</description>
   <parameter name="Email"/>
   <parameter name="Password"/>
-  <command name="type" target="css=.email-input" value="@{Email}"/>
-  <command name="type" target="css=.password-input" value="@{Password}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=.email-input"/>
+    <parameter name="inputString" value="@{Email}"/>
+  </module>
+  <command name="type" disabled="true" target="css=.email-input" value="@{Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=.password-input"/>
+    <parameter name="inputString" value="@{Password}"/>
+  </module>
+  <command name="type" disabled="true" target="css=.password-input" value="@{Password}"/>
   <action name="SubmitLogin"/>
   <command name="clickAndWait" target="name=dwfrm_login_login"/>
 </scriptmodule>
