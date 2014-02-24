@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84763)  Smoke Test » Cart » Updates 
+ * Test Case ID:(C84763)  Smoke Test » Cart » Updates
  */
 @ScriptName
 ("testcases.smoketest.cart.TCheckQuantityChangeInCart")

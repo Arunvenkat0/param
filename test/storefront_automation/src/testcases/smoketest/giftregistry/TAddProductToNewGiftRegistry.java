@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85043) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry 
+ * Test Case ID:(C85043) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry
  */
 @ScriptName
 ("testcases.smoketest.giftregistry.TAddProductToNewGiftRegistry")

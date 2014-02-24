@@ -14,5 +14,8 @@
     <parameter name="StandardPrice" value="${StandardProductPrice1}"/>
     <parameter name="ActualPrice" value="${ProductPrice1}"/>
   </module>
-  <command name="assertElementPresent" target="//button[contains(@class,'add-to-cart')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//button[contains(@class,'add-to-cart')]"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="//button[contains(@class,'add-to-cart')]"/>
 </testcase>

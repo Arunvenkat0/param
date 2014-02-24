@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85055 C84762</tags>
-  <description>Test Case ID:(C85055 C84762)  (C8505) Smoke Test » Cart » Behaviour   (C84762) Smoke Test » Cart » Edit Details Overlay </description>
+  <description>Test Case ID:(C85055 C84762)  (C8505) Smoke Test » Cart » Behaviour   (C84762) Smoke Test » Cart » Edit Details Overlay</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -20,10 +20,14 @@
     <parameter name="SearchText" value="${SecondProductID}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <command name="click" target="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]">
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]"/>
+    <parameter name="waitForElement" value="css=.Color .selected"/>
+  </module>
+  <command name="click" disabled="true" target="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]">
     <comment>Select a random color by clicking a color link.</comment>
   </command>
-  <command name="waitForElementPresent" target="css=.Color .selected">
+  <command name="waitForElementPresent" disabled="true" target="css=.Color .selected">
     <comment>Wait for the color to be selected.</comment>
   </command>
   <action name="AddSecondProductToCart"/>
@@ -112,7 +116,11 @@
   <module name="modules.cart.RemoveProductFromCart">
     <parameter name="TableRow" value="1"/>
   </module>
-  <command name="assertText" target="css=#primary h1" value="Your Shopping Cart"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Your Shopping Cart"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=#primary h1" value="Your Shopping Cart"/>
   <command name="assertText" target="css=.cart-empty" value="Your Shopping Cart is Empty">
     <comment>Validate message for empty cart.</comment>
   </command>

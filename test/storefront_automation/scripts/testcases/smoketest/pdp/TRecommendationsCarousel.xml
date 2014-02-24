@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84711</tags>
-  <description>Test Case ID:(C84711)  Smoke Test » Product Details » PDP: Recommendations Carousel </description>
+  <description>Test Case ID:(C84711)  Smoke Test » Product Details » PDP: Recommendations Carousel</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for the product set</comment>
@@ -14,11 +14,17 @@
   <action name="CheckCarouselControls"/>
   <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
   <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
-  <command name="click" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-next')]"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-next')]"/>
+  </module>
+  <command name="click" disabled="true" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-next')]"/>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
   <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
   <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
-  <command name="click" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-prev')]"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-prev')]"/>
+  </module>
+  <command name="click" disabled="true" target="//div[@class='recommendations cross-sell']//div[contains(@class,'jcarousel-prev')]"/>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
   <command name="assertElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: 0px')))]"/>
   <command name="assertNotElementPresent" target="//ul[(contains(@id,'carousel-recomendations') and (contains(@style,'left: -100px')))]"/>
@@ -29,6 +35,9 @@
   <command name="waitForElementPresent" target="//div[@id='tooltip']//div[contains(@class,'product-price')]/div[contains(text(),'${selectedprice}')]"/>
   <command name="mouseOut" target="//li[contains(@class,'jcarousel-item-1')]//div[(contains(@class,'product-name') and (contains(text(),'${selecteRecomemdation}')))]"/>
   <action name="ClickSelectProductDisplayPage"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//li[contains(@class,'jcarousel-item-1')]//div[contains(@class,'product-name')]/a[contains(text(),'${selecteRecomemdation}')]"/>
+  </module>
   <command name="clickAndWait" target="//li[contains(@class,'jcarousel-item-1')]//div[contains(@class,'product-name')]/a[contains(text(),'${selecteRecomemdation}')]"/>
   <command name="assertElementPresent" target="css=h1.product-name">
     <comment>Checks if a headline is displayed.</comment>

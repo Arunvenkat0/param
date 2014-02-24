@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85035) Smoke Test » Store Locator » Store Locator Page 
+ * Test Case ID:(C85035) Smoke Test » Store Locator » Store Locator Page
  */
 @ScriptName
 ("testcases.smoketest.staticpages.TValidateStoreLocatorPage")

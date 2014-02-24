@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(?) 
+ * Test Case ID:(?)
  */
 @ScriptName
 ("testcases.smoketest.pdp.TVariationProductWithOptions")

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84737</tags>
-  <description>[ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card </description>
+  <description>[ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
   <action name="OpenPaymentSettings"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(5) a"/>
   <action name="AddVisa"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
@@ -86,8 +89,11 @@
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

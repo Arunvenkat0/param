@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84769</tags>
-  <description>Test Case ID:(C84769)  Smoke Test » Quickview » QuickView: Add to Gift Registry </description>
+  <description>Test Case ID:(C84769)  Smoke Test » Quickview » QuickView: Add to Gift Registry</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
     <comment>Navigate to Mens --> Footwear catalog page</comment>
@@ -11,14 +11,21 @@
   <module name="modules.catalog.OpenSubCategoryPage">
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
-  <command name="storeText" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
+    <parameter name="textStoreVariableName" value="ProductName"/>
+  </module>
+  <command name="storeText" disabled="true" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
   <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
   <action name="OpenQuickview"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>
   <module name="modules.quickview.MCheckOverView"/>
-  <command name="clickAndWait" target="//a[contains(text(),'Add to Gift Registry')]"/>
-  <command name="assertElementPresent" target="css=.user-login"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//a[contains(text(),'Add to Gift Registry')]"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="//a[contains(text(),'Add to Gift Registry')]"/>
+  <command name="waitForElementPresent" target="css=.user-login"/>
   <command name="assertElementPresent" target="css=.user-register"/>
   <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
   <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
@@ -26,7 +33,11 @@
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Gift Registry">
     <comment>Validates correct breadcrumb text.</comment>
   </command>
   <command name="assertText" target="//div[@id='primary']/h1" value="Gift Registry">
@@ -34,16 +45,29 @@
   </command>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
   <action name="EnterShippingData"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm value=Continue"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm value=Continue"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_event_confirm value=Continue"/>
   <module name="modules.giftregistry.GiftRegistryEnterShippingData"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
+  </module>
   <command name="clickAndWait" target="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
   <command name="assertTextPresent" disabled="true" value="glob:*${UserFirstName} ${UserLastName}*,* ${SecondParticipantFirstName} ${SecondParticipantLastName}*${EventType}*${EventDate}"/>
   <command name="assertTextPresent" disabled="true">
     <value>glob:*${ShippingAddressFirstName} ${ShippingAddressLastName}*${ShippingAddressStreet} ${ShippingAddressCity}*${ShippingAddressZipCode}</value>
   </command>
   <action name="SubmitGiftRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_event_confirm"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Gift Registry">
     <comment>Validates correct breadcrumb text.</comment>
   </command>
   <command name="assertElementPresent" target="//table[contains(@class,'item-list')]"/>

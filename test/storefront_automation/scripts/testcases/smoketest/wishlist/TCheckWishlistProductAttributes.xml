@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85052</tags>
-  <description>Test Case ID:(C85052) Smoke Test » My Account - Returning Customer » Wish List » Check Wishlist Product Attributes </description>
+  <description>Test Case ID:(C85052) Smoke Test » My Account - Returning Customer » Wish List » Check Wishlist Product Attributes</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -48,20 +48,39 @@
   <action name="ChangeWishlistAttributesFirstProduct"/>
   <command name="store" target="${RANDOM.Number(1,10)}" value="FirstProductQuantity"/>
   <command name="store" target="${RANDOM.Number(1,5)}" value="FirstProductPriority"/>
-  <command name="type" target="id=dwfrm_wishlist_items_i0_quantity" value="${FirstProductQuantity}"/>
-  <command name="select" target="id=dwfrm_wishlist_items_i0_priority" value="value=${FirstProductPriority}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_items_i0_quantity"/>
+    <parameter name="inputString" value="${FirstProductQuantity}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_wishlist_items_i0_quantity" value="${FirstProductQuantity}"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="id=dwfrm_wishlist_items_i0_priority"/>
+    <parameter name="selection" value="value=${FirstProductPriority}"/>
+  </module>
+  <command name="select" disabled="true" target="id=dwfrm_wishlist_items_i0_priority" value="value=${FirstProductPriority}"/>
   <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i0_updateItem']"/>
   <action name="ChangeWishlistAttributesSecondProduct"/>
   <command name="store" target="${RANDOM.Number(1,10)}" value="SecondProductQuantity"/>
   <command name="store" target="${RANDOM.Number(1,5)}" value="SecondProductPriority"/>
-  <command name="type" target="id=dwfrm_wishlist_items_i1_quantity" value="${SecondProductQuantity}"/>
-  <command name="select" target="id=dwfrm_wishlist_items_i1_priority" value="value=${SecondProductPriority}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_items_i1_quantity"/>
+    <parameter name="inputString" value="${SecondProductQuantity}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_wishlist_items_i1_quantity" value="${SecondProductQuantity}"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="id=dwfrm_wishlist_items_i1_priority"/>
+    <parameter name="selection" value="value=${SecondProductPriority}"/>
+  </module>
+  <command name="select" disabled="true" target="id=dwfrm_wishlist_items_i1_priority" value="value=${SecondProductPriority}"/>
   <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i1_updateItem']"/>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="LoginAgain"/>
@@ -97,7 +116,7 @@
   <action name="MakeTheListPublic"/>
   <command name="clickAndWait" target="xpath=id('dwfrm_wishlist_share')//button[@name='dwfrm_wishlist_setListPublic']"/>
   <module name="modules.wishlist.ValidateAccountWishlistPageStructure"/>
-  <command name="assertElementPresent" target="css=#dwfrm_wishlist_share button[name='dwfrm_wishlist_setListPrivate']">
+  <command name="waitForElementPresent" target="css=#dwfrm_wishlist_share button[name='dwfrm_wishlist_setListPrivate']">
     <comment>Checks if the button which makes the list private is present.</comment>
   </command>
   <command name="assertChecked" target="id=dwfrm_wishlist_items_i0_public">
@@ -110,8 +129,11 @@
   <command name="uncheck" target="id=dwfrm_wishlist_items_i1_public"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i1_updateItem']"/>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHome"/>
@@ -120,21 +142,40 @@
   <command name="clickAndWait" target="link=regexpi:Wish List"/>
   <module name="modules.usermanagement.ValidateWishlistLoginPageStructure"/>
   <action name="FindAWishlist"/>
-  <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
+    <parameter name="inputString" value="${UserLastName}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
+    <parameter name="inputString" value="${UserFirstName}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
+    <parameter name="inputString" value="${Email}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
   <action name="SubmitWishlistSearch"/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
   </command>
-  <command name="assertText" target="css=#primary h1" value="glob:Find Someone's Wish List:">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="glob:Find Someone's Wish List:"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=#primary h1" value="glob:Find Someone's Wish List:">
     <comment>Validate headline on wishlist result page.</comment>
   </command>
   <command name="assertXpathCount" target="id('primary')/table[@class='wish-list-results-table']//tr" value="2">
     <comment>Checks if 2 table rows are present (result row + header row).</comment>
   </command>
   <action name="ViewTheWishlist"/>
-  <command name="clickAndWait" target="css=.wish-list-results-table tr:nth-child(2) .view a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.wish-list-results-table tr:nth-child(2) .view a"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.wish-list-results-table tr:nth-child(2) .view a"/>
   <command name="assertXpathCount" target="id('primary')//table[@class='item-list']/tbody/tr" value="2">
     <comment>Product row + header row</comment>
   </command>
@@ -147,6 +188,10 @@
     <parameter name="ProductName" value="${FirstProductName}"/>
     <parameter name="ProductID" value="${FirstProductID}"/>
     <parameter name="ProductPrice" value="${FirstProductPrice}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.item-list tr:nth-child(2) .item-dashboard .option-quantity-desired .value"/>
+    <parameter name="textPattern" value="${FirstProductQuantity}"/>
   </module>
   <command name="assertText" target="css=.item-list tr:nth-child(2) .item-dashboard .option-quantity-desired .value" value="${FirstProductQuantity}"/>
   <command name="assertText" target="css=.item-list tr:nth-child(2) .item-dashboard .option-priority .value" value="${FirstProductPriorityText}"/>

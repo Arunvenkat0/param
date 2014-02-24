@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84728) Smoke Test » Purchasing Gift Certificates » Purchase a Gift Certificate 
+ * Test Case ID:(C84728) Smoke Test » Purchasing Gift Certificates » Purchase a Gift Certificate
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseGiftCertificates")

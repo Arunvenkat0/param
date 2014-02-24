@@ -3,7 +3,11 @@
   <tags>C84773,C84725,C84726,C84727</tags>
   <description>Test Case ID:(C84773,C84725,C84726,C84727)  (C84773) Smoke Test » Header | Global Navigation | Footer » Cart in Header,  (C84725) Smoke Test » Mini-Cart » Mini-Cart: Opening and Closing</description>
   <module name="modules.staticelements.Homepage"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-empty" value="(0)">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-cart-total .mini-cart-empty"/>
+    <parameter name="textPattern" value="(0)"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-empty" value="(0)">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <action name="Product-1"/>
@@ -20,15 +24,17 @@
     <parameter name="Name" value="${ProductName1}"/>
     <parameter name="PriceProduct" value="${ProductPrice1}"/>
   </module>
-  <command name="storeText" target="css=.mini-cart-total .mini-cart-link" value="TestText"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.mini-cart-total .mini-cart-link"/>
+    <parameter name="textStoreVariableName" value="TestText"/>
+  </module>
+  <command name="storeText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="TestText"/>
   <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="regexp:^*CART*"/>
   <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="glob:CART (2) ITEMS, TOTAL: $359.98"/>
   <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="regexp:CART \(2\) ITEMS, TOTAL: \$359.98"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(2\) ITEMS, TOTAL: \$359.98$"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\) ITEMS, TOTAL: \$359.98$"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^CART \(2\).*$
-
-"/>
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^CART \(2\).*$  "/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\).*$"/>
   <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="Cart (${ProductQuantity1})*">
     <comment>Checks the correct quantity in mini cart</comment>
@@ -174,6 +180,10 @@
   </command>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-totals-table .order-subtotal"/>
+    <parameter name="textPattern" value="Subtotal ${price}"/>
   </module>
   <command name="assertText" target="css=.order-totals-table .order-subtotal" value="Subtotal ${price}">
     <comment>Checks the correct quantity in mini cart</comment>
