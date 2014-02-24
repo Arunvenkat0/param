@@ -77,8 +77,10 @@ var app = (function (app, $) {
 		});
 
 
-		//initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
-		//this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
+		/**
+		 * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
+		 * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
+		 * */
 		if(app.clientcache.LISTING_SEARCHSUGGEST_LEGACY){
 			app.searchsuggestbeta.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
 		}else{

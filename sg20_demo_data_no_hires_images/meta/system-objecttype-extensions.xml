@@ -3713,8 +3713,8 @@
                  <default-value>false</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="enhancedSearchSuggestions">
-                <display-name xml:lang="x-default">Enhanced Search Suggestions (BETA)</display-name>
-                <description xml:lang="x-default">To enable Enhanced Search Suggestions (BETA) set this site preference to True and set the Search Preferences&gt;Search Suggestion Settings &gt; Enhanced Search Suggestions (BETA) option to Enabled.&#13;
+                <display-name xml:lang="x-default">Enhanced Search Suggestions</display-name>
+                <description xml:lang="x-default">To enable Enhanced Search Suggestions set this site preference to True and set the Search Preferences&gt;Search Suggestion Settings &gt; Search Suggestions option to Enabled.&#13;
 To enable the older version of search suggestions, set this site preference to False and set the Search Preferences&gt;Search Suggestion Settings &gt; Search Suggestions option to Enabled.&#13;
 The Search Preferences&gt;Search Suggestion option is set to Disabled by default.</description>
                 <type>boolean</type>
