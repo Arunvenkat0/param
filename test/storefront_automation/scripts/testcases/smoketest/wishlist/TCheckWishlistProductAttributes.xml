@@ -52,12 +52,10 @@
     <parameter name="typeElement" value="id=dwfrm_wishlist_items_i0_quantity"/>
     <parameter name="inputString" value="${FirstProductQuantity}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_items_i0_quantity" value="${FirstProductQuantity}"/>
   <module name="library.function.FSelect">
     <parameter name="element" value="id=dwfrm_wishlist_items_i0_priority"/>
     <parameter name="selection" value="value=${FirstProductPriority}"/>
   </module>
-  <command name="select" disabled="true" target="id=dwfrm_wishlist_items_i0_priority" value="value=${FirstProductPriority}"/>
   <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i0_updateItem']"/>
   <action name="ChangeWishlistAttributesSecondProduct"/>
@@ -67,20 +65,16 @@
     <parameter name="typeElement" value="id=dwfrm_wishlist_items_i1_quantity"/>
     <parameter name="inputString" value="${SecondProductQuantity}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_items_i1_quantity" value="${SecondProductQuantity}"/>
   <module name="library.function.FSelect">
     <parameter name="element" value="id=dwfrm_wishlist_items_i1_priority"/>
     <parameter name="selection" value="value=${SecondProductPriority}"/>
   </module>
-  <command name="select" disabled="true" target="id=dwfrm_wishlist_items_i1_priority" value="value=${SecondProductPriority}"/>
   <action name="AndApply"/>
   <command name="clickAndWait" target="css=button[name='dwfrm_wishlist_items_i1_updateItem']"/>
   <action name="GoToWelcomePage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="LoginAgain"/>
@@ -132,8 +126,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHome"/>
@@ -146,17 +138,14 @@
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
     <parameter name="inputString" value="${UserLastName}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
     <parameter name="inputString" value="${UserFirstName}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
     <parameter name="inputString" value="${Email}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
   <action name="SubmitWishlistSearch"/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
@@ -165,9 +154,6 @@
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="glob:Find Someone's Wish List:"/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="glob:Find Someone's Wish List:">
-    <comment>Validate headline on wishlist result page.</comment>
-  </command>
   <command name="assertXpathCount" target="id('primary')/table[@class='wish-list-results-table']//tr" value="2">
     <comment>Checks if 2 table rows are present (result row + header row).</comment>
   </command>
@@ -175,7 +161,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.wish-list-results-table tr:nth-child(2) .view a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.wish-list-results-table tr:nth-child(2) .view a"/>
   <command name="assertXpathCount" target="id('primary')//table[@class='item-list']/tbody/tr" value="2">
     <comment>Product row + header row</comment>
   </command>

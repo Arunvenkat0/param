@@ -11,7 +11,6 @@
     <parameter name="textElement" value="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3"/>
     <parameter name="textPattern" value="regexpi:.*Shipping Address"/>
   </module>
-  <command name="assertText" disabled="true" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3" value="regexpi:.*Shipping Address"/>
   <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/div/div[1]" value="@{Name}">
     <comment>Validate Address Name</comment>
   </command>

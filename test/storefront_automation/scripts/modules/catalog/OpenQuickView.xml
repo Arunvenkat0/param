@@ -10,11 +10,9 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   </module>
-  <command name="click" disabled="true" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.ui-dialog .product-name"/>
     <parameter name="text" value="${ProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.ui-dialog .product-name" value="${ProductName}"/>
 </scriptmodule>

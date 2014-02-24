@@ -17,17 +17,11 @@ Approach:
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=@{SubCategoryName}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=@{SubCategoryName}">
-    <comment>Open subcategory again - first page.</comment>
-  </command>
   <command name="waitForElementPresent" target="css=.page-last"/>
   <action name="OpenLastPage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.page-last"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-last">
-    <comment>Click last page link.</comment>
-  </command>
   <command name="waitForElementPresent" target="css=.page-first"/>
   <command name="storeEval" target="document.getElementsByClassName('product-name').item(document.getElementsByClassName('product-name').length-1).textContent.trim()" value="LastProductName"/>
   <module name="modules.catalog.CheckNavigationOnLastProductPage"/>

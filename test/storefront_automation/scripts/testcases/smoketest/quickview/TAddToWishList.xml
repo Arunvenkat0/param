@@ -15,12 +15,10 @@
     <parameter name="textElement" value="css=.grid-tile:first-child .name-link"/>
     <parameter name="textStoreVariableName" value="ProductName"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.grid-tile:first-child .product-sales-price"/>
     <parameter name="textStoreVariableName" value="ProductPrice"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
   <action name="OpenQuickview"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>
@@ -28,7 +26,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//a[contains(text(),'Add to Wishlist')]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//a[contains(text(),'Add to Wishlist')]"/>
   <command name="assertElementPresent" target="css=.user-login"/>
   <command name="assertElementPresent" target="css=.user-register"/>
   <command name="assertText" target="css=.user-login" value="regexpi:Login"/>

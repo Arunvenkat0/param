@@ -5,60 +5,38 @@
   <module name="library.function.FOpenURLAndRemoveCookies">
     <parameter name="URL" value="${BMurl}"/>
   </module>
-  <command name="open" disabled="true" value="${BMurl}"/>
-  <command name="deleteAllVisibleCookies" disabled="true"/>
-  <command name="open" disabled="true" value="${BMurl}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='LoginForm_Login']"/>
     <parameter name="inputString" value="${bmlogin} "/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//input[@name='LoginForm_Login']"/>
-  <command name="type" disabled="true" target="//input[@name='LoginForm_Login']" value="${bmlogin} "/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='LoginForm_Password']"/>
     <parameter name="inputString" value="${BM}"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//input[@name='LoginForm_Password']"/>
-  <command name="type" disabled="true" target="//input[@name='LoginForm_Password']" value="${BM}"/>
-  <module name="library.function.FClickAndWaitForPageLoad" disabled="true">
+  <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//input[contains(@type,'submit')]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//input[contains(@type,'submit')]"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
-  <command name="clickAndWait" disabled="true" target="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//td[@id='bm_content_column']//a[text()='Site Genesis']"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//td[@id='bm_content_column']//a[text()='Site Genesis']"/>
-  <command name="clickAndWait" disabled="true" target="//td[@id='bm_content_column']//a[text()='Site Genesis']"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//td[@id='bm_content_column']//a[text()='Products and Catalogs']"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//td[@id='bm_content_column']//a[text()='Products and Catalogs']"/>
-  <command name="clickAndWait" disabled="true" target="//td[@id='bm_content_column']//a[text()='Products and Catalogs']"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//td[@id='bm_content_column']//a[text()='Catalogs']"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//td[@id='bm_content_column']//a[text()='Catalogs']"/>
-  <command name="clickAndWait" disabled="true" target="//td[@id='bm_content_column']//a[text()='Catalogs']"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//td[@id='bm_content_column']//a[text()='storefront-catalog-en']"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//td[@id='bm_content_column']//a[text()='storefront-catalog-en']"/>
-  <command name="clickAndWait" disabled="true" target="//td[@id='bm_content_column']//a[text()='storefront-catalog-en']"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//tr[td[contains(@class,'table_detail4')]//a[text()='${category}']]/td//a[text()='Edit']"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="//tr[td[contains(@class,'table_detail4')]//a[text()='${category}']]/td//a[text()='Edit']"/>
-  <command name="clickAndWait" disabled="true" target="//tr[td[contains(@class,'table_detail4')]//a[text()='${category}']]/td//a[text()='Edit']"/>
   <module name="library.function.FClickAndWaitForPageLoad">
-    <parameter name="clickElement" value=""/>
+    <parameter name="clickElement" value="//td[@id='bm_content_column']//a[text()='Search Refinement Definitions']"/>
   </module>
-  <command name="waitForElementPresent" target="//td[@id='bm_content_column']//a[text()='Search Refinement Definitions']"/>
-  <command name="clickAndWait" target="//td[@id='bm_content_column']//a[text()='Search Refinement Definitions']"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][1]/td[3]" value="text1"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][2]/td[3]" value="text2"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][3]/td[3]" value="text3"/>
@@ -67,7 +45,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=regexpi:${category}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=regexpi:${category}"/>
   <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text1}')]"/>
   <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text2}')]"/>
   <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text3}')]"/>

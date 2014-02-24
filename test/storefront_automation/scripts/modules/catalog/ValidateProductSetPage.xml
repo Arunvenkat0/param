@@ -9,7 +9,6 @@
     <parameter name="textElement" value="css=.breadcrumb .last"/>
     <parameter name="textPattern" value="@{ProductSetName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb .last" value="@{ProductSetName}"/>
   <command name="assertText" target="css=h1.product-name" value="@{ProductSetName}"/>
   <command name="assertElementPresent" target="css=.product-primary-image"/>
   <command name="assertXpathCount" target="id('product-set-list')/div[@class='product-set-item']" value="@{NumberOfProducts}"/>
@@ -26,7 +25,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=add-all-to-cart"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=add-all-to-cart"/>
   <command name="assertText" target="css=.product-actions .menu" value="*Send to a Friend"/>
   <command name="assertElementPresent" target="css=.addthis_toolbox"/>
 </scriptmodule>

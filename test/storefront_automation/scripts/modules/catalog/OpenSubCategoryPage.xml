@@ -5,7 +5,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=@{SubCategoryName}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=@{SubCategoryName}"/>
   <command name="waitForElementPresent" target="xpath=id('search-result-items')/li[1]">
     <comment>Is there at least one product</comment>
   </command>

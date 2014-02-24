@@ -7,7 +7,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=is-CREDIT_CARD"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=is-CREDIT_CARD"/>
   <command name="assertChecked" target="id=is-CREDIT_CARD"/>
   <command name="assertElementPresent" target="id=PaymentMethod_CREDIT_CARD"/>
   <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
@@ -24,9 +23,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=is-BML"/>
   </module>
-  <command name="check" disabled="true" target="id=is-BML">
-    <comment>Select BML as Payment Option</comment>
-  </command>
   <command name="waitForElementPresent" target="id=PaymentMethod_BML"/>
   <command name="assertElementPresent" target="id=dwfrm_billing_paymentMethods_bml_year">
     <comment>BML Elements Validation</comment>

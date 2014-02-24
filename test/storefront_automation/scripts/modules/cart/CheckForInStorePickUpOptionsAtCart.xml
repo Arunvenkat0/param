@@ -4,17 +4,13 @@
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="Delivery Options"/>
   </module>
-  <command name="waitForTextPresent" disabled="true" value="Delivery Options"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.cart-row:nth-child(1) .item-delivery-options .home-delivery"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.cart-row:nth-child(1) .item-delivery-options .home-delivery"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.cart-row:nth-child(1) .item-delivery-options .instore-delivery"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.cart-row:nth-child(1) .item-delivery-options .instore-delivery"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="link=Select Store"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="link=Select Store"/>
 </scriptmodule>

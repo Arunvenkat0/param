@@ -7,7 +7,6 @@
     <parameter name="textElement" value="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//h1"/>
     <parameter name="textPattern" value="@{ProductName}"/>
   </module>
-  <command name="assertText" disabled="true" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//h1" value="@{ProductName}"/>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]/div[@class='product-set-image']"/>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//input[@name='Quantity']"/>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//span[@class='price-sales']"/>

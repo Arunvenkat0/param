@@ -5,19 +5,16 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-thumbnails li:nth-child(2) img"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.product-thumbnails li:nth-child(2) img"/>
   <command name="storeEval" target="document.getElementsByClassName('primary-image')[0].getAttribute('src')" value="ImageNumber1"/>
   <action name="SelectAlternativeProductImage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.product-thumbnails li:nth-child(2) img"/>
   </module>
-  <command name="click" disabled="true" target="css=.product-thumbnails li:nth-child(2) img"/>
   <command name="waitForNotElementPresent" target="css=.primary-image[src*=&quot;${ImageNumber1}&quot;]"/>
   <command name="storeEval" target="document.getElementsByClassName('primary-image')[0].getAttribute('src')" value="ImageNumber2"/>
   <action name="SelectAlternativeProductImage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.product-thumbnails li:nth-child(1) img"/>
   </module>
-  <command name="click" disabled="true" target="css=.product-thumbnails li:nth-child(1) img"/>
   <command name="waitForNotElementPresent" target="css=.primary-image[src*=&quot;${ImageNumber2}&quot;]"/>
 </scriptmodule>

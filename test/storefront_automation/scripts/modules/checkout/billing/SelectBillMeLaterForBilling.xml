@@ -8,9 +8,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=is-BML"/>
   </module>
-  <command name="check" disabled="true" target="id=is-BML">
-    <comment>Select PAyPal as Pament Method</comment>
-  </command>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
@@ -22,16 +19,13 @@
     <parameter name="element" value="id=dwfrm_billing_paymentMethods_bml_year"/>
     <parameter name="selection" value="label=@{Year}"/>
   </module>
-  <command name="select" disabled="true" target="id=dwfrm_billing_paymentMethods_bml_year" value="label=@{Year}"/>
   <command name="select" target="id=dwfrm_billing_paymentMethods_bml_month" value="label=@{Month}"/>
   <command name="select" target="id=dwfrm_billing_paymentMethods_bml_day" value="label=@{Day}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_billing_paymentMethods_bml_ssn"/>
     <parameter name="inputString" value="@{Snn}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_billing_paymentMethods_bml_ssn" value="@{Snn}"/>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
 </scriptmodule>

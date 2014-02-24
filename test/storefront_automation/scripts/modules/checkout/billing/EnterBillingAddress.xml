@@ -27,5 +27,4 @@ Address 2 and Phone are not mandatory.</description>
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
     <parameter name="inputString" value="@{Email}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]" value="@{Email}"/>
 </scriptmodule>

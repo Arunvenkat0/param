@@ -13,5 +13,4 @@ Shipping Method Name: gets the Shipping Method Name from the Global Test Data</d
     <parameter name="element" value="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID"/>
     <parameter name="selection" value="@{ShippingMethodName}*"/>
   </module>
-  <command name="select" disabled="true" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position}_shippingMethodID" value="@{ShippingMethodName}*"/>
 </scriptmodule>

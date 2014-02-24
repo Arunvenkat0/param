@@ -13,7 +13,6 @@
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="Addresses"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <action name="CreateShippingAddress"/>
   <module name="modules.adressmanagement.CreateAddress">
@@ -121,7 +120,6 @@
     <parameter name="textElement" value="css=.address legend"/>
     <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
@@ -217,9 +215,6 @@
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Thank you for your order."/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="Thank you for your order.">
-    <comment>Validate Order Submission Message</comment>
-  </command>
   <command name="assertText" target="css=.order-confirmation-details h2" value="Order Summary"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
     <comment>Validate First Product Datail</comment>
@@ -266,7 +261,6 @@
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="Addresses"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <module name="modules.adressmanagement.DeleteLastAddress">
     <parameter name="AddressCount" value="1"/>
@@ -282,8 +276,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutFromWelcomePage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

@@ -13,28 +13,21 @@ Validate it remains the selected color (on product details page)</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.swatchanchor[title=&quot;@{SelectedColor}&quot;]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.swatchanchor[title=&quot;@{SelectedColor}&quot;]">
-    <comment>Check if the correct swatch is selected.</comment>
-  </command>
   <action name="CloseQuickview"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.ui-dialog-titlebar-close"/>
   </module>
-  <command name="click" disabled="true" target="css=.ui-dialog-titlebar-close"/>
   <action name="ValidateSwatchResultOnProductPage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="xpath=//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="xpath=//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.breadcrumb .last"/>
     <parameter name="text" value="${ProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.breadcrumb .last" value="${ProductName}"/>
   <command name="waitForElementPresent" target="css=.Color li.selected"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.Color li.selected a"/>
     <parameter name="text" value="@{SelectedColor}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.Color li.selected a" value="@{SelectedColor}"/>
 </scriptmodule>

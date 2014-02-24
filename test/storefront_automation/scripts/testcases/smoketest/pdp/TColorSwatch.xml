@@ -14,51 +14,29 @@
     <parameter name="textElement" value="css=.Color .emptyswatch .swatchanchor"/>
     <parameter name="textStoreVariableName" value="ColorSelected"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
-    <comment>Select size.</comment>
-  </command>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
     <parameter name="waitForElement" value="//li[contains(text(),'${ColorSelected}') ]"/>
   </module>
-  <command name="click" disabled="true" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="//li[contains(text(),'${ColorSelected}') ]"/>
   <command name="waitForElementPresent" target="css=.Color .selected"/>
   <command name="waitForElementPresent" target="css=.size .unselectable"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.size  .emptyswatch .swatchanchor"/>
     <parameter name="textStoreVariableName" value="SizeSelected"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.size  .emptyswatch .swatchanchor" value="SizeSelected">
-    <comment>Select size.</comment>
-  </command>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.size  .emptyswatch .swatchanchor"/>
     <parameter name="waitForElement" value="css=.size .selected"/>
   </module>
-  <command name="click" disabled="true" target="css=.size  .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.size .selected"/>
   <command name="waitForElementPresent" target="//li[contains(text(),'${SizeSelected}') ]"/>
   <command name="waitForElementPresent" target="css=.width .unselectable"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.width .emptyswatch .swatchanchor"/>
     <parameter name="textStoreVariableName" value="WidthSelected"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.width .emptyswatch .swatchanchor" value="WidthSelected">
-    <comment>Select size.</comment>
-  </command>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.width .emptyswatch .swatchanchor"/>
     <parameter name="waitForElement" value="css=.width .selected"/>
   </module>
-  <command name="click" disabled="true" target="css=.width .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.width .selected"/>
   <command name="waitForElementPresent" target="//li[contains(text(),'${WidthSelected}') ]"/>
-  <command name="assertElementPresent" disabled="true" target="//div[@class='product-add-to-cart']//button[contains(@title,'Select Color and Size')]"/>
 </testcase>

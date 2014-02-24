@@ -4,11 +4,9 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=View Full Details"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=View Full Details"/>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.product-name"/>
     <parameter name="textPattern" value="${ProductName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.product-name" value="${ProductName}"/>
 </scriptmodule>

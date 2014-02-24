@@ -10,7 +10,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/h3"/>
   <command name="assertElementPresent" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')]/div/div[1][.='@{Name}']">
     <comment>Validate Address Name</comment>
   </command>

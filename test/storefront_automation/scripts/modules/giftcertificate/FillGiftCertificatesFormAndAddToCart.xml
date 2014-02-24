@@ -11,7 +11,6 @@
     <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_from"/>
     <parameter name="inputString" value="@{Donor}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_giftcert_purchase_from" value="@{Donor}"/>
   <command name="type" target="id=dwfrm_giftcert_purchase_recipient" value="@{FriendsName}"/>
   <command name="type" target="id=dwfrm_giftcert_purchase_recipientEmail" value="@{Email}"/>
   <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
@@ -21,5 +20,4 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=AddToBasketButton"/>
   </module>
-  <command name="click" disabled="true" target="id=AddToBasketButton"/>
 </scriptmodule>

@@ -14,5 +14,4 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//button[contains(@class,'add-to-cart')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//button[contains(@class,'add-to-cart')]"/>
 </testcase>

@@ -11,7 +11,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(5) a"/>
   <action name="AddVisa"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${FirstName} ${LastName}"/>
@@ -92,8 +91,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

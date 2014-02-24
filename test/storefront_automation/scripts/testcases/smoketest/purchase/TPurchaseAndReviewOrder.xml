@@ -163,9 +163,6 @@
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Thank you for your order."/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="Thank you for your order.">
-    <comment>Validate Order Submission Message</comment>
-  </command>
   <command name="assertText" target="css=.order-confirmation-details h2" value="Order Summary"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
     <comment>Validate First Product Datail</comment>
@@ -208,7 +205,6 @@
     <parameter name="textElement" value="css=.order-number .value"/>
     <parameter name="textStoreVariableName" value="OrderNumber"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.order-number .value" value="OrderNumber"/>
   <command name="storeText" target="css=.order-total td:nth-child(2)" value="OrderTotal"/>
   <action name="GoToWelcomePage"/>
   <command name="clickAndWait" target="css=.user-account"/>
@@ -230,7 +226,6 @@
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="${OrderNumber}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="${OrderNumber}"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
     <comment>Validate First Product Datail</comment>
     <parameter name="Position" value="1"/>
@@ -265,8 +260,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="ClickOnCheckOrderStatus"/>
   <command name="clickAndWait" target="link=regexpi:Check Order"/>
@@ -276,19 +269,16 @@
     <parameter name="typeElement" value="id=dwfrm_ordertrack_orderNumber"/>
     <parameter name="inputString" value="${OrderNumber}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_ordertrack_orderNumber" value="${OrderNumber}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_ordertrack_postalCode"/>
     <parameter name="inputString" value="${BillingAddressZipCode}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_ordertrack_postalCode" value="${BillingAddressZipCode}"/>
   <action name="SubmitOrderSearchAndValidate"/>
   <command name="clickAndWait" target="css=#dwfrm_ordertrack button[name='dwfrm_ordertrack_findorder']"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="${OrderNumber}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="${OrderNumber}"/>
   <module name="modules.checkout.summary.ValidateProductDataOnSummaryPage">
     <comment>Validate First Product Datail</comment>
     <parameter name="Position" value="1"/>

@@ -43,17 +43,14 @@
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
     <parameter name="inputString" value="${UserLastName}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
     <parameter name="inputString" value="${UserFirstName}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
     <parameter name="inputString" value="${Email}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
   <action name="SubmitWishlistSearch"/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
@@ -80,17 +77,14 @@
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
     <parameter name="inputString" value="${ILastName}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_wishlist_search_lastname" value="${ILastName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
     <parameter name="inputString" value="${IFirstName}"/>
   </module>
-  <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${IFirstName}"/>
   <module name="library.function.FType">
-    <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
     <parameter name="inputString" value=""/>
   </module>
-  <command name="type" target="id=dwfrm_wishlist_search_email" value=""/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
   </command>

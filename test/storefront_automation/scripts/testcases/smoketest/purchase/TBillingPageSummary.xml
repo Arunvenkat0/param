@@ -16,9 +16,6 @@
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="textStoreVariableName" value="FirstProductName"/>
   </module>
-  <command name="storeText" disabled="true" target="css=h1.product-name" value="FirstProductName">
-    <comment>Store the product name using the headline on product details page.</comment>
-  </command>
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="FirstProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
@@ -28,10 +25,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
   </module>
-  <command name="click" disabled="true" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" disabled="true" value="100"/>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${FirstProductQuantity}"/>
     <parameter name="ProductName" value="${FirstProductName}"/>
@@ -59,24 +52,11 @@
     <parameter name="clickElement" value="css=.Color .emptyswatch a"/>
     <parameter name="waitForElement" value="css=.Color .selected"/>
   </module>
-  <command name="click" disabled="true" target="css=.Color .emptyswatch a">
-    <comment>Select a random color by clicking a color link.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.Color .selected">
-    <comment>Wait for the color to be selected.</comment>
-  </command>
   <action name="SelectSize"/>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.size .emptyswatch a[title=S]"/>
     <parameter name="waitForElement" value="css=.size .selected"/>
   </module>
-  <command name="click" disabled="true" target="css=.size .emptyswatch a[title=S]"/>
-  <command name="click" disabled="true" target="css=.size .emptyswatch a">
-    <comment>Select a random size by clicking one of the size options.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.size .selected">
-    <comment>Wait for the color to be selected.</comment>
-  </command>
   <action name="StoreProductDataAndAddToCart"/>
   <command name="store" target="${RANDOM.Number(1,10)}" value="SecondProductQuantity">
     <comment>Generate a random quantity and store the value.</comment>
@@ -85,9 +65,6 @@
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="textStoreVariableName" value="SecondProductName"/>
   </module>
-  <command name="storeText" disabled="true" target="css=h1.product-name" value="SecondProductName">
-    <comment>Store the product name using the headline on product details page.</comment>
-  </command>
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="SecondProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
@@ -121,9 +98,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]">
-    <comment>Click the guest checkout link.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="1"/>
     <parameter name="StepText" value="Shipping"/>
@@ -156,9 +130,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
@@ -170,9 +141,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
@@ -213,7 +181,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-shipment a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-shipment a"/>
   <module name="modules.adressmanagement.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
     <parameter name="LastName" value="${ShippingLastNameEdit}"/>
@@ -228,9 +195,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumberEdit}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodNameEdit}"/>
@@ -239,9 +203,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
   <module name="modules.checkout.billing.ValidateEntryFieldsOnBillingPage">
     <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
     <parameter name="LastName" value="${ShippingLastNameEdit}"/>
@@ -267,7 +228,6 @@
     <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
     <parameter name="inputString" value="${RandomEmailAddress}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
   <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
     <comment>Validate All Payment Methods available on page</comment>
   </module>
@@ -285,9 +245,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="3"/>
     <parameter name="StepText" value="Place Order"/>
@@ -332,14 +289,10 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=submit"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=submit">
-    <comment>Place the order by clicking the button.</comment>
-  </command>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Thank you for your order."/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="Thank you for your order."/>
   <command name="assertText" target="css=.order-date span:first-child" value="Order Placed"/>
   <command name="assertText" target="css=#main .order-total td:first-child" value="glob:Order Total:"/>
   <module name="modules.checkout.summary.ValidateShippingDataSummaryPage">

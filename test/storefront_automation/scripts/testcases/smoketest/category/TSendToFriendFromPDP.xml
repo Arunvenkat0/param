@@ -18,17 +18,14 @@
     <parameter name="textElement" value="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
     <parameter name="textStoreVariableName" value="ProductName"/>
   </module>
-  <command name="storeText" disabled="true" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
   <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="xpath=id('product-content')/div[contains(@class,'product-number')]/span"/>
     <parameter name="textStoreVariableName" value="ProductID"/>
   </module>
-  <command name="storeText" disabled="true" target="xpath=id('product-content')/div[contains(@class,'product-number')]/span" value="ProductID"/>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <module name="modules.catalog.ValidateProductDataOnDetailsPage">
     <parameter name="Name" value="${ProductName}"/>
@@ -39,24 +36,11 @@
     <parameter name="clickElement" value="link=Send to a Friend"/>
     <parameter name="waitForElement" value="id=ui-dialog-title-send-to-friend-dialog"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" disabled="true" target="id=ui-dialog-title-send-to-friend-dialog"/>
   <action name="CloseSTAFWithX"/>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.ui-icon-closethick"/>
     <parameter name="waitForElement" value="css=.send-to-friend"/>
   </module>
-  <command name="click" disabled="true" target="css=.ui-icon-closethick"/>
-  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
-  <action name="OpenSTAFOverlayAgain" disabled="true"/>
-  <command name="click" disabled="true" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" disabled="true" target="id=ui-dialog-title-send-to-friend-dialog"/>
-  <action name="CloseSTAFWithCancel" disabled="true"/>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value="css= .cancel"/>
-  </module>
-  <command name="pause" disabled="true" value="4000"/>
   <action name="OpenSTAFOverlayAndLogin"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="link=Send to a Friend"/>
@@ -65,8 +49,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=Login or Create an Account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="link=Login or Create an Account"/>
-  <command name="clickAndWait" disabled="true" target="link=Login or Create an Account"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="RegisterUser"/>
   <command name="clickAndWait" target="name=dwfrm_login_register value=Create an Account"/>
@@ -103,18 +85,11 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="link=Send to a Friend"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="link=Send to a Friend"/>
   <module name="modules.catalog.ValidateSTAFOverlayFromPDP"/>
   <action name="OpenPrivacyPolicy"/>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value="link=See Privacy Policy"/>
-  </module>
-  <command name="click" disabled="true" target="link=See Privacy Policy"/>
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="See Privacy Policy"/>
   </module>
-  <command name="assertTextPresent" disabled="true" value="See Privacy Policy"/>
   <action name="ClosePrivacyPolicy"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.ui-icon-closethick"/>
@@ -122,14 +97,11 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.send-to-friend"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="css=.send-to-friend"/>
   <module name="modules.catalog.ValidateSTAFForms"/>
   <action name="SendMessage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=#send-to-friend-dialog .send-button"/>
   </module>
-  <command name="click" disabled="true" target="css=#send-to-friend-dialog .send-button"/>
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="Your message has been sent."/>
   </module>
@@ -139,19 +111,14 @@
     <parameter name="clickElement" value="css=.close-button"/>
     <parameter name="waitForElement" value="css=.send-to-friend"/>
   </module>
-  <command name="click" disabled="true" target="css=.close-button"/>
-  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
   <action name="ClosePrivacyPolicyPopup"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.send-to-friend"/>
   </module>
-  <command name="click" disabled="true" target="css=.ui-icon-closethick"/>
   <action name="GoToWelcomePage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHome"/>

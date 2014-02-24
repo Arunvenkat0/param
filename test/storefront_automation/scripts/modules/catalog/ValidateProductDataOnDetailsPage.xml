@@ -15,21 +15,12 @@ Price: Single product price</description>
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="text" value="@{Name}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=h1.product-name" value="@{Name}">
-    <comment>Checks for the correct product name to be displayed.</comment>
-  </command>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.breadcrumb .last"/>
     <parameter name="text" value="@{Name}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.breadcrumb .last" value="@{Name}">
-    <comment>Checks for the product name as last element in breadcrumb navigation.</comment>
-  </command>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-sales"/>
     <parameter name="textPattern" value="@{Price}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.price-sales" value="@{Price}">
-    <comment>Checks for the correct displayed price.</comment>
-  </command>
 </scriptmodule>

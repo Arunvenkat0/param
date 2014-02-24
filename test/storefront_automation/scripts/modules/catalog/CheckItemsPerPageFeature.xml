@@ -26,17 +26,14 @@ Static Elements are:
     <parameter name="textElement" value="css=.pagination .results-hits"/>
     <parameter name="text" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.pagination .results-hits" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.results-hits"/>
     <parameter name="textStoreVariableName" value="PaginationText"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.results-hits" value="PaginationText"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css= .current-page"/>
     <parameter name="textStoreVariableName" value="CurrentPage"/>
   </module>
-  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
@@ -46,22 +43,14 @@ Static Elements are:
     <parameter name="clickElement" value="css=.pagination li:last-child a"/>
     <parameter name="waitForElement" value="css=.page-1"/>
   </module>
-  <command name="click" disabled="true" target="css=.pagination li:last-child a">
-    <comment>Switch to last page.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.page-1">
-    <comment>Wait for the page switch (link to fist page is visible).</comment>
-  </command>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.results-hits"/>
     <parameter name="textStoreVariableName" value="PaginationText"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.results-hits" value="PaginationText"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css= .current-page"/>
     <parameter name="textStoreVariableName" value="CurrentPage"/>
   </module>
-  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>

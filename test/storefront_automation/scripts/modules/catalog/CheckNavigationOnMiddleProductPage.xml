@@ -16,21 +16,12 @@ ProductName : name of the product to whom naviagated to</description>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.product-@{NavigateToProduct} a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.product-@{NavigateToProduct} a">
-    <comment>Click next or previous-link</comment>
-  </command>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.breadcrumb .last"/>
     <parameter name="text" value="${FirstProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.breadcrumb .last" value="${FirstProductName}">
-    <comment>Validate the correct product name within breadcrumb navigation.</comment>
-  </command>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="text" value="${FirstProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=h1.product-name" value="${FirstProductName}">
-    <comment>Validate the correct product name.</comment>
-  </command>
 </scriptmodule>

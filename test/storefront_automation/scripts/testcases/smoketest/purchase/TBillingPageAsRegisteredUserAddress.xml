@@ -37,7 +37,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.cart-actions button[value='Checkout']"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>
@@ -49,7 +48,6 @@
     <parameter name="textElement" value="css=.address legend"/>
     <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
@@ -68,7 +66,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_singleshipping_shippingAddress_save"/>
   <module name="modules.checkout.billing.ValidateBillingAddressBlankFields"/>
   <command name="waitForNotElementPresent" target="css=.select-address">
     <comment>A user who has not saved an address yet does not see a dropdown.</comment>
@@ -78,11 +75,9 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.account-options li:nth-child(3) a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(3) a"/>
   <command name="waitForText" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <action name="CreateShippingAddress"/>
@@ -140,7 +135,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
@@ -149,7 +143,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(5) a"/>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${CreditCardFirstName} ${CreditCardLastName}"/>
     <parameter name="Type" value="${CreditCardType}"/>
@@ -163,7 +156,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.cart-actions button[value='Checkout']"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>
@@ -190,7 +182,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_singleshipping_shippingAddress_save"/>
   <module name="modules.checkout.shipping.ValidateSelectedAddress">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
@@ -243,14 +234,12 @@
     <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
     <parameter name="inputString" value="${RandomEmailAddress}"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
   <module name="modules.checkout.billing.ValidateZipCode"/>
   <module name="modules.checkout.billing.ValidatePhone"/>
   <action name="CheckoutPlaceOrder"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
     <comment>Validate First Product's Details on Place Order page</comment>
     <parameter name="Position" value="1"/>
@@ -291,9 +280,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=submit"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=submit">
-    <comment>Submit Order</comment>
-  </command>
   <command name="waitForText" target="css=#primary h1" value="Thank you for your order.">
     <comment>Validate Order Submission Message</comment>
   </command>
@@ -339,12 +325,10 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="ConfirmDeleteMessage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.account-options li:nth-child(3) a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(3) a"/>
   <command name="waitForText" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <module name="modules.adressmanagement.DeleteLastAddress">
@@ -354,12 +338,10 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="ConfirmDeleteMessage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(5) a"/>
   <module name="modules.payments.DeleteCreditCard">
     <parameter name="PositionNb" value="1"/>
   </module>
@@ -367,8 +349,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutFromWelcomePage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

@@ -15,32 +15,26 @@ MiddlePageNumber : Page number on which you will validate next/previous</descrip
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.page-last"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-last"/>
   <module name="modules.catalog.ValidateCatalogNaviagationLastPage"/>
   <action name="OpenFirstPage"/>
   <module name="library.function.FClickAndWaitFor">
     <parameter name="clickElement" value="css=.page-first"/>
     <parameter name="waitForElement" value="css=.page-@{MiddlePageNumber}"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-first"/>
-  <command name="waitForElementPresent" disabled="true" target="css=.page-@{MiddlePageNumber}"/>
   <action name="OpenLastPageBeforePaging"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.page-@{MiddlePageNumber}"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-@{MiddlePageNumber}"/>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="OpenPreviousPage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.page-previous"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-previous"/>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="OpenNextPage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.page-next"/>
   </module>
-  <command name="click" disabled="true" target="css=.page-next"/>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="ClickSubcategoryInBreadcrumb"/>
   <module name="library.function.FClickAndWaitForPageLoad">

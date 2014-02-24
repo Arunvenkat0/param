@@ -5,9 +5,10 @@
   <command name="waitForElementPresent" target="name=simpleSearch">
     <comment>Wait for the search field</comment>
   </command>
-  <command name="type" target="id=q" value="@{SearchText}">
-    <comment>Type search phrase into the search entry field</comment>
-  </command>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=q"/>
+    <parameter name="inputString" value="@{SearchText}"/>
+  </module>
   <action name="SubmitSearch"/>
   <command name="clickAndWait" target="css=input[value='go']">
     <comment>Start searching using the search button</comment>

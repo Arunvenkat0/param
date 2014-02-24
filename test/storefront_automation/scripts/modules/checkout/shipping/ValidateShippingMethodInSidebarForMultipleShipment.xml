@@ -7,5 +7,4 @@
     <parameter name="textElement" value="xpath=id('secondary')/div[contains(@class,'mini-shipment')][@{Position}]//div[@class='minishipments-method']/span[2]"/>
     <parameter name="plainString" value="@{ShippingMethodName}"/>
   </module>
-  <command name="assertText" disabled="true" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')][@{Position}]//div[@class='minishipments-method']/span[2]" value="@{ShippingMethodName}"/>
 </scriptmodule>

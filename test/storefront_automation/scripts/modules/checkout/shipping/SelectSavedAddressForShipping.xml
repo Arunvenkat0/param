@@ -7,8 +7,4 @@
     <parameter name="selectLabel" value="label=(@{AddressName})*"/>
     <parameter name="labelValue" value="(@{AddressName})*"/>
   </module>
-  <command name="select" disabled="true" target="id=dwfrm_singleshipping_addressList" value="label=(@{AddressName})*">
-    <comment>Select Address from List</comment>
-  </command>
-  <command name="waitForSelectedLabel" disabled="true" target="id=dwfrm_singleshipping_addressList" value="(@{AddressName})*"/>
 </scriptmodule>

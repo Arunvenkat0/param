@@ -6,6 +6,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="xpath=id('creditcards_1')//button[@value='Delete Card']"/>
   </module>
-  <command name="click" disabled="true" target="xpath=id('creditcards_1')//button[@value='Delete Card']"/>
   <command name="waitForNotElementPresent" target="id=creditcards_@{PositionNb}"/>
 </scriptmodule>
