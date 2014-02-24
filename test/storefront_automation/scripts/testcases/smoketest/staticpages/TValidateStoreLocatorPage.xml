@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85035</tags>
-  <description>Test Case ID:(C85035) Smoke Test » Store Locator » Store Locator Page </description>
+  <description>Test Case ID:(C85035) Smoke Test » Store Locator » Store Locator Page</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenStoreLocator"/>
-  <command name="clickAndWait" target="link=regexpi:Store Locator"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=regexpi:Store Locator"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=regexpi:Store Locator"/>
   <command name="waitForText" target="css=.breadcrumb-last" value="Store Locator"/>
   <command name="assertText" target="css=#primary h1" value="Find a Store Near You"/>
   <command name="assertXpathCount" target="//div[@class=&quot;login-box&quot;]" value="2"/>

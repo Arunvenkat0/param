@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85048</tags>
-  <description>Test Case ID:(C85048) Smoke Test » Checkout - Retuning Customer » Purchase as Registered User </description>
+  <description>Test Case ID:(C85048) Smoke Test » Checkout - Retuning Customer » Purchase as Registered User</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -9,7 +9,11 @@
   </module>
   <action name="NavigateToAddressManagement"/>
   <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Addresses"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <action name="CreateShippingAddress"/>
   <module name="modules.adressmanagement.CreateAddress">
@@ -113,7 +117,11 @@
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.address legend"/>
+    <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
@@ -205,7 +213,11 @@
   <command name="clickAndWait" target="name=submit">
     <comment>Submit Order</comment>
   </command>
-  <command name="assertText" target="css=#primary h1" value="Thank you for your order.">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Thank you for your order."/>
+  </module>
+  <command name="assertText" disabled="true" target="css=#primary h1" value="Thank you for your order.">
     <comment>Validate Order Submission Message</comment>
   </command>
   <command name="assertText" target="css=.order-confirmation-details h2" value="Order Summary"/>
@@ -250,7 +262,11 @@
   <command name="clickAndWait" target="css=.user-account"/>
   <action name="ConfirmDeleteMessage"/>
   <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Addresses"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <module name="modules.adressmanagement.DeleteLastAddress">
     <parameter name="AddressCount" value="1"/>
@@ -263,8 +279,11 @@
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="Logout"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutFromWelcomePage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

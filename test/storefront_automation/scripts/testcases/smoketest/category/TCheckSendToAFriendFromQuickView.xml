@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84770</tags>
-  <description>Test Case ID:(C84770)  Smoke Test » Quickview » QuickView: Send to a Friend </description>
+  <description>Test Case ID:(C84770)  Smoke Test » Quickview » QuickView: Send to a Friend</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
@@ -19,15 +19,26 @@
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>
   <action name="OpenSTAFOverlay"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="link=Send to a Friend"/>
+    <parameter name="waitForElement" value="id=ui-dialog-title-send-to-friend-dialog"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
+  <command name="click" disabled="true" target="link=Send to a Friend"/>
+  <command name="waitForElementPresent" disabled="true" target="id=ui-dialog-title-send-to-friend-dialog"/>
   <action name="CloseSTAFWithCancel"/>
-  <command name="waitForElementPresent" target="css= .cancel-button"/>
-  <command name="click" target="css= .cancel-button"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css= .cancel-button"/>
+    <parameter name="waitForElement" value="css=.send-to-friend"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css= .cancel-button"/>
+  <command name="click" disabled="true" target="css= .cancel-button"/>
+  <command name="waitForElementPresent" disabled="true" target="css=.send-to-friend"/>
   <action name="CloseQV"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
+  </module>
+  <command name="click" disabled="true" target="css=.ui-icon-closethick"/>
   <action name="GoToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

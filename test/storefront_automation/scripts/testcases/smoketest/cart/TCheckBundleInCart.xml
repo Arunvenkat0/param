@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84766</tags>
-  <description>Test Case ID: (C84766)  Smoke Test » Cart » Bundle 
-</description>
+  <description>Test Case ID: (C84766)  Smoke Test » Cart » Bundle</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -23,7 +22,10 @@
   <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
     <comment>Wait for enable add-to-cart button</comment>
   </command>
-  <command name="click" target="id=add-to-cart">
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=add-to-cart"/>
+  </module>
+  <command name="click" disabled="true" target="id=add-to-cart">
     <comment>Add product to cart.</comment>
   </command>
   <action name="CheckMiniCart">

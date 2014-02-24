@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85037</tags>
-  <description>Test Case ID:(C85037) Smoke Test » My Account - Returning Customer » Wish List » Send Wishlist To Friend </description>
+  <description>Test Case ID:(C85037) Smoke Test » My Account - Returning Customer » Wish List » Send Wishlist To Friend</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -20,33 +20,64 @@
     <parameter name="ProductPrice" value="${ProductPrice}"/>
   </module>
   <action name="SendWishlistToFriend"/>
-  <command name="click" target="id=send-to-friend"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=send-to-friend"/>
+  </module>
+  <command name="click" disabled="true" target="id=send-to-friend"/>
   <command name="waitForText" target="id=ui-dialog-title-send-to-friend-dialog" value="regexpi:Send to a Friend"/>
   <command name="assertValue" target="id=dwfrm_sendtofriend_yourname" value="${UserFirstName} ${UserLastName}"/>
   <command name="assertTextPresent" value="${Email}"/>
   <action name="EnterFormData"/>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsname" value="${FriendsName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsname"/>
+    <parameter name="inputString" value="${FriendsName}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_sendtofriend_friendsname" value="${FriendsName}"/>
   <command name="store" target="${RANDOM.String(8)}@varmail.de" value="FriendsEmail"/>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsemail" value="${FriendsEmail}"/>
-  <command name="type" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="${FriendsEmail}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_sendtofriend_friendsemail" value="${FriendsEmail}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_confirmfriendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="${FriendsEmail}"/>
   <command name="store" target="${RANDOM.String(125)}" value="Message"/>
-  <command name="type" target="id=dwfrm_sendtofriend_message" value="${Message}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_message"/>
+    <parameter name="inputString" value="${Message}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_sendtofriend_message" value="${Message}"/>
   <command name="assertText" target="css=.char-count" value="You have 125 characters left out of 250"/>
   <action name="OpenPreview"/>
-  <command name="click" target="css=#send-to-friend-main .preview-button"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=#send-to-friend-main .preview-button"/>
+  </module>
+  <command name="click" disabled="true" target="css=#send-to-friend-main .preview-button"/>
   <command name="waitForText" target="css=#send-to-friend-main h2" value="Review Your Message"/>
   <command name="assertText" target="css=.send-to-friend-product" value="glob:To:*${FriendsName}*${FriendsEmail}*"/>
   <command name="assertText" target="css=.send-to-friend-product" value="glob:*From:*${UserFirstName} ${UserLastName}*${Email}*"/>
   <command name="assertText" target="css=.send-to-friend-product" value="glob:*Message:*${Message}*"/>
   <action name="SendMessage"/>
-  <command name="click" target="css=#send-to-friend-dialog .send-button"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=#send-to-friend-dialog .send-button"/>
+  </module>
+  <command name="click" disabled="true" target="css=#send-to-friend-dialog .send-button"/>
   <command name="waitForTextPresent" value="Your message has been sent."/>
   <action name="CloseConfirmationDialog"/>
-  <command name="click" target="css=.close-button"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.close-button"/>
+  </module>
+  <command name="click" disabled="true" target="css=.close-button"/>
   <module name="modules.wishlist.ValidateAccountWishlistPageStructure"/>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHome"/>

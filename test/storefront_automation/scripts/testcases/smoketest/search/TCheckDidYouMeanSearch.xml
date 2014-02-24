@@ -14,6 +14,9 @@ Was failed because of RAP-2460, but is fixed now.</description>
     <parameter name="InvalidSearchEntry" value="blub"/>
   </module>
   <action name="ClickDidYouMeanLink"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=blue"/>
+  </module>
   <command name="clickAndWait" target="link=blue"/>
   <module name="modules.search.ValidateSearchResultPageAfterDidYouMean">
     <parameter name="KeyWord" value="blue"/>

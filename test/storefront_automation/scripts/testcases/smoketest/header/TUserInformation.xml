@@ -3,7 +3,10 @@
   <tags>C84771</tags>
   <description>Test Case ID:(C84771)   Smoke Test » Header | Global Navigation | Footer » User Information in Header</description>
   <module name="modules.staticelements.Homepage"/>
-  <command name="assertElementPresent" target="css=.user-login"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.user-login"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.user-login"/>
   <command name="assertElementPresent" target="css=.user-register"/>
   <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
   <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
@@ -27,7 +30,10 @@
     <comment>Validates first name within logout link in page header.</comment>
   </command>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
-  <command name="check" target="css=.input-checkbox"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="css=.input-checkbox"/>
+  </module>
+  <command name="check" disabled="true" target="css=.input-checkbox"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
@@ -38,7 +44,11 @@
   <command name="waitForText" target="css=.user-account" value="regexpi:${FirstName} ${LastName}">
     <comment>Validates first and last name inside page header.</comment>
   </command>
-  <command name="assertText" target="css=.menu-utility-user .last" value="regexpi:\( Not ${FirstName}\? \)">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.menu-utility-user .last"/>
+    <parameter name="textPattern" value="regexpi:\( Not ${FirstName}\? \)"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.menu-utility-user .last" value="regexpi:\( Not ${FirstName}\? \)">
     <comment>Validates first name within logout link in page header.</comment>
   </command>
   <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | \( Not ${FirstName}*\? \)"/>

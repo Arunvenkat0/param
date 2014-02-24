@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * [ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card 
+ * [ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card
  */
 @ScriptName
 ("testcases.smoketest.myaccount.TChangePaymentData")

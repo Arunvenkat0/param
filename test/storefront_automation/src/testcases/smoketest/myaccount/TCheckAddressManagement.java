@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84708) Smoke Test » My Account - Returning Customer » Addresses » Add Address 
+ * Test Case ID:(C84708) Smoke Test » My Account - Returning Customer » Addresses » Add Address
  */
 @ScriptName
 ("testcases.smoketest.myaccount.TCheckAddressManagement")

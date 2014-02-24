@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84708</tags>
-  <description>Test Case ID:(C84708) Smoke Test » My Account - Returning Customer » Addresses » Add Address </description>
+  <description>Test Case ID:(C84708) Smoke Test » My Account - Returning Customer » Addresses » Add Address</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
   <action name="NavigateToAddressManagement"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(3) a"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.account-options li:nth-child(3) a"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Addresses"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <action name="CreateFirstAddress"/>
   <module name="modules.adressmanagement.CreateAddress">
@@ -107,7 +114,10 @@
   <action name="TryToDeleteDefaultAddress"/>
   <module name="modules.adressmanagement.DeleteDefaultAddress"/>
   <action name="ReturnToMain"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

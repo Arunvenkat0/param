@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84702) Smoke Test » Checkout - Retuning Customer » Billing » Bill Me Later as Payment Method 
+ * Test Case ID:(C84702) Smoke Test » Checkout - Retuning Customer » Billing » Bill Me Later as Payment Method
  */
 @ScriptName
 ("testcases.smoketest.purchase.TBillingPageBillMeLater")
