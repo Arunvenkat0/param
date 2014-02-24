@@ -4,9 +4,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=is-BML"/>
   </module>
-  <command name="check" disabled="true" target="id=is-BML">
-    <comment>Select PAyPal as Pament Method</comment>
-  </command>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
@@ -16,21 +13,15 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=PaymentMethod_BML"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=PaymentMethod_BML"/>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="click" disabled="true" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.year .error"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.year .error"/>
   <command name="assertElementPresent" target="css=.month .error"/>
   <command name="assertElementPresent" target="css=.day .error"/>
   <command name="assertElementPresent" target="css=#dwfrm_billing_paymentMethods_bml_ssn+.error"/>

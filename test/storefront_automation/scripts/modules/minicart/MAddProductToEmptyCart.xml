@@ -34,10 +34,6 @@
   </command>
   <command name="storeText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="DisplayedQuickViewQTY"/>
   <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="${DisplayedQuickViewQTY}"/>
-  <command name="assertValue" disabled="true" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="@{Quantity}"/>
-  <command name="assertText" disabled="true" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="@{Quantity}">
-    <comment>Checks the correct quantity in mini cart</comment>
-  </command>
   <module name="modules.minicart.MCurrencyToNumber">
     <parameter name="price" value="@{PriceProduct}"/>
   </module>

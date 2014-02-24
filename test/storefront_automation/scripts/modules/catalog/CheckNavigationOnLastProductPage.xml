@@ -4,26 +4,18 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.grid-tile:last-child .product-name a"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.grid-tile:last-child .product-name a">
-    <comment>Validate Last Product Presence</comment>
-  </command>
   <action name="ClickLastProduct"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.grid-tile:last-child .product-name a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.grid-tile:last-child .product-name a">
-    <comment>Go to Last Product</comment>
-  </command>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.breadcrumb .last"/>
     <parameter name="text" value="${LastProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.breadcrumb .last" value="${LastProductName}"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="textPattern" value="${LastProductName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=h1.product-name" value="${LastProductName}"/>
   <command name="waitForElementPresent" target="css=.product-previous a"/>
   <command name="assertNotElementPresent" target="css=.product-next a"/>
 </scriptmodule>

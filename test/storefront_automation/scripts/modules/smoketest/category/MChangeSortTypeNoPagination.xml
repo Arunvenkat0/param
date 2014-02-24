@@ -5,7 +5,4 @@
     <parameter name="element" value="css=.search-result-options .sort-by select"/>
     <parameter name="selection" value="label=@{SortMethod}"/>
   </module>
-  <command name="select" disabled="true" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
-    <comment>Select a sorting method.</comment>
-  </command>
 </scriptmodule>

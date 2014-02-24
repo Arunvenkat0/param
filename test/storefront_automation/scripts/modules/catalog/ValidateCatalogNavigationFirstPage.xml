@@ -6,12 +6,10 @@
     <parameter name="textElement" value="css=.current-page"/>
     <parameter name="textStoreVariableName" value="FirstPage"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.current-page" value="FirstPage"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.current-page"/>
     <parameter name="textPattern" value="${FirstPage}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.current-page" value="${FirstPage}"/>
   <command name="assertElementPresent" target="css=.page-next"/>
   <command name="assertElementPresent" target="css=.page-last"/>
   <command name="assertNotElementPresent" target="css=page-previous"/>

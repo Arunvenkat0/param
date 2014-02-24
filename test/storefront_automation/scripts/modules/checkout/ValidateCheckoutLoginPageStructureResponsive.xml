@@ -4,16 +4,10 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.secondary-navigation"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.secondary-navigation">
-    <comment>Validates the presence of the left navigation element.</comment>
-  </command>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Checkout Login"/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="Checkout Login">
-    <comment>Validates the headline.</comment>
-  </command>
   <command name="assertXpathCount" target="id('primary')//div[contains(@class, 'login-box')]" value="6">
     <comment>Validates the correct number of containers/boxes.</comment>
   </command>

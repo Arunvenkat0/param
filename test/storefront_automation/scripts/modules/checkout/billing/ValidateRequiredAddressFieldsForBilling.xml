@@ -5,7 +5,6 @@
     <parameter name="textElement" value="css=#dwfrm_billing legend"/>
     <parameter name="textPattern" value="regexpi:Select or Enter a Billing Address.*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=#dwfrm_billing legend" value="regexpi:Select or Enter a Billing Address.*"/>
   <module name="modules.adressmanagement.ValidateGlobalRequiredFieldsForAddresses"/>
   <command name="waitForElementPresent" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
 </scriptmodule>

@@ -11,16 +11,12 @@
     <parameter name="textElement" value="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]"/>
     <parameter name="textPattern" value="$949.99"/>
   </module>
-  <command name="assertText" disabled="true" target="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]" value="$949.99"/>
   <module name="library.function.FSelect">
     <parameter name="element" value="//select[@id='dwopt_samsung-ln37a330_tvWarranty']"/>
     <parameter name="selection" value="[$49.99] 1 Year Warranty"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//select[@id='dwopt_samsung-ln37a330_tvWarranty']"/>
-  <command name="select" disabled="true" target="//select[@id='dwopt_samsung-ln37a330_tvWarranty']" value="[$49.99] 1 Year Warranty"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]"/>
     <parameter name="textPattern" value="$999.98"/>
   </module>
-  <command name="assertText" disabled="true" target="//div[contains(@class,'product-add-to-cart')]//div[contains(@class,'product-price')]//span[contains(@class,'price-sales')]" value="$999.98"/>
 </testcase>

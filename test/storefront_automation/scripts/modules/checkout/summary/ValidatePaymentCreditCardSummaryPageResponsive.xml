@@ -13,7 +13,6 @@ Expire Year</description>
     <parameter name="textElement" value="css=.order-payment-instruments"/>
     <parameter name="textPattern" value="*@{Type}*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.order-payment-instruments" value="*@{Type}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*@{Last4}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*Exp.@{ExpireMonthNumber}.@{ExpireYear}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>

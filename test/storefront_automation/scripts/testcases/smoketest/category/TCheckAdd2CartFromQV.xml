@@ -24,7 +24,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart"/>
   <command name="waitForNotElementPresent" target="css=.quickview"/>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
@@ -45,7 +44,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart"/>
   <command name="waitForNotElementPresent" target="css=.quickview"/>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>

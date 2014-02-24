@@ -7,7 +7,4 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.cart-row:nth-child(@{TableRow}) .item-user-actions button"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .item-user-actions button">
-    <comment>Click the remove button in the given table row.</comment>
-  </command>
 </scriptmodule>

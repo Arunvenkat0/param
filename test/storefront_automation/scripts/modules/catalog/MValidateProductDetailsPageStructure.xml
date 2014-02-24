@@ -4,42 +4,24 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.breadcrumb"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.breadcrumb">
-    <comment>Checks if breadcrumb navigation is displayed.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=h1.product-name"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=h1.product-name">
-    <comment>Checks if a headline is displayed.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-primary-image img"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.product-primary-image img">
-    <comment>Checks if a product image is displayed.</comment>
-  </command>
   <command name="assertXpathCount" target="id('product-content')//div[@class='product-price']" value="2">
     <comment>Checks if the price information is displayed twice.</comment>
   </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=Quantity"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=Quantity">
-    <comment>Checks if the quantity input field is displayed.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=add-to-cart"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=add-to-cart">
-    <comment>Checks if the order button is displayed.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.addthis_toolbox"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.addthis_toolbox">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
   <command name="assertXpathCount" target="id('pdpMain')//div[contains(@class,'product-tabs')]/ul/li" value="@{TabCount}">
     <comment>Checks if 3 tab controls are displayed.</comment>
   </command>
@@ -47,5 +29,4 @@
     <parameter name="textElement" value="css=.product-tabs ul"/>
     <parameter name="textPattern" value="Description*Reviews"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.product-tabs ul" value="Description*Reviews"/>
 </scriptmodule>

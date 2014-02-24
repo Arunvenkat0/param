@@ -6,75 +6,54 @@
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="-0001"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'phone')]"/>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="-0001"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="xpath=//input[contains(@id, 'email')]"/>
   </module>
-  <command name="click" disabled="true" target="xpath=//input[contains(@id, 'email')]"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="textPattern" value="-0001"/>
   </module>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="-0001"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="1234-"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="1234-"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="1234-"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="432.434.3243"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="432.434.3243"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="432.434.3243"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="940 455 5555"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="940 455 5555"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="940 455 5555"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="123-4E6-7890"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="123-4E6-7890"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="123-4E6-7890"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="123 456 7890"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="123 456 7890"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="123 456 7890"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="9404@"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="9404@"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="9404@"/>
   <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <action name="ValidatePhoneNumber"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="800-565-2254"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'phone')]"/>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="800-565-2254"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="800-565-2254"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <command name="waitForNotElementPresent" target="xpath=//input[contains(@id, 'phone')]"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-billing-address .section-header-note"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-billing-address .section-header-note"/>
 </scriptmodule>

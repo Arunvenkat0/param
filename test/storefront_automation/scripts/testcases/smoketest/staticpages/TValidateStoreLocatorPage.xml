@@ -7,7 +7,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=regexpi:Store Locator"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=regexpi:Store Locator"/>
   <command name="waitForText" target="css=.breadcrumb-last" value="Store Locator"/>
   <command name="assertText" target="css=#primary h1" value="Find a Store Near You"/>
   <command name="assertXpathCount" target="//div[@class=&quot;login-box&quot;]" value="2"/>

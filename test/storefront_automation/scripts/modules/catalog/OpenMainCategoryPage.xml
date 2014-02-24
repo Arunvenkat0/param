@@ -12,20 +12,16 @@ MainCategoryName: Main Menu Name</description>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=regexpi:@{MainCategoryName}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=regexpi:@{MainCategoryName}"/>
   <action name="ValidateMainCategoryPage"/>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="plainString" value="@{MainCategoryName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="@{MainCategoryName}"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.refinement-header"/>
     <parameter name="textPattern" value="regexpi:.*@{MainCategoryName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.refinement-header" value="regexpi:.*@{MainCategoryName}"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=primary"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=primary"/>
 </scriptmodule>

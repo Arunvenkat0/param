@@ -8,12 +8,8 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-cart-link"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-cart-link">
-    <comment>Click the cart link.</comment>
-  </command>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="xpath=id('primary')/h1"/>
     <parameter name="plainString" value="Your Shopping Cart"/>
   </module>
-  <command name="assertText" disabled="true" target="xpath=id('primary')/h1" value="Your Shopping Cart"/>
 </scriptmodule>

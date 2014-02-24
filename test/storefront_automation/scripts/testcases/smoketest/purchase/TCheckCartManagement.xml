@@ -24,12 +24,6 @@
     <parameter name="clickElement" value="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]"/>
     <parameter name="waitForElement" value="css=.Color .selected"/>
   </module>
-  <command name="click" disabled="true" target="//ul[contains(@class,'Color')]//li[contains(@class,'emptyswatch')]/a[contains(text(),'${SecondProductFirstColor}')]">
-    <comment>Select a random color by clicking a color link.</comment>
-  </command>
-  <command name="waitForElementPresent" disabled="true" target="css=.Color .selected">
-    <comment>Wait for the color to be selected.</comment>
-  </command>
   <action name="AddSecondProductToCart"/>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${SecondProductQuantityInitital}"/>
@@ -120,7 +114,6 @@
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Your Shopping Cart"/>
   </module>
-  <command name="assertText" disabled="true" target="css=#primary h1" value="Your Shopping Cart"/>
   <command name="assertText" target="css=.cart-empty" value="Your Shopping Cart is Empty">
     <comment>Validate message for empty cart.</comment>
   </command>

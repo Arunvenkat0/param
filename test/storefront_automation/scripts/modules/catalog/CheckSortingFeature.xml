@@ -27,16 +27,10 @@ MaxItems: the complete amont of search results</description>
     <parameter name="element" value="css=.search-result-options .sort-by select"/>
     <parameter name="selection" value="label=@{SortMethod}"/>
   </module>
-  <command name="select" disabled="true" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
-    <comment>Select a sorting method.</comment>
-  </command>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.search-result-options:nth-child(4) .sort-by option[selected]"/>
     <parameter name="text" value="@{SortMethod}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.search-result-options:nth-child(4) .sort-by option[selected]" value="@{SortMethod}">
-    <comment>Wait for the selected sorting method.</comment>
-  </command>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
@@ -45,9 +39,6 @@ MaxItems: the complete amont of search results</description>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.pagination li:last-child a"/>
   </module>
-  <command name="click" disabled="true" target="css=.pagination li:last-child a">
-    <comment>Select the last page.</comment>
-  </command>
   <command name="waitForElementPresent" target="css=.page-1"/>
   <command name="waitForElementPresent" target="css=.search-result-content">
     <comment>waits for productlist before validating them</comment>

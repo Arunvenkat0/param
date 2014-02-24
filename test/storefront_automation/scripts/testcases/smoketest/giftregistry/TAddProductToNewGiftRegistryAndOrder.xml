@@ -17,12 +17,10 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_giftregistry_create"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_create"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="Gift Registry"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="Gift Registry"/>
   <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
   <action name="EnterEventAndParticipantData"/>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
@@ -30,7 +28,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_event_confirm"/>
   <module name="modules.giftregistry.GiftRegistryEnterShippingData"/>
   <action name="ValidateGiftRegistryData"/>
   <command name="clickAndWait" target="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
@@ -42,7 +39,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_event_confirm"/>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
@@ -51,12 +47,10 @@
     <parameter name="textElement" value="css=#dwfrm_giftregistry_items fieldset:first-child p"/>
     <parameter name="textPattern" value="You have no items in your gift registry."/>
   </module>
-  <command name="assertText" disabled="true" target="css=#dwfrm_giftregistry_items fieldset:first-child p" value="You have no items in your gift registry."/>
   <action name="ClickAddItems"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=Add Items"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=Add Items"/>
   <action name="SearchAndAddProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
@@ -70,13 +64,9 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=Add to Gift Registry"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=Add to Gift Registry"/>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
-  </module>
-  <module name="library.function.FWaitForElement">
-    <parameter name="element" value="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr"/>
   </module>
   <command name="assertXpathCount" target="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr" value="2">
     <comment>Number of products plus 1 header row</comment>
@@ -94,12 +84,11 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=Add to Gift Registry"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=Add to Gift Registry"/>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
   </module>
-  <module name="library.function.FWaitForElement">
+  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr"/>
   </module>
   <command name="assertXpathCount" target="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr" value="3">
@@ -109,18 +98,14 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_giftregistry_setPublic"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_giftregistry_setPublic"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
   <command name="assertElementPresent" target="css=a.send-to-friend"/>
   <action name="GoToWelcomePage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.user-account"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.user-account"/>
-  <command name="clickAndWait" disabled="true" target="css=.user-account"/>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToGiftRegistry"/>
@@ -134,7 +119,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.event-view a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.event-view a"/>
   <module name="modules.giftregistry.ValidateGiftRegistryDetails"/>
   <module name="modules.giftregistry.ValidateGiftRegistryProductRow">
     <parameter name="ProductCount" value="2"/>
@@ -156,7 +140,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.item-list tr:nth-child(1) .add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="css=.item-list tr:nth-child(1) .add-to-cart"/>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
   </action>
@@ -183,15 +166,11 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.cart-actions button[value='Checkout']"/>
   <module name="modules.checkout.ValidateCheckoutLoginPageStructure"/>
   <action name="GuestCheckoutShipping"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]">
-    <comment>Click the guest checkout link.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="1"/>
     <parameter name="StepText" value="Shipping"/>
@@ -217,15 +196,9 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
   </module>
-  <command name="check" disabled="true" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="xpath=//label[contains(., '${ShippingMethodName}')]/following-sibling::input"/>
   </module>
-  <command name="check" disabled="true" target="xpath=//label[contains(., '${ShippingMethodName}')]/following-sibling::input">
-    <comment>Select Shipping Method, select by text instead of position number. Only works with xpath.</comment>
-  </command>
   <command name="waitForText" target="css=.order-totals-table .order-shipping.first td:first-child" value="glob:*${ShippingMethodName}*">
     <comment>Have to wait till the background sync finished.</comment>
   </command>
@@ -236,9 +209,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
@@ -273,7 +243,6 @@
     <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
     <parameter name="inputString" value="${RANDOM.String(8)}@varmail.de"/>
   </module>
-  <command name="type" disabled="true" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RANDOM.String(8)}@varmail.de"/>
   <module name="modules.checkout.billing.SelectCreditCardAndEnterData">
     <parameter name="CardName" value="${CreditCardFirstName} ${CreditCardLastName}"/>
     <parameter name="Type" value="${CreditCardType}"/>
@@ -288,9 +257,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="3"/>
     <parameter name="StepText" value="Place Order"/>
@@ -329,9 +295,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=submit"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=submit">
-    <comment>Place the order by clicking the button.</comment>
-  </command>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=#primary h1"/>
     <parameter name="textPattern" value="Thank you for your order."/>
@@ -382,7 +345,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.event-view a"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.event-view a"/>
   <module name="modules.giftregistry.ValidateGiftRegistryDetails"/>
   <module name="modules.giftregistry.ValidateGiftRegistryProductRow">
     <comment>Validate quality purchased == 1</comment>

@@ -48,7 +48,6 @@ Works.</description>
   <command name="type" target="//input[contains(@id,'dwfrm_storelocator_postalCode')]" value="${invalidZip}"/>
   <command name="click" target="//button[contains(@name,'dwfrm_storelocator_findbyzip')]"/>
   <command name="waitForElementPresent" target="//span[contains(@class, 'form-caption error-message')]"/>
-  <command name="assertElementPresent" disabled="true" target="//span[contains(@class, 'form-caption error-message')]"/>
   <command name="assertText" target="//span[contains(@class, 'form-caption error-message')]" value="${ErrorMessage}"/>
   <command name="type" target="//input[contains(@id,'dwfrm_storelocator_postalCode')]" value="${ZipCode}"/>
   <command name="click" target="//button[contains(@name,'dwfrm_storelocator_findbyzip')]"/>

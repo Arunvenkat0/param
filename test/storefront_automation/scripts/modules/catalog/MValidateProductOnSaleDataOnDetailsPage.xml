@@ -11,7 +11,4 @@
     <parameter name="textElement" value="css=.price-standard"/>
     <parameter name="textPattern" value="@{StandardPrice}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.price-standard" value="@{StandardPrice}">
-    <comment>Checks for the correct displayed price.</comment>
-  </command>
 </scriptmodule>

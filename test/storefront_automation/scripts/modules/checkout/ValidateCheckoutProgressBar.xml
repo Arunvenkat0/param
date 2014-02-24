@@ -6,9 +6,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.step-@{StepNumber}.active"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.step-@{StepNumber}.active">
-    <comment>Check if the correct step is marked as active step.</comment>
-  </command>
   <command name="assertText" target="css=.step-@{StepNumber}" value="*@{StepText}">
     <comment>Validate the correct step text.</comment>
   </command>

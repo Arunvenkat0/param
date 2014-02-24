@@ -13,9 +13,6 @@ Price</description>
     <parameter name="textElement" value="css=#cart-table .cart-row:nth-child(@{Position}) .name"/>
     <parameter name="textPattern" value="@{Name}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=#cart-table .cart-row:nth-child(@{Position}) .name" value="@{Name}">
-    <comment>Validate Product Name</comment>
-  </command>
   <command name="assertText" target="css=#cart-table .cart-row:nth-child(@{Position}) .item-total" value="glob:@{PriceTotal}">
     <comment>Verify details such as quantity and price</comment>
   </command>

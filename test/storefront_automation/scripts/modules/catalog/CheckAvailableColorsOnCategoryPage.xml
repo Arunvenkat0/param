@@ -8,17 +8,12 @@ Mouse over each color and validate respective procut image</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]">
-    <comment>Validate the presence of default color</comment>
-  </command>
   <command name="pause" value="500"/>
   <command name="mouseOver" target="css=.swatch img[title=&quot;${ProductName}, ${AvailableColor2}&quot;]"/>
   <command name="waitForElementPresent" target="css=.product-image img[title=&quot;${ProductName}, ${AvailableColor2}&quot;]"/>

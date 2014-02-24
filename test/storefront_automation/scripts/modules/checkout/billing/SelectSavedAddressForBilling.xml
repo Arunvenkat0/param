@@ -7,12 +7,4 @@
     <parameter name="selectLabel" value="label=(@{AddressName})*"/>
     <parameter name="labelValue" value="(@{AddressName})*"/>
   </module>
-  <module name="library.function.FSelect" disabled="true">
-    <parameter name="element" value="id=dwfrm_billing_addressList"/>
-    <parameter name="selection" value="label=(@{AddressName})*"/>
-  </module>
-  <command name="select" disabled="true" target="id=dwfrm_billing_addressList" value="label=(@{AddressName})*">
-    <comment>Select Address Name</comment>
-  </command>
-  <command name="waitForSelectedLabel" disabled="true" target="id=dwfrm_billing_addressList" value="(@{AddressName})*"/>
 </scriptmodule>

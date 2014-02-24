@@ -6,19 +6,15 @@
     <parameter name="textElement" value="css=.ui-dialog-title"/>
     <parameter name="textPattern" value="regexpi:Product Quickview"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.ui-dialog-title" value="regexpi:Product Quickview"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.ui-dialog .product-name"/>
     <parameter name="text" value="${ProductName}"/>
   </module>
-  <command name="waitForText" disabled="true" target="css=.ui-dialog .product-name" value="${ProductName}"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.primary-image[title*=&quot;${ProductName}&quot;]"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-sales"/>
     <parameter name="textPattern" value="${ProductPrice}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.price-sales" value="${ProductPrice}"/>
 </scriptmodule>

@@ -6,120 +6,87 @@
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="-0001"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'zip')]"/>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="-0001"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="-0001"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.error-message"/>
     <parameter name="textPattern" value="Please enter a valid value"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.error-message" value="Please enter a valid value"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="1234-"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="1234-"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="1234-"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.error-message"/>
     <parameter name="textPattern" value="Please enter a valid value"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.error-message" value="Please enter a valid value"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="1234"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="1234"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="1234"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.error-message"/>
     <parameter name="textPattern" value="Please enter a valid value"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.error-message" value="Please enter a valid value"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="9404e"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="9404e"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="9404e"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.error-message"/>
     <parameter name="textPattern" value="Please enter a valid value"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.error-message" value="Please enter a valid value"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="9404@"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="9404@"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="9404@"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.error-message"/>
     <parameter name="textPattern" value="Please enter a valid value"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.error-message" value="Please enter a valid value"/>
   <action name="ValidateCanadaZipCode"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="B4V 2K4"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'zip')]"/>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="B4V 2K4"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="B4V 2K4"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <command name="assertNotElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.mini-billing-address .details"/>
     <parameter name="textPattern" value="glob:*B4V 2K4*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.mini-billing-address .details" value="glob:*B4V 2K4*"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-billing-address .section-header-note"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-billing-address .section-header-note"/>
   <action name="ValidateUSZipCode"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="12345-6789"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'zip')]"/>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="12345-6789"/>
-  <command name="assertText" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="12345-6789"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.button-fancy-large"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <command name="assertNotElementPresent" target="xpath=//input[contains(@id, 'zip')]"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.mini-billing-address .details"/>
     <parameter name="textPattern" value="glob:*12345-6789*"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.mini-billing-address .details" value="glob:*12345-6789*"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-billing-address .section-header-note"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-billing-address .section-header-note"/>
 </scriptmodule>

@@ -9,56 +9,37 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.checkout-as-guest"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.checkout-as-guest">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//form[@class='cart-action-checkout']//button[@class='button-fancy-large']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//form[@class='cart-action-checkout']//button[@class='button-fancy-large']">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//button[@name='dwfrm_login_unregistered']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//button[@name='dwfrm_login_unregistered']">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//button[@name='dwfrm_cart_register']"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="//button[@name='dwfrm_cart_register']">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="modules.cart.MQuickRegistration">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
-  <command name="assertTextPresent" disabled="true" value="Select or Enter a Shipping Address"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
@@ -66,9 +47,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
@@ -76,20 +54,16 @@
     <parameter name="typeElement" value="css=.email-input"/>
     <parameter name="inputString" value="${Email}"/>
   </module>
-  <command name="type" disabled="true" target="css=.email-input" value="${Email}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=.password-input"/>
     <parameter name="inputString" value="${Password}"/>
   </module>
-  <command name="type" disabled="true" target="css=.password-input" value="${Password}"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_login_login value=Login"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_login_login value=Login"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="Select Or Enter A Shipping Address"/>
   </module>
@@ -100,36 +74,26 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_cart_checkoutCart value=Checkout"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_cart_checkoutCart value=Checkout">
-    <comment>Add product to cart.</comment>
-  </command>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=.email-input"/>
     <parameter name="inputString" value="${Email}"/>
   </module>
-  <command name="type" disabled="true" target="css=.email-input" value="${Email}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=.password-input"/>
     <parameter name="inputString" value="${Password}"/>
   </module>
-  <command name="type" disabled="true" target="css=.password-input" value="${Password}"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_login_login value=Login"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_login_login value=Login"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//form[@id='dwfrm_singleshipping_shippingAddress']"/>
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="Select Or Enter A Shipping Address"/>
   </module>
@@ -138,16 +102,13 @@
     <parameter name="typeElement" value="css=.email-input"/>
     <parameter name="inputString" value="${Email}"/>
   </module>
-  <command name="type" disabled="true" target="css=.email-input" value="${Email}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=.password-input"/>
     <parameter name="inputString" value="${Password}"/>
   </module>
-  <command name="type" disabled="true" target="css=.password-input" value="${Password}"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="name=dwfrm_login_login value=Login"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="name=dwfrm_login_login value=Login"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${lastVisited}"/>
   </module>
@@ -157,23 +118,18 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//div[contains(@class,'account-welcome')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@class,'account-welcome')]"/>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="//div[contains(@class,'account-welcome')]/div[contains(@class,'welcome-message')]"/>
     <parameter name="plainString" value="Hello ${FirstName} , Welcome Back "/>
   </module>
-  <command name="assertText" disabled="true" target="//div[contains(@class,'account-welcome')]/div[contains(@class,'welcome-message')]" value="Hello ${FirstName} , Welcome Back "/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//div[contains(@class,'account-welcome')]/div[contains(@class,'not-user')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@class,'account-welcome')]/div[contains(@class,'not-user')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="//div[contains(@class,'last-visited')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="//div[contains(@class,'last-visited')]"/>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="//div[contains(@class,'last-visited')]//div[contains(@class,'product-name')]"/>
     <parameter name="plainString" value="${lastVisited}"/>
   </module>
-  <command name="assertText" disabled="true" target="//div[contains(@class,'last-visited')]//div[contains(@class,'product-name')]" value="${lastVisited}"/>
 </testcase>

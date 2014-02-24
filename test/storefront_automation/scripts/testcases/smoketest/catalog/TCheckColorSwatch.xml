@@ -21,7 +21,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=${SubCategoryName}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=${SubCategoryName}"/>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

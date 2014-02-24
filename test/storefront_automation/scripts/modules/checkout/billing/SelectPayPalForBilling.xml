@@ -4,9 +4,6 @@
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=is-PayPal"/>
   </module>
-  <command name="check" disabled="true" target="id=is-PayPal">
-    <comment>Select PAyPal as Pament Method</comment>
-  </command>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
@@ -16,5 +13,4 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="id=PaymentMethod_Custom"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="id=PaymentMethod_Custom"/>
 </scriptmodule>

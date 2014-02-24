@@ -14,24 +14,18 @@
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="textPattern" value="@{CategoryName}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="@{CategoryName}"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-tile"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.product-tile">
-    <comment>Check if at least one product is present.</comment>
-  </command>
   <command name="waitForElementPresent" target="css=.results-hits a"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.results-hits"/>
     <parameter name="textStoreVariableName" value="PaginationText"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.results-hits" value="PaginationText"/>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css= .current-page"/>
     <parameter name="textStoreVariableName" value="CurrentPage"/>
   </module>
-  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
@@ -40,5 +34,4 @@
     <parameter name="textElement" value="css= .current-page"/>
     <parameter name="textStoreVariableName" value="CurrentPage"/>
   </module>
-  <command name="storeText" disabled="true" target="css= .current-page" value="CurrentPage"/>
 </scriptmodule>

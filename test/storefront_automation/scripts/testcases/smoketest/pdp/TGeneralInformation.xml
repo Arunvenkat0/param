@@ -17,55 +17,32 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.addthis_toolbox"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.addthis_toolbox">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
   </module>
-  <command name="click" disabled="true" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" disabled="true" value="1000"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.value .emptyswatch .swatchanchor"/>
   </module>
   <command name="click" target="css=.value .emptyswatch .swatchanchor">
     <comment>Select size.</comment>
   </command>
-  <command name="pause" disabled="true" value="1000"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_compact"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.addthis_button_compact">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
-  <command name="click" disabled="true" target="css=.addthis_button_compact">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
   <command name="waitForElementPresent" target="id=at3wincontent"/>
   <command name="assertVisible" target="id=at3wincontent"/>
   <command name="waitForElementPresent" target="css=.at3winwrapper"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=at3winheaderclose"/>
   </module>
-  <command name="click" disabled="true" target="id=at3winheaderclose"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_facebook"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.addthis_button_facebook">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
-  <command name="click" disabled="true" target="css=.addthis_button_facebook">
-    <comment>Checks if the social toolbox is displayed.</comment>
-  </command>
   <command name="waitForPopUp"/>
   <command name="pause" value="5000"/>
-  <command name="waitForTitle" value="title=Facebook"/>
   <command name="selectWindow" target="title=Facebook"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="name=cancel"/>
   </module>
-  <command name="click" disabled="true" target="name=cancel"/>
   <command name="close"/>
 </testcase>

@@ -20,7 +20,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="xpath=(//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]/../../..//a)[contains(concat(' ',@class,' '), ' swatch ') and @title='${AvailableColor2}']"/>
   </module>
-  <command name="click" disabled="true" target="xpath=(//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]/../../..//a)[contains(concat(' ',@class,' '), ' swatch ') and @title='${AvailableColor2}']"/>
   <module name="modules.catalog.ValidateSwatchColorChange">
     <parameter name="SelectedColor" value="${AvailableColor2}"/>
   </module>
@@ -28,7 +27,6 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=@{SubCategoryName}"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=@{SubCategoryName}"/>
   <module name="modules.catalog.ValidateSwatchColorChange">
     <parameter name="SelectedColor" value="${DefaultColor}"/>
   </module>

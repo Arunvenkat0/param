@@ -39,7 +39,6 @@ at 4. This causes the first result page to appear.</description>
     <parameter name="textElement" value="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-name')]/h2/a"/>
     <parameter name="textStoreVariableName" value="Name1"/>
   </module>
-  <command name="storeText" disabled="true" target="//ul[contains(@id,'search-result-items')]/li[1]//div[contains(@class,'product-name')]/h2/a" value="Name1"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[2]//div[contains(@class,'product-name')]/h2/a" value="Name2"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[3]//div[contains(@class,'product-name')]/h2/a" value="Name3"/>
   <command name="storeText" target="//ul[contains(@id,'search-result-items')]/li[4]//div[contains(@class,'product-name')]/h2/a" value="Name4"/>

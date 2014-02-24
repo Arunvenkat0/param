@@ -58,7 +58,5 @@
   <module name="modules.minicart.MNumberToCurrency">
     <parameter name="price" value="${price}"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.mini-cart-subtotals .value" value="ThePrice"/>
-  <command name="assertValue" disabled="true" target="css=.mini-cart-subtotals .value" value="${price}"/>
   <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
 </scriptmodule>

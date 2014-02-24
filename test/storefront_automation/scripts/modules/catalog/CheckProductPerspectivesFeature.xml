@@ -5,13 +5,11 @@
     <parameter name="textElement" value="css=.grid-tile:first-child .name-link"/>
     <parameter name="textStoreVariableName" value="ProductName"/>
   </module>
-  <command name="storeText" disabled="true" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductPerspectivesImages"/>
   <action name="Perspectives_Details"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=View Full Details"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="link=View Full Details"/>
   <module name="modules.catalog.ValidateProductPerspectivesImages"/>
 </scriptmodule>

@@ -4,9 +4,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.breadcrumb"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.breadcrumb">
-    <comment>Checks if breadcrumb navigation is displayed.</comment>
-  </command>
   <command name="assertElementPresent" target="css=h1.product-name">
     <comment>Checks if a headline is displayed.</comment>
   </command>

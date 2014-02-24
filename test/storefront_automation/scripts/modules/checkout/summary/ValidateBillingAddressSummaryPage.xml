@@ -15,7 +15,6 @@
     <parameter name="textElement" value="css=.item-list th:nth-child(2)"/>
     <parameter name="textPattern" value="regexpi:Billing Address"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.item-list th:nth-child(2)" value="regexpi:Billing Address"/>
   <command name="assertText" target="css=.order-billing .mini-address-name" value="@{Name}"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="glob:@{Address}*"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{City}*"/>

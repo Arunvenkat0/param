@@ -13,7 +13,6 @@ Expire Year</description>
     <parameter name="textElement" value="css=.item-list th:nth-child(3)"/>
     <parameter name="textPattern" value="regexpi:Payment Method"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.item-list th:nth-child(3)" value="regexpi:Payment Method"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*@{Last4}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="*Exp.@{ExpireMonthNumber}.@{Expire_Year}*"/>
   <command name="assertText" target="css=.order-payment-instruments" value="glob:*Amount:*"/>

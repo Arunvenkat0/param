@@ -11,14 +11,8 @@ Quantity: new quantity</description>
     <parameter name="typeElement" value="css=.cart-row:nth-child(@{TableRow}) .item-quantity input"/>
     <parameter name="inputString" value="@{Quantity}"/>
   </module>
-  <command name="type" disabled="true" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{Quantity}">
-    <comment>Enter new quantity.</comment>
-  </command>
   <action name="Update_CommitChanges"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="id=update-cart"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="id=update-cart">
-    <comment>Update the cart by clicking the button.</comment>
-  </command>
 </scriptmodule>
