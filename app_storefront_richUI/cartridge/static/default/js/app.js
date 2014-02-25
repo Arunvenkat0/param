@@ -77,9 +77,16 @@ var app = (function (app, $) {
 		});
 
 
-		//initialize search suggestions
-		app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
-
+		/**
+		 * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
+		 * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
+		 * */
+		if(app.clientcache.LISTING_SEARCHSUGGEST_LEGACY){
+			app.searchsuggestbeta.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
+		}else{
+			app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
+		}
+		
 		// print handler
 		app.ui.printPage.on("click", function () { window.print(); return false; });
 
@@ -4535,7 +4542,8 @@ var app = (function (app, $) {
 
 			// build the request url
 			var reqUrl = app.util.appendParamToURL(app.urls.searchsuggest, "q", part);
-
+            reqUrl = app.util.appendParamToURL(reqUrl, "legacy", "true");
+            
 			// get remote data as JSON
 			$.getJSON(reqUrl, function (data) {
 				// get the total of results
@@ -4573,6 +4581,178 @@ var app = (function (app, $) {
 		clearResults : function () {
 			if (!$resultsContainer) { return; }
 			$resultsContainer.empty().hide();
+		}
+	};
+}(window.app = window.app || {}, jQuery));
+
+/**
+ * @class app.searchsuggestbeta
+ */
+(function (app, $) {
+	var currentQuery = null,
+	    lastQuery = null,
+	    runningQuery = null,
+        listTotal = -1,
+		listCurrent = -1,
+		delay = 30,
+		fieldDefault = null,
+		$searchForm,
+		$searchField,
+		$searchContainer,
+		$resultsContainer;
+	/**
+	 * @function
+	 * @description Handles keyboard's arrow keys
+	 * @param keyCode Code of an arrow key to be handled
+	 */
+	function handleArrowKeys(keyCode) {
+		switch (keyCode) {
+			case 38:
+				// keyUp
+				listCurrent = (listCurrent <= 0) ? (listTotal - 1) : (listCurrent - 1);
+				break;
+			case 40:
+				// keyDown
+				listCurrent = (listCurrent >= listTotal - 1) ? 0 : listCurrent + 1;
+				break;
+			default:
+				// reset
+				listCurrent = -1;
+				return false;
+		}
+
+		$resultsContainer.children().removeClass("selected").eq(listCurrent).addClass("selected");
+		$searchField.val($resultsContainer.find(".selected div.suggestionterm").first().text());
+		return true;
+	}
+
+	/******* app.searchsuggestBeta public object ********/
+	app.searchsuggestbeta = {
+		/**
+		 * @function
+		 * @description Configures parameters and required object instances
+		 */
+		init : function (container, defaultValue) {
+			// initialize vars
+			$searchContainer = $(container);
+			$searchForm = $searchContainer.find("form[name='simpleSearch']");
+			$searchField = $searchForm.find("input[name='q']");
+			fieldDefault = defaultValue;
+
+			// disable browser auto complete
+			$searchField.attr("autocomplete", "off");
+
+			// on focus listener (clear default value)
+			$searchField.focus(function () {
+				if(!$resultsContainer) {
+					// create results container if needed
+					$resultsContainer = $("<div/>").attr("id", "search-suggestions").appendTo($searchContainer);
+				}
+				if($searchField.val() === fieldDefault) {
+					$searchField.val("");
+				}
+			});
+			// on blur listener
+			$searchField.blur(function () {
+				setTimeout(app.searchsuggestbeta.clearResults, 200);
+			});
+			// on key up listener
+			$searchField.keyup(function (e) {
+
+				// get keyCode (window.event is for IE)
+				var keyCode = e.keyCode || window.event.keyCode;
+
+				// check and treat up and down arrows
+				if(handleArrowKeys(keyCode)) {
+					return;
+				}
+				// check for an ENTER or ESC
+				if(keyCode === 13 || keyCode === 27) {
+					app.searchsuggestbeta.clearResults();
+					return;
+				}
+
+				currentQuery = $searchField.val().trim();
+
+                // no query currently running, init a update
+                if (runningQuery == null)
+                {
+                    runningQuery = currentQuery;
+                    setTimeout("app.searchsuggestbeta.suggest()", delay);
+                }
+			});
+		},
+
+        /**
+		 * @function
+		 * @description trigger suggest action
+		 */
+		suggest : function()
+		{
+		    // check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
+            // (we had a little delay)
+            if (runningQuery !== currentQuery)
+            {
+                // update running query to the most recent search phrase
+                runningQuery = currentQuery;
+            }
+
+            // if it's empty clear the results box and return
+            if(runningQuery.length === 0) {
+                app.searchsuggestbeta.clearResults();
+                runningQuery = null;
+                return;
+            }
+
+            // if the current search phrase is the same as for the last suggestion call, just return
+            if (lastQuery === runningQuery)
+            {
+                runningQuery = null;
+                return;
+            }
+
+            // build the request url
+            var reqUrl = app.util.appendParamToURL(app.urls.searchsuggest, "q", runningQuery);
+            reqUrl = app.util.appendParamToURL(reqUrl, "legacy", "false");
+
+            // execute server call
+            $.get(reqUrl, function (data)
+            {
+
+                var suggestionHTML = data,
+                    ansLength = suggestionHTML.trim().length;
+
+                // if there are results populate the results div
+                if(ansLength === 0) {
+                    app.searchsuggestbeta.clearResults();
+                }
+                else
+                {
+                    // update the results div
+                    $resultsContainer.html(suggestionHTML).fadeIn(200);
+                }
+
+                // record the query that has been executed
+                lastQuery = runningQuery;
+                // reset currently running query
+                runningQuery = null;
+
+                // check for another required update (if current search phrase is different from just executed call)
+                if (currentQuery !== lastQuery)
+                {
+                    // ... and execute immediately if search has changed while this server call was in transit
+                    runningQuery = currentQuery;
+                    setTimeout("app.searchsuggestbeta.suggest()", delay);
+                }
+            });
+		},
+		/**
+		 * @function
+		 * @description
+		 */
+		clearResults : function () {
+			if (!$resultsContainer) { return; }
+			$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
 		}
 	};
 }(window.app = window.app || {}, jQuery));
