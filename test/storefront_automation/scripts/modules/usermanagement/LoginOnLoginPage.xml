@@ -12,5 +12,7 @@
     <parameter name="inputString" value="@{Password}"/>
   </module>
   <action name="SubmitLogin"/>
-  <command name="clickAndWait" target="name=dwfrm_login_login"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_login_login"/>
+  </module>
 </scriptmodule>
