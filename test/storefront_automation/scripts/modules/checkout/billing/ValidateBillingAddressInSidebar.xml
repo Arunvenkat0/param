@@ -13,10 +13,14 @@ PS: Works only for one address line</description>
   <parameter name="State_Short"/>
   <parameter name="ZipCode"/>
   <parameter name="Country"/>
-  <command name="assertText" target="css=.mini-billing-address h3" value="regexpi:.*Billing Address"/>
-  <command name="assertText" target="css=.mini-billing-address .details div:first-child" value="@{Name}">
-    <comment>Validate Address Name</comment>
-  </command>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-billing-address h3"/>
+    <parameter name="textPattern" value="regexpi:.*Billing Address"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-billing-address .details div:first-child"/>
+    <parameter name="textPattern" value="@{Name}"/>
+  </module>
   <command name="assertText" target="css=.mini-billing-address .details div:nth-child(2)" value="@{Address}">
     <comment>Validate Billing Address</comment>
   </command>

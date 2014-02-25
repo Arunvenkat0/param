@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84698</tags>
-  <description>Test Case ID:(C84698) 
-Expected Results
-
-    Confirm that an anonymous user does not see a dropdown to select saved addresses.
-    The address fields on this page are blank unless user chose on the shipping page to use that as the billing address.</description>
+  <description>Test Case ID:(C84698) Smoke Test » Checkout - Retuning Customer » Billing » Guest User: Address</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -25,10 +21,9 @@ Expected Results
   <command name="storeEval" target="'$' + (${FirstProductQuantity}*parseFloat('${FirstProductPrice}'.substring(1))).toFixed(2)" value="FirstProductTotalPrice">
     <comment>Calculate the total price and store the result.</comment>
   </command>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" value="1000"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
+  </module>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${FirstProductQuantity}"/>
     <parameter name="ProductName" value="${FirstProductName}"/>
@@ -52,17 +47,16 @@ Expected Results
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <action name="SelectColor"/>
-  <command name="click" target="css=.Color .emptyswatch a">
-    <comment>Select a random color by clicking a color link.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color .emptyswatch a"/>
+  </module>
   <command name="waitForElementPresent" target="css=.Color .selected">
     <comment>Wait for the color to be selected.</comment>
   </command>
   <action name="SelectSize"/>
-  <command name="click" target="css=.size .emptyswatch a[title=S]"/>
-  <command name="click" disabled="true" target="css=.size .emptyswatch a">
-    <comment>Select a random size by clicking one of the size options.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.size .emptyswatch a[title=S]"/>
+  </module>
   <command name="waitForElementPresent" target="css=.size .selected">
     <comment>Wait for the color to be selected.</comment>
   </command>
@@ -70,9 +64,10 @@ Expected Results
   <command name="store" target="${RANDOM.Number(1,10)}" value="SecondProductQuantity">
     <comment>Generate a random quantity and store the value.</comment>
   </command>
-  <command name="storeText" target="css=h1.product-name" value="SecondProductName">
-    <comment>Store the product name using the headline on product details page.</comment>
-  </command>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textStoreVariableName" value="SecondProductName"/>
+  </module>
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="SecondProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
@@ -100,12 +95,14 @@ Expected Results
     <comment>Validate Order's total amounts including charges</comment>
   </module>
   <action name="ChooseGuestCheckout"/>
-  <command name="clickAndWait" target="css=.cart-actions button[value='Checkout']"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutLoginPageStructure"/>
   <action name="GuestCheckoutShipping"/>
-  <command name="clickAndWait" target="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]">
-    <comment>Click the guest checkout link.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="1"/>
     <parameter name="StepText" value="Shipping"/>
@@ -143,21 +140,23 @@ Expected Results
   <action name="GuestCheckoutBilling">
     <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
   </action>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
+  </module>
   <module name="modules.checkout.billing.ValidateBillingAddressBlankFields"/>
   <command name="assertNotElementPresent" target="css=.select-address">
     <comment>A user who has not saved an address yet does not see a dropdown.</comment>
   </command>
   <action name="GoBackToShipping"/>
-  <command name="clickAndWait" target="css=.mini-shipment a"/>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.mini-shipment a"/>
+  </module>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
@@ -195,7 +194,10 @@ Expected Results
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
+    <parameter name="inputString" value="${RandomEmailAddress}"/>
+  </module>
   <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
     <comment>Validate All Payment Methods available on page</comment>
   </module>
@@ -210,9 +212,9 @@ Expected Results
   <action name="GuestCheckoutPlaceOrder">
     <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
   </action>
-  <command name="clickAndWait" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="3"/>
     <parameter name="StepText" value="Place Order"/>
@@ -254,9 +256,13 @@ Expected Results
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <action name="GuestSubmitOrder"/>
-  <command name="clickAndWait" target="name=submit">
-    <comment>Place the order by clicking the button.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=submit"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Thank you for your order."/>
+  </module>
   <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
   <command name="assertText" target="css=.order-date span:first-child" value="Order Placed"/>
   <command name="assertText" target="css=#main .order-total td:first-child" value="glob:Order Total:"/>

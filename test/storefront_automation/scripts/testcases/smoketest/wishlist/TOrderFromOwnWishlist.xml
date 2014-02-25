@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85036</tags>
-  <description>Test Case ID:(C85036) 
-Test with placing an order from a wishlist:
-Tests the public wishlist feature.
-- search for a product
-- add to wishlist
-- register new user
-- add the product to cart directly from the wishlist
-- complete order process
-- validate for the text &quot;This is a wishlist item&quot; on checkout pages</description>
+  <description>Test Case ID:(C85036) Smoke Test » My Account - Returning Customer » Wish List » Order From Own Wishlist</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -28,7 +20,9 @@ Tests the public wishlist feature.
     <parameter name="ProductPrice" value="${ProductPrice}"/>
   </module>
   <action name="AddProductToCart"/>
-  <command name="click" target="css=.add-to-cart"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.add-to-cart"/>
+  </module>
   <module name="modules.minicart.CheckAutomaticAppearanceOfMiniCart"/>
   <module name="modules.minicart.CheckContentOfMiniCart">
     <parameter name="Name" value="${ProductName}"/>
@@ -77,9 +71,9 @@ Tests the public wishlist feature.
     <parameter name="ZipCode" value="${ShippingAddressZipCode}"/>
     <parameter name="Phone" value="${ShippingAddressPhone}"/>
   </module>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
+  </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
     <comment>All available Shipping Methods Validation</comment>
@@ -131,9 +125,6 @@ Tests the public wishlist feature.
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="PriceTotal" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.product-list-item .item-links" value="This is a Wish List Item">
-    <comment>Does not seem to be part of the checkout minicart view anymore.</comment>
-  </command>
   <module name="modules.checkout.shipping.ValidateShippingAddressInSidebar">
     <comment>Shipping Address Validation</comment>
     <parameter name="Name" value="${ShippingAddressFirstName} ${ShippingAddressLastName}"/>

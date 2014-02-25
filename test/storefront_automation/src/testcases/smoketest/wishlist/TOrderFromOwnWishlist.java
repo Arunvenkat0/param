@@ -7,15 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85036) 
- Test with placing an order from a wishlist:
- Tests the public wishlist feature.
- - search for a product
- - add to wishlist
- - register new user
- - add the product to cart directly from the wishlist
- - complete order process
- - validate for the text "This is a wishlist item" on checkout pages
+ * Test Case ID:(C85036) Smoke Test » My Account - Returning Customer » Wish List » Order From Own Wishlist
  */
 @ScriptName
 ("testcases.smoketest.wishlist.TOrderFromOwnWishlist")

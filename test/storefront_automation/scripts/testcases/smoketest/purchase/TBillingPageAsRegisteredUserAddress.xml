@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84697</tags>
-  <description>Test Case ID:(C84697) 
-Preconditions
-
-Log in, put item(s) in cart and start checkout.
-
-Test with a registered user who
-- has no saved addresses
-- has one or more saved addresses
-
-Expected Results
-
-    The billing address fields are filled with the customer's default address.
-    If the user has no default address or no saved addresses, these fields are blank.
-    If user chose on shipping page to use that address for billing, the shipping address is pre-populated here.
-    A user who has saved addresses can choose one from the dropdown, and this fills in the fields.
-    A user who has not saved an address yet does not see a dropdown.
-    User can edit address fields after choosing an address from the dropdown. (That does not modify the saved address.)
-    Test form validation: make sure user cannot leave required fields blank and can leave optional fields blank.
-    Test form validation: make sure user has to enter valid information for zip code and phone numbers and the email address. (Unless specified in a project, the other fields do not have strict validation rules.)
-    Test with foreign addresses as well: check the telephone field with valid foreign numbers (which will be formatted differently and have different numbers of digits than US)
-    Test with foreign addresses as well: the zip code field is the biggest problem here. Make sure it is not restricted to accepting US zip codes. Common problems are Canada/UK (letters, numbers, space) and Australia (only four digits). US zip code should be accepted as 12345 or 12345-6789.
-    Depending on what countries are allowed, test the interplay of country/state fields. For example, if country is changed to Canada, user should see Canadian provinces in the dropdown instead of US states and the field label should change to 'province'.</description>
+  <description>Test Case ID:(C84697) Smoke Test » Checkout - Retuning Customer » Billing » Logged In User: Address</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -55,7 +34,9 @@ Expected Results
     <parameter name="TableRow" value="1"/>
   </module>
   <action name="CheckOutBillingNoSavedAddresses"/>
-  <command name="clickAndWait" target="css=.cart-actions button[value='Checkout']"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
+  </module>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>
@@ -63,7 +44,10 @@ Expected Results
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.address legend"/>
+    <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
+  </module>
   <module name="modules.adressmanagement.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
@@ -79,16 +63,22 @@ Expected Results
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
   </module>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
+  </module>
   <module name="modules.checkout.billing.ValidateBillingAddressBlankFields"/>
-  <command name="assertNotElementPresent" target="css=.select-address">
+  <command name="waitForNotElementPresent" target="css=.select-address">
     <comment>A user who has not saved an address yet does not see a dropdown.</comment>
   </command>
   <module name="modules.checkout.billing.ValidateBillingFieldsAreRequired"/>
   <action name="NavigateToAddressManagement"/>
-  <command name="clickAndWait" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(3) a"/>
+  </module>
+  <command name="waitForText" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <action name="CreateShippingAddress"/>
   <module name="modules.adressmanagement.CreateAddress">
@@ -142,13 +132,17 @@ Expected Results
     <parameter name="Phone" value="${BillingAddressPhone}"/>
   </module>
   <action name="NavigateToWelcomePage"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
   <action name="AddCreditCard"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
+  </module>
   <module name="modules.payments.AddCreditCard">
     <parameter name="Name" value="${CreditCardFirstName} ${CreditCardLastName}"/>
     <parameter name="Type" value="${CreditCardType}"/>
@@ -159,7 +153,9 @@ Expected Results
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
   <action name="CheckOutBillingTwoSavedAddresses"/>
   <module name="modules.cart.GotoCartViaMiniCart"/>
-  <command name="clickAndWait" target="css=.cart-actions button[value='Checkout']"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
+  </module>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>
@@ -167,7 +163,7 @@ Expected Results
     <parameter name="Quantity" value="${ProductQuantity}"/>
     <parameter name="Price" value="${ProductTotalPrice}"/>
   </module>
-  <command name="assertText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
+  <command name="waitForText" target="css=.address legend" value="regexpi:Select or Enter a Shipping Address.*"/>
   <command name="assertElementPresent" target="css=.select-address">
     <comment>A user who has saved addresses see a dropdown.</comment>
   </command>
@@ -183,7 +179,9 @@ Expected Results
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
   </module>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
+  </module>
   <module name="modules.checkout.shipping.ValidateSelectedAddress">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
@@ -217,7 +215,7 @@ Expected Results
   <module name="modules.checkout.billing.ValidateRequiredAddressFieldsForBilling">
     <comment>Billing Address Required Fields Validation</comment>
   </module>
-  <command name="assertElementPresent" target="css=.select-address">
+  <command name="waitForElementPresent" target="css=.select-address">
     <comment>A user who saved an address see a dropdown.</comment>
   </command>
   <module name="modules.checkout.billing.SelectSavedAddressForBilling">
@@ -232,11 +230,16 @@ Expected Results
     <parameter name="CreditCardType" value="${CreditCardTypeShort}"/>
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
-  <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
+    <parameter name="inputString" value="${RandomEmailAddress}"/>
+  </module>
   <module name="modules.checkout.billing.ValidateZipCode"/>
   <module name="modules.checkout.billing.ValidatePhone"/>
   <action name="CheckoutPlaceOrder"/>
-  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
   <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
     <comment>Validate First Product's Details on Place Order page</comment>
     <parameter name="Position" value="1"/>
@@ -274,10 +277,10 @@ Expected Results
     <parameter name="ExpireYear" value="${CreditCardExpiryYear}"/>
   </module>
   <action name="CheckSummary"/>
-  <command name="clickAndWait" target="name=submit">
-    <comment>Submit Order</comment>
-  </command>
-  <command name="assertText" target="css=#primary h1" value="Thank you for your order.">
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=submit"/>
+  </module>
+  <command name="waitForText" target="css=#primary h1" value="Thank you for your order.">
     <comment>Validate Order Submission Message</comment>
   </command>
   <command name="assertText" target="css=.order-confirmation-details h2" value="Order Summary"/>
@@ -319,24 +322,33 @@ Expected Results
     <comment>Validate Oder'S total amonts and various charges</comment>
   </module>
   <action name="DeleteAddress"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="ConfirmDeleteMessage"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(3) a"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Addresses"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(3) a"/>
+  </module>
+  <command name="waitForText" target="css=.breadcrumb-last" value="Addresses"/>
   <command name="assertText" target="css=#addresses h1" value="Addresses"/>
   <module name="modules.adressmanagement.DeleteLastAddress">
     <parameter name="AddressCount" value="1"/>
   </module>
   <action name="DeleteCreditCard"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="ConfirmDeleteMessage"/>
-  <command name="clickAndWait" target="css=.account-options li:nth-child(5) a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.account-options li:nth-child(5) a"/>
+  </module>
   <module name="modules.payments.DeleteCreditCard">
     <parameter name="PositionNb" value="1"/>
   </module>
   <action name="Logout"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="LogoutFromWelcomePage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>

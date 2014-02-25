@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the Bill Me Later data within the sidebar.</description>
-  <command name="assertText" target="css=.mini-payment-instrument span" value="regexpi:.*Payment Method"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-payment-instrument span"/>
+    <parameter name="textPattern" value="regexpi:.*Payment Method"/>
+  </module>
   <command name="assertText" target="css=.mini-payment-instrument .details" value="glob:*Bill Me Later*">
     <comment>Validate Pay Pal Type</comment>
   </command>

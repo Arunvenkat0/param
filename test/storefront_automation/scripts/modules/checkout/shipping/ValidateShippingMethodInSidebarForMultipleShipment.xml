@@ -3,5 +3,8 @@
   <description>Validates the selected shipping methods for the shipping addresses.</description>
   <parameter name="Position"/>
   <parameter name="ShippingMethodName"/>
-  <command name="assertText" target="xpath=id('secondary')/div[contains(@class,'mini-shipment')][@{Position}]//div[@class='minishipments-method']/span[2]" value="@{ShippingMethodName}"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="xpath=id('secondary')/div[contains(@class,'mini-shipment')][@{Position}]//div[@class='minishipments-method']/span[2]"/>
+    <parameter name="plainString" value="@{ShippingMethodName}"/>
+  </module>
 </scriptmodule>

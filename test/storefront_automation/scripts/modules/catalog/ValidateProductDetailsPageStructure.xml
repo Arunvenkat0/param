@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the detail page structure of a simple product.</description>
-  <command name="assertElementPresent" target="css=.breadcrumb">
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.breadcrumb"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=.breadcrumb">
     <comment>Checks if breadcrumb navigation is displayed.</comment>
   </command>
   <command name="assertElementPresent" target="css=h1.product-name">
@@ -19,15 +22,15 @@
   <command name="assertElementPresent" target="id=add-to-cart">
     <comment>Checks if the order button is displayed.</comment>
   </command>
-  <command name="assertXpathCount" disabled="true" target="id('product-content')/div[@class='product-actions']//li" value="3">
-    <comment>Checks if 3 tab controls are displayed</comment>
-  </command>
-  <command name="assertText" disabled="true" target="css=.product-actions .menu" value="Add to Wishlist*Add to Gift Registry*Send to a Friend"/>
   <command name="assertElementPresent" target="css=.addthis_toolbox">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>
   <command name="assertXpathCount" target="id('pdpMain')//div[contains(@class,'product-tabs')]/ul/li" value="3">
     <comment>Checks if 3 tab controls are displayed.</comment>
   </command>
-  <command name="assertText" target="css=.product-tabs ul" value="Description*Reviews"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.product-tabs ul"/>
+    <parameter name="textPattern" value="Description*Reviews"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.product-tabs ul" value="Description*Reviews"/>
 </scriptmodule>

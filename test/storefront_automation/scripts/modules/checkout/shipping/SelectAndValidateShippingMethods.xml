@@ -7,28 +7,31 @@ This module only works without shipping discount (ex. Free Ground Shipping Over 
   <parameter name="ShippingMethodNumber"/>
   <parameter name="ShippingMethodName"/>
   <action name="SelectAndValidateFirstShippingMethod"/>
-  <command name="waitForElementPresent" target="id=shipping-method-001">
-    <comment>This might turn up later due to background Ajax, so wait for it.</comment>
-  </command>
-  <command name="check" target="id=shipping-method-001"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=shipping-method-001"/>
+  </module>
   <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label" value="glob:Ground:*"/>
   <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label/span" value="regexp:^\$\s*([0-9]|([1-9][0-9]{0,2}))\.99$"/>
   <command name="storeText" target="xpath=id('shipping-method-list')/fieldset/div[1]/label/span" value="Shipping_Costs"/>
   <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="glob:*Ground*"/>
   <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]/td[2]" value="${Shipping_Costs}"/>
   <action name="SelectAndValidateSecondShippingMethod"/>
-  <command name="check" target="id=shipping-method-002"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=shipping-method-002"/>
+  </module>
   <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[2]/label" value="2-Day Express*"/>
   <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[2]/label/span" value="regexp:^\$\s*([0-9]|([1-9][0-9]{0,2}))\.99$"/>
   <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="glob:*@{ShippingMethodName}*"/>
   <action name="SelectAndValidateThirdShippingMethod"/>
-  <command name="check" target="id=shipping-method-003"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=shipping-method-003"/>
+  </module>
   <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[3]/label" value="Overnight*"/>
   <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[3]/label/span" value="regexp:^\$\s*([0-9]|([1-9][0-9]{0,2}))\.99$"/>
   <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="glob:*Overnight*"/>
   <action name="SelectShippingMethodForCheckout"/>
-  <command name="check" target="id=shipping-method-00@{ShippingMethodNumber}">
-    <comment>Select Shipping Method</comment>
-  </command>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=shipping-method-00@{ShippingMethodNumber}"/>
+  </module>
   <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[@{ShippingMethodNumber}]/label" value="@{ShippingMethodName}*"/>
 </scriptmodule>

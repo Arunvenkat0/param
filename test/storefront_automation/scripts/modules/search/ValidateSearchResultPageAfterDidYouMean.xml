@@ -4,6 +4,10 @@
 
 The sugegsted KeyWord is entered in a parameter.</description>
   <parameter name="KeyWord"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.refinement-header"/>
+    <parameter name="textPattern" value="regexpi:Refine Search"/>
+  </module>
   <command name="assertText" target="css=.refinement-header" value="regexpi:Refine Search"/>
   <command name="assertText" target="css=.breadcrumb-result-text" value="*@{KeyWord}*"/>
   <command name="assertElementPresent" target="css=.grid-tile .product-image">

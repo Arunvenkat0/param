@@ -17,5 +17,4 @@
     <parameter name="PasswordCorrect" value="@{Password}"/>
   </module>
   <action name="SubmitRegistration"/>
-  <command name="submitAndWait" disabled="true" target="id=RegistrationForm"/>
 </scriptmodule>

@@ -15,6 +15,9 @@ Quantity: Quantity of the product</description>
   <parameter name="StateShort"/>
   <parameter name="ZipCode"/>
   <parameter name="Country"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//tr[contains(@class,'cart-row')]"/>
+  </module>
   <command name="assertElementPresent" target="//tr[contains(@class,'cart-row')]"/>
   <command name="waitForText" target="css=.checkoutmultishipping .item-list:nth-child(@{Position}) .product-list-item .name" value="@{Name}">
     <comment>Validate the product name (Wait since prodcut summary get's refreshed after each selection option available on page)</comment>

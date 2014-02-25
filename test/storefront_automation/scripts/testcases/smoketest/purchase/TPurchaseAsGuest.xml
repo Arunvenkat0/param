@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85047 C84683</tags>
-  <description>Test Case ID:(C85047 C84683) 
-Guest checkout: 
-
-* Add some products
-* View cart
-* Guest checkout
-* Enter Shipping Method /Address
-* Enter Billing Method / Address
-* Summary -> Edit
-* Place Offer</description>
+  <description>Test Case ID:(C85047 C84683) (C85047) Smoke Test » Checkout - Retuning Customer » Purchase as Guest   (C84683) Smoke Test » Checkout - Retuning Customer » Starting Checkout » Login Intercept Between Cart and Checkout</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -21,19 +12,19 @@ Guest checkout:
   <command name="store" target="${RANDOM.Number(1,10)}" value="FirstProductQuantity">
     <comment>Generate a random quantity and store the value.</comment>
   </command>
-  <command name="storeText" target="css=h1.product-name" value="FirstProductName">
-    <comment>Store the product name using the headline on product details page.</comment>
-  </command>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textStoreVariableName" value="FirstProductName"/>
+  </module>
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="FirstProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
   <command name="storeEval" target="'$' + (${FirstProductQuantity}*parseFloat('${FirstProductPrice}'.substring(1))).toFixed(2)" value="FirstProductTotalPrice">
     <comment>Calculate the total price and store the result.</comment>
   </command>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" value="100"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
+  </module>
   <module name="modules.cart.AddProductToCart">
     <parameter name="Quantity" value="${FirstProductQuantity}"/>
     <parameter name="ProductName" value="${FirstProductName}"/>
@@ -57,27 +48,23 @@ Guest checkout:
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <action name="SelectColor"/>
-  <command name="click" target="css=.Color .emptyswatch a">
-    <comment>Select a random color by clicking a color link.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.Color .selected">
-    <comment>Wait for the color to be selected.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.Color .emptyswatch a"/>
+    <parameter name="waitForElement" value="css=.Color .selected"/>
+  </module>
   <action name="SelectSize"/>
-  <command name="click" target="css=.size .emptyswatch a[title=S]"/>
-  <command name="click" disabled="true" target="css=.size .emptyswatch a">
-    <comment>Select a random size by clicking one of the size options.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.size .selected">
-    <comment>Wait for the color to be selected.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.size .emptyswatch a[title=S]"/>
+    <parameter name="waitForElement" value="css=.size .selected"/>
+  </module>
   <action name="StoreProductDataAndAddToCart"/>
   <command name="store" target="${RANDOM.Number(1,10)}" value="SecondProductQuantity">
     <comment>Generate a random quantity and store the value.</comment>
   </command>
-  <command name="storeText" target="css=h1.product-name" value="SecondProductName">
-    <comment>Store the product name using the headline on product details page.</comment>
-  </command>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textStoreVariableName" value="SecondProductName"/>
+  </module>
   <command name="storeText" target="xpath=id('product-content')/div[@class='product-price']/span" value="SecondProductPrice">
     <comment>Store the product price using the value on product details page.</comment>
   </command>
@@ -140,9 +127,9 @@ Guest checkout:
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
+  </module>
   <module name="modules.checkout.shipping.SelectAndValidateShippingMethods">
     <parameter name="ShippingMethodNumber" value="${ShippingMethodNumber}"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName}"/>
@@ -191,7 +178,10 @@ Guest checkout:
     <parameter name="Country" value="${ShippingCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RandomEmailAddress}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
+    <parameter name="inputString" value="${RandomEmailAddress}"/>
+  </module>
   <module name="modules.checkout.billing.SelectAndValidatePaymentMethods">
     <comment>Validate All Payment Methods available on page</comment>
   </module>
@@ -253,6 +243,10 @@ Guest checkout:
   <command name="clickAndWait" target="name=submit">
     <comment>Place the order by clicking the button.</comment>
   </command>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Thank you for your order."/>
+  </module>
   <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
   <command name="assertText" target="css=.order-date span:first-child" value="Order Placed"/>
   <command name="assertText" target="css=#main .order-total td:first-child" value="glob:Order Total:"/>

@@ -6,9 +6,9 @@ of the displayed product.
 @Parameters:
 Name: Product name
 Price: price range taken from the product grid</description>
-  <command name="assertElementPresent" target="css=.breadcrumb">
-    <comment>Checks if breadcrumb navigation is displayed.</comment>
-  </command>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.breadcrumb"/>
+  </module>
   <command name="assertElementPresent" target="css=h1.product-name">
     <comment>Checks if a headline is displayed.</comment>
   </command>

@@ -2,12 +2,20 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>This module checks if the confirm email must equal the email.</description>
   <parameter name="Email"/>
-  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="nomatch@demandware.com"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_confirmRecipientEmail"/>
+    <parameter name="inputString" value="nomatch@demandware.com"/>
+  </module>
   <action name="Try2Add2Basket"/>
-  <command name="click" target="id=AddToBasketButton"/>
-  <command name="click" target="id=AddToBasketButton">
-    <comment>This second add2cart is for Chrome. Does not see the first click for no reason.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=AddToBasketButton"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=AddToBasketButton"/>
+  </module>
   <command name="waitForText" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail + span" value="The email address doesn't match your friend's email."/>
-  <command name="type" target="id=dwfrm_giftcert_purchase_confirmRecipientEmail" value="@{Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_confirmRecipientEmail"/>
+    <parameter name="inputString" value="@{Email}"/>
+  </module>
 </scriptmodule>

@@ -9,7 +9,9 @@ Price: Total price of the product</description>
   <parameter name="Name"/>
   <parameter name="Quantity"/>
   <parameter name="Price"/>
-  <command name="assertElementPresent" target="//tr[contains(@class,'cart-row')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//tr[contains(@class,'cart-row')]"/>
+  </module>
   <command name="waitForText" target="css=.checkoutmultishipping .product-list-item:nth-child(1) .name" value="@{Name}">
     <comment>Validate the product name (Wait since prodcut summary get's refreshed after each selection option available on page)</comment>
   </command>

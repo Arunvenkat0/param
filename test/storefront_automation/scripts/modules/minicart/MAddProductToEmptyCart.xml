@@ -32,9 +32,8 @@
   <command name="waitForText" target="css=.mini-cart-product:nth-child(1) .mini-cart-name" value="@{Name}">
     <comment>Checks the correct product name in mini cart</comment>
   </command>
-  <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="@{Quantity}">
-    <comment>Checks the correct quantity in mini cart</comment>
-  </command>
+  <command name="storeText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="DisplayedQuickViewQTY"/>
+  <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="${DisplayedQuickViewQTY}"/>
   <module name="modules.minicart.MCurrencyToNumber">
     <parameter name="price" value="@{PriceProduct}"/>
   </module>

@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85053  C84738 C84740</tags>
-  <description>Test Case ID:(C85053  C84738 C84740) 
-Tests the public wishlist feature.
-- search for a product
-- add to wishlist
-- register new user
-- make the wishlist public
-- log out 
-- search for the public wishlist</description>
+  <description>Test Case ID:(C85053  C84738 C84740) (C85053 ) Smoke Test » My Account - Returning Customer » Wish List » Public View (C84738 ) Test Suites &amp; Cases » Smoke Test » My Account - Returning Customer » Wish List » Login page (C84740) Smoke Test » My Account - Returning Customer » Wish List » Search Results</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -46,9 +39,18 @@ Tests the public wishlist feature.
   <command name="clickAndWait" target="link=regexpi:Wish List"/>
   <module name="modules.usermanagement.ValidateWishlistLoginPageStructure"/>
   <action name="FindAWishlist"/>
-  <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${UserLastName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${UserFirstName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_email" value="${Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
+    <parameter name="inputString" value="${UserLastName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
+    <parameter name="inputString" value="${UserFirstName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
+    <parameter name="inputString" value="${Email}"/>
+  </module>
   <action name="SubmitWishlistSearch"/>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
@@ -71,9 +73,18 @@ Tests the public wishlist feature.
     <parameter name="ProductID" value="${ProductID}"/>
     <parameter name="ProductPrice" value="${ProductPrice}"/>
   </module>
-  <command name="type" target="id=dwfrm_wishlist_search_lastname" value="${ILastName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_firstname" value="${IFirstName}"/>
-  <command name="type" target="id=dwfrm_wishlist_search_email" value=""/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_lastname"/>
+    <parameter name="inputString" value="${ILastName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_firstname"/>
+    <parameter name="inputString" value="${IFirstName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_wishlist_search_email"/>
+    <parameter name="inputString" value=""/>
+  </module>
   <command name="clickAndWait" target="css=#dwfrm_wishlist_search button[name='dwfrm_wishlist_search_search']">
     <comment>Click the search button.</comment>
   </command>

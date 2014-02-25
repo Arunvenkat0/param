@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <parameter name="aletrenateViewCount"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=thumbnails"/>
+  </module>
   <command name="assertElementPresent" target="id=thumbnails"/>
   <command name="assertXpathCount" target="//div[@id='thumbnails']//ul/li" value="@{aletrenateViewCount}"/>
   <command name="assertText" target="//div[@id='thumbnails']//h2" value="Alternate Views"/>

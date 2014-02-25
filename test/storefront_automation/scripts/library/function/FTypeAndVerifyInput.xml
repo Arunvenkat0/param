@@ -5,7 +5,7 @@
   <parameter name="inputString"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="@{typeElement}"/>
-    <parameter name="inputString" value="@{inputElement}"/>
+    <parameter name="inputString" value="@{inputString}"/>
   </module>
   <command name="waitForText" target="@{typeElement}" value="@{inputString}">
     <comment>Waits for the 'typeElement' to contain the 'inputString' text. This allows for input display lag.</comment>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the billing information summary page for responsive design:
 - Name
@@ -11,7 +11,10 @@
   <parameter name="StateShort"/>
   <parameter name="ZipCode"/>
   <parameter name="Country"/>
-  <command name="assertText" target="css=.order-billing .mini-address-name" value="@{Name}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-billing .mini-address-name"/>
+    <parameter name="textPattern" value="@{Name}"/>
+  </module>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="glob:@{Address}*"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{City}*"/>
   <command name="assertText" target="css=.order-billing .mini-address-location" value="*@{StateShort}*"/>

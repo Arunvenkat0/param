@@ -7,10 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85050) 
- Validates the search functionality for a product set:
- - Search item by name
- - Validate the result page
+ * Test Case ID:(C85050,C84695) (C85050) Smoke Test » Search Results » Results » Search Product Set  (C84695)  Smoke Test » Search Results » Results » Search Results Product Sets/Bundles 
  */
 @ScriptName
 ("testcases.smoketest.search.TSearchProductSet")

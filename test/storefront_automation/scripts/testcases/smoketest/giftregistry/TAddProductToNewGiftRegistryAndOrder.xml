@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85044</tags>
-  <description>Test Case ID:(C85044) 
-Places an order from a new gift registry and checks if the purchase is visible on the gift registry page. These are the steps in detail:
-- register a new user
-- create a new giftregistry
-- add two products
-- log out
-- search for the gift registry
-- order the first product, guest checkout
-- search for the gift registry again
-- validate if the &quot;quantity purchased&quot; of the first product has changed</description>
+  <description>Test Case ID:(C85044) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry and Order</description>
   <module name="modules.staticelements.Homepage"/>
   <command name="store" target="${RANDOM.String(8)}" value="UserFirstName"/>
   <module name="modules.usermanagement.RegisterNewUser">
@@ -23,13 +14,20 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="Headline" value="Find Someone's Gift Registry:"/>
   </module>
   <action name="ClickNewRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_create"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_create"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
   <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
   <action name="EnterEventAndParticipantData"/>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
   <action name="EnterShippingData"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
+  </module>
   <module name="modules.giftregistry.GiftRegistryEnterShippingData"/>
   <action name="ValidateGiftRegistryData"/>
   <command name="clickAndWait" target="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
@@ -38,14 +36,21 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <value>glob:*${ShippingAddressFirstName} ${ShippingAddressLastName}*${ShippingAddressStreet} ${ShippingAddressCity}*${ShippingAddressZipCode}</value>
   </command>
   <action name="SubmitGiftRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
   </module>
-  <command name="assertText" target="css=#dwfrm_giftregistry_items fieldset:first-child p" value="You have no items in your gift registry."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_giftregistry_items fieldset:first-child p"/>
+    <parameter name="textPattern" value="You have no items in your gift registry."/>
+  </module>
   <action name="ClickAddItems"/>
-  <command name="clickAndWait" target="link=Add Items"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Add Items"/>
+  </module>
   <action name="SearchAndAddProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
@@ -56,7 +61,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <action name="AddProductToGiftRegistry"/>
-  <command name="clickAndWait" target="link=Add to Gift Registry"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Add to Gift Registry"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
@@ -74,21 +81,31 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="Price" value="${SecondProductPrice}"/>
   </module>
   <action name="AddSecondProductToGiftRegistry"/>
-  <command name="clickAndWait" target="link=Add to Gift Registry"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Add to Gift Registry"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
+  </module>
+  <module name="library.function.FWaitForElement" disabled="true">
+    <parameter name="element" value="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr"/>
   </module>
   <command name="assertXpathCount" target="id('dwfrm_giftregistry_items')//table[@class='item-list']/tbody/tr" value="3">
     <comment>Number of products plus 1 header row</comment>
   </command>
   <action name="MakeItPublic"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_setPublic"/>
-  <command name="assertElementPresent" target="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_setPublic"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
+  </module>
   <command name="assertElementPresent" target="css=a.send-to-friend"/>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToGiftRegistry"/>
@@ -99,7 +116,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
   <action name="SearchForGiftRegistryAndValidateResult"/>
   <module name="modules.giftregistry.SearchForGiftRegistryAndValidateResult"/>
   <action name="ViewDetails"/>
-  <command name="clickAndWait" target="css=.event-view a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.event-view a"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryDetails"/>
   <module name="modules.giftregistry.ValidateGiftRegistryProductRow">
     <parameter name="ProductCount" value="2"/>
@@ -118,7 +137,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="QuantityPurchased" value="0"/>
   </module>
   <action name="AddFirstProductToCart"/>
-  <command name="click" target="css=.item-list tr:nth-child(1) .add-to-cart"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.item-list tr:nth-child(1) .add-to-cart"/>
+  </module>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
   </action>
@@ -142,12 +163,14 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="TableRow" value="1"/>
   </module>
   <action name="ChooseGuestCheckout"/>
-  <command name="clickAndWait" target="css=.cart-actions button[value='Checkout']"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.cart-actions button[value='Checkout']"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutLoginPageStructure"/>
   <action name="GuestCheckoutShipping"/>
-  <command name="clickAndWait" target="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]">
-    <comment>Click the guest checkout link.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="xpath=//*[starts-with(@name, 'dwfrm_login_unregistered')]"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="1"/>
     <parameter name="StepText" value="Shipping"/>
@@ -170,12 +193,12 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="ZipCode" value="${BillingAddressZipCode}"/>
     <parameter name="Phone" value="${BillingAddressPhone}"/>
   </module>
-  <command name="check" target="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress">
-    <comment>Use the same address for billing by ticking the checkbox.</comment>
-  </command>
-  <command name="check" target="xpath=//label[contains(., '${ShippingMethodName}')]/following-sibling::input">
-    <comment>Select Shipping Method, select by text instead of position number. Only works with xpath.</comment>
-  </command>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
+  </module>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="xpath=//label[contains(., '${ShippingMethodName}')]/following-sibling::input"/>
+  </module>
   <command name="waitForText" target="css=.order-totals-table .order-shipping.first td:first-child" value="glob:*${ShippingMethodName}*">
     <comment>Have to wait till the background sync finished.</comment>
   </command>
@@ -183,9 +206,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
   <action name="GuestCheckoutBilling">
     <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
   </action>
-  <command name="clickAndWait" target="name=dwfrm_singleshipping_shippingAddress_save">
-    <comment>Proceed to billing.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_singleshipping_shippingAddress_save"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
@@ -216,7 +239,10 @@ Places an order from a new gift registry and checks if the purchase is visible o
     <parameter name="Country" value="${BillingAddressCountry}"/>
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
-  <command name="type" target="id=dwfrm_billing_billingAddress_email_emailAddress" value="${RANDOM.String(8)}@varmail.de"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_billing_billingAddress_email_emailAddress"/>
+    <parameter name="inputString" value="${RANDOM.String(8)}@varmail.de"/>
+  </module>
   <module name="modules.checkout.billing.SelectCreditCardAndEnterData">
     <parameter name="CardName" value="${CreditCardFirstName} ${CreditCardLastName}"/>
     <parameter name="Type" value="${CreditCardType}"/>
@@ -228,9 +254,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
   <action name="GuestCheckoutPlaceOrder">
     <comment>check product information, required fields, enter Shipping details and variate shipping methods</comment>
   </action>
-  <command name="clickAndWait" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
   <module name="modules.checkout.ValidateCheckoutProgressBar">
     <parameter name="StepNumber" value="3"/>
     <parameter name="StepText" value="Place Order"/>
@@ -266,9 +292,13 @@ Places an order from a new gift registry and checks if the purchase is visible o
   </module>
   <module name="modules.checkout.ValidateNumberFormatsCheckoutPage"/>
   <action name="GuestSubmitOrder"/>
-  <command name="clickAndWait" target="name=submit">
-    <comment>Place the order by clicking the button.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=submit"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Thank you for your order."/>
+  </module>
   <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
   <command name="assertText" target="css=.order-date span:first-child" value="Order Placed"/>
   <command name="assertText" target="css=#main .order-total td:first-child" value="glob:Order Total:"/>
@@ -312,7 +342,9 @@ Places an order from a new gift registry and checks if the purchase is visible o
   <action name="SearchForGiftRegistry"/>
   <module name="modules.giftregistry.SearchForGiftRegistryAndValidateResult"/>
   <action name="ViewDetails"/>
-  <command name="clickAndWait" target="css=.event-view a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.event-view a"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryDetails"/>
   <module name="modules.giftregistry.ValidateGiftRegistryProductRow">
     <comment>Validate quality purchased == 1</comment>

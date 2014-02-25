@@ -2,36 +2,58 @@
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Clicks the store link for a product and searches for a zip code. After selecting the first store at the result list the overlay closes. 
 Overlay is opened again to do another search by clicking change location link.
-Another zip code is used for the second search.
-</description>
+Another zip code is used for the second search.</description>
   <parameter name="ZipCodeStore1"/>
   <parameter name="ZipCodeStore2"/>
   <action name="OpenStoreSelectionOverlay"/>
-  <command name="click" target="link=Select Store"/>
-  <command name="type" target="id=userZip" value="@{ZipCodeStore1}"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=Select Store"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=userZip"/>
+    <parameter name="inputString" value="@{ZipCodeStore1}"/>
+  </module>
   <action name="SearchForStoreZipCode1"/>
-  <command name="click" target="id=set-user-zip"/>
-  <command name="assertTextPresent" value="@{ZipCodeStore1}"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=set-user-zip"/>
+  </module>
+  <module name="library.function.FAssertCaseInsensitiveTextOnPage">
+    <parameter name="text" value="@{ZipCodeStore1}"/>
+  </module>
   <command name="assertElementPresent" target="css=.update-location"/>
   <command name="waitForElementPresent" target="css=.store-list .store-tile"/>
   <command name="assertElementPresent" target="css=.select-store-button"/>
   <command name="assertElementPresent" target="css=#listings-nav"/>
   <action name="SelectPickUpStore1"/>
-  <command name="click" target="css=.select-store-button"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.select-store-button"/>
+  </module>
   <command name="waitForElementPresent" target="css=.selected-store-address"/>
-  <command name="waitForElementPresent" target="link=Select Store"/>
   <action name="OpenStoreSelectionOverlayAgain"/>
-  <command name="click" target="link=Select Store"/>
-  <command name="click" target="css=.update-location"/>
-  <command name="type" target="id=userZip" value="@{ZipCodeStore2}"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=Select Store"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.update-location"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=userZip"/>
+    <parameter name="inputString" value="@{ZipCodeStore2}"/>
+  </module>
   <action name="SearchForStoreZipCode2"/>
-  <command name="click" target="id=set-user-zip"/>
-  <command name="assertTextPresent" value="@{ZipCodeStore2}"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=set-user-zip"/>
+  </module>
+  <module name="library.function.FAssertCaseInsensitiveTextOnPage">
+    <parameter name="text" value="@{ZipCodeStore2}"/>
+  </module>
   <command name="assertElementPresent" target="css=.update-location"/>
   <command name="assertElementPresent" target="css=.store-list .store-tile"/>
   <command name="assertElementPresent" target="css=.select-store-button"/>
   <command name="assertElementPresent" target="css=#listings-nav"/>
   <action name="SelectPickUpStore2"/>
-  <command name="click" target="css=.select-store-button"/>
-  <command name="waitForElementPresent" target="css=.selected-store-address"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.select-store-button"/>
+    <parameter name="waitForElement" value="css=.selected-store-address"/>
+  </module>
 </scriptmodule>

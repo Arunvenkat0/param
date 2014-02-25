@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the product data within the cart.
 
@@ -13,16 +13,19 @@ TableRow: Row number in which the item resides</description>
   <parameter name="TotalPriceProduct"/>
   <parameter name="Quantity"/>
   <parameter name="TableRow"/>
-  <command name="waitForText" target="css=.cart-row:nth-child(@{TableRow}) .name" value="@{Name}">
-    <comment>Validate product name within the cart.</comment>
-  </command>
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .name"/>
+    <parameter name="plainString" value="@{Name}"/>
+  </module>
   <command name="waitForValue" target="css=.cart-row:nth-child(@{TableRow}) .item-quantity input" value="@{Quantity}">
     <comment>Validate the quantity within the cart.</comment>
   </command>
-  <command name="waitForText" target="css=.cart-row:nth-child(@{TableRow}) .item-price span" value="@{SinglePrice}">
-    <comment>Validate the single price within the cart.</comment>
-  </command>
-  <command name="assertText" target="css=.cart-row:nth-child(@{TableRow}) .price-total" value="@{TotalPriceProduct}">
-    <comment>Validate the total price within the cart.</comment>
-  </command>
+  <module name="library.function.FWaitForTextCaseInsensitive">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .item-price span"/>
+    <parameter name="plainString" value="@{SinglePrice}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .price-total"/>
+    <parameter name="textPattern" value="@{TotalPriceProduct}"/>
+  </module>
 </scriptmodule>

@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the row contaning a single product within a product set.</description>
   <parameter name="NumberOfProduct"/>
   <parameter name="ProductName"/>
-  <command name="assertText" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//h1" value="@{ProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//h1"/>
+    <parameter name="textPattern" value="@{ProductName}"/>
+  </module>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]/div[@class='product-set-image']"/>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//input[@name='Quantity']"/>
   <command name="assertElementPresent" target="xpath=id('product-set-list')/div[@class='product-set-item'][@{NumberOfProduct}]//span[@class='price-sales']"/>

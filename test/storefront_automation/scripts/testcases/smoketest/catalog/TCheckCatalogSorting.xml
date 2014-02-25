@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84781</tags>
-  <description>Test Case ID:(C84781)  Opens a subcategory page and checks all available sort methods. For each method the correctness of the resuls is checked by validating the first and last search result.</description>
+  <description>[Test Case ID:(C84781) partial ]  Smoke Test » Search Results » Results » Search Results Page: Sort By</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">

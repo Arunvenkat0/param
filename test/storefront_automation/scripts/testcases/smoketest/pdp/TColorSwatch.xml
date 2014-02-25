@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>?</tags>
-  <description>Test Case ID:(?) </description>
+  <description>Test Case ID:(?)</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for the product set</comment>
@@ -10,31 +10,33 @@
   <command name="assertNotElementPresent" target="css=.Color .selected"/>
   <command name="assertNotElementPresent" target="css=.size .selected"/>
   <command name="assertNotElementPresent" target="css=.width .selected"/>
-  <command name="storeText" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
-    <comment>Select size.</comment>
-  </command>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" target="//li[contains(text(),'${ColorSelected}') ]"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.Color .emptyswatch .swatchanchor"/>
+    <parameter name="textStoreVariableName" value="ColorSelected"/>
+  </module>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
+    <parameter name="waitForElement" value="//li[contains(text(),'${ColorSelected}') ]"/>
+  </module>
   <command name="waitForElementPresent" target="css=.Color .selected"/>
   <command name="waitForElementPresent" target="css=.size .unselectable"/>
-  <command name="storeText" target="css=.size  .emptyswatch .swatchanchor" value="SizeSelected">
-    <comment>Select size.</comment>
-  </command>
-  <command name="click" target="css=.size  .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.size .selected"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.size  .emptyswatch .swatchanchor"/>
+    <parameter name="textStoreVariableName" value="SizeSelected"/>
+  </module>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.size  .emptyswatch .swatchanchor"/>
+    <parameter name="waitForElement" value="css=.size .selected"/>
+  </module>
   <command name="waitForElementPresent" target="//li[contains(text(),'${SizeSelected}') ]"/>
   <command name="waitForElementPresent" target="css=.width .unselectable"/>
-  <command name="storeText" target="css=.width .emptyswatch .swatchanchor" value="WidthSelected">
-    <comment>Select size.</comment>
-  </command>
-  <command name="click" target="css=.width .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.width .selected"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.width .emptyswatch .swatchanchor"/>
+    <parameter name="textStoreVariableName" value="WidthSelected"/>
+  </module>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.width .emptyswatch .swatchanchor"/>
+    <parameter name="waitForElement" value="css=.width .selected"/>
+  </module>
   <command name="waitForElementPresent" target="//li[contains(text(),'${WidthSelected}') ]"/>
-  <command name="assertElementPresent" disabled="true" target="//div[@class='product-add-to-cart']//button[contains(@title,'Select Color and Size')]"/>
 </testcase>

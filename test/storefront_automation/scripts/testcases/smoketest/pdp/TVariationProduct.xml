@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Test Case ID:(?) </description>
+  <description>Test Case ID:(?)</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -20,18 +20,18 @@
   <command name="storeText" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
     <comment>Select size.</comment>
   </command>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
+  </module>
   <command name="waitForElementPresent" target="//li[contains(text(),'${ColorSelected}') ]"/>
   <command name="waitForElementPresent" target="css=.Color .selected"/>
   <command name="assertText" target="css=.product-variations .attribute:first-child .value .swatches .selected-value" value="${ColorSelected}"/>
   <command name="storeText" target="css=.size  .emptyswatch .swatchanchor" value="SizeSelected">
     <comment>Select size.</comment>
   </command>
-  <command name="click" target="css=.size  .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.size  .emptyswatch .swatchanchor"/>
+  </module>
   <command name="waitForElementPresent" target="css=.size .selected"/>
   <command name="waitForElementPresent" target="//li[contains(text(),'${SizeSelected}') ]"/>
   <command name="assertNotElementPresent" target="//div[@class='product-add-to-cart']//button[contains(@class,'button-fancy-large add-to-cart-disabled')]"/>
@@ -43,31 +43,42 @@
   <command name="assertVisible" target="//a[contains(text(),'Send to a Friend')]"/>
   <command name="assertElementPresent" target="//a[contains(text(),'Add to Wishlist')]"/>
   <command name="assertElementPresent" target="//div[@class='product-add-to-cart']//button[contains(@class,'button-fancy-large')]"/>
-  <command name="clickAndWait" target="//a[contains(text(),'Add to Wishlist')]"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Wish List">
-    <comment>Validates correct breadcrumb text.</comment>
-  </command>
-  <command name="clickAndWait" target="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
-  <command name="click" target="css=.Color .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" value="1000"/>
-  <command name="click" target="css=.value .size .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
-  <command name="pause" value="1000"/>
-  <command name="clickAndWait" target="//a[contains(text(),'Add to Gift Registry')]"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry">
-    <comment>Validates correct breadcrumb text.</comment>
-  </command>
-  <command name="clickAndWait" target="//a[contains(text(),'Wish List')]"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Wish List">
-    <comment>Validates correct breadcrumb text.</comment>
-  </command>
-  <command name="clickAndWait" target="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
-  <command name="click" target="//a[contains(text(),'Send to a Friend')]">
-    <comment>Select size.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//a[contains(text(),'Add to Wishlist')]"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Wish List"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.value .size .swatchanchor"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//a[contains(text(),'Add to Gift Registry')]"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//a[contains(text(),'Wish List')]"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Wish List"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//a[contains(text(),'Send to a Friend')]"/>
+  </module>
   <command name="waitForElementPresent" target="//span[(contains(@id,'ui-dialog-title-send-to-friend-dialog') and (contains(text(),'Send to a Friend')))]"/>
   <module name="modules.staticelements.Homepage"/>
 </testcase>

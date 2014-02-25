@@ -7,8 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85048) 
- Registered checkout with an existing user. Therefore the user is created first and address and payment data are entered. After putting one product into the cart these data are used during the checkout process.
+ * Test Case ID:(C85048) Smoke Test » Checkout - Retuning Customer » Purchase as Registered User
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseAsRegisteredUser")

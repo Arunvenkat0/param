@@ -4,6 +4,10 @@
   <parameter name="Name"/>
   <parameter name="Quantity"/>
   <parameter name="PriceTotal"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.cart-row:nth-child(@{Position}) .name"/>
+    <parameter name="textPattern" value="@{Name}"/>
+  </module>
   <command name="assertText" target="css=.cart-row:nth-child(@{Position}) .name" value="@{Name}">
     <comment>Validate Product Name</comment>
   </command>

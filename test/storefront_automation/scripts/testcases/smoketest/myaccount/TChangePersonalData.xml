@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84676</tags>
-  <description>Test Case ID:(C84676) 
-Personal data account management. Creates a new user and changes the following information afterwards:
-
-- FirstName
-- LastName
-- Email
-
-
-The user is logged out and loggid in again to proof the changes have been stored correctly. All changes are reverted to the initial state.
-
-During the testcase email and password information are generated dynamically.
-
-Disabled because it fails in 13.3 at line 136 > wrong breadcrumb RAP-2412</description>
+  <description>Test Case ID:(C84676) Smoke Test » My Account - Returning Customer » Personal Information » Personal Information</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -21,7 +9,6 @@ Disabled because it fails in 13.3 at line 136 > wrong breadcrumb RAP-2412</descr
   </module>
   <action name="ChangePersonalData"/>
   <command name="store" target="${RANDOM.String(6)}@varmail.de" value="ChangedEmail"/>
-  <command name="store" disabled="true" target="${RANDOM.String(9)}" value="ChangedPassword"/>
   <module name="modules.usermanagement.EditPersonalData">
     <parameter name="First_Name" value="${ChangedFirstName}"/>
     <parameter name="Last_Name" value="${ChangedLastName}"/>

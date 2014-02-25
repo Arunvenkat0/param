@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84681</tags>
-  <description>Test Case ID:(C84681)</description>
+  <tags>C130252</tags>
+  <description>Test Case ID:(C130252 )Smoke Test » Search Results » Product Grid » Product Grid Display: Product Bundle Pricing </description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for the product set</comment>

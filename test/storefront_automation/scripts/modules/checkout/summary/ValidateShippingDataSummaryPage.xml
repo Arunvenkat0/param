@@ -16,7 +16,10 @@
   <parameter name="Country"/>
   <parameter name="ShippingMethod"/>
   <parameter name="ShippingStatus"/>
-  <command name="assertText" target="css=.order-shipment-table th:nth-child(4)" value="regexpi:Shipping To"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-shipment-table th:nth-child(4)"/>
+    <parameter name="textPattern" value="regexpi:Shipping To"/>
+  </module>
   <command name="assertText" target="css=.order-shipment-address .firstname" value="@{FirstName}"/>
   <command name="assertText" target="css=.order-shipment-address .lastname" value="@{LastName}"/>
   <command name="assertText" target="css=.order-shipment-address .street" value="@{Address}"/>

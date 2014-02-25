@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85043</tags>
-  <description>Test Case ID:(C85043) 
-Creates a gift registry for a new user. Performs the following steps:
-- register a new user
-- create a gift registry
-- make this gift registry public
-- add a product
-- log out 
-- search for the gift registry
-- validate results</description>
+  <description>Test Case ID:(C85043) Smoke Test » My Account - Returning Customer » Gift Registry » Add Items to Gift Registry</description>
   <module name="modules.staticelements.Homepage"/>
   <command name="store" target="${UserFirstName} ${RANDOM.String(7)}" value="UserFirstName"/>
   <module name="modules.usermanagement.RegisterNewUser">
@@ -22,29 +14,45 @@ Creates a gift registry for a new user. Performs the following steps:
     <parameter name="Headline" value="Find Someone's Gift Registry:"/>
   </module>
   <action name="ClickNewRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_create"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_create"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
   <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
   <action name="EnterEventAndParticipantData"/>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
   <action name="EnterShippingData"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm value=Continue"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm value=Continue"/>
+  </module>
   <module name="modules.giftregistry.GiftRegistryEnterShippingData"/>
   <action name="ValidateGiftRegistryData"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_eventaddress_confirm value=Continue"/>
+  </module>
   <command name="assertTextPresent" value="glob:*${UserFirstName} ${UserLastName}*,* ${SecondParticipantFirstName} ${SecondParticipantLastName}*${EventType}*${EventDate}"/>
   <command name="assertTextPresent">
     <value>glob:*${ShippingAddressFirstName} ${ShippingAddressLastName}*${ShippingAddressStreet} ${ShippingAddressCity}*${ShippingAddressZipCode}</value>
   </command>
   <action name="SubmitGiftRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_event_confirm"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_event_confirm"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
   </module>
-  <command name="assertText" target="css=#dwfrm_giftregistry_items fieldset:first-child p" value="You have no items in your gift registry."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_giftregistry_items fieldset:first-child p"/>
+    <parameter name="textPattern" value="You have no items in your gift registry."/>
+  </module>
   <action name="ClickAddItems"/>
-  <command name="clickAndWait" target="link=Add Items"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Add Items"/>
+  </module>
   <action name="SearchAndAddProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
@@ -55,7 +63,9 @@ Creates a gift registry for a new user. Performs the following steps:
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <action name="AddProductToGiftRegistry"/>
-  <command name="clickAndWait" target="link=Add to Gift Registry"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Add to Gift Registry"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryPageStructureMyAccount">
     <parameter name="EventName" value="${EventName}"/>
     <parameter name="EventDate" value="${EventDate}"/>
@@ -64,13 +74,17 @@ Creates a gift registry for a new user. Performs the following steps:
     <comment>Number of products plus 1 header row</comment>
   </command>
   <action name="MakeItPublic"/>
-  <command name="clickAndWait" target="name=dwfrm_giftregistry_setPublic"/>
-  <command name="assertElementPresent" target="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_giftregistry_setPublic"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="name=dwfrm_giftregistry_setPrivate value=Make This Registry Private"/>
+  </module>
   <command name="assertElementPresent" target="css=a.send-to-friend"/>
-  <action name="WaitForAccountLink"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
   <action name="GoToWelcomePage"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToGiftRegistry"/>
@@ -81,7 +95,9 @@ Creates a gift registry for a new user. Performs the following steps:
   <action name="SearchForGiftRegistry"/>
   <module name="modules.giftregistry.SearchForGiftRegistryAndValidateResult"/>
   <action name="ViewDetails"/>
-  <command name="clickAndWait" target="css=.event-view a"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.event-view a"/>
+  </module>
   <module name="modules.giftregistry.ValidateGiftRegistryDetails"/>
   <module name="modules.giftregistry.ValidateGiftRegistryProductRow">
     <parameter name="ProductCount" value="1"/>
