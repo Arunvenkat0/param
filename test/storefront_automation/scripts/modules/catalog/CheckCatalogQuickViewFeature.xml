@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Validates the quickview behaviour:
 - window is opened when hovering over the product image on catalog pages
@@ -7,8 +7,14 @@
 - default color is selected
 - size is selected
 - cart button is enabled</description>
-  <command name="storeText" target="css=.grid-tile:first-child .name-link" value="ProductName"/>
-  <command name="storeText" target="css=.grid-tile:first-child .product-sales-price" value="ProductPrice"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.grid-tile:first-child .name-link"/>
+    <parameter name="textStoreVariableName" value="ProductName"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.grid-tile:first-child .product-sales-price"/>
+    <parameter name="textStoreVariableName" value="ProductPrice"/>
+  </module>
   <action name="OpenQuickview"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>

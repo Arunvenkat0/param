@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85042</tags>
-  <description>Test Case ID:(C85042) 
-Validates the behaviour of the quickview inside the product catalog.
-
-This is broken in 13.4. RAP-2406</description>
+  <description>Test Case ID:(C85042)  Smoke Test » Quickview » QuickView: validate overlay </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">

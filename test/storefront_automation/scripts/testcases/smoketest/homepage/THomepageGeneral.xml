@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84757,C84776</tags>
-  <description>Test Case ID:(C84757,C84776) 
-1.All is working and linked as expected.
-
-2.Text is correct.
-
-Automation Test does not cover the testing of hover feature in menu.</description>
+  <description>Test Case ID:(C84757,C84776)  (C84757)  Smoke Test » Homepage » Homepage, General  (C84776) Smoke Test » Header | Global Navigation | Footer » Footer</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.staticelements.ValidateHomepageElements"/>
   <module name="modules.staticelements.ValidateStandardPageElements"/>
@@ -308,7 +303,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
   <action name="Next-Previous-section"/>
   <module name="modules.smoketest.MHomePageNextPreviousSection"/>
   <action name="carousel-horizontal"/>
-  <command name="click" target="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-1')]"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-1')]"/>
+  </module>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'homepage-slides') and (contains(@style,'left: 0px')))]"/>
   <command name="click" target="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-2')]"/>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'homepage-slides') and (contains(@style,'left: -960px')))]"/>
@@ -318,7 +315,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
   <command name="waitForElementPresent" target="//ul[(contains(@id,'homepage-slides') and (contains(@style,'left: -2880px')))]"/>
   <command name="click" target="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-5')]"/>
   <command name="waitForElementPresent" target="//ul[(contains(@id,'homepage-slides') and (contains(@style,'left: -3840px')))]"/>
-  <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-1-horizontal')]/a/span[contains(text(),'Shop Collection')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-1-horizontal')]/a/span[contains(text(),'Shop Collection')]"/>
+  </module>
   <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-1-horizontal')]/a/h2[contains(text(),'Spring New Arrivals')]"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-1-horizontal')]/a"/>
@@ -327,7 +326,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
     <parameter name="CheckTitle" value="New Arrivals in Women's Footwear, Outerwear, Clothing &amp; Accessories"/>
     <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
-  <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-2-horizontal')]/a/span[contains(text(),'Shop Accessories')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-2-horizontal')]/a/span[contains(text(),'Shop Accessories')]"/>
+  </module>
   <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-2-horizontal')]/a/h2[contains(text(),'The Perfect Companion')]"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-2-horizontal')]/a"/>
@@ -336,7 +337,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
     <parameter name="CheckTitle" value="Women's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More"/>
     <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
-  <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-3-horizontal')]/a/span[contains(text(),'Shop Now')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-3-horizontal')]/a/span[contains(text(),'Shop Now')]"/>
+  </module>
   <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-3-horizontal')]/a/h2[contains(text(),&quot;Men's Suits&quot;)]"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-3-horizontal')]/a"/>
@@ -345,7 +348,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
     <parameter name="CheckTitle" value="Mens Suits for Business and Casual"/>
     <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
-  <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-4-horizontal')]/a/span[contains(text(),'20% off this week only')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-4-horizontal')]/a/span[contains(text(),'20% off this week only')]"/>
+  </module>
   <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-4-horizontal')]/a/h2[contains(text(),&quot;Women's Dresses&quot;)]"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-4-horizontal')]/a"/>
@@ -354,7 +359,9 @@ Automation Test does not cover the testing of hover feature in menu.</descriptio
     <parameter name="CheckTitle" value="Women's Dresses for all Occasions"/>
     <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
-  <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-5-horizontal')]/a/span[contains(text(),'Shop Summer Shoes')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-5-horizontal')]/a/span[contains(text(),'Shop Summer Shoes')]"/>
+  </module>
   <command name="assertElementPresent" target="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-5-horizontal')]/a/h2[contains(text(),&quot;Flip into Summer&quot;)]"/>
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//ul[contains(@id,'homepage-slides')]/li[contains(@class,'jcarousel-item-5-horizontal')]/a"/>

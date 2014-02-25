@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85029</tags>
-  <description>Test Case ID:(C85029) 
-Checks the presence of different product images in quickview and product details page.</description>
+  <description>Test Case ID:(C85029) Smoke Test » Category Landing Page » Product Perspectives </description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">

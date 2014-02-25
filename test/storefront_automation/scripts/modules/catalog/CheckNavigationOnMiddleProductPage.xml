@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Check the navigation elements for any product in the catalog except the first and the last one. 
 
@@ -13,13 +13,15 @@ ProductName : name of the product to whom naviagated to</description>
     <comment>Wait for the next-link.</comment>
   </command>
   <action name="NavigateToPreviousProduct"/>
-  <command name="clickAndWait" target="css=.product-@{NavigateToProduct} a">
-    <comment>Click next or previous-link</comment>
-  </command>
-  <command name="waitForText" target="css=.breadcrumb .last" value="${FirstProductName}">
-    <comment>Validate the correct product name within breadcrumb navigation.</comment>
-  </command>
-  <command name="waitForText" target="css=h1.product-name" value="${FirstProductName}">
-    <comment>Validate the correct product name.</comment>
-  </command>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.product-@{NavigateToProduct} a"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.breadcrumb .last"/>
+    <parameter name="text" value="${FirstProductName}"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="text" value="${FirstProductName}"/>
+  </module>
 </scriptmodule>

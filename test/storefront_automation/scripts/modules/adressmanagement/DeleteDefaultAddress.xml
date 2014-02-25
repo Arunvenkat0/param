@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Tries to delete the default address. Checks if the number of addresses is equal before and after clicking the delete link.</description>
   <command name="storeXpathCount" target="id('primary')/div/ul/li" value="AddressCount"/>
-  <command name="clickAndWait" target="link=Delete"/>
-  <command name="waitForElementPresent" target="css=#addresses"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Delete"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=Delete"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=#addresses"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=#addresses"/>
   <command name="waitForXpathCount" target="id('primary')/div/ul/li" value="1"/>
   <command name="assertXpathCount" target="id('primary')/div/ul/li" value="1"/>
 </scriptmodule>

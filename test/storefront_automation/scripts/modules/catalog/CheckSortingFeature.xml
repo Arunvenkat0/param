@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the sorting method for:
 - functional correctness
@@ -23,20 +23,22 @@ MaxItems: the complete amont of search results</description>
     <comment>Wait for the dropdown.</comment>
   </command>
   <action name="SelectSortionOption"/>
-  <command name="select" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
-    <comment>Select a sorting method.</comment>
-  </command>
-  <command name="waitForText" target="css=.search-result-options:nth-child(4) .sort-by option[selected]" value="@{SortMethod}">
-    <comment>Wait for the selected sorting method.</comment>
-  </command>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="css=.search-result-options .sort-by select"/>
+    <parameter name="selection" value="label=@{SortMethod}"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.search-result-options:nth-child(4) .sort-by option[selected]"/>
+    <parameter name="text" value="@{SortMethod}"/>
+  </module>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
   </module>
   <action name="SelectLastPage"/>
-  <command name="click" target="css=.pagination li:last-child a">
-    <comment>Select the last page.</comment>
-  </command>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.pagination li:last-child a"/>
+  </module>
   <command name="waitForElementPresent" target="css=.page-1"/>
   <command name="waitForElementPresent" target="css=.search-result-content">
     <comment>waits for productlist before validating them</comment>

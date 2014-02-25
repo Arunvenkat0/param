@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>C84770</tags>
-  <description>Test Case ID:(C84770) 
-This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ´s doing the following steps:
-
-- open category, subcategory, first product
-- open staf overlay and close it with x and with cancel
-- clicks the login button at the staf overlay
-- created a new user
-- goes back to the pdp of the first product
-- opens the staf overlay
-- left mandatory fields empty and clicks preview
-- checks for error messages
-- fills all fields and opens the preview
-- validates the data at the preview
-- clicks the edit button
-- changes friends email address and message
-- opens preview again
-- validates new data at preview
-- sends the recommendation
-- closes the confirmation overlay
-- logout
-- back to the homepage</description>
+  <tags>C84770 C84745 C84746</tags>
+  <description>Test Case ID: (C84770,C84745,C84746) (C84745)  Smoke Test Â» Send to a Friend Â» Send to a Friend Overlay (C84746) Smoke Test Â» Send to a Friend Â» Send to a Friend Review</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
@@ -34,35 +14,41 @@ This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="GetDataFromFirstProductAndOpenIt"/>
-  <command name="storeText" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]" value="ProductName"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
+    <parameter name="textStoreVariableName" value="ProductName"/>
+  </module>
   <command name="storeText" target="//li[contains(@class,'grid-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]" value="ProductPrice"/>
-  <command name="clickAndWait" target="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
-  <command name="storeText" target="xpath=id('product-content')/div[contains(@class,'product-number')]/span" value="ProductID"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="//li[div[contains(@class,'product-tile')]//div[contains(@class,'product-pricing')]/span[(contains(@class,'product-sales-price') and (not (contains(text(),'-'))))]]//a[contains(@class,'name-link')]"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="xpath=id('product-content')/div[contains(@class,'product-number')]/span"/>
+    <parameter name="textStoreVariableName" value="ProductID"/>
+  </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
   <module name="modules.catalog.ValidateProductDataOnDetailsPage">
     <parameter name="Name" value="${ProductName}"/>
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <action name="OpenSTAFOverlay"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="link=Send to a Friend"/>
+    <parameter name="waitForElement" value="id=ui-dialog-title-send-to-friend-dialog"/>
+  </module>
   <action name="CloseSTAFWithX"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <action name="OpenSTAFOverlayAgain"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <command name="waitForElementPresent" target="id=ui-dialog-title-send-to-friend-dialog"/>
-  <action name="CloseSTAFWithCancel"/>
-  <command name="click" target="css= .cancel-button"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
+    <parameter name="waitForElement" value="css=.send-to-friend"/>
+  </module>
   <action name="OpenSTAFOverlayAndLogin"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="link=Send to a Friend"/>
-  <action name="ClickLoginNEEDSTOBEUPDATEDAFTERRap2541"/>
-  <command name="click" disabled="true" target="//*[@id='send-to-friend-dialog']/button[1]"/>
-  <command name="waitForElementPresent" target="link=Login or Create an Account"/>
-  <command name="clickAndWait" target="link=Login or Create an Account"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=Send to a Friend"/>
+  </module>
+  <action name="ClickLogin"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=Login or Create an Account"/>
+  </module>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="RegisterUser"/>
   <command name="clickAndWait" target="name=dwfrm_login_register value=Create an Account"/>
@@ -85,7 +71,9 @@ This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ
     <parameter name="PasswordTooShort" value="abcd"/>
     <parameter name="PasswordCorrect" value="${Password}"/>
   </module>
-  <command name="clickAndWait" target="link=Max Smith"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <module name="modules.usermanagement.ValidateWelcomePage">
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
@@ -94,29 +82,43 @@ This test validates the Send to a Friend overlay which is opened from a PDP. ItÂ
     <parameter name="SearchText" value="${ProductID}"/>
   </module>
   <action name="OpenSTAFOverlay"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="link=Send to a Friend"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="link=Send to a Friend"/>
+  </module>
   <module name="modules.catalog.ValidateSTAFOverlayFromPDP"/>
   <action name="OpenPrivacyPolicy"/>
-  <command name="click" target="link=See Privacy Policy"/>
-  <command name="assertTextPresent" value="See Privacy Policy"/>
+  <module name="library.function.FAssertCaseInsensitiveTextOnPage">
+    <parameter name="text" value="See Privacy Policy"/>
+  </module>
   <action name="ClosePrivacyPolicy"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
-  <command name="click" target="css=.send-to-friend"/>
-  <command name="click" disabled="true" target="//body[@id='ext-gen6']/div[55]/div[1]/a/span"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.send-to-friend"/>
+  </module>
   <module name="modules.catalog.ValidateSTAFForms"/>
   <action name="SendMessage"/>
-  <command name="click" target="css=#send-to-friend-dialog .send-button"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=#send-to-friend-dialog .send-button"/>
+  </module>
+  <module name="library.function.FAssertCaseInsensitiveTextOnPage">
+    <parameter name="text" value="Your message has been sent."/>
+  </module>
   <command name="waitForTextPresent" value="Your message has been sent."/>
   <action name="CloseConfirmationDialog"/>
-  <command name="click" target="css=.close-button"/>
-  <command name="waitForElementPresent" target="css=.send-to-friend"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.close-button"/>
+    <parameter name="waitForElement" value="css=.send-to-friend"/>
+  </module>
   <action name="ClosePrivacyPolicyPopup"/>
-  <command name="click" target="css=.ui-icon-closethick"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.send-to-friend"/>
+  </module>
   <action name="GoToWelcomePage"/>
-  <command name="waitForElementPresent" target="css=.user-account"/>
-  <command name="clickAndWait" target="css=.user-account"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.user-account"/>
+  </module>
   <action name="LogoutAndGoToHomepage"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHome"/>

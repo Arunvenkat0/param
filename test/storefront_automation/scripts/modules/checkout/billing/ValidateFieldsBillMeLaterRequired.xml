@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>User sees error message if any of these BML required fields are not filled out and cannot proceed to the next step of checkout.</description>
-  <command name="check" target="id=is-BML">
-    <comment>Select PAyPal as Pament Method</comment>
-  </command>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=is-BML"/>
+  </module>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_owner"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_type"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_number"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_month"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_year"/>
   <command name="assertNotVisible" target="id=dwfrm_billing_paymentMethods_creditCard_cvn"/>
-  <command name="assertElementPresent" target="id=PaymentMethod_BML"/>
-  <command name="check" target="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
-  <command name="click" target="css=.button-fancy-large">
-    <comment>Click button to place order.</comment>
-  </command>
-  <command name="assertElementPresent" target="css=.year .error"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=PaymentMethod_BML"/>
+  </module>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="id=dwfrm_billing_paymentMethods_bml_termsandconditions"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.year .error"/>
+  </module>
   <command name="assertElementPresent" target="css=.month .error"/>
   <command name="assertElementPresent" target="css=.day .error"/>
   <command name="assertElementPresent" target="css=#dwfrm_billing_paymentMethods_bml_ssn+.error"/>

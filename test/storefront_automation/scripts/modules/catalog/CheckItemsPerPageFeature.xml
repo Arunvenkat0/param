@@ -19,25 +19,38 @@ Static Elements are:
   <command name="select" target="css=.search-result-options .items-per-page select" value="label=@{ItemsPerPage}">
     <comment>Select the desired amount of items per page.</comment>
   </command>
-  <command name="pause" value="500">
+  <command name="pause" disabled="true" value="500">
     <comment>We have to give JQuery a moment to do its magic.</comment>
   </command>
-  <command name="waitForText" target="css=.pagination .results-hits" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
-  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
-  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.pagination .results-hits"/>
+    <parameter name="text" value="regexp:.*Showing [0-9]{1,} - @{ItemsPerPage} of [0-9]{1,} Results.*"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.results-hits"/>
+    <parameter name="textStoreVariableName" value="PaginationText"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css= .current-page"/>
+    <parameter name="textStoreVariableName" value="CurrentPage"/>
+  </module>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>
   </module>
   <action name="SelectLastPage"/>
-  <command name="click" target="css=.pagination li:last-child a">
-    <comment>Switch to last page.</comment>
-  </command>
-  <command name="waitForElementPresent" target="css=.page-1">
-    <comment>Wait for the page switch (link to fist page is visible).</comment>
-  </command>
-  <command name="storeText" target="css=.results-hits" value="PaginationText"/>
-  <command name="storeText" target="css= .current-page" value="CurrentPage"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.pagination li:last-child a"/>
+    <parameter name="waitForElement" value="css=.page-1"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.results-hits"/>
+    <parameter name="textStoreVariableName" value="PaginationText"/>
+  </module>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css= .current-page"/>
+    <parameter name="textStoreVariableName" value="CurrentPage"/>
+  </module>
   <module name="modules.catalog.CompareSearchResultContainers">
     <parameter name="SortMethod" value="@{SortMethod}"/>
     <parameter name="ItemsPerPage" value="@{ItemsPerPage}"/>

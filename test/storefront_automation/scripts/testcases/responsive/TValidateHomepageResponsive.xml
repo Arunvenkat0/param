@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C85031</tags>
-  <description>Validates the homepage for responsive design</description>
+  <description>Test Case ID: (C85031) Smoke Test » Customer Service » Contact Us Form </description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.staticelements.ValidateHeaderElements"/>
   <module name="modules.staticelements.ValidateMainNavigationElementsResponsive"/>

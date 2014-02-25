@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>On category pages with more than 5 pagination elements you can use arrows:
 - one step forward / backward
@@ -12,21 +12,34 @@ MiddlePageNumber : Page number on which you will validate next/previous</descrip
   <parameter name="MiddlePageNumber"/>
   <module name="modules.catalog.ValidateCatalogNavigationFirstPage"/>
   <action name="OpenLastPage"/>
-  <command name="click" target="css=.page-last"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.page-last"/>
+  </module>
   <module name="modules.catalog.ValidateCatalogNaviagationLastPage"/>
   <action name="OpenFirstPage"/>
-  <command name="click" target="css=.page-first"/>
-  <command name="waitForElementPresent" target="css=.page-@{MiddlePageNumber}"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="css=.page-first"/>
+    <parameter name="waitForElement" value="css=.page-@{MiddlePageNumber}"/>
+  </module>
   <action name="OpenLastPageBeforePaging"/>
-  <command name="click" target="css=.page-@{MiddlePageNumber}"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.page-@{MiddlePageNumber}"/>
+  </module>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="OpenPreviousPage"/>
-  <command name="click" target="css=.page-previous"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.page-previous"/>
+  </module>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="OpenNextPage"/>
-  <command name="click" target="css=.page-next"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.page-next"/>
+  </module>
   <module name="modules.catalog.ValidateCatalogNavigationMiddlePage"/>
   <action name="ClickSubcategoryInBreadcrumb"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=@{SubCategoryName}"/>
+  </module>
   <command name="clickAndWait" target="link=@{SubCategoryName}">
     <comment>Page with more navigation elements</comment>
   </command>

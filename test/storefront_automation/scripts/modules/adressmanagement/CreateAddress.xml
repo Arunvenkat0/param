@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Adds a new address to the address management properties.</description>
   <parameter name="Title"/>
@@ -11,12 +11,19 @@
   <parameter name="Country"/>
   <parameter name="Phone"/>
   <action name="CreateNewAddress"/>
-  <command name="click" target="link=Create New Address"/>
-  <command name="pause" disabled="true" value="5000"/>
-  <command name="waitForElementPresent" target="id=edit-address-form"/>
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="link=Create New Address"/>
+    <parameter name="waitForElement" value="id=edit-address-form"/>
+  </module>
+  <command name="click" disabled="true" target="link=Create New Address"/>
+  <command name="waitForElementPresent" disabled="true" target="id=edit-address-form"/>
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses"/>
   <action name="EnterNewAddressData"/>
-  <command name="type" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_profile_address_addressid"/>
+    <parameter name="inputString" value="@{Title}"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
   <module name="modules.adressmanagement.EnterAddressData">
     <parameter name="FirstName" value="@{FirstName}"/>
     <parameter name="LastName" value="@{LastName}"/>

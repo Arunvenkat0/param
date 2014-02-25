@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84768)
+ * Test Case ID:(C84768 partial)  Smoke Test » Quickview » QuickView: Add to Wish List
  */
 @ScriptName
 ("testcases.smoketest.quickview.TAddToWishList")

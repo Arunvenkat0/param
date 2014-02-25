@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks if the entry fields are required (attribute 'class' contains the word 'required').</description>
-  <command name="assertText" target="css=#dwfrm_billing legend" value="regexpi:Select or Enter a Billing Address.*"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_billing legend"/>
+    <parameter name="textPattern" value="regexpi:Select or Enter a Billing Address.*"/>
+  </module>
   <module name="modules.adressmanagement.ValidateGlobalRequiredFieldsForAddresses"/>
-  <command name="assertElementPresent" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
+  <command name="waitForElementPresent" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
 </scriptmodule>

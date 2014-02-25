@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84682</tags>
-  <description>Test Case ID:(C84682) Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.
-
-</description>
+  <description>Test Case ID:(C84682) Smoke Test » Search Results » Product Grid » Product Grid Display: Images and Swatches</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
@@ -20,7 +18,9 @@
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
   <action name="ClickCategoryInBreadcrumb"/>
-  <command name="clickAndWait" target="link=${SubCategoryName}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=${SubCategoryName}"/>
+  </module>
   <action name="BackToHome"/>
   <module name="modules.staticelements.Return2Home"/>
 </testcase>

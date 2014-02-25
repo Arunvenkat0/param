@@ -1,16 +1,16 @@
 /*
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
-package testcases.smoketest.category;
+package testcases.responsive;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84770) 
+ * Test Case ID: (C85031) Smoke Test » Customer Service » Contact Us Form 
  */
 @ScriptName
-("testcases.smoketest.category.TCheckSTAFFromQV")
-public class TCheckSTAFFromQV extends AbstractScriptTestCase
+("testcases.responsive.TValidateHomepageResponsive")
+public class TValidateHomepageResponsive extends AbstractScriptTestCase
 {
 }

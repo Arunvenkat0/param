@@ -7,7 +7,8 @@
     <parameter name="Name" value="@{Name}"/>
     <parameter name="Price" value="@{ActualPrice}"/>
   </module>
-  <command name="assertText" target="css=.price-standard" value="@{StandardPrice}">
-    <comment>Checks for the correct displayed price.</comment>
-  </command>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-standard"/>
+    <parameter name="textPattern" value="@{StandardPrice}"/>
+  </module>
 </scriptmodule>

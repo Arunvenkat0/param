@@ -18,5 +18,4 @@
   <command name="assertTitle" value="@{TitleToVerify}"/>
   <command name="assertElementPresent" target="@{ElementToVerify}"/>
   <command name="clickAndWait" target="@{ElementToClickForPreviousPage}"/>
-  <command name="open" disabled="true" value="@{previousPageLink}"/>
 </scriptmodule>

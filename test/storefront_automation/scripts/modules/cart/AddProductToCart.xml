@@ -14,19 +14,17 @@ Position:</description>
   <parameter name="ProductPrice"/>
   <parameter name="Position"/>
   <action name="EnterQuantity"/>
-  <command name="waitForElementPresent" target="id=Quantity"/>
-  <command name="click" target="id=Quantity"/>
-  <command name="type" target="id=Quantity" value="@{Quantity}">
-    <comment>Enter desired quantity.</comment>
-  </command>
-  <command name="waitForText" target="id=Quantity" value="@{Quantity}"/>
+  <module name="library.function.FTypeAndVerifyInput">
+    <parameter name="typeElement" value="id=Quantity"/>
+    <parameter name="inputString" value="@{Quantity}"/>
+  </module>
   <action name="AddToCart"/>
-  <command name="waitForElementPresent" target="xpath=id('add-to-cart')[not(@disabled='disabled')]">
-    <comment>Wait for enable add-to-cart button</comment>
-  </command>
-  <command name="click" target="id=add-to-cart">
-    <comment>Add product to cart.</comment>
-  </command>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="xpath=id('add-to-cart')[not(@disabled='disabled')]"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="id=add-to-cart"/>
+  </module>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
   </action>

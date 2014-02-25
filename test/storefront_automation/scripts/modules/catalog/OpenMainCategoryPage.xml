@@ -9,9 +9,19 @@ MainCategoryName: Main Menu Name</description>
   <parameter name="MainCategoryName"/>
   <action name="OpenMainCategoryPage"/>
   <command name="waitForElementPresent" target="xpath=id('navigation')//ul/li[@{MainCategoryNumber}]/a[@class='level-1']"/>
-  <command name="clickAndWait" target="link=regexpi:@{MainCategoryName}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=regexpi:@{MainCategoryName}"/>
+  </module>
   <action name="ValidateMainCategoryPage"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="@{MainCategoryName}"/>
-  <command name="assertText" target="css=.refinement-header" value="regexpi:.*@{MainCategoryName}"/>
-  <command name="assertElementPresent" target="id=primary"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="plainString" value="@{MainCategoryName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.refinement-header"/>
+    <parameter name="textPattern" value="regexpi:.*@{MainCategoryName}"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=primary"/>
+  </module>
 </scriptmodule>

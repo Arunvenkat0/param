@@ -9,7 +9,10 @@
   <parameter name="City"/>
   <parameter name="ZipCode"/>
   <parameter name="Phone"/>
-  <command name="assertText" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]" value="@{FirstName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]"/>
+    <parameter name="textPattern" value="@{FirstName}"/>
+  </module>
   <command name="assertText" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')]" value="@{LastName}"/>
   <command name="assertText" target="xpath=//input[contains(@id, 'address1')]" value="@{Street}"/>
   <command name="assertSelectedLabel" target="xpath=//select[contains(@id, 'country')]" value="@{Country}"/>

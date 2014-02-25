@@ -8,7 +8,10 @@ Price</description>
   <parameter name="Name"/>
   <parameter name="Quantity"/>
   <parameter name="Price"/>
-  <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) .product-list-item .name" value="@{Name}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-shipment-table tr:nth-child(@{Position}) .product-list-item .name"/>
+    <parameter name="textPattern" value="@{Name}"/>
+  </module>
   <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) td:nth-child(2)" value="@{Quantity}"/>
   <command name="assertText" target="css=.order-shipment-table tr:nth-child(@{Position}) td:nth-child(3)" value="@{Price}*"/>
 </scriptmodule>

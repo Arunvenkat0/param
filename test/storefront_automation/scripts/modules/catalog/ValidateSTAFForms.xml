@@ -10,33 +10,64 @@ Verifies if the STAF can be sent and if the confirmation overlay is shown.</desc
   </action>
   <action name="EnterIncorrectData"/>
   <command name="waitForElementPresent" target="id=dwfrm_sendtofriend_friendsemail"/>
-  <command name="pause" value="1000">
-    <comment>Needed to prevent subsequent 'type' attempt from failing.</comment>
-  </command>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsemail" value="abcd"/>
-  <command name="waitForElementPresent" target="id=dwfrm_sendtofriend_confirmfriendsemail"/>
-  <command name="type" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="abcd"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsemail"/>
+    <parameter name="inputString" value="abcd"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_confirmfriendsemail"/>
+    <parameter name="inputString" value="abcd"/>
+  </module>
+  <command name="type" disabled="true" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="abcd"/>
   <action name="AndCheckResult"/>
-  <command name="click" target="css=.preview-button"/>
-  <command name="waitForElementPresent" target="css=#dwfrm_sendtofriend_friendsname + span"/>
-  <command name="assertText" target="css=#dwfrm_sendtofriend_friendsname + span" value="Please enter your friend's name"/>
-  <command name="waitForElementPresent" target="css=#dwfrm_sendtofriend_friendsemail + span"/>
-  <command name="assertText" target="css=#dwfrm_sendtofriend_friendsemail + span" value="The email address is invalid."/>
-  <command name="waitForElementPresent" target="css=#dwfrm_sendtofriend_confirmfriendsemail + span"/>
-  <command name="assertText" target="css=#dwfrm_sendtofriend_confirmfriendsemail + span" value="The email address is invalid."/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.preview-button"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_sendtofriend_friendsname + span"/>
+    <parameter name="textPattern" value="Please enter your friend's name"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_sendtofriend_friendsemail + span"/>
+    <parameter name="textPattern" value="The email address is invalid."/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#dwfrm_sendtofriend_confirmfriendsemail + span"/>
+    <parameter name="textPattern" value="The email address is invalid."/>
+  </module>
   <action name="EnterCorrectData">
     <comment>Password, Email</comment>
   </action>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsname" value="${FriendsName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsname"/>
+    <parameter name="inputString" value="${FriendsName}"/>
+  </module>
   <command name="store" target="${RANDOM.String(8)}@varmail.de" value="FriendsEmail"/>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsemail" value="${FriendsEmail}"/>
-  <command name="type" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="${FriendsEmail}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_confirmfriendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
   <command name="store" target="${RANDOM.String(125)}" value="Message"/>
-  <command name="type" target="id=dwfrm_sendtofriend_message" value="${Message}"/>
-  <command name="assertText" target="css=.char-count" value="You have 125 characters left out of 250"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_message"/>
+    <parameter name="inputString" value="${Message}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.char-count"/>
+    <parameter name="textPattern" value="You have 125 characters left out of 250"/>
+  </module>
   <action name="OpenPreview"/>
-  <command name="click" target="css=#send-to-friend-main .preview-button"/>
-  <command name="waitForText" target="css=#send-to-friend-main h2" value="Review Your Message"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=#send-to-friend-main .preview-button"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=#send-to-friend-main h2"/>
+    <parameter name="text" value="Review Your Message"/>
+  </module>
   <command name="assertTextPresent" value="${FriendsName}">
     <comment>Checks for the correct product name to be displayed.</comment>
   </command>
@@ -58,17 +89,36 @@ Verifies if the STAF can be sent and if the confirmation overlay is shown.</desc
   <command name="assertElementPresent" target="css=.send-to-friend-product .product-image img"/>
   <command name="assertTextPresent" value="glob:*Message:*${Message}*"/>
   <action name="EditEmailAndMessage"/>
-  <command name="click" target="name=dwfrm_sendtofriend_edit value=Edit"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="name=dwfrm_sendtofriend_edit value=Edit"/>
+  </module>
   <command name="waitForElementPresent" target="id=dwfrm_sendtofriend_friendsemail"/>
   <command name="store" target="${RANDOM.String(8)}@varmail.de" value="FriendsEmail"/>
-  <command name="type" target="id=dwfrm_sendtofriend_friendsemail" value="${FriendsEmail}"/>
-  <command name="type" target="id=dwfrm_sendtofriend_confirmfriendsemail" value="${FriendsEmail}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_friendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_confirmfriendsemail"/>
+    <parameter name="inputString" value="${FriendsEmail}"/>
+  </module>
   <command name="store" target="${RANDOM.String(125)}" value="Message"/>
-  <command name="type" target="id=dwfrm_sendtofriend_message" value="${Message}"/>
-  <command name="assertText" target="css=.char-count" value="You have 125 characters left out of 250"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_sendtofriend_message"/>
+    <parameter name="inputString" value="${Message}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.char-count"/>
+    <parameter name="textPattern" value="You have 125 characters left out of 250"/>
+  </module>
   <action name="OpenPreviewAgain"/>
-  <command name="click" target="css=#send-to-friend-main .preview-button"/>
-  <command name="waitForText" target="css=#send-to-friend-main h2" value="Review Your Message"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=#send-to-friend-main .preview-button"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=#send-to-friend-main h2"/>
+    <parameter name="text" value="Review Your Message"/>
+  </module>
   <command name="assertTextPresent" value="${FriendsName}">
     <comment>Checks for the correct product name to be displayed.</comment>
   </command>

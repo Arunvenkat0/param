@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks the mandatory fields of the gift certificates form.</description>
   <parameter name="Donor"/>
@@ -6,7 +6,10 @@
   <parameter name="Email"/>
   <parameter name="Message"/>
   <parameter name="Amount"/>
-  <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_from.input-text.required"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=#dwfrm_giftcert_purchase_from.input-text.required"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="css=#dwfrm_giftcert_purchase_from.input-text.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipient.input-text.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_recipientEmail.input-text.required"/>
   <command name="assertElementPresent" target="css=#dwfrm_giftcert_purchase_confirmRecipientEmail.input-text.required"/>

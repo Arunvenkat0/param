@@ -7,9 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84722) 
- Registers a new customer.
- Checks if the new user can login by logging out and logging in again.
+ * Test Case ID:(C84722) Smoke Test » My Account - Returning Customer » Login/Register » Create Account 
  */
 @ScriptName
 ("testcases.smoketest.myaccount.TRegisterUser")

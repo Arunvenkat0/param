@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Checks a displayed address at the given position for:
 - Title
@@ -20,8 +20,27 @@
   <parameter name="Zip"/>
   <parameter name="Country"/>
   <parameter name="Phone"/>
-  <command name="waitForText" target="css=.address-list li:nth-child(@{Position}) .mini-address-title" value="@{Title}"/>
-  <command name="assertText" target="css=.address-list li:nth-child(@{Position}) .mini-address-name" value="@{FirstName} @{LastName}"/>
-  <command name="waitForElementPresent" target="css=.mini-address-location"/>
-  <command name="assertText" target="css=.address-list li:nth-child(@{Position}) .mini-address-location" value="glob:@{Address} @{City}, @{StateShort} @{Zip} @{Country} Phone: @{Phone} "/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.address-list li:nth-child(@{Position}) .mini-address-title"/>
+    <parameter name="plainString" value="@{Title}"/>
+  </module>
+  <command name="waitForText" disabled="true" target="css=.address-list li:nth-child(@{Position}) .mini-address-title" value="@{Title}"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=.address-list li:nth-child(@{Position}) .mini-address-name"/>
+    <parameter name="plainString" value="@{FirstName} @{LastName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.address-list li:nth-child(@{Position}) .mini-address-name" value="@{FirstName} @{LastName}"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.mini-address-location"/>
+  </module>
+  <command name="waitForElementPresent" disabled="true" target="css=.mini-address-location"/>
+  <module name="library.function.FStartsWithTextCaseInsensitive">
+    <parameter name="textElement" value="css=.address-list li:nth-child(@{Position}) .mini-address-location"/>
+    <parameter name="plainString" value="@{Address} @{City}, @{StateShort} @{Zip} @{Country} Phone: @{Phone}"/>
+  </module>
+  <module name="library.function.FAssertTextCaseInsensitive" disabled="true">
+    <parameter name="textElement" value="css=.address-list li:nth-child(@{Position}) .mini-address-location"/>
+    <parameter name="plainString" value="@{Address} @{City}, @{StateShort} @{Zip} @{Country} Phone: ${Phone}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.address-list li:nth-child(@{Position}) .mini-address-location" value="glob:@{Address} @{City}, @{StateShort} @{Zip} @{Country} Phone: @{Phone} "/>
 </scriptmodule>

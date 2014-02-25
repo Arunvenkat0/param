@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84728</tags>
-  <description>Test Case ID:(C84728) 
-Purchases gift certificates:
- 
-- logs on as customer
-- adds new address
-- adds new credit card
-- adds and submit a gift certificate
-- deletes the address
-- deletes credit card
-- logoff</description>
+  <description>Test Case ID:(C84728) Smoke Test » Purchasing Gift Certificates » Purchase a Gift Certificate</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="GoToGiftCertificates"/>
-  <command name="clickAndWait" target="link=regexpi:Gift Certificates"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=regexpi:Gift Certificates"/>
+  </module>
   <action name="CheckCertificateForm"/>
   <module name="modules.giftcertificate.ValidateFormForGiftCertificates">
     <comment>The Gift Certificates form needs to be checked for functionality</comment>
@@ -39,7 +32,9 @@ Purchases gift certificates:
     <parameter name="Amount" value="${Amount}"/>
   </module>
   <action name="CheckoutAsGuest"/>
-  <command name="clickAndWait" target="name=dwfrm_cart_unregistered"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=dwfrm_cart_unregistered"/>
+  </module>
   <action name="EnterBillingAndPaymentData"/>
   <module name="modules.giftcertificate.ValidateShippingDataInSideBarGiftCertificates">
     <parameter name="FriendsName" value="${FriendsName}"/>
@@ -67,7 +62,9 @@ Purchases gift certificates:
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
   <action name="PlaceOrder"/>
-  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
   <module name="modules.giftcertificate.PlaceOrderForGiftCertificates">
     <parameter name="Donor" value="${Donor}"/>
     <parameter name="FriendsName" value="${FriendsName}"/>
@@ -92,8 +89,13 @@ Purchases gift certificates:
     <parameter name="ExpireYear" value="${CreditCardExpiryYear}"/>
   </module>
   <action name="Guest_Receipt"/>
-  <command name="clickAndWait" target="name=submit"/>
-  <command name="assertText" target="css=#primary h1" value="Thank you for your order."/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="name=submit"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="Thank you for your order."/>
+  </module>
   <command name="assertText" target="css=.order-date .label" value="Order Placed*"/>
   <module name="modules.checkout.summary.ValidateBillingAddressSummaryPage">
     <parameter name="Name" value="${FirstName} ${LastName}"/>

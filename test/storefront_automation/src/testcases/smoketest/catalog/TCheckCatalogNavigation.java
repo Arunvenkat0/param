@@ -7,10 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84713)  
- Tests the navigation feature of the product catalog both on category and product details pages.
- 
- This is broken in 13.3. RAP-2304
+ * Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation 
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckCatalogNavigation")

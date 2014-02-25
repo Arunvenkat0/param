@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <parameter name="SortMethod"/>
-  <command name="select" target="css=.search-result-options .sort-by select" value="label=@{SortMethod}">
-    <comment>Select a sorting method.</comment>
-  </command>
-</scriptmodule>

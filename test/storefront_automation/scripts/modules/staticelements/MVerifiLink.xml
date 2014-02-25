@@ -5,11 +5,10 @@
   <parameter name="UrlToPreviousPage"/>
   <parameter name="CheckTitle"/>
   <parameter name="ElementToClickForPreviousPage"/>
-  <command name="waitForElementPresent" target="@{LinkToClick}"/>
-  <command name="clickAndWait" target="@{LinkToClick}"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="@{LinkToClick}"/>
+  </module>
   <command name="assertTitle" value="@{CheckTitle}"/>
-  <command name="assertText" disabled="true" target="//div[contains(@id,'primary')]/h1" value="My Account Login"/>
-  <command name="assertElementPresent" target="@{ElementToVerify}"/>
+  <command name="waitForElementPresent" target="@{ElementToVerify}"/>
   <command name="clickAndWait" target="@{ElementToClickForPreviousPage}"/>
-  <command name="open" disabled="true" value="@{UrlToPreviousPage}"/>
 </scriptmodule>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <tags>?</tags>
-  <description>Test Case ID:(?) </description>
+  <tags>C84771</tags>
+  <description>Test Case ID:(C84771)   Smoke Test » Header | Global Navigation | Footer » User Information in Header</description>
   <module name="modules.staticelements.Homepage"/>
-  <command name="assertElementPresent" target="css=.user-login"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.user-login"/>
+  </module>
   <command name="assertElementPresent" target="css=.user-register"/>
   <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
   <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
@@ -22,26 +24,26 @@
   <command name="assertText" target="css=.menu-utility-user .last" value="regexpi:\( Not ${FirstName}\? \)">
     <comment>Validates first name within logout link in page header.</comment>
   </command>
-  <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | ( Not ${FirstName} ? )">
-    <comment>Validates first name within logout link in page header.</comment>
-  </command>
+  <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | (Not ${FirstName}??)$"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
-  <command name="check" target="css=.input-checkbox"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="css=.input-checkbox"/>
+  </module>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
   </module>
-  <command name="close" disabled="true"/>
+  <action name="VerifyUserInformationPersistence"/>
   <command name="open" value="${shopURL}"/>
   <command name="waitForText" target="css=.user-account" value="regexpi:${FirstName} ${LastName}">
     <comment>Validates first and last name inside page header.</comment>
   </command>
-  <command name="assertText" target="css=.menu-utility-user .last" value="regexpi:\( Not ${FirstName}\? \)">
-    <comment>Validates first name within logout link in page header.</comment>
-  </command>
-  <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | ( Not ${FirstName} ? )">
-    <comment>Validates first name within logout link in page header.</comment>
-  </command>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.menu-utility-user .last"/>
+    <parameter name="textPattern" value="regexpi:\( Not ${FirstName}\? \)"/>
+  </module>
+  <command name="assertText" target="css=.menu-utility-user" value="regexpi:Welcome: ${FirstName} ${LastName} | \( Not ${FirstName}*\? \)"/>
+  <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="TUserInformation-0"/>
 </testcase>

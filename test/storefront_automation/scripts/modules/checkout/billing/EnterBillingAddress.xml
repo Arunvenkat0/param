@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>This module enters the necessary billing information.
 Address 2 and Phone are not mandatory.</description>
@@ -23,5 +23,8 @@ Address 2 and Phone are not mandatory.</description>
     <parameter name="ZipCode" value="@{ZipCode}"/>
     <parameter name="Phone" value="@{Phone}"/>
   </module>
-  <command name="type" target="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]" value="@{Email}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="xpath=//input[contains(@id, 'emailAddress')][contains(@class, 'required')]"/>
+    <parameter name="inputString" value="@{Email}"/>
+  </module>
 </scriptmodule>
