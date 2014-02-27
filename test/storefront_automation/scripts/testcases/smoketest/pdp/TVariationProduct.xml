@@ -53,9 +53,13 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
   </module>
+  <action name="SelectColor"/>
+  <command name="pause" value="300"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
   </module>
+  <action name="SelectSize"/>
+  <command name="pause" value="300"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.value .size .swatchanchor"/>
   </module>

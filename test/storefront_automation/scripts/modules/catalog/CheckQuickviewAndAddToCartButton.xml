@@ -5,9 +5,16 @@
     <parameter name="assertedElement" value="css=#add-to-cart[disabled]"/>
   </module>
   <module name="library.function.FWaitForElement">
+    <parameter name="element" value="${SizeSwatch}"/>
+  </module>
+  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="css= .size:first-child :not(.unselectable) .swatchanchor"/>
   </module>
-  <command name="storeText" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="${SizeSwatch}"/>
+    <parameter name="textStoreVariableName" value="ProductSize"/>
+  </module>
+  <command name="storeText" disabled="true" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=.Color:first-child :not(.unselectable) .swatchanchor"/>
   </module>
@@ -29,6 +36,9 @@
   </command>
   <action name="SelectSize"/>
   <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SizeSwatch}"/>
+  </module>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']"/>
   </module>
   <module name="library.function.FWaitForTextCaseInsensitive">
