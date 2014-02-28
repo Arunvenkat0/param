@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <tags>C84713</tags>
-  <description>Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation </description>
+  <description>Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation</description>
+  <action name="Login"/>
   <module name="modules.staticelements.Homepage"/>
   <action name="CheckCatalogNavigation"/>
   <module name="modules.catalog.CheckCatalogNavigationFeature">
