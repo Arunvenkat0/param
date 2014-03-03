@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>1. Waits for the 'textElement' to exist.  2. Asserts that the 'textElement' matches the 'textPattern'.</description>
   <parameter name="textElement"/>
   <parameter name="textPattern"/>

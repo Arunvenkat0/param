@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85033</tags>
-  <description>Test Case ID:(C85033)  Smoke Test » Search Results » Results » Different Searchtypes </description>
+  <description>Test Case ID:(C85033)  Smoke Test » Search Results » Results » Different Searchtypes</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchProductByID"/>
   <module name="modules.search.SearchProductByIDOrName">

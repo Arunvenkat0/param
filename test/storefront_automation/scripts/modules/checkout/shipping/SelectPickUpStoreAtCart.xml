@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Clicks the store link for a product and searches for a zip code. After selecting the first store at the result list the overlay closes. 
 Overlay is opened again to do another search by clicking change location link.
 Another zip code is used for the second search.</description>

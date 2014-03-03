@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Checks the presence of all header elements.</description>
   <command name="assertElementPresent" target="xpath=id('header')/header/h1/a/img">
     <comment>Checks the presence of the shop logo</comment>

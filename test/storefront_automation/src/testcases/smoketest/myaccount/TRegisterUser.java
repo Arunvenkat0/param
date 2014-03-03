@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84722) Smoke Test » My Account - Returning Customer » Login/Register » Create Account 
+ * Test Case ID:(C84722) Smoke Test » My Account - Returning Customer » Login/Register » Create Account
  */
 @ScriptName
 ("testcases.smoketest.myaccount.TRegisterUser")

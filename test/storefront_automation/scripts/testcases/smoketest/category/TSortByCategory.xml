@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C84781 (incomplete)</tags>
   <description>DISABLED This test is not complete.
 Test Case ID:(C84781) 
 
 Steps
-Homepage -> Select a category and its sub category
+Homepage -&gt; Select a category and its sub category
 Select all the sort options in the dropdown one by one.
 Page through the results.
 Change the sort order.
@@ -17,7 +17,7 @@ at 4. This causes the first result page to appear.</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>

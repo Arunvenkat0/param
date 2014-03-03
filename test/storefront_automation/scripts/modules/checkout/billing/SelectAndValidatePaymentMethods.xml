@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validate the elements of all possible payments methods,</description>
   <command name="waitForElementPresent" target="xpath=id('dwfrm_billing')/fieldset[3]//div[@class='payment-method-options']">
     <comment>Validate payment method page elements</comment>

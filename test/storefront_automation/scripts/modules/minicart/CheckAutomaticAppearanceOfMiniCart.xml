@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>This modul tests if the minicart appears and disappears after some time.</description>
   <command name="waitForVisible" target="css=.mini-cart-content">
     <comment>Wait for Cart Window to Appear (Windows is displayed only for a short time)</comment>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84773,C84725,C84726,C84727</tags>
   <description>Test Case ID:(C84773,C84725,C84726,C84727)  (C84773) Smoke Test » Header | Global Navigation | Footer » Cart in Header,  (C84725) Smoke Test » Mini-Cart » Mini-Cart: Opening and Closing</description>
   <module name="modules.staticelements.Homepage"/>

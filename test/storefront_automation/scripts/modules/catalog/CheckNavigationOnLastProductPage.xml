@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Check the presence of navigation elements for the last product detail page within the catalog.</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.grid-tile:last-child .product-name a"/>
