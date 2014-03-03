@@ -51,7 +51,7 @@
     <parameter name="PriceProduct" value="${ProductPrice2}"/>
   </module>
   <command name="storeEval" target="${ProductQuantity1}+${ProductQuantity2}" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${TotalQuantity}) *">
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\) .*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <action name="Product-3"/>
@@ -69,7 +69,7 @@
     <parameter name="PriceProduct" value="${ProductPrice3}"/>
   </module>
   <command name="storeEval" target="${TotalQuantity}+${ProductQuantity3}" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${TotalQuantity}) *">
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <action name="Product-4"/>
@@ -87,7 +87,7 @@
     <parameter name="PriceProduct" value="${ProductPrice4}"/>
   </module>
   <command name="storeEval" target="${TotalQuantity}+${ProductQuantity4}" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${TotalQuantity}) *">
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <action name="Product-Bundle"/>
@@ -109,7 +109,7 @@
     <parameter name="Quantity" value="${ProductQuantity5}"/>
   </module>
   <command name="storeEval" target="${TotalQuantity}+1" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${TotalQuantity}) *">
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <action name="AddProductSet"/>
@@ -168,7 +168,7 @@
     <parameter name="price" value="${CartSubTotal}"/>
   </module>
   <command name="storeEval" target="${TotalQuantity}+3" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="Cart (${TotalQuantity}) *">
+  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
   <module name="modules.cart.GotoCart">

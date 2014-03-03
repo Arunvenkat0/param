@@ -5,12 +5,12 @@ Since the used search term is shown at the page this word is saved in the parame
   <parameter name="InvalidSearchEntry"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//div[@id='primary']/div[2]/p[1]"/>
-    <parameter name="textPattern" value="glob:We're sorry, no products were found for your search:*"/>
+    <parameter name="textPattern" value="regexpi:We're sorry, no products were found for your search:.*"/>
   </module>
-  <command name="assertText" target="//div[@id='primary']/div[2]/p[1]" value="glob:We're sorry, no products were found for your search:*"/>
-  <command name="assertText" target="//*[@id='primary']//span[contains(@class,'no-hits-search-term')]" value="@{InvalidSearchEntry}"/>
-  <command name="assertText" target="//*[@id='primary']//p[2]" value="glob:did you mean:*"/>
-  <command name="assertElementPresent" target="link=blue"/>
+  <command name="assertText" target="//div[@id='primary']/div[2]/p[1]" value="regexpi:We're sorry, no products were found for your search:.*"/>
+  <command name="assertText" target="//*[@id='primary']//span[contains(@class,'no-hits-search-term')]" value="regexpi:@{InvalidSearchEntry}"/>
+  <command name="assertText" target="//*[@id='primary']//p[2]" value="regexpi:did you mean:.*"/>
+  <command name="assertElementPresent" target="link=BLUE"/>
   <command name="assertElementPresent" target="css=.no-hits-help"/>
   <command name="assertElementPresent" target="css=.no-hits-search"/>
 </scriptmodule>
