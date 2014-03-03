@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Checks the most important data of a product in the specified row:
-Position -> row of the product
+Position -&gt; row of the product
 Name
 Quantity
 Price</description>

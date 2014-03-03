@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="3">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <tags>cart bundle</tags>
   <description>Checks that each product which is part of the bundle is shown in the cart.
 Verifies that price is only shown at the top level, not by each individual line item. Also checks that the quantity is just at the top level editable.</description>

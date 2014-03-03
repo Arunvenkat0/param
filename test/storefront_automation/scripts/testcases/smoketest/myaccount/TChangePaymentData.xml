@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84737</tags>
   <description>[ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card</description>
   <module name="modules.staticelements.Homepage"/>

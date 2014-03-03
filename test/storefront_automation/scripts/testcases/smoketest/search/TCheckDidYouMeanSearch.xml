@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84772 C85032</tags>
   <description>Test Case ID:(C84772,C85032)  C84772 Smoke Test » Header | Global Navigation | Footer » Search Box,  C85032  Smoke Test » Search Results » Results » Did You Mean Search 
 This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
