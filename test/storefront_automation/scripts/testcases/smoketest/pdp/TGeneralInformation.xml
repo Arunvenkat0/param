@@ -30,7 +30,7 @@
     <parameter name="clickElement" value="css=.addthis_button_compact"/>
   </module>
   <command name="waitForElementPresent" target="id=at3wincontent"/>
-  <command name="assertVisible" target="id=at3wincontent"/>
+  <command name="assertVisible" disabled="true" target="id=at3wincontent"/>
   <command name="waitForElementPresent" target="css=.at3winwrapper"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=at3winheaderclose"/>

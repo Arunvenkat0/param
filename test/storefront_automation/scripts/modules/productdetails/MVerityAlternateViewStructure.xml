@@ -6,5 +6,9 @@
   </module>
   <command name="assertElementPresent" target="id=thumbnails"/>
   <command name="assertXpathCount" target="//div[@id='thumbnails']//ul/li" value="@{aletrenateViewCount}"/>
-  <command name="assertText" target="//div[@id='thumbnails']//h2" value="Alternate Views"/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="//div[@id='thumbnails']//h2"/>
+    <parameter name="plainString" value="Alternate Views"/>
+  </module>
+  <command name="assertText" disabled="true" target="//div[@id='thumbnails']//h2" value="Alternate Views"/>
 </scriptmodule>

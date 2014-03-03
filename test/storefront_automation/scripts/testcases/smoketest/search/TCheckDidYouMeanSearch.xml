@@ -15,9 +15,9 @@ Was failed because of RAP-2460, but is fixed now.</description>
   </module>
   <action name="ClickDidYouMeanLink"/>
   <module name="library.function.FClickAndWaitForPageLoad">
-    <parameter name="clickElement" value="link=blue"/>
+    <parameter name="clickElement" value="link=BLUE"/>
   </module>
-  <command name="clickAndWait" target="link=blue"/>
+  <command name="clickAndWait" disabled="true" target="link=BLUE"/>
   <module name="modules.search.ValidateSearchResultPageAfterDidYouMean">
     <parameter name="KeyWord" value="blue"/>
   </module>
