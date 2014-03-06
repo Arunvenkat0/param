@@ -14,7 +14,6 @@
     <parameter name="textElement" value="${SizeSwatch}"/>
     <parameter name="textStoreVariableName" value="ProductSize"/>
   </module>
-  <command name="storeText" disabled="true" target="css= .size:first-child :not(.unselectable) .swatchanchor" value="ProductSize"/>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=.Color:first-child :not(.unselectable) .swatchanchor"/>
   </module>
