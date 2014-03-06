@@ -24,8 +24,8 @@ TableRow: Row number in which the item resides</description>
     <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .item-price span"/>
     <parameter name="plainString" value="@{SinglePrice}"/>
   </module>
-  <module name="library.function.FAssertText">
+  <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .price-total"/>
-    <parameter name="textPattern" value="@{TotalPriceProduct}"/>
+    <parameter name="plainString" value="@{TotalPriceProduct}"/>
   </module>
 </scriptmodule>

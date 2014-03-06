@@ -7,15 +7,4 @@
     <parameter name="textElement" value="@{textElement}"/>
     <parameter name="plainString" value="@{plainString}"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="@{textElement}"/>
-  <module name="library.function.FStringToRegexStore" disabled="true">
-    <parameter name="plainString" value="@{matchString}"/>
-    <parameter name="regexVarName" value="REGEX_VAR"/>
-  </module>
-  <command name="storeEval" disabled="true" target="'@{plainString}'.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&amp;')" value="REGEX_VAR"/>
-  <command name="storeEval" disabled="true" target="'@{plainString}'.replace(/[$-\/?[-^{|}(|)]/g, '\\$&amp;')" value="REGEX_VAR"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="@{element}"/>
-    <parameter name="textPattern" value="regexpi:${REGEX_VAR}"/>
-  </module>
 </scriptmodule>
