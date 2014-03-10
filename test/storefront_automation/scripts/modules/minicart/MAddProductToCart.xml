@@ -58,5 +58,7 @@
   <module name="modules.minicart.MNumberToCurrency">
     <parameter name="price" value="${price}"/>
   </module>
+  <command name="mouseOut" target="css=.mini-cart-content"/>
+  <command name="mouseOver" target="css=.mini-cart-total-label"/>
   <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
 </scriptmodule>

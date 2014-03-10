@@ -32,8 +32,16 @@
   <command name="waitForText" target="css=.mini-cart-product:nth-child(1) .mini-cart-name" value="@{Name}">
     <comment>Checks the correct product name in mini cart</comment>
   </command>
-  <command name="storeText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="DisplayedQuickViewQTY"/>
-  <command name="assertText" target="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value" value="${DisplayedQuickViewQTY}"/>
+  <action name="CaptureQuantityOfFirstItem"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value"/>
+    <parameter name="textStoreVariableName" value="DisplayedQuickViewQTY"/>
+  </module>
+  <action name="VerifyCaptureOfQuantityOfFirstItem"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-cart-product:nth-child(1) .mini-cart-pricing .value"/>
+    <parameter name="textPattern" value="${DisplayedQuickViewQTY}"/>
+  </module>
   <module name="modules.minicart.MCurrencyToNumber">
     <parameter name="price" value="@{PriceProduct}"/>
   </module>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84773,C84725,C84726,C84727</tags>
-  <description>Test Case ID:(C84773,C84725,C84726,C84727)  (C84773) Smoke Test » Header | Global Navigation | Footer » Cart in Header,  (C84725) Smoke Test » Mini-Cart » Mini-Cart: Opening and Closing</description>
+  <description>Test Case ID:(C84773 partial,C84725,C84726 partial,C84727 partial) Promotions are not part of this test.</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.mini-cart-total .mini-cart-empty"/>
@@ -29,9 +29,6 @@
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\) ITEMS, TOTAL: \$359.98$"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^CART \(2\).*$  "/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:^Cart \(${ProductQuantity1}\).*$"/>
-  <command name="assertText" disabled="true" target="css=.mini-cart-total .mini-cart-link" value="Cart (${ProductQuantity1})*">
-    <comment>Checks the correct quantity in mini cart</comment>
-  </command>
   <action name="DismissQuickViewUsingMouseOver-MouseOut"/>
   <command name="mouseOver" target="css=div.mini-cart-content"/>
   <command name="mouseOut" target="css=div.mini-cart-content"/>
@@ -69,24 +66,6 @@
     <parameter name="PriceProduct" value="${ProductPrice3}"/>
   </module>
   <command name="storeEval" target="${TotalQuantity}+${ProductQuantity3}" value="TotalQuantity"/>
-  <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
-    <comment>Checks the correct quantity in mini cart</comment>
-  </command>
-  <action name="Product-4"/>
-  <module name="modules.search.SearchProductByIDOrName">
-    <parameter name="SearchText" value="${ProductName4}"/>
-  </module>
-  <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <module name="modules.catalog.ValidateProductDataOnDetailsPage">
-    <parameter name="Name" value="${ProductName4}"/>
-    <parameter name="Price" value="${ProductPrice4}"/>
-  </module>
-  <module name="modules.minicart.MAddProductToCart">
-    <parameter name="Quantity" value="${ProductQuantity4}"/>
-    <parameter name="Name" value="${ProductName4}"/>
-    <parameter name="PriceProduct" value="${ProductPrice4}"/>
-  </module>
-  <command name="storeEval" target="${TotalQuantity}+${ProductQuantity4}" value="TotalQuantity"/>
   <command name="assertText" target="css=.mini-cart-total .mini-cart-link" value="regexpi:Cart \(${TotalQuantity}\).*">
     <comment>Checks the correct quantity in mini cart</comment>
   </command>
