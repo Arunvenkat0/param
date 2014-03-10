@@ -4,6 +4,9 @@
   <command name="waitForVisible" target="css=.mini-cart-content">
     <comment>Wait for Cart Window to Appear (Windows is displayed only for a short time)</comment>
   </command>
+  <command name="mouseOver" target="css=.mini-cart-total-label"/>
+  <command name="mouseOver" target="css=.mini-cart-content"/>
+  <command name="mouseOut" target="css=.mini-cart-content"/>
   <command name="waitForNotVisible" target="css=.mini-cart-content">
     <comment>Wait for Cart Window to Disappear (Since windows is displayed only for a small time)</comment>
   </command>
