@@ -4744,6 +4744,7 @@ var app = (function (app, $) {
                     runningQuery = currentQuery;
                     setTimeout("app.searchsuggestbeta.suggest()", delay);
                 }
+                app.searchsuggestbeta.hideLeftPanel();
             });
 		},
 		/**
@@ -4753,6 +4754,18 @@ var app = (function (app, $) {
 		clearResults : function () {
 			if (!$resultsContainer) { return; }
 			$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
+		},
+		/**
+		 * @function
+		 * @description
+		 */
+		hideLeftPanel : function () {
+			//hide left panel if there is only a matching suggested custom phrase
+			if($('.search-suggestion-left-panel-hit').length == 1 && ($('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() == $('.search-suggestion-left-panel-hit a').text().toUpperCase())){
+				$('.search-suggestion-left-panel').css('display','none');
+				$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
+				$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
+			}
 		}
 	};
 }(window.app = window.app || {}, jQuery));
