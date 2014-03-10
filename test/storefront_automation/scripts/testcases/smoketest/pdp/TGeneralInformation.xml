@@ -27,6 +27,9 @@
     <comment>Select size.</comment>
   </command>
   <action name="OpenSharePopUp"/>
+  <module name="library.function.FMouseOver">
+    <parameter name="element" value="css=.addthis_button_compact"/>
+  </module>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_compact"/>
   </module>

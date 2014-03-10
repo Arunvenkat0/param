@@ -6,6 +6,7 @@
     <parameter name="plainString" value="@{text}"/>
     <parameter name="regexVarName" value="REGEX_VAR_NAME"/>
   </module>
-  <command name="assertTextPresent" value="regexpi:${REGEX_VAR_NAME}"/>
+  <command name="waitForTextPresent" value="regexpi:${REGEX_VAR_NAME}"/>
+  <command name="assertTextPresent" disabled="true" value="regexpi:${REGEX_VAR_NAME}"/>
   <command name="assertTextPresent" disabled="true" value="regexpi:@{text}"/>
 </scriptmodule>
