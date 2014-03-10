@@ -14,10 +14,13 @@
     <parameter name="LastName" value="${LastName}"/>
   </module>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <command name="pause" value="5000"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
   </module>
+  <action name="ConfirmUserAccountDisplay"/>
+  <command name="pause" value="5000"/>
   <command name="waitForText" target="css=.user-account" value="regexpi:${FirstName} ${LastName}">
     <comment>Validates first and last name inside page header.</comment>
   </command>
@@ -28,10 +31,12 @@
     <parameter name="textElement" value="css=.menu-utility-user"/>
     <parameter name="textPattern" value="regexpi:welcome:\s+mitchel\s+Jhonson\s+\(\s*not\s+mitchel\s*\?\s*\)"/>
   </module>
+  <action name="LogoutAndLogin"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="css=.input-checkbox"/>
   </module>
+  <command name="pause" value="5000"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
