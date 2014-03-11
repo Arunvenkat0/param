@@ -7,14 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * cart quantity update
- Validates the quantity update function.
- 
- - adds two products to the cart
- - opens cart
- - changes quantity of both products
- - updates cart
- - checks if changes are correct
+ * Test Case ID:(C84763)  Smoke Test » Cart » Updates
  */
 @ScriptName
 ("testcases.smoketest.cart.TCheckQuantityChangeInCart")

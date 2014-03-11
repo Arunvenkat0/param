@@ -7,17 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Adds two products to the cart and modifies the quantities:
- product1: quantitiy = 1, no discount
- product2: quantitiy = 2, no discount
- 
- - checks Minicart
- - checks Quickinfo in header (number of items, total price)
- - checks cart
- 
- - modifies the cart (Read, Update, Delete)
- 
- This is broken in 13.4. RAP-2396
+ * Test  Case ID:(C85055 C84762)  (C8505) Smoke Test » Cart » Behaviour   (C84762) Smoke Test » Cart » Edit Details Overlay
  */
 @ScriptName
 ("testcases.smoketest.purchase.TCheckCartManagement")
