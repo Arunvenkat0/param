@@ -11,29 +11,22 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'address1')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'address1')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//select[contains(@id, 'country')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//select[contains(@id, 'country')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//select[contains(@id, 'state')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//select[contains(@id, 'state')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'city')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'city')][contains(@class, 'required')]"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'zip')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'zip')][contains(@class, 'required')]"/>
 </scriptmodule>
