@@ -5,5 +5,4 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'phone')][contains(@class, 'required')]"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="xpath=//input[contains(@id, 'phone')][contains(@class, 'required')]"/>
 </scriptmodule>

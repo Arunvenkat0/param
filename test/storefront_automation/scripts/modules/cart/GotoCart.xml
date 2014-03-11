@@ -4,23 +4,14 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.mini-cart-link"/>
   </module>
-  <command name="waitForElementPresent" disabled="true" target="css=.mini-cart-link">
-    <comment>Wait for the cart link.</comment>
-  </command>
   <action name="ClickCartLink"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-cart-link"/>
   </module>
-  <command name="clickAndWait" disabled="true" target="css=.mini-cart-link">
-    <comment>Click the cart link.</comment>
-  </command>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="css=.breadcrumb-last"/>
     <parameter name="plainString" value="Cart"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="*Cart">
-    <comment>Validate breadcrumb in cart view.</comment>
-  </command>
   <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="xpath=id('primary')/h1"/>
     <parameter name="plainString" value="Your Shopping Cart"/>
