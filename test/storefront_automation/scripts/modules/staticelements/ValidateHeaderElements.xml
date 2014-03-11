@@ -4,7 +4,10 @@
   <command name="assertElementPresent" target="xpath=id('header')/header/h1/a/img">
     <comment>Checks the presence of the shop logo</comment>
   </command>
-  <command name="assertText" target="xpath=id('header')/header/h1/a/span" value="${shopName}"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=.primary-logo&gt;a&gt;img[alt=&quot;Demandware SiteGenesis&quot;]"/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=id('header')/header/h1/a/span" value="${shopName}"/>
   <command name="assertElementPresent" target="id=mini-cart"/>
   <command name="assertElementPresent" target="css=.menu-utility-user"/>
   <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
