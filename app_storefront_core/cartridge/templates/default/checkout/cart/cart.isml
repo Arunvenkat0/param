@@ -756,7 +756,7 @@
 									<div>
 										<span class="label">${Resource.msg('summary.orderdiscount','checkout',null)}</span>
 										<span class="value">
-											<isprint value="${priceAdjustment.promotion.calloutMsg}" />
+											<isprint value="${priceAdjustment.promotion.calloutMsg}" encoding="off" />
 										</span>
 									</div>
 								</td>
