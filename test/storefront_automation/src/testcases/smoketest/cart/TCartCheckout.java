@@ -2,7 +2,7 @@
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
 package testcases.smoketest.cart;
-import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
+import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
@@ -11,6 +11,6 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.cart.TCartCheckout")
-public class TCartCheckout extends AbstractScriptTestCase
+public class TCartCheckout extends AbstractBrowserScriptTestCase
 {
 }

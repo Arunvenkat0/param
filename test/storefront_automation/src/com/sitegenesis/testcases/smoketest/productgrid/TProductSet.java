@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * 
+ * Test Case ID:(C130251) Smoke Test » Search Results » Product Grid » Product Grid Display: Product Set Pricing
  */
 @ScriptName
 ("testcases.smoketest.productgrid.TProductSet")

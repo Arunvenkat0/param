@@ -7,11 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * 1.All is working and linked as expected.
- 
- 2.Text is correct.
- 
- Automation Test does not cover the testing of hover feature in menu.
+ * Test Case ID:(C84757,C84776)  (C84757)  Smoke Test » Homepage » Homepage, General  (C84776) Smoke Test » Header | Global Navigation | Footer » Footer
  */
 @ScriptName
 ("testcases.smoketest.homepage.THomepageGeneral")

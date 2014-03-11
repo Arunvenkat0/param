@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Checks the presence of different product images in quickview and product details page.
+ * Test Case ID:(C85029) Smoke Test » Category Landing Page » Product Perspectives
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckProductPerspectives")
