@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Checks the presence of the homepage slider and boxes</description>
-  <command name="assertElementPresent" target="id=homepage-slider"/>
-  <command name="assertElementPresent" target="css=.home-bottom-slots"/>
-  <command name="assertElementPresent" target="css=.home-bottom"/>
-  <command name="assertElementPresent" target="id=email-alert-address"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=homepage-slider"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.home-bottom-slots"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=.home-bottom"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="id=email-alert-address"/>
+  </module>
 </scriptmodule>
