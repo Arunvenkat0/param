@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Checks some basic features of the quickview. Checks if the add-to-cart-button is disabled initially and is enabled after selecting color and size.</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=#add-to-cart[disabled]"/>
   </module>
-  <module name="library.function.FWaitForElement">
-    <parameter name="element" value="${SizeSwatch}"/>
-  </module>
   <module name="library.function.FWaitForElement" disabled="true">
-    <parameter name="element" value="css= .size:first-child :not(.unselectable) .swatchanchor"/>
+    <parameter name="element" value="${SizeSwatch}"/>
   </module>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="${SizeSwatch}"/>
@@ -36,9 +32,6 @@
   <action name="SelectSize"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${SizeSwatch}"/>
-  </module>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value="css=.size:first-child :not(.unselectable) a[title='${ProductSize}']"/>
   </module>
   <module name="library.function.FWaitForTextCaseInsensitive">
     <parameter name="textElement" value="css=.size .selected-value"/>

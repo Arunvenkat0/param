@@ -40,7 +40,7 @@
   <action name="OpenQuickview"/>
   <module name="modules.catalog.OpenQuickView"/>
   <module name="modules.catalog.ValidateProductInQuickView"/>
-  <module name="modules.catalog.CheckQuickviewAndAddToCartButton"/>
+  <module name="modules.catalog.CheckQuickviewAfterAddedToCart"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
