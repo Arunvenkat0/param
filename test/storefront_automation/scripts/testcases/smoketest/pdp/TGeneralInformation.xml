@@ -23,13 +23,11 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.value .emptyswatch .swatchanchor"/>
   </module>
-  <command name="click" disabled="true" target="css=.value .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
   <action name="OpenSharePopUp"/>
   <module name="library.function.FMouseOver">
     <parameter name="element" value="css=.addthis_button_compact"/>
   </module>
+  <command name="pause" value="3000"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_compact"/>
   </module>
