@@ -14,7 +14,13 @@ MiddlePageNumber: number of the middle page to test navigation elements</descrip
   <parameter name="SubCategoryName"/>
   <parameter name="MiddlePageNumber"/>
   <action name="OpenCategory"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.link-1"/>
+  </module>
   <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="css=img[alt=&quot;Spring Arrivals&quot;]"/>
+  </module>
+  <module name="library.function.FClickAndWaitForPageLoad" disabled="true">
     <parameter name="clickElement" value="link=regexpi:@{MainCategoryName}"/>
   </module>
   <action name="OpenSubcategory"/>
