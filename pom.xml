@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.demandware.maventools</groupId>
         <artifactId>project-pom</artifactId>
-        <version>14.4.0.4-SNAPSHOT</version>
+        <version>14.3.0.5</version>
     </parent>
     
     <scm>
