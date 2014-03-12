@@ -14,40 +14,32 @@
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]"/>
     <parameter name="inputString" value="@{FirstName}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]" value="@{FirstName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')]"/>
     <parameter name="inputString" value="@{LastName}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'lastname') or contains(@id, 'lastName')]" value="@{LastName}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'address1')]"/>
     <parameter name="inputString" value="@{Address1}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'address1')]" value="@{Address1}"/>
   <module name="library.function.FSelect">
     <parameter name="element" value="xpath=//select[contains(@id, 'country')]"/>
     <parameter name="selection" value="label=@{Country}"/>
   </module>
-  <command name="select" disabled="true" target="xpath=//select[contains(@id, 'country')]" value="label=@{Country}"/>
   <module name="library.function.FSelect">
     <parameter name="element" value="xpath=//select[contains(@id, 'state')]"/>
     <parameter name="selection" value="label=@{State}"/>
   </module>
-  <command name="select" disabled="true" target="xpath=//select[contains(@id, 'state')]" value="label=@{State}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'city')]"/>
     <parameter name="inputString" value="@{City}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'city')]" value="@{City}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
     <parameter name="inputString" value="@{ZipCode}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'zip')]" value="@{ZipCode}"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="@{Phone}"/>
   </module>
-  <command name="type" disabled="true" target="xpath=//input[contains(@id, 'phone')]" value="@{Phone}"/>
 </scriptmodule>

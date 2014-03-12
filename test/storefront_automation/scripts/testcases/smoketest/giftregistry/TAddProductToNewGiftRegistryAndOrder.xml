@@ -108,6 +108,10 @@
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <action name="AllowChangesToTakeEffect"/>
+  <command name="pause" value="5000">
+    <comment>Allow Changes To Take Effect</comment>
+  </command>
   <action name="GoToGiftRegistry"/>
   <module name="modules.giftregistry.OpenGiftRegistryPage">
     <parameter name="LinkText" value="Gift Registry"/>
