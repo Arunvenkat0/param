@@ -47,4 +47,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="name=cancel"/>
   </module>
+  <command name="pause" value="5000"/>
 </testcase>
