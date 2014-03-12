@@ -3,7 +3,7 @@
     <parent>
         <groupId>dw.ecom</groupId>
         <artifactId>sitegen</artifactId>
-        <version>14.4.0.4-SNAPSHOT</version>
+        <version>14.4.0.4</version>
     </parent>
     
 	<!-- group id and version inherited from parent -->
@@ -48,7 +48,7 @@
 							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
 								<ant antfile="${basedir}/build.xml">
-									<target name="main"/>
+									<target name="main" />
 								</ant>
 							</target>
 						</configuration>
