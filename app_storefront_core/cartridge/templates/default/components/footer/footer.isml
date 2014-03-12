@@ -18,7 +18,7 @@
 <iscomment>
 	Customer registration can happen everywhere in the page flow. As special tag in the pdict
 	is indicating it. So we have to check on every page, if we have to report this event for
-	the reporting engine.
+	the reporting engine..
 </iscomment>
 <isinclude template="util/reporting/ReportUserRegistration.isml"/>
 
