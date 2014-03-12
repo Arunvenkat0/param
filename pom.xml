@@ -20,11 +20,11 @@
     <version>14.4.0.3-SNAPSHOT</version>
     <description>SiteGenesis Source</description>
 
-    <!--
+    
     <modules>
 	<module>storefront_refapp</module>
     </modules>
-    -->
+    
 	
     <build>
         <plugins>
