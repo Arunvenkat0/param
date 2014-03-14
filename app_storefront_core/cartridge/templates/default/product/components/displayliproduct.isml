@@ -37,7 +37,7 @@
 	<isif condition="${empty(pdict.p_hidepromo) || !pdict.p_hidepromo}">
 		<iscomment>promotional messaging</iscomment>
 		<isloop items="${productLineItem.priceAdjustments}" var="pli" status="loopstate">
-			<div class="promo <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">- <isprint value="${pli.promotion.calloutMsg}"/></div>
+			<div class="promo <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">- <isprint value="${pli.promotion.calloutMsg}" encoding="off" /></div>
 		</isloop>
 	</isif>
 
