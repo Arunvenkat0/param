@@ -1478,7 +1478,67 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
+	/**
+	 * @private
+	 * @function
+	 * @description Fix for ie8 Infinite Scroll Bar issue and QuickView Fix (along with CSS changes)
+	 */	
+	function initInfiniteScroll_ie8()
+	{
+		$( window ).scroll(function() {
+				
+				// getting the hidden div, which is the placeholder for the next page
+				var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
+				
+				if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
+					app.search.init();
+					// switch state to 'loading'
+					// - switches state, so the above selector is only matching once
+					// - shows loading indicator
+					loadingPlaceHolder.attr('data-loading-state','loading');
+					loadingPlaceHolder.addClass('infinite-scroll-loading');
 
+					// get url hidden in DOM
+					var gridUrl = loadingPlaceHolder.attr('data-grid-url');
+
+					/**
+					 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
+					 */
+					var fillEndlessScrollChunk = function (html) {
+						loadingPlaceHolder.removeClass('infinite-scroll-loading');
+						loadingPlaceHolder.attr('data-loading-state','loaded');
+						jQuery('div.search-result-content').append(html);
+					};
+					if (app.clientcache.LISTING_INFINITE_SCROLL && 'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]) {
+						// if we hit the cache
+						fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
+					} else {
+						// else do query via ajax
+						jQuery.ajax({
+							type: "GET",
+							dataType: 'html',
+							url: gridUrl,
+							success: function(response) {
+								// put response into cache
+								try {
+									sessionStorage["scroll-cache_" + gridUrl] = response;
+								} catch (e) {
+									// nothing to catch in case of out of memory of session storage
+									// it will fall back to load via ajax
+								}
+								// update UI
+								fillEndlessScrollChunk(response);
+							}
+						});
+					}
+					
+
+				}
+
+
+		});		
+
+	}
 	/**
 	 * @private
 	 * @function
@@ -1559,6 +1619,7 @@ var app = (function (app, $) {
 						}
 					});
 				}
+				app.search.init();
 			}
 		});
 	}
@@ -1682,12 +1743,17 @@ var app = (function (app, $) {
 			//if (app.product.compare) {
 				app.product.compare.init();
 			//}
-			updateProductListing(false);
-			if (app.clientcache.LISTING_INFINITE_SCROLL){
-				initInfiniteScroll();
+			//updateProductListing(false);
+			if (window.pageXOffset == null && app.clientcache.LISTING_INFINITE_SCROLL) {
+				initInfiniteScroll_ie8();
 			}
+			if ( window.pageXOffset != null && app.clientcache.LISTING_INFINITE_SCROLL) {
+				initInfiniteScroll(); 
+				
+			}			
 			app.product.tile.init();
 			initializeEvents();
+		
 		}
 	};
 
@@ -2051,7 +2117,7 @@ var app = (function (app, $) {
 
 	function initializeCache() {
 		$cache = {
-			addToCart : $("#AddToBasketButton"),
+			addToCart : $("#AddToBasketButton")
 		};
 	}
 
@@ -2989,13 +3055,28 @@ var app = (function (app, $) {
 			if (typeof(offsetToTop) != 'undefined') {
 				top -= offsetToTop;
 			}
+		
+			
+			if ( window.pageXOffset != null) {
 
-			return (
-					top < (window.pageYOffset + window.innerHeight) &&
-					left < (window.pageXOffset + window.innerWidth) &&
-					(top + height) > window.pageYOffset &&
-					(left + width) > window.pageXOffset
+				return (
+						top < (window.pageYOffset + window.innerHeight) &&
+						left < (window.pageXOffset + window.innerWidth) &&
+						(top + height) > window.pageYOffset &&
+						(left + width) > window.pageXOffset
+				);
+				
+			}
+
+			if (document.compatMode == "CSS1Compat") {
+				return (
+					top < (window.document.documentElement.scrollTop + window.document.documentElement.clientHeight) &&
+					left < (window.document.documentElement.scrollLeft + window.document.documentElement.clientWidth) &&
+					(top + height) > window.document.documentElement.scrollTop &&
+					(left + width) > window.document.documentElement.scrollLeft
 			);
+			
+			}
 		},
 		/**
 		 * @function
