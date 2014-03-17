@@ -14,6 +14,10 @@
   </module>
   <action name="StoreColorSelected"/>
   <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.swatches.Color .selected-value"/>
+    <parameter name="textStoreVariableName" value="ProductColor"/>
+  </module>
+  <module name="library.function.FStoreText" disabled="true">
     <parameter name="textElement" value="css=.Color:first-child :not(.unselectable) .swatchanchor"/>
     <parameter name="textStoreVariableName" value="ProductColor"/>
   </module>

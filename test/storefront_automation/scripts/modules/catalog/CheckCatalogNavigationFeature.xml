@@ -20,7 +20,7 @@ MiddlePageNumber: number of the middle page to test navigation elements</descrip
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=img[alt=&quot;Spring Arrivals&quot;]"/>
   </module>
-  <module name="library.function.FClickAndWaitForPageLoad" disabled="true">
+  <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=regexpi:@{MainCategoryName}"/>
   </module>
   <action name="OpenSubcategory"/>
