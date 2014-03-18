@@ -115,6 +115,9 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.send-to-friend"/>
   </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
+  </module>
   <action name="GoToWelcomePage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.user-account"/>

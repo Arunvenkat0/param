@@ -3,6 +3,14 @@
   <description>Logs a customer out using the logout-link on the welcome page. Checks if the customer name disappears within the page header.</description>
   <command name="clickAndWait" target="css=.menu-utility-user .last a"/>
   <command name="waitForElementPresent" target="css=.user-login"/>
-  <command name="assertText" target="css=.user-login" value="regexpi:Login"/>
-  <command name="assertText" target="css=.user-register" value="regexpi:Register"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.user-login"/>
+    <parameter name="textPattern" value="regexpi:Login"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.user-login" value="regexpi:Login"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.user-register"/>
+    <parameter name="textPattern" value="regexpi:Register"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.user-register" value="regexpi:Register"/>
 </scriptmodule>
