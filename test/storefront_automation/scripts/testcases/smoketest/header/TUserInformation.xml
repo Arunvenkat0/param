@@ -13,6 +13,7 @@
     <parameter name="FirstName" value="${FirstName}"/>
     <parameter name="LastName" value="${LastName}"/>
   </module>
+  <command name="pause" value="5000"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <command name="pause" value="5000"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
