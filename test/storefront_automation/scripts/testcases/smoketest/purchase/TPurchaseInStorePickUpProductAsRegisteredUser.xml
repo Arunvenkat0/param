@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C85057</tags>
   <description>DISABLED: Requires InStore configuration.
-Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product </description>
+Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -133,7 +133,7 @@ Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase In
   <module name="modules.checkout.shipping.ValidateStorePickUpShippingPage"/>
   <command name="storeText" target="css=.instore-shipment-address" value="storeAddress"/>
   <action name="CheckoutBilling"/>
-  <command name="clickAndWait" target="css=.instore-continue-button button[value='Continue >']"/>
+  <command name="clickAndWait" target="css=.instore-continue-button button[value='Continue &gt;']"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary tabel</comment>
     <parameter name="Position" value="1"/>

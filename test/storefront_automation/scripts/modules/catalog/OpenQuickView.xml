@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Selects a product inside a catalog and opens it's quick view dialoge.</description>
   <command name="waitForElementPresent" target="xpath=//div[@class='product-name']//a[starts-with(@title,'${ProductName}')]">
     <comment>Validate Product Presence</comment>

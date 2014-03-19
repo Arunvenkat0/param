@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85029) Smoke Test » Category Landing Page » Product Perspectives 
+ * Test Case ID:(C85029) Smoke Test » Category Landing Page » Product Perspectives
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckProductPerspectives")

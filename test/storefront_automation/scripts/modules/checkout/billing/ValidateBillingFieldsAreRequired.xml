@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Test form validation: make sure user cannot leave required fields blank and can leave optional fields blank.</description>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="name=dwfrm_billing_save value=Continue >"/>
+    <parameter name="clickElement" value="name=dwfrm_billing_save value=Continue &gt;"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName') and contains(@class, 'error')]"/>

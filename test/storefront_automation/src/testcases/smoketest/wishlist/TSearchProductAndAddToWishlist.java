@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85054) Smoke Test » My Account - Returning Customer » Wish List » Add items to Wish List 
+ * Test Case ID:(C85054) Smoke Test » My Account - Returning Customer » Wish List » Add items to Wish List
  */
 @ScriptName
 ("testcases.smoketest.wishlist.TSearchProductAndAddToWishlist")

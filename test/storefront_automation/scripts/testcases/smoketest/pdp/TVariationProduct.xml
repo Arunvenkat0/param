@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <description>Test Case ID:(?)</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
@@ -53,9 +53,13 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//div[contains(@class,'product-list-item')]//div[contains(@class,'name')]/a"/>
   </module>
+  <action name="SelectColor"/>
+  <command name="pause" value="300"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.Color .emptyswatch .swatchanchor"/>
   </module>
+  <action name="SelectSize"/>
+  <command name="pause" value="300"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.value .size .swatchanchor"/>
   </module>

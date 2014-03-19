@@ -7,16 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Preconditions
- 
- NOTE:
- 
- SG is not integrated with BML so orders cannot actually be placed using this payment method. This just tests the form on the billing page.
- Expected Results
- 
- Choosing the Bill Me Later payment method opens form with BML fields.
- User is asked to enter date of birth and last four digits of SSN, sees terms and conditions and is asked to check box agreeing to T and C. DoB, SSN and checkbox are all required.
- User sees error message if any of these BML required fields are not filled out and cannot proceed to the next step of checkout.
+ * Test Case ID:(C84702) Smoke Test » Checkout - Retuning Customer » Billing » Bill Me Later as Payment Method
  */
 @ScriptName
 ("testcases.smoketest.purchase.TBillingPageBillMeLater")

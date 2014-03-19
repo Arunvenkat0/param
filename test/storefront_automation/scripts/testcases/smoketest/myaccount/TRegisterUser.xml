@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84722</tags>
-  <description>Test Case ID:(C84722) Smoke Test » My Account - Returning Customer » Login/Register » Create Account </description>
+  <description>Test Case ID:(C84722) Smoke Test » My Account - Returning Customer » Login/Register » Create Account</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -12,6 +12,10 @@
   </action>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
+  <action name="AllowNewAccountToTakeEffect"/>
+  <command name="pause" value="5000">
+    <comment>Ensure new account is activated before continuing.</comment>
+  </command>
   <action name="LoginRegisteredUser">
     <comment>Login again with the created account and check if the user is directed to the welcome page.</comment>
   </action>

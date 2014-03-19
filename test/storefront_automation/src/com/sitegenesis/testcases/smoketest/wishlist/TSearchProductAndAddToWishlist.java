@@ -7,11 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test for searching a product an adding it to a wishlist.
- - search for a product
- - add to wishlist
- - register new user
- - validate product data on the wishlist
+ * Test Case ID:(C85054) Smoke Test » My Account - Returning Customer » Wish List » Add items to Wish List
  */
 @ScriptName
 ("testcases.smoketest.wishlist.TSearchProductAndAddToWishlist")

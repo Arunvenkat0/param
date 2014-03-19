@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85028 partial</tags>
   <description>[Test Case ID:(C85028 partial ) ] Smoke Test » Category Landing Page » Price Range  
 Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page and validated against the price at the quickview and the product detail page.</description>

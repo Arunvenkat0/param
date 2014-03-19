@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <tags>C84584</tags>
   <description>Steps
 Test all links on the page, in all the slots, on all the carousel images. (Header and footer tested elsewhere -- this is just about the homepage).

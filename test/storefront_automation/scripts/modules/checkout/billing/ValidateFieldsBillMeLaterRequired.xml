@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>User sees error message if any of these BML required fields are not filled out and cannot proceed to the next step of checkout.</description>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=is-BML"/>

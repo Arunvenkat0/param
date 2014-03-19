@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Test with foreign addresses as well: check the telephone field with valid foreign numbers (which will be formatted differently and have different numbers of digits than US)</description>
   <action name="NegativePhoneNumbers"/>
   <module name="library.function.FType">

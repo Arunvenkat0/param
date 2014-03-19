@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>This module validates the product detail page for correct name and price
 of the displayed product.
 
@@ -11,6 +11,10 @@ Price: Single product price</description>
   <command name="waitForElementPresent" target="id=main">
     <comment>Validate Product Image</comment>
   </command>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="plainString" value="@{Name}"/>
+  </module>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="text" value="@{Name}"/>

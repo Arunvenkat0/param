@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validates the page elements for creating a new user account and checks for default selections off form fields.</description>
   <command name="assertText" target="xpath=id('primary')/h1" value="Create Account"/>
   <command name="assertElementPresent" target="id=RegistrationForm"/>

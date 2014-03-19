@@ -7,9 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Checks the correct behaviour of the color swatch feature. Therefore a product is selected and available colors validated on the catalog page. An alternative color is selected and validated within quickview and on the product details page.
- 
- This is broken in 13.4. RAP-2406
+ * Test Case ID:(C84682) Smoke Test » Search Results » Product Grid » Product Grid Display: Images and Swatches
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckColorSwatch")

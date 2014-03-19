@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <parameter name="Quantity"/>
   <parameter name="Name"/>
   <parameter name="PriceProduct"/>
@@ -58,5 +58,7 @@
   <module name="modules.minicart.MNumberToCurrency">
     <parameter name="price" value="${price}"/>
   </module>
+  <command name="mouseOut" target="css=.mini-cart-content"/>
+  <command name="mouseOver" target="css=.mini-cart-total-label"/>
   <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
 </scriptmodule>
