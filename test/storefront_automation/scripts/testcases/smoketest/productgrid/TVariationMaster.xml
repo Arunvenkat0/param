@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130250</tags>
-  <description>Test Case ID:(C130250) Smoke Test » Search Results » Product Grid » Product Grid Display: Variation Product Pricing </description>
+  <description>Test Case ID:(C130250) Smoke Test » Search Results » Product Grid » Product Grid Display: Variation Product Pricing</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID1}"/>

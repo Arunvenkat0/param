@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85042)  Smoke Test » Quickview » QuickView: validate overlay 
+ * Test Case ID:(C85042)  Smoke Test » Quickview » QuickView: validate overlay
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckQuickView")

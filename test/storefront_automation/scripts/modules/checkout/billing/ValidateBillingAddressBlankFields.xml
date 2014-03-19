@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>If the user has no default address or no saved addresses, these fields are blank.</description>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="xpath=//input[contains(@id, 'firstname') or contains(@id, 'firstName')]"/>

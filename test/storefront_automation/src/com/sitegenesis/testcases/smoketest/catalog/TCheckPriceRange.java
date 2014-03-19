@@ -7,9 +7,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page and validated against the price at the quickview and the product detail page. 
- 
- This is broken in 13.4. RAP-2416 -> fixed
+ * [Test Case ID:(C85028 partial ) ] Smoke Test » Category Landing Page » Price Range  
+ Checks the correct behaviour of the price range. Therefore a product price is taken from the grid page and validated against the price at the quickview and the product detail page.
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckPriceRange")

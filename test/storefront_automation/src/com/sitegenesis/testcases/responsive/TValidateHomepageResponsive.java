@@ -4,20 +4,13 @@
 package com.sitegenesis.testcases.responsive;
 import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
-import com.xceptance.xlt.api.util.XltProperties;
 
 
 /**
- * Validates the homepage for responsive design
+ * Test Case ID: (C85031) Smoke Test » Customer Service » Contact Us Form
  */
 @ScriptName
 ("testcases.responsive.TValidateHomepageResponsive")
 public class TValidateHomepageResponsive extends AbstractBrowserScriptTestCase
 {
-	public TValidateHomepageResponsive() 
-	{
-		super(
-				XltProperties.getInstance().getProperty("webdriver.screensize.responsivedesign.width", 600), 
-				XltProperties.getInstance().getProperty("webdriver.screensize.responsivedesign.height", 800));
-	}
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>1. Wait for the 'element' to be present. 2. Mouse over the 'element'.</description>
+  <parameter name="element"/>
+  <command name="waitForElementPresent" target="@{element}"/>
+  <command name="mouseOver" target="@{element}"/>
+</scriptmodule>

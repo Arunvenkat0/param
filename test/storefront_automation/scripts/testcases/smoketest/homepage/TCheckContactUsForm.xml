@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84778</tags>
   <description>Test Case ID:(C84778) Smoke Test » Customer Service » Contact Us Form</description>
   <module name="modules.staticelements.Homepage"/>
-  <command name="waitForElementPresent" target="link=Contact Us"/>
+  <command name="waitForElementPresent" target="link=CONTACT US"/>
   <action name="ClickContactUsLinkInFooter"/>
-  <command name="clickAndWait" target="link=Contact Us"/>
+  <command name="clickAndWait" target="link=CONTACT US"/>
   <command name="assertElementPresent" target="link=Customer Service"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.primary-content h1"/>

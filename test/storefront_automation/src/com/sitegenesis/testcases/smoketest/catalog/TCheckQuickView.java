@@ -7,9 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Validates the behaviour of the quickview inside the product catalog.
- 
- This is broken in 13.4. RAP-2406
+ * Test Case ID:(C85042)  Smoke Test » Quickview » QuickView: validate overlay
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckQuickView")

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchAndAddProduct"/>
   <module name="modules.search.SearchProductByIDOrName">
@@ -137,9 +137,9 @@
   <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i1_addressList" value="label=(${BillingAddressTitle})*"/>
   <action name="SelectShippingAddressForItem2"/>
   <command name="select" target="name=dwfrm_multishipping_addressSelection_quantityLineItems_i2_addressList" value="label=(${BillingAddressTitle})*"/>
-  <command name="assertElementPresent" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
+  <command name="assertElementPresent" target="name=dwfrm_multishipping_addressSelection_save value=Continue &gt;"/>
   <action name="GoToShippingMethodPage"/>
-  <command name="clickAndWait" target="name=dwfrm_multishipping_addressSelection_save value=Continue >"/>
+  <command name="clickAndWait" target="name=dwfrm_multishipping_addressSelection_save value=Continue &gt;"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="1"/>
@@ -206,9 +206,9 @@
     <parameter name="Position" value="1"/>
     <parameter name="ShippingMethodName" value="${ShippingMethodName2}"/>
   </module>
-  <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_save value=Continue >"/>
+  <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_save value=Continue &gt;"/>
   <action name="GoToBillingPage"/>
-  <command name="clickAndWait" target="name=dwfrm_multishipping_shippingOptions_save value=Continue >"/>
+  <command name="clickAndWait" target="name=dwfrm_multishipping_shippingOptions_save value=Continue &gt;"/>
   <module name="modules.checkout.ValidateProductDataInSidebar">
     <comment>Validate First Product's Details Inside Product Summary table</comment>
     <parameter name="Position" value="1"/>

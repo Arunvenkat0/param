@@ -7,13 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Payment data account management:
- => adds credit cards:
- - Visa
- - American Express
- - Master Card
- - Discovery
- => removes credit cards
+ * [ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card
  */
 @ScriptName
 ("testcases.smoketest.myaccount.TChangePaymentData")

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.address legend"/>
     <parameter name="textPattern" value="regexpi:In Store Shipment Message*"/>
@@ -8,7 +8,7 @@
   <command name="assertElementPresent" target="css=.instore-shipment-address"/>
   <command name="assertElementPresent" target="css=.instore-message-text"/>
   <command name="assertText" target="css=.char-count" value="You have 250 characters left out of 250"/>
-  <command name="assertElementPresent" target="css=.instore-continue-button button[value='Continue >']"/>
+  <command name="assertElementPresent" target="css=.instore-continue-button button[value='Continue &gt;']"/>
   <action name="EnterStorePickupMessage"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.instore-message-text .input-textarea"/>

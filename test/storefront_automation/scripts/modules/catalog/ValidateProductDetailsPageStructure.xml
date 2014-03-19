@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validates the detail page structure of a simple product.</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.breadcrumb"/>
   </module>
-  <command name="assertElementPresent" disabled="true" target="css=.breadcrumb">
-    <comment>Checks if breadcrumb navigation is displayed.</comment>
-  </command>
-  <command name="assertElementPresent" target="css=h1.product-name">
-    <comment>Checks if a headline is displayed.</comment>
-  </command>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=h1.product-name"/>
+  </module>
   <command name="assertElementPresent" target="css=.product-primary-image img">
     <comment>Checks if a product image is displayed.</comment>
   </command>
@@ -32,5 +29,4 @@
     <parameter name="textElement" value="css=.product-tabs ul"/>
     <parameter name="textPattern" value="Description*Reviews"/>
   </module>
-  <command name="assertText" disabled="true" target="css=.product-tabs ul" value="Description*Reviews"/>
 </scriptmodule>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <module name="modules.staticelements.MVerifiLink">
     <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Home')]"/>
     <parameter name="ElementToVerify" value="//div[contains(@id,'homepage-slider')]"/>
