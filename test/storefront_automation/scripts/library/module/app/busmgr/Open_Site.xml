@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Opens "Site" menu then clicks/selects  the given site 'SiteName'.</description>
+  <parameter name="SiteName"/>
+  <action name="SetContextInLeftMenu"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//a[text()=&quot;Site&quot;]"/>
+  </module>
+  <action name="ClickGivenSiteNameInSiteList"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//a[text()=&quot;@{SiteName}&quot;]"/>
+  </module>
+</scriptmodule>

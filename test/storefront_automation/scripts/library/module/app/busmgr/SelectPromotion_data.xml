@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <SearchInputFieldElement>css=.dw-bm-widget-searchpanel-textfield &gt; input</SearchInputFieldElement>
+  <SearchButtonElement>css=.dw-bm-widget-searchpanel-searchbutton</SearchButtonElement>
+  <ActionsDropDownElement>//button[text()="Actions"]</ActionsDropDownElement>
+  <SelectVisisbleElement>//a[text()="Select Visible"]</SelectVisisbleElement>
+</data>
