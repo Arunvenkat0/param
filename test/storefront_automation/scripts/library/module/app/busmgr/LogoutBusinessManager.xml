@@ -2,6 +2,6 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Logs off from the Business Manager application.</description>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=.logoff"/>
+    <parameter name="clickElement" value="${LogoutButtonElement}"/>
   </module>
 </scriptmodule>

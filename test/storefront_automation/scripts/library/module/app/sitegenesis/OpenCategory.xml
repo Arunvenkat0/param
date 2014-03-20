@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="CategoryName"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[contains(@id,'navigation')]//a[(contains(text(),'@{CategoryName}') and (contains(@class,'level-1')))]"/>
+  </module>
+</scriptmodule>

@@ -3,4 +3,6 @@
   <ActionsDropDownElement>//button[text()="Actions"]</ActionsDropDownElement>
   <DisableSelectedElement>//a[text()="Disable Selected Promotions"]</DisableSelectedElement>
   <ConfirmDisableButtonElement>//button[text()="Disable"]</ConfirmDisableButtonElement>
+  <PromotionStatusElement>css=div.x-grid3-col-enabled</PromotionStatusElement>
+  <PromotionStatusValue>No</PromotionStatusValue>
 </data>

@@ -2,6 +2,6 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Clicks/Opens the Promotions page for the current Site.</description>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="//a[text()=&quot;Promotions&quot;]"/>
+    <parameter name="clickElement" value="${PromotionsMenuElement}"/>
   </module>
 </scriptmodule>

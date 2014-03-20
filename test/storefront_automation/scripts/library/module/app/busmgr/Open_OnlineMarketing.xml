@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks/Opens the Online Marketing menu for the current Site.</description>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="//td[@id=&quot;bm_content_column&quot;]//a[text()=&quot;Online Marketing&quot;]"/>
+    <parameter name="clickElement" value="${OnlineMarketingMenuElement}"/>
   </module>
 </scriptmodule>

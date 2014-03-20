@@ -14,10 +14,15 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${EnableSelectedElement}"/>
   </module>
-  <action name="ConfirmEnablement"/>
+  <action name="ConfirmEnablementChoice"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${ConfirmEnableButtonElement}"/>
   </module>
   <action name="VerifyEnablement"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="${PromotionStatusElement}"/>
+    <parameter name="text" value="${PromotionStatusValue}"/>
+  </module>
+  <action name="Logout"/>
   <module name="library.module.app.busmgr.LogoutBusinessManager"/>
 </scriptmodule>
