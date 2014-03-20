@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCategory" disabled="true">
+    <parameter name="CategoryName" value="Mens"/>
+  </module>
+  <module name="library.module.app.sitegenesis.OpenSubCategory">
+    <parameter name="MainCategoryName" value="Mens"/>
+    <parameter name="SubCategoryName" value="Clothing"/>
+  </module>
+</testcase>
