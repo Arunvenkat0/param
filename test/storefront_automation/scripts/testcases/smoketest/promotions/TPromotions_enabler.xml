@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <module name="modules.promotions.EnablePromotion">
+    <parameter name="SiteName" value="Site Genesis"/>
+    <parameter name="PromotionName" value="GPS 15% Off"/>
+  </module>
+  <command name="pause" value="4000"/>
+  <module name="modules.promotions.DisablePromotion">
+    <parameter name="SiteName" value="Site Genesis"/>
+    <parameter name="PromotionName" value="GPS 15% Off"/>
+  </module>
+</testcase>

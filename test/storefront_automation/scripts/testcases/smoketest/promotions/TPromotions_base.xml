@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
+    <parameter name="SiteName" value=""/>
+  </module>
+</testcase>

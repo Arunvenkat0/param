@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Logs into Bus. Mgr. and Selects a given 'PromotionName'.</description>
+  <parameter name="SiteName"/>
+  <parameter name="PromotionName"/>
+  <action name="OpenBusinessManager-NavigateToPromotionsPage"/>
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
+    <parameter name="SiteName" value="@{SiteName}"/>
+  </module>
+  <action name="SearchForPromotion"/>
+  <action name="TypePromotionName"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="${SearchInputFieldElement}"/>
+    <parameter name="inputString" value="@{PromotionName}"/>
+  </module>
+  <action name="ClickSearchButton"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SearchButtonElement}"/>
+  </module>
+  <action name="SelectSearchResults"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SelectVisisbleElement}"/>
+  </module>
+</scriptmodule>
