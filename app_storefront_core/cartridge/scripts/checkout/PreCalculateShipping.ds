@@ -24,7 +24,7 @@ function execute( pdict : PipelineDictionary ) : Number
 		
 	if( shipment != null )
 	{
-		var currencyCode : String 				= Site.getCurrent().getCurrencyCode();
+		var currencyCode : String 				= basket.currencyCode;
 		var discountPlan : DiscountPlan 		= PromotionMgr.getDiscounts(basket), 
 			productShippingCosts : Array		= [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
 			productShippingDiscounts : ArrayList= new ArrayList, // list holds all products shipping discounts NOT promotions e.g. fixed shipping discount or free shipping for individual products discount

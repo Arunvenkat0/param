@@ -37,7 +37,7 @@
 	<isif condition="${empty(pdict.p_hidepromo) || !pdict.p_hidepromo}">
 		<iscomment>promotional messaging</iscomment>
 		<isloop items="${productLineItem.priceAdjustments}" var="pli" status="loopstate">
-			<div class="promo <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">- <isprint value="${pli.promotion.calloutMsg}" encoding="off" /></div>
+			<div class="promo <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">- <isprint value="${pli.promotion.calloutMsg}"/></div>
 		</isloop>
 	</isif>
 
@@ -50,7 +50,10 @@
 		<isscript>
 			var defaultMethod : dw.order.ShippingMethod = dw.order.ShippingMgr.getDefaultShippingMethod();
 			var shippingModel : dw.order.ProductShippingModel = dw.order.ShippingMgr.getProductShippingModel(productLineItem.getProduct());
-			var shippingCost : dw.order.ProductShippingCost = shippingModel.getShippingCost(defaultMethod);
+			var shippingCost : dw.order.ProductShippingCost = null;
+			if (null!=defaultMethod) {
+			     shippingCost = shippingModel.getShippingCost(defaultMethod);
+			}
 		</isscript>		
 		<isif condition="${!empty(shippingCost) && shippingCost.surcharge}">
 			<div class="promo"><isprint value="${Resource.msg('displayliproduct.surcharge','product',null)}"/></div>
