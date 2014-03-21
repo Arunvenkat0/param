@@ -61,8 +61,11 @@
 							<isif condition="${pdict.p_shipmenteditable}">
 								<a href="${editUrl}" title="${Resource.msg('ordersummary.ordershipping.edit','components',null)}">${Resource.msg('ordersummary.ordershipping.edit','components',null)}</a>
 							</isif>
-							${Resource.msg('ordersummary.ordershipping','components',null)} <!--  SHIPPING NAME --><isprint value="${Shipment.shippingMethod.displayName}"/>
-						</td>
+							${Resource.msg('ordersummary.ordershipping','components',null)} <!--  SHIPPING NAME -->
+							<isif condition="${!empty(Shipment) && !empty(Shipment.shippingMethod)}">
+                                <isprint value="${Shipment.shippingMethod.displayName}"/>
+                            </isif>
+                        </td>
 						<td>
 							<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 								<isprint value="${Shipment.shippingTotalPrice}"/>

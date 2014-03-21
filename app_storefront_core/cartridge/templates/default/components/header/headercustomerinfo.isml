@@ -5,6 +5,20 @@
 		--------------------------------------------------------
  	</iscomment>
  	
+ 	<iscomment> Multi currency </iscomment>
+ 	<li class="mc-class">${Resource.msg('headercustomerinfo.currency','components',null)} </li>
+ 	<li class="mc-class">
+
+			<select class="currency-converter" name="currencyMnemonic" class="perm_not_disabled dropdown inputfield_en" style="height:12px;width:100%;padding:0;border:none;">
+				<isset name="sessionCurrency" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>						
+				<isloop items="${dw.system.Site.getCurrent().getAllowedCurrencies()}" var="currencyCode" status="loopstate">
+					<option class="currency-converter-option" value="<isprint value="#currencyCode#">" <isif condition="#currencyCode EQ sessionCurrency#">selected="selected"</isif>><isprint value="#currencyCode#"></option>
+				</isloop>
+			</select>
+	</li> 	
+	<iscomment> Multi currency </iscomment>
+	
+	
 	 <isif condition="${ (pdict.CurrentCustomer.registered) && (!pdict.CurrentCustomer.authenticated)}">
 	     
 	     <li>
@@ -19,7 +33,7 @@
 		       			${Resource.msg('headercustomerinfo.pleaselogin','components',null)}
 		       		</a>
 	         	)
-	         </iselse>
+	         <iselse>
 	         	
 		     </isif>
 	     </li>

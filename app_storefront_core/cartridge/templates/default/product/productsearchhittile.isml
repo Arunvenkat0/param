@@ -122,14 +122,14 @@
 <div class="product-pricing">
 
 	<iscomment>Renders pricing information depending on the option or variation model, as well as scaled prices and so on.</iscomment>
-	<isset name="currencyCode" value="${dw.system.Site.getCurrent().currencyCode}" scope="page"/>	
+	<isset name="currencyCode" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>
 	<isif condition="${Product.productSet}">
 		<iscomment>Product set pricing</iscomment>
 		<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
 		
 	<iselseif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true'}">
 		<iscomment>Product master price range depending on the represented variants</iscomment>	
-		<span class="product-sales-price"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode))}" /> - <isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode))}" /></span>
+		<span class="product-sales-price ${sessionCurrency}"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode))}" /> - <isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode))}" /></span>
 	<iselse>						
 		<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
 		<isif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true'}"/>
