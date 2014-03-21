@@ -7,10 +7,10 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * 
+ * Test Case ID:(C130246)  
  */
 @ScriptName
-("testcases.smoketest.promotions.TPromotions2")
-public class TPromotions2 extends AbstractScriptTestCase
+("testcases.smoketest.promotions.TPromotionsAmountOffWithAmountOfQualifyingProducts")
+public class TPromotionsAmountOffWithAmountOfQualifyingProducts extends AbstractScriptTestCase
 {
 }
