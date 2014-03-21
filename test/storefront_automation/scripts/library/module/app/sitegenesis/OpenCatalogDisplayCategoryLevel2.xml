@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>From the homepage, opens the 'Level1CategoryName', then the 'Level2CategoryName'  Example "Mens" &gt; "Clothing"</description>
+  <parameter name="Level1CategoryName"/>
+  <parameter name="Level2CategoryName"/>
+  <module name="library.module.app.sitegenesis.util.OpenCatalogLevel1">
+    <parameter name="CategoryName" value="@{Level1CategoryName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.util.OpenCatalogLevel2">
+    <parameter name="CategoryName" value="@{Level2CategoryName}"/>
+  </module>
+</scriptmodule>
