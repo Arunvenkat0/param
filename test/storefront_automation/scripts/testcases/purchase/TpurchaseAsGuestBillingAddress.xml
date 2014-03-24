@@ -117,7 +117,7 @@
     <parameter name="Quantity" value="${SecondProductQuantity}"/>
     <parameter name="Price" value="${SecondProductTotalPrice}"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -146,7 +146,7 @@
     <parameter name="StepNumber" value="2"/>
     <parameter name="StepText" value="Billing"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>

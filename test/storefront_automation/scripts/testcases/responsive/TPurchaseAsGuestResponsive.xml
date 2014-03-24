@@ -56,7 +56,7 @@
     <parameter name="Quantity" value="${FirstProductQuantity}"/>
     <parameter name="Price" value="${FirstProductTotalPrice}"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>

@@ -24,7 +24,7 @@
     <parameter name="inputString" value="@{Title}"/>
   </module>
   <command name="type" disabled="true" target="id=dwfrm_profile_address_addressid" value="@{Title}"/>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="@{FirstName}"/>
     <parameter name="LastName" value="@{LastName}"/>
     <parameter name="Address1" value="@{Address}"/>

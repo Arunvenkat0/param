@@ -60,7 +60,7 @@
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address1" value="${ShippingAddressStreet}"/>
