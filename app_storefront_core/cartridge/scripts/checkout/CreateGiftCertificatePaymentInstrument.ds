@@ -51,7 +51,7 @@ function execute( pdict : PipelineDictionary ) : Number
     // make sure the GC is in the right currency
     if( !(gc.balance.currencyCode == basket.currencyCode ))
     {
-        pdict.Status = new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_WRONG_CURRENCY);
+        pdict.Status = new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_CURRENCY_MISMATCH);
         return PIPELET_ERROR;
     }
 
