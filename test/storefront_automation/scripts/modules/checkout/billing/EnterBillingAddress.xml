@@ -12,7 +12,7 @@ Address 2 and Phone are not mandatory.</description>
   <parameter name="ZipCode"/>
   <parameter name="Phone"/>
   <parameter name="Email"/>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="@{FirstName}"/>
     <parameter name="LastName" value="@{LastName}"/>
     <parameter name="Address1" value="@{Address1}"/>
