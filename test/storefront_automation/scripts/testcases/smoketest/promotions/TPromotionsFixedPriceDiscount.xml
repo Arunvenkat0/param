@@ -2,12 +2,12 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130269</tags>
   <description>Test Case ID:(C130269) </description>
-  <module name="modules.promotions.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value=""/>
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
-  <module name="modules.promotions.DisablePromotion">
+  <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value=""/>
   </module>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <module name="modules.promotions.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="Site Genesis"/>
     <parameter name="PromotionName" value="GPS 15% Off"/>
   </module>
   <command name="pause" value="4000"/>
-  <module name="modules.promotions.DisablePromotion">
+  <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="Site Genesis"/>
     <parameter name="PromotionName" value="GPS 15% Off"/>
   </module>
