@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Uses Business Manager to Enable the given 'PromotionName' for the given 'SiteName'.</description>
+  <description>Uses Business Manager to Diasble the given 'PromotionName' for the given 'SiteName'.</description>
   <parameter name="SiteName"/>
   <parameter name="PromotionName"/>
-  <module name="library.module.app.busmgr.SelectPromotion">
+  <module name="library.module.app.busmgr.util.FSelectPromotion">
     <parameter name="SiteName" value="@{SiteName}"/>
     <parameter name="PromotionName" value="@{PromotionName}"/>
   </module>
-  <action name="EnableSelectedPromotionInActionsMenu"/>
+  <action name="DisableSelectedPromotionInActionsMenu"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${ActionsDropDownElement}"/>
   </module>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="${EnableSelectedElement}"/>
+    <parameter name="clickElement" value="${DisableSelectedElement}"/>
   </module>
-  <action name="ConfirmEnablementChoice"/>
+  <action name="ConfirmDisablementChoice"/>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="${ConfirmEnableButtonElement}"/>
+    <parameter name="clickElement" value="${ConfirmDisableButtonElement}"/>
   </module>
-  <action name="VerifyEnablement"/>
+  <action name="VerifyDisablement"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="${PromotionStatusElement}"/>
     <parameter name="text" value="${PromotionStatusValue}"/>

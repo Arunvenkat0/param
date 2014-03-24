@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks the Quick View Add To Car Button.</description>
+  <module name="library.module.app.sitegenesis.util.FClickQuickViewAddToCartButton"/>
+</scriptmodule>
