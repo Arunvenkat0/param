@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks a product name that is in the product display grid.</description>
+  <parameter name="ProductName"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=a.name-link[title='@{ProductName}']"/>
+  </module>
+</scriptmodule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Click product quick view link.</description>
+  <parameter name="ProductName"/>
+  <module name="library.function.FMouseOver">
+    <parameter name="element" value="xpath=//div[@class='product-image']/a[starts-with(@title,'@{ProductName}')]"/>
+  </module>
+  <command name="pause" disabled="true" value="1000"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'@{ProductName}')]"/>
+  </module>
+  <command name="pause" disabled="true" value="1000"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="id=#QuickViewDialog"/>
+  </module>
+  <command name="pause" disabled="true" value="1000"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=.ui-dialog .product-name"/>
+    <parameter name="text" value="@{ProductName}"/>
+  </module>
+</scriptmodule>

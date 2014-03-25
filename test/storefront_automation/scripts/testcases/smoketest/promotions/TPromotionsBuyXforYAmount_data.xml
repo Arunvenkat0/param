@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <PromotionName>50%offShippingAmountAbove100</PromotionName>
+  <PromotionName>Buy5for50</PromotionName>
   <ProductName>Canon PowerShot S5 IS Digital Point and Shoot Camera</ProductName>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>

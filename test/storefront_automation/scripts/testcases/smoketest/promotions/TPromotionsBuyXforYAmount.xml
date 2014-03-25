@@ -12,7 +12,7 @@
     <parameter name="SearchString" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.QuickViewAddToCart"/>
+  <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
