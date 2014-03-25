@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C130268)  
+ * Test Case ID:(C130268)
  */
 @ScriptName
 ("testcases.smoketest.promotions.TPromotionsMaximumNumberOfApplication")
