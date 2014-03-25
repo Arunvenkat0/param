@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C130276)  
+ * Test Case ID:(C130276)
  */
 @ScriptName
 ("testcases.smoketest.promotions.TPromotionsFixedShippingPrice")

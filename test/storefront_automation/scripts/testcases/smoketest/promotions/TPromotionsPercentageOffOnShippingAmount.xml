@@ -47,17 +47,6 @@
     <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
   </module>
   <action name="CompleteOrder"/>
-  <module name="library.module.app.sitegenesis.EnterAddressData" disabled="true">
-    <parameter name="FirstName" value="${ShippingFirstName}"/>
-    <parameter name="LastName" value="${ShippingLastName}"/>
-    <parameter name="Address1" value="${ShippingAddress}"/>
-    <parameter name="Address2" value=""/>
-    <parameter name="Country" value="${ShippingCountry}"/>
-    <parameter name="State" value="${ShippingState}"/>
-    <parameter name="City" value="${ShippingCity}"/>
-    <parameter name="ZipCode" value="${ShippingZipCode}"/>
-    <parameter name="Phone" value="${ShippingPhone}"/>
-  </module>
   <module name="library.module.app.sitegenesis.EnterBillingEmail">
     <parameter name="EmailAddress" value="${EmailAddress}"/>
   </module>
