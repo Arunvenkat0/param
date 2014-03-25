@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <PromotionName>50%offShippingAmountAbove100</PromotionName>
-  <ProductName>Canon PowerShot S5 IS Digital Point and Shoot Camera</ProductName>
+  <PromotionName>$50offOrderAmountOver300</PromotionName>
+  <CatalogLevel1>Electronics</CatalogLevel1>
+  <CatalogLevel2>Digital Cameras</CatalogLevel2>
+  <CatalogLevel3>Kodak</CatalogLevel3>
+  <ProductName>Kodak EasyShare Z8612 Digital Point and Shoot Camera</ProductName>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>
