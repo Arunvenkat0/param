@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Test Case ID:()  </description>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" disabled="true">
+  <description>Test Case ID:()</description>
   <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
-    <parameter name="PromotionName" value=""/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.busmgr.DisablePromotion">
