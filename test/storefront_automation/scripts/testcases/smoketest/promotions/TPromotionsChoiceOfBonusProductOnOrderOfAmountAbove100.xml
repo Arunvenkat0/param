@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130263</tags>
   <description>Test Case ID:(C130263)</description>
   <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
@@ -18,16 +18,14 @@
     <parameter name="PriceLabelText" value="$50 - $99.99"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="modules.catalog.OpenQuickView" disabled="true"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <action name="SelectBonusProduct"/>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
+  <module name="library.module.app.sitegenesis.AddToCart"/>
   <action name="ChangeQuantity"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoCallout"/>
@@ -35,9 +33,7 @@
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
     <parameter name="inputString" value="2"/>
   </module>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button#update-cart"/>
-  </module>
+  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
   <action name="VERIFY-PromoCalloutDisplayed"/>
   <action name="AddABonusProduct"/>
   <module name="library.function.FClick">
@@ -49,6 +45,7 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=button.add-to-cart-bonus"/>
   </module>
+  <action name="VERIFY-BonusProductAdded"/>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
