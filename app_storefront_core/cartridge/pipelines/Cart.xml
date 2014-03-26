@@ -2839,12 +2839,17 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
           </segment>
         </branch>
       </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="Cart-Calculate"/>
+        <node-display x="0" y="1"/>
+      </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -2888,10 +2893,10 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <key-binding alias="JSONResponse.message" key="To_1"/>
                 <key-binding alias="!CouponStatus.error" key="From_2"/>
                 <key-binding alias="JSONResponse.success" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="Basket.adjustedMerchandizeTotalGrossPrice.value" key="From_3"/>
+                <key-binding alias="JSONResponse.baskettotal" key="To_3"/>
+                <key-binding alias="CouponCode" key="From_4"/>
+                <key-binding alias="JSONResponse.CouponCode" key="To_4"/>
                 <key-binding alias="null" key="From_5"/>
                 <key-binding alias="null" key="To_5"/>
                 <key-binding alias="null" key="From_6"/>
