@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130246</tags>
   <description>Test Case ID:(C130246)</description>
-  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -11,22 +11,31 @@
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3" disabled="true">
+  <action name="CheckNoPromotion"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//a[text()=&quot;${NonPromoRefinement}&quot;]"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=a.name-link[title='${NonPromoProductName}']"/>
+    <parameter name="text" value="${NonPromoProductName}"/>
+  </module>
+  <action name="VERIFY_NoPromotion"/>
+  <action name="Refine"/>
+  <command name="pause" value="1000"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
-    <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
-  <action name="Refine"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="//a[text()=&quot;${CatalogLevel3}&quot;]"/>
   </module>
-  <command name="pause" value="5000"/>
+  <command name="pause" disabled="true" value="5000"/>
   <action name="SelectProduct"/>
   <module name="modules.catalog.OpenQuickView" disabled="true"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink" disabled="true">
+  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink">
+  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>

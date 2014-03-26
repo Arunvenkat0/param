@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130262</tags>
   <description>Test Case ID:(C130262)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <action name="CheckNoPromotion"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
+    <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
+    <parameter name="Level3CategoryName" value="Jackets &amp; Coats"/>
+  </module>
+  <action name="VERIFY-NoPromotion"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=a.name-link[title='Notch Collar Button Down Jacket']"/>
+  </module>
+  <action name="CheckForPromotion"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
+  <action name="Refine"/>
+  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+    <parameter name="PriceLabelText" value="$100 - $499.99"/>
+  </module>
+  <module name="library.module.app.sitegenesis.SelectRefinementColor">
+    <parameter name="Color" value="Brown"/>
+  </module>
   <action name="SelectProduct"/>
   <module name="modules.catalog.OpenQuickView" disabled="true"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink" disabled="true">
+  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink">
+  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.SelectSize">
+    <parameter name="Size" value="XS"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
@@ -85,7 +106,7 @@
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CleanUp"/>
-  <module name="library.module.app.busmgr.DisablePromotion">
+  <module name="library.module.app.busmgr.DisablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>

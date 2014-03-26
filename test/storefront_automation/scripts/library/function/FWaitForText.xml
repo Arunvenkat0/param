@@ -6,5 +6,6 @@
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="@{textElement}"/>
   </module>
+  <command name="waitForElementPresent" target="@{textElement}"/>
   <command name="waitForText" target="@{textElement}" value="@{text}"/>
 </scriptmodule>
