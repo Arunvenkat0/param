@@ -149,7 +149,8 @@
 		setPreferredStore			: URLUtils.url('StoreInventory-SetPreferredStore').toString(),
 		getPreferredStore			: URLUtils.url('StoreInventory-GetPreferredStore').toString(),
 		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
-		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString()		
+		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
+		billing						: URLUtils.url('COBilling-Start').toString()		
 	};
 	
 	userSettings = {

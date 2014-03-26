@@ -149,6 +149,14 @@
 						<span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatusCode.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
 					</div>
 				</isif>
+				<isif condition="${pdict.Basket.couponLineItems.length > 0}">
+					<isloop items="${pdict.Basket.couponLineItems}" var="couponLineItem" status="cliloopstate">
+						<isif condition="${couponLineItem.valid && couponLineItem.applied}">
+								${Resource.msg('billing.promocode','checkout',null)} <isprint value="${couponLineItem.couponCode}"/> ${Resource.msg('billing.couponapplied','checkout',null)}<br />
+						</isif>
+					</isloop>					
+				</isif>
+				
 			</div>
 
 			<isset name="gcPITotal" value="${0}" scope="pdict"/>
