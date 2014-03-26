@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <PromotionName>ChoiceOfBonusProductOnOrderOfAmountAbove100</PromotionName>
-  <CatalogLevel1>Electronics</CatalogLevel1>
-  <CatalogLevel2>Televisions</CatalogLevel2>
-  <CatalogLevel3>Flat Screen</CatalogLevel3>
-  <ProductName>Sony Bravia® XBR® 70" LCD High Definition Television</ProductName>
+  <CatalogLevel1>Womens</CatalogLevel1>
+  <CatalogLevel2>Jewelry</CatalogLevel2>
+  <CatalogLevel3>Bracelets</CatalogLevel3>
+  <ProductName>Pink and Brown Bracelet</ProductName>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>

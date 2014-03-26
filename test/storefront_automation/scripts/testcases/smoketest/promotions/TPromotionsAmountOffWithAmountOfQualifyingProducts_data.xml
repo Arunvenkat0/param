@@ -23,4 +23,6 @@
   <ExpirationMonth>April</ExpirationMonth>
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>999</SecurityCode>
+  <NonPromoRefinement>Canon</NonPromoRefinement>
+  <NonPromoProductName>Canon EOS 5D Mark II Digital SLR Camera (body only)</NonPromoProductName>
 </data>

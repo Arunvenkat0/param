@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="PriceLabelText"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=a.refinement-link[title='@{PriceLabelText}']"/>
+  </module>
+  <module name="library.function.FCheck" disabled="true">
+    <parameter name="checkElement" value="css=a.refinement-link[title='@{PriceLabelText}']"/>
+  </module>
+</scriptmodule>

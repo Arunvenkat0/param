@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130263</tags>
   <description>Test Case ID:(C130263)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -13,15 +13,42 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
   <action name="SelectProduct"/>
+  <action name="Refine"/>
+  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+    <parameter name="PriceLabelText" value="$50 - $99.99"/>
+  </module>
+  <action name="SelectProduct"/>
   <module name="modules.catalog.OpenQuickView" disabled="true"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink" disabled="true">
+  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink">
+  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
+  <action name="SelectBonusProduct"/>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
+  <action name="ChangeQuantity"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <action name="VERIFY-NoPromoCallout"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
+    <parameter name="inputString" value="2"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button#update-cart"/>
+  </module>
+  <action name="VERIFY-PromoCalloutDisplayed"/>
+  <action name="AddABonusProduct"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=a.select-bonus"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button.button-select-bonus"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button.add-to-cart-bonus"/>
+  </module>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
@@ -85,7 +112,7 @@
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CleanUp"/>
-  <module name="library.module.app.busmgr.DisablePromotion">
+  <module name="library.module.app.busmgr.DisablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
