@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130273</tags>
   <description>Test Case ID:(C130273)</description>
-   <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -12,7 +12,7 @@
     <parameter name="SearchString" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
+  <module name="library.module.app.sitegenesis.AddToCart"/>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>

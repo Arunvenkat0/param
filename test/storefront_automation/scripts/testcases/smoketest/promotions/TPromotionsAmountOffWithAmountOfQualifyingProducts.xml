@@ -39,7 +39,7 @@
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.ProductDisplayPageAddToCart"/>
+  <module name="library.module.app.sitegenesis.AddToCart"/>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>

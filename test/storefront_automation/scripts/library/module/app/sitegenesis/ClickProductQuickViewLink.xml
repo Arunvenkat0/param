@@ -3,19 +3,19 @@
   <description>Click product quick view link.</description>
   <parameter name="ProductName"/>
   <module name="library.function.FMouseOver">
+    <parameter name="element" value="xpath=//div[@class='product-image']/a[contains(@title,'@{ProductName}')]"/>
+  </module>
+  <module name="library.function.FMouseOver" disabled="true">
     <parameter name="element" value="xpath=//div[@class='product-image']/a[starts-with(@title,'@{ProductName}')]"/>
   </module>
-  <command name="pause" disabled="true" value="1000"/>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'@{ProductName}')]"/>
+    <parameter name="clickElement" value="xpath=id('quickviewbutton')[contains(@title,'@{ProductName}')]"/>
   </module>
-  <command name="pause" disabled="true" value="1000"/>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="id=#QuickViewDialog"/>
   </module>
-  <command name="pause" disabled="true" value="1000"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.ui-dialog .product-name"/>
-    <parameter name="text" value="@{ProductName}"/>
+    <parameter name="text" value="regexp:.*@{ProductName}.*"/>
   </module>
 </scriptmodule>
