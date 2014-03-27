@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130267</tags>
   <description>Test Case ID:(C130267)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -15,18 +15,18 @@
     <parameter name="PriceLabelText" value="${PriceRefinement1}"/>
   </module>
   <action name="VERIFY-NoPromoMessage"/>
-  <command name="pause" value="5000"/>
+  <command name="pause" value="1500"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="RefinePriceAgain"/>
   <module name="library.module.app.sitegenesis.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="${PriceRefinement2}"/>
   </module>
   <action name="VERIFY-PromoMessageDisplayed"/>
-  <command name="pause" value="5000"/>
+  <command name="pause" value="2000"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="8"/>
+  <command name="pause" disabled="true" value="1000"/>
   <action name="SelectProduct"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
-    <parameter name="ProductName" value="${ProductName}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="AddProductToCart"/>
@@ -34,10 +34,32 @@
   <action name="OpenShoppingCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoMessage"/>
+  <command name="pause" value="2000"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="ChangeQuantity"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
+    <parameter name="inputString" value="5"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button#update-cart"/>
+  </module>
   <action name="VERIFY-"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=td.cart-promo &gt; div &gt; span.value"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
   <action name="ChangeQuantityAgain"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
+    <parameter name="inputString" value="4"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button#update-cart"/>
+  </module>
   <action name="VERIFY-"/>
+  <command name="pause" value="1500"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="AddAnotherProduct"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${NewCatalogLevel1}"/>
@@ -54,7 +76,15 @@
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <action name="OpenShoppingCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
-  <action name="VERIFY-"/>
+  <action name="VERIFY-CalloutAndDiscount"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value=""/>
+    <parameter name="textPattern" value=""/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value=""/>
+    <parameter name="textPattern" value=""/>
+  </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>

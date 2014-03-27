@@ -14,7 +14,7 @@
   <ShippingCity>Nashua</ShippingCity>
   <ShippingZipCode>03030</ShippingZipCode>
   <ShippingPhone>603-456-7890</ShippingPhone>
-  <ExpectedDiscount>- $8.00</ExpectedDiscount>
+  <ExpectedDiscount>- $95.00</ExpectedDiscount>
   <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
   <EmailAddress>no_one@anywhere.com</EmailAddress>
   <NameOnCard>${ShippingFirstName} ${ShippingLastName}</NameOnCard>

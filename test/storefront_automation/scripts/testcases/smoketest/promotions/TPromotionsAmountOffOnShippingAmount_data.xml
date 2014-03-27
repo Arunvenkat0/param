@@ -4,7 +4,7 @@
   <CatalogLevel1>Electronics</CatalogLevel1>
   <CatalogLevel2>Televisions</CatalogLevel2>
   <CatalogLevel3>Flat Screen</CatalogLevel3>
-  <ProductName>Sony Bravia® XBR® 70" LCD High Definition Television</ProductName>
+  <ProductName>Sony Bravia® S-Series 52" LCD High Definition Television</ProductName>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>
@@ -14,7 +14,7 @@
   <ShippingCity>Nashua</ShippingCity>
   <ShippingZipCode>03030</ShippingZipCode>
   <ShippingPhone>603-456-7890</ShippingPhone>
-  <ExpectedDiscount>- $8.00</ExpectedDiscount>
+  <ExpectedDiscount>- $15.00</ExpectedDiscount>
   <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
   <EmailAddress>no_one@anywhere.com</EmailAddress>
   <NameOnCard>${ShippingFirstName} ${ShippingLastName}</NameOnCard>
@@ -23,4 +23,5 @@
   <ExpirationMonth>April</ExpirationMonth>
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>999</SecurityCode>
+  <ggg></ggg>
 </data>

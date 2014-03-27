@@ -5,15 +5,6 @@
   <CatalogLevel2>Clothing</CatalogLevel2>
   <CatalogLevel3>Tops</CatalogLevel3>
   <ProductName>Animal V-Neck Cardigan</ProductName>
-  <ShippingMethod>2-Day Express</ShippingMethod>
-  <ShippingFirstName>John</ShippingFirstName>
-  <ShippingLastName>Buyer</ShippingLastName>
-  <ShippingAddress>123 Mockingbird</ShippingAddress>
-  <ShippingCountry>United States</ShippingCountry>
-  <ShippingState>New Hampshire</ShippingState>
-  <ShippingCity>Nashua</ShippingCity>
-  <ShippingZipCode>03030</ShippingZipCode>
-  <ShippingPhone>603-456-7890</ShippingPhone>
   <ExpectedDiscount>- $8.00</ExpectedDiscount>
   <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
   <EmailAddress>no_one@anywhere.com</EmailAddress>
@@ -23,4 +14,5 @@
   <ExpirationMonth>April</ExpirationMonth>
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>999</SecurityCode>
+  <BonusProductName>Platinum Red Stripes Easy Care Fitted Shirt</BonusProductName>
 </data>

@@ -2,7 +2,10 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Clicks a Second Catalog Level Name on the left menu of a page  Example in 'Womens', clicks 'Clothing'.</description>
   <parameter name="CategoryName"/>
-  <module name="library.function.FClick">
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=a.refinement-link[title='@{CategoryName}']"/>
+  </module>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=a.refinement-link[title='@{CategoryName}']"/>
   </module>
 </scriptmodule>
