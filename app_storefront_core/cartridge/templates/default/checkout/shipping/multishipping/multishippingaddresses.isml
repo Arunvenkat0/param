@@ -91,13 +91,13 @@
 										<isset name="address" value="${option.object}" scope="page"/>
 										<isif condition="${!empty(address.ID)}">
 											<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page"/>
-										<iselse>
+										<iselse/>
 											<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page"/>
 										</isif>
 										<option value="${option.optionId}" <isif condition="${option.selected}">selected="selected"</isif>><isprint value="${prefix}"/> <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
 									</isloop>
 								</select>
-							<iselse>
+							<iselse/>
 								<div>
 									${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}
 								</div>

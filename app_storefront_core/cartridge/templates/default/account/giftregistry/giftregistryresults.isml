@@ -34,7 +34,7 @@
 				</isloop>
 			</table>
 			
-		<iselse>
+		<iselse/>
 
 			<p>
 				${Resource.msg('giftregistryresults.emptymessage','account',null)}

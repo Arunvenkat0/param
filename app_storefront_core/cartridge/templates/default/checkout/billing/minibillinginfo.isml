@@ -44,7 +44,7 @@
 				</iscomment>
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<div>${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}: <isprint value="${paymentInstr.maskedGiftCertificateCode}"/></div>
-				<iselse>	
+				<iselse/>	
 					<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${true}"/>						
 					<div>

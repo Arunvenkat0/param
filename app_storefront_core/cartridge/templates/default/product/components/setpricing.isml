@@ -42,10 +42,10 @@
 			<isif condition="${pdict.Product.optionProduct}">
 				<isif condition="${pdict.CurrentOptionModel != null}">
 					<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product, pdict.CurrentOptionModel)}" scope="page"/>
-				<iselse>
+				<iselse/>
 					<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product, pdict.Product.getOptionModel())}" scope="page"/>
 				</isif>
-			<iselse>
+			<iselse/>
 				<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product)}" scope="page"/>
 			</isif>
 		</isif>
@@ -65,7 +65,7 @@
 <isif condition="${pdict.Product.master && pdict.Product.priceModel.isPriceRange()}"/>
 	<isset name="ProductMinPrice" value="${pdict.ProductMinPrice + pdict.Product.priceModel.minPrice}" scope="pdict" />
 	<isset name="ProductMaxPrice" value="${pdict.ProductMaxPrice + pdict.Product.priceModel.maxPrice}" scope="pdict" />
-<iselse>	
+<iselse/>	
 	
 	<isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}">
 		

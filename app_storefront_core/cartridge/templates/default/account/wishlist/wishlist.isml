@@ -75,7 +75,7 @@
 					<button type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPrivate.htmlName}">
 						${Resource.msg('wishlist.listprivate','account',null)}
 					</button>
-				<iselse>
+				<iselse/>
 					<button type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPublic.htmlName}">
 						${Resource.msg('wishlist.listpublic','account',null)}
 					</button>
@@ -98,7 +98,7 @@
 			
 			</form>
 				
-		<iselse>
+		<iselse/>
 		
 			<h2>
 				<isprint value="${pdict.ProductList.owner.profile.firstName}"/> 
@@ -115,7 +115,7 @@
 			<h2>${Resource.msg('wishlist.empty','account',null)}</h2>
 			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('wishlist.emptyadd','account',null)}</a>
 				
-		<iselse>
+		<iselse/>
 		
 			
 
@@ -183,7 +183,7 @@
 														<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
 															<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">		
 																<isinputfield formfield="${item.quantity}" type="input"/>
-															<iselse>
+															<iselse/>
 																<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span>
 																<span class="value"><isprint value="${item.quantity.value}"/></span>
 															</isif>													
@@ -216,7 +216,7 @@
 												</div>
 								
 												
-											<iselse>
+											<iselse/>
 											
 											
 												<iscomment> Date added -------------------------------------- </iscomment>
@@ -263,7 +263,7 @@
 															<button type="submit" name="${item.addGiftCertificateToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small">
 																${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 															</button>													
-														<iselse>												
+														<iselse/>												
 															<label for="Quantity">${Resource.msg('global.qty','locale',null)}:</span>
 															<input class="input-text" type="text" name="Quantity" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
 															<button type="submit" name="${item.addItemToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small add-to-cart">

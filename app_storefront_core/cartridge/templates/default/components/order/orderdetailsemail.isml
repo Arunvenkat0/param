@@ -36,7 +36,7 @@
 
 			<isif condition="${Order.paymentInstruments.length == 1}">
 				<b>${Resource.msg('orderdetails.paymentmethod','components',null)}</b>
-			<iselse>
+			<iselse/>
 				<b>${Resource.msg('orderdetails.paymentmethods','components',null)}</b>
 			</isif>
 			
@@ -57,7 +57,7 @@
 			<b>${Resource.msg('orderdetails.paymenttotal','components',null)}</b>
 			<isif condition="${Order.shipments.length > 1}">
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
-			<iselse>
+			<iselse/>
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
 				<br />			
 			</isif> 
@@ -84,7 +84,7 @@
 						<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${empty(shipment.custom.shipmentType) || shipment.custom.shipmentType != 'instore'}"/>
 							<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('orderdetails.shippingto','components',null)}</th>
-						<iselse>
+						<iselse/>
 							<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>		
 						</isif>
 					</tr>
@@ -105,7 +105,7 @@
 					    	<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 					    	<isif condition="${productLineItem.bonusProductLineItem}">
 					    		${Resource.msg('global.bonus','locale',null)}
-					    	<iselse>
+					    	<iselse/>
 				            	<isprint value="${productLineItem.adjustedPrice}"/>				    						            
 					            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 									<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
@@ -126,7 +126,7 @@
 						    		${Resource.msg('orderdetails.shippingmethod','components',null)}
 					    			<isif condition="${!empty(shipment.shippingMethod)}">
 						               <isprint value="${shipment.shippingMethod.displayName}"/>
-									<iselse>
+									<iselse/>
 						               <isprint value="${shipment.shippingMethodID}"/>
 									</isif>
 						    	</div>
@@ -136,7 +136,7 @@
 				    					${Resource.msg('orderdetails.notshipped','components',null)}
 				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
 				    					${Resource.msg('orderdetails.shipped','components',null)}
-				    				<iselse>
+				    				<iselse/>
 				    					${Resource.msg('orderdetails.notknown','components',null)}
 				    				</isif>
 						    	</div>
@@ -161,7 +161,7 @@
 					<td colspan="4" style="${Resource.msg('email.tablecell','email',null)}">
 						<isif condition="${!empty(shipment.giftMessage)}">
 							<isprint value="${shipment.giftMessage}"/>
-						<iselse>
+						<iselse/>
 							&nbsp;
 						</isif>
 					</td>
@@ -228,18 +228,18 @@
 						<td colspan="4" style="${Resource.msg('email.tablecell','email',null)}">
 							<isif condition="${!empty(shipment.giftMessage)}">
 								<isprint value="${shipment.giftMessage}"/>
-							<iselse>
+							<iselse/>
 								&nbsp;
 							</isif>
 						</td>
 					</tr>
-				<iselse>
+				<iselse/>
 					<tr>
 						<td colspan="4" style="${Resource.msg('email.tablecell','email',null)}">
 							<isset name="theGiftCert" value="${shipment.giftCertificateLineItems.iterator().next()}" scope="page"/>
 							<isif condition="${!empty(theGiftCert.message)}">
 								<isprint value="${theGiftCert.message}"/>
-							<iselse>
+							<iselse/>
 								&nbsp;
 							</isif>
 						</td>

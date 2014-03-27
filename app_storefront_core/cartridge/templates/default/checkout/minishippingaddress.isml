@@ -43,14 +43,14 @@
 		<div class="shippingmethod">
 			<isif condition="${!empty(pdict.p_shipment.shippingMethod)}">
 				<isprint value="${pdict.p_shipment.shippingMethod.displayName}"/>
-			<iselse>
+			<iselse/>
 				<isprint value="${pdict.p_shipment.shippingMethodID}"/>
 			</isif>
 			-
 			<isif condition="${!empty(pdict.p_shipment.shippingPriceAdjustments)}">
 				<span class="shippingunadjusted"><isprint value="${pdict.p_shipment.shippingTotalPrice}"/></span>
 				<span class="promotiondescription"><isprint value="${pdict.p_shipment.adjustedShippingTotalPrice}"/></span>
-			<iselse>
+			<iselse/>
 				<isprint value="${pdict.p_shipment.shippingTotalPrice}"/>
 			</isif>
 		</div>

@@ -44,7 +44,7 @@
 	<div class="content-slot slot-grid-header">
 		<isif condition="${!empty(pdict.ProductSearchResult.category)}">
 			<isslot id="cat-banner" context="category" description="Category Banner" context-object="${pdict.ProductSearchResult.category}"/>
-		<iselse>
+		<iselse/>
 			<isslot id="search-result-banner" description="Promotional Search Result Banner" context="global"/>
 		</isif>
 	</div>
@@ -109,7 +109,7 @@
 			
 		</isif>
 						        
-	<iselse>
+	<iselse/>
 
 		<iscomment>display no results</iscomment>
 		<div class="no-results">

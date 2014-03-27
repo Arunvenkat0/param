@@ -4,6 +4,6 @@
 </iscomment>
 {
 	"giftCertificate": {
-	    "removed": <isif condition="${pdict.GiftCertRemoveStatus != null && pdict.GiftCertRemoveStatus.status == dw.system.Status.OK}">true<iselse>false</isif>
+	    "removed": <isif condition="${pdict.GiftCertRemoveStatus != null && pdict.GiftCertRemoveStatus.status == dw.system.Status.OK}">true<iselse/>false</isif>
 	}
 }
