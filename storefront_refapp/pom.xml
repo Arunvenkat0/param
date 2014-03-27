@@ -3,7 +3,7 @@
     <parent>
         <groupId>dw.ecom</groupId>
         <artifactId>sitegen</artifactId>
-        <version>14.4.0.6</version>
+        <version>14.4.0.7-SNAPSHOT</version>
     </parent>
     
 	<!-- group id and version inherited from parent -->
