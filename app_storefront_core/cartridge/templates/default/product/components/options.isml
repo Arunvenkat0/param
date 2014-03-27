@@ -16,7 +16,7 @@
 	<isif condition="${pdict.Product.optionProduct}">
 		<isif condition="${pdict.CurrentOptionModel != null}">
 			<isset name="POM" value="${pdict.CurrentOptionModel}" scope="page"/>
-		<iselse>
+		<iselse/>
 			<isset name="POM" value="${pdict.Product.getOptionModel()}" scope="page"/>
 		</isif>
 		<isif condition="${!empty(POM.options)}">
@@ -31,7 +31,7 @@
 								<isloop items="${POM.getOptionValues(Option)}" var="OptionValue">
 									<isif condition="${POM.isSelectedOptionValue(Option, OptionValue)}">
 										<isset name="selected" value="${'selected="selected"'}" scope="page"/>
-									<iselse>
+									<iselse/>
 										<isset name="selected" value="" scope="page"/>
 									</isif>	
 									<isscript>

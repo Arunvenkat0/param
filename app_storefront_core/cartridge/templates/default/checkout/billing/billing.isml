@@ -21,7 +21,7 @@
     
     <isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
     	<ischeckoutprogressindicator step="2" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
-	<iselse>
+	<iselse/>
 		<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
@@ -123,7 +123,7 @@
 		<legend>
 			<isif condition="${pdict.Basket.giftCertificateLineItems.size() == 0 && gcApplicable == 'true'}">
 				${Resource.msg('billing.giftcouponheader','checkout',null)}
-			<iselse>
+			<iselse/>
 				${Resource.msg('billing.couponheader','checkout',null)}
 			</isif>
 		</legend>
@@ -133,7 +133,7 @@
 		<iscomment>coupon code / gift certificate area</iscomment>
 			<isif condition="${gcApplicable == 'true'}">
 				<iscontentasset aid="checkout-giftcertcoupon-help"/>
-			<iselse>
+			<iselse/>
 				<iscontentasset aid="checkout-coupon-help"/>
 			</isif>
 					

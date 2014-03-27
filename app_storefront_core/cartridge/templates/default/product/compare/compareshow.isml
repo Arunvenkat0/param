@@ -22,7 +22,7 @@
 								<isloop items="${pdict.CurrentForms.compare.categories.options}" var="cat">
 									<isif condition="${cat.optionId == pdict.CurrentForms.compare.object.category}">
 										<option value="${cat.optionId}" selected="selected">${Resource.msg(cat.label, 'forms', null)}</option>
-									<iselse>
+									<iselse/>
 										<option value="${cat.optionId}">${Resource.msg(cat.label, 'forms', null)}</option>
 									</isif>
 								</isloop>
@@ -78,7 +78,7 @@
 				        <div class="add-to-gift-registry">
 				        	<a href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', compareProduct.ID)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
 				        </div>
-				    <iselse>
+				    <iselse/>
 							<isscript>
 								var product : dw.catalog.Product = compareProduct;
 								var varID : String; 
@@ -130,7 +130,7 @@
 				<isloop items="${attributeGroup.attributes}" var="attribute">
 					<isif condition="${Index % 2 == 0}">
 						<tr class="evenattributerow">
-					<iselse>
+					<iselse/>
 						<tr class="oddattributerow">
 					</isif>
 						<td class="productattribute"><isprint value="${attribute.object.displayName}"/>:</td>
@@ -158,7 +158,7 @@
 								<isif condition="${attribute.object.descriptor.valueTypeCode == attribute.object.descriptor.VALUE_TYPE_BOOLEAN}">							
 									<isif condition="${compareProduct.getAttributeModel().getValue(attribute.object.descriptor)}">
 										${Resource.msg('global.yes','locale',null)}
-									<iselse>
+									<iselse/>
 										${Resource.msg('global.no','locale',null)}
 									</isif>
 								<iselseif condition="${attribute.object.descriptor.valueTypeCode == attribute.object.descriptor.VALUE_TYPE_DATETIME}">
@@ -167,19 +167,19 @@
 								<iselseif condition="${attribute.object.descriptor.multiValueType}">				
 									<isif condition="${value == '-'}">
 										<isprint value="${value}"/>
-									<iselse>
+									<iselse/>
 										<isloop items="${compareProduct.getAttributeModel().getDisplayValue(attribute.object.descriptor)}" var="DisplayValue" status="loopstate">														
 											<isprint value="${DisplayValue}"/>														
 											<isif condition="${!loopstate.last}">, </isif>							
 										</isloop>
 									</isif>													
-								<iselse>
+								<iselse/>
 									<isif condition="${value == '-'}">
 										<isprint value="${value}"/>
-									<iselse>
+									<iselse/>
 									    <isif condition="${attribute.object.descriptor.requiresEncoding()}">
 											<isprint value="${compareProduct.getAttributeModel().getDisplayValue(attribute.object.descriptor)}" encoding="on"/>
-										<iselse>
+										<iselse/>
 											<isprint value="${compareProduct.getAttributeModel().getDisplayValue(attribute.object.descriptor)}" encoding="off"/>
 										</isif>
 									</isif>

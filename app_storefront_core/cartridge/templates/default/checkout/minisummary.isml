@@ -41,7 +41,7 @@
 	<div class="checkout-order-totals">
 		<isif condition="${checkoutstep > 3}">
 			<isordertotals p_lineitemctnr="${pdict.Basket}" p_showshipmentinfo="${true}" p_shipmenteditable="${true}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
-		<iselse>
+		<iselse/>
 			<isordertotals p_lineitemctnr="${pdict.Basket}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.estimatedtotal','locale',null)}"/>
 		</isif>
 	</div>

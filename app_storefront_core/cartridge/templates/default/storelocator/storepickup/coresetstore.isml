@@ -3,7 +3,7 @@
 
 <isif condition="${pdict.Stores.length == 0}">
 	${Resource.msgf('storelist.nostorefound','storepickup',null, new Number(dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupMaxDistance').value), dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').value, pdict.CurrentHttpParameterMap.zipCode.value )}
-<iselse>
+<iselse/>
 
 
 
@@ -26,7 +26,7 @@
 					<a href="${URLUtils.url('StoreInventory-SetStoreCore', 'storeid', Store.ID, 'plid', pdict.CurrentHttpParameterMap.pid, 'zipCode', pdict.CurrentHttpParameterMap.zipCode,'storepickup','false')}">${Resource.msg('storelist.changetohd','storepickup',null)}</a>
 				</isif>
 			</isif>		
-		<iselse>
+		<iselse/>
 			<a href="${URLUtils.url('StoreInventory-ShowSelectedStoreCore', 'storeId', Store.ID, 'pid', pdict.CurrentHttpParameterMap.pid, 'zipCode', pdict.CurrentHttpParameterMap.zipCode )}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 		</isif>
 

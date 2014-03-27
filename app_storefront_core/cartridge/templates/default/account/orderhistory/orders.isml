@@ -7,7 +7,7 @@
 			
 			<div class="no_orders">${Resource.msg('orders.noorders','account',null)}</div>
 		
-		<iselse>
+		<iselse/>
 		
 			<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.orders.htmlName}">
 			
@@ -52,17 +52,17 @@
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
 											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
-										<iselse>
+										<iselse/>
 											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</td>
 										</isif>	
 										<th class="order-items">${Resource.msg('orders.items','account',null)}</td>
 										<th class="order-total-price">${Resource.msg('orders.ordertotal','account',null)}</td>
 									</tr>
-								<iselse>
+								<iselse/>
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
 											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
-										<iselse>									
+										<iselse/>									
 											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</th>
 										</isif>						
 										<th class="order-items">${Resource.msg('orders.items','account',null)}</th>
@@ -78,7 +78,7 @@
 										<isif condition="${Shipment.giftCertificateLineItems.size() == 1}">
 											<isset name="theGiftCert" value="${Shipment.giftCertificateLineItems.iterator().next()}" scope="page"/>
 											<span class="value">${theGiftCert.recipientEmail}</span>
-										<iselse>
+										<iselse/>
 											<span class="value"><isprint value="${Shipment.shippingAddress.fullName}" /></span>
 										</isif>
 		
@@ -91,7 +91,7 @@
 												<iscomment>if we have more product line items than the max page size, display view all link and create hidden div</iscomment>
 												<isif condition="${ ( pliloopstate.count - 1 ) >= pdict.OrderPagingModel.pageSize }">														
 													<li class="hidden">
-												<iselse>
+												<iselse/>
 													<li>
 												</isif>
 													
@@ -112,7 +112,7 @@
 										<iscomment>Display total price for order</iscomment>
 										<isif condition="${shipmentloopstate.first}">
 											<span class="value"><isprint value="${order.object.totalGrossPrice}"/></span>
-										<iselse>
+										<iselse/>
 											&nbsp;
 										</isif>
 									</td>

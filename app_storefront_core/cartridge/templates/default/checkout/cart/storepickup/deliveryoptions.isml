@@ -25,7 +25,7 @@
 		<isset name="store" value="${dw.catalog.StoreMgr.getStore(lineItem.custom.fromStoreId)}" scope="page"/>
 	<iselseif condition="${!empty(session.custom.storeId)}">
 		<isset name="store" value="${dw.catalog.StoreMgr.getStore(session.custom.storeId)}" scope="page"/>
-	<iselse>
+	<iselse/>
 		<isset name="store" value="${null}" scope="page"/>
 	</isif>
 	<isif condition="${!empty(store)}">
@@ -51,7 +51,7 @@
 		<isif condition="${!empty(store)}">
 			<isif condition="${!empty(storeinventoryATS) && storeinventoryATS >= lineItem.quantityValue}">
 				<span class="store-in-stock">${StringUtils.format(Resource.msg('cart.store.availableinstore','storepickup',null))}</span>
-			<iselse>
+			<iselse/>
 				<span class="store-error">${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}</span>			
 			</isif>
 		</isif>
@@ -61,10 +61,10 @@
 				<isif condition="${pdict.CurrentSession.custom.zipcode != null}">
 					<isif condition="${lineItem.custom.fromStoreId != null}">
 						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode,'storeid',lineItem.custom.fromStoreId)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
-					<iselse>
+					<iselse/>
 						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 					</isif>
-				<iselse>
+				<iselse/>
 					<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'cart', 'true')}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 				</isif>
 			</span>

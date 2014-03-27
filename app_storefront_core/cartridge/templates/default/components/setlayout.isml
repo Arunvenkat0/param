@@ -6,7 +6,7 @@
 
 	<!--  responsive NOT enabled -->
 	
-<iselse>	
+<iselse/>	
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
 	<isif condition="${empty(pdict.CurrentSession.custom.device) 
@@ -39,7 +39,7 @@
 			}
 		</script>
 	
-	<iselse>
+	<iselse/>
 		<isset name="siteUrl" value="${URLUtils.url('Home-MobileSite')}" scope="page"/>
 		<script type="text/javascript">
 			if (window.jQuery) {

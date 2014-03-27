@@ -23,8 +23,8 @@
 		"redemption": {
 
 		    "couponCode": "<isprint value="${pdict.NewCouponLineItem.couponCode}"/>",
-		    "applied": <isif condition="${pdict.NewCouponLineItem.applied}">true<iselse>false</isif>,
-		    "bonusPromotionApplied":  <isif condition="${bonusPromotionApplied}">true<iselse>false</isif>,
+		    "applied": <isif condition="${pdict.NewCouponLineItem.applied}">true<iselse/>false</isif>,
+		    "bonusPromotionApplied":  <isif condition="${bonusPromotionApplied}">true<iselse/>false</isif>,
 		    "bonusPromotionCallout":  "<isprint value="${bonusPromotionCallout}" />",
 		    "bonusPromotionDetails":  "<isprint value="${bonusPromotionDetails}" />",
 		    "gcRedemptions": [

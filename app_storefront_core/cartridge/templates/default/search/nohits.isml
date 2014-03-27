@@ -31,7 +31,7 @@
 						<isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/>
 					</a>
 					?
-				<iselse>
+				<iselse/>
 					<isscript>
     					importPackage( dw.suggest );
 					    // instantiate and configure the SuggestModel

@@ -14,7 +14,7 @@
 					<isif condition="${Definition.valueTypeCode == Definition.VALUE_TYPE_BOOLEAN}">
 						<isif condition="${pam.getValue(Definition)}">
 							${Resource.msg('global.yes','locale',null)}
-						<iselse>
+						<iselse/>
 							${Resource.msg('global.no','locale',null)}
 						</isif>
 					<iselseif condition="${Definition.valueTypeCode == Definition.VALUE_TYPE_DATETIME}">
@@ -24,10 +24,10 @@
 						<isloop items="${pam.getDisplayValue(Definition)}" var="DisplayValue" status="loopstateMulti">
 							<isprint value="${DisplayValue}"/><isif condition="${!loopstateMulti.last}">, </isif>
 						</isloop>
-					<iselse>
+					<iselse/>
 						<isif condition="${Definition.requiresEncoding()}">
 							<isprint value="${pam.getDisplayValue(Definition)}"/>
-						<iselse>
+						<iselse/>
 							<isprint value="${pam.getDisplayValue(Definition)}" encoding="off"/>
 						</isif>
 					</isif>

@@ -28,10 +28,10 @@
 					<isif condition="${inventoryRecord.ATS.available && inventoryRecord.ATS.value > inventoryRecord.stockLevel.value}">
 						<li class="on-order">${StringUtils.format(Resource.msg('global.allbackorder','locale',null))}</li>
 					</isif>
-				<iselse>
+				<iselse/>
 					<li class="is-in-stock">${Resource.msg('global.instock','locale',null)}</li>
 				</isif>
-			<iselse>
+			<iselse/>
 				<li class="is-in-stock">${Resource.msg('global.instock','locale',null)}</li>
 			</isif>
 		</ul>
@@ -56,12 +56,12 @@
 					<li class="on-order">
 						<isif condition="${pdict.p_hidedates}">
 							${Resource.msg('global.allbackorder','locale',null)}
-						<iselse>
+						<iselse/>
 							<isset name="inStockDate" value="${p_productli.product.availabilityModel.inventoryRecord.inStockDate.toDateString()}" scope="page"/>
 							${StringUtils.format(Resource.msg('global.inStockDate','locale',null), inStockDate)}
 						</isif>
 					</li>
-				<iselse>
+				<iselse/>
 					<li class="on-order">${Resource.msg('global.allbackorder','locale',null)}</li>
 				</isif>
 			</ul>
@@ -78,10 +78,10 @@
 			<isif condition="${empty(pdict.p_displayinstock) || pdict.p_displayinstock}">
 				<ul class="product-availability-list"><li class="is-in-stock">${Resource.msg('global.instock','locale',null)}</li></ul>
 			</isif>		
-		<iselse>
+		<iselse/>
 			<ul class="product-availability-list"><li class="notavailable">${Resource.msg('global.allnotavailable','locale',null)}</li></ul>
 		</isif>
-	<iselse>
+	<iselse/>
 	
 		<ul class="product-availability-list"><li class="notavailable">${Resource.msg('global.allnotavailable','locale',null)}</li></ul>
 		
