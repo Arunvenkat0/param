@@ -5,7 +5,7 @@
     <comment>Validate Product Presence</comment>
   </command>
   <command name="mouseOver" target="xpath=//div[@class='product-image']/a[starts-with(@title,'${ProductName}')]"/>
-  <command name="waitForElementPresent" disabled="true" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <action name="ClickQuickViewLink"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>

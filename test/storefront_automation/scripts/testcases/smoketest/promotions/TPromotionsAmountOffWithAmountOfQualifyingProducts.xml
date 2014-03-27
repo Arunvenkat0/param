@@ -20,6 +20,8 @@
     <parameter name="text" value="${NonPromoProductName}"/>
   </module>
   <action name="VERIFY_NoPromotion"/>
+  <command name="pause" value="1500"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="Refine"/>
   <command name="pause" value="1000"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
@@ -29,78 +31,41 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="//a[text()=&quot;${CatalogLevel3}&quot;]"/>
   </module>
-  <command name="pause" disabled="true" value="5000"/>
+  <action name="VERIFY-PromotionCallouts"/>
+  <command name="pause" value="1500"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="5"/>
   <action name="SelectProduct"/>
-  <module name="modules.catalog.OpenQuickView" disabled="true"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
-    <parameter name="ProductName" value="${ProductName}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>
-  <action name="CheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.GoToCheckout"/>
-  <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
-    <parameter name="FirstName" value="${ShippingFirstName}"/>
-    <parameter name="LastName" value="${ShippingLastName}"/>
-    <parameter name="Address1" value="${ShippingAddress}"/>
-    <parameter name="Address2" value=""/>
-    <parameter name="Country" value="${ShippingCountry}"/>
-    <parameter name="State" value="${ShippingState}"/>
-    <parameter name="City" value="${ShippingCity}"/>
-    <parameter name="ZipCode" value="${ShippingZipCode}"/>
-    <parameter name="Phone" value="${ShippingPhone}"/>
+  <action name="VERIFY-PromoNotInShoppingCart"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <action name="ChangeQuantity"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=td.item-quantity  &gt; input.input-text "/>
+    <parameter name="inputString" value="2"/>
   </module>
-  <action name="VERIFY-ShippingPromoDispayInShippingMethodLabel"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="//label[contains(text(),'${ShippingMethod}')]//span[2]"/>
-    <parameter name="textPattern" value="${ExpectedDiscountedShipping}"/>
-  </module>
-  <action name="SelectShipping"/>
-  <module name="library.module.app.sitegenesis.SelectShippingMethod">
-    <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>
-  <action name="VERIFY-ShippingPromoDiscountDisplayInOrderSummary"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.checkout-order-totals tr.order-shipping-discount  td:nth-child(2)"/>
-    <parameter name="textPattern" value="${ExpectedDiscount}"/>
-  </module>
-  <action name="Continue"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
-  </module>
-  <action name="CompleteOrder"/>
-  <module name="library.module.app.sitegenesis.EnterBillingEmail">
-    <parameter name="EmailAddress" value="${EmailAddress}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.EnterCreditCardInfo">
-    <parameter name="NameOnCard" value="${NameOnCard}"/>
-    <parameter name="CardType" value="${CardType}"/>
-    <parameter name="CardNumber" value="${CardNumber}"/>
-    <parameter name="ExpirationMonth" value="${ExpirationMonth}"/>
-    <parameter name="ExpirationYear" value="${ExpirationYear}"/>
-    <parameter name="SecurityCode" value="${SecurityCode}"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=button#update-cart"/>
   </module>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
+    <parameter name="clickElement" value="css=button#update-cart"/>
   </module>
-  <action name="VERIFY-PromotionBeforeSubmit"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.place-order-totals tr.order-shipping-discount  td:nth-child(2)"/>
+  <action name="VERIFY-PromoCalloutAndDiscountAmount"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//tr[@class='order-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
-  <action name="SubmitOrder"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button[value=&quot;Submit Order&quot;]"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//tr[@class='order-total']/td[2]"/>
+    <parameter name="textPattern" value="$349.90"/>
   </module>
-  <action name="VERIFY-PromoDiscountOnOrderConfirmation"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.order-confirmation-details tr.order-shipping-discount  td:nth-child(2)"/>
-    <parameter name="textPattern" value="${ExpectedDiscount}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//td[@class='cart-promo']/div/span[2]"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">

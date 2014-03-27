@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130245</tags>
   <description>Test Case ID:(C130245)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -12,17 +12,44 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
+  <action name="VERIFY-PromotionCallouts"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=div.promotional-message.first "/>
+    <parameter name="textPattern" value="regexpi:${PromotionName}"/>
+  </module>
+  <command name="assertXpathCount" target="//div[contains(text(),'${PromotionName}')]" value="5"/>
   <action name="SelectProduct"/>
-  <module name="modules.catalog.OpenQuickView" disabled="true"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink" disabled="true">
+  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink">
-    <parameter name="ProductName" value="${ProductName}"/>
+  <action name="VERIFY-PromotionCallout"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=div.promotion-callout"/>
+    <parameter name="textPattern" value="${PromotionName} Details ${PromotionName}"/>
+  </module>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="//a[contains(text(),'View Full Details')]"/>
+  </module>
+  <action name="VERIFY-FullDeatailsCallout"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=div.promotion-callout"/>
+    <parameter name="textPattern" value="${PromotionName} Details ${PromotionName}"/>
   </module>
   <action name="SelectSize"/>
+  <module name="library.module.app.sitegenesis.SelectSize">
+    <parameter name="Size" value="44"/>
+  </module>
+  <command name="pause" value="2000"/>
+  <action name="SelectColor"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=a.swatchanchor[title='Gray']"/>
+  </module>
+  <command name="pause" value="2000"/>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>
+  <action name="VERIFY-NoCalloutInShoppingCart"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
@@ -37,21 +64,11 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <action name="VERIFY-ShippingPromoDispayInShippingMethodLabel"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="//label[contains(text(),'${ShippingMethod}')]//span[2]"/>
-    <parameter name="textPattern" value="${ExpectedDiscountedShipping}"/>
-  </module>
   <action name="SelectShipping"/>
   <module name="library.module.app.sitegenesis.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
   </module>
   <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>
-  <action name="VERIFY-ShippingPromoDiscountDisplayInOrderSummary"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.checkout-order-totals tr.order-shipping-discount  td:nth-child(2)"/>
-    <parameter name="textPattern" value="${ExpectedDiscount}"/>
-  </module>
   <action name="Continue"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
@@ -68,12 +85,19 @@
     <parameter name="ExpirationYear" value="${ExpirationYear}"/>
     <parameter name="SecurityCode" value="${SecurityCode}"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
+  </module>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
   </module>
   <action name="VERIFY-PromotionBeforeSubmit"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.place-order-totals tr.order-shipping-discount  td:nth-child(2)"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//td[@class='cart-promo']/div/span[@class='value']"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[@class='order-summary-footer']//tr[@class='order-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="SubmitOrder"/>
@@ -81,8 +105,8 @@
     <parameter name="clickElement" value="css=button[value=&quot;Submit Order&quot;]"/>
   </module>
   <action name="VERIFY-PromoDiscountOnOrderConfirmation"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="css=div.order-confirmation-details tr.order-shipping-discount  td:nth-child(2)"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[@class='order-confirmation-details']//tr[@class='order-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CleanUp"/>

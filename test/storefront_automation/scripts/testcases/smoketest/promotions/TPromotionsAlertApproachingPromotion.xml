@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130264</tags>
   <description>Test Case ID:(C130264)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -12,6 +12,7 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
   </module>
   <action name="VERIFY-PromoCalloutIsVisisble"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="12"/>
   <action name="Refine"/>
   <module name="library.module.app.sitegenesis.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$20 - $49.99"/>
@@ -20,13 +21,11 @@
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
-    <parameter name="ProductName" value="${ProductName}"/>
-  </module>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessageNOTDisplayed"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="ChangeQuantity"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -34,6 +33,10 @@
   </module>
   <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
   <action name="VERIFY-ApproachingPromoMessageIsDisplayed"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value=""/>
+    <parameter name="textPattern" value=""/>
+  </module>
   <action name="ChangeQuantityAgain"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
