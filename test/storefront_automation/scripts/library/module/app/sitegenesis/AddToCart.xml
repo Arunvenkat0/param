@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Clicks the ProductDisplayPage "Add To Cart" button.</description>
+  <command name="pause" value="1500"/>
   <module name="library.module.app.sitegenesis.util.FClickAddToCartButton"/>
+  <command name="pause" value="1500"/>
 </scriptmodule>
