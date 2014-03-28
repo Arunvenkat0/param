@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <PromotionName>BuyXgetY</PromotionName>
-  <ProductName>Canon PowerShot S5 IS Digital Point and Shoot Camera</ProductName>
+  <ProductName1>canon-powershot-sd1100-is</ProductName1>
+  <ProductName2>nikon-d60-wlens</ProductName2>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>

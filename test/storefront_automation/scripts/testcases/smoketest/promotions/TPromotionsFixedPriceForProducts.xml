@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130268</tags>
   <description>Test Case ID:(C130268)</description>
   <module name="library.module.app.busmgr.EnablePromotion">
@@ -116,7 +116,7 @@
   <action name="FirstProduct"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>

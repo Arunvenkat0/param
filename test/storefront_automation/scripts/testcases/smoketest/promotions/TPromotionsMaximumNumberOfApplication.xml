@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130268</tags>
   <description>Test Case ID:(C130268)</description>
-  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -82,16 +82,16 @@
   <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="4"/>
   <action name="UpdateCart"/>
   <action name="VERIFY-PromoMessage"/>
-  <module name="library.function.FAssertText">
+  <module name="library.function.FAssertText" disabled="true">
     <parameter name="textElement" value=""/>
     <parameter name="textPattern" value=""/>
   </module>
-  <module name="library.function.FAssertText">
+  <module name="library.function.FAssertText" disabled="true">
     <parameter name="textElement" value=""/>
     <parameter name="textPattern" value=""/>
   </module>
   <action name="CleanUp"/>
-  <module name="library.module.app.busmgr.DisablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>

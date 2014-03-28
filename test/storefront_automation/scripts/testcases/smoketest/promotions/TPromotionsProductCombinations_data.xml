@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
   <PromotionName>ProductCombinations</PromotionName>
-  <CatalogLevel1>Electronics</CatalogLevel1>
-  <CatalogLevel2>Televisions</CatalogLevel2>
-  <CatalogLevel3>Flat Screen</CatalogLevel3>
-  <ProductName>Sony Bravia® XBR® 70" LCD High Definition Television</ProductName>
-  <ShippingMethod>2-Day Express</ShippingMethod>
-  <ShippingFirstName>John</ShippingFirstName>
-  <ShippingLastName>Buyer</ShippingLastName>
-  <ShippingAddress>123 Mockingbird</ShippingAddress>
-  <ShippingCountry>United States</ShippingCountry>
-  <ShippingState>New Hampshire</ShippingState>
-  <ShippingCity>Nashua</ShippingCity>
-  <ShippingZipCode>03030</ShippingZipCode>
-  <ShippingPhone>603-456-7890</ShippingPhone>
-  <ExpectedDiscount>- $8.00</ExpectedDiscount>
-  <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
-  <EmailAddress>no_one@anywhere.com</EmailAddress>
-  <NameOnCard>${ShippingFirstName} ${ShippingLastName}</NameOnCard>
-  <CardType>Visa</CardType>
-  <CardNumber>4444333322221111</CardNumber>
-  <ExpirationMonth>April</ExpirationMonth>
-  <ExpirationYear>2019</ExpirationYear>
-  <SecurityCode>999</SecurityCode>
+  <ProductName>TG720</ProductName>
 </data>
