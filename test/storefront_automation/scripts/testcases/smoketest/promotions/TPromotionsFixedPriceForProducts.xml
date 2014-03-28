@@ -110,37 +110,29 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
-  <action name="VerifyShoppingCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
-  <module name="library.function.FType">
-    <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
-    <parameter name="inputString" value="2"/>
-  </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
-  <action name="VERIFY-PromoMessage"/>
+  <action name="VERIFY-FinalCart"/>
+  <action name="FirstProduct"/>
   <module name="library.function.FAssertText">
-    <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[1]/td[2]/div/div[2]"/>
-    <parameter name="textPattern" value="- ${PromotionName}"/>
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
-    <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[2]/td[2]/div/div[2]"/>
-    <parameter name="textPattern" value="- ${PromotionName}"/>
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$209.00"/>
   </module>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="4"/>
-  <action name="UpdateCart"/>
-  <action name="VERIFY-PromoMessage"/>
+  <action name="SecondProduct"/>
   <module name="library.function.FAssertText">
-    <parameter name="textElement" value=""/>
-    <parameter name="textPattern" value=""/>
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value=""/>
-    <parameter name="textPattern" value=""/>
+  <module name="library.function.FAssertTextCaseInsensitive">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
+    <parameter name="plainString" value="$159.00"/>
   </module>
   <action name="CleanUp"/>
-  <module name="library.module.app.busmgr.DisablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
