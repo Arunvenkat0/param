@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130269</tags>
   <description>Test Case ID:(C130269)</description>
-  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -14,9 +14,6 @@
   </module>
   <action name="SelectProduct"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
-    <parameter name="ProductName" value="${ProductName}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.ClickProductGridProductNameLink" disabled="true">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <module name="library.module.app.sitegenesis.SelectSize">
@@ -40,6 +37,7 @@
   <action name="VerifyInShoppingCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessage"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="ChangeQuantity"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -47,6 +45,13 @@
   </module>
   <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
   <action name="VERIFY-PromoMessage"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.promo-adjustment"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="2">
+    <comment>There are 2 instances of the message for each applied product.</comment>
+  </command>
   <action name="ChangeQuantityAgain"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i1_quantity']"/>
@@ -54,8 +59,17 @@
   </module>
   <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
   <action name="VERIFY-PromoMessage"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="4"/>
   <action name="CleanUp"/>
-  <module name="library.module.app.busmgr.DisablePromotion" disabled="true">
+  <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>

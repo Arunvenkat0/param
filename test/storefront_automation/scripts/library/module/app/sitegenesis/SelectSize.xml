@@ -5,4 +5,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=div.product-variations ul.size a.swatchanchor[title='@{Size}']"/>
   </module>
+  <command name="pause" value="1500"/>
 </scriptmodule>

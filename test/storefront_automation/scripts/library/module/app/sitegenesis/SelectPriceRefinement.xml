@@ -4,4 +4,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=a.refinement-link[title='@{PriceLabelText}']"/>
   </module>
+  <command name="pause" value="1500"/>
 </scriptmodule>
