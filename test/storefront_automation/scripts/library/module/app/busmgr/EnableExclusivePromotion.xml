@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Uses Business Manager to only enable 'PromotionName' for 'Site'.  Disables ALL promotions then enables only 'PromotionName'.</description>
+  <parameter name="SiteName"/>
+  <parameter name="PromotionName"/>
+  <module name="library.module.app.busmgr.DisableAllPromotions">
+    <parameter name="SiteName" value="@{SiteName}"/>
+  </module>
+  <module name="library.module.app.busmgr.EnablePromotion">
+    <parameter name="SiteName" value="@{SiteName}"/>
+    <parameter name="PromotionName" value="@{PromotionName}"/>
+  </module>
+</scriptmodule>

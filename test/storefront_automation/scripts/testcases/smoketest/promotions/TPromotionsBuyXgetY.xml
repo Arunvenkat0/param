@@ -11,7 +11,6 @@
   <module name="library.module.app.sitegenesis.Search">
     <parameter name="SearchString" value="${ProductName1}"/>
   </module>
-  <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="ChangeQty"/>
@@ -26,6 +25,10 @@
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promo-adjustment"/>
     <parameter name="textPattern" value="1 x BuyXgetY"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$1,049.97"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -41,6 +44,10 @@
     <parameter name="textElement" value="css=.promo-adjustment"/>
     <parameter name="textPattern" value="2 x BuyXgetY"/>
   </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$1,049.97"/>
+  </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -55,6 +62,10 @@
     <parameter name="textElement" value="css=.promo-adjustment"/>
     <parameter name="textPattern" value="2 x BuyXgetY "/>
   </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$1,399.96"/>
+  </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -67,7 +78,11 @@
   <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promo-adjustment"/>
-    <parameter name="textPattern" value="1 x BuyXgetY"/>
+    <parameter name="textPattern" value="1 x ${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$1,049.97"/>
   </module>
   <action name="SearchProduct2"/>
   <module name="library.module.app.sitegenesis.Search">
@@ -75,6 +90,21 @@
   </module>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <action name="VERIFY-ShoppingCart"/>
+  <action name="Product1"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.promo-adjustment"/>
+    <parameter name="textPattern" value="1 x ${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$1,049.97"/>
+  </module>
+  <action name="Product2"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.price-total"/>
+    <parameter name="textPattern" value="$300.30"/>
+  </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='dwfrm_cart_shipments_i0_items_i1_quantity']"/>
@@ -91,6 +121,10 @@
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
     <parameter name="textPattern" value="2 x BuyXgetY"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
+    <parameter name="textPattern" value="$900.90"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">
