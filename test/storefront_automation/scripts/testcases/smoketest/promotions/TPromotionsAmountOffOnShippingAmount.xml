@@ -2,7 +2,11 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130275</tags>
   <description>Test Case ID:(C130275)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
+    <parameter name="SiteName" value="${SiteName}"/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
+  </module>
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -35,6 +39,7 @@
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
+  <action name="ContinueTest"/>
   <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
@@ -55,6 +60,7 @@
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
+  <action name="ContinueTest"/>
   <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
@@ -88,6 +94,11 @@
   <action name="SubmitOrder"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=button[value=&quot;Submit Order&quot;]"/>
+  </module>
+  <action name="VERIFY-ShippingDiscount"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-shipping-discount &gt; td:nth-child(2)"/>
+    <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">

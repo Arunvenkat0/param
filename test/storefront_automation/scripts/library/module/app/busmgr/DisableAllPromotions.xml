@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Uses Business Manager to disable ALL promotions.</description>
+  <parameter name="SiteName"/>
+  <action name="DisableALLPromotions-BlankArgumentCausesAllToBeSelected"/>
+  <module name="library.module.app.busmgr.DisablePromotion">
+    <comment>The blank 'PromotionName' argument will cause all promotions to be acted upon.</comment>
+    <parameter name="SiteName" value="@{SiteName}"/>
+    <parameter name="PromotionName" value=""/>
+  </module>
+</scriptmodule>

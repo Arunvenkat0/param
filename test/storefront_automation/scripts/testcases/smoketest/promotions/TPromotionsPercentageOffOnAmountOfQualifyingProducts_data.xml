@@ -4,6 +4,7 @@
   <CatalogLevel1>Mens</CatalogLevel1>
   <CatalogLevel2>Clothing</CatalogLevel2>
   <CatalogLevel3>Jackets &amp; Coats</CatalogLevel3>
+  <CatalogLevel3NegativeTest>Pants</CatalogLevel3NegativeTest>
   <ProductName>Modern Sport Coat</ProductName>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
