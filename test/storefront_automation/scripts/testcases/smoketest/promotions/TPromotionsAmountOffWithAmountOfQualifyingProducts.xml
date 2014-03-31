@@ -61,7 +61,7 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-total']/td[2]"/>
-    <parameter name="textPattern" value="$349.90"/>
+    <parameter name="textPattern" value="${ExpectedPrice}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//td[@class='cart-promo']/div/span[2]"/>

@@ -17,12 +17,12 @@
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <module name="library.module.app.sitegenesis.SelectSize">
-    <parameter name="Size" value="7"/>
+    <parameter name="Size" value="${Size}"/>
   </module>
   <command name="pause" value="1000"/>
   <module name="library.function.FClick">
     <comment>Select Width</comment>
-    <parameter name="clickElement" value="xpath=//a[@title='M']"/>
+    <parameter name="clickElement" value="xpath=//a[@title='${Width}']"/>
   </module>
   <command name="pause" value="1000"/>
   <action name="UseQuickViewToAddProductToCart"/>
@@ -33,7 +33,8 @@
     <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
     <parameter name="inputString" value="5"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=button#update-cart"/>
   </module>
   <module name="library.function.FClick">
@@ -60,11 +61,11 @@
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=label[for='shipping-method-002'] &gt; span.discount-shipping"/>
-    <parameter name="textPattern" value="$0.00"/>
+    <parameter name="textPattern" value="${DiscountedShippingCost}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>
-    <parameter name="textPattern" value="- $20.99"/>
+    <parameter name="textPattern" value="${ShippingDiscount}"/>
   </module>
   <action name="SelectShipping2"/>
   <module name="library.module.app.sitegenesis.SelectShippingMethod">
@@ -74,7 +75,7 @@
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=label[for='shipping-method-003'] &gt; span.discount-shipping"/>
-    <parameter name="textPattern" value="$0.00"/>
+    <parameter name="textPattern" value="${DiscountedShippingCost}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>

@@ -21,7 +21,7 @@
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping']/td[2]"/>
-    <parameter name="textPattern" value="N/A"/>
+    <parameter name="textPattern" value="${ShippingCostNA}"/>
   </module>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
@@ -29,7 +29,7 @@
   <action name="VERIFY-ShippingDetails"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=span.discount-shipping"/>
-    <parameter name="textPattern" value="$2.00"/>
+    <parameter name="textPattern" value="${ShippingCostAfterDiscount}"/>
   </module>
   <module name="library.module.app.sitegenesis.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>

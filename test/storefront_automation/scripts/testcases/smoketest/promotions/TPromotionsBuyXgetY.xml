@@ -24,11 +24,11 @@
   <action name="VERIFY-ShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promo-adjustment"/>
-    <parameter name="textPattern" value="1 x BuyXgetY"/>
+    <parameter name="textPattern" value="1 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$1,049.97"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal1}"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -42,11 +42,11 @@
   <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promo-adjustment"/>
-    <parameter name="textPattern" value="2 x BuyXgetY"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$1,049.97"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal1}"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -60,11 +60,11 @@
   <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promo-adjustment"/>
-    <parameter name="textPattern" value="2 x BuyXgetY "/>
+    <parameter name="textPattern" value="2 x ${PromotionName} "/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$1,399.96"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal2}"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -82,7 +82,7 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$1,049.97"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal1}"/>
   </module>
   <action name="SearchProduct2"/>
   <module name="library.module.app.sitegenesis.Search">
@@ -98,12 +98,12 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$1,049.97"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal1}"/>
   </module>
   <action name="Product2"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-total"/>
-    <parameter name="textPattern" value="$300.30"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal3}"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -116,15 +116,15 @@
   <action name="VERIFY-ShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="1 x BuyXgetY"/>
+    <parameter name="textPattern" value="1 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x BuyXgetY"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$900.90"/>
+    <parameter name="textPattern" value="${ExpectedItemTotal4}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">

@@ -13,7 +13,10 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3NegativeTest}"/>
   </module>
   <action name="VERIFY-NoPromoCallouts"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="OpenCatalogSection"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
@@ -25,7 +28,10 @@
     <parameter name="textElement" value="css=div.promotional-message.first "/>
     <parameter name="textPattern" value="regexpi:${PromotionName}"/>
   </module>
-  <command name="assertXpathCount" target="//div[contains(text(),'${PromotionName}')]" value="5"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="5"/>
+  </module>
   <action name="SelectProduct"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
@@ -45,19 +51,22 @@
   </module>
   <action name="SelectSize"/>
   <module name="library.module.app.sitegenesis.SelectSize">
-    <parameter name="Size" value="44"/>
+    <parameter name="Size" value="${Size}"/>
   </module>
   <command name="pause" value="2000"/>
   <action name="SelectColor"/>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=a.swatchanchor[title='Gray']"/>
+    <parameter name="clickElement" value="css=a.swatchanchor[title='${Color}']"/>
   </module>
   <command name="pause" value="2000"/>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <action name="VERIFY-NoCalloutInShoppingCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>

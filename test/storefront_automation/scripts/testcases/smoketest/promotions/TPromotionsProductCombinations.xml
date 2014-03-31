@@ -9,14 +9,14 @@
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <action name="SearchForProduct"/>
   <module name="library.module.app.sitegenesis.Search">
-    <parameter name="SearchString" value="${ProductName}"/>
+    <parameter name="SearchString" value="${ProductID}"/>
   </module>
   <action name="SelectSizeAndColor"/>
   <module name="library.module.app.sitegenesis.SelectSize">
-    <parameter name="Size" value="M"/>
+    <parameter name="Size" value="${Size}"/>
   </module>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="css= .Color  a[title='Wheat Nubuck']"/>
+    <parameter name="clickElement" value="css= .Color  a[title='${ProductName}']"/>
   </module>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
@@ -32,15 +32,15 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-total"/>
-    <parameter name="textPattern" value="$99.99"/>
+    <parameter name="textPattern" value="${PriceTotal}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.order-subtotal &gt; td:nth-child(2)"/>
-    <parameter name="textPattern" value="$99.99"/>
+    <parameter name="textPattern" value="${OrderSubTotal}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.order-total &gt; td:nth-child(2)"/>
-    <parameter name="textPattern" value="$99.99"/>
+    <parameter name="textPattern" value="${OrderTotal}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">

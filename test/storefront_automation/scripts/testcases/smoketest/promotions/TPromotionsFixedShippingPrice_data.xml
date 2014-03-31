@@ -4,6 +4,9 @@
   <CatalogLevel1>Electronics</CatalogLevel1>
   <CatalogLevel2>GPS Navigation</CatalogLevel2>
   <ProductName>TomTom Go 720 Portable GPS Unit</ProductName>
+  <ShippingCostNA>N/A</ShippingCostNA>
+  <ShippingCostAfterDiscount>$2.00</ShippingCostAfterDiscount>
+  <ShippingDiscount>- $13.99</ShippingDiscount>
   <ShippingMethod>Ground</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>
@@ -20,5 +23,4 @@
   <ExpirationMonth>April</ExpirationMonth>
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>999</SecurityCode>
-  <ShippingDiscount>- $13.99</ShippingDiscount>
 </data>
