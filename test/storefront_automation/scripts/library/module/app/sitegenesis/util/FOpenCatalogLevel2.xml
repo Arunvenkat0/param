@@ -5,7 +5,4 @@
   <module name="library.function.FClickAndWait">
     <parameter name="clickElement" value="css=a.refinement-link[title='@{CategoryName}']"/>
   </module>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value="css=a.refinement-link[title='@{CategoryName}']"/>
-  </module>
 </scriptmodule>
