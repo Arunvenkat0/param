@@ -14,7 +14,7 @@
   <action name="VERIFY-PromoMessage"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.promotion-callout"/>
-    <parameter name="textPattern" value="${PromotionName} Details ${PromotionName}"/>
+    <parameter name="textPattern" value="regexp:${PromotionName} Details.*"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.AddToCart"/>

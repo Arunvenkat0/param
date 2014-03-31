@@ -33,7 +33,7 @@
   <action name="VERIFY-PromotionCallout"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=div.promotion-callout"/>
-    <parameter name="textPattern" value="${PromotionName} Details ${PromotionName}"/>
+    <parameter name="textPattern" value="regexpi:${PromotionName} Details.*"/>
   </module>
   <module name="library.function.FClickAndWait">
     <parameter name="clickElement" value="//a[contains(text(),'View Full Details')]"/>
@@ -41,7 +41,7 @@
   <action name="VERIFY-FullDeatailsCallout"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=div.promotion-callout"/>
-    <parameter name="textPattern" value="${PromotionName} Details ${PromotionName}"/>
+    <parameter name="textPattern" value="regexpi:${PromotionName} Details.*"/>
   </module>
   <action name="SelectSize"/>
   <module name="library.module.app.sitegenesis.SelectSize">
