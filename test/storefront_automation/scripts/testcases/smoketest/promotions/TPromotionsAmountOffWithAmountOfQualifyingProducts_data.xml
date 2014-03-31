@@ -4,9 +4,10 @@
   <CatalogLevel1>Electronics</CatalogLevel1>
   <CatalogLevel2>Digital Cameras</CatalogLevel2>
   <CatalogLevel3>Kodak</CatalogLevel3>
+  <NonPromoRefinement>Canon</NonPromoRefinement>
+  <NonPromoProductName>Canon EOS 5D Mark II Digital SLR Camera (body only)</NonPromoProductName>
   <ProductName>Kodak EasyShare Z8612 Digital Point and Shoot Camera</ProductName>
   <ExpectedDiscount>- $50.00</ExpectedDiscount>
   <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
-  <NonPromoProductName>Canon EOS 5D Mark II Digital SLR Camera (body only)</NonPromoProductName>
   <ExpectedPrice>$349.90</ExpectedPrice>
 </data>
