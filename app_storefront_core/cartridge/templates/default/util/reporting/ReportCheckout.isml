@@ -37,7 +37,7 @@
 	                     'Step', 		StringUtils.formatNumber(1, '#,##0', locale),
                          'Name',        checkoutname
 	                     )}"/>                 
-<iselse>
+<iselse/>
 	<isinclude url="${URLUtils.url('ReportingEvent-Start',
 	                     'ID',			'Checkout',
 	                     'BasketID',	pdict.Basket.UUID,

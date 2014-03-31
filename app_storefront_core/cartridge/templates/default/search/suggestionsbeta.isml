@@ -169,7 +169,7 @@
                                 		<div class="search-suggestion-right-panel-product-image">
                                         	<isif condition="${productImage != null}">
                                           		<img src="${productImage.getURL()}" alt="${productImage.alt}" title="${productImage.title}" />
-                                          	<iselse>
+                                          	<iselse/>
                                          		<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${product.name}" title="${product.name}" />
                                         	</isif>
                                         </div>

@@ -73,7 +73,7 @@
 						
 						</div>
 						
-					<iselse>
+					<iselse/>
 					
 						<isif condition="${productListAddresses.size() > 0}">
 						
@@ -166,14 +166,14 @@
 		
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 				<isinclude template="checkout/shipping/storepickup/instoremessages"/>
-			<iselse>
+			<iselse/>
 				<isset name="instoreShipmentsExistst" value="${false}" scope="page"/>		
 			</isif>
 		
 			
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExistst}">
 				<div class="form-row form-row-button instore-continue-button">
-			<iselse>
+			<iselse/>
 				<div class="form-row form-row-button">
 			</isif>
 			

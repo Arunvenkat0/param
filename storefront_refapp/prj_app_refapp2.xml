@@ -26,14 +26,8 @@
             excludes=".settings/**,javasource_test/**,.classpath,**/.project,cartridge/*.properties,cartridge/impex/**,${refapp.data}/**" />
 
         <copy
-            todir="${cartridge.dist}/resources/cartridges/${deploy.core.cartridge}/release">
-            <fileset dir="${app.target}/${core.cartridge}/cartridge"
-                includes="**" />
-        </copy>
-
-        <copy
-            todir="${cartridge.dist}/resources/cartridges/${deploy.richui.cartridge}/release">
-            <fileset dir="${app.target}/${richui.cartridge}/cartridge"
+            todir="${cartridge.dist}/webapps">
+            <fileset dir="${cartridge.base}/build/webapps"
                 includes="**" />
         </copy>
     </target>

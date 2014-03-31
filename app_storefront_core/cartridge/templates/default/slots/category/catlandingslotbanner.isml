@@ -8,7 +8,7 @@
 			<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
 				<isif condition="${"slotBannerImage" in category.custom && !empty(category.custom.slotBannerImage)}">
 					<img src="${category.custom.slotBannerImage.getURL()}" alt="${category.displayName}"/>
-				<iselse>
+				<iselse/>
 					<!-- No Image Found Blank -->
 				</isif>
 			</a>					

@@ -23,6 +23,6 @@
 	<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
 <iselseif condition="${('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)}">
 	<isset name="StandardPrice" value="${PriceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault)}" scope="page"/>	
-<iselse>
+<iselse/>
     <isset name="StandardPrice" value="${PriceModel.getPriceBookPrice('list-prices')}" scope="page"/>
 </isif>

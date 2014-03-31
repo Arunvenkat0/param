@@ -33,7 +33,7 @@
 								<isset name="thumbnailUrl" value="${imageURL}" scope="page"/>
 								<isset name="imageAlt" value="${image.alt}" scope="page"/>
 								<isset name="imageTitle" value="${image.title}" scope="page"/>
-							<iselse>
+							<iselse/>
 								<isset name="thumbnailUrl" value="${URLUtils.httpStatic('/images/noimagesmall.png')}" scope="page"/>
 								<isset name="imageTitle" value="${p_productli.product.name}" scope="page"/>
 								<isset name="imageAlt" value="${p_productli.product.name}" scope="page"/>

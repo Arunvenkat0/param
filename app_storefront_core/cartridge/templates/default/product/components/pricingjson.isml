@@ -32,10 +32,10 @@
 			<isif condition="${pdict.Product.optionProduct}">
 				<isif condition="${pdict.CurrentOptionModel != null}">
 					<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product, pdict.CurrentOptionModel)}" scope="page"/>
-				<iselse>
+				<iselse/>
 					<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product, pdict.Product.getOptionModel())}" scope="page"/>
 				</isif>
-			<iselse>
+			<iselse/>
 				<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(pdict.Product)}" scope="page"/>
 			</isif>
 		</isif>

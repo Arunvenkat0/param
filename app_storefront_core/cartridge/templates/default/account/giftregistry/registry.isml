@@ -34,7 +34,7 @@
 					<button type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
 						${Resource.msg('giftregistry.makeregprivate','account',null)}
 					</button>
-				<iselse>
+				<iselse/>
 					<button type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
 						${Resource.msg('giftregistry.makeregpublic','account',null)}
 					</button>
@@ -77,7 +77,7 @@
 				<p>${Resource.msg('giftregistry.giftregnoitems','account',null)}</p>
 				<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('giftregistry.emptyadd','account',null)}</a>
 			
-			<iselse>
+			<iselse/>
 			
 				<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 					<span class="form-error">
@@ -147,7 +147,7 @@
 									
 										<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
 											<isinputfield formfield="${item.quantity}" type="input"/>
-										<iselse>
+										<iselse/>
 											<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span>
 											<span class="value"><isprint value="${item.quantity.value}"/></span>
 										</isif>
@@ -193,7 +193,7 @@
 											<button type="submit" name="${item.addGiftCertificate.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small">
 												${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 											</button>													
-										<iselse>												
+										<iselse/>												
 											<label for="Quantity">${Resource.msg('global.qty','locale',null)}:</span>
 											<input class="input-text" type="text" name="Quantity" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
 											<button type="submit" name="${item.addItemToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small add-to-cart">

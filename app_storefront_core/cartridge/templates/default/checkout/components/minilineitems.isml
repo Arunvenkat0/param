@@ -76,7 +76,7 @@
 				<div class="mini-cart-image">					
 					<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 						<img src="${productLineItem.product.getImage('small',0).getURL()}" alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}"/>
-					<iselse>
+					<iselse/>
 						<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${productLineItem.productName}"  title="${productLineItem.productName}"/>
 					</isif>					
 				</div>
@@ -100,7 +100,7 @@
 
 				    <isif condition="${productLineItem.bonusProductLineItem}">
 					    ${Resource.msg('global.bonus','locale',null)}
-				    <iselse>
+				    <iselse/>
 				    	<isset name="productTotal" value="${productLineItem.adjustedPrice}" scope="page"/>
 				    	<isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 							<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">

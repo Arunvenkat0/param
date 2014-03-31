@@ -10,7 +10,7 @@
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
 				<isif condition="${pdict.ProductSearchResult.count > 0}">
 					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('foldercontenthits.backtoproducts','rendering',null)}</a>
-				<iselse>
+				<iselse/>
 					<p>${Resource.msgf('foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
 				</isif>
 			</isif>
@@ -57,7 +57,7 @@
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
 				<isif condition="${pdict.ProductSearchResult.count > 0}">
 					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('foldercontenthits.backtoproducts','rendering',null)}</a>
-				<iselse>
+				<iselse/>
 					<p>${Resource.msgf('foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
 				</isif>
 			</isif>

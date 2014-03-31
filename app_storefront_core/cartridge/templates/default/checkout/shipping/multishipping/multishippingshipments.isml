@@ -87,7 +87,7 @@
 											<div class="instore-shipping-option"><isprint value="${shippingMethod.displayName}"/>: <isprint value="${shippingModel.getShippingCost(shippingMethod).getAmount()}"/> (<isprint value="${shippingMethod.description}"/>)</div>
 											</isif>
 										</isloop>
-								<iselse>
+								<iselse/>
 										${Resource.msg('cart.store.homedelivery','storepickup',null)} ${Resource.msg('multishippingshipments.shipment','checkout',null)} ${'#' + shipmentloop.count}
 										<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
 										<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
@@ -147,7 +147,7 @@
 										<div>
 											<isif condition="${shipment.custom.shipmentType == 'instore'}">
 												<a href="${URLUtils.https('Cart-Show')}">${Resource.msg('global.edit','locale',null)}</a>	
-											<iselse>
+											<iselse/>
 												<a href="${URLUtils.https('COShippingMultiple-Start')}">${Resource.msg('global.edit','locale',null)}</a>	
 											</isif>
 										</div>
@@ -164,7 +164,7 @@
 									<div class="form-row">
 										<isinputfield rowclass="store-pickup-message-text" formfield="${shipmentItem.storePickupMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
 									</div>
-								<iselse>
+								<iselse/>
 									<div class="form-row">
 										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}:</label>
 										<input class="input-radio js-isgiftyes" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftyes${shipmentItem.itemIndex}" value="true" <isif condition="${shipmentItem.isGift.value}">checked="checked"</isif> /> Yes
