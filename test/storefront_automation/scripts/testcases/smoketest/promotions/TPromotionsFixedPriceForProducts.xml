@@ -76,8 +76,6 @@
     <parameter name="textPattern" value="${PromotionName}"/>
   </module>
   <action name="ChangeAgain"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart" disabled="true"/>
-  <command name="pause" disabled="true" value="2000"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input[name='dwfrm_cart_shipments_i0_items_i1_quantity']"/>
     <parameter name="inputString" value="3"/>
@@ -86,13 +84,14 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-PromoMessages"/>
+  <command name="pause" value="2000"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
     <parameter name="textPattern" value="${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <action name="ChangeFirstItemQty"/>
   <command name="pause" value="2000"/>
@@ -104,9 +103,10 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-PromoApplication"/>
+  <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
@@ -114,9 +114,10 @@
   </module>
   <action name="VERIFY-FinalCart"/>
   <action name="FirstProduct"/>
+  <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+    <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
