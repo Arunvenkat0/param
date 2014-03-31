@@ -26,7 +26,7 @@
 	<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
 			<isif condition="${pdict.CurrentVariationModel != null}">
 				<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
-			<iselse>
+			<iselse/>
 				<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE" />
 			</isif>
 
@@ -141,7 +141,7 @@
 												</isif>
 												<isif condition="${!empty(VV.getImage('hi-res'))}">
 													<isset name="hiResURL" scope="page" value="${VV.getImage('hi-res').getURL()}" />
-												<iselse>
+												<iselse/>
 													<isset name="hiResURL" scope="page" value="${''}" />
 												</isif>
 												<li class="${swatchClass}">
@@ -161,7 +161,7 @@
 											</isif>
 										</li>								
 									</ul>							
-								<iselse>
+								<iselse/>
 									<ul class="swatches ${vaId.toLowerCase()}">							
 										<isset name="selectedSwatchValue" scope="page" value="${null}" />
 										<isloop items="${VAVALS}" var="VV">
@@ -189,7 +189,7 @@
                                                          >
                                                             <isprint value="${displayValue}"/>
                                                         </a>
-													<iselse>
+													<iselse/>
 														<a title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}" class="swatchanchor">
 															<isprint value="${displayValue}"/>
 														</a>
@@ -218,7 +218,7 @@
 								</isif>						
 								</div>
 							</li>
-							<iselse>
+							<iselse/>
 								<iscomment>Drop down list</iscomment>
 								<li class="attribute variant-dropdown">							
 									<label for="va-${vaId}">

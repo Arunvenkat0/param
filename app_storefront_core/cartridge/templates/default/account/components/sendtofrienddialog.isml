@@ -82,7 +82,7 @@
 					
 						<isif condition="${pdict.Product.master && pdict.CurrentVariationModel && pdict.CurrentVariationModel.variants.size() > 0}">
 							<isset name="imageProduct" value="${pdict.CurrentVariationModel.variants[0]}" scope="page"/>
-						<iselse>
+						<iselse/>
 							<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 						</isif>
 						
@@ -90,7 +90,7 @@
 							<isset name="imageUrl" value="${imageProduct.getImage('medium', 0).getURL()}" scope="page"/>
 							<isset name="imageAlt" value="${imageProduct.getImage('medium', 0).alt}" scope="page"/>
 							<isset name="imageTitle" value="${imageProduct.getImage('medium', 0).title}" scope="page"/>
-						<iselse>
+						<iselse/>
 							<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 							<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
 							<isset name="imageTitle" value="${pdict.Product.name}" scope="page"/>
@@ -123,7 +123,7 @@
 										<span class="value">
 											<isif condition="${SelectedVariationValue != null}">
 												<isprint value="${SelectedVariationValue.displayValue}"/>
-											<iselse>
+											<iselse/>
 												-
 											</isif>
 										</span>
@@ -150,7 +150,7 @@
 												
 						</div>
 						
-					<iselse>
+					<iselse/>
 					
 						<a title="${Resource.msg('global.storename','locale',null)}" href="${URLUtils.httpHome()}">
 							<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}" />
@@ -162,7 +162,7 @@
 				
 				<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.sendtofriend.message}" type="textarea" attribute3="data-character-limit" value3="250" />
 		
-			<iselse> 
+			<iselse/> 
 			
 				<iscomment>This is a request for send to friend preview</iscomment>
 					
@@ -180,7 +180,7 @@
 						<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 					   	<isset name="imageAlt" value="${image.alt}" scope="page"/>
 					   	<isset name="imageTitle" value="${image.title}" scope="page"/>
-					<iselse>
+					<iselse/>
 					  	<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 					  	<isset name="imageTitle" value="${item.object.product.name}" scope="page"/>
 					 	<isset name="imageAlt" value="${item.object.product.name}" scope="page"/>
@@ -215,7 +215,7 @@
 								<dd>
 									<isif condition="${SelectedVariationValue != null}">
 										<isprint value="${SelectedVariationValue.displayValue}"/>
-									<iselse>
+									<iselse/>
 										-
 									</isif>
 								</dd>

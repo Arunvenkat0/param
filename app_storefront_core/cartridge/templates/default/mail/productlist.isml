@@ -52,7 +52,7 @@ ul li.onorder {color:red;}
 		         <isif condition="${pdict.ProductList.coRegistrant != null && (pdict.ProductList.coRegistrant.firstName != '' || pdict.ProductList.coRegistrant.lastName != '')}">
 		         	<td style="font-weight:bold"><b><isprint value="${pdict.ProductList.coRegistrant.role}"/>:</b></td>
 		            <td><isprint value="${pdict.ProductList.coRegistrant.firstName}"/> <isprint value="${pdict.ProductList.coRegistrant.lastName}"/></td>
-		         <iselse>
+		         <iselse/>
 		           	<td></td>
 		           	<td></td>
 		         </isif>
@@ -105,7 +105,7 @@ ul li.onorder {color:red;}
 					</isif>
 					<isif condition="${item.priority==0}">
 						<!--  No Priority Set -->
-					<iselse>
+					<iselse/>
 						<div>
 							<b>${Resource.msg('wishlist.priority','account',null)}:</b> 
 							<isif condition="${item.priority==1}">${Resource.msg('productlist.1','account',null)}</isif>
@@ -119,7 +119,7 @@ ul li.onorder {color:red;}
 						<a href="${URLUtils.http('GiftCert-Purchase', 'from', pdict.CurrentForms.sendtofriend.friendsname.htmlValue, 'recipient', pdict.CurrentForms.sendtofriend.yourname.htmlValue)}" style="font-weight:bold;line-height:24pt">${Resource.msg('global.giftcertificate','locale',null)}</a>
 					<iselseif condition="${item.product == null || !item.product.availabilityModel.orderable}">
 						${Resource.msg('displayproductlistitems.notavailable','product',null)}
-					<iselse>
+					<iselse/>
 						<a href="${URLUtils.http('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
 					</isif>
 				</td>										

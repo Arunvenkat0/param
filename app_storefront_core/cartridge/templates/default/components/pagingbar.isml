@@ -59,7 +59,7 @@
 								<iscomment>This long line is needed to avoid extra whitespaces in the link text</iscomment>
 								<a class="page-<isprint value="${i.index + 1}" style="0"/>" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
 							</li>
-						<iselse>
+						<iselse/>
 							<li class="current-page">
 								<isprint value="${i.index + 1}" style="0"/>
 							</li>

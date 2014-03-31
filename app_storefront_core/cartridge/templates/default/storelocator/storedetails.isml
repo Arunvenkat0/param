@@ -10,7 +10,7 @@
 	
 	 	<isif condition="${pdict.Store.image != null}">
 	 		<img src="${pdict.Store.image.getURL()}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
-		<iselse>
+		<iselse/>
 			<img src="${URLUtils.staticURL(URLUtils.CONTEXT_LIBRARY, null, 'images/stores/store_locator_storefront.png')}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
 		</isif>	
 	

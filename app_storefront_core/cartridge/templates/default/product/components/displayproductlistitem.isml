@@ -54,7 +54,7 @@
 			${Resource.msg('displayproductlistitems.notavailable','product',null)}
 		</div>
 		
-	<iselse>
+	<iselse/>
 	
 		<div class="name ">
 			<a href="${URLUtils.http('Product-Show','pid', p_productli.product.ID)}">
