@@ -13,13 +13,16 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
   <action name="VERIFY-PromoMessage"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="5"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="5"/>
+  </module>
   <action name="SelectFirstProduct"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName1}"/>
   </module>
   <module name="library.module.app.sitegenesis.SelectSize">
-    <parameter name="Size" value="M"/>
+    <parameter name="Size" value="${Size}"/>
   </module>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
@@ -30,7 +33,7 @@
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-adjusted-total &gt; span:nth-child(1)"/>
-    <parameter name="textPattern" value="$94.99"/>
+    <parameter name="textPattern" value="${Product1ItemTotal}"/>
   </module>
   <action name="AddSecondProduct"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
@@ -43,7 +46,7 @@
     <parameter name="ProductName" value="${ProductName2}"/>
   </module>
   <module name="library.module.app.sitegenesis.SelectSize">
-    <parameter name="Size" value="M"/>
+    <parameter name="Size" value="${Size}"/>
   </module>
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <command name="pause" value="1000"/>
@@ -66,8 +69,8 @@
     <parameter name="Size" value="L"/>
   </module>
   <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-Product1"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[1]/td[2]/div/div[2]"/>
@@ -90,7 +93,7 @@
   <command name="assertNotElementPresent" target="css=tr.cart-row:nth-child(3) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-total"/>
-    <parameter name="textPattern" value="$99.99"/>
+    <parameter name="textPattern" value="${Product3TotalCost}"/>
   </module>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
@@ -121,10 +124,13 @@
   <command name="assertNotElementPresent" target="css=tr.cart-row:nth-child(3) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-total"/>
-    <parameter name="textPattern" value="$99.99"/>
+    <parameter name="textPattern" value="${Product3TotalCost}"/>
   </module>
   <action name="VERIFY-TotalPromoDisplayInstances-2perPromoProduct"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="4"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="4"/>
+  </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>

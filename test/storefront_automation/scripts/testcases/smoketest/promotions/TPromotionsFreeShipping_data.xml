@@ -5,6 +5,11 @@
   <CatalogLevel2>Accessories</CatalogLevel2>
   <CatalogLevel3>Shoes</CatalogLevel3>
   <ProductName>Incase</ProductName>
+  <ExpectedDiscount>- $29.99</ExpectedDiscount>
+  <Size>7</Size>
+  <Width>M</Width>
+  <ShippingDiscount>- $20.99</ShippingDiscount>
+  <DiscountedShippingCost>$0.00</DiscountedShippingCost>
   <ShippingMethod1>2-Day Express</ShippingMethod1>
   <ShippingMethod2>Overnight</ShippingMethod2>
   <ShippingFirstName>John</ShippingFirstName>
@@ -15,7 +20,6 @@
   <ShippingCity>Nashua</ShippingCity>
   <ShippingZipCode>03030</ShippingZipCode>
   <ShippingPhone>603-456-7890</ShippingPhone>
-  <ExpectedDiscount>- $29.99</ExpectedDiscount>
   <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
   <EmailAddress>no_one@anywhere.com</EmailAddress>
   <NameOnCard>${ShippingFirstName} ${ShippingLastName}</NameOnCard>

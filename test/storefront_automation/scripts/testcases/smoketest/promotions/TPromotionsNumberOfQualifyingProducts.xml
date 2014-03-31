@@ -16,15 +16,19 @@
   </module>
   <action name="VERIFY-NoPromoMessage"/>
   <command name="pause" value="1500"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="RefinePriceAgain"/>
   <module name="library.module.app.sitegenesis.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="${PriceRefinement2}"/>
   </module>
   <action name="VERIFY-PromoMessageDisplayed"/>
-  <command name="pause" value="2000"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="8"/>
-  <command name="pause" disabled="true" value="1000"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="8"/>
+  </module>
   <action name="SelectProduct"/>
   <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
@@ -34,8 +38,10 @@
   <action name="OpenShoppingCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoMessage"/>
-  <command name="pause" value="2000"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="ChangeQuantity"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
@@ -59,7 +65,10 @@
   </module>
   <action name="VERIFY-"/>
   <command name="pause" value="1500"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="AddAnotherProduct"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${NewCatalogLevel1}"/>

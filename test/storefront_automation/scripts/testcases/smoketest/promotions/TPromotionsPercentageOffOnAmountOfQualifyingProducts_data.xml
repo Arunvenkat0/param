@@ -6,6 +6,8 @@
   <CatalogLevel3>Jackets &amp; Coats</CatalogLevel3>
   <CatalogLevel3NegativeTest>Pants</CatalogLevel3NegativeTest>
   <ProductName>Modern Sport Coat</ProductName>
+  <Size>44</Size>
+  <Color>Gray</Color>
   <ShippingMethod>2-Day Express</ShippingMethod>
   <ShippingFirstName>John</ShippingFirstName>
   <ShippingLastName>Buyer</ShippingLastName>

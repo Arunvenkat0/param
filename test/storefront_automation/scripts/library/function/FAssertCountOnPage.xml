@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>1. Asserts occurences of 'string' on page equal 'numberExpected'.</description>
+  <parameter name="string"/>
+  <parameter name="numberExpected"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'@{string}')]" value="@{numberExpected}"/>
+</scriptmodule>
