@@ -4,5 +4,6 @@
   <CatalogLevel1>Womens</CatalogLevel1>
   <CatalogLevel2>Accessories</CatalogLevel2>
   <ProductName>Classic Wrap</ProductName>
-  <ExpectedDiscountedShipping>$7.99</ExpectedDiscountedShipping>
+  <ExpectedDiscount>- $5.10</ExpectedDiscount>
+  <ExpectedEstimatedTotal>$96.90</ExpectedEstimatedTotal>
 </data>
