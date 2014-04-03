@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130263</tags>
   <description>BUG Test Case ID:(C130263)</description>
   <module name="library.module.app.busmgr.EnablePromotion">
@@ -26,7 +26,10 @@
   <module name="library.module.app.sitegenesis.AddToCart"/>
   <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoCallout"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
   <action name="ChangeQuantity"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -56,19 +59,16 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="//ul[@class='swatches Color']//a[contains(text(),'Light Blue')]"/>
   </module>
-  <module name="library.function.FClickAndWait" disabled="true">
-    <parameter name="clickElement" value="//ul[@class='swatches Color']//a[contains(text(),'Light Blue')]"/>
-  </module>
+  <command name="pause" value="1500"/>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="//div[@id='bonus-product-list']/div[@class='bonus-product-item'][1]"/>
+    <parameter name="clickElement" value="css=button.button-select-bonus"/>
   </module>
+  <command name="pause" value="1500"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=button.add-to-cart-bonus"/>
   </module>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value=""/>
-  </module>
   <action name="VERIFY-BonusProductAdded"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value=""/>
     <parameter name="textPattern" value=""/>
