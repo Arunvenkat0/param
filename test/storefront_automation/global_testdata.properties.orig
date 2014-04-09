@@ -1,8 +1,0 @@
-# Global test data file.
-# This file was automatically generated. DO NOT EDIT.
-<<<<<<< HEAD
-shopURL = http://qa3.vbox.demandware.net/on/demandware.store/Sites-SiteGenesis-Site
-=======
-shopURL = https://dev05.lab03a.dw.demandware.net/s/SiteGenesis/home
->>>>>>> 16c72b0ea0c570685cf29ce26aef951fba945018
-shopName = Demandware SiteGenesis
