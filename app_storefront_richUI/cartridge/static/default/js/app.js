@@ -2547,8 +2547,9 @@ var app = (function (app, $) {
 
 		// get selected payment method from payment method form
 		var paymentMethodId = $cache.paymentMethodId.filter(":checked");
-		changePaymentMethod(paymentMethodId.length===0 ? "CREDIT_CARD" : paymentMethodId.val());
-
+		if($('.payment-method-options').length >0 ){
+			changePaymentMethod(paymentMethodId.length===0 ? "CREDIT_CARD" : paymentMethodId.val());
+		}
 		// select credit card from list
 		$cache.ccList.on("change", function () {
 			var cardUUID = $(this).val();
@@ -2655,6 +2656,14 @@ var app = (function (app, $) {
 				}
 
 				$cache.redemption.html(data.message);
+
+				//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
+				//this will force a page refresh to display the coupon message based on a parameter message
+				if(data.success && data.baskettotal==0){
+					var ccode = data.CouponCode;
+						window.location.assign(app.urls.billing);
+				}
+			
 			});
 		});
 	}

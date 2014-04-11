@@ -6,7 +6,7 @@
 			<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
 			<isif condition="${category.image != null}">
 				<img src="${category.image.httpURL}" alt="${category.displayName}" />
-			<iselse>
+			<iselse/>
 				<!-- BLANK -->
 			</isif>
 			</a>

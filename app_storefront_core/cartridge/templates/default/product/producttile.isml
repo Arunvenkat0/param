@@ -86,7 +86,7 @@
 	<isif condition="${!empty(selectableColors) && selectableColors.size() > 0}">
 		<isset name="firstColorVariation" value="${selectableColors.get(0)}" scope="page"/>
 		<isset name="image" value="${firstColorVariation.getImage('medium')}" scope="page"/>					
-	<iselse>
+	<iselse/>
 		<isset name="image" value="${Product.getImage('medium',0)}" scope="page"/>					
 	</isif>
 	
@@ -95,7 +95,7 @@
 		<isset name="thumbnailUrl" value="${image.getURL()}" scope="page"/>
 		<isset name="imageAlt" value="${image.alt}" scope="page"/>
 		<isset name="imageTitle" value="${image.title}" scope="page"/>
-	<iselse>
+	<iselse/>
 		<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagemedium.png')}" scope="page"/>
 		<isset name="imageAlt" value="${Product.name}" scope="page"/>
 		<isset name="imageTitle" value="${Product.name}" scope="page"/>
@@ -133,7 +133,7 @@
 			<iscomment>Product master price range depending on the variants</iscomment>
 			<isprint value="${Product.priceModel.minPrice}"/> - <isprint value="${Product.priceModel.maxPrice}"/>
 		
-		<iselse>
+		<iselse/>
 		
 			<iscomment>For Product master without a price range get the pricing from its first variant </iscomment>
 			<isif condition="${Product.master && !Product.priceModel.isPriceRange()}"/>
@@ -147,7 +147,7 @@
 			</iscomment>
 			<isif condition="${Product.optionProduct}">
 				<isset name="PriceModel" value="${Product.getPriceModel(Product.getOptionModel())}" scope="page"/>
-			<iselse>
+			<iselse/>
 				<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
 			</isif>
 
@@ -164,7 +164,7 @@
 					<span class="product-standard-price" title="Regular Price"><isprint value="${StandardPrice}"/></span>
 					<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 				</div>
-			<iselse>
+			<iselse/>
 				<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
 			</isif>
 
@@ -241,7 +241,7 @@
 						<isset name="swatchUrl" value="${colorSwatch.getURL()}" scope="page"/>
 						<isset name="swatchAlt" value="${colorSwatch.alt}" scope="page"/>
 						<isset name="swatchTitle" value="${colorSwatch.title}" scope="page"/>
-					<iselse>
+					<iselse/>
 						<isset name="swatchUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 						<isset name="swatchAlt" value="${colorValue.displayValue}" scope="page"/>
 						<isset name="swatchTitle" value="${colorValue.displayValue}" scope="page"/>
@@ -250,7 +250,7 @@
 						<isset name="thumbnailUrl" value="${colorThumbnail.getURL()}" scope="page"/>
 						<isset name="thumbnailAlt" value="${colorThumbnail.alt}" scope="page"/>
 						<isset name="thumbnailTitle" value="${colorThumbnail.title}" scope="page"/>
-					<iselse>
+					<iselse/>
 						<isset name="thumbnailUrl" value="${URLUtils.staticURL('/images/noimagesmall.png')}" scope="page"/>
 						<isset name="thumbnailAlt" value="${colorValue.displayValue}" scope="page"/>
 						<isset name="thumbnailTitle" value="${colorValue.displayValue}" scope="page"/>
@@ -263,7 +263,7 @@
 							<a class="swatch <isif condition="${varloop.first}">selected</isif>" title="<isprint value="${colorValue.displayValue}"/>" href="<isprint value="${productUrl}"/>">
 								<img class="swatch-image" src="${swatchUrl}" alt="${swatchAlt}" title="${swatchTitle}" data-thumb='{"src":"${thumbnailUrl}","alt":"${thumbnailAlt}","title":"${thumbnailTitle}"}'/>
 							</a>
-						<iselse>
+						<iselse/>
 							<span class="swatch">						
 								<img class="swatch-image" src="${swatchUrl}" alt="${swatchAlt}" title="${swatchTitle}" data-thumb='{"src":"${thumbnailUrl}","alt":"${thumbnailAlt}","title":"${thumbnailTitle}"}'/>
 							</span>						

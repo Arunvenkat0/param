@@ -120,7 +120,7 @@
 			<isif condition="${pdict.ProductList == null}">
 				<button class="button-text" type="submit" value="${Resource.msg('global.previous','locale',null)}" name="${pdict.CurrentForms.giftregistry.eventaddress.back.htmlName}">&laquo; <span>${Resource.msg('global.previous','locale',null)}</span></button>			
 				<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.submit','locale',null)}"><span>${Resource.msg('global.submit','locale',null)}</span></button>
-			<iselse>
+			<iselse/>
 				<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 			</isif>
 		</div>

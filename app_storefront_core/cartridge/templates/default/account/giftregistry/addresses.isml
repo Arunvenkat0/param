@@ -43,11 +43,11 @@
 							<option value="" selected="selected">Select</option>
 							<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
 								<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
-							<iselse>
+							<iselse/>
 								<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
 									<isif condition="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlValue == address.ID}">
 										<option value="${address.ID}" selected="selected">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
-									<iselse>
+									<iselse/>
 										<option value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
 									</isif>								
 								</isloop>
@@ -132,11 +132,11 @@
 								<option value="" selected="selected">Select</option>
 								<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
 									<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
-								<iselse>
+								<iselse/>
 									<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">														
 										<isif condition="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlValue == address.ID}">
 											<option value="${address.ID}" selected="selected">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
-										<iselse>
+										<iselse/>
 											<option value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
 										</isif>								
 									</isloop>
@@ -196,7 +196,7 @@
 					<isif condition="${pdict.ProductList == null}">
 						<button class="previous cancel" type="submit" value="&laquo; ${Resource.msg('global.previous','locale',null)}" name="${pdict.CurrentForms.giftregistry.eventaddress.back.htmlName}"><span>&laquo; ${Resource.msg('global.previous','locale',null)}</span></button>
 						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}"><span>${Resource.msg('global.continue','locale',null)}</span></button>
-					<iselse>
+					<iselse/>
 						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 					</isif>
 				</div>

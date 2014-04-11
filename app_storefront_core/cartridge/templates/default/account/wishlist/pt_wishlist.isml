@@ -32,7 +32,7 @@
 					<div class="secondary-navigation">
 						<isif condition="${pdict.CurrentCustomer.registered}">
 							<iscontentasset aid="account-nav-registered"/>
-						<iselse>
+						<iselse/>
 							<iscontentasset aid="account-nav-unregistered"/>
 						</isif>
 					</div>

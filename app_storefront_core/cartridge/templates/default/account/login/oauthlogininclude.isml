@@ -1,7 +1,7 @@
 <isif condition="${pdict.CurrentSession.customer.anonymous || pdict.CurrentSession.customer.externallyAuthenticated}">
 	<isif condition="${pdict.CurrentSession.customer.anonymous}">
 		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
-	<iselse>
+	<iselse/>
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
 	<iscomment>Login Unsuccessful Error Message</iscomment>

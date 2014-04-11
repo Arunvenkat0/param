@@ -53,7 +53,7 @@
 		<isset name="imageUrl" value="${imageProduct.getImage('large', 0).getURL()}" scope="page"/>
 		<isset name="imageAlt" value="${imageProduct.getImage('large', 0).alt}" scope="page"/>
 		<isset name="imageTitle" value="${imageProduct.getImage('large', 0).title}" scope="page"/>
-	<iselse>
+	<iselse/>
 		<isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
 		<isset name="imageTitle" value="${pdict.Product.name}" scope="page"/>
@@ -61,7 +61,7 @@
 	
 	<isif condition="${!empty(imageProduct.getImage('hi-res', 0))}">
 		<isset name="imageUrlHiRes" value="${imageProduct.getImage('hi-res', 0).getURL()}" scope="page"/>
-	<iselse>
+	<iselse/>
 		<isset name="imageUrlHiRes" value="${URLUtils.staticURL('/images/noimagelarge.png')}" scope="page"/>
 	</isif>
 	
@@ -71,7 +71,7 @@
 		<isif condition="${!empty(imageProduct.getImages('hi-res')) && imageProduct.getImages('hi-res').length>0}">
 			<isset name="hi_res" scope="page" value="${imageProduct.getImages('hi-res')[0].getURL().toString()}" />
 			<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
-		<iselse>
+		<iselse/>
 			<isset name="hi_res" scope="page" value="${''}" />
 			<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 		</isif>
@@ -158,7 +158,7 @@
 					<button id="add-all-to-cart" type="submit" value="${Resource.msg('global.addalltocart','locale',null)}" class="button-fancy-large add-all-to-cart"${disabledText}>
 						${Resource.msg('global.addalltocart','locale',null)}
 					</button>
-				<iselse>
+				<iselse/>
 					<isscript>
 						var updateSources = ["cart", "giftregistry", "wishlist"];
 						var source = pdict.CurrentHttpParameterMap.source.stringValue;
@@ -184,7 +184,7 @@
 			<isif condition="${pdict.isBundle}">
 				<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
 					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
-				<iselse>
+				<iselse/>
 					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
 				</isif>
 				<li><a class="wl-action" href="${wishlistUrl}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>

@@ -30,7 +30,7 @@
 						<td class="city">
 							<isif condition="${ProductList.object.shippingAddress != null}">
 								<isprint value="${empty(ProductList.object.shippingAddress)?'':ProductList.object.shippingAddress.city + ", " + ProductList.object.shippingAddress.stateCode }"/>
-								<iselse>
+								<iselse/>
 									<isprint value="${Resource.msg('wishlist.nolocationtoshow','account',null)}"/>
 							</isif>							
 						</td>
@@ -43,7 +43,7 @@
 				</isloop>
 			</table>
 
-		<iselse>
+		<iselse/>
 
 			<p>${Resource.msg('searchresult.emptymessage','account',null)}
 			
