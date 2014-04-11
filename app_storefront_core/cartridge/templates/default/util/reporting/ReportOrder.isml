@@ -60,9 +60,10 @@
 		<iscomment>Get Campaign ID</iscomment>
 		<isscript>
 			var campaignID : String = "N/A";
-			if ( priceAdjustment.campaignID != null )
+			var promotion : dw.campaign.Promotion = dw.campaign.PromotionMgr.getPromotion(priceAdjustment.promotionID);
+			if ( promotion != null )
 			{
-			    campaignID = priceAdjustment.campaignID;
+			    campaignID = promotion.campaign.ID;
 			}
 		</isscript>
 		<isinclude url="${URLUtils.url('ReportingEvent-Start',
@@ -86,9 +87,10 @@
 			<iscomment>Get Campaign ID</iscomment>
 			<isscript>
 				var campaignID : String = "N/A";
-				if ( priceAdjustment.campaignID != null )
+				var promotion : dw.campaign.Promotion = dw.campaign.PromotionMgr.getPromotion(shippingAdjustment.promotionID);
+				if ( promotion != null )
 				{
-				    campaignID = priceAdjustment.campaignID;
+				    campaignID = promotion.campaign.ID;
 				}
 			</isscript>
 			<isinclude url="${URLUtils.url('ReportingEvent-Start',
@@ -132,9 +134,10 @@
 				<iscomment>Get Campaign ID</iscomment>
 				<isscript>
 					var campaignID : String = "N/A";
-					if ( priceAdjustment.campaignID != null )
+					var promotion : dw.campaign.Promotion = dw.campaign.PromotionMgr.getPromotion(priceAdjustment.promotionID);
+					if ( promotion != null )
 					{
-					    campaignID = priceAdjustment.campaignID;
+					    campaignID = promotion.campaign.ID;
 					}
 				</isscript>
 				<isinclude url="${URLUtils.url('ReportingEvent-Start',
