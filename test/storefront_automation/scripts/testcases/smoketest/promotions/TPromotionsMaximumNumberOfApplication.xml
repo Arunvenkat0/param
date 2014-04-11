@@ -18,14 +18,14 @@
     <parameter name="numberExpected" value="5"/>
   </module>
   <action name="SelectFirstProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName1}"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessage"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=div.promo.first"/>
@@ -42,15 +42,15 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
   <action name="VERIFY-PromoCalloutMessages"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <command name="pause" value="1000"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessage"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[2]/td[2]/div/div[2]"/>
@@ -62,15 +62,15 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName3}"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="L"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="VERIFY-ShoppingCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-Product1"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[1]/td[2]/div/div[2]"/>
@@ -100,7 +100,7 @@
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
     <parameter name="inputString" value="2"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
   <action name="VERIFY-PromoMessage"/>
   <action name="VERIFY-Product1"/>
   <module name="library.function.FAssertText">

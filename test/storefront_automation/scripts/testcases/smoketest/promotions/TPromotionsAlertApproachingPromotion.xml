@@ -17,16 +17,16 @@
     <parameter name="numberExpected" value="12"/>
   </module>
   <action name="Refine"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$20 - $49.99"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessageNOTDisplayed"/>
   <module name="library.function.FAssertCountOnPage">
     <parameter name="string" value="${PromotionName}"/>
@@ -37,7 +37,7 @@
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
     <parameter name="inputString" value="2"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
   <action name="VERIFY-ApproachingPromoMessageIsDisplayed"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.cart-promo-approaching"/>
@@ -48,7 +48,7 @@
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
     <parameter name="inputString" value="3"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
   <action name="VERIFY-NoApproachingPromoMessage"/>
   <command name="assertNotElementPresent" target="css=.cart-promo-approaching"/>
   <action name="VERIFY-PromotionMessageBelowProduct"/>

@@ -48,7 +48,7 @@
     <parameter name="textElement" value="css=.address legend"/>
     <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
   </module>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address1" value="${ShippingAddressStreet}"/>

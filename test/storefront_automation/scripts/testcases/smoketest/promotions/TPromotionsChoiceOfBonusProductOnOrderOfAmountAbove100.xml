@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130263</tags>
-  <description>BUG Test Case ID:(C130263)</description>
+  <description>BUG: 'RAP-2172'
+ Test Case ID:(C130263)</description>
   <module name="library.module.app.busmgr.EnablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
@@ -14,17 +15,17 @@
   </module>
   <action name="SelectProduct"/>
   <action name="Refine"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$50 - $99.99"/>
   </module>
   <command name="pause" value="1500"/>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoCallout"/>
   <module name="library.function.FAssertCountOnPage">
     <parameter name="string" value="${PromotionName}"/>
@@ -35,7 +36,7 @@
     <parameter name="typeElement" value="css=input.input-text[name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
     <parameter name="inputString" value="2"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
   <action name="VERIFY-PromoCalloutDisplayed"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=a.select-bonus[title='Select Bonus Product']"/>
@@ -68,7 +69,7 @@
     <parameter name="clickElement" value="css=button.add-to-cart-bonus"/>
   </module>
   <action name="VERIFY-BonusProductAdded"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value=""/>
     <parameter name="textPattern" value=""/>

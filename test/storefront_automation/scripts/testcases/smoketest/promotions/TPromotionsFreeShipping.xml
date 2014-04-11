@@ -13,10 +13,10 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
   <command name="pause" value="1000"/>
@@ -26,14 +26,14 @@
   </module>
   <command name="pause" value="1000"/>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="IncreaseNumberOrdered"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
     <parameter name="inputString" value="5"/>
   </module>
-  <module name="library.module.app.sitegenesis.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
   <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=button#update-cart"/>
   </module>
@@ -41,9 +41,9 @@
     <parameter name="clickElement" value="css=button[value='Checkout']"/>
   </module>
   <action name="CheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.GoToCheckout" disabled="true"/>
-  <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.header.GoToCheckout" disabled="true"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -55,7 +55,7 @@
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
   <action name="SelectShipping1"/>
-  <module name="library.module.app.sitegenesis.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod1}"/>
   </module>
   <action name="VERIFY-ShippingDiscount"/>
@@ -68,7 +68,7 @@
     <parameter name="textPattern" value="${ShippingDiscount}"/>
   </module>
   <action name="SelectShipping2"/>
-  <module name="library.module.app.sitegenesis.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod2}"/>
   </module>
   <command name="pause" value="2000"/>
@@ -93,10 +93,10 @@
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CompleteOrder"/>
-  <module name="library.module.app.sitegenesis.EnterBillingEmail">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterBillingEmail">
     <parameter name="EmailAddress" value="${EmailAddress}"/>
   </module>
-  <module name="library.module.app.sitegenesis.EnterCreditCardInfo">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterCreditCardInfo">
     <parameter name="NameOnCard" value="${NameOnCard}"/>
     <parameter name="CardType" value="${CardType}"/>
     <parameter name="CardNumber" value="${CardNumber}"/>

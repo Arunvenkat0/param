@@ -8,7 +8,7 @@
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <action name="SearchForProduct"/>
-  <module name="library.module.app.sitegenesis.Search">
+  <module name="library.module.app.sitegenesis.header.Search">
     <parameter name="SearchString" value="${ProductName1}"/>
   </module>
   <action name="VERIFY-PromoMessage"/>
@@ -17,8 +17,8 @@
     <parameter name="textPattern" value="regexp:${PromotionName} Details.*"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="ChangeQty"/>
   <module name="library.function.FType">
     <parameter name="typeElement" value="//input[@name='dwfrm_cart_shipments_i0_items_i0_quantity']"/>
@@ -56,11 +56,11 @@
     <parameter name="textPattern" value="$1,201.20"/>
   </module>
   <action name="SearchProduct2"/>
-  <module name="library.module.app.sitegenesis.Search">
+  <module name="library.module.app.sitegenesis.header.Search">
     <parameter name="SearchString" value="${ProductName2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>

@@ -8,18 +8,18 @@
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <action name="SearchForProduct"/>
-  <module name="library.module.app.sitegenesis.Search">
+  <module name="library.module.app.sitegenesis.header.Search">
     <parameter name="SearchString" value="${ProductID}"/>
   </module>
   <action name="SelectSizeAndColor"/>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css= .Color  a[title='${ProductName}']"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
   <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">

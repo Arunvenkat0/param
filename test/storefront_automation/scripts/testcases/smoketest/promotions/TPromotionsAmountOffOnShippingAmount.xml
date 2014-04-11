@@ -6,10 +6,6 @@
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
-  <module name="library.module.app.busmgr.EnableExclusivePromotion">
-    <parameter name="SiteName" value="${SiteName}"/>
-    <parameter name="PromotionName" value="${PromotionName}"/>
-  </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
@@ -17,12 +13,15 @@
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="${Brand}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="VERIFY-ShippingNA"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping']/td[2]"/>
     <parameter name="textPattern" value="${ShippingCostNA}"/>
@@ -32,15 +31,15 @@
     <parameter name="textPattern" value="${ShippingCostNA}"/>
   </module>
   <action name="CheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.GoToCheckout"/>
-  <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
+  <module name="library.module.app.sitegenesis.header.GoToCheckout"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="ContinueTest"/>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -52,7 +51,7 @@
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
   <action name="SelectShipping"/>
-  <module name="library.module.app.sitegenesis.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
   </module>
   <action name="VERIFY-ShippingDiscount"/>
@@ -68,19 +67,17 @@
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="Continue"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
-  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>
   </module>
   <action name="CompleteOrder"/>
-  <module name="library.module.app.sitegenesis.EnterBillingEmail">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterBillingEmail">
     <parameter name="EmailAddress" value="${EmailAddress}"/>
   </module>
-  <module name="library.module.app.sitegenesis.EnterCreditCardInfo">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterCreditCardInfo">
     <parameter name="NameOnCard" value="${NameOnCard}"/>
     <parameter name="CardType" value="${CardType}"/>
     <parameter name="CardNumber" value="${CardNumber}"/>
@@ -88,13 +85,12 @@
     <parameter name="ExpirationYear" value="${ExpirationYear}"/>
     <parameter name="SecurityCode" value="${SecurityCode}"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
   </module>
   <action name="SubmitOrder"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=button[value=&quot;Submit Order&quot;]"/>
-  </module>
+  <module name="library.module.app.sitegenesis.checkout.placeorder.ClickSubmitOrder"/>
   <action name="VERIFY-ShippingDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.order-shipping-discount &gt; td:nth-child(2)"/>
