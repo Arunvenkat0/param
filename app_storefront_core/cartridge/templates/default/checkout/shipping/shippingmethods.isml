@@ -49,7 +49,7 @@
 					<isif condition="${shippingCost.shippingPriceAdjustmentsTotal != 0}">
 						<span class="standard-shipping"><isprint value="${shippingCost.baseShipping}"/></span> 
 						<span class="discount-shipping"><isprint value="${shippingCost.baseShippingAdjusted}"/></span>
-					<iselse>
+					<iselse/>
 						<span><isprint value="${shippingCost.baseShipping}"></span>
 					</isif>
 				
@@ -141,7 +141,7 @@
     		
 		</isloop>					
 
-	<iselse>
+	<iselse/>
 		<div class="no-shipping-methods">${Resource.msg('singleshipping.noshippingmethods','checkout',null)}</div><!-- END: noshippingmethods -->
 	</isif>
 

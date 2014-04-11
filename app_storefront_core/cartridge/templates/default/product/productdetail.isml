@@ -7,7 +7,7 @@
 						
 		<isif condition="${pdict.Product.productSet || pdict.Product.bundle}">
 			<isinclude template="product/producttopcontentPS" />
-		<iselse>
+		<iselse/>
 			<isinclude template="product/producttopcontent" />
 		</isif>
 		

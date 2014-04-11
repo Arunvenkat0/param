@@ -18,11 +18,11 @@
 		
 		<isif condition="${pdict.CurrentOptionModel != null}">
 			<isset name="PriceModel" value="${p_productli.product.getPriceModel(pdict.CurrentOptionModel)}" scope="page"/>
-		<iselse>
+		<iselse/>
 			<isset name="PriceModel" value="${p_productli.product.getPriceModel(p_productli.product.getOptionModel())}" scope="page"/>
 		</isif>
 		
-	<iselse>
+	<iselse/>
 	
 		<isset name="PriceModel" value="${p_productli.product.getPriceModel()}" scope="page"/>
 	
@@ -58,10 +58,10 @@
 				<isif condition="${p_productli.product.optionProduct}">
 					<isif condition="${pdict.CurrentOptionModel != null}">
 						<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(p_productli.product, pdict.CurrentOptionModel)}" scope="page"/>
-					<iselse>
+					<iselse/>
 						<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(p_productli.product, p_productli.product.getOptionModel())}" scope="page"/>
 					</isif>
-				<iselse>
+				<iselse/>
 					<isset name="PromotionalPrice" value="${promo.getPromotionalPrice(p_productli.product)}" scope="page"/>
 				</isif>
 			</isif>

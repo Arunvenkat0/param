@@ -70,7 +70,7 @@
 				<div class="form-row form-row-button">
 					<isif condition="${pdict.ProductList == null}">
 						<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}"><span>${Resource.msg('global.continue','locale',null)}</span></button>
-					<iselse>
+					<iselse/>
 						<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 					</isif>
 				</div>	

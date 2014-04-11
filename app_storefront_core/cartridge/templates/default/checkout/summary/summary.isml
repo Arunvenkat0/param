@@ -14,7 +14,7 @@
 	
 	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
     	<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
-	<iselse>
+	<iselse/>
 		<ischeckoutprogressindicator step="4" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
@@ -55,7 +55,7 @@
 							<td class="item-image">
 								<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 									<img src="${productLineItem.product.getImage('small',0).getURL()}" alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}"/>
-								<iselse>
+								<iselse/>
 									<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${productLineItem.productName}" title="${productLineItem.productName}"/>
 								</isif>
 								<isif condition="${productLineItem.bonusProductLineItem}">
@@ -84,7 +84,7 @@
 								    <span class="bonus-item">
 								    	${Resource.msg('global.bonus','locale',null)}
 								    </span>
-								<iselse>
+								<iselse/>
 									<iscomment>Otherwise, render price using call to adjusted price </iscomment>
 								    <isprint value="${productLineItem.adjustedPrice}" />
 								</isif>								
@@ -173,7 +173,7 @@
 						<td class="item-total">
 							<isif condition="${couponLineItem.applied}">
 								<span class="coupon-applied">${Resource.msg('summary.applied','checkout',null)}</span>
-							<iselse>
+							<iselse/>
 								<span class="coupon-not-applied">${Resource.msg('summary.notapplied','checkout',null)}</span>
 							</isif>
 						</td>

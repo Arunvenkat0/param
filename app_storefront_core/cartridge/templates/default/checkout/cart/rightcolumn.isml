@@ -51,7 +51,7 @@
 								<iscomment>cancel class is required by client side validation plugin to bypass validation for this action</iscomment>
 								<isif condition="${enableCheckout}">	
 									<button class="checkout-as-guest shadow-darker" type="submit" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${pdict.CurrentForms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
-								<iselse>
+								<iselse/>
 									<button type="submit" disabled="disabled" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${pdict.CurrentForms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
 								</isif>
 							</div>
@@ -64,7 +64,7 @@
 			
 		</div>
 		
-	<iselse>
+	<iselse/>
 	<iscomment>form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}"</iscomment>
 		<div class="account-welcome">
 		

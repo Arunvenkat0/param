@@ -13,7 +13,7 @@
 			<div class="bottom-banner-cell banner-cell-${loopstate.count}">
 				<isif condition="${"slotBannerImage" in category.custom && !empty(category.custom.slotBannerImage)}">
 					<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}"><img src="${category.custom.slotBannerImage.getURL()}" alt="${category.displayName}"/></a>
-				<iselse>
+				<iselse/>
 					<!-- No Image Found Blank -->
 				</isif>
 			</div>

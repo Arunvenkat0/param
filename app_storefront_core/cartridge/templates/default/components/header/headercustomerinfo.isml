@@ -60,7 +60,7 @@
 		--------------------------------------------------------
  	</iscomment>
  	
-	 <iselse>
+	 <iselse/>
 	 	
 	 		<li>
 	 			${Resource.msg('headercustomerinfo.welcome','components',null)}

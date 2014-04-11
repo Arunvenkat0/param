@@ -9,7 +9,7 @@
 
 	<isif condition="${pdict.Action == 'add'}">
 		<h1>${Resource.msg('editaddress.addaddress','account',null)}</h1>
-	<iselse>
+	<iselse/>
 		<h1>${Resource.msg('editaddress.editaddress','account',null)}</h1>
 	</isif>
 

@@ -7,7 +7,7 @@
 
 		<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">
 			<h1>${Resource.msg('account.editaccount','account',null)}</h1>
-		<iselse>
+		<iselse/>
 			<h1>${Resource.msg('account.createnew','account',null)}</h1>
 		</isif>
 
@@ -31,7 +31,7 @@
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
-				<iselse>
+				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
@@ -49,7 +49,7 @@
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
-				<iselse>
+				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>					
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>

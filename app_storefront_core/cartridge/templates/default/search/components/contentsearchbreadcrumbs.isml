@@ -28,7 +28,7 @@
 			<li>
 				<isif condition="${loopstate.first && !pdict.ContentSearchResult.folderSearch}">
 					<span class="results-text">${Resource.msg('searchbreadcrumbs.in','search',null)}</span>
-				<iselse>
+				<iselse/>
 	
 				</isif>
 				<a href="${pdict.ContentSearchResult.urlRefineFolder('Search-ShowContent',folder.ID)}" title="${folder.displayName}">${folder.displayName}</a>
