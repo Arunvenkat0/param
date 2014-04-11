@@ -11,7 +11,7 @@
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
   </module>
   <action name="RefinePrice"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="${PriceRefinement1}"/>
   </module>
   <action name="VERIFY-NoPromoMessage"/>
@@ -21,22 +21,25 @@
     <parameter name="numberExpected" value="0"/>
   </module>
   <action name="RefinePriceAgain"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="${PriceRefinement2}"/>
   </module>
   <action name="VERIFY-PromoMessageDisplayed"/>
   <module name="library.function.FAssertCountOnPage">
     <parameter name="string" value="${PromotionName}"/>
-    <parameter name="numberExpected" value="8"/>
+    <parameter name="numberExpected" value="7"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="${Brand}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="AddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="OpenShoppingCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-NoPromoMessage"/>
   <module name="library.function.FAssertCountOnPage">
     <parameter name="string" value="${PromotionName}"/>
@@ -75,16 +78,16 @@
     <parameter name="Level2CategoryName" value="${NewCatalogLevel2}"/>
   </module>
   <action name="RefinePrice"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="${NewProductRefinePrice}"/>
   </module>
   <action name="SelectProductAndAddToCart"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${NewProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="OpenShoppingCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-CalloutAndDiscount"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=td.cart-promo &gt; div &gt; span.value"/>

@@ -56,7 +56,7 @@
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address1" value="${ShippingAddressStreet}"/>
@@ -97,7 +97,7 @@
   <module name="modules.checkout.billing.ValidateRequiredAddressFieldsForBilling">
     <comment>Billing Address Required Fields Validation</comment>
   </module>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${BillingAddressFirstName}"/>
     <parameter name="LastName" value="${BillingAddressLastName}"/>
     <parameter name="Address1" value="${BillingAddressStreet}"/>

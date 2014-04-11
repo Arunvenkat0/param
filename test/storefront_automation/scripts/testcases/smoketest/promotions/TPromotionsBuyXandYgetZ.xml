@@ -8,16 +8,16 @@
   </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <action name="SearchForProduct"/>
-  <module name="library.module.app.sitegenesis.Search">
+  <module name="library.module.app.sitegenesis.header.Search">
     <parameter name="SearchString" value="${ProductName1}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="SearchForProduct2"/>
-  <module name="library.module.app.sitegenesis.Search">
+  <module name="library.module.app.sitegenesis.header.Search">
     <parameter name="SearchString" value="${ProductName2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; span:nth-child(1)"/>

@@ -11,27 +11,30 @@
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="TomTom"/>
+  </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="VERIFY-ShippingCost"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-shipping']/td[2]"/>
     <parameter name="textPattern" value="${ShippingCostNA}"/>
   </module>
   <action name="CheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.GoToCheckout"/>
-  <module name="library.module.app.sitegenesis.ClickCheckoutAsGuest"/>
+  <module name="library.module.app.sitegenesis.header.GoToCheckout"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
   <action name="VERIFY-ShippingDetails"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=span.discount-shipping"/>
     <parameter name="textPattern" value="${ShippingCostAfterDiscount}"/>
   </module>
-  <module name="library.module.app.sitegenesis.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -48,7 +51,7 @@
     <parameter name="textPattern" value="${ExpectedDiscountedShipping}"/>
   </module>
   <action name="SelectShipping"/>
-  <module name="library.module.app.sitegenesis.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
   </module>
   <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>
@@ -62,10 +65,10 @@
     <parameter name="textPattern" value="${ShippingDiscount}"/>
   </module>
   <action name="CompleteOrder"/>
-  <module name="library.module.app.sitegenesis.EnterBillingEmail">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterBillingEmail">
     <parameter name="EmailAddress" value="${EmailAddress}"/>
   </module>
-  <module name="library.module.app.sitegenesis.EnterCreditCardInfo">
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterCreditCardInfo">
     <parameter name="NameOnCard" value="${NameOnCard}"/>
     <parameter name="CardType" value="${CardType}"/>
     <parameter name="CardNumber" value="${CardNumber}"/>

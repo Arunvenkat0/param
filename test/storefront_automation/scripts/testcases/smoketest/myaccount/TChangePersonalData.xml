@@ -17,6 +17,9 @@
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <command name="pause" value="5000">
+    <comment>Allow time for new account to become active.</comment>
+  </command>
   <action name="LoginAgain">
     <comment>checks if you can login with the new credentials</comment>
   </action>

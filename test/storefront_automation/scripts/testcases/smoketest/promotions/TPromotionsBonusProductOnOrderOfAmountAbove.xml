@@ -29,26 +29,26 @@
   </module>
   <action name="VERIFY-PromoCalloutMessages"/>
   <command name="pause" value="1000"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="11"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="12"/>
   <action name="Refine"/>
-  <module name="library.module.app.sitegenesis.SelectPriceRefinement">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$100 - $499.99"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectRefinementColor">
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectRefinementColor">
     <parameter name="Color" value="Brown"/>
   </module>
   <action name="SelectProduct"/>
-  <module name="library.module.app.sitegenesis.ClickProductQuickViewLink">
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>
   </module>
-  <module name="library.module.app.sitegenesis.SelectSize">
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="XS"/>
   </module>
   <command name="pause" value="1000"/>
   <action name="UseQuickViewToAddProductToCart"/>
-  <module name="library.module.app.sitegenesis.AddToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="VERIFY-PromoInShoppingCart"/>
-  <module name="library.module.app.sitegenesis.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-PromoMessageNOTDisplayed"/>
   <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>
   <action name="ChangeQuantity"/>
