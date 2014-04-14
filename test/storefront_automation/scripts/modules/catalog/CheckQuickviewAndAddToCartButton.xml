@@ -3,9 +3,6 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=#add-to-cart[disabled]"/>
   </module>
-  <module name="library.function.FWaitForElement" disabled="true">
-    <parameter name="element" value="${SizeSwatch}"/>
-  </module>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="${SizeSwatch}"/>
     <parameter name="textStoreVariableName" value="ProductSize"/>
@@ -18,8 +15,11 @@
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
   </module>
-  <module name="library.function.FClick" disabled="true">
+  <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
+  </module>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=li.selected a.swatchanchor[title='${ProductColor}']"/>
   </module>
   <command name="waitForElementPresent" target="css=.Color .selected .swatchanchor"/>
   <module name="library.function.FWaitForText">
