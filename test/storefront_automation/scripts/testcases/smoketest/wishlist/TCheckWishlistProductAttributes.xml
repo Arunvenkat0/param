@@ -77,6 +77,7 @@
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <command name="pause" value="10000"/>
   <action name="LoginAgain"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>
