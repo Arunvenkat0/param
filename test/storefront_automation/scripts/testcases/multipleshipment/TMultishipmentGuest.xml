@@ -105,6 +105,7 @@
     <parameter name="Number" value="${CreditCardNumber}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpiryMonthName}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpiryYear}"/>
+    <parameter name="HeaderElement" value=""/>
   </module>
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
   <action name="CheckOutShipping"/>

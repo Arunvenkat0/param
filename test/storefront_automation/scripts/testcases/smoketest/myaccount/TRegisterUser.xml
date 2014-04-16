@@ -13,7 +13,7 @@
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="AllowNewAccountToTakeEffect"/>
-  <command name="pause" value="5000">
+  <command name="pause" value="10000">
     <comment>Ensure new account is activated before continuing.</comment>
   </command>
   <action name="LoginRegisteredUser">
