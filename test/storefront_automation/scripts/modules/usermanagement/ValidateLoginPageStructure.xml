@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validates the page elements on the login page. Checks ia all boxes for loggin in are available.</description>
-  <command name="assertText" target="xpath=id('primary')/h1" value="My Account Login"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="My Account"/>
-  <command name="assertText" target="css=.login-account h2" value="regexpi:Returning Customers • required"/>
-  <command name="assertText" target="css=.login-create-account h2" value="regexpi:New Customers"/>
-  <command name="assertText" target="css=.login-order-track h2" value="regexpi:Check An Order • required"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=id('primary')/h1"/>
+    <parameter name="textPattern" value="My Account Login"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="My Account"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-account h2"/>
+    <parameter name="textPattern" value="regexpi:Returning Customers • required"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-create-account h2"/>
+    <parameter name="textPattern" value="regexpi:New Customers"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-order-track h2"/>
+    <parameter name="textPattern" value="regexpi:Check An Order • required"/>
+  </module>
 </scriptmodule>

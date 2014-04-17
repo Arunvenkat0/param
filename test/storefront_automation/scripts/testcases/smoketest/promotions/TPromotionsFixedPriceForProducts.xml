@@ -21,6 +21,11 @@
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$100 - $499.99"/>
   </module>
+  <action name="DisplayAll"/>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="css=#grid-paging-header"/>
+    <parameter name="selection" value="regexp:View All.*"/>
+  </module>
   <action name="SelectFirstProduct"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName1}"/>
