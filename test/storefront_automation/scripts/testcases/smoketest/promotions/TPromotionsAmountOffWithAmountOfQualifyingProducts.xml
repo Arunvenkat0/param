@@ -55,6 +55,7 @@
     <parameter name="clickElement" value="css=button#update-cart"/>
   </module>
   <action name="VERIFY-PromoCalloutAndDiscountAmount"/>
+  <command name="pause" value="1500"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//tr[@class='order-discount discount']/td[2]"/>
     <parameter name="textPattern" value="${ExpectedDiscount}"/>

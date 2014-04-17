@@ -24,19 +24,17 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
-  <module name="library.function.FWaitForElement">
-    <parameter name="element" value="css=a.name-link[title='Drape Front Cardigan.']"/>
-  </module>
-  <action name="VERIFY-PromoCalloutMessages"/>
-  <command name="pause" value="1000"/>
-  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="12"/>
   <action name="Refine"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
     <parameter name="PriceLabelText" value="$100 - $499.99"/>
   </module>
+  <command name="pause" value="1000"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectRefinementColor">
     <parameter name="Color" value="Brown"/>
   </module>
+  <command name="pause" value="1000"/>
+  <action name="VERIFY-PromoCalloutMessages"/>
+  <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="3"/>
   <action name="SelectProduct"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName}"/>

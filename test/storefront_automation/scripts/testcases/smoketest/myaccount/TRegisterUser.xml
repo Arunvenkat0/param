@@ -11,7 +11,6 @@
     <comment>Logout and check if user is directed to the login page.</comment>
   </action>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
-  <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="AllowNewAccountToTakeEffect"/>
   <command name="pause" value="10000">
     <comment>Ensure new account is activated before continuing.</comment>
@@ -23,15 +22,10 @@
     <parameter name="Email" value="${Email}"/>
     <parameter name="Password" value="${Password}"/>
   </module>
-  <module name="modules.usermanagement.ValidateWelcomePage">
-    <parameter name="FirstName" value="${FirstName}"/>
-    <parameter name="LastName" value="${LastName}"/>
-  </module>
   <action name="LogoutAgain">
     <comment>Logout again.</comment>
   </action>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
-  <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="Return2Home">
     <comment>Go back to homepage.</comment>
   </action>
