@@ -32,6 +32,14 @@
         </customer-groups>
     </campaign>
 
+    <campaign campaign-id="multi-currency demo">
+        <description>Multi-currency campaign</description>
+        <enabled-flag>false</enabled-flag>
+        <customer-groups>
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>
+
     <global-promotion-settings>
         <global-excluded-products>
             <included-products>
@@ -434,6 +442,54 @@
         </product-promotion-rule>
     </promotion>
 
+    <promotion promotion-id="15EUR-off-dresses">
+        <enabled-flag>false</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <currency>EUR</currency>
+        <name xml:lang="x-default">€15 off all Dresses</name>
+        <callout-msg xml:lang="x-default">€15 off all Dresses</callout-msg>
+        <details xml:lang="x-default">€15 off all Dresses</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-en">
+                            <category-id>womens-clothing-dresses</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <amount>15.0</amount>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="25USD-off-dresses">
+        <enabled-flag>false</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <currency>USD</currency>
+        <name xml:lang="x-default">$25 off all Dresses</name>
+        <callout-msg xml:lang="x-default">$25 off all Dresses</callout-msg>
+        <details xml:lang="x-default">$25 off all Dresses</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-en">
+                            <category-id>womens-clothing-dresses</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <amount>25.0</amount>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
     <promotion-campaign-assignment promotion-id="Payment-Promo" campaign-id="Payment-promo">
         <qualifiers match-mode="any">
             <customer-groups/>
@@ -497,6 +553,22 @@
             <coupons/>
         </qualifiers>
         <rank>10</rank>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="15EUR-off-dresses" campaign-id="multi-currency demo">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="25USD-off-dresses" campaign-id="multi-currency demo">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
     </promotion-campaign-assignment>
 
 </promotions>

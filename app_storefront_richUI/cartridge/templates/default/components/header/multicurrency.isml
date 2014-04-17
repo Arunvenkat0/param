@@ -1,0 +1,13 @@
+<!--- TEMPLATENAME: multicurrency.isml --->
+ 	<isif condition="${(dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiCurrency')) && (dw.system.Site.getCurrent().getAllowedCurrencies().length > 1)}"> 	
+ 	<li class="mc-class">${Resource.msg('headercustomerinfo.currency','components',null)} </li>
+ 	<li class="mc-class">
+
+			<select class="currency-converter" name="currencyMnemonic" class="perm_not_disabled dropdown inputfield_en">
+				<isset name="sessionCurrency" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>						
+				<isloop items="${dw.system.Site.getCurrent().getAllowedCurrencies()}" var="currencyCode" status="loopstate">
+					<option class="currency-converter-option" value="<isprint value="${currencyCode}">" <isif condition="${currencyCode == sessionCurrency}">selected="selected"</isif>><isprint value="${currencyCode}"></option>
+				</isloop>
+			</select>
+	</li> 	
+	</isif>
