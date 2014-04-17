@@ -32,7 +32,7 @@ function execute( pdict : PipelineDictionary ) : Number
     var iter : Iterator = paymentInstruments.iterator();
     var paymentInstrument : OrderPaymentInstrument = null;
 	var nonGCPaymentInstrument : OrderPaymentInstrument = null;
-	var giftCertTotal : Money = new Money(0.0, Site.getCurrent().getCurrencyCode()); 
+	var giftCertTotal : Money = new Money(0.0, basket.currencyCode);
 
     // locate any non-gift certificate payment instrument
     while( iter.hasNext() )

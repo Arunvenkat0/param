@@ -60,7 +60,7 @@
 		    				<a class="tooltip">(
 		    					${Resource.msg('singleshipping.details','checkout',null)}
 			    				<div class="tooltip-content" data-layout="small tooltip-shipping">
-			    					<isset name="productShipCost" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			    					<isset name="productShipCost" value="${new dw.value.Money(0.0, session.getCurrency().getCurrencyCode())}" scope="page"/>
 					    			<isloop items="${shippingCost.productShippingCosts}" var="productShipping" status="loopstate">
 					    				<isif condition="${productShipping.shippingCost != null && productShipping.shippingCost.amount != null && productShipping.shippingCost.amount > 0}">
 					    					<isset name="productShipCost" value="${productShipCost.add(productShipping.shippingCost.amount)}" scope="page"/>

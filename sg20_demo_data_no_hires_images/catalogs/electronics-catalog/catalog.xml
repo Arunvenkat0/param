@@ -7972,24 +7972,28 @@ Cover Flow. Plus, view photos and videos in either portrait or landscape.</short
             <option-value value-id='001' default='false'>
                 <display-value xml:lang='x-default'>1 Year Warranty</display-value>
                 <option-value-prices>
+                    <option-value-price currency="EUR">20.00</option-value-price>
                     <option-value-price currency='USD'>49.99</option-value-price>
                 </option-value-prices>
             </option-value>
             <option-value value-id='003' default='false'>
                 <display-value xml:lang='x-default'>5 Year Warranty</display-value>
                 <option-value-prices>
+                    <option-value-price currency="EUR">60.00</option-value-price>
                     <option-value-price currency='USD'>129.99</option-value-price>
                 </option-value-prices>
             </option-value>
             <option-value value-id='000' default='true'>
                 <display-value xml:lang='x-default'>None</display-value>
                 <option-value-prices>
+                    <option-value-price currency="EUR">0.00</option-value-price>
                     <option-value-price currency='USD'>0.00</option-value-price>
                 </option-value-prices>
             </option-value>
             <option-value value-id='002' default='false'>
                 <display-value xml:lang='x-default'>3 Year Warranty</display-value>
                 <option-value-prices>
+                    <option-value-price currency="EUR">40.00</option-value-price>
                     <option-value-price currency='USD'>99.99</option-value-price>
                 </option-value-prices>
             </option-value>
