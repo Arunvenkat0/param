@@ -5,9 +5,6 @@
 - click -&gt; permanent change
 - permanently changed colors appear in details and quickview</description>
   <parameter name="SubCategoryName"/>
-  <command name="pause" disabled="true" value="500">
-    <comment>Give JQuery a moment.</comment>
-  </command>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="dom=document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0]"/>
   </module>
