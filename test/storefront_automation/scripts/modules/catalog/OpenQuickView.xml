@@ -7,8 +7,9 @@
   <command name="mouseOver" target="xpath=//div[@class='product-image']/a[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <action name="ClickQuickViewLink"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  <module name="library.function.FMouseOverAndClick">
+    <parameter name="mouseOverElement" value="//a[@class='thumb-link']/img[contains(@title,'${ProductName}')]"/>
+    <parameter name="clickElement" value="css=a#quickviewbutton[title='${ProductName}']"/>
   </module>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
   <module name="library.function.FWaitForText">
