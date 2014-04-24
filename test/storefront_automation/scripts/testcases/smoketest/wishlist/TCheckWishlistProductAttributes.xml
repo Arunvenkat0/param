@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85052</tags>
   <description>Test Case ID:(C85052) Smoke Test » My Account - Returning Customer » Wish List » Check Wishlist Product Attributes</description>
   <module name="modules.staticelements.Homepage"/>
@@ -77,6 +77,7 @@
   </module>
   <action name="Logout"/>
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
+  <command name="pause" value="10000"/>
   <action name="LoginAgain"/>
   <module name="modules.usermanagement.LoginOnLoginPage">
     <parameter name="Email" value="${Email}"/>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validates the quickview behaviour:
 - window is opened when hovering over the product image on catalog pages
 - product name and price is displayed correctly
@@ -7,6 +7,14 @@
 - default color is selected
 - size is selected
 - cart button is enabled</description>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="css=#grid-sort-header"/>
+    <parameter name="selection" value="Price Low To High"/>
+  </module>
+  <command name="pause" value="2000"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="//option[@selected='selected'][text(),contains('Price Low To High')]"/>
+  </module>
   <module name="library.function.FStoreText">
     <parameter name="textElement" value="css=.grid-tile:first-child .name-link"/>
     <parameter name="textStoreVariableName" value="ProductName"/>

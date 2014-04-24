@@ -6,13 +6,8 @@ import com.sitegenesis.util.AbstractBrowserScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
-
-
-
-
 /**
- * customer service contact us
- Validates the contact us form and fills it with no data, invalid data and valid data to send it.
+ * Test Case ID:(C84778) Smoke Test » Customer Service » Contact Us Form
  */
 @ScriptName
 ("testcases.smoketest.homepage.TCheckContactUsForm")

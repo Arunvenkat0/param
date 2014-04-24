@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID: (C85030) Smoke Test » Responsive Web Design » Purchase As Guest at Responsive Design 
+ * Test Case ID: (C85030) Smoke Test » Responsive Web Design » Purchase As Guest at Responsive Design
  */
 @ScriptName
 ("testcases.responsive.TPurchaseAsGuestResponsive")

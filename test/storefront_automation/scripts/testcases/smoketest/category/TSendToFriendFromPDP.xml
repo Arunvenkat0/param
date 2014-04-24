@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84770 C84745 C84746</tags>
   <description>Test Case ID: (C84770,C84745,C84746) (C84745)  Smoke Test » Send to a Friend » Send to a Friend Overlay (C84746) Smoke Test » Send to a Friend » Send to a Friend Review</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="OpenMainCategoryPage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>
@@ -114,6 +114,9 @@
   <action name="ClosePrivacyPolicyPopup"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.send-to-friend"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.ui-icon-closethick"/>
   </module>
   <action name="GoToWelcomePage"/>
   <module name="library.function.FClickAndWaitForPageLoad">

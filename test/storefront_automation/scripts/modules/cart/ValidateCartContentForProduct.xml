@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Validates the product data within the cart.
 
 @Parameters:
@@ -24,8 +24,8 @@ TableRow: Row number in which the item resides</description>
     <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .item-price span"/>
     <parameter name="plainString" value="@{SinglePrice}"/>
   </module>
-  <module name="library.function.FAssertText">
+  <module name="library.function.FAssertTextCaseInsensitive">
     <parameter name="textElement" value="css=.cart-row:nth-child(@{TableRow}) .price-total"/>
-    <parameter name="textPattern" value="@{TotalPriceProduct}"/>
+    <parameter name="plainString" value="@{TotalPriceProduct}"/>
   </module>
 </scriptmodule>

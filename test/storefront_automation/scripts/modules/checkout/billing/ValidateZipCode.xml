@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Test with foreign addresses as well: the zip code field is the biggest problem here. Make sure it is not restricted to accepting US zip codes. Common problems are Canada/UK (letters, numbers, space) and Australia (only four digits). US zip code should be accepted as 12345 or 12345-6789.</description>
   <action name="NegativeZipCodes"/>
   <module name="library.function.FTypeAndVerifyInput">

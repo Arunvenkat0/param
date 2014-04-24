@@ -7,7 +7,8 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated. 
+ * Test Case ID:(C84772,C85032)  C84772 Smoke Test » Header | Global Navigation | Footer » Search Box,  C85032  Smoke Test » Search Results » Results » Did You Mean Search 
+ This testcase check the did you mean search. A search by an invalid keyword is done and the result page which is a did you mean page is validated.
  Afterwards is the did you mean term clicked an dthe result page (product grid) is validated.
  
  Was failed because of RAP-2460, but is fixed now.

@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * 
+ * Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information
  */
 @ScriptName
 ("testcases.smoketest.pdp.TGeneralInformation")

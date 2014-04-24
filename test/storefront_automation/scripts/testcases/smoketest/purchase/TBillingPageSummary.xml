@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84706</tags>
   <description>Test Case ID:(C84706) Smoke Test » Checkout - Retuning Customer » Billing » Shipping Information Summary</description>
   <module name="modules.staticelements.Homepage"/>
@@ -116,7 +116,7 @@
     <parameter name="Quantity" value="${SecondProductQuantity}"/>
     <parameter name="Price" value="${SecondProductTotalPrice}"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -181,7 +181,7 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="css=.mini-shipment a"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstNameEdit}"/>
     <parameter name="LastName" value="${ShippingLastNameEdit}"/>
     <parameter name="Address1" value="${ShippingAddressEdit}"/>

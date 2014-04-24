@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84769</tags>
   <description>Test Case ID:(C84769)  Smoke Test » Quickview » QuickView: Add to Gift Registry</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.catalog.OpenMainCategoryPage">
-    <comment>Navigate to Mens --> Footwear catalog page</comment>
+    <comment>Navigate to Mens --&gt; Footwear catalog page</comment>
     <parameter name="MainCategoryNumber" value="${MainCategoryNumber}"/>
     <parameter name="MainCategoryName" value="${MainCategoryName}"/>
   </module>

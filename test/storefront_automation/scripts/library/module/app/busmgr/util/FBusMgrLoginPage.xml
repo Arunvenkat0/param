@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>At the Business Manager login Page it uses the given 'User' and 'Password' to login.</description>
+  <parameter name="User"/>
+  <parameter name="Password"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="${UserInputElement}"/>
+    <parameter name="inputString" value="@{User}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="${PasswordInputElement}"/>
+    <parameter name="inputString" value="@{Password}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=input[type=&quot;submit&quot;]"/>
+  </module>
+</scriptmodule>

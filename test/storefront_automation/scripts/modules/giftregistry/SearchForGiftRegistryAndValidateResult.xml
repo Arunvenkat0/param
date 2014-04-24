@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Searches for a gift registry and validates the resulting page.</description>
   <command name="type" target="id=dwfrm_productlists_search_registrantLastName" value="${UserLastName}"/>
   <command name="type" target="id=dwfrm_productlists_search_registrantFirstName" value="${UserFirstName}"/>

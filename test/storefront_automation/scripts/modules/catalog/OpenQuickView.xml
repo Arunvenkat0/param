@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Selects a product inside a catalog and opens it's quick view dialoge.</description>
   <command name="waitForElementPresent" target="xpath=//div[@class='product-name']//a[starts-with(@title,'${ProductName}')]">
     <comment>Validate Product Presence</comment>
@@ -7,8 +7,9 @@
   <command name="mouseOver" target="xpath=//div[@class='product-image']/a[starts-with(@title,'${ProductName}')]"/>
   <command name="waitForElementPresent" target="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
   <action name="ClickQuickViewLink"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="xpath=id('quickviewbutton')[starts-with(@title,'${ProductName}')]"/>
+  <module name="library.function.FMouseOverAndClick">
+    <parameter name="mouseOverElement" value="//a[@class='thumb-link']/img[contains(@title,'${ProductName}')]"/>
+    <parameter name="clickElement" value="css=a#quickviewbutton[title='${ProductName}']"/>
   </module>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
   <module name="library.function.FWaitForText">

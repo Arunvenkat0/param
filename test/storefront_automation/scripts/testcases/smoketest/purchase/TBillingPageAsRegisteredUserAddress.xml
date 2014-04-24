@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84697</tags>
   <description>Test Case ID:(C84697) Smoke Test » Checkout - Retuning Customer » Billing » Logged In User: Address</description>
   <module name="modules.staticelements.Homepage"/>
@@ -48,7 +48,7 @@
     <parameter name="textElement" value="css=.address legend"/>
     <parameter name="textPattern" value="regexpi:Select or Enter a Shipping Address.*"/>
   </module>
-  <module name="modules.adressmanagement.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address1" value="${ShippingAddressStreet}"/>
@@ -149,6 +149,7 @@
     <parameter name="Number" value="${CreditCardNumber}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpiryMonthName}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpiryYear}"/>
+    <parameter name="HeaderElement" value="css=div.ui-dialog div#dialog-container.dialog-content h1"/>
   </module>
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
   <action name="CheckOutBillingTwoSavedAddresses"/>

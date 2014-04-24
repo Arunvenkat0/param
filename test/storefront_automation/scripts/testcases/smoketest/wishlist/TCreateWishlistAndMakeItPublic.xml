@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85053  C84738 C84740</tags>
   <description>Test Case ID:(C85053  C84738 C84740) (C85053 ) Smoke Test » My Account - Returning Customer » Wish List » Public View (C84738 ) Test Suites &amp; Cases » Smoke Test » My Account - Returning Customer » Wish List » Login page (C84740) Smoke Test » My Account - Returning Customer » Wish List » Search Results</description>
   <module name="modules.staticelements.Homepage"/>

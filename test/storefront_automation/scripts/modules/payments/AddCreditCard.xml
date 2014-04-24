@@ -1,16 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Adds a credit card to the Payment Settings</description>
   <parameter name="Name"/>
   <parameter name="Type"/>
   <parameter name="Number"/>
   <parameter name="ExpireDateMonth"/>
   <parameter name="ExpireDateYear"/>
+  <parameter name="HeaderElement"/>
   <action name="ClickLinkToAddCreditCard"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="link=Add a Credit Card"/>
   </module>
-  <command name="waitForText" target="css=#dialog-container h1" value="Add a Credit Card"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=#ui-dialog-title-dialog-container"/>
+  </module>
+  <command name="waitForText" target="@{HeaderElement}" value="Add a Credit Card"/>
   <module name="modules.payments.ValidateCreditCardRequiredFields"/>
   <action name="EnterCreditCardData"/>
   <module name="library.function.FType">

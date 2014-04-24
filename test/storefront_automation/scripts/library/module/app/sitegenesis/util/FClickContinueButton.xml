@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks the submit button with the given 'value'.</description>
+  <parameter name="value"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button[value='@{value}']"/>
+  </module>
+</scriptmodule>

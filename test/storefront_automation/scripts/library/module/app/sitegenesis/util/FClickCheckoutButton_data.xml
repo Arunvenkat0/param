@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <CheckoutButtonElement>css=button[name=dwfrm_cart_checkoutCart]</CheckoutButtonElement>
+</data>

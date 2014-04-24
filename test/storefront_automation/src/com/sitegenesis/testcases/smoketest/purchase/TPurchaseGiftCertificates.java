@@ -7,15 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Purchases gift certificates:
- 
- - logs on as customer
- - adds new address
- - adds new credit card
- - adds and submit a gift certificate
- - deletes the address
- - deletes credit card
- - logoff
+ * Test Case ID:(C84728) Smoke Test » Purchasing Gift Certificates » Purchase a Gift Certificate
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseGiftCertificates")

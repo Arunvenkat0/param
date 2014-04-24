@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Establishes a logged in session to the Business Manager instance at ${BMurl}.</description>
+  <module name="library.function.FOpenURLAndRemoveCookies">
+    <parameter name="URL" value="${BMurl}"/>
+  </module>
+  <module name="library.module.app.busmgr.util.FBusMgrLoginPage">
+    <parameter name="User" value="${bmlogin}"/>
+    <parameter name="Password" value="${BM}"/>
+  </module>
+</scriptmodule>

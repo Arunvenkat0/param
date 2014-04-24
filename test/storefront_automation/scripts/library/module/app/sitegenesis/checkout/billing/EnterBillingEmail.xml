@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="EmailAddress"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="${EmailInputElement}"/>
+    <parameter name="inputString" value="@{EmailAddress}"/>
+  </module>
+</scriptmodule>

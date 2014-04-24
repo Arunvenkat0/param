@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" disabled="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>?</tags>
   <description>DISABLED: Store data has to be configured in the Business Manager 
 Test Case ID:(?) 
 Preconditions
-Store data has to be configured in the Business Manager (Sites > Online Marketing > Stores).
+Store data has to be configured in the Business Manager (Sites &gt; Online Marketing &gt; Stores).
 Steps
-Homepage -> STORE LOCATOR
+Homepage -&gt; STORE LOCATOR
 Click SEARCH button under the ZIP CODE field without entering any detail.
-Enter incorrect data in the zipcode -> SEARCH
+Enter incorrect data in the zipcode -&gt; SEARCH
 Enter less than or equal to 4 digits
-Enter valid ZIP CODE -> SEARCH
+Enter valid ZIP CODE -&gt; SEARCH
 Confirm the stores are correct based on data in BusMgr.
 Test zip code search with at least some of the different radius options and check against BusMgr data to make sure correct stores are being returned.
 Test state search for a state that should return a result.

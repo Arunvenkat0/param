@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84710</tags>
   <description>Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information</description>
   <module name="modules.staticelements.Homepage"/>
@@ -23,26 +23,29 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.value .emptyswatch .swatchanchor"/>
   </module>
-  <command name="click" target="css=.value .emptyswatch .swatchanchor">
-    <comment>Select size.</comment>
-  </command>
+  <action name="OpenSharePopUp"/>
+  <module name="library.function.FMouseOver">
+    <parameter name="element" value="css=.addthis_button_compact"/>
+  </module>
+  <command name="pause" value="3000"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_compact"/>
   </module>
   <command name="waitForElementPresent" target="id=at3wincontent"/>
-  <command name="assertVisible" target="id=at3wincontent"/>
   <command name="waitForElementPresent" target="css=.at3winwrapper"/>
+  <action name="CloseSharePopUp"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=at3winheaderclose"/>
   </module>
+  <action name="OpenFaceBook"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.addthis_button_facebook"/>
   </module>
   <command name="waitForPopUp"/>
-  <command name="pause" value="5000"/>
+  <action name="ClosePop-Up"/>
   <command name="selectWindow" target="title=Facebook"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="name=cancel"/>
   </module>
-  <command name="close"/>
+  <command name="pause" value="5000"/>
 </testcase>

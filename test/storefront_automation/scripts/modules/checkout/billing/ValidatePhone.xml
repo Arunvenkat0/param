@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Test with foreign addresses as well: check the telephone field with valid foreign numbers (which will be formatted differently and have different numbers of digits than US)</description>
   <action name="NegativePhoneNumbers"/>
   <module name="library.function.FType">
@@ -13,37 +13,65 @@
     <parameter name="textElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="textPattern" value="-0001"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="1234-"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="432.434.3243"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="940 455 5555"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="123-4E6-7890"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="123 456 7890"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>
     <parameter name="inputString" value="9404@"/>
   </module>
-  <command name="assertText" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=//span[contains(@class, 'error')]"/>
+    <parameter name="textPattern" value="Please specify a valid phone number."/>
+  </module>
+  <command name="assertText" disabled="true" target="xpath=//span[contains(@class, 'error')]" value="Please specify a valid phone number."/>
   <action name="ValidatePhoneNumber"/>
   <module name="library.function.FTypeAndVerifyInput">
     <parameter name="typeElement" value="xpath=//input[contains(@id, 'phone')]"/>

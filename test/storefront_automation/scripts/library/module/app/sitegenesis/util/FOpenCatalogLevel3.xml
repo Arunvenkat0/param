@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks a Third Catalog Level Name on the left menu of a page  Example in 'Womens' &gt; 'Clothing', clicks 'Dresses'.  NOTE:[ this is identical to OpenCatalogLevel2 but is maintained for clarity and in case of future application changes.]</description>
+  <parameter name="CategoryName"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=a.refinement-link[title='@{CategoryName}']"/>
+  </module>
+</scriptmodule>

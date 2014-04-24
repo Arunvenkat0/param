@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <project default="all" basedir=".">
+	
+	
+	<property name="build.sysclasspath" value="last"/>
 
 	<!-- 
         Reads the properties from a file.  

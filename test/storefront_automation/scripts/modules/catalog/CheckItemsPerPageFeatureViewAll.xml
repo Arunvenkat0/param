@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Checks the correctness of the search result when &quot;View all&quot; is selected.</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Checks the correctness of the search result when "View all" is selected.</description>
   <command name="waitForElementPresent" target="name=Product-Paging-Options"/>
   <command name="storeEval" target="document.getElementsByClassName('results-hits')[1].innerHTML.trimRight().substr(-10,3).trimRight()" value="MaxItems"/>
   <action name="SelectPagingOption"/>

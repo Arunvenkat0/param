@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <BusMgr_URL></BusMgr_URL>
+  <UserNameElement></UserNameElement>
+  <PasswordElement></PasswordElement>
+  <SubmitButtonElement></SubmitButtonElement>
+</data>
