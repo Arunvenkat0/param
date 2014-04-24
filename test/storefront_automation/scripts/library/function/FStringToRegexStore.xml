@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Escapes reserved regex characters in a 'plainString' to create a regular expression that is stored in variable name 'regexVarName'.</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>1. Escapes reserved regex characters in a 'plainString' to create a regular expression that is stored in variable name 'regexVarName'.</description>
   <parameter name="plainString"/>
   <parameter name="regexVarName"/>
   <command name="storeEval" target="'@{plainString}'.replace(/[\/\\^$*+?.()|[\]{}]/g, '\\$&amp;')" value="@{regexVarName}"/>

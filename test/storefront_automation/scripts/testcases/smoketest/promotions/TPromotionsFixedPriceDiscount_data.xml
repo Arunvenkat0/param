@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <PromotionName>$50offProductsAmountAbove400</PromotionName>
+  <CatalogLevel1>Mens</CatalogLevel1>
+  <CatalogLevel2>Clothing</CatalogLevel2>
+  <CatalogLevel3>Suits</CatalogLevel3>
+  <ProductName1>Charcoal Single Pleat Striped Wool Suit</ProductName1>
+  <ProductName2>Black Flat Front Wool Suit</ProductName2>
+  <Fit>Regular</Fit>
+</data>

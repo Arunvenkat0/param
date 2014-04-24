@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+  <tags>C130267</tags>
+  <description>Test Case ID:(C130267)</description>
+  <module name="library.module.app.busmgr.EnablePromotion">
+    <parameter name="SiteName" value="${SiteName}"/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel1">
+    <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
+  </module>
+  <action name="RefinePrice"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
+    <parameter name="PriceLabelText" value="${PriceRefinement1}"/>
+  </module>
+  <action name="VERIFY-NoPromoMessage"/>
+  <command name="pause" value="1500"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
+  <action name="RefinePriceAgain"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
+    <parameter name="PriceLabelText" value="${PriceRefinement2}"/>
+  </module>
+  <action name="ViewAll"/>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="css=#grid-paging-header"/>
+    <parameter name="selectLabel" value="regexpi:View All.*"/>
+    <parameter name="labelValue" value="regexpi:View All.*"/>
+  </module>
+  <command name="pause" value="2000"/>
+  <action name="VERIFY-PromoMessageDisplayed"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.product-promo div.promotional-message"/>
+  </module>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="10"/>
+  </module>
+  <action name="SelectProduct"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="${Brand}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName}"/>
+  </module>
+  <action name="AddProductToCart"/>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <action name="OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <action name="VERIFY-NoPromoMessage"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
+  <action name="ChangeQuantity"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
+    <parameter name="inputString" value="5"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button#update-cart"/>
+  </module>
+  <action name="VERIFY-"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=td.cart-promo &gt; div &gt; span.value"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <action name="ChangeQuantityAgain"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=td.item-quantity &gt; input"/>
+    <parameter name="inputString" value="4"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button#update-cart"/>
+  </module>
+  <action name="VERIFY-"/>
+  <command name="pause" value="1500"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName}"/>
+    <parameter name="numberExpected" value="0"/>
+  </module>
+  <action name="AddAnotherProduct"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
+    <parameter name="Level1CategoryName" value="${NewCatalogLevel1}"/>
+    <parameter name="Level2CategoryName" value="${NewCatalogLevel2}"/>
+  </module>
+  <action name="RefinePrice"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectPriceRefinement">
+    <parameter name="PriceLabelText" value="${NewProductRefinePrice}"/>
+  </module>
+  <action name="SelectProductAndAddToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${NewProductName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <action name="OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <action name="VERIFY-CalloutAndDiscount"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=td.cart-promo &gt; div &gt; span.value"/>
+    <parameter name="textPattern" value="${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//tr[@class='order-discount discount']/td[2]"/>
+    <parameter name="textPattern" value="${ExpectedDiscount}"/>
+  </module>
+  <action name="CleanUp"/>
+  <module name="library.module.app.busmgr.DisablePromotion">
+    <parameter name="SiteName" value="${SiteName}"/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
+  </module>
+</testcase>

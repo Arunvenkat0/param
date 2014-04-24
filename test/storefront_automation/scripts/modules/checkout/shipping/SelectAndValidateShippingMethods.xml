@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Checks available shipping methods and selects the one of the module parameter.
 
 Shipping discount was not considered.
@@ -21,7 +21,8 @@ This module only works without shipping discount (ex. Free Ground Shipping Over 
   </module>
   <command name="waitForText" target="xpath=id('shipping-method-list')/fieldset/div[2]/label" value="2-Day Express*"/>
   <command name="assertText" target="xpath=id('shipping-method-list')/fieldset/div[2]/label/span" value="regexp:^\$\s*([0-9]|([1-9][0-9]{0,2}))\.99$"/>
-  <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="glob:*@{ShippingMethodName}*"/>
+  <action name="CHECKPOINT"/>
+  <command name="waitForText" target="xpath=id('secondary')/div[@class='checkout-order-totals']//tr[contains(@class,'order-shipping')]" value="regexp:.*2-Day Express.*"/>
   <action name="SelectAndValidateThirdShippingMethod"/>
   <module name="library.function.FCheck">
     <parameter name="checkElement" value="id=shipping-method-003"/>

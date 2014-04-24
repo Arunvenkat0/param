@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C85055 C84762</tags>
-  <description>Test Case ID:(C85055 C84762)  (C8505) Smoke Test » Cart » Behaviour   (C84762) Smoke Test » Cart » Edit Details Overlay</description>
+  <description>BUG: 'RAP-2406'
+  Test Case ID:(C85055 C84762)  (C8505) Smoke Test » Cart » Behaviour   (C84762) Smoke Test » Cart » Edit Details Overlay</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="SearchFirstProductAndCheckResult"/>
   <module name="modules.search.SearchProductByIDOrName">

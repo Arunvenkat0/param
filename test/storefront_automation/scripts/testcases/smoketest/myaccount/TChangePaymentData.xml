@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84737</tags>
   <description>[ Test Case ID:(C84737 partial) ] Smoke Test » My Account - Returning Customer » Payment » Add Credit Card</description>
   <module name="modules.staticelements.Homepage"/>
@@ -18,6 +18,7 @@
     <parameter name="Number" value="${CreditCardNumber1}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+    <parameter name="HeaderElement" value="css=#dialog-container &gt; h1:nth-child(3)"/>
   </module>
   <module name="modules.payments.ValidateCreditCardData">
     <parameter name="Position" value="1"/>
@@ -37,6 +38,7 @@
     <parameter name="Number" value="${CreditCardNumber2}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+    <parameter name="HeaderElement" value="css=#dialog-container &gt; h1:nth-child(3)"/>
   </module>
   <module name="modules.payments.ValidateCreditCardData">
     <parameter name="Position" value="1"/>
@@ -56,6 +58,7 @@
     <parameter name="Number" value="${CreditCardNumber3}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+    <parameter name="HeaderElement" value="css=div.ui-dialog div#dialog-container.dialog-content h1"/>
   </module>
   <module name="modules.payments.ValidateCreditCardData">
     <parameter name="Position" value="1"/>
@@ -75,6 +78,7 @@
     <parameter name="Number" value="${CreditCardNumber4}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpireDateMonth}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpireDateYear}"/>
+    <parameter name="HeaderElement" value="css=div.ui-dialog div#dialog-container.dialog-content h1"/>
   </module>
   <module name="modules.payments.ValidateCreditCardData">
     <parameter name="Position" value="1"/>

@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C84713</tags>
-  <description>Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation </description>
+  <description>BUG: 'RAP-2665'
+ Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation</description>
+  <action name="Login"/>
   <module name="modules.staticelements.Homepage"/>
   <action name="CheckCatalogNavigation"/>
   <module name="modules.catalog.CheckCatalogNavigationFeature">

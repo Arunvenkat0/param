@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" junit-test="true" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>?</tags>
   <description>Test Case ID:(?)</description>
   <module name="library.function.FOpenURLAndRemoveCookies">
@@ -39,14 +39,25 @@
   </module>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][1]/td[3]" value="text1"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][2]/td[3]" value="text2"/>
+  <command name="storeEval" target="'${text2}'.trim()" value="color"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][3]/td[3]" value="text3"/>
+  <command name="storeEval" target="'${text3}'.trim()" value="price"/>
   <command name="storeText" target="//tr[td[contains(@class,'table_detail')]//a[text()=&quot;Block&quot;]][4]/td[3]" value="text4"/>
+  <command name="storeEval" target="'${text4}'.trim()" value="last"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=regexpi:${category}"/>
   </module>
-  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text1}')]"/>
-  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text2}')]"/>
-  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text3}')]"/>
-  <command name="assertElementPresent" target="//div[contains(@class,'refinement ${text4}')]"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//div[contains(@class,'refinement ${text1}')]"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//div[contains(@class,'refinement ${color}')]"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//div[contains(@class,'refinement ${price}')]"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="//div[contains(@class,'refinement ${last}')]"/>
+  </module>
 </testcase>

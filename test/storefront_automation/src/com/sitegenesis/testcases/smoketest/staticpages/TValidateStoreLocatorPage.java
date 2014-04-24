@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Validates the page structure of the store locator page.
+ * Test Case ID:(C85035) Smoke Test » Store Locator » Store Locator Page
  */
 @ScriptName
 ("testcases.smoketest.staticpages.TValidateStoreLocatorPage")

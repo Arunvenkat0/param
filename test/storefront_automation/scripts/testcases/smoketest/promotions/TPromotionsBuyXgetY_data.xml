@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <PromotionName>BuyXgetY</PromotionName>
+  <ProductName1>canon-powershot-sd1100-is</ProductName1>
+  <ProductName2>nikon-d60-wlens</ProductName2>
+  <ExpectedItemTotal1>$1,049.97</ExpectedItemTotal1>
+  <ExpectedItemTotal2>$1,399.96</ExpectedItemTotal2>
+  <ExpectedItemTotal3>$300.30</ExpectedItemTotal3>
+  <ExpectedItemTotal4>$900.90</ExpectedItemTotal4>
+</data>

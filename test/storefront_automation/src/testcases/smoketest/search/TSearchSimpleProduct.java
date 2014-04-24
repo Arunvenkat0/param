@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C85034)  Smoke Test » Search Results » Results » Search Simple Product 
+ * Test Case ID:(C85034)  Smoke Test » Search Results » Results » Search Simple Product
  */
 @ScriptName
 ("testcases.smoketest.search.TSearchSimpleProduct")
