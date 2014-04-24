@@ -1510,7 +1510,7 @@ var app = (function (app, $) {
 						loadingPlaceHolder.attr('data-loading-state','loaded');
 						jQuery('div.search-result-content').append(html);
 					};
-					if (app.clientcache.LISTING_INFINITE_SCROLL && 'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]) {
+					if (false) {
 						// if we hit the cache
 						fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
 					} else {
@@ -1598,7 +1598,7 @@ var app = (function (app, $) {
 					jQuery('div.search-result-content').append(html);
 					jQuery(document).trigger('grid-update');
 				};
-				if (app.clientcache.LISTING_INFINITE_SCROLL && 'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]) {
+				if (false) {
 					// if we hit the cache
 					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
 				} else {
