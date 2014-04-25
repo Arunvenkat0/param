@@ -9,7 +9,7 @@
     <scm>
         <connection>scm:git:git@github.com:Demandware/Site-Genesis.git</connection>
         <developerConnection>scm:git:git@github.com:Demandware/Site-Genesis.git</developerConnection>
-      <tag>sitegen-14.5.0.7</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,7 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>14.5.0.7</version>
+    <version>14.5.0.8-SNAPSHOT</version>
     <description>SiteGenesis Source</description>
 
     
