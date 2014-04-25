@@ -33,7 +33,7 @@ function execute( args : PipelineDictionary ) : Number
 			homedeliveries = true;
 			continue;
 		}	
-		if(pli.shipment.shippingMethodID == '005'){
+		if(pli.shipment.shippingMethod && pli.shipment.shippingMethod.custom.storePickupEnabled){
 			//check to see if the storeid has changed
 			if(pli.custom.fromStoreId == pli.shipment.custom.fromStoreId){
 				if(pli.shipment.shippingAddress != null){
@@ -87,7 +87,7 @@ function execute( args : PipelineDictionary ) : Number
 			
 			var shippingMethods : ArrayList =  new ArrayList(ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods());
 			for each(var shippingMethod in shippingMethods){
-				if(shippingMethod.ID == '005'){
+				if(shippingMethod.custom.storePickupEnabled){
 					shipment.shippingMethod = shippingMethod;
 				}
 				
