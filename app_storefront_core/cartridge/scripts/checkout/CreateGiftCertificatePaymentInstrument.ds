@@ -48,6 +48,13 @@ function execute( pdict : PipelineDictionary ) : Number
 		return PIPELET_ERROR;
 	}
 
+    // make sure the GC is in the right currency
+    if( !(gc.balance.currencyCode == basket.currencyCode ))
+    {
+        pdict.Status = new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_CURRENCY_MISMATCH);
+        return PIPELET_ERROR;
+    }
+
 	// remove any duplicates
 	removeDuplicates(basket, giftCertID);
 
@@ -79,7 +86,7 @@ function execute( pdict : PipelineDictionary ) : Number
 function calculateAmount(amountToRedeem : Money, orderTotal : Money, basket : Basket) 
 {
 	// the total redemption amount of all gift certificates for the basket
-	var giftCertTotal : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
+	var giftCertTotal : Money = new Money(0.0, basket.currencyCode);
 
 	// iterate over the list of gift certificate payment instruments 
 	// and update the total redemption amount

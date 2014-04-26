@@ -237,12 +237,16 @@ ProductUtils.getPricing = function(item : Product) : String {
 	* (The converse is not true so this check is not perfect.)
 	* 
 	* Todo:  Improve this logic.
+	* 
+	* The check after the '||' above is to only consider standard prices for cases where the site and
+	* the session currencies are the same. This is because currently the "listPriceDefault" property
+	* can not be set per currency.
 	*/
-
+	
 	var priceModel = item.getPriceModel();
 	var standardPrice = null;
 
-	if (!priceModel.getPrice().available) {
+	if ((!priceModel.getPrice().available) || (!dw.system.Site.getCurrent().getCurrencyCode().equals(session.getCurrency().getCurrencyCode()))){
 		standardPrice = dw.value.Money.NOT_AVAILABLE;
 	} else if (('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)) {
 		standardPrice = priceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault);

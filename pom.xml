@@ -17,13 +17,13 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>14.4.0.9-SNAPSHOT</version>
+    <version>14.5.0.9-SNAPSHOT</version>
     <description>SiteGenesis Source</description>
 
     
-    <modules>
+    <!--<modules>
 	<module>storefront_refapp</module>
-    </modules>
+    </modules>-->
     
 	
     <build>

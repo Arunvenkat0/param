@@ -5,6 +5,10 @@
 		--------------------------------------------------------
  	</iscomment>
  	
+	<iscomment> Multi currency </iscomment>
+	<isinclude template="components/header/multicurrency"/>
+	
+	
 	 <isif condition="${ (pdict.CurrentCustomer.registered) && (!pdict.CurrentCustomer.authenticated)}">
 	     
 	     <li>
@@ -19,7 +23,7 @@
 		       			${Resource.msg('headercustomerinfo.pleaselogin','components',null)}
 		       		</a>
 	         	)
-	         </iselse>
+	         <iselse>
 	         	
 		     </isif>
 	     </li>
