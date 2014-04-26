@@ -1142,3 +1142,6 @@ ul.store-list .selected {background-color: #DDF0DF;}
 .search-suggestion-right-panel .first-term-bold{font-weight: bold;}
 .search-suggestion-left-panel-parent-category{color:#999999}
 
+/* Multi-currency */
+/* --------------------------------------------------------------------------------------- */
+.menu-utility-user .mc-class .currency-converter{height:12px;width:100%;padding:0;border:none;}

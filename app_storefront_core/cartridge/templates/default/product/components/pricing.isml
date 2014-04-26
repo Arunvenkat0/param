@@ -23,7 +23,7 @@
 <isset name="SalesPrice" value="${PriceModel.getPrice()}" scope="page"/>
 <isset name="BasePriceQuantity" value="${PriceModel.getBasePriceQuantity()}" scope="page"/>
 <isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page"/>
-<isset name="currencyCode" value="${dw.system.Site.getCurrent().currencyCode}" scope="page"/>
+<isset name="currencyCode" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>
 <iscomment>
 	Check whether there are any active customer promotions for this product.  If so, then
 	display two prices:  crossed-out pricebook price and promotional price.
@@ -73,7 +73,7 @@
 				<isinclude template="product/components/setpricing" />
 			</isloop>
 						
-			<isset name="CurrencyCode" value="${dw.system.Site.getCurrent().getCurrencyCode()}" scope="pdict" />
+			<isset name="CurrencyCode" value="${session.getCurrency().getCurrencyCode()}" scope="pdict" />
 
 			<isif condition="${pdict.ProductMinPrice > 0 && pdict.ProductMaxPrice > 0}">			
 				<div class="pricerange"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductMinPrice, pdict.CurrencyCode))}" /> - <isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductMaxPrice, pdict.CurrencyCode))}" /></div>
