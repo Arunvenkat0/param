@@ -3,25 +3,15 @@
   <description>Uses Business Manager to Enable the given 'PromotionName' for the given 'SiteName'.</description>
   <parameter name="SiteName"/>
   <parameter name="PromotionName"/>
-  <module name="library.module.app.busmgr.util.FSelectPromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="@{SiteName}"/>
     <parameter name="PromotionName" value="@{PromotionName}"/>
   </module>
-  <action name="EnableSelectedPromotionInActionsMenu"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions" disabled="true">
+    <parameter name="SiteName" value="@{SiteName}"/>
   </module>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${EnableSelectedElement}"/>
-  </module>
-  <action name="ConfirmEnablementChoice"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${ConfirmEnableButtonElement}"/>
-  </module>
-  <action name="VerifyEnablement"/>
-  <module name="library.function.FWaitForText">
-    <parameter name="textElement" value="${PromotionStatusElement}"/>
-    <parameter name="text" value="${PromotionStatusValue}"/>
+  <module name="library.module.app.busmgr.site.promotions.EnableAPromotion" disabled="true">
+    <parameter name="PromotionName" value="@{PromotionName}"/>
   </module>
   <action name="Logout"/>
   <module name="library.module.app.busmgr.LogoutBusinessManager"/>

@@ -3,25 +3,11 @@
   <description>Uses Business Manager to Diasble the given 'PromotionName' for the given 'SiteName'.</description>
   <parameter name="SiteName"/>
   <parameter name="PromotionName"/>
-  <module name="library.module.app.busmgr.util.FSelectPromotion">
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
     <parameter name="SiteName" value="@{SiteName}"/>
+  </module>
+  <module name="library.module.app.busmgr.site.promotions.DisableAPromotion">
     <parameter name="PromotionName" value="@{PromotionName}"/>
-  </module>
-  <action name="DisableSelectedPromotionInActionsMenu"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
-  </module>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${DisableSelectedElement}"/>
-  </module>
-  <action name="ConfirmDisablementChoice"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="${ConfirmDisableButtonElement}"/>
-  </module>
-  <action name="VerifyDisablement"/>
-  <module name="library.function.FWaitForText">
-    <parameter name="textElement" value="${PromotionStatusElement}"/>
-    <parameter name="text" value="${PromotionStatusValue}"/>
   </module>
   <action name="Logout"/>
   <module name="library.module.app.busmgr.LogoutBusinessManager"/>

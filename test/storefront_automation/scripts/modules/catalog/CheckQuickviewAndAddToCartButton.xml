@@ -7,12 +7,16 @@
     <parameter name="textElement" value="${SizeSwatch}"/>
     <parameter name="textStoreVariableName" value="ProductSize"/>
   </module>
-  <module name="library.function.FWaitForElement">
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=ul.Color:nth-child(1) &gt; li:nth-child(2) &gt; a:nth-child(1)"/>
+    <parameter name="textStoreVariableName" value="ProductColor"/>
+  </module>
+  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="css=.Color:first-child :not(.unselectable) .swatchanchor"/>
   </module>
-  <command name="storeText" target="css=.Color:first-child :not(.unselectable) .swatchanchor" value="ProductColor"/>
+  <command name="storeText" disabled="true" target="css=.Color:first-child :not(.unselectable) .swatchanchor" value="ProductColor"/>
   <action name="CheckSelectedColor"/>
-  <module name="library.function.FWaitForElement">
+  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
   </module>
   <module name="library.function.FClick">
