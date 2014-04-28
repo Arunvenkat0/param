@@ -3,11 +3,13 @@
   <description>Uses Business Manager to only enable 'PromotionName' for 'Site'.  Disables ALL promotions then enables only 'PromotionName'.</description>
   <parameter name="SiteName"/>
   <parameter name="PromotionName"/>
-  <module name="library.module.app.busmgr.DisableAllPromotions">
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
     <parameter name="SiteName" value="@{SiteName}"/>
   </module>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.site.promotions.DisableAllPromotions">
     <parameter name="SiteName" value="@{SiteName}"/>
+  </module>
+  <module name="library.module.app.busmgr.site.promotions.EnableAPromotion">
     <parameter name="PromotionName" value="@{PromotionName}"/>
   </module>
 </scriptmodule>

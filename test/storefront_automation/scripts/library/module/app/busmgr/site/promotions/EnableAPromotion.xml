@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Enables a promtion on a site's promotion page.</description>
+  <parameter name="PromotionName"/>
+  <action name="TypePromotionName"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="${SearchInputFieldElement}"/>
+    <parameter name="inputString" value="@{PromotionName}"/>
+  </module>
+  <action name="ClickSearchButton"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SearchButtonElement}"/>
+  </module>
+  <action name="SelectSearchResults"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SelectVisisbleElement}"/>
+  </module>
+  <action name="EnableSelectedPromotionInActionsMenu"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${EnableSelectedElement}"/>
+  </module>
+  <action name="ConfirmEnablementChoice"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${ConfirmEnableButtonElement}"/>
+  </module>
+  <action name="VerifyEnablement"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="${PromotionStatusElement}"/>
+    <parameter name="text" value="Yes"/>
+  </module>
+</scriptmodule>
