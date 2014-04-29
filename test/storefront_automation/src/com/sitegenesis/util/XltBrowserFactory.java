@@ -62,7 +62,7 @@ public class XltBrowserFactory {
 		} else if ((driverName.equalsIgnoreCase(PHANTOM_JS))) { 
 			
 			XltLogger.runTimeLogger.info("Using PhantomJS driver");
-			webDriver = getPhantomWebDriver(width, height);
+			webDriver = getPhantomWebDriver();
 		
 		} else if ((driverName.equalsIgnoreCase(FIRE_FOX))) {
 			
@@ -72,15 +72,18 @@ public class XltBrowserFactory {
 		} else if ((driverName.equalsIgnoreCase(XLT))) {
 			
 			XltLogger.runTimeLogger.info("Using Xlt driver");
-			webDriver = getXLTWebDriver(width, height);
+			webDriver = getXLTWebDriver();
 			
 		} else {  /* No Driver Type Identified.... */
+			String message = "No webdriver could be determined for \"" + driverName + "\", Not setting one, so this will now fail.";
+			XltLogger.runTimeLogger.error(message);
+			webDriver = null;
 			
-			String message = "No webdriver could be determined for \""
-					+ driverName + "\", Setting default PhantomJS driver.";
-			XltLogger.runTimeLogger.info(message);
-			XltLogger.runTimeLogger.info("Using PhantomJS driver");
-			webDriver = getPhantomWebDriver(width, height);
+//			String message = "No webdriver could be determined for \""
+//					+ driverName + "\", Setting default PhantomJS driver.";
+//			XltLogger.runTimeLogger.info(message);
+//			XltLogger.runTimeLogger.info("Using PhantomJS driver");
+//			webDriver = getPhantomWebDriver();
 
 		}
 		
@@ -130,11 +133,9 @@ public class XltBrowserFactory {
 	
 	/**
 	 * Get a Phantom JS WebDriver instance.
-	 * @param width
-	 * @param height
 	 * @return WebDriver
 	 */
-	private static WebDriver getPhantomWebDriver(int width, int height) {
+	private static WebDriver getPhantomWebDriver() {
 		
 		WebDriver webDriver = null;
 	
@@ -154,11 +155,9 @@ public class XltBrowserFactory {
 	
 	/**
 	 * Get an XLT WebDriver instance.
-	 * @param width
-	 * @param height
 	 * @return WebDriver
 	 */
-	private static WebDriver getXLTWebDriver(int width, int height) {
+	private static WebDriver getXLTWebDriver() {
 		
 		WebDriver webDriver = null;
 		
