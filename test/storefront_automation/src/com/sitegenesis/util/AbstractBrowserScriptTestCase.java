@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.util.XltLogger;
 import com.xceptance.xlt.api.util.XltProperties;
+import com.xceptance.xlt.api.webdriver.XltDriver;
 
 public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase 
 {
@@ -23,7 +24,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 	 */
 	public AbstractBrowserScriptTestCase(int width, int height) 
 	{
-		// get the wanted drivers from the properies
+		// get the wanted drivers from the properties
 		final String driverName = XltProperties.getInstance().getProperty("webdriver");
 		
 		if (driverName.equalsIgnoreCase("chrome"))
@@ -39,6 +40,10 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 		{
 			webDriver = new FirefoxDriver();
 			webDriver.manage().window().setSize(new Dimension(width, height));
+		}
+		else if ((driverName.equalsIgnoreCase("xlt")))
+		{
+			webDriver = new XltDriver();
 		}
 		else
 		{
