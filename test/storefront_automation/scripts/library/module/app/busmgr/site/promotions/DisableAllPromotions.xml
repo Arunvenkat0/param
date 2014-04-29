@@ -5,6 +5,9 @@
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="//div[text()=&quot;Promotions&quot;]"/>
   </module>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.my-paging-display"/>
+  </module>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=img.x-form-trigger.x-form-trigger-arrow "/>
   </module>
