@@ -60,5 +60,6 @@
   </module>
   <command name="mouseOut" target="css=.mini-cart-content"/>
   <command name="mouseOver" target="css=.mini-cart-total-label"/>
+  <action name="BUILDFAIL"/>
   <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
 </scriptmodule>
