@@ -58,6 +58,7 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=#send-to-friend-dialog .send-button"/>
   </module>
+  <command name="pause" value="1500"/>
   <command name="waitForTextPresent" value="Your message has been sent."/>
   <action name="CloseConfirmationDialog"/>
   <module name="library.function.FClick">
