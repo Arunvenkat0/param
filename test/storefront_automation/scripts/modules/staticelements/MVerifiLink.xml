@@ -8,7 +8,7 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="@{LinkToClick}"/>
   </module>
-  <command name="assertTitle" value="@{CheckTitle}"/>
+  <command name="assertTitle" value="regexp:^@{CheckTitle}.*"/>
   <command name="waitForElementPresent" target="@{ElementToVerify}"/>
   <command name="clickAndWait" target="@{ElementToClickForPreviousPage}"/>
 </scriptmodule>
