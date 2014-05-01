@@ -3,5 +3,5 @@
   <MainCategoryNumber>2</MainCategoryNumber>
   <MainCategoryName>Womens</MainCategoryName>
   <SubCategoryName>Clothing</SubCategoryName>
-  <SizeSwatch>css=.size .emptyswatch:nth-child(2) a</SizeSwatch>
+  <SizeSwatch>css=.size .emptyswatch:nth-child(1) a</SizeSwatch>
 </data>

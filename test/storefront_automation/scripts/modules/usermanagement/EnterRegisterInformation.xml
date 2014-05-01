@@ -18,6 +18,7 @@ To check the validity rules for email and password wrong data are entered in a f
   <command name="type" target="id=dwfrm_profile_login_passwordconfirm" value="@{PasswordTooShort}"/>
   <action name="AndCheckResult"/>
   <command name="clickAndWait" target="name=dwfrm_profile_confirm value=Apply"/>
+  <command name="pause" value="500"/>
   <command name="assertText" target="id=dwfrm_profile_customer_firstname" value="@{FirstName}"/>
   <command name="assertText" target="id=dwfrm_profile_customer_lastname" value="@{LastName}"/>
   <command name="assertText" target="css=#dwfrm_profile_customer_email + span" value="The email address is invalid."/>
