@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Uses Business Manager to Enable the given 'PromotionName' for the given 'SiteName'.</description>
   <parameter name="SiteName"/>
-  <parameter name="PromotionName"/>
+  <parameter name="PromotionName1"/>
+  <parameter name="PromotionName2"/>
   <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="@{SiteName}"/>
-    <parameter name="PromotionName" value="@{PromotionName}"/>
+    <parameter name="PromotionName" value="@{PromotionName1}"/>
+  </module>
+  <action name="EnableSecondPromotion"/>
+  <module name="library.module.app.busmgr.site.promotions.EnableAPromotion">
+    <parameter name="PromotionName" value="@{PromotionName2}"/>
   </module>
   <action name="Logout"/>
   <module name="library.module.app.busmgr.LogoutBusinessManager"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <PromotionName>$50FixedProductsAmountAbove100</PromotionName>
+  <PromotionName1>ExclusivityGlobal1</PromotionName1>
+  <PromotionName2>ExclusivityClass1</PromotionName2>
   <CatalogLevel1>Womens</CatalogLevel1>
   <CatalogLevel2>Clothing</CatalogLevel2>
   <CatalogLevel3>Tops</CatalogLevel3>

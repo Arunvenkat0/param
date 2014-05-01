@@ -36,7 +36,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 				@Override
 				public void run()
 				{
-					System.out.println("Shutdown Hook Called: webDriver.quit()");
+					//System.out.println("Shutdown Hook Called: webDriver.quit()");
 					webDriver.quit();
 				}
 			});
@@ -63,7 +63,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 		// do we want to close it after the test?
 		if (XltProperties.getInstance().getProperty("webdriver.shutdownAfterTest", true))
 		{
-			System.out.println("Stop Web Driver: webDriver.quit()");
+			//System.out.println("Stop Web Driver: webDriver.quit()");
 			webDriver.quit();
 		}
 	}
