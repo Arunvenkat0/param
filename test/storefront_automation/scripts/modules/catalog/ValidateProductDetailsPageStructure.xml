@@ -7,11 +7,13 @@
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=h1.product-name"/>
   </module>
-  <action name="BUILDFAIL"/>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-primary-image img"/>
   </module>
   <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=#product-content &gt; div.product-price "/>
+  </module>
+  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="id('product-content')//div[@class='product-price']"/>
   </module>
   <command name="assertXpathCount" target="id('product-content')//div[@class='product-price']" value="2">
@@ -27,7 +29,7 @@
     <parameter name="assertedElement" value="css=.addthis_toolbox"/>
   </module>
   <module name="library.function.FWaitForElement">
-    <parameter name="element" value="id('pdpMain')//div[contains(@class,'product-tabs')]/ul/li"/>
+    <parameter name="element" value="css=#pdpMain .product-tabs &gt; ul &gt; li"/>
   </module>
   <command name="assertXpathCount" target="id('pdpMain')//div[contains(@class,'product-tabs')]/ul/li" value="3">
     <comment>Checks if 3 tab controls are displayed.</comment>
