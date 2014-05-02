@@ -6,9 +6,20 @@ LinkText - link to click on to get to gift registry page
 Headline - main page headline of the gift registry page</description>
   <parameter name="LinkText"/>
   <parameter name="Headline"/>
-  <command name="clickAndWait" target="link=regexpi:@{LinkText}"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="regexpi:Gift Registry"/>
-  <command name="assertText" target="css=#primary h1" value="@{Headline}"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="link=regexpi:@{LinkText}"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="link=regexpi:@{LinkText}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="regexpi:Gift Registry"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.breadcrumb-last" value="regexpi:Gift Registry"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#primary h1"/>
+    <parameter name="textPattern" value="@{Headline}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=#primary h1" value="@{Headline}"/>
   <command name="assertElementPresent" target="id=dwfrm_productlists_search_registrantLastName"/>
   <command name="assertElementPresent" target="id=dwfrm_productlists_search_registrantFirstName"/>
   <command name="assertElementPresent" target="id=dwfrm_productlists_search_eventType"/>
