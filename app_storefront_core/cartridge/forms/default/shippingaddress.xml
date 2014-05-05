@@ -13,6 +13,7 @@
 		<options>
 			<option optionid="" 	label="forms.select"	value=""/>
 			<option optionid="US" 	label="country.unitedstates"	value="US"/>
+			<option optionid="DE" 	label="country.germany"			value="DE"/>			
 			<option optionid="CA" 	label="country.canada"			value="CA"/>
 		</options>	
 	</field>
