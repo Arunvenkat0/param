@@ -264,6 +264,13 @@
             </node>
             <simple-transition/>
             <node>
+              <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.login.password" key="FormElement"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <end-node name="login_failed"/>
               <node-display x="0" y="1"/>
             </node>
@@ -280,7 +287,7 @@
       <simple-transition/>
       <node>
         <end-node name="login_succeeded"/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
       </node>
     </segment>
   </branch>
