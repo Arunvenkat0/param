@@ -225,6 +225,20 @@
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.profile.login.passwordconfirm" key="FormElement"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.profile.login.password" key="FormElement"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
@@ -232,7 +246,11 @@
         <join-node/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <interaction-continue-node secure="false" start-name="CheckoutConfirmation" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/confirmation/confirmation"/>
