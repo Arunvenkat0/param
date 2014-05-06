@@ -7,14 +7,19 @@
 - default color is selected
 - size is selected
 - cart button is enabled</description>
-  <module name="library.function.FSelect">
-    <parameter name="element" value="css=#grid-sort-header"/>
-    <parameter name="selection" value="Price Low To High"/>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="css=#grid-sort-header"/>
+    <parameter name="selectLabel" value="Product Name Z - A"/>
+    <parameter name="labelValue" value="Product Name Z - A"/>
   </module>
-  <command name="pause" value="2000"/>
-  <module name="library.function.FWaitForText">
+  <module name="library.function.FSelect" disabled="true">
+    <parameter name="element" value="css=#grid-sort-header"/>
+    <parameter name="selection" value="Product Name Z - A"/>
+  </module>
+  <command name="pause" disabled="true" value="2000"/>
+  <module name="library.function.FWaitForText" disabled="true">
     <parameter name="textElement" value="css=#grid-sort-header &gt; option[selected=&quot;selected&quot;]"/>
-    <parameter name="text" value="Price Low To High"/>
+    <parameter name="text" value="Product Name Z - A"/>
   </module>
   <command name="pause" value="4000"/>
   <module name="library.function.FStoreText">

@@ -8,7 +8,7 @@
     <parameter name="textStoreVariableName" value="ProductSize"/>
   </module>
   <module name="library.function.FStoreText">
-    <parameter name="textElement" value="css=ul.Color:nth-child(1) &gt; li:nth-child(2) &gt; a:nth-child(1)"/>
+    <parameter name="textElement" value="css=ul.Color:nth-child(1) &gt; li:nth-child(1) &gt; a:nth-child(1)"/>
     <parameter name="textStoreVariableName" value="ProductColor"/>
   </module>
   <action name="CheckSelectedColor"/>
