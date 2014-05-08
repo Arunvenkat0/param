@@ -320,7 +320,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="!empty(CurrentForms.ordertrack.orderNumber.value) &amp;&amp; !empty(CurrentForms.ordertrack.postalCode.value)" condition-operator="expr"/>
+        <decision-node condition-key="!empty(CurrentForms.ordertrack.orderNumber.value) &amp;&amp; !empty(CurrentForms.ordertrack.postalCode.value) &amp;&amp; !empty(CurrentForms.ordertrack.orderEmail.value)" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in"/>
@@ -414,9 +414,19 @@
                         </node>
                         <simple-transition/>
                         <node>
-                          <end-node name="ok"/>
+                          <decision-node condition-key="Order.customerEmail == CurrentForms.ordertrack.orderEmail.value" condition-operator="expr"/>
                           <node-display x="0" y="1"/>
+                          <branch basename="b2" source-connector="yes">
+                            <transition target-connector="in"/>
+                            <segment>
+                              <node>
+                                <end-node name="ok"/>
+                                <node-display x="0" y="1"/>
+                              </node>
+                            </segment>
+                          </branch>
                         </node>
+                        <transition target-connector="in2" target-path="../../../+3"/>
                       </segment>
                     </branch>
                   </node>
@@ -446,10 +456,17 @@
         <join-node/>
         <node-display x="0" y="2"/>
       </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="2"/>
+      </node>
       <simple-transition/>
       <node>
         <end-node name="error"/>
-        <node-display x="0" y="2"/>
+        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>

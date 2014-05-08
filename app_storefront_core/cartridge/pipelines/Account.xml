@@ -1753,7 +1753,7 @@
         <text-node>
           <description>This pipeline contains the login procedure specific for the customer account, e.g. order tracking.</description>
         </text-node>
-        <node-display x="4" y="15"/>
+        <node-display x="3" y="15"/>
       </node>
     </segment>
   </branch>
@@ -1761,9 +1761,13 @@
     <segment>
       <node>
         <start-node call-mode="private" name="RequireLogin" secure="false"/>
-        <node-display x="4" y="16"/>
+        <node-display x="4" y="15"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="!CurrentCustomer.authenticated" condition-operator="expr"/>
         <node-display x="0" y="1"/>
@@ -1774,6 +1778,17 @@
             </transition-display>
           </transition>
           <segment>
+            <node>
+              <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.ordertrack" key="FormElement"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.login" key="FormElement"/>
@@ -2036,14 +2051,10 @@
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="1" y="0"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
       <node>
         <end-node/>
-        <node-display orientation="horizontal" x="1" y="0"/>
+        <node-display orientation="horizontal" x="2" y="0"/>
       </node>
     </segment>
   </branch>

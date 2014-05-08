@@ -26,6 +26,8 @@
 					<fieldset>
 					
 						<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderNumber}" type="input"/>
+
+						<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderEmail}" type="input"/>
 						
 						<isinputfield formfield="${pdict.CurrentForms.ordertrack.postalCode}" type="input"/>
 						
