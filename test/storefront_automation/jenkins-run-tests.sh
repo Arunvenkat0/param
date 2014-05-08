@@ -10,4 +10,4 @@ cd $cmddir
 
 # wrapper script is so jenkins will not fail the job when xvfb-run can't kill a non-existent process
 # risk is that other failures might be more significant
-xvfb-run /build/ant/latest/bin/ant -Dxlt.home.dir=/build/xlt/xlt-4.3.4 -Dwebdriver=firefox -logger || true
+xvfb-run /build/ant/latest/bin/ant -Dxlt.home.dir=/build/xlt/xlt-4.3.4 -Dwebdriver=firefox -logger org.apache.tools.ant.listener.AnsiColorLogger test || true
