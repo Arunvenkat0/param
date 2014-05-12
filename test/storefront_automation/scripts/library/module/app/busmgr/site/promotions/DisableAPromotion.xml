@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Disables a promtion on a site's promotion page.</description>
+  <description>Disables a 'PromotionName' on a site's promotion page.</description>
   <parameter name="PromotionName"/>
   <action name="TypePromotionName"/>
   <module name="library.function.FType">
@@ -10,6 +10,21 @@
   <action name="ClickSearchButton"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${SearchButtonElement}"/>
+  </module>
+  <action name="Show50"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="//div[text()=&quot;Promotions&quot;]"/>
+  </module>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.my-paging-display"/>
+  </module>
+  <command name="pause" value="2000"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=img.x-form-trigger.x-form-trigger-arrow "/>
+  </module>
+  <command name="pause" value="2000"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//*[text()=&quot;50&quot;]"/>
   </module>
   <action name="SelectSearchResults"/>
   <module name="library.function.FClick">
