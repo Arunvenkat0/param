@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Enables a promtion on a site's promotion page.</description>
+  <description>Enables a  'PromotionName' on a site's promotion page.</description>
   <parameter name="PromotionName"/>
   <action name="TypePromotionName"/>
   <module name="library.function.FType">

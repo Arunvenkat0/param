@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <PromotionName>ExclusivityGlobal1</PromotionName>
-  <CatalogLevel1>Womens</CatalogLevel1>
+  <PromotionName1>ExclusivityNo</PromotionName1>
+  <PromotionName2>DuplicateExclusivityNo-Low</PromotionName2>
+  <CatalogLevel1>Mens</CatalogLevel1>
   <CatalogLevel2>Clothing</CatalogLevel2>
-  <CatalogLevel3>Tops</CatalogLevel3>
-  <ProductName1>Floral Cardigan</ProductName1>
-  <ProductName2>Drape Front Cardigan</ProductName2>
-  <ItemTotal1>$209.00</ItemTotal1>
-  <ItemTotal2>$189.00</ItemTotal2>
+  <CatalogLevel3>Suits</CatalogLevel3>
+  <ProductName1>Charcoal Single Pleat Striped Wool Suit</ProductName1>
+  <Size>42</Size>
+  <Width>Regular</Width>
+  <OrderDiscountAmount>- $179.99</OrderDiscountAmount>
+  <EstimatedTotalWithDiscount>$120.00</EstimatedTotalWithDiscount>
 </data>

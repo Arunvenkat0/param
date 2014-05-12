@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C130270</tags>
   <description>Test Case ID:(C130270)</description>
-  <module name="library.module.app.busmgr.EnableTwoPromotions">
+  <module name="library.module.app.busmgr.BusinessManagerEnableTwoPromotions">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName1" value="${PromotionName1}"/>
     <parameter name="PromotionName2" value="${PromotionName2}"/>
