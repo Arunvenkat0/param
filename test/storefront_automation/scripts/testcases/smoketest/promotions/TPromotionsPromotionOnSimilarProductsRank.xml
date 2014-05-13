@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
-  <tags>C131732</tags>
-  <description>Test Case ID:(C131732)</description>
+  <tags>C131733</tags>
+  <description>Test Case ID:(C131733)</description>
   <module name="library.module.app.busmgr.BusinessManagerEnableTwoPromotions">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName1" value="${PromotionName1}"/>
@@ -13,7 +13,6 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
   </module>
-  <action name="Refine"/>
   <action name="SelectFirstProduct"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName1}"/>
@@ -25,11 +24,16 @@
     <parameter name="Width" value="${Width}"/>
   </module>
   <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
-  <action name="VERIFY-PromoMessage"/>
+  <action name="VERIFY-PromoMessageADisplayed"/>
   <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.cart-promo &gt; div:nth-child(1) &gt; span:nth-child(2)"/>
     <parameter name="textPattern" value="${PromotionName1}"/>
+  </module>
+  <action name="VERIFY-PromoMessageNOTDisplayed"/>
+  <module name="library.function.FAssertCountOnPage">
+    <parameter name="string" value="${PromotionName2}"/>
+    <parameter name="numberExpected" value="0"/>
   </module>
   <action name="VERIFY-PromoDiscount"/>
   <module name="library.function.FAssertText">
