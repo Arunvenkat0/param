@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <PromotionName1>ExclusivityClass1</PromotionName1>
+  <PromotionName2>ExclusivityClass2</PromotionName2>
+  <CatalogLevel1>Mens</CatalogLevel1>
+  <CatalogLevel2>Clothing</CatalogLevel2>
+  <CatalogLevel3>Suits</CatalogLevel3>
+  <ProductName1>Charcoal Single Pleat Striped Wool Suit</ProductName1>
+  <Size>42</Size>
+  <Width>Regular</Width>
+  <OrderDiscountAmount>- $120.00</OrderDiscountAmount>
+  <EstimatedTotalWithDiscount>$179.99</EstimatedTotalWithDiscount>
+  <CatalogLevel1Product2>Womens</CatalogLevel1Product2>
+  <CatalogLevel2Product2>Clothing</CatalogLevel2Product2>
+  <Product2Refinement>$100 - $499.99</Product2Refinement>
+  <ProductName2>Crew Neck Jacket</ProductName2>
+  <Product2Sorting>Price High To Low</Product2Sorting>
+  <Product2Size>8</Product2Size>
+</data>
