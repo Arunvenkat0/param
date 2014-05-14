@@ -1,16 +1,10 @@
 package com.sitegenesis.util;
 
 import org.junit.After;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
-import com.xceptance.xlt.api.util.XltLogger;
 import com.xceptance.xlt.api.util.XltProperties;
-import com.xceptance.xlt.api.webdriver.XltDriver;
 
 public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase 
 {
