@@ -3,7 +3,7 @@
   <description>Logs into Business Manager and navigates Site &gt; 'SiteName' &gt; Online Marketing &gt; Promotions</description>
   <parameter name="SiteName"/>
   <module name="library.module.app.busmgr.login.LoginBusinessManager"/>
-  <module name="library.module.app.busmgr.site.promotions.OpenSitePromotionsPage">
+  <module name="library.module.app.busmgr.home.OpenSitePromotionsPage">
     <parameter name="SiteName" value="@{SiteName}"/>
   </module>
 </scriptmodule>
