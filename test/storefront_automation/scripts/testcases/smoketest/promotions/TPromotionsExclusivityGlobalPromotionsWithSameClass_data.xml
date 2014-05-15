@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <PromotionName1>ExclusivityGlobal1</PromotionName1>
+  <PromotionName2>ExclusivityGlobal2</PromotionName2>
+  <CatalogLevel1>Electronics</CatalogLevel1>
+  <CatalogLevel2>Digital Cameras</CatalogLevel2>
+  <Product1Refinement>Kodak</Product1Refinement>
+  <ProductName1>Kodak EasyShare V1273 Digital Point and Shoot Camera</ProductName1>
+  <Size>42</Size>
+  <Width>Regular</Width>
+  <EstimatedTotalWithDiscount>$114.97</EstimatedTotalWithDiscount>
+  <CatalogLevel1Product2>Electronics</CatalogLevel1Product2>
+  <CatalogLevel2Product2>Digital Cameras</CatalogLevel2Product2>
+  <Product2Refinement>Nikon</Product2Refinement>
+  <ProductName2>Nikon D60 Digital SLR Camera w/18-55mm Lens</ProductName2>
+</data>

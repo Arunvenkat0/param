@@ -3,6 +3,8 @@
   <description>1. Waits for the 'textElement' to exist.  2. Asserts that the 'textElement' matches the 'textPattern'.</description>
   <parameter name="textElement"/>
   <parameter name="textPattern"/>
-  <command name="waitForElementPresent" target="@{textElement}"/>
-  <command name="assertText" target="@{textElement}" value="@{textPattern}"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="@{textElement}"/>
+    <parameter name="text" value="@{textPattern}"/>
+  </module>
 </scriptmodule>

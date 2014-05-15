@@ -4,4 +4,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${PromotionsMenuElement}"/>
   </module>
+  <command name="waitForElementPresent" target="css=div.dw-bm-widget-searchpanel"/>
 </scriptmodule>

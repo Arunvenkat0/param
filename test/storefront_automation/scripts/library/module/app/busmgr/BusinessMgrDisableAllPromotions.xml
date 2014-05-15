@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="SiteName"/>
+  <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
+    <parameter name="SiteName" value="@{SiteName}"/>
+  </module>
+  <module name="library.module.app.busmgr.site.promotions.DisableAllPromotions"/>
+  <module name="library.module.app.busmgr.LogoutBusinessManager"/>
+</scriptmodule>

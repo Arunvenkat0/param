@@ -10,7 +10,9 @@ $5 &lt;= x &lt;= $5000</description>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=AddToBasketButton"/>
   </module>
-  <command name="waitForText" target="css=#dwfrm_giftcert_purchase_amount + span" value="Gift Certificate can only be purchased with a minimum of $5 and maximum of $5000"/>
+  <command name="waitForText" target="css=#dwfrm_giftcert_purchase_amount + span" value="Gift Certificate can only be purchased with a minimum of 5 and maximum of 5000">
+    <comment>Currency character removed to not conflict with multi-currency settings.</comment>
+  </command>
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_giftcert_purchase_amount"/>
     <parameter name="inputString" value="4"/>

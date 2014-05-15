@@ -4,4 +4,5 @@
   <parameter name="clickElement"/>
   <command name="waitForElementPresent" target="@{clickElement}"/>
   <command name="clickAndWait" target="@{clickElement}"/>
+  <command name="pause" value="250"/>
 </scriptmodule>
