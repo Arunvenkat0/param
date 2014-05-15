@@ -28,10 +28,10 @@
 		<isloop items="${pdict.ApplicableShippingMethods}" var="shippingMethod" status="loopstate">
 
 		<iscomment>exclude the shipming method '005', instore shipming method</iscomment>
-		<isif condition="${shippingMethod.ID == '005'}">
+
+		<isif condition="${shippingMethod.custom.storePickupEnabled}">
 			<iscontinue>
 		</isif>
-
 		<isset name="shippingCost" value="${pdict.ShippingCosts.get(shippingMethod.ID)}" scope="page"/>
 			
 			<div class="form-row form-indent label-inline">
@@ -60,7 +60,7 @@
 		    				<a class="tooltip">(
 		    					${Resource.msg('singleshipping.details','checkout',null)}
 			    				<div class="tooltip-content" data-layout="small tooltip-shipping">
-			    					<isset name="productShipCost" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			    					<isset name="productShipCost" value="${new dw.value.Money(0.0, session.getCurrency().getCurrencyCode())}" scope="page"/>
 					    			<isloop items="${shippingCost.productShippingCosts}" var="productShipping" status="loopstate">
 					    				<isif condition="${productShipping.shippingCost != null && productShipping.shippingCost.amount != null && productShipping.shippingCost.amount > 0}">
 					    					<isset name="productShipCost" value="${productShipCost.add(productShipping.shippingCost.amount)}" scope="page"/>

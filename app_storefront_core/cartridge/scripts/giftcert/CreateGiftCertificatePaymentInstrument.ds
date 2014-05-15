@@ -83,6 +83,13 @@ function execute( pdict : PipelineDictionary ) : Number
 								"",	args);
 		return PIPELET_ERROR;
 	} 
+	
+	// make sure the GC is in the right currency
+    if( !(balance.currencyCode == basket.currencyCode ))
+    {
+        pdict.Status = new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_WRONG_CURRENCY);
+        return PIPELET_ERROR;
+    }
 			
 	// remove any duplicates
 	removeDuplicates(basket, giftCertID);
@@ -91,7 +98,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	// adjust the amount being applied to the current 
 	// gift certificate based on the order total minus 
 	// the aggregate amount of the current gift certificates.
-	var gcAmount = calculateAmount(new Money(amount, Site.getCurrent().getCurrencyCode()), 
+	var gcAmount = calculateAmount(new Money(amount, basket.currencyCode), 
 									orderTotal, basket);
 
 	var pi : PaymentInstrument = basket.createGiftCertificatePaymentInstrument(giftCertID, gcAmount);
@@ -111,7 +118,7 @@ Gift Certificates from the order total.
 function calculateAmount(amount : Money, orderTotal : Money, basket : Basket) 
 {
 
-	var gcTotal : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
+	var gcTotal : Money = new Money(0.0, basket.currencyCode); //Site.getCurrent().getCurrencyCode()
 
 	// iterate over the list of payment instruments 
 	// and fetch amount

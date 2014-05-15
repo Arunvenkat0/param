@@ -83,7 +83,7 @@
 									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
 											<isset name="shippingMethod" value="${option.object}" scope="page"/>
-											<isif condition=${shippingMethod.ID == '005'}>
+											<isif condition=${shippingMethod.custom.storePickupEnabled}>
 											<div class="instore-shipping-option"><isprint value="${shippingMethod.displayName}"/>: <isprint value="${shippingModel.getShippingCost(shippingMethod).getAmount()}"/> (<isprint value="${shippingMethod.description}"/>)</div>
 											</isif>
 										</isloop>
@@ -93,7 +93,7 @@
 										<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
 											<isset name="shippingMethod" value="${option.object}" scope="page"/>
-											<isif condition=${shippingMethod.ID != '005'}>
+											<isif condition=${!shippingMethod.custom.storePickupEnabled}>
 											<option value="${shippingMethod.ID}" <isif condition="${option.selected}">selected="selected"</isif>><isprint value="${shippingMethod.displayName}"/>: <isprint value="${shippingModel.getShippingCost(shippingMethod).getAmount()}"/> (<isprint value="${shippingMethod.description}"/>)</option>
 											</isif>
 										</isloop>
