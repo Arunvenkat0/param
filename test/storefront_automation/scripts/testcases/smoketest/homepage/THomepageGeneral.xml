@@ -303,6 +303,7 @@
   <action name="Next-Previous-section"/>
   <module name="modules.smoketest.MHomePageNextPreviousSection"/>
   <action name="carousel-horizontal"/>
+  <command name="pause" value="2000"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="//div[contains(@class,'jcarousel-control')]/a[contains(@class,'link-1')]"/>
   </module>
