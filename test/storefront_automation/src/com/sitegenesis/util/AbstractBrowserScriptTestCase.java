@@ -1,14 +1,9 @@
 package com.sitegenesis.util;
 
 import org.junit.After;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
-import com.xceptance.xlt.api.util.XltLogger;
 import com.xceptance.xlt.api.util.XltProperties;
 
 public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase 
@@ -23,29 +18,9 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 	 */
 	public AbstractBrowserScriptTestCase(int width, int height) 
 	{
-		// get the wanted drivers from the properies
-		final String driverName = XltProperties.getInstance().getProperty("webdriver");
 		
-		if (driverName.equalsIgnoreCase("chrome"))
-		{
-			System.setProperty("webdriver.chrome.driver", XltProperties.getInstance().getProperty("webdriver.chrome.binary.location"));
-
-			final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
-			webDriver = new ChromeDriver(capabilities);
-			webDriver.manage().window().setSize(new Dimension(width, height));
-		}
-		else if ((driverName.equalsIgnoreCase("firefox")))
-		{
-			webDriver = new FirefoxDriver();
-			webDriver.manage().window().setSize(new Dimension(width, height));
-		}
-		else
-		{
-			XltLogger.runTimeLogger.error("No webdriver could be determined. Not setting one, so this will now fail.");
-			webDriver = null;
-		}
-
+		webDriver = XltBrowserFactory.getWebDriver( width, height );
+	
 		// enabled shutdown on quit
 		if (webDriver != null && XltProperties.getInstance().getProperty("webdriver.shutdownAfterTest", true))
 		{
@@ -55,6 +30,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 				@Override
 				public void run()
 				{
+					//System.out.println("Shutdown Hook Called: webDriver.quit()");
 					webDriver.quit();
 				}
 			});
@@ -65,13 +41,15 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 	}
 
 	/**
-	 * 
+	 * Default Constructor.
 	 */
 	public AbstractBrowserScriptTestCase()
 	{
+		
 		this(XltProperties.getInstance().getProperty("webdriver.screensize.width", 1200), 
 			 XltProperties.getInstance().getProperty("webdriver.screensize.height", 900));
 	}
+	
 	
 	@After
 	public void stopWebDriver() 
@@ -79,6 +57,7 @@ public class AbstractBrowserScriptTestCase extends AbstractScriptTestCase
 		// do we want to close it after the test?
 		if (XltProperties.getInstance().getProperty("webdriver.shutdownAfterTest", true))
 		{
+			//System.out.println("Stop Web Driver: webDriver.quit()");
 			webDriver.quit();
 		}
 	}

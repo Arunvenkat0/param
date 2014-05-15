@@ -2,4 +2,5 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>1. Waits for the 'element' to exist.</description>
   <parameter name="element"/>
+  <command name="waitForElementPresent" target="@{element}"/>
 </scriptmodule>

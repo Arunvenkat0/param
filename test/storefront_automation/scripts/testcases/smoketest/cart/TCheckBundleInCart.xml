@@ -14,7 +14,10 @@
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
   <action name="StoreNameOfEachProduct"/>
-  <command name="storeText" target="//div[@id='product-set-list']/div[1]//h1/a" value="ProductName1"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//div[@id='product-set-list']/div[1]//h1/a"/>
+    <parameter name="textStoreVariableName" value="ProductName1"/>
+  </module>
   <command name="storeText" target="//div[@id='product-set-list']/div[2]//h1/a" value="ProductName2"/>
   <command name="storeText" target="//div[@id='product-set-list']/div[3]//h1/a" value="ProductName3"/>
   <command name="storeText" target="//div[@id='product-set-list']/div[4]//h1/a" value="ProductName4"/>
@@ -25,9 +28,6 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="id=add-to-cart"/>
   </module>
-  <command name="click" disabled="true" target="id=add-to-cart">
-    <comment>Add product to cart.</comment>
-  </command>
   <action name="CheckMiniCart">
     <comment>Checks the correct behaviour of the mini cart window and the content of the added product</comment>
   </action>
@@ -88,8 +88,13 @@
   <command name="assertElementPresent" target="css=.in-wishlist"/>
   <command name="assertText" target="css=.in-wishlist" value="This item has been added to your Wish List."/>
   <action name="AddBundleToGiftRegistry"/>
-  <command name="clickAndWait" target="name=dwfrm_cart_shipments_i0_items_i0_addToGiftRegistry"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Gift Registry"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="name=dwfrm_cart_shipments_i0_items_i0_addToGiftRegistry"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Gift Registry"/>
+  </module>
   <command name="assertText" target="xpath=id('dwfrm_giftregistry_event')//legend[1]" value="regexpi:Event Information.*"/>
   <action name="EnterEventAndParticipantData"/>
   <module name="modules.giftregistry.GiftRegistryEnterEventAndParticipantData"/>
@@ -125,31 +130,47 @@
   <module name="modules.cart.ValidateCartBundleData"/>
   <action name="OpenBundle"/>
   <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[1]/td[2]/div[1]//a"/>
-  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]"/>
+    <parameter name="textPattern" value="${ProductName}"/>
+  </module>
+  <command name="assertText" disabled="true" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName}"/>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <action name="OpenProduct1"/>
   <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[2]/td[2]/div[1]//a"/>
-  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName1}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]"/>
+    <parameter name="textPattern" value="${ProductName1}"/>
+  </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <action name="OpenProduct2"/>
   <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[3]/td[2]/div[1]//a"/>
-  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName2}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]"/>
+    <parameter name="textPattern" value="${ProductName2}"/>
+  </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <action name="OpenProduct3"/>
   <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[4]/td[2]/div[1]//a"/>
-  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName3}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]"/>
+    <parameter name="textPattern" value="${ProductName3}"/>
+  </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>
   <action name="OpenProduct4"/>
   <command name="clickAndWait" target="//table[@id='cart-table']/tbody/tr[5]/td[2]/div[1]//a"/>
-  <command name="assertText" target="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]" value="${ProductName4}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//*[@id='pdpMain']/h1[contains(@class,'product-name')][1]"/>
+    <parameter name="textPattern" value="${ProductName4}"/>
+  </module>
   <module name="modules.cart.GotoCart">
     <comment>Go to Cart View</comment>
   </module>

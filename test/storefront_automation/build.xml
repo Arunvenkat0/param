@@ -64,7 +64,7 @@
 		<!-- 
             Run the junit tests. 
         -->
-		<junit forkmode="once" printsummary="on">
+		<junit forkmode="${project.junit-forkmode}" printsummary="on">
 			<!-- build the class path -->
 			<classpath refid="test.suite.class.path" />
 
@@ -77,7 +77,7 @@
 			<formatter type="xml" />
 
 			<!-- execute all configured tests -->
-			<batchtest fork="yes" todir="${test.results.dir}">
+			<batchtest fork="no" todir="${test.results.dir}">
 				<fileset dir="${test.src.dir}" includes="${test.cases.java}" />
 			</batchtest>
 		</junit>

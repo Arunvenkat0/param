@@ -144,9 +144,9 @@
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
     <parameter name="textPattern" value="2 x ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertTextCaseInsensitive">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
-    <parameter name="plainString" value="${ItemTotal2}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td.item-total &gt; span.price-adjusted-total &gt; span"/>
+    <parameter name="textPattern" value="${ItemTotal2}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">
