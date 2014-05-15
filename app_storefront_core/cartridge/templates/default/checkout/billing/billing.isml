@@ -194,7 +194,13 @@
 			    		</isif>
 			    		
 			    		<div class="balance"><!-- contains the balance information on a successful balance check -->
-							<isif condition="${!empty(pdict.giftCertError)}"><span class="error">${Resource.msg('billing.giftcertinvalid','checkout',null)}</span></isif>
+							<isif condition="${!empty(pdict.giftCertError)}">
+								<isif condition="${pdict.GiftCertStatusCode.code=='GIFTCERTIFICATE_CURRENCY_MISMATCH'}">
+									<span class="error">${Resource.msg('billinggiftcert.giftcertwrongcurrency','forms',null)}</span>
+								<iselse>
+									<span class="error">${Resource.msg('billing.giftcertinvalid','checkout',null)}</span>
+								</isif>
+							</isif>
 						</div>
 			    	</div>
 

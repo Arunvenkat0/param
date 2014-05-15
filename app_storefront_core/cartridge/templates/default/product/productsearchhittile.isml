@@ -122,7 +122,7 @@
 <div class="product-pricing">
 
 	<iscomment>Renders pricing information depending on the option or variation model, as well as scaled prices and so on.</iscomment>
-	<isset name="currencyCode" value="${dw.system.Site.getCurrent().currencyCode}" scope="page"/>	
+	<isset name="currencyCode" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>
 	<isif condition="${Product.productSet}">
 		<iscomment>Product set pricing</iscomment>
 		<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
