@@ -3,5 +3,5 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="${UpdateCartButtonElement}"/>
   </module>
-  <command name="pause" value="1500"/>
+  <command name="pause" value="3000"/>
 </scriptmodule>
