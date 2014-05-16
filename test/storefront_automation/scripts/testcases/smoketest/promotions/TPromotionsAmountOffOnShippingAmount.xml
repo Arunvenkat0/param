@@ -90,9 +90,6 @@
     <parameter name="SecurityCode" value="${SecurityCode}"/>
   </module>
   <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
-  <module name="library.function.FClick" disabled="true">
-    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
-  </module>
   <action name="SubmitOrder"/>
   <module name="library.module.app.sitegenesis.checkout.placeorder.ClickSubmitOrder"/>
   <action name="VERIFY-ShippingDiscount"/>
