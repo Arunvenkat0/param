@@ -3,10 +3,10 @@
   <description>Click product quick view link.</description>
   <parameter name="ProductName"/>
   <module name="library.function.FMouseOver">
-    <parameter name="element" value="xpath=//div[@class='product-image']/a[contains(@title,'@{ProductName}')]"/>
+    <parameter name="element" value="xpath=//div[@class='product-image']/a[@title=&quot;@{ProductName}&quot;]"/>
   </module>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="xpath=id('quickviewbutton')[contains(@title,'@{ProductName}')]"/>
+    <parameter name="clickElement" value="xpath=id('quickviewbutton')[contains(@title,&quot;@{ProductName}&quot;)]"/>
   </module>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="id=#QuickViewDialog"/>
