@@ -52,6 +52,9 @@
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectNumberOfProductsToDisplay">
     <parameter name="numberOfProductsToDisplay" value="60"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName2}"/>
   </module>
