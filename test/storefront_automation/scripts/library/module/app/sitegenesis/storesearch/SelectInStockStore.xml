@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Selects the store that has the product for the given 'ZipCode'.  (Store must be visible in the list)  Captures variables: SelectedStoreAddress, SelectedStoreCity, SelectedStoreState, SelectedStoreZip.</description>
+  <parameter name="ZipCode"/>
+  <action name="ClickSelectStoreButtonUsingZip"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / button"/>
+  </module>
+  <action name="CaptureSelectedStore-Address"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / span[contains(@class,&quot;store-tile-address&quot;)]"/>
+    <parameter name="textStoreVariableName" value="SelectedStoreAddress"/>
+  </module>
+  <action name="CaptureSelectedStore-City"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / span[contains(@class,&quot;store-tile-city&quot;)]"/>
+    <parameter name="textStoreVariableName" value="SelectedStoreCity"/>
+  </module>
+  <action name="CaptureSelectedStore-State"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / span[contains(@class,&quot;store-tile-state&quot;)]"/>
+    <parameter name="textStoreVariableName" value="SelectedStoreState"/>
+  </module>
+  <action name="CaptureSelectedStore-Zip"/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / span[contains(@class,&quot;store-tile-postalCode&quot;)]"/>
+    <parameter name="textStoreVariableName" value="SelectedStoreZip"/>
+  </module>
+  <action name="WaitForButtonToDisplaySelectionMessage-ThenClickContinue"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="//div[@class=&quot;store-list&quot;] // li[contains(@class,&quot;In-Stock&quot;)] / span[text()='02108'] / parent::li / button[contains(text(),&quot;Preferred Store&quot;)]"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="//button[contains(@class,&quot;close&quot;)]"/>
+  </module>
+</scriptmodule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Enters 'ZipCode' and clicks the  "Search" button in the store search pop-up dialog.</description>
+  <parameter name="ZipCode"/>
+  <module name="library.function.FTypeAndVerifyInput">
+    <parameter name="typeElement" value="${ZipCodeInputElement}"/>
+    <parameter name="inputString" value="@{ZipCode}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="${SearchButtonElement}"/>
+  </module>
+</scriptmodule>

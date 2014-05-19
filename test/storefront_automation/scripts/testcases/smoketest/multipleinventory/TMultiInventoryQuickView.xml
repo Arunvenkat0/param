@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <module name="library.module.app.busmgr.EnableInStorePickup"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
+    <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
+    <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductNameLink">
+    <parameter name="ProductName" value="${ProductName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.SelectSize">
+    <parameter name="Size" value="${Size}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.ClickStoreAvailablity"/>
+  <module name="library.module.app.sitegenesis.storesearch.SearchStoresNearYouWithZIP">
+    <parameter name="ZipCode" value="${ZipCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.storesearch.SelectInStockStore">
+    <parameter name="ZipCode" value="${OtherStoreZipCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.AddToCart" disabled="true"/>
+  <module name="library.module.app.busmgr.DisableInStorePickup"/>
+</testcase>

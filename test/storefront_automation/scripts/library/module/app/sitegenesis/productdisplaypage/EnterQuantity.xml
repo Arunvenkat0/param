@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Sets the quantity to 'number'.</description>
+  <parameter name="number"/>
+  <module name="library.function.FTypeAndVerifyInput">
+    <parameter name="typeElement" value="${quantityElement}"/>
+    <parameter name="inputString" value="@{number}"/>
+  </module>
+</scriptmodule>
