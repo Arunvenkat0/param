@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+  <description>Test Case ID:(C132426)</description>
   <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
@@ -16,13 +17,27 @@
   <module name="library.module.app.sitegenesis.productdisplaypage.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
+  <action name="VERIFY-CheckStoreAvailablityLinkAndPopUpDisplay"/>
   <module name="library.module.app.sitegenesis.productdisplaypage.ClickStoreAvailablity"/>
+  <action name="VERIFY-StoreAvailablityList"/>
   <module name="library.module.app.sitegenesis.storesearch.SearchStoresNearYouWithZIP">
     <parameter name="ZipCode" value="${ZipCode}"/>
   </module>
-  <module name="library.module.app.sitegenesis.storesearch.SelectInStockStore">
-    <parameter name="ZipCode" value="${OtherStoreZipCode}"/>
+  <module name="library.module.app.sitegenesis.storesearch.ClickChangeLocation"/>
+  <action name="VERIFY-StoreSearchDialogUI"/>
+  <module name="library.module.app.sitegenesis.storesearch.VerifyStoreSearchDialogUIElements"/>
+  <action name="VERIFY-StoreSearchBadInputError"/>
+  <module name="library.module.app.sitegenesis.storesearch.SearchStoresNearYouWithZIP">
+    <parameter name="ZipCode" value="000"/>
   </module>
-  <module name="library.module.app.sitegenesis.quickview.AddToCart" disabled="true"/>
+  <module name="library.module.app.sitegenesis.storesearch.VerifyInvalidZipErrorMessageDisplayed"/>
+  <action name="VERIFY-NoNearbyStores"/>
+  <module name="library.module.app.sitegenesis.productdisplaypage.ClickStoreAvailablity"/>
+  <module name="library.module.app.sitegenesis.storesearch.SearchStoresNearYouWithZIP">
+    <parameter name="ZipCode" value="94123"/>
+  </module>
+  <module name="library.module.app.sitegenesis.storesearch.VerifyStoreSearchNoResultsMessage"/>
+  <action name="CloseStoreSearchDialog"/>
+  <module name="testcases.smoketest.storelocator.ExitDialog"/>
   <module name="library.module.app.busmgr.DisableInStorePickup"/>
 </testcase>
