@@ -2,6 +2,6 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Clicks the "Check store availability" link.</description>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="${CheckStoreAvailabilityLinkElement}"/>
+    <parameter name="clickElement" value="css=div.availability  div.store-stock span.set-preferred-store    a"/>
   </module>
 </scriptmodule>

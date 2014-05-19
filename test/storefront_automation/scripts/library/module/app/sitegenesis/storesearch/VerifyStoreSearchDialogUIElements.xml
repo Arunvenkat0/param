@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.ui-dialog-title"/>
+    <parameter name="textPattern" value="WHAT'S AVAILABLE AT A STORE NEAR YOU"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=#userZip"/>
+  </module>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="css=#set-user-zip"/>
+  </module>
+</scriptmodule>

@@ -3,8 +3,10 @@
   <CatalogLevel1>Mens</CatalogLevel1>
   <CatalogLevel2>Clothing</CatalogLevel2>
   <CatalogLevel3>Pants</CatalogLevel3>
-  <ProductName>Straight Leg Stretch Trousers</ProductName>
+  <ProductName1>Straight Leg Stretch Trousers</ProductName1>
+  <ProductName2>Basic Leg Trousers</ProductName2>
   <Size>32</Size>
   <ZipCode>01850</ZipCode>
-  <OtherStoreZipCode>02108</OtherStoreZipCode>
+  <Product1StoreZipCode>02108</Product1StoreZipCode>
+  <Product2StoreZipCode>02141</Product2StoreZipCode>
 </data>
