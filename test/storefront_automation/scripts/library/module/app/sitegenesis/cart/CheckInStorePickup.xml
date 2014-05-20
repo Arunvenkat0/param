@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="itemNumberInCartList"/>
+  <module name="library.function.FCheck">
+    <parameter name="checkElement" value="css=form#cart-items-form table.item-list tbody tr:nth-child(@{itemNumberInCartList}) div.instore-delivery input.radio-url[value=&quot;store&quot;]"/>
+  </module>
+</scriptmodule>
