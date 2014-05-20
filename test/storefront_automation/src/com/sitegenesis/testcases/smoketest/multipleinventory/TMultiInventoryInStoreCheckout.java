@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C132429)
+ * Test Case ID:(C132427)
  */
 @ScriptName
 ("testcases.smoketest.multipleinventory.TMultiInventoryInStoreCheckout")

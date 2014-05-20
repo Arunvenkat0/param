@@ -45,11 +45,6 @@
     <parameter name="ZipCode" value="${ShippingZipCode}"/>
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
-  <action name="VERIFY-ToolTip" disabled="true"/>
-  <module name="library.function.FAssertText" disabled="true">
-    <parameter name="textElement" value="//label[contains(text(),'${ShippingMethod}')]//span[2]"/>
-    <parameter name="textPattern" value="${ExpectedDiscountedShipping}"/>
-  </module>
   <action name="SelectShipping"/>
   <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>

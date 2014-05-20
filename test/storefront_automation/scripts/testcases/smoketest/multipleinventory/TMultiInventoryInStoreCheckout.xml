@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
-  <description>Test Case ID:(C132429)</description>
+  <description>Test Case ID:(C132427)</description>
   <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
@@ -48,5 +48,142 @@
   </module>
   <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
   <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <action name="VERIFY-InitialInStorePickupAddress"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyCartItemHomeDeliverySelected">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyInStoreAddress">
+    <parameter name="itemNumberInCartList" value="1"/>
+    <parameter name="StreetAddress" value="${SelectedStoreAddress}"/>
+    <parameter name="City" value="${SelectedStoreCity}"/>
+    <parameter name="State" value="${SelectedStoreState}"/>
+    <parameter name="Zip" value="${SelectedStoreZip}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifySelectStoreLinkDisplayed">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyCartItemHomeDeliverySelected">
+    <parameter name="itemNumberInCartList" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifySelectStoreLinkDisplayed">
+    <parameter name="itemNumberInCartList" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyInStoreAddress">
+    <parameter name="itemNumberInCartList" value="2"/>
+    <parameter name="StreetAddress" value="${SelectedStoreAddress}"/>
+    <parameter name="City" value="${SelectedStoreCity}"/>
+    <parameter name="State" value="${SelectedStoreState}"/>
+    <parameter name="Zip" value="${SelectedStoreZip}"/>
+  </module>
+  <action name="SelectExistingInStoreOptionForFirstProduct"/>
+  <module name="library.module.app.sitegenesis.cart.CheckInStorePickup">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <action name="ChangeSecondProductInStorePickupAddress"/>
+  <module name="library.module.app.sitegenesis.cart.ClickSelectStore">
+    <parameter name="itemNumberInCartList" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.storesearch.QuickSelectInStockStore">
+    <parameter name="ZipCode" value="${Product1StoreZipCode}"/>
+  </module>
+  <action name="VERIFY-SecondProductChangedInStoreAddress"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=form#cart-items-form table.item-list tbody tr:nth-child(2) td.item-delivery-options .selected-store-address"/>
+    <parameter name="textPattern" value="regexp:.*${SelectedStoreCity}.*"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=form#cart-items-form table.item-list tbody tr:nth-child(2) td.item-delivery-options .selected-store-address"/>
+    <parameter name="textPattern" value="regexp:.*${SelectedStoreState}.*"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=form#cart-items-form table.item-list tbody tr:nth-child(2) td.item-delivery-options .selected-store-address"/>
+    <parameter name="textPattern" value="regexp:.*${SelectedStoreZip}.*"/>
+  </module>
+  <action name="Checkout"/>
+  <module name="library.module.app.sitegenesis.cart.ClickUpdateCartButton"/>
+  <module name="library.module.app.sitegenesis.cart.ClickCheckoutButton"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickContinue"/>
+  <action name="VERIFY-ShippingAsInStorePickup"/>
+  <module name="library.module.app.sitegenesis.checkout.billing.VerifyOrderSummaryInStorePickupMessage">
+    <parameter name="ShipmentNumber" value="1"/>
+    <parameter name="StoreName" value="${Product2_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product2_Store_Street}"/>
+    <parameter name="StoreCityStateZip" value="${Product2_Store_City}, ${Product2_Store_State} ${Product2_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product2_Store_Country}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.VerifyOrderSummaryInStorePickupMessage">
+    <parameter name="ShipmentNumber" value="2"/>
+    <parameter name="StoreName" value="${Product1_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product1_Store_Street}"/>
+    <parameter name="StoreCityStateZip" value="${Product1_Store_City}, ${Product1_Store_State} ${Product1_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product1_Store_Country}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+    <parameter name="FirstName" value="${ShippingFirstName}"/>
+    <parameter name="LastName" value="${ShippingLastName}"/>
+    <parameter name="Address1" value="${ShippingAddress}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${ShippingCountry}"/>
+    <parameter name="State" value="${ShippingState}"/>
+    <parameter name="City" value="${ShippingCity}"/>
+    <parameter name="ZipCode" value="${ShippingZipCode}"/>
+    <parameter name="Phone" value="${ShippingPhone}"/>
+  </module>
+  <action name="CompleteOrder"/>
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterBillingEmail">
+    <parameter name="EmailAddress" value="${EmailAddress}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterCreditCardInfo">
+    <parameter name="NameOnCard" value="${NameOnCard}"/>
+    <parameter name="CardType" value="${CardType}"/>
+    <parameter name="CardNumber" value="${CardNumber}"/>
+    <parameter name="ExpirationMonth" value="${ExpirationMonth}"/>
+    <parameter name="ExpirationYear" value="${ExpirationYear}"/>
+    <parameter name="SecurityCode" value="${SecurityCode}"/>
+  </module>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button[value='Continue &gt;']"/>
+  </module>
+  <action name="VERIFY-ShippingAsInStorePickup"/>
+  <module name="library.module.app.sitegenesis.checkout.billing.VerifyOrderSummaryInStorePickupMessage">
+    <parameter name="ShipmentNumber" value="1"/>
+    <parameter name="StoreName" value="${Product2_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product2_Store_Street}"/>
+    <parameter name="StoreCityStateZip" value="${Product2_Store_City}, ${Product2_Store_State} ${Product2_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product2_Store_Country}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.VerifyOrderSummaryInStorePickupMessage">
+    <parameter name="ShipmentNumber" value="2"/>
+    <parameter name="StoreName" value="${Product1_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product1_Store_Street}"/>
+    <parameter name="StoreCityStateZip" value="${Product1_Store_City}, ${Product1_Store_State} ${Product1_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product1_Store_Country}"/>
+  </module>
+  <action name="SubmitOrder"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button[value=&quot;Submit Order&quot;]"/>
+  </module>
+  <action name="Reset-InStore"/>
+  <action name="VERIFY-OrderSummaryInStoreDetails"/>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyInStoreShipmentForProduct">
+    <parameter name="ProductName" value="${ProductName1}"/>
+    <parameter name="StoreName" value="${Product1_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product1_Store_Street}"/>
+    <parameter name="StoreCity" value="${Product1_Store_City}"/>
+    <parameter name="StoreState" value="${Product1_Store_State}"/>
+    <parameter name="StoreZip" value="${Product1_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product1_Store_Country}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyInStoreShipmentForProduct">
+    <parameter name="ProductName" value="${ProductName2}"/>
+    <parameter name="StoreName" value="${Product2_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product2_Store_Street}"/>
+    <parameter name="StoreCity" value="${Product2_Store_City}"/>
+    <parameter name="StoreState" value="${Product2_Store_State}"/>
+    <parameter name="StoreZip" value="${Product2_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product2_Store_Country}"/>
+  </module>
+  <action name="Cleanup"/>
   <module name="library.module.app.busmgr.DisableInStorePickup"/>
 </testcase>

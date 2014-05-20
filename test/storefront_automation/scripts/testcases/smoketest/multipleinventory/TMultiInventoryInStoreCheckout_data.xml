@@ -9,4 +9,31 @@
   <ZipCode>01850</ZipCode>
   <Product1StoreZipCode>02108</Product1StoreZipCode>
   <Product2StoreZipCode>02141</Product2StoreZipCode>
+  <ShippingFirstName>John</ShippingFirstName>
+  <ShippingLastName>Buyer</ShippingLastName>
+  <ShippingAddress>123 Mockingbird</ShippingAddress>
+  <ShippingCountry>United States</ShippingCountry>
+  <ShippingState>New Hampshire</ShippingState>
+  <ShippingCity>Nashua</ShippingCity>
+  <ShippingZipCode>03030</ShippingZipCode>
+  <ShippingPhone>603-456-7890</ShippingPhone>
+  <EmailAddress>no_one@anywhere.com</EmailAddress>
+  <NameOnCard>${ShippingFirstName} ${ShippingLastName}</NameOnCard>
+  <CardType>Visa</CardType>
+  <CardNumber>4444333322221111</CardNumber>
+  <ExpirationMonth>April</ExpirationMonth>
+  <ExpirationYear>2019</ExpirationYear>
+  <SecurityCode>999</SecurityCode>
+  <Product1_Store_Name>Champaign Electronic Shop</Product1_Store_Name>
+  <Product1_Store_Street>1001 Cambridge St</Product1_Store_Street>
+  <Product1_Store_City>Cambridge</Product1_Store_City>
+  <Product1_Store_State>MA</Product1_Store_State>
+  <Product1_Store_Zip>02141</Product1_Store_Zip>
+  <Product1_Store_Country>United States</Product1_Store_Country>
+  <Product2_Store_Name>Downtown TV Shop</Product2_Store_Name>
+  <Product2_Store_Street>333 Washington St</Product2_Store_Street>
+  <Product2_Store_City>Boston</Product2_Store_City>
+  <Product2_Store_State>MA</Product2_Store_State>
+  <Product2_Store_Zip>02108</Product2_Store_Zip>
+  <Product2_Store_Country>United States</Product2_Store_Country>
 </data>
