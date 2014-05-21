@@ -21,11 +21,6 @@
     <description>SiteGenesis Source</description>
 
     
-    <!--<modules>
-	<module>storefront_refapp</module>
-    </modules>-->
-    
-	
     <build>
         <plugins>
             <plugin>
