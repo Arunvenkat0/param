@@ -1546,7 +1546,9 @@ var app = (function (app, $) {
 	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
 	 */
 	function updateProductListing(isHashChange) {
-		var hash = encodeURI(decodeURI(window.location.hash));
+		// [RAP-2653] requires special handling for Firefox's encoding of ampersands
+		var isFirefox = (navigator.userAgent).toLowerCase().index('firefox')) >= 0;
+		var hash = isFireFox ? encodeURI(decodeURI(window.location.hash)) : window.location.hash;
 		if(hash==='#results-content' || hash==='#results-products') { return; }
 
 		var refineUrl = null;
@@ -1675,7 +1677,9 @@ var app = (function (app, $) {
 				var uri = app.util.getUri(this);
 
 				if( uri.query.length > 1 ) {
-					window.location.hash = encodeURI(decodeURI(uri.query.substring(1)));
+					// [RAP-2653] requires special handling for Firefox's encoding of ampersands
+					var isFirefox = (navigator.userAgent).toLowerCase().index('firefox')) >= 0;
+					window.location.hash = 	isFirefox ? encodeURI(decodeURI(uri.query.substring(1))) : uri.query.substring(1);;
 				} else {
 					window.location.href = this.href;
 				}
