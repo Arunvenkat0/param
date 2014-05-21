@@ -38,10 +38,8 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//li[contains(@class,'jcarousel-item-1')]//div[contains(@class,'product-name')]/a[contains(text(),'${selecteRecomemdation}')]"/>
   </module>
-  <command name="assertElementPresent" target="css=h1.product-name">
-    <comment>Checks if a headline is displayed.</comment>
-  </command>
-  <command name="assertText" target="css=h1.product-name" value="${selecteRecomemdation}">
-    <comment>Checks if a headline is displayed.</comment>
-  </command>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=h1.product-name"/>
+    <parameter name="textPattern" value="${selecteRecomemdation}"/>
+  </module>
 </testcase>

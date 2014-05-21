@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C84710</tags>
-  <description>Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information</description>
+  <description>Bug: 'RAP-????' Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <comment>Search for the product set</comment>
