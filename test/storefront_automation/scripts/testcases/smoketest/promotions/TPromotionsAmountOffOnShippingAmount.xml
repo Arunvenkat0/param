@@ -6,10 +6,6 @@
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
-  <module name="library.module.app.busmgr.EnablePromotion" disabled="true">
-    <parameter name="SiteName" value="${SiteName}"/>
-    <parameter name="PromotionName" value="${PromotionName}"/>
-  </module>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
     <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
