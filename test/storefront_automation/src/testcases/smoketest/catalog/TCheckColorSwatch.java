@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84682) Smoke Test » Search Results » Product Grid » Product Grid Display: Images and Swatches
+ * DISABLED: Automation Code Bug - Test Case ID:(C84682) Smoke Test » Search Results » Product Grid » Product Grid Display: Images and Swatches
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckColorSwatch")
