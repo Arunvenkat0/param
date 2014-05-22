@@ -3,7 +3,7 @@
   <tags>C130263</tags>
   <description>BUG: 'RAP-2172'
  Test Case ID:(C130263)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
