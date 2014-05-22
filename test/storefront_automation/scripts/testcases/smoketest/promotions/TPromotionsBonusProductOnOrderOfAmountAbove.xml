@@ -17,7 +17,7 @@
     <parameter name="numberOfProductsToDisplay" value="48"/>
   </module>
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
-    <parameter name="SortSelectionName" value="Price Low To High"/>
+    <parameter name="SortSelectionName" value="Price High To Low"/>
   </module>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=a.name-link[title='${NoPromoProductName}']"/>

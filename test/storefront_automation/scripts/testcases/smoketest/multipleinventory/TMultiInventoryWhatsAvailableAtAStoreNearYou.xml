@@ -38,6 +38,6 @@
   </module>
   <module name="library.module.app.sitegenesis.storesearch.VerifyStoreSearchNoResultsMessage"/>
   <action name="CloseStoreSearchDialog"/>
-  <module name="testcases.smoketest.storelocator.ExitDialog"/>
+  <module name="library.module.app.sitegenesis.storesearch.ExitDialog"/>
   <module name="library.module.app.busmgr.DisableInStorePickup"/>
 </testcase>

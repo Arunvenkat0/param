@@ -7,5 +7,5 @@
     <parameter name="selectLabel" value="@{SortSelectionName}"/>
     <parameter name="labelValue" value="@{SortSelectionName}"/>
   </module>
-  <command name="pause" value="1500"/>
+  <command name="pause" value="2000"/>
 </scriptmodule>
