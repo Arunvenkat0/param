@@ -8,7 +8,7 @@ Mouse over each color and validate respective procut image</description>
   <module name="library.function.FAssertElementPresent">
     <parameter name="assertedElement" value="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
   </module>
-  <module name="library.function.FAssertElementPresent">
+  <module name="library.function.FAssertElementPresent" disabled="true">
     <parameter name="assertedElement" value="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
   </module>
   <module name="library.function.FAssertElementPresent">
