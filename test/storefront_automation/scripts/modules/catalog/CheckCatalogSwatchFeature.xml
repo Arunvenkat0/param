@@ -5,25 +5,22 @@
 - click -&gt; permanent change
 - permanently changed colors appear in details and quickview</description>
   <parameter name="SubCategoryName"/>
-  <module name="library.function.FClick" disabled="true">
+  <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.product-image &gt; a.thumb-link"/>
   </module>
   <module name="library.function.FWaitForElement">
-    <parameter name="element" value="css=.product-image &gt; a.thumb-link"/>
-  </module>
-  <module name="library.function.FWaitForElement" disabled="true">
     <parameter name="element" value="dom=document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0]"/>
   </module>
   <module name="library.function.FStoreText">
-    <parameter name="textElement" value="css=#search-result-items li:nth-child(1) div.product-name a.name-link"/>
+    <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="textStoreVariableName" value="ProductName"/>
   </module>
   <command name="storeEval" disabled="true" target="document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0].getAttribute('title').split(&quot;,&quot;,1)" value="ProductName"/>
-  <module name="library.function.FStoreText" disabled="true">
+  <module name="library.function.FStoreText">
     <parameter name="textElement" value=""/>
     <parameter name="textStoreVariableName" value="DefaultColor"/>
   </module>
-  <command name="storeEval" target="document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
+  <command name="storeEval" disabled="true" target="document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
   <module name="library.function.FStoreText" disabled="true">
     <parameter name="textElement" value=""/>
     <parameter name="textStoreVariableName" value="AvailableColor2"/>
