@@ -19,7 +19,10 @@
   <command name="assertElementPresent" target="id=add-to-cart">
     <comment>Checks if the order button is displayed.</comment>
   </command>
-  <command name="assertElementPresent" target="link=Check store availability"/>
+  <module name="library.function.FAssertElementPresent">
+    <parameter name="assertedElement" value="link=Check store availability"/>
+  </module>
+  <command name="assertElementPresent" disabled="true" target="link=Check store availability"/>
   <command name="assertElementPresent" target="css=.addthis_toolbox">
     <comment>Checks if the social toolbox is displayed.</comment>
   </command>

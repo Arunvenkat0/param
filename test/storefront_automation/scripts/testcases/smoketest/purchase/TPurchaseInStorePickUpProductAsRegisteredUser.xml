@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85057</tags>
   <description>DISABLED: Requires InStore configuration.
 Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product</description>
+  <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -232,4 +233,5 @@ Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase In
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
+  <module name="library.module.app.busmgr.DisableInStorePickup"/>
 </testcase>

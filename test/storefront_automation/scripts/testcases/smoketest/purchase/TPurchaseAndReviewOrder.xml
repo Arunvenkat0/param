@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C85046</tags>
-  <description>Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order</description>
+  <description>DISABLED: RAP-2130 Needs email as part of order search Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -119,7 +119,10 @@
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
   <action name="CheckoutPlaceOrder"/>
-  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
     <comment>Validate First Product's Details on Place Order page</comment>
     <parameter name="Position" value="1"/>
