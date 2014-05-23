@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <tags>C85045</tags>
-  <description>DISABLED: Requires Multi-shipment preference enabled.
+  <description>DISABLED: Automation Bug
 Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Shipment with Registered User</description>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -400,4 +401,5 @@ Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Sh
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>
