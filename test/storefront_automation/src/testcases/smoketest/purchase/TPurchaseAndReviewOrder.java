@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order
+ * DISABLED: RAP-2130 Needs email as part of order search Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseAndReviewOrder")
