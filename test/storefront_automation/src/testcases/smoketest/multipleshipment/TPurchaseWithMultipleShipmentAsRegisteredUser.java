@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED: Requires Multi-shipment preference enabled.
+ * DISABLED: Automation Bug
  Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Shipment with Registered User
  */
 @ScriptName

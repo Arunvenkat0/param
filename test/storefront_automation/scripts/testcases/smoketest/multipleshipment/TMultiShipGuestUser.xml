@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Test Case ID:(C132192)</description>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
+    <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CategoryLevel2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="${Brand}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="${Sorting}"/>
+  </module>
+  <action name="AddProduct1ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="AddProduct2ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="AddProduct3ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="Checkout"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.cart.ClickCheckoutButton"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickShipToMultipleAddresses"/>
+  <command name="pause" value="1000"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
+</testcase>
