@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Selects the 'shippingMethod' for the 'productName'.</description>
+  <parameter name="shippingMethod"/>
+  <parameter name="productName"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.step-2.active"/>
+  </module>
+  <module name="library.function.FSelect">
+    <parameter name="element" value="//div[@class=&quot;name&quot;] / a[@title=&quot;@{productName}&quot;] / ancestor::tbody // select"/>
+    <parameter name="selection" value="regexp:.*@{shippingMethod}.*"/>
+  </module>
+</scriptmodule>

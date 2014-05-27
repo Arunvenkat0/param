@@ -119,7 +119,7 @@
     <parameter name="StoreCityStateZip" value="${Product1_Store_City}, ${Product1_Store_State} ${Product1_Store_Zip}"/>
     <parameter name="StoreCountry" value="${Product1_Store_Country}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>

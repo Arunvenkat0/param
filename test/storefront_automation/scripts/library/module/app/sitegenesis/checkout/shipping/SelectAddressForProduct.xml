@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Selects the given 'address' for the 'number' product in the cart. Mutli-shipping only.</description>
+  <parameter name="number"/>
+  <parameter name="address"/>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="//tbody//tr[contains(@class,&quot;cart-row&quot;)][@{number}]//select"/>
+    <parameter name="selectLabel" value="@{address}"/>
+    <parameter name="labelValue" value="@{address}"/>
+  </module>
+</scriptmodule>

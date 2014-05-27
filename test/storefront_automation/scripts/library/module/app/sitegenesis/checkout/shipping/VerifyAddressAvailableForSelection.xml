@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Verifies that a given 'address' is an selectable option in the "Select an Address" drop down list for the 'number' element. ( 1,2,3...) by selecting it then selecting the default value.</description>
+  <parameter name="number"/>
+  <parameter name="address"/>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="//tbody//tr[contains(@class,&quot;cart-row&quot;)][@{number}]//select"/>
+    <parameter name="selectLabel" value="@{address}"/>
+    <parameter name="labelValue" value="@{address}"/>
+  </module>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="//tbody/tr[contains(@class,&quot;cart-row&quot;)][@{number}]//select"/>
+    <parameter name="selectLabel" value="Select an Address"/>
+    <parameter name="labelValue" value="Select an Address"/>
+  </module>
+</scriptmodule>

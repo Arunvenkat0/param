@@ -70,7 +70,7 @@
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.header.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -82,7 +82,7 @@
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
   <action name="SelectShipping"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
   </module>
   <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>
