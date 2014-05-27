@@ -186,7 +186,7 @@
     <parameter name="Quantity" value="1"/>
     <parameter name="Price" value="${ProductPrice}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.EnterAddressData">
     <parameter name="FirstName" value="${BillingAddressFirstName}"/>
     <parameter name="LastName" value="${BillingAddressLastName}"/>
     <parameter name="Address1" value="${BillingAddressStreet}"/>

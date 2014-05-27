@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Clicks the "Cancel" button for a new or edited address.</description>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=button[value=&quot;Cancel&quot;]"/>
+  </module>
+  <module name="library.function.FWaitForNotElement">
+    <parameter name="element" value="css=.ui-dialog-titlebar"/>
+  </module>
+</scriptmodule>

@@ -2,6 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Test Case ID:(C132196)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
+  <action name="OPEN_STOREFRONT"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
@@ -13,6 +14,7 @@
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
     <parameter name="SortSelectionName" value="${Sorting}"/>
   </module>
+  <action name="ADD_MULTIPLE_PRODUCTS_TO_CART"/>
   <action name="AddProduct1ToCart"/>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName1}"/>
@@ -28,10 +30,13 @@
     <parameter name="ProductName" value="${ProductName3}"/>
   </module>
   <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="GOTO_CART_PAGE"/>
   <action name="Checkout"/>
   <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <module name="library.module.app.sitegenesis.cart.ClickCheckoutButton"/>
+  <action name="CHECKOUT_AS_GUEST"/>
   <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
+  <action name="CLICK_CHECKOUT_AS_GUEST"/>
   <module name="library.module.app.sitegenesis.checkout.shipping.ClickShipToMultipleAddresses"/>
   <command name="pause" value="1000"/>
   <module name="library.module.app.busmgr.DisableMultiShipping"/>
