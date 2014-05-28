@@ -11,7 +11,8 @@
   <LName1>Buyer</LName1>
   <Street1>101 Jones St.</Street1>
   <Country1>United States</Country1>
-  <State1>MA</State1>
+  <State1>Massachusetts</State1>
+  <State1Abbrev>MA</State1Abbrev>
   <City1>Burlington</City1>
   <Zip1>01850</Zip1>
   <Phone1>617-321-4321</Phone1>
@@ -19,8 +20,16 @@
   <LName2>Granger</LName2>
   <Street2>102 Bliss St.</Street2>
   <Country2>United States</Country2>
-  <State2>NH</State2>
+  <State2>New Hampshire</State2>
+  <State2Abbrev>NH</State2Abbrev>
   <City2>Nashua</City2>
   <Zip2>03064</Zip2>
-  <Phone2>603-123-4567</Phone2>
+  <Phone2>617-321-4322</Phone2>
+  <CardName>John Buyer</CardName>
+  <CardType>Visa</CardType>
+  <CardNumber>4111111111111111</CardNumber>
+  <ExpirationMonth>December</ExpirationMonth>
+  <ExpirationYear>2019</ExpirationYear>
+  <SecurityCode>333</SecurityCode>
+  <Email>JBuyer@nowhere.com</Email>
 </data>
