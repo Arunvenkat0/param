@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <description>Test Case ID:(C132192)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <action name="OPEN_STOREFRONT"/>
@@ -115,21 +115,21 @@
   </module>
   <module name="library.module.app.sitegenesis.checkout.shipping.ClickContinue"/>
   <action name="VERIFY-Addresses"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyAddressForProductShipment">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyShippingAddressForProduct">
     <parameter name="productName" value="${ProductName1}"/>
     <parameter name="long_name" value="${FName1} ${LName1}"/>
     <parameter name="street" value="${Street1}"/>
     <parameter name="city_stateabbr_zip" value="${City1}, ${State1Abbrev} ${Zip1}"/>
     <parameter name="country" value="${Country1}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyAddressForProductShipment">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyShippingAddressForProduct">
     <parameter name="productName" value="${ProductName2}"/>
     <parameter name="long_name" value="${FName2} ${LName2}"/>
     <parameter name="street" value="${Street2}"/>
     <parameter name="city_stateabbr_zip" value="${City2}, ${State2Abbrev} ${Zip2}"/>
     <parameter name="country" value="${Country2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyAddressForProductShipment">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.VerifyShippingAddressForProduct">
     <parameter name="productName" value="${ProductName3}"/>
     <parameter name="long_name" value="${FName2} ${LName2}"/>
     <parameter name="street" value="${Street2}"/>
@@ -172,6 +172,36 @@
   <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
   <module name="library.module.app.sitegenesis.checkout.placeorder.ClickSubmitOrder"/>
   <action name="VERIFY-OrderConfirmationShipmentAddresses"/>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
+    <parameter name="productName" value="${ProductName1}"/>
+    <parameter name="firstName" value="${FName1} "/>
+    <parameter name="lastName" value="${LName1}"/>
+    <parameter name="street" value="${Street1}"/>
+    <parameter name="city" value="${City1},"/>
+    <parameter name="stateAbbrev" value="${State1Abbrev} "/>
+    <parameter name="zip" value="${Zip1}"/>
+    <parameter name="country" value="${Country1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
+    <parameter name="productName" value="${ProductName2}"/>
+    <parameter name="firstName" value="${FName2} "/>
+    <parameter name="lastName" value="${LName2}"/>
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="city" value="${City2},"/>
+    <parameter name="stateAbbrev" value="${State2Abbrev} "/>
+    <parameter name="zip" value="${Zip2}"/>
+    <parameter name="country" value="${Country2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
+    <parameter name="productName" value="${ProductName3}"/>
+    <parameter name="firstName" value="${FName2} "/>
+    <parameter name="lastName" value="${LName2}"/>
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="city" value="${City2},"/>
+    <parameter name="stateAbbrev" value="${State2Abbrev} "/>
+    <parameter name="zip" value="${Zip2}"/>
+    <parameter name="country" value="${Country2}"/>
+  </module>
   <action name="CLEAN_UP"/>
   <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>
