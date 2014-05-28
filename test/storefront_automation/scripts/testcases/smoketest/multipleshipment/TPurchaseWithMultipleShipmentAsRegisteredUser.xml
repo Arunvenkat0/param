@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85045</tags>
-  <description>Test Case ID:(C85045)  </description>
+  <description>Test Case ID:(C85045)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">

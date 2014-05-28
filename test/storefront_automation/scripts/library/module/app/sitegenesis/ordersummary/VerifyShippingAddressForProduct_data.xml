@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <f>//div[@class="name"] / a[@title="Canon PowerShot E1 Digital Point and Shoot Camera"] / ancestor::tbody //  div[@class="order-shipment-address"] // span[@class="firstname"]</f>
+</data>
