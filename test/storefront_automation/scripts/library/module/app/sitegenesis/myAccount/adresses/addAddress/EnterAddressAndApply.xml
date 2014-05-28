@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="addressName"/>
+  <parameter name="firstName"/>
+  <parameter name="lastName"/>
+  <parameter name="street1"/>
+  <parameter name="street2"/>
+  <parameter name="country"/>
+  <parameter name="stateName"/>
+  <parameter name="city"/>
+  <parameter name="zip"/>
+  <parameter name="phone"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_addressid"/>
+    <parameter name="inputString" value="@{addressName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_firstname"/>
+    <parameter name="inputString" value="@{firstName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_lastname"/>
+    <parameter name="inputString" value="@{lastName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_address1"/>
+    <parameter name="inputString" value="@{street1}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_address2"/>
+    <parameter name="inputString" value="@{street2}"/>
+  </module>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="css=#dwfrm_profile_address_country"/>
+    <parameter name="selectLabel" value="@{country}"/>
+    <parameter name="labelValue" value="@{country}"/>
+  </module>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="css=#dwfrm_profile_address_states_state"/>
+    <parameter name="selectLabel" value="@{stateName}"/>
+    <parameter name="labelValue" value="@{stateName}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_city"/>
+    <parameter name="inputString" value="@{city}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_zip"/>
+    <parameter name="inputString" value="@{zip}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_phone"/>
+    <parameter name="inputString" value="@{phone}"/>
+  </module>
+  <action name="Apply-Submit"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=.apply-button"/>
+  </module>
+</scriptmodule>

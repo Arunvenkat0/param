@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <description>Test Case ID:(C132192)</description>
-  <module name="library.module.app.busmgr.EnableMultiShipping"/>
+  <module name="library.module.app.busmgr.EnableMultiShipping" disabled="true"/>
   <action name="OPEN_STOREFRONT"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <action name="RegisterANewUser"/>
+  <module name="library.module.app.sitegenesis.header.ClickRegisterLink"/>
+  <module name="library.module.app.sitegenesis.createAccount.CreateANewUserAccount">
+    <parameter name="firstName" value="${FName1}"/>
+    <parameter name="lastName" value="${LName1}"/>
+  </module>
+  <action name="AddAddressForUser"/>
+  <module name="library.module.app.sitegenesis.myAccount.ClickAddresses"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.ClickCreateNewAddress"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.addAddress.EnterAddressAndApply">
+    <parameter name="addressName" value="Home"/>
+    <parameter name="firstName" value="${FName1}"/>
+    <parameter name="lastName" value="${LName1}"/>
+    <parameter name="street1" value="${Street1}"/>
+    <parameter name="street2" value=""/>
+    <parameter name="country" value="${Country1}"/>
+    <parameter name="stateName" value="${State1}"/>
+    <parameter name="city" value="${City1}"/>
+    <parameter name="zip" value="${Zip1}"/>
+    <parameter name="phone" value="${Phone1}"/>
+  </module>
+  <action name="Shop"/>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
     <parameter name="Level2CategoryName" value="${CategoryLevel2}"/>
@@ -203,5 +225,5 @@
     <parameter name="country" value="${Country2}"/>
   </module>
   <action name="CLEAN_UP"/>
-  <module name="library.module.app.busmgr.DisableMultiShipping"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping" disabled="true"/>
 </testcase>
