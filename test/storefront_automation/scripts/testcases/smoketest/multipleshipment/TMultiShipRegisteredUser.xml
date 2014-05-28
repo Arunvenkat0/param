@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <description>Test Case ID:(C132192)</description>
-  <module name="library.module.app.busmgr.EnableMultiShipping" disabled="true"/>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <action name="OPEN_STOREFRONT"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
   <action name="RegisterANewUser"/>
@@ -225,5 +225,5 @@
     <parameter name="country" value="${Country2}"/>
   </module>
   <action name="CLEAN_UP"/>
-  <module name="library.module.app.busmgr.DisableMultiShipping" disabled="true"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>
