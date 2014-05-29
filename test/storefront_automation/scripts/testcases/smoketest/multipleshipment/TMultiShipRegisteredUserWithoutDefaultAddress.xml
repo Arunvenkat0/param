@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
   <description>Possible Bug - needs test for account address Test Case ID:(C132192)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <action name="OPEN_STOREFRONT"/>
@@ -133,6 +133,7 @@
   <module name="library.module.app.sitegenesis.header.ClickUserAccount"/>
   <module name="library.module.app.sitegenesis.myAccount.ClickAddresses"/>
   <action name="DO_ADDRESS_CHECK_HERE"/>
+  <command name="pause" value="3000"/>
   <action name="CLEAN_UP"/>
   <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>
