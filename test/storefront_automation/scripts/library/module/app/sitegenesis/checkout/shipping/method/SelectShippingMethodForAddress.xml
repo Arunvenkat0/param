@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>NOT WORKING! Selects the 'shippingMethod' for the 'street'.</description>
+  <parameter name="street"/>
+  <parameter name="shippingMethod"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.step-2.active"/>
+  </module>
+  <module name="library.function.FSelect">
+    <parameter name="element" value=" //td[@class='item-quantity-details']//div[text()='@{street}']//ancestor::tbody//select[@class='selectbox']"/>
+    <parameter name="selection" value="regexp:.*@{shippingMethod}.*"/>
+  </module>
+</scriptmodule>

@@ -9,7 +9,7 @@
   </module>
   <command name="pause" value="750"/>
   <module name="library.function.FClickAndWait">
-    <parameter name="clickElement" value="css= input.button[value=&quot; Apply &quot;] "/>
+    <parameter name="clickElement" value="css=td.button button[name=&quot;update&quot;] "/>
   </module>
   <action name="Logout"/>
   <module name="library.module.app.busmgr.LogoutBusinessManager"/>

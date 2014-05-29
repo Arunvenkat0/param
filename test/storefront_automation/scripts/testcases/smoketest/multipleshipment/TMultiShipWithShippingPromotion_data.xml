@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <CategoryLevel1>Electronics</CategoryLevel1>
-  <CategoryLevel2>Digital Cameras</CategoryLevel2>
-  <Brand>Canon</Brand>
+  <CategoryLevel1>Womens</CategoryLevel1>
+  <CategoryLevel2>Accessories</CategoryLevel2>
+  <CategoryLevel3>Shoes</CategoryLevel3>
   <Sorting>Price Low To High</Sorting>
-  <ProductName1>Canon PowerShot A580 Digital Point and Shoot Camera</ProductName1>
-  <ProductName2>Canon PowerShot E1 Digital Point and Shoot Camera</ProductName2>
+  <ProductName1>Aylin</ProductName1>
+  <ProductName2>Bozwell</ProductName2>
   <ProductName3>Canon PowerShot SD1100 Digital Point and Shoot Camera</ProductName3>
   <FName1>Joe</FName1>
   <LName1>Buyer</LName1>
@@ -33,4 +33,5 @@
   <SecurityCode>333</SecurityCode>
   <Email>JBuyer@nowhere.com</Email>
   <PromotionName>FreeShippingForNumberAbove5</PromotionName>
+  <ShippingMethod1>2-Day Express</ShippingMethod1>
 </data>
