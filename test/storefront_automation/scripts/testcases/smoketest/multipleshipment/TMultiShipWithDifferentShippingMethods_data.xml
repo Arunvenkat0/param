@@ -32,4 +32,6 @@
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>333</SecurityCode>
   <Email>JBuyer@nowhere.com</Email>
+  <ShipMethod1>2-Day Express</ShipMethod1>
+  <ShipMethod2>Overnight</ShipMethod2>
 </data>

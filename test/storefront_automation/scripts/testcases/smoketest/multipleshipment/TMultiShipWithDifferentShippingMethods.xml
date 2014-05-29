@@ -56,7 +56,7 @@
   <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
     <parameter name="ItemListNumber" value="1"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${FName1}"/>
     <parameter name="LastName" value="${LName1}"/>
     <parameter name="Address1" value="${Street1}"/>
@@ -67,7 +67,7 @@
     <parameter name="ZipCode" value="${Zip1}"/>
     <parameter name="Phone" value="${Phone1}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.ClickSave"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
   <action name="VERIFY_FirstAddressSavedAndIsInList"/>
   <module name="library.module.app.sitegenesis.checkout.shipping.VerifyAddressAvailableForSelection">
     <parameter name="number" value="1"/>
@@ -77,7 +77,7 @@
   <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
     <parameter name="ItemListNumber" value="2"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${FName2}"/>
     <parameter name="LastName" value="${LName2}"/>
     <parameter name="Address1" value="${Street2}"/>
@@ -88,7 +88,7 @@
     <parameter name="ZipCode" value="${Zip2}"/>
     <parameter name="Phone" value="${Phone2}"/>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.multiaddress.ClickSave"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
   <action name="VERIFY_FirstAndSecondAddressSavedAndIsInList"/>
   <module name="library.module.app.sitegenesis.checkout.shipping.VerifyAddressAvailableForSelection">
     <parameter name="number" value="1"/>
@@ -138,11 +138,11 @@
   </module>
   <action name="SelectShippingMethods"/>
   <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForProduct">
-    <parameter name="shippingMethod" value="2-Day Express:"/>
+    <parameter name="shippingMethod" value="${ShipMethod1}"/>
     <parameter name="productName" value="${ProductName1}"/>
   </module>
   <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForProduct">
-    <parameter name="shippingMethod" value="Overnight"/>
+    <parameter name="shippingMethod" value="${ShipMethod2}"/>
     <parameter name="productName" value="${ProductName2}"/>
   </module>
   <module name="library.module.app.sitegenesis.checkout.shipping.method.ClickContinue"/>
@@ -170,6 +170,15 @@
     <parameter name="SecurityCode" value="${SecurityCode}"/>
   </module>
   <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
+  <action name="VERIFY-DifferentShippingMethodsAndAddresses"/>
+  <module name="library.module.app.sitegenesis.checkout.placeorder.VerifyShipmentMethodForAddress">
+    <parameter name="street" value="${Street1}"/>
+    <parameter name="shipMethod" value="${ShipMethod1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.placeorder.VerifyShipmentMethodForAddress">
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="shipMethod" value="${ShipMethod2}"/>
+  </module>
   <module name="library.module.app.sitegenesis.checkout.placeorder.ClickSubmitOrder"/>
   <action name="VERIFY-OrderConfirmationShipmentAddresses"/>
   <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
@@ -201,6 +210,15 @@
     <parameter name="stateAbbrev" value="${State2Abbrev} "/>
     <parameter name="zip" value="${Zip2}"/>
     <parameter name="country" value="${Country2}"/>
+  </module>
+  <action name="VERIFY-OrderConfirmationShippingMethods"/>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShipmentMethodForAddress">
+    <parameter name="street" value="${Street1}"/>
+    <parameter name="shipMethod" value="${ShipMethod1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShipmentMethodForAddress">
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="shipMethod" value="${ShipMethod2}"/>
   </module>
   <action name="CLEAN_UP"/>
   <module name="library.module.app.busmgr.DisableMultiShipping"/>
