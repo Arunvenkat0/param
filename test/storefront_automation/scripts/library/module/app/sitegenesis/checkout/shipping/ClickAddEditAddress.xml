@@ -5,6 +5,7 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.item-list &gt; tbody &gt; tr:nth-child(@{ItemListNumber}) &gt; td.shippingaddress a.edit"/>
   </module>
+  <command name="pause" value="1000"/>
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=.ui-dialog-titlebar"/>
   </module>
