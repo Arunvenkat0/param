@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C132196)
+ * Possible Bug - needs test for account address Test Case ID:(C132192)
  */
 @ScriptName
 ("testcases.smoketest.multipleshipment.TMultiShipRegisteredUserWithoutDefaultAddress")

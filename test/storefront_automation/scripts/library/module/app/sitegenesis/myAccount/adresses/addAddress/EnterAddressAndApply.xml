@@ -10,6 +10,9 @@
   <parameter name="city"/>
   <parameter name="zip"/>
   <parameter name="phone"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=form#edit-address-form"/>
+  </module>
   <module name="library.function.FType">
     <parameter name="typeElement" value="css=#dwfrm_profile_address_addressid"/>
     <parameter name="inputString" value="@{addressName}"/>
@@ -55,5 +58,8 @@
   <action name="Apply-Submit"/>
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.apply-button"/>
+  </module>
+  <module name="library.function.FWaitForNotElement">
+    <parameter name="element" value="css=form#edit-address-form"/>
   </module>
 </scriptmodule>

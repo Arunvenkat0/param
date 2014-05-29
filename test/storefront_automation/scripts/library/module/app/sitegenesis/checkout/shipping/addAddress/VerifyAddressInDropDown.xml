@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="address"/>
+  <action name="VERIFY-AddressInListBySelectingIt"/>
+  <module name="library.function.FSelectAndVerifySelection">
+    <parameter name="selectElement" value="css=select[name='dwfrm_multishipping_editAddress_addressList']"/>
+    <parameter name="selectLabel" value="@{address}"/>
+    <parameter name="labelValue" value="@{address}"/>
+  </module>
+  <action name="Cancel-DoNotUseTheSelectedAddress"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickCancel"/>
+</scriptmodule>

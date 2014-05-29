@@ -22,6 +22,6 @@
   <module name="library.module.app.sitegenesis.createAccount.ClickApply"/>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=#primary &gt; h1:nth-child(1)"/>
-    <parameter name="text" value="regexp:My Account | @{firstName} @{lastName}.*"/>
+    <parameter name="text" value="regexp:.*@{firstName}.*@{lastName}.*"/>
   </module>
 </scriptmodule>
