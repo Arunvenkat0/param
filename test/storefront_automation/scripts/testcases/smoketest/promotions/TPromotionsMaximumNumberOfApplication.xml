@@ -76,18 +76,18 @@
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[1]/td[2]/div/div[2]"/>
     <parameter name="textPattern" value="- ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <action name="VERIFY-Product2"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[2]/td[2]/div/div[2]"/>
     <parameter name="textPattern" value="- ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <action name="VERIFY-Product3"/>
   <command name="assertNotElementPresent" target="css=tr.cart-row:nth-child(3) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
@@ -107,18 +107,18 @@
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[1]/td[2]/div/div[2]"/>
     <parameter name="textPattern" value="- ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="1 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="1 x ${PromotionName}"/>
   </module>
   <action name="VERIFY-Product2"/>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="//table[@id='cart-table']/tbody/tr[2]/td[2]/div/div[2]"/>
     <parameter name="textPattern" value="- ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <action name="VERIFY-Product3"/>
   <command name="assertNotElementPresent" target="css=tr.cart-row:nth-child(3) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>

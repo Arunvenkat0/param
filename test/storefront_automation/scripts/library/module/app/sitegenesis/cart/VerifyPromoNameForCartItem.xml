@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Veriffies that the 'promoName' for item in 'rowNumber' (1,2,3) in the cart is displayed.</description>
+  <parameter name="rowNumber"/>
+  <parameter name="promoName"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=table.item-list tr.cart-row:nth-child(@{rowNumber}) div.promo-adjustment"/>
+    <parameter name="text" value="@{promoName}"/>
+  </module>
+</scriptmodule>

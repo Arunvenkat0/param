@@ -62,13 +62,13 @@
   <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.order-subtotal &gt; td:nth-child(2)"/>
@@ -83,9 +83,9 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-ShoppingCart"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.price-total"/>
@@ -100,13 +100,13 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-ShoppingCart"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.order-subtotal &gt; td:nth-child(2)"/>
