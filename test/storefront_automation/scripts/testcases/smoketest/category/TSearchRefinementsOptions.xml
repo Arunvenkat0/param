@@ -2,20 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>?</tags>
   <description>Test Case ID:(?)</description>
-  <module name="library.function.FOpenURLAndRemoveCookies">
-    <parameter name="URL" value="${BMurl}"/>
-  </module>
-  <module name="library.function.FType">
-    <parameter name="typeElement" value="//input[@name='LoginForm_Login']"/>
-    <parameter name="inputString" value="${bmlogin} "/>
-  </module>
-  <module name="library.function.FType">
-    <parameter name="typeElement" value="//input[@name='LoginForm_Password']"/>
-    <parameter name="inputString" value="${BM}"/>
-  </module>
-  <module name="library.function.FClickAndWaitForPageLoad">
-    <parameter name="clickElement" value="//input[contains(@type,'submit')]"/>
-  </module>
+  <module name="library.module.app.busmgr.login.LoginBusinessManager"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="//*[@id='site_navigation_column']/table/tbody/tr/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr/td/a"/>
   </module>
