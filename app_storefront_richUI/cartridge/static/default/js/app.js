@@ -2532,7 +2532,6 @@ var app = (function (app, $) {
 					window.alert(app.resources.CC_LOAD_ERROR);
 					return false;
 				}
-				$cache.ccList.data(cardID, data);
 				setCCFields(data);
 			}
 		});
@@ -2559,11 +2558,6 @@ var app = (function (app, $) {
 		$cache.ccList.on("change", function () {
 			var cardUUID = $(this).val();
 			if(!cardUUID) { return; }
-			var ccdata = $cache.ccList.data(cardUUID);
-			if (ccdata && ccdata.holder) {
-				setCCFields(ccdata);
-				return;
-			}
 			populateCreditCardForm(cardUUID);
 		});
 
