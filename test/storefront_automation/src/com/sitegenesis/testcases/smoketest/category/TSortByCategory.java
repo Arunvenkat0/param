@@ -15,7 +15,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.category.TSortByCategory")
-@Ignore
+
 public class TSortByCategory extends AbstractBrowserScriptTestCase
 {
 }

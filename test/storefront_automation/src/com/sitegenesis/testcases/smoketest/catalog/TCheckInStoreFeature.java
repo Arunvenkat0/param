@@ -10,11 +10,11 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 /**
  * DISABLED: Needs In Store Configuration.
- Test Case ID:(C85056) Smoke Test » Product Details » PDP: InStore Feature
+ Test Case ID:(C85056)
  */
 @ScriptName
 ("testcases.smoketest.catalog.TCheckInStoreFeature")
-@Ignore
+
 public class TCheckInStoreFeature extends AbstractBrowserScriptTestCase
 {
 }
