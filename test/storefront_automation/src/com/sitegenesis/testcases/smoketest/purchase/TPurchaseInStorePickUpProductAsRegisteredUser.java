@@ -14,7 +14,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseInStorePickUpProductAsRegisteredUser")
-@Ignore
+
 public class TPurchaseInStorePickUpProductAsRegisteredUser extends AbstractBrowserScriptTestCase
 {
 }
