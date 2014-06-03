@@ -26,6 +26,17 @@
     <parameter name="phone" value="${Phone1}"/>
   </module>
   <action name="Shop"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.VerifyDefaultAddress">
+    <parameter name="AddressTitle" value="${RegisteredAddressName}"/>
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Street1" value="${Street1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="StateAbbrev" value="${State1Abbrev}"/>
+    <parameter name="Zip" value="${Zip1}"/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
   <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
     <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
     <parameter name="Level2CategoryName" value="${CategoryLevel2}"/>

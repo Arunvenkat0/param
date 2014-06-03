@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85046</tags>
-  <description>DISABLED: RAP-2130 Needs email as part of order search Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order</description>
+  <description>Test Case ID: (C85046) Smoke Test » Checkout - Retuning Customer » Purchase and review Order</description>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -276,6 +276,10 @@
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_ordertrack_postalCode"/>
     <parameter name="inputString" value="${BillingAddressZipCode}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_ordertrack_orderEmail"/>
+    <parameter name="inputString" value="${Email}"/>
   </module>
   <action name="SubmitOrderSearchAndValidate"/>
   <command name="clickAndWait" target="css=#dwfrm_ordertrack button[name='dwfrm_ordertrack_findorder']"/>

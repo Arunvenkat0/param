@@ -15,22 +15,23 @@
     <parameter name="textElement" value="css=h1.product-name"/>
     <parameter name="textStoreVariableName" value="ProductName"/>
   </module>
-  <command name="storeEval" disabled="true" target="document.getElementsByClassName('selected')[0].getElementsByTagName('img')[0].getAttribute('title').split(&quot;,&quot;,1)" value="ProductName"/>
   <module name="library.function.FStoreText">
-    <parameter name="textElement" value=""/>
+    <parameter name="textElement" value="css=.Color  li.selected a.swatchanchor"/>
     <parameter name="textStoreVariableName" value="DefaultColor"/>
   </module>
-  <command name="storeEval" disabled="true" target="document.getElementsByClassName('selected')[0].getAttribute('title')" value="DefaultColor"/>
-  <module name="library.function.FStoreText" disabled="true">
-    <parameter name="textElement" value=""/>
+  <module name="library.function.FStoreText">
+    <parameter name="textElement" value="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor"/>
     <parameter name="textStoreVariableName" value="AvailableColor2"/>
   </module>
-  <command name="storeEval" target="document.getElementsByClassName('swatch')[1].getAttribute('title')" value="AvailableColor2"/>
   <action name="CheckAvailableColors"/>
   <module name="modules.catalog.CheckAvailableColorsOnCategoryPage"/>
   <action name="SelectAlternativeColorAndCheckResult"/>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="xpath=(//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]/../../..//a)[contains(concat(' ',@class,' '), ' swatch ') and @title='${AvailableColor2}']"/>
+    <parameter name="clickElement" value="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor[title=&quot;${AvailableColor2}&quot;]"/>
+  </module>
+  <command name="pause" value="3000"/>
+  <module name="library.function.FClickAndWaitForPageLoad">
+    <parameter name="clickElement" value="link=@{SubCategoryName}"/>
   </module>
   <module name="modules.catalog.ValidateSwatchColorChange">
     <parameter name="SelectedColor" value="${AvailableColor2}"/>

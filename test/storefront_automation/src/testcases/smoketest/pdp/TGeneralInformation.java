@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * BUG: RAP-???? Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information
+ * BUG: RAP-???? Missing Social Links - Test Case ID:(C84710) Smoke Test » Product Details » PDP: General Information
  */
 @ScriptName
 ("testcases.smoketest.pdp.TGeneralInformation")
