@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
-  <description>DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132192)</description>
+  <tags>C132196</tags>
+  <description>DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132196)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <action name="OPEN_STOREFRONT"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
