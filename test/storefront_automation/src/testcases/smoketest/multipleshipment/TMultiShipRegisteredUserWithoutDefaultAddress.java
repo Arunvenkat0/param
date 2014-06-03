@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132192)
+ * DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132196)
  */
 @ScriptName
 ("testcases.smoketest.multipleshipment.TMultiShipRegisteredUserWithoutDefaultAddress")
