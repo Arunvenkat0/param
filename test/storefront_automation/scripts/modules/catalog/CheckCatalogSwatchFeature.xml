@@ -23,6 +23,10 @@
     <parameter name="textElement" value="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor"/>
     <parameter name="textStoreVariableName" value="AvailableColor2"/>
   </module>
+  <action name="VerifyProductThumbnailImageColor"/>
+  <module name="library.module.app.sitegenesis.productdisplaypage.VerifyThumbnailImageTitleIncludesText">
+    <parameter name="text" value="${DefaultColor}"/>
+  </module>
   <action name="CheckAvailableColors"/>
   <module name="modules.catalog.CheckAvailableColorsOnCategoryPage"/>
   <action name="SelectAlternativeColorAndCheckResult"/>
@@ -30,11 +34,13 @@
     <parameter name="clickElement" value="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor[title=&quot;${AvailableColor2}&quot;]"/>
   </module>
   <command name="pause" value="3000"/>
+  <action name="VerifyProductThumbnailImageColor"/>
+  <module name="library.module.app.sitegenesis.productdisplaypage.VerifyThumbnailImageTitleIncludesText">
+    <parameter name="text" value="${AvailableColor2}"/>
+  </module>
+  <action name="GoBackToProductGrid"/>
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=@{SubCategoryName}"/>
-  </module>
-  <module name="modules.catalog.ValidateSwatchColorChange">
-    <parameter name="SelectedColor" value="${AvailableColor2}"/>
   </module>
   <action name="SelectDefaultColorAndCheckResult"/>
   <module name="library.function.FClickAndWaitForPageLoad">
