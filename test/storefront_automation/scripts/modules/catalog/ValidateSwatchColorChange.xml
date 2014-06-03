@@ -19,7 +19,7 @@ Validate it remains the selected color (on product details page)</description>
   </module>
   <action name="ValidateSwatchResultOnProductPage"/>
   <module name="library.function.FClickAndWaitForPageLoad">
-    <parameter name="clickElement" value="xpath=//div[@class='product-name']//a[@title=&quot;${ProductName}&quot;]"/>
+    <parameter name="clickElement" value="css= .product-name a[title=&quot;${ProductName}&quot;]   "/>
   </module>
   <module name="library.function.FWaitForText">
     <parameter name="textElement" value="css=.breadcrumb .last"/>

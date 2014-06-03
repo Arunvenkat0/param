@@ -8,7 +8,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * BUG: 'RAP-2665'
+ * BUG: 'RAP-2406'  (& 'RAP-2665')
  Test Case ID:(C84713)  Smoke Test » Product Details » PDP: Previous and Next Navigation
  */
 @ScriptName

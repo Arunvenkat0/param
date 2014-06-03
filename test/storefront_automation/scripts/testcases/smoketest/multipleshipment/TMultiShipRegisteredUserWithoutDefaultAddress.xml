@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
-  <description>Possible Bug - needs test for account address Test Case ID:(C132192)</description>
+  <description>DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132192)</description>
   <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <action name="OPEN_STOREFRONT"/>
   <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
@@ -133,7 +133,17 @@
   <module name="library.module.app.sitegenesis.header.ClickUserAccount"/>
   <module name="library.module.app.sitegenesis.myAccount.ClickAddresses"/>
   <action name="DO_ADDRESS_CHECK_HERE"/>
-  <command name="pause" value="3000"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.VerifyDefaultAddress">
+    <parameter name="AddressTitle" value="${RegisteredAddressName}"/>
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Street1" value="${Street1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="StateAbbrev" value="${State1Abbrev}"/>
+    <parameter name="Zip" value="${Zip1}"/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
   <action name="CLEAN_UP"/>
   <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>
