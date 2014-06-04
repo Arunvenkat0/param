@@ -61,5 +61,9 @@
   <command name="mouseOut" target="css=.mini-cart-content"/>
   <command name="mouseOver" target="css=.mini-cart-total-label"/>
   <action name="BUILDFAIL"/>
-  <command name="assertText" target="css=.mini-cart-subtotals .value" value="${price}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.mini-cart-subtotals .value"/>
+    <parameter name="textPattern" value="${price}"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.mini-cart-subtotals .value" value="${price}"/>
 </scriptmodule>
