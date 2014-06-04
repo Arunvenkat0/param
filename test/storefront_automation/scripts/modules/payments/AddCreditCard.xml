@@ -14,7 +14,7 @@
   <module name="library.function.FWaitForElement">
     <parameter name="element" value="css=#ui-dialog-title-dialog-container"/>
   </module>
-  <command name="waitForText" target="@{HeaderElement}" value="ADD A CREDIT CARD"/>
+  <command name="waitForText" target="@{HeaderElement}" value="regexpi:ADD A CREDIT CARD"/>
   <module name="modules.payments.ValidateCreditCardRequiredFields"/>
   <action name="EnterCreditCardData"/>
   <module name="library.function.FType">
