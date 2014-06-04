@@ -5367,15 +5367,10 @@ var app = (function (app, $) {
 		return isMobile;
 	}
 	
-	app.isMobileUserAgent = function() 
-	{
-		return isMobile();
-	};
+	app.isMobileUserAgent = isMobile();
 	
-	app.zoomViewerEnabled = function()
-	{
-		return (!isMobile());
-	};
+	app.zoomViewerEnabled = !isMobile();
+	
 }(window.app = window.app || {}));
 
 // jquery extensions
