@@ -7,8 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * DISABLED: Requires InStore configuration.
- Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product
+ * Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseInStorePickUpProductAsRegisteredUser")

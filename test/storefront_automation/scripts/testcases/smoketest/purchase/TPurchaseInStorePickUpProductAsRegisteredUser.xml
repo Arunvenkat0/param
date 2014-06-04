@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85057</tags>
-  <description>DISABLED: Requires InStore configuration.
-Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product</description>
+  <description>Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product</description>
   <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
@@ -78,7 +77,7 @@ Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase In
     <parameter name="Number" value="${CreditCardNumber}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpiryMonthName}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpiryYear}"/>
-    <parameter name="HeaderElement" value=""/>
+    <parameter name="HeaderElement" value="css=.ui-dialog-title"/>
   </module>
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
   <action name="SearchAndAddProduct"/>
