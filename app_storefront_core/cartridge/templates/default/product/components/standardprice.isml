@@ -10,7 +10,7 @@
 	price book or if the price book defines no price for the product
 </iscomment>
 
-<isif condition="${(!PriceModel.getPrice().available) || (!dw.system.Site.getCurrent().getCurrencyCode().equals(session.getCurrency().getCurrencyCode()))}">
+<isif condition="${(!PriceModel.getPrice().available) || (!dw.system.Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode()))}">
 	<iscomment>
 		There is currently no way to check if the list pricebook is actually
 		assigned to the site.  Therefore, we do a sanity check:  If the

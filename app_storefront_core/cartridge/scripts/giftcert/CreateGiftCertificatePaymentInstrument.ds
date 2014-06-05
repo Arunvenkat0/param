@@ -118,7 +118,7 @@ Gift Certificates from the order total.
 function calculateAmount(amount : Money, orderTotal : Money, basket : Basket) 
 {
 
-	var gcTotal : Money = new Money(0.0, basket.currencyCode); //Site.getCurrent().getCurrencyCode()
+	var gcTotal : Money = new Money(0.0, basket.currencyCode); 
 
 	// iterate over the list of payment instruments 
 	// and fetch amount
