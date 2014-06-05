@@ -67,7 +67,7 @@ function copyAddressInfo(address : CustomerAddress, orderAddress : OrderAddress)
 	orderAddress.setPhone(address.getPhone());
 	orderAddress.setPostalCode(address.getPostalCode());
 	orderAddress.setPostBox(address.getPostBox());
-	orderAddress.setSaluation(address.getSalutation());
+	orderAddress.setSalutation(address.getSalutation());
 	orderAddress.setSecondName(address.getSecondName());
 	orderAddress.setStateCode(address.getStateCode());
 	orderAddress.setSuffix(address.getSuffix());
