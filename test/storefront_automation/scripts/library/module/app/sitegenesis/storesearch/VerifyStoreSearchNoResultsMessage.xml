@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=#preferred-store-panel .no-results"/>
+    <parameter name="textPattern" value="No Results"/>
+  </module>
+</scriptmodule>

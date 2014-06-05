@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130247</tags>
   <description>Test Case ID:(C130247)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -16,7 +16,7 @@
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.header.GoToCheckout"/>
   <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -33,7 +33,7 @@
     <parameter name="textPattern" value="${ExpectedDiscountedShipping}"/>
   </module>
   <action name="SelectShipping"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod}"/>
   </module>
   <module name="library.module.app.sitegenesis.util.FSelectUseThisAddressForBilling"/>

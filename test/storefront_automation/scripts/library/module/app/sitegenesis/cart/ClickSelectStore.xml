@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="itemNumberInCartList"/>
+  <module name="library.function.FClick">
+    <parameter name="clickElement" value="css=form#cart-items-form table.item-list tbody tr:nth-child(@{itemNumberInCartList}) span.set-preferred-store a"/>
+  </module>
+</scriptmodule>

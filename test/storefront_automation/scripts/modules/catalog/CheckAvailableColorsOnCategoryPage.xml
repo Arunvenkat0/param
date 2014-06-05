@@ -6,17 +6,14 @@ Steps:
 Validate Colors avaiable
 Mouse over each color and validate respective procut image</description>
   <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="css=.product-name a[title=&quot;${ProductName}&quot;]"/>
+    <parameter name="assertedElement" value="css=.product-name"/>
   </module>
   <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="css=a.name-link[title=&quot;${ProductName}&quot;]"/>
-  </module>
-  <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="css=.swatch.selected img[title=&quot;${ProductName}, ${DefaultColor}&quot;]"/>
+    <parameter name="assertedElement" value="css=.primary-image[title=&quot;${ProductName}, ${DefaultColor}&quot;]"/>
   </module>
   <command name="pause" value="500"/>
-  <command name="mouseOver" target="css=.swatch img[title=&quot;${ProductName}, ${AvailableColor2}&quot;]"/>
+  <command name="mouseOver" target="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor[title=&quot;${AvailableColor2}&quot;]"/>
   <command name="waitForElementPresent" target="css=.product-image img[title=&quot;${ProductName}, ${AvailableColor2}&quot;]"/>
-  <command name="mouseOut" target="css=.swatch img[title=&quot;${ProductName}, ${AvailableColor2}&quot;]"/>
+  <command name="mouseOut" target="css=.Color &gt; li.emptyswatch &gt; a.swatchanchor[title=&quot;${AvailableColor2}&quot;]"/>
   <command name="waitForElementPresent" target="css=.product-image img[title=&quot;${ProductName}, ${DefaultColor}&quot;] "/>
 </scriptmodule>

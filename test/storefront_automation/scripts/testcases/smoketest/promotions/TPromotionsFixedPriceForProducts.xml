@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130270</tags>
   <description>Test Case ID:(C130270)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -52,6 +52,9 @@
   <module name="library.module.app.sitegenesis.productgriddisplay.SelectNumberOfProductsToDisplay">
     <parameter name="numberOfProductsToDisplay" value="60"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
   <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
     <parameter name="ProductName" value="${ProductName2}"/>
   </module>
@@ -82,11 +85,19 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-PromoMessage"/>
-  <module name="library.function.FAssertText">
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="${PromotionName}"/>
+  </module>
+  <module name="library.function.FAssertText" disabled="true">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
     <parameter name="textPattern" value="${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
+  <module name="library.function.FAssertText" disabled="true">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
     <parameter name="textPattern" value="${PromotionName}"/>
   </module>
@@ -100,13 +111,13 @@
   </module>
   <action name="VERIFY-PromoMessages"/>
   <command name="pause" value="1500"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
   <action name="ChangeFirstItemQty"/>
   <command name="pause" value="1500"/>
@@ -119,20 +130,20 @@
   </module>
   <action name="VERIFY-PromoApplication"/>
   <command name="pause" value="1500"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
   <action name="VERIFY-FinalCart"/>
   <action name="FirstProduct"/>
   <command name="pause" value="1500"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
@@ -140,13 +151,13 @@
   </module>
   <action name="SecondProduct"/>
   <command name="pause" value="1500"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertTextCaseInsensitive">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>
-    <parameter name="plainString" value="${ItemTotal2}"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td.item-total &gt; span.price-adjusted-total &gt; span"/>
+    <parameter name="textPattern" value="${ItemTotal2}"/>
   </module>
   <action name="CleanUp"/>
   <module name="library.module.app.busmgr.DisablePromotion">

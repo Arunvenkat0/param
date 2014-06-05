@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
+  <tags>C132194</tags>
+  <description>Test Case ID:(C132194)</description>
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
+    <parameter name="SiteName" value="${SiteName}"/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
+  </module>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
+  <action name="OPEN_STOREFRONT"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
+    <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CategoryLevel2}"/>
+    <parameter name="Level3CategoryName" value="${CategoryLevel3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="${Sorting}"/>
+  </module>
+  <action name="AddProduct1ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
+    <parameter name="Size" value="7"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.SelectWidth">
+    <parameter name="Width" value="M"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.EnterQuantity">
+    <parameter name="number" value="5"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="AddProduct2ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.SelectSize">
+    <parameter name="Size" value="7"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.SelectWidth">
+    <parameter name="Width" value="M"/>
+  </module>
+  <module name="library.module.app.sitegenesis.quickview.EnterQuantity">
+    <parameter name="number" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="GOTO_CART_PAGE"/>
+  <action name="Checkout"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.cart.ClickCheckoutButton"/>
+  <action name="CHECKOUT_AS_GUEST"/>
+  <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
+  <action name="VERIFY-MultiAddressOptionAvailable"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.ship-to-multiple"/>
+    <parameter name="textPattern" value="regexp:^Do you want to ship to multiple addresses\?.*"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.shiptomultiplebutton"/>
+    <parameter name="textPattern" value="YES"/>
+  </module>
+  <action name="Mutli-Address"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickShipToMultipleAddresses"/>
+  <action name="EnterAddress1"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Address1" value="${Street1}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="State" value="${State1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="ZipCode" value="${Zip1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
+  <action name="EnterAddress2"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
+    <parameter name="FirstName" value="${FName2}"/>
+    <parameter name="LastName" value="${LName2}"/>
+    <parameter name="Address1" value="${Street2}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${Country2}"/>
+    <parameter name="State" value="${State2}"/>
+    <parameter name="City" value="${City2}"/>
+    <parameter name="ZipCode" value="${Zip2}"/>
+    <parameter name="Phone" value="${Phone2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
+  <action name="SelectShippingAddresses"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="1"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="2"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="3"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="4"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="5"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="6"/>
+    <parameter name="address" value="${FName2} ${LName2}, ${Street2}, ${City2}, ${State2Abbrev}, ${Zip2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.SelectAddressForProduct">
+    <parameter name="number" value="7"/>
+    <parameter name="address" value="${FName2} ${LName2}, ${Street2}, ${City2}, ${State2Abbrev}, ${Zip2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickContinue"/>
+  <action name="SelectShippingMethods"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForAddress" disabled="true">
+    <parameter name="street" value="${Street1}"/>
+    <parameter name="shippingMethod" value="${ShippingMethod1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForAddress" disabled="true">
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="shippingMethod" value="${ShippingMethod2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForProduct">
+    <parameter name="shippingMethod" value="${ShippingMethod1}"/>
+    <parameter name="productName" value="${ProductName1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethodForProduct">
+    <parameter name="shippingMethod" value="${ShippingMethod1}"/>
+    <parameter name="productName" value="${ProductName2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.ClickContinue"/>
+  <action name="VERIFY-Promo-FreeShippingFor5plus"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-shipping-discount &gt; td:nth-child(2)"/>
+    <parameter name="textPattern" value="- $15.99"/>
+  </module>
+  <command name="assertXpathCount" target="//tr[contains(@class,&quot;order-shipping-discount&quot;)] / td[text()=&quot;- $15.99&quot; ]" value="1"/>
+  <action name="CompleteOrderAndSubmit"/>
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterAddressData">
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Address1" value="${Street1}"/>
+    <parameter name="Address2" value="${Email}"/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="State" value="${State1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="ZipCode" value="${Zip1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterBillingEmail">
+    <parameter name="EmailAddress" value="${Email}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.EnterCreditCardInfo">
+    <parameter name="NameOnCard" value="${FName1} ${LName1}"/>
+    <parameter name="CardType" value="${CardType}"/>
+    <parameter name="CardNumber" value="${CardNumber}"/>
+    <parameter name="ExpirationMonth" value="${ExpirationMonth}"/>
+    <parameter name="ExpirationYear" value="${ExpirationYear}"/>
+    <parameter name="SecurityCode" value="${SecurityCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.billing.ClickContinue"/>
+  <module name="library.module.app.sitegenesis.checkout.placeorder.ClickSubmitOrder"/>
+  <action name="VERIFY-OrderConfirmationShipmentAddresses"/>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
+    <parameter name="productName" value="${ProductName1}"/>
+    <parameter name="firstName" value="${FName1} "/>
+    <parameter name="lastName" value="${LName1}"/>
+    <parameter name="street" value="${Street1}"/>
+    <parameter name="city" value="${City1},"/>
+    <parameter name="stateAbbrev" value="${State1Abbrev} "/>
+    <parameter name="zip" value="${Zip1}"/>
+    <parameter name="country" value="${Country1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyShippingAddressForProduct">
+    <parameter name="productName" value="${ProductName2}"/>
+    <parameter name="firstName" value="${FName2} "/>
+    <parameter name="lastName" value="${LName2}"/>
+    <parameter name="street" value="${Street2}"/>
+    <parameter name="city" value="${City2},"/>
+    <parameter name="stateAbbrev" value="${State2Abbrev} "/>
+    <parameter name="zip" value="${Zip2}"/>
+    <parameter name="country" value="${Country2}"/>
+  </module>
+  <action name="VERIFY-Promo-FreeShippingFor5plus"/>
+  <action name="VERIFY-Promo-FreeShippingFor5plus"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.order-shipping-discount &gt; td:nth-child(2)"/>
+    <parameter name="textPattern" value="- $15.99"/>
+  </module>
+  <command name="assertXpathCount" target="//tr[contains(@class,&quot;order-shipping-discount&quot;)] / td[text()=&quot;- $15.99&quot; ]" value="1"/>
+  <action name="CLEAN_UP"/>
+  <module name="library.module.app.busmgr.DisablePromotion">
+    <parameter name="SiteName" value="${SiteName}"/>
+    <parameter name="PromotionName" value="${PromotionName}"/>
+  </module>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
+</testcase>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Creates a registered user account using 'firstName' and 'lastName'.  Creates email as ${generatedEmail}.  Creates password as ${generatedPassword}</description>
+  <parameter name="firstName"/>
+  <parameter name="lastName"/>
+  <action name="GenerateUniqueEmailAndPassword"/>
+  <module name="library.function.FStore">
+    <parameter name="target" value="${RANDOM.String(8)}@nowhere.com"/>
+    <parameter name="variableName" value="generatedEmail"/>
+  </module>
+  <module name="library.function.FStore">
+    <parameter name="target" value="${RANDOM.String(9)}"/>
+    <parameter name="variableName" value="generatedPassword"/>
+  </module>
+  <action name="EnterData"/>
+  <module name="library.module.app.sitegenesis.createAccount.EnterAccountInformation">
+    <parameter name="firstName" value="@{firstName}"/>
+    <parameter name="lastName" value="@{lastName}"/>
+    <parameter name="email" value="${generatedEmail}"/>
+    <parameter name="password" value="${generatedPassword}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.createAccount.ClickApply"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="css=#primary &gt; h1:nth-child(1)"/>
+    <parameter name="text" value="regexp:.*@{firstName}.*@{lastName}.*"/>
+  </module>
+</scriptmodule>

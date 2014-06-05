@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <command name="assertText" target="xpath=id('primary')/h1" value="My Account Login"/>
-  <command name="assertText" target="css=.breadcrumb-last" value="Wish List"/>
-  <command name="assertText" target="css=.login-account h2" value="regexpi:Returning Customers • required"/>
-  <command name="assertText" target="css=.login-create-account h2" value="regexpi:Create a Wish List"/>
-  <command name="assertText" target="css=.login-general h2" value="regexpi:Find Someone's Wish List"/>
+  <action name="BUILDFAIL"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="xpath=id('primary')/h1"/>
+    <parameter name="textPattern" value="My Account Login"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.breadcrumb-last"/>
+    <parameter name="textPattern" value="Wish List"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-account h2"/>
+    <parameter name="textPattern" value="regexpi:Returning Customers • required"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-create-account h2"/>
+    <parameter name="textPattern" value="regexpi:Create a Wish List"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.login-general h2"/>
+    <parameter name="textPattern" value="regexpi:Find Someone's Wish List"/>
+  </module>
 </scriptmodule>

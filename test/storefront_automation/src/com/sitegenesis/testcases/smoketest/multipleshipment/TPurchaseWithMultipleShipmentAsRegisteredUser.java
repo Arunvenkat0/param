@@ -10,11 +10,11 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 /**
  * DISABLED: Requires Multi-shipment preference enabled.
- Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Shipment with Registered User
+ Test Case ID:(C85045)
  */
 @ScriptName
 ("testcases.smoketest.multipleshipment.TPurchaseWithMultipleShipmentAsRegisteredUser")
-@Ignore
+
 public class TPurchaseWithMultipleShipmentAsRegisteredUser extends AbstractBrowserScriptTestCase
 {
 }

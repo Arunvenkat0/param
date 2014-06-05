@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130272</tags>
   <description>Test Case ID:(C130272)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -114,13 +114,13 @@
     <parameter name="clickElement" value="css=#update-cart"/>
   </module>
   <action name="VERIFY-ShoppingCart"/>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(1) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="1 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="1"/>
+    <parameter name="promoName" value="1 x ${PromotionName}"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; div:nth-child(2)"/>
-    <parameter name="textPattern" value="2 x ${PromotionName}"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyPromoNameForCartItem">
+    <parameter name="rowNumber" value="2"/>
+    <parameter name="promoName" value="2 x ${PromotionName}"/>
   </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=tr.cart-row:nth-child(2) &gt; td:nth-child(6) &gt; span:nth-child(3) &gt; span:nth-child(1)"/>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <PromotionName1>ExclusivityNo</PromotionName1>
+  <PromotionName2>DuplicateExclusivityNo-Low</PromotionName2>
+  <CatalogLevel1>Mens</CatalogLevel1>
+  <CatalogLevel2>Clothing</CatalogLevel2>
+  <CatalogLevel3>Suits</CatalogLevel3>
+  <ProductName1>Charcoal Single Pleat Striped Wool Suit</ProductName1>
+  <Size>42</Size>
+  <Width>Regular</Width>
+  <OrderDiscountAmount>- $179.99</OrderDiscountAmount>
+  <EstimatedTotalWithDiscount>$120.00</EstimatedTotalWithDiscount>
+</data>

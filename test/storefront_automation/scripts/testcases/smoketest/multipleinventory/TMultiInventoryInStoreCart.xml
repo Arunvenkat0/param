@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Test Case ID:(C132429)</description>
+  <module name="library.module.app.busmgr.EnableInStorePickup"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
+    <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
+    <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductNameLink">
+    <parameter name="ProductName" value="${ProductName1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.SelectSize">
+    <parameter name="Size" value="${Size}"/>
+  </module>
+  <action name="SelectAStoreNearby"/>
+  <module name="library.module.app.sitegenesis.productdisplaypage.ClickStoreAvailablity"/>
+  <module name="library.module.app.sitegenesis.storesearch.SearchStoresNearYouWithZIP">
+    <parameter name="ZipCode" value="${ZipCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.storesearch.SelectInStockStore">
+    <parameter name="ZipCode" value="${Product1StoreZipCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <action name="VERIFY-InitialInStorePickupAddress"/>
+  <module name="library.module.app.sitegenesis.cart.VerifyCartItemHomeDeliverySelected">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyInStoreAddress">
+    <parameter name="itemNumberInCartList" value="1"/>
+    <parameter name="StreetAddress" value="${SelectedStoreAddress}"/>
+    <parameter name="City" value="${SelectedStoreCity}"/>
+    <parameter name="State" value="${SelectedStoreState}"/>
+    <parameter name="Zip" value="${SelectedStoreZip}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifySelectStoreLinkDisplayed">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <action name="SelectInStore"/>
+  <module name="library.module.app.sitegenesis.cart.CheckInStorePickup">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <action name="SelectSecondProduct"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel3">
+    <parameter name="Level1CategoryName" value="${CatalogLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
+    <parameter name="Level3CategoryName" value="${CatalogLevel3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductNameLink">
+    <parameter name="ProductName" value="${ProductName2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.SelectSize">
+    <parameter name="Size" value="${Size}"/>
+  </module>
+  <action name="SelectADifferentStoreForSecondProduct"/>
+  <module name="library.module.app.sitegenesis.productdisplaypage.ClickStoreAvailablity"/>
+  <module name="library.module.app.sitegenesis.storesearch.SelectInStockStore">
+    <parameter name="ZipCode" value="${Product2StoreZipCode}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <action name="VERIFY-InitialInStorePickupAddress"/>
+  <module name="library.module.app.sitegenesis.cart.VerifySelectStoreLinkDisplayed">
+    <parameter name="itemNumberInCartList" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyCartItemHomeDeliverySelected">
+    <parameter name="itemNumberInCartList" value="2"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifyInStoreAddress">
+    <parameter name="itemNumberInCartList" value="2"/>
+    <parameter name="StreetAddress" value="${SelectedStoreAddress}"/>
+    <parameter name="City" value="${SelectedStoreCity}"/>
+    <parameter name="State" value="${SelectedStoreState}"/>
+    <parameter name="Zip" value="${SelectedStoreZip}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.cart.VerifySelectStoreLinkDisplayed">
+    <parameter name="itemNumberInCartList" value="2"/>
+  </module>
+  <action name="Cleanup"/>
+  <module name="library.module.app.busmgr.DisableInStorePickup"/>
+</testcase>

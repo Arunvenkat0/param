@@ -3,6 +3,9 @@
   <description>From the homepage, opens the 'Level1CategoryName', then the 'Level2CategoryName'  Example "Mens" &gt; "Clothing"</description>
   <parameter name="Level1CategoryName"/>
   <parameter name="Level2CategoryName"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=#navigation"/>
+  </module>
   <module name="library.module.app.sitegenesis.util.FOpenCatalogLevel1">
     <parameter name="CategoryName" value="@{Level1CategoryName}"/>
   </module>

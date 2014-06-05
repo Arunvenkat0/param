@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://xlt.xceptance.com/xlt-script-data">
+  <ActionsDropDownElement>//button[text()="Actions"]</ActionsDropDownElement>
+  <EnableSelectedElement>//a[text()="Enable Selected Promotions"]</EnableSelectedElement>
+  <ConfirmEnableButtonElement>//button[text()="Enable"]</ConfirmEnableButtonElement>
+  <PromotionStatusElement>css=div.x-grid3-col-enabled</PromotionStatusElement>
+  <PromotionStatusValue>Yes</PromotionStatusValue>
+  <SearchInputFieldElement>css=.dw-bm-widget-searchpanel-textfield &gt; input</SearchInputFieldElement>
+  <SearchButtonElement>css=.dw-bm-widget-searchpanel-searchbutton</SearchButtonElement>
+  <SelectVisisbleElement>//a[text()="Select Visible"]</SelectVisisbleElement>
+</data>

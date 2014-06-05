@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85056</tags>
-  <description>DISABLED: Needs In Store Configuration.
-Test Case ID:(C85056) Smoke Test » Product Details » PDP: InStore Feature</description>
+  <description>Test Case ID:(C85056) </description>
+  <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.search.SearchProductByIDOrName">
     <parameter name="SearchText" value="${ProductID}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.SelectSize">
+    <parameter name="Size" value="32"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.SelectColor">
+    <parameter name="Color" value="Black"/>
   </module>
   <module name="modules.catalog.ValidateInStorePickUpProductDetailsPageStructure"/>
   <module name="modules.catalog.ValidateProductDataOnDetailsPage">
@@ -73,7 +79,11 @@ Test Case ID:(C85056) Smoke Test » Product Details » PDP: InStore Feature</des
     <comment>//*[@id='preferred-store-panel']/button[contains(@class,'close') and contains(@class,'button-style-1')][1]</comment>
   </command>
   <command name="waitForElementPresent" target="link=Check store availability"/>
-  <command name="assertText" target="css=.store-list li(1).In-Stock .store-tile-status" value="In Stock"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.in-stock-msg"/>
+    <parameter name="textPattern" value="In Stock"/>
+  </module>
+  <command name="assertText" disabled="true" target="css=.store-list li(1).In-Stock .store-tile-status" value="In Stock"/>
   <command name="assertElementPresent" target="css=.store-list .store-tile-address"/>
   <command name="assertElementPresent" target="css=.more-stores"/>
   <action name="OpenStoreList"/>
@@ -92,4 +102,5 @@ Test Case ID:(C85056) Smoke Test » Product Details » PDP: InStore Feature</des
   <command name="assertTextPresent" value="${storeState}"/>
   <command name="assertTextPresent" value="${storeZip}"/>
   <command name="assertElementPresent" target="css=.store-in-stock"/>
+  <module name="library.module.app.busmgr.DisableInStorePickup"/>
 </testcase>

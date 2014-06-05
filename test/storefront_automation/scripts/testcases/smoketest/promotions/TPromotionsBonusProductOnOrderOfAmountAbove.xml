@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130262</tags>
   <description>Test Case ID:(C130262)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -13,8 +13,14 @@
     <parameter name="Level2CategoryName" value="${CatalogLevel2}"/>
     <parameter name="Level3CategoryName" value="Jackets &amp; Coats"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectNumberOfProductsToDisplay">
+    <parameter name="numberOfProductsToDisplay" value="48"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Price High To Low"/>
+  </module>
   <module name="library.function.FWaitForElement">
-    <parameter name="element" value="css=a.name-link[title='Notch Collar Button Down Jacket']"/>
+    <parameter name="element" value="css=a.name-link[title='${NoPromoProductName}']"/>
   </module>
   <action name="VERIFY-NoPromotion"/>
   <command name="assertXpathCount" target="//*[contains(text(),'${PromotionName}')]" value="0"/>

@@ -7,6 +7,6 @@
     <parameter name="clickElement" value="@{typeElement}"/>
   </module>
   <command name="waitForElementPresent" target="@{typeElement}"/>
-  <command name="pause" value="750"/>
+  <command name="pause" value="400"/>
   <command name="type" target="@{typeElement}" value="@{inputString}"/>
 </scriptmodule>
