@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130274</tags>
   <description>Test Case ID:(C130274)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -19,6 +19,7 @@
     <parameter name="clickElement" value="css= .Color  a[title='${ProductName}']"/>
   </module>
   <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
+  <command name="pause" value="1000"/>
   <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
   <action name="VERIFY-ShoppingCart"/>
   <command name="pause" value="1500"/>

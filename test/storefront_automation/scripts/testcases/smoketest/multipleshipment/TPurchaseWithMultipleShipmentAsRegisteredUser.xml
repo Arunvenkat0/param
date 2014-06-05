@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85045</tags>
-  <description>DISABLED: Requires Multi-shipment preference enabled.
-Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Shipment with Registered User</description>
+  <description>Test Case ID:(C85045)</description>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
     <parameter name="FirstName" value="${FirstName}"/>
@@ -77,7 +77,7 @@ Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Sh
     <parameter name="Number" value="${CreditCardNumber}"/>
     <parameter name="ExpireDateMonth" value="${CreditCardExpiryMonthName}"/>
     <parameter name="ExpireDateYear" value="${CreditCardExpiryYear}"/>
-    <parameter name="HeaderElement" value=""/>
+    <parameter name="HeaderElement" value="css=#dialog-container &gt; h1:nth-child(3)"/>
   </module>
   <command name="waitForXpathCount" target="id('primary')/ul/li" value="1"/>
   <action name="SearchAndAddProduct"/>
@@ -400,4 +400,5 @@ Test Case ID:(C85045)  Smoke Test » Checkout - Retuning Customer » Multiple Sh
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="GoToHomepage"/>
   <module name="modules.staticelements.Return2Home"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
 </testcase>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true" disabled="true">
+  <tags>C132196</tags>
+  <description>DISABLED: Bug 'RAP-????' No default address Test Case ID:(C132196)</description>
+  <module name="library.module.app.busmgr.EnableMultiShipping"/>
+  <action name="OPEN_STOREFRONT"/>
+  <module name="library.module.app.sitegenesis.OpenShoppingSite"/>
+  <action name="RegisterANewUser"/>
+  <module name="library.module.app.sitegenesis.header.ClickRegisterLink"/>
+  <module name="library.module.app.sitegenesis.createAccount.CreateANewUserAccount">
+    <parameter name="firstName" value="${FName1}"/>
+    <parameter name="lastName" value="${LName1}"/>
+  </module>
+  <action name="AddAddressForUser" disabled="true"/>
+  <module name="library.module.app.sitegenesis.myAccount.ClickAddresses" disabled="true"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.ClickCreateNewAddress" disabled="true"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.addAddress.EnterAddressAndApply" disabled="true">
+    <parameter name="addressName" value="${RegisteredAddressName}"/>
+    <parameter name="firstName" value="${FName1}"/>
+    <parameter name="lastName" value="${LName1}"/>
+    <parameter name="street1" value="${Street1}"/>
+    <parameter name="street2" value=""/>
+    <parameter name="country" value="${Country1}"/>
+    <parameter name="stateName" value="${State1}"/>
+    <parameter name="city" value="${City1}"/>
+    <parameter name="zip" value="${Zip1}"/>
+    <parameter name="phone" value="${Phone1}"/>
+  </module>
+  <action name="Shop"/>
+  <module name="library.module.app.sitegenesis.OpenCatalogDisplayCategoryLevel2">
+    <parameter name="Level1CategoryName" value="${CategoryLevel1}"/>
+    <parameter name="Level2CategoryName" value="${CategoryLevel2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectBrandRefinement">
+    <parameter name="brandName" value="${Brand}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="${Sorting}"/>
+  </module>
+  <action name="ADD_MULTIPLE_PRODUCTS_TO_CART"/>
+  <action name="AddProduct1ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="AddProduct2ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="AddProduct3ToCart"/>
+  <module name="library.module.app.sitegenesis.productgriddisplay.ClickProductQuickViewLink">
+    <parameter name="ProductName" value="${ProductName3}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.productdisplaypage.AddToCart"/>
+  <action name="GOTO_CART_PAGE"/>
+  <action name="Checkout"/>
+  <module name="library.module.app.sitegenesis.header.OpenShoppingCart"/>
+  <module name="library.module.app.sitegenesis.cart.ClickCheckoutButton"/>
+  <action name="VERIFY-MultiAddressOptionAvailable"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.ship-to-multiple"/>
+    <parameter name="textPattern" value="regexp:^Do you want to ship to multiple addresses\?.*"/>
+  </module>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="css=.shiptomultiplebutton"/>
+    <parameter name="textPattern" value="YES"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickShipToMultipleAddresses"/>
+  <action name="VERIFY-EachItemHasAddressOption"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="//div[@class=&quot;editaddress&quot;]/a[text()=&quot;Add/Edit Address&quot;]"/>
+  </module>
+  <command name="assertXpathCount" target="//div[@class=&quot;editaddress&quot;]/a[text()=&quot;Add/Edit Address&quot;]" value="3"/>
+  <action name="1"/>
+  <action name="EnterFirstAddress"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Address1" value="${Street1}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="State" value="${State1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="ZipCode" value="${Zip1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
+  <action name="VERIFY_NewAddressSavedAndIsInListInShippingAddressPage"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.VerifyAddressAvailableForSelection">
+    <parameter name="number" value="2"/>
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <action name="VERIFY-AddressInAddEditPage"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.VerifyAddressInDropDown">
+    <parameter name="address" value="${FName1} ${LName1}, ${Street1}, ${City1}, ${State1Abbrev}, ${Zip1}"/>
+  </module>
+  <action name="2"/>
+  <action name="EnterSecondAddress"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
+    <parameter name="FirstName" value="${FName2}"/>
+    <parameter name="LastName" value="${LName2}"/>
+    <parameter name="Address1" value="${Street2}"/>
+    <parameter name="Address2" value=""/>
+    <parameter name="Country" value="${Country2}"/>
+    <parameter name="State" value="${State2}"/>
+    <parameter name="City" value="${City2}"/>
+    <parameter name="ZipCode" value="${Zip2}"/>
+    <parameter name="Phone" value="${Phone2}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.ClickSave"/>
+  <action name="VERIFY_NewAddressSavedAndIsInListInShippingAddressPage"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.VerifyAddressAvailableForSelection">
+    <parameter name="number" value="2"/>
+    <parameter name="address" value="${FName2} ${LName2}, ${Street2}, ${City2}, ${State2Abbrev}, ${Zip2}"/>
+  </module>
+  <action name="VERIFY-AddressInAddEditPage"/>
+  <module name="library.module.app.sitegenesis.checkout.shipping.ClickAddEditAddress">
+    <parameter name="ItemListNumber" value="1"/>
+  </module>
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.VerifyAddressInDropDown">
+    <parameter name="address" value="${FName2} ${LName2}, ${Street2}, ${City2}, ${State2Abbrev}, ${Zip2}"/>
+  </module>
+  <action name="VERIFY-MyAccountAddress"/>
+  <module name="library.module.app.sitegenesis.header.ClickUserAccount"/>
+  <module name="library.module.app.sitegenesis.myAccount.ClickAddresses"/>
+  <action name="DO_ADDRESS_CHECK_HERE"/>
+  <module name="library.module.app.sitegenesis.myAccount.adresses.VerifyDefaultAddress">
+    <parameter name="AddressTitle" value="${RegisteredAddressName}"/>
+    <parameter name="FirstName" value="${FName1}"/>
+    <parameter name="LastName" value="${LName1}"/>
+    <parameter name="Street1" value="${Street1}"/>
+    <parameter name="City" value="${City1}"/>
+    <parameter name="StateAbbrev" value="${State1Abbrev}"/>
+    <parameter name="Zip" value="${Zip1}"/>
+    <parameter name="Country" value="${Country1}"/>
+    <parameter name="Phone" value="${Phone1}"/>
+  </module>
+  <action name="CLEAN_UP"/>
+  <module name="library.module.app.busmgr.DisableMultiShipping"/>
+</testcase>

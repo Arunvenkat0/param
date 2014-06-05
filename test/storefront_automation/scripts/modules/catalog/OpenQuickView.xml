@@ -9,7 +9,7 @@
   <action name="ClickQuickViewLink"/>
   <module name="library.function.FMouseOverAndClick">
     <parameter name="mouseOverElement" value="//a[@class='thumb-link']/img[contains(@title,'${ProductName}')]"/>
-    <parameter name="clickElement" value="css=a#quickviewbutton[title='${ProductName}']"/>
+    <parameter name="clickElement" value="css=a#quickviewbutton"/>
   </module>
   <command name="waitForElementPresent" target="id=#QuickViewDialog"/>
   <module name="library.function.FWaitForText">

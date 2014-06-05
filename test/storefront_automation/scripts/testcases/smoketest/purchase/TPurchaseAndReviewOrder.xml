@@ -57,7 +57,7 @@
   <module name="modules.adressmanagement.ValidateRequiredFieldsForAddresses">
     <comment>Shipping Required Fields Validation</comment>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${ShippingAddressFirstName}"/>
     <parameter name="LastName" value="${ShippingAddressLastName}"/>
     <parameter name="Address1" value="${ShippingAddressStreet}"/>
@@ -98,7 +98,7 @@
   <module name="modules.checkout.billing.ValidateRequiredAddressFieldsForBilling">
     <comment>Billing Address Required Fields Validation</comment>
   </module>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${BillingAddressFirstName}"/>
     <parameter name="LastName" value="${BillingAddressLastName}"/>
     <parameter name="Address1" value="${BillingAddressStreet}"/>
@@ -119,7 +119,10 @@
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
   <action name="CheckoutPlaceOrder"/>
-  <command name="clickAndWait" target="css=.button-fancy-large"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=.button-fancy-large"/>
+  </module>
+  <command name="clickAndWait" disabled="true" target="css=.button-fancy-large"/>
   <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
     <comment>Validate First Product's Details on Place Order page</comment>
     <parameter name="Position" value="1"/>
@@ -273,6 +276,10 @@
   <module name="library.function.FType">
     <parameter name="typeElement" value="id=dwfrm_ordertrack_postalCode"/>
     <parameter name="inputString" value="${BillingAddressZipCode}"/>
+  </module>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="css=#dwfrm_ordertrack_orderEmail"/>
+    <parameter name="inputString" value="${Email}"/>
   </module>
   <action name="SubmitOrderSearchAndValidate"/>
   <command name="clickAndWait" target="css=#dwfrm_ordertrack button[name='dwfrm_ordertrack_findorder']"/>

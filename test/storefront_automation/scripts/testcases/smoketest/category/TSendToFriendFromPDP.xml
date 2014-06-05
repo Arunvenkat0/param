@@ -102,6 +102,7 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=#send-to-friend-dialog .send-button"/>
   </module>
+  <command name="pause" value="1000"/>
   <module name="library.function.FAssertCaseInsensitiveTextOnPage">
     <parameter name="text" value="Your message has been sent."/>
   </module>

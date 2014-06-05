@@ -7,21 +7,24 @@
   <module name="library.module.app.busmgr.GoToBusinessManagerPromotions">
     <parameter name="SiteName" value="@{SiteName}"/>
   </module>
-  <action name="SearchForPromotion"/>
-  <action name="TypePromotionName"/>
-  <module name="library.function.FType">
+  <module name="library.module.app.busmgr.site.promotions.EnableAPromotion">
+    <parameter name="PromotionName" value="@{PromotionName}"/>
+  </module>
+  <action name="SearchForPromotion" disabled="true"/>
+  <action name="TypePromotionName" disabled="true"/>
+  <module name="library.function.FType" disabled="true">
     <parameter name="typeElement" value="${SearchInputFieldElement}"/>
     <parameter name="inputString" value="@{PromotionName}"/>
   </module>
-  <action name="ClickSearchButton"/>
-  <module name="library.function.FClick">
+  <action name="ClickSearchButton" disabled="true"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="${SearchButtonElement}"/>
   </module>
-  <action name="SelectSearchResults"/>
-  <module name="library.function.FClick">
+  <action name="SelectSearchResults" disabled="true"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="${ActionsDropDownElement}"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="${SelectVisisbleElement}"/>
   </module>
 </scriptmodule>

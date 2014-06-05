@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Verifies the 'address' for the shipment containing 'product'.</description>
+  <parameter name="productName"/>
+  <parameter name="long_name"/>
+  <parameter name="street"/>
+  <parameter name="city_stateabbr_zip"/>
+  <parameter name="country"/>
+  <action name="MakeSureWeAreOnTheRightPage-Step2_ShippingMethods"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=div.step-2.active"/>
+  </module>
+  <action name="CheckAdddressElements"/>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="//div[@class=&quot;name&quot;] / a[@title=&quot;@{productName}&quot;] / ancestor::tbody // td[@class=&quot;item-quantity-details&quot;] / div[1]"/>
+    <parameter name="text" value="@{long_name}"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="//div[@class=&quot;name&quot;] / a[@title=&quot;@{productName}&quot;] / ancestor::tbody // td[@class=&quot;item-quantity-details&quot;] /  div[2]"/>
+    <parameter name="text" value="@{street}"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="//div[@class=&quot;name&quot;] / a[@title=&quot;@{productName}&quot;] / ancestor::tbody // td[@class=&quot;item-quantity-details&quot;] / div[3]"/>
+    <parameter name="text" value="@{city_stateabbr_zip}"/>
+  </module>
+  <module name="library.function.FWaitForText">
+    <parameter name="textElement" value="//div[@class=&quot;name&quot;] / a[@title=&quot;@{productName}&quot;] / ancestor::tbody // td[@class=&quot;item-quantity-details&quot;] / div[4]"/>
+    <parameter name="text" value="@{country}"/>
+  </module>
+</scriptmodule>

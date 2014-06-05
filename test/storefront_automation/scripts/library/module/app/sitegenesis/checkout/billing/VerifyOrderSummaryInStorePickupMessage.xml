@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <parameter name="ShipmentNumber"/>
+  <parameter name="StoreName"/>
+  <parameter name="StoreStreet"/>
+  <parameter name="StoreCityStateZip"/>
+  <parameter name="StoreCountry"/>
+  <action name="VERIFY-NameOfShipment"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}] /div[@class=&quot;name&quot;]"/>
+    <parameter name="textPattern" value="Shipment #@{ShipmentNumber}"/>
+  </module>
+  <action name="VERIFY-HeaderMessage"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}] //*[@class=&quot;section-header&quot;]"/>
+    <parameter name="textPattern" value="regexp:.*IN STORE PICKUP.*"/>
+  </module>
+  <action name="VERIFY-EditLink"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}] //a[@class=&quot;section-header-note&quot;]"/>
+    <parameter name="textPattern" value="Edit"/>
+  </module>
+  <action name="VERIFY-Store-NameAndAddress"/>
+  <module name="library.function.FAssertText" disabled="true">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}]  //div[@class=&quot;details&quot;]/div[1]"/>
+    <parameter name="textPattern" value="@{StoreName}"/>
+  </module>
+  <module name="library.function.FAssertText" disabled="true">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}]  //div[@class=&quot;details&quot;]/div[2]"/>
+    <parameter name="textPattern" value="@{StoreStreet}"/>
+  </module>
+  <module name="library.function.FAssertText" disabled="true">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}]  //div[@class=&quot;details&quot;]/div[3]"/>
+    <parameter name="textPattern" value="@{StoreCityStateZip}"/>
+  </module>
+  <module name="library.function.FAssertText" disabled="true">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}] //div[@class=&quot;details&quot;]/div[4]"/>
+    <parameter name="textPattern" value="@{StoreCountry}"/>
+  </module>
+  <action name="VERIFY-MethodName"/>
+  <module name="library.function.FAssertText">
+    <parameter name="textElement" value="//div[contains(@class,&quot;mini-shipment&quot;)][@{ShipmentNumber}] //div[@class=&quot;minishipments-method&quot;]"/>
+    <parameter name="textPattern" value="Method: Store Pickup"/>
+  </module>
+</scriptmodule>

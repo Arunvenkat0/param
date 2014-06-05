@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>1. Waits for the 'element' to exist. 2. Asserts that the 'element' is a checked radio button or checkbox.</description>
+  <parameter name="element"/>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="@{element}"/>
+  </module>
+  <command name="assertChecked" target="@{element}"/>
+</scriptmodule>

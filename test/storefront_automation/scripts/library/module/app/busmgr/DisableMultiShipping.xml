@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Disables Multi-Shipping destinations.</description>
+  <module name="library.module.app.busmgr.login.LoginBusinessManager"/>
+  <module name="library.module.app.busmgr.home.OpenSiteCustomPrefrencesPage"/>
+  <module name="library.function.FUnCheck">
+    <parameter name="checkElement" value="css=#bm_content_column &gt; table:nth-child(1) &gt; tbody:nth-child(1) &gt; tr:nth-child(1) &gt; td:nth-child(1) &gt; table:nth-child(1) &gt; tbody:nth-child(1) &gt; tr:nth-child(1) &gt; td:nth-child(2) &gt; form:nth-child(7) &gt; table:nth-child(4) &gt; tbody:nth-child(1) &gt; tr:nth-child(19) &gt; td:nth-child(2) &gt; table:nth-child(1) &gt; tbody:nth-child(1) &gt; tr:nth-child(1) &gt; td:nth-child(1) &gt; input:nth-child(1)"/>
+  </module>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css= button.button[name=&quot;update&quot;]"/>
+  </module>
+  <module name="library.module.app.busmgr.LogoutBusinessManager"/>
+</scriptmodule>

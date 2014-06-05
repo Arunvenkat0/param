@@ -12,6 +12,6 @@
     <parameter name="inputString" value="@{Password}"/>
   </module>
   <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=input[type=&quot;submit&quot;]"/>
+    <parameter name="clickElement" value="css=button[type=&quot;submit&quot;]"/>
   </module>
 </scriptmodule>

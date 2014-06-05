@@ -2,7 +2,7 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C130277</tags>
   <description>Test Case ID:(C130277)</description>
-  <module name="library.module.app.busmgr.EnablePromotion">
+  <module name="library.module.app.busmgr.EnableExclusivePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
   </module>
@@ -43,7 +43,7 @@
   <action name="CheckoutAsGuest"/>
   <module name="library.module.app.sitegenesis.header.GoToCheckout" disabled="true"/>
   <module name="library.module.app.sitegenesis.checkout.login.ClickCheckoutAsGuest"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.EnterAddressData">
+  <module name="library.module.app.sitegenesis.checkout.shipping.addAddress.EnterAddressData">
     <parameter name="FirstName" value="${ShippingFirstName}"/>
     <parameter name="LastName" value="${ShippingLastName}"/>
     <parameter name="Address1" value="${ShippingAddress}"/>
@@ -55,7 +55,7 @@
     <parameter name="Phone" value="${ShippingPhone}"/>
   </module>
   <action name="SelectShipping1"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod1}"/>
   </module>
   <action name="VERIFY-ShippingDiscount"/>
@@ -68,7 +68,7 @@
     <parameter name="textPattern" value="${ShippingDiscount}"/>
   </module>
   <action name="SelectShipping2"/>
-  <module name="library.module.app.sitegenesis.checkout.shipping.SelectShippingMethod">
+  <module name="library.module.app.sitegenesis.checkout.shipping.method.SelectShippingMethod">
     <parameter name="ShippingMethodName" value="${ShippingMethod2}"/>
   </module>
   <command name="pause" value="2000"/>

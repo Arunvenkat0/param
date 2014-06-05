@@ -53,7 +53,7 @@
     <parameter name="LinkToClick" value="//div[contains(@id,'footer')]//a[contains(text(),'Privacy')]"/>
     <parameter name="ElementToVerify" value="//div[contains(@id,'primary')]//h1[contains(text(),'Privacy Policy')]"/>
     <parameter name="UrlToPreviousPage" value="${shopURL}"/>
-    <parameter name="CheckTitle" value="eCommerce Solutions On-Demand | Demandware Privacy Policy"/>
+    <parameter name="CheckTitle" value="eCommerce Solutions On-Demand"/>
     <parameter name="ElementToClickForPreviousPage" value="link=regexpi:Home"/>
   </module>
   <module name="modules.staticelements.MVerifiLink">
