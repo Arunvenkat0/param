@@ -66,7 +66,7 @@
     <parameter name="textElement" value="css=.order-total &gt; td:nth-child(2)"/>
     <parameter name="textPattern" value="${ExpectedEstimatedTotal}"/>
   </module>
-  <action name="CleanUp"/>
+  <action name="CleanUpPromotions"/>
   <module name="library.module.app.busmgr.DisablePromotion">
     <parameter name="SiteName" value="${SiteName}"/>
     <parameter name="PromotionName" value="${PromotionName}"/>
