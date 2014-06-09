@@ -2287,7 +2287,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="AddBonusProductBundle">
     <segment>
       <node>
-        <start-node name="AddBonusProductBundle" secure="false"/>
+        <start-node call-mode="private" name="AddBonusProductBundle" secure="false"/>
         <node-display x="5" y="35"/>
       </node>
       <simple-transition/>
@@ -2464,7 +2464,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="NewBonusDiscountLineItem">
     <segment>
       <node>
-        <start-node name="NewBonusDiscountLineItem" secure="false"/>
+        <start-node call-mode="private" name="NewBonusDiscountLineItem" secure="false"/>
         <node-display x="9" y="35"/>
       </node>
       <simple-transition>

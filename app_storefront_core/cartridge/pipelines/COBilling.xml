@@ -885,7 +885,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
   <branch basename="RedeemGiftCertificate">
     <segment>
       <node>
-        <start-node call-mode="public" name="RedeemGiftCertificate" secure="true"/>
+        <start-node call-mode="private" name="RedeemGiftCertificate" secure="true"/>
         <node-display x="12" y="14"/>
       </node>
       <simple-transition>
