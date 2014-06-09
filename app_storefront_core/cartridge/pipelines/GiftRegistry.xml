@@ -945,7 +945,6 @@
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="account/giftregistry/CopyAddressFormFields.ds"/>
                       <key-binding alias="test" key="ScriptLog"/>
-                      <key-binding alias="CurrentForms.giftregistry" key="EventAddressForm"/>
                       <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                     </pipelet-node>
                     <node-display orientation="horizontal" x="-1" y="-1"/>
@@ -1540,13 +1539,7 @@
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
                             <config-property key="Transactional" value="true"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress" key="EventAddressForm"/>
                             <key-binding alias="ProductList" key="ProductList"/>
-                            <key-binding alias="null" key="TestMessage"/>
-                            <key-binding alias="CurrentCustomer.profile.addressBook" key="AddressBook"/>
-                            <key-binding alias="CurrentCustomer" key="AddressBook1"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="PostShippingAddressID"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="PreShippingAddressID"/>
                             <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                             <key-binding alias="CurrentCustomer" key="Customer"/>
                           </pipelet-node>
@@ -2978,10 +2971,8 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
-          <key-binding alias="WishList" key="UpdatedProductList"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
@@ -3399,15 +3390,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
                 <config-property key="Transactional" value="true"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress" key="EventAddressForm"/>
                 <key-binding alias="ProductList" key="ProductList"/>
-                <key-binding alias="null" key="TestMessage"/>
-                <key-binding alias="CurrentCustomer.profile.addressBook" key="AddressBook"/>
-                <key-binding alias="CurrentCustomer" key="AddressBook1"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="postShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="preShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="PostShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="PreShippingAddressID"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
                 <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
               </pipelet-node>
