@@ -2071,7 +2071,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/ParseBonusProductsJSON.ds"/>
-          <key-binding alias="Products" key="products"/>
           <key-binding alias="Products" key="Products"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
         </pipelet-node>
@@ -2165,8 +2164,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="cart/UpdateProductOptionSelections.ds"/>
-                <key-binding alias="Product" key="product"/>
-                <key-binding alias="new dw.util.ArrayList(bonusPid.options)" key="options"/>
                 <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
                 <key-binding alias="new dw.util.ArrayList(product.options)" key="SelectedOptions"/>
                 <key-binding alias="Product" key="Product"/>
@@ -2357,8 +2354,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="cart/UpdateProductOptionSelections.ds"/>
-                <key-binding alias="Product" key="product"/>
-                <key-binding alias="new dw.util.ArrayList(bonusPid.options)" key="options"/>
                 <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
                 <key-binding alias="new dw.util.ArrayList(product.options)" key="SelectedOptions"/>
                 <key-binding alias="ChildProduct" key="Product"/>

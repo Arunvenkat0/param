@@ -47,11 +47,6 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
-          <key-binding alias="CurrentSession.custom.storeId" key="storeId"/>
-          <key-binding alias="Basket" key="basket"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="productId"/>
-          <key-binding alias="CurrentHttpParameterMap.storepickup.stringValue" key="storepickup"/>
-          <key-binding alias="Product" key="product"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="LineItemUUID"/>
           <key-binding alias="CurrentHttpParameterMap.storeid.stringValue" key="StoreId"/>
@@ -428,7 +423,6 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
           <key-binding alias="Stores" key="stores"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.value" key="productId"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>
         </pipelet-node>
@@ -717,11 +711,6 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
-          <key-binding alias="CurrentSession.custom.storeId" key="storeId"/>
-          <key-binding alias="Basket" key="basket"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="productId"/>
-          <key-binding alias="CurrentHttpParameterMap.storepickup.stringValue" key="storepickup"/>
-          <key-binding alias="Product" key="product"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="LineItemUUID"/>
           <key-binding alias="CurrentHttpParameterMap.storeid.stringValue" key="StoreId"/>
@@ -874,7 +863,6 @@ dge), if the storeID is not set it will be set within the session object.</descr
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
           <key-binding alias="Stores" key="stores"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.value" key="productId"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>
           <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>

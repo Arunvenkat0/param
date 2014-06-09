@@ -277,7 +277,6 @@
           <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="GiftCertificateLineItemID" key="ProductLineItemID"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
           <key-binding alias="CurrentHttpParameterMap.GiftCertificateLineItemID.value" key="GiftCertificateLineItemID"/>
         </pipelet-node>
@@ -856,7 +855,6 @@
           <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="GiftCertificateLineItemID" key="ProductLineItemID"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
           <key-binding alias="CurrentHttpParameterMap.lineItemId.value" key="GiftCertificateLineItemID"/>
         </pipelet-node>
@@ -1033,7 +1031,6 @@
           <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="GiftCertificateLineItemID" key="ProductLineItemID"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
           <key-binding alias="CurrentForms.giftcert.purchase.lineItemId.value" key="GiftCertificateLineItemID"/>
         </pipelet-node>
