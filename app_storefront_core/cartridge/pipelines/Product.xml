@@ -1123,22 +1123,7 @@ formatted prices as json</description>
       </node>
     </segment>
   </branch>
-  <branch basename="FormatPrices">
-    <segment>
-      <node>
-        <start-node name="FormatPrices" secure="false"/>
-        <node-display x="7" y="14"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="util/formatprices"/>
-        </interaction-node>
-        <node-display x="0" y="2"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_23">
     <segment>
       <node>
         <text-node>
