@@ -2535,84 +2535,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_50">
-    <segment>
-      <node>
-        <text-node>
-          <description>Confirmation dialog to delete a selected credit card.</description>
-        </text-node>
-        <node-display x="2" y="37"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="DeleteCreditCard">
-    <segment>
-      <node>
-        <start-node name="DeleteCreditCard" secure="false"/>
-        <node-display x="2" y="38"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="Cart-GetExistingBasket"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="COBilling-InitCreditCardList"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="false"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/GetCustomerCreditCard.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="CurrentHttpParameterMap.creditCardID.value" key="CreditCardUUID"/>
-          <key-binding alias="ApplicableCreditCards" key="CustomerPaymentInstruments"/>
-          <key-binding alias="CreditCardToRemove" key="CreditCardPaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in2" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="RemoveCustomerPaymentInstrument" pipelet-set-identifier="bc_api">
-          <key-binding alias="CreditCardToRemove" key="PaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <transition target-connector="in1" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="account/payment/creditcarddeletedjson"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="ResetPaymentForms">
     <segment>
       <node>
@@ -3275,7 +3197,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_56">
+  <branch basename="_ANONYMOUS_BRANCH_54">
     <segment>
       <node>
         <text-node>
@@ -3413,7 +3335,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_58">
+  <branch basename="_ANONYMOUS_BRANCH_56">
     <segment>
       <node>
         <text-node>
@@ -3466,7 +3388,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_60">
+  <branch basename="_ANONYMOUS_BRANCH_58">
     <segment>
       <node>
         <text-node>
