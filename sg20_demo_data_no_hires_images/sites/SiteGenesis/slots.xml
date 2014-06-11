@@ -119,6 +119,66 @@
         </content>
     </slot-configuration>
 
+    <slot-configuration slot-id="account-banner" context="global" configuration-id="Account Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="registry-header" context="global" configuration-id="Registry Header" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="error-banner" context="global" configuration-id="Error Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="placeorder-slot" context="global" configuration-id="Placeorder Slot" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="wishlist-banner" context="global" configuration-id="Wishlist Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="noresult-banner" context="global" configuration-id="Noresult Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default"></body>
+            </html>
+        </content>
+    </slot-configuration>
+
     <slot-configuration slot-id="cat-banner" context="category" context-id="electronics-televisions-flat-screen" configuration-id="banner-Electronics-Televisions-Flat Screen" default="true" assigned-to-site="true">
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>
