@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Displays the product sorting options.
 	It expects the name of the key of the pageable in a parameter

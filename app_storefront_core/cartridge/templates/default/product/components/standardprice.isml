@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Sets a variable "StandardPrice" in the dictionary based on passed PriceModel.
 	This is used to show a crossed-out price on product detail pages.
