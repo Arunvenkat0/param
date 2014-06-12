@@ -36,7 +36,7 @@
 		
 		<isloop items="${pdict.BonusDiscountLineItem.bonusProducts}" var="LoopProductHit" status="loopstate">			
 			<isset name="hasDefaultVariant" value="${!empty(LoopProductHit.variationModel.defaultVariant)}" scope="page"/>
-			<isset name="Product" value="${hasDefaultVariant?LoopProductHit.variationModel.defaultVariant : LoopProductHit}" scope="pdict"/>
+			<isset name="Product" value="${hasDefaultVariant ? LoopProductHit : LoopProductHit.variationModel.defaultVariant}" scope="pdict"/>
 					
 			<div class="bonus-product-item" id="${'item-'+pdict.Product.UUID}">
 				<isinclude template="product/components/bonusproduct"/>
