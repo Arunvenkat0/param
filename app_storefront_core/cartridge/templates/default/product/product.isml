@@ -26,32 +26,42 @@
 			productColorValue = PMapValue.split('=')[1];
 		}
 	}
-
+	
 </isscript>
-
 
 <iscomment>select the size if there is only one</iscomment>
 <isif condition="${pdict.CurrentVariationModel != null}">
 	<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
+	<isset name="variantSelected" value="${pdict.CurrentVariationModel.selectedVariant != null}" scope="PAGE" />
 <iselse/>
 	<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE" />
 </isif>
-			
+
+<isif condition="${variantSelected}">
+	<isset name="variant" value="${PVM.selectedVariant}" scope="PAGE" />
+<iselse>
+	<isset name="variant" value="${PVM.variants[0]}" scope="PAGE"/>
+</isif>
+
 <isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-	<isset name="VAVALS" value="${PVM.getAllValues(VA)}" scope="page"/>
-	<isset name="Valength" value="${VAVALS.length}" scope="page"/>
+	<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="page"/>
 	<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
 	<isif condition="${vaId=='size'}">
-		<isif condition="${Valength==1}">
+		<isif condition="${variantSelected || valength==1}">
+			<iscomment>Should it be wrapped in an isscript, or could we just use isset?</iscomment>
 			<isscript>
-				var variant = PVM.variants[0];
-				var productVariationAttribute = PVM.getProductVariationAttribute("size");
-					productSizeValue = PVM.getVariationValue(variant, productVariationAttribute).value;
-			 </isscript>											
+				productSizeValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value;
+			</isscript>
+		</isif>
+	<iscomment>This will override the color value set by the parameter above. Is this desirable? I can probably check if that has been set and skip instead</iscomment>
+	<iselseif condition="${vaId=='color'}">
+		<isif condition="${variantSelected}">
+			<isscript>
+				productColorValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value;
+			</isscript>
 		</isif>
 	</isif>
 </isloop>
-
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
 <iscomment>pwr = power review write</iscomment>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
