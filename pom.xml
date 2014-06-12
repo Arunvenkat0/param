@@ -7,8 +7,8 @@
     </parent>
     
     <scm>
-        <connection>scm:git:ssh://git@bitbucket.org:demandware/sitegenesis.git</connection>
-        <developerConnection>scm:git:ssh://git@bitbucket.org:demandware/sitegenesis.git</developerConnection>
+        <connection>scm:git:git@bitbucket.org:demandware/sitegenesis.git</connection>
+        <developerConnection>scm:git:git@bitbucket.org:demandware/sitegenesis.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
 
