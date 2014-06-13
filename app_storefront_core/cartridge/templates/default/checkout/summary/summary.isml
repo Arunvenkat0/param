@@ -73,7 +73,6 @@
 							</td>
 							
 							<td class="item-quantity-details">
-								<div class="editdetails"><a href="${URLUtils.url('Cart-Show')}">${Resource.msg('global.editdetails','locale',null)}</a></div>
 								<div class="item-stock">
 									<isdisplayproductavailability p_productli="${productLineItem}"/>
 								</div>
