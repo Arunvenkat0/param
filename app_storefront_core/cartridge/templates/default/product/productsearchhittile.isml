@@ -42,19 +42,7 @@
 	</iscomment>
 	<isset name="firstColorVariation" value="${null}" scope="page"/>
 	<isset name="productUrl" value="${URLUtils.http('Product-Show', 'pid', Product.ID)}" scope="page"/>
-	<isif condition="${!empty(selectableColors) && selectableColors.size() > 0 && !empty(varAttrColor)}">
-		
-		<iscomment>if we have a selected color, this color is highlighted otherwise the first selectable color is hightlighted</iscomment>
-		<isif condition="${!empty(selectedColor)}">
-			<isset name="firstColorVariation" value="${selectedColor}" scope="page"/>
-		<iselse/>
-			<isset name="firstColorVariation" value="${selectableColors.get(0)}" scope="page"/>
-		</isif>
-		<isif condition="${!empty(varAttrColor)}">
-			<isset name="productUrl" value="${pdict.Product.variationModel.url('Product-Show', varAttrColor, firstColorVariation)}" scope="page"/>
-		</isif>
-		
-	</isif>
+
 
     <iscomment>append the paging parameters to the product URL</iscomment>
 	<iscomment><isset name="productUrl" value="${productUrl.append('start', pdict.CurrentHttpParameterMap.starting.stringValue)}" scope="page"/></iscomment>
