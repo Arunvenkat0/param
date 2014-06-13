@@ -4,10 +4,30 @@
 	render sub product details.
 </iscomment>
 
-<isset name="productColorValue" value="" scope="PAGE" />
-<isset name="productSizeValue" value="" scope="PAGE" /> 
-<isset name="colorAttributeID" value="${'dwvar_'+pdict.Product.ID+'_color'}" scope="PAGE" />
-<isset name="sizeAttributeID" value="${'dwvar_'+pdict.Product.ID+'_size'}" scope="PAGE" />
+<isscript>
+
+	//two attirbutes needed to pass along the selected color to the pdp/quickview
+	var colorAttributeID = 'dwvar_'+pdict.Product.ID+'_color';
+	var sizeAttributeID = 'dwvar_'+pdict.Product.ID+'_size';
+	var productColorValue = '';
+	var productSizeValue = '';
+	
+	//helper variables 
+	var requestQueryStringArray = pdict.CurrentRequest.getHttpHeaders().get("x-is-query_string").split('&');
+	var x = 0;
+	var PMapValue = '';
+	
+	
+	for(x = 0; x<requestQueryStringArray.length ;x++){
+	
+		PMapValue = requestQueryStringArray[x];
+		
+		if(PMapValue.indexOf('color') != -1){
+			productColorValue = PMapValue.split('=')[1];
+		}
+	}
+	
+</isscript>
 
 <iscomment>select the size if there is only one</iscomment>
 <isif condition="${pdict.CurrentVariationModel != null}">
@@ -20,24 +40,32 @@
 <isif condition="${variantSelected}">
 	<isset name="variant" value="${PVM.selectedVariant}" scope="PAGE" />
 <iselse>
-	<isset name="variant" value="${PVM.defaultVariant}" scope="PAGE"/>
+	<isset name="variant" value="${PVM.variants[0]}" scope="PAGE"/>
 </isif>
 
 <isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-	<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
-	<isset name="vaId" value="${VA.getAttributeID()}" scope="PAGE"/>
-	<isif condition="${vaId == 'size'}">
-		<isif condition="${variantSelected || valength == 1}">
-			<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
+	<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="page"/>
+	<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
+	<isif condition="${vaId=='size'}">
+		<isif condition="${variantSelected || valength==1}">
+			<iscomment>Should it be wrapped in an isscript, or could we just use isset?</iscomment>
+			<isscript>
+				productSizeValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value;
+			</isscript>
 		</isif>
-	<iselseif condition="${vaId == 'color'}">
-		<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE">
+	<iscomment>This will override the color value set by the parameter above. Is this desirable? I can probably check if that has been set and skip instead</iscomment>
+	<iselseif condition="${vaId=='color'}">
+		<isif condition="${variantSelected}">
+			<isscript>
+				productColorValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value;
+			</isscript>
+		</isif>
 	</isif>
 </isloop>
-<isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
+<isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
 <iscomment>pwr = power review write</iscomment>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
-	<isset name="DecoratorTemplate" value="util/pt_empty" scope="PAGE"/>
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
