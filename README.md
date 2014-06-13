@@ -62,3 +62,4 @@ At the end of the test, a JUnit report will be compiled and can be found in `<te
 For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can 
 download the tool for free and browse the [documentation](http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html "XLT Documentation") online.
 
+Updated: 6/13/14
