@@ -745,10 +745,6 @@
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CountryCode" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
-                <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="PaymentCards" key="PaymentCards"/>
-                <key-binding alias="PaymentMethods" key="PaymentMethods"/>
-                <key-binding alias="InvalidPaymentInstrument" key="InvalidPaymentInstrument"/>
                 <key-binding alias="PaymentAmount" key="PaymentAmount"/>
                 <key-binding alias="AvailableCreditCards" key="PaymentInstruments"/>
                 <key-binding alias="ApplicableCreditCards" key="ValidPaymentInstruments"/>
@@ -889,7 +885,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
   <branch basename="RedeemGiftCertificate">
     <segment>
       <node>
-        <start-node call-mode="public" name="RedeemGiftCertificate" secure="true"/>
+        <start-node call-mode="private" name="RedeemGiftCertificate" secure="true"/>
         <node-display x="12" y="14"/>
       </node>
       <simple-transition>
@@ -919,14 +915,9 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="CurrentForms.giftcert.redemption.amount.value" key="Amount"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="CurrentHttpParameterMap.giftCertificateID.stringValue||CurrentHttpParameterMap.dwfrm_billing_giftCertCode.stringValue" key="GiftCertificateID"/>
           <key-binding alias="NewGCPaymentInstrument" key="PaymentInstrument"/>
-          <key-binding alias="RedemptionErrorMessage" key="RedemptionErrorMessage"/>
-          <key-binding alias="GiftCertificateBalance" key="GiftCertificateBalance"/>
-          <key-binding alias="CurrentForms.giftcert.redemption.amount.value" key="GiftCertificateAmount"/>
-          <key-binding alias="null" key="ErrorMessage"/>
           <key-binding alias="GiftCertStatusCode" key="Status"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -1273,8 +1264,6 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
                 <config-property key="ScriptFile" value="checkout/UpdateBillingAddress.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.billing.billingAddress" key="AddressForm"/>
-                <key-binding alias="Basket.defaultShipment" key="Shipment"/>
-                <key-binding alias="CurrentForms.singleshipping.shippingAddress" key="GiftOptionsForm"/>
                 <key-binding alias="Basket.billingAddress" key="BillingAddress"/>
               </pipelet-node>
               <node-display orientation="horizontal" x="1" y="0"/>
@@ -1681,14 +1670,9 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <key-binding alias="null" key="ScriptLog"/>
-                <key-binding alias="CurrentForms.giftcert.redemption.amount.value" key="Amount"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="gcID" key="GiftCertificateID"/>
                 <key-binding alias="NewGCPaymentInstrument" key="PaymentInstrument"/>
-                <key-binding alias="RedemptionErrorMessage" key="RedemptionErrorMessage"/>
-                <key-binding alias="GiftCertificateBalance" key="GiftCertificateBalance"/>
-                <key-binding alias="CurrentForms.giftcert.redemption.amount.value" key="GiftCertificateAmount"/>
-                <key-binding alias="null" key="ErrorMessage"/>
                 <key-binding alias="GiftCertStatusCode" key="Status"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
@@ -2454,8 +2438,6 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <config-property key="ScriptFile" value="checkout/UpdateBillingAddress.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentForms.billing.billingAddress" key="AddressForm"/>
-          <key-binding alias="Basket.defaultShipment" key="Shipment"/>
-          <key-binding alias="CurrentForms.singleshipping.shippingAddress" key="GiftOptionsForm"/>
           <key-binding alias="Basket.billingAddress" key="BillingAddress"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -2550,84 +2532,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
           <description>This branch is used to revalidate existing payment instruments in later checkout steps.</description>
         </text-node>
         <node-display x="27" y="35"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_50">
-    <segment>
-      <node>
-        <text-node>
-          <description>Confirmation dialog to delete a selected credit card.</description>
-        </text-node>
-        <node-display x="2" y="37"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="DeleteCreditCard">
-    <segment>
-      <node>
-        <start-node name="DeleteCreditCard" secure="false"/>
-        <node-display x="2" y="38"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="Cart-GetExistingBasket"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="COBilling-InitCreditCardList"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="false"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/GetCustomerCreditCard.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="CurrentHttpParameterMap.creditCardID.value" key="CreditCardUUID"/>
-          <key-binding alias="ApplicableCreditCards" key="CustomerPaymentInstruments"/>
-          <key-binding alias="CreditCardToRemove" key="CreditCardPaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in2" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="RemoveCustomerPaymentInstrument" pipelet-set-identifier="bc_api">
-          <key-binding alias="CreditCardToRemove" key="PaymentInstrument"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <transition target-connector="in1" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="account/payment/creditcarddeletedjson"/>
-        </interaction-node>
-        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>
@@ -2827,10 +2731,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentHttpParameterMap.countryCode.value" key="CountryCode"/>
           <key-binding alias="CurrentCustomer" key="Customer"/>
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="PaymentCards" key="PaymentCards"/>
-          <key-binding alias="PaymentMethods" key="PaymentMethods"/>
-          <key-binding alias="InvalidPaymentInstrument" key="InvalidPaymentInstrument"/>
           <key-binding alias="PaymentAmount" key="PaymentAmount"/>
           <key-binding alias="Basket.paymentInstruments" key="PaymentInstruments"/>
           <key-binding alias="InvalidPaymentInstruments" key="InvalidPaymentInstruments"/>
@@ -2925,10 +2825,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentHttpParameterMap.countryCode.value" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
-                <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="PaymentCards" key="PaymentCards"/>
-                <key-binding alias="PaymentMethods" key="PaymentMethods"/>
-                <key-binding alias="InvalidPaymentInstrument" key="InvalidPaymentInstrument"/>
                 <key-binding alias="PaymentAmount" key="PaymentAmount"/>
                 <key-binding alias="AvailableCreditCards" key="PaymentInstruments"/>
                 <key-binding alias="ApplicableCreditCards" key="ValidPaymentInstruments"/>
@@ -3177,10 +3073,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.billing.billingAddress.addressFields.country.value" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
-                <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="PaymentCards" key="PaymentCards"/>
-                <key-binding alias="PaymentMethods" key="PaymentMethods"/>
-                <key-binding alias="InvalidPaymentInstrument" key="InvalidPaymentInstrument"/>
                 <key-binding alias="PaymentAmount" key="PaymentAmount"/>
                 <key-binding alias="Basket.paymentInstruments" key="PaymentInstruments"/>
               </pipelet-node>
@@ -3305,7 +3197,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_56">
+  <branch basename="_ANONYMOUS_BRANCH_54">
     <segment>
       <node>
         <text-node>
@@ -3443,7 +3335,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_58">
+  <branch basename="_ANONYMOUS_BRANCH_56">
     <segment>
       <node>
         <text-node>
@@ -3496,7 +3388,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_60">
+  <branch basename="_ANONYMOUS_BRANCH_58">
     <segment>
       <node>
         <text-node>
@@ -3533,7 +3425,6 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="checkout/AddAddressToAddressBook.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
-                <key-binding alias="CurrentForms.billing.billingAddress.addressFields" key="AddressForm"/>
                 <key-binding alias="CurrentCustomer.profile" key="Profile"/>
                 <key-binding alias="Basket.billingAddress" key="OrderAddress"/>
               </pipelet-node>
