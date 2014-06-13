@@ -334,12 +334,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromLinkedInProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -414,15 +409,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromGoogleProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
-          <key-binding alias="OAuthProvider" key="OAuthProvider"/>
-          <key-binding alias="OAuthProviderId" key="OauthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="CurrentSession.privacy.OAuthProviderId" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -475,14 +462,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromMicrosoftProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
-          <key-binding alias="OAuthProvider" key="OAuthProvider"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -535,12 +515,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromFacebookProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -615,12 +590,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromGitHubProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>

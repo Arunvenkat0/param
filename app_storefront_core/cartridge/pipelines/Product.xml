@@ -55,10 +55,8 @@
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
-                      <key-binding alias="CurrentHttpParameterMap.get(&quot;dwvar_&quot;+Product.ID+&quot;_color&quot;).value" key="colorId"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="DefaultVariant" key="newProduct"/>
-                      <key-binding alias="Product.variationModel" key="PVM"/>
                       <key-binding alias="CurrentVariationModel" key="CurrentVariationModel"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
@@ -722,10 +720,8 @@ Expects Product instance</description>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
-                      <key-binding alias="CurrentHttpParameterMap.get(&quot;dwvar_&quot;+Product.ID+&quot;_color&quot;).value" key="colorId"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="DefaultVariant" key="newProduct"/>
-                      <key-binding alias="CurrentVariationModel" key="PVM"/>
                       <key-binding alias="CurrentVariationModel" key="CurrentVariationModel"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
@@ -982,10 +978,8 @@ Expects Product instance</description>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
-                      <key-binding alias="CurrentHttpParameterMap.get(&quot;dwvar_&quot;+Product.ID+&quot;_color&quot;).value" key="colorId"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="Product" key="newProduct"/>
-                      <key-binding alias="CurrentVariationModel" key="PVM"/>
                       <key-binding alias="CurrentVariationModel" key="CurrentVariationModel"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
@@ -1129,22 +1123,7 @@ formatted prices as json</description>
       </node>
     </segment>
   </branch>
-  <branch basename="FormatPrices">
-    <segment>
-      <node>
-        <start-node name="FormatPrices" secure="false"/>
-        <node-display x="7" y="14"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="util/formatprices"/>
-        </interaction-node>
-        <node-display x="0" y="2"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_23">
     <segment>
       <node>
         <text-node>
@@ -1215,7 +1194,7 @@ formatted prices as json</description>
   <branch basename="AddBonusProduct">
     <segment>
       <node>
-        <start-node name="AddBonusProduct" secure="false"/>
+        <start-node call-mode="private" name="AddBonusProduct" secure="false"/>
         <node-display x="4" y="17"/>
       </node>
       <simple-transition>
