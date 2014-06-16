@@ -1619,10 +1619,10 @@ var app = (function (app, $) {
 							}
 							// update UI
 							fillEndlessScrollChunk(response);
+							app.search.init();
 						}
 					});
 				}
-				app.search.init();
 			}
 		});
 	}
