@@ -35,6 +35,7 @@
 	<isset name="variantSelected" value="${pdict.CurrentVariationModel.selectedVariant != null}" scope="PAGE" />
 <iselse/>
 	<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE" />
+	<isset name="variantSelected" value="${false}" scope="PAGE" />
 </isif>
 
 <isif condition="${variantSelected}">
