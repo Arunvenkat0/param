@@ -227,20 +227,7 @@
             <node>
               <call-node start-name-ref="Account-Register"/>
               <node-display x="0" y="2"/>
-              <branch basename="b2" source-connector="cancel">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="0" y="-1"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <jump-node start-name-ref="COCustomer-Start"/>
-                    <node-display x="0" y="2"/>
-                  </node>
-                </segment>
-              </branch>
-              <branch basename="b3" source-connector="ok">
+              <branch basename="b2" source-connector="ok">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="target" x="-1" y="0"/>

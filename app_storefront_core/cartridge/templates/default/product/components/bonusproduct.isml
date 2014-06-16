@@ -65,7 +65,7 @@
 
 	<div class="product-add-to-cart">
 	
-		<form action="${URLUtils.getURL()('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
+		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
 			<fieldset>
 				
 				<isinclude template="product/components/options"/>		

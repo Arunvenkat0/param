@@ -1876,6 +1876,7 @@ var app = (function (app, $) {
 				callback : function () {
 					$cache.bonusProduct.dialog('open');
 					app.bonusProductsView.initializeGrid();
+					$('#bonus-product-dialog .emptyswatch').css('display','none');
 				}
 			});
 
@@ -1964,27 +1965,6 @@ var app = (function (app, $) {
 
 			$cache.bonusProductList.on("click", "div.bonus-product-item a[href].swatchanchor", function (e) {
 				e.preventDefault();
-
-				var anchor = $(this),
-					bpItem = anchor.closest(".bonus-product-item"),
-					bpForm = bpItem.find("form.bonus-product-form"),
-					qty = bpForm.find("input[name='Quantity']").first().val(),
-					params = {
-						Quantity : isNaN(qty) ? "1" : qty,
-						format : "ajax",
-						source : "bonus",
-						bonusDiscountLineItemUUID : bliUUID
-					};
-
-				var url = app.util.appendParamsToUrl(this.href, params);
-
-				app.progress.show(bpItem);
-				app.ajax.load({
-					url: url,
-					callback : function (data) {
-						bpItem.html(data);
-					}
-				});
 			})
 			.on("click", "button.button-select-bonus", function (e) {
 				e.preventDefault();

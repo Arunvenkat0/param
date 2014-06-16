@@ -541,7 +541,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="ScriptFile" value="checkout/multishipping/InitSessionAddressBook.ds"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="CurrentCustomer" key="CCustomer"/>
-          <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
