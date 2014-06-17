@@ -1492,7 +1492,7 @@ var app = (function (app, $) {
 				var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
 				
 				if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-					app.search.init();
+					// app.search.init();
 					// switch state to 'loading'
 					// - switches state, so the above selector is only matching once
 					// - shows loading indicator
@@ -1529,6 +1529,7 @@ var app = (function (app, $) {
 								}
 								// update UI
 								fillEndlessScrollChunk(response);
+								app.product.tile.init();
 							}
 						});
 					}
@@ -1619,7 +1620,8 @@ var app = (function (app, $) {
 							}
 							// update UI
 							fillEndlessScrollChunk(response);
-							app.search.init();
+							//app.search.init();
+							app.product.tile.init();
 						}
 					});
 				}
@@ -1758,7 +1760,7 @@ var app = (function (app, $) {
 			}			
 			app.product.tile.init();
 			initializeEvents();
-		
+			
 		}
 	};
 
