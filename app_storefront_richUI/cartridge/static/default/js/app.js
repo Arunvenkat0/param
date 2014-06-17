@@ -1507,6 +1507,9 @@ var app = (function (app, $) {
 				loadingPlaceHolder.attr('data-loading-state','loaded');
 				jQuery('div.search-result-content').append(html);
 			};
+			
+			// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
+			// it was removed to temporarily address RAP-2649
 			if (false) {
 				// if we hit the cache
 				fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
