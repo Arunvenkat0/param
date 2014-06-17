@@ -1479,68 +1479,59 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
+	
 	/**
 	 * @private
 	 * @function
-	 * @description Fix for ie8 Infinite Scroll Bar issue and QuickView Fix (along with CSS changes)
-	 */	
-	function initInfiniteScroll_ie8()
+	 * @description
+	 */
+	function infiniteScroll()
 	{
-		$( window ).scroll(function() {
-				
-				// getting the hidden div, which is the placeholder for the next page
-				var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-				
-				if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-					// app.search.init();
-					// switch state to 'loading'
-					// - switches state, so the above selector is only matching once
-					// - shows loading indicator
-					loadingPlaceHolder.attr('data-loading-state','loading');
-					loadingPlaceHolder.addClass('infinite-scroll-loading');
+		// getting the hidden div, which is the placeholder for the next page
+		var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
+		// get url hidden in DOM
+		var gridUrl = loadingPlaceHolder.attr('data-grid-url');
+		
+		if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
+			// switch state to 'loading'
+			// - switches state, so the above selector is only matching once
+			// - shows loading indicator
+			loadingPlaceHolder.attr('data-loading-state','loading');
+			loadingPlaceHolder.addClass('infinite-scroll-loading');
 
-					// get url hidden in DOM
-					var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-					/**
-					 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-					 */
-					var fillEndlessScrollChunk = function (html) {
-						loadingPlaceHolder.removeClass('infinite-scroll-loading');
-						loadingPlaceHolder.attr('data-loading-state','loaded');
-						jQuery('div.search-result-content').append(html);
-					};
-					if (false) {
-						// if we hit the cache
-						fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-					} else {
-						// else do query via ajax
-						jQuery.ajax({
-							type: "GET",
-							dataType: 'html',
-							url: gridUrl,
-							success: function(response) {
-								// put response into cache
-								try {
-									sessionStorage["scroll-cache_" + gridUrl] = response;
-								} catch (e) {
-									// nothing to catch in case of out of memory of session storage
-									// it will fall back to load via ajax
-								}
-								// update UI
-								fillEndlessScrollChunk(response);
-								app.product.tile.init();
-							}
-						});
+			/**
+			 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
+			 */
+			var fillEndlessScrollChunk = function (html) {
+				loadingPlaceHolder.removeClass('infinite-scroll-loading');
+				loadingPlaceHolder.attr('data-loading-state','loaded');
+				jQuery('div.search-result-content').append(html);
+			};
+			if (false) {
+				// if we hit the cache
+				fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
+			} else {
+				// else do query via ajax
+				jQuery.ajax({
+					type: "GET",
+					dataType: 'html',
+					url: gridUrl,
+					success: function(response) {
+						// put response into cache
+						try {
+							sessionStorage["scroll-cache_" + gridUrl] = response;
+						} catch (e) {
+							// nothing to catch in case of out of memory of session storage
+							// it will fall back to load via ajax
+						}
+						// update UI
+						fillEndlessScrollChunk(response);
+						app.product.tile.init();
 					}
-					
-
-				}
-
-
-		});		
-
-	}
+				});
+			}
+		}
+	};
 	/**
 	 * @private
 	 * @function
@@ -1572,62 +1563,7 @@ var app = (function (app, $) {
 			}
 		});
 	}
-	/**
-	 * @private
-	 * @function
-	 * @description
-	 */
-	function initInfiniteScroll() {
-
-		jQuery(document).bind('scroll ready grid-update',function(e) {
-			// getting the hidden div, which is the placeholder for the next page
-			var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-			if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-				// switch state to 'loading'
-				// - switches state, so the above selector is only matching once
-				// - shows loading indicator
-				loadingPlaceHolder.attr('data-loading-state','loading');
-				loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-				// get url hidden in DOM
-				var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-				/**
-				 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-				 */
-				var fillEndlessScrollChunk = function (html) {
-					loadingPlaceHolder.removeClass('infinite-scroll-loading');
-					loadingPlaceHolder.attr('data-loading-state','loaded');
-					jQuery('div.search-result-content').append(html);
-					jQuery(document).trigger('grid-update');
-				};
-				if (false) {
-					// if we hit the cache
-					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-				} else {
-					// else do query via ajax
-					jQuery.ajax({
-						type: "GET",
-						dataType: 'html',
-						url: gridUrl,
-						success: function(response) {
-							// put response into cache
-							try {
-								sessionStorage["scroll-cache_" + gridUrl] = response;
-							} catch (e) {
-								// nothing to catch in case of out of memory of session storage
-								// it will fall back to load via ajax
-							}
-							// update UI
-							fillEndlessScrollChunk(response);
-							//app.search.init();
-							app.product.tile.init();
-						}
-					});
-				}
-			}
-		});
-	}
+	
 	/**
 	 * @private
 	 * @function
@@ -1747,17 +1683,11 @@ var app = (function (app, $) {
 				items : $("#search-result-items")
 			};
 			$cache.content = $cache.main.find(".search-result-content");
-			//if (app.product.compare) {
-				app.product.compare.init();
-			//}
-			//updateProductListing(false);
-			if (window.pageXOffset == null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll_ie8();
+			app.product.compare.init();
+
+			if (app.clientcache.LISTING_INFINITE_SCROLL) {
+				$(window).on('scroll', infiniteScroll);
 			}
-			if ( window.pageXOffset != null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll(); 
-				
-			}			
 			app.product.tile.init();
 			initializeEvents();
 			
