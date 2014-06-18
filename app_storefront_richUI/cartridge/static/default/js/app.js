@@ -2549,7 +2549,7 @@ var app = (function (app, $) {
 				if (fail) {
 					var error = $cache.redemption.find("span.error");
 					if (error.length===0) {
-						$("<span>").addClass("error").appendTo($cache.redemption);
+						error = $("<span>").addClass("error").appendTo($cache.redemption);
 					}
 					error.html(msg);
 					return;
