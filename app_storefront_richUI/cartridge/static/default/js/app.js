@@ -1540,30 +1540,21 @@ var app = (function (app, $) {
 	 * @function
 	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
 	 */
-	function updateProductListing(isHashChange) {
-		// [RAP-2653] requires special handling for 's encoding of ampersands
-		var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-		var hash = isFirefox ? encodeURI(decodeURI(window.location.hash)) : window.location.hash;
-		if(hash==='#results-content' || hash==='#results-products') { return; }
-
-		var refineUrl = null;
+	function updateProductListing() {
+		var hash = location.href.split('#')[1];
+		if (hash === 'results-content' || hash === 'results-products') { return; }
+		var refineUrl;
+		
 		if (hash.length > 0) {
-			refineUrl = window.location.pathname+"?"+hash.substr(1);
+			refineUrl = window.location.pathname + "?" + hash;
+		} else {
+			return;
 		}
-		else if (isHashChange) {
-			refineUrl = window.location.href;
-		}
-
-		if (!refineUrl) { return; }
-
 		app.progress.show($cache.content);
 		$cache.main.load(app.util.appendParamToURL(refineUrl, "format", "ajax"), function () {
 			app.product.compare.init();
 			app.product.tile.init();
 			app.progress.hide();
-			if (app.clientcache.LISTING_INFINITE_SCROLL){
-				jQuery(document).trigger('grid-update');
-			}
 		});
 	}
 	
@@ -1603,24 +1594,19 @@ var app = (function (app, $) {
 
 		// handle events for updating grid
 		$cache.main.on("click", ".refinements a, .pagination a, .breadcrumb-refinement-value a", function (e) {
-
-			if($(this).parent().hasClass("unselectable")) { return; }
+			if ($(this).parent().hasClass("unselectable")) { return; }
 			var catparent = $(this).parents('.category-refinement');
 			var folderparent = $(this).parents('.folder-refinement');
 
 			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
 			//else handle the encoding for the url
-			if(catparent.length > 0 || folderparent.length > 0 ){
-
+			if (catparent.length > 0 || folderparent.length > 0 ) {
 				return true;
-			}else{
-				e.preventDefault();
+			} else {
 				var uri = app.util.getUri(this);
 
-				if( uri.query.length > 1 ) {
-					// [RAP-2653] requires special handling for 's encoding of ampersands
-					var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-					window.location.hash = 	isFirefox ? encodeURI(decodeURI(uri.query.substring(1))) : uri.query.substring(1);
+				if ( uri.query.length > 1 ) {
+					window.location.hash = uri.query.substring(1);
 				} else {
 					window.location.href = this.href;
 				}
@@ -1675,7 +1661,7 @@ var app = (function (app, $) {
 
 		// handle hash change
 		$(window).hashchange(function () {
-			updateProductListing(true);
+			updateProductListing();
 		});
 	}
 	/******* app.search public object ********/
@@ -1687,7 +1673,7 @@ var app = (function (app, $) {
 			};
 			$cache.content = $cache.main.find(".search-result-content");
 			app.product.compare.init();
-
+			
 			if (app.clientcache.LISTING_INFINITE_SCROLL) {
 				$(window).on('scroll', infiniteScroll);
 			}
