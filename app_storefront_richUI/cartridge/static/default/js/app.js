@@ -1479,155 +1479,85 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
-	/**
-	 * @private
-	 * @function
-	 * @description Fix for ie8 Infinite Scroll Bar issue and QuickView Fix (along with CSS changes)
-	 */	
-	function initInfiniteScroll_ie8()
-	{
-		$( window ).scroll(function() {
-				
-				// getting the hidden div, which is the placeholder for the next page
-				var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-				
-				if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-					// app.search.init();
-					// switch state to 'loading'
-					// - switches state, so the above selector is only matching once
-					// - shows loading indicator
-					loadingPlaceHolder.attr('data-loading-state','loading');
-					loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-					// get url hidden in DOM
-					var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-					/**
-					 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-					 */
-					var fillEndlessScrollChunk = function (html) {
-						loadingPlaceHolder.removeClass('infinite-scroll-loading');
-						loadingPlaceHolder.attr('data-loading-state','loaded');
-						jQuery('div.search-result-content').append(html);
-					};
-					if (false) {
-						// if we hit the cache
-						fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-					} else {
-						// else do query via ajax
-						jQuery.ajax({
-							type: "GET",
-							dataType: 'html',
-							url: gridUrl,
-							success: function(response) {
-								// put response into cache
-								try {
-									sessionStorage["scroll-cache_" + gridUrl] = response;
-								} catch (e) {
-									// nothing to catch in case of out of memory of session storage
-									// it will fall back to load via ajax
-								}
-								// update UI
-								fillEndlessScrollChunk(response);
-								app.product.tile.init();
-							}
-						});
-					}
-					
-
-				}
-
-
-		});		
-
-	}
-	/**
-	 * @private
-	 * @function
-	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
-	 */
-	function updateProductListing(isHashChange) {
-		// [RAP-2653] requires special handling for 's encoding of ampersands
-		var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-		var hash = isFirefox ? encodeURI(decodeURI(window.location.hash)) : window.location.hash;
-		if(hash==='#results-content' || hash==='#results-products') { return; }
-
-		var refineUrl = null;
-		if (hash.length > 0) {
-			refineUrl = window.location.pathname+"?"+hash.substr(1);
-		}
-		else if (isHashChange) {
-			refineUrl = window.location.href;
-		}
-
-		if (!refineUrl) { return; }
-
-		app.progress.show($cache.content);
-		$cache.main.load(app.util.appendParamToURL(refineUrl, "format", "ajax"), function () {
-			app.product.compare.init();
-			app.product.tile.init();
-			app.progress.hide();
-			if (app.clientcache.LISTING_INFINITE_SCROLL){
-				jQuery(document).trigger('grid-update');
-			}
-		});
-	}
+	
 	/**
 	 * @private
 	 * @function
 	 * @description
 	 */
-	function initInfiniteScroll() {
+	function infiniteScroll()
+	{
+		// getting the hidden div, which is the placeholder for the next page
+		var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
+		// get url hidden in DOM
+		var gridUrl = loadingPlaceHolder.attr('data-grid-url');
+		
+		if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
+			// switch state to 'loading'
+			// - switches state, so the above selector is only matching once
+			// - shows loading indicator
+			loadingPlaceHolder.attr('data-loading-state','loading');
+			loadingPlaceHolder.addClass('infinite-scroll-loading');
 
-		jQuery(document).bind('scroll ready grid-update',function(e) {
-			// getting the hidden div, which is the placeholder for the next page
-			var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-			if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-				// switch state to 'loading'
-				// - switches state, so the above selector is only matching once
-				// - shows loading indicator
-				loadingPlaceHolder.attr('data-loading-state','loading');
-				loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-				// get url hidden in DOM
-				var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-				/**
-				 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-				 */
-				var fillEndlessScrollChunk = function (html) {
-					loadingPlaceHolder.removeClass('infinite-scroll-loading');
-					loadingPlaceHolder.attr('data-loading-state','loaded');
-					jQuery('div.search-result-content').append(html);
-					jQuery(document).trigger('grid-update');
-				};
-				if (false) {
-					// if we hit the cache
-					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-				} else {
-					// else do query via ajax
-					jQuery.ajax({
-						type: "GET",
-						dataType: 'html',
-						url: gridUrl,
-						success: function(response) {
-							// put response into cache
-							try {
-								sessionStorage["scroll-cache_" + gridUrl] = response;
-							} catch (e) {
-								// nothing to catch in case of out of memory of session storage
-								// it will fall back to load via ajax
-							}
-							// update UI
-							fillEndlessScrollChunk(response);
-							//app.search.init();
-							app.product.tile.init();
+			/**
+			 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
+			 */
+			var fillEndlessScrollChunk = function (html) {
+				loadingPlaceHolder.removeClass('infinite-scroll-loading');
+				loadingPlaceHolder.attr('data-loading-state','loaded');
+				jQuery('div.search-result-content').append(html);
+			};
+			
+			// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
+			// it was removed to temporarily address RAP-2649
+			if (false) {
+				// if we hit the cache
+				fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
+			} else {
+				// else do query via ajax
+				jQuery.ajax({
+					type: "GET",
+					dataType: 'html',
+					url: gridUrl,
+					success: function(response) {
+						// put response into cache
+						try {
+							sessionStorage["scroll-cache_" + gridUrl] = response;
+						} catch (e) {
+							// nothing to catch in case of out of memory of session storage
+							// it will fall back to load via ajax
 						}
-					});
-				}
+						// update UI
+						fillEndlessScrollChunk(response);
+						app.product.tile.init();
+					}
+				});
 			}
+		}
+	};
+	/**
+	 * @private
+	 * @function
+	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
+	 */
+	function updateProductListing() {
+		var hash = location.href.split('#')[1];
+		if (hash === 'results-content' || hash === 'results-products') { return; }
+		var refineUrl;
+		
+		if (hash.length > 0) {
+			refineUrl = window.location.pathname + "?" + hash;
+		} else {
+			return;
+		}
+		app.progress.show($cache.content);
+		$cache.main.load(app.util.appendParamToURL(refineUrl, "format", "ajax"), function () {
+			app.product.compare.init();
+			app.product.tile.init();
+			app.progress.hide();
 		});
 	}
+	
 	/**
 	 * @private
 	 * @function
@@ -1664,24 +1594,19 @@ var app = (function (app, $) {
 
 		// handle events for updating grid
 		$cache.main.on("click", ".refinements a, .pagination a, .breadcrumb-refinement-value a", function (e) {
-
-			if($(this).parent().hasClass("unselectable")) { return; }
+			if ($(this).parent().hasClass("unselectable")) { return; }
 			var catparent = $(this).parents('.category-refinement');
 			var folderparent = $(this).parents('.folder-refinement');
 
 			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
 			//else handle the encoding for the url
-			if(catparent.length > 0 || folderparent.length > 0 ){
-
+			if (catparent.length > 0 || folderparent.length > 0 ) {
 				return true;
-			}else{
-				e.preventDefault();
+			} else {
 				var uri = app.util.getUri(this);
 
-				if( uri.query.length > 1 ) {
-					// [RAP-2653] requires special handling for 's encoding of ampersands
-					var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-					window.location.hash = 	isFirefox ? encodeURI(decodeURI(uri.query.substring(1))) : uri.query.substring(1);
+				if ( uri.query.length > 1 ) {
+					window.location.hash = uri.query.substring(1);
 				} else {
 					window.location.href = this.href;
 				}
@@ -1736,7 +1661,7 @@ var app = (function (app, $) {
 
 		// handle hash change
 		$(window).hashchange(function () {
-			updateProductListing(true);
+			updateProductListing();
 		});
 	}
 	/******* app.search public object ********/
@@ -1747,17 +1672,11 @@ var app = (function (app, $) {
 				items : $("#search-result-items")
 			};
 			$cache.content = $cache.main.find(".search-result-content");
-			//if (app.product.compare) {
-				app.product.compare.init();
-			//}
-			//updateProductListing(false);
-			if (window.pageXOffset == null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll_ie8();
+			app.product.compare.init();
+			
+			if (app.clientcache.LISTING_INFINITE_SCROLL) {
+				$(window).on('scroll', infiniteScroll);
 			}
-			if ( window.pageXOffset != null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll(); 
-				
-			}			
 			app.product.tile.init();
 			initializeEvents();
 			
