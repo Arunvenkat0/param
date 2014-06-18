@@ -5215,6 +5215,13 @@ var app = (function (app, $) {
  				if(app.user.zip === null || app.user.zip === "") {
  					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
  				}
+ 				
+ 	 			//disable continue button if a preferred store has not been selected
+ 	 			if($('.store-list .selected').length > 0){
+ 	 				$('#preferred-store-panel .close').attr('disabled', false);
+ 	 			}else{
+ 	 				$('#preferred-store-panel .close').attr('disabled', true);
+ 	 			}
 
  		},
 
@@ -5236,6 +5243,9 @@ var app = (function (app, $) {
  			app.user.storeId = id;
  			jQuery.post(app.urls.setPreferredStore, { storeId : id }, function(data) {
  				jQuery('.selected-store-availability').html(data);
+
+ 				//enable continue button when a preferred store has been selected
+ 		 		$('#preferred-store-panel .close').attr('disabled', false);
  			});
 
  		},
