@@ -115,4 +115,14 @@
 		</fieldset>
 			
 	</form>
+	
+	<isscript>
+	importScript("util/ViewHelpers.ds");
+	var stateForm = pdict.CurrentForms.shippingaddress.states;
+	var countryField = pdict.CurrentForms.shippingaddress.country; 
+	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
+	
+	var json = JSON.stringify(countries);		
+</isscript>
+<script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
 </isdecorate>
