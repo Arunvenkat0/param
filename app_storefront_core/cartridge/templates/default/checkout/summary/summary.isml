@@ -65,7 +65,7 @@
 							
 							<td class="item-details">
 								<iscomment>Display product line and product using module</iscomment>
-								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${true}"/>
+								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 							</td>
 							
 							<td class="item-quantity">
