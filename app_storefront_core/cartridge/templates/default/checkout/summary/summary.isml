@@ -218,7 +218,7 @@
 			<form action="${URLUtils.https('COSummary-Submit')}" method="post" class="submit-order">
 				<fieldset>
 					<div class="form-row">
-						<a href="${URLUtils.http('Cart-Show')}">
+						<a class="back-to-cart" href="${URLUtils.http('Cart-Show')}">
 							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
 						</a>
 						<button class="button-fancy-large" type="submit" name="submit" value="${Resource.msg('global.submitorder','locale',null)}">
