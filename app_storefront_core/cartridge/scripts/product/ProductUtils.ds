@@ -357,7 +357,7 @@ ProductUtils.getBonusProductJson = function(item : Product, lineItem : dw.order.
 
 ProductUtils.getSelectedColor = function(product : Product, pvm : ProductVariationModel) {
 	if (product==null) { return null; }
-	var vm : ProductVariationModel = pvm==null ? product.variationModel : pvm;
+	var vm : ProductVariationModel = (pvm == null) ? product.variationModel : pvm;
 	var cvm : ProductVariationModel = product.isVariant() ? product.masterProduct.variationModel : product.variationModel;
 						
 	var selectedColor = null;				
@@ -413,7 +413,7 @@ ProductUtils.getVariantForColor = function(prod : dw.catalog.Product, colorId : 
 	return newProduct;
 }
 
-ProductUtils.getQueryString = function(map: dw.web.HttpParameterMap, fields : Array) {
+ProductUtils.getQueryString = function(map: HttpParameterMap, fields : Array) {
 	var parms = [];	
 	for (var i=0,il=fields.length;i<il;i++) {
 		var key = fields[i];
@@ -544,4 +544,12 @@ ProductUtils.getDefaultVariant = function(pvm : ProductVariationModel) {
 		}
 	}
 	return null;
+};
+
+ProductUtils.getProductDetailsUrl = function(variant: Variant, map: HttpParameterMap) {
+	var url : S = pvm.url('Product-Detail');
+	url.append('source', map.source.stringValue);
+	url.append('Quantity', map.Quantity.stringValue);
+	
+	return url;
 };
