@@ -2285,7 +2285,6 @@ var app = (function (app, $) {
 
 	            	$("select option:selected").each(function () {
 	              		selectvalues.push(this.value)
-
 	           	 	});
 
 	            	//if we found a empty value disable the button
@@ -2647,6 +2646,14 @@ var app = (function (app, $) {
 				$('.order-summary-footer .submit-order .button-fancy-large').attr( 'disabled', 'disabled' );
 			}
 		}
+
+		$('.editaddress').on('click', 'a', function() {
+			app.dialog.open({url: this.href, options: {open: function() {
+				initializeCache();
+				addressLoad();
+			}}});
+			return false;
+		});
 	}
 
 	/******* app.checkout public object ********/
@@ -4071,8 +4078,7 @@ var app = (function (app, $) {
 				target : $cache.container,
 				url : params.url,
 				callback : function () {
-
-					if($cache.container.dialog("isOpen")) {	return;	}
+					if ($cache.container.dialog("isOpen")) { return; }
 					$cache.container.dialog("open");
 				}
 			});

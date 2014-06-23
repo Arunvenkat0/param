@@ -16,7 +16,7 @@
 		<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 	</h1>
 
-	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">		
+	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">		
 		<fieldset>		
 			
 			<isif condition="${pdict.Status != null && pdict.Status.isError()}">				 
@@ -115,4 +115,14 @@
 		</fieldset>
 			
 	</form>
+	
+	<isscript>
+	importScript("util/ViewHelpers.ds");
+	var stateForm = pdict.CurrentForms.shippingaddress.states;
+	var countryField = pdict.CurrentForms.shippingaddress.country; 
+	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
+	
+	var json = JSON.stringify(countries);		
+</isscript>
+<script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
 </isdecorate>
