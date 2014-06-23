@@ -1,4 +1,4 @@
-<isset name="DecoratorTemplate" value="content/pt_customerservice" scope="page"/>
+<isset name="DecoratorTemplate" value="content/content/pt_content" scope="page"/>
 
 <iscomment>Use another decorator if the context is the content search</iscomment>
 <isif condition="${!empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
