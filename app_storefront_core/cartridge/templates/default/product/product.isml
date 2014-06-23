@@ -53,7 +53,7 @@
 				<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
 			</isif>
 		<iselseif condition="${vaId == 'color'}">
-			<isif condition="${variantSelected}">
+			<isif condition="${variantSelected || (productColorValue === '')}">
 				<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
 			</isif>
 		</isif>
