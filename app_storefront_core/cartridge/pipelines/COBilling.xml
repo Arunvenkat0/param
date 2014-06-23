@@ -341,7 +341,7 @@
   <branch basename="UpdateAddress">
     <segment>
       <node>
-        <start-node name="UpdateAddress" secure="false"/>
+        <start-node name="UpdateAddress" secure="true"/>
         <node-display x="3" y="7"/>
       </node>
       <simple-transition/>
@@ -1123,7 +1123,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
   <branch basename="UpdateSummary">
     <segment>
       <node>
-        <start-node name="UpdateSummary" secure="false"/>
+        <start-node name="UpdateSummary" secure="true"/>
         <node-display x="18" y="14"/>
       </node>
       <simple-transition>
@@ -1183,7 +1183,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
   <branch basename="UpdateAddressDetails">
     <segment>
       <node>
-        <start-node name="UpdateAddressDetails" secure="false"/>
+        <start-node name="UpdateAddressDetails" secure="true"/>
         <node-display x="21" y="14"/>
       </node>
       <simple-transition/>

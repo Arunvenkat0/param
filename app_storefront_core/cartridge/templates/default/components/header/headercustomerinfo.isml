@@ -28,7 +28,7 @@
 		     </isif>
 	     </li>
 	     <li class="last">
-	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.url('Login-Logout')}">
+	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 	     		(
 	     			${Resource.msg('headercustomerinfo.not','components',null)}
 	     			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?
@@ -51,7 +51,7 @@
 		     </a>
 	     </li>
 	     <li class="last">
-	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.url('Login-Logout')}">
+	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 	     		(
 	     			${Resource.msg('headercustomerinfo.not','components',null)}
 	     			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?

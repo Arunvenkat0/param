@@ -123,7 +123,7 @@
   <branch basename="Submit">
     <segment>
       <node>
-        <start-node call-mode="public" name="Submit" secure="false"/>
+        <start-node call-mode="public" name="Submit" secure="true"/>
         <node-display x="6" y="4"/>
       </node>
       <simple-transition>
@@ -252,7 +252,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="CheckoutConfirmation" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="CheckoutConfirmation" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/confirmation/confirmation"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
