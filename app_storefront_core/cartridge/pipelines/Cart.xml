@@ -1537,7 +1537,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="AddToWishlist">
     <segment>
       <node>
-        <start-node name="AddToWishlist" secure="false"/>
+        <start-node name="AddToWishlist" secure="true"/>
         <node-display x="18" y="13"/>
       </node>
       <simple-transition/>

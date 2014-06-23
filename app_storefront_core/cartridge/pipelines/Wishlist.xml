@@ -153,7 +153,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormLanding" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormLanding" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/wishlist/wishlistlanding"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -328,7 +328,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitForm" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/wishlist/wishlist"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -645,7 +645,7 @@
   <branch basename="ShowOther">
     <segment>
       <node>
-        <start-node name="ShowOther" secure="false"/>
+        <start-node name="ShowOther" secure="true"/>
         <node-display x="9" y="2"/>
       </node>
       <simple-transition>
@@ -1461,7 +1461,7 @@ Expects: AddressID</description>
   <branch basename="ReplaceProductListItem">
     <segment>
       <node>
-        <start-node name="ReplaceProductListItem" secure="false"/>
+        <start-node name="ReplaceProductListItem" secure="true"/>
         <node-display x="10" y="18"/>
       </node>
       <simple-transition/>

@@ -171,7 +171,7 @@ Input:
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormAdd" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormAdd" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/addressbook/addressdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -481,7 +481,7 @@ Input:
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormEdit" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormEdit" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/addressbook/addressdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -880,7 +880,7 @@ Input:
   <branch basename="GetAddressDetails">
     <segment>
       <node>
-        <start-node name="GetAddressDetails" secure="false"/>
+        <start-node name="GetAddressDetails" secure="true"/>
         <node-display x="1" y="8"/>
       </node>
       <simple-transition>
@@ -937,7 +937,7 @@ Input:
   <branch basename="Delete">
     <segment>
       <node>
-        <start-node name="Delete" secure="false"/>
+        <start-node name="Delete" secure="true"/>
         <node-display x="1" y="15"/>
       </node>
       <simple-transition>
