@@ -43,7 +43,7 @@
 <iselse>
 	<isset name="variant" value="${(PVM.variants.length > 0) ? PVM.variants[0] : null}" scope="PAGE"/>
 </isif>
-${PVM.getVariationValue(variant, PVM.getProductVariationAttribute('color')).value}
+
 <isif condition="${variant != null}">
 	<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
 		<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
