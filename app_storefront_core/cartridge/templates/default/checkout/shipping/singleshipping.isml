@@ -165,13 +165,14 @@
 		<fieldset>
 		
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+				<isset name="instoreShipmentsExists" value="${false}" scope="page"/>
 				<isinclude template="checkout/shipping/storepickup/instoremessages"/>
 			<iselse/>
-				<isset name="instoreShipmentsExistst" value="${false}" scope="page"/>		
+				<isset name="instoreShipmentsExists" value="${false}" scope="page"/>		
 			</isif>
 		
 			
-			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExistst}">
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExists}">
 				<div class="form-row form-row-button instore-continue-button">
 			<iselse/>
 				<div class="form-row form-row-button">
