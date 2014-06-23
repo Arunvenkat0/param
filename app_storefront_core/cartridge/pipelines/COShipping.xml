@@ -418,7 +418,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="SelectShippingMethod">
     <segment>
       <node>
-        <start-node name="SelectShippingMethod" secure="false"/>
+        <start-node name="SelectShippingMethod" secure="true"/>
         <node-display x="11" y="4"/>
       </node>
       <simple-transition/>
@@ -521,7 +521,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateShippingMethodList">
     <segment>
       <node>
-        <start-node name="UpdateShippingMethodList" secure="false"/>
+        <start-node name="UpdateShippingMethodList" secure="true"/>
         <node-display x="15" y="4"/>
       </node>
       <simple-transition/>
@@ -786,7 +786,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="GetApplicableShippingMethodsJSON">
     <segment>
       <node>
-        <start-node name="GetApplicableShippingMethodsJSON" secure="false"/>
+        <start-node name="GetApplicableShippingMethodsJSON" secure="true"/>
         <node-display x="19" y="4"/>
       </node>
       <simple-transition/>
@@ -873,7 +873,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateAddress">
     <segment>
       <node>
-        <start-node name="UpdateAddress" secure="false"/>
+        <start-node name="UpdateAddress" secure="true"/>
         <node-display x="3" y="13"/>
       </node>
       <transition target-connector="in1" target-path="/Start.1/b3.1/b2.1">
@@ -1412,7 +1412,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateAddressDetails">
     <segment>
       <node>
-        <start-node name="UpdateAddressDetails" secure="false"/>
+        <start-node name="UpdateAddressDetails" secure="true"/>
         <node-display x="14" y="21"/>
       </node>
       <simple-transition/>

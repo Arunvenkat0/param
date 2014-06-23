@@ -16,7 +16,7 @@
   <branch basename="Purchase">
     <segment>
       <node>
-        <start-node name="Purchase" secure="false"/>
+        <start-node name="Purchase" secure="true"/>
         <node-display x="1" y="2"/>
       </node>
       <simple-transition/>
@@ -246,7 +246,7 @@
   <branch basename="Edit">
     <segment>
       <node>
-        <start-node name="Edit" secure="false"/>
+        <start-node name="Edit" secure="true"/>
         <node-display x="4" y="2"/>
       </node>
       <simple-transition>
@@ -375,7 +375,7 @@
   <branch basename="CheckBalance">
     <segment>
       <node>
-        <start-node name="CheckBalance" secure="false"/>
+        <start-node name="CheckBalance" secure="true"/>
         <node-display x="8" y="2"/>
       </node>
       <simple-transition/>
@@ -522,7 +522,7 @@
   <branch basename="AddToBasket">
     <segment>
       <node>
-        <start-node name="AddToBasket" secure="false"/>
+        <start-node name="AddToBasket" secure="true"/>
         <node-display x="11" y="2"/>
       </node>
       <simple-transition>
@@ -757,7 +757,7 @@
   <branch basename="Update">
     <segment>
       <node>
-        <start-node name="Update" secure="false"/>
+        <start-node name="Update" secure="true"/>
         <node-display x="13" y="2"/>
       </node>
       <simple-transition>
@@ -784,7 +784,7 @@
   <branch basename="PurchaseError">
     <segment>
       <node>
-        <start-node name="PurchaseError" secure="false"/>
+        <start-node name="PurchaseError" secure="true"/>
         <node-display orientation="horizontal" x="0" y="4"/>
       </node>
       <transition target-connector="in2" target-path="/Purchase.2"/>

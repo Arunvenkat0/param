@@ -140,7 +140,7 @@
   <branch basename="ContactUs">
     <segment>
       <node>
-        <start-node name="ContactUs" secure="false"/>
+        <start-node name="ContactUs" secure="true"/>
         <node-display x="4" y="7"/>
       </node>
       <simple-transition/>
