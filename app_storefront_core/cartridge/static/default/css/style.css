@@ -753,6 +753,8 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .order-summary-footer h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
 .summary-help{float:right;font-size:0.8em;margin:1em 0;}
 .submit-order{clear:both;display:block;padding:20px 0 0;text-align:right;}
+.submit-order .back-to-cart {font-size: 1.5em;}
+.submit-order .back-to-cart:hover {text-decoration: underline;}
 .submit-order button{margin-left:1.5em;}
 .pt_order-confirmation h1{font-size:2.5em;}
 .pt_order-confirmation .order-shipment-table{margin:0 0 20px;}
