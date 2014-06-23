@@ -20,7 +20,7 @@
 		storeID = shipment.object.custom.fromStoreId;
 		storeObject = StoreMgr.getStore(storeID)
 	</isscript>
-	<isset name="instoreShipmentsExistst" value="${true}" scope="page"/>
+	<isset name="instoreShipmentsExists" value="${true}" scope="page"/>
 <div class="instore-shipment-message">
 
 	<div class="instore-shipment-header">
