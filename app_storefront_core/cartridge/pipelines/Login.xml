@@ -304,7 +304,7 @@
   <branch basename="OAuthReentryLinkedIn">
     <segment>
       <node>
-        <start-node name="OAuthReentryLinkedIn" secure="false"/>
+        <start-node name="OAuthReentryLinkedIn" secure="true"/>
         <node-display x="4" y="2"/>
       </node>
       <simple-transition/>
@@ -379,7 +379,7 @@
   <branch basename="OAuthReentryGoogle">
     <segment>
       <node>
-        <start-node name="OAuthReentryGoogle" secure="false"/>
+        <start-node name="OAuthReentryGoogle" secure="true"/>
         <node-display x="5" y="2"/>
       </node>
       <simple-transition/>
@@ -432,7 +432,7 @@
   <branch basename="OAuthReentryMicrosoft">
     <segment>
       <node>
-        <start-node name="OAuthReentryMicrosoft" secure="false"/>
+        <start-node name="OAuthReentryMicrosoft" secure="true"/>
         <node-display x="6" y="2"/>
       </node>
       <simple-transition/>
@@ -485,7 +485,7 @@
   <branch basename="OAuthReentryFacebook">
     <segment>
       <node>
-        <start-node name="OAuthReentryFacebook" secure="false"/>
+        <start-node name="OAuthReentryFacebook" secure="true"/>
         <node-display x="7" y="2"/>
       </node>
       <simple-transition/>
@@ -560,7 +560,7 @@
   <branch basename="OAuthReentryGitHub">
     <segment>
       <node>
-        <start-node name="OAuthReentryGitHub" secure="false"/>
+        <start-node name="OAuthReentryGitHub" secure="true"/>
         <node-display x="8" y="2"/>
       </node>
       <simple-transition/>
@@ -613,7 +613,7 @@
   <branch basename="Logout">
     <segment>
       <node>
-        <start-node name="Logout" secure="false"/>
+        <start-node name="Logout" secure="true"/>
         <node-display x="10" y="2"/>
       </node>
       <simple-transition>

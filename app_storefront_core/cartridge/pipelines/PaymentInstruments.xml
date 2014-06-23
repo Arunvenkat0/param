@@ -163,7 +163,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormAdd" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormAdd" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/payment/paymentinstrumentdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
