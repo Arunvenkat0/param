@@ -274,11 +274,13 @@ ViewHelpers.getFieldOptions = function(formField : dw.web.FormField, resourceFil
 	return fields;
 };
 
-ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, resourceName : String) {
+ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, resource : String) {
 	
 	var list = {};	
 	var countryField = addressForm.country;
 	var stateForm = addressForm.states;
+	var resourceName = resource || 'forms';
+	
 	if (empty(countryField.options)) {
 		return list;
 	}
