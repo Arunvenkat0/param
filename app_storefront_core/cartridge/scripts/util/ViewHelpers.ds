@@ -293,7 +293,7 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 				var stateField = stateForm["state" + option.value];
 				var postalField = addressForm["postal" + option.value];
 				list[option.value] = {					
-					label: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
+					regionLabel: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
 					regions: ViewHelpers.getFieldOptions(stateField, resourceName),
 					postalLabel: dw.web.Resource.msg(postalField.label, resourceName, postalField.label)
 				};			
