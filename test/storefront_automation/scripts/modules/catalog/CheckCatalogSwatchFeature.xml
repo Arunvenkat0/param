@@ -46,6 +46,9 @@
   <module name="library.function.FClickAndWaitForPageLoad">
     <parameter name="clickElement" value="link=@{SubCategoryName}"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Product Name Z - A"/>
+  </module>
   <module name="modules.catalog.ValidateSwatchColorChange">
     <parameter name="SelectedColor" value="${DefaultColor}"/>
   </module>
