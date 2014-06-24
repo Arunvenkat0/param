@@ -3225,7 +3225,7 @@ var app = (function (app, $) {
 				postalLabel = form.find("label[for='" + postalField[0].id + "'] span").not(".required-indicator");
 
 			// set the label text
-			stateLabel.html(c.label);
+			stateLabel.html(c.regionLabel);
 			postalLabel.html(c.postalLabel);
 
 			var s;
