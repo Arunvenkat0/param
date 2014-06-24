@@ -230,9 +230,8 @@
 </form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var stateForm = pdict.CurrentForms.billing.billingAddress.addressFields.states;
-	var countryField = pdict.CurrentForms.billing.billingAddress.addressFields.country; 
-	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");	
+	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm, "forms");	
 	var json = JSON.stringify(countries);	
 </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
