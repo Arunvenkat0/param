@@ -274,22 +274,26 @@ ViewHelpers.getFieldOptions = function(formField : dw.web.FormField, resourceFil
 	return fields;
 };
 
-ViewHelpers.getCountriesAndRegions = function(countryField : dw.web.FormField,  stateForm : dw.web.FormGroup, resourceName : String) {
+ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, resourceName : String) {
 	
 	var list = {};	
+	var countryField = addressForm.country;
+	var stateForm = addressForm.states;
 	if (empty(countryField.options)) {
 		return list;
 	}
 	
 	var countryOptions = countryField.options;
-	for (o in countryOptions) {
+	for (var o in countryOptions) {
 		try {
 			if (countryOptions[o] && countryOptions[o].value && countryOptions[o].value.length > 0) { 
 				var option = countryOptions[o];									
-				var formField = stateForm["state"+option.value]
+				var stateField = stateForm["state" + option.value];
+				var postalField = addressForm["postal" + option.value];
 				list[option.value] = {					
-					label:dw.web.Resource.msg(formField.label, resourceName, formField.label),
-					regions: ViewHelpers.getFieldOptions(formField, resourceName)
+					label: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
+					regions: ViewHelpers.getFieldOptions(stateField, resourceName),
+					postalLabel: dw.web.Resource.msg(postalField.label, resourceName, postalField.label)
 				};			
 			}
 		}
