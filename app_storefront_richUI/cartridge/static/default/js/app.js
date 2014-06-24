@@ -3210,8 +3210,10 @@ var app = (function (app, $) {
 			if (country.length===0 || !app.countries[country.val()]) {
 				 return;
 			}
-			var form = country.closest("form");
-			var stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']");
+			var form = country.closest("form"),
+				stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']"),
+				postalField = form.find("input[name$='_postal']");
+				
 			if (stateField.length===0) {
 				return;
 			}
@@ -3219,10 +3221,12 @@ var app = (function (app, $) {
 			var form = country.closest("form"),
 				c = app.countries[country.val()],
 				arrHtml = [],
-				labelSpan = form.find("label[for='"+stateField[0].id+"'] span").not(".required-indicator");
+				stateLabel = form.find("label[for='" + stateField[0].id + "'] span").not(".required-indicator"),
+				postalLabel = form.find("label[for='" + postalField[0].id + "'] span").not(".required-indicator");
 
 			// set the label text
-			labelSpan.html(c.label);
+			stateLabel.html(c.label);
+			postalLabel.html(c.postalLabel);
 
 			var s;
 			for (s in c.regions) {
