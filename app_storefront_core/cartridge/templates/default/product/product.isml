@@ -5,7 +5,7 @@
 </iscomment>
 
 <isscript>
-
+	importScript("product/ProductUtils.ds"); 
 	//two attirbutes needed to pass along the selected color to the pdp/quickview
 	var colorAttributeID = 'dwvar_'+pdict.Product.ID+'_color';
 	var sizeAttributeID = 'dwvar_'+pdict.Product.ID+'_size';
@@ -67,5 +67,5 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue, colorAttributeID, productColorValue, sizeAttributeID, productSizeValue)}"/>
+	<isinclude url="${ProductUtils.getProductDetailsUrl(PVM, pdict.Product, pdict.CurrentHttpParameterMap)}"/>	
 </isdecorate>

@@ -546,10 +546,10 @@ ProductUtils.getDefaultVariant = function(pvm : ProductVariationModel) {
 	return null;
 };
 
-ProductUtils.getProductDetailsUrl = function(variant: Variant, map: HttpParameterMap) {
-	var url : S = pvm.url('Product-Detail');
-	url.append('source', map.source.stringValue);
-	url.append('Quantity', map.Quantity.stringValue);
-	
-	return url;
+ProductUtils.getProductDetailsUrl = function(pvm : ProductVariationModel, product : Product, map: HttpParameterMap) {
+	var url : URL = pvm.url('Product-Detail').append('source', map.source.stringValue).append('Quantity', map.Quantity.stringValue);
+	// match pid
+	var pid : String = url.toString().match(new RegExp('.*pid=(.[^&]+)&.*'))[1];
+	// replace all master pid with variant pid
+	return url.toString().replace(new RegExp(pid, 'g'), product.getID());
 };
