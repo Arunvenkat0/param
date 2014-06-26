@@ -5,59 +5,13 @@
 </iscomment>
 
 <isscript>
-
-	//two attirbutes needed to pass along the selected color to the pdp/quickview
-	var colorAttributeID = 'dwvar_'+pdict.Product.ID+'_color';
-	var sizeAttributeID = 'dwvar_'+pdict.Product.ID+'_size';
-	var productColorValue = '';
-	var productSizeValue = '';
-	
-	//helper variables 
-	var requestQueryStringArray = pdict.CurrentRequest.getHttpHeaders().get("x-is-query_string").split('&');
-	var x = 0;
-	var PMapValue = '';
-	
-	
-	for (x = 0; x < requestQueryStringArray.length ;x++) {
-	
-		PMapValue = requestQueryStringArray[x];
-		
-		if (PMapValue.indexOf('color') != -1) {
-			productColorValue = PMapValue.split('=')[1];
-		}
-	}
-	
+	importScript("product/ProductUtils.ds"); 
 </isscript>
 
-<iscomment>select the size if there is only one</iscomment>
 <isif condition="${pdict.CurrentVariationModel != null}">
 	<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
-	<isset name="variantSelected" value="${pdict.CurrentVariationModel.selectedVariant != null}" scope="PAGE" />
 <iselse>
 	<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE" />
-	<isset name="variantSelected" value="${false}" scope="PAGE" />
-</isif>
-
-<isif condition="${variantSelected}">
-	<isset name="variant" value="${PVM.selectedVariant}" scope="PAGE" />
-<iselse>
-	<isset name="variant" value="${(PVM.variants.length > 0) ? PVM.variants[0] : null}" scope="PAGE"/>
-</isif>
-
-<isif condition="${variant != null}">
-	<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-		<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
-		<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
-		<isif condition="${vaId == 'size'}">
-			<isif condition="${variantSelected || valength == 1}">
-				<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		<iselseif condition="${vaId == 'color'}">
-			<isif condition="${variantSelected || (productColorValue === '')}">
-				<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		</isif>
-	</isloop>
 </isif>
 
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
@@ -67,5 +21,5 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue, colorAttributeID, productColorValue, sizeAttributeID, productSizeValue)}"/>
+	<isinclude url="${ProductUtils.getProductDetailsUrl(PVM, pdict.Product, pdict.CurrentHttpParameterMap)}"/>	
 </isdecorate>
