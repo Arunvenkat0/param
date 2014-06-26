@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Displays order details, such as order number, creation date, payment information,
 	order totals and information for each contained shipment.
@@ -147,6 +148,7 @@
 						               <span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
 									</isif>
 						    	</div>
+				    			<isif condition="${shipment.custom.shipmentType != 'instore'}">
 						    	<div class="shipping-status">
 						    		<span class="label">${Resource.msg('orderdetails.shippingstatus','components',null)}</span>
 				    				<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
@@ -157,6 +159,7 @@
 				    					<span class="value">${Resource.msg('orderdetails.notknown','components',null)}</span>
 				    				</isif>
 						    	</div>
+						    	</isif>
 						    	<isif condition="${!empty(shipment.trackingNumber)}">
 							    	<div class="track-ingnumber">
 							    		<span class="label">${Resource.msg('orderdetails.tracking','components',null)}</span>
