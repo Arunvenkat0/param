@@ -37,7 +37,7 @@
 	.form-field-tooltip {float:none;margin:0 0 10px 5px;width:auto;}
 	.ui-dialog {max-width:98%;}
 	.ui-dialog .ui-dialog-content {height: auto !important; overflow: visible;}
-	#wrapper{border:0;font-size: 14px; max-width:100%; min-width:320px; width:320px;}
+	#wrapper{border:0;font-size: 14px; max-width:100%; min-width:320px; width:100%;}
 	#main {padding: 0 1%;}	
 	#primary{background:none;border:0 !important;float:none;margin:0;padding-left:0 !important;width:100% !important;}
 	#secondary{border:0;float:none;font-size: 1.1em; width:100% !important;}
