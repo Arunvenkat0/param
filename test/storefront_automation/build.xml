@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <project default="all" basedir=".">
 	
+   <description>
+     override xlt properties with:
+        -Dinstancehost=something.demandware.com (shopURL and BMurl)
+        -Dxlt.bmgr.user=user (bmlogin)
+        -Dxlt.bmgr.pass=pass (BM)
+        -Dxlt.SiteName=some name (SiteName)
+        -Dxlt.mem=2048 (set jvm max memory for xlt)  
+   </description>
 	
 	<property name="build.sysclasspath" value="last"/>
 
@@ -60,7 +68,8 @@
 	<!-- 
         Performs a functional test by running the configured Java test cases. 
     -->
-	<target name="test.java" depends="compile">
+	<target name="test.java" depends="compile"
+                description="run unit tests">
 		<!-- 
             Run the junit tests. 
         -->
@@ -86,7 +95,8 @@
 	<!-- 
         Performs a functional test by running the configured script test cases. 
     -->
-	<target name="test.script" depends="compile">
+	<target name="test.script" depends="compile"
+                description="run functional tests">
 		<!-- 
 			Determine the test scripts to run from the configuration. 
 		-->
@@ -128,7 +138,8 @@
 	<!-- 
         Performs all the functional tests and creates a JUnit test report.  
     -->
-	<target name="test" depends="test.java, test.script">
+	<target name="test" depends="test.java, test.script"
+                description="run the unit and funtional tests" >
 		<!-- 
             Create a test report from the test results. 
         -->
@@ -143,11 +154,25 @@
 		</junitreport>
 	</target>
 
+        <target name="gen-xlt-properties">
+           <propertyfile file="global_testdata.properties" comment="project xlt property file">
+              <entry key="shopURL" value="@shopurl" />
+              <entry key="shopName" value="${xlt.shopName}" />
+              <entry key="BMurl" value="@bmurl" />
+              <entry key="bmlogin" value="${xlt.bmgr.user}" />
+              <entry key="BM" value="${xlt.bmgr.pass}" />
+              <entry key="SiteName" value="${xlt.SiteName}" />
+           </propertyfile>
+           <replace file="global_testdata.properties" token="@bmurl" value="${xlt.BMurl}" />
+           <replace file="global_testdata.properties" token="@shopurl" value="${xlt.shopURL}" />
+ 
+        </target>
 	<!-- 
         Performs a load test with the test cases configured in the test suite.
         For this, the XLT load test environment is used. 
     -->
-	<target name="loadtest" depends="compile">
+	<target name="loadtest" depends="compile,gen-xlt-properties"
+                description="compile and run the xlt tests">
 		<!-- 
 			Determine the command to run depending on the OS.
 		-->
@@ -158,14 +183,20 @@
 		<!-- 
             Run the master controller using an embedded agent controller. 
         -->
+               <echo> Run xlt: ${xlt.bin.dir}/${command} -auto -embedded -report ${xlt.args} </echo>
 		<exec executable="${xlt.bin.dir}/${command}">
-			<arg line="-auto -embedded -report" />
+			<arg line="-auto -embedded -report ${xlt.args}" />
 		</exec>
 	</target>
 
 	<!-- 
         Executes all targets one after the other.  
     -->
-	<target name="all" depends="clean, test, loadtest" />
+	<target name="all" depends="clean, test, loadtest" 
+                description="execute clean test and loadtest"/>
 
+        <target name="diag" description="view property settings">
+           <echo>$${xlt.args} = ${xlt.args}</echo>
+           <echoproperties prefix="xlt" /> 
+        </target>
 </project>
