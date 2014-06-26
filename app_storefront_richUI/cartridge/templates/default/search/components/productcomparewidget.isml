@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>Product compare widget uses session information and therefore must not be cached.</iscomment>
 <isif condition="${(pdict.CompareList != null) && (pdict.Category != null)}">
 	<isscript>			

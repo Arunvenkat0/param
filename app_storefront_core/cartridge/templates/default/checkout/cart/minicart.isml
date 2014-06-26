@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>This includes global utilities into the pages</iscomment>
 <isinclude template="util/modules"/>
 <iscomment>
