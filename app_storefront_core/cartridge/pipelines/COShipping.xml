@@ -368,18 +368,17 @@ This pipeline implements the logic for the default (single) shipping scenario. I
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
+          <bend-point relative-to="target" x="-1" y="-1"/>
           <bend-point relative-to="target" x="-1" y="0"/>
         </transition-display>
       </simple-transition>
       <node>
         <decision-node condition-key="CurrentCustomer.authenticated &amp;&amp; CurrentCustomer.registered &amp;&amp; !empty(CurrentCustomer.addressBook.preferredAddress)" condition-operator="expr"/>
-        <node-display orientation="horizontal" x="0" y="1"/>
+        <node-display orientation="horizontal" x="-1" y="1"/>
         <branch basename="b3" source-connector="yes">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="source" x="-1" y="-1"/>
+              <bend-point relative-to="source" x="2" y="0"/>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
@@ -390,7 +389,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                 <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields" key="Form"/>
                 <key-binding alias="CurrentCustomer.addressBook.preferredAddress" key="Object"/>
               </pipelet-node>
-              <node-display x="-1" y="0"/>
+              <node-display x="1" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -409,12 +408,16 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           </segment>
         </branch>
       </node>
-      <transition target-connector="in1" target-path="./+1"/>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="target" x="-2" y="0"/>
+        </transition-display>
+      </transition>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="3"/>
+        <node-display x="1" y="3"/>
       </node>
       <simple-transition>
         <transition-display>
