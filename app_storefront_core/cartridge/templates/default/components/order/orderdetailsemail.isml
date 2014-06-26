@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Displays order details, such as order number, creation date, payment information,
 	order totals and information for each contained shipment.
