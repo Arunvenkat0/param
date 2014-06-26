@@ -267,6 +267,7 @@
   <module name="modules.usermanagement.LogOutFromWelcomePage"/>
   <action name="ClickOnCheckOrderStatus"/>
   <command name="clickAndWait" target="link=regexpi:Check Order"/>
+  <command name="pause" value="1000"/>
   <module name="modules.usermanagement.ValidateLoginPageStructure"/>
   <action name="SearchForOrder"/>
   <module name="library.function.FType">
