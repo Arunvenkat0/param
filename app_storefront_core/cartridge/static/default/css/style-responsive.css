@@ -190,6 +190,9 @@ float: right;}
 	.pt_order-confirmation .order-shipment-table th {display:none;}
 	.pt_order-confirmation .order-shipment-table td {font-size: .8em;}
 	.pt_order-confirmation .order-shipment-table .shipping-method {padding-left:0;}
+	.order-shipment-details .order-shipment-address {width:auto;}
+	.order-shipment-details .label {position:static;width:auto;}
+	.order-shipment-details .value {margin-left:0;}
 	
 	/* account pages */
 	/* ------------------------------------- */
@@ -221,7 +224,10 @@ float: right;}
 	/* ------------------------------------- */
 
 	table.item-list td,
-	table.item-list .section-header {font-size: .9em !important;padding: .3em;}
+	table.item-list .section-header, 
+	.order-shipment-table .section-header {font-size: .9em !important;padding: .3em;}
+	table.item-list .section-header, 
+	.order-shipment-table .section-header {background-image:none;}
 	table.item-list .item-image,
 	table.item-list .item-details,
 	table.item-list .item-availability,
@@ -231,7 +237,6 @@ float: right;}
 	table.item-list .item-availability {width: 97%;}
 	table.item-list .item-dashboard {width: 97%;}
 	table.item-list .delete-registry {text-align:center;}
-	table.item-list th.section-header {background-image:none;}
 	.list-table-header {padding: 1em !important;}
 	.list-table-header .button {display:block;margin:20px 0;width: 196px;}
 	.list-table-header p {display:none;}
@@ -250,7 +255,10 @@ float: right;}
 	#email-alert-signup input[type="text"] {float:none;margin:0;width:50%;}
 	#email-alert-signup input[type="image"] {float:none;vertical-align: bottom;}
 	.facebook-registration {left:-3px;}
-	.facebook-registration,.facebook-registration .fb_iframe_widget,.facebook-registration .fb_iframe_widget span,.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100.7% !important;}
+	.facebook-registration,
+	.facebook-registration .fb_iframe_widget,
+	.facebook-registration .fb_iframe_widget span,
+	.facebook-registration .fb_iframe_widget span iframe {position:relative;width:100.7% !important;}
 }
 
 /* Bump up to a min-480 viewport */
