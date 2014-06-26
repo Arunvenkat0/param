@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Renders product detail page both quickview and normal view.
 	If the product is a product set or bundle, then it also includes subproduct template to 

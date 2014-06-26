@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="product/pt_productdetails">
 <isinclude template="util/modules"/>
 <div class="reviewlogin">
