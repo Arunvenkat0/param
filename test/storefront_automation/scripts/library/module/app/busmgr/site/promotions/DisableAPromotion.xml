@@ -34,10 +34,18 @@
     <parameter name="clickElement" value="${SelectVisisbleElement}"/>
   </module>
   <action name="DisableSelectedPromotionInActionsMenu"/>
-  <module name="library.function.FClick">
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="${ActionsDropDownElement}"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.function.FClickAndWaitFor">
+    <parameter name="clickElement" value="${ActionsDropDownElement}"/>
+    <parameter name="waitForElement" value="${DisableSelectedElement}"/>
+  </module>
+  <module name="library.function.FClickAndWaitForNotElement">
+    <parameter name="clickElement" value="${DisableSelectedElement}"/>
+    <parameter name="notElement" value="${DisableSelectedElement}"/>
+  </module>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="${DisableSelectedElement}"/>
   </module>
   <action name="ConfirmDisablementChoice"/>
