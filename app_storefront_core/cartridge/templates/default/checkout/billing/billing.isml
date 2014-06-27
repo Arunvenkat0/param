@@ -88,7 +88,7 @@
 	    </iscomment>
 	    
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.city}" type="input"/>
-    	what
+    	
     	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.postal}" type="input"/>
     	
     	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.phone}" type="input"/>
