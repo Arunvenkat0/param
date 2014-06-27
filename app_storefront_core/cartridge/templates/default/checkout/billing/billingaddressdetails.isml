@@ -40,7 +40,7 @@
 					
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.zip}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.billingaddress.postal}" type="input"/>
 					
 				</div>
 				<div class="formfield clearfix">

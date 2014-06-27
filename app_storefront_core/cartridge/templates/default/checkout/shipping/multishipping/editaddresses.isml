@@ -88,7 +88,7 @@
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.city}" type="input"/>
 	    	
-	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.zip}" type="input"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input"/>
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input"/>
 				
