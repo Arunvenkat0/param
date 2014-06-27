@@ -126,7 +126,7 @@
 			    	
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
 			    	
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.zip}" type="input"/>
+			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 			    	
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 						
