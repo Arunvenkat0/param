@@ -20,7 +20,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	billingAddressForm.address1.value =  shippingAddressForm.address1.value;
 	billingAddressForm.address2.value =  shippingAddressForm.address2.value;
 	billingAddressForm.city.value = shippingAddressForm.city.value;
-	billingAddressForm.zip.value = shippingAddressForm.zip.value;
+	billingAddressForm.postal.value = shippingAddressForm.postal.value;
 	billingAddressForm.phone.value=shippingAddressForm.phone.value;
 	billingAddressForm.states.state.value =  shippingAddressForm.states.state.value;
 	billingAddressForm.country.value = shippingAddressForm.country.value;
