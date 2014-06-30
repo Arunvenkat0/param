@@ -20,7 +20,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	billingAddress.setAddress1( addressFields.address1.value );
 	billingAddress.setAddress2( addressFields.address2.value );
 	billingAddress.setCity( addressFields.city.value );
-	billingAddress.setPostalCode( addressFields.zip.value );
+	billingAddress.setPostalCode( addressFields.postal.value );
 	billingAddress.setStateCode( addressFields.states.state.value );
 	billingAddress.setCountryCode( addressFields.country.value );
 	billingAddress.setPhone( addressFields.phone.value );

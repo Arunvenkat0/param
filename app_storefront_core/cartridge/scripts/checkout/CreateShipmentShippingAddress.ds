@@ -34,7 +34,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	shippingAddress.setAddress1( addressFields.address1.value );
 	shippingAddress.setAddress2( addressFields.address2.value );
 	shippingAddress.setCity( addressFields.city.value );
-	shippingAddress.setPostalCode( addressFields.zip.value );
+	shippingAddress.setPostalCode( addressFields.postal.value );
 	shippingAddress.setStateCode( addressFields.states.state.value );
 	shippingAddress.setCountryCode( addressFields.country.value );
 	shippingAddress.setPhone( addressFields.phone.value );
