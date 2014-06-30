@@ -2467,7 +2467,7 @@ var app = (function (app, $) {
 
 		$cache.save.on('click', function (e) {
 			// determine if the order total was paid using gift cert or a promotion
-			if ($("#noPaymentNeeded").length > 0 && $(".giftcertpi").length > 0) {
+			if ($("#noPaymentNeeded").length > 0 && $(".giftcert-pi").length > 0) {
 				// as a safety precaution, uncheck any existing payment methods
 				$cache.paymentMethodId.filter(":checked").removeAttr("checked");
 				// add selected radio button with gift card payment method
