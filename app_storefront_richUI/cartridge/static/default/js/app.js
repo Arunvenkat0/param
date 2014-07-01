@@ -2487,7 +2487,7 @@ var app = (function (app, $) {
 
 		});
 
-		$cache.gcCheckBalance.on("click", function (e) {
+		$cache.checkGiftCert.on("click", function (e) {
 			e.preventDefault();
 			$cache.gcCode = $cache.gcCode || $cache.checkoutForm.find("input[name$='_giftCertCode']");
 			$cache.balance = $cache.balance || $cache.checkoutForm.find("div.balance");
@@ -2516,6 +2516,43 @@ var app = (function (app, $) {
 				$cache.balance.html(app.resources.GIFT_CERT_BALANCE+" "+balance);
 			});
 		});
+		
+		$cache.addGiftCert.on('click', function(e) {
+			e.preventDefault();
+			var code = $cache.checkoutForm.find('input[name$="_giftCertCode"]').val(),
+				$redemption = $cache.checkoutForm.find('.redemption.giftcert');
+			if (code.length === 0) {
+				var $error = $redemption.find('.giftcert-error');
+				if ($error.length === 0) {
+					$error = $('<span>').addClass('giftcert-error').appendTo($redemption);
+				}
+				$error.html(app.resources.GIFT_CERT_MISSING);
+				return;
+			}
+			
+			var url = app.util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
+			$.getJSON(url, function(data) {
+				var fail = false;
+				var msg = '';
+				if (!data) {
+					msg = app.resources.BAD_RESPONSE;
+					fail = true;
+				} else if (!data.success) {
+					msg = data.message;
+					msg = msg.split('<').join('&lt;');
+					msg = msg.split('>').join('&gt;');
+					fail = true;
+				}
+				if (fail) {
+					var $error = $redemption.find('.giftcert-error');
+					if ($error.length === 0) {
+						$error = $('<span>').addClass('giftcert-error').appendTo($redemption);
+					}
+					$error.html(msg);
+					return;
+				}
+			});
+		});
 
 		$cache.addCoupon.on("click", function(e){
 			e.preventDefault();
@@ -2523,9 +2560,9 @@ var app = (function (app, $) {
 			$cache.redemption = $cache.redemption || $cache.checkoutForm.find("div.redemption.coupon");
 			var val = $cache.couponCode.val();
 			if (val.length===0) {
-				var error = $cache.redemption.find("span.error");
+				var error = $cache.redemption.find(".coupon-error");
 				if (error.length===0) {
-					error = $("<span>").addClass("error").appendTo($cache.redemption);
+					error = $("<span>").addClass("coupon-error").appendTo($cache.redemption);
 				}
 				error.html(app.resources.COUPON_CODE_MISSING);
 				return;
@@ -2548,7 +2585,7 @@ var app = (function (app, $) {
 				if (fail) {
 					var error = $cache.redemption.find("span.error");
 					if (error.length===0) {
-						error = $("<span>").addClass("error").appendTo($cache.redemption);
+						error = $("<span>").addClass("coupon-error").appendTo($cache.redemption);
 					}
 					error.html(msg);
 					return;
@@ -2615,7 +2652,8 @@ var app = (function (app, $) {
 			$cache.ccYear = $cache.ccContainer.find("[name$='_year']");
 			$cache.ccCcv = $cache.ccContainer.find("input[name$='_cvn']");
 			$cache.BMLContainer = $("#PaymentMethod_BML");
-			$cache.gcCheckBalance = $("#gc-checkbalance");
+			$cache.checkGiftCert = $("#check-giftcert");
+			$cache.addGiftCert = $('#add-giftcert');
 			$cache.addCoupon = $("#add-coupon");
 
 		}

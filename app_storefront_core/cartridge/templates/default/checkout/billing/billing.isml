@@ -147,7 +147,7 @@
 			<div class="redemption coupon"><!-- container for coupon applied success messages -->
 				<isif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 					<div class="error">
-						<span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
+						<span class="coupon-error">${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
 					</div>
 				</isif>
 				<isif condition="${pdict.Basket.couponLineItems.length > 0}">
@@ -172,14 +172,14 @@
 					<isinputfield formfield="${pdict.CurrentForms.billing.giftCertCode}" type="input" rowclass="label-above"/>
 						
 					<div class="form-row">
-				    	<button class="apply cancel" type="submit" name="${pdict.CurrentForms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+				    	<button class="apply cancel" id="add-giftcert" type="submit" name="${pdict.CurrentForms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 					</div>
 					<div class="form-row">
-				    	<button class="button-text cancel" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" id="gc-checkbalance" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
+				    	<button class="button-text cancel" id="check-giftcert" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
 				    </div>
 				    
 				    
-				    <div class="redemption">
+				    <div class="redemption giftcert">
 			    		<iscomment>render gift cert redeemed success message for each gift certificate payment instrument</iscomment>
 			    		<isset name="gcPITotal" value="${0}" scope="pdict"/>
 			    		<isif condition="${pdict.Basket.giftCertificatePaymentInstruments.size() > 0}">
@@ -194,13 +194,9 @@
 			    			
 			    		</isif>
 			    		
-			    		<div class="balance"><!-- contains the balance information on a successful balance check -->
-							<isif condition="${!empty(pdict.giftCertError)}">
-								<isif condition="${pdict.GiftCertStatusCode.code=='GIFTCERTIFICATE_CURRENCY_MISMATCH'}">
-									<span class="error">${Resource.msg('billinggiftcert.giftcertwrongcurrency','forms',null)}</span>
-								<iselse>
-									<span class="error">${Resource.msg('billing.giftcertinvalid','checkout',null)}</span>
-								</isif>
+			    		<div class="error">
+							<isif condition="${pdict.GiftCertStatus && pdict.GiftCertStatus.error}">
+								<span class="giftcert-error">${Resource.msg('billing.' + pdict.GiftCertStatus.code, 'checkout', pdict.GiftCertStatus.code)}</span>
 							</isif>
 						</div>
 			    	</div>
