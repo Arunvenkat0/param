@@ -140,6 +140,7 @@
 		compareRemove				: URLUtils.url('Compare-RemoveProduct').toString(),
 		compareEmptyImage			: URLUtils.staticURL('/images/comparewidgetempty.png').toString(),
 		giftCardCheckBalance		: URLUtils.https('COBilling-GetGiftCertificateBalance').toString(),
+		redeemGiftCert				: URLUtils.https('COBilling-RedeemGiftCertificateJson').toString(),
 		addCoupon					: URLUtils.https('Cart-AddCouponJson').toString(),	
 		powerReviewsFullJs			: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '/pwr/engine/js/full.js').toString(),
 		powerReviewsZip				: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '').toString(),

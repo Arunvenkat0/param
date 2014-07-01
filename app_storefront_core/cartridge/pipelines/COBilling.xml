@@ -228,15 +228,38 @@
           </segment>
         </branch>
         <branch basename="b5" source-connector="redeemGiftCert">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="CurrentForms.billing.giftCertCode.htmlValue" key="From_0"/>
+                <key-binding alias="GiftCertCode" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="-1" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
               <call-node start-name-ref="COBilling-RedeemGiftCertificate"/>
-              <node-display x="-1" y="3"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -1056,7 +1079,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="gcID" key="GiftCertificateID"/>
                 <key-binding alias="NewGCPaymentInstrument" key="PaymentInstrument"/>
-                <key-binding alias="GiftCertStatusCode" key="Status"/>
+                <key-binding alias="GiftCertStatus" key="Status"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
@@ -1095,16 +1118,6 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
-    <segment>
-      <node>
-        <text-node>
-          <description>Attempts to remove a gift certificate from the basket payment instruments and generates a JSON response with a status. This start node is called by an Ajax request.</description>
-        </text-node>
-        <node-display width="2" x="14" y="13"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="RedeemGiftCertificate">
     <segment>
       <node>
@@ -1120,45 +1133,50 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <call-node start-name-ref="Cart-GetExistingBasket"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="./b3.1">
+          <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="ScriptFile" value="checkout/CreateGiftCertificatePaymentInstrument.ds"/>
-          <config-property key="Transactional" value="true"/>
-          <config-property key="OnError" value="PIPELET_ERROR"/>
-          <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="CurrentHttpParameterMap.giftCertificateID.stringValue||CurrentHttpParameterMap.dwfrm_billing_giftCertCode.stringValue" key="GiftCertificateID"/>
-          <key-binding alias="NewGCPaymentInstrument" key="PaymentInstrument"/>
-          <key-binding alias="GiftCertStatusCode" key="Status"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in1"/>
           <segment>
             <node>
-              <join-node/>
-              <node-display x="1" y="0"/>
+              <pipelet-node custom-name="create fake GiftCertStatus object" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="new Object()" key="From_0"/>
+                <key-binding alias="GiftCertStatus" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="1" y="1"/>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
-                <key-binding alias="&quot;invalid_giftcert&quot;" key="From_0"/>
-                <key-binding alias="giftCertError" key="To_0"/>
-                <key-binding alias="null" key="From_1"/>
-                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="'BASKET_NOT_FOUND'" key="From_0"/>
+                <key-binding alias="GiftCertStatus.code" key="To_0"/>
+                <key-binding alias="true" key="From_1"/>
+                <key-binding alias="GiftCertStatus.error" key="To_1"/>
                 <key-binding alias="null" key="From_2"/>
                 <key-binding alias="null" key="To_2"/>
                 <key-binding alias="null" key="From_3"/>
@@ -1180,30 +1198,81 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
             </node>
             <transition target-connector="in3" target-path="../+1">
               <transition-display>
-                <bend-point relative-to="target" x="2" y="0"/>
+                <bend-point relative-to="source" x="0" y="2"/>
               </transition-display>
             </transition>
           </segment>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="ScriptFile" value="checkout/CreateGiftCertificatePaymentInstrument.ds"/>
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="GiftCertCode" key="GiftCertificateID"/>
+          <key-binding alias="NewGCPaymentInstrument" key="PaymentInstrument"/>
+          <key-binding alias="GiftCertStatus" key="Status"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <call-node start-name-ref="Cart-Calculate"/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
       <node>
-        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
-          <key-binding alias="CurrentForms.billinggiftcert" key="FormElement"/>
-        </pipelet-node>
+        <join-node/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="RedeemGiftCertificateJson">
+    <segment>
+      <node>
+        <start-node name="RedeemGiftCertificateJson" secure="false"/>
+        <node-display x="14" y="14"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="null" key="From_0"/>
-          <key-binding alias="giftCertError" key="To_0"/>
+          <key-binding alias="CurrentHttpParameterMap.giftCertCode.stringValue" key="From_0"/>
+          <key-binding alias="GiftCertCode" key="To_0"/>
           <key-binding alias="null" key="From_1"/>
           <key-binding alias="null" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
@@ -1225,11 +1294,13 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
-      <transition target-connector="in1" target-path="./+1"/>
-    </segment>
-    <segment>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
-        <join-node/>
+        <call-node start-name-ref="COBilling-RedeemGiftCertificate"/>
         <node-display x="0" y="1"/>
       </node>
       <simple-transition>
@@ -1238,8 +1309,103 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         </transition-display>
       </simple-transition>
       <node>
-        <end-node/>
+        <decision-node condition-key="CurrentHttpParameterMap.format.stringValue == 'ajax'" condition-operator="expr"/>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node custom-name="create JSONResponse object" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="new Object()" key="From_0"/>
+                <key-binding alias="JSONResponse" key="To_0"/>
+                <key-binding alias="'billing.' + GiftCertStatus.code" key="From_1"/>
+                <key-binding alias="ResourceProperty" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="GiftCertStatus.code" key="From_0"/>
+                <key-binding alias="JSONResponse.status" key="To_0"/>
+                <key-binding alias="!GiftCertStatus.error" key="From_1"/>
+                <key-binding alias="JSONResponse.success" key="To_1"/>
+                <key-binding alias="dw.web.Resource.msgf(ResourceProperty,'checkout', null, GiftCertCode)" key="From_2"/>
+                <key-binding alias="JSONResponse.message" key="To_2"/>
+                <key-binding alias="GiftCertCode" key="From_3"/>
+                <key-binding alias="JSONResponse.code" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <interaction-node transaction-required="false">
+                <description>create JSONResponse object</description>
+                <template buffered="true" dynamic="false" name="util/responsejson"/>
+              </interaction-node>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_21">
+    <segment>
+      <node>
+        <text-node>
+          <description>Attempts to remove a gift certificate from the basket payment instruments and generates a JSON response with a status. This start node is called by an Ajax request.</description>
+        </text-node>
+        <node-display width="2" x="16" y="13"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_22">
+    <segment>
+      <node>
+        <text-node>
+          <description>Renders the order summary including mini cart order totals and shipment summary. This is used to update the order totals in the UI based on the recalculated basket after a coupon code has been applied.</description>
+        </text-node>
+        <node-display width="2" x="19" y="13"/>
       </node>
     </segment>
   </branch>
@@ -1247,7 +1413,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <start-node call-mode="public" name="RemoveGiftCertificate" secure="true"/>
-        <node-display x="14" y="14"/>
+        <node-display x="16" y="14"/>
       </node>
       <simple-transition/>
       <node>
@@ -1333,21 +1499,11 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_22">
-    <segment>
-      <node>
-        <text-node>
-          <description>Renders the order summary including mini cart order totals and shipment summary. This is used to update the order totals in the UI based on the recalculated basket after a coupon code has been applied.</description>
-        </text-node>
-        <node-display width="2" x="18" y="13"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="UpdateSummary">
     <segment>
       <node>
         <start-node name="UpdateSummary" secure="true"/>
-        <node-display x="18" y="14"/>
+        <node-display x="19" y="14"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -1516,7 +1672,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1526,7 +1682,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>
@@ -1586,7 +1742,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_28">
+  <branch basename="_ANONYMOUS_BRANCH_29">
     <segment>
       <node>
         <text-node>
@@ -1596,7 +1752,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1606,7 +1762,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_30">
+  <branch basename="_ANONYMOUS_BRANCH_31">
     <segment>
       <node>
         <text-node>
@@ -1617,7 +1773,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_31">
+  <branch basename="_ANONYMOUS_BRANCH_32">
     <segment>
       <node>
         <text-node>
@@ -1788,7 +1944,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <transition target-connector="in2" target-path="./-1"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_33">
+  <branch basename="_ANONYMOUS_BRANCH_34">
     <segment>
       <node>
         <text-node>
@@ -1936,7 +2092,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_35">
+  <branch basename="_ANONYMOUS_BRANCH_36">
     <segment>
       <node>
         <text-node>
@@ -1946,7 +2102,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_36">
+  <branch basename="_ANONYMOUS_BRANCH_37">
     <segment>
       <node>
         <text-node>
@@ -1956,7 +2112,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_37">
+  <branch basename="_ANONYMOUS_BRANCH_38">
     <segment>
       <node>
         <text-node>
@@ -2004,7 +2160,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
+  <branch basename="_ANONYMOUS_BRANCH_40">
     <segment>
       <node>
         <text-node>
@@ -2363,7 +2519,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_45">
+  <branch basename="_ANONYMOUS_BRANCH_46">
     <segment>
       <node>
         <text-node>
@@ -2379,7 +2535,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_46">
+  <branch basename="_ANONYMOUS_BRANCH_47">
     <segment>
       <node>
         <text-node>
@@ -2389,7 +2545,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_47">
+  <branch basename="_ANONYMOUS_BRANCH_48">
     <segment>
       <node>
         <text-node>
@@ -2399,7 +2555,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_48">
+  <branch basename="_ANONYMOUS_BRANCH_49">
     <segment>
       <node>
         <text-node>
@@ -3071,7 +3227,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_53">
+  <branch basename="_ANONYMOUS_BRANCH_54">
     <segment>
       <node>
         <text-node>
@@ -3209,7 +3365,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_55">
+  <branch basename="_ANONYMOUS_BRANCH_56">
     <segment>
       <node>
         <text-node>
@@ -3262,7 +3418,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_57">
+  <branch basename="_ANONYMOUS_BRANCH_58">
     <segment>
       <node>
         <text-node>
