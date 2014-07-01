@@ -262,13 +262,12 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addCoupon">
-          <transition target-connector="in1"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
           <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="6"/>
-            </node>
-            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -293,7 +292,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="0" y="1"/>
+              <node-display x="1" y="7"/>
             </node>
             <simple-transition/>
             <node>
@@ -2723,11 +2722,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
           <description>Need to use this pipelet instead of UpdateObjectFromForm since the latter one doesn't support recursive lists yet.</description>
           <key-binding alias="CurrentForms.cart.shipments" key="Form"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="Cart-AddCoupon"/>
         <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
