@@ -145,9 +145,9 @@
 			</div>
 			
 			<div class="redemption coupon"><!-- container for coupon applied success messages -->
-				<isif condition="${pdict.CouponStatusCode != null && pdict.CouponStatusCode.error}">
+				<isif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 					<div class="error">
-						<span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatusCode.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
+						<span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
 					</div>
 				</isif>
 				<isif condition="${pdict.Basket.couponLineItems.length > 0}">
