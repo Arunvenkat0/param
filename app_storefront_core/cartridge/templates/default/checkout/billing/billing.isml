@@ -185,7 +185,14 @@
 			    		<isif condition="${pdict.Basket.giftCertificatePaymentInstruments.size() > 0}">
 			    			<isloop items="${pdict.Basket.giftCertificatePaymentInstruments}" var="giftCertPI">
 			    				<isset name="gcPITotal" value="${pdict.gcPITotal + giftCertPI.paymentTransaction.amount}" scope="pdict"/>			    				
-			    				<div class="success giftcert-pi" id="gc-${giftCertPI.getGiftCertificateCode()}"><isprint value="${giftCertPI.paymentTransaction.amount}"/> ${Resource.msg('billing.giftcertredeemed','checkout',null)} <a id="rgc-${giftCertPI.getGiftCertificateCode()}" class="remove" href="${URLUtils.https('COBilling-RemoveGiftCertificate', "giftCertificateID", giftCertPI.getGiftCertificateCode(),'format','old')}"><img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/><span>${Resource.msg('global.remove','locale',null)}</span></a></div>
+			    				<div class="success giftcert-pi" id="gc-${giftCertPI.getGiftCertificateCode()}">
+			    					<isprint value="${giftCertPI.paymentTransaction.amount}"/> 
+			    					${Resource.msg('billing.giftcertredeemed','checkout',null)}
+			    					<a id="rgc-${giftCertPI.getGiftCertificateCode()}" class="remove" href="${URLUtils.https('COBilling-RemoveGiftCertificate', "giftCertificateID", giftCertPI.getGiftCertificateCode(),'format','old')}">
+			    						<img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/>
+			    						<span>${Resource.msg('global.remove','locale',null)}</span>
+			    					</a>
+			    				</div>
 			    			</isloop>
 			    			
 			    			<isif condition="${pdict.Basket.totalGrossPrice!=null && pdict.Basket.totalGrossPrice.value-pdict.gcPITotal<=0}">			    				

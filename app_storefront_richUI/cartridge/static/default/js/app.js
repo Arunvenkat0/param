@@ -2550,6 +2550,8 @@ var app = (function (app, $) {
 					}
 					$error.html(msg);
 					return;
+				} else {
+					window.location.assign(app.urls.billing);
 				}
 			});
 		});
