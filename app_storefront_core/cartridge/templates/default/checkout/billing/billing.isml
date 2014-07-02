@@ -178,8 +178,9 @@
 				    	<button class="button-text cancel" id="check-giftcert" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
 				    </div>
 				    
+				    <div class="form-row balance"></div>
 				    
-				    <div class="redemption giftcert">
+				    <div class="form-row redemption giftcert">
 			    		<iscomment>render gift cert redeemed success message for each gift certificate payment instrument</iscomment>
 			    		<isset name="gcPITotal" value="${0}" scope="pdict"/>
 			    		<isif condition="${pdict.Basket.giftCertificatePaymentInstruments.size() > 0}">
@@ -197,16 +198,13 @@
 			    			<isif condition="${pdict.Basket.totalGrossPrice!=null && pdict.Basket.totalGrossPrice.value-pdict.gcPITotal<=0}">			    				
 			    				<isset name="OrderTotal" value="${pdict.Basket.totalGrossPrice.value-pdict.gcPITotal}" scope="pdict"/>
 			    			</isif>
-			    			
 			    		</isif>
-			    		
 			    		<div class="error">
 							<isif condition="${pdict.GiftCertStatus && pdict.GiftCertStatus.error}">
 								<span class="giftcert-error">${Resource.msg('billing.' + pdict.GiftCertStatus.code, 'checkout', pdict.GiftCertStatus.code)}</span>
 							</isif>
 						</div>
 			    	</div>
-
 				</isif>
 			
 			</isif>

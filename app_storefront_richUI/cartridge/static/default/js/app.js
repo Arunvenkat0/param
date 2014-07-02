@@ -2502,18 +2502,10 @@ var app = (function (app, $) {
 
 			app.giftcard.checkBalance($cache.gcCode.val(), function (data) {
 				if(!data || !data.giftCertificate) {
-					// error
-					var error = $cache.balance.find("span.error");
-					if (error.length===0) {
-						error = $("<span>").addClass("error").appendTo($cache.balance);
-					}
-					error.html(app.resources.GIFT_CERT_INVALID);
+					$cache.balance.html(app.resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
 					return;
 				}
-				// display details in UI
-				$cache.balance.find("span.error").remove();
-				var balance = data.giftCertificate.balance;
-				$cache.balance.html(app.resources.GIFT_CERT_BALANCE+" "+balance);
+				$cache.balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
 			});
 		});
 		
