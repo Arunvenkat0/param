@@ -2588,7 +2588,7 @@ var app = (function (app, $) {
 		$cache.address1 = $cache.checkoutForm.find("input[name$='_address1']");
 		$cache.address2 = $cache.checkoutForm.find("input[name$='_address2']");
 		$cache.city = $cache.checkoutForm.find("input[name$='_city']");
-		$cache.postalCode = $cache.checkoutForm.find("input[name$='_zip']");
+		$cache.postalCode = $cache.checkoutForm.find("input[name$='_postal']");
 		$cache.phone = $cache.checkoutForm.find("input[name$='_phone']");
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
@@ -3330,7 +3330,7 @@ var app = (function (app, $) {
 				$cache.addressBeforeFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressBeforeFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressBeforeFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressBeforeFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressBeforeFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressBeforeFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressBeforeFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressBeforeFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3361,7 +3361,7 @@ var app = (function (app, $) {
 				$cache.addressAfterFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressAfterFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressAfterFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressAfterFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressAfterFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressAfterFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressAfterFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressAfterFields.filter("[name$='_phone']").val(data.address.phone);
