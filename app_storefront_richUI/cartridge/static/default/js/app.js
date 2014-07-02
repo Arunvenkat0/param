@@ -2512,12 +2512,9 @@ var app = (function (app, $) {
 		$cache.addGiftCert.on('click', function(e) {
 			e.preventDefault();
 			var code = $cache.checkoutForm.find('input[name$="_giftCertCode"]').val(),
-				$redemption = $cache.checkoutForm.find('.redemption.giftcert');
+				$redemption = $cache.checkoutForm.find('.redemption.giftcert'),
+				$error = $cache.checkoutForm.find('.giftcert-error');
 			if (code.length === 0) {
-				var $error = $redemption.find('.giftcert-error');
-				if ($error.length === 0) {
-					$error = $('<span>').addClass('giftcert-error').appendTo($redemption);
-				}
 				$error.html(app.resources.GIFT_CERT_MISSING);
 				return;
 			}
@@ -2530,16 +2527,10 @@ var app = (function (app, $) {
 					msg = app.resources.BAD_RESPONSE;
 					fail = true;
 				} else if (!data.success) {
-					msg = data.message;
-					msg = msg.split('<').join('&lt;');
-					msg = msg.split('>').join('&gt;');
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
-					var $error = $redemption.find('.giftcert-error');
-					if ($error.length === 0) {
-						$error = $('<span>').addClass('giftcert-error').appendTo($redemption);
-					}
 					$error.html(msg);
 					return;
 				} else {
@@ -2551,18 +2542,15 @@ var app = (function (app, $) {
 		$cache.addCoupon.on("click", function(e){
 			e.preventDefault();
 			$cache.couponCode = $cache.couponCode || $cache.checkoutForm.find("input[name$='_couponCode']");
-			$cache.redemption = $cache.redemption || $cache.checkoutForm.find("div.redemption.coupon");
-			var val = $cache.couponCode.val();
-			if (val.length===0) {
-				var error = $cache.redemption.find(".coupon-error");
-				if (error.length===0) {
-					error = $("<span>").addClass("coupon-error").appendTo($cache.redemption);
-				}
-				error.html(app.resources.COUPON_CODE_MISSING);
+			$cache.redemption = $cache.redemption || $cache.checkoutForm.find(".redemption.coupon");
+			var $error = $cache.checkoutForm.find('.coupon-error'),
+				code = $cache.couponCode.val();
+			if (code.length===0) {
+				$error.html(app.resources.COUPON_CODE_MISSING);
 				return;
 			}
 
-			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode:val,format:"ajax"});
+			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode: code,format: "ajax"});
 			$.getJSON(url, function(data) {
 				var fail = false;
 				var msg = "";
@@ -2571,27 +2559,18 @@ var app = (function (app, $) {
 					fail = true;
 				}
 				else if (!data.success) {
-					msg = data.message;
-					msg = msg.split('<').join('&lt;');
-					msg = msg.split('>').join('&gt;');
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
-					var error = $cache.redemption.find("span.error");
-					if (error.length===0) {
-						error = $("<span>").addClass("coupon-error").appendTo($cache.redemption);
-					}
-					error.html(msg);
+					$error.html(msg);
 					return;
 				}
-
-				$cache.redemption.html(data.message);
 
 				//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 				//this will force a page refresh to display the coupon message based on a parameter message
 				if(data.success && data.baskettotal==0){
-					var ccode = data.CouponCode;
-						window.location.assign(app.urls.billing);
+					window.location.assign(app.urls.billing);
 				}
 			
 			});
