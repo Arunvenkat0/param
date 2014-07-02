@@ -90,7 +90,7 @@
 	
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.city}" type="input"/>
 	
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.zip}" type="input"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.postal}" type="input"/>
 	
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.phone}" type="input"/>
 				
@@ -179,7 +179,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.city}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.zip}" type="input"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.postal}" type="input"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.phone}" type="input"/>
 			    
