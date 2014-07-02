@@ -143,21 +143,19 @@
 			<div class="form-row">
 			    <button class="apply cancel" id="add-coupon" type="submit" name="${pdict.CurrentForms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 			</div>
-			
-			<div class="redemption coupon"><!-- container for coupon applied success messages -->
+			<div class="form-row coupon-error error">
 				<isif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
-					<div class="error">
-						<span class="coupon-error">${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}</span>
-					</div>
+					${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}
 				</isif>
+			</div>
+			<div class="redemption coupon form-row"><!-- container for coupon applied success messages -->
 				<isif condition="${pdict.Basket.couponLineItems.length > 0}">
 					<isloop items="${pdict.Basket.couponLineItems}" var="couponLineItem" status="cliloopstate">
 						<isif condition="${couponLineItem.valid && couponLineItem.applied}">
-								${Resource.msg('billing.promocode','checkout',null)} <isprint value="${couponLineItem.couponCode}"/> ${Resource.msg('billing.couponapplied','checkout',null)}<br />
+							<span class="success">${Resource.msgf('billing.couponapplied', 'checkout', null, couponLineItem.couponCode)}</span>
 						</isif>
 					</isloop>					
 				</isif>
-				
 			</div>
 
 			<isset name="gcPITotal" value="${0}" scope="pdict"/>
@@ -179,7 +177,11 @@
 				    </div>
 				    
 				    <div class="form-row balance"></div>
-				    
+				    <div class="form-row giftcert-error error">
+						<isif condition="${pdict.GiftCertStatus && pdict.GiftCertStatus.error}">
+							${Resource.msg('billing.' + pdict.GiftCertStatus.code, 'checkout', pdict.GiftCertStatus.code)}
+						</isif>
+					</div>
 				    <div class="form-row redemption giftcert">
 			    		<iscomment>render gift cert redeemed success message for each gift certificate payment instrument</iscomment>
 			    		<isset name="gcPITotal" value="${0}" scope="pdict"/>
@@ -199,11 +201,7 @@
 			    				<isset name="OrderTotal" value="${pdict.Basket.totalGrossPrice.value-pdict.gcPITotal}" scope="pdict"/>
 			    			</isif>
 			    		</isif>
-			    		<div class="error">
-							<isif condition="${pdict.GiftCertStatus && pdict.GiftCertStatus.error}">
-								<span class="giftcert-error">${Resource.msg('billing.' + pdict.GiftCertStatus.code, 'checkout', pdict.GiftCertStatus.code)}</span>
-							</isif>
-						</div>
+			    		
 			    	</div>
 				</isif>
 			
