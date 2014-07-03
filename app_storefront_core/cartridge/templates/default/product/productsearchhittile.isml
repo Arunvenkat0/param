@@ -297,6 +297,7 @@
 				</isif>
 				
 				<isif condition="${!empty(selectedColor)}">
+					
 					<isset name="preselectCurrentSwatch" value="${colorValue.value == selectedColor.value}" scope="page"/>
 				<iselse/>
 					<isset name="preselectCurrentSwatch" value="${varloop.first}" scope="page"/>

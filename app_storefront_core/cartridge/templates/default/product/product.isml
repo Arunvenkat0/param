@@ -22,5 +22,5 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${ProductUtils.getProductDetailsUrl(PVM, pdict.Product, pdict.CurrentHttpParameterMap)}"/>	
+	<isinclude url="${ProductUtils.getProductDetailsUrl(PVM, pdict.Product, pdict.CurrentHttpParameterMap)}"/>
 </isdecorate>
