@@ -3206,36 +3206,33 @@ var app = (function (app, $) {
 		 * @param {String} countrySelect The selected country
 		 */
 		updateStateOptions : function(countrySelect) {
-			var country = $(countrySelect);
-			if (country.length===0 || !app.countries[country.val()]) {
+			var $country = $(countrySelect);
+			if ($country.length===0 || !app.countries[$country.val()]) {
 				 return;
 			}
-			var form = country.closest("form"),
-				stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']"),
-				postalField = form.find("input[name$='_postal']");
-				
-			if (stateField.length===0) {
-				return;
-			}
-
-			var form = country.closest("form"),
-				c = app.countries[country.val()],
+			var $form = $country.closest("form"),
+				c = app.countries[$country.val()],
 				arrHtml = [],
-				stateLabel = (stateField.length > 0) ? form.find("label[for='" + stateField[0].id + "'] span").not(".required-indicator") : undefined,
-				postalLabel = (postalField.length > 0) ? form.find("label[for='" + postalField[0].id + "'] span").not(".required-indicator") : undefined;
+				$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
+				$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
+				$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
+				$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined;
 
 			// set the label text
-			if (stateLabel) {stateLabel.html(c.regionLabel);}
-			if (postalLabel) {postalLabel.html(c.postalLabel);}
-
+			if ($postalLabel) {$postalLabel.html(c.postalLabel);}
+			if ($stateLabel) {
+				$stateLabel.html(c.regionLabel);
+			} else {
+				return;
+			}
 			var s;
 			for (s in c.regions) {
-				arrHtml.push('<option value="'+s+'">'+c.regions[s]+'</option>');
+				arrHtml.push('<option value="' + s + '">' + c.regions[s] + '</option>');
 			}
 			// clone the empty option item and add to stateSelect
-			var o1 = stateField.children().first().clone();
-			stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
-			stateField[0].selectedIndex=0;
+			var o1 = $stateField.children().first().clone();
+			$stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
+			$stateField[0].selectedIndex = 0;
 		},
 		/**
 		 * @function
@@ -3415,8 +3412,12 @@ var app = (function (app, $) {
 	 * @description DOM-Object initialization of the gift registration
 	 */
 	function initializeDom() {
-		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
-		$cache.addressAfterFields.filter("[name$='_country']").data("stateField", $cache.addressAfterFields.filter("[name$='_state']"));
+		$cache.addressBeforeFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressBeforeFields.filter("[name$='_postal']"));
+		$cache.addressAfterFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressAfterFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressAfterFields.filter("[name$='_postal']"));
 
 		if ($cache.copyAddress.length && $cache.copyAddress[0].checked) {
 			// fill the address after fields
