@@ -3221,12 +3221,12 @@ var app = (function (app, $) {
 			var form = country.closest("form"),
 				c = app.countries[country.val()],
 				arrHtml = [],
-				stateLabel = form.find("label[for='" + stateField[0].id + "'] span").not(".required-indicator"),
-				postalLabel = form.find("label[for='" + postalField[0].id + "'] span").not(".required-indicator");
+				stateLabel = (stateField.length > 0) ? form.find("label[for='" + stateField[0].id + "'] span").not(".required-indicator") : undefined,
+				postalLabel = (postalField.length > 0) ? form.find("label[for='" + postalField[0].id + "'] span").not(".required-indicator") : undefined;
 
 			// set the label text
-			stateLabel.html(c.regionLabel);
-			postalLabel.html(c.postalLabel);
+			if (stateLabel) {stateLabel.html(c.regionLabel);}
+			if (postalLabel) {postalLabel.html(c.postalLabel);}
 
 			var s;
 			for (s in c.regions) {
