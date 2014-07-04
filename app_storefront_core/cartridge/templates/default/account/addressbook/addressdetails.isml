@@ -45,7 +45,7 @@
 			
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.city}" type="input"/>
 			
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.zip}" type="input"/>
+			<isinputfield formfield="${pdict.CurrentForms.profile.address.postal}" type="input"/>
 			
 			<isinputfield formfield="${pdict.CurrentForms.profile.address.phone}" type="input"/>
 			
@@ -80,10 +80,8 @@
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var stateForm = pdict.CurrentForms.profile.address.states;
-	var countryField = pdict.CurrentForms.profile.address.country; 
-	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
-	
+	var addressForm = pdict.CurrentForms.profile.address;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);		
 </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>

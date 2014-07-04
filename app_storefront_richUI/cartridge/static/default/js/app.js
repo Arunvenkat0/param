@@ -2588,7 +2588,7 @@ var app = (function (app, $) {
 		$cache.address1 = $cache.checkoutForm.find("input[name$='_address1']");
 		$cache.address2 = $cache.checkoutForm.find("input[name$='_address2']");
 		$cache.city = $cache.checkoutForm.find("input[name$='_city']");
-		$cache.postalCode = $cache.checkoutForm.find("input[name$='_zip']");
+		$cache.postalCode = $cache.checkoutForm.find("input[name$='_postal']");
 		$cache.phone = $cache.checkoutForm.find("input[name$='_phone']");
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
@@ -3206,32 +3206,33 @@ var app = (function (app, $) {
 		 * @param {String} countrySelect The selected country
 		 */
 		updateStateOptions : function(countrySelect) {
-			var country = $(countrySelect);
-			if (country.length===0 || !app.countries[country.val()]) {
+			var $country = $(countrySelect);
+			if ($country.length===0 || !app.countries[$country.val()]) {
 				 return;
 			}
-			var form = country.closest("form");
-			var stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']");
-			if (stateField.length===0) {
-				return;
-			}
-
-			var form = country.closest("form"),
-				c = app.countries[country.val()],
+			var $form = $country.closest("form"),
+				c = app.countries[$country.val()],
 				arrHtml = [],
-				labelSpan = form.find("label[for='"+stateField[0].id+"'] span").not(".required-indicator");
+				$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
+				$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
+				$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
+				$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined;
 
 			// set the label text
-			labelSpan.html(c.label);
-
+			if ($postalLabel) {$postalLabel.html(c.postalLabel);}
+			if ($stateLabel) {
+				$stateLabel.html(c.regionLabel);
+			} else {
+				return;
+			}
 			var s;
 			for (s in c.regions) {
-				arrHtml.push('<option value="'+s+'">'+c.regions[s]+'</option>');
+				arrHtml.push('<option value="' + s + '">' + c.regions[s] + '</option>');
 			}
 			// clone the empty option item and add to stateSelect
-			var o1 = stateField.children().first().clone();
-			stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
-			stateField[0].selectedIndex=0;
+			var o1 = $stateField.children().first().clone();
+			$stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
+			$stateField[0].selectedIndex = 0;
 		},
 		/**
 		 * @function
@@ -3326,7 +3327,7 @@ var app = (function (app, $) {
 				$cache.addressBeforeFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressBeforeFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressBeforeFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressBeforeFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressBeforeFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressBeforeFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressBeforeFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressBeforeFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3357,7 +3358,7 @@ var app = (function (app, $) {
 				$cache.addressAfterFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressAfterFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressAfterFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressAfterFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressAfterFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressAfterFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressAfterFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressAfterFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3411,8 +3412,12 @@ var app = (function (app, $) {
 	 * @description DOM-Object initialization of the gift registration
 	 */
 	function initializeDom() {
-		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
-		$cache.addressAfterFields.filter("[name$='_country']").data("stateField", $cache.addressAfterFields.filter("[name$='_state']"));
+		$cache.addressBeforeFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressBeforeFields.filter("[name$='_postal']"));
+		$cache.addressAfterFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressAfterFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressAfterFields.filter("[name$='_postal']"));
 
 		if ($cache.copyAddress.length && $cache.copyAddress[0].checked) {
 			// fill the address after fields
