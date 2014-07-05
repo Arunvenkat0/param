@@ -137,7 +137,7 @@ function validateProductExistence(basket : Basket, pdict : PipelineDictionary)
 		}
 		
 		//RAP-2490 : if this pli is marked as an instore item use the store inventory instead of hte default inventory when diabling the cart based on inventory levels
-		if(pli.custom.fromStoreId != null){
+		if(pli.custom.hasOwnProperty("fromStoreId") && !empty(pli.custom.fromStoreId)){
 			var store : Store = StoreMgr.getStore(pli.custom.fromStoreId);
 			var storeinventory : ProductInventoryList = ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
 			quantityOverflow = quantityOverflow && (!empty(storeinventory.getRecord(pli.productID)) && storeinventory.getRecord(pli.productID).ATS.value >= pli.quantityValue);
