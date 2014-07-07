@@ -547,7 +547,13 @@ ProductUtils.getDefaultVariant = function(pvm : ProductVariationModel) {
 };
 
 ProductUtils.getProductDetailsUrl = function(pvm : ProductVariationModel, product : Product, map: HttpParameterMap) {
-	var url : URL = pvm.url('Product-Detail').append('source', map.source.stringValue).append('Quantity', map.Quantity.stringValue);
+	var attrValuesArray = ['source', map.source.stringValue, 'Quantity', map.Quantity.stringValue];
+	if (pvm.master) {
+		var variant = ProductUtils.getDefaultVariant(pvm),
+			colorValue = variant.variationModel.getSelectedValue(pvm.getProductVariationAttribute('color')).value;
+		attrValuesArray.push('color', colorValue);
+	}
+	var url : URL = pvm.url('Product-Detail', attrValuesArray);
 	// match pid
 	var pid : String = url.toString().match(new RegExp('.*pid=(.[^&]+)&.*'))[1];
 	// replace all master pid with variant pid
