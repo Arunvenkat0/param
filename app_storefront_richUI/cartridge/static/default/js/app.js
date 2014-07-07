@@ -2511,8 +2511,7 @@ var app = (function (app, $) {
 		
 		$cache.addGiftCert.on('click', function(e) {
 			e.preventDefault();
-			var code = $cache.checkoutForm.find('input[name$="_giftCertCode"]').val(),
-				$redemption = $cache.checkoutForm.find('.redemption.giftcert'),
+			var code = $cache.giftCertCode.val(),
 				$error = $cache.checkoutForm.find('.giftcert-error');
 			if (code.length === 0) {
 				$error.html(app.resources.GIFT_CERT_MISSING);
@@ -2541,8 +2540,6 @@ var app = (function (app, $) {
 
 		$cache.addCoupon.on("click", function(e){
 			e.preventDefault();
-			$cache.couponCode = $cache.couponCode || $cache.checkoutForm.find("input[name$='_couponCode']");
-			$cache.redemption = $cache.redemption || $cache.checkoutForm.find(".redemption.coupon");
 			var $error = $cache.checkoutForm.find('.coupon-error'),
 				code = $cache.couponCode.val();
 			if (code.length===0) {
@@ -2572,8 +2569,21 @@ var app = (function (app, $) {
 				if(data.success && data.baskettotal==0){
 					window.location.assign(app.urls.billing);
 				}
-			
 			});
+		});
+		
+		// trigger events on enter
+		$cache.couponCode.on('keyup', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addCoupon.click();
+			}
+		});
+		$cache.giftCertCode.on('keyup', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addGiftCert.click();
+			}
 		});
 	}
 
@@ -2625,9 +2635,11 @@ var app = (function (app, $) {
 			$cache.ccYear = $cache.ccContainer.find("[name$='_year']");
 			$cache.ccCcv = $cache.ccContainer.find("input[name$='_cvn']");
 			$cache.BMLContainer = $("#PaymentMethod_BML");
-			$cache.checkGiftCert = $("#check-giftcert");
-			$cache.addGiftCert = $('#add-giftcert');
-			$cache.addCoupon = $("#add-coupon");
+			$cache.giftCertCode = $cache.checkoutForm.find('input[name$="_giftCertCode"]');
+			$cache.couponCode = $cache.checkoutForm.find("input[name$='_couponCode']");
+			$cache.checkGiftCert = $cache.checkoutForm.find("#check-giftcert");
+			$cache.addGiftCert = $cache.checkoutForm.find('#add-giftcert');
+			$cache.addCoupon = $cache.checkoutForm.find("#add-coupon");
 
 		}
 	}
