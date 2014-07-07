@@ -133,7 +133,7 @@
 							</td>
 							<isif condition="${pliloopstate.first}">
 								<isset name="rowspan" value="${shipment.productLineItems.size()}" scope="page"/>
-								<td class="item-quantity-details" rowspan="${rowspan.toFixed()}">
+								<td class="item-shipping-address" rowspan="${rowspan.toFixed()}">
 									<isif condition="${shipment.shippingAddress != null}"/>
 										<isset name="address" value="${shipment.shippingAddress}" scope="page">
 										<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
