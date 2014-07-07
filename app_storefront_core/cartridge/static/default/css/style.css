@@ -724,8 +724,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .shipping-method{padding:22px 0 0 28%;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
-.redemption{color:#990000;}
-.redemption span.error{margin-left:0;}
+.redemption .success{color:green;}
 .payment-method-options{padding-left:24%;}
 .payment-method-options .form-row{clear:none;float:left;width:30%;}
 .payment-method-options label{width:auto;}
