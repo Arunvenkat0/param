@@ -776,6 +776,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .order-shipment-details .label { position:absolute;width:150px;text-align:right;font-weight:bold}
 .order-shipment-details .value { margin-left:155px;}
 .order-shipment-details .order-shipment-address { width:240px;}
+.item-shipping-address {min-width: 120px;}
 
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
 .order-shipment-gift-message {font-size: 1.1em;}
