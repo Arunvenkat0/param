@@ -721,10 +721,13 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .checkout-progress-indicator .active{font-weight:700;}
 .checkout-progress-indicator .step-3{background:none repeat scroll 0 0 transparent;padding-right:0;}
 .select-address{padding:2em 0;}
-.shipping-method{padding:22px 0 0 28%;}
+.shipping-method{padding:0;margin: 22px -104px 0;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
 .redemption .success{color:green;}
+.shipping-status{padding:0;margin: 0 -57px 0;}
+.redemption{color:#990000;}
+.redemption span.error{margin-left:0;}
 .payment-method-options{padding-left:24%;}
 .payment-method-options .form-row{clear:none;float:left;width:30%;}
 .payment-method-options label{width:auto;}

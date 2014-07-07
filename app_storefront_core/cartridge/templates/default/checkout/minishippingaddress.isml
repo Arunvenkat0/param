@@ -37,6 +37,7 @@
 			<span class="zip"><isprint value="${ShippingAddress.postalCode}"/></span>
 		</div><!-- END:location -->
 		<div class="country"><isprint value="${ShippingAddress.countryCode}"/></div>
+		<div class="phone"><isprint value="${ShippingAddress.phone}"/></div>
 	</div><!-- END:name -->
 
 	<iscomment>Shipping Method</iscomment>
