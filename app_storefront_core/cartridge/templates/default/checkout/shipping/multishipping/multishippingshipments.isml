@@ -77,8 +77,6 @@
 							<tr class="cart-row">
 								<td><b>${Resource.msg('multishippingshipments.selectmethod','checkout',null)}</b></td>
 								<td colspan="3">
-
-						
 								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 									${Resource.msg('cart.store.instorepickup','storepickup',null)}
 									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
@@ -134,7 +132,7 @@
 								<isprint value="${productLineItem.quantity}" />
 							</td>
 							<isif condition="${pliloopstate.first}">
-								<isset name="rowspan" value="${shipment.productLineItems.size() + 1}" scope="page"/>
+								<isset name="rowspan" value="${shipment.productLineItems.size()}" scope="page"/>
 								<td class="item-quantity-details" rowspan="${rowspan.toFixed()}">
 									<isif condition="${shipment.shippingAddress != null}"/>
 										<isset name="address" value="${shipment.shippingAddress}" scope="page">
