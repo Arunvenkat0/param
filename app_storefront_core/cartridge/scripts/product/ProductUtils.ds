@@ -357,7 +357,7 @@ ProductUtils.getBonusProductJson = function(item : Product, lineItem : dw.order.
 
 ProductUtils.getSelectedColor = function(product : Product, pvm : ProductVariationModel) {
 	if (product==null) { return null; }
-	var vm : ProductVariationModel = (pvm == null) ? product.variationModel : pvm;
+	var vm : ProductVariationModel = pvm==null ? product.variationModel : pvm;
 	var cvm : ProductVariationModel = product.isVariant() ? product.masterProduct.variationModel : product.variationModel;
 						
 	var selectedColor = null;				
@@ -413,7 +413,7 @@ ProductUtils.getVariantForColor = function(prod : dw.catalog.Product, colorId : 
 	return newProduct;
 }
 
-ProductUtils.getQueryString = function(map: HttpParameterMap, fields : Array) {
+ProductUtils.getQueryString = function(map: dw.web.HttpParameterMap, fields : Array) {
 	var parms = [];	
 	for (var i=0,il=fields.length;i<il;i++) {
 		var key = fields[i];
@@ -544,18 +544,4 @@ ProductUtils.getDefaultVariant = function(pvm : ProductVariationModel) {
 		}
 	}
 	return null;
-};
-
-ProductUtils.getProductDetailsUrl = function(pvm : ProductVariationModel, product : Product, map: HttpParameterMap) {
-	var attrValuesArray = ['source', map.source.stringValue, 'Quantity', map.Quantity.stringValue];
-	if (pvm.master) {
-		var variant = ProductUtils.getDefaultVariant(pvm),
-			colorValue = variant.variationModel.getSelectedValue(pvm.getProductVariationAttribute('color')).value;
-		attrValuesArray.push('color', colorValue);
-	}
-	var url : URL = pvm.url('Product-Detail', attrValuesArray);
-	// match pid
-	var pid : String = url.toString().match(new RegExp('.*pid=(.[^&]+)&.*'))[1];
-	// replace all master pid with variant pid
-	return url.toString().replace(new RegExp(pid, 'g'), product.getID());
 };
