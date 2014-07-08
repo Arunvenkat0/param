@@ -33,7 +33,11 @@
 		<div class="form-row form-row-button">
 			<button id="payment-select-go" name="${pdict.CurrentForms.billing.paymentSelect.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 		</div>
-			
+
+		<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
+			<div class="billing-error">${Resource.msg('billing.missingprocessorerror','checkout',null)}</div>
+		</isif>				
+
 		<iscomment>
 			Credit card block
 			--------------------------------------------------------------

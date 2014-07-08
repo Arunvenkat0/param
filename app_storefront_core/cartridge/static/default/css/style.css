@@ -725,8 +725,9 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .shipping-method{padding:0;margin: 22px -104px 0;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
-.redemption .success{color:green;}
+
 .shipping-status{padding:0;margin: 0 -57px 0;}
+.redemption .success{color:green;}
 .redemption{color:#990000;}
 .redemption span.error{margin-left:0;}
 .payment-method-options{padding-left:24%;}
@@ -784,6 +785,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
 .order-shipment-gift-message {font-size: 1.1em;}
+.billing-error {color:red; margin: 0 0 10px 24%;}
 
 
 /* multishipping elements */
