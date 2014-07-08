@@ -632,9 +632,9 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .buttonbar{margin:11px 0;overflow:hidden;width:336px;}
 .bonus-product-list .bonus-product-item{border-bottom:1px solid #E0E0E0;clear:both;}
 .bonus-product-list .product-name{float:none;margin:1em 0;}
-.bonus-product-list .product-add-to-cart button{float:left;margin-top:24px;}
+.bonus-product-list .product-add-to-cart button{float:left;margin-top:22px;margin-left: 2%;}
 .bonus-product-list-footer{clear:both;}
-.bonus-product-list-footer button{float:right;}
+.bonus-product-list-footer button{float:right;margin-top: -2%;}
 
 /* send to friend */
 /* ------------------------------------- */
