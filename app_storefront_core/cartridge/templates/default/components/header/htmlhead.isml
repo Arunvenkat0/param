@@ -37,10 +37,6 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>DEFAULT STYLESHEETS INCLUDED ON ALL PAGES</iscomment>
 
-<link rel="stylesheet" href="${URLUtils.staticURL('/css/normalize.css')}" />
-<link rel="stylesheet" media="print" href="${URLUtils.staticURL('/css/print.css')}" />
-
-
 <isinclude template="components/header/htmlhead_UI"/>
 
 <!--  UI -->
@@ -51,7 +47,5 @@ If you are not using the build cartridge the comments can be safely removed.
     <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.GoogleVerificationTag}"/>" />
 </isif>
 
-
 <iscomment>Gather device-aware scripts</iscomment>    
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>
-
