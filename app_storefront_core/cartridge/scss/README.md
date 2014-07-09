@@ -1,10 +1,14 @@
 # SASS Guide
 This is a port of SiteGenesis's old CSS architecture to using SASS.
 
+### Authoring
 All stylesheets are now written in SCSS, whose syntax is a superset of CSS. This means that any existing CSS is valid SCSS.
 
 SCSS authoring is meant to be used with a build tool, which is currently [gulp](http://gulpjs.com). 
 Once compiled, the SCSS is output as CSS in `static/default/css` folder just like before.
+
+### Eclipse
+To edit `.scss` files in Eclipse, install the [Aptana Studio Eclispe Plug-in](http://www.aptana.com/products/studio3/download) version.
 
 ## Code styles
 Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> and <http://css-tricks.com/sass-style-guide/>
