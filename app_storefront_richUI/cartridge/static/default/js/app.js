@@ -2250,15 +2250,13 @@ var app = (function (app, $) {
 
 	    $("select option:selected").each(function () {
 	    	selectvalue.push(this.value)
-
      	});
-
+	    
 	    //if we found a empty value disable the button
-	    if(selectvalue.indexOf('') == -1){
+	    if (selectvalue.length > 0 && selectvalue.indexOf('') == -1){
 	    	$('.formactions button').removeAttr('disabled');
-	    }else{
+	    } else {
 	    	$('.formactions button').attr('disabled','disabled');
-
 	    }
 
 	    //add error classes to selects that don't have an address associated with them  when the button is clicked
@@ -2359,8 +2357,10 @@ var app = (function (app, $) {
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
-		if($(".cart-row .shippingaddress select.selectbox").length>0){
+		if ($(".cart-row .shippingaddress select.selectbox").length > 0){
 			initmultishipshipaddress();
+		} else {
+			$('.formactions button').attr('disabled','disabled');
 		}
 		return null;
 	}
