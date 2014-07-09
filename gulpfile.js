@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
-	sass = require('gulp-sass');
+	sass = require('gulp-sass'),
+	prefix = require('gulp-autoprefixer');
 
 var paths = {
 	scss: {
@@ -10,6 +11,7 @@ var paths = {
 gulp.task('sass', function () {
 	gulp.src(paths.scss.src)
 		.pipe(sass())
+		.pipe(prefix({cascade: true}))
 		.pipe(gulp.dest(paths.scss.dest));
 });
 
