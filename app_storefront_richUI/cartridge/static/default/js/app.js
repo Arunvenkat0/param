@@ -2573,13 +2573,13 @@ var app = (function (app, $) {
 		});
 		
 		// trigger events on enter
-		$cache.couponCode.on('keyup', function(e) {
+		$cache.couponCode.on('keydown', function(e) {
 			if (e.which === 13) {
 				e.preventDefault();
 				$cache.addCoupon.click();
 			}
 		});
-		$cache.giftCertCode.on('keyup', function(e) {
+		$cache.giftCertCode.on('keydown', function(e) {
 			if (e.which === 13) {
 				e.preventDefault();
 				$cache.addGiftCert.click();
