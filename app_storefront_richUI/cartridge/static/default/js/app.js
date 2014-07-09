@@ -2225,7 +2225,7 @@ var app = (function (app, $) {
 
 			//handle initial load
 			if($(this).find(".js-isgiftyes").is(':checked')){
-				$(this).find(".gift-message-text").css('display','block')
+				$(this).find(".gift-message-text").css('display','block');
 			}
 
 			//set event listeners
@@ -2244,58 +2244,33 @@ var app = (function (app, $) {
 	* @description this function inits the form so that uses client side validation before submitting to the server
 	*/
 	function initmultishipshipaddress() {
-	//init the continue button as disabled
-		var selectvalue = new Array();
-	    $(this).removeClass('error');
-
-	    $("select option:selected").each(function () {
-	    	selectvalue.push(this.value)
-     	});
+		var $continue = $('.formactions button');
+		var $selects = $('.selectbox');
 	    
-	    //if we found a empty value disable the button
-	    if (selectvalue.length > 0 && selectvalue.indexOf('') == -1){
-	    	$('.formactions button').removeAttr('disabled');
+	    var hasEmptySelect = function () {
+	    	var selectValues = $selects.children(':selected').map(function(){return this.value;});
+	    	return $.inArray('', selectValues) !== -1;
+	    };
+	    // if we found a empty value disable the button
+	    if (hasEmptySelect()){
+	    	$continue.attr('disabled','disabled');
 	    } else {
-	    	$('.formactions button').attr('disabled','disabled');
+	    	$continue.removeAttr('disabled');
 	    }
 
-	    //add error classes to selects that don't have an address associated with them  when the button is clicked
-	    $('.formactions').bind('click',function(){
-	    	$.each( $(".cart-row .shippingaddress select.selectbox"), function(){
-	        	if(this.value == ''){
-	          		$(this).addClass('error');
-	        	}else{
-	          		$(this).removeClass('error');
-	        	};
-	      	});
-	    });
-
 	    //add listeners to the selects to enable the continue button
-	    $.each( $(".cart-row .shippingaddress select.selectbox"), function(){
-	    	$(this).bind('change', function(){
-	        	if(this.value == ''){
-	          		$('.formactions button').attr('disabled','disabled');
-	          		$(this).addClass('error');
-	        	}else{
-	          		//check to see if any select box has a empty vlaue
-	          		var selectvalues = new Array();
-	          		$(this).removeClass('error');
-
-	            	$("select option:selected").each(function () {
-	              		selectvalues.push(this.value)
-	           	 	});
-
-	            	//if we found a empty value disable the button
-	            	if(selectvalues.indexOf('') == -1){
-	              		$('.formactions button').removeAttr('disabled');
-	            	}else{
-	              		$('.formactions button').attr('disabled','disabled');
-
-	            	}
-	        	}
-	      	});
-
-	    });
+	    $selects.on('change', function(){
+        	if (this.value == ''){
+          		$continue.attr('disabled','disabled');
+        	} else {
+          		//check to see if any select box has a empty vlaue
+          		if (hasEmptySelect()) {
+          			$continue.attr('disabled','disabled');
+          		} else {
+          			$continue.removeAttr('disabled');
+          		}
+        	}
+      	});
 	}
 	/**
 	 * @function
