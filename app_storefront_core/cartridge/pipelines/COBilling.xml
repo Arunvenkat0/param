@@ -1815,6 +1815,16 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
     <segment>
       <node>
         <text-node>
+          <description>Handles the selection of the payment method and performs payment method specific validation and verification upon the entered form fields.</description>
+        </text-node>
+        <node-display width="2" x="10" y="23"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_33">
+    <segment>
+      <node>
+        <text-node>
           <description>Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends in templates, which just trigger a certain JS event. The calling page of this dialog is responsible for handling these events.</description>
         </text-node>
         <node-display width="2" x="2" y="25"/>
@@ -1982,21 +1992,38 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       <transition target-connector="in2" target-path="./-1"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_34">
-    <segment>
-      <node>
-        <text-node>
-          <description>Handles the selection of the payment method and performs payment method specific validation and verification upon the entered form fields.</description>
-        </text-node>
-        <node-display width="2" x="10" y="24"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="HandlePaymentSelection">
     <segment>
       <node>
         <start-node call-mode="private" name="HandlePaymentSelection" secure="false"/>
-        <node-display x="10" y="25"/>
+        <node-display x="10" y="24"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="null" key="From_0"/>
+          <key-binding alias="MissingPaymentProcessor" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -2067,12 +2094,88 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+        <decision-node condition-key="!empty(dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor)" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b4" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node custom-name="Handle Pipeline Assignment" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
+                <key-binding alias="HandlePipeline" key="To_0"/>
+                <key-binding alias="HandlePipeline + '-Handle'" key="From_1"/>
+                <key-binding alias="HandlePipelineAction" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-key="HandlePipelineAction"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1"/>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="2" y="0"/>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node name="ok"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="dw.order.PaymentMgr.getPaymentMethod(CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID" key="From_0"/>
-          <key-binding alias="HandlePipeline" key="To_0"/>
-          <key-binding alias="HandlePipeline + '-Handle'" key="From_1"/>
-          <key-binding alias="HandlePipelineAction" key="To_1"/>
+          <key-binding alias="true" key="From_0"/>
+          <key-binding alias="MissingPaymentProcessor" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
           <key-binding alias="null" key="To_2"/>
           <key-binding alias="null" key="From_3"/>
@@ -2090,43 +2193,16 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display x="0" y="2"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
+          <bend-point relative-to="source" x="1" y="0"/>
         </transition-display>
       </simple-transition>
       <node>
-        <call-node start-name-key="HandlePipelineAction"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="2" y="0"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node name="error"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <end-node name="ok"/>
-        <node-display x="0" y="1"/>
+        <end-node name="error"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
     </segment>
   </branch>
@@ -2146,7 +2222,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <text-node>
           <description>if the order total is 0 (in case user has product promotions etc.) then we do not need a valid payment method.</description>
         </text-node>
-        <node-display x="12" y="25"/>
+        <node-display x="12" y="24"/>
       </node>
     </segment>
   </branch>
