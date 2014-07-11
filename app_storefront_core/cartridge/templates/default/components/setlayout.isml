@@ -15,7 +15,6 @@
 		|| pdict.CurrentSession.custom.device == 'tablet' 
 		|| pdict.CurrentSession.custom.device == 'desktop'}">
 		<isset name="siteUrl" value="${URLUtils.url('Home-FullSite')}" scope="page"/>
-		<link rel="stylesheet" href="${URLUtils.staticURL('/css/style-responsive.css')}" />
 		<script src="${URLUtils.staticURL('/js/responsive.js')}"></script>
 
 		<script type="text/javascript">
