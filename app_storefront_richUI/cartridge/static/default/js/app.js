@@ -2272,6 +2272,19 @@ var app = (function (app, $) {
         	}
       	});
 	}
+
+	/**
+	 * @function
+	 * @description capture add edit adddress form events
+	 */
+	 function adddEditAddress() {
+	 	var $addressForm =$('form[name$="multishipping_editAddress"]');
+	 	$addressForm.on('submit', function (e) {
+	 		e.preventDefault();
+	 		console.log(e.target);
+	 	});
+	 }
+
 	/**
 	 * @function
 	 * @description shows gift message box, if shipment is gift
@@ -2649,7 +2662,9 @@ var app = (function (app, $) {
 			app.dialog.open({url: this.href, options: {open: function() {
 				initializeCache();
 				addressLoad();
+				adddEditAddress();
 			}}});
+			// return false to prevent global dialogify event from triggering
 			return false;
 		});
 	}
