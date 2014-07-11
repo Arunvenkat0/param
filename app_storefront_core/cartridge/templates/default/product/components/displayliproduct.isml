@@ -27,7 +27,9 @@
 				e.g. order confirmation email, links inside it are wrong i.e. host name is missing because 
 				URLUtils.url api returns relative url!!
 			</iscomment>
-			<isif condition="${!productLineItem.product.isSearchable()}">
+			<isif condition="${productLineItem.product.isVariant() && !(productLineItem.product.getMasterProduct().isSearchable())}">
+				<isprint value="${productLineItem.lineItemText}"/>
+			<iselseif condition="${!productLineItem.product.isSearchable()}">
 				<isprint value="${productLineItem.lineItemText}"/>
 			<iselseif condition="${productLineItem.categoryID != null}">
 				<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="${productLineItem.productName}"><isprint value="${productLineItem.lineItemText}"/></a>
