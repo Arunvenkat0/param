@@ -2277,13 +2277,34 @@ var app = (function (app, $) {
 	 * @function
 	 * @description capture add edit adddress form events
 	 */
-	 function adddEditAddress() {
-	 	var $addressForm =$('form[name$="multishipping_editAddress"]');
-	 	$addressForm.on('submit', function (e) {
-	 		e.preventDefault();
-	 		console.log(e.target);
-	 	});
-	 }
+	function addEditAddress(target) {
+		var $addressForm =$('form[name$="multishipping_editAddress"]');
+		$addressForm.on('submit', function (e) {
+			e.preventDefault();
+			console.log('submit');
+			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (address) {
+				console.log(address);
+				var $shippingAddress = $(target).closest('.shippingaddress'),
+					$select = $shippingAddress.find('.select-address'),
+					$selected = $select.find('option:selected'),
+					newOption = '<option value="' + address.UUID + '">' 
+						+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
+						+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
+						+ '</option>';
+				if (address) {
+					app.dialog.close();
+					// TODO check for edit address
+					$('.shippingaddress select').removeClass('no-option').append(newOption);
+					$('.no-address').hide();
+					// if there's no previously selected option, select it
+					// TODO: This isn't working right yet
+					if (!$selected.length > 0 ) {
+						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected');
+					}
+				}
+			});
+		});
+	}
 
 	/**
 	 * @function
@@ -2658,11 +2679,11 @@ var app = (function (app, $) {
 			}
 		}
 
-		$('.editaddress').on('click', 'a', function() {
+		$('.edit-address').on('click', 'a', function(e) {
 			app.dialog.open({url: this.href, options: {open: function() {
 				initializeCache();
 				addressLoad();
-				adddEditAddress();
+				addEditAddress(e.target);
 			}}});
 			// return false to prevent global dialogify event from triggering
 			return false;
