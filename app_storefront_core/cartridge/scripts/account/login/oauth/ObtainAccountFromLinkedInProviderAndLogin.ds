@@ -18,8 +18,8 @@ function execute( pdict : PipelineDictionary ) : Number
 	Logger.debug(THIS_SCRIPT + "pdict.ResponseText: " + pdict.ResponseText);
 	if (null!=pdict.ResponseText) {
 		//wheather to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
-		var rememberMe : Boolean = session.custom.RememberMe;
-		delete session.custom.RememberMe;
+		var rememberMe : Boolean = session.custom['RememberMe'];
+		delete session.custom['RememberMe'];
 		
 		// vvvvvvvvv Custom XML parsing part starts here: vvvvvvvvv
 		var extProfile : XML;
@@ -42,7 +42,12 @@ function execute( pdict : PipelineDictionary ) : Number
 			Logger.warn(THIS_SCRIPT + "extProfile could not be extracted from the response:" + pdict.ResponseText);
 			return PIPELET_ERROR;
 		} 
-		var userId = extProfile["id"]; 
+		var userId = extProfile["id"];
+		if (!userId) {
+			Logger.warn(THIS_SCRIPT + "Undefined user identifier - make sure you are mapping the correct property from the response."
+				+ " We are mapping 'id' which is not available in the response: " + extProfile);
+			return PIPELET_ERROR;
+		}
 		Logger.debug(THIS_SCRIPT + "Parsed UserId from response: "+userId);
 			
 		var profile : Profile = CustomerMgr.getExternallyAuthenticatedCustomerProfile(pdict.OAuthProviderID, userId);
