@@ -352,13 +352,12 @@ function addAddressToJSON(jsonAddressBook : String, referenceAddress : Object) :
 *	New function for multi-shipping checkout
 *	Updates an address in the JSON sessionAddressBookAttribute
 */
-function updateAddressInJSON(jsonAddressBook : String, referenceAddress : Object, originalUUID : String) : String {
-	var newAddress : Object = new ShippingAddress();
+function updateAddressInJSON(jsonAddressBook : String, referenceAddress : Object) : String {
 	var jsonObj : Object = new Object();
 	var addresses : Array = new Array();
 	var log : Log = Logger.getLogger("multishipping");
 	
-	if (referenceAddress != null && jsonAddressBook != null && originalUUID != null){
+	if (referenceAddress != null && jsonAddressBook != null){
 		try {
 			jsonObj = JSON.parse(jsonAddressBook);
 		} catch (error){
@@ -366,18 +365,16 @@ function updateAddressInJSON(jsonAddressBook : String, referenceAddress : Object
 			return jsonAddressBook;
 		}
 		
-		newAddress.copyFrom(referenceAddress);
 		addresses = jsonObj.addresses;
 		
 		for (var i = 0; i < addresses.length; i++){
-			if (addresses[i].UUID == originalUUID){
-				newAddress.UUID = addresses[i].UUID;
-				newAddress.ID = addresses[i].ID;
-				newAddress.referenceAddressUUID = addresses[i].referenceAddressUUID;
-				jsonObj.addresses[i] = newAddress;
+			if (addresses[i].UUID == referenceAddress.UUID){
+				referenceAddress.ID = addresses[i].ID;
+				referenceAddress.referenceAddressUUID = addresses[i].referenceAddressUUID;
+				jsonObj.addresses[i] = referenceAddress;
 			}
 		}
-		
+
 		return JSON.stringify(jsonObj);
 	}
 }

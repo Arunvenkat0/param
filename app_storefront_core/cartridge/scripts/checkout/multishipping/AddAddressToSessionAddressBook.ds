@@ -68,7 +68,8 @@ function execute( args : PipelineDictionary ) : Number {
 		sessionAddressBook = addAddressToJSON(sessionAddressBook, formAddress);
 	} else {
 		// Update Address
-		sessionAddressBook = updateAddressInJSON(sessionAddressBook, formAddress, referenceAddress.UUID);
+		formAddress.UUID = referenceAddress.UUID;
+		sessionAddressBook = updateAddressInJSON(sessionAddressBook, formAddress);
 	}
 
 	basket.custom.sessionAddressBook = sessionAddressBook;
