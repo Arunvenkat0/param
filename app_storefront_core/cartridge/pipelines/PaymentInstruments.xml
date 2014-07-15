@@ -163,7 +163,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormAdd" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormAdd" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/payment/paymentinstrumentdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -232,13 +232,9 @@
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="account/payment/DuplicateCheck.ds"/>
-                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.month.value" key="MoIn"/>
                 <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.number.value" key="NoIn"/>
-                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.year.value" key="YrIn"/>
                 <key-binding alias="DuplicateCard" key="Duplicate"/>
                 <key-binding alias="PaymentInstruments" key="PIList"/>
-                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.owner.value" key="NmIn"/>
-                <key-binding alias="OldCard" key="OldCardOut"/>
                 <key-binding alias="debugger" key="ScriptLog"/>
                 <key-binding alias="OldCard" key="OldCard"/>
               </pipelet-node>
@@ -360,48 +356,13 @@
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="CurrentHttpParameterMap.format.stringValue != 'ajax'" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <jump-node start-name-ref="PaymentInstruments-List"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="1" y="0"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <decision-node condition-key="!CurrentForms.profile.address.valid" condition-operator="expr"/>
-        <node-display orientation="horizontal" x="1" y="0"/>
-        <branch basename="b3" source-connector="yes">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="-14"/>
-            </node>
-            <transition target-connector="in1" target-path="../-2"/>
-          </segment>
-        </branch>
-      </node>
       <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="0" y="1"/>
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-node transaction-required="false">
-          <template buffered="true" dynamic="false" name="components/dialog/dialogjson"/>
-        </interaction-node>
+        <jump-node start-name-ref="PaymentInstruments-List"/>
         <node-display x="0" y="1"/>
       </node>
     </segment>
@@ -443,7 +404,6 @@
                 <config-property key="ScriptFile" value="checkout/InvalidatePaymentCardFormElements.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard" key="CreditCardForm"/>
-                <key-binding alias="CreditCardStatus" key="CreditCardStatus"/>
                 <key-binding alias="Status" key="Status"/>
               </pipelet-node>
               <node-display x="1" y="1"/>

@@ -128,7 +128,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="MultiShippingAddresses" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="MultiShippingAddresses" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/shipping/multishipping/multishippingaddresses"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -252,7 +252,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="MultiShippingMethods" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="MultiShippingMethods" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/shipping/multishipping/multishippingshipments"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -383,55 +383,11 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
-            <simple-transition/>
-            <node>
-              <pipelet-node custom-name="Get the shipping addresses from the session" pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
-                <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/multishipping/GetSessionAddresses.ds"/>
-                <key-binding alias="Basket" key="CBasket"/>
-                <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <jump-node start-name-ref="COShippingMultiple-Start"/>
-                    <node-display orientation="horizontal" x="1" y="-1"/>
-                  </node>
-                </segment>
-              </branch>
-            </node>
-            <simple-transition/>
-            <node>
-              <decision-node condition-key="!empty(ShippingAddresses)" condition-operator="expr"/>
-              <node-display x="0" y="1"/>
-              <branch basename="b3" source-connector="yes">
-                <transition target-connector="in"/>
-                <segment>
-                  <node>
-                    <call-node start-name-ref="COShippingMultiple-InitShippingAddresses"/>
-                    <node-display x="0" y="1"/>
-                  </node>
-                  <transition target-connector="in1" target-path="../../+1"/>
-                </segment>
-              </branch>
-            </node>
-            <transition target-connector="in2" target-path="../+1">
-              <transition-display>
-                <bend-point relative-to="source" x="1" y="0"/>
-                <bend-point relative-to="target" x="1" y="0"/>
-              </transition-display>
-            </transition>
+            <transition target-connector="in1" target-path="../+1"/>
           </segment>
         </branch>
       </node>
-      <transition target-connector="in1" target-path="./+1">
+      <transition target-connector="in2" target-path="./+1">
         <transition-display>
           <bend-point relative-to="source" x="1" y="0"/>
           <bend-point relative-to="target" x="1" y="0"/>
@@ -441,7 +397,62 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="6"/>
+        <node-display x="0" y="3"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node custom-name="Get the shipping addresses from the session" pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="checkout/multishipping/GetSessionAddresses.ds"/>
+          <key-binding alias="Basket" key="CBasket"/>
+          <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <jump-node start-name-ref="COShippingMultiple-Start"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="!empty(ShippingAddresses)" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="COShippingMultiple-InitShippingAddresses"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="target" x="1" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="2"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -541,7 +552,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <config-property key="ScriptFile" value="checkout/multishipping/InitSessionAddressBook.ds"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="CurrentCustomer" key="CCustomer"/>
-          <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">
@@ -595,7 +605,27 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <text-node>
           <description>Initializes the forms for the multi shipment setting.</description>
         </text-node>
-        <node-display x="10" y="14"/>
+        <node-display x="10" y="15"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_16">
+    <segment>
+      <node>
+        <text-node>
+          <description>Initializes the shipping method list for each shipment.</description>
+        </text-node>
+        <node-display x="13" y="15"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_17">
+    <segment>
+      <node>
+        <text-node>
+          <description>Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends in templates, which just trigger a certain JS event. The calling page of this dialog is responsible for handling these events.</description>
+        </text-node>
+        <node-display width="2" x="2" y="19"/>
       </node>
     </segment>
   </branch>
@@ -603,9 +633,13 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
     <segment>
       <node>
         <start-node call-mode="private" name="InitShipmentForms" secure="false"/>
-        <node-display x="10" y="15"/>
+        <node-display x="10" y="16"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
           <key-binding alias="CurrentForms.multishipping.shippingOptions" key="FormElement"/>
@@ -630,26 +664,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
       <node>
         <end-node/>
         <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_17">
-    <segment>
-      <node>
-        <text-node>
-          <description>Initializes the shipping method list for each shipment.</description>
-        </text-node>
-        <node-display x="13" y="15"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
-    <segment>
-      <node>
-        <text-node>
-          <description>Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends in templates, which just trigger a certain JS event. The calling page of this dialog is responsible for handling these events.</description>
-        </text-node>
-        <node-display width="2" x="2" y="19"/>
       </node>
     </segment>
   </branch>
@@ -814,7 +828,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="EditForm" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="EditForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/shipping/multishipping/editaddresses"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>

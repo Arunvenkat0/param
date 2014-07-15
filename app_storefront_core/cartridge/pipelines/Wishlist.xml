@@ -153,7 +153,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormLanding" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormLanding" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/wishlist/wishlistlanding"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -220,17 +220,8 @@
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="Wishlist-Search"/>
+              <jump-node start-name-ref="Wishlist-Search"/>
               <node-display x="-1" y="2"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node/>
-              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -337,7 +328,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitForm" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/wishlist/wishlist"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -654,7 +645,7 @@
   <branch basename="ShowOther">
     <segment>
       <node>
-        <start-node name="ShowOther" secure="false"/>
+        <start-node name="ShowOther" secure="true"/>
         <node-display x="9" y="2"/>
       </node>
       <simple-transition>
@@ -1470,7 +1461,7 @@ Expects: AddressID</description>
   <branch basename="ReplaceProductListItem">
     <segment>
       <node>
-        <start-node name="ReplaceProductListItem" secure="false"/>
+        <start-node name="ReplaceProductListItem" secure="true"/>
         <node-display x="10" y="18"/>
       </node>
       <simple-transition/>
@@ -1511,10 +1502,8 @@ Expects: AddressID</description>
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
-          <key-binding alias="WishList" key="UpdatedProductList"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">

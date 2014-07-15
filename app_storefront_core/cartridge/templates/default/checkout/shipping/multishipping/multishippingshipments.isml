@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/pt_checkout">
 <isinclude template="util/modules"/>
 
@@ -76,8 +77,6 @@
 							<tr class="cart-row">
 								<td><b>${Resource.msg('multishippingshipments.selectmethod','checkout',null)}</b></td>
 								<td colspan="3">
-
-						
 								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 									${Resource.msg('cart.store.instorepickup','storepickup',null)}
 									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
@@ -133,8 +132,8 @@
 								<isprint value="${productLineItem.quantity}" />
 							</td>
 							<isif condition="${pliloopstate.first}">
-								<isset name="rowspan" value="${shipment.productLineItems.size() + 1}" scope="page"/>
-								<td class="item-quantity-details" rowspan="${rowspan.toFixed()}">
+								<isset name="rowspan" value="${shipment.productLineItems.size()}" scope="page"/>
+								<td class="item-shipping-address" rowspan="${rowspan.toFixed()}">
 									<isif condition="${shipment.shippingAddress != null}"/>
 										<isset name="address" value="${shipment.shippingAddress}" scope="page">
 										<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
@@ -166,7 +165,7 @@
 									</div>
 								<iselse/>
 									<div class="form-row">
-										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}:</label>
+										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}</label>
 										<input class="input-radio js-isgiftyes" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftyes${shipmentItem.itemIndex}" value="true" <isif condition="${shipmentItem.isGift.value}">checked="checked"</isif> /> Yes
 										<input class="input-radio js-isgiftno" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftno${shipmentItem.itemIndex}" value="false" <isif condition="${!shipmentItem.isGift.value}">checked="checked"</isif> /> No
 									</div>

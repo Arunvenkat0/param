@@ -1479,153 +1479,85 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
-	/**
-	 * @private
-	 * @function
-	 * @description Fix for ie8 Infinite Scroll Bar issue and QuickView Fix (along with CSS changes)
-	 */	
-	function initInfiniteScroll_ie8()
-	{
-		$( window ).scroll(function() {
-				
-				// getting the hidden div, which is the placeholder for the next page
-				var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-				
-				if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-					app.search.init();
-					// switch state to 'loading'
-					// - switches state, so the above selector is only matching once
-					// - shows loading indicator
-					loadingPlaceHolder.attr('data-loading-state','loading');
-					loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-					// get url hidden in DOM
-					var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-					/**
-					 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-					 */
-					var fillEndlessScrollChunk = function (html) {
-						loadingPlaceHolder.removeClass('infinite-scroll-loading');
-						loadingPlaceHolder.attr('data-loading-state','loaded');
-						jQuery('div.search-result-content').append(html);
-					};
-					if (false) {
-						// if we hit the cache
-						fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-					} else {
-						// else do query via ajax
-						jQuery.ajax({
-							type: "GET",
-							dataType: 'html',
-							url: gridUrl,
-							success: function(response) {
-								// put response into cache
-								try {
-									sessionStorage["scroll-cache_" + gridUrl] = response;
-								} catch (e) {
-									// nothing to catch in case of out of memory of session storage
-									// it will fall back to load via ajax
-								}
-								// update UI
-								fillEndlessScrollChunk(response);
-							}
-						});
-					}
-					
-
-				}
-
-
-		});		
-
-	}
-	/**
-	 * @private
-	 * @function
-	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
-	 */
-	function updateProductListing(isHashChange) {
-		// [RAP-2653] requires special handling for 's encoding of ampersands
-		var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-		var hash = isFirefox ? encodeURI(decodeURI(window.location.hash)) : window.location.hash;
-		if(hash==='#results-content' || hash==='#results-products') { return; }
-
-		var refineUrl = null;
-		if (hash.length > 0) {
-			refineUrl = window.location.pathname+"?"+hash.substr(1);
-		}
-		else if (isHashChange) {
-			refineUrl = window.location.href;
-		}
-
-		if (!refineUrl) { return; }
-
-		app.progress.show($cache.content);
-		$cache.main.load(app.util.appendParamToURL(refineUrl, "format", "ajax"), function () {
-			app.product.compare.init();
-			app.product.tile.init();
-			app.progress.hide();
-			if (app.clientcache.LISTING_INFINITE_SCROLL){
-				jQuery(document).trigger('grid-update');
-			}
-		});
-	}
+	
 	/**
 	 * @private
 	 * @function
 	 * @description
 	 */
-	function initInfiniteScroll() {
+	function infiniteScroll()
+	{
+		// getting the hidden div, which is the placeholder for the next page
+		var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
+		// get url hidden in DOM
+		var gridUrl = loadingPlaceHolder.attr('data-grid-url');
+		
+		if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
+			// switch state to 'loading'
+			// - switches state, so the above selector is only matching once
+			// - shows loading indicator
+			loadingPlaceHolder.attr('data-loading-state','loading');
+			loadingPlaceHolder.addClass('infinite-scroll-loading');
 
-		jQuery(document).bind('scroll ready grid-update',function(e) {
-			// getting the hidden div, which is the placeholder for the next page
-			var loadingPlaceHolder = jQuery('.infinite-scroll-placeholder[data-loading-state="unloaded"]')
-			if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-				// switch state to 'loading'
-				// - switches state, so the above selector is only matching once
-				// - shows loading indicator
-				loadingPlaceHolder.attr('data-loading-state','loading');
-				loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-				// get url hidden in DOM
-				var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-				/**
-				 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-				 */
-				var fillEndlessScrollChunk = function (html) {
-					loadingPlaceHolder.removeClass('infinite-scroll-loading');
-					loadingPlaceHolder.attr('data-loading-state','loaded');
-					jQuery('div.search-result-content').append(html);
-					jQuery(document).trigger('grid-update');
-				};
-				if (false) {
-					// if we hit the cache
-					fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
-				} else {
-					// else do query via ajax
-					jQuery.ajax({
-						type: "GET",
-						dataType: 'html',
-						url: gridUrl,
-						success: function(response) {
-							// put response into cache
-							try {
-								sessionStorage["scroll-cache_" + gridUrl] = response;
-							} catch (e) {
-								// nothing to catch in case of out of memory of session storage
-								// it will fall back to load via ajax
-							}
-							// update UI
-							fillEndlessScrollChunk(response);
+			/**
+			 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
+			 */
+			var fillEndlessScrollChunk = function (html) {
+				loadingPlaceHolder.removeClass('infinite-scroll-loading');
+				loadingPlaceHolder.attr('data-loading-state','loaded');
+				jQuery('div.search-result-content').append(html);
+			};
+			
+			// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
+			// it was removed to temporarily address RAP-2649
+			if (false) {
+				// if we hit the cache
+				fillEndlessScrollChunk(sessionStorage["scroll-cache_" + gridUrl]);
+			} else {
+				// else do query via ajax
+				jQuery.ajax({
+					type: "GET",
+					dataType: 'html',
+					url: gridUrl,
+					success: function(response) {
+						// put response into cache
+						try {
+							sessionStorage["scroll-cache_" + gridUrl] = response;
+						} catch (e) {
+							// nothing to catch in case of out of memory of session storage
+							// it will fall back to load via ajax
 						}
-					});
-				}
-				app.search.init();
+						// update UI
+						fillEndlessScrollChunk(response);
+						app.product.tile.init();
+					}
+				});
 			}
+		}
+	};
+	/**
+	 * @private
+	 * @function
+	 * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
+	 */
+	function updateProductListing() {
+		var hash = location.href.split('#')[1];
+		if (hash === 'results-content' || hash === 'results-products') { return; }
+		var refineUrl;
+		
+		if (hash.length > 0) {
+			refineUrl = window.location.pathname + "?" + hash;
+		} else {
+			return;
+		}
+		app.progress.show($cache.content);
+		$cache.main.load(app.util.appendParamToURL(refineUrl, "format", "ajax"), function () {
+			app.product.compare.init();
+			app.product.tile.init();
+			app.progress.hide();
 		});
 	}
+	
 	/**
 	 * @private
 	 * @function
@@ -1662,24 +1594,19 @@ var app = (function (app, $) {
 
 		// handle events for updating grid
 		$cache.main.on("click", ".refinements a, .pagination a, .breadcrumb-refinement-value a", function (e) {
-
-			if($(this).parent().hasClass("unselectable")) { return; }
+			if ($(this).parent().hasClass("unselectable")) { return; }
 			var catparent = $(this).parents('.category-refinement');
 			var folderparent = $(this).parents('.folder-refinement');
 
 			//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
 			//else handle the encoding for the url
-			if(catparent.length > 0 || folderparent.length > 0 ){
-
+			if (catparent.length > 0 || folderparent.length > 0 ) {
 				return true;
-			}else{
-				e.preventDefault();
+			} else {
 				var uri = app.util.getUri(this);
 
-				if( uri.query.length > 1 ) {
-					// [RAP-2653] requires special handling for 's encoding of ampersands
-					var isFirefox = (navigator.userAgent).toLowerCase().indexOf('firefox') >= 0;
-					window.location.hash = 	isFirefox ? encodeURI(decodeURI(uri.query.substring(1))) : uri.query.substring(1);
+				if ( uri.query.length > 1 ) {
+					window.location.hash = uri.query.substring(1);
 				} else {
 					window.location.href = this.href;
 				}
@@ -1734,7 +1661,7 @@ var app = (function (app, $) {
 
 		// handle hash change
 		$(window).hashchange(function () {
-			updateProductListing(true);
+			updateProductListing();
 		});
 	}
 	/******* app.search public object ********/
@@ -1745,20 +1672,14 @@ var app = (function (app, $) {
 				items : $("#search-result-items")
 			};
 			$cache.content = $cache.main.find(".search-result-content");
-			//if (app.product.compare) {
-				app.product.compare.init();
-			//}
-			//updateProductListing(false);
-			if (window.pageXOffset == null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll_ie8();
+			app.product.compare.init();
+			
+			if (app.clientcache.LISTING_INFINITE_SCROLL) {
+				$(window).on('scroll', infiniteScroll);
 			}
-			if ( window.pageXOffset != null && app.clientcache.LISTING_INFINITE_SCROLL) {
-				initInfiniteScroll(); 
-				
-			}			
 			app.product.tile.init();
 			initializeEvents();
-		
+			
 		}
 	};
 
@@ -1876,6 +1797,7 @@ var app = (function (app, $) {
 				callback : function () {
 					$cache.bonusProduct.dialog('open');
 					app.bonusProductsView.initializeGrid();
+					$('#bonus-product-dialog .emptyswatch').css('display','none');
 				}
 			});
 
@@ -1964,27 +1886,6 @@ var app = (function (app, $) {
 
 			$cache.bonusProductList.on("click", "div.bonus-product-item a[href].swatchanchor", function (e) {
 				e.preventDefault();
-
-				var anchor = $(this),
-					bpItem = anchor.closest(".bonus-product-item"),
-					bpForm = bpItem.find("form.bonus-product-form"),
-					qty = bpForm.find("input[name='Quantity']").first().val(),
-					params = {
-						Quantity : isNaN(qty) ? "1" : qty,
-						format : "ajax",
-						source : "bonus",
-						bonusDiscountLineItemUUID : bliUUID
-					};
-
-				var url = app.util.appendParamsToUrl(this.href, params);
-
-				app.progress.show(bpItem);
-				app.ajax.load({
-					url: url,
-					callback : function (data) {
-						bpItem.html(data);
-					}
-				});
 			})
 			.on("click", "button.button-select-bonus", function (e) {
 				e.preventDefault();
@@ -2349,15 +2250,13 @@ var app = (function (app, $) {
 
 	    $("select option:selected").each(function () {
 	    	selectvalue.push(this.value)
-
      	});
-
+	    
 	    //if we found a empty value disable the button
-	    if(selectvalue.indexOf('') == -1){
+	    if (selectvalue.length > 0 && selectvalue.indexOf('') == -1){
 	    	$('.formactions button').removeAttr('disabled');
-	    }else{
+	    } else {
 	    	$('.formactions button').attr('disabled','disabled');
-
 	    }
 
 	    //add error classes to selects that don't have an address associated with them  when the button is clicked
@@ -2384,7 +2283,6 @@ var app = (function (app, $) {
 
 	            	$("select option:selected").each(function () {
 	              		selectvalues.push(this.value)
-
 	           	 	});
 
 	            	//if we found a empty value disable the button
@@ -2459,8 +2357,10 @@ var app = (function (app, $) {
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
-		if($(".cart-row .shippingaddress select.selectbox").length>0){
+		if ($(".cart-row .shippingaddress select.selectbox").length > 0){
 			initmultishipshipaddress();
+		} else {
+			$('.formactions button').attr('disabled','disabled');
 		}
 		return null;
 	}
@@ -2567,7 +2467,7 @@ var app = (function (app, $) {
 
 		$cache.save.on('click', function (e) {
 			// determine if the order total was paid using gift cert or a promotion
-			if ($("#noPaymentNeeded").length > 0 && $(".giftcertpi").length > 0) {
+			if ($("#noPaymentNeeded").length > 0 && $(".giftcert-pi").length > 0) {
 				// as a safety precaution, uncheck any existing payment methods
 				$cache.paymentMethodId.filter(":checked").removeAttr("checked");
 				// add selected radio button with gift card payment method
@@ -2587,7 +2487,7 @@ var app = (function (app, $) {
 
 		});
 
-		$cache.gcCheckBalance.on("click", function (e) {
+		$cache.checkGiftCert.on("click", function (e) {
 			e.preventDefault();
 			$cache.gcCode = $cache.gcCode || $cache.checkoutForm.find("input[name$='_giftCertCode']");
 			$cache.balance = $cache.balance || $cache.checkoutForm.find("div.balance");
@@ -2602,36 +2502,52 @@ var app = (function (app, $) {
 
 			app.giftcard.checkBalance($cache.gcCode.val(), function (data) {
 				if(!data || !data.giftCertificate) {
-					// error
-					var error = $cache.balance.find("span.error");
-					if (error.length===0) {
-						error = $("<span>").addClass("error").appendTo($cache.balance);
-					}
-					error.html(app.resources.GIFT_CERT_INVALID);
+					$cache.balance.html(app.resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
 					return;
 				}
-				// display details in UI
-				$cache.balance.find("span.error").remove();
-				var balance = data.giftCertificate.balance;
-				$cache.balance.html(app.resources.GIFT_CERT_BALANCE+" "+balance);
+				$cache.balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
+			});
+		});
+		
+		$cache.addGiftCert.on('click', function(e) {
+			e.preventDefault();
+			var code = $cache.giftCertCode.val(),
+				$error = $cache.checkoutForm.find('.giftcert-error');
+			if (code.length === 0) {
+				$error.html(app.resources.GIFT_CERT_MISSING);
+				return;
+			}
+			
+			var url = app.util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
+			$.getJSON(url, function(data) {
+				var fail = false;
+				var msg = '';
+				if (!data) {
+					msg = app.resources.BAD_RESPONSE;
+					fail = true;
+				} else if (!data.success) {
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
+					fail = true;
+				}
+				if (fail) {
+					$error.html(msg);
+					return;
+				} else {
+					window.location.assign(app.urls.billing);
+				}
 			});
 		});
 
 		$cache.addCoupon.on("click", function(e){
 			e.preventDefault();
-			$cache.couponCode = $cache.couponCode || $cache.checkoutForm.find("input[name$='_couponCode']");
-			$cache.redemption = $cache.redemption || $cache.checkoutForm.find("div.redemption.coupon");
-			var val = $cache.couponCode.val();
-			if (val.length===0) {
-				var error = $cache.redemption.find("span.error");
-				if (error.length===0) {
-					error = $("<span>").addClass("error").appendTo($cache.redemption);
-				}
-				error.html(app.resources.COUPON_CODE_MISSING);
+			var $error = $cache.checkoutForm.find('.coupon-error'),
+				code = $cache.couponCode.val();
+			if (code.length===0) {
+				$error.html(app.resources.COUPON_CODE_MISSING);
 				return;
 			}
 
-			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode:val,format:"ajax"});
+			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode: code,format: "ajax"});
 			$.getJSON(url, function(data) {
 				var fail = false;
 				var msg = "";
@@ -2640,30 +2556,34 @@ var app = (function (app, $) {
 					fail = true;
 				}
 				else if (!data.success) {
-					msg = data.message;
-					msg = msg.split('<').join('&lt;');
-					msg = msg.split('>').join('&gt;');
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
-					var error = $cache.redemption.find("span.error");
-					if (error.length===0) {
-						$("<span>").addClass("error").appendTo($cache.redemption);
-					}
-					error.html(msg);
+					$error.html(msg);
 					return;
 				}
-
-				$cache.redemption.html(data.message);
 
 				//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 				//this will force a page refresh to display the coupon message based on a parameter message
 				if(data.success && data.baskettotal==0){
-					var ccode = data.CouponCode;
-						window.location.assign(app.urls.billing);
+					window.location.assign(app.urls.billing);
 				}
-			
 			});
+		});
+		
+		// trigger events on enter
+		$cache.couponCode.on('keydown', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addCoupon.click();
+			}
+		});
+		$cache.giftCertCode.on('keydown', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addGiftCert.click();
+			}
 		});
 	}
 
@@ -2688,7 +2608,7 @@ var app = (function (app, $) {
 		$cache.address1 = $cache.checkoutForm.find("input[name$='_address1']");
 		$cache.address2 = $cache.checkoutForm.find("input[name$='_address2']");
 		$cache.city = $cache.checkoutForm.find("input[name$='_city']");
-		$cache.postalCode = $cache.checkoutForm.find("input[name$='_zip']");
+		$cache.postalCode = $cache.checkoutForm.find("input[name$='_postal']");
 		$cache.phone = $cache.checkoutForm.find("input[name$='_phone']");
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
@@ -2715,8 +2635,11 @@ var app = (function (app, $) {
 			$cache.ccYear = $cache.ccContainer.find("[name$='_year']");
 			$cache.ccCcv = $cache.ccContainer.find("input[name$='_cvn']");
 			$cache.BMLContainer = $("#PaymentMethod_BML");
-			$cache.gcCheckBalance = $("#gc-checkbalance");
-			$cache.addCoupon = $("#add-coupon");
+			$cache.giftCertCode = $cache.checkoutForm.find('input[name$="_giftCertCode"]');
+			$cache.couponCode = $cache.checkoutForm.find("input[name$='_couponCode']");
+			$cache.checkGiftCert = $cache.checkoutForm.find("#check-giftcert");
+			$cache.addGiftCert = $cache.checkoutForm.find('#add-giftcert');
+			$cache.addCoupon = $cache.checkoutForm.find("#add-coupon");
 
 		}
 	}
@@ -2746,6 +2669,14 @@ var app = (function (app, $) {
 				$('.order-summary-footer .submit-order .button-fancy-large').attr( 'disabled', 'disabled' );
 			}
 		}
+
+		$('.editaddress').on('click', 'a', function() {
+			app.dialog.open({url: this.href, options: {open: function() {
+				initializeCache();
+				addressLoad();
+			}}});
+			return false;
+		});
 	}
 
 	/******* app.checkout public object ********/
@@ -3298,32 +3229,33 @@ var app = (function (app, $) {
 		 * @param {String} countrySelect The selected country
 		 */
 		updateStateOptions : function(countrySelect) {
-			var country = $(countrySelect);
-			if (country.length===0 || !app.countries[country.val()]) {
+			var $country = $(countrySelect);
+			if ($country.length===0 || !app.countries[$country.val()]) {
 				 return;
 			}
-			var form = country.closest("form");
-			var stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']");
-			if (stateField.length===0) {
-				return;
-			}
-
-			var form = country.closest("form"),
-				c = app.countries[country.val()],
+			var $form = $country.closest("form"),
+				c = app.countries[$country.val()],
 				arrHtml = [],
-				labelSpan = form.find("label[for='"+stateField[0].id+"'] span").not(".required-indicator");
+				$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
+				$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
+				$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
+				$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined;
 
 			// set the label text
-			labelSpan.html(c.label);
-
+			if ($postalLabel) {$postalLabel.html(c.postalLabel);}
+			if ($stateLabel) {
+				$stateLabel.html(c.regionLabel);
+			} else {
+				return;
+			}
 			var s;
 			for (s in c.regions) {
-				arrHtml.push('<option value="'+s+'">'+c.regions[s]+'</option>');
+				arrHtml.push('<option value="' + s + '">' + c.regions[s] + '</option>');
 			}
 			// clone the empty option item and add to stateSelect
-			var o1 = stateField.children().first().clone();
-			stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
-			stateField[0].selectedIndex=0;
+			var o1 = $stateField.children().first().clone();
+			$stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
+			$stateField[0].selectedIndex = 0;
 		},
 		/**
 		 * @function
@@ -3418,7 +3350,7 @@ var app = (function (app, $) {
 				$cache.addressBeforeFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressBeforeFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressBeforeFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressBeforeFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressBeforeFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressBeforeFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressBeforeFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressBeforeFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3449,7 +3381,7 @@ var app = (function (app, $) {
 				$cache.addressAfterFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressAfterFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressAfterFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressAfterFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressAfterFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressAfterFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressAfterFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressAfterFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3503,8 +3435,12 @@ var app = (function (app, $) {
 	 * @description DOM-Object initialization of the gift registration
 	 */
 	function initializeDom() {
-		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
-		$cache.addressAfterFields.filter("[name$='_country']").data("stateField", $cache.addressAfterFields.filter("[name$='_state']"));
+		$cache.addressBeforeFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressBeforeFields.filter("[name$='_postal']"));
+		$cache.addressAfterFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressAfterFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressAfterFields.filter("[name$='_postal']"));
 
 		if ($cache.copyAddress.length && $cache.copyAddress[0].checked) {
 			// fill the address after fields
@@ -4170,8 +4106,7 @@ var app = (function (app, $) {
 				target : $cache.container,
 				url : params.url,
 				callback : function () {
-
-					if($cache.container.dialog("isOpen")) {	return;	}
+					if ($cache.container.dialog("isOpen")) { return; }
 					$cache.container.dialog("open");
 				}
 			});
@@ -5314,6 +5249,13 @@ var app = (function (app, $) {
  				if(app.user.zip === null || app.user.zip === "") {
  					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
  				}
+ 				
+ 	 			//disable continue button if a preferred store has not been selected
+ 	 			if($('.store-list .selected').length > 0){
+ 	 				$('#preferred-store-panel .close').attr('disabled', false);
+ 	 			}else{
+ 	 				$('#preferred-store-panel .close').attr('disabled', true);
+ 	 			}
 
  		},
 
@@ -5335,6 +5277,9 @@ var app = (function (app, $) {
  			app.user.storeId = id;
  			jQuery.post(app.urls.setPreferredStore, { storeId : id }, function(data) {
  				jQuery('.selected-store-availability').html(data);
+
+ 				//enable continue button when a preferred store has been selected
+ 		 		$('#preferred-store-panel .close').attr('disabled', false);
  			});
 
  		},

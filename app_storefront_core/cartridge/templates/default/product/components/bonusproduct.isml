@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${pdict.Product.master && pdict.CurrentVariationModel && pdict.CurrentVariationModel.variants.size() > 0}">
 	<isset name="imageProduct" value="${pdict.CurrentVariationModel.variants[0]}" scope="page"/>
 <iselse/>
@@ -65,7 +66,7 @@
 
 	<div class="product-add-to-cart">
 	
-		<form action="${URLUtils.getURL()('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
+		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
 			<fieldset>
 				
 				<isinclude template="product/components/options"/>		

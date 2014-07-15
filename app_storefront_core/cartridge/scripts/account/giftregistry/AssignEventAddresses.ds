@@ -78,7 +78,7 @@ function addAddress(addressFields : FormGroup, addressBook : AddressBook) {
 	address.setAddress1( addressFields.address1.value );
 	address.setAddress2( addressFields.address2.value );
 	address.setCity( addressFields.city.value );
-	address.setPostalCode( addressFields.zip.value );
+	address.setPostalCode( addressFields.postal.value );
 	address.setStateCode( addressFields.states.state.value );
 	address.setCountryCode( addressFields.country.value );
 	address.setPhone( addressFields.phone.value );
@@ -115,7 +115,7 @@ function isAddressChanged(addressFields : FormGroup, address : CustomerAddress) 
 		return true;
 	}
 	
-	if ( addressFields.zip.value != address.postalCode ) {
+	if ( addressFields.postal.value != address.postalCode ) {
 		return true;
 	}
 	

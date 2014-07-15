@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
 <iscomment>
 	This template renders the summary of the current basket at the right hand side
@@ -10,11 +11,9 @@
 	<isset name="checkoutstep" value="${pdict.checkoutstep}" scope="page"/>
 </isif>
 
-<isif condition="${!empty(checkoutstep) && (checkoutstep >= 2)}">
-
-		<iscontentasset aid="cs-contact-number"/>
-
-		<isif condition="${checkoutstep <= 5}">
+<isif condition="${typeof checkoutstep !== 'undefined' && !empty(checkoutstep) && (checkoutstep >= 2)}">
+	<iscontentasset aid="cs-contact-number"/>
+	<isif condition="${checkoutstep <= 5}">
 		<h3 class="section-header">
 			<iscomment>
 				The edit link depends on the basket content: if there is just one gift 
@@ -32,9 +31,7 @@
       		<isif condition="${checkoutstep  != 5}">
         		<isminilineitems p_lineitemctnr="${pdict.Basket}"/>
       		</isif>
-			
 		</div>
-		
 	</isif>
 
 	<iscomment>render the order totals</iscomment>
@@ -51,9 +48,6 @@
 		<isinclude template="checkout/shipping/minishipments"/>
 	</isif>
 	
-
 	<iscomment>render billing information: billing address and payment instruments</iscomment>	
 	<isinclude template="checkout/billing/minibillinginfo"/>
-	
-
 </isif>

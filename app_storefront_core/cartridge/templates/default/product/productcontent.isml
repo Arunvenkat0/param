@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${false&&pdict.resetAttributes}">
 	<isscript>
 		importScript("product/ProductUtils.ds"); 
@@ -142,8 +143,7 @@
 				<isif condition="${!pdict.Product.master}">
 					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
 					<span class="value"><isinclude template="product/components/availability"/></span>
-						<div class="availability-results online-stock">
-						</div>
+					<div class="availability-results online-stock"></div>
 					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 						<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
 							<div  id="${pdict.Product.ID}"  class="availability-results store-stock">
@@ -151,8 +151,7 @@
 						<iselse/>	
 							<div  id="${pdict.CurrentHttpParameterMap.uuid.value}"  class="availability-results store-stock">
 						</isif>
-							
-						</div>
+							</div>
 					</isif>
 				</isif>
 				</div>

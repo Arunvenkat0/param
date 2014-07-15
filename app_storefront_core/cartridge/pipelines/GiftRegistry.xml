@@ -25,7 +25,7 @@
   <branch basename="RequireLogin">
     <segment>
       <node>
-        <start-node name="RequireLogin" secure="false"/>
+        <start-node name="RequireLogin" secure="true"/>
         <node-display x="2" y="1"/>
       </node>
       <simple-transition/>
@@ -157,7 +157,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="SubmitFormLanding" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="SubmitFormLanding" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/giftregistrylanding"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -234,22 +234,14 @@
         <branch basename="b4" source-connector="search">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
+              <bend-point relative-to="source" x="-2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="GiftRegistry-Search"/>
-              <node-display x="-1" y="0"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node/>
-              <node-display x="0" y="1"/>
+              <jump-node start-name-ref="GiftRegistry-Search"/>
+              <node-display x="-1" y="1"/>
             </node>
           </segment>
         </branch>
@@ -380,7 +372,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="registrymain" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="registrymain" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/registrylist"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -823,7 +815,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="EventParticipant" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="EventParticipant" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/eventparticipant"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -922,7 +914,7 @@
               </transition-display>
             </simple-transition>
             <node>
-              <interaction-continue-node secure="false" start-name="ParticipantAddresses" transaction-required="false">
+              <interaction-continue-node secure="true" start-name="ParticipantAddresses" transaction-required="false">
                 <template buffered="true" dynamic="false" name="account/giftregistry/addresses"/>
               </interaction-continue-node>
               <node-display x="0" y="1"/>
@@ -945,7 +937,6 @@
                       <config-property key="OnError" value="PIPELET_ERROR"/>
                       <config-property key="ScriptFile" value="account/giftregistry/CopyAddressFormFields.ds"/>
                       <key-binding alias="test" key="ScriptLog"/>
-                      <key-binding alias="CurrentForms.giftregistry" key="EventAddressForm"/>
                       <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                     </pipelet-node>
                     <node-display orientation="horizontal" x="-1" y="-1"/>
@@ -1540,13 +1531,7 @@
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
                             <config-property key="Transactional" value="true"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress" key="EventAddressForm"/>
                             <key-binding alias="ProductList" key="ProductList"/>
-                            <key-binding alias="null" key="TestMessage"/>
-                            <key-binding alias="CurrentCustomer.profile.addressBook" key="AddressBook"/>
-                            <key-binding alias="CurrentCustomer" key="AddressBook1"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="PostShippingAddressID"/>
-                            <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="PreShippingAddressID"/>
                             <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                             <key-binding alias="CurrentCustomer" key="Customer"/>
                           </pipelet-node>
@@ -1797,7 +1782,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="Edit Event Participant" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="Edit Event Participant" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/eventparticipant"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -2118,7 +2103,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="ShowPurchasesInteraction" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="ShowPurchasesInteraction" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/purchases"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -2260,7 +2245,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="ShowRegistryInteraction" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="ShowRegistryInteraction" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/registry"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -2600,7 +2585,7 @@
   <branch basename="UpdateAddress">
     <segment>
       <node>
-        <start-node name="UpdateAddress" secure="false"/>
+        <start-node name="UpdateAddress" secure="true"/>
         <node-display x="18" y="10"/>
       </node>
       <transition target-connector="in1" target-path="/CreateOne.2/b3.2">
@@ -2634,7 +2619,7 @@
   <branch basename="Search">
     <segment>
       <node>
-        <start-node name="Search" secure="false"/>
+        <start-node name="Search" secure="true"/>
         <node-display x="1" y="14"/>
       </node>
       <simple-transition>
@@ -2667,7 +2652,11 @@
         <join-node/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <interaction-continue-node secure="false" start-name="SearchGiftRegistry" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/giftregistryresults"/>
@@ -2937,7 +2926,7 @@
   <branch basename="ReplaceProductListItem">
     <segment>
       <node>
-        <start-node name="ReplaceProductListItem" secure="false"/>
+        <start-node name="ReplaceProductListItem" secure="true"/>
         <node-display x="1" y="21"/>
       </node>
       <simple-transition>
@@ -2978,10 +2967,8 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
-          <key-binding alias="CurrentHttpParameterMap.pid.stringValue" key="pid"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
-          <key-binding alias="WishList" key="UpdatedProductList"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
@@ -3188,7 +3175,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="Edit Addresses" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="Edit Addresses" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/addresses"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -3399,15 +3386,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
                 <config-property key="Transactional" value="true"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress" key="EventAddressForm"/>
                 <key-binding alias="ProductList" key="ProductList"/>
-                <key-binding alias="null" key="TestMessage"/>
-                <key-binding alias="CurrentCustomer.profile.addressBook" key="AddressBook"/>
-                <key-binding alias="CurrentCustomer" key="AddressBook1"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="postShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="preShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value" key="PostShippingAddressID"/>
-                <key-binding alias="CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value" key="PreShippingAddressID"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
                 <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
               </pipelet-node>

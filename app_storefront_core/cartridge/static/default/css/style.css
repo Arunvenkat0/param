@@ -23,7 +23,7 @@ ul.menu li{float:left;list-style:none outside none !important;}
 #wrapper{background:none repeat scroll 0 0 #FFFFFF;border:3px solid #FFFFFF;margin:auto;max-width:960px;width:960px;}
 header {position:relative;margin-left:10px;margin-right:10px;}
 .primary-content{border-left:1px solid #D9D9D9;float:right;margin-left:-1px;padding:0 0 20px;position:relative;width:787px;}
-#secondary{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;border-right:1px solid #D9D9D9;float:left;width:172px;}
+#secondary{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;border-right:1px solid #D9D9D9;float:left;width:172px;position:relative;}
 #secondary nav {padding-left:10px; padding-right:10px;}
 #secondary nav a {margin-left:15px;}
 .primary-focus .primary-content{border:0 none;float:left;margin:0;width:709px;}
@@ -54,16 +54,12 @@ header {position:relative;margin-left:10px;margin-right:10px;}
 /* form components */
 /* ------------------------------------- */
 
-.button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
-button,a.buttonstyle{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
-input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
+button,.button,a.buttonstyle,input[type="button"]{background:none repeat scroll 0 0 #FFFFFF;border-color:#CCCCCC #CCCCCC #D0D0D0;border-style:solid;border-width:1px 1px 4px;color:#3EBAEA;cursor:pointer;display:inline-block;font-size:1.1em;font-weight:700;padding:0.6em 2em 0.5em;text-align:center;}
 button[disabled],input[disabled]{color:#CCCCCC;}
 .button-fancy-small{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1em;font-weight:400;text-transform:uppercase;}
 .button-fancy-medium{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-weight:400;text-transform:uppercase;}
 .button-fancy-large{background:url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01A4E4;color:#FFFFFF !important;font-size:1.75em;font-weight:400;padding:0.5em 1em;text-transform:uppercase;}
-.button-fancy-small[disabled]{opacity:0.5}
-.button-fancy-medium[disabled]{opacity:0.5}
-.button-fancy-large[disabled]{opacity:0.5}
+.button-fancy-small[disabled],.button-fancy-medium[disabled],.button-fancy-large[disabled]{opacity:0.5}
 
 .button-text{background:none repeat scroll 0 0 transparent;border:0 none;font-weight:400;padding:0;}
 .button-full-width{padding-left:0;padding-right:0;text-align:center;width:100%;}
@@ -131,6 +127,7 @@ div.error{background:none repeat scroll 0 0 transparent;}
 /* tables used for product lists (wishlist, gift reg) */
 /* ------------------------------------- */
 
+table.item-list {margin-bottom:1em;}
 table.item-list tr{border-bottom:1px solid #D9D9D9;}
 table.item-list tr.last{border:0 none;}
 table.item-list tr.headings{display:none;}
@@ -631,9 +628,9 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .buttonbar{margin:11px 0;overflow:hidden;width:336px;}
 .bonus-product-list .bonus-product-item{border-bottom:1px solid #E0E0E0;clear:both;}
 .bonus-product-list .product-name{float:none;margin:1em 0;}
-.bonus-product-list .product-add-to-cart button{float:left;margin-top:24px;}
+.bonus-product-list .product-add-to-cart button{float:left;margin-top:22px;margin-left: 2%;}
 .bonus-product-list-footer{clear:both;}
-.bonus-product-list-footer button{float:right;}
+.bonus-product-list-footer button{float:right;margin-top: -2%;}
 
 /* send to friend */
 /* ------------------------------------- */
@@ -688,7 +685,8 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .cart-order-totals{float:right;width:40%;margin-top:26px;}
 .cart-order-totals button{float:right;}
 .order-totals-table th{display:none;}
-.order-totals-table td{padding:5px 0;text-align:right !important;}
+.order-totals-table td{padding:5px 0;text-align:right !important;word-break:break-all;}
+.order-totals-table td+td{word-break:normal;}
 .order-totals-table .order-total{font-size:1.3em;font-weight:700;}
 .order-totals-item{width:60%;}
 .order-totals-value{width:40%;}
@@ -720,9 +718,12 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .checkout-progress-indicator .active{font-weight:700;}
 .checkout-progress-indicator .step-3{background:none repeat scroll 0 0 transparent;padding-right:0;}
 .select-address{padding:2em 0;}
-.shipping-method{padding:22px 0 0 28%;}
+.shipping-method{padding:0;margin: 22px -104px 0;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
+
+.shipping-status{padding:0;margin: 0 -57px 0;}
+.redemption .success{color:green;}
 .redemption{color:#990000;}
 .redemption span.error{margin-left:0;}
 .payment-method-options{padding-left:24%;}
@@ -753,6 +754,8 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .order-summary-footer h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
 .summary-help{float:right;font-size:0.8em;margin:1em 0;}
 .submit-order{clear:both;display:block;padding:20px 0 0;text-align:right;}
+.submit-order .back-to-cart {font-size: 1.5em;}
+.submit-order .back-to-cart:hover {text-decoration: underline;}
 .submit-order button{margin-left:1.5em;}
 .pt_order-confirmation h1{font-size:2.5em;}
 .pt_order-confirmation .order-shipment-table{margin:0 0 20px;}
@@ -774,9 +777,11 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .order-shipment-details .label { position:absolute;width:150px;text-align:right;font-weight:bold}
 .order-shipment-details .value { margin-left:155px;}
 .order-shipment-details .order-shipment-address { width:240px;}
+.item-shipping-address {min-width: 120px;}
 
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
 .order-shipment-gift-message {font-size: 1.1em;}
+.billing-error {color:red; margin: 0 0 10px 24%;}
 
 
 /* multishipping elements */

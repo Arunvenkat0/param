@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/pt_checkout"/>
 <isinclude template="util/modules"/>
 
@@ -65,7 +66,7 @@
 							
 							<td class="item-details">
 								<iscomment>Display product line and product using module</iscomment>
-								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${true}"/>
+								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 							</td>
 							
 							<td class="item-quantity">
@@ -73,7 +74,6 @@
 							</td>
 							
 							<td class="item-quantity-details">
-								<div class="editdetails"><a href="${URLUtils.url('Cart-Show')}">${Resource.msg('global.editdetails','locale',null)}</a></div>
 								<div class="item-stock">
 									<isdisplayproductavailability p_productli="${productLineItem}"/>
 								</div>
@@ -219,7 +219,7 @@
 			<form action="${URLUtils.https('COSummary-Submit')}" method="post" class="submit-order">
 				<fieldset>
 					<div class="form-row">
-						<a href="${URLUtils.http('Cart-Show')}">
+						<a class="back-to-cart" href="${URLUtils.http('Cart-Show')}">
 							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
 						</a>
 						<button class="button-fancy-large" type="submit" name="submit" value="${Resource.msg('global.submitorder','locale',null)}">

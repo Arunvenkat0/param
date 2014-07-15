@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="error/pt_error">
 <iscache type="relative" hour="24"/>
 <isinclude template="util/modules"/>

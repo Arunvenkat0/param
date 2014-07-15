@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24" varyby="price_promotion"/>
 <iscomment>
 	This template renders a product in the search result using a ProductSearchHit object.
@@ -310,7 +311,7 @@
 				<iscomment>render a single swatch, the url to the proper product detail page is contained in the href of the swatch link</iscomment>
 				<li>
 					<a href="${swatchproductUrl}" class="swatch ${(preselectCurrentSwatch) ? 'selected' : ''}" title="<isprint value="${colorValue.displayValue}"/>">
-						<img src="${swatchUrl}" alt="${swatchAlt}" title="${swatchTitle}" data-thumb='{"src":"${thumbnailUrl}","alt":"${thumbnailAlt}","title":"${thumbnailTitle}"}'/>
+						<img src="${swatchUrl}" alt="${swatchAlt}" title="${swatchTitle}" data-thumb='{"src":"${thumbnailUrl}","alt":"<isprint value="${thumbnailAlt}"/>","title":"<isprint value="${thumbnailTitle}"/>"}'/>
 					</a>
 				</li>
 
