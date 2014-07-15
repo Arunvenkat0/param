@@ -2619,7 +2619,7 @@
         <template/>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="alternativeUrl">$url('GiftCert-Purchase')$</custom-attribute>
+            <custom-attribute attribute-id="alternativeUrl">$httpsUrl('GiftCert-Purchase')$</custom-attribute>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
         </custom-attributes>
