@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${!empty(pdict.Order)}">
 
 	<iscomment>Log the total amount of orders the customer has</iscomment>

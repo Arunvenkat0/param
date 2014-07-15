@@ -366,12 +366,58 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           </segment>
         </branch>
       </node>
-      <transition target-connector="in1" target-path="./+1"/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="-1" y="-1"/>
+          <bend-point relative-to="target" x="-1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="CurrentCustomer.authenticated &amp;&amp; CurrentCustomer.registered &amp;&amp; !empty(CurrentCustomer.addressBook.preferredAddress)" condition-operator="expr"/>
+        <node-display orientation="horizontal" x="-1" y="1"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="UpdateFormWithObject" pipelet-set-identifier="bc_api">
+                <config-property key="Clear" value="false"/>
+                <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields" key="Form"/>
+                <key-binding alias="CurrentCustomer.addressBook.preferredAddress" key="Object"/>
+              </pipelet-node>
+              <node-display x="1" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <pipelet-node custom-name="Bind stateCode to sub form group" pipelet-name="UpdateFormWithObject" pipelet-set-identifier="bc_api">
+                <config-property key="Clear" value="false"/>
+                <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields.states" key="Form"/>
+                <key-binding alias="CurrentCustomer.addressBook.preferredAddress" key="Object"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="target" x="-2" y="0"/>
+        </transition-display>
+      </transition>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="4"/>
+        <node-display x="1" y="3"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -418,7 +464,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="SelectShippingMethod">
     <segment>
       <node>
-        <start-node name="SelectShippingMethod" secure="false"/>
+        <start-node name="SelectShippingMethod" secure="true"/>
         <node-display x="11" y="4"/>
       </node>
       <simple-transition/>
@@ -440,8 +486,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetApplicableShippingMethods.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
-          <key-binding alias="CurrentShippingMethod.ID" key="ShippingMethodID"/>
-          <key-binding alias="Basket.defaultShipment" key="Shipment"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="ApplicableShippingMethods" key="ShippingMethods"/>
           <key-binding alias="CurrentHttpParameterMap.city.stringValue" key="City"/>
@@ -523,7 +567,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateShippingMethodList">
     <segment>
       <node>
-        <start-node name="UpdateShippingMethodList" secure="false"/>
+        <start-node name="UpdateShippingMethodList" secure="true"/>
         <node-display x="15" y="4"/>
       </node>
       <simple-transition/>
@@ -551,8 +595,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetApplicableShippingMethods.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
-          <key-binding alias="CurrentShippingMethod.ID" key="ShippingMethodID"/>
-          <key-binding alias="Basket.defaultShipment" key="Shipment"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="ApplicableShippingMethods" key="ShippingMethods"/>
           <key-binding alias="CurrentHttpParameterMap.city.stringValue" key="City"/>
@@ -665,7 +707,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                 <key-binding alias="log" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="Method" key="Method"/>
-                <key-binding alias="ShippingCosts" key="ShippingCosts"/>
                 <key-binding alias="ShippingCost" key="ShippingCost"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
@@ -791,7 +832,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="GetApplicableShippingMethodsJSON">
     <segment>
       <node>
-        <start-node name="GetApplicableShippingMethodsJSON" secure="false"/>
+        <start-node name="GetApplicableShippingMethodsJSON" secure="true"/>
         <node-display x="19" y="4"/>
       </node>
       <simple-transition/>
@@ -806,8 +847,6 @@ This pipeline implements the logic for the default (single) shipping scenario. I
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/GetApplicableShippingMethods.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
-          <key-binding alias="CurrentShippingMethod.ID" key="ShippingMethodID"/>
-          <key-binding alias="Basket.defaultShipment" key="Shipment"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="ApplicableShippingMethods" key="ShippingMethods"/>
           <key-binding alias="CurrentHttpParameterMap.city.stringValue" key="City"/>
@@ -880,7 +919,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateAddress">
     <segment>
       <node>
-        <start-node name="UpdateAddress" secure="false"/>
+        <start-node name="UpdateAddress" secure="true"/>
         <node-display x="3" y="13"/>
       </node>
       <transition target-connector="in1" target-path="/Start.1/b3.1/b2.1">
@@ -1419,7 +1458,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
   <branch basename="UpdateAddressDetails">
     <segment>
       <node>
-        <start-node name="UpdateAddressDetails" secure="false"/>
+        <start-node name="UpdateAddressDetails" secure="true"/>
         <node-display x="14" y="21"/>
       </node>
       <simple-transition/>

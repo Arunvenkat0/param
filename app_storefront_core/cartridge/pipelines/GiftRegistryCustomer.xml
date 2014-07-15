@@ -15,7 +15,7 @@
   <branch basename="Show">
     <segment>
       <node>
-        <start-node name="Show" secure="false">
+        <start-node name="Show" secure="true">
           <start-parameter value="GiftRegistryID"/>
         </start-node>
         <node-display x="1" y="2"/>
@@ -258,7 +258,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="ShowInteraction" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="ShowInteraction" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/registrycustomer"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -308,23 +308,13 @@
         <branch basename="b3" source-connector="search">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="GiftRegistry-Search"/>
+              <jump-node start-name-ref="GiftRegistry-Search"/>
               <node-display x="1" y="2"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <end-node/>
-              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -344,7 +334,7 @@
   <branch basename="PurchaseGiftCertificate">
     <segment>
       <node>
-        <start-node call-mode="public" name="PurchaseGiftCertificate" secure="false"/>
+        <start-node call-mode="public" name="PurchaseGiftCertificate" secure="true"/>
         <node-display x="5" y="2"/>
       </node>
       <simple-transition/>

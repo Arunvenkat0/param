@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/pt_checkout">
 <isinclude template="util/modules"/>
 
@@ -126,7 +127,7 @@
 			    	
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
 			    	
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.zip}" type="input"/>
+			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 			    	
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 						
@@ -149,7 +150,7 @@
 					
 					<iscomment>Is this a gift</iscomment>
 				    <div class="form-row">
-				    	<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/>:</label>
+				    	<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
 			    		<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> Yes
 			    		<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> No
 				    </div>
@@ -165,13 +166,14 @@
 		<fieldset>
 		
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+				<isset name="instoreShipmentsExists" value="${false}" scope="page"/>
 				<isinclude template="checkout/shipping/storepickup/instoremessages"/>
 			<iselse/>
-				<isset name="instoreShipmentsExistst" value="${false}" scope="page"/>		
+				<isset name="instoreShipmentsExists" value="${false}" scope="page"/>		
 			</isif>
 		
 			
-			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExistst}">
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExists}">
 				<div class="form-row form-row-button instore-continue-button">
 			<iselse/>
 				<div class="form-row form-row-button">
@@ -195,10 +197,8 @@
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var stateForm = pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states;
-	var countryField = pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country; 
-	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
-	
+	var addressForm = pdict.CurrentForms.singleshipping.shippingAddress.addressFields;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);		
 </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>

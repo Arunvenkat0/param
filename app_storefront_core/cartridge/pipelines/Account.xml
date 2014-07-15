@@ -766,7 +766,7 @@
   <branch basename="PasswordResetDialog">
     <segment>
       <node>
-        <start-node name="PasswordResetDialog" secure="false"/>
+        <start-node name="PasswordResetDialog" secure="true"/>
         <node-display x="13" y="2"/>
       </node>
       <simple-transition>
@@ -789,7 +789,7 @@
       </node>
       <simple-transition/>
       <node>
-        <interaction-continue-node secure="false" start-name="PasswordResetDialogForm" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="PasswordResetDialogForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/password/requestpasswordresetdialog"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -982,7 +982,7 @@
   <branch basename="PasswordReset">
     <segment>
       <node>
-        <start-node name="PasswordReset" secure="false"/>
+        <start-node name="PasswordReset" secure="true"/>
         <node-display x="18" y="2"/>
       </node>
       <simple-transition/>
@@ -1005,7 +1005,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <interaction-continue-node secure="false" start-name="PasswordResetForm" transaction-required="false">
+        <interaction-continue-node secure="true" start-name="PasswordResetForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/password/requestpasswordreset"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
@@ -1187,7 +1187,7 @@
   <branch basename="SetNewPassword">
     <segment>
       <node>
-        <start-node name="SetNewPassword" secure="false"/>
+        <start-node name="SetNewPassword" secure="true"/>
         <node-display x="23" y="2"/>
       </node>
       <simple-transition/>
@@ -1237,7 +1237,7 @@
               </transition-display>
             </simple-transition>
             <node>
-              <interaction-continue-node secure="false" start-name="SetNewPasswordForm" transaction-required="false">
+              <interaction-continue-node secure="true" start-name="SetNewPasswordForm" transaction-required="false">
                 <template buffered="true" dynamic="false" name="account/password/setnewpassword"/>
               </interaction-continue-node>
               <node-display x="0" y="1"/>
@@ -1505,7 +1505,7 @@
   <branch basename="SetNewPasswordConfirm">
     <segment>
       <node>
-        <start-node name="SetNewPasswordConfirm" secure="false"/>
+        <start-node name="SetNewPasswordConfirm" secure="true"/>
         <node-display x="27" y="2"/>
       </node>
       <simple-transition>
@@ -1534,7 +1534,7 @@
   <branch basename="StartRegister">
     <segment>
       <node>
-        <start-node name="StartRegister" secure="false"/>
+        <start-node name="StartRegister" secure="true"/>
         <node-display x="1" y="7"/>
       </node>
       <transition target-connector="in1" target-path="./+1"/>
@@ -1548,25 +1548,7 @@
       <node>
         <call-node start-name-ref="Account-Register"/>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="cancel">
-          <transition target-connector="in1">
-            <transition-display>
-              <bend-point relative-to="target" x="-1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="1"/>
-            </node>
-            <transition target-connector="in1" target-path="..">
-              <transition-display>
-                <bend-point relative-to="target" x="2" y="0"/>
-              </transition-display>
-            </transition>
-          </segment>
-        </branch>
-        <branch basename="b3" source-connector="ok">
+        <branch basename="b2" source-connector="ok">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -1726,7 +1708,11 @@
                     </pipelet-node>
                     <node-display x="0" y="1"/>
                   </node>
-                  <simple-transition/>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
                   <node>
                     <end-node name="ok"/>
                     <node-display x="0" y="1"/>
@@ -2213,7 +2199,7 @@
   <branch basename="UpdateName">
     <segment>
       <node>
-        <start-node name="UpdateName" secure="false"/>
+        <start-node name="UpdateName" secure="true"/>
         <node-display x="11" y="25"/>
       </node>
       <simple-transition/>
@@ -2292,7 +2278,7 @@
   <branch basename="Connect">
     <segment>
       <node>
-        <start-node name="Connect" secure="false"/>
+        <start-node name="Connect" secure="true"/>
         <node-display x="1" y="30"/>
       </node>
       <simple-transition>

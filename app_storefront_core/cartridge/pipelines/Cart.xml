@@ -262,19 +262,41 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addCoupon">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
-              <call-node start-name-ref="Cart-AddCoupon"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="CurrentForms.cart.couponCode.htmlValue" key="From_0"/>
+                <key-binding alias="CouponCode" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
               <node-display x="1" y="7"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
             <node>
-              <call-node start-name-ref="Cart-Calculate"/>
+              <call-node start-name-ref="Cart-AddCoupon"/>
               <node-display x="0" y="1"/>
             </node>
             <transition target-connector="in1" target-path="./+1"/>
@@ -1537,7 +1559,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="AddToWishlist">
     <segment>
       <node>
-        <start-node name="AddToWishlist" secure="false"/>
+        <start-node name="AddToWishlist" secure="true"/>
         <node-display x="18" y="13"/>
       </node>
       <simple-transition/>
@@ -2071,7 +2093,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="cart/ParseBonusProductsJSON.ds"/>
-          <key-binding alias="Products" key="products"/>
           <key-binding alias="Products" key="Products"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
         </pipelet-node>
@@ -2165,8 +2186,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="cart/UpdateProductOptionSelections.ds"/>
-                <key-binding alias="Product" key="product"/>
-                <key-binding alias="new dw.util.ArrayList(bonusPid.options)" key="options"/>
                 <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
                 <key-binding alias="new dw.util.ArrayList(product.options)" key="SelectedOptions"/>
                 <key-binding alias="Product" key="Product"/>
@@ -2290,7 +2309,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="AddBonusProductBundle">
     <segment>
       <node>
-        <start-node name="AddBonusProductBundle" secure="false"/>
+        <start-node call-mode="private" name="AddBonusProductBundle" secure="false"/>
         <node-display x="5" y="35"/>
       </node>
       <simple-transition/>
@@ -2357,8 +2376,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="cart/UpdateProductOptionSelections.ds"/>
-                <key-binding alias="Product" key="product"/>
-                <key-binding alias="new dw.util.ArrayList(bonusPid.options)" key="options"/>
                 <key-binding alias="ProductOptionModel" key="ProductOptionModel"/>
                 <key-binding alias="new dw.util.ArrayList(product.options)" key="SelectedOptions"/>
                 <key-binding alias="ChildProduct" key="Product"/>
@@ -2469,7 +2486,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
   <branch basename="NewBonusDiscountLineItem">
     <segment>
       <node>
-        <start-node name="NewBonusDiscountLineItem" secure="false"/>
+        <start-node call-mode="private" name="NewBonusDiscountLineItem" secure="false"/>
         <node-display x="9" y="35"/>
       </node>
       <simple-transition>
@@ -2709,11 +2726,6 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="Cart-AddCoupon"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
         <call-node start-name-ref="Cart-Calculate"/>
         <node-display x="0" y="1"/>
       </node>
@@ -2733,22 +2745,143 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_43">
+    <segment>
+      <node>
+        <text-node>
+          <description>AddCoupon expects a CouponCode variable in the pdict</description>
+        </text-node>
+        <node-display x="13" y="41"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="AddCoupon">
     <segment>
       <node>
-        <start-node call-mode="public" name="AddCoupon" secure="false"/>
+        <start-node call-mode="private" name="AddCoupon" secure="false"/>
         <node-display x="13" y="42"/>
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="Cart-GetBasket"/>
+        <decision-node condition-key="CouponCode" condition-operator="expr"/>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="Cart-GetBasket"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="AddCouponToBasket2" pipelet-set-identifier="bc_api">
+                <key-binding alias="Basket" key="Basket"/>
+                <key-binding alias="CouponCode" key="CouponCode"/>
+                <key-binding alias="CouponStatus" key="Status"/>
+                <key-binding alias="null" key="CouponLineItem"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="1" y="0"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <decision-node condition-key="empty(CouponCode)" condition-operator="expr"/>
+                    <node-display orientation="horizontal" x="1" y="0"/>
+                    <branch basename="b2" source-connector="yes">
+                      <transition target-connector="in">
+                        <transition-display>
+                          <bend-point relative-to="source" x="1" y="0"/>
+                          <bend-point relative-to="source" x="2" y="0"/>
+                        </transition-display>
+                      </transition>
+                      <segment>
+                        <node>
+                          <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="false"/>
+                            <key-binding alias="'COUPON_CODE_MISSING'" key="From_0"/>
+                            <key-binding alias="null" key="From_2"/>
+                            <key-binding alias="null" key="To_2"/>
+                            <key-binding alias="null" key="From_3"/>
+                            <key-binding alias="null" key="To_3"/>
+                            <key-binding alias="null" key="From_4"/>
+                            <key-binding alias="null" key="To_4"/>
+                            <key-binding alias="null" key="From_5"/>
+                            <key-binding alias="null" key="To_5"/>
+                            <key-binding alias="null" key="From_6"/>
+                            <key-binding alias="null" key="To_6"/>
+                            <key-binding alias="null" key="From_7"/>
+                            <key-binding alias="null" key="To_7"/>
+                            <key-binding alias="null" key="From_8"/>
+                            <key-binding alias="null" key="To_8"/>
+                            <key-binding alias="null" key="From_9"/>
+                            <key-binding alias="null" key="To_9"/>
+                            <key-binding alias="CouponError" key="To_0"/>
+                          </pipelet-node>
+                          <node-display x="1" y="1"/>
+                        </node>
+                        <transition target-connector="in1" target-path="../../+1">
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="2"/>
+                            <bend-point relative-to="target" x="2" y="0"/>
+                          </transition-display>
+                        </transition>
+                      </segment>
+                    </branch>
+                  </node>
+                  <transition target-connector="in1" target-path="../+1">
+                    <transition-display>
+                      <bend-point relative-to="target" x="2" y="0"/>
+                    </transition-display>
+                  </transition>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="Cart-Calculate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="AddCouponJson">
+    <segment>
+      <node>
+        <start-node name="AddCouponJson" secure="false"/>
+        <node-display x="16" y="42"/>
       </node>
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="CurrentHttpParameterMap.couponCode.stringValue || CurrentForms.cart.couponCode.htmlValue" key="From_0"/>
+          <key-binding alias="CurrentHttpParameterMap.couponCode.stringValue" key="From_0"/>
           <key-binding alias="CouponCode" key="To_0"/>
           <key-binding alias="null" key="From_1"/>
           <key-binding alias="null" key="To_1"/>
@@ -2773,90 +2906,23 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node pipelet-name="AddCouponToBasket2" pipelet-set-identifier="bc_api">
-          <key-binding alias="Basket" key="Basket"/>
-          <key-binding alias="CouponCode" key="CouponCode"/>
-          <key-binding alias="CouponStatus" key="Status"/>
-          <key-binding alias="null" key="CouponLineItem"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <decision-node condition-key="empty(CouponCode)" condition-operator="expr"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
-              <branch basename="b2" source-connector="yes">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="source" x="1" y="0"/>
-                    <bend-point relative-to="source" x="2" y="0"/>
-                  </transition-display>
-                </transition>
-                <segment>
-                  <node>
-                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                      <config-property key="Transactional" value="false"/>
-                      <key-binding alias="'COUPON_CODE_MISSING'" key="From_0"/>
-                      <key-binding alias="null" key="From_2"/>
-                      <key-binding alias="null" key="To_2"/>
-                      <key-binding alias="null" key="From_3"/>
-                      <key-binding alias="null" key="To_3"/>
-                      <key-binding alias="null" key="From_4"/>
-                      <key-binding alias="null" key="To_4"/>
-                      <key-binding alias="null" key="From_5"/>
-                      <key-binding alias="null" key="To_5"/>
-                      <key-binding alias="null" key="From_6"/>
-                      <key-binding alias="null" key="To_6"/>
-                      <key-binding alias="null" key="From_7"/>
-                      <key-binding alias="null" key="To_7"/>
-                      <key-binding alias="null" key="From_8"/>
-                      <key-binding alias="null" key="To_8"/>
-                      <key-binding alias="null" key="From_9"/>
-                      <key-binding alias="null" key="To_9"/>
-                      <key-binding alias="CouponError" key="To_0"/>
-                    </pipelet-node>
-                    <node-display x="1" y="1"/>
-                  </node>
-                  <transition target-connector="in1" target-path="../../+1">
-                    <transition-display>
-                      <bend-point relative-to="source" x="0" y="2"/>
-                      <bend-point relative-to="target" x="2" y="0"/>
-                    </transition-display>
-                  </transition>
-                </segment>
-              </branch>
-            </node>
-            <transition target-connector="in1" target-path="../+1">
-              <transition-display>
-                <bend-point relative-to="target" x="2" y="0"/>
-              </transition-display>
-            </transition>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="Cart-Calculate"/>
+        <call-node start-name-ref="Cart-AddCoupon"/>
         <node-display x="0" y="1"/>
       </node>
-      <transition target-connector="in1" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="CurrentHttpParameterMap.format.stringValue == 'ajax'" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <pipelet-node custom-name="create JSONResponse object" pipelet-name="Assign" pipelet-set-identifier="bc_api">
@@ -2879,11 +2945,14 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
                 <key-binding alias="null" key="To_9"/>
                 <key-binding alias="'cart.' + CouponStatus.code" key="From_1"/>
                 <key-binding alias="ResourceProperty" key="To_1"/>
-                <key-binding alias="JSONResponse.foo" key="To_2"/>
               </pipelet-node>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -2910,7 +2979,11 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="util/responsejson"/>
@@ -3240,7 +3313,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_45">
+  <branch basename="_ANONYMOUS_BRANCH_47">
     <segment>
       <node>
         <text-node>

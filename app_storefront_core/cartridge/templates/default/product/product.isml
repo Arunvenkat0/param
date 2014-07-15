@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Renders product detail page both quickview and normal view.
 	If the product is a product set or bundle, then it also includes subproduct template to 
@@ -18,41 +19,49 @@
 	var PMapValue = '';
 	
 	
-	for(x = 0; x<requestQueryStringArray.length ;x++){
+	for (x = 0; x < requestQueryStringArray.length ;x++) {
 	
 		PMapValue = requestQueryStringArray[x];
 		
-		if(PMapValue.indexOf('color') != -1){
+		if (PMapValue.indexOf('color') != -1) {
 			productColorValue = PMapValue.split('=')[1];
 		}
 	}
-
+	
 </isscript>
-
 
 <iscomment>select the size if there is only one</iscomment>
 <isif condition="${pdict.CurrentVariationModel != null}">
 	<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
-<iselse/>
+	<isset name="variantSelected" value="${pdict.CurrentVariationModel.selectedVariant != null}" scope="PAGE" />
+<iselse>
 	<isset name="PVM" value="${pdict.Product.variationModel}" scope="PAGE" />
+	<isset name="variantSelected" value="${false}" scope="PAGE" />
 </isif>
-			
-<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-	<isset name="VAVALS" value="${PVM.getAllValues(VA)}" scope="page"/>
-	<isset name="Valength" value="${VAVALS.length}" scope="page"/>
-	<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
-	<isif condition="${vaId=='size'}">
-		<isif condition="${Valength==1}">
-			<isscript>
-				var variant = PVM.variants[0];
-				var productVariationAttribute = PVM.getProductVariationAttribute("size");
-					productSizeValue = PVM.getVariationValue(variant, productVariationAttribute).value;
-			 </isscript>											
-		</isif>
-	</isif>
-</isloop>
 
-<isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
+<isif condition="${variantSelected}">
+	<isset name="variant" value="${PVM.selectedVariant}" scope="PAGE" />
+<iselse>
+	<isset name="variant" value="${(PVM.variants.length > 0) ? PVM.variants[0] : null}" scope="PAGE"/>
+</isif>
+
+<isif condition="${variant != null}">
+	<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
+		<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
+		<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
+		<isif condition="${vaId == 'size'}">
+			<isif condition="${variantSelected || valength == 1}">
+				<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
+			</isif>
+		<iselseif condition="${vaId == 'color'}">
+			<isif condition="${variantSelected || (productColorValue === '')}">
+				<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
+			</isif>
+		</isif>
+	</isloop>
+</isif>
+
+<isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
 <iscomment>pwr = power review write</iscomment>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>

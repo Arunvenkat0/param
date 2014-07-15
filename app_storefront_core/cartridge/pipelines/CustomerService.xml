@@ -101,8 +101,6 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="customerservice/GetCustomerServiceContent.ds"/>
           <key-binding alias="CustomerServiceLinks" key="CustomerServiceLinks"/>
-          <key-binding alias="LinkMap" key="LinkMap"/>
-          <key-binding alias="CurrentHttpParameterMap.aid.stringValue" key="aid"/>
           <key-binding alias="&quot;customer-service&quot;" key="FolderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -142,7 +140,7 @@
   <branch basename="ContactUs">
     <segment>
       <node>
-        <start-node name="ContactUs" secure="false"/>
+        <start-node name="ContactUs" secure="true"/>
         <node-display x="4" y="7"/>
       </node>
       <simple-transition/>

@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isset name="DecoratorTemplate" value="checkout/pt_checkout" scope="page"/>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
@@ -16,7 +17,7 @@
 		<span class = "required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 	</h1>
 
-	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">		
+	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">		
 		<fieldset>		
 			
 			<isif condition="${pdict.Status != null && pdict.Status.isError()}">				 
@@ -88,7 +89,7 @@
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.city}" type="input"/>
 	    	
-	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.zip}" type="input"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input"/>
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input"/>
 				
@@ -115,4 +116,12 @@
 		</fieldset>
 			
 	</form>
+	
+	<isscript>
+	importScript("util/ViewHelpers.ds");
+	var addressForm = pdict.CurrentForms.shippingaddress;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
+	var json = JSON.stringify(countries);		
+</isscript>
+<script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
 </isdecorate>

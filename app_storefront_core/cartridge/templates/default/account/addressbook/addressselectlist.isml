@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <select id="${pdict.p_listid}" name="${pdict.p_listid}" class="input-select">
 	
 	<iscomment>May be preferable to replace data-address attribute with ajax call</iscomment>

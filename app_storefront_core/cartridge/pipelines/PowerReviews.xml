@@ -85,7 +85,7 @@ pid (required) - product ID</description>
   <branch basename="WriteReview">
     <segment>
       <node>
-        <start-node name="WriteReview" secure="false"/>
+        <start-node name="WriteReview" secure="true"/>
         <node-display x="4" y="2"/>
       </node>
       <simple-transition/>

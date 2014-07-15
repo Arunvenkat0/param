@@ -1704,15 +1704,6 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <jump-node start-name-ref="COSummary-Start"/>
-        <node-display x="0" y="1"/>
-      </node>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_43">

@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/cart/pt_cart">
 	<isinclude template="util/modules" />
 	<isinclude template="util/reporting/ReportBasket.isml" />
@@ -556,7 +557,7 @@
 									</a>
 								</td>
 		
-								<td colspan="3" class="bonus-item-actions">
+								<td colspan="4" class="bonus-item-actions">
 									<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
 										${bonusButtonText}
 									</a>
@@ -655,7 +656,7 @@
 												</div>
 											</td>
 		
-											<td class="item-price"></td>
+											<td class="item-price">${new dw.value.Money(0.0, session.getCurrency().symbol)}</td>
 		
 											<td class="item-total">
 												<span class="bonus-item">

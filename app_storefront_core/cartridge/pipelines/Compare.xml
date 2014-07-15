@@ -37,7 +37,6 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="ScriptFile" value="catalog/GetCompareList.ds"/>
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="Comparison" key="ProductComparison"/>
           <key-binding alias="CurrentHttpParameterMap.category.value" key="SelectedCategory"/>
           <key-binding alias="CompareList" key="CompareList"/>
           <key-binding alias="null" key="ScriptLog"/>
@@ -375,7 +374,6 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="ScriptFile" value="catalog/GetCompareList.ds"/>
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="Comparison" key="ProductComparison"/>
           <key-binding alias="CurrentHttpParameterMap.category.value" key="SelectedCategory"/>
           <key-binding alias="CompareList" key="CompareList"/>
           <key-binding alias="null" key="ScriptLog"/>

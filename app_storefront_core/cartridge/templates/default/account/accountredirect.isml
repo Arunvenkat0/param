@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isredirect location="${URLUtils.https('Account-Show')}"/>
 
 <iscomment>a page with a meta refresh in case the browser doesn't follow the redirect</iscomment>

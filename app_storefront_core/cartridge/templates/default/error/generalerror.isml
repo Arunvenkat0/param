@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isset name="DecoratorTemplate" value="error/pt_error" scope="page"/>
 <isif condition="${!empty(pdict.nodecorator) && pdict.nodecorator == true}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
@@ -8,7 +9,7 @@
 
 <h1>${Resource.msg('generalerror.erroroccured','error',null)}</h1>
 
-	<isslot id="error-banner." description="Banner for error pages" context="global"/>
+	<isslot id="error-banner" description="Banner for error pages" context="global"/>
 
 		<div class="error-page-message">
 			<iscontentasset aid="error-callout"/>		

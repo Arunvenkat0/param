@@ -25,7 +25,6 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="checkout/CreatePaymentInstrument.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="&quot;PayPal&quot;" key="PaymentType"/>
           <key-binding alias="true" key="RemoveExisting"/>
           <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>

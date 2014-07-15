@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
-	<field formid="day" label="forms.day" type="integer" mandatory="false"
+	<field formid="day" label="forms.day" type="integer" mandatory="true"
 			missing-error="bml.dayerror">
 		<options>
 			<option label="forms.day" value=""/>
@@ -37,7 +37,7 @@
 			<option label="day.031" value="31"/>
 		</options>
 	</field>
-	<field formid="month" label="forms.month" type="integer" mandatory="false"
+	<field formid="month" label="forms.month" type="integer" mandatory="true"
 			missing-error="bml.montherror">
 		<options>
 			<option label="forms.month" value=""/>
@@ -55,7 +55,7 @@
 			<option label="month.december" value="12"/>
 		</options>
 	</field>
-	<field formid="year" label="forms.year" type="integer" mandatory="false"
+	<field formid="year" label="forms.year" type="integer" mandatory="true"
 			missing-error="bml.yearerror" value-error="bml.valueerror">
 		<options>
 			<option label="forms.year" value=""/>
@@ -122,7 +122,7 @@
 			<option label="year.1940" value="1940"/>
 		</options>
 	</field>
-	<field formid="ssn" label="bml.ssn" type="string" mandatory="false" min-length="4" max-length="4"
+	<field formid="ssn" label="bml.ssn" type="string" mandatory="true" min-length="4" max-length="4"
 			missing-error="bml.ssnerror"
 			range-error="bml.ssnerror"/>
 
