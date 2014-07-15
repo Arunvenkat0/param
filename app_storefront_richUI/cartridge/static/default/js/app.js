@@ -2245,32 +2245,31 @@ var app = (function (app, $) {
 	*/
 	function initmultishipshipaddress() {
 		var $continue = $('.formactions button');
-		var $selects = $('.selectbox');
-	    
-	    var hasEmptySelect = function () {
-	    	var selectValues = $selects.children(':selected').map(function(){return this.value;});
-	    	return $.inArray('', selectValues) !== -1;
-	    };
-	    // if we found a empty value disable the button
-	    if (hasEmptySelect()){
-	    	$continue.attr('disabled','disabled');
-	    } else {
-	    	$continue.removeAttr('disabled');
-	    }
+		var $selects = $('.select-address');
 
-	    //add listeners to the selects to enable the continue button
-	    $selects.on('change', function(){
-        	if (this.value == ''){
-          		$continue.attr('disabled','disabled');
-        	} else {
-          		//check to see if any select box has a empty vlaue
-          		if (hasEmptySelect()) {
-          			$continue.attr('disabled','disabled');
-          		} else {
-          			$continue.removeAttr('disabled');
-          		}
-        	}
-      	});
+		var hasEmptySelect = function () {
+			var selectValues = $selects.children(':selected').map(function(){return this.value;});
+			return $.inArray('', selectValues) !== -1;
+		};
+		// if we found a empty value disable the button
+		if (hasEmptySelect()){
+			$continue.attr('disabled','disabled');
+		} else {
+			$continue.removeAttr('disabled');
+		}
+		//add listeners to the selects to enable the continue button
+		$selects.on('change', function(){
+			if (this.value == ''){
+				$continue.attr('disabled','disabled');
+			} else {
+				//check to see if any select box has a empty vlaue
+				if (hasEmptySelect()) {
+					$continue.attr('disabled','disabled');
+				} else {
+					$continue.removeAttr('disabled');
+				}
+			}
+		});
 	}
 
 	/**
@@ -2296,7 +2295,7 @@ var app = (function (app, $) {
 					$('.no-address').hide();
 					// if there's no previously selected option, select it
 					if (!$selected.length > 0 || $selected.val() === '') {
-						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected');
+						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
 					}
 				}
 			});
@@ -2363,7 +2362,7 @@ var app = (function (app, $) {
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
-		if ($(".cart-row .shippingaddress select.selectbox").length > 0){
+		if ($(".cart-row .shippingaddress .select-address").length > 0){
 			initmultishipshipaddress();
 		} else {
 			$('.formactions button').attr('disabled','disabled');
