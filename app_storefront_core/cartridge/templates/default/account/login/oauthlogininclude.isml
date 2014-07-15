@@ -15,43 +15,59 @@
 		
 			<select  name="OAuthProvider" id="OAuthProvider" >
 				<option value="">${Resource.msgf('logininclude.oauthselect','account',"")}</option>
-				<option value="Google">${Resource.msgf('logininclude.oauthGoogle','account',"")}</option>
+				<option value="GooglePlus">${Resource.msgf('logininclude.oauthGooglePlus','account',"")}</option>
 				<option value="LinkedIn">${Resource.msgf('logininclude.oauthLinkedIn','account',"")}</option>
 				<option value="Microsoft">${Resource.msgf('logininclude.oauthMicrosoft','account',"")}</option>
 				<option value="Facebook">${Resource.msgf('logininclude.oauthFacebook','account',"")}</option>
 				<option value="GitHub">${Resource.msgf('logininclude.oauthGitHub','account',"")}</option>
+				<option value="SinaWeibo">${Resource.msgf('logininclude.oauthSinaWeibo','account',"")}</option>
+				<option value="VKontakte">${Resource.msgf('logininclude.oauthVKontakte','account',"")}</option>
 			</select>
 		
-			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('Google' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
-			<input type="image" alt="Google login"
+			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('GooglePlus' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
+			<input type="image" alt="GooglePlus login"
 			 	name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-			 	src="${URLUtils.staticURL('/images/google.png')}"
+			 	src="${URLUtils.staticURL('/images/Google.png')}"
 			 	/>
 			</isif>
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('LinkedIn' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="LinkedIn login"
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-			 	 src="${URLUtils.staticURL('/images/linkedin.png')}"
+			 	 src="${URLUtils.staticURL('/images/LinkedIn.png')}"
 				 />
 			</isif>
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('Microsoft' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Microsoft login"
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-			 	 src="${URLUtils.staticURL('/images/microsoft.png')}"
+			 	 src="${URLUtils.staticURL('/images/Microsoft.png')}"
 				 />
 			</isif>
 
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('Facebook' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Facebook login"
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-			 	 src="${URLUtils.staticURL('/images/facebook.png')}"
+			 	 src="${URLUtils.staticURL('/images/Facebook.png')}"
 				 />
 			</isif>
 
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('GitHub' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GitHub login"
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-			 	 src="${URLUtils.staticURL('/images/github.jpeg')}"
+  			 	 src="${URLUtils.staticURL('/images/GitHub.png')}"
+				 />
+			</isif>
+
+			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('SinaWeibo' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
+			<input type="image" alt="SinaWeibo login"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
+  			 	 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"
+				 />
+			</isif>
+
+			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('VKontakte' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
+			<input type="image" alt="VKontakte login"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
+  			 	 src="${URLUtils.staticURL('/images/VKontakte.png')}"
 				 />
 			</isif>
 

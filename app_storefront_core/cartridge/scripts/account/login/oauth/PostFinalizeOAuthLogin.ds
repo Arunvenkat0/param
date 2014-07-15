@@ -25,10 +25,10 @@ function execute( args : PipelineDictionary ) : Number
 	var THIS_SCRIPT : String = 'PostFinalizeOAuthLogin.ds: ';
 
 	//to continue to the destination (preserved in the session before InitiateOAuthLogin pipelet)
-	args.Location = session.custom.ContinuationURL; 
+	args.Location = session.custom['ContinuationURL']; 
 
-	Logger.debug(THIS_SCRIPT + "Extracted from session.custom: ContinuationURL: " + session.custom.ContinuationURL);
-	delete session.custom.ContinuationURL;
+	Logger.debug(THIS_SCRIPT + "Extracted from session.custom: ContinuationURL: " + session.custom['ContinuationURL']);
+	delete session.custom['ContinuationURL'];
 
     return PIPELET_NEXT;
 }
