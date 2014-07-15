@@ -139,7 +139,7 @@
 				value="${Resource.msg('global.save','locale',null)}">
 				<span>${Resource.msg('global.save','locale',null)}</span>
 			</button>
-			<button class="cancel cancel-button" type="submit"
+			<button class="cancel cancel-button" type="button"
 				name="${pdict.CurrentForms.multishipping.editAddress.cancel.htmlName}"
 				value="${Resource.msg('global.cancel','locale',null)}">
 				${Resource.msg('global.cancel','locale',null)}</button>
