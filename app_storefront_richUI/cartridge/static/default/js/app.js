@@ -2278,12 +2278,10 @@ var app = (function (app, $) {
 	 * @description capture add edit adddress form events
 	 */
 	function addEditAddress(target) {
-		var $addressForm =$('form[name$="multishipping_editAddress"]');
+		var $addressForm = $('form[name$="multishipping_editAddress"]');
 		$addressForm.on('submit', function (e) {
 			e.preventDefault();
-			console.log('submit');
 			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (address) {
-				console.log(address);
 				var $shippingAddress = $(target).closest('.shippingaddress'),
 					$select = $shippingAddress.find('.select-address'),
 					$selected = $select.find('option:selected'),
@@ -2297,8 +2295,7 @@ var app = (function (app, $) {
 					$('.shippingaddress select').removeClass('no-option').append(newOption);
 					$('.no-address').hide();
 					// if there's no previously selected option, select it
-					// TODO: This isn't working right yet
-					if (!$selected.length > 0 ) {
+					if (!$selected.length > 0 || $selected.val() === '') {
 						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected');
 					}
 				}
