@@ -9,7 +9,7 @@ importPackage( dw.customer );
 
 function execute( pdict : PipelineDictionary ) : Number
 {
-	var THIS_SCRIPT : String = 'ObtainAccountFromGitHubProviderAndLogin.ds, pdict.OAuthProviderID:' + pdict.OAuthProviderID + ": ";
+	var THIS_SCRIPT : String = 'ObtainAccountFromGooglePlusProviderAndLogin.ds, pdict.OAuthProviderID:' + pdict.OAuthProviderID + ": ";
 	if (null == pdict.OAuthProviderID) {
 		Logger.warn(THIS_SCRIPT + "exiting because the provider id is null.");
 		return PIPELET_ERROR;	
@@ -19,13 +19,13 @@ function execute( pdict : PipelineDictionary ) : Number
 		//wheather to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
 		var rememberMe : Boolean = session.custom['RememberMe'];
 		delete session.custom['RememberMe'];
-		
+
 		var extProfile : Object = JSON.parse(pdict.ResponseText);
 		if (null == extProfile) {
 			Logger.warn(THIS_SCRIPT + ": extProfile could not be extracted from the response:" + pdict.ResponseText);
 			return PIPELET_ERROR;
 		}
-		var userId : String = extProfile['id'];
+		var userId : String = extProfile['id']; 
 		if (!userId) {
 			Logger.warn(THIS_SCRIPT + "Undefined user identifier - make sure you are mapping the correct property from the response."
 				+ " We are mapping 'id' which is not available in the response: " + extProfile);
@@ -34,6 +34,7 @@ function execute( pdict : PipelineDictionary ) : Number
 		Logger.debug(THIS_SCRIPT + ": Parsed UserId from response: "+userId);
 		var profile : Profile = CustomerMgr.getExternallyAuthenticatedCustomerProfile(pdict.OAuthProviderID, userId);
 		var customer : Customer;	
+
 		if (profile == null)
 		{
 			Logger.debug(THIS_SCRIPT + ": User id: "+userId+" not found in the DB, creating a new profile.");
@@ -41,9 +42,15 @@ function execute( pdict : PipelineDictionary ) : Number
 			profile = customer.getProfile();
 			
 			// vvvvvvvvv Custom JSON parsing part starts here: vvvvvvvvv
-			profile.setFirstName(extProfile['name']);
-			profile.setLastName(extProfile['name']); 
-			profile.setEmail(extProfile['email']);
+			if (extProfile['name']) {
+				profile.setFirstName(extProfile['name']['givenName']);
+				profile.setLastName(extProfile['name']['familyName']);
+			}
+			var emails : Array = extProfile['emails'];
+			if (emails && 0 < emails.length) {
+				//first element of the array would be the account email according to Google:
+				profile.setEmail(extProfile['emails'][0]['value']);
+			}
 			// ^^^^^^^^^^^ Custom parsing part ends here ^^^^^^^^^^^
 		} else {
 			customer = profile.getCustomer();
@@ -57,7 +64,7 @@ function execute( pdict : PipelineDictionary ) : Number
 				+ profile.getCustomer().getCustomerNo() + " with id:" + userId);
 			return PIPELET_ERROR;
 		}
-		
+
 		return PIPELET_NEXT;
 	} else {
 		Logger.warn(THIS_SCRIPT + "Response from provider is empty");
