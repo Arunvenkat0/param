@@ -34,7 +34,7 @@
 				addressesArr.push(addresses.options[opt].object); 
 			}
 		</isscript>
-		<div class="select-address" data-addresses="${JSON.stringify(addressesArr)}">
+		<div class="select-address address-list" data-addresses="${JSON.stringify(addressesArr)}">
 			<div class="form-row">
 				<label for="${pdict.CurrentForms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
 				</label> <select class="input-select" name="${addresses.htmlName}">
