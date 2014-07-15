@@ -2296,6 +2296,10 @@ var app = (function (app, $) {
 				}
 			}
 		});
+		$addressForm.on('click', '.cancel', function (e) {
+			e.preventDefault();
+			app.dialog.close();
+		});
 		$addressForm.on('submit', function (e) {
 			e.preventDefault();
 			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (address) {
@@ -2321,6 +2325,7 @@ var app = (function (app, $) {
 				}
 			});
 		});
+		$addressForm.on()
 	}
 
 	/**
