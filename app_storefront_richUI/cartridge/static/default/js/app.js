@@ -2277,7 +2277,25 @@ var app = (function (app, $) {
 	 * @description capture add edit adddress form events
 	 */
 	function addEditAddress(target) {
-		var $addressForm = $('form[name$="multishipping_editAddress"]');
+		var $addressForm = $('form[name$="multishipping_editAddress"]'),
+			$selectButton = $addressForm.find('button[name$=_selectAddress]'),
+			$addressList = $addressForm.find('.address-list'),
+			add = true;
+		$selectButton.on('click', function (e) {
+			e.preventDefault();
+			var selectedAddress = $addressList.find('select').val();
+			if (selectedAddress !== 'newAddress') {
+				selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+					return add.UUID === selectedAddress;
+				})[0];
+				add = false;
+				// proceed to fill the form with the selected address
+				for (var field in selectedAddress) {
+					// if the key in selectedAddress object ends with 'Code', remove that suffix
+					$addressForm.find('[name$=' + field + '], [name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
+				}
+			}
+		});
 		$addressForm.on('submit', function (e) {
 			e.preventDefault();
 			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (address) {
