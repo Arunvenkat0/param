@@ -2308,9 +2308,12 @@ var app = (function (app, $) {
 						+ '</option>';
 				if (address) {
 					app.dialog.close();
-					// TODO check for edit address
-					$('.shippingaddress select').removeClass('no-option').append(newOption);
-					$('.no-address').hide();
+					if (add) {
+						$('.shippingaddress select').removeClass('no-option').append(newOption);
+						$('.no-address').hide();
+					} else {
+						$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
+					}
 					// if there's no previously selected option, select it
 					if (!$selected.length > 0 || $selected.val() === '') {
 						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
