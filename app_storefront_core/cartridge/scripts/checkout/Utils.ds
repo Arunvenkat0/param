@@ -336,12 +336,9 @@ function addAddressToJSON(jsonAddressBook : String, referenceAddress : Object) :
 			jsonObj.addresses = new Array();
 		}
 		
-		address.UUID = UUIDUtils.createUUID();
-		address.copyFrom(referenceAddress);
-		
 		// Add address if not already existing
-		if (!address.addressExists(jsonObj.addresses)){
-			jsonObj.addresses.push(address);
+		if (!referenceAddress.addressExists(jsonObj.addresses)){
+			jsonObj.addresses.push(referenceAddress);
 		}
 	}
 	
