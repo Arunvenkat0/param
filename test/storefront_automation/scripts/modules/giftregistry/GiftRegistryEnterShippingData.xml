@@ -8,7 +8,7 @@
   <command name="select" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_country" value="label=${ShippingAddressCountry}"/>
   <command name="select" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_states_state" value="label=${ShippingAddressState}"/>
   <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_city" value="${ShippingAddressCity}"/>
-  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_zip" value="${ShippingAddressZipCode}"/>
+  <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_postal" value="${ShippingAddressZipCode}"/>
   <command name="type" target="id=dwfrm_giftregistry_eventaddress_addressBeforeEvent_phone" value="${ShippingAddressPhone}"/>
   <command name="check" target="id=dwfrm_giftregistry_copyAddress"/>
 </scriptmodule>
