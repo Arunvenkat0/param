@@ -15,7 +15,7 @@
   <module name="library.module.app.sitegenesis.quickview.SelectSize">
     <parameter name="Size" value="${Size}"/>
   </module>
-  <module name="library.function.FClick">
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css= .Color  a[title='${ProductName}']"/>
   </module>
   <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
