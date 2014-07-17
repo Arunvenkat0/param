@@ -2205,6 +2205,42 @@ var app = (function (app, $) {
 		});
 	}
 
+	/**
+	 * @function
+	 * @description disable continue button on the page if required inputs are not filled
+	 * @input String the selector string of the continue button
+	 */
+	function initContinue(continueSelector, formSelector) {
+		var $continue = $(continueSelector);
+		var $form = $(formSelector);
+		var $requiredInputs = $('.required', $form).find('input, select');
+		// check for required input
+		var hasEmptyRequired = function () {
+			var requiredValues = $requiredInputs.map(function () {
+				return $(this).val();
+			});
+			return $.inArray('', requiredValues) !== -1 && $form.validate();
+		};
+
+		if (hasEmptyRequired() || !$form.valid()) {
+			$continue.attr('disabled', 'disabled');
+		} else {
+			$continue.removeAttr('disabled');
+		}
+
+		$requiredInputs.on('change', function () {
+			if ($(this).val() === '') {
+				$continue.attr('disabled', 'disabled');
+			} else {
+				if (hasEmptyRequired() || !$form.valid()) {
+					$continue.attr('disabled', 'disabled');
+				} else {
+					$continue.removeAttr('disabled');
+				}
+			}
+		});
+	}
+
 	//shipping page logic
 	//checkout gift message counter
 	/**
@@ -2333,6 +2369,8 @@ var app = (function (app, $) {
 	 * @description shows gift message box, if shipment is gift
 	 */
 	function shippingLoad() {
+		initContinue('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
+
 		$cache.checkoutForm.on("click", "#is-gift-yes, #is-gift-no", function (e) {
 			$cache.checkoutForm.find(".gift-message-text").toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
 		})
@@ -2474,7 +2512,6 @@ var app = (function (app, $) {
 
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
-
 		});
 
 		// get selected payment method from payment method form
