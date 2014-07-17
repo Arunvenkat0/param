@@ -2390,10 +2390,7 @@ var app = (function (app, $) {
 		initMultiGiftMessageBox();
 		if ($(".cart-row .shippingaddress .select-address").length > 0){
 			initmultishipshipaddress();
-		} else {
-			$('.formactions button').attr('disabled','disabled');
 		}
-		return null;
 	}
 
 	/**
