@@ -83,7 +83,7 @@
 						</div>
 						</td>
 						<td class="quantitycolumn"><isprint value="${quantityLI.quantity}"/></td>
-						<td class="shippingaddress">
+						<td class="shippingaddress required">
 							<iscomment>display select box with available addresses</iscomment>
 							<isif condition="${!listItem.addressList.options.optionsCount > 0}">
 								<isset name="addressClass" value="no-option" scope="PAGE" />
