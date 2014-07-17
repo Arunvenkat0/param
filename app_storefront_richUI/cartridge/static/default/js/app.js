@@ -2274,7 +2274,7 @@ var app = (function (app, $) {
 
 	/**
 	 * @function
-	 * @description capture add edit adddress form events
+	 * @description capture and handle add and edit address action in dialog on multiship page
 	 */
 	function addEditAddress(target) {
 		var $addressForm = $('form[name$="multishipping_editAddress"]'),
