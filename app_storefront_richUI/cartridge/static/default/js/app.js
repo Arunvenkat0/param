@@ -2213,29 +2213,31 @@ var app = (function (app, $) {
 	function initContinue(continueSelector, formSelector) {
 		var $continue = $(continueSelector);
 		var $form = $(formSelector);
-		var $requiredInputs = $('.required', $form).find('input, select');
+		var $requiredInputs = $('.required', $form).find('input, select, checkbox');
 		// check for required input
 		var hasEmptyRequired = function () {
-			var requiredValues = $requiredInputs.map(function () {
+			// filter out only the visible fields - this allows the checking to work on 
+			// billing page where some payment methods inputs are hidden
+			var requiredValues = $requiredInputs.filter(':visible').map(function () {
 				return $(this).val();
 			});
-			return $.inArray('', requiredValues) !== -1 && $form.validate();
+			return $.inArray('', requiredValues) !== -1;
 		};
 
-		if (hasEmptyRequired() || !$form.valid()) {
-			$continue.attr('disabled', 'disabled');
-		} else {
+		if (!hasEmptyRequired() && $form.valid()) {
 			$continue.removeAttr('disabled');
+		} else {
+			$continue.attr('disabled', 'disabled');
 		}
 
 		$requiredInputs.on('change', function () {
 			if ($(this).val() === '') {
 				$continue.attr('disabled', 'disabled');
 			} else {
-				if (hasEmptyRequired() || !$form.valid()) {
-					$continue.attr('disabled', 'disabled');
-				} else {
+				if (!hasEmptyRequired() && $form.valid()) {
 					$continue.removeAttr('disabled');
+				} else {
+					$continue.attr('disabled', 'disabled');
 				}
 			}
 		});
@@ -2415,19 +2417,19 @@ var app = (function (app, $) {
 		// ensure checkbox of payment method is checked
 		$("#is-" + paymentMethodID)[0].checked = true;
 
-		var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
-		bmlForm.find("select[name$='_year']").removeClass("required");
-		bmlForm.find("select[name$='_month']").removeClass("required");
-		bmlForm.find("select[name$='_day']").removeClass("required");
-		bmlForm.find("input[name$='_ssn']").removeClass("required");
+		// var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
+		// bmlForm.find("select[name$='_year']").removeClass("required");
+		// bmlForm.find("select[name$='_month']").removeClass("required");
+		// bmlForm.find("select[name$='_day']").removeClass("required");
+		// bmlForm.find("input[name$='_ssn']").removeClass("required");
 
-		if (paymentMethodID==="BML") {
-			var yr = bmlForm.find("select[name$='_year']");
-			bmlForm.find("select[name$='_year']").addClass("required");
-			bmlForm.find("select[name$='_month']").addClass("required");
-			bmlForm.find("select[name$='_day']").addClass("required");
-			bmlForm.find("input[name$='_ssn']").addClass("required");
-		}
+		// if (paymentMethodID==="BML") {
+		// 	var yr = bmlForm.find("select[name$='_year']");
+		// 	bmlForm.find("select[name$='_year']").addClass("required");
+		// 	bmlForm.find("select[name$='_month']").addClass("required");
+		// 	bmlForm.find("select[name$='_day']").addClass("required");
+		// 	bmlForm.find("input[name$='_ssn']").addClass("required");
+		// }
 		app.validator.init();
 	}
 	/**
@@ -2478,6 +2480,7 @@ var app = (function (app, $) {
 	function billingLoad() {
 		if( !$cache.paymentMethodId ) return;
 
+		initContinue('[name$="billing_save"]', 'form[id$="billing"');
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
 		});
