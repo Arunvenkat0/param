@@ -9,6 +9,7 @@
 *	@input CBasket : dw.order.Basket The current basket.
 *	@input AddToAddressBook : Boolean Add to customer address book if true.
 *
+	@output FormAddress : Object Form address
 */
 importPackage( dw.system );
 importPackage( dw.order );
@@ -67,10 +68,13 @@ function execute( args : PipelineDictionary ) : Number {
 		sessionAddressBook = addAddressToJSON(sessionAddressBook, formAddress);
 	} else {
 		// Update Address
-		sessionAddressBook = updateAddressInJSON(sessionAddressBook, formAddress, referenceAddress.UUID);
+		formAddress.UUID = referenceAddress.UUID;
+		sessionAddressBook = updateAddressInJSON(sessionAddressBook, formAddress);
 	}
-    
-    basket.custom.sessionAddressBook = sessionAddressBook;
 
-   return PIPELET_NEXT;
+	basket.custom.sessionAddressBook = sessionAddressBook;
+	
+	args.FormAddress = formAddress;
+
+	return PIPELET_NEXT;
 }
