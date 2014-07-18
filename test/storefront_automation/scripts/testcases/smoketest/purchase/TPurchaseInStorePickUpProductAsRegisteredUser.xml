@@ -223,7 +223,8 @@
     <comment>Validate Oder'S total amonts and various charges</comment>
   </module>
   <command name="waitForElementPresent" target="css=.user-account"/>
-  <module name="modules.checkout.summary.ValidateStoreShippingAtSummary">
+  <module name="modules.checkout.summary.ValidateInStoreShippingInSummary"/>
+  <module name="modules.checkout.summary.ValidateStoreShippingAtSummary" disabled="true">
     <parameter name="ShippingMethod" value="Store Pickup"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
