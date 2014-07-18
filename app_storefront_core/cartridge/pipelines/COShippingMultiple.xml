@@ -132,15 +132,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <template buffered="true" dynamic="false" name="checkout/shipping/multishipping/multishippingaddresses"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
-        <call-node start-name-ref="COShippingMultiple-HandleAddressSelections"/>
-        <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="save">
           <transition target-connector="in">
             <transition-display>
@@ -148,6 +139,19 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
             </transition-display>
           </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="COShippingMultiple-HandleAddressSelections"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in2" target-path="../+1">
+                  <transition-display>
+                    <bend-point relative-to="source" x="1" y="2"/>
+                    <bend-point relative-to="source" x="2" y="2"/>
+                  </transition-display>
+                </transition>
+              </branch>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -172,31 +176,24 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="2"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
             <node>
               <jump-node start-name-ref="COShippingMultiple-StartShipments"/>
               <node-display x="0" y="1"/>
             </node>
-            <transition target-connector="in1" target-path=".."/>
-          </segment>
-        </branch>
-        <branch basename="b3" source-connector="save1">
-          <transition target-connector="in1"/>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="-1"/>
-            </node>
-            <transition target-connector="in1" target-path=".."/>
           </segment>
         </branch>
       </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="0"/>
+      </node>
+      <transition target-connector="in1" target-path="./-1"/>
     </segment>
   </branch>
   <branch basename="StartShipments">
