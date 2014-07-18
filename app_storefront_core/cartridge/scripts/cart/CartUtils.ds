@@ -37,7 +37,7 @@ CartUtils.getAddressList = function(basket, currentCustomer, includeLineItems) {
 		
 	var al = new ArrayList();
 		
-	if (empty(basket) || empty(basket.productLineItems)) {
+	if (empty(basket) || (empty(basket.productLineItems) && empty(basket.giftCertificateLineItems))) {
 		return al;
 	}
 	
