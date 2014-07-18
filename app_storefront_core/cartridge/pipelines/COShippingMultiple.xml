@@ -141,13 +141,53 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
       <node>
         <call-node start-name-ref="COShippingMultiple-HandleAddressSelections"/>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in2">
+        <branch basename="b2" source-connector="save">
+          <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="2"/>
-              <bend-point relative-to="source" x="2" y="2"/>
+              <bend-point relative-to="source" x="0" y="1"/>
             </transition-display>
           </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="true" key="From_0"/>
+                <key-binding alias="CurrentForms.multishipping.addressSelection.fulfilled.value" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <jump-node start-name-ref="COShippingMultiple-StartShipments"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path=".."/>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="save1">
+          <transition target-connector="in1"/>
           <segment>
             <node>
               <join-node/>
@@ -156,38 +196,6 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
             <transition target-connector="in1" target-path=".."/>
           </segment>
         </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-          <config-property key="Transactional" value="false"/>
-          <key-binding alias="true" key="From_0"/>
-          <key-binding alias="CurrentForms.multishipping.addressSelection.fulfilled.value" key="To_0"/>
-          <key-binding alias="null" key="From_1"/>
-          <key-binding alias="null" key="To_1"/>
-          <key-binding alias="null" key="From_2"/>
-          <key-binding alias="null" key="To_2"/>
-          <key-binding alias="null" key="From_3"/>
-          <key-binding alias="null" key="To_3"/>
-          <key-binding alias="null" key="From_4"/>
-          <key-binding alias="null" key="To_4"/>
-          <key-binding alias="null" key="From_5"/>
-          <key-binding alias="null" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
-          <key-binding alias="null" key="From_7"/>
-          <key-binding alias="null" key="To_7"/>
-          <key-binding alias="null" key="From_8"/>
-          <key-binding alias="null" key="To_8"/>
-          <key-binding alias="null" key="From_9"/>
-          <key-binding alias="null" key="To_9"/>
-        </pipelet-node>
-        <node-display x="0" y="2"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <jump-node start-name-ref="COShippingMultiple-StartShipments"/>
-        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>
@@ -580,7 +588,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <text-node>
           <description>Mark step as fulfilled.</description>
         </text-node>
-        <node-display x="1" y="15"/>
+        <node-display x="1" y="14"/>
       </node>
     </segment>
   </branch>
