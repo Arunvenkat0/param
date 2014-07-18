@@ -86,13 +86,18 @@
 						<td class="shippingaddress required">
 							<iscomment>display select box with available addresses</iscomment>
 							<isif condition="${!listItem.addressList.options.optionsCount > 0}">
-								<isset name="addressClass" value="no-option" scope="PAGE" />
-								<div class="no-address">
-									${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}
-								</div>
+								<isset name="gotOption" value="${false}" scope="PAGE">
+							<iselse>
+								<isset name="gotOption" value="${true}" scope="PAGE">
 							</isif>
-							<select class="select-address ${addressClass}" name="${listItem.addressList.htmlName}">
-								<option value="">${Resource.msg('global.selectaddressmessage','locale',null)}</option>
+							<select class="select-address required" name="${listItem.addressList.htmlName}" <isif condition="${!gotOption}"> disabled="disabled"</isif>>
+								<option value="" data-with-option="${Resource.msg('global.selectaddressmessage','locale',null)}" data-no-option="${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}">
+									<isif condition="${!gotOption}">
+										${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}
+									<iselse>
+										${Resource.msg('global.selectaddressmessage','locale',null)}
+									</isif>
+								</option>
 								<isloop items="${listItem.addressList.options}" var="option">
 									<isset name="address" value="${option.object}" scope="page"/>
 									<isif condition="${!empty(address.ID)}">

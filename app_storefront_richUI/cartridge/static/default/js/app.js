@@ -2223,7 +2223,7 @@ var app = (function (app, $) {
 			});
 			return $.inArray('', requiredValues) !== -1;
 		};
-
+		console.log(!hasEmptyRequired() && $form.valid());
 		if (!hasEmptyRequired() && $form.valid()) {
 			$continue.removeAttr('disabled');
 		} else {
@@ -2319,8 +2319,9 @@ var app = (function (app, $) {
 				if (address) {
 					app.dialog.close();
 					if (add) {
-						$('.shippingaddress select').removeClass('no-option').append(newOption);
-						$('.no-address').hide();
+						$('.shippingaddress select').append(newOption).removeProp('disabled');;
+						var $defaultOption = $('.shippingaddress select').find('option[value=""]');
+						$defaultOption.html($defaultOption.data('withOption'));
 					} else {
 						$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
 					}
