@@ -35,8 +35,4 @@
     <parameter name="textElement" value="//a[@title=&quot;@{ProductName}&quot;]/ancestor::table//td[@class=&quot;order-shipment-details&quot;]//div[@class=&quot;shipping-method&quot;]//span[@class=&quot;value&quot;]"/>
     <parameter name="textPattern" value="Store Pickup"/>
   </module>
-  <module name="library.function.FAssertText">
-    <parameter name="textElement" value="//a[@title=&quot;@{ProductName}&quot;]//ancestor::table//td[@class=&quot;order-shipment-details&quot;]//div[@class=&quot;shipping-status&quot;]//span[@class=&quot;value&quot;]"/>
-    <parameter name="textPattern" value="Not Shipped"/>
-  </module>
 </scriptmodule>

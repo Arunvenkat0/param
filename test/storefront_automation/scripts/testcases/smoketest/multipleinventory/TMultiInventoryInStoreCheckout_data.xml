@@ -24,11 +24,11 @@
   <ExpirationMonth>April</ExpirationMonth>
   <ExpirationYear>2019</ExpirationYear>
   <SecurityCode>999</SecurityCode>
-  <Product1_Store_Name>Champaign Electronic Shop</Product1_Store_Name>
-  <Product1_Store_Street>1001 Cambridge St</Product1_Store_Street>
-  <Product1_Store_City>Cambridge</Product1_Store_City>
+  <Product1_Store_Name>Short Electro</Product1_Store_Name>
+  <Product1_Store_Street>584 Columbus Ave</Product1_Store_Street>
+  <Product1_Store_City>Boston</Product1_Store_City>
   <Product1_Store_State>MA</Product1_Store_State>
-  <Product1_Store_Zip>02141</Product1_Store_Zip>
+  <Product1_Store_Zip>02118</Product1_Store_Zip>
   <Product1_Store_Country>United States</Product1_Store_Country>
   <Product2_Store_Name>Downtown TV Shop</Product2_Store_Name>
   <Product2_Store_Street>333 Washington St</Product2_Store_Street>
@@ -36,11 +36,11 @@
   <Product2_Store_State>MA</Product2_Store_State>
   <Product2_Store_Zip>02108</Product2_Store_Zip>
   <Product2_Store_Country>United States</Product2_Store_Country>
-  <New_Store_ZipCode>02171</New_Store_ZipCode>
-  <New_Store_Name>Short Electro</New_Store_Name>
-  <New_Store_Street>584 Columbus Ave</New_Store_Street>
-  <New_Store_City>Boston</New_Store_City>
+  <New_Store_ZipCode>01843</New_Store_ZipCode>
+  <New_Store_Name>Khale Street Electronics</New_Store_Name>
+  <New_Store_Street>150 Winthrop Ave</New_Store_Street>
+  <New_Store_City>Lawrence</New_Store_City>
   <New_Store_State>MA</New_Store_State>
   <New_Store_Country>United States</New_Store_Country>
-  <New_Store_Zip>02171</New_Store_Zip>
+  <New_Store_Zip>01843</New_Store_Zip>
 </data>

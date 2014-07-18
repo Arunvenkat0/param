@@ -84,9 +84,6 @@
   <module name="library.module.app.sitegenesis.cart.ClickSelectStore">
     <parameter name="itemNumberInCartList" value="2"/>
   </module>
-  <module name="library.module.app.sitegenesis.storesearch.QuickSelectInStockStore" disabled="true">
-    <parameter name="ZipCode" value="${Product1StoreZipCode}"/>
-  </module>
   <module name="library.module.app.sitegenesis.storesearch.QuickSelectInStockStore">
     <parameter name="ZipCode" value="${New_Store_ZipCode}"/>
   </module>
@@ -172,21 +169,21 @@
   <action name="VERIFY-OrderSummaryInStoreDetails"/>
   <module name="library.module.app.sitegenesis.ordersummary.VerifyInStoreShipmentForProduct">
     <parameter name="ProductName" value="${ProductName1}"/>
+    <parameter name="StoreName" value="${Product1_Store_Name}"/>
+    <parameter name="StoreStreet" value="${Product1_Store_Street}"/>
+    <parameter name="StoreCity" value="${Product1_Store_City}"/>
+    <parameter name="StoreState" value="${Product1_Store_State}"/>
+    <parameter name="StoreZip" value="${Product1_Store_Zip}"/>
+    <parameter name="StoreCountry" value="${Product1_Store_Country}"/>
+  </module>
+  <module name="library.module.app.sitegenesis.ordersummary.VerifyInStoreShipmentForProduct">
+    <parameter name="ProductName" value="${ProductName2}"/>
     <parameter name="StoreName" value="${New_Store_Name}"/>
     <parameter name="StoreStreet" value="${New_Store_Street}"/>
     <parameter name="StoreCity" value="${New_Store_City}"/>
     <parameter name="StoreState" value="${New_Store_State}"/>
     <parameter name="StoreZip" value="${New_Store_ZipCode}"/>
     <parameter name="StoreCountry" value="${New_Store_Country}"/>
-  </module>
-  <module name="library.module.app.sitegenesis.ordersummary.VerifyInStoreShipmentForProduct">
-    <parameter name="ProductName" value="${ProductName2}"/>
-    <parameter name="StoreName" value="${Product2_Store_Name}"/>
-    <parameter name="StoreStreet" value="${Product2_Store_Street}"/>
-    <parameter name="StoreCity" value="${Product2_Store_City}"/>
-    <parameter name="StoreState" value="${Product2_Store_State}"/>
-    <parameter name="StoreZip" value="${Product2_Store_Zip}"/>
-    <parameter name="StoreCountry" value="${Product2_Store_Country}"/>
   </module>
   <action name="Cleanup"/>
   <module name="library.module.app.busmgr.DisableInStorePickup"/>
