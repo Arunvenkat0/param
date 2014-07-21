@@ -27,8 +27,8 @@ Quantity: Quantity of the product</description>
   </command>
   <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position2}_shippingMethodID"/>
   <command name="assertElementPresent" target="name=dwfrm_multishipping_shippingOptions_shipments_i@{Position2}_isGift"/>
-  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[1][.='@{AddressName}']"/>
-  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[2][.='@{Address}']"/>
-  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[3][.='@{City}, @{StateShort} @{ZipCode}']"/>
-  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-quantity-details']/div[4][.='@{Country}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-shipping-address']/div[1][.='@{AddressName}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-shipping-address']/div[2][.='@{Address}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-shipping-address']/div[3][.='@{City}, @{StateShort} @{ZipCode}']"/>
+  <command name="assertElementPresent" target="//div[@id='primary']/div/form/div[@class='checkoutmultishipping']//table//td[@class='item-shipping-address']/div[4][.='@{Country}']"/>
 </scriptmodule>

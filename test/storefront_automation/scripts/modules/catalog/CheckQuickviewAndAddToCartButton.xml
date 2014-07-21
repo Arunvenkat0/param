@@ -11,8 +11,8 @@
     <parameter name="textElement" value="css=ul.Color:nth-child(1) &gt; li:nth-child(1) &gt; a:nth-child(1)"/>
     <parameter name="textStoreVariableName" value="ProductColor"/>
   </module>
-  <action name="CheckSelectedColor"/>
-  <module name="library.function.FClick">
+  <action name="CheckSelectedColor" disabled="true"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=.Color:first-child :not(.unselectable) a[title='${ProductColor}']"/>
   </module>
   <module name="library.function.FWaitForElement">

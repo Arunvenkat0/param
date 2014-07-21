@@ -11,12 +11,12 @@
     <parameter name="SearchText" value="${searchID}"/>
   </module>
   <module name="modules.catalog.ValidateProductDetailsPageStructure"/>
-  <command name="assertNotElementPresent" target="//a[contains(text(),'Add to Wishlist')]"/>
-  <command name="assertNotElementPresent" target="//a[contains(text(),'Add to Gift Registry')]"/>
-  <command name="assertElementPresent" target="//div[@class='product-add-to-cart']//button[contains(@title,'Select Color and Size')]"/>
-  <command name="assertElementPresent" target="//div[@class='product-add-to-cart']//button[contains(@class,'button-fancy-large add-to-cart-disabled')]"/>
-  <command name="assertNotElementPresent" target="css=.Color .selected"/>
-  <command name="assertNotElementPresent" target="css=.size .selected"/>
+  <command name="assertNotElementPresent" disabled="true" target="//a[contains(text(),'Add to Wishlist')]"/>
+  <command name="assertNotElementPresent" disabled="true" target="//a[contains(text(),'Add to Gift Registry')]"/>
+  <command name="assertElementPresent" target="//div[@class='product-add-to-cart']//button[contains(@title,'Add to Cart')]"/>
+  <command name="assertElementPresent" disabled="true" target="//div[@class='product-add-to-cart']//button[contains(@class,'button-fancy-large add-to-cart-disabled')]"/>
+  <command name="assertNotElementPresent" disabled="true" target="css=.Color .selected"/>
+  <command name="assertNotElementPresent" disabled="true" target="css=.size .selected"/>
   <command name="storeText" target="css=.Color .emptyswatch .swatchanchor" value="ColorSelected">
     <comment>Select size.</comment>
   </command>
