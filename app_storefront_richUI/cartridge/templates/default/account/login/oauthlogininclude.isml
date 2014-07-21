@@ -16,7 +16,7 @@
 			<isif condition="${pdict.CurrentSession.customer.anonymous || (pdict.CurrentSession.customer.externallyAuthenticated && ('GooglePlus' == pdict.CurrentSession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GooglePlus login"
 				class="oAuthIcon"
-				id='GooglePlus'
+				id='Google'
 			 	name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
 			 	src="${URLUtils.staticURL('/images/Google.png')}"
 			 	/>
