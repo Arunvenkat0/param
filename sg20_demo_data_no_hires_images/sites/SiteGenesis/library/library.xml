@@ -1913,7 +1913,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 	&lt;li&gt;&lt;a href="$httpsURL('Account-Show')$"&gt;My Account&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;li&gt;&lt;a href="$httpsURL('Order-History')$"&gt;Check Order&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;li&gt;&lt;a href="$url('CustomerService-Show','aid','customer-service')$"&gt;Help&lt;/a&gt;&lt;/li&gt;&#13;
-	&lt;li&gt;&lt;a href="$url('CustomerService-ContactUs')$"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
+	&lt;li&gt;&lt;a href="$httpsURL('CustomerService-ContactUs')$"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'about-us')$"&gt; About Us&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'terms')$"&gt;Terms&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy&lt;/a&gt;&lt;/li&gt;&#13;
