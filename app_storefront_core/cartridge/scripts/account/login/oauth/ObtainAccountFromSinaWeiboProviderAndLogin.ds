@@ -2,7 +2,7 @@
  * @input OAuthProviderID : String
  * @input ResponseText : String
  * @input AccessToken : String
- * -@input ErrorStatus : String
+ * @input ErrorStatus : String
  */
 importPackage( dw.system );
 importPackage( dw.net );

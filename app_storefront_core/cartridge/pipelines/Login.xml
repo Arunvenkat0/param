@@ -683,6 +683,7 @@
           <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
           <key-binding alias="AccessToken" key="AccessToken"/>
+          <key-binding alias="ErrorStatus" key="ErrorStatus"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b3" source-connector="error">
