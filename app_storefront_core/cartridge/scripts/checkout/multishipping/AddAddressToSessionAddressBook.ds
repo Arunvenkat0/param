@@ -5,12 +5,12 @@
 *	updates addresses for the customer address book.
 *
 *   @input FormAddress : Object The address object created from form fields.
-*	@input ReferenceAddress : Object The address which should be changed.
-*	@input CBasket : dw.order.Basket The current basket.
-*	@input AddToAddressBook : Boolean Add to customer address book if true.
+*   @input ReferenceAddress : Object The address which should be changed.
+*   @input CBasket : dw.order.Basket The current basket.
+*   @input AddToAddressBook : Boolean Add to customer address book if true.
 *
-*	@output FormAddress : Object Form address
-*	@output SessionAddresses : dw.util.ArrayList The Addresses from the session address book.
+*   @output FormAddress : Object Form address
+*   @output SessionAddresses : dw.util.ArrayList The Addresses from the session address book.
 */
 importPackage( dw.system );
 importPackage( dw.order );
