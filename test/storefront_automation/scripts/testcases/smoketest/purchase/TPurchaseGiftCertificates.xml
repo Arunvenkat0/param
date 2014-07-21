@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C84728</tags>
-  <description>Test Case ID:(C84728) Smoke Test » Purchasing Gift Certificates » Purchase a Gift Certificate</description>
+  <description>Test Case ID:(C84728)</description>
   <module name="modules.staticelements.Homepage"/>
   <action name="GoToGiftCertificates"/>
   <module name="library.function.FClickAndWaitForPageLoad">

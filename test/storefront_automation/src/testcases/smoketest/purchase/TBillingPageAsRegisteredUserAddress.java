@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID:(C84697) Smoke Test » Checkout - Retuning Customer » Billing » Logged In User: Address
+ * Test Case ID:(C84697)
  */
 @ScriptName
 ("testcases.smoketest.purchase.TBillingPageAsRegisteredUserAddress")

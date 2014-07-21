@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
   <tags>C85057</tags>
-  <description>Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product</description>
+  <description>Test Case ID: (C85057)</description>
   <module name="library.module.app.busmgr.EnableInStorePickup"/>
   <module name="modules.staticelements.Homepage"/>
   <module name="modules.usermanagement.RegisterNewUser">
@@ -159,6 +159,7 @@
     <parameter name="SecurityCode" value="${CreditCardSecurityCode}"/>
   </module>
   <action name="CheckoutPlaceOrder"/>
+  <command name="pause" value="1500"/>
   <command name="clickAndWait" target="css=.button-fancy-large"/>
   <module name="modules.checkout.ValidateProductDataOnPlaceOrderPage">
     <comment>Validate First Product's Details on Place Order page</comment>
@@ -222,7 +223,8 @@
     <comment>Validate Oder'S total amonts and various charges</comment>
   </module>
   <command name="waitForElementPresent" target="css=.user-account"/>
-  <module name="modules.checkout.summary.ValidateStoreShippingAtSummary">
+  <module name="modules.checkout.summary.ValidateInStoreShippingInSummary"/>
+  <module name="modules.checkout.summary.ValidateStoreShippingAtSummary" disabled="true">
     <parameter name="ShippingMethod" value="Store Pickup"/>
     <parameter name="ShippingStatus" value="Not Shipped"/>
   </module>
