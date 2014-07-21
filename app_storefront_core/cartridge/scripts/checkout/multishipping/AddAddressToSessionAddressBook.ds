@@ -13,6 +13,7 @@
 *   @output SessionAddresses : dw.util.ArrayList The Addresses from the session address book.
 */
 importPackage( dw.system );
+importPackage( dw.util );
 importPackage( dw.order );
 importPackage( dw.web );
 importPackage( dw.customer );
@@ -77,7 +78,8 @@ function execute( args : PipelineDictionary ) : Number {
 	basket.custom.sessionAddressBook = sessionAddressBook;
 	var sessionAddressesObj : Object = new Object();
 	sessionAddressesObj = JSON.parse(sessionAddressBook);
-	args.SessionAddresses = sessionAddressesObj.addresses;	
+	sessionAddresses.add(sessionAddressesObj.addresses);
+	args.SessionAddresses = sessionAddresses;
 	args.FormAddress = formAddress;
 
 	return PIPELET_NEXT;
