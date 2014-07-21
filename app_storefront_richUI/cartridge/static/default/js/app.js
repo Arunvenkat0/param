@@ -2317,31 +2317,33 @@ var app = (function (app, $) {
 		});
 		$addressForm.on('submit', function (e) {
 			e.preventDefault();
-			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (address) {
-				var $shippingAddress = $(target).closest('.shippingaddress'),
+			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (response) {
+				if (!response.success) {
+					// @TODO: figure out a way to handle error on the form
+					console.log('error!');
+					return;
+				}
+				var address = response.address,
+					$shippingAddress = $(target).closest('.shippingaddress'),
 					$select = $shippingAddress.find('.select-address'),
 					$selected = $select.find('option:selected'),
 					newOption = '<option value="' + address.UUID + '">' 
 						+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
 						+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
 						+ '</option>';
-				if (address) {
-					app.dialog.close();
-					if (add) {
-						$('.shippingaddress select').append(newOption).removeProp('disabled');
-						var $defaultOption = $('.shippingaddress select').find('option[value=""]');
-						$defaultOption.html($defaultOption.data('withOption'));
-					} else {
-						$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
-					}
-					// if there's no previously selected option, select it
-					if (!$selected.length > 0 || $selected.val() === '') {
-						$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
-					}
+				app.dialog.close();
+				if (add) {
+					$('.shippingaddress select').removeClass('no-option').append(newOption);
+					$('.no-address').hide();
+				} else {
+					$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
+				}
+				// if there's no previously selected option, select it
+				if (!$selected.length > 0 || $selected.val() === '') {
+					$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
 				}
 			});
 		});
-		$addressForm.on()
 	}
 
 	/**
