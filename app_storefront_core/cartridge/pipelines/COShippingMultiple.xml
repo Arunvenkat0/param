@@ -1227,6 +1227,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="NewAddress" key="FormAddress"/>
           <key-binding alias="CurrentForms.multishipping.editAddress.addressList.selectedOptionObject" key="ReferenceAddress"/>
+          <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b5" source-connector="error">
@@ -1244,14 +1245,10 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
       <node>
         <end-node/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
       </node>
     </segment>
   </branch>
