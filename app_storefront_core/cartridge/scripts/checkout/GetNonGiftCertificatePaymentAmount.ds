@@ -1,7 +1,7 @@
 /**
  * Returns the amount of order total that is not covered by any gift certificate.
  *
- * @input Basket : dw.order.Basket The basket.
+ * @input Basket : dw.order.LineItemCtnr The basket.
  * @output Amount : Number The amount to pay that is not covered by any gift certificate.
  */
 importPackage( dw.order );
