@@ -323,12 +323,13 @@ function addAddressToJSON(jsonAddressBook : String, referenceAddress : Object) :
 	
 	if (referenceAddress != null){
 		// Try to parse incoming JSON string
-		try {
-			if (jsonAddressBook != null){
+		
+		if (jsonAddressBook != null){
+			try {
 				jsonObj = JSON.parse(jsonAddressBook);
+			} catch (error){
+				log.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
 			}
-		} catch (error){
-			log.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
 		}
 		
 		// Check if JSON object already has addresses
