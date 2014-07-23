@@ -337,12 +337,15 @@ function addAddressToJSON(jsonAddressBook : String, referenceAddress : Object) :
 			jsonObj.addresses = new Array();
 		}
 		
+		// Copy referenceAddress to address object to be stringified
+		address.copyFrom(referenceAddress);
+		address.UUID = referenceAddress.UUID;
 		// Add address if not already existing
-		if (!referenceAddress.addressExists(jsonObj.addresses)){
-			jsonObj.addresses.push(referenceAddress);
+		if (!address.addressExists(jsonObj.addresses)){
+			jsonObj.addresses.push(address);
 		}
 	}
-	
+
 	return JSON.stringify(jsonObj);
 }
 
