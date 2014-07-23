@@ -1,0 +1,32 @@
+/* homepage elements */
+/* ------------------------------------- */
+
+#homepage-slides{padding:0;width:100%;}
+#homepage-slider{overflow:hidden;}
+#homepage-slider .slide{list-style:none outside none;margin:0;max-width:100% !important;padding:0;width:100%;}
+#homepage-slider .slide img{height:auto;max-width:100% !important;}
+#homepage-slider .slide a h2{border:0 none;clip:rect(0pt,0pt,0pt,0pt);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;}
+#homepage-slider .slide a span{position:absolute;text-indent:-999em;}
+.home-bottom-left{float:left;width:50%;}
+#home-promo-shop-shoes{background-attachment:scroll;background-clip:border-box;background-color:transparent;background-image:url("../images/homepage/home-promo-shoes.png");background-origin:padding-box;background-position:left top;background-repeat:no-repeat;background-size:100% auto;height:413px;margin:auto;max-width:320px;position:relative;width:100%;}
+#home-promo-shop-shoes h2{position:absolute;text-indent:-999em;}
+#home-promo-shop-shoes ul{padding:30% 0 0;text-align:center;}
+#home-promo-shop-shoes li{border-right:1px solid #3EBAEA;display:inline;list-style:none outside none;margin:0 5px 0 0;padding:0 5px 0 0;text-transform:uppercase;}
+#home-promo-shop-shoes li:last-child{border:0 none;}
+#home-promo-shop-shoes li a{color:#3EBAEA;}
+#home-promo-shop-shoes span{font-style:italic;margin:0 10px 0 0;}
+.home-bottom-center{background:none repeat scroll 0 0 #F3F3F3;float:left;width:50%;}
+#home-promo-free-shipping{background-attachment:scroll;background-clip:border-box;background-color:transparent;background-image:url("../images/homepage/home-promo-free-shipping.png");background-origin:padding-box;background-position:center top;background-repeat:no-repeat;background-size:100% auto;height:413px;margin:auto;max-width:319px;text-indent:-999em;width:100%;}
+.home-bottom-right{clear:both;margin:0;width:auto;}
+.home-bottom-right h2{background:url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;border-bottom:2px solid #01A4E5;height:54px;padding:30px 0;text-indent:-999em;}
+.home-bottom-right .vertical-carousel{margin:0;padding:0;}
+.home-bottom-right .vertical-carousel li{float:left;list-style:none outside none;padding:0;width:25%;}
+.home-bottom-right .vertical-carousel li .capture-product-id{display:none;}
+.home-bottom-right .vertical-carousel li .product-price .product-standard-price{text-decoration:line-through;}
+.home-bottom-right .product-tile{border:0 none;margin:auto;min-height:255px;width:90%;}
+.home-bottom-right .product-tile img{max-width:90%;}
+.home-bottom{clear:both;overflow:hidden;padding:2em 0;}
+#email-alert-signup{display:block;margin:0 0 0 33px;width:910px;}
+#email-alert-signup label{color:#8F8F8F;float:left;padding:0.5em 0 !important;text-transform:uppercase;width:50%;}
+#email-alert-signup input[type="text"]{float:left;padding:0.7em 0.5em;width:30%;}
+#email-alert-signup input[type="image"]{float:left;padding:0.1em;}

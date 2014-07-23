@@ -1,0 +1,17 @@
+/* primary region elements */
+/* ------------------------------------- */
+
+.primary-content a{color:#3EBAEA;}
+.primary-content h1,#secondary h1{font-family:Georgia,serif;font-size:1.75em;font-style:italic;font-weight:400;margin:0 0 14px;}
+.primary-content h2{font-size:1.3em;}
+.primary-content h3{font-size:1.15em;}
+.primary-content dl{clear:both;overflow:hidden;}
+.primary-content dl dt{clear:both;float:left;margin:2% 0 0;min-width:15%;}
+.primary-content dl dd{float:left;margin:2% 0 0;padding:0 0 0 5%;}
+.col-1{float:left;margin:4px 0;width:48%;}
+.col-2{float:right;margin:4px 0;width:48%;}
+.content-header{font-family:Georgia,serif;font-size:1.75em;font-style:italic;font-weight:400;margin:0 0 14px !important;}
+.content-header span{font-size:0.75em;font-style:normal;font-weight:400;}
+.section-header{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;border-bottom:1px solid #FFFFFF;font-size:1.1em !important;font-weight:700;margin:0;padding:1em;position:relative;text-transform:uppercase;}
+.section-header-note{font-size:0.9em;font-weight:400;position:absolute;right:1em;text-transform:none;}
+.back{display:block;margin:0 0 10px;}

@@ -1,0 +1,19 @@
+/* homepage assets
+--------------------------------------------------------------------------------------- */
+.js .homepage-slides {height: 550px;}
+.js #homepage-slider .jcarousel-item {max-width:100%;}
+.js #homepage-slider .jcarousel-control {position: absolute;right:10px;bottom:20px;}
+.js #homepage-slider .jcarousel-control a {background: none repeat scroll 0 0 #E0E0E0;border:1px solid #cccccc;display: block;float: left;height: 15px;margin: 0 3px;text-indent: -999em; width: 6px;}
+.js #homepage-slider .jcarousel-control a.active {background-color:#666666;}
+.js .home-bottom-left,
+.js .home-bottom-center,
+.js .home-bottom-right {clear:none;float:left;width: 33%;}
+
+.js .home-bottom-right .jcarousel-clip {height: 282px; overflow:hidden;}
+.js .home-bottom-right .vertical-carousel li {height: 282px;float:none; width:300px;}
+.js .home-bottom-right .product-tile {min-height: 0;}
+.js .home-bottom-right .jcarousel-prev {background:url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:20px;right:0;width:52px;z-index:999;}
+.js .home-bottom-right .jcarousel-next {background:url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;cursor:pointer;height:12px;position:absolute;bottom:0px;right:0;width:52px;z-index:999;}
+.js .home-bottom-right .jcarousel-prev-disabled, .home-bottom-right .jcarousel-next-disabled {display:none !important;}
+
+.js button.select {display:none}

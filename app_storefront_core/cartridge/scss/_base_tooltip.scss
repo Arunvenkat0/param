@@ -1,0 +1,14 @@
+/* base tool tip */
+/* ------------------------------------- */
+
+.tooltip{cursor:help;position:relative;}
+.tooltip .tooltip-content{background:none repeat scroll 0 0 rgba(0,0,0,0.8);border-radius:3px 3px 3px 3px;color:#FFFFFF;display:none;font-size:12px;font-style:normal;left:100%;max-width:300px;min-width:200px;opacity:0;padding:1em;position:absolute;text-decoration:none;top:100%;visibility:hidden;z-index:10;}
+.tooltip:hover .tooltip-content{display:block;opacity:1;overflow:visible;visibility:visible;}
+.js .tooltip-content{display:none !important;}
+#tooltip{background-color:#FFFFFF;border:1px solid #111111;opacity:0.95;padding:5px;position:absolute;z-index:3000;}
+#tooltip .small{width:300px;}
+#tooltip .medium{width:500px;}
+#tooltip .recommendation-tooltip-header{background:none repeat scroll 0 0 #CCCCCC;font-size:1.2em;font-weight:bold;padding:10px;}
+#tooltip .recommendation-tooltip-header .product-price .price-standard{color:#999999;text-decoration:line-through;}
+#tooltip .recommendation-tooltip-description{padding:10px;}
+#tooltip .recommendation-tooltip-attributes{padding:10px;}

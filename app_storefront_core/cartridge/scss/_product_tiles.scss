@@ -1,0 +1,36 @@
+
+/* product tiles */
+/* ------------------------------------- */
+
+.product-tile{color:#999999;position:relative;text-align:center;}
+.product-tile img{max-width:100%;}
+.product-tile .product-image{height:195px;position:relative;}
+.product-tile .product-name{font-family:Georgia,sans-serif;font-size:1.2em;font-style:italic;margin:13px 0 2px;}
+.product-tile .product-name h2{font-size:1.1em !important;font-weight:normal;margin-bottom:5px;}
+.product-tile .product-pricing .product-standard-price{text-decoration:line-through;}
+.product-tile .product-swatches{bottom:-9px;position:absolute;right:0;}
+.product-tile .product-swatches-all{cursor:pointer;font-size:0.9em;}
+.product-tile .product-swatches ul{list-style:none outside none;margin:0;overflow:hidden;padding:0;}
+.product-tile .product-swatches ul.swatch-toggle{background:none repeat scroll 0 0 #FFFFFF;display:none;position:absolute;}
+.product-tile .product-swatches:hover ul.swatch-toggle{display:block;}
+.product-tile .product-swatches {float:right;}
+.product-tile .product-swatches li{float:left;}
+.product-tile .product-swatches .swatch{display:block;width:16px;}
+.product-tile .product-swatches .swatch img{border:1px solid #FFFFFF;height:12px;padding:1px;width:12px;}
+.product-tile .product-swatches .selected img{border-color:#12ABE7;}
+.product-tile .product-swatches img:hover{border-color:#12ABE7;}
+.product-tile .product-promo{font-size:0.8em;margin:6px 0;text-transform:uppercase;}
+.product-tile .product-compare{bottom:-5px;left:5px;position:absolute;width:40px;line-height:11px;}
+.product-tile .product-compare label{float:right;font-weight:400;padding:0;width:50%;}
+.product-tile .product-compare input{float:left;margin:0;}
+.product-tile .pr_stars{height:auto;position:relative;left:8px;}
+.product-tile .prSnippetTitle {float:left;}
+.product-tile .prSnippetReadReviews {display:none;}
+.product-tile .prSnippetRatingUnclickable {float:left;}
+.product-tile .prSnippetNumberOfRatingsText {display:none;}
+.product-tile .pr-snippet-review-count{display:none;}
+.product-tile .pr-snippet-read-write{display:none;}
+.product-tile .pr-snippet-social-bar{display:none;}
+.product-tile .pr-clear{display:none;}
+.product-tile .pr-snippet-stars{float:none;margin:0 auto;width:115px;}
+.capture-product-id{left:-999em;position:absolute;}
