@@ -9,7 +9,7 @@ importPackage( dw.customer );
 
 function execute( pdict : PipelineDictionary ) : Number
 {
-	var THIS_SCRIPT : String = 'ObtainAccountFromGitHubProviderAndLogin.ds, pdict.OAuthProviderID:' + pdict.OAuthProviderID + ": ";
+	var THIS_SCRIPT : String = 'ObtainAccountFromVKontakteProviderAndLogin.ds, pdict.OAuthProviderID:' + pdict.OAuthProviderID + ": ";
 	if (null == pdict.OAuthProviderID) {
 		Logger.warn(THIS_SCRIPT + "exiting because the provider id is null.");
 		return PIPELET_ERROR;	
@@ -20,12 +20,12 @@ function execute( pdict : PipelineDictionary ) : Number
 		var rememberMe : Boolean = session.custom['RememberMe'];
 		delete session.custom['RememberMe'];
 		
-		var extProfile : Object = JSON.parse(pdict.ResponseText);
+		var extProfile : Object = JSON.parse(pdict.ResponseText)['response'][0];
 		if (null == extProfile) {
 			Logger.warn(THIS_SCRIPT + ": extProfile could not be extracted from the response:" + pdict.ResponseText);
 			return PIPELET_ERROR;
 		}
-		var userId : String = extProfile['id'];
+		var userId : String = extProfile['uid'];
 		if (!userId) {
 			Logger.warn(THIS_SCRIPT + "Undefined user identifier - make sure you are mapping the correct property from the response."
 				+ " We are mapping 'id' which is not available in the response: " + extProfile);
@@ -41,8 +41,8 @@ function execute( pdict : PipelineDictionary ) : Number
 			profile = customer.getProfile();
 			
 			// vvvvvvvvv Custom JSON parsing part starts here: vvvvvvvvv
-			profile.setFirstName(extProfile['name']);
-			profile.setLastName(extProfile['name']); 
+			profile.setFirstName(extProfile['first_name']);
+			profile.setLastName(extProfile['last_name']); 
 			profile.setEmail(extProfile['email']);
 			// ^^^^^^^^^^^ Custom parsing part ends here ^^^^^^^^^^^
 		} else {

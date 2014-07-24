@@ -26,5 +26,5 @@ This module validates the entered paramameters:
     <comment>workaround: can't check selected field</comment>
   </command>
   <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_city')[@value='@{City}']"/>
-  <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_zip')[@value='@{ZipCode}']"/>
+  <command name="assertElementPresent" target="xpath=id('dwfrm_billing_billingAddress_addressFields_postal')[@value='@{ZipCode}']"/>
 </scriptmodule>

@@ -427,7 +427,7 @@
 														${Resource.msg('cart.wishlistitem','checkout',null)}
 													</a>
 												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
-													<a href="${URLUtils.url('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
+													<a href="${URLUtils.https('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
 														${Resource.msg('cart.registryitem','checkout',null)}
 													</a>
 												</isif>

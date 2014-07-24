@@ -54,11 +54,11 @@
     <parameter name="Size" value="${Size}"/>
   </module>
   <command name="pause" value="2000"/>
-  <action name="SelectColor"/>
-  <module name="library.function.FClick">
+  <action name="SelectColor" disabled="true"/>
+  <module name="library.function.FClick" disabled="true">
     <parameter name="clickElement" value="css=a.swatchanchor[title='${Color}']"/>
   </module>
-  <command name="pause" value="2000"/>
+  <command name="pause" disabled="true" value="2000"/>
   <action name="UseQuickViewToAddProductToCart"/>
   <module name="library.module.app.sitegenesis.quickview.AddToCart"/>
   <action name="VERIFY-NoCalloutInShoppingCart"/>

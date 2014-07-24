@@ -18,6 +18,6 @@
   <command name="assertSelectedLabel" target="xpath=//select[contains(@id, 'country')]" value="@{Country}"/>
   <command name="assertSelectedLabel" target="xpath=//select[contains(@id, 'state')]" value="@{State}"/>
   <command name="assertText" target="xpath=//input[contains(@id, 'city')]" value="@{City}"/>
-  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value="@{ZipCode}"/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'postal')]" value="@{ZipCode}"/>
   <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value="@{Phone}"/>
 </scriptmodule>
