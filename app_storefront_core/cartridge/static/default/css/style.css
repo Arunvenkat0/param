@@ -3222,8 +3222,7 @@ ul.product-availability-list .on-order, ul.product-availability-list .not-availa
   padding: 2em 0; }
 
 .shipping-method {
-  padding: 0;
-  margin: 22px -104px 0; }
+  margin-top: 22px; }
 
 .shipping-method label {
   display: inline;
@@ -3232,10 +3231,6 @@ ul.product-availability-list .on-order, ul.product-availability-list .not-availa
 
 .shipping-method .shipping-description {
   display: inline; }
-
-.shipping-status {
-  padding: 0;
-  margin: 0 -57px 0; }
 
 .redemption .success {
   color: green; }
@@ -3373,7 +3368,8 @@ ul.product-availability-list .on-order, ul.product-availability-list .not-availa
   margin: 0 0 20px; }
 
 .pt_order-confirmation .order-shipment-table .order-shipment-details {
-  border-left: 1px solid #E0E0E0; }
+  border-right: 1px solid #E0E0E0;
+  min-width: 200px; }
 
 .pt_order-confirmation #primary h2 {
   font-family: Georgia, serif;
@@ -3426,20 +3422,8 @@ ul.product-availability-list .on-order, ul.product-availability-list .not-availa
 .pt_order-confirmation .order-confirmation-details .content-header {
   margin: 7px 0 !important; }
 
-.order-shipment-details .shipping-method {
-  padding-left: 0px; }
-
-.order-shipment-details .label {
-  position: absolute;
-  width: 150px;
-  text-align: right;
+.order-shipment-details .label, .order-shipment-details .firstname, .order-shipment-details .lastname {
   font-weight: bold; }
-
-.order-shipment-details .value {
-  margin-left: 155px; }
-
-.order-shipment-details .order-shipment-address {
-  width: 240px; }
 
 .item-shipping-address {
   min-width: 120px; }
@@ -5213,16 +5197,22 @@ ul.store-list .selected {
   .pt_order-confirmation .order-shipment-table th {
     display: none; }
   .pt_order-confirmation .order-shipment-table td {
-    font-size: 0.8em; }
+    font-size: 0.9em;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    float: left; }
+  .pt_order-confirmation .order-shipment-table .line-item-details {
+    width: 70%; }
+  .pt_order-confirmation .order-shipment-table .line-item-quantity {
+    width: 10%; }
+  .pt_order-confirmation .order-shipment-table .line-item-price {
+    width: 20%; }
+  .pt_order-confirmation .order-shipment-table .order-shipment-details {
+    border: none;
+    width: 100%; }
   .pt_order-confirmation .order-shipment-table .shipping-method {
     padding-left: 0; }
-  .order-shipment-details .order-shipment-address {
-    width: auto; }
-  .order-shipment-details .label {
-    position: static;
-    width: auto; }
-  .order-shipment-details .value {
-    margin-left: 0; }
   .content-asset ul.account-options li {
     float: none;
     width: auto; }
