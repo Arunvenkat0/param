@@ -7,7 +7,6 @@
     <comment>Search for the product set</comment>
     <parameter name="SearchText" value="${searchID}"/>
   </module>
-  <command name="assertNotElementPresent" target="css=.Color .selected"/>
   <command name="assertNotElementPresent" target="css=.size .selected"/>
   <command name="assertNotElementPresent" target="css=.width .selected"/>
   <module name="library.function.FStoreText">

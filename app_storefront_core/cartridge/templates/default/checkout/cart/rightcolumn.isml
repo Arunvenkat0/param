@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Renders the right column on cart page. 
 	
@@ -75,7 +76,7 @@
 			</div><!-- END: welcomemessage -->
 			
 			<div class="not-user">
-				<form action="${URLUtils.httpContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}" class="cartcontinue">
+				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}" class="cartcontinue">
 					<fieldset>
 						${Resource.msg('pt_cart.usernot','checkout',null)} 
 						<span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/>

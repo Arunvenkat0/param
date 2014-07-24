@@ -20,9 +20,9 @@
 
 	<iscomment>determine the appropriate error message based on the status code</iscomment>
 	<isscript>
-		var status : dw.system.Status = pdict.GiftCertStatusCode;
+		var status : dw.system.Status = pdict.GiftCertStatus;
 		var errorMsg : String = null;
-		if(!empty(pdict.GiftCertStatusCode))
+		if(!empty(pdict.GiftCertStatus))
 		{
 			// not found / disabled / not available for use
 			if( dw.order.GiftCertificateStatusCodes.GIFTCERTIFICATE_NOT_FOUND.equals(status.code)

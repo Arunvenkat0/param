@@ -13,6 +13,9 @@
   <module name="modules.catalog.OpenSubCategoryPage">
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>
   </module>
+  <module name="library.module.app.sitegenesis.productgriddisplay.SelectSorting">
+    <parameter name="SortSelectionName" value="Product Name Z - A"/>
+  </module>
   <action name="CheckColorSwatch"/>
   <module name="modules.catalog.CheckCatalogSwatchFeature">
     <parameter name="SubCategoryName" value="${SubCategoryName}"/>

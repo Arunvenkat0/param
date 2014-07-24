@@ -21,17 +21,17 @@ importPackage( dw.web );
 
 function execute( args : PipelineDictionary ) : Number
 {
-	var tmp : HttpParameter = args.CurrentHttpParameterMap.OAuthProvider; 
+	var tmp : HttpParameter = args['CurrentHttpParameterMap']['OAuthProvider']; 
 	var providerId : String = null==tmp? "(undefined)" : tmp.stringValue;
 	var THIS_SCRIPT : String = 'PreInitiateOAuthLogin.ds: provider Id' + providerId + ": ";
 
-	tmp = args.CurrentHttpParameterMap.rememberme;
-	session.custom.RememberMe = null==tmp?false:tmp.booleanValue;
+	tmp = args['CurrentHttpParameterMap']['rememberme'];
+	session.custom['RememberMe'] = null==tmp?false:tmp.booleanValue;
 
-	session.custom.ContinuationURL = URLUtils.continueURL().toString();
+	session.custom['ContinuationURL'] = URLUtils.continueURL().toString();
 
 	Logger.debug(THIS_SCRIPT + "Placed in session.custom: RememberMe: " 
-		+ session.custom.RememberM + ", ContinuationURL:" +  session.custom.ContinuationURL);
+		+ session.custom['RememberMe'] + ", ContinuationURL:" +  session.custom['ContinuationURL']);
 
     return PIPELET_NEXT;
 }

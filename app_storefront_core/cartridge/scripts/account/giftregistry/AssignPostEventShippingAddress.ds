@@ -23,7 +23,7 @@ function execute( pdict : PipelineDictionary ) : Number
 	giftRegistryForm.eventaddress.addressAfterEvent.address1.value = addressBeforeFields.address1.value;
 	giftRegistryForm.eventaddress.addressAfterEvent.address2.value = addressBeforeFields.address2.value;
 	giftRegistryForm.eventaddress.addressAfterEvent.city.value = addressBeforeFields.city.value;
-	giftRegistryForm.eventaddress.addressAfterEvent.zip.value = addressBeforeFields.zip.value;
+	giftRegistryForm.eventaddress.addressAfterEvent.postal.value = addressBeforeFields.postal.value;
 	giftRegistryForm.eventaddress.addressAfterEvent.states.state.value = addressBeforeFields.states.state.value;
 	giftRegistryForm.eventaddress.addressAfterEvent.country.value = addressBeforeFields.country.value;
 	giftRegistryForm.eventaddress.addressAfterEvent.phone.value = addressBeforeFields.phone.value;

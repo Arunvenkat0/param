@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
 
 <iscomment>
@@ -40,7 +41,7 @@
 					
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.zip}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.billingaddress.postal}" type="input"/>
 					
 				</div>
 				<div class="formfield clearfix">
@@ -60,12 +61,9 @@
 	</form>
 <isscript>	
 	importScript("util/ViewHelpers.ds");
-	var stateForm = pdict.CurrentForms.billingaddress.states;
-	var countryField = pdict.CurrentForms.billingaddress.country; 
-	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
-	
+	var addressForm = pdict.CurrentForms.billingaddress;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);		
 </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
 </div>
-

@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Creates a mini credit card display.
 	If p_card is given the second parameter is ignored.

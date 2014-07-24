@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Test Case ID: (C85057) Smoke Test » Checkout - Retuning Customer » Purchase InStore Pickup Product
+ * Test Case ID: (C85057)
  */
 @ScriptName
 ("testcases.smoketest.purchase.TPurchaseInStorePickUpProductAsRegisteredUser")

@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <div id="fb-root"></div>
 	<isinclude template="account/facebook/facebookinit"/>
 	
