@@ -2209,6 +2209,53 @@ var app = (function (app, $) {
 		});
 	}
 
+	/**
+	 * @function
+	 * @description disable continue button on the page if required inputs are not filled
+	 * @input String the selector string of the continue button
+	 * @input String the selector string for the form
+	 */
+	function initContinue(continueSelector, formSelector) {
+		var $continue = $(continueSelector);
+		var $form = $(formSelector);
+		var validator = $form.validate();
+		var $requiredInputs = $('.required', $form).find(':input');
+		// check for required input
+		var hasEmptyRequired = function () {
+			// filter out only the visible fields - this allows the checking to work on 
+			// billing page where some payment methods inputs are hidden
+			var requiredValues = $requiredInputs.filter(':visible').map(function () {
+				return $(this).val();
+			});
+			return $.inArray('', requiredValues) !== -1;
+		};
+
+		if (!hasEmptyRequired()) {
+			// only validate form when all required fields are filled to avoid 
+			// throwing errors on empty form
+			if (validator.form()) {
+				$continue.removeAttr('disabled');
+			}
+			
+		} else {
+			$continue.attr('disabled', 'disabled');
+		}
+
+		$requiredInputs.on('change', function () {
+			if ($(this).val() === '') {
+				$continue.attr('disabled', 'disabled');
+			} else {
+				// enable continue button on last required field that is valid
+				// only validate single field
+				if (validator.element(this) && !hasEmptyRequired()) {
+					$continue.removeAttr('disabled');
+				} else {
+					$continue.attr('disabled', 'disabled');
+				}
+			}
+		});
+	}
+
 	//shipping page logic
 	//checkout gift message counter
 	/**
@@ -2243,42 +2290,10 @@ var app = (function (app, $) {
 
 		});
 	}
-	/**
-	* @function
-	* @description this function inits the form so that uses client side validation before submitting to the server
-	*/
-	function initmultishipshipaddress() {
-		var $continue = $('.formactions button');
-		var $selects = $('.select-address');
-
-		var hasEmptySelect = function () {
-			var selectValues = $selects.children(':selected').map(function(){return this.value;});
-			return $.inArray('', selectValues) !== -1;
-		};
-		// if we found a empty value disable the button
-		if (hasEmptySelect()){
-			$continue.attr('disabled','disabled');
-		} else {
-			$continue.removeAttr('disabled');
-		}
-		//add listeners to the selects to enable the continue button
-		$selects.on('change', function(){
-			if (this.value == ''){
-				$continue.attr('disabled','disabled');
-			} else {
-				//check to see if any select box has a empty vlaue
-				if (hasEmptySelect()) {
-					$continue.attr('disabled','disabled');
-				} else {
-					$continue.removeAttr('disabled');
-				}
-			}
-		});
-	}
 
 	/**
 	 * @function
-	 * @description capture add edit adddress form events
+	 * @description capture and handle add and edit address action in dialog on multiship page
 	 */
 	function addEditAddress(target) {
 		var $addressForm = $('form[name$="multishipping_editAddress"]'),
@@ -2340,6 +2355,8 @@ var app = (function (app, $) {
 	 * @description shows gift message box, if shipment is gift
 	 */
 	function shippingLoad() {
+		initContinue('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
+
 		$cache.checkoutForm.on("click", "#is-gift-yes, #is-gift-no", function (e) {
 			$cache.checkoutForm.find(".gift-message-text").toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
 		})
@@ -2396,11 +2413,8 @@ var app = (function (app, $) {
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
 		if ($(".cart-row .shippingaddress .select-address").length > 0){
-			initmultishipshipaddress();
-		} else {
-			$('.formactions button').attr('disabled','disabled');
+			initContinue('[name$="addressSelection_save"]', '[id$="multishipping_addressSelection"]')
 		}
-		return null;
 	}
 
 	/**
@@ -2419,19 +2433,19 @@ var app = (function (app, $) {
 		// ensure checkbox of payment method is checked
 		$("#is-" + paymentMethodID)[0].checked = true;
 
-		var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
-		bmlForm.find("select[name$='_year']").removeClass("required");
-		bmlForm.find("select[name$='_month']").removeClass("required");
-		bmlForm.find("select[name$='_day']").removeClass("required");
-		bmlForm.find("input[name$='_ssn']").removeClass("required");
+		// var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
+		// bmlForm.find("select[name$='_year']").removeClass("required");
+		// bmlForm.find("select[name$='_month']").removeClass("required");
+		// bmlForm.find("select[name$='_day']").removeClass("required");
+		// bmlForm.find("input[name$='_ssn']").removeClass("required");
 
-		if (paymentMethodID==="BML") {
-			var yr = bmlForm.find("select[name$='_year']");
-			bmlForm.find("select[name$='_year']").addClass("required");
-			bmlForm.find("select[name$='_month']").addClass("required");
-			bmlForm.find("select[name$='_day']").addClass("required");
-			bmlForm.find("input[name$='_ssn']").addClass("required");
-		}
+		// if (paymentMethodID==="BML") {
+		// 	var yr = bmlForm.find("select[name$='_year']");
+		// 	bmlForm.find("select[name$='_year']").addClass("required");
+		// 	bmlForm.find("select[name$='_month']").addClass("required");
+		// 	bmlForm.find("select[name$='_day']").addClass("required");
+		// 	bmlForm.find("input[name$='_ssn']").addClass("required");
+		// }
 		app.validator.init();
 	}
 	/**
@@ -2482,9 +2496,9 @@ var app = (function (app, $) {
 	function billingLoad() {
 		if( !$cache.paymentMethodId ) return;
 
+		initContinue('[name$="billing_save"]', 'form[id$="billing"');
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
-
 		});
 
 		// get selected payment method from payment method form
