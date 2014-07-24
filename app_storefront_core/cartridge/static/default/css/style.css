@@ -718,18 +718,10 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .checkout-progress-indicator .active{font-weight:700;}
 .checkout-progress-indicator .step-3{background:none repeat scroll 0 0 transparent;padding-right:0;}
 .select-address{padding:2em 0;}
-<<<<<<< HEAD
 .shipping-method{margin-top:22px;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
 
-=======
-.shipping-method{padding:0;margin: 22px -104px 0;}
-.shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
-.shipping-method .shipping-description{display:inline;}
-
-.shipping-status{padding:0;margin: 0 -57px 0;}
->>>>>>> sitegen-14.8
 .redemption .success{color:green;}
 .redemption{color:#990000;}
 .redemption span.error{margin-left:0;}
@@ -780,16 +772,9 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .pt_order-confirmation #main {padding: 0 14px;}
 .pt_cart .breadcrumb {padding-left:0}
 .pt_order-confirmation .order-confirmation-details .content-header {margin:7px 0 !important;}
-<<<<<<< HEAD
 .order-shipment-details .label,
 .order-shipment-details .firstname,
 .order-shipment-details .lastname {font-weight:bold}
-=======
-.order-shipment-details .shipping-method { padding-left:0px;}
-.order-shipment-details .label { position:absolute;width:150px;text-align:right;font-weight:bold}
-.order-shipment-details .value { margin-left:155px;}
-.order-shipment-details .order-shipment-address { width:240px;}
->>>>>>> sitegen-14.8
 .item-shipping-address {min-width: 120px;}
 
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
