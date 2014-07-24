@@ -152,7 +152,8 @@
 		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
 		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
 		billing						: URLUtils.url('COBilling-Start').toString(),		
-		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString()
+		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
+		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString()
 	};
 	
 	userSettings = {
