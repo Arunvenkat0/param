@@ -11,6 +11,6 @@
   <command name="assertText" target="xpath=//select[contains(@id, 'country')]" value="regexp:Select...*"/>
   <command name="assertText" target="xpath=//select[contains(@id, 'state')]" value="regexp:Select...*"/>
   <command name="assertText" target="xpath=//input[contains(@id, 'city')]" value=""/>
-  <command name="assertText" target="xpath=//input[contains(@id, 'zip')]" value=""/>
+  <command name="assertText" target="xpath=//input[contains(@id, 'postal')]" value=""/>
   <command name="assertText" target="xpath=//input[contains(@id, 'phone')]" value=""/>
 </scriptmodule>

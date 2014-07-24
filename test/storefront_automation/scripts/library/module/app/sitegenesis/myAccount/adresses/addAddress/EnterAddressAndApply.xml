@@ -48,7 +48,7 @@
     <parameter name="inputString" value="@{city}"/>
   </module>
   <module name="library.function.FType">
-    <parameter name="typeElement" value="css=#dwfrm_profile_address_zip"/>
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_postal"/>
     <parameter name="inputString" value="@{zip}"/>
   </module>
   <module name="library.function.FType">

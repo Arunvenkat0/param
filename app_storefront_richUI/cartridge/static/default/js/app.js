@@ -1941,6 +1941,9 @@ var app = (function (app, $) {
 				e.preventDefault();
 				var url = app.util.appendParamsToUrl(app.urls.addBonusProduct, {bonusDiscountLineItemUUID:bliUUID});
 				var bonusProducts = getBonusProducts();
+				if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
+					bonusProducts.bonusproducts[0].product.qty = maxItems;
+				} 
 				// make the server call
 				$.ajax({
 					type : "POST",
@@ -1965,6 +1968,7 @@ var app = (function (app, $) {
 				.always(function () {
 					$cache.bonusProduct.dialog("close");
 				});
+				
 			});
 		}
 	};
