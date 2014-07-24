@@ -27,6 +27,6 @@
     <parameter name="assertedElement" value="xpath=//input[contains(@id, 'city')][contains(@class, 'required')]"/>
   </module>
   <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="xpath=//input[contains(@id, 'zip')][contains(@class, 'required')]"/>
+    <parameter name="assertedElement" value="xpath=//input[contains(@id, 'postal')][contains(@class, 'required')]"/>
   </module>
 </scriptmodule>
