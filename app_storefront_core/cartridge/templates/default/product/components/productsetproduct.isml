@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isscript>
 	var avm = pdict.Product.availabilityModel;
 	pdict.available = avm.availabilityStatus==dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK 

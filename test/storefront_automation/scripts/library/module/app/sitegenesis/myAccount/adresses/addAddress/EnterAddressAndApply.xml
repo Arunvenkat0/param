@@ -48,7 +48,7 @@
     <parameter name="inputString" value="@{city}"/>
   </module>
   <module name="library.function.FType">
-    <parameter name="typeElement" value="css=#dwfrm_profile_address_zip"/>
+    <parameter name="typeElement" value="css=#dwfrm_profile_address_postal"/>
     <parameter name="inputString" value="@{zip}"/>
   </module>
   <module name="library.function.FType">
@@ -59,6 +59,7 @@
   <module name="library.function.FClick">
     <parameter name="clickElement" value="css=.apply-button"/>
   </module>
+  <command name="pause" value="1000"/>
   <module name="library.function.FWaitForNotElement">
     <parameter name="element" value="css=form#edit-address-form"/>
   </module>

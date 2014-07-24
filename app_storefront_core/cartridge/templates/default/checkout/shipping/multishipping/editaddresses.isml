@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isset name="DecoratorTemplate" value="checkout/pt_checkout" scope="page"/>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
@@ -88,7 +89,7 @@
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.city}" type="input"/>
 	    	
-	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.zip}" type="input"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input"/>
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input"/>
 				
@@ -118,10 +119,8 @@
 	
 	<isscript>
 	importScript("util/ViewHelpers.ds");
-	var stateForm = pdict.CurrentForms.shippingaddress.states;
-	var countryField = pdict.CurrentForms.shippingaddress.country; 
-	var countries = ViewHelpers.getCountriesAndRegions(countryField, stateForm, "forms");
-	
+	var addressForm = pdict.CurrentForms.shippingaddress;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);		
 </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	

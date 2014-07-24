@@ -2077,7 +2077,7 @@
   <branch basename="IncludeNavigation">
     <segment>
       <node>
-        <start-node name="IncludeNavigation" secure="true"/>
+        <start-node name="IncludeNavigation" secure="false"/>
         <node-display x="13" y="17"/>
       </node>
       <simple-transition>

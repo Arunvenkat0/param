@@ -35,7 +35,7 @@
     <parameter name="inputString" value="@{City}"/>
   </module>
   <module name="library.function.FType">
-    <parameter name="typeElement" value="xpath=//input[contains(@id, 'zip')]"/>
+    <parameter name="typeElement" value="xpath=//input[contains(@id, 'postal')]"/>
     <parameter name="inputString" value="@{ZipCode}"/>
   </module>
   <module name="library.function.FType">

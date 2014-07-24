@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Logs a customer out using the logout-link on the welcome page. Checks if the customer name disappears within the page header.</description>
-  <command name="clickAndWait" target="css=.menu-utility-user .last a"/>
-  <command name="waitForElementPresent" target="css=.user-login"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="css=.menu-utility-user .last a"/>
+  </module>
+  <module name="library.function.FWaitForElement">
+    <parameter name="element" value="css=.user-login"/>
+  </module>
   <module name="library.function.FAssertText">
     <parameter name="textElement" value="css=.user-login"/>
     <parameter name="textPattern" value="regexpi:Login"/>

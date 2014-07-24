@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	Displays order details, such as order number, creation date, payment information,
 	order totals and information for each contained shipment.
@@ -165,8 +166,43 @@
 									</isloop>
 								</isif>
 							</isif>
-						</td>
-
+					    </td>
+			
+			    		<iscomment>only show shipping address for first pli in shipment</iscomment>
+					    <isif condition="${pliloopstate.first}">
+					    	<isset name="rowSpan" value="${shipment.productLineItems.size()}" scope="page"/>
+						    <td rowspan="${rowSpan.toFixed()}" class="order-shipment-details">
+						    	<div class="order-shipment-address">
+						    		<isminishippingaddress p_shipment="${shipment}" p_editable="${false}" p_showmethod="${false}" p_showpromos="${false}"/>
+						    	</div>
+						    	<div class="shipping-method">
+						    		<span class="label">${Resource.msg('orderdetails.shippingmethod','components',null)}</span>
+					    			<isif condition="${!empty(shipment.shippingMethod)}">
+						               <span class="value"><isprint value="${shipment.shippingMethod.displayName}"/></span>
+									<iselse/>
+						               <span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
+									</isif>
+						    	</div>
+				    			<isif condition="${shipment.custom.shipmentType != 'instore'}">
+						    	<div class="shipping-status">
+						    		<span class="label">${Resource.msg('orderdetails.shippingstatus','components',null)}</span>
+				    				<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
+				    					<span class="value">${Resource.msg('orderdetails.notshipped','components',null)}</span>
+				    				<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
+				    					<span class="value">${Resource.msg('orderdetails.shipped','components',null)}</span>
+				    				<iselse/>
+				    					<span class="value">${Resource.msg('orderdetails.notknown','components',null)}</span>
+				    				</isif>
+						    	</div>
+						    	</isif>
+						    	<isif condition="${!empty(shipment.trackingNumber)}">
+							    	<div class="track-ingnumber">
+							    		<span class="label">${Resource.msg('orderdetails.tracking','components',null)}</span>
+							    		<span class="value"><!-- Tracking Number --><isprint value="${shipment.trackingNumber}"/></span>
+							    	</div>
+						    	</isif>
+						    </td>
+					    </isif>
 					</tr>
 				</isloop>
 			<iscomment>Shipment Gift Message</iscomment>

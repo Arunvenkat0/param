@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24" varyby="price_promotion"/>
 
 <isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">

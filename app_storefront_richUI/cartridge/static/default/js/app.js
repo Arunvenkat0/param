@@ -1941,6 +1941,9 @@ var app = (function (app, $) {
 				e.preventDefault();
 				var url = app.util.appendParamsToUrl(app.urls.addBonusProduct, {bonusDiscountLineItemUUID:bliUUID});
 				var bonusProducts = getBonusProducts();
+				if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
+					bonusProducts.bonusproducts[0].product.qty = maxItems;
+				} 
 				// make the server call
 				$.ajax({
 					type : "POST",
@@ -1965,6 +1968,7 @@ var app = (function (app, $) {
 				.always(function () {
 					$cache.bonusProduct.dialog("close");
 				});
+				
 			});
 		}
 	};
@@ -2250,15 +2254,13 @@ var app = (function (app, $) {
 
 	    $("select option:selected").each(function () {
 	    	selectvalue.push(this.value)
-
      	});
-
+	    
 	    //if we found a empty value disable the button
-	    if(selectvalue.indexOf('') == -1){
+	    if (selectvalue.length > 0 && selectvalue.indexOf('') == -1){
 	    	$('.formactions button').removeAttr('disabled');
-	    }else{
+	    } else {
 	    	$('.formactions button').attr('disabled','disabled');
-
 	    }
 
 	    //add error classes to selects that don't have an address associated with them  when the button is clicked
@@ -2359,8 +2361,10 @@ var app = (function (app, $) {
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
-		if($(".cart-row .shippingaddress select.selectbox").length>0){
+		if ($(".cart-row .shippingaddress select.selectbox").length > 0){
 			initmultishipshipaddress();
+		} else {
+			$('.formactions button').attr('disabled','disabled');
 		}
 		return null;
 	}
@@ -2467,7 +2471,7 @@ var app = (function (app, $) {
 
 		$cache.save.on('click', function (e) {
 			// determine if the order total was paid using gift cert or a promotion
-			if ($("#noPaymentNeeded").length > 0 && $(".giftcertpi").length > 0) {
+			if ($("#noPaymentNeeded").length > 0 && $(".giftcert-pi").length > 0) {
 				// as a safety precaution, uncheck any existing payment methods
 				$cache.paymentMethodId.filter(":checked").removeAttr("checked");
 				// add selected radio button with gift card payment method
@@ -2487,7 +2491,7 @@ var app = (function (app, $) {
 
 		});
 
-		$cache.gcCheckBalance.on("click", function (e) {
+		$cache.checkGiftCert.on("click", function (e) {
 			e.preventDefault();
 			$cache.gcCode = $cache.gcCode || $cache.checkoutForm.find("input[name$='_giftCertCode']");
 			$cache.balance = $cache.balance || $cache.checkoutForm.find("div.balance");
@@ -2502,36 +2506,52 @@ var app = (function (app, $) {
 
 			app.giftcard.checkBalance($cache.gcCode.val(), function (data) {
 				if(!data || !data.giftCertificate) {
-					// error
-					var error = $cache.balance.find("span.error");
-					if (error.length===0) {
-						error = $("<span>").addClass("error").appendTo($cache.balance);
-					}
-					error.html(app.resources.GIFT_CERT_INVALID);
+					$cache.balance.html(app.resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
 					return;
 				}
-				// display details in UI
-				$cache.balance.find("span.error").remove();
-				var balance = data.giftCertificate.balance;
-				$cache.balance.html(app.resources.GIFT_CERT_BALANCE+" "+balance);
+				$cache.balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
+			});
+		});
+		
+		$cache.addGiftCert.on('click', function(e) {
+			e.preventDefault();
+			var code = $cache.giftCertCode.val(),
+				$error = $cache.checkoutForm.find('.giftcert-error');
+			if (code.length === 0) {
+				$error.html(app.resources.GIFT_CERT_MISSING);
+				return;
+			}
+			
+			var url = app.util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
+			$.getJSON(url, function(data) {
+				var fail = false;
+				var msg = '';
+				if (!data) {
+					msg = app.resources.BAD_RESPONSE;
+					fail = true;
+				} else if (!data.success) {
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
+					fail = true;
+				}
+				if (fail) {
+					$error.html(msg);
+					return;
+				} else {
+					window.location.assign(app.urls.billing);
+				}
 			});
 		});
 
 		$cache.addCoupon.on("click", function(e){
 			e.preventDefault();
-			$cache.couponCode = $cache.couponCode || $cache.checkoutForm.find("input[name$='_couponCode']");
-			$cache.redemption = $cache.redemption || $cache.checkoutForm.find("div.redemption.coupon");
-			var val = $cache.couponCode.val();
-			if (val.length===0) {
-				var error = $cache.redemption.find("span.error");
-				if (error.length===0) {
-					error = $("<span>").addClass("error").appendTo($cache.redemption);
-				}
-				error.html(app.resources.COUPON_CODE_MISSING);
+			var $error = $cache.checkoutForm.find('.coupon-error'),
+				code = $cache.couponCode.val();
+			if (code.length===0) {
+				$error.html(app.resources.COUPON_CODE_MISSING);
 				return;
 			}
 
-			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode:val,format:"ajax"});
+			var url = app.util.appendParamsToUrl(app.urls.addCoupon, {couponCode: code,format: "ajax"});
 			$.getJSON(url, function(data) {
 				var fail = false;
 				var msg = "";
@@ -2540,30 +2560,34 @@ var app = (function (app, $) {
 					fail = true;
 				}
 				else if (!data.success) {
-					msg = data.message;
-					msg = msg.split('<').join('&lt;');
-					msg = msg.split('>').join('&gt;');
+					msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 					fail = true;
 				}
 				if (fail) {
-					var error = $cache.redemption.find("span.error");
-					if (error.length===0) {
-						error = $("<span>").addClass("error").appendTo($cache.redemption);
-					}
-					error.html(msg);
+					$error.html(msg);
 					return;
 				}
-
-				$cache.redemption.html(data.message);
 
 				//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 				//this will force a page refresh to display the coupon message based on a parameter message
 				if(data.success && data.baskettotal==0){
-					var ccode = data.CouponCode;
-						window.location.assign(app.urls.billing);
+					window.location.assign(app.urls.billing);
 				}
-			
 			});
+		});
+		
+		// trigger events on enter
+		$cache.couponCode.on('keydown', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addCoupon.click();
+			}
+		});
+		$cache.giftCertCode.on('keydown', function(e) {
+			if (e.which === 13) {
+				e.preventDefault();
+				$cache.addGiftCert.click();
+			}
 		});
 	}
 
@@ -2588,7 +2612,7 @@ var app = (function (app, $) {
 		$cache.address1 = $cache.checkoutForm.find("input[name$='_address1']");
 		$cache.address2 = $cache.checkoutForm.find("input[name$='_address2']");
 		$cache.city = $cache.checkoutForm.find("input[name$='_city']");
-		$cache.postalCode = $cache.checkoutForm.find("input[name$='_zip']");
+		$cache.postalCode = $cache.checkoutForm.find("input[name$='_postal']");
 		$cache.phone = $cache.checkoutForm.find("input[name$='_phone']");
 		$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
 		$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
@@ -2615,8 +2639,11 @@ var app = (function (app, $) {
 			$cache.ccYear = $cache.ccContainer.find("[name$='_year']");
 			$cache.ccCcv = $cache.ccContainer.find("input[name$='_cvn']");
 			$cache.BMLContainer = $("#PaymentMethod_BML");
-			$cache.gcCheckBalance = $("#gc-checkbalance");
-			$cache.addCoupon = $("#add-coupon");
+			$cache.giftCertCode = $cache.checkoutForm.find('input[name$="_giftCertCode"]');
+			$cache.couponCode = $cache.checkoutForm.find("input[name$='_couponCode']");
+			$cache.checkGiftCert = $cache.checkoutForm.find("#check-giftcert");
+			$cache.addGiftCert = $cache.checkoutForm.find('#add-giftcert');
+			$cache.addCoupon = $cache.checkoutForm.find("#add-coupon");
 
 		}
 	}
@@ -3206,32 +3233,33 @@ var app = (function (app, $) {
 		 * @param {String} countrySelect The selected country
 		 */
 		updateStateOptions : function(countrySelect) {
-			var country = $(countrySelect);
-			if (country.length===0 || !app.countries[country.val()]) {
+			var $country = $(countrySelect);
+			if ($country.length===0 || !app.countries[$country.val()]) {
 				 return;
 			}
-			var form = country.closest("form");
-			var stateField = country.data("stateField") ? country.data("stateField") : form.find("select[name$='_state']");
-			if (stateField.length===0) {
-				return;
-			}
-
-			var form = country.closest("form"),
-				c = app.countries[country.val()],
+			var $form = $country.closest("form"),
+				c = app.countries[$country.val()],
 				arrHtml = [],
-				labelSpan = form.find("label[for='"+stateField[0].id+"'] span").not(".required-indicator");
+				$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
+				$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
+				$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
+				$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined;
 
 			// set the label text
-			labelSpan.html(c.label);
-
+			if ($postalLabel) {$postalLabel.html(c.postalLabel);}
+			if ($stateLabel) {
+				$stateLabel.html(c.regionLabel);
+			} else {
+				return;
+			}
 			var s;
 			for (s in c.regions) {
-				arrHtml.push('<option value="'+s+'">'+c.regions[s]+'</option>');
+				arrHtml.push('<option value="' + s + '">' + c.regions[s] + '</option>');
 			}
 			// clone the empty option item and add to stateSelect
-			var o1 = stateField.children().first().clone();
-			stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
-			stateField[0].selectedIndex=0;
+			var o1 = $stateField.children().first().clone();
+			$stateField.html(arrHtml.join("")).removeAttr("disabled").children().first().before(o1);
+			$stateField[0].selectedIndex = 0;
 		},
 		/**
 		 * @function
@@ -3326,7 +3354,7 @@ var app = (function (app, $) {
 				$cache.addressBeforeFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressBeforeFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressBeforeFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressBeforeFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressBeforeFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressBeforeFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressBeforeFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressBeforeFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3357,7 +3385,7 @@ var app = (function (app, $) {
 				$cache.addressAfterFields.filter("[name$='_address1']").val(data.address.address1);
 				$cache.addressAfterFields.filter("[name$='_address2']").val(data.address.address2);
 				$cache.addressAfterFields.filter("[name$='_city']").val(data.address.city);
-				$cache.addressAfterFields.filter("[name$='_zip']").val(data.address.postalCode);
+				$cache.addressAfterFields.filter("[name$='_postal']").val(data.address.postalCode);
 				$cache.addressAfterFields.filter("[name$='_state']").val(data.address.stateCode);
 				$cache.addressAfterFields.filter("[name$='_country']").val(data.address.countryCode);
 				$cache.addressAfterFields.filter("[name$='_phone']").val(data.address.phone);
@@ -3411,8 +3439,12 @@ var app = (function (app, $) {
 	 * @description DOM-Object initialization of the gift registration
 	 */
 	function initializeDom() {
-		$cache.addressBeforeFields.filter("[name$='_country']").data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"));
-		$cache.addressAfterFields.filter("[name$='_country']").data("stateField", $cache.addressAfterFields.filter("[name$='_state']"));
+		$cache.addressBeforeFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressBeforeFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressBeforeFields.filter("[name$='_postal']"));
+		$cache.addressAfterFields.filter("[name$='_country']")
+			.data("stateField", $cache.addressAfterFields.filter("[name$='_state']"))
+			.data("postalField", $cache.addressAfterFields.filter("[name$='_postal']"));
 
 		if ($cache.copyAddress.length && $cache.copyAddress[0].checked) {
 			// fill the address after fields

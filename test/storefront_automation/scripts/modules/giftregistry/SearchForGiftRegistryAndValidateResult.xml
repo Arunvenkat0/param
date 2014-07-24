@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Searches for a gift registry and validates the resulting page.</description>
-  <command name="type" target="id=dwfrm_productlists_search_registrantLastName" value="${UserLastName}"/>
+  <module name="library.function.FType">
+    <parameter name="typeElement" value="id=dwfrm_productlists_search_registrantLastName"/>
+    <parameter name="inputString" value="${UserLastName}"/>
+  </module>
   <command name="type" target="id=dwfrm_productlists_search_registrantFirstName" value="${UserFirstName}"/>
   <command name="select" target="id=dwfrm_productlists_search_eventType" value="value=${EventType}"/>
   <action name="AndValidateResult"/>
-  <command name="clickAndWait" target="name=dwfrm_productlists_search_search value=Find"/>
+  <module name="library.function.FClickAndWait">
+    <parameter name="clickElement" value="name=dwfrm_productlists_search_search value=Find"/>
+  </module>
   <command name="waitForText" target="css=#primary h2" value="Search Results"/>
   <command name="assertText" target="css=#primary h2" value="Search Results"/>
   <command name="assertXpathCount" target="id('primary')/table[@class='registry-results-table item-list']/tbody/tr" value="2">

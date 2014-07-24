@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!--- TEMPLATENAME: paymentmethods.isml --->
 <isinclude template="util/modules"/>
 <isif condition="${pdict.OrderTotal>0}">
@@ -32,7 +33,11 @@
 		<div class="form-row form-row-button">
 			<button id="payment-select-go" name="${pdict.CurrentForms.billing.paymentSelect.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 		</div>
-			
+
+		<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
+			<div class="billing-error">${Resource.msg('billing.missingprocessorerror','checkout',null)}</div>
+		</isif>				
+
 		<iscomment>
 			Credit card block
 			--------------------------------------------------------------
@@ -117,8 +122,8 @@
 		<div id="PaymentMethod_BML" class="payment-method <isif condition="${!empty(pdict.selectedPaymentID) && pdict.selectedPaymentID=='BML'}">payment-method-expanded</isif>">
 		
 			<p class="form-caption">${Resource.msg('billing.bmlhelp','checkout',null)}</p>
-	
-		    <span class="form-label-text">Date of Birth:</span>
+			
+		    <span class="form-label-text"><span class="required-indicator">&#8226;</span>Date of Birth:</span>
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.year}" type="select" rowclass="year label-removed"/>
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.month}" type="select" rowclass="month label-removed"/>
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.day}" type="select" rowclass="day label-removed"/>

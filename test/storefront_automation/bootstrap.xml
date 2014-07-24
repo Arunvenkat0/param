@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="buildinit"
+         default="init"
+         xmlns:jacoco="antlib:org.jacoco.ant"
+         xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+
+   <property name="antlib" value="${user.home}/.ant/lib" />
+   <property name="junit-ant.version" value="1.8.4" />
+   <property name="ant-junit-url" value="http://repo1.maven.org/maven2/org/apache/ant/ant-junit/${junit-ant.version}/ant-junit-${junit-ant.version}.jar" />
+
+   <target name="init" depends="init-junit-ant" 
+           description="Bootstrap ant extensions and jars.  Populate user's .ant/lib directory with jars required by the build which need to be in place when ant starts up" />
+
+   <target name="init-junit-ant" >
+      <mkdir dir="${antlib}" />
+      <get dest="${antlib}" usetimestamp="true" maxtime="10">
+        <url url="${ant-junit-url}"/> 
+      </get>
+   </target>
+</project>

@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!--- TEMPLATENAME: confirmationregister.isml --->
 <iscomment>Provide a create account form for unregistered customers</iscomment>
 <isif condition="${!pdict.CurrentCustomer.authenticated}">

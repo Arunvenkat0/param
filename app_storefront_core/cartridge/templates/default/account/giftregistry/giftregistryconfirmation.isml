@@ -1,3 +1,4 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="account/giftregistry/pt_giftregistry">
 	<isinclude template="util/modules"/>
 
@@ -94,7 +95,7 @@
 				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.city.htmlValue}"/>,
 				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.states.state.htmlValue}"/>
 			</div>
-			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.zip.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.postal.htmlValue}"/></div>
 		</dd>
 
 
@@ -110,7 +111,7 @@
 				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.city.htmlValue}"/>,
 				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.states.state.htmlValue}"/>
 			</div>
-			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.zip.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.postal.htmlValue}"/></div>
 		</dd>
 		
 	</dl>
