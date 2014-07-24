@@ -166,5 +166,5 @@
 	app.urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	
 	app.clientcache = <isprint value="${JSON.stringify(clientcache)}" encoding="off"/>;
 	app.user = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
-	app.enabledStorePickup = ${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')};
+	window.site.storePickupEnabled = ${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')};
 }(window.app = window.app || {}));

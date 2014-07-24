@@ -224,7 +224,7 @@
 	function initializeEvents() {
 
 		app.product.initAddThis();
-		if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
+		if(site.storePickupEnabled){app.storeinventory.buildStoreList($('.product-number span').html());}
 		// add or update shopping cart line item
 		app.product.initAddToCart();
 		$cache.pdpMain.on("change keyup", "form.pdpForm input[name='Quantity']", function (e) {
@@ -424,7 +424,7 @@
 					target.html(data);
 					app.product.initAddThis();
 					app.product.initAddToCart();
-					if(app.enabledStorePickup){app.storeinventory.buildStoreList($('.product-number span').html());}
+					if(site.storePickupEnabled){app.storeinventory.buildStoreList($('.product-number span').html());}
 					if (hasSwapImage) {
 						replaceImages();
 					}
@@ -549,7 +549,7 @@
 			initializeDom();
 			initializeEvents();
 			loadZoom();
-			if(app.enabledStorePickup){
+			if(site.storePickupEnabled){
 				app.storeinventory.init();
 			}
 		},

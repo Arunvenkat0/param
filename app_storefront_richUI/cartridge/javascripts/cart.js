@@ -98,7 +98,7 @@ var cart = {
 		// edit shopping cart line item
 		initializeCache();
 		initializeEvents();
-		if(app.enabledStorePickup){
+		if(site.storePickupEnabled){
 			storeinventory.init();
 		}
 		account.initCartLogin();
