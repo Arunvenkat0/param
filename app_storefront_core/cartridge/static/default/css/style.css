@@ -786,8 +786,9 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 
 /* multishipping elements */
 /* ------------------------------------- */
-.selectbox {width: 100%;}
-.editaddress {padding-left: 2%;}
+.shippingaddress .select-address {width: 100%; margin-left: 0;}
+.shippingaddress .select-address.no-option {display: none;}
+.shippingaddress .edit-address {margin-top: 0.5em;}
 .formactions {margin-top:20px;text-align: right;}
 table.item-list .multi-shipment-row {border-bottom: none;}
 .minishipments-method {padding-top: 10px;}
