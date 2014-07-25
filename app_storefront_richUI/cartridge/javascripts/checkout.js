@@ -257,7 +257,7 @@ function addEditAddress(target) {
 					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
 					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
 					+ '</option>';
-			app.dialog.close();
+			dialog.close();
 			if (add) {
 				$('.shippingaddress select').removeClass('no-option').append(newOption);
 				$('.no-address').hide();
