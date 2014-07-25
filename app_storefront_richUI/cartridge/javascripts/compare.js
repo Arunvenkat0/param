@@ -1,70 +1,43 @@
+'use strict';
+
+var ajax = require('./ajax'),
+	page = require('./page'),
+	product = require('./product'),
+	productTile = require('./product-tile'),
+	quickview = require('./quickview');
+
 /**
- * @class app.compare
+ * @private
+ * @function
+ * @description Binds the click events to the remove-link and quick-view button
  */
-(function (app, $) {
-	var $cache = {};
-	/**
-	 * @private
-	 * @function
-	 * @description Initializes the cache on the compare table
-	 */
-	function initializeCache() {
-		$cache = {
-			compareTable : $("#compare-table"),
-			categoryList : $("#compare-category-list")
-		};
-	}
-	/**
-	 * @private
-	 * @function
-	 * @description Initializes the DOM on the product tile
-	 */
-	function initializeDom() {
-		app.product.tile.init();
-	}
-	/**
-	 * @private
-	 * @function
-	 * @description Binds the click events to the remove-link and quick-view button
-	 */
-	function initializeEvents() {
-		$cache.compareTable.on("click", ".remove-link", function (e) {
-			e.preventDefault();
-			app.ajax.getJson({
-				url : this.href,
-				callback : function (response) {
-					app.page.refresh();
-				}
-			});
-		})
-		.on("click", ".open-quick-view", function (e) {
-			e.preventDefault();
-			var form = $(this).closest("form");
-			app.quickView.show({
-				url:form.attr("action"),
-				source:"quickview",
-				data:form.serialize()
-			});
+function initializeEvents() {
+	$('#compare-table').on("click", ".remove-link", function (e) {
+		e.preventDefault();
+		ajax.getJson({
+			url : this.href,
+			callback : function (response) {
+				page.refresh();
+			}
 		});
-
-		$cache.categoryList.on("change", function () {
-			$(this).closest("form").submit();
+	})
+	.on("click", ".open-quick-view", function (e) {
+		e.preventDefault();
+		var form = $(this).closest("form");
+		quickview.show({
+			url:form.attr("action"),
+			source:"quickview",
+			data:form.serialize()
 		});
-	}
+	});
 
-	/*************** app.compare public object ***************/
-	app.compare = {
-		/**
-		 * @function
-		 * @description Initializing of Cache, DOM and events
-		 */
-		init : function () {
-			initializeCache();
-			initializeDom();
-			initializeEvents();
-			app.product.initAddToCart();
-		}
-	};
+	$('#compare-category-list').on("change", function () {
+		$(this).closest("form").submit();
+	});
+}
 
-
-}(window.app = window.app || {}, jQuery));
+exports.init = function () {
+	productTile.init();
+	initializeEvents();
+	product.initAddToCart();
+}
