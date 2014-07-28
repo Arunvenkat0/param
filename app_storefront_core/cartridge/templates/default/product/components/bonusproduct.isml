@@ -82,6 +82,9 @@
 	
 				<button type="submit" value="${Resource.msg('global.select','locale',null)}" class="button-select-bonus"><span>${Resource.msg('global.select','locale',null)}</span></button>
 			</fieldset>
+			<div>
+				<label class="quantity-error"/>				
+			</div>
 		</form>
 		
 	</div>

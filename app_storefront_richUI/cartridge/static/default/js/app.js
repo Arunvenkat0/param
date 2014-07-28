@@ -1887,6 +1887,11 @@ var app = (function (app, $) {
 			$cache.bonusProductList.on("click", "div.bonus-product-item a[href].swatchanchor", function (e) {
 				e.preventDefault();
 			})
+			.on("change", "input.input-text", function(e){
+				$cache.bonusProductList.find("button.button-select-bonus").removeAttr("disabled");
+				var form = $(this).closest("form.bonus-product-form");
+				form.find("label.quantity-error").text("");
+			})
 			.on("click", "button.button-select-bonus", function (e) {
 				e.preventDefault();
 				if (selectedList.length>=maxItems) {
@@ -1901,6 +1906,11 @@ var app = (function (app, $) {
 					qtyVal = form.find("input[name='Quantity']").val(),
 					qty = isNaN(qtyVal) ? 1 : (+qtyVal);
 
+				if (qty > maxItems) {
+					$cache.bonusProductList.find("button.button-select-bonus").attr("disabled", "disabled");
+					form.find(".quantity-error").text(app.resources.BONUS_PRODUCT_TOOMANY);
+					return;					
+				}
 				var product = {
 					uuid : uuid,
 					pid : form.find("input[name='pid']").val(),
