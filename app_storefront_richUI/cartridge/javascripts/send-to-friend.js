@@ -1,90 +1,70 @@
-/**
- * @class app.sendToFriend
- */
-(function (app, $) {
-	var $cache = {},
-		initialized=false;
-	/**
-	 * @private
-	 * @function
-	 * @description Initializes the events (preview, send, edit, cancel and close) on the send to friend form
-	 */
-	function initializeEvents() {
-		app.util.limitCharacters();
-		if (initialized) {return; }
-		$cache.dialog.on("click", ".preview-button, .send-button, .edit-button", function (e) {
-			e.preventDefault();
-			$cache.form.validate();
-			if (!$cache.form.valid()) {
-				return false;
-			}
-			var requestType = $cache.form.find("#request-type");
-			if (requestType.length>0) {
-				requestType.remove();
-			}
-			$("<input/>").attr({id:"request-type", type:"hidden", name:$(this).attr("name"), value:$(this).attr("value")}).appendTo($cache.form);
-			var data = $cache.form.serialize();
-			app.ajax.load({url:$cache.form.attr("action"),
-				   data: data,
-				   target: $cache.dialog,
-				   callback: function() {
-						app.validator.init();
-						app.util.limitCharacters();
-						$cache.form = $("#send-to-friend-form");
-						$(".ui-dialog-content").dialog("option", "position", "center");
-				   }
-			});
-		})
-		.on("click", ".cancel-button, .close-button", function (e) {
-			e.preventDefault();
-			$cache.dialog.dialog("close");
-		});
-		initialized=true;
-	}
+'use strict';
 
-	/*************** app.sendToFriend public object ***************/
-	app.sendToFriend = {
-		init : function () {
-			$cache = {
-				form: $("#send-to-friend-form"),
-				dialog: $("#send-to-friend-dialog"),
-				pdpForm: $("form.pdpForm")
-			};
-			initializeEvents();
-		},
+var ajax = require('ajax'),
+	dialog = require('./dialog'),
+	util = require('./util'),
+	validator = require('./validator');
 
-		/**
-		 * @function
-		 * @description
-		 */
-		initializeDialog : function (eventDelegate, eventTarget) {
-			$(eventDelegate).on("click", eventTarget, function (e) {
-				e.preventDefault();
-				var dlg = app.dialog.create({target:$("#send-to-friend-dialog"), options:{
-					width:800,
-					height:'auto',
-					title:this.title,
-					open:function() {
-						app.sendToFriend.init();
-						app.validator.init();
-					}
-				}});
-
-				var data = app.util.getQueryStringParams($("form.pdpForm").serialize());
-				if (data.cartAction) {
-					delete data.cartAction;
-				}
-				var url = app.util.appendParamsToUrl(this.href, data);
-				url = this.protocol + "//" + this.hostname + ((url.charAt(0)==="/") ? url : ("/"+url));
-				app.ajax.load({
-					url:app.util.ajaxUrl(url),
-					target:dlg,
-					callback: function () {
-						dlg.dialog("open");	 // open after load to ensure dialog is centered
-					}
-				});
-			});
+exports.init = function () {
+	var $form = $("#send-to-friend-form"),
+		$dialog = $("#send-to-friend-dialog");
+	util.limitCharacters();
+	$dialog.on('click', '.preview-button, .send-button, .edit-button', function (e) {
+		e.preventDefault();
+		$form.validate();
+		if (!$form.valid()) {
+			return false;
 		}
-	};
+		var requestType = $form.find('#request-type');
+		if (requestType.length > 0) {
+			requestType.remove();
+		}
+		$('<input/>').attr({id: 'request-type', type: 'hidden', name: $(this).attr('name'), value: $(this).attr('value')}).appendTo($form);
+		var data = $form.serialize();
+		ajax.load({url:$form.attr("action"),
+			data: data,
+			target: $dialog,
+			callback: function() {
+				validator.init();
+				util.limitCharacters();
+				$('.ui-dialog-content').dialog('option', 'position', 'center');
+			}
+		});
+	})
+	.on('click', '.cancel-button, .close-button', function (e) {
+		e.preventDefault();
+		$dialog.dialog('close');
+	});
+};
 
-}(window.app = window.app || {}, jQuery));
+exports.initializeDialog = function (eventDelegate, eventTarget) {
+	$(eventDelegate).on('click', eventTarget, function (e) {
+		e.preventDefault();
+		var dlg = dialog.create({
+			target: $("#send-to-friend-dialog"), 
+			options: {
+				width:800,
+				height:'auto',
+				title:this.title,
+				open:function() {
+					app.sendToFriend.init();
+					validator.init();
+				}
+			}
+		});
+
+		var data = util.getQueryStringParams($("form.pdpForm").serialize());
+		if (data.cartAction) {
+			delete data.cartAction;
+		}
+		var url = util.appendParamsToUrl(this.href, data);
+		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
+		ajax.load({
+			url: util.ajaxUrl(url),
+			target: dlg,
+			callback: function () {
+				dlg.dialog('open');	 // open after load to ensure dialog is centered
+			}
+		});
+	});
+};
