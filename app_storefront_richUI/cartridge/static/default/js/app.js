@@ -2297,10 +2297,11 @@ var app = (function (app, $) {
 	 */
 	function addEditAddress(target) {
 		var $addressForm = $('form[name$="multishipping_editAddress"]'),
-			$selectButton = $addressForm.find('button[name$=_selectAddress]'),
+			$selectDropDown = $addressForm.find('.input-select'),
 			$addressList = $addressForm.find('.address-list'),
-			add = true;
-		$selectButton.on('click', function (e) {
+			add = true,
+			selectedAddressUUID = $(target).closest('.shippingaddress').find('.select-address').val();
+		$selectDropDown.on('change', function (e) {
 			e.preventDefault();
 			var selectedAddress = $addressList.find('select').val();
 			if (selectedAddress !== 'newAddress') {
@@ -2348,6 +2349,18 @@ var app = (function (app, $) {
 				}
 			});
 		});
+		
+		//preserve the uuid of the option for the hop up form		
+		if (selectedAddressUUID) {
+			//update the form with selected address
+			$addressList.find('option').each(function() {
+				//check the values of the options
+				if ($(this).attr('value') == selectedAddressUUID) {
+					$(this).attr('selected','selected');
+					$selectDropDown.trigger('change'); 
+				}
+			});						
+		}
 	}
 
 	/**
