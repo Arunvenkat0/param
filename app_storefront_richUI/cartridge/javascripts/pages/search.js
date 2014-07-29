@@ -1,9 +1,9 @@
 'use strict';
 
-var productCompare = require('./product-compare'),
-	productTile = require('./product-tile'),
-	progress = require('./progress'),
-	util = require('./util')
+var productCompare = require('../product-compare'),
+	productTile = require('../product-tile'),
+	progress = require('../progress'),
+	util = require('../util');
 
 var $cache = {};
 

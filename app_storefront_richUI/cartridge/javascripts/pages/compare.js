@@ -1,10 +1,10 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	page = require('./page'),
+var ajax = require('../ajax'),
+	page = require('../page'),
 	product = require('./product'),
-	productTile = require('./product-tile'),
-	quickview = require('./quickview');
+	productTile = require('../product-tile'),
+	quickview = require('../quickview');
 
 /**
  * @private

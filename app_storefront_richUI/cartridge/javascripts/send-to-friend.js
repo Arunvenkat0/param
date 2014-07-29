@@ -1,6 +1,6 @@
 'use strict';
 
-var ajax = require('ajax'),
+var ajax = require('./ajax'),
 	dialog = require('./dialog'),
 	util = require('./util'),
 	validator = require('./validator');

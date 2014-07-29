@@ -1,11 +1,11 @@
 'use strict';
 
 var account = require('./account'),
-	bonusProductsView = require('./bonus-products-view'),
-	page = require('./page'),
-	quickview = require('./quickview'),
-	storeinventory = require('./storeinventory'),
-	util = require('./util')
+	bonusProductsView = require('../bonus-products-view'),
+	page = require('../page'),
+	quickview = require('../quickview'),
+	storeinventory = require('../storeinventory'),
+	util = require('../util');
 /**
  * @private
  * @function

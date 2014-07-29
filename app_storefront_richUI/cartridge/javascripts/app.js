@@ -9,6 +9,7 @@
 
 var minicart = require('./minicart'),
 	mulitcurrency = require('./mulitcurrency'),
+	page = require('./page'),
 	searchplaceholder = require('./searchplcaeholder'),
 	tooltip = require('./tooltip'),
 	util = require('./util'),
@@ -25,11 +26,6 @@ if (!window.jQuery) {
 require('./jquery-ext')();
 
 document.cookie = 'dw=1';
-
-// initialize app
-$(document).ready(function () {
-	app.init();
-});
 
 /**
  * @private
@@ -126,6 +122,18 @@ function initializeDom() {
 	util.limitCharacters();
 }
 
+var pages = {
+	account: require('./pages/account'),
+	cart: require('./pages/cart'),
+	checkout: require('./pages/checkout'),
+	compare: require('./pages/compare'),
+	product: require('./pages/product'),
+	registry: require('./pages/registry'),
+	search: require('./pages/search'),
+	storefront: require('./pages/storefront'),
+	wishlist: require('./pages/wishlist')
+};
+
 var app = {
 	init: function () {
 		if (document.cookie.length === 0) {
@@ -142,9 +150,10 @@ var app = {
 		searchplaceholder.init();
 		mulitcurrency.init();			
 		// execute page specific initializations
-		var ns = app.page.ns;
-		if (ns && app[ns] && app[ns].init) {
-			app[ns].init();
+		$.extend(page, pageContext);
+		var ns = page.ns;
+		if (ns && pages[ns] && pages[ns].init) {
+			pages[ns].init();
 		}
 	}
 };
@@ -161,3 +170,8 @@ var app = {
 // 		return s;
 // 	};
 // })();
+
+// initialize app
+$(document).ready(function () {
+	app.init();
+});

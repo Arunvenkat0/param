@@ -1,7 +1,7 @@
 'use strict';
 
-var ajax = require('ajax'),
-	util = require('./util')
+var ajax = require('./ajax'),
+	util = require('./util');
 
 var dialog = {
 	/**

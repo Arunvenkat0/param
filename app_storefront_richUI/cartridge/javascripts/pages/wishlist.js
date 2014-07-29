@@ -1,9 +1,9 @@
 'use strict';
 
-var page = require('./page'),
+var page = require('../page'),
 	product = require('./product'),
-	sendToFiend = require('./send-to-friend'),
-	util = require('./util');
+	sendToFiend = require('../send-to-friend'),
+	util = require('../util');
 
 exports.init = function () {
 	product.initAddToCart();

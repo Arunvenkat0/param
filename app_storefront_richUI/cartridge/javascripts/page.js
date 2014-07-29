@@ -1,13 +1,10 @@
 'use strict';
 
-var util = require('./util')
+var util = require('./util');
 
-page = {
+var page = {
 	title : '',
 	type : '',
-	setContext : function (o) {
-		$.extend(this, o);
-	},
 	params : util.getQueryStringParams(window.location.search.substr(1)),
 	redirect : function (newURL) {
 		setTimeout('window.location.href="' + newURL + '"', 0);

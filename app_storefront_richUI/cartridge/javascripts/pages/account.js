@@ -1,12 +1,11 @@
 'use strict';
 
-var giftcert = require('./giftcert'),
-	tooltip = require('./tooltip'),
-	util = require('./util'),
-	dialog = require('./dialog'),
-	page = require('./page'),
-	account = require('./account'),
-	validator = require('./validator')
+var giftcert = require('../giftcert'),
+	tooltip = require('../tooltip'),
+	util = require('../util'),
+	dialog = require('../dialog'),
+	page = require('../page'),
+	validator = require('../validator')
 
 /**
  * @function

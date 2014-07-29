@@ -1,12 +1,12 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
-	giftcard = require('./giftcard'),
-	progress = require('./progress'),
-	tooltip = require('./tooltip'),
-	util = require('./util'),
-	validator = require('./validator')
+var ajax = require('../ajax'),
+	dialog = require('../dialog'),
+	giftcard = require('../giftcard'),
+	progress = require('../progress'),
+	tooltip = require('../tooltip'),
+	util = require('../util'),
+	validator = require('../validator')
 
 var $cache = {},
 	isShipping = false,

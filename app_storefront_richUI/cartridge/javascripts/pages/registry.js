@@ -1,10 +1,10 @@
 'use strict';
 
-var ajax = require('./ajax'),
+var ajax = require('../ajax'),
 	product = require('./product'),
-	quickview = require('./quickview'),
-	sendToFriend = require('./send-to-friend'),
-	util = require('./util')
+	quickview = require('../quickview'),
+	sendToFriend = require('../send-to-friend'),
+	util = require('../util')
 
 /**
  * @function
