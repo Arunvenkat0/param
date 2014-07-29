@@ -2314,6 +2314,9 @@ var app = (function (app, $) {
 					// if the key in selectedAddress object ends with 'Code', remove that suffix
 					$addressForm.find('[name$=' + field + '], [name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
 				}
+			} else {
+				//reset the form if the value of the option is not a UUID
+				$addressForm.find('.input-text, .input-select').val('');
 			}
 		});
 		$addressForm.on('click', '.cancel', function (e) {
