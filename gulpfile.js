@@ -29,7 +29,10 @@ gulp.task('sass', function () {
 
 gulp.task('browserify', function () {
 	var bundleMethod = watching ? watchify : browserify;
-	var bundler = bundleMethod(paths.js.src);
+	var bundler = bundleMethod({
+		entries: paths.js.src,
+		debug: development
+	});
 	var development = gutil.env.type === 'development';
 	// optionally transform
 	// bundler.transform('transformer');
@@ -38,7 +41,7 @@ gulp.task('browserify', function () {
 
 	function bundle () {
 		return bundler
-			.bundle({debug: development})
+			.bundle()
 			.on('error', function (e) {
 				gutil.log('Browserify Error', e);
 			})
