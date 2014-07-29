@@ -162,7 +162,7 @@ function initializeEvents() {
 	});
 }
 
-exports.init : function () {
+exports.init = function () {
 	initializeCache();
 	initializeDom();
 	initializeEvents();

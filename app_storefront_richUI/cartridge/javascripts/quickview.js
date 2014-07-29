@@ -1,7 +1,7 @@
 'use strict';
 
 var dialog = require('./dialog'),
-	product = require('./product'),
+	product = require('./pages/product'),
 	progress = require('./progress');
 
 var quickView = {

@@ -37,9 +37,9 @@ var minicart = {
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
-			if (this.$content.not(':visible') {
+			if (this.$content.not(':visible')) {
 				this.slide();
-			})
+			}
 		}.bind(this));
 
 		this.$content.on('mouseenter', function () {

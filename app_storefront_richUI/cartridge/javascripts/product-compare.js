@@ -131,7 +131,7 @@ function removeProduct (args) {
 			}
 		});
 	} else {
-		.ajax.getJson({
+		ajax.getJson({
 			url : Urls.compareRemove,
 			// TODO this is ATROCIOUS
 			async: false,

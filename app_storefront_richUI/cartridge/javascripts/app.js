@@ -8,9 +8,9 @@
 'use strict';
 
 var minicart = require('./minicart'),
-	mulitcurrency = require('./mulitcurrency'),
+	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
-	searchplaceholder = require('./searchplcaeholder'),
+	searchplaceholder = require('./searchplaceholder'),
 	tooltip = require('./tooltip'),
 	util = require('./util'),
 	validator = require('./validator');

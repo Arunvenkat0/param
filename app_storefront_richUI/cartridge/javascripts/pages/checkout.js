@@ -280,12 +280,8 @@ function shippingLoad() {
 		giftMessageBox();
 	});
 
-	$('.address').on("change", 
-		"input[name$='_addressFields_address1'], 
-		input[name$='_addressFields_address2'], 
-		input[name$='_addressFields_state'], 
-		input[name$='_addressFields_city'], 
-		input[name$='_addressFields_zip']",
+	$('.address').on('change', 
+		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], input[name$="_addressFields_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
 		updateShippingMethodList
 	);
 

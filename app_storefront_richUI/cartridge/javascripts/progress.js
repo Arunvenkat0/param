@@ -16,7 +16,7 @@ var show = function (container) {
 			.append($("<div/>").addClass("loader-indicator"), $("<div/>").addClass("loader-bg"));
 	}
 	return $loader.appendTo(target).show();
-},
+};
 /**
  * @function
  * @description Hides an AJAX-loader
@@ -25,7 +25,7 @@ var hide = function () {
 	if ($loader) { 
 		$loader.hide(); 
 	}
-}
+};
 
 exports.show = show;
 exports.hide = hide;

@@ -1,16 +1,15 @@
 'use strict';
 
-var ajax = require('./ajax'),
+var ajax = require('../ajax'),
 	cart = require('./cart'),
-	components = require('./components'),
-	dialog = require('./dialog'),
-	minicart = require('./minicart'),
-	progress = require('./progress'),
-	quickview = require('./quickview'),
-	sendToFriend = require('./send-to-friend'),
-	storeinventory = require('./storeinventory'),
-	tooltip = require('./tooltip'),
-	util = require('./util')
+	dialog = require('../dialog'),
+	minicart = require('../minicart'),
+	progress = require('../progress'),
+	quickview = require('../quickview'),
+	sendToFriend = require('../send-to-friend'),
+	storeinventory = require('../storeinventory'),
+	tooltip = require('../tooltip'),
+	util = require('../util')
 
 var $cache;
 
@@ -243,7 +242,7 @@ function initializeEvents() {
 					var avRoot = availabilityContainer.find('.availability-msg').html('');
 
 					// Look through levels ... if msg is not empty, then create span el
-					i (data.levels.IN_STOCK > 0) {
+					if (data.levels.IN_STOCK > 0) {
 						avMsg = avRoot.find('.in-stock-msg');
 						if (avMsg.length === 0) {
 							avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
