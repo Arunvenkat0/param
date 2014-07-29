@@ -100,7 +100,7 @@ function swapImage(element) {
  * @description Enables the zoom viewer on the product detail page
  */
 function loadZoom() {
-	if (quickview.isActive() || !app.zoomViewerEnabled) { return; }
+	if (quickview.isActive() || util.isMobile()) { return; }
 
 	//zoom properties
 	var options = {
@@ -142,7 +142,7 @@ function replaceImages() {
  * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
  */
 function setMainImageLink() {
-	if (quickview.isActive() || app.isMobileUserAgent) {
+	if (quickview.isActive() || util.isMobile()) {
 		$cache.pdpMain.find('.main-image').removeAttr('href');
 	} else {
 		$cache.pdpMain.find('.main-image').addClass('image-zoom');
@@ -175,7 +175,7 @@ function initializeDom() {
 		});
 
 		dialog.create({
-			target : app.ui.reviewsContainer,
+			target : $("#pwrwritediv"),
 			options : options
 		});
 	}
@@ -555,7 +555,6 @@ var product = {
 	 * @function
 	 * @description Loads a product into a given container div
 	 * @param {Object} options An object with the following properties:
-	 * - containerId - id of the container div, if empty then global app.containerId is used
 	 * - source - source string e.g. search, cart etc.
 	 * - label - label for the add to cart button, default is Add to Cart
 	 * - url - url to get the product
@@ -575,7 +574,6 @@ var product = {
 		}
 
 		// show small loading image
-		//progress.show(app.ui.primary);
 		ajax.load({
 			target : target,
 			url : productUrl,
