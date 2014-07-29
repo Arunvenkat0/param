@@ -50,7 +50,7 @@ function addToList(data) {
 		if ($tile.length > 0) {
 			$tile.find(".compare-check")[0].checked = false;
 		}
-		window.alert(app.resources.COMPARE_ADD_FAIL)
+		window.alert(Resources.COMPARE_ADD_FAIL)
 		return;
 	} // safety only
 
@@ -86,7 +86,7 @@ function removeFromList(uuid) {
 
 	// replace the item image
 	$item.children('.compareproduct').first()
-		.attr({src : app.urls.compareEmptyImage, alt : app.resources.EMPTY_IMG_ALT});
+		.attr({src : Urls.compareEmptyImage, alt : Resources.EMPTY_IMG_ALT});
 
 	// remove class, data and id from item
 	$item.removeClass('active')
@@ -115,14 +115,14 @@ function removeProduct (args) {
 	var cb = args.cb ? $(args.cb) : null;
 	var ajaxCall = args.ajaxCall ? $(args.ajaxCall) : true;
 	if (ajaxCall) {
-		app.ajax.getJson({
-			url : app.urls.compareRemove,
+		ajax.getJson({
+			url : Urls.compareRemove,
 			data : { 'pid' : args.itemid, 'category' : _currentCategory },
 			callback : function (response) {
 				if (!response || !response.success) {
 					// response failed. uncheck the checkbox return
 					if (cb && cb.length > 0) { cb[0].checked = true; }
-					window.alert(app.resources.COMPARE_REMOVE_FAIL);
+					window.alert(Resources.COMPARE_REMOVE_FAIL);
 					return;
 				}
 
@@ -132,7 +132,7 @@ function removeProduct (args) {
 		});
 	} else {
 		.ajax.getJson({
-			url : app.urls.compareRemove,
+			url : Urls.compareRemove,
 			// TODO this is ATROCIOUS
 			async: false,
 			data : { 'pid' : args.itemid, 'category' : _currentCategory },
@@ -140,7 +140,7 @@ function removeProduct (args) {
 				if (!response || !response.success) {
 					// response failed. uncheck the checkbox return
 					if (cb && cb.length > 0) { cb[0].checked = true; }
-					window.alert(app.resources.COMPARE_REMOVE_FAIL);
+					window.alert(Resources.COMPARE_REMOVE_FAIL);
 					return;
 				}
 
@@ -160,7 +160,7 @@ function addProduct (args) {
 	var cb = $(args.cb);
 	var ac = $items.filter(".active").length;
 	if(ac===MAX_ACTIVE) {
-		if(!window.confirm(app.resources.COMPARE_CONFIRMATION)) {
+		if(!window.confirm(Resources.COMPARE_CONFIRMATION)) {
 			cb[0].checked = false;
 			return;
 		}
@@ -171,7 +171,7 @@ function addProduct (args) {
 		// safety check only. should never occur.
 		if (item[0].id.indexOf(CI_PREFIX)!==0) {
 			cb[0].checked = false;
-			window.alert(app.resources.COMPARE_ADD_FAIL);
+			window.alert(Resources.COMPARE_ADD_FAIL);
 			return;
 		}
 		var uuid = item[0].id.substr(CI_PREFIX.length);
@@ -184,13 +184,13 @@ function addProduct (args) {
 	}
 
 	ajax.getJson({
-		url : app.urls.compareAdd,
+		url : Urls.compareAdd,
 		data : { 'pid' : args.itemid, 'category' : _currentCategory },
 		callback : function (response) {
 			if (!response || !response.success) {
 				// response failed. uncheck the checkbox return
 				cb[0].checked = false;
-				window.alert(app.resources.COMPARE_ADD_FAIL);
+				window.alert(Resources.COMPARE_ADD_FAIL);
 				return;
 			}
 
@@ -241,7 +241,7 @@ function initializeEvents() {
 
 	// Button to go to compare page
 	$('#compare-items-button').on('click', function () {
-		page.redirect(util.appendParamToURL(app.urls.compareShow, "category", _currentCategory));
+		page.redirect(util.appendParamToURL(Urls.compareShow, "category", _currentCategory));
 	});
 
 	// Button to clear all compared items

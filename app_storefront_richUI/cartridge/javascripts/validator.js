@@ -58,13 +58,13 @@ function validateEmail(value, el) {
  * Add phone validation method to jQuery validation plugin.
  * Text fields must have 'phone' css class to be validated as phone
  */
-$.validator.addMethod('phone', validatePhone, app.resources.INVALID_PHONE);
+$.validator.addMethod('phone', validatePhone, Resources.INVALID_PHONE);
 
 /**
  * Add email validation method to jQuery validation plugin.
  * Text fields must have 'email' css class to be validated as email
  */
-$.validator.addMethod('email', validateEmail, app.resources.INVALID_EMAIL);
+$.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
@@ -74,7 +74,7 @@ $.validator.addMethod('gift-cert-amount', function (value, el){
 	var isOptional = this.optional(el);
 	var isValid = (!isNaN(value)) && (parseFloat(value)>=5) && (parseFloat(value) <= 5000);
 	return isOptional || isValid;
-}, app.resources.GIFT_CERT_AMOUNT_INVALID);
+}, Resources.GIFT_CERT_AMOUNT_INVALID);
 
 /**
  * Add positive number validation method to jQuery validation plugin.

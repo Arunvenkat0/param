@@ -28,14 +28,14 @@ function initializeEvents() {
 		e.preventDefault();
 		if ($(this).hasClass('selected')) { return; }
 
-		var $tile = $(this).closest(".grid-tile");
-		$(this).closest(".swatch-list").find(".swatch.selected").removeClass("selected");
-		$(this).addClass("selected");
-		$tile.find(".thumb-link").attr("href", $(this).attr("href"));
-		$tile.find(".name-link").attr("href", $(this).attr("href"));
+		var $tile = $(this).closest('.grid-tile');
+		$(this).closest('.swatch-list').find('.swatch.selected').removeClass('selected');
+		$(this).addClass('selected');
+		$tile.find('.thumb-link').attr('href', $(this).attr('href'));
+		$tile.find('name-link').attr('href', $(this).attr('href'));
 
-		var data = $(this).children("img").filter(":first").data("thumb");
-		var $thumb = tile.find(".product-image .thumb-link img").filter(":first");
+		var data = $(this).children('img').filter(':first').data('thumb');
+		var $thumb = tile.find('.product-image .thumb-link img').filter(':first');
 		var currentAttrs = {
 			src : data.src,
 			alt : data.alt,

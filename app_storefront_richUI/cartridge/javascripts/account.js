@@ -56,8 +56,8 @@ function initializeAddressForm(form) {
 	})
 	.on("click", ".delete-button", function(e){
 		e.preventDefault();
-		if (confirm(String.format(app.resources.CONFIRM_DELETE, app.resources.TITLE_ADDRESS))) {
-			var url = util.appendParamsToUrl(app.urls.deleteAddress, {AddressID:form.find("#addressid").val(),format:"ajax"});
+		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+			var url = util.appendParamsToUrl(Urls.deleteAddress, {AddressID:form.find("#addressid").val(),format:"ajax"});
 			$.ajax({
 				url: url,
 				method: "POST",
@@ -117,13 +117,13 @@ function initAddressEvents() {
 		dialog.open({url:this.href, options:options});
 	}).on("click", ".delete", function(e){
 		e.preventDefault();
-		if (confirm(String.format(app.resources.CONFIRM_DELETE, app.resources.TITLE_ADDRESS))) {
+		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
 				url: util.appendParamsToUrl($(this).attr("href"), {format:"ajax"}),
 				dataType:"json"
 			}).done(function(data){
 				if (data.status.toLowerCase()==="ok") {
-					page.redirect(app.urls.addressesList);
+					page.redirect(Urls.addressesList);
 				}
 				else if (data.message.length>0) {
 					alert(data.message);
@@ -144,7 +144,7 @@ function initPaymentEvents() {
 	var paymentList = $(".payment-list");
 	if (paymentList.length===0) { return; }
 
-	util.setDeleteConfirmation(paymentList, String.format(app.resources.CONFIRM_DELETE, app.resources.TITLE_CREDITCARD));
+	util.setDeleteConfirmation(paymentList, String.format(Resources.CONFIRM_DELETE, Resources.TITLE_CREDITCARD));
 
 	$("form[name='payment-remove']").on("submit", function(e){
 		e.preventDefault();
@@ -158,7 +158,7 @@ function initPaymentEvents() {
 			data: data
 		})
 		.done(function(response) {
-			page.redirect(app.urls.paymentsList);
+			page.redirect(Urls.paymentsList);
 		});
 	});
 }

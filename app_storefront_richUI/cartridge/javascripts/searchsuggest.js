@@ -131,7 +131,7 @@ var searchsuggest = {
 		qlen = part.length;
 
 		// build the request url
-		var reqUrl = util.appendParamToURL(app.urls.searchsuggest, 'q', part, 'legacy', 'true');
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part, 'legacy', 'true');
 
 		// get remote data as JSON
 		$.getJSON(reqUrl, function (data) {

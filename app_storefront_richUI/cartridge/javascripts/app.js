@@ -21,7 +21,7 @@ if (!window.jQuery) {
 /** @namespace */
 var app = (function (app, $) {
 	//allows the use of $ within this function without conflicting with other JavaScript libraries which are using it (JQuery extension)
-	document.cookie="dw=1";
+	document.cookie = "dw=1";
 	/******** private functions & vars **********/
 
 	/**
@@ -82,9 +82,9 @@ var app = (function (app, $) {
 		 * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
 		 * */
 		if(app.clientcache.LISTING_SEARCHSUGGEST_LEGACY){
-			app.searchsuggestbeta.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
+			app.searchsuggestbeta.init(app.ui.searchContainer, Resources.SIMPLE_SEARCH);
 		}else{
-			app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
+			app.searchsuggest.init(app.ui.searchContainer, Resources.SIMPLE_SEARCH);
 		}
 		
 		// print handler
@@ -106,7 +106,7 @@ var app = (function (app, $) {
 		if (app.ui.slots.subscribeEmail.length > 0)	{
 			app.ui.slots.subscribeEmail.focus(function () {
 				var val = $(this.val());
-				if(val.length > 0 && val !== app.resources.SUBSCRIBE_EMAIL_DEFAULT) {
+				if(val.length > 0 && val !== Resources.SUBSCRIBE_EMAIL_DEFAULT) {
 					return; // do not animate when contains non-default value
 				}
 
@@ -119,7 +119,7 @@ var app = (function (app, $) {
 					return; // do not animate when contains value
 				}
 
-				$(this).val(app.resources.SUBSCRIBE_EMAIL_DEFAULT)
+				$(this).val(Resources.SUBSCRIBE_EMAIL_DEFAULT)
 					   .css('color','#999999')
 					   .animate({color: '#333333'}, 500, 'linear');
 
@@ -160,7 +160,7 @@ var app = (function (app, $) {
 		init: function () {
 
 			if (document.cookie.length===0) {
-				$("<div/>").addClass("browser-compatibility-alert").append($("<p/>").addClass("browser-error").html(app.resources.COOKIES_DISABLED)).appendTo("#browser-check");
+				$("<div/>").addClass("browser-compatibility-alert").append($("<p/>").addClass("browser-error").html(Resources.COOKIES_DISABLED)).appendTo("#browser-check");
 			}
 
 

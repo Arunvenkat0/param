@@ -34,7 +34,7 @@ function getShippingMethodURL(url) {
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 function updateSummary() {
-	var url = app.urls.summaryRefreshURL;
+	var url = Urls.summaryRefreshURL;
 	var summary = $("#secondary.summary");
 	// indicate progress
 	progress.show(summary);
@@ -58,7 +58,7 @@ function selectShippingMethod(shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
-	var url = util.appendParamsToUrl(app.urls.selectShippingMethodsList, { 
+	var url = util.appendParamsToUrl(Urls.selectShippingMethodsList, { 
 		address1: $cache.address1.val(),
 		address2: $cache.address2.val(),
 		countryCode: $cache.countryCode.val(),
@@ -101,7 +101,7 @@ function selectShippingMethod(shippingMethodID) {
 function updateShippingMethodList() {
 	var $shippingMethodList = $("#shipping-method-list");
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
-	var url = getShippingMethodURL(app.urls.shippingMethodsJSON);
+	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
 	 ajax.getJson({
 		url: url,
@@ -120,7 +120,7 @@ function updateShippingMethodList() {
 			// Cache the array of returned shipping methods.
 			shippingMethods = data;
 
-			var smlUrl = getShippingMethodURL(app.urls.shippingMethodsList);
+			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
 
 			// indicate progress
 			progress.show($shippingMethodList);
@@ -243,7 +243,7 @@ function addEditAddress(target) {
 
 	$addressForm.on('submit', function (e) {
 		e.preventDefault();
-		$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (response) {
+		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
 			if (!response.success) {
 				// @TODO: figure out a way to handle error on the form
 				console.log('error!');
@@ -400,12 +400,12 @@ function setCCFields(data) {
  */
 function populateCreditCardForm(cardID) {
 	// load card details
-	var url = util.appendParamToURL(app.urls.billingSelectCC, "creditCardUUID", cardID);
+	var url = util.appendParamToURL(Urls.billingSelectCC, "creditCardUUID", cardID);
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			if(!data) {
-				window.alert(app.resources.CC_LOAD_ERROR);
+				window.alert(Resources.CC_LOAD_ERROR);
 				return false;
 			}
 			setCCFields(data);
@@ -462,7 +462,7 @@ function billingLoad() {
 
 		var tc = $cache.checkoutForm.find("input[name$='bml_termsandconditions']");
 		if ($paymentMethodId.filter(":checked").val()==="BML" && !$cache.checkoutForm.find("input[name$='bml_termsandconditions']")[0].checked) {
-			alert(app.resources.BML_AGREE_TO_TERMS);
+			alert(Resources.BML_AGREE_TO_TERMS);
 			return false;
 		}
 
@@ -476,16 +476,16 @@ function billingLoad() {
 			if (error.length===0) {
 				error = $("<span>").addClass("error").appendTo($balance);
 			}
-			error.html(app.resources.GIFT_CERT_MISSING);
+			error.html(Resources.GIFT_CERT_MISSING);
 			return;
 		}
 
 		giftcard.checkBalance($giftCertCode.val(), function (data) {
 			if (!data || !data.giftCertificate) {
-				$balance.html(app.resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
+				$balance.html(Resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
 				return;
 			}
-			$balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
+			$balance.html(Resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
 		});
 	});
 	
@@ -494,16 +494,16 @@ function billingLoad() {
 		var code = $giftCertCode.val(),
 			$error = $cache.checkoutForm.find('.giftcert-error');
 		if (code.length === 0) {
-			$error.html(app.resources.GIFT_CERT_MISSING);
+			$error.html(Resources.GIFT_CERT_MISSING);
 			return;
 		}
 		
-		var url = util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
+		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
 		$.getJSON(url, function(data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
-				msg = app.resources.BAD_RESPONSE;
+				msg = Resources.BAD_RESPONSE;
 				fail = true;
 			} else if (!data.success) {
 				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
@@ -513,7 +513,7 @@ function billingLoad() {
 				$error.html(msg);
 				return;
 			} else {
-				window.location.assign(app.urls.billing);
+				window.location.assign(Urls.billing);
 			}
 		});
 	});
@@ -523,16 +523,16 @@ function billingLoad() {
 		var $error = $cache.checkoutForm.find('.coupon-error'),
 			code = $couponCode.val();
 		if (code.length===0) {
-			$error.html(app.resources.COUPON_CODE_MISSING);
+			$error.html(Resources.COUPON_CODE_MISSING);
 			return;
 		}
 
-		var url = util.appendParamsToUrl(app.urls.addCoupon, {couponCode: code,format: "ajax"});
+		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: "ajax"});
 		$.getJSON(url, function(data) {
 			var fail = false;
 			var msg = "";
 			if (!data) {
-				msg = app.resources.BAD_RESPONSE;
+				msg = Resources.BAD_RESPONSE;
 				fail = true;
 			}
 			else if (!data.success) {
@@ -547,7 +547,7 @@ function billingLoad() {
 			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 			//this will force a page refresh to display the coupon message based on a parameter message
 			if(data.success && data.baskettotal==0){
-				window.location.assign(app.urls.billing);
+				window.location.assign(Urls.billing);
 			}
 		});
 	});

@@ -33,7 +33,7 @@ function loadProductNavigation() {
 		hashParams += '&pid=' + pid;
 	}
 
-	var url = app.urls.productNav+(app.urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
+	var url = Urls.productNav+(Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
 	ajax.load({
 		url:url, 
 		target: navContainer
@@ -250,7 +250,7 @@ function initializeEvents() {
 						}
 						if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 							// Just in stock
-							avMsg.text(app.resources.IN_STOCK);
+							avMsg.text(Resources.IN_STOCK);
 						} else {
 							// In stock with conditions ...
 							avMsg.text(data.inStockMsg);
@@ -263,7 +263,7 @@ function initializeEvents() {
 						}
 						if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 							// Just in stock
-							avMsg.text(app.resources.PREORDER);
+							avMsg.text(Resources.PREORDER);
 						} else {
 							avMsg.text(data.preOrderMsg);
 						}
@@ -275,7 +275,7 @@ function initializeEvents() {
 						}
 						if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 							// Just in stock
-							avMsg.text(app.resources.BACKORDER);
+							avMsg.text(Resources.BACKORDER);
 						} else {
 							avMsg.text(data.backOrderMsg);
 						}
@@ -285,7 +285,7 @@ function initializeEvents() {
 						if (avMsg.length === 0) {
 							avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
 						}
-						avMsg.text(String.format(app.resources.IN_STOCK_DATE,data.inStockDate));
+						avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
 					}
 					if (data.levels.NOT_AVAILABLE > 0) {
 						avMsg = avRoot.find('.not-available-msg');
@@ -293,9 +293,9 @@ function initializeEvents() {
 							avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
 						}
 						if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-							avMsg.text(app.resources.NOT_AVAILABLE);
+							avMsg.text(Resources.NOT_AVAILABLE);
 						} else {
-							avMsg.text(app.resources.REMAIN_NOT_AVAILABLE);
+							avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
 						}
 					}
 					return;
@@ -440,7 +440,7 @@ function initializeEvents() {
 		var qty = psItem.find('form input[name="Quantity"]').first().val();
 		params.Quantity = isNaN(qty) ? '1' : qty;
 
-		var url = app.urls.getSetItem + '?' + $.param(params);
+		var url = Urls.getSetItem + '?' + $.param(params);
 
 		// get container
 		var ic = $(this).closest('.product-set-item');
@@ -464,7 +464,7 @@ function initializeEvents() {
 		e.preventDefault();
 		var psForms = $cache.productSetList.find('form').toArray(),
 			miniCartHtml = '',
-			addProductUrl = util.ajaxUrl(app.urls.addProduct);
+			addProductUrl = util.ajaxUrl(Urls.addProduct);
 
 		// add items to cart
 		function addItems() {
@@ -482,12 +482,12 @@ function initializeEvents() {
 			})
 			.fail(function (xhr, textStatus) {
 				// failed
-				var msg = app.resources.ADD_TO_CART_FAIL;
+				var msg = Resources.ADD_TO_CART_FAIL;
 				$.validator.format(msg, itemid);
 				if (textStatus === 'parsererror') {
-					msg += '\n' + app.resources.BAD_RESPONSE;
+					msg += '\n' + Resources.BAD_RESPONSE;
 				} else {
-					msg += '\n' + app.resources.SERVER_CONNECTION_ERROR;
+					msg += '\n' + Resources.SERVER_CONNECTION_ERROR;
 				}
 				window.alert(msg);
 			})
@@ -566,7 +566,7 @@ var product = {
 		var source = options.source || '';
 		var productListID = options.productlistid || '';
 
-		var productUrl = options.url || util.appendParamToURL(app.urls.getProductUrl, 'pid', options.id);
+		var productUrl = options.url || util.appendParamToURL(Urls.getProductUrl, 'pid', options.id);
 		if(source.length > 0) {
 			productUrl = util.appendParamToURL(productUrl, 'source', source);
 		}
@@ -590,7 +590,7 @@ var product = {
 	 */
 	getAvailability : function (pid, quantity, callback) {
 		ajax.getJson({
-			url: util.appendParamsToUrl(app.urls.getAvailability, {pid:pid, Quantity:quantity}),
+			url: util.appendParamsToUrl(Urls.getAvailability, {pid:pid, Quantity:quantity}),
 			callback: callback
 		});
 	},

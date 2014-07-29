@@ -36,7 +36,7 @@ var getJson = function (options) {
 	// failed
 	.fail(function (xhr, textStatus) {
 		if(textStatus === "parsererror") {
-			window.alert(app.resources.BAD_RESPONSE);
+			window.alert(Resources.BAD_RESPONSE);
 		}
 		if(options.callback) {
 			options.callback(null);
@@ -86,7 +86,7 @@ var load = function (options) {
 	.fail(function (xhr, textStatus) {
 		// failed
 		if(textStatus === "parsererror") {
-			window.alert(app.resources.BAD_RESPONSE);
+			window.alert(Resources.BAD_RESPONSE);
 		}
 		options.callback(null, textStatus);
 	})

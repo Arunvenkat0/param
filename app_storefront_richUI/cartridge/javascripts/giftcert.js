@@ -18,7 +18,7 @@ function setAddToCartHandler(e) {
 	$.ajax(options).done(function (response) {
 		if( response.success ) {
 			ajax.load({
-				url : app.urls.minicartGC,
+				url : Urls.minicartGC,
 				data :{lineItemId : response.result.lineItemId},
 				callback : function(response){
 					minicart.show(response);
@@ -40,9 +40,9 @@ function setAddToCartHandler(e) {
 	}).fail(function (xhr, textStatus) {
 		// failed
 		if (textStatus === "parsererror") {
-			window.alert(app.resources.BAD_RESPONSE);
+			window.alert(Resources.BAD_RESPONSE);
 		} else {
-			window.alert(app.resources.SERVER_CONNECTION_ERROR);
+			window.alert(Resources.SERVER_CONNECTION_ERROR);
 		}
 	});
 }

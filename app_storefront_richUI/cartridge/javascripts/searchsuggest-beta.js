@@ -114,7 +114,7 @@ var searchsuggest = {
 		}
 
 		// build the request url
-		var reqUrl = util.appendParamToURL(app.urls.searchsuggest, 'q', runningQuery, 'legacy', 'false');
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery, 'legacy', 'false');
 
 		// execute server call
 		$.get(reqUrl, function (data) {

@@ -38,7 +38,7 @@ var util = {
 		// if this is a content link, update url from Page-Show to Page-Include
 		if ($actionSource.hasClass("attributecontentlink")) {
 			var uri = util.getUri(url);
-			url = app.urls.pageInclude+uri.query;
+			url = Urls.pageInclude+uri.query;
 		}
 		if (method && method.toUpperCase() === 'POST') {
 			var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
@@ -187,9 +187,9 @@ var util = {
 	 */
 	staticUrl: function (path) {
 		if (!path || $.trim(path).length === 0) {
-			return app.urls.staticPath;
+			return Urls.staticPath;
 		}
-		return app.urls.staticPath + (path.charAt(0) === "/" ? path.substr(1) : path );
+		return Urls.staticPath + (path.charAt(0) === "/" ? path.substr(1) : path );
 	},
 	/**
 	 * @function
@@ -340,7 +340,7 @@ var util = {
 		if (bundleName && bundleName.length===0) {
 			params.bn = bundleName;
 		}
-		var url = this.appendParamsToUrl(app.urls.appResources, params);
+		var url = this.appendParamsToUrl(Urls.appResources, params);
 		$.getJSON(url, callback);
 	},
 	/**
@@ -387,7 +387,7 @@ var util = {
 	limitCharacters: function () {
 		$('form').find('textarea[data-character-limit]').each(function(){
 			var characterLimit = $(this).data("character-limit");
-			var charCountHtml = String.format(app.resources.CHAR_LIMIT_MSG,
+			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
 				'<span class="char-allowed-count">' + characterLimit + '</span>');
 			var charCountContainer = $(this).next('div.char-count');

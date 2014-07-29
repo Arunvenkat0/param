@@ -38,7 +38,7 @@ var dialog = {
 		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
 
 		// finally load the dialog
-		app.ajax.load({
+		ajax.load({
 			target : this.container,
 			url : params.url,
 			callback : function () {
@@ -85,7 +85,7 @@ var dialog = {
 				this.container.html(data);
 			}.bind(this),
 			failure : function (data) {
-				window.alert(app.resources.SERVER_ERROR);
+				window.alert(Resources.SERVER_ERROR);
 			}
 		});
 	},

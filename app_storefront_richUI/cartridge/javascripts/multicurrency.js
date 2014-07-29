@@ -9,7 +9,7 @@ exports.init = function () {
 	$('.currency-converter').on('change', function () {
 			// request results from server
 	 		ajax.getJson({
-	 		 	url: util.appendParamsToUrl(app.urls.currencyConverter , {
+	 		 	url: util.appendParamsToUrl(Urls.currencyConverter , {
 	 		 		format: 'ajax',
 	 		 		currencyMnemonic: $('.currency-converter').val()
 	 		 	}),

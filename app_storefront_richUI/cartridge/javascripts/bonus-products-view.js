@@ -170,7 +170,7 @@ function initializeGrid () {
 	})
 	.on("click", ".add-to-cart-bonus", function (e) {
 		e.preventDefault();
-		var url = util.appendParamsToUrl(app.urls.addBonusProduct, {bonusDiscountLineItemUUID:bliUUID});
+		var url = util.appendParamsToUrl(Urls.addBonusProduct, {bonusDiscountLineItemUUID:bliUUID});
 		var bonusProducts = getBonusProducts();
 		if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
 			bonusProducts.bonusproducts[0].product.qty = maxItems;
@@ -191,9 +191,9 @@ function initializeGrid () {
 		.fail(function (xhr, textStatus) {
 			// failed
 			if(textStatus === "parsererror") {
-				window.alert(app.resources.BAD_RESPONSE);
+				window.alert(Resources.BAD_RESPONSE);
 			} else {
-				window.alert(app.resources.SERVER_CONNECTION_ERROR);
+				window.alert(Resources.SERVER_CONNECTION_ERROR);
 			}
 		})
 		.always(function () {
@@ -225,7 +225,7 @@ bonusProductsView = {
 			options : {
 				width: 795,
 				dialogClass : 'quickview',
-				title : app.resources.BONUS_PRODUCTS
+				title : Resources.BONUS_PRODUCTS
 			}
 		});
 
@@ -261,7 +261,7 @@ bonusProductsView = {
 				height : 'auto',
 				width : 350,
 				dialogClass : 'quickview',
-				title : app.resources.BONUS_PRODUCT
+				title : Resources.BONUS_PRODUCT
 			}
 		});
 		$bonusDiscountContainer.dialog('open');
@@ -270,7 +270,7 @@ bonusProductsView = {
 		$bonusDiscountContainer.on("click", ".select-bonus-btn", function (e) {
 			e.preventDefault();
 			var uuid = $bonusDiscountContainer.data("lineitemid");
-			var url = util.appendParamsToUrl(app.urls.getBonusProducts,
+			var url = util.appendParamsToUrl(Urls.getBonusProducts,
 												 {
 													bonusDiscountLineItemUUID : uuid,
 													source : "bonus"

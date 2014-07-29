@@ -14,7 +14,7 @@ var account = require('./account'),
  * @param {Object} A callback function to be called
  */
 function updateCart(postdata, callback) {
-	var url = util.ajaxUrl(app.urls.addProduct);
+	var url = util.ajaxUrl(Urls.addProduct);
 	$.post(url, postdata, callback || cart.refresh);
 }
 /**

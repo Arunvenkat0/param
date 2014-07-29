@@ -9,7 +9,7 @@ exports.init = function () {
 	product.initAddToCart();
 	sendToFriend.initializeDialog(".list-table-header", ".send-to-friend");
 	$('#editAddress').on('change', function () {
-		page.redirect(util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val()));
+		page.redirect(util.appendParamToURL(Urls.wishlistAddress, "AddressID", $(this).val()));
 	});
 	
 	//add js logic to remove the , from the qty feild to pass regex expression on client side

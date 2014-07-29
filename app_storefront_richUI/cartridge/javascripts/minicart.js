@@ -15,7 +15,7 @@ var timer = {
 		this.id = setTimeout(callback, duration);
 	}
 };
-/******* app.minicart public object ********/
+
 var minicart = {
 	$el: $('#mini-cart'),
 

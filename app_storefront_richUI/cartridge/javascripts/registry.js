@@ -13,12 +13,12 @@ var ajax = require('./ajax'),
  */
 function populateBeforeAddressForm(addressID) {
 	// load address details
-	var url = app.urls.giftRegAdd + addressID;
+	var url = Urls.giftRegAdd + addressID;
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			if(!data || !data.address) {
-				window.alert(app.resources.REG_ADDR_ERROR);
+				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}
 			// fill the form
@@ -44,12 +44,12 @@ function populateBeforeAddressForm(addressID) {
  */
 function populateAfterAddressForm(addressID) {
 	// load address details
-	var url = app.urls.giftRegAdd + addressID;
+	var url = Urls.giftRegAdd + addressID;
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			if(!data || !data.address) {
-				window.alert(app.resources.REG_ADDR_ERROR);
+				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}
 			// fill the form
@@ -116,7 +116,7 @@ function initializeDom() {
  */
 function initializeEvents() {
 	sendToFriend.initializeDialog('.list-table-header', '.send-to-friend');
-	util.setDeleteConfirmation('.item-list', String.format(app.resources.CONFIRM_DELETE, app.resources.TITLE_GIFTREGISTRY));
+	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 
 	$cache.copyAddress.on('click', function () {
 		if (this.checked) {
