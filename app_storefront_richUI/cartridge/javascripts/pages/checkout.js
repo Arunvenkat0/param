@@ -452,7 +452,7 @@ function billingLoad() {
 				name: $paymentMethodId.first().attr("name"),
 				type: "radio",
 				checked: "checked",
-				value: app.constants.PI_METHOD_GIFT_CERTIFICATE
+				value: Constants.PI_METHOD_GIFT_CERTIFICATE
 			}).appendTo($cache.checkoutForm);
 		}
 

@@ -153,14 +153,14 @@
 	};
 	
 	userSettings = {
-		zip : pdict.CurrentSession.custom.zipcode=="null"?null:pdict.CurrentSession.custom.zipcode,
-		storeId : pdict.CurrentSession.custom.storeId=="null"?null:pdict.CurrentSession.custom.storeId
+		zip : pdict.CurrentSession.custom.zipcode == "null" ? null : pdict.CurrentSession.custom.zipcode,
+		storeId : pdict.CurrentSession.custom.storeId == "null" ? null : pdict.CurrentSession.custom.storeId
 	};
 </isscript>
 (function(app){	
-	app.constants = <isprint value="${JSON.stringify(constants)}" encoding="off"/>;
+	window.Constants = <isprint value="${JSON.stringify(constants)}" encoding="off"/>;
 	window.Resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;	
 	window.Urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	
 	window.SitePreferences = <isprint value="${JSON.stringify(sitePreferences)}" encoding="off"/>;
-	app.user = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
+	window.User = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
 }(window.app = window.app || {}));

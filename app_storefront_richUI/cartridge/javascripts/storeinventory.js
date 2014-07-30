@@ -78,7 +78,7 @@ var storeinventory = {
 			$storeList = $('.store-list');
 		// request results from server
 		ajax.getJson({
-			url: util.appendParamsToUrl(Urls.storesInventory , {pid:pid, zipCode:app.user.zip}),
+			url: util.appendParamsToUrl(Urls.storesInventory , {pid:pid, zipCode: User.zip}),
 			callback: function (data) {
 				// clear any previous results, then build new
 				$storeList.empty();
@@ -105,7 +105,7 @@ var storeinventory = {
 					}
 				// no records
 				} else {
-					if (app.user.zip){
+					if (User.zip){
 						$storeList.append("<div class='no-results'>No Results</div>");
 					}
 				}
@@ -137,9 +137,9 @@ var storeinventory = {
 				} else {
 					selectedButtonText = Resources.PREFERRED_STORE;
 				}
-				listings.find('.store-' + app.user.storeId).addClass('selected').find('.select-store-button ').text(selectedButtonText);
+				listings.find('.store-' + User.storeId).addClass('selected').find('.select-store-button ').text(selectedButtonText);
 
-				that.bubbleStoreUp(listings, app.user.storeId);
+				that.bubbleStoreUp(listings, User.storeId);
 
 				// if there is a block to show results on page (pdp)
 				if (currentTemplate !== 'cart') {
@@ -181,7 +181,7 @@ var storeinventory = {
 						$('div[name="'+liuuid+'-sp"] .radio-url').click();
 						$('#preferred-store-panel').dialog("close");
 					} else {
-						if (app.user.storeId !== selectedStoreId) {
+						if (User.storeId !== selectedStoreId) {
 							// set as selected
 							app.storeinventory.setPreferredStore(selectedStoreId);
 							app.storeinventory.bubbleStoreUp (onPageList, selectedStoreId);
@@ -222,7 +222,7 @@ var storeinventory = {
 		$preferredStorePanel.empty();
 
 		// show form if no zip set
-		if (app.user.zip === null || app.user.zip === "") {
+		if (User.zip === null || User.zip === "") {
 			$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' + Resources.ENTER_ZIP + '"/><button id="set-user-zip" class="button-style-1">' + Resources.SEARCH + '</button></div>')
 				.find('#set-user-zip').on('click', function () {
 					var enteredZip = $('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
@@ -269,7 +269,7 @@ var storeinventory = {
 		} else {
 			app.storeinventory.buildStoreList(pid);
 			$preferredStorePanel
-				.append("<div>For " + app.user.zip + " <span class='update-location'>" + Resources.CHANGE_LOCATION + "</span></div>" )
+				.append("<div>For " + User.zip + " <span class='update-location'>" + Resources.CHANGE_LOCATION + "</span></div>" )
 				.append($('.store-list'));
 			$preferredStorePanel.find('.update-location').on('click', function () {
 				that.setUserZip(null);
@@ -279,9 +279,9 @@ var storeinventory = {
 
 		// append close button for pdp
 		if (currentTemplate !== "cart") {
-			if (app.user.storeId !== null) {
+			if (User.storeId !== null) {
 				$preferredStorePanel.append("<button class='close button-style-1  set-preferred-store'>" + Resources.CONTINUE_WITH_STORE + "</button>");
-			} else if (app.user.zip !== null) {
+			} else if (User.zip !== null) {
 				$preferredStorePanel.append("<button class='close button-style-1'>" + Resources.CONTINUE + "</button>");
 			}
 		} else {
@@ -301,7 +301,7 @@ var storeinventory = {
 		});
 
 		//remove the continue button if selecting a zipcode
-		if (app.user.zip === null || app.user.zip === "") {
+		if (User.zip === null || User.zip === "") {
 			$('#preferred-store-panel .set-preferred-store').last().remove();
 		}
 		
@@ -314,7 +314,7 @@ var storeinventory = {
 	},
 
 	setUserZip : function(zip) {
-		app.user.zip = zip;
+		User.zip = zip;
 		$.ajax({
 			type: "POST",
 			url: Urls.setZipCode,
@@ -323,7 +323,7 @@ var storeinventory = {
 	},
 
 	setPreferredStore : function(id) {
-		app.user.storeId = id;
+		User.storeId = id;
 		$.post(Urls.setPreferredStore, { storeId : id }, function(data) {
 			$('.selected-store-availability').html(data);
 			//enable continue button when a preferred store has been selected

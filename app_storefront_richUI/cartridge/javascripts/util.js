@@ -255,7 +255,7 @@ var util = {
 	 */
 	getQueryStringParams : function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
-		var params = {}, 
+		var params = {},
 			unescapedQS = unescape(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
@@ -350,11 +350,11 @@ var util = {
 	 */
 	updateStateOptions: function(countrySelect) {
 		var $country = $(countrySelect);
-		if ($country.length===0 || !app.countries[$country.val()]) {
+		if ($country.length===0 || !Countries[$country.val()]) {
 			return;
 		}
 		var $form = $country.closest("form"),
-			c = app.countries[$country.val()],
+			c = Countries[$country.val()],
 			arrHtml = [],
 			$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
 			$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),

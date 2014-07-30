@@ -14,39 +14,39 @@
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.firstName}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.lastName}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address1}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address2}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.country}" type="select"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.states.state}" type="select"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.city}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.postal}" type="input"/>
-					
+
 				</div>
 				<div class="formfield clearfix">
 					<isinputfield formfield="${pdict.CurrentForms.billingaddress.phone}" type="input"/>
-					
+
 				</div>
 			</div>
 		</fieldset>
@@ -56,14 +56,14 @@
 				<button id="dialogCancelBtn" type="button" value="${Resource.msg('global.cancel', 'locale', null)}"><span>${Resource.msg('global.cancel', 'locale', null)}</span></button>
 				<button id="dialogDeleteBtn" name="${pdict.CurrentForms.billingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
 			</div>
-			
+
 		</fieldset>
 	</form>
-<isscript>	
+<isscript>
 	importScript("util/ViewHelpers.ds");
 	var addressForm = pdict.CurrentForms.billingaddress;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
-	var json = JSON.stringify(countries);		
+	var json = JSON.stringify(countries);
 </isscript>
-<script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>	
+<script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
 </div>
