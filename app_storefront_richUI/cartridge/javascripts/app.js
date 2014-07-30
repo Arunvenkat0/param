@@ -64,7 +64,7 @@ function initializeEvents() {
 	 * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
 	 * */
 	var $searchContainer = $('#navigation .header-search');
-	if (app.clientcache.LISTING_SEARCHSUGGEST_LEGACY) {
+	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
 		app.searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	} else {
 		app.searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
@@ -115,7 +115,7 @@ function initializeEvents() {
 function initializeDom() {
 	// add class to html for css targeting
 	$('html').addClass('js');
-	if (app.clientcache.LISTING_INFINITE_SCROLL) {
+	if (SitePreferences.LISTING_INFINITE_SCROLL) {
 		$('html').addClass('infinite-scroll');
 	}
 	// load js specific styles

@@ -221,7 +221,7 @@ function initializeCache() {
  */
 function initializeEvents() {
 	product.initAddThis();
-	if (site.storePickupEnabled) {
+	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
 	// add or update shopping cart line item
@@ -420,7 +420,9 @@ function initializeEvents() {
 				target.html(data);
 				product.initAddThis();
 				product.initAddToCart();
-				if(site.storePickupEnabled){storeinventory.buildStoreList($('.product-number span').html());}
+				if (SitePreferences.STORE_PICKUP){
+					storeinventory.buildStoreList($('.product-number span').html());
+				}
 				if (hasSwapImage) {
 					replaceImages();
 				}

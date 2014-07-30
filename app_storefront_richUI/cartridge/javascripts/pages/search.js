@@ -195,7 +195,7 @@ exports.init = function () {
 	$cache.content = $cache.main.find(".search-result-content");
 	productCompare.init();
 	
-	if (app.clientcache.LISTING_INFINITE_SCROLL) {
+	if (SitePreferences.LISTING_INFINITE_SCROLL) {
 		$(window).on('scroll', infiniteScroll);
 	}
 	productTile.init();

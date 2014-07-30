@@ -204,7 +204,7 @@ function initializeGrid () {
 	});
 }
 
-bonusProductsView = {
+var bonusProductsView = {
 	/**
 	 * @function
 	 * @description Opens the bonus product quick view dialog
