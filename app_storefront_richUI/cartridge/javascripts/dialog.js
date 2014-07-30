@@ -9,7 +9,7 @@ var dialog = {
 	 * @description Appends a dialog to a given container (target)
 	 * @param {Object} params  params.target can be an id selector or an jquery object
 	 */
-	create : function (params) {
+	create: function (params) {
 		// options.target can be an id selector or an jquery object
 		var target = $(params.target || "#dialog-container");
 
@@ -31,7 +31,7 @@ var dialog = {
 	 * @description Opens a dialog using the given url (params.url)
 	 * @param {Object} params.url should contain the url
 	 */
-	open : function (params) {
+	open: function (params) {
 		if (!params.url || params.url.length===0) { return; }
 
 		this.container = this.dialog.create(params);
@@ -52,7 +52,7 @@ var dialog = {
 	 * @function
 	 * @description Closes the dialog and triggers the "close" event for the dialog
 	 */
-	close : function () {
+	close: function () {
 		if(!this.container) {
 			return;
 		}
@@ -63,7 +63,7 @@ var dialog = {
 	 * @description Submits the dialog form with the given action
 	 * @param {String} The action which will be triggered upon form submit
 	 */
-	submit : function (action) {
+	submit: function (action) {
 		var form = this.container.find("form:first");
 		// set the action
 		$("<input/>").attr({
@@ -89,7 +89,7 @@ var dialog = {
 			}
 		});
 	},
-	settings : {
+	settings: {
 		autoOpen : false,
 		resizable : false,
 		bgiframe : true,
@@ -107,7 +107,7 @@ var dialog = {
 		 * @function
 		 * @description The close event
 		 */
-		close : function (event, ui) {
+		close: function (event, ui) {
 			$(this).dialog("destroy");
 		}
 	}

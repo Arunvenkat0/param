@@ -6,6 +6,7 @@ var account = require('./account'),
 	quickview = require('../quickview'),
 	storeinventory = require('../storeinventory'),
 	util = require('../util');
+
 /**
  * @private
  * @function

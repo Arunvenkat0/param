@@ -12,8 +12,6 @@ var ajax = require('../ajax'),
 	tooltip = require('../tooltip'),
 	util = require('../util')
 
-var $cache;
-
 /**
  * @private
  * @function
@@ -35,7 +33,7 @@ function loadProductNavigation() {
 
 	var url = Urls.productNav+(Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
 	ajax.load({
-		url:url, 
+		url:url,
 		target: navContainer
 	});
 }
@@ -496,8 +494,7 @@ function initializeEvents() {
 			.always(function () {
 				if (psForms.length > 0) {
 					addItems();
-				}
-				else {
+				} else {
 					quickview.close();
 					minicart.show(miniCartHtml);
 				}
