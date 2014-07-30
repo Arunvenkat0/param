@@ -4,7 +4,7 @@ var dialog = require('./dialog'),
 	product = require('./pages/product'),
 	progress = require('./progress');
 
-var quickView = {
+var quickview = {
 	initializeButton : function (container, target) {
 		var that = this;
 		// quick view button

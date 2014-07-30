@@ -17,17 +17,9 @@ var timer = {
 };
 
 var minicart = {
-	$el: $('#mini-cart'),
-
-	$content: this.$el.find('.mini-cart-content'),
-
 	init : function () {
-		$cache.mcTotal = $cache.minicart.find(".mini-cart-total");
-		$cache.mcContent = $cache.minicart.find(".mini-cart-content");
-		$cache.mcClose = $cache.minicart.find(".mini-cart-close");
-		$cache.mcProductList = $cache.minicart.find(".mini-cart-products");
-		$cache.mcProducts = $cache.mcProductList.children(".mini-cart-product");
-
+		this.$el = $('#mini-cart');
+		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
 		$productList.children().not(':first').addClass('collapsed');

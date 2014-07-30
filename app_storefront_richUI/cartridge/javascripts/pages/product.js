@@ -2,6 +2,7 @@
 
 var ajax = require('../ajax'),
 	cart = require('./cart'),
+	components = require('../components'),
 	dialog = require('../dialog'),
 	minicart = require('../minicart'),
 	progress = require('../progress'),

@@ -36,7 +36,7 @@ function slideCarousel_itemVisible(carousel, item, idx, state) {
 	$('.jcarousel-control').find('.link-'+idx).addClass('active');
 }
 exports.init = function () {
-	$('#homepage-slider').slider.jcarousel({
+	$('#homepage-slider').jcarousel({
 		scroll: 1,
 		auto: 4,
 		buttonNextHTML: null,

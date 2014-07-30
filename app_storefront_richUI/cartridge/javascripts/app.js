@@ -7,10 +7,13 @@
 
 'use strict';
 
-var minicart = require('./minicart'),
+var components = require('./components'),
+	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
 	searchplaceholder = require('./searchplaceholder'),
+	searchsuggest = require('./searchsuggest'),
+	searchsuggestbeta = require('./searchsuggest-beta'),
 	tooltip = require('./tooltip'),
 	util = require('./util'),
 	validator = require('./validator');
@@ -35,7 +38,7 @@ document.cookie = 'dw=1';
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
-	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', app.util.setDialogify)
+	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
 	.on('keydown', 'textarea[data-character-limit]', function(e) {
 		var text = $.trim($(this).val()),
 			charsLimit = $(this).data('character-limit'),
@@ -65,9 +68,9 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		app.searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	} else {
-		app.searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 	
 	// print handler
@@ -146,9 +149,9 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		// app.components.init();
+		components.init();
 		searchplaceholder.init();
-		mulitcurrency.init();			
+		mulitcurrency.init();
 		// execute page specific initializations
 		$.extend(page, pageContext);
 		var ns = page.ns;

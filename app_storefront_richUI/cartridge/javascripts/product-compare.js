@@ -28,7 +28,7 @@ function refreshContainer() {
 
 	// update list with sequential classes for ui targeting
 	var $compareItems = $compareContainer.find('.compare-item');
-	for( i=0; i < $compareItems.length; i++ ){
+	for (var i = 0; i < $compareItems.length; i++ ){
 		$compareItems.removeClass('compare-item-' + i);
 		$($compareItems[i]).addClass('compare-item-' + i);
 	}
@@ -159,7 +159,7 @@ function addProduct (args) {
 	var $items = $('#compare-items').find(".compare-item");
 	var cb = $(args.cb);
 	var ac = $items.filter(".active").length;
-	if(ac===MAX_ACTIVE) {
+	if (ac===MAX_ACTIVE) {
 		if(!window.confirm(Resources.COMPARE_CONFIRMATION)) {
 			cb[0].checked = false;
 			return;
@@ -184,9 +184,9 @@ function addProduct (args) {
 	}
 
 	ajax.getJson({
-		url : Urls.compareAdd,
-		data : { 'pid' : args.itemid, 'category' : _currentCategory },
-		callback : function (response) {
+		url: Urls.compareAdd,
+		data: { 'pid' : args.itemid, 'category' : _currentCategory },
+		callback: function (response) {
 			if (!response || !response.success) {
 				// response failed. uncheck the checkbox return
 				cb[0].checked = false;

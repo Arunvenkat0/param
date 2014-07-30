@@ -8,10 +8,13 @@
 
 'use strict';
 
-var minicart = require('./minicart'),
+var components = require('./components'),
+	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
 	searchplaceholder = require('./searchplaceholder'),
+	searchsuggest = require('./searchsuggest'),
+	searchsuggestbeta = require('./searchsuggest-beta'),
 	tooltip = require('./tooltip'),
 	util = require('./util'),
 	validator = require('./validator');
@@ -36,7 +39,7 @@ document.cookie = 'dw=1';
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
-	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', app.util.setDialogify)
+	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
 	.on('keydown', 'textarea[data-character-limit]', function(e) {
 		var text = $.trim($(this).val()),
 			charsLimit = $(this).data('character-limit'),
@@ -66,9 +69,9 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		app.searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	} else {
-		app.searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 	
 	// print handler
@@ -147,9 +150,9 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		// app.components.init();
+		components.init();
 		searchplaceholder.init();
-		mulitcurrency.init();			
+		mulitcurrency.init();
 		// execute page specific initializations
 		$.extend(page, pageContext);
 		var ns = page.ns;
@@ -177,7 +180,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./jquery-ext":7,"./minicart":8,"./multicurrency":9,"./page":10,"./pages/account":11,"./pages/cart":12,"./pages/checkout":13,"./pages/compare":14,"./pages/product":15,"./pages/registry":16,"./pages/search":17,"./pages/storefront":18,"./pages/wishlist":19,"./searchplaceholder":24,"./tooltip":27,"./util":28,"./validator":29}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":14,"./pages/compare":15,"./pages/product":16,"./pages/registry":17,"./pages/search":18,"./pages/storefront":19,"./pages/wishlist":20,"./searchplaceholder":25,"./searchsuggest":27,"./searchsuggest-beta":26,"./tooltip":30,"./util":31,"./validator":32}],2:[function(require,module,exports){
 var progress= require('./progress'),
 	util = require('./util');
 
@@ -281,7 +284,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":22,"./util":28}],3:[function(require,module,exports){
+},{"./progress":23,"./util":31}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -561,7 +564,46 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":4,"./page":10,"./util":28}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":31}],4:[function(require,module,exports){
+'use strict';
+
+/**
+ * @function
+ * @description capture recommendation of each product when it becomes visible in the carousel
+ * @param c TBD
+ * @param {Element} li The visible product element in the carousel
+ * @param index TBD
+ * @param state TBD
+ */
+
+function captureCarouselRecommendations(c, li, index, state) {
+	if (!dw) { return; }
+
+	$(li).find(".capture-product-id").each(function () {
+		dw.ac.capture({
+			id : $(this).text(),
+			type : dw.ac.EV_PRD_RECOMMENDATION
+		});
+	});
+}
+
+var components = {
+	carouselSettings : {
+		scroll : 1,
+		itemFallbackDimension: '100%',
+		itemVisibleInCallback : app.captureCarouselRecommendations
+	},
+	init : function () {
+		setTimeout(function(){
+			// renders horizontal/vertical carousels for product slots
+			$('#vertical-carousel').jcarousel($.extend({vertical : true}, this.carouselSettings));
+			$('#horizontal-carousel').jcarousel(this.carouselSettings);
+		}.bind(this), 1000);
+	}
+};
+
+module.exports = components;
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -678,7 +720,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":28}],5:[function(require,module,exports){
+},{"./ajax":2,"./util":31}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -699,7 +741,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":28}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":31}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -753,7 +795,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":8,"./util":28}],7:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":31}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -786,7 +828,7 @@ module.exports = function () {
 		return this.height($(arr[arr.length-1]).height());
 	};
 }
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -806,17 +848,9 @@ var timer = {
 };
 
 var minicart = {
-	$el: $('#mini-cart'),
-
-	$content: this.$el.find('.mini-cart-content'),
-
 	init : function () {
-		$cache.mcTotal = $cache.minicart.find(".mini-cart-total");
-		$cache.mcContent = $cache.minicart.find(".mini-cart-content");
-		$cache.mcClose = $cache.minicart.find(".mini-cart-close");
-		$cache.mcProductList = $cache.minicart.find(".mini-cart-products");
-		$cache.mcProducts = $cache.mcProductList.children(".mini-cart-product");
-
+		this.$el = $('#mini-cart');
+		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
 		$productList.children().not(':first').addClass('collapsed');
@@ -876,7 +910,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":28}],9:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":31}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -904,7 +938,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":10,"./util":28}],10:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":31}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -922,7 +956,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":28}],11:[function(require,module,exports){
+},{"./util":31}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1132,7 +1166,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":4,"../giftcert":6,"../page":10,"../tooltip":27,"../util":28,"../validator":29}],12:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":30,"../util":31,"../validator":32}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1241,7 +1275,7 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":10,"../quickview":23,"../storeinventory":26,"../util":28,"./account":11}],13:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":24,"../storeinventory":29,"../util":31,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1888,7 +1922,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../ajax":2,"../dialog":4,"../giftcard":5,"../progress":22,"../tooltip":27,"../util":28,"../validator":29}],14:[function(require,module,exports){
+},{"../ajax":2,"../dialog":5,"../giftcard":6,"../progress":23,"../tooltip":30,"../util":31,"../validator":32}],15:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1932,11 +1966,12 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":10,"../product-tile":21,"../quickview":23,"./product":15}],15:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":22,"../quickview":24,"./product":16}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
 	cart = require('./cart'),
+	components = require('../components'),
 	dialog = require('../dialog'),
 	minicart = require('../minicart'),
 	progress = require('../progress'),
@@ -2569,7 +2604,7 @@ var product = {
 
 module.exports = product;
 
-},{"../ajax":2,"../dialog":4,"../minicart":8,"../progress":22,"../quickview":23,"../send-to-friend":25,"../storeinventory":26,"../tooltip":27,"../util":28,"./cart":12}],16:[function(require,module,exports){
+},{"../ajax":2,"../components":4,"../dialog":5,"../minicart":9,"../progress":23,"../quickview":24,"../send-to-friend":28,"../storeinventory":29,"../tooltip":30,"../util":31,"./cart":13}],17:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2741,7 +2776,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":23,"../send-to-friend":25,"../util":28,"./product":15}],17:[function(require,module,exports){
+},{"../ajax":2,"../quickview":24,"../send-to-friend":28,"../util":31,"./product":16}],18:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2947,7 +2982,7 @@ exports.init = function () {
 	
 }
 
-},{"../product-compare":20,"../product-tile":21,"../progress":22,"../util":28}],18:[function(require,module,exports){
+},{"../product-compare":21,"../product-tile":22,"../progress":23,"../util":31}],19:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2986,7 +3021,7 @@ function slideCarousel_itemVisible(carousel, item, idx, state) {
 	$('.jcarousel-control').find('.link-'+idx).addClass('active');
 }
 exports.init = function () {
-	$('#homepage-slider').slider.jcarousel({
+	$('#homepage-slider').jcarousel({
 		scroll: 1,
 		auto: 4,
 		buttonNextHTML: null,
@@ -2997,7 +3032,7 @@ exports.init = function () {
 	});
 };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -3018,7 +3053,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":10,"../send-to-friend":25,"../util":28,"./product":15}],20:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":28,"../util":31,"./product":16}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3049,7 +3084,7 @@ function refreshContainer() {
 
 	// update list with sequential classes for ui targeting
 	var $compareItems = $compareContainer.find('.compare-item');
-	for( i=0; i < $compareItems.length; i++ ){
+	for (var i = 0; i < $compareItems.length; i++ ){
 		$compareItems.removeClass('compare-item-' + i);
 		$($compareItems[i]).addClass('compare-item-' + i);
 	}
@@ -3180,7 +3215,7 @@ function addProduct (args) {
 	var $items = $('#compare-items').find(".compare-item");
 	var cb = $(args.cb);
 	var ac = $items.filter(".active").length;
-	if(ac===MAX_ACTIVE) {
+	if (ac===MAX_ACTIVE) {
 		if(!window.confirm(Resources.COMPARE_CONFIRMATION)) {
 			cb[0].checked = false;
 			return;
@@ -3205,9 +3240,9 @@ function addProduct (args) {
 	}
 
 	ajax.getJson({
-		url : Urls.compareAdd,
-		data : { 'pid' : args.itemid, 'category' : _currentCategory },
-		callback : function (response) {
+		url: Urls.compareAdd,
+		data: { 'pid' : args.itemid, 'category' : _currentCategory },
+		callback: function (response) {
 			if (!response || !response.success) {
 				// response failed. uncheck the checkbox return
 				cb[0].checked = false;
@@ -3284,7 +3319,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":10,"./util":28}],21:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":31}],22:[function(require,module,exports){
 'use strict';
 
 var quickview = require('./quickview');
@@ -3366,7 +3401,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":23}],22:[function(require,module,exports){
+},{"./quickview":24}],23:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3399,14 +3434,14 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
 	product = require('./pages/product'),
 	progress = require('./progress');
 
-var quickView = {
+var quickview = {
 	initializeButton : function (container, target) {
 		var that = this;
 		// quick view button
@@ -3550,7 +3585,7 @@ var quickView = {
 };
 
 module.exports = quickview;
-},{"./dialog":4,"./pages/product":15,"./progress":22}],24:[function(require,module,exports){
+},{"./dialog":5,"./pages/product":16,"./progress":23}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3576,7 +3611,352 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
+'use strict';
+var util = require('./util');
+
+var currentQuery = null,
+	lastQuery = null,
+	runningQuery = null,
+	listTotal = -1,
+	listCurrent = -1,
+	delay = 30,
+	$resultsContainer;
+/**
+ * @function
+ * @description Handles keyboard's arrow keys
+ * @param keyCode Code of an arrow key to be handled
+ */
+function handleArrowKeys(keyCode) {
+	switch (keyCode) {
+		case 38:
+			// keyUp
+			listCurrent = (listCurrent <= 0) ? (listTotal - 1) : (listCurrent - 1);
+			break;
+		case 40:
+			// keyDown
+			listCurrent = (listCurrent >= listTotal - 1) ? 0 : listCurrent + 1;
+			break;
+		default:
+			// reset
+			listCurrent = -1;
+			return false;
+	}
+
+	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
+	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	return true;
+}
+
+var searchsuggest = {
+	/**
+	 * @function
+	 * @description Configures parameters and required object instances
+	 */
+	init : function (container, defaultValue) {
+		var $searchContainer = $(container),
+			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
+			$searchField = $searchForm.find('input[name="q"]'),
+			fieldDefault = defaultValue;
+
+		// disable browser auto complete
+		$searchField.attr('autocomplete', 'off');
+
+		// on focus listener (clear default value)
+		$searchField.focus(function () {
+			if (!$resultsContainer) {
+				// create results container if needed
+				$resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
+			}
+			if ($searchField.val() === fieldDefault) {
+				$searchField.val('');
+			}
+		});
+		// on blur listener
+		$searchField.blur(function () {
+			setTimeout(this.clearResults, 200);
+		}.bind(this));
+		// on key up listener
+		$searchField.keyup(function (e) {
+
+			// get keyCode (window.event is for IE)
+			var keyCode = e.keyCode || window.event.keyCode;
+
+			// check and treat up and down arrows
+			if (handleArrowKeys(keyCode)) {
+				return;
+			}
+			// check for an ENTER or ESC
+			if(keyCode === 13 || keyCode === 27) {
+				this.clearResults();
+				return;
+			}
+
+			currentQuery = $searchField.val().trim();
+
+			// no query currently running, init a update
+			if (runningQuery == null) {
+				runningQuery = currentQuery;
+				setTimeout('this.suggest()', delay);
+			}
+		}.bind(this));
+	},
+
+	/**
+	 * @function
+	 * @description trigger suggest action
+	 */
+	suggest : function() {
+		// check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
+		// (we had a little delay)
+		if (runningQuery !== currentQuery) {
+			// update running query to the most recent search phrase
+			runningQuery = currentQuery;
+		}
+
+		// if it's empty clear the results box and return
+		if (runningQuery.length === 0) {
+			this.clearResults();
+			runningQuery = null;
+			return;
+		}
+
+		// if the current search phrase is the same as for the last suggestion call, just return
+		if (lastQuery === runningQuery) {
+			runningQuery = null;
+			return;
+		}
+
+		// build the request url
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery, 'legacy', 'false');
+
+		// execute server call
+		$.get(reqUrl, function (data) {
+			var suggestionHTML = data,
+				ansLength = suggestionHTML.trim().length;
+
+			// if there are results populate the results div
+			if (ansLength === 0) {
+				this.clearResults();
+			} else {
+				// update the results div
+				$resultsContainer.html(suggestionHTML).fadeIn(200);
+			}
+
+			// record the query that has been executed
+			lastQuery = runningQuery;
+			// reset currently running query
+			runningQuery = null;
+
+			// check for another required update (if current search phrase is different from just executed call)
+			if (currentQuery !== lastQuery) {
+				// ... and execute immediately if search has changed while this server call was in transit
+				runningQuery = currentQuery;
+				setTimeout("this.suggest()", delay);
+			}
+			this.hideLeftPanel();
+		}.bind(this));
+	},
+	/**
+	 * @function
+	 * @description
+	 */
+	clearResults : function () {
+		if (!$resultsContainer) { return; }
+		$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
+	},
+	/**
+	 * @function
+	 * @description
+	 */
+	hideLeftPanel : function () {
+		//hide left panel if there is only a matching suggested custom phrase
+		if($('.search-suggestion-left-panel-hit').length == 1 && ($('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() == $('.search-suggestion-left-panel-hit a').text().toUpperCase())){
+			$('.search-suggestion-left-panel').css('display','none');
+			$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
+			$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
+		}
+	}
+};
+
+module.exports = searchsuggest;
+},{"./util":31}],27:[function(require,module,exports){
+'use strict';
+
+var util = require('./util');
+
+var qlen = 0,
+	listTotal = -1,
+	listCurrent = -1,
+	delay = 300,
+	fieldDefault = null,
+	suggestionsJson = null,
+	$searchForm,
+	$searchField,
+	$searchContainer,
+	$resultsContainer;
+/**
+ * @function
+ * @description Handles keyboard's arrow keys
+ * @param keyCode Code of an arrow key to be handled
+ */
+function handleArrowKeys(keyCode) {
+	switch (keyCode) {
+		case 38:
+			// keyUp
+			listCurrent = (listCurrent <= 0) ? (listTotal - 1) : (listCurrent - 1);
+			break;
+		case 40:
+			// keyDown
+			listCurrent = (listCurrent >= listTotal - 1) ? 0 : listCurrent + 1;
+			break;
+		default:
+			// reset
+			listCurrent = -1;
+			return false;
+	}
+
+	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
+	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	return true;
+}
+var searchsuggest = {
+	/**
+	 * @function
+	 * @description Configures parameters and required object instances
+	 */
+	init : function (container, defaultValue) {
+		// initialize vars
+		$searchContainer = $(container);
+		$searchForm = $searchContainer.find('form[name="simpleSearch"]');
+		$searchField = $searchForm.find('input[name="q"]');
+		fieldDefault = defaultValue;
+
+		// disable browser auto complete
+		$searchField.attr('autocomplete', 'off');
+
+		// on focus listener (clear default value)
+		$searchField.focus(function () {
+			if(!$resultsContainer) {
+				// create results container if needed
+				$resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
+					'top': $searchContainer[0].offsetHeight,
+					'left': 0,
+					'width': $searchField[0].offsetWidth
+				});
+			}
+			if($searchField.val() === fieldDefault) {
+				$searchField.val('');
+			}
+		});
+		// on blur listener
+		$searchField.blur(function () {
+			setTimeout(this.clearResults, 200);
+		}.bind(this));
+		// on key up listener
+		$searchField.keyup(function (e) {
+
+			// get keyCode (window.event is for IE)
+			var keyCode = e.keyCode || window.event.keyCode;
+
+			// check and treat up and down arrows
+			if (handleArrowKeys(keyCode)) {
+				return;
+			}
+			// check for an ENTER or ESC
+			if (keyCode === 13 || keyCode === 27) {
+				this.clearResults();
+				return;
+			}
+
+			var lastVal = $searchField.val();
+
+			// if is text, call with delay
+			setTimeout(function () { 
+				this.suggest(lastVal); 
+			}.bind(this), delay);
+		}.bind(this));
+		// on submit we do not submit the form, but change the window location
+		// in order to avoid https to http warnings in the browser
+		// only if it's not the default value and it's not empty
+		$searchForm.submit(function (e) {
+			e.preventDefault();
+			var searchTerm = $searchField.val();
+			if(searchTerm === fieldDefault || searchTerm.length === 0) {
+				return false;
+			}
+			window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
+		});
+	},
+
+	/**
+	 * @function
+	 * @description trigger suggest action
+	 * @param lastValue
+	 */
+	suggest : function (lastValue) {
+		// get the field value
+		var part = $searchField.val();
+
+		// if it's empty clear the resuts box and return
+		if(part.length === 0) {
+			this.clearResults();
+			return;
+		}
+
+		// if part is not equal to the value from the initiated call,
+		// or there were no results in the last call and the query length
+		// is longer than the last query length, return
+		// #TODO: improve this to look at the query value and length
+		if((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
+			return;
+		}
+		qlen = part.length;
+
+		// build the request url
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part, 'legacy', 'true');
+
+		// get remote data as JSON
+		$.getJSON(reqUrl, function (data) {
+			// get the total of results
+			var suggestions = data,
+				ansLength = suggestions.length,
+				listTotal = ansLength;
+
+			// if there are results populate the results div
+			if (ansLength === 0) {
+				this.clearResults();
+				return;
+			}
+			suggestionsJson = suggestions;
+			var html = '';
+			for (var i=0; i < ansLength; i++) {
+				html+='<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
+			}
+
+			// update the results div
+			$resultsContainer.html(html).show().on('hover', 'div', function () {
+				$(this).toggleClass = 'selected';
+			}).on('click', 'div', function () {
+				// on click copy suggestion to search field, hide the list and submit the search
+				$searchField.val($(this).children('.suggestionterm').text());
+				this.clearResults();
+				$searchForm.trigger('submit');
+			}.bind(this));
+		}.bind(this));
+	},
+	/**
+	 * @function
+	 * @description
+	 */
+	clearResults : function () {
+		if (!$resultsContainer) { return; }
+		$resultsContainer.empty().hide();
+	}
+};
+
+module.exports = searchsuggest;
+},{"./util":31}],28:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3651,7 +4031,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":4,"./util":28,"./validator":29}],26:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":31,"./validator":32}],29:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3995,7 +4375,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":10,"./util":28}],27:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":31}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4017,7 +4397,7 @@ exports.init = function () {
 	});
 };
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
@@ -4455,7 +4835,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./ajax":2,"./dialog":4,"./validator":29}],29:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./validator":32}],32:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,

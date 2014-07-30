@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @function
  * @description capture recommendation of each product when it becomes visible in the carousel
@@ -7,7 +9,6 @@
  * @param state TBD
  */
 
- /*
 function captureCarouselRecommendations(c, li, index, state) {
 	if (!dw) { return; }
 
@@ -19,7 +20,7 @@ function captureCarouselRecommendations(c, li, index, state) {
 	});
 }
 
-app.components = {
+var components = {
 	carouselSettings : {
 		scroll : 1,
 		itemFallbackDimension: '100%',
@@ -28,9 +29,10 @@ app.components = {
 	init : function () {
 		setTimeout(function(){
 			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical : true}, app.components.carouselSettings));
-			$('#horizontal-carousel').jcarousel(app.components.carouselSettings);
-		}, 1000);
+			$('#vertical-carousel').jcarousel($.extend({vertical : true}, this.carouselSettings));
+			$('#horizontal-carousel').jcarousel(this.carouselSettings);
+		}.bind(this), 1000);
 	}
 };
-*/
+
+module.exports = components;
