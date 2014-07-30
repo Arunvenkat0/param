@@ -4,7 +4,8 @@ var gulp = require('gulp'),
 	prefix = require('gulp-autoprefixer'),
 	browserify = require('browserify'),
 	watchify = require('watchify'),
-	source = require('vinyl-source-stream');
+	source = require('vinyl-source-stream'),
+	xtend = require('xtend');
 
 var paths = {
 	scss: {
@@ -28,27 +29,35 @@ gulp.task('sass', function () {
 });
 
 gulp.task('browserify', function () {
-	var bundleMethod = watching ? watchify : browserify;
-	var bundler = bundleMethod({
+	var opts = {
 		entries: paths.js.src,
-		debug: development
-	});
-	var development = gutil.env.type === 'development';
+		debug: (gutil.env.type === 'development')
+	}
+	if (watching) {
+		opts = xtend(opts, watchify.args);
+	}
+	var bundler = browserify(opts);
+	if (watching) {
+		bundler = watchify(bundler);
+	}
 	// optionally transform
 	// bundler.transform('transformer');
 
-	bundler.on('update', bundle);
+	bundler.on('update', function (ids) {
+		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
+		gutil.log('Rebunlding...');
+	});
 
-	function bundle () {
+	function rebundle () {
 		return bundler
 			.bundle()
 			.on('error', function (e) {
-				gutil.log('Browserify Error', e);
+				gutil.log('Browserify Error', gutil.colors.red(e));
 			})
 			.pipe(source('app.js'))
 			.pipe(gulp.dest(paths.js.dest));
 	}
-	return bundle();
+	return rebundle();
 });
 
 gulp.task('watch', ['enable-watch-mode', 'browserify'], function () {
