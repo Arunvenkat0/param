@@ -38,7 +38,7 @@ document.cookie = 'dw=1';
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
-	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
+	$('body')//.on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
 	.on('keydown', 'textarea[data-character-limit]', function(e) {
 		var text = $.trim($(this).val()),
 			charsLimit = $(this).data('character-limit'),
@@ -72,7 +72,7 @@ function initializeEvents() {
 	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
-	
+
 	// print handler
 	$('.print-page').on('click', function () { window.print(); return false; });
 
@@ -155,6 +155,7 @@ var app = {
 		// execute page specific initializations
 		$.extend(page, pageContext);
 		var ns = page.ns;
+		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}

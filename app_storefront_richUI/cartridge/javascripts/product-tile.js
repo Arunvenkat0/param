@@ -1,7 +1,29 @@
 'use strict';
 
-var quickview = require('./quickview');
+var product = require('./pages/product'),
+	quickview = require('./quickview');
 
+function initQuickViewButtons() {
+	$('.tiles-container .product-image').on('mouseenter', function (e) {
+		var $qvButton = $('#quickviewbutton');
+		if ($qvButton.length === 0) {
+			$qvButton = $('<a id="quickviewbutton"/>');
+		}
+		var $link = $(this).children('.thumb-link:first');
+		$qvButton.attr({
+			'href': $link.attr('href'),
+			'title': $link.attr('title')
+		}).appendTo(this);
+		$qvButton.on('click', function (e) {
+			e.preventDefault();
+			quickview.show({
+				url: $(this).attr('href'),
+				source: 'quickview',
+				callback: product.init
+			});
+		});
+	});
+}
 /**
  * @private
  * @function
@@ -10,14 +32,14 @@ var quickview = require('./quickview');
  * - thumbnails
  */
 function initializeEvents() {
-	quickview.initializeButton($(".tiles-container"), '.product-image');
+	initQuickViewButtons();
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest(".grid-tile"),
 			$thumb = $tile.find(".product-image a.thumb-link img").filter(":first"),
 			data = $thumb.data("current");
-		
+
 		$thumb.attr({
 			src : data.src,
 			alt : data.alt,

@@ -39,7 +39,7 @@ document.cookie = 'dw=1';
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
-	$('body').on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
+	$('body')//.on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
 	.on('keydown', 'textarea[data-character-limit]', function(e) {
 		var text = $.trim($(this).val()),
 			charsLimit = $(this).data('character-limit'),
@@ -73,7 +73,7 @@ function initializeEvents() {
 	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
-	
+
 	// print handler
 	$('.print-page').on('click', function () { window.print(); return false; });
 
@@ -156,6 +156,7 @@ var app = {
 		// execute page specific initializations
 		$.extend(page, pageContext);
 		var ns = page.ns;
+		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}
@@ -181,6 +182,8 @@ $(document).ready(function () {
 });
 
 },{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":14,"./pages/compare":15,"./pages/product":16,"./pages/registry":17,"./pages/search":18,"./pages/storefront":19,"./pages/wishlist":20,"./searchplaceholder":25,"./searchsuggest":27,"./searchsuggest-beta":26,"./tooltip":30,"./util":31,"./validator":32}],2:[function(require,module,exports){
+'use strict';
+
 var progress= require('./progress'),
 	util = require('./util');
 
@@ -615,7 +618,7 @@ var dialog = {
 	 * @description Appends a dialog to a given container (target)
 	 * @param {Object} params  params.target can be an id selector or an jquery object
 	 */
-	create : function (params) {
+	create: function (params) {
 		// options.target can be an id selector or an jquery object
 		var target = $(params.target || "#dialog-container");
 
@@ -637,10 +640,10 @@ var dialog = {
 	 * @description Opens a dialog using the given url (params.url)
 	 * @param {Object} params.url should contain the url
 	 */
-	open : function (params) {
+	open: function (params) {
 		if (!params.url || params.url.length===0) { return; }
 
-		this.container = this.dialog.create(params);
+		this.container = this.create(params);
 		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
 
 		// finally load the dialog
@@ -648,7 +651,7 @@ var dialog = {
 			target : this.container,
 			url : params.url,
 			callback : function () {
-				if (this.container.dialog("isOpen")) { return; }
+				if (this.container.dialog("isOpen")) {return;}
 				this.container.dialog("open");
 			}.bind(this)
 		});
@@ -658,7 +661,7 @@ var dialog = {
 	 * @function
 	 * @description Closes the dialog and triggers the "close" event for the dialog
 	 */
-	close : function () {
+	close: function () {
 		if(!this.container) {
 			return;
 		}
@@ -669,7 +672,7 @@ var dialog = {
 	 * @description Submits the dialog form with the given action
 	 * @param {String} The action which will be triggered upon form submit
 	 */
-	submit : function (action) {
+	submit: function (action) {
 		var form = this.container.find("form:first");
 		// set the action
 		$("<input/>").attr({
@@ -695,7 +698,7 @@ var dialog = {
 			}
 		});
 	},
-	settings : {
+	settings: {
 		autoOpen : false,
 		resizable : false,
 		bgiframe : true,
@@ -713,7 +716,7 @@ var dialog = {
 		 * @function
 		 * @description The close event
 		 */
-		close : function (event, ui) {
+		close: function (event, ui) {
 			$(this).dialog("destroy");
 		}
 	}
@@ -964,7 +967,7 @@ var giftcert = require('../giftcert'),
 	util = require('../util'),
 	dialog = require('../dialog'),
 	page = require('../page'),
-	validator = require('../validator')
+	validator = require('../validator');
 
 /**
  * @function
@@ -1120,18 +1123,18 @@ function initPaymentEvents() {
 		});
 	});
 }
-/** 
- * @private 
- * @function 
+/**
+ * @private
+ * @function
  * @description init events for the loginPage
  */
 function initLoginPage() {
-	
+
 	//o-auth binding for which icon is clicked
 	$('.oAuthIcon').bind( "click", function() {
 		$('#OAuthProvider').val(this.id);
-	});	
-	
+	});
+
 	//toggle the value of the rememberme checkbox
 	$( "#dwfrm_login_rememberme" ).bind( "change", function() {
 		if($('#dwfrm_login_rememberme').attr('checked')){
@@ -1139,8 +1142,8 @@ function initLoginPage() {
 		}else{
 			$('#rememberme').val('false')
 		}
-	});	
-			
+	});
+
 }
 /**
  * @private
@@ -1175,6 +1178,7 @@ var account = require('./account'),
 	quickview = require('../quickview'),
 	storeinventory = require('../storeinventory'),
 	util = require('../util');
+
 /**
  * @private
  * @function
@@ -1981,8 +1985,6 @@ var ajax = require('../ajax'),
 	tooltip = require('../tooltip'),
 	util = require('../util')
 
-var $cache;
-
 /**
  * @private
  * @function
@@ -2004,7 +2006,7 @@ function loadProductNavigation() {
 
 	var url = Urls.productNav+(Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
 	ajax.load({
-		url:url, 
+		url:url,
 		target: navContainer
 	});
 }
@@ -2465,8 +2467,7 @@ function initializeEvents() {
 			.always(function () {
 				if (psForms.length > 0) {
 					addItems();
-				}
-				else {
+				} else {
 					quickview.close();
 					minicart.show(miniCartHtml);
 				}
@@ -3322,8 +3323,30 @@ exports.removeProduct = removeProduct;
 },{"./ajax":2,"./page":11,"./util":31}],22:[function(require,module,exports){
 'use strict';
 
-var quickview = require('./quickview');
+var product = require('./pages/product'),
+	quickview = require('./quickview');
 
+function initQuickViewButtons() {
+	$('.tiles-container .product-image').on('mouseenter', function (e) {
+		var $qvButton = $('#quickviewbutton');
+		if ($qvButton.length === 0) {
+			$qvButton = $('<a id="quickviewbutton"/>');
+		}
+		var $link = $(this).children('.thumb-link:first');
+		$qvButton.attr({
+			'href': $link.attr('href'),
+			'title': $link.attr('title')
+		}).appendTo(this);
+		$qvButton.on('click', function (e) {
+			e.preventDefault();
+			quickview.show({
+				url: $(this).attr('href'),
+				source: 'quickview',
+				callback: product.init
+			});
+		});
+	});
+}
 /**
  * @private
  * @function
@@ -3332,14 +3355,14 @@ var quickview = require('./quickview');
  * - thumbnails
  */
 function initializeEvents() {
-	quickview.initializeButton($(".tiles-container"), '.product-image');
+	initQuickViewButtons();
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest(".grid-tile"),
 			$thumb = $tile.find(".product-image a.thumb-link img").filter(":first"),
 			data = $thumb.data("current");
-		
+
 		$thumb.attr({
 			src : data.src,
 			alt : data.alt,
@@ -3401,7 +3424,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":24}],23:[function(require,module,exports){
+},{"./pages/product":16,"./quickview":24}],23:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3437,52 +3460,30 @@ exports.hide = hide;
 },{}],24:[function(require,module,exports){
 'use strict';
 
-var dialog = require('./dialog'),
-	product = require('./pages/product'),
-	progress = require('./progress');
+var ajax = require('./ajax'),
+	dialog = require('./dialog'),
+	progress = require('./progress'),
+	util = require('./util');
 
 var quickview = {
-	initializeButton : function (container, target) {
-		var that = this;
-		// quick view button
-		$(container).on("mouseenter", target, function (e) {
-			var $qvButton = $('#quickviewbutton');
-			if ($qvButton.length === 0) {
-				$qvButton = $('<a id="quickviewbutton"/>');
-			}
-			$qvButton.on("click", function (e) {
-				e.preventDefault();
-				that.show({
-					url : $(this).attr("href"),
-					source : "quickview"
-				});
-			});
-
-			var $link = $(this).children("a:first");
-			$qvButton.attr({
-				'href': $link.attr('href'),
-				'title': $link.attr('title')
-			}).appendTo($(this));
-		});
-	},
 	init : function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
 	},
-	
+
 	initializeQuickViewNav : function(qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-		
+
 		if (qvUrlPidParam.indexOf('pid') > 0){
 			// if storefront urls are turned off
 			// append the pid to the url
 			qvUrl = qvUrl + qvUrlPidParam;
 		}
-		
+
 		this.searchesultsContainer = $('#search-result-items').parent();
 		this.productLinks = this.searchesultsContainer.find('.thumb-link');
 
@@ -3494,8 +3495,8 @@ var quickview = {
 
 		var productLinksUrl = '';
 		for (var i = 0; i < this.productLinks.length; i++) {
-			productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
-			productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
+			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
+			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
 			if (productLinksUrlPidParam.indexOf('pid') > 0){
 				//append the pid to the url
 				//if storefront urls are turned off
@@ -3504,7 +3505,7 @@ var quickview = {
 			} else {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
-		
+
 			if (productLinksUrl == ''){
 				productLinksUrl = this.productLinks[i].href;
 			}
@@ -3542,37 +3543,55 @@ var quickview = {
 			source : 'quickview'
 		});
 	},
-	
+
 	// show quick view dialog and send request to the server to get the product
 	// options.source - source of the dialog i.e. search/cart
 	// options.url - product url
 	show : function (options) {
+		if (!this.exists()) {
+			this.init();
+		}
 		var that = this;
-		options.target = this.init();
-		options.callback = function () {
-			product.init();
-			dialog.create({
-				target : that.$container,
-				options : {
-					height : 'auto',
-					width : 920,
-					dialogClass : 'quickview',
-					title : 'Product Quickview',
-					resizable : false,
-					position : 'center',
-					open : function () {
-						progress.hide();
+		var target = this.$container;
+		var url = options.url;
+		var source = options.source;
+		var productListId = options.productlistid || '';
+		if (source.length > 0) {
+			url = util.appendParamToURL(url, 'source', source);
+		}
+		if (productListId.length > 0) {
+			url = util.appendParamToURL(url, 'productlistid', productListId)
+		}
+
+		ajax.load({
+			target: target,
+			url: url,
+			callback: function () {
+				dialog.create({
+					target: target,
+					options: {
+						height: 'auto',
+						width: 920,
+						modal: true,
+						dialogClass: 'quickview',
+						title: 'Product Quickview',
+						resizable: false,
+						position: 'center',
+						open: function() {
+							// allow for click outside modal to close the modal
+							$('.ui-widget-overlay').on('click', this.close.bind(this));
+							if (options.callback) options.callback();
+						}.bind(this)
 					}
-				}
-			});
-			that.$container.dialog('open');
-			that.initializeQuickViewNav(this.url);
-		};
-		product.get(options);
+				});
+				target.dialog('open');
+				this.initializeQuickViewNav(url);
+			}.bind(this)
+		});
 	},
 	// close the quick view dialog
 	close : function () {
-		if(this.exists()) {
+		if (this.exists()) {
 			this.$container.dialog('close').empty();
 		}
 	},
@@ -3585,7 +3604,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./dialog":5,"./pages/product":16,"./progress":23}],25:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":23,"./util":31}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4399,8 +4418,7 @@ exports.init = function () {
 
 },{}],31:[function(require,module,exports){
 'use strict';
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var // dialog = require('./dialog'),
 	validator = require('./validator')
 
 var util = {
@@ -4418,51 +4436,51 @@ var util = {
 	 * @description
 	 */
 	setDialogify: function (e) {
-		var util = this;
-		e.preventDefault();
-		var $actionSource = $(e.target),
-			dlgAction = $actionSource.data('dlg-action') || {}, // url, target, isForm
-			dlgOptions = $.extend({}, dialog.settings, $actionSource.data('dlg-options') || {});
+		// var util = this;
+		// e.preventDefault();
+		// var $actionSource = $(e.target),
+		// 	dlgAction = $actionSource.data('dlg-action') || {}, // url, target, isForm
+		// 	dlgOptions = $.extend({}, dialog.settings, $actionSource.data('dlg-options') || {});
 
-		dlgOptions.title = dlgOptions.title || $actionSource.attr('title') || '';
+		// dlgOptions.title = dlgOptions.title || $actionSource.attr('title') || '';
 
-		var url = dlgAction.url // url from data
-			|| (dlgAction.isForm ? $actionSource.closest('form').attr('action') : null) // or url from form action if isForm=true
-			|| $actionSource.attr('href'); // or url from href
+		// var url = dlgAction.url // url from data
+		// 	|| (dlgAction.isForm ? $actionSource.closest('form').attr('action') : null) // or url from form action if isForm=true
+		// 	|| $actionSource.attr('href'); // or url from href
 
-		if (!url) {return;}
+		// if (!url) {return;}
 
-		var $form = $actionSource.parents('form'),
-			method = $form.attr('method') || 'POST';
+		// var $form = $actionSource.parents('form'),
+		// 	method = $form.attr('method') || 'POST';
 
-		// if this is a content link, update url from Page-Show to Page-Include
-		if ($actionSource.hasClass("attributecontentlink")) {
-			var uri = util.getUri(url);
-			url = Urls.pageInclude+uri.query;
-		}
-		if (method && method.toUpperCase() === 'POST') {
-			var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
-		} else {
-			if (url.indexOf('?') == -1 ) {
-				url += '?';
-			} else {
-				url += '&'
-			}
-			url += form.serialize();
-			url = this.appendParamToURL(url, $actionSource.attr('name'), "submit");
-		}
+		// // if this is a content link, update url from Page-Show to Page-Include
+		// if ($actionSource.hasClass("attributecontentlink")) {
+		// 	var uri = util.getUri(url);
+		// 	url = Urls.pageInclude+uri.query;
+		// }
+		// if (method && method.toUpperCase() === 'POST') {
+		// 	var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
+		// } else {
+		// 	if (url.indexOf('?') == -1 ) {
+		// 		url += '?';
+		// 	} else {
+		// 		url += '&'
+		// 	}
+		// 	url += form.serialize();
+		// 	url = this.appendParamToURL(url, $actionSource.attr('name'), "submit");
+		// }
 
-		var dlg = dialog.create({target:dlgAction.target, options : dlgOptions});
+		// var dlg = dialog.create({target:dlgAction.target, options : dlgOptions});
 
-		ajax.load({
-			url: $actionSource.attr("href") || $actionSource.closest("form").attr("action"),
-			target: dlg,
-			callback: function () {
-				dlg.dialog("open");	// open after load to ensure dialog is centered
-				validator.init(); // re-init validator
-			},
-			data : !$actionSource.attr('href') ? postData : null
-		});
+		// ajax.load({
+		// 	url: $actionSource.attr("href") || $actionSource.closest("form").attr("action"),
+		// 	target: dlg,
+		// 	callback: function () {
+		// 		dlg.dialog("open");	// open after load to ensure dialog is centered
+		// 		validator.init(); // re-init validator
+		// 	},
+		// 	data : !$actionSource.attr('href') ? postData : null
+		// });
 	}.bind(this),
 	/**
 	 * @function
@@ -4835,7 +4853,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./ajax":2,"./dialog":5,"./validator":32}],32:[function(require,module,exports){
+},{"./validator":32}],32:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,

@@ -34,7 +34,7 @@ var dialog = {
 	open: function (params) {
 		if (!params.url || params.url.length===0) { return; }
 
-		this.container = this.dialog.create(params);
+		this.container = this.create(params);
 		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
 
 		// finally load the dialog
@@ -42,7 +42,7 @@ var dialog = {
 			target : this.container,
 			url : params.url,
 			callback : function () {
-				if (this.container.dialog("isOpen")) { return; }
+				if (this.container.dialog("isOpen")) {return;}
 				this.container.dialog("open");
 			}.bind(this)
 		});

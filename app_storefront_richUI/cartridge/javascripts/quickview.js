@@ -1,51 +1,29 @@
 'use strict';
 
-var dialog = require('./dialog'),
-	product = require('./pages/product'),
-	progress = require('./progress');
+var ajax = require('./ajax'),
+	dialog = require('./dialog'),
+	progress = require('./progress'),
+	util = require('./util');
 
 var quickview = {
-	initializeButton : function (container, target) {
-		var that = this;
-		// quick view button
-		$(container).on("mouseenter", target, function (e) {
-			var $qvButton = $('#quickviewbutton');
-			if ($qvButton.length === 0) {
-				$qvButton = $('<a id="quickviewbutton"/>');
-			}
-			$qvButton.on("click", function (e) {
-				e.preventDefault();
-				that.show({
-					url : $(this).attr("href"),
-					source : "quickview"
-				});
-			});
-
-			var $link = $(this).children("a:first");
-			$qvButton.attr({
-				'href': $link.attr('href'),
-				'title': $link.attr('title')
-			}).appendTo($(this));
-		});
-	},
 	init : function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
 	},
-	
+
 	initializeQuickViewNav : function(qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-		
+
 		if (qvUrlPidParam.indexOf('pid') > 0){
 			// if storefront urls are turned off
 			// append the pid to the url
 			qvUrl = qvUrl + qvUrlPidParam;
 		}
-		
+
 		this.searchesultsContainer = $('#search-result-items').parent();
 		this.productLinks = this.searchesultsContainer.find('.thumb-link');
 
@@ -57,8 +35,8 @@ var quickview = {
 
 		var productLinksUrl = '';
 		for (var i = 0; i < this.productLinks.length; i++) {
-			productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
-			productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
+			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
+			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
 			if (productLinksUrlPidParam.indexOf('pid') > 0){
 				//append the pid to the url
 				//if storefront urls are turned off
@@ -67,7 +45,7 @@ var quickview = {
 			} else {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
-		
+
 			if (productLinksUrl == ''){
 				productLinksUrl = this.productLinks[i].href;
 			}
@@ -105,37 +83,55 @@ var quickview = {
 			source : 'quickview'
 		});
 	},
-	
+
 	// show quick view dialog and send request to the server to get the product
 	// options.source - source of the dialog i.e. search/cart
 	// options.url - product url
 	show : function (options) {
+		if (!this.exists()) {
+			this.init();
+		}
 		var that = this;
-		options.target = this.init();
-		options.callback = function () {
-			product.init();
-			dialog.create({
-				target : that.$container,
-				options : {
-					height : 'auto',
-					width : 920,
-					dialogClass : 'quickview',
-					title : 'Product Quickview',
-					resizable : false,
-					position : 'center',
-					open : function () {
-						progress.hide();
+		var target = this.$container;
+		var url = options.url;
+		var source = options.source;
+		var productListId = options.productlistid || '';
+		if (source.length > 0) {
+			url = util.appendParamToURL(url, 'source', source);
+		}
+		if (productListId.length > 0) {
+			url = util.appendParamToURL(url, 'productlistid', productListId)
+		}
+
+		ajax.load({
+			target: target,
+			url: url,
+			callback: function () {
+				dialog.create({
+					target: target,
+					options: {
+						height: 'auto',
+						width: 920,
+						modal: true,
+						dialogClass: 'quickview',
+						title: 'Product Quickview',
+						resizable: false,
+						position: 'center',
+						open: function() {
+							// allow for click outside modal to close the modal
+							$('.ui-widget-overlay').on('click', this.close.bind(this));
+							if (options.callback) options.callback();
+						}.bind(this)
 					}
-				}
-			});
-			that.$container.dialog('open');
-			that.initializeQuickViewNav(this.url);
-		};
-		product.get(options);
+				});
+				target.dialog('open');
+				this.initializeQuickViewNav(url);
+			}.bind(this)
+		});
 	},
 	// close the quick view dialog
 	close : function () {
-		if(this.exists()) {
+		if (this.exists()) {
 			this.$container.dialog('close').empty();
 		}
 	},

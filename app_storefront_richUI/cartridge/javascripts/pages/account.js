@@ -5,7 +5,7 @@ var giftcert = require('../giftcert'),
 	util = require('../util'),
 	dialog = require('../dialog'),
 	page = require('../page'),
-	validator = require('../validator')
+	validator = require('../validator');
 
 /**
  * @function
@@ -161,18 +161,18 @@ function initPaymentEvents() {
 		});
 	});
 }
-/** 
- * @private 
- * @function 
+/**
+ * @private
+ * @function
  * @description init events for the loginPage
  */
 function initLoginPage() {
-	
+
 	//o-auth binding for which icon is clicked
 	$('.oAuthIcon').bind( "click", function() {
 		$('#OAuthProvider').val(this.id);
-	});	
-	
+	});
+
 	//toggle the value of the rememberme checkbox
 	$( "#dwfrm_login_rememberme" ).bind( "change", function() {
 		if($('#dwfrm_login_rememberme').attr('checked')){
@@ -180,8 +180,8 @@ function initLoginPage() {
 		}else{
 			$('#rememberme').val('false')
 		}
-	});	
-			
+	});
+
 }
 /**
  * @private

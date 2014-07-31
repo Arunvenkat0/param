@@ -1,6 +1,5 @@
 'use strict';
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var // dialog = require('./dialog'),
 	validator = require('./validator')
 
 var util = {
@@ -18,51 +17,51 @@ var util = {
 	 * @description
 	 */
 	setDialogify: function (e) {
-		var util = this;
-		e.preventDefault();
-		var $actionSource = $(e.target),
-			dlgAction = $actionSource.data('dlg-action') || {}, // url, target, isForm
-			dlgOptions = $.extend({}, dialog.settings, $actionSource.data('dlg-options') || {});
+		// var util = this;
+		// e.preventDefault();
+		// var $actionSource = $(e.target),
+		// 	dlgAction = $actionSource.data('dlg-action') || {}, // url, target, isForm
+		// 	dlgOptions = $.extend({}, dialog.settings, $actionSource.data('dlg-options') || {});
 
-		dlgOptions.title = dlgOptions.title || $actionSource.attr('title') || '';
+		// dlgOptions.title = dlgOptions.title || $actionSource.attr('title') || '';
 
-		var url = dlgAction.url // url from data
-			|| (dlgAction.isForm ? $actionSource.closest('form').attr('action') : null) // or url from form action if isForm=true
-			|| $actionSource.attr('href'); // or url from href
+		// var url = dlgAction.url // url from data
+		// 	|| (dlgAction.isForm ? $actionSource.closest('form').attr('action') : null) // or url from form action if isForm=true
+		// 	|| $actionSource.attr('href'); // or url from href
 
-		if (!url) {return;}
+		// if (!url) {return;}
 
-		var $form = $actionSource.parents('form'),
-			method = $form.attr('method') || 'POST';
+		// var $form = $actionSource.parents('form'),
+		// 	method = $form.attr('method') || 'POST';
 
-		// if this is a content link, update url from Page-Show to Page-Include
-		if ($actionSource.hasClass("attributecontentlink")) {
-			var uri = util.getUri(url);
-			url = Urls.pageInclude+uri.query;
-		}
-		if (method && method.toUpperCase() === 'POST') {
-			var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
-		} else {
-			if (url.indexOf('?') == -1 ) {
-				url += '?';
-			} else {
-				url += '&'
-			}
-			url += form.serialize();
-			url = this.appendParamToURL(url, $actionSource.attr('name'), "submit");
-		}
+		// // if this is a content link, update url from Page-Show to Page-Include
+		// if ($actionSource.hasClass("attributecontentlink")) {
+		// 	var uri = util.getUri(url);
+		// 	url = Urls.pageInclude+uri.query;
+		// }
+		// if (method && method.toUpperCase() === 'POST') {
+		// 	var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
+		// } else {
+		// 	if (url.indexOf('?') == -1 ) {
+		// 		url += '?';
+		// 	} else {
+		// 		url += '&'
+		// 	}
+		// 	url += form.serialize();
+		// 	url = this.appendParamToURL(url, $actionSource.attr('name'), "submit");
+		// }
 
-		var dlg = dialog.create({target:dlgAction.target, options : dlgOptions});
+		// var dlg = dialog.create({target:dlgAction.target, options : dlgOptions});
 
-		ajax.load({
-			url: $actionSource.attr("href") || $actionSource.closest("form").attr("action"),
-			target: dlg,
-			callback: function () {
-				dlg.dialog("open");	// open after load to ensure dialog is centered
-				validator.init(); // re-init validator
-			},
-			data : !$actionSource.attr('href') ? postData : null
-		});
+		// ajax.load({
+		// 	url: $actionSource.attr("href") || $actionSource.closest("form").attr("action"),
+		// 	target: dlg,
+		// 	callback: function () {
+		// 		dlg.dialog("open");	// open after load to ensure dialog is centered
+		// 		validator.init(); // re-init validator
+		// 	},
+		// 	data : !$actionSource.attr('href') ? postData : null
+		// });
 	}.bind(this),
 	/**
 	 * @function

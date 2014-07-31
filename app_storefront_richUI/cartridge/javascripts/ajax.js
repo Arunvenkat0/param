@@ -1,3 +1,5 @@
+'use strict';
+
 var progress= require('./progress'),
 	util = require('./util');
 
