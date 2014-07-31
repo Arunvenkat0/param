@@ -388,52 +388,18 @@ quantity (required) - the quantity to use for determining avalability</descripti
     <segment>
       <node>
         <start-node name="HitTile" secure="false"/>
-        <node-display x="17" y="1"/>
+        <node-display x="17" y="2"/>
       </node>
       <simple-transition/>
       <node>
         <call-node start-name-ref="Product-GetProduct"/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="CurrentHttpParameterMap.vpid.stringValue" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="GetProduct" pipelet-set-identifier="bc_api">
-                <key-binding alias="CurrentHttpParameterMap.vpid.stringValue" key="ProductID"/>
-                <key-binding alias="FirstProduct" key="Product"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../+1">
-                  <transition-display>
-                    <bend-point relative-to="source" x="1" y="0"/>
-                    <bend-point relative-to="target" x="1" y="0"/>
-                  </transition-display>
-                </transition>
-              </branch>
-            </node>
-            <transition target-connector="in1" target-path="../+1"/>
-          </segment>
-        </branch>
-      </node>
-      <transition target-connector="in1" target-path="./+1">
+      <simple-transition>
         <transition-display>
-          <bend-point relative-to="source" x="1" y="0"/>
-          <bend-point relative-to="target" x="1" y="0"/>
+          <bend-point relative-to="source" x="0" y="1"/>
         </transition-display>
-      </transition>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="2"/>
-      </node>
-      <simple-transition/>
+      </simple-transition>
       <node>
         <interaction-node transaction-required="false">
           <template buffered="true" dynamic="false" name="product/productsearchhittile"/>
