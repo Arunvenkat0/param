@@ -1211,7 +1211,7 @@ function initializeCache() {
 function initializeEvents() {
 	$cache.cartTable.on("click", ".item-edit-details a", function (e) {
 		e.preventDefault();
-		quickView.show({
+		quickview.show({
 			url : e.target.href,
 			source : "cart"
 		});
@@ -1271,7 +1271,7 @@ var cart = {
 		// edit shopping cart line item
 		initializeCache();
 		initializeEvents();
-		if(site.storePickupEnabled){
+		if (SitePreferences.STORE_PICKUP){
 			storeinventory.init();
 		}
 		account.initCartLogin();
