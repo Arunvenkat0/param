@@ -86,7 +86,7 @@ var app = (function (app, $) {
 		}else{
 			app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
 		}
-		
+
 		// print handler
 		app.ui.printPage.on("click", function () { window.print(); return false; });
 
@@ -179,7 +179,7 @@ var app = (function (app, $) {
 			app.validator.init();
 			app.components.init();
 			app.searchplaceholder.init();
-			app.mulitcurrency.init();			
+			app.mulitcurrency.init();
 			// execute page specific initializations
 			var ns = app.page.ns;
 			if (ns && app[ns] && app[ns].init) {
@@ -667,9 +667,9 @@ var app = (function (app, $) {
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
-			
+
 			var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
-			
+
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
@@ -1305,7 +1305,7 @@ var app = (function (app, $) {
 					}
 				});
 			}
-				
+
 		}
 	};
 
@@ -1479,7 +1479,7 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
-	
+
 	/**
 	 * @private
 	 * @function
@@ -1491,7 +1491,7 @@ var app = (function (app, $) {
 		var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
 		// get url hidden in DOM
 		var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-		
+
 		if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
 			// switch state to 'loading'
 			// - switches state, so the above selector is only matching once
@@ -1507,7 +1507,7 @@ var app = (function (app, $) {
 				loadingPlaceHolder.attr('data-loading-state','loaded');
 				jQuery('div.search-result-content').append(html);
 			};
-			
+
 			// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
 			// it was removed to temporarily address RAP-2649
 			if (false) {
@@ -1544,7 +1544,7 @@ var app = (function (app, $) {
 		var hash = location.href.split('#')[1];
 		if (hash === 'results-content' || hash === 'results-products') { return; }
 		var refineUrl;
-		
+
 		if (hash.length > 0) {
 			refineUrl = window.location.pathname + "?" + hash;
 		} else {
@@ -1557,7 +1557,7 @@ var app = (function (app, $) {
 			app.progress.hide();
 		});
 	}
-	
+
 	/**
 	 * @private
 	 * @function
@@ -1673,13 +1673,13 @@ var app = (function (app, $) {
 			};
 			$cache.content = $cache.main.find(".search-result-content");
 			app.product.compare.init();
-			
+
 			if (app.clientcache.LISTING_INFINITE_SCROLL) {
 				$(window).on('scroll', infiniteScroll);
 			}
 			app.product.tile.init();
 			initializeEvents();
-			
+
 		}
 	};
 
@@ -1943,7 +1943,7 @@ var app = (function (app, $) {
 				var bonusProducts = getBonusProducts();
 				if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
 					bonusProducts.bonusproducts[0].product.qty = maxItems;
-				} 
+				}
 				// make the server call
 				$.ajax({
 					type : "POST",
@@ -1968,7 +1968,7 @@ var app = (function (app, $) {
 				.always(function () {
 					$cache.bonusProduct.dialog("close");
 				});
-				
+
 			});
 		}
 	};
@@ -2222,7 +2222,7 @@ var app = (function (app, $) {
 		var $requiredInputs = $('.required', $form).find(':input');
 		// check for required input
 		var hasEmptyRequired = function () {
-			// filter out only the visible fields - this allows the checking to work on 
+			// filter out only the visible fields - this allows the checking to work on
 			// billing page where some payment methods inputs are hidden
 			var requiredValues = $requiredInputs.filter(':visible').map(function () {
 				return $(this).val();
@@ -2231,12 +2231,12 @@ var app = (function (app, $) {
 		};
 
 		if (!hasEmptyRequired()) {
-			// only validate form when all required fields are filled to avoid 
+			// only validate form when all required fields are filled to avoid
 			// throwing errors on empty form
 			if (validator.form()) {
 				$continue.removeAttr('disabled');
 			}
-			
+
 		} else {
 			$continue.attr('disabled', 'disabled');
 		}
@@ -2335,7 +2335,7 @@ var app = (function (app, $) {
 					$shippingAddress = $(target).closest('.shippingaddress'),
 					$select = $shippingAddress.find('.select-address'),
 					$selected = $select.find('option:selected'),
-					newOption = '<option value="' + address.UUID + '">' 
+					newOption = '<option value="' + address.UUID + '">'
 						+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
 						+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
 						+ '</option>';
@@ -2352,17 +2352,17 @@ var app = (function (app, $) {
 				}
 			});
 		});
-		
-		//preserve the uuid of the option for the hop up form		
+
+		//preserve the uuid of the option for the hop up form
 		if (selectedAddressUUID) {
 			//update the form with selected address
 			$addressList.find('option').each(function() {
 				//check the values of the options
 				if ($(this).attr('value') == selectedAddressUUID) {
 					$(this).attr('selected','selected');
-					$selectDropDown.trigger('change'); 
+					$selectDropDown.trigger('change');
 				}
-			});						
+			});
 		}
 	}
 
@@ -2512,7 +2512,7 @@ var app = (function (app, $) {
 	function billingLoad() {
 		if( !$cache.paymentMethodId ) return;
 
-		initContinue('[name$="billing_save"]', 'form[id$="billing"');
+		initContinue('[name$="billing_save"]', 'form[id$="billing"]');
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
 		});
@@ -2576,7 +2576,7 @@ var app = (function (app, $) {
 				$cache.balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
 			});
 		});
-		
+
 		$cache.addGiftCert.on('click', function(e) {
 			e.preventDefault();
 			var code = $cache.giftCertCode.val(),
@@ -2585,7 +2585,7 @@ var app = (function (app, $) {
 				$error.html(app.resources.GIFT_CERT_MISSING);
 				return;
 			}
-			
+
 			var url = app.util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
 			$.getJSON(url, function(data) {
 				var fail = false;
@@ -2639,7 +2639,7 @@ var app = (function (app, $) {
 				}
 			});
 		});
-		
+
 		// trigger events on enter
 		$cache.couponCode.on('keydown', function(e) {
 			if (e.which === 13) {
@@ -2722,7 +2722,7 @@ var app = (function (app, $) {
 			//on the single shipping page, update the list of shipping methods when the state feild changes
 			$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 				updateShippingMethodList();
-			});	
+			});
 		}
 		else if(isMultiShipping){
 			multishippingLoad();
@@ -2730,7 +2730,7 @@ var app = (function (app, $) {
 		else{
 			billingLoad();
 		}
-		
+
 		//if on the order review page and there are products that are not available diable the submit order button
 		if($('.order-summary-footer').length > 0){
 			if($('.notavailable').length > 0){
@@ -2808,20 +2808,20 @@ var app = (function (app, $) {
 			$cache.quickView = $("<div/>").attr("id", "#QuickViewDialog").appendTo(document.body);
 			return $cache.quickView;
 		},
-		
+
 		initializeQuickViewNav : function(qvUrl) {
-			
+
 			//from the url of the product in the quickview
 			qvUrlTail = qvUrl.substring(qvUrl.indexOf('?'));
 			qvUrlPidParam = qvUrlTail.substring(0,qvUrlTail.indexOf('&'));
 			qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-			
+
 			if(qvUrlPidParam.indexOf('pid') > 0){
 				//if storefront urls are turned off
 				//append the pid to the url
 				qvUrl = qvUrl+qvUrlPidParam;
 			}
-			
+
 			this.searchesultsContainer = $('#search-result-items').parent();
 			this.productLinks = this.searchesultsContainer.find('.thumb-link');
 
@@ -2841,15 +2841,15 @@ var app = (function (app, $) {
 					//if storefront urls are turned off
 					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 					productLinksUrl = productLinksUrl+productLinksUrlPidParam;
-				
+
 				}else{
 					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 				}
-			
+
 				if(productLinksUrl == ""){
 					productLinksUrl = this.productLinks[i].href;
 				}
-				
+
 				if (qvUrl == productLinksUrl) {
 					this.productLinkIndex = i;
 				}
@@ -2868,7 +2868,7 @@ var app = (function (app, $) {
 				this.btnNext.hide();
 				this.btnPrev.hide();
 			}
-			
+
 		},
 
 		navigateQuickview : function(event) {
@@ -2887,7 +2887,7 @@ var app = (function (app, $) {
 
 			event.preventDefault();
 		},
-		
+
 		// show quick view dialog and send request to the server to get the product
 		// options.source - source of the dialog i.e. search/cart
 		// options.url - product url
@@ -2914,7 +2914,7 @@ var app = (function (app, $) {
 					}
 				});
 				$cache.quickView.dialog('open');
-				
+
 				app.quickView.initializeQuickViewNav(this.url);
 			};
 			app.product.get(options);
@@ -3064,8 +3064,8 @@ var app = (function (app, $) {
 			if (typeof(offsetToTop) != 'undefined') {
 				top -= offsetToTop;
 			}
-		
-			
+
+
 			if ( window.pageXOffset != null) {
 
 				return (
@@ -3074,7 +3074,7 @@ var app = (function (app, $) {
 						(top + height) > window.pageYOffset &&
 						(left + width) > window.pageXOffset
 				);
-				
+
 			}
 
 			if (document.compatMode == "CSS1Compat") {
@@ -3084,7 +3084,7 @@ var app = (function (app, $) {
 					(top + height) > window.document.documentElement.scrollTop &&
 					(left + width) > window.document.documentElement.scrollLeft
 			);
-			
+
 			}
 		},
 		/**
@@ -3923,18 +3923,18 @@ var app = (function (app, $) {
 			});
 		});
 	}
-	/** 
-	 * @private 
-	 * @function 
+	/**
+	 * @private
+	 * @function
 	 * @description init events for the loginPage
 	 */
 	function initLoginPage() {
-		
+
 		//o-auth binding for which icon is clicked
 		$('.oAuthIcon').bind( "click", function() {
 			$('#OAuthProvider').val(this.id);
-		});	
-		
+		});
+
 		//toggle the value of the rememberme checkbox
 		$( "#dwfrm_login_rememberme" ).bind( "change", function() {
 			if($('#dwfrm_login_rememberme').attr('checked')){
@@ -3942,8 +3942,8 @@ var app = (function (app, $) {
 			}else{
 				$('#rememberme').val('false')
 			}
-		});	
-				
+		});
+
 	}
 	/**
 	 * @private
@@ -3990,10 +3990,10 @@ var app = (function (app, $) {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 
 		});
-		
+
 		//add js logic to remove the , from the qty feild to pass regex expression on client side
-		jQuery('.option-quantity-desired div input').focusout(function(){		
-			$(this).val($(this).val().replace(',',''));	
+		jQuery('.option-quantity-desired div input').focusout(function(){
+			$(this).val($(this).val().replace(',',''));
 		});
 	}
 
@@ -4637,7 +4637,7 @@ var app = (function (app, $) {
 			// build the request url
 			var reqUrl = app.util.appendParamToURL(app.urls.searchsuggest, "q", part);
             reqUrl = app.util.appendParamToURL(reqUrl, "legacy", "true");
-            
+
 			// get remote data as JSON
 			$.getJSON(reqUrl, function (data) {
 				// get the total of results
@@ -4921,19 +4921,19 @@ var app = (function (app, $) {
  	 		 	}// end ajax callback
  	 		 });
 		});
-		
+
 		//hide the feature if user is in checkout
 		if(app.page.title=="Checkout"){
 			$('.mc-class').css('display','none');
 		}
-		
+
 	}
 
 	/******* app.mulitcurrency public object ********/
 	app.mulitcurrency = {
 		/**
 		 * @function
-		 * @description 
+		 * @description
 		 */
 		init : function () {
 			initializeEvents();
@@ -4975,12 +4975,12 @@ var app = (function (app, $) {
   				e.preventDefault();
  				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
   			});
-  			
+
   			//disable the radio button for home deliveries if the store inventory is out of stock
   			jQuery('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
   				jQuery(this).parents('.home-delivery').children('input').attr('disabled','disabled');
   			});
-  			
+
 
   			jQuery('body').on('click', '#pdpMain .set-preferred-store', function(e){
  				e.stopImmediatePropagation();
@@ -5188,11 +5188,11 @@ var app = (function (app, $) {
  						}
 						//if there is a dialog box open in the cart for editing a pli and the user selected a new store
 						//add an event to for a page refresh on the cart page if the update button has not been clicked
-						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.  
+						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
 						//when the update button is clicked it forces a refresh.
 						if(jQuery('#cart-table').length > 0 && jQuery('.select-store-button').length > 0){
  							jQuery('.ui-dialog .ui-icon-closethick:first').bind( "click", function(){
- 								window.location.reload(); 						
+ 								window.location.reload();
  							});
 						}
 
@@ -5319,7 +5319,7 @@ var app = (function (app, $) {
  				if(app.user.zip === null || app.user.zip === "") {
  					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
  				}
- 				
+
  	 			//disable continue button if a preferred store has not been selected
  	 			if($('.store-list .selected').length > 0){
  	 				$('#preferred-store-panel .close').attr('disabled', false);
@@ -5368,24 +5368,24 @@ var app = (function (app, $) {
 
 
 (function(app){
-	
+
 	function isMobile() {
 		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
-				
+
 		while (mobileAgentHash[idx] && !isMobile) {
 			isMobile = (userAgent.indexOf(mobileAgentHash[idx]) >= 0);
 			idx++;
 		}
 		return isMobile;
 	}
-	
+
 	app.isMobileUserAgent = isMobile();
-	
+
 	app.zoomViewerEnabled = !isMobile();
-	
+
 }(window.app = window.app || {}));
 
 // jquery extensions
