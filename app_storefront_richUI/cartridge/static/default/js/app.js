@@ -164,17 +164,17 @@ var app = {
 };
 
 // general extension functions
-// (function () {
-// 	String.format = function() {
-// 		var s = arguments[0];
-// 		var i,len=arguments.length - 1;
-// 		for (i = 0; i < len; i++) {
-// 			var reg = new RegExp('\\{' + i + '\\}', 'gm');
-// 			s = s.replace(reg, arguments[i + 1]);
-// 		}
-// 		return s;
-// 	};
-// })();
+(function () {
+	String.format = function() {
+		var s = arguments[0];
+		var i, len=arguments.length - 1;
+		for (i = 0; i < len; i++) {
+			var reg = new RegExp('\\{' + i + '\\}', 'gm');
+			s = s.replace(reg, arguments[i + 1]);
+		}
+		return s;
+	};
+})();
 
 // initialize app
 $(document).ready(function () {
@@ -1983,7 +1983,7 @@ var ajax = require('../ajax'),
 	sendToFriend = require('../send-to-friend'),
 	storeinventory = require('../storeinventory'),
 	tooltip = require('../tooltip'),
-	util = require('../util')
+	util = require('../util');
 
 /**
  * @private
@@ -1991,23 +1991,23 @@ var ajax = require('../ajax'),
  * @description Loads product's navigation on the product detail page
  */
 function loadProductNavigation() {
-	var pidInput = $cache.pdpForm.find('input[name="pid"]').last();
-	var navContainer = $('#product-nav-container');
+	var $pidInput = $('.pdpForm').find('input[name="pid"]').last(),
+		$navContainer = $('#product-nav-container');
 	// if no hash exists, or no pid exists, or nav container does not exist, return
-	if (window.location.hash.length <= 1 || pidInput.length === 0 || navContainer.length === 0) {
+	if (window.location.hash.length <= 1 || $pidInput.length === 0 || $navContainer.length === 0) {
 		return;
 	}
 
-	var pid = pidInput.val();
+	var pid = $pidInput.val();
 	var hashParams = window.location.hash.substr(1);
 	if (hashParams.indexOf('pid=' + pid) < 0) {
 		hashParams += '&pid=' + pid;
 	}
 
-	var url = Urls.productNav+(Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
+	var url = Urls.productNav + (Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
 	ajax.load({
 		url:url,
-		target: navContainer
+		target: $navContainer
 	});
 }
 
@@ -2155,11 +2155,11 @@ function initializeDom() {
 	loadProductNavigation();
 	setMainImageLink();
 
-	if ($cache.productSetList.length>0) {
-		var unavailable = $cache.productSetList.find("form").find("button.add-to-cart[disabled]");
+	if ($('#product-set-list').length > 0) {
+		var unavailable = $('#product-set-list').find("form").find("button.add-to-cart[disabled]");
 		if (unavailable.length > 0) {
-			$cache.addAllToCart.attr("disabled", "disabled");
-			$cache.addToCart.attr("disabled", "disabled"); // this may be a bundle
+			$('#add-all-to-cart').attr("disabled", "disabled");
+			$('#add-to-cart').attr("disabled", "disabled"); // this may be a bundle
 		}
 	}
 
@@ -2172,12 +2172,8 @@ function initializeDom() {
  */
 function initializeCache() {
 	$cache = {
-		pdpMain : $('#pdpMain'),
-		productSetList : $('#product-set-list'),
-		addToCart : $('#add-to-cart'),
-		addAllToCart : $('#add-all-to-cart')
+		pdpMain : $('#pdpMain')
 	};
-	$cache.pdpForm = $cache.pdpMain.find('.pdpForm');
 }
 
 /**
@@ -2192,104 +2188,103 @@ function initializeCache() {
  * - send to friend functionality
  */
 function initializeEvents() {
+	var $pdpMain = $('#pdpMain'),
+		$pdpForm = $('.pdpForm'),
+		$addToCart = $('#add-to-cart'),
+		$addAllToCart = $('#add-all-to-cart'),
+		$productSetList = $('#product-set-list');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
 	// add or update shopping cart line item
 	product.initAddToCart();
-	$cache.pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
-		var availabilityContainer = $cache.pdpMain.find('.availability');
-		product.getAvailability(
-			$('#pid').val(),
-			$(this).val(),
-			function (data) {
-				if (!data) {
-					$cache.addToCart.removeAttr('disabled');
-					availabilityContainer.find('.availability-qty-available').html();
-					availabilityContainer.find('.availability-msg').show();
-					return;
+	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
+		var $availabilityContainer = $pdpMain.find('.availability');
+		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
+			if (!data) {
+				$availabilityContainer.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
+				return;
+			}
+			var avMsg;
+			var avRoot = $availabilityContainer.find('.availability-msg').html('');
+
+			// Look through levels ... if msg is not empty, then create span el
+			if (data.levels.IN_STOCK > 0) {
+				avMsg = avRoot.find('.in-stock-msg');
+				if (avMsg.length === 0) {
+					avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
+				}
+				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+					// Just in stock
+					avMsg.text(Resources.IN_STOCK);
 				} else {
-					var avMsg = null;
-					var avRoot = availabilityContainer.find('.availability-msg').html('');
-
-					// Look through levels ... if msg is not empty, then create span el
-					if (data.levels.IN_STOCK > 0) {
-						avMsg = avRoot.find('.in-stock-msg');
-						if (avMsg.length === 0) {
-							avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
-						}
-						if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-							// Just in stock
-							avMsg.text(Resources.IN_STOCK);
-						} else {
-							// In stock with conditions ...
-							avMsg.text(data.inStockMsg);
-						}
-					}
-					if (data.levels.PREORDER > 0) {
-						avMsg = avRoot.find('.preorder-msg');
-						if (avMsg.length === 0) {
-							avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
-						}
-						if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-							// Just in stock
-							avMsg.text(Resources.PREORDER);
-						} else {
-							avMsg.text(data.preOrderMsg);
-						}
-					}
-					if (data.levels.BACKORDER > 0) {
-						avMsg = avRoot.find('.backorder-msg');
-						if (avMsg.length === 0) {
-							avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
-						}
-						if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-							// Just in stock
-							avMsg.text(Resources.BACKORDER);
-						} else {
-							avMsg.text(data.backOrderMsg);
-						}
-					}
-					if (data.inStockDate != '') {
-						avMsg = avRoot.find('.in-stock-date-msg');
-						if (avMsg.length === 0) {
-							avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
-						}
-						avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
-					}
-					if (data.levels.NOT_AVAILABLE > 0) {
-						avMsg = avRoot.find('.not-available-msg');
-						if (avMsg.length === 0) {
-							avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
-						}
-						if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-							avMsg.text(Resources.NOT_AVAILABLE);
-						} else {
-							avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
-						}
-					}
-					return;
+					// In stock with conditions ...
+					avMsg.text(data.inStockMsg);
 				}
-				$cache.addToCart.attr('disabled', 'disabled');
-				availabilityContainer.find('.availability-msg').hide();
-				var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-				if (avQtyMsg.length === 0) {
-					avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+			}
+			if (data.levels.PREORDER > 0) {
+				avMsg = avRoot.find('.preorder-msg');
+				if (avMsg.length === 0) {
+					avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
 				}
-				avQtyMsg.text(data.inStockMsg).show();
-
-				var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-				if (avQtyMsg.length === 0) {
-					avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+				if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+					// Just in stock
+					avMsg.text(Resources.PREORDER);
+				} else {
+					avMsg.text(data.preOrderMsg);
 				}
-				avQtyMsg.text(data.backorderMsg).show();
-			});
+			}
+			if (data.levels.BACKORDER > 0) {
+				avMsg = avRoot.find('.backorder-msg');
+				if (avMsg.length === 0) {
+					avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
+				}
+				if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+					// Just in stock
+					avMsg.text(Resources.BACKORDER);
+				} else {
+					avMsg.text(data.backOrderMsg);
+				}
+			}
+			if (data.inStockDate != '') {
+				avMsg = avRoot.find('.in-stock-date-msg');
+				if (avMsg.length === 0) {
+					avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
+				}
+				avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
+			}
+			if (data.levels.NOT_AVAILABLE > 0) {
+				avMsg = avRoot.find('.not-available-msg');
+				if (avMsg.length === 0) {
+					avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
+				}
+				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
+					avMsg.text(Resources.NOT_AVAILABLE);
+				} else {
+					avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
+				}
+			}
+			/* TODO: This has never been reached before. Consider removing?
+			$addToCart.attr('disabled', 'disabled');
+			availabilityContainer.find('.availability-msg').hide();
+			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
+			if (avQtyMsg.length === 0) {
+				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+			}
+			avQtyMsg.text(data.inStockMsg).show();
 
+			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
+			if (avQtyMsg.length === 0) {
+				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+			}
+			avQtyMsg.text(data.backorderMsg).show();
+			*/
+		});
 	});
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
-	$cache.pdpMain.on('click', '.wl-action', function (e) {
+	$pdpMain.on('click', '.wl-action', function (e) {
 		e.preventDefault();
 
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
@@ -2301,20 +2296,16 @@ function initializeEvents() {
 		window.location.href = url;
 	});
 
-	$cache.pdpMain.on('hover', '.swatches .swatchanchor', function () {
-		swapImage(this);
-	});
-	// productthumbnail.onclick()
-	$cache.pdpMain.on('click', '.productthumbnail', function () {
+	$pdpMain.on('click', '.productthumbnail', function () {
 		var lgImg = $(this).data('lgimg');
 
 		// switch indicator
-		$cache.pdpMain.find('.product-thumbnails .selected').removeClass('selected');
+		$pdpMain.find('.product-thumbnails .selected').removeClass('selected');
 		$(this).closest('li').addClass('selected');
 
 		setMainImage(lgImg);
 		// load zoom if not quick view
-		if( lgImg.hires !== '' && lgImg.hires.indexOf('noimagelarge')<0 ){
+		if (lgImg.hires !== '' && lgImg.hires.indexOf('noimagelarge') < 0) {
 			setMainImageLink();
 			loadZoom();
 		} else {
@@ -2323,21 +2314,22 @@ function initializeEvents() {
 	});
 
 	// dropdown variations
-	$cache.pdpMain.on('change', '.product-options select', function (e) {
+	$pdpMain.on('change', '.product-options select', function () {
 		var salesPrice = $cache.pdpMain.find('.product-add-to-cart .price-sales');
 		var selectedItem = $(this).children().filter(':selected').first();
 		salesPrice.text(selectedItem.data('combined'));
 	});
 
 	// prevent default behavior of thumbnail link and add this Button
-	$cache.pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a', false);
-	$cache.pdpMain.on('click', '.unselectable a', false);
+	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
+		e.preventDefault();
+	});
 
 	// handle drop down variation attribute value selection event
-	$cache.pdpMain.on('change', '.variation-select', function(e){
+	$pdpMain.on('change', '.variation-select', function () {
 		if ($(this).val().length === 0) {return;}
-		var qty = $cache.pdpForm.find('input[name="Quantity"]').first().val(),
-			listid = $cache.pdpForm.find('input[name="productlistid"]').first().val(),
+		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
+			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
 			productSet = $(this).closest('.subProduct'),
 			params = {
 				Quantity : isNaN(qty) ? '1' : qty,
@@ -2346,7 +2338,7 @@ function initializeEvents() {
 		if (listid) {params.productlistid = listid;}
 		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
 		var url = util.appendParamsToUrl($(this).val(), params);
-		progress.show($cache.pdpMain);
+		progress.show($pdpMain);
 		var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
 
 		ajax.load({
@@ -2364,32 +2356,33 @@ function initializeEvents() {
 		});
 	});
 
-	// swatch anchor onclick()
-	$cache.pdpMain.on('click', '.product-detail a[href].swatchanchor', function (e) {
+	$pdpMain.on('hover', '.swatchanchor', function () {
+		swapImage(this);
+	});
+
+	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
+		var $this = $(this),
+			params = {},
+			hasSwapImage, qty,listid, url;
+
 		e.preventDefault();
 
-		var el = $(this);
-		if (el.parents('li').hasClass('unselectable')) {return;}
+		if ($this.parents('li').hasClass('unselectable')) {return;}
 
-		var hasSwapImage = (el.attr('data-lgimg') !== null);
-
-		var anchor = el,
-			qty = $cache.pdpForm.find('input[name="Quantity"]').first().val(),
-			listid = $cache.pdpForm.find('input[name="productlistid"]').first().val(),
-			productSet = $(anchor).closest('.subProduct'),
-			params = {
-				Quantity : isNaN(qty) ? '1' : qty
-			};
-		if (listid) {params.productlistid = listid;}
-
-		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
-		var url = util.appendParamsToUrl(this.href, params);
-		progress.show($cache.pdpMain);
+		hasSwapImage = ($this.attr('data-lgimg') !== null);
+		qty = $pdpForm.find('input[name="Quantity"]').first().val();
+		listid = $pdpForm.find('input[name="productlistid"]').first().val();
+		params.Quantity = isNaN(qty) ? '1' : qty;
+		if (listid) {
+			params.productlistid = listid;
+		}
+		url = util.appendParamsToUrl(this.href, params);
+		progress.show($pdpMain);
 
 		ajax.load({
 			url: url,
-			callback : function (data) {
-				target.html(data);
+			target: $('#product-content'),
+			callback: function (data) {
 				product.initAddThis();
 				product.initAddToCart();
 				if (SitePreferences.STORE_PICKUP){
@@ -2403,39 +2396,38 @@ function initializeEvents() {
 		});
 	});
 
-	$cache.productSetList.on('click', '.product-set-item li a[href].swatchanchor', function (e) {
+	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
+		var params, qty, url, $psItem, $container;
 		e.preventDefault();
 		// get the querystring from the anchor element
-		var params = util.getQueryStringParams(this.search);
-		var psItem = $(this).closest('.product-set-item');
-
-		// set quantity to value from form
-		var qty = psItem.find('form input[name="Quantity"]').first().val();
+		params = util.getQueryStringParams(this.search);
+		$psItem = $(this).closest('.product-set-item');
+		qty = $psItem.find('form input[name="Quantity"]').first().val();
 		params.Quantity = isNaN(qty) ? '1' : qty;
+		url = Urls.getSetItem + '?' + $.param(params);
+		$container = $(this).closest('.product-set-item');
 
-		var url = Urls.getSetItem + '?' + $.param(params);
-
-		// get container
-		var ic = $(this).closest('.product-set-item');
-		ic.load(url, function () {
-			progress.hide();
-			if ($cache.productSetList.find('.add-to-cart[disabled]').length>0) {
-				$cache.addAllToCart.attr('disabled', 'disabled');
-				$cache.addToCart.attr('disabled', 'disabled'); // this may be a bundle
+		ajax.load({
+			url: url,
+			target: $container,
+			callback: function () {
+				progress.hide();
+				if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
+					$addAllToCart.attr('disabled', 'disabled');
+					$addToCart.attr('disabled', 'disabled'); // this may be a bundle
+				} else {
+					$addAllToCart.removeAttr('disabled');
+					$addToCart.removeAttr('disabled'); // this may be a bundle
+				}
+				product.initAddToCart($container);
+				tooltip.init();
 			}
-			else {
-				$cache.addAllToCart.removeAttr('disabled');
-				$cache.addToCart.removeAttr('disabled'); // this may be a bundle
-			}
-
-			product.initAddToCart(ic);
-			tooltip.init();
 		});
 	});
 
-	$cache.addAllToCart.on('click', function (e) {
+	$addAllToCart.on('click', function (e) {
 		e.preventDefault();
-		var psForms = $cache.productSetList.find('form').toArray(),
+		var psForms = $productSetList.find('form').toArray(),
 			miniCartHtml = '',
 			addProductUrl = util.ajaxUrl(Urls.addProduct);
 
@@ -2515,44 +2507,13 @@ var product = {
 		initializeDom();
 		initializeEvents();
 		loadZoom();
-		if (site.storePickupEnabled){
+		if (SitePreferences.STORE_PICKUP){
 			storeinventory.init();
 		}
 	},
 	readReviews : function(){
 		$('.product-tabs').tabs('select','#tab4');
 		$('body').scrollTop($('#tab4').offset().top);
-	},
-	/**
-	 * @function
-	 * @description Loads a product into a given container div
-	 * @param {Object} options An object with the following properties:
-	 * - source - source string e.g. search, cart etc.
-	 * - label - label for the add to cart button, default is Add to Cart
-	 * - url - url to get the product
-	 * - id - id of the product to get, is optional only used when url is empty
-	 */
-	get : function (options) {
-		var target = options.target || quickview.init();
-		var source = options.source || '';
-		var productListID = options.productlistid || '';
-
-		var productUrl = options.url || util.appendParamToURL(Urls.getProductUrl, 'pid', options.id);
-		if(source.length > 0) {
-			productUrl = util.appendParamToURL(productUrl, 'source', source);
-		}
-		if(productListID.length > 0) {
-			productUrl = util.appendParamToURL(productUrl, 'productlistid', productListID);
-		}
-
-		// show small loading image
-		ajax.load({
-			target : target,
-			url : productUrl,
-			data : options.data || '',
-			// replace with callback passed in by options
-			callback : options.callback || product.init
-		});
 	},
 	/**
 	 * @function

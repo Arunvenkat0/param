@@ -16,14 +16,14 @@
 
 
 	// application constants
-	var constants = {	
+	var constants = {
 		AVAIL_STATUS_IN_STOCK 		: ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK,
 		AVAIL_STATUS_PREORDER 		: ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER,
 		AVAIL_STATUS_BACKORDER 		: ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER,
 		AVAIL_STATUS_NOT_AVAILABLE 	: ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE,
 		PI_METHOD_GIFT_CERTIFICATE	: dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE
 	};
-	
+
 	// application resources
 	var resources =  {
 		SHIP_QualifiesFor 				: Resource.msg('shipment.qualifiesfor','checkout',null),
@@ -40,7 +40,7 @@
 		BONUS_PRODUCT_MAX 				: Resource.msg('product.bonusproductsmax','product',null),
 		SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext','search', null),
 		SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('forms.subscribe.email.default','forms', 'Email Address'),
-				
+
 		CURRENCY_SYMBOL					: Currency.getCurrency(dw.system.Site.current.currencyCode).symbol,
 		MISSINGVAL						: Resource.msg('global.missingval','locale',null),
 		SERVER_ERROR 					: Resource.msg('global.servererror','locale',null),
@@ -55,7 +55,7 @@
 		COMPARE_CONFIRMATION			: Resource.msg('productcomparewidget.maxproducts', 'search', null),
 		COMPARE_REMOVE_FAIL				: Resource.msg('productcomparewidget.removefail', 'search', null),
 		COMPARE_ADD_FAIL				: Resource.msg('productcomparewidget.addfail', 'search', null),
-		ADD_TO_CART_FAIL				: Resource.msg('cart.unableToAdd', 'checkout', null),	
+		ADD_TO_CART_FAIL				: Resource.msg('cart.unableToAdd', 'checkout', null),
 		REGISTRY_SEARCH_ADVANCED_CLOSE	: Resource.msg('giftregistry.closeadvanced', 'account', null),
 		GIFT_CERT_INVALID				: Resource.msg('billing.giftcertinvalid', 'checkout', null),
 		GIFT_CERT_BALANCE				: Resource.msg('billing.giftcertbalance', 'checkout', null),
@@ -71,6 +71,7 @@
 		TITLE_CREDITCARD				: Resource.msg('forms.title.creditcard', 'forms', null),
 		SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection','locale','Server connection failed!'),
 		IN_STOCK_DATE					: Resource.msg('global.inStockDate', 'locale', null),
+		ITEM_STATUS_NOTAVAILABLE		: Resource.msg('global.allnotavailable', 'locale', null),
 		INIFINITESCROLL					: Resource.msg('paginginformation.infinite-scroll','search',null),
 		STORE_NEAR_YOU					: Resource.msg('storelist.lightbox.whatsavailable','storepickup','What\'s available at a store near you'),
 		SELECT_STORE					: Resource.msg('storelist.lightbox.selectstore','storepickup',null),
@@ -86,8 +87,8 @@
 		SEE_MORE						: Resource.msg('storelist.lightbox.seemore','storepickup',null),
 		SEE_LESS						: Resource.msg('storelist.lightbox.seeless','storepickup',null)
 	};
-	
-	// additional resources 
+
+	// additional resources
 	resources[ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK] = Resource.msg('global.instock','locale',null);
 	resources["QTY_" + ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK] = Resource.msg('global.quantityinstock','locale',null);
 	resources[ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER] = Resource.msg('global.allpreorder','locale',null);
@@ -98,7 +99,7 @@
 	resources["REMAIN_" + ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER] = Resource.msg('global.remainingbackorder','locale',null);
 	resources[ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE] = Resource.msg('global.allnotavailable','locale',null);
 	resources["REMAIN_" + ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE] = Resource.msg('global.remainingnotavailable','locale',null);
-			
+
 	// application urls
 	var urls =  {
 		appResources				: URLUtils.url('Resources-Load').toString(),
@@ -122,8 +123,8 @@
 		productDetail 				: URLUtils.url('Product-Detail').toString(),
 		getAvailability				: URLUtils.url('Product-GetAvailability').toString(),
 		removeImg 					: URLUtils.staticURL('/images/interface/icon_remove.gif').toString(),
-		searchsuggest 				: URLUtils.url('Search-GetSuggestions').toString(),	
-		productNav 					: URLUtils.url('Product-Productnav').toString(),	
+		searchsuggest 				: URLUtils.url('Search-GetSuggestions').toString(),
+		productNav 					: URLUtils.url('Product-Productnav').toString(),
 		summaryRefreshURL			: URLUtils.url('COBilling-UpdateSummary').toString(),
 		billingSelectCC				: URLUtils.https('COBilling-SelectCreditCard').toString(),
 		updateAddressDetails		: URLUtils.https('COShipping-UpdateAddressDetails').toString(),
@@ -151,16 +152,16 @@
 		billing						: URLUtils.url('COBilling-Start').toString(),
 		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString()
 	};
-	
+
 	userSettings = {
 		zip : pdict.CurrentSession.custom.zipcode == "null" ? null : pdict.CurrentSession.custom.zipcode,
 		storeId : pdict.CurrentSession.custom.storeId == "null" ? null : pdict.CurrentSession.custom.storeId
 	};
 </isscript>
-(function(app){	
+(function(app){
 	window.Constants = <isprint value="${JSON.stringify(constants)}" encoding="off"/>;
-	window.Resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;	
-	window.Urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;	
+	window.Resources = <isprint value="${JSON.stringify(resources)}" encoding="off"/>;
+	window.Urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;
 	window.SitePreferences = <isprint value="${JSON.stringify(sitePreferences)}" encoding="off"/>;
 	window.User = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
 }(window.app = window.app || {}));

@@ -163,17 +163,17 @@ var app = {
 };
 
 // general extension functions
-// (function () {
-// 	String.format = function() {
-// 		var s = arguments[0];
-// 		var i,len=arguments.length - 1;
-// 		for (i = 0; i < len; i++) {
-// 			var reg = new RegExp('\\{' + i + '\\}', 'gm');
-// 			s = s.replace(reg, arguments[i + 1]);
-// 		}
-// 		return s;
-// 	};
-// })();
+(function () {
+	String.format = function() {
+		var s = arguments[0];
+		var i, len=arguments.length - 1;
+		for (i = 0; i < len; i++) {
+			var reg = new RegExp('\\{' + i + '\\}', 'gm');
+			s = s.replace(reg, arguments[i + 1]);
+		}
+		return s;
+	};
+})();
 
 // initialize app
 $(document).ready(function () {
