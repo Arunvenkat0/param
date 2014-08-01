@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":14,"./pages/compare":15,"./pages/product":16,"./pages/registry":17,"./pages/search":18,"./pages/storefront":19,"./pages/wishlist":20,"./searchplaceholder":25,"./searchsuggest":27,"./searchsuggest-beta":26,"./tooltip":30,"./util":31,"./validator":32}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":14,"./pages/compare":15,"./pages/product":17,"./pages/registry":18,"./pages/search":19,"./pages/storefront":20,"./pages/wishlist":21,"./searchplaceholder":26,"./searchsuggest":28,"./searchsuggest-beta":27,"./tooltip":31,"./util":32,"./validator":33}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":23,"./util":31}],3:[function(require,module,exports){
+},{"./progress":24,"./util":32}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":31}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":32}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -723,7 +723,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":31}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":32}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -744,7 +744,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":31}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":32}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -798,7 +798,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":31}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":32}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -913,7 +913,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":31}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":32}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -941,7 +941,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":31}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":32}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -959,7 +959,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":31}],12:[function(require,module,exports){
+},{"./util":32}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1169,7 +1169,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":30,"../util":31,"../validator":32}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":31,"../util":32,"../validator":33}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1279,7 +1279,7 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":24,"../storeinventory":29,"../util":31,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":25,"../storeinventory":30,"../util":32,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1926,7 +1926,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../ajax":2,"../dialog":5,"../giftcard":6,"../progress":23,"../tooltip":30,"../util":31,"../validator":32}],15:[function(require,module,exports){
+},{"../ajax":2,"../dialog":5,"../giftcard":6,"../progress":24,"../tooltip":31,"../util":32,"../validator":33}],15:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1970,20 +1970,102 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":22,"../quickview":24,"./product":16}],16:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":23,"../quickview":25,"./product":17}],16:[function(require,module,exports){
+module.exports = function (data, $container) {
+	if (!data) {
+		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
+		return;
+	}
+	var avMsg;
+	var avRoot = $container.find('.availability-msg').html('');
+
+	// Look through levels ... if msg is not empty, then create span el
+	if (data.levels.IN_STOCK > 0) {
+		avMsg = avRoot.find('.in-stock-msg');
+		if (avMsg.length === 0) {
+			avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
+		}
+		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+			// Just in stock
+			avMsg.text(Resources.IN_STOCK);
+		} else {
+			// In stock with conditions ...
+			avMsg.text(data.inStockMsg);
+		}
+	}
+	if (data.levels.PREORDER > 0) {
+		avMsg = avRoot.find('.preorder-msg');
+		if (avMsg.length === 0) {
+			avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
+		}
+		if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+			// Just in stock
+			avMsg.text(Resources.PREORDER);
+		} else {
+			avMsg.text(data.preOrderMsg);
+		}
+	}
+	if (data.levels.BACKORDER > 0) {
+		avMsg = avRoot.find('.backorder-msg');
+		if (avMsg.length === 0) {
+			avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
+		}
+		if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
+			// Just in stock
+			avMsg.text(Resources.BACKORDER);
+		} else {
+			avMsg.text(data.backOrderMsg);
+		}
+	}
+	if (data.inStockDate != '') {
+		avMsg = avRoot.find('.in-stock-date-msg');
+		if (avMsg.length === 0) {
+			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
+		}
+		avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
+	}
+	if (data.levels.NOT_AVAILABLE > 0) {
+		avMsg = avRoot.find('.not-available-msg');
+		if (avMsg.length === 0) {
+			avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
+		}
+		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
+			avMsg.text(Resources.NOT_AVAILABLE);
+		} else {
+			avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
+		}
+	}
+	/* TODO: This has never been reached before. Consider removing?
+	$addToCart.attr('disabled', 'disabled');
+	availabilityContainer.find('.availability-msg').hide();
+	var avQtyMsg = availabilityContainer.find('.availability-qty-available');
+	if (avQtyMsg.length === 0) {
+		avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+	}
+	avQtyMsg.text(data.inStockMsg).show();
+
+	var avQtyMsg = availabilityContainer.find('.availability-qty-available');
+	if (avQtyMsg.length === 0) {
+		avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
+	}
+	avQtyMsg.text(data.backorderMsg).show();
+	*/
+}
+},{}],17:[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
-	cart = require('./cart'),
-	components = require('../components'),
-	dialog = require('../dialog'),
-	minicart = require('../minicart'),
-	progress = require('../progress'),
-	quickview = require('../quickview'),
-	sendToFriend = require('../send-to-friend'),
-	storeinventory = require('../storeinventory'),
-	tooltip = require('../tooltip'),
-	util = require('../util');
+var ajax = require('../../ajax'),
+	cart = require('../cart'),
+	components = require('../../components'),
+	dialog = require('../../dialog'),
+	minicart = require('../../minicart'),
+	progress = require('../../progress'),
+	quickview = require('../../quickview'),
+	sendToFriend = require('../../send-to-friend'),
+	storeinventory = require('../../storeinventory'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util'),
+	quantityEvent = require('./events/quantity');
 
 /**
  * @private
@@ -2202,84 +2284,7 @@ function initializeEvents() {
 	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
-			if (!data) {
-				$availabilityContainer.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
-				return;
-			}
-			var avMsg;
-			var avRoot = $availabilityContainer.find('.availability-msg').html('');
-
-			// Look through levels ... if msg is not empty, then create span el
-			if (data.levels.IN_STOCK > 0) {
-				avMsg = avRoot.find('.in-stock-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
-				}
-				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.IN_STOCK);
-				} else {
-					// In stock with conditions ...
-					avMsg.text(data.inStockMsg);
-				}
-			}
-			if (data.levels.PREORDER > 0) {
-				avMsg = avRoot.find('.preorder-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
-				}
-				if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.PREORDER);
-				} else {
-					avMsg.text(data.preOrderMsg);
-				}
-			}
-			if (data.levels.BACKORDER > 0) {
-				avMsg = avRoot.find('.backorder-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
-				}
-				if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.BACKORDER);
-				} else {
-					avMsg.text(data.backOrderMsg);
-				}
-			}
-			if (data.inStockDate != '') {
-				avMsg = avRoot.find('.in-stock-date-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
-				}
-				avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
-			}
-			if (data.levels.NOT_AVAILABLE > 0) {
-				avMsg = avRoot.find('.not-available-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
-				}
-				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-					avMsg.text(Resources.NOT_AVAILABLE);
-				} else {
-					avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
-				}
-			}
-			/* TODO: This has never been reached before. Consider removing?
-			$addToCart.attr('disabled', 'disabled');
-			availabilityContainer.find('.availability-msg').hide();
-			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-			if (avQtyMsg.length === 0) {
-				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-			}
-			avQtyMsg.text(data.inStockMsg).show();
-
-			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-			if (avQtyMsg.length === 0) {
-				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-			}
-			avQtyMsg.text(data.backorderMsg).show();
-			*/
+			quantityEvent(data, $availabilityContainer);
 		});
 	});
 
@@ -2385,7 +2390,7 @@ function initializeEvents() {
 			callback: function (data) {
 				product.initAddThis();
 				product.initAddToCart();
-				if (SitePreferences.STORE_PICKUP){
+				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
 				if (hasSwapImage) {
@@ -2566,7 +2571,7 @@ var product = {
 
 module.exports = product;
 
-},{"../ajax":2,"../components":4,"../dialog":5,"../minicart":9,"../progress":23,"../quickview":24,"../send-to-friend":28,"../storeinventory":29,"../tooltip":30,"../util":31,"./cart":13}],17:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":24,"../../quickview":25,"../../send-to-friend":29,"../../storeinventory":30,"../../tooltip":31,"../../util":32,"../cart":13,"./events/quantity":16}],18:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2738,7 +2743,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":24,"../send-to-friend":28,"../util":31,"./product":16}],18:[function(require,module,exports){
+},{"../ajax":2,"../quickview":25,"../send-to-friend":29,"../util":32,"./product":17}],19:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2944,7 +2949,7 @@ exports.init = function () {
 	
 }
 
-},{"../product-compare":21,"../product-tile":22,"../progress":23,"../util":31}],19:[function(require,module,exports){
+},{"../product-compare":22,"../product-tile":23,"../progress":24,"../util":32}],20:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2994,7 +2999,7 @@ exports.init = function () {
 	});
 };
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -3015,7 +3020,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":28,"../util":31,"./product":16}],21:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":29,"../util":32,"./product":17}],22:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3281,7 +3286,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":31}],22:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":32}],23:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3385,7 +3390,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":16,"./quickview":24}],23:[function(require,module,exports){
+},{"./pages/product":17,"./quickview":25}],24:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3418,7 +3423,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3565,7 +3570,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":23,"./util":31}],25:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":24,"./util":32}],26:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3591,7 +3596,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3760,7 +3765,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":31}],27:[function(require,module,exports){
+},{"./util":32}],28:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3936,7 +3941,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":31}],28:[function(require,module,exports){
+},{"./util":32}],29:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4011,7 +4016,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":31,"./validator":32}],29:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":32,"./validator":33}],30:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4355,7 +4360,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":31}],30:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":32}],31:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4377,7 +4382,7 @@ exports.init = function () {
 	});
 };
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4814,7 +4819,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":32}],32:[function(require,module,exports){
+},{"./validator":33}],33:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,

@@ -1,16 +1,17 @@
 'use strict';
 
-var ajax = require('../ajax'),
-	cart = require('./cart'),
-	components = require('../components'),
-	dialog = require('../dialog'),
-	minicart = require('../minicart'),
-	progress = require('../progress'),
-	quickview = require('../quickview'),
-	sendToFriend = require('../send-to-friend'),
-	storeinventory = require('../storeinventory'),
-	tooltip = require('../tooltip'),
-	util = require('../util');
+var ajax = require('../../ajax'),
+	cart = require('../cart'),
+	components = require('../../components'),
+	dialog = require('../../dialog'),
+	minicart = require('../../minicart'),
+	progress = require('../../progress'),
+	quickview = require('../../quickview'),
+	sendToFriend = require('../../send-to-friend'),
+	storeinventory = require('../../storeinventory'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util'),
+	quantityEvent = require('./events/quantity');
 
 /**
  * @private
@@ -229,84 +230,7 @@ function initializeEvents() {
 	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
-			if (!data) {
-				$availabilityContainer.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
-				return;
-			}
-			var avMsg;
-			var avRoot = $availabilityContainer.find('.availability-msg').html('');
-
-			// Look through levels ... if msg is not empty, then create span el
-			if (data.levels.IN_STOCK > 0) {
-				avMsg = avRoot.find('.in-stock-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
-				}
-				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.IN_STOCK);
-				} else {
-					// In stock with conditions ...
-					avMsg.text(data.inStockMsg);
-				}
-			}
-			if (data.levels.PREORDER > 0) {
-				avMsg = avRoot.find('.preorder-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
-				}
-				if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.PREORDER);
-				} else {
-					avMsg.text(data.preOrderMsg);
-				}
-			}
-			if (data.levels.BACKORDER > 0) {
-				avMsg = avRoot.find('.backorder-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
-				}
-				if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-					// Just in stock
-					avMsg.text(Resources.BACKORDER);
-				} else {
-					avMsg.text(data.backOrderMsg);
-				}
-			}
-			if (data.inStockDate != '') {
-				avMsg = avRoot.find('.in-stock-date-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
-				}
-				avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
-			}
-			if (data.levels.NOT_AVAILABLE > 0) {
-				avMsg = avRoot.find('.not-available-msg');
-				if (avMsg.length === 0) {
-					avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
-				}
-				if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-					avMsg.text(Resources.NOT_AVAILABLE);
-				} else {
-					avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
-				}
-			}
-			/* TODO: This has never been reached before. Consider removing?
-			$addToCart.attr('disabled', 'disabled');
-			availabilityContainer.find('.availability-msg').hide();
-			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-			if (avQtyMsg.length === 0) {
-				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-			}
-			avQtyMsg.text(data.inStockMsg).show();
-
-			var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-			if (avQtyMsg.length === 0) {
-				avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-			}
-			avQtyMsg.text(data.backorderMsg).show();
-			*/
+			quantityEvent(data, $availabilityContainer);
 		});
 	});
 
@@ -412,7 +336,7 @@ function initializeEvents() {
 			callback: function (data) {
 				product.initAddThis();
 				product.initAddToCart();
-				if (SitePreferences.STORE_PICKUP){
+				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
 				if (hasSwapImage) {
