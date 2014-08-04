@@ -50,9 +50,7 @@
 				
 				<div class="form-row">
 				
-					<label class="label">
-						Select a Credit Card:
-					</label>
+					<label class="label">${Resource.msg('billing.selectcreditcard','checkout',null)}</label>
 	
 					<select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="creditCardList" class="input-select">
 						<option value="" selected="selected">${Resource.msg('billing.creditcardlistselect','checkout',null)}</option>
@@ -81,7 +79,7 @@
 				
 			</isif>
 	
-	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off" xhtmlclass="owner"/>
 	    	
 	    	<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select"/>
 	    	
