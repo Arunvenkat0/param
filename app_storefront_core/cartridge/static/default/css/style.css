@@ -807,7 +807,7 @@ table.item-list .multi-shipment-row {border-bottom: none;}
 position: absolute;
 top: 0px;
 left: 63%;}
-h1 .account-logout{font-size:0.6em;}
+h1 .account-logout{font-size:0.6em;float:none;}
 .registration-selection input,.registration-selection label{display:inline;float:none;}
 ul.address-list{padding:0;}
 ul.address-list li{float:left;list-style:none outside none;margin:0;min-height:135px;padding:1em 0;width:30%;}
