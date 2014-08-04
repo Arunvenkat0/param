@@ -934,9 +934,9 @@ exports.init = function () {
 	 		 	}
 	 		 });
 	});
-	
+
 	//hide the feature if user is in checkout
-	if (page.title=="Checkout"){
+	if (page.title === 'Checkout'){
 		$('.mc-class').css('display','none');
 	}
 };
@@ -1182,52 +1182,27 @@ var account = require('./account'),
 /**
  * @private
  * @function
- * @description Updates the cart with new data
- * @param {Object} postdata An Object representing the the new or uptodate data
- * @param {Object} A callback function to be called
- */
-function updateCart(postdata, callback) {
-	var url = util.ajaxUrl(Urls.addProduct);
-	$.post(url, postdata, callback || cart.refresh);
-}
-/**
- * @private
- * @function
- * @description Cache initialization of the cart page
- */
-function initializeCache() {
-	$cache = {
-		cartTable : $("#cart-table"),
-		itemsForm : $("#cart-items-form"),
-		addCoupon : $("#add-coupon"),
-		couponCode : $("form input[name$='_couponCode']")
-	};
-}
-/**
- * @private
- * @function
  * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry )
  */
 function initializeEvents() {
-	$cache.cartTable.on("click", ".item-edit-details a", function (e) {
+	$('#cart-table').on('click', '.item-edit-details a', function (e) {
 		e.preventDefault();
 		quickview.show({
 			url : e.target.href,
-			source : "cart"
+			source : 'cart'
 		});
 	})
-	.on("click", ".bonus-item-actions a", function (e) {
+	.on('click', '.bonus-item-actions a', function (e) {
 		e.preventDefault();
 		bonusProductsView.show(this.href);
 	});
 
 	// override enter key for coupon code entry
-	$cache.couponCode.on("keydown", function (e) {
-		if (e.which === 13 && $(this).val().length===0) { return false; }
+	$('form input[name$="_couponCode"]').on('keydown', function (e) {
+		if (e.which === 13 && $(this).val().length === 0) { return false; }
 	});
 }
 
-/******* cart public object ********/
 var cart = {
 	/**
 	 * @function
@@ -1235,15 +1210,16 @@ var cart = {
 	 * @param {Object} postdata An Object representing the the new or uptodate data
 	 * @param {Object} A callback function to be called
 	 */
-	add : function (postdata, callback) {
-		updateCart(postdata, callback);
+	add: function (postdata, callback) {
+		var url = util.ajaxUrl(Urls.addProduct);
+		$.post(url, postdata, callback || this.refresh);
 	},
 	/**
 	 * @function
 	 * @description Hook for removing item from the cart
 	 *
 	 */
-	remove : function () {
+	remove: function () {
 		return;
 	},
 	/**
@@ -1252,14 +1228,14 @@ var cart = {
 	 * @param {Object} postdata An Object representing the the new or uptodate data
 	 * @param {Object} A callback function to be called
 	 */
-	update : function (postdata, callback) {
+	update: function (postdata, callback) {
 		updateCart(postdata, callback);
 	},
 	/**
 	 * @function
 	 * @description Refreshes the cart without posting
 	 */
-	refresh : function () {
+	refresh: function () {
 		// refresh without posting
 		page.refresh();
 	},
@@ -1267,11 +1243,9 @@ var cart = {
 	 * @function
 	 * @description Initializes the functionality on the cart
 	 */
-	init : function () {
-		// edit shopping cart line item
-		initializeCache();
+	init: function () {
 		initializeEvents();
-		if (SitePreferences.STORE_PICKUP){
+		if (SitePreferences.STORE_PICKUP) {
 			storeinventory.init();
 		}
 		account.initCartLogin();

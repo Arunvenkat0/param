@@ -18,9 +18,9 @@ exports.init = function () {
 	 		 	}
 	 		 });
 	});
-	
+
 	//hide the feature if user is in checkout
-	if (page.title=="Checkout"){
+	if (page.title === 'Checkout'){
 		$('.mc-class').css('display','none');
 	}
 };
