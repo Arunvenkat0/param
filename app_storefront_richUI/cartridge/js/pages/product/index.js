@@ -58,7 +58,7 @@ function loadRecommendations() {
  * @param {Object} atts Simple object with url, alt, title and hires properties
  */
 function setMainImage(atts) {
-	var imgZoom = $cache.pdpMain.find('.main-image');
+	var imgZoom = $('#pdpMain .main-image');
 	if (imgZoom.length > 0 && atts.hires && atts.hires != '' && atts.hires != 'null') {
 		imgZoom.attr('href', atts.hires);
 	}
@@ -81,7 +81,7 @@ function swapImage(element) {
 		return;
 	}
 	var newImg = $.extend({}, lgImg);
-	var imgZoom = $cache.pdpMain.find('.main-image');
+	var imgZoom = $('#pdpMain .main-image');
 	var mainImage = imgZoom.find('.primary-image');
 	// store current image info
 	lgImg.hires = imgZoom.attr('href');
@@ -116,7 +116,7 @@ function loadZoom() {
 	};
 
 	// Added to prevent empty hires zoom feature (if images don't exist)
-	var mainImage = $cache.pdpMain.find('.main-image');
+	var mainImage = $('#pdpMain').find('.main-image');
 	var hiresImageSrc = mainImage.attr('href');
 	if (hiresImageSrc && hiresImageSrc !== '' && hiresImageSrc.indexOf('noimagelarge') < 0) {
 		mainImage.removeData('jqzoom').jqzoom(options);
@@ -128,7 +128,7 @@ function loadZoom() {
  */
 function replaceImages() {
 	var newImages = $('#update-images');
-	var imageContainer = $cache.pdpMain.find('.product-image-container');
+	var imageContainer = $('#pdpMain').find('.product-image-container');
 
 	imageContainer.html(newImages.html());
 	newImages.remove();
@@ -141,19 +141,12 @@ function replaceImages() {
  * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
  */
 function setMainImageLink() {
+	var $mainImage = $('#pdpMain .main-image')
 	if (quickview.isActive() || util.isMobile()) {
-		$cache.pdpMain.find('.main-image').removeAttr('href');
+		$mainImage.removeAttr('href');
 	} else {
-		$cache.pdpMain.find('.main-image').addClass('image-zoom');
+		$mainImage.addClass('image-zoom');
 	}
-}
-
-/**
- * @function
- * @description Removes css class (image-zoom) from the main product image in order to deactivate the zoom viewer on the product detail page.
- */
-function removeImageZoom() {
-	$cache.pdpMain.find('.main-image').removeClass('image-zoom');
 }
 
 /**
@@ -162,7 +155,7 @@ function removeImageZoom() {
  * @description Initializes the DOM of the product detail page (images, reviews, recommendation and product-navigation).
  */
 function initializeDom() {
-	$cache.pdpMain.find('div.product-detail .product-tabs').tabs();
+	$('#pdpMain .product-detail .product-tabs').tabs();
 	if ($('#pwrwritediv').length > 0) {
 		var options = $.extend(true, {}, dialog.settings, {
 			autoOpen : true,
@@ -174,34 +167,24 @@ function initializeDom() {
 		});
 
 		dialog.create({
-			target : $("#pwrwritediv"),
+			target : $('#pwrwritediv'),
 			options : options
 		});
 	}
 
-	loadRecommendations($cache.container);
+	loadRecommendations();
 	loadProductNavigation();
 	setMainImageLink();
 
 	if ($('#product-set-list').length > 0) {
-		var unavailable = $('#product-set-list').find("form").find("button.add-to-cart[disabled]");
+		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
 		if (unavailable.length > 0) {
-			$('#add-all-to-cart').attr("disabled", "disabled");
-			$('#add-to-cart').attr("disabled", "disabled"); // this may be a bundle
+			$('#add-all-to-cart').attr('disabled', 'disabled');
+			$('#add-to-cart').attr('disabled', 'disabled'); // this may be a bundle
 		}
 	}
 
 	tooltip.init();
-}
-/**
- * @private
- * @function
- * @description Initializes the cache on the product detail page.
- */
-function initializeCache() {
-	$cache = {
-		pdpMain : $('#pdpMain')
-	};
 }
 
 /**
@@ -260,13 +243,13 @@ function initializeEvents() {
 			setMainImageLink();
 			loadZoom();
 		} else {
-			removeImageZoom();
+			$pdpMain.find('.main-image').removeClass('image-zoom');
 		}
 	});
 
 	// dropdown variations
 	$pdpMain.on('change', '.product-options select', function () {
-		var salesPrice = $cache.pdpMain.find('.product-add-to-cart .price-sales');
+		var salesPrice = $pdpMain.find('.product-add-to-cart .price-sales');
 		var selectedItem = $(this).children().filter(':selected').first();
 		salesPrice.text(selectedItem.data('combined'));
 	});
@@ -290,7 +273,7 @@ function initializeEvents() {
 		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
 		var url = util.appendParamsToUrl($(this).val(), params);
 		progress.show($pdpMain);
-		var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
+		var hasSwapImage = $(this).find('option:selected').attr('data-lgimg') !== null;
 
 		ajax.load({
 			url: url,
@@ -419,9 +402,9 @@ function initializeEvents() {
 		addItems();
 		return false;
 	});
-	sendToFriend.initializeDialog($cache.pdpMain, '.send-to-friend');
+	sendToFriend.initializeDialog($pdpMain, '.send-to-friend');
 
-	$cache.pdpMain.find('.add-to-cart[disabled]').attr('title', $cache.pdpMain.find('.availability-msg').html());
+	$pdpMain.find('.add-to-cart[disabled]').attr('title', $pdpMain.find('.availability-msg').html());
 }
 /**
  * @private
@@ -454,7 +437,6 @@ function setAddToCartHandler(e) {
 
 var product = {
 	init : function () {
-		initializeCache();
 		initializeDom();
 		initializeEvents();
 		loadZoom();
