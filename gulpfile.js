@@ -13,7 +13,7 @@ var paths = {
 		dest: './app_storefront_core/cartridge/static/default/css'
 	},
 	js : {
-		src: './app_storefront_richUI/cartridge/javascripts/app.js',
+		src: './app_storefront_richUI/cartridge/js/app.js',
 		dest: './app_storefront_richUI/cartridge/static/default/js'
 	}
 }
