@@ -34,30 +34,13 @@ function initializeEvents() {
 var cart = {
 	/**
 	 * @function
-	 * @description Adds new item to the cart
-	 * @param {Object} postdata An Object representing the the new or uptodate data
-	 * @param {Object} A callback function to be called
-	 */
-	add: function (postdata, callback) {
-		var url = util.ajaxUrl(Urls.addProduct);
-		$.post(url, postdata, callback || this.refresh);
-	},
-	/**
-	 * @function
-	 * @description Hook for removing item from the cart
-	 *
-	 */
-	remove: function () {
-		return;
-	},
-	/**
-	 * @function
 	 * @description Updates the cart with new data
 	 * @param {Object} postdata An Object representing the the new or uptodate data
 	 * @param {Object} A callback function to be called
 	 */
 	update: function (postdata, callback) {
-		updateCart(postdata, callback);
+		var url = util.ajaxUrl(Urls.addProduct);
+		$.post(url, postdata, callback || this.refresh);
 	},
 	/**
 	 * @function
