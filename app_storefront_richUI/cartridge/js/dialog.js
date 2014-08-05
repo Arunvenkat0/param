@@ -10,6 +10,7 @@ var dialog = {
 	 * @param {Object} params  params.target can be an id selector or an jquery object
 	 */
 	create: function (params) {
+		var id;
 		// options.target can be an id selector or an jquery object
 		var target = $(params.target || "#dialog-container");
 

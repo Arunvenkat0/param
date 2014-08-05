@@ -13,25 +13,25 @@ var giftcert = require('../giftcert'),
  * @param {Element} form The form which will be initialized
  */
 function initializeAddressForm(form) {
-	var form = $("#edit-address-form");
+	var $form = $('#edit-address-form');
 
-	form.find("input[name='format']").remove();
+	$form.find('input[name="format"]').remove();
 	tooltip.init();
 	//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
 
-	form.on("click", ".apply-button", function(e) {
+	$form.on('click', '.apply-button', function(e) {
 		e.preventDefault();
-		var addressId = form.find("input[name$='_addressid']");
-		addressId.val(addressId.val().replace(/[^\w+-]/g, "-"));
-		if (!form.valid()) {
+		var addressId = $form.find('input[name$="_addressid"]');
+		addressId.val(addressId.val().replace(/[^\w+-]/g, '-'));
+		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl(form.attr('action'),{format:"ajax"});
-		var applyName = form.find('.apply-button').attr('name');
+		var url = util.appendParamsToUrl($form.attr('action'),{format: 'ajax'});
+		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
-			data: form.serialize()+"&"+applyName+'=x',
-			type: "POST"
+			data: $form.serialize() + '&' + applyName + '=x',
+			type: 'POST'
 		};
 		$.ajax( options ).done(function(data){
 			if( typeof(data)!=='string' ) {
@@ -49,20 +49,20 @@ function initializeAddressForm(form) {
 			}
 		});
 	})
-	.on("click", ".cancel-button, .close-button", function(e){
+	.on('click', '.cancel-button, .close-button', function(e){
 		e.preventDefault();
 		dialog.close();
 	})
-	.on("click", ".delete-button", function(e){
+	.on('click', '.delete-button', function(e){
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-			var url = util.appendParamsToUrl(Urls.deleteAddress, {AddressID:form.find("#addressid").val(),format:"ajax"});
+			var url = util.appendParamsToUrl(Urls.deleteAddress, {AddressID: $form.find('#addressid').val(),format: 'ajax'});
 			$.ajax({
 				url: url,
-				method: "POST",
-				dataType:"json"
+				method: 'POST',
+				dataType: 'json'
 			}).done(function(data){
-				if (data.status.toLowerCase()==="ok") {
+				if (data.status.toLowerCase() === 'ok') {
 					dialog.close();
 					page.refresh();
 				}
@@ -78,8 +78,7 @@ function initializeAddressForm(form) {
 		}
 	});
 
-	var $countrySelect = form.find("select[id$='_country']");
-	$countrySelect.on("change", function(){
+	$form.find('select[id$="_country"]').on('change', function (){
 		util.updateStateOptions(this);
 	});
 
@@ -107,27 +106,25 @@ function toggleFullOrder () {
  * @description Binds the events on the address form (edit, create, delete)
  */
 function initAddressEvents() {
-	var addresses = $("#addresses");
-	if (addresses.length===0) { return; }
+	var addresses = $('#addresses');
+	if (addresses.length === 0) { return; }
 
-	addresses.on("click", "a.address-edit, a.address-create", function(e){
+	addresses.on('click', '.address-edit, .address-create', function (e) {
 		e.preventDefault();
 		var options = {open: initializeAddressForm};
-		dialog.open({url:this.href, options:options});
-	}).on("click", ".delete", function(e){
+		dialog.open({url: this.href, options: options});
+	}).on('click', '.delete', function (e) {
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
-				url: util.appendParamsToUrl($(this).attr("href"), {format:"ajax"}),
-				dataType:"json"
+				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
+				dataType: 'json'
 			}).done(function(data){
-				if (data.status.toLowerCase()==="ok") {
+				if (data.status.toLowerCase() === 'ok') {
 					page.redirect(Urls.addressesList);
-				}
-				else if (data.message.length>0) {
+				} else if (data.message.length>0) {
 					alert(data.message);
-				}
-				else {
+				} else {
 					page.refresh();
 				}
 			});
@@ -140,23 +137,27 @@ function initAddressEvents() {
  * @description Binds the events of the payment methods list (delete card)
  */
 function initPaymentEvents() {
-	var paymentList = $(".payment-list");
-	if (paymentList.length===0) { return; }
+	var paymentList = $('.payment-list');
+	if (paymentList.length === 0) { return; }
 
 	util.setDeleteConfirmation(paymentList, String.format(Resources.CONFIRM_DELETE, Resources.TITLE_CREDITCARD));
 
-	$("form[name='payment-remove']").on("submit", function(e){
+	$('form[name="payment-remove"]').on('submit', function (e) {
 		e.preventDefault();
 		// override form submission in order to prevent refresh issues
-		var button = $(this).find("button.delete");
-		$("<input/>").attr({type:"hidden", name:button.attr("name"), value:button.attr("value")||"delete card"}).appendTo($(this));
+		var button = $(this).find('.delete');
+		$('<input/>').attr({
+			type: 'hidden',
+			name: button.attr('name'),
+			value:button.attr('value') || 'delete card'
+		}).appendTo($(this));
 		var data = $(this).serialize();
 		$.ajax({
-			type: "POST",
-			url: $(this).attr("action"),
+			type: 'POST',
+			url: $(this).attr('action'),
 			data: data
 		})
-		.done(function(response) {
+		.done(function (response) {
 			page.redirect(Urls.paymentsList);
 		});
 	});
@@ -167,18 +168,17 @@ function initPaymentEvents() {
  * @description init events for the loginPage
  */
 function initLoginPage() {
-
 	//o-auth binding for which icon is clicked
-	$('.oAuthIcon').bind( "click", function() {
+	$('.oAuthIcon').bind('click', function () {
 		$('#OAuthProvider').val(this.id);
 	});
 
 	//toggle the value of the rememberme checkbox
-	$( "#dwfrm_login_rememberme" ).bind( "change", function() {
-		if($('#dwfrm_login_rememberme').attr('checked')){
-			$('#rememberme').val('true')
-		}else{
-			$('#rememberme').val('false')
+	$('#dwfrm_login_rememberme').bind('change', function() {
+		if ($('#dwfrm_login_rememberme').attr('checked')) {
+			$('#rememberme').val('true');
+		} else {
+			$('#rememberme').val('false');
 		}
 	});
 
