@@ -293,44 +293,24 @@ function shippingLoad() {
  * @description Selects the first address from the list of addresses
  */
 function addressLoad() {
+	var $form = $('.address');
 	// select address from list
-	$('.select-address select[id$="_addressList"]').on('change', function () {
+	$('select[id$="_addressList"]', $form).on('change', function () {
 		var selected = $(this).children(':selected').first();
 		var selectedAddress = $(selected).data('address');
-		var $form = $('.address');
-		// selectedAddress object
-		// ID: "addressId"
-		// UUID: "bco8ciaagJKXoaaadfTJ6gaiy3"
-		// address1: "318 Farms Dr"
-		// address2: null
-		// city: "Burlington"
-		// countryCode: "US"
-		// displayValue: "eaves"
-		// firstName: "Tri"
-		// key: "eaves"
-		// lastName: "Nguyen"
-		// phone: "5084360455"
-		// postalCode: "01803"
-		// stateCode: "MA"
-		// type: "customer"
 		if (!selectedAddress) { return; }
 		// TODO fill in the fields using the same function as the addEditAddress $selectButton
 		for (var field in selectedAddress) {
 			// if the key in selectedAddress object ends with 'Code', remove that suffix
-			$form.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
-
-			// if ($cache[p] && data[p]) {
-			// 	$cache[p].val(data[p].replace("^","'"));
-			// 	// special handling for countrycode => stateCode combo
-			// 	if ($cache[p]===$cache.countryCode) {
-			// 		util.updateStateOptions($cache[p]);
-			// 		$cache.stateCode.val(data.stateCode);
-			// 		$cache.stateCode.trigger("change");
-			// 	}
-			// 	else {
-			// 		updateShippingMethodList();
-			// 	}
-			// }
+			$form.find('[name$="' + field.replace('Code', '') + '"]').val(selectedAddress[field]);
+			// update the state fields
+			if (field === 'countryCode') {
+				$form.find('[name$="' + field.replace('Code', '') + '"]').trigger('change');
+				// retrigger state selection after country has changed
+				// this results in duplication of the state code, but is a necessary evil
+				// for now because sometimes countryCode comes after stateCode
+				$form.find('[name$="state"]').val(selectedAddress['stateCode']);
+			}
 		}
 		updateShippingMethodList();
 		// re-validate the form
@@ -338,8 +318,8 @@ function addressLoad() {
 	});
 
 	// update state options in case the country changes
-	$cache.countryCode.on("change", function () {
-		util.updateStateOptions(this);
+	$('select[id$="_country"]', $form).on('change', function () {
+		util.updateStateOptions($form);
 	});
 }
 

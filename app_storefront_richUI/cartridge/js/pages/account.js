@@ -78,8 +78,8 @@ function initializeAddressForm(form) {
 		}
 	});
 
-	$form.find('select[id$="_country"]').on('change', function (){
-		util.updateStateOptions(this);
+	$('select[id$="_country"]', $form).on('change', function (){
+		util.updateStateOptions($form);
 	});
 
 	validator.init();
