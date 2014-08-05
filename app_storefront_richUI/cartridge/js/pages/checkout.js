@@ -58,7 +58,7 @@ function selectShippingMethod(shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
-	var url = util.appendParamsToUrl(Urls.selectShippingMethodsList, { 
+	var url = util.appendParamsToUrl(Urls.selectShippingMethodsList, {
 		address1: $cache.address1.val(),
 		address2: $cache.address2.val(),
 		countryCode: $cache.countryCode.val(),
@@ -231,7 +231,7 @@ function addEditAddress(target) {
 			// proceed to fill the form with the selected address
 			for (var field in selectedAddress) {
 				// if the key in selectedAddress object ends with 'Code', remove that suffix
-				$addressForm.find('[name$=' + field + '], [name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
+				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
 			}
 		}
 	});
@@ -253,7 +253,7 @@ function addEditAddress(target) {
 				$shippingAddress = $(target).closest('.shippingaddress'),
 				$select = $shippingAddress.find('.select-address'),
 				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">' 
+				newOption = '<option value="' + address.UUID + '">'
 					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
 					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
 					+ '</option>';
@@ -280,7 +280,7 @@ function shippingLoad() {
 		giftMessageBox();
 	});
 
-	$('.address').on('change', 
+	$('.address').on('change',
 		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], input[name$="_addressFields_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
 		updateShippingMethodList
 	);
@@ -294,28 +294,47 @@ function shippingLoad() {
  */
 function addressLoad() {
 	// select address from list
-	$('.select-address select[id$="_addressList"]').on("change", function () {
-		var selected = $(this).children(":selected").first();
-		var data = $(selected).data("address");
-		if (!data) { return; }
+	$('.select-address select[id$="_addressList"]').on('change', function () {
+		var selected = $(this).children(':selected').first();
+		var selectedAddress = $(selected).data('address');
+		var $form = $('.address');
+		// selectedAddress object
+		// ID: "addressId"
+		// UUID: "bco8ciaagJKXoaaadfTJ6gaiy3"
+		// address1: "318 Farms Dr"
+		// address2: null
+		// city: "Burlington"
+		// countryCode: "US"
+		// displayValue: "eaves"
+		// firstName: "Tri"
+		// key: "eaves"
+		// lastName: "Nguyen"
+		// phone: "5084360455"
+		// postalCode: "01803"
+		// stateCode: "MA"
+		// type: "customer"
+		if (!selectedAddress) { return; }
 		// TODO fill in the fields using the same function as the addEditAddress $selectButton
-		for (var p in data) {
-			if ($cache[p] && data[p]) {
-				$cache[p].val(data[p].replace("^","'"));
-				// special handling for countrycode => stateCode combo
-				if ($cache[p]===$cache.countryCode) {
-					util.updateStateOptions($cache[p]);
-					$cache.stateCode.val(data.stateCode);
-					$cache.stateCode.trigger("change");
-				}
-				else {
-					updateShippingMethodList();
-				}
-			}
-		}
+		for (var field in selectedAddress) {
+			// if the key in selectedAddress object ends with 'Code', remove that suffix
+			$form.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
 
+			// if ($cache[p] && data[p]) {
+			// 	$cache[p].val(data[p].replace("^","'"));
+			// 	// special handling for countrycode => stateCode combo
+			// 	if ($cache[p]===$cache.countryCode) {
+			// 		util.updateStateOptions($cache[p]);
+			// 		$cache.stateCode.val(data.stateCode);
+			// 		$cache.stateCode.trigger("change");
+			// 	}
+			// 	else {
+			// 		updateShippingMethodList();
+			// 	}
+			// }
+		}
+		updateShippingMethodList();
 		// re-validate the form
-		$cache.checkoutForm.validate().form();
+		$form.validate().form();
 	});
 
 	// update state options in case the country changes
@@ -484,7 +503,7 @@ function billingLoad() {
 			$balance.html(Resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
 		});
 	});
-	
+
 	$addGiftCert.on('click', function(e) {
 		e.preventDefault();
 		var code = $giftCertCode.val(),
@@ -493,7 +512,7 @@ function billingLoad() {
 			$error.html(Resources.GIFT_CERT_MISSING);
 			return;
 		}
-		
+
 		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
 		$.getJSON(url, function(data) {
 			var fail = false;
@@ -547,7 +566,7 @@ function billingLoad() {
 			}
 		});
 	});
-	
+
 	// trigger events on enter
 	$couponCode.on('keydown', function(e) {
 		if (e.which === 13) {
@@ -611,7 +630,7 @@ function initializeEvents() {
 		//on the single shipping page, update the list of shipping methods when the state feild changes
 		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 			updateShippingMethodList();
-		});	
+		});
 	}
 	else if(isMultiShipping){
 		multishippingLoad();
@@ -619,7 +638,7 @@ function initializeEvents() {
 	else{
 		billingLoad();
 	}
-	
+
 	//if on the order review page and there are products that are not available diable the submit order button
 	if($('.order-summary-footer').length > 0){
 		if($('.notavailable').length > 0){
