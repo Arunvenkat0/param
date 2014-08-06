@@ -3,6 +3,46 @@
 var giftcard = require('../../giftcard'),
 	util = require('../../util'),
 	validator = require('../../validator');
+
+/**
+ * @function
+ * @description Fills the Credit Card form with the passed data-parameter and clears the former cvn input
+ * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
+ */
+function setCCFields(data) {
+	$cache.ccOwner.val(data.holder);
+	$cache.ccType.val(data.type);
+	$cache.ccNum.val(data.maskedNumber);
+	$cache.ccMonth.val(data.expirationMonth);
+	$cache.ccYear.val(data.expirationYear);
+	$cache.ccCcv.val("");
+
+	// remove error messages
+	$cache.ccContainer.find(".errormessage").toggleClass("errormessage").filter("span").remove();
+
+	$cache.ccContainer.find(".errorlabel").toggleClass("errorlabel");
+}
+
+/**
+ * @function
+ * @description Updates the credit card form with the attributes of a given card
+ * @param {String} cardID the credit card ID of a given card
+ */
+function populateCreditCardForm(cardID) {
+	// load card details
+	var url = util.appendParamToURL(Urls.billingSelectCC, "creditCardUUID", cardID);
+	ajax.getJson({
+		url: url,
+		callback: function (data) {
+			if(!data) {
+				window.alert(Resources.CC_LOAD_ERROR);
+				return false;
+			}
+			setCCFields(data);
+		}
+	});
+}
+
 /**
  * @function
  * @description Changes the payment method form depending on the passed paymentMethodID
