@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":15,"./pages/compare":17,"./pages/product":19,"./pages/registry":20,"./pages/search":21,"./pages/storefront":22,"./pages/wishlist":23,"./searchplaceholder":28,"./searchsuggest":30,"./searchsuggest-beta":29,"./tooltip":33,"./util":34,"./validator":35}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":16,"./pages/compare":18,"./pages/product":20,"./pages/registry":21,"./pages/search":22,"./pages/storefront":23,"./pages/wishlist":24,"./searchplaceholder":29,"./searchsuggest":31,"./searchsuggest-beta":30,"./tooltip":34,"./util":35,"./validator":36}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":26,"./util":34}],3:[function(require,module,exports){
+},{"./progress":27,"./util":35}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":34}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":35}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -724,7 +724,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":34}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":35}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -745,7 +745,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":34}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":35}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -799,7 +799,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":34}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":35}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -914,7 +914,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":34}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":35}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -942,7 +942,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":34}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":35}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -960,7 +960,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":34}],12:[function(require,module,exports){
+},{"./util":35}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1170,7 +1170,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":33,"../util":34,"../validator":35}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":34,"../util":35,"../validator":36}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1237,7 +1237,46 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":27,"../storeinventory":32,"../util":34,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":28,"../storeinventory":33,"../util":35,"./account":12}],14:[function(require,module,exports){
+'use strict';
+
+var util = require('../../util');
+
+/**
+ * @function
+ * @description Selects the first address from the list of addresses
+ */
+exports.init = function () {
+	var $form = $('.address');
+	// select address from list
+	$('select[name$="_addressList"]', $form).on('change', function () {
+		var selected = $(this).children(':selected').first();
+		var selectedAddress = $(selected).data('address');
+		if (!selectedAddress) { return; }
+		// TODO fill in the fields using the same function as the addEditAddress $selectButton
+		for (var field in selectedAddress) {
+			// if the key in selectedAddress object ends with 'Code', remove that suffix
+			$form.find('[name$="' + field.replace('Code', '') + '"]').val(selectedAddress[field]);
+			// update the state fields
+			if (field === 'countryCode') {
+				$form.find('[name$="' + field.replace('Code', '') + '"]').trigger('change');
+				// retrigger state selection after country has changed
+				// this results in duplication of the state code, but is a necessary evil
+				// for now because sometimes countryCode comes after stateCode
+				$form.find('[name$="state"]').val(selectedAddress['stateCode']);
+			}
+		}
+		updateShippingMethodList();
+		// re-validate the form
+		$form.validate().form();
+	});
+
+	// update state options in case the country changes
+	$('select[id$="_country"]', $form).on('change', function () {
+		util.updateStateOptions($form);
+	});
+}
+},{"../../util":35}],15:[function(require,module,exports){
 'use strict';
 
 var giftcard = require('../../giftcard'),
@@ -1430,16 +1469,16 @@ exports.init = function () {
 		}
 	});
 }
-},{"../../giftcard":6,"../../util":34,"../../validator":35}],15:[function(require,module,exports){
+},{"../../giftcard":6,"../../util":35,"../../validator":36}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
-	dialog = require('../../dialog'),
 	progress = require('../../progress'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
-var billing = require('./billing'),
+var address = require('./address'),
+	billing = require('./billing'),
 	multiship = require('./multiship');
 
 var $cache = {},
@@ -1580,66 +1619,6 @@ function giftMessageBox() {
 
 /**
  * @function
- * @description capture add edit adddress form events
- */
-function addEditAddress(target) {
-	var $addressForm = $('form[name$="multishipping_editAddress"]'),
-		$selectButton = $addressForm.find('button[name$=_selectAddress]'),
-		$addressList = $addressForm.find('.address-list'),
-		add = true;
-	$selectButton.on('click', function (e) {
-		e.preventDefault();
-		var selectedAddress = $addressList.find('select').val();
-		if (selectedAddress !== 'newAddress') {
-			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
-				return add.UUID === selectedAddress;
-			})[0];
-			add = false;
-			// proceed to fill the form with the selected address
-			for (var field in selectedAddress) {
-				// if the key in selectedAddress object ends with 'Code', remove that suffix
-				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
-			}
-		}
-	});
-
-	$addressForm.on('click', '.cancel', function (e) {
-		e.preventDefault();
-		dialog.close();
-	});
-
-	$addressForm.on('submit', function (e) {
-		e.preventDefault();
-		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
-			if (!response.success) {
-				// @TODO: figure out a way to handle error on the form
-				console.log('error!');
-				return;
-			}
-			var address = response.address,
-				$shippingAddress = $(target).closest('.shippingaddress'),
-				$select = $shippingAddress.find('.select-address'),
-				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">'
-					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
-					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
-					+ '</option>';
-			dialog.close();
-			if (add) {
-				$('.shippingaddress select').removeClass('no-option').append(newOption);
-				$('.no-address').hide();
-			} else {
-				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
-			}
-			// if there's no previously selected option, select it
-			if (!$selected.length > 0 || $selected.val() === '') {
-				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
-			}
-		});
-	});
-}
-/**
- * @function
  * @description shows gift message box, if shipment is gift
  */
 function shippingLoad() {
@@ -1655,40 +1634,7 @@ function shippingLoad() {
 	giftMessageBox();
 	updateShippingMethodList();
 }
-/**
- * @function
- * @description Selects the first address from the list of addresses
- */
-function addressLoad() {
-	var $form = $('.address');
-	// select address from list
-	$('select[id$="_addressList"]', $form).on('change', function () {
-		var selected = $(this).children(':selected').first();
-		var selectedAddress = $(selected).data('address');
-		if (!selectedAddress) { return; }
-		// TODO fill in the fields using the same function as the addEditAddress $selectButton
-		for (var field in selectedAddress) {
-			// if the key in selectedAddress object ends with 'Code', remove that suffix
-			$form.find('[name$="' + field.replace('Code', '') + '"]').val(selectedAddress[field]);
-			// update the state fields
-			if (field === 'countryCode') {
-				$form.find('[name$="' + field.replace('Code', '') + '"]').trigger('change');
-				// retrigger state selection after country has changed
-				// this results in duplication of the state code, but is a necessary evil
-				// for now because sometimes countryCode comes after stateCode
-				$form.find('[name$="state"]').val(selectedAddress['stateCode']);
-			}
-		}
-		updateShippingMethodList();
-		// re-validate the form
-		$form.validate().form();
-	});
 
-	// update state options in case the country changes
-	$('select[id$="_country"]', $form).on('change', function () {
-		util.updateStateOptions($form);
-	});
-}
 
 /**
  * @function
@@ -1760,15 +1706,14 @@ function initializeCache() {
  * @function Initializes the page events depending on the checkout stage (shipping/billing)
  */
 function initializeEvents() {
-	addressLoad();
+	address.init();
 	if ($(".checkout-shipping").length > 0) {
 		shippingLoad();
 		//on the single shipping page, update the list of shipping methods when the state feild changes
 		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 			updateShippingMethodList();
 		});
-	}
-	else if ($(".checkout-multi-shipping").length > 0) {
+	} else if ($(".checkout-multi-shipping").length > 0) {
 		multiship.init();
 	} else{
 		billing.init();
@@ -1780,16 +1725,6 @@ function initializeEvents() {
 			$('.order-summary-footer .submit-order .button-fancy-large').attr( 'disabled', 'disabled' );
 		}
 	}
-
-	$('.edit-address').on('click', 'a', function (e) {
-		dialog.open({url: this.href, options: {open: function() {
-			initializeCache();
-			addressLoad();
-			addEditAddress(e.target);
-		}}});
-		// return false to prevent global dialogify event from triggering
-		return false;
-	});
 }
 
 exports.init = function () {
@@ -1797,8 +1732,11 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../../ajax":2,"../../dialog":5,"../../progress":26,"../../tooltip":33,"../../util":34,"./billing":14,"./multiship":16}],16:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":27,"../../tooltip":34,"../../util":35,"./address":14,"./billing":15,"./multiship":17}],17:[function(require,module,exports){
 'use strict';
+
+var address = require('./address'),
+	dialog = require('../../dialog');
 
 /**
 * @function
@@ -1862,6 +1800,68 @@ function initMultiGiftMessageBox() {
 	});
 }
 
+
+/**
+ * @function
+ * @description capture add edit adddress form events
+ */
+function addEditAddress(target) {
+	var $addressForm = $('form[name$="multishipping_editAddress"]'),
+		$selectButton = $addressForm.find('button[name$=_selectAddress]'),
+		$addressList = $addressForm.find('.address-list'),
+		add = true;
+	$selectButton.on('click', function (e) {
+		e.preventDefault();
+		var selectedAddress = $addressList.find('select').val();
+		if (selectedAddress !== 'newAddress') {
+			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+				return add.UUID === selectedAddress;
+			})[0];
+			add = false;
+			// proceed to fill the form with the selected address
+			for (var field in selectedAddress) {
+				// if the key in selectedAddress object ends with 'Code', remove that suffix
+				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
+			}
+		}
+	});
+
+	$addressForm.on('click', '.cancel', function (e) {
+		e.preventDefault();
+		dialog.close();
+	});
+
+	$addressForm.on('submit', function (e) {
+		e.preventDefault();
+		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
+			if (!response.success) {
+				// @TODO: figure out a way to handle error on the form
+				console.log('error!');
+				return;
+			}
+			var address = response.address,
+				$shippingAddress = $(target).closest('.shippingaddress'),
+				$select = $shippingAddress.find('.select-address'),
+				$selected = $select.find('option:selected'),
+				newOption = '<option value="' + address.UUID + '">'
+					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
+					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
+					+ '</option>';
+			dialog.close();
+			if (add) {
+				$('.shippingaddress select').removeClass('no-option').append(newOption);
+				$('.no-address').hide();
+			} else {
+				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
+			}
+			// if there's no previously selected option, select it
+			if (!$selected.length > 0 || $selected.val() === '') {
+				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
+			}
+		});
+	});
+}
+
 /**
  * @function
  * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
@@ -1873,8 +1873,16 @@ exports.init = function () {
 	} else {
 		$('.formactions button').attr('disabled','disabled');
 	}
+	$('.edit-address').on('click', 'a', function (e) {
+		dialog.open({url: this.href, options: {open: function() {
+			address.init();
+			addEditAddress(e.target);
+		}}});
+		// return false to prevent global dialogify event from triggering
+		return false;
+	});
 }
-},{}],17:[function(require,module,exports){
+},{"../../dialog":5,"./address":14}],18:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1918,7 +1926,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":25,"../quickview":27,"./product":19}],18:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":26,"../quickview":28,"./product":20}],19:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -1999,7 +2007,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2501,7 +2509,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":26,"../../quickview":27,"../../send-to-friend":31,"../../storeinventory":32,"../../tooltip":33,"../../util":34,"../cart":13,"./events/quantity":18}],20:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":27,"../../quickview":28,"../../send-to-friend":32,"../../storeinventory":33,"../../tooltip":34,"../../util":35,"../cart":13,"./events/quantity":19}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2673,7 +2681,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":27,"../send-to-friend":31,"../util":34,"./product":19}],21:[function(require,module,exports){
+},{"../ajax":2,"../quickview":28,"../send-to-friend":32,"../util":35,"./product":20}],22:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2865,7 +2873,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../product-compare":24,"../product-tile":25,"../progress":26,"../util":34}],22:[function(require,module,exports){
+},{"../product-compare":25,"../product-tile":26,"../progress":27,"../util":35}],23:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2915,7 +2923,7 @@ exports.init = function () {
 	});
 };
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -2936,7 +2944,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":31,"../util":34,"./product":19}],24:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":32,"../util":35,"./product":20}],25:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3202,7 +3210,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":34}],25:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":35}],26:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3306,7 +3314,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":19,"./quickview":27}],26:[function(require,module,exports){
+},{"./pages/product":20,"./quickview":28}],27:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3339,7 +3347,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3486,7 +3494,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":26,"./util":34}],28:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":27,"./util":35}],29:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3512,7 +3520,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3681,7 +3689,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":34}],30:[function(require,module,exports){
+},{"./util":35}],31:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3857,7 +3865,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":34}],31:[function(require,module,exports){
+},{"./util":35}],32:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3932,7 +3940,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":34,"./validator":35}],32:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":35,"./validator":36}],33:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4276,7 +4284,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":34}],33:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":35}],34:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4298,7 +4306,7 @@ exports.init = function () {
 	});
 };
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4740,7 +4748,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":35}],35:[function(require,module,exports){
+},{"./validator":36}],36:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,

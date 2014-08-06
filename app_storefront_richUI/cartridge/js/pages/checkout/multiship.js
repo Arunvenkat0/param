@@ -1,5 +1,8 @@
 'use strict';
 
+var address = require('./address'),
+	dialog = require('../../dialog');
+
 /**
 * @function
 * @description this function inits the form so that uses client side validation before submitting to the server
@@ -62,6 +65,68 @@ function initMultiGiftMessageBox() {
 	});
 }
 
+
+/**
+ * @function
+ * @description capture add edit adddress form events
+ */
+function addEditAddress(target) {
+	var $addressForm = $('form[name$="multishipping_editAddress"]'),
+		$selectButton = $addressForm.find('button[name$=_selectAddress]'),
+		$addressList = $addressForm.find('.address-list'),
+		add = true;
+	$selectButton.on('click', function (e) {
+		e.preventDefault();
+		var selectedAddress = $addressList.find('select').val();
+		if (selectedAddress !== 'newAddress') {
+			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+				return add.UUID === selectedAddress;
+			})[0];
+			add = false;
+			// proceed to fill the form with the selected address
+			for (var field in selectedAddress) {
+				// if the key in selectedAddress object ends with 'Code', remove that suffix
+				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
+			}
+		}
+	});
+
+	$addressForm.on('click', '.cancel', function (e) {
+		e.preventDefault();
+		dialog.close();
+	});
+
+	$addressForm.on('submit', function (e) {
+		e.preventDefault();
+		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
+			if (!response.success) {
+				// @TODO: figure out a way to handle error on the form
+				console.log('error!');
+				return;
+			}
+			var address = response.address,
+				$shippingAddress = $(target).closest('.shippingaddress'),
+				$select = $shippingAddress.find('.select-address'),
+				$selected = $select.find('option:selected'),
+				newOption = '<option value="' + address.UUID + '">'
+					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
+					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
+					+ '</option>';
+			dialog.close();
+			if (add) {
+				$('.shippingaddress select').removeClass('no-option').append(newOption);
+				$('.no-address').hide();
+			} else {
+				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
+			}
+			// if there's no previously selected option, select it
+			if (!$selected.length > 0 || $selected.val() === '') {
+				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
+			}
+		});
+	});
+}
+
 /**
  * @function
  * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
@@ -73,4 +138,12 @@ exports.init = function () {
 	} else {
 		$('.formactions button').attr('disabled','disabled');
 	}
+	$('.edit-address').on('click', 'a', function (e) {
+		dialog.open({url: this.href, options: {open: function() {
+			address.init();
+			addEditAddress(e.target);
+		}}});
+		// return false to prevent global dialogify event from triggering
+		return false;
+	});
 }
