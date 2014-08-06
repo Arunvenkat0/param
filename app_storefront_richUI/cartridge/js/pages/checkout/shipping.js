@@ -2,6 +2,7 @@
 
 var ajax = require('../../ajax'),
 	progress = require('../../progress'),
+	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
 var shippingMethods = null;
@@ -38,13 +39,14 @@ function updateSummary() {
  * entered address information as URL request parameters.
  */
 function getShippingMethodURL(url, extraParams) {
+	var $form = $('.address');
 	var params = {
-		address1: $cache.address1.val(),
-		address2: $cache.address2.val(),
-		countryCode: $cache.countryCode.val(),
-		stateCode: $cache.stateCode.val(),
-		postalCode: $cache.postalCode.val(),
-		city: $cache.city.val()
+		address1: $form.find('input[name$="_address1"]').val(),
+		address2: $form.find('input[name$="_address2"]').val(),
+		countryCode: $form.find('select[id$="_country"]').val(),
+		stateCode: $form.find('select[id$="_state"]').val(),
+		postalCode: $form.find('input[name$="_postal"]').val(),
+		city: $form.find('input[name$="_city"]').val()
 	};
 	return util.appendParamsToUrl(url, $.extend(params, extraParams));
 }

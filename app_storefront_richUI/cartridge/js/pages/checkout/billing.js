@@ -10,17 +10,17 @@ var giftcard = require('../../giftcard'),
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
 function setCCFields(data) {
-	$cache.ccOwner.val(data.holder);
-	$cache.ccType.val(data.type);
-	$cache.ccNum.val(data.maskedNumber);
-	$cache.ccMonth.val(data.expirationMonth);
-	$cache.ccYear.val(data.expirationYear);
-	$cache.ccCcv.val("");
+	var $creditCard = $("#PaymentMethod_CREDIT_CARD");
+	$creditCard.find('input[name$="creditCard_owner"]').val(data.holder);
+	$creditCard.find('select[name$="_type"]').val(data.type);
+	$creditCard.find('input[name$="_number"]').val(data.maskedNumber);
+	$creditCard.find('[name$="_month"]').val(data.expirationMonth);
+	$creditCard.find('[name$="_year"]').val(data.expirationYear);
+	$creditCard.find('input[name$="_cvn"]').val('');
 
 	// remove error messages
-	$cache.ccContainer.find(".errormessage").toggleClass("errormessage").filter("span").remove();
-
-	$cache.ccContainer.find(".errorlabel").toggleClass("errorlabel");
+	$creditCard.find(".errormessage").removeClass("errormessage").filter("span").remove();
+	$creditCard.find(".errorlabel").removeClass("errorlabel");
 }
 
 /**

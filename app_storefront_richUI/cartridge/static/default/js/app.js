@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":16,"./pages/compare":18,"./pages/product":20,"./pages/registry":21,"./pages/search":22,"./pages/storefront":23,"./pages/wishlist":24,"./searchplaceholder":29,"./searchsuggest":31,"./searchsuggest-beta":30,"./tooltip":34,"./util":35,"./validator":36}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":16,"./pages/compare":19,"./pages/product":21,"./pages/registry":22,"./pages/search":23,"./pages/storefront":24,"./pages/wishlist":25,"./searchplaceholder":30,"./searchsuggest":32,"./searchsuggest-beta":31,"./tooltip":35,"./util":36,"./validator":37}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":27,"./util":35}],3:[function(require,module,exports){
+},{"./progress":28,"./util":36}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":35}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":36}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -724,7 +724,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":35}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":36}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -745,7 +745,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":35}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":36}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -799,7 +799,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":35}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":36}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -914,7 +914,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":35}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":36}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -942,7 +942,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":35}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":36}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -960,7 +960,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":35}],12:[function(require,module,exports){
+},{"./util":36}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1170,7 +1170,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":34,"../util":35,"../validator":36}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":35,"../util":36,"../validator":37}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1237,7 +1237,7 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":28,"../storeinventory":33,"../util":35,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":29,"../storeinventory":34,"../util":36,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1276,7 +1276,7 @@ exports.init = function () {
 		util.updateStateOptions($form);
 	});
 }
-},{"../../util":35}],15:[function(require,module,exports){
+},{"../../util":36}],15:[function(require,module,exports){
 'use strict';
 
 var giftcard = require('../../giftcard'),
@@ -1289,17 +1289,17 @@ var giftcard = require('../../giftcard'),
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
 function setCCFields(data) {
-	$cache.ccOwner.val(data.holder);
-	$cache.ccType.val(data.type);
-	$cache.ccNum.val(data.maskedNumber);
-	$cache.ccMonth.val(data.expirationMonth);
-	$cache.ccYear.val(data.expirationYear);
-	$cache.ccCcv.val("");
+	var $creditCard = $("#PaymentMethod_CREDIT_CARD");
+	$creditCard.find('input[name$="creditCard_owner"]').val(data.holder);
+	$creditCard.find('select[name$="_type"]').val(data.type);
+	$creditCard.find('input[name$="_number"]').val(data.maskedNumber);
+	$creditCard.find('[name$="_month"]').val(data.expirationMonth);
+	$creditCard.find('[name$="_year"]').val(data.expirationYear);
+	$creditCard.find('input[name$="_cvn"]').val('');
 
 	// remove error messages
-	$cache.ccContainer.find(".errormessage").toggleClass("errormessage").filter("span").remove();
-
-	$cache.ccContainer.find(".errorlabel").toggleClass("errorlabel");
+	$creditCard.find(".errormessage").removeClass("errormessage").filter("span").remove();
+	$creditCard.find(".errorlabel").removeClass("errorlabel");
 }
 
 /**
@@ -1509,78 +1509,40 @@ exports.init = function () {
 		}
 	});
 }
-},{"../../giftcard":6,"../../util":35,"../../validator":36}],16:[function(require,module,exports){
+},{"../../giftcard":6,"../../util":36,"../../validator":37}],16:[function(require,module,exports){
 'use strict';
-
-var ajax = require('../../ajax'),
-	progress = require('../../progress'),
-	tooltip = require('../../tooltip'),
-	util = require('../../util');
 
 var address = require('./address'),
 	billing = require('./billing'),
-	multiship = require('./multiship');
+	multiship = require('./multiship'),
+	shipping = require('./shipping');
 
-var $cache = {};
-
-/**
- * @function
- * @description Initializes the cache of the checkout UI
- */
-function initializeCache() {
-	$cache.checkoutForm = $(".address");
-	$cache.firstName = $cache.checkoutForm.find("input[name$='_firstName']");
-	$cache.lastName = $cache.checkoutForm.find("input[name$='_lastName']");
-	$cache.address1 = $cache.checkoutForm.find("input[name$='_address1']");
-	$cache.address2 = $cache.checkoutForm.find("input[name$='_address2']");
-	$cache.city = $cache.checkoutForm.find("input[name$='_city']");
-	$cache.postalCode = $cache.checkoutForm.find("input[name$='_postal']");
-	$cache.phone = $cache.checkoutForm.find("input[name$='_phone']");
-	$cache.countryCode = $cache.checkoutForm.find("select[id$='_country']");
-	$cache.stateCode = $cache.checkoutForm.find("select[id$='_state']");
-
-	if ($cache.checkoutForm.hasClass("checkout-billing")) {
-		// billing only
-		$cache.ccContainer = $("#PaymentMethod_CREDIT_CARD");
-		$cache.ccOwner = $cache.ccContainer.find("input[name$='creditCard_owner']");
-		$cache.ccType = $cache.ccContainer.find("select[name$='_type']");
-		$cache.ccNum = $cache.ccContainer.find("input[name$='_number']");
-		$cache.ccMonth = $cache.ccContainer.find("[name$='_month']");
-		$cache.ccYear = $cache.ccContainer.find("[name$='_year']");
-		$cache.ccCcv = $cache.ccContainer.find("input[name$='_cvn']");
-	}
-}
 /**
  * @function Initializes the page events depending on the checkout stage (shipping/billing)
  */
-function initializeEvents() {
+exports.init = function () {
 	address.init();
-	if ($(".checkout-shipping").length > 0) {
+	if ($('.checkout-shipping').length > 0) {
 		shipping.init();
 		//on the single shipping page, update the list of shipping methods when the state feild changes
 		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 			shipping.updateShippingMethodList();
 		});
-	} else if ($(".checkout-multi-shipping").length > 0) {
+	} else if ($('.checkout-multi-shipping').length > 0) {
 		multiship.init();
-	} else{
+	} else {
 		billing.init();
 	}
 
 	//if on the order review page and there are products that are not available diable the submit order button
-	if($('.order-summary-footer').length > 0){
-		if($('.notavailable').length > 0){
-			$('.order-summary-footer .submit-order .button-fancy-large').attr( 'disabled', 'disabled' );
+	if ($('.order-summary-footer').length > 0) {
+		if ($('.notavailable').length > 0) {
+			$('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
 		}
 	}
 }
 
-exports.init = function () {
-	initializeCache();
-	initializeEvents();
-};
-
-},{"../../ajax":2,"../../progress":27,"../../tooltip":34,"../../util":35,"./address":14,"./billing":15,"./multiship":17}],17:[function(require,module,exports){
+},{"./address":14,"./billing":15,"./multiship":17,"./shipping":18}],17:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1733,6 +1695,162 @@ exports.init = function () {
 },{"../../dialog":5,"./address":14}],18:[function(require,module,exports){
 'use strict';
 
+var ajax = require('../../ajax'),
+	progress = require('../../progress'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util');
+
+var shippingMethods = null;
+/**
+ * @function
+ * @description Initializes gift message box, if shipment is gift
+ */
+function giftMessageBox() {
+	// show gift message box, if shipment is gift
+	$(".gift-message-text").toggle($("#is-gift-yes")[0].checked);
+}
+
+/**
+ * @function
+ * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
+ */
+function updateSummary() {
+	var $summary = $("#secondary.summary");
+	// indicate progress
+	progress.show($summary);
+
+	// load the updated summary area
+	$summary.load(Urls.summaryRefreshURL, function () {
+		// hide edit shipping method link
+		$summary.fadeIn("fast");
+		$summary.find('.checkout-mini-cart .minishipment .header a').hide();
+		$summary.find('.order-totals-table .order-shipping .label a').hide();
+	});
+}
+
+/**
+ * @function
+ * @description Helper method which constructs a URL for an AJAX request using the
+ * entered address information as URL request parameters.
+ */
+function getShippingMethodURL(url, extraParams) {
+	var $form = $('.address');
+	var params = {
+		address1: $form.find('input[name$="_address1"]').val(),
+		address2: $form.find('input[name$="_address2"]').val(),
+		countryCode: $form.find('select[id$="_country"]').val(),
+		stateCode: $form.find('select[id$="_state"]').val(),
+		postalCode: $form.find('input[name$="_postal"]').val(),
+		city: $form.find('input[name$="_city"]').val()
+	};
+	return util.appendParamsToUrl(url, $.extend(params, extraParams));
+}
+
+/**
+ * @function
+ * @description selects a shipping method for the default shipment and updates the summary section on the right hand side
+ * @param
+ */
+function selectShippingMethod(shippingMethodID) {
+	// nothing entered
+	if(!shippingMethodID) {
+		return;
+	}
+	// attempt to set shipping method
+	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
+	 ajax.getJson({
+		url: url,
+		callback: function (data) {
+			updateSummary();
+			if(!data || !data.shippingMethodID) {
+				window.alert("Couldn't select shipping method.");
+				return false;
+			}
+			// display promotion in UI and update the summary section,
+			// if some promotions were applied
+			$(".shippingpromotions").empty();
+
+			// TODO the for loop below isn't doing anything?
+			// if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
+			// 	var len = data.shippingPriceAdjustments.length;
+			// 	for (var i=0; i < len; i++) {
+			// 		var spa = data.shippingPriceAdjustments[i];
+			// 	}
+			// }
+		}
+	});
+}
+
+/**
+ * @function
+ * @description Make an AJAX request to the server to retrieve the list of applicable shipping methods
+ * based on the merchandise in the cart and the currently entered shipping address
+ * (the address may be only partially entered).  If the list of applicable shipping methods
+ * has changed because new address information has been entered, then issue another AJAX
+ * request which updates the currently selected shipping method (if needed) and also updates
+ * the UI.
+ */
+function updateShippingMethodList() {
+	var $shippingMethodList = $("#shipping-method-list");
+	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
+	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
+
+	 ajax.getJson({
+		url: url,
+		callback: function (data) {
+			if(!data) {
+				window.alert("Couldn't get list of applicable shipping methods.");
+				return false;
+			}
+			if (shippingMethods && shippingMethods.toString() === data.toString()) {
+				// No need to update the UI.  The list has not changed.
+				return true;
+			}
+
+			// We need to update the UI.  The list has changed.
+			// Cache the array of returned shipping methods.
+			shippingMethods = data;
+
+			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
+
+			// indicate progress
+			progress.show($shippingMethodList);
+
+			// load the shipping method form
+			$shippingMethodList.load(smlUrl, function () {
+				$shippingMethodList.fadeIn("fast");
+				// rebind the radio buttons onclick function to a handler.
+				$shippingMethodList.find("[name$='_shippingMethodID']").click(function () {
+					selectShippingMethod($(this).val());
+				});
+
+				// update the summary
+				updateSummary();
+				progress.hide();
+				tooltip.init();
+			});
+		}
+	});
+}
+
+exports.init = function () {
+	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
+		giftMessageBox();
+	});
+
+	$('.address').on('change',
+		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], input[name$="_addressFields_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
+		updateShippingMethodList
+	);
+
+	giftMessageBox();
+	updateShippingMethodList();
+}
+
+exports.updateShippingMethodList = updateShippingMethodList;
+},{"../../ajax":2,"../../progress":28,"../../tooltip":35,"../../util":36}],19:[function(require,module,exports){
+'use strict';
+
 var ajax = require('../ajax'),
 	page = require('../page'),
 	product = require('./product'),
@@ -1774,7 +1892,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":26,"../quickview":28,"./product":20}],19:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":27,"../quickview":29,"./product":21}],20:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -1855,7 +1973,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2357,7 +2475,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":27,"../../quickview":28,"../../send-to-friend":32,"../../storeinventory":33,"../../tooltip":34,"../../util":35,"../cart":13,"./events/quantity":19}],21:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":28,"../../quickview":29,"../../send-to-friend":33,"../../storeinventory":34,"../../tooltip":35,"../../util":36,"../cart":13,"./events/quantity":20}],22:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2529,7 +2647,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":28,"../send-to-friend":32,"../util":35,"./product":20}],22:[function(require,module,exports){
+},{"../ajax":2,"../quickview":29,"../send-to-friend":33,"../util":36,"./product":21}],23:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2721,7 +2839,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../product-compare":25,"../product-tile":26,"../progress":27,"../util":35}],23:[function(require,module,exports){
+},{"../product-compare":26,"../product-tile":27,"../progress":28,"../util":36}],24:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2771,7 +2889,7 @@ exports.init = function () {
 	});
 };
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -2792,7 +2910,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":32,"../util":35,"./product":20}],25:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":33,"../util":36,"./product":21}],26:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3058,7 +3176,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":35}],26:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":36}],27:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3162,7 +3280,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":20,"./quickview":28}],27:[function(require,module,exports){
+},{"./pages/product":21,"./quickview":29}],28:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3195,7 +3313,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3342,7 +3460,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":27,"./util":35}],29:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":28,"./util":36}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3368,7 +3486,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3537,7 +3655,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":35}],31:[function(require,module,exports){
+},{"./util":36}],32:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3713,7 +3831,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":35}],32:[function(require,module,exports){
+},{"./util":36}],33:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3788,7 +3906,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":35,"./validator":36}],33:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":36,"./validator":37}],34:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4132,7 +4250,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":35}],34:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":36}],35:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4154,7 +4272,7 @@ exports.init = function () {
 	});
 };
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4596,7 +4714,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":36}],36:[function(require,module,exports){
+},{"./validator":37}],37:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
