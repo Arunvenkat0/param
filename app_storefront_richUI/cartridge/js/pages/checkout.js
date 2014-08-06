@@ -18,15 +18,16 @@ var $cache = {},
  * @description Helper method which constructs a URL for an AJAX request using the
  * entered address information as URL request parameters.
  */
-function getShippingMethodURL(url) {
-	return util.appendParamsToUrl(url,{
+function getShippingMethodURL(url, extraParams) {
+	var params = {
 		address1: $cache.address1.val(),
 		address2: $cache.address2.val(),
 		countryCode: $cache.countryCode.val(),
 		stateCode: $cache.stateCode.val(),
 		postalCode: $cache.postalCode.val(),
 		city: $cache.city.val()
-	},true);
+	};
+	return util.appendParamsToUrl(url, $.extend(params, extraParams));
 }
 
 /**
@@ -67,7 +68,8 @@ function selectShippingMethod(shippingMethodID) {
 		city: $cache.city.val(),
 		shippingMethodID:shippingMethodID
 	}, true);
-
+	console.log(url);
+	console.log(getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID}));
 	 ajax.getJson({
 		url: url,
 		callback: function (data) {
