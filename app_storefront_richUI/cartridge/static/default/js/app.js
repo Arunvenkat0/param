@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":15,"./pages/compare":16,"./pages/product":18,"./pages/registry":19,"./pages/search":20,"./pages/storefront":21,"./pages/wishlist":22,"./searchplaceholder":27,"./searchsuggest":29,"./searchsuggest-beta":28,"./tooltip":32,"./util":33,"./validator":34}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":15,"./pages/compare":17,"./pages/product":19,"./pages/registry":20,"./pages/search":21,"./pages/storefront":22,"./pages/wishlist":23,"./searchplaceholder":28,"./searchsuggest":30,"./searchsuggest-beta":29,"./tooltip":33,"./util":34,"./validator":35}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":25,"./util":33}],3:[function(require,module,exports){
+},{"./progress":26,"./util":34}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":33}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":34}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -724,7 +724,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":33}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":34}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -745,7 +745,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":33}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":34}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -799,7 +799,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":33}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":34}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -914,7 +914,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":33}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":34}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -942,7 +942,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":33}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":34}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -960,7 +960,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":33}],12:[function(require,module,exports){
+},{"./util":34}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1170,7 +1170,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":32,"../util":33,"../validator":34}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":33,"../util":34,"../validator":35}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1237,7 +1237,7 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":26,"../storeinventory":31,"../util":33,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":27,"../storeinventory":32,"../util":34,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
 var giftcard = require('../../giftcard'),
@@ -1430,7 +1430,7 @@ exports.init = function () {
 		}
 	});
 }
-},{"../../giftcard":6,"../../util":33,"../../validator":34}],15:[function(require,module,exports){
+},{"../../giftcard":6,"../../util":34,"../../validator":35}],15:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1439,11 +1439,10 @@ var ajax = require('../../ajax'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
-var billing = require('./billing');
+var billing = require('./billing'),
+	multiship = require('./multiship');
 
 var $cache = {},
-	isShipping = false,
-	isMultiShipping = false,
 	shippingMethods = null;
 
 /**
@@ -1578,64 +1577,7 @@ function giftMessageBox() {
 	$(".gift-message-text").toggle($("#is-gift-yes")[0].checked);
 
 }
-/**
- * @function
- * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
- */
-function initMultiGiftMessageBox() {
-	$.each( $(".item-list"), function(){
-		var $this = $(this),
-			$isGiftYes = $this.find('.js-isgiftyes'),
-			$isGiftNo = $this.find('.js-isgiftno'),
-			$giftMessage = $this.find('.gift-message-text');
 
-		//handle initial load
-		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display','block');
-		}
-
-		//set event listeners
-		$this.on('change', function(){
-			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display','block');
-			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display','none');
-			}
-		});
-	});
-}
-/**
-* @function
-* @description this function inits the form so that uses client side validation before submitting to the server
-*/
-function initmultishipshipaddress() {
-	var $continue = $('.formactions button'),
-		$selects = $('.select-address');
-
-	var hasEmptySelect = function () {
-		var selectValues = $selects.children(':selected').map(function(){return this.value;});
-		return $.inArray('', selectValues) !== -1;
-	};
-	// if we found a empty value disable the button
-	if (hasEmptySelect()){
-		$continue.attr('disabled','disabled');
-	} else {
-		$continue.removeAttr('disabled');
-	}
-	//add listeners to the selects to enable the continue button
-	$selects.on('change', function(){
-		if (this.value == ''){
-			$continue.attr('disabled','disabled');
-		} else {
-			//check to see if any select box has a empty vlaue
-			if (hasEmptySelect()) {
-				$continue.attr('disabled','disabled');
-			} else {
-				$continue.removeAttr('disabled');
-			}
-		}
-	});
-}
 /**
  * @function
  * @description capture add edit adddress form events
@@ -1750,20 +1692,6 @@ function addressLoad() {
 
 /**
  * @function
- * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
- */
-function multishippingLoad() {
-	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0){
-		initmultishipshipaddress();
-	} else {
-		$('.formactions button').attr('disabled','disabled');
-	}
-	return null;
-}
-
-/**
- * @function
  * @description Fills the Credit Card form with the passed data-parameter and clears the former cvn input
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
@@ -1801,17 +1729,6 @@ function populateCreditCardForm(cardID) {
 	});
 }
 
-
-
-/**
- * @function
- * @description Sets a boolean variable (isShipping) to determine the checkout stage
- */
-function initializeDom() {
-	isShipping = $(".checkout-shipping").length > 0;
-	isMultiShipping = $(".checkout-multi-shipping").length > 0;
-}
-
 /**
  * @function
  * @description Initializes the cache of the checkout UI
@@ -1844,16 +1761,15 @@ function initializeCache() {
  */
 function initializeEvents() {
 	addressLoad();
-	if (isShipping) {
+	if ($(".checkout-shipping").length > 0) {
 		shippingLoad();
-
 		//on the single shipping page, update the list of shipping methods when the state feild changes
 		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 			updateShippingMethodList();
 		});
 	}
-	else if (isMultiShipping) {
-		multishippingLoad();
+	else if ($(".checkout-multi-shipping").length > 0) {
+		multiship.init();
 	} else{
 		billing.init();
 	}
@@ -1878,11 +1794,87 @@ function initializeEvents() {
 
 exports.init = function () {
 	initializeCache();
-	initializeDom();
 	initializeEvents();
 };
 
-},{"../../ajax":2,"../../dialog":5,"../../progress":25,"../../tooltip":32,"../../util":33,"./billing":14}],16:[function(require,module,exports){
+},{"../../ajax":2,"../../dialog":5,"../../progress":26,"../../tooltip":33,"../../util":34,"./billing":14,"./multiship":16}],16:[function(require,module,exports){
+'use strict';
+
+/**
+* @function
+* @description this function inits the form so that uses client side validation before submitting to the server
+*/
+function initmultishipshipaddress() {
+	var $continue = $('.formactions button'),
+		$selects = $('.select-address');
+
+	var hasEmptySelect = function () {
+		var selectValues = $selects.children(':selected').map(function (){
+			return this.value;
+		});
+		return $.inArray('', selectValues) !== -1;
+	};
+	// if we found a empty value disable the button
+	if (hasEmptySelect()){
+		$continue.attr('disabled','disabled');
+	} else {
+		$continue.removeAttr('disabled');
+	}
+	//add listeners to the selects to enable the continue button
+	$selects.on('change', function(){
+		if (this.value === ''){
+			$continue.attr('disabled','disabled');
+		} else {
+			//check to see if any select box has a empty vlaue
+			if (hasEmptySelect()) {
+				$continue.attr('disabled','disabled');
+			} else {
+				$continue.removeAttr('disabled');
+			}
+		}
+	});
+}
+
+/**
+ * @function
+ * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
+ */
+function initMultiGiftMessageBox() {
+	$.each( $(".item-list"), function(){
+		var $this = $(this),
+			$isGiftYes = $this.find('.js-isgiftyes'),
+			$isGiftNo = $this.find('.js-isgiftno'),
+			$giftMessage = $this.find('.gift-message-text');
+
+		//handle initial load
+		if ($isGiftYes.is(':checked')) {
+			$giftMessage.css('display','block');
+		}
+
+		//set event listeners
+		$this.on('change', function(){
+			if ($isGiftYes.is(':checked')) {
+				$giftMessage.css('display','block');
+			} else if ($isGiftNo.is(':checked')) {
+				$giftMessage.css('display','none');
+			}
+		});
+	});
+}
+
+/**
+ * @function
+ * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
+ */
+exports.init = function () {
+	initMultiGiftMessageBox();
+	if ($(".cart-row .shippingaddress .select-address").length > 0){
+		initmultishipshipaddress();
+	} else {
+		$('.formactions button').attr('disabled','disabled');
+	}
+}
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1926,7 +1918,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":24,"../quickview":26,"./product":18}],17:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":25,"../quickview":27,"./product":19}],18:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2007,7 +1999,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2509,7 +2501,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":25,"../../quickview":26,"../../send-to-friend":30,"../../storeinventory":31,"../../tooltip":32,"../../util":33,"../cart":13,"./events/quantity":17}],19:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":26,"../../quickview":27,"../../send-to-friend":31,"../../storeinventory":32,"../../tooltip":33,"../../util":34,"../cart":13,"./events/quantity":18}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2681,7 +2673,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":26,"../send-to-friend":30,"../util":33,"./product":18}],20:[function(require,module,exports){
+},{"../ajax":2,"../quickview":27,"../send-to-friend":31,"../util":34,"./product":19}],21:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2873,7 +2865,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../product-compare":23,"../product-tile":24,"../progress":25,"../util":33}],21:[function(require,module,exports){
+},{"../product-compare":24,"../product-tile":25,"../progress":26,"../util":34}],22:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2923,7 +2915,7 @@ exports.init = function () {
 	});
 };
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -2944,7 +2936,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":30,"../util":33,"./product":18}],23:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":31,"../util":34,"./product":19}],24:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3210,7 +3202,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":33}],24:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":34}],25:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3314,7 +3306,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":18,"./quickview":26}],25:[function(require,module,exports){
+},{"./pages/product":19,"./quickview":27}],26:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3347,7 +3339,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3494,7 +3486,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":25,"./util":33}],27:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":26,"./util":34}],28:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3520,7 +3512,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3689,7 +3681,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":33}],29:[function(require,module,exports){
+},{"./util":34}],30:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3865,7 +3857,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":33}],30:[function(require,module,exports){
+},{"./util":34}],31:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3940,7 +3932,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":33,"./validator":34}],31:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":34,"./validator":35}],32:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4284,7 +4276,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":33}],32:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":34}],33:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4306,7 +4298,7 @@ exports.init = function () {
 	});
 };
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4748,7 +4740,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":34}],34:[function(require,module,exports){
+},{"./validator":35}],35:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
