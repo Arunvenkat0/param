@@ -38,6 +38,7 @@
 		SELECT_BONUS_PRODUCTS 			: Resource.msg('product.selectbonusproducts','product',null),
 		SELECT_BONUS_PRODUCT 			: Resource.msg('product.selectbonusproduct','product',null),
 		BONUS_PRODUCT_MAX 				: Resource.msg('product.bonusproductsmax','product',null),
+		BONUS_PRODUCT_TOOMANY 			: Resource.msg('product.bonusproductstoomany','product',null),
 		SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext','search', null),
 		SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('forms.subscribe.email.default','forms', 'Email Address'),
 
@@ -150,7 +151,8 @@
 		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
 		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
 		billing						: URLUtils.url('COBilling-Start').toString(),
-		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString()
+		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
+		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString()
 	};
 
 	userSettings = {

@@ -150,8 +150,7 @@ figure {
  */
 hr {
   -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   height: 0; }
 
 /**
@@ -243,9 +242,8 @@ input {
  * 2. Remove excess padding in IE 8/9/10.
  */
 input[type="checkbox"], input[type="radio"] {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */ }
@@ -267,7 +265,6 @@ input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
   -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box; }
 
@@ -528,8 +525,7 @@ header {
   border-radius: 0 0 0 0;
   border-style: solid;
   border-width: 1px;
-  -webkit-box-shadow: 4px 2px 10px 0 rgba(66, 66, 66, 0.1);
-          box-shadow: 4px 2px 10px 0 rgba(66, 66, 66, 0.1);
+  box-shadow: 4px 2px 10px 0 rgba(66, 66, 66, 0.1);
   color: #414141;
   font-size: 0.9em;
   line-height: 1.5em;
@@ -1396,8 +1392,7 @@ ul.level-1 a {
 
 div.level-2 {
   background: none repeat scroll 0 0 #EFEFEF;
-  -webkit-box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
-          box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
+  box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
   display: none;
   margin: 0;
   padding: 15px;
@@ -1408,8 +1403,7 @@ div.level-2 {
 
 div.level-2 .menu-wrapper {
   background: none repeat scroll 0 0 #FFFFFF;
-  -webkit-box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
-          box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
+  box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
   overflow: hidden; }
 
 div.level-2 ul.level-2 {
@@ -2097,8 +2091,7 @@ ul.search-result-items .new-row {
 
 ul.search-result-items .grid-tile {
   background: none repeat scroll 0 0 #FFFFFF;
-  -webkit-box-shadow: 0 0 9px #CCCCCC;
-          box-shadow: 0 0 9px #CCCCCC;
+  box-shadow: 0 0 9px #CCCCCC;
   float: left;
   list-style: none outside none;
   margin: 0 0 2% 20px;
@@ -3903,16 +3896,13 @@ ul.payment-list li {
 
 #home-promo-shop-shoes {
   background-attachment: scroll;
-  -webkit-background-clip: border-box;
-          background-clip: border-box;
+  background-clip: border-box;
   background-color: transparent;
   background-image: url("../images/homepage/home-promo-shoes.png");
-  -webkit-background-origin: padding-box;
-          background-origin: padding-box;
+  background-origin: padding-box;
   background-position: left top;
   background-repeat: no-repeat;
-  -webkit-background-size: 100% auto;
-          background-size: 100% auto;
+  background-size: 100% auto;
   height: 413px;
   margin: auto;
   max-width: 320px;
@@ -3952,16 +3942,13 @@ ul.payment-list li {
 
 #home-promo-free-shipping {
   background-attachment: scroll;
-  -webkit-background-clip: border-box;
-          background-clip: border-box;
+  background-clip: border-box;
   background-color: transparent;
   background-image: url("../images/homepage/home-promo-free-shipping.png");
-  -webkit-background-origin: padding-box;
-          background-origin: padding-box;
+  background-origin: padding-box;
   background-position: center top;
   background-repeat: no-repeat;
-  -webkit-background-size: 100% auto;
-          background-size: 100% auto;
+  background-size: 100% auto;
   height: 413px;
   margin: auto;
   max-width: 319px;
@@ -5213,7 +5200,19 @@ ul.store-list .selected {
   .pt_order-confirmation .order-shipment-table th {
     display: none; }
   .pt_order-confirmation .order-shipment-table td {
-    font-size: 0.8em; }
+    font-size: 0.9em;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    float: left; }
+  .pt_order-confirmation .order-shipment-table .line-item-details {
+    width: 70%; }
+  .pt_order-confirmation .order-shipment-table .line-item-quantity {
+    width: 10%; }
+  .pt_order-confirmation .order-shipment-table .line-item-price {
+    width: 20%; }
+  .pt_order-confirmation .order-shipment-table .order-shipment-details {
+    border: none;
+    width: 100%; }
   .pt_order-confirmation .order-shipment-table .shipping-method {
     padding-left: 0; }
   .order-shipment-details .order-shipment-address {
