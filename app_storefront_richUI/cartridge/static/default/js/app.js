@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":14,"./pages/compare":15,"./pages/product":17,"./pages/registry":18,"./pages/search":19,"./pages/storefront":20,"./pages/wishlist":21,"./searchplaceholder":26,"./searchsuggest":28,"./searchsuggest-beta":27,"./tooltip":31,"./util":32,"./validator":33}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":15,"./pages/compare":16,"./pages/product":18,"./pages/registry":19,"./pages/search":20,"./pages/storefront":21,"./pages/wishlist":22,"./searchplaceholder":27,"./searchsuggest":29,"./searchsuggest-beta":28,"./tooltip":32,"./util":33,"./validator":34}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":24,"./util":32}],3:[function(require,module,exports){
+},{"./progress":25,"./util":33}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":32}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":33}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -724,7 +724,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":32}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":33}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -745,7 +745,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":32}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":33}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -799,7 +799,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":32}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":33}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -914,7 +914,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":32}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":33}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -942,7 +942,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":32}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":33}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -960,7 +960,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":32}],12:[function(require,module,exports){
+},{"./util":33}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1170,7 +1170,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":31,"../util":32,"../validator":33}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":32,"../util":33,"../validator":34}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1237,16 +1237,209 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":25,"../storeinventory":30,"../util":32,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":26,"../storeinventory":31,"../util":33,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
-	dialog = require('../dialog'),
-	giftcard = require('../giftcard'),
-	progress = require('../progress'),
-	tooltip = require('../tooltip'),
-	util = require('../util'),
-	validator = require('../validator')
+var giftcard = require('../../giftcard'),
+	util = require('../../util'),
+	validator = require('../../validator');
+/**
+ * @function
+ * @description Changes the payment method form depending on the passed paymentMethodID
+ * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to
+ */
+function changePaymentMethod(paymentMethodID) {
+	var $paymentMethods = $('.payment-method');
+	$paymentMethods.removeClass('payment-method-expanded');
+	var pmc = $paymentMethods.filter('#PaymentMethod_' + paymentMethodID);
+	if (pmc.length===0) {
+		pmc = $('#PaymentMethod_Custom');
+	}
+	pmc.addClass('payment-method-expanded');
+
+	// ensure checkbox of payment method is checked
+	$('#is-' + paymentMethodID)[0].checked = true;
+
+	var bmlForm = $('#PaymentMethod_BML');
+	bmlForm.find('select[name$="_year"]').removeClass('required');
+	bmlForm.find('select[name$="_month"]').removeClass('required');
+	bmlForm.find('select[name$="_day"]').removeClass('required');
+	bmlForm.find('input[name$="_ssn"]').removeClass('required');
+
+	if (paymentMethodID === 'BML') {
+		var yr = bmlForm.find('select[name$="_year"]');
+		bmlForm.find('select[name$="_year"]').addClass('required');
+		bmlForm.find('select[name$="_month"]').addClass('required');
+		bmlForm.find('select[name$="_day"]').addClass('required');
+		bmlForm.find('input[name$="_ssn"]').addClass('required');
+	}
+	validator.init();
+}
+
+/**
+ * @function
+ * @description loads billing address, Gift Certificates, Coupon and Payment methods
+ */
+exports.init = function () {
+	var $checkoutForm = $('.checkout-billing'),
+		$paymentMethodId = $('input[name$="_selectedPaymentMethodID"]'),
+		$addGiftCert = $('#add-giftcert'),
+		$giftCertCode = $('input[name$="_giftCertCode"]'),
+		$addCoupon = $('#add-coupon'),
+		$couponCode = $('input[name$="_couponCode"]');
+
+	if( !$paymentMethodId ) return;
+
+	$paymentMethodId.on('click', function () {
+		changePaymentMethod($(this).val());
+	});
+
+	// get selected payment method from payment method form
+	var $selectedPaymentMethodId = $paymentMethodId.filter(':checked');
+	if($('.payment-method-options').length > 0 ){
+		changePaymentMethod($selectedPaymentMethodId.length===0 ? 'CREDIT_CARD' : $selectedPaymentMethodId.val());
+	}
+	// select credit card from list
+	$("#creditCardList").on('change', function () {
+		var cardUUID = $(this).val();
+		if(!cardUUID) { return; }
+		populateCreditCardForm(cardUUID);
+	});
+
+	// handle whole form submit (bind click to continue checkout button)
+	// append form fields of current payment form to this submit
+	// in order to validate the payment method form inputs too
+
+	$('button[name$="_billing_save"]').on('click', function (e) {
+		// determine if the order total was paid using gift cert or a promotion
+		if ($('#noPaymentNeeded').length > 0 && $('.giftcert-pi').length > 0) {
+			// as a safety precaution, uncheck any existing payment methods
+			$selectedPaymentMethodId.removeAttr('checked');
+			// add selected radio button with gift card payment method
+			$('<input/>').attr({
+				name: $paymentMethodId.first().attr('name'),
+				type: 'radio',
+				checked: 'checked',
+				value: Constants.PI_METHOD_GIFT_CERTIFICATE
+			}).appendTo($checkoutForm);
+		}
+
+		var tc = $checkoutForm.find('input[name$="bml_termsandconditions"]');
+		if ($paymentMethodId.filter(':checked').val()==='BML' && !$checkoutForm.find('input[name$="bml_termsandconditions"]')[0].checked) {
+			alert(Resources.BML_AGREE_TO_TERMS);
+			return false;
+		}
+
+	});
+
+	$('#check-giftcert').on('click', function (e) {
+		e.preventDefault();
+		$balance = $('.balance');
+		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
+			var error = $balance.find('span.error');
+			if (error.length===0) {
+				error = $('<span>').addClass('error').appendTo($balance);
+			}
+			error.html(Resources.GIFT_CERT_MISSING);
+			return;
+		}
+
+		giftcard.checkBalance($giftCertCode.val(), function (data) {
+			if (!data || !data.giftCertificate) {
+				$balance.html(Resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
+				return;
+			}
+			$balance.html(Resources.GIFT_CERT_BALANCE + ' ' + data.giftCertificate.balance).removeClass('error').addClass('success');
+		});
+	});
+
+	$addGiftCert.on('click', function(e) {
+		e.preventDefault();
+		var code = $giftCertCode.val(),
+			$error = $checkoutForm.find('.giftcert-error');
+		if (code.length === 0) {
+			$error.html(Resources.GIFT_CERT_MISSING);
+			return;
+		}
+
+		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
+		$.getJSON(url, function(data) {
+			var fail = false;
+			var msg = '';
+			if (!data) {
+				msg = Resources.BAD_RESPONSE;
+				fail = true;
+			} else if (!data.success) {
+				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
+				fail = true;
+			}
+			if (fail) {
+				$error.html(msg);
+				return;
+			} else {
+				window.location.assign(Urls.billing);
+			}
+		});
+	});
+
+	$addCoupon.on('click', function(e){
+		e.preventDefault();
+		var $error = $checkoutForm.find('.coupon-error'),
+			code = $couponCode.val();
+		if (code.length===0) {
+			$error.html(Resources.COUPON_CODE_MISSING);
+			return;
+		}
+
+		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: 'ajax'});
+		$.getJSON(url, function(data) {
+			var fail = false;
+			var msg = '';
+			if (!data) {
+				msg = Resources.BAD_RESPONSE;
+				fail = true;
+			}
+			else if (!data.success) {
+				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
+				fail = true;
+			}
+			if (fail) {
+				$error.html(msg);
+				return;
+			}
+
+			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
+			//this will force a page refresh to display the coupon message based on a parameter message
+			if(data.success && data.baskettotal==0){
+				window.location.assign(Urls.billing);
+			}
+		});
+	});
+
+	// trigger events on enter
+	$couponCode.on('keydown', function(e) {
+		if (e.which === 13) {
+			e.preventDefault();
+			$addCoupon.click();
+		}
+	});
+	$giftCertCode.on('keydown', function(e) {
+		if (e.which === 13) {
+			e.preventDefault();
+			$addGiftCert.click();
+		}
+	});
+}
+},{"../../giftcard":6,"../../util":33,"../../validator":34}],15:[function(require,module,exports){
+'use strict';
+
+var ajax = require('../../ajax'),
+	dialog = require('../../dialog'),
+	progress = require('../../progress'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util');
+
+var billing = require('./billing');
 
 var $cache = {},
 	isShipping = false,
@@ -1299,17 +1492,7 @@ function selectShippingMethod(shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
-	var url = util.appendParamsToUrl(Urls.selectShippingMethodsList, {
-		address1: $cache.address1.val(),
-		address2: $cache.address2.val(),
-		countryCode: $cache.countryCode.val(),
-		stateCode: $cache.stateCode.val(),
-		postalCode: $cache.postalCode.val(),
-		city: $cache.city.val(),
-		shippingMethodID:shippingMethodID
-	}, true);
-	console.log(url);
-	console.log(getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID}));
+	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
 	 ajax.getJson({
 		url: url,
 		callback: function (data) {
@@ -1581,38 +1764,6 @@ function multishippingLoad() {
 
 /**
  * @function
- * @description Changes the payment method form depending on the passed paymentMethodID
- * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to
- */
-function changePaymentMethod(paymentMethodID) {
-	var $paymentMethods = $('.payment-method');
-	$paymentMethods.removeClass("payment-method-expanded");
-	var pmc = $paymentMethods.filter("#PaymentMethod_" + paymentMethodID);
-	if (pmc.length===0) {
-		pmc = $("#PaymentMethod_Custom");
-	}
-	pmc.addClass("payment-method-expanded");
-
-	// ensure checkbox of payment method is checked
-	$("#is-" + paymentMethodID)[0].checked = true;
-
-	var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
-	bmlForm.find("select[name$='_year']").removeClass("required");
-	bmlForm.find("select[name$='_month']").removeClass("required");
-	bmlForm.find("select[name$='_day']").removeClass("required");
-	bmlForm.find("input[name$='_ssn']").removeClass("required");
-
-	if (paymentMethodID==="BML") {
-		var yr = bmlForm.find("select[name$='_year']");
-		bmlForm.find("select[name$='_year']").addClass("required");
-		bmlForm.find("select[name$='_month']").addClass("required");
-		bmlForm.find("select[name$='_day']").addClass("required");
-		bmlForm.find("input[name$='_ssn']").addClass("required");
-	}
-	validator.init();
-}
-/**
- * @function
  * @description Fills the Credit Card form with the passed data-parameter and clears the former cvn input
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
@@ -1650,159 +1801,7 @@ function populateCreditCardForm(cardID) {
 	});
 }
 
-/**
- * @function
- * @description loads billing address, Gift Certificates, Coupon and Payment methods
- */
-function billingLoad() {
-	var $paymentMethodId = $('input[name$="_selectedPaymentMethodID"]'),
-		$addGiftCert = $('#add-giftcert'),
-		$giftCertCode = $('input[name$="_giftCertCode"]'),
-		$addCoupon = $('#add-coupon'),
-		$couponCode = $('input[name$="_couponCode"]');
 
-	if( !$paymentMethodId ) return;
-
-	$paymentMethodId.on("click", function () {
-		changePaymentMethod($(this).val());
-	});
-
-	// get selected payment method from payment method form
-	var $selectedPaymentMethodId = $paymentMethodId.filter(":checked");
-	if($('.payment-method-options').length > 0 ){
-		changePaymentMethod($selectedPaymentMethodId.length===0 ? "CREDIT_CARD" : $selectedPaymentMethodId.val());
-	}
-	// select credit card from list
-	$cache.ccList.on("change", function () {
-		var cardUUID = $(this).val();
-		if(!cardUUID) { return; }
-		populateCreditCardForm(cardUUID);
-	});
-
-	// handle whole form submit (bind click to continue checkout button)
-	// append form fields of current payment form to this submit
-	// in order to validate the payment method form inputs too
-
-	$('button[name$="_billing_save"]').on('click', function (e) {
-		// determine if the order total was paid using gift cert or a promotion
-		if ($("#noPaymentNeeded").length > 0 && $(".giftcert-pi").length > 0) {
-			// as a safety precaution, uncheck any existing payment methods
-			$selectedPaymentMethodId.removeAttr("checked");
-			// add selected radio button with gift card payment method
-			$("<input/>").attr({
-				name: $paymentMethodId.first().attr("name"),
-				type: "radio",
-				checked: "checked",
-				value: Constants.PI_METHOD_GIFT_CERTIFICATE
-			}).appendTo($cache.checkoutForm);
-		}
-
-		var tc = $cache.checkoutForm.find("input[name$='bml_termsandconditions']");
-		if ($paymentMethodId.filter(":checked").val()==="BML" && !$cache.checkoutForm.find("input[name$='bml_termsandconditions']")[0].checked) {
-			alert(Resources.BML_AGREE_TO_TERMS);
-			return false;
-		}
-
-	});
-
-	$('#check-giftcert').on("click", function (e) {
-		e.preventDefault();
-		$balance = $('.balance');
-		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
-			var error = $balance.find("span.error");
-			if (error.length===0) {
-				error = $("<span>").addClass("error").appendTo($balance);
-			}
-			error.html(Resources.GIFT_CERT_MISSING);
-			return;
-		}
-
-		giftcard.checkBalance($giftCertCode.val(), function (data) {
-			if (!data || !data.giftCertificate) {
-				$balance.html(Resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
-				return;
-			}
-			$balance.html(Resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
-		});
-	});
-
-	$addGiftCert.on('click', function(e) {
-		e.preventDefault();
-		var code = $giftCertCode.val(),
-			$error = $cache.checkoutForm.find('.giftcert-error');
-		if (code.length === 0) {
-			$error.html(Resources.GIFT_CERT_MISSING);
-			return;
-		}
-
-		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
-		$.getJSON(url, function(data) {
-			var fail = false;
-			var msg = '';
-			if (!data) {
-				msg = Resources.BAD_RESPONSE;
-				fail = true;
-			} else if (!data.success) {
-				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
-				fail = true;
-			}
-			if (fail) {
-				$error.html(msg);
-				return;
-			} else {
-				window.location.assign(Urls.billing);
-			}
-		});
-	});
-
-	$addCoupon.on("click", function(e){
-		e.preventDefault();
-		var $error = $cache.checkoutForm.find('.coupon-error'),
-			code = $couponCode.val();
-		if (code.length===0) {
-			$error.html(Resources.COUPON_CODE_MISSING);
-			return;
-		}
-
-		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: "ajax"});
-		$.getJSON(url, function(data) {
-			var fail = false;
-			var msg = "";
-			if (!data) {
-				msg = Resources.BAD_RESPONSE;
-				fail = true;
-			}
-			else if (!data.success) {
-				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
-				fail = true;
-			}
-			if (fail) {
-				$error.html(msg);
-				return;
-			}
-
-			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
-			//this will force a page refresh to display the coupon message based on a parameter message
-			if(data.success && data.baskettotal==0){
-				window.location.assign(Urls.billing);
-			}
-		});
-	});
-
-	// trigger events on enter
-	$couponCode.on('keydown', function(e) {
-		if (e.which === 13) {
-			e.preventDefault();
-			$addCoupon.click();
-		}
-	});
-	$giftCertCode.on('keydown', function(e) {
-		if (e.which === 13) {
-			e.preventDefault();
-			$addGiftCert.click();
-		}
-	});
-}
 
 /**
  * @function
@@ -1832,7 +1831,6 @@ function initializeCache() {
 	if ($cache.checkoutForm.hasClass("checkout-billing")) {
 		// billing only
 		$cache.ccContainer = $("#PaymentMethod_CREDIT_CARD");
-		$cache.ccList = $("#creditCardList");
 		$cache.ccOwner = $cache.ccContainer.find("input[name$='creditCard_owner']");
 		$cache.ccType = $cache.ccContainer.find("select[name$='_type']");
 		$cache.ccNum = $cache.ccContainer.find("input[name$='_number']");
@@ -1854,11 +1852,10 @@ function initializeEvents() {
 			updateShippingMethodList();
 		});
 	}
-	else if(isMultiShipping){
+	else if (isMultiShipping) {
 		multishippingLoad();
-	}
-	else{
-		billingLoad();
+	} else{
+		billing.init();
 	}
 
 	//if on the order review page and there are products that are not available diable the submit order button
@@ -1885,7 +1882,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../ajax":2,"../dialog":5,"../giftcard":6,"../progress":24,"../tooltip":31,"../util":32,"../validator":33}],15:[function(require,module,exports){
+},{"../../ajax":2,"../../dialog":5,"../../progress":25,"../../tooltip":32,"../../util":33,"./billing":14}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1929,7 +1926,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":23,"../quickview":25,"./product":17}],16:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":24,"../quickview":26,"./product":18}],17:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2010,7 +2007,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2512,7 +2509,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":24,"../../quickview":25,"../../send-to-friend":29,"../../storeinventory":30,"../../tooltip":31,"../../util":32,"../cart":13,"./events/quantity":16}],18:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":25,"../../quickview":26,"../../send-to-friend":30,"../../storeinventory":31,"../../tooltip":32,"../../util":33,"../cart":13,"./events/quantity":17}],19:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2684,7 +2681,7 @@ exports.init = function () {
 	product.initAddToCart();
 };
 
-},{"../ajax":2,"../quickview":25,"../send-to-friend":29,"../util":32,"./product":17}],19:[function(require,module,exports){
+},{"../ajax":2,"../quickview":26,"../send-to-friend":30,"../util":33,"./product":18}],20:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2876,7 +2873,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../product-compare":22,"../product-tile":23,"../progress":24,"../util":32}],20:[function(require,module,exports){
+},{"../product-compare":23,"../product-tile":24,"../progress":25,"../util":33}],21:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2926,7 +2923,7 @@ exports.init = function () {
 	});
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -2947,7 +2944,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":29,"../util":32,"./product":17}],22:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":30,"../util":33,"./product":18}],23:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3213,7 +3210,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":32}],23:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":33}],24:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3317,7 +3314,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":17,"./quickview":25}],24:[function(require,module,exports){
+},{"./pages/product":18,"./quickview":26}],25:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3350,7 +3347,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3497,7 +3494,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":24,"./util":32}],26:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":25,"./util":33}],27:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3523,7 +3520,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3692,7 +3689,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":32}],28:[function(require,module,exports){
+},{"./util":33}],29:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3868,7 +3865,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":32}],29:[function(require,module,exports){
+},{"./util":33}],30:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3943,7 +3940,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":32,"./validator":33}],30:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":33,"./validator":34}],31:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4287,7 +4284,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":32}],31:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":33}],32:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4309,7 +4306,7 @@ exports.init = function () {
 	});
 };
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4751,7 +4748,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":33}],33:[function(require,module,exports){
+},{"./validator":34}],34:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
