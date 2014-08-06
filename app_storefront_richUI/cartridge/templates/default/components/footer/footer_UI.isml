@@ -17,9 +17,9 @@
 <script type="text/javascript"><isinclude template="resources/appresources"/></script>
 <script src="${URLUtils.staticURL('/js/app.js')}"></script>
 <isif condition="${!('pageContext' in this) || empty(pageContext)}">
-<isscript>pageContext = new Object();</isscript>
+	<isscript>pageContext = new Object();</isscript>
 </isif>
-<script>app.page.setContext(<isprint value="${JSON.stringify(pageContext)}" encoding="off"/>);</script>
+<script>pageContext = <isprint value="${JSON.stringify(pageContext)}" encoding="off"/>;</script>
 <script>
 var meta = "${pdict.CurrentPageMetaData.description}";
 var keywords = "${pdict.CurrentPageMetaData.keywords}";

@@ -9,12 +9,17 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "browserify": "^5.0.8",
     "grunt-autoprefixer": "^0.8.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^0.14.0",
     "gulp": "^3.8.5",
     "gulp-autoprefixer": "0.0.8",
-    "gulp-sass": "^0.7.2"
+    "gulp-sass": "^0.7.2",
+    "gulp-util": "^3.0.0",
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^1.0.0",
+    "xtend": "^3.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
