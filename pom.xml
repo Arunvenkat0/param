@@ -13,7 +13,7 @@
   </scm>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dw.ecom</groupId>
+    <groupId>com.demandware.ecom</groupId>
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
