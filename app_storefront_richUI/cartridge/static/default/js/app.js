@@ -1253,7 +1253,7 @@ exports.init = function () {
 		var selected = $(this).children(':selected').first();
 		var selectedAddress = $(selected).data('address');
 		if (!selectedAddress) { return; }
-		util.fillAddressFrields(selectedAddress, $form);
+		util.fillAddressFields(selectedAddress, $form);
 		updateShippingMethodList();
 		// re-validate the form
 		$form.validate().form();
