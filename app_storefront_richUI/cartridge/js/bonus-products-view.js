@@ -22,7 +22,7 @@ function getBonusProducts() {
 	for (i = 0, len = selectedList.length; i < len; i++) {
 		var p = {
 			pid : selectedList[i].pid,
-			qty : selectedList[i].qty, 
+			qty : selectedList[i].qty,
 			options : {}
 		};
 		var a, alen, bp = selectedList[i];
@@ -119,7 +119,11 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('click', 'button.button-select-bonus', function (e) {
+	.on('change', '.input-text', function (e){
+		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
+		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
+	})
+	.on('click', '.button-select-bonus', function (e) {
 		e.preventDefault();
 		if (selectedList.length>=maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
@@ -132,6 +136,12 @@ function initializeGrid () {
 			uuid = form.find('input[name="productUUID"]').val(),
 			qtyVal = form.find('input[name="Quantity"]').val(),
 			qty = isNaN(qtyVal) ? 1 : (+qtyVal);
+
+		if (qty > maxItems) {
+			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+			form.find('.quantity-error').text(Resources.BONUS_PRODUCT_TOOMANY);
+			return;
+		}
 
 		var product = {
 			uuid : uuid,
@@ -175,7 +185,7 @@ function initializeGrid () {
 		var bonusProducts = getBonusProducts();
 		if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
 			bonusProducts.bonusproducts[0].product.qty = maxItems;
-		} 
+		}
 		// make the server call
 		$.ajax({
 			type: 'POST',
@@ -200,7 +210,7 @@ function initializeGrid () {
 		.always(function () {
 			$bonusProduct.dialog('close');
 		});
-		
+
 	});
 }
 
