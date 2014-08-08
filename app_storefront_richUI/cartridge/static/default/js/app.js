@@ -1253,19 +1253,7 @@ exports.init = function () {
 		var selected = $(this).children(':selected').first();
 		var selectedAddress = $(selected).data('address');
 		if (!selectedAddress) { return; }
-		// TODO fill in the fields using the same function as the addEditAddress $selectButton
-		for (var field in selectedAddress) {
-			// if the key in selectedAddress object ends with 'Code', remove that suffix
-			$form.find('[name$="' + field.replace('Code', '') + '"]').val(selectedAddress[field]);
-			// update the state fields
-			if (field === 'countryCode') {
-				$form.find('[name$="' + field.replace('Code', '') + '"]').trigger('change');
-				// retrigger state selection after country has changed
-				// this results in duplication of the state code, but is a necessary evil
-				// for now because sometimes countryCode comes after stateCode
-				$form.find('[name$="state"]').val(selectedAddress['stateCode']);
-			}
-		}
+		util.fillAddressFrields(selectedAddress, $form);
 		updateShippingMethodList();
 		// re-validate the form
 		$form.validate().form();
@@ -1546,7 +1534,8 @@ exports.init = function () {
 'use strict';
 
 var address = require('./address'),
-	dialog = require('../../dialog');
+	dialog = require('../../dialog'),
+	util = require('../../util');
 
 /**
 * @function
@@ -1629,10 +1618,7 @@ function addEditAddress(target) {
 			})[0];
 			add = false;
 			// proceed to fill the form with the selected address
-			for (var field in selectedAddress) {
-				// if the key in selectedAddress object ends with 'Code', remove that suffix
-				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
-			}
+			util.fillAddressFields(selectedAddress, $addressForm);
 		}
 	});
 
@@ -1692,7 +1678,7 @@ exports.init = function () {
 		return false;
 	});
 }
-},{"../../dialog":5,"./address":14}],18:[function(require,module,exports){
+},{"../../dialog":5,"../../util":36,"./address":14}],18:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2486,7 +2472,7 @@ var ajax = require('../ajax'),
 
 /**
  * @function
- * @description Loads address details to a given address and fills the 'Pre-Event-Shipping' address form
+ * @description Loads address details to a given address and fills the address form
  * @param {String} addressID The ID of the address to which data will be loaded
  */
 function populateForm(addressID, $form) {
@@ -2506,9 +2492,9 @@ function populateForm(addressID, $form) {
 			$form.find('[name$="_address1"]').val(data.address.address1);
 			$form.find('[name$="_address2"]').val(data.address.address2);
 			$form.find('[name$="_city"]').val(data.address.city);
+			$form.find('[name$="_country"]').val(data.address.countryCode).trigger('change');
 			$form.find('[name$="_postal"]').val(data.address.postalCode);
 			$form.find('[name$="_state"]').val(data.address.stateCode);
-			$form.find('[name$="_country"]').val(data.address.countryCode);
 			$form.find('[name$="_phone"]').val(data.address.phone);
 			// $form.parent('form').validate().form();
 		}
@@ -2529,7 +2515,7 @@ function initializeEvents() {
 		$(':input', $beforeAddress).each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
-			$afterField.val($(this).val());
+			$afterField.val($(this).val()).trigger('change');
 		});
 	})
 	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
@@ -4538,6 +4524,21 @@ var util = {
 		}
 		var url = this.appendParamsToUrl(Urls.appResources, params);
 		$.getJSON(url, callback);
+	},
+	fillAddressFields: function (address, $form) {
+		for (var field in address) {
+			// if the key in address object ends with 'Code', remove that suffix
+			// keys that ends with 'Code' are postalCode, stateCode and countryCode
+			$form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);
+			// update the state fields
+			if (field === 'countryCode') {
+				$form.find('[name$="country"]').trigger('change');
+				// retrigger state selection after country has changed
+				// this results in duplication of the state code, but is a necessary evil
+				// for now because sometimes countryCode comes after stateCode
+				$form.find('[name$="state"]').val(address['stateCode']);
+			}
+		}
 	},
 	/**
 	 * @function

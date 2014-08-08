@@ -8,7 +8,7 @@ var ajax = require('../ajax'),
 
 /**
  * @function
- * @description Loads address details to a given address and fills the 'Pre-Event-Shipping' address form
+ * @description Loads address details to a given address and fills the address form
  * @param {String} addressID The ID of the address to which data will be loaded
  */
 function populateForm(addressID, $form) {
@@ -28,9 +28,9 @@ function populateForm(addressID, $form) {
 			$form.find('[name$="_address1"]').val(data.address.address1);
 			$form.find('[name$="_address2"]').val(data.address.address2);
 			$form.find('[name$="_city"]').val(data.address.city);
+			$form.find('[name$="_country"]').val(data.address.countryCode).trigger('change');
 			$form.find('[name$="_postal"]').val(data.address.postalCode);
 			$form.find('[name$="_state"]').val(data.address.stateCode);
-			$form.find('[name$="_country"]').val(data.address.countryCode);
 			$form.find('[name$="_phone"]').val(data.address.phone);
 			// $form.parent('form').validate().form();
 		}
@@ -51,7 +51,7 @@ function initializeEvents() {
 		$(':input', $beforeAddress).each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
-			$afterField.val($(this).val());
+			$afterField.val($(this).val()).trigger('change');
 		});
 	})
 	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
