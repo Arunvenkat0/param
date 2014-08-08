@@ -4697,7 +4697,8 @@ var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})
 			ca : /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
 			gb : /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
 		},
-		email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/
+		email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
+		notCC : /^(?!(([0-9 -]){13,19})).*$/
 	},
 	settings = {
 		// global form validator settings
@@ -4741,6 +4742,17 @@ function validateEmail(value, el) {
 }
 
 /**
+ * @function
+ * @description Validates that a credit card owner is not a Credit card number
+ * @param {String} value The owner field which will be validated
+ * @param {String} el The input field
+ */
+function validateOwner(value, el) {
+	var isValid = regex.notCC.test($.trim(value));
+	return isValid;
+}
+
+/**
  * Add phone validation method to jQuery validation plugin.
  * Text fields must have 'phone' css class to be validated as phone
  */
@@ -4751,6 +4763,12 @@ $.validator.addMethod('phone', validatePhone, Resources.INVALID_PHONE);
  * Text fields must have 'email' css class to be validated as email
  */
 $.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
+
+/**
+ * Add CCOwner validation method to jQuery validation plugin.
+ * Text fields must have 'owner' css class to be validated as not a credit card
+ */
+$.validator.addMethod("owner", validateOwner, app.resources.INVALID_OWNER);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
