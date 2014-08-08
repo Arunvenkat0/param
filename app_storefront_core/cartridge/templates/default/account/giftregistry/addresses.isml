@@ -57,10 +57,6 @@
 
 					</div>
 
-					<div class="form-row form-row-button">
-						<button name="${pdict.CurrentForms.giftregistry.eventaddress.selectAddressBefore.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
-					</div>
-
 				</div>
 
 			</isif>
@@ -116,7 +112,7 @@
 
 				<legend>
 					${Resource.msg('global.selectaddressmessage','locale',null)}:
-					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
+					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield', 'locale', null)}</em></span></div>
 				</legend>
 
 				<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
@@ -144,10 +140,6 @@
 								</isif>
 							</select>
 
-						</div>
-
-						<div class="form-row form-row-button">
-							<button class="select" name="${pdict.CurrentForms.giftregistry.eventaddress.selectAddressAfter.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 						</div>
 
 					</div>
