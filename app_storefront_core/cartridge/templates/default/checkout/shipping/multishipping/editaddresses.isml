@@ -56,10 +56,6 @@
 				</select>
 			</div>
 
-			<div class="form-row form-row-button">
-				<button name="${pdict.CurrentForms.multishipping.editAddress.selectAddress.htmlName}" type="button">${Resource.msg('multishippingaddresses.select','checkout',null)}</button>
-			</div>
-
 		</div>
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.firstName}" type="input" />

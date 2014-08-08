@@ -1620,10 +1620,12 @@ function initMultiGiftMessageBox() {
  */
 function addEditAddress(target) {
 	var $addressForm = $('form[name$="multishipping_editAddress"]'),
-		$selectButton = $addressForm.find('button[name$=_selectAddress]'),
+		$addressDropdown = $addressForm.find('select[name$=_addressList]'),
 		$addressList = $addressForm.find('.address-list'),
-		add = true;
-	$selectButton.on('click', function (e) {
+		add = true,
+		selectedAddressUUID = $(target).parent().siblings('.select-address').val();
+
+	$addressDropdown.on('change', function (e) {
 		e.preventDefault();
 		var selectedAddress = $addressList.find('select').val();
 		if (selectedAddress !== 'newAddress') {
@@ -1633,6 +1635,9 @@ function addEditAddress(target) {
 			add = false;
 			// proceed to fill the form with the selected address
 			util.fillAddressFields(selectedAddress, $addressForm);
+		} else {
+			//reset the form if the value of the option is not a UUID
+			$addressForm.find('.input-text, .input-select').val('');
 		}
 	});
 
@@ -1670,6 +1675,18 @@ function addEditAddress(target) {
 			}
 		});
 	});
+
+	//preserve the uuid of the option for the hop up form
+	if (selectedAddressUUID) {
+		//update the form with selected address
+		$addressList.find('option').each(function() {
+			//check the values of the options
+			if ($(this).attr('value') === selectedAddressUUID) {
+				$(this).attr('selected','selected');
+				$addressDropdown.trigger('change');
+			}
+		});
+	}
 }
 
 /**
