@@ -1,6 +1,7 @@
 'use strict';
 
-var giftcard = require('../../giftcard'),
+var formPrepare = require('./formPrepare'),
+	giftcard = require('../../giftcard'),
 	util = require('../../util'),
 	validator = require('../../validator');
 
@@ -89,6 +90,8 @@ exports.init = function () {
 		$couponCode = $('input[name$="_couponCode"]');
 
 	if( !$paymentMethodId ) return;
+
+	formPrepare.init('[name$="billing_save"]', 'form[id$="billing"]');
 
 	$paymentMethodId.on('click', function () {
 		changePaymentMethod($(this).val());

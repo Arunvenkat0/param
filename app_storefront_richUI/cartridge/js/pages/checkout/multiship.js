@@ -1,43 +1,9 @@
 'use strict';
 
 var address = require('./address'),
+	formPrepare = require('./formPrepare'),
 	dialog = require('../../dialog'),
 	util = require('../../util');
-
-/**
-* @function
-* @description this function inits the form so that uses client side validation before submitting to the server
-*/
-function initmultishipshipaddress() {
-	var $continue = $('.formactions button'),
-		$selects = $('.select-address');
-
-	var hasEmptySelect = function () {
-		var selectValues = $selects.children(':selected').map(function (){
-			return this.value;
-		});
-		return $.inArray('', selectValues) !== -1;
-	};
-	// if we found a empty value disable the button
-	if (hasEmptySelect()){
-		$continue.attr('disabled','disabled');
-	} else {
-		$continue.removeAttr('disabled');
-	}
-	//add listeners to the selects to enable the continue button
-	$selects.on('change', function(){
-		if (this.value === ''){
-			$continue.attr('disabled','disabled');
-		} else {
-			//check to see if any select box has a empty vlaue
-			if (hasEmptySelect()) {
-				$continue.attr('disabled','disabled');
-			} else {
-				$continue.removeAttr('disabled');
-			}
-		}
-	});
-}
 
 /**
  * @function
@@ -132,9 +98,7 @@ function addEditAddress(target) {
 exports.init = function () {
 	initMultiGiftMessageBox();
 	if ($(".cart-row .shippingaddress .select-address").length > 0){
-		initmultishipshipaddress();
-	} else {
-		$('.formactions button').attr('disabled','disabled');
+		formPrepare.init('[name$="addressSelection_save"]', '[id$="multishipping_addressSelection"]');
 	}
 	$('.edit-address').on('click', 'a', function (e) {
 		dialog.open({url: this.href, options: {open: function() {

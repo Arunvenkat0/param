@@ -181,7 +181,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":16,"./pages/compare":19,"./pages/product":21,"./pages/registry":22,"./pages/search":23,"./pages/storefront":24,"./pages/wishlist":25,"./searchplaceholder":30,"./searchsuggest":32,"./searchsuggest-beta":31,"./tooltip":35,"./util":36,"./validator":37}],2:[function(require,module,exports){
+},{"./components":4,"./jquery-ext":8,"./minicart":9,"./multicurrency":10,"./page":11,"./pages/account":12,"./pages/cart":13,"./pages/checkout":17,"./pages/compare":20,"./pages/product":22,"./pages/registry":23,"./pages/search":24,"./pages/storefront":25,"./pages/wishlist":26,"./searchplaceholder":31,"./searchsuggest":33,"./searchsuggest-beta":32,"./tooltip":36,"./util":37,"./validator":38}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -287,7 +287,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":28,"./util":36}],3:[function(require,module,exports){
+},{"./progress":29,"./util":37}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -567,7 +567,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":5,"./page":11,"./util":36}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./page":11,"./util":37}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -724,7 +724,7 @@ var dialog = {
 };
 
 module.exports = dialog;
-},{"./ajax":2,"./util":36}],6:[function(require,module,exports){
+},{"./ajax":2,"./util":37}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -745,7 +745,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":36}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":37}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -799,7 +799,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":9,"./util":36}],8:[function(require,module,exports){
+},{"./ajax":2,"./minicart":9,"./util":37}],8:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -914,7 +914,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":36}],10:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":37}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -942,7 +942,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":11,"./util":36}],11:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":37}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -960,7 +960,7 @@ var page = {
 };
 
 module.exports = page;
-},{"./util":36}],12:[function(require,module,exports){
+},{"./util":37}],12:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1170,7 +1170,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":35,"../util":36,"../validator":37}],13:[function(require,module,exports){
+},{"../dialog":5,"../giftcert":7,"../page":11,"../tooltip":36,"../util":37,"../validator":38}],13:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1237,7 +1237,7 @@ var cart = {
 };
 
 module.exports = cart;
-},{"../bonus-products-view":3,"../page":11,"../quickview":29,"../storeinventory":34,"../util":36,"./account":12}],14:[function(require,module,exports){
+},{"../bonus-products-view":3,"../page":11,"../quickview":30,"../storeinventory":35,"../util":37,"./account":12}],14:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1264,10 +1264,11 @@ exports.init = function () {
 		util.updateStateOptions($form);
 	});
 }
-},{"../../util":36}],15:[function(require,module,exports){
+},{"../../util":37}],15:[function(require,module,exports){
 'use strict';
 
-var giftcard = require('../../giftcard'),
+var formPrepare = require('./formPrepare'),
+	giftcard = require('../../giftcard'),
 	util = require('../../util'),
 	validator = require('../../validator');
 
@@ -1356,6 +1357,8 @@ exports.init = function () {
 		$couponCode = $('input[name$="_couponCode"]');
 
 	if( !$paymentMethodId ) return;
+
+	formPrepare.init('[name$="billing_save"]', 'form[id$="billing"]');
 
 	$paymentMethodId.on('click', function () {
 		changePaymentMethod($(this).val());
@@ -1497,7 +1500,56 @@ exports.init = function () {
 		}
 	});
 }
-},{"../../giftcard":6,"../../util":36,"../../validator":37}],16:[function(require,module,exports){
+},{"../../giftcard":6,"../../util":37,"../../validator":38,"./formPrepare":16}],16:[function(require,module,exports){
+'use strict';
+
+/**
+ * @function
+ * @description disable continue button on the page if required inputs are not filled
+ * @input String the selector string of the continue button
+ * @input String the selector string for the form
+ */
+exports.init = function (continueSelector, formSelector) {
+	var $continue = $(continueSelector);
+	var $form = $(formSelector);
+	var validator = $form.validate();
+	var $requiredInputs = $('.required', $form).find(':input');
+	// check for required input
+	var hasEmptyRequired = function () {
+		// filter out only the visible fields - this allows the checking to work on
+		// billing page where some payment methods inputs are hidden
+		var requiredValues = $requiredInputs.filter(':visible').map(function () {
+			return $(this).val();
+		});
+		return $.inArray('', requiredValues) !== -1;
+	};
+
+	if (!hasEmptyRequired()) {
+		// only validate form when all required fields are filled to avoid
+		// throwing errors on empty form
+		if (validator.form()) {
+			$continue.removeAttr('disabled');
+		}
+	} else {
+		$continue.attr('disabled', 'disabled');
+	}
+
+	$requiredInputs.on('change', function () {
+		if ($(this).val() === '') {
+			$continue.attr('disabled', 'disabled');
+		} else {
+			// enable continue button on last required field that is valid
+			// only validate single field
+			if (validator.element(this) && !hasEmptyRequired()) {
+				$continue.removeAttr('disabled');
+			} else {
+				$continue.attr('disabled', 'disabled');
+			}
+		}
+	});
+}
+
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1526,47 +1578,13 @@ exports.init = function () {
 	}
 }
 
-},{"./address":14,"./billing":15,"./multiship":17,"./shipping":18}],17:[function(require,module,exports){
+},{"./address":14,"./billing":15,"./multiship":18,"./shipping":19}],18:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
+	formPrepare = require('./formPrepare'),
 	dialog = require('../../dialog'),
 	util = require('../../util');
-
-/**
-* @function
-* @description this function inits the form so that uses client side validation before submitting to the server
-*/
-function initmultishipshipaddress() {
-	var $continue = $('.formactions button'),
-		$selects = $('.select-address');
-
-	var hasEmptySelect = function () {
-		var selectValues = $selects.children(':selected').map(function (){
-			return this.value;
-		});
-		return $.inArray('', selectValues) !== -1;
-	};
-	// if we found a empty value disable the button
-	if (hasEmptySelect()){
-		$continue.attr('disabled','disabled');
-	} else {
-		$continue.removeAttr('disabled');
-	}
-	//add listeners to the selects to enable the continue button
-	$selects.on('change', function(){
-		if (this.value === ''){
-			$continue.attr('disabled','disabled');
-		} else {
-			//check to see if any select box has a empty vlaue
-			if (hasEmptySelect()) {
-				$continue.attr('disabled','disabled');
-			} else {
-				$continue.removeAttr('disabled');
-			}
-		}
-	});
-}
 
 /**
  * @function
@@ -1661,9 +1679,7 @@ function addEditAddress(target) {
 exports.init = function () {
 	initMultiGiftMessageBox();
 	if ($(".cart-row .shippingaddress .select-address").length > 0){
-		initmultishipshipaddress();
-	} else {
-		$('.formactions button').attr('disabled','disabled');
+		formPrepare.init('[name$="addressSelection_save"]', '[id$="multishipping_addressSelection"]');
 	}
 	$('.edit-address').on('click', 'a', function (e) {
 		dialog.open({url: this.href, options: {open: function() {
@@ -1674,10 +1690,11 @@ exports.init = function () {
 		return false;
 	});
 }
-},{"../../dialog":5,"../../util":36,"./address":14}],18:[function(require,module,exports){
+},{"../../dialog":5,"../../util":37,"./address":14,"./formPrepare":16}],19:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
+	formPrepare = require('./formPrepare'),
 	progress = require('../../progress'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
@@ -1816,6 +1833,7 @@ function updateShippingMethodList() {
 }
 
 exports.init = function () {
+	formPrepare.init('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
 	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
 		giftMessageBox();
 	});
@@ -1829,7 +1847,7 @@ exports.init = function () {
 	updateShippingMethodList();
 }
 
-},{"../../ajax":2,"../../progress":28,"../../tooltip":35,"../../util":36}],19:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":29,"../../tooltip":36,"../../util":37,"./formPrepare":16}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1873,7 +1891,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":11,"../product-tile":27,"../quickview":29,"./product":21}],20:[function(require,module,exports){
+},{"../ajax":2,"../page":11,"../product-tile":28,"../quickview":30,"./product":22}],21:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -1954,7 +1972,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2456,7 +2474,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":28,"../../quickview":29,"../../send-to-friend":33,"../../storeinventory":34,"../../tooltip":35,"../../util":36,"../cart":13,"./events/quantity":20}],22:[function(require,module,exports){
+},{"../../ajax":2,"../../components":4,"../../dialog":5,"../../minicart":9,"../../progress":29,"../../quickview":30,"../../send-to-friend":34,"../../storeinventory":35,"../../tooltip":36,"../../util":37,"../cart":13,"./events/quantity":21}],23:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2550,7 +2568,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":29,"../send-to-friend":33,"../util":36,"./product":21}],23:[function(require,module,exports){
+},{"../ajax":2,"../quickview":30,"../send-to-friend":34,"../util":37,"./product":22}],24:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -2742,7 +2760,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../product-compare":26,"../product-tile":27,"../progress":28,"../util":36}],24:[function(require,module,exports){
+},{"../product-compare":27,"../product-tile":28,"../progress":29,"../util":37}],25:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -2792,7 +2810,7 @@ exports.init = function () {
 	});
 };
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -2813,7 +2831,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":11,"../send-to-friend":33,"../util":36,"./product":21}],26:[function(require,module,exports){
+},{"../page":11,"../send-to-friend":34,"../util":37,"./product":22}],27:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3079,7 +3097,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":36}],27:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":37}],28:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3183,7 +3201,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":21,"./quickview":29}],28:[function(require,module,exports){
+},{"./pages/product":22,"./quickview":30}],29:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3216,7 +3234,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3369,7 +3387,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":5,"./progress":28,"./util":36}],30:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./progress":29,"./util":37}],31:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3395,7 +3413,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3564,7 +3582,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":36}],32:[function(require,module,exports){
+},{"./util":37}],33:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3740,7 +3758,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":36}],33:[function(require,module,exports){
+},{"./util":37}],34:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3815,7 +3833,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":5,"./util":36,"./validator":37}],34:[function(require,module,exports){
+},{"./ajax":2,"./dialog":5,"./util":37,"./validator":38}],35:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4159,7 +4177,7 @@ var storeinventory = {
 };
 
 module.exports = storeinventory;
-},{"./ajax":2,"./page":11,"./util":36}],35:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":37}],36:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4181,7 +4199,7 @@ exports.init = function () {
 	});
 };
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4638,7 +4656,7 @@ var util = {
 };
 
 module.exports = util;
-},{"./validator":37}],37:[function(require,module,exports){
+},{"./validator":38}],38:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,

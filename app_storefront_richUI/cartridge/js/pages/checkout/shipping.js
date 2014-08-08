@@ -1,6 +1,7 @@
 'use strict';
 
 var ajax = require('../../ajax'),
+	formPrepare = require('./formPrepare'),
 	progress = require('../../progress'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
@@ -139,6 +140,7 @@ function updateShippingMethodList() {
 }
 
 exports.init = function () {
+	formPrepare.init('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
 	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
 		giftMessageBox();
 	});
