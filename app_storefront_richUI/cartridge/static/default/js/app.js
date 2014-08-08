@@ -3254,6 +3254,12 @@ var quickview = {
 		this.btnNext = $('.quickview-next');
 		this.btnPrev = $('.quickview-prev');
 
+		if (this.productLinks.length === 0) {
+			this.btnNext.hide();
+			this.btnPrev.hide();
+			return;
+		}
+
 		this.btnNext.click(this.navigateQuickview.bind(this));
 		this.btnPrev.click(this.navigateQuickview.bind(this));
 
