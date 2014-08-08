@@ -342,6 +342,21 @@ var util = {
 		var url = this.appendParamsToUrl(Urls.appResources, params);
 		$.getJSON(url, callback);
 	},
+	fillAddressFields: function (address, $form) {
+		for (var field in address) {
+			// if the key in address object ends with 'Code', remove that suffix
+			// keys that ends with 'Code' are postalCode, stateCode and countryCode
+			$form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);
+			// update the state fields
+			if (field === 'countryCode') {
+				$form.find('[name$="country"]').trigger('change');
+				// retrigger state selection after country has changed
+				// this results in duplication of the state code, but is a necessary evil
+				// for now because sometimes countryCode comes after stateCode
+				$form.find('[name$="state"]').val(address['stateCode']);
+			}
+		}
+	},
 	/**
 	 * @function
 	 * @description Updates the states options to a given country

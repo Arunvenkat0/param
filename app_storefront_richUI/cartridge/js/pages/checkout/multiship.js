@@ -1,7 +1,8 @@
 'use strict';
 
 var address = require('./address'),
-	dialog = require('../../dialog');
+	dialog = require('../../dialog'),
+	util = require('../../util');
 
 /**
 * @function
@@ -84,10 +85,7 @@ function addEditAddress(target) {
 			})[0];
 			add = false;
 			// proceed to fill the form with the selected address
-			for (var field in selectedAddress) {
-				// if the key in selectedAddress object ends with 'Code', remove that suffix
-				$addressForm.find('[name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
-			}
+			util.fillAddressFields(selectedAddress, $addressForm);
 		}
 	});
 
