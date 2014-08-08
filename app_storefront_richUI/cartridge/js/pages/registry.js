@@ -118,37 +118,28 @@ function initializeEvents() {
 	sendToFriend.initializeDialog('.list-table-header', '.send-to-friend');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 
-	$cache.copyAddress.on('click', function () {
-		if (this.checked) {
-			// fill the address after fields
-			copyBeforeAddress();
-		}
-	});
-	$cache.registryForm.on('change', 'select[name$="_addressBeforeList"]', function (e) {
+	$('.usepreevent').on('click', function () {
+		$(':input', $beforeAddress).each(function () {
+			var fieldName = $(this).attr('name'),
+				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
+			$afterField.val($(this).val());
+		});
+	})
+	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
 		var addressID = $(this).val();
 		if (addressID.length===0) { return; }
 		populateBeforeAddressForm(addressID);
-		if ($cache.copyAddress[0].checked) {
-			copyBeforeAddress();
-		}
 	})
 	.on('change', 'select[name$="_addressAfterList"]', function (e) {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateAfterAddressForm(addressID);
 	})
-	.on('change', $cache.addressBeforeFields.filter(':not([name$="_country"])'), function (e) {
-		if (!$cache.copyAddress[0].checked) { return; }
-		copyBeforeAddress();
 	});
 
 	$('form').on('change', 'select[name$="_country"]', function(e) {
 		util.updateStateOptions(this);
 
-		if ($cache.copyAddress.length > 0 && $cache.copyAddress[0].checked && this.id.indexOf('_addressBefore') > 0) {
-			copyBeforeAddress();
-			$cache.addressAfterFields.filter('[name$="_country"]').trigger('change');
-		}
 	});
 
 	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {

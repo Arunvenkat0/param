@@ -100,8 +100,6 @@
 					</a>)
 				</div>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.copyAddress}" type="checkbox" rowclass="label-inline form-indent"/>
-
 			</fieldset>
 
 			<h2>${Resource.msg('addresses.postheader','account',null)}</h2>
@@ -114,7 +112,10 @@
 					${Resource.msg('global.selectaddressmessage','locale',null)}:
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield', 'locale', null)}</em></span></div>
 				</legend>
-
+				<div class="form-row form-row-button">
+					<button type="button" class="usepreevent">${Resource.msg('address.usepreevent', 'account', null)}</button>
+				</div>
+				
 				<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 
 					<div class="select-address">
@@ -188,9 +189,9 @@
 				<div class="form-row form-row-button">
 					<isif condition="${pdict.ProductList == null}">
 						<button class="previous cancel" type="submit" value="&laquo; ${Resource.msg('global.previous','locale',null)}" name="${pdict.CurrentForms.giftregistry.eventaddress.back.htmlName}"><span>&laquo; ${Resource.msg('global.previous','locale',null)}</span></button>
-						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}"><span>${Resource.msg('global.continue','locale',null)}</span></button>
+						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}">${Resource.msg('global.continue','locale',null)}</button>
 					<iselse/>
-						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}">${Resource.msg('global.apply','locale',null)}</button>
 					</isif>
 				</div>
 
