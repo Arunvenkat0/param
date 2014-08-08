@@ -1512,10 +1512,6 @@ exports.init = function () {
 	address.init();
 	if ($('.checkout-shipping').length > 0) {
 		shipping.init();
-		//on the single shipping page, update the list of shipping methods when the state feild changes
-		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
-			shipping.updateShippingMethodList();
-		});
 	} else if ($('.checkout-multi-shipping').length > 0) {
 		multiship.init();
 	} else {
@@ -1825,7 +1821,7 @@ exports.init = function () {
 	});
 
 	$('.address').on('change',
-		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], input[name$="_addressFields_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
+		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], input[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
 		updateShippingMethodList
 	);
 
@@ -1833,7 +1829,6 @@ exports.init = function () {
 	updateShippingMethodList();
 }
 
-exports.updateShippingMethodList = updateShippingMethodList;
 },{"../../ajax":2,"../../progress":28,"../../tooltip":35,"../../util":36}],19:[function(require,module,exports){
 'use strict';
 

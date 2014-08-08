@@ -12,10 +12,6 @@ exports.init = function () {
 	address.init();
 	if ($('.checkout-shipping').length > 0) {
 		shipping.init();
-		//on the single shipping page, update the list of shipping methods when the state feild changes
-		$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
-			shipping.updateShippingMethodList();
-		});
 	} else if ($('.checkout-multi-shipping').length > 0) {
 		multiship.init();
 	} else {
