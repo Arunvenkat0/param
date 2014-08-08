@@ -62,6 +62,7 @@
 		GIFT_CERT_BALANCE				: Resource.msg('billing.giftcertbalance', 'checkout', null),
 		GIFT_CERT_AMOUNT_INVALID		: Resource.msg('giftcert.amountvalueerror', 'forms', null),
 		GIFT_CERT_MISSING				: Resource.msg('billing.giftcertidmissing', 'checkout', null),
+		INVALID_OWNER                   : Resource.msg('billing.ownerparseerror','checkout',null),
 		COUPON_CODE_MISSING				: Resource.msg('cart.COUPON_CODE_MISSING','checkout', null),
 		COOKIES_DISABLED				: Resource.msg('browsertoolscheck.cookies','components',null),
 		BML_AGREE_TO_TERMS				: Resource.msg('bml.termserror', 'forms', null),

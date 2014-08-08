@@ -15,7 +15,7 @@
 		
 			<select  name="OAuthProvider" id="OAuthProvider" >
 				<option value="">${Resource.msgf('logininclude.oauthselect','account',"")}</option>
-				<option value="Google">${Resource.msgf('logininclude.oauthGooglePlus','account',"")}</option>
+				<option value="GooglePlus">${Resource.msgf('logininclude.oauthGooglePlus','account',"")}</option>
 				<option value="LinkedIn">${Resource.msgf('logininclude.oauthLinkedIn','account',"")}</option>
 				<option value="Microsoft">${Resource.msgf('logininclude.oauthMicrosoft','account',"")}</option>
 				<option value="Facebook">${Resource.msgf('logininclude.oauthFacebook','account',"")}</option>
