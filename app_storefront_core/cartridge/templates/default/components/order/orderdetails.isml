@@ -38,7 +38,7 @@
 		<td class="order-information">
 			<div class="order-date ">
 				<span class="label">${Resource.msg('orderdetails.orderplaced','components',null)}</span>
-				<span class="value"><isprint value="${Order.creationDate}" style="DATE_LONG"/></span>			
+				<span class="value"><isprint value="${Order.creationDate}" style="DATE_LONG"/></span>
 			</div>
 		
 			<isif condition="${!empty(pdict.orderstatus) && pdict.orderstatus == 'true'}">
@@ -65,7 +65,7 @@
 				           </span>
 				    </div> 
 				<iselse/> 
-					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>         
+					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
 					<div class="payment-amount">
 						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
@@ -97,35 +97,70 @@
 			<table class="order-shipment-table">
 				<thead>
 					<tr>
-						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
-						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
 						<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
-							<th class="section-header">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>							
+							<th class="section-header">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>
 						<iselse/>
 							<th class="section-header">${Resource.msg('orderdetails.shippingto','components',null)}</th>
 						</isif>
+						<th class="section-header">${Resource.msg('global.item','locale',null)}</th>
+						<th class="section-header">${Resource.msg('global.quantity','locale',null)}</th>
+						<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
 					</tr>
 				</thead>
 				<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
 					<tr>
-	
-						<td>
+						<iscomment>only show shipping address for first pli in shipment</iscomment>
+						<isif condition="${pliloopstate.first}">
+							<isset name="rowSpan" value="${shipment.productLineItems.size()}" scope="page"/>
+							<td rowspan="${rowSpan.toFixed()}" class="order-shipment-details">
+								<div class="order-shipment-address">
+									<isminishippingaddress p_shipment="${shipment}" p_editable="${false}" p_showmethod="${false}" p_showpromos="${false}"/>
+								</div>
+								<div class="shipping-method">
+									<span class="label">${Resource.msg('orderdetails.shippingmethod','components',null)}</span>
+									<isif condition="${!empty(shipment.shippingMethod)}">
+										<span class="value"><isprint value="${shipment.shippingMethod.displayName}"/></span>
+									<iselse/>
+										<span class="value"><isprint value="${shipment.shippingMethodID}"/></span>
+									</isif>
+								</div>
+								<isif condition="${shipment.custom.shipmentType != 'instore'}">
+								<div class="shipping-status">
+									<span class="label">${Resource.msg('orderdetails.shippingstatus','components',null)}</span>
+									<isif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
+										<span class="value">${Resource.msg('orderdetails.notshipped','components',null)}</span>
+									<iselseif condition="${shipment.shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}">
+										<span class="value">${Resource.msg('orderdetails.shipped','components',null)}</span>
+									<iselse/>
+										<span class="value">${Resource.msg('orderdetails.notknown','components',null)}</span>
+									</isif>
+								</div>
+								</isif>
+								<isif condition="${!empty(shipment.trackingNumber)}">
+									<div class="trackingnumber">
+										<span class="label">${Resource.msg('orderdetails.tracking','components',null)}</span>
+										<span class="value"><!-- Tracking Number --><isprint value="${shipment.trackingNumber}"/></span>
+									</div>
+								</isif>
+							</td>
+						</isif>
+						
+						<td class="line-item-details">
 							<iscomment>Display product line and product using module</iscomment>
 							<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 						</td>
 	
-					    <td>
-				    		<isprint value="${productLineItem.quantity}"/>
-				    	</td>
+						<td class="line-item-quantity">
+							<isprint value="${productLineItem.quantity}"/>
+						</td>
 	
-					    <td>
-					    	<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
-					    	<isif condition="${productLineItem.bonusProductLineItem}">
-					    		<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
-					    	<iselse/>
-				            	<isprint value="${productLineItem.adjustedPrice}"/>				    						            
-					            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
+						<td class="line-item-price">
+							<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
+							<isif condition="${productLineItem.bonusProductLineItem}">
+								<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
+							<iselse/>
+								<isprint value="${productLineItem.adjustedPrice}"/>
+								<isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 									<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
 										<p>+ <isprint value="${optionLI.adjustedPrice}"/></p>
 									</isloop>

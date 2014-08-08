@@ -631,6 +631,7 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .bonus-product-list .product-add-to-cart button{float:left;margin-top:22px;margin-left: 2%;}
 .bonus-product-list-footer{clear:both;}
 .bonus-product-list-footer button{float:right;margin-top: -2%;}
+.bonus-product-list .quantity-error{color:red;text-transform:inherit;}
 
 /* send to friend */
 /* ------------------------------------- */
@@ -717,11 +718,12 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .checkout-progress-indicator a{color:#333333;}
 .checkout-progress-indicator .active{font-weight:700;}
 .checkout-progress-indicator .step-3{background:none repeat scroll 0 0 transparent;padding-right:0;}
-.shipping-method{padding:0;margin: 22px -104px 0;}
+.shipping-method{margin-top:22px;}
+//RAP-1210.shipping-method{padding:0;margin: 22px -104px 0;}
+.select-address{padding:2em 0;}
 .shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
 .shipping-method .shipping-description{display:inline;}
 
-.shipping-status{padding:0;margin: 0 -57px 0;}
 .redemption .success{color:green;}
 .redemption{color:#990000;}
 .redemption span.error{margin-left:0;}
@@ -758,7 +760,7 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .submit-order button{margin-left:1.5em;}
 .pt_order-confirmation h1{font-size:2.5em;}
 .pt_order-confirmation .order-shipment-table{margin:0 0 20px;}
-.pt_order-confirmation .order-shipment-table .order-shipment-details{border-left:1px solid #E0E0E0;}
+.pt_order-confirmation .order-shipment-table .order-shipment-details{border-right:1px solid #E0E0E0;min-width: 200px;}
 .pt_order-confirmation #primary h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
 .pt_order-confirmation a.print-page{float:right;}
 .confirmation-message{border-bottom:3px solid #00A4E4;margin-bottom:20px;padding-bottom:20px;}
@@ -772,10 +774,9 @@ ul.product-availability-list .on-order,ul.product-availability-list .not-availab
 .pt_order-confirmation #main {padding: 0 14px;}
 .pt_cart .breadcrumb {padding-left:0}
 .pt_order-confirmation .order-confirmation-details .content-header {margin:7px 0 !important;}
-.order-shipment-details .shipping-method { padding-left:0px;}
-.order-shipment-details .label { position:absolute;width:150px;text-align:right;font-weight:bold}
-.order-shipment-details .value { margin-left:155px;}
-.order-shipment-details .order-shipment-address { width:240px;}
+.order-shipment-details .label,
+.order-shipment-details .firstname,
+.order-shipment-details .lastname {font-weight:bold}
 .item-shipping-address {min-width: 120px;}
 
 .order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
@@ -806,7 +807,7 @@ table.item-list .multi-shipment-row {border-bottom: none;}
 position: absolute;
 top: 0px;
 left: 63%;}
-h1 .account-logout{font-size:0.6em;}
+h1 .account-logout{font-size:0.6em;float:none;}
 .registration-selection input,.registration-selection label{display:inline;float:none;}
 ul.address-list{padding:0;}
 ul.address-list li{float:left;list-style:none outside none;margin:0;min-height:135px;padding:1em 0;width:30%;}
