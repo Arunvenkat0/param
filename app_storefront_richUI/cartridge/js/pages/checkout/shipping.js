@@ -116,13 +116,11 @@ function updateShippingMethodList() {
 			// We need to update the UI.  The list has changed.
 			// Cache the array of returned shipping methods.
 			shippingMethods = data;
-
-			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
-
 			// indicate progress
 			progress.show($shippingMethodList);
 
 			// load the shipping method form
+			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
 			$shippingMethodList.load(smlUrl, function () {
 				$shippingMethodList.fadeIn("fast");
 				// rebind the radio buttons onclick function to a handler.
@@ -134,6 +132,10 @@ function updateShippingMethodList() {
 				updateSummary();
 				progress.hide();
 				tooltip.init();
+				//if nothing is selected in the shipping methods select the first one
+				if ($shippingMethodList.find('.input-radio:checked').length === 0) {
+					$shippingMethodList.find('.input-radio:first').attr('checked', true);
+				}
 			});
 		}
 	});
