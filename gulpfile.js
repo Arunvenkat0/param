@@ -6,7 +6,9 @@ var gulp = require('gulp'),
 	watchify = require('watchify'),
 	source = require('vinyl-source-stream'),
 	xtend = require('xtend'),
-	jscs = require('gulp-jscs');
+	jscs = require('gulp-jscs'),
+	jshint = require('gulp-jshint'),
+	stylish = require('jshint-stylish');
 
 var paths = {
 	scss: {
@@ -64,6 +66,12 @@ gulp.task('js', function () {
 gulp.task('jscs', function () {
 	return gulp.src('**/*.js')
 		.pipe(jscs());
+});
+
+gulp.task('jshint', function () {
+	return gulp.src('./app_storefront_richUI/cartridge/js/**/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish));
 });
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {

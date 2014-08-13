@@ -50,6 +50,13 @@ module.exports = function (grunt) {
 			options: {
 				config: './.jscsrc'
 			}
+		},
+		jshint: {
+			options: {
+				reporter: require('jshint-stylish'),
+				jshintrc: true
+			},
+			target: ['app_storefront_richUI/cartridge/js/**/*.js']
 		}
 	});
 
