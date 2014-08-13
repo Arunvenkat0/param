@@ -280,7 +280,7 @@ div.level-3 ul.level-3 a{color:#3EBAEA;font-weight:400;text-transform:none;}
 a.breadcrumb-relax{background:none repeat scroll 0 0 transparent !important;font-family:Georgia,serif;font-style:italic;padding:0 5px 0 0;}
 .breadcrumb-last{background:none repeat scroll 0 0 transparent !important;font-family:Georgia,serif;font-style:italic;}
 .breadcrumb-result-text a,.breadcrumb a.searchphraselink{background:none repeat scroll 0 0 transparent;color:#3EBAEA;font-family:Georgia,serif;font-style:italic;padding:0;}
-
+.breadcrumb-result-text{float:none;}
 /* primary region elements */
 /* ------------------------------------- */
 
