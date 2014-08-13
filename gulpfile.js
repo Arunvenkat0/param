@@ -28,7 +28,7 @@ gulp.task('scss', function () {
 		.pipe(gulp.dest(paths.scss.dest));
 });
 
-gulp.task('browserify', function () {
+gulp.task('js', function () {
 	var opts = {
 		entries: paths.js.src,
 		debug: (gutil.env.type === 'development')
@@ -60,6 +60,6 @@ gulp.task('browserify', function () {
 	return rebundle();
 });
 
-gulp.task('watch', ['enable-watch-mode', 'browserify'], function () {
-	gulp.watch(paths.scss.src, ['sass']);
+gulp.task('watch', ['enable-watch-mode', 'js'], function () {
+	gulp.watch(paths.scss.src, ['scss']);
 });
