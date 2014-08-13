@@ -21,7 +21,7 @@ var paths = {
 var watching = false;
 gulp.task('enable-watch-mode', function() { watching = true })
 
-gulp.task('sass', function () {
+gulp.task('scss', function () {
 	gulp.src(paths.scss.src)
 		.pipe(sass())
 		.pipe(prefix({cascade: true}))
