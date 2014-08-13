@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	browserify = require('browserify'),
 	watchify = require('watchify'),
 	source = require('vinyl-source-stream'),
-	xtend = require('xtend');
+	xtend = require('xtend'),
+	jscs = require('gulp-jscs');
 
 var paths = {
 	scss: {
@@ -58,6 +59,11 @@ gulp.task('js', function () {
 			.pipe(gulp.dest(paths.js.dest));
 	}
 	return rebundle();
+});
+
+gulp.task('jscs', function () {
+	return gulp.src('**/*.js')
+		.pipe(jscs());
 });
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {
