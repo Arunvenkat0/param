@@ -84,28 +84,25 @@ function initializeGrid () {
 	var $bonusProduct = $('#bonus-product-dialog'),
 		$bonusProductList = $('#bonus-product-list'),
 	bliData = $bonusProductList.data('line-item-detail');
-
 	maxItems = bliData.maxItems;
 	bliUUID = bliData.uuid;
 
-	if (bliData.itemCount>=maxItems) {
+	if (bliData.itemCount >= maxItems) {
 		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
-
 	cartItems.each(function() {
 		var ci = $(this);
-
 		var product = {
-			uuid : ci.data('uuid'),
-			pid : ci.data('pid'),
-			qty : ci.find('.item-qty').text(),
-			name : ci.find('.item-name').html(),
+			uuid: ci.data('uuid'),
+			pid: ci.data('pid'),
+			qty: ci.find('.item-qty').text(),
+			name: ci.find('.item-name').html(),
 			attributes: {}
 		};
 		var attributes = ci.find('ul.item-attributes li');
-		attributes.each(function(){
+		attributes.each(function (){
 			var li = $(this);
 			product.attributes[li.data('attributeId')] = {
 				displayName:li.children('.display-name').html(),
@@ -114,7 +111,6 @@ function initializeGrid () {
 		});
 		selectedList.push(product);
 	});
-
 
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
@@ -144,12 +140,12 @@ function initializeGrid () {
 		}
 
 		var product = {
-			uuid : uuid,
-			pid : form.find('input[name="pid"]').val(),
-			qty : qty,
-			name : detail.find('.product-name').text(),
-			attributes : detail.find('.product-variations').data('current'),
-			options : []
+			uuid: uuid,
+			pid: form.find('input[name="pid"]').val(),
+			qty: qty,
+			name: detail.find('.product-name').text(),
+			attributes: detail.find('.product-variations').data('current'),
+			options: []
 		};
 
 		var optionSelects = form.find('.product-option');
@@ -171,7 +167,7 @@ function initializeGrid () {
 
 		var uuid = container.data('uuid');
 		var i, len = selectedList.length;
-		for(i = 0; i < len; i++) {
+		for (i = 0; i < len; i++) {
 			if (selectedList[i].uuid === uuid) {
 				selectedList.splice(i,1);
 				break;
@@ -181,7 +177,7 @@ function initializeGrid () {
 	})
 	.on('click', '.add-to-cart-bonus', function (e) {
 		e.preventDefault();
-		var url = util.appendParamsToUrl(Urls.addBonusProduct, {bonusDiscountLineItemUUID:bliUUID});
+		var url = util.appendParamsToUrl(Urls.addBonusProduct, {bonusDiscountLineItemUUID: bliUUID});
 		var bonusProducts = getBonusProducts();
 		if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
 			bonusProducts.bonusproducts[0].product.qty = maxItems;
@@ -210,7 +206,6 @@ function initializeGrid () {
 		.always(function () {
 			$bonusProduct.dialog('close');
 		});
-
 	});
 }
 
@@ -233,9 +228,9 @@ var bonusProductsView = {
 
 		// load the products then show
 		ajax.load({
-			target : $bonusProduct,
-			url : url,
-			callback : function () {
+			target: $bonusProduct,
+			url: url,
+			callback: function () {
 				$bonusProduct.dialog('open');
 				initializeGrid();
 				$('#bonus-product-dialog .emptyswatch').css('display','none');
@@ -247,14 +242,14 @@ var bonusProductsView = {
 	 * @function
 	 * @description Closes the bonus product quick view dialog
 	 */
-	close : function () {
+	close: function () {
 		$bonusProduct.dialog('close');
 	},
 	/**
 	 * @function
 	 * @description Loads the list of bonus products into quick view dialog
 	 */
-	loadBonusOption : function () {
+	loadBonusOption: function () {
 		var	$bonusDiscountContainer = $('.bonus-discount-container');
 		if ($bonusDiscountContainer.length === 0) { return; }
 
