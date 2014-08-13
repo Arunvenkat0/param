@@ -2214,6 +2214,11 @@ var app = (function (app, $) {
 					updateSummary();
 					app.progress.hide();
 					app.tooltips.init();
+
+					//if nothing is selected in the shipping methods select the first one
+					if( $('#shipping-method-list ').find('.input-radio:checked').length == 0 ) {
+						$('#shipping-method-list ').find('.input-radio:first').attr('checked',true);
+					}					
 				});
 			}
 		});
