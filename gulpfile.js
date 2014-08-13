@@ -13,14 +13,14 @@ var paths = {
 		src: './app_storefront_core/cartridge/scss/*.scss',
 		dest: './app_storefront_core/cartridge/static/default/css'
 	},
-	js : {
+	js: {
 		src: './app_storefront_richUI/cartridge/js/app.js',
 		dest: './app_storefront_richUI/cartridge/static/default/js'
 	}
 }
 
 var watching = false;
-gulp.task('enable-watch-mode', function() { watching = true })
+gulp.task('enable-watch-mode', function () { watching = true })
 
 gulp.task('scss', function () {
 	gulp.src(paths.scss.src)

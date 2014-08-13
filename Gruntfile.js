@@ -44,6 +44,12 @@ module.exports = function (grunt) {
 					watch: true
 				}
 			}
+		},
+		jscs: {
+			src: '**/*.js',
+			options: {
+				config: './.jscsrc'
+			}
 		}
 	});
 
