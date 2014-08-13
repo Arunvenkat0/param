@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 		watch: {
 			sass: {
 				files: ['app_storefront_core/cartridge/scss/*.scss'],
-				tasks: ['sass', 'autoprefixer']
+				tasks: ['scss']
 			}
 		},
 		sass: {
@@ -28,9 +28,6 @@ module.exports = function (grunt) {
 		},
 	});
 
-	grunt.registerTask('default', [
-		'sass',
-		'autoprefixer',
-		'watch'
-	]);
+	grunt.registerTask('scss', ['sass', 'autoprefixer']);
+	grunt.registerTask('default', ['scss', 'watch']);
 }
