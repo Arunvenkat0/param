@@ -88,55 +88,65 @@
 <iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 
 <div class="product-pricing">
-	<iscomment>Renders pricing information depending on the option or variation model, as well as scaled prices and so on.</iscomment>
-	<isset name="currencyCode" value="${session.getCurrency().getCurrencyCode()}" scope="page"/>
-	<isif condition="${Product.productSet}">
-		<iscomment>Product set pricing</iscomment>
-		<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
+<isscript>
+	var currencyCode = session.getCurrency().getCurrencyCode();
+	var price = {};
+	var PriceModelSource = Product, PriceModel;
+	if (Product.productSet) {
+		price.class = 'product-set-price';
+		price.value = Resource.msg('global.buyall', 'locale', null);
+	} else if (Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
+		// Product master price range depending on the represented variants
+		price.class = 'product-sales-price';
+		price.value = dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode));
+	} else {
+		// For Product master without a price range get the pricing from first variant
+		if (Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
+			PriceModelSource = Product.variants[0];
+		}
+		// Regular pricing through price model of the product. If the product is an option product, we have to initialize the product price model with the option model.
+		if (Product.optionProduct) {
+			PriceModel = PriceModelSource.getPriceModel(Product.getOptionModel());
+		} else {
+			PriceModel = PriceModelSource.getPriceModel();
+		}
+	}
+</isscript>
+<iscomment>
+	Check whether the product has price in the sale pricebook. If so, then
+	display two prices: crossed-out standard price and sales price.
+</iscomment>
+<isinclude template="product/components/standardprice"/>
+<isscript>
+	// SHAME
+	// The break above to include template as logic is UGLY. There should be a better way to include logic.
+	var prices = [];
+	var SalesPrice, ShowStandardPrice, extraPrice;
+	// simulate the same if else block from before the template include break
+	if (!Product.productSet && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
+		SalesPrice = PriceModel.getPrice();
+		ShowStandardPrice = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1;
+		if (ShowStandardPrice) {
+			price.class = 'product-standard-price';
+			price.title = 'Regular Price';
+			price.value = StandardPrice;
+			extraPrice = {};
+			extraPrice.class = 'product-sales-price';
+			extraPrice.title = 'Sale Price';
+			extraPrice.value = SalesPrice;
+		} else {
+			price.class = 'product-sales-price';
+			price.title = 'Sale Price';
+			price.value = SalesPrice;
+		}
+	}
+	prices.push(price);
+	if (extraPrice) {prices.push(extraPrice);}
+</isscript>
 
-	<iselseif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true'}">
-		<iscomment>Product master price range depending on the represented variants</iscomment>
-		<span class="product-sales-price"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode))}" /> - <isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode))}" /></span>
-	<iselse/>
-		<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
-		<isif condition="${Product.master && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true'}"/>
-			<iscomment>Preserve current product instance</iscomment>
-			<isset name="OrgProduct" value="${Product}" scope="page"/>
-			<isset name="Product" value="${pdict.FirstProduct}" scope="page"/>
-		</isif>
-		<iscomment>
-			Regular pricing through price model of the product. If the product is an option product,
-			we have to initialize the product price model with the option model.
-		</iscomment>
-		<isif condition="${Product.optionProduct}">
-			<isset name="PriceModel" value="${Product.getPriceModel(Product.getOptionModel())}" scope="page"/>
-		<iselse/>
-			<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
-		</isif>
-
-		<iscomment>
-			Check whether the product has price in the sale pricebook. If so, then
-			display two prices: crossed-out standard price and sales price.
-		</iscomment>
-		<isinclude template="product/components/standardprice"/>
-		<isset name="SalesPrice" value="${PriceModel.getPrice()}" scope="page"/>
-		<isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page"/>
-
-		<isif condition="${ShowStandardPrice}">
-			<div class="product-discounted-price">
-				<span class="product-standard-price" title="Regular Price"><isprint value="${StandardPrice}"/></span>
-				<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
-			</div>
-		<iselse/>
-			<span class="product-sales-price" title="Sale Price"><isprint value="${SalesPrice}"/></span>
-		</isif>
-
-		<isif condition="${!empty(OrgProduct)}">
-			<iscomment>Restore current product instance</iscomment>
-			<isset name="Product" value="${OrgProduct}" scope="page"/>
-			<isset name="OrgProduct" value="${null}" scope="page"/>
-		</isif>
-	</isif>
+<isloop items="${prices}" var="productPrice">
+	<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
+</isloop>
 </div>
 
 <iscomment>Promotion</iscomment>
