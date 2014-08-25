@@ -115,11 +115,11 @@
 <iscomment>
 	Check whether the product has price in the sale pricebook. If so, then
 	display two prices: crossed-out standard price and sales price.
+	
+	TODO: should find a better way to include logic.
 </iscomment>
 <isinclude template="product/components/standardprice"/>
 <isscript>
-	// SHAME
-	// The break above to include template as logic is UGLY. There should be a better way to include logic.
 	var prices = [];
 	var SalesPrice, ShowStandardPrice, extraPrice;
 	// simulate the same if else block from before the template include break
