@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances>
+            <preference preference-id="AddProductToBasketBehavior">IncrementQuantities</preference>
+            <preference preference-id="CategoryChangeFrequency">daily</preference>
+            <preference preference-id="CategoryPriority">0.5</preference>
+            <preference preference-id="ContentChangeFrequency">daily</preference>
+            <preference preference-id="ContentPriority">0.5</preference>
+            <preference preference-id="CouponGeneratorIncludeDashes">true</preference>
+            <preference preference-id="CouponGeneratorIncludeVowels">true</preference>
+            <preference preference-id="EnableSiteOrderNumbers">false</preference>
+            <preference preference-id="MaxURLsPerFile">5000</preference>
+            <preference preference-id="ProductChangeFrequency">daily</preference>
+            <preference preference-id="ProductPriority">0.5</preference>
+            <preference preference-id="SiteCurrencies">USD</preference>
+            <preference preference-id="SiteCustomerList">SiteGenesisCollections</preference>
+            <preference preference-id="SiteDefaultLocale">default</preference>
+            <preference preference-id="SiteLibrary">SharedLibrary</preference>
+            <preference preference-id="SiteLocales">default</preference>
+            <preference preference-id="SiteTimezone">Etc/UTC</preference>
+            <preference preference-id="StorefrontURLsEnabled">true</preference>
+        </all-instances>
+        <development>
+            <preference preference-id="RobotsTxtContent"/>
+            <preference preference-id="RobotsTxtMode">Cartridge</preference>
+            <preference preference-id="StorefrontProtectionPassword"/>
+        </development>
+        <staging>
+            <preference preference-id="RobotsTxtContent"/>
+            <preference preference-id="RobotsTxtMode">Cartridge</preference>
+            <preference preference-id="StorefrontProtectionPassword"/>
+        </staging>
+        <production>
+            <preference preference-id="RobotsTxtContent"/>
+            <preference preference-id="RobotsTxtMode">Cartridge</preference>
+            <preference preference-id="StorefrontProtectionPassword"/>
+        </production>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances/>
+        <development/>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
+
