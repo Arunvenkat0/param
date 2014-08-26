@@ -4765,7 +4765,7 @@ $.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
  * Add CCOwner validation method to jQuery validation plugin.
  * Text fields must have 'owner' css class to be validated as not a credit card
  */
-$.validator.addMethod("owner", validateOwner, app.resources.INVALID_OWNER);
+$.validator.addMethod("owner", validateOwner, Resources.INVALID_OWNER);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
@@ -4773,7 +4773,7 @@ $.validator.addMethod("owner", validateOwner, app.resources.INVALID_OWNER);
  */
 $.validator.addMethod('gift-cert-amount', function (value, el){
 	var isOptional = this.optional(el);
-	var isValid = (!isNaN(value)) && (parseFloat(value)>=5) && (parseFloat(value) <= 5000);
+	var isValid = (!isNaN(value)) && (parseFloat(value) >= 5) && (parseFloat(value) <= 5000);
 	return isOptional || isValid;
 }, Resources.GIFT_CERT_AMOUNT_INVALID);
 
