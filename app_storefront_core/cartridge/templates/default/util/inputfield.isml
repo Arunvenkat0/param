@@ -108,126 +108,125 @@
 	additionalClass += (pdict.formfield.mandatory == true) ? " required": "";
 </isscript>
 
-	<div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
+<div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
 
-	<isif condition="${['select', 'textarea'].indexOf(pdict.type) !== -1 || inputElementTypes.indexOf(pdict.type) !== -1}">
-		<isif condition="${empty(pdict.label) || !pdict.label == 'false'}">
-			<iscomment>display the field label</iscomment>
-			<label for="${pi_name}">
-				<iscomment>Display Required Star</iscomment>
-				<isif condition="${pdict.formfield.mandatory}">
-					<span class="required-indicator">&#8226;</span>
-				</isif>
-				<iscomment>span is required to allow for dynamic change of label text</iscomment>
-				<span>
-				<isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/>
-				</span>
-			</label>
-		</isif>
-
-		<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
-			<isif condition="${pdict.type == 'select'}">
-				<isscript>/* to prevent HTML encoding */
-					aTag = '<select class="input-select ' + additionalClass + '" id="' + pi_id + '" name="' + pi_name + '" ' + pi_attributes + '>';
-				</isscript>
-				<isprint value="${aTag}" encoding="off"/>
-				<isloop items="${pdict.formfield.options}" var="option">
-					<isscript>
-						// code to avoid empty option tags, because this causes an XHTML warning
-						var label = Resource.msg(option.label,'forms',null);
-						var displayValue = label;
-
-						if (displayValue == null || displayValue == '')
-						{
-							displayValue = "<!-- Empty -->";
-						}
-						else
-						{
-							// encode it already, because in case of empty, we want to
-							// avoid encoding
-							displayValue = StringUtils.stringToHtml(displayValue);
-						}
-					</isscript>
-					<isif condition="${option.selected}">
-						<option class="select-option" label="${label}" value="${option.value||''}" selected="selected"><isprint value="${displayValue}" encoding="off"/></option>
-					<iselse/>
-						<option class="select-option" label="${label}" value="${option.value||''}"><isprint value="${displayValue}" encoding="off"/></option>
-					</isif>
-				</isloop>
-				</select>
-			<iselseif condition="${inputElementTypes.indexOf(pdict.type) !== -1}">
-				<isscript>/* to prevent HTML encoding */
-					aTag = '<input class="input-text' + additionalClass + '" id="' + pi_id + '" type="' + pdict.type + '" name="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
-				</isscript>
-				<isprint value="${aTag}" encoding="off"/>
-			<iselseif condition="${pdict.type == 'textarea'}">
-				<isscript>/* to prevent HTML encoding */
-					aTag = '<textarea class="input-textarea ' + additionalClass + '" id="' + pi_id + '" name="' + pi_name + '"' + pi_attributes + '>' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '</textarea>';
-				</isscript>
-				<isprint value="${aTag}" encoding="off"/>
-			</isif>
-
-			<iscomment>description or error message</iscomment>
-			<isif condition="${pdict.formfield.valid}">
-				<isif condition="${!empty(pdict.formfield.description)}">
-					<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-				</isif>
-			<iselse/>
-				<isif condition="${!empty(pdict.formfield.error)}">
-					<span class="form-caption error-message"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
-				<iselseif condition="${!empty(pdict.formfield.description)}">
-					<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-				</isif>
-			</isif>
-		</isif>
-
-	<iscomment>display checkbox fields</iscomment>
-	<iselseif condition="${pdict.type == 'checkbox'}">
-
-		<isif condition="${empty(pdict.label) || pdict.label == 'true'}">
-			<label for="${pi_name}"><isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/></label>
-		</isif>
-
-		<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
-
-			<isprint value="${aTag}" encoding="off"/>
-
-			<isif condition="${pdict.formfield.checked}">
-			 	<isscript>/* to prevent HTML encoding */
-					aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" checked="checked" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes +'/>';
-			 	</isscript>
-			<iselse/>
-			 	<isscript>/* to prevent HTML encoding */
-					aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
-			 	</isscript>
-			</isif>
-		 	<isprint value="${aTag}" encoding="off"/>
-
-			<iscomment>display required star</iscomment>
+<isif condition="${['select', 'textarea'].indexOf(pdict.type) !== -1 || inputElementTypes.indexOf(pdict.type) !== -1}">
+	<isif condition="${empty(pdict.label) || !pdict.label == 'false'}">
+		<iscomment>display the field label</iscomment>
+		<label for="${pi_name}">
+			<iscomment>Display Required Star</iscomment>
 			<isif condition="${pdict.formfield.mandatory}">
 				<span class="required-indicator">&#8226;</span>
 			</isif>
-
-			<iscomment>display description or error message</iscomment>
-			<isif condition="${pdict.formfield.valid}">
-				<isif condition="${!empty(pdict.formfield.description)}">
-					<span class="form-caption"><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-				</isif>
-			<iselse/>
-				<isif condition="${!empty(pdict.formfield.error)}">
-					<span class="form-caption error-message"><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
-				<iselseif condition="${!empty(pdict.formfield.description)}">
-					<span class="form-caption"><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-				</isif>
-			</isif>
-		</isif>
-
-	<iscomment>hidden fields</iscomment>
-	<iselseif condition="${pdict.type == 'hidden'}">
-		<isscript>/* to prevent HTML encoding */
-			aTag = '<input type="hidden" name="' + pi_name + '" id="' + pi_id + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes +'/>';
-		</isscript>
-		<isprint value="${aTag}" encoding="off"/>
+			<iscomment>span is required to allow for dynamic change of label text</iscomment>
+			<span>
+			<isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/>
+			</span>
+		</label>
 	</isif>
 
-	</div>
+	<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
+		<isif condition="${pdict.type == 'select'}">
+			<isscript>/* to prevent HTML encoding */
+				aTag = '<select class="input-select ' + additionalClass + '" id="' + pi_id + '" name="' + pi_name + '" ' + pi_attributes + '>';
+			</isscript>
+			<isprint value="${aTag}" encoding="off"/>
+			<isloop items="${pdict.formfield.options}" var="option">
+				<isscript>
+					// code to avoid empty option tags, because this causes an XHTML warning
+					var label = Resource.msg(option.label,'forms',null);
+					var displayValue = label;
+
+					if (displayValue == null || displayValue == '')
+					{
+						displayValue = "<!-- Empty -->";
+					}
+					else
+					{
+						// encode it already, because in case of empty, we want to
+						// avoid encoding
+						displayValue = StringUtils.stringToHtml(displayValue);
+					}
+				</isscript>
+				<isif condition="${option.selected}">
+					<option class="select-option" label="${label}" value="${option.value||''}" selected="selected"><isprint value="${displayValue}" encoding="off"/></option>
+				<iselse/>
+					<option class="select-option" label="${label}" value="${option.value||''}"><isprint value="${displayValue}" encoding="off"/></option>
+				</isif>
+			</isloop>
+			</select>
+		<iselseif condition="${inputElementTypes.indexOf(pdict.type) !== -1}">
+			<isscript>/* to prevent HTML encoding */
+				aTag = '<input class="input-text' + additionalClass + '" id="' + pi_id + '" type="' + pdict.type + '" name="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
+			</isscript>
+			<isprint value="${aTag}" encoding="off"/>
+		<iselseif condition="${pdict.type == 'textarea'}">
+			<isscript>/* to prevent HTML encoding */
+				aTag = '<textarea class="input-textarea ' + additionalClass + '" id="' + pi_id + '" name="' + pi_name + '"' + pi_attributes + '>' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '</textarea>';
+			</isscript>
+			<isprint value="${aTag}" encoding="off"/>
+		</isif>
+
+		<iscomment>description or error message</iscomment>
+		<isif condition="${pdict.formfield.valid}">
+			<isif condition="${!empty(pdict.formfield.description)}">
+				<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
+			</isif>
+		<iselse/>
+			<isif condition="${!empty(pdict.formfield.error)}">
+				<span class="form-caption error-message"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
+			<iselseif condition="${!empty(pdict.formfield.description)}">
+				<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
+			</isif>
+		</isif>
+	</isif>
+
+<iscomment>display checkbox fields</iscomment>
+<iselseif condition="${pdict.type == 'checkbox'}">
+	<isif condition="${empty(pdict.label) || pdict.label == 'true'}">
+		<label for="${pi_name}"><isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/></label>
+	</isif>
+
+	<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
+
+		<isprint value="${aTag}" encoding="off"/>
+
+		<isif condition="${pdict.formfield.checked}">
+		 	<isscript>/* to prevent HTML encoding */
+				aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" checked="checked" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes +'/>';
+		 	</isscript>
+		<iselse/>
+		 	<isscript>/* to prevent HTML encoding */
+				aTag = '<input class="input-checkbox' + additionalClass + '" type="checkbox" name="' + pi_name + '" id="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
+		 	</isscript>
+		</isif>
+	 	<isprint value="${aTag}" encoding="off"/>
+
+		<iscomment>display required star</iscomment>
+		<isif condition="${pdict.formfield.mandatory}">
+			<span class="required-indicator">&#8226;</span>
+		</isif>
+
+		<iscomment>display description or error message</iscomment>
+		<isif condition="${pdict.formfield.valid}">
+			<isif condition="${!empty(pdict.formfield.description)}">
+				<span class="form-caption"><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
+			</isif>
+		<iselse/>
+			<isif condition="${!empty(pdict.formfield.error)}">
+				<span class="form-caption error-message"><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
+			<iselseif condition="${!empty(pdict.formfield.description)}">
+				<span class="form-caption"><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
+			</isif>
+		</isif>
+	</isif>
+
+<iscomment>hidden fields</iscomment>
+<iselseif condition="${pdict.type == 'hidden'}">
+	<isscript>/* to prevent HTML encoding */
+		aTag = '<input type="hidden" name="' + pi_name + '" id="' + pi_id + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes +'/>';
+	</isscript>
+	<isprint value="${aTag}" encoding="off"/>
+</isif>
+
+</div>
