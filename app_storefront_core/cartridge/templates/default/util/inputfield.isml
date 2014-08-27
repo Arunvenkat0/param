@@ -161,24 +161,11 @@
 						</isif>
 					</isloop>
 					</select>
-					
-				<iscomment>display password input fields</iscomment>
-				<iselseif condition="${pdict.type == 'password'}">
-
-				 	<isscript>/* to prevent HTML encoding */
-						aTag = '<input class="input-text-pw' + additionalClass + '" id="' + pi_id + '" type="password" name="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
-				 	</isscript>
-				 	<isprint value="${aTag}" encoding="off"/>
-
-				<iscomment>display normal input fields</iscomment>
-				<iselseif condition="${pdict.type == 'input'}">
-				 	
-				 	<isscript>/* to prevent HTML encoding */
-						aTag = '<input class="input-text' + additionalClass + '" id="' + pi_id + '" type="text" name="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
-				 	</isscript>
-				 	<isprint value="${aTag}" encoding="off"/>
-				 	
-				<iscomment>textarea</iscomment>
+				<iselseif condition="${inputElementTypes.indexOf(pdict.type) !== -1}">
+					<isscript>/* to prevent HTML encoding */
+						aTag = '<input class="input-text' + additionalClass + '" id="' + pi_id + '" type="' + pdict.type + '" name="' + pi_name + '" value="' + StringUtils.stringToHtml(pdict.formfield.htmlValue) + '" ' + pi_attributes + '/>';
+					</isscript>
+					<isprint value="${aTag}" encoding="off"/>
 				<iselseif condition="${pdict.type == 'textarea'}">
 				 	
 				 	<isscript>/* to prevent HTML encoding */
