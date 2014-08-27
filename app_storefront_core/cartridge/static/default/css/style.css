@@ -686,8 +686,7 @@ button.add-all-to-cart{display:none;} /* not available in simple ui. */
 .cart-order-totals{float:right;width:40%;margin-top:26px;}
 .cart-order-totals button{float:right;}
 .order-totals-table th{display:none;}
-.order-totals-table td{padding:5px 0;text-align:right !important;word-break:break-all;}
-.order-totals-table td+td{word-break:normal;}
+.order-totals-table td{padding:5px 0;text-align:right !important;}
 .order-totals-table .order-total{font-size:1.3em;font-weight:700;}
 .order-totals-item{width:60%;}
 .order-totals-value{width:40%;}

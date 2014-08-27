@@ -7,22 +7,25 @@
 
 <isscript>
 	//two attirbutes needed to pass along the selected color to the pdp/quickview
-	var colorAttributeID = 'dwvar_' + pdict.Product.ID + '_color',
+	var queryString, queryStringArray = [],
+		colorAttributeID = 'dwvar_' + pdict.Product.ID + '_color',
 		sizeAttributeID = 'dwvar_' + pdict.Product.ID + '_size',
 		productColorValue = '',
 		productSizeValue = '';
 
 	//helper variables
-	var requestQueryStringArray = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string').split('&');
+	queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string');
+	if (queryString) {
+		queryStringArray = queryString.split('&');
+	}
 	var PMapValue = '';
 
-	for (var x = 0; x < requestQueryStringArray.length ;x++) {
-		PMapValue = requestQueryStringArray[x];
+	for (var x = 0; x < queryStringArray.length ;x++) {
+		PMapValue = queryStringArray[x];
 		if (PMapValue.indexOf('color') != -1) {
 			productColorValue = PMapValue.split('=')[1];
 		}
 	}
-
 	// look into the PVM
 	var PVM : dw.catalog.ProductVariationModel,
 		variant : dw.catalog.Variant,
