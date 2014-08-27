@@ -31,7 +31,7 @@
 <isscript>
 	var pi_attributes 	: String = '';
 	var pi_name 		: String = '';
-	<iscomment> used for client side validation especially for equalTo rule (e.g. password, confirmpassword. see app.js for details and example</iscomment>
+	// used for client side validation especially for equalTo rule (e.g. password, confirmpassword)
 	var pi_id 			: String = '';
 
 	/* Prevent maxlength from being used by select and textarea */
@@ -86,16 +86,16 @@
 		rowClass = ' ' + pdict.rowclass;
 	}
 
-<iscomment>
+	/*
 	 if it is a phone, country field then add these as css class names as well
 	 so that client side validation can work
-	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used 
-</iscomment>
-if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
-	additionalClass += ' ' + pdict.formfield.formId;
-}
+	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used
+	*/
+	if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
+		additionalClass += ' ' + pdict.formfield.formId;
+	}
 
-	<iscomment> used for client side validation DO NOT remove it! otherwise client side validation won't work!!!</iscomment>
+	// used for client side validation DO NOT remove it! otherwise client side validation won't work!!!
 	additionalClass += (pdict.formfield.mandatory == true) ? " required": "";
 </isscript>
 
