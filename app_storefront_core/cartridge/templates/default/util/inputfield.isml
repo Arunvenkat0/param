@@ -86,7 +86,7 @@
 	var additionalClass : String = '';
 	if (! empty(pdict.xhtmlclass))
 	{
-		additionalClass = ' ' + pdict.xhtmlclass;
+		additionalClass = pdict.xhtmlclass;
 	}
 	
 	var rowClass : String = '';
@@ -127,9 +127,6 @@
 		</isif>
 
 		<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
-			<iscomment>display input/select fields</iscomment>
-
-				<iscomment>display select boxes</iscomment>
 				<isif condition="${pdict.type == 'select'}">
 				 	<isscript>/* to prevent HTML encoding */
 						aTag = '<select class="input-select ' + additionalClass + '" id="' + pi_id + '" name="' + pi_name + '" ' + pi_attributes + '>';
@@ -174,8 +171,8 @@
 				 	<isprint value="${aTag}" encoding="off"/>
 				 	
 				</isif>
-				
-				<iscomment>display description or error message</iscomment>
+
+				<iscomment>description or error message</iscomment>
 				<isif condition="${pdict.formfield.valid}">
 					<isif condition="${!empty(pdict.formfield.description)}">
 						<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
