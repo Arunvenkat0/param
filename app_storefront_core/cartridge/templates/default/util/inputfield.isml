@@ -34,6 +34,15 @@
 	// used for client side validation especially for equalTo rule (e.g. password, confirmpassword)
 	var pi_id 			: String = '';
 
+	var inputTypes : Array = ['select', 'checkbox', 'textarea', 'radio', 'hidden', 'input'];
+	// http://www.w3.org/TR/html-markup/input.html
+	var inputElementTypes : Array = ['text', 'password', 'number', 'range', 'date', 'datetime', 'time', 'datetime-local', 'month', 'week', 'email', 'url', 'tel', 'color', 'search'];
+
+	// default input to type text
+	if (pdict.type === 'input') {
+		pdict.type = 'text';
+	}
+
 	/* Prevent maxlength from being used by select and textarea */
 	if ( (pdict.type != 'select') && (pdict.type != 'textarea') && (pdict.type != 'checkbox') && (pdict.type != 'radio') && (pdict.type != 'hidden') )
 	{
@@ -100,9 +109,8 @@
 </isscript>
 
 	<div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
-	
-	<isif condition="${(pdict.type == 'select') || (pdict.type == 'password') || (pdict.type == 'input') || (pdict.type == 'textarea')}">
-	
+
+	<isif condition="${['select', 'textarea'].indexOf(pdict.type) !== -1 || inputFieldTypes.indexOf(pdict.type) !== -1}">
 		<isif condition="${empty(pdict.label) || !pdict.label == 'false'}">
 			<iscomment>display the field label</iscomment>
 			<label for="${pi_name}">
