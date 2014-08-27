@@ -110,7 +110,7 @@
 
 	<div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
 
-	<isif condition="${['select', 'textarea'].indexOf(pdict.type) !== -1 || inputFieldTypes.indexOf(pdict.type) !== -1}">
+	<isif condition="${['select', 'textarea'].indexOf(pdict.type) !== -1 || inputElementTypes.indexOf(pdict.type) !== -1}">
 		<isif condition="${empty(pdict.label) || !pdict.label == 'false'}">
 			<iscomment>display the field label</iscomment>
 			<label for="${pi_name}">
