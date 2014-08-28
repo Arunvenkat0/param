@@ -13,10 +13,17 @@ importPackage( dw.system );
  * @output subcategories  : Array Subcategories for menu
  */
 function getSubcategoriesInMenuForCategory(Category : dw.catalog.Category) : Object {
-    var Subcategories = Category.getOnlineSubCategories();
+	
+    var psm : ProductSearchModel = new dw.catalog.ProductSearchModel();
+    psm.setCategoryID(Category.ID);
+    psm.search();
+    var psrefinements : ProductSearchRefinements = psm.getRefinements();
+    var psvValues : ArrayList = psrefinements.getNextLevelCategoryRefinementValues(psm.getCategory());	
+	
     var result = [];
-    if(!empty(Subcategories)){
-        for each(var Subcategory : dw.catalog.Category in Subcategories) {
+    if(!empty(psvValues)){
+        for each(var SubcategoryPSV : dw.catalog.ProductSearchRefinementValue in psvValues) {
+        	var Subcategory : dw.catalog.Catalog = dw.catalog.CatalogMgr.getCategory(SubcategoryPSV.getValue())
         	if(('showInMenu' in Subcategory.custom) && Subcategory.custom.showInMenu.valueOf()) {
         		result.push(Subcategory);
         	}

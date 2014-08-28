@@ -5,7 +5,7 @@
         <artifactId>project-pom</artifactId>
         <version>14.8.0.4</version>
     </parent>
-    
+
     <scm>
         <connection>scm:git:git@bitbucket.org:demandware/sitegenesis.git</connection>
         <developerConnection>scm:git:git@bitbucket.org:demandware/sitegenesis.git</developerConnection>
@@ -17,10 +17,10 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>14.9.0.2-SNAPSHOT</version>
+    <version>14.9.0.3-SNAPSHOT</version>
     <description>SiteGenesis Source</description>
 
-    
+
     <build>
         <plugins>
             <plugin>
