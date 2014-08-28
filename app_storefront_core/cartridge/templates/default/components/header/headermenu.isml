@@ -31,7 +31,19 @@
 	
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat" status="catstatus">
-	
+
+		<iscomment>
+			Manually adding in the gift certificate link into the navigation as it does 
+			not have products and will not be included in the Items collection.
+		</iscomment>
+		<isif condition="${catstatus.last}">
+			<li class=''>
+				<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(dw.catalog.CatalogMgr.getCategory('gift-certificates'))}" encoding="off"/>" class="level-1">
+					<isprint value="${dw.catalog.CatalogMgr.getCategory('gift-certificates').displayName}"/>
+				</a>
+			</li>
+		</isif>
+
 		<li ${catstatus.first ? 'class=first' : ''} ${catstatus.last ? 'class=last' : ''}>
 			<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(topCat)}" encoding="off"/>" class="level-1">
 				<isprint value="${topCat.getDisplayName()}"/>
