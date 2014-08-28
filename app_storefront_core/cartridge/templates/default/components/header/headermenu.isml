@@ -33,8 +33,8 @@
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat" status="catstatus">
 
 		<iscomment>
-			Manually adding in the gift certificate link into the navigation as it does 
-			not have products and will not be included in the Items collection.
+			Manually adding the gift certificate link into the navigation, 
+			b/c it does not have products and will not be included in the Items collection.
 		</iscomment>
 		<isif condition="${catstatus.last}">
 			<li class=''>
