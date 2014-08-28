@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url-rules xmlns="http://www.demandware.com/xml/impex/urlrules/2012-12-01">
+    <general-settings>
+        <lower-case-urls>false</lower-case-urls>
+        <blank-substitute>%20</blank-substitute>
+        <character-replacements-enabled>false</character-replacements-enabled>
+    </general-settings>
+    <category-rule>[ attribute, ID ]</category-rule>
+    <category-page-url-override>false</category-page-url-override>
+    <category-trailing-slash>false</category-trailing-slash>
+    <product-rule/>
+    <product-page-url-override>false</product-page-url-override>
+    <product-id-separator>/</product-id-separator>
+    <folder-rule>[ attribute, ID ]</folder-rule>
+    <folder-page-url-override>false</folder-page-url-override>
+    <folder-trailing-slash>false</folder-trailing-slash>
+    <content-rule/>
+    <content-page-url-override>false</content-page-url-override>
+    <content-id-separator>/</content-id-separator>
+</url-rules>
+

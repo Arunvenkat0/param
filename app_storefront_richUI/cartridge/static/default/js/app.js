@@ -86,7 +86,7 @@ var app = (function (app, $) {
 		}else{
 			app.searchsuggest.init(app.ui.searchContainer, app.resources.SIMPLE_SEARCH);
 		}
-		
+
 		// print handler
 		app.ui.printPage.on("click", function () { window.print(); return false; });
 
@@ -179,7 +179,7 @@ var app = (function (app, $) {
 			app.validator.init();
 			app.components.init();
 			app.searchplaceholder.init();
-			app.mulitcurrency.init();			
+			app.mulitcurrency.init();
 			// execute page specific initializations
 			var ns = app.page.ns;
 			if (ns && app[ns] && app[ns].init) {
@@ -667,9 +667,9 @@ var app = (function (app, $) {
 			var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $cache.productContent;
 			var url = app.util.appendParamsToUrl($(this).val(), params);
 			app.progress.show($cache.pdpMain);
-			
+
 			var hasSwapImage = $(this).find("option:selected").attr("data-lgimg") !== null;
-			
+
 			app.ajax.load({
 				url: url,
 				callback : function (data) {
@@ -1305,7 +1305,7 @@ var app = (function (app, $) {
 					}
 				});
 			}
-				
+
 		}
 	};
 
@@ -1479,7 +1479,7 @@ var app = (function (app, $) {
  */
 (function (app, $) {
 	var $cache = {};
-	
+
 	/**
 	 * @private
 	 * @function
@@ -1491,7 +1491,7 @@ var app = (function (app, $) {
 		var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
 		// get url hidden in DOM
 		var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-		
+
 		if (loadingPlaceHolder.length == 1 && app.util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
 			// switch state to 'loading'
 			// - switches state, so the above selector is only matching once
@@ -1507,7 +1507,7 @@ var app = (function (app, $) {
 				loadingPlaceHolder.attr('data-loading-state','loaded');
 				jQuery('div.search-result-content').append(html);
 			};
-			
+
 			// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
 			// it was removed to temporarily address RAP-2649
 			if (false) {
@@ -1544,7 +1544,7 @@ var app = (function (app, $) {
 		var hash = location.href.split('#')[1];
 		if (hash === 'results-content' || hash === 'results-products') { return; }
 		var refineUrl;
-		
+
 		if (hash.length > 0) {
 			refineUrl = window.location.pathname + "?" + hash;
 		} else {
@@ -1557,7 +1557,7 @@ var app = (function (app, $) {
 			app.progress.hide();
 		});
 	}
-	
+
 	/**
 	 * @private
 	 * @function
@@ -1673,13 +1673,13 @@ var app = (function (app, $) {
 			};
 			$cache.content = $cache.main.find(".search-result-content");
 			app.product.compare.init();
-			
+
 			if (app.clientcache.LISTING_INFINITE_SCROLL) {
 				$(window).on('scroll', infiniteScroll);
 			}
 			app.product.tile.init();
 			initializeEvents();
-			
+
 		}
 	};
 
@@ -1887,6 +1887,11 @@ var app = (function (app, $) {
 			$cache.bonusProductList.on("click", "div.bonus-product-item a[href].swatchanchor", function (e) {
 				e.preventDefault();
 			})
+			.on("change", "input.input-text", function(e){
+				$cache.bonusProductList.find("button.button-select-bonus").removeAttr("disabled");
+				var form = $(this).closest("form.bonus-product-form");
+				form.find("label.quantity-error").text("");
+			})
 			.on("click", "button.button-select-bonus", function (e) {
 				e.preventDefault();
 				if (selectedList.length>=maxItems) {
@@ -1901,6 +1906,11 @@ var app = (function (app, $) {
 					qtyVal = form.find("input[name='Quantity']").val(),
 					qty = isNaN(qtyVal) ? 1 : (+qtyVal);
 
+				if (qty > maxItems) {
+					$cache.bonusProductList.find("button.button-select-bonus").attr("disabled", "disabled");
+					form.find(".quantity-error").text(app.resources.BONUS_PRODUCT_TOOMANY);
+					return;					
+				}
 				var product = {
 					uuid : uuid,
 					pid : form.find("input[name='pid']").val(),
@@ -1943,7 +1953,7 @@ var app = (function (app, $) {
 				var bonusProducts = getBonusProducts();
 				if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
 					bonusProducts.bonusproducts[0].product.qty = maxItems;
-				} 
+				}
 				// make the server call
 				$.ajax({
 					type : "POST",
@@ -1968,7 +1978,7 @@ var app = (function (app, $) {
 				.always(function () {
 					$cache.bonusProduct.dialog("close");
 				});
-				
+
 			});
 		}
 	};
@@ -2204,7 +2214,59 @@ var app = (function (app, $) {
 					updateSummary();
 					app.progress.hide();
 					app.tooltips.init();
+
+					//if nothing is selected in the shipping methods select the first one
+					if( $('#shipping-method-list ').find('.input-radio:checked').length == 0 ) {
+						$('#shipping-method-list ').find('.input-radio:first').attr('checked',true);
+					}					
 				});
+			}
+		});
+	}
+
+	/**
+	 * @function
+	 * @description disable continue button on the page if required inputs are not filled
+	 * @input String the selector string of the continue button
+	 * @input String the selector string for the form
+	 */
+	function initContinue(continueSelector, formSelector) {
+		var $continue = $(continueSelector);
+		var $form = $(formSelector);
+		var validator = $form.validate();
+		var $requiredInputs = $('.required', $form).find(':input');
+		// check for required input
+		var hasEmptyRequired = function () {
+			// filter out only the visible fields - this allows the checking to work on
+			// billing page where some payment methods inputs are hidden
+			var requiredValues = $requiredInputs.filter(':visible').map(function () {
+				return $(this).val();
+			});
+			return $.inArray('', requiredValues) !== -1;
+		};
+
+		if (!hasEmptyRequired()) {
+			// only validate form when all required fields are filled to avoid
+			// throwing errors on empty form
+			if (validator.form()) {
+				$continue.removeAttr('disabled');
+			}
+
+		} else {
+			$continue.attr('disabled', 'disabled');
+		}
+
+		$requiredInputs.on('change', function () {
+			if ($(this).val() === '') {
+				$continue.attr('disabled', 'disabled');
+			} else {
+				// enable continue button on last required field that is valid
+				// only validate single field
+				if (validator.element(this) && !hasEmptyRequired()) {
+					$continue.removeAttr('disabled');
+				} else {
+					$continue.attr('disabled', 'disabled');
+				}
 			}
 		});
 	}
@@ -2229,7 +2291,7 @@ var app = (function (app, $) {
 
 			//handle initial load
 			if($(this).find(".js-isgiftyes").is(':checked')){
-				$(this).find(".gift-message-text").css('display','block')
+				$(this).find(".gift-message-text").css('display','block');
 			}
 
 			//set event listeners
@@ -2243,69 +2305,89 @@ var app = (function (app, $) {
 
 		});
 	}
+
 	/**
-	* @function
-	* @description this function inits the form so that uses client side validation before submitting to the server
-	*/
-	function initmultishipshipaddress() {
-	//init the continue button as disabled
-		var selectvalue = new Array();
-	    $(this).removeClass('error');
+	 * @function
+	 * @description capture and handle add and edit address action in dialog on multiship page
+	 */
+	function addEditAddress(target) {
+		var $addressForm = $('form[name$="multishipping_editAddress"]'),
+			$selectDropDown = $addressForm.find('.input-select-multiship'),
+			$addressList = $addressForm.find('.address-list'),
+			add = true,
+			selectedAddressUUID = $(target).closest('.shippingaddress').find('.select-address').val();
+		$selectDropDown.on('change', function (e) {
+			e.preventDefault();
+			var selectedAddress = $addressList.find('select').val();
+			if (selectedAddress !== 'newAddress') {
+				selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+					return add.UUID === selectedAddress;
+				})[0];
+				add = false;
+				// proceed to fill the form with the selected address
+				for (var field in selectedAddress) {
+					// if the key in selectedAddress object ends with 'Code', remove that suffix
+					$addressForm.find('[name$=' + field + '], [name$=' + field.replace('Code', '') + ']').val(selectedAddress[field]);
+				}
+			} else {
+				//reset the form if the value of the option is not a UUID
+				$addressForm.find('.input-text, .input-select').val('');
+			}
+		});
+		$addressForm.on('click', '.cancel', function (e) {
+			e.preventDefault();
+			app.dialog.close();
+		});
+		$addressForm.on('submit', function (e) {
+			e.preventDefault();
+			$.getJSON(app.urls.addEditAddress, $addressForm.serialize(), function (response) {
+				if (!response.success) {
+					// @TODO: figure out a way to handle error on the form
+					console.log('error!');
+					return;
+				}
+				var address = response.address,
+					$shippingAddress = $(target).closest('.shippingaddress'),
+					$select = $shippingAddress.find('.select-address'),
+					$selected = $select.find('option:selected'),
+					newOption = '<option value="' + address.UUID + '">'
+						+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
+						+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
+						+ '</option>';
+				app.dialog.close();
+				if (add) {
+					$('.shippingaddress select').removeClass('no-option').append(newOption);
+					$('.no-address').hide();
+				} else {
+					$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
+				}
+				// if there's no previously selected option, select it
+				if (!$selected.length > 0 || $selected.val() === '') {
+					$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
+				}
+			});
+		});
 
-	    $("select option:selected").each(function () {
-	    	selectvalue.push(this.value)
-     	});
-	    
-	    //if we found a empty value disable the button
-	    if (selectvalue.length > 0 && selectvalue.indexOf('') == -1){
-	    	$('.formactions button').removeAttr('disabled');
-	    } else {
-	    	$('.formactions button').attr('disabled','disabled');
-	    }
-
-	    //add error classes to selects that don't have an address associated with them  when the button is clicked
-	    $('.formactions').bind('click',function(){
-	    	$.each( $(".cart-row .shippingaddress select.selectbox"), function(){
-	        	if(this.value == ''){
-	          		$(this).addClass('error');
-	        	}else{
-	          		$(this).removeClass('error');
-	        	};
-	      	});
-	    });
-
-	    //add listeners to the selects to enable the continue button
-	    $.each( $(".cart-row .shippingaddress select.selectbox"), function(){
-	    	$(this).bind('change', function(){
-	        	if(this.value == ''){
-	          		$('.formactions button').attr('disabled','disabled');
-	          		$(this).addClass('error');
-	        	}else{
-	          		//check to see if any select box has a empty vlaue
-	          		var selectvalues = new Array();
-	          		$(this).removeClass('error');
-
-	            	$("select option:selected").each(function () {
-	              		selectvalues.push(this.value)
-	           	 	});
-
-	            	//if we found a empty value disable the button
-	            	if(selectvalues.indexOf('') == -1){
-	              		$('.formactions button').removeAttr('disabled');
-	            	}else{
-	              		$('.formactions button').attr('disabled','disabled');
-
-	            	}
-	        	}
-	      	});
-
-	    });
+		//preserve the uuid of the option for the hop up form
+		if (selectedAddressUUID) {
+			//update the form with selected address
+			$addressList.find('option').each(function() {
+				//check the values of the options
+				if ($(this).attr('value') == selectedAddressUUID) {
+					$(this).attr('selected','selected');
+					$selectDropDown.trigger('change');
+				}
+			});
+		}
 	}
+
 	/**
 	 * @function
 	 * @description shows gift message box, if shipment is gift
 	 */
 	function shippingLoad() {
+		initContinue('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
+
 		$cache.checkoutForm.on("click", "#is-gift-yes, #is-gift-no", function (e) {
 			$cache.checkoutForm.find(".gift-message-text").toggle($cache.checkoutForm.find("#is-gift-yes")[0].checked);
 		})
@@ -2361,12 +2443,9 @@ var app = (function (app, $) {
 	 */
 	function multishippingLoad() {
 		initMultiGiftMessageBox();
-		if ($(".cart-row .shippingaddress select.selectbox").length > 0){
-			initmultishipshipaddress();
-		} else {
-			$('.formactions button').attr('disabled','disabled');
+		if ($(".cart-row .shippingaddress .select-address").length > 0){
+			initContinue('[name$="addressSelection_save"]', '[id$="multishipping_addressSelection"]')
 		}
-		return null;
 	}
 
 	/**
@@ -2385,19 +2464,19 @@ var app = (function (app, $) {
 		// ensure checkbox of payment method is checked
 		$("#is-" + paymentMethodID)[0].checked = true;
 
-		var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
-		bmlForm.find("select[name$='_year']").removeClass("required");
-		bmlForm.find("select[name$='_month']").removeClass("required");
-		bmlForm.find("select[name$='_day']").removeClass("required");
-		bmlForm.find("input[name$='_ssn']").removeClass("required");
+		// var bmlForm = $cache.checkoutForm.find("#PaymentMethod_BML");
+		// bmlForm.find("select[name$='_year']").removeClass("required");
+		// bmlForm.find("select[name$='_month']").removeClass("required");
+		// bmlForm.find("select[name$='_day']").removeClass("required");
+		// bmlForm.find("input[name$='_ssn']").removeClass("required");
 
-		if (paymentMethodID==="BML") {
-			var yr = bmlForm.find("select[name$='_year']");
-			bmlForm.find("select[name$='_year']").addClass("required");
-			bmlForm.find("select[name$='_month']").addClass("required");
-			bmlForm.find("select[name$='_day']").addClass("required");
-			bmlForm.find("input[name$='_ssn']").addClass("required");
-		}
+		// if (paymentMethodID==="BML") {
+		// 	var yr = bmlForm.find("select[name$='_year']");
+		// 	bmlForm.find("select[name$='_year']").addClass("required");
+		// 	bmlForm.find("select[name$='_month']").addClass("required");
+		// 	bmlForm.find("select[name$='_day']").addClass("required");
+		// 	bmlForm.find("input[name$='_ssn']").addClass("required");
+		// }
 		app.validator.init();
 	}
 	/**
@@ -2448,9 +2527,9 @@ var app = (function (app, $) {
 	function billingLoad() {
 		if( !$cache.paymentMethodId ) return;
 
+		initContinue('[name$="billing_save"]', 'form[id$="billing"]');
 		$cache.paymentMethodId.on("click", function () {
 			changePaymentMethod($(this).val());
-
 		});
 
 		// get selected payment method from payment method form
@@ -2512,7 +2591,7 @@ var app = (function (app, $) {
 				$cache.balance.html(app.resources.GIFT_CERT_BALANCE + " " + data.giftCertificate.balance).removeClass('error').addClass('success');
 			});
 		});
-		
+
 		$cache.addGiftCert.on('click', function(e) {
 			e.preventDefault();
 			var code = $cache.giftCertCode.val(),
@@ -2521,7 +2600,7 @@ var app = (function (app, $) {
 				$error.html(app.resources.GIFT_CERT_MISSING);
 				return;
 			}
-			
+
 			var url = app.util.appendParamsToUrl(app.urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
 			$.getJSON(url, function(data) {
 				var fail = false;
@@ -2575,7 +2654,7 @@ var app = (function (app, $) {
 				}
 			});
 		});
-		
+
 		// trigger events on enter
 		$cache.couponCode.on('keydown', function(e) {
 			if (e.which === 13) {
@@ -2658,7 +2737,7 @@ var app = (function (app, $) {
 			//on the single shipping page, update the list of shipping methods when the state feild changes
 			$('#dwfrm_singleshipping_shippingAddress_addressFields_states_state').bind('change', function(){
 				updateShippingMethodList();
-			});	
+			});
 		}
 		else if(isMultiShipping){
 			multishippingLoad();
@@ -2666,7 +2745,7 @@ var app = (function (app, $) {
 		else{
 			billingLoad();
 		}
-		
+
 		//if on the order review page and there are products that are not available diable the submit order button
 		if($('.order-summary-footer').length > 0){
 			if($('.notavailable').length > 0){
@@ -2674,11 +2753,13 @@ var app = (function (app, $) {
 			}
 		}
 
-		$('.editaddress').on('click', 'a', function() {
+		$('.edit-address').on('click', 'a', function(e) {
 			app.dialog.open({url: this.href, options: {open: function() {
 				initializeCache();
 				addressLoad();
+				addEditAddress(e.target);
 			}}});
+			// return false to prevent global dialogify event from triggering
 			return false;
 		});
 	}
@@ -2742,20 +2823,20 @@ var app = (function (app, $) {
 			$cache.quickView = $("<div/>").attr("id", "#QuickViewDialog").appendTo(document.body);
 			return $cache.quickView;
 		},
-		
+
 		initializeQuickViewNav : function(qvUrl) {
-			
+
 			//from the url of the product in the quickview
 			qvUrlTail = qvUrl.substring(qvUrl.indexOf('?'));
 			qvUrlPidParam = qvUrlTail.substring(0,qvUrlTail.indexOf('&'));
 			qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-			
+
 			if(qvUrlPidParam.indexOf('pid') > 0){
 				//if storefront urls are turned off
 				//append the pid to the url
 				qvUrl = qvUrl+qvUrlPidParam;
 			}
-			
+
 			this.searchesultsContainer = $('#search-result-items').parent();
 			this.productLinks = this.searchesultsContainer.find('.thumb-link');
 
@@ -2775,15 +2856,15 @@ var app = (function (app, $) {
 					//if storefront urls are turned off
 					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 					productLinksUrl = productLinksUrl+productLinksUrlPidParam;
-				
+
 				}else{
 					productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 				}
-			
+
 				if(productLinksUrl == ""){
 					productLinksUrl = this.productLinks[i].href;
 				}
-				
+
 				if (qvUrl == productLinksUrl) {
 					this.productLinkIndex = i;
 				}
@@ -2802,7 +2883,7 @@ var app = (function (app, $) {
 				this.btnNext.hide();
 				this.btnPrev.hide();
 			}
-			
+
 		},
 
 		navigateQuickview : function(event) {
@@ -2821,7 +2902,7 @@ var app = (function (app, $) {
 
 			event.preventDefault();
 		},
-		
+
 		// show quick view dialog and send request to the server to get the product
 		// options.source - source of the dialog i.e. search/cart
 		// options.url - product url
@@ -2848,7 +2929,7 @@ var app = (function (app, $) {
 					}
 				});
 				$cache.quickView.dialog('open');
-				
+
 				app.quickView.initializeQuickViewNav(this.url);
 			};
 			app.product.get(options);
@@ -2998,8 +3079,8 @@ var app = (function (app, $) {
 			if (typeof(offsetToTop) != 'undefined') {
 				top -= offsetToTop;
 			}
-		
-			
+
+
 			if ( window.pageXOffset != null) {
 
 				return (
@@ -3008,7 +3089,7 @@ var app = (function (app, $) {
 						(top + height) > window.pageYOffset &&
 						(left + width) > window.pageXOffset
 				);
-				
+
 			}
 
 			if (document.compatMode == "CSS1Compat") {
@@ -3018,7 +3099,7 @@ var app = (function (app, $) {
 					(top + height) > window.document.documentElement.scrollTop &&
 					(left + width) > window.document.documentElement.scrollLeft
 			);
-			
+
 			}
 		},
 		/**
@@ -3857,18 +3938,18 @@ var app = (function (app, $) {
 			});
 		});
 	}
-	/** 
-	 * @private 
-	 * @function 
+	/**
+	 * @private
+	 * @function
 	 * @description init events for the loginPage
 	 */
 	function initLoginPage() {
-		
+
 		//o-auth binding for which icon is clicked
 		$('.oAuthIcon').bind( "click", function() {
 			$('#OAuthProvider').val(this.id);
-		});	
-		
+		});
+
 		//toggle the value of the rememberme checkbox
 		$( "#dwfrm_login_rememberme" ).bind( "change", function() {
 			if($('#dwfrm_login_rememberme').attr('checked')){
@@ -3876,8 +3957,8 @@ var app = (function (app, $) {
 			}else{
 				$('#rememberme').val('false')
 			}
-		});	
-				
+		});
+
 	}
 	/**
 	 * @private
@@ -3924,10 +4005,10 @@ var app = (function (app, $) {
 			window.location.href = app.util.appendParamToURL(app.urls.wishlistAddress, "AddressID", $(this).val());
 
 		});
-		
+
 		//add js logic to remove the , from the qty feild to pass regex expression on client side
-		jQuery('.option-quantity-desired div input').focusout(function(){		
-			$(this).val($(this).val().replace(',',''));	
+		jQuery('.option-quantity-desired div input').focusout(function(){
+			$(this).val($(this).val().replace(',',''));
 		});
 	}
 
@@ -4231,7 +4312,8 @@ var app = (function (app, $) {
 				ca : /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
 				gb : /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
 			},
-			email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/
+			email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
+			notCC : /^(?!(([0-9 -]){13,19})).*$/
 		},
 		settings = {
 			// global form validator settings
@@ -4274,6 +4356,17 @@ var app = (function (app, $) {
 		return isOptional || isValid;
 	}
 
+ 	/**
+	 * @function
+	 * @description Validates that a credit card owner is not a Credit card number
+	 * @param {String} value The owner field which will be validated
+	 * @param {String} el The input field
+	 */
+	function validateOwner(value, el) {
+		var isValid = regex.notCC.test($.trim(value));
+		return isValid;
+	}
+	
 	/**
 	 * Add phone validation method to jQuery validation plugin.
 	 * Text fields must have 'phone' css class to be validated as phone
@@ -4285,7 +4378,13 @@ var app = (function (app, $) {
 	 * Text fields must have 'email' css class to be validated as email
 	 */
 	$.validator.addMethod("email", validateEmail, app.resources.INVALID_EMAIL);
-
+	
+ 	/**
+	 * Add CCOwner validation method to jQuery validation plugin.
+	 * Text fields must have 'owner' css class to be validated as not a credit card
+	 */
+	$.validator.addMethod("owner", validateOwner, app.resources.INVALID_OWNER);
+	
 	/**
 	 * Add gift cert amount validation method to jQuery validation plugin.
 	 * Text fields must have 'gift-cert-amont' css class to be validated
@@ -4571,7 +4670,7 @@ var app = (function (app, $) {
 			// build the request url
 			var reqUrl = app.util.appendParamToURL(app.urls.searchsuggest, "q", part);
             reqUrl = app.util.appendParamToURL(reqUrl, "legacy", "true");
-            
+
 			// get remote data as JSON
 			$.getJSON(reqUrl, function (data) {
 				// get the total of results
@@ -4855,19 +4954,19 @@ var app = (function (app, $) {
  	 		 	}// end ajax callback
  	 		 });
 		});
-		
+
 		//hide the feature if user is in checkout
 		if(app.page.title=="Checkout"){
 			$('.mc-class').css('display','none');
 		}
-		
+
 	}
 
 	/******* app.mulitcurrency public object ********/
 	app.mulitcurrency = {
 		/**
 		 * @function
-		 * @description 
+		 * @description
 		 */
 		init : function () {
 			initializeEvents();
@@ -4909,12 +5008,12 @@ var app = (function (app, $) {
   				e.preventDefault();
  				app.storeinventory.loadPreferredStorePanel(jQuery(this).parent().attr('id'));
   			});
-  			
+
   			//disable the radio button for home deliveries if the store inventory is out of stock
   			jQuery('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
   				jQuery(this).parents('.home-delivery').children('input').attr('disabled','disabled');
   			});
-  			
+
 
   			jQuery('body').on('click', '#pdpMain .set-preferred-store', function(e){
  				e.stopImmediatePropagation();
@@ -5122,11 +5221,11 @@ var app = (function (app, $) {
  						}
 						//if there is a dialog box open in the cart for editing a pli and the user selected a new store
 						//add an event to for a page refresh on the cart page if the update button has not been clicked
-						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.  
+						//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
 						//when the update button is clicked it forces a refresh.
 						if(jQuery('#cart-table').length > 0 && jQuery('.select-store-button').length > 0){
  							jQuery('.ui-dialog .ui-icon-closethick:first').bind( "click", function(){
- 								window.location.reload(); 						
+ 								window.location.reload();
  							});
 						}
 
@@ -5253,7 +5352,7 @@ var app = (function (app, $) {
  				if(app.user.zip === null || app.user.zip === "") {
  					jQuery('#preferred-store-panel .set-preferred-store').last().remove();
  				}
- 				
+
  	 			//disable continue button if a preferred store has not been selected
  	 			if($('.store-list .selected').length > 0){
  	 				$('#preferred-store-panel .close').attr('disabled', false);
@@ -5302,24 +5401,24 @@ var app = (function (app, $) {
 
 
 (function(app){
-	
+
 	function isMobile() {
 		var mobileAgentHash = ["mobile","tablet","phone","ipad","ipod","android","blackberry","windows ce","opera mini","palm"];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
-				
+
 		while (mobileAgentHash[idx] && !isMobile) {
 			isMobile = (userAgent.indexOf(mobileAgentHash[idx]) >= 0);
 			idx++;
 		}
 		return isMobile;
 	}
-	
+
 	app.isMobileUserAgent = isMobile();
-	
+
 	app.zoomViewerEnabled = !isMobile();
-	
+
 }(window.app = window.app || {}));
 
 // jquery extensions

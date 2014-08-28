@@ -89,8 +89,8 @@
 					</a>
 					<p>
 						${Resource.msg('wishlist.copylabel','account',null)}:
-						<a href="${URLUtils.http('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}">
-							<isprint value="${URLUtils.http('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}"/>
+						<a href="${URLUtils.https('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}">
+							<isprint value="${URLUtils.https('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}"/>
 						</a>
 					</p>
 				</isif>
