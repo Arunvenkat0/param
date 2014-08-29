@@ -2,7 +2,7 @@
 
 var ajax = require('./ajax'),
 	page = require('./page'),
-	util = require('./util')
+	util = require('./util');
 
 exports.init = function () {
 	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
