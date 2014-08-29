@@ -6,7 +6,7 @@
 
 		<!--  branding logo -->
 		<h1 class="primary-logo">
-			<a href="${URLUtils.url('Home-Show')}"">
+			<a href="${URLUtils.url('Home-Show')}">
 				<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}">
 				<span>${Resource.msg('global.storename','locale',null)}</span>
 			</a>
