@@ -2,7 +2,7 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 	<list formid="items">
 		<field formid="public" label="forms.wishlist.makepublic"  type="boolean" binding="public" />
-		<field formid="quantity" label="forms.wishlist.quantitydesired"  type="integer" 
+		<field formid="quantity" label="forms.wishlist.quantitydesired"  type="integer"
 			binding="quantityValue"
 			min-length="1"
 			max-length="5"
@@ -10,11 +10,11 @@
 			parse-error="forms.giftregistry.items.quantity.parse-error"
 			value-error="forms.giftregistry.items.quantity.value-error"
 			/>
-	
+
 		<field formid="priority" label="forms.wishlist.priority" type="integer" mandatory="false" binding="priority"
 			missing-error="forms.wishlist.items.priority.missing-error">
 			<options>
-				<option optionid="0" label="productlist.priority0" value="0"/>				
+				<option optionid="0" label="productlist.priority0" value="0"/>
 				<option optionid="1" label="productlist.priority1" value="1"/>
 				<option optionid="2" label="productlist.priority2" value="2"/>
 				<option optionid="3" label="productlist.priority3" value="3"/>
@@ -27,7 +27,8 @@
 		<action formid="addItemToCart" valid-form="false" label="forms.addtocart"/>
 		<action formid="setItemPublic" valid-form="false" label="productlist.setpublic"/>
 		<action formid="setItemPrivate" valid-form="false" label="productlist.setprivate"/>
-		<action formid="addGiftCertificateToCart" valid-form="false"/>
+		<action formid="addGiftCertificate" valid-form="false"/>
+		<action formid="addToCart" valid-form="false"/>
 	</list>
 	<list formid="productlists">
 		<!-- contains only links and no actions -->
@@ -40,8 +41,8 @@
 	</group>
 
 	<group formid="address">
-		<action formid="edit" valid-form="true"/>	
-		<action formid="remove" valid-form="true"/>	
+		<action formid="edit" valid-form="true"/>
+		<action formid="remove" valid-form="true"/>
 	</group>
 
 	<group formid="addressbook">
@@ -49,7 +50,7 @@
 			<action formid="select" label="" valid-form="false"/>
 		</list>
 		<action formid="edit" label="" valid-form="false"/>
-		
+
 	</group>
 
 	<group formid="send">
@@ -59,7 +60,7 @@
 			   missing-error="forms.wishlist.010"/>
 		<action formid="send" valid-form="true" label="forms.send"/>
 	</group>
-	
+
 	<field formid="sort" label="forms.wishlist.020" type="string" mandatory="false">
 		<options>
 			<option optionid="Title" value="Title" label="forms.wishlist.014"/>
@@ -68,11 +69,11 @@
 			<option optionid="DateAdded" value="Date Added" label="forms.wishlist.017"/>
 			<option optionid="LastUpdated" value="Last Updated" label="forms.wishlist.018"/>
 			<option optionid="PriorityHighLow" value="Priority (high to low)" label="forms.profile.019"/>
-		</options>	
+		</options>
 	</field>
-			
+
 	<action formid="addGiftCertificate" valid-form="false" label="forms.giftregistry.addgiftcertificate"/>
-	
+
 	<!-- Share wishlist -->
 	<action formid="setListPublic" valid-form="false" label="productlist.setpublic"/>
 	<action formid="setListPrivate" valid-form="false" label="productlist.setprivate"/>
