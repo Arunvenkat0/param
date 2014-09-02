@@ -124,11 +124,6 @@
 											<iselse/>
 												<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${lineItem.productName}" title="${lineItem.productName}" />
 											</isif> 
-											<isif condition="${lineItem.bonusProductLineItem}">
-												<span class="bonus-item">
-													${Resource.msg('global.bonus','locale',null)}
-												</span>
-											</isif>
 										</td>
 										<td class="item-details">
 		

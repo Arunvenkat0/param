@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site xmlns="http://www.demandware.com/xml/impex/site/2007-04-30" site-id="SiteGenesisCollections">
-    <name>SiteGenesis Collections</name>
-    <currency>USD</currency>
-    <taxation>net</taxation>
-    <custom-cartridges>app_collections_richUI:sitegenesis_storefront_richUI:sitegenesis_storefront_core</custom-cartridges>
-</site>
-

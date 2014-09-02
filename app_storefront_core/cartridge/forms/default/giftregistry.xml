@@ -27,15 +27,6 @@
 		<field formid="town" label="forms.giftregistry.eventCity" type="string" mandatory="true" binding="eventCity" min-length="2" max-length="60"
 			missing-error="forms.giftregistry.eventCity.missing-error" />
 
-		<field formid="state" label="forms.giftregistry.eventState" type="string" mandatory="true" binding="eventState"
-			missing-error="forms.giftregistry.eventState.missing-error" />
-
-		<field formid="country" label="forms.giftregistry.eventCountry" type="string" mandatory="true" binding="eventCountry"
-			missing-error="forms.giftregistry.eventCountry.missing-error" />
-
-		<field formid="message" label="forms.giftregistry.message" type="string" mandatory="false" binding="description" max-length="60"
-				description="forms.giftregistry.message.description" />
-
 		<!--  include address fields from customeraddress.xml form definition -->
 		<include formid="eventaddress" name="customeraddress"/>
 
