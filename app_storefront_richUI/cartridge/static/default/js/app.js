@@ -808,18 +808,6 @@ exports.init = function(){
 'use strict';
 // jQuery extensions
 
-function sortHeight(a, b) {
-	return $(a).height() - $(b).height();
-}
-
-function handleToggle(e) {
-	e.preventDefault();
-	var classTarget = options.triggerSelector ? $(this).parent() : $(this);
-	classTarget.toggleClass(options.toggleClass);
-	// execute callback if exists
-	if (options.callback) { options.callback(); }
-}
-
 module.exports = function () {
 	// params
 	// toggleClass - required
@@ -828,12 +816,20 @@ module.exports = function () {
 	$.fn.toggledList = function (options) {
 		if (!options.toggleClass) { return this; }
 		var list = this;
-		return list.on(options.eventName || 'click', options.triggerSelector || list.children(), handleToggle);
+		return list.on(options.eventName || 'click', options.triggerSelector || list.children(), function (e) {
+			e.preventDefault();
+			var classTarget = options.triggerSelector ? $(this).parent() : $(this);
+			classTarget.toggleClass(options.toggleClass);
+			// execute callback if exists
+			if (options.callback) {options.callback();}
+		});
 	};
 
 	$.fn.syncHeight = function () {
 		var arr = $.makeArray(this);
-		arr.sort(sortHeight);
+		arr.sort(function (a, b) {
+			return $(a).height() - $(b).height();
+		});
 		return this.height($(arr[arr.length-1]).height());
 	};
 }
