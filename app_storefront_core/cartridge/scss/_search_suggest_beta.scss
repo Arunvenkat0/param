@@ -56,7 +56,9 @@
 	margin-left: 1em;
 }
 
-.search-suggestion-normal-link:hover, .search-suggestion-left-panel-hitgroup-link:hover, .search-suggestion-left-panel-hit:hover {
+.search-suggestion-normal-link:hover,
+.search-suggestion-left-panel-hitgroup-link:hover,
+.search-suggestion-left-panel-hit:hover {
 	text-decoration: underline;
 }
 
@@ -94,8 +96,6 @@
 	float: right;
 	text-align: right;
 }
-
-.search-suggestion-right-panel-phrasewrapper {}
 
 .search-phrase-suggestion {
 	margin-top: 1em;

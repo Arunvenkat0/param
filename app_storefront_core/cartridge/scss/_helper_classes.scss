@@ -15,13 +15,12 @@
 	padding: 0;
 	position: absolute;
 	width: 1px;
+	.ie7 & {
+		width: 1px !important;
+	}
 }
 
-.ie7 .visually-hidden {
-	width: 1px !important;
-}
-
-ul.menu {
+.menu {
 	float: left;
 	margin: 0;
 	padding: 0;

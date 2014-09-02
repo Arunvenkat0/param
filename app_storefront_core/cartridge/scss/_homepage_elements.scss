@@ -157,15 +157,13 @@
 		text-transform: uppercase;
 		width: 50%;
 	}
-	input {
-		&[type="text"] {
-			float: left;
-			padding: 0.7em 0.5em;
-			width: 30%;
-		}
-		&[type="image"] {
-			float: left;
-			padding: 0.1em;
-		}
+	input[type="text"] {
+		float: left;
+		padding: 0.7em 0.5em;
+		width: 30%;
+	}
+	input[type="image"] {
+		float: left;
+		padding: 0.1em;
 	}
 }

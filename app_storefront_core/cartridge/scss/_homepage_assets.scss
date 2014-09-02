@@ -67,12 +67,11 @@
 			display: none !important;
 		}
 	}
+	.select {
+		display: none;
+	}
 }
 
 .home-bottom-right .jcarousel-next-disabled {
 	display: none !important;
-}
-
-.js button.select {
-	display: none;
 }

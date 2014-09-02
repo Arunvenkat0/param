@@ -1,9 +1,8 @@
 .compare-item-remove {
 	display: none;
-}
-
-.active .compare-item-remove {
-	display: inline;
+	.active & {
+		display: inline;
+	}
 }
 
 .compare-item {
@@ -94,11 +93,6 @@
 		border-color: -moz-use-text-color $gainsboro $gainsboro;
 		border-style: none solid solid;
 		border-width: 0 1px 1px;
-	}
-	tr.evenattributerow {
-		background: none repeat scroll 0 0 $white-smoke;
-	}
-	td {
 		.product-tile {
 			font-size: 0.9em;
 			width: 100px;
@@ -117,6 +111,9 @@
 		&.product button {
 			font-size: 0.9em;
 		}
+	}
+	.evenattributerow {
+		background: none repeat scroll 0 0 $white-smoke;
 	}
 	.section-header {
 		font-size: 0.9em;
@@ -144,12 +141,14 @@
 		padding: 0 20px 0 0;
 		text-align: right;
 	}
-	.add-to-wishlist, .add-to-gift-registry {
+	.add-to-wishlist,
+	.add-to-gift-registry {
 		padding: 0.2em 0;
 		text-align: center;
 	}
 	.compare-lists {
-		label, select {
+		label,
+		select {
 			float: none;
 			text-align: left;
 			width: 100%;

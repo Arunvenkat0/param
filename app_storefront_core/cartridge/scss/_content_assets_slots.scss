@@ -12,7 +12,7 @@
 	background: none repeat scroll 0 0 $white;
 	overflow: hidden;
 	padding: 10px 0;
-	ul.search-result-items .grid-tile {
+	.search-result-items .grid-tile {
 		margin: 0 1% 0 2%;
 		width: 18%;
 	}
@@ -36,7 +36,8 @@
 		line-height: 1.6em;
 		margin: 1em 0;
 	}
-	ul, ol {
+	ul,
+	ol {
 		line-height: 1.6em;
 		margin: 1em 0;
 		padding: 0 1.5em;
@@ -50,7 +51,7 @@
 	ol li {
 		list-style: decimal outside none;
 	}
-	ul.account-options {
+	.account-options {
 		margin: 0;
 		padding: 0;
 		li {
