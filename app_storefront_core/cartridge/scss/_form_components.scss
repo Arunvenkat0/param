@@ -1,9 +1,9 @@
 button, .button, a.buttonstyle, input[type="button"] {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border-color: #CCCCCC #CCCCCC #D0D0D0;
+	background: none repeat scroll 0 0 $white;
+	border-color: $very-light-gray;
 	border-style: solid;
 	border-width: 1px 1px 4px;
-	color: #3EBAEA;
+	color: $pacific-blue;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 1.1em;
@@ -13,27 +13,27 @@ button, .button, a.buttonstyle, input[type="button"] {
 }
 
 button[disabled], input[disabled] {
-	color: #CCCCCC;
+	color: $very-light-gray;
 }
 
 .button-fancy-small {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01a4e4;
-	color: #FFFFFF !important;
+	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
+	color: $white !important;
 	font-size: 1em;
 	font-weight: 400;
 	text-transform: uppercase;
 }
 
 .button-fancy-medium {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01a4e4;
-	color: #FFFFFF !important;
+	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
+	color: $white !important;
 	font-weight: 400;
 	text-transform: uppercase;
 }
 
 .button-fancy-large {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #01a4e4;
-	color: #FFFFFF !important;
+	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
+	color: $white !important;
 	font-size: 1.75em;
 	font-weight: 400;
 	padding: 0.5em 1em;
@@ -63,8 +63,8 @@ button[disabled], input[disabled] {
 }
 
 legend {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
-	border-bottom: 1em solid #FFFFFF;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
+	border-bottom: 1em solid $white;
 	font-size: 1.1em;
 	font-weight: 700;
 	margin: 0;
@@ -85,12 +85,12 @@ legend span {
 	text-transform: none;
 	padding: 0 .5;
 	em {
-		color: #333333;
+		color: $night-rider;
 	}
 }
 
 span em {
-	color: #333333;
+	color: $night-rider;
 }
 
 h2 span {
@@ -101,7 +101,7 @@ h2 span {
 	float: right;
 	padding: 0 0;
 	em {
-		color: #333333;
+		color: $night-rider;
 	}
 }
 
@@ -113,7 +113,7 @@ h1 span {
 	float: right;
 	padding: 2px 0px;
 	em {
-		color: #333333;
+		color: $night-rider;
 	}
 }
 
@@ -124,7 +124,7 @@ h1 span {
 	float: right;
 	padding: 2px 0;
 	em {
-		color: #333333;
+		color: $night-rider;
 	}
 }
 
@@ -163,7 +163,7 @@ label {
 
 input {
 	&[type="text"], &[type="password"] {
-		border: 1px solid #AAAAAA;
+		border: 1px solid $dark-gray;
 		margin-left: 2%;
 		padding: 0.7em 0.5em;
 		text-indent: 0;
@@ -172,7 +172,7 @@ input {
 }
 
 textarea {
-	border: 1px solid #AAAAAA;
+	border: 1px solid $dark-gray;
 	margin-left: 2%;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
@@ -182,7 +182,7 @@ textarea {
 select {
 	text-indent: 0;
 	height: 3em;
-	border: 1px solid #AAAAAA;
+	border: 1px solid $dark-gray;
 	margin-left: 2%;
 	padding: 0.7em 0.3em;
 	width: 51.6%;
@@ -252,17 +252,17 @@ input {
 }
 
 .error-message {
-	border: 2px solid #990000;
-	background-color: #F1E6E6;
+	border: 2px solid $sangria;
+	background-color: $tutu;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
 	width: 49.5966%;
 }
 
 .error {
-	background-color: #F1E6E6;
-	border-color: #990000;
-	color: #990000;
+	background-color: $tutu;
+	border-color: $sangria;
+	color: $sangria;
 }
 
 span.error {
@@ -277,7 +277,7 @@ div.error {
 
 .error-form {
 	background: url("../images/interface/icon-alert.png") no-repeat scroll left top transparent;
-	color: #990000;
+	color: $sangria;
 	margin: 1em 0;
 	padding: 0.5em 0 0 4em;
 }
@@ -357,7 +357,7 @@ div.error {
 }
 
 .required-indicator {
-	color: #3EBAEA;
+	color: $pacific-blue;
 }
 
 .form-field-tooltip {

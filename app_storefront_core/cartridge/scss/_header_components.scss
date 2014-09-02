@@ -38,7 +38,7 @@
 	position: relative;
 	z-index: 200;
 	a {
-		color: #3EBAEA;
+		color: $pacific-blue;
 	}
 }
 
@@ -53,8 +53,8 @@
 }
 
 .mini-cart-content {
-	background: none repeat scroll 0 0 #F3F3F3;
-	border: 2px solid #CCCCCC;
+	background: none repeat scroll 0 0 $white-smoke;
+	border: 2px solid $very-light-gray;
 	display: none;
 	position: absolute;
 	right: -1px;
@@ -67,7 +67,7 @@
 }
 
 .mini-cart-header {
-	border-color: #FFFFFF;
+	border-color: $white;
 	border-style: solid;
 	border-width: 1px 1px 0;
 	font-size: 1.1em;
@@ -91,14 +91,14 @@
 }
 
 .mini-cart-product {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border-color: #FFFFFF;
+	background: none repeat scroll 0 0 $white;
+	border-color: $white;
 	border-style: solid;
 	border-width: 1px 1px 0;
 	overflow: hidden;
 	padding: 10px;
 	&.collapsed {
-		background: none repeat scroll 0 0 #E8E8E8;
+		background: none repeat scroll 0 0 $gainsboro;
 		.mini-cart-name, .mini-cart-attributes, .mini-cart-pricing, .product-availability-list {
 			width: 90%;
 		}
@@ -115,7 +115,7 @@
 
 .mini-cart-name {
 	float: right;
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-style: italic;
 	width: 50%;
 }
@@ -144,8 +144,8 @@
 }
 
 .mini-cart-slot {
-	background: none repeat scroll 0 0 #E8E8E8;
-	border: 1px solid #D0D0D0;
+	background: none repeat scroll 0 0 $gainsboro;
+	border: 1px solid $gainsboro;
 	font-size: 0.9em;
 	font-style: italic;
 	margin: 20px;
@@ -168,7 +168,7 @@
 
 .menu-utility {
 	clear: both;
-	color: #8F8F8F;
+	color: $nobel;
 	float: right;
 	font-size: 0.8em;
 	letter-spacing: 1px;
@@ -182,7 +182,7 @@
 }
 
 .menu-utility-user {
-	color: #8F8F8F;
+	color: $nobel;
 	float: right;
 	font-size: 0.8em;
 	letter-spacing: 1px;
@@ -209,9 +209,9 @@
 	z-index: 21;
 	input {
 		&[type="text"] {
-			background: none repeat scroll 0 0 #666666;
+			background: none repeat scroll 0 0 $dim-gray;
 			border: 0 none;
-			color: #FFFFFF;
+			color: $white;
 			height: 16px;
 			margin: 0;
 			width: 180px;

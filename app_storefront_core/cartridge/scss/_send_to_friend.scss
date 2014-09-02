@@ -1,6 +1,6 @@
 .send-to-friend-product {
-	border-bottom: 1px solid #E0E0E0;
-	border-top: 1px solid #E0E0E0;
+	border-bottom: 1px solid $gainsboro;
+	border-top: 1px solid $gainsboro;
 	margin-bottom: 20px;
 	margin-top: 20px;
 	margin-right: 22%;
@@ -23,7 +23,7 @@
 			font-weight: bold;
 		}
 		h2 {
-			font-family: Georgia;
+			font-family: $serif;
 			font-size: 1.2em;
 			font-style: italic;
 		}

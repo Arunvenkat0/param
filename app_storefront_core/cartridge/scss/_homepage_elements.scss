@@ -61,7 +61,7 @@
 		text-align: center;
 	}
 	li {
-		border-right: 1px solid #3ebaea;
+		border-right: 1px solid $pacific-blue;
 		display: inline;
 		list-style: none outside none;
 		margin: 0 5px 0 0;
@@ -71,7 +71,7 @@
 			border: 0 none;
 		}
 		a {
-			color: #3ebaea;
+			color: $pacific-blue
 		}
 	}
 	span {
@@ -81,7 +81,7 @@
 }
 
 .home-bottom-center {
-	background: none repeat scroll 0 0 #f3f3f3;
+	background: none repeat scroll 0 0 $white-smoke;
 	float: left;
 	width: 50%;
 }
@@ -151,7 +151,7 @@
 	margin: 0 0 0 33px;
 	width: 910px;
 	label {
-		color: #8f8f8f;
+		color: $nobel;
 		float: left;
 		padding: 0.5em 0 !important;
 		text-transform: uppercase;

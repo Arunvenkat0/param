@@ -16,7 +16,7 @@
 	}
 	.price-promotion {
 		.price-sales {
-			color: #990000;
+			color: $sangria;
 		}
 		.price-standard {
 			margin: 0 1em 0 0;
@@ -32,7 +32,7 @@
 		}
 	}
 	.price-unadjusted {
-		color: #666666;
+		color: $dim-gray;
 		display: block;
 		margin: 0 0 5px;
 		span {
@@ -40,22 +40,22 @@
 		}
 	}
 	.price-adjusted-total {
-		color: #666666;
+		color: $dim-gray;
 		display: block;
 		margin: 5px 0 0;
 		span {
-			color: #990000;
+			color: $sangria;
 		}
 	}
 	.gift-cert-delivery {
-		color: #990000;
+		color: $sangria;
 	}
 }
 
 .cart-promo {
 	background: url("../images/interface/ui-promo-bg-gray-diag.png") repeat scroll 0 0 transparent;
-	color: #333333;
-	font-family: Georgia,serif;
+	color: $night-rider;
+	font-family: $serif;
 	font-style: italic;
 	margin: 0.3em 0;
 	padding: 1em;
@@ -146,7 +146,7 @@
 }
 
 .promo-adjustment {
-	color: #990000;
+	color: $sangria;
 }
 
 ul.product-availability-list {
@@ -157,14 +157,14 @@ ul.product-availability-list {
 		margin: 3px 0;
 	}
 	.on-order, .not-available {
-		color: #990000;
+		color: $sangria;
 		font-size: 0.9em;
 	}
 }
 
 .account-welcome {
 	.welcome-message {
-		font-family: Georgia,serif;
+		font-family: $serif;
 		font-size: 1.2em;
 		font-style: italic;
 	}
@@ -175,7 +175,7 @@ ul.product-availability-list {
 
 .last-visited {
 	h2 {
-		font-family: Georgia,serif;
+		font-family: $serif;
 		font-size: 1.2em;
 		font-style: italic;
 		font-weight: normal;

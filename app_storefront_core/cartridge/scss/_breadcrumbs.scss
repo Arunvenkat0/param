@@ -24,20 +24,20 @@
 
 .breadcrumb-refinement-name, .breadcrumb-refinement-value {
 	background: none repeat scroll 0 0 transparent !important;
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-style: italic;
 }
 
 a.breadcrumb-relax {
 	background: none repeat scroll 0 0 transparent !important;
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-style: italic;
 	padding: 0 5px 0 0;
 }
 
 .breadcrumb-last {
 	background: none repeat scroll 0 0 transparent !important;
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-style: italic;
 }
 
@@ -47,8 +47,8 @@ a.breadcrumb-relax {
 
 .breadcrumb-result-text a, .breadcrumb a.searchphraselink {
 	background: none repeat scroll 0 0 transparent;
-	color: #3EBAEA;
-	font-family: Georgia,serif;
+	color: $pacific-blue;
+	font-family: $serif;
 	font-style: italic;
 	padding: 0;
 }
