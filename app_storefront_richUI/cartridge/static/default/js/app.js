@@ -844,14 +844,14 @@ var util = require('./util'),
 	bonusProductsView = require('./bonus-products-view');
 
 var timer = {
-	id : null,
-	clear : function () {
+	id: null,
+	clear: function () {
 		if (this.id) {
 			window.clearTimeout(this.id);
 			delete this.id;
 		}
 	},
-	start : function (duration, callback) {
+	start: function (duration, callback) {
 		this.id = setTimeout(callback, duration);
 	}
 };
@@ -878,7 +878,7 @@ var minicart = {
 			timer.clear();
 		}).on('mouseleave', function () {
 			timer.clear();
-			timer.start(30, this.close);
+			timer.start(30, this.close.bind(this));
 		}.bind(this));
 
 		this.$el.find('.mini-cart-close').on('click', this.close);
@@ -904,7 +904,7 @@ var minicart = {
 		// show the item
 		this.$content.slideDown('slow');
 		// after a time out automatically close it
-		timer.start(6000, this.close);
+		timer.start(6000, this.close.bind(this));
 	},
 	/**
 	 * @function
@@ -924,7 +924,7 @@ module.exports = minicart;
 
 var ajax = require('./ajax'),
 	page = require('./page'),
-	util = require('./util')
+	util = require('./util');
 
 exports.init = function () {
 	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
