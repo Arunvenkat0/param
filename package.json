@@ -1,0 +1,29 @@
+{
+  "name": "sitegenesis",
+  "version": "14.8.0",
+  "description": "Because of file size constraints, the demo store data distribution is broken into 2 distinct parts:\r - everything, without high resolution images, including a catalog with hi resolution references removed\r - a delta distibution, with only high resolution images, plus a catalog specifically referencing those images",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-autoprefixer": "^0.8.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.14.0",
+    "gulp": "^3.8.5",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-sass": "^0.7.2",
+    "load-grunt-tasks": "^0.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:demandware/sitegenesis.git"
+  },
+  "author": "Tri Nguyen",
+  "license": "ISC"
+}
