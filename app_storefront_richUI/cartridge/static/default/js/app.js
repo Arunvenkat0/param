@@ -3715,7 +3715,7 @@ var app = (function (app, $) {
 				source : "cart"
 			});
 		})
-		.on("click", ".bonus-item-actions a", function (e) {
+		.on("click", ".bonus-item-actions a, #cart-table .bonusproducts a", function (e) {
 			e.preventDefault();
 			app.bonusProductsView.show(this.href);
 		});

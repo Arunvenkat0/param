@@ -119,7 +119,7 @@
 		Show Edit Details link if
 		Product is not null and it is either a variant and online or options product and online
 	</iscomment>
-	<isif condition="${productLineItem.product != null && ((pdict.p_editable && productLineItem.product.isVariant() && productLineItem.product.online) || productLineItem.optionProductLineItems.size() > 0)}">
+	<isif condition="${!productLineItem.bonusProductLineItem && productLineItem.product != null && ((pdict.p_editable && productLineItem.product.isVariant() && productLineItem.product.online) || productLineItem.optionProductLineItems.size() > 0)}">
 		<div class="item-edit-details">
 			<isif condition="${empty(pdict.p_editable) || pdict.p_editable}">
 				<iscomment>if item has a category context, forward this category context</iscomment>
