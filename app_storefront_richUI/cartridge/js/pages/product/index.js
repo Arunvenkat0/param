@@ -402,7 +402,7 @@ function initializeEvents() {
 		addItems();
 		return false;
 	});
-	sendToFriend.initializeDialog($pdpMain, '.send-to-friend');
+	sendToFriend.initializeDialog($pdpMain);
 
 	$pdpMain.find('.add-to-cart[disabled]').attr('title', $pdpMain.find('.availability-msg').html());
 }

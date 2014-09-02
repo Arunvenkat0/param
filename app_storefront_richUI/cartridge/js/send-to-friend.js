@@ -25,7 +25,7 @@ var sendToFriend = {
 			ajax.load({url:$form.attr("action"),
 				data: data,
 				target: $dialog,
-				callback: function() {
+				callback: function () {
 					validator.init();
 					util.limitCharacters();
 					$('.ui-dialog-content').dialog('option', 'position', 'center');
@@ -37,16 +37,16 @@ var sendToFriend = {
 			$dialog.dialog('close');
 		});
 	},
-	initializeDialog : function (eventDelegate, eventTarget) {
-		$(eventDelegate).on('click', eventTarget, function (e) {
+	initializeDialog : function (eventDelegate) {
+		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
-				target: $("#send-to-friend-dialog"), 
+				target: $("#send-to-friend-dialog"),
 				options: {
-					width:800,
-					height:'auto',
-					title:this.title,
-					open:function() {
+					width: 800,
+					height: 'auto',
+					title: this.title,
+					open: function () {
 						sendToFriend.init();
 						validator.init();
 					}

@@ -87,6 +87,6 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
-	sendToFriend.initializeDialog('.list-table-header', '.send-to-friend');
+	sendToFriend.initializeDialog('.list-table-header');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
