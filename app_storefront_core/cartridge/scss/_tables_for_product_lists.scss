@@ -32,7 +32,7 @@ table.item-list {
 		color: #990000;
 	}
 	.price-standard {
-		color: #999999;
+		color: #999;
 		text-decoration: line-through;
 	}
 }
@@ -43,15 +43,21 @@ table.item-list {
 	padding: 0;
 }
 .item-dashboard {
-	color: #AAAAAA;
+	color: #aaa;
 	width: 250px;
-	.label, label {
+	label {
 		display: inline;
 		float: none;
-		font-size: 1em;
 		font-weight: 400;
+	}
+	input,
+	.value,
+	.option-toggle-public label {
+		color: #333;
+	}
+	input {
 		padding: 0;
-		width: auto !important;
+		width: 20px;
 	}
 	.input-text {
 		margin: 0;
@@ -60,36 +66,22 @@ table.item-list {
 	.input-select {
 		margin: 0;
 		padding: 8px;
-		width: auto !important;
+		width: auto;
+		height:auto;
+		color:#333
 	}
 	.input-checkbox {
 		margin: 0 5px;
 	}
 	.item-option {
-		clear: both;
-		font-size: 1em;
 		margin: 0 0 0.5em;
 		.form-row {
 			display: inline;
 		}
 	}
-	.option-date-added .value {
-		color: #333333;
-		font-weight: 700;
-	}
-	.option-quantity-desired input {
-		padding: 0;
-		width: 20px;
-	}
-	.option-priority {
-		.label, label {
-			color: #333333;
-			font-weight: 700;
-		}
-	}
 	.option-add-to-cart {
 		.label, label {
-			color: #333333;
+			color: #333;
 			font-size: 1.1em;
 			font-weight: 700;
 			text-transform: uppercase;

@@ -832,7 +832,7 @@ table.item-list {
 .item-details .product-list-item .promo {
   color: #990000; }
 .item-details .product-list-item .price-standard {
-  color: #999999;
+  color: #999;
   text-decoration: line-through; }
 
 .item-availability ul, .item-quantity-details ul {
@@ -841,41 +841,34 @@ table.item-list {
   padding: 0; }
 
 .item-dashboard {
-  color: #AAAAAA;
+  color: #aaa;
   width: 250px; }
-  .item-dashboard .label, .item-dashboard label {
+  .item-dashboard label {
     display: inline;
     float: none;
-    font-size: 1em;
-    font-weight: 400;
+    font-weight: 400; }
+  .item-dashboard input, .item-dashboard .value, .item-dashboard .option-toggle-public label {
+    color: #333; }
+  .item-dashboard input {
     padding: 0;
-    width: auto !important; }
+    width: 20px; }
   .item-dashboard .input-text {
     margin: 0;
     text-align: center; }
   .item-dashboard .input-select {
     margin: 0;
     padding: 8px;
-    width: auto !important; }
+    width: auto;
+    height: auto;
+    color: #333; }
   .item-dashboard .input-checkbox {
     margin: 0 5px; }
   .item-dashboard .item-option {
-    clear: both;
-    font-size: 1em;
     margin: 0 0 0.5em; }
     .item-dashboard .item-option .form-row {
       display: inline; }
-  .item-dashboard .option-date-added .value {
-    color: #333333;
-    font-weight: 700; }
-  .item-dashboard .option-quantity-desired input {
-    padding: 0;
-    width: 20px; }
-  .item-dashboard .option-priority .label, .item-dashboard .option-priority label {
-    color: #333333;
-    font-weight: 700; }
   .item-dashboard .option-add-to-cart .label, .item-dashboard .option-add-to-cart label {
-    color: #333333;
+    color: #333;
     font-size: 1.1em;
     font-weight: 700;
     text-transform: uppercase; }
