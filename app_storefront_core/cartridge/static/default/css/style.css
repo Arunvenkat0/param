@@ -2944,7 +2944,8 @@ table.item-list .multi-shipment-row {
   left: 63%; }
 
 h1 .account-logout {
-  font-size: 0.6em; }
+  font-size: 0.6em;
+  float: none; }
 
 .registration-selection input, .registration-selection label {
   display: inline;
