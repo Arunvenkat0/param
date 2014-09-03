@@ -1,17 +1,17 @@
 .pt_wish-list {
-  .list-table-header {
-    background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
-    overflow: hidden;
-    padding: 2em;
-    p {
-      color: #999999;
-      float: right;
-      margin: 0;
-      overflow: hidden;
-      width: 40%;
-    }
-  }
-  .primary-content .list-table-header h2 {
-    float: left;
-  }
+	.list-table-header {
+		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+		overflow: hidden;
+		padding: 2em;
+		p {
+			color: #999999;
+			float: right;
+			margin: 0;
+			overflow: hidden;
+			width: 40%;
+		}
+	}
+	.primary-content .list-table-header h2 {
+		float: left;
+	}
 }

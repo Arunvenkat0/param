@@ -1,106 +1,106 @@
 table.item-list {
-  margin-bottom: 1em;
-  tr {
-    border-bottom: 1px solid #D9D9D9;
-    &.last {
-      border: 0 none;
-    }
-    &.headings {
-      display: none;
-    }
-  }
-  td {
-    padding: 1em;
-    vertical-align: top;
-  }
+	margin-bottom: 1em;
+	tr {
+		border-bottom: 1px solid #D9D9D9;
+		&.last {
+			border: 0 none;
+		}
+		&.headings {
+			display: none;
+		}
+	}
+	td {
+		padding: 1em;
+		vertical-align: top;
+	}
 }
 
 th.section-header {
-  padding: 1em;
+	padding: 1em;
 }
 
 td {
-  &.item-details .product-list-item {
-    .name {
-      font-family: Georgia,serif;
-      font-size: 1.2em;
-      font-style: italic;
-    }
-    .value {
-      font-weight: 700;
-    }
-    .promo {
-      color: #990000;
-    }
-    .price-standard {
-      color: #999999;
-      text-decoration: line-through;
-    }
-  }
-  &.item-availability ul, &.item-quantity-details ul {
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
-  }
-  &.item-dashboard {
-    color: #AAAAAA;
-    width: 250px;
-    .label, label {
-      display: inline;
-      float: none;
-      font-size: 1em;
-      font-weight: 400;
-      padding: 0;
-      width: auto !important;
-    }
-    .input-text {
-      margin: 0;
-      text-align: center;
-    }
-    .input-select {
-      margin: 0;
-      padding: 8px;
-      width: auto !important;
-    }
-    .input-checkbox {
-      margin: 0 5px;
-    }
-    .item-option {
-      clear: both;
-      font-size: 1em;
-      margin: 0 0 0.5em;
-      .form-row {
-        display: inline;
-      }
-    }
-    .option-date-added .value {
-      color: #333333;
-      font-weight: 700;
-    }
-    .option-quantity-desired input {
-      padding: 0;
-      width: 20px;
-    }
-    .option-priority {
-      .label, label {
-        color: #333333;
-        font-weight: 700;
-      }
-    }
-    .option-add-to-cart {
-      .label, label {
-        color: #333333;
-        font-size: 1.1em;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-      input {
-        padding: 0.8em 0.3em 0.7em;
-        width: 50px;
-      }
-    }
-    .option-quantity-purchased span.exceeded {
-      color: #ff0000;
-    }
-  }
+	&.item-details .product-list-item {
+		.name {
+			font-family: Georgia,serif;
+			font-size: 1.2em;
+			font-style: italic;
+		}
+		.value {
+			font-weight: 700;
+		}
+		.promo {
+			color: #990000;
+		}
+		.price-standard {
+			color: #999999;
+			text-decoration: line-through;
+		}
+	}
+	&.item-availability ul, &.item-quantity-details ul {
+		list-style: none outside none;
+		margin: 0;
+		padding: 0;
+	}
+	&.item-dashboard {
+		color: #AAAAAA;
+		width: 250px;
+		.label, label {
+			display: inline;
+			float: none;
+			font-size: 1em;
+			font-weight: 400;
+			padding: 0;
+			width: auto !important;
+		}
+		.input-text {
+			margin: 0;
+			text-align: center;
+		}
+		.input-select {
+			margin: 0;
+			padding: 8px;
+			width: auto !important;
+		}
+		.input-checkbox {
+			margin: 0 5px;
+		}
+		.item-option {
+			clear: both;
+			font-size: 1em;
+			margin: 0 0 0.5em;
+			.form-row {
+				display: inline;
+			}
+		}
+		.option-date-added .value {
+			color: #333333;
+			font-weight: 700;
+		}
+		.option-quantity-desired input {
+			padding: 0;
+			width: 20px;
+		}
+		.option-priority {
+			.label, label {
+				color: #333333;
+				font-weight: 700;
+			}
+		}
+		.option-add-to-cart {
+			.label, label {
+				color: #333333;
+				font-size: 1.1em;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+			input {
+				padding: 0.8em 0.3em 0.7em;
+				width: 50px;
+			}
+		}
+		.option-quantity-purchased span.exceeded {
+			color: #ff0000;
+		}
+	}
 }

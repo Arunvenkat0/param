@@ -1,34 +1,34 @@
 .select-bonus-btn, .no-bonus-btn {
-  float: left;
-  margin: 0 5px 0 0;
+	float: left;
+	margin: 0 5px 0 0;
 }
 
 .buttonbar {
-  margin: 11px 0;
-  overflow: hidden;
-  width: 336px;
+	margin: 11px 0;
+	overflow: hidden;
+	width: 336px;
 }
 
 .bonus-product-list {
-  .bonus-product-item {
-    border-bottom: 1px solid #E0E0E0;
-    clear: both;
-  }
-  .product-name {
-    float: none;
-    margin: 1em 0;
-  }
-  .product-add-to-cart button {
-    float: left;
-    margin-top: 22px;
-    margin-left: 2%;
-  }
+	.bonus-product-item {
+		border-bottom: 1px solid #E0E0E0;
+		clear: both;
+	}
+	.product-name {
+		float: none;
+		margin: 1em 0;
+	}
+	.product-add-to-cart button {
+		float: left;
+		margin-top: 22px;
+		margin-left: 2%;
+	}
 }
 
 .bonus-product-list-footer {
-  clear: both;
-  button {
-    float: right;
-    margin-top: -2%;
-  }
+	clear: both;
+	button {
+		float: right;
+		margin-top: -2%;
+	}
 }

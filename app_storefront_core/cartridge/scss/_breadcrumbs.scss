@@ -1,50 +1,50 @@
 .breadcrumb {
-  font-size: 1.2em;
-  line-height: 1.5em;
-  margin: 1px 0 9px;
-  padding: 0 10px;
-  li {
-    display: inline;
-    list-style: none outside none;
-  }
-  a {
-    background: url("../images/interface/icon-breadcrumb-separator.png") no-repeat scroll right center transparent;
-    padding: 0 0.8em 0 0;
-  }
-  h1 {
-    display: inline;
-    font-size: 1em;
-    font-weight: normal;
-    .paging-current-page {
-      left: -999em;
-      position: absolute;
-    }
-  }
+	font-size: 1.2em;
+	line-height: 1.5em;
+	margin: 1px 0 9px;
+	padding: 0 10px;
+	li {
+		display: inline;
+		list-style: none outside none;
+	}
+	a {
+		background: url("../images/interface/icon-breadcrumb-separator.png") no-repeat scroll right center transparent;
+		padding: 0 0.8em 0 0;
+	}
+	h1 {
+		display: inline;
+		font-size: 1em;
+		font-weight: normal;
+		.paging-current-page {
+			left: -999em;
+			position: absolute;
+		}
+	}
 }
 
 .breadcrumb-refinement-name, .breadcrumb-refinement-value {
-  background: none repeat scroll 0 0 transparent !important;
-  font-family: Georgia,serif;
-  font-style: italic;
+	background: none repeat scroll 0 0 transparent !important;
+	font-family: Georgia,serif;
+	font-style: italic;
 }
 
 a.breadcrumb-relax {
-  background: none repeat scroll 0 0 transparent !important;
-  font-family: Georgia,serif;
-  font-style: italic;
-  padding: 0 5px 0 0;
+	background: none repeat scroll 0 0 transparent !important;
+	font-family: Georgia,serif;
+	font-style: italic;
+	padding: 0 5px 0 0;
 }
 
 .breadcrumb-last {
-  background: none repeat scroll 0 0 transparent !important;
-  font-family: Georgia,serif;
-  font-style: italic;
+	background: none repeat scroll 0 0 transparent !important;
+	font-family: Georgia,serif;
+	font-style: italic;
 }
 
 .breadcrumb-result-text a, .breadcrumb a.searchphraselink {
-  background: none repeat scroll 0 0 transparent;
-  color: #3EBAEA;
-  font-family: Georgia,serif;
-  font-style: italic;
-  padding: 0;
+	background: none repeat scroll 0 0 transparent;
+	color: #3EBAEA;
+	font-family: Georgia,serif;
+	font-style: italic;
+	padding: 0;
 }
