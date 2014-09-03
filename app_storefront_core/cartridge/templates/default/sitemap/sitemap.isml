@@ -3,35 +3,19 @@
 <isinclude template="util/modules"/>
 
 	<h1>${Resource.msg('global.storename','locale',null)}</h1>
-	
-	<isscript>	 
-	    var psm : ProductSearchModel = new dw.catalog.ProductSearchModel();
-	    psm.setCategoryID(dw.catalog.CatalogMgr.getSiteCatalog().getRoot().getID());
-	    psm.search();
-	    var psrefinements : ProductSearchRefinements = psm.getRefinements();
-	    var catValues : ArrayList = psrefinements.getNextLevelCategoryRefinementValues(psm.getCategory());
-	</isscript>
 
-	<isloop items="${catValues}" var="topCategoryPSV" status="loopstatus">	
-		<isset name="topCategory" value="${dw.catalog.CatalogMgr.getCategory(topCategoryPSV.getValue())}" scope="page"/>
-
+	<isloop items="${dw.catalog.CatalogMgr.getSiteCatalog().getRoot().getOnlineSubCategories().iterator()}" var="topCategory" status="loopstatus">
+		
 		<h2>
 			<a href="${URLUtils.http('Search-Show','cgid', topCategory.getID())}" title="${topCategory.displayName}">
 				<isprint value="${topCategory.displayName}"/>
 			</a>
 		</h2>
-
-		<isscript>	 
-		    psm.setCategoryID(topCategory.getID());
-		    psm.search();
-		    var psrefinements : ProductSearchRefinements = psm.getRefinements();
-		    var subCatValues : ArrayList = psrefinements.getNextLevelCategoryRefinementValues(psm.getCategory());
-		</isscript>
 		
-		<isif condition="${subCatValues.size() > 0}">			
+		<isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+			
 			<ul>
-				<isloop items="${subCatValues}" var="subCategoryPSV" status="loopstatus">
-					<isset name="subCategory" value="${dw.catalog.CatalogMgr.getCategory(subCategoryPSV.getValue())}" scope="page"/>	
+				<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<li>
 						<a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 							<isprint value="${subCategory.displayName}"/>
