@@ -8,8 +8,8 @@
 			right: 10px;
 			bottom: 20px;
 			a {
-				background: none repeat scroll 0 0 #E0E0E0;
-				border: 1px solid #cccccc;
+				background: none repeat scroll 0 0 #e0e0e0;
+				border: 1px solid #ccc;
 				display: block;
 				float: left;
 				height: 15px;
@@ -17,7 +17,7 @@
 				text-indent: -999em;
 				width: 6px;
 				&.active {
-					background-color: #666666;
+					background-color: #666;
 				}
 			}
 		}

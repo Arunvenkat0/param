@@ -9,28 +9,26 @@
 	.slide {
 		list-style: none outside none;
 		margin: 0;
-		max-width: 100% !important;
+		max-width: 100%;
 		padding: 0;
 		width: 100%;
 		img {
 			height: auto;
-			max-width: 100% !important;
+			max-width: 100%;
 		}
-		a {
-			h2 {
-				border: 0 none;
-				clip: rect(0pt, 0pt, 0pt, 0pt);
-				height: 1px;
-				margin: -1px;
-				overflow: hidden;
-				padding: 0;
-				position: absolute;
-				width: 1px;
-			}
-			span {
-				position: absolute;
-				text-indent: -999em;
-			}
+		h2 {
+			border: 0 none;
+			clip: rect(0pt, 0pt, 0pt, 0pt);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+		}
+		span {
+			position: absolute;
+			text-indent: -999em;
 		}
 	}
 }
@@ -63,7 +61,7 @@
 		text-align: center;
 	}
 	li {
-		border-right: 1px solid #3EBAEA;
+		border-right: 1px solid #3ebaea;
 		display: inline;
 		list-style: none outside none;
 		margin: 0 5px 0 0;
@@ -73,7 +71,7 @@
 			border: 0 none;
 		}
 		a {
-			color: #3EBAEA;
+			color: #3ebaea;
 		}
 	}
 	span {
@@ -83,7 +81,7 @@
 }
 
 .home-bottom-center {
-	background: none repeat scroll 0 0 #F3F3F3;
+	background: none repeat scroll 0 0 #f3f3f3;
 	float: left;
 	width: 50%;
 }
@@ -110,7 +108,7 @@
 	width: auto;
 	h2 {
 		background: url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;
-		border-bottom: 2px solid #01A4E5;
+		border-bottom: 2px solid #01a4e5;
 		height: 54px;
 		padding: 30px 0;
 		text-indent: -999em;
@@ -153,7 +151,7 @@
 	margin: 0 0 0 33px;
 	width: 910px;
 	label {
-		color: #8F8F8F;
+		color: #8f8f8f;
 		float: left;
 		padding: 0.5em 0 !important;
 		text-transform: uppercase;

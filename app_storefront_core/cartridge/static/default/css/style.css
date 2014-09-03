@@ -3237,13 +3237,13 @@ ul.payment-list {
   #homepage-slider .slide {
     list-style: none outside none;
     margin: 0;
-    max-width: 100% !important;
+    max-width: 100%;
     padding: 0;
     width: 100%; }
     #homepage-slider .slide img {
       height: auto;
-      max-width: 100% !important; }
-    #homepage-slider .slide a h2 {
+      max-width: 100%; }
+    #homepage-slider .slide h2 {
       border: 0 none;
       clip: rect(0pt, 0pt, 0pt, 0pt);
       height: 1px;
@@ -3252,7 +3252,7 @@ ul.payment-list {
       padding: 0;
       position: absolute;
       width: 1px; }
-    #homepage-slider .slide a span {
+    #homepage-slider .slide span {
       position: absolute;
       text-indent: -999em; }
 
@@ -3281,7 +3281,7 @@ ul.payment-list {
     padding: 30% 0 0;
     text-align: center; }
   #home-promo-shop-shoes li {
-    border-right: 1px solid #3EBAEA;
+    border-right: 1px solid #3ebaea;
     display: inline;
     list-style: none outside none;
     margin: 0 5px 0 0;
@@ -3290,13 +3290,13 @@ ul.payment-list {
     #home-promo-shop-shoes li:last-child {
       border: 0 none; }
     #home-promo-shop-shoes li a {
-      color: #3EBAEA; }
+      color: #3ebaea; }
   #home-promo-shop-shoes span {
     font-style: italic;
     margin: 0 10px 0 0; }
 
 .home-bottom-center {
-  background: none repeat scroll 0 0 #F3F3F3;
+  background: none repeat scroll 0 0 #f3f3f3;
   float: left;
   width: 50%; }
 
@@ -3321,7 +3321,7 @@ ul.payment-list {
   width: auto; }
   .home-bottom-right h2 {
     background: url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;
-    border-bottom: 2px solid #01A4E5;
+    border-bottom: 2px solid #01a4e5;
     height: 54px;
     padding: 30px 0;
     text-indent: -999em; }
@@ -3355,7 +3355,7 @@ ul.payment-list {
   margin: 0 0 0 33px;
   width: 910px; }
   #email-alert-signup label {
-    color: #8F8F8F;
+    color: #8f8f8f;
     float: left;
     padding: 0.5em 0 !important;
     text-transform: uppercase;
@@ -3584,8 +3584,8 @@ ul.payment-list {
   right: 10px;
   bottom: 20px; }
   .js #homepage-slider .jcarousel-control a {
-    background: none repeat scroll 0 0 #E0E0E0;
-    border: 1px solid #cccccc;
+    background: none repeat scroll 0 0 #e0e0e0;
+    border: 1px solid #ccc;
     display: block;
     float: left;
     height: 15px;
@@ -3593,7 +3593,7 @@ ul.payment-list {
     text-indent: -999em;
     width: 6px; }
     .js #homepage-slider .jcarousel-control a.active {
-      background-color: #666666; }
+      background-color: #666; }
 .js .home-bottom-left, .js .home-bottom-center {
   clear: none;
   float: left;
