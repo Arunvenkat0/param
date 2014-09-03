@@ -1,72 +1,283 @@
-/* checkout */
-/* ------------------------------------- */
+.checkout-progress-indicator {
+  font-size: 1.2em;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 6px;
+  div {
+    background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;
+    display: inline;
+    padding: 0 25px;
+  }
+  span {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  a {
+    color: #333333;
+  }
+  .active {
+    font-weight: 700;
+  }
+  .step-3 {
+    background: none repeat scroll 0 0 transparent;
+    padding-right: 0;
+  }
+}
 
-.checkout-progress-indicator{font-size:1.2em;overflow:hidden;position:absolute;right:0;text-align:right;top:6px;}
-.checkout-progress-indicator div{background:url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;display:inline;padding:0 25px;}
-.checkout-progress-indicator span{font-weight:700;text-transform:uppercase;}
-.checkout-progress-indicator a{color:#333333;}
-.checkout-progress-indicator .active{font-weight:700;}
-.checkout-progress-indicator .step-3{background:none repeat scroll 0 0 transparent;padding-right:0;}
-.select-address{padding:2em 0;}
-.shipping-method{margin-top:22px;}
-.shipping-method label{display:inline;float:none !important;padding-right:5px !important;}
-.shipping-method .shipping-description{display:inline;}
+.select-address {
+  padding: 2em 0;
+}
 
-.redemption .success{color:green;}
-.redemption{color:#990000;}
-.redemption span.error{margin-left:0;}
-.payment-method-options{padding-left:24%;}
-.payment-method-options .form-row{clear:none;float:left;width:30%;}
-.payment-method-options label{width:auto;}
-.payment-method{clear:both;display:none;}
-.payment-method-expanded{display:block;}
-.cvn-tip{float:left;margin:-38px 0 0 40%;width:auto;}
-.cvn-tip-error{float:left;margin:-78px 0 0 40%;width:auto;}
-.month,.year,.day{clear:none;float:left;margin:0 0 2% 2%;}
-.month select,.year select,.day select{margin:0;width:auto;}
-.month .form-caption{margin-left:0;}
-.cvn input{width:50px !important;}
-.bml-terms-and-conditions{border:1px solid #AAAAAA;font-size:0.8em;height:400px;overflow:auto;padding:1em;}
-.bml-table-col-1{width:25%;}
-.checkout-mini-cart{background:none repeat scroll 0 0 #EFEFEF;max-height:330px;overflow:auto;}
-.checkout-order-totals{background:none repeat scroll 0 0 #EFEFEF;padding:0.5em 1em;}
-.checkout-order-totals .order-totals-table{width:90%;}
-.checkout-order-totals .order-totals-table td{padding:5px 0 0;}
-.checkout-order-totals .order-totals-table .order-total td{font-size:0.9em;padding:10px 0 0 5px;}
-.place-order-totals{clear:both;}
-.place-order-totals .order-totals-table{float:right;width:50%;}
-.place-order-totals .content-asset{}
-.order-component-block{margin:20px 0;}
-.order-component-block .section-header a{float:right;font-weight:normal;}
-.order-component-block .details{background:none repeat scroll 0 0 #E8E8E8;color:#A3A3A3;padding:0.5em 1em;}
-.order-summary-footer{position:relative;}
-.order-summary-footer h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
-.summary-help{float:right;font-size:0.8em;margin:1em 0;}
-.submit-order{clear:both;display:block;padding:20px 0 0;text-align:right;}
-.submit-order .back-to-cart {font-size: 1.5em;}
-.submit-order .back-to-cart:hover {text-decoration: underline;}
-.submit-order button{margin-left:1.5em;}
-.pt_order-confirmation h1{font-size:2.5em;}
-.pt_order-confirmation .order-shipment-table{margin:0 0 20px;}
-.pt_order-confirmation .order-shipment-table .order-shipment-details{border-right:1px solid #E0E0E0;min-width: 200px;}
-.pt_order-confirmation #primary h2{font-family:Georgia,serif;font-size:2em;font-style:italic;font-weight:normal;}
-.pt_order-confirmation a.print-page{float:right;}
-.confirmation-message{border-bottom:3px solid #00A4E4;margin-bottom:20px;padding-bottom:20px;}
-.order-discount{color:#990000;}
-.gift-cert-used{padding:10px 0;}
-.order-detail-options{border-top:1px solid #E0E0E0;margin:20px 0 0;padding:20px 0 0;text-align:right;}
-.order-detail-options a{margin:0 10px;}
-.summary .edit {position: absolute;text-transform: uppercase;right: 10px;font-size: 0.9em;line-height: 1.5em;}
-.pt_checkout #main {padding: 0 14px;}
-.pt_cart #main {padding: 0 14px;}
-.pt_order-confirmation #main {padding: 0 14px;}
-.pt_cart .breadcrumb {padding-left:0}
-.pt_order-confirmation .order-confirmation-details .content-header {margin:7px 0 !important;}
-.order-shipment-details .label,
-.order-shipment-details .firstname,
-.order-shipment-details .lastname {font-weight:bold}
-.item-shipping-address {min-width: 120px;}
+.shipping-method {
+  margin-top: 22px;
+  label {
+    display: inline;
+    float: none !important;
+    padding-right: 5px !important;
+  }
+  .shipping-description {
+    display: inline;
+  }
+}
 
-.order-shipment-gift-message-header {font-weight: bold;font-size: 1.2em;padding-bottom: 0px;}
-.order-shipment-gift-message {font-size: 1.1em;}
-.billing-error {color:red; margin: 0 0 10px 24%;}
+.redemption {
+  .success {
+    color: green;
+  }
+  color: #990000;
+  span.error {
+    margin-left: 0;
+  }
+}
+
+.payment-method-options {
+  padding-left: 24%;
+  .form-row {
+    clear: none;
+    float: left;
+    width: 30%;
+  }
+  label {
+    width: auto;
+  }
+}
+
+.payment-method {
+  clear: both;
+  display: none;
+}
+
+.payment-method-expanded {
+  display: block;
+}
+
+.cvn-tip {
+  float: left;
+  margin: -38px 0 0 40%;
+  width: auto;
+}
+
+.cvn-tip-error {
+  float: left;
+  margin: -78px 0 0 40%;
+  width: auto;
+}
+
+.month, .year, .day {
+  clear: none;
+  float: left;
+  margin: 0 0 2% 2%;
+}
+
+.month select, .year select, .day select {
+  margin: 0;
+  width: auto;
+}
+
+.month .form-caption {
+  margin-left: 0;
+}
+
+.cvn input {
+  width: 50px !important;
+}
+
+.bml-terms-and-conditions {
+  border: 1px solid #AAAAAA;
+  font-size: 0.8em;
+  height: 400px;
+  overflow: auto;
+  padding: 1em;
+}
+
+.bml-table-col-1 {
+  width: 25%;
+}
+
+.checkout-mini-cart {
+  background: none repeat scroll 0 0 #EFEFEF;
+  max-height: 330px;
+  overflow: auto;
+}
+
+.checkout-order-totals {
+  background: none repeat scroll 0 0 #EFEFEF;
+  padding: 0.5em 1em;
+  .order-totals-table {
+    width: 90%;
+    td {
+      padding: 5px 0 0;
+    }
+    .order-total td {
+      font-size: 0.9em;
+      padding: 10px 0 0 5px;
+    }
+  }
+}
+
+.place-order-totals {
+  clear: both;
+  .order-totals-table {
+    float: right;
+    width: 50%;
+  }
+  .content-asset {}
+}
+
+.order-component-block {
+  margin: 20px 0;
+  .section-header a {
+    float: right;
+    font-weight: normal;
+  }
+  .details {
+    background: none repeat scroll 0 0 #E8E8E8;
+    color: #A3A3A3;
+    padding: 0.5em 1em;
+  }
+}
+
+.order-summary-footer {
+  position: relative;
+  h2 {
+    font-family: Georgia,serif;
+    font-size: 2em;
+    font-style: italic;
+    font-weight: normal;
+  }
+}
+
+.summary-help {
+  float: right;
+  font-size: 0.8em;
+  margin: 1em 0;
+}
+
+.submit-order {
+  clear: both;
+  display: block;
+  padding: 20px 0 0;
+  text-align: right;
+  .back-to-cart {
+    font-size: 1.5em;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  button {
+    margin-left: 1.5em;
+  }
+}
+
+.pt_order-confirmation {
+  h1 {
+    font-size: 2.5em;
+  }
+  .order-shipment-table {
+    margin: 0 0 20px;
+    .order-shipment-details {
+      border-right: 1px solid #E0E0E0;
+      min-width: 200px;
+    }
+  }
+  #primary h2 {
+    font-family: Georgia,serif;
+    font-size: 2em;
+    font-style: italic;
+    font-weight: normal;
+  }
+  a.print-page {
+    float: right;
+  }
+}
+
+.confirmation-message {
+  border-bottom: 3px solid #00A4E4;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.order-discount {
+  color: #990000;
+}
+
+.gift-cert-used {
+  padding: 10px 0;
+}
+
+.order-detail-options {
+  border-top: 1px solid #E0E0E0;
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  text-align: right;
+  a {
+    margin: 0 10px;
+  }
+}
+
+.summary .edit {
+  position: absolute;
+  text-transform: uppercase;
+  right: 10px;
+  font-size: 0.9em;
+  line-height: 1.5em;
+}
+
+.pt_checkout #main, .pt_cart #main, .pt_order-confirmation #main {
+  padding: 0 14px;
+}
+
+.pt_cart .breadcrumb {
+  padding-left: 0;
+}
+
+.pt_order-confirmation .order-confirmation-details .content-header {
+  margin: 7px 0 !important;
+}
+
+.order-shipment-details {
+  .label, .firstname, .lastname {
+    font-weight: bold;
+  }
+}
+
+.item-shipping-address {
+  min-width: 120px;
+}
+
+.order-shipment-gift-message-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-bottom: 0px;
+}
+
+.order-shipment-gift-message {
+  font-size: 1.1em;
+}
+
+.billing-error {
+  color: red;
+  margin: 0 0 10px 24%;
+}

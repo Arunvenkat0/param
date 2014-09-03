@@ -1,7 +1,20 @@
-/* infinite scroll amendments */
-/* ------------------------------------- */
-.infinite-scroll .pagination ul{display:none}
-.infinite-scroll .pagination .current-page-label{display:none}
-.infinite-scroll .items-per-page {display:none}
-.infinite-scroll div.search-result-content .infinite-scroll-loading {text-align: center;  background: url("../images/infinite-loading-indicator.gif") center no-repeat; height: 35px; width: 100%} 
-.disable-infinite-scroll div.search-result-content .page-element {display:none} 
+.infinite-scroll {
+  .pagination {
+    ul, .current-page-label {
+      display: none;
+    }
+  }
+  .items-per-page {
+    display: none;
+  }
+  div.search-result-content .infinite-scroll-loading {
+    text-align: center;
+    background: url("../images/infinite-loading-indicator.gif") center no-repeat;
+    height: 35px;
+    width: 100%;
+  }
+}
+
+.disable-infinite-scroll div.search-result-content .page-element {
+  display: none;
+}

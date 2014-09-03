@@ -1,33 +1,102 @@
-/* account */
-/* ------------------------------------- */
+#PasswordResetForm {
+  fieldset {
+    position: relative;
+  }
+  button {
+    float: right;
+    position: absolute;
+    top: 0px;
+    left: 63%;
+  }
+}
 
-#PasswordResetForm fieldset { position: relative; }
-#PasswordResetForm button {
-	float: right;
-position: absolute;
-top: 0px;
-left: 63%;}
-h1 .account-logout{font-size:0.6em;}
-.registration-selection input,.registration-selection label{display:inline;float:none;}
-ul.address-list{padding:0;}
-ul.address-list li{float:left;list-style:none outside none;margin:0;min-height:135px;padding:1em 0;width:30%;}
-ul.address-list li.default{border-bottom:1px solid #EFEFEF;float:none;width:auto;}
-ul.address-list .mini-address-title{font-style:italic;}
-ul.payment-list{overflow:hidden;padding:0;}
-ul.payment-list li{float:left;list-style:none outside none;margin:0;min-height:110px;width:33%;}
-.order-history-header{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #EFEFEF;overflow:hidden;padding:10px;}
-.order-history-header .label{font-weight:700;}
-.order-history-header button{float:right;}
-.order-history-header .order-date{float:left;margin:2px 0;width:60%;}
-.order-history-header .order-status{float:left;margin:2px 0;width:60%;}
-.order-history-header .order-number{float:left;margin:2px 0;width:60%;}
-.order-history-items{margin:20px 0;}
-.order-history-table th{padding:5px 10px;}
-.order-history-table td{padding:5px 10px;}
-.order-history-table ul{margin:0;padding:0;}
-.order-history-table li{list-style:none outside none;}
-.order-history-table th.order-shipped-to{width:33%;}
-.order-history-table th.order-items{width:33%;}
-.order-history-table th.order-total-price{width:33%;}
-.order-history-table .toggle{cursor:pointer;display:block;}
-.js .order-history-table li.hidden{display:none;}
+h1 .account-logout {
+  font-size: 0.6em;
+}
+
+.registration-selection {
+  input, label {
+    display: inline;
+    float: none;
+  }
+}
+
+ul {
+  &.address-list {
+    padding: 0;
+    li {
+      float: left;
+      list-style: none outside none;
+      margin: 0;
+      min-height: 135px;
+      padding: 1em 0;
+      width: 30%;
+      &.default {
+        border-bottom: 1px solid #EFEFEF;
+        float: none;
+        width: auto;
+      }
+    }
+    .mini-address-title {
+      font-style: italic;
+    }
+  }
+  &.payment-list {
+    overflow: hidden;
+    padding: 0;
+    li {
+      float: left;
+      list-style: none outside none;
+      margin: 0;
+      min-height: 110px;
+      width: 33%;
+    }
+  }
+}
+
+.order-history-header {
+  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+  overflow: hidden;
+  padding: 10px;
+  .label {
+    font-weight: 700;
+  }
+  button {
+    float: right;
+  }
+  .order-date, .order-status, .order-number {
+    float: left;
+    margin: 2px 0;
+    width: 60%;
+  }
+}
+
+.order-history-items {
+  margin: 20px 0;
+}
+
+.order-history-table {
+  th, td {
+    padding: 5px 10px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none outside none;
+  }
+  th {
+    &.order-shipped-to, &.order-items, &.order-total-price {
+      width: 33%;
+    }
+  }
+  .toggle {
+    cursor: pointer;
+    display: block;
+  }
+}
+
+.js .order-history-table li.hidden {
+  display: none;
+}

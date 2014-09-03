@@ -1,11 +1,26 @@
-/* size charts */
-/* ------------------------------------- */
-
-.sizinginformation{border:0 none;padding:10px;}
-.sizinginformation th{background:none repeat scroll 0 0 #F3F3F3;}
-.sizinginformation td,.sizinginformation th{border-bottom:1px solid #F3F3F3;padding:10px;}
-.sizinginformation td{border-left:1px solid #F3F3F3;}
-.sizinginformation .ui-tabs-nav{height:33px;}
-.sizinginformation .sizing-charts{border:0 none;}
-.sizinginformation .tips-list{padding:0 !important;}
-.sizinginformation .tips-list li{list-style:none outside none !important;}
+.sizinginformation {
+  border: 0 none;
+  padding: 10px;
+  th {
+    background: none repeat scroll 0 0 #F3F3F3;
+  }
+  td, th {
+    border-bottom: 1px solid #F3F3F3;
+    padding: 10px;
+  }
+  td {
+    border-left: 1px solid #F3F3F3;
+  }
+  .ui-tabs-nav {
+    height: 33px;
+  }
+  .sizing-charts {
+    border: 0 none;
+  }
+  .tips-list {
+    padding: 0 !important;
+    li {
+      list-style: none outside none !important;
+    }
+  }
+}

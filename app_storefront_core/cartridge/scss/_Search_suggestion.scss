@@ -1,26 +1,53 @@
-/* SEARCH SUGGESTION
---------------------------------------------------------------------------------------- */
-.js #suggestions {background-color: #666666;color: #e0e0e0;cursor:pointer;padding: 0;display: none; position:absolute; z-index:8184}
-.js #suggestions div {clear: both;height:23px;padding: 5px;overflow: hidden;white-space:nowrap;}
-.js #suggestions div:hover {background-color: #cccccc;color: #333333;}
-.js #suggestions div div.suggestionterm {float:left;overflow: hidden;width: 110px;}
-.js #suggestions div span.hits {float: right;line-height: 1.8em;text-align: right;margin-left: 3px;}
-.js .mini-cart-product {position:relative;}
-.js .mini-cart-toggler {
-	background: url(../images/minicart_expanded.png) repeat scroll 0 0 transparent;
-	cursor: pointer;
-	height: 13px;
-	left: 5px;
-	position: absolute;
-	top: 10px;
-	width: 13px;
-}
-
-.js div.collapsed .mini-cart-toggler {
-	background: url(../images/minicart_collapsed.png) repeat scroll 0 0 transparent; 
-	
-}
-
-.js div.collapsed .mini-cart-image {
-	display:none; 	
+.js {
+  #suggestions {
+    background-color: #666666;
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+    position: absolute;
+    z-index: 8184;
+    div {
+      clear: both;
+      height: 23px;
+      padding: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      &:hover {
+        background-color: #cccccc;
+        color: #333333;
+      }
+      div.suggestionterm {
+        float: left;
+        overflow: hidden;
+        width: 110px;
+      }
+      span.hits {
+        float: right;
+        line-height: 1.8em;
+        text-align: right;
+        margin-left: 3px;
+      }
+    }
+  }
+  .mini-cart-product {
+    position: relative;
+  }
+  .mini-cart-toggler {
+    background: url(../images/minicart_expanded.png) repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 13px;
+    left: 5px;
+    position: absolute;
+    top: 10px;
+    width: 13px;
+  }
+  div.collapsed {
+    .mini-cart-toggler {
+      background: url(../images/minicart_collapsed.png) repeat scroll 0 0 transparent;
+    }
+    .mini-cart-image {
+      display: none;
+    }
+  }
 }

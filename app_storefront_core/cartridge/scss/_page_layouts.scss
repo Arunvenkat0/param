@@ -1,13 +1,62 @@
-/* page layouts */
-/* ------------------------------------- */
+#wrapper {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 3px solid #FFFFFF;
+  margin: auto;
+  max-width: 960px;
+  width: 960px;
+}
 
-#wrapper{background:none repeat scroll 0 0 #FFFFFF;border:3px solid #FFFFFF;margin:auto;max-width:960px;width:960px;}
-header {position:relative;margin-left:10px;margin-right:10px;}
-.primary-content{border-left:1px solid #D9D9D9;float:right;margin-left:-1px;padding:0 0 20px;position:relative;width:787px;}
-#secondary{background:url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;border-right:1px solid #D9D9D9;float:left;width:172px;position:relative;}
-#secondary nav {padding-left:10px; padding-right:10px;}
-#secondary nav a {margin-left:15px;}
-.primary-focus .primary-content{border:0 none;float:left;margin:0;width:709px;}
-.primary-focus #secondary{background:none repeat scroll 0 0 transparent;border:0 none;float:right;width:210px;}
-.full-width .primary-content{border:0 none;width:100%;}
-.page-content .primary-content{padding-left:3%;width:758px;}
+header {
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.primary-content {
+  border-left: 1px solid #D9D9D9;
+  float: right;
+  margin-left: -1px;
+  padding: 0 0 20px;
+  position: relative;
+  width: 787px;
+}
+
+#secondary {
+  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+  border-right: 1px solid #D9D9D9;
+  float: left;
+  width: 172px;
+  position: relative;
+  nav {
+    padding-left: 10px;
+    padding-right: 10px;
+    a {
+      margin-left: 15px;
+    }
+  }
+}
+
+.primary-focus {
+  .primary-content {
+    border: 0 none;
+    float: left;
+    margin: 0;
+    width: 709px;
+  }
+  #secondary {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    float: right;
+    width: 210px;
+  }
+}
+
+.full-width .primary-content {
+  border: 0 none;
+  width: 100%;
+}
+
+.page-content .primary-content {
+  padding-left: 3%;
+  width: 758px;
+}
