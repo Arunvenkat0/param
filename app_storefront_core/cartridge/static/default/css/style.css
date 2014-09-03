@@ -820,67 +820,69 @@ table.item-list {
     padding: 1em;
     vertical-align: top; }
 
-th.section-header {
+.section-header {
   padding: 1em; }
 
-td.item-details .product-list-item .name {
+.item-details .product-list-item .name {
   font-family: Georgia, serif;
   font-size: 1.2em;
   font-style: italic; }
-td.item-details .product-list-item .value {
+.item-details .product-list-item .value {
   font-weight: 700; }
-td.item-details .product-list-item .promo {
+.item-details .product-list-item .promo {
   color: #990000; }
-td.item-details .product-list-item .price-standard {
+.item-details .product-list-item .price-standard {
   color: #999999;
   text-decoration: line-through; }
-td.item-availability ul, td.item-quantity-details ul {
+
+.item-availability ul, .item-quantity-details ul {
   list-style: none outside none;
   margin: 0;
   padding: 0; }
-td.item-dashboard {
+
+.item-dashboard {
   color: #AAAAAA;
   width: 250px; }
-  td.item-dashboard .label, td.item-dashboard label {
+  .item-dashboard .label, .item-dashboard label {
     display: inline;
     float: none;
     font-size: 1em;
     font-weight: 400;
     padding: 0;
     width: auto !important; }
-  td.item-dashboard .input-text {
+  .item-dashboard .input-text {
     margin: 0;
     text-align: center; }
-  td.item-dashboard .input-select {
+  .item-dashboard .input-select {
     margin: 0;
     padding: 8px;
     width: auto !important; }
-  td.item-dashboard .input-checkbox {
+  .item-dashboard .input-checkbox {
     margin: 0 5px; }
-  td.item-dashboard .item-option {
+  .item-dashboard .item-option {
     clear: both;
     font-size: 1em;
     margin: 0 0 0.5em; }
-    td.item-dashboard .item-option .form-row {
+    .item-dashboard .item-option .form-row {
       display: inline; }
-  td.item-dashboard .option-date-added .value {
+  .item-dashboard .option-date-added .value {
     color: #333333;
     font-weight: 700; }
-  td.item-dashboard .option-quantity-desired input {
+  .item-dashboard .option-quantity-desired input {
     padding: 0;
     width: 20px; }
-  td.item-dashboard .option-priority .label, td.item-dashboard .option-priority label {
+  .item-dashboard .option-priority .label, .item-dashboard .option-priority label {
     color: #333333;
     font-weight: 700; }
-  td.item-dashboard .option-add-to-cart .label, td.item-dashboard .option-add-to-cart label {
+  .item-dashboard .option-add-to-cart .label, .item-dashboard .option-add-to-cart label {
     color: #333333;
     font-size: 1.1em;
     font-weight: 700;
     text-transform: uppercase; }
-  td.item-dashboard .option-add-to-cart input {
+  .item-dashboard .option-add-to-cart input {
     padding: 0.8em 0.3em 0.7em;
     width: 50px; }
-  td.item-dashboard .option-quantity-purchased span.exceeded {
+  .item-dashboard .option-quantity-purchased span.exceeded {
     color: #ff0000; }
 
 .tooltip {
