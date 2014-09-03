@@ -1329,6 +1329,9 @@ a.breadcrumb-relax {
   font-family: Georgia, serif;
   font-style: italic; }
 
+.breadcrumb-result-text {
+  float: none; }
+
 .breadcrumb-result-text a, .breadcrumb a.searchphraselink {
   background: none repeat scroll 0 0 transparent;
   color: #3EBAEA;
