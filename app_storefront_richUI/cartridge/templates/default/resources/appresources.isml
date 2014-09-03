@@ -38,6 +38,7 @@
 		SELECT_BONUS_PRODUCTS 			: Resource.msg('product.selectbonusproducts','product',null),
 		SELECT_BONUS_PRODUCT 			: Resource.msg('product.selectbonusproduct','product',null),
 		BONUS_PRODUCT_MAX 				: Resource.msg('product.bonusproductsmax','product',null),
+		BONUS_PRODUCT_TOOMANY 			: Resource.msg('product.bonusproductstoomany','product',null),
 		SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext','search', null),
 		SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('forms.subscribe.email.default','forms', 'Email Address'),
 				
@@ -62,6 +63,7 @@
 		GIFT_CERT_BALANCE				: Resource.msg('billing.giftcertbalance', 'checkout', null),
 		GIFT_CERT_AMOUNT_INVALID		: Resource.msg('giftcert.amountvalueerror', 'forms', null),
 		GIFT_CERT_MISSING				: Resource.msg('billing.giftcertidmissing', 'checkout', null),
+		INVALID_OWNER                   : Resource.msg('billing.ownerparseerror','checkout',null),
 		
 		COUPON_CODE_MISSING				: Resource.msg('cart.COUPON_CODE_MISSING','checkout', null),
 		
@@ -152,7 +154,8 @@
 		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
 		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
 		billing						: URLUtils.url('COBilling-Start').toString(),		
-		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString()
+		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
+		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString()
 	};
 	
 	userSettings = {

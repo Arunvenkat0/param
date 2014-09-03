@@ -8,7 +8,7 @@ var paths = {
 		dest: 'app_storefront_core/cartridge/static/default/css'
 	}
 }
-gulp.task('sass', function () {
+gulp.task('scss', function () {
 	gulp.src(paths.scss.src)
 		.pipe(sass())
 		.pipe(prefix({cascade: true}))
@@ -16,5 +16,5 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(paths.scss.src, ['sass']);
+	gulp.watch(paths.scss.src, ['scss']);
 });

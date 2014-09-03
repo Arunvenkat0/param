@@ -20,25 +20,32 @@
 				<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(subCat)}" encoding="off"/>" class="level-2">
 					<isprint value="${subCat.getDisplayName()}"/>
 				</a>
+
+				<isscript>	 
+				    var psm : ProductSearchModel = new dw.catalog.ProductSearchModel();
+				    psm.setCategoryID(subCat.ID);
+				    psm.search();
+				    var psrefinements : ProductSearchRefinements = psm.getRefinements();
+				    var catValues : ArrayList = psrefinements.getNextLevelCategoryRefinementValues(psm.getCategory());
+				</isscript>
 				
-				<isif condition="${ subCat.getOnlineSubCategories().length > 0}">
-				<div class="level-3">
-					<ul class="level-3">
-					
-						<isloop items="${subCat.getOnlineSubCategories()}" var="thirdLevelCategory">
-							<isif condition="${('showInMenu' in thirdLevelCategory.custom) && thirdLevelCategory.custom.showInMenu.valueOf()}">
-								<li>
-									<iscomment><!-- Server side tag in client side tag to enforce printing out unencoded text --></iscomment>
-									<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(thirdLevelCategory)}" encoding="off"/>">
-										<isprint value="${thirdLevelCategory.getDisplayName()}"/>
-									</a>
-								</li>
-							</isif>
-						</isloop>
-						
-					</ul>	
-				</div>		
-				</isif>
+				<isif condition="${catValues.size() > 0}">
+					<div class="level-3">
+						<ul class="level-3">	
+						  <isloop items="${catValues}" var="thirdLevelCategoryPSV" status="loopstate">
+								<isset name="thirdLevelCategory" value="${dw.catalog.CatalogMgr.getCategory(thirdLevelCategoryPSV.getValue())}" scope="page"/>
+						  
+								<isif condition="${('showInMenu' in thirdLevelCategory.custom) && thirdLevelCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(thirdLevelCategory)}" encoding="off"/>">
+											<isprint value="${thirdLevelCategory.getDisplayName()}"/>
+										</a>
+									</li>
+								</isif>
+						  </isloop>
+						</ul>	
+					</div>		
+				</isif>				
 				
 			</li>
 			

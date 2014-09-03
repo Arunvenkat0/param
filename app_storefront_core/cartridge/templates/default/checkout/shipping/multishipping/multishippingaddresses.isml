@@ -83,27 +83,32 @@
 						</div>
 						</td>
 						<td class="quantitycolumn"><isprint value="${quantityLI.quantity}"/></td>
-						<td class="shippingaddress">
+						<td class="shippingaddress required">
 							<iscomment>display select box with available addresses</iscomment>
-							<isif condition="${listItem.addressList.options.optionsCount > 0}">
-								<select class="selectbox" name="${listItem.addressList.htmlName}">
-									<option value="">${Resource.msg('global.selectaddressmessage','locale',null)}</option>
-									<isloop items="${listItem.addressList.options}" var="option">
-										<isset name="address" value="${option.object}" scope="page"/>
-										<isif condition="${!empty(address.ID)}">
-											<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page"/>
-										<iselse/>
-											<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page"/>
-										</isif>
-										<option value="${option.optionId}" <isif condition="${option.selected}">selected="selected"</isif>><isprint value="${prefix}"/> <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
-									</isloop>
-								</select>
-							<iselse/>
-								<div>
-									${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}
-								</div>
+							<isif condition="${!listItem.addressList.options.optionsCount > 0}">
+								<isset name="gotOption" value="${false}" scope="PAGE">
+							<iselse>
+								<isset name="gotOption" value="${true}" scope="PAGE">
 							</isif>
-							<div class="editaddress">
+							<select class="select-address required" name="${listItem.addressList.htmlName}">
+								<option value="" data-with-option="${Resource.msg('global.selectaddressmessage','locale',null)}" data-no-option="${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}">
+									<isif condition="${!gotOption}">
+										${Resource.msg('multishippingaddresses.noaddresses','checkout',null)}
+									<iselse>
+										${Resource.msg('global.selectaddressmessage','locale',null)}
+									</isif>
+								</option>
+								<isloop items="${listItem.addressList.options}" var="option">
+									<isset name="address" value="${option.object}" scope="page"/>
+									<isif condition="${!empty(address.ID)}">
+										<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page"/>
+									<iselse/>
+										<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page"/>
+									</isif>
+									<option value="${option.optionId}" <isif condition="${option.selected}">selected="selected"</isif>><isprint value="${prefix}"/> <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
+								</isloop>
+							</select>
+							<div class="edit-address">
 								<a href="${URLUtils.url('COShippingMultiple-EditAddresses')}" class="edit dialogify">${Resource.msg('multishipping.editaddress','checkout',null)}</a>
 							</div>
 						</td>
