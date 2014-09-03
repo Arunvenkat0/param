@@ -87,8 +87,9 @@ table.item-list {
 			text-transform: uppercase;
 		}
 		input {
-			padding: 0.8em 0.3em 0.7em;
+			padding: 0.5em 0;
 			width: 50px;
+			margin-right: 1em
 		}
 	}
 	.option-quantity-purchased span.exceeded {

@@ -873,8 +873,9 @@ table.item-list {
     font-weight: 700;
     text-transform: uppercase; }
   .item-dashboard .option-add-to-cart input {
-    padding: 0.8em 0.3em 0.7em;
-    width: 50px; }
+    padding: 0.5em 0;
+    width: 50px;
+    margin-right: 1em; }
   .item-dashboard .option-quantity-purchased span.exceeded {
     color: #ff0000; }
 
@@ -3018,6 +3019,17 @@ ul.payment-list {
     width: 40%; }
 .pt_wish-list .primary-content .list-table-header h2 {
   float: left; }
+
+.list-share .share-option {
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+  width: 30%;
+  margin-right: 3.33333%;
+  float: left; }
+  .list-share .share-option a {
+    word-break: break-all; }
+  .list-share .share-option button, .list-share .share-option .button {
+    margin-top: 1em; }
 
 .pt_gift-registry .create-new-registry {
   margin: 1em 0; }
