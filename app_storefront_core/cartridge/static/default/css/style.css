@@ -2451,6 +2451,9 @@ button.add-all-to-cart {
   float: left;
   margin-top: 22px;
   margin-left: 2%; }
+.bonus-product-list .quantity-error {
+  color: red;
+  text-transform: inherit; }
 
 .bonus-product-list-footer {
   clear: both; }
