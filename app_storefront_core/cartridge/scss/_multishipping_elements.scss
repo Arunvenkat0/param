@@ -1,9 +1,11 @@
-.selectbox {
-	width: 100%;
-}
-
-.editaddress {
-	padding-left: 2%;
+.shippingaddress {
+	.select-address {
+		width: 100%;
+		margin-left: 0;
+	}
+	.edit-address {
+		margin-top: 0.5em;
+	}
 }
 
 .formactions {
