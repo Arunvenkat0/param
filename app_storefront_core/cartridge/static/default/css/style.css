@@ -3229,7 +3229,8 @@ ul.payment-list {
 
 #homepage-slides {
   padding: 0;
-  width: 100%; }
+  width: 100%;
+  height: 550px; }
 
 #homepage-slider {
   overflow: hidden; }
@@ -3576,8 +3577,6 @@ ul.payment-list {
   position: absolute;
   display: block; }
 
-.js .homepage-slides {
-  height: 550px; }
 .js #homepage-slider .jcarousel-item {
   max-width: 100%; }
 .js #homepage-slider .jcarousel-control {
