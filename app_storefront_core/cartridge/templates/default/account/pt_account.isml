@@ -28,7 +28,11 @@
 			<isif condition="${!empty(pdict.bctext2)}">
 				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${pdict.bctext2}"/>
 			<iselse/>
-				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}"/>
+				<isif condition="${pdict.bctext1 == 'gc'}">
+					<isbreadcrumbs bctext1="${Resource.msg('global.giftcertificates','locale',null)}"/>
+				<iselse/>		
+					<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}"/>
+				</isif>
 			</isif>
 		
 			<div id="primary" class="primary-content">
