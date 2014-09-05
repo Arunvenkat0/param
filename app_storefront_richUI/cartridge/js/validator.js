@@ -103,21 +103,16 @@ $.validator.addMethod('positivenumber', function (value, element) {
 	return (!isNaN(value) && Number(value) >= 0);
 }, ''); // '' should be replaced with error message if needed
 
-$.validator.messages.required = function ($1, ele, $3) {
-	var requiredText = $(ele).parents('.form-row').attr('data-required-text');
-	return requiredText || '';
-};
-
 var validator = {
-	regex : regex,
-	settings : settings,
-	init : function () {
-		var that = this;
+	regex: regex,
+	settings: settings,
+	init: function () {
+		var self = this;
 		$('form:not(.suppress)').each(function () {
-			$(this).validate(that.settings);
+			$(this).validate(self.settings);
 		});
 	},
-	initForm : function(f) {
+	initForm: function(f) {
 		$(f).validate(this.settings);
 	}
 };

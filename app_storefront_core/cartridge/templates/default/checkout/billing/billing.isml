@@ -217,7 +217,6 @@
 
 	<iscomment>payment method area</iscomment>
 	<isinclude template="checkout/billing/paymentmethods"/>
-	<input type="hidden" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" />
 	<isbonusdiscountlineitem p_alert_text="${Resource.msg('billing.bonusproductalert','checkout',null)}" p_discount_line_item="${pdict.BonusDiscountLineItem}"/>
 
 

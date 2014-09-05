@@ -7,7 +7,9 @@
     "doc": "docs",
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^2.4.1"
+  },
   "devDependencies": {
     "browserify": "^5.0.8",
     "grunt-autoprefixer": "^0.8.1",

@@ -126,9 +126,9 @@
 			missing-error="bml.ssnerror"
 			range-error="bml.ssnerror"/>
 
-	<field formid="termsandconditions" 
-			label="bml.terms" type="boolean" mandatory="false"
+	<field formid="termsandconditions"
+			label="bml.terms" type="boolean" mandatory="true"
 			value-error="bml.termserror"/>
-			
+
 	<action formid="confirm" valid-form="true"/>
 </form>
