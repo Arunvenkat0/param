@@ -1,6 +1,7 @@
 'use strict';
 
-var formPrepare = require('./formPrepare'),
+var ajax = require('../../ajax'),
+	formPrepare = require('./formPrepare'),
 	giftcard = require('../../giftcard'),
 	util = require('../../util'),
 	validator = require('../../validator');

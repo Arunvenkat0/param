@@ -1268,7 +1268,8 @@ exports.init = function () {
 },{"../../util":37}],15:[function(require,module,exports){
 'use strict';
 
-var formPrepare = require('./formPrepare'),
+var ajax = require('../../ajax'),
+	formPrepare = require('./formPrepare'),
 	giftcard = require('../../giftcard'),
 	util = require('../../util'),
 	validator = require('../../validator');
@@ -1501,7 +1502,8 @@ exports.init = function () {
 		}
 	});
 }
-},{"../../giftcard":6,"../../util":37,"../../validator":38,"./formPrepare":16}],16:[function(require,module,exports){
+
+},{"../../ajax":2,"../../giftcard":6,"../../util":37,"../../validator":38,"./formPrepare":16}],16:[function(require,module,exports){
 'use strict';
 
 /**
