@@ -2241,7 +2241,7 @@ var app = (function (app, $) {
 			$continue.attr('disabled', 'disabled');
 		}
 
-		$requiredInputs.on('change', function () {
+		function validateInputs() {
 			if ($(this).val() === '') {
 				$continue.attr('disabled', 'disabled');
 			} else {
@@ -2253,7 +2253,8 @@ var app = (function (app, $) {
 					$continue.attr('disabled', 'disabled');
 				}
 			}
-		});
+		}
+		$requiredInputs.off('change', validateInputs).on('change', validateInputs);
 	}
 
 	//shipping page logic
@@ -2463,6 +2464,7 @@ var app = (function (app, $) {
 		// 	bmlForm.find("input[name$='_ssn']").addClass("required");
 		// }
 		app.validator.init();
+		initContinue('[name$="billing_save"]', 'form[id$="billing"]');
 	}
 	/**
 	 * @function
@@ -4351,7 +4353,7 @@ var app = (function (app, $) {
 		var isValid = regex.notCC.test($.trim(value));
 		return isValid;
 	}
-	
+
 	/**
 	 * Add phone validation method to jQuery validation plugin.
 	 * Text fields must have 'phone' css class to be validated as phone
@@ -4363,13 +4365,13 @@ var app = (function (app, $) {
 	 * Text fields must have 'email' css class to be validated as email
 	 */
 	$.validator.addMethod("email", validateEmail, app.resources.INVALID_EMAIL);
-	
+
  	/**
 	 * Add CCOwner validation method to jQuery validation plugin.
 	 * Text fields must have 'owner' css class to be validated as not a credit card
 	 */
 	$.validator.addMethod("owner", validateOwner, app.resources.INVALID_OWNER);
-	
+
 	/**
 	 * Add gift cert amount validation method to jQuery validation plugin.
 	 * Text fields must have 'gift-cert-amont' css class to be validated
