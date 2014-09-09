@@ -796,8 +796,11 @@ var app = (function (app, $) {
 			addItems();
 			return false;
 		});
-		app.sendToFriend.initializeDialog($cache.pdpMain, "a.send-to-friend");
 
+		//if product page loaded in http this will cause the send to a friend link to open in a new page rather than in a hop up.
+		if( app.protocol == 'https' ){
+			app.sendToFriend.initializeDialog($cache.pdpMain, "a.send-to-friend");
+		}
 		$cache.pdpMain.find("button.add-to-cart[disabled]").attr('title', $cache.pdpMain.find(".availability-msg").html() );
 	}
 	/**
