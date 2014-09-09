@@ -169,4 +169,5 @@
 	app.clientcache = <isprint value="${JSON.stringify(clientcache)}" encoding="off"/>;
 	app.user = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
 	app.enabledStorePickup = ${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')};
+	app.protocol = "${pdict.CurrentRequest.httpProtocol}";
 }(window.app = window.app || {}));
