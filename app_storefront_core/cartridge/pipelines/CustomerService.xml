@@ -175,14 +175,13 @@
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="&quot;edit&quot;" key="From_0"/>
                 <key-binding alias="ConfirmationMessage" key="To_0"/>
-                <key-binding alias="null" key="From_1"/>
-                <key-binding alias="null" key="To_1"/>
-                <key-binding alias="null" key="From_2"/>
-                <key-binding alias="null" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="MailFrom" key="To_1"/>
+                <key-binding alias="CurrentForms.contactus.myquestion.value" key="From_2"/>
+                <key-binding alias="MailSubject" key="To_2"/>
+                <key-binding alias="&quot;mail/contactus&quot;" key="From_3"/>
+                <key-binding alias="MailTemplate" key="To_3"/>
+                <key-binding alias="CurrentForms.contactus.email.value" key="From_4"/>
+                <key-binding alias="MailTo" key="To_4"/>
                 <key-binding alias="null" key="From_5"/>
                 <key-binding alias="null" key="To_5"/>
                 <key-binding alias="null" key="From_6"/>
@@ -193,6 +192,7 @@
                 <key-binding alias="null" key="To_8"/>
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
+                <key-binding alias="CurrentForms.contactus.email.value" key="From_1"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
@@ -202,15 +202,7 @@
               </transition-display>
             </simple-transition>
             <node>
-              <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="CurrentForms.contactus.email.value" key="MailFrom"/>
-                <key-binding alias="&quot;mail/contactus&quot;" key="MailTemplate"/>
-                <key-binding alias="CurrentForms.contactus.email.value" key="MailTo"/>
-                <key-binding alias="CurrentForms.contactus.myquestion.value" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
-              </pipelet-node>
+              <call-node start-name-ref="Mail-SecureSend"/>
               <node-display x="0" y="1"/>
             </node>
             <transition target-connector="in1" target-path="../+1">
