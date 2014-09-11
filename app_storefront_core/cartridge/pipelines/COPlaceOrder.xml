@@ -758,7 +758,7 @@
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
                 <key-binding alias="MailFrom" key="To_0"/>
-                <key-binding alias="&quot;Your order with Demandware online store&quot;" key="From_1"/>
+                <key-binding alias="dw.web.Resource.msg('order.orderconfirmation-email.001','order',null)+ &quot; &quot; + Order.orderNo" key="From_1"/>
                 <key-binding alias="MailSubject" key="To_1"/>
                 <key-binding alias="&quot;mail/orderconfirmation&quot;" key="From_2"/>
                 <key-binding alias="MailTemplate" key="To_2"/>
@@ -1004,11 +1004,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node custom-name="Confirm order" pipelet-name="Eval" pipelet-set-identifier="bc_api">
-          <config-property key="Expression" value="Order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED)"/>
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="Result" key="Result"/>
-        </pipelet-node>
+        <pipelet-node custom-name="Confirm order" pipelet-name="Eval" pipelet-set-identifier="bc_api"/>
         <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
@@ -1127,7 +1123,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
                 <key-binding alias="MailFrom" key="To_0"/>
-                <key-binding alias="&quot;A gift certificate from &quot; + GiftCertificate.senderName" key="From_1"/>
+                <key-binding alias="dw.web.Resource.msg('email.ordergcemsg','email',null)+&quot; &quot;+GiftCertificate.senderName" key="From_1"/>
                 <key-binding alias="MailSubject" key="To_1"/>
                 <key-binding alias="&quot;mail/giftcert&quot;" key="From_2"/>
                 <key-binding alias="MailTemplate" key="To_2"/>
@@ -1377,22 +1373,6 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
   <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
-        <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;mail/giftcert&quot;" key="MailTemplate"/>
-          <key-binding alias="GiftCertificate.recipientEmail" key="MailTo"/>
-          <key-binding alias="&quot;A gift certificate from &quot; + GiftCertificate.senderName" key="MailSubject"/>
-          <key-binding alias="null" key="LocaleID"/>
-          <key-binding alias="null" key="MailCC"/>
-          <key-binding alias="null" key="MailBCC"/>
-          <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-        </pipelet-node>
-        <node-display x="10" y="17"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
-    <segment>
-      <node>
         <text-node>
           <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will create a new Order with status 'Created'.</description>
         </text-node>
@@ -1409,7 +1389,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in2" target-path="/Start.2/b2.3"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_28">
+  <branch basename="_ANONYMOUS_BRANCH_27">
     <segment>
       <node>
         <text-node>
@@ -1428,7 +1408,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in1" target-path="/Start.2/b2.4"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_30">
+  <branch basename="_ANONYMOUS_BRANCH_29">
     <segment>
       <node>
         <text-node>
@@ -1438,7 +1418,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_31">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1457,7 +1437,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in1" target-path="/Start.2/b2.4/b2.2"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_33">
+  <branch basename="_ANONYMOUS_BRANCH_32">
     <segment>
       <node>
         <text-node>
@@ -1624,7 +1604,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_37">
+  <branch basename="_ANONYMOUS_BRANCH_36">
     <segment>
       <node>
         <text-node>
@@ -1634,7 +1614,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_38">
+  <branch basename="_ANONYMOUS_BRANCH_37">
     <segment>
       <node>
         <text-node>
@@ -1644,23 +1624,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
-    <segment>
-      <node>
-        <pipelet-node custom-name="Send order confirmation email" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-          <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-          <key-binding alias="&quot;mail/orderconfirmation&quot;" key="MailTemplate"/>
-          <key-binding alias="Order.customerEmail" key="MailTo"/>
-          <key-binding alias="&quot;Your order with Demandware online store&quot;" key="MailSubject"/>
-          <key-binding alias="null" key="LocaleID"/>
-          <key-binding alias="null" key="MailCC"/>
-          <key-binding alias="null" key="MailBCC"/>
-        </pipelet-node>
-        <node-display x="3" y="31"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_40">
+  <branch basename="_ANONYMOUS_BRANCH_38">
     <segment>
       <node>
         <text-node>
@@ -1670,7 +1634,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_41">
+  <branch basename="_ANONYMOUS_BRANCH_39">
     <segment>
       <node>
         <text-node>
@@ -1680,7 +1644,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_42">
+  <branch basename="_ANONYMOUS_BRANCH_40">
     <segment>
       <node>
         <text-node>
@@ -1787,7 +1751,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_45">
+  <branch basename="_ANONYMOUS_BRANCH_43">
     <segment>
       <node>
         <text-node>

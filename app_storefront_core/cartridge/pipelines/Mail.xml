@@ -43,9 +43,9 @@
                 <key-binding alias="MailTemplate" key="MailTemplate"/>
                 <key-binding alias="MailTo" key="MailTo"/>
                 <key-binding alias="MailSubject" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
+                <key-binding alias="LocaleID" key="LocaleID"/>
+                <key-binding alias="MailCC" key="MailCC"/>
+                <key-binding alias="MailBCC" key="MailBCC"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
