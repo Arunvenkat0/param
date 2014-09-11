@@ -754,18 +754,45 @@
               </transition-display>
             </simple-transition>
             <node>
-              <pipelet-node custom-name="Send order confirmation email" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-                <key-binding alias="&quot;mail/orderconfirmation&quot;" key="MailTemplate"/>
-                <key-binding alias="Order.customerEmail" key="MailTo"/>
-                <key-binding alias="&quot;Your order with Demandware online store&quot;" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
+                <key-binding alias="MailFrom" key="To_0"/>
+                <key-binding alias="dw.web.Resource.msg('order.orderconfirmation-email.001','order',null)+ &quot; &quot; + Order.orderNo" key="From_1"/>
+                <key-binding alias="MailSubject" key="To_1"/>
+                <key-binding alias="&quot;mail/orderconfirmation&quot;" key="From_2"/>
+                <key-binding alias="MailTemplate" key="To_2"/>
+                <key-binding alias="Order.customerEmail" key="From_3"/>
+                <key-binding alias="MailTo" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="0" y="3"/>
+              <node-display x="0" y="2"/>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Mail-SecureSend"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
@@ -977,11 +1004,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node custom-name="Confirm order" pipelet-name="Eval" pipelet-set-identifier="bc_api">
-          <config-property key="Expression" value="Order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED)"/>
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="Result" key="Result"/>
-        </pipelet-node>
+        <pipelet-node custom-name="Confirm order" pipelet-name="Eval" pipelet-set-identifier="bc_api"/>
         <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
@@ -1096,21 +1119,43 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
               </transition-display>
             </simple-transition>
             <node>
-              <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="&quot;mail/giftcert&quot;" key="MailTemplate"/>
-                <key-binding alias="GiftCertificate.recipientEmail" key="MailTo"/>
-                <key-binding alias="&quot;A gift certificate from &quot; + GiftCertificate.senderName" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
-                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
+                <key-binding alias="MailFrom" key="To_0"/>
+                <key-binding alias="dw.web.Resource.msg('email.ordergcemsg','email',null)+&quot; &quot;+GiftCertificate.senderName" key="From_1"/>
+                <key-binding alias="MailSubject" key="To_1"/>
+                <key-binding alias="&quot;mail/giftcert&quot;" key="From_2"/>
+                <key-binding alias="MailTemplate" key="To_2"/>
+                <key-binding alias="GiftCertificate.recipientEmail" key="From_3"/>
+                <key-binding alias="MailTo" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
               </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Mail-SecureSend"/>
               <node-display x="0" y="1"/>
             </node>
             <transition target-connector="loop" target-path="..">
               <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-                <bend-point relative-to="source" x="-1" y="1"/>
+                <bend-point relative-to="source" x="-1" y="0"/>
                 <bend-point relative-to="target" x="-1" y="0"/>
               </transition-display>
             </transition>
