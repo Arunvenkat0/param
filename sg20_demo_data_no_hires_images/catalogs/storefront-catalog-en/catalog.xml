@@ -322,7 +322,7 @@
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
-            <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$url('GiftCert-Purchase')$"&gt;&lt;img width="433" height="80" src="images/WomensMenuBottomBanner.jpg?$staticlink$" alt="Womans Catalog" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$httpsUrl('GiftCert-Purchase')$"&gt;&lt;img width="433" height="80" src="images/WomensMenuBottomBanner.jpg?$staticlink$" alt="Womans Catalog" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
         </custom-attributes>
