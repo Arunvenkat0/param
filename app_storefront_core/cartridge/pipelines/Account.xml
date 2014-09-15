@@ -808,14 +808,18 @@
           </segment>
         </branch>
         <branch basename="b3" source-connector="send">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <pipelet-node pipelet-name="GetCustomer" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.requestpassword.email.htmlValue" key="Login"/>
                 <key-binding alias="Customer" key="Customer"/>
               </pipelet-node>
-              <node-display x="0" y="3"/>
+              <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
@@ -847,7 +851,7 @@
                       <key-binding alias="null" key="From_9"/>
                       <key-binding alias="null" key="To_9"/>
                     </pipelet-node>
-                    <node-display x="1" y="3"/>
+                    <node-display x="1" y="4"/>
                   </node>
                   <transition target-connector="in1" target-path="./+1">
                     <transition-display>
@@ -864,7 +868,11 @@
                 </segment>
               </branch>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="GenerateResetPasswordToken" pipelet-set-identifier="bc_api">
                 <key-binding alias="Customer" key="Customer"/>
@@ -872,21 +880,36 @@
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
             <node>
-              <pipelet-node custom-name="resetpasswordemail" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-                <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="MailTemplate"/>
-                <key-binding alias="Customer.profile.email" key="MailTo"/>
-                <key-binding alias="&quot;Password Assistance&quot;" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
+                <key-binding alias="MailFrom" key="To_0"/>
+                <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                <key-binding alias="MailSubject" key="To_1"/>
+                <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="From_2"/>
+                <key-binding alias="MailTemplate" key="To_2"/>
+                <key-binding alias="Customer.profile.email" key="From_3"/>
+                <key-binding alias="MailTo" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
               </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <call-node start-name-ref="Mail-SecureSend"/>
               <node-display x="0" y="1"/>
             </node>
             <simple-transition>
@@ -1073,15 +1096,38 @@
               </transition-display>
             </simple-transition>
             <node>
-              <pipelet-node custom-name="resetpasswordemail" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-                <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="MailTemplate"/>
-                <key-binding alias="Customer.profile.email" key="MailTo"/>
-                <key-binding alias="&quot;Password Assistance&quot;" key="MailSubject"/>
-                <key-binding alias="null" key="LocaleID"/>
-                <key-binding alias="null" key="MailCC"/>
-                <key-binding alias="null" key="MailBCC"/>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
+                <key-binding alias="MailFrom" key="To_0"/>
+                <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                <key-binding alias="MailSubject" key="To_1"/>
+                <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="From_2"/>
+                <key-binding alias="MailTemplate" key="To_2"/>
+                <key-binding alias="Customer.profile.email" key="From_3"/>
+                <key-binding alias="MailTo" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
               </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Mail-SecureSend"/>
               <node-display x="0" y="1"/>
             </node>
             <simple-transition>
@@ -1340,20 +1386,51 @@
                             </segment>
                           </branch>
                         </node>
-                        <simple-transition/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
                         <node>
-                          <pipelet-node custom-name="passwordchangedemail" pipelet-name="SendMail" pipelet-set-identifier="bc_api">
-                            <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="MailFrom"/>
-                            <key-binding alias="&quot;mail/passwordchangedemail&quot;" key="MailTemplate"/>
-                            <key-binding alias="Customer.profile.email" key="MailTo"/>
-                            <key-binding alias="&quot;Password Assistance&quot;" key="MailSubject"/>
-                            <key-binding alias="null" key="LocaleID"/>
-                            <key-binding alias="null" key="MailCC"/>
-                            <key-binding alias="null" key="MailBCC"/>
+                          <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="false"/>
+                            <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
+                            <key-binding alias="MailFrom" key="To_0"/>
+                            <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                            <key-binding alias="MailSubject" key="To_1"/>
+                            <key-binding alias="&quot;mail/passwordchangedemail&quot;" key="From_2"/>
+                            <key-binding alias="MailTemplate" key="To_2"/>
+                            <key-binding alias="Customer.profile.email" key="From_3"/>
+                            <key-binding alias="MailTo" key="To_3"/>
+                            <key-binding alias="null" key="From_4"/>
+                            <key-binding alias="null" key="To_4"/>
+                            <key-binding alias="null" key="From_5"/>
+                            <key-binding alias="null" key="To_5"/>
+                            <key-binding alias="null" key="From_6"/>
+                            <key-binding alias="null" key="To_6"/>
+                            <key-binding alias="null" key="From_7"/>
+                            <key-binding alias="null" key="To_7"/>
+                            <key-binding alias="null" key="From_8"/>
+                            <key-binding alias="null" key="To_8"/>
+                            <key-binding alias="null" key="From_9"/>
+                            <key-binding alias="null" key="To_9"/>
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                         </node>
-                        <simple-transition/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <call-node start-name-ref="Mail-SecureSend"/>
+                          <node-display x="0" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
                         <node>
                           <pipelet-node custom-name="Invalidate ErrorCode" pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
@@ -1380,11 +1457,7 @@
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                         </node>
-                        <simple-transition>
-                          <transition-display>
-                            <bend-point relative-to="target" x="0" y="-2"/>
-                          </transition-display>
-                        </simple-transition>
+                        <simple-transition/>
                         <node>
                           <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
@@ -1409,7 +1482,7 @@
                             <key-binding alias="null" key="From_9"/>
                             <key-binding alias="null" key="To_9"/>
                           </pipelet-node>
-                          <node-display x="0" y="4"/>
+                          <node-display x="0" y="3"/>
                         </node>
                         <simple-transition>
                           <transition-display>
