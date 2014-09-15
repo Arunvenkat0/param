@@ -1,26 +1,19 @@
 /**
- * calculate.js
+ * @module calculate.js
  *
  * This javascript file implements methods (via Common.js exports) that are needed by
- * the new (smaller) CalculateCart.ds script file.  This gives us the ability to reconcile
- * the two different carts (storefront and OCAPI) into the single OCAPI cart, allowing SG
- * pipelines to be shared with OCAPI-based applications.
+ * the new (smaller) CalculateCart.ds script file.  This allows OCAPI calls to reference
+ * these tools via the OCAPI 'hook' mechanism
  *
  */
-importPackage( dw.system );
-importPackage( dw.web );
-importPackage( dw.value );
-importPackage( dw.util );
-importPackage( dw.order );
-importPackage( dw.campaign );
-importPackage( dw.catalog );
-importPackage( dw.customer );
 
 /**
- * FUNCTION: calculateProductPrices
+ * @function calculateProductPrices
  *
  * Calculates product prices based on line item quantities. Set calculates prices
- * on the product line items.
+ * on the product line items.  This updates the basket and returns nothing
+ *
+ * @param {object} basket The basket containing the elements to be computed
  */
 exports.calculateProductPrices = function(basket)
 {
@@ -31,9 +24,8 @@ exports.calculateProductPrices = function(basket)
 	var products : Iterator = productQuantities.keySet().iterator();
 	var productPrices : HashMap = new HashMap();
 
-	while(products.hasNext())
+	for each(var product : Product in productQuantities.keySet())
 	{
-		var product : Product = products.next();
 		var quantity : Quantity = productQuantities.get(product);
 		productPrices.put(product, product.priceModel.getPrice(quantity));
 	}
@@ -107,10 +99,12 @@ exports.calculateProductPrices = function(basket)
 }
 
 /**
- * FUNCTION: calculateGiftCertificates
+ * @function calculateGiftCertificates
  *
  * Function sets either the net or gross price attribute of all gift certificate
- * line items of the basket by using the gift certificate base price.
+ * line items of the basket by using the gift certificate base price. It updates the basket in place.
+ *
+ * @param {object} basket The basket containing the gift certificates
  */
 exports.calculateGiftCertificatePrices = function(basket)
 {
@@ -123,7 +117,7 @@ exports.calculateGiftCertificatePrices = function(basket)
 }
 
 /**
- * FUNCTION: calculateTax <p>
+ * @function calculateTax <p>
  *
  * Determines tax rates for all line items of the basket. Uses the shipping addresses
  * associated with the basket shipments to determine the appropriate tax jurisdiction.
@@ -137,7 +131,9 @@ exports.calculateGiftCertificatePrices = function(basket)
  * if no other jurisdiction matches the specified shipping location/shipping address.<p>
  *
  * Note that the function implements a fallback to the default tax class if a
- * product or a shipping method does explicitely define a tax class.
+ * product or a shipping method does explicitly define a tax class.
+ *
+ * @param {object} basket The basket containing the elements for which taxes need to be calculated
  */
 exports.calculateTax = function(basket)
 {

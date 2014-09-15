@@ -1,7 +1,16 @@
-importPackage( dw.campaign );
+/** @module ServiceDispatcher **/
 
 var cartCalculator = require( "../cart/calculate.js" );
 
+/**
+ * @function calculate
+ *
+ * calculate is the arching logic for computing the value of a basket.  It makes
+ * calls into cart/calculate.js and enables both SG and OCAPI applications to share
+ * the same cart calculation logic.
+ *
+ * @param {object} basket The basket to be calculated
+ */
 exports.calculate = function(basket)
 {
     // ===================================================
