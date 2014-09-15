@@ -105,7 +105,7 @@
 	}
 
 	// used for client side validation DO NOT remove it! otherwise client side validation won't work!!!
-	additionalClass += (pdict.formfield.mandatory == true) ? 'required': '';
+	additionalClass += (pdict.formfield.mandatory == true) ? ' required': '';
 </isscript>
 
 <div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
