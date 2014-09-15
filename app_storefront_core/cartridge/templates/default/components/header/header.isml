@@ -1,8 +1,12 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24"/>
 
-<isif condition="${dw.content.ContentMgr.getContent('cookie_hint') && dw.content.ContentMgr.getContent('cookie_hint').online}">
-	<isinclude template="components/cookieprivacy"/>
+<iscomment>Include div for European Cookie notification</iscomment>
+<isif condition="${dw.content.ContentMgr.getContent('cookie_hint').online}">
+	<div id='cookie-hint'>
+		<isinclude url="${URLUtils.url('Page-Include', 'cid', 'cookie_hint')}"/>
+	</div>
+	<div id="overlay-background"></div>
 </isif>
 
 <div id="header" role="banner">
@@ -16,19 +20,19 @@
 				<span>${Resource.msg('global.storename','locale',null)}</span>
 			</a>
 		</h1>
-	
+
 		<a href="#main" class="visually-hidden">Skip to content</a>
-	    
-	
+
+
 		<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
 	    <div id="mini-cart">
 	    	<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    </div>
-	    
+
 		<!--  utility user menu -->
 		<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/> 
-	
+		<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
+
 		<!-- utility menu -->
 		<ul class="menu-utility">
 			<li>
@@ -51,15 +55,15 @@
 					${Resource.msg('global.helplink','locale',null)}
 				</a>
 			</li>
-		</ul> 
-	    
+		</ul>
+
 	    <iscomment>SLOT CONFIGURATION:  SLOT/ID: header-banner</iscomment>
 	    <div class="header-banner">
 	    	<isslot id="header-banner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 	    </div>
-		
+
 	</header>
-	
+
 </div><!-- /header -->
 
 <div id="navigation" role="navigation">
@@ -67,11 +71,11 @@
 	<nav>
 
 		<h1 class="visually-hidden navigation-header">Catalog Navigation</h1>
-		
+
 		<!--  category navigation -->
 		<iscomment>INCLUDE: category menu</iscomment>
 		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
-		
+
 		<div class="header-search">
 			<isinclude template="search/simplesearch"/>
 		</div>

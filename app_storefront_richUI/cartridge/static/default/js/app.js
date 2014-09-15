@@ -29,6 +29,15 @@ if (!window.jQuery) {
 
 require('./jquery-ext')();
 require('./cookieprivacy')();
+<<<<<<< HEAD
+=======
+
+document.cookie = 'dw=1';
+
+// expose util for use in 2 templates pt_contentsearchresult_UI.isml and pt_customerservice_UI.isml
+// remove me later
+window.util = util;
+>>>>>>> added check for dw_cookies_accepted
 
 /**
  * @private
@@ -616,6 +625,7 @@ module.exports = components;
 /** @function cookieprivacy	Used to display/control the scrim containing the cookie privacy code **/
 
 module.exports = function () {
+<<<<<<< HEAD
 	/**
 	 * if we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
 	 *
@@ -641,10 +651,21 @@ module.exports = function () {
 	$('.privacy_close_noaction').on('click', function () {
 		enable_cookies();
 		close_all();
+=======
+	if (document.cookie.indexOf('dw_cookies_accepted') < 0) {
+		$('#overlay-background').css('visibility','inherit');
+		$('#cookie-hint').css('visibility','inherit');
+	}
+
+	// Close Button handler
+	$('.privacy_close_noaction').on('click', function () {
+		closeall();
+>>>>>>> added check for dw_cookies_accepted
 	});
 
 	// Accept Button handler
 	$('.privacypolicy_agreebtn').on('click', function () {
+<<<<<<< HEAD
 		enable_cookies();
 		close_all();
 	});
@@ -664,6 +685,17 @@ module.exports = function () {
 	};
 }
 
+=======
+		closeall();
+	});
+
+	function closeall() {
+		$('#overlay-background').hide();
+		$('#cookie-hint').hide();
+		document.cookie = 'dw_cookies_accepted=1';
+	};
+}
+>>>>>>> added check for dw_cookies_accepted
 },{}],6:[function(require,module,exports){
 'use strict';
 
@@ -1534,7 +1566,11 @@ exports.init = function () {
 	});
 }
 
+<<<<<<< HEAD
 },{"../../ajax":2,"../../giftcard":7,"../../util":38,"./formPrepare":17}],17:[function(require,module,exports){
+=======
+},{"../../ajax":2,"../../giftcard":7,"../../util":38,"../../validator":39,"./formPrepare":17}],17:[function(require,module,exports){
+>>>>>>> added check for dw_cookies_accepted
 'use strict';
 
 var _ = require('lodash');
@@ -1589,11 +1625,15 @@ function validateEl() {
 	}
 }
 
+<<<<<<< HEAD
 exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
 },{"lodash":41}],18:[function(require,module,exports){
+=======
+},{}],18:[function(require,module,exports){
+>>>>>>> added check for dw_cookies_accepted
 'use strict';
 
 var address = require('./address'),
@@ -1754,7 +1794,10 @@ exports.init = function () {
 		return false;
 	});
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> added check for dw_cookies_accepted
 },{"../../dialog":6,"../../util":38,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
 'use strict';
 
@@ -3171,7 +3214,11 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
+<<<<<<< HEAD
 },{"./ajax":2,"./page":12,"./util":38,"promise":43}],29:[function(require,module,exports){
+=======
+},{"./ajax":2,"./page":12,"./util":38}],29:[function(require,module,exports){
+>>>>>>> added check for dw_cookies_accepted
 'use strict';
 
 var product = require('./pages/product'),
