@@ -1,5 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/></isif></subject>
 <html>
 <head>
 <title>${Resource.msg('lockoutemail.title','account',null)}</title>
