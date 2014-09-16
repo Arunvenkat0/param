@@ -21,7 +21,6 @@ exports.calculateProductPrices = function(basket)
 	var productQuantities : HashMap = basket.getProductQuantities();
 
 	// get product prices for the accumulated product quantities
-	var products : Iterator = productQuantities.keySet().iterator();
 	var productPrices : HashMap = new HashMap();
 
 	for each(var product : Product in productQuantities.keySet())

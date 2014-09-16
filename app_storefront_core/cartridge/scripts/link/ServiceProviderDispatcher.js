@@ -1,4 +1,4 @@
-/** @module ServiceDispatcher **/
+/** @module ServiceProviderDispatcher **/
 
 var cartCalculator = require( "../cart/calculate.js" );
 
