@@ -1,12 +1,18 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24"/>
 
-<iscomment>Include div for European Cookie notification</iscomment>
-<isif condition="${dw.content.ContentMgr.getContent('cookie_hint').online}">
+<isif condition="${dw.content.ContentMgr.getContent('cookie_hint') && dw.content.ContentMgr.getContent('cookie_hint').online}">
+	<iscomment>Include div for European Cookie notification</iscomment>
 	<div id='cookie-hint'>
 		<isinclude url="${URLUtils.url('Page-Include', 'cid', 'cookie_hint')}"/>
 	</div>
 	<div id="overlay-background"></div>
+<iselse>
+	<iscomment>Asset is missing, don't display popup, but do enable cookies</iscomment>
+	<script type="text/javascript">
+		document.cookie = "dw=1";
+		document.cookie = "dw_cookies_accepted=1";
+	</script>
 </isif>
 
 <div id="header" role="banner">
