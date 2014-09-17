@@ -26,8 +26,15 @@
 				selectableColors = PVM.getFilteredValues(colorVarAttr);
 			}
 			if (PVM.master && PVM.defaultVariant) {
-				imageSource = PVM.defaultVariant;
-				selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+				// if the PVM has `color` variation, use the default variant
+				// otherwise, use the master variant
+				if (colorVarAttr !== null) {
+					imageSource = PVM.defaultVariant;
+					selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+				} else {
+					imageSource = PVM.master;
+				}
+			// @TODO: not sure if we need to check for a variant that is not master for the search tiles
 			} else if (Product.isVariant()) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (!imageSource) {
@@ -37,6 +44,7 @@
 					}
 				}
 			} else {
+				// standard product, product set or bundle
 				imageSource = Product;
 			}
 		} else {
@@ -115,7 +123,7 @@
 <iscomment>
 	Check whether the product has price in the sale pricebook. If so, then
 	display two prices: crossed-out standard price and sales price.
-	
+
 	TODO: should find a better way to include logic.
 </iscomment>
 <isinclude template="product/components/standardprice"/>
