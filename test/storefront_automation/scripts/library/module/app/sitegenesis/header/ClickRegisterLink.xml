@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <action name="ClickRegisterLink">
-    <comment>Click the register link and check if all elements are present for creating an account.</comment>
-  </action>
-  <module name="library.function.FClickAndWait">
-    <parameter name="clickElement" value="css=.user-register"/>
-  </module>
-</scriptmodule>

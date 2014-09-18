@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <parameter name="expectedCount"/>
-  <command name="assertXpathCount" target="//ul[contains(@class,&quot;store-list expanded&quot;)] / li" value="8"/>
-</scriptmodule>

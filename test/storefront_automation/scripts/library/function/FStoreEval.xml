@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>1. Wait for the 'element' to exist. 2. Stores the text from ? into the variable name in 'variableName'.</description>
-  <parameter name="javascript"/>
-  <parameter name="variableName"/>
-  <command name="storeEval" target="@{javascript}" value="@{variableName}"/>
-</scriptmodule>

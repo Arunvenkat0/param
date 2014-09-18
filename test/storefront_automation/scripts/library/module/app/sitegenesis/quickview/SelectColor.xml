@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Selects a color for the dispalyed item.</description>
-  <parameter name="Color"/>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=a.swatchanchor[title=&quot;@{Color}&quot;]"/>
-  </module>
-</scriptmodule>

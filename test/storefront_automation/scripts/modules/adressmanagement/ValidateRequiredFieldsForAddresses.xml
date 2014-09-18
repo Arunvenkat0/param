@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Checks if the fields are required. The attribute 'class' contains the word 'required'.</description>
-  <module name="modules.adressmanagement.ValidateGlobalRequiredFieldsForAddresses"/>
-  <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="xpath=//input[contains(@id, 'phone')][contains(@class, 'required')]"/>
-  </module>
-</scriptmodule>

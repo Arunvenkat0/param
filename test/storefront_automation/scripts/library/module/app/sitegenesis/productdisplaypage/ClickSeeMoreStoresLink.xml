@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Clicks the "See More Stores" link.</description>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="css=.more-stores"/>
-  </module>
-</scriptmodule>

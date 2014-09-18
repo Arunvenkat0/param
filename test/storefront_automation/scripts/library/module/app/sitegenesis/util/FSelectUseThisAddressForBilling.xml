@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <module name="library.function.FCheck">
-    <parameter name="checkElement" value="css=input#dwfrm_singleshipping_shippingAddress_useAsBillingAddress"/>
-  </module>
-  <command name="pause" value="1000"/>
-</scriptmodule>

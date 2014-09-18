@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <parameter name="RecomendationsCount"/>
-  <module name="library.function.FAssertElementPresent">
-    <parameter name="assertedElement" value="//div[@class='recommendations cross-sell']"/>
-  </module>
-  <command name="assertXpathCount" target="//div[@class='recommendations cross-sell']//ul/li[contains(@class,'jcarousel-item')]" value="@{RecomendationsCount}"/>
-  <command name="assertText" target="//div[@class='recommendations cross-sell']//h2" value="glob:You Might Also Like:"/>
-</scriptmodule>

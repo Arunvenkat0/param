@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <parameter name="itemNumberInCartList"/>
-  <module name="library.function.FAssertChecked">
-    <parameter name="element" value="css=form#cart-items-form table.item-list tbody tr:nth-child(@{itemNumberInCartList})  .home-delivery input[value=&quot;home&quot;]"/>
-  </module>
-</scriptmodule>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <PromotionName>5%offOrderAmountAbove100</PromotionName>
-  <CatalogLevel1>Womens</CatalogLevel1>
-  <CatalogLevel2>Accessories</CatalogLevel2>
-  <ProductName>Classic Wrap</ProductName>
-  <ExpectedDiscount>- $5.10</ExpectedDiscount>
-  <ExpectedEstimatedTotal>$96.90</ExpectedEstimatedTotal>
-</data>
