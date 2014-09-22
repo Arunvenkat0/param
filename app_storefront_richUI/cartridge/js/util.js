@@ -5,84 +5,6 @@ var // dialog = require('./dialog'),
 var util = {
 	/**
 	 * @function
-	 * @description trims a prefix from a given string, this can be used to trim
-	 * a certain prefix from DOM element IDs for further processing on the ID
-	 */
-	trimPrefix: function (str, prefix) {
-		return str.substring(prefix.length);
-	},
-
-	/**
-	 * @function
-	 * @description
-	 */
-	setDialogify: function (e) {
-		// var util = this;
-		// e.preventDefault();
-		// var $actionSource = $(e.target),
-		// 	dlgAction = $actionSource.data('dlg-action') || {}, // url, target, isForm
-		// 	dlgOptions = $.extend({}, dialog.settings, $actionSource.data('dlg-options') || {});
-
-		// dlgOptions.title = dlgOptions.title || $actionSource.attr('title') || '';
-
-		// var url = dlgAction.url // url from data
-		// 	|| (dlgAction.isForm ? $actionSource.closest('form').attr('action') : null) // or url from form action if isForm=true
-		// 	|| $actionSource.attr('href'); // or url from href
-
-		// if (!url) {return;}
-
-		// var $form = $actionSource.parents('form'),
-		// 	method = $form.attr('method') || 'POST';
-
-		// // if this is a content link, update url from Page-Show to Page-Include
-		// if ($actionSource.hasClass("attributecontentlink")) {
-		// 	var uri = util.getUri(url);
-		// 	url = Urls.pageInclude+uri.query;
-		// }
-		// if (method && method.toUpperCase() === 'POST') {
-		// 	var postData = $form.serialize() + "&"+ $actionSource.attr("name") + "=submit";
-		// } else {
-		// 	if (url.indexOf('?') == -1 ) {
-		// 		url += '?';
-		// 	} else {
-		// 		url += '&'
-		// 	}
-		// 	url += form.serialize();
-		// 	url = this.appendParamToURL(url, $actionSource.attr('name'), "submit");
-		// }
-
-		// var dlg = dialog.create({target:dlgAction.target, options : dlgOptions});
-
-		// ajax.load({
-		// 	url: $actionSource.attr("href") || $actionSource.closest("form").attr("action"),
-		// 	target: dlg,
-		// 	callback: function () {
-		// 		dlg.dialog("open");	// open after load to ensure dialog is centered
-		// 		validator.init(); // re-init validator
-		// 	},
-		// 	data : !$actionSource.attr('href') ? postData : null
-		// });
-	}.bind(this),
-	/**
-	 * @function
-	 * @description Appends a character to the left side of a numeric string (normally ' ')
-	 * @param {String} str the original string
-	 * @param {String} padChar the character which will be appended to the original string
-	 * @param {Number} len the length of the end string
-	 */
-	padLeft: function (str, padChar, len) {
-		var digs = len || 10;
-		var s = str.toString();
-		var dif = digs - s.length;
-		while (dif > 0) {
-			s = padChar + s;
-			dif--;
-		}
-		return s;
-	},
-
-	/**
-	 * @function
 	 * @description appends the parameter with the given name and value to the given url and returns the changed url
 	 * @param {String} url the url to which the parameter will be added
 	 * @param {String} name the name of the parameter
@@ -155,41 +77,7 @@ var util = {
 		}
 		return result;
 	},
-	/**
-	 * @function
-	 * @description removes the parameter with the given name from the given url and returns the changed url
-	 * @param {String} url the url from which the parameter will be removed
-	 * @param {String} name the name of the parameter
-	 */
-	removeParamFromURL: function (url, parameter) {
-		var urlparts = url.split('?');
-		if (urlparts.length >= 2) {
-			var urlBase = urlparts.shift();
-			var queryString = urlparts.join('?');
-			var prefix = encodeURIComponent(parameter) + '=';
-			var pars = queryString.split(/[&;]/g);
-			var i = pars.length;
-			while (0 > i--) {
-				if(pars[i].lastIndexOf(prefix, 0) !== -1) {
-					pars.splice(i, 1);
-				}
-			}
-			url = urlBase + '?' + pars.join('&');
-		}
-		return url;
-	},
 
-	/**
-	 * @function
-	 * @description Returns the static url for a specific relative path
-	 * @param {String} path the relative path
-	 */
-	staticUrl: function (path) {
-		if (!path || $.trim(path).length === 0) {
-			return Urls.staticPath;
-		}
-		return Urls.staticPath + (path.charAt(0) === "/" ? path.substr(1) : path );
-	},
 	/**
 	 * @function
 	 * @description Appends the parameter 'format=ajax' to a given path
@@ -303,45 +191,7 @@ var util = {
 			urlWithQuery: a.protocol + '//' + a.host + a.port + a.pathname + a.search
 		};
 	},
-	/**
-	 * @function
-	 * @description Appends a form-element with given arguments to a body-element and submits it
-	 * @param {Object} args The arguments which will be attached to the form-element:
-	 * - url
-	 * - fields - an Object containing the query-string parameters
-	 */
-	postForm: function (args) {
-		var form = $('<form>').attr({
-			action: args.url,
-			method: 'post'
-		}).appendTo('body');
-		var p;
-		for (p in args.fields) {
-			$('<input>').attr({
-				name: p,
-				value: args.fields[p]
-			}).appendTo(form);
-		}
-		form.submit();
-	},
-	/**
-	 * @function
-	 * @description  Returns a JSON-Structure of a specific key-value pair from a given resource bundle
-	 * @param {String} key The key in a given Resource bundle
-	 * @param {String} bundleName The resource bundle name
-	 * @param {Object} A callback function to be called
-	 */
-	getMessage: function (key, bundleName, callback) {
-		if (!callback || !key || key.length===0) {
-			return;
-		}
-		var params = {key: key};
-		if (bundleName && bundleName.length===0) {
-			params.bn = bundleName;
-		}
-		var url = this.appendParamsToUrl(Urls.appResources, params);
-		$.getJSON(url, callback);
-	},
+
 	fillAddressFields: function (address, $form) {
 		for (var field in address) {
 			// if the key in address object ends with 'Code', remove that suffix
