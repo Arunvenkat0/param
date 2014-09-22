@@ -4,3 +4,4 @@ target
 .project
 .settings/
 node_modules
+*.log
