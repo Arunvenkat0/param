@@ -1,4 +1,4 @@
-var assert = require('assert');
+var assert = require('chai').assert;
 var client = require('./browser/client');
 var config = require('./browser/config');
 

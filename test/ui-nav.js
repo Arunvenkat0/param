@@ -1,5 +1,5 @@
+var assert = require('chai').assert;
 var client = require('./browser/client');
-var assert = require('assert');
 var config = require('./browser/config');
 
 describe('navigation menu', function () {
