@@ -33,7 +33,7 @@
     "xtend": "^4.0.0"
   },
   "scripts": {
-    "test": "node test/*.js | faucet"
+    "test": "mocha --reporter spec -t 10000"
   },
   "repository": {
     "type": "git",
