@@ -12,6 +12,14 @@
     $ start-selenium
     ```
     For more information, see http://webdriver.io/guide/getstarted/install.html
+- Update site url config
+    If you are running selenium test, specify a url in `test/browser/config.json`. For example:
+
+    ```json
+    {
+	"url": "http://example.com"
+    }
+    ```
 - Run the test
 
     ```sh
