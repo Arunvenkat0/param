@@ -1,9 +1,10 @@
 var client = require('./browser/client');
 var assert = require('assert');
+var config = require('./browser/config');
 
 describe('navigation menu', function () {
 	before(function (done) {
-		client.init().url('http://dev10-sitegenesis-dw.demandware.net/on/demandware.store/Sites-SiteGenesis-Site', done);
+		client.init().url(config.url, done);
 	});
 	it('check navigation menu', function (done) {
 		client.getAttribute('#navigation .menu-category .level-1', 'innerHTML', function (err, res) {

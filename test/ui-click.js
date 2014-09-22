@@ -1,9 +1,10 @@
 var assert = require('assert');
 var client = require('./browser/client');
+var config = require('./browser/config');
 
 describe('click tests', function () {
 	before(function (done) {
-		client.init().url('http://dev10-sitegenesis-dw.demandware.net/on/demandware.store/Sites-SiteGenesis-Site', done);
+		client.init().url(config.url, done);
 	});
 	it('wait for login', function (done) {
 		client.waitForExist('.user-login', function (err, res) {
