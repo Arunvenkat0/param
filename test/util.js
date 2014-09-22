@@ -1,8 +1,15 @@
-var test = require('tape');
+var assert = require('assert');
 var util = require('../app_storefront_richUI/cartridge/js/util');
 
-test('append param to url', function (t) {
-	t.equal(util.appendParamToURL('http://example.com', 'color', 'blue'), 'http://example.com?color=blue');
-	t.equal(util.appendParamToURL('http://example.com?color=red', 'size', 'large'), 'http://example.com?color=red&size=large');
-	t.end();
+describe('util tests', function () {
+	describe('append param to url', function () {
+		it('should append first param to url', function () {
+			assert.equal('http://example.com?color=blue',
+				util.appendParamToURL('http://example.com', 'color', 'blue'));
+		});
+		it('should append second param to url', function () {
+			assert.equal('http://example.com?color=red&size=large',
+				util.appendParamToURL('http://example.com?color=red', 'size', 'large'));
+		});
+	});
 });
