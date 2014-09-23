@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Searchs for a product using the given search text. This text can be either an ID or the prdouct name. The search phrase is entered into the search entry field.</description>
-  <parameter name="SearchText"/>
-  <module name="modules.search.InsertSearchText">
-    <parameter name="SearchText" value="@{SearchText}"/>
-  </module>
-</scriptmodule>

@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- TemplateComment :  EMail form for inviting someone to shop from a customer's wish list -->
 <iscontent type="text/html" charset="UTF-8"/>
+<subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/></isif></subject>
 <html>
 <head>
 <style type="text/css">

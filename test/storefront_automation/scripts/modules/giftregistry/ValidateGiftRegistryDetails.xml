@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Validates the content of the gift registy details page.</description>
-  <command name="assertText" target="css=.event-information-user-info">
-    <value>*${FirstParticipantRole}*${UserFirstName} ${UserLastName}*${SecondParticipantRole}*${SecondParticipantFirstName} ${SecondParticipantLastName}</value>
-  </command>
-  <command name="assertText" target="css=.event-information-event-info" value="*${EventType}*${EventCity}*${EventState}"/>
-</scriptmodule>

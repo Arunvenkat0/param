@@ -2,6 +2,7 @@
 <!-- TemplateComment :  EMail Sending a Product List -->
 <iscontent type="text/html" charset="UTF-8"/>
 <isinclude template="util/modules"/>
+<subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/></isif></subject>
 <html>
 <head>
 <style type="text/css">

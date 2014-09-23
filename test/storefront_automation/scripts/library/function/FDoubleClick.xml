@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>1. Waits for the 'clickElement' to exist.  2 Double clicks the 'clickElement'.</description>
-  <parameter name="clickElement"/>
-  <command name="waitForElementPresent" target="@{clickElement}"/>
-  <command name="doubleClick" target="@{clickElement}"/>
-</scriptmodule>

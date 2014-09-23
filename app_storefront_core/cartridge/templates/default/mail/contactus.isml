@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
-<subject><isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></subject>
+<subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/><isprint value="${pdict.CurrentForms.contactus.myquestion.value}"/></isif></subject>
 
 <head>
 

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Clicks the "See Less Stores" link.</description>
-  <module name="library.function.FClick">
-    <parameter name="clickElement" value="//div[@class=&quot;availability&quot;]/span[contains(text(),&quot;See Less Stores&quot;)]"/>
-  </module>
-</scriptmodule>

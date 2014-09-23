@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://xlt.xceptance.com/xlt-script-data">
-  <NameOnCardElement>css=input#dwfrm_billing_paymentMethods_creditCard_owner</NameOnCardElement>
-  <CardTypeElement>css=select#dwfrm_billing_paymentMethods_creditCard_type</CardTypeElement>
-  <CardNumberElement>css=input#dwfrm_billing_paymentMethods_creditCard_number</CardNumberElement>
-  <ExpirationMonthElement>css=select#dwfrm_billing_paymentMethods_creditCard_month</ExpirationMonthElement>
-  <ExpirationYearElement>css=select#dwfrm_billing_paymentMethods_creditCard_year</ExpirationYearElement>
-  <SecurityCodeElement>css=input#dwfrm_billing_paymentMethods_creditCard_cvn</SecurityCodeElement>
-</data>

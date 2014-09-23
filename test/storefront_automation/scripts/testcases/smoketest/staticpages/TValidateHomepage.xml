@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" junit-test="true">
-  <tags>C85051</tags>
-  <description>Test Case ID:(C85051) Smoke Test » Homepage » Validate Homepage</description>
-  <module name="modules.staticelements.Homepage"/>
-  <module name="modules.staticelements.ValidateStandardPageElements"/>
-  <module name="modules.staticelements.ValidateHomepageElements"/>
-</testcase>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <tags>homepage</tags>
-  <description>Goes to the start url of the store and resets the cookies, effectivly cleaning the session state and reseting the browser environment for the test run.</description>
-  <module name="library.function.FOpenURLAndRemoveCookies">
-    <parameter name="URL" value="${shopURL}"/>
-  </module>
-</scriptmodule>

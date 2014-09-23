@@ -83,10 +83,10 @@
 
 	var aTag : String = ''; // for isprints to prevent encoding
 
-	var additionalClass : String = '';
+	var additionalClass : String = ' ';
 	if (! empty(pdict.xhtmlclass))
 	{
-		additionalClass = pdict.xhtmlclass;
+		additionalClass += pdict.xhtmlclass;
 	}
 
 	var rowClass : String = '';
@@ -101,11 +101,11 @@
 	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used
 	*/
 	if (pdict.formfield.formId == 'phone' || pdict.formfield.formId == 'country') {
-		additionalClass += ' ' + pdict.formfield.formId;
+		additionalClass += pdict.formfield.formId;
 	}
 
 	// used for client side validation DO NOT remove it! otherwise client side validation won't work!!!
-	additionalClass += (pdict.formfield.mandatory == true) ? " required": "";
+	additionalClass += (pdict.formfield.mandatory == true) ? ' required': '';
 </isscript>
 
 <div class="form-row ${rowClass} <isif condition="${pdict.formfield.mandatory}"> required</isif> <isif condition="${!pdict.formfield.valid}">error</isif>"<isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>

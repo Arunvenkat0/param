@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Opens the shopping site homepage.</description>
-  <module name="library.function.FOpenURLAndRemoveCookies">
-    <parameter name="URL" value="${shopURL}"/>
-  </module>
-</scriptmodule>

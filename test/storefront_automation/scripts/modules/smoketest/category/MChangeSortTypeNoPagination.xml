@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <parameter name="SortMethod"/>
-  <module name="library.function.FSelect">
-    <parameter name="element" value="css=.search-result-options .sort-by select"/>
-    <parameter name="selection" value="label=@{SortMethod}"/>
-  </module>
-</scriptmodule>
