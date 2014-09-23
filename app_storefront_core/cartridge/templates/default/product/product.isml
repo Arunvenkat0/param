@@ -1,74 +1,89 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
-	Renders product detail page both quickview and normal view.
-	If the product is a product set or bundle, then it also includes subproduct template to
-	render sub product details.
+    Renders product detail page both quickview and normal view.
+    If the product is a product set or bundle, then it also includes subproduct template to
+    render sub product details.
 </iscomment>
 
 <isscript>
-	//two attirbutes needed to pass along the selected color to the pdp/quickview
-	var queryString, queryStringArray = [],
-		colorAttributeID = 'dwvar_' + pdict.Product.ID + '_color',
-		sizeAttributeID = 'dwvar_' + pdict.Product.ID + '_size',
-		productColorValue = '',
-		productSizeValue = '';
+    var productDetailUrl = '';
+    var isMaster = pdict.Product.master;
 
-	//helper variables
-	queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string');
-	if (queryString) {
-		queryStringArray = queryString.split('&');
-	}
-	var PMapValue = '';
-
-	for (var x = 0; x < queryStringArray.length ;x++) {
-		PMapValue = queryStringArray[x];
-		if (PMapValue.indexOf('color') != -1) {
-			productColorValue = PMapValue.split('=')[1];
-		}
-	}
-	// look into the PVM
-	var PVM : dw.catalog.ProductVariationModel,
-		variant : dw.catalog.Variant,
-		variantSelected = false;
-	if (pdict.CurrentVariationModel && pdict.CurrentVariationModel.selectedVariant) {
-		PVM = pdict.CurrentVariationModel;
-		variant = PVM.selectedVariant;
-		variantSelected = true;
-	} else {
-		PVM = pdict.Product.variationModel;
-	}
-	if (!variantSelected) {
-		if (PVM.defaultVariant) {
-			variant = PVM.defaultVariant;
-		} else {
-			if (!PVM.variants.isEmpty()) {
-				variant = PVM.variants[0];
-			}
-		}
-	}
+    // look into the PVM
+    var PVM : dw.catalog.ProductVariationModel;
+    if (pdict.CurrentVariationModel) 
+    {
+        PVM = pdict.CurrentVariationModel;
+    } 
+    else 
+    {
+        PVM = pdict.Product.variationModel;
+    }
+    
+    if (!pdict.CurrentVariationModel.selectedVariant) 
+    {
+        var variant : dw.catalog.Variant;
+        if (PVM.defaultVariant) 
+        {
+            variant = PVM.defaultVariant;
+        } 
+        else 
+        {
+            if (!PVM.variants.isEmpty()) 
+            {
+                variant = PVM.variants[0];
+            }
+        }
+    }
 </isscript>
 
-<isif condition="${variant != null}">
-	<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-		<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
-		<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
-		<isif condition="${vaId == 'size'}">
-			<isif condition="${variantSelected || valength == 1}">
-				<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		<iselseif condition="${vaId == 'color'}">
-			<isif condition="${variantSelected || (productColorValue === '')}">
-				<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		</isif>
-	</isloop>
+<iscomment>Create the default product detail URL.</iscomment>
+<isset name="productDetailUrl" value="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue)}" scope="page"/>
+
+<iscomment>Add the selected variation values to the URL.</iscomment>
+<isif condition="#(isDefined(PVM))#">
+    <isif condition="#(isMaster)#">
+        <iscomment>For master products select the values from the default variant.</iscomment>
+        <isloop iterator="${PVM.productVariationAttributes}" alias="VariationAttribute" status="LoopState"> 
+            <isset name="vaID" value="${VariationAttribute.getID()}" scope="page"/>
+            <isset name="vaValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaID))}" scope="PAGE" />
+            
+            <isif condition="#(isDefined(vaValue:Value))#">
+                <isset name="vaValue" value="${vaValue.getValue()}" scope="page"/>
+            </isif>     
+
+            <iscomment>Add only selected variation attributes to the URL.</iscomment>           
+            <isif condition="#(vaValue NE '')#">
+                <isscript>
+                    productDetailUrl = productDetailUrl + '&' + 'dwvar_' + vaID + '=' + vaValue;
+                </isscript>
+            </isif>
+        </isloop>
+    <iselse>
+        <iscomment>For variation group products select the values which are configured.</iscomment>
+        <isloop iterator="${PVM.productVariationAttributes}" alias="VariationAttribute" status="LoopState">     
+            <isset name="vaID" value="${VariationAttribute.getID()}" scope="page"/>
+            <isset name="vaValue" value="${PVM.getSelectedValue(PVM.getProductVariationAttribute(VariationAttribute.getAttributeID()))}" scope="page"/>
+            <isif condition="#(isDefined(vaValue:Value))#">
+                <isset name="vaValue" value="${vaValue.getValue()}" scope="page"/>
+            </isif>
+
+            <iscomment>Add only selected variation attributes to the URL.</iscomment>
+            <isif condition="#(vaValue NE '')#">
+                <isscript>
+                    productDetailUrl = productDetailUrl + '&' + 'dwvar_' + vaID + '=' + vaValue;
+                </isscript>
+            </isif>
+        </isloop>
+    </isif> 
 </isif>
 
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
 <iscomment>pwr = power review write</iscomment>
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
-	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+    <isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
+
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue, colorAttributeID, productColorValue, sizeAttributeID, productSizeValue)}"/>
+    <isinclude url="#productDetailUrl#"/>    
 </isdecorate>

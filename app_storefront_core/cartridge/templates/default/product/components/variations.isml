@@ -20,10 +20,10 @@
 		selectedVariants = [],
 		selectedVariant=null,
 		currentPvm = empty(pdict.CurrentVariationModel) ? pdict.Product.variationModel : pdict.CurrentVariationModel,
-		selectedAtts = pdict.Product.isVariant() ? ProductUtils.getSelectedAttributes(currentPvm) : {},
+		selectedAtts = (pdict.Product.isVariant() || pdict.Product.isVariationGroup()) ? ProductUtils.getSelectedAttributes(currentPvm) : {},
 		swatchAttributes = ["color","size","width","waist","length"];	
 </isscript>
-	<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
+	<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster() || pdict.Product.isVariationGroup()}">
 			<isif condition="${pdict.CurrentVariationModel != null}">
 				<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
 			<iselse/>
@@ -166,9 +166,6 @@
 										<isset name="selectedSwatchValue" scope="page" value="${null}" />
 										<isloop items="${VAVALS}" var="VV">
 											<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
-												<isscript>													
-													var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
-												</isscript>
 												<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 												<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />											
 												<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />

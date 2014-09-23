@@ -1,8 +1,8 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
-	If it is a master product without a price range, get its pricing from its first variant.	
+	If it is a master product or variation group without a price range, get its pricing from its first variant.	
 </iscomment>
-<isif condition="${pdict.Product.master && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
+<isif condition="${(pdict.Product.master || pdict.Product.variationGroup) && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
 	<iscomment>Preserve current product instance</iscomment>
 	<isset name="OrgProduct" value="${pdict.Product}" scope="pdict"/>
 	<isset name="Product" value="${pdict.OrgProduct.variationModel.variants[0]}" scope="pdict"/>
@@ -82,11 +82,9 @@
 				<div class="standardprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetStandardPrice, pdict.CurrencyCode))}" /></div>
 			<iselseif condition="${pdict.ProductSetStandardPrice > pdict.ProductSetSalesPrice}">
 				<div class="salesprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetSalesPrice, pdict.CurrencyCode))}" /></div>
-			<iselseif condition="${pdict.ProductSetStandardPrice == pdict.ProductSetSalesPrice}">
-				<div class="salesprice"><isprint value="${dw.util.StringUtils.formatMoney(dw.value.Money(pdict.ProductSetStandardPrice, pdict.CurrencyCode))}" /></div>
 			</isif>
 			
-		<iselseif condition="${pdict.Product.master && pdict.Product.priceModel.isPriceRange()}" >
+		<iselseif condition="${(pdict.Product.master || pdict.Product.variationGroup) && pdict.Product.priceModel.isPriceRange()}" >
 			<iscomment>Product master price range depending on the variants</iscomment>
 			<div>			
 				<isprint value="${pdict.Product.priceModel.minPrice}"/> - <isprint value="${pdict.Product.priceModel.maxPrice}"/>
@@ -100,6 +98,7 @@
 			<span class="price-sales"><isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}"><isprint value="${SalesPrice}"/><iselse/>${Resource.msg('pricing.noprice','product',null)}</isif></span>
 					
 		</isif>
+		
 		<isset name="displayPrice" value="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) ? SalesPrice : new dw.value.Money(0, currencyCode)}" scope="pdict"/> 
 	
 	<isif condition="${typeof showTieredPrice !== 'undefined' && showTieredPrice == true}">
