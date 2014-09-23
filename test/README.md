@@ -12,12 +12,13 @@
     $ start-selenium
     ```
     For more information, see http://webdriver.io/guide/getstarted/install.html
-- Update site url config
-    If you are running selenium test, specify a url in `test/browser/config.json`. For example:
+- Update site url config and desired browser client
+    If you are running selenium test, specify a url and client in `test/browser/config.json`. For example:
 
     ```json
     {
-	"url": "http://example.com"
+	"url": "http://example.com",
+	"client": "phantomjs"
     }
     ```
 - Run the test
