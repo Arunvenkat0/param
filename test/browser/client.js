@@ -1,6 +1,8 @@
+var config = require('./config');
+
 var client = require('webdriverio').remote({
 	desiredCapabilities: {
-		browserName: 'phantomjs'
+		browserName: config.client || 'phantomjs'
 	},
 	logLevel: 'silent'
 });
