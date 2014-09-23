@@ -1,0 +1,33 @@
+.pt_wish-list {
+	.list-table-header {
+		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+		overflow: hidden;
+		padding: 2em;
+		p {
+			color: #999999;
+			float: right;
+			margin: 0;
+			overflow: hidden;
+			width: 40%;
+		}
+	}
+	.primary-content .list-table-header h2 {
+		float: left;
+	}
+}
+
+.list-share {
+	.share-option {
+		box-sizing: border-box;
+		width: 30%;
+		margin-right: 3.3333333%;
+		float: left;
+		a {
+			word-break: break-all;
+		}
+		button,
+		.button {
+			margin-top: 1em;
+		}
+	}
+}
