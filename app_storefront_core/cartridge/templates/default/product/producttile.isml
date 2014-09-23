@@ -44,7 +44,7 @@
 	</iscomment>
 	<isscript>
 		var selectableColors : dw.util.Collection = new dw.util.ArrayList();
-		if( Product.master )
+		if( (Product.master || product.variationGroup) )
 		{
 			var varModel : dw.catalog.ProductVariationModel = Product.variationModel;
 			var varAttrColor : dw.catalog.ProductVariationAttribute = varModel.getProductVariationAttribute("color");
@@ -80,11 +80,10 @@
 <iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 
 <div class="product-image">
-	
 	<iscomment>Render the thumbnail</iscomment>
 		
 	<iscomment>Determine the correct image, either first displayed color variation or default product thumbnail</iscomment>
-	<isif condition="${!empty(selectableColors) && selectableColors.size() > 0}">
+	<isif condition="${!empty(selectableColors) && selectableColors.size() > 0 && Product.master}">
 		<isset name="firstColorVariation" value="${selectableColors.get(0)}" scope="page"/>
 		<isset name="image" value="${firstColorVariation.getImage('medium')}" scope="page"/>					
 	<iselse/>
@@ -129,7 +128,7 @@
 			<iscomment>Product set pricing</iscomment>
 			<span class="product-set-price">${Resource.msg('global.buyall','locale',null)}</span>
 		
-		<iselseif condition="${Product.master && Product.priceModel.isPriceRange()}">
+		<iselseif condition="${(Product.master ||Product.variationGroup) && Product.priceModel.isPriceRange()}">
 			
 			<iscomment>Product master price range depending on the variants</iscomment>
 			<isprint value="${Product.priceModel.minPrice}"/> - <isprint value="${Product.priceModel.maxPrice}"/>
@@ -137,7 +136,7 @@
 		<iselse/>
 		
 			<iscomment>For Product master without a price range get the pricing from its first variant </iscomment>
-			<isif condition="${Product.master && !Product.priceModel.isPriceRange()}"/>
+			<isif condition="${(Product.master ||Product.variationGroup) && !Product.priceModel.isPriceRange()}"/>
 				<iscomment>Preserve current product instance</iscomment>
 				<isset name="OrgProduct" value="${Product}" scope="page"/>
 				<isset name="Product" value="${OrgProduct.variationModel.variants[0]}" scope="page"/>
