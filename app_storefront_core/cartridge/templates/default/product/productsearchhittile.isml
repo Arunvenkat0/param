@@ -56,7 +56,7 @@
 		Generate link to product detail page: by default it's just the product of the product search hit.
 		If a color variation is available, the first color is used as link URL.
 	</iscomment>
-	<isset name="productUrl" value="${URLUtils.http('Product-Show', 'pid', Product.ID)}" scope="page"/>
+	<isset name="productUrl" value="${URLUtils.url('Product-Show', 'pid', Product.ID)}" scope="page"/>
 
 <div class="product-tile" id="${Product.UUID}" data-itemid="${Product.ID}">
 
@@ -282,7 +282,7 @@
 				<iscomment>build the proper URL and append the search query parameters</iscomment>
 				<isset name="swatchproductUrl" value="${Product.variationModel.url('Product-Show', colorVarAttr, colorValue.value)}" scope="page"/>
 				<isif condition="${!empty(pdict.ProductSearchResult)}">
-					<isset name="swatchproductUrl" value="${pdict.ProductSearchResult.url( swatchproductUrl )}" scope="page"/>
+					<isset name="swatchproductUrl" value="${pdict.ProductSearchResult.url(swatchproductUrl)}" scope="page"/>
 				</isif>
 
 				<iscomment>render a single swatch, the url to the proper product detail page is contained in the href of the swatch link</iscomment>
