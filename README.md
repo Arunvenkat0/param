@@ -1,3 +1,6 @@
+## Official tags
+Please ignore tags that are in the format `sitegen-14.x.x.x`. Use tags in format `v14.x.x` instead.
+
 # Demo Storefront Data
 
 ## Creating a data installation
@@ -9,11 +12,11 @@ Because of file size constraints, the demo store data distribution is broken int
 If you need to install high resolution images, you will need to perform 2 separate import steps.
 
     % git pull sg20_demo_data_no_hires_images
-    
+
 When you want to install the high resolution images, you can do that, following the same procedure.
 
     % git pull sg20_demo_data_only_hires_images
-    
+
 
 ## Zipping the files
 
@@ -25,19 +28,19 @@ On the Mac, you should use the commandline `zip` command to make sure the folder
 ## Upload and import the site
 
 Upload the resulting file to your site and import it.
-    
+
 # Test Automation
 
 ## Overview
 
-Within the folder `test/storefront_automation` you can find a complete testsuite of automated storefront tests 
-created with and for the [XLT](http://www.xceptance-loadtest.com/). Watch this [screencast](http://youtu.be/Ykx4DcKo-mc) for a quick start. 
+Within the folder `test/storefront_automation` you can find a complete testsuite of automated storefront tests
+created with and for the [XLT](http://www.xceptance-loadtest.com/). Watch this [screencast](http://youtu.be/Ykx4DcKo-mc) for a quick start.
 
 The documentation of the test suite can be found in `test/storefront_automation/doc/testcases_manual.html`. It also explains how to create a new version of the documentation based on your latest changes.
 
 ## How to run with ANT?
 
-You can run the entire test suite with the Script Developer in Firefox and watch the tests live. See the screencast for more info. 
+You can run the entire test suite with the Script Developer in Firefox and watch the tests live. See the screencast for more info.
 
 The test suite also gained the ability to be executed from Eclipse or ANT directly by utilizing WebDrivers. Currently ChromeDriver and FirefoxDriver work fine. IEDrivers has not been tried yet. PhantomJS is similar to Chrome and therefore should work as well. You can find some details about getting WebDriver to work with XLT [here](http://blog.xceptance.com/2013/04/23/webdrivers-in-xlt-how-to-run-test-cases-in-multiple-browser/).
 
@@ -59,7 +62,7 @@ At the end of the test, a JUnit report will be compiled and can be found in `<te
 
 ## Tool
 
-For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can 
+For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can
 download the tool for free and browse the [documentation](http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html "XLT Documentation") online.
 
 Updated: 6/13/14
