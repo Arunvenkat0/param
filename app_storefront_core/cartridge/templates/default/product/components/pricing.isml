@@ -123,7 +123,7 @@
 				<isset name="NextQuantity" value="${PriceTable.getNextQuantity(Quantity)}" scope="PAGE"/>	
 			<div class="price-tiered-values">
 					<isif condition="${NextQuantity != null}">						
-						<isprint value="${Quantity}" formatter="#"/><isif condition="${Quantity != NextQuantity.getValue()-1}"><span class="divider">${Resource.msg('global.symbol.dash','global',null)}</span><isprint value="${NextQuantity.getValue()-1}" formatter="#"/></isif> ${Resource.msg('pricing.items','product',null)}						
+						<isprint value="${Quantity}" formatter="#"/><isif condition="${Quantity != NextQuantity.getValue()-1}"><span class="divider">${Resource.msg('global.symbol.dash','locale',null)}</span><isprint value="${NextQuantity.getValue()-1}" formatter="#"/></isif> ${Resource.msg('pricing.items','product',null)}						
 					<iselse/>						
 						<isprint value="${Quantity}" formatter="#"/> ${Resource.msg('pricing.more','product',null)}						
 					</isif>
