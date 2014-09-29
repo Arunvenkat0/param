@@ -1,4 +1,5 @@
-For contribution guideline, please see `CONTRIBUTING.md`
+## Official tags
+Please ignore tags that are in the format `sitegen-14.x.x.x`. Use tags in format `v14.x.x` instead.
 
 # Demo Storefront Data
 
