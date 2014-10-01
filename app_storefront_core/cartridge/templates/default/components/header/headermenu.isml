@@ -28,7 +28,8 @@
 <isif condition="${topLevelCategory != null}">
 
 	<ul class="menu-category level-1 clearfix">
-	
+	<li class="home hide-mobile"><a href="${URLUtils.url('Home-Show')}" class="home-icon"><img src="${URLUtils.staticURL('/images/home-icon.png')}" alt="" title="" /></a></li>
+	<li class="back-to-menu hide" data-level="0"><a href="javascript:void(0);" class="level-1">${Resource.msg('global.back','locale',null)} <span></span></a></li>
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat" status="catstatus">
 	
