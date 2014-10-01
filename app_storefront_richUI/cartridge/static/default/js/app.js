@@ -31,6 +31,10 @@ require('./jquery-ext')();
 
 document.cookie = 'dw=1';
 
+// expose util for use in 2 templates pt_contentsearchresult_UI.isml and pt_customerservice_UI.isml
+// remove me later
+window.util = util;
+
 /**
  * @private
  * @function
