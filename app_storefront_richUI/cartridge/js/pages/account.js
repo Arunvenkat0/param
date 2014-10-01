@@ -33,9 +33,9 @@ function initializeAddressForm(form) {
 			data: $form.serialize() + '&' + applyName + '=x',
 			type: 'POST'
 		};
-		$.ajax( options ).done(function(data){
-			if( typeof(data)!=='string' ) {
-				if ( data.success ) {
+		$.ajax(options).done(function (data){
+			if (typeof(data) !== 'string') {
+				if (data.success) {
 					dialog.close();
 					page.refresh();
 				} else {
@@ -56,7 +56,10 @@ function initializeAddressForm(form) {
 	.on('click', '.delete-button', function(e){
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-			var url = util.appendParamsToUrl(Urls.deleteAddress, {AddressID: $form.find('#addressid').val(),format: 'ajax'});
+			var url = util.appendParamsToUrl(Urls.deleteAddress, {
+				AddressID: $form.find('#addressid').val(),
+				format: 'ajax'
+			});
 			$.ajax({
 				url: url,
 				method: 'POST',
@@ -92,13 +95,13 @@ function initializeAddressForm(form) {
 function toggleFullOrder () {
 	$('.order-items')
 		.find('li.hidden:first')
-			.prev('li')
-				.append('<a class="toggle">View All</a>')
-				.children('.toggle')
-					.click(function() {
-						$(this).parent().siblings('li.hidden').show();
-						$(this).remove();
-					});
+		.prev('li')
+		.append('<a class="toggle">View All</a>')
+		.children('.toggle')
+		.click(function() {
+			$(this).parent().siblings('li.hidden').show();
+			$(this).remove();
+		});
 }
 /**
  * @private
@@ -111,8 +114,12 @@ function initAddressEvents() {
 
 	addresses.on('click', '.address-edit, .address-create', function (e) {
 		e.preventDefault();
-		var options = {open: initializeAddressForm};
-		dialog.open({url: this.href, options: options});
+		dialog.open({
+			url: this.href,
+			options: {
+				open: initializeAddressForm
+			}
+		});
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
@@ -149,7 +156,7 @@ function initPaymentEvents() {
 		$('<input/>').attr({
 			type: 'hidden',
 			name: button.attr('name'),
-			value:button.attr('value') || 'delete card'
+			value: button.attr('value') || 'delete card'
 		}).appendTo($(this));
 		var data = $(this).serialize();
 		$.ajax({

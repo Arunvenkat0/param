@@ -651,7 +651,7 @@ var dialog = {
 	 * @param {Object} params.url should contain the url
 	 */
 	open: function (params) {
-		if (!params.url || params.url.length===0) { return; }
+		if (!params.url || params.url.length === 0) { return; }
 
 		this.container = this.create(params);
 		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
@@ -686,8 +686,8 @@ var dialog = {
 		var form = this.container.find("form:first");
 		// set the action
 		$("<input/>").attr({
-			name : action,
-			type : "hidden"
+			name: action,
+			type: "hidden"
 		}).appendTo(form);
 
 		// serialize the form and get the post url
@@ -696,31 +696,31 @@ var dialog = {
 
 		// post the data and replace current content with response content
 		$.ajax({
-			type : "POST",
-			url : url,
-			data : post,
-			dataType : "html",
-			success : function (data) {
+			type: "POST",
+			url: url,
+			data: post,
+			dataType: "html",
+			success: function (data) {
 				this.container.html(data);
 			}.bind(this),
-			failure : function (data) {
+			failure: function (data) {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
 	},
 	settings: {
-		autoOpen : false,
-		resizable : false,
-		bgiframe : true,
-		modal : true,
-		height : 'auto',
-		width : '800',
-		buttons : {},
-		title : '',
-		position : 'center',
-		overlay : {
-			opacity : 0.5,
-			background : "black"
+		autoOpen: false,
+		resizable: false,
+		bgiframe: true,
+		modal: true,
+		height: 'auto',
+		width: '800',
+		buttons: {},
+		title: '',
+		position: 'center',
+		overlay: {
+			opacity: 0.5,
+			background: "black"
 		},
 		/**
 		 * @function
@@ -733,6 +733,7 @@ var dialog = {
 };
 
 module.exports = dialog;
+
 },{"./ajax":2,"./util":37}],6:[function(require,module,exports){
 'use strict';
 
@@ -1001,9 +1002,9 @@ function initializeAddressForm(form) {
 			data: $form.serialize() + '&' + applyName + '=x',
 			type: 'POST'
 		};
-		$.ajax( options ).done(function(data){
-			if( typeof(data)!=='string' ) {
-				if ( data.success ) {
+		$.ajax(options).done(function (data){
+			if (typeof(data) !== 'string') {
+				if (data.success) {
 					dialog.close();
 					page.refresh();
 				} else {
@@ -1024,7 +1025,10 @@ function initializeAddressForm(form) {
 	.on('click', '.delete-button', function(e){
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-			var url = util.appendParamsToUrl(Urls.deleteAddress, {AddressID: $form.find('#addressid').val(),format: 'ajax'});
+			var url = util.appendParamsToUrl(Urls.deleteAddress, {
+				AddressID: $form.find('#addressid').val(),
+				format: 'ajax'
+			});
 			$.ajax({
 				url: url,
 				method: 'POST',
@@ -1060,13 +1064,13 @@ function initializeAddressForm(form) {
 function toggleFullOrder () {
 	$('.order-items')
 		.find('li.hidden:first')
-			.prev('li')
-				.append('<a class="toggle">View All</a>')
-				.children('.toggle')
-					.click(function() {
-						$(this).parent().siblings('li.hidden').show();
-						$(this).remove();
-					});
+		.prev('li')
+		.append('<a class="toggle">View All</a>')
+		.children('.toggle')
+		.click(function() {
+			$(this).parent().siblings('li.hidden').show();
+			$(this).remove();
+		});
 }
 /**
  * @private
@@ -1079,8 +1083,12 @@ function initAddressEvents() {
 
 	addresses.on('click', '.address-edit, .address-create', function (e) {
 		e.preventDefault();
-		var options = {open: initializeAddressForm};
-		dialog.open({url: this.href, options: options});
+		dialog.open({
+			url: this.href,
+			options: {
+				open: initializeAddressForm
+			}
+		});
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
@@ -1117,7 +1125,7 @@ function initPaymentEvents() {
 		$('<input/>').attr({
 			type: 'hidden',
 			name: button.attr('name'),
-			value:button.attr('value') || 'delete card'
+			value: button.attr('value') || 'delete card'
 		}).appendTo($(this));
 		var data = $(this).serialize();
 		$.ajax({

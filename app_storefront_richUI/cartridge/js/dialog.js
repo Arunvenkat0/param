@@ -33,7 +33,7 @@ var dialog = {
 	 * @param {Object} params.url should contain the url
 	 */
 	open: function (params) {
-		if (!params.url || params.url.length===0) { return; }
+		if (!params.url || params.url.length === 0) { return; }
 
 		this.container = this.create(params);
 		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
@@ -68,8 +68,8 @@ var dialog = {
 		var form = this.container.find("form:first");
 		// set the action
 		$("<input/>").attr({
-			name : action,
-			type : "hidden"
+			name: action,
+			type: "hidden"
 		}).appendTo(form);
 
 		// serialize the form and get the post url
@@ -78,31 +78,31 @@ var dialog = {
 
 		// post the data and replace current content with response content
 		$.ajax({
-			type : "POST",
-			url : url,
-			data : post,
-			dataType : "html",
-			success : function (data) {
+			type: "POST",
+			url: url,
+			data: post,
+			dataType: "html",
+			success: function (data) {
 				this.container.html(data);
 			}.bind(this),
-			failure : function (data) {
+			failure: function (data) {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
 	},
 	settings: {
-		autoOpen : false,
-		resizable : false,
-		bgiframe : true,
-		modal : true,
-		height : 'auto',
-		width : '800',
-		buttons : {},
-		title : '',
-		position : 'center',
-		overlay : {
-			opacity : 0.5,
-			background : "black"
+		autoOpen: false,
+		resizable: false,
+		bgiframe: true,
+		modal: true,
+		height: 'auto',
+		width: '800',
+		buttons: {},
+		title: '',
+		position: 'center',
+		overlay: {
+			opacity: 0.5,
+			background: "black"
 		},
 		/**
 		 * @function
