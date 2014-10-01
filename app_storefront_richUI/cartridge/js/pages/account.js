@@ -144,6 +144,13 @@ function initAddressEvents() {
  * @description Binds the events of the payment methods list (delete card)
  */
 function initPaymentEvents() {
+	$('.add-card').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href')
+		});
+	});
+
 	var paymentList = $('.payment-list');
 	if (paymentList.length === 0) { return; }
 
