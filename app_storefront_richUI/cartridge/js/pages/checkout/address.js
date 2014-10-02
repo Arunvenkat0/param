@@ -1,6 +1,7 @@
 'use strict';
 
 var util = require('../../util');
+var shipping = require('./shipping');
 
 /**
  * @function
@@ -14,7 +15,7 @@ exports.init = function () {
 		var selectedAddress = $(selected).data('address');
 		if (!selectedAddress) { return; }
 		util.fillAddressFields(selectedAddress, $form);
-		updateShippingMethodList();
+		shipping.updateShippingMethodList();
 		// re-validate the form
 		$form.validate().form();
 	});

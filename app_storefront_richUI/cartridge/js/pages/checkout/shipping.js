@@ -6,7 +6,7 @@ var ajax = require('../../ajax'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
-var shippingMethods = null;
+var shippingMethods;
 /**
  * @function
  * @description Initializes gift message box, if shipment is gift
@@ -155,3 +155,5 @@ exports.init = function () {
 	giftMessageBox();
 	updateShippingMethodList();
 }
+
+exports.updateShippingMethodList = updateShippingMethodList;

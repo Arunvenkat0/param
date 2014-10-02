@@ -1261,6 +1261,7 @@ module.exports = cart;
 'use strict';
 
 var util = require('../../util');
+var shipping = require('./shipping');
 
 /**
  * @function
@@ -1274,7 +1275,7 @@ exports.init = function () {
 		var selectedAddress = $(selected).data('address');
 		if (!selectedAddress) { return; }
 		util.fillAddressFields(selectedAddress, $form);
-		updateShippingMethodList();
+		shipping.updateShippingMethodList();
 		// re-validate the form
 		$form.validate().form();
 	});
@@ -1284,7 +1285,8 @@ exports.init = function () {
 		util.updateStateOptions($form);
 	});
 }
-},{"../../util":37}],15:[function(require,module,exports){
+
+},{"../../util":37,"./shipping":19}],15:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1738,7 +1740,7 @@ var ajax = require('../../ajax'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
-var shippingMethods = null;
+var shippingMethods;
 /**
  * @function
  * @description Initializes gift message box, if shipment is gift
@@ -1887,6 +1889,8 @@ exports.init = function () {
 	giftMessageBox();
 	updateShippingMethodList();
 }
+
+exports.updateShippingMethodList = updateShippingMethodList;
 
 },{"../../ajax":2,"../../progress":29,"../../tooltip":36,"../../util":37,"./formPrepare":16}],20:[function(require,module,exports){
 'use strict';
