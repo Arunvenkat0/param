@@ -129,13 +129,9 @@
 
 		<!-- Define the action here so that only the parent form group is validated -->
 		<action formid="confirm" valid-form="true"/>
-		<action formid="selectAddressBefore" valid-form="false"/>
-		<action formid="selectAddressAfter" valid-form="false"/>
 		<action formid="displayBeforeAddress" valid-form="false"/>
 		<action formid="displayAfterAddress" valid-form="false"/>
 		<action formid="back" valid-form="false"/>
-
-
 
 	</group>
 
