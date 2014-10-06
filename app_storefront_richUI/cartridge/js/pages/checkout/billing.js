@@ -3,8 +3,7 @@
 var ajax = require('../../ajax'),
 	formPrepare = require('./formPrepare'),
 	giftcard = require('../../giftcard'),
-	util = require('../../util'),
-	validator = require('../../validator');
+	util = require('../../util');
 
 /**
  * @function
@@ -12,17 +11,13 @@ var ajax = require('../../ajax'),
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
 function setCCFields(data) {
-	var $creditCard = $("#PaymentMethod_CREDIT_CARD");
-	$creditCard.find('input[name$="creditCard_owner"]').val(data.holder);
-	$creditCard.find('select[name$="_type"]').val(data.type);
-	$creditCard.find('input[name$="_number"]').val(data.maskedNumber);
-	$creditCard.find('[name$="_month"]').val(data.expirationMonth);
-	$creditCard.find('[name$="_year"]').val(data.expirationYear);
-	$creditCard.find('input[name$="_cvn"]').val('');
-
-	// remove error messages
-	$creditCard.find(".errormessage").removeClass("errormessage").filter("span").remove();
-	$creditCard.find(".errorlabel").removeClass("errorlabel");
+	var $creditCard = $('[data-method="CREDIT_CARD"]');
+	$creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('change');
+	$creditCard.find('select[name$="_type"]').val(data.type).trigger('change');
+	$creditCard.find('input[name$="_number"]').val(data.maskedNumber).trigger('change');
+	$creditCard.find('[name$="_month"]').val(data.expirationMonth).trigger('change');
+	$creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
+	$creditCard.find('input[name$="_cvn"]').val('').trigger('change');
 }
 
 /**
@@ -50,33 +45,21 @@ function populateCreditCardForm(cardID) {
  * @description Changes the payment method form depending on the passed paymentMethodID
  * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to
  */
-function changePaymentMethod(paymentMethodID) {
+function updatePaymentMethod(paymentMethodID) {
 	var $paymentMethods = $('.payment-method');
 	$paymentMethods.removeClass('payment-method-expanded');
-	var pmc = $paymentMethods.filter('#PaymentMethod_' + paymentMethodID);
-	if (pmc.length===0) {
-		pmc = $('#PaymentMethod_Custom');
+
+	var $selectedPaymentMethod = $paymentMethods.filter('[data-method="' + paymentMethodID + '"]');
+	if ($selectedPaymentMethod.length === 0) {
+		$selectedPaymentMethod = $('[data-method="Custom"]');
 	}
-	pmc.addClass('payment-method-expanded');
+	$selectedPaymentMethod.addClass('payment-method-expanded');
 
 	// ensure checkbox of payment method is checked
-	$('#is-' + paymentMethodID)[0].checked = true;
+	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
+	$('input[value=' + paymentMethodID +']').attr('checked', 'checked');
 
-	var bmlForm = $('#PaymentMethod_BML');
-	bmlForm.find('select[name$="_year"]').removeClass('required');
-	bmlForm.find('select[name$="_month"]').removeClass('required');
-	bmlForm.find('select[name$="_day"]').removeClass('required');
-	bmlForm.find('input[name$="_ssn"]').removeClass('required');
-
-	if (paymentMethodID === 'BML') {
-		var yr = bmlForm.find('select[name$="_year"]');
-		bmlForm.find('select[name$="_year"]').addClass('required');
-		bmlForm.find('select[name$="_month"]').addClass('required');
-		bmlForm.find('select[name$="_day"]').addClass('required');
-		bmlForm.find('input[name$="_ssn"]').addClass('required');
-	}
-	validator.init();
-	formPrepare.init('[name$="billing_save"]', 'form[id$="billing"]');
+	formPrepare.validateForm();
 }
 
 /**
@@ -84,57 +67,34 @@ function changePaymentMethod(paymentMethodID) {
  * @description loads billing address, Gift Certificates, Coupon and Payment methods
  */
 exports.init = function () {
-	var $checkoutForm = $('.checkout-billing'),
-		$paymentMethodId = $('input[name$="_selectedPaymentMethodID"]'),
-		$addGiftCert = $('#add-giftcert'),
-		$giftCertCode = $('input[name$="_giftCertCode"]'),
-		$addCoupon = $('#add-coupon'),
-		$couponCode = $('input[name$="_couponCode"]');
+	var $checkoutForm = $('.checkout-billing');
+	var $addGiftCert = $('#add-giftcert');
+	var $giftCertCode = $('input[name$="_giftCertCode"]');
+	var $addCoupon = $('#add-coupon');
+	var $couponCode = $('input[name$="_couponCode"]');
+	var $selectPaymentMethod = $('.payment-method-options');
+	var selectedPaymentMethod = $selectPaymentMethod.find(':checked').val();
 
-	if( !$paymentMethodId ) return;
-
-	formPrepare.init('[name$="billing_save"]', 'form[id$="billing"]');
-
-	$paymentMethodId.on('click', function () {
-		changePaymentMethod($(this).val());
+	formPrepare.init({
+		formSelector: 'form[id$="billing"]',
+		continueSelector: '[name$="billing_save"]'
 	});
 
-	// get selected payment method from payment method form
-	var $selectedPaymentMethodId = $paymentMethodId.filter(':checked');
-	if($('.payment-method-options').length > 0 ){
-		changePaymentMethod($selectedPaymentMethodId.length===0 ? 'CREDIT_CARD' : $selectedPaymentMethodId.val());
-	}
+	// default payment method to 'CREDIT_CARD'
+	updatePaymentMethod((selectedPaymentMethod) ? selectedPaymentMethod : 'CREDIT_CARD');
+	$selectPaymentMethod.on('click', 'input[type="radio"]', function () {
+		updatePaymentMethod($(this).val());
+	});
+
 	// select credit card from list
 	$("#creditCardList").on('change', function () {
 		var cardUUID = $(this).val();
-		if(!cardUUID) { return; }
+		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
-	});
 
-	// handle whole form submit (bind click to continue checkout button)
-	// append form fields of current payment form to this submit
-	// in order to validate the payment method form inputs too
-
-	$('button[name$="_billing_save"]').on('click', function (e) {
-		// determine if the order total was paid using gift cert or a promotion
-		if ($('#noPaymentNeeded').length > 0 && $('.giftcert-pi').length > 0) {
-			// as a safety precaution, uncheck any existing payment methods
-			$selectedPaymentMethodId.removeAttr('checked');
-			// add selected radio button with gift card payment method
-			$('<input/>').attr({
-				name: $paymentMethodId.first().attr('name'),
-				type: 'radio',
-				checked: 'checked',
-				value: Constants.PI_METHOD_GIFT_CERTIFICATE
-			}).appendTo($checkoutForm);
-		}
-
-		var tc = $checkoutForm.find('input[name$="bml_termsandconditions"]');
-		if ($paymentMethodId.filter(':checked').val()==='BML' && !$checkoutForm.find('input[name$="bml_termsandconditions"]')[0].checked) {
-			alert(Resources.BML_AGREE_TO_TERMS);
-			return false;
-		}
-
+		// remove server side error
+		$('.required.error').removeClass('error');
+		$('.error-message').remove();
 	});
 
 	$('#check-giftcert').on('click', function (e) {
