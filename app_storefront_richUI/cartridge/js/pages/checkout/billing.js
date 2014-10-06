@@ -76,6 +76,7 @@ function changePaymentMethod(paymentMethodID) {
 		bmlForm.find('input[name$="_ssn"]').addClass('required');
 	}
 	validator.init();
+	formPrepare.init('[name$="billing_save"]', 'form[id$="billing"]');
 }
 
 /**
