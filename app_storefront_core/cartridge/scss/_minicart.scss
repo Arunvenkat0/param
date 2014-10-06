@@ -1,0 +1,133 @@
+#mini-cart {
+	float: right;
+	margin: 5px 6px 0 0;
+	position: relative;
+	z-index: 200;
+	a {
+		color: $pacific-blue;
+	}
+}
+
+.mini-cart-label {
+	margin: 0 10px 0 0;
+}
+
+.mini-cart-total {
+	font-size: 1em;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.mini-cart-content {
+	background: none repeat scroll 0 0 $white-smoke;
+	border: 2px solid $very-light-gray;
+	display: none;
+	position: absolute;
+	right: -1px;
+	top: 15px;
+	width: 220px;
+}
+
+#mini-cart:hover .mini-cart-content {
+	display: block;
+}
+
+.mini-cart-header {
+	border-color: $white;
+	border-style: solid;
+	border-width: 1px 1px 0;
+	font-size: 1.1em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 12px;
+	text-transform: uppercase;
+}
+
+.mini-cart-close {
+	background: url("../images/interface/icon-mini-cart-close.png") no-repeat scroll left top transparent;
+	display: none;
+	height: 20px;
+	text-indent: -999em;
+	width: 19px;
+}
+
+.mini-cart-products {
+	max-height: 360px;
+	overflow: auto;
+}
+
+.mini-cart-product {
+	background: none repeat scroll 0 0 $white;
+	border-color: $white;
+	border-style: solid;
+	border-width: 1px 1px 0;
+	overflow: hidden;
+	padding: 10px;
+	&.collapsed {
+		background: none repeat scroll 0 0 $gainsboro;
+		.mini-cart-name, .mini-cart-attributes, .mini-cart-pricing, .product-availability-list {
+			width: 90%;
+		}
+	}
+}
+
+.mini-cart-image {
+	float: left;
+	width: 50%;
+	img {
+		max-width: 90%;
+	}
+}
+
+.mini-cart-name {
+	float: right;
+	font-family: $serif;
+	font-style: italic;
+	width: 50%;
+}
+
+.mini-cart-attributes, .mini-cart-product .product-availability-list {
+	float: right;
+	font-size: 0.9em;
+	font-weight: bold;
+	width: 50%;
+}
+
+.mini-cart-pricing {
+	clear: right;
+	float: right;
+	font-size: 0.9em;
+	width: 50%;
+}
+
+.mini-cart-subtotals {
+	font-weight: 700;
+	padding: 10px 0 0;
+	text-align: center;
+	.label {
+		margin: 0 20px 0 0;
+	}
+}
+
+.mini-cart-slot {
+	background: none repeat scroll 0 0 $gainsboro;
+	border: 1px solid $gainsboro;
+	font-size: 0.9em;
+	font-style: italic;
+	margin: 20px;
+	padding: 10px;
+	text-align: center;
+}
+
+.mini-cart-link-cart {
+	display: block;
+	margin: 20px;
+	width: auto;
+}
+
+.mini-cart-link-checkout {
+	clear: both;
+	display: block;
+	padding: 20px 0 10px;
+	text-align: center;
+}
