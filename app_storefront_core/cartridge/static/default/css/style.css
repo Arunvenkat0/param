@@ -378,7 +378,6 @@ td {
 
 #wrapper {
   background: none repeat scroll 0 0 #fff;
-  border: 3px solid #fff;
   margin: auto;
   max-width: 960px;
   width: 960px; }
@@ -1176,7 +1175,6 @@ div.error {
 
 ul.level-1 {
   background: none repeat scroll 0 0 #000;
-  margin: 0 0 10px;
   padding: 10px 0 11px;
   position: relative; }
   .ie7 ul.level-1 {
@@ -4033,10 +4031,7 @@ h1 .account-logout {
   div, img {
     max-width: 100%; }
 
-  input[type="text"], input[type="password"] {
-    width: 90%; }
-
-  textarea, select {
+  input[type="text"], input[type="password"], textarea, select {
     width: 90%; }
 
   .form-row-button {
@@ -4076,7 +4071,7 @@ h1 .account-logout {
   .form-field-tooltip {
     display: none; }
 
-  .print-page, .size-chart-link, a.tooltip, #tooltip {
+  .print-page, .size-chart-link, .tooltip, #tooltip {
     display: none !important; }
 
   .tooltip {
@@ -4099,9 +4094,6 @@ h1 .account-logout {
     max-width: 100%;
     min-width: 320px;
     width: 100%; }
-
-  #main {
-    padding: 0 1%; }
 
   #primary {
     background: none;
@@ -4485,7 +4477,7 @@ h1 .account-logout {
     float: none;
     width: auto; }
 
-  ul.address-list li, ul.payment-list li {
+  .address-list li, .payment-list li {
     float: none;
     width: auto; }
 
@@ -4567,7 +4559,7 @@ h1 .account-logout {
     #email-alert-signup label {
       text-align: center;
       width: 100%; }
-    #email-alert-signup input[type="text"] {
+    #email-alert-signup input [type="text"] {
       float: none;
       margin: 0;
       width: 50%; }
@@ -4754,7 +4746,7 @@ h1 .account-logout {
     text-indent: 0;
     width: 49.5966%; }
 
-  div#wrapper.pt_gift-registry {
+  #wrapper.pt_gift-registry {
     font-size: 12px; }
 
   #preferred-store-panel input[type="text"] {
