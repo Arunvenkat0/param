@@ -1,6 +1,6 @@
 #search-suggestions {
-	background-color: #FFFFFF;
-	border: 1px solid #88c14b;
+	background-color: $white;
+	border: 1px solid $mantis;
 	top: 34px;
 	right: 0px;
 	position: absolute;
@@ -27,12 +27,12 @@
 .search-suggestion-right-panel {
 	width: 300px;
 	float: left;
-	border-left: solid 1px #88c14b;
+	border-left: solid 1px $mantis;
 	margin-left: -1px;
 }
 
 .search-suggestion-left-panel {
-	border-right: solid 1px #88c14b;
+	border-right: solid 1px $mantis;
 }
 
 .search-suggestion-left-panel-hitgroup-header {
@@ -42,7 +42,7 @@
 }
 
 .search-suggestion-left-panel-hitgroup {
-	color: #555555;
+	color: $dim-gray;
 	margin: 10px 0 10px 10px;
 }
 
@@ -87,7 +87,7 @@
 }
 
 .search-suggestion-right-panel-product-details {
-	color: #333333;
+	color: $night-rider;
 	height: auto;
 	display: inline;
 	width: 70%;
@@ -119,5 +119,5 @@
 }
 
 .search-suggestion-left-panel-parent-category {
-	color: #999999;
+	color: $nobel;
 }

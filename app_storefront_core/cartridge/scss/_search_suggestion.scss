@@ -1,7 +1,7 @@
 .js {
 	#suggestions {
-		background-color: #666666;
-		color: #e0e0e0;
+		background-color: $dim-gray;
+		color: $gainsboro;
 		cursor: pointer;
 		padding: 0;
 		display: none;
@@ -14,8 +14,8 @@
 			overflow: hidden;
 			white-space: nowrap;
 			&:hover {
-				background-color: #cccccc;
-				color: #333333;
+				background-color: $very-light-gray;
+				color: $night-rider;
 			}
 			div.suggestionterm {
 				float: left;

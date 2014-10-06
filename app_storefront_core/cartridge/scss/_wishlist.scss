@@ -1,10 +1,10 @@
 .pt_wish-list {
 	.list-table-header {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
 		overflow: hidden;
 		padding: 2em;
 		p {
-			color: #999999;
+			color: $nobel;
 			float: right;
 			margin: 0;
 			overflow: hidden;

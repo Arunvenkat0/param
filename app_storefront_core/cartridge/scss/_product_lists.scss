@@ -1,7 +1,7 @@
 table.item-list {
 	margin-bottom: 1em;
 	tr {
-		border-bottom: 1px solid #D9D9D9;
+		border-bottom: 1px solid $gainsboro;
 		&.last {
 			border: 0 none;
 		}
@@ -21,7 +21,7 @@ table.item-list {
 
 .item-details .product-list-item {
 	.name {
-		font-family: Georgia,serif;
+		font-family: $serif;
 		font-size: 1.2em;
 		font-style: italic;
 	}
@@ -29,10 +29,10 @@ table.item-list {
 		font-weight: 700;
 	}
 	.promo {
-		color: #990000;
+		color: $sangria;
 	}
 	.price-standard {
-		color: #999;
+		color: $nobel;
 		text-decoration: line-through;
 	}
 }
@@ -43,7 +43,7 @@ table.item-list {
 	padding: 0;
 }
 .item-dashboard {
-	color: #aaa;
+	color: $dark-gray;
 	width: 250px;
 	label {
 		display: inline;
@@ -53,7 +53,7 @@ table.item-list {
 	input,
 	.value,
 	.option-toggle-public label {
-		color: #333;
+		color: $night-rider;
 	}
 	input {
 		padding: 0;
@@ -68,7 +68,7 @@ table.item-list {
 		padding: 8px;
 		width: auto;
 		height:auto;
-		color:#333
+		color: $night-rider;
 	}
 	.input-checkbox {
 		margin: 0 5px;
@@ -81,7 +81,7 @@ table.item-list {
 	}
 	.option-add-to-cart {
 		.label, label {
-			color: #333;
+			color: $night-rider;
 			font-size: 1.1em;
 			font-weight: 700;
 			text-transform: uppercase;
@@ -93,6 +93,6 @@ table.item-list {
 		}
 	}
 	.option-quantity-purchased span.exceeded {
-		color: #ff0000;
+		color: $sangria;
 	}
 }

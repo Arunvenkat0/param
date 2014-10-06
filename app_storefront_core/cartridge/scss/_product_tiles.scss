@@ -1,5 +1,5 @@
 .product-tile {
-	color: #999999;
+	color: $nobel;
 	position: relative;
 	text-align: center;
 	img {
@@ -10,7 +10,7 @@
 		position: relative;
 	}
 	.product-name {
-		font-family: Georgia,sans-serif;
+		font-family: $serif;
 		font-size: 1.2em;
 		font-style: italic;
 		margin: 13px 0 2px;
@@ -39,7 +39,7 @@
 			overflow: hidden;
 			padding: 0;
 			&.swatch-toggle {
-				background: none repeat scroll 0 0 #FFFFFF;
+				background: none repeat scroll 0 0 $white;
 				display: none;
 				position: absolute;
 			}
@@ -55,14 +55,14 @@
 			display: block;
 			width: 16px;
 			img {
-				border: 1px solid #FFFFFF;
+				border: 1px solid $white;
 				height: 12px;
 				padding: 1px;
 				width: 12px;
 			}
 		}
 		.selected img, img:hover {
-			border-color: #12ABE7;
+			border-color: $pacific-blue;
 		}
 	}
 	.product-promo {

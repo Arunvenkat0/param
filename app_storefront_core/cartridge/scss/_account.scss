@@ -33,7 +33,7 @@ ul {
 			padding: 1em 0;
 			width: 30%;
 			&.default {
-				border-bottom: 1px solid #EFEFEF;
+				border-bottom: 1px solid $white-smoke;
 				float: none;
 				width: auto;
 			}
@@ -56,7 +56,7 @@ ul {
 }
 
 .order-history-header {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
 	overflow: hidden;
 	padding: 10px;
 	.label {

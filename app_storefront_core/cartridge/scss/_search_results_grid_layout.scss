@@ -1,5 +1,5 @@
 .pt_product-search-result .primary-content, .pt_content-search-result .primary-content {
-	background: none repeat scroll 0 0 #EFEFEF;
+	background: none repeat scroll 0 0 $white-smoke;
 }
 
 .pt_product-search-result .primary-content h1.content-header {
@@ -11,7 +11,7 @@
 }
 
 .no-hits-search-term, .no-hits-search-term-suggest {
-	color: #990000;
+	color: $sangria;
 	font-style: italic;
 }
 
@@ -24,7 +24,7 @@
 .search-result-bookmarks {
 	margin: 15px;
 	.first {
-		border-right: 1px solid #999999;
+		border-right: 1px solid $nobel;
 		padding-right: 5px;
 	}
 }
@@ -36,8 +36,8 @@
 }
 
 .sort-by, .items-per-page {
-	background: none repeat scroll 0 0 #D9D9D9;
-	border-bottom: 1px solid #C2C2C2;
+	background: none repeat scroll 0 0 $gainsboro;
+	border-bottom: 1px solid $very-light-gray;
 	float: left;
 	margin: 0 0 0 20px;
 	padding: 3px 5px;
@@ -48,7 +48,7 @@
 }
 
 .sort-by select, .items-per-page select {
-	background: none repeat scroll 0 0 #D9D9D9;
+	background: none repeat scroll 0 0 $gainsboro;
 	border: 0 none;
 	font-size: 0.9em;
 	margin: 0 6px 0 0;
@@ -57,9 +57,9 @@
 }
 
 .sort-by button, .items-per-page button {
-	background: none repeat scroll 0 0 #C2C2C2;
+	background: none repeat scroll 0 0 $very-light-gray;
 	border: 0 none;
-	color: #333333;
+	color: $night-rider;
 	font-size: 0.9em;
 	padding: 0.3em;
 	width: auto;
@@ -67,7 +67,7 @@
 
 .pagination {
 	.results-hits {
-		color: #666666;
+		color: $dim-gray;
 		float: left;
 		padding: 5px 0;
 	}
@@ -84,8 +84,8 @@
 		list-style: none outside none;
 		padding: 0.5em;
 		&.first-last a {
-			background-color: #00A4E3;
-			color: #FFFFFF;
+			background-color: $pacific-blue;
+			color: $white;
 			font-size: 0.9em;
 			padding: 0 2px;
 		}
@@ -102,8 +102,8 @@ ul.search-result-items {
 		clear: both;
 	}
 	.grid-tile {
-		background: none repeat scroll 0 0 #FFFFFF;
-		box-shadow: 0 0 9px #CCCCCC;
+		background: none repeat scroll 0 0 $white;
+		box-shadow: 0 0 9px $very-light-gray;
 		float: left;
 		list-style: none outside none;
 		margin: 0 0 2% 20px;

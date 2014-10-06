@@ -7,7 +7,7 @@
 }
 
 .compare-item {
-	background: none repeat scroll 0 0 #E6E6E6;
+	background: none repeat scroll 0 0 $gainsboro;
 	float: left;
 	height: 55px;
 	margin-right: 13px;
@@ -41,7 +41,7 @@
 }
 
 .compareitems {
-	background: none repeat scroll 0 0 #D9D9D9;
+	background: none repeat scroll 0 0 $gainsboro;
 	clear: both;
 	margin: 3.5em 2em 0;
 	overflow: hidden;
@@ -54,7 +54,7 @@
 }
 
 .compareitemcount {
-	color: #CCCCCC;
+	color: $very-light-gray;
 	font-size: 3em;
 	left: 30%;
 	position: absolute;
@@ -91,12 +91,12 @@
 		-moz-border-left-colors: none;
 		-moz-border-right-colors: none;
 		-moz-border-top-colors: none;
-		border-color: -moz-use-text-color #D9D9D9 #D9D9D9;
+		border-color: -moz-use-text-color $gainsboro $gainsboro;
 		border-style: none solid solid;
 		border-width: 0 1px 1px;
 	}
 	tr.evenattributerow {
-		background: none repeat scroll 0 0 #F3F3F3;
+		background: none repeat scroll 0 0 $white-smoke;
 	}
 	td {
 		.product-tile {

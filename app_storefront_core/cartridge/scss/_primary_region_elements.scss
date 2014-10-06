@@ -1,9 +1,9 @@
 .primary-content {
 	a {
-		color: #3EBAEA;
+		color: $pacific-blue;
 	}
 	h1 {
-		font-family: Georgia,serif;
+		font-family: $serif;
 		font-size: 1.75em;
 		font-style: italic;
 		font-weight: 400;
@@ -12,7 +12,7 @@
 }
 
 #secondary h1 {
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-size: 1.75em;
 	font-style: italic;
 	font-weight: 400;
@@ -56,7 +56,7 @@
 }
 
 .content-header {
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-size: 1.75em;
 	font-style: italic;
 	font-weight: 400;
@@ -69,8 +69,8 @@
 }
 
 .section-header {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
-	border-bottom: 1px solid #FFFFFF;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
+	border-bottom: 1px solid $white;
 	font-size: 1.1em !important;
 	font-weight: 700;
 	margin: 0;

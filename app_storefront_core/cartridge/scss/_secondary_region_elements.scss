@@ -1,5 +1,5 @@
 #secondary a {
-	color: #3EBAEA;
+	color: $pacific-blue;
 }
 
 #category-level-1 {
@@ -25,8 +25,8 @@
 #category-level-2 {
 	a {
 		&.active {
-			color: #000000;
-			font-family: georgia;
+			color: $black;
+			font-family: $serif;
 			font-style: italic;
 			font-weight: normal;
 		}
@@ -41,8 +41,8 @@
 		}
 		&.active {
 			background-position: left -47px;
-			color: #000000;
-			font-family: georgia;
+			color: $black;
+			font-family: $serif;
 			font-style: italic;
 		}
 	}
@@ -65,7 +65,7 @@
 }
 
 .refinement-header {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
 	display: block;
 	font-size: 1.1em;
 	font-weight: bold;
@@ -76,7 +76,7 @@
 }
 
 .refinement h3 {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
 	font-size: 1.1em;
 	letter-spacing: 1.5px;
 	margin: 0;
@@ -111,13 +111,13 @@
 			float: left;
 			padding: 2px;
 			a {
-				border: 2px solid #D9D9D9;
+				border: 2px solid $gainsboro;
 				border-radius: 6px 6px 6px 6px;
 				display: block;
 				padding: 0.2em 0.8em;
 			}
 			&.selected a {
-				border-color: #3EBAEA;
+				border-color: $pacific-blue;
 				font-weight: bold;
 			}
 			&.unselectable a {

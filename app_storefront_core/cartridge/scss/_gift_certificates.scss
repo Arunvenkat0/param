@@ -1,5 +1,5 @@
 .gift-certificate-purchase {
-	background: none repeat scroll 0 0 #F3F3F3;
+	background: none repeat scroll 0 0 $white-smoke;
 	padding: 10px;
 	.content-asset {
 		float: left;
@@ -9,7 +9,7 @@
 		}
 	}
 	form {
-		background: none repeat scroll 0 0 #FFFFFF;
+		background: none repeat scroll 0 0 $white;
 		float: right;
 		padding: 0 20px 20px;
 		width: 40%;
@@ -45,7 +45,7 @@
 }
 
 .check-balance {
-	border-bottom: 1px solid #D9D9D9;
+	border-bottom: 1px solid $gainsboro;
 	margin: 0 0 20px;
 	padding: 0 0 20px;
 }
