@@ -168,28 +168,29 @@
 		</isif>
 
 		<iscomment>description or error message</iscomment>
-		<isif condition="${pdict.formfield.valid}">
-			<isif condition="${!empty(pdict.formfield.description)}">
-				<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-			</isif>
+		<isset name="hasError" value="${!empty(pdict.formfield.error)}" scope="page"/>
+		<isif condition="${hasError}">
+			<isset name="message" value="${Resource.msg(pdict.formfield.error,'forms',null)}" scope="page"/>
 		<iselse/>
-			<isif condition="${!empty(pdict.formfield.error)}">
-				<span class="form-caption error-message"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.error,'forms',null)}"/></span>
-			<iselseif condition="${!empty(pdict.formfield.description)}">
-				<span class="form-caption"><!--  Display Form Error Message --><isprint value="${Resource.msg(pdict.formfield.description,'forms',null)}"/></span>
-			</isif>
+			<isset name="message" value="${Resource.msg(pdict.formfield.description,'forms',null)}" scope="page"/>
 		</isif>
+		<span class="form-caption <isif condition="${hasError}"> error-message</isif>"><isprint value="${message}"/></span>
 	</isif>
 
 <iscomment>display checkbox fields</iscomment>
 <iselseif condition="${pdict.type == 'checkbox'}">
 	<isif condition="${empty(pdict.label) || pdict.label == 'true'}">
-		<label for="${pi_name}"><isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/></label>
+		<label for="${pi_name}">
+			<iscomment>display required star</iscomment>
+			<isif condition="${pdict.formfield.mandatory}">
+				<span class="required-indicator">&#8226;</span>
+			</isif>
+			<isprint value="${Resource.msg(pdict.formfield.label,'forms',null)}"/>
+		</label>
 	</isif>
 
 	<isif condition="${empty(pdict.value) || !pdict.value == 'false'}">
 
-		<isprint value="${aTag}" encoding="off"/>
 
 		<isif condition="${pdict.formfield.checked}">
 		 	<isscript>/* to prevent HTML encoding */
@@ -202,10 +203,6 @@
 		</isif>
 	 	<isprint value="${aTag}" encoding="off"/>
 
-		<iscomment>display required star</iscomment>
-		<isif condition="${pdict.formfield.mandatory}">
-			<span class="required-indicator">&#8226;</span>
-		</isif>
 
 		<iscomment>display description or error message</iscomment>
 		<isif condition="${pdict.formfield.valid}">

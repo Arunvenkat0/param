@@ -142,7 +142,10 @@ function updateShippingMethodList() {
 }
 
 exports.init = function () {
-	formPrepare.init('[name$="shippingAddress_save"]', '[id$="singleshipping_shippingAddress"]');
+	formPrepare.init({
+		continueSelector: '[name$="shippingAddress_save"]',
+		formSelector:'[id$="singleshipping_shippingAddress"]'
+	});
 	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
 		giftMessageBox();
 	});
