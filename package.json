@@ -13,6 +13,7 @@
     "promise": "^6.0.1"
   },
   "devDependencies": {
+    "aliasify": "^1.4.0",
     "browserify": "^6.2.0",
     "chai": "^1.9.1",
     "grunt-autoprefixer": "^1.0.1",
@@ -31,6 +32,7 @@
     "load-grunt-tasks": "^1.0.0",
     "mocha": "^1.21.4",
     "phantomjs": "^1.9.9",
+    "remapify": "^1.2.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.0",
     "webdriverio": "^2.2.3",
