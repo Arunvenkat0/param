@@ -3144,7 +3144,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":11,"./util":37,"promise":41}],28:[function(require,module,exports){
+},{"./ajax":2,"./page":11,"./util":37,"promise":40}],28:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -4713,30 +4713,30 @@ process.nextTick = (function () {
     ;
 
     if (canSetImmediate) {
-	return function (f) { return window.setImmediate(f) };
+        return function (f) { return window.setImmediate(f) };
     }
 
     if (canPost) {
-	var queue = [];
-	window.addEventListener('message', function (ev) {
-	    var source = ev.source;
-	    if ((source === window || source === null) && ev.data === 'process-tick') {
-		ev.stopPropagation();
-		if (queue.length > 0) {
-		    var fn = queue.shift();
-		    fn();
-		}
-	    }
-	}, true);
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
 
-	return function nextTick(fn) {
-	    queue.push(fn);
-	    window.postMessage('process-tick', '*');
-	};
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
     }
 
     return function nextTick(fn) {
-	setTimeout(fn, 0);
+        setTimeout(fn, 0);
     };
 })();
 
@@ -4768,9 +4768,16 @@ process.chdir = function (dir) {
 },{}],40:[function(require,module,exports){
 'use strict';
 
+module.exports = require('./lib/core.js')
+require('./lib/done.js')
+require('./lib/es6-extensions.js')
+require('./lib/node-extensions.js')
+},{"./lib/core.js":41,"./lib/done.js":42,"./lib/es6-extensions.js":43,"./lib/node-extensions.js":44}],41:[function(require,module,exports){
+'use strict';
+
 var asap = require('asap')
 
-module.exports = Promise
+module.exports = Promise;
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -4780,7 +4787,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new Promise(function(resolve, reject) {
+    return new self.constructor(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -4793,16 +4800,16 @@ function Promise(fn) {
     asap(function() {
       var cb = state ? deferred.onFulfilled : deferred.onRejected
       if (cb === null) {
-	(state ? deferred.resolve : deferred.reject)(value)
-	return
+        (state ? deferred.resolve : deferred.reject)(value)
+        return
       }
       var ret
       try {
-	ret = cb(value)
+        ret = cb(value)
       }
       catch (e) {
-	deferred.reject(e)
-	return
+        deferred.reject(e)
+        return
       }
       deferred.resolve(ret)
     })
@@ -4812,11 +4819,11 @@ function Promise(fn) {
     try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
       if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
       if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-	var then = newValue.then
-	if (typeof then === 'function') {
-	  doResolve(then.bind(newValue), resolve, reject)
-	  return
-	}
+        var then = newValue.then
+        if (typeof then === 'function') {
+          doResolve(then.bind(newValue), resolve, reject)
+          return
+        }
       }
       state = true
       value = newValue
@@ -4872,10 +4879,25 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":42}],41:[function(require,module,exports){
+},{"asap":45}],42:[function(require,module,exports){
 'use strict';
 
-//This file contains then/promise specific extensions to the core promise API
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
+    asap(function () {
+      throw err
+    })
+  })
+}
+},{"./core.js":41,"asap":45}],43:[function(require,module,exports){
+'use strict';
+
+//This file contains the ES6 extensions to the core Promises/A+ API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -4889,16 +4911,16 @@ function ValuePromise(value) {
     if (typeof onFulfilled !== 'function') return this
     return new Promise(function (resolve, reject) {
       asap(function () {
-	try {
-	  resolve(onFulfilled(value))
-	} catch (ex) {
-	  reject(ex);
-	}
+        try {
+          resolve(onFulfilled(value))
+        } catch (ex) {
+          reject(ex);
+        }
       })
     })
   }
 }
-ValuePromise.prototype = Object.create(Promise.prototype)
+ValuePromise.prototype = Promise.prototype
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -4921,11 +4943,11 @@ Promise.resolve = function (value) {
     try {
       var then = value.then
       if (typeof then === 'function') {
-	return new Promise(then.bind(value))
+        return new Promise(then.bind(value))
       }
     } catch (ex) {
       return new Promise(function (resolve, reject) {
-	reject(ex)
+        reject(ex)
       })
     }
   }
@@ -4933,76 +4955,27 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.from = Promise.cast = function (value) {
-  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
-  err.name = 'Warning'
-  console.warn(err.stack)
-  return Promise.resolve(value)
-}
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-	args.pop()
-      }
-      args.push(function (err, res) {
-	if (err) reject(err)
-	else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    try {
-      return fn.apply(this, arguments).nodeify(callback)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-	return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-	asap(function () {
-	  callback(ex)
-	})
-      }
-    }
-  }
-}
-
-Promise.all = function () {
-  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
-  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
-
-  if (!calledWithArray) {
-    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
-    err.name = 'Warning'
-    console.warn(err.stack)
-  }
+Promise.all = function (arr) {
+  var args = Array.prototype.slice.call(arr)
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
     var remaining = args.length
     function res(i, val) {
       try {
-	if (val && (typeof val === 'object' || typeof val === 'function')) {
-	  var then = val.then
-	  if (typeof then === 'function') {
-	    then.call(val, function (val) { res(i, val) }, reject)
-	    return
-	  }
-	}
-	args[i] = val
-	if (--remaining === 0) {
-	  resolve(args);
-	}
+        if (val && (typeof val === 'object' || typeof val === 'function')) {
+          var then = val.then
+          if (typeof then === 'function') {
+            then.call(val, function (val) { res(i, val) }, reject)
+            return
+          }
+        }
+        args[i] = val
+        if (--remaining === 0) {
+          resolve(args);
+        }
       } catch (ex) {
-	reject(ex)
+        reject(ex)
       }
     }
     for (var i = 0; i < args.length; i++) {
@@ -5012,13 +4985,13 @@ Promise.all = function () {
 }
 
 Promise.reject = function (value) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) { 
     reject(value);
   });
 }
 
 Promise.race = function (values) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) { 
     values.forEach(function(value){
       Promise.resolve(value).then(resolve, reject);
     })
@@ -5027,34 +5000,73 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-
-Promise.prototype.nodeify = function (callback) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
-    asap(function () {
-      callback(null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback(err)
-    })
-  })
-}
-
 Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":40,"asap":42}],42:[function(require,module,exports){
+},{"./core.js":41,"asap":45}],44:[function(require,module,exports){
+'use strict';
+
+//This file contains then/promise specific extensions that are only useful for node.js interop
+
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+
+/* Static Functions */
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    var ctx = this
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback.call(ctx, ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.prototype.nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err)
+    })
+  })
+}
+
+},{"./core.js":41,"asap":45}],45:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -5071,49 +5083,49 @@ function flush() {
     /* jshint loopfunc: true */
 
     while (head.next) {
-	head = head.next;
-	var task = head.task;
-	head.task = void 0;
-	var domain = head.domain;
+        head = head.next;
+        var task = head.task;
+        head.task = void 0;
+        var domain = head.domain;
 
-	if (domain) {
-	    head.domain = void 0;
-	    domain.enter();
-	}
+        if (domain) {
+            head.domain = void 0;
+            domain.enter();
+        }
 
-	try {
-	    task();
+        try {
+            task();
 
-	} catch (e) {
-	    if (isNodeJS) {
-		// In node, uncaught exceptions are considered fatal errors.
-		// Re-throw them synchronously to interrupt flushing!
+        } catch (e) {
+            if (isNodeJS) {
+                // In node, uncaught exceptions are considered fatal errors.
+                // Re-throw them synchronously to interrupt flushing!
 
-		// Ensure continuation if the uncaught exception is suppressed
-		// listening "uncaughtException" events (as domains does).
-		// Continue in next event to avoid tick recursion.
-		if (domain) {
-		    domain.exit();
-		}
-		setTimeout(flush, 0);
-		if (domain) {
-		    domain.enter();
-		}
+                // Ensure continuation if the uncaught exception is suppressed
+                // listening "uncaughtException" events (as domains does).
+                // Continue in next event to avoid tick recursion.
+                if (domain) {
+                    domain.exit();
+                }
+                setTimeout(flush, 0);
+                if (domain) {
+                    domain.enter();
+                }
 
-		throw e;
+                throw e;
 
-	    } else {
-		// In browsers, uncaught exceptions are not fatal.
-		// Re-throw them asynchronously to avoid slow-downs.
-		setTimeout(function() {
-		   throw e;
-		}, 0);
-	    }
-	}
+            } else {
+                // In browsers, uncaught exceptions are not fatal.
+                // Re-throw them asynchronously to avoid slow-downs.
+                setTimeout(function() {
+                   throw e;
+                }, 0);
+            }
+        }
 
-	if (domain) {
-	    domain.exit();
-	}
+        if (domain) {
+            domain.exit();
+        }
     }
 
     flushing = false;
@@ -5125,17 +5137,17 @@ if (typeof process !== "undefined" && process.nextTick) {
     isNodeJS = true;
 
     requestFlush = function () {
-	process.nextTick(flush);
+        process.nextTick(flush);
     };
 
 } else if (typeof setImmediate === "function") {
     // In IE10, Node.js 0.9+, or https://github.com/NobleJS/setImmediate
     if (typeof window !== "undefined") {
-	requestFlush = setImmediate.bind(window, flush);
+        requestFlush = setImmediate.bind(window, flush);
     } else {
-	requestFlush = function () {
-	    setImmediate(flush);
-	};
+        requestFlush = function () {
+            setImmediate(flush);
+        };
     }
 
 } else if (typeof MessageChannel !== "undefined") {
@@ -5144,26 +5156,26 @@ if (typeof process !== "undefined" && process.nextTick) {
     var channel = new MessageChannel();
     channel.port1.onmessage = flush;
     requestFlush = function () {
-	channel.port2.postMessage(0);
+        channel.port2.postMessage(0);
     };
 
 } else {
     // old browsers
     requestFlush = function () {
-	setTimeout(flush, 0);
+        setTimeout(flush, 0);
     };
 }
 
 function asap(task) {
     tail = tail.next = {
-	task: task,
-	domain: isNodeJS && process.domain,
-	next: null
+        task: task,
+        domain: isNodeJS && process.domain,
+        next: null
     };
 
     if (!flushing) {
-	flushing = true;
-	requestFlush();
+        flushing = true;
+        requestFlush();
     }
 };
 
