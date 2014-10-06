@@ -160,14 +160,13 @@
 		<field formid="purchasedQuantity" type="integer" binding="purchasedQuantityValue" />
 		<action formid="update" valid-form="true" label="forms.giftregistry.items.update"/>
 		<action formid="remove" valid-form="false" label="forms.giftregistry.items.remove"/>
-		<action formid="purchaseProduct" valid-form="false" label="forms.addtocart"/>
-		<action formid="purchaseGiftCertificate" valid-form="false" label="forms.giftregistry.items.purchaseGiftCertificate"/>
 		<action formid="updateItem" valid-form="true"/>
 		<action formid="deleteItem" valid-form="false" label="forms.delete"/>
 		<action formid="addItemToCart" valid-form="false" label="forms.addtocart"/>
 		<action formid="setItemPublic" valid-form="false" label="productlist.setpublic"/>
 		<action formid="setItemPrivate" valid-form="false" label="productlist.setprivate"/>
 		<action formid="addGiftCertificate" valid-form="false" label="forms.giftregistry.addgiftcertificate"/>
+		<action formid="addToCart" valid-form="false" label="forms.addtocart"/>
 	</list>
 
 	<list formid="purchases" binding="purchases">
