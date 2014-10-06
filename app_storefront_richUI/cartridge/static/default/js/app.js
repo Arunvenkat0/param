@@ -621,7 +621,7 @@ module.exports = function () {
 	 *
 	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
 	 */
-	if (HasCookieAsset == true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
+	if (SitePreferences.COOKIE_HINT == true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
 		// Show the Content Asset
 		if ($('h1.content-header').length == 0 || $('h1.content-header')[0].textContent.indexOf('Privacy Policy') < 0) {
 			$('#overlay-background').css('display','block');
@@ -663,6 +663,7 @@ module.exports = function () {
 		$('#cookie-hint').hide();
 	};
 }
+
 },{}],6:[function(require,module,exports){
 'use strict';
 

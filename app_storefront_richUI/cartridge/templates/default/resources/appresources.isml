@@ -6,12 +6,14 @@
 	importPackage( dw.util );
 	importPackage( dw.value );
 	importPackage( dw.web );
+	importPackage( dw.content );
 
 	var sitePreferences = {
-		LISTING_INFINITE_SCROLL: (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
+		LISTING_INFINITE_SCROLL: (Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
 		LISTING_REFINE_SORT: true,
-		LISTING_SEARCHSUGGEST_LEGACY: (dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? true : false),
-		STORE_PICKUP: dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')
+		LISTING_SEARCHSUGGEST_LEGACY: (Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? true : false),
+		STORE_PICKUP: Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
+		COOKIE_HINT: (ContentMgr.getContent('cookie_hint') && ContentMgr.getContent('cookie_hint').online) || false
 	};
 
 
@@ -42,7 +44,7 @@
 		SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext','search', null),
 		SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('forms.subscribe.email.default','forms', 'Email Address'),
 
-		CURRENCY_SYMBOL					: Currency.getCurrency(dw.system.Site.current.currencyCode).symbol,
+		CURRENCY_SYMBOL					: Currency.getCurrency(Site.current.currencyCode).symbol,
 		MISSINGVAL						: Resource.msg('global.missingval','locale',null),
 		SERVER_ERROR 					: Resource.msg('global.servererror','locale',null),
 		MISSING_LIB 					: Resource.msg('global.missinglib','locale',null),
@@ -156,7 +158,7 @@
 		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString()
 	};
 
-	userSettings = {
+	var userSettings = {
 		zip : pdict.CurrentSession.custom.zipcode == "null" ? null : pdict.CurrentSession.custom.zipcode,
 		storeId : pdict.CurrentSession.custom.storeId == "null" ? null : pdict.CurrentSession.custom.storeId
 	};
@@ -167,5 +169,4 @@
 	window.Urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;
 	window.SitePreferences = <isprint value="${JSON.stringify(sitePreferences)}" encoding="off"/>;
 	window.User = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
-	window.HasCookieAsset = <isprint value="${dw.content.ContentMgr.getContent('cookie_hint') && dw.content.ContentMgr.getContent('cookie_hint').online}" encoding="off">;
 }(window.app = window.app || {}));
