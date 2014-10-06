@@ -11,6 +11,7 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <!-- jQuery -->
 <script src="${URLUtils.staticURL('/lib/jquery/jquery-1.7.1.min.js')}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
 <script>var app={};</script>
 <isinclude template="common/powerreviews_UI"/>
 <!--[if lt IE 9]>
