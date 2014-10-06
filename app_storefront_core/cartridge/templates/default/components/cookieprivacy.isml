@@ -1,0 +1,7 @@
+<!--- TEMPLATENAME: cookieprivacy.isml --->
+<iscomment>Include div for European Cookie notification</iscomment>
+
+<div id='cookie-hint'>
+	<isinclude url="${URLUtils.url('Page-Include', 'cid', 'cookie_hint')}"/>
+</div>
+<div id="overlay-background"></div>

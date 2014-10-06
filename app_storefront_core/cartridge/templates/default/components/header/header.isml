@@ -1,5 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24"/>
+
+<isif condition="${dw.content.ContentMgr.getContent('cookie_hint') && dw.content.ContentMgr.getContent('cookie_hint').online}">
+	<isinclude template="components/cookieprivacy"/>
+</isif>
+
 <div id="header" role="banner">
 
 	<header>

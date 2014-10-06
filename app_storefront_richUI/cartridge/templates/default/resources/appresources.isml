@@ -167,4 +167,5 @@
 	window.Urls = <isprint value="${JSON.stringify(urls)}" encoding="off"/>;
 	window.SitePreferences = <isprint value="${JSON.stringify(sitePreferences)}" encoding="off"/>;
 	window.User = <isprint value="${JSON.stringify(userSettings)}" encoding="off"/>;
+	window.HasCookieAsset = <isprint value="${dw.content.ContentMgr.getContent('cookie_hint') && dw.content.ContentMgr.getContent('cookie_hint').online}" encoding="off">;
 }(window.app = window.app || {}));
