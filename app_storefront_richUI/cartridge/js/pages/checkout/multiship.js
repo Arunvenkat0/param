@@ -125,7 +125,5 @@ exports.init = function () {
 			address.init();
 			addEditAddress(e.target);
 		}}});
-		// return false to prevent global dialogify event from triggering
-		return false;
 	});
 }

@@ -8,6 +8,7 @@
 'use strict';
 
 var components = require('./components'),
+	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -29,37 +30,32 @@ if (!window.jQuery) {
 require('./jquery-ext')();
 require('./cookieprivacy')();
 
-/**
- * @private
- * @function
- * @description Apply dialogify event handler to all elements that match one or more of the specified selectors.
- */
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
-	$('body')//.on('click', '.dialogify, [data-dlg-options], [data-dlg-action]', util.setDialogify)
-	.on('keydown', 'textarea[data-character-limit]', function(e) {
-		var text = $.trim($(this).val()),
-			charsLimit = $(this).data('character-limit'),
-			charsUsed = text.length;
+	$('body')
+		.on('keydown', 'textarea[data-character-limit]', function(e) {
+			var text = $.trim($(this).val()),
+				charsLimit = $(this).data('character-limit'),
+				charsUsed = text.length;
 
-			if ((charsUsed >= charsLimit) && (controlKeys.indexOf(e.which.toString()) < 0)) {
-				e.preventDefault();
+				if ((charsUsed >= charsLimit) && (controlKeys.indexOf(e.which.toString()) < 0)) {
+					e.preventDefault();
+				}
+		})
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function(e) {
+			var text = $.trim($(this).val()),
+				charsLimit = $(this).data('character-limit'),
+				charsUsed = text.length,
+				charsRemain = charsLimit - charsUsed;
+
+			if(charsRemain < 0) {
+				$(this).val( text.slice(0, charsRemain) );
+				charsRemain = 0;
 			}
-	})
-	.on('change keyup mouseup', 'textarea[data-character-limit]', function(e) {
-		var text = $.trim($(this).val()),
-			charsLimit = $(this).data('character-limit'),
-			charsUsed = text.length,
-			charsRemain = charsLimit - charsUsed;
 
-		if(charsRemain < 0) {
-			$(this).val( text.slice(0, charsRemain) );
-			charsRemain = 0;
-		}
-
-		$(this).next('div.char-count').find('.char-remain-count').html(charsRemain);
-	});
+			$(this).next('div.char-count').find('.char-remain-count').html(charsRemain);
+		});
 
 	/**
 	 * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
@@ -108,6 +104,16 @@ function initializeEvents() {
 				.animate({color: '#333333'}, 500, 'linear');
 		});
 	}
+
+	$('.privacy-policy').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href'),
+			options: {
+				height: 600
+			}
+		});
+	});
 }
 /**
  * @private
@@ -133,7 +139,8 @@ var pages = {
 	registry: require('./pages/registry'),
 	search: require('./pages/search'),
 	storefront: require('./pages/storefront'),
-	wishlist: require('./pages/wishlist')
+	wishlist: require('./pages/wishlist'),
+	storelocator: require('./pages/storelocator')
 };
 
 var app = {

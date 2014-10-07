@@ -6,14 +6,20 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 
 <head>
-	<isscript>var pageContext={title:'Content Search Results',type:'search',ns:'search'};</isscript>
+	<isscript>
+		var pageContext={
+			title: 'Content Search Results',
+			type: 'search',
+			ns: 'search'
+		};
+	</isscript>
 	<isinclude template="util/modules"/>
-	
+
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="search/pt_contentsearchresult_UI"/>
-	
-	<iscomment>Add template-specific header information here.</iscomment>	
-	
+
+	<iscomment>Add template-specific header information here.</iscomment>
+
 </head>
 
 <body>
@@ -23,24 +29,24 @@
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="page-content clearfix">
-			<isinclude template="components/browsertoolscheck"/>		
+			<isinclude template="components/browsertoolscheck"/>
 			<isinclude template="search/components/contentsearchbreadcrumbs"/>
-		
+
 			<div id="primary" class="primary-content">
 				<isreplace/>
 			</div>
-			
+
 			<div id="secondary" class="nav refinements">
 				<isinclude template="search/components/contentsearchrefinebar"/>
 			</div>
-			
+
 		</div>
 
 		<isinclude template="components/footer/footer"/>
 
 		<isinclude template="search/pt_contentsearchresult_VARS"/>
-		
+
 	</div>
-	
+
 </body>
 </html>
