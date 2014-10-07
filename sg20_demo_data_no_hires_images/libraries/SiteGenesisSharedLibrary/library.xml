@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="SiteGenesisSharedLibrary">
     <folder folder-id="root">
         <online-flag>true</online-flag>
         <page-attributes>
@@ -1695,36 +1695,17 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
     </content>
 
     <content content-id="cookie_hint">
-	<display-name xml:lang="x-default">cookie_hint</display-name>
-	<description xml:lang="x-default">Used by EU sites to expose the cookie acceptance page</description>
-	<online-flag>true</online-flag>
-	<searchable-flag>true</searchable-flag>
-	<page-attributes/>
-	<custom-attributes>
-	    <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="wrapper"&gt;&#13;
-    &lt;div class="privacy_policy_message_box"&gt;			&#13;
-	&lt;h4&gt;&#13;
-	    privacy and cookie policy&#13;
-	&lt;/h4&gt; 	&#13;
-	&lt;div class="message"&gt;&#13;
-	    Demandware uses cookies to give you the best experience. With the cookies we allow you to make full use of the online shopping and personalized features available on our website.&lt;br&gt;&#13;
-	    View our &lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy and Cookie Policy&lt;/a&gt; to learn more about this.&#13;
-	&lt;/div&gt;&#13;
-	&lt;a href="#" class="privacypolicy_agreebtn"&gt;&#13;
-	    i agree&#13;
-	&lt;/a&gt;	&#13;
-	&lt;!--&#13;
-	  NOTE: The Close Button handler does the same thing as the 'I Accept" button - it sets the cookies&#13;
-	  and clears the cookie notification.  In a strict situation where you MUST actively accept the cookies&#13;
-	  before proceeding, we recommend removing this button from the content asset as well as its event handler in app.js&#13;
-	 --&gt;	&#13;
-	&lt;a class="privacy_close_noaction close"&gt;&#13;
-	    close&#13;
-	&lt;/a&gt;&#13;
-    &lt;/div&gt;			&#13;
+        <display-name xml:lang="x-default">cookie_hint</display-name>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="privacy_policy_message_box"&gt;           &#13;
+    &lt;h2&gt;Privacy and Cookie Policy&lt;/h2&gt;  &#13;
+    &lt;p&gt;Demandware uses cookies to give you the best experience. With the cookies we allow you to make full use of the online shopping and personalized features available on our website.&lt;/p&gt;&#13;
+    &lt;p&gt;View our &lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy and Cookie Policy&lt;/a&gt; to learn more about this.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-	</custom-attributes>
-	<sitemap-included-flag>false</sitemap-included-flag>
+        </custom-attributes>
     </content>
 
     <content content-id="create-account-benefits">
