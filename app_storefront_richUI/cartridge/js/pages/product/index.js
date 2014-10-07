@@ -45,11 +45,11 @@ function loadProductNavigation() {
  * @description Creates product recommendation carousel using jQuery jcarousel plugin
  */
 function loadRecommendations() {
-	var carousel = $('#carousel-recomendations');
-	if (!carousel || carousel.length === 0 || carousel.children().length === 0) {
+	var $carousel = $('#carousel-recomendations');
+	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
 		return;
 	}
-	carousel.jcarousel(components.carouselSettings);
+	$carousel.jcarousel(components.carouselSettings);
 }
 
 /**
@@ -64,9 +64,9 @@ function setMainImage(atts) {
 	}
 
 	imgZoom.find('.primary-image').attr({
-		'src' : atts.url,
-		'alt' : atts.alt,
-		'title' : atts.title
+		src: atts.url,
+		alt: atts.alt,
+		title: atts.title
 	});
 }
 
@@ -104,14 +104,14 @@ function loadZoom() {
 	//zoom properties
 	var options = {
 		zoomType: 'standard',
-		alwaysOn : 0, // setting to 1 will load load high res images on page load
-		zoomWidth : 575,
-		zoomHeight : 349,
+		alwaysOn: 0, // setting to 1 will load load high res images on page load
+		zoomWidth: 575,
+		zoomHeight: 349,
 		position: 'right',
 		preloadImages: 0, // setting to 1 will load load high res images on page load
 		xOffset: 30,
 		yOffset: 0,
-		showEffect : 'fadein',
+		showEffect: 'fadein',
 		hideEffect: 'fadeout'
 	};
 
@@ -158,17 +158,17 @@ function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
 	if ($('#pwrwritediv').length > 0) {
 		var options = $.extend(true, {}, dialog.settings, {
-			autoOpen : true,
-			height : 750,
-			width : 650,
-			dialogClass : 'writereview',
-			title : 'Product Review',
-			resizable : false
+			autoOpen: true,
+			height: 750,
+			width: 650,
+			dialogClass: 'writereview',
+			title: 'Product Review',
+			resizable: false
 		});
 
 		dialog.create({
-			target : $('#pwrwritediv'),
-			options : options
+			target: $('#pwrwritediv'),
+			options: options
 		});
 	}
 
@@ -277,7 +277,7 @@ function initializeEvents() {
 
 		ajax.load({
 			url: url,
-			callback : function (data) {
+			callback: function (data) {
 				target.html(data);
 				product.initAddThis();
 				product.initAddToCart();
@@ -404,7 +404,16 @@ function initializeEvents() {
 	});
 	sendToFriend.initializeDialog($pdpMain);
 
-	$pdpMain.find('.add-to-cart[disabled]').attr('title', $pdpMain.find('.availability-msg').html());
+	$pdpMain.find('.add-to-cart[disabled]')
+		.attr('title', $pdpMain.find('.availability-msg')
+		.html());
+
+	$('.size-chart-link a').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href')
+		});
+	});
 }
 /**
  * @private
@@ -436,7 +445,7 @@ function setAddToCartHandler(e) {
 }
 
 var product = {
-	init : function () {
+	init: function () {
 		initializeDom();
 		initializeEvents();
 		loadZoom();
@@ -444,15 +453,15 @@ var product = {
 			storeinventory.init();
 		}
 	},
-	readReviews : function(){
-		$('.product-tabs').tabs('select','#tab4');
+	readReviews: function(){
+		$('.product-tabs').tabs('select', '#tab4');
 		$('body').scrollTop($('#tab4').offset().top);
 	},
 	/**
 	 * @function
 	 * @description Gets the availability to given product and quantity
 	 */
-	getAvailability : function (pid, quantity, callback) {
+	getAvailability: function (pid, quantity, callback) {
 		ajax.getJson({
 			url: util.appendParamsToUrl(Urls.getAvailability, {pid:pid, Quantity:quantity}),
 			callback: callback
@@ -462,7 +471,7 @@ var product = {
 	 * @function
 	 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
 	 */
-	initAddThis : function () {
+	initAddThis: function () {
 		var addThisServices = ['compact', 'facebook', 'myspace', 'google', 'twitter'],
 			addThisToolbox = $('.addthis_toolbox'),
 			addThisLinks = '',
@@ -488,7 +497,7 @@ var product = {
 	 * @description Binds the click event to a given target for the add-to-cart handling
 	 * @param {Element} target The target on which an add to cart event-handler will be set
 	 */
-	initAddToCart : function (target) {
+	initAddToCart: function (target) {
 		if (target) {
 			target.on('click', '.add-to-cart', setAddToCartHandler);
 		} else {

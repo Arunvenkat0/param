@@ -98,7 +98,7 @@ function toggleFullOrder () {
 		.prev('li')
 		.append('<a class="toggle">View All</a>')
 		.children('.toggle')
-		.click(function() {
+		.click(function () {
 			$(this).parent().siblings('li.hidden').show();
 			$(this).remove();
 		});
@@ -188,14 +188,19 @@ function initLoginPage() {
 	});
 
 	//toggle the value of the rememberme checkbox
-	$('#dwfrm_login_rememberme').bind('change', function() {
+	$('#dwfrm_login_rememberme').bind('change', function () {
 		if ($('#dwfrm_login_rememberme').attr('checked')) {
 			$('#rememberme').val('true');
 		} else {
 			$('#rememberme').val('false');
 		}
 	});
-
+	$('#password-reset').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href')
+		});
+	});
 }
 /**
  * @private

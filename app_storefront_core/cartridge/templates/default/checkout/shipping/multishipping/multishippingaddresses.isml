@@ -109,7 +109,7 @@
 								</isloop>
 							</select>
 							<div class="edit-address">
-								<a href="${URLUtils.url('COShippingMultiple-EditAddresses')}" class="edit dialogify">${Resource.msg('multishipping.editaddress','checkout',null)}</a>
+								<a href="${URLUtils.url('COShippingMultiple-EditAddresses')}" class="edit">${Resource.msg('multishipping.editaddress','checkout',null)}</a>
 							</div>
 						</td>
 					</tr>

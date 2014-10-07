@@ -114,7 +114,7 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0){
+	if ($('.cart-row .shippingaddress .select-address').length > 0){
 		formPrepare.init('[name$="addressSelection_save"]', '[id$="multishipping_addressSelection"]');
 	}
 	$('.edit-address').on('click', 'a', function (e) {
@@ -122,7 +122,5 @@ exports.init = function () {
 			address.init();
 			addEditAddress(e.target);
 		}}});
-		// return false to prevent global dialogify event from triggering
-		return false;
 	});
 }

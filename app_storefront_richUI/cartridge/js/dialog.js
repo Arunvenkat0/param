@@ -40,14 +40,13 @@ var dialog = {
 
 		// finally load the dialog
 		ajax.load({
-			target : this.container,
-			url : params.url,
-			callback : function () {
+			target: this.container,
+			url: params.url,
+			callback: function () {
 				if (this.container.dialog("isOpen")) {return;}
 				this.container.dialog("open");
 			}.bind(this)
 		});
-
 	},
 	/**
 	 * @function
@@ -99,7 +98,6 @@ var dialog = {
 		width: '800',
 		buttons: {},
 		title: '',
-		position: 'center',
 		overlay: {
 			opacity: 0.5,
 			background: "black"
