@@ -1,15 +1,36 @@
-#navigation {
-	position: relative;
-	width: 100%;
-	z-index: 100;
+.menu-toggle {
+	border: none;
+	display: block;
+	float: left;
+	padding: 0.5em;
+	@media screen and (min-width: 768px) {
+		display: none;
+	}
 }
 
-ul.level-1 {
+#navigation {
+	left: -20em;
+	width: 20em;
+	position: absolute;
+	@media screen and (min-width: 768px) {
+		left: auto;
+		position: static;
+		width: auto;
+	}
+}
+
+.menu-category {
 	background: none repeat scroll 0 0 $black;
+	clear: both;
 	padding: 10px 0 11px;
-	position: relative;
-	.ie7 & {
-		height: 30px;
+}
+
+ul.level-1 li {
+	float: left;
+	padding: 0 5px;
+	&:hover a.level-1 {
+		background: none repeat scroll 0 0 $white-smoke;
+		color: $black;
 	}
 	li {
 		float: left;

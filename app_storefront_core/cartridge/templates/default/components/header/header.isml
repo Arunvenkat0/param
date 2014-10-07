@@ -2,21 +2,20 @@
 <iscache type="relative" hour="24"/>
 
 <div class="top-banner" role="banner">
-	<header class="main-header">
-		<!--  branding logo -->
-		<h1 class="primary-logo">
-			<a href="${URLUtils.url('Home-Show')}">
-				<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}">
-				<span>${Resource.msg('global.storename','locale',null)}</span>
-			</a>
-		</h1>
+	<button class="menu-toggle">Menu</button>
+	<h1 class="primary-logo">
+		<a href="${URLUtils.url('Home-Show')}">
+			<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}">
+			<span class="visually-hidden">${Resource.msg('global.storename','locale',null)}</span>
+		</a>
+	</h1>
 
-		<a href="#main" class="visually-hidden">Skip to content</a>
-		<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
-		<div id="mini-cart">
-			<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
-		</div>
+	<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+	<div id="mini-cart">
+		<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
+	</div>
 
+	<nav id="navigation" role="navigation">
 		<!--  utility user menu -->
 		<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
 		<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
@@ -50,10 +49,6 @@
 			<isslot id="header-banner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 		</div>
 
-	</header>
-
-
-	<nav id="navigation" role="navigation">
 		<h1 class="visually-hidden navigation-header">Catalog Navigation</h1>
 		<!--  category navigation -->
 		<iscomment>INCLUDE: category menu</iscomment>

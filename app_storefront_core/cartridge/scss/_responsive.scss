@@ -135,8 +135,6 @@
 	}
 	.menu-utility,
 	.menu-utility-user {
-		clear: both;
-		float: none;
 		letter-spacing: 0;
 		margin: 10px 0;
 		overflow: hidden;
@@ -180,58 +178,6 @@
 				width: 16%;
 				top: 0px;
 			}
-		}
-	}
-	#navigation {
-		padding: 0 1%;
-		width: 98%;
-		h1 {
-			background: black url('../images/interface/icon-nav-arrow.png') 95% center no-repeat;
-			color: #ffffff;
-			cursor: pointer;
-			font-size: 1.1em;
-			font-weight: normal;
-			margin: 0;
-			padding: .7em;
-			position: relative;
-			height: auto;
-			text-transform: uppercase;
-			width: auto;
-		}
-	}
-	ul.level-1 {
-		padding: 5px 0;
-		a {
-			font-size: 1em;
-			&.level-1 {
-				border-bottom: 1px solid #999999;
-			}
-			span {
-				float: right;
-				font-size: .8em;
-			}
-		}
-		.last a.level-1 {
-			border: 0;
-		}
-		li {
-			float: none;
-			&:hover a.level-1 {
-				border-color: #efefef;
-			}
-		}
-	}
-	.js ul.level-1 li:hover div.level-2 {
-		display: none;
-	}
-	div.level-2 {
-		position: relative;
-		&.menu-horizontal li {
-			border: 0 !important;
-			float: none !important;
-		}
-		.custom {
-			display: none;
 		}
 	}
 	.primary-content h1 {
@@ -722,9 +668,6 @@
 }
 
 @media screen and (min-width: 480px) and (max-width: 767px) {
-	#wrapper {
-		width: 480px;
-	}
 	.product-tile .pr_stars {
 		left: 40px;
 	}
@@ -797,16 +740,8 @@
 	.mini-cart-total-label {
 		display: none;
 	}
-	.menu-utility {
-		clear: both;
-		margin: .7em 0;
-	}
 	.mini-cart-products {
 		max-height: 100%;
-	}
-	.header-banner {
-		font-size: 1em;
-		margin: 0;
 	}
 	.header-search input[type="text"] {
 		width: 135px;
@@ -907,9 +842,6 @@
 }
 
 @media screen and (max-width: 480px) {
-	#navigation h1 {
-		top: 2px;
-	}
 	.header-search input[type="submit"] {
 		height: 37px;
 		width: 15%;
