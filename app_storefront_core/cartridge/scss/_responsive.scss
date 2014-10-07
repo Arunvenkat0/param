@@ -132,20 +132,9 @@
 			}
 		}
 	}
-	.menu-utility,
-	.menu-utility-user {
-		letter-spacing: 0;
-		margin: 10px 0;
-		overflow: hidden;
-	}
 	.menu-utility li,
 	.menu-utility-user li {
 		padding: 0 5px;
-	}
-	.header-banner {
-		float: none;
-		font-size: .8em;
-		margin: 10px 5px;
 	}
 	.mini-cart-products {
 		max-height: 100%;
@@ -159,25 +148,6 @@
 	.mini-cart-item-word,
 	.mini-cart-total-label {
 		display: none;
-	}
-	.header-search {
-		left: 1%;
-		top: -36px;
-		width: 98%;
-		input {
-			&[type="text"] {
-				width: 81%;
-				height: 15px;
-			}
-			&[type="submit"] {
-				float: right;
-				height: 34px;
-				position: absolute;
-				right: 0;
-				width: 16%;
-				top: 0px;
-			}
-		}
 	}
 	.primary-content h1 {
 		font-size: 1.5em;
@@ -841,17 +811,6 @@
 }
 
 @media screen and (max-width: 480px) {
-	.header-search input[type="submit"] {
-		height: 37px;
-		width: 15%;
-	}
-	input[type="text"] {
-		border: 1px solid #AAAAAA;
-		margin-left: 2%;
-		padding: 0.8em 0.5em;
-		text-indent: 0;
-		width: 49.5966%;
-	}
 	#wrapper.pt_gift-registry {
 		font-size: 12px;
 	}

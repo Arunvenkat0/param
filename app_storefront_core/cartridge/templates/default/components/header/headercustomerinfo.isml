@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<ul class="menu-utility-user">
+<ul class="menu-utility-user nav-section">
 
-	<iscomment> Multi currency </iscomment>
+	<iscomment>Multi currency</iscomment>
 	<isinclude template="components/header/multicurrency"/>
 
 	<iscomment>User has sessoin, but not currently active (welcome back)</iscomment>
@@ -30,7 +30,7 @@
 			</a>
 		</li>
 
-	<iscomment>ser has session and is validated</iscomment>
+	<iscomment>User has session and is validated</iscomment>
 	<iselseif condition="${pdict.CurrentCustomer.registered}">
 		<li>
 			${Resource.msg('headercustomerinfo.welcome', 'components', null)}

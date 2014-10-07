@@ -9,13 +9,42 @@
 	}
 }
 
-#navigation {
+nav[role="navigation"] {
+	@extend .clearfix;
 	left: -20em;
 	width: 20em;
 	position: absolute;
+	top: 0;
+	color: $white;
+	* {
+		box-sizing: border-box;
+	}
+	a {
+		color: $pacific-blue;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 	@media screen and (min-width: 768px) {
 		left: auto;
 		position: static;
+		top: auto;
+		width: auto;
+		color: $night-rider;
+		a {
+			color: $night-rider;
+		}
+	}
+}
+
+.nav-section {
+	color: $white;
+	float: left;
+	position: relative;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		color: $nobel;
+		float: right;
 		width: auto;
 	}
 }
