@@ -118,6 +118,11 @@ function initializeEvents() {
 			}
 		});
 	});
+
+	// main menu toggle
+	$('.menu-toggle').on('click', function () {
+		$('#wrapper').toggleClass('menu-active');
+	});
 }
 /**
  * @private

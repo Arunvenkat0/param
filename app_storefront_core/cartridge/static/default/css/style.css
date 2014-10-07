@@ -378,9 +378,15 @@ td {
 
 #wrapper {
   background: none repeat scroll 0 0 #fff;
+  left: 0;
   margin: auto;
   max-width: 960px;
+  position: relative;
+  -webkit-transition: left 0.2s ease-in;
+	  transition: left 0.2s ease-in;
   width: 960px; }
+  #wrapper.menu-active {
+    left: 20em; }
 
 .primary-content {
   border-left: 1px solid #e0e0e0;
@@ -4122,7 +4128,6 @@ h1 .account-logout {
 
   #wrapper {
     border: 0;
-    font-size: 14px;
     max-width: 100%;
     min-width: 320px;
     width: 100%; }
