@@ -18,60 +18,115 @@
 	}
 }
 
-.header-banner {
-	font-size: .8em;
-	margin: 0.5em 6px;
+// navigation
+.menu-toggle {
+	border: none;
+	display: block;
+	float: left;
+	margin-left: 0.2em;
+	padding: 0.5em;
 	@media screen and (min-width: 768px) {
-		clear: right;
-		font-size: 1em;
-		margin-bottom: 1em;
+		display: none;
+	}
+}
+
+nav[role="navigation"] {
+	@extend .clearfix;
+	left: -20em;
+	width: 20em;
+	position: absolute;
+	top: 0;
+	color: $white;
+	* {
+		box-sizing: border-box;
+	}
+	@media screen and (min-width: 768px) {
+		left: auto;
+		position: static;
+		top: auto;
+		width: auto;
+		color: $night-rider;
+	}
+}
+
+.nav-section {
+	@extend .clearfix;
+	border-bottom: 5px solid darken($dim-gray, 10%);
+	color: $white;
+	float: left;
+	font-size: 1em;
+	margin: 0;
+	position: relative;
+	text-transform: uppercase;
+	width: 100%;
+	&:last-of-type {
+		border: none;
+	}
+	@media screen and (min-width: 768px) {
+		border: none;
+		color: $nobel;
+		float: right;
+		width: auto;
 	}
 	@media screen and (min-width: 960px) {
 		font-size: 1.2em;
 	}
-	.ie7 & {
-		width: 350px;
+}
+
+.header-banner {
+	padding: 0.8em 1rem;
+	@media screen and (min-width: 768px) {
+		clear: right;
+		margin-bottom: 1em;
 	}
 }
 
 .menu-utility {
-	@extend .clearfix;
-	font-size: 0.8em;
-	letter-spacing: 1px;
-	margin: 10px 0;
 	padding: 0;
-	text-transform: uppercase;
 	@media screen and (min-width: 768px) {
 		clear: right;
 	}
-	.ie7 & {
-		width: 350px;
+	a {
+		color: $white;
+		display: block;
+		padding: 0.5em 1rem;
+		text-decoration: none;
+		width: 100%;
+		&:hover {
+			background-color: darken($night-rider, 10%);
+		}
+		&:active {
+			color: $pacific-blue;
+		}
 	}
 }
 
 .menu-utility-user {
-	@extend .clearfix;
-	font-size: 0.8em;
-	letter-spacing: 1px;
-	margin: 6px 10px 0 0;
 	padding: 0;
-	text-transform: uppercase;
 	.currency-converter {
 		color: $black;
 		display: inline;
 		height: 1em;
 		width: auto;
 	}
+	li {
+		padding: 0.5em 1rem;
+	}
+	a {
+		color: $pacific-blue;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
 .menu-utility li,
 .menu-utility-user li {
 	list-style: none;
-	padding: 0 6px;
 	@media screen and (min-width: 768px) {
 		border-right: 1px solid;
 		float: left;
-		&.last {
+		&:last-of-type {
 			border: none;
 		}
 	}
@@ -105,5 +160,123 @@
 	}
 	legend {
 		background: none repeat scroll 0 0 transparent;
+	}
+}
+
+.menu-category {
+	background: none repeat scroll 0 0 $black;
+	clear: both;
+	margin: 0;
+	padding: 10px 0 11px;
+}
+
+ul.level-1 li {
+	float: left;
+	padding: 0 5px;
+	&:hover a.level-1 {
+		background: none repeat scroll 0 0 $white-smoke;
+		color: $black;
+	}
+}
+
+a.level-1:focus + .level-2 {
+	display: block;
+}
+
+ul.level-1 {
+	li:hover div.level-2 {
+		display: block;
+	}
+	a {
+		color: $white;
+		display: block;
+		font-size: 1.2em;
+		padding: 10px;
+		text-transform: uppercase;
+	}
+}
+
+div.level-2 {
+	background: none repeat scroll 0 0 $white-smoke;
+	box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+	display: none;
+	margin: 0;
+	padding: 15px;
+	position: absolute;
+}
+
+.ie7 div.level-2 {
+	width: 452px;
+}
+
+div.level-2 {
+	.menu-wrapper {
+		background: none repeat scroll 0 0 $white;
+		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+		overflow: hidden;
+	}
+	ul.level-2 {
+		float: left;
+		margin: 0;
+		padding: 0;
+		li {
+			float: none;
+			min-width: 130px;
+			padding: 7px 5px;
+		}
+		a {
+			line-height: 18px;
+			color: $night-rider;
+			font-size: 1em;
+			font-weight: 700;
+			padding: 0;
+		}
+		.level-3 a {
+			line-height: normal;
+		}
+	}
+	.custom {
+		float: right;
+		text-align: center;
+		img {
+			height: auto !important;
+			width: auto !important;
+		}
+	}
+}
+div.menu-horizontal {
+	ul.level-2 {
+		float: none;
+	}
+	li {
+		float: left !important;
+		height: 100%;
+		li {
+			border-color: $white-smoke;
+			border-style: solid;
+			border-width: 0 1px 0 0;
+			float: none !important;
+			height: 100%;
+		}
+		&.last li {
+			border-width: 0 !important;
+		}
+	}
+	.custom {
+		clear: both;
+	}
+}
+
+div.level-3 ul.level-3 {
+	margin: 0;
+	padding: 0;
+	li {
+		padding: 3px 5px;
+		width: auto;
+	}
+	a {
+		color: $pacific-blue;
+		font-weight: 400;
+		text-transform: none;
 	}
 }
