@@ -59,7 +59,7 @@ nav[role="navigation"] {
 	position: relative;
 	text-transform: uppercase;
 	width: 100%;
-	&:last-of-type {
+	&:last-child {
 		border: none;
 	}
 	@media screen and (min-width: 768px) {
@@ -164,10 +164,10 @@ nav[role="navigation"] {
 }
 
 .menu-category {
-	background: none repeat scroll 0 0 $black;
-	clear: both;
-	margin: 0;
-	padding: 10px 0 11px;
+	padding: 0;
+	@media screen and (min-width: 768px) {
+		background-color: $black;
+	}
 }
 
 ul.level-1 li {

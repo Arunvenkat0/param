@@ -22,24 +22,18 @@
 
 <isscript>
 	importScript( "util/ViewHelpers.ds" );
-	var topLevelCategory = getTopLevelCategory();
 </isscript>
-
+<isset name="topLevelCategory" value="${getTopLevelCategory()}" scope="page"/>
 <isif condition="${topLevelCategory != null}">
-
-	<ul class="menu-category level-1 clearfix">
+	<ul class="menu-category level-1 nav-section">
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
-	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat" status="catstatus">
-
-		<li ${catstatus.first ? 'class=first' : ''} ${catstatus.last ? 'class=last' : ''}>
-			<a href="<isprint value="${MainNavigationUtilities.getCategoryUrl(topCat)}" encoding="off"/>" class="level-1">
+	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
+		<li>
+			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>" class="level-1">
 				<isprint value="${topCat.getDisplayName()}"/>
 			</a>
 			<iscategoryflyout category="${topCat}"/>
 		</li>
-
 	</isloop>
-
 	</ul>
-
 </isif>

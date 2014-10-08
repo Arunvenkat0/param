@@ -53,8 +53,6 @@
 			<isslot id="header-banner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 		</div>
 
-		<h1 class="visually-hidden navigation-header">Catalog Navigation</h1>
-		<!--  category navigation -->
 		<iscomment>INCLUDE: category menu</iscomment>
 		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
 	</nav>
