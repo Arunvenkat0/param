@@ -30,8 +30,8 @@
 				</li>
 			</isif>
 		</isloop>
-		<isif condition="${flyOutRenderer.hasCustomContent}">
-			<li class="custom"><isprint value="${topCat.custom.headerMenuBanner}" encoding="off"/></li>
+		<isif condition="${subCatLayout.banner}">
+			<li class="banner"><isprint value="${subCatLayout.banner}" encoding="off"/></li>
 		</isif>
 	</ul>
 </isif>

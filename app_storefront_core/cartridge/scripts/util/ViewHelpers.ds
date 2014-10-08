@@ -41,8 +41,8 @@ function getSubCategoriesLayout(topCat) {
 	var subCategories = getSubcategoriesInMenuForCategory(topCat);
 	layout.maxColLength = 5;
 	layout.subCategories = subCategories;
-	layout.hasCustomContent = !empty(topCat.custom.headerMenuBanner);
-	layout.hasContent = !!(layout.hasCustomContent || subCategories.length !== 0);
+	layout.banner = !empty(topCat.custom.headerMenuBanner) ? topCat.custom.headerMenuBanner : undefined;
+	layout.hasContent = !!(layout.banner || subCategories.length !== 0);
 	if ('headerMenuOrientation' in topCat.custom
 		&& !empty(topCat.custom.headerMenuOrientation)
 		&& topCat.custom.headerMenuOrientation == 'Horizontal') {

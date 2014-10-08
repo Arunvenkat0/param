@@ -1152,6 +1152,11 @@ nav[role="navigation"] {
   padding-left: 2em; }
   .level-1 > .active .level-2 {
     display: block; }
+  .level-2 .banner {
+    display: none; }
+    @media screen and (min-width: 768px) {
+      .level-2 .banner {
+	display: block; } }
 
 .level-3 {
   display: none;
