@@ -708,21 +708,12 @@
 	.mini-cart-products {
 		max-height: 100%;
 	}
-	.header-search input[type="text"] {
-		width: 135px;
-	}
-	ul {
-		&.level-1 a {
-			font-size: 1em;
-			padding: 10px 5px;
+	ul.search-result-items {
+		.new-row {
+			clear: none;
 		}
-		&.search-result-items {
-			.new-row {
-				clear: none;
-			}
-			.grid-tile {
-				width: 41.5%;
-			}
+		.grid-tile {
+			width: 41.5%;
 		}
 	}
 	.pdp-main {

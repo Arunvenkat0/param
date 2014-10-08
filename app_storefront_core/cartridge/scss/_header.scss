@@ -12,9 +12,10 @@
 .primary-logo {
 	margin: 0.2em auto;
 	width: 200px; // width of image
+	height: 38px; // height of image
 	@media screen and (min-width: 768px) {
-		float: left;
-		margin: 0.5em;
+		left: 0.5em;
+		position: absolute;
 	}
 }
 
@@ -54,7 +55,6 @@ nav[role="navigation"] {
 	border-bottom: 5px solid darken($dim-gray, 10%);
 	color: $white;
 	float: left;
-	font-size: 1em;
 	margin: 0;
 	position: relative;
 	text-transform: uppercase;
@@ -64,12 +64,9 @@ nav[role="navigation"] {
 	}
 	@media screen and (min-width: 768px) {
 		border: none;
-		color: $nobel;
+		color: $night-rider;
 		float: right;
 		width: auto;
-	}
-	@media screen and (min-width: 960px) {
-		font-size: 1.2em;
 	}
 }
 
@@ -77,19 +74,55 @@ nav[role="navigation"] {
 	padding: 0.8em 1rem;
 	@media screen and (min-width: 768px) {
 		clear: right;
-		margin-bottom: 1em;
 	}
 }
 
 .menu-utility {
-	padding: 0;
 	@media screen and (min-width: 768px) {
 		clear: right;
 	}
+}
+
+.menu-utility-user {
+	.currency-converter {
+		padding: 0.8em 1rem;
+		select {
+			display: inline;
+			margin: 0;
+			height: auto;
+			width: auto;
+		}
+	}
 	li {
-		border-bottom: 1px solid darken($night-rider, 10%);
-		&:last-child {
+		@media screen and (min-width: 768px) {
+			padding-top: 0.3em;
+			&:first-child {
+				padding-top: 0;
+			}
+		}
+	}
+}
+
+.menu-utility,
+.menu-utility-user {
+	padding: 0;
+	@media screen and (min-width: 768px) {
+		font-size: 0.9em;
+		margin-bottom: 0.5em;
+	}
+	li {
+		border-top: 1px solid darken($night-rider, 10%);
+		list-style: none;
+		&:first-child {
 			border: none;
+		}
+		@media screen and (min-width: 768px) {
+			border-top: none;
+			border-left: 1px solid $dim-gray;
+			float: left;
+			&:first-child {
+				border: none;
+			}
 		}
 	}
 	a {
@@ -104,48 +137,23 @@ nav[role="navigation"] {
 		&:active {
 			color: $pacific-blue;
 		}
-	}
-}
-
-.menu-utility-user {
-	padding: 0;
-	.currency-converter {
-		color: $black;
-		display: inline;
-		height: 1em;
-		width: auto;
-	}
-	li {
-		padding: 0.5em 1rem;
-	}
-	a {
-		color: $pacific-blue;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-}
-
-.menu-utility li,
-.menu-utility-user li {
-	list-style: none;
-	@media screen and (min-width: 768px) {
-		border-right: 1px solid;
-		float: left;
-		&:last-of-type {
-			border: none;
+		@media screen and (min-width: 768px) {
+			color: $night-rider;
+			padding: 0 0.8rem;
+			&:hover {
+				background-color: transparent;
+				text-decoration: underline;
+			}
 		}
 	}
 }
 
 .header-search {
-	z-index: 21;
 	width: 100%;
 	@media screen and (min-width: 768px) {
 		position: absolute;
-		right: 5px;
-		bottom: 12px;
-		width: auto;
+		top: 52px;
+		width: 17rem;
 	}
 	input[type="text"] {
 		background: none repeat scroll 0 0 $dim-gray;
@@ -154,7 +162,17 @@ nav[role="navigation"] {
 		float: left;
 		margin: 0;
 		height: 2rem;
-		width: 75%;
+		min-width: 75%;
+		@media screen and (min-width: 768px) {
+			background-color: transparent;
+			border-bottom: 1px solid $dim-gray;
+			color: $night-rider;
+			float: right;
+			width: 14rem;
+			&:focus {
+				border-bottom-color: $night-rider;
+			}
+		}
 	}
 	input[type="submit"] {
 		background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
@@ -163,6 +181,11 @@ nav[role="navigation"] {
 		padding: 8px 0;
 		text-indent: -999em;
 		width: 25%;
+		@media screen and (min-width: 768px) {
+			float: left;
+			max-width: 3rem;
+			pointer-events: none;
+		}
 	}
 	legend {
 		background: none repeat scroll 0 0 transparent;
@@ -173,10 +196,15 @@ nav[role="navigation"] {
 	padding: 0;
 	@media screen and (min-width: 768px) {
 		background-color: $black;
+		width: 100%;
 	}
 	li {
 		list-style: none;
 		border-top: 1px solid darken($night-rider, 10%);
+		@media screen and (min-width: 768px) {
+			border: none;
+			float: left;
+		}
 	}
 	a {
 		color: $mantis;
@@ -186,6 +214,9 @@ nav[role="navigation"] {
 		padding: 1em 1rem;
 		&:hover {
 			background-color: darken($night-rider, 10%);
+		}
+		@media screen and (min-width: 768px) {
+			color: $white;
 		}
 	}
 }
