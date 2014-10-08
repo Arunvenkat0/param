@@ -75,6 +75,6 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
-gulp.task('watch', ['enable-watch-mode', 'js'], function () {
+gulp.task('watch', ['enable-watch-mode', 'js', 'scss'], function () {
 	gulp.watch(paths.scss.src, ['scss']);
 });
