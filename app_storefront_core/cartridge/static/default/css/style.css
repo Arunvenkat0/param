@@ -1112,23 +1112,37 @@ nav[role="navigation"] {
       position: absolute;
       top: 52px;
       width: 17rem; } }
+  @media screen and (min-width: 960px) {
+    .header-search {
+      top: auto;
+      bottom: 7px;
+      right: 5px;
+      width: 13rem;
+      z-index: 1; } }
   .header-search input[type="text"] {
-    background: none repeat scroll 0 0 #666;
-    border: 0 none;
+    background-color: #666;
+    border: none;
     color: #fff;
     float: left;
     margin: 0;
     height: 2rem;
-    min-width: 75%; }
+    width: 75%; }
     @media screen and (min-width: 768px) {
       .header-search input[type="text"] {
-        background-color: transparent;
+	background-color: transparent;
         border-bottom: 1px solid #666;
         color: #333;
         float: right;
-        width: 14rem; }
-        .header-search input[type="text"]:focus {
-          border-bottom-color: #333; } }
+	width: 14rem; }
+	.header-search input[type="text"]:focus {
+	  border-bottom-color: #333; } }
+    @media screen and (min-width: 960px) {
+      .header-search input[type="text"] {
+	border-bottom: none;
+	background-color: #666;
+	color: #fff;
+	float: left;
+	width: 80%; } }
   .header-search input[type="submit"] {
     background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
     border: 0 none;
@@ -1138,9 +1152,13 @@ nav[role="navigation"] {
     width: 25%; }
     @media screen and (min-width: 768px) {
       .header-search input[type="submit"] {
-        float: left;
-        max-width: 3rem;
-        pointer-events: none; } }
+	float: left;
+	max-width: 3rem;
+	pointer-events: none; } }
+    @media screen and (min-width: 960px) {
+      .header-search input[type="submit"] {
+	pointer-events: auto;
+	width: 20%; } }
   .header-search legend {
     background: none repeat scroll 0 0 transparent; }
 
@@ -1195,7 +1213,7 @@ nav[role="navigation"] {
     display: block; }
 
 #mini-cart {
-  margin: 2em 0.8rem 0;
+  margin: 0.2em 0.8rem 0;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1205,8 +1223,7 @@ nav[role="navigation"] {
       float: right;
       position: relative;
       top: auto;
-      right: auto;
-      margin-top: 0.2em; } }
+      right: auto; } }
   #mini-cart a {
     color: #00a4e4; }
 

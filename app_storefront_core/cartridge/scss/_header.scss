@@ -155,14 +155,21 @@ nav[role="navigation"] {
 		top: 52px;
 		width: 17rem;
 	}
+	@media screen and (min-width: 960px) {
+		top: auto;
+		bottom: 7px;
+		right: 5px;
+		width: 13rem;
+		z-index: 1;
+	}
 	input[type="text"] {
-		background: none repeat scroll 0 0 $dim-gray;
-		border: 0 none;
+		background-color: $dim-gray;
+		border: none;
 		color: $white;
 		float: left;
 		margin: 0;
 		height: 2rem;
-		min-width: 75%;
+		width: 75%;
 		@media screen and (min-width: 768px) {
 			background-color: transparent;
 			border-bottom: 1px solid $dim-gray;
@@ -172,6 +179,13 @@ nav[role="navigation"] {
 			&:focus {
 				border-bottom-color: $night-rider;
 			}
+		}
+		@media screen and (min-width: 960px) {
+			border-bottom: none;
+			background-color: $dim-gray;
+			color: $white;
+			float: left;
+			width: 80%;
 		}
 	}
 	input[type="submit"] {
@@ -184,7 +198,11 @@ nav[role="navigation"] {
 		@media screen and (min-width: 768px) {
 			float: left;
 			max-width: 3rem;
-			pointer-events: none;
+			pointer-events: none; //disable clicking on the button
+		}
+		@media screen and (min-width: 960px) {
+			pointer-events: auto;
+			width: 20%;
 		}
 	}
 	legend {
