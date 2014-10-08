@@ -86,10 +86,16 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		clear: right;
 	}
+	li {
+		border-bottom: 1px solid darken($night-rider, 10%);
+		&:last-child {
+			border: none;
+		}
+	}
 	a {
 		color: $white;
 		display: block;
-		padding: 0.5em 1rem;
+		padding: 0.8em 1rem;
 		text-decoration: none;
 		width: 100%;
 		&:hover {
@@ -168,115 +174,144 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		background-color: $black;
 	}
-}
-
-ul.level-1 li {
-	float: left;
-	padding: 0 5px;
-	&:hover a.level-1 {
-		background: none repeat scroll 0 0 $white-smoke;
-		color: $black;
-	}
-}
-
-a.level-1:focus + .level-2 {
-	display: block;
-}
-
-ul.level-1 {
-	li:hover div.level-2 {
-		display: block;
+	li {
+		list-style: none;
+		border-top: 1px solid darken($night-rider, 10%);
 	}
 	a {
-		color: $white;
+		color: $mantis;
 		display: block;
 		font-size: 1.2em;
-		padding: 10px;
-		text-transform: uppercase;
+		width: 100%;
+		padding: 1em 1rem;
+		&:hover {
+			background-color: darken($night-rider, 10%);
+		}
 	}
 }
 
-div.level-2 {
-	background: none repeat scroll 0 0 $white-smoke;
-	box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+.level-1 > li {
+	&:first-child {
+		border: none;
+	}
+	@media screen and (min-width: 768px) {
+		&:hover > a {
+			background: none repeat scroll 0 0 $white-smoke;
+			color: $black;
+		}
+	}
+}
+
+.level-2 {
 	display: none;
-	margin: 0;
-	padding: 15px;
-	position: absolute;
-}
-
-.ie7 div.level-2 {
-	width: 452px;
-}
-
-div.level-2 {
-	.menu-wrapper {
-		background: none repeat scroll 0 0 $white;
-		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
-		overflow: hidden;
-	}
-	ul.level-2 {
-		float: left;
-		margin: 0;
-		padding: 0;
-		li {
-			float: none;
-			min-width: 130px;
-			padding: 7px 5px;
-		}
-		a {
-			line-height: 18px;
-			color: $night-rider;
-			font-size: 1em;
-			font-weight: 700;
-			padding: 0;
-		}
-		.level-3 a {
-			line-height: normal;
-		}
-	}
-	.custom {
-		float: right;
-		text-align: center;
-		img {
-			height: auto !important;
-			width: auto !important;
-		}
-	}
-}
-div.menu-horizontal {
-	ul.level-2 {
-		float: none;
-	}
-	li {
-		float: left !important;
-		height: 100%;
-		li {
-			border-color: $white-smoke;
-			border-style: solid;
-			border-width: 0 1px 0 0;
-			float: none !important;
-			height: 100%;
-		}
-		&.last li {
-			border-width: 0 !important;
-		}
-	}
-	.custom {
-		clear: both;
+	padding-left: 2em;
+	.level-1 > .active & {
+		display: block;
 	}
 }
 
-div.level-3 ul.level-3 {
-	margin: 0;
-	padding: 0;
-	li {
-		padding: 3px 5px;
-		width: auto;
-	}
-	a {
-		color: $pacific-blue;
-		font-weight: 400;
-		text-transform: none;
+.level-3 {
+	display: none;
+	padding-left: 2em;
+	.level-2 > .active & {
+		display: block;
 	}
 }
+
+// ul.level-1 {
+// 	li:hover div.level-2 {
+// 		display: block;
+// 	}
+// 	a {
+// 		color: $white;
+// 		display: block;
+// 		font-size: 1.2em;
+// 		padding: 10px;
+// 		text-transform: uppercase;
+// 	}
+// }
+
+// div.level-2 {
+// 	background: none repeat scroll 0 0 $white-smoke;
+// 	box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+// 	display: none;
+// 	margin: 0;
+// 	padding: 15px;
+// 	position: absolute;
+// }
+
+// .ie7 div.level-2 {
+// 	width: 452px;
+// }
+
+// div.level-2 {
+// 	.menu-wrapper {
+// 		background: none repeat scroll 0 0 $white;
+// 		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+// 		overflow: hidden;
+// 	}
+// 	ul.level-2 {
+// 		float: left;
+// 		margin: 0;
+// 		padding: 0;
+// 		li {
+// 			float: none;
+// 			min-width: 130px;
+// 			padding: 7px 5px;
+// 		}
+// 		a {
+// 			line-height: 18px;
+// 			color: $night-rider;
+// 			font-size: 1em;
+// 			font-weight: 700;
+// 			padding: 0;
+// 		}
+// 		.level-3 a {
+// 			line-height: normal;
+// 		}
+// 	}
+// 	.custom {
+// 		float: right;
+// 		text-align: center;
+// 		img {
+// 			height: auto !important;
+// 			width: auto !important;
+// 		}
+// 	}
+// }
+// div.menu-horizontal {
+// 	ul.level-2 {
+// 		float: none;
+// 	}
+// 	li {
+// 		float: left !important;
+// 		height: 100%;
+// 		li {
+// 			border-color: $white-smoke;
+// 			border-style: solid;
+// 			border-width: 0 1px 0 0;
+// 			float: none !important;
+// 			height: 100%;
+// 		}
+// 		&.last li {
+// 			border-width: 0 !important;
+// 		}
+// 	}
+// 	.custom {
+// 		clear: both;
+// 	}
+// }
+
+// div.level-3 ul.level-3 {
+// 	margin: 0;
+// 	padding: 0;
+// 	li {
+// 		padding: 3px 5px;
+// 		width: auto;
+// 	}
+// 	a {
+// 		color: $pacific-blue;
+// 		font-weight: 400;
+// 		text-transform: none;
+// 	}
+// }

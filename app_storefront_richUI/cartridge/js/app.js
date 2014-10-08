@@ -122,6 +122,16 @@ function initializeEvents() {
 	$('.menu-toggle').on('click', function () {
 		$('#wrapper').toggleClass('menu-active');
 	});
+	$('.menu-category li').on('click', function (e) {
+		e.stopPropagation();
+		var $this = $(e.delegateTarget);
+		$this.siblings('li').removeClass('active');
+		$this.addClass('active');
+		// if there are nested menu, don't navigate away
+		if ($this.has('ul').length) {
+			e.preventDefault();
+		}
+	});
 }
 /**
  * @private

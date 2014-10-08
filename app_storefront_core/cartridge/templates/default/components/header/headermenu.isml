@@ -29,7 +29,7 @@
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
 		<li>
-			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>" class="level-1">
+			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
 				<isprint value="${topCat.getDisplayName()}"/>
 			</a>
 			<iscategoryflyout category="${topCat}"/>
