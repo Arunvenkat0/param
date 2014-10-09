@@ -235,6 +235,10 @@ nav[role="navigation"] {
 		}
 		@media screen and (min-width: 768px) {
 			color: $white;
+			width: auto;
+			&:hover {
+				background-color: transparent;
+			}
 		}
 	}
 }
@@ -245,7 +249,7 @@ nav[role="navigation"] {
 	}
 	@media screen and (min-width: 768px) {
 		&:hover > a {
-			background: none repeat scroll 0 0 $white-smoke;
+			background-color: $white-smoke;
 			color: $black;
 		}
 	}
@@ -253,9 +257,60 @@ nav[role="navigation"] {
 
 .level-2 {
 	display: none;
-	padding-left: 2em;
+	> ul {
+		@extend .clearfix;
+		padding-left: 2em;
+	}
 	.level-1 > .active & {
 		display: block;
+	}
+	@media screen and (min-width: 768px) {
+		background-color: $white;
+		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+		color: $night-rider;
+		padding: 0.5em 0;
+		position: absolute;
+		z-index: 1;
+		.level-1 li:hover & {
+			display: block;
+		}
+		a {
+			color: $night-rider;
+			font-weight: bold;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		> ul {
+			float: left;
+			padding-left: 0;
+			> li {
+				float: none;
+				min-width: 12em;
+				> a {
+					padding: 0.5em 1rem;
+				}
+			}
+		}
+		.menu-vertical {
+			> li > a:first-child {
+				padding-top: 1em;
+			}
+		}
+		.menu-horizontal {
+			float: none;
+			> li {
+				border-right: 1px solid $gainsboro;
+				float: left;
+				&:last-child {
+					border-right: none;
+				}
+			}
+
+		}
+		.banner {
+			float: left;
+		}
 	}
 	.banner {
 		display: none;
@@ -268,105 +323,21 @@ nav[role="navigation"] {
 .level-3 {
 	display: none;
 	padding-left: 2em;
-	.level-2 > .active & {
+	.level-2 .active & {
 		display: block;
 	}
+	@media screen and (min-width: 768px) {
+		display: block;
+		a {
+			color: $pacific-blue;
+			font-weight: normal;
+			font-size: 1em;
+			padding: 0;
+			text-transform: none;
+		}
+		li {
+			float: none;
+			padding: 0.4em;
+		}
+	}
 }
-
-// ul.level-1 {
-// 	li:hover div.level-2 {
-// 		display: block;
-// 	}
-// 	a {
-// 		color: $white;
-// 		display: block;
-// 		font-size: 1.2em;
-// 		padding: 10px;
-// 		text-transform: uppercase;
-// 	}
-// }
-
-// div.level-2 {
-// 	background: none repeat scroll 0 0 $white-smoke;
-// 	box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
-// 	display: none;
-// 	margin: 0;
-// 	padding: 15px;
-// 	position: absolute;
-// }
-
-// .ie7 div.level-2 {
-// 	width: 452px;
-// }
-
-// div.level-2 {
-// 	.menu-wrapper {
-// 		background: none repeat scroll 0 0 $white;
-// 		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
-// 		overflow: hidden;
-// 	}
-// 	ul.level-2 {
-// 		float: left;
-// 		margin: 0;
-// 		padding: 0;
-// 		li {
-// 			float: none;
-// 			min-width: 130px;
-// 			padding: 7px 5px;
-// 		}
-// 		a {
-// 			line-height: 18px;
-// 			color: $night-rider;
-// 			font-size: 1em;
-// 			font-weight: 700;
-// 			padding: 0;
-// 		}
-// 		.level-3 a {
-// 			line-height: normal;
-// 		}
-// 	}
-// 	.custom {
-// 		float: right;
-// 		text-align: center;
-// 		img {
-// 			height: auto !important;
-// 			width: auto !important;
-// 		}
-// 	}
-// }
-// div.menu-horizontal {
-// 	ul.level-2 {
-// 		float: none;
-// 	}
-// 	li {
-// 		float: left !important;
-// 		height: 100%;
-// 		li {
-// 			border-color: $white-smoke;
-// 			border-style: solid;
-// 			border-width: 0 1px 0 0;
-// 			float: none !important;
-// 			height: 100%;
-// 		}
-// 		&.last li {
-// 			border-width: 0 !important;
-// 		}
-// 	}
-// 	.custom {
-// 		clear: both;
-// 	}
-// }
-
-// div.level-3 ul.level-3 {
-// 	margin: 0;
-// 	padding: 0;
-// 	li {
-// 		padding: 3px 5px;
-// 		width: auto;
-// 	}
-// 	a {
-// 		color: $pacific-blue;
-// 		font-weight: 400;
-// 		text-transform: none;
-// 	}
-// }

@@ -349,7 +349,7 @@ td {
   padding: 1em;
   vertical-align: top; }
 
-.clearfix:after, .top-banner:after, .main-header:after, nav[role="navigation"]:after, .nav-section:after, .category-switch:after {
+.clearfix:after, .top-banner:after, .main-header:after, nav[role="navigation"]:after, .nav-section:after, .level-2 > ul:after, .category-switch:after {
   clear: both;
   content: " ";
   display: block;
@@ -1129,20 +1129,20 @@ nav[role="navigation"] {
     width: 75%; }
     @media screen and (min-width: 768px) {
       .header-search input[type="text"] {
-	background-color: transparent;
+        background-color: transparent;
         border-bottom: 1px solid #666;
         color: #333;
         float: right;
-	width: 14rem; }
-	.header-search input[type="text"]:focus {
-	  border-bottom-color: #333; } }
+        width: 14rem; }
+        .header-search input[type="text"]:focus {
+          border-bottom-color: #333; } }
     @media screen and (min-width: 960px) {
       .header-search input[type="text"] {
-	border-bottom: none;
-	background-color: #666;
-	color: #fff;
-	float: left;
-	width: 80%; } }
+        border-bottom: none;
+        background-color: #666;
+        color: #fff;
+        float: left;
+        width: 80%; } }
   .header-search input[type="submit"] {
     background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
     border: 0 none;
@@ -1152,13 +1152,13 @@ nav[role="navigation"] {
     width: 25%; }
     @media screen and (min-width: 768px) {
       .header-search input[type="submit"] {
-	float: left;
-	max-width: 3rem;
-	pointer-events: none; } }
+        float: left;
+        max-width: 3rem;
+        pointer-events: none; } }
     @media screen and (min-width: 960px) {
       .header-search input[type="submit"] {
-	pointer-events: auto;
-	width: 20%; } }
+        pointer-events: auto;
+        width: 20%; } }
   .header-search legend {
     background: none repeat scroll 0 0 transparent; }
 
@@ -1185,21 +1185,59 @@ nav[role="navigation"] {
       background-color: #1a1a1a; }
     @media screen and (min-width: 768px) {
       .menu-category a {
-        color: #fff; } }
+        color: #fff;
+        width: auto; }
+        .menu-category a:hover {
+          background-color: transparent; } }
 
 .level-1 > li:first-child {
   border: none; }
 @media screen and (min-width: 768px) {
   .level-1 > li:hover > a {
-    background: none repeat scroll 0 0 #efefef;
+    background-color: #efefef;
     color: #000; }
  }
 
 .level-2 {
-  display: none;
-  padding-left: 2em; }
+  display: none; }
+  .level-2 > ul {
+    padding-left: 2em; }
   .level-1 > .active .level-2 {
     display: block; }
+  @media screen and (min-width: 768px) {
+    .level-2 {
+      background-color: #fff;
+      box-shadow: 6px 8px 5px -6px rgba(66, 66, 66, 0.5);
+      color: #333;
+      padding: 0.5em 0;
+      position: absolute;
+      z-index: 1; }
+      .level-1 li:hover .level-2 {
+        display: block; }
+      .level-2 a {
+        color: #333;
+        font-weight: bold; }
+        .level-2 a:hover {
+          text-decoration: underline; }
+      .level-2 > ul {
+        float: left;
+        padding-left: 0; }
+        .level-2 > ul > li {
+          float: none;
+          min-width: 12em; }
+          .level-2 > ul > li > a {
+            padding: 0.5em 1rem; }
+      .level-2 .menu-vertical > li > a:first-child {
+        padding-top: 1em; }
+      .level-2 .menu-horizontal {
+        float: none; }
+        .level-2 .menu-horizontal > li {
+          border-right: 1px solid #e0e0e0;
+          float: left; }
+          .level-2 .menu-horizontal > li:last-child {
+            border-right: none; }
+      .level-2 .banner {
+        float: left; } }
   .level-2 .banner {
     display: none; }
     @media screen and (min-width: 768px) {
@@ -1209,8 +1247,20 @@ nav[role="navigation"] {
 .level-3 {
   display: none;
   padding-left: 2em; }
-  .level-2 > .active .level-3 {
+  .level-2 .active .level-3 {
     display: block; }
+  @media screen and (min-width: 768px) {
+    .level-3 {
+      display: block; }
+      .level-3 a {
+        color: #00a4e4;
+        font-weight: normal;
+        font-size: 1em;
+        padding: 0;
+        text-transform: none; }
+      .level-3 li {
+        float: none;
+        padding: 0.4em; } }
 
 #mini-cart {
   margin: 0.2em 0.8rem 0;

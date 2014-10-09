@@ -126,7 +126,7 @@ function initializeEvents() {
 		e.stopPropagation();
 		var $this = $(e.delegateTarget);
 		$this.siblings('li').removeClass('active');
-		$this.addClass('active');
+		$this.toggleClass('active');
 		// if there are nested menu, don't navigate away
 		if ($this.has('ul').length) {
 			e.preventDefault();
