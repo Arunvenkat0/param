@@ -1253,10 +1253,10 @@ nav[role="navigation"] {
     .level-3 {
       display: block; }
       .level-3 a {
-        color: #00a4e4;
-        font-weight: normal;
-        font-size: 1em;
-        padding: 0;
+	color: #88c14b;
+	font-weight: normal;
+	font-size: 1em;
+	padding: 0;
         text-transform: none; }
       .level-3 li {
         float: none;
