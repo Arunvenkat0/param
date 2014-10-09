@@ -19,7 +19,6 @@
 	}
 }
 
-// navigation
 .menu-toggle {
 	border: none;
 	display: block;
@@ -151,11 +150,13 @@ nav[role="navigation"] {
 .header-search {
 	width: 100%;
 	@media screen and (min-width: 768px) {
-		position: absolute;
-		top: 52px;
+		float: left;
+		margin: 52px 0 0.5em;
 		width: 17rem;
 	}
 	@media screen and (min-width: 960px) {
+		margin: 0;
+		position: absolute;
 		top: auto;
 		bottom: 7px;
 		right: 5px;
