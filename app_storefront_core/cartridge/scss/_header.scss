@@ -79,12 +79,17 @@ nav[role="navigation"] {
 .menu-utility {
 	@media screen and (min-width: 768px) {
 		clear: right;
+		margin-top: 1em;
 	}
 }
 
 .menu-utility-user {
 	.currency-converter {
 		padding: 0.8em 1rem;
+		@media screen and (min-width: 768px) {
+			padding: 0 1rem;
+			margin-top: 0;
+		}
 		select {
 			display: inline;
 			margin: 0;
@@ -94,10 +99,7 @@ nav[role="navigation"] {
 	}
 	li {
 		@media screen and (min-width: 768px) {
-			padding-top: 0.3em;
-			&:first-child {
-				padding-top: 0;
-			}
+			margin-top: 0.3em;
 		}
 	}
 }
