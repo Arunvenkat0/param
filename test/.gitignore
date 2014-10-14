@@ -1,1 +1,5 @@
 browser/config.json
+xlt/*
+!xlt/run.js
+!xlt/webdriver.js
+!xlt/data.sample.json
