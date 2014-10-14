@@ -11,7 +11,6 @@ describe('navigation menu', function () {
 	});
 	it('check navigation menu', function () {
 		return getAttribute('#navigation .menu-category .level-1', 'innerHTML').then(function (array) {
-			console.log(array);
 			assert.deepEqual(array, [
 				'New Arrivals',
 				'Womens',
@@ -21,18 +20,6 @@ describe('navigation menu', function () {
 				'Top Seller'
 			]);
 		});
-
-		// , function (err, res) {
-		// 	assert.deepEqual(res, [
-		// 		'New Arrivals',
-		// 		'Womens',
-		// 		'Mens',
-		// 		'Electronics',
-		// 		'Gift Certificates',
-		// 		'Top Seller'
-		// 	]);
-		// 	done();
-		// });
 	});
 	after(function (done) {
 		client.end();

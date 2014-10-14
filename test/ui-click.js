@@ -10,15 +10,12 @@ describe('click tests', function () {
 	before(function (done) {
 		client.init().url(config.url, done);
 	});
-	it('wait for login', function () {
-		return waitForExist('.user-login').then(function (res) {
-			assert.ok(true);
-		});
-
-	});
-	it('click login', function () {
-		return click('.user-login').then(function (res) {
-			assert.ok(true);
+	require('./sub')();
+	describe('sub test 2', function () {
+		it('click login', function () {
+			return click('.user-login').then(function (res) {
+				assert.ok(true);
+			});
 		});
 	});
 	after(function (done) {
