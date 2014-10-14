@@ -17,6 +17,7 @@ var methods = [
 	'deleteCookie',
 	'doubleClick',
 	'pause',
+	'url',
 	'waitForChecked',
 	'waitForExist',
 	'waitForText'
