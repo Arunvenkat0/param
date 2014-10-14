@@ -10,7 +10,7 @@ var b = browserify(__dirname + '/TESTS/SiteGenesis/PUBLIC/smoketest/cart');
 var aliasify = require('aliasify').configure({
 	aliases: {
 		'webdriver': './webdriver.js',
-		'globalData': './globalData.json'
+		'globalData': './data.json'
 	},
 	configDir: __dirname
 });
