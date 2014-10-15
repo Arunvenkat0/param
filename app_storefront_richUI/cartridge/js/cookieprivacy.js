@@ -12,29 +12,25 @@ module.exports = function () {
 	 */
 	 var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
 	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
-		if (!isPrivacyPolicyPage) {
+		// check for privacy policy page
+		if ($('.privacy-policy').length === 0) {
 			dialog.open({
 				url: Urls.cookieHint,
 				options: {
-					buttons: {
-						//NOTE: The Close Button handler does the same thing as the 'I Accept" handler - it sets the cookies
-						// and clears the cookie notification.  In a strict situation where you MUST actively accept the cookies
-						// before proceeding, we recommend removing this button from the content asset as well as this handler.
-						'I Agree': buttonHandler,
-						'Close': buttonHandler
-					}
+					closeOnEscape: false,
+					dialogClass: 'no-close',
+					buttons: [{
+						text: Resources.I_AGREE,
+						click: function () {
+							$(this).dialog('close');
+							enable_cookies();
+						}
+					}]
 				}
 			});
 		}
 	} else {
 		// Otherwise, we don't need to show the asset, just enable the cookies
-		enable_cookies();
-	}
-
-	// Close Button handler
-
-	function buttonHandler() {
-		$(this).dialog('close');
 		enable_cookies();
 	}
 

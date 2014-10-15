@@ -467,6 +467,9 @@ header {
     position: relative;
     text-transform: none; }
 
+.no-close .ui-dialog-titlebar-close {
+  display: none; }
+
 .ui-accordion .ui-accordion-content {
   padding: 0; }
 
@@ -492,7 +495,7 @@ header {
     .ui-tabs .ui-tabs-nav li.ui-state-active {
       background: none repeat scroll 0 0 #fff; }
       .ui-tabs .ui-tabs-nav li.ui-state-active a {
-	color: #666; }
+        color: #666; }
     .ui-tabs .ui-tabs-nav li a {
       color: #999; }
 .ui-tabs .ui-tabs-panel {
@@ -1646,9 +1649,9 @@ a.breadcrumb-relax {
       overflow: hidden;
       padding: 0; }
       .product-tile .product-swatches ul.swatch-toggle {
-	background: none repeat scroll 0 0 #fff;
-	display: none;
-	position: absolute; }
+        background: none repeat scroll 0 0 #fff;
+        display: none;
+        position: absolute; }
     .product-tile .product-swatches:hover ul.swatch-toggle {
       display: block; }
     .product-tile .product-swatches li {
@@ -1657,10 +1660,10 @@ a.breadcrumb-relax {
       display: block;
       width: 16px; }
       .product-tile .product-swatches .swatch img {
-	border: 1px solid #fff;
-	height: 12px;
-	padding: 1px;
-	width: 12px; }
+        border: 1px solid #fff;
+        height: 12px;
+        padding: 1px;
+        width: 12px; }
     .product-tile .product-swatches .selected img, .product-tile .product-swatches img:hover {
       border-color: #00a4e4; }
   .product-tile .product-promo {
