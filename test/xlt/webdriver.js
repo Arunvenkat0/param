@@ -16,8 +16,10 @@ var methods = [
 	'click',
 	'deleteCookie',
 	'doubleClick',
+	'getText',
 	'pause',
 	'url',
+	'sessionStorage',
 	'waitForChecked',
 	'waitForExist',
 	'waitForText'
@@ -26,3 +28,27 @@ var methods = [
 methods.each(function (method) {
 	exports[method] = Promise.denodeify(webdriver[method]).bind(webdriver);
 });
+
+exports.store = function (target, value) {
+	return exports.sessionStorage('POST', {
+		key: value,
+		value: target
+	});
+};
+
+exports.storeEval = function (target, value) {
+	var v = eval(target);
+	return exports.sessionStorage('POST', {
+		key: value,
+		value: v
+	});
+};
+
+exports.storeText = function (target, value) {
+	return exports.getText(target).then(function (text) {
+		return exports.sessionStorage('POST', {
+			key: value,
+			value: text
+		});
+	});
+};
