@@ -2,14 +2,13 @@
 
 var webdriverio = require('webdriverio');
 var Promise = require('promise');
+var data = require('globalData');
 
-var webdriver = webdriverio.remove({
+var webdriver = webdriverio.remote({
 	desiredCapabilities: {
 		browserName: data.browser || 'phantomjs'
 	}
 });
-
-module.exports = webdriver;
 
 // promise-ify
 var methods = [
@@ -17,56 +16,61 @@ var methods = [
 	'deleteCookie',
 	'doubleClick',
 	'elements',
+	'end',
 	'getText',
+	'init',
 	'isSelected',
-	'pause',
+	'moveToObject',
+	'setValue',
 	'url',
-	'sessionStorage',
+	'localStorage',
 	'waitForChecked',
 	'waitForExist',
 	'waitForText'
 ];
 
-methods.each(function (method) {
-	exports[method] = Promise.denodeify(webdriver[method]).bind(webdriver);
+methods.forEach(function (method) {
+	webdriver[method] = Promise.denodeify(webdriver[method]).bind(webdriver);
 });
 
-exports.store = function (target, value) {
-	return exports.sessionStorage('POST', {
+webdriver.store = function (target, value) {
+	return webdriver.localStorage('POST', {
 		key: value,
 		value: target
 	});
 };
 
-exports.storeEval = function (target, value) {
+webdriver.storeEval = function (target, value) {
 	var v = eval(target);
-	return exports.sessionStorage('POST', {
+	return webdriver.localStorage('POST', {
 		key: value,
 		value: v
 	});
 };
 
-exports.storeText = function (target, value) {
-	return exports.getText(target).then(function (text) {
-		return exports.sessionStorage('POST', {
+webdriver.storeText = function (target, value) {
+	return webdriver.getText(target).then(function (text) {
+		return webdriver.localStorage('POST', {
 			key: value,
 			value: text
 		});
 	});
 };
 
-exports.check = function (target, reverse) {
-	return exports.isSelected(target).then(function (selected) {
+webdriver.check = function (target, reverse) {
+	return webdriver.isSelected(target).then(function (selected) {
 		if ((reverse ? !selected : selected)) {
 			return Promise.resolve();
 		} else {
-			return exports.click(target);
+			return webdriver.click(target);
 		}
 	});
 };
 
-exports.storeXpathCount = function (target, value) {
-	return exports.elements(target).then(function (res) {
-		return exports.store(res.value.length, value);
+webdriver.storeXpathCount = function (target, value) {
+	return webdriver.elements(target).then(function (res) {
+		return webdriver.store(res.value.length, value);
 	});
 };
+
+module.exports = webdriver;
