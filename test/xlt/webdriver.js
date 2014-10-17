@@ -17,6 +17,7 @@ var methods = [
 	'deleteCookie',
 	'doubleClick',
 	'getText',
+	'isSelected',
 	'pause',
 	'url',
 	'sessionStorage',
@@ -52,3 +53,13 @@ exports.storeText = function (target, value) {
 		});
 	});
 };
+
+exports.check = function (target, reverse) {
+	return exports.isSelected(target).then(function (selected) {
+		if ((reverse ? !selected : selected)) {
+			return Promise.resolve();
+		} else {
+			return exports.click(target);
+		}
+	});
+}
