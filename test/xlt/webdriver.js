@@ -16,6 +16,7 @@ var methods = [
 	'click',
 	'deleteCookie',
 	'doubleClick',
+	'elements',
 	'getText',
 	'isSelected',
 	'pause',
@@ -62,4 +63,10 @@ exports.check = function (target, reverse) {
 			return exports.click(target);
 		}
 	});
-}
+};
+
+exports.storeXpathCount = function (target, value) {
+	return exports.elements(target).then(function (res) {
+		return exports.store(res.value.length, value);
+	});
+};
