@@ -57,7 +57,7 @@ function initializeEvents() {
 		$tile.find('name-link').attr('href', $(this).attr('href'));
 
 		var data = $(this).children('img').filter(':first').data('thumb');
-		var $thumb = tile.find('.product-image .thumb-link img').filter(':first');
+		var $thumb = $tile.find('.product-image .thumb-link img').filter(':first');
 		var currentAttrs = {
 			src : data.src,
 			alt : data.alt,

@@ -1,4 +1,110 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var progress= require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if(!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType : "json",
+		url : options.url,
+		async : (typeof options.async==="undefined" || options.async===null) ? true : options.async,
+		data : options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if(options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if(textStatus === "parsererror") {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if(options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if(currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if(!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType : "html",
+		url : util.appendParamToURL(options.url, "format", "ajax"),
+		data : options.data
+	})
+	.done(function (response) {
+		// success
+		if(options.target) {
+			$(options.target).empty().html(response);
+		}
+		if(options.callback) {
+			options.callback(response);
+		}
+
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if(textStatus === "parsererror") {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if(currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+}
+
+exports.getJson = getJson;
+exports.load = load;
+},{"./progress":31,"./util":39}],2:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -187,113 +293,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":4,"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":23,"./pages/registry":24,"./pages/search":25,"./pages/storefront":26,"./pages/storelocator":27,"./pages/wishlist":28,"./searchplaceholder":33,"./searchsuggest":35,"./searchsuggest-beta":34,"./tooltip":38,"./util":39,"./validator":40}],2:[function(require,module,exports){
-'use strict';
-
-var progress= require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType : "json",
-		url : options.url,
-		async : (typeof options.async==="undefined" || options.async===null) ? true : options.async,
-		data : options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if(options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if(textStatus === "parsererror") {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if(options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if(currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType : "html",
-		url : util.appendParamToURL(options.url, "format", "ajax"),
-		data : options.data
-	})
-	.done(function (response) {
-		// success
-		if(options.target) {
-			$(options.target).empty().html(response);
-		}
-		if(options.callback) {
-			options.callback(response);
-		}
-
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if(textStatus === "parsererror") {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if(currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-}
-
-exports.getJson = getJson;
-exports.load = load;
-},{"./progress":31,"./util":39}],3:[function(require,module,exports){
+},{"./components":4,"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":23,"./pages/registry":24,"./pages/search":25,"./pages/storefront":26,"./pages/storelocator":27,"./pages/wishlist":28,"./searchplaceholder":33,"./searchsuggest":35,"./searchsuggest-beta":34,"./tooltip":38,"./util":39,"./validator":40}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -578,7 +578,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":6,"./page":12,"./util":39}],4:[function(require,module,exports){
+},{"./ajax":1,"./dialog":6,"./page":12,"./util":39}],4:[function(require,module,exports){
 'use strict';
 
 /**
@@ -781,7 +781,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":39}],7:[function(require,module,exports){
+},{"./ajax":1,"./util":39}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -802,7 +802,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":39}],8:[function(require,module,exports){
+},{"./ajax":1,"./util":39}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -856,7 +856,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":10,"./util":39}],9:[function(require,module,exports){
+},{"./ajax":1,"./minicart":10,"./util":39}],9:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -995,7 +995,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":12,"./util":39}],12:[function(require,module,exports){
+},{"./ajax":1,"./page":12,"./util":39}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1538,7 +1538,7 @@ exports.init = function () {
 	});
 }
 
-},{"../../ajax":2,"../../giftcard":7,"../../util":39,"./formPrepare":17}],17:[function(require,module,exports){
+},{"../../ajax":1,"../../giftcard":7,"../../util":39,"./formPrepare":17}],17:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1921,7 +1921,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":31,"../../tooltip":38,"../../util":39,"./formPrepare":17}],21:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":31,"../../tooltip":38,"../../util":39,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -1965,7 +1965,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
-},{"../ajax":2,"../page":12,"../product-tile":30,"../quickview":32,"./product":23}],22:[function(require,module,exports){
+},{"../ajax":1,"../page":12,"../product-tile":30,"../quickview":32,"./product":23}],22:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2557,7 +2557,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":4,"../../dialog":6,"../../minicart":10,"../../progress":31,"../../quickview":32,"../../send-to-friend":36,"../../storeinventory":37,"../../tooltip":38,"../../util":39,"../cart":14,"./events/quantity":22}],24:[function(require,module,exports){
+},{"../../ajax":1,"../../components":4,"../../dialog":6,"../../minicart":10,"../../progress":31,"../../quickview":32,"../../send-to-friend":36,"../../storeinventory":37,"../../tooltip":38,"../../util":39,"../cart":14,"./events/quantity":22}],24:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2651,7 +2651,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":32,"../send-to-friend":36,"../util":39,"./product":23}],25:[function(require,module,exports){
+},{"../ajax":1,"../quickview":32,"../send-to-friend":36,"../util":39,"./product":23}],25:[function(require,module,exports){
 'use strict';
 
 var productCompare = require('../product-compare'),
@@ -3195,7 +3195,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":12,"./util":39,"promise":44}],30:[function(require,module,exports){
+},{"./ajax":1,"./page":12,"./util":39,"promise":44}],30:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3255,7 +3255,7 @@ function initializeEvents() {
 		$tile.find('name-link').attr('href', $(this).attr('href'));
 
 		var data = $(this).children('img').filter(':first').data('thumb');
-		var $thumb = tile.find('.product-image .thumb-link img').filter(':first');
+		var $thumb = $tile.find('.product-image .thumb-link img').filter(':first');
 		var currentAttrs = {
 			src : data.src,
 			alt : data.alt,
@@ -3485,7 +3485,7 @@ var quickview = {
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":6,"./progress":31,"./util":39}],33:[function(require,module,exports){
+},{"./ajax":1,"./dialog":6,"./progress":31,"./util":39}],33:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3931,7 +3931,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":6,"./util":39,"./validator":40}],37:[function(require,module,exports){
+},{"./ajax":1,"./dialog":6,"./util":39,"./validator":40}],37:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4295,7 +4295,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":2,"./page":12,"./util":39}],38:[function(require,module,exports){
+},{"./ajax":1,"./page":12,"./util":39}],38:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12007,4 +12007,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":41}]},{},[1]);
+},{"_process":41}]},{},[2]);
