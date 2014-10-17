@@ -811,6 +811,10 @@ div.error {
   display: block;
   margin-left: 24%; }
 
+.label-inline label {
+  padding: 0;
+  padding-left: 0.25em; }
+
 table.item-list {
   margin-bottom: 1em; }
   table.item-list tr {
