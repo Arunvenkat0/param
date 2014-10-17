@@ -2284,7 +2284,7 @@ body .review-image {
   .pdp-main .recommendations .product-name {
     font-size: 1em;
     margin: 0.2em 0;
-    width: auto; }
+    width: 100%; }
   .pdp-main .recommendations .product-price {
     font-size: 1em; }
   .pdp-main .recommendations .jcarousel-clip {
