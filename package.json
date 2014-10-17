@@ -30,6 +30,7 @@
     "gulp-util": "^3.0.0",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^1.0.0",
+    "minimist": "^1.1.0",
     "mocha": "^1.21.4",
     "phantomjs": "^1.9.9",
     "remapify": "^1.2.0",

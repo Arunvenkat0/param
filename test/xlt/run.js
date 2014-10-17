@@ -5,7 +5,9 @@
 var browserify = require('browserify');
 var remapify = require('remapify');
 var fs = require('fs');
-var b = browserify(__dirname + '/TESTS/SiteGenesis/PUBLIC/smoketest/cart');
+var path = require('path');
+var argv = require('minimist')(process.argv.slice(2));
+var b, suite;
 
 var aliasify = require('aliasify').configure({
 	aliases: {
@@ -15,6 +17,15 @@ var aliasify = require('aliasify').configure({
 	configDir: __dirname
 });
 
+if (argv.suite) {
+	suite = argv.suite;
+}
+
+var testDir = __dirname + '/TESTS/SiteGenesis/PUBLIC/smoketest/' + suite;
+
+b = browserify(testDir, {
+	debug: true
+});
 b.plugin(remapify, [
 	{
 		src: '**/*.js',
@@ -27,5 +38,7 @@ b.plugin(remapify, [
 	}
 ]);
 
+b.external('webdriverio');
+
 b.transform(aliasify);
-b.bundle();
+b.bundle().pipe(fs.createWriteStream(__dirname + '/out.js'));
