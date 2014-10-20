@@ -20,7 +20,9 @@ var methods = [
 	'getText',
 	'init',
 	'isSelected',
+	'isExisting',
 	'moveToObject',
+	'pause',
 	'setValue',
 	'url',
 	'localStorage',
@@ -30,46 +32,47 @@ var methods = [
 ];
 
 methods.forEach(function (method) {
-	webdriver[method] = Promise.denodeify(webdriver[method]).bind(webdriver);
+	webdriver[method + 'P'] = Promise.denodeify(webdriver[method]).bind(webdriver);
 });
 
-webdriver.store = function (target, value) {
-	return webdriver.localStorage('POST', {
+webdriver.storeP = function (target, value) {
+	return webdriver.localStorageP('POST', {
 		key: value,
 		value: target
 	});
 };
 
-webdriver.storeEval = function (target, value) {
-	var v = eval(target);
-	return webdriver.localStorage('POST', {
+webdriver.storeEvalP = function (target, value) {
+	// var v = eval(target);
+	var v = target; // should have been evaluated by now
+	return webdriver.localStorageP('POST', {
 		key: value,
 		value: v
 	});
 };
 
-webdriver.storeText = function (target, value) {
-	return webdriver.getText(target).then(function (text) {
-		return webdriver.localStorage('POST', {
+webdriver.storeTextP = function (target, value) {
+	return webdriver.getTextP(target).then(function (text) {
+		return webdriver.localStorageP('POST', {
 			key: value,
 			value: text
 		});
 	});
 };
 
-webdriver.check = function (target, reverse) {
-	return webdriver.isSelected(target).then(function (selected) {
+webdriver.checkP = function (target, reverse) {
+	return webdriver.isSelectedP(target).then(function (selected) {
 		if ((reverse ? !selected : selected)) {
 			return Promise.resolve();
 		} else {
-			return webdriver.click(target);
+			return webdriver.clickP(target);
 		}
 	});
 };
 
-webdriver.storeXpathCount = function (target, value) {
-	return webdriver.elements(target).then(function (res) {
-		return webdriver.store(res.value.length, value);
+webdriver.storeXpathCountP = function (target, value) {
+	return webdriver.elementsP(target).then(function (res) {
+		return webdriver.storeP(res.value.length, value);
 	});
 };
 
