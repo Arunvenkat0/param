@@ -25,9 +25,13 @@
 			if (colorVarAttr != null) {
 				selectableColors = PVM.getFilteredValues(colorVarAttr);
 			}
-			if (PVM.master && PVM.defaultVariant) {
-				imageSource = PVM.defaultVariant;
-				selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+			if (Product.isMaster() && PVM.defaultVariant) {
+				if (colorVarAttr !== null) {
+					imageSource = PVM.defaultVariant;
+					selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+				} else {
+					imageSource = PVM.master;
+				}
 			} else if (Product.isVariant()) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (!imageSource) {
@@ -115,7 +119,7 @@
 <iscomment>
 	Check whether the product has price in the sale pricebook. If so, then
 	display two prices: crossed-out standard price and sales price.
-	
+
 	TODO: should find a better way to include logic.
 </iscomment>
 <isinclude template="product/components/standardprice"/>
