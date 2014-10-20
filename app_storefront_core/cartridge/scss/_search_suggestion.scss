@@ -17,12 +17,12 @@
 				background-color: $very-light-gray;
 				color: $night-rider;
 			}
-			div.suggestionterm {
+			.suggestionterm {
 				float: left;
 				overflow: hidden;
 				width: 110px;
 			}
-			span.hits {
+			.hits {
 				float: right;
 				line-height: 1.8em;
 				text-align: right;
@@ -42,7 +42,7 @@
 		top: 10px;
 		width: 13px;
 	}
-	div.collapsed {
+	.collapsed {
 		.mini-cart-toggler {
 			background: url(../images/minicart_collapsed.png) repeat scroll 0 0 transparent;
 		}

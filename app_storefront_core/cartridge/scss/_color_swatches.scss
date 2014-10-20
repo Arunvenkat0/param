@@ -1,7 +1,7 @@
 @each $type in $swatch-types {
-     .swatch-#{nth($type, 1)} a{
-	background-color: nth($type, 2) !important;
-    }
+	.swatch-#{nth($type, 1)} a{
+		background-color: nth($type, 2) !important;
+	}
 }
 
 .swatch-miscellaneous a {

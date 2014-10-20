@@ -1,4 +1,5 @@
-.pt_product-search-result .primary-content, .pt_content-search-result .primary-content {
+.pt_product-search-result .primary-content,
+.pt_content-search-result .primary-content {
 	background: none repeat scroll 0 0 $white-smoke;
 }
 
@@ -10,7 +11,8 @@
 	max-width: 100%;
 }
 
-.no-hits-search-term, .no-hits-search-term-suggest {
+.no-hits-search-term,
+.no-hits-search-term-suggest {
 	color: $sangria;
 	font-style: italic;
 }
@@ -35,7 +37,8 @@
 	width: 100%;
 }
 
-.sort-by, .items-per-page {
+.sort-by,
+.items-per-page {
 	background: none repeat scroll 0 0 $gainsboro;
 	border-bottom: 1px solid $very-light-gray;
 	float: left;
@@ -43,26 +46,27 @@
 	padding: 3px 5px;
 }
 
-.sort-by label, .items-per-page label {
-	display: none;
-}
-
-.sort-by select, .items-per-page select {
-	background: none repeat scroll 0 0 $gainsboro;
-	border: 0 none;
-	font-size: 0.9em;
-	margin: 0 6px 0 0;
-	padding: 0;
-	width: auto;
-}
-
-.sort-by button, .items-per-page button {
-	background: none repeat scroll 0 0 $very-light-gray;
-	border: 0 none;
-	color: $night-rider;
-	font-size: 0.9em;
-	padding: 0.3em;
-	width: auto;
+.sort-by,
+.items-per-page {
+	label {
+		display: none;
+	}
+	select {
+		background: none repeat scroll 0 0 $gainsboro;
+		border: 0 none;
+		font-size: 0.9em;
+		margin: 0 6px 0 0;
+		padding: 0;
+		width: auto;
+	}
+	button {
+		background: none repeat scroll 0 0 $very-light-gray;
+		border: 0 none;
+		color: $night-rider;
+		font-size: 0.9em;
+		padding: 0.3em;
+		width: auto;
+	}
 }
 
 .pagination {
@@ -92,7 +96,7 @@
 	}
 }
 
-ul.search-result-items {
+.search-result-items {
 	margin: 0;
 	padding: 0;
 	li {
@@ -126,12 +130,12 @@ ul.search-result-items {
 	padding: 20px;
 }
 
-h1#results-content {
+#results-content {
 	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
 	padding-top: 30px;
 }
 
-ul.folder-content-list {
+.folder-content-list {
 	margin: 0;
 	overflow: hidden;
 	padding: 0 20px;
@@ -163,7 +167,7 @@ ul.folder-content-list {
 }
 
 .wide-tiles {
-	ul.search-result-items .grid-tile {
+	.search-result-items .grid-tile {
 		width: 91%;
 	}
 	.product-tile {
@@ -172,7 +176,11 @@ ul.folder-content-list {
 			float: left;
 			width: 40%;
 		}
-		.product-name, .product-pricing, .product-promo, .pr_stars, .product-swatches {
+		.product-name,
+		.product-pricing,
+		.product-promo,
+		.pr_stars,
+		.product-swatches {
 			float: left;
 			text-align: left;
 			width: 55%;

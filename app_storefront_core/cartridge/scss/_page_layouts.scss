@@ -19,6 +19,20 @@ header {
 	padding: 0 0 20px;
 	position: relative;
 	width: 787px;
+	.primary-focus & {
+		border: 0 none;
+		float: left;
+		margin: 0;
+		width: 709px;
+	}
+	.full-width & {
+		border: 0 none;
+		width: 100%;
+	}
+	.page-content & {
+		padding-left: 3%;
+		width: 758px;
+	}
 }
 
 #secondary {
@@ -34,29 +48,10 @@ header {
 			margin-left: 15px;
 		}
 	}
-}
-
-.primary-focus {
-	.primary-content {
-		border: 0 none;
-		float: left;
-		margin: 0;
-		width: 709px;
-	}
-	#secondary {
+	.primary-focus & {
 		background: none repeat scroll 0 0 transparent;
 		border: 0 none;
 		float: right;
 		width: 210px;
 	}
-}
-
-.full-width .primary-content {
-	border: 0 none;
-	width: 100%;
-}
-
-.page-content .primary-content {
-	padding-left: 3%;
-	width: 758px;
 }

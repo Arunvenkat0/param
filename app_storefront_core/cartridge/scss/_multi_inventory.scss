@@ -34,7 +34,7 @@
 	cursor: pointer;
 }
 
-div.store-list {
+.store-list {
 	border-color: $very-light-gray;
 	border-style: dashed;
 	border-width: 1px 0;
@@ -42,13 +42,13 @@ div.store-list {
 	overflow: hidden;
 	padding: 0;
 	position: relative;
-	ul.store-list {
+	.store-list {
 		position: absolute;
 		width: 1920px;
 	}
 }
 
-ul.store-list {
+.store-list {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
@@ -70,7 +70,8 @@ ul.store-list {
 	.store-tile-address {
 		display: block;
 	}
-	.store-tile-city, .store-tile-state {
+	.store-tile-city,
+	.store-tile-state {
 		margin: 0 5px 0 0;
 	}
 	.store-tile-postalCode {
@@ -83,7 +84,8 @@ ul.store-list {
 	}
 }
 
-.not-available .store-tile-status, .out-of-stock .store-tile-status {
+.not-available .store-tile-status,
+.out-of-stock .store-tile-status {
 	color: $sangria;
 }
 
@@ -108,19 +110,19 @@ ul.store-list {
 	ul {
 		&.expanded {
 			height: auto;
+			.extended-list {
+				display: block;
+			}
 		}
 		&.store-list {
 			margin: 20px 0 5px;
 			.extended-list {
 				display: none;
 			}
-		}
-		&.expanded .extended-list {
-			display: block;
-		}
-		&.store-list .selected {
-			background-color: $white;
-			font-weight: bold;
+			.selected {
+				background-color: $white;
+				font-weight: bold;
+			}
 		}
 	}
 	.store-tile {
@@ -164,7 +166,8 @@ ul.store-list {
 		left: 13px;
 	}
 	.store-tile {
-		.store-tile-map-this, .select-store-button {
+		.store-tile-map-this,
+		.select-store-button {
 			display: none;
 		}
 	}
@@ -198,7 +201,7 @@ ul.store-list {
 .multi-ship-shipments-table {
 	margin: 0 0 20px;
 	width: 706px;
-	th.section-header {
+	.section-header {
 		font-size: 10px;
 		font-weight: bold;
 		padding: 9px 6px 11px;
@@ -282,11 +285,12 @@ ul.store-list {
 	width: 95%;
 }
 
-.multi-shipping-addresses .shipping-qty, .multi-ship-shipments-table .shipping-qty {
+.multi-shipping-addresses .shipping-qty,
+.multi-ship-shipments-table .shipping-qty {
 	background: none repeat scroll 0 0 $white-smoke;
 }
 
-.multiship span.label {
+.multiship .label {
 	font-weight: bold;
 }
 
@@ -320,7 +324,9 @@ ul.store-list {
 	width: 100px;
 }
 
-.selected-store-address, .set-preferred-store, .selected-store-availability {
+.selected-store-address,
+.set-preferred-store,
+.selected-store-availability {
 	font-size: 0.8em;
 	font-weight: 400;
 	margin-left: 0px;
@@ -343,33 +349,33 @@ ul.store-list {
 	width: 100%;
 }
 
-.pt_checkout div {
-	&.instore-shipment-header {
+.pt_checkout {
+	.instore-shipment-header {
 		width: 100%;
 	}
-	&.instore-shipment-method {
+	.instore-shipment-method {
 		width: 100%;
 		padding: 1em;
 		span {
 			font-weight: bold;
 		}
 	}
-	&.instore-shipment-address {
+	.instore-shipment-address {
 		width: 40%;
 		float: left;
 		padding-left: 1em;
 	}
-	&.instore-shipment-message {
+	.instore-shipment-message {
 		clear: both;
 	}
-	&.instore-shipment-messagetxt {
+	.instore-shipment-messagetxt {
 		width: 50%;
 		float: right;
 	}
 }
 
-.ui-dialog #preferred-store-panel {
-	button#set-user-zip {
+#preferred-store-panel {
+	#set-user-zip {
 		margin-left: 3%;
 	}
 	#userZip {
@@ -383,11 +389,12 @@ ul.store-list {
 }
 
 #preferred-store-panel {
-	div.store-list {
+	.store-list {
 		margin-top: 1%;
 	}
 	button {
-		&.set-preferred-store, &.close {
+		&.set-preferred-store,
+		&.close {
 			margin-top: 2%;
 		}
 	}
