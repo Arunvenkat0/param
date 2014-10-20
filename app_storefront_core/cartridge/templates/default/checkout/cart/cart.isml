@@ -69,7 +69,7 @@
 				<iselseif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='TaxError'}">
 					${Resource.msg('cart.taxinvalid','checkout',null)} 
 				<iselse/>
-					Error: ${pdict.BasketStatus.code}
+					${pdict.BasketStatus.code}
 					${Resource.msg('cart.carterror','checkout',null)}
 				</isif>
 			</div>
