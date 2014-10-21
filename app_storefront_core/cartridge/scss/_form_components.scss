@@ -162,6 +162,7 @@ label {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="password"] {
 	border: 1px solid $dark-gray;
 	margin-left: 2%;
@@ -374,6 +375,6 @@ div.error {
 }
 
 .label-inline label {
-  padding: 0; 
+  padding: 0;
   padding-left: 0.25em;
 }
