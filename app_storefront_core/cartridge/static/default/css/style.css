@@ -3390,12 +3390,12 @@ h1 .account-logout {
   padding: 10px 0;
   padding: 0px\9;
   left: 0\9; }
-  .ie7 .js #quickviewbutton {
-    position: absolute;
-    left: 0;
-    width: 200px; }
-  .product-image:hover .js #quickviewbutton {
-    display: block; }
+.js .ie7 #quickviewbutton {
+  position: absolute;
+  left: 0;
+  width: 200px; }
+.js .product-image:hover #quickviewbutton {
+  display: block; }
 
 .js #suggestions {
   background-color: #666;

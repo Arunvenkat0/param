@@ -35,13 +35,13 @@
 		padding: 10px 0;
 		padding: 0px\9;
 		left: 0\9;
-		.ie7 & {
-			position: absolute;
-			left: 0;
-			width: 200px;
-		}
-		.product-image:hover & {
-			display: block;
-		}
+	}
+	.ie7 #quickviewbutton {
+		position: absolute;
+		left: 0;
+		width: 200px;
+	}
+	.product-image:hover #quickviewbutton {
+		display: block;
 	}
 }
