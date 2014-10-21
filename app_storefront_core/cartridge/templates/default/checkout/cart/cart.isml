@@ -148,7 +148,7 @@
 													<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span>${Resource.msg('global.remove','locale',null)}</span></button>																				
 												</isif>
 												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
-													<isif condition="${!isInWishList}">
+													<isif condition="${!isInWishList && !empty(lineItem.product)}">
 														<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addtowishlist','locale',null)}">
 															${Resource.msg('global.addtowishlist','locale',null)}
 														</a>
@@ -158,9 +158,11 @@
 														${Resource.msg('global.iteminwishlist','locale',null)}
 													</div>
 												</isif>
-												<a class="add-to-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', lineItem.productID)}" name="${FormLi.addToGiftRegistry.htmlName}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">
-													${Resource.msg('global.addtogiftregistry','locale',null)}
-												</a>
+												<isif condition="${!empty(lineItem.product)}">
+													<a class="add-to-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', lineItem.productID)}" name="${FormLi.addToGiftRegistry.htmlName}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">
+														${Resource.msg('global.addtogiftregistry','locale',null)}
+													</a>
+												</isif>
 											</div>
 		
 											<iscomment>Product Existence and Product Availability</iscomment>
