@@ -1853,6 +1853,9 @@ div.level-3 ul.level-3 {
     .wide-tiles .product-tile .product-swatches li {
       float: left; }
 
+.breadcrumb h1 span {
+  float: none; }
+
 .infinite-scroll .pagination ul, .infinite-scroll .pagination .current-page-label {
   display: none; }
 .infinite-scroll .items-per-page {
