@@ -583,26 +583,6 @@ legend {
     legend span em {
       color: #333; }
 
-h2 span {
-  font-size: 12px;
-  font-weight: 400;
-  position: relative;
-  text-transform: none;
-  float: right;
-  padding: 0 0; }
-  h2 span em {
-    color: #333; }
-
-h1 span {
-  font-size: 12px;
-  font-weight: 400;
-  position: relative;
-  text-transform: none;
-  float: right;
-  padding: 2px 0px; }
-  h1 span em {
-    color: #333; }
-
 .dialog-required {
   font-size: 12px;
   font-weight: 400;
@@ -1287,38 +1267,47 @@ div.level-3 ul.level-3 {
   .breadcrumb li {
     display: inline;
     list-style: none outside none; }
-  .breadcrumb a {
-    background: url("../images/interface/icon-breadcrumb-separator.png") no-repeat scroll right center transparent;
-    padding: 0 0.8em 0 0; }
-  .breadcrumb h1 {
-    display: inline;
-    font-size: 1em;
-    font-weight: normal; }
-    .breadcrumb h1 .paging-current-page {
-      left: -999em;
-      position: absolute; }
 
-.breadcrumb-refinement-name, .breadcrumb-refinement-value {
-  background: none repeat scroll 0 0 transparent !important;
+.paging-current-page {
+  left: -999em;
+  position: absolute; }
+
+.breadcrumb-element:after {
+  color: #ccc;
+  content: '>';
+  margin-left: 5px; }
+.breadcrumb-element:last-child {
   font-family: Georgia, serif;
   font-style: italic; }
+  .breadcrumb-element:last-child:after {
+    content: ''; }
+
+.breadcrumb-refinement {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-style: italic; }
+  .breadcrumb-refinement:after {
+    content: attr(data-divider);
+    font-style: normal; }
+  .breadcrumb-refinement:last-of-type:after {
+    content: ''; }
+
+.breadcrumb-refinement-value {
+  background-color: rgba(136, 193, 75, 0.3);
+  display: inline-block;
+  border-radius: 3px;
+  margin-right: 5px;
+  padding: 0 5px; }
 
 .breadcrumb-relax {
-  background: none repeat scroll 0 0 transparent !important;
-  font-family: Georgia, serif;
-  font-style: italic;
-  padding: 0 5px 0 0; }
+  background: none;
+  color: #990000;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  padding: 0 0 0 3px; }
 
-.breadcrumb-last {
-  background: none repeat scroll 0 0 transparent !important;
-  font-family: Georgia, serif;
-  font-style: italic; }
-
-.breadcrumb-result-text {
-  float: none; }
-
-.breadcrumb-result-text a, .breadcrumb a.searchphraselink {
-  background: none repeat scroll 0 0 transparent;
+.breadcrumb-result-text a, .breadcrumb .searchphraselink {
+  background: none;
   color: #00a4e4;
   font-family: Georgia, serif;
   font-style: italic;
@@ -1387,6 +1376,8 @@ div.level-3 ul.level-3 {
   padding: 1em;
   position: relative;
   text-transform: uppercase; }
+  .section-header .dialog-required {
+    text-transform: initial; }
 
 .section-header-note {
   font-size: 0.9em;
@@ -1852,9 +1843,6 @@ div.level-3 ul.level-3 {
     margin-top: 5px; }
     .wide-tiles .product-tile .product-swatches li {
       float: left; }
-
-.breadcrumb h1 span {
-  float: none; }
 
 .infinite-scroll .pagination ul, .infinite-scroll .pagination .current-page-label {
   display: none; }
