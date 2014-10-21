@@ -2671,6 +2671,9 @@ ul.product-availability-list {
 .last-visited .jcarousel-prev-disabled, .last-visited .jcarousel-next-disabled {
   background-image: none; }
 
+#password-reset {
+  white-space: nowrap; }
+
 .checkout-progress-indicator {
   font-size: 1.2em;
   overflow: hidden;
