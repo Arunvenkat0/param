@@ -488,7 +488,7 @@ header {
     .ui-tabs .ui-tabs-nav li.ui-state-active {
       background: none repeat scroll 0 0 #fff; }
       .ui-tabs .ui-tabs-nav li.ui-state-active a {
-	color: #666; }
+        color: #666; }
     .ui-tabs .ui-tabs-nav li a {
       color: #999; }
 .ui-tabs .ui-tabs-panel {
@@ -1627,9 +1627,9 @@ div.level-3 ul.level-3 {
       overflow: hidden;
       padding: 0; }
       .product-tile .product-swatches ul.swatch-toggle {
-	background: none repeat scroll 0 0 #fff;
-	display: none;
-	position: absolute; }
+        background: none repeat scroll 0 0 #fff;
+        display: none;
+        position: absolute; }
     .product-tile .product-swatches:hover ul.swatch-toggle {
       display: block; }
     .product-tile .product-swatches li {
@@ -1638,10 +1638,10 @@ div.level-3 ul.level-3 {
       display: block;
       width: 16px; }
       .product-tile .product-swatches .swatch img {
-	border: 1px solid #fff;
-	height: 12px;
-	padding: 1px;
-	width: 12px; }
+        border: 1px solid #fff;
+        height: 12px;
+        padding: 1px;
+        width: 12px; }
     .product-tile .product-swatches .selected img, .product-tile .product-swatches img:hover {
       border-color: #00a4e4; }
   .product-tile .product-promo {
@@ -1945,7 +1945,7 @@ div.level-3 ul.level-3 {
     #compare-table td .product-tile .product-image {
       height: 100px; }
       #compare-table td .product-tile .product-image img {
-	height: 100px; }
+        height: 100px; }
     #compare-table td .product-tile .product-swatches {
       float: none; }
   #compare-table td.product button {
@@ -3383,12 +3383,12 @@ h1 .account-logout {
   padding: 10px 0;
   padding: 0px\9;
   left: 0\9; }
-  .ie7 .js #quickviewbutton {
-    position: absolute;
-    left: 0;
-    width: 200px; }
-  .product-image:hover .js #quickviewbutton {
-    display: block; }
+.js .ie7 #quickviewbutton {
+  position: absolute;
+  left: 0;
+  width: 200px; }
+.js .product-image:hover #quickviewbutton {
+  display: block; }
 
 .js #suggestions {
   background-color: #666;
