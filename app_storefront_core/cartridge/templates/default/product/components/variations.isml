@@ -154,9 +154,6 @@
 								<isset name="selectedSwatchValue" scope="page" value="${null}" />
 								<isloop items="${VAVALS}" var="VV">
 									<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
-										<isscript>
-											var isAvailable = selectedVariants.length > 0 ? pUtil.isVariantAvailable(VA.ID+"-"+VV.value,selectedVariants) : true;
-										</isscript>
 										<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 										<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />
 										<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
