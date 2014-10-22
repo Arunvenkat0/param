@@ -132,7 +132,7 @@
 
 					<isloop items="${pdict.CurrentForms.wishlist.items}" var="item" status="loopstate">
 
-						<isif condition="${((pdict.CurrentCustomer == pdict.ProductList.owner) || (pdict.CurrentCustomer != pdict.ProductList.owner && item.public.value && item.object.product != null))}">
+						<isif condition="${((pdict.CurrentCustomer == pdict.ProductList.owner) || (pdict.CurrentCustomer != pdict.ProductList.owner && item.public.value && (item.object.product != null || item.object.getType() == 2)))}">
 
 							<tr>
 
@@ -254,7 +254,7 @@
 
 										<iscomment> Add to cart -------------------------------------- </iscomment>
 										<div class="item-option option-add-to-cart">
-											<isif condition="${item.object.product != null && item.object.product.availabilityModel.inStock}">
+											<isif condition="${(item.object.product != null && item.object.product.availabilityModel.inStock) || item.object.getType()==2}">
 												<isset name="isGiftCert" value="${item.object.type == item.object.TYPE_GIFT_CERTIFICATE}" scope="page"/>
 												<form action="${isGiftCert ? URLUtils.url('GiftCert-Purchase') : URLUtils.url('Cart-AddProduct')}" method="post" name="${isGiftCert ? 'gift-cert-purchase' : pdict.CurrentForms.product.addtocart.htmlName}">
 													<fieldset>

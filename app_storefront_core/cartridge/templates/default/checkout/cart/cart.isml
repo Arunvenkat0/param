@@ -419,7 +419,7 @@
 											<span class="product-list-item">
 												<isif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 													<a href="${URLUtils.url('Wishlist-ShowOther','WishListID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.wishlistitem','checkout',null)}">
-														${Resource.msg('cart.wishlistitem','checkout',null)}
+														${Resource.msg('displayliproduct.wishlistitem','product',null)}
 													</a>
 												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 													<a href="${URLUtils.https('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
