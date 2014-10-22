@@ -20,7 +20,7 @@
         PVM = pdict.Product.variationModel;
     }
     
-    if (!pdict.CurrentVariationModel.selectedVariant) 
+    if (!PVM.selectedVariant)
     {
         var variant : dw.catalog.Variant;
         if (PVM.defaultVariant) 
