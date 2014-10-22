@@ -8,8 +8,8 @@
 			right: 10px;
 			bottom: 20px;
 			a {
-				background: none repeat scroll 0 0 #e0e0e0;
-				border: 1px solid #ccc;
+				background: none repeat scroll 0 0 $gainsboro;
+				border: 1px solid $very-light-gray;
 				display: block;
 				float: left;
 				height: 15px;
@@ -17,7 +17,7 @@
 				text-indent: -999em;
 				width: 6px;
 				&.active {
-					background-color: #666;
+					background-color: $dim-gray;
 				}
 			}
 		}
@@ -67,12 +67,11 @@
 			display: none !important;
 		}
 	}
+	.select {
+		display: none;
+	}
 }
 
 .home-bottom-right .jcarousel-next-disabled {
 	display: none !important;
-}
-
-.js button.select {
-	display: none;
 }

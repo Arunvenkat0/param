@@ -22,41 +22,40 @@ h1 .account-logout {
 	}
 }
 
-ul {
-	&.address-list {
-		padding: 0;
-		li {
-			float: left;
-			list-style: none outside none;
-			margin: 0;
-			min-height: 135px;
-			padding: 1em 0;
-			width: 30%;
-			&.default {
-				border-bottom: 1px solid #EFEFEF;
-				float: none;
-				width: auto;
-			}
-		}
-		.mini-address-title {
-			font-style: italic;
+.address-list {
+	padding: 0;
+	li {
+		float: left;
+		list-style: none outside none;
+		margin: 0;
+		min-height: 135px;
+		padding: 1em 0;
+		width: 30%;
+		&.default {
+			border-bottom: 1px solid $white-smoke;
+			float: none;
+			width: auto;
 		}
 	}
-	&.payment-list {
-		overflow: hidden;
-		padding: 0;
-		li {
-			float: left;
-			list-style: none outside none;
-			margin: 0;
-			min-height: 110px;
-			width: 33%;
-		}
+	.mini-address-title {
+		font-style: italic;
+	}
+}
+.payment-list {
+	overflow: hidden;
+	padding: 0;
+	li {
+		float: left;
+		list-style: none outside none;
+		margin: 0;
+		min-height: 110px;
+		width: 33%;
 	}
 }
 
+
 .order-history-header {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
 	overflow: hidden;
 	padding: 10px;
 	.label {
@@ -87,10 +86,10 @@ ul {
 	li {
 		list-style: none outside none;
 	}
-	th {
-		&.order-shipped-to, &.order-items, &.order-total-price {
-			width: 33%;
-		}
+	.order-shipped-to,
+	.order-items,
+	.order-total-price {
+		width: 33%;
 	}
 	.toggle {
 		cursor: pointer;
@@ -98,6 +97,6 @@ ul {
 	}
 }
 
-.js .order-history-table li.hidden {
+.js .order-history-table .hidden {
 	display: none;
 }

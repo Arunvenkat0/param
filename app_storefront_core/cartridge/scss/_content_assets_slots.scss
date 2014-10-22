@@ -9,10 +9,10 @@
 }
 
 .product-listing-1x4 {
-	background: none repeat scroll 0 0 #FFFFFF;
+	background: none repeat scroll 0 0 $white;
 	overflow: hidden;
 	padding: 10px 0;
-	ul.search-result-items .grid-tile {
+	.search-result-items .grid-tile {
 		margin: 0 1% 0 2%;
 		width: 18%;
 	}
@@ -24,7 +24,7 @@
 	margin: 40px 10px;
 	padding: 10px 0;
 	h2 {
-		font-family: Georgia,serif;
+		font-family: $serif;
 		font-style: italic;
 		font-weight: 400;
 		margin: 14px 0 20px;
@@ -36,7 +36,8 @@
 		line-height: 1.6em;
 		margin: 1em 0;
 	}
-	ul, ol {
+	ul,
+	ol {
 		line-height: 1.6em;
 		margin: 1em 0;
 		padding: 0 1.5em;
@@ -50,11 +51,11 @@
 	ol li {
 		list-style: decimal outside none;
 	}
-	ul.account-options {
+	.account-options {
 		margin: 0;
 		padding: 0;
 		li {
-			border-bottom: 1px solid #D9D9D9;
+			border-bottom: 1px solid $gainsboro;
 			float: left;
 			height: 80px;
 			list-style: none outside none !important;
@@ -82,9 +83,9 @@
 }
 
 .browser-compatibility-alert {
-	background: url("../images/interface/icon-alert.png") no-repeat scroll 1em 1em #faeded;
+	background: url("../images/interface/icon-alert.png") no-repeat scroll 1em 1em $tutu;
 	border: 1px solid;
-	color: #9E0F0F;
+	color: $sangria;
 	margin: 1em;
 	padding: 0.5em 4em;
 }

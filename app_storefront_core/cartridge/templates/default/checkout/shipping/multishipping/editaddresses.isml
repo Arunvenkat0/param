@@ -1,14 +1,14 @@
 <iscontent type="text/html" charset="UTF-8" compact="true" />
 <isset name="DecoratorTemplate" value="checkout/pt_checkout" scope="page" />
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
-	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page" /> 
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page" />
 </isif>
 
 <isdecorate template="${DecoratorTemplate}" />
 <isinclude template="util/modules" />
 
 <isif condition="${DecoratorTemplate == 'checkout/pt_checkout'}">
-	<iscomment>checkout progress indicator</iscomment> 
+	<iscomment>checkout progress indicator</iscomment>
 	<ischeckoutprogressindicator step="1" multishipping="true" />
 	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
 </isif>
@@ -22,15 +22,15 @@
 	<fieldset>
 		<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 			<!-- Use the error code value to build an appropriate error message -->
-			<span class="form-error"> 
+			<span class="form-error">
 				<isprint value="${Resource.msg('addressdetails.' + pdict.Status.code, 'account',null)}" />
-			</span> 
+			</span>
 		</isif>
 		<isset name="addresses" value="${pdict.CurrentForms.multishipping.editAddress.addressList}" scope="page" />
-		<isscript> 
-			var addressesArr = []; 
+		<isscript>
+			var addressesArr = [];
 			for (var opt in addresses.options) {
-				addressesArr.push(addresses.options[opt].object); 
+				addressesArr.push(addresses.options[opt].object);
 			}
 		</isscript>
 		<div class="select-address address-list" data-addresses="${JSON.stringify(addressesArr)}">
@@ -38,10 +38,10 @@
 				<label for="${pdict.CurrentForms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
 				</label> <select class="input-select-multiship" name="${addresses.htmlName}">
 					<option value="newAddress" selected="selected">${Resource.msg('forms.multishipping.editaddress.select.newaddress','forms',null)}</option>
-					<isloop items="${addresses.options}" var="option"> 
-						<isset name="address" value="${option.object}" scope="page" /> 
-						<isif condition="${!empty(address.ID)}"> 
-							<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page" /> 
+					<isloop items="${addresses.options}" var="option">
+						<isset name="address" value="${option.object}" scope="page" />
+						<isif condition="${!empty(address.ID)}">
+							<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page" />
 						<iselse>
 							<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page" />
 						</isif>
@@ -81,7 +81,7 @@
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.state}" type="select" />
 
 		<iscomment> States will be populated via javascript in
-		rich ui. Solution for simple ui is still required. CSS? 
+		rich ui. Solution for simple ui is still required. CSS?
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateUS}" type="select" />
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateCA}" type="select" />
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateDE}" type="select" />

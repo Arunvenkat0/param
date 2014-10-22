@@ -1,6 +1,6 @@
 #wrapper {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border: 3px solid #FFFFFF;
+	background: none repeat scroll 0 0 $white;
+	border: 3px solid $white;
 	margin: auto;
 	max-width: 960px;
 	width: 960px;
@@ -13,17 +13,31 @@ header {
 }
 
 .primary-content {
-	border-left: 1px solid #D9D9D9;
+	border-left: 1px solid $gainsboro;
 	float: right;
 	margin-left: -1px;
 	padding: 0 0 20px;
 	position: relative;
 	width: 787px;
+	.primary-focus & {
+		border: 0 none;
+		float: left;
+		margin: 0;
+		width: 709px;
+	}
+	.full-width & {
+		border: 0 none;
+		width: 100%;
+	}
+	.page-content & {
+		padding-left: 3%;
+		width: 758px;
+	}
 }
 
 #secondary {
 	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
-	border-right: 1px solid #D9D9D9;
+	border-right: 1px solid $gainsboro;
 	float: left;
 	width: 172px;
 	position: relative;
@@ -34,29 +48,10 @@ header {
 			margin-left: 15px;
 		}
 	}
-}
-
-.primary-focus {
-	.primary-content {
-		border: 0 none;
-		float: left;
-		margin: 0;
-		width: 709px;
-	}
-	#secondary {
+	.primary-focus & {
 		background: none repeat scroll 0 0 transparent;
 		border: 0 none;
 		float: right;
 		width: 210px;
 	}
-}
-
-.full-width .primary-content {
-	border: 0 none;
-	width: 100%;
-}
-
-.page-content .primary-content {
-	padding-left: 3%;
-	width: 758px;
 }

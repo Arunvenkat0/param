@@ -2,14 +2,14 @@
 	border: 0 none;
 	padding: 10px;
 	th {
-		background: none repeat scroll 0 0 #F3F3F3;
+		background: none repeat scroll 0 0 $white-smoke;
 	}
 	td, th {
-		border-bottom: 1px solid #F3F3F3;
+		border-bottom: 1px solid $white-smoke;
 		padding: 10px;
 	}
 	td {
-		border-left: 1px solid #F3F3F3;
+		border-left: 1px solid $white-smoke;
 	}
 	.ui-tabs-nav {
 		height: 33px;

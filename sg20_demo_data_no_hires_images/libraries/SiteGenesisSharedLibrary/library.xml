@@ -1694,6 +1694,20 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         </folder-links>
     </content>
 
+    <content content-id="cookie_hint">
+        <display-name xml:lang="x-default">cookie_hint</display-name>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="privacy_policy_message_box"&gt;           &#13;
+    &lt;h2&gt;Privacy and Cookie Policy&lt;/h2&gt;  &#13;
+    &lt;p&gt;Demandware uses cookies to give you the best experience. With the cookies we allow you to make full use of the online shopping and personalized features available on our website.&lt;/p&gt;&#13;
+    &lt;p&gt;View our &lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy and Cookie Policy&lt;/a&gt; to learn more about this.&lt;/p&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
     <content content-id="create-account-benefits">
         <display-name xml:lang="x-default">Account Benefits</display-name>
         <description xml:lang="x-default">Benefits to creating an account include receiving email updates on special promotions, reviewing information about orders and saving billing and shipping addresses along with a default payment method to aid in faster checkout.</description>
@@ -1757,7 +1771,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help?&amp;nbsp;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
@@ -1937,7 +1951,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 &#13;
 &lt;p class="copyright"&gt;&amp;copy; 2004-2014 Demandware or its affiliates. All rights reserved.&lt;/p&gt;&#13;
 &lt;p class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/p&gt;
-&lt;!-- SG.15.1.0.3 --&gt;</custom-attribute>
+&lt;!-- SG.15.1.0.7 --&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="home-page"/>
@@ -3044,7 +3058,7 @@ The possibilities are endless, not to mention the extensive benefits package, tr
             <page-keywords xml:lang="x-default">Privacy Policy</page-keywords>
         </page-attributes>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Privacy Policy&lt;/h1&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header privacy-policy"&gt;Privacy Policy&lt;/h1&gt;&#13;
 &lt;p&gt;At Demandware, we respect the privacy of our customers and the visitors to our website. This statement describes the current information gathering, sharing and privacy practices for our website, www.demandware.com.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Collection of Personal Information&lt;/h2&gt;&#13;

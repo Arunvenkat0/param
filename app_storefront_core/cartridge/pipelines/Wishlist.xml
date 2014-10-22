@@ -333,11 +333,7 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addGiftCertificate">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+	  <transition target-connector="in"/>
           <segment>
             <node>
               <pipelet-node pipelet-name="AddGiftCertificateToProductList" pipelet-set-identifier="bc_api">
@@ -347,7 +343,21 @@
               </pipelet-node>
               <node-display x="3" y="4"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="./+1"/>
+		<transition target-connector="in1"/>
+		<segment>
+		  <node>
+		    <join-node/>
+		    <node-display x="0" y="2"/>
+		  </node>
+		  <transition target-connector="in1" target-path="./+1"/>
+		</segment>
+		<segment>
+		  <node>
+		    <join-node/>
+		    <node-display x="1" y="0"/>
+		  </node>
+		  <transition target-connector="in1" target-path="../+1"/>
+		</segment>
               </branch>
             </node>
             <transition target-connector="in1" target-path="./+1">
@@ -362,17 +372,45 @@
               <join-node/>
               <node-display x="2" y="2"/>
             </node>
-            <transition target-connector="in1" target-path="../+1"/>
-          </segment>
-        </branch>
-        <branch basename="b3" source-connector="deleteItem">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	    <transition target-connector="in1" target-path="../+1"/>
+	  </segment>
+	</branch>
+	<branch basename="b3" source-connector="addToCart">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
+	      <decision-node condition-key="CurrentForms.wishlist.items.triggeredAction.parent.object.type == CurrentForms.wishlist.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE" condition-operator="expr"/>
+	      <node-display orientation="horizontal" x="3" y="1"/>
+	      <branch basename="b2" source-connector="yes">
+		<transition target-connector="in">
+		  <transition-display>
+		    <bend-point relative-to="source" x="1" y="0"/>
+		  </transition-display>
+		</transition>
+		<segment>
+		  <node>
+		    <jump-node start-name-ref="GiftCert-Purchase"/>
+		    <node-display orientation="horizontal" x="1" y="0"/>
+		  </node>
+		</segment>
+	      </branch>
+	    </node>
+	    <simple-transition>
+	      <transition-display>
+		<bend-point relative-to="source" x="0" y="2"/>
+		<bend-point relative-to="target" x="-1" y="0"/>
+	      </transition-display>
+	    </simple-transition>
+	    <node>
+	      <jump-node start-name-ref="Cart-AddProduct"/>
+	      <node-display orientation="horizontal" x="1" y="1"/>
+	    </node>
+	  </segment>
+	</branch>
+	<branch basename="b4" source-connector="deleteItem">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <pipelet-node pipelet-name="RemoveProductListItem" pipelet-set-identifier="bc_api">
                 <key-binding alias="TriggeredAction.object" key="ProductListItem"/>
               </pipelet-node>
@@ -385,30 +423,22 @@
               <join-node/>
               <node-display x="0" y="2"/>
             </node>
-            <transition target-connector="in1" target-path="../b2.2"/>
-          </segment>
-        </branch>
-        <branch basename="b4" source-connector="selectAddressWishlist">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	    <transition target-connector="in1" target-path="../b2.1/b2.1"/>
+	  </segment>
+	</branch>
+	<branch basename="b5" source-connector="selectAddressWishlist">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <jump-node start-name-ref="Wishlist-SetShippingAddress"/>
               <node-display x="-3" y="4"/>
-            </node>
-          </segment>
-        </branch>
-        <branch basename="b5" source-connector="setItemPrivate">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	    </node>
+	  </segment>
+	</branch>
+	<branch basename="b6" source-connector="setItemPrivate">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="false" key="From_0"/>
@@ -452,20 +482,16 @@
           </segment>
           <segment>
             <node>
-              <join-node/>
-              <node-display x="1" y="0"/>
-            </node>
-            <transition target-connector="in1" target-path="../b3.2"/>
-          </segment>
-        </branch>
-        <branch basename="b6" source-connector="setItemPublic">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	      <join-node/>
+	      <node-display x="1" y="0"/>
+	    </node>
+	    <transition target-connector="in1" target-path="../b4.2"/>
+	  </segment>
+	</branch>
+	<branch basename="b7" source-connector="setItemPublic">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="true" key="From_0"/>
@@ -495,20 +521,16 @@
           </segment>
           <segment>
             <node>
-              <join-node/>
-              <node-display x="0" y="2"/>
-            </node>
-            <transition target-connector="in1" target-path="../b5.2"/>
-          </segment>
-        </branch>
-        <branch basename="b7" source-connector="setListPrivate">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	      <join-node/>
+	      <node-display x="0" y="2"/>
+	    </node>
+	    <transition target-connector="in1" target-path="../b6.2"/>
+	  </segment>
+	</branch>
+	<branch basename="b8" source-connector="setListPrivate">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="false" key="From_0"/>
@@ -545,13 +567,13 @@
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b5.4"/>
+		<transition target-connector="in1" target-path="../b6.4"/>
               </branch>
             </node>
-            <transition target-connector="in2" target-path="../b5.4"/>
+	    <transition target-connector="in2" target-path="../b6.4"/>
           </segment>
         </branch>
-        <branch basename="b8" source-connector="setListPublic">
+	<branch basename="b9" source-connector="setListPublic">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-1"/>
@@ -592,33 +614,29 @@
                 <config-property key="ScriptFile" value="productlist/MakeItemsPublic.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="ProductList" key="ProductList"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b5.3"/>
-              </branch>
-            </node>
-            <transition target-connector="in2" target-path="../b5.3"/>
-          </segment>
-        </branch>
-        <branch basename="b9" source-connector="updateItem">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
+	      </pipelet-node>
+	      <node-display x="0" y="1"/>
+	      <branch basename="b2" source-connector="error">
+		<transition target-connector="in1" target-path="../b6.3"/>
+	      </branch>
+	    </node>
+	    <transition target-connector="in2" target-path="../b6.3"/>
+	  </segment>
+	</branch>
+	<branch basename="b10" source-connector="updateItem">
+	  <transition target-connector="in"/>
+	  <segment>
+	    <node>
               <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
                 <key-binding alias="TriggeredAction.parent" key="Form"/>
                 <key-binding alias="TriggeredAction.object" key="Object"/>
               </pipelet-node>
               <node-display x="4" y="4"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b2.2"/>
+		<transition target-connector="in1" target-path="../b2.1/b2.2"/>
               </branch>
             </node>
-            <transition target-connector="in1" target-path="../b2.2"/>
+	    <transition target-connector="in1" target-path="../b2.1/b2.2"/>
           </segment>
         </branch>
       </node>
@@ -626,8 +644,8 @@
     </segment>
     <segment>
       <node>
-        <join-node/>
-        <node-display x="3" y="0"/>
+	<join-node/>
+	<node-display x="5" y="0"/>
       </node>
       <transition target-connector="in3" target-path="./-1"/>
     </segment>

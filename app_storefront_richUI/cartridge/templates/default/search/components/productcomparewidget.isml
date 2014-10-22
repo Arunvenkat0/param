@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>Product compare widget uses session information and therefore must not be cached.</iscomment>
 <isif condition="${(pdict.CompareList != null) && (pdict.Category != null)}">
-	<isscript>			
+	<isscript>
 	   	var products = new dw.util.ArrayList();
 		if (!empty(pdict.CompareList.products)) {
 			for (var i=0,len=pdict.CompareList.products.length;i<len;i++) {
@@ -10,33 +10,33 @@
 				var image = item.getImage('small',0);
 				products.add({
 					id: item.ID,
-					uuid: item.UUID,														
+					uuid: item.UUID,
 					imgSrc: image ? image.getURL().toString() : URLUtils.staticURL('/images/noimagesmall.png').toString(),
 					imgAlt: item.name
 				});
 			}
 		}
-		
+
 		var plen = products.length;
 		for (i=plen;i < 6; i++) {
 			products.add({
 				imgSrc: URLUtils.staticURL('/images/comparewidgetempty.png').toString(),
 				imgAlt: Resource.msg('productcomparewidget.empty', 'search', null)
 			});
-		}						
-	</isscript>	
-	<div id="compare-items" class="compareitems" <isif condition="${plen==0}">style="display:none;" </isif>data-category="${pdict.Category.ID || ''}">		
+		}
+	</isscript>
+	<div id="compare-items" class="compareitems" <isif condition="${plen==0}">style="display:none;" </isif>data-category="${pdict.Category.ID || ''}">
 		<h2>${Resource.msg('productcomparewidget.compareitems', 'search', null)}</h2>
-		<div class="comparebar">				
-			<div id="compare-items-panel" class="compareitemspanel">				
-				<isloop items="${products}" var="item" status="Status">					
-	 				<div <isif condition="${!empty(item.uuid)}">id="ci-${item.uuid}"</isif> class="compare-item compare-item-<isprint value="${Status.index}"/> <isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>						 						 					
+		<div class="comparebar">
+			<div id="compare-items-panel" class="compareitemspanel">
+				<isloop items="${products}" var="item" status="Status">
+					<div <isif condition="${!empty(item.uuid)}">data-uuid="${item.uuid}"</isif> class="compare-item compare-item-<isprint value="${Status.index}"/> <isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>
 	 					<img class="compareproduct" src="${item.imgSrc}" alt="${item.imgAlt}"/>
 
 	 					<div class="compareitemremove">
 	 						<img class="compare-item-remove" src="${URLUtils.staticURL('/images/remove_icon.png')}" alt="${Resource.msg('global.remove', 'locale', null)}"/>
 	 					</div>
-	  				</div>		
+					</div>
 		 		</isloop>
 			</div>
 			<div class="compare-buttons">

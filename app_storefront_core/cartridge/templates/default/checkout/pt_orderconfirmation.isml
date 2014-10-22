@@ -8,36 +8,42 @@
 <head>
 
 	<isinclude template="util/modules"/>
-	
+
 	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
-	<isscript>var pageContext={title:'Order Confirmation', type:'orderconfirmation', ns:'orderconfirmation'};</isscript>
+	<isscript>
+		var pageContext = {
+			title: 'Order Confirmation',
+			type: 'orderconfirmation',
+			ns: 'orderconfirmation'
+		};
+	</isscript>
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="checkout/pt_orderconfirmation_UI"/>
-	
-	<iscomment>Add template-specific header information here.</iscomment>	
-	
+
+	<iscomment>Add template-specific header information here.</iscomment>
+
 </head>
 
 <body>
 	<div id="wrapper" class="pt_order-confirmation">
-	
+
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
-		
+
 		<div id="main" role="main" class="clearfix primary-focus">
-		
+
 			<div id="primary" class="primary-content">
 				<isreplace/>
 			</div>
-			
+
 			<div id="secondary" class="nav summary">
 				<isinclude template="checkout/confirmation/confirmationregister"/>
 			</div>
-			
+
 		</div>
-	
-		<isinclude template="components/footer/footer"/>		
+
+		<isinclude template="components/footer/footer"/>
 		<isinclude template="checkout/pt_orderconfirmation_VARS"/>
-		
+
 	</div>
 </body>
 </html>

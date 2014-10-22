@@ -1,23 +1,21 @@
 #header {
 	height: 79px;
 	position: relative;
-}
-
-.ie7 #header {
-	z-index: 200;
-}
-
-#header .primary-logo {
-	left: 0;
-	margin: 0;
-	position: absolute;
-	top: 22px;
-	a {
-		display: block;
+	.ie7 & {
+		z-index: 200;
 	}
-	span {
-		left: -999em;
+	.primary-logo {
+		left: 0;
+		margin: 0;
 		position: absolute;
+		top: 22px;
+		a {
+			display: block;
+		}
+		span {
+			left: -999em;
+			position: absolute;
+		}
 	}
 }
 
@@ -26,10 +24,9 @@
 	float: right;
 	font-size: 1.2em;
 	margin: 0 6px;
-}
-
-.ie7 .header-banner {
-	width: 350px;
+	.ie7 & {
+		width: 350px;
+	}
 }
 
 #mini-cart {
@@ -38,7 +35,7 @@
 	position: relative;
 	z-index: 200;
 	a {
-		color: #3EBAEA;
+		color: $pacific-blue;
 	}
 }
 
@@ -53,21 +50,20 @@
 }
 
 .mini-cart-content {
-	background: none repeat scroll 0 0 #F3F3F3;
-	border: 2px solid #CCCCCC;
+	background: none repeat scroll 0 0 $white-smoke;
+	border: 2px solid $very-light-gray;
 	display: none;
 	position: absolute;
 	right: -1px;
 	top: 15px;
 	width: 220px;
-}
-
-#mini-cart:hover .mini-cart-content {
-	display: block;
+	#mini-cart:hover & {
+		display: block;
+	}
 }
 
 .mini-cart-header {
-	border-color: #FFFFFF;
+	border-color: $white;
 	border-style: solid;
 	border-width: 1px 1px 0;
 	font-size: 1.1em;
@@ -91,14 +87,14 @@
 }
 
 .mini-cart-product {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border-color: #FFFFFF;
+	background: none repeat scroll 0 0 $white;
+	border-color: $white;
 	border-style: solid;
 	border-width: 1px 1px 0;
 	overflow: hidden;
 	padding: 10px;
 	&.collapsed {
-		background: none repeat scroll 0 0 #E8E8E8;
+		background: none repeat scroll 0 0 $gainsboro;
 		.mini-cart-name, .mini-cart-attributes, .mini-cart-pricing, .product-availability-list {
 			width: 90%;
 		}
@@ -115,12 +111,13 @@
 
 .mini-cart-name {
 	float: right;
-	font-family: Georgia,serif;
+	font-family: $serif;
 	font-style: italic;
 	width: 50%;
 }
 
-.mini-cart-attributes, .mini-cart-product .product-availability-list {
+.mini-cart-attributes,
+.mini-cart-product .product-availability-list {
 	float: right;
 	font-size: 0.9em;
 	font-weight: bold;
@@ -144,8 +141,8 @@
 }
 
 .mini-cart-slot {
-	background: none repeat scroll 0 0 #E8E8E8;
-	border: 1px solid #D0D0D0;
+	background: none repeat scroll 0 0 $gainsboro;
+	border: 1px solid $gainsboro;
 	font-size: 0.9em;
 	font-style: italic;
 	margin: 20px;
@@ -168,21 +165,20 @@
 
 .menu-utility {
 	clear: both;
-	color: #8F8F8F;
+	color: $nobel;
 	float: right;
 	font-size: 0.8em;
 	letter-spacing: 1px;
 	margin: 10px 0;
 	padding: 0;
 	text-transform: uppercase;
-}
-
-.ie7 .menu-utility {
-	width: 350px;
+	.ie7 & {
+		width: 350px;
+	}
 }
 
 .menu-utility-user {
-	color: #8F8F8F;
+	color: $nobel;
 	float: right;
 	font-size: 0.8em;
 	letter-spacing: 1px;
@@ -191,15 +187,15 @@
 	text-transform: uppercase;
 }
 
-.menu-utility li, .menu-utility-user li {
+.menu-utility li,
+.menu-utility-user li {
 	border-right: 1px solid;
 	float: left;
 	list-style: none outside none;
 	padding: 0 6px;
-}
-
-.menu-utility li.last, .menu-utility-user li.last {
-	border: 0 none;
+	&.last {
+		border: none;
+	}
 }
 
 .header-search {
@@ -207,23 +203,21 @@
 	right: 5px;
 	top: 12px;
 	z-index: 21;
-	input {
-		&[type="text"] {
-			background: none repeat scroll 0 0 #666666;
-			border: 0 none;
-			color: #FFFFFF;
-			height: 16px;
-			margin: 0;
-			width: 180px;
-		}
-		&[type="submit"] {
-			background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
-			border: 0 none;
-			height: 32px;
-			padding: 8px 0;
-			text-indent: -999em;
-			width: 32px;
-		}
+	input[type="text"] {
+		background: none repeat scroll 0 0 $dim-gray;
+		border: 0 none;
+		color: $white;
+		height: 16px;
+		margin: 0;
+		width: 180px;
+	}
+	input[type="submit"] {
+		background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
+		border: 0 none;
+		height: 32px;
+		padding: 8px 0;
+		text-indent: -999em;
+		width: 32px;
 	}
 	legend {
 		background: none repeat scroll 0 0 transparent;

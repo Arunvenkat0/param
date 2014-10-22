@@ -1,7 +1,7 @@
 .js {
 	#suggestions {
-		background-color: #666666;
-		color: #e0e0e0;
+		background-color: $dim-gray;
+		color: $gainsboro;
 		cursor: pointer;
 		padding: 0;
 		display: none;
@@ -14,15 +14,15 @@
 			overflow: hidden;
 			white-space: nowrap;
 			&:hover {
-				background-color: #cccccc;
-				color: #333333;
+				background-color: $very-light-gray;
+				color: $night-rider;
 			}
-			div.suggestionterm {
+			.suggestionterm {
 				float: left;
 				overflow: hidden;
 				width: 110px;
 			}
-			span.hits {
+			.hits {
 				float: right;
 				line-height: 1.8em;
 				text-align: right;
@@ -42,7 +42,7 @@
 		top: 10px;
 		width: 13px;
 	}
-	div.collapsed {
+	.collapsed {
 		.mini-cart-toggler {
 			background: url(../images/minicart_collapsed.png) repeat scroll 0 0 transparent;
 		}

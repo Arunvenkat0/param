@@ -6,7 +6,13 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 
-	<isscript>var pageContext={title:'Storefront',type:'storefront',ns:'storefront'};</isscript>
+	<isscript>
+		var pageContext = {
+			title: 'Storefront',
+			type: 'storefront',
+			ns: 'storefront'
+		};
+	</isscript>
 	<isinclude template="util/modules"/>
 
 	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
@@ -15,7 +21,7 @@
 	<isinclude template="content/home/pt_storefront_UI"/>
 
 	<iscomment>Add page specific header information here.</iscomment>
-	
+
 </head>
 <body>
 
@@ -32,6 +38,6 @@
 		<isinclude template="content/home/pt_storefront_VARS"/>
 
 	</div><!--  /wrapper -->
-	
+
 </body>
 </html>
