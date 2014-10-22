@@ -25,16 +25,14 @@
 			if (colorVarAttr != null) {
 				selectableColors = PVM.getFilteredValues(colorVarAttr);
 			}
-			if (PVM.master && PVM.defaultVariant) {
-				// if the PVM has `color` variation, use the default variant
-				// otherwise, use the master variant
+			if (Product.isMaster() && PVM.defaultVariant) {
 				if (colorVarAttr !== null) {
 					imageSource = PVM.defaultVariant;
 					selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
 				} else {
 					imageSource = PVM.master;
 				}
-			// @TODO: not sure if we need to check for a variant that is not master for the search tiles
+
 			} else if (Product.isVariant()) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (!imageSource) {
