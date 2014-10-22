@@ -1,46 +1,4 @@
-.compare-item-remove {
-	display: none;
-	.active & {
-		display: inline;
-	}
-}
-
-.compare-item {
-	background: none repeat scroll 0 0 $gainsboro;
-	float: left;
-	height: 55px;
-	margin-right: 13px;
-	overflow: hidden;
-	position: relative;
-	width: 55px;
-}
-
-.compare-item-0 {
-	background-image: url("../images/interface/icon-compare-placeholder-1.png");
-}
-
-.compare-item-1 {
-	background-image: url("../images/interface/icon-compare-placeholder-2.png");
-}
-
-.compare-item-2 {
-	background-image: url("../images/interface/icon-compare-placeholder-3.png");
-}
-
-.compare-item-3 {
-	background-image: url("../images/interface/icon-compare-placeholder-4.png");
-}
-
-.compare-item-4 {
-	background-image: url("../images/interface/icon-compare-placeholder-5.png");
-}
-
-.compare-item-5 {
-	background-image: url("../images/interface/icon-compare-placeholder-6.png");
-}
-
-.compareitems {
-	background: none repeat scroll 0 0 $gainsboro;
+.compare-items {
 	clear: both;
 	margin: 3.5em 2em 0;
 	overflow: hidden;
@@ -52,26 +10,43 @@
 	}
 }
 
-.compareitemcount {
-	color: $very-light-gray;
-	font-size: 3em;
-	left: 30%;
-	position: absolute;
-	top: 15%;
-	z-index: 1;
+.compare-item {
+	background-color: $gainsboro;
+	float: left;
+	height: 55px;
+	margin-right: 13px;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+	width: 55px;
+	.compare-item-remove {
+		background-color: $pacific-blue;
+		color: $white;
+		cursor: pointer;
+		display: none;
+		padding: 0 3px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 1;
+	}
+	&.active {
+		.compare-item-remove {
+			display: block;
+		}
+	}
+	.compare-item-number {
+		color: $very-light-gray;
+		font-size: 3em;
+		margin-top: 6px;
+	}
 }
 
-.compareproduct {
+.compare-product {
 	max-width: 100%;
 	position: absolute;
-	z-index: 2;
-}
-
-.compareitemremove {
-	position: absolute;
-	right: 1px;
-	top: 1px;
-	z-index: 3;
+	top: 0;
+	left: 0;
 }
 
 .compare-buttons {
@@ -83,38 +58,80 @@
 	margin: 0 0 10px;
 }
 
+.category-switch {
+	@extend .clearfix;
+	margin-bottom: 2em;
+	label {
+		float: left;
+		margin: 0;
+		width: 45%;
+		@media (min-width: 410px) {
+			width: 11em;
+		}
+	}
+	select {
+		float: left;
+		margin: 0;
+		width: 55%;
+		@media (min-width: 410px) {
+			margin-left: 1em;
+			width: 15em;
+		}
+	}
+}
+
 #compare-table {
-	td {
-		-moz-border-bottom-colors: none;
-		-moz-border-image: none;
-		-moz-border-left-colors: none;
-		-moz-border-right-colors: none;
-		-moz-border-top-colors: none;
-		border-color: -moz-use-text-color $gainsboro $gainsboro;
-		border-style: none solid solid;
-		border-width: 0 1px 1px;
-		.product-tile {
-			font-size: 0.9em;
-			width: 100px;
-			margin-bottom: 12px;
-			padding-bottom: 12px;
-			.product-image {
-				height: 100px;
-				img {
-					height: 100px;
+	border-collapse: collapse;
+	a {
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	.attribute-row {
+		border-bottom: 1px solid $very-light-gray;
+		&:first-of-type {
+			border-top: 1px solid $very-light-gray;
+		}
+		&:last-of-type {
+			border-bottom: none;
+		}
+		&:nth-child(2n) {
+			background-color: $white-smoke;
+		}
+	}
+	.product-attribute {
+		border-right: 1px solid $very-light-gray;
+	}
+	.action {
+		display: block;
+		padding: 0.2em 0;
+	}
+	.value,
+	.product {
+		border-left: 1px solid $very-light-gray;
+	}
+	.product {
+		font-weight: normal;
+		text-align: center;
+	}
+	.value {
+		.value-item {
+			&:after {
+				content: ', ';
+			}
+			&:last-child {
+				&:after {
+					content: '';
 				}
 			}
-			.product-swatches {
-				float: none;
-			}
-		}
-		&.product button {
-			font-size: 0.9em;
 		}
 	}
-	.evenattributerow {
-		background: none repeat scroll 0 0 $white-smoke;
+	.product-tile {
+		.swatch-list {
+			display: inline-block;
+		}
 	}
+
 	.section-header {
 		font-size: 0.9em;
 		padding: 1em;
@@ -134,17 +151,6 @@
 	}
 	.comparelists {
 		padding: 0;
-	}
-	.remove-link {
-		background: url("../images/interface/icon-mini-close.png") no-repeat scroll right top transparent;
-		display: block;
-		padding: 0 20px 0 0;
-		text-align: right;
-	}
-	.add-to-wishlist,
-	.add-to-gift-registry {
-		padding: 0.2em 0;
-		text-align: center;
 	}
 	.compare-lists {
 		label,

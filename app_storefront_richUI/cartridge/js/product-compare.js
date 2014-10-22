@@ -14,7 +14,7 @@ var _currentCategory = '',
  * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
  */
 function refreshContainer() {
-	var $compareContainer = $('#compare-items');
+	var $compareContainer = $('.compare-items');
 	var $compareItems = $compareContainer.find('.compare-item');
 	var numActive = $compareItems.filter('.active').length;
 
@@ -24,15 +24,7 @@ function refreshContainer() {
 		$('#compare-items-button').removeAttr('disabled');
 	}
 
-	// update list with sequential classes for ui targeting
-
-	for (var i = 0; i < $compareItems.length; i++) {
-		$compareItems.removeClass('compare-item-' + i);
-		$compareItems.eq(i).addClass('compare-item-' + i);
-	}
-
 	$compareContainer.toggle(numActive > 0);
-
 }
 /**
  * @private
@@ -41,7 +33,7 @@ function refreshContainer() {
  */
 function addToList(data) {
 	// get the first compare-item not currently active
-	var $item = $('#compare-items').find('.compare-item').not('.active').first(),
+	var $item = $('.compare-items .compare-item').not('.active').first(),
 		$productTile = $('#' + data.uuid);
 
 	if ($item.length === 0) {
@@ -59,14 +51,8 @@ function addToList(data) {
 	// set as active item
 	$item.addClass('active')
 		.attr('data-uuid', data.uuid)
-		.data('itemid', data.itemid);
-
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: $(data.img).attr('src'),
-			alt: $(data.img).attr('alt')
-		});
+		.data('itemid', data.itemid)
+		.append($(data.img).clone().addClass('compare-product'));
 
 	// refresh container state
 	refreshContainer();
@@ -85,24 +71,15 @@ function removeFromList(uuid) {
 	var $item = $('[data-uuid="' + uuid + '"]');
 	if ($item.length === 0) { return; }
 
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: Urls.compareEmptyImage,
-			alt: Resources.EMPTY_IMG_ALT
-		});
-
 	// remove class, data and id from item
 	$item.removeClass('active')
 		.removeAttr('data-uuid')
 		.removeAttr('data-itemid')
 		.data('uuid', '')
-		.data('itemid', '');
+		.data('itemid', '')
+		// remove the image
+		.find('.compare-product').remove();
 
-	// use clone to prevent image flash when removing item from list
-	var cloneItem = $item.clone();
-	$item.remove();
-	cloneItem.appendTo($('#compare-items-panel'));
 	refreshContainer();
 
 	// ensure that the associated checkbox is not checked
@@ -133,13 +110,43 @@ function addProductAjax(args) {
 	return promise;
 }
 
+function shiftImages() {
+	return new Promise(function (resolve, reject) {
+		var $items = $('.compare-items .compare-item');
+		$items.each(function (i, item) {
+			var $item = $(item);
+			// last item
+			if (i === $items.length - 1) {
+				$item.removeClass('active')
+					.removeAttr('data-uuid')
+					.removeAttr('data-itemid')
+					.data('uuid', '')
+					.data('itemid', '')
+					.find('.compare-product').remove();
+				return;
+			}
+			var $next = $items.eq(i + 1);
+			if ($next.hasClass('active')) {
+				// remove its own image
+				$next.find('.compare-product').detach().appendTo($item);
+				$item.addClass('active')
+					.attr('data-uuid', $next.data('uuid'))
+					.attr('data-itemid', $next.data('itemid'))
+					.data('uuid', $next.data('uuid'))
+					.data('itemid', $next.data('itemid'));
+			}
+		});
+		resolve();
+	});
+}
+
 /**
  * @function
  * @description Adds product to the compare table
  */
 function addProduct(args) {
 	var promise;
-	var $items = $('#compare-items').find('.compare-item');
+	var $items = $('.compare-items .compare-item');
 	var $cb = $(args.cb);
 	var numActive = $items.filter('.active').length;
 	if (numActive === MAX_ACTIVE) {
@@ -149,24 +156,25 @@ function addProduct(args) {
 		}
 
 		// remove product using id
-		var $item = $items.first();
-		var uuid = $item.data('uuid');
+		var $firstItem = $items.first();
+		var uuid = $firstItem.data('uuid');
 		promise = removeProduct({
-			itemid: item.data('itemid'),
+			itemid: $firstItem.data('itemid'),
 			uuid: uuid,
 			cb: $('#' + uuid).find('.compare-check')
+		}).then(function () {
+			return shiftImages();
 		});
 	} else {
 		promise = Promise.resolve(0);
 	}
 	return promise.then(function () {
-		refreshContainer();
 		return addProductAjax(args).then(function () {
 			addToList(args);
 		});
 	}).then(null, function (err) {
 		if ($cb && $cb.length > 0) {$cb[0].checked = false;}
-		window.alert(err.message);
+		console.log(err.stack);
 	});
 }
 
@@ -220,11 +228,11 @@ function removeItem($item) {
  * @description Initializes the DOM-Object of the compare container
  */
 function initializeDom() {
-	var $compareContainer = $('#compare-items');
+	var $compareContainer = $('.compare-items');
 	_currentCategory = $compareContainer.data('category') || '';
 	var $active = $compareContainer.find('.compare-item').filter('.active');
 	$active.each(function () {
-		var $proudctTile = $('#' +  $(this).data('uuid'));
+		var $productTile = $('#' +  $(this).data('uuid'));
 		if ($productTile.length === 0) {return;}
 		$productTile.find('.compare-check')[0].checked = true;
 	});
@@ -239,7 +247,7 @@ function initializeDom() {
  */
 function initializeEvents() {
 	// add event to buttons to remove products
-	$('.compare-item-remove').on('click', function (e) {
+	$('.compare-item').on('click', '.compare-item-remove', function (e) {
 		removeItem($(this).closest('.compare-item'));
 	});
 
@@ -251,7 +259,7 @@ function initializeEvents() {
 	// Button to clear all compared items
 	// rely on refreshContainer to take care of hiding the container
 	$('#clear-compared-items').on('click', function () {
-		$('#compare-items .active').each(function () {
+		$('.compare-items .active').each(function () {
 			removeItem($(this));
 		});
 	});

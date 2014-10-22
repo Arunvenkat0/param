@@ -1936,27 +1936,27 @@ var ajax = require('../ajax'),
  * @description Binds the click events to the remove-link and quick-view button
  */
 function initializeEvents() {
-	$('#compare-table').on("click", ".remove-link", function (e) {
+	$('#compare-table').on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		ajax.getJson({
-			url : this.href,
-			callback : function (response) {
+			url: this.href,
+			callback: function (response) {
 				page.refresh();
 			}
 		});
 	})
-	.on("click", ".open-quick-view", function (e) {
+	.on('click', '.open-quick-view', function (e) {
 		e.preventDefault();
-		var form = $(this).closest("form");
+		var form = $(this).closest('form');
 		quickview.show({
-			url:form.attr("action"),
-			source:"quickview",
-			data:form.serialize()
+			url: form.attr('action'),
+			source: 'quickview',
+			data: form.serialize()
 		});
 	});
 
-	$('#compare-category-list').on("change", function () {
-		$(this).closest("form").submit();
+	$('#compare-category-list').on('change', function () {
+		$(this).closest('form').submit();
 	});
 }
 
@@ -1965,6 +1965,7 @@ exports.init = function () {
 	initializeEvents();
 	product.initAddToCart();
 }
+
 },{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js":[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
@@ -2944,7 +2945,7 @@ var _currentCategory = '',
  * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
  */
 function refreshContainer() {
-	var $compareContainer = $('#compare-items');
+	var $compareContainer = $('.compare-items');
 	var $compareItems = $compareContainer.find('.compare-item');
 	var numActive = $compareItems.filter('.active').length;
 
@@ -2954,15 +2955,7 @@ function refreshContainer() {
 		$('#compare-items-button').removeAttr('disabled');
 	}
 
-	// update list with sequential classes for ui targeting
-
-	for (var i = 0; i < $compareItems.length; i++) {
-		$compareItems.removeClass('compare-item-' + i);
-		$compareItems.eq(i).addClass('compare-item-' + i);
-	}
-
 	$compareContainer.toggle(numActive > 0);
-
 }
 /**
  * @private
@@ -2971,7 +2964,7 @@ function refreshContainer() {
  */
 function addToList(data) {
 	// get the first compare-item not currently active
-	var $item = $('#compare-items').find('.compare-item').not('.active').first(),
+	var $item = $('.compare-items .compare-item').not('.active').first(),
 		$productTile = $('#' + data.uuid);
 
 	if ($item.length === 0) {
@@ -2989,14 +2982,8 @@ function addToList(data) {
 	// set as active item
 	$item.addClass('active')
 		.attr('data-uuid', data.uuid)
-		.data('itemid', data.itemid);
-
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: $(data.img).attr('src'),
-			alt: $(data.img).attr('alt')
-		});
+		.data('itemid', data.itemid)
+		.append($(data.img).clone().addClass('compare-product'));
 
 	// refresh container state
 	refreshContainer();
@@ -3015,24 +3002,15 @@ function removeFromList(uuid) {
 	var $item = $('[data-uuid="' + uuid + '"]');
 	if ($item.length === 0) { return; }
 
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: Urls.compareEmptyImage,
-			alt: Resources.EMPTY_IMG_ALT
-		});
-
 	// remove class, data and id from item
 	$item.removeClass('active')
 		.removeAttr('data-uuid')
 		.removeAttr('data-itemid')
 		.data('uuid', '')
-		.data('itemid', '');
+		.data('itemid', '')
+		// remove the image
+		.find('.compare-product').remove();
 
-	// use clone to prevent image flash when removing item from list
-	var cloneItem = $item.clone();
-	$item.remove();
-	cloneItem.appendTo($('#compare-items-panel'));
 	refreshContainer();
 
 	// ensure that the associated checkbox is not checked
@@ -3063,13 +3041,43 @@ function addProductAjax(args) {
 	return promise;
 }
 
+function shiftImages() {
+	return new Promise(function (resolve, reject) {
+		var $items = $('.compare-items .compare-item');
+		$items.each(function (i, item) {
+			var $item = $(item);
+			// last item
+			if (i === $items.length - 1) {
+				$item.removeClass('active')
+					.removeAttr('data-uuid')
+					.removeAttr('data-itemid')
+					.data('uuid', '')
+					.data('itemid', '')
+					.find('.compare-product').remove();
+				return;
+			}
+			var $next = $items.eq(i + 1);
+			if ($next.hasClass('active')) {
+				// remove its own image
+				$next.find('.compare-product').detach().appendTo($item);
+				$item.addClass('active')
+					.attr('data-uuid', $next.data('uuid'))
+					.attr('data-itemid', $next.data('itemid'))
+					.data('uuid', $next.data('uuid'))
+					.data('itemid', $next.data('itemid'));
+			}
+		});
+		resolve();
+	});
+}
+
 /**
  * @function
  * @description Adds product to the compare table
  */
 function addProduct(args) {
 	var promise;
-	var $items = $('#compare-items').find('.compare-item');
+	var $items = $('.compare-items .compare-item');
 	var $cb = $(args.cb);
 	var numActive = $items.filter('.active').length;
 	if (numActive === MAX_ACTIVE) {
@@ -3079,24 +3087,25 @@ function addProduct(args) {
 		}
 
 		// remove product using id
-		var $item = $items.first();
-		var uuid = $item.data('uuid');
+		var $firstItem = $items.first();
+		var uuid = $firstItem.data('uuid');
 		promise = removeProduct({
-			itemid: item.data('itemid'),
+			itemid: $firstItem.data('itemid'),
 			uuid: uuid,
 			cb: $('#' + uuid).find('.compare-check')
+		}).then(function () {
+			return shiftImages();
 		});
 	} else {
 		promise = Promise.resolve(0);
 	}
 	return promise.then(function () {
-		refreshContainer();
 		return addProductAjax(args).then(function () {
 			addToList(args);
 		});
 	}).then(null, function (err) {
 		if ($cb && $cb.length > 0) {$cb[0].checked = false;}
-		window.alert(err.message);
+		console.log(err.stack);
 	});
 }
 
@@ -3150,11 +3159,11 @@ function removeItem($item) {
  * @description Initializes the DOM-Object of the compare container
  */
 function initializeDom() {
-	var $compareContainer = $('#compare-items');
+	var $compareContainer = $('.compare-items');
 	_currentCategory = $compareContainer.data('category') || '';
 	var $active = $compareContainer.find('.compare-item').filter('.active');
 	$active.each(function () {
-		var $proudctTile = $('#' +  $(this).data('uuid'));
+		var $productTile = $('#' +  $(this).data('uuid'));
 		if ($productTile.length === 0) {return;}
 		$productTile.find('.compare-check')[0].checked = true;
 	});
@@ -3169,7 +3178,7 @@ function initializeDom() {
  */
 function initializeEvents() {
 	// add event to buttons to remove products
-	$('.compare-item-remove').on('click', function (e) {
+	$('.compare-item').on('click', '.compare-item-remove', function (e) {
 		removeItem($(this).closest('.compare-item'));
 	});
 
@@ -3181,7 +3190,7 @@ function initializeEvents() {
 	// Button to clear all compared items
 	// rely on refreshContainer to take care of hiding the container
 	$('#clear-compared-items').on('click', function () {
-		$('#compare-items .active').each(function () {
+		$('.compare-items .active').each(function () {
 			removeItem($(this));
 		});
 	});
@@ -3234,45 +3243,45 @@ function initializeEvents() {
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
-		var $tile = $(this).closest(".grid-tile"),
-			$thumb = $tile.find(".product-image a.thumb-link img").filter(":first"),
+		var $tile = $(this).closest(".product-tile"),
+			$thumb = $tile.find(".product-image .thumb-link img").eq(0),
 			data = $thumb.data("current");
 
 		$thumb.attr({
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		});
 	});
 	$('.swatch-list .swatch').on('click', function (e) {
 		e.preventDefault();
 		if ($(this).hasClass('selected')) { return; }
 
-		var $tile = $(this).closest('.grid-tile');
+		var $tile = $(this).closest('.product-tile');
 		$(this).closest('.swatch-list').find('.swatch.selected').removeClass('selected');
 		$(this).addClass('selected');
 		$tile.find('.thumb-link').attr('href', $(this).attr('href'));
 		$tile.find('name-link').attr('href', $(this).attr('href'));
 
 		var data = $(this).children('img').filter(':first').data('thumb');
-		var $thumb = $tile.find('.product-image .thumb-link img').filter(':first');
+		var $thumb = $tile.find('.product-image .thumb-link img').eq(0);
 		var currentAttrs = {
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		};
 		$thumb.attr(currentAttrs);
 		$thumb.data('current', currentAttrs);
 	}).on('mouseenter', function () {
 		// get current thumb details
-		var $tile = $(this).closest('.grid-tile'),
-			$thumb = $tile.find('.product-image .thumb-link img').filter(':first'),
+		var $tile = $(this).closest('.product-tile'),
+			$thumb = $tile.find('.product-image .thumb-link img').eq(0),
 			data = $(this).children('img').filter(':first').data('thumb'),
 			current = $thumb.data('current');
 
 		// If this is the first time, then record the current img
 		if (!current) {
-			$thumb.data('current',{
+			$thumb.data('current', {
 				src: $thumb[0].src,
 				alt: $thumb[0].alt,
 				title: $thumb[0].title
@@ -3281,20 +3290,20 @@ function initializeEvents() {
 
 		// Set the tile image to the values provided on the swatch data attributes
 		$thumb.attr({
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		});
 	});
 }
 
 
 exports.init = function () {
-	var $tiles = $('.tiles-container').find(".product-tile");
-	if ($tiles.length===0) { return; }
+	var $tiles = $('.tiles-container .product-tile');
+	if ($tiles.length === 0) { return; }
 	$tiles.syncHeight()
 		.each(function (idx) {
-			$(this).data("idx",idx);
+			$(this).data("idx", idx);
 		});
 	initializeEvents();
 };

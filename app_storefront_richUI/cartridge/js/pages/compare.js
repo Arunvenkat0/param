@@ -12,27 +12,27 @@ var ajax = require('../ajax'),
  * @description Binds the click events to the remove-link and quick-view button
  */
 function initializeEvents() {
-	$('#compare-table').on("click", ".remove-link", function (e) {
+	$('#compare-table').on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		ajax.getJson({
-			url : this.href,
-			callback : function (response) {
+			url: this.href,
+			callback: function (response) {
 				page.refresh();
 			}
 		});
 	})
-	.on("click", ".open-quick-view", function (e) {
+	.on('click', '.open-quick-view', function (e) {
 		e.preventDefault();
-		var form = $(this).closest("form");
+		var form = $(this).closest('form');
 		quickview.show({
-			url:form.attr("action"),
-			source:"quickview",
-			data:form.serialize()
+			url: form.attr('action'),
+			source: 'quickview',
+			data: form.serialize()
 		});
 	});
 
-	$('#compare-category-list').on("change", function () {
-		$(this).closest("form").submit();
+	$('#compare-category-list').on('change', function () {
+		$(this).closest('form').submit();
 	});
 }
 
