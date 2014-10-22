@@ -99,7 +99,7 @@ exports.init = function () {
 
 	$('#check-giftcert').on('click', function (e) {
 		e.preventDefault();
-		$balance = $('.balance');
+		var $balance = $('.balance');
 		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
 			var error = $balance.find('span.error');
 			if (error.length===0) {
