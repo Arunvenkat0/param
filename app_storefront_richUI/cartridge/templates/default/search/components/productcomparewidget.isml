@@ -34,7 +34,7 @@
 						<div class="compare-item-number"><isprint value="${Status.index + 1}" style="INTEGER" /></div>
 						<a class="compare-item-remove">x</a>
 						<isif condition="${!empty(item.id)}">
-							<img class="compare-product" src="${item.imgSrc}" alt="${item.imgAlt}"/>
+							<img class="compare-item-image" src="${item.imgSrc}" alt="${item.imgAlt}"/>
 						</isif>
 					</div>
 				</isloop>

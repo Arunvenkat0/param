@@ -42,7 +42,7 @@ function addToList(data) {
 		}
 		window.alert(Resources.COMPARE_ADD_FAIL)
 		return;
-	} // safety only
+	}
 
 	// if already added somehow, return
 	if ($('[data-uuid="' + data.uuid + '"]').length > 0) {
@@ -51,26 +51,18 @@ function addToList(data) {
 	// set as active item
 	$item.addClass('active')
 		.attr('data-uuid', data.uuid)
+		.attr('data-itemid', data.itemid)
+		.data('uuid', data.uuid)
 		.data('itemid', data.itemid)
-		.append($(data.img).clone().addClass('compare-product'));
-
-	// refresh container state
-	refreshContainer();
-
-	if ($productTile.length === 0) { return; }
-
-	// ensure that the associated checkbox is checked
-	$productTile.find('.compare-check')[0].checked = true;
+		.append($(data.img).clone().addClass('compare-item-image'));
 }
 /**
  * @private
  * @function
  * description Removes an item from the compare container and refreshes it
  */
-function removeFromList(uuid) {
-	var $item = $('[data-uuid="' + uuid + '"]');
+function removeFromList($item) {
 	if ($item.length === 0) { return; }
-
 	// remove class, data and id from item
 	$item.removeClass('active')
 		.removeAttr('data-uuid')
@@ -78,14 +70,7 @@ function removeFromList(uuid) {
 		.data('uuid', '')
 		.data('itemid', '')
 		// remove the image
-		.find('.compare-product').remove();
-
-	refreshContainer();
-
-	// ensure that the associated checkbox is not checked
-	var $productTile = $('#' + uuid);
-	if ($productTile.length === 0 ) {return;}
-	$productTile.find('.compare-check')[0].checked = false;
+		.find('.compare-item-image').remove();
 }
 
 function addProductAjax(args) {
@@ -110,6 +95,28 @@ function addProductAjax(args) {
 	return promise;
 }
 
+function removeProductAjax(args) {
+	var promise = new Promise(function (resolve, reject) {
+		$.ajax({
+			url: Urls.compareRemove,
+			data: {
+				pid: args.itemid,
+				category: _currentCategory
+			},
+			dataType: 'json'
+		}).done(function (response) {
+			if (!response || !response.success) {
+				reject(new Error(Resources.COMPARE_REMOVE_FAIL));
+			} else {
+				resolve(response);
+			}
+		}).fail(function (jqxhr, status, err) {
+			reject(new Error(err));
+		});
+	});
+	return promise;
+}
+
 function shiftImages() {
 	return new Promise(function (resolve, reject) {
 		var $items = $('.compare-items .compare-item');
@@ -117,18 +124,12 @@ function shiftImages() {
 			var $item = $(item);
 			// last item
 			if (i === $items.length - 1) {
-				$item.removeClass('active')
-					.removeAttr('data-uuid')
-					.removeAttr('data-itemid')
-					.data('uuid', '')
-					.data('itemid', '')
-					.find('.compare-product').remove();
-				return;
+				return removeFromList($item);
 			}
 			var $next = $items.eq(i + 1);
 			if ($next.hasClass('active')) {
 				// remove its own image
-				$next.find('.compare-product').detach().appendTo($item);
+				$next.find('.compare-item-image').detach().appendTo($item);
 				$item.addClass('active')
 					.attr('data-uuid', $next.data('uuid'))
 					.attr('data-itemid', $next.data('itemid'))
@@ -157,12 +158,7 @@ function addProduct(args) {
 
 		// remove product using id
 		var $firstItem = $items.first();
-		var uuid = $firstItem.data('uuid');
-		promise = removeProduct({
-			itemid: $firstItem.data('itemid'),
-			uuid: uuid,
-			cb: $('#' + uuid).find('.compare-check')
-		}).then(function () {
+		promise = removeItem($firstItem).then(function () {
 			return shiftImages();
 		});
 	} else {
@@ -171,9 +167,11 @@ function addProduct(args) {
 	return promise.then(function () {
 		return addProductAjax(args).then(function () {
 			addToList(args);
+			if ($cb && $cb.length > 0) { $cb[0].checked = true; }
+			refreshContainer();
 		});
 	}).then(null, function (err) {
-		if ($cb && $cb.length > 0) {$cb[0].checked = false;}
+		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
 		console.log(err.stack);
 	});
 }
@@ -181,45 +179,29 @@ function addProduct(args) {
 /**
  * @function
  * @description Removes product from the compare table
+ * @param {object} args - the arguments object should have the following properties: itemid, uuid and cb (checkbox)
  */
 function removeProduct(args) {
-	if (!args.itemid) {return;}
 	var $cb = args.cb ? $(args.cb) : null;
-	var promise = new Promise(function (resolve, reject) {
-		$.ajax({
-			url: Urls.compareRemove,
-			data: {
-				pid: args.itemid,
-				category: _currentCategory
-			},
-			dataType: 'json'
-		}).done(function (response) {
-			if (!response || !response.success) {
-				reject(new Error(Resources.COMPARE_REMOVE_FAIL));
-			} else {
-				resolve(response);
-			}
-		}).fail(function (jqxhr, status, err) {
-			reject(new Error(err));
-		});
-	});
-	return promise.then(function () {
-		removeFromList(args.uuid);
+	return removeProductAjax(args).then(function () {
+		var $item = $('[data-uuid="' + args.uuid + '"]');
+		removeFromList($item);
+		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
+		refreshContainer();
 	}, function (err) {
-		if ($cb && $cb.length > 0) {$cb[0].checked = true;}
-		window.alert(err.message);
+		if ($cb && $cb.length > 0) { $cb[0].checked = true; }
+		console.log(err.stack);
 	});
 }
 
 function removeItem($item) {
 	var uuid = $item.data('uuid'),
 		$productTile = $('#' + uuid);
-	removeProduct({
+	return removeProduct({
 		itemid: $item.data('itemid'),
 		uuid: uuid,
 		cb: ($productTile.length === 0) ? null : $productTile.find('.compare-check')
 	});
-	refreshContainer();
 }
 
 /**
