@@ -13,5 +13,5 @@
 	${Resource.msg('approachingpromo.purchase','checkout',null)}
 	<isprint value="${approachingdiscount.getDistanceFromConditionThreshold()}" /> ${Resource.msg('approachingpromo.more','checkout',null)}
 	${Resource.msg('approachingpromo.receive','checkout',null)}
-	<isprint value="${approachingdiscount.getDiscount().getPromotion().getCalloutMsg()}" />
+	<isprint value="${approachingdiscount.getDiscount().getPromotion().getCalloutMsg()}" encoding="off"/>
 </div>

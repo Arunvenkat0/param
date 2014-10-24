@@ -9,7 +9,7 @@ p_discount_line_item : discount line item
 			<isprint value="${pdict.p_alert_text}"/>
 		</div>
 		<span class="bonus-product-promo">
-			<isprint value="${empty(pdict.p_discount_line_item.promotion.calloutMsg) ? '' : pdict.p_discount_line_item.promotion.calloutMsg.markup}"/>
+			<isprint value="${empty(pdict.p_discount_line_item.promotion.calloutMsg) ? '' : pdict.p_discount_line_item.promotion.calloutMsg.markup}" encoding="off"/>
 		</span>
 		
 		<a class="tooltip" href="#">
