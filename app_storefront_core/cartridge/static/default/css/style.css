@@ -1606,10 +1606,6 @@ div.level-3 ul.level-3 {
     font-size: 1.2em;
     font-style: italic;
     margin: 13px 0 2px; }
-    .product-tile .product-name h2 {
-      font-size: 1.1em !important;
-      font-weight: normal;
-      margin-bottom: 5px; }
   .product-tile .product-pricing .product-standard-price {
     text-decoration: line-through; }
   .grid-tile .product-tile .product-swatches {
