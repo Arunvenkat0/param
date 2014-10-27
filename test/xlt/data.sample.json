@@ -1,9 +1,0 @@
-{
-	"shopURL": "http://example.demandware.net/on/demandware.store/Sites-SiteGenesis-Site",
-	"shopName": "Demandware SiteGenesis",
-	"BMurl": "http://example.demandware.net/on/demandware.store/Sites-Site",
-	"bmlogin": "bmlogin",
-	"BM": "password",
-	"SiteName": "Site Genesis",
-	"browser": "phantomjs"
-}
