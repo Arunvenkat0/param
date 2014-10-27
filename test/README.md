@@ -13,7 +13,7 @@
     ```
     For more information, see http://webdriver.io/guide/getstarted/install.html
 - Update site url config and desired browser client
-    If you are running selenium test, specify a url and client in `test/browser/config.json`. For example:
+    If you are running selenium test, specify a url and client in `test/webdriver/config.json`. For example:
 
     ```json
     {
