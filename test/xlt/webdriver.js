@@ -35,6 +35,16 @@ methods.forEach(function (method) {
 	webdriver[method + 'P'] = Promise.denodeify(webdriver[method]).bind(webdriver);
 });
 
+webdriver.checkP = function (target, reverse) {
+	return webdriver.isSelectedP(target).then(function (selected) {
+		if ((reverse ? !selected : selected)) {
+			return Promise.resolve();
+		} else {
+			return webdriver.clickP(target);
+		}
+	});
+};
+
 webdriver.storeP = function (data, target, value) {
 	data[value] = target;
 	return webdriver.localStorageP('POST', {
@@ -60,16 +70,6 @@ webdriver.storeTextP = function (data, target, value) {
 			key: value,
 			value: text
 		});
-	});
-};
-
-webdriver.checkP = function (target, reverse) {
-	return webdriver.isSelectedP(target).then(function (selected) {
-		if ((reverse ? !selected : selected)) {
-			return Promise.resolve();
-		} else {
-			return webdriver.clickP(target);
-		}
 	});
 };
 
