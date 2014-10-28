@@ -35,7 +35,7 @@ function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
 	$('body')
-		.on('keydown', 'textarea[data-character-limit]', function(e) {
+		.on('keydown', 'textarea[data-character-limit]', function (e) {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length;
@@ -44,14 +44,14 @@ function initializeEvents() {
 					e.preventDefault();
 				}
 		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function(e) {
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function (e) {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length,
 				charsRemain = charsLimit - charsUsed;
 
-			if(charsRemain < 0) {
-				$(this).val( text.slice(0, charsRemain) );
+			if (charsRemain < 0) {
+				$(this).val(text.slice(0, charsRemain));
 				charsRemain = 0;
 			}
 
@@ -70,16 +70,19 @@ function initializeEvents() {
 	}
 
 	// print handler
-	$('.print-page').on('click', function () { window.print(); return false; });
+	$('.print-page').on('click', function () {
+		window.print();
+		return false;
+	});
 
 	// add show/hide navigation elements
-	$('.secondary-navigation .toggle').click(function(){
+	$('.secondary-navigation .toggle').click(function () {
 		$(this).toggleClass('expanded').next('ul').toggle();
 	});
 
 	// add generic toggle functionality
 	$('.toggle').next('.toggle-content').hide();
-	$('.toggle').click(function(){
+	$('.toggle').click(function () {
 		$(this).toggleClass('expanded').next('.toggle-content').toggle();
 	});
 
@@ -92,8 +95,8 @@ function initializeEvents() {
 				return; // do not animate when contains non-default value
 			}
 
-			$(this).animate({ color: '#999999'}, 500, 'linear', function () {
-				$(this).val('').css('color','#333333');
+			$(this).animate({color: '#999999'}, 500, 'linear', function () {
+				$(this).val('').css('color', '#333333');
 			});
 		}).blur(function () {
 			var val = $.trim($(this.val()));
@@ -101,7 +104,7 @@ function initializeEvents() {
 				return; // do not animate when contains value
 			}
 			$(this).val(Resources.SUBSCRIBE_EMAIL_DEFAULT)
-				.css('color','#999999')
+				.css('color', '#999999')
 				.animate({color: '#333333'}, 500, 'linear');
 		});
 	}
@@ -171,9 +174,9 @@ var app = {
 
 // general extension functions
 (function () {
-	String.format = function() {
+	String.format = function () {
 		var s = arguments[0];
-		var i, len=arguments.length - 1;
+		var i, len = arguments.length - 1;
 		for (i = 0; i < len; i++) {
 			var reg = new RegExp('\\{' + i + '\\}', 'gm');
 			s = s.replace(reg, arguments[i + 1]);
@@ -190,7 +193,7 @@ $(document).ready(function () {
 },{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":25,"./pages/registry":26,"./pages/search":27,"./pages/storefront":28,"./pages/storelocator":29,"./pages/wishlist":30,"./searchplaceholder":34,"./searchsuggest":36,"./searchsuggest-beta":35,"./tooltip":39,"./util":40,"./validator":41}],2:[function(require,module,exports){
 'use strict';
 
-var progress= require('./progress'),
+var progress = require('./progress'),
 	util = require('./util');
 
 var currentRequests = [];
@@ -206,7 +209,7 @@ var currentRequests = [];
 var getJson = function (options) {
 	options.url = util.toAbsoluteUrl(options.url);
 	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
+	if (!options.url || currentRequests[options.url]) {
 		return;
 	}
 
@@ -214,30 +217,30 @@ var getJson = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType : "json",
-		url : options.url,
-		async : (typeof options.async==="undefined" || options.async===null) ? true : options.async,
-		data : options.data || {}
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
 	})
 	// success
 	.done(function (response) {
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(response);
 		}
 	})
 	// failed
 	.fail(function (xhr, textStatus) {
-		if(textStatus === "parsererror") {
+		if (textStatus === "parsererror") {
 			window.alert(Resources.BAD_RESPONSE);
 		}
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(null);
 		}
 	})
 	// executed on success or fail
 	.always(function () {
 		// remove current request from hash
-		if(currentRequests[options.url]) {
+		if (currentRequests[options.url]) {
 			delete currentRequests[options.url];
 		}
 	});
@@ -253,7 +256,7 @@ var getJson = function (options) {
 var load = function (options) {
 	options.url = util.toAbsoluteUrl(options.url);
 	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
+	if (!options.url || currentRequests[options.url]) {
 		return;
 	}
 
@@ -261,23 +264,23 @@ var load = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType : "html",
-		url : util.appendParamToURL(options.url, "format", "ajax"),
-		data : options.data
+		dataType: "html",
+		url: util.appendParamToURL(options.url, "format", "ajax"),
+		data: options.data
 	})
 	.done(function (response) {
 		// success
-		if(options.target) {
+		if (options.target) {
 			$(options.target).empty().html(response);
 		}
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(response);
 		}
 
 	})
 	.fail(function (xhr, textStatus) {
 		// failed
-		if(textStatus === "parsererror") {
+		if (textStatus === "parsererror") {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		options.callback(null, textStatus);
@@ -285,7 +288,7 @@ var load = function (options) {
 	.always(function () {
 		progress.hide();
 		// remove current request from hash
-		if(currentRequests[options.url]) {
+		if (currentRequests[options.url]) {
 			delete currentRequests[options.url];
 		}
 	});
@@ -293,6 +296,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
+
 },{"./progress":32,"./util":40}],3:[function(require,module,exports){
 'use strict';
 
@@ -317,14 +321,14 @@ function getBonusProducts() {
 	var i, len;
 	for (i = 0, len = selectedList.length; i < len; i++) {
 		var p = {
-			pid : selectedList[i].pid,
-			qty : selectedList[i].qty,
-			options : {}
+			pid: selectedList[i].pid,
+			qty: selectedList[i].qty,
+			options: {}
 		};
 		var a, alen, bp = selectedList[i];
 		for (a = 0, alen = bp.options.length; a < alen; a++) {
 			var opt = bp.options[a];
-			p.options = {optionName:opt.name,optionValue:opt.value};
+			p.options = {optionName:opt.name, optionValue:opt.value};
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -370,8 +374,7 @@ function updateSummary() {
 	$bonusProductList.find('.bonus-items-available').text(remain);
 	if (remain <= 0) {
 		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
-	}
-	else {
+	} else {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 	}
 }
@@ -388,7 +391,7 @@ function initializeGrid () {
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
-	cartItems.each(function() {
+	cartItems.each(function () {
 		var ci = $(this);
 		var product = {
 			uuid: ci.data('uuid'),
@@ -398,7 +401,7 @@ function initializeGrid () {
 			attributes: {}
 		};
 		var attributes = ci.find('ul.item-attributes li');
-		attributes.each(function (){
+		attributes.each(function () {
 			var li = $(this);
 			product.attributes[li.data('attributeId')] = {
 				displayName:li.children('.display-name').html(),
@@ -411,13 +414,13 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('change', '.input-text', function (e){
+	.on('change', '.input-text', function (e) {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
 	.on('click', '.button-select-bonus', function (e) {
 		e.preventDefault();
-		if (selectedList.length>=maxItems) {
+		if (selectedList.length >= maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
 			$bonusProductList.find('.bonus-items-available').text('0');
 			return;
@@ -456,7 +459,7 @@ function initializeGrid () {
 		selectedList.push(product);
 		updateSummary();
 	})
-	.on('click', '.remove-link', function(e){
+	.on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		var container = $(this).closest('.selected-bonus-item');
 		if (!container.data('uuid')) { return; }
@@ -465,7 +468,7 @@ function initializeGrid () {
 		var i, len = selectedList.length;
 		for (i = 0; i < len; i++) {
 			if (selectedList[i].uuid === uuid) {
-				selectedList.splice(i,1);
+				selectedList.splice(i, 1);
 				break;
 			}
 		}
@@ -510,15 +513,15 @@ var bonusProductsView = {
 	 * @function
 	 * @description Opens the bonus product quick view dialog
 	 */
-	show : function (url) {
+	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
 		dialog.create({
-			target : $bonusProduct,
-			options : {
+			target: $bonusProduct,
+			options: {
 				width: 795,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCTS
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCTS
 			}
 		});
 
@@ -529,7 +532,7 @@ var bonusProductsView = {
 			callback: function () {
 				$bonusProduct.dialog('open');
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display','none');
+				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
 			}
 		});
 
@@ -550,12 +553,12 @@ var bonusProductsView = {
 		if ($bonusDiscountContainer.length === 0) { return; }
 
 		dialog.create({
-			target : $bonusDiscountContainer,
-			options : {
-				height : 'auto',
-				width : 350,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCT
+			target: $bonusDiscountContainer,
+			options: {
+				height: 'auto',
+				width: 350,
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCT
 			}
 		});
 		$bonusDiscountContainer.dialog('open');
@@ -567,7 +570,7 @@ var bonusProductsView = {
 			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
 				bonusDiscountLineItemUUID: uuid,
 				source: 'bonus'
-			 });
+			});
 
 			$bonusDiscountContainer.dialog('close');
 			this.show(url);
@@ -578,6 +581,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
+
 },{"./ajax":2,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
 'use strict';
 
@@ -836,7 +840,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":13,"./util":40,"promise":45}],5:[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":40,"promise":44}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -853,28 +857,29 @@ function captureCarouselRecommendations(c, li, index, state) {
 
 	$(li).find(".capture-product-id").each(function () {
 		dw.ac.capture({
-			id : $(this).text(),
-			type : dw.ac.EV_PRD_RECOMMENDATION
+			id: $(this).text(),
+			type: dw.ac.EV_PRD_RECOMMENDATION
 		});
 	});
 }
 
 var components = {
-	carouselSettings : {
-		scroll : 1,
+	carouselSettings: {
+		scroll: 1,
 		itemFallbackDimension: '100%',
-		itemVisibleInCallback : app.captureCarouselRecommendations
+		itemVisibleInCallback: app.captureCarouselRecommendations
 	},
-	init : function () {
-		setTimeout(function(){
+	init: function () {
+		setTimeout(function () {
 			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical : true}, this.carouselSettings));
+			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.carouselSettings));
 			$('#horizontal-carousel').jcarousel(this.carouselSettings);
 		}.bind(this), 1000);
 	}
 };
 
 module.exports = components;
+
 },{}],6:[function(require,module,exports){
 'use strict';
 
@@ -888,7 +893,7 @@ module.exports = function () {
 	 * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
 	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
 	 */
-	 var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
+	var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
 	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
 		// check for privacy policy page
 		if ($('.privacy-policy').length === 0) {
@@ -978,7 +983,7 @@ var dialog = {
 	 * @description Closes the dialog and triggers the "close" event for the dialog
 	 */
 	close: function () {
-		if(!this.container) {
+		if (!this.container) {
 			return;
 		}
 		this.container.dialog("close");
@@ -1072,31 +1077,31 @@ function setAddToCartHandler(e) {
 	var form = $(this).closest("form");
 
 	var options = {
-		url : util.ajaxUrl(form.attr('action')),
-		method : 'POST',
+		url: util.ajaxUrl(form.attr('action')),
+		method: 'POST',
 		cache: false,
-		contentType : 'application/json',
-		data : form.serialize()
+		contentType: 'application/json',
+		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {
-		if( response.success ) {
+		if (response.success) {
 			ajax.load({
-				url : Urls.minicartGC,
-				data :{lineItemId : response.result.lineItemId},
-				callback : function(response){
+				url: Urls.minicartGC,
+				data: {lineItemId: response.result.lineItemId},
+				callback: function (response) {
 					minicart.show(response);
 					form.find('input,textarea').val('');
 				}
 			});
 		} else {
 			form.find('span.error').hide();
-			for( id in response.errors.FormErrors ) {
-				var error_el = $('#'+id).addClass('error').removeClass('valid').next('.error');
-				if( !error_el || error_el.length===0 ) {
-					error_el = $('<span for="'+id+'" generated="true" class="error" style=""></span>');
-					$('#'+id).after(error_el);
+			for (id in response.errors.FormErrors) {
+				var error_el = $('#' + id).addClass('error').removeClass('valid').next('.error');
+				if (!error_el || error_el.length === 0) {
+					error_el = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
+					$('#' + id).after(error_el);
 				}
-				error_el.text(response.errors.FormErrors[id].replace(/\\'/g,"'")).show();
+				error_el.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
 			}
 			console.log(JSON.stringify(response.errors));
 		}
@@ -1110,7 +1115,7 @@ function setAddToCartHandler(e) {
 	});
 }
 
-exports.init = function(){
+exports.init = function () {
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
@@ -1140,9 +1145,10 @@ module.exports = function () {
 		arr.sort(function (a, b) {
 			return $(a).height() - $(b).height();
 		});
-		return this.height($(arr[arr.length-1]).height());
+		return this.height($(arr[arr.length - 1]).height());
 	};
 }
+
 },{}],11:[function(require,module,exports){
 'use strict';
 
@@ -1163,7 +1169,7 @@ var timer = {
 };
 
 var minicart = {
-	init : function () {
+	init: function () {
 		this.$el = $('#mini-cart');
 		this.$content = this.$el.find('.mini-cart-content');
 
@@ -1171,7 +1177,10 @@ var minicart = {
 		$productList.children().not(':first').addClass('collapsed');
 		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
 
-		$productList.toggledList({toggleClass : "collapsed", triggerSelector:".mini-cart-toggler", eventName:"click"});
+		$productList.toggledList({
+			toggleClass: 'collapsed',
+			triggerSelector: '.mini-cart-toggler',
+			eventName: 'click'});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -1194,7 +1203,7 @@ var minicart = {
 	 * @description Shows the given content in the mini cart
 	 * @param {String} A HTML string with the content which will be shown
 	 */
-	show : function (html) {
+	show: function (html) {
 		this.$el.html(html);
 		util.scrollBrowser(0);
 		this.init();
@@ -1205,7 +1214,7 @@ var minicart = {
 	 * @function
 	 * @description Slides down and show the contents of the mini cart
 	 */
-	slide : function () {
+	slide: function () {
 		timer.clear();
 		// show the item
 		this.$content.slideDown('slow');
@@ -1217,7 +1226,7 @@ var minicart = {
 	 * @description Closes the mini cart with given delay
 	 * @param {Number} delay The delay in milliseconds
 	 */
-	close : function (delay) {
+	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
 	},
@@ -1235,21 +1244,21 @@ var ajax = require('./ajax'),
 exports.init = function () {
 	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
 	$('.currency-converter').on('change', function () {
-			// request results from server
-	 		ajax.getJson({
-	 		 	url: util.appendParamsToUrl(Urls.currencyConverter , {
-	 		 		format: 'ajax',
-	 		 		currencyMnemonic: $('.currency-converter').val()
-	 		 	}),
-	 		 	callback: function(){
-	 				location.reload();
-	 		 	}
-	 		 });
+		// request results from server
+		ajax.getJson({
+			url: util.appendParamsToUrl(Urls.currencyConverter, {
+				format: 'ajax',
+				currencyMnemonic: $('.currency-converter').val()
+			}),
+			callback: function () {
+				location.reload();
+			}
+		});
 	});
 
 	//hide the feature if user is in checkout
-	if (page.title === 'Checkout'){
-		$('.mc-class').css('display','none');
+	if (page.title === 'Checkout') {
+		$('.mc-class').css('display', 'none');
 	}
 };
 
@@ -1294,21 +1303,21 @@ function initializeAddressForm(form) {
 	tooltip.init();
 	//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
 
-	$form.on('click', '.apply-button', function(e) {
+	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
 		var addressId = $form.find('input[name$="_addressid"]');
 		addressId.val(addressId.val().replace(/[^\w+-]/g, '-'));
 		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl($form.attr('action'),{format: 'ajax'});
+		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
 		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
 			data: $form.serialize() + '&' + applyName + '=x',
 			type: 'POST'
 		};
-		$.ajax(options).done(function (data){
+		$.ajax(options).done(function (data) {
 			if (typeof(data) !== 'string') {
 				if (data.success) {
 					dialog.close();
@@ -1324,11 +1333,11 @@ function initializeAddressForm(form) {
 			}
 		});
 	})
-	.on('click', '.cancel-button, .close-button', function(e){
+	.on('click', '.cancel-button, .close-button', function (e) {
 		e.preventDefault();
 		dialog.close();
 	})
-	.on('click', '.delete-button', function(e){
+	.on('click', '.delete-button', function (e) {
 		e.preventDefault();
 		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			var url = util.appendParamsToUrl(Urls.deleteAddress, {
@@ -1339,16 +1348,14 @@ function initializeAddressForm(form) {
 				url: url,
 				method: 'POST',
 				dataType: 'json'
-			}).done(function(data){
+			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
 					dialog.close();
 					page.refresh();
-				}
-				else if (data.message.length>0) {
+				} else if (data.message.length > 0) {
 					alert(data.message);
 					return false;
-				}
-				else {
+				} else {
 					dialog.close();
 					page.refresh();
 				}
@@ -1356,7 +1363,7 @@ function initializeAddressForm(form) {
 		}
 	});
 
-	$('select[id$="_country"]', $form).on('change', function (){
+	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
 
@@ -1401,10 +1408,10 @@ function initAddressEvents() {
 			$.ajax({
 				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
 				dataType: 'json'
-			}).done(function(data){
+			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
 					page.redirect(Urls.addressesList);
-				} else if (data.message.length>0) {
+				} else if (data.message.length > 0) {
 					alert(data.message);
 				} else {
 					page.refresh();
@@ -1606,7 +1613,7 @@ function populateCreditCardForm(cardID) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
+			if (!data) {
 				window.alert(Resources.CC_LOAD_ERROR);
 				return false;
 			}
@@ -1632,7 +1639,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID +']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
 
 	formPrepare.validateForm();
 }
@@ -1677,7 +1684,7 @@ exports.init = function () {
 		var $balance = $('.balance');
 		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
 			var error = $balance.find('span.error');
-			if (error.length===0) {
+			if (error.length === 0) {
 				error = $('<span>').addClass('error').appendTo($balance);
 			}
 			error.html(Resources.GIFT_CERT_MISSING);
@@ -1693,7 +1700,7 @@ exports.init = function () {
 		});
 	});
 
-	$addGiftCert.on('click', function(e) {
+	$addGiftCert.on('click', function (e) {
 		e.preventDefault();
 		var code = $giftCertCode.val(),
 			$error = $checkoutForm.find('.giftcert-error');
@@ -1703,7 +1710,7 @@ exports.init = function () {
 		}
 
 		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
-		$.getJSON(url, function(data) {
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
@@ -1722,24 +1729,23 @@ exports.init = function () {
 		});
 	});
 
-	$addCoupon.on('click', function(e){
+	$addCoupon.on('click', function (e) {
 		e.preventDefault();
 		var $error = $checkoutForm.find('.coupon-error'),
 			code = $couponCode.val();
-		if (code.length===0) {
+		if (code.length === 0) {
 			$error.html(Resources.COUPON_CODE_MISSING);
 			return;
 		}
 
-		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: 'ajax'});
-		$.getJSON(url, function(data) {
+		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code, format: 'ajax'});
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
 				msg = Resources.BAD_RESPONSE;
 				fail = true;
-			}
-			else if (!data.success) {
+			} else if (!data.success) {
 				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 				fail = true;
 			}
@@ -1750,20 +1756,20 @@ exports.init = function () {
 
 			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 			//this will force a page refresh to display the coupon message based on a parameter message
-			if(data.success && data.baskettotal==0){
+			if (data.success && data.baskettotal === 0) {
 				window.location.assign(Urls.billing);
 			}
 		});
 	});
 
 	// trigger events on enter
-	$couponCode.on('keydown', function(e) {
+	$couponCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addCoupon.click();
 		}
 	});
-	$giftCertCode.on('keydown', function(e) {
+	$giftCertCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addGiftCert.click();
@@ -1872,7 +1878,7 @@ var address = require('./address'),
  * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
  */
 function initMultiGiftMessageBox() {
-	$.each( $(".item-list"), function(){
+	$.each($(".item-list"), function () {
 		var $this = $(this),
 			$isGiftYes = $this.find('.js-isgiftyes'),
 			$isGiftNo = $this.find('.js-isgiftno'),
@@ -1880,15 +1886,15 @@ function initMultiGiftMessageBox() {
 
 		//handle initial load
 		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display','block');
+			$giftMessage.css('display', 'block');
 		}
 
 		//set event listeners
-		$this.on('change', function(){
+		$this.on('change', function () {
 			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display','block');
+				$giftMessage.css('display', 'block');
 			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display','none');
+				$giftMessage.css('display', 'none');
 			}
 		});
 	});
@@ -1910,7 +1916,7 @@ function addEditAddress(target) {
 		e.preventDefault();
 		var selectedAddress = $addressList.find('select').val();
 		if (selectedAddress !== 'newAddress') {
-			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+			selectedAddress = $.grep($addressList.data('addresses'), function (add) {
 				return add.UUID === selectedAddress;
 			})[0];
 			add = false;
@@ -1960,10 +1966,10 @@ function addEditAddress(target) {
 	//preserve the uuid of the option for the hop up form
 	if (selectedAddressUUID) {
 		//update the form with selected address
-		$addressList.find('option').each(function() {
+		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected','selected');
+				$(this).attr('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});
@@ -1976,14 +1982,14 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0){
+	if ($(".cart-row .shippingaddress .select-address").length > 0) {
 		formPrepare.init({
 			continueSelector: '[name$="addressSelection_save"]',
 			formSelector: '[id$="multishipping_addressSelection"]'
 		});
 	}
 	$('.edit-address').on('click', 'a', function (e) {
-		dialog.open({url: this.href, options: {open: function() {
+		dialog.open({url: this.href, options: {open: function () {
 			address.init();
 			addEditAddress(e.target);
 		}}});
@@ -2052,16 +2058,16 @@ function getShippingMethodURL(url, extraParams) {
  */
 function selectShippingMethod(shippingMethodID) {
 	// nothing entered
-	if(!shippingMethodID) {
+	if (!shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
 	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			updateSummary();
-			if(!data || !data.shippingMethodID) {
+			if (!data || !data.shippingMethodID) {
 				window.alert("Couldn't select shipping method.");
 				return false;
 			}
@@ -2094,10 +2100,10 @@ function updateShippingMethodList() {
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
 	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
+			if (!data) {
 				window.alert("Couldn't get list of applicable shipping methods.");
 				return false;
 			}
@@ -2304,7 +2310,7 @@ module.exports = function (data, $container) {
 		if (avMsg.length === 0) {
 			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
 		}
-		avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
+		avMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
 		avMsg = avRoot.find('.not-available-msg');
@@ -2333,6 +2339,7 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
+
 },{}],25:[function(require,module,exports){
 'use strict';
 
@@ -2602,8 +2609,8 @@ function initializeEvents() {
 			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
 			productSet = $(this).closest('.subProduct'),
 			params = {
-				Quantity : isNaN(qty) ? '1' : qty,
-				format : 'ajax'
+				Quantity: isNaN(qty) ? '1' : qty,
+				format: 'ajax'
 			};
 		if (listid) {params.productlistid = listid;}
 		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
@@ -2633,7 +2640,7 @@ function initializeEvents() {
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		var $this = $(this),
 			params = {},
-			hasSwapImage, qty,listid, url;
+			hasSwapImage, qty, listid, url;
 
 		e.preventDefault();
 
@@ -2759,11 +2766,11 @@ var product = {
 		initializeDom();
 		initializeEvents();
 		loadZoom();
-		if (SitePreferences.STORE_PICKUP){
+		if (SitePreferences.STORE_PICKUP) {
 			storeinventory.init();
 		}
 	},
-	readReviews: function() {
+	readReviews: function () {
 		$('.product-tabs').tabs('select', '#tab4');
 		$('body').scrollTop($('#tab4').offset().top);
 	},
@@ -2826,7 +2833,7 @@ function populateForm(addressID, $form) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data || !data.address) {
+			if (!data || !data.address) {
 				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}
@@ -2919,7 +2926,7 @@ function infiniteScroll() {
 		// switch state to 'loading'
 		// - switches state, so the above selector is only matching once
 		// - shows loading indicator
-		loadingPlaceHolder.attr('data-loading-state','loading');
+		loadingPlaceHolder.attr('data-loading-state', 'loading');
 		loadingPlaceHolder.addClass('infinite-scroll-loading');
 
 		/**
@@ -2927,8 +2934,8 @@ function infiniteScroll() {
 		 */
 		var fillEndlessScrollChunk = function (html) {
 			loadingPlaceHolder.removeClass('infinite-scroll-loading');
-			loadingPlaceHolder.attr('data-loading-state','loaded');
-			jQuery('div.search-result-content').append(html);
+			loadingPlaceHolder.attr('data-loading-state', 'loaded');
+			$('div.search-result-content').append(html);
 		};
 
 		// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
@@ -3000,10 +3007,10 @@ function initializeEvents() {
 		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
 		var itemImg = tile.find('.product-image a img').first();
 		func({
-			itemid : tile.data('itemid'),
-			uuid : tile[0].id,
-			img : itemImg,
-			cb : cb
+			itemid: tile.data('itemid'),
+			uuid: tile[0].id,
+			img: itemImg,
+			cb: cb
 		});
 
 	});
@@ -3111,7 +3118,7 @@ function slideCarousel_initCallback(carousel) {
 	slideShowNav = slideShowNav + '</div>';
 	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
 
-	$('.jcarousel-control a').bind('click', function() {
+	$('.jcarousel-control a').bind('click', function () {
 		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
 		return false;
 	});
@@ -3129,7 +3136,7 @@ function slideCarousel_initCallback(carousel) {
  */
 function slideCarousel_itemVisible(carousel, item, idx, state) {
 	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-'+idx).addClass('active');
+	$('.jcarousel-control').find('.link-' + idx).addClass('active');
 }
 exports.init = function () {
 	$('#homepage-slider').jcarousel({
@@ -3173,7 +3180,7 @@ exports.init = function () {
 
 	//add js logic to remove the , from the qty feild to pass regex expression on client side
 	$('.option-quantity-desired input').on('focusout', function () {
-		$(this).val($(this).val().replace(',',''));
+		$(this).val($(this).val().replace(',', ''));
 	});
 };
 
@@ -3306,8 +3313,8 @@ var show = function (container) {
  * @description Hides an AJAX-loader
  */
 var hide = function () {
-	if ($loader) { 
-		$loader.hide(); 
+	if ($loader) {
+		$loader.hide();
 	}
 };
 
@@ -3329,13 +3336,13 @@ var quickview = {
 		}
 	},
 
-	initializeQuickViewNav: function(qvUrl) {
+	initializeQuickViewNav: function (qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
 
-		if (qvUrlPidParam.indexOf('pid') > 0){
+		if (qvUrlPidParam.indexOf('pid') > 0) {
 			// if storefront urls are turned off
 			// append the pid to the url
 			qvUrl = qvUrl + qvUrlPidParam;
@@ -3360,7 +3367,7 @@ var quickview = {
 		for (var i = 0; i < this.productLinks.length; i++) {
 			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
 			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
-			if (productLinksUrlPidParam.indexOf('pid') > 0){
+			if (productLinksUrlPidParam.indexOf('pid') > 0) {
 				//append the pid to the url
 				//if storefront urls are turned off
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
@@ -3369,7 +3376,7 @@ var quickview = {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
 
-			if (productLinksUrl == ''){
+			if (productLinksUrl == '') {
 				productLinksUrl = this.productLinks[i].href;
 			}
 			if (qvUrl == productLinksUrl) {
@@ -3386,7 +3393,7 @@ var quickview = {
 		}
 
 		//hide the buttons on the compare page
-		if ($('.compareremovecell').length > 0){
+		if ($('.compareremovecell').length > 0) {
 			this.btnNext.hide();
 			this.btnPrev.hide();
 		}
@@ -3402,8 +3409,8 @@ var quickview = {
 		}
 
 		this.show({
-			url : this.productLinks[this.productLinkIndex].href,
-			source : 'quickview'
+			url: this.productLinks[this.productLinkIndex].href,
+			source: 'quickview'
 		});
 	},
 
@@ -3440,7 +3447,7 @@ var quickview = {
 						title: 'Product Quickview',
 						resizable: false,
 						position: 'center',
-						open: function() {
+						open: function () {
 							// allow for click outside modal to close the modal
 							$('.ui-widget-overlay').on('click', this.close.bind(this));
 							if (options.callback) options.callback();
@@ -3536,7 +3543,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		var $searchContainer = $(container),
 			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
 			$searchField = $searchForm.find('input[name="q"]'),
@@ -3570,7 +3577,7 @@ var searchsuggest = {
 				return;
 			}
 			// check for an ENTER or ESC
-			if(keyCode === 13 || keyCode === 27) {
+			if (keyCode === 13 || keyCode === 27) {
 				this.clearResults();
 				return;
 			}
@@ -3589,7 +3596,7 @@ var searchsuggest = {
 	 * @function
 	 * @description trigger suggest action
 	 */
-	suggest : function() {
+	suggest: function () {
 		// check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
 		// (we had a little delay)
 		if (runningQuery !== currentQuery) {
@@ -3644,18 +3651,18 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
+		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty()});
 	},
 	/**
 	 * @function
 	 * @description
 	 */
-	hideLeftPanel : function () {
+	hideLeftPanel: function () {
 		//hide left panel if there is only a matching suggested custom phrase
-		if($('.search-suggestion-left-panel-hit').length == 1 && ($('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() == $('.search-suggestion-left-panel-hit a').text().toUpperCase())){
-			$('.search-suggestion-left-panel').css('display','none');
+		if ($('.search-suggestion-left-panel-hit').length === 1 && $('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() === $('.search-suggestion-left-panel-hit a').text().toUpperCase()) {
+			$('.search-suggestion-left-panel').css('display', 'none');
 			$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
 			$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
 		}
@@ -3663,6 +3670,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
+
 },{"./util":40}],36:[function(require,module,exports){
 'use strict';
 
@@ -3708,7 +3716,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		// initialize vars
 		$searchContainer = $(container);
 		$searchForm = $searchContainer.find('form[name="simpleSearch"]');
@@ -3720,7 +3728,7 @@ var searchsuggest = {
 
 		// on focus listener (clear default value)
 		$searchField.focus(function () {
-			if(!$resultsContainer) {
+			if (!$resultsContainer) {
 				// create results container if needed
 				$resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
 					'top': $searchContainer[0].offsetHeight,
@@ -3728,7 +3736,7 @@ var searchsuggest = {
 					'width': $searchField[0].offsetWidth
 				});
 			}
-			if($searchField.val() === fieldDefault) {
+			if ($searchField.val() === fieldDefault) {
 				$searchField.val('');
 			}
 		});
@@ -3755,8 +3763,8 @@ var searchsuggest = {
 			var lastVal = $searchField.val();
 
 			// if is text, call with delay
-			setTimeout(function () { 
-				this.suggest(lastVal); 
+			setTimeout(function () {
+				this.suggest(lastVal);
 			}.bind(this), delay);
 		}.bind(this));
 		// on submit we do not submit the form, but change the window location
@@ -3765,7 +3773,7 @@ var searchsuggest = {
 		$searchForm.submit(function (e) {
 			e.preventDefault();
 			var searchTerm = $searchField.val();
-			if(searchTerm === fieldDefault || searchTerm.length === 0) {
+			if (searchTerm === fieldDefault || searchTerm.length === 0) {
 				return false;
 			}
 			window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
@@ -3777,12 +3785,12 @@ var searchsuggest = {
 	 * @description trigger suggest action
 	 * @param lastValue
 	 */
-	suggest : function (lastValue) {
+	suggest: function (lastValue) {
 		// get the field value
 		var part = $searchField.val();
 
 		// if it's empty clear the resuts box and return
-		if(part.length === 0) {
+		if (part.length === 0) {
 			this.clearResults();
 			return;
 		}
@@ -3791,7 +3799,7 @@ var searchsuggest = {
 		// or there were no results in the last call and the query length
 		// is longer than the last query length, return
 		// #TODO: improve this to look at the query value and length
-		if((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
+		if ((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
 			return;
 		}
 		qlen = part.length;
@@ -3813,8 +3821,8 @@ var searchsuggest = {
 			}
 			suggestionsJson = suggestions;
 			var html = '';
-			for (var i=0; i < ansLength; i++) {
-				html+='<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
+			for (var i = 0; i < ansLength; i++) {
+				html += '<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
 			}
 
 			// update the results div
@@ -3832,13 +3840,14 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
 		$resultsContainer.empty().hide();
 	}
 };
 
 module.exports = searchsuggest;
+
 },{"./util":40}],37:[function(require,module,exports){
 'use strict';
 
@@ -3879,7 +3888,7 @@ var sendToFriend = {
 			$dialog.dialog('close');
 		});
 	},
-	initializeDialog : function (eventDelegate) {
+	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
@@ -3905,7 +3914,7 @@ var sendToFriend = {
 				url: util.ajaxUrl(url),
 				target: dlg,
 				callback: function () {
-					dlg.dialog('open');	 // open after load to ensure dialog is centered
+					dlg.dialog('open');	// open after load to ensure dialog is centered
 				}
 			});
 		});
@@ -3935,8 +3944,8 @@ var storeinventory = {
 		});
 
 		//disable the radio button for home deliveries if the store inventory is out of stock
-		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
-			$(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function () {
+			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
 		$('body').on('click', '#pdpMain .set-preferred-store', function (e) {
@@ -3962,14 +3971,14 @@ var storeinventory = {
 			}
 		});
 	},
-	setLineItemStore: function(radio) {
+	setLineItemStore: function (radio) {
 		// @TODO refactor DOM manipulation
 		$(radio).parent().parent().children().toggleClass('hide');
 		$(radio).parent().parent().toggleClass('loading');
 		ajax.getJson({
-			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid : $(radio).siblings('.storeid').attr('value')}),
-			callback: function(data){
-				$(radio).attr('checked','checked');
+			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
+			callback: function (data) {
+				$(radio).attr('checked', 'checked');
 				$(radio).parent().parent().toggleClass('loading');
 				$(radio).parent().parent().children().toggleClass('hide');
 			}
@@ -3977,7 +3986,7 @@ var storeinventory = {
 
 		//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
 		var countplis = 0;
-		$('.item-delivery-options').each(function(){
+		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
 			if (($instore.children('input').attr('disabled') === 'disabled')
 				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
@@ -3987,7 +3996,7 @@ var storeinventory = {
 					countplis++;
 				}
 			});
-			if (countplis > 0 && $('.error-message').length === 0){
+			if (countplis > 0 && $('.error-message').length === 0) {
 				$('.cart-action-checkout button').removeAttr("disabled", "disabled")
 			}
 	},
@@ -4010,7 +4019,7 @@ var storeinventory = {
 							displayButton;
 						//Disable button if there is no stock for item
 						if (item.statusclass == 'store-in-stock') {
-							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status+'">' + Resources.SELECT_STORE + '</button>';
+							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
 						} else {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
 						}
@@ -4038,7 +4047,7 @@ var storeinventory = {
 					selectedButtonText;
 				for (var i = 0, link = 1; i <= numListings; i++) {
 					if (numListings >  i) {
-						listingsNav.append('<a data-index="'+ i +'">'+link+'</a>');
+						listingsNav.append('<a data-index="' + i + '">' + link + '</a>');
 					}
 					link++;
 					i = i + 2;
@@ -4053,7 +4062,7 @@ var storeinventory = {
 				self.$storeList.after(listingsNav);
 
 				// check for preferred store id, highlight, move to top
-				if (currentTemplate === 'cart'){
+				if (currentTemplate === 'cart') {
 					selectedButtonText = Resources.SELECTED_STORE;
 				} else {
 					selectedButtonText = Resources.PREFERRED_STORE;
@@ -4070,7 +4079,7 @@ var storeinventory = {
 					$div.append(onPageList);
 
 					if (onPageList.find('li').size() > 1) {
-						$div.find('li:gt(0)').each(function(){
+						$div.find('li:gt(0)').each(function () {
 							$(this).addClass('extended-list');
 						});
 						$('.more-stores').remove();
@@ -4104,7 +4113,7 @@ var storeinventory = {
 							+ ' , '
 							+ $this.siblings('.store-tile-state').text()
 							+ ' '
-							+$this.siblings('.store-tile-postalCode').text()
+							+ $this.siblings('.store-tile-postalCode').text()
 						);
 						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
 						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
@@ -4125,7 +4134,7 @@ var storeinventory = {
 					//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
 					//when the update button is clicked it forces a refresh.
 					if ($('#cart-table').length > 0 && $('.select-store-button').length > 0) {
-						$('.ui-dialog .ui-icon-closethick:first').bind('click', function (){
+						$('.ui-dialog .ui-icon-closethick:first').bind('click', function () {
 							page.refresh();
 						});
 					}
@@ -4134,7 +4143,7 @@ var storeinventory = {
 		});
 	},
 
-	bubbleStoreUp: function(list, id) {
+	bubbleStoreUp: function (list, id) {
 		var preferredEntry = list.find('li.store-' + id).clone();
 		preferredEntry.removeClass('extended-list');
 		list.find('.store-tile').not('extended-list').addClass('extended-list');
@@ -4142,7 +4151,7 @@ var storeinventory = {
 		list.prepend(preferredEntry);
 	},
 
-	loadPreferredStorePanel: function(pid) {
+	loadPreferredStorePanel: function (pid) {
 		var self = this;
 		//clear error messages from other product tiles if they exists in the dom
 		this.$preferredStorePanel.find('.error-message').remove();
@@ -4182,7 +4191,7 @@ var storeinventory = {
 						self.loadPreferredStorePanel(pid);
 					//bad zip
 					} else {
-						if ($('#preferred-store-panel .error-message').length == 0){
+						if ($('#preferred-store-panel .error-message').length === 0) {
 							$('#preferred-store-panel div').append('<div class="error-message">' + Resources.INVALID_ZIP + '</div>');
 						}
 					}
@@ -4240,14 +4249,14 @@ var storeinventory = {
 		}
 
 		//disable continue button if a preferred store has not been selected
-		if ($('.store-list .selected').length > 0){
+		if ($('.store-list .selected').length > 0) {
 			this.$preferredStorePanel.find('.close').attr('disabled', false);
 		} else {
 			this.$preferredStorePanel.find('.close').attr('disabled', true);
 		}
 	},
 
-	setUserZip: function(zip) {
+	setUserZip: function (zip) {
 		User.zip = zip;
 		$.ajax({
 			type: 'POST',
@@ -4258,16 +4267,16 @@ var storeinventory = {
 		});
 	},
 
-	setPreferredStore: function(id) {
+	setPreferredStore: function (id) {
 		User.storeId = id;
-		$.post(Urls.setPreferredStore, {storeId: id}, function(data) {
+		$.post(Urls.setPreferredStore, {storeId: id}, function (data) {
 			$('.selected-store-availability').html(data);
 			//enable continue button when a preferred store has been selected
 			$('#preferred-store-panel .close').attr('disabled', false);
 		});
 	},
 
-	shippingLoad: function() {
+	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
 		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function (e) {
@@ -4289,7 +4298,7 @@ exports.init = function () {
 	$('.tooltip').tooltip({
 		track: true,
 		showURL: false,
-		bodyHandler: function() {
+		bodyHandler: function () {
 			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
 			var tooltipClass = "";
 			if (tooltipClass = $(this).find('.tooltip-content').data("layout")) {
@@ -4315,7 +4324,7 @@ var util = {
 	 */
 	appendParamToURL: function (url, name, value) {
 		var c = '?';
-		if(url.indexOf(c) !== -1) {
+		if (url.indexOf(c) !== -1) {
 			c = '&';
 		}
 		return url + c + name + '=' + encodeURIComponent(value);
@@ -4342,7 +4351,7 @@ var util = {
 			top -= offsetToTop;
 		}
 
-		if ( window.pageXOffset != null) {
+		if (window.pageXOffset != null) {
 			return (
 				top < (window.pageYOffset + window.innerHeight) &&
 				left < (window.pageXOffset + window.innerWidth) &&
@@ -4373,7 +4382,7 @@ var util = {
 		var qsParams = $.extend(uri.queryParams, params);
 		var result = uri.path + '?' + $.param(qsParams);
 		if (includeHash) {
-			result+=uri.hash;
+			result += uri.hash;
 		}
 		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
 			result = '/' + result;
@@ -4420,8 +4429,8 @@ var util = {
 	 */
 	loadCssFile: function (url) {
 		return $("<link/>").appendTo($("head")).attr({
-			type : "text/css",
-			rel : "stylesheet"
+			type: 'text/css',
+			rel: 'stylesheet'
 		}).attr("href", url); // for i.e. <9, href must be added after link has been appended to head
 	},
 	// array to keep track of the dynamically loaded CSS files
@@ -4431,9 +4440,9 @@ var util = {
 	 * @function
 	 * @description Removes all css files which were dynamically loaded
 	 */
-	clearDynamicCss : function () {
+	clearDynamicCss: function () {
 		var i = this.loadedCssFiles.length;
-		while(0 > i--) {
+		while (0 > i--) {
 			$(this.loadedCssFiles[i]).remove();
 		}
 		this.loadedCssFiles = [];
@@ -4443,14 +4452,14 @@ var util = {
 	 * @description Extracts all parameters from a given query string into an object
 	 * @param {String} qs The query string from which the parameters will be extracted
 	 */
-	getQueryStringParams : function (qs) {
+	getQueryStringParams: function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
 		var params = {},
 			unescapedQS = unescape(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
-		unescapedQS.replace( new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-			function ( $0, $1, $2, $3 ) {
+		unescapedQS.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+			function ($0, $1, $2, $3) {
 				params[$1] = $3;
 			}
 		);
@@ -4557,7 +4566,7 @@ var util = {
 	 * based on the character limit in a text area
 	 */
 	limitCharacters: function () {
-		$('form').find('textarea[data-character-limit]').each(function(){
+		$('form').find('textarea[data-character-limit]').each(function () {
 			var characterLimit = $(this).data("character-limit");
 			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
@@ -4578,8 +4587,8 @@ var util = {
 	 * @param {String} container The name of element to which the function will be bind
 	 * @param {String} message The message the will be shown upon a click
 	 */
-	setDeleteConfirmation: function(container, message) {
-		$(container).on('click', '.delete', function(e){
+	setDeleteConfirmation: function (container, message) {
+		$(container).on('click', '.delete', function (e) {
 			return confirm(message);
 		});
 	},
@@ -4589,11 +4598,11 @@ var util = {
 	 * @param {String} The x coordinate
 	 */
 	scrollBrowser: function (xLocation) {
-		$('html, body').animate({ scrollTop: xLocation }, 500);
+		$('html, body').animate({scrollTop: xLocation}, 500);
 	},
 
 	isMobile: function () {
-		var mobileAgentHash = ['mobile','tablet','phone','ipad','ipod','android','blackberry','windows ce','opera mini','palm'];
+		var mobileAgentHash = ['mobile', 'tablet', 'phone', 'ipad', 'ipod', 'android', 'blackberry', 'windows ce', 'opera mini', 'palm'];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
@@ -4613,25 +4622,25 @@ module.exports = util;
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
 	regex = {
-		phone : {
-			us : naPhone,
-			ca : naPhone
+		phone: {
+			us: naPhone,
+			ca: naPhone
 		},
-		postal : {
-			us : /^\d{5}(-\d{4})?$/,
-			ca : /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
-			gb : /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
+		postal: {
+			us: /^\d{5}(-\d{4})?$/,
+			ca: /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
+			gb: /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
 		},
-		email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
-		notCC : /^(?!(([0-9 -]){13,19})).*$/
+		email: /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
+		notCC: /^(?!(([0-9 -]){13,19})).*$/
 	},
 	settings = {
 		// global form validator settings
-		errorClass : 'error',
-		errorElement : 'span',
-		onkeyup : false,
-		onfocusout : function (element) {
-			if(!this.checkable(element)) {
+		errorClass: 'error',
+		errorElement: 'span',
+		onkeyup: false,
+		onfocusout: function (element) {
+			if (!this.checkable(element)) {
 				this.element(element);
 			}
 		}
@@ -4699,7 +4708,7 @@ $.validator.addMethod("owner", validateOwner, Resources.INVALID_OWNER);
  * Add gift cert amount validation method to jQuery validation plugin.
  * Text fields must have 'gift-cert-amont' css class to be validated
  */
-$.validator.addMethod('gift-cert-amount', function (value, el){
+$.validator.addMethod('gift-cert-amount', function (value, el) {
 	var isOptional = this.optional(el);
 	var isValid = (!isNaN(value)) && (parseFloat(value) >= 5) && (parseFloat(value) <= 5000);
 	return isOptional || isValid;
@@ -4710,7 +4719,7 @@ $.validator.addMethod('gift-cert-amount', function (value, el){
  * Text fields must have 'positivenumber' css class to be validated as positivenumber
  */
 $.validator.addMethod('positivenumber', function (value, element) {
-	if($.trim(value).length === 0) { return true; }
+	if ($.trim(value).length === 0) { return true; }
 	return (!isNaN(value) && Number(value) >= 0);
 }, ''); // '' should be replaced with error message if needed
 
@@ -4723,7 +4732,7 @@ var validator = {
 			$(this).validate(self.settings);
 		});
 	},
-	initForm: function(f) {
+	initForm: function (f) {
 		$(f).validate(this.settings);
 	}
 };
@@ -4738,6 +4747,8 @@ var process = module.exports = {};
 process.nextTick = (function () {
     var canSetImmediate = typeof window !== 'undefined'
     && window.setImmediate;
+    var canMutationObserver = typeof window !== 'undefined'
+    && window.MutationObserver;
     var canPost = typeof window !== 'undefined'
     && window.postMessage && window.addEventListener
     ;
@@ -4746,8 +4757,29 @@ process.nextTick = (function () {
         return function (f) { return window.setImmediate(f) };
     }
 
+    var queue = [];
+
+    if (canMutationObserver) {
+        var hiddenDiv = document.createElement("div");
+        var observer = new MutationObserver(function () {
+            var queueList = queue.slice();
+            queue.length = 0;
+            queueList.forEach(function (fn) {
+                fn();
+            });
+        });
+
+        observer.observe(hiddenDiv, { attributes: true });
+
+        return function nextTick(fn) {
+            if (!queue.length) {
+                hiddenDiv.setAttribute('yes', 'no');
+            }
+            queue.push(fn);
+        };
+    }
+
     if (canPost) {
-        var queue = [];
         window.addEventListener('message', function (ev) {
             var source = ev.source;
             if ((source === window || source === null) && ev.data === 'process-tick') {
@@ -4787,7 +4819,7 @@ process.emit = noop;
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
-}
+};
 
 // TODO(shtylman)
 process.cwd = function () { return '/' };
@@ -11587,9 +11619,16 @@ process.chdir = function (dir) {
 },{}],44:[function(require,module,exports){
 'use strict';
 
+module.exports = require('./lib/core.js')
+require('./lib/done.js')
+require('./lib/es6-extensions.js')
+require('./lib/node-extensions.js')
+},{"./lib/core.js":45,"./lib/done.js":46,"./lib/es6-extensions.js":47,"./lib/node-extensions.js":48}],45:[function(require,module,exports){
+'use strict';
+
 var asap = require('asap')
 
-module.exports = Promise
+module.exports = Promise;
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -11599,7 +11638,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new Promise(function(resolve, reject) {
+    return new self.constructor(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -11691,10 +11730,25 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":46}],45:[function(require,module,exports){
+},{"asap":49}],46:[function(require,module,exports){
 'use strict';
 
-//This file contains then/promise specific extensions to the core promise API
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
+    asap(function () {
+      throw err
+    })
+  })
+}
+},{"./core.js":45,"asap":49}],47:[function(require,module,exports){
+'use strict';
+
+//This file contains the ES6 extensions to the core Promises/A+ API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -11717,7 +11771,7 @@ function ValuePromise(value) {
     })
   }
 }
-ValuePromise.prototype = Object.create(Promise.prototype)
+ValuePromise.prototype = Promise.prototype
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -11752,57 +11806,8 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.from = Promise.cast = function (value) {
-  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
-  err.name = 'Warning'
-  console.warn(err.stack)
-  return Promise.resolve(value)
-}
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-        args.pop()
-      }
-      args.push(function (err, res) {
-        if (err) reject(err)
-        else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    try {
-      return fn.apply(this, arguments).nodeify(callback)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-        return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-        asap(function () {
-          callback(ex)
-        })
-      }
-    }
-  }
-}
-
-Promise.all = function () {
-  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
-  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
-
-  if (!calledWithArray) {
-    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
-    err.name = 'Warning'
-    console.warn(err.stack)
-  }
+Promise.all = function (arr) {
+  var args = Array.prototype.slice.call(arr)
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
@@ -11846,34 +11851,73 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-
-Promise.prototype.nodeify = function (callback) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
-    asap(function () {
-      callback(null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback(err)
-    })
-  })
-}
-
 Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":44,"asap":46}],46:[function(require,module,exports){
+},{"./core.js":45,"asap":49}],48:[function(require,module,exports){
+'use strict';
+
+//This file contains then/promise specific extensions that are only useful for node.js interop
+
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+
+/* Static Functions */
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    var ctx = this
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback.call(ctx, ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.prototype.nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err)
+    })
+  })
+}
+
+},{"./core.js":45,"asap":49}],49:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn

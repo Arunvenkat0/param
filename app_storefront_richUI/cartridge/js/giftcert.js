@@ -9,31 +9,31 @@ function setAddToCartHandler(e) {
 	var form = $(this).closest("form");
 
 	var options = {
-		url : util.ajaxUrl(form.attr('action')),
-		method : 'POST',
+		url: util.ajaxUrl(form.attr('action')),
+		method: 'POST',
 		cache: false,
-		contentType : 'application/json',
-		data : form.serialize()
+		contentType: 'application/json',
+		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {
-		if( response.success ) {
+		if (response.success) {
 			ajax.load({
-				url : Urls.minicartGC,
-				data :{lineItemId : response.result.lineItemId},
-				callback : function(response){
+				url: Urls.minicartGC,
+				data: {lineItemId: response.result.lineItemId},
+				callback: function (response) {
 					minicart.show(response);
 					form.find('input,textarea').val('');
 				}
 			});
 		} else {
 			form.find('span.error').hide();
-			for( id in response.errors.FormErrors ) {
-				var error_el = $('#'+id).addClass('error').removeClass('valid').next('.error');
-				if( !error_el || error_el.length===0 ) {
-					error_el = $('<span for="'+id+'" generated="true" class="error" style=""></span>');
-					$('#'+id).after(error_el);
+			for (id in response.errors.FormErrors) {
+				var error_el = $('#' + id).addClass('error').removeClass('valid').next('.error');
+				if (!error_el || error_el.length === 0) {
+					error_el = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
+					$('#' + id).after(error_el);
 				}
-				error_el.text(response.errors.FormErrors[id].replace(/\\'/g,"'")).show();
+				error_el.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
 			}
 			console.log(JSON.stringify(response.errors));
 		}
@@ -47,6 +47,6 @@ function setAddToCartHandler(e) {
 	});
 }
 
-exports.init = function(){
+exports.init = function () {
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }

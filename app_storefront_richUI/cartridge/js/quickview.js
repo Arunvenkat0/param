@@ -12,13 +12,13 @@ var quickview = {
 		}
 	},
 
-	initializeQuickViewNav: function(qvUrl) {
+	initializeQuickViewNav: function (qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
 
-		if (qvUrlPidParam.indexOf('pid') > 0){
+		if (qvUrlPidParam.indexOf('pid') > 0) {
 			// if storefront urls are turned off
 			// append the pid to the url
 			qvUrl = qvUrl + qvUrlPidParam;
@@ -43,7 +43,7 @@ var quickview = {
 		for (var i = 0; i < this.productLinks.length; i++) {
 			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
 			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
-			if (productLinksUrlPidParam.indexOf('pid') > 0){
+			if (productLinksUrlPidParam.indexOf('pid') > 0) {
 				//append the pid to the url
 				//if storefront urls are turned off
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
@@ -52,7 +52,7 @@ var quickview = {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
 
-			if (productLinksUrl == ''){
+			if (productLinksUrl == '') {
 				productLinksUrl = this.productLinks[i].href;
 			}
 			if (qvUrl == productLinksUrl) {
@@ -69,7 +69,7 @@ var quickview = {
 		}
 
 		//hide the buttons on the compare page
-		if ($('.compareremovecell').length > 0){
+		if ($('.compareremovecell').length > 0) {
 			this.btnNext.hide();
 			this.btnPrev.hide();
 		}
@@ -85,8 +85,8 @@ var quickview = {
 		}
 
 		this.show({
-			url : this.productLinks[this.productLinkIndex].href,
-			source : 'quickview'
+			url: this.productLinks[this.productLinkIndex].href,
+			source: 'quickview'
 		});
 	},
 
@@ -123,7 +123,7 @@ var quickview = {
 						title: 'Product Quickview',
 						resizable: false,
 						position: 'center',
-						open: function() {
+						open: function () {
 							// allow for click outside modal to close the modal
 							$('.ui-widget-overlay').on('click', this.close.bind(this));
 							if (options.callback) options.callback();

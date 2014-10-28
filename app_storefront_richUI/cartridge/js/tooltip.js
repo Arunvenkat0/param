@@ -8,7 +8,7 @@ exports.init = function () {
 	$('.tooltip').tooltip({
 		track: true,
 		showURL: false,
-		bodyHandler: function() {
+		bodyHandler: function () {
 			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
 			var tooltipClass = "";
 			if (tooltipClass = $(this).find('.tooltip-content').data("layout")) {

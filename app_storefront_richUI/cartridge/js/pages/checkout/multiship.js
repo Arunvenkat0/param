@@ -10,7 +10,7 @@ var address = require('./address'),
  * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
  */
 function initMultiGiftMessageBox() {
-	$.each( $(".item-list"), function(){
+	$.each($(".item-list"), function () {
 		var $this = $(this),
 			$isGiftYes = $this.find('.js-isgiftyes'),
 			$isGiftNo = $this.find('.js-isgiftno'),
@@ -18,15 +18,15 @@ function initMultiGiftMessageBox() {
 
 		//handle initial load
 		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display','block');
+			$giftMessage.css('display', 'block');
 		}
 
 		//set event listeners
-		$this.on('change', function(){
+		$this.on('change', function () {
 			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display','block');
+				$giftMessage.css('display', 'block');
 			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display','none');
+				$giftMessage.css('display', 'none');
 			}
 		});
 	});
@@ -48,7 +48,7 @@ function addEditAddress(target) {
 		e.preventDefault();
 		var selectedAddress = $addressList.find('select').val();
 		if (selectedAddress !== 'newAddress') {
-			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+			selectedAddress = $.grep($addressList.data('addresses'), function (add) {
 				return add.UUID === selectedAddress;
 			})[0];
 			add = false;
@@ -98,10 +98,10 @@ function addEditAddress(target) {
 	//preserve the uuid of the option for the hop up form
 	if (selectedAddressUUID) {
 		//update the form with selected address
-		$addressList.find('option').each(function() {
+		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected','selected');
+				$(this).attr('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});
@@ -114,14 +114,14 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0){
+	if ($(".cart-row .shippingaddress .select-address").length > 0) {
 		formPrepare.init({
 			continueSelector: '[name$="addressSelection_save"]',
 			formSelector: '[id$="multishipping_addressSelection"]'
 		});
 	}
 	$('.edit-address').on('click', 'a', function (e) {
-		dialog.open({url: this.href, options: {open: function() {
+		dialog.open({url: this.href, options: {open: function () {
 			address.init();
 			addEditAddress(e.target);
 		}}});

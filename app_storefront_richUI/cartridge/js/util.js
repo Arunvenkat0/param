@@ -12,7 +12,7 @@ var util = {
 	 */
 	appendParamToURL: function (url, name, value) {
 		var c = '?';
-		if(url.indexOf(c) !== -1) {
+		if (url.indexOf(c) !== -1) {
 			c = '&';
 		}
 		return url + c + name + '=' + encodeURIComponent(value);
@@ -39,7 +39,7 @@ var util = {
 			top -= offsetToTop;
 		}
 
-		if ( window.pageXOffset != null) {
+		if (window.pageXOffset != null) {
 			return (
 				top < (window.pageYOffset + window.innerHeight) &&
 				left < (window.pageXOffset + window.innerWidth) &&
@@ -70,7 +70,7 @@ var util = {
 		var qsParams = $.extend(uri.queryParams, params);
 		var result = uri.path + '?' + $.param(qsParams);
 		if (includeHash) {
-			result+=uri.hash;
+			result += uri.hash;
 		}
 		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
 			result = '/' + result;
@@ -117,8 +117,8 @@ var util = {
 	 */
 	loadCssFile: function (url) {
 		return $("<link/>").appendTo($("head")).attr({
-			type : "text/css",
-			rel : "stylesheet"
+			type: 'text/css',
+			rel: 'stylesheet'
 		}).attr("href", url); // for i.e. <9, href must be added after link has been appended to head
 	},
 	// array to keep track of the dynamically loaded CSS files
@@ -128,9 +128,9 @@ var util = {
 	 * @function
 	 * @description Removes all css files which were dynamically loaded
 	 */
-	clearDynamicCss : function () {
+	clearDynamicCss: function () {
 		var i = this.loadedCssFiles.length;
-		while(0 > i--) {
+		while (0 > i--) {
 			$(this.loadedCssFiles[i]).remove();
 		}
 		this.loadedCssFiles = [];
@@ -140,14 +140,14 @@ var util = {
 	 * @description Extracts all parameters from a given query string into an object
 	 * @param {String} qs The query string from which the parameters will be extracted
 	 */
-	getQueryStringParams : function (qs) {
+	getQueryStringParams: function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
 		var params = {},
 			unescapedQS = unescape(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
-		unescapedQS.replace( new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-			function ( $0, $1, $2, $3 ) {
+		unescapedQS.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+			function ($0, $1, $2, $3) {
 				params[$1] = $3;
 			}
 		);
@@ -254,7 +254,7 @@ var util = {
 	 * based on the character limit in a text area
 	 */
 	limitCharacters: function () {
-		$('form').find('textarea[data-character-limit]').each(function(){
+		$('form').find('textarea[data-character-limit]').each(function () {
 			var characterLimit = $(this).data("character-limit");
 			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
@@ -275,8 +275,8 @@ var util = {
 	 * @param {String} container The name of element to which the function will be bind
 	 * @param {String} message The message the will be shown upon a click
 	 */
-	setDeleteConfirmation: function(container, message) {
-		$(container).on('click', '.delete', function(e){
+	setDeleteConfirmation: function (container, message) {
+		$(container).on('click', '.delete', function (e) {
 			return confirm(message);
 		});
 	},
@@ -286,11 +286,11 @@ var util = {
 	 * @param {String} The x coordinate
 	 */
 	scrollBrowser: function (xLocation) {
-		$('html, body').animate({ scrollTop: xLocation }, 500);
+		$('html, body').animate({scrollTop: xLocation}, 500);
 	},
 
 	isMobile: function () {
-		var mobileAgentHash = ['mobile','tablet','phone','ipad','ipod','android','blackberry','windows ce','opera mini','palm'];
+		var mobileAgentHash = ['mobile', 'tablet', 'phone', 'ipad', 'ipod', 'android', 'blackberry', 'windows ce', 'opera mini', 'palm'];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();

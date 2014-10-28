@@ -49,7 +49,7 @@ module.exports = function (data, $container) {
 		if (avMsg.length === 0) {
 			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
 		}
-		avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
+		avMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
 		avMsg = avRoot.find('.not-available-msg');

@@ -7,20 +7,20 @@ var ajax = require('./ajax'),
 exports.init = function () {
 	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
 	$('.currency-converter').on('change', function () {
-			// request results from server
-	 		ajax.getJson({
-	 		 	url: util.appendParamsToUrl(Urls.currencyConverter , {
-	 		 		format: 'ajax',
-	 		 		currencyMnemonic: $('.currency-converter').val()
-	 		 	}),
-	 		 	callback: function(){
-	 				location.reload();
-	 		 	}
-	 		 });
+		// request results from server
+		ajax.getJson({
+			url: util.appendParamsToUrl(Urls.currencyConverter, {
+				format: 'ajax',
+				currencyMnemonic: $('.currency-converter').val()
+			}),
+			callback: function () {
+				location.reload();
+			}
+		});
 	});
 
 	//hide the feature if user is in checkout
-	if (page.title === 'Checkout'){
-		$('.mc-class').css('display','none');
+	if (page.title === 'Checkout') {
+		$('.mc-class').css('display', 'none');
 	}
 };

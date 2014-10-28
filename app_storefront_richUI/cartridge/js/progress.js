@@ -22,8 +22,8 @@ var show = function (container) {
  * @description Hides an AJAX-loader
  */
 var hide = function () {
-	if ($loader) { 
-		$loader.hide(); 
+	if ($loader) {
+		$loader.hide();
 	}
 };
 

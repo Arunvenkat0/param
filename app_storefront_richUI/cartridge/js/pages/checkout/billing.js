@@ -31,7 +31,7 @@ function populateCreditCardForm(cardID) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
+			if (!data) {
 				window.alert(Resources.CC_LOAD_ERROR);
 				return false;
 			}
@@ -57,7 +57,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID +']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
 
 	formPrepare.validateForm();
 }
@@ -102,7 +102,7 @@ exports.init = function () {
 		var $balance = $('.balance');
 		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
 			var error = $balance.find('span.error');
-			if (error.length===0) {
+			if (error.length === 0) {
 				error = $('<span>').addClass('error').appendTo($balance);
 			}
 			error.html(Resources.GIFT_CERT_MISSING);
@@ -118,7 +118,7 @@ exports.init = function () {
 		});
 	});
 
-	$addGiftCert.on('click', function(e) {
+	$addGiftCert.on('click', function (e) {
 		e.preventDefault();
 		var code = $giftCertCode.val(),
 			$error = $checkoutForm.find('.giftcert-error');
@@ -128,7 +128,7 @@ exports.init = function () {
 		}
 
 		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
-		$.getJSON(url, function(data) {
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
@@ -147,24 +147,23 @@ exports.init = function () {
 		});
 	});
 
-	$addCoupon.on('click', function(e){
+	$addCoupon.on('click', function (e) {
 		e.preventDefault();
 		var $error = $checkoutForm.find('.coupon-error'),
 			code = $couponCode.val();
-		if (code.length===0) {
+		if (code.length === 0) {
 			$error.html(Resources.COUPON_CODE_MISSING);
 			return;
 		}
 
-		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: 'ajax'});
-		$.getJSON(url, function(data) {
+		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code, format: 'ajax'});
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
 				msg = Resources.BAD_RESPONSE;
 				fail = true;
-			}
-			else if (!data.success) {
+			} else if (!data.success) {
 				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 				fail = true;
 			}
@@ -175,20 +174,20 @@ exports.init = function () {
 
 			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 			//this will force a page refresh to display the coupon message based on a parameter message
-			if(data.success && data.baskettotal==0){
+			if (data.success && data.baskettotal === 0) {
 				window.location.assign(Urls.billing);
 			}
 		});
 	});
 
 	// trigger events on enter
-	$couponCode.on('keydown', function(e) {
+	$couponCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addCoupon.click();
 		}
 	});
-	$giftCertCode.on('keydown', function(e) {
+	$giftCertCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addGiftCert.click();

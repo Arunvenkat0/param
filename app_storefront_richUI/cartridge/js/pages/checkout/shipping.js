@@ -59,16 +59,16 @@ function getShippingMethodURL(url, extraParams) {
  */
 function selectShippingMethod(shippingMethodID) {
 	// nothing entered
-	if(!shippingMethodID) {
+	if (!shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
 	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			updateSummary();
-			if(!data || !data.shippingMethodID) {
+			if (!data || !data.shippingMethodID) {
 				window.alert("Couldn't select shipping method.");
 				return false;
 			}
@@ -101,10 +101,10 @@ function updateShippingMethodList() {
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
 	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
+			if (!data) {
 				window.alert("Couldn't get list of applicable shipping methods.");
 				return false;
 			}

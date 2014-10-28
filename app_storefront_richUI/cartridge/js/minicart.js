@@ -17,7 +17,7 @@ var timer = {
 };
 
 var minicart = {
-	init : function () {
+	init: function () {
 		this.$el = $('#mini-cart');
 		this.$content = this.$el.find('.mini-cart-content');
 
@@ -25,7 +25,10 @@ var minicart = {
 		$productList.children().not(':first').addClass('collapsed');
 		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
 
-		$productList.toggledList({toggleClass : "collapsed", triggerSelector:".mini-cart-toggler", eventName:"click"});
+		$productList.toggledList({
+			toggleClass: 'collapsed',
+			triggerSelector: '.mini-cart-toggler',
+			eventName: 'click'});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -48,7 +51,7 @@ var minicart = {
 	 * @description Shows the given content in the mini cart
 	 * @param {String} A HTML string with the content which will be shown
 	 */
-	show : function (html) {
+	show: function (html) {
 		this.$el.html(html);
 		util.scrollBrowser(0);
 		this.init();
@@ -59,7 +62,7 @@ var minicart = {
 	 * @function
 	 * @description Slides down and show the contents of the mini cart
 	 */
-	slide : function () {
+	slide: function () {
 		timer.clear();
 		// show the item
 		this.$content.slideDown('slow');
@@ -71,7 +74,7 @@ var minicart = {
 	 * @description Closes the mini cart with given delay
 	 * @param {Number} delay The delay in milliseconds
 	 */
-	close : function (delay) {
+	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
 	},

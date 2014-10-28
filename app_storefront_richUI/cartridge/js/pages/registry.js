@@ -17,7 +17,7 @@ function populateForm(addressID, $form) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data || !data.address) {
+			if (!data || !data.address) {
 				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}

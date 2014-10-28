@@ -18,8 +18,8 @@ var storeinventory = {
 		});
 
 		//disable the radio button for home deliveries if the store inventory is out of stock
-		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
-			$(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function () {
+			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
 		$('body').on('click', '#pdpMain .set-preferred-store', function (e) {
@@ -45,14 +45,14 @@ var storeinventory = {
 			}
 		});
 	},
-	setLineItemStore: function(radio) {
+	setLineItemStore: function (radio) {
 		// @TODO refactor DOM manipulation
 		$(radio).parent().parent().children().toggleClass('hide');
 		$(radio).parent().parent().toggleClass('loading');
 		ajax.getJson({
-			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid : $(radio).siblings('.storeid').attr('value')}),
-			callback: function(data){
-				$(radio).attr('checked','checked');
+			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
+			callback: function (data) {
+				$(radio).attr('checked', 'checked');
 				$(radio).parent().parent().toggleClass('loading');
 				$(radio).parent().parent().children().toggleClass('hide');
 			}
@@ -60,7 +60,7 @@ var storeinventory = {
 
 		//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
 		var countplis = 0;
-		$('.item-delivery-options').each(function(){
+		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
 			if (($instore.children('input').attr('disabled') === 'disabled')
 				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
@@ -70,7 +70,7 @@ var storeinventory = {
 					countplis++;
 				}
 			});
-			if (countplis > 0 && $('.error-message').length === 0){
+			if (countplis > 0 && $('.error-message').length === 0) {
 				$('.cart-action-checkout button').removeAttr("disabled", "disabled")
 			}
 	},
@@ -93,7 +93,7 @@ var storeinventory = {
 							displayButton;
 						//Disable button if there is no stock for item
 						if (item.statusclass == 'store-in-stock') {
-							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status+'">' + Resources.SELECT_STORE + '</button>';
+							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
 						} else {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
 						}
@@ -121,7 +121,7 @@ var storeinventory = {
 					selectedButtonText;
 				for (var i = 0, link = 1; i <= numListings; i++) {
 					if (numListings >  i) {
-						listingsNav.append('<a data-index="'+ i +'">'+link+'</a>');
+						listingsNav.append('<a data-index="' + i + '">' + link + '</a>');
 					}
 					link++;
 					i = i + 2;
@@ -136,7 +136,7 @@ var storeinventory = {
 				self.$storeList.after(listingsNav);
 
 				// check for preferred store id, highlight, move to top
-				if (currentTemplate === 'cart'){
+				if (currentTemplate === 'cart') {
 					selectedButtonText = Resources.SELECTED_STORE;
 				} else {
 					selectedButtonText = Resources.PREFERRED_STORE;
@@ -153,7 +153,7 @@ var storeinventory = {
 					$div.append(onPageList);
 
 					if (onPageList.find('li').size() > 1) {
-						$div.find('li:gt(0)').each(function(){
+						$div.find('li:gt(0)').each(function () {
 							$(this).addClass('extended-list');
 						});
 						$('.more-stores').remove();
@@ -187,7 +187,7 @@ var storeinventory = {
 							+ ' , '
 							+ $this.siblings('.store-tile-state').text()
 							+ ' '
-							+$this.siblings('.store-tile-postalCode').text()
+							+ $this.siblings('.store-tile-postalCode').text()
 						);
 						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
 						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
@@ -208,7 +208,7 @@ var storeinventory = {
 					//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
 					//when the update button is clicked it forces a refresh.
 					if ($('#cart-table').length > 0 && $('.select-store-button').length > 0) {
-						$('.ui-dialog .ui-icon-closethick:first').bind('click', function (){
+						$('.ui-dialog .ui-icon-closethick:first').bind('click', function () {
 							page.refresh();
 						});
 					}
@@ -217,7 +217,7 @@ var storeinventory = {
 		});
 	},
 
-	bubbleStoreUp: function(list, id) {
+	bubbleStoreUp: function (list, id) {
 		var preferredEntry = list.find('li.store-' + id).clone();
 		preferredEntry.removeClass('extended-list');
 		list.find('.store-tile').not('extended-list').addClass('extended-list');
@@ -225,7 +225,7 @@ var storeinventory = {
 		list.prepend(preferredEntry);
 	},
 
-	loadPreferredStorePanel: function(pid) {
+	loadPreferredStorePanel: function (pid) {
 		var self = this;
 		//clear error messages from other product tiles if they exists in the dom
 		this.$preferredStorePanel.find('.error-message').remove();
@@ -265,7 +265,7 @@ var storeinventory = {
 						self.loadPreferredStorePanel(pid);
 					//bad zip
 					} else {
-						if ($('#preferred-store-panel .error-message').length == 0){
+						if ($('#preferred-store-panel .error-message').length === 0) {
 							$('#preferred-store-panel div').append('<div class="error-message">' + Resources.INVALID_ZIP + '</div>');
 						}
 					}
@@ -323,14 +323,14 @@ var storeinventory = {
 		}
 
 		//disable continue button if a preferred store has not been selected
-		if ($('.store-list .selected').length > 0){
+		if ($('.store-list .selected').length > 0) {
 			this.$preferredStorePanel.find('.close').attr('disabled', false);
 		} else {
 			this.$preferredStorePanel.find('.close').attr('disabled', true);
 		}
 	},
 
-	setUserZip: function(zip) {
+	setUserZip: function (zip) {
 		User.zip = zip;
 		$.ajax({
 			type: 'POST',
@@ -341,16 +341,16 @@ var storeinventory = {
 		});
 	},
 
-	setPreferredStore: function(id) {
+	setPreferredStore: function (id) {
 		User.storeId = id;
-		$.post(Urls.setPreferredStore, {storeId: id}, function(data) {
+		$.post(Urls.setPreferredStore, {storeId: id}, function (data) {
 			$('.selected-store-availability').html(data);
 			//enable continue button when a preferred store has been selected
 			$('#preferred-store-panel .close').attr('disabled', false);
 		});
 	},
 
-	shippingLoad: function() {
+	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
 		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function (e) {

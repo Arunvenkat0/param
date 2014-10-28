@@ -15,7 +15,7 @@ function slideCarousel_initCallback(carousel) {
 	slideShowNav = slideShowNav + '</div>';
 	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
 
-	$('.jcarousel-control a').bind('click', function() {
+	$('.jcarousel-control a').bind('click', function () {
 		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
 		return false;
 	});
@@ -33,7 +33,7 @@ function slideCarousel_initCallback(carousel) {
  */
 function slideCarousel_itemVisible(carousel, item, idx, state) {
 	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-'+idx).addClass('active');
+	$('.jcarousel-control').find('.link-' + idx).addClass('active');
 }
 exports.init = function () {
 	$('#homepage-slider').jcarousel({

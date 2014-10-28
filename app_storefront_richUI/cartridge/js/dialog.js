@@ -53,7 +53,7 @@ var dialog = {
 	 * @description Closes the dialog and triggers the "close" event for the dialog
 	 */
 	close: function () {
-		if(!this.container) {
+		if (!this.container) {
 			return;
 		}
 		this.container.dialog("close");

@@ -14,22 +14,22 @@ function captureCarouselRecommendations(c, li, index, state) {
 
 	$(li).find(".capture-product-id").each(function () {
 		dw.ac.capture({
-			id : $(this).text(),
-			type : dw.ac.EV_PRD_RECOMMENDATION
+			id: $(this).text(),
+			type: dw.ac.EV_PRD_RECOMMENDATION
 		});
 	});
 }
 
 var components = {
-	carouselSettings : {
-		scroll : 1,
+	carouselSettings: {
+		scroll: 1,
 		itemFallbackDimension: '100%',
-		itemVisibleInCallback : app.captureCarouselRecommendations
+		itemVisibleInCallback: app.captureCarouselRecommendations
 	},
-	init : function () {
-		setTimeout(function(){
+	init: function () {
+		setTimeout(function () {
 			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical : true}, this.carouselSettings));
+			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.carouselSettings));
 			$('#horizontal-carousel').jcarousel(this.carouselSettings);
 		}.bind(this), 1000);
 	}

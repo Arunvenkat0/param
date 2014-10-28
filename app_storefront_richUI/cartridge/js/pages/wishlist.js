@@ -14,6 +14,6 @@ exports.init = function () {
 
 	//add js logic to remove the , from the qty feild to pass regex expression on client side
 	$('.option-quantity-desired input').on('focusout', function () {
-		$(this).val($(this).val().replace(',',''));
+		$(this).val($(this).val().replace(',', ''));
 	});
 };

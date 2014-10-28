@@ -266,8 +266,8 @@ function initializeEvents() {
 			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
 			productSet = $(this).closest('.subProduct'),
 			params = {
-				Quantity : isNaN(qty) ? '1' : qty,
-				format : 'ajax'
+				Quantity: isNaN(qty) ? '1' : qty,
+				format: 'ajax'
 			};
 		if (listid) {params.productlistid = listid;}
 		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
@@ -297,7 +297,7 @@ function initializeEvents() {
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		var $this = $(this),
 			params = {},
-			hasSwapImage, qty,listid, url;
+			hasSwapImage, qty, listid, url;
 
 		e.preventDefault();
 
@@ -423,11 +423,11 @@ var product = {
 		initializeDom();
 		initializeEvents();
 		loadZoom();
-		if (SitePreferences.STORE_PICKUP){
+		if (SitePreferences.STORE_PICKUP) {
 			storeinventory.init();
 		}
 	},
-	readReviews: function() {
+	readReviews: function () {
 		$('.product-tabs').tabs('select', '#tab4');
 		$('body').scrollTop($('#tab4').offset().top);
 	},

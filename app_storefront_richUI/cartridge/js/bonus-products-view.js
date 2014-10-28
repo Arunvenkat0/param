@@ -21,14 +21,14 @@ function getBonusProducts() {
 	var i, len;
 	for (i = 0, len = selectedList.length; i < len; i++) {
 		var p = {
-			pid : selectedList[i].pid,
-			qty : selectedList[i].qty,
-			options : {}
+			pid: selectedList[i].pid,
+			qty: selectedList[i].qty,
+			options: {}
 		};
 		var a, alen, bp = selectedList[i];
 		for (a = 0, alen = bp.options.length; a < alen; a++) {
 			var opt = bp.options[a];
-			p.options = {optionName:opt.name,optionValue:opt.value};
+			p.options = {optionName:opt.name, optionValue:opt.value};
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -74,8 +74,7 @@ function updateSummary() {
 	$bonusProductList.find('.bonus-items-available').text(remain);
 	if (remain <= 0) {
 		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
-	}
-	else {
+	} else {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 	}
 }
@@ -92,7 +91,7 @@ function initializeGrid () {
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
-	cartItems.each(function() {
+	cartItems.each(function () {
 		var ci = $(this);
 		var product = {
 			uuid: ci.data('uuid'),
@@ -102,7 +101,7 @@ function initializeGrid () {
 			attributes: {}
 		};
 		var attributes = ci.find('ul.item-attributes li');
-		attributes.each(function (){
+		attributes.each(function () {
 			var li = $(this);
 			product.attributes[li.data('attributeId')] = {
 				displayName:li.children('.display-name').html(),
@@ -115,13 +114,13 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('change', '.input-text', function (e){
+	.on('change', '.input-text', function (e) {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
 	.on('click', '.button-select-bonus', function (e) {
 		e.preventDefault();
-		if (selectedList.length>=maxItems) {
+		if (selectedList.length >= maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
 			$bonusProductList.find('.bonus-items-available').text('0');
 			return;
@@ -160,7 +159,7 @@ function initializeGrid () {
 		selectedList.push(product);
 		updateSummary();
 	})
-	.on('click', '.remove-link', function(e){
+	.on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		var container = $(this).closest('.selected-bonus-item');
 		if (!container.data('uuid')) { return; }
@@ -169,7 +168,7 @@ function initializeGrid () {
 		var i, len = selectedList.length;
 		for (i = 0; i < len; i++) {
 			if (selectedList[i].uuid === uuid) {
-				selectedList.splice(i,1);
+				selectedList.splice(i, 1);
 				break;
 			}
 		}
@@ -214,15 +213,15 @@ var bonusProductsView = {
 	 * @function
 	 * @description Opens the bonus product quick view dialog
 	 */
-	show : function (url) {
+	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
 		dialog.create({
-			target : $bonusProduct,
-			options : {
+			target: $bonusProduct,
+			options: {
 				width: 795,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCTS
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCTS
 			}
 		});
 
@@ -233,7 +232,7 @@ var bonusProductsView = {
 			callback: function () {
 				$bonusProduct.dialog('open');
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display','none');
+				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
 			}
 		});
 
@@ -254,12 +253,12 @@ var bonusProductsView = {
 		if ($bonusDiscountContainer.length === 0) { return; }
 
 		dialog.create({
-			target : $bonusDiscountContainer,
-			options : {
-				height : 'auto',
-				width : 350,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCT
+			target: $bonusDiscountContainer,
+			options: {
+				height: 'auto',
+				width: 350,
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCT
 			}
 		});
 		$bonusDiscountContainer.dialog('open');
@@ -271,7 +270,7 @@ var bonusProductsView = {
 			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
 				bonusDiscountLineItemUUID: uuid,
 				source: 'bonus'
-			 });
+			});
 
 			$bonusDiscountContainer.dialog('close');
 			this.show(url);

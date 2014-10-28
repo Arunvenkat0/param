@@ -42,7 +42,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		// initialize vars
 		$searchContainer = $(container);
 		$searchForm = $searchContainer.find('form[name="simpleSearch"]');
@@ -54,7 +54,7 @@ var searchsuggest = {
 
 		// on focus listener (clear default value)
 		$searchField.focus(function () {
-			if(!$resultsContainer) {
+			if (!$resultsContainer) {
 				// create results container if needed
 				$resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
 					'top': $searchContainer[0].offsetHeight,
@@ -62,7 +62,7 @@ var searchsuggest = {
 					'width': $searchField[0].offsetWidth
 				});
 			}
-			if($searchField.val() === fieldDefault) {
+			if ($searchField.val() === fieldDefault) {
 				$searchField.val('');
 			}
 		});
@@ -89,8 +89,8 @@ var searchsuggest = {
 			var lastVal = $searchField.val();
 
 			// if is text, call with delay
-			setTimeout(function () { 
-				this.suggest(lastVal); 
+			setTimeout(function () {
+				this.suggest(lastVal);
 			}.bind(this), delay);
 		}.bind(this));
 		// on submit we do not submit the form, but change the window location
@@ -99,7 +99,7 @@ var searchsuggest = {
 		$searchForm.submit(function (e) {
 			e.preventDefault();
 			var searchTerm = $searchField.val();
-			if(searchTerm === fieldDefault || searchTerm.length === 0) {
+			if (searchTerm === fieldDefault || searchTerm.length === 0) {
 				return false;
 			}
 			window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
@@ -111,12 +111,12 @@ var searchsuggest = {
 	 * @description trigger suggest action
 	 * @param lastValue
 	 */
-	suggest : function (lastValue) {
+	suggest: function (lastValue) {
 		// get the field value
 		var part = $searchField.val();
 
 		// if it's empty clear the resuts box and return
-		if(part.length === 0) {
+		if (part.length === 0) {
 			this.clearResults();
 			return;
 		}
@@ -125,7 +125,7 @@ var searchsuggest = {
 		// or there were no results in the last call and the query length
 		// is longer than the last query length, return
 		// #TODO: improve this to look at the query value and length
-		if((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
+		if ((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
 			return;
 		}
 		qlen = part.length;
@@ -147,8 +147,8 @@ var searchsuggest = {
 			}
 			suggestionsJson = suggestions;
 			var html = '';
-			for (var i=0; i < ansLength; i++) {
-				html+='<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
+			for (var i = 0; i < ansLength; i++) {
+				html += '<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
 			}
 
 			// update the results div
@@ -166,7 +166,7 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
 		$resultsContainer.empty().hide();
 	}

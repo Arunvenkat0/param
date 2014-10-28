@@ -37,7 +37,7 @@ var sendToFriend = {
 			$dialog.dialog('close');
 		});
 	},
-	initializeDialog : function (eventDelegate) {
+	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
@@ -63,7 +63,7 @@ var sendToFriend = {
 				url: util.ajaxUrl(url),
 				target: dlg,
 				callback: function () {
-					dlg.dialog('open');	 // open after load to ensure dialog is centered
+					dlg.dialog('open');	// open after load to ensure dialog is centered
 				}
 			});
 		});

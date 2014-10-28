@@ -15,7 +15,7 @@ function infiniteScroll() {
 		// switch state to 'loading'
 		// - switches state, so the above selector is only matching once
 		// - shows loading indicator
-		loadingPlaceHolder.attr('data-loading-state','loading');
+		loadingPlaceHolder.attr('data-loading-state', 'loading');
 		loadingPlaceHolder.addClass('infinite-scroll-loading');
 
 		/**
@@ -23,8 +23,8 @@ function infiniteScroll() {
 		 */
 		var fillEndlessScrollChunk = function (html) {
 			loadingPlaceHolder.removeClass('infinite-scroll-loading');
-			loadingPlaceHolder.attr('data-loading-state','loaded');
-			jQuery('div.search-result-content').append(html);
+			loadingPlaceHolder.attr('data-loading-state', 'loaded');
+			$('div.search-result-content').append(html);
 		};
 
 		// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
@@ -96,10 +96,10 @@ function initializeEvents() {
 		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
 		var itemImg = tile.find('.product-image a img').first();
 		func({
-			itemid : tile.data('itemid'),
-			uuid : tile[0].id,
-			img : itemImg,
-			cb : cb
+			itemid: tile.data('itemid'),
+			uuid: tile[0].id,
+			img: itemImg,
+			cb: cb
 		});
 
 	});
