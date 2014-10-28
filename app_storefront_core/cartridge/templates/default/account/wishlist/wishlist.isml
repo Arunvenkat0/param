@@ -139,14 +139,14 @@
 										</div>
 
 										<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
-											<isif condition="${isListOwner}">
-												<isinputfield formfield="${item.quantity}" type="input" rowclass="item-option option-quantity-desired"/>
-											<iselse/>
-												<div class="item-option option-quantity-desired">
-													<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span>
+											<div class="item-option option-quantity-desired">
+												<label for="${item.quantity.htmlName}">${Resource.msg('productlist.qtydesired','account',null)}</span>
+												<isif condition="${isListOwner}">
+													<input type="number" name="${item.quantity.htmlName}" value="<isprint value="${item.quantity.value}" style="INTEGER"/>"/>
+												<iselse/>
 													<span class="value"><isprint value="${item.quantity.value}"/></span>
-												</div>
-											</isif>
+												</isif>
+											</div>
 										</isif>
 
 										<isif condition="${isListOwner}">

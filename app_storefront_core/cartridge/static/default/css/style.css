@@ -828,8 +828,8 @@ div.error {
   .item-dashboard input, .item-dashboard .value, .item-dashboard .option-toggle-public label {
     color: #333; }
   .item-dashboard input {
-    padding: 0;
-    width: 20px; }
+    padding: 0.2em;
+    width: 2em; }
   .item-dashboard .input-text {
     margin: 0;
     text-align: center; }

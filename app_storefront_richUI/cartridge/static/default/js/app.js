@@ -187,7 +187,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":24,"./pages/registry":25,"./pages/search":26,"./pages/storefront":27,"./pages/storelocator":28,"./pages/wishlist":29,"./searchplaceholder":33,"./searchsuggest":35,"./searchsuggest-beta":34,"./tooltip":38,"./util":39,"./validator":40}],2:[function(require,module,exports){
+},{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":25,"./pages/registry":26,"./pages/search":27,"./pages/storefront":28,"./pages/storelocator":29,"./pages/wishlist":30,"./searchplaceholder":34,"./searchsuggest":36,"./searchsuggest-beta":35,"./tooltip":39,"./util":40,"./validator":41}],2:[function(require,module,exports){
 'use strict';
 
 var progress= require('./progress'),
@@ -293,7 +293,7 @@ var load = function (options) {
 
 exports.getJson = getJson;
 exports.load = load;
-},{"./progress":31,"./util":39}],3:[function(require,module,exports){
+},{"./progress":32,"./util":40}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -578,7 +578,7 @@ var bonusProductsView = {
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":2,"./dialog":7,"./page":13,"./util":39}],4:[function(require,module,exports){
+},{"./ajax":2,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -836,7 +836,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":13,"./util":39,"promise":44}],5:[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":40,"promise":45}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1039,7 +1039,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":39}],8:[function(require,module,exports){
+},{"./ajax":2,"./util":40}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1060,7 +1060,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":39}],9:[function(require,module,exports){
+},{"./ajax":2,"./util":40}],9:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1114,7 +1114,7 @@ exports.init = function(){
 	$("#AddToBasketButton").on('click', setAddToCartHandler);
 }
 
-},{"./ajax":2,"./minicart":11,"./util":39}],10:[function(require,module,exports){
+},{"./ajax":2,"./minicart":11,"./util":40}],10:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1225,7 +1225,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":39}],12:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":40}],12:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1253,7 +1253,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":39}],13:[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":40}],13:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1272,7 +1272,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":39}],14:[function(require,module,exports){
+},{"./util":40}],14:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1501,27 +1501,27 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":38,"../util":39,"../validator":40}],15:[function(require,module,exports){
+},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":39,"../util":40,"../validator":41}],15:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	page = require('../page'),
+	product = require('./product'),
 	quickview = require('../quickview'),
-	storeinventory = require('../storeinventory'),
-	util = require('../util');
+	storeinventory = require('../storeinventory');
 
 /**
  * @private
  * @function
- * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry )
+ * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry)
  */
 function initializeEvents() {
 	$('#cart-table').on('click', '.item-edit-details a', function (e) {
 		e.preventDefault();
 		quickview.show({
-			url : e.target.href,
-			source : 'cart'
+			url: e.target.href,
+			source: 'cart',
+			callback: product.initializeEvents
 		});
 	})
 	.on('click', '.bonus-item-actions a', function (e) {
@@ -1535,40 +1535,15 @@ function initializeEvents() {
 	});
 }
 
-var cart = {
-	/**
-	 * @function
-	 * @description Updates the cart with new data
-	 * @param {Object} postdata An Object representing the the new or uptodate data
-	 * @param {Object} A callback function to be called
-	 */
-	update: function (postdata, callback) {
-		var url = util.ajaxUrl(Urls.addProduct);
-		$.post(url, postdata, callback || this.refresh);
-	},
-	/**
-	 * @function
-	 * @description Refreshes the cart without posting
-	 */
-	refresh: function () {
-		// refresh without posting
-		page.refresh();
-	},
-	/**
-	 * @function
-	 * @description Initializes the functionality on the cart
-	 */
-	init: function () {
-		initializeEvents();
-		if (SitePreferences.STORE_PICKUP) {
-			storeinventory.init();
-		}
-		account.initCartLogin();
+exports.init = function () {
+	initializeEvents();
+	if (SitePreferences.STORE_PICKUP) {
+		storeinventory.init();
 	}
+	account.initCartLogin();
 };
 
-module.exports = cart;
-},{"../bonus-products-view":3,"../page":13,"../quickview":32,"../storeinventory":37,"../util":39,"./account":14}],16:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":33,"../storeinventory":38,"./account":14,"./product":25}],16:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1597,7 +1572,7 @@ exports.init = function () {
 	});
 }
 
-},{"../../util":39,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":40,"./shipping":21}],17:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1796,7 +1771,7 @@ exports.init = function () {
 	});
 }
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":39,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":8,"../../util":40,"./formPrepare":18}],18:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1855,7 +1830,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":42}],19:[function(require,module,exports){
+},{"lodash":43}],19:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2015,7 +1990,7 @@ exports.init = function () {
 	});
 }
 
-},{"../../dialog":7,"../../util":39,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":7,"../../util":40,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2179,7 +2154,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":31,"../../tooltip":38,"../../util":39,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":32,"../../tooltip":39,"../../util":40,"./formPrepare":18}],22:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2224,7 +2199,60 @@ exports.init = function () {
 	product.initAddToCart();
 }
 
-},{"../ajax":2,"../page":13,"../product-tile":30,"../quickview":32,"./product":24}],23:[function(require,module,exports){
+},{"../ajax":2,"../page":13,"../product-tile":31,"../quickview":33,"./product":25}],23:[function(require,module,exports){
+'use strict';
+
+var page = require('../../page'),
+	util = require('../../util');
+
+/**
+ * @private
+ * @function
+ * @description Event handler to handle the add to cart event
+ */
+function setAddToCartHandler(e) {
+	e.preventDefault();
+	var $form = $(this).closest('form');
+	var qty = $form.find('input[name="Quantity"]');
+	var isSubItem = $(this).hasClass('sub-product-item');
+	if (qty.length === 0 || isNaN(qty.val()) || parseInt(qty.val(), 10) === 0) {
+		qty.val('1');
+	}
+
+	var data = $form.serialize();
+	var url = util.ajaxUrl(Urls.addProduct);
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: data,
+		success: function (response) {
+			var $uuid = $form.find('input[name="uuid"]');
+			if ($uuid.length > 0 && $uuid.val().length > 0) {
+				page.refresh();
+			} else {
+				if (!isSubItem) {
+					quickview.close();
+				}
+				minicart.show(response);
+			}
+		}
+	});
+}
+
+/**
+ * @function
+ * @description Binds the click event to a given target for the add-to-cart handling
+ * @param {Element} target The target on which an add to cart event-handler will be set
+ */
+module.exports = function (target) {
+	if (target) {
+		target.on('click', '.add-to-cart', setAddToCartHandler);
+	} else {
+		$('.add-to-cart').on('click', setAddToCartHandler);
+	}
+}
+
+},{"../../page":13,"../../util":40}],24:[function(require,module,exports){
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2305,11 +2333,10 @@ module.exports = function (data, $container) {
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
 }
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
-	cart = require('../cart'),
 	components = require('../../components'),
 	dialog = require('../../dialog'),
 	minicart = require('../../minicart'),
@@ -2319,7 +2346,8 @@ var ajax = require('../../ajax'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
-	quantityEvent = require('./events/quantity');
+	quantityEvent = require('./events/quantity'),
+	addToCartHandler = require('./addToCartHandler');
 
 /**
  * @private
@@ -2517,7 +2545,7 @@ function initializeEvents() {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
 	// add or update shopping cart line item
-	product.initAddToCart();
+	addToCartHandler();
 	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
@@ -2588,7 +2616,7 @@ function initializeEvents() {
 			callback: function (data) {
 				target.html(data);
 				product.initAddThis();
-				product.initAddToCart();
+				addToCartHandler();
 				if (hasSwapImage) {
 					replaceImages();
 				}
@@ -2626,7 +2654,7 @@ function initializeEvents() {
 			target: $('#product-content'),
 			callback: function (data) {
 				product.initAddThis();
-				product.initAddToCart();
+				addToCartHandler();
 				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
@@ -2661,7 +2689,7 @@ function initializeEvents() {
 					$addAllToCart.removeAttr('disabled');
 					$addToCart.removeAttr('disabled'); // this may be a bundle
 				}
-				product.initAddToCart($container);
+				addToCartHandler($container);
 				tooltip.init();
 			}
 		});
@@ -2679,7 +2707,7 @@ function initializeEvents() {
 			var itemid = form.find('input[name="pid"]').val();
 
 			$.ajax({
-				dataType : 'html',
+				dataType: 'html',
 				url: addProductUrl,
 				data: form.serialize()
 			})
@@ -2723,36 +2751,10 @@ function initializeEvents() {
 		});
 	});
 }
-/**
- * @private
- * @function
- * @description Event handler to handle the add to cart event
- */
-function setAddToCartHandler(e) {
-	e.preventDefault();
-	var form = $(this).closest('form');
-	var qty = form.find('input[name="Quantity"]');
-	var isSubItem = $(this).hasClass('sub-product-item');
-	if (qty.length === 0 || isNaN(qty.val()) || parseInt(qty.val(), 10) === 0) {
-		qty.val('1');
-	}
 
-	var data = form.serialize();
-	cart.update(data, function (response) {
-		var uuid = form.find('input[name="uuid"]');
-		if (uuid.length > 0 && uuid.val().length > 0) {
-			cart.refresh();
-		}
-		else {
-			if (!isSubItem) {
-				quickview.close();
-			}
-			minicart.show(response);
-		}
-	});
-}
 
 var product = {
+	initializeEvents: initializeEvents,
 	init: function () {
 		initializeDom();
 		initializeEvents();
@@ -2761,7 +2763,7 @@ var product = {
 			storeinventory.init();
 		}
 	},
-	readReviews: function(){
+	readReviews: function() {
 		$('.product-tabs').tabs('select', '#tab4');
 		$('body').scrollTop($('#tab4').offset().top);
 	},
@@ -2796,27 +2798,15 @@ var product = {
 		addThisToolbox.html(addThisLinks);
 		try {
 			addthis.toolbox('.addthis_toolbox');
-		} catch(e) {
+		} catch (e) {
 			return;
-		}
-	},
-	/**
-	 * @function
-	 * @description Binds the click event to a given target for the add-to-cart handling
-	 * @param {Element} target The target on which an add to cart event-handler will be set
-	 */
-	initAddToCart: function (target) {
-		if (target) {
-			target.on('click', '.add-to-cart', setAddToCartHandler);
-		} else {
-			$('.add-to-cart').on('click', setAddToCartHandler);
 		}
 	}
 };
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":31,"../../quickview":32,"../../send-to-friend":36,"../../storeinventory":37,"../../tooltip":38,"../../util":39,"../cart":15,"./events/quantity":23}],25:[function(require,module,exports){
+},{"../../ajax":2,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":32,"../../quickview":33,"../../send-to-friend":37,"../../storeinventory":38,"../../tooltip":39,"../../util":40,"./addToCartHandler":23,"./events/quantity":24}],26:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../ajax'),
@@ -2911,7 +2901,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":32,"../send-to-friend":36,"../util":39,"./product":24}],26:[function(require,module,exports){
+},{"../ajax":2,"../quickview":33,"../send-to-friend":37,"../util":40,"./product":25}],27:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3103,7 +3093,7 @@ exports.init = function () {
 	initializeEvents();
 }
 
-},{"../compare-widget":4,"../product-tile":30,"../progress":31,"../util":39}],27:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":31,"../progress":32,"../util":40}],28:[function(require,module,exports){
 ' use strict';
 
 /**
@@ -3153,7 +3143,7 @@ exports.init = function () {
 	});
 };
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3166,7 +3156,7 @@ exports.init = function () {
 	});
 }
 
-},{"../dialog":7}],29:[function(require,module,exports){
+},{"../dialog":7}],30:[function(require,module,exports){
 'use strict';
 
 var page = require('../page'),
@@ -3187,7 +3177,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":36,"../util":39,"./product":24}],30:[function(require,module,exports){
+},{"../page":13,"../send-to-friend":37,"../util":40,"./product":25}],31:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3291,7 +3281,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":24,"./quickview":32}],31:[function(require,module,exports){
+},{"./pages/product":25,"./quickview":33}],32:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3324,7 +3314,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3333,13 +3323,13 @@ var ajax = require('./ajax'),
 	util = require('./util');
 
 var quickview = {
-	init : function () {
+	init: function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
 	},
 
-	initializeQuickViewNav : function(qvUrl) {
+	initializeQuickViewNav: function(qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
@@ -3401,7 +3391,7 @@ var quickview = {
 			this.btnPrev.hide();
 		}
 	},
-	navigateQuickview : function (e) {
+	navigateQuickview: function (e) {
 		e.preventDefault();
 		var button = $(e.currentTarget);
 
@@ -3420,7 +3410,7 @@ var quickview = {
 	// show quick view dialog and send request to the server to get the product
 	// options.source - source of the dialog i.e. search/cart
 	// options.url - product url
-	show : function (options) {
+	show: function (options) {
 		if (!this.exists()) {
 			this.init();
 		}
@@ -3463,21 +3453,22 @@ var quickview = {
 		});
 	},
 	// close the quick view dialog
-	close : function () {
+	close: function () {
 		if (this.exists()) {
 			this.$container.dialog('close').empty();
 		}
 	},
-	exists : function () {
+	exists: function () {
 		return this.$container && (this.$container.length > 0);
 	},
-	isActive : function () {
+	isActive: function () {
 		return this.exists() && (this.$container.children.length > 0);
 	}
 };
 
 module.exports = quickview;
-},{"./ajax":2,"./dialog":7,"./progress":31,"./util":39}],33:[function(require,module,exports){
+
+},{"./ajax":2,"./dialog":7,"./progress":32,"./util":40}],34:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3503,7 +3494,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 var util = require('./util');
 
@@ -3672,7 +3663,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":39}],35:[function(require,module,exports){
+},{"./util":40}],36:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3848,7 +3839,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
-},{"./util":39}],36:[function(require,module,exports){
+},{"./util":40}],37:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3923,7 +3914,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":7,"./util":39,"./validator":40}],37:[function(require,module,exports){
+},{"./ajax":2,"./dialog":7,"./util":40,"./validator":41}],38:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4287,7 +4278,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":2,"./page":13,"./util":39}],38:[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":40}],39:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4309,7 +4300,7 @@ exports.init = function () {
 	});
 };
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 var // dialog = require('./dialog'),
 	validator = require('./validator')
@@ -4617,7 +4608,7 @@ var util = {
 
 module.exports = util;
 
-},{"./validator":40}],40:[function(require,module,exports){
+},{"./validator":41}],41:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4739,7 +4730,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4804,7 +4795,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -11593,7 +11584,7 @@ process.chdir = function (dir) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -11700,7 +11691,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":45}],44:[function(require,module,exports){
+},{"asap":46}],45:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions to the core promise API
@@ -11882,7 +11873,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":43,"asap":45}],45:[function(require,module,exports){
+},{"./core.js":44,"asap":46}],46:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -11999,4 +11990,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":41}]},{},[1]);
+},{"_process":42}]},{},[1]);
