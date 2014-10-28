@@ -2,9 +2,19 @@
 <iscomment>
 	If it is a master product or variation group without a price range, get its pricing from its first variant.	
 </iscomment>
-<isif condition="${(pdict.Product.master || pdict.Product.variationGroup) && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
+
+<isset name="OrgProduct" value="${pdict.Product}" scope="pdict"/>
+
+<isscript>
+// for variation groups use the master, because all variants are available in detail page
+if ( pdict.Product.variationGroup )
+{
+	pdict.Product = pdict.Product.masterProduct;
+}
+</isscript>
+
+<isif condition="${pdict.Product.master && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
 	<iscomment>Preserve current product instance</iscomment>
-	<isset name="OrgProduct" value="${pdict.Product}" scope="pdict"/>
 	<isset name="Product" value="${pdict.OrgProduct.variationModel.variants[0]}" scope="pdict"/>
 </isif>
 
