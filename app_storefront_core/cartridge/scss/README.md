@@ -25,6 +25,7 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
     // Bad
     a {color: $green; text-decoration: underline;}
     ```
+    
 - Use ONE space after a property's colon.
 
     ```scss
@@ -37,6 +38,7 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
     	display:block;
     }
     ```
+    
 - End all lines with a semi-colon.
 - For multiple, comma-separated selectors, place each selector on its own line.
 
@@ -49,6 +51,7 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
     // Bad
     . selectorA, .selectorB {}
     ```
+    
 - No vendor prefixes. This will be done at build time using autoprefixer.
 - Attribute selectors, like `input[type="text"]` should always wrap the attribute's value in double quotes, for consistency and safety.
 - Maximum selector nesting: **three** levels deep.
@@ -64,6 +67,7 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
     div.className{
     }
     ```
+    
 - Use lowercase for HEX colors, i.e. `#eaea56` instead of `#EAEA56`.
 - Contract HEX colors when possible, i.e. `#fff` instead of `#ffffff`.
 - **!important** Avoid using `!important` at all cost!
