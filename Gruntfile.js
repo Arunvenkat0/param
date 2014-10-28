@@ -57,10 +57,20 @@ module.exports = function (grunt) {
 				jshintrc: true
 			},
 			target: ['app_storefront_richUI/cartridge/js/**/*.js']
+		},
+		mochaTest: {
+			ui: {
+				options: {
+					reporter: 'spec',
+					timeout: 10000
+				},
+				src: ['test/ui.*.js']
+			}
 		}
 	});
 
 	grunt.registerTask('scss', ['sass', 'autoprefixer']);
 	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
+	grunt.registerTask('ui-test', ['mochaTest:ui']);
 }
