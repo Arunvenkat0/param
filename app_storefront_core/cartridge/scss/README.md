@@ -15,59 +15,51 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
 
 - Include partials should be prefixed with `_`, i.e. `_partial.scss`
 - Multiple-line approach (one property and value per line).
-
-    ```scss
-    // OK
-    a {
-    	color: $green;
-    	text-decoration: underline;
-    }
-    // Bad
-    a {color: $green; text-decoration: underline;}
-    ```
-
+```scss
+// OK
+a {
+	color: $green;
+	text-decoration: underline;
+}
+// Bad
+a {color: $green; text-decoration: underline;}
+```
 - Use ONE space after a property's colon.
-
-    ```scss
-    // OK
-    .block {
-    	display: block;
-    }
-    // Bad
-    .block {
-    	display:block;
-    }
-    ```
-
+```scss
+// OK
+.block {
+	display: block;
+}
+// Bad
+.block {
+	display:block;
+}
+```
 - End all lines with a semi-colon.
 - For multiple, comma-separated selectors, place each selector on its own line.
+```scss
+// OK
+.selectorA,
+.selectorB {
 
-    ```scss
-    // OK
-    .selectorA,
-    .selectorB {
-
-    }
-    // Bad
-    . selectorA, .selectorB {}
-    ```
-
+}
+// Bad
+. selectorA, .selectorB {}
+```
 - No vendor prefixes. This will be done at build time using autoprefixer.
 - Attribute selectors, like `input[type="text"]` should always wrap the attribute's value in double quotes, for consistency and safety.
 - Maximum selector nesting: **three** levels deep.
 - Global sass file (`style.scss`) is just a table of content.
 - Avoid the use of ID (`#`) like a plague. Class naming is preferred.
 - When using class or ID selector, drop the element selector.
-
-    ```scss
-    // OK
-    .className {
-    }
-    // Bad
-    div.className{
-    }
-    ```
-
+```scss
+// OK
+.className {
+}
+// Bad
+div.className{
+}
+```
 - Use lowercase for HEX colors, i.e. `#eaea56` instead of `#EAEA56`.
 - Contract HEX colors when possible, i.e. `#fff` instead of `#ffffff`.
 - **!important** Avoid using `!important` at all cost!
