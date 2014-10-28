@@ -48,7 +48,8 @@ function initializeEvents() {
 		$afterAddress = $form.find('fieldset[name="address-after"]');
 
 	$('.usepreevent').on('click', function () {
-		$(':input', $beforeAddress).each(function () {
+		// filter out storefront toolkit
+		$(':input', $beforeAddress).not('[id^="ext"]').each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
@@ -77,9 +78,9 @@ function initializeEvents() {
 		e.preventDefault();
 		var productListID = $('input[name=productListID]').val();
 		quickview.show({
-			url : e.target.href,
-			source : 'giftregistry',
-			productlistid : productListID
+			url: e.target.href,
+			source: 'giftregistry',
+			productlistid: productListID
 		});
 	});
 }

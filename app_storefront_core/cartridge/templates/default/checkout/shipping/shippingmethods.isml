@@ -91,7 +91,7 @@
 					    				<isif condition="${shippingPA.calloutMsg != null}">
 											<div class="promo">
 												<span class="label">
-													<isprint value="${shippingPA.calloutMsg}"/>: 
+													<isprint value="${shippingPA.calloutMsg}" encoding="off"/>: 
 												</span>
 												<span class="value">
 													<isprint value="${shippingPA.price}"/>
@@ -134,7 +134,7 @@
 					<!---  Display approaching shipping promotional discounts. --->
 				    <ul class="shipping-promos"> 
 					    <isloop items="${DiscountPlan.getApproachingShippingDiscounts(shipment, shippingMethod)}" var="shippingDiscount">
-					        <li>${Resource.msg('approachingpromo.purchase','checkout',null)} <isprint value="${shippingDiscount.getDistanceFromConditionThreshold()}" /> ${Resource.msg('approachingpromo.more','checkout',null)} ${Resource.msg('approachingpromo.receive','checkout',null)}: ${shippingDiscount.getDiscount().getPromotion().getCalloutMsg()}<br/>
+					        <li>${Resource.msg('approachingpromo.purchase','checkout',null)} <isprint value="${shippingDiscount.getDistanceFromConditionThreshold()}" /> ${Resource.msg('approachingpromo.more','checkout',null)} ${Resource.msg('approachingpromo.receive','checkout',null)}: <isprint value="${shippingDiscount.getDiscount().getPromotion().getCalloutMsg()}" encoding="off" /><br/>
 					    </isloop>
 				    </ul>   			
     			

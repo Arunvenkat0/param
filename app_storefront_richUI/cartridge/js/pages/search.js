@@ -1,6 +1,6 @@
 'use strict';
 
-var productCompare = require('../product-compare'),
+var compareWidget = require('../compare-widget'),
 	productTile = require('../product-tile'),
 	progress = require('../progress'),
 	util = require('../util');
@@ -71,7 +71,7 @@ function updateProductListing() {
 	}
 	progress.show($('.search-result-content'));
 	$('#main').load(util.appendParamToURL(refineUrl, 'format', 'ajax'), function () {
-		productCompare.init();
+		compareWidget.init();
 		productTile.init();
 		progress.hide();
 	});
@@ -93,7 +93,7 @@ function initializeEvents() {
 		var cb = $(this);
 		var tile = cb.closest('.product-tile');
 
-		var func = this.checked ? productCompare.addProduct : productCompare.removeProduct;
+		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
 		var itemImg = tile.find('.product-image a img').first();
 		func({
 			itemid : tile.data('itemid'),
@@ -181,7 +181,7 @@ function initializeEvents() {
 }
 
 exports.init = function () {
-	productCompare.init();
+	compareWidget.init();
 	if (SitePreferences.LISTING_INFINITE_SCROLL) {
 		$(window).on('scroll', infiniteScroll);
 	}

@@ -2,22 +2,22 @@
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	page = require('../page'),
+	product = require('./product'),
 	quickview = require('../quickview'),
-	storeinventory = require('../storeinventory'),
-	util = require('../util');
+	storeinventory = require('../storeinventory');
 
 /**
  * @private
  * @function
- * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry )
+ * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry)
  */
 function initializeEvents() {
 	$('#cart-table').on('click', '.item-edit-details a', function (e) {
 		e.preventDefault();
 		quickview.show({
-			url : e.target.href,
-			source : 'cart'
+			url: e.target.href,
+			source: 'cart',
+			callback: product.initializeEvents
 		});
 	})
 	.on('click', '.bonus-item-actions a', function (e) {
@@ -31,36 +31,10 @@ function initializeEvents() {
 	});
 }
 
-var cart = {
-	/**
-	 * @function
-	 * @description Updates the cart with new data
-	 * @param {Object} postdata An Object representing the the new or uptodate data
-	 * @param {Object} A callback function to be called
-	 */
-	update: function (postdata, callback) {
-		var url = util.ajaxUrl(Urls.addProduct);
-		$.post(url, postdata, callback || this.refresh);
-	},
-	/**
-	 * @function
-	 * @description Refreshes the cart without posting
-	 */
-	refresh: function () {
-		// refresh without posting
-		page.refresh();
-	},
-	/**
-	 * @function
-	 * @description Initializes the functionality on the cart
-	 */
-	init: function () {
-		initializeEvents();
-		if (SitePreferences.STORE_PICKUP) {
-			storeinventory.init();
-		}
-		account.initCartLogin();
+exports.init = function () {
+	initializeEvents();
+	if (SitePreferences.STORE_PICKUP) {
+		storeinventory.init();
 	}
+	account.initCartLogin();
 };
-
-module.exports = cart;

@@ -23,7 +23,7 @@
 	<div id="bonus-product-list" class="bonus-product-list pdp-main" data-line-item-detail='<isprint value="${JSON.stringify(lidata)}" encoding="off"/>'>
 	
 		<div class="promotion">
-			<isprint value="${pdict.BonusDiscountLineItem.getPromotion().getCalloutMsg()}"/>
+			<isprint value="${pdict.BonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 			<a class="tooltip" href="#">
 				${Resource.msg('product.promotiondetails','product',null)}
 				<div class="tooltip-content" data-layout="small">

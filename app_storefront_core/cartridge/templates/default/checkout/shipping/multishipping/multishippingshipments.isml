@@ -64,7 +64,7 @@
 									<isset name="shippingPromotion" value="${shippingPA.promotion}" scope="page"/>
 									<isif condition="${shippingPromotion != null}">
 										<tr class="cart-row">
-											<td colspan="4"><isprint value="${Resource.msg('shipment.qualifiesfor','checkout',null)}"/> <isprint value="${shippingPromotion.calloutMsg}"/></td>
+											<td colspan="4"><isprint value="${Resource.msg('shipment.qualifiesfor','checkout',null)}"/> <isprint value="${shippingPromotion.calloutMsg}" encoding="off" /></td>
 										</tr>
 									</isif>
 								</isloop>

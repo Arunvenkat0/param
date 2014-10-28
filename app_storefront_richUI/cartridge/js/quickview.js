@@ -6,13 +6,13 @@ var ajax = require('./ajax'),
 	util = require('./util');
 
 var quickview = {
-	init : function () {
+	init: function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
 	},
 
-	initializeQuickViewNav : function(qvUrl) {
+	initializeQuickViewNav: function(qvUrl) {
 		// from the url of the product in the quickview
 		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
 			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
@@ -74,7 +74,7 @@ var quickview = {
 			this.btnPrev.hide();
 		}
 	},
-	navigateQuickview : function (e) {
+	navigateQuickview: function (e) {
 		e.preventDefault();
 		var button = $(e.currentTarget);
 
@@ -93,7 +93,7 @@ var quickview = {
 	// show quick view dialog and send request to the server to get the product
 	// options.source - source of the dialog i.e. search/cart
 	// options.url - product url
-	show : function (options) {
+	show: function (options) {
 		if (!this.exists()) {
 			this.init();
 		}
@@ -136,15 +136,15 @@ var quickview = {
 		});
 	},
 	// close the quick view dialog
-	close : function () {
+	close: function () {
 		if (this.exists()) {
 			this.$container.dialog('close').empty();
 		}
 	},
-	exists : function () {
+	exists: function () {
 		return this.$container && (this.$container.length > 0);
 	},
-	isActive : function () {
+	isActive: function () {
 		return this.exists() && (this.$container.children.length > 0);
 	}
 };
