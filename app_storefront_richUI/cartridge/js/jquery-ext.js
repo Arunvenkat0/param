@@ -25,4 +25,4 @@ module.exports = function () {
 		});
 		return this.height($(arr[arr.length - 1]).height());
 	};
-}
+};

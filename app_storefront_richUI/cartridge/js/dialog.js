@@ -12,14 +12,14 @@ var dialog = {
 	create: function (params) {
 		var id;
 		// options.target can be an id selector or an jquery object
-		var target = $(params.target || "#dialog-container");
+		var target = $(params.target || '#dialog-container');
 
 		// if no element found, create one
 		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === "#") {
+			if (target.selector && target.selector.charAt(0) === '#') {
 				id = target.selector.substr(1);
 			}
-			target = $("<div>").attr("id", id).addClass("dialog-content").appendTo("body");
+			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
@@ -36,15 +36,15 @@ var dialog = {
 		if (!params.url || params.url.length === 0) { return; }
 
 		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
+		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
 
 		// finally load the dialog
 		ajax.load({
 			target: this.container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog("isOpen")) {return;}
-				this.container.dialog("open");
+				if (this.container.dialog('isOpen')) { return; }
+				this.container.dialog('open');
 			}.bind(this)
 		});
 	},
@@ -56,7 +56,7 @@ var dialog = {
 		if (!this.container) {
 			return;
 		}
-		this.container.dialog("close");
+		this.container.dialog('close');
 	},
 	/**
 	 * @function
@@ -64,27 +64,27 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var form = this.container.find("form:first");
+		var form = this.container.find('form:first');
 		// set the action
-		$("<input/>").attr({
+		$('<input/>').attr({
 			name: action,
-			type: "hidden"
+			type: 'hidden'
 		}).appendTo(form);
 
 		// serialize the form and get the post url
 		var post = form.serialize();
-		var url = form.attr("action");
+		var url = form.attr('action');
 
 		// post the data and replace current content with response content
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: url,
 			data: post,
-			dataType: "html",
+			dataType: 'html',
 			success: function (data) {
 				this.container.html(data);
 			}.bind(this),
-			failure: function (data) {
+			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
@@ -100,14 +100,14 @@ var dialog = {
 		title: '',
 		overlay: {
 			opacity: 0.5,
-			background: "black"
+			background: 'black'
 		},
 		/**
 		 * @function
 		 * @description The close event
 		 */
-		close: function (event, ui) {
-			$(this).dialog("destroy");
+		close: function () {
+			$(this).dialog('destroy');
 		}
 	}
 };

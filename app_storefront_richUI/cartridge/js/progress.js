@@ -8,12 +8,12 @@ var $loader;
  * @param {Element} container The Element on top of which the AJAX-Loader will be shown
  */
 var show = function (container) {
-	var target = (!container || $(container).length === 0) ? $("body") : $(container);
-	$loader = $loader || $(".loader");
+	var target = (!container || $(container).length === 0) ? $('body') : $(container);
+	$loader = $loader || $('.loader');
 
 	if ($loader.lengt === 0) {
-		$loader = $("<div/>").addClass("loader")
-			.append($("<div/>").addClass("loader-indicator"), $("<div/>").addClass("loader-bg"));
+		$loader = $('<div/>').addClass('loader')
+			.append($('<div/>').addClass('loader-indicator'), $('<div/>').addClass('loader-bg'));
 	}
 	return $loader.appendTo(target).show();
 };

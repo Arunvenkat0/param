@@ -54,13 +54,13 @@ function initializeEvents() {
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
 		});
-	})
-	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
+	});
+	$form.on('change', 'select[name$="_addressBeforeList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $beforeAddress);
 	})
-	.on('change', 'select[name$="_addressAfterList"]', function (e) {
+	.on('change', 'select[name$="_addressAfterList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $afterAddress);

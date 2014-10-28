@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -44,7 +46,7 @@ module.exports = function (data, $container) {
 			avMsg.text(data.backOrderMsg);
 		}
 	}
-	if (data.inStockDate != '') {
+	if (data.inStockDate !== '') {
 		avMsg = avRoot.find('.in-stock-date-msg');
 		if (avMsg.length === 0) {
 			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
@@ -77,4 +79,4 @@ module.exports = function (data, $container) {
 	}
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
-}
+};

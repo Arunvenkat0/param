@@ -2,7 +2,6 @@
 
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
-	progress = require('./progress'),
 	util = require('./util');
 
 var quickview = {
@@ -52,19 +51,19 @@ var quickview = {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
 
-			if (productLinksUrl == '') {
+			if (productLinksUrl === '') {
 				productLinksUrl = this.productLinks[i].href;
 			}
-			if (qvUrl == productLinksUrl) {
+			if (qvUrl === productLinksUrl) {
 				this.productLinkIndex = i;
 			}
 		}
 
-		if (this.productLinkIndex == this.productLinks.length - 1) {
+		if (this.productLinkIndex === this.productLinks.length - 1) {
 			this.btnNext.hide();
 		}
 
-		if (this.productLinkIndex == 0) {
+		if (this.productLinkIndex === 0) {
 			this.btnPrev.hide();
 		}
 
@@ -97,7 +96,6 @@ var quickview = {
 		if (!this.exists()) {
 			this.init();
 		}
-		var that = this;
 		var target = this.$container;
 		var url = options.url;
 		var source = options.source;
@@ -106,7 +104,7 @@ var quickview = {
 			url = util.appendParamToURL(url, 'source', source);
 		}
 		if (productListId.length > 0) {
-			url = util.appendParamToURL(url, 'productlistid', productListId)
+			url = util.appendParamToURL(url, 'productlistid', productListId);
 		}
 
 		ajax.load({
@@ -126,7 +124,7 @@ var quickview = {
 						open: function () {
 							// allow for click outside modal to close the modal
 							$('.ui-widget-overlay').on('click', this.close.bind(this));
-							if (options.callback) options.callback();
+							if (options.callback) { options.callback(); }
 						}.bind(this)
 					}
 				});

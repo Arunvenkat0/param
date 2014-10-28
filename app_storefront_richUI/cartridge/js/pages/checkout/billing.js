@@ -27,7 +27,7 @@ function setCCFields(data) {
  */
 function populateCreditCardForm(cardID) {
 	// load card details
-	var url = util.appendParamToURL(Urls.billingSelectCC, "creditCardUUID", cardID);
+	var url = util.appendParamToURL(Urls.billingSelectCC, 'creditCardUUID', cardID);
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
@@ -87,7 +87,7 @@ exports.init = function () {
 	});
 
 	// select credit card from list
-	$("#creditCardList").on('change', function () {
+	$('#creditCardList').on('change', function () {
 		var cardUUID = $(this).val();
 		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
@@ -193,4 +193,4 @@ exports.init = function () {
 			$addGiftCert.click();
 		}
 	});
-}
+};

@@ -31,7 +31,7 @@ var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})
  * @param {String} value The phone number which will be validated
  * @param {String} el The input field
  */
-function validatePhone(value, el) {
+var validatePhone = function (value, el) {
 	var country = $(el).closest('form').find('.country');
 	if (country.length === 0 || country.val().length === 0 || !regex.phone[country.val().toLowerCase()]) {
 		return true;
@@ -42,18 +42,18 @@ function validatePhone(value, el) {
 	var isValid = rgx.test($.trim(value));
 
 	return isOptional || isValid;
-}
+};
 /**
  * @function
  * @description Validates a given email
  * @param {String} value The email which will be validated
  * @param {String} el The input field
  */
-function validateEmail(value, el) {
+var validateEmail = function (value, el) {
 	var isOptional = this.optional(el);
 	var isValid = regex.email.test($.trim(value));
 	return isOptional || isValid;
-}
+};
 
 /**
  * @function
@@ -61,10 +61,10 @@ function validateEmail(value, el) {
  * @param {String} value The owner field which will be validated
  * @param {String} el The input field
  */
-function validateOwner(value, el) {
+var validateOwner = function (value) {
 	var isValid = regex.notCC.test($.trim(value));
 	return isValid;
-}
+};
 
 /**
  * Add phone validation method to jQuery validation plugin.
@@ -82,7 +82,7 @@ $.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
  * Add CCOwner validation method to jQuery validation plugin.
  * Text fields must have 'owner' css class to be validated as not a credit card
  */
-$.validator.addMethod("owner", validateOwner, Resources.INVALID_OWNER);
+$.validator.addMethod('owner', validateOwner, Resources.INVALID_OWNER);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
@@ -98,7 +98,7 @@ $.validator.addMethod('gift-cert-amount', function (value, el) {
  * Add positive number validation method to jQuery validation plugin.
  * Text fields must have 'positivenumber' css class to be validated as positivenumber
  */
-$.validator.addMethod('positivenumber', function (value, element) {
+$.validator.addMethod('positivenumber', function (value) {
 	if ($.trim(value).length === 0) { return true; }
 	return (!isNaN(value) && Number(value) >= 0);
 }, ''); // '' should be replaced with error message if needed

@@ -10,7 +10,6 @@ module.exports = function () {
 	 * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
 	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
 	 */
-	var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
 	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
 		// check for privacy policy page
 		if ($('.privacy-policy').length === 0) {
@@ -23,7 +22,7 @@ module.exports = function () {
 						text: Resources.I_AGREE,
 						click: function () {
 							$(this).dialog('close');
-							enable_cookies();
+							enableCookies();
 						}
 					}]
 				}
@@ -31,10 +30,10 @@ module.exports = function () {
 		}
 	} else {
 		// Otherwise, we don't need to show the asset, just enable the cookies
-		enable_cookies();
+		enableCookies();
 	}
 
-	function enable_cookies() {
+	function enableCookies() {
 		if (document.cookie.indexOf('dw=1') < 0) {
 			document.cookie = 'dw=1; path=/';
 		}
@@ -42,4 +41,4 @@ module.exports = function () {
 			document.cookie = 'dw_cookies_accepted=1; path=/';
 		}
 	}
-}
+};

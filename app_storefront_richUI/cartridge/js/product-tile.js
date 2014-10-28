@@ -4,7 +4,7 @@ var product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
-	$('.tiles-container .product-image').on('mouseenter', function (e) {
+	$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton"/>');
@@ -36,9 +36,9 @@ function initializeEvents() {
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
-		var $tile = $(this).closest(".product-tile"),
-			$thumb = $tile.find(".product-image .thumb-link img").eq(0),
-			data = $thumb.data("current");
+		var $tile = $(this).closest('.product-tile'),
+			$thumb = $tile.find('.product-image .thumb-link img').eq(0),
+			data = $thumb.data('current');
 
 		$thumb.attr({
 			src: data.src,
@@ -96,7 +96,7 @@ exports.init = function () {
 	if ($tiles.length === 0) { return; }
 	$tiles.syncHeight()
 		.each(function (idx) {
-			$(this).data("idx", idx);
+			$(this).data('idx', idx);
 		});
 	initializeEvents();
 };

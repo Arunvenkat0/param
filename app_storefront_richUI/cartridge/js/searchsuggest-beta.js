@@ -1,4 +1,5 @@
 'use strict';
+
 var util = require('./util');
 
 var currentQuery = null,
@@ -30,7 +31,7 @@ function handleArrowKeys(keyCode) {
 	}
 
 	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	$('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
 	return true;
 }
 
@@ -81,9 +82,9 @@ var searchsuggest = {
 			currentQuery = $searchField.val().trim();
 
 			// no query currently running, init a update
-			if (runningQuery == null) {
+			if (runningQuery === null) {
 				runningQuery = currentQuery;
-				setTimeout('this.suggest()', delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 		}.bind(this));
 	},
@@ -138,7 +139,7 @@ var searchsuggest = {
 			if (currentQuery !== lastQuery) {
 				// ... and execute immediately if search has changed while this server call was in transit
 				runningQuery = currentQuery;
-				setTimeout("this.suggest()", delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 			this.hideLeftPanel();
 		}.bind(this));
@@ -149,7 +150,7 @@ var searchsuggest = {
 	 */
 	clearResults: function () {
 		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty()});
+		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
 	},
 	/**
 	 * @function

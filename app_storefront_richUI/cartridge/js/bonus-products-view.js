@@ -3,7 +3,7 @@
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
 	page = require('./page'),
-	util = require('./util')
+	util = require('./util');
 
 var selectedList = [];
 var maxItems = 1;
@@ -40,7 +40,7 @@ function getBonusProducts() {
  * @description Updates the summary page with the selected bonus product
  */
 function updateSummary() {
-	var $bonusProductList = $('#bonus-product-list')
+	var $bonusProductList = $('#bonus-product-list');
 	if (selectedList.length === 0) {
 		$bonusProductList.find('li.selected-bonus-item').remove();
 	} else {
@@ -114,7 +114,7 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('change', '.input-text', function (e) {
+	.on('change', '.input-text', function () {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
@@ -127,10 +127,10 @@ function initializeGrid () {
 		}
 
 		var form = $(this).closest('.bonus-product-form'),
-			detail = $(this).closest('.product-detail');
+			detail = $(this).closest('.product-detail'),
 			uuid = form.find('input[name="productUUID"]').val(),
 			qtyVal = form.find('input[name="Quantity"]').val(),
-			qty = isNaN(qtyVal) ? 1 : (+qtyVal);
+			qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
 		if (qty > maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
@@ -149,7 +149,7 @@ function initializeGrid () {
 
 		var optionSelects = form.find('.product-option');
 
-		optionSelects.each(function (idx) {
+		optionSelects.each(function () {
 			product.options.push({
 				name: this.name,
 				value: $(this).val(),
@@ -190,7 +190,7 @@ function initializeGrid () {
 			url: url,
 			data: JSON.stringify(bonusProducts)
 		})
-		.done(function (response) {
+		.done(function () {
 			// success
 			page.refresh();
 		})
@@ -242,7 +242,7 @@ var bonusProductsView = {
 	 * @description Closes the bonus product quick view dialog
 	 */
 	close: function () {
-		$bonusProduct.dialog('close');
+		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
@@ -274,7 +274,7 @@ var bonusProductsView = {
 
 			$bonusDiscountContainer.dialog('close');
 			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function (e) {
+		}.bind(this)).on('click', '.no-bonus-btn', function () {
 			$bonusDiscountContainer.dialog('close');
 		});
 	},

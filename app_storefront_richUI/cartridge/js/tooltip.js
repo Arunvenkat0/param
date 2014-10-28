@@ -10,11 +10,11 @@ exports.init = function () {
 		showURL: false,
 		bodyHandler: function () {
 			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = "";
-			if (tooltipClass = $(this).find('.tooltip-content').data("layout")) {
-				tooltipClass = " class='" + tooltipClass + "' ";
+			var tooltipClass = '';
+			if ($(this).find('.tooltip-content').data('layout')) {
+				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
 			}
-		return "<div " + tooltipClass + ">" + $(this).find('.tooltip-content').html() + "</div>";
+		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
 		}
 	});
 };

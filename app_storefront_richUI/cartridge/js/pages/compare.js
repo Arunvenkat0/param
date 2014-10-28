@@ -16,7 +16,7 @@ function initializeEvents() {
 		e.preventDefault();
 		ajax.getJson({
 			url: this.href,
-			callback: function (response) {
+			callback: function () {
 				page.refresh();
 			}
 		});
@@ -40,4 +40,4 @@ exports.init = function () {
 	productTile.init();
 	initializeEvents();
 	product.initAddToCart();
-}
+};

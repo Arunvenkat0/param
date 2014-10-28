@@ -4,9 +4,9 @@ var ajax = require('./ajax'),
 	minicart = require('./minicart'),
 	util = require('./util');
 
-function setAddToCartHandler(e) {
+var setAddToCartHandler = function (e) {
 	e.preventDefault();
-	var form = $(this).closest("form");
+	var form = $(this).closest('form');
 
 	var options = {
 		url: util.ajaxUrl(form.attr('action')),
@@ -27,26 +27,25 @@ function setAddToCartHandler(e) {
 			});
 		} else {
 			form.find('span.error').hide();
-			for (id in response.errors.FormErrors) {
-				var error_el = $('#' + id).addClass('error').removeClass('valid').next('.error');
-				if (!error_el || error_el.length === 0) {
-					error_el = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
-					$('#' + id).after(error_el);
+			for (var id in response.errors.FormErrors) {
+				var $errorEl = $('#' + id).addClass('error').removeClass('valid').next('.error');
+				if (!$errorEl || $errorEl.length === 0) {
+					$errorEl = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
+					$('#' + id).after($errorEl);
 				}
-				error_el.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
+				$errorEl.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
 			}
-			console.log(JSON.stringify(response.errors));
 		}
 	}).fail(function (xhr, textStatus) {
 		// failed
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		} else {
 			window.alert(Resources.SERVER_CONNECTION_ERROR);
 		}
 	});
-}
+};
 
 exports.init = function () {
-	$("#AddToBasketButton").on('click', setAddToCartHandler);
-}
+	$('#AddToBasketButton').on('click', setAddToCartHandler);
+};

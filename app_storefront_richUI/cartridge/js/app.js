@@ -43,7 +43,7 @@ function initializeEvents() {
 					e.preventDefault();
 				}
 		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function (e) {
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function () {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length,
@@ -162,9 +162,8 @@ var app = {
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
-		$.extend(page, pageContext);
+		$.extend(page, window.pageContext);
 		var ns = page.ns;
-		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}

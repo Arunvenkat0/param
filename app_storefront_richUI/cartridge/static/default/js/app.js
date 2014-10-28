@@ -44,7 +44,7 @@ function initializeEvents() {
 					e.preventDefault();
 				}
 		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function (e) {
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function () {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length,
@@ -163,9 +163,8 @@ var app = {
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
-		$.extend(page, pageContext);
+		$.extend(page, window.pageContext);
 		var ns = page.ns;
-		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}
@@ -230,7 +229,7 @@ var getJson = function (options) {
 	})
 	// failed
 	.fail(function (xhr, textStatus) {
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		if (options.callback) {
@@ -264,8 +263,8 @@ var load = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType: "html",
-		url: util.appendParamToURL(options.url, "format", "ajax"),
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
 		data: options.data
 	})
 	.done(function (response) {
@@ -280,7 +279,7 @@ var load = function (options) {
 	})
 	.fail(function (xhr, textStatus) {
 		// failed
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		options.callback(null, textStatus);
@@ -292,7 +291,7 @@ var load = function (options) {
 			delete currentRequests[options.url];
 		}
 	});
-}
+};
 
 exports.getJson = getJson;
 exports.load = load;
@@ -303,7 +302,7 @@ exports.load = load;
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
 	page = require('./page'),
-	util = require('./util')
+	util = require('./util');
 
 var selectedList = [];
 var maxItems = 1;
@@ -340,7 +339,7 @@ function getBonusProducts() {
  * @description Updates the summary page with the selected bonus product
  */
 function updateSummary() {
-	var $bonusProductList = $('#bonus-product-list')
+	var $bonusProductList = $('#bonus-product-list');
 	if (selectedList.length === 0) {
 		$bonusProductList.find('li.selected-bonus-item').remove();
 	} else {
@@ -414,7 +413,7 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('change', '.input-text', function (e) {
+	.on('change', '.input-text', function () {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
@@ -427,10 +426,10 @@ function initializeGrid () {
 		}
 
 		var form = $(this).closest('.bonus-product-form'),
-			detail = $(this).closest('.product-detail');
+			detail = $(this).closest('.product-detail'),
 			uuid = form.find('input[name="productUUID"]').val(),
 			qtyVal = form.find('input[name="Quantity"]').val(),
-			qty = isNaN(qtyVal) ? 1 : (+qtyVal);
+			qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
 		if (qty > maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
@@ -449,7 +448,7 @@ function initializeGrid () {
 
 		var optionSelects = form.find('.product-option');
 
-		optionSelects.each(function (idx) {
+		optionSelects.each(function () {
 			product.options.push({
 				name: this.name,
 				value: $(this).val(),
@@ -490,7 +489,7 @@ function initializeGrid () {
 			url: url,
 			data: JSON.stringify(bonusProducts)
 		})
-		.done(function (response) {
+		.done(function () {
 			// success
 			page.refresh();
 		})
@@ -542,7 +541,7 @@ var bonusProductsView = {
 	 * @description Closes the bonus product quick view dialog
 	 */
 	close: function () {
-		$bonusProduct.dialog('close');
+		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
@@ -574,7 +573,7 @@ var bonusProductsView = {
 
 			$bonusDiscountContainer.dialog('close');
 			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function (e) {
+		}.bind(this)).on('click', '.no-bonus-btn', function () {
 			$bonusDiscountContainer.dialog('close');
 		});
 	},
@@ -585,10 +584,9 @@ module.exports = bonusProductsView;
 },{"./ajax":2,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	page = require('./page'),
+var page = require('./page'),
 	util = require('./util'),
-	Promise = require('promise');
+	TPromise = require('promise');
 
 var _currentCategory = '',
 	MAX_ACTIVE = 6;
@@ -625,7 +623,7 @@ function addToList(data) {
 		if ($productTile.length > 0) {
 			$productTile.find('.compare-check')[0].checked = false;
 		}
-		window.alert(Resources.COMPARE_ADD_FAIL)
+		window.alert(Resources.COMPARE_ADD_FAIL);
 		return;
 	}
 
@@ -659,7 +657,7 @@ function removeFromList($item) {
 }
 
 function addProductAjax(args) {
-	var promise = new Promise(function (resolve, reject) {
+	var promise = new TPromise(function (resolve, reject) {
 		$.ajax({
 			url: Urls.compareAdd,
 			data: {
@@ -675,13 +673,13 @@ function addProductAjax(args) {
 			}
 		}).fail(function (jqxhr, status, err) {
 			reject(new Error(err));
-		})
+		});
 	});
 	return promise;
 }
 
 function removeProductAjax(args) {
-	var promise = new Promise(function (resolve, reject) {
+	var promise = new TPromise(function (resolve, reject) {
 		$.ajax({
 			url: Urls.compareRemove,
 			data: {
@@ -703,7 +701,7 @@ function removeProductAjax(args) {
 }
 
 function shiftImages() {
-	return new Promise(function (resolve, reject) {
+	return new TPromise(function (resolve) {
 		var $items = $('.compare-items .compare-item');
 		$items.each(function (i, item) {
 			var $item = $(item);
@@ -747,7 +745,7 @@ function addProduct(args) {
 			return shiftImages();
 		});
 	} else {
-		promise = Promise.resolve(0);
+		promise = TPromise.resolve(0);
 	}
 	return promise.then(function () {
 		return addProductAjax(args).then(function () {
@@ -755,9 +753,8 @@ function addProduct(args) {
 			if ($cb && $cb.length > 0) { $cb[0].checked = true; }
 			refreshContainer();
 		});
-	}).then(null, function (err) {
+	}).then(null, function () {
 		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
-		console.log(err.stack);
 	});
 }
 
@@ -773,9 +770,8 @@ function removeProduct(args) {
 		removeFromList($item);
 		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
 		refreshContainer();
-	}, function (err) {
+	}, function () {
 		if ($cb && $cb.length > 0) { $cb[0].checked = true; }
-		console.log(err.stack);
 	});
 }
 
@@ -814,7 +810,7 @@ function initializeDom() {
  */
 function initializeEvents() {
 	// add event to buttons to remove products
-	$('.compare-item').on('click', '.compare-item-remove', function (e) {
+	$('.compare-item').on('click', '.compare-item-remove', function () {
 		removeItem($(this).closest('.compare-item'));
 	});
 
@@ -835,12 +831,14 @@ function initializeEvents() {
 exports.init = function () {
 	initializeDom();
 	initializeEvents();
-}
+};
 
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":13,"./util":40,"promise":44}],5:[function(require,module,exports){
+},{"./page":13,"./util":40,"promise":44}],5:[function(require,module,exports){
+/* global dw */
+
 'use strict';
 
 /**
@@ -852,10 +850,10 @@ exports.removeProduct = removeProduct;
  * @param state TBD
  */
 
-function captureCarouselRecommendations(c, li, index, state) {
+function captureCarouselRecommendations(c, li) {
 	if (!dw) { return; }
 
-	$(li).find(".capture-product-id").each(function () {
+	$(li).find('.capture-product-id').each(function () {
 		dw.ac.capture({
 			id: $(this).text(),
 			type: dw.ac.EV_PRD_RECOMMENDATION
@@ -867,7 +865,7 @@ var components = {
 	carouselSettings: {
 		scroll: 1,
 		itemFallbackDimension: '100%',
-		itemVisibleInCallback: app.captureCarouselRecommendations
+		itemVisibleInCallback: captureCarouselRecommendations
 	},
 	init: function () {
 		setTimeout(function () {
@@ -893,7 +891,6 @@ module.exports = function () {
 	 * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
 	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
 	 */
-	var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
 	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
 		// check for privacy policy page
 		if ($('.privacy-policy').length === 0) {
@@ -906,7 +903,7 @@ module.exports = function () {
 						text: Resources.I_AGREE,
 						click: function () {
 							$(this).dialog('close');
-							enable_cookies();
+							enableCookies();
 						}
 					}]
 				}
@@ -914,10 +911,10 @@ module.exports = function () {
 		}
 	} else {
 		// Otherwise, we don't need to show the asset, just enable the cookies
-		enable_cookies();
+		enableCookies();
 	}
 
-	function enable_cookies() {
+	function enableCookies() {
 		if (document.cookie.indexOf('dw=1') < 0) {
 			document.cookie = 'dw=1; path=/';
 		}
@@ -925,7 +922,7 @@ module.exports = function () {
 			document.cookie = 'dw_cookies_accepted=1; path=/';
 		}
 	}
-}
+};
 
 },{"./dialog":7}],7:[function(require,module,exports){
 'use strict';
@@ -942,14 +939,14 @@ var dialog = {
 	create: function (params) {
 		var id;
 		// options.target can be an id selector or an jquery object
-		var target = $(params.target || "#dialog-container");
+		var target = $(params.target || '#dialog-container');
 
 		// if no element found, create one
 		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === "#") {
+			if (target.selector && target.selector.charAt(0) === '#') {
 				id = target.selector.substr(1);
 			}
-			target = $("<div>").attr("id", id).addClass("dialog-content").appendTo("body");
+			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
@@ -966,15 +963,15 @@ var dialog = {
 		if (!params.url || params.url.length === 0) { return; }
 
 		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
+		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
 
 		// finally load the dialog
 		ajax.load({
 			target: this.container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog("isOpen")) {return;}
-				this.container.dialog("open");
+				if (this.container.dialog('isOpen')) { return; }
+				this.container.dialog('open');
 			}.bind(this)
 		});
 	},
@@ -986,7 +983,7 @@ var dialog = {
 		if (!this.container) {
 			return;
 		}
-		this.container.dialog("close");
+		this.container.dialog('close');
 	},
 	/**
 	 * @function
@@ -994,27 +991,27 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var form = this.container.find("form:first");
+		var form = this.container.find('form:first');
 		// set the action
-		$("<input/>").attr({
+		$('<input/>').attr({
 			name: action,
-			type: "hidden"
+			type: 'hidden'
 		}).appendTo(form);
 
 		// serialize the form and get the post url
 		var post = form.serialize();
-		var url = form.attr("action");
+		var url = form.attr('action');
 
 		// post the data and replace current content with response content
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: url,
 			data: post,
-			dataType: "html",
+			dataType: 'html',
 			success: function (data) {
 				this.container.html(data);
 			}.bind(this),
-			failure: function (data) {
+			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
@@ -1030,14 +1027,14 @@ var dialog = {
 		title: '',
 		overlay: {
 			opacity: 0.5,
-			background: "black"
+			background: 'black'
 		},
 		/**
 		 * @function
 		 * @description The close event
 		 */
-		close: function (event, ui) {
-			$(this).dialog("destroy");
+		close: function () {
+			$(this).dialog('destroy');
 		}
 	}
 };
@@ -1057,7 +1054,7 @@ var ajax = require('./ajax'),
  */
 exports.checkBalance = function (id, callback) {
 	// load gift certificate details
-	var url = util.appendParamToURL(Urls.giftCardCheckBalance, "giftCertificateID", id);
+	var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
 
 	ajax.getJson({
 		url: url,
@@ -1072,9 +1069,9 @@ var ajax = require('./ajax'),
 	minicart = require('./minicart'),
 	util = require('./util');
 
-function setAddToCartHandler(e) {
+var setAddToCartHandler = function (e) {
 	e.preventDefault();
-	var form = $(this).closest("form");
+	var form = $(this).closest('form');
 
 	var options = {
 		url: util.ajaxUrl(form.attr('action')),
@@ -1095,29 +1092,28 @@ function setAddToCartHandler(e) {
 			});
 		} else {
 			form.find('span.error').hide();
-			for (id in response.errors.FormErrors) {
-				var error_el = $('#' + id).addClass('error').removeClass('valid').next('.error');
-				if (!error_el || error_el.length === 0) {
-					error_el = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
-					$('#' + id).after(error_el);
+			for (var id in response.errors.FormErrors) {
+				var $errorEl = $('#' + id).addClass('error').removeClass('valid').next('.error');
+				if (!$errorEl || $errorEl.length === 0) {
+					$errorEl = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
+					$('#' + id).after($errorEl);
 				}
-				error_el.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
+				$errorEl.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
 			}
-			console.log(JSON.stringify(response.errors));
 		}
 	}).fail(function (xhr, textStatus) {
 		// failed
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		} else {
 			window.alert(Resources.SERVER_CONNECTION_ERROR);
 		}
 	});
-}
+};
 
 exports.init = function () {
-	$("#AddToBasketButton").on('click', setAddToCartHandler);
-}
+	$('#AddToBasketButton').on('click', setAddToCartHandler);
+};
 
 },{"./ajax":2,"./minicart":11,"./util":40}],10:[function(require,module,exports){
 'use strict';
@@ -1147,7 +1143,7 @@ module.exports = function () {
 		});
 		return this.height($(arr[arr.length - 1]).height());
 	};
-}
+};
 
 },{}],11:[function(require,module,exports){
 'use strict';
@@ -1272,10 +1268,14 @@ var page = {
 	type: '',
 	params: util.getQueryStringParams(window.location.search.substr(1)),
 	redirect: function (newURL) {
-		setTimeout('window.location.href="' + newURL + '"', 0);
+		setTimeout(function () {
+			window.location.href = newURL;
+		}, 0);
 	},
 	refresh: function () {
-		setTimeout('window.location.assign(window.location.href);', 500);
+		setTimeout(function () {
+			window.location.assign(window.location.href);
+		}, 500);
 	}
 };
 
@@ -1296,7 +1296,7 @@ var giftcert = require('../giftcert'),
  * @description Initializes the events on the address form (apply, cancel, delete)
  * @param {Element} form The form which will be initialized
  */
-function initializeAddressForm(form) {
+function initializeAddressForm() {
 	var $form = $('#edit-address-form');
 
 	$form.find('input[name="format"]').remove();
@@ -1323,7 +1323,7 @@ function initializeAddressForm(form) {
 					dialog.close();
 					page.refresh();
 				} else {
-					alert(data.message);
+					window.alert(data.message);
 					return false;
 				}
 			} else {
@@ -1339,7 +1339,7 @@ function initializeAddressForm(form) {
 	})
 	.on('click', '.delete-button', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			var url = util.appendParamsToUrl(Urls.deleteAddress, {
 				AddressID: $form.find('#addressid').val(),
 				format: 'ajax'
@@ -1353,7 +1353,7 @@ function initializeAddressForm(form) {
 					dialog.close();
 					page.refresh();
 				} else if (data.message.length > 0) {
-					alert(data.message);
+					window.alert(data.message);
 					return false;
 				} else {
 					dialog.close();
@@ -1404,7 +1404,7 @@ function initAddressEvents() {
 		});
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
 				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
 				dataType: 'json'
@@ -1412,7 +1412,7 @@ function initAddressEvents() {
 				if (data.status.toLowerCase() === 'ok') {
 					page.redirect(Urls.addressesList);
 				} else if (data.message.length > 0) {
-					alert(data.message);
+					window.alert(data.message);
 				} else {
 					page.refresh();
 				}
@@ -1453,7 +1453,7 @@ function initPaymentEvents() {
 			url: $(this).attr('action'),
 			data: data
 		})
-		.done(function (response) {
+		.done(function () {
 			page.redirect(Urls.paymentsList);
 		});
 	});
@@ -1504,7 +1504,7 @@ var account = {
 	initCartLogin: function () {
 		initLoginPage();
 	}
-}
+};
 
 module.exports = account;
 
@@ -1577,7 +1577,7 @@ exports.init = function () {
 	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
-}
+};
 
 },{"../../util":40,"./shipping":21}],17:[function(require,module,exports){
 'use strict';
@@ -1609,7 +1609,7 @@ function setCCFields(data) {
  */
 function populateCreditCardForm(cardID) {
 	// load card details
-	var url = util.appendParamToURL(Urls.billingSelectCC, "creditCardUUID", cardID);
+	var url = util.appendParamToURL(Urls.billingSelectCC, 'creditCardUUID', cardID);
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
@@ -1669,7 +1669,7 @@ exports.init = function () {
 	});
 
 	// select credit card from list
-	$("#creditCardList").on('change', function () {
+	$('#creditCardList').on('change', function () {
 		var cardUUID = $(this).val();
 		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
@@ -1775,7 +1775,7 @@ exports.init = function () {
 			$addGiftCert.click();
 		}
 	});
-}
+};
 
 },{"../../ajax":2,"../../giftcard":8,"../../util":40,"./formPrepare":18}],18:[function(require,module,exports){
 'use strict';
@@ -1784,29 +1784,15 @@ var _ = require('lodash');
 
 var $form, $continue, $requiredInputs, validator;
 
-function init(opts) {
-	if (!opts.formSelector || !opts.continueSelector) {
-		throw new Error('Missing form and continue action selectors.');
-	}
-	$form = $(opts.formSelector);
-	$continue = $(opts.continueSelector);
-	validator = $form.validate();
-	$requiredInputs = $('.required', $form).find(':input');
-	validateForm();
-	// start listening
-	$requiredInputs.on('change', validateEl);
-	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
-}
-
-function hasEmptyRequired() {
+var hasEmptyRequired = function () {
 	// filter out only the visible fields
 	var requiredValues = $requiredInputs.filter(':visible').map(function () {
 		return $(this).val();
 	});
 	return _(requiredValues).contains('');
-}
+};
 
-function validateForm() {
+var validateForm = function () {
 	// only validate form when all required fields are filled to avoid
 	// throwing errors on empty form
 	if (!hasEmptyRequired()) {
@@ -1816,9 +1802,9 @@ function validateForm() {
 	} else {
 		$continue.attr('disabled', 'disabled');
 	}
-}
+};
 
-function validateEl() {
+var validateEl = function () {
 	if ($(this).val() === '') {
 		$continue.attr('disabled', 'disabled');
 	} else {
@@ -1830,7 +1816,21 @@ function validateEl() {
 			$continue.attr('disabled', 'disabled');
 		}
 	}
-}
+};
+
+var init = function (opts) {
+	if (!opts.formSelector || !opts.continueSelector) {
+		throw new Error('Missing form and continue action selectors.');
+	}
+	$form = $(opts.formSelector);
+	$continue = $(opts.continueSelector);
+	validator = $form.validate();
+	$requiredInputs = $('.required', $form).find(':input');
+	validateForm();
+	// start listening
+	$requiredInputs.on('change', validateEl);
+	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
+};
 
 exports.init = init;
 exports.validateForm = validateForm;
@@ -1863,7 +1863,7 @@ exports.init = function () {
 			$('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
 		}
 	}
-}
+};
 
 },{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
 'use strict';
@@ -1878,7 +1878,7 @@ var address = require('./address'),
  * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
  */
 function initMultiGiftMessageBox() {
-	$.each($(".item-list"), function () {
+	$.each($('.item-list'), function () {
 		var $this = $(this),
 			$isGiftYes = $this.find('.js-isgiftyes'),
 			$isGiftNo = $this.find('.js-isgiftno'),
@@ -1938,17 +1938,16 @@ function addEditAddress(target) {
 		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
 			if (!response.success) {
 				// @TODO: figure out a way to handle error on the form
-				console.log('error!');
 				return;
 			}
 			var address = response.address,
 				$shippingAddress = $(target).closest('.shippingaddress'),
 				$select = $shippingAddress.find('.select-address'),
 				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">'
-					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
-					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
-					+ '</option>';
+				newOption = '<option value="' + address.UUID + '">' +
+					((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
+					address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
+					'</option>';
 			dialog.close();
 			if (add) {
 				$('.shippingaddress select').removeClass('no-option').append(newOption);
@@ -1957,7 +1956,7 @@ function addEditAddress(target) {
 				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
 			}
 			// if there's no previously selected option, select it
-			if (!$selected.length > 0 || $selected.val() === '') {
+			if ($selected.length === 0 || $selected.val() === '') {
 				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
 			}
 		});
@@ -1982,7 +1981,7 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0) {
+	if ($('.cart-row .shippingaddress .select-address').length > 0) {
 		formPrepare.init({
 			continueSelector: '[name$="addressSelection_save"]',
 			formSelector: '[id$="multishipping_addressSelection"]'
@@ -1994,7 +1993,7 @@ exports.init = function () {
 			addEditAddress(e.target);
 		}}});
 	});
-}
+};
 
 },{"../../dialog":7,"../../util":40,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
 'use strict';
@@ -2012,7 +2011,7 @@ var shippingMethods;
  */
 function giftMessageBox() {
 	// show gift message box, if shipment is gift
-	$(".gift-message-text").toggle($("#is-gift-yes")[0].checked);
+	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
 }
 
 /**
@@ -2020,14 +2019,14 @@ function giftMessageBox() {
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 function updateSummary() {
-	var $summary = $("#secondary.summary");
+	var $summary = $('#secondary.summary');
 	// indicate progress
 	progress.show($summary);
 
 	// load the updated summary area
 	$summary.load(Urls.summaryRefreshURL, function () {
 		// hide edit shipping method link
-		$summary.fadeIn("fast");
+		$summary.fadeIn('fast');
 		$summary.find('.checkout-mini-cart .minishipment .header a').hide();
 		$summary.find('.order-totals-table .order-shipping .label a').hide();
 	});
@@ -2068,12 +2067,12 @@ function selectShippingMethod(shippingMethodID) {
 		callback: function (data) {
 			updateSummary();
 			if (!data || !data.shippingMethodID) {
-				window.alert("Couldn't select shipping method.");
+				window.alert('Couldn\'t select shipping method.');
 				return false;
 			}
 			// display promotion in UI and update the summary section,
 			// if some promotions were applied
-			$(".shippingpromotions").empty();
+			$('.shippingpromotions').empty();
 
 			// TODO the for loop below isn't doing anything?
 			// if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
@@ -2096,7 +2095,7 @@ function selectShippingMethod(shippingMethodID) {
  * the UI.
  */
 function updateShippingMethodList() {
-	var $shippingMethodList = $("#shipping-method-list");
+	var $shippingMethodList = $('#shipping-method-list');
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
 	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
@@ -2104,7 +2103,7 @@ function updateShippingMethodList() {
 		url: url,
 		callback: function (data) {
 			if (!data) {
-				window.alert("Couldn't get list of applicable shipping methods.");
+				window.alert('Couldn\'t get list of applicable shipping methods.');
 				return false;
 			}
 			if (shippingMethods && shippingMethods.toString() === data.toString()) {
@@ -2121,9 +2120,9 @@ function updateShippingMethodList() {
 			// load the shipping method form
 			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
 			$shippingMethodList.load(smlUrl, function () {
-				$shippingMethodList.fadeIn("fast");
+				$shippingMethodList.fadeIn('fast');
 				// rebind the radio buttons onclick function to a handler.
-				$shippingMethodList.find("[name$='_shippingMethodID']").click(function () {
+				$shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
 					selectShippingMethod($(this).val());
 				});
 
@@ -2145,7 +2144,7 @@ exports.init = function () {
 		continueSelector: '[name$="shippingAddress_save"]',
 		formSelector:'[id$="singleshipping_shippingAddress"]'
 	});
-	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
+	$('#is-gift-yes, #is-gift-no').on('click', function () {
 		giftMessageBox();
 	});
 
@@ -2156,7 +2155,7 @@ exports.init = function () {
 
 	giftMessageBox();
 	updateShippingMethodList();
-}
+};
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
@@ -2179,7 +2178,7 @@ function initializeEvents() {
 		e.preventDefault();
 		ajax.getJson({
 			url: this.href,
-			callback: function (response) {
+			callback: function () {
 				page.refresh();
 			}
 		});
@@ -2203,12 +2202,14 @@ exports.init = function () {
 	productTile.init();
 	initializeEvents();
 	product.initAddToCart();
-}
+};
 
 },{"../ajax":2,"../page":13,"../product-tile":31,"../quickview":33,"./product":25}],23:[function(require,module,exports){
 'use strict';
 
-var page = require('../../page'),
+var minicart = require('../../minicart'),
+	page = require('../../page'),
+	quickview = require('../../quickview'),
 	util = require('../../util');
 
 /**
@@ -2216,7 +2217,7 @@ var page = require('../../page'),
  * @function
  * @description Event handler to handle the add to cart event
  */
-function setAddToCartHandler(e) {
+var setAddToCartHandler = function (e) {
 	e.preventDefault();
 	var $form = $(this).closest('form');
 	var qty = $form.find('input[name="Quantity"]');
@@ -2243,7 +2244,7 @@ function setAddToCartHandler(e) {
 			}
 		}
 	});
-}
+};
 
 /**
  * @function
@@ -2256,9 +2257,11 @@ module.exports = function (target) {
 	} else {
 		$('.add-to-cart').on('click', setAddToCartHandler);
 	}
-}
+};
 
-},{"../../page":13,"../../util":40}],24:[function(require,module,exports){
+},{"../../minicart":11,"../../page":13,"../../quickview":33,"../../util":40}],24:[function(require,module,exports){
+'use strict';
+
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2305,7 +2308,7 @@ module.exports = function (data, $container) {
 			avMsg.text(data.backOrderMsg);
 		}
 	}
-	if (data.inStockDate != '') {
+	if (data.inStockDate !== '') {
 		avMsg = avRoot.find('.in-stock-date-msg');
 		if (avMsg.length === 0) {
 			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
@@ -2338,9 +2341,11 @@ module.exports = function (data, $container) {
 	}
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
-}
+};
 
 },{}],25:[function(require,module,exports){
+/* global addthis */
+
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2402,7 +2407,7 @@ function loadRecommendations() {
  */
 function setMainImage(atts) {
 	var imgZoom = $('#pdpMain .main-image');
-	if (imgZoom.length > 0 && atts.hires && atts.hires != '' && atts.hires != 'null') {
+	if (imgZoom.length > 0 && atts.hires && atts.hires !== '' && atts.hires !== 'null') {
 		imgZoom.attr('href', atts.hires);
 	}
 
@@ -2484,7 +2489,7 @@ function replaceImages() {
  * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
  */
 function setMainImageLink() {
-	var $mainImage = $('#pdpMain .main-image')
+	var $mainImage = $('#pdpMain .main-image');
 	if (quickview.isActive() || util.isMobile()) {
 		$mainImage.removeAttr('href');
 	} else {
@@ -2553,7 +2558,7 @@ function initializeEvents() {
 	}
 	// add or update shopping cart line item
 	addToCartHandler();
-	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
+	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
 			quantityEvent(data, $availabilityContainer);
@@ -2659,7 +2664,7 @@ function initializeEvents() {
 		ajax.load({
 			url: url,
 			target: $('#product-content'),
-			callback: function (data) {
+			callback: function () {
 				product.initAddThis();
 				addToCartHandler();
 				if (SitePreferences.STORE_PICKUP) {
@@ -2870,13 +2875,13 @@ function initializeEvents() {
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
 		});
-	})
-	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
+	});
+	$form.on('change', 'select[name$="_addressBeforeList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $beforeAddress);
 	})
-	.on('change', 'select[name$="_addressAfterList"]', function (e) {
+	.on('change', 'select[name$="_addressAfterList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $afterAddress);
@@ -2964,7 +2969,7 @@ function infiniteScroll() {
 			});
 		}
 	}
-};
+}
 /**
  * @private
  * @function
@@ -2976,7 +2981,7 @@ function updateProductListing() {
 	var refineUrl;
 
 	if (hash.length > 0) {
-		refineUrl = window.location.pathname + "?" + hash;
+		refineUrl = window.location.pathname + '?' + hash;
 	} else {
 		return;
 	}
@@ -3000,7 +3005,7 @@ function updateProductListing() {
 function initializeEvents() {
 	var $main = $('#main');
 	// compare checked
-	$main.on('click', 'input[type="checkbox"].compare-check', function (e) {
+	$main.on('click', 'input[type="checkbox"].compare-check', function () {
 		var cb = $(this);
 		var tile = cb.closest('.product-tile');
 
@@ -3016,13 +3021,13 @@ function initializeEvents() {
 	});
 
 	// handle toggle refinement blocks
-	$main.on('click', '.refinement h3', function (e) {
+	$main.on('click', '.refinement h3', function () {
 		$(this).toggleClass('expanded')
 		.siblings('ul').toggle();
 	});
 
 	// handle events for updating grid
-	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function (e) {
+	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function () {
 		if ($(this).parent().hasClass('unselectable')) { return; }
 		var catparent = $(this).parents('.category-refinement');
 		var folderparent = $(this).parents('.folder-refinement');
@@ -3043,7 +3048,7 @@ function initializeEvents() {
 	});
 
 	// handle events item click. append params.
-	$main.on('click', '.product-tile a:not("#quickviewbutton")', function (e) {
+	$main.on('click', '.product-tile a:not("#quickviewbutton")', function () {
 		var a = $(this);
 		// get current page refinement values
 		var wl = window.location;
@@ -3067,15 +3072,15 @@ function initializeEvents() {
 	});
 
 	// handle sorting change
-	$main.on('change', '.sort-by select', function (e) {
+	$main.on('change', '.sort-by select', function () {
 		var refineUrl = $(this).find('option:selected').val();
 		var uri = util.getUri(refineUrl);
 		window.location.hash = uri.query.substr(1);
 		return false;
 	})
-	.on('change', '.items-per-page select', function (e) {
+	.on('change', '.items-per-page select', function () {
 		var refineUrl = $(this).find('option:selected').val();
-		if (refineUrl == 'INFINITE_SCROLL') {
+		if (refineUrl === 'INFINITE_SCROLL') {
 			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
 		} else {
 			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
@@ -3098,17 +3103,17 @@ exports.init = function () {
 	}
 	productTile.init();
 	initializeEvents();
-}
+};
 
 },{"../compare-widget":4,"../product-tile":31,"../progress":32,"../util":40}],28:[function(require,module,exports){
-' use strict';
+'use strict';
 
 /**
  * @function
  * @description Triggers the scroll event on a carousel element
  * @param {Object} carousel
  */
-function slideCarousel_initCallback(carousel) {
+function slideCarouselInitCallback(carousel) {
 	// create navigation for slideshow
 	var numSlides = $('#homepage-slider li').size();
 	var slideShowNav = '<div class="jcarousel-control">';
@@ -3134,7 +3139,7 @@ function slideCarousel_initCallback(carousel) {
  * @param {Number} idx Index of the item which should be activated
  * @param {Object} state --  necessity needs TBD!
  */
-function slideCarousel_itemVisible(carousel, item, idx, state) {
+function slideCarouselItemVisible(carousel, item, idx) {
 	$('.jcarousel-control a').removeClass('active');
 	$('.jcarousel-control').find('.link-' + idx).addClass('active');
 }
@@ -3145,8 +3150,8 @@ exports.init = function () {
 		buttonNextHTML: null,
 		buttonPrevHTML: null,
 		itemFallbackDimension: '100%',
-		initCallback: slideCarousel_initCallback,
-		itemFirstInCallback: slideCarousel_itemVisible
+		initCallback: slideCarouselInitCallback,
+		itemFirstInCallback: slideCarouselItemVisible
 	});
 };
 
@@ -3161,7 +3166,7 @@ exports.init = function () {
 			url: $(e.target).attr('href')
 		});
 	});
-}
+};
 
 },{"../dialog":7}],30:[function(require,module,exports){
 'use strict';
@@ -3173,9 +3178,9 @@ var page = require('../page'),
 
 exports.init = function () {
 	product.initAddToCart();
-	sendToFriend.initializeDialog(".list-table-header");
+	sendToFriend.initializeDialog('.list-table-header');
 	$('#editAddress').on('change', function () {
-		page.redirect(util.appendParamToURL(Urls.wishlistAddress, "AddressID", $(this).val()));
+		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});
 
 	//add js logic to remove the , from the qty feild to pass regex expression on client side
@@ -3191,7 +3196,7 @@ var product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
-	$('.tiles-container .product-image').on('mouseenter', function (e) {
+	$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton"/>');
@@ -3223,9 +3228,9 @@ function initializeEvents() {
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
-		var $tile = $(this).closest(".product-tile"),
-			$thumb = $tile.find(".product-image .thumb-link img").eq(0),
-			data = $thumb.data("current");
+		var $tile = $(this).closest('.product-tile'),
+			$thumb = $tile.find('.product-image .thumb-link img').eq(0),
+			data = $thumb.data('current');
 
 		$thumb.attr({
 			src: data.src,
@@ -3283,7 +3288,7 @@ exports.init = function () {
 	if ($tiles.length === 0) { return; }
 	$tiles.syncHeight()
 		.each(function (idx) {
-			$(this).data("idx", idx);
+			$(this).data('idx', idx);
 		});
 	initializeEvents();
 };
@@ -3299,12 +3304,12 @@ var $loader;
  * @param {Element} container The Element on top of which the AJAX-Loader will be shown
  */
 var show = function (container) {
-	var target = (!container || $(container).length === 0) ? $("body") : $(container);
-	$loader = $loader || $(".loader");
+	var target = (!container || $(container).length === 0) ? $('body') : $(container);
+	$loader = $loader || $('.loader');
 
 	if ($loader.lengt === 0) {
-		$loader = $("<div/>").addClass("loader")
-			.append($("<div/>").addClass("loader-indicator"), $("<div/>").addClass("loader-bg"));
+		$loader = $('<div/>').addClass('loader')
+			.append($('<div/>').addClass('loader-indicator'), $('<div/>').addClass('loader-bg'));
 	}
 	return $loader.appendTo(target).show();
 };
@@ -3326,7 +3331,6 @@ exports.hide = hide;
 
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
-	progress = require('./progress'),
 	util = require('./util');
 
 var quickview = {
@@ -3376,19 +3380,19 @@ var quickview = {
 				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
 			}
 
-			if (productLinksUrl == '') {
+			if (productLinksUrl === '') {
 				productLinksUrl = this.productLinks[i].href;
 			}
-			if (qvUrl == productLinksUrl) {
+			if (qvUrl === productLinksUrl) {
 				this.productLinkIndex = i;
 			}
 		}
 
-		if (this.productLinkIndex == this.productLinks.length - 1) {
+		if (this.productLinkIndex === this.productLinks.length - 1) {
 			this.btnNext.hide();
 		}
 
-		if (this.productLinkIndex == 0) {
+		if (this.productLinkIndex === 0) {
 			this.btnPrev.hide();
 		}
 
@@ -3421,7 +3425,6 @@ var quickview = {
 		if (!this.exists()) {
 			this.init();
 		}
-		var that = this;
 		var target = this.$container;
 		var url = options.url;
 		var source = options.source;
@@ -3430,7 +3433,7 @@ var quickview = {
 			url = util.appendParamToURL(url, 'source', source);
 		}
 		if (productListId.length > 0) {
-			url = util.appendParamToURL(url, 'productlistid', productListId)
+			url = util.appendParamToURL(url, 'productlistid', productListId);
 		}
 
 		ajax.load({
@@ -3450,7 +3453,7 @@ var quickview = {
 						open: function () {
 							// allow for click outside modal to close the modal
 							$('.ui-widget-overlay').on('click', this.close.bind(this));
-							if (options.callback) options.callback();
+							if (options.callback) { options.callback(); }
 						}.bind(this)
 					}
 				});
@@ -3475,7 +3478,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./ajax":2,"./dialog":7,"./progress":32,"./util":40}],34:[function(require,module,exports){
+},{"./ajax":2,"./dialog":7,"./util":40}],34:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3503,6 +3506,7 @@ exports.init = initializeEvents;
 
 },{}],35:[function(require,module,exports){
 'use strict';
+
 var util = require('./util');
 
 var currentQuery = null,
@@ -3534,7 +3538,7 @@ function handleArrowKeys(keyCode) {
 	}
 
 	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	$('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
 	return true;
 }
 
@@ -3585,9 +3589,9 @@ var searchsuggest = {
 			currentQuery = $searchField.val().trim();
 
 			// no query currently running, init a update
-			if (runningQuery == null) {
+			if (runningQuery === null) {
 				runningQuery = currentQuery;
-				setTimeout('this.suggest()', delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 		}.bind(this));
 	},
@@ -3642,7 +3646,7 @@ var searchsuggest = {
 			if (currentQuery !== lastQuery) {
 				// ... and execute immediately if search has changed while this server call was in transit
 				runningQuery = currentQuery;
-				setTimeout("this.suggest()", delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 			this.hideLeftPanel();
 		}.bind(this));
@@ -3653,7 +3657,7 @@ var searchsuggest = {
 	 */
 	clearResults: function () {
 		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty()});
+		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
 	},
 	/**
 	 * @function
@@ -3811,8 +3815,7 @@ var searchsuggest = {
 		$.getJSON(reqUrl, function (data) {
 			// get the total of results
 			var suggestions = data,
-				ansLength = suggestions.length,
-				listTotal = ansLength;
+				ansLength = suggestions.length;
 
 			// if there are results populate the results div
 			if (ansLength === 0) {
@@ -3858,8 +3861,8 @@ var ajax = require('./ajax'),
 
 var sendToFriend = {
 	init: function () {
-		var $form = $("#send-to-friend-form"),
-			$dialog = $("#send-to-friend-dialog");
+		var $form = $('#send-to-friend-form'),
+			$dialog = $('#send-to-friend-dialog');
 		util.limitCharacters();
 		$dialog.on('click', '.preview-button, .send-button, .edit-button', function (e) {
 			e.preventDefault();
@@ -3873,7 +3876,7 @@ var sendToFriend = {
 			}
 			$('<input/>').attr({id: 'request-type', type: 'hidden', name: $(this).attr('name'), value: $(this).attr('value')}).appendTo($form);
 			var data = $form.serialize();
-			ajax.load({url:$form.attr("action"),
+			ajax.load({url:$form.attr('action'),
 				data: data,
 				target: $dialog,
 				callback: function () {
@@ -3892,7 +3895,7 @@ var sendToFriend = {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
-				target: $("#send-to-friend-dialog"),
+				target: $('#send-to-friend-dialog'),
 				options: {
 					width: 800,
 					height: 'auto',
@@ -3904,7 +3907,7 @@ var sendToFriend = {
 				}
 			});
 
-			var data = util.getQueryStringParams($("form.pdpForm").serialize());
+			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
@@ -3930,8 +3933,7 @@ var ajax = require('./ajax'),
 	page = require('./page'),
 	util = require('./util');
 
-var pid,
-	currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
+var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
 
 var storeinventory = {
 	init: function () {
@@ -3948,7 +3950,7 @@ var storeinventory = {
 			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
-		$('body').on('click', '#pdpMain .set-preferred-store', function (e) {
+		$('body').on('click', '#pdpMain .set-preferred-store', function () {
 			self.loadPreferredStorePanel($(this).parent().attr('id'));
 			return false;
 		});
@@ -3957,16 +3959,16 @@ var storeinventory = {
 			self.setLineItemStore($(this));
 		});
 
-		if ($(".checkout-shipping").length > 0) {
+		if ($('.checkout-shipping').length > 0) {
 			this.shippingLoad();
 		}
 
 		//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
 		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 				$('.cart-action-checkout button').attr('disabled', 'disabled');
 			}
 		});
@@ -3977,7 +3979,7 @@ var storeinventory = {
 		$(radio).parent().parent().toggleClass('loading');
 		ajax.getJson({
 			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
-			callback: function (data) {
+			callback: function () {
 				$(radio).attr('checked', 'checked');
 				$(radio).parent().parent().toggleClass('loading');
 				$(radio).parent().parent().children().toggleClass('hide');
@@ -3988,16 +3990,16 @@ var storeinventory = {
 		var countplis = 0;
 		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 					$('.cart-action-checkout button').attr('disabled', 'disabled');
 				} else {
 					countplis++;
 				}
 			});
 			if (countplis > 0 && $('.error-message').length === 0) {
-				$('.cart-action-checkout button').removeAttr("disabled", "disabled")
+				$('.cart-action-checkout button').removeAttr('disabled', 'disabled');
 			}
 	},
 	buildStoreList: function (pid) {
@@ -4012,13 +4014,13 @@ var storeinventory = {
 			callback: function (data) {
 				// clear any previous results, then build new
 				self.$storeList.empty();
-				var listings = $("<ul class='store-list'/>");
+				var listings = $('<ul class="store-list"/>');
 				if (data && data.length > 0) {
 					for (var i = 0; i < 10 && i < data.length; i++) {
 						var item = data[i],
 							displayButton;
 						//Disable button if there is no stock for item
-						if (item.statusclass == 'store-in-stock') {
+						if (item.statusclass === 'store-in-stock') {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
 						} else {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
@@ -4036,7 +4038,7 @@ var storeinventory = {
 				// no records
 				} else {
 					if (User.zip) {
-						self.$storeList.append("<div class='no-results'>No Results</div>");
+						self.$storeList.append('<div class="no-results">No Results</div>');
 					}
 				}
 
@@ -4045,12 +4047,12 @@ var storeinventory = {
 					numListings = listings.find('li').size(),
 					listingsNav = $('<div id="listings-nav"/>'),
 					selectedButtonText;
-				for (var i = 0, link = 1; i <= numListings; i++) {
-					if (numListings >  i) {
-						listingsNav.append('<a data-index="' + i + '">' + link + '</a>');
+				for (var j = 0, link = 1; j <= numListings; j++) {
+					if (numListings > j) {
+						listingsNav.append('<a data-index="' + j + '">' + link + '</a>');
 					}
 					link++;
-					i = i + 2;
+					j = j + 2;
 				}
 				listingsNav.find('a').on('click', function () {
 					$(this).siblings().removeClass('active');
@@ -4100,26 +4102,26 @@ var storeinventory = {
 
 				// set up 'set preferred store' action on new elements
 				// @TODO this needs to be refactored
-				listings.find('button.select-store-button').on('click', function (e) {
+				listings.find('button.select-store-button').on('click', function () {
 					var $this = $(this);
 					var selectedStoreId = $this.val();
 					if (currentTemplate === 'cart') {
 						//update selected store and set the lineitem
 						var liuuid = self.$preferredStorePanel.find('.srcitem').attr('value');
 						$('div[name="' + liuuid + '-sp"] .selected-store-address').html(
-							$this.siblings('.store-tile-address').text()
-							+ ' <br />'
-							+ $this.siblings('.store-tile-city').text()
-							+ ' , '
-							+ $this.siblings('.store-tile-state').text()
-							+ ' '
-							+ $this.siblings('.store-tile-postalCode').text()
+							$this.siblings('.store-tile-address').text() +
+							' <br />' +
+							$this.siblings('.store-tile-city').text() +
+							' , ' +
+							$this.siblings('.store-tile-state').text() +
+							' ' +
+							$this.siblings('.store-tile-postalCode').text()
 						);
 						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
 						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
 						$('div[name="' + liuuid + '-sp"] .radio-url').removeAttr('disabled');
 						$('div[name="' + liuuid + '-sp"] .radio-url').click();
-						self.$preferredStorePanel.dialog("close");
+						self.$preferredStorePanel.dialog('close');
 					} else {
 						if (User.storeId !== selectedStoreId) {
 							// set as selected
@@ -4161,11 +4163,11 @@ var storeinventory = {
 
 		// show form if no zip set
 		if (User.zip === null || User.zip === '') {
-			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="'
-					+ Resources.ENTER_ZIP
-					+ '"/><button id="set-user-zip" class="button-style-1">'
-					+ Resources.SEARCH
-					+ '</button></div>')
+			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' +
+					Resources.ENTER_ZIP +
+					'"/><button id="set-user-zip" class="button-style-1">' +
+					Resources.SEARCH +
+					'</button></div>')
 				.find('#set-user-zip').on('click', function () {
 					var enteredZip = $('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
 					var regexObj = {
@@ -4173,14 +4175,14 @@ var storeinventory = {
 						usa: /^\d{5}(-\d{4})?$/
 					};
 					var validZipEntry = false;
-
+					var regexp;
 					//check Canadian postal code
-					var regexp = new RegExp(regexObj.canada);
+					regexp = new RegExp(regexObj.canada);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
 					//check us zip codes
-					var regexp = new RegExp(regexObj.usa);
+					regexp = new RegExp(regexObj.usa);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
@@ -4197,7 +4199,7 @@ var storeinventory = {
 					}
 				});
 			$('#userZip').on('keypress', function (e) {
-				code = e.keyCode ? e.keyCode : e.which;
+				var code = e.keyCode ? e.keyCode : e.which;
 				if (code.toString() === 13) {
 					$('#set-user-zip').trigger('click');
 				}
@@ -4279,7 +4281,7 @@ var storeinventory = {
 	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
-		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function (e) {
+		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function () {
 			$(this).parent().siblings('.gift-message-text').toggle($(this).checked);
 		});
 	}
@@ -4300,19 +4302,19 @@ exports.init = function () {
 		showURL: false,
 		bodyHandler: function () {
 			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = "";
-			if (tooltipClass = $(this).find('.tooltip-content').data("layout")) {
-				tooltipClass = " class='" + tooltipClass + "' ";
+			var tooltipClass = '';
+			if ($(this).find('.tooltip-content').data('layout')) {
+				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
 			}
-		return "<div " + tooltipClass + ">" + $(this).find('.tooltip-content').html() + "</div>";
+		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
 		}
 	});
 };
 
 },{}],40:[function(require,module,exports){
+/* global Countries */
+
 'use strict';
-var // dialog = require('./dialog'),
-	validator = require('./validator')
 
 var util = {
 	/**
@@ -4347,11 +4349,11 @@ var util = {
 			left += el.offsetLeft;
 		}
 
-		if (typeof(offsetToTop) != 'undefined') {
+		if (typeof(offsetToTop) !== 'undefined') {
 			top -= offsetToTop;
 		}
 
-		if (window.pageXOffset != null) {
+		if (window.pageXOffset !== null) {
 			return (
 				top < (window.pageYOffset + window.innerHeight) &&
 				left < (window.pageXOffset + window.innerWidth) &&
@@ -4360,7 +4362,7 @@ var util = {
 			);
 		}
 
-		if (document.compatMode == "CSS1Compat") {
+		if (document.compatMode === 'CSS1Compat') {
 			return (
 				top < (window.document.documentElement.scrollTop + window.document.documentElement.clientHeight) &&
 				left < (window.document.documentElement.scrollLeft + window.document.documentElement.clientWidth) &&
@@ -4396,7 +4398,7 @@ var util = {
 	 * @param {String} path the relative path
 	 */
 	ajaxUrl: function (path) {
-		return this.appendParamToURL(path, "format", "ajax");
+		return this.appendParamToURL(path, 'format', 'ajax');
 	},
 
 	/**
@@ -4428,10 +4430,10 @@ var util = {
 	 * @param {String} url The url from which css file will be dynamically loaded.
 	 */
 	loadCssFile: function (url) {
-		return $("<link/>").appendTo($("head")).attr({
+		return $('<link/>').appendTo($('head')).attr({
 			type: 'text/css',
 			rel: 'stylesheet'
-		}).attr("href", url); // for i.e. <9, href must be added after link has been appended to head
+		}).attr('href', url); // for i.e. <9, href must be added after link has been appended to head
 	},
 	// array to keep track of the dynamically loaded CSS files
 	loadedCssFiles: [],
@@ -4455,10 +4457,10 @@ var util = {
 	getQueryStringParams: function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
 		var params = {},
-			unescapedQS = unescape(qs);
+			unescapedQS = decodeURIComponent(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
-		unescapedQS.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+		unescapedQS.replace(new RegExp('([^?=&]+)(=([^&]*))?', 'g'),
 			function ($0, $1, $2, $3) {
 				params[$1] = $3;
 			}
@@ -4515,7 +4517,7 @@ var util = {
 				// retrigger state selection after country has changed
 				// this results in duplication of the state code, but is a necessary evil
 				// for now because sometimes countryCode comes after stateCode
-				$form.find('[name$="state"]').val(address['stateCode']);
+				$form.find('[name$="state"]').val(address.stateCode);
 			}
 		}
 	},
@@ -4527,15 +4529,15 @@ var util = {
 	updateStateOptions: function (form) {
 		var $form = $(form),
 			$country = $form.find('select[id$="_country"]'),
-			country = Countries[$country.val()]
+			country = Countries[$country.val()];
 		if ($country.length === 0 || !country) {
 			return;
 		}
 		var arrHtml = [],
-			$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
-			$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
-			$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
-			$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined,
+			$stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
+			$postalField = $country.data('postalField') ? $country.data('postalField') : $form.find('input[name$="_postal"]'),
+			$stateLabel = ($stateField.length > 0) ? $form.find('label[for="' + $stateField[0].id + '"] span').not('.required-indicator') : undefined,
+			$postalLabel = ($postalField.length > 0) ? $form.find('label[for="' + $postalField[0].id + '"] span').not('.required-indicator') : undefined,
 			prevStateValue = $stateField.val();
 		// set the label text
 		if ($postalLabel) {
@@ -4567,7 +4569,7 @@ var util = {
 	 */
 	limitCharacters: function () {
 		$('form').find('textarea[data-character-limit]').each(function () {
-			var characterLimit = $(this).data("character-limit");
+			var characterLimit = $(this).data('character-limit');
 			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
 				'<span class="char-allowed-count">' + characterLimit + '</span>');
@@ -4588,8 +4590,8 @@ var util = {
 	 * @param {String} message The message the will be shown upon a click
 	 */
 	setDeleteConfirmation: function (container, message) {
-		$(container).on('click', '.delete', function (e) {
-			return confirm(message);
+		$(container).on('click', '.delete', function () {
+			return window.confirm(message);
 		});
 	},
 	/**
@@ -4617,7 +4619,7 @@ var util = {
 
 module.exports = util;
 
-},{"./validator":41}],41:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4651,7 +4653,7 @@ var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})
  * @param {String} value The phone number which will be validated
  * @param {String} el The input field
  */
-function validatePhone(value, el) {
+var validatePhone = function (value, el) {
 	var country = $(el).closest('form').find('.country');
 	if (country.length === 0 || country.val().length === 0 || !regex.phone[country.val().toLowerCase()]) {
 		return true;
@@ -4662,18 +4664,18 @@ function validatePhone(value, el) {
 	var isValid = rgx.test($.trim(value));
 
 	return isOptional || isValid;
-}
+};
 /**
  * @function
  * @description Validates a given email
  * @param {String} value The email which will be validated
  * @param {String} el The input field
  */
-function validateEmail(value, el) {
+var validateEmail = function (value, el) {
 	var isOptional = this.optional(el);
 	var isValid = regex.email.test($.trim(value));
 	return isOptional || isValid;
-}
+};
 
 /**
  * @function
@@ -4681,10 +4683,10 @@ function validateEmail(value, el) {
  * @param {String} value The owner field which will be validated
  * @param {String} el The input field
  */
-function validateOwner(value, el) {
+var validateOwner = function (value) {
 	var isValid = regex.notCC.test($.trim(value));
 	return isValid;
-}
+};
 
 /**
  * Add phone validation method to jQuery validation plugin.
@@ -4702,7 +4704,7 @@ $.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
  * Add CCOwner validation method to jQuery validation plugin.
  * Text fields must have 'owner' css class to be validated as not a credit card
  */
-$.validator.addMethod("owner", validateOwner, Resources.INVALID_OWNER);
+$.validator.addMethod('owner', validateOwner, Resources.INVALID_OWNER);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
@@ -4718,7 +4720,7 @@ $.validator.addMethod('gift-cert-amount', function (value, el) {
  * Add positive number validation method to jQuery validation plugin.
  * Text fields must have 'positivenumber' css class to be validated as positivenumber
  */
-$.validator.addMethod('positivenumber', function (value, element) {
+$.validator.addMethod('positivenumber', function (value) {
 	if ($.trim(value).length === 0) { return true; }
 	return (!isNaN(value) && Number(value) >= 0);
 }, ''); // '' should be replaced with error message if needed

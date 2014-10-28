@@ -37,7 +37,7 @@ var getJson = function (options) {
 	})
 	// failed
 	.fail(function (xhr, textStatus) {
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		if (options.callback) {
@@ -71,8 +71,8 @@ var load = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType: "html",
-		url: util.appendParamToURL(options.url, "format", "ajax"),
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
 		data: options.data
 	})
 	.done(function (response) {
@@ -87,7 +87,7 @@ var load = function (options) {
 	})
 	.fail(function (xhr, textStatus) {
 		// failed
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		options.callback(null, textStatus);
@@ -99,7 +99,7 @@ var load = function (options) {
 			delete currentRequests[options.url];
 		}
 	});
-}
+};
 
 exports.getJson = getJson;
 exports.load = load;

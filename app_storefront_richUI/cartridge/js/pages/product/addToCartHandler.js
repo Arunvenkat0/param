@@ -1,6 +1,8 @@
 'use strict';
 
-var page = require('../../page'),
+var minicart = require('../../minicart'),
+	page = require('../../page'),
+	quickview = require('../../quickview'),
 	util = require('../../util');
 
 /**
@@ -8,7 +10,7 @@ var page = require('../../page'),
  * @function
  * @description Event handler to handle the add to cart event
  */
-function setAddToCartHandler(e) {
+var setAddToCartHandler = function (e) {
 	e.preventDefault();
 	var $form = $(this).closest('form');
 	var qty = $form.find('input[name="Quantity"]');
@@ -35,7 +37,7 @@ function setAddToCartHandler(e) {
 			}
 		}
 	});
-}
+};
 
 /**
  * @function
@@ -48,4 +50,4 @@ module.exports = function (target) {
 	} else {
 		$('.add-to-cart').on('click', setAddToCartHandler);
 	}
-}
+};

@@ -1,3 +1,5 @@
+/* global addthis */
+
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -59,7 +61,7 @@ function loadRecommendations() {
  */
 function setMainImage(atts) {
 	var imgZoom = $('#pdpMain .main-image');
-	if (imgZoom.length > 0 && atts.hires && atts.hires != '' && atts.hires != 'null') {
+	if (imgZoom.length > 0 && atts.hires && atts.hires !== '' && atts.hires !== 'null') {
 		imgZoom.attr('href', atts.hires);
 	}
 
@@ -141,7 +143,7 @@ function replaceImages() {
  * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
  */
 function setMainImageLink() {
-	var $mainImage = $('#pdpMain .main-image')
+	var $mainImage = $('#pdpMain .main-image');
 	if (quickview.isActive() || util.isMobile()) {
 		$mainImage.removeAttr('href');
 	} else {
@@ -210,7 +212,7 @@ function initializeEvents() {
 	}
 	// add or update shopping cart line item
 	addToCartHandler();
-	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
+	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
 			quantityEvent(data, $availabilityContainer);
@@ -316,7 +318,7 @@ function initializeEvents() {
 		ajax.load({
 			url: url,
 			target: $('#product-content'),
-			callback: function (data) {
+			callback: function () {
 				product.initAddThis();
 				addToCartHandler();
 				if (SitePreferences.STORE_PICKUP) {

@@ -10,7 +10,7 @@ var address = require('./address'),
  * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
  */
 function initMultiGiftMessageBox() {
-	$.each($(".item-list"), function () {
+	$.each($('.item-list'), function () {
 		var $this = $(this),
 			$isGiftYes = $this.find('.js-isgiftyes'),
 			$isGiftNo = $this.find('.js-isgiftno'),
@@ -70,17 +70,16 @@ function addEditAddress(target) {
 		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
 			if (!response.success) {
 				// @TODO: figure out a way to handle error on the form
-				console.log('error!');
 				return;
 			}
 			var address = response.address,
 				$shippingAddress = $(target).closest('.shippingaddress'),
 				$select = $shippingAddress.find('.select-address'),
 				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">'
-					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
-					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
-					+ '</option>';
+				newOption = '<option value="' + address.UUID + '">' +
+					((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
+					address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
+					'</option>';
 			dialog.close();
 			if (add) {
 				$('.shippingaddress select').removeClass('no-option').append(newOption);
@@ -89,7 +88,7 @@ function addEditAddress(target) {
 				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
 			}
 			// if there's no previously selected option, select it
-			if (!$selected.length > 0 || $selected.val() === '') {
+			if ($selected.length === 0 || $selected.val() === '') {
 				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
 			}
 		});
@@ -114,7 +113,7 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0) {
+	if ($('.cart-row .shippingaddress .select-address').length > 0) {
 		formPrepare.init({
 			continueSelector: '[name$="addressSelection_save"]',
 			formSelector: '[id$="multishipping_addressSelection"]'
@@ -126,4 +125,4 @@ exports.init = function () {
 			addEditAddress(e.target);
 		}}});
 	});
-}
+};

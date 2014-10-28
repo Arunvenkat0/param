@@ -4,8 +4,7 @@ var ajax = require('./ajax'),
 	page = require('./page'),
 	util = require('./util');
 
-var pid,
-	currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
+var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
 
 var storeinventory = {
 	init: function () {
@@ -22,7 +21,7 @@ var storeinventory = {
 			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
-		$('body').on('click', '#pdpMain .set-preferred-store', function (e) {
+		$('body').on('click', '#pdpMain .set-preferred-store', function () {
 			self.loadPreferredStorePanel($(this).parent().attr('id'));
 			return false;
 		});
@@ -31,16 +30,16 @@ var storeinventory = {
 			self.setLineItemStore($(this));
 		});
 
-		if ($(".checkout-shipping").length > 0) {
+		if ($('.checkout-shipping').length > 0) {
 			this.shippingLoad();
 		}
 
 		//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
 		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 				$('.cart-action-checkout button').attr('disabled', 'disabled');
 			}
 		});
@@ -51,7 +50,7 @@ var storeinventory = {
 		$(radio).parent().parent().toggleClass('loading');
 		ajax.getJson({
 			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
-			callback: function (data) {
+			callback: function () {
 				$(radio).attr('checked', 'checked');
 				$(radio).parent().parent().toggleClass('loading');
 				$(radio).parent().parent().children().toggleClass('hide');
@@ -62,16 +61,16 @@ var storeinventory = {
 		var countplis = 0;
 		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 					$('.cart-action-checkout button').attr('disabled', 'disabled');
 				} else {
 					countplis++;
 				}
 			});
 			if (countplis > 0 && $('.error-message').length === 0) {
-				$('.cart-action-checkout button').removeAttr("disabled", "disabled")
+				$('.cart-action-checkout button').removeAttr('disabled', 'disabled');
 			}
 	},
 	buildStoreList: function (pid) {
@@ -86,13 +85,13 @@ var storeinventory = {
 			callback: function (data) {
 				// clear any previous results, then build new
 				self.$storeList.empty();
-				var listings = $("<ul class='store-list'/>");
+				var listings = $('<ul class="store-list"/>');
 				if (data && data.length > 0) {
 					for (var i = 0; i < 10 && i < data.length; i++) {
 						var item = data[i],
 							displayButton;
 						//Disable button if there is no stock for item
-						if (item.statusclass == 'store-in-stock') {
+						if (item.statusclass === 'store-in-stock') {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
 						} else {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
@@ -110,7 +109,7 @@ var storeinventory = {
 				// no records
 				} else {
 					if (User.zip) {
-						self.$storeList.append("<div class='no-results'>No Results</div>");
+						self.$storeList.append('<div class="no-results">No Results</div>');
 					}
 				}
 
@@ -119,12 +118,12 @@ var storeinventory = {
 					numListings = listings.find('li').size(),
 					listingsNav = $('<div id="listings-nav"/>'),
 					selectedButtonText;
-				for (var i = 0, link = 1; i <= numListings; i++) {
-					if (numListings >  i) {
-						listingsNav.append('<a data-index="' + i + '">' + link + '</a>');
+				for (var j = 0, link = 1; j <= numListings; j++) {
+					if (numListings > j) {
+						listingsNav.append('<a data-index="' + j + '">' + link + '</a>');
 					}
 					link++;
-					i = i + 2;
+					j = j + 2;
 				}
 				listingsNav.find('a').on('click', function () {
 					$(this).siblings().removeClass('active');
@@ -174,26 +173,26 @@ var storeinventory = {
 
 				// set up 'set preferred store' action on new elements
 				// @TODO this needs to be refactored
-				listings.find('button.select-store-button').on('click', function (e) {
+				listings.find('button.select-store-button').on('click', function () {
 					var $this = $(this);
 					var selectedStoreId = $this.val();
 					if (currentTemplate === 'cart') {
 						//update selected store and set the lineitem
 						var liuuid = self.$preferredStorePanel.find('.srcitem').attr('value');
 						$('div[name="' + liuuid + '-sp"] .selected-store-address').html(
-							$this.siblings('.store-tile-address').text()
-							+ ' <br />'
-							+ $this.siblings('.store-tile-city').text()
-							+ ' , '
-							+ $this.siblings('.store-tile-state').text()
-							+ ' '
-							+ $this.siblings('.store-tile-postalCode').text()
+							$this.siblings('.store-tile-address').text() +
+							' <br />' +
+							$this.siblings('.store-tile-city').text() +
+							' , ' +
+							$this.siblings('.store-tile-state').text() +
+							' ' +
+							$this.siblings('.store-tile-postalCode').text()
 						);
 						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
 						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
 						$('div[name="' + liuuid + '-sp"] .radio-url').removeAttr('disabled');
 						$('div[name="' + liuuid + '-sp"] .radio-url').click();
-						self.$preferredStorePanel.dialog("close");
+						self.$preferredStorePanel.dialog('close');
 					} else {
 						if (User.storeId !== selectedStoreId) {
 							// set as selected
@@ -235,11 +234,11 @@ var storeinventory = {
 
 		// show form if no zip set
 		if (User.zip === null || User.zip === '') {
-			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="'
-					+ Resources.ENTER_ZIP
-					+ '"/><button id="set-user-zip" class="button-style-1">'
-					+ Resources.SEARCH
-					+ '</button></div>')
+			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' +
+					Resources.ENTER_ZIP +
+					'"/><button id="set-user-zip" class="button-style-1">' +
+					Resources.SEARCH +
+					'</button></div>')
 				.find('#set-user-zip').on('click', function () {
 					var enteredZip = $('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
 					var regexObj = {
@@ -247,14 +246,14 @@ var storeinventory = {
 						usa: /^\d{5}(-\d{4})?$/
 					};
 					var validZipEntry = false;
-
+					var regexp;
 					//check Canadian postal code
-					var regexp = new RegExp(regexObj.canada);
+					regexp = new RegExp(regexObj.canada);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
 					//check us zip codes
-					var regexp = new RegExp(regexObj.usa);
+					regexp = new RegExp(regexObj.usa);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
@@ -271,7 +270,7 @@ var storeinventory = {
 					}
 				});
 			$('#userZip').on('keypress', function (e) {
-				code = e.keyCode ? e.keyCode : e.which;
+				var code = e.keyCode ? e.keyCode : e.which;
 				if (code.toString() === 13) {
 					$('#set-user-zip').trigger('click');
 				}
@@ -353,7 +352,7 @@ var storeinventory = {
 	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
-		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function (e) {
+		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function () {
 			$(this).parent().siblings('.gift-message-text').toggle($(this).checked);
 		});
 	}

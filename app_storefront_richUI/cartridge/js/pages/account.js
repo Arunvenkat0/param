@@ -12,7 +12,7 @@ var giftcert = require('../giftcert'),
  * @description Initializes the events on the address form (apply, cancel, delete)
  * @param {Element} form The form which will be initialized
  */
-function initializeAddressForm(form) {
+function initializeAddressForm() {
 	var $form = $('#edit-address-form');
 
 	$form.find('input[name="format"]').remove();
@@ -39,7 +39,7 @@ function initializeAddressForm(form) {
 					dialog.close();
 					page.refresh();
 				} else {
-					alert(data.message);
+					window.alert(data.message);
 					return false;
 				}
 			} else {
@@ -55,7 +55,7 @@ function initializeAddressForm(form) {
 	})
 	.on('click', '.delete-button', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			var url = util.appendParamsToUrl(Urls.deleteAddress, {
 				AddressID: $form.find('#addressid').val(),
 				format: 'ajax'
@@ -69,7 +69,7 @@ function initializeAddressForm(form) {
 					dialog.close();
 					page.refresh();
 				} else if (data.message.length > 0) {
-					alert(data.message);
+					window.alert(data.message);
 					return false;
 				} else {
 					dialog.close();
@@ -120,7 +120,7 @@ function initAddressEvents() {
 		});
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
 				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
 				dataType: 'json'
@@ -128,7 +128,7 @@ function initAddressEvents() {
 				if (data.status.toLowerCase() === 'ok') {
 					page.redirect(Urls.addressesList);
 				} else if (data.message.length > 0) {
-					alert(data.message);
+					window.alert(data.message);
 				} else {
 					page.refresh();
 				}
@@ -169,7 +169,7 @@ function initPaymentEvents() {
 			url: $(this).attr('action'),
 			data: data
 		})
-		.done(function (response) {
+		.done(function () {
 			page.redirect(Urls.paymentsList);
 		});
 	});
@@ -220,6 +220,6 @@ var account = {
 	initCartLogin: function () {
 		initLoginPage();
 	}
-}
+};
 
 module.exports = account;

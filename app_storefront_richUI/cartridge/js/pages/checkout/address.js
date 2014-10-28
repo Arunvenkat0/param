@@ -24,4 +24,4 @@ exports.init = function () {
 	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
-}
+};

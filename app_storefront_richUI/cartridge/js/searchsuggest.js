@@ -137,8 +137,7 @@ var searchsuggest = {
 		$.getJSON(reqUrl, function (data) {
 			// get the total of results
 			var suggestions = data,
-				ansLength = suggestions.length,
-				listTotal = ansLength;
+				ansLength = suggestions.length;
 
 			// if there are results populate the results div
 			if (ansLength === 0) {

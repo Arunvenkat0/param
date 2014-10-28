@@ -1,9 +1,8 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	page = require('./page'),
+var page = require('./page'),
 	util = require('./util'),
-	Promise = require('promise');
+	TPromise = require('promise');
 
 var _currentCategory = '',
 	MAX_ACTIVE = 6;
@@ -40,7 +39,7 @@ function addToList(data) {
 		if ($productTile.length > 0) {
 			$productTile.find('.compare-check')[0].checked = false;
 		}
-		window.alert(Resources.COMPARE_ADD_FAIL)
+		window.alert(Resources.COMPARE_ADD_FAIL);
 		return;
 	}
 
@@ -74,7 +73,7 @@ function removeFromList($item) {
 }
 
 function addProductAjax(args) {
-	var promise = new Promise(function (resolve, reject) {
+	var promise = new TPromise(function (resolve, reject) {
 		$.ajax({
 			url: Urls.compareAdd,
 			data: {
@@ -90,13 +89,13 @@ function addProductAjax(args) {
 			}
 		}).fail(function (jqxhr, status, err) {
 			reject(new Error(err));
-		})
+		});
 	});
 	return promise;
 }
 
 function removeProductAjax(args) {
-	var promise = new Promise(function (resolve, reject) {
+	var promise = new TPromise(function (resolve, reject) {
 		$.ajax({
 			url: Urls.compareRemove,
 			data: {
@@ -118,7 +117,7 @@ function removeProductAjax(args) {
 }
 
 function shiftImages() {
-	return new Promise(function (resolve, reject) {
+	return new TPromise(function (resolve) {
 		var $items = $('.compare-items .compare-item');
 		$items.each(function (i, item) {
 			var $item = $(item);
@@ -162,7 +161,7 @@ function addProduct(args) {
 			return shiftImages();
 		});
 	} else {
-		promise = Promise.resolve(0);
+		promise = TPromise.resolve(0);
 	}
 	return promise.then(function () {
 		return addProductAjax(args).then(function () {
@@ -170,9 +169,8 @@ function addProduct(args) {
 			if ($cb && $cb.length > 0) { $cb[0].checked = true; }
 			refreshContainer();
 		});
-	}).then(null, function (err) {
+	}).then(null, function () {
 		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
-		console.log(err.stack);
 	});
 }
 
@@ -188,9 +186,8 @@ function removeProduct(args) {
 		removeFromList($item);
 		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
 		refreshContainer();
-	}, function (err) {
+	}, function () {
 		if ($cb && $cb.length > 0) { $cb[0].checked = true; }
-		console.log(err.stack);
 	});
 }
 
@@ -229,7 +226,7 @@ function initializeDom() {
  */
 function initializeEvents() {
 	// add event to buttons to remove products
-	$('.compare-item').on('click', '.compare-item-remove', function (e) {
+	$('.compare-item').on('click', '.compare-item-remove', function () {
 		removeItem($(this).closest('.compare-item'));
 	});
 
@@ -250,7 +247,7 @@ function initializeEvents() {
 exports.init = function () {
 	initializeDom();
 	initializeEvents();
-}
+};
 
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;

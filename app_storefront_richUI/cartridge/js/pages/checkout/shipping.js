@@ -13,7 +13,7 @@ var shippingMethods;
  */
 function giftMessageBox() {
 	// show gift message box, if shipment is gift
-	$(".gift-message-text").toggle($("#is-gift-yes")[0].checked);
+	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
 }
 
 /**
@@ -21,14 +21,14 @@ function giftMessageBox() {
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 function updateSummary() {
-	var $summary = $("#secondary.summary");
+	var $summary = $('#secondary.summary');
 	// indicate progress
 	progress.show($summary);
 
 	// load the updated summary area
 	$summary.load(Urls.summaryRefreshURL, function () {
 		// hide edit shipping method link
-		$summary.fadeIn("fast");
+		$summary.fadeIn('fast');
 		$summary.find('.checkout-mini-cart .minishipment .header a').hide();
 		$summary.find('.order-totals-table .order-shipping .label a').hide();
 	});
@@ -69,12 +69,12 @@ function selectShippingMethod(shippingMethodID) {
 		callback: function (data) {
 			updateSummary();
 			if (!data || !data.shippingMethodID) {
-				window.alert("Couldn't select shipping method.");
+				window.alert('Couldn\'t select shipping method.');
 				return false;
 			}
 			// display promotion in UI and update the summary section,
 			// if some promotions were applied
-			$(".shippingpromotions").empty();
+			$('.shippingpromotions').empty();
 
 			// TODO the for loop below isn't doing anything?
 			// if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
@@ -97,7 +97,7 @@ function selectShippingMethod(shippingMethodID) {
  * the UI.
  */
 function updateShippingMethodList() {
-	var $shippingMethodList = $("#shipping-method-list");
+	var $shippingMethodList = $('#shipping-method-list');
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
 	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
@@ -105,7 +105,7 @@ function updateShippingMethodList() {
 		url: url,
 		callback: function (data) {
 			if (!data) {
-				window.alert("Couldn't get list of applicable shipping methods.");
+				window.alert('Couldn\'t get list of applicable shipping methods.');
 				return false;
 			}
 			if (shippingMethods && shippingMethods.toString() === data.toString()) {
@@ -122,9 +122,9 @@ function updateShippingMethodList() {
 			// load the shipping method form
 			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
 			$shippingMethodList.load(smlUrl, function () {
-				$shippingMethodList.fadeIn("fast");
+				$shippingMethodList.fadeIn('fast');
 				// rebind the radio buttons onclick function to a handler.
-				$shippingMethodList.find("[name$='_shippingMethodID']").click(function () {
+				$shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
 					selectShippingMethod($(this).val());
 				});
 
@@ -146,7 +146,7 @@ exports.init = function () {
 		continueSelector: '[name$="shippingAddress_save"]',
 		formSelector:'[id$="singleshipping_shippingAddress"]'
 	});
-	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
+	$('#is-gift-yes, #is-gift-no').on('click', function () {
 		giftMessageBox();
 	});
 
@@ -157,6 +157,6 @@ exports.init = function () {
 
 	giftMessageBox();
 	updateShippingMethodList();
-}
+};
 
 exports.updateShippingMethodList = updateShippingMethodList;

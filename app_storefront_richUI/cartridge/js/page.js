@@ -7,10 +7,14 @@ var page = {
 	type: '',
 	params: util.getQueryStringParams(window.location.search.substr(1)),
 	redirect: function (newURL) {
-		setTimeout('window.location.href="' + newURL + '"', 0);
+		setTimeout(function () {
+			window.location.href = newURL;
+		}, 0);
 	},
 	refresh: function () {
-		setTimeout('window.location.assign(window.location.href);', 500);
+		setTimeout(function () {
+			window.location.assign(window.location.href);
+		}, 500);
 	}
 };
 

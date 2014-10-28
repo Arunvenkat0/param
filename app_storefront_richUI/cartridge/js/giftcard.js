@@ -10,7 +10,7 @@ var ajax = require('./ajax'),
  */
 exports.checkBalance = function (id, callback) {
 	// load gift certificate details
-	var url = util.appendParamToURL(Urls.giftCardCheckBalance, "giftCertificateID", id);
+	var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
 
 	ajax.getJson({
 		url: url,

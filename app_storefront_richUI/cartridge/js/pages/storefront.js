@@ -1,11 +1,11 @@
-' use strict';
+'use strict';
 
 /**
  * @function
  * @description Triggers the scroll event on a carousel element
  * @param {Object} carousel
  */
-function slideCarousel_initCallback(carousel) {
+function slideCarouselInitCallback(carousel) {
 	// create navigation for slideshow
 	var numSlides = $('#homepage-slider li').size();
 	var slideShowNav = '<div class="jcarousel-control">';
@@ -31,7 +31,7 @@ function slideCarousel_initCallback(carousel) {
  * @param {Number} idx Index of the item which should be activated
  * @param {Object} state --  necessity needs TBD!
  */
-function slideCarousel_itemVisible(carousel, item, idx, state) {
+function slideCarouselItemVisible(carousel, item, idx) {
 	$('.jcarousel-control a').removeClass('active');
 	$('.jcarousel-control').find('.link-' + idx).addClass('active');
 }
@@ -42,7 +42,7 @@ exports.init = function () {
 		buttonNextHTML: null,
 		buttonPrevHTML: null,
 		itemFallbackDimension: '100%',
-		initCallback: slideCarousel_initCallback,
-		itemFirstInCallback: slideCarousel_itemVisible
+		initCallback: slideCarouselInitCallback,
+		itemFirstInCallback: slideCarouselItemVisible
 	});
 };

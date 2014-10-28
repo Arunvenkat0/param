@@ -8,4 +8,4 @@ exports.init = function () {
 			url: $(e.target).attr('href')
 		});
 	});
-}
+};
