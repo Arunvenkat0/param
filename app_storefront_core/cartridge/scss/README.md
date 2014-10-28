@@ -5,7 +5,7 @@ This is a port of SiteGenesis's old CSS architecture to using SASS.
 All stylesheets are now written in SCSS, whose syntax is a superset of CSS. This means that any existing CSS is valid SCSS.
 
 SCSS authoring is meant to be used with a build tool, which is currently [gulp](http://gulpjs.com).
-Once compiled, the SCSS is output as CSS in `static/default/css` folder just like before.
+Once compiled, the SCSS is output as CSS in `static/default/css` folder just like before. See [contributing guide](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/CONTRIBUTING.md?at=master) for more information.
 
 ### Eclipse
 To edit `.scss` files in Eclipse, install the [Aptana Studio Eclispe Plug-in](http://www.aptana.com/products/studio3/download) version.
@@ -15,15 +15,70 @@ Inspired by <https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#css> 
 
 - Include partials should be prefixed with `_`, i.e. `_partial.scss`
 - Multiple-line approach (one property and value per line).
-- Use ONE space after a property's colon (e.g., `display: block;` and *not* `display:block;`).
+
+    ```scss
+    // OK
+    a {
+    	color: $green;
+    	text-decoration: underline;
+    }
+    // Bad
+    a {color: $green; text-decoration: underline;}
+    ```
+
+- Use ONE space after a property's colon.
+
+    ```scss
+    // OK
+    .block {
+    	display: block;
+    }
+    // Bad
+    .block {
+    	display:block;
+    }
+    ```
+
 - End all lines with a semi-colon.
 - For multiple, comma-separated selectors, place each selector on its own line.
-- No vendor prefixes. This will be done at build time.
+
+    ```scss
+    // OK
+    .selectorA,
+    .selectorB {
+
+    }
+    // Bad
+    . selectorA, .selectorB {}
+    ```
+
+- No vendor prefixes. This will be done at build time using autoprefixer.
 - Attribute selectors, like `input[type="text"]` should always wrap the attribute's value in double quotes, for consistency and safety.
 - Maximum selector nesting: **three** levels deep.
 - Global sass file (`style.scss`) is just a table of content.
-- Avoid the use of ID (#) like a plague. Class naming is preferred.
-- When using class or ID selector, drop the element selector, i.e. `.className` and not `div.className`.
+- Avoid the use of ID (`#`) like a plague. Class naming is preferred.
+- When using class or ID selector, drop the element selector.
+
+    ```scss
+    // OK
+    .className {
+    }
+    // Bad
+    div.className{
+    }
+    ```
+
 - Use lowercase for HEX colors, i.e. `#eaea56` instead of `#EAEA56`.
 - Contract HEX colors when possible, i.e. `#fff` instead of `#ffffff`.
-- Avoid using `!important` at all cost!!
+- **!important** Avoid using `!important` at all cost!
+
+## Variables
+Variables are defined in the `_variables.scss` files.
+For color variables, use <http://www.color-blindness.com/color-name-hue/> to find the color name.
+
+```scss
+// OK
+$sangria: #990000;
+// Bad
+$red: #990000;
+```

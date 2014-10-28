@@ -1,14 +1,20 @@
 # JavaScript Guide
-This is a [part](https://intranet.demandware.com/jira/browse/RAP-2737) of the efforts to break SiteGenesis's JS code into more modular components.
+This is a [part](https://intranet.demandware.com/jira/browse/RAP-2737) of a larger effort to refactor SiteGenesis's JavaScript code into more modular components. [CommonJS](http://wiki.commonjs.org/wiki/CommonJS) standard is used to break the original behemoth codebase into smaller modules.
 
-## Big architectural notes
-[CommonJS](http://wiki.commonjs.org/wiki/CommonJS) is the standard of choice for refactoring the JS code into modules. The modules are then bundled into a single file using [Browserify](http://browserify.org/).
+The modules are then bundled into a single file using [Browserify](http://browserify.org/).
+
+To use browserify, run `gulp js` on the command line. See the [contributing guide](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/CONTRIBUTING.md?at=master).
 
 ## Authoring
 All codes are written in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode).
 
+In order to enforce a consistent style, please use [editorconfig](http://editorconfig.org/) to set up your editors.
+
+[jshint](http://www.jshint.com/) and [jscs](https://github.com/mdevils/node-jscs) are used for style and format validation.
+They can be run using the build tool, `gulp jscs` and `gulp jshint`. Grunt task equivalents are also available (`grunt jscs` and `grunt jshint`).
+
 ### Code styles
-Inspired by <http://www.jshint.com/hack/>
+> Inspired by <http://www.jshint.com/hack/>
 
 #### White spaces
 - Hard tabs everywhere (this allows different developer to configure the amount of tab size to their liking).
@@ -58,7 +64,7 @@ var main = 'one'
 - Always use curly braces, even for a single statement
 ```js
 // OK
-if (condition === true) {return true;}
+if (condition === true) { return true; }
 // Bad
 if (condition === false) return false;
 ```
@@ -75,6 +81,3 @@ var obj = {
 	't-w-o': 2
 };
 ```
-
-In order to enforce some of these styles, we use [editorconfig](http://editorconfig.org/) to set up your editors, as well as [jshint](http://www.jshint.com/) and [jscs](https://github.com/mdevils/node-jscs) for style and format validation.
-They can be run using the build tool, i.e. `gulp jscs` and `gulp jshint`. Grunt task equivalents are also available.
