@@ -1,14 +1,15 @@
-var gulp = require('gulp'),
+var browserify = require('browserify'),
+	gulp = require('gulp'),
 	gutil = require('gulp-util'),
-	sass = require('gulp-sass'),
-	prefix = require('gulp-autoprefixer'),
-	browserify = require('browserify'),
-	watchify = require('watchify'),
-	source = require('vinyl-source-stream'),
-	xtend = require('xtend'),
 	jscs = require('gulp-jscs'),
 	jshint = require('gulp-jshint'),
-	stylish = require('jshint-stylish');
+	mocha = require('gulp-mocha'),
+	sass = require('gulp-sass'),
+	source = require('vinyl-source-stream'),
+	stylish = require('jshint-stylish'),
+	prefix = require('gulp-autoprefixer'),
+	watchify = require('watchify'),
+	xtend = require('xtend');
 
 var paths = {
 	scss: {
@@ -73,6 +74,14 @@ gulp.task('jshint', function () {
 	return gulp.src('./app_storefront_richUI/cartridge/js/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
+});
+
+gulp.task('ui-test', function () {
+	return gulp.src('test/ui.*.js', {read: false})
+		.pipe(mocha({
+			reporter: 'spec',
+			timeout: 10000
+		}));
 });
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {
