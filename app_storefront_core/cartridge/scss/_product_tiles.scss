@@ -23,7 +23,7 @@
 	.product-pricing .product-standard-price {
 		text-decoration: line-through;
 	}
-	.product-swatches {
+	.grid-tile & .product-swatches {
 		bottom: -9px;
 		position: absolute;
 		right: 0;
@@ -47,7 +47,6 @@
 		&:hover ul.swatch-toggle {
 			display: block;
 		}
-		float: right;
 		li {
 			float: left;
 		}
