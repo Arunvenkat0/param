@@ -63,9 +63,9 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+	} else {
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 
 	// print handler
