@@ -1,8 +1,8 @@
 'use strict';
 
-var ajax = require('../ajax'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	page = require('../page'),
-	product = require('./product'),
 	productTile = require('../product-tile'),
 	quickview = require('../quickview');
 
@@ -39,5 +39,5 @@ function initializeEvents() {
 exports.init = function () {
 	productTile.init();
 	initializeEvents();
-	product.initAddToCart();
+	addToCartHandler();
 };

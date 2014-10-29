@@ -64,9 +64,9 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+	} else {
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 
 	// print handler
@@ -2162,9 +2162,9 @@ exports.updateShippingMethodList = updateShippingMethodList;
 },{"../../ajax":2,"../../progress":32,"../../tooltip":39,"../../util":40,"./formPrepare":18}],22:[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	page = require('../page'),
-	product = require('./product'),
 	productTile = require('../product-tile'),
 	quickview = require('../quickview');
 
@@ -2201,10 +2201,10 @@ function initializeEvents() {
 exports.init = function () {
 	productTile.init();
 	initializeEvents();
-	product.initAddToCart();
+	addToCartHandler();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":31,"../quickview":33,"./product":25}],23:[function(require,module,exports){
+},{"../ajax":2,"../page":13,"../product-tile":31,"../quickview":33,"./product/addToCartHandler":23}],23:[function(require,module,exports){
 'use strict';
 
 var minicart = require('../../minicart'),
@@ -2821,8 +2821,8 @@ module.exports = product;
 },{"../../ajax":2,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":32,"../../quickview":33,"../../send-to-friend":37,"../../storeinventory":38,"../../tooltip":39,"../../util":40,"./addToCartHandler":23,"./events/quantity":24}],26:[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
-	product = require('./product'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	quickview = require('../quickview'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
@@ -2908,12 +2908,12 @@ function initializeEvents() {
 
 exports.init = function () {
 	initializeEvents();
-	product.initAddToCart();
+	addToCartHandler();
 	sendToFriend.initializeDialog('.list-table-header');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":33,"../send-to-friend":37,"../util":40,"./product":25}],27:[function(require,module,exports){
+},{"../ajax":2,"../quickview":33,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],27:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3171,13 +3171,13 @@ exports.init = function () {
 },{"../dialog":7}],30:[function(require,module,exports){
 'use strict';
 
-var page = require('../page'),
-	product = require('./product'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	page = require('../page'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
 
 exports.init = function () {
-	product.initAddToCart();
+	addToCartHandler();
 	sendToFriend.initializeDialog('.list-table-header');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
@@ -3189,7 +3189,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":37,"../util":40,"./product":25}],31:[function(require,module,exports){
+},{"../page":13,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],31:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
