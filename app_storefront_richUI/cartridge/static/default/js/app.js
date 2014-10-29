@@ -991,25 +991,26 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var form = this.container.find('form:first');
+		var $form = this.container.find('form:first');
 		// set the action
-		$('<input/>').attr({
+		$("<input/>").attr({
 			name: action,
-			type: 'hidden'
-		}).appendTo(form);
-
+			type: "hidden"
+		}).appendTo($form);
 		// serialize the form and get the post url
-		var post = form.serialize();
-		var url = form.attr('action');
-
+		var data = $form.serialize();
+		var url = $form.attr('action');
+		// if (data.indexOf('ajax') === -1) {
+		// 	data += '&format=ajax';
+		// }
 		// post the data and replace current content with response content
 		$.ajax({
 			type: 'POST',
 			url: url,
-			data: post,
+			data: data,
 			dataType: 'html',
-			success: function (data) {
-				this.container.html(data);
+			success: function (html) {
+				this.container.html(html);
 			}.bind(this),
 			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
@@ -1480,7 +1481,21 @@ function initLoginPage() {
 	$('#password-reset').on('click', function (e) {
 		e.preventDefault();
 		dialog.open({
-			url: $(e.target).attr('href')
+			url: $(e.target).attr('href'),
+			options: {
+				open: function () {
+					validator.init();
+					var $requestPasswordForm = $('[name$="_requestpassword"]'),
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]')
+					$($submit).on('click', function (e) {
+						if (!$requestPasswordForm.valid()) {
+							return;
+						}
+						e.preventDefault();
+						dialog.submit($submit.attr('name'));
+					});
+				}
+			}
 		});
 	});
 }

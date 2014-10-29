@@ -196,7 +196,21 @@ function initLoginPage() {
 	$('#password-reset').on('click', function (e) {
 		e.preventDefault();
 		dialog.open({
-			url: $(e.target).attr('href')
+			url: $(e.target).attr('href'),
+			options: {
+				open: function () {
+					validator.init();
+					var $requestPasswordForm = $('[name$="_requestpassword"]'),
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]')
+					$($submit).on('click', function (e) {
+						if (!$requestPasswordForm.valid()) {
+							return;
+						}
+						e.preventDefault();
+						dialog.submit($submit.attr('name'));
+					});
+				}
+			}
 		});
 	});
 }
