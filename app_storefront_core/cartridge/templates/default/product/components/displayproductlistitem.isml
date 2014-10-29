@@ -20,7 +20,7 @@
 	<isif condition="${p_productli.type == p_productli.TYPE_GIFT_CERTIFICATE}">
 		
 		<div class="name ">
-			<a href="${URLUtils.url('GiftCert-Purchase')}">${Resource.msg('global.giftcertificate','locale',null)}</a>
+			<a href="${URLUtils.https('GiftCert-Purchase')}">${Resource.msg('global.giftcertificate','locale',null)}</a>
 		</div>
 		
 		<div class="sku">
