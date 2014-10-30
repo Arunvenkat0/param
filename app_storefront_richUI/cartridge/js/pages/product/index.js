@@ -415,9 +415,11 @@ function initializeEvents() {
 			url: $(e.target).attr('href')
 		});
 	});
-	
+
 	$readReviewLink.on('click', function (e) {
-		product.readReviews();
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('body').scrollTop($('#tab4').offset().top);
 	});
 }
 /**
@@ -457,10 +459,6 @@ var product = {
 		if (SitePreferences.STORE_PICKUP){
 			storeinventory.init();
 		}
-	},
-	readReviews: function(){
-		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
 	},
 	/**
 	 * @function

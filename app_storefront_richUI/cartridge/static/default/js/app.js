@@ -2252,7 +2252,8 @@ function initializeEvents() {
 		$pdpForm = $('.pdpForm'),
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list');
+		$productSetList = $('#product-set-list'),
+		$readReviewLink = $('.prSnippetLink');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
@@ -2463,6 +2464,12 @@ function initializeEvents() {
 			url: $(e.target).attr('href')
 		});
 	});
+
+	$readReviewLink.on('click', function (e) {
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('body').scrollTop($('#tab4').offset().top);
+	});
 }
 /**
  * @private
@@ -2501,10 +2508,6 @@ var product = {
 		if (SitePreferences.STORE_PICKUP){
 			storeinventory.init();
 		}
-	},
-	readReviews: function(){
-		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
 	},
 	/**
 	 * @function
@@ -3196,7 +3199,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./ajax":2,"./page":12,"./util":39,"promise":44}],30:[function(require,module,exports){
+},{"./ajax":2,"./page":12,"./util":39,"promise":43}],30:[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -11628,9 +11631,16 @@ process.chdir = function (dir) {
 },{}],43:[function(require,module,exports){
 'use strict';
 
+module.exports = require('./lib/core.js')
+require('./lib/done.js')
+require('./lib/es6-extensions.js')
+require('./lib/node-extensions.js')
+},{"./lib/core.js":44,"./lib/done.js":45,"./lib/es6-extensions.js":46,"./lib/node-extensions.js":47}],44:[function(require,module,exports){
+'use strict';
+
 var asap = require('asap')
 
-module.exports = Promise
+module.exports = Promise;
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -11640,7 +11650,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new Promise(function(resolve, reject) {
+    return new self.constructor(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -11732,10 +11742,25 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":45}],44:[function(require,module,exports){
+},{"asap":48}],45:[function(require,module,exports){
 'use strict';
 
-//This file contains then/promise specific extensions to the core promise API
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
+    asap(function () {
+      throw err
+    })
+  })
+}
+},{"./core.js":44,"asap":48}],46:[function(require,module,exports){
+'use strict';
+
+//This file contains the ES6 extensions to the core Promises/A+ API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -11758,7 +11783,7 @@ function ValuePromise(value) {
     })
   }
 }
-ValuePromise.prototype = Object.create(Promise.prototype)
+ValuePromise.prototype = Promise.prototype
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -11793,57 +11818,8 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.from = Promise.cast = function (value) {
-  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
-  err.name = 'Warning'
-  console.warn(err.stack)
-  return Promise.resolve(value)
-}
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-        args.pop()
-      }
-      args.push(function (err, res) {
-        if (err) reject(err)
-        else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    try {
-      return fn.apply(this, arguments).nodeify(callback)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-        return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-        asap(function () {
-          callback(ex)
-        })
-      }
-    }
-  }
-}
-
-Promise.all = function () {
-  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
-  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
-
-  if (!calledWithArray) {
-    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
-    err.name = 'Warning'
-    console.warn(err.stack)
-  }
+Promise.all = function (arr) {
+  var args = Array.prototype.slice.call(arr)
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
@@ -11887,34 +11863,73 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-
-Promise.prototype.nodeify = function (callback) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
-    asap(function () {
-      callback(null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback(err)
-    })
-  })
-}
-
 Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":43,"asap":45}],45:[function(require,module,exports){
+},{"./core.js":44,"asap":48}],47:[function(require,module,exports){
+'use strict';
+
+//This file contains then/promise specific extensions that are only useful for node.js interop
+
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+
+/* Static Functions */
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    var ctx = this
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback.call(ctx, ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.prototype.nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err)
+    })
+  })
+}
+
+},{"./core.js":44,"asap":48}],48:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
