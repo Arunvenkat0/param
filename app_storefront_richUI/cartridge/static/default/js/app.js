@@ -1,4 +1,111 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var progress = require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if (options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data
+	})
+	.done(function (response) {
+		// success
+		if (options.target) {
+			$(options.target).empty().html(response);
+		}
+		if (options.callback) {
+			options.callback(response);
+		}
+
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+
+exports.getJson = getJson;
+exports.load = load;
+
+},{"./progress":32,"./util":40}],2:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -189,114 +296,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":25,"./pages/registry":26,"./pages/search":27,"./pages/storefront":28,"./pages/storelocator":29,"./pages/wishlist":30,"./searchplaceholder":34,"./searchsuggest":36,"./searchsuggest-beta":35,"./tooltip":39,"./util":40,"./validator":41}],2:[function(require,module,exports){
-'use strict';
-
-var progress = require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'json',
-		url: options.url,
-		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
-		data: options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if (options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'html',
-		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data
-	})
-	.done(function (response) {
-		// success
-		if (options.target) {
-			$(options.target).empty().html(response);
-		}
-		if (options.callback) {
-			options.callback(response);
-		}
-
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-
-exports.getJson = getJson;
-exports.load = load;
-
-},{"./progress":32,"./util":40}],3:[function(require,module,exports){
+},{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":25,"./pages/registry":26,"./pages/search":27,"./pages/storefront":28,"./pages/storelocator":29,"./pages/wishlist":30,"./searchplaceholder":34,"./searchsuggest":36,"./searchsuggest-beta":35,"./tooltip":39,"./util":40,"./validator":41}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -581,7 +581,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
+},{"./ajax":1,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -836,7 +836,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":40,"promise":44}],5:[function(require,module,exports){
+},{"./page":13,"./util":40,"promise":45}],5:[function(require,module,exports){
 /* global dw */
 
 'use strict';
@@ -1000,9 +1000,10 @@ var dialog = {
 		// serialize the form and get the post url
 		var data = $form.serialize();
 		var url = $form.attr('action');
-		// if (data.indexOf('ajax') === -1) {
-		// 	data += '&format=ajax';
-		// }
+		// make sure the server knows this is an ajax request
+		if (data.indexOf('ajax') === -1) {
+			data += '&format=ajax';
+		}
 		// post the data and replace current content with response content
 		$.ajax({
 			type: 'POST',
@@ -1042,7 +1043,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":40}],8:[function(require,module,exports){
+},{"./ajax":1,"./util":40}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1063,7 +1064,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":40}],9:[function(require,module,exports){
+},{"./ajax":1,"./util":40}],9:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1116,7 +1117,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":11,"./util":40}],10:[function(require,module,exports){
+},{"./ajax":1,"./minicart":11,"./util":40}],10:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1259,7 +1260,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":40}],13:[function(require,module,exports){
+},{"./ajax":1,"./page":13,"./util":40}],13:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1792,7 +1793,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":40,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":1,"../../giftcard":8,"../../util":40,"./formPrepare":18}],18:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -2174,7 +2175,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":32,"../../tooltip":39,"../../util":40,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":32,"../../tooltip":39,"../../util":40,"./formPrepare":18}],22:[function(require,module,exports){
 'use strict';
 
 var addToCartHandler = require('./product/addToCartHandler'),
@@ -2219,7 +2220,7 @@ exports.init = function () {
 	addToCartHandler();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":31,"../quickview":33,"./product/addToCartHandler":23}],23:[function(require,module,exports){
+},{"../ajax":1,"../page":13,"../product-tile":31,"../quickview":33,"./product/addToCartHandler":23}],23:[function(require,module,exports){
 'use strict';
 
 var minicart = require('../../minicart'),
@@ -2566,7 +2567,8 @@ function initializeEvents() {
 		$pdpForm = $('.pdpForm'),
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list');
+		$productSetList = $('#product-set-list'),
+		$readReviewLink = $('.prSnippetLink');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
@@ -2777,6 +2779,12 @@ function initializeEvents() {
 			url: $(e.target).attr('href')
 		});
 	});
+
+	$readReviewLink.on('click', function (e) {
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('body').scrollTop($('#tab4').offset().top);
+	});
 }
 
 
@@ -2790,10 +2798,7 @@ var product = {
 			storeinventory.init();
 		}
 	},
-	readReviews: function () {
-		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
-	},
+
 	/**
 	 * @function
 	 * @description Gets the availability to given product and quantity
@@ -2833,7 +2838,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":2,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":32,"../../quickview":33,"../../send-to-friend":37,"../../storeinventory":38,"../../tooltip":39,"../../util":40,"./addToCartHandler":23,"./events/quantity":24}],26:[function(require,module,exports){
+},{"../../ajax":1,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":32,"../../quickview":33,"../../send-to-friend":37,"../../storeinventory":38,"../../tooltip":39,"../../util":40,"./addToCartHandler":23,"./events/quantity":24}],26:[function(require,module,exports){
 'use strict';
 
 var addToCartHandler = require('./product/addToCartHandler'),
@@ -2933,7 +2938,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":33,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],27:[function(require,module,exports){
+},{"../ajax":1,"../quickview":33,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],27:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3498,7 +3503,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./ajax":2,"./dialog":7,"./util":40}],34:[function(require,module,exports){
+},{"./ajax":1,"./dialog":7,"./util":40}],34:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3948,7 +3953,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":7,"./util":40,"./validator":41}],38:[function(require,module,exports){
+},{"./ajax":1,"./dialog":7,"./util":40,"./validator":41}],38:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4311,7 +4316,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":2,"./page":13,"./util":40}],39:[function(require,module,exports){
+},{"./ajax":1,"./page":13,"./util":40}],39:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4771,8 +4776,6 @@ var process = module.exports = {};
 process.nextTick = (function () {
     var canSetImmediate = typeof window !== 'undefined'
     && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
     var canPost = typeof window !== 'undefined'
     && window.postMessage && window.addEventListener
     ;
@@ -4781,29 +4784,8 @@ process.nextTick = (function () {
         return function (f) { return window.setImmediate(f) };
     }
 
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
     if (canPost) {
+        var queue = [];
         window.addEventListener('message', function (ev) {
             var source = ev.source;
             if ((source === window || source === null) && ev.data === 'process-tick') {
@@ -4843,7 +4825,7 @@ process.emit = noop;
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
-};
+}
 
 // TODO(shtylman)
 process.cwd = function () { return '/' };
@@ -11643,16 +11625,9 @@ process.chdir = function (dir) {
 },{}],44:[function(require,module,exports){
 'use strict';
 
-module.exports = require('./lib/core.js')
-require('./lib/done.js')
-require('./lib/es6-extensions.js')
-require('./lib/node-extensions.js')
-},{"./lib/core.js":45,"./lib/done.js":46,"./lib/es6-extensions.js":47,"./lib/node-extensions.js":48}],45:[function(require,module,exports){
-'use strict';
-
 var asap = require('asap')
 
-module.exports = Promise;
+module.exports = Promise
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -11662,7 +11637,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new self.constructor(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -11754,25 +11729,10 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":49}],46:[function(require,module,exports){
+},{"asap":46}],45:[function(require,module,exports){
 'use strict';
 
-var Promise = require('./core.js')
-var asap = require('asap')
-
-module.exports = Promise
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-},{"./core.js":45,"asap":49}],47:[function(require,module,exports){
-'use strict';
-
-//This file contains the ES6 extensions to the core Promises/A+ API
+//This file contains then/promise specific extensions to the core promise API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -11795,7 +11755,7 @@ function ValuePromise(value) {
     })
   }
 }
-ValuePromise.prototype = Promise.prototype
+ValuePromise.prototype = Object.create(Promise.prototype)
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -11830,8 +11790,57 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.all = function (arr) {
-  var args = Array.prototype.slice.call(arr)
+Promise.from = Promise.cast = function (value) {
+  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
+  err.name = 'Warning'
+  console.warn(err.stack)
+  return Promise.resolve(value)
+}
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    try {
+      return fn.apply(this, arguments).nodeify(callback)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback(ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.all = function () {
+  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
+  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
+
+  if (!calledWithArray) {
+    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
+    err.name = 'Warning'
+    console.warn(err.stack)
+  }
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
@@ -11875,73 +11884,34 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype['catch'] = function (onRejected) {
-  return this.then(null, onRejected);
-}
-
-},{"./core.js":45,"asap":49}],48:[function(require,module,exports){
-'use strict';
-
-//This file contains then/promise specific extensions that are only useful for node.js interop
-
-var Promise = require('./core.js')
-var asap = require('asap')
-
-module.exports = Promise
-
-/* Static Functions */
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-        args.pop()
-      }
-      args.push(function (err, res) {
-        if (err) reject(err)
-        else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    var ctx = this
-    try {
-      return fn.apply(this, arguments).nodeify(callback, ctx)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-        return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-        asap(function () {
-          callback.call(ctx, ex)
-        })
-      }
-    }
-  }
-}
-
-Promise.prototype.nodeify = function (callback, ctx) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
     asap(function () {
-      callback.call(ctx, null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback.call(ctx, err)
+      throw err
     })
   })
 }
 
-},{"./core.js":45,"asap":49}],49:[function(require,module,exports){
+Promise.prototype.nodeify = function (callback) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback(null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback(err)
+    })
+  })
+}
+
+Promise.prototype['catch'] = function (onRejected) {
+  return this.then(null, onRejected);
+}
+
+},{"./core.js":44,"asap":46}],46:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12058,4 +12028,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":42}]},{},[1]);
+},{"_process":42}]},{},[2]);

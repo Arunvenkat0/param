@@ -417,9 +417,11 @@ function initializeEvents() {
 			url: $(e.target).attr('href')
 		});
 	});
-	
+
 	$readReviewLink.on('click', function (e) {
-		product.readReviews();
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('body').scrollTop($('#tab4').offset().top);
 	});
 }
 
@@ -434,10 +436,7 @@ var product = {
 			storeinventory.init();
 		}
 	},
-	readReviews: function () {
-		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
-	},
+
 	/**
 	 * @function
 	 * @description Gets the availability to given product and quantity
