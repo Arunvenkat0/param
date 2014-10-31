@@ -1,111 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-var progress = require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'json',
-		url: options.url,
-		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
-		data: options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if (options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'html',
-		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data
-	})
-	.done(function (response) {
-		// success
-		if (options.target) {
-			$(options.target).empty().html(response);
-		}
-		if (options.callback) {
-			options.callback(response);
-		}
-
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-
-exports.getJson = getJson;
-exports.load = load;
-
-},{"./progress":32,"./util":40}],2:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app_storefront_richUI/cartridge/js/app.js":[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -296,7 +189,114 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":5,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":25,"./pages/registry":26,"./pages/search":27,"./pages/storefront":28,"./pages/storelocator":29,"./pages/wishlist":30,"./searchplaceholder":34,"./searchsuggest":36,"./searchsuggest-beta":35,"./tooltip":39,"./util":40,"./validator":41}],3:[function(require,module,exports){
+},{"./components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","./cookieprivacy":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
+'use strict';
+
+var progress = require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if (options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data
+	})
+	.done(function (response) {
+		// success
+		if (options.target) {
+			$(options.target).empty().html(response);
+		}
+		if (options.callback) {
+			options.callback(response);
+		}
+
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+
+exports.getJson = getJson;
+exports.load = load;
+
+},{"./progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -581,7 +581,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":1,"./dialog":7,"./page":13,"./util":40}],4:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -836,7 +836,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":40,"promise":45}],5:[function(require,module,exports){
+},{"./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js":[function(require,module,exports){
 /* global dw */
 
 'use strict';
@@ -878,7 +878,7 @@ var components = {
 
 module.exports = components;
 
-},{}],6:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -924,7 +924,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":7}],7:[function(require,module,exports){
+},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -961,7 +961,8 @@ var dialog = {
 	 */
 	open: function (params) {
 		if (!params.url || params.url.length === 0) { return; }
-
+		// close any open dialog
+		this.close();
 		this.container = this.create(params);
 		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
 
@@ -976,8 +977,36 @@ var dialog = {
 		});
 	},
 	/**
+	 * @description Replace the content of current dialog
+	 * @param {object} options
+	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
+	 * @param {string} options.html - If no url property is provided, use html provided to replace
+	 * @param {function} options.callback - Callback, could be used to set up event handlers
+	 */
+	replace: function (options) {
+		if (!this.container) {
+			return;
+		}
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
+		if (options.url) {
+			ajax.load({
+				target: this.container,
+				url: options.url,
+				callback: function () {
+					callback();
+					if (!this.container.dialog('isOpen')) {
+						this.container.dialog('open');
+					}
+				}.bind(this)
+			});
+		} else if (options.html) {
+			this.container.empty().html(options.html);
+			callback();
+		}
+	},
+	/**
 	 * @function
-	 * @description Closes the dialog and triggers the "close" event for the dialog
+	 * @description Closes the dialog
 	 */
 	close: function () {
 		if (!this.container) {
@@ -993,9 +1022,9 @@ var dialog = {
 	submit: function (action) {
 		var $form = this.container.find('form:first');
 		// set the action
-		$("<input/>").attr({
+		$('<input/>').attr({
 			name: action,
-			type: "hidden"
+			type: 'hidden'
 		}).appendTo($form);
 		// serialize the form and get the post url
 		var data = $form.serialize();
@@ -1020,21 +1049,18 @@ var dialog = {
 	},
 	settings: {
 		autoOpen: false,
-		resizable: false,
 		bgiframe: true,
-		modal: true,
-		height: 'auto',
-		width: '800',
 		buttons: {},
-		title: '',
+		height: 'auto',
+		modal: true,
 		overlay: {
 			opacity: 0.5,
 			background: 'black'
 		},
-		/**
-		 * @function
-		 * @description The close event
-		 */
+		position: 'center',
+		resizable: false,
+		title: '',
+		width: '800',
 		close: function () {
 			$(this).dialog('destroy');
 		}
@@ -1043,7 +1069,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":1,"./util":40}],8:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1064,7 +1090,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":1,"./util":40}],9:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1117,7 +1143,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":1,"./minicart":11,"./util":40}],10:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1147,7 +1173,7 @@ module.exports = function () {
 	};
 };
 
-},{}],11:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1232,7 +1258,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":40}],12:[function(require,module,exports){
+},{"./bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1260,7 +1286,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":1,"./page":13,"./util":40}],13:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1283,7 +1309,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":40}],14:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js":[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1487,7 +1513,7 @@ function initLoginPage() {
 				open: function () {
 					validator.init();
 					var $requestPasswordForm = $('[name$="_requestpassword"]'),
-						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]')
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
 					$($submit).on('click', function (e) {
 						if (!$requestPasswordForm.valid()) {
 							return;
@@ -1524,7 +1550,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":39,"../util":40,"../validator":41}],15:[function(require,module,exports){
+},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../giftcert":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js":[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1566,7 +1592,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":33,"../storeinventory":38,"./account":14,"./product":25}],16:[function(require,module,exports){
+},{"../bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","./account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1595,7 +1621,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":40,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1793,7 +1819,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":1,"../../giftcard":8,"../../util":40,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1852,7 +1878,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":43}],19:[function(require,module,exports){
+},{"lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1881,7 +1907,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
+},{"./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2011,7 +2037,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":7,"../../util":40,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2175,7 +2201,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":1,"../../progress":32,"../../tooltip":39,"../../util":40,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
 'use strict';
 
 var addToCartHandler = require('./product/addToCartHandler'),
@@ -2220,7 +2246,7 @@ exports.init = function () {
 	addToCartHandler();
 };
 
-},{"../ajax":1,"../page":13,"../product-tile":31,"../quickview":33,"./product/addToCartHandler":23}],23:[function(require,module,exports){
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js":[function(require,module,exports){
 'use strict';
 
 var minicart = require('../../minicart'),
@@ -2275,7 +2301,7 @@ module.exports = function (target) {
 	}
 };
 
-},{"../../minicart":11,"../../page":13,"../../quickview":33,"../../util":40}],24:[function(require,module,exports){
+},{"../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function (data, $container) {
@@ -2359,7 +2385,7 @@ module.exports = function (data, $container) {
 	*/
 };
 
-},{}],25:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2838,7 +2864,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":1,"../../components":5,"../../dialog":7,"../../minicart":11,"../../progress":32,"../../quickview":33,"../../send-to-friend":37,"../../storeinventory":38,"../../tooltip":39,"../../util":40,"./addToCartHandler":23,"./events/quantity":24}],26:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js","./events/quantity":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
 'use strict';
 
 var addToCartHandler = require('./product/addToCartHandler'),
@@ -2938,7 +2964,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":1,"../quickview":33,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],27:[function(require,module,exports){
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3130,7 +3156,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":31,"../progress":32,"../util":40}],28:[function(require,module,exports){
+},{"../compare-widget":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -3180,7 +3206,7 @@ exports.init = function () {
 	});
 };
 
-},{}],29:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js":[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3193,7 +3219,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":7}],30:[function(require,module,exports){
+},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
 'use strict';
 
 var addToCartHandler = require('./product/addToCartHandler'),
@@ -3214,7 +3240,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":37,"../util":40,"./product/addToCartHandler":23}],31:[function(require,module,exports){
+},{"../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
@@ -3226,7 +3252,7 @@ function initQuickViewButtons() {
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton"/>');
 		}
-		var $link = $(this).children('.thumb-link:first');
+		var $link = $(this).find('.thumb-link');
 		$qvButton.attr({
 			'href': $link.attr('href'),
 			'title': $link.attr('title')
@@ -3318,7 +3344,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":25,"./quickview":33}],32:[function(require,module,exports){
+},{"./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js":[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3351,140 +3377,108 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],33:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
-	util = require('./util');
+var dialog = require('./dialog'),
+	util = require('./util'),
+	_ = require('lodash');
+
+
+var makeUrl = function (url, source, productListID) {
+	if (source) {
+		url = util.appendParamToURL(url, 'source', source);
+	}
+	if (productListID) {
+		url = util.appendParamToURL(url, 'productlistid', productListID);
+	}
+	return url;
+};
 
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
-	},
-
-	initializeQuickViewNav: function (qvUrl) {
-		// from the url of the product in the quickview
-		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
-			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
-		if (qvUrlPidParam.indexOf('pid') > 0) {
-			// if storefront urls are turned off
-			// append the pid to the url
-			qvUrl = qvUrl + qvUrlPidParam;
-		}
-
-		this.searchesultsContainer = $('#search-result-items').parent();
-		this.productLinks = this.searchesultsContainer.find('.thumb-link');
-
-		this.btnNext = $('.quickview-next');
-		this.btnPrev = $('.quickview-prev');
-
-		if (this.productLinks.length === 0) {
-			this.btnNext.hide();
-			this.btnPrev.hide();
-			return;
-		}
-
-		this.btnNext.click(this.navigateQuickview.bind(this));
-		this.btnPrev.click(this.navigateQuickview.bind(this));
-
-		var productLinksUrl = '';
-		for (var i = 0; i < this.productLinks.length; i++) {
-			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
-			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
-			if (productLinksUrlPidParam.indexOf('pid') > 0) {
-				//append the pid to the url
-				//if storefront urls are turned off
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-				productLinksUrl = productLinksUrl + productLinksUrlPidParam;
-			} else {
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-			}
-
-			if (productLinksUrl === '') {
-				productLinksUrl = this.productLinks[i].href;
-			}
-			if (qvUrl === productLinksUrl) {
-				this.productLinkIndex = i;
-			}
-		}
-
-		if (this.productLinkIndex === this.productLinks.length - 1) {
-			this.btnNext.hide();
-		}
-
-		if (this.productLinkIndex === 0) {
-			this.btnPrev.hide();
-		}
-
-		//hide the buttons on the compare page
-		if ($('.compareremovecell').length > 0) {
-			this.btnNext.hide();
-			this.btnPrev.hide();
-		}
-	},
-	navigateQuickview: function (e) {
-		e.preventDefault();
-		var button = $(e.currentTarget);
-
-		if (button.hasClass('quickview-next')) {
-			this.productLinkIndex++;
-		} else {
-			this.productLinkIndex--;
-		}
-
-		this.show({
-			url: this.productLinks[this.productLinkIndex].href,
-			source: 'quickview'
+		this.productLinks = $('#search-result-items .thumb-link').map(function (index, thumbLink) {
+			return $(thumbLink).attr('href');
 		});
 	},
 
-	// show quick view dialog and send request to the server to get the product
-	// options.source - source of the dialog i.e. search/cart
-	// options.url - product url
+	initializeQuickViewNav: function (qvUrl) {
+		var $btnNext = $('.quickview-next'),
+			$btnPrev = $('.quickview-prev');
+
+		// remove any param
+		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
+
+		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
+			return url === qvUrl;
+		});
+
+		// hide the buttons on the compare page or when there are no other products
+		if (this.productLinks.length <= 1 || $('.compareremovecell').length > 0) {
+			$btnNext.hide();
+			$btnPrev.hide();
+			return;
+		}
+
+		if (this.productLinkIndex === this.productLinks.length - 1) {
+			$btnNext.attr('disabled', 'disabled');
+		}
+		if (this.productLinkIndex === 0) {
+			$btnPrev.attr('disabled', 'disabled');
+		}
+
+		$btnNext.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(1);
+		}.bind(this));
+		$btnPrev.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(-1);
+		}.bind(this));
+	},
+
+	/**
+	 * @param {Number} step - How many products away from current product to navigate to. Negative number means navigate backward
+	 */
+	navigateQuickview: function (step) {
+		// default step to 0
+		this.productLinkIndex += (step ? step : 0);
+		var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
+		dialog.replace({
+			url: url,
+			callback: this.initializeQuickViewNav.bind(this, url)
+		});
+	},
+
+	/**
+	 * @description show quick view dialog
+	 * @param {object} options
+	 * @param {stirng} options.url - url of the product details
+	 * @param {string} options.source - source of the dialog to be appended to URL
+	 * @param {string} options.productlistid - to be appended to URL
+	 * @param {function} options.callback - callback once the dialog is opened
+	 */
 	show: function (options) {
+		var url;
 		if (!this.exists()) {
 			this.init();
 		}
-		var target = this.$container;
-		var url = options.url;
-		var source = options.source;
-		var productListId = options.productlistid || '';
-		if (source.length > 0) {
-			url = util.appendParamToURL(url, 'source', source);
-		}
-		if (productListId.length > 0) {
-			url = util.appendParamToURL(url, 'productlistid', productListId);
-		}
+		url = makeUrl(options.url, options.source, options.productlistid);
 
-		ajax.load({
-			target: target,
+		dialog.open({
+			target: this.$container,
 			url: url,
-			callback: function () {
-				dialog.create({
-					target: target,
-					options: {
-						height: 'auto',
-						width: 920,
-						modal: true,
-						dialogClass: 'quickview',
-						title: 'Product Quickview',
-						resizable: false,
-						position: 'center',
-						open: function () {
-							// allow for click outside modal to close the modal
-							$('.ui-widget-overlay').on('click', this.close.bind(this));
-							if (options.callback) { options.callback(); }
-						}.bind(this)
-					}
-				});
-				target.dialog('open');
-				this.initializeQuickViewNav(url);
-			}.bind(this)
+			options: {
+				width: 920,
+				title: 'Product Quickview',
+				open: function () {
+					this.initializeQuickViewNav(url);
+					if (typeof options.callback === 'function') { options.callback(); }
+				}.bind(this)
+			}
 		});
 	},
 	// close the quick view dialog
@@ -3503,7 +3497,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./ajax":1,"./dialog":7,"./util":40}],34:[function(require,module,exports){
+},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -3529,7 +3523,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],35:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3701,7 +3695,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":40}],36:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3878,7 +3872,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":40}],37:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3953,7 +3947,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":1,"./dialog":7,"./util":40,"./validator":41}],38:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4316,7 +4310,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":1,"./page":13,"./util":40}],39:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -4338,7 +4332,7 @@ exports.init = function () {
 	});
 };
 
-},{}],40:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4646,7 +4640,7 @@ var util = {
 
 module.exports = util;
 
-},{}],41:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4768,7 +4762,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],42:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4776,6 +4770,8 @@ var process = module.exports = {};
 process.nextTick = (function () {
     var canSetImmediate = typeof window !== 'undefined'
     && window.setImmediate;
+    var canMutationObserver = typeof window !== 'undefined'
+    && window.MutationObserver;
     var canPost = typeof window !== 'undefined'
     && window.postMessage && window.addEventListener
     ;
@@ -4784,8 +4780,29 @@ process.nextTick = (function () {
         return function (f) { return window.setImmediate(f) };
     }
 
+    var queue = [];
+
+    if (canMutationObserver) {
+        var hiddenDiv = document.createElement("div");
+        var observer = new MutationObserver(function () {
+            var queueList = queue.slice();
+            queue.length = 0;
+            queueList.forEach(function (fn) {
+                fn();
+            });
+        });
+
+        observer.observe(hiddenDiv, { attributes: true });
+
+        return function nextTick(fn) {
+            if (!queue.length) {
+                hiddenDiv.setAttribute('yes', 'no');
+            }
+            queue.push(fn);
+        };
+    }
+
     if (canPost) {
-        var queue = [];
         window.addEventListener('message', function (ev) {
             var source = ev.source;
             if ((source === window || source === null) && ev.data === 'process-tick') {
@@ -4825,7 +4842,7 @@ process.emit = noop;
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
-}
+};
 
 // TODO(shtylman)
 process.cwd = function () { return '/' };
@@ -4833,7 +4850,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],43:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -11622,12 +11639,19 @@ process.chdir = function (dir) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],44:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
+'use strict';
+
+module.exports = require('./lib/core.js')
+require('./lib/done.js')
+require('./lib/es6-extensions.js')
+require('./lib/node-extensions.js')
+},{"./lib/core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
 
-module.exports = Promise
+module.exports = Promise;
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -11637,7 +11661,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new Promise(function(resolve, reject) {
+    return new self.constructor(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -11729,10 +11753,25 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":46}],45:[function(require,module,exports){
+},{"asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
 'use strict';
 
-//This file contains then/promise specific extensions to the core promise API
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
+    asap(function () {
+      throw err
+    })
+  })
+}
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
+'use strict';
+
+//This file contains the ES6 extensions to the core Promises/A+ API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -11755,7 +11794,7 @@ function ValuePromise(value) {
     })
   }
 }
-ValuePromise.prototype = Object.create(Promise.prototype)
+ValuePromise.prototype = Promise.prototype
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -11790,57 +11829,8 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.from = Promise.cast = function (value) {
-  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
-  err.name = 'Warning'
-  console.warn(err.stack)
-  return Promise.resolve(value)
-}
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-        args.pop()
-      }
-      args.push(function (err, res) {
-        if (err) reject(err)
-        else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    try {
-      return fn.apply(this, arguments).nodeify(callback)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-        return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-        asap(function () {
-          callback(ex)
-        })
-      }
-    }
-  }
-}
-
-Promise.all = function () {
-  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
-  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
-
-  if (!calledWithArray) {
-    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
-    err.name = 'Warning'
-    console.warn(err.stack)
-  }
+Promise.all = function (arr) {
+  var args = Array.prototype.slice.call(arr)
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
@@ -11884,34 +11874,73 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-
-Promise.prototype.nodeify = function (callback) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
-    asap(function () {
-      callback(null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback(err)
-    })
-  })
-}
-
 Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":44,"asap":46}],46:[function(require,module,exports){
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
+'use strict';
+
+//This file contains then/promise specific extensions that are only useful for node.js interop
+
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+
+/* Static Functions */
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    var ctx = this
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback.call(ctx, ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.prototype.nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err)
+    })
+  })
+}
+
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12028,4 +12057,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":42}]},{},[2]);
+},{"_process":"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js"}]},{},["./app_storefront_richUI/cartridge/js/app.js"]);

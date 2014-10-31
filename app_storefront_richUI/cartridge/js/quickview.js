@@ -1,136 +1,104 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
-	util = require('./util');
+var dialog = require('./dialog'),
+	util = require('./util'),
+	_ = require('lodash');
+
+
+var makeUrl = function (url, source, productListID) {
+	if (source) {
+		url = util.appendParamToURL(url, 'source', source);
+	}
+	if (productListID) {
+		url = util.appendParamToURL(url, 'productlistid', productListID);
+	}
+	return url;
+};
 
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
-	},
-
-	initializeQuickViewNav: function (qvUrl) {
-		// from the url of the product in the quickview
-		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
-			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
-		if (qvUrlPidParam.indexOf('pid') > 0) {
-			// if storefront urls are turned off
-			// append the pid to the url
-			qvUrl = qvUrl + qvUrlPidParam;
-		}
-
-		this.searchesultsContainer = $('#search-result-items').parent();
-		this.productLinks = this.searchesultsContainer.find('.thumb-link');
-
-		this.btnNext = $('.quickview-next');
-		this.btnPrev = $('.quickview-prev');
-
-		if (this.productLinks.length === 0) {
-			this.btnNext.hide();
-			this.btnPrev.hide();
-			return;
-		}
-
-		this.btnNext.click(this.navigateQuickview.bind(this));
-		this.btnPrev.click(this.navigateQuickview.bind(this));
-
-		var productLinksUrl = '';
-		for (var i = 0; i < this.productLinks.length; i++) {
-			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
-			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
-			if (productLinksUrlPidParam.indexOf('pid') > 0) {
-				//append the pid to the url
-				//if storefront urls are turned off
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-				productLinksUrl = productLinksUrl + productLinksUrlPidParam;
-			} else {
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-			}
-
-			if (productLinksUrl === '') {
-				productLinksUrl = this.productLinks[i].href;
-			}
-			if (qvUrl === productLinksUrl) {
-				this.productLinkIndex = i;
-			}
-		}
-
-		if (this.productLinkIndex === this.productLinks.length - 1) {
-			this.btnNext.hide();
-		}
-
-		if (this.productLinkIndex === 0) {
-			this.btnPrev.hide();
-		}
-
-		//hide the buttons on the compare page
-		if ($('.compareremovecell').length > 0) {
-			this.btnNext.hide();
-			this.btnPrev.hide();
-		}
-	},
-	navigateQuickview: function (e) {
-		e.preventDefault();
-		var button = $(e.currentTarget);
-
-		if (button.hasClass('quickview-next')) {
-			this.productLinkIndex++;
-		} else {
-			this.productLinkIndex--;
-		}
-
-		this.show({
-			url: this.productLinks[this.productLinkIndex].href,
-			source: 'quickview'
+		this.productLinks = $('#search-result-items .thumb-link').map(function (index, thumbLink) {
+			return $(thumbLink).attr('href');
 		});
 	},
 
-	// show quick view dialog and send request to the server to get the product
-	// options.source - source of the dialog i.e. search/cart
-	// options.url - product url
+	initializeQuickViewNav: function (qvUrl) {
+		var $btnNext = $('.quickview-next'),
+			$btnPrev = $('.quickview-prev');
+
+		// remove any param
+		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
+
+		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
+			return url === qvUrl;
+		});
+
+		// hide the buttons on the compare page or when there are no other products
+		if (this.productLinks.length <= 1 || $('.compareremovecell').length > 0) {
+			$btnNext.hide();
+			$btnPrev.hide();
+			return;
+		}
+
+		if (this.productLinkIndex === this.productLinks.length - 1) {
+			$btnNext.attr('disabled', 'disabled');
+		}
+		if (this.productLinkIndex === 0) {
+			$btnPrev.attr('disabled', 'disabled');
+		}
+
+		$btnNext.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(1);
+		}.bind(this));
+		$btnPrev.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(-1);
+		}.bind(this));
+	},
+
+	/**
+	 * @param {Number} step - How many products away from current product to navigate to. Negative number means navigate backward
+	 */
+	navigateQuickview: function (step) {
+		// default step to 0
+		this.productLinkIndex += (step ? step : 0);
+		var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
+		dialog.replace({
+			url: url,
+			callback: this.initializeQuickViewNav.bind(this, url)
+		});
+	},
+
+	/**
+	 * @description show quick view dialog
+	 * @param {object} options
+	 * @param {stirng} options.url - url of the product details
+	 * @param {string} options.source - source of the dialog to be appended to URL
+	 * @param {string} options.productlistid - to be appended to URL
+	 * @param {function} options.callback - callback once the dialog is opened
+	 */
 	show: function (options) {
+		var url;
 		if (!this.exists()) {
 			this.init();
 		}
-		var target = this.$container;
-		var url = options.url;
-		var source = options.source;
-		var productListId = options.productlistid || '';
-		if (source.length > 0) {
-			url = util.appendParamToURL(url, 'source', source);
-		}
-		if (productListId.length > 0) {
-			url = util.appendParamToURL(url, 'productlistid', productListId);
-		}
+		url = makeUrl(options.url, options.source, options.productlistid);
 
-		ajax.load({
-			target: target,
+		dialog.open({
+			target: this.$container,
 			url: url,
-			callback: function () {
-				dialog.create({
-					target: target,
-					options: {
-						height: 'auto',
-						width: 920,
-						modal: true,
-						dialogClass: 'quickview',
-						title: 'Product Quickview',
-						resizable: false,
-						position: 'center',
-						open: function () {
-							// allow for click outside modal to close the modal
-							$('.ui-widget-overlay').on('click', this.close.bind(this));
-							if (options.callback) { options.callback(); }
-						}.bind(this)
-					}
-				});
-				target.dialog('open');
-				this.initializeQuickViewNav(url);
-			}.bind(this)
+			options: {
+				width: 920,
+				title: 'Product Quickview',
+				open: function () {
+					this.initializeQuickViewNav(url);
+					if (typeof options.callback === 'function') { options.callback(); }
+				}.bind(this)
+			}
 		});
 	},
 	// close the quick view dialog

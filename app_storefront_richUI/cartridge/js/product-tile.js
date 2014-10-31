@@ -9,7 +9,7 @@ function initQuickViewButtons() {
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton"/>');
 		}
-		var $link = $(this).children('.thumb-link:first');
+		var $link = $(this).find('.thumb-link');
 		$qvButton.attr({
 			'href': $link.attr('href'),
 			'title': $link.attr('title')

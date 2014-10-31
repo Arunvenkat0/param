@@ -201,7 +201,7 @@ function initLoginPage() {
 				open: function () {
 					validator.init();
 					var $requestPasswordForm = $('[name$="_requestpassword"]'),
-						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]')
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
 					$($submit).on('click', function (e) {
 						if (!$requestPasswordForm.valid()) {
 							return;
