@@ -205,7 +205,8 @@ function initializeEvents() {
 		$pdpForm = $('.pdpForm'),
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list');
+		$productSetList = $('#product-set-list'),
+		$readReviewLink = $('.prSnippetLink');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
@@ -415,6 +416,10 @@ function initializeEvents() {
 		dialog.open({
 			url: $(e.target).attr('href')
 		});
+	});
+	
+	$readReviewLink.on('click', function (e) {
+		product.readReviews();
 	});
 }
 
