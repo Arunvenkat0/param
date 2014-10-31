@@ -2879,19 +2879,20 @@ function populateForm(addressID, $form) {
  * @description Initializes events for the gift registration
  */
 function initializeEvents() {
-	var $form = $('form[name$="_giftregistry"]'),
-		$beforeAddress = $form.find('fieldset[name="address-before"]'),
-		$afterAddress = $form.find('fieldset[name="address-after"]');
+	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
+		$eventAddressForm = $('form[name$="_giftregistry"]'),
+		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
+		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
 
 	$('.usepreevent').on('click', function () {
 		// filter out storefront toolkit
-		$(':input', $beforeAddress).not('[id^="ext"]').each(function () {
+		$(':input', $beforeAddress).not('[id^="ext"]').not('select[name$="_addressBeforeList"]').each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
 		});
 	});
-	$form.on('change', 'select[name$="_addressBeforeList"]', function () {
+	$eventAddressForm.on('change', 'select[name$="_addressBeforeList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $beforeAddress);
@@ -2908,6 +2909,10 @@ function initializeEvents() {
 
 	$afterAddress.on('change', 'select[name$="_country"]', function () {
 		util.updateStateOptions($afterAddress);
+	});
+
+	$eventInfoForm.on('change', 'select[name$="_country"]', function () {
+		util.updateStateOptions($eventInfoForm);
 	});
 
 	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
