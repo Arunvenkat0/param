@@ -3,6 +3,7 @@ var browserify = require('browserify'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
 	jshint = require('gulp-jshint'),
+	minimist = require('minimist'),
 	mocha = require('gulp-mocha'),
 	sass = require('gulp-sass'),
 	source = require('vinyl-source-stream'),
@@ -77,7 +78,9 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('ui-test', function () {
-	return gulp.src('test/ui.*.js', {read: false})
+	var suite = minimist(process.argv.slice(2)).suite || '';
+	console.log(suite);
+	return gulp.src('test/ui.' + suite + '*.js', {read: false})
 		.pipe(mocha({
 			reporter: 'spec',
 			timeout: 10000
