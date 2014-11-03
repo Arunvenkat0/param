@@ -3,19 +3,19 @@
 
 <isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 
-<isif condition="${isQuickView && pdict.CurrentHttpParameterMap.source.stringValue != 'cart'}">	
+<isif condition="${isQuickView && pdict.CurrentHttpParameterMap.source.stringValue != 'cart'}">
 	<div class="quick-view-navigation">
 		<button class="quickview-prev">< ${Resource.msg('global.previous','locale',null)}</button>
-		<button class="quickview-next" style="float:right">${Resource.msg('global.next','locale',null)} ></button>	
+		<button class="quickview-next" style="float:right">${Resource.msg('global.next','locale',null)} ></button>
 	</div>
-</isif>	
+</isif>
 
 <!-- dwMarker="product" dwContentID="${pdict.Product.UUID}" -->
 
 <h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
-	
+
 <div class="product-col-1 product-image-container">
-	<isinclude template="product/components/productimages"/>	
+	<isinclude template="product/components/productimages"/>
 </div>
 
 <div class="product-col-2  product-detail">
@@ -24,9 +24,9 @@
 	</div>
 	<isif condition="${!isQuickView}">
 		<div class="product-tabs">
-		
+
 			<h2 class="visually-hidden">Additional Information</h2>
-			
+
 			<isset name="vags" value="${pam.getVisibleAttributeGroups()}" scope="page"/>
 			<isset name="showAttributes" value="${false}" scope="page"/>
 			<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
@@ -38,28 +38,28 @@
 			<ul class="tabs-menu">
 				<isif condition="${! empty(pdict.Product.shortDescription) && pdict.Product.shortDescription.markup.length > 0}">
 					<li><a href="#tab1">${Resource.msg('product.tab1','product',null)}</a></li>
-				</isif>				
+				</isif>
 				<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
 					<li><a href="#tab2">${Resource.msg('product.tab2','product',null)}</a></li>
-				</isif>				
+				</isif>
 				<isif condition="${showAttributes}">
 					<li><a href="#tab3">${Resource.msg('product.tab3','product',null)}</a></li>
-				</isif>				
+				</isif>
 				<li><a href="#tab4">${Resource.msg('product.tab4','product',null)}</a></li>
 			</ul>
-			
+
 			<isif condition="${! empty(pdict.Product.shortDescription) && pdict.Product.shortDescription.markup.length > 0}">
 				<div id="tab1" class="tab-content">
 					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 					<isprint value="${pdict.Product.shortDescription}" encoding="off"/>
 				</div>
-			</isif>			
+			</isif>
 			<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
 				<div id="tab2" class="tab-content" itemprop="description">
 					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
 					<isprint value="${pdict.Product.longDescription}" encoding="off"/>
 				</div>
-			</isif>				
+			</isif>
 			<isif condition="${showAttributes}">
 				<div id="tab3" class="tab-content">
 					<a class="print-page button">${Resource.msg('global.print', 'locale', null)}</a>
