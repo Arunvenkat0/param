@@ -9,7 +9,7 @@ If you are not using the build cartridge the comments can be safely removed.
 <iscomment>the page title calculated by the app </iscomment>
 
 <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
-	<title>${pdict.CurrentPageMetaData.title} ${Resource.msg('revisioninfo.revisionnumber','revisioninfo',null)}</title>
+	<title>${pdict.CurrentPageMetaData.title} | SiteGenesis | ${Resource.msg('revisioninfo.revisionnumber','revisioninfo',null)}</title>
 <iselse/>
   <title><isprint value="${pdict.CurrentPageMetaData.title}" encoding="off" /></title>
 </isif>
@@ -47,5 +47,5 @@ If you are not using the build cartridge the comments can be safely removed.
     <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.GoogleVerificationTag}"/>" />
 </isif>
 
-<iscomment>Gather device-aware scripts</iscomment>    
+<iscomment>Gather device-aware scripts</iscomment>
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>
