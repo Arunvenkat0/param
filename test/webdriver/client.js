@@ -11,11 +11,12 @@ var client = require('webdriverio').remote({
 var toPromisify = [
 	'click',
 	'getAttribute',
+	'getTitle',
 	'waitForExist'
 ]
 
-toPromisify.forEach(function (m) {
-	client[m] = Promise.denodeify(client[m]).bind(client);
-});
+// toPromisify.forEach(function (m) {
+// 	client[m] = Promise.denodeify(client[m]).bind(client);
+// });
 
 module.exports = client;
