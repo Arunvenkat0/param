@@ -1,12 +1,31 @@
 ## Build tools
 Starting with 15.1, SiteGenesis uses [gulp](http://gulpjs.com) as its main build tool. [Grunt](http://gruntjs.com) is also supported.
 
-### Getting started with gulp
-- Install gulp globally with `npm install -g gulp`. (This assumes that you already have `npm` installed on your command line. If not, please [install node](http://nodejs.org/download/) first.)
+### Getting started
 - Pull down the latest copy of SiteGenesis. If you're reading this doc, it is likely that you already have a version of SG with the build tool config.
-- Run `npm install`. If there's an error, please try and address that first, either by Googling or [contacting us](mailto:tnguyen@demandware.com).
+- `cd` into the `sitegenesis` directory.
+- Install node modules:
+```sh
+$ npm install
+```
+This assumes that you already have `npm` installed on your command line. If not, please [install node](http://nodejs.org/download/) first.
+If you encounter an error, please try and address that first, either by Googling or [contacting us](mailto:tnguyen@demandware.com).
+- Install either `gulp` or `grunt` (see below).
 
-Now that you have gulp and its dependencies installed, you can start using it in your workflow.
+#### gulp
+Install gulp globally
+```sh
+$ npm install -g gulp
+```
+
+#### grunt
+Install the grunt command line tools
+```sh
+$ npm install -g grunt-cli
+```
+
+Now that you have gulp (or grunt) and its dependencies installed, you can start using it in your workflow.
+
 
 ### SCSS
 Before authoring SCSS, make sure to check out the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_core/cartridge/scss/README.md?at=master) in `app_storefront_core/cartridge/scss` directory.
@@ -38,7 +57,8 @@ Run code format and style validators. New code must not have any errors reported
 
 The equivalent tasks for grunt, `grunt jscs` and `grunt jshint`, are also available.
 
-### `gulp watch`
+### Watching
+#### `gulp watch`
 To make the development process easier, running `gulp watch` on the command line will automatically watch any changes in both `scss` and `js` code and run the right compilers.
 
 For JavaScript, when watching is happening, [watchify](https://github.com/substack/watchify) is used instead of browserify for faster bundling by taking advantage of caching.
