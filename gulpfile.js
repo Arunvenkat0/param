@@ -78,9 +78,12 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('ui-test', function () {
-	var suite = minimist(process.argv.slice(2)).suite || '';
-	console.log(suite);
-	return gulp.src('test/ui.' + suite + '*.js', {read: false})
+	// default option to all
+	var suite = minimist(process.argv.slice(2)).suite || '*';
+	if (suite === 'all') {
+		suite = '*';
+	}
+	return gulp.src('test/ui/' + suite + '/*.js', {read: false})
 		.pipe(mocha({
 			reporter: 'spec',
 			timeout: 10000
