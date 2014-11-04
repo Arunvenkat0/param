@@ -78,15 +78,20 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('ui-test', function () {
+	var opts = minimist(process.argv.slice(2));
 	// default option to all
-	var suite = minimist(process.argv.slice(2)).suite || '*';
+	var suite = opts.suite || '*';
 	if (suite === 'all') {
 		suite = '*';
 	}
+	// default reporter to spec
+	var reporter = opts.reporter || 'spec';
+	// default timeout to 10s
+	var timeout = opts.timeout || 10000;
 	return gulp.src('test/ui/' + suite + '/*.js', {read: false})
 		.pipe(mocha({
-			reporter: 'spec',
-			timeout: 10000
+			reporter: reporter,
+			timeout: timeout
 		}));
 });
 
