@@ -2,6 +2,16 @@
 
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
+
+	// command line arguments
+	var config = {};
+	// mocha ui tests
+	config.suite = grunt.option('suite') || '*';
+	if (config.suite === 'all') { config.suite === '*'; }
+	config.reporter = grunt.option('reporter') || 'spec';
+	config.timeout = grunt.option('timeout') || 10000;
+
+
 	grunt.initConfig({
 		watch: {
 			sass: {
@@ -61,10 +71,10 @@ module.exports = function (grunt) {
 		mochaTest: {
 			ui: {
 				options: {
-					reporter: 'spec',
-					timeout: 10000
+					reporter: config.reporter,
+					timeout: config.timeout
 				},
-				src: ['test/ui/**/*.js']
+				src: ['test/ui/' + config.suite + '/*.js']
 			}
 		}
 	});
