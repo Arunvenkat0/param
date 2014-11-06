@@ -34,7 +34,7 @@
 					</isif>
 					<div class="bonus-item-details">
 						<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
-						<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" />
+						<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 						<a class="tooltip" href="#">
 							${Resource.msg('product.promotiondetails','product',null)}
 							<div class="tooltip-content" data-layout="small">
@@ -234,7 +234,7 @@
 															<isif condition="${lineItem.quantityValue > 1 && lineItem.quantityValue != pa.quantity}">
 																<isprint value="${pa.quantity}" /> x
 															</isif>
-															<isprint value="${pa.promotion.calloutMsg}" />
+															<isprint value="${pa.promotion.calloutMsg}" encoding="off"/>
 														</div>
 													</isloop>
 
@@ -419,7 +419,7 @@
 											<span class="product-list-item">
 												<isif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 													<a href="${URLUtils.url('Wishlist-ShowOther','WishListID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.wishlistitem','checkout',null)}">
-														${Resource.msg('cart.wishlistitem','checkout',null)}
+														${Resource.msg('displayliproduct.wishlistitem','product',null)}
 													</a>
 												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 													<a href="${URLUtils.https('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
@@ -540,7 +540,7 @@
 
 								<td colspan="3" class="bonus-item-details">
 									<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
-									<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" />
+									<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
 									<a class="tooltip" href="#">
 										${Resource.msg('product.promotiondetails','product',null)}
 										<div class="tooltip-content" data-layout="small">

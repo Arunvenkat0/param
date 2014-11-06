@@ -1,4 +1,5 @@
 'use strict';
+
 var util = require('./util');
 
 var currentQuery = null,
@@ -30,7 +31,7 @@ function handleArrowKeys(keyCode) {
 	}
 
 	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	$('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
 	return true;
 }
 
@@ -39,7 +40,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		var $searchContainer = $(container),
 			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
 			$searchField = $searchForm.find('input[name="q"]'),
@@ -73,7 +74,7 @@ var searchsuggest = {
 				return;
 			}
 			// check for an ENTER or ESC
-			if(keyCode === 13 || keyCode === 27) {
+			if (keyCode === 13 || keyCode === 27) {
 				this.clearResults();
 				return;
 			}
@@ -81,9 +82,9 @@ var searchsuggest = {
 			currentQuery = $searchField.val().trim();
 
 			// no query currently running, init a update
-			if (runningQuery == null) {
+			if (runningQuery === null) {
 				runningQuery = currentQuery;
-				setTimeout('this.suggest()', delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 		}.bind(this));
 	},
@@ -92,7 +93,7 @@ var searchsuggest = {
 	 * @function
 	 * @description trigger suggest action
 	 */
-	suggest : function() {
+	suggest: function () {
 		// check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
 		// (we had a little delay)
 		if (runningQuery !== currentQuery) {
@@ -114,7 +115,8 @@ var searchsuggest = {
 		}
 
 		// build the request url
-		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery, 'legacy', 'false');
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery);
+		reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'false');
 
 		// execute server call
 		$.get(reqUrl, function (data) {
@@ -138,7 +140,7 @@ var searchsuggest = {
 			if (currentQuery !== lastQuery) {
 				// ... and execute immediately if search has changed while this server call was in transit
 				runningQuery = currentQuery;
-				setTimeout("this.suggest()", delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 			this.hideLeftPanel();
 		}.bind(this));
@@ -147,18 +149,18 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
+		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
 	},
 	/**
 	 * @function
 	 * @description
 	 */
-	hideLeftPanel : function () {
+	hideLeftPanel: function () {
 		//hide left panel if there is only a matching suggested custom phrase
-		if($('.search-suggestion-left-panel-hit').length == 1 && ($('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() == $('.search-suggestion-left-panel-hit a').text().toUpperCase())){
-			$('.search-suggestion-left-panel').css('display','none');
+		if ($('.search-suggestion-left-panel-hit').length === 1 && $('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() === $('.search-suggestion-left-panel-hit a').text().toUpperCase()) {
+			$('.search-suggestion-left-panel').css('display', 'none');
 			$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
 			$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
 		}

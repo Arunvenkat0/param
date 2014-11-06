@@ -23,6 +23,6 @@ module.exports = function () {
 		arr.sort(function (a, b) {
 			return $(a).height() - $(b).height();
 		});
-		return this.height($(arr[arr.length-1]).height());
+		return this.height($(arr[arr.length - 1]).height());
 	};
-}
+};

@@ -7,8 +7,8 @@ var ajax = require('./ajax'),
 
 var sendToFriend = {
 	init: function () {
-		var $form = $("#send-to-friend-form"),
-			$dialog = $("#send-to-friend-dialog");
+		var $form = $('#send-to-friend-form'),
+			$dialog = $('#send-to-friend-dialog');
 		util.limitCharacters();
 		$dialog.on('click', '.preview-button, .send-button, .edit-button', function (e) {
 			e.preventDefault();
@@ -22,7 +22,7 @@ var sendToFriend = {
 			}
 			$('<input/>').attr({id: 'request-type', type: 'hidden', name: $(this).attr('name'), value: $(this).attr('value')}).appendTo($form);
 			var data = $form.serialize();
-			ajax.load({url:$form.attr("action"),
+			ajax.load({url:$form.attr('action'),
 				data: data,
 				target: $dialog,
 				callback: function () {
@@ -37,11 +37,11 @@ var sendToFriend = {
 			$dialog.dialog('close');
 		});
 	},
-	initializeDialog : function (eventDelegate) {
+	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
-				target: $("#send-to-friend-dialog"),
+				target: $('#send-to-friend-dialog'),
 				options: {
 					width: 800,
 					height: 'auto',
@@ -53,7 +53,7 @@ var sendToFriend = {
 				}
 			});
 
-			var data = util.getQueryStringParams($("form.pdpForm").serialize());
+			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
@@ -63,7 +63,7 @@ var sendToFriend = {
 				url: util.ajaxUrl(url),
 				target: dlg,
 				callback: function () {
-					dlg.dialog('open');	 // open after load to ensure dialog is centered
+					dlg.dialog('open');	// open after load to ensure dialog is centered
 				}
 			});
 		});

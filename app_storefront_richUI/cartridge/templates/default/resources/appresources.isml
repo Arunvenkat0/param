@@ -11,7 +11,7 @@
 	var sitePreferences = {
 		LISTING_INFINITE_SCROLL: (Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
 		LISTING_REFINE_SORT: true,
-		LISTING_SEARCHSUGGEST_LEGACY: (Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? true : false),
+		LISTING_SEARCHSUGGEST_LEGACY: (Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? false : true),
 		STORE_PICKUP: Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
 		COOKIE_HINT: (ContentMgr.getContent('cookie_hint') && ContentMgr.getContent('cookie_hint').online) || false
 	};

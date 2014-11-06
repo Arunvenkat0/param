@@ -1,7 +1,7 @@
 'use strict';
 
-var ajax = require('../ajax'),
-	product = require('./product'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	quickview = require('../quickview'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
@@ -17,7 +17,7 @@ function populateForm(addressID, $form) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data || !data.address) {
+			if (!data || !data.address) {
 				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}
@@ -43,23 +43,25 @@ function populateForm(addressID, $form) {
  * @description Initializes events for the gift registration
  */
 function initializeEvents() {
-	var $form = $('form[name$="_giftregistry"]'),
-		$beforeAddress = $form.find('fieldset[name="address-before"]'),
-		$afterAddress = $form.find('fieldset[name="address-after"]');
+	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
+		$eventAddressForm = $('form[name$="_giftregistry"]'),
+		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
+		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
 
 	$('.usepreevent').on('click', function () {
-		$(':input', $beforeAddress).each(function () {
+		// filter out storefront toolkit
+		$(':input', $beforeAddress).not('[id^="ext"]').not('select[name$="_addressBeforeList"]').each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
 		});
-	})
-	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
+	});
+	$eventAddressForm.on('change', 'select[name$="_addressBeforeList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $beforeAddress);
 	})
-	.on('change', 'select[name$="_addressAfterList"]', function (e) {
+	.on('change', 'select[name$="_addressAfterList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $afterAddress);
@@ -73,20 +75,24 @@ function initializeEvents() {
 		util.updateStateOptions($afterAddress);
 	});
 
+	$eventInfoForm.on('change', 'select[name$="_country"]', function () {
+		util.updateStateOptions($eventInfoForm);
+	});
+
 	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
 		e.preventDefault();
 		var productListID = $('input[name=productListID]').val();
 		quickview.show({
-			url : e.target.href,
-			source : 'giftregistry',
-			productlistid : productListID
+			url: e.target.href,
+			source: 'giftregistry',
+			productlistid: productListID
 		});
 	});
 }
 
 exports.init = function () {
 	initializeEvents();
-	product.initAddToCart();
+	addToCartHandler();
 	sendToFriend.initializeDialog('.list-table-header');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };

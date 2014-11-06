@@ -35,7 +35,7 @@ function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
 	$('body')
-		.on('keydown', 'textarea[data-character-limit]', function(e) {
+		.on('keydown', 'textarea[data-character-limit]', function (e) {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length;
@@ -44,14 +44,14 @@ function initializeEvents() {
 					e.preventDefault();
 				}
 		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function(e) {
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function () {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length,
 				charsRemain = charsLimit - charsUsed;
 
-			if(charsRemain < 0) {
-				$(this).val( text.slice(0, charsRemain) );
+			if (charsRemain < 0) {
+				$(this).val(text.slice(0, charsRemain));
 				charsRemain = 0;
 			}
 
@@ -64,22 +64,25 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+	} else {
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 
 	// print handler
-	$('.print-page').on('click', function () { window.print(); return false; });
+	$('.print-page').on('click', function () {
+		window.print();
+		return false;
+	});
 
 	// add show/hide navigation elements
-	$('.secondary-navigation .toggle').click(function(){
+	$('.secondary-navigation .toggle').click(function () {
 		$(this).toggleClass('expanded').next('ul').toggle();
 	});
 
 	// add generic toggle functionality
 	$('.toggle').next('.toggle-content').hide();
-	$('.toggle').click(function(){
+	$('.toggle').click(function () {
 		$(this).toggleClass('expanded').next('.toggle-content').toggle();
 	});
 
@@ -92,8 +95,8 @@ function initializeEvents() {
 				return; // do not animate when contains non-default value
 			}
 
-			$(this).animate({ color: '#999999'}, 500, 'linear', function () {
-				$(this).val('').css('color','#333333');
+			$(this).animate({color: '#999999'}, 500, 'linear', function () {
+				$(this).val('').css('color', '#333333');
 			});
 		}).blur(function () {
 			var val = $.trim($(this.val()));
@@ -101,7 +104,7 @@ function initializeEvents() {
 				return; // do not animate when contains value
 			}
 			$(this).val(Resources.SUBSCRIBE_EMAIL_DEFAULT)
-				.css('color','#999999')
+				.css('color', '#999999')
 				.animate({color: '#333333'}, 500, 'linear');
 		});
 	}
@@ -160,9 +163,8 @@ var app = {
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
-		$.extend(page, pageContext);
+		$.extend(page, window.pageContext);
 		var ns = page.ns;
-		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}
@@ -171,9 +173,9 @@ var app = {
 
 // general extension functions
 (function () {
-	String.format = function() {
+	String.format = function () {
 		var s = arguments[0];
-		var i, len=arguments.length - 1;
+		var i, len = arguments.length - 1;
 		for (i = 0; i < len; i++) {
 			var reg = new RegExp('\\{' + i + '\\}', 'gm');
 			s = s.replace(reg, arguments[i + 1]);
@@ -190,7 +192,7 @@ $(document).ready(function () {
 },{"./components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","./cookieprivacy":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
 'use strict';
 
-var progress= require('./progress'),
+var progress = require('./progress'),
 	util = require('./util');
 
 var currentRequests = [];
@@ -206,7 +208,7 @@ var currentRequests = [];
 var getJson = function (options) {
 	options.url = util.toAbsoluteUrl(options.url);
 	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
+	if (!options.url || currentRequests[options.url]) {
 		return;
 	}
 
@@ -214,30 +216,30 @@ var getJson = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType : "json",
-		url : options.url,
-		async : (typeof options.async==="undefined" || options.async===null) ? true : options.async,
-		data : options.data || {}
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
 	})
 	// success
 	.done(function (response) {
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(response);
 		}
 	})
 	// failed
 	.fail(function (xhr, textStatus) {
-		if(textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(null);
 		}
 	})
 	// executed on success or fail
 	.always(function () {
 		// remove current request from hash
-		if(currentRequests[options.url]) {
+		if (currentRequests[options.url]) {
 			delete currentRequests[options.url];
 		}
 	});
@@ -253,7 +255,7 @@ var getJson = function (options) {
 var load = function (options) {
 	options.url = util.toAbsoluteUrl(options.url);
 	// return if no url exists or url matches a current request
-	if(!options.url || currentRequests[options.url]) {
+	if (!options.url || currentRequests[options.url]) {
 		return;
 	}
 
@@ -261,23 +263,23 @@ var load = function (options) {
 
 	// make the server call
 	$.ajax({
-		dataType : "html",
-		url : util.appendParamToURL(options.url, "format", "ajax"),
-		data : options.data
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data
 	})
 	.done(function (response) {
 		// success
-		if(options.target) {
+		if (options.target) {
 			$(options.target).empty().html(response);
 		}
-		if(options.callback) {
+		if (options.callback) {
 			options.callback(response);
 		}
 
 	})
 	.fail(function (xhr, textStatus) {
 		// failed
-		if(textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		}
 		options.callback(null, textStatus);
@@ -285,21 +287,22 @@ var load = function (options) {
 	.always(function () {
 		progress.hide();
 		// remove current request from hash
-		if(currentRequests[options.url]) {
+		if (currentRequests[options.url]) {
 			delete currentRequests[options.url];
 		}
 	});
-}
+};
 
 exports.getJson = getJson;
 exports.load = load;
+
 },{"./progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
 	dialog = require('./dialog'),
 	page = require('./page'),
-	util = require('./util')
+	util = require('./util');
 
 var selectedList = [];
 var maxItems = 1;
@@ -317,14 +320,14 @@ function getBonusProducts() {
 	var i, len;
 	for (i = 0, len = selectedList.length; i < len; i++) {
 		var p = {
-			pid : selectedList[i].pid,
-			qty : selectedList[i].qty,
-			options : {}
+			pid: selectedList[i].pid,
+			qty: selectedList[i].qty,
+			options: {}
 		};
 		var a, alen, bp = selectedList[i];
 		for (a = 0, alen = bp.options.length; a < alen; a++) {
 			var opt = bp.options[a];
-			p.options = {optionName:opt.name,optionValue:opt.value};
+			p.options = {optionName:opt.name, optionValue:opt.value};
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -336,7 +339,7 @@ function getBonusProducts() {
  * @description Updates the summary page with the selected bonus product
  */
 function updateSummary() {
-	var $bonusProductList = $('#bonus-product-list')
+	var $bonusProductList = $('#bonus-product-list');
 	if (selectedList.length === 0) {
 		$bonusProductList.find('li.selected-bonus-item').remove();
 	} else {
@@ -370,8 +373,7 @@ function updateSummary() {
 	$bonusProductList.find('.bonus-items-available').text(remain);
 	if (remain <= 0) {
 		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
-	}
-	else {
+	} else {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 	}
 }
@@ -388,7 +390,7 @@ function initializeGrid () {
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
-	cartItems.each(function() {
+	cartItems.each(function () {
 		var ci = $(this);
 		var product = {
 			uuid: ci.data('uuid'),
@@ -398,7 +400,7 @@ function initializeGrid () {
 			attributes: {}
 		};
 		var attributes = ci.find('ul.item-attributes li');
-		attributes.each(function (){
+		attributes.each(function () {
 			var li = $(this);
 			product.attributes[li.data('attributeId')] = {
 				displayName:li.children('.display-name').html(),
@@ -411,23 +413,23 @@ function initializeGrid () {
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
 	})
-	.on('change', '.input-text', function (e){
+	.on('change', '.input-text', function () {
 		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
 	.on('click', '.button-select-bonus', function (e) {
 		e.preventDefault();
-		if (selectedList.length>=maxItems) {
+		if (selectedList.length >= maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
 			$bonusProductList.find('.bonus-items-available').text('0');
 			return;
 		}
 
 		var form = $(this).closest('.bonus-product-form'),
-			detail = $(this).closest('.product-detail');
+			detail = $(this).closest('.product-detail'),
 			uuid = form.find('input[name="productUUID"]').val(),
 			qtyVal = form.find('input[name="Quantity"]').val(),
-			qty = isNaN(qtyVal) ? 1 : (+qtyVal);
+			qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
 		if (qty > maxItems) {
 			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
@@ -446,7 +448,7 @@ function initializeGrid () {
 
 		var optionSelects = form.find('.product-option');
 
-		optionSelects.each(function (idx) {
+		optionSelects.each(function () {
 			product.options.push({
 				name: this.name,
 				value: $(this).val(),
@@ -456,7 +458,7 @@ function initializeGrid () {
 		selectedList.push(product);
 		updateSummary();
 	})
-	.on('click', '.remove-link', function(e){
+	.on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		var container = $(this).closest('.selected-bonus-item');
 		if (!container.data('uuid')) { return; }
@@ -465,7 +467,7 @@ function initializeGrid () {
 		var i, len = selectedList.length;
 		for (i = 0; i < len; i++) {
 			if (selectedList[i].uuid === uuid) {
-				selectedList.splice(i,1);
+				selectedList.splice(i, 1);
 				break;
 			}
 		}
@@ -487,7 +489,7 @@ function initializeGrid () {
 			url: url,
 			data: JSON.stringify(bonusProducts)
 		})
-		.done(function (response) {
+		.done(function () {
 			// success
 			page.refresh();
 		})
@@ -510,15 +512,15 @@ var bonusProductsView = {
 	 * @function
 	 * @description Opens the bonus product quick view dialog
 	 */
-	show : function (url) {
+	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
 		dialog.create({
-			target : $bonusProduct,
-			options : {
+			target: $bonusProduct,
+			options: {
 				width: 795,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCTS
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCTS
 			}
 		});
 
@@ -529,7 +531,7 @@ var bonusProductsView = {
 			callback: function () {
 				$bonusProduct.dialog('open');
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display','none');
+				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
 			}
 		});
 
@@ -539,7 +541,7 @@ var bonusProductsView = {
 	 * @description Closes the bonus product quick view dialog
 	 */
 	close: function () {
-		$bonusProduct.dialog('close');
+		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
@@ -550,12 +552,12 @@ var bonusProductsView = {
 		if ($bonusDiscountContainer.length === 0) { return; }
 
 		dialog.create({
-			target : $bonusDiscountContainer,
-			options : {
-				height : 'auto',
-				width : 350,
-				dialogClass : 'quickview',
-				title : Resources.BONUS_PRODUCT
+			target: $bonusDiscountContainer,
+			options: {
+				height: 'auto',
+				width: 350,
+				dialogClass: 'quickview',
+				title: Resources.BONUS_PRODUCT
 			}
 		});
 		$bonusDiscountContainer.dialog('open');
@@ -567,18 +569,276 @@ var bonusProductsView = {
 			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
 				bonusDiscountLineItemUUID: uuid,
 				source: 'bonus'
-			 });
+			});
 
 			$bonusDiscountContainer.dialog('close');
 			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function (e) {
+		}.bind(this)).on('click', '.no-bonus-btn', function () {
 			$bonusDiscountContainer.dialog('close');
 		});
 	},
 };
 
 module.exports = bonusProductsView;
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js":[function(require,module,exports){
+
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
+'use strict';
+
+var page = require('./page'),
+	util = require('./util'),
+	TPromise = require('promise');
+
+var _currentCategory = '',
+	MAX_ACTIVE = 6;
+
+/**
+ * @private
+ * @function
+ * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
+ */
+function refreshContainer() {
+	var $compareContainer = $('.compare-items');
+	var $compareItems = $compareContainer.find('.compare-item');
+	var numActive = $compareItems.filter('.active').length;
+
+	if (numActive < 2) {
+		$('#compare-items-button').attr('disabled', 'disabled');
+	} else {
+		$('#compare-items-button').removeAttr('disabled');
+	}
+
+	$compareContainer.toggle(numActive > 0);
+}
+/**
+ * @private
+ * @function
+ * @description Adds an item to the compare container and refreshes it
+ */
+function addToList(data) {
+	// get the first compare-item not currently active
+	var $item = $('.compare-items .compare-item').not('.active').first(),
+		$productTile = $('#' + data.uuid);
+
+	if ($item.length === 0) {
+		if ($productTile.length > 0) {
+			$productTile.find('.compare-check')[0].checked = false;
+		}
+		window.alert(Resources.COMPARE_ADD_FAIL);
+		return;
+	}
+
+	// if already added somehow, return
+	if ($('[data-uuid="' + data.uuid + '"]').length > 0) {
+		return;
+	}
+	// set as active item
+	$item.addClass('active')
+		.attr('data-uuid', data.uuid)
+		.attr('data-itemid', data.itemid)
+		.data('uuid', data.uuid)
+		.data('itemid', data.itemid)
+		.append($(data.img).clone().addClass('compare-item-image'));
+}
+/**
+ * @private
+ * @function
+ * description Removes an item from the compare container and refreshes it
+ */
+function removeFromList($item) {
+	if ($item.length === 0) { return; }
+	// remove class, data and id from item
+	$item.removeClass('active')
+		.removeAttr('data-uuid')
+		.removeAttr('data-itemid')
+		.data('uuid', '')
+		.data('itemid', '')
+		// remove the image
+		.find('.compare-item-image').remove();
+}
+
+function addProductAjax(args) {
+	var promise = new TPromise(function (resolve, reject) {
+		$.ajax({
+			url: Urls.compareAdd,
+			data: {
+				pid: args.itemid,
+				category: _currentCategory
+			},
+			dataType: 'json',
+		}).done(function (response) {
+			if (!response || !response.success) {
+				reject(new Error(Resources.COMPARE_ADD_FAIL));
+			} else {
+				resolve(response);
+			}
+		}).fail(function (jqxhr, status, err) {
+			reject(new Error(err));
+		});
+	});
+	return promise;
+}
+
+function removeProductAjax(args) {
+	var promise = new TPromise(function (resolve, reject) {
+		$.ajax({
+			url: Urls.compareRemove,
+			data: {
+				pid: args.itemid,
+				category: _currentCategory
+			},
+			dataType: 'json'
+		}).done(function (response) {
+			if (!response || !response.success) {
+				reject(new Error(Resources.COMPARE_REMOVE_FAIL));
+			} else {
+				resolve(response);
+			}
+		}).fail(function (jqxhr, status, err) {
+			reject(new Error(err));
+		});
+	});
+	return promise;
+}
+
+function shiftImages() {
+	return new TPromise(function (resolve) {
+		var $items = $('.compare-items .compare-item');
+		$items.each(function (i, item) {
+			var $item = $(item);
+			// last item
+			if (i === $items.length - 1) {
+				return removeFromList($item);
+			}
+			var $next = $items.eq(i + 1);
+			if ($next.hasClass('active')) {
+				// remove its own image
+				$next.find('.compare-item-image').detach().appendTo($item);
+				$item.addClass('active')
+					.attr('data-uuid', $next.data('uuid'))
+					.attr('data-itemid', $next.data('itemid'))
+					.data('uuid', $next.data('uuid'))
+					.data('itemid', $next.data('itemid'));
+			}
+		});
+		resolve();
+	});
+}
+
+/**
+ * @function
+ * @description Adds product to the compare table
+ */
+function addProduct(args) {
+	var promise;
+	var $items = $('.compare-items .compare-item');
+	var $cb = $(args.cb);
+	var numActive = $items.filter('.active').length;
+	if (numActive === MAX_ACTIVE) {
+		if (!window.confirm(Resources.COMPARE_CONFIRMATION)) {
+			$cb[0].checked = false;
+			return;
+		}
+
+		// remove product using id
+		var $firstItem = $items.first();
+		promise = removeItem($firstItem).then(function () {
+			return shiftImages();
+		});
+	} else {
+		promise = TPromise.resolve(0);
+	}
+	return promise.then(function () {
+		return addProductAjax(args).then(function () {
+			addToList(args);
+			if ($cb && $cb.length > 0) { $cb[0].checked = true; }
+			refreshContainer();
+		});
+	}).then(null, function () {
+		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
+	});
+}
+
+/**
+ * @function
+ * @description Removes product from the compare table
+ * @param {object} args - the arguments object should have the following properties: itemid, uuid and cb (checkbox)
+ */
+function removeProduct(args) {
+	var $cb = args.cb ? $(args.cb) : null;
+	return removeProductAjax(args).then(function () {
+		var $item = $('[data-uuid="' + args.uuid + '"]');
+		removeFromList($item);
+		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
+		refreshContainer();
+	}, function () {
+		if ($cb && $cb.length > 0) { $cb[0].checked = true; }
+	});
+}
+
+function removeItem($item) {
+	var uuid = $item.data('uuid'),
+		$productTile = $('#' + uuid);
+	return removeProduct({
+		itemid: $item.data('itemid'),
+		uuid: uuid,
+		cb: ($productTile.length === 0) ? null : $productTile.find('.compare-check')
+	});
+}
+
+/**
+ * @private
+ * @function
+ * @description Initializes the DOM-Object of the compare container
+ */
+function initializeDom() {
+	var $compareContainer = $('.compare-items');
+	_currentCategory = $compareContainer.data('category') || '';
+	var $active = $compareContainer.find('.compare-item').filter('.active');
+	$active.each(function () {
+		var $productTile = $('#' +  $(this).data('uuid'));
+		if ($productTile.length === 0) {return;}
+		$productTile.find('.compare-check')[0].checked = true;
+	});
+	// set container state
+	refreshContainer();
+}
+
+/**
+ * @private
+ * @function
+ * @description Initializes the events on the compare container
+ */
+function initializeEvents() {
+	// add event to buttons to remove products
+	$('.compare-item').on('click', '.compare-item-remove', function () {
+		removeItem($(this).closest('.compare-item'));
+	});
+
+	// Button to go to compare page
+	$('#compare-items-button').on('click', function () {
+		page.redirect(util.appendParamToURL(Urls.compareShow, 'category', _currentCategory));
+	});
+
+	// Button to clear all compared items
+	// rely on refreshContainer to take care of hiding the container
+	$('#clear-compared-items').on('click', function () {
+		$('.compare-items .active').each(function () {
+			removeItem($(this));
+		});
+	});
+}
+
+exports.init = function () {
+	initializeDom();
+	initializeEvents();
+};
+
+exports.addProduct = addProduct;
+exports.removeProduct = removeProduct;
+
+},{"./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js":[function(require,module,exports){
+/* global dw */
+
 'use strict';
 
 /**
@@ -590,33 +850,34 @@ module.exports = bonusProductsView;
  * @param state TBD
  */
 
-function captureCarouselRecommendations(c, li, index, state) {
+function captureCarouselRecommendations(c, li) {
 	if (!dw) { return; }
 
-	$(li).find(".capture-product-id").each(function () {
+	$(li).find('.capture-product-id').each(function () {
 		dw.ac.capture({
-			id : $(this).text(),
-			type : dw.ac.EV_PRD_RECOMMENDATION
+			id: $(this).text(),
+			type: dw.ac.EV_PRD_RECOMMENDATION
 		});
 	});
 }
 
 var components = {
-	carouselSettings : {
-		scroll : 1,
+	carouselSettings: {
+		scroll: 1,
 		itemFallbackDimension: '100%',
-		itemVisibleInCallback : app.captureCarouselRecommendations
+		itemVisibleInCallback: captureCarouselRecommendations
 	},
-	init : function () {
-		setTimeout(function(){
+	init: function () {
+		setTimeout(function () {
 			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical : true}, this.carouselSettings));
+			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.carouselSettings));
 			$('#horizontal-carousel').jcarousel(this.carouselSettings);
 		}.bind(this), 1000);
 	}
 };
 
 module.exports = components;
+
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
 'use strict';
 
@@ -630,7 +891,6 @@ module.exports = function () {
 	 * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
 	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
 	 */
-	 var isPrivacyPolicyPage = $('.content-header').length !== 0 && $('.content-header').text().indexOf('Privacy Policy') !== -1;
 	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
 		// check for privacy policy page
 		if ($('.privacy-policy').length === 0) {
@@ -643,7 +903,7 @@ module.exports = function () {
 						text: Resources.I_AGREE,
 						click: function () {
 							$(this).dialog('close');
-							enable_cookies();
+							enableCookies();
 						}
 					}]
 				}
@@ -651,10 +911,10 @@ module.exports = function () {
 		}
 	} else {
 		// Otherwise, we don't need to show the asset, just enable the cookies
-		enable_cookies();
+		enableCookies();
 	}
 
-	function enable_cookies() {
+	function enableCookies() {
 		if (document.cookie.indexOf('dw=1') < 0) {
 			document.cookie = 'dw=1; path=/';
 		}
@@ -662,7 +922,7 @@ module.exports = function () {
 			document.cookie = 'dw_cookies_accepted=1; path=/';
 		}
 	}
-}
+};
 
 },{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
 'use strict';
@@ -679,14 +939,14 @@ var dialog = {
 	create: function (params) {
 		var id;
 		// options.target can be an id selector or an jquery object
-		var target = $(params.target || "#dialog-container");
+		var target = $(params.target || '#dialog-container');
 
 		// if no element found, create one
 		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === "#") {
+			if (target.selector && target.selector.charAt(0) === '#') {
 				id = target.selector.substr(1);
 			}
-			target = $("<div>").attr("id", id).addClass("dialog-content").appendTo("body");
+			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
@@ -701,29 +961,58 @@ var dialog = {
 	 */
 	open: function (params) {
 		if (!params.url || params.url.length === 0) { return; }
-
+		// close any open dialog
+		this.close();
 		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
+		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
 
 		// finally load the dialog
 		ajax.load({
 			target: this.container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog("isOpen")) {return;}
-				this.container.dialog("open");
+				if (this.container.dialog('isOpen')) { return; }
+				this.container.dialog('open');
 			}.bind(this)
 		});
 	},
 	/**
-	 * @function
-	 * @description Closes the dialog and triggers the "close" event for the dialog
+	 * @description Replace the content of current dialog
+	 * @param {object} options
+	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
+	 * @param {string} options.html - If no url property is provided, use html provided to replace
+	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
-	close: function () {
-		if(!this.container) {
+	replace: function (options) {
+		if (!this.container) {
 			return;
 		}
-		this.container.dialog("close");
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
+		if (options.url) {
+			ajax.load({
+				target: this.container,
+				url: options.url,
+				callback: function () {
+					callback();
+					if (!this.container.dialog('isOpen')) {
+						this.container.dialog('open');
+					}
+				}.bind(this)
+			});
+		} else if (options.html) {
+			this.container.empty().html(options.html);
+			callback();
+		}
+	},
+	/**
+	 * @function
+	 * @description Closes the dialog
+	 */
+	close: function () {
+		if (!this.container) {
+			return;
+		}
+		this.container.dialog('close');
 	},
 	/**
 	 * @function
@@ -731,50 +1020,49 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var form = this.container.find("form:first");
+		var $form = this.container.find('form:first');
 		// set the action
-		$("<input/>").attr({
+		$('<input/>').attr({
 			name: action,
-			type: "hidden"
-		}).appendTo(form);
-
+			type: 'hidden'
+		}).appendTo($form);
 		// serialize the form and get the post url
-		var post = form.serialize();
-		var url = form.attr("action");
-
+		var data = $form.serialize();
+		var url = $form.attr('action');
+		// make sure the server knows this is an ajax request
+		if (data.indexOf('ajax') === -1) {
+			data += '&format=ajax';
+		}
 		// post the data and replace current content with response content
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: url,
-			data: post,
-			dataType: "html",
-			success: function (data) {
-				this.container.html(data);
+			data: data,
+			dataType: 'html',
+			success: function (html) {
+				this.container.html(html);
 			}.bind(this),
-			failure: function (data) {
+			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
 	},
 	settings: {
 		autoOpen: false,
-		resizable: false,
 		bgiframe: true,
-		modal: true,
-		height: 'auto',
-		width: '800',
 		buttons: {},
-		title: '',
+		height: 'auto',
+		modal: true,
 		overlay: {
 			opacity: 0.5,
-			background: "black"
+			background: 'black'
 		},
-		/**
-		 * @function
-		 * @description The close event
-		 */
-		close: function (event, ui) {
-			$(this).dialog("destroy");
+		position: 'center',
+		resizable: false,
+		title: '',
+		width: '800',
+		close: function () {
+			$(this).dialog('destroy');
 		}
 	}
 };
@@ -794,7 +1082,7 @@ var ajax = require('./ajax'),
  */
 exports.checkBalance = function (id, callback) {
 	// load gift certificate details
-	var url = util.appendParamToURL(Urls.giftCardCheckBalance, "giftCertificateID", id);
+	var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
 
 	ajax.getJson({
 		url: url,
@@ -809,52 +1097,51 @@ var ajax = require('./ajax'),
 	minicart = require('./minicart'),
 	util = require('./util');
 
-function setAddToCartHandler(e) {
+var setAddToCartHandler = function (e) {
 	e.preventDefault();
-	var form = $(this).closest("form");
+	var form = $(this).closest('form');
 
 	var options = {
-		url : util.ajaxUrl(form.attr('action')),
-		method : 'POST',
+		url: util.ajaxUrl(form.attr('action')),
+		method: 'POST',
 		cache: false,
-		contentType : 'application/json',
-		data : form.serialize()
+		contentType: 'application/json',
+		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {
-		if( response.success ) {
+		if (response.success) {
 			ajax.load({
-				url : Urls.minicartGC,
-				data :{lineItemId : response.result.lineItemId},
-				callback : function(response){
+				url: Urls.minicartGC,
+				data: {lineItemId: response.result.lineItemId},
+				callback: function (response) {
 					minicart.show(response);
 					form.find('input,textarea').val('');
 				}
 			});
 		} else {
 			form.find('span.error').hide();
-			for( id in response.errors.FormErrors ) {
-				var error_el = $('#'+id).addClass('error').removeClass('valid').next('.error');
-				if( !error_el || error_el.length===0 ) {
-					error_el = $('<span for="'+id+'" generated="true" class="error" style=""></span>');
-					$('#'+id).after(error_el);
+			for (var id in response.errors.FormErrors) {
+				var $errorEl = $('#' + id).addClass('error').removeClass('valid').next('.error');
+				if (!$errorEl || $errorEl.length === 0) {
+					$errorEl = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
+					$('#' + id).after($errorEl);
 				}
-				error_el.text(response.errors.FormErrors[id].replace(/\\'/g,"'")).show();
+				$errorEl.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
 			}
-			console.log(JSON.stringify(response.errors));
 		}
 	}).fail(function (xhr, textStatus) {
 		// failed
-		if (textStatus === "parsererror") {
+		if (textStatus === 'parsererror') {
 			window.alert(Resources.BAD_RESPONSE);
 		} else {
 			window.alert(Resources.SERVER_CONNECTION_ERROR);
 		}
 	});
-}
+};
 
-exports.init = function(){
-	$("#AddToBasketButton").on('click', setAddToCartHandler);
-}
+exports.init = function () {
+	$('#AddToBasketButton').on('click', setAddToCartHandler);
+};
 
 },{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
 'use strict';
@@ -882,9 +1169,10 @@ module.exports = function () {
 		arr.sort(function (a, b) {
 			return $(a).height() - $(b).height();
 		});
-		return this.height($(arr[arr.length-1]).height());
+		return this.height($(arr[arr.length - 1]).height());
 	};
-}
+};
+
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
 'use strict';
 
@@ -905,7 +1193,7 @@ var timer = {
 };
 
 var minicart = {
-	init : function () {
+	init: function () {
 		this.$el = $('#mini-cart');
 		this.$content = this.$el.find('.mini-cart-content');
 
@@ -913,7 +1201,10 @@ var minicart = {
 		$productList.children().not(':first').addClass('collapsed');
 		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
 
-		$productList.toggledList({toggleClass : "collapsed", triggerSelector:".mini-cart-toggler", eventName:"click"});
+		$productList.toggledList({
+			toggleClass: 'collapsed',
+			triggerSelector: '.mini-cart-toggler',
+			eventName: 'click'});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -936,7 +1227,7 @@ var minicart = {
 	 * @description Shows the given content in the mini cart
 	 * @param {String} A HTML string with the content which will be shown
 	 */
-	show : function (html) {
+	show: function (html) {
 		this.$el.html(html);
 		util.scrollBrowser(0);
 		this.init();
@@ -947,7 +1238,7 @@ var minicart = {
 	 * @function
 	 * @description Slides down and show the contents of the mini cart
 	 */
-	slide : function () {
+	slide: function () {
 		timer.clear();
 		// show the item
 		this.$content.slideDown('slow');
@@ -959,7 +1250,7 @@ var minicart = {
 	 * @description Closes the mini cart with given delay
 	 * @param {Number} delay The delay in milliseconds
 	 */
-	close : function (delay) {
+	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
 	},
@@ -977,21 +1268,21 @@ var ajax = require('./ajax'),
 exports.init = function () {
 	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
 	$('.currency-converter').on('change', function () {
-			// request results from server
-	 		ajax.getJson({
-	 		 	url: util.appendParamsToUrl(Urls.currencyConverter , {
-	 		 		format: 'ajax',
-	 		 		currencyMnemonic: $('.currency-converter').val()
-	 		 	}),
-	 		 	callback: function(){
-	 				location.reload();
-	 		 	}
-	 		 });
+		// request results from server
+		ajax.getJson({
+			url: util.appendParamsToUrl(Urls.currencyConverter, {
+				format: 'ajax',
+				currencyMnemonic: $('.currency-converter').val()
+			}),
+			callback: function () {
+				location.reload();
+			}
+		});
 	});
 
 	//hide the feature if user is in checkout
-	if (page.title === 'Checkout'){
-		$('.mc-class').css('display','none');
+	if (page.title === 'Checkout') {
+		$('.mc-class').css('display', 'none');
 	}
 };
 
@@ -1005,10 +1296,14 @@ var page = {
 	type: '',
 	params: util.getQueryStringParams(window.location.search.substr(1)),
 	redirect: function (newURL) {
-		setTimeout('window.location.href="' + newURL + '"', 0);
+		setTimeout(function () {
+			window.location.href = newURL;
+		}, 0);
 	},
 	refresh: function () {
-		setTimeout('window.location.assign(window.location.href);', 500);
+		setTimeout(function () {
+			window.location.assign(window.location.href);
+		}, 500);
 	}
 };
 
@@ -1029,34 +1324,34 @@ var giftcert = require('../giftcert'),
  * @description Initializes the events on the address form (apply, cancel, delete)
  * @param {Element} form The form which will be initialized
  */
-function initializeAddressForm(form) {
+function initializeAddressForm() {
 	var $form = $('#edit-address-form');
 
 	$form.find('input[name="format"]').remove();
 	tooltip.init();
 	//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
 
-	$form.on('click', '.apply-button', function(e) {
+	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
 		var addressId = $form.find('input[name$="_addressid"]');
 		addressId.val(addressId.val().replace(/[^\w+-]/g, '-'));
 		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl($form.attr('action'),{format: 'ajax'});
+		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
 		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
 			data: $form.serialize() + '&' + applyName + '=x',
 			type: 'POST'
 		};
-		$.ajax(options).done(function (data){
+		$.ajax(options).done(function (data) {
 			if (typeof(data) !== 'string') {
 				if (data.success) {
 					dialog.close();
 					page.refresh();
 				} else {
-					alert(data.message);
+					window.alert(data.message);
 					return false;
 				}
 			} else {
@@ -1066,13 +1361,13 @@ function initializeAddressForm(form) {
 			}
 		});
 	})
-	.on('click', '.cancel-button, .close-button', function(e){
+	.on('click', '.cancel-button, .close-button', function (e) {
 		e.preventDefault();
 		dialog.close();
 	})
-	.on('click', '.delete-button', function(e){
+	.on('click', '.delete-button', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			var url = util.appendParamsToUrl(Urls.deleteAddress, {
 				AddressID: $form.find('#addressid').val(),
 				format: 'ajax'
@@ -1081,16 +1376,14 @@ function initializeAddressForm(form) {
 				url: url,
 				method: 'POST',
 				dataType: 'json'
-			}).done(function(data){
+			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
 					dialog.close();
 					page.refresh();
-				}
-				else if (data.message.length>0) {
-					alert(data.message);
+				} else if (data.message.length > 0) {
+					window.alert(data.message);
 					return false;
-				}
-				else {
+				} else {
 					dialog.close();
 					page.refresh();
 				}
@@ -1098,7 +1391,7 @@ function initializeAddressForm(form) {
 		}
 	});
 
-	$('select[id$="_country"]', $form).on('change', function (){
+	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
 
@@ -1139,15 +1432,15 @@ function initAddressEvents() {
 		});
 	}).on('click', '.delete', function (e) {
 		e.preventDefault();
-		if (confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
 				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
 				dataType: 'json'
-			}).done(function(data){
+			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
 					page.redirect(Urls.addressesList);
-				} else if (data.message.length>0) {
-					alert(data.message);
+				} else if (data.message.length > 0) {
+					window.alert(data.message);
 				} else {
 					page.refresh();
 				}
@@ -1188,7 +1481,7 @@ function initPaymentEvents() {
 			url: $(this).attr('action'),
 			data: data
 		})
-		.done(function (response) {
+		.done(function () {
 			page.redirect(Urls.paymentsList);
 		});
 	});
@@ -1215,7 +1508,21 @@ function initLoginPage() {
 	$('#password-reset').on('click', function (e) {
 		e.preventDefault();
 		dialog.open({
-			url: $(e.target).attr('href')
+			url: $(e.target).attr('href'),
+			options: {
+				open: function () {
+					validator.init();
+					var $requestPasswordForm = $('[name$="_requestpassword"]'),
+						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
+					$($submit).on('click', function (e) {
+						if (!$requestPasswordForm.valid()) {
+							return;
+						}
+						e.preventDefault();
+						dialog.submit($submit.attr('name'));
+					});
+				}
+			}
 		});
 	});
 }
@@ -1239,7 +1546,7 @@ var account = {
 	initCartLogin: function () {
 		initLoginPage();
 	}
-}
+};
 
 module.exports = account;
 
@@ -1248,22 +1555,22 @@ module.exports = account;
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	page = require('../page'),
+	product = require('./product'),
 	quickview = require('../quickview'),
-	storeinventory = require('../storeinventory'),
-	util = require('../util');
+	storeinventory = require('../storeinventory');
 
 /**
  * @private
  * @function
- * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry )
+ * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry)
  */
 function initializeEvents() {
 	$('#cart-table').on('click', '.item-edit-details a', function (e) {
 		e.preventDefault();
 		quickview.show({
-			url : e.target.href,
-			source : 'cart'
+			url: e.target.href,
+			source: 'cart',
+			callback: product.initializeEvents
 		});
 	})
 	.on('click', '.bonus-item-actions a', function (e) {
@@ -1277,40 +1584,15 @@ function initializeEvents() {
 	});
 }
 
-var cart = {
-	/**
-	 * @function
-	 * @description Updates the cart with new data
-	 * @param {Object} postdata An Object representing the the new or uptodate data
-	 * @param {Object} A callback function to be called
-	 */
-	update: function (postdata, callback) {
-		var url = util.ajaxUrl(Urls.addProduct);
-		$.post(url, postdata, callback || this.refresh);
-	},
-	/**
-	 * @function
-	 * @description Refreshes the cart without posting
-	 */
-	refresh: function () {
-		// refresh without posting
-		page.refresh();
-	},
-	/**
-	 * @function
-	 * @description Initializes the functionality on the cart
-	 */
-	init: function () {
-		initializeEvents();
-		if (SitePreferences.STORE_PICKUP) {
-			storeinventory.init();
-		}
-		account.initCartLogin();
+exports.init = function () {
+	initializeEvents();
+	if (SitePreferences.STORE_PICKUP) {
+		storeinventory.init();
 	}
+	account.initCartLogin();
 };
 
-module.exports = cart;
-},{"../bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
+},{"../bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","./account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1337,7 +1619,7 @@ exports.init = function () {
 	$('select[id$="_country"]', $form).on('change', function () {
 		util.updateStateOptions($form);
 	});
-}
+};
 
 },{"../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
 'use strict';
@@ -1369,11 +1651,11 @@ function setCCFields(data) {
  */
 function populateCreditCardForm(cardID) {
 	// load card details
-	var url = util.appendParamToURL(Urls.billingSelectCC, "creditCardUUID", cardID);
+	var url = util.appendParamToURL(Urls.billingSelectCC, 'creditCardUUID', cardID);
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
+			if (!data) {
 				window.alert(Resources.CC_LOAD_ERROR);
 				return false;
 			}
@@ -1399,7 +1681,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID +']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
 
 	formPrepare.validateForm();
 }
@@ -1429,7 +1711,7 @@ exports.init = function () {
 	});
 
 	// select credit card from list
-	$("#creditCardList").on('change', function () {
+	$('#creditCardList').on('change', function () {
 		var cardUUID = $(this).val();
 		if (!cardUUID) {return;}
 		populateCreditCardForm(cardUUID);
@@ -1441,10 +1723,10 @@ exports.init = function () {
 
 	$('#check-giftcert').on('click', function (e) {
 		e.preventDefault();
-		$balance = $('.balance');
+		var $balance = $('.balance');
 		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
 			var error = $balance.find('span.error');
-			if (error.length===0) {
+			if (error.length === 0) {
 				error = $('<span>').addClass('error').appendTo($balance);
 			}
 			error.html(Resources.GIFT_CERT_MISSING);
@@ -1460,7 +1742,7 @@ exports.init = function () {
 		});
 	});
 
-	$addGiftCert.on('click', function(e) {
+	$addGiftCert.on('click', function (e) {
 		e.preventDefault();
 		var code = $giftCertCode.val(),
 			$error = $checkoutForm.find('.giftcert-error');
@@ -1470,7 +1752,7 @@ exports.init = function () {
 		}
 
 		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
-		$.getJSON(url, function(data) {
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
@@ -1489,24 +1771,23 @@ exports.init = function () {
 		});
 	});
 
-	$addCoupon.on('click', function(e){
+	$addCoupon.on('click', function (e) {
 		e.preventDefault();
 		var $error = $checkoutForm.find('.coupon-error'),
 			code = $couponCode.val();
-		if (code.length===0) {
+		if (code.length === 0) {
 			$error.html(Resources.COUPON_CODE_MISSING);
 			return;
 		}
 
-		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code,format: 'ajax'});
-		$.getJSON(url, function(data) {
+		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code, format: 'ajax'});
+		$.getJSON(url, function (data) {
 			var fail = false;
 			var msg = '';
 			if (!data) {
 				msg = Resources.BAD_RESPONSE;
 				fail = true;
-			}
-			else if (!data.success) {
+			} else if (!data.success) {
 				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
 				fail = true;
 			}
@@ -1517,26 +1798,26 @@ exports.init = function () {
 
 			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
 			//this will force a page refresh to display the coupon message based on a parameter message
-			if(data.success && data.baskettotal==0){
+			if (data.success && data.baskettotal === 0) {
 				window.location.assign(Urls.billing);
 			}
 		});
 	});
 
 	// trigger events on enter
-	$couponCode.on('keydown', function(e) {
+	$couponCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addCoupon.click();
 		}
 	});
-	$giftCertCode.on('keydown', function(e) {
+	$giftCertCode.on('keydown', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
 			$addGiftCert.click();
 		}
 	});
-}
+};
 
 },{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
 'use strict';
@@ -1545,29 +1826,15 @@ var _ = require('lodash');
 
 var $form, $continue, $requiredInputs, validator;
 
-function init(opts) {
-	if (!opts.formSelector || !opts.continueSelector) {
-		throw new Error('Missing form and continue action selectors.');
-	}
-	$form = $(opts.formSelector);
-	$continue = $(opts.continueSelector);
-	validator = $form.validate();
-	$requiredInputs = $('.required', $form).find(':input');
-	validateForm();
-	// start listening
-	$requiredInputs.on('change', validateEl);
-	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
-}
-
-function hasEmptyRequired() {
+var hasEmptyRequired = function () {
 	// filter out only the visible fields
 	var requiredValues = $requiredInputs.filter(':visible').map(function () {
 		return $(this).val();
 	});
 	return _(requiredValues).contains('');
-}
+};
 
-function validateForm() {
+var validateForm = function () {
 	// only validate form when all required fields are filled to avoid
 	// throwing errors on empty form
 	if (!hasEmptyRequired()) {
@@ -1577,9 +1844,9 @@ function validateForm() {
 	} else {
 		$continue.attr('disabled', 'disabled');
 	}
-}
+};
 
-function validateEl() {
+var validateEl = function () {
 	if ($(this).val() === '') {
 		$continue.attr('disabled', 'disabled');
 	} else {
@@ -1591,7 +1858,21 @@ function validateEl() {
 			$continue.attr('disabled', 'disabled');
 		}
 	}
-}
+};
+
+var init = function (opts) {
+	if (!opts.formSelector || !opts.continueSelector) {
+		throw new Error('Missing form and continue action selectors.');
+	}
+	$form = $(opts.formSelector);
+	$continue = $(opts.continueSelector);
+	validator = $form.validate();
+	$requiredInputs = $('.required', $form).find(':input');
+	validateForm();
+	// start listening
+	$requiredInputs.on('change', validateEl);
+	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
+};
 
 exports.init = init;
 exports.validateForm = validateForm;
@@ -1624,7 +1905,7 @@ exports.init = function () {
 			$('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
 		}
 	}
-}
+};
 
 },{"./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
 'use strict';
@@ -1639,7 +1920,7 @@ var address = require('./address'),
  * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
  */
 function initMultiGiftMessageBox() {
-	$.each( $(".item-list"), function(){
+	$.each($('.item-list'), function () {
 		var $this = $(this),
 			$isGiftYes = $this.find('.js-isgiftyes'),
 			$isGiftNo = $this.find('.js-isgiftno'),
@@ -1647,15 +1928,15 @@ function initMultiGiftMessageBox() {
 
 		//handle initial load
 		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display','block');
+			$giftMessage.css('display', 'block');
 		}
 
 		//set event listeners
-		$this.on('change', function(){
+		$this.on('change', function () {
 			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display','block');
+				$giftMessage.css('display', 'block');
 			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display','none');
+				$giftMessage.css('display', 'none');
 			}
 		});
 	});
@@ -1677,7 +1958,7 @@ function addEditAddress(target) {
 		e.preventDefault();
 		var selectedAddress = $addressList.find('select').val();
 		if (selectedAddress !== 'newAddress') {
-			selectedAddress = $.grep($addressList.data('addresses'), function(add) {
+			selectedAddress = $.grep($addressList.data('addresses'), function (add) {
 				return add.UUID === selectedAddress;
 			})[0];
 			add = false;
@@ -1699,17 +1980,16 @@ function addEditAddress(target) {
 		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
 			if (!response.success) {
 				// @TODO: figure out a way to handle error on the form
-				console.log('error!');
 				return;
 			}
 			var address = response.address,
 				$shippingAddress = $(target).closest('.shippingaddress'),
 				$select = $shippingAddress.find('.select-address'),
 				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">'
-					+ ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', '
-					+ address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode
-					+ '</option>';
+				newOption = '<option value="' + address.UUID + '">' +
+					((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
+					address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
+					'</option>';
 			dialog.close();
 			if (add) {
 				$('.shippingaddress select').removeClass('no-option').append(newOption);
@@ -1718,7 +1998,7 @@ function addEditAddress(target) {
 				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
 			}
 			// if there's no previously selected option, select it
-			if (!$selected.length > 0 || $selected.val() === '') {
+			if ($selected.length === 0 || $selected.val() === '') {
 				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
 			}
 		});
@@ -1727,10 +2007,10 @@ function addEditAddress(target) {
 	//preserve the uuid of the option for the hop up form
 	if (selectedAddressUUID) {
 		//update the form with selected address
-		$addressList.find('option').each(function() {
+		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected','selected');
+				$(this).attr('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});
@@ -1743,19 +2023,19 @@ function addEditAddress(target) {
  */
 exports.init = function () {
 	initMultiGiftMessageBox();
-	if ($(".cart-row .shippingaddress .select-address").length > 0){
+	if ($('.cart-row .shippingaddress .select-address').length > 0) {
 		formPrepare.init({
 			continueSelector: '[name$="addressSelection_save"]',
 			formSelector: '[id$="multishipping_addressSelection"]'
 		});
 	}
 	$('.edit-address').on('click', 'a', function (e) {
-		dialog.open({url: this.href, options: {open: function() {
+		dialog.open({url: this.href, options: {open: function () {
 			address.init();
 			addEditAddress(e.target);
 		}}});
 	});
-}
+};
 
 },{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
 'use strict';
@@ -1773,7 +2053,7 @@ var shippingMethods;
  */
 function giftMessageBox() {
 	// show gift message box, if shipment is gift
-	$(".gift-message-text").toggle($("#is-gift-yes")[0].checked);
+	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
 }
 
 /**
@@ -1781,14 +2061,14 @@ function giftMessageBox() {
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 function updateSummary() {
-	var $summary = $("#secondary.summary");
+	var $summary = $('#secondary.summary');
 	// indicate progress
 	progress.show($summary);
 
 	// load the updated summary area
 	$summary.load(Urls.summaryRefreshURL, function () {
 		// hide edit shipping method link
-		$summary.fadeIn("fast");
+		$summary.fadeIn('fast');
 		$summary.find('.checkout-mini-cart .minishipment .header a').hide();
 		$summary.find('.order-totals-table .order-shipping .label a').hide();
 	});
@@ -1819,22 +2099,22 @@ function getShippingMethodURL(url, extraParams) {
  */
 function selectShippingMethod(shippingMethodID) {
 	// nothing entered
-	if(!shippingMethodID) {
+	if (!shippingMethodID) {
 		return;
 	}
 	// attempt to set shipping method
 	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
 			updateSummary();
-			if(!data || !data.shippingMethodID) {
-				window.alert("Couldn't select shipping method.");
+			if (!data || !data.shippingMethodID) {
+				window.alert('Couldn\'t select shipping method.');
 				return false;
 			}
 			// display promotion in UI and update the summary section,
 			// if some promotions were applied
-			$(".shippingpromotions").empty();
+			$('.shippingpromotions').empty();
 
 			// TODO the for loop below isn't doing anything?
 			// if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
@@ -1857,15 +2137,15 @@ function selectShippingMethod(shippingMethodID) {
  * the UI.
  */
 function updateShippingMethodList() {
-	var $shippingMethodList = $("#shipping-method-list");
+	var $shippingMethodList = $('#shipping-method-list');
 	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
 	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
-	 ajax.getJson({
+	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data) {
-				window.alert("Couldn't get list of applicable shipping methods.");
+			if (!data) {
+				window.alert('Couldn\'t get list of applicable shipping methods.');
 				return false;
 			}
 			if (shippingMethods && shippingMethods.toString() === data.toString()) {
@@ -1882,9 +2162,9 @@ function updateShippingMethodList() {
 			// load the shipping method form
 			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
 			$shippingMethodList.load(smlUrl, function () {
-				$shippingMethodList.fadeIn("fast");
+				$shippingMethodList.fadeIn('fast');
 				// rebind the radio buttons onclick function to a handler.
-				$shippingMethodList.find("[name$='_shippingMethodID']").click(function () {
+				$shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
 					selectShippingMethod($(this).val());
 				});
 
@@ -1906,7 +2186,7 @@ exports.init = function () {
 		continueSelector: '[name$="shippingAddress_save"]',
 		formSelector:'[id$="singleshipping_shippingAddress"]'
 	});
-	$('#is-gift-yes, #is-gift-no').on('click', function (e) {
+	$('#is-gift-yes, #is-gift-no').on('click', function () {
 		giftMessageBox();
 	});
 
@@ -1917,16 +2197,16 @@ exports.init = function () {
 
 	giftMessageBox();
 	updateShippingMethodList();
-}
+};
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
 },{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	page = require('../page'),
-	product = require('./product'),
 	productTile = require('../product-tile'),
 	quickview = require('../quickview');
 
@@ -1936,36 +2216,94 @@ var ajax = require('../ajax'),
  * @description Binds the click events to the remove-link and quick-view button
  */
 function initializeEvents() {
-	$('#compare-table').on("click", ".remove-link", function (e) {
+	$('#compare-table').on('click', '.remove-link', function (e) {
 		e.preventDefault();
 		ajax.getJson({
-			url : this.href,
-			callback : function (response) {
+			url: this.href,
+			callback: function () {
 				page.refresh();
 			}
 		});
 	})
-	.on("click", ".open-quick-view", function (e) {
+	.on('click', '.open-quick-view', function (e) {
 		e.preventDefault();
-		var form = $(this).closest("form");
+		var form = $(this).closest('form');
 		quickview.show({
-			url:form.attr("action"),
-			source:"quickview",
-			data:form.serialize()
+			url: form.attr('action'),
+			source: 'quickview',
+			data: form.serialize()
 		});
 	});
 
-	$('#compare-category-list').on("change", function () {
-		$(this).closest("form").submit();
+	$('#compare-category-list').on('change', function () {
+		$(this).closest('form').submit();
 	});
 }
 
 exports.init = function () {
 	productTile.init();
 	initializeEvents();
-	product.initAddToCart();
-}
-},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js":[function(require,module,exports){
+	addToCartHandler();
+};
+
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js":[function(require,module,exports){
+'use strict';
+
+var minicart = require('../../minicart'),
+	page = require('../../page'),
+	quickview = require('../../quickview'),
+	util = require('../../util');
+
+/**
+ * @private
+ * @function
+ * @description Event handler to handle the add to cart event
+ */
+var setAddToCartHandler = function (e) {
+	e.preventDefault();
+	var $form = $(this).closest('form');
+	var qty = $form.find('input[name="Quantity"]');
+	var isSubItem = $(this).hasClass('sub-product-item');
+	if (qty.length === 0 || isNaN(qty.val()) || parseInt(qty.val(), 10) === 0) {
+		qty.val('1');
+	}
+
+	var data = $form.serialize();
+	var url = util.ajaxUrl(Urls.addProduct);
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: data,
+		success: function (response) {
+			var $uuid = $form.find('input[name="uuid"]');
+			if ($uuid.length > 0 && $uuid.val().length > 0) {
+				page.refresh();
+			} else {
+				if (!isSubItem) {
+					quickview.close();
+				}
+				minicart.show(response);
+			}
+		}
+	});
+};
+
+/**
+ * @function
+ * @description Binds the click event to a given target for the add-to-cart handling
+ * @param {Element} target The target on which an add to cart event-handler will be set
+ */
+module.exports = function (target) {
+	if (target) {
+		target.on('click', '.add-to-cart', setAddToCartHandler);
+	} else {
+		$('.add-to-cart').on('click', setAddToCartHandler);
+	}
+};
+
+},{"../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js":[function(require,module,exports){
+'use strict';
+
 module.exports = function (data, $container) {
 	if (!data) {
 		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
@@ -2012,12 +2350,12 @@ module.exports = function (data, $container) {
 			avMsg.text(data.backOrderMsg);
 		}
 	}
-	if (data.inStockDate != '') {
+	if (data.inStockDate !== '') {
 		avMsg = avRoot.find('.in-stock-date-msg');
 		if (avMsg.length === 0) {
 			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
 		}
-		avMsg.text(String.format(Resources.IN_STOCK_DATE,data.inStockDate));
+		avMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
 		avMsg = avRoot.find('.not-available-msg');
@@ -2045,12 +2383,14 @@ module.exports = function (data, $container) {
 	}
 	avQtyMsg.text(data.backorderMsg).show();
 	*/
-}
+};
+
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
+/* global addthis */
+
 'use strict';
 
 var ajax = require('../../ajax'),
-	cart = require('../cart'),
 	components = require('../../components'),
 	dialog = require('../../dialog'),
 	minicart = require('../../minicart'),
@@ -2060,7 +2400,8 @@ var ajax = require('../../ajax'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
-	quantityEvent = require('./events/quantity');
+	quantityEvent = require('./events/quantity'),
+	addToCartHandler = require('./addToCartHandler');
 
 /**
  * @private
@@ -2108,7 +2449,7 @@ function loadRecommendations() {
  */
 function setMainImage(atts) {
 	var imgZoom = $('#pdpMain .main-image');
-	if (imgZoom.length > 0 && atts.hires && atts.hires != '' && atts.hires != 'null') {
+	if (imgZoom.length > 0 && atts.hires && atts.hires !== '' && atts.hires !== 'null') {
 		imgZoom.attr('href', atts.hires);
 	}
 
@@ -2190,7 +2531,7 @@ function replaceImages() {
  * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
  */
 function setMainImageLink() {
-	var $mainImage = $('#pdpMain .main-image')
+	var $mainImage = $('#pdpMain .main-image');
 	if (quickview.isActive() || util.isMobile()) {
 		$mainImage.removeAttr('href');
 	} else {
@@ -2252,14 +2593,15 @@ function initializeEvents() {
 		$pdpForm = $('.pdpForm'),
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list');
+		$productSetList = $('#product-set-list'),
+		$readReviewLink = $('.prSnippetLink');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
 	// add or update shopping cart line item
-	product.initAddToCart();
-	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function (e) {
+	addToCartHandler();
+	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
 			quantityEvent(data, $availabilityContainer);
@@ -2315,8 +2657,8 @@ function initializeEvents() {
 			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
 			productSet = $(this).closest('.subProduct'),
 			params = {
-				Quantity : isNaN(qty) ? '1' : qty,
-				format : 'ajax'
+				Quantity: isNaN(qty) ? '1' : qty,
+				format: 'ajax'
 			};
 		if (listid) {params.productlistid = listid;}
 		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
@@ -2329,7 +2671,7 @@ function initializeEvents() {
 			callback: function (data) {
 				target.html(data);
 				product.initAddThis();
-				product.initAddToCart();
+				addToCartHandler();
 				if (hasSwapImage) {
 					replaceImages();
 				}
@@ -2346,7 +2688,7 @@ function initializeEvents() {
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		var $this = $(this),
 			params = {},
-			hasSwapImage, qty,listid, url;
+			hasSwapImage, qty, listid, url;
 
 		e.preventDefault();
 
@@ -2365,9 +2707,9 @@ function initializeEvents() {
 		ajax.load({
 			url: url,
 			target: $('#product-content'),
-			callback: function (data) {
+			callback: function () {
 				product.initAddThis();
-				product.initAddToCart();
+				addToCartHandler();
 				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
@@ -2402,7 +2744,7 @@ function initializeEvents() {
 					$addAllToCart.removeAttr('disabled');
 					$addToCart.removeAttr('disabled'); // this may be a bundle
 				}
-				product.initAddToCart($container);
+				addToCartHandler($container);
 				tooltip.init();
 			}
 		});
@@ -2420,7 +2762,7 @@ function initializeEvents() {
 			var itemid = form.find('input[name="pid"]').val();
 
 			$.ajax({
-				dataType : 'html',
+				dataType: 'html',
 				url: addProductUrl,
 				data: form.serialize()
 			})
@@ -2463,49 +2805,26 @@ function initializeEvents() {
 			url: $(e.target).attr('href')
 		});
 	});
-}
-/**
- * @private
- * @function
- * @description Event handler to handle the add to cart event
- */
-function setAddToCartHandler(e) {
-	e.preventDefault();
-	var form = $(this).closest('form');
-	var qty = form.find('input[name="Quantity"]');
-	var isSubItem = $(this).hasClass('sub-product-item');
-	if (qty.length === 0 || isNaN(qty.val()) || parseInt(qty.val(), 10) === 0) {
-		qty.val('1');
-	}
 
-	var data = form.serialize();
-	cart.update(data, function (response) {
-		var uuid = form.find('input[name="uuid"]');
-		if (uuid.length > 0 && uuid.val().length > 0) {
-			cart.refresh();
-		}
-		else {
-			if (!isSubItem) {
-				quickview.close();
-			}
-			minicart.show(response);
-		}
+	$readReviewLink.on('click', function (e) {
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('body').scrollTop($('#tab4').offset().top);
 	});
 }
 
+
 var product = {
+	initializeEvents: initializeEvents,
 	init: function () {
 		initializeDom();
 		initializeEvents();
 		loadZoom();
-		if (SitePreferences.STORE_PICKUP){
+		if (SitePreferences.STORE_PICKUP) {
 			storeinventory.init();
 		}
 	},
-	readReviews: function(){
-		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
-	},
+
 	/**
 	 * @function
 	 * @description Gets the availability to given product and quantity
@@ -2537,31 +2856,19 @@ var product = {
 		addThisToolbox.html(addThisLinks);
 		try {
 			addthis.toolbox('.addthis_toolbox');
-		} catch(e) {
+		} catch (e) {
 			return;
-		}
-	},
-	/**
-	 * @function
-	 * @description Binds the click event to a given target for the add-to-cart handling
-	 * @param {Element} target The target on which an add to cart event-handler will be set
-	 */
-	initAddToCart: function (target) {
-		if (target) {
-			target.on('click', '.add-to-cart', setAddToCartHandler);
-		} else {
-			$('.add-to-cart').on('click', setAddToCartHandler);
 		}
 	}
 };
 
 module.exports = product;
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../cart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./events/quantity":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js","./events/quantity":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
 'use strict';
 
-var ajax = require('../ajax'),
-	product = require('./product'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	ajax = require('../ajax'),
 	quickview = require('../quickview'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
@@ -2577,7 +2884,7 @@ function populateForm(addressID, $form) {
 	ajax.getJson({
 		url: url,
 		callback: function (data) {
-			if(!data || !data.address) {
+			if (!data || !data.address) {
 				window.alert(Resources.REG_ADDR_ERROR);
 				return false;
 			}
@@ -2603,23 +2910,25 @@ function populateForm(addressID, $form) {
  * @description Initializes events for the gift registration
  */
 function initializeEvents() {
-	var $form = $('form[name$="_giftregistry"]'),
-		$beforeAddress = $form.find('fieldset[name="address-before"]'),
-		$afterAddress = $form.find('fieldset[name="address-after"]');
+	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
+		$eventAddressForm = $('form[name$="_giftregistry"]'),
+		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
+		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
 
 	$('.usepreevent').on('click', function () {
-		$(':input', $beforeAddress).each(function () {
+		// filter out storefront toolkit
+		$(':input', $beforeAddress).not('[id^="ext"]').not('select[name$="_addressBeforeList"]').each(function () {
 			var fieldName = $(this).attr('name'),
 				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
 			$afterField.val($(this).val()).trigger('change');
 		});
-	})
-	$form.on('change', 'select[name$="_addressBeforeList"]', function (e) {
+	});
+	$eventAddressForm.on('change', 'select[name$="_addressBeforeList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $beforeAddress);
 	})
-	.on('change', 'select[name$="_addressAfterList"]', function (e) {
+	.on('change', 'select[name$="_addressAfterList"]', function () {
 		var addressID = $(this).val();
 		if (addressID.length === 0) { return; }
 		populateForm(addressID, $afterAddress);
@@ -2633,28 +2942,32 @@ function initializeEvents() {
 		util.updateStateOptions($afterAddress);
 	});
 
+	$eventInfoForm.on('change', 'select[name$="_country"]', function () {
+		util.updateStateOptions($eventInfoForm);
+	});
+
 	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
 		e.preventDefault();
 		var productListID = $('input[name=productListID]').val();
 		quickview.show({
-			url : e.target.href,
-			source : 'giftregistry',
-			productlistid : productListID
+			url: e.target.href,
+			source: 'giftregistry',
+			productlistid: productListID
 		});
 	});
 }
 
 exports.init = function () {
 	initializeEvents();
-	product.initAddToCart();
+	addToCartHandler();
 	sendToFriend.initializeDialog('.list-table-header');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
 'use strict';
 
-var productCompare = require('../product-compare'),
+var compareWidget = require('../compare-widget'),
 	productTile = require('../product-tile'),
 	progress = require('../progress'),
 	util = require('../util');
@@ -2669,7 +2982,7 @@ function infiniteScroll() {
 		// switch state to 'loading'
 		// - switches state, so the above selector is only matching once
 		// - shows loading indicator
-		loadingPlaceHolder.attr('data-loading-state','loading');
+		loadingPlaceHolder.attr('data-loading-state', 'loading');
 		loadingPlaceHolder.addClass('infinite-scroll-loading');
 
 		/**
@@ -2677,8 +2990,8 @@ function infiniteScroll() {
 		 */
 		var fillEndlessScrollChunk = function (html) {
 			loadingPlaceHolder.removeClass('infinite-scroll-loading');
-			loadingPlaceHolder.attr('data-loading-state','loaded');
-			jQuery('div.search-result-content').append(html);
+			loadingPlaceHolder.attr('data-loading-state', 'loaded');
+			$('div.search-result-content').append(html);
 		};
 
 		// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
@@ -2707,7 +3020,7 @@ function infiniteScroll() {
 			});
 		}
 	}
-};
+}
 /**
  * @private
  * @function
@@ -2719,13 +3032,13 @@ function updateProductListing() {
 	var refineUrl;
 
 	if (hash.length > 0) {
-		refineUrl = window.location.pathname + "?" + hash;
+		refineUrl = window.location.pathname + '?' + hash;
 	} else {
 		return;
 	}
 	progress.show($('.search-result-content'));
 	$('#main').load(util.appendParamToURL(refineUrl, 'format', 'ajax'), function () {
-		productCompare.init();
+		compareWidget.init();
 		productTile.init();
 		progress.hide();
 	});
@@ -2743,29 +3056,29 @@ function updateProductListing() {
 function initializeEvents() {
 	var $main = $('#main');
 	// compare checked
-	$main.on('click', 'input[type="checkbox"].compare-check', function (e) {
+	$main.on('click', 'input[type="checkbox"].compare-check', function () {
 		var cb = $(this);
 		var tile = cb.closest('.product-tile');
 
-		var func = this.checked ? productCompare.addProduct : productCompare.removeProduct;
+		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
 		var itemImg = tile.find('.product-image a img').first();
 		func({
-			itemid : tile.data('itemid'),
-			uuid : tile[0].id,
-			img : itemImg,
-			cb : cb
+			itemid: tile.data('itemid'),
+			uuid: tile[0].id,
+			img: itemImg,
+			cb: cb
 		});
 
 	});
 
 	// handle toggle refinement blocks
-	$main.on('click', '.refinement h3', function (e) {
+	$main.on('click', '.refinement h3', function () {
 		$(this).toggleClass('expanded')
 		.siblings('ul').toggle();
 	});
 
 	// handle events for updating grid
-	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function (e) {
+	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function () {
 		if ($(this).parent().hasClass('unselectable')) { return; }
 		var catparent = $(this).parents('.category-refinement');
 		var folderparent = $(this).parents('.folder-refinement');
@@ -2786,7 +3099,7 @@ function initializeEvents() {
 	});
 
 	// handle events item click. append params.
-	$main.on('click', '.product-tile a:not("#quickviewbutton")', function (e) {
+	$main.on('click', '.product-tile a:not("#quickviewbutton")', function () {
 		var a = $(this);
 		// get current page refinement values
 		var wl = window.location;
@@ -2810,15 +3123,15 @@ function initializeEvents() {
 	});
 
 	// handle sorting change
-	$main.on('change', '.sort-by select', function (e) {
+	$main.on('change', '.sort-by select', function () {
 		var refineUrl = $(this).find('option:selected').val();
 		var uri = util.getUri(refineUrl);
 		window.location.hash = uri.query.substr(1);
 		return false;
 	})
-	.on('change', '.items-per-page select', function (e) {
+	.on('change', '.items-per-page select', function () {
 		var refineUrl = $(this).find('option:selected').val();
-		if (refineUrl == 'INFINITE_SCROLL') {
+		if (refineUrl === 'INFINITE_SCROLL') {
 			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
 		} else {
 			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
@@ -2835,23 +3148,23 @@ function initializeEvents() {
 }
 
 exports.init = function () {
-	productCompare.init();
+	compareWidget.init();
 	if (SitePreferences.LISTING_INFINITE_SCROLL) {
 		$(window).on('scroll', infiniteScroll);
 	}
 	productTile.init();
 	initializeEvents();
-}
+};
 
-},{"../product-compare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-compare.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
-' use strict';
+},{"../compare-widget":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
+'use strict';
 
 /**
  * @function
  * @description Triggers the scroll event on a carousel element
  * @param {Object} carousel
  */
-function slideCarousel_initCallback(carousel) {
+function slideCarouselInitCallback(carousel) {
 	// create navigation for slideshow
 	var numSlides = $('#homepage-slider li').size();
 	var slideShowNav = '<div class="jcarousel-control">';
@@ -2861,7 +3174,7 @@ function slideCarousel_initCallback(carousel) {
 	slideShowNav = slideShowNav + '</div>';
 	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
 
-	$('.jcarousel-control a').bind('click', function() {
+	$('.jcarousel-control a').bind('click', function () {
 		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
 		return false;
 	});
@@ -2877,9 +3190,9 @@ function slideCarousel_initCallback(carousel) {
  * @param {Number} idx Index of the item which should be activated
  * @param {Object} state --  necessity needs TBD!
  */
-function slideCarousel_itemVisible(carousel, item, idx, state) {
+function slideCarouselItemVisible(carousel, item, idx) {
 	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-'+idx).addClass('active');
+	$('.jcarousel-control').find('.link-' + idx).addClass('active');
 }
 exports.init = function () {
 	$('#homepage-slider').jcarousel({
@@ -2888,8 +3201,8 @@ exports.init = function () {
 		buttonNextHTML: null,
 		buttonPrevHTML: null,
 		itemFallbackDimension: '100%',
-		initCallback: slideCarousel_initCallback,
-		itemFirstInCallback: slideCarousel_itemVisible
+		initCallback: slideCarouselInitCallback,
+		itemFirstInCallback: slideCarouselItemVisible
 	});
 };
 
@@ -2904,310 +3217,42 @@ exports.init = function () {
 			url: $(e.target).attr('href')
 		});
 	});
-}
+};
 
 },{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
 'use strict';
 
-var page = require('../page'),
-	product = require('./product'),
+var addToCartHandler = require('./product/addToCartHandler'),
+	page = require('../page'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
 
 exports.init = function () {
-	product.initAddToCart();
-	sendToFriend.initializeDialog(".list-table-header");
+	addToCartHandler();
+	sendToFriend.initializeDialog('.list-table-header');
 	$('#editAddress').on('change', function () {
-		page.redirect(util.appendParamToURL(Urls.wishlistAddress, "AddressID", $(this).val()));
+		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});
 
 	//add js logic to remove the , from the qty feild to pass regex expression on client side
 	$('.option-quantity-desired input').on('focusout', function () {
-		$(this).val($(this).val().replace(',',''));
+		$(this).val($(this).val().replace(',', ''));
 	});
 };
 
-},{"../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-compare.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('./ajax'),
-	page = require('./page'),
-	util = require('./util'),
-	Promise = require('promise');
-
-var _currentCategory = '',
-	MAX_ACTIVE = 6;
-
-/**
- * @private
- * @function
- * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
- */
-function refreshContainer() {
-	var $compareContainer = $('#compare-items');
-	var $compareItems = $compareContainer.find('.compare-item');
-	var numActive = $compareItems.filter('.active').length;
-
-	if (numActive < 2) {
-		$('#compare-items-button').attr('disabled', 'disabled');
-	} else {
-		$('#compare-items-button').removeAttr('disabled');
-	}
-
-	// update list with sequential classes for ui targeting
-
-	for (var i = 0; i < $compareItems.length; i++) {
-		$compareItems.removeClass('compare-item-' + i);
-		$compareItems.eq(i).addClass('compare-item-' + i);
-	}
-
-	$compareContainer.toggle(numActive > 0);
-
-}
-/**
- * @private
- * @function
- * @description Adds an item to the compare container and refreshes it
- */
-function addToList(data) {
-	// get the first compare-item not currently active
-	var $item = $('#compare-items').find('.compare-item').not('.active').first(),
-		$productTile = $('#' + data.uuid);
-
-	if ($item.length === 0) {
-		if ($productTile.length > 0) {
-			$productTile.find('.compare-check')[0].checked = false;
-		}
-		window.alert(Resources.COMPARE_ADD_FAIL)
-		return;
-	} // safety only
-
-	// if already added somehow, return
-	if ($('[data-uuid="' + data.uuid + '"]').length > 0) {
-		return;
-	}
-	// set as active item
-	$item.addClass('active')
-		.attr('data-uuid', data.uuid)
-		.data('itemid', data.itemid);
-
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: $(data.img).attr('src'),
-			alt: $(data.img).attr('alt')
-		});
-
-	// refresh container state
-	refreshContainer();
-
-	if ($productTile.length === 0) { return; }
-
-	// ensure that the associated checkbox is checked
-	$productTile.find('.compare-check')[0].checked = true;
-}
-/**
- * @private
- * @function
- * description Removes an item from the compare container and refreshes it
- */
-function removeFromList(uuid) {
-	var $item = $('[data-uuid="' + uuid + '"]');
-	if ($item.length === 0) { return; }
-
-	// replace the item image
-	$item.children('.compareproduct').first()
-		.attr({
-			src: Urls.compareEmptyImage,
-			alt: Resources.EMPTY_IMG_ALT
-		});
-
-	// remove class, data and id from item
-	$item.removeClass('active')
-		.removeAttr('data-uuid')
-		.removeAttr('data-itemid')
-		.data('uuid', '')
-		.data('itemid', '');
-
-	// use clone to prevent image flash when removing item from list
-	var cloneItem = $item.clone();
-	$item.remove();
-	cloneItem.appendTo($('#compare-items-panel'));
-	refreshContainer();
-
-	// ensure that the associated checkbox is not checked
-	var $productTile = $('#' + uuid);
-	if ($productTile.length === 0 ) {return;}
-	$productTile.find('.compare-check')[0].checked = false;
-}
-
-function addProductAjax(args) {
-	var promise = new Promise(function (resolve, reject) {
-		$.ajax({
-			url: Urls.compareAdd,
-			data: {
-				pid: args.itemid,
-				category: _currentCategory
-			},
-			dataType: 'json',
-		}).done(function (response) {
-			if (!response || !response.success) {
-				reject(new Error(Resources.COMPARE_ADD_FAIL));
-			} else {
-				resolve(response);
-			}
-		}).fail(function (jqxhr, status, err) {
-			reject(new Error(err));
-		})
-	});
-	return promise;
-}
-
-/**
- * @function
- * @description Adds product to the compare table
- */
-function addProduct(args) {
-	var promise;
-	var $items = $('#compare-items').find('.compare-item');
-	var $cb = $(args.cb);
-	var numActive = $items.filter('.active').length;
-	if (numActive === MAX_ACTIVE) {
-		if (!window.confirm(Resources.COMPARE_CONFIRMATION)) {
-			$cb[0].checked = false;
-			return;
-		}
-
-		// remove product using id
-		var $item = $items.first();
-		var uuid = $item.data('uuid');
-		promise = removeProduct({
-			itemid: item.data('itemid'),
-			uuid: uuid,
-			cb: $('#' + uuid).find('.compare-check')
-		});
-	} else {
-		promise = Promise.resolve(0);
-	}
-	return promise.then(function () {
-		refreshContainer();
-		return addProductAjax(args).then(function () {
-			addToList(args);
-		});
-	}).then(null, function (err) {
-		if ($cb && $cb.length > 0) {$cb[0].checked = false;}
-		window.alert(err.message);
-	});
-}
-
-/**
- * @function
- * @description Removes product from the compare table
- */
-function removeProduct(args) {
-	if (!args.itemid) {return;}
-	var $cb = args.cb ? $(args.cb) : null;
-	var promise = new Promise(function (resolve, reject) {
-		$.ajax({
-			url: Urls.compareRemove,
-			data: {
-				pid: args.itemid,
-				category: _currentCategory
-			},
-			dataType: 'json'
-		}).done(function (response) {
-			if (!response || !response.success) {
-				reject(new Error(Resources.COMPARE_REMOVE_FAIL));
-			} else {
-				resolve(response);
-			}
-		}).fail(function (jqxhr, status, err) {
-			reject(new Error(err));
-		});
-	});
-	return promise.then(function () {
-		removeFromList(args.uuid);
-	}, function (err) {
-		if ($cb && $cb.length > 0) {$cb[0].checked = true;}
-		window.alert(err.message);
-	});
-}
-
-function removeItem($item) {
-	var uuid = $item.data('uuid'),
-		$productTile = $('#' + uuid);
-	removeProduct({
-		itemid: $item.data('itemid'),
-		uuid: uuid,
-		cb: ($productTile.length === 0) ? null : $productTile.find('.compare-check')
-	});
-	refreshContainer();
-}
-
-/**
- * @private
- * @function
- * @description Initializes the DOM-Object of the compare container
- */
-function initializeDom() {
-	var $compareContainer = $('#compare-items');
-	_currentCategory = $compareContainer.data('category') || '';
-	var $active = $compareContainer.find('.compare-item').filter('.active');
-	$active.each(function () {
-		var $proudctTile = $('#' +  $(this).data('uuid'));
-		if ($productTile.length === 0) {return;}
-		$productTile.find('.compare-check')[0].checked = true;
-	});
-	// set container state
-	refreshContainer();
-}
-
-/**
- * @private
- * @function
- * @description Initializes the events on the compare container
- */
-function initializeEvents() {
-	// add event to buttons to remove products
-	$('.compare-item-remove').on('click', function (e) {
-		removeItem($(this).closest('.compare-item'));
-	});
-
-	// Button to go to compare page
-	$('#compare-items-button').on('click', function () {
-		page.redirect(util.appendParamToURL(Urls.compareShow, 'category', _currentCategory));
-	});
-
-	// Button to clear all compared items
-	// rely on refreshContainer to take care of hiding the container
-	$('#clear-compared-items').on('click', function () {
-		$('#compare-items .active').each(function () {
-			removeItem($(this));
-		});
-	});
-}
-
-exports.init = function () {
-	initializeDom();
-	initializeEvents();
-}
-
-exports.addProduct = addProduct;
-exports.removeProduct = removeProduct;
-
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
+},{"../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCartHandler":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCartHandler.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
 'use strict';
 
 var product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
-	$('.tiles-container .product-image').on('mouseenter', function (e) {
+	$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
 			$qvButton = $('<a id="quickviewbutton"/>');
 		}
-		var $link = $(this).children('.thumb-link:first');
+		var $link = $(this).find('.thumb-link');
 		$qvButton.attr({
 			'href': $link.attr('href'),
 			'title': $link.attr('title')
@@ -3234,45 +3279,45 @@ function initializeEvents() {
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
-		var $tile = $(this).closest(".grid-tile"),
-			$thumb = $tile.find(".product-image a.thumb-link img").filter(":first"),
-			data = $thumb.data("current");
+		var $tile = $(this).closest('.product-tile'),
+			$thumb = $tile.find('.product-image .thumb-link img').eq(0),
+			data = $thumb.data('current');
 
 		$thumb.attr({
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		});
 	});
 	$('.swatch-list .swatch').on('click', function (e) {
 		e.preventDefault();
 		if ($(this).hasClass('selected')) { return; }
 
-		var $tile = $(this).closest('.grid-tile');
+		var $tile = $(this).closest('.product-tile');
 		$(this).closest('.swatch-list').find('.swatch.selected').removeClass('selected');
 		$(this).addClass('selected');
 		$tile.find('.thumb-link').attr('href', $(this).attr('href'));
 		$tile.find('name-link').attr('href', $(this).attr('href'));
 
 		var data = $(this).children('img').filter(':first').data('thumb');
-		var $thumb = $tile.find('.product-image .thumb-link img').filter(':first');
+		var $thumb = $tile.find('.product-image .thumb-link img').eq(0);
 		var currentAttrs = {
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		};
 		$thumb.attr(currentAttrs);
 		$thumb.data('current', currentAttrs);
 	}).on('mouseenter', function () {
 		// get current thumb details
-		var $tile = $(this).closest('.grid-tile'),
-			$thumb = $tile.find('.product-image .thumb-link img').filter(':first'),
+		var $tile = $(this).closest('.product-tile'),
+			$thumb = $tile.find('.product-image .thumb-link img').eq(0),
 			data = $(this).children('img').filter(':first').data('thumb'),
 			current = $thumb.data('current');
 
 		// If this is the first time, then record the current img
 		if (!current) {
-			$thumb.data('current',{
+			$thumb.data('current', {
 				src: $thumb[0].src,
 				alt: $thumb[0].alt,
 				title: $thumb[0].title
@@ -3281,20 +3326,20 @@ function initializeEvents() {
 
 		// Set the tile image to the values provided on the swatch data attributes
 		$thumb.attr({
-			src : data.src,
-			alt : data.alt,
-			title : data.title
+			src: data.src,
+			alt: data.alt,
+			title: data.title
 		});
 	});
 }
 
 
 exports.init = function () {
-	var $tiles = $('.tiles-container').find(".product-tile");
-	if ($tiles.length===0) { return; }
+	var $tiles = $('.tiles-container .product-tile');
+	if ($tiles.length === 0) { return; }
 	$tiles.syncHeight()
 		.each(function (idx) {
-			$(this).data("idx",idx);
+			$(this).data('idx', idx);
 		});
 	initializeEvents();
 };
@@ -3310,12 +3355,12 @@ var $loader;
  * @param {Element} container The Element on top of which the AJAX-Loader will be shown
  */
 var show = function (container) {
-	var target = (!container || $(container).length === 0) ? $("body") : $(container);
-	$loader = $loader || $(".loader");
+	var target = (!container || $(container).length === 0) ? $('body') : $(container);
+	$loader = $loader || $('.loader');
 
 	if ($loader.lengt === 0) {
-		$loader = $("<div/>").addClass("loader")
-			.append($("<div/>").addClass("loader-indicator"), $("<div/>").addClass("loader-bg"));
+		$loader = $('<div/>').addClass('loader')
+			.append($('<div/>').addClass('loader-indicator'), $('<div/>').addClass('loader-bg'));
 	}
 	return $loader.appendTo(target).show();
 };
@@ -3324,8 +3369,8 @@ var show = function (container) {
  * @description Hides an AJAX-loader
  */
 var hide = function () {
-	if ($loader) { 
-		$loader.hide(); 
+	if ($loader) {
+		$loader.hide();
 	}
 };
 
@@ -3335,157 +3380,124 @@ exports.hide = hide;
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
-	progress = require('./progress'),
-	util = require('./util');
+var dialog = require('./dialog'),
+	util = require('./util'),
+	_ = require('lodash');
+
+
+var makeUrl = function (url, source, productListID) {
+	if (source) {
+		url = util.appendParamToURL(url, 'source', source);
+	}
+	if (productListID) {
+		url = util.appendParamToURL(url, 'productlistid', productListID);
+	}
+	return url;
+};
 
 var quickview = {
-	init : function () {
+	init: function () {
 		if (!this.exists()) {
 			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
 		}
+		this.productLinks = $('#search-result-items .thumb-link').map(function (index, thumbLink) {
+			return $(thumbLink).attr('href');
+		});
 	},
 
-	initializeQuickViewNav : function(qvUrl) {
-		// from the url of the product in the quickview
-		var qvUrlTail = qvUrl.substring(qvUrl.indexOf('?')),
-			qvUrlPidParam = qvUrlTail.substring(0, qvUrlTail.indexOf('&'));
+	initializeQuickViewNav: function (qvUrl) {
+		var $btnNext = $('.quickview-next'),
+			$btnPrev = $('.quickview-prev');
+
+		// remove any param
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
 
-		if (qvUrlPidParam.indexOf('pid') > 0){
-			// if storefront urls are turned off
-			// append the pid to the url
-			qvUrl = qvUrl + qvUrlPidParam;
-		}
+		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
+			return url === qvUrl;
+		});
 
-		this.searchesultsContainer = $('#search-result-items').parent();
-		this.productLinks = this.searchesultsContainer.find('.thumb-link');
-
-		this.btnNext = $('.quickview-next');
-		this.btnPrev = $('.quickview-prev');
-
-		if (this.productLinks.length === 0) {
-			this.btnNext.hide();
-			this.btnPrev.hide();
+		// hide the buttons on the compare page or when there are no other products
+		if (this.productLinks.length <= 1 || $('.compareremovecell').length > 0) {
+			$btnNext.hide();
+			$btnPrev.hide();
 			return;
 		}
 
-		this.btnNext.click(this.navigateQuickview.bind(this));
-		this.btnPrev.click(this.navigateQuickview.bind(this));
-
-		var productLinksUrl = '';
-		for (var i = 0; i < this.productLinks.length; i++) {
-			var productLinksUrlTail = this.productLinks[i].href.substring(this.productLinks[i].href.indexOf('?'));
-			var productLinksUrlPidParam = productLinksUrlTail.substring(0, qvUrlTail.indexOf('&'));
-			if (productLinksUrlPidParam.indexOf('pid') > 0){
-				//append the pid to the url
-				//if storefront urls are turned off
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-				productLinksUrl = productLinksUrl + productLinksUrlPidParam;
-			} else {
-				productLinksUrl = this.productLinks[i].href.substring(0, this.productLinks[i].href.indexOf('?'));
-			}
-
-			if (productLinksUrl == ''){
-				productLinksUrl = this.productLinks[i].href;
-			}
-			if (qvUrl == productLinksUrl) {
-				this.productLinkIndex = i;
-			}
+		if (this.productLinkIndex === this.productLinks.length - 1) {
+			$btnNext.attr('disabled', 'disabled');
+		}
+		if (this.productLinkIndex === 0) {
+			$btnPrev.attr('disabled', 'disabled');
 		}
 
-		if (this.productLinkIndex == this.productLinks.length - 1) {
-			this.btnNext.hide();
-		}
-
-		if (this.productLinkIndex == 0) {
-			this.btnPrev.hide();
-		}
-
-		//hide the buttons on the compare page
-		if ($('.compareremovecell').length > 0){
-			this.btnNext.hide();
-			this.btnPrev.hide();
-		}
+		$btnNext.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(1);
+		}.bind(this));
+		$btnPrev.on('click', function (e) {
+			e.preventDefault();
+			this.navigateQuickview(-1);
+		}.bind(this));
 	},
-	navigateQuickview : function (e) {
-		e.preventDefault();
-		var button = $(e.currentTarget);
 
-		if (button.hasClass('quickview-next')) {
-			this.productLinkIndex++;
-		} else {
-			this.productLinkIndex--;
-		}
-
-		this.show({
-			url : this.productLinks[this.productLinkIndex].href,
-			source : 'quickview'
+	/**
+	 * @param {Number} step - How many products away from current product to navigate to. Negative number means navigate backward
+	 */
+	navigateQuickview: function (step) {
+		// default step to 0
+		this.productLinkIndex += (step ? step : 0);
+		var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
+		dialog.replace({
+			url: url,
+			callback: this.initializeQuickViewNav.bind(this, url)
 		});
 	},
 
-	// show quick view dialog and send request to the server to get the product
-	// options.source - source of the dialog i.e. search/cart
-	// options.url - product url
-	show : function (options) {
+	/**
+	 * @description show quick view dialog
+	 * @param {object} options
+	 * @param {stirng} options.url - url of the product details
+	 * @param {string} options.source - source of the dialog to be appended to URL
+	 * @param {string} options.productlistid - to be appended to URL
+	 * @param {function} options.callback - callback once the dialog is opened
+	 */
+	show: function (options) {
+		var url;
 		if (!this.exists()) {
 			this.init();
 		}
-		var that = this;
-		var target = this.$container;
-		var url = options.url;
-		var source = options.source;
-		var productListId = options.productlistid || '';
-		if (source.length > 0) {
-			url = util.appendParamToURL(url, 'source', source);
-		}
-		if (productListId.length > 0) {
-			url = util.appendParamToURL(url, 'productlistid', productListId)
-		}
+		url = makeUrl(options.url, options.source, options.productlistid);
 
-		ajax.load({
-			target: target,
+		dialog.open({
+			target: this.$container,
 			url: url,
-			callback: function () {
-				dialog.create({
-					target: target,
-					options: {
-						height: 'auto',
-						width: 920,
-						modal: true,
-						dialogClass: 'quickview',
-						title: 'Product Quickview',
-						resizable: false,
-						position: 'center',
-						open: function() {
-							// allow for click outside modal to close the modal
-							$('.ui-widget-overlay').on('click', this.close.bind(this));
-							if (options.callback) options.callback();
-						}.bind(this)
-					}
-				});
-				target.dialog('open');
-				this.initializeQuickViewNav(url);
-			}.bind(this)
+			options: {
+				width: 920,
+				title: 'Product Quickview',
+				open: function () {
+					this.initializeQuickViewNav(url);
+					if (typeof options.callback === 'function') { options.callback(); }
+				}.bind(this)
+			}
 		});
 	},
 	// close the quick view dialog
-	close : function () {
+	close: function () {
 		if (this.exists()) {
 			this.$container.dialog('close').empty();
 		}
 	},
-	exists : function () {
+	exists: function () {
 		return this.$container && (this.$container.length > 0);
 	},
-	isActive : function () {
+	isActive: function () {
 		return this.exists() && (this.$container.children.length > 0);
 	}
 };
 
 module.exports = quickview;
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
+
+},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -3513,6 +3525,7 @@ exports.init = initializeEvents;
 
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
 'use strict';
+
 var util = require('./util');
 
 var currentQuery = null,
@@ -3544,7 +3557,7 @@ function handleArrowKeys(keyCode) {
 	}
 
 	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+	$('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
 	return true;
 }
 
@@ -3553,7 +3566,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		var $searchContainer = $(container),
 			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
 			$searchField = $searchForm.find('input[name="q"]'),
@@ -3587,7 +3600,7 @@ var searchsuggest = {
 				return;
 			}
 			// check for an ENTER or ESC
-			if(keyCode === 13 || keyCode === 27) {
+			if (keyCode === 13 || keyCode === 27) {
 				this.clearResults();
 				return;
 			}
@@ -3595,9 +3608,9 @@ var searchsuggest = {
 			currentQuery = $searchField.val().trim();
 
 			// no query currently running, init a update
-			if (runningQuery == null) {
+			if (runningQuery === null) {
 				runningQuery = currentQuery;
-				setTimeout('this.suggest()', delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 		}.bind(this));
 	},
@@ -3606,7 +3619,7 @@ var searchsuggest = {
 	 * @function
 	 * @description trigger suggest action
 	 */
-	suggest : function() {
+	suggest: function () {
 		// check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
 		// (we had a little delay)
 		if (runningQuery !== currentQuery) {
@@ -3628,7 +3641,8 @@ var searchsuggest = {
 		}
 
 		// build the request url
-		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery, 'legacy', 'false');
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery);
+		reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'false');
 
 		// execute server call
 		$.get(reqUrl, function (data) {
@@ -3652,7 +3666,7 @@ var searchsuggest = {
 			if (currentQuery !== lastQuery) {
 				// ... and execute immediately if search has changed while this server call was in transit
 				runningQuery = currentQuery;
-				setTimeout("this.suggest()", delay);
+				setTimeout(this.suggest.bind(this), delay);
 			}
 			this.hideLeftPanel();
 		}.bind(this));
@@ -3661,18 +3675,18 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function() {$resultsContainer.empty()});
+		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
 	},
 	/**
 	 * @function
 	 * @description
 	 */
-	hideLeftPanel : function () {
+	hideLeftPanel: function () {
 		//hide left panel if there is only a matching suggested custom phrase
-		if($('.search-suggestion-left-panel-hit').length == 1 && ($('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() == $('.search-suggestion-left-panel-hit a').text().toUpperCase())){
-			$('.search-suggestion-left-panel').css('display','none');
+		if ($('.search-suggestion-left-panel-hit').length === 1 && $('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() === $('.search-suggestion-left-panel-hit a').text().toUpperCase()) {
+			$('.search-suggestion-left-panel').css('display', 'none');
 			$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
 			$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
 		}
@@ -3680,6 +3694,7 @@ var searchsuggest = {
 };
 
 module.exports = searchsuggest;
+
 },{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
 'use strict';
 
@@ -3725,7 +3740,7 @@ var searchsuggest = {
 	 * @function
 	 * @description Configures parameters and required object instances
 	 */
-	init : function (container, defaultValue) {
+	init: function (container, defaultValue) {
 		// initialize vars
 		$searchContainer = $(container);
 		$searchForm = $searchContainer.find('form[name="simpleSearch"]');
@@ -3737,7 +3752,7 @@ var searchsuggest = {
 
 		// on focus listener (clear default value)
 		$searchField.focus(function () {
-			if(!$resultsContainer) {
+			if (!$resultsContainer) {
 				// create results container if needed
 				$resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
 					'top': $searchContainer[0].offsetHeight,
@@ -3745,7 +3760,7 @@ var searchsuggest = {
 					'width': $searchField[0].offsetWidth
 				});
 			}
-			if($searchField.val() === fieldDefault) {
+			if ($searchField.val() === fieldDefault) {
 				$searchField.val('');
 			}
 		});
@@ -3772,8 +3787,8 @@ var searchsuggest = {
 			var lastVal = $searchField.val();
 
 			// if is text, call with delay
-			setTimeout(function () { 
-				this.suggest(lastVal); 
+			setTimeout(function () {
+				this.suggest(lastVal);
 			}.bind(this), delay);
 		}.bind(this));
 		// on submit we do not submit the form, but change the window location
@@ -3782,7 +3797,7 @@ var searchsuggest = {
 		$searchForm.submit(function (e) {
 			e.preventDefault();
 			var searchTerm = $searchField.val();
-			if(searchTerm === fieldDefault || searchTerm.length === 0) {
+			if (searchTerm === fieldDefault || searchTerm.length === 0) {
 				return false;
 			}
 			window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
@@ -3794,12 +3809,12 @@ var searchsuggest = {
 	 * @description trigger suggest action
 	 * @param lastValue
 	 */
-	suggest : function (lastValue) {
+	suggest: function (lastValue) {
 		// get the field value
 		var part = $searchField.val();
 
 		// if it's empty clear the resuts box and return
-		if(part.length === 0) {
+		if (part.length === 0) {
 			this.clearResults();
 			return;
 		}
@@ -3808,20 +3823,20 @@ var searchsuggest = {
 		// or there were no results in the last call and the query length
 		// is longer than the last query length, return
 		// #TODO: improve this to look at the query value and length
-		if((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
+		if ((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
 			return;
 		}
 		qlen = part.length;
 
 		// build the request url
-		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part, 'legacy', 'true');
+		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part);
+		reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'true');
 
 		// get remote data as JSON
 		$.getJSON(reqUrl, function (data) {
 			// get the total of results
 			var suggestions = data,
-				ansLength = suggestions.length,
-				listTotal = ansLength;
+				ansLength = suggestions.length;
 
 			// if there are results populate the results div
 			if (ansLength === 0) {
@@ -3830,8 +3845,8 @@ var searchsuggest = {
 			}
 			suggestionsJson = suggestions;
 			var html = '';
-			for (var i=0; i < ansLength; i++) {
-				html+='<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
+			for (var i = 0; i < ansLength; i++) {
+				html += '<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
 			}
 
 			// update the results div
@@ -3849,13 +3864,14 @@ var searchsuggest = {
 	 * @function
 	 * @description
 	 */
-	clearResults : function () {
+	clearResults: function () {
 		if (!$resultsContainer) { return; }
 		$resultsContainer.empty().hide();
 	}
 };
 
 module.exports = searchsuggest;
+
 },{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
 'use strict';
 
@@ -3866,8 +3882,8 @@ var ajax = require('./ajax'),
 
 var sendToFriend = {
 	init: function () {
-		var $form = $("#send-to-friend-form"),
-			$dialog = $("#send-to-friend-dialog");
+		var $form = $('#send-to-friend-form'),
+			$dialog = $('#send-to-friend-dialog');
 		util.limitCharacters();
 		$dialog.on('click', '.preview-button, .send-button, .edit-button', function (e) {
 			e.preventDefault();
@@ -3881,7 +3897,7 @@ var sendToFriend = {
 			}
 			$('<input/>').attr({id: 'request-type', type: 'hidden', name: $(this).attr('name'), value: $(this).attr('value')}).appendTo($form);
 			var data = $form.serialize();
-			ajax.load({url:$form.attr("action"),
+			ajax.load({url:$form.attr('action'),
 				data: data,
 				target: $dialog,
 				callback: function () {
@@ -3896,11 +3912,11 @@ var sendToFriend = {
 			$dialog.dialog('close');
 		});
 	},
-	initializeDialog : function (eventDelegate) {
+	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var dlg = dialog.create({
-				target: $("#send-to-friend-dialog"),
+				target: $('#send-to-friend-dialog'),
 				options: {
 					width: 800,
 					height: 'auto',
@@ -3912,7 +3928,7 @@ var sendToFriend = {
 				}
 			});
 
-			var data = util.getQueryStringParams($("form.pdpForm").serialize());
+			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
@@ -3922,7 +3938,7 @@ var sendToFriend = {
 				url: util.ajaxUrl(url),
 				target: dlg,
 				callback: function () {
-					dlg.dialog('open');	 // open after load to ensure dialog is centered
+					dlg.dialog('open');	// open after load to ensure dialog is centered
 				}
 			});
 		});
@@ -3938,8 +3954,7 @@ var ajax = require('./ajax'),
 	page = require('./page'),
 	util = require('./util');
 
-var pid,
-	currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
+var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
 
 var storeinventory = {
 	init: function () {
@@ -3952,11 +3967,11 @@ var storeinventory = {
 		});
 
 		//disable the radio button for home deliveries if the store inventory is out of stock
-		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function(){
-			$(this).parents('.home-delivery').children('input').attr('disabled','disabled');
+		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function () {
+			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
-		$('body').on('click', '#pdpMain .set-preferred-store', function (e) {
+		$('body').on('click', '#pdpMain .set-preferred-store', function () {
 			self.loadPreferredStorePanel($(this).parent().attr('id'));
 			return false;
 		});
@@ -3965,28 +3980,28 @@ var storeinventory = {
 			self.setLineItemStore($(this));
 		});
 
-		if ($(".checkout-shipping").length > 0) {
+		if ($('.checkout-shipping').length > 0) {
 			this.shippingLoad();
 		}
 
 		//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
 		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 				$('.cart-action-checkout button').attr('disabled', 'disabled');
 			}
 		});
 	},
-	setLineItemStore: function(radio) {
+	setLineItemStore: function (radio) {
 		// @TODO refactor DOM manipulation
 		$(radio).parent().parent().children().toggleClass('hide');
 		$(radio).parent().parent().toggleClass('loading');
 		ajax.getJson({
-			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid : $(radio).siblings('.storeid').attr('value')}),
-			callback: function(data){
-				$(radio).attr('checked','checked');
+			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
+			callback: function () {
+				$(radio).attr('checked', 'checked');
 				$(radio).parent().parent().toggleClass('loading');
 				$(radio).parent().parent().children().toggleClass('hide');
 			}
@@ -3994,18 +4009,18 @@ var storeinventory = {
 
 		//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
 		var countplis = 0;
-		$('.item-delivery-options').each(function(){
+		$('.item-delivery-options').each(function () {
 			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled')
-				&& ($instore.children('.selected-store-availability').children('.store-error').length > 0)
-				&& ($instore.children('input').attr('checked') === 'checked')) {
+			if (($instore.children('input').attr('disabled') === 'disabled') &&
+				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
+				($instore.children('input').attr('checked') === 'checked')) {
 					$('.cart-action-checkout button').attr('disabled', 'disabled');
 				} else {
 					countplis++;
 				}
 			});
-			if (countplis > 0 && $('.error-message').length === 0){
-				$('.cart-action-checkout button').removeAttr("disabled", "disabled")
+			if (countplis > 0 && $('.error-message').length === 0) {
+				$('.cart-action-checkout button').removeAttr('disabled', 'disabled');
 			}
 	},
 	buildStoreList: function (pid) {
@@ -4020,14 +4035,14 @@ var storeinventory = {
 			callback: function (data) {
 				// clear any previous results, then build new
 				self.$storeList.empty();
-				var listings = $("<ul class='store-list'/>");
+				var listings = $('<ul class="store-list"/>');
 				if (data && data.length > 0) {
 					for (var i = 0; i < 10 && i < data.length; i++) {
 						var item = data[i],
 							displayButton;
 						//Disable button if there is no stock for item
-						if (item.statusclass == 'store-in-stock') {
-							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status+'">' + Resources.SELECT_STORE + '</button>';
+						if (item.statusclass === 'store-in-stock') {
+							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
 						} else {
 							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
 						}
@@ -4044,7 +4059,7 @@ var storeinventory = {
 				// no records
 				} else {
 					if (User.zip) {
-						self.$storeList.append("<div class='no-results'>No Results</div>");
+						self.$storeList.append('<div class="no-results">No Results</div>');
 					}
 				}
 
@@ -4053,12 +4068,12 @@ var storeinventory = {
 					numListings = listings.find('li').size(),
 					listingsNav = $('<div id="listings-nav"/>'),
 					selectedButtonText;
-				for (var i = 0, link = 1; i <= numListings; i++) {
-					if (numListings >  i) {
-						listingsNav.append('<a data-index="'+ i +'">'+link+'</a>');
+				for (var j = 0, link = 1; j <= numListings; j++) {
+					if (numListings > j) {
+						listingsNav.append('<a data-index="' + j + '">' + link + '</a>');
 					}
 					link++;
-					i = i + 2;
+					j = j + 2;
 				}
 				listingsNav.find('a').on('click', function () {
 					$(this).siblings().removeClass('active');
@@ -4070,7 +4085,7 @@ var storeinventory = {
 				self.$storeList.after(listingsNav);
 
 				// check for preferred store id, highlight, move to top
-				if (currentTemplate === 'cart'){
+				if (currentTemplate === 'cart') {
 					selectedButtonText = Resources.SELECTED_STORE;
 				} else {
 					selectedButtonText = Resources.PREFERRED_STORE;
@@ -4087,7 +4102,7 @@ var storeinventory = {
 					$div.append(onPageList);
 
 					if (onPageList.find('li').size() > 1) {
-						$div.find('li:gt(0)').each(function(){
+						$div.find('li:gt(0)').each(function () {
 							$(this).addClass('extended-list');
 						});
 						$('.more-stores').remove();
@@ -4108,26 +4123,26 @@ var storeinventory = {
 
 				// set up 'set preferred store' action on new elements
 				// @TODO this needs to be refactored
-				listings.find('button.select-store-button').on('click', function (e) {
+				listings.find('button.select-store-button').on('click', function () {
 					var $this = $(this);
 					var selectedStoreId = $this.val();
 					if (currentTemplate === 'cart') {
 						//update selected store and set the lineitem
 						var liuuid = self.$preferredStorePanel.find('.srcitem').attr('value');
 						$('div[name="' + liuuid + '-sp"] .selected-store-address').html(
-							$this.siblings('.store-tile-address').text()
-							+ ' <br />'
-							+ $this.siblings('.store-tile-city').text()
-							+ ' , '
-							+ $this.siblings('.store-tile-state').text()
-							+ ' '
-							+$this.siblings('.store-tile-postalCode').text()
+							$this.siblings('.store-tile-address').text() +
+							' <br />' +
+							$this.siblings('.store-tile-city').text() +
+							' , ' +
+							$this.siblings('.store-tile-state').text() +
+							' ' +
+							$this.siblings('.store-tile-postalCode').text()
 						);
 						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
 						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
 						$('div[name="' + liuuid + '-sp"] .radio-url').removeAttr('disabled');
 						$('div[name="' + liuuid + '-sp"] .radio-url').click();
-						self.$preferredStorePanel.dialog("close");
+						self.$preferredStorePanel.dialog('close');
 					} else {
 						if (User.storeId !== selectedStoreId) {
 							// set as selected
@@ -4142,7 +4157,7 @@ var storeinventory = {
 					//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
 					//when the update button is clicked it forces a refresh.
 					if ($('#cart-table').length > 0 && $('.select-store-button').length > 0) {
-						$('.ui-dialog .ui-icon-closethick:first').bind('click', function (){
+						$('.ui-dialog .ui-icon-closethick:first').bind('click', function () {
 							page.refresh();
 						});
 					}
@@ -4151,7 +4166,7 @@ var storeinventory = {
 		});
 	},
 
-	bubbleStoreUp: function(list, id) {
+	bubbleStoreUp: function (list, id) {
 		var preferredEntry = list.find('li.store-' + id).clone();
 		preferredEntry.removeClass('extended-list');
 		list.find('.store-tile').not('extended-list').addClass('extended-list');
@@ -4159,7 +4174,7 @@ var storeinventory = {
 		list.prepend(preferredEntry);
 	},
 
-	loadPreferredStorePanel: function(pid) {
+	loadPreferredStorePanel: function (pid) {
 		var self = this;
 		//clear error messages from other product tiles if they exists in the dom
 		this.$preferredStorePanel.find('.error-message').remove();
@@ -4169,11 +4184,11 @@ var storeinventory = {
 
 		// show form if no zip set
 		if (User.zip === null || User.zip === '') {
-			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="'
-					+ Resources.ENTER_ZIP
-					+ '"/><button id="set-user-zip" class="button-style-1">'
-					+ Resources.SEARCH
-					+ '</button></div>')
+			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' +
+					Resources.ENTER_ZIP +
+					'"/><button id="set-user-zip" class="button-style-1">' +
+					Resources.SEARCH +
+					'</button></div>')
 				.find('#set-user-zip').on('click', function () {
 					var enteredZip = $('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
 					var regexObj = {
@@ -4181,14 +4196,14 @@ var storeinventory = {
 						usa: /^\d{5}(-\d{4})?$/
 					};
 					var validZipEntry = false;
-
+					var regexp;
 					//check Canadian postal code
-					var regexp = new RegExp(regexObj.canada);
+					regexp = new RegExp(regexObj.canada);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
 					//check us zip codes
-					var regexp = new RegExp(regexObj.usa);
+					regexp = new RegExp(regexObj.usa);
 					if (regexp.test(enteredZip)) {
 						validZipEntry = true;
 					}
@@ -4199,13 +4214,13 @@ var storeinventory = {
 						self.loadPreferredStorePanel(pid);
 					//bad zip
 					} else {
-						if ($('#preferred-store-panel .error-message').length == 0){
+						if ($('#preferred-store-panel .error-message').length === 0) {
 							$('#preferred-store-panel div').append('<div class="error-message">' + Resources.INVALID_ZIP + '</div>');
 						}
 					}
 				});
 			$('#userZip').on('keypress', function (e) {
-				code = e.keyCode ? e.keyCode : e.which;
+				var code = e.keyCode ? e.keyCode : e.which;
 				if (code.toString() === 13) {
 					$('#set-user-zip').trigger('click');
 				}
@@ -4257,14 +4272,14 @@ var storeinventory = {
 		}
 
 		//disable continue button if a preferred store has not been selected
-		if ($('.store-list .selected').length > 0){
+		if ($('.store-list .selected').length > 0) {
 			this.$preferredStorePanel.find('.close').attr('disabled', false);
 		} else {
 			this.$preferredStorePanel.find('.close').attr('disabled', true);
 		}
 	},
 
-	setUserZip: function(zip) {
+	setUserZip: function (zip) {
 		User.zip = zip;
 		$.ajax({
 			type: 'POST',
@@ -4275,19 +4290,19 @@ var storeinventory = {
 		});
 	},
 
-	setPreferredStore: function(id) {
+	setPreferredStore: function (id) {
 		User.storeId = id;
-		$.post(Urls.setPreferredStore, {storeId: id}, function(data) {
+		$.post(Urls.setPreferredStore, {storeId: id}, function (data) {
 			$('.selected-store-availability').html(data);
 			//enable continue button when a preferred store has been selected
 			$('#preferred-store-panel .close').attr('disabled', false);
 		});
 	},
 
-	shippingLoad: function() {
+	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
-		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function (e) {
+		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function () {
 			$(this).parent().siblings('.gift-message-text').toggle($(this).checked);
 		});
 	}
@@ -4306,21 +4321,21 @@ exports.init = function () {
 	$('.tooltip').tooltip({
 		track: true,
 		showURL: false,
-		bodyHandler: function() {
+		bodyHandler: function () {
 			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = "";
-			if (tooltipClass = $(this).find('.tooltip-content').data("layout")) {
-				tooltipClass = " class='" + tooltipClass + "' ";
+			var tooltipClass = '';
+			if ($(this).find('.tooltip-content').data('layout')) {
+				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
 			}
-		return "<div " + tooltipClass + ">" + $(this).find('.tooltip-content').html() + "</div>";
+		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
 		}
 	});
 };
 
 },{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
+/* global Countries */
+
 'use strict';
-var // dialog = require('./dialog'),
-	validator = require('./validator')
 
 var util = {
 	/**
@@ -4332,7 +4347,7 @@ var util = {
 	 */
 	appendParamToURL: function (url, name, value) {
 		var c = '?';
-		if(url.indexOf(c) !== -1) {
+		if (url.indexOf(c) !== -1) {
 			c = '&';
 		}
 		return url + c + name + '=' + encodeURIComponent(value);
@@ -4355,11 +4370,11 @@ var util = {
 			left += el.offsetLeft;
 		}
 
-		if (typeof(offsetToTop) != 'undefined') {
+		if (typeof(offsetToTop) !== 'undefined') {
 			top -= offsetToTop;
 		}
 
-		if ( window.pageXOffset != null) {
+		if (window.pageXOffset !== null) {
 			return (
 				top < (window.pageYOffset + window.innerHeight) &&
 				left < (window.pageXOffset + window.innerWidth) &&
@@ -4368,7 +4383,7 @@ var util = {
 			);
 		}
 
-		if (document.compatMode == "CSS1Compat") {
+		if (document.compatMode === 'CSS1Compat') {
 			return (
 				top < (window.document.documentElement.scrollTop + window.document.documentElement.clientHeight) &&
 				left < (window.document.documentElement.scrollLeft + window.document.documentElement.clientWidth) &&
@@ -4390,7 +4405,7 @@ var util = {
 		var qsParams = $.extend(uri.queryParams, params);
 		var result = uri.path + '?' + $.param(qsParams);
 		if (includeHash) {
-			result+=uri.hash;
+			result += uri.hash;
 		}
 		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
 			result = '/' + result;
@@ -4404,7 +4419,7 @@ var util = {
 	 * @param {String} path the relative path
 	 */
 	ajaxUrl: function (path) {
-		return this.appendParamToURL(path, "format", "ajax");
+		return this.appendParamToURL(path, 'format', 'ajax');
 	},
 
 	/**
@@ -4436,10 +4451,10 @@ var util = {
 	 * @param {String} url The url from which css file will be dynamically loaded.
 	 */
 	loadCssFile: function (url) {
-		return $("<link/>").appendTo($("head")).attr({
-			type : "text/css",
-			rel : "stylesheet"
-		}).attr("href", url); // for i.e. <9, href must be added after link has been appended to head
+		return $('<link/>').appendTo($('head')).attr({
+			type: 'text/css',
+			rel: 'stylesheet'
+		}).attr('href', url); // for i.e. <9, href must be added after link has been appended to head
 	},
 	// array to keep track of the dynamically loaded CSS files
 	loadedCssFiles: [],
@@ -4448,9 +4463,9 @@ var util = {
 	 * @function
 	 * @description Removes all css files which were dynamically loaded
 	 */
-	clearDynamicCss : function () {
+	clearDynamicCss: function () {
 		var i = this.loadedCssFiles.length;
-		while(0 > i--) {
+		while (0 > i--) {
 			$(this.loadedCssFiles[i]).remove();
 		}
 		this.loadedCssFiles = [];
@@ -4460,14 +4475,14 @@ var util = {
 	 * @description Extracts all parameters from a given query string into an object
 	 * @param {String} qs The query string from which the parameters will be extracted
 	 */
-	getQueryStringParams : function (qs) {
+	getQueryStringParams: function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
 		var params = {},
-			unescapedQS = unescape(qs);
+			unescapedQS = decodeURIComponent(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
-		unescapedQS.replace( new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-			function ( $0, $1, $2, $3 ) {
+		unescapedQS.replace(new RegExp('([^?=&]+)(=([^&]*))?', 'g'),
+			function ($0, $1, $2, $3) {
 				params[$1] = $3;
 			}
 		);
@@ -4523,7 +4538,7 @@ var util = {
 				// retrigger state selection after country has changed
 				// this results in duplication of the state code, but is a necessary evil
 				// for now because sometimes countryCode comes after stateCode
-				$form.find('[name$="state"]').val(address['stateCode']);
+				$form.find('[name$="state"]').val(address.stateCode);
 			}
 		}
 	},
@@ -4535,15 +4550,15 @@ var util = {
 	updateStateOptions: function (form) {
 		var $form = $(form),
 			$country = $form.find('select[id$="_country"]'),
-			country = Countries[$country.val()]
+			country = Countries[$country.val()];
 		if ($country.length === 0 || !country) {
 			return;
 		}
 		var arrHtml = [],
-			$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
-			$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
-			$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
-			$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined,
+			$stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
+			$postalField = $country.data('postalField') ? $country.data('postalField') : $form.find('input[name$="_postal"]'),
+			$stateLabel = ($stateField.length > 0) ? $form.find('label[for="' + $stateField[0].id + '"] span').not('.required-indicator') : undefined,
+			$postalLabel = ($postalField.length > 0) ? $form.find('label[for="' + $postalField[0].id + '"] span').not('.required-indicator') : undefined,
 			prevStateValue = $stateField.val();
 		// set the label text
 		if ($postalLabel) {
@@ -4574,8 +4589,8 @@ var util = {
 	 * based on the character limit in a text area
 	 */
 	limitCharacters: function () {
-		$('form').find('textarea[data-character-limit]').each(function(){
-			var characterLimit = $(this).data("character-limit");
+		$('form').find('textarea[data-character-limit]').each(function () {
+			var characterLimit = $(this).data('character-limit');
 			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
 				'<span class="char-allowed-count">' + characterLimit + '</span>');
@@ -4595,9 +4610,9 @@ var util = {
 	 * @param {String} container The name of element to which the function will be bind
 	 * @param {String} message The message the will be shown upon a click
 	 */
-	setDeleteConfirmation: function(container, message) {
-		$(container).on('click', '.delete', function(e){
-			return confirm(message);
+	setDeleteConfirmation: function (container, message) {
+		$(container).on('click', '.delete', function () {
+			return window.confirm(message);
 		});
 	},
 	/**
@@ -4606,11 +4621,11 @@ var util = {
 	 * @param {String} The x coordinate
 	 */
 	scrollBrowser: function (xLocation) {
-		$('html, body').animate({ scrollTop: xLocation }, 500);
+		$('html, body').animate({scrollTop: xLocation}, 500);
 	},
 
 	isMobile: function () {
-		var mobileAgentHash = ['mobile','tablet','phone','ipad','ipod','android','blackberry','windows ce','opera mini','palm'];
+		var mobileAgentHash = ['mobile', 'tablet', 'phone', 'ipad', 'ipod', 'android', 'blackberry', 'windows ce', 'opera mini', 'palm'];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
@@ -4625,30 +4640,30 @@ var util = {
 
 module.exports = util;
 
-},{"./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
 	regex = {
-		phone : {
-			us : naPhone,
-			ca : naPhone
+		phone: {
+			us: naPhone,
+			ca: naPhone
 		},
-		postal : {
-			us : /^\d{5}(-\d{4})?$/,
-			ca : /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
-			gb : /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
+		postal: {
+			us: /^\d{5}(-\d{4})?$/,
+			ca: /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
+			gb: /^GIR?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])?[0-9][ABD-HJLNP-UW-Z]{2}$/
 		},
-		email : /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
-		notCC : /^(?!(([0-9 -]){13,19})).*$/
+		email: /^[\w.%+\-]+@[\w.\-]+\.[\w]{2,6}$/,
+		notCC: /^(?!(([0-9 -]){13,19})).*$/
 	},
 	settings = {
 		// global form validator settings
-		errorClass : 'error',
-		errorElement : 'span',
-		onkeyup : false,
-		onfocusout : function (element) {
-			if(!this.checkable(element)) {
+		errorClass: 'error',
+		errorElement: 'span',
+		onkeyup: false,
+		onfocusout: function (element) {
+			if (!this.checkable(element)) {
 				this.element(element);
 			}
 		}
@@ -4659,7 +4674,7 @@ var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})
  * @param {String} value The phone number which will be validated
  * @param {String} el The input field
  */
-function validatePhone(value, el) {
+var validatePhone = function (value, el) {
 	var country = $(el).closest('form').find('.country');
 	if (country.length === 0 || country.val().length === 0 || !regex.phone[country.val().toLowerCase()]) {
 		return true;
@@ -4670,18 +4685,18 @@ function validatePhone(value, el) {
 	var isValid = rgx.test($.trim(value));
 
 	return isOptional || isValid;
-}
+};
 /**
  * @function
  * @description Validates a given email
  * @param {String} value The email which will be validated
  * @param {String} el The input field
  */
-function validateEmail(value, el) {
+var validateEmail = function (value, el) {
 	var isOptional = this.optional(el);
 	var isValid = regex.email.test($.trim(value));
 	return isOptional || isValid;
-}
+};
 
 /**
  * @function
@@ -4689,10 +4704,10 @@ function validateEmail(value, el) {
  * @param {String} value The owner field which will be validated
  * @param {String} el The input field
  */
-function validateOwner(value, el) {
+var validateOwner = function (value) {
 	var isValid = regex.notCC.test($.trim(value));
 	return isValid;
-}
+};
 
 /**
  * Add phone validation method to jQuery validation plugin.
@@ -4710,13 +4725,13 @@ $.validator.addMethod('email', validateEmail, Resources.INVALID_EMAIL);
  * Add CCOwner validation method to jQuery validation plugin.
  * Text fields must have 'owner' css class to be validated as not a credit card
  */
-$.validator.addMethod("owner", validateOwner, Resources.INVALID_OWNER);
+$.validator.addMethod('owner', validateOwner, Resources.INVALID_OWNER);
 
 /**
  * Add gift cert amount validation method to jQuery validation plugin.
  * Text fields must have 'gift-cert-amont' css class to be validated
  */
-$.validator.addMethod('gift-cert-amount', function (value, el){
+$.validator.addMethod('gift-cert-amount', function (value, el) {
 	var isOptional = this.optional(el);
 	var isValid = (!isNaN(value)) && (parseFloat(value) >= 5) && (parseFloat(value) <= 5000);
 	return isOptional || isValid;
@@ -4726,8 +4741,8 @@ $.validator.addMethod('gift-cert-amount', function (value, el){
  * Add positive number validation method to jQuery validation plugin.
  * Text fields must have 'positivenumber' css class to be validated as positivenumber
  */
-$.validator.addMethod('positivenumber', function (value, element) {
-	if($.trim(value).length === 0) { return true; }
+$.validator.addMethod('positivenumber', function (value) {
+	if ($.trim(value).length === 0) { return true; }
 	return (!isNaN(value) && Number(value) >= 0);
 }, ''); // '' should be replaced with error message if needed
 
@@ -4740,7 +4755,7 @@ var validator = {
 			$(this).validate(self.settings);
 		});
 	},
-	initForm: function(f) {
+	initForm: function (f) {
 		$(f).validate(this.settings);
 	}
 };
@@ -11624,12 +11639,19 @@ process.chdir = function (dir) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/core.js":[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
+'use strict';
+
+module.exports = require('./lib/core.js')
+require('./lib/done.js')
+require('./lib/es6-extensions.js')
+require('./lib/node-extensions.js')
+},{"./lib/core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
 
-module.exports = Promise
+module.exports = Promise;
 function Promise(fn) {
   if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
   if (typeof fn !== 'function') throw new TypeError('not a function')
@@ -11639,7 +11661,7 @@ function Promise(fn) {
   var self = this
 
   this.then = function(onFulfilled, onRejected) {
-    return new Promise(function(resolve, reject) {
+    return new self.constructor(function(resolve, reject) {
       handle(new Handler(onFulfilled, onRejected, resolve, reject))
     })
   }
@@ -11731,10 +11753,25 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
+},{"asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
 'use strict';
 
-//This file contains then/promise specific extensions to the core promise API
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+Promise.prototype.done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this
+  self.then(null, function (err) {
+    asap(function () {
+      throw err
+    })
+  })
+}
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
+'use strict';
+
+//This file contains the ES6 extensions to the core Promises/A+ API
 
 var Promise = require('./core.js')
 var asap = require('asap')
@@ -11757,7 +11794,7 @@ function ValuePromise(value) {
     })
   }
 }
-ValuePromise.prototype = Object.create(Promise.prototype)
+ValuePromise.prototype = Promise.prototype
 
 var TRUE = new ValuePromise(true)
 var FALSE = new ValuePromise(false)
@@ -11792,57 +11829,8 @@ Promise.resolve = function (value) {
   return new ValuePromise(value)
 }
 
-Promise.from = Promise.cast = function (value) {
-  var err = new Error('Promise.from and Promise.cast are deprecated, use Promise.resolve instead')
-  err.name = 'Warning'
-  console.warn(err.stack)
-  return Promise.resolve(value)
-}
-
-Promise.denodeify = function (fn, argumentCount) {
-  argumentCount = argumentCount || Infinity
-  return function () {
-    var self = this
-    var args = Array.prototype.slice.call(arguments)
-    return new Promise(function (resolve, reject) {
-      while (args.length && args.length > argumentCount) {
-        args.pop()
-      }
-      args.push(function (err, res) {
-        if (err) reject(err)
-        else resolve(res)
-      })
-      fn.apply(self, args)
-    })
-  }
-}
-Promise.nodeify = function (fn) {
-  return function () {
-    var args = Array.prototype.slice.call(arguments)
-    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-    try {
-      return fn.apply(this, arguments).nodeify(callback)
-    } catch (ex) {
-      if (callback === null || typeof callback == 'undefined') {
-        return new Promise(function (resolve, reject) { reject(ex) })
-      } else {
-        asap(function () {
-          callback(ex)
-        })
-      }
-    }
-  }
-}
-
-Promise.all = function () {
-  var calledWithArray = arguments.length === 1 && Array.isArray(arguments[0])
-  var args = Array.prototype.slice.call(calledWithArray ? arguments[0] : arguments)
-
-  if (!calledWithArray) {
-    var err = new Error('Promise.all should be called with a single array, calling it with multiple arguments is deprecated')
-    err.name = 'Warning'
-    console.warn(err.stack)
-  }
+Promise.all = function (arr) {
+  var args = Array.prototype.slice.call(arr)
 
   return new Promise(function (resolve, reject) {
     if (args.length === 0) return resolve([])
@@ -11886,34 +11874,73 @@ Promise.race = function (values) {
 
 /* Prototype Methods */
 
-Promise.prototype.done = function (onFulfilled, onRejected) {
-  var self = arguments.length ? this.then.apply(this, arguments) : this
-  self.then(null, function (err) {
-    asap(function () {
-      throw err
-    })
-  })
-}
-
-Promise.prototype.nodeify = function (callback) {
-  if (typeof callback != 'function') return this
-
-  this.then(function (value) {
-    asap(function () {
-      callback(null, value)
-    })
-  }, function (err) {
-    asap(function () {
-      callback(err)
-    })
-  })
-}
-
 Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
+'use strict';
+
+//This file contains then/promise specific extensions that are only useful for node.js interop
+
+var Promise = require('./core.js')
+var asap = require('asap')
+
+module.exports = Promise
+
+/* Static Functions */
+
+Promise.denodeify = function (fn, argumentCount) {
+  argumentCount = argumentCount || Infinity
+  return function () {
+    var self = this
+    var args = Array.prototype.slice.call(arguments)
+    return new Promise(function (resolve, reject) {
+      while (args.length && args.length > argumentCount) {
+        args.pop()
+      }
+      args.push(function (err, res) {
+        if (err) reject(err)
+        else resolve(res)
+      })
+      fn.apply(self, args)
+    })
+  }
+}
+Promise.nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments)
+    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+    var ctx = this
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx)
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) { reject(ex) })
+      } else {
+        asap(function () {
+          callback.call(ctx, ex)
+        })
+      }
+    }
+  }
+}
+
+Promise.prototype.nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value)
+    })
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err)
+    })
+  })
+}
+
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn

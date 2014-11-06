@@ -12,14 +12,14 @@ var dialog = {
 	create: function (params) {
 		var id;
 		// options.target can be an id selector or an jquery object
-		var target = $(params.target || "#dialog-container");
+		var target = $(params.target || '#dialog-container');
 
 		// if no element found, create one
 		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === "#") {
+			if (target.selector && target.selector.charAt(0) === '#') {
 				id = target.selector.substr(1);
 			}
-			target = $("<div>").attr("id", id).addClass("dialog-content").appendTo("body");
+			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
@@ -34,29 +34,58 @@ var dialog = {
 	 */
 	open: function (params) {
 		if (!params.url || params.url.length === 0) { return; }
-
+		// close any open dialog
+		this.close();
 		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format:"ajax"});
+		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
 
 		// finally load the dialog
 		ajax.load({
 			target: this.container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog("isOpen")) {return;}
-				this.container.dialog("open");
+				if (this.container.dialog('isOpen')) { return; }
+				this.container.dialog('open');
 			}.bind(this)
 		});
 	},
 	/**
-	 * @function
-	 * @description Closes the dialog and triggers the "close" event for the dialog
+	 * @description Replace the content of current dialog
+	 * @param {object} options
+	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
+	 * @param {string} options.html - If no url property is provided, use html provided to replace
+	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
-	close: function () {
-		if(!this.container) {
+	replace: function (options) {
+		if (!this.container) {
 			return;
 		}
-		this.container.dialog("close");
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
+		if (options.url) {
+			ajax.load({
+				target: this.container,
+				url: options.url,
+				callback: function () {
+					callback();
+					if (!this.container.dialog('isOpen')) {
+						this.container.dialog('open');
+					}
+				}.bind(this)
+			});
+		} else if (options.html) {
+			this.container.empty().html(options.html);
+			callback();
+		}
+	},
+	/**
+	 * @function
+	 * @description Closes the dialog
+	 */
+	close: function () {
+		if (!this.container) {
+			return;
+		}
+		this.container.dialog('close');
 	},
 	/**
 	 * @function
@@ -64,50 +93,49 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var form = this.container.find("form:first");
+		var $form = this.container.find('form:first');
 		// set the action
-		$("<input/>").attr({
+		$('<input/>').attr({
 			name: action,
-			type: "hidden"
-		}).appendTo(form);
-
+			type: 'hidden'
+		}).appendTo($form);
 		// serialize the form and get the post url
-		var post = form.serialize();
-		var url = form.attr("action");
-
+		var data = $form.serialize();
+		var url = $form.attr('action');
+		// make sure the server knows this is an ajax request
+		if (data.indexOf('ajax') === -1) {
+			data += '&format=ajax';
+		}
 		// post the data and replace current content with response content
 		$.ajax({
-			type: "POST",
+			type: 'POST',
 			url: url,
-			data: post,
-			dataType: "html",
-			success: function (data) {
-				this.container.html(data);
+			data: data,
+			dataType: 'html',
+			success: function (html) {
+				this.container.html(html);
 			}.bind(this),
-			failure: function (data) {
+			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
 	},
 	settings: {
 		autoOpen: false,
-		resizable: false,
 		bgiframe: true,
-		modal: true,
-		height: 'auto',
-		width: '800',
 		buttons: {},
-		title: '',
+		height: 'auto',
+		modal: true,
 		overlay: {
 			opacity: 0.5,
-			background: "black"
+			background: 'black'
 		},
-		/**
-		 * @function
-		 * @description The close event
-		 */
-		close: function (event, ui) {
-			$(this).dialog("destroy");
+		position: 'center',
+		resizable: false,
+		title: '',
+		width: '800',
+		close: function () {
+			$(this).dialog('destroy');
 		}
 	}
 };

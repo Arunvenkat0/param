@@ -24,4 +24,4 @@ exports.init = function () {
 			$('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
 		}
 	}
-}
+};

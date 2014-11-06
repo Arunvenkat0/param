@@ -5,7 +5,7 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	
+
 <isinclude url="${pdict.Location + "&pwr=true"}"/>
 
 <iscomment>
@@ -27,19 +27,19 @@
 		<isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
 	</isif>
 	<img src="${imageUrl}" alt="${imageAlt}" class="review-image"/>
-	
-	<h1><!-- Product Name Display --><isprint value="${pdict.Product.name}"/></h1>
-	
-	<isprint value="${pdict.Product.shortDescription}"/>
-	
-	
+
+	<h1><isprint value="${pdict.Product.name}"/></h1>
+
+	<isprint value="${pdict.Product.shortDescription}" encoding="off"/>
+
+
 	<isscript>
 		var source = "web";
 		if (pdict.CurrentHttpParameterMap.source.stringValue == "email") {
 			source = "email";
 		}
 	</isscript>
-	<iframe src="http://services.powerreviews.com/SubmitReview.do?pageId=${pdict.Product.ID}&amp;merchantId=6690&amp;source=${source}&merchantUserEmail=user@yoursite.com&promoCode=coupon}&pr_locale=" frameborder="0" height="2000" width="100%" scrolling="no"/></iframe>
+	<iframe src="https://services.powerreviews.com/SubmitReview.do?pageId=${pdict.Product.ID}&amp;merchantId=6690&amp;source=${source}&merchantUserEmail=user@yoursite.com&promoCode=coupon}&pr_locale=" frameborder="0" height="2000" width="100%" scrolling="no"/></iframe>
 </div>
-	
+
 </isdecorate>

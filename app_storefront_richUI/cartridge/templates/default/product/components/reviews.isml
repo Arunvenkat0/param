@@ -4,7 +4,7 @@
 <script type="text/javascript">
   var pr_page_id = "${(pdict.Product.variant?pdict.Product.variationModel.master.ID:pdict.Product.ID)}";
   var pr_write_review = "${URLUtils.https('PowerReviews-WriteReview')}?pid=${(pdict.Product.variant?pdict.Product.variationModel.master.ID:pdict.Product.ID)}";
-  var pr_read_review = "javascript:app.product.readReviews();";
+//  var pr_read_review = "javascript:app.product.readReviews();";
 
   if (typeof(engine) != "undefined") {
     engine(document);

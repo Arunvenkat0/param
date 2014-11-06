@@ -37,14 +37,18 @@
 							selectedColor = PVM.getVariationValue(imageSource, colorVarAttr);
 					}
 				}
-			} else if (ProductHitSource.variant) {
+			} else if (ProductHitSource && ProductHitSource.variant) {
 				imageSource = ProductHitSource;
 				if (imageSource != null && colorVarAttr != null)
 					selectedColor = imageSource.variationModel.getVariationValue(ProductHitSource, colorVarAttr);
 			} else if (PVM.master && PVM.defaultVariant) {
-				imageSource = PVM.defaultVariant;
-				selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
-			} else if (Product.variant) {
+				if (colorVarAttr !== null) {
+					imageSource = PVM.defaultVariant;
+					selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+				} else {
+					imageSource = PVM.master;
+				}
+			} else if (Product.isVariant()) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (imageSource == null) {
 					<iscomment>
@@ -63,6 +67,7 @@
 		}
 		image = imageSource.getImage(imageSize, 0);
 	</isscript>
+
 	<iscomment>
 		Generate link to product detail page: by default it's just the product of the product search hit.
 		If a color variation is available, the first color is used as link URL.

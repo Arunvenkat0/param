@@ -34,7 +34,7 @@ function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
 	$('body')
-		.on('keydown', 'textarea[data-character-limit]', function(e) {
+		.on('keydown', 'textarea[data-character-limit]', function (e) {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length;
@@ -43,14 +43,14 @@ function initializeEvents() {
 					e.preventDefault();
 				}
 		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function(e) {
+		.on('change keyup mouseup', 'textarea[data-character-limit]', function () {
 			var text = $.trim($(this).val()),
 				charsLimit = $(this).data('character-limit'),
 				charsUsed = text.length,
 				charsRemain = charsLimit - charsUsed;
 
-			if(charsRemain < 0) {
-				$(this).val( text.slice(0, charsRemain) );
+			if (charsRemain < 0) {
+				$(this).val(text.slice(0, charsRemain));
 				charsRemain = 0;
 			}
 
@@ -63,22 +63,25 @@ function initializeEvents() {
 	 * */
 	var $searchContainer = $('#navigation .header-search');
 	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-	} else {
 		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
+	} else {
+		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 
 	// print handler
-	$('.print-page').on('click', function () { window.print(); return false; });
+	$('.print-page').on('click', function () {
+		window.print();
+		return false;
+	});
 
 	// add show/hide navigation elements
-	$('.secondary-navigation .toggle').click(function(){
+	$('.secondary-navigation .toggle').click(function () {
 		$(this).toggleClass('expanded').next('ul').toggle();
 	});
 
 	// add generic toggle functionality
 	$('.toggle').next('.toggle-content').hide();
-	$('.toggle').click(function(){
+	$('.toggle').click(function () {
 		$(this).toggleClass('expanded').next('.toggle-content').toggle();
 	});
 
@@ -91,8 +94,8 @@ function initializeEvents() {
 				return; // do not animate when contains non-default value
 			}
 
-			$(this).animate({ color: '#999999'}, 500, 'linear', function () {
-				$(this).val('').css('color','#333333');
+			$(this).animate({color: '#999999'}, 500, 'linear', function () {
+				$(this).val('').css('color', '#333333');
 			});
 		}).blur(function () {
 			var val = $.trim($(this.val()));
@@ -100,7 +103,7 @@ function initializeEvents() {
 				return; // do not animate when contains value
 			}
 			$(this).val(Resources.SUBSCRIBE_EMAIL_DEFAULT)
-				.css('color','#999999')
+				.css('color', '#999999')
 				.animate({color: '#333333'}, 500, 'linear');
 		});
 	}
@@ -159,9 +162,8 @@ var app = {
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
-		$.extend(page, pageContext);
+		$.extend(page, window.pageContext);
 		var ns = page.ns;
-		console.log(ns);
 		if (ns && pages[ns] && pages[ns].init) {
 			pages[ns].init();
 		}
@@ -170,9 +172,9 @@ var app = {
 
 // general extension functions
 (function () {
-	String.format = function() {
+	String.format = function () {
 		var s = arguments[0];
-		var i, len=arguments.length - 1;
+		var i, len = arguments.length - 1;
 		for (i = 0; i < len; i++) {
 			var reg = new RegExp('\\{' + i + '\\}', 'gm');
 			s = s.replace(reg, arguments[i + 1]);

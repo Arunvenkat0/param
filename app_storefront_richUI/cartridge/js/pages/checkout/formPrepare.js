@@ -4,29 +4,15 @@ var _ = require('lodash');
 
 var $form, $continue, $requiredInputs, validator;
 
-function init(opts) {
-	if (!opts.formSelector || !opts.continueSelector) {
-		throw new Error('Missing form and continue action selectors.');
-	}
-	$form = $(opts.formSelector);
-	$continue = $(opts.continueSelector);
-	validator = $form.validate();
-	$requiredInputs = $('.required', $form).find(':input');
-	validateForm();
-	// start listening
-	$requiredInputs.on('change', validateEl);
-	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
-}
-
-function hasEmptyRequired() {
+var hasEmptyRequired = function () {
 	// filter out only the visible fields
 	var requiredValues = $requiredInputs.filter(':visible').map(function () {
 		return $(this).val();
 	});
 	return _(requiredValues).contains('');
-}
+};
 
-function validateForm() {
+var validateForm = function () {
 	// only validate form when all required fields are filled to avoid
 	// throwing errors on empty form
 	if (!hasEmptyRequired()) {
@@ -36,9 +22,9 @@ function validateForm() {
 	} else {
 		$continue.attr('disabled', 'disabled');
 	}
-}
+};
 
-function validateEl() {
+var validateEl = function () {
 	if ($(this).val() === '') {
 		$continue.attr('disabled', 'disabled');
 	} else {
@@ -50,7 +36,21 @@ function validateEl() {
 			$continue.attr('disabled', 'disabled');
 		}
 	}
-}
+};
+
+var init = function (opts) {
+	if (!opts.formSelector || !opts.continueSelector) {
+		throw new Error('Missing form and continue action selectors.');
+	}
+	$form = $(opts.formSelector);
+	$continue = $(opts.continueSelector);
+	validator = $form.validate();
+	$requiredInputs = $('.required', $form).find(':input');
+	validateForm();
+	// start listening
+	$requiredInputs.on('change', validateEl);
+	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
+};
 
 exports.init = init;
 exports.validateForm = validateForm;

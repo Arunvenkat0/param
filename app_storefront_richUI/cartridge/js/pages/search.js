@@ -1,6 +1,6 @@
 'use strict';
 
-var productCompare = require('../product-compare'),
+var compareWidget = require('../compare-widget'),
 	productTile = require('../product-tile'),
 	progress = require('../progress'),
 	util = require('../util');
@@ -15,7 +15,7 @@ function infiniteScroll() {
 		// switch state to 'loading'
 		// - switches state, so the above selector is only matching once
 		// - shows loading indicator
-		loadingPlaceHolder.attr('data-loading-state','loading');
+		loadingPlaceHolder.attr('data-loading-state', 'loading');
 		loadingPlaceHolder.addClass('infinite-scroll-loading');
 
 		/**
@@ -23,8 +23,8 @@ function infiniteScroll() {
 		 */
 		var fillEndlessScrollChunk = function (html) {
 			loadingPlaceHolder.removeClass('infinite-scroll-loading');
-			loadingPlaceHolder.attr('data-loading-state','loaded');
-			jQuery('div.search-result-content').append(html);
+			loadingPlaceHolder.attr('data-loading-state', 'loaded');
+			$('div.search-result-content').append(html);
 		};
 
 		// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
@@ -53,7 +53,7 @@ function infiniteScroll() {
 			});
 		}
 	}
-};
+}
 /**
  * @private
  * @function
@@ -65,13 +65,13 @@ function updateProductListing() {
 	var refineUrl;
 
 	if (hash.length > 0) {
-		refineUrl = window.location.pathname + "?" + hash;
+		refineUrl = window.location.pathname + '?' + hash;
 	} else {
 		return;
 	}
 	progress.show($('.search-result-content'));
 	$('#main').load(util.appendParamToURL(refineUrl, 'format', 'ajax'), function () {
-		productCompare.init();
+		compareWidget.init();
 		productTile.init();
 		progress.hide();
 	});
@@ -89,29 +89,29 @@ function updateProductListing() {
 function initializeEvents() {
 	var $main = $('#main');
 	// compare checked
-	$main.on('click', 'input[type="checkbox"].compare-check', function (e) {
+	$main.on('click', 'input[type="checkbox"].compare-check', function () {
 		var cb = $(this);
 		var tile = cb.closest('.product-tile');
 
-		var func = this.checked ? productCompare.addProduct : productCompare.removeProduct;
+		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
 		var itemImg = tile.find('.product-image a img').first();
 		func({
-			itemid : tile.data('itemid'),
-			uuid : tile[0].id,
-			img : itemImg,
-			cb : cb
+			itemid: tile.data('itemid'),
+			uuid: tile[0].id,
+			img: itemImg,
+			cb: cb
 		});
 
 	});
 
 	// handle toggle refinement blocks
-	$main.on('click', '.refinement h3', function (e) {
+	$main.on('click', '.refinement h3', function () {
 		$(this).toggleClass('expanded')
 		.siblings('ul').toggle();
 	});
 
 	// handle events for updating grid
-	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function (e) {
+	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function () {
 		if ($(this).parent().hasClass('unselectable')) { return; }
 		var catparent = $(this).parents('.category-refinement');
 		var folderparent = $(this).parents('.folder-refinement');
@@ -132,7 +132,7 @@ function initializeEvents() {
 	});
 
 	// handle events item click. append params.
-	$main.on('click', '.product-tile a:not("#quickviewbutton")', function (e) {
+	$main.on('click', '.product-tile a:not("#quickviewbutton")', function () {
 		var a = $(this);
 		// get current page refinement values
 		var wl = window.location;
@@ -156,15 +156,15 @@ function initializeEvents() {
 	});
 
 	// handle sorting change
-	$main.on('change', '.sort-by select', function (e) {
+	$main.on('change', '.sort-by select', function () {
 		var refineUrl = $(this).find('option:selected').val();
 		var uri = util.getUri(refineUrl);
 		window.location.hash = uri.query.substr(1);
 		return false;
 	})
-	.on('change', '.items-per-page select', function (e) {
+	.on('change', '.items-per-page select', function () {
 		var refineUrl = $(this).find('option:selected').val();
-		if (refineUrl == 'INFINITE_SCROLL') {
+		if (refineUrl === 'INFINITE_SCROLL') {
 			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
 		} else {
 			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
@@ -181,10 +181,10 @@ function initializeEvents() {
 }
 
 exports.init = function () {
-	productCompare.init();
+	compareWidget.init();
 	if (SitePreferences.LISTING_INFINITE_SCROLL) {
 		$(window).on('scroll', infiniteScroll);
 	}
 	productTile.init();
 	initializeEvents();
-}
+};

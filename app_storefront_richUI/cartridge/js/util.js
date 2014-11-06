@@ -1,6 +1,6 @@
+/* global Countries */
+
 'use strict';
-var // dialog = require('./dialog'),
-	validator = require('./validator')
 
 var util = {
 	/**
@@ -12,7 +12,7 @@ var util = {
 	 */
 	appendParamToURL: function (url, name, value) {
 		var c = '?';
-		if(url.indexOf(c) !== -1) {
+		if (url.indexOf(c) !== -1) {
 			c = '&';
 		}
 		return url + c + name + '=' + encodeURIComponent(value);
@@ -35,11 +35,11 @@ var util = {
 			left += el.offsetLeft;
 		}
 
-		if (typeof(offsetToTop) != 'undefined') {
+		if (typeof(offsetToTop) !== 'undefined') {
 			top -= offsetToTop;
 		}
 
-		if ( window.pageXOffset != null) {
+		if (window.pageXOffset !== null) {
 			return (
 				top < (window.pageYOffset + window.innerHeight) &&
 				left < (window.pageXOffset + window.innerWidth) &&
@@ -48,7 +48,7 @@ var util = {
 			);
 		}
 
-		if (document.compatMode == "CSS1Compat") {
+		if (document.compatMode === 'CSS1Compat') {
 			return (
 				top < (window.document.documentElement.scrollTop + window.document.documentElement.clientHeight) &&
 				left < (window.document.documentElement.scrollLeft + window.document.documentElement.clientWidth) &&
@@ -70,7 +70,7 @@ var util = {
 		var qsParams = $.extend(uri.queryParams, params);
 		var result = uri.path + '?' + $.param(qsParams);
 		if (includeHash) {
-			result+=uri.hash;
+			result += uri.hash;
 		}
 		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
 			result = '/' + result;
@@ -84,7 +84,7 @@ var util = {
 	 * @param {String} path the relative path
 	 */
 	ajaxUrl: function (path) {
-		return this.appendParamToURL(path, "format", "ajax");
+		return this.appendParamToURL(path, 'format', 'ajax');
 	},
 
 	/**
@@ -116,10 +116,10 @@ var util = {
 	 * @param {String} url The url from which css file will be dynamically loaded.
 	 */
 	loadCssFile: function (url) {
-		return $("<link/>").appendTo($("head")).attr({
-			type : "text/css",
-			rel : "stylesheet"
-		}).attr("href", url); // for i.e. <9, href must be added after link has been appended to head
+		return $('<link/>').appendTo($('head')).attr({
+			type: 'text/css',
+			rel: 'stylesheet'
+		}).attr('href', url); // for i.e. <9, href must be added after link has been appended to head
 	},
 	// array to keep track of the dynamically loaded CSS files
 	loadedCssFiles: [],
@@ -128,9 +128,9 @@ var util = {
 	 * @function
 	 * @description Removes all css files which were dynamically loaded
 	 */
-	clearDynamicCss : function () {
+	clearDynamicCss: function () {
 		var i = this.loadedCssFiles.length;
-		while(0 > i--) {
+		while (0 > i--) {
 			$(this.loadedCssFiles[i]).remove();
 		}
 		this.loadedCssFiles = [];
@@ -140,14 +140,14 @@ var util = {
 	 * @description Extracts all parameters from a given query string into an object
 	 * @param {String} qs The query string from which the parameters will be extracted
 	 */
-	getQueryStringParams : function (qs) {
+	getQueryStringParams: function (qs) {
 		if (!qs || qs.length === 0) { return {}; }
 		var params = {},
-			unescapedQS = unescape(qs);
+			unescapedQS = decodeURIComponent(qs);
 		// Use the String::replace method to iterate over each
 		// name-value pair in the string.
-		unescapedQS.replace( new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-			function ( $0, $1, $2, $3 ) {
+		unescapedQS.replace(new RegExp('([^?=&]+)(=([^&]*))?', 'g'),
+			function ($0, $1, $2, $3) {
 				params[$1] = $3;
 			}
 		);
@@ -203,7 +203,7 @@ var util = {
 				// retrigger state selection after country has changed
 				// this results in duplication of the state code, but is a necessary evil
 				// for now because sometimes countryCode comes after stateCode
-				$form.find('[name$="state"]').val(address['stateCode']);
+				$form.find('[name$="state"]').val(address.stateCode);
 			}
 		}
 	},
@@ -215,15 +215,15 @@ var util = {
 	updateStateOptions: function (form) {
 		var $form = $(form),
 			$country = $form.find('select[id$="_country"]'),
-			country = Countries[$country.val()]
+			country = Countries[$country.val()];
 		if ($country.length === 0 || !country) {
 			return;
 		}
 		var arrHtml = [],
-			$stateField = $country.data("stateField") ? $country.data("stateField") : $form.find("select[name$='_state']"),
-			$postalField = $country.data("postalField") ? $country.data("postalField") : $form.find("input[name$='_postal']"),
-			$stateLabel = ($stateField.length > 0) ? $form.find("label[for='" + $stateField[0].id + "'] span").not(".required-indicator") : undefined,
-			$postalLabel = ($postalField.length > 0) ? $form.find("label[for='" + $postalField[0].id + "'] span").not(".required-indicator") : undefined,
+			$stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
+			$postalField = $country.data('postalField') ? $country.data('postalField') : $form.find('input[name$="_postal"]'),
+			$stateLabel = ($stateField.length > 0) ? $form.find('label[for="' + $stateField[0].id + '"] span').not('.required-indicator') : undefined,
+			$postalLabel = ($postalField.length > 0) ? $form.find('label[for="' + $postalField[0].id + '"] span').not('.required-indicator') : undefined,
 			prevStateValue = $stateField.val();
 		// set the label text
 		if ($postalLabel) {
@@ -254,8 +254,8 @@ var util = {
 	 * based on the character limit in a text area
 	 */
 	limitCharacters: function () {
-		$('form').find('textarea[data-character-limit]').each(function(){
-			var characterLimit = $(this).data("character-limit");
+		$('form').find('textarea[data-character-limit]').each(function () {
+			var characterLimit = $(this).data('character-limit');
 			var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
 				'<span class="char-remain-count">' + characterLimit + '</span>',
 				'<span class="char-allowed-count">' + characterLimit + '</span>');
@@ -275,9 +275,9 @@ var util = {
 	 * @param {String} container The name of element to which the function will be bind
 	 * @param {String} message The message the will be shown upon a click
 	 */
-	setDeleteConfirmation: function(container, message) {
-		$(container).on('click', '.delete', function(e){
-			return confirm(message);
+	setDeleteConfirmation: function (container, message) {
+		$(container).on('click', '.delete', function () {
+			return window.confirm(message);
 		});
 	},
 	/**
@@ -286,11 +286,11 @@ var util = {
 	 * @param {String} The x coordinate
 	 */
 	scrollBrowser: function (xLocation) {
-		$('html, body').animate({ scrollTop: xLocation }, 500);
+		$('html, body').animate({scrollTop: xLocation}, 500);
 	},
 
 	isMobile: function () {
-		var mobileAgentHash = ['mobile','tablet','phone','ipad','ipod','android','blackberry','windows ce','opera mini','palm'];
+		var mobileAgentHash = ['mobile', 'tablet', 'phone', 'ipad', 'ipod', 'android', 'blackberry', 'windows ce', 'opera mini', 'palm'];
 		var	idx = 0;
 		var isMobile = false;
 		var userAgent = (navigator.userAgent).toLowerCase();
