@@ -1,4 +1,5 @@
 var browserify = require('browserify'),
+	connect = require('gulp-connect'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
@@ -93,6 +94,45 @@ gulp.task('ui-test', function () {
 			reporter: reporter,
 			timeout: timeout
 		}));
+});
+
+var transform = require('vinyl-transform');
+var rename = require('gulp-rename');
+var filter = require('gulp-filter');
+gulp.task('test-browserify', function () {
+	var browserified = transform(function(filename) {
+		var b = browserify(filename);
+		return b.bundle();
+	});
+
+	return gulp.src(['test/unit/browser/*.js', '!test/unit/browser/*.out.js'])
+		.pipe(browserified)
+		.pipe(rename(function (path) {
+			path.basename += '.out';
+		}))
+		.pipe(gulp.dest('test/unit/browser'));
+});
+
+gulp.task('test-connect', function () {
+	var opts = minimist(process.argv.slice(2));
+	var port = opts.port || 7000;
+	return connect.server({
+		root: 'test/unit/browser',
+		port: port
+	});
+});
+gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
+	var opts = minimist(process.argv.slice(2));
+	var reporter = opts.reporter || 'spec';
+	var timeout = opts.timeout || 10000;
+	gulp.src('test/unit/*.js', {read: false})
+		.pipe(mocha({
+			reporter: reporter,
+			timeout: timeout
+		}))
+		.on('end', function () {
+			connect.serverClose();
+		})
 });
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {
