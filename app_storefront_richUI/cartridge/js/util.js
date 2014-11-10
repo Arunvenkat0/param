@@ -194,6 +194,9 @@ var util = {
 
 	fillAddressFields: function (address, $form) {
 		for (var field in address) {
+			if (field === 'ID' || field === 'UUID') {
+				continue;
+			}
 			// if the key in address object ends with 'Code', remove that suffix
 			// keys that ends with 'Code' are postalCode, stateCode and countryCode
 			$form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);
