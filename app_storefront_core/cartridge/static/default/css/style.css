@@ -2498,8 +2498,9 @@ button.add-all-to-cart {
   text-align: right; }
 #cart-table .item-quantity input {
   margin: 0;
+  padding: 0.7em 0.2em;
   text-indent: 0;
-  width: 2em; }
+  width: 2.5em; }
 #cart-table .item-user-actions {
   width: 100px; }
   #cart-table .item-user-actions a, #cart-table .item-user-actions button {
