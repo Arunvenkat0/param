@@ -205,8 +205,7 @@ function initializeEvents() {
 		$pdpForm = $('.pdpForm'),
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list'),
-		$readReviewLink = $('.prSnippetLink');
+		$productSetList = $('#product-set-list');
 	product.initAddThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
@@ -418,10 +417,10 @@ function initializeEvents() {
 		});
 	});
 
-	$readReviewLink.on('click', function (e) {
+	$pdpMain.on('click', '.prSnippetLink', function (e) {
 		e.preventDefault();
 		$('.product-tabs').tabs('select', '#tab4');
-		$('body').scrollTop($('#tab4').offset().top);
+		$('html, body').scrollTop($('#tab4').offset().top);
 	});
 }
 
