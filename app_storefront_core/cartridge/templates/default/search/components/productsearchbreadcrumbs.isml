@@ -50,6 +50,18 @@
 
 	</isif>
 
+	<iscomment>SORTING INFO </iscomment>
+	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.sortingRule) && (pdict.ProductSearchResult.category != null)}">
+		<isif condition="${pdict.ProductSearchResult.sortingRule.ID}">
+			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
+		</isif>
+		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="sortingOption">
+			<isif condition="${sortingOption.getID() == pdict.ProductSearchResult.sortingRule.ID}">
+				<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span>
+			</isif>
+		</isloop>
+	</isif>
+
 	<iscomment>REFINEMENT INFO </iscomment>
 	<isif condition="${!empty(pdict.ProductSearchResult) && (pdict.ProductSearchResult.refinedByPrice || pdict.ProductSearchResult.refinedByAttribute)}">
 
