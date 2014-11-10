@@ -81,7 +81,7 @@
 					breadcrumbLabel = prdValues.iterator().next().getDisplayValue();
 				}
 			</isscript>
-			<div class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
+			<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 				<span class="breadcrumb-refinement-name">
 					<isprint value="${pdict.ProductSearchResult.refinements.priceRefinementDefinition.displayName}"/>
 				</span>
@@ -102,7 +102,7 @@
 					</isif>
 					<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 				</span>
-			</div>
+			</span>
 
 		</isif>
 
@@ -110,7 +110,7 @@
 		<isset name="hasAttributes" value="${false}" scope="page" />
 		<isloop items="${pdict.ProductSearchResult.refinements.refinementDefinitions}" var="definition" status="attributes">
 			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
-				<div class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
+				<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 					<span class="breadcrumb-refinement-name">
 						<isprint value="${definition.displayName}"/>
 					</span>
@@ -128,7 +128,7 @@
 							</span>
 						</isif>
 					</isloop>
-				</div>
+				</span>
 			</isif>
 		</isloop>
 	</isif>

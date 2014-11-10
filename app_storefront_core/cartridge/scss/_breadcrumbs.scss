@@ -1,7 +1,7 @@
 .breadcrumb {
 	font-size: 1.2em;
-	line-height: 1.5em;
-	margin: 1px 0 9px;
+	line-height: 1.5;
+	margin: 0 0 5px;
 	padding: 0 10px;
 	li {
 		display: inline;
@@ -30,7 +30,6 @@
 }
 
 .breadcrumb-refinement {
-	display: inline-block;
 	font-family: $serif;
 	font-style: italic;
 	&:after {
@@ -48,7 +47,7 @@
 	background-color: rgba($mantis, 0.3);
 	display: inline-block;
 	border-radius: 3px;
-	margin-right: 5px;
+	margin: 0 5px 5px 0;
 	padding: 0 5px;
 }
 
