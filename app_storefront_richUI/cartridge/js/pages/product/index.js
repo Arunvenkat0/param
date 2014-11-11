@@ -356,49 +356,6 @@ function initializeEvents() {
 		});
 	});
 
-	$addAllToCart.on('click', function (e) {
-		e.preventDefault();
-		var psForms = $productSetList.find('form').toArray(),
-			miniCartHtml = '',
-			addProductUrl = util.ajaxUrl(Urls.addProduct);
-
-		// add items to cart
-		function addItems() {
-			var form = $(psForms.shift());
-			var itemid = form.find('input[name="pid"]').val();
-
-			$.ajax({
-				dataType: 'html',
-				url: addProductUrl,
-				data: form.serialize()
-			})
-			.done(function (response) {
-				// success
-				miniCartHtml = response;
-			})
-			.fail(function (xhr, textStatus) {
-				// failed
-				var msg = Resources.ADD_TO_CART_FAIL;
-				$.validator.format(msg, itemid);
-				if (textStatus === 'parsererror') {
-					msg += '\n' + Resources.BAD_RESPONSE;
-				} else {
-					msg += '\n' + Resources.SERVER_CONNECTION_ERROR;
-				}
-				window.alert(msg);
-			})
-			.always(function () {
-				if (psForms.length > 0) {
-					addItems();
-				} else {
-					quickview.close();
-					minicart.show(miniCartHtml);
-				}
-			});
-		}
-		addItems();
-		return false;
-	});
 	sendToFriend.initializeDialog($pdpMain);
 
 	$pdpMain.find('.add-to-cart[disabled]')
