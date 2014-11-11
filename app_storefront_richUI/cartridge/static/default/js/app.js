@@ -2301,91 +2301,97 @@ module.exports = function (target) {
 	}
 };
 
-},{"../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js":[function(require,module,exports){
+},{"../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js":[function(require,module,exports){
 'use strict';
 
-module.exports = function (data, $container) {
+var ajax =  require('../../ajax'),
+	util = require('../../util');
+
+var updateContainer = function (data) {
+	var $availabilityMsgContainer = $('#pdpMain .availability .availability-msg'),
+		$availabilityMsg;
 	if (!data) {
-		$container.find('.availability-msg').html(Resources.ITEM_STATUS_NOTAVAILABLE);
+		$availabilityMsgContainer.html(Resources.ITEM_STATUS_NOTAVAILABLE);
 		return;
 	}
-	var avMsg;
-	var avRoot = $container.find('.availability-msg').html('');
+
+	$availabilityMsgContainer.empty();
 
 	// Look through levels ... if msg is not empty, then create span el
 	if (data.levels.IN_STOCK > 0) {
-		avMsg = avRoot.find('.in-stock-msg');
-		if (avMsg.length === 0) {
-			avMsg = $('<p/>').addClass('in-stock-msg').appendTo(avRoot);
+		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-msg');
+		if ($availabilityMsg.length === 0) {
+			$availabilityMsg = $('<p/>').addClass('in-stock-msg');
 		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 			// Just in stock
-			avMsg.text(Resources.IN_STOCK);
+			$availabilityMsg.text(Resources.IN_STOCK);
 		} else {
 			// In stock with conditions ...
-			avMsg.text(data.inStockMsg);
+			$availabilityMsg.text(data.inStockMsg);
 		}
 	}
 	if (data.levels.PREORDER > 0) {
-		avMsg = avRoot.find('.preorder-msg');
-		if (avMsg.length === 0) {
-			avMsg = $('<p/>').addClass('preorder-msg').appendTo(avRoot);
+		$availabilityMsg = $availabilityMsgContainer.find('.preorder-msg');
+		if ($availabilityMsg.length === 0) {
+			$availabilityMsg = $('<p/>').addClass('preorder-msg');
 		}
 		if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 			// Just in stock
-			avMsg.text(Resources.PREORDER);
+			$availabilityMsg.text(Resources.PREORDER);
 		} else {
-			avMsg.text(data.preOrderMsg);
+			$availabilityMsg.text(data.preOrderMsg);
 		}
 	}
 	if (data.levels.BACKORDER > 0) {
-		avMsg = avRoot.find('.backorder-msg');
-		if (avMsg.length === 0) {
-			avMsg = $('<p/>').addClass('backorder-msg').appendTo(avRoot);
+		$availabilityMsg = $availabilityMsgContainer.find('.backorder-msg');
+		if ($availabilityMsg.length === 0) {
+			$availabilityMsg = $('<p/>').addClass('backorder-msg');
 		}
 		if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 			// Just in stock
-			avMsg.text(Resources.BACKORDER);
+			$availabilityMsg.text(Resources.BACKORDER);
 		} else {
-			avMsg.text(data.backOrderMsg);
+			$availabilityMsg.text(data.backOrderMsg);
 		}
 	}
 	if (data.inStockDate !== '') {
-		avMsg = avRoot.find('.in-stock-date-msg');
-		if (avMsg.length === 0) {
-			avMsg = $('<p/>').addClass('in-stock-date-msg').appendTo(avRoot);
+		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-date-msg');
+		if ($availabilityMsg.length === 0) {
+			$availabilityMsg = $('<p/>').addClass('in-stock-date-msg');
 		}
-		avMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
+		$availabilityMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
-		avMsg = avRoot.find('.not-available-msg');
-		if (avMsg.length === 0) {
-			avMsg = $('<p/>').addClass('not-available-msg').appendTo(avRoot);
+		$availabilityMsg = $availabilityMsgContainer.find('.not-available-msg');
+		if ($availabilityMsg.length === 0) {
+			$availabilityMsg = $('<p/>').addClass('not-available-msg');
 		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-			avMsg.text(Resources.NOT_AVAILABLE);
+			$availabilityMsg.text(Resources.NOT_AVAILABLE);
 		} else {
-			avMsg.text(Resources.REMAIN_NOT_AVAILABLE);
+			$availabilityMsg.text(Resources.REMAIN_NOT_AVAILABLE);
 		}
 	}
-	/* TODO: This has never been reached before. Consider removing?
-	$addToCart.attr('disabled', 'disabled');
-	availabilityContainer.find('.availability-msg').hide();
-	var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-	if (avQtyMsg.length === 0) {
-		avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-	}
-	avQtyMsg.text(data.inStockMsg).show();
 
-	var avQtyMsg = availabilityContainer.find('.availability-qty-available');
-	if (avQtyMsg.length === 0) {
-		avQtyMsg = $('<span/>').addClass('availability-qty-available').appendTo(availabilityContainer);
-	}
-	avQtyMsg.text(data.backorderMsg).show();
-	*/
-};
+	$availabilityMsgContainer.append($availabilityMsg);
+}
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
+var getAvailability = function () {
+	ajax.getJson({
+		url: util.appendParamsToUrl(Urls.getAvailability, {
+			pid: $('#pid').val(),
+			Quantity: $(this).val()
+		}),
+		callback: updateContainer
+	});
+}
+
+module.exports = function () {
+	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
+}
+
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2400,8 +2406,8 @@ var ajax = require('../../ajax'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
-	quantityEvent = require('./events/quantity'),
-	addToCart = require('./addToCart');
+	addToCart = require('./addToCart'),
+	availability = require('./availability');
 
 /**
  * @private
@@ -2600,12 +2606,8 @@ function initializeEvents() {
 	}
 	// add or update shopping cart line item
 	addToCart();
-	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
-		var $availabilityContainer = $pdpMain.find('.availability');
-		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
-			quantityEvent(data, $availabilityContainer);
-		});
-	});
+
+	availability();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -2826,16 +2828,6 @@ var product = {
 
 	/**
 	 * @function
-	 * @description Gets the availability to given product and quantity
-	 */
-	getAvailability: function (pid, quantity, callback) {
-		ajax.getJson({
-			url: util.appendParamsToUrl(Urls.getAvailability, {pid:pid, Quantity:quantity}),
-			callback: callback
-		});
-	},
-	/**
-	 * @function
 	 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
 	 */
 	initAddThis: function () {
@@ -2863,7 +2855,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./events/quantity":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/events/quantity.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./availability":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),

@@ -12,8 +12,8 @@ var ajax = require('../../ajax'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
-	quantityEvent = require('./events/quantity'),
-	addToCart = require('./addToCart');
+	addToCart = require('./addToCart'),
+	availability = require('./availability');
 
 /**
  * @private
@@ -212,12 +212,8 @@ function initializeEvents() {
 	}
 	// add or update shopping cart line item
 	addToCart();
-	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
-		var $availabilityContainer = $pdpMain.find('.availability');
-		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
-			quantityEvent(data, $availabilityContainer);
-		});
-	});
+
+	availability();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -436,16 +432,6 @@ var product = {
 		}
 	},
 
-	/**
-	 * @function
-	 * @description Gets the availability to given product and quantity
-	 */
-	getAvailability: function (pid, quantity, callback) {
-		ajax.getJson({
-			url: util.appendParamsToUrl(Urls.getAvailability, {pid:pid, Quantity:quantity}),
-			callback: callback
-		});
-	},
 	/**
 	 * @function
 	 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
