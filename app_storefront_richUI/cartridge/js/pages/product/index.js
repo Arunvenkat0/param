@@ -13,7 +13,7 @@ var ajax = require('../../ajax'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
 	quantityEvent = require('./events/quantity'),
-	addToCartHandler = require('./addToCartHandler');
+	addToCart = require('./addToCart');
 
 /**
  * @private
@@ -211,7 +211,7 @@ function initializeEvents() {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
 	// add or update shopping cart line item
-	addToCartHandler();
+	addToCart();
 	$pdpMain.on('change keyup', '.pdpForm input[name="Quantity"]', function () {
 		var $availabilityContainer = $pdpMain.find('.availability');
 		product.getAvailability($('#pid').val(), $(this).val(), function (data) {
@@ -282,7 +282,7 @@ function initializeEvents() {
 			callback: function (data) {
 				target.html(data);
 				product.initAddThis();
-				addToCartHandler();
+				addToCart();
 				if (hasSwapImage) {
 					replaceImages();
 				}
@@ -320,7 +320,7 @@ function initializeEvents() {
 			target: $('#product-content'),
 			callback: function () {
 				product.initAddThis();
-				addToCartHandler();
+				addToCart();
 				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
@@ -355,7 +355,7 @@ function initializeEvents() {
 					$addAllToCart.removeAttr('disabled');
 					$addToCart.removeAttr('disabled'); // this may be a bundle
 				}
-				addToCartHandler($container);
+				addToCart($container);
 				tooltip.init();
 			}
 		});
