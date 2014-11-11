@@ -71,7 +71,7 @@ var updateContainer = function (data) {
 	}
 
 	$availabilityMsgContainer.append($availabilityMsg);
-}
+};
 
 var getAvailability = function () {
 	ajax.getJson({
@@ -81,8 +81,8 @@ var getAvailability = function () {
 		}),
 		callback: updateContainer
 	});
-}
+};
 
 module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
-}
+};

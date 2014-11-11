@@ -1,5 +1,3 @@
-/* global addthis */
-
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -12,6 +10,7 @@ var ajax = require('../../ajax'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
+	addThis = require('./addThis'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability');
 
@@ -206,7 +205,7 @@ function initializeEvents() {
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
 		$productSetList = $('#product-set-list');
-	product.initAddThis();
+	addThis();
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
 	}
@@ -277,7 +276,7 @@ function initializeEvents() {
 			url: url,
 			callback: function (data) {
 				target.html(data);
-				product.initAddThis();
+				addThis();
 				addToCart();
 				if (hasSwapImage) {
 					replaceImages();
@@ -315,7 +314,7 @@ function initializeEvents() {
 			url: url,
 			target: $('#product-content'),
 			callback: function () {
-				product.initAddThis();
+				addThis();
 				addToCart();
 				if (SitePreferences.STORE_PICKUP) {
 					storeinventory.buildStoreList($('.product-number span').html());
@@ -429,32 +428,6 @@ var product = {
 		loadZoom();
 		if (SitePreferences.STORE_PICKUP) {
 			storeinventory.init();
-		}
-	},
-
-	/**
-	 * @function
-	 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
-	 */
-	initAddThis: function () {
-		var addThisServices = ['compact', 'facebook', 'myspace', 'google', 'twitter'],
-			addThisToolbox = $('.addthis_toolbox'),
-			addThisLinks = '',
-			i,
-			len = addThisServices.length;
-
-		for (i = 0; i < len; i++) {
-			if (addThisToolbox.find('.addthis_button_' + addThisServices[i]).length === 0) {
-				addThisLinks += '<a class="addthis_button_' + addThisServices[i] + '"></a>';
-			}
-		}
-		if (addThisLinks.length === 0) { return; }
-
-		addThisToolbox.html(addThisLinks);
-		try {
-			addthis.toolbox('.addthis_toolbox');
-		} catch (e) {
-			return;
 		}
 	}
 };
