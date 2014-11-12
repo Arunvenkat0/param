@@ -1,8 +1,6 @@
 'use strict';
 
-var ajax = require('../../ajax'),
-	components = require('../../components'),
-	dialog = require('../../dialog'),
+var dialog = require('../../dialog'),
 	sendToFriend = require('../../send-to-friend'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
@@ -13,21 +11,8 @@ var ajax = require('../../ajax'),
 	content = require('./content'),
 	image = require('./image'),
 	productNav = require('./productNav'),
+	recommendations = require('./recommendations'),
 	swatch = require('./swatch');
-
-
-/**
- * @private
- * @function
- * @description Creates product recommendation carousel using jQuery jcarousel plugin
- */
-function loadRecommendations() {
-	var $carousel = $('#carousel-recomendations');
-	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
-		return;
-	}
-	$carousel.jcarousel(components.carouselSettings);
-}
 
 /**
  * @private
@@ -52,7 +37,7 @@ function initializeDom() {
 		});
 	}
 
-	loadRecommendations();
+	recommendations();
 	productNav();
 
 	if ($('#product-set-list').length > 0) {
