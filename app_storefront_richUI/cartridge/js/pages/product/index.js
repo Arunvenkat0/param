@@ -37,9 +37,6 @@ function initializeDom() {
 		});
 	}
 
-	recommendations();
-	productNav();
-
 	if ($('#product-set-list').length > 0) {
 		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
 		if (unavailable.length > 0) {
@@ -48,6 +45,8 @@ function initializeDom() {
 		}
 	}
 
+	recommendations();
+	productNav();
 	tooltip.init();
 }
 
@@ -72,11 +71,8 @@ function initializeEvents() {
 	addThis();
 	// add or update shopping cart line item
 	addToCart();
-
 	availability();
-
 	swatch();
-
 	image.loadZoom();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
@@ -137,7 +133,6 @@ function initializeEvents() {
 		$('html, body').scrollTop($('#tab4').offset().top);
 	});
 }
-
 
 var product = {
 	initializeEvents: initializeEvents,
