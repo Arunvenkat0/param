@@ -26,10 +26,10 @@
 		<thead>
 			<tr>
 				<th></th>
-				<isloop items="${pdict.CompareList.products}" var="productID" status="Status">
+				<isloop items="${pdict.CompareList.products}" var="productID" status="status">
 					<isset name="compareProduct" value="${dw.catalog.ProductMgr.getProduct(productID)}" scope="page"/>
 
-					<th class="product">
+					<th class="product" style="width: ${90 / pdict.CompareList.products.length}%">
 						<iscomment>render a full featured product tile</iscomment>
 						<isproducttile product="${compareProduct}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}"/>
 
