@@ -12,33 +12,9 @@ var ajax = require('../../ajax'),
 	availability = require('./availability'),
 	content = require('./content'),
 	image = require('./image'),
+	productNav = require('./productNav'),
 	swatch = require('./swatch');
 
-/**
- * @private
- * @function
- * @description Loads product's navigation on the product detail page
- */
-function loadProductNavigation() {
-	var $pidInput = $('.pdpForm').find('input[name="pid"]').last(),
-		$navContainer = $('#product-nav-container');
-	// if no hash exists, or no pid exists, or nav container does not exist, return
-	if (window.location.hash.length <= 1 || $pidInput.length === 0 || $navContainer.length === 0) {
-		return;
-	}
-
-	var pid = $pidInput.val();
-	var hashParams = window.location.hash.substr(1);
-	if (hashParams.indexOf('pid=' + pid) < 0) {
-		hashParams += '&pid=' + pid;
-	}
-
-	var url = Urls.productNav + (Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
-	ajax.load({
-		url:url,
-		target: $navContainer
-	});
-}
 
 /**
  * @private
@@ -77,7 +53,7 @@ function initializeDom() {
 	}
 
 	loadRecommendations();
-	loadProductNavigation();
+	productNav();
 
 	if ($('#product-set-list').length > 0) {
 		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
