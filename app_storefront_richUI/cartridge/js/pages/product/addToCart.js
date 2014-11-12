@@ -23,7 +23,7 @@ var addItemToCart = function (form) {
 		url: util.ajaxUrl(Urls.addProduct),
 		data: $form.serialize()
 	}));
-}
+};
 
 /**
  * @description Handler to handle the add to cart event
@@ -32,7 +32,7 @@ var addToCart = function (e) {
 	e.preventDefault();
 	var $form = $(this).closest('form');
 
-	addItemToCart($form).then(function () {
+	addItemToCart($form).then(function (response) {
 		var $uuid = $form.find('input[name="uuid"]');
 		if ($uuid.length > 0 && $uuid.val().length > 0) {
 			page.refresh();
@@ -59,7 +59,7 @@ var addAllToCart = function (e) {
 			// show the final response only, which would include all the other items
 			minicart.show(responses[responses.length - 1]);
 		});
-}
+};
 
 /**
  * @function
@@ -73,5 +73,5 @@ module.exports = function (target) {
 		$('.add-to-cart').on('click', addToCart);
 	}
 
-	$('#add-all-to-cart').on('click', addAllToCart)
-;};
+	$('#add-all-to-cart').on('click', addAllToCart);
+};

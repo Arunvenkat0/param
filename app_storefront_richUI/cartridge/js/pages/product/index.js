@@ -3,9 +3,6 @@
 var ajax = require('../../ajax'),
 	components = require('../../components'),
 	dialog = require('../../dialog'),
-	minicart = require('../../minicart'),
-	progress = require('../../progress'),
-	quickview = require('../../quickview'),
 	sendToFriend = require('../../send-to-friend'),
 	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
@@ -13,6 +10,7 @@ var ajax = require('../../ajax'),
 	addThis = require('./addThis'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability'),
+	content = require('./content'),
 	image = require('./image'),
 	swatch = require('./swatch');
 
@@ -103,11 +101,7 @@ function initializeDom() {
  * - send to friend functionality
  */
 function initializeEvents() {
-	var $pdpMain = $('#pdpMain'),
-		$pdpForm = $('.pdpForm'),
-		$addToCart = $('#add-to-cart'),
-		$addAllToCart = $('#add-all-to-cart'),
-		$productSetList = $('#product-set-list');
+	var $pdpMain = $('#pdpMain');
 
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
@@ -138,13 +132,11 @@ function initializeEvents() {
 	});
 
 	$pdpMain.on('click', '.productthumbnail', function () {
-		var lgImg = $(this).data('lgimg');
-
 		// switch indicator
 		$pdpMain.find('.product-thumbnails .selected').removeClass('selected');
 		$(this).closest('li').addClass('selected');
 
-		image.setMainImage(lgImg);
+		image.setMainImage($(this).data('lgimg'));
 	});
 
 	// dropdown variations
@@ -162,88 +154,7 @@ function initializeEvents() {
 	// handle drop down variation attribute value selection event
 	$pdpMain.on('change', '.variation-select', function () {
 		if ($(this).val().length === 0) { return; }
-		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
-			$productSet = $(this).closest('.subProduct'),
-			params = {
-				Quantity: isNaN(qty) ? '1' : qty,
-				format: 'ajax',
-				productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
-			},
-			hasSwapImage = $(this).find('option:selected').attr('data-lgimg') !== null;
-
-		progress.show($pdpMain);
-
-		ajax.load({
-			url: util.appendParamsToUrl($(this).val(), params),
-			target: ($productSet.length > 0 && $productSet.children.length > 0) ? $productSet : $('#product-content'),
-			callback: function () {
-				addThis();
-				addToCart();
-				if (hasSwapImage) {
-					image.replaceImages();
-				}
-				tooltip.init();
-			}
-		});
-	});
-
-	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
-		e.preventDefault();
-		if ($(this).parents('li').hasClass('unselectable')) { return; }
-		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
-			params = {
-				Quantity: isNaN(qty) ? '1' : qty,
-				format: 'ajax',
-				productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
-			},
-			hasSwapImage = ($(this).attr('data-lgimg') !== null);
-
-		progress.show($pdpMain);
-
-		ajax.load({
-			url: util.appendParamsToUrl(this.href, params),
-			target: $('#product-content'),
-			callback: function () {
-				addThis();
-				addToCart();
-				if (SitePreferences.STORE_PICKUP) {
-					storeinventory.buildStoreList($('.product-number span').html());
-				}
-				if (hasSwapImage) {
-					image.replaceImages();
-				}
-				tooltip.init();
-			}
-		});
-	});
-
-	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
-		var params, qty, url, $psItem, $container;
-		e.preventDefault();
-		// get the querystring from the anchor element
-		params = util.getQueryStringParams(this.search);
-		$psItem = $(this).closest('.product-set-item');
-		qty = $psItem.find('form input[name="Quantity"]').first().val();
-		params.Quantity = isNaN(qty) ? '1' : qty;
-		url = Urls.getSetItem + '?' + $.param(params);
-		$container = $(this).closest('.product-set-item');
-
-		ajax.load({
-			url: url,
-			target: $container,
-			callback: function () {
-				progress.hide();
-				if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
-					$addAllToCart.attr('disabled', 'disabled');
-					$addToCart.attr('disabled', 'disabled'); // this may be a bundle
-				} else {
-					$addAllToCart.removeAttr('disabled');
-					$addToCart.removeAttr('disabled'); // this may be a bundle
-				}
-				addToCart($container);
-				tooltip.init();
-			}
-		});
+		content.update($(this).val());
 	});
 
 	sendToFriend.initializeDialog($pdpMain);

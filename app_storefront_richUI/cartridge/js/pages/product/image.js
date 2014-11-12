@@ -28,11 +28,11 @@ var loadZoom = function () {
 
 	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
 		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(options);
+		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
 	} else {
 		$imgZoom.removeClass('image-zoom');
 	}
-}
+};
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag
@@ -54,13 +54,14 @@ var setMainImage = function (atts) {
  * @description Replaces the images in the image container, for eg. when a different color was clicked.
  */
 var replaceImages = function () {
-	var $newImages = $('#update-images');
-	var $imageContainer = $('#pdpMain .product-image-container');
+	var $newImages = $('#update-images'),
+		$imageContainer = $('#pdpMain .product-image-container');
+	if ($newImages.length === 0) { return; }
 
 	$imageContainer.html($newImages.html());
 	$newImages.remove();
 	loadZoom();
-}
+};
 
 /* @module image
  * @description this module handles the primary image viewer on PDP
