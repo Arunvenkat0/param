@@ -9,6 +9,7 @@ var minicart = require('../../minicart'),
 
 /**
  * @description Make the AJAX request to add an item to cart
+ * @param {Element} form The form element that contains the item quantity and ID data
  * @returns {Promise}
  */
 var addItemToCart = function (form) {

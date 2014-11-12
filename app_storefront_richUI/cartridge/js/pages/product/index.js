@@ -12,7 +12,9 @@ var ajax = require('../../ajax'),
 	util = require('../../util'),
 	addThis = require('./addThis'),
 	addToCart = require('./addToCart'),
-	availability = require('./availability');
+	availability = require('./availability'),
+	image = require('./image'),
+	swatch = require('./swatch');
 
 /**
  * @private
@@ -54,103 +56,6 @@ function loadRecommendations() {
 }
 
 /**
- * @function
- * @description Sets the main image attributes and the href for the surrounding <a> tag
- * @param {Object} atts Simple object with url, alt, title and hires properties
- */
-function setMainImage(atts) {
-	var imgZoom = $('#pdpMain .main-image');
-	if (imgZoom.length > 0 && atts.hires && atts.hires !== '' && atts.hires !== 'null') {
-		imgZoom.attr('href', atts.hires);
-	}
-
-	imgZoom.find('.primary-image').attr({
-		src: atts.url,
-		alt: atts.alt,
-		title: atts.title
-	});
-}
-
-/**
- * @function
- * @description helper function for swapping main image on swatch hover
- * @param {Element} element DOM element with custom data-lgimg attribute
- */
-function swapImage(element) {
-	var lgImg = $(element).data('lgimg');
-	if (!lgImg) {
-		return;
-	}
-	var newImg = $.extend({}, lgImg);
-	var imgZoom = $('#pdpMain .main-image');
-	var mainImage = imgZoom.find('.primary-image');
-	// store current image info
-	lgImg.hires = imgZoom.attr('href');
-	lgImg.url = mainImage.attr('src');
-	lgImg.alt = mainImage.attr('alt');
-	lgImg.title = mainImage.attr('title');
-	// reset element's lgimg data attribute
-	$(element).data(lgImg);
-	// set the main image
-	setMainImage(newImg);
-}
-
-/**
- * @function
- * @description Enables the zoom viewer on the product detail page
- */
-function loadZoom() {
-	if (quickview.isActive() || util.isMobile()) { return; }
-
-	//zoom properties
-	var options = {
-		zoomType: 'standard',
-		alwaysOn: 0, // setting to 1 will load load high res images on page load
-		zoomWidth: 575,
-		zoomHeight: 349,
-		position: 'right',
-		preloadImages: 0, // setting to 1 will load load high res images on page load
-		xOffset: 30,
-		yOffset: 0,
-		showEffect: 'fadein',
-		hideEffect: 'fadeout'
-	};
-
-	// Added to prevent empty hires zoom feature (if images don't exist)
-	var mainImage = $('#pdpMain').find('.main-image');
-	var hiresImageSrc = mainImage.attr('href');
-	if (hiresImageSrc && hiresImageSrc !== '' && hiresImageSrc.indexOf('noimagelarge') < 0) {
-		mainImage.removeData('jqzoom').jqzoom(options);
-	}
-}
-/**
- * @function
- * @description replaces the images in the image container. for example when a different color was clicked.
- */
-function replaceImages() {
-	var newImages = $('#update-images');
-	var imageContainer = $('#pdpMain').find('.product-image-container');
-
-	imageContainer.html(newImages.html());
-	newImages.remove();
-	setMainImageLink();
-
-	loadZoom();
-}
-/**
- * @function
- * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
- */
-function setMainImageLink() {
-	var $mainImage = $('#pdpMain .main-image');
-	if (quickview.isActive() || util.isMobile()) {
-		$mainImage.removeAttr('href');
-	} else {
-		$mainImage.addClass('image-zoom');
-	}
-}
-
-/**
  * @private
  * @function
  * @description Initializes the DOM of the product detail page (images, reviews, recommendation and product-navigation).
@@ -175,7 +80,6 @@ function initializeDom() {
 
 	loadRecommendations();
 	loadProductNavigation();
-	setMainImageLink();
 
 	if ($('#product-set-list').length > 0) {
 		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
@@ -189,7 +93,6 @@ function initializeDom() {
 }
 
 /**
- * @private
  * @function
  * @description Initializes events on the product detail page for the following elements:
  * - availability message
@@ -205,14 +108,21 @@ function initializeEvents() {
 		$addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
 		$productSetList = $('#product-set-list');
-	addThis();
+
 	if (SitePreferences.STORE_PICKUP) {
 		storeinventory.buildStoreList($('.product-number span').html());
+		storeinventory.init();
 	}
+
+	addThis();
 	// add or update shopping cart line item
 	addToCart();
 
 	availability();
+
+	swatch();
+
+	image.loadZoom();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -234,14 +144,7 @@ function initializeEvents() {
 		$pdpMain.find('.product-thumbnails .selected').removeClass('selected');
 		$(this).closest('li').addClass('selected');
 
-		setMainImage(lgImg);
-		// load zoom if not quick view
-		if (lgImg.hires !== '' && lgImg.hires.indexOf('noimagelarge') < 0) {
-			setMainImageLink();
-			loadZoom();
-		} else {
-			$pdpMain.find('.main-image').removeClass('image-zoom');
-		}
+		image.setMainImage(lgImg);
 	});
 
 	// dropdown variations
@@ -258,60 +161,47 @@ function initializeEvents() {
 
 	// handle drop down variation attribute value selection event
 	$pdpMain.on('change', '.variation-select', function () {
-		if ($(this).val().length === 0) {return;}
+		if ($(this).val().length === 0) { return; }
 		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
-			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
-			productSet = $(this).closest('.subProduct'),
+			$productSet = $(this).closest('.subProduct'),
 			params = {
 				Quantity: isNaN(qty) ? '1' : qty,
-				format: 'ajax'
-			};
-		if (listid) {params.productlistid = listid;}
-		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
-		var url = util.appendParamsToUrl($(this).val(), params);
+				format: 'ajax',
+				productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
+			},
+			hasSwapImage = $(this).find('option:selected').attr('data-lgimg') !== null;
+
 		progress.show($pdpMain);
-		var hasSwapImage = $(this).find('option:selected').attr('data-lgimg') !== null;
 
 		ajax.load({
-			url: url,
-			callback: function (data) {
-				target.html(data);
+			url: util.appendParamsToUrl($(this).val(), params),
+			target: ($productSet.length > 0 && $productSet.children.length > 0) ? $productSet : $('#product-content'),
+			callback: function () {
 				addThis();
 				addToCart();
 				if (hasSwapImage) {
-					replaceImages();
+					image.replaceImages();
 				}
-				$('#update-images').remove();
 				tooltip.init();
 			}
 		});
 	});
 
-	$pdpMain.on('hover', '.swatchanchor', function () {
-		swapImage(this);
-	});
-
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
-		var $this = $(this),
-			params = {},
-			hasSwapImage, qty, listid, url;
-
 		e.preventDefault();
+		if ($(this).parents('li').hasClass('unselectable')) { return; }
+		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
+			params = {
+				Quantity: isNaN(qty) ? '1' : qty,
+				format: 'ajax',
+				productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
+			},
+			hasSwapImage = ($(this).attr('data-lgimg') !== null);
 
-		if ($this.parents('li').hasClass('unselectable')) {return;}
-
-		hasSwapImage = ($this.attr('data-lgimg') !== null);
-		qty = $pdpForm.find('input[name="Quantity"]').first().val();
-		listid = $pdpForm.find('input[name="productlistid"]').first().val();
-		params.Quantity = isNaN(qty) ? '1' : qty;
-		if (listid) {
-			params.productlistid = listid;
-		}
-		url = util.appendParamsToUrl(this.href, params);
 		progress.show($pdpMain);
 
 		ajax.load({
-			url: url,
+			url: util.appendParamsToUrl(this.href, params),
 			target: $('#product-content'),
 			callback: function () {
 				addThis();
@@ -320,7 +210,7 @@ function initializeEvents() {
 					storeinventory.buildStoreList($('.product-number span').html());
 				}
 				if (hasSwapImage) {
-					replaceImages();
+					image.replaceImages();
 				}
 				tooltip.init();
 			}
@@ -382,10 +272,6 @@ var product = {
 	init: function () {
 		initializeDom();
 		initializeEvents();
-		loadZoom();
-		if (SitePreferences.STORE_PICKUP) {
-			storeinventory.init();
-		}
 	}
 };
 
