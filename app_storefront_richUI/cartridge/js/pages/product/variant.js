@@ -41,10 +41,7 @@ var updateContent = function (href) {
 };
 
 module.exports = function () {
-	var $addToCart = $('#add-to-cart'),
-		$addAllToCart = $('#add-all-to-cart'),
-		$pdpMain = $('#pdpMain'),
-		$productSetList = $('#product-set-list');
+	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
 	$pdpMain.on('hover', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
@@ -74,34 +71,5 @@ module.exports = function () {
 	$pdpMain.on('change', '.variation-select', function () {
 		if ($(this).val().length === 0) { return; }
 		updateContent($(this).val());
-	});
-
-	// click on swatch for product set
-	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
-		e.preventDefault();
-		var url = Urls.getSetItem + this.search,
-			$container = $(this).closest('.product-set-item'),
-			qty = $container.find('form input[name="Quantity"]').first().val();
-		if (isNaN(qty)) {
-			qty = '1';
-		}
-		url = util.appendParamToURL(url, 'Quantity', qty);
-
-		ajax.load({
-			url: url,
-			target: $container,
-			callback: function () {
-				if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
-					$addAllToCart.attr('disabled', 'disabled');
-					// product set does not have an add-to-cart button, but product bundle does
-					$addToCart.attr('disabled', 'disabled');
-				} else {
-					$addAllToCart.removeAttr('disabled');
-					$addToCart.removeAttr('disabled');
-				}
-				addToCart($container);
-				tooltip.init();
-			}
-		});
 	});
 };

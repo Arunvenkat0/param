@@ -11,6 +11,7 @@ var dialog = require('../../dialog'),
 	image = require('./image'),
 	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
+	productSet = require('./productSet'),
 	recommendations = require('./recommendations'),
 	variant = require('./variant');
 
@@ -21,15 +22,6 @@ var dialog = require('../../dialog'),
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
-
-	if ($('#product-set-list').length > 0) {
-		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
-		if (unavailable.length > 0) {
-			$('#add-all-to-cart').attr('disabled', 'disabled');
-			$('#add-to-cart').attr('disabled', 'disabled'); // this may be a bundle
-		}
-	}
-
 	powerReviews();
 	productNav();
 	recommendations();
@@ -60,6 +52,7 @@ function initializeEvents() {
 	variant();
 	image();
 	sendToFriend.initializeDialog($pdpMain);
+	productSet();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
