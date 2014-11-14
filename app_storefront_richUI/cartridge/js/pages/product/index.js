@@ -16,9 +16,7 @@ var dialog = require('../../dialog'),
 	variant = require('./variant');
 
 /**
- * @private
- * @function
- * @description Initializes the DOM of the product detail page (images, reviews, recommendation and product-navigation).
+ * @description Initialize product detail page with reviews, recommendation and product navigation.
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
@@ -29,22 +27,10 @@ function initializeDom() {
 }
 
 /**
- * @function
- * @description Initializes events on the product detail page for the following elements:
- * - availability message
- * - add to cart functionality
- * - images and swatches
- * - variation selection
- * - option selection
- * - send to friend functionality
+ * @description Initialize event handlers on product detail page
  */
 function initializeEvents() {
 	var $pdpMain = $('#pdpMain');
-
-	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.buildStoreList($('.product-number span').html());
-		storeinventory.init();
-	}
 
 	addThis();
 	addToCart();
@@ -53,6 +39,10 @@ function initializeEvents() {
 	image();
 	sendToFriend.initializeDialog($pdpMain);
 	productSet();
+	if (SitePreferences.STORE_PICKUP) {
+		storeinventory.buildStoreList($('.product-number span').html());
+		storeinventory.init();
+	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -78,10 +68,6 @@ function initializeEvents() {
 	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
 		e.preventDefault();
 	});
-
-	$pdpMain.find('.add-to-cart[disabled]')
-		.attr('title', $pdpMain.find('.availability-msg')
-		.html());
 
 	$('.size-chart-link a').on('click', function (e) {
 		e.preventDefault();

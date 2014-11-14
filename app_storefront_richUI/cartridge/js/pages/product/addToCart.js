@@ -67,6 +67,8 @@ var addAllToCart = function (e) {
  * @param {Element} target The target on which an add to cart event-handler will be set
  */
 module.exports = function (target) {
+	$('.add-to-cart[disabled]').attr('title', $('.availability-msg').text());
+
 	if (target) {
 		target.on('click', '.add-to-cart', addToCart);
 	} else {
