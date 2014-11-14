@@ -1,11 +1,44 @@
 'use strict';
 
-var addToCart = require('./addToCart'),
+var addThis = require('./addThis'),
+	addToCart = require('./addToCart'),
 	ajax = require('../../ajax'),
-	content = require('./content'),
 	image = require('./image'),
+	progress = require('../../progress'),
+	storeinventory = require('../../storeinventory'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
+
+
+/**
+ * @description update product content with new variant from href, load new content to #product-content panel
+ * @param {String} href - url of the new product variant
+ **/
+var updateContent = function (href) {
+	var $pdpForm = $('.pdpForm'),
+		qty = $pdpForm.find('input[name="Quantity"]').first().val(),
+		params = {
+			Quantity: isNaN(qty) ? '1' : qty,
+			format: 'ajax',
+			productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
+		};
+
+	progress.show($('#pdpMain'));
+
+	ajax.load({
+		url: util.appendParamsToUrl(href, params),
+		target: $('#product-content'),
+		callback: function () {
+			addThis();
+			addToCart();
+			if (SitePreferences.STORE_PICKUP) {
+				storeinventory.buildStoreList($('.product-number span').html());
+			}
+			image.replaceImages();
+			tooltip.init();
+		}
+	});
+};
 
 module.exports = function () {
 	var $addToCart = $('#add-to-cart'),
@@ -34,13 +67,13 @@ module.exports = function () {
 	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
 		e.preventDefault();
 		if ($(this).parents('li').hasClass('unselectable')) { return; }
-		content.update(this.href);
+		updateContent(this.href);
 	});
 
 	// change drop down variation attribute - should replace product content with new variant
 	$pdpMain.on('change', '.variation-select', function () {
 		if ($(this).val().length === 0) { return; }
-		content.update($(this).val());
+		updateContent($(this).val());
 	});
 
 	// click on swatch for product set
