@@ -19,7 +19,7 @@ function initQuickViewButtons() {
 			quickview.show({
 				url: $(this).attr('href'),
 				source: 'quickview',
-				callback: product.init
+				callback: product.initializeEvents
 			});
 		});
 	});

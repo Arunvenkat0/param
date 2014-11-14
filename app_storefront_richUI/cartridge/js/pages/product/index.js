@@ -55,11 +55,11 @@ function initializeEvents() {
 	}
 
 	addThis();
-	// add or update shopping cart line item
 	addToCart();
 	availability();
 	variant();
 	image();
+	sendToFriend.initializeDialog($pdpMain);
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -74,7 +74,7 @@ function initializeEvents() {
 		window.location.href = url;
 	});
 
-	// dropdown variations
+	// product options
 	$pdpMain.on('change', '.product-options select', function () {
 		var salesPrice = $pdpMain.find('.product-add-to-cart .price-sales');
 		var selectedItem = $(this).children().filter(':selected').first();
@@ -85,8 +85,6 @@ function initializeEvents() {
 	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
 		e.preventDefault();
 	});
-
-	sendToFriend.initializeDialog($pdpMain);
 
 	$pdpMain.find('.add-to-cart[disabled]')
 		.attr('title', $pdpMain.find('.availability-msg')
