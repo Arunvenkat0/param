@@ -1,6 +1,7 @@
 'use strict';
 
 var addToCart = require('./addToCart'),
+	ajax = require('../../ajax'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
@@ -18,7 +19,7 @@ module.exports = function () {
 			$addAllToCart.removeAttr('disabled');
 			$addToCart.removeAttr('disabled');
 		}
-	}
+	};
 
 	if ($productSetList.length > 0) {
 		updateAddToCartButtons();
@@ -44,4 +45,4 @@ module.exports = function () {
 			}
 		});
 	});
-}
+};

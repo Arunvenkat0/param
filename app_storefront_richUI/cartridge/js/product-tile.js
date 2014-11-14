@@ -18,8 +18,7 @@ function initQuickViewButtons() {
 			e.preventDefault();
 			quickview.show({
 				url: $(this).attr('href'),
-				source: 'quickview',
-				callback: product.initializeEvents
+				source: 'quickview'
 			});
 		});
 	});

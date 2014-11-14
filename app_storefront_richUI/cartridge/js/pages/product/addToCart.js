@@ -1,8 +1,8 @@
 'use strict';
 
-var minicart = require('../../minicart'),
+var dialog = require('../../dialog'),
+	minicart = require('../../minicart'),
 	page = require('../../page'),
-	quickview = require('../../quickview'),
 	util = require('../../util'),
 	TPromise = require('promise'),
 	_ = require('lodash');
@@ -40,7 +40,7 @@ var addToCart = function (e) {
 			// do not close quickview if adding individual item that is part of product set
 			// @TODO should notify the user some other way that the add action has completed successfully
 			if (!$(this).hasClass('sub-product-item')) {
-				quickview.close();
+				dialog.close();
 			}
 			minicart.show(response);
 		}
@@ -55,7 +55,7 @@ var addAllToCart = function (e) {
 	var $productForms = $('#product-set-list').find('form').toArray();
 	Promise.all(_.map($productForms, addItemToCart))
 		.then(function (responses) {
-			quickview.close();
+			dialog.close();
 			// show the final response only, which would include all the other items
 			minicart.show(responses[responses.length - 1]);
 		});

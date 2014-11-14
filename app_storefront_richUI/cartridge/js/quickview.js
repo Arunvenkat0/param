@@ -1,6 +1,7 @@
 'use strict';
 
 var dialog = require('./dialog'),
+	product = require('./pages/product'),
 	util = require('./util'),
 	_ = require('lodash');
 
@@ -18,16 +19,18 @@ var makeUrl = function (url, source, productListID) {
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
-			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
+			this.$container = $('<div/>').attr('id', 'QuickViewDialog').appendTo(document.body);
 		}
 		this.productLinks = $('#search-result-items .thumb-link').map(function (index, thumbLink) {
 			return $(thumbLink).attr('href');
 		});
 	},
 
-	initializeQuickViewNav: function (qvUrl) {
+	setup: function (qvUrl) {
 		var $btnNext = $('.quickview-next'),
 			$btnPrev = $('.quickview-prev');
+
+		product.initializeEvents();
 
 		// remove any param
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
@@ -69,17 +72,17 @@ var quickview = {
 		var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
 		dialog.replace({
 			url: url,
-			callback: this.initializeQuickViewNav.bind(this, url)
+			callback: this.setup.bind(this, url)
 		});
 	},
 
 	/**
 	 * @description show quick view dialog
-	 * @param {object} options
-	 * @param {stirng} options.url - url of the product details
-	 * @param {string} options.source - source of the dialog to be appended to URL
-	 * @param {string} options.productlistid - to be appended to URL
-	 * @param {function} options.callback - callback once the dialog is opened
+	 * @param {Object} options
+	 * @param {String} options.url - url of the product details
+	 * @param {String} options.source - source of the dialog to be appended to URL
+	 * @param {String} options.productlistid - to be appended to URL
+	 * @param {Function} options.callback - callback once the dialog is opened
 	 */
 	show: function (options) {
 		var url;
@@ -95,23 +98,14 @@ var quickview = {
 				width: 920,
 				title: 'Product Quickview',
 				open: function () {
-					this.initializeQuickViewNav(url);
+					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }
 				}.bind(this)
 			}
 		});
 	},
-	// close the quick view dialog
-	close: function () {
-		if (this.exists()) {
-			this.$container.dialog('close').empty();
-		}
-	},
 	exists: function () {
 		return this.$container && (this.$container.length > 0);
-	},
-	isActive: function () {
-		return this.exists() && (this.$container.children.length > 0);
 	}
 };
 
