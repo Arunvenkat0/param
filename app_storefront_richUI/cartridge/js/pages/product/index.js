@@ -59,7 +59,7 @@ function initializeEvents() {
 	addToCart();
 	availability();
 	variant();
-	image.loadZoom();
+	image();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
@@ -72,14 +72,6 @@ function initializeEvents() {
 		var url = util.appendParamsToUrl(this.href, data);
 		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
 		window.location.href = url;
-	});
-
-	$pdpMain.on('click', '.productthumbnail', function () {
-		// switch indicator
-		$pdpMain.find('.product-thumbnails .selected').removeClass('selected');
-		$(this).closest('li').addClass('selected');
-
-		image.setMainImage($(this).data('lgimg'));
 	});
 
 	// dropdown variations

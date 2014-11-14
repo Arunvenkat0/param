@@ -66,6 +66,21 @@ var replaceImages = function () {
 /* @module image
  * @description this module handles the primary image viewer on PDP
  **/
+
+/**
+ * @description by default, this function sets up zoom and event handler for thumbnail click
+ **/
+module.exports = function () {
+	loadZoom();
+	// handle product thumbnail click event
+	$('#pdpMain').on('click', '.productthumbnail', function () {
+		// switch indicator
+		$(this).closest('.product-thumbnails').find('.thumb.selected').removeClass('selected');
+		$(this).closest('.thumb').addClass('selected');
+
+		setMainImage($(this).data('lgimg'));
+	})
+}
 module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
