@@ -10,6 +10,7 @@ var dialog = require('../../dialog'),
 	availability = require('./availability'),
 	content = require('./content'),
 	image = require('./image'),
+	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
 	recommendations = require('./recommendations'),
 	swatch = require('./swatch');
@@ -21,21 +22,6 @@ var dialog = require('../../dialog'),
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
-	if ($('#pwrwritediv').length > 0) {
-		var options = $.extend(true, {}, dialog.settings, {
-			autoOpen: true,
-			height: 750,
-			width: 650,
-			dialogClass: 'writereview',
-			title: 'Product Review',
-			resizable: false
-		});
-
-		dialog.create({
-			target: $('#pwrwritediv'),
-			options: options
-		});
-	}
 
 	if ($('#product-set-list').length > 0) {
 		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
@@ -45,8 +31,9 @@ function initializeDom() {
 		}
 	}
 
-	recommendations();
+	powerReviews();
 	productNav();
+	recommendations();
 	tooltip.init();
 }
 
@@ -125,12 +112,6 @@ function initializeEvents() {
 		dialog.open({
 			url: $(e.target).attr('href')
 		});
-	});
-
-	$pdpMain.on('click', '.prSnippetLink', function (e) {
-		e.preventDefault();
-		$('.product-tabs').tabs('select', '#tab4');
-		$('html, body').scrollTop($('#tab4').offset().top);
 	});
 }
 
