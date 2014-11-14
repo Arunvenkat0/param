@@ -37,6 +37,12 @@ module.exports = function () {
 		content.update(this.href);
 	});
 
+	// change drop down variation attribute - should replace product content with new variant
+	$pdpMain.on('change', '.variation-select', function () {
+		if ($(this).val().length === 0) { return; }
+		content.update($(this).val());
+	});
+
 	// click on swatch for product set
 	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
 		e.preventDefault();

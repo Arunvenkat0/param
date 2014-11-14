@@ -8,12 +8,11 @@ var dialog = require('../../dialog'),
 	addThis = require('./addThis'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability'),
-	content = require('./content'),
 	image = require('./image'),
 	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
 	recommendations = require('./recommendations'),
-	swatch = require('./swatch');
+	variant = require('./variant');
 
 /**
  * @private
@@ -59,7 +58,7 @@ function initializeEvents() {
 	// add or update shopping cart line item
 	addToCart();
 	availability();
-	swatch();
+	variant();
 	image.loadZoom();
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
@@ -93,12 +92,6 @@ function initializeEvents() {
 	// prevent default behavior of thumbnail link and add this Button
 	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
 		e.preventDefault();
-	});
-
-	// handle drop down variation attribute value selection event
-	$pdpMain.on('change', '.variation-select', function () {
-		if ($(this).val().length === 0) { return; }
-		content.update($(this).val());
 	});
 
 	sendToFriend.initializeDialog($pdpMain);
