@@ -1,10 +1,63 @@
 'use strict';
 
-var ajax = require('./ajax'),
+var _ = require('lodash'),
+	ajax = require('./ajax'),
+	dialog = require('./dialog'),
 	page = require('./page'),
 	util = require('./util');
 
 var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
+
+var storeTemplate = function (store) {
+	return '' +
+	'<li class="store-tile ' + store.storeId + '">' +
+	'	<p class="store-address">' +
+	'		' + store.address1 + '<br/>' +
+	'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode +
+	'	</p>' +
+	'	<p class="store-status ' + store.statusClass + '">' + store.status + '</p>' +
+	'	<button class="select-store-button" value="' + store.storeId +
+	'" data-stock-status="' + status + (statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') +
+	'		' + Resources.SELECT_STORE +
+	'	</button>' +
+	'</li>';
+}
+
+var storeListTemplate = function (stores) {
+	if (stores && stores.length) {
+		return '' +
+		'<ul class="store-list">' +
+		_.map(stores, storeListTemplate) +
+		'</ul>';
+	} else {
+		return '<div class="no-results">No Results</div>';
+	}
+};
+
+var zipPromptTemplate = function () {
+	return '' +
+	'<div id="preferred-store-panel">' +
+	'	<input type="text" id="user-zip" placeholder="' + Resources.ENTER_ZIP + '" name="zipCode"/>' +
+	'</div>';
+};
+
+/**
+ * @description test whether zipcode is valid for either US or Canada
+ * @return {Boolean} true if the zipcode is valid for either country, false if it's invalid for both
+ **/
+var validateZipCode = function (zipCode) {
+	var regexes = {
+		canada: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i,
+		usa: /^\d{5}(-\d{4})?$/
+	},
+		valid = false;
+	if (!zipCode) { return; }
+	_.each(regexes, function (re) {
+		var regexp = new RegExp(re);
+		valid = regexp.test(zipCode);
+	});
+	return valid;
+}
 
 var storeinventory = {
 	init: function () {
@@ -21,9 +74,13 @@ var storeinventory = {
 			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
 		});
 
-		$('body').on('click', '#pdpMain .set-preferred-store', function () {
-			self.loadPreferredStorePanel($(this).parent().attr('id'));
-			return false;
+		$('#pdpMain').on('click', '.set-preferred-store', function (e) {
+			e.preventDefault();
+			if (!User.zip) {
+				self.zipPrompt();
+			} else {
+				self.buildStoreList($('input[name="pid"]').val());
+			}
 		});
 
 		$('.item-delivery-options input.radio-url').on('click', function () {
@@ -41,6 +98,27 @@ var storeinventory = {
 				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
 				($instore.children('input').attr('checked') === 'checked')) {
 				$('.cart-action-checkout button').attr('disabled', 'disabled');
+			}
+		});
+	},
+
+	zipPrompt: function () {
+		var self = this;
+		dialog.open({
+			html: zipPromptTemplate(),
+			options: {
+				buttons: [
+					{
+						text: Resources.SEARCH,
+						click: function () {
+							var zipCode = $('#user-zip').val();
+							if (validateZipCode(zipCode)) {
+								self.setUserZip(zipCode);
+								self.buildStoreList($('input[name="pid"]').val());
+							}
+						}
+					}
+				]
 			}
 		});
 	},
@@ -74,6 +152,21 @@ var storeinventory = {
 			}
 	},
 	buildStoreList: function (pid) {
+		$.ajax({
+			url: util.appendParamsToUrl(Urls.storesInventory, {
+				pid: pid,
+				zipCode: User.zip
+			}),
+			dataType: 'json',
+			success: function (data) {
+				var storeList = storeListTemplate(data);
+				dialog.open({
+					html: storeList
+				});
+			}
+		})
+	},
+	buildStoreList2: function (pid) {
 		var self = this;
 		this.$storeList = $('<div class="store-list">');
 		// request results from server

@@ -40,7 +40,6 @@ function initializeEvents() {
 	sendToFriend.initializeDialog($pdpMain);
 	productSet();
 	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.buildStoreList($('.product-number span').html());
 		storeinventory.init();
 	}
 
