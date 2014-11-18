@@ -1,6 +1,7 @@
 'use strict';
 
-var product = require('./pages/product'),
+var imagesLoaded = require('imagesloaded'),
+	product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
@@ -89,13 +90,14 @@ function initializeEvents() {
 	});
 }
 
-
 exports.init = function () {
 	var $tiles = $('.tiles-container .product-tile');
 	if ($tiles.length === 0) { return; }
-	$tiles.syncHeight()
-		.each(function (idx) {
-			$(this).data('idx', idx);
-		});
+	imagesLoaded('.tiles-container').on('done', function() {
+		$tiles.syncHeight()
+			.each(function (idx) {
+				$(this).data('idx', idx);
+			});
+	});
 	initializeEvents();
 };

@@ -73,7 +73,15 @@
 			<isset name="thumbnailAlt" value="${Product.name}" scope="page"/>
 			<isset name="thumbnailTitle" value="${Product.name}" scope="page"/>
 		</isif>
-
+		
+		<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
+		<isif condition="${thumbnailTitle.charAt(0) == ','}">
+			<isset name="thumbnailTitle" value="${Product.name + thumbnailTitle}" scope="page"/>
+		</isif>
+		<isif condition="${thumbnailAlt.charAt(0) == ','}">
+			<isset name="thumbnailAlt" value="${Product.name + thumbnailAlt}" scope="page"/>
+		</isif>
+		
 		<a class="thumb-link" href="${productUrl}" title="${Product.name}">
 			<img src="${thumbnailUrl}" alt="${thumbnailAlt}" title="${thumbnailTitle}" />
 		</a>
