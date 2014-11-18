@@ -1,6 +1,6 @@
 'use strict';
 
-var addToCartHandler = require('./product/addToCartHandler'),
+var addProductToCart = require('./product/addToCart'),
 	ajax = require('../ajax'),
 	quickview = require('../quickview'),
 	sendToFriend = require('../send-to-friend'),
@@ -92,7 +92,7 @@ function initializeEvents() {
 
 exports.init = function () {
 	initializeEvents();
-	addToCartHandler();
+	addProductToCart();
 	sendToFriend.initializeDialog('.list-table-header');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
