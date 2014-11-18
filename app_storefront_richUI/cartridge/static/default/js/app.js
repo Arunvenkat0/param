@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app_storefront_richUI/cartridge/js/app.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -8,7 +8,7 @@
 
 'use strict';
 
-var components = require('./components'),
+var carousel = require('./carousel'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
@@ -159,7 +159,7 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		components.init();
+		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -189,7 +189,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","./cookieprivacy":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
+},{"./carousel":4,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":27,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -296,7 +296,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
+},{"./progress":39,"./util":47}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -581,7 +581,47 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
+},{"./ajax":2,"./dialog":7,"./page":13,"./util":47}],4:[function(require,module,exports){
+/* global dw */
+
+'use strict';
+
+/**
+ * @function
+ * @description capture recommendation of each product when it becomes visible in the carousel
+ * @param c TBD
+ * @param {Element} li The visible product element in the carousel
+ */
+
+function captureCarouselRecommendations(c, li) {
+	if (!dw) { return; }
+
+	$(li).find('.capture-product-id').each(function () {
+		dw.ac.capture({
+			id: $(this).text(),
+			type: dw.ac.EV_PRD_RECOMMENDATION
+		});
+	});
+}
+
+var carousel = {
+	settings: {
+		scroll: 1,
+		itemFallbackDimension: '100%',
+		itemVisibleInCallback: captureCarouselRecommendations
+	},
+	init: function () {
+		setTimeout(function () {
+			// renders horizontal/vertical carousels for product slots
+			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.settings));
+			$('#horizontal-carousel').jcarousel(this.settings);
+		}.bind(this), 1000);
+	}
+};
+
+module.exports = carousel;
+
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -836,49 +876,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js":[function(require,module,exports){
-/* global dw */
-
-'use strict';
-
-/**
- * @function
- * @description capture recommendation of each product when it becomes visible in the carousel
- * @param c TBD
- * @param {Element} li The visible product element in the carousel
- * @param index TBD
- * @param state TBD
- */
-
-function captureCarouselRecommendations(c, li) {
-	if (!dw) { return; }
-
-	$(li).find('.capture-product-id').each(function () {
-		dw.ac.capture({
-			id: $(this).text(),
-			type: dw.ac.EV_PRD_RECOMMENDATION
-		});
-	});
-}
-
-var components = {
-	carouselSettings: {
-		scroll: 1,
-		itemFallbackDimension: '100%',
-		itemVisibleInCallback: captureCarouselRecommendations
-	},
-	init: function () {
-		setTimeout(function () {
-			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.carouselSettings));
-			$('#horizontal-carousel').jcarousel(this.carouselSettings);
-		}.bind(this), 1000);
-	}
-};
-
-module.exports = components;
-
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
+},{"./page":13,"./util":47,"promise":54}],6:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -924,11 +922,12 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
+},{"./dialog":7}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
-	util = require('./util');
+	util = require('./util'),
+	_ = require('lodash');
 
 var dialog = {
 	/**
@@ -937,22 +936,32 @@ var dialog = {
 	 * @param {Object} params  params.target can be an id selector or an jquery object
 	 */
 	create: function (params) {
-		var id;
-		// options.target can be an id selector or an jquery object
-		var target = $(params.target || '#dialog-container');
+		var $target, id;
+
+		if (_.isString(params.target)) {
+			if (params.target.charAt(0) === '#') {
+				$target = $(params.target);
+			} else {
+				$target = $('#' + params.target);
+			}
+		} else if (params.target instanceof jQuery) {
+			$target = params.target;
+		} else {
+			$target = $('#dialog-container');
+		}
 
 		// if no element found, create one
-		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === '#') {
-				id = target.selector.substr(1);
+		if ($target.length === 0) {
+			if ($target.selector && $target.selector.charAt(0) === '#') {
+				id = $target.selector.substr(1);
+				$target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 			}
-			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
-		this.container = target;
-		this.container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.container;
+		this.$container = $target;
+		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
+		return this.$container;
 	},
 	/**
 	 * @function
@@ -963,16 +972,16 @@ var dialog = {
 		if (!params.url || params.url.length === 0) { return; }
 		// close any open dialog
 		this.close();
-		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
+		this.$container = this.create(params);
+		params.url = util.appendParamToURL(params.url, 'format', 'ajax');
 
 		// finally load the dialog
 		ajax.load({
-			target: this.container,
+			target: this.$container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog('isOpen')) { return; }
-				this.container.dialog('open');
+				if (this.$container.dialog('isOpen')) { return; }
+				this.$container.dialog('open');
 			}.bind(this)
 		});
 	},
@@ -984,23 +993,23 @@ var dialog = {
 	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
 	replace: function (options) {
-		if (!this.container) {
+		if (!this.$container) {
 			return;
 		}
 		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			ajax.load({
-				target: this.container,
+				target: this.$container,
 				url: options.url,
 				callback: function () {
 					callback();
-					if (!this.container.dialog('isOpen')) {
-						this.container.dialog('open');
+					if (!this.$container.dialog('isOpen')) {
+						this.$container.dialog('open');
 					}
 				}.bind(this)
 			});
 		} else if (options.html) {
-			this.container.empty().html(options.html);
+			this.$container.empty().html(options.html);
 			callback();
 		}
 	},
@@ -1009,10 +1018,10 @@ var dialog = {
 	 * @description Closes the dialog
 	 */
 	close: function () {
-		if (!this.container) {
+		if (!this.$container) {
 			return;
 		}
-		this.container.dialog('close');
+		this.$container.dialog('close').empty();
 	},
 	/**
 	 * @function
@@ -1020,7 +1029,7 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var $form = this.container.find('form:first');
+		var $form = this.$container.find('form:first');
 		// set the action
 		$('<input/>').attr({
 			name: action,
@@ -1040,12 +1049,18 @@ var dialog = {
 			data: data,
 			dataType: 'html',
 			success: function (html) {
-				this.container.html(html);
+				this.$container.html(html);
 			}.bind(this),
 			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
+	},
+	exists: function () {
+		return this.$container && (this.$container.length > 0);
+	},
+	isActive: function () {
+		return this.exists() && (this.$container.children.length > 0);
 	},
 	settings: {
 		autoOpen: false,
@@ -1069,7 +1084,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js":[function(require,module,exports){
+},{"./ajax":2,"./util":47,"lodash":53}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1090,7 +1105,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js":[function(require,module,exports){
+},{"./ajax":2,"./util":47}],9:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1143,7 +1158,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
+},{"./ajax":2,"./minicart":11,"./util":47}],10:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1173,7 +1188,7 @@ module.exports = function () {
 	};
 };
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1258,7 +1273,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js":[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":47}],12:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1286,7 +1301,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js":[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":47}],13:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1309,7 +1324,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js":[function(require,module,exports){
+},{"./util":47}],14:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1550,7 +1565,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../giftcert":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js":[function(require,module,exports){
+},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":46,"../util":47,"../validator":48}],15:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1569,8 +1584,7 @@ function initializeEvents() {
 		e.preventDefault();
 		quickview.show({
 			url: e.target.href,
-			source: 'cart',
-			callback: product.initializeEvents
+			source: 'cart'
 		});
 	})
 	.on('click', '.bonus-item-actions a', function (e) {
@@ -1592,7 +1606,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","./account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":40,"../storeinventory":45,"./account":14,"./product":27}],16:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1621,7 +1635,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
+},{"../../util":47,"./shipping":21}],17:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1819,7 +1833,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":8,"../../util":47,"./formPrepare":18}],18:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1878,7 +1892,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js":[function(require,module,exports){
+},{"lodash":53}],19:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1907,7 +1921,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
+},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2037,7 +2051,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
+},{"../../dialog":7,"../../util":47,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2201,7 +2215,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
+},{"../../ajax":2,"../../progress":39,"../../tooltip":46,"../../util":47,"./formPrepare":18}],22:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2227,11 +2241,10 @@ function initializeEvents() {
 	})
 	.on('click', '.open-quick-view', function (e) {
 		e.preventDefault();
-		var form = $(this).closest('form');
+		var url = $(this).closest('.product').find('.thumb-link').attr('href');
 		quickview.show({
-			url: form.attr('action'),
-			source: 'quickview',
-			data: form.serialize()
+			url: url,
+			source: 'quickview'
 		});
 	});
 
@@ -2246,46 +2259,99 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js":[function(require,module,exports){
+},{"../ajax":2,"../page":13,"../product-tile":38,"../quickview":40,"./product/addToCart":24}],23:[function(require,module,exports){
+/* global addthis */
+
 'use strict';
 
-var minicart = require('../../minicart'),
+/**
+ * @function
+ * @description Initializes the 'AddThis'-functionality for the social sharing plugin
+ */
+module.exports = function () {
+	var addThisServices = ['compact', 'facebook', 'myspace', 'google', 'twitter'],
+		$addThisToolbox = $('.addthis_toolbox'),
+		addThisLinks = '',
+		i,
+		len = addThisServices.length;
+
+	for (i = 0; i < len; i++) {
+		if ($addThisToolbox.find('.addthis_button_' + addThisServices[i]).length === 0) {
+			addThisLinks += '<a class="addthis_button_' + addThisServices[i] + '"></a>';
+		}
+	}
+	if (addThisLinks.length === 0) { return; }
+
+	$addThisToolbox.html(addThisLinks);
+	try {
+		addthis.toolbox('.addthis_toolbox');
+	} catch (e) {
+		return;
+	}
+};
+
+},{}],24:[function(require,module,exports){
+'use strict';
+
+var dialog = require('../../dialog'),
+	minicart = require('../../minicart'),
 	page = require('../../page'),
-	quickview = require('../../quickview'),
-	util = require('../../util');
+	util = require('../../util'),
+	TPromise = require('promise'),
+	_ = require('lodash');
 
 /**
- * @private
- * @function
- * @description Event handler to handle the add to cart event
+ * @description Make the AJAX request to add an item to cart
+ * @param {Element} form The form element that contains the item quantity and ID data
+ * @returns {Promise}
  */
-var setAddToCartHandler = function (e) {
+var addItemToCart = function (form) {
+	var $form = $(form),
+		$qty = $form.find('input[name="Quantity"]');
+	if ($qty.length === 0 || isNaN($qty.val()) || parseInt($qty.val(), 10) === 0) {
+		$qty.val('1');
+	}
+	return TPromise.resolve($.ajax({
+		type: 'POST',
+		url: util.ajaxUrl(Urls.addProduct),
+		data: $form.serialize()
+	}));
+};
+
+/**
+ * @description Handler to handle the add to cart event
+ */
+var addToCart = function (e) {
 	e.preventDefault();
 	var $form = $(this).closest('form');
-	var qty = $form.find('input[name="Quantity"]');
-	var isSubItem = $(this).hasClass('sub-product-item');
-	if (qty.length === 0 || isNaN(qty.val()) || parseInt(qty.val(), 10) === 0) {
-		qty.val('1');
-	}
 
-	var data = $form.serialize();
-	var url = util.ajaxUrl(Urls.addProduct);
-	$.ajax({
-		type: 'POST',
-		url: url,
-		data: data,
-		success: function (response) {
-			var $uuid = $form.find('input[name="uuid"]');
-			if ($uuid.length > 0 && $uuid.val().length > 0) {
-				page.refresh();
-			} else {
-				if (!isSubItem) {
-					quickview.close();
-				}
-				minicart.show(response);
+	addItemToCart($form).then(function (response) {
+		var $uuid = $form.find('input[name="uuid"]');
+		if ($uuid.length > 0 && $uuid.val().length > 0) {
+			page.refresh();
+		} else {
+			// do not close quickview if adding individual item that is part of product set
+			// @TODO should notify the user some other way that the add action has completed successfully
+			if (!$(this).hasClass('sub-product-item')) {
+				dialog.close();
 			}
+			minicart.show(response);
 		}
-	});
+	}.bind(this));
+};
+
+/**
+ * @description Handler to handle the add all items to cart event
+ */
+var addAllToCart = function (e) {
+	e.preventDefault();
+	var $productForms = $('#product-set-list').find('form').toArray();
+	Promise.all(_.map($productForms, addItemToCart))
+		.then(function (responses) {
+			dialog.close();
+			// show the final response only, which would include all the other items
+			minicart.show(responses[responses.length - 1]);
+		});
 };
 
 /**
@@ -2294,14 +2360,18 @@ var setAddToCartHandler = function (e) {
  * @param {Element} target The target on which an add to cart event-handler will be set
  */
 module.exports = function (target) {
+	$('.add-to-cart[disabled]').attr('title', $('.availability-msg').text());
+
 	if (target) {
-		target.on('click', '.add-to-cart', setAddToCartHandler);
+		target.on('click', '.add-to-cart', addToCart);
 	} else {
-		$('.add-to-cart').on('click', setAddToCartHandler);
+		$('.add-to-cart').on('click', addToCart);
 	}
+
+	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js":[function(require,module,exports){
+},{"../../dialog":7,"../../minicart":11,"../../page":13,"../../util":47,"lodash":53,"promise":54}],25:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2375,7 +2445,7 @@ var updateContainer = function (data) {
 	}
 
 	$availabilityMsgContainer.append($availabilityMsg);
-}
+};
 
 var getAvailability = function () {
 	ajax.getJson({
@@ -2385,173 +2455,199 @@ var getAvailability = function () {
 		}),
 		callback: updateContainer
 	});
-}
+};
 
 module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
-}
+};
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
-/* global addthis */
-
+},{"../../ajax":2,"../../util":47}],26:[function(require,module,exports){
 'use strict';
-
-var ajax = require('../../ajax'),
-	components = require('../../components'),
-	dialog = require('../../dialog'),
-	minicart = require('../../minicart'),
-	progress = require('../../progress'),
-	quickview = require('../../quickview'),
-	sendToFriend = require('../../send-to-friend'),
-	storeinventory = require('../../storeinventory'),
-	tooltip = require('../../tooltip'),
-	util = require('../../util'),
-	addToCart = require('./addToCart'),
-	availability = require('./availability');
+var dialog = require('../../dialog'),
+	util = require('../../util');
 
 /**
- * @private
- * @function
- * @description Loads product's navigation on the product detail page
+ * @description Enables the zoom viewer on the product detail page
  */
-function loadProductNavigation() {
-	var $pidInput = $('.pdpForm').find('input[name="pid"]').last(),
-		$navContainer = $('#product-nav-container');
-	// if no hash exists, or no pid exists, or nav container does not exist, return
-	if (window.location.hash.length <= 1 || $pidInput.length === 0 || $navContainer.length === 0) {
+var loadZoom = function () {
+	var $imgZoom = $('#pdpMain .main-image'),
+		zoomOptions = {
+			zoomType: 'standard',
+			alwaysOn: 0, // setting to 1 will load load high res images on page load
+			zoomWidth: 575,
+			zoomHeight: 349,
+			position: 'right',
+			preloadImages: 0, // setting to 1 will load load high res images on page load
+			xOffset: 30,
+			yOffset: 0,
+			showEffect: 'fadein',
+			hideEffect: 'fadeout'
+		},
+		hiresUrl;
+
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
 		return;
 	}
+	hiresUrl = $imgZoom.attr('href');
 
-	var pid = $pidInput.val();
-	var hashParams = window.location.hash.substr(1);
-	if (hashParams.indexOf('pid=' + pid) < 0) {
-		hashParams += '&pid=' + pid;
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
+		$imgZoom.addClass('image-zoom');
+		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
+	} else {
+		$imgZoom.removeClass('image-zoom');
 	}
-
-	var url = Urls.productNav + (Urls.productNav.indexOf('?') < 0 ? '?' : '&') + hashParams;
-	ajax.load({
-		url:url,
-		target: $navContainer
-	});
-}
+};
 
 /**
- * @private
- * @function
- * @description Creates product recommendation carousel using jQuery jcarousel plugin
- */
-function loadRecommendations() {
-	var $carousel = $('#carousel-recomendations');
-	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
-		return;
-	}
-	$carousel.jcarousel(components.carouselSettings);
-}
-
-/**
- * @function
  * @description Sets the main image attributes and the href for the surrounding <a> tag
- * @param {Object} atts Simple object with url, alt, title and hires properties
+ * @param {Object} atts Object with url, alt, title and hires properties
  */
-function setMainImage(atts) {
-	var imgZoom = $('#pdpMain .main-image');
-	if (imgZoom.length > 0 && atts.hires && atts.hires !== '' && atts.hires !== 'null') {
-		imgZoom.attr('href', atts.hires);
-	}
-
-	imgZoom.find('.primary-image').attr({
+var setMainImage = function (atts) {
+	$('#pdpMain .primary-image').attr({
 		src: atts.url,
 		alt: atts.alt,
 		title: atts.title
 	});
-}
-
-/**
- * @function
- * @description helper function for swapping main image on swatch hover
- * @param {Element} element DOM element with custom data-lgimg attribute
- */
-function swapImage(element) {
-	var lgImg = $(element).data('lgimg');
-	if (!lgImg) {
-		return;
+	if (!dialog.isActive() && !util.isMobile()) {
+		$('#pdpMain .main-image').attr('href', atts.hires);
 	}
-	var newImg = $.extend({}, lgImg);
-	var imgZoom = $('#pdpMain .main-image');
-	var mainImage = imgZoom.find('.primary-image');
-	// store current image info
-	lgImg.hires = imgZoom.attr('href');
-	lgImg.url = mainImage.attr('src');
-	lgImg.alt = mainImage.attr('alt');
-	lgImg.title = mainImage.attr('title');
-	// reset element's lgimg data attribute
-	$(element).data(lgImg);
-	// set the main image
-	setMainImage(newImg);
-}
-
-/**
- * @function
- * @description Enables the zoom viewer on the product detail page
- */
-function loadZoom() {
-	if (quickview.isActive() || util.isMobile()) { return; }
-
-	//zoom properties
-	var options = {
-		zoomType: 'standard',
-		alwaysOn: 0, // setting to 1 will load load high res images on page load
-		zoomWidth: 575,
-		zoomHeight: 349,
-		position: 'right',
-		preloadImages: 0, // setting to 1 will load load high res images on page load
-		xOffset: 30,
-		yOffset: 0,
-		showEffect: 'fadein',
-		hideEffect: 'fadeout'
-	};
-
-	// Added to prevent empty hires zoom feature (if images don't exist)
-	var mainImage = $('#pdpMain').find('.main-image');
-	var hiresImageSrc = mainImage.attr('href');
-	if (hiresImageSrc && hiresImageSrc !== '' && hiresImageSrc.indexOf('noimagelarge') < 0) {
-		mainImage.removeData('jqzoom').jqzoom(options);
-	}
-}
-/**
- * @function
- * @description replaces the images in the image container. for example when a different color was clicked.
- */
-function replaceImages() {
-	var newImages = $('#update-images');
-	var imageContainer = $('#pdpMain').find('.product-image-container');
-
-	imageContainer.html(newImages.html());
-	newImages.remove();
-	setMainImageLink();
-
 	loadZoom();
-}
-/**
- * @function
- * @description Adds css class (image-zoom) to the main product image in order to activate the zoom viewer on the product detail page.
- */
-function setMainImageLink() {
-	var $mainImage = $('#pdpMain .main-image');
-	if (quickview.isActive() || util.isMobile()) {
-		$mainImage.removeAttr('href');
-	} else {
-		$mainImage.addClass('image-zoom');
-	}
-}
+};
 
 /**
- * @private
- * @function
- * @description Initializes the DOM of the product detail page (images, reviews, recommendation and product-navigation).
+ * @description Replaces the images in the image container, for eg. when a different color was clicked.
+ */
+var replaceImages = function () {
+	var $newImages = $('#update-images'),
+		$imageContainer = $('#pdpMain .product-image-container');
+	if ($newImages.length === 0) { return; }
+
+	$imageContainer.html($newImages.html());
+	$newImages.remove();
+	loadZoom();
+};
+
+/* @module image
+ * @description this module handles the primary image viewer on PDP
+ **/
+
+/**
+ * @description by default, this function sets up zoom and event handler for thumbnail click
+ **/
+module.exports = function () {
+	if (dialog.isActive() || util.isMobile()) {
+		$('#pdpMain .main-image').removeAttr('href');
+	}
+	loadZoom();
+	// handle product thumbnail click event
+	$('#pdpMain').on('click', '.productthumbnail', function () {
+		// switch indicator
+		$(this).closest('.product-thumbnails').find('.thumb.selected').removeClass('selected');
+		$(this).closest('.thumb').addClass('selected');
+
+		setMainImage($(this).data('lgimg'));
+	});
+};
+module.exports.loadZoom = loadZoom;
+module.exports.setMainImage = setMainImage;
+module.exports.replaceImages = replaceImages;
+
+},{"../../dialog":7,"../../util":47}],27:[function(require,module,exports){
+'use strict';
+
+var dialog = require('../../dialog'),
+	sendToFriend = require('../../send-to-friend'),
+	storeinventory = require('../../storeinventory'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util'),
+	addThis = require('./addThis'),
+	addToCart = require('./addToCart'),
+	availability = require('./availability'),
+	image = require('./image'),
+	powerReviews = require('./powerReviews'),
+	productNav = require('./productNav'),
+	productSet = require('./productSet'),
+	recommendations = require('./recommendations'),
+	variant = require('./variant');
+
+/**
+ * @description Initialize product detail page with reviews, recommendation and product navigation.
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
+	powerReviews();
+	productNav();
+	recommendations();
+	tooltip.init();
+}
+
+/**
+ * @description Initialize event handlers on product detail page
+ */
+function initializeEvents() {
+	var $pdpMain = $('#pdpMain');
+
+	addThis();
+	addToCart();
+	availability();
+	variant();
+	image();
+	sendToFriend.initializeDialog($pdpMain);
+	productSet();
+	if (SitePreferences.STORE_PICKUP) {
+		storeinventory.buildStoreList($('.product-number span').html());
+		storeinventory.init();
+	}
+
+	// Add to Wishlist and Add to Gift Registry links behaviors
+	$pdpMain.on('click', '.wl-action', function (e) {
+		e.preventDefault();
+
+		var data = util.getQueryStringParams($('.pdpForm').serialize());
+		if (data.cartAction) {
+			delete data.cartAction;
+		}
+		var url = util.appendParamsToUrl(this.href, data);
+		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
+		window.location.href = url;
+	});
+
+	// product options
+	$pdpMain.on('change', '.product-options select', function () {
+		var salesPrice = $pdpMain.find('.product-add-to-cart .price-sales');
+		var selectedItem = $(this).children().filter(':selected').first();
+		salesPrice.text(selectedItem.data('combined'));
+	});
+
+	// prevent default behavior of thumbnail link and add this Button
+	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
+		e.preventDefault();
+	});
+
+	$('.size-chart-link a').on('click', function (e) {
+		e.preventDefault();
+		dialog.open({
+			url: $(e.target).attr('href')
+		});
+	});
+}
+
+var product = {
+	initializeEvents: initializeEvents,
+	init: function () {
+		initializeDom();
+		initializeEvents();
+	}
+};
+
+module.exports = product;
+
+},{"../../dialog":7,"../../send-to-friend":44,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./availability":25,"./image":26,"./powerReviews":28,"./productNav":29,"./productSet":30,"./recommendations":31,"./variant":32}],28:[function(require,module,exports){
+'use strict';
+
+var dialog = require('../../dialog');
+
+module.exports = function () {
 	if ($('#pwrwritediv').length > 0) {
 		var options = $.extend(true, {}, dialog.settings, {
 			autoOpen: true,
@@ -2568,294 +2664,184 @@ function initializeDom() {
 		});
 	}
 
-	loadRecommendations();
-	loadProductNavigation();
-	setMainImageLink();
+	$('#pdpMain').on('click', '.prSnippetLink', function (e) {
+		e.preventDefault();
+		$('.product-tabs').tabs('select', '#tab4');
+		$('html, body').scrollTop($('#tab4').offset().top);
+	});
+};
 
-	if ($('#product-set-list').length > 0) {
-		var unavailable = $('#product-set-list form .add-to-cart[disabled]');
-		if (unavailable.length > 0) {
-			$('#add-all-to-cart').attr('disabled', 'disabled');
-			$('#add-to-cart').attr('disabled', 'disabled'); // this may be a bundle
-		}
-	}
+},{"../../dialog":7}],29:[function(require,module,exports){
+'use strict';
 
-	tooltip.init();
-}
+var ajax = require('../../ajax'),
+	util = require('../../util');
 
 /**
- * @private
- * @function
- * @description Initializes events on the product detail page for the following elements:
- * - availability message
- * - add to cart functionality
- * - images and swatches
- * - variation selection
- * - option selection
- * - send to friend functionality
- */
-function initializeEvents() {
-	var $pdpMain = $('#pdpMain'),
-		$pdpForm = $('.pdpForm'),
-		$addToCart = $('#add-to-cart'),
+ * @description loads product's navigation
+ **/
+module.exports = function () {
+	var $pidInput = $('.pdpForm input[name="pid"]').last(),
+		$navContainer = $('#product-nav-container');
+	// if no hash exists, or no pid exists, or nav container does not exist, return
+	if (window.location.hash.length <= 1 || $pidInput.length === 0 || $navContainer.length === 0) {
+		return;
+	}
+
+	var pid = $pidInput.val(),
+		hash = window.location.hash.substr(1),
+		url = util.appendParamToURL(Urls.productNav + '?' + hash, 'pid', pid);
+
+	ajax.load({
+		url: url,
+		target: $navContainer
+	});
+};
+
+},{"../../ajax":2,"../../util":47}],30:[function(require,module,exports){
+'use strict';
+
+var addToCart = require('./addToCart'),
+	ajax = require('../../ajax'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util');
+
+module.exports = function () {
+	var $addToCart = $('#add-to-cart'),
 		$addAllToCart = $('#add-all-to-cart'),
 		$productSetList = $('#product-set-list');
-	product.initAddThis();
-	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.buildStoreList($('.product-number span').html());
-	}
-	// add or update shopping cart line item
-	addToCart();
 
-	availability();
-
-	// Add to Wishlist and Add to Gift Registry links behaviors
-	$pdpMain.on('click', '.wl-action', function (e) {
-		e.preventDefault();
-
-		var data = util.getQueryStringParams($('.pdpForm').serialize());
-		if (data.cartAction) {
-			delete data.cartAction;
-		}
-		var url = util.appendParamsToUrl(this.href, data);
-		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-		window.location.href = url;
-	});
-
-	$pdpMain.on('click', '.productthumbnail', function () {
-		var lgImg = $(this).data('lgimg');
-
-		// switch indicator
-		$pdpMain.find('.product-thumbnails .selected').removeClass('selected');
-		$(this).closest('li').addClass('selected');
-
-		setMainImage(lgImg);
-		// load zoom if not quick view
-		if (lgImg.hires !== '' && lgImg.hires.indexOf('noimagelarge') < 0) {
-			setMainImageLink();
-			loadZoom();
+	var updateAddToCartButtons = function () {
+		if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
+			$addAllToCart.attr('disabled', 'disabled');
+			// product set does not have an add-to-cart button, but product bundle does
+			$addToCart.attr('disabled', 'disabled');
 		} else {
-			$pdpMain.find('.main-image').removeClass('image-zoom');
+			$addAllToCart.removeAttr('disabled');
+			$addToCart.removeAttr('disabled');
 		}
-	});
+	};
 
-	// dropdown variations
-	$pdpMain.on('change', '.product-options select', function () {
-		var salesPrice = $pdpMain.find('.product-add-to-cart .price-sales');
-		var selectedItem = $(this).children().filter(':selected').first();
-		salesPrice.text(selectedItem.data('combined'));
-	});
-
-	// prevent default behavior of thumbnail link and add this Button
-	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
-		e.preventDefault();
-	});
-
-	// handle drop down variation attribute value selection event
-	$pdpMain.on('change', '.variation-select', function () {
-		if ($(this).val().length === 0) {return;}
-		var qty = $pdpForm.find('input[name="Quantity"]').first().val(),
-			listid = $pdpForm.find('input[name="productlistid"]').first().val(),
-			productSet = $(this).closest('.subProduct'),
-			params = {
-				Quantity: isNaN(qty) ? '1' : qty,
-				format: 'ajax'
-			};
-		if (listid) {params.productlistid = listid;}
-		var target = (productSet.length > 0 && productSet.children.length > 0) ? productSet : $('#product-content');
-		var url = util.appendParamsToUrl($(this).val(), params);
-		progress.show($pdpMain);
-		var hasSwapImage = $(this).find('option:selected').attr('data-lgimg') !== null;
-
-		ajax.load({
-			url: url,
-			callback: function (data) {
-				target.html(data);
-				product.initAddThis();
-				addToCart();
-				if (hasSwapImage) {
-					replaceImages();
-				}
-				$('#update-images').remove();
-				tooltip.init();
-			}
-		});
-	});
-
-	$pdpMain.on('hover', '.swatchanchor', function () {
-		swapImage(this);
-	});
-
-	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
-		var $this = $(this),
-			params = {},
-			hasSwapImage, qty, listid, url;
-
-		e.preventDefault();
-
-		if ($this.parents('li').hasClass('unselectable')) {return;}
-
-		hasSwapImage = ($this.attr('data-lgimg') !== null);
-		qty = $pdpForm.find('input[name="Quantity"]').first().val();
-		listid = $pdpForm.find('input[name="productlistid"]').first().val();
-		params.Quantity = isNaN(qty) ? '1' : qty;
-		if (listid) {
-			params.productlistid = listid;
-		}
-		url = util.appendParamsToUrl(this.href, params);
-		progress.show($pdpMain);
-
-		ajax.load({
-			url: url,
-			target: $('#product-content'),
-			callback: function () {
-				product.initAddThis();
-				addToCart();
-				if (SitePreferences.STORE_PICKUP) {
-					storeinventory.buildStoreList($('.product-number span').html());
-				}
-				if (hasSwapImage) {
-					replaceImages();
-				}
-				tooltip.init();
-			}
-		});
-	});
-
+	if ($productSetList.length > 0) {
+		updateAddToCartButtons();
+	}
+	// click on swatch for product set
 	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
-		var params, qty, url, $psItem, $container;
 		e.preventDefault();
-		// get the querystring from the anchor element
-		params = util.getQueryStringParams(this.search);
-		$psItem = $(this).closest('.product-set-item');
-		qty = $psItem.find('form input[name="Quantity"]').first().val();
-		params.Quantity = isNaN(qty) ? '1' : qty;
-		url = Urls.getSetItem + '?' + $.param(params);
-		$container = $(this).closest('.product-set-item');
+		var url = Urls.getSetItem + this.search,
+			$container = $(this).closest('.product-set-item'),
+			qty = $container.find('form input[name="Quantity"]').first().val();
+		if (isNaN(qty)) {
+			qty = '1';
+		}
+		url = util.appendParamToURL(url, 'Quantity', qty);
 
 		ajax.load({
 			url: url,
 			target: $container,
 			callback: function () {
-				progress.hide();
-				if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
-					$addAllToCart.attr('disabled', 'disabled');
-					$addToCart.attr('disabled', 'disabled'); // this may be a bundle
-				} else {
-					$addAllToCart.removeAttr('disabled');
-					$addToCart.removeAttr('disabled'); // this may be a bundle
-				}
+				updateAddToCartButtons();
 				addToCart($container);
 				tooltip.init();
 			}
 		});
 	});
-
-	$addAllToCart.on('click', function (e) {
-		e.preventDefault();
-		var psForms = $productSetList.find('form').toArray(),
-			miniCartHtml = '',
-			addProductUrl = util.ajaxUrl(Urls.addProduct);
-
-		// add items to cart
-		function addItems() {
-			var form = $(psForms.shift());
-			var itemid = form.find('input[name="pid"]').val();
-
-			$.ajax({
-				dataType: 'html',
-				url: addProductUrl,
-				data: form.serialize()
-			})
-			.done(function (response) {
-				// success
-				miniCartHtml = response;
-			})
-			.fail(function (xhr, textStatus) {
-				// failed
-				var msg = Resources.ADD_TO_CART_FAIL;
-				$.validator.format(msg, itemid);
-				if (textStatus === 'parsererror') {
-					msg += '\n' + Resources.BAD_RESPONSE;
-				} else {
-					msg += '\n' + Resources.SERVER_CONNECTION_ERROR;
-				}
-				window.alert(msg);
-			})
-			.always(function () {
-				if (psForms.length > 0) {
-					addItems();
-				} else {
-					quickview.close();
-					minicart.show(miniCartHtml);
-				}
-			});
-		}
-		addItems();
-		return false;
-	});
-	sendToFriend.initializeDialog($pdpMain);
-
-	$pdpMain.find('.add-to-cart[disabled]')
-		.attr('title', $pdpMain.find('.availability-msg')
-		.html());
-
-	$('.size-chart-link a').on('click', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: $(e.target).attr('href')
-		});
-	});
-
-	$pdpMain.on('click', '.prSnippetLink', function (e) {
-		e.preventDefault();
-		$('.product-tabs').tabs('select', '#tab4');
-		$('html, body').scrollTop($('#tab4').offset().top);
-	});
-}
-
-
-var product = {
-	initializeEvents: initializeEvents,
-	init: function () {
-		initializeDom();
-		initializeEvents();
-		loadZoom();
-		if (SitePreferences.STORE_PICKUP) {
-			storeinventory.init();
-		}
-	},
-
-	/**
-	 * @function
-	 * @description Initializes the 'AddThis'-functionality for the social sharing plugin
-	 */
-	initAddThis: function () {
-		var addThisServices = ['compact', 'facebook', 'myspace', 'google', 'twitter'],
-			addThisToolbox = $('.addthis_toolbox'),
-			addThisLinks = '',
-			i,
-			len = addThisServices.length;
-
-		for (i = 0; i < len; i++) {
-			if (addThisToolbox.find('.addthis_button_' + addThisServices[i]).length === 0) {
-				addThisLinks += '<a class="addthis_button_' + addThisServices[i] + '"></a>';
-			}
-		}
-		if (addThisLinks.length === 0) { return; }
-
-		addThisToolbox.html(addThisLinks);
-		try {
-			addthis.toolbox('.addthis_toolbox');
-		} catch (e) {
-			return;
-		}
-	}
 };
 
-module.exports = product;
+},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":24}],31:[function(require,module,exports){
+'use strict';
 
-},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../components":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/components.js","../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./availability":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
+var carousel = require('../../carousel');
+
+/**
+ * @description Creates product recommendation carousel using jQuery jcarousel plugin
+ **/
+module.exports = function () {
+	var $carousel = $('#carousel-recomendations');
+	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
+		return;
+	}
+	$carousel.jcarousel(carousel.settings);
+};
+
+},{"../../carousel":4}],32:[function(require,module,exports){
+'use strict';
+
+var addThis = require('./addThis'),
+	addToCart = require('./addToCart'),
+	ajax = require('../../ajax'),
+	image = require('./image'),
+	progress = require('../../progress'),
+	storeinventory = require('../../storeinventory'),
+	tooltip = require('../../tooltip'),
+	util = require('../../util');
+
+
+/**
+ * @description update product content with new variant from href, load new content to #product-content panel
+ * @param {String} href - url of the new product variant
+ **/
+var updateContent = function (href) {
+	var $pdpForm = $('.pdpForm'),
+		qty = $pdpForm.find('input[name="Quantity"]').first().val(),
+		params = {
+			Quantity: isNaN(qty) ? '1' : qty,
+			format: 'ajax',
+			productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
+		};
+
+	progress.show($('#pdpMain'));
+
+	ajax.load({
+		url: util.appendParamsToUrl(href, params),
+		target: $('#product-content'),
+		callback: function () {
+			addThis();
+			addToCart();
+			if (SitePreferences.STORE_PICKUP) {
+				storeinventory.buildStoreList($('.product-number span').html());
+			}
+			image.replaceImages();
+			tooltip.init();
+		}
+	});
+};
+
+module.exports = function () {
+	var $pdpMain = $('#pdpMain');
+	// hover on swatch - should update main image with swatch image
+	$pdpMain.on('hover', '.swatchanchor', function () {
+		var largeImg = $(this).data('lgimg'),
+			$imgZoom = $pdpMain.find('.main-image'),
+			$mainImage = $pdpMain.find('.primary-image');
+
+		if (!largeImg) { return; }
+		// store the old data from main image for mouseleave handler
+		$(this).data('lgimg', {
+			hires: $imgZoom.attr('href'),
+			url: $mainImage.attr('src'),
+			alt: $mainImage.attr('alt'),
+			title: $mainImage.attr('title')
+		});
+		// set the main image
+		image.setMainImage(largeImg);
+	});
+
+	// click on swatch - should replace product content with new variant
+	$pdpMain.on('click', '.product-detail .swatchanchor', function (e) {
+		e.preventDefault();
+		if ($(this).parents('li').hasClass('unselectable')) { return; }
+		updateContent(this.href);
+	});
+
+	// change drop down variation attribute - should replace product content with new variant
+	$pdpMain.on('change', '.variation-select', function () {
+		if ($(this).val().length === 0) { return; }
+		updateContent($(this).val());
+	});
+};
+
+},{"../../ajax":2,"../../progress":39,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./image":26}],33:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2955,7 +2941,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
+},{"../ajax":2,"../quickview":40,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],34:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3147,7 +3133,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
+},{"../compare-widget":5,"../product-tile":38,"../progress":39,"../util":47}],35:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3197,7 +3183,7 @@ exports.init = function () {
 	});
 };
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js":[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3210,7 +3196,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
+},{"../dialog":7}],37:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3231,10 +3217,11 @@ exports.init = function () {
 	});
 };
 
-},{"../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
+},{"../page":13,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],38:[function(require,module,exports){
 'use strict';
 
-var product = require('./pages/product'),
+var imagesLoaded = require('imagesloaded'),
+	product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
@@ -3252,8 +3239,7 @@ function initQuickViewButtons() {
 			e.preventDefault();
 			quickview.show({
 				url: $(this).attr('href'),
-				source: 'quickview',
-				callback: product.init
+				source: 'quickview'
 			});
 		});
 	});
@@ -3324,18 +3310,19 @@ function initializeEvents() {
 	});
 }
 
-
 exports.init = function () {
 	var $tiles = $('.tiles-container .product-tile');
 	if ($tiles.length === 0) { return; }
-	$tiles.syncHeight()
-		.each(function (idx) {
-			$(this).data('idx', idx);
-		});
+	imagesLoaded('.tiles-container').on('done', function() {
+		$tiles.syncHeight()
+			.each(function (idx) {
+				$(this).data('idx', idx);
+			});
+	});
 	initializeEvents();
 };
 
-},{"./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js":[function(require,module,exports){
+},{"./pages/product":27,"./quickview":40,"imagesloaded":50}],39:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3368,10 +3355,11 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
+	product = require('./pages/product'),
 	util = require('./util'),
 	_ = require('lodash');
 
@@ -3389,16 +3377,18 @@ var makeUrl = function (url, source, productListID) {
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
-			this.$container = $('<div/>').attr('id', '#QuickViewDialog').appendTo(document.body);
+			this.$container = $('<div/>').attr('id', 'QuickViewDialog').appendTo(document.body);
 		}
 		this.productLinks = $('#search-result-items .thumb-link').map(function (index, thumbLink) {
 			return $(thumbLink).attr('href');
 		});
 	},
 
-	initializeQuickViewNav: function (qvUrl) {
+	setup: function (qvUrl) {
 		var $btnNext = $('.quickview-next'),
 			$btnPrev = $('.quickview-prev');
+
+		product.initializeEvents();
 
 		// remove any param
 		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
@@ -3440,17 +3430,17 @@ var quickview = {
 		var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
 		dialog.replace({
 			url: url,
-			callback: this.initializeQuickViewNav.bind(this, url)
+			callback: this.setup.bind(this, url)
 		});
 	},
 
 	/**
 	 * @description show quick view dialog
-	 * @param {object} options
-	 * @param {stirng} options.url - url of the product details
-	 * @param {string} options.source - source of the dialog to be appended to URL
-	 * @param {string} options.productlistid - to be appended to URL
-	 * @param {function} options.callback - callback once the dialog is opened
+	 * @param {Object} options
+	 * @param {String} options.url - url of the product details
+	 * @param {String} options.source - source of the dialog to be appended to URL
+	 * @param {String} options.productlistid - to be appended to URL
+	 * @param {Function} options.callback - callback once the dialog is opened
 	 */
 	show: function (options) {
 		var url;
@@ -3466,29 +3456,20 @@ var quickview = {
 				width: 920,
 				title: 'Product Quickview',
 				open: function () {
-					this.initializeQuickViewNav(url);
+					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }
 				}.bind(this)
 			}
 		});
 	},
-	// close the quick view dialog
-	close: function () {
-		if (this.exists()) {
-			this.$container.dialog('close').empty();
-		}
-	},
 	exists: function () {
 		return this.$container && (this.$container.length > 0);
-	},
-	isActive: function () {
-		return this.exists() && (this.$container.children.length > 0);
 	}
 };
 
 module.exports = quickview;
 
-},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
+},{"./dialog":7,"./pages/product":27,"./util":47,"lodash":53}],41:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3514,7 +3495,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3686,7 +3667,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
+},{"./util":47}],43:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3863,7 +3844,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
+},{"./util":47}],44:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3938,7 +3919,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js":[function(require,module,exports){
+},{"./ajax":2,"./dialog":7,"./util":47,"./validator":48}],45:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4301,7 +4282,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js":[function(require,module,exports){
+},{"./ajax":2,"./page":13,"./util":47}],46:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4323,7 +4304,7 @@ exports.init = function () {
 	});
 };
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4337,11 +4318,12 @@ var util = {
 	 * @param {String} value the value of the parameter
 	 */
 	appendParamToURL: function (url, name, value) {
-		var c = '?';
-		if (url.indexOf(c) !== -1) {
-			c = '&';
+		// quit if the param already exists
+		if (url.indexOf(name + '=') !== -1) {
+			return url;
 		}
-		return url + c + name + '=' + encodeURIComponent(value);
+		var separator = url.indexOf('?') !== -1 ? '&' : '?';
+		return url + separator + name + '=' + encodeURIComponent(value);
 	},
 	/**
 	 * @function
@@ -4634,7 +4616,7 @@ var util = {
 
 module.exports = util;
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4756,7 +4738,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4844,7 +4826,902 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
+},{}],50:[function(require,module,exports){
+/*!
+ * imagesLoaded v3.1.8
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window, factory ) { 'use strict';
+  // universal module definition
+
+  /*global define: false, module: false, require: false */
+
+  if ( typeof define === 'function' && define.amd ) {
+    // AMD
+    define( [
+      'eventEmitter/EventEmitter',
+      'eventie/eventie'
+    ], function( EventEmitter, eventie ) {
+      return factory( window, EventEmitter, eventie );
+    });
+  } else if ( typeof exports === 'object' ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('wolfy87-eventemitter'),
+      require('eventie')
+    );
+  } else {
+    // browser global
+    window.imagesLoaded = factory(
+      window,
+      window.EventEmitter,
+      window.eventie
+    );
+  }
+
+})( window,
+
+// --------------------------  factory -------------------------- //
+
+function factory( window, EventEmitter, eventie ) {
+
+'use strict';
+
+var $ = window.jQuery;
+var console = window.console;
+var hasConsole = typeof console !== 'undefined';
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var objToString = Object.prototype.toString;
+function isArray( obj ) {
+  return objToString.call( obj ) === '[object Array]';
+}
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  var ary = [];
+  if ( isArray( obj ) ) {
+    // use object if already an array
+    ary = obj;
+  } else if ( typeof obj.length === 'number' ) {
+    // convert nodeList to array
+    for ( var i=0, len = obj.length; i < len; i++ ) {
+      ary.push( obj[i] );
+    }
+  } else {
+    // array of single index
+    ary.push( obj );
+  }
+  return ary;
+}
+
+  // -------------------------- imagesLoaded -------------------------- //
+
+  /**
+   * @param {Array, Element, NodeList, String} elem
+   * @param {Object or Function} options - if function, use as callback
+   * @param {Function} onAlways - callback function
+   */
+  function ImagesLoaded( elem, options, onAlways ) {
+    // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+    if ( !( this instanceof ImagesLoaded ) ) {
+      return new ImagesLoaded( elem, options );
+    }
+    // use elem as selector string
+    if ( typeof elem === 'string' ) {
+      elem = document.querySelectorAll( elem );
+    }
+
+    this.elements = makeArray( elem );
+    this.options = extend( {}, this.options );
+
+    if ( typeof options === 'function' ) {
+      onAlways = options;
+    } else {
+      extend( this.options, options );
+    }
+
+    if ( onAlways ) {
+      this.on( 'always', onAlways );
+    }
+
+    this.getImages();
+
+    if ( $ ) {
+      // add jQuery Deferred object
+      this.jqDeferred = new $.Deferred();
+    }
+
+    // HACK check async to allow time to bind listeners
+    var _this = this;
+    setTimeout( function() {
+      _this.check();
+    });
+  }
+
+  ImagesLoaded.prototype = new EventEmitter();
+
+  ImagesLoaded.prototype.options = {};
+
+  ImagesLoaded.prototype.getImages = function() {
+    this.images = [];
+
+    // filter & find items if we have an item selector
+    for ( var i=0, len = this.elements.length; i < len; i++ ) {
+      var elem = this.elements[i];
+      // filter siblings
+      if ( elem.nodeName === 'IMG' ) {
+        this.addImage( elem );
+      }
+      // find children
+      // no non-element nodes, #143
+      var nodeType = elem.nodeType;
+      if ( !nodeType || !( nodeType === 1 || nodeType === 9 || nodeType === 11 ) ) {
+        continue;
+      }
+      var childElems = elem.querySelectorAll('img');
+      // concat childElems to filterFound array
+      for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
+        var img = childElems[j];
+        this.addImage( img );
+      }
+    }
+  };
+
+  /**
+   * @param {Image} img
+   */
+  ImagesLoaded.prototype.addImage = function( img ) {
+    var loadingImage = new LoadingImage( img );
+    this.images.push( loadingImage );
+  };
+
+  ImagesLoaded.prototype.check = function() {
+    var _this = this;
+    var checkedCount = 0;
+    var length = this.images.length;
+    this.hasAnyBroken = false;
+    // complete if no images
+    if ( !length ) {
+      this.complete();
+      return;
+    }
+
+    function onConfirm( image, message ) {
+      if ( _this.options.debug && hasConsole ) {
+        console.log( 'confirm', image, message );
+      }
+
+      _this.progress( image );
+      checkedCount++;
+      if ( checkedCount === length ) {
+        _this.complete();
+      }
+      return true; // bind once
+    }
+
+    for ( var i=0; i < length; i++ ) {
+      var loadingImage = this.images[i];
+      loadingImage.on( 'confirm', onConfirm );
+      loadingImage.check();
+    }
+  };
+
+  ImagesLoaded.prototype.progress = function( image ) {
+    this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+    // HACK - Chrome triggers event before object properties have changed. #83
+    var _this = this;
+    setTimeout( function() {
+      _this.emit( 'progress', _this, image );
+      if ( _this.jqDeferred && _this.jqDeferred.notify ) {
+        _this.jqDeferred.notify( _this, image );
+      }
+    });
+  };
+
+  ImagesLoaded.prototype.complete = function() {
+    var eventName = this.hasAnyBroken ? 'fail' : 'done';
+    this.isComplete = true;
+    var _this = this;
+    // HACK - another setTimeout so that confirm happens after progress
+    setTimeout( function() {
+      _this.emit( eventName, _this );
+      _this.emit( 'always', _this );
+      if ( _this.jqDeferred ) {
+        var jqMethod = _this.hasAnyBroken ? 'reject' : 'resolve';
+        _this.jqDeferred[ jqMethod ]( _this );
+      }
+    });
+  };
+
+  // -------------------------- jquery -------------------------- //
+
+  if ( $ ) {
+    $.fn.imagesLoaded = function( options, callback ) {
+      var instance = new ImagesLoaded( this, options, callback );
+      return instance.jqDeferred.promise( $(this) );
+    };
+  }
+
+
+  // --------------------------  -------------------------- //
+
+  function LoadingImage( img ) {
+    this.img = img;
+  }
+
+  LoadingImage.prototype = new EventEmitter();
+
+  LoadingImage.prototype.check = function() {
+    // first check cached any previous images that have same src
+    var resource = cache[ this.img.src ] || new Resource( this.img.src );
+    if ( resource.isConfirmed ) {
+      this.confirm( resource.isLoaded, 'cached was confirmed' );
+      return;
+    }
+
+    // If complete is true and browser supports natural sizes,
+    // try to check for image status manually.
+    if ( this.img.complete && this.img.naturalWidth !== undefined ) {
+      // report based on naturalWidth
+      this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+      return;
+    }
+
+    // If none of the checks above matched, simulate loading on detached element.
+    var _this = this;
+    resource.on( 'confirm', function( resrc, message ) {
+      _this.confirm( resrc.isLoaded, message );
+      return true;
+    });
+
+    resource.check();
+  };
+
+  LoadingImage.prototype.confirm = function( isLoaded, message ) {
+    this.isLoaded = isLoaded;
+    this.emit( 'confirm', this, message );
+  };
+
+  // -------------------------- Resource -------------------------- //
+
+  // Resource checks each src, only once
+  // separate class from LoadingImage to prevent memory leaks. See #115
+
+  var cache = {};
+
+  function Resource( src ) {
+    this.src = src;
+    // add to cache
+    cache[ src ] = this;
+  }
+
+  Resource.prototype = new EventEmitter();
+
+  Resource.prototype.check = function() {
+    // only trigger checking once
+    if ( this.isChecked ) {
+      return;
+    }
+    // simulate loading on detached element
+    var proxyImage = new Image();
+    eventie.bind( proxyImage, 'load', this );
+    eventie.bind( proxyImage, 'error', this );
+    proxyImage.src = this.src;
+    // set flag
+    this.isChecked = true;
+  };
+
+  // ----- events ----- //
+
+  // trigger specified handler for event type
+  Resource.prototype.handleEvent = function( event ) {
+    var method = 'on' + event.type;
+    if ( this[ method ] ) {
+      this[ method ]( event );
+    }
+  };
+
+  Resource.prototype.onload = function( event ) {
+    this.confirm( true, 'onload' );
+    this.unbindProxyEvents( event );
+  };
+
+  Resource.prototype.onerror = function( event ) {
+    this.confirm( false, 'onerror' );
+    this.unbindProxyEvents( event );
+  };
+
+  // ----- confirm ----- //
+
+  Resource.prototype.confirm = function( isLoaded, message ) {
+    this.isConfirmed = true;
+    this.isLoaded = isLoaded;
+    this.emit( 'confirm', this, message );
+  };
+
+  Resource.prototype.unbindProxyEvents = function( event ) {
+    eventie.unbind( event.target, 'load', this );
+    eventie.unbind( event.target, 'error', this );
+  };
+
+  // -----  ----- //
+
+  return ImagesLoaded;
+
+});
+
+},{"eventie":51,"wolfy87-eventemitter":52}],51:[function(require,module,exports){
+/*!
+ * eventie v1.0.5
+ * event binding helper
+ *   eventie.bind( elem, 'click', myFn )
+ *   eventie.unbind( elem, 'click', myFn )
+ * MIT license
+ */
+
+/*jshint browser: true, undef: true, unused: true */
+/*global define: false, module: false */
+
+( function( window ) {
+
+'use strict';
+
+var docElem = document.documentElement;
+
+var bind = function() {};
+
+function getIEEvent( obj ) {
+  var event = window.event;
+  // add event.target
+  event.target = event.target || event.srcElement || obj;
+  return event;
+}
+
+if ( docElem.addEventListener ) {
+  bind = function( obj, type, fn ) {
+    obj.addEventListener( type, fn, false );
+  };
+} else if ( docElem.attachEvent ) {
+  bind = function( obj, type, fn ) {
+    obj[ type + fn ] = fn.handleEvent ?
+      function() {
+        var event = getIEEvent( obj );
+        fn.handleEvent.call( fn, event );
+      } :
+      function() {
+        var event = getIEEvent( obj );
+        fn.call( obj, event );
+      };
+    obj.attachEvent( "on" + type, obj[ type + fn ] );
+  };
+}
+
+var unbind = function() {};
+
+if ( docElem.removeEventListener ) {
+  unbind = function( obj, type, fn ) {
+    obj.removeEventListener( type, fn, false );
+  };
+} else if ( docElem.detachEvent ) {
+  unbind = function( obj, type, fn ) {
+    obj.detachEvent( "on" + type, obj[ type + fn ] );
+    try {
+      delete obj[ type + fn ];
+    } catch ( err ) {
+      // can't delete window object properties
+      obj[ type + fn ] = undefined;
+    }
+  };
+}
+
+var eventie = {
+  bind: bind,
+  unbind: unbind
+};
+
+// ----- module definition ----- //
+
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( eventie );
+} else if ( typeof exports === 'object' ) {
+  // CommonJS
+  module.exports = eventie;
+} else {
+  // browser global
+  window.eventie = eventie;
+}
+
+})( this );
+
+},{}],52:[function(require,module,exports){
+/*!
+ * EventEmitter v4.2.9 - git.io/ee
+ * Oliver Caldwell
+ * MIT license
+ * @preserve
+ */
+
+(function () {
+    'use strict';
+
+    /**
+     * Class for managing events.
+     * Can be extended to provide event functionality in other classes.
+     *
+     * @class EventEmitter Manages event registering and emitting.
+     */
+    function EventEmitter() {}
+
+    // Shortcuts to improve speed and size
+    var proto = EventEmitter.prototype;
+    var exports = this;
+    var originalGlobalValue = exports.EventEmitter;
+
+    /**
+     * Finds the index of the listener for the event in its storage array.
+     *
+     * @param {Function[]} listeners Array of listeners to search through.
+     * @param {Function} listener Method to look for.
+     * @return {Number} Index of the specified listener, -1 if not found
+     * @api private
+     */
+    function indexOfListener(listeners, listener) {
+        var i = listeners.length;
+        while (i--) {
+            if (listeners[i].listener === listener) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Alias a method while keeping the context correct, to allow for overwriting of target method.
+     *
+     * @param {String} name The name of the target method.
+     * @return {Function} The aliased method
+     * @api private
+     */
+    function alias(name) {
+        return function aliasClosure() {
+            return this[name].apply(this, arguments);
+        };
+    }
+
+    /**
+     * Returns the listener array for the specified event.
+     * Will initialise the event object and listener arrays if required.
+     * Will return an object if you use a regex search. The object contains keys for each matched event. So /ba[rz]/ might return an object containing bar and baz. But only if you have either defined them with defineEvent or added some listeners to them.
+     * Each property in the object response is an array of listener functions.
+     *
+     * @param {String|RegExp} evt Name of the event to return the listeners from.
+     * @return {Function[]|Object} All listener functions for the event.
+     */
+    proto.getListeners = function getListeners(evt) {
+        var events = this._getEvents();
+        var response;
+        var key;
+
+        // Return a concatenated array of all matching events if
+        // the selector is a regular expression.
+        if (evt instanceof RegExp) {
+            response = {};
+            for (key in events) {
+                if (events.hasOwnProperty(key) && evt.test(key)) {
+                    response[key] = events[key];
+                }
+            }
+        }
+        else {
+            response = events[evt] || (events[evt] = []);
+        }
+
+        return response;
+    };
+
+    /**
+     * Takes a list of listener objects and flattens it into a list of listener functions.
+     *
+     * @param {Object[]} listeners Raw listener objects.
+     * @return {Function[]} Just the listener functions.
+     */
+    proto.flattenListeners = function flattenListeners(listeners) {
+        var flatListeners = [];
+        var i;
+
+        for (i = 0; i < listeners.length; i += 1) {
+            flatListeners.push(listeners[i].listener);
+        }
+
+        return flatListeners;
+    };
+
+    /**
+     * Fetches the requested listeners via getListeners but will always return the results inside an object. This is mainly for internal use but others may find it useful.
+     *
+     * @param {String|RegExp} evt Name of the event to return the listeners from.
+     * @return {Object} All listener functions for an event in an object.
+     */
+    proto.getListenersAsObject = function getListenersAsObject(evt) {
+        var listeners = this.getListeners(evt);
+        var response;
+
+        if (listeners instanceof Array) {
+            response = {};
+            response[evt] = listeners;
+        }
+
+        return response || listeners;
+    };
+
+    /**
+     * Adds a listener function to the specified event.
+     * The listener will not be added if it is a duplicate.
+     * If the listener returns true then it will be removed after it is called.
+     * If you pass a regular expression as the event name then the listener will be added to all events that match it.
+     *
+     * @param {String|RegExp} evt Name of the event to attach the listener to.
+     * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.addListener = function addListener(evt, listener) {
+        var listeners = this.getListenersAsObject(evt);
+        var listenerIsWrapped = typeof listener === 'object';
+        var key;
+
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key) && indexOfListener(listeners[key], listener) === -1) {
+                listeners[key].push(listenerIsWrapped ? listener : {
+                    listener: listener,
+                    once: false
+                });
+            }
+        }
+
+        return this;
+    };
+
+    /**
+     * Alias of addListener
+     */
+    proto.on = alias('addListener');
+
+    /**
+     * Semi-alias of addListener. It will add a listener that will be
+     * automatically removed after its first execution.
+     *
+     * @param {String|RegExp} evt Name of the event to attach the listener to.
+     * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.addOnceListener = function addOnceListener(evt, listener) {
+        return this.addListener(evt, {
+            listener: listener,
+            once: true
+        });
+    };
+
+    /**
+     * Alias of addOnceListener.
+     */
+    proto.once = alias('addOnceListener');
+
+    /**
+     * Defines an event name. This is required if you want to use a regex to add a listener to multiple events at once. If you don't do this then how do you expect it to know what event to add to? Should it just add to every possible match for a regex? No. That is scary and bad.
+     * You need to tell it what event names should be matched by a regex.
+     *
+     * @param {String} evt Name of the event to create.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.defineEvent = function defineEvent(evt) {
+        this.getListeners(evt);
+        return this;
+    };
+
+    /**
+     * Uses defineEvent to define multiple events.
+     *
+     * @param {String[]} evts An array of event names to define.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.defineEvents = function defineEvents(evts) {
+        for (var i = 0; i < evts.length; i += 1) {
+            this.defineEvent(evts[i]);
+        }
+        return this;
+    };
+
+    /**
+     * Removes a listener function from the specified event.
+     * When passed a regular expression as the event name, it will remove the listener from all events that match it.
+     *
+     * @param {String|RegExp} evt Name of the event to remove the listener from.
+     * @param {Function} listener Method to remove from the event.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.removeListener = function removeListener(evt, listener) {
+        var listeners = this.getListenersAsObject(evt);
+        var index;
+        var key;
+
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key)) {
+                index = indexOfListener(listeners[key], listener);
+
+                if (index !== -1) {
+                    listeners[key].splice(index, 1);
+                }
+            }
+        }
+
+        return this;
+    };
+
+    /**
+     * Alias of removeListener
+     */
+    proto.off = alias('removeListener');
+
+    /**
+     * Adds listeners in bulk using the manipulateListeners method.
+     * If you pass an object as the second argument you can add to multiple events at once. The object should contain key value pairs of events and listeners or listener arrays. You can also pass it an event name and an array of listeners to be added.
+     * You can also pass it a regular expression to add the array of listeners to all events that match it.
+     * Yeah, this function does quite a bit. That's probably a bad thing.
+     *
+     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add to multiple events at once.
+     * @param {Function[]} [listeners] An optional array of listener functions to add.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.addListeners = function addListeners(evt, listeners) {
+        // Pass through to manipulateListeners
+        return this.manipulateListeners(false, evt, listeners);
+    };
+
+    /**
+     * Removes listeners in bulk using the manipulateListeners method.
+     * If you pass an object as the second argument you can remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
+     * You can also pass it an event name and an array of listeners to be removed.
+     * You can also pass it a regular expression to remove the listeners from all events that match it.
+     *
+     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to remove from multiple events at once.
+     * @param {Function[]} [listeners] An optional array of listener functions to remove.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.removeListeners = function removeListeners(evt, listeners) {
+        // Pass through to manipulateListeners
+        return this.manipulateListeners(true, evt, listeners);
+    };
+
+    /**
+     * Edits listeners in bulk. The addListeners and removeListeners methods both use this to do their job. You should really use those instead, this is a little lower level.
+     * The first argument will determine if the listeners are removed (true) or added (false).
+     * If you pass an object as the second argument you can add/remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
+     * You can also pass it an event name and an array of listeners to be added/removed.
+     * You can also pass it a regular expression to manipulate the listeners of all events that match it.
+     *
+     * @param {Boolean} remove True if you want to remove listeners, false if you want to add.
+     * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add/remove from multiple events at once.
+     * @param {Function[]} [listeners] An optional array of listener functions to add/remove.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.manipulateListeners = function manipulateListeners(remove, evt, listeners) {
+        var i;
+        var value;
+        var single = remove ? this.removeListener : this.addListener;
+        var multiple = remove ? this.removeListeners : this.addListeners;
+
+        // If evt is an object then pass each of its properties to this method
+        if (typeof evt === 'object' && !(evt instanceof RegExp)) {
+            for (i in evt) {
+                if (evt.hasOwnProperty(i) && (value = evt[i])) {
+                    // Pass the single listener straight through to the singular method
+                    if (typeof value === 'function') {
+                        single.call(this, i, value);
+                    }
+                    else {
+                        // Otherwise pass back to the multiple function
+                        multiple.call(this, i, value);
+                    }
+                }
+            }
+        }
+        else {
+            // So evt must be a string
+            // And listeners must be an array of listeners
+            // Loop over it and pass each one to the multiple method
+            i = listeners.length;
+            while (i--) {
+                single.call(this, evt, listeners[i]);
+            }
+        }
+
+        return this;
+    };
+
+    /**
+     * Removes all listeners from a specified event.
+     * If you do not specify an event then all listeners will be removed.
+     * That means every event will be emptied.
+     * You can also pass a regex to remove all events that match it.
+     *
+     * @param {String|RegExp} [evt] Optional name of the event to remove all listeners for. Will remove from every event if not passed.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.removeEvent = function removeEvent(evt) {
+        var type = typeof evt;
+        var events = this._getEvents();
+        var key;
+
+        // Remove different things depending on the state of evt
+        if (type === 'string') {
+            // Remove all listeners for the specified event
+            delete events[evt];
+        }
+        else if (evt instanceof RegExp) {
+            // Remove all events matching the regex.
+            for (key in events) {
+                if (events.hasOwnProperty(key) && evt.test(key)) {
+                    delete events[key];
+                }
+            }
+        }
+        else {
+            // Remove all listeners in all events
+            delete this._events;
+        }
+
+        return this;
+    };
+
+    /**
+     * Alias of removeEvent.
+     *
+     * Added to mirror the node API.
+     */
+    proto.removeAllListeners = alias('removeEvent');
+
+    /**
+     * Emits an event of your choice.
+     * When emitted, every listener attached to that event will be executed.
+     * If you pass the optional argument array then those arguments will be passed to every listener upon execution.
+     * Because it uses `apply`, your array of arguments will be passed as if you wrote them out separately.
+     * So they will not arrive within the array on the other side, they will be separate.
+     * You can also pass a regular expression to emit to all events that match it.
+     *
+     * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+     * @param {Array} [args] Optional array of arguments to be passed to each listener.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.emitEvent = function emitEvent(evt, args) {
+        var listeners = this.getListenersAsObject(evt);
+        var listener;
+        var i;
+        var key;
+        var response;
+
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key)) {
+                i = listeners[key].length;
+
+                while (i--) {
+                    // If the listener returns true then it shall be removed from the event
+                    // The function is executed either with a basic call or an apply if there is an args array
+                    listener = listeners[key][i];
+
+                    if (listener.once === true) {
+                        this.removeListener(evt, listener.listener);
+                    }
+
+                    response = listener.listener.apply(this, args || []);
+
+                    if (response === this._getOnceReturnValue()) {
+                        this.removeListener(evt, listener.listener);
+                    }
+                }
+            }
+        }
+
+        return this;
+    };
+
+    /**
+     * Alias of emitEvent
+     */
+    proto.trigger = alias('emitEvent');
+
+    /**
+     * Subtly different from emitEvent in that it will pass its arguments on to the listeners, as opposed to taking a single array of arguments to pass on.
+     * As with emitEvent, you can pass a regex in place of the event name to emit to all events that match it.
+     *
+     * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+     * @param {...*} Optional additional arguments to be passed to each listener.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.emit = function emit(evt) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return this.emitEvent(evt, args);
+    };
+
+    /**
+     * Sets the current value to check against when executing listeners. If a
+     * listeners return value matches the one set here then it will be removed
+     * after execution. This value defaults to true.
+     *
+     * @param {*} value The new value to check for when executing listeners.
+     * @return {Object} Current instance of EventEmitter for chaining.
+     */
+    proto.setOnceReturnValue = function setOnceReturnValue(value) {
+        this._onceReturnValue = value;
+        return this;
+    };
+
+    /**
+     * Fetches the current value to check against when executing listeners. If
+     * the listeners return value matches this one then it should be removed
+     * automatically. It will return true by default.
+     *
+     * @return {*|Boolean} The current value to check for or the default, true.
+     * @api private
+     */
+    proto._getOnceReturnValue = function _getOnceReturnValue() {
+        if (this.hasOwnProperty('_onceReturnValue')) {
+            return this._onceReturnValue;
+        }
+        else {
+            return true;
+        }
+    };
+
+    /**
+     * Fetches the events object and creates one if required.
+     *
+     * @return {Object} The events storage object.
+     * @api private
+     */
+    proto._getEvents = function _getEvents() {
+        return this._events || (this._events = {});
+    };
+
+    /**
+     * Reverts the global {@link EventEmitter} to its previous value and returns a reference to this version.
+     *
+     * @return {Function} Non conflicting EventEmitter class.
+     */
+    EventEmitter.noConflict = function noConflict() {
+        exports.EventEmitter = originalGlobalValue;
+        return EventEmitter;
+    };
+
+    // Expose the class either via AMD, CommonJS or the global object
+    if (typeof define === 'function' && define.amd) {
+        define(function () {
+            return EventEmitter;
+        });
+    }
+    else if (typeof module === 'object' && module.exports){
+        module.exports = EventEmitter;
+    }
+    else {
+        exports.EventEmitter = EventEmitter;
+    }
+}.call(this));
+
+},{}],53:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -11633,14 +12510,14 @@ process.chdir = function (dir) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
+},{"./lib/core.js":55,"./lib/done.js":56,"./lib/es6-extensions.js":57,"./lib/node-extensions.js":58}],55:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -11747,7 +12624,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
+},{"asap":59}],56:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -11762,7 +12639,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
+},{"./core.js":55,"asap":59}],57:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -11872,7 +12749,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
+},{"./core.js":55,"asap":59}],58:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -11934,7 +12811,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
+},{"./core.js":55,"asap":59}],59:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12051,4 +12928,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js"}]},{},["./app_storefront_richUI/cartridge/js/app.js"]);
+},{"_process":49}]},{},[1]);

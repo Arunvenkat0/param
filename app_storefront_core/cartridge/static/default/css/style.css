@@ -316,6 +316,12 @@ table {
 td, th {
   padding: 0; }
 
+.compare-items-panel:before, .compare-items-panel:after {
+  content: " ";
+  display: table; }
+.compare-items-panel:after {
+  clear: both; }
+
 body {
   background: none repeat scroll 0 0 #333;
   color: #333;
@@ -1864,6 +1870,9 @@ div.level-3 ul.level-3 {
     margin: 0.5em 0;
     text-transform: uppercase; }
 
+.compare-items-panel {
+  float: left; }
+
 .compare-item {
   background-color: #e0e0e0;
   float: left;
@@ -1897,6 +1906,7 @@ div.level-3 ul.level-3 {
   left: 0; }
 
 .compare-buttons {
+  float: left;
   padding: 0.7em 0 0; }
 
 .compare-print {
@@ -1922,7 +1932,9 @@ div.level-3 ul.level-3 {
         width: 15em; } }
 
 #compare-table {
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%; }
   #compare-table a:hover {
     text-decoration: underline; }
   #compare-table .attribute-row {
@@ -1949,6 +1961,10 @@ div.level-3 ul.level-3 {
     content: ''; }
   #compare-table .product-tile .swatch-list {
     display: inline-block; }
+  #compare-table .product-image {
+    height: auto; }
+    #compare-table .product-image img {
+      height: auto; }
   #compare-table .section-header {
     font-size: 0.9em;
     padding: 1em;
@@ -2034,28 +2050,30 @@ div.level-3 ul.level-3 {
 .primary-image {
   max-width: 100%; }
 
-.pdp-main .product-thumbnails {
+.product-thumbnails {
   clear: both;
   display: inline-block;
   padding: 0px 0.5em; }
-  .pdp-main .product-thumbnails li {
+  .product-thumbnails .thumb {
     border-top: 5px solid #fff;
     float: left;
     margin: 0 5px 0 0;
     padding: 3px 0 0;
     width: 55px; }
-    .pdp-main .product-thumbnails li.selected {
+    .product-thumbnails .thumb.selected {
       border-color: #00a4e4; }
-    .pdp-main .product-thumbnails li img {
-      border: 1px solid #ccc;
-      max-width: 53px; }
-  .pdp-main .product-thumbnails h2 {
+  .product-thumbnails .productthumbnail {
+    border: 1px solid #ccc;
+    cursor: pointer;
+    max-width: 53px; }
+  .product-thumbnails h2 {
     text-transform: uppercase;
     font-family: Arial, sans-serif;
     font-size: 1.5em;
     font-style: normal;
     font-weight: bold;
     margin: 0.83em 0; }
+
 .pdp-main .product-col-2 {
   float: right;
   width: 59.5%; }
