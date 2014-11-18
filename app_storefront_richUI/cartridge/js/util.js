@@ -195,7 +195,7 @@ var util = {
 
 	fillAddressFields: function (address, $form) {
 		for (var field in address) {
-			if (field === 'ID' || field === 'UUID') {
+			if (field === 'ID' || field === 'UUID' || field === 'key') {
 				continue;
 			}
 			// if the key in address object ends with 'Code', remove that suffix
