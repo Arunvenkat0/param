@@ -7,38 +7,45 @@ var _ = require('lodash'),
 	util = require('./util');
 
 var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
-
+var newLine = '\n';
 var storeTemplate = function (store) {
-	return '' +
-	'<li class="store-tile ' + store.storeId + '">' +
-	'	<p class="store-address">' +
-	'		' + store.address1 + '<br/>' +
-	'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode +
-	'	</p>' +
-	'	<p class="store-status ' + store.statusClass + '">' + store.status + '</p>' +
-	'	<button class="select-store-button" value="' + store.storeId +
-	'" data-stock-status="' + status + (statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') +
-	'		' + Resources.SELECT_STORE +
-	'	</button>' +
-	'</li>';
+	return [
+		'<li class="store-tile ' + store.storeId + (store.storeId === User.storeId ? ' selected' : '') +'">',
+		'	<p class="store-address">',
+		'		' + store.address1 + '<br/>',
+		'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode,
+		'	</p>',
+		'	<p class="store-status ' + store.statusclass + '">' + store.status + '</p>',
+		'	<button class="select-store-button" data-store-id="' + store.storeId +
+		'" data-stock-status="' + store.status + '"' + (store.statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') + '>',
+		'		' + (store.storeId === User.storeId ? Resources.PREFERRED_STORE : Resources.SELECT_STORE),
+		'	</button>',
+		'</li>'
+	].join(newLine);
 }
 
 var storeListTemplate = function (stores) {
 	if (stores && stores.length) {
-		return '' +
-		'<ul class="store-list">' +
-		_.map(stores, storeListTemplate) +
-		'</ul>';
+		return [
+			'<div class="store-list-container">',
+			'<ul class="store-list">',
+			_.map(stores, storeTemplate).join(newLine),
+			'</ul>',
+			'</div>',
+			'<div class="store-list-pagination">',
+			'</div>'
+		].join(newLine);
 	} else {
 		return '<div class="no-results">No Results</div>';
 	}
 };
 
 var zipPromptTemplate = function () {
-	return '' +
-	'<div id="preferred-store-panel">' +
-	'	<input type="text" id="user-zip" placeholder="' + Resources.ENTER_ZIP + '" name="zipCode"/>' +
-	'</div>';
+	return [
+		'<div id="preferred-store-panel">',
+		'	<input type="text" id="user-zip" placeholder="' + Resources.ENTER_ZIP + '" name="zipCode"/>',
+		'</div>'
+	].join(newLine);
 };
 
 /**
@@ -107,6 +114,8 @@ var storeinventory = {
 		dialog.open({
 			html: zipPromptTemplate(),
 			options: {
+				title: Resources.STORE_NEAR_YOU,
+				width: 500,
 				buttons: [
 					{
 						text: Resources.SEARCH,
@@ -152,6 +161,7 @@ var storeinventory = {
 			}
 	},
 	buildStoreList: function (pid) {
+		var self = this;
 		$.ajax({
 			url: util.appendParamsToUrl(Urls.storesInventory, {
 				pid: pid,
@@ -159,12 +169,42 @@ var storeinventory = {
 			}),
 			dataType: 'json',
 			success: function (data) {
-				var storeList = storeListTemplate(data);
+				var storeList = storeListTemplate(data),
+					buttonText;
+				if (User.storeId) {
+					buttonText = Resources.CONTINUE_WITH_STORE;
+				} else if (User.zip) {
+					buttonText = Resources.CONTINUE;
+				}
 				dialog.open({
-					html: storeList
+					html: storeList,
+					options: {
+						title: Resources.SELECT_STORE + ' - ' + User.zip,
+						buttons: [
+							{
+								text: Resources.CHANGE_LOCATION,
+								click: function () {
+									self.setUserZip(null);
+									self.zipPrompt();
+								}
+							}, {
+								text: Resources.CONTINUE,
+								click: function () {}
+							}
+						]
+					},
+					callback: function () {
+						$('.select-store-button').on('click', function (e) {
+							e.preventDefault();
+							var storeId = $(this).data('storeId');
+							// if the store is already selected, don't select again
+							if (storeId === User.storeId) { return; }
+							self.setPreferredStore(storeId);
+						});
+					}
 				});
 			}
-		})
+		});
 	},
 	buildStoreList2: function (pid) {
 		var self = this;
@@ -435,10 +475,15 @@ var storeinventory = {
 
 	setPreferredStore: function (id) {
 		User.storeId = id;
-		$.post(Urls.setPreferredStore, {storeId: id}, function (data) {
-			$('.selected-store-availability').html(data);
-			//enable continue button when a preferred store has been selected
-			$('#preferred-store-panel .close').attr('disabled', false);
+		$.ajax({
+			url: Urls.setPreferredStore,
+			type: 'POST',
+			data: {storeId: id},
+			success: function (data) {
+				$('.selected-store-availability').html(data);
+				$('.store-list .store-tile.selected').removeClass('selected').find('.select-store-button').text(Resources.SELECT_STORE);
+				$('.store-list .store-tile.' + id).addClass('selected').find('.select-store-button').text(Resources.PREFERRED_STORE);
+			}
 		});
 	},
 
