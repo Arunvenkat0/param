@@ -1,5 +1,5 @@
 'use strict';
-var quickview = require('../../quickview'),
+var dialog = require('../../dialog'),
 	util = require('../../util');
 
 /**
@@ -21,7 +21,7 @@ var loadZoom = function () {
 		},
 		hiresUrl;
 
-	if ($imgZoom.length === 0 || quickview.isActive() || util.isMobile()) {
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
@@ -44,7 +44,7 @@ var setMainImage = function (atts) {
 		alt: atts.alt,
 		title: atts.title
 	});
-	if (!quickview.isActive() && !util.isMobile()) {
+	if (!dialog.isActive() && !util.isMobile()) {
 		$('#pdpMain .main-image').attr('href', atts.hires);
 	}
 	loadZoom();
@@ -71,6 +71,9 @@ var replaceImages = function () {
  * @description by default, this function sets up zoom and event handler for thumbnail click
  **/
 module.exports = function () {
+	if (dialog.isActive() || util.isMobile()) {
+		$('#pdpMain .main-image').removeAttr('href');
+	}
 	loadZoom();
 	// handle product thumbnail click event
 	$('#pdpMain').on('click', '.productthumbnail', function () {
@@ -79,8 +82,8 @@ module.exports = function () {
 		$(this).closest('.thumb').addClass('selected');
 
 		setMainImage($(this).data('lgimg'));
-	})
-}
+	});
+};
 module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
