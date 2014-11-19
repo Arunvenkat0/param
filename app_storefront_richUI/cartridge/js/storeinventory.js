@@ -171,7 +171,15 @@ var storeinventory = {
 							}
 						}
 					}
-				]
+				],
+				open: function () {
+					$('#user-zip').on('keypress', function (e) {
+						if (e.which === 13) {
+							// trigger the search button
+							$('.ui-dialog-buttonset .ui-button').trigger('click');
+						}
+					});
+				}
 			}
 		});
 	},
@@ -234,17 +242,17 @@ var storeinventory = {
 							dialog.close();
 						}
 					}
-				]
+				],
+				open: function () {
+					$('.select-store-button').on('click', function (e) {
+						e.preventDefault();
+						var storeId = $(this).data('storeId');
+						// if the store is already selected, don't select again
+						if (storeId === User.storeId) { return; }
+						self.setPreferredStore(storeId);
+					});
+				}
 			},
-			callback: function () {
-				$('.select-store-button').on('click', function (e) {
-					e.preventDefault();
-					var storeId = $(this).data('storeId');
-					// if the store is already selected, don't select again
-					if (storeId === User.storeId) { return; }
-					self.setPreferredStore(storeId);
-				});
-			}
 		});
 	},
 	// list all stores on PDP page
