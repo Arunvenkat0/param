@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!--- TEMPLATENAME: paymentmethods.isml --->
+<iscomment> TEMPLATENAME: paymentmethods.isml </iscomment>
 <isinclude template="util/modules"/>
 <isif condition="${pdict.OrderTotal > 0}">
 	<fieldset>

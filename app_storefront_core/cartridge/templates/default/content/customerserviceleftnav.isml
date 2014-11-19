@@ -8,7 +8,7 @@
 		<span class="toggle"><isprint value="${links}"/></span>
 		
 		<ul>
-			<!--- Loop Through Customer Service Libraries --->
+			<iscomment> Loop Through Customer Service Libraries </iscomment>
 			<isloop items="${pdict.CustomerServiceLinks.get(links)}" var="ContentAsset" status="loopcounter">	
 				<li>
 					<a href="${URLUtils.url('Page-Show','cid', ContentAsset.ID)}" title="${ContentAsset.name}">
