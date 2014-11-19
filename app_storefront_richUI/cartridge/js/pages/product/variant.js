@@ -5,7 +5,7 @@ var addThis = require('./addThis'),
 	ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
-	storeinventory = require('../../storeinventory'),
+	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
@@ -32,7 +32,7 @@ var updateContent = function (href) {
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
-				storeinventory.init();
+				productStoreInventory();
 			}
 			image.replaceImages();
 			tooltip.init();

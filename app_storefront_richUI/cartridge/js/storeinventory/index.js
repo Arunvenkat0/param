@@ -1,13 +1,12 @@
 'use strict';
 
 var _ = require('lodash'),
-	ajax = require('./ajax'),
-	dialog = require('./dialog'),
-	page = require('./page'),
+	ajax = require('../ajax'),
+	dialog = require('../dialog'),
+	page = require('../page'),
 	TPromise = require('promise'),
-	util = require('./util');
+	util = require('../util');
 
-var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
 var newLine = '\n';
 var storeTemplate = function (store) {
 	return [
@@ -96,7 +95,7 @@ var storeinventory = {
 			$availabilityContainer = $('.availability-results'),
 			pid = $('input[name="pid"]').val()
 		this.$preferredStorePanel = $('<div id="preferred-store-panel">');
-		// check for items that trigger dialog
+		//
 		$('#cart-table .set-preferred-store').on('click', function (e) {
 			e.preventDefault();
 			self.loadPreferredStorePanel($(this).parent().attr('id'));
@@ -105,32 +104,6 @@ var storeinventory = {
 		//disable the radio button for home deliveries if the store inventory is out of stock
 		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function () {
 			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
-		});
-
-		$('#pdpMain').on('click', '.set-preferred-store', function (e) {
-			e.preventDefault();
-			if (!User.zip) {
-				self.zipPrompt();
-			} else {
-				self.getStoresInventory(pid).then(self.selectStoreDialog.bind(self));
-			}
-		});
-
-		if ($availabilityContainer.length) {
-			if (User.storeId) {
-				self.getStoresInventory(pid).then(self.storesListing.bind(self));
-			}
-		}
-
-		$availabilityContainer.on('click', '.stores-toggle', function (e) {
-			e.preventDefault();
-			$('.store-list-pdp .store-list-item').toggleClass('visible');
-			if ($(this).hasClass('collapsed')) {
-				$(this).text(Resources.SEE_LESS);
-			} else {
-				$(this).text(Resources.SEE_MORE);
-			}
-			$(this).toggleClass('collapsed');
 		});
 
 		$('.item-delivery-options input.radio-url').on('click', function () {
@@ -152,7 +125,7 @@ var storeinventory = {
 		});
 	},
 
-	zipPrompt: function () {
+	zipPrompt: function (callback) {
 		var self = this;
 		dialog.open({
 			html: zipPromptTemplate(),
@@ -166,8 +139,9 @@ var storeinventory = {
 							var zipCode = $('#user-zip').val();
 							if (validateZipCode(zipCode)) {
 								self.setUserZip(zipCode);
-								self.getStoresInventory($('input[name="pid"]').val())
-									.then(self.selectStoreDialog.bind(self));
+								if (callback) {
+									callback(zipCode);
+								}
 							}
 						}
 					}

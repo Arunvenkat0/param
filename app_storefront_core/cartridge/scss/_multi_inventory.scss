@@ -30,18 +30,24 @@
 	}
 }
 
-.availability {
-	.in-stock-msg {
-			color: $islamic-green;
-		}
-		.not-available-msg,
-		.in-stock-date-msg {
-			color: $sangria;
-		}
-		.preorder-msg,
-		.backorder-msg {
-			color: $cerulean;
-		}
+.in-stock-msg,
+.store-in-stock,
+.is-in-stock {
+	color: $islamic-green;
+}
+
+.not-available-msg,
+.in-stock-date-msg,
+.not-available,
+.out-of-stock,
+.store-error, {
+	color: $sangria;
+}
+
+.on-order,
+.preorder-msg,
+.backorder-msg {
+	color: $cerulean;
 }
 
 .availability-results {
@@ -118,14 +124,12 @@
 	}
 }
 
-.not-available,
-.out-of-stock,
-.store-error {
-	color: $sangria;
+// Cart inventory
+.selected-store-address {
+	margin-top: 0.5em;
 }
-
-.store-in-stock {
-	color: $islamic-green;
+.selected-store-availability {
+	margin: 0.3em 0 0.5em;
 }
 
 .multishipprogress {
@@ -247,12 +251,6 @@
 
 .loading {
 	background: url("../images/loading-progress-98x22.gif") no-repeat scroll left center transparent;
-}
-
-#cart-table .item-delivery-options .store-in-stock {
-	color: $night-rider;
-	font-family: $sans-serif;
-	font-size: 12px;
 }
 
 #cart-table .item-delivery-options {
