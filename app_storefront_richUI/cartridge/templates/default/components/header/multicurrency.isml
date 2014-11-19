@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!--- TEMPLATENAME: multicurrency.isml --->
+<iscomment> TEMPLATENAME: multicurrency.isml </iscomment>
  	<isif condition="${(dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiCurrency')) && (dw.system.Site.getCurrent().getAllowedCurrencies().length > 1)}"> 	
  	<li class="mc-class">${Resource.msg('headercustomerinfo.currency','components',null)} </li>
  	<li class="mc-class">

@@ -6,7 +6,7 @@ params:
 pdict.productlistitem
 </iscomment>
 
-<!--- display options and values if any --->
+<iscomment> display options and values if any </iscomment>
 <isif condition="${pdict.productlistitem.productOptionModel != null}">
 	<div class="product_options <isprint value="${pdict.productlistitem.product.ID}"/>options">
 		<isloop iterator="${pdict.productlistitem.productOptionModel.options}" alias="productOption">
