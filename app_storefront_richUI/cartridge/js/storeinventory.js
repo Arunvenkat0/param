@@ -4,6 +4,7 @@ var _ = require('lodash'),
 	ajax = require('./ajax'),
 	dialog = require('./dialog'),
 	page = require('./page'),
+	TPromise = require('promise'),
 	util = require('./util');
 
 var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
@@ -40,6 +41,29 @@ var storeListTemplate = function (stores) {
 	}
 };
 
+var pdpStoreTemplate = function (store) {
+	return [
+		'<li class="store-list-item ' + (store.storeId === User.storeId ? ' selected' : '') + '">',
+		'	<div class="store-address">' + store.address1 + ', ' + store.city + ' ' + store.stateCode +
+		' ' + store.postalCode + '</div>',
+		'	<div class="store-status ' + store.statusclass + '">' + store.status + '</div>',
+		'</li>'
+	].join(newLine);
+}
+
+var pdpStoresListingTemplate = function (stores) {
+	if (stores && stores.length) {
+		return [
+			'<div class="store-list-pdp-container">',
+			(stores.length > 1 ? '	<a class="stores-toggle collapsed" href="#">' + Resources.SEE_MORE + '</a>' : ''),
+			'	<ul class="store-list-pdp">',
+			_.map(stores, pdpStoreTemplate).join(newLine),
+			'	</ul>',
+			'</div>'
+		].join(newLine);
+	}
+}
+
 var zipPromptTemplate = function () {
 	return [
 		'<div id="preferred-store-panel">',
@@ -68,7 +92,9 @@ var validateZipCode = function (zipCode) {
 
 var storeinventory = {
 	init: function () {
-		var self = this;
+		var self = this,
+			$availabilityContainer = $('.availability-results'),
+			pid = $('input[name="pid"]').val()
 		this.$preferredStorePanel = $('<div id="preferred-store-panel">');
 		// check for items that trigger dialog
 		$('#cart-table .set-preferred-store').on('click', function (e) {
@@ -86,8 +112,25 @@ var storeinventory = {
 			if (!User.zip) {
 				self.zipPrompt();
 			} else {
-				self.buildStoreList($('input[name="pid"]').val());
+				self.getStoresInventory(pid).then(self.selectStoreDialog.bind(self));
 			}
+		});
+
+		if ($availabilityContainer.length) {
+			if (User.storeId) {
+				self.getStoresInventory(pid).then(self.storesListing.bind(self));
+			}
+		}
+
+		$availabilityContainer.on('click', '.stores-toggle', function (e) {
+			e.preventDefault();
+			$('.store-list-pdp .store-list-item').toggleClass('visible');
+			if ($(this).hasClass('collapsed')) {
+				$(this).text(Resources.SEE_LESS);
+			} else {
+				$(this).text(Resources.SEE_MORE);
+			}
+			$(this).toggleClass('collapsed');
 		});
 
 		$('.item-delivery-options input.radio-url').on('click', function () {
@@ -123,7 +166,8 @@ var storeinventory = {
 							var zipCode = $('#user-zip').val();
 							if (validateZipCode(zipCode)) {
 								self.setUserZip(zipCode);
-								self.buildStoreList($('input[name="pid"]').val());
+								self.getStoresInventory($('input[name="pid"]').val())
+									.then(self.selectStoreDialog.bind(self));
 							}
 						}
 					}
@@ -160,51 +204,55 @@ var storeinventory = {
 				$('.cart-action-checkout button').removeAttr('disabled', 'disabled');
 			}
 	},
-	buildStoreList: function (pid) {
-		var self = this;
-		$.ajax({
+	getStoresInventory: function (pid) {
+		return TPromise.resolve($.ajax({
 			url: util.appendParamsToUrl(Urls.storesInventory, {
 				pid: pid,
 				zipCode: User.zip
 			}),
-			dataType: 'json',
-			success: function (data) {
-				var storeList = storeListTemplate(data),
-					buttonText;
-				if (User.storeId) {
-					buttonText = Resources.CONTINUE_WITH_STORE;
-				} else if (User.zip) {
-					buttonText = Resources.CONTINUE;
-				}
-				dialog.open({
-					html: storeList,
-					options: {
-						title: Resources.SELECT_STORE + ' - ' + User.zip,
-						buttons: [
-							{
-								text: Resources.CHANGE_LOCATION,
-								click: function () {
-									self.setUserZip(null);
-									self.zipPrompt();
-								}
-							}, {
-								text: Resources.CONTINUE,
-								click: function () {}
-							}
-						]
-					},
-					callback: function () {
-						$('.select-store-button').on('click', function (e) {
-							e.preventDefault();
-							var storeId = $(this).data('storeId');
-							// if the store is already selected, don't select again
-							if (storeId === User.storeId) { return; }
-							self.setPreferredStore(storeId);
-						});
+			dataType: 'json'
+		}));
+	},
+	selectStoreDialog: function (stores) {
+		var self = this,
+			storeList = storeListTemplate(stores);
+		dialog.open({
+			html: storeList,
+			options: {
+				title: Resources.SELECT_STORE + ' - ' + User.zip,
+				buttons: [
+					{
+						text: Resources.CHANGE_LOCATION,
+						click: function () {
+							self.setUserZip(null);
+							self.zipPrompt();
+						}.bind(this)
+					}, {
+						text: Resources.CONTINUE,
+						click: function () {
+							self.storesListing(stores);
+							dialog.close();
+						}
 					}
+				]
+			},
+			callback: function () {
+				$('.select-store-button').on('click', function (e) {
+					e.preventDefault();
+					var storeId = $(this).data('storeId');
+					// if the store is already selected, don't select again
+					if (storeId === User.storeId) { return; }
+					self.setPreferredStore(storeId);
 				});
 			}
 		});
+	},
+	// list all stores on PDP page
+	storesListing: function (stores) {
+		if ($('.store-list-pdp-container').length) {
+			$('.store-list-pdp-container').remove();
+		}
+		$('.availability-results').append(pdpStoresListingTemplate(stores));
 	},
 	buildStoreList2: function (pid) {
 		var self = this;

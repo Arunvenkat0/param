@@ -32,7 +32,7 @@ var updateContent = function (href) {
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
-				storeinventory.buildStoreList($('.product-number span').html());
+				storeinventory.init();
 			}
 			image.replaceImages();
 			tooltip.init();
