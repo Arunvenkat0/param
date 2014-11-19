@@ -44,7 +44,6 @@ var dialog = {
 	 * @param {Object} options
 	 * @param {Object} options.url should contain the url
 	 * @param {String} options.html contains the html of the dialog content
-	 * @param {function} options.callback
 	 */
 	open: function (options) {
 		// close any open dialog
@@ -68,25 +67,21 @@ var dialog = {
 	 * @param {object} options
 	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
 	 * @param {string} options.html - If no url property is provided, use html provided to replace
-	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
 	replace: function (options) {
 		if (!this.$container) {
 			return;
 		}
-		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
 				callback: function (response) {
 					this.openWithContent(response);
-					callback();
 				}.bind(this)
 			});
 		} else if (options.html) {
 			this.openWithContent(options.html);
-			callback();
 		}
 	},
 	/**
@@ -97,7 +92,7 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
-		this.$container.dialog('close').remove();
+		this.$container.dialog('close');
 	},
 	/**
 	 * @function
@@ -153,7 +148,7 @@ var dialog = {
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy');
+			$(this).dialog('destroy').remove();
 		}
 	}
 };
