@@ -195,7 +195,7 @@ var storeinventory = {
 			dataType: 'json'
 		}));
 	},
-	selectStoreDialog: function (stores) {
+	selectStoreDialog: function (stores, callback) {
 		var self = this,
 			storeList = storeListTemplate(stores);
 		dialog.open({
@@ -207,12 +207,15 @@ var storeinventory = {
 						text: Resources.CHANGE_LOCATION,
 						click: function () {
 							self.setUserZip(null);
-							self.zipPrompt();
+							// trigger the event to start the process all over again
+							$('.set-preferred-store').trigger('click');
 						}.bind(this)
 					}, {
 						text: Resources.CONTINUE,
 						click: function () {
-							self.storesListing(stores);
+							if (callback) {
+								callback(stores);
+							}
 							dialog.close();
 						}
 					}

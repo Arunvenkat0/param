@@ -2,6 +2,12 @@
 
 var inventory = require('./');
 
+var productSelectStore = function (pid) {
+	inventory.getStoresInventory(pid).then(function (stores) {
+		inventory.selectStoreDialog(stores, inventory.storesListing)
+	});
+};
+
 module.exports = function () {
 	var $availabilityContainer = $('.availability-results'),
 		pid = $('input[name="pid"]').val();
@@ -10,10 +16,10 @@ module.exports = function () {
 		e.preventDefault();
 		if (!User.zip) {
 			inventory.zipPrompt(function () {
-				inventory.getStoresInventory(pid).then(inventory.selectStoreDialog.bind(inventory));
+				productSelectStore(pid);
 			});
 		} else {
-			inventory.getStoresInventory(pid).then(inventory.selectStoreDialog.bind(inventory));
+			productSelectStore(pid);w
 		}
 	});
 

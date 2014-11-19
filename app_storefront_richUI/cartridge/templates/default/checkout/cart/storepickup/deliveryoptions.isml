@@ -61,8 +61,8 @@
 			</isif>
 		</isif>
 		</div>
-		<div class="form-row" id="${lineItem.UUID}">
-			<a class="set-preferred-store" href=""> ${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+		<div class="form-row">
+			<a class="set-preferred-store" href="" data-uuid="${lineItem.UUID}"> ${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 		</div>
 	</div>
 </isif>
