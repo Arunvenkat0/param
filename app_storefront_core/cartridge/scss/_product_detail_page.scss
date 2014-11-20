@@ -265,31 +265,6 @@
 	}
 }
 
-.availability {
-	.availability-msg {
-		p {
-			margin-top: 0px;
-			display: inline;
-		}
-		display: inline;
-	}
-	.in-stock-msg {
-		color: black;
-	}
-	.not-available-msg {
-		color: red;
-	}
-	.preorder-msg {
-		color: blue;
-	}
-	.backorder-msg {
-		color: $islamic-green;
-	}
-	.in-stock-date-msg {
-		color: red;
-	}
-}
-
 .pdp-main {
 	.product-actions {
 		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;

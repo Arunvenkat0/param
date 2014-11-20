@@ -40,7 +40,7 @@ function initializeEvents() {
 	sendToFriend.initializeDialog($pdpMain);
 	productSet();
 	if (SitePreferences.STORE_PICKUP) {
-		productStoreInventory();
+		productStoreInventory.init();
 	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors

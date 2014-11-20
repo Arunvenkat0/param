@@ -33,7 +33,7 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	if (SitePreferences.STORE_PICKUP) {
-		cartStoreInventory();
+		cartStoreInventory.init();
 	}
 	account.initCartLogin();
 };

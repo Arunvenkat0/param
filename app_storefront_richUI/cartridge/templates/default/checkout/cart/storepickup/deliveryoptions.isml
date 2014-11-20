@@ -36,33 +36,32 @@
 		</isif>
 	</isif>
 
-	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline instore-delivery">
-		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store" name="${lineItem.getUUID()}"
+	<div class="form-row label-inline instore-delivery">
+		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store"
 				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=true" value="store"
 				<isif condition="${typeof storeinventoryATS == 'undefined' || empty(storeinventoryATS) || storeinventoryATS < lineItem.quantityValue}">disabled </isif>
 				<isif condition="${lineItem.custom.fromStoreId != null}">checked</isif>/>
 
-		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
+		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup', 'storepickup', null)}</label>
 
 		<iscomment>Store Address</iscomment>
-		<input type="hidden" class="storeid" name="${lineItem.getUUID()}-store" value="${!empty(store) ? store.ID : ''}">
-		<div class="selected-store-address">
-			<isif condition="${!empty(store)}">
+		<isif condition="${!empty(store)}">
+			<input type="hidden" name="${lineItem.getUUID()}-store" value="${store.ID}">
+			<div class="selected-store-address" data-store-id="${store.ID}">
 				<isprint value="${store.address1}"/><br />
 				<isprint value="${store.city}"/><isif condition="${store.city != null && store.stateCode != null}">,</isif> <isprint value="${store.stateCode}"/> <isprint value="${store.postalCode}"/>
-			</isif>
-		</div>
-		<div name="${lineItem.UUID}-stock" class="selected-store-availability">
-		<isif condition="${!empty(store)}">
+			</div>
 			<isif condition="${!empty(storeinventoryATS) && storeinventoryATS >= lineItem.quantityValue}">
-				<span class="store-in-stock">${StringUtils.format(Resource.msg('cart.store.availableinstore','storepickup',null))}</span>
+				<isset name="status" value="store-in-stock" scope="page" />
+				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.availableinstore','storepickup',null))}" scope="page" />
 			<iselse/>
-				<span class="store-error">${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}</span>
+				<isset name="status" value="store-error" scope="page" />
+				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}" scope="page" />
 			</isif>
+			<div class="selected-store-availability" data-status="${status}">${statusText}</div>
 		</isif>
-		</div>
 		<div class="form-row">
-			<a class="set-preferred-store" href="" data-uuid="${lineItem.UUID}"> ${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+			<a class="set-preferred-store" href="" data-uuid="${lineItem.getUUID()}"> ${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 		</div>
 	</div>
 </isif>

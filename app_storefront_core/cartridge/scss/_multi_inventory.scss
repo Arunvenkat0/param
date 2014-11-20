@@ -31,8 +31,8 @@
 }
 
 .in-stock-msg,
-.store-in-stock,
-.is-in-stock {
+.is-in-stock,
+[data-status="store-in-stock"] {
 	color: $islamic-green;
 }
 

@@ -8,28 +8,30 @@ var _ = require('lodash'),
 	util = require('../util');
 
 var newLine = '\n';
-var storeTemplate = function (store) {
+var storeTemplate = function (store, selectedStoreId, selectedStoreText) {
 	return [
-		'<li class="store-tile ' + store.storeId + (store.storeId === User.storeId ? ' selected' : '') +'">',
+		'<li class="store-tile ' + store.storeId + (store.storeId === selectedStoreId? ' selected' : '') +'">',
 		'	<p class="store-address">',
 		'		' + store.address1 + '<br/>',
 		'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode,
 		'	</p>',
-		'	<p class="store-status ' + store.statusclass + '">' + store.status + '</p>',
-		'	<button class="select-store-button" data-store-id="' + store.storeId +
-		'" data-stock-status="' + store.status + '"' + (store.statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') + '>',
-		'		' + (store.storeId === User.storeId ? Resources.PREFERRED_STORE : Resources.SELECT_STORE),
+		'	<p class="store-status" data-status="' + store.statusclass + '">' + store.status + '</p>',
+		'	<button class="select-store-button" data-store-id="' + store.storeId + '"' +
+		(store.statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') + '>',
+		'		' + (store.storeId === selectedStoreId ? selectedStoreText : Resources.SELECT_STORE),
 		'	</button>',
 		'</li>'
 	].join(newLine);
 }
 
-var storeListTemplate = function (stores) {
+var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 	if (stores && stores.length) {
 		return [
 			'<div class="store-list-container">',
 			'<ul class="store-list">',
-			_.map(stores, storeTemplate).join(newLine),
+			_.map(stores, function (store) {
+				return storeTemplate(store, selectedStoreId, selectedStoreText);
+			}).join(newLine),
 			'</ul>',
 			'</div>',
 			'<div class="store-list-pagination">',
@@ -39,29 +41,6 @@ var storeListTemplate = function (stores) {
 		return '<div class="no-results">No Results</div>';
 	}
 };
-
-var pdpStoreTemplate = function (store) {
-	return [
-		'<li class="store-list-item ' + (store.storeId === User.storeId ? ' selected' : '') + '">',
-		'	<div class="store-address">' + store.address1 + ', ' + store.city + ' ' + store.stateCode +
-		' ' + store.postalCode + '</div>',
-		'	<div class="store-status ' + store.statusclass + '">' + store.status + '</div>',
-		'</li>'
-	].join(newLine);
-}
-
-var pdpStoresListingTemplate = function (stores) {
-	if (stores && stores.length) {
-		return [
-			'<div class="store-list-pdp-container">',
-			(stores.length > 1 ? '	<a class="stores-toggle collapsed" href="#">' + Resources.SEE_MORE + '</a>' : ''),
-			'	<ul class="store-list-pdp">',
-			_.map(stores, pdpStoreTemplate).join(newLine),
-			'	</ul>',
-			'</div>'
-		].join(newLine);
-	}
-}
 
 var zipPromptTemplate = function () {
 	return [
@@ -195,9 +174,20 @@ var storeinventory = {
 			dataType: 'json'
 		}));
 	},
-	selectStoreDialog: function (stores, callback) {
+	/**
+	 * @description open the dialog to select store
+	 * @param {Array} options.stores
+	 * @param {String} options.selectedStoreId
+	 * @param {String} options.selectedStoreText
+	 * @param {Function} options.continueCallback
+	 * @param {Function} options.selectStoreCallback
+	 **/
+	selectStoreDialog: function (options) {
 		var self = this,
-			storeList = storeListTemplate(stores);
+			stores = options.stores,
+			selectedStoreId = options.selectedStoreId,
+			selectedStoreText = options.selectedStoreText,
+			storeList = storeListTemplate(stores, selectedStoreId, selectedStoreText);
 		dialog.open({
 			html: storeList,
 			options: {
@@ -213,8 +203,8 @@ var storeinventory = {
 					}, {
 						text: Resources.CONTINUE,
 						click: function () {
-							if (callback) {
-								callback(stores);
+							if (options.continueCallback) {
+								options.continueCallback(stores);
 							}
 							dialog.close();
 						}
@@ -225,20 +215,20 @@ var storeinventory = {
 						e.preventDefault();
 						var storeId = $(this).data('storeId');
 						// if the store is already selected, don't select again
-						if (storeId === User.storeId) { return; }
-						self.setPreferredStore(storeId);
+						if (storeId === selectedStoreId) { return; }
+						$('.store-list .store-tile.selected').removeClass('selected')
+							.find('.select-store-button').text(Resources.SELECT_STORE);
+						$(this).text(selectedStoreText)
+							.closest('.store-tile').addClass('selected');
+						if (options.selectStoreCallback) {
+							options.selectStoreCallback(storeId);
+						}
 					});
 				}
 			},
 		});
 	},
-	// list all stores on PDP page
-	storesListing: function (stores) {
-		if ($('.store-list-pdp-container').length) {
-			$('.store-list-pdp-container').remove();
-		}
-		$('.availability-results').append(pdpStoresListingTemplate(stores));
-	},
+
 	buildStoreList2: function (pid) {
 		var self = this;
 		this.$storeList = $('<div class="store-list">');
@@ -502,20 +492,6 @@ var storeinventory = {
 			url: Urls.setZipCode,
 			data: {
 				zipCode: zip
-			}
-		});
-	},
-
-	setPreferredStore: function (id) {
-		User.storeId = id;
-		$.ajax({
-			url: Urls.setPreferredStore,
-			type: 'POST',
-			data: {storeId: id},
-			success: function (data) {
-				$('.selected-store-availability').html(data);
-				$('.store-list .store-tile.selected').removeClass('selected').find('.select-store-button').text(Resources.SELECT_STORE);
-				$('.store-list .store-tile.' + id).addClass('selected').find('.select-store-button').text(Resources.PREFERRED_STORE);
 			}
 		});
 	},
