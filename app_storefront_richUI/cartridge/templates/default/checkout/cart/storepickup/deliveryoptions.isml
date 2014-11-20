@@ -1,8 +1,8 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <div class="form-row label-inline home-delivery">
 	<isif condition="${lineItem.product.custom.availableForInStorePickup}">
-		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-home" name="${lineItem.getUUID()}"
-				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=false" value="home"
+		<input type="radio" class="delivery-option" name="delivery_option_${lineItem.getUUID()}"
+				value="home"
 				<isif condition="${lineItem.custom.fromStoreId == null}">checked</isif>/>
 	</isif>
 	<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','storepickup',null)}</label>
@@ -37,8 +37,7 @@
 	</isif>
 
 	<div class="form-row label-inline instore-delivery">
-		<input type="radio" class="radio-url" id="${lineItem.getUUID()}-delivery-options-store"
-				data-url="${URLUtils.https('StoreInventory-SetStore')}?plid=${lineItem.getUUID()}&storepickup=true" value="store"
+		<input type="radio" class="delivery-option" value="store" name="delivery_option_${lineItem.getUUID()}"
 				<isif condition="${typeof storeinventoryATS == 'undefined' || empty(storeinventoryATS) || storeinventoryATS < lineItem.quantityValue}">disabled </isif>
 				<isif condition="${lineItem.custom.fromStoreId != null}">checked</isif>/>
 
@@ -46,7 +45,6 @@
 
 		<iscomment>Store Address</iscomment>
 		<isif condition="${!empty(store)}">
-			<input type="hidden" name="${lineItem.getUUID()}-store" value="${store.ID}">
 			<div class="selected-store-address" data-store-id="${store.ID}">
 				<isprint value="${store.address1}"/><br />
 				<isprint value="${store.city}"/><isif condition="${store.city != null && store.stateCode != null}">,</isif> <isprint value="${store.stateCode}"/> <isprint value="${store.postalCode}"/>
@@ -59,6 +57,9 @@
 				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}" scope="page" />
 			</isif>
 			<div class="selected-store-availability" data-status="${status}">${statusText}</div>
+		<iselse>
+			<div class="selected-store-address"></div>
+			<div class="selected-store-availability"></div>
 		</isif>
 		<div class="form-row">
 			<a class="set-preferred-store" href="" data-uuid="${lineItem.getUUID()}"> ${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>

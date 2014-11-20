@@ -157,6 +157,7 @@
 		getPreferredStore			: URLUtils.url('StoreInventory-GetPreferredStore').toString(),
 		setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
 		getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
+		setStorePickup				: URLUtils.https('StoreInventory-SetStore').toString(),
 		billing						: URLUtils.url('COBilling-Start').toString(),
 		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
 		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),

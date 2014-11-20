@@ -9,6 +9,8 @@ var cartInventory = {
 			storeAddress = $selectedStore.find('.store-address').html(),
 			storeStatus = $selectedStore.find('.store-status').data('status'),
 			storeStatusText = $selectedStore.find('.store-status').text();
+		this.selectedStore = storeId;
+
 		$lineItem.find('.instore-delivery .selected-store-address')
 			.data('storeId', storeId)
 			.attr('data-store-id', storeId)
@@ -17,7 +19,7 @@ var cartInventory = {
 			.data('status', storeStatus)
 			.attr('data-status', storeStatus)
 			.text(storeStatusText);
-		$lineItem.find('.instore-delivery input[name="' + this.uuid + '-store"]').val(storeId);
+		$lineItem.find('.instore-delivery .delivery-option').removeAttr('disabled').trigger('click');
 	},
 	cartSelectStore: function () {
 		var self = this;
@@ -30,6 +32,33 @@ var cartInventory = {
 				selectStoreCallback: self.setSelectedStore.bind(self)
 			});
 		}).done();
+	},
+	setDeliveryOption: function (value) {
+		// set loading state
+		$('.item-delivery-options')
+			.addClass('loading')
+			.children().hide();
+
+		var data = {
+			plid: this.uuid,
+			storepickup: (value === 'store' ? true : false)
+		}
+		if (value === 'store') {
+			data.storepickup = true;
+			data.storeid = this.selectedStore;
+		} else {
+			data.storepickup = false;
+		}
+		$.ajax({
+			url: Urls.setStorePickup,
+			data: data,
+			success: function () {
+				// remove loading state
+				$('.item-delivery-options')
+					.removeClass('loading')
+					.children().show();
+			}
+		});
 	},
 	init: function () {
 		var self = this;
@@ -44,6 +73,11 @@ var cartInventory = {
 			} else {
 				self.cartSelectStore();
 			}
+		});
+		$('.item-delivery-options .delivery-option').on('click', function (e) {
+			// reset the uuid
+			self.uuid = $(this).closest('.cart-row').data('uuid');
+			self.setDeliveryOption($(this).val());
 		});
 	}
 };
