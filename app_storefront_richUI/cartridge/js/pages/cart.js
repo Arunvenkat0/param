@@ -2,7 +2,6 @@
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	product = require('./product'),
 	quickview = require('../quickview'),
 	cartStoreInventory = require('../storeinventory/cart');
 

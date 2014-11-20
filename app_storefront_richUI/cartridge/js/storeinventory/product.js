@@ -35,7 +35,7 @@ var storesListing = function (stores) {
 };
 
 var productInventory = {
-	setPreferredStore: function(storeId) {
+	setPreferredStore: function (storeId) {
 		User.storeId = storeId;
 		$.ajax({
 			url: Urls.setPreferredStore,

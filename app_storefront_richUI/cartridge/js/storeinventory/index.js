@@ -1,16 +1,14 @@
 'use strict';
 
 var _ = require('lodash'),
-	ajax = require('../ajax'),
 	dialog = require('../dialog'),
-	page = require('../page'),
 	TPromise = require('promise'),
 	util = require('../util');
 
 var newLine = '\n';
 var storeTemplate = function (store, selectedStoreId, selectedStoreText) {
 	return [
-		'<li class="store-tile ' + store.storeId + (store.storeId === selectedStoreId? ' selected' : '') +'">',
+		'<li class="store-tile ' + store.storeId + (store.storeId === selectedStoreId ? ' selected' : '') + '">',
 		'	<p class="store-address">',
 		'		' + store.address1 + '<br/>',
 		'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode,
@@ -22,7 +20,7 @@ var storeTemplate = function (store, selectedStoreId, selectedStoreText) {
 		'	</button>',
 		'</li>'
 	].join(newLine);
-}
+};
 
 var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 	if (stores && stores.length) {
@@ -66,7 +64,7 @@ var validateZipCode = function (zipCode) {
 		valid = regexp.test(zipCode);
 	});
 	return valid;
-}
+};
 
 var storeinventory = {
 	zipPrompt: function (callback) {

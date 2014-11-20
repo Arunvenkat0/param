@@ -5,7 +5,7 @@ var inventory = require('./');
 var cartInventory = {
 	setSelectedStore: function (storeId) {
 		var $selectedStore = $('.store-tile.' + storeId),
-			$lineItem = $('.cart-row[data-uuid="' + this.uuid +'"]'),
+			$lineItem = $('.cart-row[data-uuid="' + this.uuid + '"]'),
 			storeAddress = $selectedStore.find('.store-address').html(),
 			storeStatus = $selectedStore.find('.store-status').data('status'),
 			storeStatusText = $selectedStore.find('.store-status').text();
@@ -42,7 +42,7 @@ var cartInventory = {
 		var data = {
 			plid: this.uuid,
 			storepickup: (value === 'store' ? true : false)
-		}
+		};
 		if (value === 'store') {
 			data.storepickup = true;
 			data.storeid = this.selectedStore;
@@ -74,7 +74,7 @@ var cartInventory = {
 				self.cartSelectStore();
 			}
 		});
-		$('.item-delivery-options .delivery-option').on('click', function (e) {
+		$('.item-delivery-options .delivery-option').on('click', function () {
 			// reset the uuid
 			self.uuid = $(this).closest('.cart-row').data('uuid');
 			self.setDeliveryOption($(this).val());
