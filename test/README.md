@@ -13,7 +13,7 @@ $ npm install --production selenium-standalone@latest -g
 $ start-selenium
 ```
 
-    It's important to keep this command-line instance running in the background. Open a new window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
+It's important to keep this command-line instance running in the background. Open a new window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
 
 - Update site url config and desired browser client
     If you are running selenium test, specify a url and client in `test/webdriver/config.json`. For example:
@@ -31,8 +31,8 @@ $ start-selenium
 $ gulp ui-test
 ```
 
-    This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp ui-test --suite homepage`.
-    Other configurations are also available.
+This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp ui-test --suite homepage`.
+Other configurations are also available, see below.
 
 ### Options
 The following options are supported on the command line:
@@ -61,8 +61,6 @@ test/ui
     └── config.sample.json
 ```
 
-THe `webdriver` directory contains configuration settings for webdriver.
-
-All the other directories in `test/ui` are test suites.
+The `webdriver` directory contains configuration settings for webdriver. All the other directories in `test/ui` are test suites.
 
 ### Test suites
