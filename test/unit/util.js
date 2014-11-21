@@ -1,7 +1,7 @@
 var assert = require('assert');
-var util = require('../app_storefront_richUI/cartridge/js/util');
+var util = require('../../app_storefront_richUI/cartridge/js/util');
 
-describe('util tests', function () {
+describe('Utils', function () {
 	describe('append param to url', function () {
 		it('should append first param to url', function () {
 			assert.equal('http://example.com?color=blue',
