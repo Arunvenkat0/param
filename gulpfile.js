@@ -1,5 +1,8 @@
 var browserify = require('browserify'),
+<<<<<<< HEAD
 	connect = require('gulp-connect'),
+=======
+>>>>>>> RAP-3005-homepage-ui
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
