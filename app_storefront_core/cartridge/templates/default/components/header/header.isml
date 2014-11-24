@@ -2,7 +2,7 @@
 <iscache type="relative" hour="24"/>
 
 <div class="top-banner" role="banner">
-	<button class="menu-toggle">Menu</button>
+	<button class="menu-toggle"><span class="menu-icon icon-menu2"></span><span class="visually-hidden">Menu</span></button>
 	<h1 class="primary-logo">
 		<a href="${URLUtils.url('Home-Show')}">
 			<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}">
