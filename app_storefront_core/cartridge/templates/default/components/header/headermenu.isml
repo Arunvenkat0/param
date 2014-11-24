@@ -25,7 +25,7 @@
 </isscript>
 <isset name="topLevelCategory" value="${getTopLevelCategory()}" scope="page"/>
 <isif condition="${topLevelCategory != null}">
-	<ul class="menu-category level-1 nav-section">
+	<ul class="menu-category level-1">
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
 		<li>

@@ -20,41 +20,17 @@
 			<isinclude template="search/simplesearch"/>
 		</div>
 
-		<!--  utility user menu -->
-		<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
-
-		<!-- utility menu -->
-		<ul class="menu-utility nav-section">
-			<li>
-				<a href="${URLUtils.https('Wishlist-Show')}" title="${Resource.msg('header.wishlistlink','components',null)}">
-					${Resource.msg('header.wishlistlink','components',null)}
-				</a>
-			</li>
-			<li>
-				<a href="${URLUtils.https('GiftRegistry-Start')}" title="${Resource.msg('header.registrylink','components',null)}">
-					${Resource.msg('header.registrylink','components',null)}
-				</a>
-			</li>
-			<li>
-				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('header.storelocator','components',null)}">
-					${Resource.msg('header.storelocator','components',null)}
-				</a>
-			</li>
-			<li class="last">
-				<a href="${URLUtils.http('CustomerService-Show')}" title="${Resource.msg('global.helplink','locale',null)}">
-					${Resource.msg('global.helplink','locale',null)}
-				</a>
-			</li>
-		</ul>
+		<iscomment>INCLUDE: category menu</iscomment>
+		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
 
 		<iscomment>SLOT CONFIGURATION:  SLOT/ID: header-banner</iscomment>
-		<div class="header-banner nav-section">
+		<div class="header-banner">
 			<isslot id="header-banner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 		</div>
 
-		<iscomment>INCLUDE: category menu</iscomment>
-		<isinclude url="${URLUtils.url('Home-IncludeHeaderMenu')}"/>
+		<!--  utility user menu -->
+		<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
+		<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
 	</nav>
 
 </div><!-- /header -->

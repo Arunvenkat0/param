@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<ul class="menu-utility-user nav-section">
+<ul class="menu-utility-user">
 
 	<iscomment>Multi currency</iscomment>
 	<isinclude template="components/header/multicurrency"/>
@@ -16,8 +16,6 @@
 			- <a title="${loginStr}" href="${URLUtils.https('Account-Show')}" class="user-account-login">
 				${loginStr}
 			</a>
-		</li>
-		<li>
 			<a title="${notStr} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 				(
 					${notStr}
@@ -25,8 +23,7 @@
 				)
 			</a>
 		</li>
-
-	<iscomment>User has session and is validated</iscomment>
+	<iscomment>User has sesssion and is validated</iscomment>
 	<iselseif condition="${customer.registered}">
 		<li>
 			${Resource.msg('headercustomerinfo.welcome', 'components', null)}
@@ -34,8 +31,6 @@
 				<isprint value="${customer.profile.firstName}"/>
 				<isprint value="${customer.profile.lastName}"/>
 			</a>
-		</li>
-		<li>
 			<a title="${notStr} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 				(
 					${notStr}
@@ -43,18 +38,26 @@
 				)
 			</a>
 		</li>
-
 	<iscomment>User has no session</iscomment>
 	<iselse/>
 		<li>
-			<a title="${loginStr}" href="${URLUtils.https('Account-Show')}" class="user-login">
-				${loginStr}
-			</a>
-		</li>
-		<li>
-			<a title="${Resource.msg('global.register', 'locale', null)}" href="${URLUtils.https('Account-StartRegister')}" class="user-register">
-				${Resource.msg('global.register','locale',null)}
-			</a>
+			<a title="${loginStr}" href="${URLUtils.https('Account-Show')}" class="user-login">${loginStr}</a> /
+			<a title="${Resource.msg('global.register', 'locale', null)}" href="${URLUtils.https('Account-StartRegister')}" class="user-register">${Resource.msg('global.register','locale',null)}</a>
 		</li>
 	</isif>
+	<li>
+		<a href="${URLUtils.https('Wishlist-Show')}" title="${Resource.msg('header.wishlistlink','components',null)}">
+			${Resource.msg('header.wishlistlink','components',null)}
+		</a>
+	</li>
+	<li>
+		<a href="${URLUtils.https('GiftRegistry-Start')}" title="${Resource.msg('header.registrylink','components',null)}">
+			${Resource.msg('header.registrylink','components',null)}
+		</a>
+	</li>
+	<li>
+		<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('header.storelocator','components',null)}">
+			${Resource.msg('header.storelocator','components',null)}
+		</a>
+	</li>
 </ul>
