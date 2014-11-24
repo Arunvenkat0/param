@@ -785,6 +785,10 @@
 							<div class="error">
 								${Resource.msg('cart.COUPON_CODE_MISSING','checkout', null)}
 							</div>
+						<iselseif condition="${pdict.CouponError && pdict.CouponError=='NO_ACTIVE_PROMOTION'}">
+							<div class="error">
+								${Resource.msgf("cart.NO_ACTIVE_PROMOTION", "checkout", "", pdict.CurrentForms.cart.couponCode.htmlValue)}
+							</div>				
 						<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 							<div class="error">
 								${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}
