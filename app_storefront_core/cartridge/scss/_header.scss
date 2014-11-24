@@ -178,7 +178,6 @@ nav[role="navigation"] {
 	padding: 0;
 	text-transform: uppercase;
 	@media screen and (min-width: 768px) {
-		background-color: $black;
 		border: none;
 		float: right;
 		margin-top: 7em;
@@ -202,11 +201,7 @@ nav[role="navigation"] {
 			background-color: darken($night-rider, 10%);
 		}
 		@media screen and (min-width: 768px) {
-			color: $white;
 			width: auto;
-			&:hover {
-				background-color: transparent;
-			}
 		}
 		@media screen and (min-width: 960px) {
 			padding: 1em 2rem;
@@ -220,8 +215,8 @@ nav[role="navigation"] {
 	}
 	@media screen and (min-width: 768px) {
 		&:hover > a {
-			background-color: $white-smoke;
-			color: $black;
+			background-color: darken($mantis, 10%);
+			color: $white;
 		}
 	}
 }
@@ -237,7 +232,7 @@ nav[role="navigation"] {
 	}
 	@media screen and (min-width: 768px) {
 		background-color: $white;
-		box-shadow: 6px 8px 5px -6px rgba($charcoal, 0.5);
+		box-shadow: 2px 3px 3px 2px rgba($charcoal, 0.5);
 		color: $night-rider;
 		padding: 0.5em 0;
 		position: absolute;
@@ -246,8 +241,7 @@ nav[role="navigation"] {
 			display: block;
 		}
 		a {
-			color: $night-rider;
-			font-weight: bold;
+			color: $mantis;
 			&:hover {
 				text-decoration: underline;
 			}
@@ -260,6 +254,8 @@ nav[role="navigation"] {
 				min-width: 12em;
 				> a {
 					padding: 0.5em 1rem;
+					text-transform: none;
+					font-weight: bold;
 				}
 			}
 		}
@@ -300,11 +296,10 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		display: block;
 		a {
-			color: $mantis;
+			color: darken($mantis, 20%);
 			font-weight: normal;
 			font-size: 1em;
 			padding: 0;
-			text-transform: none;
 		}
 		li {
 			float: none;
