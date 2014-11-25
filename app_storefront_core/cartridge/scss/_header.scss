@@ -186,9 +186,15 @@ nav[role="navigation"] {
 	li {
 		list-style: none;
 		border-top: 1px solid darken($night-rider, 10%);
+		&:hover {
+			background-color: darken($night-rider, 10%);
+		}
 		@media screen and (min-width: 768px) {
 			border: none;
 			float: left;
+			&:hover {
+				background-color: $gainsboro;
+			}
 		}
 	}
 	a {
@@ -197,9 +203,6 @@ nav[role="navigation"] {
 		font-size: 1.2em;
 		width: 100%;
 		padding: 1em 1rem;
-		&:hover {
-			background-color: darken($night-rider, 10%);
-		}
 		@media screen and (min-width: 768px) {
 			width: auto;
 		}
