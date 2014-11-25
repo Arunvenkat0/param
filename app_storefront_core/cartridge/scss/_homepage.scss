@@ -1,33 +1,90 @@
-#homepage-slides {
-	padding: 0;
-	width: 100%;
+.home-bottom-left, .home-bottom-center {
+	clear: none;
+	float: left;
+	width: 33%;
+}
+.home-bottom-right {
+	clear: none;
+	float: left;
+	width: 33%;
+	.jcarousel-clip {
+		height: 282px;
+		overflow: hidden;
+	}
+	.vertical-carousel li {
+		height: 282px;
+		float: none;
+		width: 300px;
+	}
+	.product-tile {
+		min-height: 0;
+	}
+	.jcarousel-prev {
+		background: url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;
+		cursor: pointer;
+		height: 12px;
+		position: absolute;
+		bottom: 20px;
+		right: 0;
+		width: 52px;
+		z-index: 999;
+	}
+	.jcarousel-next {
+		background: url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;
+		cursor: pointer;
+		height: 12px;
+		position: absolute;
+		bottom: 0px;
+		right: 0;
+		width: 52px;
+		z-index: 999;
+	}
+	.jcarousel-prev-disabled {
+		display: none !important;
+	}
+}
+.select {
+	display: none;
+}
+
+.home-bottom-right .jcarousel-next-disabled {
+	display: none !important;
 }
 
 #homepage-slider {
+	border-top: 1px solid $dark-gray;
+	border-bottom: 1px solid $dark-gray;
+	height: 558px;
 	overflow: hidden;
 	.slide {
-		list-style: none outside none;
-		margin: 0;
-		max-width: 100%;
-		padding: 0;
 		width: 100%;
 		img {
 			height: auto;
 			max-width: 100%;
 		}
 		h2 {
-			border: 0 none;
-			clip: rect(0pt, 0pt, 0pt, 0pt);
-			height: 1px;
-			margin: -1px;
-			overflow: hidden;
-			padding: 0;
-			position: absolute;
-			width: 1px;
+			@extend .visually-hidden;
 		}
 		span {
-			position: absolute;
+			@extend .visually-hidden;
+		}
+	}
+	.jcarousel-control {
+		position: absolute;
+		right: 10px;
+		bottom: 20px;
+		a {
+			background: none repeat scroll 0 0 $gainsboro;
+			border: 1px solid $very-light-gray;
+			display: block;
+			float: left;
+			height: 15px;
+			margin: 0 3px;
 			text-indent: -999em;
+			width: 6px;
+			&.active {
+				background-color: $dim-gray;
+			}
 		}
 	}
 }
@@ -168,3 +225,4 @@
 		}
 	}
 }
+
