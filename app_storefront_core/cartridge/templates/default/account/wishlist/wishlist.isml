@@ -107,7 +107,7 @@
 					<th class="item-actions">Options</th>
 				</tr>
 				<isloop items="${pdict.CurrentForms.wishlist.items}" var="item" status="loopstate">
-					<isif condition="${((pdict.CurrentCustomer == pdict.ProductList.owner) || (pdict.CurrentCustomer != pdict.ProductList.owner && item.public.value && item.object.product != null))}">
+					<isif condition="${((pdict.CurrentCustomer == pdict.ProductList.owner) || (pdict.CurrentCustomer != pdict.ProductList.owner && item.public.value && (item.object.product != null || item.object.TYPE_GIFT_CERTIFICATE)))}">
 						<tr>
 							<td class="item-image">
 								<isdisplayproductimage p_productli="${item.object}" p_size="small" />
