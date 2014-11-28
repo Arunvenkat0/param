@@ -14,7 +14,7 @@
 	Full-Block-Element: yes
 -->
 
-<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
+<isif condition="${pdict.Product.variant || pdict.Product.variationGroup || pdict.Product.master}">
 	<isif condition="${pdict.CurrentVariationModel != null}">
 		<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="PAGE" />
 	<iselse/>
@@ -129,23 +129,58 @@
 							</isif>
 						</isloop>
 						<h3><isprint value="${VA.displayName}"/></h3>
+						
+						<isscript>
+							var variationGroup : dw.catalog.Product;
+							
+							// try to find a variation group
+							// if the product is a variation group, take this
+							if( pdict.Product.variationGroup )
+								variationGroup = pdict.Product;
+							// if the Product-VariationPS call contain a vg_pid, try to get it	
+							else if ( pdict.CurrentHttpParameterMap.vg_pid != null)
+								variationGroup = dw.catalog.ProductMgr.getProduct( pdict.CurrentHttpParameterMap.vg_pid );
+						</isscript>
+						
+						<iscomment>determine if we have a variation group, which filter this value</iscomment>
+						<isset name="variationGroupFilter" value="${variationGroup != null && 
+								PVM.getVariationValue(variationGroup, VA) != null && PVM.getVariationValue(variationGroup, VA).displayValue != ''}" scope="page"/>	
+						
 						<isif condition="${vaId=='color'}">
 							<ul class="swatches Color">
 								<isloop items="${VAVALS}" var="VV">
 									<isset name="lgImage" value="${VV.getImage('large')}" scope="page"/>
-									<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
+									<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
 									<isset name="swatchClass" value="${isSelected ? 'selected' : 'emptyswatch'}" scope="page" />
 									<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
 									<isif condition="${isSelected}">
 										<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 									</isif>
 									<li class="${swatchClass}">
-										<a class="swatchanchor" href="${PVM.urlSelectVariationValue('Product-VariationPS', VA, VV)}"
-										   title="${displayValue}"
-										   style="background: url(${VV.getImage('swatch').getURL()}) repeat-y;"
-										   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}" <isif condition="${!empty(imageProduct.getImage("hi-res", 0))}">, "hires":"${VV.getImage("hi-res").getURL()}"</isif>}'>
-										   	<isprint value="${displayValue}"/>
-										</a>
+										<isif condition="${!variationGroupFilter}">
+											<isset name="colorSelectUrl" value="${PVM.urlSelectVariationValue('Product-VariationPS', VA, VV)}" scope="page"/>
+											
+											<isscript>
+											if( variationGroup != null )
+												// add the variation group information to the parameters
+												colorSelectUrl = colorSelectUrl + '&' + 'vg_pid' + '=' + variationGroup.ID;
+											</isscript>
+											
+											<a class="swatchanchor" href="${colorSelectUrl}"
+											   title="${displayValue}"
+											   style="background: url(${VV.getImage('swatch').getURL()}) repeat-y;"
+											   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}" <isif condition="${!empty(VV.getImage("hi-res", 0))}">, "hires":"${VV.getImage("hi-res").getURL()}"</isif>}'>
+												<isprint value="${displayValue}"/>
+											</a>
+										<iselse>
+											<iscomment>if we have a variation group filter here make the variations unselectable and opacity</iscomment>
+											<a class="unselectable"
+											   title="${displayValue}"
+											   style="<isif condition="${!isSelected}">opacity: .5;</isif> background: url(${VV.getImage('swatch').getURL()}) repeat-y;"
+											   data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}" <isif condition="${!empty(VV.getImage("hi-res", 0))}">, "hires":"${VV.getImage("hi-res").getURL()}"</isif>}'>
+												<isprint value="${displayValue}"/>
+											</a>
+										</isif>
 									</li>
 								</isloop>
 								<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>
@@ -153,23 +188,39 @@
 						<iselse/>
 							<ul class="swatches">
 								<isloop items="${VAVALS}" var="VV">
-									<isset name="isSelected" value="${(PVM.isSelectedAttributeValue(VA, VV) || Valength == 1 || (!empty(variantColor) && VV.value.equals(variantColor)))}" scope="page" />
-									<isset name="selectable" value="${PVM.getFilteredValues(VA).contains(VV)}" scope="page" />
+									<isset name="isSelected" value="${PVM.isSelectedAttributeValue(VA, VV)}" scope="page" />
+									<isset name="selectable" value="${PVM.hasOrderableVariants(VA, VV)}" scope="page" />
 									<isset name="swatchClass" value="${(isSelected ? 'selected' : 'emptyswatch')+(selectable ? '' : ' unselectable')}" scope="page" />
 									<isset name="displayValue" value="${VV.displayValue==null?VV.value:VV.displayValue}" scope="page"/>
 									<isif condition="${isSelected}">
 										<isset name="selectedSwatchValue" scope="page" value="${displayValue}" />
 									</isif>
 									<li class="${swatchClass}">
-										<isif condition="${selectable}">
-											<a title="${displayValue}" class="swatchanchor" href="${PVM.urlSelectVariationValue('Product-VariationPS', VA, VV)}">
+										<isif condition="${!variationGroupFilter}">
+											<isif condition="${selectable}">
+												<isset name="colorSelectUrl" value="${PVM.urlSelectVariationValue('Product-VariationPS', VA, VV)}" scope="page"/>
+												
+												<isscript>
+												if( variationGroup != null )
+													// add the variation group information to the parameters
+													colorSelectUrl = colorSelectUrl + '&' + 'vg_pid' + '=' + variationGroup.ID;
+												</isscript>
+												
+												<a title="${displayValue}" class="swatchanchor" href="${colorSelectUrl}">
+													<isprint value="${displayValue}"/>
+												</a>
+											<iselse/>
+												<a title="${displayValue}" class="swatchanchor">
+													<isprint value="${displayValue}"/>
+												</a>
+											</isif>
+										<iselse>
+											<iscomment>if we have a variation group filter here make the variations unselectable and opacity</iscomment>
+											<a title="${displayValue}" class="unselectable" style="<isif condition="${!isSelected}">opacity: .5;</isif>">
 												<isprint value="${displayValue}"/>
 											</a>
-										<iselse/>
-											<a title="${displayValue}" class="swatchanchor">
-												<isprint value="${displayValue}"/>
-											</a>
-										</isif>
+										</isif>	
+										
 									</li>
 								</isloop>
 								<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>

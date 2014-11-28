@@ -21,10 +21,12 @@
 			${Resource.msg('product.item','product',null)} <isprint value="${ pdict.Product.ID }"/>
 		</div>
 		
-		<div class="availability">
-			<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
-			<span class="value"><isinclude template="product/components/availability"/></span>
-		</div>
+		<isif condition="${!pdict.Product.variationGroup}">
+			<div class="availability">
+				<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
+				<span class="value"><isinclude template="product/components/availability"/></span>
+			</div>
+		</isif>
 		
 		<isif condition="${pdict.isSet}">
 			<isinclude template="product/components/promotions"/>
