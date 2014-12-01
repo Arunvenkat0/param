@@ -7,18 +7,6 @@ var dialog = require('../../dialog'),
  */
 var loadZoom = function () {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zoomOptions = {
-			zoomType: 'standard',
-			alwaysOn: 0, // setting to 1 will load load high res images on page load
-			zoomWidth: 575,
-			zoomHeight: 349,
-			position: 'right',
-			preloadImages: 0, // setting to 1 will load load high res images on page load
-			xOffset: 30,
-			yOffset: 0,
-			showEffect: 'fadein',
-			hideEffect: 'fadeout'
-		},
 		hiresUrl;
 
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
@@ -27,10 +15,9 @@ var loadZoom = function () {
 	hiresUrl = $imgZoom.attr('href');
 
 	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
-		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
-	} else {
-		$imgZoom.removeClass('image-zoom');
+		$imgZoom.zoom({
+			url: hiresUrl
+		});
 	}
 };
 

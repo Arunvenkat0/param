@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app_storefront_richUI/cartridge/js/app.js":[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -8,8 +8,7 @@
 
 'use strict';
 
-var carousel = require('./carousel'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -159,7 +158,6 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -189,7 +187,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./carousel":4,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":27,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
+},{"./cookieprivacy":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -296,7 +294,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":39,"./util":47}],3:[function(require,module,exports){
+},{"./progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -581,47 +579,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":7,"./page":13,"./util":47}],4:[function(require,module,exports){
-/* global dw */
-
-'use strict';
-
-/**
- * @function
- * @description capture recommendation of each product when it becomes visible in the carousel
- * @param c TBD
- * @param {Element} li The visible product element in the carousel
- */
-
-function captureCarouselRecommendations(c, li) {
-	if (!dw) { return; }
-
-	$(li).find('.capture-product-id').each(function () {
-		dw.ac.capture({
-			id: $(this).text(),
-			type: dw.ac.EV_PRD_RECOMMENDATION
-		});
-	});
-}
-
-var carousel = {
-	settings: {
-		scroll: 1,
-		itemFallbackDimension: '100%',
-		itemVisibleInCallback: captureCarouselRecommendations
-	},
-	init: function () {
-		setTimeout(function () {
-			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.settings));
-			$('#horizontal-carousel').jcarousel(this.settings);
-		}.bind(this), 1000);
-	}
-};
-
-module.exports = carousel;
-
-},{}],5:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -876,7 +834,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":47,"promise":54}],6:[function(require,module,exports){
+},{"./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -922,7 +880,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":7}],7:[function(require,module,exports){
+},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1064,27 +1022,20 @@ var dialog = {
 	},
 	settings: {
 		autoOpen: false,
-		bgiframe: true,
-		buttons: {},
 		height: 'auto',
 		modal: true,
 		overlay: {
 			opacity: 0.5,
 			background: 'black'
 		},
-		position: 'center',
 		resizable: false,
-		title: '',
-		width: '800',
-		close: function () {
-			$(this).dialog('destroy');
-		}
+		width: '800'
 	}
 };
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":47,"lodash":53}],8:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1105,7 +1056,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":47}],9:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1158,7 +1109,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":11,"./util":47}],10:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1188,7 +1139,7 @@ module.exports = function () {
 	};
 };
 
-},{}],11:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1273,7 +1224,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":47}],12:[function(require,module,exports){
+},{"./bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1301,7 +1252,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":47}],13:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1324,7 +1275,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":47}],14:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js":[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1565,7 +1516,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":46,"../util":47,"../validator":48}],15:[function(require,module,exports){
+},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../giftcert":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js":[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1606,7 +1557,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":40,"../storeinventory":45,"./account":14,"./product":27}],16:[function(require,module,exports){
+},{"../bonus-products-view":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","./account":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1635,7 +1586,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":47,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1833,7 +1784,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":47,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1892,7 +1843,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":53}],19:[function(require,module,exports){
+},{"lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1921,7 +1872,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
+},{"./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2051,7 +2002,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":7,"../../util":47,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2215,7 +2166,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":39,"../../tooltip":46,"../../util":47,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2259,7 +2210,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":38,"../quickview":40,"./product/addToCart":24}],23:[function(require,module,exports){
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js":[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2290,7 +2241,7 @@ module.exports = function () {
 	}
 };
 
-},{}],24:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2371,7 +2322,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":7,"../../minicart":11,"../../page":13,"../../util":47,"lodash":53,"promise":54}],25:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js","promise":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js":[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2461,7 +2412,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":47}],26:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js":[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2471,18 +2422,6 @@ var dialog = require('../../dialog'),
  */
 var loadZoom = function () {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zoomOptions = {
-			zoomType: 'standard',
-			alwaysOn: 0, // setting to 1 will load load high res images on page load
-			zoomWidth: 575,
-			zoomHeight: 349,
-			position: 'right',
-			preloadImages: 0, // setting to 1 will load load high res images on page load
-			xOffset: 30,
-			yOffset: 0,
-			showEffect: 'fadein',
-			hideEffect: 'fadeout'
-		},
 		hiresUrl;
 
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
@@ -2491,10 +2430,9 @@ var loadZoom = function () {
 	hiresUrl = $imgZoom.attr('href');
 
 	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
-		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
-	} else {
-		$imgZoom.removeClass('image-zoom');
+		$imgZoom.zoom({
+			url: hiresUrl
+		});
 	}
 };
 
@@ -2552,7 +2490,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":7,"../../util":47}],27:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2642,7 +2580,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":7,"../../send-to-friend":44,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./availability":25,"./image":26,"./powerReviews":28,"./productNav":29,"./productSet":30,"./recommendations":31,"./variant":32}],28:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./availability":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js","./image":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js","./powerReviews":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js","./productNav":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js","./productSet":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js","./recommendations":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js","./variant":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog');
@@ -2671,7 +2609,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../dialog":7}],29:[function(require,module,exports){
+},{"../../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2698,7 +2636,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":47}],30:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js":[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2748,23 +2686,42 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":24}],31:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js":[function(require,module,exports){
 'use strict';
-
-var carousel = require('../../carousel');
 
 /**
  * @description Creates product recommendation carousel using jQuery jcarousel plugin
  **/
 module.exports = function () {
-	var $carousel = $('#carousel-recomendations');
+	var $carousel = $('#carousel-recommendations');
 	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
 		return;
 	}
-	$carousel.jcarousel(carousel.settings);
+	$carousel.jcarousel();
+	$('#carousel-recommendations .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#carousel-recommendations .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{"../../carousel":4}],32:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js":[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2841,7 +2798,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":39,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./image":26}],33:[function(require,module,exports){
+},{"../../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../storeinventory":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js","../../tooltip":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./image":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2941,7 +2898,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":40,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],34:[function(require,module,exports){
+},{"../ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3119,9 +3076,7 @@ function initializeEvents() {
 	});
 
 	// handle hash change
-	$(window).hashchange(function () {
-		updateProductListing();
-	});
+	window.onhashchange = updateProductListing;
 }
 
 exports.init = function () {
@@ -3133,57 +3088,66 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":5,"../product-tile":38,"../progress":39,"../util":47}],35:[function(require,module,exports){
+},{"../compare-widget":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
 'use strict';
-
-/**
- * @function
- * @description Triggers the scroll event on a carousel element
- * @param {Object} carousel
- */
-function slideCarouselInitCallback(carousel) {
-	// create navigation for slideshow
-	var numSlides = $('#homepage-slider li').size();
-	var slideShowNav = '<div class="jcarousel-control">';
-	for (var i = 1; i <= numSlides; i++) {
-		slideShowNav = slideShowNav + '<a href="#" class="link-' + i + '">' + i + '</a>';
-	}
-	slideShowNav = slideShowNav + '</div>';
-	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
-
-	$('.jcarousel-control a').bind('click', function () {
-		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
-		return false;
-	});
-	$('.slide').width($('#wrapper').width());
-}
-
-// TODO what are these TBDs? Check with Carousel API? Use a simpler carousel?
-/**
- * @function
- * @description Activates the visibility of the next element in the carousel
- * @param {Object} carousel -- necessity needs TBD!
- * @param {Object} item --  necessity needs TBD!
- * @param {Number} idx Index of the item which should be activated
- * @param {Object} state --  necessity needs TBD!
- */
-function slideCarouselItemVisible(carousel, item, idx) {
-	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-' + idx).addClass('active');
-}
 exports.init = function () {
-	$('#homepage-slider').jcarousel({
-		scroll: 1,
-		auto: 4,
-		buttonNextHTML: null,
-		buttonPrevHTML: null,
-		itemFallbackDimension: '100%',
-		initCallback: slideCarouselInitCallback,
-		itemFirstInCallback: slideCarouselItemVisible
-	});
+	var homepageCarousel = $('#homepage-slider')
+		// responsive slides
+		.on('jcarousel:create jcarousel:reload', function () {
+			var element = $(this),
+				width = element.innerWidth();
+			element.jcarousel('items').css('width', width + 'px');
+		})
+		.jcarousel({
+			wrap: 'circular'
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#homepage-slider .jcarousel-control')
+		.on('jcarouselpagination:active', 'a', function () {
+			$(this).addClass('active');
+		})
+		.on('jcarouselpagination:inactive', 'a', function () {
+			$(this).removeClass('active');
+		})
+		.jcarouselPagination({
+			item: function (page) {
+				return '<a href="#' + page + '">' + page + '</a>';
+			}
+		});
+
+	$('#vertical-carousel')
+		.jcarousel({
+			vertical: true
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#vertical-carousel .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#vertical-carousel .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{}],36:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js":[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3196,7 +3160,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":7}],37:[function(require,module,exports){
+},{"../dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3217,7 +3181,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],38:[function(require,module,exports){
+},{"../page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3322,7 +3286,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":27,"./quickview":40,"imagesloaded":50}],39:[function(require,module,exports){
+},{"./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./quickview":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","imagesloaded":"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/imagesloaded.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/progress.js":[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3355,7 +3319,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],40:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3469,7 +3433,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":7,"./pages/product":27,"./util":47,"lodash":53}],41:[function(require,module,exports){
+},{"./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./pages/product":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -3495,7 +3459,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],42:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3667,7 +3631,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],43:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3844,7 +3808,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],44:[function(require,module,exports){
+},{"./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3919,7 +3883,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":7,"./util":47,"./validator":48}],45:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -4282,7 +4246,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":2,"./page":13,"./util":47}],46:[function(require,module,exports){
+},{"./ajax":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -4290,21 +4254,16 @@ module.exports = storeinventory;
  * @description Initializes the tooltip-content and layout
  */
 exports.init = function () {
-	$('.tooltip').tooltip({
+	$(document).tooltip({
+		items: '.tooltip',
 		track: true,
-		showURL: false,
-		bodyHandler: function () {
-			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = '';
-			if ($(this).find('.tooltip-content').data('layout')) {
-				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
-			}
-		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
+		content: function (callback) {
+			return $(this).find('.tooltip-content').html();
 		}
 	});
 };
 
-},{}],47:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4616,7 +4575,7 @@ var util = {
 
 module.exports = util;
 
-},{}],48:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4738,7 +4697,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],49:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4826,7 +4785,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],50:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/imagesloaded.js":[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5163,7 +5122,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":51,"wolfy87-eventemitter":52}],51:[function(require,module,exports){
+},{"eventie":"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js","wolfy87-eventemitter":"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js":[function(require,module,exports){
 /*!
  * eventie v1.0.5
  * event binding helper
@@ -5247,7 +5206,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( this );
 
-},{}],52:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js":[function(require,module,exports){
 /*!
  * EventEmitter v4.2.9 - git.io/ee
  * Oliver Caldwell
@@ -5721,7 +5680,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],53:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12510,14 +12469,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],54:[function(require,module,exports){
+},{}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":55,"./lib/done.js":56,"./lib/es6-extensions.js":57,"./lib/node-extensions.js":58}],55:[function(require,module,exports){
+},{"./lib/core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12624,7 +12583,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":59}],56:[function(require,module,exports){
+},{"asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12639,7 +12598,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":55,"asap":59}],57:[function(require,module,exports){
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12749,7 +12708,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":55,"asap":59}],58:[function(require,module,exports){
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12811,7 +12770,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":55,"asap":59}],59:[function(require,module,exports){
+},{"./core.js":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/tnguyen/demandware/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12928,4 +12887,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":49}]},{},[1]);
+},{"_process":"/Users/tnguyen/demandware/sitegenesis/node_modules/browserify/node_modules/process/browser.js"}]},{},["./app_storefront_richUI/cartridge/js/app.js"]);
