@@ -188,8 +188,8 @@
 				<iselse/>
 					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
 				</isif>
-				<li><a class="wl-action" href="${wishlistUrl}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
-				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
+				<li><a class="wl-action" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
+				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
 			</isif>
 			<li>
 				<a class="send-to-friend"
