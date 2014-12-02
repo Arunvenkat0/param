@@ -1651,7 +1651,7 @@
         </system-attribute-definitions>
         <custom-attribute-definitions>
             <attribute-definition attribute-id="availableForInStorePickup">
-                <display-name xml:lang="x-default">availableForInStorePickup</display-name>
+                <display-name xml:lang="x-default">Available For In Store Pickup</display-name>
                 <description xml:lang="x-default">Signals if there are inventory lists for stores (brick and mortar) associated with this product.</description>
                 <type>boolean</type>
                 <site-specific-flag>false</site-specific-flag>
