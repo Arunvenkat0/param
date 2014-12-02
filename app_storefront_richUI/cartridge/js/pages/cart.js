@@ -2,9 +2,8 @@
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	product = require('./product'),
 	quickview = require('../quickview'),
-	storeinventory = require('../storeinventory');
+	cartStoreInventory = require('../storeinventory/cart');
 
 /**
  * @private
@@ -33,7 +32,7 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.init();
+		cartStoreInventory.init();
 	}
 	account.initCartLogin();
 };

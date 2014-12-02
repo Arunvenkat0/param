@@ -83,7 +83,6 @@ var load = function (options) {
 		if (options.callback) {
 			options.callback(response);
 		}
-
 	})
 	.fail(function (xhr, textStatus) {
 		// failed

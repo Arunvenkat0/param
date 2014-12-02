@@ -115,7 +115,7 @@
 
 								<iscomment>	Skip bonus-choice products in first pass.	</iscomment>
 								<isif condition="${lineItem.bonusDiscountLineItem == null}">
-									<tr class="cart-row">
+									<tr class="cart-row" data-uuid="${lineItem.getUUID()}">
 										<td class="item-image">
 											<isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">
 												<img src="${lineItem.product.getImage('small',0).getURL()}"	alt="${lineItem.product.getImage('small',0).alt}" title="${lineItem.product.getImage('small',0).title}" />
