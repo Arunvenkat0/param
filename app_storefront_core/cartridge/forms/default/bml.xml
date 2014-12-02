@@ -124,6 +124,8 @@
 	</field>
 	<field formid="ssn" label="bml.ssn" type="string" mandatory="true" min-length="4" max-length="4"
 			missing-error="bml.ssnerror"
+			parse-error="bml.ssninvalid"
+			regexp="(^\d{4}$)" 			
 			range-error="bml.ssnerror"/>
 
 	<field formid="termsandconditions"
