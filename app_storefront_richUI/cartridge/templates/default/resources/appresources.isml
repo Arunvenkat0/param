@@ -83,6 +83,7 @@
 		INIFINITESCROLL					: Resource.msg('paginginformation.infinite-scroll','search',null),
 		STORE_NEAR_YOU					: Resource.msg('storelist.lightbox.whatsavailable','storepickup','What\'s available at a store near you'),
 		SELECT_STORE					: Resource.msg('storelist.lightbox.selectstore','storepickup',null),
+		NO_RESULTS						: Resource.msg('storelist.lightbox.noresults','storepickup',null),
 		SELECTED_STORE					: Resource.msg('storelist.lightbox.selectedstore','storepickup',null),
 		PREFERRED_STORE					: Resource.msg('storelist.lightbox.preferredstore','storepickup',null),
 		SET_PREFERRED_STORE				: Resource.msg('storelist.lightbox.setpreferredstore','storepickup',null),

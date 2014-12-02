@@ -36,7 +36,7 @@ var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 			'</div>'
 		].join(newLine);
 	} else {
-		return '<div class="no-results">No Results</div>';
+		return '<div class="no-results">'+ Resources.NO_RESULTS +'</div>';
 	}
 };
 
