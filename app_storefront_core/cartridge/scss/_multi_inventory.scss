@@ -12,13 +12,6 @@
 }
 
 .pdp-main .product-add-to-cart {
-	.availability {
-		.label {
-			position: relative;
-		}
-		padding: 20px 0 20px 0px;
-		width: 80%;
-	}
 	.online-stock span {
 		float: left;
 	}
@@ -28,157 +21,115 @@
 	}
 }
 
-.update-location {
-	color: $pacific-blue;
-	padding-left: 10px;
-	cursor: pointer;
+// Store inventory
+
+.availability-block {
+	clear: both;
+	.availability {
+		width: 100%;
+	}
 }
 
-.store-list {
-	border-color: $very-light-gray;
-	border-style: dashed;
-	border-width: 1px 0;
-	height: 150px;
-	overflow: hidden;
-	padding: 0;
+.in-stock-msg,
+.is-in-stock,
+[data-status="store-in-stock"] {
+	color: $islamic-green;
+}
+
+.not-available-msg,
+.in-stock-date-msg,
+.not-available,
+.out-of-stock,
+.store-error, {
+	color: $sangria;
+}
+
+.on-order,
+.preorder-msg,
+.backorder-msg {
+	color: $cerulean;
+}
+
+.availability-results {
+	margin-top: 1em;
+}
+
+#user-zip {
+	display: block;
+	margin: 2em auto 0;
+}
+
+.store-list-container {
+	margin: 0 auto;
 	position: relative;
-	.store-list {
-		position: absolute;
-		width: 1920px;
-	}
+	overflow: hidden;
+	width: 565px; // fallback for IE8 and browser without support for calc
+	width: calc(525px + 3em);
 }
 
 .store-list {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
-	.selected {
-		background-color: $white;
-	}
 }
 
 .store-tile {
-	border-left: 1px dashed $very-light-gray;
-	border-right: 1px dashed $very-light-gray;
+	border: 1px dashed $very-light-gray;
+	box-sizing: border-box;
 	float: left;
-	height: 134px;
 	list-style: none outside none;
-	margin: 0 2px;
-	padding: 8px;
-	position: relative;
-	width: 154px;
-	.store-tile-address {
-		display: block;
+	margin: 0.3em 0.5em;
+	padding: 0.8em;
+	text-align: center;
+	width: 175px;
+	&.selected {
+		background-color: rgba($mantis, 0.5);
 	}
-	.store-tile-city,
-	.store-tile-state {
-		margin: 0 5px 0 0;
-	}
-	.store-tile-postalCode {
-		display: block;
-	}
-	.store-tile-status {
-		display: block;
-		font-size: 0.9em;
-		margin: 5px 0;
-	}
-}
-
-.not-available .store-tile-status,
-.out-of-stock .store-tile-status {
-	color: $sangria;
-}
-
-.In-Stock .store-tile-status {
-	color: $islamic-green;
-}
-
-.store-tile {
-	.store-tile-map-this {
+	.store-status {
 		display: block;
 		font-size: 0.9em;
 		margin: 5px 0;
 	}
 	.select-store-button {
-		bottom: 5px;
-		left: 6px;
-		position: absolute;
+		margin-top: 1em;
 	}
 }
 
-.store-stock {
-	ul {
-		&.expanded {
-			height: auto;
-			.extended-list {
-				display: block;
-			}
-		}
-		&.store-list {
-			margin: 20px 0 5px;
-			.extended-list {
-				display: none;
-			}
-			.selected {
-				background-color: $white;
-				font-weight: bold;
-			}
-		}
+.store-list-pdp-container {
+	margin-top: 1em;
+	.store-list-pdp {
+		margin-top: 0.5em;
 	}
-	.store-tile {
-		border-color: $stark-white;
-		border-style: dotted;
-		border-width: 1px 0 0;
-		clear: both;
-		float: none;
-		font-size: 0.9em;
-		height: auto;
-		line-height: 1.5em;
-		overflow: hidden;
-		padding: 5px 0 5px 55%;
-		text-align: right;
-		width: auto;
-		.store-tile-address {
-			color: $cerulean;
-			display: inline-block;
-			margin: 0 0px 0 0;
+	.store-list-item {
+		@extend %clearfix;
+		border-bottom: 1px dotted $very-light-gray;
+		display: none;
+		padding: 0.5em  0.8em;
+		&:last-of-type {
+			border: none;
 		}
-		.store-tile-city {
-			color: $cerulean;
-			margin: 0 3px 0 0;
+		&.selected {
+			display: block;
+			font-weight: bold;
 		}
-		.store-tile-state {
-			color: $cerulean;
+		&.visible {
+			display: block;
 		}
-		.store-tile-postalCode {
-			display: none;
+		.store-address {
+			float: left;
 		}
-		.store-tile-status {
-			left: 0;
-			margin: 0;
-			position: absolute;
-			text-align: left;
-			top: 3px;
-			width: 80px;
-		}
-	}
-	.In-Stock .store-tile-status {
-		left: 13px;
-	}
-	.store-tile {
-		.store-tile-map-this,
-		.select-store-button {
-			display: none;
+		.store-status {
+			float: right;
 		}
 	}
 }
 
-.more-stores {
-	color: $cerulean;
-	cursor: pointer;
-	font-size: 0.8em;
-	margin: 0 0 0 2px;
-	padding: 0 0 0 12px;
+// Cart inventory
+.selected-store-address {
+	margin-top: 0.5em;
+}
+.selected-store-availability {
+	margin: 0.3em 0 0.5em;
 }
 
 .multishipprogress {
@@ -302,42 +253,9 @@
 	background: url("../images/loading-progress-98x22.gif") no-repeat scroll left center transparent;
 }
 
-.store-in-stock {
-	color: $islamic-green;
-}
-
-#cart-table .item-delivery-options .store-in-stock {
-	color: $night-rider;
-	font-family: $sans-serif;
-	font-size: 12px;
-}
-
-.store-error {
-	color: $sangria;
-}
-
 #cart-table .item-delivery-options {
-	.store-error {
-		color: $sangria;
-	}
 	padding: 1em 0 1em 0;
 	width: 100px;
-}
-
-.selected-store-address,
-.set-preferred-store,
-.selected-store-availability {
-	font-size: 0.8em;
-	font-weight: 400;
-	margin-left: 0px;
-}
-
-.set-preferred-store {
-	cursor: pointer;
-}
-
-#cart-table .form-row .radio-url {
-	display: inline;
 }
 
 .label-inline input {
@@ -371,32 +289,6 @@
 	.instore-shipment-messagetxt {
 		width: 50%;
 		float: right;
-	}
-}
-
-#preferred-store-panel {
-	#set-user-zip {
-		margin-left: 3%;
-	}
-	#userZip {
-		margin-left: 12%;
-		margin-top: 5%;
-	}
-	.error-message {
-		margin-left: 12%;
-		margin-top: 1%;
-	}
-}
-
-#preferred-store-panel {
-	.store-list {
-		margin-top: 1%;
-	}
-	button {
-		&.set-preferred-store,
-		&.close {
-			margin-top: 2%;
-		}
 	}
 }
 

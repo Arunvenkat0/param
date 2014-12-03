@@ -1,25 +1,28 @@
 .tooltip {
 	cursor: help;
 	position: relative;
-	.tooltip-content {
-		background: none repeat scroll 0 0 rgba($black, 0.8);
-		border-radius: 3px 3px 3px 3px;
-		color: $white;
-		display: none;
-		font-size: 12px;
-		font-style: normal;
-		left: 100%;
-		max-width: 300px;
-		min-width: 200px;
-		opacity: 0;
-		padding: 1em;
-		position: absolute;
-		text-decoration: none;
-		top: 100%;
-		visibility: hidden;
-		z-index: 10;
-	}
-	&:hover .tooltip-content {
+
+
+}
+
+.tooltip-content {
+	background: none repeat scroll 0 0 rgba($black, 0.8);
+	border-radius: 3px 3px 3px 3px;
+	color: $white;
+	display: none;
+	font-size: 12px;
+	font-style: normal;
+	left: 100%;
+	max-width: 300px;
+	min-width: 200px;
+	opacity: 0;
+	padding: 1em;
+	position: absolute;
+	text-decoration: none;
+	top: 100%;
+	visibility: hidden;
+	z-index: 10;
+	.tooltip:hover & {
 		display: block;
 		opacity: 1;
 		overflow: visible;
@@ -39,10 +42,10 @@
 	position: absolute;
 	z-index: 3000;
 	.small {
-		width: 300px;
+		max-width: 300px;
 	}
 	.medium {
-		width: 500px;
+		max-width: 500px;
 	}
 	.recommendation-tooltip-header {
 		background: none repeat scroll 0 0 $very-light-gray;
@@ -56,5 +59,18 @@
 	}
 	.recommendation-tooltip-description, .recommendation-tooltip-attributes {
 		padding: 10px;
+	}
+	.shipping-method-cost {
+		float: right;
+		.value {
+			border-bottom: 1px solid $charcoal;
+			display: inline-block;
+			padding-bottom: 0.3em;
+		}
+	}
+	.shippingtotal {
+		clear: right;
+		float: right;
+		margin-top: 0.3em;
 	}
 }

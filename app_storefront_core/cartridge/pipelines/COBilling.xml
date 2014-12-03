@@ -320,6 +320,9 @@
             <node>
               <call-node start-name-ref="COBilling-ResetPaymentForms"/>
               <node-display x="0" y="2"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../+1"/>
+              </branch>
             </node>
             <simple-transition>
               <transition-display>
@@ -329,7 +332,7 @@
             <node>
               <call-node start-name-ref="COBilling-ValidateBilling"/>
               <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="Error">
+              <branch basename="b3" source-connector="Error">
                 <transition target-connector="in1" target-path="../+1"/>
               </branch>
             </node>
@@ -337,15 +340,15 @@
             <node>
               <call-node start-name-ref="COBilling-HandleBillingAddress"/>
               <node-display x="0" y="1"/>
-              <branch basename="b3" source-connector="error">
-                <transition target-connector="in1" target-path="./b4.2"/>
+              <branch basename="b4" source-connector="error">
+                <transition target-connector="in1" target-path="./b5.2"/>
               </branch>
             </node>
             <simple-transition/>
             <node>
               <call-node start-name-ref="COBilling-HandlePaymentSelection"/>
               <node-display x="0" y="1"/>
-              <branch basename="b4" source-connector="error">
+              <branch basename="b5" source-connector="error">
                 <transition target-connector="in1">
                   <transition-display>
                     <bend-point relative-to="source" x="1" y="1"/>
@@ -2753,7 +2756,11 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 </transition>
               </branch>
             </node>
-            <simple-transition/>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="FormElement"/>
@@ -2762,17 +2769,36 @@ The handle pipeline is responsible for payment provider / payment method specifi
             </node>
             <simple-transition/>
             <node>
-              <pipelet-node pipelet-name="RemoveBasketPaymentInstrument" pipelet-set-identifier="bc_api">
-                <key-binding alias="null" key="PaymentInstrument"/>
-                <key-binding alias="Basket.getPaymentInstruments( dw.order.PaymentInstrument.METHOD_CREDIT_CARD)" key="PaymentInstruments"/>
-              </pipelet-node>
+              <decision-node condition-key="CurrentForms.billing.paymentMethods.bml.ssn.valid" condition-operator="expr"/>
               <node-display x="0" y="1"/>
+              <branch basename="b3" source-connector="yes">
+                <transition target-connector="in"/>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="RemoveBasketPaymentInstrument" pipelet-set-identifier="bc_api">
+                      <key-binding alias="null" key="PaymentInstrument"/>
+                      <key-binding alias="Basket.getPaymentInstruments( dw.order.PaymentInstrument.METHOD_CREDIT_CARD)" key="PaymentInstruments"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <transition target-connector="in3" target-path="../../+1">
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                      <bend-point relative-to="target" x="0" y="1"/>
+                    </transition-display>
+                  </transition>
+                </segment>
+              </branch>
             </node>
-            <transition target-connector="in3" target-path="../+1">
+            <simple-transition>
               <transition-display>
-                <bend-point relative-to="source" x="0" y="2"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
               </transition-display>
-            </transition>
+            </simple-transition>
+            <node>
+              <end-node name="error"/>
+              <node-display orientation="horizontal" x="2" y="0"/>
+            </node>
           </segment>
         </branch>
       </node>
