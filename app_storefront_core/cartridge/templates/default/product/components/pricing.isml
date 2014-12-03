@@ -43,7 +43,12 @@ if ( pdict.Product.variationGroup )
 	discount and a promotion.
 </iscomment>
 
-<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(pdict.Product)}" scope="page"/>
+<isif condition="${pdict.OrgProduct.variationGroup}">
+	<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(pdict.OrgProduct)}" scope="page"/>
+<iselse>
+	<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(pdict.Product)}" scope="page"/>
+</isif>
+
 <isset name="PromotionalPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
 <isset name="isPromoPrice" value="${false}" scope="page"/>
 
