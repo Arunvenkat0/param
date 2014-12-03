@@ -16,8 +16,7 @@ function initializeEvents() {
 		e.preventDefault();
 		quickview.show({
 			url: e.target.href,
-			source: 'cart',
-			callback: product.initializeEvents
+			source: 'cart'
 		});
 	})
 	.on('click', '.bonus-item-actions a', function (e) {

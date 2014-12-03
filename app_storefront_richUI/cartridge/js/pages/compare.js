@@ -1,6 +1,6 @@
 'use strict';
 
-var addToCartHandler = require('./product/addToCartHandler'),
+var addProductToCart = require('./product/addToCart'),
 	ajax = require('../ajax'),
 	page = require('../page'),
 	productTile = require('../product-tile'),
@@ -23,11 +23,10 @@ function initializeEvents() {
 	})
 	.on('click', '.open-quick-view', function (e) {
 		e.preventDefault();
-		var form = $(this).closest('form');
+		var url = $(this).closest('.product').find('.thumb-link').attr('href');
 		quickview.show({
-			url: form.attr('action'),
-			source: 'quickview',
-			data: form.serialize()
+			url: url,
+			source: 'quickview'
 		});
 	});
 
@@ -39,5 +38,5 @@ function initializeEvents() {
 exports.init = function () {
 	productTile.init();
 	initializeEvents();
-	addToCartHandler();
+	addProductToCart();
 };

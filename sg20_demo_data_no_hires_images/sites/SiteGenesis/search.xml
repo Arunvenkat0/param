@@ -3,91 +3,76 @@
     <indexes>
         <index index-id="product" xml:lang="x-default">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="content" xml:lang="x-default">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="synonym" xml:lang="x-default">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="spelling" xml:lang="x-default">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="suggest" xml:lang="x-default">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="product" xml:lang="en">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="content" xml:lang="en">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="synonym" xml:lang="en">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="spelling" xml:lang="en">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="suggest" xml:lang="en">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="product" xml:lang="en-US">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="content" xml:lang="en-US">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="synonym" xml:lang="en-US">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="spelling" xml:lang="en-US">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>
         <index index-id="suggest" xml:lang="en-US">
             <settings>
-                <stemmer>English</stemmer>
                 <indexing-mode>production</indexing-mode>
             </settings>
         </index>

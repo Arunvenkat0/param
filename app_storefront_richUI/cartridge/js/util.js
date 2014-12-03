@@ -11,11 +11,12 @@ var util = {
 	 * @param {String} value the value of the parameter
 	 */
 	appendParamToURL: function (url, name, value) {
-		var c = '?';
-		if (url.indexOf(c) !== -1) {
-			c = '&';
+		// quit if the param already exists
+		if (url.indexOf(name + '=') !== -1) {
+			return url;
 		}
-		return url + c + name + '=' + encodeURIComponent(value);
+		var separator = url.indexOf('?') !== -1 ? '&' : '?';
+		return url + separator + name + '=' + encodeURIComponent(value);
 	},
 	/**
 	 * @function
@@ -194,6 +195,9 @@ var util = {
 
 	fillAddressFields: function (address, $form) {
 		for (var field in address) {
+			if (field === 'ID' || field === 'UUID' || field === 'key') {
+				continue;
+			}
 			// if the key in address object ends with 'Code', remove that suffix
 			// keys that ends with 'Code' are postalCode, stateCode and countryCode
 			$form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);

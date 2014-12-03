@@ -33,7 +33,7 @@ function execute( pdict : PipelineDictionary ) : Number
         for each(var item in shipmentitem.items) {
    			
             var productLineItem : ProductLineItem = item.object;
-            if (item.quantity.value == 0 || item.quantity.value == null) 
+            if (item.quantity.value == 0) 
             {
                 basket.removeProductLineItem(productLineItem);
             }

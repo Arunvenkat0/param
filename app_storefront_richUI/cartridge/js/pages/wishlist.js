@@ -1,12 +1,12 @@
 'use strict';
 
-var addToCartHandler = require('./product/addToCartHandler'),
+var addProductToCart = require('./product/addToCart'),
 	page = require('../page'),
 	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
 
 exports.init = function () {
-	addToCartHandler();
+	addProductToCart();
 	sendToFriend.initializeDialog('.list-table-header');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));

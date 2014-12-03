@@ -142,7 +142,7 @@
 											<div class="item-option option-quantity-desired">
 												<label for="${item.quantity.htmlName}">${Resource.msg('productlist.qtydesired','account',null)}</span>
 												<isif condition="${isListOwner}">
-													<input type="number" name="${item.quantity.htmlName}" value="<isprint value="${item.quantity.value}" style="INTEGER"/>"/>
+													<input type="number" min="0" name="${item.quantity.htmlName}" value="<isprint value="${item.quantity.value}" style="INTEGER"/>"/>
 												<iselse/>
 													<span class="value"><isprint value="${item.quantity.value}"/></span>
 												</isif>
@@ -183,7 +183,7 @@
 												<input type="hidden" name="plid" value="${pdict.ProductList.UUID}"/>
 												<isif condition="${!isGiftCert}">
 													<label for="Quantity">${Resource.msg('global.qty','locale',null)}:</label>
-													<input class="input-text" type="number" name="Quantity" value="<isprint value="${item.quantity.value}" formatter="#"/>" step="1"/>
+													<input class="input-text" type="number" min="0" step="1" name="Quantity" value="<isprint value="${item.quantity.value}" formatter="#"/>"/>
 												</isif>
 												<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small <isif condition="${!isGiftCert}">add-to-cart</isif>">
 													${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}

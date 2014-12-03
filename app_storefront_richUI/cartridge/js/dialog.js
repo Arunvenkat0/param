@@ -1,7 +1,8 @@
 'use strict';
 
 var ajax = require('./ajax'),
-	util = require('./util');
+	util = require('./util'),
+	_ = require('lodash');
 
 var dialog = {
 	/**
@@ -10,22 +11,32 @@ var dialog = {
 	 * @param {Object} params  params.target can be an id selector or an jquery object
 	 */
 	create: function (params) {
-		var id;
-		// options.target can be an id selector or an jquery object
-		var target = $(params.target || '#dialog-container');
+		var $target, id;
+
+		if (_.isString(params.target)) {
+			if (params.target.charAt(0) === '#') {
+				$target = $(params.target);
+			} else {
+				$target = $('#' + params.target);
+			}
+		} else if (params.target instanceof jQuery) {
+			$target = params.target;
+		} else {
+			$target = $('#dialog-container');
+		}
 
 		// if no element found, create one
-		if (target.length === 0) {
-			if (target.selector && target.selector.charAt(0) === '#') {
-				id = target.selector.substr(1);
+		if ($target.length === 0) {
+			if ($target.selector && $target.selector.charAt(0) === '#') {
+				id = $target.selector.substr(1);
+				$target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 			}
-			target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
 		}
 
 		// create the dialog
-		this.container = target;
-		this.container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.container;
+		this.$container = $target;
+		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
+		return this.$container;
 	},
 	/**
 	 * @function
@@ -36,16 +47,16 @@ var dialog = {
 		if (!params.url || params.url.length === 0) { return; }
 		// close any open dialog
 		this.close();
-		this.container = this.create(params);
-		params.url = util.appendParamsToUrl(params.url, {format: 'ajax'});
+		this.$container = this.create(params);
+		params.url = util.appendParamToURL(params.url, 'format', 'ajax');
 
 		// finally load the dialog
 		ajax.load({
-			target: this.container,
+			target: this.$container,
 			url: params.url,
 			callback: function () {
-				if (this.container.dialog('isOpen')) { return; }
-				this.container.dialog('open');
+				if (this.$container.dialog('isOpen')) { return; }
+				this.$container.dialog('open');
 			}.bind(this)
 		});
 	},
@@ -57,23 +68,23 @@ var dialog = {
 	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
 	replace: function (options) {
-		if (!this.container) {
+		if (!this.$container) {
 			return;
 		}
 		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			ajax.load({
-				target: this.container,
+				target: this.$container,
 				url: options.url,
 				callback: function () {
 					callback();
-					if (!this.container.dialog('isOpen')) {
-						this.container.dialog('open');
+					if (!this.$container.dialog('isOpen')) {
+						this.$container.dialog('open');
 					}
 				}.bind(this)
 			});
 		} else if (options.html) {
-			this.container.empty().html(options.html);
+			this.$container.empty().html(options.html);
 			callback();
 		}
 	},
@@ -82,10 +93,10 @@ var dialog = {
 	 * @description Closes the dialog
 	 */
 	close: function () {
-		if (!this.container) {
+		if (!this.$container) {
 			return;
 		}
-		this.container.dialog('close');
+		this.$container.dialog('close').empty();
 	},
 	/**
 	 * @function
@@ -93,7 +104,7 @@ var dialog = {
 	 * @param {String} The action which will be triggered upon form submit
 	 */
 	submit: function (action) {
-		var $form = this.container.find('form:first');
+		var $form = this.$container.find('form:first');
 		// set the action
 		$('<input/>').attr({
 			name: action,
@@ -113,12 +124,18 @@ var dialog = {
 			data: data,
 			dataType: 'html',
 			success: function (html) {
-				this.container.html(html);
+				this.$container.html(html);
 			}.bind(this),
 			failure: function () {
 				window.alert(Resources.SERVER_ERROR);
 			}
 		});
+	},
+	exists: function () {
+		return this.$container && (this.$container.length > 0);
+	},
+	isActive: function () {
+		return this.exists() && (this.$container.children.length > 0);
 	},
 	settings: {
 		autoOpen: false,
