@@ -38,7 +38,7 @@
 					<isloop items="${recProducts}" var="rec" end="19">
 						<isset name="Product" value="${rec}" scope="pdict"/>
 						<isset name="pName" value="${pdict.Product.name}" scope="page"/>
-						<li>
+						<li class="recommendation-item">
 							<div class="product-tile tooltip">
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">
