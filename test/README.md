@@ -1,5 +1,6 @@
 # SiteGenesis Tests
 We're launching a new client-side testing strategy for SiteGenesis. It will include:
+
 - a stronger focus on unit tests, whether that is pure JavaScript unit tests, or tests that run in a browser environment
 - the ability to run all tests on the command-line with a build tool (gulp and grunt), with flexible reporting output
 
