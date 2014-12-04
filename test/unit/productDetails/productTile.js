@@ -1,8 +1,8 @@
 'use strict';
 
 var assert = require('chai').assert;
-var client = require('./webdriver/client');
-var config = require('./webdriver/config');
+var client = require('../webdriver/client');
+var config = require('../webdriver/config');
 
 describe('Product Tile', function () {
 	before(function (done) {

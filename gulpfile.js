@@ -91,7 +91,7 @@ gulp.task('ui-test', function () {
 	var reporter = opts.reporter || 'spec';
 	// default timeout to 10s
 	var timeout = opts.timeout || 10000;
-	return gulp.src('test/ui/' + suite + '/*.js', {read: false})
+	return gulp.src(['test/ui/' + suite + '/*.js', '!test/ui/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
@@ -127,7 +127,7 @@ gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
-	gulp.src('test/unit/*.js', {read: false})
+	gulp.src(['test/unit/**/*.js', '!test/unit/browser/*', '!test/unit/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
