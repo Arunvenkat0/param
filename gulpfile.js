@@ -1,3 +1,5 @@
+'use strict';
+
 var browserify = require('browserify'),
 	connect = require('gulp-connect'),
 	gulp = require('gulp'),

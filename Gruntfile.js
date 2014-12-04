@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 	if (config.suite === 'all') { config.suite === '*'; }
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 10000;
-
+	config.port = grunt.option('port') || 7000;
 
 	grunt.initConfig({
 		watch: {
@@ -53,6 +53,23 @@ module.exports = function (grunt) {
 				options: {
 					watch: true
 				}
+			},
+			browserTest: {
+				files: [{
+					expand: true,
+					cwd: 'test/unit/browser/',
+					src: ['*.js', '!*.out.js'],
+					dest: 'test/unit/browser',
+					ext: '.out.js'
+				}]
+			}
+		},
+		connect: {
+			browserTest: {
+				options: {
+					port: config.port,
+					base: 'test/unit/browser'
+				}
 			}
 		},
 		jscs: {
@@ -75,6 +92,13 @@ module.exports = function (grunt) {
 					timeout: config.timeout
 				},
 				src: ['test/ui/' + config.suite + '/*.js']
+			},
+			unit: {
+				options: {
+					reporter: config.reporter,
+					timeout: config.timeout
+				},
+				src: ['test/unit/*.js']
 			}
 		}
 	});
@@ -83,4 +107,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
 	grunt.registerTask('ui-test', ['mochaTest:ui']);
+	grunt.registerTask('unit-test', ['browserify:browserTest', 'connect:browserTest', 'mochaTest:unit'])
 }
