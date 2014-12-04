@@ -1858,10 +1858,6 @@ div.level-3 ul.level-3 {
 .breadcrumb h1 span {
   float: none; }
 
-.infinite-scroll .pagination ul, .infinite-scroll .pagination .current-page-label {
-  display: none; }
-.infinite-scroll .items-per-page {
-  display: none; }
 .infinite-scroll .search-result-content .infinite-scroll-loading {
   text-align: center;
   background: url("../images/infinite-loading-indicator.gif") center no-repeat;
