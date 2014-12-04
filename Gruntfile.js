@@ -59,8 +59,7 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: 'test/unit/browser/',
 					src: ['*.js', '!*.out.js'],
-					dest: 'test/unit/browser',
-					ext: '.out.js'
+					dest: 'test/unit/browser/dist'
 				}]
 			}
 		},
@@ -91,14 +90,14 @@ module.exports = function (grunt) {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/ui/' + config.suite + '/*.js']
+				src: ['test/ui/' + config.suite + '/**/*.js', '!test/ui/webdriver/*']
 			},
 			unit: {
 				options: {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/unit/*.js']
+				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
 			}
 		}
 	});

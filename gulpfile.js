@@ -91,7 +91,7 @@ gulp.task('ui-test', function () {
 	var reporter = opts.reporter || 'spec';
 	// default timeout to 10s
 	var timeout = opts.timeout || 10000;
-	return gulp.src(['test/ui/' + suite + '/*.js', '!test/ui/webdriver/*'], {read: false})
+	return gulp.src(['test/ui/' + suite + '/**/*.js', '!test/ui/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
@@ -110,7 +110,7 @@ gulp.task('test-browserify', function () {
 	return gulp.src(['test/unit/browser/*.js', '!test/unit/browser/*.out.js'])
 		.pipe(browserified)
 		.pipe(rename(function (path) {
-			path.basename += '.out';
+			path.dirname += '/dist';
 		}))
 		.pipe(gulp.dest('test/unit/browser'));
 });
@@ -127,7 +127,8 @@ gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
-	gulp.src(['test/unit/**/*.js', '!test/unit/browser/*', '!test/unit/webdriver/*'], {read: false})
+	var suite = opts.suite || '*';
+	gulp.src(['test/unit/' + suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
