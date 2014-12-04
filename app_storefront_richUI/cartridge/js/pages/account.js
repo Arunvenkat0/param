@@ -22,7 +22,6 @@ function initializeAddressForm() {
 	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
 		var addressId = $form.find('input[name$="_addressid"]');
-		addressId.val(addressId.val().replace(/[^\w+-]/g, '-'));
 		if (!$form.valid()) {
 			return false;
 		}
