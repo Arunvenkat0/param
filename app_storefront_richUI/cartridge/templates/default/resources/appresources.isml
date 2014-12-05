@@ -30,6 +30,7 @@
 		// Common
 		I_AGREE							: Resource.msg('i_agree', 'common', null),
 		CLOSE 							: Resource.msg('close', 'common', null),
+		NO_THANKS						: Resource.msg('global.nothanks','locale',null),
 
 		// Checkout
 		SHIP_QualifiesFor 				: Resource.msg('shipment.qualifiesfor','checkout',null),
@@ -42,7 +43,6 @@
 		BONUS_PRODUCT 					: Resource.msg('product.bonusproduct','product',null),
 		BONUS_PRODUCTS 					: Resource.msg('product.bonusproducts','product',null),
 		SELECT_BONUS_PRODUCTS 			: Resource.msg('product.selectbonusproducts','product',null),
-		SELECT_BONUS_PRODUCT 			: Resource.msg('product.selectbonusproduct','product',null),
 		BONUS_PRODUCT_MAX 				: Resource.msg('product.bonusproductsmax','product',null),
 		BONUS_PRODUCT_TOOMANY 			: Resource.msg('product.bonusproductstoomany','product',null),
 		SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext','search', null),
