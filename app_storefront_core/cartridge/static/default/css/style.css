@@ -4644,6 +4644,9 @@ h1 .account-logout {
         .facebook-registration .fb_iframe_widget span iframe {
           position: relative;
           width: 100% !important; }
+
+  .mini-cart-item-word span {
+    display: none; }
  }
 
 @media screen and (max-width: 480px) {
