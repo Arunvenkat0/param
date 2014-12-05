@@ -7,7 +7,7 @@ var addProductToCart = require('./product/addToCart'),
 
 exports.init = function () {
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});

@@ -17,6 +17,10 @@
 }
 
 .list-share {
+	@extend %clearfix;
+	background-color: $white-smoke;
+	border-top: 1px solid darken($white-smoke, 10%);
+	padding: 2em;
 	.share-option {
 		box-sizing: border-box;
 		width: 30%;
@@ -25,9 +29,15 @@
 		a {
 			word-break: break-all;
 		}
-		button,
-		.button {
-			margin-top: 1em;
-		}
 	}
+	.list-title {
+		float: left;
+	}
+	.print-page {
+		float: right;
+	}
+}
+
+.event-info {
+	margin: 1em;
 }
