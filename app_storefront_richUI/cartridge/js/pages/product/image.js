@@ -2,24 +2,32 @@
 var dialog = require('../../dialog'),
 	util = require('../../util');
 
+var zoomMediaQuery = matchMedia('(min-width: 960px)');
+
 /**
  * @description Enables the zoom viewer on the product detail page
+ * @param zmq {Media Query List}
  */
-var loadZoom = function () {
+var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
+		zmq = zmq || zoomMediaQuery,
 		hiresUrl;
 
-	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
+		// remove zoom
+		$imgZoom.trigger('zoom.destroy');
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
 
-	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
 		$imgZoom.zoom({
 			url: hiresUrl
 		});
 	}
 };
+
+zoomMediaQuery.addListener(loadZoom);
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag
