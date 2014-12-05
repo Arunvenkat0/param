@@ -1,13 +1,4 @@
 .infinite-scroll {
-	.pagination {
-		ul,
-		.current-page-label {
-			display: none;
-		}
-	}
-	.items-per-page {
-		display: none;
-	}
 	.search-result-content .infinite-scroll-loading {
 		text-align: center;
 		background: url("../images/infinite-loading-indicator.gif") center no-repeat;
