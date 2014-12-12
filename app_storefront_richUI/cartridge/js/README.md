@@ -3,7 +3,7 @@ This is a [part](https://intranet.demandware.com/jira/browse/RAP-2737) of a larg
 
 The modules are then bundled into a single file using [Browserify](http://browserify.org/).
 
-To use browserify, run `gulp js` on the command line. See the [contributing guide](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/CONTRIBUTING.md?at=master).
+To use browserify, run `gulp js` on the command line. See the contributing guide in `CONTRIBUTING.md`.
 
 ## Authoring
 All codes are written in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode).
