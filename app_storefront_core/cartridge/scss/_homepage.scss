@@ -1,48 +1,3 @@
-.home-bottom-left, .home-bottom-center {
-	clear: none;
-	float: left;
-	width: 33%;
-}
-.home-bottom-right {
-	clear: none;
-	float: left;
-	width: 33%;
-	.jcarousel-clip {
-		height: 282px;
-		overflow: hidden;
-	}
-	.vertical-carousel li {
-		height: 282px;
-		float: none;
-		width: 300px;
-	}
-	.product-tile {
-		min-height: 0;
-	}
-	.jcarousel-prev {
-		background: url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;
-		cursor: pointer;
-		height: 12px;
-		position: absolute;
-		bottom: 20px;
-		right: 0;
-		width: 52px;
-		z-index: 999;
-	}
-	.jcarousel-next {
-		background: url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;
-		cursor: pointer;
-		height: 12px;
-		position: absolute;
-		bottom: 0px;
-		right: 0;
-		width: 52px;
-		z-index: 999;
-	}
-	.jcarousel-prev-disabled {
-		display: none !important;
-	}
-}
 .select {
 	display: none;
 }
@@ -52,7 +7,6 @@
 }
 
 #homepage-slider {
-	border-top: 1px solid $dark-gray;
 	overflow: hidden;
 	.slide {
 		width: 100%;
@@ -87,9 +41,81 @@
 	}
 }
 
-.home-bottom-left {
+.home-bottom-left,
+.home-bottom-center,
+.home-bottom-right {
+	clear: none;
 	float: left;
-	width: 50%;
+	width: 33%;
+}
+
+.home-bottom {
+	clear: both;
+	overflow: hidden;
+	padding: 2em 0;
+}
+
+.home-bottom-right {
+	.jcarousel-clip {
+		height: 282px;
+		overflow: hidden;
+	}
+	.vertical-carousel li {
+		height: 282px;
+		float: none;
+		width: 300px;
+	}
+	.jcarousel-prev {
+		background: url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;
+		cursor: pointer;
+		height: 12px;
+		position: absolute;
+		bottom: 20px;
+		right: 0;
+		width: 52px;
+		z-index: 999;
+	}
+	.jcarousel-next {
+		background: url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;
+		cursor: pointer;
+		height: 12px;
+		position: absolute;
+		bottom: 0px;
+		right: 0;
+		width: 52px;
+		z-index: 999;
+	}
+	.jcarousel-prev-disabled {
+		display: none !important;
+	}
+	h2 {
+		background: url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;
+		border-bottom: 2px solid #01a4e5;
+		height: 54px;
+		padding: 30px 0;
+		text-indent: -999em;
+	}
+	.vertical-carousel {
+		margin: 0;
+		padding: 0;
+		li {
+			.capture-product-id {
+				display: none;
+			}
+			.product-price .product-standard-price {
+				text-decoration: line-through;
+			}
+		}
+	}
+	.product-tile {
+		border: 0 none;
+		margin: auto;
+		min-height: 255px;
+		width: 90%;
+		img {
+			max-width: 90%;
+		}
+	}
 }
 
 #home-promo-shop-shoes {
@@ -134,12 +160,6 @@
 	}
 }
 
-.home-bottom-center {
-	background: none repeat scroll 0 0 $white-smoke;
-	float: left;
-	width: 50%;
-}
-
 #home-promo-free-shipping {
 	background-attachment: scroll;
 	background-clip: border-box;
@@ -154,50 +174,6 @@
 	max-width: 319px;
 	text-indent: -999em;
 	width: 100%;
-}
-
-.home-bottom-right {
-	clear: both;
-	margin: 0;
-	width: auto;
-	h2 {
-		background: url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;
-		border-bottom: 2px solid #01a4e5;
-		height: 54px;
-		padding: 30px 0;
-		text-indent: -999em;
-	}
-	.vertical-carousel {
-		margin: 0;
-		padding: 0;
-		li {
-			float: left;
-			list-style: none outside none;
-			padding: 0;
-			width: 25%;
-			.capture-product-id {
-				display: none;
-			}
-			.product-price .product-standard-price {
-				text-decoration: line-through;
-			}
-		}
-	}
-	.product-tile {
-		border: 0 none;
-		margin: auto;
-		min-height: 255px;
-		width: 90%;
-		img {
-			max-width: 90%;
-		}
-	}
-}
-
-.home-bottom {
-	clear: both;
-	overflow: hidden;
-	padding: 2em 0;
 }
 
 #email-alert-signup {

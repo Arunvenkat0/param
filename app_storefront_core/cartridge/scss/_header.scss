@@ -235,7 +235,7 @@ nav[role="navigation"] {
 	}
 	@media screen and (min-width: 768px) {
 		background-color: $white;
-		box-shadow: 2px 3px 3px 2px rgba($charcoal, 0.5);
+		box-shadow: 0 3px 3px 2px rgba($charcoal, 0.3);
 		color: $night-rider;
 		padding: 0.5em 0;
 		position: absolute;
