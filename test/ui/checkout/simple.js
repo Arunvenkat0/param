@@ -19,9 +19,9 @@ describe('Checkout Simple Product', function () {
 				assert.equal(err, undefined);
 			})
 			.click('.swatches.size li:nth-child(2) a')
-			.pause(200)
+			.pause(500)
 			.click('.swatches.width li:nth-child(2) a')
-			.pause(200)
+			.pause(500)
 			.isEnabled('#add-to-cart', function (err, enabled) {
 				assert.equal(err, undefined);
 				assert.ok(enabled, 'Add to Cart button is not enabled');
