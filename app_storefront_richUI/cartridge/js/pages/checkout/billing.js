@@ -57,7 +57,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').prop('checked', 'checked');
 
 	formPrepare.validateForm();
 }

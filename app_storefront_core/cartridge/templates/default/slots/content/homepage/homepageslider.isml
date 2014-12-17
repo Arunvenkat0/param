@@ -8,12 +8,14 @@
 
 <iscomment>make sure we have content at all</iscomment>
 <isif condition="${slotcontent != null}">
-	
+
 	<h1 class="visually-hidden">Promotions</h1>
 	<div id="homepage-slider">
 		<isloop items="${slotcontent.content}" var="contentAsset">
 			<isprint value="${contentAsset.custom.body}" encoding="off"/>
 		</isloop>
+		<div class="jcarousel-control">
+		</div>
 	</div>
 
 </isif>

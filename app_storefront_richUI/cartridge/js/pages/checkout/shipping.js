@@ -134,7 +134,7 @@ function updateShippingMethodList() {
 				tooltip.init();
 				//if nothing is selected in the shipping methods select the first one
 				if ($shippingMethodList.find('.input-radio:checked').length === 0) {
-					$shippingMethodList.find('.input-radio:first').attr('checked', true);
+					$shippingMethodList.find('.input-radio:first').prop('checked', 'checked');
 				}
 			});
 		}

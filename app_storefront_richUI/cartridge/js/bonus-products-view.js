@@ -216,66 +216,55 @@ var bonusProductsView = {
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
-		dialog.create({
+		dialog.open({
 			target: $bonusProduct,
+			url: url,
 			options: {
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
-			}
-		});
-
-		// load the products then show
-		ajax.load({
-			target: $bonusProduct,
-			url: url,
-			callback: function () {
-				$bonusProduct.dialog('open');
+			},
+			open: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
+				$('#bonus-product-dialog .emptyswatch').hide();
 			}
 		});
-
-	},
-	/**
-	 * @function
-	 * @description Closes the bonus product quick view dialog
-	 */
-	close: function () {
-		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
 	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	loadBonusOption: function () {
-		var	$bonusDiscountContainer = $('.bonus-discount-container');
+		var	self = this,
+			$bonusDiscountContainer = $('.bonus-discount-container').clone();
 		if ($bonusDiscountContainer.length === 0) { return; }
 
-		dialog.create({
-			target: $bonusDiscountContainer,
+		// get the html from minicart, then trash it
+		$('.bonus-discount-container').remove();
+
+		dialog.open({
+			html: $bonusDiscountContainer.html(),
 			options: {
-				height: 'auto',
-				width: 350,
-				dialogClass: 'quickview',
-				title: Resources.BONUS_PRODUCT
+				width: 400,
+				title: Resources.BONUS_PRODUCT,
+				buttons: [{
+					text: Resources.SELECT_BONUS_PRODUCTS,
+					click: function () {
+						var uuid = $('.bonus-product-promo').data('lineitemid'),
+							url = util.appendParamsToUrl(Urls.getBonusProducts, {
+								bonusDiscountLineItemUUID: uuid,
+								source: 'bonus'
+							});
+						$(this).dialog('close');
+						self.show(url);
+					}
+				}, {
+					text: Resources.NO_THANKS,
+					click: function () {
+						$(this).dialog('close');
+					}
+				}]
 			}
-		});
-		$bonusDiscountContainer.dialog('open');
-
-		// add event handlers
-		$bonusDiscountContainer.on('click', '.select-bonus-btn', function (e) {
-			e.preventDefault();
-			var uuid = $bonusDiscountContainer.data('lineitemid');
-			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
-				bonusDiscountLineItemUUID: uuid,
-				source: 'bonus'
-			});
-
-			$bonusDiscountContainer.dialog('close');
-			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function () {
-			$bonusDiscountContainer.dialog('close');
 		});
 	},
 };

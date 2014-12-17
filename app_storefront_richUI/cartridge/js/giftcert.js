@@ -12,7 +12,6 @@ var setAddToCartHandler = function (e) {
 		url: util.ajaxUrl(form.attr('action')),
 		method: 'POST',
 		cache: false,
-		contentType: 'application/json',
 		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {

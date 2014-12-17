@@ -5,7 +5,7 @@ This is a port of SiteGenesis's old CSS architecture to using SASS.
 All stylesheets are now written in SCSS, whose syntax is a superset of CSS. This means that any existing CSS is valid SCSS.
 
 SCSS authoring is meant to be used with a build tool, which is currently [gulp](http://gulpjs.com).
-Once compiled, the SCSS is output as CSS in `static/default/css` folder just like before. See [contributing guide](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/CONTRIBUTING.md?at=master) for more information.
+Once compiled, the SCSS is output as CSS in `static/default/css` folder just like before. See the contributing guide (`CONTRIBUTING.md`) for more information.
 
 ### Eclipse
 To edit `.scss` files in Eclipse, install the [Aptana Studio Eclispe Plug-in](http://www.aptana.com/products/studio3/download) version.

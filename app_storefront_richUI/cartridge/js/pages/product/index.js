@@ -2,7 +2,7 @@
 
 var dialog = require('../../dialog'),
 	sendToFriend = require('../../send-to-friend'),
-	storeinventory = require('../../storeinventory'),
+	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
 	addThis = require('./addThis'),
@@ -40,8 +40,7 @@ function initializeEvents() {
 	sendToFriend.initializeDialog($pdpMain);
 	productSet();
 	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.buildStoreList($('.product-number span').html());
-		storeinventory.init();
+		productStoreInventory.init();
 	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
