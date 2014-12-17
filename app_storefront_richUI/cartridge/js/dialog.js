@@ -135,15 +135,12 @@ var dialog = {
 	},
 	settings: {
 		autoOpen: false,
-		bgiframe: true,
-		buttons: {},
 		height: 'auto',
 		modal: true,
 		overlay: {
 			opacity: 0.5,
 			background: 'black'
 		},
-		position: 'center',
 		resizable: false,
 		title: '',
 		width: '800',

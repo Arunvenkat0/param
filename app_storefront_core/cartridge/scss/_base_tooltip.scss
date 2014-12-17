@@ -1,64 +1,36 @@
 .tooltip {
 	cursor: help;
 	position: relative;
-
-
+	&.product-tile {
+		cursor: pointer;
+	}
 }
 
 .tooltip-content {
-	background: none repeat scroll 0 0 rgba($black, 0.8);
-	border-radius: 3px 3px 3px 3px;
-	color: $white;
 	display: none;
-	font-size: 12px;
-	font-style: normal;
-	left: 100%;
-	max-width: 300px;
-	min-width: 200px;
-	opacity: 0;
-	padding: 1em;
-	position: absolute;
-	text-decoration: none;
-	top: 100%;
-	visibility: hidden;
-	z-index: 10;
-	.tooltip:hover & {
-		display: block;
-		opacity: 1;
-		overflow: visible;
-		visibility: visible;
-	}
 }
 
-.js .tooltip-content {
-	display: none !important;
+.ui-tooltip.ui-widget-content {
+	background: $white;
+	box-shadow: none;
 }
 
-#tooltip {
-	background-color: $white;
-	border: 1px solid $black;
-	opacity: 0.95;
-	padding: 5px;
-	position: absolute;
-	z-index: 3000;
-	.small {
-		max-width: 300px;
-	}
-	.medium {
-		max-width: 500px;
-	}
+
+.ui-tooltip-content {
+	padding: 0.5em;
 	.recommendation-tooltip-header {
-		background: none repeat scroll 0 0 $very-light-gray;
+		background-color: $very-light-gray;
 		font-size: 1.2em;
 		font-weight: bold;
-		padding: 10px;
+		padding: 0.5em;
 		.product-price .price-standard {
 			color: $nobel;
 			text-decoration: line-through;
 		}
 	}
-	.recommendation-tooltip-description, .recommendation-tooltip-attributes {
-		padding: 10px;
+	.recommendation-tooltip-description,
+	.recommendation-tooltip-attributes {
+		padding: 0.8em;
 	}
 	.shipping-method-cost {
 		float: right;

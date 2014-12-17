@@ -100,7 +100,7 @@ function addEditAddress(target) {
 		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected', 'selected');
+				$(this).prop('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});

@@ -46,6 +46,9 @@
 	}
 }
 
+.main-image {
+	display: block;
+}
 .primary-image {
 	max-width: 100%;
 }
@@ -241,27 +244,27 @@
 .pdp-main .product-add-to-cart {
 	.inventory {
 		float: left;
+		margin-top: 0.3em;
 		width: 15%;
 		label {
-			float: none;
+			margin-top: 0.3em;
 		}
 		input {
-			margin: 0.7em 0;
-			width: 56px;
+			margin-left: 0.8em;
+			padding: 0.3em;
+			width: 2em;
 		}
 	}
 	.product-price {
 		float: left;
-		font-size: 2.4em;
+		font-size: 2.2em;
 		margin: 0;
-		padding-top: 18px;
 		text-align: right;
 		width: 47%;
 	}
 	button {
 		float: right;
-		margin-top: 0.5em;
-		width: 37%;
+		width: 35%;
 	}
 }
 
@@ -295,6 +298,15 @@
 			font-weight: 400;
 			margin-left: 14px;
 		}
+		#carousel-recommendations {
+			position: relative;
+			overflow: hidden;
+			width: 300px;
+		}
+		ul {
+			position: relative;
+			width: 2000em;
+		}
 		li {
 			float: left;
 			width: 100px;
@@ -318,26 +330,23 @@
 			overflow: hidden;
 			width: 300px;
 		}
+		.jcarousel-nav {
+			cursor: pointer;
+			position: absolute;
+			width: 9px;
+			height: 17px;
+			top: 20%;
+			&.inactive {
+				display: none;
+			}
+		}
 		.jcarousel-prev {
 			background: url("../images/interface/icon-jcarousel-horiz-arrow-left.png") repeat scroll 0 0 transparent;
-			cursor: pointer;
-			height: 17px;
 			left: 0;
-			position: absolute;
-			top: 20%;
-			width: 9px;
 		}
 		.jcarousel-next {
 			background: url("../images/interface/icon-jcarousel-horiz-arrow-right.png") repeat scroll 0 0 transparent;
-			cursor: pointer;
-			height: 17px;
-			position: absolute;
 			right: 0;
-			top: 20%;
-			width: 9px;
-		}
-		.jcarousel-prev-disabled, .jcarousel-next-disabled {
-			background: none repeat scroll 0 0 transparent;
 		}
 		.product-tile:hover .recommendation-tooltip {
 			display: block !important;

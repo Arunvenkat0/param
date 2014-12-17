@@ -8,8 +8,7 @@
 
 'use strict';
 
-var carousel = require('./carousel'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -159,7 +158,6 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -189,7 +187,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./carousel":4,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":27,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":48,"./util":49,"./validator":50}],2:[function(require,module,exports){
+},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -295,7 +293,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":39,"./util":49}],3:[function(require,module,exports){
+},{"./progress":38,"./util":48}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -580,47 +578,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":7,"./page":13,"./util":49}],4:[function(require,module,exports){
-/* global dw */
-
-'use strict';
-
-/**
- * @function
- * @description capture recommendation of each product when it becomes visible in the carousel
- * @param c TBD
- * @param {Element} li The visible product element in the carousel
- */
-
-function captureCarouselRecommendations(c, li) {
-	if (!dw) { return; }
-
-	$(li).find('.capture-product-id').each(function () {
-		dw.ac.capture({
-			id: $(this).text(),
-			type: dw.ac.EV_PRD_RECOMMENDATION
-		});
-	});
-}
-
-var carousel = {
-	settings: {
-		scroll: 1,
-		itemFallbackDimension: '100%',
-		itemVisibleInCallback: captureCarouselRecommendations
-	},
-	init: function () {
-		setTimeout(function () {
-			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.settings));
-			$('#horizontal-carousel').jcarousel(this.settings);
-		}.bind(this), 1000);
-	}
-};
-
-module.exports = carousel;
-
-},{}],5:[function(require,module,exports){
+},{"./ajax":2,"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -875,7 +833,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":49,"promise":56}],6:[function(require,module,exports){
+},{"./page":12,"./util":48,"promise":55}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -921,7 +879,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":7}],7:[function(require,module,exports){
+},{"./dialog":6}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1059,15 +1017,12 @@ var dialog = {
 	},
 	settings: {
 		autoOpen: false,
-		bgiframe: true,
-		buttons: {},
 		height: 'auto',
 		modal: true,
 		overlay: {
 			opacity: 0.5,
 			background: 'black'
 		},
-		position: 'center',
 		resizable: false,
 		title: '',
 		width: '800',
@@ -1079,7 +1034,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":49,"lodash":55}],8:[function(require,module,exports){
+},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1100,7 +1055,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":49}],9:[function(require,module,exports){
+},{"./ajax":2,"./util":48}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1115,7 +1070,6 @@ var setAddToCartHandler = function (e) {
 		url: util.ajaxUrl(form.attr('action')),
 		method: 'POST',
 		cache: false,
-		contentType: 'application/json',
 		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {
@@ -1153,7 +1107,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":11,"./util":49}],10:[function(require,module,exports){
+},{"./ajax":2,"./minicart":10,"./util":48}],9:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1183,7 +1137,7 @@ module.exports = function () {
 	};
 };
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1268,7 +1222,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":49}],12:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":48}],11:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1296,7 +1250,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":49}],13:[function(require,module,exports){
+},{"./ajax":2,"./page":12,"./util":48}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1319,7 +1273,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":49}],14:[function(require,module,exports){
+},{"./util":48}],13:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1559,7 +1513,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":48,"../util":49,"../validator":50}],15:[function(require,module,exports){
+},{"../dialog":6,"../giftcert":8,"../page":12,"../tooltip":47,"../util":48,"../validator":49}],14:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1599,7 +1553,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":40,"../storeinventory/cart":45,"./account":14}],16:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1628,7 +1582,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":49,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":48,"./shipping":20}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1688,7 +1642,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').prop('checked', 'checked');
 
 	formPrepare.validateForm();
 }
@@ -1826,7 +1780,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":49,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1885,7 +1839,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":55}],19:[function(require,module,exports){
+},{"lodash":54}],18:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1914,7 +1868,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
+},{"./address":15,"./billing":16,"./multiship":19,"./shipping":20}],19:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2017,7 +1971,7 @@ function addEditAddress(target) {
 		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected', 'selected');
+				$(this).prop('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});
@@ -2044,7 +1998,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":7,"../../util":49,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2181,7 +2135,7 @@ function updateShippingMethodList() {
 				tooltip.init();
 				//if nothing is selected in the shipping methods select the first one
 				if ($shippingMethodList.find('.input-radio:checked').length === 0) {
-					$shippingMethodList.find('.input-radio:first').attr('checked', true);
+					$shippingMethodList.find('.input-radio:first').prop('checked', 'checked');
 				}
 			});
 		}
@@ -2208,7 +2162,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":39,"../../tooltip":48,"../../util":49,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2252,7 +2206,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":38,"../quickview":40,"./product/addToCart":24}],23:[function(require,module,exports){
+},{"../ajax":2,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2283,7 +2237,7 @@ module.exports = function () {
 	}
 };
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2364,7 +2318,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":7,"../../minicart":11,"../../page":13,"../../util":49,"lodash":55,"promise":56}],25:[function(require,module,exports){
+},{"../../dialog":6,"../../minicart":10,"../../page":12,"../../util":48,"lodash":54,"promise":55}],24:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2454,7 +2408,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":49}],26:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],25:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2464,18 +2418,6 @@ var dialog = require('../../dialog'),
  */
 var loadZoom = function () {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zoomOptions = {
-			zoomType: 'standard',
-			alwaysOn: 0, // setting to 1 will load load high res images on page load
-			zoomWidth: 575,
-			zoomHeight: 349,
-			position: 'right',
-			preloadImages: 0, // setting to 1 will load load high res images on page load
-			xOffset: 30,
-			yOffset: 0,
-			showEffect: 'fadein',
-			hideEffect: 'fadeout'
-		},
 		hiresUrl;
 
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
@@ -2484,10 +2426,9 @@ var loadZoom = function () {
 	hiresUrl = $imgZoom.attr('href');
 
 	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
-		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
-	} else {
-		$imgZoom.removeClass('image-zoom');
+		$imgZoom.zoom({
+			url: hiresUrl
+		});
 	}
 };
 
@@ -2545,7 +2486,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":7,"../../util":49}],27:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48}],26:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2634,7 +2575,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":7,"../../send-to-friend":44,"../../storeinventory/product":47,"../../tooltip":48,"../../util":49,"./addThis":23,"./addToCart":24,"./availability":25,"./image":26,"./powerReviews":28,"./productNav":29,"./productSet":30,"./recommendations":31,"./variant":32}],28:[function(require,module,exports){
+},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./powerReviews":27,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],27:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog');
@@ -2663,7 +2604,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../dialog":7}],29:[function(require,module,exports){
+},{"../../dialog":6}],28:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2690,7 +2631,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":49}],30:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],29:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2740,23 +2681,42 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":48,"../../util":49,"./addToCart":24}],31:[function(require,module,exports){
+},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
 'use strict';
-
-var carousel = require('../../carousel');
 
 /**
  * @description Creates product recommendation carousel using jQuery jcarousel plugin
  **/
 module.exports = function () {
-	var $carousel = $('#carousel-recomendations');
+	var $carousel = $('#carousel-recommendations');
 	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
 		return;
 	}
-	$carousel.jcarousel(carousel.settings);
+	$carousel.jcarousel();
+	$('#carousel-recommendations .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#carousel-recommendations .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{"../../carousel":4}],32:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2833,7 +2793,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":39,"../../storeinventory/product":47,"../../tooltip":48,"../../util":49,"./addThis":23,"./addToCart":24,"./image":26}],33:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2933,7 +2893,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":40,"../send-to-friend":44,"../util":49,"./product/addToCart":24}],34:[function(require,module,exports){
+},{"../ajax":2,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3111,9 +3071,7 @@ function initializeEvents() {
 	});
 
 	// handle hash change
-	$(window).hashchange(function () {
-		updateProductListing();
-	});
+	window.onhashchange = updateProductListing;
 }
 
 exports.init = function () {
@@ -3125,57 +3083,66 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":5,"../product-tile":38,"../progress":39,"../util":49}],35:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
 'use strict';
-
-/**
- * @function
- * @description Triggers the scroll event on a carousel element
- * @param {Object} carousel
- */
-function slideCarouselInitCallback(carousel) {
-	// create navigation for slideshow
-	var numSlides = $('#homepage-slider li').size();
-	var slideShowNav = '<div class="jcarousel-control">';
-	for (var i = 1; i <= numSlides; i++) {
-		slideShowNav = slideShowNav + '<a href="#" class="link-' + i + '">' + i + '</a>';
-	}
-	slideShowNav = slideShowNav + '</div>';
-	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
-
-	$('.jcarousel-control a').bind('click', function () {
-		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
-		return false;
-	});
-	$('.slide').width($('#wrapper').width());
-}
-
-// TODO what are these TBDs? Check with Carousel API? Use a simpler carousel?
-/**
- * @function
- * @description Activates the visibility of the next element in the carousel
- * @param {Object} carousel -- necessity needs TBD!
- * @param {Object} item --  necessity needs TBD!
- * @param {Number} idx Index of the item which should be activated
- * @param {Object} state --  necessity needs TBD!
- */
-function slideCarouselItemVisible(carousel, item, idx) {
-	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-' + idx).addClass('active');
-}
 exports.init = function () {
-	$('#homepage-slider').jcarousel({
-		scroll: 1,
-		auto: 4,
-		buttonNextHTML: null,
-		buttonPrevHTML: null,
-		itemFallbackDimension: '100%',
-		initCallback: slideCarouselInitCallback,
-		itemFirstInCallback: slideCarouselItemVisible
-	});
+	var homepageCarousel = $('#homepage-slider')
+		// responsive slides
+		.on('jcarousel:create jcarousel:reload', function () {
+			var element = $(this),
+				width = element.innerWidth();
+			element.jcarousel('items').css('width', width + 'px');
+		})
+		.jcarousel({
+			wrap: 'circular'
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#homepage-slider .jcarousel-control')
+		.on('jcarouselpagination:active', 'a', function () {
+			$(this).addClass('active');
+		})
+		.on('jcarouselpagination:inactive', 'a', function () {
+			$(this).removeClass('active');
+		})
+		.jcarouselPagination({
+			item: function (page) {
+				return '<a href="#' + page + '">' + page + '</a>';
+			}
+		});
+
+	$('#vertical-carousel')
+		.jcarousel({
+			vertical: true
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#vertical-carousel .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#vertical-carousel .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{}],36:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3188,7 +3155,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":7}],37:[function(require,module,exports){
+},{"../dialog":6}],36:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3209,7 +3176,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":44,"../util":49,"./product/addToCart":24}],38:[function(require,module,exports){
+},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],37:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3313,7 +3280,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":40,"imagesloaded":52}],39:[function(require,module,exports){
+},{"./quickview":39,"imagesloaded":51}],38:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3346,7 +3313,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3460,7 +3427,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":7,"./pages/product":27,"./util":49,"lodash":55}],41:[function(require,module,exports){
+},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3486,7 +3453,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],42:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3658,7 +3625,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":49}],43:[function(require,module,exports){
+},{"./util":48}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3835,7 +3802,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":49}],44:[function(require,module,exports){
+},{"./util":48}],43:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3910,7 +3877,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":7,"./util":49,"./validator":50}],45:[function(require,module,exports){
+},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -3997,7 +3964,7 @@ var cartInventory = {
 
 module.exports = cartInventory;
 
-},{"./":46}],46:[function(require,module,exports){
+},{"./":45}],45:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4183,7 +4150,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":7,"../util":49,"lodash":55,"promise":56}],47:[function(require,module,exports){
+},{"../dialog":6,"../util":48,"lodash":54,"promise":55}],46:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4279,7 +4246,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":46,"lodash":55}],48:[function(require,module,exports){
+},{"./":45,"lodash":54}],47:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4287,21 +4254,16 @@ module.exports = productInventory;
  * @description Initializes the tooltip-content and layout
  */
 exports.init = function () {
-	$('.tooltip').tooltip({
+	$(document).tooltip({
+		items: '.tooltip',
 		track: true,
-		showURL: false,
-		bodyHandler: function () {
-			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = '';
-			if ($(this).find('.tooltip-content').data('layout')) {
-				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
-			}
-		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
+		content: function (callback) {
+			return $(this).find('.tooltip-content').html();
 		}
 	});
 };
 
-},{}],49:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4613,7 +4575,7 @@ var util = {
 
 module.exports = util;
 
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4735,7 +4697,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],51:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4823,7 +4785,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5160,7 +5122,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":53,"wolfy87-eventemitter":54}],53:[function(require,module,exports){
+},{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
  * eventie v1.0.5
  * event binding helper
@@ -5244,15 +5206,15 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( this );
 
-},{}],54:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
- * EventEmitter v4.2.9 - git.io/ee
- * Oliver Caldwell
- * MIT license
+ * EventEmitter v4.2.11 - git.io/ee
+ * Unlicense - http://unlicense.org/
+ * Oliver Caldwell - http://oli.me.uk/
  * @preserve
  */
 
-(function () {
+;(function () {
     'use strict';
 
     /**
@@ -5718,7 +5680,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],55:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12507,14 +12469,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":57,"./lib/done.js":58,"./lib/es6-extensions.js":59,"./lib/node-extensions.js":60}],57:[function(require,module,exports){
+},{"./lib/core.js":56,"./lib/done.js":57,"./lib/es6-extensions.js":58,"./lib/node-extensions.js":59}],56:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12621,7 +12583,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":61}],58:[function(require,module,exports){
+},{"asap":60}],57:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12636,7 +12598,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":57,"asap":61}],59:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],58:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12746,7 +12708,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":57,"asap":61}],60:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],59:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12808,7 +12770,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":57,"asap":61}],61:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],60:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12925,4 +12887,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":51}]},{},[1]);
+},{"_process":50}]},{},[1]);
