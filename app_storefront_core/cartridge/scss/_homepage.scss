@@ -7,9 +7,16 @@
 }
 
 #homepage-slider {
+	position: relative;
 	overflow: hidden;
+	width: 100%;
+}
+
+#homepage-slides {
+	position: relative;
+	width: 20000em;
 	.slide {
-		width: 100%;
+		float: left;
 		img {
 			height: auto;
 			max-width: 100%;
@@ -41,6 +48,22 @@
 	}
 }
 
+#vertical-carousel {
+	position: relative;
+	overflow: hidden;
+	height: 18.5rem;
+	ul {
+		height: 10000em;
+		position: relative;
+		li {
+			float: left;
+			padding-top: 1.5rem;
+			width: 100%;
+			height: 17rem;
+		}
+	}
+}
+
 .home-bottom-left,
 .home-bottom-center,
 .home-bottom-right {
@@ -56,37 +79,23 @@
 }
 
 .home-bottom-right {
-	.jcarousel-clip {
-		height: 282px;
-		overflow: hidden;
-	}
-	.vertical-carousel li {
-		height: 282px;
-		float: none;
-		width: 300px;
+	.jcarousel-nav {
+		color: $pacific-blue;
+		cursor: pointer;
+		font-size: 0.9em;
+		font-weight: 700;
+		position: absolute;
+		right: 0;
+		text-transform: uppercase;
+		&.inactive {
+			display: none;
+		}
 	}
 	.jcarousel-prev {
-		background: url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;
-		cursor: pointer;
-		height: 12px;
-		position: absolute;
 		bottom: 20px;
-		right: 0;
-		width: 52px;
-		z-index: 999;
 	}
 	.jcarousel-next {
-		background: url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;
-		cursor: pointer;
-		height: 12px;
-		position: absolute;
-		bottom: 0px;
-		right: 0;
-		width: 52px;
-		z-index: 999;
-	}
-	.jcarousel-prev-disabled {
-		display: none !important;
+		bottom: 0;
 	}
 	h2 {
 		background: url("../images/homepage/hdr-this-weeks-deals.png") no-repeat scroll center center transparent;
@@ -96,8 +105,6 @@
 		text-indent: -999em;
 	}
 	.vertical-carousel {
-		margin: 0;
-		padding: 0;
 		li {
 			.capture-product-id {
 				display: none;
