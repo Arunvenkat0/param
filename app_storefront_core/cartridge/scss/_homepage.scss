@@ -2,24 +2,6 @@
 	position: relative;
 	overflow: hidden;
 	width: 100%;
-}
-
-#homepage-slides {
-	position: relative;
-	width: 20000em;
-	.slide {
-		float: left;
-		img {
-			height: auto;
-			max-width: 100%;
-		}
-		h2 {
-			@extend .visually-hidden;
-		}
-		span {
-			@extend .visually-hidden;
-		}
-	}
 	.jcarousel-control {
 		position: absolute;
 		right: 10px;
@@ -36,6 +18,24 @@
 			&.active {
 				background-color: $dim-gray;
 			}
+		}
+	}
+}
+
+#homepage-slides {
+	position: relative;
+	width: 20000em;
+	.slide {
+		float: left;
+		img {
+			height: auto;
+			max-width: 100%;
+		}
+		h2 {
+			@extend .visually-hidden;
+		}
+		span {
+			@extend .visually-hidden;
 		}
 	}
 }
