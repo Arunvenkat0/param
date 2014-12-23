@@ -7,8 +7,7 @@
 
 'use strict';
 
-var carousel = require('./carousel'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -158,7 +157,6 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations

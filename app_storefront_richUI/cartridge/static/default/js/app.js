@@ -8,8 +8,7 @@
 
 'use strict';
 
-var carousel = require('./carousel'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -159,7 +158,6 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -189,7 +187,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./carousel":4,"./cookieprivacy":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":27,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
+},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -275,7 +273,6 @@ var load = function (options) {
 		if (options.callback) {
 			options.callback(response);
 		}
-
 	})
 	.fail(function (xhr, textStatus) {
 		// failed
@@ -296,7 +293,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":39,"./util":47}],3:[function(require,module,exports){
+},{"./progress":38,"./util":48}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -581,47 +578,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":7,"./page":13,"./util":47}],4:[function(require,module,exports){
-/* global dw */
-
-'use strict';
-
-/**
- * @function
- * @description capture recommendation of each product when it becomes visible in the carousel
- * @param c TBD
- * @param {Element} li The visible product element in the carousel
- */
-
-function captureCarouselRecommendations(c, li) {
-	if (!dw) { return; }
-
-	$(li).find('.capture-product-id').each(function () {
-		dw.ac.capture({
-			id: $(this).text(),
-			type: dw.ac.EV_PRD_RECOMMENDATION
-		});
-	});
-}
-
-var carousel = {
-	settings: {
-		scroll: 1,
-		itemFallbackDimension: '100%',
-		itemVisibleInCallback: captureCarouselRecommendations
-	},
-	init: function () {
-		setTimeout(function () {
-			// renders horizontal/vertical carousels for product slots
-			$('#vertical-carousel').jcarousel($.extend({vertical: true}, this.settings));
-			$('#horizontal-carousel').jcarousel(this.settings);
-		}.bind(this), 1000);
-	}
-};
-
-module.exports = carousel;
-
-},{}],5:[function(require,module,exports){
+},{"./ajax":2,"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -876,7 +833,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":47,"promise":54}],6:[function(require,module,exports){
+},{"./page":12,"./util":48,"promise":55}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -922,7 +879,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":7}],7:[function(require,module,exports){
+},{"./dialog":6}],6:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -965,52 +922,48 @@ var dialog = {
 	},
 	/**
 	 * @function
-	 * @description Opens a dialog using the given url (params.url)
-	 * @param {Object} params.url should contain the url
+	 * @description Opens a dialog using the given url (options.url) or html (options.html)
+	 * @param {Object} options
+	 * @param {Object} options.url should contain the url
+	 * @param {String} options.html contains the html of the dialog content
 	 */
-	open: function (params) {
-		if (!params.url || params.url.length === 0) { return; }
+	open: function (options) {
 		// close any open dialog
 		this.close();
-		this.$container = this.create(params);
-		params.url = util.appendParamToURL(params.url, 'format', 'ajax');
-
-		// finally load the dialog
-		ajax.load({
-			target: this.$container,
-			url: params.url,
-			callback: function () {
-				if (this.$container.dialog('isOpen')) { return; }
-				this.$container.dialog('open');
-			}.bind(this)
-		});
+		this.$container = this.create(options);
+		this.replace(options);
+	},
+	/**
+	 * @description populate the dialog with html content, then open it
+	 * @param {String} html
+	 **/
+	openWithContent: function (html) {
+		if (!this.$container) { return; }
+		this.$container.empty().html(html);
+		if (!this.$container.dialog('isOpen')) {
+			this.$container.dialog('open');
+		}
 	},
 	/**
 	 * @description Replace the content of current dialog
 	 * @param {object} options
 	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
 	 * @param {string} options.html - If no url property is provided, use html provided to replace
-	 * @param {function} options.callback - Callback, could be used to set up event handlers
 	 */
 	replace: function (options) {
 		if (!this.$container) {
 			return;
 		}
-		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
+			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
-				target: this.$container,
 				url: options.url,
-				callback: function () {
-					callback();
-					if (!this.$container.dialog('isOpen')) {
-						this.$container.dialog('open');
-					}
+				callback: function (response) {
+					this.openWithContent(response);
 				}.bind(this)
 			});
 		} else if (options.html) {
-			this.$container.empty().html(options.html);
-			callback();
+			this.openWithContent(options.html);
 		}
 	},
 	/**
@@ -1021,7 +974,7 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
-		this.$container.dialog('close').empty();
+		this.$container.dialog('close');
 	},
 	/**
 	 * @function
@@ -1064,27 +1017,24 @@ var dialog = {
 	},
 	settings: {
 		autoOpen: false,
-		bgiframe: true,
-		buttons: {},
 		height: 'auto',
 		modal: true,
 		overlay: {
 			opacity: 0.5,
 			background: 'black'
 		},
-		position: 'center',
 		resizable: false,
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy');
+			$(this).dialog('destroy').remove();
 		}
 	}
 };
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":47,"lodash":53}],8:[function(require,module,exports){
+},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1105,7 +1055,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":47}],9:[function(require,module,exports){
+},{"./ajax":2,"./util":48}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1120,7 +1070,6 @@ var setAddToCartHandler = function (e) {
 		url: util.ajaxUrl(form.attr('action')),
 		method: 'POST',
 		cache: false,
-		contentType: 'application/json',
 		data: form.serialize()
 	};
 	$.ajax(options).done(function (response) {
@@ -1158,7 +1107,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":11,"./util":47}],10:[function(require,module,exports){
+},{"./ajax":2,"./minicart":10,"./util":48}],9:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1188,7 +1137,7 @@ module.exports = function () {
 	};
 };
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1273,7 +1222,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":47}],12:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":48}],11:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1301,7 +1250,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":47}],13:[function(require,module,exports){
+},{"./ajax":2,"./page":12,"./util":48}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1324,7 +1273,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":47}],14:[function(require,module,exports){
+},{"./util":48}],13:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1349,7 +1298,6 @@ function initializeAddressForm() {
 	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
 		var addressId = $form.find('input[name$="_addressid"]');
-		addressId.val(addressId.val().replace(/[^\w+-]/g, '-'));
 		if (!$form.valid()) {
 			return false;
 		}
@@ -1565,14 +1513,13 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":46,"../util":47,"../validator":48}],15:[function(require,module,exports){
+},{"../dialog":6,"../giftcert":8,"../page":12,"../tooltip":47,"../util":48,"../validator":49}],14:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
 	bonusProductsView = require('../bonus-products-view'),
-	product = require('./product'),
 	quickview = require('../quickview'),
-	storeinventory = require('../storeinventory');
+	cartStoreInventory = require('../storeinventory/cart');
 
 /**
  * @private
@@ -1601,12 +1548,12 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.init();
+		cartStoreInventory.init();
 	}
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":40,"../storeinventory":45,"./account":14,"./product":27}],16:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1635,7 +1582,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":47,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":48,"./shipping":20}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1695,7 +1642,7 @@ function updatePaymentMethod(paymentMethodID) {
 
 	// ensure checkbox of payment method is checked
 	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID + ']').attr('checked', 'checked');
+	$('input[value=' + paymentMethodID + ']').prop('checked', 'checked');
 
 	formPrepare.validateForm();
 }
@@ -1833,7 +1780,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":47,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1892,7 +1839,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":53}],19:[function(require,module,exports){
+},{"lodash":54}],18:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1921,7 +1868,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
+},{"./address":15,"./billing":16,"./multiship":19,"./shipping":20}],19:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2024,7 +1971,7 @@ function addEditAddress(target) {
 		$addressList.find('option').each(function () {
 			//check the values of the options
 			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).attr('selected', 'selected');
+				$(this).prop('selected', 'selected');
 				$addressDropdown.trigger('change');
 			}
 		});
@@ -2051,7 +1998,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":7,"../../util":47,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2188,7 +2135,7 @@ function updateShippingMethodList() {
 				tooltip.init();
 				//if nothing is selected in the shipping methods select the first one
 				if ($shippingMethodList.find('.input-radio:checked').length === 0) {
-					$shippingMethodList.find('.input-radio:first').attr('checked', true);
+					$shippingMethodList.find('.input-radio:first').prop('checked', 'checked');
 				}
 			});
 		}
@@ -2215,7 +2162,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":39,"../../tooltip":46,"../../util":47,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2259,7 +2206,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":38,"../quickview":40,"./product/addToCart":24}],23:[function(require,module,exports){
+},{"../ajax":2,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2290,7 +2237,7 @@ module.exports = function () {
 	}
 };
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2371,7 +2318,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":7,"../../minicart":11,"../../page":13,"../../util":47,"lodash":53,"promise":54}],25:[function(require,module,exports){
+},{"../../dialog":6,"../../minicart":10,"../../page":12,"../../util":48,"lodash":54,"promise":55}],24:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2461,7 +2408,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":47}],26:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],25:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2471,18 +2418,6 @@ var dialog = require('../../dialog'),
  */
 var loadZoom = function () {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zoomOptions = {
-			zoomType: 'standard',
-			alwaysOn: 0, // setting to 1 will load load high res images on page load
-			zoomWidth: 575,
-			zoomHeight: 349,
-			position: 'right',
-			preloadImages: 0, // setting to 1 will load load high res images on page load
-			xOffset: 30,
-			yOffset: 0,
-			showEffect: 'fadein',
-			hideEffect: 'fadeout'
-		},
 		hiresUrl;
 
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
@@ -2491,10 +2426,9 @@ var loadZoom = function () {
 	hiresUrl = $imgZoom.attr('href');
 
 	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
-		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
-	} else {
-		$imgZoom.removeClass('image-zoom');
+		$imgZoom.zoom({
+			url: hiresUrl
+		});
 	}
 };
 
@@ -2552,12 +2486,12 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":7,"../../util":47}],27:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48}],26:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
 	sendToFriend = require('../../send-to-friend'),
-	storeinventory = require('../../storeinventory'),
+	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
 	addThis = require('./addThis'),
@@ -2595,8 +2529,7 @@ function initializeEvents() {
 	sendToFriend.initializeDialog($pdpMain);
 	productSet();
 	if (SitePreferences.STORE_PICKUP) {
-		storeinventory.buildStoreList($('.product-number span').html());
-		storeinventory.init();
+		productStoreInventory.init();
 	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
@@ -2642,7 +2575,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":7,"../../send-to-friend":44,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./availability":25,"./image":26,"./powerReviews":28,"./productNav":29,"./productSet":30,"./recommendations":31,"./variant":32}],28:[function(require,module,exports){
+},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./powerReviews":27,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],27:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog');
@@ -2671,7 +2604,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../dialog":7}],29:[function(require,module,exports){
+},{"../../dialog":6}],28:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2698,7 +2631,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":47}],30:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],29:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2748,23 +2681,42 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":24}],31:[function(require,module,exports){
+},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
 'use strict';
-
-var carousel = require('../../carousel');
 
 /**
  * @description Creates product recommendation carousel using jQuery jcarousel plugin
  **/
 module.exports = function () {
-	var $carousel = $('#carousel-recomendations');
+	var $carousel = $('#carousel-recommendations');
 	if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
 		return;
 	}
-	$carousel.jcarousel(carousel.settings);
+	$carousel.jcarousel();
+	$('#carousel-recommendations .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#carousel-recommendations .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{"../../carousel":4}],32:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2772,7 +2724,7 @@ var addThis = require('./addThis'),
 	ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
-	storeinventory = require('../../storeinventory'),
+	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
@@ -2799,7 +2751,7 @@ var updateContent = function (href) {
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
-				storeinventory.buildStoreList($('.product-number span').html());
+				productStoreInventory.init();
 			}
 			image.replaceImages();
 			tooltip.init();
@@ -2841,7 +2793,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":39,"../../storeinventory":45,"../../tooltip":46,"../../util":47,"./addThis":23,"./addToCart":24,"./image":26}],33:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2941,7 +2893,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":40,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],34:[function(require,module,exports){
+},{"../ajax":2,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3119,9 +3071,7 @@ function initializeEvents() {
 	});
 
 	// handle hash change
-	$(window).hashchange(function () {
-		updateProductListing();
-	});
+	window.onhashchange = updateProductListing;
 }
 
 exports.init = function () {
@@ -3133,57 +3083,66 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":5,"../product-tile":38,"../progress":39,"../util":47}],35:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
 'use strict';
-
-/**
- * @function
- * @description Triggers the scroll event on a carousel element
- * @param {Object} carousel
- */
-function slideCarouselInitCallback(carousel) {
-	// create navigation for slideshow
-	var numSlides = $('#homepage-slider li').size();
-	var slideShowNav = '<div class="jcarousel-control">';
-	for (var i = 1; i <= numSlides; i++) {
-		slideShowNav = slideShowNav + '<a href="#" class="link-' + i + '">' + i + '</a>';
-	}
-	slideShowNav = slideShowNav + '</div>';
-	$('#homepage-slider .jcarousel-clip').append(slideShowNav);
-
-	$('.jcarousel-control a').bind('click', function () {
-		carousel.scroll(jQuery.jcarousel.intval($(this).text()));
-		return false;
-	});
-	$('.slide').width($('#wrapper').width());
-}
-
-// TODO what are these TBDs? Check with Carousel API? Use a simpler carousel?
-/**
- * @function
- * @description Activates the visibility of the next element in the carousel
- * @param {Object} carousel -- necessity needs TBD!
- * @param {Object} item --  necessity needs TBD!
- * @param {Number} idx Index of the item which should be activated
- * @param {Object} state --  necessity needs TBD!
- */
-function slideCarouselItemVisible(carousel, item, idx) {
-	$('.jcarousel-control a').removeClass('active');
-	$('.jcarousel-control').find('.link-' + idx).addClass('active');
-}
 exports.init = function () {
-	$('#homepage-slider').jcarousel({
-		scroll: 1,
-		auto: 4,
-		buttonNextHTML: null,
-		buttonPrevHTML: null,
-		itemFallbackDimension: '100%',
-		initCallback: slideCarouselInitCallback,
-		itemFirstInCallback: slideCarouselItemVisible
-	});
+	var homepageCarousel = $('#homepage-slider')
+		// responsive slides
+		.on('jcarousel:create jcarousel:reload', function () {
+			var element = $(this),
+				width = element.innerWidth();
+			element.jcarousel('items').css('width', width + 'px');
+		})
+		.jcarousel({
+			wrap: 'circular'
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#homepage-slider .jcarousel-control')
+		.on('jcarouselpagination:active', 'a', function () {
+			$(this).addClass('active');
+		})
+		.on('jcarouselpagination:inactive', 'a', function () {
+			$(this).removeClass('active');
+		})
+		.jcarouselPagination({
+			item: function (page) {
+				return '<a href="#' + page + '">' + page + '</a>';
+			}
+		});
+
+	$('#vertical-carousel')
+		.jcarousel({
+			vertical: true
+		})
+		.jcarouselAutoscroll({
+			interval: 5000
+		});
+	$('#vertical-carousel .jcarousel-prev')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '-=1'
+		});
+
+	$('#vertical-carousel .jcarousel-next')
+		.on('jcarouselcontrol:active', function() {
+			$(this).removeClass('inactive');
+		})
+		.on('jcarouselcontrol:inactive', function() {
+			$(this).addClass('inactive');
+		})
+		.jcarouselControl({
+			target: '+=1'
+		});
 };
 
-},{}],36:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3196,7 +3155,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":7}],37:[function(require,module,exports){
+},{"../dialog":6}],36:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3217,11 +3176,10 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../send-to-friend":44,"../util":47,"./product/addToCart":24}],38:[function(require,module,exports){
+},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],37:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
-	product = require('./pages/product'),
 	quickview = require('./quickview');
 
 function initQuickViewButtons() {
@@ -3313,7 +3271,7 @@ function initializeEvents() {
 exports.init = function () {
 	var $tiles = $('.tiles-container .product-tile');
 	if ($tiles.length === 0) { return; }
-	imagesLoaded('.tiles-container').on('done', function() {
+	imagesLoaded('.tiles-container').on('done', function () {
 		$tiles.syncHeight()
 			.each(function (idx) {
 				$(this).data('idx', idx);
@@ -3322,7 +3280,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./pages/product":27,"./quickview":40,"imagesloaded":50}],39:[function(require,module,exports){
+},{"./quickview":39,"imagesloaded":51}],38:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3355,7 +3313,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],40:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3469,7 +3427,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":7,"./pages/product":27,"./util":47,"lodash":53}],41:[function(require,module,exports){
+},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3495,7 +3453,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],42:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3667,7 +3625,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],43:[function(require,module,exports){
+},{"./util":48}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3844,7 +3802,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],44:[function(require,module,exports){
+},{"./util":48}],43:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3919,338 +3877,258 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":7,"./util":47,"./validator":48}],45:[function(require,module,exports){
+},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	page = require('./page'),
-	util = require('./util');
+var inventory = require('./');
 
-var currentTemplate = $('#wrapper.pt_cart').length ? 'cart' : 'pdp';
+var cartInventory = {
+	setSelectedStore: function (storeId) {
+		var $selectedStore = $('.store-tile.' + storeId),
+			$lineItem = $('.cart-row[data-uuid="' + this.uuid + '"]'),
+			storeAddress = $selectedStore.find('.store-address').html(),
+			storeStatus = $selectedStore.find('.store-status').data('status'),
+			storeStatusText = $selectedStore.find('.store-status').text();
+		this.selectedStore = storeId;
 
-var storeinventory = {
+		$lineItem.find('.instore-delivery .selected-store-address')
+			.data('storeId', storeId)
+			.attr('data-store-id', storeId)
+			.html(storeAddress);
+		$lineItem.find('.instore-delivery .selected-store-availability')
+			.data('status', storeStatus)
+			.attr('data-status', storeStatus)
+			.text(storeStatusText);
+		$lineItem.find('.instore-delivery .delivery-option').removeAttr('disabled').trigger('click');
+	},
+	cartSelectStore: function () {
+		var self = this;
+		inventory.getStoresInventory(this.uuid).then(function (stores) {
+			inventory.selectStoreDialog({
+				stores: stores,
+				selectedStoreId: self.selectedStore,
+				selectedStoreText: Resources.SELECTED_STORE,
+				continueCallback: function () {},
+				selectStoreCallback: self.setSelectedStore.bind(self)
+			});
+		}).done();
+	},
+	setDeliveryOption: function (value) {
+		// set loading state
+		$('.item-delivery-options')
+			.addClass('loading')
+			.children().hide();
+
+		var data = {
+			plid: this.uuid,
+			storepickup: (value === 'store' ? true : false)
+		};
+		if (value === 'store') {
+			data.storepickup = true;
+			data.storeid = this.selectedStore;
+		} else {
+			data.storepickup = false;
+		}
+		$.ajax({
+			url: Urls.setStorePickup,
+			data: data,
+			success: function () {
+				// remove loading state
+				$('.item-delivery-options')
+					.removeClass('loading')
+					.children().show();
+			}
+		});
+	},
 	init: function () {
 		var self = this;
-		this.$preferredStorePanel = $('<div id="preferred-store-panel">');
-		// check for items that trigger dialog
-		$('#cart-table .set-preferred-store').on('click', function (e) {
+		$('.item-delivery-options .set-preferred-store').on('click', function (e) {
 			e.preventDefault();
-			self.loadPreferredStorePanel($(this).parent().attr('id'));
-		});
-
-		//disable the radio button for home deliveries if the store inventory is out of stock
-		$('#cart-table .item-delivery-options .home-delivery .not-available').each(function () {
-			$(this).parents('.home-delivery').children('input').attr('disabled', 'disabled');
-		});
-
-		$('body').on('click', '#pdpMain .set-preferred-store', function () {
-			self.loadPreferredStorePanel($(this).parent().attr('id'));
-			return false;
-		});
-
-		$('.item-delivery-options input.radio-url').on('click', function () {
-			self.setLineItemStore($(this));
-		});
-
-		if ($('.checkout-shipping').length > 0) {
-			this.shippingLoad();
-		}
-
-		//disable the cart button if there is pli set to instore and the status is 'Not Available' and it is marked as an instore pli
-		$('.item-delivery-options').each(function () {
-			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled') &&
-				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
-				($instore.children('input').attr('checked') === 'checked')) {
-				$('.cart-action-checkout button').attr('disabled', 'disabled');
+			self.uuid = $(this).data('uuid');
+			self.selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
+			if (!User.zip) {
+				inventory.zipPrompt(function () {
+					self.cartSelectStore();
+				});
+			} else {
+				self.cartSelectStore();
 			}
 		});
+		$('.item-delivery-options .delivery-option').on('click', function () {
+			// reset the uuid
+			self.uuid = $(this).closest('.cart-row').data('uuid');
+			self.setDeliveryOption($(this).val());
+		});
+	}
+};
+
+module.exports = cartInventory;
+
+},{"./":45}],45:[function(require,module,exports){
+'use strict';
+
+var _ = require('lodash'),
+	dialog = require('../dialog'),
+	TPromise = require('promise'),
+	util = require('../util');
+
+var newLine = '\n';
+var storeTemplate = function (store, selectedStoreId, selectedStoreText) {
+	return [
+		'<li class="store-tile ' + store.storeId + (store.storeId === selectedStoreId ? ' selected' : '') + '">',
+		'	<p class="store-address">',
+		'		' + store.address1 + '<br/>',
+		'		' + store.city + ', ' + store.stateCode + ' ' + store.postalCode,
+		'	</p>',
+		'	<p class="store-status" data-status="' + store.statusclass + '">' + store.status + '</p>',
+		'	<button class="select-store-button" data-store-id="' + store.storeId + '"' +
+		(store.statusclass !== 'store-in-stock' ? 'disabled="disabled"' : '') + '>',
+		'		' + (store.storeId === selectedStoreId ? selectedStoreText : Resources.SELECT_STORE),
+		'	</button>',
+		'</li>'
+	].join(newLine);
+};
+
+var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
+	if (stores && stores.length) {
+		return [
+			'<div class="store-list-container">',
+			'<ul class="store-list">',
+			_.map(stores, function (store) {
+				return storeTemplate(store, selectedStoreId, selectedStoreText);
+			}).join(newLine),
+			'</ul>',
+			'</div>',
+			'<div class="store-list-pagination">',
+			'</div>'
+		].join(newLine);
+	} else {
+		return '<div class="no-results">'+ Resources.NO_RESULTS +'</div>';
+	}
+};
+
+var zipPromptTemplate = function () {
+	return [
+		'<div id="preferred-store-panel">',
+		'	<input type="text" id="user-zip" placeholder="' + Resources.ENTER_ZIP + '" name="zipCode"/>',
+		'</div>'
+	].join(newLine);
+};
+
+/**
+ * @description test whether zipcode is valid for either US or Canada
+ * @return {Boolean} true if the zipcode is valid for either country, false if it's invalid for both
+ **/
+var validateZipCode = function (zipCode) {
+	var regexes = {
+		canada: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i,
+		usa: /^\d{5}(-\d{4})?$/
 	},
-	setLineItemStore: function (radio) {
-		// @TODO refactor DOM manipulation
-		$(radio).parent().parent().children().toggleClass('hide');
-		$(radio).parent().parent().toggleClass('loading');
-		ajax.getJson({
-			url: util.appendParamsToUrl($(radio).attr('data-url') , {storeid: $(radio).siblings('.storeid').attr('value')}),
-			callback: function () {
-				$(radio).attr('checked', 'checked');
-				$(radio).parent().parent().toggleClass('loading');
-				$(radio).parent().parent().children().toggleClass('hide');
-			}
-		});
+		valid = false;
+	if (!zipCode) { return; }
+	_.each(regexes, function (re) {
+		var regexp = new RegExp(re);
+		valid = regexp.test(zipCode);
+	});
+	return valid;
+};
 
-		//scan the plis to see if there are any that are not able to go through checkout, if none are found re-enable the checkout button
-		var countplis = 0;
-		$('.item-delivery-options').each(function () {
-			var $instore = $(this).children('.instore-delivery');
-			if (($instore.children('input').attr('disabled') === 'disabled') &&
-				($instore.children('.selected-store-availability').children('.store-error').length > 0) &&
-				($instore.children('input').attr('checked') === 'checked')) {
-					$('.cart-action-checkout button').attr('disabled', 'disabled');
-				} else {
-					countplis++;
-				}
-			});
-			if (countplis > 0 && $('.error-message').length === 0) {
-				$('.cart-action-checkout button').removeAttr('disabled', 'disabled');
-			}
-	},
-	buildStoreList: function (pid) {
+var storeinventory = {
+	zipPrompt: function (callback) {
 		var self = this;
-		this.$storeList = $('<div class="store-list">');
-		// request results from server
-		ajax.getJson({
+		dialog.open({
+			html: zipPromptTemplate(),
+			options: {
+				title: Resources.STORE_NEAR_YOU,
+				width: 500,
+				buttons: [
+					{
+						text: Resources.SEARCH,
+						click: function () {
+							var zipCode = $('#user-zip').val();
+							if (validateZipCode(zipCode)) {
+								self.setUserZip(zipCode);
+								if (callback) {
+									callback(zipCode);
+								}
+							}
+						}
+					}
+				],
+				open: function () {
+					$('#user-zip').on('keypress', function (e) {
+						if (e.which === 13) {
+							// trigger the search button
+							$('.ui-dialog-buttonset .ui-button').trigger('click');
+						}
+					});
+				}
+			}
+		});
+	},
+	getStoresInventory: function (pid) {
+		return TPromise.resolve($.ajax({
 			url: util.appendParamsToUrl(Urls.storesInventory, {
 				pid: pid,
 				zipCode: User.zip
 			}),
-			callback: function (data) {
-				// clear any previous results, then build new
-				self.$storeList.empty();
-				var listings = $('<ul class="store-list"/>');
-				if (data && data.length > 0) {
-					for (var i = 0; i < 10 && i < data.length; i++) {
-						var item = data[i],
-							displayButton;
-						//Disable button if there is no stock for item
-						if (item.statusclass === 'store-in-stock') {
-							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '">' + Resources.SELECT_STORE + '</button>';
-						} else {
-							displayButton = '<button value="' + item.storeId + '" class="button-style-1 select-store-button" data-stock-status="' + item.status + '" disabled="disabled">' + Resources.SELECT_STORE + '</button>';
-						}
-
-						listings.append('<li class="store-' + item.storeId + item.status.replace(/ /g, '-') + ' store-tile">' +
-							'<span class="store-tile-address ">' + item.address1 + ',</span>' +
-							'<span class="store-tile-city ">' + item.city + '</span>' +
-							'<span class="store-tile-state ">' + item.stateCode + '</span>' +
-							'<span class="store-tile-postalCode ">' + item.postalCode + '</span>' +
-							'<span class="store-tile-status ' + item.statusclass + '">' + item.status + '</span>' +
-							displayButton +
-							'</li>');
-					}
-				// no records
-				} else {
-					if (User.zip) {
-						self.$storeList.append('<div class="no-results">No Results</div>');
-					}
-				}
-
-				// set up pagination for results
-				var storeTileWidth = 176,
-					numListings = listings.find('li').size(),
-					listingsNav = $('<div id="listings-nav"/>'),
-					selectedButtonText;
-				for (var j = 0, link = 1; j <= numListings; j++) {
-					if (numListings > j) {
-						listingsNav.append('<a data-index="' + j + '">' + link + '</a>');
-					}
-					link++;
-					j = j + 2;
-				}
-				listingsNav.find('a').on('click', function () {
-					$(this).siblings().removeClass('active');
-					$(this).addClass('active');
-					$('.store-list').animate({
-						'left': storeTileWidth * $(this).data('index') * - 1
-					}, 1000);
-				}).first().addClass('active');
-				self.$storeList.after(listingsNav);
-
-				// check for preferred store id, highlight, move to top
-				if (currentTemplate === 'cart') {
-					selectedButtonText = Resources.SELECTED_STORE;
-				} else {
-					selectedButtonText = Resources.PREFERRED_STORE;
-				}
-				listings.find('.store-' + User.storeId).addClass('selected').find('.select-store-button ').text(selectedButtonText);
-
-				self.bubbleStoreUp(listings, User.storeId);
-
-				// if there is a block to show results on page (pdp)
-				if (currentTemplate !== 'cart') {
-					var onPageList = listings.clone(),
-						$div = $('div#' + pid);
-					$div.find('.store-list').remove();
-					$div.append(onPageList);
-
-					if (onPageList.find('li').size() > 1) {
-						$div.find('li:gt(0)').each(function () {
-							$(this).addClass('extended-list');
-						});
-						$('.more-stores').remove();
-						$div.after('<span class="more-stores">' + Resources.SEE_MORE + '</span>');
-						$div.parent().find('.more-stores').on('click', function () {
-							if ($(this).text() ===  Resources.SEE_MORE) {
-								$(this).text(Resources.SEE_LESS).addClass('active');
-							} else {
-								$(this).text(Resources.SEE_MORE).removeClass('active');
+			dataType: 'json'
+		}));
+	},
+	/**
+	 * @description open the dialog to select store
+	 * @param {Array} options.stores
+	 * @param {String} options.selectedStoreId
+	 * @param {String} options.selectedStoreText
+	 * @param {Function} options.continueCallback
+	 * @param {Function} options.selectStoreCallback
+	 **/
+	selectStoreDialog: function (options) {
+		var self = this,
+			stores = options.stores,
+			selectedStoreId = options.selectedStoreId,
+			selectedStoreText = options.selectedStoreText,
+			storeList = storeListTemplate(stores, selectedStoreId, selectedStoreText);
+		dialog.open({
+			html: storeList,
+			options: {
+				title: Resources.SELECT_STORE + ' - ' + User.zip,
+				buttons: [
+					{
+						text: Resources.CHANGE_LOCATION,
+						click: function () {
+							self.setUserZip(null);
+							// trigger the event to start the process all over again
+							$('.set-preferred-store').trigger('click');
+						}.bind(this)
+					}, {
+						text: Resources.CONTINUE,
+						click: function () {
+							if (options.continueCallback) {
+								options.continueCallback(stores);
 							}
-							$div.find(' ul.store-list').toggleClass('expanded');
-						});
-					}
-				}
-
-				// update panel with new list
-				listings.width(numListings * storeTileWidth).appendTo(self.$storeList);
-
-				// set up 'set preferred store' action on new elements
-				// @TODO this needs to be refactored
-				listings.find('button.select-store-button').on('click', function () {
-					var $this = $(this);
-					var selectedStoreId = $this.val();
-					if (currentTemplate === 'cart') {
-						//update selected store and set the lineitem
-						var liuuid = self.$preferredStorePanel.find('.srcitem').attr('value');
-						$('div[name="' + liuuid + '-sp"] .selected-store-address').html(
-							$this.siblings('.store-tile-address').text() +
-							' <br />' +
-							$this.siblings('.store-tile-city').text() +
-							' , ' +
-							$this.siblings('.store-tile-state').text() +
-							' ' +
-							$this.siblings('.store-tile-postalCode').text()
-						);
-						$('div[name="' + liuuid + '-sp"] .storeid').val($this.val());
-						$('div[name="' + liuuid + '-sp"] .selected-store-availability').html($this.siblings('.store-tile-status'));
-						$('div[name="' + liuuid + '-sp"] .radio-url').removeAttr('disabled');
-						$('div[name="' + liuuid + '-sp"] .radio-url').click();
-						self.$preferredStorePanel.dialog('close');
-					} else {
-						if (User.storeId !== selectedStoreId) {
-							// set as selected
-							self.setPreferredStore(selectedStoreId);
-							self.bubbleStoreUp (onPageList, selectedStoreId);
-							$('.store-list li.selected').removeClass('selected').find('.select-store-button').text(Resources.SELECT_STORE);
-							$('.store-list li.store-' + selectedStoreId + ' .select-store-button').text(Resources.PREFERRED_STORE).parent().addClass('selected');
+							dialog.close();
 						}
 					}
-					//if there is a dialog box open in the cart for editing a pli and the user selected a new store
-					//add an event to for a page refresh on the cart page if the update button has not been clicked
-					//reason - the pli has been updated but the update button was not clicked, leaving the cart visually in accurate.
-					//when the update button is clicked it forces a refresh.
-					if ($('#cart-table').length > 0 && $('.select-store-button').length > 0) {
-						$('.ui-dialog .ui-icon-closethick:first').bind('click', function () {
-							page.refresh();
-						});
-					}
-				});
-			} // end ajax callback
-		});
-	},
-
-	bubbleStoreUp: function (list, id) {
-		var preferredEntry = list.find('li.store-' + id).clone();
-		preferredEntry.removeClass('extended-list');
-		list.find('.store-tile').not('extended-list').addClass('extended-list');
-		list.find('.store-' + id).remove();
-		list.prepend(preferredEntry);
-	},
-
-	loadPreferredStorePanel: function (pid) {
-		var self = this;
-		//clear error messages from other product tiles if they exists in the dom
-		this.$preferredStorePanel.find('.error-message').remove();
-
-		// clear any previous results
-		this.$preferredStorePanel.empty();
-
-		// show form if no zip set
-		if (User.zip === null || User.zip === '') {
-			this.$preferredStorePanel.append('<div><input type="text" id="userZip" class="entered-zip" placeholder="' +
-					Resources.ENTER_ZIP +
-					'"/><button id="set-user-zip" class="button-style-1">' +
-					Resources.SEARCH +
-					'</button></div>')
-				.find('#set-user-zip').on('click', function () {
-					var enteredZip = $('.ui-dialog #preferred-store-panel input.entered-zip').last().val();
-					var regexObj = {
-						canada: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i,
-						usa: /^\d{5}(-\d{4})?$/
-					};
-					var validZipEntry = false;
-					var regexp;
-					//check Canadian postal code
-					regexp = new RegExp(regexObj.canada);
-					if (regexp.test(enteredZip)) {
-						validZipEntry = true;
-					}
-					//check us zip codes
-					regexp = new RegExp(regexObj.usa);
-					if (regexp.test(enteredZip)) {
-						validZipEntry = true;
-					}
-					//good zip
-					if (validZipEntry) {
-						$('#preferred-store-panel .error-message').remove();
-						self.setUserZip(enteredZip);
-						self.loadPreferredStorePanel(pid);
-					//bad zip
-					} else {
-						if ($('#preferred-store-panel .error-message').length === 0) {
-							$('#preferred-store-panel div').append('<div class="error-message">' + Resources.INVALID_ZIP + '</div>');
+				],
+				open: function () {
+					$('.select-store-button').on('click', function (e) {
+						e.preventDefault();
+						var storeId = $(this).data('storeId');
+						// if the store is already selected, don't select again
+						if (storeId === selectedStoreId) { return; }
+						$('.store-list .store-tile.selected').removeClass('selected')
+							.find('.select-store-button').text(Resources.SELECT_STORE);
+						$(this).text(selectedStoreText)
+							.closest('.store-tile').addClass('selected');
+						if (options.selectStoreCallback) {
+							options.selectStoreCallback(storeId);
 						}
-					}
-				});
-			$('#userZip').on('keypress', function (e) {
-				var code = e.keyCode ? e.keyCode : e.which;
-				if (code.toString() === 13) {
-					$('#set-user-zip').trigger('click');
+					});
 				}
-			});
-
-			// clear any on-page results
-			$('.store-stock .store-list').remove();
-			$('.availability .more-stores').remove();
-
-		// zip is set, build list
-		} else {
-			this.buildStoreList(pid);
-			this.$preferredStorePanel
-				.append('<div>For ' + User.zip + ' <span class="update-location">' + Resources.CHANGE_LOCATION + '</span></div>')
-				.append(this.$storeList);
-			this.$preferredStorePanel.find('.update-location').on('click', function () {
-				this.setUserZip(null);
-				this.loadPreferredStorePanel(pid);
-			}.bind(this));
-		}
-
-		// append close button for pdp
-		if (currentTemplate !== 'cart') {
-			if (User.storeId !== null) {
-				this.$preferredStorePanel.append('<button class="close button-style-1  set-preferred-store">' + Resources.CONTINUE_WITH_STORE + '</button>');
-			} else if (User.zip !== null) {
-				this.$preferredStorePanel.append('<button class="close button-style-1">' + Resources.CONTINUE + '</button>');
-			}
-		} else {
-			this.$preferredStorePanel.append('<input type="hidden" class="srcitem" value="' + pid + '">');
-		}
-
-		// open the dialog
-		this.$preferredStorePanel.dialog({
-			width: 550,
-			autoOpen: true,
-			modal: true,
-			title: Resources.STORE_NEAR_YOU
+			},
 		});
-
-		// action for close/continue
-		$('.close').on('click', function () {
-			this.$preferredStorePanel.dialog('close');
-		}.bind(this));
-
-		//remove the continue button if selecting a zipcode
-		if (User.zip === null || User.zip === '') {
-			this.$preferredStorePanel.find('.set-preferred-store').last().remove();
-		}
-
-		//disable continue button if a preferred store has not been selected
-		if ($('.store-list .selected').length > 0) {
-			this.$preferredStorePanel.find('.close').attr('disabled', false);
-		} else {
-			this.$preferredStorePanel.find('.close').attr('disabled', true);
-		}
 	},
-
 	setUserZip: function (zip) {
 		User.zip = zip;
 		$.ajax({
@@ -4261,16 +4139,6 @@ var storeinventory = {
 			}
 		});
 	},
-
-	setPreferredStore: function (id) {
-		User.storeId = id;
-		$.post(Urls.setPreferredStore, {storeId: id}, function (data) {
-			$('.selected-store-availability').html(data);
-			//enable continue button when a preferred store has been selected
-			$('#preferred-store-panel .close').attr('disabled', false);
-		});
-	},
-
 	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
@@ -4282,7 +4150,103 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"./ajax":2,"./page":13,"./util":47}],46:[function(require,module,exports){
+},{"../dialog":6,"../util":48,"lodash":54,"promise":55}],46:[function(require,module,exports){
+'use strict';
+
+var _ = require('lodash'),
+	inventory = require('./');
+
+var newLine = '\n';
+var pdpStoreTemplate = function (store) {
+	return [
+		'<li class="store-list-item ' + (store.storeId === User.storeId ? ' selected' : '') + '">',
+		'	<div class="store-address">' + store.address1 + ', ' + store.city + ' ' + store.stateCode +
+		' ' + store.postalCode + '</div>',
+		'	<div class="store-status ' + store.statusclass + '">' + store.status + '</div>',
+		'</li>'
+	].join(newLine);
+};
+var pdpStoresListingTemplate = function (stores) {
+	if (stores && stores.length) {
+		return [
+			'<div class="store-list-pdp-container">',
+			(stores.length > 1 ? '	<a class="stores-toggle collapsed" href="#">' + Resources.SEE_MORE + '</a>' : ''),
+			'	<ul class="store-list-pdp">',
+			_.map(stores, pdpStoreTemplate).join(newLine),
+			'	</ul>',
+			'</div>'
+		].join(newLine);
+	}
+};
+
+var storesListing = function (stores) {
+	// list all stores on PDP page
+	if ($('.store-list-pdp-container').length) {
+		$('.store-list-pdp-container').remove();
+	}
+	$('.availability-results').append(pdpStoresListingTemplate(stores));
+};
+
+var productInventory = {
+	setPreferredStore: function (storeId) {
+		User.storeId = storeId;
+		$.ajax({
+			url: Urls.setPreferredStore,
+			type: 'POST',
+			data: {storeId: storeId}
+		});
+	},
+	productSelectStore: function () {
+		var self = this;
+		inventory.getStoresInventory(this.pid).then(function (stores) {
+			inventory.selectStoreDialog({
+				stores: stores,
+				selectedStoreId: User.storeId,
+				selectedStoreText: Resources.PREFERRED_STORE,
+				continueCallback: storesListing,
+				selectStoreCallback: self.setPreferredStore
+			});
+		}).done();
+	},
+	init: function () {
+		var $availabilityContainer = $('.availability-results'),
+			self = this;
+		this.pid = $('input[name="pid"]').val();
+
+		$('#product-content .set-preferred-store').on('click', function (e) {
+			e.preventDefault();
+			if (!User.zip) {
+				inventory.zipPrompt(function () {
+					self.productSelectStore();
+				});
+			} else {
+				self.productSelectStore();
+			}
+		});
+
+		if ($availabilityContainer.length) {
+			if (User.storeId) {
+				inventory.getStoresInventory(this.pid).then(storesListing);
+			}
+
+			// See more or less stores in the listing
+			$availabilityContainer.on('click', '.stores-toggle', function (e) {
+				e.preventDefault();
+				$('.store-list-pdp .store-list-item').toggleClass('visible');
+				if ($(this).hasClass('collapsed')) {
+					$(this).text(Resources.SEE_LESS);
+				} else {
+					$(this).text(Resources.SEE_MORE);
+				}
+				$(this).toggleClass('collapsed');
+			});
+		}
+	}
+};
+
+module.exports = productInventory;
+
+},{"./":45,"lodash":54}],47:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4290,21 +4254,16 @@ module.exports = storeinventory;
  * @description Initializes the tooltip-content and layout
  */
 exports.init = function () {
-	$('.tooltip').tooltip({
+	$(document).tooltip({
+		items: '.tooltip',
 		track: true,
-		showURL: false,
-		bodyHandler: function () {
-			// add a data attribute of data-layout="some-class" to your tooltip-content container if you want a custom class
-			var tooltipClass = '';
-			if ($(this).find('.tooltip-content').data('layout')) {
-				tooltipClass = ' class="' + $(this).find('.tooltip-content').data('layout') + '" ';
-			}
-		return '<div ' + tooltipClass + '>' + $(this).find('.tooltip-content').html() + '</div>';
+		content: function (callback) {
+			return $(this).find('.tooltip-content').html();
 		}
 	});
 };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4616,7 +4575,7 @@ var util = {
 
 module.exports = util;
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4738,7 +4697,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4826,7 +4785,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5163,7 +5122,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":51,"wolfy87-eventemitter":52}],51:[function(require,module,exports){
+},{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
  * eventie v1.0.5
  * event binding helper
@@ -5247,15 +5206,15 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( this );
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
- * EventEmitter v4.2.9 - git.io/ee
- * Oliver Caldwell
- * MIT license
+ * EventEmitter v4.2.11 - git.io/ee
+ * Unlicense - http://unlicense.org/
+ * Oliver Caldwell - http://oli.me.uk/
  * @preserve
  */
 
-(function () {
+;(function () {
     'use strict';
 
     /**
@@ -5721,7 +5680,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12510,14 +12469,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":55,"./lib/done.js":56,"./lib/es6-extensions.js":57,"./lib/node-extensions.js":58}],55:[function(require,module,exports){
+},{"./lib/core.js":56,"./lib/done.js":57,"./lib/es6-extensions.js":58,"./lib/node-extensions.js":59}],56:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12624,7 +12583,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":59}],56:[function(require,module,exports){
+},{"asap":60}],57:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12639,7 +12598,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":55,"asap":59}],57:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],58:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12749,7 +12708,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":55,"asap":59}],58:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],59:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12811,7 +12770,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":55,"asap":59}],59:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],60:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12928,4 +12887,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":49}]},{},[1]);
+},{"_process":50}]},{},[1]);

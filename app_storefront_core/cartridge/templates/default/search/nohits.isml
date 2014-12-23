@@ -25,7 +25,7 @@
 		<iscomment>render a link to execute the search with an alternative suggested search phrase</iscomment>
 		<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
 			<p>
-				<!---this isif is to keep the search suggestions consistent--->
+				<iscomment>this isif is to keep the search suggestions consistent</iscomment>
 				<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions')}">
 					${Resource.msg('nohits.didyoumean','search',null)}
 					<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}">

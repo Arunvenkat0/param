@@ -4,14 +4,18 @@
 <isinclude template="util/modules"/>
 
 <h2>${Resource.msg('verticalcarousel.featuredproducts','slots',null)}</h2>
-			
-<ul id="vertical-carousel" class="vertical-carousel">
-	<isloop items="${slotcontent.content}" var="product">
-		<li>
-			<div class="analytics capture-product-id"><isprint value="${product.getID()}"/></div>
-			<isproducttile product="${product}" showpricing="${true}"/>			
-		</li>
-	</isloop>
-</ul>
+
+<div id="vertical-carousel">
+	<ul>
+		<isloop items="${slotcontent.content}" var="product">
+			<li>
+				<div class="analytics capture-product-id"><isprint value="${product.getID()}"/></div>
+				<isproducttile product="${product}" showpricing="${true}"/>
+			</li>
+		</isloop>
+	</ul>
+	<a class="jcarousel-nav jcarousel-prev" href="${'#'}">Prev</a>
+	<a class="jcarousel-nav jcarousel-next" href="${'#'}">Next</a>
+</div>
 
 <!-- END: verticalcarousel -->

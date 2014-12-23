@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!--- TEMPLATENAME: coreshowselectedstore.isml --->
+<iscomment> TEMPLATENAME: coreshowselectedstore.isml </iscomment>
 <isscript>
 	var store : Store = dw.catalog.StoreMgr.getStore(pdict.CurrentHttpParameterMap.storeId);
 </isscript>

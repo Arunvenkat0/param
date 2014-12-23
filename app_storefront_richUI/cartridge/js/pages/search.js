@@ -175,9 +175,7 @@ function initializeEvents() {
 	});
 
 	// handle hash change
-	$(window).hashchange(function () {
-		updateProductListing();
-	});
+	window.onhashchange = updateProductListing;
 }
 
 exports.init = function () {

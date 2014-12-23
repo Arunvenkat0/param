@@ -131,7 +131,7 @@
 	    				<div class="form-caption">(<isprint value="${shippingMethod.description}"/>)</div>
 	    			</isif>				    			
     			
-					<!---  Display approaching shipping promotional discounts. --->
+					<iscomment>  Display approaching shipping promotional discounts. </iscomment>
 				    <ul class="shipping-promos"> 
 					    <isloop items="${DiscountPlan.getApproachingShippingDiscounts(shipment, shippingMethod)}" var="shippingDiscount">
 					        <li>${Resource.msg('approachingpromo.purchase','checkout',null)} <isprint value="${shippingDiscount.getDistanceFromConditionThreshold()}" /> ${Resource.msg('approachingpromo.more','checkout',null)} ${Resource.msg('approachingpromo.receive','checkout',null)}: <isprint value="${shippingDiscount.getDiscount().getPromotion().getCalloutMsg()}" encoding="off" /><br/>

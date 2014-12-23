@@ -43,28 +43,23 @@
 		.product-tile {
 			min-height: 0;
 		}
-		.jcarousel-prev {
-			background: url('../images/interface/icon-vertical-carousel-prev.png') left top no-repeat;
+		.jcarousel-nav {
+			color: $pacific-blue;
 			cursor: pointer;
-			height: 12px;
+			font-size: 0.9em;
+			font-weight: 700;
 			position: absolute;
-			bottom: 20px;
 			right: 0;
-			width: 52px;
-			z-index: 999;
+			text-transform: uppercase;
+			&.inactive {
+				display: none;
+			}
+		}
+		.jcarousel-prev {
+			bottom: 20px;
 		}
 		.jcarousel-next {
-			background: url('../images/interface/icon-vertical-carousel-next.png') left top no-repeat;
-			cursor: pointer;
-			height: 12px;
-			position: absolute;
-			bottom: 0px;
-			right: 0;
-			width: 52px;
-			z-index: 999;
-		}
-		.jcarousel-prev-disabled {
-			display: none !important;
+			bottom: 0;
 		}
 	}
 	.select {

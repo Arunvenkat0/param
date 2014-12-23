@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!--- TEMPLATENAME: functions.isml --->
+<iscomment> TEMPLATENAME: functions.isml </iscomment>
 
-<!---  Function for filtering DOM id's removing white spaces. Only characters allowed are "A-Z" "a-z" "0-9" "-" and "_" --->
+<iscomment>  Function for filtering DOM id's removing white spaces. Only characters allowed are "A-Z" "a-z" "0-9" "-" and "_" </iscomment>
 <isscript>
 	function cleanupID(s) {
 		if(s!=null)

@@ -759,7 +759,7 @@
 			width: 540px;
 		}
 		#secondary {
-			width: 210px;
+			width: 190px;
 		}
 	}
 	.html-slot-container img, .bottom-banner-cell img {
@@ -885,6 +885,11 @@
 			}
 		}
 	}
+	.mini-cart-item-word{
+		span{
+			display:none;
+		}
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -908,4 +913,5 @@
 	#preferred-store-panel input[type="text"] {
 		width: 49.5966%;
 	}
+
 }

@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!--- TEMPLATENAME: paymentmethods.isml --->
+<iscomment> TEMPLATENAME: paymentmethods.isml </iscomment>
 <isinclude template="util/modules"/>
 <isif condition="${pdict.OrderTotal > 0}">
 	<fieldset>
@@ -19,7 +19,8 @@
 					<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
 					<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/>:</label>
 
-					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}"/>
+					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" 
+						<isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
 				</div>
 
 			</isloop>

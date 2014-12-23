@@ -6,7 +6,7 @@
 	<iscomment>addresses are sorted, preferred first, than alphabetic </iscomment>
 	
 	<isif condition="${pdict.Status != null && pdict.Status.isError()}">				 
-	 	<!--- Use the error code value to build an appropriate error message --->
+	 	<iscomment> Use the error code value to build an appropriate error message </iscomment>
 		<span class="form-error">
 			<isprint value="${Resource.msg('addressdetails.' + pdict.Status.code, 'account',null)}"/>
 		</span>

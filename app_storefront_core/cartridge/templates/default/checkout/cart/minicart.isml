@@ -36,7 +36,7 @@
 		<a href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}" class="mini-cart-link">
 			<span class="mini-cart-label">${Resource.msg('minicart.label','checkout',null)}</span>
 			(<isprint value="${cartQty}" formatter="##" />)
-			<span class="mini-cart-item-word"><isprint value="${item_word}"/></span>
+			<span class="mini-cart-item-word"><isprint value="${item_word}"/><span>${Resource.msg('minicart.comma','checkout',null)}</span></span>
 			<span class="mini-cart-total-label">${Resource.msg('minicart.total','checkout',null)} <isprint value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(true).add(pdict.Basket.giftCertificateTotalPrice)}"/></span>
 		</a>
 	<iselse/>
