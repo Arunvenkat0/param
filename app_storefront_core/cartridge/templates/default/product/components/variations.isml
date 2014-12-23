@@ -45,6 +45,7 @@
 					<span class="label">Select <isprint value="${VA.displayName}"/></span>
 					<div class="value">
 						<ul class="swatches ${vaId.toLowerCase()}">
+							<isset name="selectedSwatch" value="${''}" scope="page"/>
 							<isloop items="${VAVALS}" var="VV">
 								<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 									<isscript>
@@ -56,7 +57,7 @@
 											linkURL = PVM.urlSelectVariationValue('Product-Variation', VA, VV),
 											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '';
 										if (isSelected) {
-											var selectedSwatchValue = displayValue;
+											selectedSwatch = displayValue;
 											linkURL = PVM.urlUnselectVariationValue('Product-Variation', VA);
 											selectedVariants.push(VA.ID + '-' + VV.value);
 										}
@@ -78,13 +79,13 @@
 									</li>
 								</isif>
 							</isloop>
-							<isif condition="${selectedSwatchValue}">
-								<li class="selected-value"><isprint value="${selectedSwatchValue}"/></li>
+							<isif condition="${selectedSwatch}">
+								<li class="selected-value"><isprint value="${selectedSwatch}"/></li>
 							</isif>
 						</ul>
 
 						<iscomment>Size Chart link</iscomment>
-						<isif condition="${vaId != 'color'}">
+						<isif condition="${vaId != 'color' && !sizeChartShown}">
 							<isscript>
 								// get category from products primary category
 								var category = pdict.Product.primaryCategory,
@@ -103,7 +104,7 @@
 									}
 								}
 							</isscript>
-							<isif condition="${!empty(sizeChartID) && !sizeChartShown}">
+							<isif condition="${!empty(sizeChartID)}">
 								<div class="size-chart-link">
 									<a href="${URLUtils.url('Page-Show','cid', sizeChartID)}" target="_blank" title="${Resource.msg('variations.sizechart', 'product', null)}">${Resource.msg('variations.sizechart', 'product', null)}</a>
 								</div>
