@@ -738,6 +738,25 @@
 	#preferred-store-panel input[type="text"] {
 		width: 49.5966%;
 	}
+
+	.pt_content-search-result{
+		.folder-content-list{
+			li{
+				float: none;
+				width: 100%;
+				clear: both;
+			}
+		}
+		.pagination{
+			clear: both;
+			float: none;
+			.results-hits{
+				float:none;
+			}				
+		}		
+	}
+	
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 959px) {
@@ -890,6 +909,7 @@
 			display:none;
 		}
 	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -913,5 +933,22 @@
 	#preferred-store-panel input[type="text"] {
 		width: 49.5966%;
 	}
+
+	.pt_content-search-result{
+		.folder-content-list{
+			li{
+				float: none;
+				width: 100%;
+				clear: both;
+			}
+		}
+		.pagination{
+			clear: both;
+			float: none;
+			.results-hits{
+				float:none;
+			}				
+		}		
+	}	
 
 }
