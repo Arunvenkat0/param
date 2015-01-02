@@ -1,54 +1,54 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isscript>
 	var avm = pdict.Product.availabilityModel;
-	pdict.available = avm.availabilityStatus==dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK 
-					&& avm.inventoryRecord != null 
+	pdict.available = avm.availabilityStatus==dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK
+					&& avm.inventoryRecord != null
 					&& avm.inventoryRecord.stockLevel.available;
-</isscript>	
+</isscript>
 	<div class="product-set-image">
 		<isset name="smImg" value="${pdict.Product.getImages('small')[0]}" scope="page" />
 		<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}" title="${smImg.title}" />
 	</div>
-	
+
 	<div class="product-set-details">
 		<h1 class="product-name">
 			<a class="item-name" href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">
 				<isprint value="${pdict.Product.name}"/>
 			</a>
 		</h1>
-		
+
 		<div class="product-number">
 			${Resource.msg('product.item','product',null)} <isprint value="${ pdict.Product.ID }"/>
 		</div>
-		
+
 		<div class="availability">
 			<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
 			<span class="value"><isinclude template="product/components/availability"/></span>
 		</div>
-		
+
 		<isif condition="${pdict.isSet}">
 			<isinclude template="product/components/promotions"/>
 		</isif>
-		
+
 		<isif condition="${pdict.isBundle}">
 			<div class="attribute">
 				<span class="label">${Resource.msg('global.quantity','locale',null)}: </span>
 				<span class="value"><isprint value="${pdict.ProductSet.getBundledProductQuantity(pdict.Product)}" /></span>
 			</div>
 		</isif>
-		
+
 		<isif condition="${pdict.isSet}">
-			<isinclude template="product/components/variationsproductset"/>
+			<isinclude template="product/components/variations"/>
 		</isif>
-		
+
 		<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 		<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
-		
-		<isinclude template="product/components/group"/>			
+
+		<isinclude template="product/components/group"/>
 
 		<isinclude template="product/components/options"/>
-		
-	</div>	
+
+	</div>
 	<isif condition="${pdict.isSet}">
 		<isscript>
 			// ensure a unique form name and make the name reuseable, because the call to
