@@ -2,6 +2,16 @@
 
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
+
+	// command line arguments
+	var config = {};
+	// mocha ui tests
+	config.suite = grunt.option('suite') || '*';
+	if (config.suite === 'all') { config.suite === '*'; }
+	config.reporter = grunt.option('reporter') || 'spec';
+	config.timeout = grunt.option('timeout') || 10000;
+	config.port = grunt.option('port') || 7000;
+
 	grunt.initConfig({
 		watch: {
 			sass: {
@@ -43,6 +53,22 @@ module.exports = function (grunt) {
 				options: {
 					watch: true
 				}
+			},
+			browserTest: {
+				files: [{
+					expand: true,
+					cwd: 'test/unit/browser/',
+					src: ['*.js', '!*.out.js'],
+					dest: 'test/unit/browser/dist'
+				}]
+			}
+		},
+		connect: {
+			browserTest: {
+				options: {
+					port: config.port,
+					base: 'test/unit/browser'
+				}
 			}
 		},
 		jscs: {
@@ -57,10 +83,28 @@ module.exports = function (grunt) {
 				jshintrc: true
 			},
 			target: ['app_storefront_richUI/cartridge/js/**/*.js']
+		},
+		mochaTest: {
+			ui: {
+				options: {
+					reporter: config.reporter,
+					timeout: config.timeout
+				},
+				src: ['test/ui/' + config.suite + '/**/*.js', '!test/ui/webdriver/*']
+			},
+			unit: {
+				options: {
+					reporter: config.reporter,
+					timeout: config.timeout
+				},
+				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
+			}
 		}
 	});
 
 	grunt.registerTask('scss', ['sass', 'autoprefixer']);
 	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
+	grunt.registerTask('ui-test', ['mochaTest:ui']);
+	grunt.registerTask('unit-test', ['browserify:browserTest', 'connect:browserTest', 'mochaTest:unit'])
 }
