@@ -26,7 +26,7 @@
 		selectedVariants = [],
 		selectedVariant;
 </isscript>
-<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
+<isif condition="${pdict.Product.variant || pdict.Product.variationGroup || pdict.Product.master}">
 	<div class="product-variations">
 		<h2 class="visually-hidden">Variations</h2>
 		<iscomment>

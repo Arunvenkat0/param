@@ -211,7 +211,7 @@ function initializeGrid () {
 var bonusProductsView = {
 	/**
 	 * @function
-	 * @description Opens the bonus product quick view dialog
+	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
@@ -224,15 +224,23 @@ var bonusProductsView = {
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
 			},
-			open: function () {
+			callback: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').hide();
+				// @TODO this action relies on the fact that variation attributes that belong
+				// variationGroup is not selected
+				// There should be a flag set in variations to indicate attributes that belong
+				// to a variationGroup instead.
+				$('.bonus-product-item .swatches').each(function (index, element) {
+					if ($('.selected', element).length > 0) {
+						$('li', element).not('.selected').hide();
+					}
+				});
 			}
 		});
 	},
 	/**
 	 * @function
-	 * @description Loads the list of bonus products into quick view dialog
+	 * @description
 	 */
 	loadBonusOption: function () {
 		var	self = this,
