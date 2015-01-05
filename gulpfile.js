@@ -1,14 +1,19 @@
-var gulp = require('gulp'),
+'use strict';
+
+var browserify = require('browserify'),
+	connect = require('gulp-connect'),
+	gulp = require('gulp'),
 	gutil = require('gulp-util'),
-	sass = require('gulp-sass'),
-	prefix = require('gulp-autoprefixer'),
-	browserify = require('browserify'),
-	watchify = require('watchify'),
-	source = require('vinyl-source-stream'),
-	xtend = require('xtend'),
 	jscs = require('gulp-jscs'),
 	jshint = require('gulp-jshint'),
-	stylish = require('jshint-stylish');
+	minimist = require('minimist'),
+	mocha = require('gulp-mocha'),
+	sass = require('gulp-sass'),
+	source = require('vinyl-source-stream'),
+	stylish = require('jshint-stylish'),
+	prefix = require('gulp-autoprefixer'),
+	watchify = require('watchify'),
+	xtend = require('xtend');
 
 var paths = {
 	scss: {
@@ -73,6 +78,64 @@ gulp.task('jshint', function () {
 	return gulp.src('./app_storefront_richUI/cartridge/js/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
+});
+
+gulp.task('ui-test', function () {
+	var opts = minimist(process.argv.slice(2));
+	// default option to all
+	var suite = opts.suite || '*';
+	if (suite === 'all') {
+		suite = '*';
+	}
+	// default reporter to spec
+	var reporter = opts.reporter || 'spec';
+	// default timeout to 10s
+	var timeout = opts.timeout || 10000;
+	return gulp.src(['test/ui/' + suite + '/**/*.js', '!test/ui/webdriver/*'], {read: false})
+		.pipe(mocha({
+			reporter: reporter,
+			timeout: timeout
+		}));
+});
+
+var transform = require('vinyl-transform');
+var rename = require('gulp-rename');
+var filter = require('gulp-filter');
+gulp.task('test-browserify', function () {
+	var browserified = transform(function(filename) {
+		var b = browserify(filename);
+		return b.bundle();
+	});
+
+	return gulp.src(['test/unit/browser/*.js', '!test/unit/browser/*.out.js'])
+		.pipe(browserified)
+		.pipe(rename(function (path) {
+			path.dirname += '/dist';
+		}))
+		.pipe(gulp.dest('test/unit/browser'));
+});
+
+gulp.task('test-connect', function () {
+	var opts = minimist(process.argv.slice(2));
+	var port = opts.port || 7000;
+	return connect.server({
+		root: 'test/unit/browser',
+		port: port
+	});
+});
+gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
+	var opts = minimist(process.argv.slice(2));
+	var reporter = opts.reporter || 'spec';
+	var timeout = opts.timeout || 10000;
+	var suite = opts.suite || '*';
+	gulp.src(['test/unit/' + suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*'], {read: false})
+		.pipe(mocha({
+			reporter: reporter,
+			timeout: timeout
+		}))
+		.on('end', function () {
+			connect.serverClose();
+		})
 });
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {
