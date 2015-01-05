@@ -121,15 +121,16 @@ function initializeEvents() {
 	$('.menu-toggle').on('click', function () {
 		$('#wrapper').toggleClass('menu-active');
 	});
-	$('.menu-category li').on('click', function (e) {
-		e.stopPropagation();
-		var $this = $(e.delegateTarget);
-		$this.siblings('li').removeClass('active');
-		$this.toggleClass('active');
+	$('.menu-category li .menu-item-toggle').on('click', function (e) {
+		e.preventDefault();
+		var $parentLi = $(e.target).closest('li');
+		$parentLi.siblings('li').removeClass('active');
+		$parentLi.toggleClass('active');
+		$(e.target).toggleClass('fa-chevron-right fa-chevron-up');
 		// if there are nested menu, don't navigate away
-		if ($this.has('ul').length) {
-			e.preventDefault();
-		}
+		// if ($this.has('ul').length) {
+		// 	e.preventDefault();
+		// }
 	});
 }
 /**

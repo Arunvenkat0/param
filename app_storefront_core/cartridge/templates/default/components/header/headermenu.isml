@@ -31,7 +31,11 @@
 		<li>
 			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
 				<isprint value="${topCat.getDisplayName()}"/>
+				<isif condition="${getSubCategoriesLayout(topCat).hasContent}">
+					<i class="menu-item-toggle fa fa-chevron-right"></i>
+				</isif>
 			</a>
+
 			<iscategoryflyout category="${topCat}"/>
 		</li>
 	</isloop>
