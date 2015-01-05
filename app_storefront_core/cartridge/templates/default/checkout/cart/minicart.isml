@@ -13,7 +13,7 @@
 
 <iscomment> the mini cart total which is always visible</iscomment>
 <div class="mini-cart-total">
-	<span class="mini-cart-label"><span class="minicart-icon icon-cart2"></span><span class="visually-hidden">${Resource.msg('minicart.label','checkout',null)}</span>
+	<span class="mini-cart-label"><i class="minicart-icon fa fa-shopping-cart"></i><span class="visually-hidden">${Resource.msg('minicart.label','checkout',null)}</span>
 	<isif condition="${(pdict.Basket != null) && (pdict.Basket.productLineItems.size() + pdict.Basket.giftCertificateLineItems.size() > 0 )}">
 		<isscript>
 			// calculate the total number of items in the cart by adding quantities together
