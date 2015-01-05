@@ -22,13 +22,13 @@
 
 <iscomment>
 	Provides an easy to exchange flyout renderer
-	
+
 	category 		: the category of which the menu flyout will be rendered
 
 </iscomment>
 <ismodule template="components/header/categoryflyout.isml"
 	name="categoryflyout"
-	attribute="category"	
+	attribute="category"
 />
 
 <iscomment>
@@ -48,6 +48,7 @@
 	attribute="showpricing"
 	attribute="showpromotion"
 	attribute="showrating"
+	attribute="showcompare"
 />
 
 <iscomment>

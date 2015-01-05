@@ -25,21 +25,21 @@
 				</div>
 			</isif>
 
-			<div class="list-table-header">
+			<div class="list-share">
 				<isif condition="${pdict.ProductList.public}">
-					<button type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
+					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
 						${Resource.msg('giftregistry.makeregprivate','account',null)}
 					</button>
 				<iselse/>
-					<button type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
+					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
 						${Resource.msg('giftregistry.makeregpublic','account',null)}
 					</button>
 				</isif>
 				<isif condition="${pdict.ProductList.public}">
-					<a class="button send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}"  href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.ID,'source','registry')}">
+					<a class="button send-to-friend share-option" title="${Resource.msg('product.sendfriend','product',null)}"  href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.ID,'source','registry')}">
 						${Resource.msg('account.sendlisttofriend','account',null)}
 					</a>
-					<p>${Resource.msg('registry.copypaste','account',null)}
+					<p class="share-option">${Resource.msg('registry.copypaste','account',null)}
 						<a href="${URLUtils.http('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}" title="${Resource.msg('registry.copypaste','account',null)}">
 							<isprint value="${URLUtils.http('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}"/>
 						</a>
