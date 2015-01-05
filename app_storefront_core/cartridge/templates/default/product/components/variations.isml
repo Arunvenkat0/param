@@ -62,11 +62,11 @@
 											selectedVariants.push(VA.ID + '-' + VV.value);
 										}
 									</isscript>
-									<li class="${(!selectable ? 'unselectable' : '') + (isSelected ? ' selected' : '')}">
+									<li class="${(!selectable ? 'unselectable' : 'available') + (isSelected ? ' selected' : '')}">
 										<isif condition="${selectable}">
 											<a class="swatchanchor" href="${linkURL + qsAppend}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 												<isif condition="${vaId == 'color' && !empty(swImage)}">
-													<img src="${swImage.getURL()}">
+													<img src="${swImage.getURL()}" title="${displayValue}">
 												<iselse/>
 													<isprint value="${displayValue}"/>
 												</isif>
