@@ -82,9 +82,9 @@ function updateSummary() {
 	var remain = maxItems - selectedList.length;
 	$bonusProductList.find('.bonus-items-available').text(remain);
 	if (remain <= 0) {
-		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+		$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 	} else {
-		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
+		$bonusProductList.find('.select-bonus-item').removeAttr('disabled');
 	}
 }
 
@@ -96,7 +96,7 @@ function initializeGrid () {
 	bliUUID = bliData.uuid;
 
 	if (bliData.itemCount >= maxItems) {
-		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+		$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
@@ -124,13 +124,13 @@ function initializeGrid () {
 		e.preventDefault();
 	})
 	.on('change', '.input-text', function () {
-		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
+		$bonusProductList.find('.select-bonus-item').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
-	.on('click', '.button-select-bonus', function (e) {
+	.on('click', '.select-bonus-item', function (e) {
 		e.preventDefault();
 		if (selectedList.length >= maxItems) {
-			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+			$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 			$bonusProductList.find('.bonus-items-available').text('0');
 			return;
 		}
@@ -142,7 +142,7 @@ function initializeGrid () {
 			qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
 		if (qty > maxItems) {
-			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+			$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 			form.find('.quantity-error').text(Resources.BONUS_PRODUCT_TOOMANY);
 			return;
 		}
