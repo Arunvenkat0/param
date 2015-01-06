@@ -6,8 +6,7 @@
 	<isinclude template="util/reporting/ReportSearch.isml"/>
 		<isif condition="${!(pdict.CurrentHttpParameterMap.q == '')}">
 			<h1>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
-		<iselse>
-			<h1>[heading - content/articles]</h2>			
+		<iselse>		
 		</isif>
 	
        <isslot id="folder-main-slot" description="Library Folder Slot" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>

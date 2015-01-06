@@ -19,6 +19,7 @@
     <folder folder-id="about-us">
         <display-name xml:lang="x-default">About Demandware</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>0.0</position>
         <page-attributes/>
@@ -77,6 +78,7 @@
     <folder folder-id="customer-service">
         <display-name xml:lang="x-default">Customer Service</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>1.0</position>
         <page-attributes/>
@@ -231,7 +233,6 @@
         <display-name xml:lang="x-default">Top Nav</display-name>
         <description xml:lang="x-default">Holds all the articles</description>
         <online-flag>false</online-flag>
-        <template>content/contentLanding</template>
         <parent>root</parent>
         <page-attributes/>
     </folder>
