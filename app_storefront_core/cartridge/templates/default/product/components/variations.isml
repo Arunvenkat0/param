@@ -30,7 +30,7 @@
 	}
 </isscript>
 <isif condition="${pdict.Product.variant || pdict.Product.variationGroup || pdict.Product.master}">
-	<div class="product-variations">
+	<div class="product-variations" data-attributes="${JSON.stringify(selectedAtts)}">
 		<h2 class="visually-hidden">Variations</h2>
 		<iscomment>
 			Filter out variation attribute values with no orderable variants.

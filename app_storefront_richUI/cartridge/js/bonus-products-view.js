@@ -34,6 +34,30 @@ function getBonusProducts() {
 	}
 	return o;
 }
+
+var selectedItemTemplate = function (data) {
+	var attributes = '';
+	for (var attrID in data.attributes) {
+		var attr = data.attributes[attrID];
+		attributes += '<li data-attribute-id="' + attrID + '">\n';
+		attributes += '<span class="display-name">' + attr.displayName + '</span>: ';
+		attributes += '<span class="display-value">' + attr.displayValue + '</span>\n';
+		attributes += '</li>';
+	}
+	attributes += '<li class="item-qty">\n';
+	attributes += '<span class="display-name">Qty</span>: ';
+	attributes += '<span class="display-value">' + data.qty + '</span>';
+	return [
+		'<li class="selected-bonus-item" data-uuid="' + data.uuid + '" data-pid="' + data.pid + '">',
+		'<i class="remove-link fa fa-remove" title="Remove this product" href="#"></i>',
+		'<div class="item-name">' + data.name + '</div>',
+		'<ul class="item-attributes">',
+		attributes,
+		'<ul>',
+		'<li>',
+	].join('\n');
+};
+
 /**
  * @private
  * @function
@@ -49,24 +73,9 @@ function updateSummary() {
 		var i, len;
 		for (i = 0, len = selectedList.length; i < len; i++) {
 			var item = selectedList[i];
-			var li = itemTemplate.clone().removeClass('selected-item-template').addClass('selected-bonus-item');
-			li.data('uuid', item.uuid).data('pid', item.pid);
-			li.find('.item-name').html(item.name);
-			li.find('.item-qty').html(item.qty);
-			var ulAtts = li.find('.item-attributes');
-			var attTemplate = ulAtts.children().first().clone();
-			ulAtts.empty();
-			var att;
-			for (att in item.attributes) {
-				var attLi = attTemplate.clone();
-				attLi.addClass(att);
-				attLi.children('.display-name').html(item.attributes[att].displayName);
-				attLi.children('.display-value').html(item.attributes[att].displayValue);
-				attLi.appendTo(ulAtts);
-			}
-			li.appendTo(ulList);
+			var li = selectedItemTemplate(item);
+			$(li).appendTo(ulList);
 		}
-		ulList.children('.selected-bonus-item').show();
 	}
 
 	// get remaining item count
@@ -143,7 +152,7 @@ function initializeGrid () {
 			pid: form.find('input[name="pid"]').val(),
 			qty: qty,
 			name: detail.find('.product-name').text(),
-			attributes: detail.find('.product-variations').data('current'),
+			attributes: detail.find('.product-variations').data('attributes'),
 			options: []
 		};
 

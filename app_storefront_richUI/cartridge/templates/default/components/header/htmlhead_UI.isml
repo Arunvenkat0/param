@@ -7,6 +7,7 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>THIRD PARTY STYLESHEETS STYLING</iscomment>
 <link href="${URLUtils.staticURL('/lib/jquery/ui/jquery-ui.min.css')}" type="text/css" rel="stylesheet" />
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="${URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '/pwr/engine/pr_styles_review.css')}" type="text/css" rel="stylesheet" />
 
 <!-- jQuery -->
