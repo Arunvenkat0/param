@@ -220,21 +220,19 @@ var bonusProductsView = {
 			target: $bonusProduct,
 			url: url,
 			options: {
+				position: {
+					my: 'center',
+					at: 'top',
+					of: window
+				},
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
 			},
 			callback: function () {
 				initializeGrid();
-				// @TODO this action relies on the fact that variation attributes that belong
-				// variationGroup is not selected
-				// There should be a flag set in variations to indicate attributes that belong
-				// to a variationGroup instead.
-				$('.bonus-product-item .swatches').each(function (index, element) {
-					if ($('.selected', element).length > 0) {
-						$('li', element).not('.selected').hide();
-					}
-				});
+				// hide swatches that are not selected or not part of a Product Variation Group
+				$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
 			}
 		});
 	},
