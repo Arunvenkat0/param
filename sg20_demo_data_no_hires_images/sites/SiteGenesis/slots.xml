@@ -192,7 +192,7 @@ It all started with a series of observations: eCommerce merchandising and market
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
-                <body xml:lang="x-default">&lt;div&gt;
+                <body xml:lang="x-default">&lt;div class="folder-slot"&gt;
 &lt;h2&gt;
 Customer Service
 &lt;/h2&gt;

@@ -972,6 +972,16 @@ div.error {
   margin: 1em;
   padding: 0.5em 4em; }
 
+.folder-slot {
+  border-style: solid;
+  border-color: #019328;
+  border-width: 1px;
+  background-color: white;
+  padding: 0.5em 0.5em; }
+  .folder-slot h2 {
+    color: #019328;
+    margin: 0.5em 0em; }
+
 #header {
   height: 79px;
   position: relative; }

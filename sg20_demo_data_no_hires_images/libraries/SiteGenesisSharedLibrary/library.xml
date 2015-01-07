@@ -3356,6 +3356,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 
     <content content-id="super-save-shipping">
         <display-name xml:lang="x-default">Super Saver Shipping</display-name>
+        <description xml:lang="x-default">Super Saver Shipping Savings on the shipment of Video Games.</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
@@ -3438,16 +3439,6 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="terms"/>
-        </folder-links>
-    </content>
-
-    <content content-id="testcontent">
-        <display-name xml:lang="x-default">Test Content</display-name>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="testfolder"/>
         </folder-links>
     </content>
 

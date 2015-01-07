@@ -89,3 +89,16 @@
 	margin: 1em;
 	padding: 0.5em 4em;
 }
+
+.folder-slot{
+	border-style: solid;
+	border-color:  $islamic-green;
+	border-width: 1px;
+	background-color: white;	
+	padding: 0.5em 0.5em;
+	
+	h2{
+		color: 	$islamic-green;
+		margin: 0.5em 0em;
+	}
+}
