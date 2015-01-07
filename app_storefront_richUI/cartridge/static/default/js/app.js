@@ -122,15 +122,16 @@ function initializeEvents() {
 	$('.menu-toggle').on('click', function () {
 		$('#wrapper').toggleClass('menu-active');
 	});
-	$('.menu-category li').on('click', function (e) {
-		e.stopPropagation();
-		var $this = $(e.delegateTarget);
-		$this.siblings('li').removeClass('active');
-		$this.toggleClass('active');
+	$('.menu-category li .menu-item-toggle').on('click', function (e) {
+		e.preventDefault();
+		var $parentLi = $(e.target).closest('li');
+		$parentLi.siblings('li').removeClass('active');
+		$parentLi.toggleClass('active');
+		$(e.target).toggleClass('fa-chevron-right fa-chevron-up');
 		// if there are nested menu, don't navigate away
-		if ($this.has('ul').length) {
-			e.preventDefault();
-		}
+		// if ($this.has('ul').length) {
+		// 	e.preventDefault();
+		// }
 	});
 }
 /**
@@ -527,66 +528,55 @@ var bonusProductsView = {
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
-		dialog.create({
+		dialog.open({
 			target: $bonusProduct,
+			url: url,
 			options: {
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
-			}
-		});
-
-		// load the products then show
-		ajax.load({
-			target: $bonusProduct,
-			url: url,
-			callback: function () {
-				$bonusProduct.dialog('open');
+			},
+			open: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
+				$('#bonus-product-dialog .emptyswatch').hide();
 			}
 		});
-
-	},
-	/**
-	 * @function
-	 * @description Closes the bonus product quick view dialog
-	 */
-	close: function () {
-		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
 	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	loadBonusOption: function () {
-		var	$bonusDiscountContainer = $('.bonus-discount-container');
+		var	self = this,
+			$bonusDiscountContainer = $('.bonus-discount-container').clone();
 		if ($bonusDiscountContainer.length === 0) { return; }
 
-		dialog.create({
-			target: $bonusDiscountContainer,
+		// get the html from minicart, then trash it
+		$('.bonus-discount-container').remove();
+
+		dialog.open({
+			html: $bonusDiscountContainer.html(),
 			options: {
-				height: 'auto',
-				width: 350,
-				dialogClass: 'quickview',
-				title: Resources.BONUS_PRODUCT
+				width: 400,
+				title: Resources.BONUS_PRODUCT,
+				buttons: [{
+					text: Resources.SELECT_BONUS_PRODUCTS,
+					click: function () {
+						var uuid = $('.bonus-product-promo').data('lineitemid'),
+							url = util.appendParamsToUrl(Urls.getBonusProducts, {
+								bonusDiscountLineItemUUID: uuid,
+								source: 'bonus'
+							});
+						$(this).dialog('close');
+						self.show(url);
+					}
+				}, {
+					text: Resources.NO_THANKS,
+					click: function () {
+						$(this).dialog('close');
+					}
+				}]
 			}
-		});
-		$bonusDiscountContainer.dialog('open');
-
-		// add event handlers
-		$bonusDiscountContainer.on('click', '.select-bonus-btn', function (e) {
-			e.preventDefault();
-			var uuid = $bonusDiscountContainer.data('lineitemid');
-			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
-				bonusDiscountLineItemUUID: uuid,
-				source: 'bonus'
-			});
-
-			$bonusDiscountContainer.dialog('close');
-			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function () {
-			$bonusDiscountContainer.dialog('close');
 		});
 	},
 };
@@ -933,7 +923,6 @@ var dialog = {
 		// create the dialog
 		this.$container = $target;
 		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.$container;
 	},
 	/**
 	 * @function
@@ -945,7 +934,7 @@ var dialog = {
 	open: function (options) {
 		// close any open dialog
 		this.close();
-		this.$container = this.create(options);
+		this.create(options);
 		this.replace(options);
 	},
 	/**
@@ -969,16 +958,19 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
 				callback: function (response) {
 					this.openWithContent(response);
+					callback();
 				}.bind(this)
 			});
 		} else if (options.html) {
 			this.openWithContent(options.html);
+			callback();
 		}
 	},
 	/**
@@ -1042,7 +1034,7 @@ var dialog = {
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy').remove();
+			$(this).dialog('close');
 		}
 	}
 };
@@ -1177,13 +1169,14 @@ var minicart = {
 		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
-		$productList.children().not(':first').addClass('collapsed');
-		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
+		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('icon-arrow-down8');
+		$('.mini-cart-product').not(':first').addClass('collapsed')
+			.find('.mini-cart-toggle').addClass('icon-arrow-right8');
 
-		$productList.toggledList({
-			toggleClass: 'collapsed',
-			triggerSelector: '.mini-cart-toggler',
-			eventName: 'click'});
+		$('.mini-cart-toggle').on('click', function (e) {
+			$(this).toggleClass('icon-arrow-down8 icon-arrow-right8');
+			$(this).closest('.mini-cart-product').toggleClass('collapsed');
+		});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -1198,8 +1191,6 @@ var minicart = {
 			timer.clear();
 			timer.start(30, this.close.bind(this));
 		}.bind(this));
-
-		this.$el.find('.mini-cart-close').on('click', this.close);
 	},
 	/**
 	 * @function
@@ -2428,24 +2419,32 @@ module.exports = function () {
 var dialog = require('../../dialog'),
 	util = require('../../util');
 
+var zoomMediaQuery = matchMedia('(min-width: 960px)');
+
 /**
  * @description Enables the zoom viewer on the product detail page
+ * @param zmq {Media Query List}
  */
-var loadZoom = function () {
+var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
+		zmq = zmq || zoomMediaQuery,
 		hiresUrl;
 
-	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
+		// remove zoom
+		$imgZoom.trigger('zoom.destroy');
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
 
-	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
 		$imgZoom.zoom({
 			url: hiresUrl
 		});
 	}
 };
+
+zoomMediaQuery.addListener(loadZoom);
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag
@@ -2777,7 +2776,7 @@ var updateContent = function (href) {
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
-	$pdpMain.on('hover', '.swatchanchor', function () {
+	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
 			$imgZoom = $pdpMain.find('.main-image'),
 			$mainImage = $pdpMain.find('.primary-image');
@@ -2904,7 +2903,7 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
@@ -3180,7 +3179,7 @@ var addProductToCart = require('./product/addToCart'),
 
 exports.init = function () {
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});
@@ -3347,6 +3346,10 @@ var makeUrl = function (url, source, productListID) {
 	return url;
 };
 
+var removeParam = function (url) {
+	return url.substring(0, url.indexOf('?'));
+}
+
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
@@ -3363,11 +3366,8 @@ var quickview = {
 
 		product.initializeEvents();
 
-		// remove any param
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
 		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
-			return url === qvUrl;
+			return removeParam(url) === removeParam(qvUrl);
 		});
 
 		// hide the buttons on the compare page or when there are no other products

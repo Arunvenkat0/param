@@ -2,7 +2,7 @@
 <form role="search" action="${URLUtils.url('Search-Show')}" method="get" name="simpleSearch">
 	<fieldset>
 		<legend class="visually-hidden">Search Catalog</legend>
-		<label class="icon-search2" for="q"><span class="visually-hidden">${Resource.msg('simplesearch.searchlabel','search',null)}</span></label>
+		<label class="fa fa-search" for="q"><span class="visually-hidden">${Resource.msg('simplesearch.searchlabel','search',null)}</span></label>
 		<input type="text" id="q" name="q" value=""  placeholder="${Resource.msg('simplesearch.searchtext','search',null)}" />
 	</fieldset>
 </form>
