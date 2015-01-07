@@ -1632,68 +1632,6 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         </custom-attributes>
     </content>
 
-    <content content-id="contact-us-details">
-        <display-name xml:lang="x-default">Contact Us Details</display-name>
-        <description xml:lang="x-default">Interested in getting more information about Demandware and our On-Demand eCommerce solution? Here is information on office locations and directions to our locations.</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h5&gt;Connect with Demandware&lt;/h5&gt;&#13;
-				&lt;div id="main_content_inner"&gt;&#13;
-					&lt;p&gt;Interested in getting more information about Demandware and our On-Demand eCommerce solution?&lt;br /&gt;&#13;
-					&lt;a href="$url('Page-Show', 'cid', 'contactform')$"&gt;Fill out our contact form to speak to us now!&lt;/a&gt;&lt;/p&gt;&#13;
-					&lt;div class="sep"&gt;&lt;/div&gt;&#13;
-					&#13;
-					&lt;h4 style="margin-top: 0;"&gt;Office Locations&lt;/h4&gt;&#13;
-					&#13;
-					&lt;address&gt;&#13;
-						&lt;strong&gt;Boston Area Office: Headquarters&lt;/strong&gt;&lt;br /&gt;&#13;
-						10 Presidential Way, Woburn, MA 01801 USA&lt;br /&gt;&#13;
-						Main +1 (888) 553 XXXX : Fax +1 (781) 756 3747&#13;
-					&lt;/address&gt;&#13;
-					&#13;
-					&lt;address&gt;&#13;
-						&lt;strong&gt;European Offices&lt;/strong&gt;&lt;br /&gt;&#13;
-						Landsberger Strasse 155/2, 80687 M&amp;uuml;nchen, Germany&lt;br /&gt;&#13;
-						Rathausgasse 4, 07743 Jena, Germany&lt;br /&gt;&#13;
-						Main +49 89 579 59-650 : Fax +49 89 579 59-200&lt;br /&gt;&#13;
-						Email &lt;a href="mailto:rgeiger@demandware.com"&gt;rgeiger@demandware.com&lt;/a&gt;&#13;
-					&lt;/address&gt;&#13;
-					&lt;div class="sep"&gt;&lt;/div&gt;&#13;
-					&#13;
-					&lt;div class="twocol_wrap"&gt;&#13;
-						&lt;div class="twocol_left"&gt;&#13;
-							&lt;h4 style="margin-top: 0;"&gt;Directions to our headquarters&lt;/h4&gt;&#13;
-							&lt;p&gt;&lt;strong&gt;From Route 93:&lt;/strong&gt; Take exit 37C Commerce Way /Atlantic Ave. Turn right onto Presidential Way (at lights). Pass Raytheon Headquarters (on left). 10 Presidential Way is approximately 0.6 miles (on right).&lt;/p&gt;&#13;
-							&lt;a class="button_97x28" href="http://maps.google.com/maps?f=q&amp;amp;hl=en&amp;amp;q=10+Presidential+Way,+Woburn,+MA&amp;amp;ll=42.527911,-71.141324&amp;amp;spn=0.023119,0.071411" target="_blank"&gt;&lt;span&gt;View Map&lt;/span&gt;&lt;/a&gt;&#13;
-						&lt;/div&gt;&#13;
-						&lt;div class="twocol_right"&gt;&#13;
-							&lt;h4 style="margin-top: 0;"&gt;Local Accommodations&lt;/h4&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Residence  Inn&lt;/strong&gt; &lt;a href="http://marriott.com/residenceinn/" target="_blank"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								300 Presidential Way, Woburn MA &lt;nobr&gt;+1 (781) 376-4000&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Courtyard&lt;/strong&gt; &lt;a href="http://marriott.com/courtyard/" target="_blank"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								240 Mishawum Road, Woburn MA &lt;nobr&gt;+1 (781) 932-3200&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Fairfield Inn Boston Woburn&lt;/strong&gt; &lt;a href="http://marriott.com/property/propertypage/BOSFW " target="_blank" class="linkContact"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								285 Mishawum Road, Woburn MA  &lt;nobr&gt;+1 (781) 938-7575&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-	     &#13;
-						&lt;/div&gt;&#13;
-					&lt;/div&gt;&#13;
-				&lt;/div&gt;&#13;
-			&lt;/div&gt;&#13;
-			&lt;div class="clear"&gt;</custom-attribute>
-        </custom-attributes>
-        <folder-links>
-            <classification-link folder-id="contact-us-new"/>
-        </folder-links>
-    </content>
-
     <content content-id="cookie_hint">
         <display-name xml:lang="x-default">cookie_hint</display-name>
         <online-flag>false</online-flag>
