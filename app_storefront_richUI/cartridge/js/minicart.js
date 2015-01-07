@@ -22,12 +22,12 @@ var minicart = {
 		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
-		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('icon-arrow-down8');
+		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
 		$('.mini-cart-product').not(':first').addClass('collapsed')
-			.find('.mini-cart-toggle').addClass('icon-arrow-right8');
+			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
 		$('.mini-cart-toggle').on('click', function (e) {
-			$(this).toggleClass('icon-arrow-down8 icon-arrow-right8');
+			$(this).toggleClass('fa-caret-down fa-caret-right');
 			$(this).closest('.mini-cart-product').toggleClass('collapsed');
 		});
 

@@ -74,7 +74,7 @@
 		<isloop items="${pliList}" var="productLineItem" status="loopstate">
 
 			<div class="mini-cart-product">
-				<span class="mini-cart-toggle"></span>
+				<span class="mini-cart-toggle fa"></span>
 				<div class="mini-cart-image">
 					<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 						<img src="${productLineItem.product.getImage('small',0).getURL()}" alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}"/>
