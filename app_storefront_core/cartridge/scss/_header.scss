@@ -188,9 +188,6 @@ nav[role="navigation"] {
 	li {
 		list-style: none;
 		border-top: 1px solid darken($night-rider, 10%);
-		&:hover > a{
-			background-color: darken($night-rider, 10%);
-		}
 		@media screen and (min-width: 768px) {
 			border: none;
 			float: left;
@@ -203,8 +200,7 @@ nav[role="navigation"] {
 		color: $mantis;
 		display: block;
 		font-size: 1.2em;
-		width: 100%;
-		padding: 1em 1rem;
+		padding: 0.9rem 1rem;
 		@media screen and (min-width: 768px) {
 			width: auto;
 		}
@@ -215,13 +211,41 @@ nav[role="navigation"] {
 }
 
 .level-1 > li {
+	@extend %clearfix;
+	// override background-color for small viewport
+	background-color: transparent;
 	&:first-child {
 		border: none;
 	}
 	.menu-item-toggle {
-		margin-left: 0.8em;
+		color: $mantis;
+		cursor: pointer;
+		float: left;
+		line-height: 1.1;
+		padding: 1rem 0.8rem;
+		transition: background-color 0.5s;
+		width: 2.1rem;
+		&:hover {
+			background-color: darken($night-rider, 10%);
+		}
+	}
+	a {
+		transition: background-color 0.5s, color 0.5s;
+		&:hover {
+			background-color: darken($night-rider, 10%);
+		}
+	}
+	> a {
+		float: left;
+		padding-left: 0.8rem;
+		width: calc(100% - 2.1rem);
 	}
 	@media screen and (min-width: 768px) {
+		a {
+			&:hover {
+				background-color: transparent;
+			}
+		}
 		&:hover > a {
 			background-color: darken($mantis, 10%);
 			color: $white;
@@ -229,14 +253,25 @@ nav[role="navigation"] {
 		.menu-item-toggle {
 			display: none;
 		}
+		> a {
+			float: none;
+			padding-left: 1rem;
+			width: 100%;
+		}
+	}
+	@media screen and (min-width: 960px) {
+		> a {
+			padding-left: 2rem;
+		}
 	}
 }
 
 .level-2 {
+	clear: left;
 	display: none;
 	> ul {
 		@extend .clearfix;
-		padding-left: 2em;
+		padding-left: 2.1rem;
 	}
 	.level-1 > .active & {
 		display: block;

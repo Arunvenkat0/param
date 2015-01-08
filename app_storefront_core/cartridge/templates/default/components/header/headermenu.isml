@@ -29,11 +29,12 @@
 	<iscomment><!-- Use two loops because the demo catalog has too many nested categories --></iscomment>
 	<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
 		<li>
-			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
-				<isprint value="${topCat.getDisplayName()}"/>
-				<isif condition="${getSubCategoriesLayout(topCat).hasContent}">
+			<isif condition="${getSubCategoriesLayout(topCat).hasContent}">
 					<i class="menu-item-toggle fa fa-chevron-right"></i>
 				</isif>
+			<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>">
+				<isprint value="${topCat.getDisplayName()}"/>
+
 			</a>
 
 			<iscategoryflyout category="${topCat}"/>
