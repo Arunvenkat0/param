@@ -18,7 +18,7 @@ var makeUrl = function (url, source, productListID) {
 
 var removeParam = function (url) {
 	return url.substring(0, url.indexOf('?'));
-}
+};
 
 var quickview = {
 	init: function () {

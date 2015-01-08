@@ -296,8 +296,7 @@ exports.load = load;
 },{"./progress":38,"./util":48}],3:[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	page = require('./page'),
 	util = require('./util');
 
@@ -512,73 +511,62 @@ var bonusProductsView = {
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
-		dialog.create({
+		dialog.open({
 			target: $bonusProduct,
+			url: url,
 			options: {
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
-			}
-		});
-
-		// load the products then show
-		ajax.load({
-			target: $bonusProduct,
-			url: url,
-			callback: function () {
-				$bonusProduct.dialog('open');
+			},
+			open: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
+				$('#bonus-product-dialog .emptyswatch').hide();
 			}
 		});
-
-	},
-	/**
-	 * @function
-	 * @description Closes the bonus product quick view dialog
-	 */
-	close: function () {
-		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
 	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	loadBonusOption: function () {
-		var	$bonusDiscountContainer = $('.bonus-discount-container');
+		var	self = this,
+			$bonusDiscountContainer = $('.bonus-discount-container').clone();
 		if ($bonusDiscountContainer.length === 0) { return; }
 
-		dialog.create({
-			target: $bonusDiscountContainer,
+		// get the html from minicart, then trash it
+		$('.bonus-discount-container').remove();
+
+		dialog.open({
+			html: $bonusDiscountContainer.html(),
 			options: {
-				height: 'auto',
-				width: 350,
-				dialogClass: 'quickview',
-				title: Resources.BONUS_PRODUCT
+				width: 400,
+				title: Resources.BONUS_PRODUCT,
+				buttons: [{
+					text: Resources.SELECT_BONUS_PRODUCTS,
+					click: function () {
+						var uuid = $('.bonus-product-promo').data('lineitemid'),
+							url = util.appendParamsToUrl(Urls.getBonusProducts, {
+								bonusDiscountLineItemUUID: uuid,
+								source: 'bonus'
+							});
+						$(this).dialog('close');
+						self.show(url);
+					}
+				}, {
+					text: Resources.NO_THANKS,
+					click: function () {
+						$(this).dialog('close');
+					}
+				}]
 			}
-		});
-		$bonusDiscountContainer.dialog('open');
-
-		// add event handlers
-		$bonusDiscountContainer.on('click', '.select-bonus-btn', function (e) {
-			e.preventDefault();
-			var uuid = $bonusDiscountContainer.data('lineitemid');
-			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
-				bonusDiscountLineItemUUID: uuid,
-				source: 'bonus'
-			});
-
-			$bonusDiscountContainer.dialog('close');
-			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function () {
-			$bonusDiscountContainer.dialog('close');
 		});
 	},
 };
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
+},{"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -918,7 +906,6 @@ var dialog = {
 		// create the dialog
 		this.$container = $target;
 		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.$container;
 	},
 	/**
 	 * @function
@@ -930,7 +917,7 @@ var dialog = {
 	open: function (options) {
 		// close any open dialog
 		this.close();
-		this.$container = this.create(options);
+		this.create(options);
 		this.replace(options);
 	},
 	/**
@@ -954,16 +941,19 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
 				callback: function (response) {
 					this.openWithContent(response);
+					callback();
 				}.bind(this)
 			});
 		} else if (options.html) {
 			this.openWithContent(options.html);
+			callback();
 		}
 	},
 	/**
@@ -1027,7 +1017,7 @@ var dialog = {
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy').remove();
+			$(this).dialog('close');
 		}
 	}
 };
@@ -1297,7 +1287,6 @@ function initializeAddressForm() {
 
 	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
-		var addressId = $form.find('input[name$="_addressid"]');
 		if (!$form.valid()) {
 			return false;
 		}
@@ -2413,24 +2402,33 @@ module.exports = function () {
 var dialog = require('../../dialog'),
 	util = require('../../util');
 
+var zoomMediaQuery = matchMedia('(min-width: 960px)');
+
 /**
  * @description Enables the zoom viewer on the product detail page
+ * @param zmq {Media Query List}
  */
-var loadZoom = function () {
+var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
 		hiresUrl;
-
-	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
+	if (!zmq) {
+		zmq = zoomMediaQuery;
+	}
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
+		// remove zoom
+		$imgZoom.trigger('zoom.destroy');
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
 
-	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
 		$imgZoom.zoom({
 			url: hiresUrl
 		});
 	}
 };
+
+zoomMediaQuery.addListener(loadZoom);
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag
@@ -2694,10 +2692,10 @@ module.exports = function () {
 	}
 	$carousel.jcarousel();
 	$('#carousel-recommendations .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -2705,10 +2703,10 @@ module.exports = function () {
 		});
 
 	$('#carousel-recommendations .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -2889,7 +2887,7 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
@@ -3086,7 +3084,7 @@ exports.init = function () {
 },{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
 'use strict';
 exports.init = function () {
-	var homepageCarousel = $('#homepage-slider')
+	$('#homepage-slider')
 		// responsive slides
 		.on('jcarousel:create jcarousel:reload', function () {
 			var element = $(this),
@@ -3120,10 +3118,10 @@ exports.init = function () {
 			interval: 5000
 		});
 	$('#vertical-carousel .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -3131,10 +3129,10 @@ exports.init = function () {
 		});
 
 	$('#vertical-carousel .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -3165,7 +3163,7 @@ var addProductToCart = require('./product/addToCart'),
 
 exports.init = function () {
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});
@@ -3332,6 +3330,10 @@ var makeUrl = function (url, source, productListID) {
 	return url;
 };
 
+var removeParam = function (url) {
+	return url.substring(0, url.indexOf('?'));
+};
+
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
@@ -3348,11 +3350,8 @@ var quickview = {
 
 		product.initializeEvents();
 
-		// remove any param
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
 		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
-			return url === qvUrl;
+			return removeParam(url) === removeParam(qvUrl);
 		});
 
 		// hide the buttons on the compare page or when there are no other products
@@ -4003,7 +4002,7 @@ var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 			'</div>'
 		].join(newLine);
 	} else {
-		return '<div class="no-results">'+ Resources.NO_RESULTS +'</div>';
+		return '<div class="no-results">' + Resources.NO_RESULTS + '</div>';
 	}
 };
 
@@ -4257,7 +4256,7 @@ exports.init = function () {
 	$(document).tooltip({
 		items: '.tooltip',
 		track: true,
-		content: function (callback) {
+		content: function () {
 			return $(this).find('.tooltip-content').html();
 		}
 	});
@@ -5124,7 +5123,7 @@ function makeArray( obj ) {
 
 },{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
- * eventie v1.0.5
+ * eventie v1.0.6
  * event binding helper
  *   eventie.bind( elem, 'click', myFn )
  *   eventie.unbind( elem, 'click', myFn )
@@ -5204,7 +5203,7 @@ if ( typeof define === 'function' && define.amd ) {
   window.eventie = eventie;
 }
 
-})( this );
+})( window );
 
 },{}],53:[function(require,module,exports){
 /*!

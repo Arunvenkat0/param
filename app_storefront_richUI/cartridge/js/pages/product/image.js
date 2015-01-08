@@ -10,9 +10,10 @@ var zoomMediaQuery = matchMedia('(min-width: 960px)');
  */
 var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zmq = zmq || zoomMediaQuery,
 		hiresUrl;
-
+	if (!zmq) {
+		zmq = zoomMediaQuery;
+	}
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
 		// remove zoom
 		$imgZoom.trigger('zoom.destroy');

@@ -1,7 +1,6 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	page = require('./page'),
 	util = require('./util');
 

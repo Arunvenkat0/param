@@ -102,7 +102,7 @@ var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 gulp.task('test-browserify', function () {
-	var browserified = transform(function(filename) {
+	var browserified = transform(function (filename) {
 		var b = browserify(filename);
 		return b.bundle();
 	});

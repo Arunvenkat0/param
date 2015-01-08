@@ -21,7 +21,6 @@ function initializeAddressForm() {
 
 	$form.on('click', '.apply-button', function (e) {
 		e.preventDefault();
-		var addressId = $form.find('input[name$="_addressid"]');
 		if (!$form.valid()) {
 			return false;
 		}

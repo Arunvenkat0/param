@@ -10,10 +10,10 @@ module.exports = function () {
 	}
 	$carousel.jcarousel();
 	$('#carousel-recommendations .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -21,10 +21,10 @@ module.exports = function () {
 		});
 
 	$('#carousel-recommendations .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
