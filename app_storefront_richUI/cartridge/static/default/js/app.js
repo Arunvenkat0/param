@@ -1,4 +1,110 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var progress = require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if (options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data
+	})
+	.done(function (response) {
+		// success
+		if (options.target) {
+			$(options.target).empty().html(response);
+		}
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+
+exports.getJson = getJson;
+exports.load = load;
+
+},{"./progress":38,"./util":48}],2:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -187,113 +293,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
-'use strict';
-
-var progress = require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'json',
-		url: options.url,
-		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
-		data: options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if (options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'html',
-		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data
-	})
-	.done(function (response) {
-		// success
-		if (options.target) {
-			$(options.target).empty().html(response);
-		}
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-
-exports.getJson = getJson;
-exports.load = load;
-
-},{"./progress":38,"./util":48}],3:[function(require,module,exports){
+},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -512,73 +512,62 @@ var bonusProductsView = {
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
 		// create the dialog
-		dialog.create({
+		dialog.open({
 			target: $bonusProduct,
+			url: url,
 			options: {
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
-			}
-		});
-
-		// load the products then show
-		ajax.load({
-			target: $bonusProduct,
-			url: url,
-			callback: function () {
-				$bonusProduct.dialog('open');
+			},
+			open: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').css('display', 'none');
+				$('#bonus-product-dialog .emptyswatch').hide();
 			}
 		});
-
-	},
-	/**
-	 * @function
-	 * @description Closes the bonus product quick view dialog
-	 */
-	close: function () {
-		$('#bonus-product-dialog').dialog('close');
 	},
 	/**
 	 * @function
 	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	loadBonusOption: function () {
-		var	$bonusDiscountContainer = $('.bonus-discount-container');
+		var	self = this,
+			$bonusDiscountContainer = $('.bonus-discount-container').clone();
 		if ($bonusDiscountContainer.length === 0) { return; }
 
-		dialog.create({
-			target: $bonusDiscountContainer,
+		// get the html from minicart, then trash it
+		$('.bonus-discount-container').remove();
+
+		dialog.open({
+			html: $bonusDiscountContainer.html(),
 			options: {
-				height: 'auto',
-				width: 350,
-				dialogClass: 'quickview',
-				title: Resources.BONUS_PRODUCT
+				width: 400,
+				title: Resources.BONUS_PRODUCT,
+				buttons: [{
+					text: Resources.SELECT_BONUS_PRODUCTS,
+					click: function () {
+						var uuid = $('.bonus-product-promo').data('lineitemid'),
+							url = util.appendParamsToUrl(Urls.getBonusProducts, {
+								bonusDiscountLineItemUUID: uuid,
+								source: 'bonus'
+							});
+						$(this).dialog('close');
+						self.show(url);
+					}
+				}, {
+					text: Resources.NO_THANKS,
+					click: function () {
+						$(this).dialog('close');
+					}
+				}]
 			}
-		});
-		$bonusDiscountContainer.dialog('open');
-
-		// add event handlers
-		$bonusDiscountContainer.on('click', '.select-bonus-btn', function (e) {
-			e.preventDefault();
-			var uuid = $bonusDiscountContainer.data('lineitemid');
-			var url = util.appendParamsToUrl(Urls.getBonusProducts, {
-				bonusDiscountLineItemUUID: uuid,
-				source: 'bonus'
-			});
-
-			$bonusDiscountContainer.dialog('close');
-			this.show(url);
-		}.bind(this)).on('click', '.no-bonus-btn', function () {
-			$bonusDiscountContainer.dialog('close');
 		});
 	},
 };
 
 module.exports = bonusProductsView;
 
-},{"./ajax":2,"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
+},{"./ajax":1,"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -1034,7 +1023,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
+},{"./ajax":1,"./util":48,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1055,7 +1044,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":48}],8:[function(require,module,exports){
+},{"./ajax":1,"./util":48}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1107,7 +1096,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":10,"./util":48}],9:[function(require,module,exports){
+},{"./ajax":1,"./minicart":10,"./util":48}],9:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1250,7 +1239,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":12,"./util":48}],12:[function(require,module,exports){
+},{"./ajax":1,"./page":12,"./util":48}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1780,7 +1769,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
+},{"../../ajax":1,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -2162,7 +2151,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2206,7 +2195,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
+},{"../ajax":1,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2408,29 +2397,37 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":48}],25:[function(require,module,exports){
+},{"../../ajax":1,"../../util":48}],25:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
 
+var zoomMediaQuery = matchMedia('(min-width: 960px)');
+
 /**
  * @description Enables the zoom viewer on the product detail page
+ * @param zmq {Media Query List}
  */
-var loadZoom = function () {
+var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
+		zmq = zmq || zoomMediaQuery,
 		hiresUrl;
 
-	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
+		// remove zoom
+		$imgZoom.trigger('zoom.destroy');
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
 
-	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
 		$imgZoom.zoom({
 			url: hiresUrl
 		});
 	}
 };
+
+zoomMediaQuery.addListener(loadZoom);
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag
@@ -2631,7 +2628,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":48}],29:[function(require,module,exports){
+},{"../../ajax":1,"../../util":48}],29:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2681,7 +2678,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
+},{"../../ajax":1,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2793,7 +2790,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2889,11 +2886,11 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
+},{"../ajax":1,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3165,7 +3162,7 @@ var addProductToCart = require('./product/addToCart'),
 
 exports.init = function () {
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-table-header');
+	sendToFriend.initializeDialog('.list-share');
 	$('#editAddress').on('change', function () {
 		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
 	});
@@ -3877,7 +3874,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
+},{"./ajax":1,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -5208,13 +5205,13 @@ if ( typeof define === 'function' && define.amd ) {
 
 },{}],53:[function(require,module,exports){
 /*!
- * EventEmitter v4.2.11 - git.io/ee
- * Unlicense - http://unlicense.org/
- * Oliver Caldwell - http://oli.me.uk/
+ * EventEmitter v4.2.9 - git.io/ee
+ * Oliver Caldwell
+ * MIT license
  * @preserve
  */
 
-;(function () {
+(function () {
     'use strict';
 
     /**
@@ -12887,4 +12884,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":50}]},{},[1]);
+},{"_process":50}]},{},[2]);
