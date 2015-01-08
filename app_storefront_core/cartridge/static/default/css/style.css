@@ -2378,6 +2378,10 @@ button.add-all-to-cart {
 
 .bonus-product-list .bonus-product-item {
   border-bottom: 1px solid #e0e0e0; }
+  @media screen and (max-width: 768px) {
+    .bonus-product-list .bonus-product-item .product-col-1, .bonus-product-list .bonus-product-item .product-col-2 {
+      float: left;
+      clear: none; } }
 .bonus-product-list .product-add-to-cart {
   padding-bottom: 0; }
   .bonus-product-list .product-add-to-cart .inventory {

@@ -2,6 +2,13 @@
 	.bonus-product-item {
 		@extend %clearfix;
 		border-bottom: 1px solid $gainsboro;
+		.product-col-1,
+		.product-col-2 {
+			@media screen and (max-width: 768px) {
+				float: left;
+				clear: none;
+			}
+		}
 	}
 	.product-add-to-cart {
 		padding-bottom: 0;
