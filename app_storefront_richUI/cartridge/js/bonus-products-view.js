@@ -58,6 +58,11 @@ var selectedItemTemplate = function (data) {
 	].join('\n');
 };
 
+// hide swatches that are not selected or not part of a Product Variation Group
+var hideSwatches = function () {
+	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+};
+
 /**
  * @private
  * @function
@@ -132,6 +137,7 @@ function initializeGrid () {
 			url: url,
 			success: function (response) {
 				$this.closest('.bonus-product-item').empty().html(response);
+				hideSwatches();
 			}
 		});
 	})
@@ -252,8 +258,7 @@ var bonusProductsView = {
 			},
 			callback: function () {
 				initializeGrid();
-				// hide swatches that are not selected or not part of a Product Variation Group
-				$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+				hideSwatches();
 			}
 		});
 	},

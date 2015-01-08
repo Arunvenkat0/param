@@ -59,24 +59,38 @@
 											displayValue = VV.displayValue ? VV.displayValue : VV.value,
 											linkURL = PVM.urlSelectVariationValue('Product-Variation', VA, VV),
 											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '',
-											swatchClass = selectable ? 'available' : 'unselectable';
+											swatchClass = selectable ? 'available' : 'unselectable',
+											variationGroup;
 										if (isSelected) {
 											swatchClass = 'selected';
 											selectedSwatch = displayValue;
 											linkURL = PVM.urlUnselectVariationValue('Product-Variation', VA);
 											selectedVariants.push(VA.ID + '-' + VV.value);
 										}
+										linkURL = linkURL + qsAppend;
+
 										if (pdict.Product.variationGroup) {
+											variationGroup = pdict.Product;
+										} else if (pdict.CurrentHttpParameterMap.variationgroup_id) {
+											variationGroup = dw.catalog.ProductMgr.getProduct(pdict.CurrentHttpParameterMap.variationgroup_id);
+										}
+										if (variationGroup) {
+											linkURL += '&variationgroup_id=' + variationGroup.ID;
 											// PVM.getVariationValue returns `null` for attribute that
 											// is not assigned to the variation group
-											if (PVM.getVariationValue(pdict.Product, VA) == null) {
-												swatchClass = 'variation-group-value';
+											if (PVM.getVariationValue(variationGroup, VA) == null) {
+												if (swatchClass === 'available') {
+													swatchClass = 'variation-group-value';
+												} else if (swatchClass === 'selected') {
+													swatchClass += ' variation-group-value';
+												}
+
 											}
 										}
 									</isscript>
 									<li class="${swatchClass}">
 										<isif condition="${selectable}">
-											<a class="swatchanchor" href="${linkURL + qsAppend}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 												<isif condition="${vaId == 'color' && !empty(swImage)}">
 													<img src="${swImage.getURL()}">
 												<iselse/>
