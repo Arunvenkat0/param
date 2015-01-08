@@ -201,6 +201,7 @@ nav[role="navigation"] {
 		display: block;
 		font-size: 1.2em;
 		padding: 0.9rem 1rem;
+		width: 100%;
 		@media screen and (min-width: 768px) {
 			width: auto;
 		}
@@ -238,7 +239,9 @@ nav[role="navigation"] {
 	> a {
 		float: left;
 		padding-left: 0.8rem;
-		width: calc(100% - 2.1rem);
+		&.has-sub-menu {
+			width: calc(100% - 2.1rem);
+		}
 	}
 	@media screen and (min-width: 768px) {
 		a {

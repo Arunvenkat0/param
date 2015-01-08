@@ -1135,7 +1135,8 @@ nav[role="navigation"] {
     color: #88c14b;
     display: block;
     font-size: 1.2em;
-    padding: 0.9rem 1rem; }
+    padding: 0.9rem 1rem;
+    width: 100%; }
     @media screen and (min-width: 768px) {
       .menu-category a {
         width: auto; } }
@@ -1163,8 +1164,9 @@ nav[role="navigation"] {
       background-color: #1a1a1a; }
   .level-1 > li > a {
     float: left;
-    padding-left: 0.8rem;
-    width: calc(100% - 2.1rem); }
+    padding-left: 0.8rem; }
+    .level-1 > li > a.has-sub-menu {
+      width: calc(100% - 2.1rem); }
   @media screen and (min-width: 768px) {
     .level-1 > li a:hover {
       background-color: transparent; }
