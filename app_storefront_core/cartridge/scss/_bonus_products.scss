@@ -1,9 +1,10 @@
 .bonus-product-list {
 	.bonus-product-item {
+		@extend %clearfix;
 		border-bottom: 1px solid $gainsboro;
-		clear: both;
 	}
 	.product-add-to-cart {
+		padding-bottom: 0;
 		.inventory {
 			width: auto;
 		}

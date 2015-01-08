@@ -43,7 +43,7 @@
 
 	<isif condition="${!isQuickView}">
 		<div class="product-review-links">
-		   	<isinclude template="product/components/reviewsmini"/>
+			<isinclude template="product/components/reviewsmini"/>
 		</div>
 	</isif>
 

@@ -122,6 +122,18 @@ function initializeGrid () {
 
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
+		var url = this.href,
+			$this = $(this);
+		url = util.appendParamsToUrl(url, {
+			'source': 'bonus',
+			'format': 'ajax'
+		});
+		$.ajax({
+			url: url,
+			success: function (response) {
+				$this.closest('.bonus-product-item').empty().html(response);
+			}
+		});
 	})
 	.on('change', '.input-text', function () {
 		$bonusProductList.find('.select-bonus-item').removeAttr('disabled');
