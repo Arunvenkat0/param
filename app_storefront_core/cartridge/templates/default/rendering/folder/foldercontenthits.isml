@@ -9,7 +9,9 @@
 		<iselse>		
 		</isif>
 	
-       <isslot id="folder-main-slot" description="Library Folder Slot" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>
+		<isif condition="${pdict.ContentSearchResult.folder != null}">
+       		<isslot id="folder-main-slot" description="Library Folder Slot" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>
+   		</isif>
    
    		<iscomment>link back to product search result</iscomment>
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
