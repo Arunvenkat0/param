@@ -316,10 +316,10 @@ table {
 td, th {
   padding: 0; }
 
-.compare-items-panel:before, .store-list-pdp-container .store-list-item:before, .compare-items-panel:after, .store-list-pdp-container .store-list-item:after {
+.compare-items-panel:before, .list-share:before, .store-list-pdp-container .store-list-item:before, .compare-items-panel:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
   content: " ";
   display: table; }
-.compare-items-panel:after, .store-list-pdp-container .store-list-item:after {
+.compare-items-panel:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
   clear: both; }
 
 body {
@@ -722,7 +722,6 @@ div.error {
   padding: 0.5em 0 0 4em; }
 
 .form-inline form {
-  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left bottom transparent;
   padding: 0 0 2em;
   width: 98%; }
 .form-inline .form-row {
@@ -972,6 +971,16 @@ div.error {
   color: #990000;
   margin: 1em;
   padding: 0.5em 4em; }
+
+.folder-slot {
+  border-style: solid;
+  border-color: #019328;
+  border-width: 1px;
+  background-color: white;
+  padding: 0.5em 0.5em; }
+  .folder-slot h2 {
+    color: #019328;
+    margin: 0.5em 0em; }
 
 #header {
   height: 79px;
@@ -2301,13 +2310,6 @@ div.level-3 ul.level-3 {
 .pdp-main .product-tabs .print-page {
   float: right; }
 
-.list-table-header .print-page {
-  font-size: 13.2px;
-  float: right; }
-
-.pt_gift-registry .list-table-header .print-page {
-  margin-top: -0.5em; }
-
 .pdp-main .product-tabs .tab-content {
   min-height: 100px; }
   .pdp-main .product-tabs .tab-content ul {
@@ -2388,8 +2390,7 @@ button.add-all-to-cart {
 
 .buttonbar {
   margin: 11px 0;
-  overflow: hidden;
-  width: 336px; }
+  overflow: hidden; }
 
 .bonus-product-list .bonus-product-item {
   border-bottom: 1px solid #e0e0e0;
@@ -2976,15 +2977,25 @@ h1 .account-logout {
 .pt_wish-list .primary-content .list-table-header h2 {
   float: left; }
 
-.list-share .share-option {
-  box-sizing: border-box;
-  width: 30%;
-  margin-right: 3.33333%;
-  float: left; }
-  .list-share .share-option a {
-    word-break: break-all; }
-  .list-share .share-option button, .list-share .share-option .button {
-    margin-top: 1em; }
+.list-share {
+  background-color: #efefef;
+  border-top: 1px solid #d5d5d5;
+  padding: 2em; }
+  .list-share .share-option {
+    box-sizing: border-box;
+    width: 30%;
+    margin-right: 3.33333%;
+    float: left; }
+    .list-share .share-option a {
+      display: block;
+      word-break: break-all; }
+  .list-share .list-title {
+    float: left; }
+  .list-share .print-page {
+    float: right; }
+
+.event-info {
+  margin: 1em; }
 
 .pt_gift-registry .create-new-registry {
   margin: 1em 0; }
@@ -3015,10 +3026,6 @@ h1 .account-logout {
     font-style: italic;
     line-height: 1.5em;
     width: 40%; }
-.pt_gift-registry .list-table-header {
-  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top #efefef;
-  overflow: hidden;
-  padding: 2em; }
 .pt_gift-registry .hdr-options {
   width: 5%; }
 
@@ -3058,13 +3065,11 @@ h1 .account-logout {
 .gift-registry-advanced {
   clear: both; }
   .gift-registry-advanced .toggle-content {
+    display: none;
     overflow: hidden;
-    padding: 10px; }
+    padding: 1em 0; }
   .gift-registry-advanced .event-month, .gift-registry-advanced .event-city {
     clear: both; }
-
-.pt_gift-registry .primary-content .list-table-header h2 {
-  float: left; }
 
 .gift-certificate-purchase {
   background: none repeat scroll 0 0 #efefef;
@@ -4505,6 +4510,16 @@ h1 .account-logout {
 
   #preferred-store-panel input[type="text"] {
     width: 49.5966%; }
+
+  .pt_content-search-result .folder-content-list li {
+    float: none;
+    width: 100%;
+    clear: both; }
+  .pt_content-search-result .pagination {
+    clear: both;
+    float: none; }
+    .pt_content-search-result .pagination .results-hits {
+      float: none; }
  }
 
 @media screen and (min-width: 768px) and (max-width: 959px) {
@@ -4649,6 +4664,16 @@ h1 .account-logout {
 
   #preferred-store-panel input[type="text"] {
     width: 49.5966%; }
+
+  .pt_content-search-result .folder-content-list li {
+    float: none;
+    width: 100%;
+    clear: both; }
+  .pt_content-search-result .pagination {
+    clear: both;
+    float: none; }
+    .pt_content-search-result .pagination .results-hits {
+      float: none; }
  }
 
 @media print {

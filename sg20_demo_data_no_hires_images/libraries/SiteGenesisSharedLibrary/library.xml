@@ -19,6 +19,7 @@
     <folder folder-id="about-us">
         <display-name xml:lang="x-default">About Demandware</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>0.0</position>
         <page-attributes/>
@@ -77,6 +78,7 @@
     <folder folder-id="customer-service">
         <display-name xml:lang="x-default">Customer Service</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>1.0</position>
         <page-attributes/>
@@ -231,7 +233,6 @@
         <display-name xml:lang="x-default">Top Nav</display-name>
         <description xml:lang="x-default">Holds all the articles</description>
         <online-flag>false</online-flag>
-        <template>content/contentLanding</template>
         <parent>root</parent>
         <page-attributes/>
     </folder>
@@ -348,7 +349,11 @@ We seem to have misplaced this page result in an unfortunate error: (Page or Fil
 &lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class ecommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an ecommerce operation. We took what we knew of great ecommerce merchandising (our founders have been in ecommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;				&#13;
 &lt;h2&gt;Our customers could not be happier with the results.&lt;/h2&gt;		&#13;
 &lt;p&gt;With Demandware ecommerce, they're spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.&lt;/p&gt;&#13;
-&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;</custom-attribute>
+&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;&#13;
+&#13;
+&lt;p&gt;&#13;
+For more information please browse our &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,about-us)$"&gt;About Us&lt;/a&gt; and  &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Customer Service&lt;/a&gt; pages.&#13;
+&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="customCSSFile">css/aboutus.css</custom-attribute>
         </custom-attributes>
         <folder-links>
@@ -3289,6 +3294,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 
     <content content-id="super-save-shipping">
         <display-name xml:lang="x-default">Super Saver Shipping</display-name>
+        <description xml:lang="x-default">Super Saver Shipping Savings on the shipment of Video Games.</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
@@ -3371,16 +3377,6 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="terms"/>
-        </folder-links>
-    </content>
-
-    <content content-id="testcontent">
-        <display-name xml:lang="x-default">Test Content</display-name>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="testfolder"/>
         </folder-links>
     </content>
 
