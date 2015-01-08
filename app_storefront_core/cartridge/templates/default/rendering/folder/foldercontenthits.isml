@@ -5,8 +5,7 @@
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
 		<isif condition="${!(pdict.CurrentHttpParameterMap.q == '')}">
-			<h1>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
-		<iselse>		
+			<h2>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
 		</isif>
 	
 		<isif condition="${pdict.ContentSearchResult.folder != null}">
