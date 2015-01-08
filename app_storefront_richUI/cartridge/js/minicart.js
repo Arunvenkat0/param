@@ -77,7 +77,7 @@ var minicart = {
 	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
-	},
+	}
 };
 
 module.exports = minicart;

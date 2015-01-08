@@ -265,7 +265,7 @@ var bonusProductsView = {
 				}]
 			}
 		});
-	},
+	}
 };
 
 module.exports = bonusProductsView;

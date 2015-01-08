@@ -561,7 +561,7 @@ var bonusProductsView = {
 				}]
 			}
 		});
-	},
+	}
 };
 
 module.exports = bonusProductsView;
@@ -649,7 +649,7 @@ function addProductAjax(args) {
 				pid: args.itemid,
 				category: _currentCategory
 			},
-			dataType: 'json',
+			dataType: 'json'
 		}).done(function (response) {
 			if (!response || !response.success) {
 				reject(new Error(Resources.COMPARE_ADD_FAIL));
@@ -1207,7 +1207,7 @@ var minicart = {
 	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
-	},
+	}
 };
 
 module.exports = minicart;
@@ -4125,7 +4125,7 @@ var storeinventory = {
 						}
 					});
 				}
-			},
+			}
 		});
 	},
 	setUserZip: function (zip) {

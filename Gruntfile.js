@@ -44,7 +44,7 @@ module.exports = function (grunt) {
 			dist: {
 				files: {
 					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				},
+				}
 			},
 			watch: {
 				files: {

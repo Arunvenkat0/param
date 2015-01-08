@@ -159,7 +159,7 @@ var storeinventory = {
 						}
 					});
 				}
-			},
+			}
 		});
 	},
 	setUserZip: function (zip) {
