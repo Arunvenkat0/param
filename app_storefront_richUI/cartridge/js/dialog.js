@@ -60,6 +60,7 @@ var dialog = {
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
+		this.$container.dialog('option', 'position', 'center');
 	},
 	/**
 	 * @description Replace the content of current dialog
@@ -76,6 +77,7 @@ var dialog = {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
+				data: options.data,
 				callback: function (response) {
 					this.openWithContent(response);
 					callback();
