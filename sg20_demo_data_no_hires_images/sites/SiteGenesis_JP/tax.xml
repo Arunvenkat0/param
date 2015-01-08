@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tax xmlns="http://www.demandware.com/xml/impex/tax/2007-02-14">
+    <tax-classes>
+        <tax-class class-id="standard" default="true">
+            <display-name>Standard</display-name>
+            <description/>
+        </tax-class>
+
+    </tax-classes>
+    <tax-jurisdictions>
+        <tax-jurisdiction jurisdiction-id="JP">
+            <display-name>JP</display-name>
+            <address-mappings>
+                <address-mapping key1="JP" key2="-"/>
+            </address-mappings>
+        </tax-jurisdiction>
+
+        <tax-jurisdiction jurisdiction-id="US" default="true">
+            <display-name>US</display-name>
+            <address-mappings>
+                <address-mapping key1="US" key2="-"/>
+            </address-mappings>
+        </tax-jurisdiction>
+
+    </tax-jurisdictions>
+    <tax-rates>
+        <tax-rate jurisdiction-id="US" class-id="standard">0.1</tax-rate>
+
+        <tax-rate jurisdiction-id="JP" class-id="standard">0.1</tax-rate>
+
+    </tax-rates>
+</tax>
