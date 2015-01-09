@@ -2083,10 +2083,10 @@ div.level-3 ul.level-3 {
 .pdp-main .product-number {
   color: #ccc;
   font-size: 0.9em;
-  margin: 0 0 0.5em 0.5em; }
+  margin-bottom: 0.5em; }
 .pdp-main .product-price {
-  font-size: 2em;
-  margin: 0 0 0.5em; }
+  font-size: 1.5rem;
+  margin-bottom: 0.5em; }
   .pdp-main .product-price .price-standard {
     color: #999;
     text-decoration: line-through; }
@@ -2116,8 +2116,8 @@ div.level-3 ul.level-3 {
     text-transform: uppercase;
     width: 25%; }
   .pdp-main .attribute .value {
-    float: right;
-    width: 74%; }
+    float: left;
+    width: 75%; }
   .pdp-main .attribute ul {
     float: right;
     width: 100%; }
@@ -2183,30 +2183,28 @@ div.level-3 ul.level-3 {
   clear: both;
   margin: 1em 0;
   overflow: hidden;
-  padding: 1.5em 0; }
+  padding: 1rem 0 0; }
+  .pdp-main .product-add-to-cart .inventory {
+    float: left;
+    margin-top: 0.7rem;
+    width: 25%; }
+    .pdp-main .product-add-to-cart .inventory label {
+      margin-top: 0.3em; }
+    .pdp-main .product-add-to-cart .inventory input {
+      margin-left: 0.8em;
+      padding: 0.3em;
+      width: 2em; }
+  .pdp-main .product-add-to-cart .product-price {
+    float: left;
+    margin: 0.5rem 0 0;
+    width: 40%; }
+  .pdp-main .product-add-to-cart button {
+    float: right;
+    font-size: 1.2rem;
+    width: 35%; }
 
 .product-set .product-add-to-cart {
   display: block; }
-
-.pdp-main .product-add-to-cart .inventory {
-  float: left;
-  margin-top: 0.3em;
-  width: 15%; }
-  .pdp-main .product-add-to-cart .inventory label {
-    margin-top: 0.3em; }
-  .pdp-main .product-add-to-cart .inventory input {
-    margin-left: 0.8em;
-    padding: 0.3em;
-    width: 2em; }
-.pdp-main .product-add-to-cart .product-price {
-  float: left;
-  font-size: 2.2em;
-  margin: 0;
-  text-align: right;
-  width: 47%; }
-.pdp-main .product-add-to-cart button {
-  float: right;
-  width: 35%; }
 
 .pdp-main .product-actions {
   background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;

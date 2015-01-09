@@ -104,11 +104,11 @@
 	.product-number {
 		color: $very-light-gray;
 		font-size: 0.9em;
-		margin: 0 0 0.5em 0.5em;
+		margin-bottom: 0.5em;
 	}
 	.product-price {
-		font-size: 2em;
-		margin: 0 0 0.5em;
+		font-size: 1.5rem;
+		margin-bottom: 0.5em;
 		.price-standard {
 			color: $nobel;
 			text-decoration: line-through;
@@ -145,8 +145,8 @@
 			width: 25%;
 		}
 		.value {
-			float: right;
-			width: 74%;
+			float: left;
+			width: 75%;
 		}
 		ul {
 			float: right;
@@ -236,39 +236,35 @@
 		clear: both;
 		margin: 1em 0;
 		overflow: hidden;
-		padding: 1.5em 0;
+		padding: 1rem 0 0;
+		.inventory {
+			float: left;
+			margin-top: 0.7rem;
+			width: 25%;
+			label {
+				margin-top: 0.3em;
+			}
+			input {
+				margin-left: 0.8em;
+				padding: 0.3em;
+				width: 2em;
+			}
+		}
+		.product-price {
+			float: left;
+			margin: 0.5rem 0 0;
+			width: 40%;
+		}
+		button {
+			float: right;
+			font-size: 1.2rem;
+			width: 35%;
+		}
 	}
 }
 
 .product-set .product-add-to-cart {
 	display: block;
-}
-
-.pdp-main .product-add-to-cart {
-	.inventory {
-		float: left;
-		margin-top: 0.3em;
-		width: 15%;
-		label {
-			margin-top: 0.3em;
-		}
-		input {
-			margin-left: 0.8em;
-			padding: 0.3em;
-			width: 2em;
-		}
-	}
-	.product-price {
-		float: left;
-		font-size: 2.2em;
-		margin: 0;
-		text-align: right;
-		width: 47%;
-	}
-	button {
-		float: right;
-		width: 35%;
-	}
 }
 
 .pdp-main {
