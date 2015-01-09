@@ -25,9 +25,12 @@
 		swatchAttributes = ['color', 'size', 'width', 'waist', 'length'],
 		selectedVariants = [],
 		selectedVariant;
+	if (pdict.Product.variationGroup) {
+		PVM = pdict.Product.variationGroup.getVariationModel();
+	}
 </isscript>
-<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
-	<div class="product-variations">
+<isif condition="${pdict.Product.variant || pdict.Product.variationGroup || pdict.Product.master}">
+	<div class="product-variations" data-attributes="${JSON.stringify(selectedAtts)}">
 		<h2 class="visually-hidden">Variations</h2>
 		<iscomment>
 			Filter out variation attribute values with no orderable variants.
@@ -55,16 +58,39 @@
 											isSelected = PVM.isSelectedAttributeValue(VA, VV),
 											displayValue = VV.displayValue ? VV.displayValue : VV.value,
 											linkURL = PVM.urlSelectVariationValue('Product-Variation', VA, VV),
-											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '';
+											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '',
+											swatchClass = selectable ? 'available' : 'unselectable',
+											variationGroup;
 										if (isSelected) {
+											swatchClass = 'selected';
 											selectedSwatch = displayValue;
 											linkURL = PVM.urlUnselectVariationValue('Product-Variation', VA);
 											selectedVariants.push(VA.ID + '-' + VV.value);
 										}
+										linkURL = linkURL + qsAppend;
+
+										if (pdict.Product.variationGroup) {
+											variationGroup = pdict.Product;
+										} else if (pdict.CurrentHttpParameterMap.variationgroup_id) {
+											variationGroup = dw.catalog.ProductMgr.getProduct(pdict.CurrentHttpParameterMap.variationgroup_id);
+										}
+										if (variationGroup) {
+											linkURL += '&variationgroup_id=' + variationGroup.ID;
+											// PVM.getVariationValue returns `null` for attribute that
+											// is not assigned to the variation group
+											if (PVM.getVariationValue(variationGroup, VA) == null) {
+												if (swatchClass === 'available') {
+													swatchClass = 'variation-group-value';
+												} else if (swatchClass === 'selected') {
+													swatchClass += ' variation-group-value';
+												}
+
+											}
+										}
 									</isscript>
-									<li class="${(!selectable ? 'unselectable' : 'available') + (isSelected ? ' selected' : '')}">
+									<li class="${swatchClass}">
 										<isif condition="${selectable}">
-											<a class="swatchanchor" href="${linkURL + qsAppend}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 												<isif condition="${vaId == 'color' && !empty(swImage)}">
 													<img src="${swImage.getURL()}" title="${displayValue}">
 												<iselse/>
@@ -138,9 +164,7 @@
 									}
 								</isscript>
 								<isif condition="${isAvailable}">
-									<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>"
-										data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'
-										<isprint value="${selected}" encoding="off"/>>
+									<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
 											<isprint value="${(VV.displayValue||VV.value)}"/>
 									</option>
 								</isif>

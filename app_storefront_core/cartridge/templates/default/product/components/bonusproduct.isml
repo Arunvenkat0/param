@@ -27,16 +27,12 @@
 </isif>
 
 <div class="product-col-1">
-
 	<div class="product-primary-image">
 		<img src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
 	</div>
-
-
 </div>
 
 <div class="product-col-2  product-detail">
-
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 
 	<div class="product-number">
@@ -61,33 +57,27 @@
 	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
 	<isinclude template="product/components/group"/>
-	
+
 	<isinclude template="product/components/variations"/>
 
 	<div class="product-add-to-cart">
-	
 		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
 			<fieldset>
-				
-				<isinclude template="product/components/options"/>		
+				<isinclude template="product/components/options"/>
 				<input type="hidden" name="pid" value="${pdict.Product.ID}"/>
 				<input type="hidden" name="productUUID" value="${pdict.Product.UUID}"/>
-				<input type="hidden" name="bonusDiscountLineItemUUID" value="${pdict.BonusDiscountLineItem.UUID}"/>				
+				<input type="hidden" name="bonusDiscountLineItemUUID" value="${pdict.BonusDiscountLineItem.UUID}"/>
 				<div class="inventory">
 					<div class="quantity">
-						<label for="qty-${pdict.Product.UUID}">${Resource.msg('global.qty','locale',null)}:</label>				
-						<input type="text" class="input-text" name="Quantity" id="qty-${pdict.Product.UUID}" size="2" maxlength="3"  value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"  />
+						<label for="qty-${pdict.Product.UUID}">${Resource.msg('global.qty','locale',null)}:</label>
+						<input type="text" class="input-text" name="Quantity" id="qty-${pdict.Product.UUID}" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
 					</div>
+					<label class="quantity-error"/></label>
 				</div>
-	
-				<button type="submit" value="${Resource.msg('global.select','locale',null)}" class="button-select-bonus"><span>${Resource.msg('global.select','locale',null)}</span></button>
-			</fieldset>
-			<div>
-				<label class="quantity-error"/>				
-			</div>
-		</form>
-		
-	</div>
 
+				<button type="submit" class="select-bonus-item"><span>${Resource.msg('global.select','locale',null)}</span></button>
+			</fieldset>
+		</form>
+	</div>
 </div>
 
