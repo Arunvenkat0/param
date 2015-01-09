@@ -36,7 +36,7 @@
 					</button>
 				</isif>
 				<isif condition="${pdict.ProductList.public}">
-					<a class="button send-to-friend share-option" title="${Resource.msg('product.sendfriend','product',null)}"  href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.ID,'source','registry')}">
+					<a class="button send-to-friend share-option" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start', 'plid', pdict.ProductList.ID, 'source', 'registry')}">
 						${Resource.msg('account.sendlisttofriend','account',null)}
 					</a>
 					<p class="share-option">${Resource.msg('registry.copypaste','account',null)}
