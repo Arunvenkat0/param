@@ -71,11 +71,11 @@
 
 										if (pdict.Product.variationGroup) {
 											variationGroup = pdict.Product;
-										} else if (pdict.CurrentHttpParameterMap.variationgroup_id) {
-											variationGroup = dw.catalog.ProductMgr.getProduct(pdict.CurrentHttpParameterMap.variationgroup_id);
+										} else if (pdict.CurrentHttpParameterMap.vgid) {
+											variationGroup = dw.catalog.ProductMgr.getProduct(pdict.CurrentHttpParameterMap.vgid);
 										}
 										if (variationGroup) {
-											linkURL += '&variationgroup_id=' + variationGroup.ID;
+											linkURL += '&vgid=' + variationGroup.ID;
 											// PVM.getVariationValue returns `null` for attribute that
 											// is not assigned to the variation group
 											if (PVM.getVariationValue(variationGroup, VA) == null) {
