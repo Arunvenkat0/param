@@ -229,11 +229,19 @@ nav[role="navigation"] {
 		&:hover {
 			background-color: darken($night-rider, 10%);
 		}
+		@media screen and (min-width: 768px) {
+			display: none;
+		}
 	}
 	a {
 		transition: background-color 0.5s, color 0.5s;
 		&:hover {
 			background-color: darken($night-rider, 10%);
+		}
+		@media screen and (min-width: 768px) {
+			&:hover {
+				background-color: transparent;
+			}
 		}
 	}
 	> a {
@@ -242,28 +250,19 @@ nav[role="navigation"] {
 		&.has-sub-menu {
 			width: calc(100% - 2.1rem);
 		}
-	}
-	@media screen and (min-width: 768px) {
-		a {
-			&:hover {
-				background-color: transparent;
-			}
-		}
-		&:hover > a {
-			background-color: darken($mantis, 10%);
-			color: $white;
-		}
-		.menu-item-toggle {
-			display: none;
-		}
-		> a {
+		@media screen and (min-width: 768px) {
 			float: none;
 			padding-left: 1rem;
 			width: 100%;
+			&.has-sub-menu {
+				width: 100%;
+			}
+			&:hover {
+				background-color: darken($mantis, 10%);
+				color: $white;
+			}
 		}
-	}
-	@media screen and (min-width: 960px) {
-		> a {
+		@media screen and (min-width: 960px) {
 			padding-left: 2rem;
 		}
 	}

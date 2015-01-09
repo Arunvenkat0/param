@@ -1158,35 +1158,35 @@ nav[role="navigation"] {
     width: 2.1rem; }
     .level-1 > li .menu-item-toggle:hover {
       background-color: #1a1a1a; }
+    @media screen and (min-width: 768px) {
+      .level-1 > li .menu-item-toggle {
+        display: none; } }
   .level-1 > li a {
     transition: background-color 0.5s, color 0.5s; }
     .level-1 > li a:hover {
       background-color: #1a1a1a; }
+    @media screen and (min-width: 768px) {
+      .level-1 > li a:hover {
+        background-color: transparent; }
+ }
   .level-1 > li > a {
     float: left;
     padding-left: 0.8rem; }
     .level-1 > li > a.has-sub-menu {
       width: calc(100% - 2.1rem); }
-  @media screen and (min-width: 768px) {
-    .level-1 > li a:hover {
-      background-color: transparent; }
-
-    .level-1 > li:hover > a {
-      background-color: #6ea138;
-      color: #fff; }
-
-    .level-1 > li .menu-item-toggle {
-      display: none; }
-
-    .level-1 > li > a {
-      float: none;
-      padding-left: 1rem;
-      width: 100%; }
- }
-  @media screen and (min-width: 960px) {
-    .level-1 > li > a {
-      padding-left: 2rem; }
- }
+    @media screen and (min-width: 768px) {
+      .level-1 > li > a {
+        float: none;
+        padding-left: 1rem;
+        width: 100%; }
+        .level-1 > li > a.has-sub-menu {
+          width: 100%; }
+        .level-1 > li > a:hover {
+          background-color: #6ea138;
+          color: #fff; } }
+    @media screen and (min-width: 960px) {
+      .level-1 > li > a {
+        padding-left: 2rem; } }
 
 .level-2 {
   clear: left;
