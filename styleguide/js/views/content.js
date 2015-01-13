@@ -5,6 +5,7 @@ var Model = require('ampersand-model');
 var template = require('../../templates/content.hbs');
 var ColorsView = require('./colors');
 var TypographyView = require('./typography');
+var ButtonsView = require('./buttons');
 
 var TypographyModel = Model.extend({
 	props: {
@@ -36,6 +37,7 @@ var ContentView = View.extend({
 				fonts: require('../../fonts.json')
 			})
 		}));
+		this.renderSubview(new ButtonsView());
 		return this;
 	}
 });

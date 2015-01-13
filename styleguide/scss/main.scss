@@ -13,17 +13,20 @@ body {
 .segment {
 	@extend %clearfix;
 	border-bottom: 1px solid $very-light-gray;
+	padding-bottom: 1em;
 	.subheader {
 		color: $sangria;
 	}
 }
 
 .wrapper {
-	background-color: $white-smoke;
 	border: 1px solid $very-light-gray;
 	border-radius: 2px;
 	margin-bottom: 1em;
 	padding: 0.8em;
+	#typography & {
+		background-color: $white-smoke;
+	}
 }
 
 // colors
