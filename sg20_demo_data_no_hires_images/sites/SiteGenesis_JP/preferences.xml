@@ -19,7 +19,7 @@
             <preference preference-id="SiteCustomerList">SiteGenesis</preference>
             <preference preference-id="SiteDefaultLocale">default</preference>
             <preference preference-id="SiteInventoryList">inventory</preference>
-            <preference preference-id="SiteLibrary">SiteGenesis_JP</preference>
+            <preference preference-id="SiteLibrary">SiteGenesisSharedLibrary</preference>
             <preference preference-id="SiteLocales">default:ja_JP</preference>
             <preference preference-id="SitePriceBooks">jpy-list-prices:jpy-sale-prices</preference>
             <preference preference-id="SiteTimezone">Etc/UTC</preference>

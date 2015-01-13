@@ -3,6 +3,6 @@
     <name>SiteGenesis_JP</name>
     <currency>JPY</currency>
     <taxation>gross</taxation>
-    <custom-cartridges>app_storefront_jp:app_storefront_richUI:app_storefront_core</custom-cartridges>
+    <custom-cartridges>sitegenesis_storefront_richUI:sitegenesis_storefront_core</custom-cartridges>
 </site>
 
