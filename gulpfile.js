@@ -154,7 +154,7 @@ gulp.task('styleguide-browserify', function () {
 		opts = xtend(opts, watchify.args);
 	}
 	var bundler = browserify(opts);
-	if (watching) {
+	if (styleguideWatching) {
 		bundler = watchify(bundler);
 	}
 
@@ -186,8 +186,15 @@ gulp.task('styleguide-connect', function () {
 		root: 'styleguide',
 		port: port
 	});
-})
+});
 
-gulp.task('styleguide', ['styleguide-watching', 'styleguide-browserify', 'styleguide-connect'], function () {
+gulp.task('styleguide-scss', function () {
+	gulp.src('styleguide/scss/*.scss')
+		.pipe(sass())
+		.pipe(prefix({cascade: true}))
+		.pipe(gulp.dest('styleguide/dist'));
+});
 
+gulp.task('styleguide', ['styleguide-watching', 'styleguide-browserify', 'styleguide-scss', 'styleguide-connect'], function () {
+	gulp.watch('styleguide/scss/*.scss', ['styleguide-scss']);
 });
