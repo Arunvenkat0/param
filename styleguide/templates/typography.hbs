@@ -1,9 +1,17 @@
-<section class="typography">
-	<h3>Typography</h3>
-	<h4>Fonts</h4>
-	{{#each model.fonts}}
-		<div class="font" style="font-family: {{stack}}">
-			{{name}}: {{stack}}
-		</div>
-	{{/each}}
+<section id="typography" class="segment">
+	<h2>Typography</h2>
+	<h3 class="subheader">Fonts</h3>
+	<div class="wrapper">
+		{{#each model.fonts}}
+			<div class="font" style="font-family: {{stack}}">
+				{{name}}: {{stack}}
+			</div>
+		{{/each}}
+	</div>
+	<h3 class="subheader">Headings</h3>
+	<div class="wrapper">
+		{{#each model.headings}}
+			<{{this}}>Heading element {{this}}<{{this}}>
+		{{/each}}
+	</div>
 </section>

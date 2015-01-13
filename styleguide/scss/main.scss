@@ -10,11 +10,23 @@ body {
 	margin: 0 auto;
 }
 
-// colors
-.colors {
+.segment {
 	@extend %clearfix;
+	border-bottom: 1px solid $very-light-gray;
+	.subheader {
+		color: $sangria;
+	}
 }
 
+.wrapper {
+	background-color: $white-smoke;
+	border: 1px solid $very-light-gray;
+	border-radius: 2px;
+	margin-bottom: 1em;
+	padding: 0.8em;
+}
+
+// colors
 .color {
 	float: left;
 	width: 5em;
@@ -27,6 +39,7 @@ body {
 	}
 	.code {
 		font-family: monospace;
+		font-size: 0.8em;
 		margin-top: 0.5em;
 		word-break: break-word;
 		p {
@@ -35,3 +48,9 @@ body {
 		}
 	}
 }
+
+// typography
+.font {
+	margin-bottom: 0.5em;
+}
+
