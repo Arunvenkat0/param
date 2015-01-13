@@ -1,0 +1,9 @@
+<section class="typography">
+	<h3>Typography</h3>
+	<h4>Fonts</h4>
+	{{#each model.fonts}}
+		<div class="font" style="font-family: {{stack}}">
+			{{name}}: {{stack}}
+		</div>
+	{{/each}}
+</section>

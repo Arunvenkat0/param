@@ -11,6 +11,9 @@ body {
 }
 
 // colors
+.colors {
+	@extend %clearfix;
+}
 
 .color {
 	float: left;
