@@ -1,0 +1,34 @@
+@import "../../app_storefront_core/cartridge/scss/style.scss";
+
+body {
+	background: none;
+	font-size: 16px;
+}
+
+#main {
+	width: 90%;
+	margin: 0 auto;
+}
+
+// colors
+
+.color {
+	float: left;
+	width: 5em;
+	height: 8em;
+	overflow: scroll;
+	margin: 0 1.5em 1em 0;
+	.sample {
+		width: 100%;
+		height: 4em;
+	}
+	.code {
+		font-family: monospace;
+		margin-top: 0.5em;
+		word-break: break-word;
+		p {
+			margin: 0;
+			text-align: center;
+		}
+	}
+}

@@ -1,7 +1,10 @@
 <section class="colors">
 	<h3>Colors</h3>
 	{{#each collection.models}}
-		{{> color}}
+		<div class="color">
+			<div class="sample" style="background-color: {{code}}"></div>
+			<div class="code"><p>{{code}}</p><p>{{name}}</p></div>
+		</div>
 	{{/each}}
 </section>
 
