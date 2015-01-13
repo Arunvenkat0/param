@@ -3930,19 +3930,19 @@ var cartInventory = {
 			.text(storeStatusText);
 		$lineItem.find('.instore-delivery .delivery-option').removeAttr('disabled').trigger('click');
 	},
-	cartSelectStore: function () {
+	cartSelectStore: function (selectedStore) {
 		var self = this;
 		inventory.getStoresInventory(this.uuid).then(function (stores) {
 			inventory.selectStoreDialog({
 				stores: stores,
-				selectedStoreId: self.selectedStore,
+				selectedStoreId: selectedStore,
 				selectedStoreText: Resources.SELECTED_STORE,
 				continueCallback: function () {},
 				selectStoreCallback: self.setSelectedStore.bind(self)
 			});
 		}).done();
 	},
-	setDeliveryOption: function (value) {
+	setDeliveryOption: function (value, storeId) {
 		// set loading state
 		$('.item-delivery-options')
 			.addClass('loading')
@@ -3954,7 +3954,7 @@ var cartInventory = {
 		};
 		if (value === 'store') {
 			data.storepickup = true;
-			data.storeid = this.selectedStore;
+			data.storeid = storeId;
 		} else {
 			data.storepickup = false;
 		}
@@ -3974,19 +3974,20 @@ var cartInventory = {
 		$('.item-delivery-options .set-preferred-store').on('click', function (e) {
 			e.preventDefault();
 			self.uuid = $(this).data('uuid');
-			self.selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
+			var selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
 			if (!User.zip) {
 				inventory.zipPrompt(function () {
-					self.cartSelectStore();
+					self.cartSelectStore(selectedStore);
 				});
 			} else {
-				self.cartSelectStore();
+				self.cartSelectStore(selectedStore);
 			}
 		});
 		$('.item-delivery-options .delivery-option').on('click', function () {
 			// reset the uuid
+			var selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
 			self.uuid = $(this).closest('.cart-row').data('uuid');
-			self.setDeliveryOption($(this).val());
+			self.setDeliveryOption($(this).val(), selectedStore);
 		});
 	}
 };
