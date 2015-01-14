@@ -80,14 +80,20 @@ The bundle can then be pulled in to the site with a simple `script` tag as such:
 $ npm install
 ```
 
-- Install Selenium driver and start the server
+- Install phantomjs, Selenium driver and start the server
 
 ```sh
-$ npm install --production selenium-standalone@latest -g
-$ start-selenium
+$ npm install -g phantomjs # see note [1]
+$ npm install --production -g selenium-standalone@latest # see note [2]
+$ selenium-standalone install
+$ selenium-standalone start
 ```
 
 It's important to keep this command-line instance running in the background. Open a new terminal window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
+
+*[1] You do not need to install `phantomjs` globally if `./node_modules/bin` is in your `$PATH`.*
+
+*[2] Selenium version 2.44.0 is not compatible with PhantomJS (see https://code.google.com/p/selenium/issues/detail?id=8088). In order to circumvent this, install version 2.43.1 instead: `selenium-standalone install --version=2.43.1`.*
 
 ### Unit tests
 
