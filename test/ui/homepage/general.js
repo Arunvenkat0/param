@@ -12,8 +12,8 @@ describe('Homepage General #C84584', function () {
 		});
 		it('#1 should go to New Arrivals for Womens', function (done) {
 			client
-				.waitForExist('.jcarousel-control .link-1')
-				.click('.jcarousel-control .link-1', function (err) {
+				.waitForExist('.jcarousel-control a:nth-child(1)')
+				.click('.jcarousel-control a:nth-child(1)', function (err) {
 					assert.equal(err, undefined);
 				})
 				// .pause(500) // should wait for slider transition, but skipping it since this is the first slide
@@ -33,8 +33,8 @@ describe('Homepage General #C84584', function () {
 		});
 		it('#2 should go to Women\'s Accessories', function (done) {
 			client
-				.waitForExist('.jcarousel-control .link-2')
-				.click('.jcarousel-control .link-2')
+				.waitForExist('.jcarousel-control a:nth-child(2)')
+				.click('.jcarousel-control a:nth-child(2)')
 				.pause(500) // wait for slider transition
 				.click('#homepage-slider')
 				.getTitle(function (err, title) {
@@ -50,8 +50,8 @@ describe('Homepage General #C84584', function () {
 		});
 		it('#3 should go to Mens Suits', function (done) {
 			client
-				.waitForExist('.jcarousel-control .link-3')
-				.click('.jcarousel-control .link-3')
+				.waitForExist('.jcarousel-control a:nth-child(3)')
+				.click('.jcarousel-control a:nth-child(3)')
 				.pause(500) // wait for slider transition
 				.click('#homepage-slider')
 				.getTitle(function (err, title) {
@@ -67,8 +67,8 @@ describe('Homepage General #C84584', function () {
 		});
 		it('#4 should go to Women\'s Dresses', function (done) {
 			client
-				.waitForExist('.jcarousel-control .link-4')
-				.click('.jcarousel-control .link-4')
+				.waitForExist('.jcarousel-control a:nth-child(4)')
+				.click('.jcarousel-control a:nth-child(4)')
 				.pause(500) // wait for slider transition
 				.click('#homepage-slider')
 				.getTitle(function (err, title) {
@@ -84,8 +84,8 @@ describe('Homepage General #C84584', function () {
 		});
 		it('#5 should go to Women\'s Shoes', function (done) {
 			client
-				.waitForExist('.jcarousel-control .link-5')
-				.click('.jcarousel-control .link-5')
+				.waitForExist('.jcarousel-control a:nth-child(5)')
+				.click('.jcarousel-control a:nth-child(5)')
 				.pause(500) // wait for slider transition
 				.click('#homepage-slider')
 				.getTitle(function (err, title) {
@@ -104,19 +104,19 @@ describe('Homepage General #C84584', function () {
 		});
 	});
 	describe('Vertical carousel', function () {
-		var verticalCarousel = '.home-bottom-right .jcarousel-container-vertical';
+		var verticalCarousel = '#vertical-carousel';
 		before(function (done) {
 			client.url(config.url, done);
 		});
 		it('#1 should be Classic Pant', function (done) {
 			client
 				.pause(500) // wait for carousel to be set up
-				.waitForExist(verticalCarousel + ' .jcarousel-item-1')
-				.isVisible('.jcarousel-item-1 .product-tile', function (err, visible) {
+				.waitForExist(verticalCarousel + ' ul li:nth-child(1)')
+				.isVisible(verticalCarousel + ' ul li:nth-child(1) .product-tile', function (err, visible) {
 					assert.equal(err, undefined);
 					assert.ok(visible);
 				})
-				.getText('.jcarousel-item-1 .product-name a', function (err, text) {
+				.getText(verticalCarousel + ' ul li:nth-child(1) .product-name a', function (err, text) {
 					assert.equal(err, undefined);
 					assert.equal(text, 'Classic Pant');
 				})
@@ -127,11 +127,11 @@ describe('Homepage General #C84584', function () {
 				.waitForExist(verticalCarousel + ' .jcarousel-next')
 				.click(verticalCarousel + ' .jcarousel-next')
 				.pause(500) // wait for carousel transition
-				.isVisible('.jcarousel-item-2 .product-tile', function (err, visible) {
+				.isVisible(verticalCarousel + ' ul li:nth-child(2) .product-tile', function (err, visible) {
 					assert.equal(err, undefined);
 					assert.ok(visible);
 				})
-				.getText('.jcarousel-item-2 .product-name a', function (err, text) {
+				.getText(verticalCarousel + ' ul li:nth-child(2) .product-name a', function (err, text) {
 					assert.equal(err, undefined);
 					assert.equal(text, 'Pink Quartz Hoop Earring');
 				})
@@ -142,11 +142,11 @@ describe('Homepage General #C84584', function () {
 				.waitForExist(verticalCarousel + ' .jcarousel-next')
 				.click(verticalCarousel + ' .jcarousel-next')
 				.pause(500) // wait for carousel transition
-				.isVisible('.jcarousel-item-3 .product-tile', function (err, visible) {
+				.isVisible(verticalCarousel + ' ul li:nth-child(3) .product-tile', function (err, visible) {
 					assert.equal(err, undefined);
 					assert.ok(visible);
 				})
-				.getText('.jcarousel-item-3 .product-name a', function (err, text) {
+				.getText(verticalCarousel + ' ul li:nth-child(3) .product-name a', function (err, text) {
 					assert.equal(err, undefined);
 					assert.equal(text, 'Classic Shell');
 				})
@@ -157,11 +157,11 @@ describe('Homepage General #C84584', function () {
 				.waitForExist(verticalCarousel + ' .jcarousel-next')
 				.click(verticalCarousel + ' .jcarousel-next')
 				.pause(500) // wait for carousel transition
-				.isVisible('.jcarousel-item-4 .product-tile', function (err, visible) {
+				.isVisible(verticalCarousel + ' ul li:nth-child(4) .product-tile', function (err, visible) {
 					assert.equal(err, undefined);
 					assert.ok(visible);
 				})
-				.getText('.jcarousel-item-4 .product-name a', function (err, text) {
+				.getText(verticalCarousel + ' ul li:nth-child(4) .product-name a', function (err, text) {
 					assert.equal(err, undefined);
 					assert.equal(text, 'Charcoal Single Pleat Wool Suit');
 				})
