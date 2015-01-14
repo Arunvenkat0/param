@@ -23,6 +23,8 @@ var ColorsModel = Model.extend({
 	}
 });
 
+var ButtonsModel = require('../models/buttons');
+
 var ContentView = View.extend({
 	template: template,
 	render: function () {
@@ -37,7 +39,12 @@ var ContentView = View.extend({
 				fonts: require('../../fonts.json')
 			})
 		}));
-		this.renderSubview(new ButtonsView());
+		this.renderSubview(new ButtonsView({
+			model: new ButtonsModel({
+				button: require('../../templates/elements/button.hbs')(),
+				fancyButton: require('../../templates/elements/buttonFancylarge.hbs')()
+			})
+		}));
 		return this;
 	}
 });
