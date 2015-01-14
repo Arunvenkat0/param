@@ -54,6 +54,11 @@
 				vaValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value,
 				selectedValue;
 
+			// for variation group products, select the values which are configured
+			if (pdict.Product.variationGroup) {
+				vaValue = PVM.getSelectedValue(PVM.getProductVariationAttribute(vaId)).value;
+			}
+
 			switch (vaId) {
 				case 'size':
 					if (valength == 1 || variantSelected) {
