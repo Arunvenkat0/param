@@ -3,27 +3,14 @@
 var View = require('ampersand-view');
 var Model = require('ampersand-model');
 var template = require('../../templates/content.hbs');
+
+var ButtonsView = require('./buttons');
 var ColorsView = require('./colors');
 var TypographyView = require('./typography');
-var ButtonsView = require('./buttons');
-
-var TypographyModel = Model.extend({
-	props: {
-		fonts: 'array',
-		headings: {
-			type: 'array',
-			default: function () {return ['h1', 'h2', 'h3', 'h4', 'h5'];}
-		}
-	}
-});
-
-var ColorsModel = Model.extend({
-	props: {
-		colors: 'array'
-	}
-});
 
 var ButtonsModel = require('../models/buttons');
+var ColorsModel = require('../models/colors');
+var TypographyModel = require('../models/typography');
 
 var ContentView = View.extend({
 	template: template,
