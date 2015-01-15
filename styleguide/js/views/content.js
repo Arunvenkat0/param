@@ -20,12 +20,12 @@ var ContentView = View.extend({
 		this.renderWithTemplate();
 		this.renderSubview(new ColorsView({
 			model: new ColorsModel({
-				colors: require('../../colors.json')
+				colors: require('../../data/colors.json')
 			})
 		}));
 		this.renderSubview(new TypographyView({
 			model: new TypographyModel({
-				fonts: require('../../fonts.json')
+				fonts: require('../../data/fonts.json')
 			})
 		}));
 		this.renderSubview(new ButtonsView({
@@ -36,7 +36,7 @@ var ContentView = View.extend({
 		}));
 		this.renderSubview(new BreadcrumbView({
 			model: new BreadcrumbModel({
-				demos: [require('../../templates/elements/breadcrumb.hbs')(require('../../breadcrumb.json'))]
+				demos: [require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))]
 			})
 		}));
 		return this;
