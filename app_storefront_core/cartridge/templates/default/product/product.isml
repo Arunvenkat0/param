@@ -80,7 +80,7 @@
 					}
 					break;
 			}
-			if (vaValue) {
+			if (selectedValue) {
 				productDetailUrl += '&dwvar_' + vaId + '=' + selectedValue;
 			}
 		}
