@@ -2,7 +2,7 @@
 	"attributes": [{
 		"name": "Color",
 		"slug": "color",
-		"selected": "",
+		"selected": "Orange",
 		"values": [{
 			"type": "img",
 			"value": "http://placehold.it/40x40/ff9800/ff9800",
