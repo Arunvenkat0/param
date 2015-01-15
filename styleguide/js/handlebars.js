@@ -2,6 +2,14 @@
 
 var Handlebars = require('hbsfy/runtime');
 
-Handlebars.registerHelper('debug', function (stuff) {
+Handlebars.registerHelper('log', function (stuff) {
 	console.log(stuff);
+});
+
+Handlebars.registerHelper('ifeq', function (a, b, options) {
+	if (a === b) {
+		return options.fn(this);
+	} else {
+		return options.inverse(this);
+	}
 });

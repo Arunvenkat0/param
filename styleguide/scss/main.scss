@@ -10,7 +10,7 @@ body {
 	margin: 0 auto;
 }
 
-.segment {
+.section {
 	@extend %clearfix;
 	border-bottom: 1px solid $very-light-gray;
 	padding-bottom: 1em;
@@ -57,7 +57,7 @@ body {
 }
 
 // colors
-.color {
+.fragment {
 	float: left;
 	width: 5em;
 	height: 8em;
@@ -84,3 +84,12 @@ body {
 	margin-bottom: 0.5em;
 }
 
+// variations
+.product-variations {
+	// remove default ul styles
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}

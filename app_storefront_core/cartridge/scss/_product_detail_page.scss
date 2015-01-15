@@ -129,6 +129,26 @@
 			margin-right: 1em;
 		}
 	}
+	.product-main-attributes {
+		.attribute {
+			padding: 0.2em 0;
+		}
+		.label {
+			padding: 0;
+		}
+	}
+
+	.product-add-to-cart {
+		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+		clear: both;
+		margin: 1em 0;
+		overflow: hidden;
+		padding: 1.5em 0;
+	}
+}
+
+.product-variations {
+	margin-left: 0.5em;
 	.attribute {
 		margin: 1em 0;
 		overflow: hidden;
@@ -219,24 +239,6 @@
 				width: 100%;
 			}
 		}
-	}
-	.product-main-attributes {
-		.attribute {
-			padding: 0.2em 0;
-		}
-		.label {
-			padding: 0;
-		}
-	}
-	.product-variations {
-		margin-left: 0.5em;
-	}
-	.product-add-to-cart {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
-		clear: both;
-		margin: 1em 0;
-		overflow: hidden;
-		padding: 1.5em 0;
 	}
 }
 

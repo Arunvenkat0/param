@@ -4,16 +4,12 @@ var View = require('ampersand-view');
 var Model = require('ampersand-model');
 var template = require('../../templates/content.hbs');
 
-var ButtonsView = require('./buttons');
 var ColorsView = require('./colors');
 var TypographyView = require('./typography');
-var BreadcrumbView = require('./breadcrumb');
 var DemoView = require('./demo');
 
-var ButtonsModel = require('../models/buttons');
 var ColorsModel = require('../models/colors');
 var TypographyModel = require('../models/typography');
-var BreadcrumbModel = require('../models/breadcrumb');
 var DemoModel = require('../models/demo');
 
 var ContentView = View.extend({
@@ -44,6 +40,14 @@ var ContentView = View.extend({
 				title: 'Breadcrumb',
 				demos: [
 					require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))
+				]
+			})
+		}));
+		this.renderSubview(new DemoView({
+			model: new DemoModel({
+				title: 'Variations Swatches',
+				demos: [
+					require('../../templates/elements/variations.hbs')(require('../../data/variations.json'))
 				]
 			})
 		}));
