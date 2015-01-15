@@ -1,38 +1,15 @@
 'use strict';
 
 var View = require('ampersand-view');
-var Model = require('ampersand-model');
-var template = require('../../templates/content.hbs');
+var template = require('../../templates/elements.hbs');
 
-var ColorsView = require('./colors');
-var TypographyView = require('./typography');
-var IconsView = require('./icons');
 var DemoView = require('./demo');
-
-var ColorsModel = require('../models/colors');
-var TypographyModel = require('../models/typography');
-var IconsModel = require('../models/icons');
 var DemoModel = require('../models/demo');
 
-var ContentView = View.extend({
+module.exports = View.extend({
 	template: template,
 	render: function () {
 		this.renderWithTemplate();
-		this.renderSubview(new ColorsView({
-			model: new ColorsModel({
-				colors: require('../../data/colors.json')
-			})
-		}));
-		this.renderSubview(new TypographyView({
-			model: new TypographyModel({
-				fonts: require('../../data/fonts.json')
-			})
-		}));
-		this.renderSubview(new IconsView({
-			model: new IconsModel({
-				icons: require('../../data/icons.json')
-			})
-		}));
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Buttons',
@@ -60,6 +37,4 @@ var ContentView = View.extend({
 		}));
 		return this;
 	}
-});
-
-module.exports = ContentView;
+})
