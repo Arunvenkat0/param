@@ -8,11 +8,13 @@ var ButtonsView = require('./buttons');
 var ColorsView = require('./colors');
 var TypographyView = require('./typography');
 var BreadcrumbView = require('./breadcrumb');
+var DemoView = require('./demo');
 
 var ButtonsModel = require('../models/buttons');
 var ColorsModel = require('../models/colors');
 var TypographyModel = require('../models/typography');
 var BreadcrumbModel = require('../models/breadcrumb');
+var DemoModel = require('../models/demo');
 
 var ContentView = View.extend({
 	template: template,
@@ -28,15 +30,21 @@ var ContentView = View.extend({
 				fonts: require('../../data/fonts.json')
 			})
 		}));
-		this.renderSubview(new ButtonsView({
-			model: new ButtonsModel({
-				button: require('../../templates/elements/button.hbs')(),
-				fancyButton: require('../../templates/elements/buttonFancylarge.hbs')()
+		this.renderSubview(new DemoView({
+			model: new DemoModel({
+				title: 'Buttons',
+				demos: [
+					require('../../templates/elements/button.hbs')(),
+					require('../../templates/elements/buttonFancylarge.hbs')()
+				]
 			})
 		}));
-		this.renderSubview(new BreadcrumbView({
-			model: new BreadcrumbModel({
-				demos: [require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))]
+		this.renderSubview(new DemoView({
+			model: new DemoModel({
+				title: 'Breadcrumb',
+				demos: [
+					require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))
+				]
 			})
 		}));
 		return this;
