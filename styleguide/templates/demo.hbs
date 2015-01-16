@@ -1,7 +1,7 @@
 <section class="section">
 	<h2>{{model.title}}</h2>
 	{{#each model.demos}}
-		<div class="wrapper demo">
+		<div class="wrapper demo" data-column="{{../model.column}}">
 			<div class="sample">
 				{{{this}}}
 			</div>

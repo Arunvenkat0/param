@@ -13,6 +13,7 @@ module.exports = View.extend({
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Buttons',
+				column: 2,
 				demos: [
 					require('../../templates/elements/button.hbs')(),
 					require('../../templates/elements/buttonFancylarge.hbs')()
@@ -30,6 +31,7 @@ module.exports = View.extend({
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Variations Swatches',
+				column: 2,
 				demos: [
 					require('../../templates/elements/variations.hbs')(require('../../data/variations.json'))
 				]

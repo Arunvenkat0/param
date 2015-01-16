@@ -34,17 +34,8 @@ body {
 .demo {
 	.sample {
 		box-sizing: border-box;
-		@media (min-width: 50em) {
-			width: 50%;
-			float: left;
-			padding-right: 2em;
-		}
 	}
 	.code {
-		@media (min-width: 50em) {
-			width: 50%;
-			float: left;
-		}
 		a {
 			color: inherit;
 		}
@@ -52,6 +43,26 @@ body {
 			background-color: $white-smoke;
 			border: 1px solid $very-light-gray;
 			border-radius: 2px;
+		}
+	}
+	&[data-column="1"] {
+		.sample {
+			margin-bottom: 1em;
+		}
+	}
+	&[data-column="2"] {
+		.sample {
+			@media (min-width: 50em) {
+				width: 50%;
+				float: left;
+				padding-right: 2em;
+			}
+		}
+		.code {
+			@media (min-width: 50em) {
+				width: 50%;
+				float: left;
+			}
 		}
 	}
 }
