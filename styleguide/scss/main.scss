@@ -3,11 +3,52 @@
 body {
 	background: none;
 	font-size: 16px;
+	position: relative;
 }
 
 #main {
-	width: 90%;
-	margin: 0 auto;
+	width: calc(100% - 10rem);
+	margin-left: 10rem;
+	position: relative;
+	padding-left: 2em;
+}
+
+// Nav
+#nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 10rem;
+	height: 100%;
+}
+.nav {
+	margin: 0 0 0 0.5em;
+	padding: 0;
+	.nested-nav {
+		display: none;
+		font-size: 0.9em;
+		margin: 0 0 0 1em;
+		li {
+			margin: 0.5em 0;
+		}
+	}
+	.active {
+		.nested-nav {
+			display: block;
+		}
+	}
+}
+.nav-item {
+	display: block;
+	padding: 1em 0 1em 1em;
+	border-right: 3px solid transparent;
+	.active > & {
+		border-color: $sangria;
+		color: $sangria;
+	}
+	.nested-nav & {
+		padding: 0.5em 0 0.5em 1em;
+	}
 }
 
 .section {
