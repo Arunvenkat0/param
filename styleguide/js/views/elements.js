@@ -10,6 +10,7 @@ module.exports = View.extend({
 	template: template,
 	render: function () {
 		this.renderWithTemplate();
+		// buttons
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Buttons',
@@ -21,6 +22,7 @@ module.exports = View.extend({
 				]
 			})
 		}));
+		// breadcrumb
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Breadcrumb',
@@ -30,6 +32,7 @@ module.exports = View.extend({
 				]
 			})
 		}));
+		// variation swatches
 		this.renderSubview(new DemoView({
 			model: new DemoModel({
 				title: 'Variations Swatches',

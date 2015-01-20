@@ -11,7 +11,3 @@ var nav = new NavView({
 var main = new MainView({
 	el: document.querySelector('#main')
 }).render();
-
-// $('body').scrollspy({
-// 	target: '#nav'
-// });

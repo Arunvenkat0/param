@@ -7,10 +7,12 @@ body {
 }
 
 #main {
+	box-sizing: border-box;
 	width: calc(100% - 10rem);
 	margin-left: 10rem;
 	position: relative;
-	padding-left: 2em;
+	padding-left: 2rem;
+	padding-right: 1rem;
 }
 
 // Nav
@@ -66,6 +68,7 @@ body {
 	border-radius: 2px;
 	margin-bottom: 1em;
 	padding: 0.8em;
+	position: relative;
 	#typography & {
 		background-color: $white-smoke;
 	}
@@ -74,6 +77,7 @@ body {
 // demo with code
 .demo {
 	.sample {
+		@extend %clearfix;
 		box-sizing: border-box;
 	}
 	.code {
@@ -81,7 +85,7 @@ body {
 			color: inherit;
 		}
 		pre {
-			background-color: $white-smoke;
+			// background-color: $white-smoke;
 			border: 1px solid $very-light-gray;
 			border-radius: 2px;
 		}
