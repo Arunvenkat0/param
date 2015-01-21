@@ -16,7 +16,7 @@ module.exports = View.extend({
 				title: 'Header',
 				slug: 'header',
 				demos: [
-					require('../../templates/components/header.hbs')()
+					require('../../templates/components/header.hbs')(require('../../data/header.json'))
 				]
 			})
 		}));
