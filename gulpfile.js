@@ -2,6 +2,7 @@
 
 var browserify = require('browserify'),
 	connect = require('gulp-connect'),
+	deploy = require('gulp-gh-pages'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
@@ -197,4 +198,11 @@ gulp.task('styleguide-scss', function () {
 
 gulp.task('styleguide', ['styleguide-watching', 'styleguide-browserify', 'styleguide-scss', 'styleguide-connect'], function () {
 	gulp.watch('styleguide/scss/*.scss', ['styleguide-scss']);
+});
+
+// deploy to github pages
+gulp.task('styleguide-deploy', function () {
+	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
+	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'])
+		.pipe(deploy(options));
 });
