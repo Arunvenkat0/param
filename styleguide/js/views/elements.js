@@ -35,8 +35,7 @@ module.exports = View.extend({
 				slug: 'breadcrumb',
 				demos: [
 					new DemoModel({
-						code: require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json')),
-						showMarkup: false
+						code: require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))
 					})
 				]
 			})
@@ -49,8 +48,7 @@ module.exports = View.extend({
 				demos: [
 					new DemoModel({
 						code: require('../../templates/elements/variations.hbs')(require('../../data/variations.json')),
-						column: 2,
-						showMarkup: false
+						column: 2
 					})
 				]
 			})

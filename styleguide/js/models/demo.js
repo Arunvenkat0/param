@@ -9,6 +9,6 @@ module.exports = Model.extend({
 			type: 'number',
 			default: 1
 		},
-		showMarkup: ['boolean', true, true]
+		showMarkup: ['boolean', true, false]
 	}
 });

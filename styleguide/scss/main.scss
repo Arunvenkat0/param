@@ -56,7 +56,7 @@ body {
 .section {
 	@extend %clearfix;
 	border-bottom: 1px solid $very-light-gray;
-	padding-bottom: 1em;
+	margin-bottom: 1em;
 	.subheader {
 		color: $sangria;
 	}
@@ -76,11 +76,18 @@ body {
 
 // demo with code
 .demo {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
 	.sample {
 		@extend %clearfix;
+		border: 1px dashed $very-light-gray;
 		box-sizing: border-box;
+		margin: 1rem 0;
+		padding: 1em;
+		position: relative;
 	}
 	.code {
+		margin-top: 1rem;
 		a {
 			color: inherit;
 		}
@@ -90,25 +97,9 @@ body {
 			border-radius: 2px;
 		}
 	}
-	&[data-column="1"] {
-		.sample {
-			margin-bottom: 1em;
-		}
-	}
-	&[data-column="2"] {
-		.sample {
-			@media (min-width: 50em) {
-				width: 50%;
-				float: left;
-				padding-right: 2em;
-			}
-		}
-		.code {
-			@media (min-width: 50em) {
-				width: 50%;
-				float: left;
-			}
-		}
+	.toggle-markup {
+		cursor: pointer;
+		text-decoration: underline;
 	}
 }
 

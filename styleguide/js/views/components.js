@@ -18,8 +18,7 @@ module.exports = View.extend({
 				slug: 'header',
 				demos: [
 					new DemoModel({
-						code: require('../../templates/components/header.hbs')(require('../../data/header.json')),
-						showMarkup: false
+						code: require('../../templates/components/header.hbs')(require('../../data/header.json'))
 					})
 				]
 			})
