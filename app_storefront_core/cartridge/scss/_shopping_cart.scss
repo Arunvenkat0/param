@@ -134,6 +134,12 @@
 	display: none;
 }
 
+.cart-actions:after {
+	clear: both;
+    content: "";
+    display: block;
+}
+	
 .cart-action-checkout {
 	float: right;
 }
@@ -144,6 +150,22 @@
 		line-height: 50px;
 		padding-right: 1em;
 	}
+}
+
+.cart-recommendations .product-listing {
+	clear: both;
+	background-color: $white-smoke;
+    margin: 24px -13px 24px -17px;
+    padding: 36px 10px;
+    h2 {
+		margin: 0 0 12px 14px;
+	}
+}
+	
+.cart-recommendations .product-listing:after {
+    clear: both;
+    content: "";
+    display: block;
 }
 
 .promo-adjustment {

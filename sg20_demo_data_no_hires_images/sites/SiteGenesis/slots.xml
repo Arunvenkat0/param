@@ -85,15 +85,19 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cart-footer" context="global" configuration-id="New Slot Configuration - 2012-06-05 15:08:36" assigned-to-site="true">
-        <description>global slot footer</description>
-        <template>slots/product/verticalcarousel.isml</template>
+    <slot-configuration slot-id="cart-footer" context="global" configuration-id="CartFooterFeatured" assigned-to-site="true">
+        <description>Featured Products that display in the footer of the cart page, below the cart-actions buttons.</description>
+        <template>slots/product/product_listing.isml</template>
         <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="en-US">hey look at us</callout-msg>
+        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
         <content>
             <products>
                 <product product-id="008884303989"/>
                 <product product-id="008884303996"/>
+                <product product-id="008884304047"/>
+                <product product-id="008884304054"/>
+                <product product-id="008884304085"/>
+                <product product-id="008885004533"/>
             </products>
         </content>
     </slot-configuration>
