@@ -3,7 +3,8 @@
 var View = require('ampersand-view');
 var template = require('../../templates/elements.hbs');
 
-var DemoView = require('./demo');
+var SectionView = require('./sectionWithDemos');
+var SectionModel = require('../models/section');
 var DemoModel = require('../models/demo');
 
 module.exports = View.extend({
@@ -11,35 +12,46 @@ module.exports = View.extend({
 	render: function () {
 		this.renderWithTemplate();
 		// buttons
-		this.renderSubview(new DemoView({
-			model: new DemoModel({
+		this.renderSubview(new SectionView({
+			model: new SectionModel({
 				title: 'Buttons',
 				slug: 'buttons',
-				column: 2,
 				demos: [
-					require('../../templates/elements/button.hbs')(),
-					require('../../templates/elements/buttonFancylarge.hbs')()
+					new DemoModel({
+						code: require('../../templates/elements/button.hbs')(),
+						column: 2
+					}),
+					new DemoModel({
+						code: require('../../templates/elements/buttonFancylarge.hbs')(),
+						column: 2
+					})
 				]
 			})
 		}));
 		// breadcrumb
-		this.renderSubview(new DemoView({
-			model: new DemoModel({
+		this.renderSubview(new SectionView({
+			model: new SectionModel({
 				title: 'Breadcrumb',
 				slug: 'breadcrumb',
 				demos: [
-					require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json'))
+					new DemoModel({
+						code: require('../../templates/elements/breadcrumb.hbs')(require('../../data/breadcrumb.json')),
+						showMarkup: false
+					})
 				]
 			})
 		}));
 		// variation swatches
-		this.renderSubview(new DemoView({
-			model: new DemoModel({
+		this.renderSubview(new SectionView({
+			model: new SectionModel({
 				title: 'Variations Swatches',
 				slug: 'variations',
-				column: 2,
 				demos: [
-					require('../../templates/elements/variations.hbs')(require('../../data/variations.json'))
+					new DemoModel({
+						code: require('../../templates/elements/variations.hbs')(require('../../data/variations.json')),
+						column: 2,
+						showMarkup: false
+					})
 				]
 			})
 		}));

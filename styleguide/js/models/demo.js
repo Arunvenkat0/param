@@ -4,12 +4,11 @@ var Model = require('ampersand-model');
 
 module.exports = Model.extend({
 	props: {
-		title: 'string',
-		slug: 'string',
-		demos: 'array',
+		code: 'string',
 		column: {
 			type: 'number',
 			default: 1
-		}
+		},
+		showMarkup: ['boolean', true, true]
 	}
 });

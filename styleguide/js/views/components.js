@@ -3,7 +3,8 @@
 var View = require('ampersand-view');
 var template = require('../../templates/components.hbs');
 
-var DemoView = require('./demo');
+var SectionView = require('./sectionWithDemos');
+var SectionModel = require('../models/section');
 var DemoModel = require('../models/demo');
 
 module.exports = View.extend({
@@ -11,12 +12,15 @@ module.exports = View.extend({
 	render: function () {
 		this.renderWithTemplate();
 		// header
-		this.renderSubview(new DemoView({
-			model: new DemoModel({
+		this.renderSubview(new SectionView({
+			model: new SectionModel({
 				title: 'Header',
 				slug: 'header',
 				demos: [
-					require('../../templates/components/header.hbs')(require('../../data/header.json'))
+					new DemoModel({
+						code: require('../../templates/components/header.hbs')(require('../../data/header.json')),
+						showMarkup: false
+					})
 				]
 			})
 		}));

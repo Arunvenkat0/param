@@ -1,16 +1,12 @@
-<section id="{{model.slug}}" class="section">
-	<h2>{{model.title}}</h2>
-	{{#each model.demos}}
-		<div class="wrapper demo" data-column="{{../model.column}}">
-			<div class="sample">
-				{{{this}}}
-			</div>
-			<div class="code">
-<pre><code class="language-markup">
-{{this}}
+<div class="wrapper demo" data-column="{{model.column}}">
+	<div class="sample">
+		{{{model.code}}}
+	</div>
+	<div class="code">
+		<a class="toggle-markup" data-hook="toggle-markup">{{showMarkupText}}</a>
+<pre data-hook="markup"><code class="language-markup">
+{{model.code}}
 </code></pre>
-			</div>
-		</div>
-	{{/each}}
+	</div>
+</div>
 
-</section>
