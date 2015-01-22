@@ -7,6 +7,8 @@ The SiteGenesis Style Guide (SSG) is created with the goal of helping designers 
 
 By documenting only what is essential to the design of the application, SSG frees up the constraints that are traditionally imposed on designers by old-school wireframes, allowing them to be creative and experiment with new and user-friendly interface centered around the users.
 
+_**Disclaimer**: this is still a work in progress and is not complete. The example style guide provided here is meant as a proof of concept. Further development on top of is strongly encouranged._
+
 ## How to use
 In order to generate the styleguide for your application, go to the command line and run `gulp styleguide`. This will set up a static web server (by default at `http://localhost:8000`) that displays the living styleguide.
 
