@@ -15,10 +15,22 @@ module.exports = View.extend({
 		this.renderSubview(new SectionView({
 			model: new SectionModel({
 				title: 'Header',
-				slug: 'header',
+				slug: 'header-with-nav',
 				demos: [
 					new DemoModel({
 						code: require('../../templates/components/header.hbs')(require('../../data/header.json'))
+					})
+				]
+			})
+		}));
+		// product tile
+		this.renderSubview(new SectionView({
+			model: new SectionModel({
+				title: 'Product Tile',
+				slug: 'product-tile',
+				demos: [
+					new DemoModel({
+						code: require('../../templates/components/productTile.hbs')(require('../../data/productTile.json'))
 					})
 				]
 			})
