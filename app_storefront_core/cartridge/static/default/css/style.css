@@ -2593,7 +2593,7 @@ button.add-all-to-cart {
     padding-right: 1em; }
 
 .cart-actions-top {
-  padding-bottom: 8px; }
+  padding-bottom: 1em; }
   .cart-actions-top .cart-action-continue-shopping {
     float: none; }
 
