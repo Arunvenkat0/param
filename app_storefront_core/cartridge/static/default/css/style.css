@@ -316,10 +316,10 @@ table {
 td, th {
   padding: 0; }
 
-.compare-items-panel:before, .bonus-product-list .bonus-product-item:before, .bonus-product-list .bonus-product-list-footer:before, .list-share:before, .store-list-pdp-container .store-list-item:before, .compare-items-panel:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
+.compare-items-panel:before, .bonus-product-list .bonus-product-item:before, .bonus-product-list .bonus-product-list-footer:before, .cart-recommendations .product-listing:before, .list-share:before, .store-list-pdp-container .store-list-item:before, .compare-items-panel:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
   content: " ";
   display: table; }
-.compare-items-panel:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
+.compare-items-panel:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
   clear: both; }
 
 body {
@@ -2584,7 +2584,6 @@ button.add-all-to-cart {
   display: none; }
 
 .cart-actions:after {
-  clear: both;
   content: "";
   display: block; }
 
@@ -2598,7 +2597,6 @@ button.add-all-to-cart {
     padding-right: 1em; }
 
 .cart-recommendations .product-listing {
-  clear: both;
   background-color: #efefef;
   margin: 24px -13px 24px -17px;
   padding: 36px 10px; }
@@ -2606,7 +2604,6 @@ button.add-all-to-cart {
     margin: 0 0 12px 14px; }
 
 .cart-recommendations .product-listing:after {
-  clear: both;
   content: "";
   display: block; }
 
