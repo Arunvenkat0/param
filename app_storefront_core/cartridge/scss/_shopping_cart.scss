@@ -134,10 +134,8 @@
 	display: none;
 }
 
-.cart-actions:after {
+.cart-actions {
 	@extend %clearfix;
-    content: "";
-    display: block;
 }
 	
 .cart-action-checkout {
@@ -160,12 +158,6 @@
     h2 {
 		margin: 0 0 12px 14px;
 	}
-}
-	
-.cart-recommendations .product-listing:after {
-    @extend %clearfix;
-    content: "";
-    display: block;
 }
 
 .promo-adjustment {
