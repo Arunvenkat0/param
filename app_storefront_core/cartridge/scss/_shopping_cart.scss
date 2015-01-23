@@ -146,7 +146,7 @@
 	float: right;
 	button.button-text {
 		line-height: 50px;
-		padding-right: 1em;
+		padding-right: 1.0em;
 	}
 }
 
@@ -154,10 +154,10 @@
 	.product-listing {
 		@extend %clearfix;
 		background-color: $white-smoke;
-		margin: 24px -13px 24px -17px;
-		padding: 36px 10px;
+		margin: 2.8em -1.1em 1.3em -1.4em;
+		padding: 2.0em 1.0em;
 		h2 {
-			margin: 0 0 12px 14px;
+			margin: 0 0 1.0em 1.2em;
 		}
 	}
 }		

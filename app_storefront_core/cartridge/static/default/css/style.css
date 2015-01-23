@@ -2594,10 +2594,10 @@ button.add-all-to-cart {
 
 .cart-recommendations .product-listing {
   background-color: #efefef;
-  margin: 24px -13px 24px -17px;
-  padding: 36px 10px; }
+  margin: 2.8em -1.1em 1.3em -1.4em;
+  padding: 2em 1em; }
   .cart-recommendations .product-listing h2 {
-    margin: 0 0 12px 14px; }
+    margin: 0 0 1em 1.2em; }
 
 .promo-adjustment {
   color: #990000; }
