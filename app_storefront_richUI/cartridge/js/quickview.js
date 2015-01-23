@@ -17,7 +17,11 @@ var makeUrl = function (url, source, productListID) {
 };
 
 var removeParam = function (url) {
-	return url.substring(0, url.indexOf('?'));
+	if (url.indexOf('?') !== -1) {
+		return url.substring(0, url.indexOf('?'));
+	} else {
+		return url;
+	}
 };
 
 var quickview = {
