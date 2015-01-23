@@ -150,15 +150,17 @@
 	}
 }
 
-.cart-recommendations .product-listing {
-	@extend %clearfix;
-	background-color: $white-smoke;
-    margin: 24px -13px 24px -17px;
-    padding: 36px 10px;
-    h2 {
-		margin: 0 0 12px 14px;
+.cart-recommendations {
+	.product-listing {
+		@extend %clearfix;
+		background-color: $white-smoke;
+		margin: 24px -13px 24px -17px;
+		padding: 36px 10px;
+		h2 {
+			margin: 0 0 12px 14px;
+		}
 	}
-}
+}		
 
 .promo-adjustment {
 	color: $sangria;
