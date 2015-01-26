@@ -137,7 +137,7 @@
 .cart-actions {
 	@extend %clearfix;
 }
-	
+
 .cart-action-checkout {
 	float: right;
 }
@@ -151,16 +151,19 @@
 }
 
 .cart-recommendations {
+	margin-top: 1rem;
 	.product-listing {
 		@extend %clearfix;
 		background-color: $white-smoke;
-		margin: 2.8em -1.1em 1.3em -1.4em;
-		padding: 2.0em 1.0em;
+		padding: 1rem 0;
 		h2 {
-			margin: 0 0 1.0em 1.2em;
+			margin-left: 1.3rem;
+		}
+		.search-result-items {
+			margin-top: 1em;
 		}
 	}
-}		
+}
 
 .promo-adjustment {
 	color: $sangria;

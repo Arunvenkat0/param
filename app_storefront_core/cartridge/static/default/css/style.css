@@ -2592,12 +2592,15 @@ button.add-all-to-cart {
     line-height: 50px;
     padding-right: 1em; }
 
-.cart-recommendations .product-listing {
-  background-color: #efefef;
-  margin: 2.8em -1.1em 1.3em -1.4em;
-  padding: 2em 1em; }
-  .cart-recommendations .product-listing h2 {
-    margin: 0 0 1em 1.2em; }
+.cart-recommendations {
+  margin-top: 1rem; }
+  .cart-recommendations .product-listing {
+    background-color: #efefef;
+    padding: 1rem 0; }
+    .cart-recommendations .product-listing h2 {
+      margin-left: 1.3rem; }
+    .cart-recommendations .product-listing .search-result-items {
+      margin-top: 1em; }
 
 .promo-adjustment {
   color: #990000; }
