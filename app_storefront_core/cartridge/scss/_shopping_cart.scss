@@ -134,6 +134,10 @@
 	display: none;
 }
 
+.cart-actions {
+	@extend %clearfix;
+}
+
 .cart-action-checkout {
 	float: right;
 }
@@ -142,7 +146,22 @@
 	float: right;
 	button.button-text {
 		line-height: 50px;
-		padding-right: 1em;
+		padding-right: 1.0em;
+	}
+}
+
+.cart-recommendations {
+	margin-top: 1rem;
+	.product-listing {
+		@extend %clearfix;
+		background-color: $white-smoke;
+		padding: 1rem 0;
+		h2 {
+			margin-left: 1.3rem;
+		}
+		.search-result-items {
+			margin-top: 1em;
+		}
 	}
 }
 

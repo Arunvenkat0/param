@@ -857,7 +857,7 @@
 
 		</div>
 
-		<div class="cart-footer">
+		<div class="cart-recommendations">
 			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 		</div>
 	</isif>
