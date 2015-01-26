@@ -246,6 +246,33 @@
 	display: block;
 }
 
+.pdp-main .product-add-to-cart {
+	.inventory {
+		float: left;
+		margin-top: 0.3em;
+		width: 15%;
+		label {
+			margin-top: 0.3em;
+		}
+		input {
+			margin-left: 0.8em;
+			padding: 0.3em;
+			width: 2em;
+		}
+	}
+	.product-price {
+		float: left;
+		font-size: 2.2em;
+		margin: 0;
+		text-align: right;
+		width: 47%;
+	}
+	button {
+		float: right;
+		width: 35%;
+	}
+}
+
 .pdp-main {
 	.product-actions {
 		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
