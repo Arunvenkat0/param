@@ -146,6 +146,13 @@
 	}
 }
 
+.cart-actions-top {
+	padding-bottom: 1.0em;
+	.cart-action-continue-shopping {
+		float: none;
+	}
+}
+
 .promo-adjustment {
 	color: $sangria;
 }
