@@ -2,6 +2,7 @@
 
 var browserify = require('browserify'),
 	connect = require('gulp-connect'),
+	deploy = require('gulp-gh-pages'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
@@ -140,4 +141,68 @@ gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
 
 gulp.task('watch', ['enable-watch-mode', 'js'], function () {
 	gulp.watch(paths.scss.src, ['scss']);
+});
+
+var hbsfy = require('hbsfy');
+var styleguideWatching = false;
+gulp.task('styleguide-watching', function () {styleguideWatching = true});
+gulp.task('styleguide-browserify', function () {
+	var opts = {
+		entries: ['./styleguide/js/main.js'],
+		debug: (gutil.env.type === 'development')
+	}
+	if (styleguideWatching) {
+		opts = xtend(opts, watchify.args);
+	}
+	var bundler = browserify(opts);
+	if (styleguideWatching) {
+		bundler = watchify(bundler);
+	}
+
+	// transforms
+	bundler.transform(hbsfy);
+
+	bundler.on('update', function (ids) {
+		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
+		gutil.log('Rebunlding...');
+		bundle();
+	});
+
+	var bundle = function() {
+		return bundler
+			.bundle()
+			.on('error', function (e) {
+				gutil.log('Browserify Error', gutil.colors.red(e));
+			})
+			.pipe(source('main.js'))
+			.pipe(gulp.dest('./styleguide/dist'));
+	};
+	return bundle();
+});
+
+gulp.task('styleguide-connect', function () {
+	var opts = minimist(process.argv.slice(2));
+	var port = opts.port || 8000;
+	return connect.server({
+		root: 'styleguide',
+		port: port
+	});
+});
+
+gulp.task('styleguide-scss', function () {
+	gulp.src('styleguide/scss/*.scss')
+		.pipe(sass())
+		.pipe(prefix({cascade: true}))
+		.pipe(gulp.dest('styleguide/dist'));
+});
+
+gulp.task('styleguide', ['styleguide-watching', 'styleguide-browserify', 'styleguide-scss', 'styleguide-connect'], function () {
+	gulp.watch('styleguide/scss/*.scss', ['styleguide-scss']);
+});
+
+// deploy to github pages
+gulp.task('styleguide-deploy', function () {
+	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
+	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'])
+		.pipe(deploy(options));
 });
