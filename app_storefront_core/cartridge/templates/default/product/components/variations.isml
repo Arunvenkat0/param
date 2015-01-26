@@ -61,6 +61,7 @@
 											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '',
 											swatchClass = selectable ? 'available' : 'unselectable',
 											variationGroup;
+
 										if (isSelected) {
 											swatchClass = 'selected';
 											selectedSwatch = displayValue;

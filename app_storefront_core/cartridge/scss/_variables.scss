@@ -10,6 +10,10 @@
 	}
 }
 
+.clearfix {
+	@extend %clearfix;
+}
+
 // colors
 // names taken from http://www.color-blindness.com/color-name-hue/
 $black: #000;
@@ -35,3 +39,25 @@ $swatch-types: black #000000, beige #f5f5dc, blue blue, purple purple, red red, 
 // fonts
 $sans-serif: Arial, sans-serif;
 $serif: Georgia, serif;
+
+// global classes
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.menu {
+	float: left;
+	margin: 0;
+	padding: 0;
+	li {
+		float: left;
+		list-style: none outside none !important;
+	}
+}

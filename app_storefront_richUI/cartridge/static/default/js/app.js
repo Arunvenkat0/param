@@ -117,6 +117,22 @@ function initializeEvents() {
 			}
 		});
 	});
+
+	// main menu toggle
+	$('.menu-toggle').on('click', function () {
+		$('#wrapper').toggleClass('menu-active');
+	});
+	$('.menu-category li .menu-item-toggle').on('click', function (e) {
+		e.preventDefault();
+		var $parentLi = $(e.target).closest('li');
+		$parentLi.siblings('li').removeClass('active').find('.menu-item-toggle').removeClass('fa-chevron-up active').addClass('fa-chevron-right');
+		$parentLi.toggleClass('active');
+		$(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
+		// if there are nested menu, don't navigate away
+		// if ($this.has('ul').length) {
+		// 	e.preventDefault();
+		// }
+	});
 }
 /**
  * @private
@@ -1186,13 +1202,14 @@ var minicart = {
 		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
-		$productList.children().not(':first').addClass('collapsed');
-		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
+		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
+		$('.mini-cart-product').not(':first').addClass('collapsed')
+			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
-		$productList.toggledList({
-			toggleClass: 'collapsed',
-			triggerSelector: '.mini-cart-toggler',
-			eventName: 'click'});
+		$('.mini-cart-toggle').on('click', function (e) {
+			$(this).toggleClass('fa-caret-down fa-caret-right');
+			$(this).closest('.mini-cart-product').toggleClass('collapsed');
+		});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -1207,8 +1224,6 @@ var minicart = {
 			timer.clear();
 			timer.start(30, this.close.bind(this));
 		}.bind(this));
-
-		this.$el.find('.mini-cart-close').on('click', this.close);
 	},
 	/**
 	 * @function
@@ -2794,7 +2809,7 @@ var updateContent = function (href) {
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
-	$pdpMain.on('hover', '.swatchanchor', function () {
+	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
 			$imgZoom = $pdpMain.find('.main-image'),
 			$mainImage = $pdpMain.find('.primary-image');

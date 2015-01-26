@@ -22,13 +22,14 @@ var minicart = {
 		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
-		$productList.children().not(':first').addClass('collapsed');
-		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
+		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
+		$('.mini-cart-product').not(':first').addClass('collapsed')
+			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
-		$productList.toggledList({
-			toggleClass: 'collapsed',
-			triggerSelector: '.mini-cart-toggler',
-			eventName: 'click'});
+		$('.mini-cart-toggle').on('click', function (e) {
+			$(this).toggleClass('fa-caret-down fa-caret-right');
+			$(this).closest('.mini-cart-product').toggleClass('collapsed');
+		});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -43,8 +44,6 @@ var minicart = {
 			timer.clear();
 			timer.start(30, this.close.bind(this));
 		}.bind(this));
-
-		this.$el.find('.mini-cart-close').on('click', this.close);
 	},
 	/**
 	 * @function

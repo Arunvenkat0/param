@@ -30,24 +30,4 @@
 			}
 		}
 	}
-	.mini-cart-product {
-		position: relative;
-	}
-	.mini-cart-toggler {
-		background: url(../images/minicart_expanded.png) repeat scroll 0 0 transparent;
-		cursor: pointer;
-		height: 13px;
-		left: 5px;
-		position: absolute;
-		top: 10px;
-		width: 13px;
-	}
-	.collapsed {
-		.mini-cart-toggler {
-			background: url(../images/minicart_collapsed.png) repeat scroll 0 0 transparent;
-		}
-		.mini-cart-image {
-			display: none;
-		}
-	}
 }

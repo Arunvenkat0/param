@@ -162,7 +162,7 @@
 		billing						: URLUtils.url('COBilling-Start').toString(),
 		currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
 		addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
-		cookieHint 					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString()
+		cookieHint					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString()
 	};
 
 	var userSettings = {
