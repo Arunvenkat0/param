@@ -60,7 +60,11 @@ var dialog = {
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
-		this.$container.dialog('option', 'position', 'center');
+		this.$container.dialog('option', 'position', {
+			my: 'center',
+			at: 'center',
+			of: window
+		});
 	},
 	/**
 	 * @description Replace the content of current dialog
