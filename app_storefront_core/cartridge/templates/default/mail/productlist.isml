@@ -29,9 +29,9 @@ ul li.onorder {color:red;}
 			${Resource.msg('global.storeaddress','locale',null)}<br />
 			${Resource.msg('global.storecitystate','locale',null)}<br />
 			${Resource.msg('global.storephone','locale',null)}<br />
-		</td>								
-	</tr>			
-</table>		
+		</td>
+	</tr>
+</table>
 <div style="border:1px solid #CCCCCC;margin:0;padding:0;">
 	<h3 style="background-color:#CCCCCC;color:black;font-size:1.3em;font-weight:bold;margin:0;padding:5px 0;text-align:center;">
 		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}"> 			<isprint value="${pdict.ProductList.name}"/>
@@ -78,17 +78,17 @@ ul li.onorder {color:red;}
 		         </tr>
 		         <tr>
 		             <td></td>
-		             <td><isprint value="${pdict.CurrentForms.sendtofriend.youremail.htmlValue}"/></td>
+		             <td><isprint value="${pdict.CurrentCustomer.profile.email}"/></td>
 		         </tr>
 		    </table>
 			<div style="margin:7px 0 0 0;text-align:center;">
      			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitwishlist','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitwishlist','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
      		</div>
-		</isif>		
+		</isif>
  	</div>
 <table style="width:100%">
-	<isloop items="${pdict.ProductList.items}" var="item" status="loopstate">	
-		<isif condition="${item.public}"> 					
+	<isloop items="${pdict.ProductList.items}" var="item" status="loopstate">
+		<isif condition="${item.public}">
 			<tr <isif condition="${loopstate.first}">class="first"<iselseif condition="${loopstate.last}">class="last"</isif>>
 				<td style="margin:auto;text-align:center;width:113px;">
 					<isdisplayproductimage p_productli="${item}" p_email="${true}"/>
@@ -108,7 +108,7 @@ ul li.onorder {color:red;}
 						<!--  No Priority Set -->
 					<iselse/>
 						<div>
-							<b>${Resource.msg('wishlist.priority','account',null)}:</b> 
+							<b>${Resource.msg('wishlist.priority','account',null)}:</b>
 							<isif condition="${item.priority==1}">${Resource.msg('productlist.1','account',null)}</isif>
 							<isif condition="${item.priority==2}">${Resource.msg('productlist.2','account',null)}</isif>
 							<isif condition="${item.priority==3}">${Resource.msg('productlist.3','account',null)}</isif>
@@ -123,17 +123,17 @@ ul li.onorder {color:red;}
 					<iselse/>
 						<a href="${URLUtils.http('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
 					</isif>
-				</td>										
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3" style="border-bottom:1px dashed #CECDCB;margin-top:25px;padding-bottom:10px;">
-					<!--  Dotted Line -->							
+					<!--  Dotted Line -->
 				</td>
-			</tr>						
+			</tr>
 		</isif>
 	</isloop>
 </table>
 </div>
-</div>													
+</div>
 </body>
 </html>
