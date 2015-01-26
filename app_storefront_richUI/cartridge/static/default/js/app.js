@@ -3380,7 +3380,11 @@ var makeUrl = function (url, source, productListID) {
 };
 
 var removeParam = function (url) {
-	return url.substring(0, url.indexOf('?'));
+	if (url.indexOf('?') !== -1) {
+		return url.substring(0, url.indexOf('?'));
+	} else {
+		return url;
+	}
 };
 
 var quickview = {
@@ -5169,7 +5173,7 @@ function makeArray( obj ) {
 
 },{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
- * eventie v1.0.5
+ * eventie v1.0.6
  * event binding helper
  *   eventie.bind( elem, 'click', myFn )
  *   eventie.unbind( elem, 'click', myFn )
@@ -5249,17 +5253,17 @@ if ( typeof define === 'function' && define.amd ) {
   window.eventie = eventie;
 }
 
-})( this );
+})( window );
 
 },{}],53:[function(require,module,exports){
 /*!
- * EventEmitter v4.2.9 - git.io/ee
- * Oliver Caldwell
- * MIT license
+ * EventEmitter v4.2.11 - git.io/ee
+ * Unlicense - http://unlicense.org/
+ * Oliver Caldwell - http://oli.me.uk/
  * @preserve
  */
 
-(function () {
+;(function () {
     'use strict';
 
     /**
