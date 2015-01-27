@@ -224,7 +224,7 @@
 				}
 			</isscript>
 			<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
-			<label for="${'cc-'+Product.UUID}">Compare</label>
+			<label for="${'cc-'+Product.UUID}">${Resource.msg('search.compare','search',null)}</label>
 		</isif>
 	</div>
 

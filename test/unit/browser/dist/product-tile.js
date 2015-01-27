@@ -1,193 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app_storefront_richUI/cartridge/js/app.js":[function(require,module,exports){
-/**
- *    (c) 2009-2014 Demandware Inc.
- *    Subject to standard usage terms and conditions
- *    For all details and documentation:
- *    https://bitbucket.com/demandware/sitegenesis
- */
-
-'use strict';
-
-var dialog = require('./dialog'),
-	minicart = require('./minicart'),
-	mulitcurrency = require('./multicurrency'),
-	page = require('./page'),
-	searchplaceholder = require('./searchplaceholder'),
-	searchsuggest = require('./searchsuggest'),
-	searchsuggestbeta = require('./searchsuggest-beta'),
-	tooltip = require('./tooltip'),
-	util = require('./util'),
-	validator = require('./validator');
-
-// if jQuery has not been loaded, load from google cdn
-if (!window.jQuery) {
-	var s = document.createElement('script');
-	s.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
-	s.setAttribute('type', 'text/javascript');
-	document.getElementsByTagName('head')[0].appendChild(s);
-}
-
-require('./jquery-ext')();
-require('./cookieprivacy')();
-
-function initializeEvents() {
-	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
-
-	$('body')
-		.on('keydown', 'textarea[data-character-limit]', function (e) {
-			var text = $.trim($(this).val()),
-				charsLimit = $(this).data('character-limit'),
-				charsUsed = text.length;
-
-				if ((charsUsed >= charsLimit) && (controlKeys.indexOf(e.which.toString()) < 0)) {
-					e.preventDefault();
-				}
-		})
-		.on('change keyup mouseup', 'textarea[data-character-limit]', function () {
-			var text = $.trim($(this).val()),
-				charsLimit = $(this).data('character-limit'),
-				charsUsed = text.length,
-				charsRemain = charsLimit - charsUsed;
-
-			if (charsRemain < 0) {
-				$(this).val(text.slice(0, charsRemain));
-				charsRemain = 0;
-			}
-
-			$(this).next('div.char-count').find('.char-remain-count').html(charsRemain);
-		});
-
-	/**
-	 * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
-	 * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
-	 * */
-	var $searchContainer = $('#navigation .header-search');
-	if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-		searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
-	} else {
-		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-	}
-
-	// print handler
-	$('.print-page').on('click', function () {
-		window.print();
-		return false;
-	});
-
-	// add show/hide navigation elements
-	$('.secondary-navigation .toggle').click(function () {
-		$(this).toggleClass('expanded').next('ul').toggle();
-	});
-
-	// add generic toggle functionality
-	$('.toggle').next('.toggle-content').hide();
-	$('.toggle').click(function () {
-		$(this).toggleClass('expanded').next('.toggle-content').toggle();
-	});
-
-	// subscribe email box
-	var $subscribeEmail = $('.subscribe-email');
-	if ($subscribeEmail.length > 0)	{
-		$subscribeEmail.focus(function () {
-			var val = $(this.val());
-			if (val.length > 0 && val !== Resources.SUBSCRIBE_EMAIL_DEFAULT) {
-				return; // do not animate when contains non-default value
-			}
-
-			$(this).animate({color: '#999999'}, 500, 'linear', function () {
-				$(this).val('').css('color', '#333333');
-			});
-		}).blur(function () {
-			var val = $.trim($(this.val()));
-			if (val.length > 0) {
-				return; // do not animate when contains value
-			}
-			$(this).val(Resources.SUBSCRIBE_EMAIL_DEFAULT)
-				.css('color', '#999999')
-				.animate({color: '#333333'}, 500, 'linear');
-		});
-	}
-
-	$('.privacy-policy').on('click', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: $(e.target).attr('href'),
-			options: {
-				height: 600
-			}
-		});
-	});
-}
-/**
- * @private
- * @function
- * @description Adds class ('js') to html for css targeting and loads js specific styles.
- */
-function initializeDom() {
-	// add class to html for css targeting
-	$('html').addClass('js');
-	if (SitePreferences.LISTING_INFINITE_SCROLL) {
-		$('html').addClass('infinite-scroll');
-	}
-	// load js specific styles
-	util.limitCharacters();
-}
-
-var pages = {
-	account: require('./pages/account'),
-	cart: require('./pages/cart'),
-	checkout: require('./pages/checkout'),
-	compare: require('./pages/compare'),
-	product: require('./pages/product'),
-	registry: require('./pages/registry'),
-	search: require('./pages/search'),
-	storefront: require('./pages/storefront'),
-	wishlist: require('./pages/wishlist'),
-	storelocator: require('./pages/storelocator')
-};
-
-var app = {
-	init: function () {
-		if (document.cookie.length === 0) {
-			$('<div/>').addClass('browser-compatibility-alert').append($('<p/>').addClass('browser-error').html(Resources.COOKIES_DISABLED)).appendTo('#browser-check');
-		}
-		initializeDom();
-		initializeEvents();
-
-		// init specific global components
-		tooltip.init();
-		minicart.init();
-		validator.init();
-		searchplaceholder.init();
-		mulitcurrency.init();
-		// execute page specific initializations
-		$.extend(page, window.pageContext);
-		var ns = page.ns;
-		if (ns && pages[ns] && pages[ns].init) {
-			pages[ns].init();
-		}
-	}
-};
-
-// general extension functions
-(function () {
-	String.format = function () {
-		var s = arguments[0];
-		var i, len = arguments.length - 1;
-		for (i = 0; i < len; i++) {
-			var reg = new RegExp('\\{' + i + '\\}', 'gm');
-			s = s.replace(reg, arguments[i + 1]);
-		}
-		return s;
-	};
-})();
-
-// initialize app
-$(document).ready(function () {
-	app.init();
-});
-
-},{"./cookieprivacy":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -293,11 +104,10 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
+},{"./progress":17,"./util":23}],2:[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	page = require('./page'),
 	util = require('./util');
 
@@ -330,6 +140,35 @@ function getBonusProducts() {
 	}
 	return o;
 }
+
+var selectedItemTemplate = function (data) {
+	var attributes = '';
+	for (var attrID in data.attributes) {
+		var attr = data.attributes[attrID];
+		attributes += '<li data-attribute-id="' + attrID + '">\n';
+		attributes += '<span class="display-name">' + attr.displayName + '</span>: ';
+		attributes += '<span class="display-value">' + attr.displayValue + '</span>\n';
+		attributes += '</li>';
+	}
+	attributes += '<li class="item-qty">\n';
+	attributes += '<span class="display-name">Qty</span>: ';
+	attributes += '<span class="display-value">' + data.qty + '</span>';
+	return [
+		'<li class="selected-bonus-item" data-uuid="' + data.uuid + '" data-pid="' + data.pid + '">',
+		'<i class="remove-link fa fa-remove" title="Remove this product" href="#"></i>',
+		'<div class="item-name">' + data.name + '</div>',
+		'<ul class="item-attributes">',
+		attributes,
+		'<ul>',
+		'<li>',
+	].join('\n');
+};
+
+// hide swatches that are not selected or not part of a Product Variation Group
+var hideSwatches = function () {
+	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+};
+
 /**
  * @private
  * @function
@@ -345,33 +184,18 @@ function updateSummary() {
 		var i, len;
 		for (i = 0, len = selectedList.length; i < len; i++) {
 			var item = selectedList[i];
-			var li = itemTemplate.clone().removeClass('selected-item-template').addClass('selected-bonus-item');
-			li.data('uuid', item.uuid).data('pid', item.pid);
-			li.find('.item-name').html(item.name);
-			li.find('.item-qty').html(item.qty);
-			var ulAtts = li.find('.item-attributes');
-			var attTemplate = ulAtts.children().first().clone();
-			ulAtts.empty();
-			var att;
-			for (att in item.attributes) {
-				var attLi = attTemplate.clone();
-				attLi.addClass(att);
-				attLi.children('.display-name').html(item.attributes[att].displayName);
-				attLi.children('.display-value').html(item.attributes[att].displayValue);
-				attLi.appendTo(ulAtts);
-			}
-			li.appendTo(ulList);
+			var li = selectedItemTemplate(item);
+			$(li).appendTo(ulList);
 		}
-		ulList.children('.selected-bonus-item').show();
 	}
 
 	// get remaining item count
 	var remain = maxItems - selectedList.length;
 	$bonusProductList.find('.bonus-items-available').text(remain);
 	if (remain <= 0) {
-		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+		$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 	} else {
-		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
+		$bonusProductList.find('.select-bonus-item').removeAttr('disabled');
 	}
 }
 
@@ -383,7 +207,7 @@ function initializeGrid () {
 	bliUUID = bliData.uuid;
 
 	if (bliData.itemCount >= maxItems) {
-		$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+		$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 	}
 
 	var cartItems = $bonusProductList.find('.selected-bonus-item');
@@ -409,15 +233,28 @@ function initializeGrid () {
 
 	$bonusProductList.on('click', '.bonus-product-item a[href].swatchanchor', function (e) {
 		e.preventDefault();
+		var url = this.href,
+			$this = $(this);
+		url = util.appendParamsToUrl(url, {
+			'source': 'bonus',
+			'format': 'ajax'
+		});
+		$.ajax({
+			url: url,
+			success: function (response) {
+				$this.closest('.bonus-product-item').empty().html(response);
+				hideSwatches();
+			}
+		});
 	})
 	.on('change', '.input-text', function () {
-		$bonusProductList.find('.button-select-bonus').removeAttr('disabled');
+		$bonusProductList.find('.select-bonus-item').removeAttr('disabled');
 		$(this).closest('.bonus-product-form').find('.quantity-error').text('');
 	})
-	.on('click', '.button-select-bonus', function (e) {
+	.on('click', '.select-bonus-item', function (e) {
 		e.preventDefault();
 		if (selectedList.length >= maxItems) {
-			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+			$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 			$bonusProductList.find('.bonus-items-available').text('0');
 			return;
 		}
@@ -429,7 +266,7 @@ function initializeGrid () {
 			qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
 		if (qty > maxItems) {
-			$bonusProductList.find('.button-select-bonus').attr('disabled', 'disabled');
+			$bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
 			form.find('.quantity-error').text(Resources.BONUS_PRODUCT_TOOMANY);
 			return;
 		}
@@ -439,7 +276,7 @@ function initializeGrid () {
 			pid: form.find('input[name="pid"]').val(),
 			qty: qty,
 			name: detail.find('.product-name').text(),
-			attributes: detail.find('.product-variations').data('current'),
+			attributes: detail.find('.product-variations').data('attributes'),
 			options: []
 		};
 
@@ -507,7 +344,7 @@ function initializeGrid () {
 var bonusProductsView = {
 	/**
 	 * @function
-	 * @description Opens the bonus product quick view dialog
+	 * @description Loads the list of bonus products into quick view dialog
 	 */
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
@@ -516,19 +353,24 @@ var bonusProductsView = {
 			target: $bonusProduct,
 			url: url,
 			options: {
+				position: {
+					my: 'center',
+					at: 'top',
+					of: window
+				},
 				width: 795,
 				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
 			},
-			open: function () {
+			callback: function () {
 				initializeGrid();
-				$('#bonus-product-dialog .emptyswatch').hide();
+				hideSwatches();
 			}
 		});
 	},
 	/**
 	 * @function
-	 * @description Loads the list of bonus products into quick view dialog
+	 * @description
 	 */
 	loadBonusOption: function () {
 		var	self = this,
@@ -562,313 +404,12 @@ var bonusProductsView = {
 				}]
 			}
 		});
-	},
+	}
 };
 
 module.exports = bonusProductsView;
 
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
-'use strict';
-
-var page = require('./page'),
-	util = require('./util'),
-	TPromise = require('promise');
-
-var _currentCategory = '',
-	MAX_ACTIVE = 6;
-
-/**
- * @private
- * @function
- * @description Verifies the number of elements in the compare container and updates it with sequential classes for ui targeting
- */
-function refreshContainer() {
-	var $compareContainer = $('.compare-items');
-	var $compareItems = $compareContainer.find('.compare-item');
-	var numActive = $compareItems.filter('.active').length;
-
-	if (numActive < 2) {
-		$('#compare-items-button').attr('disabled', 'disabled');
-	} else {
-		$('#compare-items-button').removeAttr('disabled');
-	}
-
-	$compareContainer.toggle(numActive > 0);
-}
-/**
- * @private
- * @function
- * @description Adds an item to the compare container and refreshes it
- */
-function addToList(data) {
-	// get the first compare-item not currently active
-	var $item = $('.compare-items .compare-item').not('.active').first(),
-		$productTile = $('#' + data.uuid);
-
-	if ($item.length === 0) {
-		if ($productTile.length > 0) {
-			$productTile.find('.compare-check')[0].checked = false;
-		}
-		window.alert(Resources.COMPARE_ADD_FAIL);
-		return;
-	}
-
-	// if already added somehow, return
-	if ($('[data-uuid="' + data.uuid + '"]').length > 0) {
-		return;
-	}
-	// set as active item
-	$item.addClass('active')
-		.attr('data-uuid', data.uuid)
-		.attr('data-itemid', data.itemid)
-		.data('uuid', data.uuid)
-		.data('itemid', data.itemid)
-		.append($(data.img).clone().addClass('compare-item-image'));
-}
-/**
- * @private
- * @function
- * description Removes an item from the compare container and refreshes it
- */
-function removeFromList($item) {
-	if ($item.length === 0) { return; }
-	// remove class, data and id from item
-	$item.removeClass('active')
-		.removeAttr('data-uuid')
-		.removeAttr('data-itemid')
-		.data('uuid', '')
-		.data('itemid', '')
-		// remove the image
-		.find('.compare-item-image').remove();
-}
-
-function addProductAjax(args) {
-	var promise = new TPromise(function (resolve, reject) {
-		$.ajax({
-			url: Urls.compareAdd,
-			data: {
-				pid: args.itemid,
-				category: _currentCategory
-			},
-			dataType: 'json',
-		}).done(function (response) {
-			if (!response || !response.success) {
-				reject(new Error(Resources.COMPARE_ADD_FAIL));
-			} else {
-				resolve(response);
-			}
-		}).fail(function (jqxhr, status, err) {
-			reject(new Error(err));
-		});
-	});
-	return promise;
-}
-
-function removeProductAjax(args) {
-	var promise = new TPromise(function (resolve, reject) {
-		$.ajax({
-			url: Urls.compareRemove,
-			data: {
-				pid: args.itemid,
-				category: _currentCategory
-			},
-			dataType: 'json'
-		}).done(function (response) {
-			if (!response || !response.success) {
-				reject(new Error(Resources.COMPARE_REMOVE_FAIL));
-			} else {
-				resolve(response);
-			}
-		}).fail(function (jqxhr, status, err) {
-			reject(new Error(err));
-		});
-	});
-	return promise;
-}
-
-function shiftImages() {
-	return new TPromise(function (resolve) {
-		var $items = $('.compare-items .compare-item');
-		$items.each(function (i, item) {
-			var $item = $(item);
-			// last item
-			if (i === $items.length - 1) {
-				return removeFromList($item);
-			}
-			var $next = $items.eq(i + 1);
-			if ($next.hasClass('active')) {
-				// remove its own image
-				$next.find('.compare-item-image').detach().appendTo($item);
-				$item.addClass('active')
-					.attr('data-uuid', $next.data('uuid'))
-					.attr('data-itemid', $next.data('itemid'))
-					.data('uuid', $next.data('uuid'))
-					.data('itemid', $next.data('itemid'));
-			}
-		});
-		resolve();
-	});
-}
-
-/**
- * @function
- * @description Adds product to the compare table
- */
-function addProduct(args) {
-	var promise;
-	var $items = $('.compare-items .compare-item');
-	var $cb = $(args.cb);
-	var numActive = $items.filter('.active').length;
-	if (numActive === MAX_ACTIVE) {
-		if (!window.confirm(Resources.COMPARE_CONFIRMATION)) {
-			$cb[0].checked = false;
-			return;
-		}
-
-		// remove product using id
-		var $firstItem = $items.first();
-		promise = removeItem($firstItem).then(function () {
-			return shiftImages();
-		});
-	} else {
-		promise = TPromise.resolve(0);
-	}
-	return promise.then(function () {
-		return addProductAjax(args).then(function () {
-			addToList(args);
-			if ($cb && $cb.length > 0) { $cb[0].checked = true; }
-			refreshContainer();
-		});
-	}).then(null, function () {
-		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
-	});
-}
-
-/**
- * @function
- * @description Removes product from the compare table
- * @param {object} args - the arguments object should have the following properties: itemid, uuid and cb (checkbox)
- */
-function removeProduct(args) {
-	var $cb = args.cb ? $(args.cb) : null;
-	return removeProductAjax(args).then(function () {
-		var $item = $('[data-uuid="' + args.uuid + '"]');
-		removeFromList($item);
-		if ($cb && $cb.length > 0) { $cb[0].checked = false; }
-		refreshContainer();
-	}, function () {
-		if ($cb && $cb.length > 0) { $cb[0].checked = true; }
-	});
-}
-
-function removeItem($item) {
-	var uuid = $item.data('uuid'),
-		$productTile = $('#' + uuid);
-	return removeProduct({
-		itemid: $item.data('itemid'),
-		uuid: uuid,
-		cb: ($productTile.length === 0) ? null : $productTile.find('.compare-check')
-	});
-}
-
-/**
- * @private
- * @function
- * @description Initializes the DOM-Object of the compare container
- */
-function initializeDom() {
-	var $compareContainer = $('.compare-items');
-	_currentCategory = $compareContainer.data('category') || '';
-	var $active = $compareContainer.find('.compare-item').filter('.active');
-	$active.each(function () {
-		var $productTile = $('#' +  $(this).data('uuid'));
-		if ($productTile.length === 0) {return;}
-		$productTile.find('.compare-check')[0].checked = true;
-	});
-	// set container state
-	refreshContainer();
-}
-
-/**
- * @private
- * @function
- * @description Initializes the events on the compare container
- */
-function initializeEvents() {
-	// add event to buttons to remove products
-	$('.compare-item').on('click', '.compare-item-remove', function () {
-		removeItem($(this).closest('.compare-item'));
-	});
-
-	// Button to go to compare page
-	$('#compare-items-button').on('click', function () {
-		page.redirect(util.appendParamToURL(Urls.compareShow, 'category', _currentCategory));
-	});
-
-	// Button to clear all compared items
-	// rely on refreshContainer to take care of hiding the container
-	$('#clear-compared-items').on('click', function () {
-		$('.compare-items .active').each(function () {
-			removeItem($(this));
-		});
-	});
-}
-
-exports.init = function () {
-	initializeDom();
-	initializeEvents();
-};
-
-exports.addProduct = addProduct;
-exports.removeProduct = removeProduct;
-
-},{"./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
-'use strict';
-
-var dialog = require('./dialog');
-
-/**
- * @function cookieprivacy	Used to display/control the scrim containing the cookie privacy code
- **/
-module.exports = function () {
-	/**
-	 * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
-	 * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page
-	 */
-	if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
-		// check for privacy policy page
-		if ($('.privacy-policy').length === 0) {
-			dialog.open({
-				url: Urls.cookieHint,
-				options: {
-					closeOnEscape: false,
-					dialogClass: 'no-close',
-					buttons: [{
-						text: Resources.I_AGREE,
-						click: function () {
-							$(this).dialog('close');
-							enableCookies();
-						}
-					}]
-				}
-			});
-		}
-	} else {
-		// Otherwise, we don't need to show the asset, just enable the cookies
-		enableCookies();
-	}
-
-	function enableCookies() {
-		if (document.cookie.indexOf('dw=1') < 0) {
-			document.cookie = 'dw=1; path=/';
-		}
-		if (document.cookie.indexOf('dw_cookies_accepted') < 0) {
-			document.cookie = 'dw_cookies_accepted=1; path=/';
-		}
-	}
-};
-
-},{"./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
+},{"./dialog":3,"./page":5,"./util":23}],3:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -907,7 +448,6 @@ var dialog = {
 		// create the dialog
 		this.$container = $target;
 		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.$container;
 	},
 	/**
 	 * @function
@@ -919,7 +459,7 @@ var dialog = {
 	open: function (options) {
 		// close any open dialog
 		this.close();
-		this.$container = this.create(options);
+		this.create(options);
 		this.replace(options);
 	},
 	/**
@@ -932,6 +472,7 @@ var dialog = {
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
+		this.$container.dialog('option', 'position', 'center');
 	},
 	/**
 	 * @description Replace the content of current dialog
@@ -943,16 +484,20 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
+				data: options.data,
 				callback: function (response) {
 					this.openWithContent(response);
+					callback();
 				}.bind(this)
 			});
 		} else if (options.html) {
 			this.openWithContent(options.html);
+			callback();
 		}
 	},
 	/**
@@ -1016,117 +561,14 @@ var dialog = {
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy').remove();
+			$(this).dialog('close');
 		}
 	}
 };
 
 module.exports = dialog;
 
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('./ajax'),
-	util = require('./util');
-/**
- * @function
- * @description Load details to a given gift certificate
- * @param {String} id The ID of the gift certificate
- * @param {Function} callback A function to called
- */
-exports.checkBalance = function (id, callback) {
-	// load gift certificate details
-	var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
-
-	ajax.getJson({
-		url: url,
-		callback: callback
-	});
-};
-
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('./ajax'),
-	minicart = require('./minicart'),
-	util = require('./util');
-
-var setAddToCartHandler = function (e) {
-	e.preventDefault();
-	var form = $(this).closest('form');
-
-	var options = {
-		url: util.ajaxUrl(form.attr('action')),
-		method: 'POST',
-		cache: false,
-		data: form.serialize()
-	};
-	$.ajax(options).done(function (response) {
-		if (response.success) {
-			ajax.load({
-				url: Urls.minicartGC,
-				data: {lineItemId: response.result.lineItemId},
-				callback: function (response) {
-					minicart.show(response);
-					form.find('input,textarea').val('');
-				}
-			});
-		} else {
-			form.find('span.error').hide();
-			for (var id in response.errors.FormErrors) {
-				var $errorEl = $('#' + id).addClass('error').removeClass('valid').next('.error');
-				if (!$errorEl || $errorEl.length === 0) {
-					$errorEl = $('<span for="' + id + '" generated="true" class="error" style=""></span>');
-					$('#' + id).after($errorEl);
-				}
-				$errorEl.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
-			}
-		}
-	}).fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		} else {
-			window.alert(Resources.SERVER_CONNECTION_ERROR);
-		}
-	});
-};
-
-exports.init = function () {
-	$('#AddToBasketButton').on('click', setAddToCartHandler);
-};
-
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
-'use strict';
-// jQuery extensions
-
-module.exports = function () {
-	// params
-	// toggleClass - required
-	// triggerSelector - optional. the selector for the element that triggers the event handler. defaults to the child elements of the list.
-	// eventName - optional. defaults to 'click'
-	$.fn.toggledList = function (options) {
-		if (!options.toggleClass) { return this; }
-		var list = this;
-		return list.on(options.eventName || 'click', options.triggerSelector || list.children(), function (e) {
-			e.preventDefault();
-			var classTarget = options.triggerSelector ? $(this).parent() : $(this);
-			classTarget.toggleClass(options.toggleClass);
-			// execute callback if exists
-			if (options.callback) {options.callback();}
-		});
-	};
-
-	$.fn.syncHeight = function () {
-		var arr = $.makeArray(this);
-		arr.sort(function (a, b) {
-			return $(a).height() - $(b).height();
-		});
-		return this.height($(arr[arr.length - 1]).height());
-	};
-};
-
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
+},{"./ajax":1,"./util":23,"lodash":29}],4:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1206,40 +648,12 @@ var minicart = {
 	close: function (delay) {
 		timer.clear();
 		this.$content.slideUp(delay);
-	},
+	}
 };
 
 module.exports = minicart;
 
-},{"./bonus-products-view":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('./ajax'),
-	page = require('./page'),
-	util = require('./util');
-
-exports.init = function () {
-	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
-	$('.currency-converter').on('change', function () {
-		// request results from server
-		ajax.getJson({
-			url: util.appendParamsToUrl(Urls.currencyConverter, {
-				format: 'ajax',
-				currencyMnemonic: $('.currency-converter').val()
-			}),
-			callback: function () {
-				location.reload();
-			}
-		});
-	});
-
-	//hide the feature if user is in checkout
-	if (page.title === 'Checkout') {
-		$('.mc-class').css('display', 'none');
-	}
-};
-
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js":[function(require,module,exports){
+},{"./bonus-products-view":2,"./util":23}],5:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1262,940 +676,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js":[function(require,module,exports){
-'use strict';
-
-var giftcert = require('../giftcert'),
-	tooltip = require('../tooltip'),
-	util = require('../util'),
-	dialog = require('../dialog'),
-	page = require('../page'),
-	validator = require('../validator');
-
-/**
- * @function
- * @description Initializes the events on the address form (apply, cancel, delete)
- * @param {Element} form The form which will be initialized
- */
-function initializeAddressForm() {
-	var $form = $('#edit-address-form');
-
-	$form.find('input[name="format"]').remove();
-	tooltip.init();
-	//$("<input/>").attr({type:"hidden", name:"format", value:"ajax"}).appendTo(form);
-
-	$form.on('click', '.apply-button', function (e) {
-		e.preventDefault();
-		var addressId = $form.find('input[name$="_addressid"]');
-		if (!$form.valid()) {
-			return false;
-		}
-		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
-		var applyName = $form.find('.apply-button').attr('name');
-		var options = {
-			url: url,
-			data: $form.serialize() + '&' + applyName + '=x',
-			type: 'POST'
-		};
-		$.ajax(options).done(function (data) {
-			if (typeof(data) !== 'string') {
-				if (data.success) {
-					dialog.close();
-					page.refresh();
-				} else {
-					window.alert(data.message);
-					return false;
-				}
-			} else {
-				$('#dialog-container').html(data);
-				account.init();
-				tooltip.init();
-			}
-		});
-	})
-	.on('click', '.cancel-button, .close-button', function (e) {
-		e.preventDefault();
-		dialog.close();
-	})
-	.on('click', '.delete-button', function (e) {
-		e.preventDefault();
-		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-			var url = util.appendParamsToUrl(Urls.deleteAddress, {
-				AddressID: $form.find('#addressid').val(),
-				format: 'ajax'
-			});
-			$.ajax({
-				url: url,
-				method: 'POST',
-				dataType: 'json'
-			}).done(function (data) {
-				if (data.status.toLowerCase() === 'ok') {
-					dialog.close();
-					page.refresh();
-				} else if (data.message.length > 0) {
-					window.alert(data.message);
-					return false;
-				} else {
-					dialog.close();
-					page.refresh();
-				}
-			});
-		}
-	});
-
-	$('select[id$="_country"]', $form).on('change', function () {
-		util.updateStateOptions($form);
-	});
-
-	validator.init();
-}
-/**
- * @private
- * @function
- * @description Toggles the list of Orders
- */
-function toggleFullOrder () {
-	$('.order-items')
-		.find('li.hidden:first')
-		.prev('li')
-		.append('<a class="toggle">View All</a>')
-		.children('.toggle')
-		.click(function () {
-			$(this).parent().siblings('li.hidden').show();
-			$(this).remove();
-		});
-}
-/**
- * @private
- * @function
- * @description Binds the events on the address form (edit, create, delete)
- */
-function initAddressEvents() {
-	var addresses = $('#addresses');
-	if (addresses.length === 0) { return; }
-
-	addresses.on('click', '.address-edit, .address-create', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: this.href,
-			options: {
-				open: initializeAddressForm
-			}
-		});
-	}).on('click', '.delete', function (e) {
-		e.preventDefault();
-		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-			$.ajax({
-				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
-				dataType: 'json'
-			}).done(function (data) {
-				if (data.status.toLowerCase() === 'ok') {
-					page.redirect(Urls.addressesList);
-				} else if (data.message.length > 0) {
-					window.alert(data.message);
-				} else {
-					page.refresh();
-				}
-			});
-		}
-	});
-}
-/**
- * @private
- * @function
- * @description Binds the events of the payment methods list (delete card)
- */
-function initPaymentEvents() {
-	$('.add-card').on('click', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: $(e.target).attr('href')
-		});
-	});
-
-	var paymentList = $('.payment-list');
-	if (paymentList.length === 0) { return; }
-
-	util.setDeleteConfirmation(paymentList, String.format(Resources.CONFIRM_DELETE, Resources.TITLE_CREDITCARD));
-
-	$('form[name="payment-remove"]').on('submit', function (e) {
-		e.preventDefault();
-		// override form submission in order to prevent refresh issues
-		var button = $(this).find('.delete');
-		$('<input/>').attr({
-			type: 'hidden',
-			name: button.attr('name'),
-			value: button.attr('value') || 'delete card'
-		}).appendTo($(this));
-		var data = $(this).serialize();
-		$.ajax({
-			type: 'POST',
-			url: $(this).attr('action'),
-			data: data
-		})
-		.done(function () {
-			page.redirect(Urls.paymentsList);
-		});
-	});
-}
-/**
- * @private
- * @function
- * @description init events for the loginPage
- */
-function initLoginPage() {
-	//o-auth binding for which icon is clicked
-	$('.oAuthIcon').bind('click', function () {
-		$('#OAuthProvider').val(this.id);
-	});
-
-	//toggle the value of the rememberme checkbox
-	$('#dwfrm_login_rememberme').bind('change', function () {
-		if ($('#dwfrm_login_rememberme').attr('checked')) {
-			$('#rememberme').val('true');
-		} else {
-			$('#rememberme').val('false');
-		}
-	});
-	$('#password-reset').on('click', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: $(e.target).attr('href'),
-			options: {
-				open: function () {
-					validator.init();
-					var $requestPasswordForm = $('[name$="_requestpassword"]'),
-						$submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
-					$($submit).on('click', function (e) {
-						if (!$requestPasswordForm.valid()) {
-							return;
-						}
-						e.preventDefault();
-						dialog.submit($submit.attr('name'));
-					});
-				}
-			}
-		});
-	});
-}
-/**
- * @private
- * @function
- * @description Binds the events of the order, address and payment pages
- */
-function initializeEvents() {
-	toggleFullOrder();
-	initAddressEvents();
-	initPaymentEvents();
-	initLoginPage();
-}
-
-var account = {
-	init: function () {
-		initializeEvents();
-		giftcert.init();
-	},
-	initCartLogin: function () {
-		initLoginPage();
-	}
-};
-
-module.exports = account;
-
-},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../giftcert":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js","../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js":[function(require,module,exports){
-'use strict';
-
-var account = require('./account'),
-	bonusProductsView = require('../bonus-products-view'),
-	quickview = require('../quickview'),
-	cartStoreInventory = require('../storeinventory/cart');
-
-/**
- * @private
- * @function
- * @description Binds events to the cart page (edit item's details, bonus item's actions, coupon code entry)
- */
-function initializeEvents() {
-	$('#cart-table').on('click', '.item-edit-details a', function (e) {
-		e.preventDefault();
-		quickview.show({
-			url: e.target.href,
-			source: 'cart'
-		});
-	})
-	.on('click', '.bonus-item-actions a', function (e) {
-		e.preventDefault();
-		bonusProductsView.show(this.href);
-	});
-
-	// override enter key for coupon code entry
-	$('form input[name$="_couponCode"]').on('keydown', function (e) {
-		if (e.which === 13 && $(this).val().length === 0) { return false; }
-	});
-}
-
-exports.init = function () {
-	initializeEvents();
-	if (SitePreferences.STORE_PICKUP) {
-		cartStoreInventory.init();
-	}
-	account.initCartLogin();
-};
-
-},{"../bonus-products-view":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory/cart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/cart.js","./account":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
-'use strict';
-
-var util = require('../../util');
-var shipping = require('./shipping');
-
-/**
- * @function
- * @description Selects the first address from the list of addresses
- */
-exports.init = function () {
-	var $form = $('.address');
-	// select address from list
-	$('select[name$="_addressList"]', $form).on('change', function () {
-		var selected = $(this).children(':selected').first();
-		var selectedAddress = $(selected).data('address');
-		if (!selectedAddress) { return; }
-		util.fillAddressFields(selectedAddress, $form);
-		shipping.updateShippingMethodList();
-		// re-validate the form
-		$form.validate().form();
-	});
-
-	// update state options in case the country changes
-	$('select[id$="_country"]', $form).on('change', function () {
-		util.updateStateOptions($form);
-	});
-};
-
-},{"../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('../../ajax'),
-	formPrepare = require('./formPrepare'),
-	giftcard = require('../../giftcard'),
-	util = require('../../util');
-
-/**
- * @function
- * @description Fills the Credit Card form with the passed data-parameter and clears the former cvn input
- * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
- */
-function setCCFields(data) {
-	var $creditCard = $('[data-method="CREDIT_CARD"]');
-	$creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('change');
-	$creditCard.find('select[name$="_type"]').val(data.type).trigger('change');
-	$creditCard.find('input[name$="_number"]').val(data.maskedNumber).trigger('change');
-	$creditCard.find('[name$="_month"]').val(data.expirationMonth).trigger('change');
-	$creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
-	$creditCard.find('input[name$="_cvn"]').val('').trigger('change');
-}
-
-/**
- * @function
- * @description Updates the credit card form with the attributes of a given card
- * @param {String} cardID the credit card ID of a given card
- */
-function populateCreditCardForm(cardID) {
-	// load card details
-	var url = util.appendParamToURL(Urls.billingSelectCC, 'creditCardUUID', cardID);
-	ajax.getJson({
-		url: url,
-		callback: function (data) {
-			if (!data) {
-				window.alert(Resources.CC_LOAD_ERROR);
-				return false;
-			}
-			setCCFields(data);
-		}
-	});
-}
-
-/**
- * @function
- * @description Changes the payment method form depending on the passed paymentMethodID
- * @param {String} paymentMethodID the ID of the payment method, to which the payment method form should be changed to
- */
-function updatePaymentMethod(paymentMethodID) {
-	var $paymentMethods = $('.payment-method');
-	$paymentMethods.removeClass('payment-method-expanded');
-
-	var $selectedPaymentMethod = $paymentMethods.filter('[data-method="' + paymentMethodID + '"]');
-	if ($selectedPaymentMethod.length === 0) {
-		$selectedPaymentMethod = $('[data-method="Custom"]');
-	}
-	$selectedPaymentMethod.addClass('payment-method-expanded');
-
-	// ensure checkbox of payment method is checked
-	$('input[name$="_selectedPaymentMethodID"]').removeAttr('checked');
-	$('input[value=' + paymentMethodID + ']').prop('checked', 'checked');
-
-	formPrepare.validateForm();
-}
-
-/**
- * @function
- * @description loads billing address, Gift Certificates, Coupon and Payment methods
- */
-exports.init = function () {
-	var $checkoutForm = $('.checkout-billing');
-	var $addGiftCert = $('#add-giftcert');
-	var $giftCertCode = $('input[name$="_giftCertCode"]');
-	var $addCoupon = $('#add-coupon');
-	var $couponCode = $('input[name$="_couponCode"]');
-	var $selectPaymentMethod = $('.payment-method-options');
-	var selectedPaymentMethod = $selectPaymentMethod.find(':checked').val();
-
-	formPrepare.init({
-		formSelector: 'form[id$="billing"]',
-		continueSelector: '[name$="billing_save"]'
-	});
-
-	// default payment method to 'CREDIT_CARD'
-	updatePaymentMethod((selectedPaymentMethod) ? selectedPaymentMethod : 'CREDIT_CARD');
-	$selectPaymentMethod.on('click', 'input[type="radio"]', function () {
-		updatePaymentMethod($(this).val());
-	});
-
-	// select credit card from list
-	$('#creditCardList').on('change', function () {
-		var cardUUID = $(this).val();
-		if (!cardUUID) {return;}
-		populateCreditCardForm(cardUUID);
-
-		// remove server side error
-		$('.required.error').removeClass('error');
-		$('.error-message').remove();
-	});
-
-	$('#check-giftcert').on('click', function (e) {
-		e.preventDefault();
-		var $balance = $('.balance');
-		if ($giftCertCode.length === 0 || $giftCertCode.val().length === 0) {
-			var error = $balance.find('span.error');
-			if (error.length === 0) {
-				error = $('<span>').addClass('error').appendTo($balance);
-			}
-			error.html(Resources.GIFT_CERT_MISSING);
-			return;
-		}
-
-		giftcard.checkBalance($giftCertCode.val(), function (data) {
-			if (!data || !data.giftCertificate) {
-				$balance.html(Resources.GIFT_CERT_INVALID).removeClass('success').addClass('error');
-				return;
-			}
-			$balance.html(Resources.GIFT_CERT_BALANCE + ' ' + data.giftCertificate.balance).removeClass('error').addClass('success');
-		});
-	});
-
-	$addGiftCert.on('click', function (e) {
-		e.preventDefault();
-		var code = $giftCertCode.val(),
-			$error = $checkoutForm.find('.giftcert-error');
-		if (code.length === 0) {
-			$error.html(Resources.GIFT_CERT_MISSING);
-			return;
-		}
-
-		var url = util.appendParamsToUrl(Urls.redeemGiftCert, {giftCertCode: code, format: 'ajax'});
-		$.getJSON(url, function (data) {
-			var fail = false;
-			var msg = '';
-			if (!data) {
-				msg = Resources.BAD_RESPONSE;
-				fail = true;
-			} else if (!data.success) {
-				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
-				fail = true;
-			}
-			if (fail) {
-				$error.html(msg);
-				return;
-			} else {
-				window.location.assign(Urls.billing);
-			}
-		});
-	});
-
-	$addCoupon.on('click', function (e) {
-		e.preventDefault();
-		var $error = $checkoutForm.find('.coupon-error'),
-			code = $couponCode.val();
-		if (code.length === 0) {
-			$error.html(Resources.COUPON_CODE_MISSING);
-			return;
-		}
-
-		var url = util.appendParamsToUrl(Urls.addCoupon, {couponCode: code, format: 'ajax'});
-		$.getJSON(url, function (data) {
-			var fail = false;
-			var msg = '';
-			if (!data) {
-				msg = Resources.BAD_RESPONSE;
-				fail = true;
-			} else if (!data.success) {
-				msg = data.message.split('<').join('&lt;').split('>').join('&gt;');
-				fail = true;
-			}
-			if (fail) {
-				$error.html(msg);
-				return;
-			}
-
-			//basket check for displaying the payment section, if the adjusted total of the basket is 0 after applying the coupon
-			//this will force a page refresh to display the coupon message based on a parameter message
-			if (data.success && data.baskettotal === 0) {
-				window.location.assign(Urls.billing);
-			}
-		});
-	});
-
-	// trigger events on enter
-	$couponCode.on('keydown', function (e) {
-		if (e.which === 13) {
-			e.preventDefault();
-			$addCoupon.click();
-		}
-	});
-	$giftCertCode.on('keydown', function (e) {
-		if (e.which === 13) {
-			e.preventDefault();
-			$addGiftCert.click();
-		}
-	});
-};
-
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
-'use strict';
-
-var _ = require('lodash');
-
-var $form, $continue, $requiredInputs, validator;
-
-var hasEmptyRequired = function () {
-	// filter out only the visible fields
-	var requiredValues = $requiredInputs.filter(':visible').map(function () {
-		return $(this).val();
-	});
-	return _(requiredValues).contains('');
-};
-
-var validateForm = function () {
-	// only validate form when all required fields are filled to avoid
-	// throwing errors on empty form
-	if (!hasEmptyRequired()) {
-		if (validator.form()) {
-			$continue.removeAttr('disabled');
-		}
-	} else {
-		$continue.attr('disabled', 'disabled');
-	}
-};
-
-var validateEl = function () {
-	if ($(this).val() === '') {
-		$continue.attr('disabled', 'disabled');
-	} else {
-		// enable continue button on last required field that is valid
-		// only validate single field
-		if (validator.element(this) && !hasEmptyRequired()) {
-			$continue.removeAttr('disabled');
-		} else {
-			$continue.attr('disabled', 'disabled');
-		}
-	}
-};
-
-var init = function (opts) {
-	if (!opts.formSelector || !opts.continueSelector) {
-		throw new Error('Missing form and continue action selectors.');
-	}
-	$form = $(opts.formSelector);
-	$continue = $(opts.continueSelector);
-	validator = $form.validate();
-	$requiredInputs = $('.required', $form).find(':input');
-	validateForm();
-	// start listening
-	$requiredInputs.on('change', validateEl);
-	$requiredInputs.filter('input').on('keyup', _.debounce(validateEl, 200));
-};
-
-exports.init = init;
-exports.validateForm = validateForm;
-exports.validateEl = validateEl;
-
-},{"lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js":[function(require,module,exports){
-'use strict';
-
-var address = require('./address'),
-	billing = require('./billing'),
-	multiship = require('./multiship'),
-	shipping = require('./shipping');
-
-/**
- * @function Initializes the page events depending on the checkout stage (shipping/billing)
- */
-exports.init = function () {
-	address.init();
-	if ($('.checkout-shipping').length > 0) {
-		shipping.init();
-	} else if ($('.checkout-multi-shipping').length > 0) {
-		multiship.init();
-	} else {
-		billing.init();
-	}
-
-	//if on the order review page and there are products that are not available diable the submit order button
-	if ($('.order-summary-footer').length > 0) {
-		if ($('.notavailable').length > 0) {
-			$('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
-		}
-	}
-};
-
-},{"./address":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
-'use strict';
-
-var address = require('./address'),
-	formPrepare = require('./formPrepare'),
-	dialog = require('../../dialog'),
-	util = require('../../util');
-
-/**
- * @function
- * @description Initializes gift message box for multiship shipping, the message box starts off as hidden and this will display it if the radio button is checked to yes, also added event handler to listen for when a radio button is pressed to display the message box
- */
-function initMultiGiftMessageBox() {
-	$.each($('.item-list'), function () {
-		var $this = $(this),
-			$isGiftYes = $this.find('.js-isgiftyes'),
-			$isGiftNo = $this.find('.js-isgiftno'),
-			$giftMessage = $this.find('.gift-message-text');
-
-		//handle initial load
-		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display', 'block');
-		}
-
-		//set event listeners
-		$this.on('change', function () {
-			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display', 'block');
-			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display', 'none');
-			}
-		});
-	});
-}
-
-
-/**
- * @function
- * @description capture add edit adddress form events
- */
-function addEditAddress(target) {
-	var $addressForm = $('form[name$="multishipping_editAddress"]'),
-		$addressDropdown = $addressForm.find('select[name$=_addressList]'),
-		$addressList = $addressForm.find('.address-list'),
-		add = true,
-		selectedAddressUUID = $(target).parent().siblings('.select-address').val();
-
-	$addressDropdown.on('change', function (e) {
-		e.preventDefault();
-		var selectedAddress = $addressList.find('select').val();
-		if (selectedAddress !== 'newAddress') {
-			selectedAddress = $.grep($addressList.data('addresses'), function (add) {
-				return add.UUID === selectedAddress;
-			})[0];
-			add = false;
-			// proceed to fill the form with the selected address
-			util.fillAddressFields(selectedAddress, $addressForm);
-		} else {
-			//reset the form if the value of the option is not a UUID
-			$addressForm.find('.input-text, .input-select').val('');
-		}
-	});
-
-	$addressForm.on('click', '.cancel', function (e) {
-		e.preventDefault();
-		dialog.close();
-	});
-
-	$addressForm.on('submit', function (e) {
-		e.preventDefault();
-		$.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
-			if (!response.success) {
-				// @TODO: figure out a way to handle error on the form
-				return;
-			}
-			var address = response.address,
-				$shippingAddress = $(target).closest('.shippingaddress'),
-				$select = $shippingAddress.find('.select-address'),
-				$selected = $select.find('option:selected'),
-				newOption = '<option value="' + address.UUID + '">' +
-					((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
-					address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
-					'</option>';
-			dialog.close();
-			if (add) {
-				$('.shippingaddress select').removeClass('no-option').append(newOption);
-				$('.no-address').hide();
-			} else {
-				$('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
-			}
-			// if there's no previously selected option, select it
-			if ($selected.length === 0 || $selected.val() === '') {
-				$select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
-			}
-		});
-	});
-
-	//preserve the uuid of the option for the hop up form
-	if (selectedAddressUUID) {
-		//update the form with selected address
-		$addressList.find('option').each(function () {
-			//check the values of the options
-			if ($(this).attr('value') === selectedAddressUUID) {
-				$(this).prop('selected', 'selected');
-				$addressDropdown.trigger('change');
-			}
-		});
-	}
-}
-
-/**
- * @function
- * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
- */
-exports.init = function () {
-	initMultiGiftMessageBox();
-	if ($('.cart-row .shippingaddress .select-address').length > 0) {
-		formPrepare.init({
-			continueSelector: '[name$="addressSelection_save"]',
-			formSelector: '[id$="multishipping_addressSelection"]'
-		});
-	}
-	$('.edit-address').on('click', 'a', function (e) {
-		dialog.open({url: this.href, options: {open: function () {
-			address.init();
-			addEditAddress(e.target);
-		}}});
-	});
-};
-
-},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
-'use strict';
-
-var ajax = require('../../ajax'),
-	formPrepare = require('./formPrepare'),
-	progress = require('../../progress'),
-	tooltip = require('../../tooltip'),
-	util = require('../../util');
-
-var shippingMethods;
-/**
- * @function
- * @description Initializes gift message box, if shipment is gift
- */
-function giftMessageBox() {
-	// show gift message box, if shipment is gift
-	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
-}
-
-/**
- * @function
- * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
- */
-function updateSummary() {
-	var $summary = $('#secondary.summary');
-	// indicate progress
-	progress.show($summary);
-
-	// load the updated summary area
-	$summary.load(Urls.summaryRefreshURL, function () {
-		// hide edit shipping method link
-		$summary.fadeIn('fast');
-		$summary.find('.checkout-mini-cart .minishipment .header a').hide();
-		$summary.find('.order-totals-table .order-shipping .label a').hide();
-	});
-}
-
-/**
- * @function
- * @description Helper method which constructs a URL for an AJAX request using the
- * entered address information as URL request parameters.
- */
-function getShippingMethodURL(url, extraParams) {
-	var $form = $('.address');
-	var params = {
-		address1: $form.find('input[name$="_address1"]').val(),
-		address2: $form.find('input[name$="_address2"]').val(),
-		countryCode: $form.find('select[id$="_country"]').val(),
-		stateCode: $form.find('select[id$="_state"]').val(),
-		postalCode: $form.find('input[name$="_postal"]').val(),
-		city: $form.find('input[name$="_city"]').val()
-	};
-	return util.appendParamsToUrl(url, $.extend(params, extraParams));
-}
-
-/**
- * @function
- * @description selects a shipping method for the default shipment and updates the summary section on the right hand side
- * @param
- */
-function selectShippingMethod(shippingMethodID) {
-	// nothing entered
-	if (!shippingMethodID) {
-		return;
-	}
-	// attempt to set shipping method
-	var url = getShippingMethodURL(Urls.selectShippingMethodsList, {shippingMethodID: shippingMethodID});
-	ajax.getJson({
-		url: url,
-		callback: function (data) {
-			updateSummary();
-			if (!data || !data.shippingMethodID) {
-				window.alert('Couldn\'t select shipping method.');
-				return false;
-			}
-			// display promotion in UI and update the summary section,
-			// if some promotions were applied
-			$('.shippingpromotions').empty();
-
-			// TODO the for loop below isn't doing anything?
-			// if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
-			// 	var len = data.shippingPriceAdjustments.length;
-			// 	for (var i=0; i < len; i++) {
-			// 		var spa = data.shippingPriceAdjustments[i];
-			// 	}
-			// }
-		}
-	});
-}
-
-/**
- * @function
- * @description Make an AJAX request to the server to retrieve the list of applicable shipping methods
- * based on the merchandise in the cart and the currently entered shipping address
- * (the address may be only partially entered).  If the list of applicable shipping methods
- * has changed because new address information has been entered, then issue another AJAX
- * request which updates the currently selected shipping method (if needed) and also updates
- * the UI.
- */
-function updateShippingMethodList() {
-	var $shippingMethodList = $('#shipping-method-list');
-	if (!$shippingMethodList || $shippingMethodList.length === 0) { return; }
-	var url = getShippingMethodURL(Urls.shippingMethodsJSON);
-
-	ajax.getJson({
-		url: url,
-		callback: function (data) {
-			if (!data) {
-				window.alert('Couldn\'t get list of applicable shipping methods.');
-				return false;
-			}
-			if (shippingMethods && shippingMethods.toString() === data.toString()) {
-				// No need to update the UI.  The list has not changed.
-				return true;
-			}
-
-			// We need to update the UI.  The list has changed.
-			// Cache the array of returned shipping methods.
-			shippingMethods = data;
-			// indicate progress
-			progress.show($shippingMethodList);
-
-			// load the shipping method form
-			var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
-			$shippingMethodList.load(smlUrl, function () {
-				$shippingMethodList.fadeIn('fast');
-				// rebind the radio buttons onclick function to a handler.
-				$shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
-					selectShippingMethod($(this).val());
-				});
-
-				// update the summary
-				updateSummary();
-				progress.hide();
-				tooltip.init();
-				//if nothing is selected in the shipping methods select the first one
-				if ($shippingMethodList.find('.input-radio:checked').length === 0) {
-					$shippingMethodList.find('.input-radio:first').prop('checked', 'checked');
-				}
-			});
-		}
-	});
-}
-
-exports.init = function () {
-	formPrepare.init({
-		continueSelector: '[name$="shippingAddress_save"]',
-		formSelector:'[id$="singleshipping_shippingAddress"]'
-	});
-	$('#is-gift-yes, #is-gift-no').on('click', function () {
-		giftMessageBox();
-	});
-
-	$('.address').on('change',
-		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
-		updateShippingMethodList
-	);
-
-	giftMessageBox();
-	updateShippingMethodList();
-};
-
-exports.updateShippingMethodList = updateShippingMethodList;
-
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
-'use strict';
-
-var addProductToCart = require('./product/addToCart'),
-	ajax = require('../ajax'),
-	page = require('../page'),
-	productTile = require('../product-tile'),
-	quickview = require('../quickview');
-
-/**
- * @private
- * @function
- * @description Binds the click events to the remove-link and quick-view button
- */
-function initializeEvents() {
-	$('#compare-table').on('click', '.remove-link', function (e) {
-		e.preventDefault();
-		ajax.getJson({
-			url: this.href,
-			callback: function () {
-				page.refresh();
-			}
-		});
-	})
-	.on('click', '.open-quick-view', function (e) {
-		e.preventDefault();
-		var url = $(this).closest('.product').find('.thumb-link').attr('href');
-		quickview.show({
-			url: url,
-			source: 'quickview'
-		});
-	});
-
-	$('#compare-category-list').on('change', function () {
-		$(this).closest('form').submit();
-	});
-}
-
-exports.init = function () {
-	productTile.init();
-	initializeEvents();
-	addProductToCart();
-};
-
-},{"../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js":[function(require,module,exports){
+},{"./util":23}],6:[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2226,7 +707,7 @@ module.exports = function () {
 	}
 };
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js":[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2307,7 +788,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js":[function(require,module,exports){
+},{"../../dialog":3,"../../minicart":4,"../../page":5,"../../util":23,"lodash":29,"promise":30}],8:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2397,7 +878,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js":[function(require,module,exports){
+},{"../../ajax":1,"../../util":23}],9:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2410,9 +891,10 @@ var zoomMediaQuery = matchMedia('(min-width: 960px)');
  */
 var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zmq = zmq || zoomMediaQuery,
 		hiresUrl;
-
+	if (!zmq) {
+		zmq = zoomMediaQuery;
+	}
 	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
 		// remove zoom
 		$imgZoom.trigger('zoom.destroy');
@@ -2483,7 +965,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
+},{"../../dialog":3,"../../util":23}],10:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2572,7 +1054,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./availability":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js","./image":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js","./powerReviews":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js","./productNav":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js","./productSet":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js","./recommendations":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js","./variant":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js":[function(require,module,exports){
+},{"../../dialog":3,"../../send-to-friend":19,"../../storeinventory/product":21,"../../tooltip":22,"../../util":23,"./addThis":6,"./addToCart":7,"./availability":8,"./image":9,"./powerReviews":11,"./productNav":12,"./productSet":13,"./recommendations":14,"./variant":15}],11:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog');
@@ -2601,7 +1083,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js":[function(require,module,exports){
+},{"../../dialog":3}],12:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2628,7 +1110,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js":[function(require,module,exports){
+},{"../../ajax":1,"../../util":23}],13:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2678,7 +1160,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js":[function(require,module,exports){
+},{"../../ajax":1,"../../tooltip":22,"../../util":23,"./addToCart":7}],14:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2691,10 +1173,10 @@ module.exports = function () {
 	}
 	$carousel.jcarousel();
 	$('#carousel-recommendations .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -2702,10 +1184,10 @@ module.exports = function () {
 		});
 
 	$('#carousel-recommendations .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -2713,7 +1195,7 @@ module.exports = function () {
 		});
 };
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js":[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2790,390 +1272,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../storeinventory/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./image":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
-'use strict';
-
-var addProductToCart = require('./product/addToCart'),
-	ajax = require('../ajax'),
-	quickview = require('../quickview'),
-	sendToFriend = require('../send-to-friend'),
-	util = require('../util');
-
-/**
- * @function
- * @description Loads address details to a given address and fills the address form
- * @param {String} addressID The ID of the address to which data will be loaded
- */
-function populateForm(addressID, $form) {
-	// load address details
-	var url = Urls.giftRegAdd + addressID;
-	ajax.getJson({
-		url: url,
-		callback: function (data) {
-			if (!data || !data.address) {
-				window.alert(Resources.REG_ADDR_ERROR);
-				return false;
-			}
-			// fill the form
-			$form.find('[name$="_addressid"]').val(data.address.ID);
-			$form.find('[name$="_firstname"]').val(data.address.firstName);
-			$form.find('[name$="_lastname"]').val(data.address.lastName);
-			$form.find('[name$="_address1"]').val(data.address.address1);
-			$form.find('[name$="_address2"]').val(data.address.address2);
-			$form.find('[name$="_city"]').val(data.address.city);
-			$form.find('[name$="_country"]').val(data.address.countryCode).trigger('change');
-			$form.find('[name$="_postal"]').val(data.address.postalCode);
-			$form.find('[name$="_state"]').val(data.address.stateCode);
-			$form.find('[name$="_phone"]').val(data.address.phone);
-			// $form.parent('form').validate().form();
-		}
-	});
-}
-
-/**
- * @private
- * @function
- * @description Initializes events for the gift registration
- */
-function initializeEvents() {
-	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
-		$eventAddressForm = $('form[name$="_giftregistry"]'),
-		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
-		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
-
-	$('.usepreevent').on('click', function () {
-		// filter out storefront toolkit
-		$(':input', $beforeAddress).not('[id^="ext"]').not('select[name$="_addressBeforeList"]').each(function () {
-			var fieldName = $(this).attr('name'),
-				$afterField = $afterAddress.find('[name="' + fieldName.replace('Before', 'After') + '"]');
-			$afterField.val($(this).val()).trigger('change');
-		});
-	});
-	$eventAddressForm.on('change', 'select[name$="_addressBeforeList"]', function () {
-		var addressID = $(this).val();
-		if (addressID.length === 0) { return; }
-		populateForm(addressID, $beforeAddress);
-	})
-	.on('change', 'select[name$="_addressAfterList"]', function () {
-		var addressID = $(this).val();
-		if (addressID.length === 0) { return; }
-		populateForm(addressID, $afterAddress);
-	});
-
-	$beforeAddress.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($beforeAddress);
-	});
-
-	$afterAddress.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($afterAddress);
-	});
-
-	$eventInfoForm.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($eventInfoForm);
-	});
-
-	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
-		e.preventDefault();
-		var productListID = $('input[name=productListID]').val();
-		quickview.show({
-			url: e.target.href,
-			source: 'giftregistry',
-			productlistid: productListID
-		});
-	});
-}
-
-exports.init = function () {
-	initializeEvents();
-	addProductToCart();
-	sendToFriend.initializeDialog('.list-share');
-	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
-};
-
-},{"../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
-'use strict';
-
-var compareWidget = require('../compare-widget'),
-	productTile = require('../product-tile'),
-	progress = require('../progress'),
-	util = require('../util');
-
-function infiniteScroll() {
-	// getting the hidden div, which is the placeholder for the next page
-	var loadingPlaceHolder = $('.infinite-scroll-placeholder[data-loading-state="unloaded"]');
-	// get url hidden in DOM
-	var gridUrl = loadingPlaceHolder.attr('data-grid-url');
-
-	if (loadingPlaceHolder.length === 1 && util.elementInViewport(loadingPlaceHolder.get(0), 250)) {
-		// switch state to 'loading'
-		// - switches state, so the above selector is only matching once
-		// - shows loading indicator
-		loadingPlaceHolder.attr('data-loading-state', 'loading');
-		loadingPlaceHolder.addClass('infinite-scroll-loading');
-
-		/**
-		 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-		 */
-		var fillEndlessScrollChunk = function (html) {
-			loadingPlaceHolder.removeClass('infinite-scroll-loading');
-			loadingPlaceHolder.attr('data-loading-state', 'loaded');
-			$('div.search-result-content').append(html);
-		};
-
-		// old condition for caching was `'sessionStorage' in window && sessionStorage["scroll-cache_" + gridUrl]`
-		// it was removed to temporarily address RAP-2649
-		if (false) {
-			// if we hit the cache
-			fillEndlessScrollChunk(sessionStorage['scroll-cache_' + gridUrl]);
-		} else {
-			// else do query via ajax
-			$.ajax({
-				type: 'GET',
-				dataType: 'html',
-				url: gridUrl,
-				success: function (response) {
-					// put response into cache
-					try {
-						sessionStorage['scroll-cache_' + gridUrl] = response;
-					} catch (e) {
-						// nothing to catch in case of out of memory of session storage
-						// it will fall back to load via ajax
-					}
-					// update UI
-					fillEndlessScrollChunk(response);
-					productTile.init();
-				}
-			});
-		}
-	}
-}
-/**
- * @private
- * @function
- * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
- */
-function updateProductListing() {
-	var hash = location.href.split('#')[1];
-	if (hash === 'results-content' || hash === 'results-products') { return; }
-	var refineUrl;
-
-	if (hash.length > 0) {
-		refineUrl = window.location.pathname + '?' + hash;
-	} else {
-		return;
-	}
-	progress.show($('.search-result-content'));
-	$('#main').load(util.appendParamToURL(refineUrl, 'format', 'ajax'), function () {
-		compareWidget.init();
-		productTile.init();
-		progress.hide();
-	});
-}
-
-/**
- * @private
- * @function
- * @description Initializes events for the following elements:<br/>
- * <p>refinement blocks</p>
- * <p>updating grid: refinements, pagination, breadcrumb</p>
- * <p>item click</p>
- * <p>sorting changes</p>
- */
-function initializeEvents() {
-	var $main = $('#main');
-	// compare checked
-	$main.on('click', 'input[type="checkbox"].compare-check', function () {
-		var cb = $(this);
-		var tile = cb.closest('.product-tile');
-
-		var func = this.checked ? compareWidget.addProduct : compareWidget.removeProduct;
-		var itemImg = tile.find('.product-image a img').first();
-		func({
-			itemid: tile.data('itemid'),
-			uuid: tile[0].id,
-			img: itemImg,
-			cb: cb
-		});
-
-	});
-
-	// handle toggle refinement blocks
-	$main.on('click', '.refinement h3', function () {
-		$(this).toggleClass('expanded')
-		.siblings('ul').toggle();
-	});
-
-	// handle events for updating grid
-	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function () {
-		if ($(this).parent().hasClass('unselectable')) { return; }
-		var catparent = $(this).parents('.category-refinement');
-		var folderparent = $(this).parents('.folder-refinement');
-
-		//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
-		//else handle the encoding for the url
-		if (catparent.length > 0 || folderparent.length > 0) {
-			return true;
-		} else {
-			var uri = util.getUri(this);
-			if (uri.query.length > 1) {
-				window.location.hash = uri.query.substring(1);
-			} else {
-				window.location.href = this.href;
-			}
-			return false;
-		}
-	});
-
-	// handle events item click. append params.
-	$main.on('click', '.product-tile a:not("#quickviewbutton")', function () {
-		var a = $(this);
-		// get current page refinement values
-		var wl = window.location;
-
-		var qsParams = (wl.search.length > 1) ? util.getQueryStringParams(wl.search.substr(1)) : {};
-		var hashParams = (wl.hash.length > 1) ? util.getQueryStringParams(wl.hash.substr(1)) : {};
-
-		// merge hash params with querystring params
-		var params = $.extend(hashParams, qsParams);
-		if (!params.start) {
-			params.start = 0;
-		}
-		// get the index of the selected item and save as start parameter
-		var tile = a.closest('.product-tile');
-		var idx = tile.data('idx') ? + tile.data('idx') : 0;
-
-		// convert params.start to integer and add index
-		params.start = (+params.start) + (idx + 1);
-		// set the hash and allow normal action to continue
-		a[0].hash = $.param(params);
-	});
-
-	// handle sorting change
-	$main.on('change', '.sort-by select', function () {
-		var refineUrl = $(this).find('option:selected').val();
-		var uri = util.getUri(refineUrl);
-		window.location.hash = uri.query.substr(1);
-		return false;
-	})
-	.on('change', '.items-per-page select', function () {
-		var refineUrl = $(this).find('option:selected').val();
-		if (refineUrl === 'INFINITE_SCROLL') {
-			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
-		} else {
-			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
-			var uri = util.getUri(refineUrl);
-			window.location.hash = uri.query.substr(1);
-		}
-		return false;
-	});
-
-	// handle hash change
-	window.onhashchange = updateProductListing;
-}
-
-exports.init = function () {
-	compareWidget.init();
-	if (SitePreferences.LISTING_INFINITE_SCROLL) {
-		$(window).on('scroll', infiniteScroll);
-	}
-	productTile.init();
-	initializeEvents();
-};
-
-},{"../compare-widget":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
-'use strict';
-exports.init = function () {
-	var homepageCarousel = $('#homepage-slider')
-		// responsive slides
-		.on('jcarousel:create jcarousel:reload', function () {
-			var element = $(this),
-				width = element.innerWidth();
-			element.jcarousel('items').css('width', width + 'px');
-		})
-		.jcarousel({
-			wrap: 'circular'
-		})
-		.jcarouselAutoscroll({
-			interval: 5000
-		});
-	$('#homepage-slider .jcarousel-control')
-		.on('jcarouselpagination:active', 'a', function () {
-			$(this).addClass('active');
-		})
-		.on('jcarouselpagination:inactive', 'a', function () {
-			$(this).removeClass('active');
-		})
-		.jcarouselPagination({
-			item: function (page) {
-				return '<a href="#' + page + '">' + page + '</a>';
-			}
-		});
-
-	$('#vertical-carousel')
-		.jcarousel({
-			vertical: true
-		})
-		.jcarouselAutoscroll({
-			interval: 5000
-		});
-	$('#vertical-carousel .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
-			$(this).removeClass('inactive');
-		})
-		.on('jcarouselcontrol:inactive', function() {
-			$(this).addClass('inactive');
-		})
-		.jcarouselControl({
-			target: '-=1'
-		});
-
-	$('#vertical-carousel .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
-			$(this).removeClass('inactive');
-		})
-		.on('jcarouselcontrol:inactive', function() {
-			$(this).addClass('inactive');
-		})
-		.jcarouselControl({
-			target: '+=1'
-		});
-};
-
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js":[function(require,module,exports){
-'use strict';
-var dialog = require('../dialog');
-
-exports.init = function () {
-	$('.store-details-link').on('click', function (e) {
-		e.preventDefault();
-		dialog.open({
-			url: $(e.target).attr('href')
-		});
-	});
-};
-
-},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
-'use strict';
-
-var addProductToCart = require('./product/addToCart'),
-	page = require('../page'),
-	sendToFriend = require('../send-to-friend'),
-	util = require('../util');
-
-exports.init = function () {
-	addProductToCart();
-	sendToFriend.initializeDialog('.list-share');
-	$('#editAddress').on('change', function () {
-		page.redirect(util.appendParamToURL(Urls.wishlistAddress, 'AddressID', $(this).val()));
-	});
-
-	//add js logic to remove the , from the qty feild to pass regex expression on client side
-	$('.option-quantity-desired input').on('focusout', function () {
-		$(this).val($(this).val().replace(',', ''));
-	});
-};
-
-},{"../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
+},{"../../ajax":1,"../../progress":17,"../../storeinventory/product":21,"../../tooltip":22,"../../util":23,"./addThis":6,"./addToCart":7,"./image":9}],16:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3277,7 +1376,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","imagesloaded":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/imagesloaded.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js":[function(require,module,exports){
+},{"./quickview":18,"imagesloaded":26}],17:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3310,7 +1409,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3329,6 +1428,10 @@ var makeUrl = function (url, source, productListID) {
 	return url;
 };
 
+var removeParam = function (url) {
+	return url.substring(0, url.indexOf('?'));
+};
+
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
@@ -3345,11 +1448,8 @@ var quickview = {
 
 		product.initializeEvents();
 
-		// remove any param
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
 		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
-			return url === qvUrl;
+			return removeParam(url) === removeParam(qvUrl);
 		});
 
 		// hide the buttons on the compare page or when there are no other products
@@ -3424,382 +1524,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./pages/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
-'use strict';
-
-/**
- * @private
- * @function
- * @description Binds event to the place holder (.blur)
- */
-function initializeEvents() {
-	$('#q').focus(function () {
-		var input = $(this);
-		if (input.val() === input.attr('placeholder')) {
-			input.val('');
-		}
-	})
-	.blur(function () {
-		var input = $(this);
-		if (input.val() === '' || input.val() === input.attr('placeholder')) {
-			input.val(input.attr('placeholder'));
-		}
-	})
-	.blur();
-}
-
-exports.init = initializeEvents;
-
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
-'use strict';
-
-var util = require('./util');
-
-var currentQuery = null,
-	lastQuery = null,
-	runningQuery = null,
-	listTotal = -1,
-	listCurrent = -1,
-	delay = 30,
-	$resultsContainer;
-/**
- * @function
- * @description Handles keyboard's arrow keys
- * @param keyCode Code of an arrow key to be handled
- */
-function handleArrowKeys(keyCode) {
-	switch (keyCode) {
-		case 38:
-			// keyUp
-			listCurrent = (listCurrent <= 0) ? (listTotal - 1) : (listCurrent - 1);
-			break;
-		case 40:
-			// keyDown
-			listCurrent = (listCurrent >= listTotal - 1) ? 0 : listCurrent + 1;
-			break;
-		default:
-			// reset
-			listCurrent = -1;
-			return false;
-	}
-
-	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
-	return true;
-}
-
-var searchsuggest = {
-	/**
-	 * @function
-	 * @description Configures parameters and required object instances
-	 */
-	init: function (container, defaultValue) {
-		var $searchContainer = $(container),
-			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
-			$searchField = $searchForm.find('input[name="q"]'),
-			fieldDefault = defaultValue;
-
-		// disable browser auto complete
-		$searchField.attr('autocomplete', 'off');
-
-		// on focus listener (clear default value)
-		$searchField.focus(function () {
-			if (!$resultsContainer) {
-				// create results container if needed
-				$resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
-			}
-			if ($searchField.val() === fieldDefault) {
-				$searchField.val('');
-			}
-		});
-		// on blur listener
-		$searchField.blur(function () {
-			setTimeout(this.clearResults, 200);
-		}.bind(this));
-		// on key up listener
-		$searchField.keyup(function (e) {
-
-			// get keyCode (window.event is for IE)
-			var keyCode = e.keyCode || window.event.keyCode;
-
-			// check and treat up and down arrows
-			if (handleArrowKeys(keyCode)) {
-				return;
-			}
-			// check for an ENTER or ESC
-			if (keyCode === 13 || keyCode === 27) {
-				this.clearResults();
-				return;
-			}
-
-			currentQuery = $searchField.val().trim();
-
-			// no query currently running, init a update
-			if (runningQuery === null) {
-				runningQuery = currentQuery;
-				setTimeout(this.suggest.bind(this), delay);
-			}
-		}.bind(this));
-	},
-
-	/**
-	 * @function
-	 * @description trigger suggest action
-	 */
-	suggest: function () {
-		// check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
-		// (we had a little delay)
-		if (runningQuery !== currentQuery) {
-			// update running query to the most recent search phrase
-			runningQuery = currentQuery;
-		}
-
-		// if it's empty clear the results box and return
-		if (runningQuery.length === 0) {
-			this.clearResults();
-			runningQuery = null;
-			return;
-		}
-
-		// if the current search phrase is the same as for the last suggestion call, just return
-		if (lastQuery === runningQuery) {
-			runningQuery = null;
-			return;
-		}
-
-		// build the request url
-		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery);
-		reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'false');
-
-		// execute server call
-		$.get(reqUrl, function (data) {
-			var suggestionHTML = data,
-				ansLength = suggestionHTML.trim().length;
-
-			// if there are results populate the results div
-			if (ansLength === 0) {
-				this.clearResults();
-			} else {
-				// update the results div
-				$resultsContainer.html(suggestionHTML).fadeIn(200);
-			}
-
-			// record the query that has been executed
-			lastQuery = runningQuery;
-			// reset currently running query
-			runningQuery = null;
-
-			// check for another required update (if current search phrase is different from just executed call)
-			if (currentQuery !== lastQuery) {
-				// ... and execute immediately if search has changed while this server call was in transit
-				runningQuery = currentQuery;
-				setTimeout(this.suggest.bind(this), delay);
-			}
-			this.hideLeftPanel();
-		}.bind(this));
-	},
-	/**
-	 * @function
-	 * @description
-	 */
-	clearResults: function () {
-		if (!$resultsContainer) { return; }
-		$resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
-	},
-	/**
-	 * @function
-	 * @description
-	 */
-	hideLeftPanel: function () {
-		//hide left panel if there is only a matching suggested custom phrase
-		if ($('.search-suggestion-left-panel-hit').length === 1 && $('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() === $('.search-suggestion-left-panel-hit a').text().toUpperCase()) {
-			$('.search-suggestion-left-panel').css('display', 'none');
-			$('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
-			$('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
-		}
-	}
-};
-
-module.exports = searchsuggest;
-
-},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
-'use strict';
-
-var util = require('./util');
-
-var qlen = 0,
-	listTotal = -1,
-	listCurrent = -1,
-	delay = 300,
-	fieldDefault = null,
-	suggestionsJson = null,
-	$searchForm,
-	$searchField,
-	$searchContainer,
-	$resultsContainer;
-/**
- * @function
- * @description Handles keyboard's arrow keys
- * @param keyCode Code of an arrow key to be handled
- */
-function handleArrowKeys(keyCode) {
-	switch (keyCode) {
-		case 38:
-			// keyUp
-			listCurrent = (listCurrent <= 0) ? (listTotal - 1) : (listCurrent - 1);
-			break;
-		case 40:
-			// keyDown
-			listCurrent = (listCurrent >= listTotal - 1) ? 0 : listCurrent + 1;
-			break;
-		default:
-			// reset
-			listCurrent = -1;
-			return false;
-	}
-
-	$resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-	$searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
-	return true;
-}
-var searchsuggest = {
-	/**
-	 * @function
-	 * @description Configures parameters and required object instances
-	 */
-	init: function (container, defaultValue) {
-		// initialize vars
-		$searchContainer = $(container);
-		$searchForm = $searchContainer.find('form[name="simpleSearch"]');
-		$searchField = $searchForm.find('input[name="q"]');
-		fieldDefault = defaultValue;
-
-		// disable browser auto complete
-		$searchField.attr('autocomplete', 'off');
-
-		// on focus listener (clear default value)
-		$searchField.focus(function () {
-			if (!$resultsContainer) {
-				// create results container if needed
-				$resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
-					'top': $searchContainer[0].offsetHeight,
-					'left': 0,
-					'width': $searchField[0].offsetWidth
-				});
-			}
-			if ($searchField.val() === fieldDefault) {
-				$searchField.val('');
-			}
-		});
-		// on blur listener
-		$searchField.blur(function () {
-			setTimeout(this.clearResults, 200);
-		}.bind(this));
-		// on key up listener
-		$searchField.keyup(function (e) {
-
-			// get keyCode (window.event is for IE)
-			var keyCode = e.keyCode || window.event.keyCode;
-
-			// check and treat up and down arrows
-			if (handleArrowKeys(keyCode)) {
-				return;
-			}
-			// check for an ENTER or ESC
-			if (keyCode === 13 || keyCode === 27) {
-				this.clearResults();
-				return;
-			}
-
-			var lastVal = $searchField.val();
-
-			// if is text, call with delay
-			setTimeout(function () {
-				this.suggest(lastVal);
-			}.bind(this), delay);
-		}.bind(this));
-		// on submit we do not submit the form, but change the window location
-		// in order to avoid https to http warnings in the browser
-		// only if it's not the default value and it's not empty
-		$searchForm.submit(function (e) {
-			e.preventDefault();
-			var searchTerm = $searchField.val();
-			if (searchTerm === fieldDefault || searchTerm.length === 0) {
-				return false;
-			}
-			window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
-		});
-	},
-
-	/**
-	 * @function
-	 * @description trigger suggest action
-	 * @param lastValue
-	 */
-	suggest: function (lastValue) {
-		// get the field value
-		var part = $searchField.val();
-
-		// if it's empty clear the resuts box and return
-		if (part.length === 0) {
-			this.clearResults();
-			return;
-		}
-
-		// if part is not equal to the value from the initiated call,
-		// or there were no results in the last call and the query length
-		// is longer than the last query length, return
-		// #TODO: improve this to look at the query value and length
-		if ((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
-			return;
-		}
-		qlen = part.length;
-
-		// build the request url
-		var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part);
-		reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'true');
-
-		// get remote data as JSON
-		$.getJSON(reqUrl, function (data) {
-			// get the total of results
-			var suggestions = data,
-				ansLength = suggestions.length;
-
-			// if there are results populate the results div
-			if (ansLength === 0) {
-				this.clearResults();
-				return;
-			}
-			suggestionsJson = suggestions;
-			var html = '';
-			for (var i = 0; i < ansLength; i++) {
-				html += '<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
-			}
-
-			// update the results div
-			$resultsContainer.html(html).show().on('hover', 'div', function () {
-				$(this).toggleClass = 'selected';
-			}).on('click', 'div', function () {
-				// on click copy suggestion to search field, hide the list and submit the search
-				$searchField.val($(this).children('.suggestionterm').text());
-				this.clearResults();
-				$searchForm.trigger('submit');
-			}.bind(this));
-		}.bind(this));
-	},
-	/**
-	 * @function
-	 * @description
-	 */
-	clearResults: function () {
-		if (!$resultsContainer) { return; }
-		$resultsContainer.empty().hide();
-	}
-};
-
-module.exports = searchsuggest;
-
-},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
+},{"./dialog":3,"./pages/product":10,"./util":23,"lodash":29}],19:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3809,63 +1534,59 @@ var ajax = require('./ajax'),
 
 var sendToFriend = {
 	init: function () {
-		var $form = $('#send-to-friend-form'),
-			$dialog = $('#send-to-friend-dialog');
-		util.limitCharacters();
-		$dialog.on('click', '.preview-button, .send-button, .edit-button', function (e) {
-			e.preventDefault();
-			$form.validate();
-			if (!$form.valid()) {
-				return false;
-			}
-			var requestType = $form.find('#request-type');
-			if (requestType.length > 0) {
-				requestType.remove();
-			}
-			$('<input/>').attr({id: 'request-type', type: 'hidden', name: $(this).attr('name'), value: $(this).attr('value')}).appendTo($form);
-			var data = $form.serialize();
-			ajax.load({url:$form.attr('action'),
-				data: data,
-				target: $dialog,
-				callback: function () {
-					validator.init();
-					util.limitCharacters();
-					$('.ui-dialog-content').dialog('option', 'position', 'center');
+		$('#send-to-friend-dialog')
+			.on('click', '.preview-button, .send-button, .edit-button', function (e) {
+				e.preventDefault();
+				var $form = $('#send-to-friend-form')
+				$form.validate();
+				if (!$form.valid()) {
+					return false;
 				}
+				var requestType = $form.find('#request-type');
+				if (requestType.length > 0) {
+					requestType.remove();
+				}
+				$('<input/>').attr({
+					id: 'request-type',
+					type: 'hidden',
+					name: $(this).attr('name'),
+					value: $(this).attr('value')
+				}).appendTo($form);
+				dialog.replace({
+					url: $form.attr('action'),
+					data: $form.serialize(),
+					callback: function () {
+						validator.init();
+						util.limitCharacters();
+					}
+				});
+			})
+			.on('click', '.cancel-button, .close-button', function (e) {
+				e.preventDefault();
+				dialog.close();
 			});
-		})
-		.on('click', '.cancel-button, .close-button', function (e) {
-			e.preventDefault();
-			$dialog.dialog('close');
-		});
 	},
 	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
-			var dlg = dialog.create({
-				target: $('#send-to-friend-dialog'),
-				options: {
-					width: 800,
-					height: 'auto',
-					title: this.title,
-					open: function () {
-						sendToFriend.init();
-						validator.init();
-					}
-				}
-			});
-
+			var url = this.href;
 			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
-			var url = util.appendParamsToUrl(this.href, data);
+			url = util.appendParamsToUrl(this.href, data);
 			url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-			ajax.load({
-				url: util.ajaxUrl(url),
-				target: dlg,
+
+			dialog.open({
+				target: '#send-to-friend-dialog',
+				url: url,
+				options: {
+					title: this.title
+				},
 				callback: function () {
-					dlg.dialog('open');	// open after load to ensure dialog is centered
+					sendToFriend.init();
+					validator.init();
+					util.limitCharacters();
 				}
 			});
 		});
@@ -3874,94 +1595,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/cart.js":[function(require,module,exports){
-'use strict';
-
-var inventory = require('./');
-
-var cartInventory = {
-	setSelectedStore: function (storeId) {
-		var $selectedStore = $('.store-tile.' + storeId),
-			$lineItem = $('.cart-row[data-uuid="' + this.uuid + '"]'),
-			storeAddress = $selectedStore.find('.store-address').html(),
-			storeStatus = $selectedStore.find('.store-status').data('status'),
-			storeStatusText = $selectedStore.find('.store-status').text();
-		this.selectedStore = storeId;
-
-		$lineItem.find('.instore-delivery .selected-store-address')
-			.data('storeId', storeId)
-			.attr('data-store-id', storeId)
-			.html(storeAddress);
-		$lineItem.find('.instore-delivery .selected-store-availability')
-			.data('status', storeStatus)
-			.attr('data-status', storeStatus)
-			.text(storeStatusText);
-		$lineItem.find('.instore-delivery .delivery-option').removeAttr('disabled').trigger('click');
-	},
-	cartSelectStore: function () {
-		var self = this;
-		inventory.getStoresInventory(this.uuid).then(function (stores) {
-			inventory.selectStoreDialog({
-				stores: stores,
-				selectedStoreId: self.selectedStore,
-				selectedStoreText: Resources.SELECTED_STORE,
-				continueCallback: function () {},
-				selectStoreCallback: self.setSelectedStore.bind(self)
-			});
-		}).done();
-	},
-	setDeliveryOption: function (value) {
-		// set loading state
-		$('.item-delivery-options')
-			.addClass('loading')
-			.children().hide();
-
-		var data = {
-			plid: this.uuid,
-			storepickup: (value === 'store' ? true : false)
-		};
-		if (value === 'store') {
-			data.storepickup = true;
-			data.storeid = this.selectedStore;
-		} else {
-			data.storepickup = false;
-		}
-		$.ajax({
-			url: Urls.setStorePickup,
-			data: data,
-			success: function () {
-				// remove loading state
-				$('.item-delivery-options')
-					.removeClass('loading')
-					.children().show();
-			}
-		});
-	},
-	init: function () {
-		var self = this;
-		$('.item-delivery-options .set-preferred-store').on('click', function (e) {
-			e.preventDefault();
-			self.uuid = $(this).data('uuid');
-			self.selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
-			if (!User.zip) {
-				inventory.zipPrompt(function () {
-					self.cartSelectStore();
-				});
-			} else {
-				self.cartSelectStore();
-			}
-		});
-		$('.item-delivery-options .delivery-option').on('click', function () {
-			// reset the uuid
-			self.uuid = $(this).closest('.cart-row').data('uuid');
-			self.setDeliveryOption($(this).val());
-		});
-	}
-};
-
-module.exports = cartInventory;
-
-},{"./":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js":[function(require,module,exports){
+},{"./ajax":1,"./dialog":3,"./util":23,"./validator":24}],20:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4000,7 +1634,7 @@ var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 			'</div>'
 		].join(newLine);
 	} else {
-		return '<div class="no-results">'+ Resources.NO_RESULTS +'</div>';
+		return '<div class="no-results">' + Resources.NO_RESULTS + '</div>';
 	}
 };
 
@@ -4123,7 +1757,7 @@ var storeinventory = {
 						}
 					});
 				}
-			},
+			}
 		});
 	},
 	setUserZip: function (zip) {
@@ -4147,7 +1781,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js":[function(require,module,exports){
+},{"../dialog":3,"../util":23,"lodash":29,"promise":30}],21:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4243,7 +1877,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js":[function(require,module,exports){
+},{"./":20,"lodash":29}],22:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4254,13 +1888,13 @@ exports.init = function () {
 	$(document).tooltip({
 		items: '.tooltip',
 		track: true,
-		content: function (callback) {
+		content: function () {
 			return $(this).find('.tooltip-content').html();
 		}
 	});
 };
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4572,7 +2206,7 @@ var util = {
 
 module.exports = util;
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4694,7 +2328,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4782,7 +2416,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/imagesloaded.js":[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5119,7 +2753,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js","wolfy87-eventemitter":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js":[function(require,module,exports){
+},{"eventie":27,"wolfy87-eventemitter":28}],27:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5203,7 +2837,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js":[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -5677,7 +3311,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12466,14 +10100,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
+},{"./lib/core.js":31,"./lib/done.js":32,"./lib/es6-extensions.js":33,"./lib/node-extensions.js":34}],31:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12580,7 +10214,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
+},{"asap":35}],32:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12595,7 +10229,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
+},{"./core.js":31,"asap":35}],33:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12705,7 +10339,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
+},{"./core.js":31,"asap":35}],34:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12767,7 +10401,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
+},{"./core.js":31,"asap":35}],35:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12884,4 +10518,11 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/browserify/node_modules/process/browser.js"}]},{},["./app_storefront_richUI/cartridge/js/app.js"]);
+},{"_process":25}],36:[function(require,module,exports){
+'use strict';
+
+var productTile = require('../../../app_storefront_richUI/cartridge/js/product-tile');
+
+productTile.init();
+
+},{"../../../app_storefront_richUI/cartridge/js/product-tile":16}]},{},[36]);
