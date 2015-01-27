@@ -5,7 +5,10 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		watch: {
 			sass: {
-				files: ['app_storefront_core/cartridge/scss/*.scss'],
+				files: [
+					'app_storefront_core/cartridge/scss/*.scss',
+					'app_storefront_jp/cartridge/scss/*.scss'
+				],
 				tasks: ['scss']
 			},
 			js: {
@@ -20,7 +23,15 @@ module.exports = function (grunt) {
 					sourcemap: true
 				},
 				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss'
+					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss'				}
+			},
+			japan: {
+				options: {
+					style: 'expanded',
+					sourcemap: true
+				},
+				files: {
+					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/scss/style.scss'
 				}
 			}
 		},
@@ -28,7 +39,11 @@ module.exports = function (grunt) {
 			dev: {
 				src: 'app_storefront_core/cartridge/static/default/css/style.css',
 				dest: 'app_storefront_core/cartridge/static/default/css/style.css'
-			}
+			},
+			japan: {
+				src: 'app_storefront_jp/cartridge/static/ja_JP/css/style.css',
+				dest: 'app_storefront_jp/cartridge/static/ja_JP/css/style.css'
+			}			
 		},
 		browserify: {
 			dist: {

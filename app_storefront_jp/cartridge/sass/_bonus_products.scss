@@ -1,0 +1,38 @@
+.select-bonus-btn,
+.no-bonus-btn {
+	float: left;
+	margin: 0 5px 0 0;
+}
+
+.buttonbar {
+	margin: 11px 0;
+	overflow: hidden;
+}
+
+.bonus-product-list {
+	.bonus-product-item {
+		border-bottom: 1px solid $gainsboro;
+		clear: both;
+	}
+	.product-name {
+		float: none;
+		margin: 1em 0;
+	}
+	.product-add-to-cart button {
+		float: left;
+		margin-top: 22px;
+		margin-left: 2%;
+	}
+	.quantity-error {
+		color: red;
+		text-transform: inherit;
+	}
+}
+
+.bonus-product-list-footer {
+	clear: both;
+	button {
+		float: right;
+		margin-top: -2%;
+	}
+}

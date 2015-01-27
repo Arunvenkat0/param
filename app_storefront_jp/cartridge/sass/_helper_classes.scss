@@ -1,0 +1,31 @@
+.clearfix:after {
+	clear: both;
+	content: " ";
+	display: block;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+.visually-hidden {
+	border: 0 none;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	.ie7 & {
+		width: 1px !important;
+	}
+}
+
+.menu {
+	float: left;
+	margin: 0;
+	padding: 0;
+	li {
+		float: left;
+		list-style: none outside none !important;
+	}
+}

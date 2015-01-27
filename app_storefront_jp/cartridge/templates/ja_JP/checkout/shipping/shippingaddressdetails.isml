@@ -21,8 +21,8 @@
 					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.postal}" type="input"/>
 
 				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.states.state}" type="select"/>
+				<div class="formfield clearfix">BOING
+					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.states.state}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">

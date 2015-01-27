@@ -1,0 +1,224 @@
+#header {
+	height: 79px;
+	position: relative;
+	.ie7 & {
+		z-index: 200;
+	}
+	.primary-logo {
+		left: 0;
+		margin: 0;
+		position: absolute;
+		top: 22px;
+		a {
+			display: block;
+		}
+		span {
+			left: -999em;
+			position: absolute;
+		}
+	}
+}
+
+.header-banner {
+	clear: both;
+	float: right;
+	font-size: 1.2em;
+	margin: 0 6px;
+	.ie7 & {
+		width: 350px;
+	}
+}
+
+#mini-cart {
+	float: right;
+	margin: 5px 6px 0 0;
+	position: relative;
+	z-index: 20;
+	a {
+		color: $pacific-blue;
+	}
+}
+
+.mini-cart-label {
+	margin: 0 10px 0 0;
+}
+
+.mini-cart-total {
+	font-size: 1em;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.mini-cart-content {
+	background: none repeat scroll 0 0 $white-smoke;
+	border: 2px solid $very-light-gray;
+	display: none;
+	position: absolute;
+	right: -1px;
+	top: 15px;
+	width: 220px;
+	#mini-cart:hover & {
+		display: block;
+	}
+}
+
+.mini-cart-header {
+	border-color: $white;
+	border-style: solid;
+	border-width: 1px 1px 0;
+	font-size: 1.1em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 12px;
+	text-transform: uppercase;
+}
+
+.mini-cart-close {
+	background: url("../images/interface/icon-mini-cart-close.png") no-repeat scroll left top transparent;
+	display: none;
+	height: 20px;
+	text-indent: -999em;
+	width: 19px;
+}
+
+.mini-cart-products {
+	max-height: 360px;
+	overflow: auto;
+}
+
+.mini-cart-product {
+	background: none repeat scroll 0 0 $white;
+	border-color: $white;
+	border-style: solid;
+	border-width: 1px 1px 0;
+	overflow: hidden;
+	padding: 10px;
+	&.collapsed {
+		background: none repeat scroll 0 0 $gainsboro;
+		.mini-cart-name, .mini-cart-attributes, .mini-cart-pricing, .product-availability-list {
+			width: 90%;
+		}
+	}
+}
+
+.mini-cart-image {
+	float: left;
+	width: 50%;
+	img {
+		max-width: 90%;
+	}
+}
+
+.mini-cart-name {
+	float: right;
+	font-family: $serif;
+	font-style: italic;
+	width: 50%;
+}
+
+.mini-cart-attributes,
+.mini-cart-product .product-availability-list {
+	float: right;
+	font-size: 0.9em;
+	font-weight: bold;
+	width: 50%;
+}
+
+.mini-cart-pricing {
+	clear: right;
+	float: right;
+	font-size: 0.9em;
+	width: 50%;
+}
+
+.mini-cart-subtotals {
+	font-weight: 700;
+	padding: 10px 0 0;
+	text-align: center;
+	.label {
+		margin: 0 20px 0 0;
+	}
+}
+
+.mini-cart-slot {
+	background: none repeat scroll 0 0 $gainsboro;
+	border: 1px solid $gainsboro;
+	font-size: 0.9em;
+	font-style: italic;
+	margin: 20px;
+	padding: 10px;
+	text-align: center;
+}
+
+.mini-cart-link-cart {
+	display: block;
+	margin: 20px;
+	width: auto;
+}
+
+.mini-cart-link-checkout {
+	clear: both;
+	display: block;
+	padding: 20px 0 10px;
+	text-align: center;
+}
+
+.menu-utility {
+	clear: both;
+	color: $nobel;
+	float: right;
+	font-size: 0.8em;
+	letter-spacing: 1px;
+	margin: 10px 0;
+	padding: 0;
+	text-transform: uppercase;
+	.ie7 & {
+		width: 350px;
+	}
+}
+
+.menu-utility-user {
+	color: $nobel;
+	float: right;
+	font-size: 0.8em;
+	letter-spacing: 1px;
+	margin: 6px 10px 0 0;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+.menu-utility li,
+.menu-utility-user li {
+	border-right: 1px solid;
+	float: left;
+	list-style: none outside none;
+	padding: 0 6px;
+	&.last {
+		border: none;
+	}
+}
+
+.header-search {
+	position: absolute;
+	right: 5px;
+	top: 12px;
+	input[type="text"] {
+		background: none repeat scroll 0 0 $dim-gray;
+		border: 0 none;
+		color: $white;
+		height: 16px;
+		margin: 0;
+		width: 180px;
+	}
+	input[type="submit"] {
+		background: url("../images/interface/icon-search.png") no-repeat scroll center center transparent;
+		border: 0 none;
+		height: 32px;
+		padding: 8px 0;
+		text-indent: -999em;
+		width: 32px;
+	}
+	legend {
+		background: none repeat scroll 0 0 transparent;
+	}
+}

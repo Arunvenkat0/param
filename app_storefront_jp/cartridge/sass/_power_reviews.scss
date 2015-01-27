@@ -1,0 +1,28 @@
+.pr-snippet-wrapper {
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+}
+.pr-snippet-stars {
+	border: 0 none;
+}
+.pr-snippet-review-count {
+	display: none;
+}
+.pr-snippet-read-write {
+	border: 0 none;
+	clear: none;
+	float: left;
+	font-size: 1.1em;
+	margin: 0;
+	padding: 4px 0;
+	p {
+		display: none;
+	}
+	a.pr-snippet-link {
+		color: $pacific-blue;
+	}
+}
+.review-image {
+	float: left;
+	margin: 0 20px;
+}
