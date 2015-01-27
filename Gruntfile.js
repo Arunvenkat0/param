@@ -23,27 +23,18 @@ module.exports = function (grunt) {
 					sourcemap: true
 				},
 				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss'				}
-			},
-			japan: {
-				options: {
-					style: 'expanded',
-					sourcemap: true
-				},
-				files: {
-					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/scss/style.scss'
+					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss',
+					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/sass/style.scss'
 				}
 			}
 		},
 		autoprefixer: {
 			dev: {
-				src: 'app_storefront_core/cartridge/static/default/css/style.css',
-				dest: 'app_storefront_core/cartridge/static/default/css/style.css'
+				files: {
+					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/static/default/css/style.css',
+					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/static/ja_JP/css/style.css'
+				}
 			},
-			japan: {
-				src: 'app_storefront_jp/cartridge/static/ja_JP/css/style.css',
-				dest: 'app_storefront_jp/cartridge/static/ja_JP/css/style.css'
-			}			
 		},
 		browserify: {
 			dist: {
