@@ -288,7 +288,10 @@ var load = function (options) {
 	$.ajax({
 		dataType: 'html',
 		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data
+		data: options.data,
+		xhrFields: {
+			withCredentials: true
+		}
 	})
 	.done(function (response) {
 		// success
