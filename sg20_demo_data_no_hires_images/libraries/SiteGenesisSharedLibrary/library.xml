@@ -1747,7 +1747,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
             <page-title xml:lang="x-default">General Error</page-title>
         </page-attributes>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;An error occurred in the application. Please try again and contact our call center if the problem persists. Feel free to use the search below to assist you in finding what you were looking for.&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We're sorry that your order could not be placed. This probably happened due to a high order volume or temporary connection errors. Please wait a few minutes and resubmit your order. We won't process your payment until you successfully place your order. If you have further questions, please contact us via &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="page-includes"/>
