@@ -167,7 +167,15 @@
           <template buffered="true" dynamic="false" name="account/payment/paymentinstrumentdetails"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="create">
+        <branch basename="b2" source-connector="cancel">
+          <transition target-connector="in2" target-path="./+3">
+            <transition-display>
+              <bend-point relative-to="source" x="-1" y="1"/>
+              <bend-point relative-to="target" x="-1" y="-1"/>
+            </transition-display>
+          </transition>
+        </branch>
+        <branch basename="b3" source-connector="create">
           <transition target-connector="in1" target-path="./+1"/>
         </branch>
       </node>
@@ -175,7 +183,7 @@
       <node>
         <decision-node condition-key="!CurrentForms.paymentinstruments.creditcards.valid" condition-operator="expr"/>
         <node-display x="1" y="1"/>
-        <branch basename="b3" source-connector="yes">
+        <branch basename="b4" source-connector="yes">
           <transition target-connector="in1" target-path="./+1/b2.1/b4.2"/>
         </branch>
       </node>
@@ -356,11 +364,14 @@
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <jump-node start-name-ref="PaymentInstruments-List"/>
         <node-display x="0" y="1"/>
