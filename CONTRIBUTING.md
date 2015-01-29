@@ -30,14 +30,14 @@ Now that you have gulp (or grunt) and its dependencies installed, you can start 
 ### SCSS
 Before authoring SCSS, make sure to check out the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_core/cartridge/scss/README.md?at=master) in `app_storefront_core/cartridge/scss` directory.
 
-#### `gulp scss`
+#### `gulp css`
 This task does 2 things:
 - Compile `.scss` code into `.css`
 - [Auto-prefix](https://github.com/ai/autoprefixer) for vendor prefixes
 
 This task is also run automatically on any `.scss` file change by using the `gulp watch` task.
 
-The equivalent task for grunt, `grunt scss`, is also available.
+The equivalent task for grunt, `grunt css`, is also available.
 
 ### JS
 Before authoring JS, make sure to checkout the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_richUI/cartridge/js/README.md?at=master) in `app_storefront_richUI/cartridge/js` directory.
@@ -58,9 +58,8 @@ Run code format and style validators. New code must not have any errors reported
 The equivalent tasks for grunt, `grunt jscs` and `grunt jshint`, are also available.
 
 ### Watching
-#### `gulp watch`
-To make the development process easier, running `gulp watch` on the command line will automatically watch any changes in both `scss` and `js` code and run the right compilers.
+To make the development process easier, running `gulp` on the command line will run the default task and automatically watch any changes in both `scss` and `js` code to run the right compilers.
 
 For JavaScript, when watching is happening, [watchify](https://github.com/substack/watchify) is used instead of browserify for faster bundling by taking advantage of caching.
 
-The equivalent task for grunt, `grunt watch`, is also available.
+The equivalent default task for grunt, `grunt`, is also available.

@@ -54,7 +54,7 @@ module.exports = function (grunt) {
 					watch: true
 				}
 			},
-			browserTest: {
+			test: {
 				files: [{
 					expand: true,
 					cwd: 'test/unit/browser/',
@@ -64,7 +64,7 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			browserTest: {
+			test: {
 				options: {
 					port: config.port,
 					base: 'test/unit/browser'
@@ -102,9 +102,9 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.registerTask('scss', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
+	grunt.registerTask('css', ['sass', 'autoprefixer']);
+	grunt.registerTask('default', ['css', 'browserify:dist', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
-	grunt.registerTask('ui-test', ['mochaTest:ui']);
-	grunt.registerTask('unit-test', ['browserify:browserTest', 'connect:browserTest', 'mochaTest:unit'])
+	grunt.registerTask('test:ui', ['mochaTest:ui']);
+	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
 }

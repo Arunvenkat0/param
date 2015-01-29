@@ -59,7 +59,7 @@ Sometimes we need to run unit tests in a browser environment, such as testing DO
 
 A local static web server will be established when the tests are run, serving assets in `browser` directory to `localhost` port `7000`, i.e. `http://localhost:7000`.
 
-Any JavaScript required for browser tests should be written in the standard CommonJS syntax with references to modules that live in the core cartridges. Browserify will resolve those dependencies and create a bundle in `browser/dist`. For example, the content of `test/unit/browser/product-tile.js` is:
+Any JavaScript required for browser tests should be written in the standard CommonJS syntax with references to modules that live in the core casrtridges. Browserify will resolve those dependencies and create a bundle in `browser/dist`. For example, the content of `test/unit/browser/product-tile.js` is:
 
 ```js
 'use strict';
@@ -109,9 +109,9 @@ It's important to keep this command-line instance running in the background. Ope
 - Run the test
 
 ```sh
-$ gulp unit-test
+$ gulp test:unit
 ```
-This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp unit-test --suite util`.
+This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
 Other configurations are also available, see below.
 
 ### UI tests
@@ -128,10 +128,10 @@ Other configurations are also available, see below.
 - Run the test
 
 ```sh
-$ gulp ui-test
+$ gulp test:ui
 ```
 
-This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp ui-test --suite homepage`.
+This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:ui --suite homepage`.
 Other configurations are also available, see below.
 
 ### Options

@@ -30,8 +30,8 @@ var paths = {
 var watching = false;
 gulp.task('enable-watch-mode', function () { watching = true })
 
-gulp.task('scss', function () {
-	gulp.src(paths.scss.src)
+gulp.task('css', function () {
+	return gulp.src(paths.scss.src)
 		.pipe(sass())
 		.pipe(prefix({cascade: true}))
 		.pipe(gulp.dest(paths.scss.dest));
@@ -81,7 +81,7 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
-gulp.task('ui-test', function () {
+gulp.task('test:ui', function () {
 	var opts = minimist(process.argv.slice(2));
 	// default option to all
 	var suite = opts.suite || '*';
@@ -102,7 +102,7 @@ gulp.task('ui-test', function () {
 var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
 var filter = require('gulp-filter');
-gulp.task('test-browserify', function () {
+gulp.task('js:test', function () {
 	var browserified = transform(function (filename) {
 		var b = browserify(filename);
 		return b.bundle();
@@ -116,7 +116,7 @@ gulp.task('test-browserify', function () {
 		.pipe(gulp.dest('test/unit/browser'));
 });
 
-gulp.task('test-connect', function () {
+gulp.task('connect:test', function () {
 	var opts = minimist(process.argv.slice(2));
 	var port = opts.port || 7000;
 	return connect.server({
@@ -124,7 +124,7 @@ gulp.task('test-connect', function () {
 		port: port
 	});
 });
-gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
+gulp.task('test:unit', ['js:test', 'connect:test'], function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
@@ -139,14 +139,14 @@ gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
 		})
 });
 
-gulp.task('watch', ['enable-watch-mode', 'js'], function () {
-	gulp.watch(paths.scss.src, ['scss']);
+gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
+	gulp.watch(paths.scss.src, ['css']);
 });
 
 var hbsfy = require('hbsfy');
 var styleguideWatching = false;
 gulp.task('styleguide-watching', function () {styleguideWatching = true});
-gulp.task('styleguide-browserify', function () {
+gulp.task('js:styleguide', function () {
 	var opts = {
 		entries: ['./styleguide/js/main.js'],
 		debug: (gutil.env.type === 'development')
@@ -180,7 +180,7 @@ gulp.task('styleguide-browserify', function () {
 	return bundle();
 });
 
-gulp.task('styleguide-connect', function () {
+gulp.task('connect:styleguide', function () {
 	var opts = minimist(process.argv.slice(2));
 	var port = opts.port || 8000;
 	return connect.server({
@@ -189,19 +189,19 @@ gulp.task('styleguide-connect', function () {
 	});
 });
 
-gulp.task('styleguide-scss', function () {
-	gulp.src('styleguide/scss/*.scss')
+gulp.task('css:styleguide', function () {
+	return gulp.src('styleguide/scss/*.scss')
 		.pipe(sass())
 		.pipe(prefix({cascade: true}))
 		.pipe(gulp.dest('styleguide/dist'));
 });
 
-gulp.task('styleguide', ['styleguide-watching', 'styleguide-browserify', 'styleguide-scss', 'styleguide-connect'], function () {
-	gulp.watch('styleguide/scss/*.scss', ['styleguide-scss']);
+gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide', 'connect:styleguide'], function () {
+	gulp.watch('styleguide/scss/*.scss', ['css:styleguide']);
 });
 
 // deploy to github pages
-gulp.task('styleguide-deploy', function () {
+gulp.task('deploy:styleguide', function () {
 	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
 	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'])
 		.pipe(deploy(options));
