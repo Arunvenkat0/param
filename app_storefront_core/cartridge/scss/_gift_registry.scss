@@ -18,20 +18,10 @@
 		margin-bottom: -1px;
 		overflow: auto;
 		padding: 10px;
-		button {
-			background: url("../images/banners/banner-gift-cert.gif") no-repeat scroll left top transparent;
-			border: 0 none;
-			float: left;
-			height: 80px;
-			text-indent: -999em;
-			width: 433px;
-		}
 		p {
 			color: $nobel;
-			float: right;
 			font-style: italic;
 			line-height: 1.5em;
-			width: 40%;
 		}
 	}
 	.hdr-options {
