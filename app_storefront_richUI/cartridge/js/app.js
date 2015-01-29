@@ -132,6 +132,13 @@ function initializeEvents() {
 		// 	e.preventDefault();
 		// }
 	});
+
+	// grid toggle
+	$('.toggle-grid').on('click', function () {
+		$('.search-result-content').toggleClass('wide-tiles');
+		$(this).toggleClass('wide');
+	});
+
 }
 /**
  * @private

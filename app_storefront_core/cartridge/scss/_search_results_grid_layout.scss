@@ -73,7 +73,6 @@
 	.results-hits {
 		color: $dim-gray;
 		float: left;
-		padding: 5px 0;
 	}
 	float: right;
 	margin: 0 20px 0 0;
@@ -85,8 +84,8 @@
 	li {
 		display: block;
 		float: left;
-		list-style: none outside none;
-		padding: 0.5em;
+		list-style: none;
+		padding: 0 0.5em;
 		&.first-last a {
 			background-color: $pacific-blue;
 			color: $white;
@@ -156,14 +155,24 @@
 }
 
 .toggle-grid {
-	background: url("../images/interface/icon-toggle-grid.png") no-repeat scroll left top transparent;
-	cursor: pointer;
 	display: block;
 	float: left;
-	height: 11px;
-	margin: 2px 10px 0 0;
-	text-indent: -999em;
-	width: 24px;
+	margin-right: 0.5em;
+	i {
+		cursor: pointer;
+		margin-right: 0.3em;
+	}
+	[data-option="column"] {
+		color: $pacific-blue;
+	}
+	&.wide {
+		[data-option="wide"] {
+			color: $pacific-blue;
+		}
+		[data-option="column"] {
+			color: $dim-gray;
+		}
+	}
 }
 
 .wide-tiles {
@@ -210,14 +219,6 @@
 			li {
 				float: left;
 			}
-		}
-	}
-}
-
-.breadcrumb{
-	h1{
-		span{
-			float:none;
 		}
 	}
 }
