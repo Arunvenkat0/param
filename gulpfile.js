@@ -7,6 +7,7 @@ var browserify = require('browserify'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
 	jshint = require('gulp-jshint'),
+	merge = require('merge-stream'),
 	minimist = require('minimist'),
 	mocha = require('gulp-mocha'),
 	sass = require('gulp-sass'),
@@ -16,30 +17,26 @@ var browserify = require('browserify'),
 	watchify = require('watchify'),
 	xtend = require('xtend');
 
-var paths = {
-	scss: {
-		src: './app_storefront_core/cartridge/scss/*.scss',
-		dest: './app_storefront_core/cartridge/static/default/css'
-	},
-	js: {
-		src: './app_storefront_richUI/cartridge/js/app.js',
-		dest: './app_storefront_richUI/cartridge/static/default/js'
-	}
-}
+var paths = require('./package.json').paths;
 
 var watching = false;
 gulp.task('enable-watch-mode', function () { watching = true })
 
 gulp.task('css', function () {
-	return gulp.src(paths.scss.src)
-		.pipe(sass())
-		.pipe(prefix({cascade: true}))
-		.pipe(gulp.dest(paths.scss.dest));
+	var streams = merge();
+	paths.css.forEach(function (path) {
+		streams.add(gulp.src(path.src + '*.scss')
+			.pipe(sass())
+			.pipe(prefix({cascade: true}))
+			.pipe(gulp.dest(path.dest)));
+	});
+	return streams;
+
 });
 
 gulp.task('js', function () {
 	var opts = {
-		entries: paths.js.src,
+		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
 		debug: (gutil.env.type === 'development')
 	}
 	if (watching) {
@@ -140,7 +137,9 @@ gulp.task('test:unit', ['js:test', 'connect:test'], function () {
 });
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
-	gulp.watch(paths.scss.src, ['css']);
+	gulp.watch(paths.css.map(function (path) {
+		return path.src + '*.scss';
+	}), ['css']);
 });
 
 var hbsfy = require('hbsfy');

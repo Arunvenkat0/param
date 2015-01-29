@@ -12,15 +12,13 @@ module.exports = function (grunt) {
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
 
+	var paths = require('./package.json').paths;
+
 	grunt.initConfig({
 		watch: {
 			sass: {
 				files: ['app_storefront_core/cartridge/scss/*.scss'],
-				tasks: ['scss']
-			},
-			js: {
-				files: ['app_storefront_richUI/cartridge/js/**/*.js'],
-				tasks: ['browserify:watch']
+				tasks: ['css']
 			}
 		},
 		sass: {
@@ -29,27 +27,30 @@ module.exports = function (grunt) {
 					style: 'expanded',
 					sourcemap: true
 				},
-				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss'
-				}
+				files: paths.css.map(function (path) {
+					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
+				})
 			}
 		},
 		autoprefixer: {
 			dev: {
-				src: 'app_storefront_core/cartridge/static/default/css/style.css',
-				dest: 'app_storefront_core/cartridge/static/default/css/style.css'
+				files: paths.css.map(function (path) {
+					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
+				})
 			}
 		},
 		browserify: {
 			dist: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				}
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}]
 			},
 			watch: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				},
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}],
 				options: {
 					watch: true
 				}
@@ -103,7 +104,7 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('css', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['css', 'browserify:dist', 'watch']);
+	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
 	grunt.registerTask('test:ui', ['mochaTest:ui']);
 	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
