@@ -19,6 +19,7 @@
     <folder folder-id="about-us">
         <display-name xml:lang="x-default">About Demandware</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>0.0</position>
         <page-attributes/>
@@ -77,6 +78,7 @@
     <folder folder-id="customer-service">
         <display-name xml:lang="x-default">Customer Service</display-name>
         <online-flag>true</online-flag>
+        <template>rendering/folder/foldercontenthits</template>
         <parent>root</parent>
         <position>1.0</position>
         <page-attributes/>
@@ -231,7 +233,6 @@
         <display-name xml:lang="x-default">Top Nav</display-name>
         <description xml:lang="x-default">Holds all the articles</description>
         <online-flag>false</online-flag>
-        <template>content/contentLanding</template>
         <parent>root</parent>
         <page-attributes/>
     </folder>
@@ -348,7 +349,11 @@ We seem to have misplaced this page result in an unfortunate error: (Page or Fil
 &lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class ecommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an ecommerce operation. We took what we knew of great ecommerce merchandising (our founders have been in ecommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;				&#13;
 &lt;h2&gt;Our customers could not be happier with the results.&lt;/h2&gt;		&#13;
 &lt;p&gt;With Demandware ecommerce, they're spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.&lt;/p&gt;&#13;
-&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;</custom-attribute>
+&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;&#13;
+&#13;
+&lt;p&gt;&#13;
+For more information please browse our &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,about-us)$"&gt;About Us&lt;/a&gt; and  &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Customer Service&lt;/a&gt; pages.&#13;
+&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="customCSSFile">css/aboutus.css</custom-attribute>
         </custom-attributes>
         <folder-links>
@@ -1632,68 +1637,6 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         </custom-attributes>
     </content>
 
-    <content content-id="contact-us-details">
-        <display-name xml:lang="x-default">Contact Us Details</display-name>
-        <description xml:lang="x-default">Interested in getting more information about Demandware and our On-Demand eCommerce solution? Here is information on office locations and directions to our locations.</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h5&gt;Connect with Demandware&lt;/h5&gt;&#13;
-				&lt;div id="main_content_inner"&gt;&#13;
-					&lt;p&gt;Interested in getting more information about Demandware and our On-Demand eCommerce solution?&lt;br /&gt;&#13;
-					&lt;a href="$url('Page-Show', 'cid', 'contactform')$"&gt;Fill out our contact form to speak to us now!&lt;/a&gt;&lt;/p&gt;&#13;
-					&lt;div class="sep"&gt;&lt;/div&gt;&#13;
-					&#13;
-					&lt;h4 style="margin-top: 0;"&gt;Office Locations&lt;/h4&gt;&#13;
-					&#13;
-					&lt;address&gt;&#13;
-						&lt;strong&gt;Boston Area Office: Headquarters&lt;/strong&gt;&lt;br /&gt;&#13;
-						10 Presidential Way, Woburn, MA 01801 USA&lt;br /&gt;&#13;
-						Main +1 (888) 553 XXXX : Fax +1 (781) 756 3747&#13;
-					&lt;/address&gt;&#13;
-					&#13;
-					&lt;address&gt;&#13;
-						&lt;strong&gt;European Offices&lt;/strong&gt;&lt;br /&gt;&#13;
-						Landsberger Strasse 155/2, 80687 M&amp;uuml;nchen, Germany&lt;br /&gt;&#13;
-						Rathausgasse 4, 07743 Jena, Germany&lt;br /&gt;&#13;
-						Main +49 89 579 59-650 : Fax +49 89 579 59-200&lt;br /&gt;&#13;
-						Email &lt;a href="mailto:rgeiger@demandware.com"&gt;rgeiger@demandware.com&lt;/a&gt;&#13;
-					&lt;/address&gt;&#13;
-					&lt;div class="sep"&gt;&lt;/div&gt;&#13;
-					&#13;
-					&lt;div class="twocol_wrap"&gt;&#13;
-						&lt;div class="twocol_left"&gt;&#13;
-							&lt;h4 style="margin-top: 0;"&gt;Directions to our headquarters&lt;/h4&gt;&#13;
-							&lt;p&gt;&lt;strong&gt;From Route 93:&lt;/strong&gt; Take exit 37C Commerce Way /Atlantic Ave. Turn right onto Presidential Way (at lights). Pass Raytheon Headquarters (on left). 10 Presidential Way is approximately 0.6 miles (on right).&lt;/p&gt;&#13;
-							&lt;a class="button_97x28" href="http://maps.google.com/maps?f=q&amp;amp;hl=en&amp;amp;q=10+Presidential+Way,+Woburn,+MA&amp;amp;ll=42.527911,-71.141324&amp;amp;spn=0.023119,0.071411" target="_blank"&gt;&lt;span&gt;View Map&lt;/span&gt;&lt;/a&gt;&#13;
-						&lt;/div&gt;&#13;
-						&lt;div class="twocol_right"&gt;&#13;
-							&lt;h4 style="margin-top: 0;"&gt;Local Accommodations&lt;/h4&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Residence  Inn&lt;/strong&gt; &lt;a href="http://marriott.com/residenceinn/" target="_blank"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								300 Presidential Way, Woburn MA &lt;nobr&gt;+1 (781) 376-4000&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Courtyard&lt;/strong&gt; &lt;a href="http://marriott.com/courtyard/" target="_blank"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								240 Mishawum Road, Woburn MA &lt;nobr&gt;+1 (781) 932-3200&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-							&lt;address&gt;&#13;
-								&lt;strong&gt;Fairfield Inn Boston Woburn&lt;/strong&gt; &lt;a href="http://marriott.com/property/propertypage/BOSFW " target="_blank" class="linkContact"&gt;view site&lt;/a&gt;&lt;br /&gt;&#13;
-								285 Mishawum Road, Woburn MA  &lt;nobr&gt;+1 (781) 938-7575&lt;/nobr&gt;&#13;
-							&lt;/address&gt;&#13;
-	     &#13;
-						&lt;/div&gt;&#13;
-					&lt;/div&gt;&#13;
-				&lt;/div&gt;&#13;
-			&lt;/div&gt;&#13;
-			&lt;div class="clear"&gt;</custom-attribute>
-        </custom-attributes>
-        <folder-links>
-            <classification-link folder-id="contact-us-new"/>
-        </folder-links>
-    </content>
-
     <content content-id="cookie_hint">
         <display-name xml:lang="x-default">cookie_hint</display-name>
         <online-flag>false</online-flag>
@@ -1804,7 +1747,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
             <page-title xml:lang="x-default">General Error</page-title>
         </page-attributes>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;An error occurred in the application. Please try again and contact our call center if the problem persists. Feel free to use the search below to assist you in finding what you were looking for.&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We're sorry that your order could not be placed. This probably happened due to a high order volume or temporary connection errors. Please wait a few minutes and resubmit your order. We won't process your payment until you successfully place your order. If you have further questions, please contact us via &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="page-includes"/>
@@ -1949,9 +1892,9 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 	&lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'jobs-landing')$"&gt;Jobs&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&lt;!-- END: footer_links --&gt;&#13;
 &#13;
-&lt;p class="copyright"&gt;&amp;copy; 2004-2014 Demandware or its affiliates. All rights reserved.&lt;/p&gt;&#13;
+&lt;p class="copyright"&gt;&amp;copy; 2004-2015 Demandware or its affiliates. All rights reserved.&lt;/p&gt;&#13;
 &lt;p class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/p&gt;
-&lt;!-- SG.15.1.0.15 --&gt;</custom-attribute>
+&lt;!-- SG.15.3.0.4 --&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="home-page"/>
@@ -3351,6 +3294,7 @@ We take the privacy rights of users of this Site very seriously and this Privacy
 
     <content content-id="super-save-shipping">
         <display-name xml:lang="x-default">Super Saver Shipping</display-name>
+        <description xml:lang="x-default">Super Saver Shipping Savings on the shipment of Video Games.</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
@@ -3433,16 +3377,6 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="terms"/>
-        </folder-links>
-    </content>
-
-    <content content-id="testcontent">
-        <display-name xml:lang="x-default">Test Content</display-name>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="testfolder"/>
         </folder-links>
     </content>
 

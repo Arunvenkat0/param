@@ -13,6 +13,7 @@
 		text-transform: uppercase;
 	}
 	.ui-dialog-title {
+		color: $night-rider;
 		font-weight: bold;
 	}
 	.ui-icon-closethick {
@@ -20,6 +21,10 @@
 		background-position: left top;
 		height: 32px;
 		width: 32px;
+		left: 0;
+		top: 0;
+		margin-left: 0;
+		margin-top: 0;
 	}
 	.ui-dialog-titlebar-close {
 		border: 0 none;

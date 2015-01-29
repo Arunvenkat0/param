@@ -7,6 +7,7 @@
 	"disallowSpacesInsideObjectBrackets": "all",
 	"disallowSpacesInsideParentheses": true,
 	"disallowTrailingWhitespace": true,
+	"disallowTrailingComma": true,
 	"excludeFiles": ["**/static/**", "**/scripts/**", "node_modules/**", "test/**", "storefront_refapp/**", "docs/**"],
 	"requireBlocksOnNewline": 1,
 	"requireCommaBeforeLineBreak": true,

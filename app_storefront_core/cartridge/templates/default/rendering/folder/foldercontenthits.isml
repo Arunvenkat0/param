@@ -4,10 +4,15 @@
 	
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
-
-		<h1>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
+		<isif condition="${!(pdict.CurrentHttpParameterMap.q == '')}">
+			<h2>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
+		</isif>
 	
-		<iscomment>link back to product search result</iscomment>
+		<isif condition="${pdict.ContentSearchResult.folder != null}">
+       		<isslot id="folder-main-slot" description="Library Folder Slot" context="folder" context-object="${pdict.ContentSearchResult.folder}"/>
+   		</isif>
+   
+   		<iscomment>link back to product search result</iscomment>
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
 				<isif condition="${pdict.ProductSearchResult.count > 0}">
 					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('foldercontenthits.backtoproducts','rendering',null)}</a>

@@ -5,7 +5,7 @@ var addThis = require('./addThis'),
 	ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
-	storeinventory = require('../../storeinventory'),
+	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util');
 
@@ -32,7 +32,7 @@ var updateContent = function (href) {
 			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
-				storeinventory.buildStoreList($('.product-number span').html());
+				productStoreInventory.init();
 			}
 			image.replaceImages();
 			tooltip.init();
@@ -43,7 +43,7 @@ var updateContent = function (href) {
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
-	$pdpMain.on('hover', '.swatchanchor', function () {
+	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
 			$imgZoom = $pdpMain.find('.main-image'),
 			$mainImage = $pdpMain.find('.primary-image');

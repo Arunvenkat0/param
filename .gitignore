@@ -1,6 +1,6 @@
 target
 .DS_Store
-.DS_Store
 .project
 .settings/
 node_modules
+*.log

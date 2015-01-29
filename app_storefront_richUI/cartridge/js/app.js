@@ -7,8 +7,7 @@
 
 'use strict';
 
-var carousel = require('./carousel'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -117,6 +116,22 @@ function initializeEvents() {
 			}
 		});
 	});
+
+	// main menu toggle
+	$('.menu-toggle').on('click', function () {
+		$('#wrapper').toggleClass('menu-active');
+	});
+	$('.menu-category li .menu-item-toggle').on('click', function (e) {
+		e.preventDefault();
+		var $parentLi = $(e.target).closest('li');
+		$parentLi.siblings('li').removeClass('active').find('.menu-item-toggle').removeClass('fa-chevron-up active').addClass('fa-chevron-right');
+		$parentLi.toggleClass('active');
+		$(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
+		// if there are nested menu, don't navigate away
+		// if ($this.has('ul').length) {
+		// 	e.preventDefault();
+		// }
+	});
 }
 /**
  * @private
@@ -158,7 +173,6 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
-		carousel.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations

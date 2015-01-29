@@ -34,11 +34,6 @@
 			width: 40%;
 		}
 	}
-	.list-table-header {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
-		overflow: hidden;
-		padding: 2em;
-	}
 	.hdr-options {
 		width: 5%;
 	}
@@ -90,14 +85,11 @@
 .gift-registry-advanced {
 	clear: both;
 	.toggle-content {
+		display: none;
 		overflow: hidden;
-		padding: 10px;
+		padding: 1em 0;
 	}
 	.event-month, .event-city {
 		clear: both;
 	}
-}
-
-.pt_gift-registry .primary-content .list-table-header h2 {
-	float: left;
 }

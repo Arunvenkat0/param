@@ -2,37 +2,33 @@
 var dialog = require('../../dialog'),
 	util = require('../../util');
 
+var zoomMediaQuery = matchMedia('(min-width: 960px)');
+
 /**
  * @description Enables the zoom viewer on the product detail page
+ * @param zmq {Media Query List}
  */
-var loadZoom = function () {
+var loadZoom = function (zmq) {
 	var $imgZoom = $('#pdpMain .main-image'),
-		zoomOptions = {
-			zoomType: 'standard',
-			alwaysOn: 0, // setting to 1 will load load high res images on page load
-			zoomWidth: 575,
-			zoomHeight: 349,
-			position: 'right',
-			preloadImages: 0, // setting to 1 will load load high res images on page load
-			xOffset: 30,
-			yOffset: 0,
-			showEffect: 'fadein',
-			hideEffect: 'fadeout'
-		},
 		hiresUrl;
-
-	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile()) {
+	if (!zmq) {
+		zmq = zoomMediaQuery;
+	}
+	if ($imgZoom.length === 0 || dialog.isActive() || util.isMobile() || !zoomMediaQuery.matches) {
+		// remove zoom
+		$imgZoom.trigger('zoom.destroy');
 		return;
 	}
 	hiresUrl = $imgZoom.attr('href');
 
-	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1) {
-		$imgZoom.addClass('image-zoom');
-		$imgZoom.removeData('jqzoom').jqzoom(zoomOptions);
-	} else {
-		$imgZoom.removeClass('image-zoom');
+	if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
+		$imgZoom.zoom({
+			url: hiresUrl
+		});
 	}
 };
+
+zoomMediaQuery.addListener(loadZoom);
 
 /**
  * @description Sets the main image attributes and the href for the surrounding <a> tag

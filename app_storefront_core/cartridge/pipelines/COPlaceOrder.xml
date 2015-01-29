@@ -1378,7 +1378,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <text-node>
-          <description>Create a new order, with PlaceOrder=false.  This will internally ReserveInventoryForOrder and will create a new Order with status 'Created'.</description>
+          <description>Creates a new order.  This will internally Reserve Inventory For Order and will create a new Order with status 'Created'.</description>
         </text-node>
         <node-display width="2" x="0" y="20"/>
       </node>

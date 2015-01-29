@@ -17,17 +17,28 @@
 }
 
 .list-share {
+	@extend %clearfix;
+	background-color: $white-smoke;
+	border-top: 1px solid darken($white-smoke, 10%);
+	padding: 2em;
 	.share-option {
 		box-sizing: border-box;
 		width: 30%;
 		margin-right: 3.3333333%;
 		float: left;
+		word-wrap: break-word;
 		a {
-			word-break: break-all;
-		}
-		button,
-		.button {
-			margin-top: 1em;
+			display: block;
 		}
 	}
+	.list-title {
+		float: left;
+	}
+	.print-page {
+		float: right;
+	}
+}
+
+.event-info {
+	margin: 1em;
 }

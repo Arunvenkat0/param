@@ -159,7 +159,6 @@ textarea {
 select {
 	text-indent: 0;
 	height: 3em;
-	border: 1px solid $dark-gray;
 	margin-left: 2%;
 	padding: 0.7em 0.3em;
 	width: 51.6%;
@@ -259,7 +258,6 @@ div.error {
 
 .form-inline {
 	form {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left bottom transparent;
 		padding: 0 0 2em;
 		width: 98%;
 	}

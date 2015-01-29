@@ -6,30 +6,27 @@
 </iscomment>
 
 <isscript>
-	//two attirbutes needed to pass along the selected color to the pdp/quickview
-	var queryString, queryStringArray = [],
-		colorAttributeID = 'dwvar_' + pdict.Product.ID + '_color',
-		sizeAttributeID = 'dwvar_' + pdict.Product.ID + '_size',
-		productColorValue = '',
-		productSizeValue = '';
+	var productDetailUrl = URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue);
+
+	var queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string'),
+		queryStringArray = [],
+		colorValue;
 
 	//helper variables
-	queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string');
 	if (queryString) {
 		queryStringArray = queryString.split('&');
 	}
-	var PMapValue = '';
 
-	for (var x = 0; x < queryStringArray.length ;x++) {
-		PMapValue = queryStringArray[x];
-		if (PMapValue.indexOf('color') != -1) {
-			productColorValue = PMapValue.split('=')[1];
+	for (var x = 0; x < queryStringArray.length; x++) {
+		var parameter = queryStringArray[x];
+		if (parameter.indexOf('color') != -1) {
+			colorValue = parameter.split('=')[1];
 		}
 	}
-	// look into the PVM
-	var PVM : dw.catalog.ProductVariationModel,
-		variant : dw.catalog.Variant,
-		variantSelected = false;
+
+	var variantSelected = false,
+		PVM,
+		variant;
 	if (pdict.CurrentVariationModel && pdict.CurrentVariationModel.selectedVariant) {
 		PVM = pdict.CurrentVariationModel;
 		variant = PVM.selectedVariant;
@@ -37,6 +34,8 @@
 	} else {
 		PVM = pdict.Product.variationModel;
 	}
+
+	// use default or first variant if it is not selected
 	if (!variantSelected) {
 		if (PVM.defaultVariant) {
 			variant = PVM.defaultVariant;
@@ -46,23 +45,47 @@
 			}
 		}
 	}
-</isscript>
 
-<isif condition="${variant != null}">
-	<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
-		<isset name="valength" value="${PVM.getAllValues(VA).length}" scope="PAGE"/>
-		<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
-		<isif condition="${vaId == 'size'}">
-			<isif condition="${variantSelected || valength == 1}">
-				<isset name="productSizeValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		<iselseif condition="${vaId == 'color'}">
-			<isif condition="${variantSelected || (productColorValue === '')}">
-				<isset name="productColorValue" value="${PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value}" scope="PAGE" />
-			</isif>
-		</isif>
-	</isloop>
-</isif>
+	if (variant != null) {
+		for (var i = 0; i < PVM.productVariationAttributes.length; i++) {
+			var VA = PVM.productVariationAttributes[i],
+				valength = PVM.getAllValues(VA).length,
+				vaId = VA.getAttributeID(),
+				vaValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value,
+				selectedValue;
+
+			// for variation group products, select the values which are configured
+			if (pdict.Product.variationGroup) {
+				vaValue = PVM.getSelectedValue(PVM.getProductVariationAttribute(vaId)).value;
+			}
+
+			switch (vaId) {
+				case 'size':
+					if (valength == 1 || variantSelected) {
+						selectedValue = vaValue;
+					}
+					break;
+				case 'color':
+					if (colorValue == '') {
+						if (variantSelected) {
+							selectedValue = vaValue;
+						}
+					} else {
+						selectedValue = colorValue;
+					}
+					break;
+				default:
+					if (variantSelected) {
+						selectedValue = vaValue;
+					}
+					break;
+			}
+			if (selectedValue) {
+				productDetailUrl += '&dwvar_' + vaId + '=' + selectedValue;
+			}
+		}
+	}
+</isscript>
 
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
 <iscomment>pwr = power review write</iscomment>
@@ -70,5 +93,5 @@
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 <isdecorate template="${DecoratorTemplate}">
-	<isinclude url="${URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue, colorAttributeID, productColorValue, sizeAttributeID, productSizeValue)}"/>
+	<isinclude url="${productDetailUrl}"/>
 </isdecorate>

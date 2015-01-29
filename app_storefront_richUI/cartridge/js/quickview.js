@@ -16,6 +16,14 @@ var makeUrl = function (url, source, productListID) {
 	return url;
 };
 
+var removeParam = function (url) {
+	if (url.indexOf('?') !== -1) {
+		return url.substring(0, url.indexOf('?'));
+	} else {
+		return url;
+	}
+};
+
 var quickview = {
 	init: function () {
 		if (!this.exists()) {
@@ -32,11 +40,8 @@ var quickview = {
 
 		product.initializeEvents();
 
-		// remove any param
-		qvUrl = qvUrl.substring(0, qvUrl.indexOf('?'));
-
 		this.productLinkIndex = _(this.productLinks).findIndex(function (url) {
-			return url === qvUrl;
+			return removeParam(url) === removeParam(qvUrl);
 		});
 
 		// hide the buttons on the compare page or when there are no other products

@@ -4,7 +4,7 @@
   [ 
     {
       "client_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "allowed_origins":["http://www.sitegenesis.com","https://secure.sitegenesis.com"],
+      "allowed_origins":[],
       "resources":
       [
         {
