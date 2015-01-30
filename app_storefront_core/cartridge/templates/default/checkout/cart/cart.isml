@@ -8,11 +8,8 @@
 	<isset name="store" value="${dw.catalog.StoreMgr.getStore(pdict.CurrentSession.custom.storeId)}" scope="page" />
 	</isif>
 	<isslot id="cart-banner" description="Banner for Cart page"	context="global" />
-
-	<h1>${Resource.msg('cart.header','checkout',null)}</h1>
-
+	
 	<iscomment>Display selected bonus products Order Promotion message</iscomment>
-
 	<isif condition="${!(pdict.Basket == null)}">
 		<isloop items="${pdict.Basket.bonusDiscountLineItems}"	var="bonusDiscountLineItem">
 			<isif condition="${bonusDiscountLineItem.getPromotion().getPromotionClass() == dw.campaign.Promotion.PROMOTION_CLASS_ORDER && bonusDiscountLineItem.getBonusProductLineItems().size() == 0}">
@@ -60,7 +57,33 @@
 			${Resource.msg('cart.cartempty','checkout',null)}
 		</div>
 	<iselse/>
-
+		
+		<iscomment>show checkout and continue shopping buttons above cart</iscomment>
+		<div class="cart-actions cart-actions-top">	
+			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
+			<form class="cart-action-checkout" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
+				<fieldset>
+					<isif condition="${enableCheckout}">
+						<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+							${Resource.msg('global.checkout','locale',null)}
+						</button>
+					<iselse/>
+						<button class="button-fancy-large" disabled="disabled" type="submit" value="${Resource.msg('global.checkout','locale',null)}"	name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+							${Resource.msg('global.checkout','locale',null)}
+						</button>
+					</isif>
+				</fieldset>
+			</form>
+	
+			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+				<fieldset>
+					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
+						&#171; ${Resource.msg('global.continueshopping','locale',null)}
+					</button>
+				</fieldset>
+			</form>	
+		</div>
+	
 		<iscomment>prevent checkout if any product price is N/A or if invalid coupons</iscomment>
 		<isif condition="${pdict.BasketStatus != null && pdict.BasketStatus.error}">
 			<div class="error-form ">
@@ -834,7 +857,7 @@
 
 		</div>
 
-		<div class="cart-footer">
+		<div class="cart-recommendations">
 			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 		</div>
 	</isif>

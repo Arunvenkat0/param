@@ -36,7 +36,7 @@ var storeListTemplate = function (stores, selectedStoreId, selectedStoreText) {
 			'</div>'
 		].join(newLine);
 	} else {
-		return '<div class="no-results">'+ Resources.NO_RESULTS +'</div>';
+		return '<div class="no-results">' + Resources.NO_RESULTS + '</div>';
 	}
 };
 
@@ -159,7 +159,7 @@ var storeinventory = {
 						}
 					});
 				}
-			},
+			}
 		});
 	},
 	setUserZip: function (zip) {

@@ -1,4 +1,3 @@
-<iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${false&&pdict.resetAttributes}">
 	<isscript>
 		importScript("product/ProductUtils.ds");
@@ -44,7 +43,7 @@
 
 	<isif condition="${!isQuickView}">
 		<div class="product-review-links">
-		   	<isinclude template="product/components/reviewsmini"/>
+			<isinclude template="product/components/reviewsmini"/>
 		</div>
 	</isif>
 
@@ -112,7 +111,7 @@
 			</isif>
 			<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
 			<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
-			<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master ? '' : ' disabled="disabled"'}" scope="page"/>
+			<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master&&!pdict.Product.variationGroup ? '' : ' disabled="disabled"'}" scope="page"/>
 			<isif condition="${disabledAttr.length == 0}">
 				<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart">${buttonTitle}</button>
 			<iselse/>
@@ -140,7 +139,7 @@
 
 			<div class="availability-block">
 				<div class="availability">
-				<isif condition="${!pdict.Product.master}">
+				<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
 					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
 					<span class="value"><isinclude template="product/components/availability"/></span>
 					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
@@ -167,13 +166,13 @@
 
 	<div class="product-actions">
 		<ul class="menu">
-			<isif condition="${pdict.available && !pdict.Product.bundle && !pdict.Product.master}">
-				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}"  title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
+			<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
+				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
 				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
-			</isif>	
-			<li><a class="send-to-friend" 
-				   title="${Resource.msg('product.sendfriend','product',null)}" 
-				   href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
+			</isif>
+			<li><a class="send-to-friend"
+				   title="${Resource.msg('product.sendfriend','product',null)}"
+				   href="${URLUtils.url('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
 				   ${Resource.msg('product.sendfriend','product',null)}
 				   </a>
 			</li>

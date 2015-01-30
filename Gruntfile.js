@@ -2,18 +2,23 @@
 
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
+
+	// command line arguments
+	var config = {};
+	// mocha ui tests
+	config.suite = grunt.option('suite') || '*';
+	if (config.suite === 'all') { config.suite === '*'; }
+	config.reporter = grunt.option('reporter') || 'spec';
+	config.timeout = grunt.option('timeout') || 10000;
+	config.port = grunt.option('port') || 7000;
+
+	var paths = require('./package.json').paths;
+
 	grunt.initConfig({
 		watch: {
 			sass: {
-				files: [
-					'app_storefront_core/cartridge/scss/*.scss',
-					'app_storefront_jp/cartridge/scss/*.scss'
-				],
-				tasks: ['scss']
-			},
-			js: {
-				files: ['app_storefront_richUI/cartridge/js/**/*.js'],
-				tasks: ['browserify:watch']
+				files: ['app_storefront_core/cartridge/scss/*.scss'],
+				tasks: ['css']
 			}
 		},
 		sass: {
@@ -22,32 +27,48 @@ module.exports = function (grunt) {
 					style: 'expanded',
 					sourcemap: true
 				},
-				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss',
-					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/scss/style.scss'
-				}
+				files: paths.css.map(function (path) {
+					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
+				})
 			}
 		},
 		autoprefixer: {
 			dev: {
-				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/static/default/css/style.css',
-					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/static/ja_JP/css/style.css'
-				}
-			},
+				files: paths.css.map(function (path) {
+					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
+				})
+			}
 		},
 		browserify: {
 			dist: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				},
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}]
 			},
 			watch: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				},
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}],
 				options: {
 					watch: true
+				}
+			},
+			test: {
+				files: [{
+					expand: true,
+					cwd: 'test/unit/browser/',
+					src: ['*.js', '!*.out.js'],
+					dest: 'test/unit/browser/dist'
+				}]
+			}
+		},
+		connect: {
+			test: {
+				options: {
+					port: config.port,
+					base: 'test/unit/browser'
 				}
 			}
 		},
@@ -63,10 +84,28 @@ module.exports = function (grunt) {
 				jshintrc: true
 			},
 			target: ['app_storefront_richUI/cartridge/js/**/*.js']
+		},
+		mochaTest: {
+			ui: {
+				options: {
+					reporter: config.reporter,
+					timeout: config.timeout
+				},
+				src: ['test/ui/' + config.suite + '/**/*.js', '!test/ui/webdriver/*']
+			},
+			unit: {
+				options: {
+					reporter: config.reporter,
+					timeout: config.timeout
+				},
+				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
+			}
 		}
 	});
 
-	grunt.registerTask('scss', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
+	grunt.registerTask('css', ['sass', 'autoprefixer']);
+	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
+	grunt.registerTask('test:ui', ['mochaTest:ui']);
+	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
 }

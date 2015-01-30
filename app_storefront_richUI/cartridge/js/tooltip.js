@@ -8,7 +8,7 @@ exports.init = function () {
 	$(document).tooltip({
 		items: '.tooltip',
 		track: true,
-		content: function (callback) {
+		content: function () {
 			return $(this).find('.tooltip-content').html();
 		}
 	});

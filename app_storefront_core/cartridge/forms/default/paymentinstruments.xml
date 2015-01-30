@@ -8,6 +8,6 @@
 		</list>	
 		<include formid="newcreditcard" name="creditcard"/>
 		<action formid="create" valid-form="true"/>
-		
+		<action formid="cancel" valid-form="false"/>		
 	</group>	
 </form>

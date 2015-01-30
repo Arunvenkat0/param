@@ -11,8 +11,6 @@
 
 	<isif condition="${!pdict.CurrentCustomer.authenticated}">
 		
-		<h1>${Resource.msg('pt_cart.checkoutheader','checkout',null)}</h1>
-		
 		<isinclude template="account/login/logininclude"/>
 		
 		<div class="login-box ">

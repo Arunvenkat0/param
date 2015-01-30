@@ -43,7 +43,7 @@ var updateContent = function (href) {
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
-	$pdpMain.on('hover', '.swatchanchor', function () {
+	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
 			$imgZoom = $pdpMain.find('.main-image'),
 			$mainImage = $pdpMain.find('.primary-image');

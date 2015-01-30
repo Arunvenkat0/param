@@ -6,6 +6,11 @@
  * these tools via the OCAPI 'hook' mechanism
  *
  */
+var HashMap = require("dw/util").HashMap,
+	PromotionMgr = require("dw/campaign").PromotionMgr,
+	ShippingMgr = require("dw/order").ShippingMgr,
+	ShippingLocation = require("dw/order").ShippingLocation,
+	TaxMgr = require("dw/order").TaxMgr;
 
 /**
  * @function calculate
@@ -22,13 +27,13 @@ exports.calculate = function(basket)
 	// =====   CALCULATE PRODUCT LINE ITEM PRICES    =====
     // ===================================================
 
-	cartCalculator.calculateProductPrices(basket);
+	calculateProductPrices(basket);
 
     // ===================================================
 	// =====    CALCULATE GIFT CERTIFICATE PRICES    =====
     // ===================================================
 
-	cartCalculator.calculateGiftCertificatePrices(basket);
+	calculateGiftCertificatePrices(basket);
 
     // ===================================================
 	// =====   Note: Promotions must be applied      =====
@@ -63,13 +68,13 @@ exports.calculate = function(basket)
 
 	// since we might have bonus product line items, we need to
 	// reset product prices
-	cartCalculator.calculateProductPrices(basket);
+	calculateProductPrices(basket);
 
     // ===================================================
 	// =====         CALCULATE TAX                   =====
     // ===================================================
 
-	cartCalculator.calculateTax(basket);
+	calculateTax(basket);
 
     // ===================================================
 	// =====         CALCULATE BASKET TOTALS         =====
@@ -80,6 +85,8 @@ exports.calculate = function(basket)
     // ===================================================
 	// =====            DONE                         =====
     // ===================================================
+
+	return new Status(Status.OK);
 }
 
 /**

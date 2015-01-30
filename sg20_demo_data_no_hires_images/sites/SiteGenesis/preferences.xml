@@ -40,7 +40,6 @@
             <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
             <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
             <preference preference-id="StaticCacheTTL">86400</preference>
-            <preference preference-id="StorefrontProtectionPassword"/>
         </development>
         <staging>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
@@ -54,7 +53,6 @@
             <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
             <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
             <preference preference-id="StaticCacheTTL">0</preference>
-            <preference preference-id="StorefrontProtectionPassword"/>
         </staging>
         <production>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
@@ -68,7 +66,6 @@
             <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
             <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
             <preference preference-id="StaticCacheTTL">86400</preference>
-            <preference preference-id="StorefrontProtectionPassword"/>
         </production>
     </standard-preferences>
     <custom-preferences>

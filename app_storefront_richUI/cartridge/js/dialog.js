@@ -36,7 +36,6 @@ var dialog = {
 		// create the dialog
 		this.$container = $target;
 		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
-		return this.$container;
 	},
 	/**
 	 * @function
@@ -48,7 +47,7 @@ var dialog = {
 	open: function (options) {
 		// close any open dialog
 		this.close();
-		this.$container = this.create(options);
+		this.create(options);
 		this.replace(options);
 	},
 	/**
@@ -61,6 +60,11 @@ var dialog = {
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
+		this.$container.dialog('option', 'position', {
+			my: 'center',
+			at: 'center',
+			of: window
+		});
 	},
 	/**
 	 * @description Replace the content of current dialog
@@ -72,16 +76,20 @@ var dialog = {
 		if (!this.$container) {
 			return;
 		}
+		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
 		if (options.url) {
 			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
 			ajax.load({
 				url: options.url,
+				data: options.data,
 				callback: function (response) {
 					this.openWithContent(response);
+					callback();
 				}.bind(this)
 			});
 		} else if (options.html) {
 			this.openWithContent(options.html);
+			callback();
 		}
 	},
 	/**
@@ -145,7 +153,7 @@ var dialog = {
 		title: '',
 		width: '800',
 		close: function () {
-			$(this).dialog('destroy').remove();
+			$(this).dialog('close');
 		}
 	}
 };

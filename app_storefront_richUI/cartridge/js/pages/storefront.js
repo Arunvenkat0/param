@@ -1,6 +1,6 @@
 'use strict';
 exports.init = function () {
-	var homepageCarousel = $('#homepage-slider')
+	$('#homepage-slider')
 		// responsive slides
 		.on('jcarousel:create jcarousel:reload', function () {
 			var element = $(this),
@@ -34,10 +34,10 @@ exports.init = function () {
 			interval: 5000
 		});
 	$('#vertical-carousel .jcarousel-prev')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({
@@ -45,10 +45,10 @@ exports.init = function () {
 		});
 
 	$('#vertical-carousel .jcarousel-next')
-		.on('jcarouselcontrol:active', function() {
+		.on('jcarouselcontrol:active', function () {
 			$(this).removeClass('inactive');
 		})
-		.on('jcarouselcontrol:inactive', function() {
+		.on('jcarouselcontrol:inactive', function () {
 			$(this).addClass('inactive');
 		})
 		.jcarouselControl({

@@ -80,7 +80,7 @@ function addProductAjax(args) {
 				pid: args.itemid,
 				category: _currentCategory
 			},
-			dataType: 'json',
+			dataType: 'json'
 		}).done(function (response) {
 			if (!response || !response.success) {
 				reject(new Error(Resources.COMPARE_ADD_FAIL));

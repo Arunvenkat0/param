@@ -32,6 +32,7 @@
 		<isset name="hi_res" scope="page" value="${''}" />
 		<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 	</isif>
+
 	<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
 	<isif condition="${imageTitle.charAt(0) == ','}">
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>

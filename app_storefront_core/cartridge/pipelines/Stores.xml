@@ -402,7 +402,7 @@
                 <key-binding alias="&quot;Zip &quot; + CurrentForms.storelocator.postalCode.value" key="From_0"/>
                 <key-binding alias="SearchString" key="To_0"/>
                 <key-binding alias="NearestStores.keySet()" key="From_1"/>
-                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="NearestStores.size()" key="From_2"/>
                 <key-binding alias="null" key="From_3"/>
                 <key-binding alias="null" key="To_3"/>
                 <key-binding alias="null" key="From_4"/>
