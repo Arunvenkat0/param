@@ -12,6 +12,7 @@ var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
+	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
 	searchsuggest = require('./searchsuggest'),
 	searchsuggestbeta = require('./searchsuggest-beta'),
@@ -181,6 +182,7 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
+		rating.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -210,7 +212,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":31,"./pages/search":32,"./pages/storefront":33,"./pages/storelocator":34,"./pages/wishlist":35,"./searchplaceholder":39,"./searchsuggest":41,"./searchsuggest-beta":40,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
+},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":31,"./pages/search":32,"./pages/storefront":33,"./pages/storelocator":34,"./pages/wishlist":35,"./rating":39,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -316,7 +318,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":37,"./util":47}],3:[function(require,module,exports){
+},{"./progress":37,"./util":48}],3:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -621,7 +623,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./dialog":6,"./page":12,"./util":47}],4:[function(require,module,exports){
+},{"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -876,7 +878,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":12,"./util":47,"promise":54}],5:[function(require,module,exports){
+},{"./page":12,"./util":48,"promise":55}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -1085,7 +1087,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":47,"lodash":53}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1106,7 +1108,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":47}],8:[function(require,module,exports){
+},{"./ajax":2,"./util":48}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1158,7 +1160,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":10,"./util":47}],9:[function(require,module,exports){
+},{"./ajax":2,"./minicart":10,"./util":48}],9:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1272,7 +1274,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":47}],11:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":48}],11:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1300,7 +1302,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":12,"./util":47}],12:[function(require,module,exports){
+},{"./ajax":2,"./page":12,"./util":48}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1323,7 +1325,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":47}],13:[function(require,module,exports){
+},{"./util":48}],13:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1562,7 +1564,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":6,"../giftcert":8,"../page":12,"../tooltip":46,"../util":47,"../validator":48}],14:[function(require,module,exports){
+},{"../dialog":6,"../giftcert":8,"../page":12,"../tooltip":47,"../util":48,"../validator":49}],14:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1602,7 +1604,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":38,"../storeinventory/cart":43,"./account":13}],15:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":38,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1631,7 +1633,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":47,"./shipping":20}],16:[function(require,module,exports){
+},{"../../util":48,"./shipping":20}],16:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1829,7 +1831,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":7,"../../util":47,"./formPrepare":17}],17:[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1888,7 +1890,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":53}],18:[function(require,module,exports){
+},{"lodash":54}],18:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2047,7 +2049,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":6,"../../util":47,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2211,7 +2213,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":37,"../../tooltip":46,"../../util":47,"./formPrepare":17}],21:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2367,7 +2369,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":6,"../../minicart":10,"../../page":12,"../../util":47,"lodash":53,"promise":54}],24:[function(require,module,exports){
+},{"../../dialog":6,"../../minicart":10,"../../page":12,"../../util":48,"lodash":54,"promise":55}],24:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2457,7 +2459,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":47}],25:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],25:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2544,7 +2546,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":6,"../../util":47}],26:[function(require,module,exports){
+},{"../../dialog":6,"../../util":48}],26:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2631,7 +2633,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":6,"../../send-to-friend":42,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./productNav":27,"./productSet":28,"./recommendations":29,"./variant":30}],27:[function(require,module,exports){
+},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./productNav":27,"./productSet":28,"./recommendations":29,"./variant":30}],27:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2658,7 +2660,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":47}],28:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],28:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2708,7 +2710,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":23}],29:[function(require,module,exports){
+},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],29:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2820,7 +2822,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":37,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addThis":22,"./addToCart":23,"./image":25}],31:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],31:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2920,7 +2922,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":38,"../send-to-friend":42,"../util":47,"./product/addToCart":23}],32:[function(require,module,exports){
+},{"../ajax":2,"../quickview":38,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],32:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3110,7 +3112,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":47}],33:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":48}],33:[function(require,module,exports){
 'use strict';
 exports.init = function () {
 	$('#homepage-slider')
@@ -3203,7 +3205,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":12,"../send-to-friend":42,"../util":47,"./product/addToCart":23}],36:[function(require,module,exports){
+},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],36:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3230,20 +3232,6 @@ function initQuickViewButtons() {
 	});
 }
 
-function rating() {
-	$('.product-review').each(function (index, review) {
-		var rating = $(review).data('rating');
-		var baseRating = Math.floor(rating);
-		for (var i = 0; i < baseRating; i++) {
-			$('.rating', review).append('<i class="fa fa-star"></i>');
-		}
-		// give half star for anything in between
-		if (rating > baseRating) {
-			$('.rating', review).append('<i class="fa fa-star-half-o"></i>');
-		}
-	});
-}
-
 /**
  * @private
  * @function
@@ -3253,7 +3241,6 @@ function rating() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-	rating();
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
@@ -3323,7 +3310,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":38,"imagesloaded":50}],37:[function(require,module,exports){
+},{"./quickview":38,"imagesloaded":51}],37:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3475,7 +3462,53 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":6,"./pages/product":26,"./util":47,"lodash":53}],39:[function(require,module,exports){
+},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],39:[function(require,module,exports){
+/**
+ * copied from https://github.com/darkskyapp/string-hash
+ */
+function hash(str) {
+	var hash = 5381,
+		i = str.length;
+
+	while (i) {
+		hash = (hash * 33) ^ str.charCodeAt(--i);
+	}
+	/* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+	* integers. Since we want the results to be always positive, convert the
+	* signed int to an unsigned by doing an unsigned bitshift. */
+	return hash >>> 0;
+}
+
+module.exports = {
+	init: function () {
+		$('.product-review').each(function (index, review) {
+			var pid = $(review).data('pid');
+			if (!pid) {
+				return;
+			}
+			// rating range from 2 - 5
+			var rating = hash(pid.toString()) % 30 / 10 + 2;
+			var baseRating = Math.floor(rating);
+			var starsCount = 0;
+			for (var i = 0; i < baseRating; i++) {
+				$('.rating', review).append('<i class="fa fa-star"></i>');
+				starsCount++;
+			}
+			// give half star for anything in between
+			if (rating > baseRating) {
+				$('.rating', review).append('<i class="fa fa-star-half-o"></i>');
+				starsCount++;
+			}
+			if (starsCount < 5) {
+				for (var j = 0; j < 5 - starsCount; j++) {
+					$('.rating', review).append('<i class="fa fa-star-o"></i>');
+				}
+			}
+		});
+	}
+};
+
+},{}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3501,7 +3534,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3673,7 +3706,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],41:[function(require,module,exports){
+},{"./util":48}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3850,7 +3883,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],42:[function(require,module,exports){
+},{"./util":48}],43:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3921,7 +3954,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":6,"./util":47,"./validator":48}],43:[function(require,module,exports){
+},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -4009,7 +4042,7 @@ var cartInventory = {
 
 module.exports = cartInventory;
 
-},{"./":44}],44:[function(require,module,exports){
+},{"./":45}],45:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4195,7 +4228,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":6,"../util":47,"lodash":53,"promise":54}],45:[function(require,module,exports){
+},{"../dialog":6,"../util":48,"lodash":54,"promise":55}],46:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4291,7 +4324,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":44,"lodash":53}],46:[function(require,module,exports){
+},{"./":45,"lodash":54}],47:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4308,7 +4341,7 @@ exports.init = function () {
 	});
 };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4620,7 +4653,7 @@ var util = {
 
 module.exports = util;
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4742,7 +4775,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4830,7 +4863,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5167,7 +5200,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":51,"wolfy87-eventemitter":52}],51:[function(require,module,exports){
+},{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5251,7 +5284,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -5725,7 +5758,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12514,14 +12547,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":55,"./lib/done.js":56,"./lib/es6-extensions.js":57,"./lib/node-extensions.js":58}],55:[function(require,module,exports){
+},{"./lib/core.js":56,"./lib/done.js":57,"./lib/es6-extensions.js":58,"./lib/node-extensions.js":59}],56:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12628,7 +12661,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":59}],56:[function(require,module,exports){
+},{"asap":60}],57:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12643,7 +12676,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":55,"asap":59}],57:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],58:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12753,7 +12786,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":55,"asap":59}],58:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],59:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12815,7 +12848,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":55,"asap":59}],59:[function(require,module,exports){
+},{"./core.js":56,"asap":60}],60:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12932,4 +12965,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":49}]},{},[1]);
+},{"_process":50}]},{},[1]);

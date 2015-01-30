@@ -24,20 +24,6 @@ function initQuickViewButtons() {
 	});
 }
 
-function rating() {
-	$('.product-review').each(function (index, review) {
-		var rating = $(review).data('rating');
-		var baseRating = Math.floor(rating);
-		for (var i = 0; i < baseRating; i++) {
-			$('.rating', review).append('<i class="fa fa-star"></i>');
-		}
-		// give half star for anything in between
-		if (rating > baseRating) {
-			$('.rating', review).append('<i class="fa fa-star-half-o"></i>');
-		}
-	});
-}
-
 /**
  * @private
  * @function
@@ -47,7 +33,6 @@ function rating() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-	rating();
 
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image

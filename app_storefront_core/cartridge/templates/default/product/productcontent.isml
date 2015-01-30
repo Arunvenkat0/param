@@ -42,9 +42,7 @@
 	<isinclude template="product/components/pricing"/>
 
 	<isif condition="${!isQuickView}">
-		<div class="product-review-links">
-			<isinclude template="product/components/reviewsmini"/>
-		</div>
+		<isinclude template="product/components/reviewsmini"/>
 	</isif>
 
 	<isset name="showTieredPrice" value="${false}" scope="page"/>

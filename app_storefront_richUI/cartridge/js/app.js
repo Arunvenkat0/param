@@ -11,6 +11,7 @@ var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
+	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
 	searchsuggest = require('./searchsuggest'),
 	searchsuggestbeta = require('./searchsuggest-beta'),
@@ -180,6 +181,7 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
+		rating.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
