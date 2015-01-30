@@ -40,6 +40,7 @@
     "hbsfy": "^2.2.1",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^1.0.0",
+    "merge-stream": "^0.1.7",
     "minimist": "^1.1.0",
     "mocha": "^2.0.1",
     "phantomjs": "^1.9.9",
@@ -57,5 +58,15 @@
     "url": "git@bitbucket.org:demandware/sitegenesis.git"
   },
   "author": "Tri Nguyen",
-  "license": "ISC"
+  "license": "ISC",
+  "paths": {
+    "css": [{
+      "src": "app_storefront_core/cartridge/scss/",
+      "dest": "app_storefront_core/cartridge/static/default/css/"
+    }],
+    "js": {
+      "src": "app_storefront_richUI/cartridge/js/",
+      "dest": "app_storefront_richUI/cartridge/static/default/js/"
+    }
+  }
 }
