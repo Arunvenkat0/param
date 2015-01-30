@@ -2707,36 +2707,6 @@ ul.product-availability-list {
 .account-welcome .not-user {
   margin: 10px 0; }
 
-.last-visited h2 {
-  font-family: Georgia, serif;
-  font-size: 1.2em;
-  font-style: italic;
-  font-weight: normal; }
-.last-visited .jcarousel-clip {
-  margin: 0 20px;
-  overflow: hidden;
-  width: 167px; }
-.last-visited .jcarousel-item {
-  width: 167px; }
-.last-visited .jcarousel-next {
-  background: url("../images/interface/icon-jcarousel-horiz-arrow-right.png") no-repeat scroll left top transparent;
-  cursor: pointer;
-  height: 20px;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 10px; }
-.last-visited .jcarousel-prev {
-  background: url("../images/interface/icon-jcarousel-horiz-arrow-left.png") no-repeat scroll left top transparent;
-  cursor: pointer;
-  height: 20px;
-  left: 0;
-  position: absolute;
-  top: 50%;
-  width: 10px; }
-.last-visited .jcarousel-prev-disabled, .last-visited .jcarousel-next-disabled {
-  background-image: none; }
-
 #password-reset {
   white-space: nowrap; }
 
