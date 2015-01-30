@@ -1,27 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<!-- i.e. for category pages and productlistings, is multiple -->
-<isscript>
-	var uuid = dw.util.UUIDUtils.createUUID();	
-	var pid = '';
-	if(pdict.Product != null)
-	{
-		pid = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID;
-	}
-		
-	var pwrDivId = "pr_snippet_category_"+uuid;
-	var jqSelector = "#"+pwrDivId;
-</isscript>
+<iscomment>Generate a random star rating between 3 and 5</iscomment>
+<div class="product-review" data-rating="${3 + Math.round(Math.random() * 20) / 10}">
+	<h5 class="rating-title">Product Rating</h5>
+	<div class="rating"></div>
+</div>
 
-<div class="pr_stars" id="pr_snippet_category_${uuid}" >
-	<script type="text/javascript">
-	if (typeof POWERREVIEWS != "undefined") { 
-		POWERREVIEWS.display.snippet({write : function(content) { jQuery('${jqSelector}').append(content); }}, 
-			{
-				pr_page_id : '${pid}', 
-				pr_snippet_min_reviews : '0'
-			}
-		)
-	}
-	</script>
- </div>
-    

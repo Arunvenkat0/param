@@ -20,7 +20,6 @@
 	</iscomment>
 
 	<isinclude template="components/header/htmlhead"/>
-	<iscomment><isinclude template="common/powerreviews_UI"/></iscomment>
 
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
 		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />

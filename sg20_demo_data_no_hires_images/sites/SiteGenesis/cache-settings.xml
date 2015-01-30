@@ -31,7 +31,6 @@
                 <pipeline>Product-Show</pipeline>
                 <pipeline>Product-Detail</pipeline>
                 <pipeline>Product-GetVariants</pipeline>
-                <pipeline>PowerReviews-XmlProductDescription</pipeline>
             </pipelines>
         </page-cache-partition>
         <page-cache-partition partition-id="ProductTiles">

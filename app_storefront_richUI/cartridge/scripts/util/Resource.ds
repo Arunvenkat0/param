@@ -158,8 +158,6 @@ var ResourceHelper = {
 				giftCardCheckBalance		: URLUtils.https('COBilling-GetGiftCertificateBalance').toString(),
 				redeemGiftCert				: URLUtils.https('COBilling-RedeemGiftCertificateJson').toString(),
 				addCoupon					: URLUtils.https('Cart-AddCouponJson').toString(),
-				powerReviewsFullJs			: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '/pwr/engine/js/full.js').toString(),
-				powerReviewsZip				: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '').toString(),
 				storeLocatorPage			: URLUtils.https('StoreInventory-Find').toString(),
 				storesInventory				: URLUtils.https('StoreInventory-Inventory').toString(),
 				storesLookup				: URLUtils.https('StoreInventory-Lookup').toString(),

@@ -9,7 +9,6 @@ var dialog = require('../../dialog'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability'),
 	image = require('./image'),
-	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
 	productSet = require('./productSet'),
 	recommendations = require('./recommendations'),
@@ -20,7 +19,6 @@ var dialog = require('../../dialog'),
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
-	powerReviews();
 	productNav();
 	recommendations();
 	tooltip.init();
