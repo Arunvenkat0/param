@@ -24,7 +24,7 @@ module.exports = function (grunt) {
 				},
 				files: {
 					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss',
-					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/sass/style.scss'
+					'app_storefront_jp/cartridge/static/ja_JP/css/style.css': 'app_storefront_jp/cartridge/scss/style.scss'
 				}
 			}
 		},

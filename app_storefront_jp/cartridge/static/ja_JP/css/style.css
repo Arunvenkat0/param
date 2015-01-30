@@ -985,7 +985,8 @@ div.error {
     #header .primary-logo a {
       display: block; }
     #header .primary-logo span {
-      position: relative; }
+      left: -999em;
+      position: absolute; }
 
 .header-banner {
   clear: both;
