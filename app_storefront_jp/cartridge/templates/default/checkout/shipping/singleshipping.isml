@@ -113,11 +113,11 @@
 
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country}" type="input"/>
 
-			    	Country<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.state}" type="input"/>
+			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.state}" type="input"/>
 
-			    	State<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
+			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
 
-			    	POSTAL<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
+			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 
 			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 
