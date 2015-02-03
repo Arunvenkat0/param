@@ -3931,13 +3931,11 @@ var sendToFriend = {
 	initializeDialog: function (eventDelegate) {
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
-			var url = this.href;
 			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
-			url = util.appendParamsToUrl(this.href, data);
-			url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
+			var url = util.appendParamsToUrl(this.href, data);
 
 			dialog.open({
 				target: '#send-to-friend-dialog',
@@ -4416,7 +4414,7 @@ var util = {
 			includeHash = arguments.length < 3 ? false : arguments[2];
 
 		var qsParams = $.extend(uri.queryParams, params);
-		var result = uri.path + '?' + $.param(qsParams);
+		var result = uri.url + '?' + $.param(qsParams);
 		if (includeHash) {
 			result += uri.hash;
 		}
