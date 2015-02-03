@@ -17,7 +17,9 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		watch: {
 			sass: {
-				files: ['app_storefront_core/cartridge/scss/default/*.scss'],
+				files: paths.css.map(function (path) {
+					return path.src + '*.scss';
+				}),
 				tasks: ['css']
 			}
 		},
