@@ -61,7 +61,7 @@
   "license": "ISC",
   "paths": {
     "css": [{
-      "src": "app_storefront_core/cartridge/scss/",
+      "src": "app_storefront_core/cartridge/scss/default/",
       "dest": "app_storefront_core/cartridge/static/default/css/"
     }],
     "js": {
