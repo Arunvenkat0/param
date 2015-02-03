@@ -62,10 +62,13 @@
   "paths": {
     "css": [
       {
-        "src": "app_storefront_core/cartridge/scss/",
+        "src": "app_storefront_core/cartridge/scss/default/",
         "dest": "app_storefront_core/cartridge/static/default/css/"
       }, {
-        "src": "app_storefront_jp/cartridge/scss/",
+        "src": "app_storefront_jp/cartridge/scss/default/",
+        "dest": "app_storefront_jp/cartridge/static/default/css/"
+      }, {
+        "src": "app_storefront_jp/cartridge/scss/ja_JP/",
         "dest": "app_storefront_jp/cartridge/static/ja_JP/css/"
       }
     ],
