@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./app_storefront_richUI/cartridge/js/app.js":[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -210,7 +210,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
+},{"./cookieprivacy":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js","./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./jquery-ext":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js","./minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./multicurrency":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./pages/account":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js","./pages/cart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js","./pages/checkout":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js","./pages/compare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js","./pages/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./pages/registry":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js","./pages/search":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js","./pages/storefront":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js","./pages/storelocator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js","./pages/wishlist":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js","./searchplaceholder":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js","./searchsuggest":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js","./searchsuggest-beta":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js","./tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js":[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -316,7 +316,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":38,"./util":48}],3:[function(require,module,exports){
+},{"./progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -621,7 +621,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./dialog":6,"./page":12,"./util":48}],4:[function(require,module,exports){
+},{"./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js":[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -876,7 +876,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":12,"./util":48,"promise":55}],5:[function(require,module,exports){
+},{"./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/cookieprivacy.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -922,7 +922,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":6}],6:[function(require,module,exports){
+},{"./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1085,7 +1085,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
+},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1106,7 +1106,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":48}],8:[function(require,module,exports){
+},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1158,7 +1158,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":10,"./util":48}],9:[function(require,module,exports){
+},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/jquery-ext.js":[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1188,7 +1188,7 @@ module.exports = function () {
 	};
 };
 
-},{}],10:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1272,7 +1272,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":48}],11:[function(require,module,exports){
+},{"./bonus-products-view":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/multicurrency.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1300,7 +1300,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":12,"./util":48}],12:[function(require,module,exports){
+},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1323,7 +1323,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":48}],13:[function(require,module,exports){
+},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js":[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1562,7 +1562,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":6,"../giftcert":8,"../page":12,"../tooltip":47,"../util":48,"../validator":49}],14:[function(require,module,exports){
+},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../giftcert":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcert.js","../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","../validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/cart.js":[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1602,7 +1602,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
+},{"../bonus-products-view":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/bonus-products-view.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../storeinventory/cart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/cart.js","./account":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/account.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js":[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1631,7 +1631,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":48,"./shipping":20}],16:[function(require,module,exports){
+},{"../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./shipping":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1829,7 +1829,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":7,"../../util":48,"./formPrepare":17}],17:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../giftcard":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/giftcard.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js":[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1888,7 +1888,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":54}],18:[function(require,module,exports){
+},{"lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/index.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1917,7 +1917,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":15,"./billing":16,"./multiship":19,"./shipping":20}],19:[function(require,module,exports){
+},{"./address":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./billing":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/billing.js","./multiship":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js","./shipping":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/multiship.js":[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2047,7 +2047,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":6,"../../util":48,"./address":15,"./formPrepare":17}],20:[function(require,module,exports){
+},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./address":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/address.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/shipping.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2211,7 +2211,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./formPrepare":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/checkout/formPrepare.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/compare.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2255,7 +2255,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
+},{"../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../product-tile":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js":[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2286,7 +2286,7 @@ module.exports = function () {
 	}
 };
 
-},{}],23:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2367,7 +2367,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":6,"../../minicart":10,"../../page":12,"../../util":48,"lodash":54,"promise":55}],24:[function(require,module,exports){
+},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../minicart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/minicart.js","../../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js":[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2457,7 +2457,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":48}],25:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js":[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2544,7 +2544,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":6,"../../util":48}],26:[function(require,module,exports){
+},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2633,7 +2633,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./powerReviews":27,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],27:[function(require,module,exports){
+},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../../storeinventory/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./availability":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/availability.js","./image":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js","./powerReviews":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js","./productNav":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js","./productSet":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js","./recommendations":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js","./variant":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/powerReviews.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog');
@@ -2662,7 +2662,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../dialog":6}],28:[function(require,module,exports){
+},{"../../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productNav.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2689,7 +2689,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":48}],29:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/productSet.js":[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2739,7 +2739,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/recommendations.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -2774,7 +2774,7 @@ module.exports = function () {
 		});
 };
 
-},{}],31:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/variant.js":[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2851,7 +2851,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
+},{"../../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../../storeinventory/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js","../../tooltip":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js","../../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./addThis":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addThis.js","./addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js","./image":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/image.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/registry.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2951,7 +2951,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
+},{"../ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","../quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/search.js":[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3141,7 +3141,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
+},{"../compare-widget":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/compare-widget.js","../product-tile":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js","../progress":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storefront.js":[function(require,module,exports){
 'use strict';
 exports.init = function () {
 	$('#homepage-slider')
@@ -3200,7 +3200,7 @@ exports.init = function () {
 		});
 };
 
-},{}],35:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/storelocator.js":[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3213,7 +3213,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":6}],36:[function(require,module,exports){
+},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/wishlist.js":[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3234,7 +3234,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],37:[function(require,module,exports){
+},{"../page":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/page.js","../send-to-friend":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./product/addToCart":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/addToCart.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/product-tile.js":[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3338,7 +3338,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":39,"imagesloaded":51}],38:[function(require,module,exports){
+},{"./quickview":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js","imagesloaded":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/imagesloaded.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/progress.js":[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3371,7 +3371,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],39:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/quickview.js":[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3490,7 +3490,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],40:[function(require,module,exports){
+},{"./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./pages/product":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/pages/product/index.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchplaceholder.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -3516,7 +3516,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],41:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest-beta.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3688,7 +3688,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":48}],42:[function(require,module,exports){
+},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/searchsuggest.js":[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3865,7 +3865,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":48}],43:[function(require,module,exports){
+},{"./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/send-to-friend.js":[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -3936,7 +3936,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
+},{"./ajax":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/ajax.js","./dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","./util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","./validator":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/cart.js":[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -4024,7 +4024,7 @@ var cartInventory = {
 
 module.exports = cartInventory;
 
-},{"./":45}],45:[function(require,module,exports){
+},{"./":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js":[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4210,7 +4210,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":6,"../util":48,"lodash":54,"promise":55}],46:[function(require,module,exports){
+},{"../dialog":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/dialog.js","../util":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js","promise":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/product.js":[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4306,7 +4306,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":45,"lodash":54}],47:[function(require,module,exports){
+},{"./":"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/storeinventory/index.js","lodash":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/tooltip.js":[function(require,module,exports){
 'use strict';
 
 /**
@@ -4323,7 +4323,7 @@ exports.init = function () {
 	});
 };
 
-},{}],48:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/util.js":[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4635,7 +4635,7 @@ var util = {
 
 module.exports = util;
 
-},{}],49:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/app_storefront_richUI/cartridge/js/validator.js":[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4757,7 +4757,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],50:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -4845,7 +4845,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],51:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/imagesloaded.js":[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5182,7 +5182,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
+},{"eventie":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js","wolfy87-eventemitter":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/eventie/eventie.js":[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5266,7 +5266,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],53:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/imagesloaded/node_modules/wolfy87-eventemitter/EventEmitter.js":[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -5740,7 +5740,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],54:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -12529,14 +12529,14 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],55:[function(require,module,exports){
+},{}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/index.js":[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":56,"./lib/done.js":57,"./lib/es6-extensions.js":58,"./lib/node-extensions.js":59}],56:[function(require,module,exports){
+},{"./lib/core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","./lib/done.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/done.js","./lib/es6-extensions.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/es6-extensions.js","./lib/node-extensions.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/node-extensions.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js":[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -12643,7 +12643,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":60}],57:[function(require,module,exports){
+},{"asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/done.js":[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -12658,7 +12658,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":56,"asap":60}],58:[function(require,module,exports){
+},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/es6-extensions.js":[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -12768,7 +12768,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":56,"asap":60}],59:[function(require,module,exports){
+},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/node-extensions.js":[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -12793,7 +12793,10 @@ Promise.denodeify = function (fn, argumentCount) {
         if (err) reject(err)
         else resolve(res)
       })
-      fn.apply(self, args)
+      var res = fn.apply(self, args)
+      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+        resolve(res)
+      }
     })
   }
 }
@@ -12830,7 +12833,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":56,"asap":60}],60:[function(require,module,exports){
+},{"./core.js":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/lib/core.js","asap":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js"}],"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/promise/node_modules/asap/asap.js":[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -12947,4 +12950,4 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":50}]},{},[1]);
+},{"_process":"/Users/lgelberg/SG/cwd/sitegenesis/node_modules/browserify/node_modules/process/browser.js"}]},{},["./app_storefront_richUI/cartridge/js/app.js"]);
