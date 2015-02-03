@@ -213,7 +213,7 @@
       </node>
       <simple-transition/>
       <node>
-	<call-node start-name-ref="Util-AddCORSHeaders"/>
+	<call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
 	<node-display x="0" y="1"/>
       </node>
       <simple-transition/>
@@ -638,10 +638,10 @@
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
-            </node>
+	    </node>
 	    <simple-transition/>
 	    <node>
-	      <call-node start-name-ref="Util-AddCORSHeaders"/>
+	      <call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
 	      <node-display x="0" y="1"/>
 	    </node>
 	    <simple-transition/>
@@ -880,7 +880,7 @@
       </node>
       <simple-transition/>
       <node>
-	<call-node start-name-ref="Util-AddCORSHeaders"/>
+	<call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
 	<node-display x="0" y="1"/>
       </node>
       <simple-transition/>
@@ -968,7 +968,50 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_8">
+  <branch basename="AddCORSHeaders">
+    <segment>
+      <node>
+	<start-node call-mode="private" name="AddCORSHeaders" secure="false"/>
+	<node-display x="8" y="8"/>
+      </node>
+      <simple-transition>
+	<transition-display>
+	  <bend-point relative-to="source" x="0" y="1"/>
+	</transition-display>
+      </simple-transition>
+      <node>
+	<pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+	  <config-property key="Transactional" value="false"/>
+	  <config-property key="OnError" value="PIPELET_ERROR"/>
+	  <config-property key="ScriptFile" value="util/AddCORSHeaders.ds"/>
+	  <key-binding alias="null" key="ScriptLog"/>
+	  <key-binding alias="CurrentRequest" key="Request"/>
+	</pipelet-node>
+	<node-display x="0" y="1"/>
+	<branch basename="b2" source-connector="error">
+	  <transition target-connector="in2" target-path="./+1">
+	    <transition-display>
+	      <bend-point relative-to="source" x="1" y="0"/>
+	      <bend-point relative-to="target" x="1" y="0"/>
+	    </transition-display>
+	  </transition>
+	</branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+	<join-node/>
+	<node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+	<end-node/>
+	<node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_9">
     <segment>
       <node>
         <text-node>
@@ -978,7 +1021,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_9">
+  <branch basename="_ANONYMOUS_BRANCH_10">
     <segment>
       <node>
         <text-node>
