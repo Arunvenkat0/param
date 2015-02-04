@@ -23,6 +23,7 @@ function initQuickViewButtons() {
 		});
 	});
 }
+
 /**
  * @private
  * @function

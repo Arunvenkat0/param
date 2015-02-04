@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/09/30/mitsubishi__l65__a90-en_US-meta.js'] = {metadata:[{rid:21156111,date:20111017,rating:1,helpfulScore:0,oid:27235400,batch:1,images:0},{rid:21155107,date:20111017,rating:3,helpfulScore:0,oid:27233599,batch:1,images:0},{rid:7020386,date:20090411,rating:5,helpfulScore:0,oid:7563753,batch:1,images:0}]};

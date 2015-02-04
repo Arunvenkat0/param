@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/09/15/apple__ipod__touch-en_US-rollup.js'] = {rollup:{r:null,d:5,a:5,n:1,w:"2009-04-30",o:"2009-04-30",v:true,p:false,g:null,ar:null}};

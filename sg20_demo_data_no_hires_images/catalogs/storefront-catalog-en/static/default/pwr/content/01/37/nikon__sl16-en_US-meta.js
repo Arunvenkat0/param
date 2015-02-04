@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/01/37/nikon__sl16-en_US-meta.js'] = {metadata:[{rid:7020388,date:20090411,rating:5,helpfulScore:0,oid:7563774,batch:1,images:0}]};

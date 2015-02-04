@@ -913,8 +913,7 @@ Cart (Login)
 COCustomer (Start)
 GiftRegistry (Start, AddProduct, Delete, Create)
 Order (History)
-PaymentsInstrument (List, Delete) 
-PowerReviews (WriteReview)
+PaymentsInstrument (List, Delete)
 Wishlist (Show, Add)</description>
         </text-node>
         <node-display height="2" width="3" x="17" y="5"/>

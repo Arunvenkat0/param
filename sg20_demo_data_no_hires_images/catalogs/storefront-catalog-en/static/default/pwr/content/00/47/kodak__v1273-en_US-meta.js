@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/00/47/kodak__v1273-en_US-meta.js'] = {metadata:[{rid:6970821,date:20090407,rating:5,helpfulScore:0,expertLevel:0,batch:1,images:0}]};
