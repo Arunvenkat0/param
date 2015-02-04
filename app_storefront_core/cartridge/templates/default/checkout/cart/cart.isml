@@ -83,6 +83,9 @@
 				</fieldset>
 			</form>	
 		</div>
+		
+		<iscomment>Display approaching order and shipping promotions.</iscomment>
+		<isinclude template="checkout/components/approachingdiscounts"/>
 	
 		<iscomment>prevent checkout if any product price is N/A or if invalid coupons</iscomment>
 		<isif condition="${pdict.BasketStatus != null && pdict.BasketStatus.error}">
@@ -856,8 +859,9 @@
 			</form>
 
 		</div>
-
+		
 		<div class="cart-recommendations">
+			<isinclude url="${URLUtils.url('Product-IncludeLastVisited')}"/>
 			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
 		</div>
 	</isif>

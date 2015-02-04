@@ -29,15 +29,11 @@
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
-		<div id="main" role="main" class="primary-focus clearfix">
+		<div id="main" role="main" class="full-width clearfix">
 
 
 			<div id="primary" class="primary-content">
 				<isreplace/>
-			</div>
-
-			<div id="secondary" class="nav">
-				<isinclude template="checkout/cart/rightcolumn"/>
 			</div>
 
 		</div>

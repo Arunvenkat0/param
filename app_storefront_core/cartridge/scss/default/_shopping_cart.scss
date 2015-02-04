@@ -200,44 +200,6 @@ ul.product-availability-list {
 	}
 }
 
-.last-visited {
-	h2 {
-		font-family: $serif;
-		font-size: 1.2em;
-		font-style: italic;
-		font-weight: normal;
-	}
-	.jcarousel-clip {
-		margin: 0 20px;
-		overflow: hidden;
-		width: 167px;
-	}
-	.jcarousel-item {
-		width: 167px;
-	}
-	.jcarousel-next {
-		background: url("../images/interface/icon-jcarousel-horiz-arrow-right.png") no-repeat scroll left top transparent;
-		cursor: pointer;
-		height: 20px;
-		position: absolute;
-		right: 0;
-		top: 50%;
-		width: 10px;
-	}
-	.jcarousel-prev {
-		background: url("../images/interface/icon-jcarousel-horiz-arrow-left.png") no-repeat scroll left top transparent;
-		cursor: pointer;
-		height: 20px;
-		left: 0;
-		position: absolute;
-		top: 50%;
-		width: 10px;
-	}
-	.jcarousel-prev-disabled, .jcarousel-next-disabled {
-		background-image: none;
-	}
-}
-
 #password-reset{
 	white-space: nowrap;
 }
