@@ -2076,6 +2076,14 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
 		&lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
 	&lt;/ul&gt;&#13;
 &lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div id="home-promo-shop-shoes"&gt;&#13;
+	&lt;h2&gt;ショップ&lt;/h2&gt;&#13;
+	&lt;ul&gt;&#13;
+		&lt;li&gt;&lt;span&gt;靴:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;踵&lt;/a&gt;&lt;/li&gt;&#13;
+		&lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラットシュー&lt;/a&gt;&lt;/li&gt;&#13;
+		&lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントゥシュー&lt;/a&gt;&lt;/li&gt;&#13;
+	&lt;/ul&gt;&#13;
+&lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
