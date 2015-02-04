@@ -3929,6 +3929,11 @@ var sendToFriend = {
 			});
 	},
 	initializeDialog: function (eventDelegate) {
+		// detect withCredentials support to do CORS from HTTP to HTTPS
+		// with browsers do not support withCredentials (mainly IE 8 and 9), fall back to page reload
+		if (!'withCredentials' in new XMLHttpRequest()) {
+			return;
+		}
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
 			var data = util.getQueryStringParams($('.pdpForm').serialize());
