@@ -30,6 +30,7 @@ var ResourceHelper = {
 				// Common
 				I_AGREE							: Resource.msg('i_agree', 'common', null),
 				CLOSE 							: Resource.msg('close', 'common', null),
+				NO_THANKS						: Resource.msg('global.nothanks', 'locale', null),
 
 				// Checkout
 				SHIP_QualifiesFor 				: Resource.msg('shipment.qualifiesfor', 'checkout', null),

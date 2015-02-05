@@ -25,9 +25,11 @@ function getBonusProducts() {
 			options: {}
 		};
 		var a, alen, bp = selectedList[i];
-		for (a = 0, alen = bp.options.length; a < alen; a++) {
-			var opt = bp.options[a];
-			p.options = {optionName:opt.name, optionValue:opt.value};
+		if (bp.options) {
+			for (a = 0, alen = bp.options.length; a < alen; a++) {
+				var opt = bp.options[a];
+				p.options = {optionName:opt.name, optionValue:opt.value};
+			}
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -60,6 +62,10 @@ var selectedItemTemplate = function (data) {
 // hide swatches that are not selected or not part of a Product Variation Group
 var hideSwatches = function () {
 	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+	// prevent unselecting the selected variant
+	$('.bonus-product-item .swatches .selected').on('click', function () {
+		return false;
+	});
 };
 
 /**
