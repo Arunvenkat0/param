@@ -10,7 +10,7 @@ describe('Product Details Page', function () {
 		client
 			.waitForExist('form[role="search"]')
 			.setValue('#q', 'modern')
-			.click('form[role="search"] input[type="submit"]')
+			.submitForm('form[role="search"]')
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
