@@ -88,12 +88,12 @@ module.exports = function (grunt) {
 			target: ['app_storefront_richUI/cartridge/js/**/*.js']
 		},
 		mochaTest: {
-			ui: {
+			application: {
 				options: {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/ui/' + config.suite + '/**/*.js', '!test/ui/webdriver/*']
+				src: ['test/application/' + config.suite + '/**/*.js', '!test/application/webdriver/*']
 			},
 			unit: {
 				options: {
@@ -108,6 +108,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('css', ['sass', 'autoprefixer']);
 	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
-	grunt.registerTask('test:ui', ['mochaTest:ui']);
+	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
 }

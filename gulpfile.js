@@ -78,7 +78,7 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
-gulp.task('test:ui', function () {
+gulp.task('test:application', function () {
 	var opts = minimist(process.argv.slice(2));
 	// default option to all
 	var suite = opts.suite || '*';
@@ -89,7 +89,7 @@ gulp.task('test:ui', function () {
 	var reporter = opts.reporter || 'spec';
 	// default timeout to 10s
 	var timeout = opts.timeout || 10000;
-	return gulp.src(['test/ui/' + suite + '/**/*.js', '!test/ui/webdriver/*'], {read: false})
+	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
