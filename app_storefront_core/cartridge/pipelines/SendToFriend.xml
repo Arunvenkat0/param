@@ -8,7 +8,7 @@
         <text-node>
           <description>SendToFriend allows the use of dialog to gather email info to send to a friend.  A template that uses this dialog can set some of the values ahead of time.  Please look at wishlist.isml or registry.isml</description>
         </text-node>
-        <node-display width="2" x="2" y="1"/>
+	<node-display width="2" x="1" y="1"/>
       </node>
     </segment>
   </branch>
@@ -16,7 +16,7 @@
     <segment>
       <node>
         <start-node name="Start" secure="true"/>
-        <node-display x="3" y="2"/>
+	<node-display x="3" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -211,11 +211,12 @@
         <join-node/>
         <node-display x="-1" y="2"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
+      <node>
+	<call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
+	<node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <interaction-continue-node secure="true" start-name="SendToFriendForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/components/sendtofrienddialog"/>
@@ -637,12 +638,13 @@
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+	    </node>
+	    <simple-transition/>
+	    <node>
+	      <call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
+	      <node-display x="0" y="1"/>
+	    </node>
+	    <simple-transition/>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="account/components/sendtofrienddialogsuccess"/>
@@ -878,6 +880,11 @@
       </node>
       <simple-transition/>
       <node>
+	<call-node start-name-ref="SendToFriend-AddCORSHeaders"/>
+	<node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
         <interaction-continue-node secure="true" start-name="submitForm" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/login/accountlogin"/>
         </interaction-continue-node>
@@ -895,7 +902,7 @@
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="..">
                   <transition-display>
-                    <bend-point relative-to="source" x="-3" y="-3"/>
+		    <bend-point relative-to="target" x="-3" y="3"/>
                     <bend-point relative-to="target" x="-3" y="0"/>
                   </transition-display>
                 </transition>
@@ -945,9 +952,8 @@
       </node>
       <transition target-connector="in2" target-path=".">
         <transition-display>
-          <bend-point relative-to="source" x="-3" y="1"/>
-          <bend-point relative-to="source" x="-3" y="1"/>
-          <bend-point relative-to="target" x="-3" y="0"/>
+	  <bend-point relative-to="source" x="-1" y="2"/>
+	  <bend-point relative-to="source" x="-1" y="-2"/>
         </transition-display>
       </transition>
     </segment>
@@ -962,7 +968,50 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_8">
+  <branch basename="AddCORSHeaders">
+    <segment>
+      <node>
+	<start-node call-mode="private" name="AddCORSHeaders" secure="false"/>
+	<node-display x="8" y="8"/>
+      </node>
+      <simple-transition>
+	<transition-display>
+	  <bend-point relative-to="source" x="0" y="1"/>
+	</transition-display>
+      </simple-transition>
+      <node>
+	<pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+	  <config-property key="Transactional" value="false"/>
+	  <config-property key="OnError" value="PIPELET_ERROR"/>
+	  <config-property key="ScriptFile" value="util/AddCORSHeaders.ds"/>
+	  <key-binding alias="null" key="ScriptLog"/>
+	  <key-binding alias="CurrentRequest" key="Request"/>
+	</pipelet-node>
+	<node-display x="0" y="1"/>
+	<branch basename="b2" source-connector="error">
+	  <transition target-connector="in2" target-path="./+1">
+	    <transition-display>
+	      <bend-point relative-to="source" x="1" y="0"/>
+	      <bend-point relative-to="target" x="1" y="0"/>
+	    </transition-display>
+	  </transition>
+	</branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+	<join-node/>
+	<node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+	<end-node/>
+	<node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_9">
     <segment>
       <node>
         <text-node>
@@ -972,7 +1021,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_9">
+  <branch basename="_ANONYMOUS_BRANCH_10">
     <segment>
       <node>
         <text-node>

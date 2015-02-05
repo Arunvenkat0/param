@@ -69,7 +69,7 @@ var util = {
 			includeHash = arguments.length < 3 ? false : arguments[2];
 
 		var qsParams = $.extend(uri.queryParams, params);
-		var result = uri.path + '?' + $.param(qsParams);
+		var result = uri.url + '?' + $.param(qsParams);
 		if (includeHash) {
 			result += uri.hash;
 		}
