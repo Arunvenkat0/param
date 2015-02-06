@@ -349,9 +349,11 @@ function getBonusProducts() {
 			options: {}
 		};
 		var a, alen, bp = selectedList[i];
-		for (a = 0, alen = bp.options.length; a < alen; a++) {
-			var opt = bp.options[a];
-			p.options = {optionName:opt.name, optionValue:opt.value};
+		if (bp.options) {
+			for (a = 0, alen = bp.options.length; a < alen; a++) {
+				var opt = bp.options[a];
+				p.options = {optionName:opt.name, optionValue:opt.value};
+			}
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -384,6 +386,10 @@ var selectedItemTemplate = function (data) {
 // hide swatches that are not selected or not part of a Product Variation Group
 var hideSwatches = function () {
 	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+	// prevent unselecting the selected variant
+	$('.bonus-product-item .swatches .selected').on('click', function () {
+		return false;
+	});
 };
 
 /**
@@ -1588,7 +1594,7 @@ function initializeEvents() {
 			source: 'cart'
 		});
 	})
-	.on('click', '.bonus-item-actions a', function (e) {
+	.on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
 		e.preventDefault();
 		bonusProductsView.show(this.href);
 	});
@@ -12817,7 +12823,10 @@ Promise.denodeify = function (fn, argumentCount) {
         if (err) reject(err)
         else resolve(res)
       })
-      fn.apply(self, args)
+      var res = fn.apply(self, args)
+      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+        resolve(res)
+      }
     })
   }
 }
