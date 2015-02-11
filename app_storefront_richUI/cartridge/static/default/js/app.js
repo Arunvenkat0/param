@@ -379,7 +379,7 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 
@@ -1297,7 +1297,7 @@ exports.init = function () {
 		ajax.getJson({
 			url: util.appendParamsToUrl(Urls.currencyConverter, {
 				format: 'ajax',
-				currencyMnemonic: $('.currency-converter').val()
+				currencyMnemonic: $('.currency-converter select').val()
 			}),
 			callback: function () {
 				location.reload();
