@@ -134,13 +134,6 @@ function initializeEvents() {
 		// 	e.preventDefault();
 		// }
 	});
-
-	// grid toggle
-	$('.toggle-grid').on('click', function () {
-		$('.search-result-content').toggleClass('wide-tiles');
-		$(this).toggleClass('wide');
-	});
-
 }
 /**
  * @private
@@ -379,7 +372,7 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 
@@ -3241,6 +3234,13 @@ function initQuickViewButtons() {
 	});
 }
 
+function gridViewToggle() {
+	$('.toggle-grid').on('click', function () {
+		$('.search-result-content').toggleClass('wide-tiles');
+		$(this).toggleClass('wide');
+	});
+}
+
 /**
  * @private
  * @function
@@ -3250,7 +3250,7 @@ function initQuickViewButtons() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-
+	gridViewToggle();
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest('.product-tile'),
