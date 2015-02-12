@@ -1,7 +1,6 @@
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
-var $ = require('jquery');
 
 describe('Product Details Page', function () {
 	before(function (done) {
@@ -49,7 +48,7 @@ describe('Product Details Page', function () {
 				assert.equal(err, undefined);
 				assert.notOk(enabled, 'Add to Cart button is disabled');
 			})
-			
+
 			.call(done);
 	});
 	after(function (done) {
