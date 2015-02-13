@@ -3,12 +3,12 @@
  *
  */
 
-var ResourceHelper = {
+function ResourceHelper() {}
 	/**
 	 * Get the client-side constants
 	 * @returns {Object} An objects key key-value pairs holding the constants
 	 */
-	getConstants: function(pageContext) {
+	ResourceHelper.getConstants = function(pageContext) {
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 		return {
 			AVAIL_STATUS_IN_STOCK 		: ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK,
@@ -16,12 +16,12 @@ var ResourceHelper = {
 			AVAIL_STATUS_BACKORDER 		: ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER,
 			AVAIL_STATUS_NOT_AVAILABLE 	: ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE
 		};
-	},
+	}
 	/**
 	 * Get the client-side resources of a given page
 	 * @returns {Object} An objects key key-value pairs holding the resources
 	 */
-	getResources: function(pageContext) {
+	ResourceHelper.getResources = function(pageContext) {
 		var Resource = require('dw/web/Resource');
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 
@@ -110,12 +110,12 @@ var ResourceHelper = {
 		resources["REMAIN_" + ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE] = Resource.msg('global.remainingnotavailable', 'locale', null);
 
 		return resources;
-	},
+	}
 	/**
 	 * Get the client-side URLs of a given page
 	 * @returns {Object} An objects key key-value pairs holding the URLs
 	 */
-	getUrls: function(pageContext) {
+	ResourceHelper.getUrls = function(pageContext) {
 		var URLUtils = require('dw/web/URLUtils');
 		var Resource = require('dw/web/Resource');
 
@@ -173,12 +173,12 @@ var ResourceHelper = {
 		};
 		return urls;
 
-	},
+	}
 	/**
 	 * Get the client-side preferences of a given page
 	 * @returns {Object} An objects key key-value pairs holding the preferences
 	 */
-	getPreferences: function(pageContext) {
+	ResourceHelper.getPreferences = function(pageContext) {
 		var cookieHintAsset = dw.content.ContentMgr.getContent('cookie_hint');
 		return {
 			LISTING_INFINITE_SCROLL: (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
@@ -187,18 +187,15 @@ var ResourceHelper = {
 			STORE_PICKUP: dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
 			COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false
 		};
-	},
+	}
 	/**
 	 * Get the client-side user settings
 	 * @returns {Object} An objects key key-value pairs holding the settings
 	 */
-	getUserSettings: function(pageContext) {
+	ResourceHelper.getUserSettings = function(pageContext) {
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 		return {
 			zip: session.custom.zipcode == "null" ? null : session.custom.zipcode,
 			storeId: session.custom.storeId == "null" ? null : session.custom.storeId
 		};
 	}
-}
-
-module.exports = ResourceHelper;
