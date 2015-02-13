@@ -23,6 +23,7 @@
 }
 
 .menu-toggle {
+	background-color: transparent;
 	border: none;
 	color: $night-rider;
 	display: block;
@@ -31,6 +32,9 @@
 	padding: 0.5em;
 	@media screen and (min-width: 768px) {
 		display: none;
+	}
+	&:hover {
+		background-color: transparent;
 	}
 	.menu-icon {
 		font-size: 2em;
