@@ -8,7 +8,7 @@
 	<isset name="store" value="${dw.catalog.StoreMgr.getStore(pdict.CurrentSession.custom.storeId)}" scope="page" />
 	</isif>
 	<isslot id="cart-banner" description="Banner for Cart page"	context="global" />
-	
+
 	<iscomment>Display selected bonus products Order Promotion message</iscomment>
 	<isif condition="${!(pdict.Basket == null)}">
 		<isloop items="${pdict.Basket.bonusDiscountLineItems}"	var="bonusDiscountLineItem">
@@ -65,9 +65,9 @@
 			<isslot id="cart-empty" description="Empty Cart page slot." context="global" />
 		</div>
 	<iselse/>
-		
+
 		<iscomment>show checkout and continue shopping buttons above cart</iscomment>
-		<div class="cart-actions cart-actions-top">	
+		<div class="cart-actions cart-actions-top">
 			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
 			<form class="cart-action-checkout" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
 				<fieldset>
@@ -82,19 +82,19 @@
 					</isif>
 				</fieldset>
 			</form>
-	
+
 			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
-						&#171; ${Resource.msg('global.continueshopping','locale',null)}
+						<i class="fa fa-angle-double-left left"></i>${Resource.msg('global.continueshopping','locale',null)}
 					</button>
 				</fieldset>
-			</form>	
+			</form>
 		</div>
-		
+
 		<iscomment>Display approaching order and shipping promotions.</iscomment>
 		<isinclude template="checkout/components/approachingdiscounts"/>
-	
+
 		<iscomment>prevent checkout if any product price is N/A or if invalid coupons</iscomment>
 		<isif condition="${pdict.BasketStatus != null && pdict.BasketStatus.error}">
 			<div class="error-form ">
@@ -175,7 +175,7 @@
 												<input type="number" min="0" name="${FormLi.quantity.htmlName}" maxlength="6" value="${lineItem.quantity.value.toFixed()}" class="input-text" />
 											</isif>
 										</td>
-										<td class="item-quantity-details">								
+										<td class="item-quantity-details">
 											<iscomment>Product Existence and Product Availability</iscomment>
 											<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
 												<isif condition="${lineItem.product == null}">
@@ -188,7 +188,7 @@
 													<isinclude template="checkout/cart/cartavailability" />
 												</isif>
 											</isif>
-											
+
 											<div class="item-user-actions">
 												<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
 													<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span>${Resource.msg('global.remove','locale',null)}</span></button>
@@ -805,12 +805,12 @@
 						<button type="submit" value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon">
 							${Resource.msg('global.apply','locale',null)}
 						</button>
-						
+
 						<iscomment>Update Cart</iscomment>
 						<button type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
 							${Resource.msg('global.updatecart','locale',null)}
 						</button>
-						
+
 						<isif condition="${pdict.CouponError && pdict.CouponError=='COUPON_CODE_MISSING'}">
 							<div class="error">
 								${Resource.msg('cart.COUPON_CODE_MISSING','checkout', null)}
@@ -818,7 +818,7 @@
 						<iselseif condition="${pdict.CouponError && pdict.CouponError=='NO_ACTIVE_PROMOTION'}">
 							<div class="error">
 								${Resource.msgf("cart.NO_ACTIVE_PROMOTION", "checkout", "", pdict.CurrentForms.cart.couponCode.htmlValue)}
-							</div>				
+							</div>
 						<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 							<div class="error">
 								${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}
@@ -857,13 +857,13 @@
 			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
-						&#171; ${Resource.msg('global.continueshopping','locale',null)}
+						<i class="fa fa-angle-double-left left"></i>${Resource.msg('global.continueshopping','locale',null)}
 					</button>
 				</fieldset>
 			</form>
 
 		</div>
-		
+
 		<div class="cart-recommendations">
 			<isinclude url="${URLUtils.url('Product-IncludeLastVisited')}"/>
 			<isslot id="cart-footer" description="Footer for Cart page" context="global" />
