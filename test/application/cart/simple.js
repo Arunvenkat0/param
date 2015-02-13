@@ -3,11 +3,8 @@ var client = require('../webdriver/client');
 var config = require('../webdriver/config');
 
 describe('Cart - Simple', function () {
-	before(function (done) {
-		client.init(done);
-	});
-	it('should show product in cart', function (done) {
-		client
+	beforeEach(function (done) {
+		client.init()
 			// go directly to product page for Straight Leg Trousers
 			.url(config.url + '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA')
 			.waitForExist('.product-variations')
@@ -17,10 +14,12 @@ describe('Cart - Simple', function () {
 				assert.equal(err, undefined);
 				assert.ok(enabled, 'Add to Cart button is not enabled');
 			})
-			.click('#add-to-cart', function (err) {
-				assert.equal(err, undefined);
-			})
+			.click('#add-to-cart')
 			.url(config.url + '/cart')
+			.call(done);
+	});
+	it('should show product in cart', function (done) {
+		client
 			.elements('.item-list .cart-row', function (err, results) {
 				assert.equal(err, undefined);
 				assert(results.value.length === 1, 'cart contains 1 product')
@@ -39,7 +38,20 @@ describe('Cart - Simple', function () {
 			})
 			.call(done);
 	});
-	after(function (done) {
+
+	it('should remove product from cart', function (done) {
+		client
+			.click('.cart-row:nth-child(1) .item-user-actions button[value="Remove"]', function (err) {
+				assert.equal(err, undefined);
+			})
+			.isExisting('.cart-empty', function (err, exists) {
+				assert.equal(err, undefined);
+				assert.ok(exists, 'item is removed from cart');
+			})
+			.call(done);
+	});
+
+	afterEach(function (done) {
 		client.end(done);
 	});
 });
