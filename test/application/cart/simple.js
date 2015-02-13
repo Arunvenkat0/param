@@ -66,6 +66,22 @@ describe('Cart - Simple', function () {
 			.call(done);
 	});
 
+	it('should change size', function (done) {
+		client
+			.click('.cart-row:nth-child(1) .item-details .item-edit-details a')
+			.waitForExist('.ui-dialog')
+			.click('.ui-dialog .product-variations .swatches.size li:nth-child(5) a')
+			.pause(500)
+			.click('.ui-dialog #add-to-cart')
+			// wait for the page to refresh, which happens after a 500 timeout by default
+			.pause(1500)
+			.getText('.cart-row:nth-child(1) .attribute[data-attribute="size"] .value', function (err, size) {
+				assert.equal(err, undefined);
+				assert.equal(size, '32');
+			})
+			.call(done);
+	})
+
 	afterEach(function (done) {
 		client.end(done);
 	});
