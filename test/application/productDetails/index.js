@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
 
-describe('Product Details Page', function () {
+describe('Product Details Page - single item', function () {
 	before(function (done) {
 		client.init().url(config.url, done);
 	});
@@ -39,10 +39,6 @@ describe('Product Details Page', function () {
 			.getAttribute('#Quantity', 'size', function (err, exists) {
 				assert.equal(err, undefined);
 				assert.equal(exists, '2', 'The attribute size is 2');
-			})
-			.getText('#product-content > .product-price .price-sales', function (err, price) {
-				assert.equal(err, undefined);
-				assert.match(price, /^\$.*$/, 'The price should be USD');
 			})
 			.isEnabled('#add-to-cart', function (err, enabled) {
 				assert.equal(err, undefined);
