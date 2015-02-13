@@ -1,47 +1,5 @@
-# Welcome to the SiteGenesis repository
-
-# Purpose
-This is the primary repository for Demandware's SiteGenesis development team.  The 'master' branch contains the HEAD code of our development activities.  The HEAD branch has not been released and should be treated "as is".  For 'released' versions of SiteGenesis, either look at our TAGS or consult the Community Branch at [https://bitbucket.org/demandware/sitegenesis-community](https://bitbucket.org/demandware/sitegenesis-community).
-
-Only authorized members of the SiteGenesis developement team can modify the 'master' branch, however, we encourage all other Demandware employees and friends to fork this repository, and submit pull requests according to Contribution Guidelines outlined in [How to contribute to SiteGenesis (Internal Guide)](https://intranet.demandware.com/confluence/pages/viewpage.action?pageId=166199408)
-
-# Demo Storefront Data
-
-## Creating a data installation
-
-Because of file size constraints, the demo store data distribution is broken into 2 distinct parts:
-- everything, without high resolution images, including a catalog with hi resolution references removed
-- a delta distibution, with only high resolution images, plus a catalog specifically referencing those images
-
-If you need to install high resolution images, you will need to perform 2 separate import steps.
-
-    % git pull sg20_demo_data_no_hires_images
-
-When you want to install the high resolution images, you can do that, following the same procedure.
-
-    % git pull sg20_demo_data_only_hires_images
-
-
-## Zipping the files
-
-On the Mac, you should use the commandline `zip` command to make sure the folder structure is created properly.
-
-    % zip -r sg20_demo_data_no_hires_images sg20_demo_data_no_hires_images
-
-
-## Upload and import the site
-
-Upload the resulting file to your site and import it.
-
-# Test Automation
-
-Please read the README.md file in the test directory, but essentially, we have a series of application and unit tests that are runnable from the commandline using either 'grunt' or 'gulp'.  The README.md in the test directory will guide in installing and running the tools that you need for executing these tests.
-
-Please note: the tests that we are offering is not a complete, fixed set of tests.  This is a living directory which we will continue to add to as our team is able.  We also encourage any reader of this document to use these tests as a model and to enhance this capability by adding their own tests.
-
-# How to Use
 ## Build tools
-Starting with 15.1, SiteGenesis supports both [gulp](http://gulpjs.com) and [Grunt](http://gruntjs.com) as build tools.
+Starting with 15.1, SiteGenesis uses [gulp](http://gulpjs.com) as its main build tool. [Grunt](http://gruntjs.com) is also supported.
 
 ### Getting started
 - Pull down the latest copy of SiteGenesis. If you're reading this doc, it is likely that you already have a version of SG with the build tool config.
@@ -105,6 +63,3 @@ To make the development process easier, running `gulp` on the command line will 
 For JavaScript, when watching is happening, [watchify](https://github.com/substack/watchify) is used instead of browserify for faster bundling by taking advantage of caching.
 
 The equivalent default task for grunt, `grunt`, is also available.
-
-
-Updated: 2/13/15
