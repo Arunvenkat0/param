@@ -51,6 +51,21 @@ describe('Cart - Simple', function () {
 			.call(done);
 	});
 
+	it('should update quantity in cart', function (done) {
+		client
+			.setValue('.cart-row:nth-child(1) .item-quantity input', 3)
+			.click('.cart-footer button[name$="_updateCart"]')
+			.getValue('.cart-row:nth-child(1) .item-quantity input', function (err, qty) {
+				assert.equal(err, undefined);
+				assert.equal(qty, 3, 'quantity updated')
+			})
+			.getText('.cart-row:nth-child(1) .item-total .price-total', function (err, price) {
+				assert.equal(err, undefined);
+				assert.equal(price, '$675.00', 'price updated')
+			})
+			.call(done);
+	});
+
 	afterEach(function (done) {
 		client.end(done);
 	});
