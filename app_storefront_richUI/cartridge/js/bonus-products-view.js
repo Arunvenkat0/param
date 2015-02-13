@@ -55,7 +55,7 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 

@@ -167,7 +167,7 @@ gulp.task('js:styleguide', function () {
 		bundle();
 	});
 
-	var bundle = function() {
+	var bundle = function () {
 		return bundler
 			.bundle()
 			.on('error', function (e) {
