@@ -40,7 +40,7 @@ describe('Product Details Page - Set', function () {
 				assert.equal(err, undefined);
 				assert.equal(price, '$204.00', 'The price is right');
 			})
-			.isEnabled('.button-fancy-large.add-all-to-cart', function (err, enabled) {
+			.isEnabled('.add-all-to-cart', function (err, enabled) {
 				assert.equal(err, undefined);
 				assert.ok(enabled, 'Add All to Cart button is enabled');
 			})
