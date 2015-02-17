@@ -379,7 +379,7 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 
@@ -2601,15 +2601,12 @@ function initializeEvents() {
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
-		e.preventDefault();
-
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-		window.location.href = url;
+		this.setAttribute(href, url);
 	});
 
 	// product options
