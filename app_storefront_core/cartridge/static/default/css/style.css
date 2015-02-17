@@ -366,6 +366,54 @@ td {
   padding: 1em;
   vertical-align: top; }
 
+button, .button, .buttonstyle, input[type="button"] {
+  background-color: #88c14b;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.1em;
+  height: 2.5em;
+  padding: 0.7em 2em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out; }
+  button:hover, .button:hover, .buttonstyle:hover, input[type="button"]:hover {
+    background-color: #6ea138; }
+  button.large, .button.large, .button-fancy-large, .buttonstyle.large, input[type="button"].large {
+    font-size: 1.5em;
+    padding: 0.2em 2.5em; }
+  button.raised, .button.raised, .buttonstyle.raised, input[type="button"].raised {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  button.simple, .button.simple, .buttonstyle.simple, input[type="button"].simple {
+    background-color: #efefef;
+    color: #88c14b; }
+    button.simple:hover, .button.simple:hover, .buttonstyle.simple:hover, input[type="button"].simple:hover {
+      background-color: #e2e2e2;
+      color: #6ea138; }
+  button[disabled], button.disabled, .button[disabled], .button.disabled, .buttonstyle[disabled], .buttonstyle.disabled, input[type="button"][disabled], input[type="button"].disabled {
+    background-color: #ccc;
+    color: #666; }
+  button i.left, .button i.left, .buttonstyle i.left, input[type="button"] i.left {
+    margin-right: 0.6em; }
+  button i.right, .button i.right, .buttonstyle i.right, input[type="button"] i.right {
+    margin-left: 0.6em; }
+
+.button-text {
+  background-color: transparent;
+  color: #88c14b;
+  padding: 0; }
+  .button-text:hover {
+    background-color: transparent;
+    text-decoration: underline; }
+
+.button-full-width {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  width: 100%; }
+
 #wrapper {
   background: none repeat scroll 0 0 #fff;
   left: 0;
@@ -421,7 +469,8 @@ td {
   opacity: 0.4; }
 
 .ui-dialog {
-  background-color: #fff; }
+  background-color: #fff;
+  padding: 0; }
   .ui-dialog .ui-widget-header {
     background-color: #efefef;
     border: 0 none;
@@ -497,58 +546,6 @@ td {
   line-height: 1.5em;
   margin: 0;
   padding: 20px 10px; }
-
-button, .button, .buttonstyle, input[type="button"] {
-  background: none repeat scroll 0 0 #fff;
-  border-color: #ccc;
-  border-style: solid;
-  border-width: 1px 1px 4px;
-  color: #00a4e4;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.1em;
-  font-weight: 700;
-  padding: 0.6em 2em 0.5em;
-  text-align: center; }
-
-button[disabled], input[disabled] {
-  color: #ccc; }
-
-.button-fancy-small {
-  background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #00a4e4;
-  color: #fff !important;
-  font-size: 1em;
-  font-weight: 400;
-  text-transform: uppercase; }
-
-.button-fancy-medium {
-  background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #00a4e4;
-  color: #fff !important;
-  font-weight: 400;
-  text-transform: uppercase; }
-
-.button-fancy-large {
-  background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 #00a4e4;
-  color: #fff !important;
-  font-size: 1.75em;
-  font-weight: 400;
-  padding: 0.5em 1em;
-  text-transform: uppercase; }
-
-.button-fancy-small[disabled], .button-fancy-medium[disabled], .button-fancy-large[disabled] {
-  opacity: 0.5; }
-
-.button-text {
-  background: none repeat scroll 0 0 transparent;
-  border: 0 none;
-  font-weight: 400;
-  padding: 0; }
-
-.button-full-width {
-  padding-left: 0;
-  padding-right: 0;
-  text-align: center;
-  width: 100%; }
 
 .js .simple-submit {
   display: none; }
@@ -982,6 +979,7 @@ div.error {
       position: absolute; } }
 
 .menu-toggle {
+  background-color: transparent;
   border: none;
   color: #333;
   display: block;
@@ -991,6 +989,8 @@ div.error {
   @media screen and (min-width: 768px) {
     .menu-toggle {
       display: none; } }
+  .menu-toggle:hover {
+    background-color: transparent; }
   .menu-toggle .menu-icon {
     font-size: 2em; }
 
@@ -1260,12 +1260,15 @@ nav[role="navigation"] {
       right: 0; } }
   #mini-cart a {
     color: #00a4e4; }
+  #mini-cart .mini-cart-link-cart {
+    color: #fff; }
 
 .mini-cart-label {
   margin: 0 10px 0 0; }
   .mini-cart-label .minicart-icon {
     font-size: 2em; }
   .mini-cart-label .minicart-quantity {
+    color: #88c14b;
     font-size: 1.5em;
     margin-left: 0.3em; }
 
@@ -1339,10 +1342,12 @@ nav[role="navigation"] {
   font-size: 0.9em;
   width: 50%; }
 
+.mini-cart-totals {
+  text-align: center; }
+
 .mini-cart-subtotals {
   font-weight: 700;
-  padding: 1em 0 0;
-  text-align: center; }
+  padding: 1em 0 0; }
   .mini-cart-subtotals .label {
     margin: 0 20px 0 0; }
 
@@ -1352,13 +1357,7 @@ nav[role="navigation"] {
   font-size: 0.9em;
   font-style: italic;
   margin: 1em 2em;
-  padding: 1em;
-  text-align: center; }
-
-.mini-cart-link-cart {
-  display: block;
-  margin: 1em 2em;
-  width: auto; }
+  padding: 1em; }
 
 .mini-cart-link-checkout {
   clear: both;
@@ -1706,6 +1705,22 @@ nav[role="navigation"] {
   .product-tile .product-image {
     height: auto;
     position: relative; }
+    .product-tile .product-image .quickview {
+      background-color: rgba(136, 193, 75, 0.7);
+      color: #fff;
+      display: none;
+      width: 7em;
+      height: 1.2em;
+      top: 50%;
+      left: 50%;
+      margin-top: -0.6em;
+      margin-left: -3.5em;
+      padding: 0.5em;
+      position: absolute; }
+      .product-tile .product-image .quickview i {
+	margin-left: 0.5em; }
+    .product-tile .product-image:hover .quickview {
+      display: block; }
   .product-tile .product-name {
     font-family: Georgia, serif;
     font-size: 1.2em;
@@ -3294,25 +3309,6 @@ h1 .account-logout {
   width: 64px;
   height: 64px;
   background: url("../images/loading-small.gif") no-repeat; }
-.js #quickviewbutton {
-  background: transparent url(../images/quickview.gif) center center no-repeat;
-  display: none;
-  position: absolute;
-  top: 50%;
-  top: 0\9;
-  width: 100%;
-  width: 200px\9;
-  height: 17px;
-  height: 225px\9;
-  padding: 10px 0;
-  padding: 0px\9;
-  left: 0\9; }
-.js .ie7 #quickviewbutton {
-  position: absolute;
-  left: 0;
-  width: 200px; }
-.js .product-image:hover #quickviewbutton {
-  display: block; }
 
 .js #suggestions {
   background-color: #666;
