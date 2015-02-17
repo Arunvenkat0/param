@@ -13,6 +13,9 @@
 	a {
 		color: $pacific-blue;
 	}
+	.mini-cart-link-cart {
+		color: #fff;
+	}
 }
 
 .mini-cart-label {
@@ -21,6 +24,7 @@
 		font-size: 2em;
 	}
 	.minicart-quantity {
+		color: $mantis;
 		font-size: 1.5em;
 		margin-left: 0.3em;
 	}
@@ -116,10 +120,13 @@
 	width: 50%;
 }
 
+.mini-cart-totals {
+	text-align: center;
+}
+
 .mini-cart-subtotals {
 	font-weight: 700;
 	padding: 1em 0 0;
-	text-align: center;
 	.label {
 		margin: 0 20px 0 0;
 	}
@@ -132,13 +139,6 @@
 	font-style: italic;
 	margin: 1em 2em;
 	padding: 1em;
-	text-align: center;
-}
-
-.mini-cart-link-cart {
-	display: block;
-	margin: 1em 2em;
-	width: auto;
 }
 
 .mini-cart-link-checkout {
