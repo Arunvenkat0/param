@@ -1716,7 +1716,7 @@ nav[role="navigation"] {
     font-style: italic;
     margin-top: 1em;
     height: 3em;
-    overflow: scroll; }
+    overflow: auto; }
   .product-tile .product-pricing .product-standard-price {
     text-decoration: line-through; }
   .grid-tile .product-tile .product-swatches {
