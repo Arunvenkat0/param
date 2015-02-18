@@ -92,7 +92,7 @@ function execute( pdict : PipelineDictionary ) : Number
     		}	
     		else if (productList.getType() == ProductList.TYPE_GIFT_REGISTRY)
     		{
-    			shipmentID = Resource.msgf("giftregistry.owner", "account", "", ownerName);
+    			shipmentID = Resource.msgf("account.giftregistry.owner", "account", "", ownerName);
     		}
     			    
 	    	// use it for the name of the list

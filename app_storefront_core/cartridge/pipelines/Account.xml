@@ -454,7 +454,7 @@
           <key-binding alias="null" key="To_8"/>
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
-          <key-binding alias="dw.web.Resource.msg('account.editaccount','account',null)" key="From_1"/>
+          <key-binding alias="dw.web.Resource.msg('account.user.registration.editaccount','account',null)" key="From_1"/>
           <key-binding alias="bctext2" key="To_1"/>
         </pipelet-node>
         <node-display x="0" y="1"/>

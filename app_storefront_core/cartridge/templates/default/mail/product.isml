@@ -43,7 +43,7 @@
 						</td>
 						<td style="${Resource.msg('email.tablecell','email',null)}">
 							<h1 style="${Resource.msg('email.h1','email',null)}"><isprint value="${pdict.Product.name}" encoding="off"/></h1>
-							<p>${Resource.msg('sendtoafrienddialog.item','account',null)}: <isprint value="${pdict.Product.ID}" encoding="off"/></p>
+							<p>${Resource.msg('product.item','product',null)}: <isprint value="${pdict.Product.ID}" encoding="off"/></p>
 							<isdisplayvariationvalues product="${pdict.Product}"/>
 							<isloop iterator="${pdict.ProductOptionModel.options}" alias="productOption">
 								<isset name="selectedOptionValue" value="${pdict.ProductOptionModel.getSelectedOptionValue(productOption)}" scope="page"/>					

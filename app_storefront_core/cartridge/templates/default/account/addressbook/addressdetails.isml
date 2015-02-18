@@ -9,9 +9,9 @@
 <isdecorate template="${DecoratorTemplate}">
 
 	<isif condition="${pdict.Action == 'add'}">
-		<h1>${Resource.msg('editaddress.addaddress','account',null)}</h1>
+		<h1>${Resource.msg('account.addressbook.editaddress.addaddress','account',null)}</h1>
 	<iselse/>
-		<h1>${Resource.msg('editaddress.editaddress','account',null)}</h1>
+		<h1>${Resource.msg('account.addressbook.editaddress.editaddress','account',null)}</h1>
 	</isif>
 
 	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">

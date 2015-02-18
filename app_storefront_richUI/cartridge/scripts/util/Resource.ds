@@ -64,7 +64,7 @@ function ResourceHelper() {}
 				COMPARE_REMOVE_FAIL				: Resource.msg('productcomparewidget.removefail', 'search', null),
 				COMPARE_ADD_FAIL				: Resource.msg('productcomparewidget.addfail', 'search', null),
 				ADD_TO_CART_FAIL				: Resource.msg('cart.unableToAdd', 'checkout', null),
-				REGISTRY_SEARCH_ADVANCED_CLOSE	: Resource.msg('giftregistry.closeadvanced', 'account', null),
+				REGISTRY_SEARCH_ADVANCED_CLOSE	: Resource.msg('account.giftregistry.closeadvanced', 'account', null),
 				GIFT_CERT_INVALID				: Resource.msg('billing.giftcertinvalid', 'checkout', null),
 				GIFT_CERT_BALANCE				: Resource.msg('billing.giftcertbalance', 'checkout', null),
 				GIFT_CERT_AMOUNT_INVALID		: Resource.msg('giftcert.amountvalueerror', 'forms', null),

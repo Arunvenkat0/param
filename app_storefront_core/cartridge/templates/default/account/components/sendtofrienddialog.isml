@@ -167,9 +167,9 @@
 
 				<iscomment>This is a request for send to friend preview</iscomment>
 
-				<h2>${Resource.msg('sendtoafrienddialog.reviewheader','account',null)}</h2>
+				<h2>${Resource.msg('account.components.sendtoafrienddialog.reviewheader','account',null)}</h2>
 
-				<p>${Resource.msg('sendtoafrienddialog.reviewmessage','account',null)}</p>
+				<p>${Resource.msg('account.components.sendtoafrienddialog.reviewmessage','account',null)}</p>
 
 			<div class="send-to-friend-product">
 
@@ -203,7 +203,7 @@
 
 					<dl>
 
-						<dt>${Resource.msg('sendtoafrienddialog.item','account',null)}</dt>
+						<dt>${Resource.msg('account.components.sendtoafrienddialog.item','account',null)}</dt>
 						<dd><isprint value="${product.ID}" encoding="off"/></dd>
 
 						<isif condition="${product != null && product.isVariant()}">
@@ -259,10 +259,10 @@
 						<isprint value="${pdict.CurrentUser.profile.email}"/>
 					</dd>
 
-					<dt>${Resource.msg('sendtoafrienddialog.subject','account',null)}</dt>
+					<dt>${Resource.msg('account.components.sendtoafrienddialog.subject','account',null)}</dt>
 					<dd><isprint value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/></dd>
 
-					<dt>${Resource.msg('sendtoafrienddialog.message','account',null)}</dt>
+					<dt>${Resource.msg('account.components.sendtoafrienddialog.message','account',null)}</dt>
 					<dd><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></dd>
 
 					</dl>
@@ -306,12 +306,12 @@
 <isif condition="${!pdict.CurrentCustomer.registered}">
 	<div class="send-to-friend-login-message">
 		<span>
-			${Resource.msg('sendtoafrienddialog.unregistereduser','account',null)}
+			${Resource.msg('account.components.sendtoafrienddialog.unregistereduser','account',null)}
 		</span>
 	</div>
 	
 	<span class="buttonstyle">
-		<a href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('sendtoafrienddialog.unregistereduser.button','account',null)}</a>
+		<a href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('account.components.sendtoafrienddialog.unregistereduser.button','account',null)}</a>
 	</span>
 	
 	<span class="cancel cancel-button buttonstyle">

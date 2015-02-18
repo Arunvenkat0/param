@@ -49,7 +49,7 @@
 
 	
 	<div class="confirmation-container dialog-content" id="confirmation-container" style="display:none;">
-		<div class="error-form">${Resource.msg('account.forbidden','account',null)}</div>
+		<div class="error-form">${Resource.msg('account.paymentinstruments.forbidden','account',null)}</div>
 		<button type="button">${Resource.msg('global.close','locale',null)}</button>			
 	</div>
 
