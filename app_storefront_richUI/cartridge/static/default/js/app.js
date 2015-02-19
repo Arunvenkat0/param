@@ -134,13 +134,6 @@ function initializeEvents() {
 		// 	e.preventDefault();
 		// }
 	});
-
-	// grid toggle
-	$('.toggle-grid').on('click', function () {
-		$('.search-result-content').toggleClass('wide-tiles');
-		$(this).toggleClass('wide');
-	});
-
 }
 /**
  * @private
@@ -379,7 +372,7 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 
@@ -1297,7 +1290,7 @@ exports.init = function () {
 		ajax.getJson({
 			url: util.appendParamsToUrl(Urls.currencyConverter, {
 				format: 'ajax',
-				currencyMnemonic: $('.currency-converter').val()
+				currencyMnemonic: $('.currency-converter select').val()
 			}),
 			callback: function () {
 				location.reload();
@@ -2601,15 +2594,12 @@ function initializeEvents() {
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
-		e.preventDefault();
-
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-		window.location.href = url;
+		this.setAttribute(href, url);
 	});
 
 	// product options
@@ -3241,6 +3231,13 @@ function initQuickViewButtons() {
 	});
 }
 
+function gridViewToggle() {
+	$('.toggle-grid').on('click', function () {
+		$('.search-result-content').toggleClass('wide-tiles');
+		$(this).toggleClass('wide');
+	});
+}
+
 /**
  * @private
  * @function
@@ -3250,7 +3247,7 @@ function initQuickViewButtons() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-
+	gridViewToggle();
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest('.product-tile'),
