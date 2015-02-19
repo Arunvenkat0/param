@@ -10,12 +10,12 @@
 
 <iscomment>This page should be static or only have limited dynamic parts. </iscomment>
 <head>
-	<title>${Resource.msg('redirect_error.title','common',null)}</title>
+	<title>${Resource.msg('common.redirect_error.title','common',null)}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="Robots" content="noindex, nofollow" />
 </head>
 
 <body>
-	${Resource.msg('redirect_error.message','common',null)} <a href="/">${Resource.msg('redirect_error.home','common',null)}</a>
+	${Resource.msg('common.redirect_error.message','common',null)} <a href="/">${Resource.msg('common.redirect_error.home','common',null)}</a>
 </body>
 </html>

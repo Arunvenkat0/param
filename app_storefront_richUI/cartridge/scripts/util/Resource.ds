@@ -28,8 +28,8 @@ function ResourceHelper() {}
 		// application resources
 		var resources = {
 				// Common
-				I_AGREE							: Resource.msg('i_agree', 'common', null),
-				CLOSE 							: Resource.msg('close', 'common', null),
+				I_AGREE							: Resource.msg('global.i_agree', 'locale', null),
+				CLOSE 							: Resource.msg('global.close', 'locale', null),
 				NO_THANKS						: Resource.msg('global.nothanks', 'locale', null),
 
 				// Checkout
