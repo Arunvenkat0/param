@@ -1,3 +1,4 @@
+Fcart-empty
 #cart-table {
 	.header-total-price {
 		text-align: right;
@@ -169,6 +170,30 @@
 	padding-bottom: 1.0em;
 	.cart-action-continue-shopping {
 		float: none;
+	}
+}
+
+.cart-empty {
+	@extend %clearfix;
+	margin-top: 4rem;
+	h1 {
+		text-align: center;
+	}
+	.cart-action-continue-shopping {
+		float: none;
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+	.product-listing {
+		@extend %clearfix;
+		background-color: $white-smoke;
+		padding: 1rem 0;
+		h2 {
+			margin-left: 1.3rem;
+		}
+		.search-result-items {
+			margin-top: 1em;
+		}
 	}
 }
 
