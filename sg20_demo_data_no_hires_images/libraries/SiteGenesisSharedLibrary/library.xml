@@ -237,6 +237,39 @@
         <page-attributes/>
     </folder>
 
+    <folder folder-id="SearchBanner">
+        <display-name xml:lang="x-default">Search Banner</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+    </folder>
+
+<content content-id="keyword_shoe">
+    <display-name xml:lang="x-default">Keyword Shoe</display-name>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <page-attributes/>
+    <custom-attributes>
+        <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;&lt;img width="789" height="136" src="images/SearchBanner/womens-accessories-footwear.jpg?$staticlink$" alt="" /&gt;&lt;/p&gt;</custom-attribute>
+    </custom-attributes>
+    <folder-links>
+        <classification-link folder-id="SearchBanner"/>
+    </folder-links>
+</content>
+
+<content content-id="keyword_television">
+    <display-name xml:lang="x-default">Keyword Television</display-name>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <page-attributes/>
+    <custom-attributes>
+        <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img width="789" height="136" src="images/SearchBanner/Sony_Sale.jpg?$staticlink$" alt="" /&gt;</custom-attribute>
+    </custom-attributes>
+    <folder-links>
+        <classification-link folder-id="SearchBanner"/>
+    </folder-links>
+</content>
+
     <content content-id="2-day-shipping-popup">
         <display-name xml:lang="x-default">2 Day Shipping Information</display-name>
         <online-flag>true</online-flag>
