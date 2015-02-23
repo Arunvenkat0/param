@@ -98,7 +98,7 @@
 				<thead>
 					<tr>
 						<isif condition="${!empty(shipment.custom.shipmentType) && shipment.custom.shipmentType == 'instore'}">
-							<th class="section-header">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>
+							<th class="section-header">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
 						<iselse/>
 							<th class="section-header">${Resource.msg('orderdetails.shippingto','components',null)}</th>
 						</isif>

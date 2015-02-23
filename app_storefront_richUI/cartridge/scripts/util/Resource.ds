@@ -89,10 +89,10 @@ function ResourceHelper() {}
 				SET_PREFERRED_STORE				: Resource.msg('storelist.lightbox.setpreferredstore', 'storepickup', null),
 				ENTER_ZIP						: Resource.msg('storelist.lightbox.enterzip', 'storepickup', null),
 				INVALID_ZIP						: Resource.msg('storelist.lightbox.invalidpostalcode', 'storepickup', null),
-				SEARCH							: Resource.msg('storelist.lightbox.search', 'storepickup', null),
+				SEARCH							: Resource.msg('global.search', 'locale', null),
 				CHANGE_LOCATION					: Resource.msg('storelist.lightbox.changelocation', 'storepickup', null),
 				CONTINUE_WITH_STORE				: Resource.msg('storelist.lightbox.continuewithstore', 'storepickup', null),
-				CONTINUE						: Resource.msg('storelist.lightbox.continue', 'storepickup', null),
+				CONTINUE						: Resource.msg('global.continue', 'locale', null),
 				SEE_MORE						: Resource.msg('storelist.lightbox.seemore', 'storepickup', null),
 				SEE_LESS						: Resource.msg('storelist.lightbox.seeless', 'storepickup', null)
 		};

@@ -184,7 +184,7 @@
 							</td>
 							<td class="shippingaddress">
 								<isif condition="${!empty(store) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}" />
-									<span class="label">${Resource.msg('cart.store.storepickupaddress','storepickup',null)}</span>
+									<span class="label">${Resource.msg('cart.store.storepickupaddress','checkout',null)}</span>
 									<div><isprint value="${store.name}"/></div>
 									<div><isprint value="${store.address1}"/></div>
 									<isif condition="${!empty(store.address2)}">

@@ -78,7 +78,7 @@
 								<td><b>${Resource.msg('multishippingshipments.selectmethod','checkout',null)}</b></td>
 								<td colspan="3">
 								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-									${Resource.msg('cart.store.instorepickup','storepickup',null)}
+									${Resource.msg('cart.store.instorepickup','checkout',null)}
 									<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">
 											<isset name="shippingMethod" value="${option.object}" scope="page"/>
@@ -87,7 +87,7 @@
 											</isif>
 										</isloop>
 								<iselse/>
-										${Resource.msg('cart.store.homedelivery','storepickup',null)} ${Resource.msg('multishippingshipments.shipment','checkout',null)} ${'#' + shipmentloop.count}
+										${Resource.msg('cart.store.homedelivery','checkout',null)} ${Resource.msg('multishippingshipments.shipment','checkout',null)} ${'#' + shipmentloop.count}
 										<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
 										<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">

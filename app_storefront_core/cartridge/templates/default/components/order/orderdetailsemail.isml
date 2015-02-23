@@ -86,7 +86,7 @@
 						<isif condition="${empty(shipment.custom.shipmentType) || shipment.custom.shipmentType != 'instore'}"/>
 							<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('orderdetails.shippingto','components',null)}</th>
 						<iselse/>
-							<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('cart.store.instorepickup','storepickup',null)}</th>		
+							<th style="${Resource.msg('email.tableheader','email',null)}">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>		
 						</isif>
 					</tr>
 				</thead>

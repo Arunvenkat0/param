@@ -52,7 +52,7 @@
 								<isif condition="${shipmentloopstate.first}">
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
-											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','checkout',null)}</td>
 										<iselse/>
 											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</td>
 										</isif>	
@@ -62,7 +62,7 @@
 								<iselse/>
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
-											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','checkout',null)}</td>
 										<iselse/>									
 											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</th>
 										</isif>						
