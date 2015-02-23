@@ -17,7 +17,7 @@
 			<fieldset>
 
 				<legend>
-					${Resource.msg('registration.name','account',null)}
+					${Resource.msg('account.user.registration.name','account',null)}
 					<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 				</legend>
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
@@ -33,7 +33,7 @@
 			<fieldset>
 
 				<legend>
-					${Resource.msg('registration.logininfo','account',null)}
+					${Resource.msg('account.user.registration.logininfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">

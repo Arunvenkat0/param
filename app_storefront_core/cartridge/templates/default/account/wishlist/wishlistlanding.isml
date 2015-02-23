@@ -14,7 +14,7 @@
 			
 			<div class="login-box-content">
 			
-				<p>${Resource.msg('landing.findmessage','account',null)}</p>
+				<p>${Resource.msg('account.wishlist.landing.findmessage','account',null)}</p>
 				
 				<isinclude template="account/wishlist/wishlistsearch"/>
 				
@@ -28,7 +28,7 @@
 	
 		<div class="login-box login-create-account clearfix">
 			
-			<h2 class="section-header">${Resource.msg('landing.createheader','account',null)}</h2>
+			<h2 class="section-header">${Resource.msg('account.wishlist.landing.createheader','account',null)}</h2>
 			
 			<div class="login-box-content">
 			

@@ -4,9 +4,9 @@
 	
 	<iscomment>Let the customer choice between the standard or facebook for registration</iscomment>
 	<div class="registration-selection">
-		<label for="register-here">${Resource.msg('facebook.newcustomer','account',null)}</label>
+		<label for="register-here">${Resource.msg('account.facebook.newcustomer','account',null)}</label>
 		<input type="radio" name="registration" value="new-customer-registration" checked="checked" id="register-here"/>
-		<label for="register-facebook">${Resource.msg('facebook.usefbtoregister','account',null)}</label>
+		<label for="register-facebook">${Resource.msg('account.facebook.usefbtoregister','account',null)}</label>
 		<input type="radio" name="registration" value="facebook-registration"  id="register-facebook"/> 
 	</div>
 
