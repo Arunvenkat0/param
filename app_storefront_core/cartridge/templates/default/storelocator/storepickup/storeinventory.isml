@@ -14,7 +14,7 @@ for (var i=0,len=pdict.Stores.length;i<len;i++) {
 	stores.push({
 		storeId : store.ID,
 		status: pdict.storeAvailabilityMap.get(store.ID),
-		statusclass : pdict.storeAvailabilityMap.get(store.ID) == Resource.msg('cart.store.availableinstore','storepickup',null) ? 'store-in-stock' : 'store-error',
+		statusclass : pdict.storeAvailabilityMap.get(store.ID) == Resource.msg('global.instock','locale',null) ? 'store-in-stock' : 'store-error',
 		quantity: inventoryRec ? inventoryRec.ATS.value : 0,
 		address1: store.address1,
 		city: store.city,

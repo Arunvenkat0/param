@@ -31,7 +31,7 @@
 					<iselseif condition="${shipment.custom.shipmentType == 'instore'}"/>
 						<isset name="editUrl" value="${URLUtils.https('Cart-Show')}" scope="page"/>
 						<a href="${editUrl}"  class="section-header-note">${Resource.msg('global.edit','locale',null)}</a>						
-						${Resource.msg('cart.store.instorepickup','storepickup',null)}			
+						${Resource.msg('cart.store.instorepickup','checkout',null)}			
 					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
 						<a href="${editUrl}"  class="section-header-note">${Resource.msg('global.edit','locale',null)}</a>
 						${Resource.msg('minishipments.shippingaddress','checkout',null)}
