@@ -7,7 +7,7 @@
 		max-width: 100%;
 	}
 	.product-image {
-		height: 195px;
+		height: auto;
 		position: relative;
 	}
 	.product-name {
@@ -18,8 +18,11 @@
 		height: 3em;
 		overflow: auto;
 	}
-	.product-pricing .product-standard-price {
-		text-decoration: line-through;
+	.product-pricing {
+		margin: 0.5em 0;
+		.product-standard-price {
+			text-decoration: line-through;
+		}
 	}
 	.grid-tile & .product-swatches {
 		float: right;
@@ -62,18 +65,17 @@
 	}
 	.product-promo {
 		font-size: 0.8em;
-		margin: 6px 0;
+		margin: 0.5em 0;
 		text-transform: uppercase;
 	}
 	.product-compare {
 		float: left;
-		width: 40px;
 		line-height: 11px;
 		label {
-			float: right;
 			font-weight: 400;
-			padding: 0;
-			width: 50%;
+			line-height: 1;
+			padding: 0 0 0 .5em;
+			width: auto;
 		}
 		input {
 			float: left;
@@ -88,6 +90,28 @@
 		}
 		.rating {
 			display: inline-block;
+		}
+	}
+	.wide-tiles & {
+		height: auto !important; // overwrite synced heights set on element
+		.product-image {
+			float: left;
+			width: 40%;
+		}
+		.product-name,
+		.product-pricing,
+		.product-promo,
+		.product-swatches,
+		.product-review {
+			float: left;
+			text-align: left;
+			width: 55%;
+		}
+		.product-name {
+			margin-top: 0;
+		}
+		.product-swatches {
+			margin-bottom: 1em;
 		}
 	}
 }
