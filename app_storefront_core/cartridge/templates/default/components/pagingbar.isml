@@ -28,7 +28,7 @@
 <div class="pagination">
 	<div class="results-hits">
 		<span class="toggle-grid"><i class="fa fa-th" data-option="column"></i><i class="fa fa-th-list" data-option="wide"></i></span>
-		${Resource.msg('pagecomponents.paginginformation.showing', 'pagecomponents', null)}
+		${Resource.msg('global.paginginformation.showing', 'locale', null)}
 		<isif condition="${!empty(pdict.OrderPagingModel) || !dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
 			<isprint value="${StringUtils.formatInteger(showingStart)}"/> - <isprint value="${StringUtils.formatInteger(showingEnd)}"/> ${Resource.msg('paginginformation.of', 'search', null)}
 		</isif>
