@@ -50,7 +50,7 @@
 
 		<div class="mini-cart-totals">
 			<div class="mini-cart-subtotals">
-				<span class="label">${Resource.msg('ordersummary.ordersubtotal','components',null)}</span>
+				<span class="label">${Resource.msg('order.ordersummary.ordersubtotal','order',null)}</span>
 				<span class="value"><isprint value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(LineItemCtnr.giftCertificateTotalPrice)}"/></span>
 			</div>
 

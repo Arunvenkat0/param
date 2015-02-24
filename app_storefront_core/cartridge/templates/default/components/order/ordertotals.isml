@@ -30,7 +30,7 @@
 				(product line item prices including product level promotions plus gift certificate line items prices)
 			</iscomment>
 			<tr class="order-subtotal">
-				<td>${Resource.msg('ordersummary.subtotal','components',null)}</td>
+				<td>${Resource.msg('order.ordersummary.subtotal','order',null)}</td>
 				<td><isprint value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(false).add(LineItemCtnr.giftCertificateTotalPrice)}"/></td>
 			</tr>
 			
@@ -42,7 +42,7 @@
 			</isscript>
 			<isif condition="${!empty(orderDiscount) && orderDiscount.value > 0.0}">
 				<tr class="order-discount discount">
-					<td>${Resource.msg('ordersummary.orderdiscount','components',null)}</td>
+					<td>${Resource.msg('order.ordersummary.orderdiscount','order',null)}</td>
 					<td>- <isprint value="${orderDiscount}"/></td>
 				</tr>
 			</isif>
@@ -60,9 +60,9 @@
 					<tr class="order-shipping <isif condition="${loopstatus.first}"> first <iselseif condition="${loopstatus.last}"> last</isif>">
 						<td>
 							<isif condition="${pdict.p_shipmenteditable}">
-								<a href="${editUrl}" title="${Resource.msg('ordersummary.ordershipping.edit','components',null)}">${Resource.msg('ordersummary.ordershipping.edit','components',null)}</a>
+								<a href="${editUrl}" title="${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}">${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}</a>
 							</isif>
-							${Resource.msg('ordersummary.ordershipping','components',null)} <!--  SHIPPING NAME -->
+							${Resource.msg('order.ordersummary.ordershipping','order',null)} <!--  SHIPPING NAME -->
 							<isif condition="${!empty(Shipment) && !empty(Shipment.shippingMethod)}">
                                 <isprint value="${Shipment.shippingMethod.displayName}"/>
                             </isif>
@@ -71,7 +71,7 @@
 							<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 								<isprint value="${Shipment.shippingTotalPrice}"/>
 							<iselse/>
-								${Resource.msg('ordersummary.nodata','components',null)}
+								${Resource.msg('order.ordersummary.nodata','order',null)}
 							</isif>
 						</td>
 					</tr>
@@ -80,7 +80,7 @@
 			<iselse/>
 				<tr class="order-shipping">
 					<td>
-						${Resource.msg('ordersummary.ordershipping','components',null)}
+						${Resource.msg('order.ordersummary.ordershipping','order',null)}
 						<!-- Display Shipping Method -->
 						<isset name="Shipment" value="${LineItemCtnr.shipments.iterator().next()}" scope="page"/>
 						<isif condition="${!empty(Shipment) && !empty(Shipment.shippingMethod)}">
@@ -91,7 +91,7 @@
 						<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 							<isprint value="${LineItemCtnr.shippingTotalPrice}"/>
 						<iselse/>
-							${Resource.msg('ordersummary.nodata','components',null)}
+							${Resource.msg('order.ordersummary.nodata','order',null)}
 						</isif>
 					</td>
 				</tr>
@@ -106,12 +106,12 @@
 			<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}">
 				<isif condition="${pdict.p_showshipmentinfo}">
 					<tr class="order-shipping-discount discount">
-						<td>${Resource.msg('ordersummary.ordershippingdiscount','components',null)}</td>
+						<td>${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
 						<td>- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				<iselse/>
 					<tr class="order-shipping-discount discount">
-						<td>${Resource.msg('ordersummary.ordershippingdiscount','components',null)}</td>
+						<td>${Resource.msg('order.ordersummary.ordershippingdiscount','order',null)}</td>
 						<td>- <isprint value="${shippingDiscount}"/></td>
 					</tr>
 				</isif>
@@ -119,12 +119,12 @@
 		
 			<iscomment>tax amount</iscomment>
 			<tr class="order-sales-tax">
-				<td>${Resource.msg('ordersummary.ordertax','components',null)}</td>
+				<td>${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
 				<td>
 					<isif condition="${LineItemCtnr.totalTax.available}">
 						<isprint value="${LineItemCtnr.totalTax}"/>
 					<iselse/>
-						${Resource.msg('ordersummary.nodata','components',null)}
+						${Resource.msg('order.ordersummary.nodata','order',null)}
 					</isif>
 				</td>
 			</tr>
