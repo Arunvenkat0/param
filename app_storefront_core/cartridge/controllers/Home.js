@@ -1,13 +1,15 @@
-var g = require('./dw/guard');
-
 /**
  * Renders the home page.
+ *
+ * @module Home
  */
+
+var g = require('./dw/guard');
 
 /**
  * Renders the whole menu to use as a remote include. It's cached.
  */
-function Show()
+function show()
 {
     var web = require('./dw/web');
     web.updatePageMetaDataForFolder(dw.content.ContentMgr.getSiteLibrary().root, dw.system.Site.getCurrent().name,
@@ -16,8 +18,11 @@ function Show()
     response.renderTemplate('content/home/homepage');
 }
 
-
-function IncludeHeader()
+/**
+ * Remote include for the header
+ * This is designed as a remote include to achieve optimal caching results for the header
+ */
+function includeHeader()
 {
     response.renderTemplate('components/header/header');
 }
@@ -26,30 +31,34 @@ function IncludeHeader()
 /**
  * Renders the category navigation and the menu to use as a remote include. It's
  * cached.
+ *
+ * @deprecated Converted into a template include
  */
-function IncludeHeaderMenu()
+function includeHeaderMenu()
 {
     response.renderTemplate('components/header/headermenu');
 }
 
 
 /**
- * Renders customer information. This is session information and must not be
+ * Renders customer information.
+ *
+ * This is designed as a remote include as it represents dynamic session information and must not be
  * cached.
  */
-function IncludeHeaderCustomerInfo()
+function includeHeaderCustomerInfo()
 {
     response.renderTemplate('components/header/headercustomerinfo');
 }
 
 
-function ErrorNotFound()
+function errorNotFound()
 {
     response.renderTemplate('error/notfound');
 }
 
-
-function MobileSite()
+// @TODO As we want to have a responsive layout, do we really need the below?
+function mobileSite()
 {
     session.custom.device = 'mobile';
 
@@ -57,7 +66,7 @@ function MobileSite()
 }
 
 
-function FullSite()
+function fullSite()
 {
     session.custom.device = 'fullsite';
 
@@ -65,31 +74,26 @@ function FullSite()
 }
 
 
-function SetLayout()
+function setLayout()
 {
     response.renderTemplate('components/setlayout');
 }
 
 
-function DeviceLayouts()
+function deviceLayouts()
 {
     response.renderTemplate('util/devicelayouts');
 }
 
-
 /*
- * Module exports
+ * Export the publicly available controller methods
  */
-
-/*
- * Web exposed methods
- */
-exports.Show                        = g.get(Show);
-exports.IncludeHeader               = g.get(IncludeHeader);
-exports.IncludeHeaderMenu           = g.get(IncludeHeaderMenu);
-exports.IncludeHeaderCustomerInfo   = g.get(IncludeHeaderCustomerInfo);
-exports.ErrorNotFound               = g.get(ErrorNotFound);
-exports.MobileSite                  = g.get(MobileSite);
-exports.FullSite                    = g.get(FullSite);
-exports.SetLayout                   = g.get(SetLayout);
-exports.DeviceLayouts               = g.get(DeviceLayouts);
+exports.Show                        = g.get(show);
+exports.IncludeHeader               = g.get(includeHeader);
+//exports.IncludeHeaderMenu           = g.get(includeHeaderMenu);
+exports.IncludeHeaderCustomerInfo   = g.get(includeHeaderCustomerInfo);
+exports.ErrorNotFound               = g.get(errorNotFound);
+exports.MobileSite                  = g.get(mobileSite);
+exports.FullSite                    = g.get(fullSite);
+exports.SetLayout                   = g.get(setLayout);
+exports.DeviceLayouts               = g.get(deviceLayouts);
