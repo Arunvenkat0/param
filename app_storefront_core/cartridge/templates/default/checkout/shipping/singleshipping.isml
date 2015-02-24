@@ -17,7 +17,7 @@
 	var productListAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, true);
 </isscript>
 
-	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
+	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
 
     <iscomment>checkout progress indicator</iscomment>
 
