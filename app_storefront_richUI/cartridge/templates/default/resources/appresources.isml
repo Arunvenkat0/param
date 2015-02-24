@@ -166,8 +166,8 @@
 	};
 
 	var userSettings = {
-		zip : pdict.CurrentSession.custom.zipcode == "null" ? null : pdict.CurrentSession.custom.zipcode,
-		storeId : pdict.CurrentSession.custom.storeId == "null" ? null : pdict.CurrentSession.custom.storeId
+		zip : session.custom.zipcode == "null" ? null : session.custom.zipcode,
+		storeId : session.custom.storeId == "null" ? null : session.custom.storeId
 	};
 </isscript>
 (function(app){
