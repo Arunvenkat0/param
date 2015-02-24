@@ -71,7 +71,7 @@ function ResourceHelper() {}
 				GIFT_CERT_MISSING				: Resource.msg('billing.giftcertidmissing', 'checkout', null),
 				INVALID_OWNER                   : Resource.msg('billing.ownerparseerror', 'checkout', null),
 				COUPON_CODE_MISSING				: Resource.msg('cart.COUPON_CODE_MISSING', 'checkout',  null),
-				COOKIES_DISABLED				: Resource.msg('browsertoolscheck.cookies', 'components', null),
+				COOKIES_DISABLED				: Resource.msg('global.browsertoolscheck.cookies', 'locale', null),
 				BML_AGREE_TO_TERMS				: Resource.msg('bml.termserror', 'forms', null),
 				CHAR_LIMIT_MSG					: Resource.msg('forms.character.limit', 'forms', null),
 				CONFIRM_DELETE					: Resource.msg('forms.confirm.delete', 'forms', null),
