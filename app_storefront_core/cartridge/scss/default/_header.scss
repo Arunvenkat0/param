@@ -130,40 +130,38 @@ nav[role="navigation"] {
 .header-search {
 	width: 100%;
 	@media screen and (min-width: 768px) {
+		background-color: $very-light-gray;
 		position: absolute;
-		right: 10%;
+		right: 7%;
 		top: 2.2em;
-		width: 17rem;
+		width: 16rem;
 		z-index: 1;
 	}
 	label {
-		float: left;
+		color: $white;
+		float: right;
 		margin: 0;
-		padding-top: 0.2em;
+		padding: 0.8em 0.5em 0 0;
 		width: 2.5rem;
 		&:before {
-			font-size: 2em;
-			padding-left: 0.2em;
+			font-size: 1.3em;
 		}
 		@media screen and (min-width: 768px) {
 			width: auto;
-			padding-top: 0.2em;
-			padding-left: 0;
 		}
 	}
 	input[type="text"] {
-		background-color: $dim-gray;
 		border: none;
-		color: $gainsboro;
+		color: $white;
 		float: left;
 		margin: 0;
-		height: 2rem;
+		padding-left: 1em;
+		height: 2.3rem;
 		width: 85%; // default for older browser
 		width: calc(100% - 2.5rem);
 		@media screen and (min-width: 768px) {
 			background-color: transparent;
-			border-bottom: 1px solid $dim-gray;
-			color: $night-rider;
+			color: $white;
 			width: 14rem;
 			&:focus {
 				border-bottom-color: $night-rider;
