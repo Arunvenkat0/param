@@ -41,7 +41,7 @@
 							<option value="${dw.web.PagingModel.appendPageSize(pdict.pageurl,60)}" <isif condition="${pdict.pagingmodel.pageSize == 60}">selected="selected"</isif>>60</option>
 						</isif>
 						<isif condition="${(pdict.pagingmodel.count % 12) != 0 && (pdict.pagingmodel.count < 60)}">
-							<option value="${dw.web.PagingModel.appendPageSize(pdict.pageurl,pdict.pagingmodel.count)}" <isif condition="${pdict.pagingmodel.count == pdict.pagingmodel.pageSize}">selected="selected"</isif>>${Resource.msgf('pagecomponents.paginginformation.viewallx','pagecomponents',null,pdict.pagingmodel.count)}</option>
+							<option value="${dw.web.PagingModel.appendPageSize(pdict.pageurl,pdict.pagingmodel.count)}" <isif condition="${pdict.pagingmodel.count == pdict.pagingmodel.pageSize}">selected="selected"</isif>>${Resource.msgf('global.paginginformation.viewallx','locale',null,pdict.pagingmodel.count)}</option>
 						</isif>
 					</select>
 					
