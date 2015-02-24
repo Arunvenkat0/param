@@ -26,9 +26,9 @@
 		<isif condition="${recProducts.size() > 0}">
 			<h2>
 				<isif condition="${pdict.Product.productSet}">
-					${Resource.msg('recommendations.productsets','product',null)}
+					${Resource.msg('product.recommendations.productsets','product',null)}
 				<iselse/>
-					${Resource.msg('recommendations.products','product',null)}
+					${Resource.msg('product.recommendations.products','product',null)}
 				</isif>
 			</h2>
 			<div id="carousel-recommendations">
