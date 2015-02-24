@@ -1354,7 +1354,7 @@ function initializeAddressForm() {
 		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
+		var url = util.appendParamToURL($form.attr('action'), 'format', 'ajax');
 		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
@@ -1450,7 +1450,7 @@ function initAddressEvents() {
 		e.preventDefault();
 		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
-				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
+				url: util.appendParamToURL($(this).attr('href'), 'format', 'ajax'),
 				dataType: 'json'
 			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
@@ -4355,6 +4355,8 @@ exports.init = function () {
 
 'use strict';
 
+var _ = require('lodash');
+
 var util = {
 	/**
 	 * @function
@@ -4370,6 +4372,19 @@ var util = {
 		}
 		var separator = url.indexOf('?') !== -1 ? '&' : '?';
 		return url + separator + name + '=' + encodeURIComponent(value);
+	},
+	/**
+	 * @function
+	 * @description appends the parameters to the given url and returns the changed url
+	 * @param {String} url the url to which the parameters will be added
+	 * @param {Object} params
+	 */
+	appendParamsToUrl: function (url, params) {
+		var _url = url;
+		_.each(params, function (value, name) {
+			_url = this.appendParamToURL(_url, name, value);
+		}.bind(this));
+		return _url;
 	},
 	/**
 	 * @function
@@ -4410,26 +4425,6 @@ var util = {
 				(left + width) > window.document.documentElement.scrollLeft
 			);
 		}
-	},
-	/**
-	 * @function
-	 * @description appends the parameters to the given url and returns the changed url
-	 * @param {String} url the url to which the parameters will be added
-	 * @param {String} params a JSON string with the parameters
-	 */
-	appendParamsToUrl: function (url, params) {
-		var uri = this.getUri(url),
-			includeHash = arguments.length < 3 ? false : arguments[2];
-
-		var qsParams = $.extend(uri.queryParams, params);
-		var result = uri.url + '?' + $.param(qsParams);
-		if (includeHash) {
-			result += uri.hash;
-		}
-		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
-			result = '/' + result;
-		}
-		return result;
 	},
 
 	/**
@@ -4506,44 +4501,6 @@ var util = {
 			}
 		);
 		return params;
-	},
-	/**
-	 * @function
-	 * @description Returns an URI-Object from a given element with the following properties:
-	 * - protocol
-	 * - host
-	 * - hostname
-	 * - port
-	 * - path
-	 * - query
-	 * - queryParams
-	 * - hash
-	 * - url
-	 * - urlWithQuery
-	 * @param {Object} o The HTML-Element
-	 */
-	getUri: function (o) {
-		var a;
-		if (o.tagName && $(o).attr('href')) {
-			a = o;
-		} else if (typeof o === 'string') {
-			a = document.createElement('a');
-			a.href = o;
-		} else {
-			return null;
-		}
-		return {
-			protocol: a.protocol, //http:
-			host: a.host, //www.myexample.com
-			hostname: a.hostname, //www.myexample.com'
-			port: a.port, //:80
-			path: a.pathname, // /sub1/sub2
-			query: a.search, // ?param1=val1&param2=val2
-			queryParams: a.search.length > 1 ? this.getQueryStringParams(a.search.substr(1)) : {},
-			hash: a.hash, // #OU812,5150
-			url: a.protocol + '//' + a.host + a.pathname,
-			urlWithQuery: a.protocol + '//' + a.host + a.port + a.pathname + a.search
-		};
 	},
 
 	fillAddressFields: function (address, $form) {
@@ -4662,7 +4619,7 @@ var util = {
 
 module.exports = util;
 
-},{}],49:[function(require,module,exports){
+},{"lodash":54}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
