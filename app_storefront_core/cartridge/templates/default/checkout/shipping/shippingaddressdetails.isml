@@ -6,56 +6,56 @@
 	The dialog supports editing an existing address and removing an address.
 </iscomment>
 <div id="AddressForm" class="edit_address_form" >
-	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.continueURL()}">
+	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.https('COShipping-EditShippingAddress')}">
 		<fieldset>
 			<div id="editprofile" class="editaddress">
 				<div class="keynote">
 					<span class="required">*</span><strong>${Resource.msg('global.requiredfield','locale',null)}</strong></strong>
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.firstName}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.firstName}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.lastName}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.lastName}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.address1}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.address1}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.address2}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.address2}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.country}" type="select"/>
+					<isinputfield formfield="${session.forms.shippingaddress.country}" type="select"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.states.state}" type="select"/>
+					<isinputfield formfield="${session.forms.shippingaddress.states.state}" type="select"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.city}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.city}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.postal}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.postal}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.shippingaddress.phone}" type="input"/>
+					<isinputfield formfield="${session.forms.shippingaddress.phone}" type="input"/>
 
 				</div>
 			</div>
 		</fieldset>
 		<fieldset>
 			<div class="actions clearfix">
-				<button id="dialogApplyBtn" name="${pdict.CurrentForms.shippingaddress.apply.htmlName}" type="button" value="${Resource.msg('global.apply', 'locale', null)}"><span>${Resource.msg('global.apply', 'locale', null)}</span></button>
+				<button id="dialogApplyBtn" name="${session.forms.shippingaddress.apply.htmlName}" type="button" value="${Resource.msg('global.apply', 'locale', null)}"><span>${Resource.msg('global.apply', 'locale', null)}</span></button>
 				<button id="dialogCancelBtn" type="button" value="${Resource.msg('global.cancel', 'locale', null)}"><span>${Resource.msg('global.cancel', 'locale', null)}</span></button>
-				<isif condition="${!empty(pdict.CurrentForms.shippingaddress.object)}">
-					<button id="dialogDeleteBtn" name="${pdict.CurrentForms.shippingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
+				<isif condition="${!empty(session.forms.shippingaddress.object)}">
+					<button id="dialogDeleteBtn" name="${session.forms.shippingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
 				</isif>
 			</div>
 
@@ -63,7 +63,7 @@
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.shippingaddress;
+	var addressForm = session.forms.shippingaddress;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

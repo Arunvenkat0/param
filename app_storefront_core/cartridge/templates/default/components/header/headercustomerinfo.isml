@@ -10,17 +10,17 @@
 	<isinclude template="components/header/multicurrency"/>
 	
 	
-	 <isif condition="${ (pdict.CurrentCustomer.registered) && (!pdict.CurrentCustomer.authenticated)}">
+	 <isif condition="${ (customer.registered) && (!customer.authenticated)}">
 	     
 	     <li>
 	     	${Resource.msg('headercustomerinfo.welcomeback','components',null)}
 	     	<a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)} " class="user-account">
-	     		<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
-	     		<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
+	     		<isprint value="${customer.profile.firstName}"/>
+	     		<isprint value="${customer.profile.lastName}"/>
 		     </a>
-		      <isif condition="${!pdict.CurrentCustomer.authenticated}">
+		      <isif condition="${!customer.authenticated}">
 	         	(
-		       		<a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Account-Show')}" class="user-account-login">
+		       		<a title="${Resource.msg('global.login','locale',null)}${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Account-Show')}" class="user-account-login">
 		       			${Resource.msg('headercustomerinfo.pleaselogin','components',null)}
 		       		</a>
 	         	)
@@ -29,10 +29,10 @@
 		     </isif>
 	     </li>
 	     <li class="last">
-	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
+	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 	     		(
 	     			${Resource.msg('headercustomerinfo.not','components',null)}
-	     			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?
+	     			<isprint value="${customer.profile.firstName}"/>?
 	     		)
 	     	</a>
 	     </li>	
@@ -42,20 +42,20 @@
 		--------------------------------------------------------
  	</iscomment>
  	
-	 <iselseif condition="${pdict.CurrentCustomer.registered}">
+	 <iselseif condition="${customer.registered}">
 	 
 	 	<li>
 			${Resource.msg('headercustomerinfo.welcome','components',null)}
 	     	<a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)} " class="user-account">
-	     		<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
-	     		<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
+	     		<isprint value="${customer.profile.firstName}"/>
+	     		<isprint value="${customer.profile.lastName}"/>
 		     </a>
 	     </li>
 	     <li class="last">
-	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
+	     	<a title="${Resource.msg('headercustomerinfo.not','components',null)} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 	     		(
 	     			${Resource.msg('headercustomerinfo.not','components',null)}
-	     			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?
+	     			<isprint value="${customer.profile.firstName}"/>?
 	     		)
 	     	</a>
 	     </li>	

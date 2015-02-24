@@ -61,7 +61,7 @@
 	<isinclude template="product/components/variations"/>
 
 	<div class="product-add-to-cart">
-		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" name="${pdict.CurrentForms.product.addtocart.htmlName}" class="bonus-product-form">
+		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${session.forms.product.addtocart.dynamicHtmlName}" name="${session.forms.product.addtocart.htmlName}" class="bonus-product-form">
 			<fieldset>
 				<isinclude template="product/components/options"/>
 				<input type="hidden" name="pid" value="${pdict.Product.ID}"/>
@@ -70,7 +70,7 @@
 				<div class="inventory">
 					<div class="quantity">
 						<label for="qty-${pdict.Product.UUID}">${Resource.msg('global.qty','locale',null)}:</label>
-						<input type="text" class="input-text" name="Quantity" id="qty-${pdict.Product.UUID}" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
+						<input type="text" class="input-text" name="Quantity" id="qty-${pdict.Product.UUID}" size="2" maxlength="3" value="${Number(empty(request.httpParameterMap.Quantity.stringValue) ? 1 : request.httpParameterMap.Quantity.stringValue).toFixed()}"/>
 					</div>
 					<label class="quantity-error"/></label>
 				</div>

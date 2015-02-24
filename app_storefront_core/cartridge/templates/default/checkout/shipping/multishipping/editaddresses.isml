@@ -1,6 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true" />
 <isset name="DecoratorTemplate" value="checkout/pt_checkout" scope="page" />
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
+<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' || request.httpParameterMap.pwr.stringValue == 'true' || request.httpParameterMap.source.stringValue == 'search' || request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page" />
 </isif>
 
@@ -18,7 +18,7 @@
 		class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 </h1>
 
-<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">
+<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${session.forms.multishipping.editAddress.htmlName}">
 	<fieldset>
 		<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 			<!-- Use the error code value to build an appropriate error message -->
@@ -26,7 +26,7 @@
 				<isprint value="${Resource.msg('addressdetails.' + pdict.Status.code, 'account',null)}" />
 			</span>
 		</isif>
-		<isset name="addresses" value="${pdict.CurrentForms.multishipping.editAddress.addressList}" scope="page" />
+		<isset name="addresses" value="${session.forms.multishipping.editAddress.addressList}" scope="page" />
 		<isscript>
 			var addressesArr = [];
 			for (var opt in addresses.options) {
@@ -35,7 +35,7 @@
 		</isscript>
 		<div class="select-address address-list" data-addresses="${JSON.stringify(addressesArr)}">
 			<div class="form-row">
-				<label for="${pdict.CurrentForms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
+				<label for="${session.forms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
 				</label> <select class="input-select-multiship" name="${addresses.htmlName}">
 					<option value="newAddress" selected="selected">${Resource.msg('forms.multishipping.editaddress.select.newaddress','forms',null)}</option>
 					<isloop items="${addresses.options}" var="option">
@@ -58,11 +58,11 @@
 
 		</div>
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.firstName}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.firstName}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.lastName}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.lastName}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address1}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.address1}" type="input" />
 
 		<div class="form-field-tooltip">
 			(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}"
@@ -74,24 +74,24 @@
 			</a>)
 		</div>
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.address2}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.country}" type="select" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.country}" type="select" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.state}" type="select" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.states.state}" type="select" />
 
 		<iscomment> States will be populated via javascript in
 		rich ui. Solution for simple ui is still required. CSS?
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateUS}" type="select" />
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateCA}" type="select" />
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateDE}" type="select" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.states.stateUS}" type="select" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.states.stateCA}" type="select" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.states.stateDE}" type="select" />
 		</iscomment>
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.city}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.city}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.postal}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" />
+		<isinputfield formfield="${session.forms.multishipping.editAddress.addressFields.phone}" type="input" />
 
 		<div class="form-field-tooltip with-helper-text">
 			(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
@@ -103,20 +103,20 @@
 		</div>
 
 		<iscomment>Add address to Address Book</iscomment>
-		<isif condition="${pdict.CurrentCustomer.authenticated}"> <isinputfield
-			formfield="${pdict.CurrentForms.multishipping.editAddress.addToAddressBook}"
+		<isif condition="${customer.authenticated}"> <isinputfield
+			formfield="${session.forms.multishipping.editAddress.addToAddressBook}"
 			type="checkbox" rowclass="form-indent label-inline" /> </isif>
 
 		<div class="form-row form-row-button">
-			<button type="submit" name="${pdict.CurrentForms.multishipping.editAddress.save.htmlName}" value="${Resource.msg('global.save','locale',null)}">${Resource.msg('global.save','locale',null)}</button>
-			<button class="cancel cancel-button" type="button" name="${pdict.CurrentForms.multishipping.editAddress.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">${Resource.msg('global.cancel','locale',null)}</button>
+			<button type="submit" name="${session.forms.multishipping.editAddress.save.htmlName}" value="${Resource.msg('global.save','locale',null)}">${Resource.msg('global.save','locale',null)}</button>
+			<button class="cancel cancel-button" type="button" name="${session.forms.multishipping.editAddress.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">${Resource.msg('global.cancel','locale',null)}</button>
 		</div>
 	</fieldset>
 
 </form>
 
 <isscript> importScript("util/ViewHelpers.ds"); var
-addressForm = pdict.CurrentForms.shippingaddress; var countries =
+addressForm = session.forms.shippingaddress; var countries =
 ViewHelpers.getCountriesAndRegions(addressForm); var json =
 JSON.stringify(countries); </isscript>
 <script>if (window.app) {app.countries = <isprint value="${json}" encoding="off"/>;}</script>

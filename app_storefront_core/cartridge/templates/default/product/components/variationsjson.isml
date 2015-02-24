@@ -3,6 +3,6 @@
 <isscript>
 importScript("product/ProductUtils.ds")
 var pvm = empty(pdict.CurrentVariationModel) ? (product==null?null:product.variationModel) : pdict.CurrentVariationModel;
-var variants = ProductUtils.getVariants(pdict.Product, pvm, pdict.CurrentHttpParameterMap.Quantity.stringValue);
+var variants = ProductUtils.getVariants(pdict.Product, pvm, request.httpParameterMap.Quantity.stringValue);
 </isscript>
 <isprint value="${JSON.stringify(variants)}" encoding="off"/>

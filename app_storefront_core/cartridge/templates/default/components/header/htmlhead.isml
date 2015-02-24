@@ -9,9 +9,9 @@ If you are not using the build cartridge the comments can be safely removed.
 <iscomment>the page title calculated by the app </iscomment>
 
 <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
-	<title>${pdict.CurrentPageMetaData.title} | ${Resource.msg('site.name', 'common', null)} | ${Resource.msg('revisioninfo.revisionnumber', 'revisioninfo', null)}</title>
+	<title>${request.pageMetaData.title} | ${Resource.msg('site.name', 'common', null)} | ${Resource.msg('revisioninfo.revisionnumber', 'revisioninfo', null)}</title>
 <iselse/>
-  <title><isprint value="${pdict.CurrentPageMetaData.title}" encoding="off" /></title>
+  <title><isprint value="${request.pageMetaData.title}" encoding="off" /></title>
 </isif>
 
 <iscomment>FAVICON ICON: (website icon, a page icon or an urlicon) 16x16 pixel image icon for website</iscomment>
@@ -26,8 +26,8 @@ If you are not using the build cartridge the comments can be safely removed.
 </iscomment>
 
 <iscomment>Automatic generation for meta tags.</iscomment>
-<meta name="description" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.description)}">${pdict.CurrentPageMetaData.description}</isif> ${Resource.msg('global.storename','locale',null)}"/>
-<meta name="keywords" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.keywords)}">${pdict.CurrentPageMetaData.keywords}</isif> ${Resource.msg('global.storename','locale',null)}"/>
+<meta name="description" content=" <isif condition="${!empty(request.pageMetaData.description)}">${request.pageMetaData.description}</isif> ${Resource.msg('global.storename','locale',null)}"/>
+<meta name="keywords" content=" <isif condition="${!empty(request.pageMetaData.keywords)}">${request.pageMetaData.keywords}</isif> ${Resource.msg('global.storename','locale',null)}"/>
 
 <iscomment>
 	Add your own meta information here, e.g. Dublin-Core information

@@ -1,5 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+<isset name="isQuickView" value="${request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart' || request.httpParameterMap.source.stringValue == 'giftregistry' || request.httpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 
 <isif condition="${isQuickView}">
 	<div class="quick-view-navigation">
@@ -132,7 +132,7 @@
 
 	<isinclude template="product/components/promotions"/>
 	<isif condition=${pdict.isBundle}>
-		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm bundle">
+		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${session.forms.product.addtocart.dynamicHtmlName}" class="pdpForm bundle">
 	</isif>
 	<div id="product-set-list" class="product-set-list">
 		<h2 class="visually-hidden">Products</h2>
@@ -149,7 +149,7 @@
 	</div><!-- END id=productSetScroller -->
 	<isset name="Product" value="${psProduct}" scope="pdict"/>
 	<isif condition="${pdict.isSet}">
-		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
+		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${session.forms.product.addtocart.dynamicHtmlName}" class="pdpForm">
 	</isif>
 		<div class="product-add-to-cart">
 			<isset name="disabledText" value="${isUnavailable?' disabled="disabled"':''}" scope="page"/>
@@ -162,12 +162,12 @@
 				<iselse/>
 					<isscript>
 						var updateSources = ["cart", "giftregistry", "wishlist"];
-						var source = pdict.CurrentHttpParameterMap.source.stringValue;
+						var source = request.httpParameterMap.source.stringValue;
 						var buttonTitle = (empty(source) || updateSources.indexOf(source)<0) ?	dw.web.Resource.msg('global.addtocart','locale','Add to Cart') : dw.web.Resource.msg('global.update','locale','Update');
 					</isscript>
 					<isset name="cartAction" value="add" scope="page"/>
-					<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
-						<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
+					<isif condition="${request.httpParameterMap.uuid.stringValue}">
+						<input type="hidden" name="uuid" id="uuid" value="${request.httpParameterMap.uuid.stringValue}" />
 						<isset name="cartAction" value="update" scope="page"/>
 					</isif>
 					<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
@@ -183,8 +183,8 @@
 
 		<ul class="menu">
 			<isif condition="${pdict.isBundle}">
-				<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
+				<isif condition="${!empty(request.httpParameterMap.source.stringValue)}">
+					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', request.httpParameterMap.source.stringValue)}" scope="page"/>
 				<iselse/>
 					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
 				</isif>
@@ -194,7 +194,7 @@
 			<li>
 				<a class="send-to-friend"
 				   title="${Resource.msg('product.sendfriend','product',null)}"
-				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.ProductSet.ID, 'source', 'productdetail')}">
+				   href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.ProductSet.ID, 'source', 'productdetail')}">
 				   ${Resource.msg('product.sendfriend','product',null)}
 				</a>
 			</li>

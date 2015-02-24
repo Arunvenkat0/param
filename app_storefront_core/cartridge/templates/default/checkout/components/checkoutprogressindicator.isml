@@ -46,7 +46,7 @@
 		</isif>
 
 		<div class="${step1state}">
-			<isif condition="${pdict.CurrentForms.multishipping.addressSelection.fulfilled.value}">
+			<isif condition="${session.forms.multishipping.addressSelection.fulfilled.value}">
 				<a href="${URLUtils.https('COShippingMultiple-Start')}" title="${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}">
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}
@@ -58,7 +58,7 @@
 		</div><!-- END: step1 -->
 		
 		<div class="step-2 ${step2state}">
-			<isif condition="${pdict.CurrentForms.multishipping.shippingOptions.fulfilled.value}">
+			<isif condition="${session.forms.multishipping.shippingOptions.fulfilled.value}">
 				<a href="${URLUtils.https('COShippingMultiple-StartShipments')}" title="${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}">
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}
@@ -71,7 +71,7 @@
 		
 
 		<div class="step-3 ${step3state}">
-			<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+			<isif condition="${session.forms.billing.fulfilled.value}">
 				<a href="${URLUtils.https('COBilling-Start')}" title="${Resource.msg('checkoutprogressindicator.billing','checkout',null)}">
 					<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
@@ -84,7 +84,7 @@
 		
 
 		<div class="step-4 ${step4state}">
-			<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+			<isif condition="${session.forms.billing.fulfilled.value}">
 				<a href="${URLUtils.https('COSummary-Start')}" title="${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}">
 					<span>${Resource.msg('checkoutprogressindicator.step4','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
@@ -120,7 +120,7 @@
 		
 			<iscomment>render steps with shipping (default)</iscomment>
 			<div class="step-1 ${step1state}">
-				<isif condition="${pdict.CurrentForms.singleshipping.fulfilled.value}">
+				<isif condition="${session.forms.singleshipping.fulfilled.value}">
 					<a href="${URLUtils.https('COShipping-Start')}" title="${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}">
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}
@@ -132,7 +132,7 @@
 			</div><!-- END: step1 -->
 			
 			<div class="step-2 ${step2state}">
-				<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+				<isif condition="${session.forms.billing.fulfilled.value}">
 					<a href="${URLUtils.https('COBilling-Start')}" title="${Resource.msg('checkoutprogressindicator.billing','checkout',null)}">
 						<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
@@ -144,7 +144,7 @@
 			</div><!-- END: step2 -->
 
 			<div class="step-3 ${step3state}">
-				<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+				<isif condition="${session.forms.billing.fulfilled.value}">
 					<a href="${URLUtils.https('COSummary-Start')}" title="${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}">
 						<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}
@@ -160,7 +160,7 @@
 			<iscomment>render steps without shipping (labels are adjusted)</iscomment>
 			
 			<div class="step-2 ${step2state}">
-				<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+				<isif condition="${session.forms.billing.fulfilled.value}">
 					<a href="${URLUtils.https('COBilling-Start')}" title="${Resource.msg('checkoutprogressindicator.billing','checkout',null)}">
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
@@ -172,7 +172,7 @@
 			</div><!-- END: step2 -->
 			
 			<div class="step-3 ${step3state}">
-				<isif condition="${pdict.CurrentForms.billing.fulfilled.value}">
+				<isif condition="${session.forms.billing.fulfilled.value}">
 					<a href="${URLUtils.https('COSummary-Start')}" title="${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}">
 						<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.placeorder','checkout',null)}

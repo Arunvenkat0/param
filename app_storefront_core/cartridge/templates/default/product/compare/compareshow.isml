@@ -11,12 +11,12 @@
 	</a>
 
 	<h1>${Resource.msg('compareshow.header', 'product', null)}</h1>
-	<isif condition="${pdict.CurrentForms.compare.categories.options.optionsCount > 1}">
+	<isif condition="${session.forms.compare.categories.options.optionsCount > 1}">
 		<form class="category-switch" action="${URLUtils.url('Compare-Show')}" method="post">
 			<label for="compare-category-list">${Resource.msg('compareshow.othercompareitems', 'product', null)}</label>
 			<select id="compare-category-list" name="category" size="1" class="input-select">
-				<isloop items="${pdict.CurrentForms.compare.categories.options}" var="cat">
-					<option value="${cat.optionId}" <isif condition="${cat.optionId == pdict.CurrentForms.compare.object.category}">selected="selected"</isif>>${Resource.msg(cat.label, 'forms', null)}</option>
+				<isloop items="${session.forms.compare.categories.options}" var="cat">
+					<option value="${cat.optionId}" <isif condition="${cat.optionId == session.forms.compare.object.category}">selected="selected"</isif>>${Resource.msg(cat.label, 'forms', null)}</option>
 				</isloop>
 			</select>
 		</form>
@@ -66,7 +66,7 @@
 						</isif>
 						<a class="action" href="${URLUtils.https('Wishlist-Add', 'pid', pid)}">${Resource.msg('global.addtowishlist', 'locale', null)}</a>
 						<a class="action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pid)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
-						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', pdict.CurrentHttpParameterMap.category.stringValue)}" scope="page"/>
+						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', request.httpParameterMap.category.stringValue)}" scope="page"/>
 						<a class="action remove-link" href="${removeUrl}" title="${Resource.msg('compareshow.removeitem', 'product', null)}">${Resource.msg('compareshow.removeitem', 'product', null)}</a>
 					</th>
 				</isloop>
@@ -74,8 +74,8 @@
 		</thead>
 
 		<iscomment>all attribute groups and attributes of the first product in the compare list</iscomment>
-		<isif condition="${pdict.CurrentForms.compare.attributegroups != null}">
-			<isloop items="${pdict.CurrentForms.compare.attributegroups}" var="attributeGroup">
+		<isif condition="${session.forms.compare.attributegroups != null}">
+			<isloop items="${session.forms.compare.attributegroups}" var="attributeGroup">
 				<isloop items="${attributeGroup.attributes}" var="attribute">
 					<tr class="attribute-row">
 						<th class="product-attribute"><isprint value="${attribute.object.displayName}"/>:</th>

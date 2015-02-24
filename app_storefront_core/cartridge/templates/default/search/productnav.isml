@@ -40,7 +40,7 @@
 			var imgUrl = "";
 			var imgFile;
 			
-			var hashAppend = removeParameter(pdict.CurrentRequest.httpQueryString, 'start');
+			var hashAppend = removeParameter(request.httpQueryString, 'start');
 			hashAppend = removeParameter(hashAppend, 'pid') + '&start=' + start;;
 			
 			if (!empty(product)) {
@@ -73,7 +73,7 @@
 		
 		var rList 		= pdict.ProductPagingModel.pageElements.asList();
 		var listSize 	= rList.size();
-		var start 		= pdict.CurrentHttpParameterMap.start.intValue;
+		var start 		= request.httpParameterMap.start.intValue;
 		
 		var totalCount = pdict.ProductPagingModel.count;
 		var prevProd = null, prevProdHit = null;
@@ -106,7 +106,7 @@
 	</isscript>
 	<isif condition="${!empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.count > 0 }">	
 
-		<isset name="backLinkText" value="${Resource.msgf('productnav.back','search',null, (!empty(pdict.ProductSearchResult.categoryID) ? pdict.ProductSearchResult.category.displayName: pdict.CurrentHttpParameterMap.q.stringValue))}" scope="page"/>
+		<isset name="backLinkText" value="${Resource.msgf('productnav.back','search',null, (!empty(pdict.ProductSearchResult.categoryID) ? pdict.ProductSearchResult.category.displayName: request.httpParameterMap.q.stringValue))}" scope="page"/>
 	
 		<isif condition="${prevProd != null}">			
 			<div class="product-previous <isif condition="${nextProd != null}">divided</isif>">

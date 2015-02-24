@@ -14,7 +14,7 @@
 <isreportcheckout checkoutstep="${3}" checkoutname="${'ShippingMethod'}"/>
 <isscript>
 	importScript("cart/CartUtils.ds");
-	var productListAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, true);
+	var productListAddresses = CartUtils.getAddressList(pdict.Basket, customer, true);
 </isscript>
 
 	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
@@ -23,7 +23,7 @@
 
     <ischeckoutprogressindicator step="1" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 
-	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.singleshipping.shippingAddress.htmlName}" class="checkout-shipping address">
+	<form action="${URLUtils.https('COShipping-SingleShipping')}" method="post" id="${session.forms.singleshipping.shippingAddress.htmlName}" class="checkout-shipping address">
 
 		<fieldset>
 		<isif condition="${pdict.HomeDeliveries}">
@@ -47,7 +47,7 @@
 						<isif condition="${plicount > 1 }">
 							<div class="ship-to-multiple">
 								${Resource.msg('singleshipping.multiple','checkout',null)}
-								<button class="shiptomultiplebutton button-fancy-medium cancel" type="submit" name="${pdict.CurrentForms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
+								<button class="shiptomultiplebutton button-fancy-medium cancel" type="submit" name="${session.forms.singleshipping.shipToMultiple.htmlName}" value="${Resource.msg('global.yes','locale',null)}">
 									${Resource.msg('global.yes','locale',null)}
 								</button>
 							</div>
@@ -56,20 +56,20 @@
 
 
 					<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
-					<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+					<isif condition="${customer.authenticated && customer.profile.addressBook.addresses.size() > 0}">
 
 						<div class="select-address">
 
 							<div class="form-row">
 
-								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
+								<label for="${session.forms.singleshipping.addressList.htmlName}">
 									${Resource.msg('global.selectaddressmessage','locale',null)}:
 								</label>
-								<isaddressselectlist p_listId="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
+								<isaddressselectlist p_listId="${session.forms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
 							</div>
 
 							<div class="form-row form-row-button">
-								<button id="addressSelectGoButton" class="select" name="${pdict.CurrentForms.singleshipping.shippingAddress.selectAddress.htmlName}" type="submit" value="Go" >${Resource.msg('singleshipping.select','checkout',null)}</button>
+								<button id="addressSelectGoButton" class="select" name="${session.forms.singleshipping.shippingAddress.selectAddress.htmlName}" type="submit" value="Go" >${Resource.msg('singleshipping.select','checkout',null)}</button>
 							</div>
 
 						</div>
@@ -82,10 +82,10 @@
 
 							<div class="form-row">
 
-								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
+								<label for="${session.forms.singleshipping.addressList.htmlName}">
 									${Resource.msg('global.selectaddressmessage','locale',null)}:
 								</label>
-								<isaddressselectlist p_listid="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
+								<isaddressselectlist p_listid="${session.forms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
 							</div>
 						</div>
 
@@ -94,11 +94,11 @@
 					</isif>
 
 
-				    <isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.firstName}" type="input"/>
+				    <isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.firstName}" type="input"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.lastName}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.lastName}" type="input"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
 
 					<div class="form-field-tooltip">
 						(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
@@ -109,27 +109,27 @@
 						</a>)
 					</div>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address2}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.address2}" type="input"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country}" type="select"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.country}" type="select"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.state}" type="select"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.states.state}" type="select"/>
 
 			    	<iscomment>
 				    	States will be populated via javascript in rich ui.
 				    	Solution for simple ui is still required. CSS?
-				    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.stateUS}" type="select"/>
+				    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.states.stateUS}" type="select"/>
 
-				    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.stateCA}" type="select"/>
+				    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.states.stateCA}" type="select"/>
 
-				    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.states.stateDE}" type="select"/>
+				    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.states.stateDE}" type="select"/>
 			    	</iscomment>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.city}" type="input"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 
-			    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
+			    	<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
 
 					<div class="form-field-tooltip with-helper-text">
 						(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
@@ -141,21 +141,21 @@
 					</div>
 
 		    		<iscomment>Add address to Address Book</iscomment>
-		    		<isif condition="${pdict.CurrentCustomer.authenticated}">
-		    			<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
+		    		<isif condition="${customer.authenticated}">
+		    			<isinputfield formfield="${session.forms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
 		    		</isif>
 
 		    		<iscomment>Use address for Billing Address</iscomment>
-		    		<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox" rowclass="form-indent label-inline"/>
+		    		<isinputfield formfield="${session.forms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox" rowclass="form-indent label-inline"/>
 
 					<iscomment>Is this a gift</iscomment>
 				    <div class="form-row">
-				    	<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
-			    		<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> Yes
-			    		<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> No
+				    	<label for="${session.forms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(session.forms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
+			    		<input class="input-radio" type="radio" name="${session.forms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${session.forms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> Yes
+			    		<input class="input-radio" type="radio" name="${session.forms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!session.forms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> No
 				    </div>
 
-			    	<isinputfield rowclass="gift-message-text" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
+			    	<isinputfield rowclass="gift-message-text" formfield="${session.forms.singleshipping.shippingAddress.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
 
 				</fieldset>
 
@@ -179,7 +179,7 @@
 				<div class="form-row form-row-button">
 			</isif>
 
-				<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
+				<button class="button-fancy-large" type="submit" name="${session.forms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 			</div>
 
 			<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
@@ -189,7 +189,7 @@
 				</div>
 			</isif>
 
-			<input type="hidden" name="${pdict.CurrentForms.singleshipping.secureKeyHtmlName}" value="${pdict.CurrentForms.singleshipping.secureKeyValue}"/>
+			<input type="hidden" name="${session.forms.singleshipping.secureKeyHtmlName}" value="${session.forms.singleshipping.secureKeyValue}"/>
 
 		</fieldset>
 
@@ -197,7 +197,7 @@
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.singleshipping.shippingAddress.addressFields;
+	var addressForm = session.forms.singleshipping.shippingAddress.addressFields;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

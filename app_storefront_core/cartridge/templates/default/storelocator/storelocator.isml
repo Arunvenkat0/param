@@ -24,18 +24,18 @@
 	
 		<div class="login-box-content clearfix">	
 			
-			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}">
+			<form action="${URLUtils.abs('Stores-FindStores')}" method="get" id="${session.forms.storelocator.htmlName}">
 				<fieldset>
 					
-					<input type="hidden" name="${pdict.CurrentForms.storelocator.countryCode.htmlName}" value="US" />
-					<input type="hidden" name="${pdict.CurrentForms.storelocator.distanceUnit.htmlName}" value="mi" />
+					<input type="hidden" name="${session.forms.storelocator.countryCode.htmlName}" value="US" />
+					<input type="hidden" name="${session.forms.storelocator.distanceUnit.htmlName}" value="mi" />
 					
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.postalCode}" type="input"/>
+					<isinputfield formfield="${session.forms.storelocator.postalCode}" type="input"/>
 					
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.maxdistance}" type="select"/>
+					<isinputfield formfield="${session.forms.storelocator.maxdistance}" type="select"/>
 					
 					<div class="form-row form-row-button">
-						<button type="submit" name="${pdict.CurrentForms.storelocator.findbyzip.htmlName}" value="${Resource.msg('global.search','locale',null)}">
+						<button type="submit" name="${session.forms.storelocator.findbyzip.htmlName}" value="${Resource.msg('global.search','locale',null)}">
 							${Resource.msg('global.search','locale',null)}
 						</button>
 					</div>
@@ -43,13 +43,13 @@
 				</fieldset>
 			</form>
 		
-			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}_state">
+			<form action="${URLUtils.abs('Stores-FindStores')}" method="get" id="${session.forms.storelocator.htmlName}_state">
 				<fieldset>
 				
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.states.stateUSCA}" type="select" mandatory="false"/>
+					<isinputfield formfield="${session.forms.storelocator.address.states.stateUSCA}" type="select" mandatory="false"/>
 					
 					<div class="form-row form-row-button">
-						<button type="submit" name="${pdict.CurrentForms.storelocator.findbystate.htmlName}" value="${Resource.msg('global.search','locale',null)}">
+						<button type="submit" name="${session.forms.storelocator.findbystate.htmlName}" value="${Resource.msg('global.search','locale',null)}">
 							${Resource.msg('global.search','locale',null)}
 						</button>
 					</div>
@@ -73,12 +73,12 @@
 	
 		<div class="login-box-content clearfix">
 		
-			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}_int">
+			<form action="${URLUtils.abs('Stores-FindStores')}" method="get" id="${session.forms.storelocator.htmlName}_int">
 				<fieldset>
 				
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.country}" type="select" mandatory="false"/>
+					<isinputfield formfield="${session.forms.storelocator.address.country}" type="select" mandatory="false"/>
 					
-					<div class="form-row form-row-button">						<button class="search shadow-darker" type="submit" name="${pdict.CurrentForms.storelocator.findbycountry.htmlName}" value="${Resource.msg('global.search','locale',null)}"><span>${Resource.msg('global.search','locale',null)}</span></button>
+					<div class="form-row form-row-button">						<button class="search shadow-darker" type="submit" name="${session.forms.storelocator.findbycountry.htmlName}" value="${Resource.msg('global.search','locale',null)}"><span>${Resource.msg('global.search','locale',null)}</span></button>
 					</div>
 					
 					<div class="form-caption">

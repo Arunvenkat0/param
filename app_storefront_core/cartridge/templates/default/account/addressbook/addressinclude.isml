@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules.isml"/>
 
-<isif condition="${!empty(pdict.CurrentCustomer.profile.addressBook.addresses)}">
+<isif condition="${!empty(customer.profile.addressBook.addresses)}">
 	
 	<iscomment>addresses are sorted, preferred first, than alphabetic </iscomment>
 	
@@ -13,9 +13,9 @@
 	</isif>
 	<ul class="address-list">
 	
-	<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address" status="loopstate">
+	<isloop items="${customer.profile.addressBook.addresses}" var="address" status="loopstate">
 		<isscript>
-			var isDefault = !empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress) && (pdict.CurrentCustomer.profile.addressBook.preferredAddress.ID == address.ID);
+			var isDefault = !empty(customer.profile.addressBook.preferredAddress) && (customer.profile.addressBook.preferredAddress.ID == address.ID);
 			var cssClass = "";
 			if (loopstate.first) { cssClass = "first"; } 
 			else if (loopstate.last) { cssClass = "last"; }

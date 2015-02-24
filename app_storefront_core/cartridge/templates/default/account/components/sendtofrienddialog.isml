@@ -8,11 +8,11 @@
 			subject: dw.web.Resource.msg('product.sendfriendemailsubject','product',null)
 		},
 		wishlist: {
-			link: pdict.CurrentHttpParameterMap.plid.stringValue ? dw.web.URLUtils.https('Wishlist-ShowOther', 'WishListID', pdict.CurrentHttpParameterMap.plid.stringValue).toString() : "",
+			link: request.httpParameterMap.plid.stringValue ? dw.web.URLUtils.https('Wishlist-ShowOther', 'WishListID', request.httpParameterMap.plid.stringValue).toString() : "",
 			subject:dw.web.Resource.msg('wishlist.emailsubject','account',null)
 		},
 		registry: {
-			link: pdict.CurrentHttpParameterMap.plid.stringValue ? dw.web.URLUtils.https('GiftRegistry-ShowRegistryByID','ProductListID', pdict.CurrentHttpParameterMap.plid.stringValue).toString() : "",
+			link: request.httpParameterMap.plid.stringValue ? dw.web.URLUtils.https('GiftRegistry-ShowRegistryByID','ProductListID', request.httpParameterMap.plid.stringValue).toString() : "",
 			subject:dw.web.Resource.msg('registry.emailsubject','account',null)
 		}
 	};
@@ -22,28 +22,28 @@
 <isset name="IsProductDetail" value="${false}" scope="page" />
 <isset name="productOptionModel" value="${pdict.ProductOptionModel}" scope="page"/>
 
-<isif condition="${pdict.CurrentHttpParameterMap.source.stringValue == 'registry' && pdict.CurrentHttpParameterMap.format.stringValue != 'ajax' }">
+<isif condition="${request.httpParameterMap.source.stringValue == 'registry' && request.httpParameterMap.format.stringValue != 'ajax' }">
 	<isset name="DecoratorTemplate" value="account/giftregistry/pt_giftregistry" scope="page"/>
 	<isset name="IsRegistry" value="${true}" scope="page" />
 </isif>
 
-<isif condition="${pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' && pdict.CurrentHttpParameterMap.format.stringValue != 'ajax' }">
+<isif condition="${request.httpParameterMap.source.stringValue == 'wishlist' && request.httpParameterMap.format.stringValue != 'ajax' }">
 	<isset name="DecoratorTemplate" value="account/wishlist/pt_wishlist" scope="page"/>
 	<isset name="IsWishList" value="${true}" scope="page" />
 </isif>
 
-<isif condition="${pdict.CurrentHttpParameterMap.source.stringValue == 'productdetail' && pdict.CurrentHttpParameterMap.format.stringValue != 'ajax'}">
+<isif condition="${request.httpParameterMap.source.stringValue == 'productdetail' && request.httpParameterMap.format.stringValue != 'ajax'}">
 	<isset name="DecoratorTemplate" value="content/pt_customerservice" scope="page"/>
 	<isset name="IsProductDetail" value="${true}" scope="page" />
 </isif>
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' }">
+<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' }">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 
 
 <isdecorate template="${DecoratorTemplate}">
-<isif condition="${pdict.CurrentCustomer.registered}">
-<form action="${URLUtils.continueURL()}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
+<isif condition="${customer.registered}">
+<form action="${URLUtils.https('SendToFriend-SendToFriendForm')}" method="post" name="${session.forms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 	<div id="send-to-friend-main">
 		<isif condition="${IsRegistry || IsWishList || IsProductDetail}">
 			<h1>${Resource.msg('global.sendtoafriend','locale',null)}</h1>
@@ -52,23 +52,23 @@
 		<fieldset>
 			<isif condition="${pdict.ViewMode != 'preview'}">
 
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.yourname}" type="input"/>
+				<isinputfield formfield="${session.forms.sendtofriend.yourname}" type="input"/>
 
 				<div class="form-row">
 					<span class="send-to-friend-sender">
 						<label class="send-to-friend-sender-label">
 							<span>${dw.web.Resource.msg('forms.sendtofriend.yourEmail','forms',null)}</span>
 						</label>
- 						${pdict.CurrentCustomer.profile.email}
+ 						${customer.profile.email}
  					</span>
 				</div>
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsname}" type="input" requiredtext="${Resource.msg('forms.sendtofriend.friendsName.missing-error','forms',null)}"/>
+				<isinputfield formfield="${session.forms.sendtofriend.friendsname}" type="input" requiredtext="${Resource.msg('forms.sendtofriend.friendsName.missing-error','forms',null)}"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.friendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
+				<isinputfield formfield="${session.forms.sendtofriend.friendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.confirmfriendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
+				<isinputfield formfield="${session.forms.sendtofriend.confirmfriendsemail}" type="input" xhtmlclass="email" requiredtext="${Resource.msg('forms.sendtofriend.email.missing-error','forms',null)}"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.sendtofriend.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
+				<isinputfield formfield="${session.forms.sendtofriend.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 
 				<div class="form-caption">
 					${Resource.msg('global.email.policy','locale',null)}
@@ -161,7 +161,7 @@
 
 				</div>
 
-				<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.sendtofriend.message}" type="textarea" attribute3="data-character-limit" value3="250" />
+				<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${session.forms.sendtofriend.message}" type="textarea" attribute3="data-character-limit" value3="250" />
 
 			<iselse/>
 
@@ -249,49 +249,49 @@
 
 					<dt>${Resource.msg('global.to','locale',null)}:</dt>
 					<dd>
-						<isprint value="${pdict.CurrentForms.sendtofriend.friendsname.htmlValue}"/><br />
-						<isprint value="${pdict.CurrentForms.sendtofriend.friendsemail.htmlValue}"/>
+						<isprint value="${session.forms.sendtofriend.friendsname.htmlValue}"/><br />
+						<isprint value="${session.forms.sendtofriend.friendsemail.htmlValue}"/>
 					</dd>
 
 					<dt>${Resource.msg('global.from','locale',null)}:</dt>
 					<dd>
-						<isprint value="${pdict.CurrentForms.sendtofriend.yourname.htmlValue}"/><br />
-						<isprint value="${pdict.CurrentUser.profile.email}"/>
+						<isprint value="${session.forms.sendtofriend.yourname.htmlValue}"/><br />
+						<isprint value="${user.profile.email}"/>
 					</dd>
 
 					<dt>${Resource.msg('sendtoafrienddialog.subject','account',null)}</dt>
-					<dd><isprint value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/></dd>
+					<dd><isprint value="${sourceHash[request.httpParameterMap.source.stringValue].subject}"/></dd>
 
 					<dt>${Resource.msg('sendtoafrienddialog.message','account',null)}</dt>
-					<dd><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></dd>
+					<dd><isprint value="${session.forms.sendtofriend.message.htmlValue}"/></dd>
 
 					</dl>
-					<input type="hidden" name="pid" value="${pdict.CurrentHttpParameterMap.pid.stringValue}" />
-					<input type="hidden" name="plid" value="${pdict.CurrentHttpParameterMap.plid.stringValue}" />
+					<input type="hidden" name="pid" value="${request.httpParameterMap.pid.stringValue}" />
+					<input type="hidden" name="plid" value="${request.httpParameterMap.plid.stringValue}" />
 				</div>
 
 			</div>
 
 			</isif>
 
-			<input type="hidden" name="source" value="${pdict.CurrentHttpParameterMap.source.stringValue}" />
-			<isif condition="${'pid' in pdict.CurrentHttpParameterMap}">
-				<input type="hidden" name="pid" value="${pdict.CurrentHttpParameterMap.pid.stringValue}" />
+			<input type="hidden" name="source" value="${request.httpParameterMap.source.stringValue}" />
+			<isif condition="${'pid' in request.httpParameterMap}">
+				<input type="hidden" name="pid" value="${request.httpParameterMap.pid.stringValue}" />
 			</isif>
-			<isif condition="${'plid' in pdict.CurrentHttpParameterMap}">
-				<input type="hidden" name="plid" value="${pdict.CurrentHttpParameterMap.plid.stringValue}" />
+			<isif condition="${'plid' in request.httpParameterMap}">
+				<input type="hidden" name="plid" value="${request.httpParameterMap.plid.stringValue}" />
 			</isif>
-			<input type="hidden" name="${pdict.CurrentForms.sendtofriend.subject.htmlName}" value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/>
-			<input type="hidden" name="${pdict.CurrentForms.sendtofriend.messagelink.htmlName}" value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].link}"/>
-			<input type="hidden" name="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlName}" value="${sourceHash[pdict.CurrentHttpParameterMap.source.stringValue].subject}"/>
+			<input type="hidden" name="${session.forms.sendtofriend.subject.htmlName}" value="${sourceHash[request.httpParameterMap.source.stringValue].subject}"/>
+			<input type="hidden" name="${session.forms.sendtofriend.messagelink.htmlName}" value="${sourceHash[request.httpParameterMap.source.stringValue].link}"/>
+			<input type="hidden" name="${session.forms.sendtofriend.messagelinktext.htmlName}" value="${sourceHash[request.httpParameterMap.source.stringValue].subject}"/>
 			<div class="form-row form-row-button">
-				<button class="edit-button" type="submit" value="${Resource.msg('global.edit','locale',null)}" name="${pdict.CurrentForms.sendtofriend.edit.htmlName}"${pdict.ViewMode == "preview" ? "" : " style='display:none'"}>
+				<button class="edit-button" type="submit" value="${Resource.msg('global.edit','locale',null)}" name="${session.forms.sendtofriend.edit.htmlName}"${pdict.ViewMode == "preview" ? "" : " style='display:none'"}>
 					${Resource.msg('global.edit','locale',null)}
 				</button>
-				<button class="preview-button" type="submit" value="${Resource.msg('global.preview','locale',null)}" name="${pdict.CurrentForms.sendtofriend.preview.htmlName}"${pdict.ViewMode == "preview" ? " style='display:none'" : ""}>
+				<button class="preview-button" type="submit" value="${Resource.msg('global.preview','locale',null)}" name="${session.forms.sendtofriend.preview.htmlName}"${pdict.ViewMode == "preview" ? " style='display:none'" : ""}>
 					${Resource.msg('global.preview','locale',null)}
 				</button>
-				<button class="send-button" value="${Resource.msg('global.send','locale',null)}" type="submit" name="${pdict.CurrentForms.sendtofriend.send.htmlName}">
+				<button class="send-button" value="${Resource.msg('global.send','locale',null)}" type="submit" name="${session.forms.sendtofriend.send.htmlName}">
 					${Resource.msg('global.send','locale',null)}
 				</button>
 				<button class="cancel cancel-button">
@@ -303,7 +303,7 @@
 	</div>
 </form>
 </isif>
-<isif condition="${!pdict.CurrentCustomer.registered}">
+<isif condition="${!customer.registered}">
 	<div class="send-to-friend-login-message">
 		<span>
 			${Resource.msg('sendtoafrienddialog.unregistereduser','account',null)}

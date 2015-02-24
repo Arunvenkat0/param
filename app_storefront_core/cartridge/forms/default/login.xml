@@ -10,6 +10,10 @@
 	     information that login failed -->
 	<field formid="loginsucceeded" type="boolean" mandatory="false"/>
 
+    <!-- action for continuing the workflow after login -->
+    <field formid="targetAction" type="string" mandatory="false" />
+    <field formid="targetParameters" type="string" mandatory="false" />
+
 	<action formid="login" valid-form="true"/>
 	<action formid="register" valid-form="false"/>
 	<action formid="forgotpassword" valid-form="false"/>

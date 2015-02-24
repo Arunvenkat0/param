@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 
 <isset name="DecoratorTemplate" value="account/pt_account" scope="page"/>
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
+<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' || request.httpParameterMap.pwr.stringValue == 'true' || request.httpParameterMap.source.stringValue == 'search' || request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 
@@ -14,7 +14,7 @@
 		<h1>${Resource.msg('editaddress.editaddress','account',null)}</h1>
 	</isif>
 
-	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
+	<form method="post" action="${URLUtils.https(pdict.FormAction)}" id="edit-address-form" name="${session.forms.profile.address.htmlName}">
 		<fieldset>
 			<legend>
 				Address Details
@@ -29,25 +29,25 @@
 				</span>
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.addressid}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.addressid}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.firstname}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.firstname}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.lastname}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.lastname}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address1}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.address1}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address2}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.address2}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.country}" type="select"/>
+			<isinputfield formfield="${session.forms.profile.address.country}" type="select"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.states.state}" type="select"/>
+			<isinputfield formfield="${session.forms.profile.address.states.state}" type="select"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.city}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.city}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.postal}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.postal}" type="input"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.phone}" type="input"/>
+			<isinputfield formfield="${session.forms.profile.address.phone}" type="input"/>
 
 			<div class="form-field-tooltip" >
 				(<a class="tooltip" href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}">
@@ -59,28 +59,28 @@
 			</div>
 
 			<div class="form-row form-row-button">
-				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
+				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? session.forms.profile.address.create.htmlName : session.forms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 					${Resource.msg('global.apply','locale',null)}
 				</button>
-				<button class="cancel cancel-button" type="submit" name="${pdict.CurrentForms.profile.address.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
+				<button class="cancel cancel-button" type="submit" name="${session.forms.profile.address.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
 					${Resource.msg('global.cancel','locale',null)}
 				</button>
 				<isif condition="${pdict.Action != 'add'}">
 					<input type="hidden" value="${pdict.Address.ID}" name="addressid" id="addressid" />
-					<button class="delete-button delete cancel" type="submit" name="${pdict.CurrentForms.profile.address.remove.htmlName}" value="${Resource.msg('global.delete','locale',null)}">
+					<button class="delete-button delete cancel" type="submit" name="${session.forms.profile.address.remove.htmlName}" value="${Resource.msg('global.delete','locale',null)}">
 						${Resource.msg('global.delete','locale',null)}
 					</button>
 				</isif>
 			</div>
 
-			<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
+			<input type="hidden" name="${session.forms.profile.secureKeyHtmlName}" value="${session.forms.profile.secureKeyValue}"/>
 
 		</fieldset>
 
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.profile.address;
+	var addressForm = session.forms.profile.address;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

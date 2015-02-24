@@ -42,7 +42,7 @@
 	
 </isscript>  
 	<div class="sort-by">
-		<form action="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" method="post" name="Product-Sorting-Options">
+		<form action="${URLUtils.url('Search-Show','cgid', request.httpParameterMap.cgid)}" method="post" name="Product-Sorting-Options">
 				<fieldset>
 			
 					<label for="${uniqueId}">${Resource.msg('pagecomponents.paginginformation.sortby','pagecomponents',null)}</label>

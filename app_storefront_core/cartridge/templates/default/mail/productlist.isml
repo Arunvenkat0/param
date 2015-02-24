@@ -40,7 +40,7 @@ ul li.onorder {color:red;}
 		</isif>
 	</h3>
 	<div style="border-bottom:1px solid #CCCCCC;padding:5px 10px;">
-    	<div style="margin:0 0 7px;text-align:center;"><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></div>
+    	<div style="margin:0 0 7px;text-align:center;"><isprint value="${session.forms.sendtofriend.message.htmlValue}"/></div>
 		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 			<table style="margin:auto;width:65%;">
 		         <tr>
@@ -68,21 +68,21 @@ ul li.onorder {color:red;}
 		         </tr>
 		    </table>
 		    <div style="margin:7px 0 0 0;text-align:center;">
-     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitgr','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitgr','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
+     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitgr','account',null)}:</span><a href="<isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitgr','account',null)}"><isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/></a>
      		</div>
 		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 			<table>
 		         <tr>
 		             <td style="font-weight:bold"><b>${Resource.msg('global.from','locale',null)}:</b></td>
-		             <td><isprint value="${pdict.CurrentCustomer.profile.firstName}"/> <isprint value="${pdict.CurrentCustomer.profile.lastName}"/></td>
+		             <td><isprint value="${customer.profile.firstName}"/> <isprint value="${customer.profile.lastName}"/></td>
 		         </tr>
 		         <tr>
 		             <td></td>
-		             <td><isprint value="${pdict.CurrentForms.sendtofriend.youremail.htmlValue}"/></td>
+		             <td><isprint value="${session.forms.sendtofriend.youremail.htmlValue}"/></td>
 		         </tr>
 		    </table>
 			<div style="margin:7px 0 0 0;text-align:center;">
-     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitwishlist','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitwishlist','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
+     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitwishlist','account',null)}:</span><a href="<isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitwishlist','account',null)}"><isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/></a>
      		</div>
 		</isif>		
  	</div>
@@ -117,7 +117,7 @@ ul li.onorder {color:red;}
 						</div>
 					</isif>
 					<isif condition="${item.type == p_productli.TYPE_GIFT_CERTIFICATE}">
-						<a href="${URLUtils.https('GiftCert-Purchase', 'from', pdict.CurrentForms.sendtofriend.friendsname.htmlValue, 'recipient', pdict.CurrentForms.sendtofriend.yourname.htmlValue)}" style="font-weight:bold;line-height:24pt">${Resource.msg('global.giftcertificate','locale',null)}</a>
+						<a href="${URLUtils.https('GiftCert-Purchase', 'from', session.forms.sendtofriend.friendsname.htmlValue, 'recipient', session.forms.sendtofriend.yourname.htmlValue)}" style="font-weight:bold;line-height:24pt">${Resource.msg('global.giftcertificate','locale',null)}</a>
 					<iselseif condition="${item.product == null || !item.product.availabilityModel.orderable}">
 						${Resource.msg('displayproductlistitems.notavailable','product',null)}
 					<iselse/>

@@ -19,13 +19,13 @@
 		checkout progress indicator
 	 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 
-	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
+	<isif condition="${!session.forms.multishipping.entered.value}">
 		<ischeckoutprogressindicator step="2" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	<iselse/>
 		<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
-	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address">
+	<form action="${URLUtils.https('COBilling-Billing')}" method="post" id="${session.forms.billing.htmlName}" class="checkout-billing address">
 
 	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		billing address
@@ -36,7 +36,7 @@
 		<iscomment>billing address area</iscomment>
 
 		<iscomment>hidden input with action to trigger for the address form</iscomment>
-		<input type="hidden" name="${pdict.CurrentForms.billing.save.htmlName}" value="true" />
+		<input type="hidden" name="${session.forms.billing.save.htmlName}" value="true" />
 
 		<legend>
 			${Resource.msg('billing.addressheader','checkout',null)}
@@ -44,63 +44,63 @@
 		</legend>
 
 		<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
-		<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+		<isif condition="${customer.authenticated && customer.profile.addressBook.addresses.size() > 0}">
 			<div class="select-address">
 				<div class="form-row">
-					<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
+					<label for="${session.forms.billing.addressList.htmlName}">
 						Choose an Address
 					</label>
 					<isscript>
 						importScript("cart/CartUtils.ds");
-						var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
+						var customerAddresses = CartUtils.getAddressList(pdict.Basket, customer, false);
 					</isscript>
-					<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" />
+					<isaddressselectlist p_listId="${session.forms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" />
 				</div>
 
 				<div class="form-row form-row-button">
-					<button id="address-select-go-button" name="${pdict.CurrentForms.billing.selectAddress.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
+					<button id="address-select-go-button" name="${session.forms.billing.selectAddress.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 				</div>
 
 			</div>
 
 		</isif>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.firstName}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.firstName}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.lastName}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.lastName}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.address1}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.address1}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.address2}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.address2}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.country}" type="select"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.country}" type="select"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.state}" type="select"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.states.state}" type="select"/>
 
 		<iscomment>
 			States will be populated via javascript in rich ui.
 			Solution for simple ui is still required.
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateUS}" type="select"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.states.stateUS}" type="select"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateCA}" type="select"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.states.stateCA}" type="select"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateDE}" type="select"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.states.stateDE}" type="select"/>
 		</iscomment>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.city}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.city}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.postal}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.postal}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.phone}" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addressFields.phone}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" xhtmlclass="email" type="input"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.email.emailAddress}" xhtmlclass="email" type="input"/>
 
 		<iscomment>provide option to add address to address book if customer is authenticated</iscomment>
-		<isif condition="${pdict.CurrentCustomer.authenticated}">
-			<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
+		<isif condition="${customer.authenticated}">
+			<isinputfield formfield="${session.forms.billing.billingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
 		</isif>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox" rowclass="form-indent label-inline"/>
+		<isinputfield formfield="${session.forms.billing.billingAddress.addToEmailList}" type="checkbox" rowclass="form-indent label-inline"/>
 		<div class="form-caption">
 			<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
 		</div>
@@ -113,7 +113,7 @@
 
 	<fieldset>
 
-		<input type="hidden" name="${pdict.CurrentForms.billing.secureKeyHtmlName}" value="${pdict.CurrentForms.billing.secureKeyValue}"/>
+		<input type="hidden" name="${session.forms.billing.secureKeyHtmlName}" value="${session.forms.billing.secureKeyValue}"/>
 
 		<isset name="gcApplicable" value="${'false'}" scope="page"/>
 		<isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE).isActive() }">
@@ -137,14 +137,14 @@
 				<iscontentasset aid="checkout-coupon-help"/>
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.couponCode}" type="input" rowclass="label-above"/>
+			<isinputfield formfield="${session.forms.billing.couponCode}" type="input" rowclass="label-above"/>
 
 			<div class="form-row">
-				<button class="apply cancel" id="add-coupon" type="submit" name="${pdict.CurrentForms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+				<button class="apply cancel" id="add-coupon" type="submit" name="${session.forms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 			</div>
 			<div class="form-row coupon-error error">
 				<isif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
-					${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.billing.couponCode.htmlValue)}
+					${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, session.forms.billing.couponCode.htmlValue)}
 				</isif>
 			</div>
 			<div class="redemption coupon form-row"><!-- container for coupon applied success messages -->
@@ -166,13 +166,13 @@
 
 					<iscontentasset aid="checkout-giftcert-help"/>
 
-					<isinputfield formfield="${pdict.CurrentForms.billing.giftCertCode}" type="input" rowclass="label-above"/>
+					<isinputfield formfield="${session.forms.billing.giftCertCode}" type="input" rowclass="label-above"/>
 
 					<div class="form-row">
-						<button class="apply cancel" id="add-giftcert" type="submit" name="${pdict.CurrentForms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+						<button class="apply cancel" id="add-giftcert" type="submit" name="${session.forms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 					</div>
 					<div class="form-row">
-						<button class="button-text cancel" id="check-giftcert" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
+						<button class="button-text cancel" id="check-giftcert" type="submit" name="${session.forms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
 					</div>
 
 					<div class="form-row balance"></div>
@@ -221,13 +221,13 @@
 
 
 		<div class="form-row form-row-button">
-			<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
+			<button class="button-fancy-large" type="submit" name="${session.forms.billing.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 		</div>
 
 </form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
+	var addressForm = session.forms.billing.billingAddress.addressFields;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

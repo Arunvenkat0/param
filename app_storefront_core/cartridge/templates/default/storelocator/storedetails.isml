@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
 <isset name="DecoratorTemplate" value="account/pt_account" scope="page"/>
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart'}">
+<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' || request.httpParameterMap.pwr.stringValue == 'true' || request.httpParameterMap.source.stringValue == 'search' || request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 <isdecorate template="${DecoratorTemplate}">

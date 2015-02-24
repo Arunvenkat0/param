@@ -59,11 +59,11 @@
 		</div>
 		<div class="form-row label-inline select-store" id="${lineItem.UUID}">
 			<span class="set-preferred-store">
-				<isif condition="${pdict.CurrentSession.custom.zipcode != null}">
+				<isif condition="${session.custom.zipcode != null}">
 					<isif condition="${lineItem.custom.fromStoreId != null}">
-						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode,'storeid',lineItem.custom.fromStoreId)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', session.custom.zipcode,'storeid',lineItem.custom.fromStoreId)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 					<iselse/>
-						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', pdict.CurrentSession.custom.zipcode)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
+						<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'fromCart', 'true', 'zipCode', session.custom.zipcode)}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>
 					</isif>
 				<iselse/>
 					<a href="${URLUtils.url('StoreInventory-CartSetZipCodeCore','pid', lineItem.UUID, 'cart', 'true')}" title="${pdict.Product.name}">${Resource.msg('storelist.lightbox.selectstore','storepickup',null)}</a>

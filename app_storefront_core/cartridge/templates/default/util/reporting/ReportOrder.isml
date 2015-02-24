@@ -2,10 +2,10 @@
 <isif condition="${!empty(pdict.Order)}">
 
 	<iscomment>Log the total amount of orders the customer has</iscomment>
-	<isif condition="${!empty(pdict.CurrentCustomer)}">
+	<isif condition="${!empty(customer)}">
 		<isinclude url="${URLUtils.url('ReportingEvent-Start',
 			'ID', 	'UserOrders',
-			'Count', StringUtils.formatNumber(pdict.CurrentCustomer.orderHistory.orderCount, '#,##0'))}"/>
+			'Count', StringUtils.formatNumber(customer.orderHistory.orderCount, '#,##0'))}"/>
 	</isif>
 
 	<iscomment>

@@ -22,8 +22,8 @@
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="search/pt_productsearchresult_UI"/>
 
-	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
-		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+	<isif condition="${(request.httpParameterMap.cgid.submitted && request.httpParameterMap.cgid.value != '')}">
+		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', request.httpParameterMap.cgid)}" />
 	</isif>
 
 	<iscomment>Add  template-specific header information here.</iscomment>

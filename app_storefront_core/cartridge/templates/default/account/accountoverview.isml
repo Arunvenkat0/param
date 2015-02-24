@@ -6,7 +6,7 @@
 
 	<h1>
 		${Resource.msg('account.header','account',null)} | 
-		<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>&nbsp;<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
+		<isprint value="${customer.profile.firstName}"/>&nbsp;<isprint value="${customer.profile.lastName}"/>
 		<span class="account-logout">(<a title="Logout" href="${URLUtils.https('Login-Logout')}">${Resource.msg('global.logout','locale',null)}</a>)</span>
 	</h1>
 	

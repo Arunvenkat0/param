@@ -7,7 +7,7 @@
 		<isorderdetails order="${pdict.Order}" orderstatus="true"/>
 		
 		<div class="form-row order-detail-options">
-			<isif condition="${pdict.CurrentCustomer.authenticated}">
+			<isif condition="${customer.authenticated}">
 				<a href="${URLUtils.https('Order-History')}" title="${Resource.msg('orderdetails.returnorder','account',null)}">
 					${Resource.msg('orderdetails.returnorder','account',null)}
 				</a>
@@ -19,7 +19,7 @@
 		
 	<iselse/>
 	
-		<isif condition="${pdict.CurrentCustomer.authenticated}">
+		<isif condition="${customer.authenticated}">
 			<div class="back">
 				<a href="${URLUtils.https('Order-History')}" title="${Resource.msg('orderdetails.returnorder','account',null)}">
 					${Resource.msg('orderdetails.returnorder','account',null)}

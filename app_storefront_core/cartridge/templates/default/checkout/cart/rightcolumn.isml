@@ -9,7 +9,7 @@
 	
 	<iscomment>Cart Login Column</iscomment>
 
-	<isif condition="${!pdict.CurrentCustomer.authenticated}">
+	<isif condition="${!customer.authenticated}">
 		
 		<h1>${Resource.msg('pt_cart.checkoutheader','checkout',null)}</h1>
 		
@@ -28,16 +28,16 @@
 						login/create account/guest checkout actions go to cart pipeline for continuation purpose i.e. users lands back on the cart page after these action.
 				 		so moved the form definiton at the top of the div it is non-secure url
 				 	</iscomment>
-					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}" class="cartcontinue">
+					<form action="${URLUtils.https('Cart-SubmitForm')}" method="post" id="${session.forms.cart.dynamicHtmlName}" class="cartcontinue">
 						<fieldset>
 							<div class="form-row form-row-button">
 								<iscomment>cancel class is required by client side validation plugin to bypass validation for this action</iscomment>					
-								<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.cart.register.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>							
+								<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.cart.register.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>							
 							</div>
 						</fieldset>
 					</form>
 				
-				<isif condition="${!pdict.CurrentCustomer.registered}">
+				<isif condition="${!customer.registered}">
 					<div class="checkout-option-divider">${Resource.msg('pt_cart.checkoutoptiondivider','checkout',null)}</div>
 					<h3>${Resource.msg('pt_cart.guestcheckout','checkout',null)}</h3>			
 
@@ -46,14 +46,14 @@
 						login/create account/guest checkout actions go to cart pipeline for continuation purpose i.e. users lands back on the cart page after these action.
 					  	so moved the form definiton at the top of the div it is a secure url
 					</iscomment>
-					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}" class="cartcontinue">
+					<form action="${URLUtils.https('Cart-SubmitForm')}" method="post" id="${session.forms.cart.dynamicHtmlName}" class="cartcontinue">
 						<fieldset>
 							<div class="form-row form-row-button">
 								<iscomment>cancel class is required by client side validation plugin to bypass validation for this action</iscomment>
 								<isif condition="${enableCheckout}">	
-									<button class="checkout-as-guest shadow-darker" type="submit" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${pdict.CurrentForms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
+									<button class="checkout-as-guest shadow-darker" type="submit" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${session.forms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
 								<iselse/>
-									<button type="submit" disabled="disabled" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${pdict.CurrentForms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
+									<button type="submit" disabled="disabled" value="${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}" name="${session.forms.cart.unregistered.htmlName}"><span>${Resource.msg('pt_cart.guestcheckoutbutton','checkout',null)}</span></button>
 								</isif>
 							</div>
 						</fieldset>
@@ -66,22 +66,22 @@
 		</div>
 		
 	<iselse/>
-	<iscomment>form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}"</iscomment>
+	<iscomment>form action="${URLUtils.https('Cart-SubmitForm')}" method="post" id="${session.forms.cart.dynamicHtmlName}"</iscomment>
 		<div class="account-welcome">
 		
 			<div class="welcome-message">
 				${Resource.msg('pt_cart.userwelcome','checkout',null)} 
-				<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
+				<isprint value="${customer.profile.firstName}"/>
 				${Resource.msg('pt_cart.userwelcome2','checkout',null)}
 			</div><!-- END: welcomemessage -->
 			
 			<div class="not-user">
-				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.cart.dynamicHtmlName}" class="cartcontinue">
+				<form action="${URLUtils.https('Cart-SubmitForm')}" method="post" id="${session.forms.cart.dynamicHtmlName}" class="cartcontinue">
 					<fieldset>
 						${Resource.msg('pt_cart.usernot','checkout',null)} 
-						<span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
-						<isprint value="${pdict.CurrentCustomer.profile.lastName}"/></span>? 
-						(<button class="button-text" type="submit" value="${Resource.msg('global.logout','locale',null)}" name="${pdict.CurrentForms.cart.logout.htmlName}">
+						<span class="username"><isprint value="${customer.profile.firstName}"/>
+						<isprint value="${customer.profile.lastName}"/></span>? 
+						(<button class="button-text" type="submit" value="${Resource.msg('global.logout','locale',null)}" name="${session.forms.cart.logout.htmlName}">
 							${Resource.msg('global.logout','locale',null)}
 						</button>)
 					</fieldset>

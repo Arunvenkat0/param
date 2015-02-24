@@ -5,7 +5,7 @@
 
 	<isset name="enableCheckout" value="${pdict.EnableCheckout}" scope="page" />
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-	<isset name="store" value="${dw.catalog.StoreMgr.getStore(pdict.CurrentSession.custom.storeId)}" scope="page" />
+	<isset name="store" value="${dw.catalog.StoreMgr.getStore(session.custom.storeId)}" scope="page" />
 	</isif>
 	<isslot id="cart-banner" description="Banner for Cart page"	context="global" />
 
@@ -76,10 +76,10 @@
 		</isif>
 
 		<iscomment>show the basket when we have data</iscomment>
-		<form action="${URLUtils.httpContinue()}" method="post"	name="${pdict.CurrentForms.cart.htmlName}" id="cart-items-form">
+		<form action="${URLUtils.https('Cart-SubmitForm')}" method="post"	name="${session.forms.cart.htmlName}" id="cart-items-form">
 			<fieldset>
 				<iscomment>This button is hidden but required to ensure that update cart is called whenever the "enter" key is pressed in an input field</iscomment>
-				<button class="visually-hidden" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}"></button>
+				<button class="visually-hidden" type="submit" value="${session.forms.cart.updateCart.htmlName}" name="${session.forms.cart.updateCart.htmlName}"></button>
 				<table id="cart-table" class="item-list">
 					<thead>
 						<tr>
@@ -96,7 +96,7 @@
 					<tbody>
 
 						<iscomment>	LOOP TO SEPARATE DIFFERENT SHIPMENTS ex: Gift Registry Shipments Etc.</iscomment>
-						<isloop items="${pdict.CurrentForms.cart.shipments}" var="Shipment"	status="loopstate">
+						<isloop items="${session.forms.cart.shipments}" var="Shipment"	status="loopstate">
 							<isloop items="${Shipment.items}" alias="FormLi" status="loopstate">
 								<isset name="lineItem" value="${FormLi.object}" scope="page" />
 								<isscript>
@@ -460,7 +460,7 @@
 
 
 						<iscomment>Coupons</iscomment>
-						<isloop items="${pdict.CurrentForms.cart.coupons}" var="FormCoupon" status="loopstateCoupons">
+						<isloop items="${session.forms.cart.coupons}" var="FormCoupon" status="loopstateCoupons">
 
 							<tr class="rowcoupons">
 
@@ -570,7 +570,7 @@
 								sense in multiple-shipment scenario.
 							</iscomment>
 
-							<isloop items="${pdict.CurrentForms.cart.shipments}" var="Shipment" status="loopstate">
+							<isloop items="${session.forms.cart.shipments}" var="Shipment" status="loopstate">
 
 								<isloop items="${Shipment.items}" alias="FormLi" status="loopstate">
 
@@ -763,22 +763,22 @@
 
 				<div class="cart-footer">
 
-					<input type="hidden" name="${pdict.CurrentForms.cart.updateCart.htmlName}" value="${pdict.CurrentForms.cart.updateCart.htmlName}"/>
+					<input type="hidden" name="${session.forms.cart.updateCart.htmlName}" value="${session.forms.cart.updateCart.htmlName}"/>
 					<div class="cart-order-totals">
-						<button type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
+						<button type="submit" value="${session.forms.cart.updateCart.htmlName}" name="${session.forms.cart.updateCart.htmlName}" id="update-cart">
 							${Resource.msg('global.updatecart','locale',null)}
 						</button>
 
 						<isordertotals p_lineitemctnr="${pdict.Basket}" p_totallabel="${Resource.msg('global.estimatedtotal','locale',null)}" />
 					</div>
 					<div class="cart-coupon-code">
-						<label for="${pdict.CurrentForms.cart.couponCode.htmlName}">
+						<label for="${session.forms.cart.couponCode.htmlName}">
 							${Resource.msg('cart.entercouponcode','checkout',null)}
 						</label>
 
-						<input type="text" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" />
+						<input type="text" name="${session.forms.cart.couponCode.htmlName}" id="${session.forms.cart.couponCode.htmlName}" />
 
-						<button type="submit" value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon">
+						<button type="submit" value="${session.forms.cart.addCoupon.htmlName}" name="${session.forms.cart.addCoupon.htmlName}" id="add-coupon">
 							${Resource.msg('global.apply','locale',null)}
 						</button>
 						<isif condition="${pdict.CouponError && pdict.CouponError=='COUPON_CODE_MISSING'}">
@@ -787,11 +787,11 @@
 							</div>
 						<iselseif condition="${pdict.CouponError && pdict.CouponError=='NO_ACTIVE_PROMOTION'}">
 							<div class="error">
-								${Resource.msgf("cart.NO_ACTIVE_PROMOTION", "checkout", "", pdict.CurrentForms.cart.couponCode.htmlValue)}
+								${Resource.msgf("cart.NO_ACTIVE_PROMOTION", "checkout", "", session.forms.cart.couponCode.htmlValue)}
 							</div>				
 						<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
 							<div class="error">
-								${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}
+								${Resource.msgf('cart.' + pdict.CouponStatus.code,'checkout', null, session.forms.cart.couponCode.htmlValue)}
 							</div>
 						</isif>
 					</div>
@@ -810,23 +810,23 @@
 		<div class="cart-actions">
 
 			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
-			<form class="cart-action-checkout" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
+			<form class="cart-action-checkout" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${session.forms.cart.dynamicHtmlName}" id="checkout-form">
 				<fieldset>
 					<isif condition="${enableCheckout}">
-						<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+						<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${session.forms.cart.checkoutCart.htmlName}">
 							${Resource.msg('global.checkout','locale',null)}
 						</button>
 					<iselse/>
-						<button class="button-fancy-large" disabled="disabled" type="submit" value="${Resource.msg('global.checkout','locale',null)}"	name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+						<button class="button-fancy-large" disabled="disabled" type="submit" value="${Resource.msg('global.checkout','locale',null)}"	name="${session.forms.cart.checkoutCart.htmlName}">
 							${Resource.msg('global.checkout','locale',null)}
 						</button>
 					</isif>
 				</fieldset>
 			</form>
 
-			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.http('Cart-SubmitForm')}" method="post" name="${session.forms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
-					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
+					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${session.forms.cart.continueShopping.htmlName}">
 						&#171; ${Resource.msg('global.continueshopping','locale',null)}
 					</button>
 				</fieldset>

@@ -23,17 +23,17 @@
 					<div class="error-form">${Resource.msg('accountlogin.ordererror','account',null)}</div>
 				</isif>				
 		
-				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.ordertrack.htmlName}">
+				<form action="${URLUtils.https('Account-LoginForm')}" method="post" id="${session.forms.ordertrack.htmlName}">
 					<fieldset>
 					
-						<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderNumber}" type="input"/>
+						<isinputfield formfield="${session.forms.ordertrack.orderNumber}" type="input"/>
 
-						<isinputfield formfield="${pdict.CurrentForms.ordertrack.orderEmail}" type="input"/>
+						<isinputfield formfield="${session.forms.ordertrack.orderEmail}" type="input"/>
 						
-						<isinputfield formfield="${pdict.CurrentForms.ordertrack.postalCode}" type="input"/>
+						<isinputfield formfield="${session.forms.ordertrack.postalCode}" type="input"/>
 						
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('accountlogin.orderbutton','account',null)}" name="${pdict.CurrentForms.ordertrack.findorder.htmlName}">
+							<button type="submit" value="${Resource.msg('accountlogin.orderbutton','account',null)}" name="${session.forms.ordertrack.findorder.htmlName}">
 								${Resource.msg('accountlogin.orderbutton','account',null)}
 							</button>
 						</div>
@@ -56,14 +56,14 @@
 			<div class="login-box-content clearfix">			
 				<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>				
 			
-				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.login.htmlName}_register">
+				<form action="${URLUtils.https('Account-LoginForm')}" method="post" id="${session.forms.login.htmlName}_register">
 					<fieldset>
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}">
+							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.login.register.htmlName}">
 								${Resource.msg('global.createnowbutton','locale',null)}
 							</button>
 						</div>
-						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+						<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
 					</fieldset>
 				</form>
 			

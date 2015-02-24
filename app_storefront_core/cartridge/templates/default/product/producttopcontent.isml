@@ -1,9 +1,9 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>In the product pipeline, if a product was not found for the selected attributes, we need to refresh the ProductVariationModel using the default selected variant</iscomment>
 
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+<isset name="isQuickView" value="${request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart' || request.httpParameterMap.source.stringValue == 'giftregistry' || request.httpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 
-<isif condition="${isQuickView && pdict.CurrentHttpParameterMap.source.stringValue != 'cart'}">
+<isif condition="${isQuickView && request.httpParameterMap.source.stringValue != 'cart'}">
 	<div class="quick-view-navigation">
 		<button class="quickview-prev">< ${Resource.msg('global.previous','locale',null)}</button>
 		<button class="quickview-next" style="float:right">${Resource.msg('global.next','locale',null)} ></button>

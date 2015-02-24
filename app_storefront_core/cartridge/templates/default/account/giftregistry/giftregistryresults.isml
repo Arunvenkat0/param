@@ -41,12 +41,12 @@
 				${Resource.msg('giftregistryresults.emptymessage','account',null)}
 				"
 
-			<isif condition="${pdict.CurrentForms.productlists.search.registrantFirstName.value != null}">
-				<isprint value="${pdict.CurrentForms.productlists.search.registrantFirstName.value}"/>
+			<isif condition="${session.forms.productlists.search.registrantFirstName.value != null}">
+				<isprint value="${session.forms.productlists.search.registrantFirstName.value}"/>
 			</isif>
 							
-			<isif condition="${pdict.CurrentForms.productlists.search.registrantLastName.value != null}">
-				<isprint value="${pdict.CurrentForms.productlists.search.registrantLastName.value}"/>
+			<isif condition="${session.forms.productlists.search.registrantLastName.value != null}">
+				<isprint value="${session.forms.productlists.search.registrantLastName.value}"/>
 			</isif>
 			
 				"

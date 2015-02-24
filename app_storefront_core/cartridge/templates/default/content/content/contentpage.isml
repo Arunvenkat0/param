@@ -6,7 +6,7 @@
 	<isset name="DecoratorTemplate" value="search/pt_contentsearchresult" scope="page"/>
 </isif>
 
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+<isif condition="${request.httpParameterMap.format.stringValue == 'ajax'}">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 

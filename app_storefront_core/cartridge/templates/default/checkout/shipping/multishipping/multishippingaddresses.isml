@@ -15,7 +15,7 @@
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="1" multishipping="true"/>
    	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
-	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.multishipping.addressSelection.htmlName}" class="checkout-multi-shipping address">
+	<form action="${URLUtils.https('COShippingMultiple-MultiShippingAddresses')}" method="post" id="${session.forms.multishipping.addressSelection.htmlName}" class="checkout-multi-shipping address">
 	<div class="checkoutmultishipping">
 		<table class="item-list"  cellspacing="0">
 			<thead>
@@ -27,7 +27,7 @@
 			</thead>
 			<tbody>
 				<iscomment>Product line items (provide address selection for each)</iscomment>
-				<isloop items="${pdict.CurrentForms.multishipping.addressSelection.quantityLineItems}" var="listItem" status="loopstate">
+				<isloop items="${session.forms.multishipping.addressSelection.quantityLineItems}" var="listItem" status="loopstate">
 					<isset name="quantityLI" value="${listItem.object}" scope="page"/>
 					<isset name="quantityLIproduct" value="${dw.catalog.ProductMgr.getProduct(listItem.object.productID)}" scope="page"/>
 					<tr class="cart-row <isif condition="${loopstate.first}"> first </isif>">
@@ -202,14 +202,14 @@
 			</tfoot>
 		</table>
 		<div class="formactions">
-			<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.multishipping.addressSelection.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
+			<button class="button-fancy-large" type="submit" name="${session.forms.multishipping.addressSelection.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 		</div><!-- END: formactions -->
 	</div><!-- END: multishipaddresses -->
 	</form>
 </div><!-- END: checkout -->
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.profile.address;
+	var addressForm = session.forms.profile.address;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

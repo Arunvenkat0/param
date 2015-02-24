@@ -6,62 +6,62 @@
 	The dialog supports editing an existing address and removing an address.
 </iscomment>
 <div id="AddressForm" class="edit_address_form" >
-	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.continueURL()}">
+	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.https('COBilling-EditBillingAddress')}">
 		<fieldset>
 			<div id="editprofile" class="editaddress">
 				<div class="keynote">
 					<span class="required">*</span><strong>${Resource.msg('global.requiredfield','locale',null)}</strong></strong>
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.firstName}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.firstName}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.lastName}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.lastName}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address1}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.address1}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address2}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.address2}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.country}" type="select"/>
+					<isinputfield formfield="${session.forms.billingaddress.country}" type="select"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.states.state}" type="select"/>
+					<isinputfield formfield="${session.forms.billingaddress.states.state}" type="select"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.city}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.city}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.postal}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.postal}" type="input"/>
 
 				</div>
 				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.phone}" type="input"/>
+					<isinputfield formfield="${session.forms.billingaddress.phone}" type="input"/>
 
 				</div>
 			</div>
 		</fieldset>
 		<fieldset>
 			<div class="actions clearfix">
-				<button id="dialogApplyBtn" name="${pdict.CurrentForms.billingaddress.apply.htmlName}" type="button" value="${Resource.msg('global.apply', 'locale', null)}"><span>${Resource.msg('global.apply', 'locale', null)}</span></button>
+				<button id="dialogApplyBtn" name="${session.forms.billingaddress.apply.htmlName}" type="button" value="${Resource.msg('global.apply', 'locale', null)}"><span>${Resource.msg('global.apply', 'locale', null)}</span></button>
 				<button id="dialogCancelBtn" type="button" value="${Resource.msg('global.cancel', 'locale', null)}"><span>${Resource.msg('global.cancel', 'locale', null)}</span></button>
-				<button id="dialogDeleteBtn" name="${pdict.CurrentForms.billingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
+				<button id="dialogDeleteBtn" name="${session.forms.billingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
 			</div>
 
 		</fieldset>
 	</form>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.billingaddress;
+	var addressForm = session.forms.billingaddress;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

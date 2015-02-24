@@ -37,7 +37,7 @@
 				<nav>
 					<h1 class="visually-hidden">${Resource.msg('global.secondarynavheading','locale',null)}</h1>
 					<div class="secondary-navigation">
-						<isif condition="${pdict.CurrentCustomer.registered}">
+						<isif condition="${customer.registered}">
 							<iscontentasset aid="account-nav-registered"/>
 						<iselse/>
 							<iscontentasset aid="account-nav-unregistered"/>

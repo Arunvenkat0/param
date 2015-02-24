@@ -1,6 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24" varyby="price_promotion"/>
-<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || (pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' && empty(pdict.CurrentHttpParameterMap.format))}" scope="page"/>
+<isset name="isQuickView" value="${request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart' || request.httpParameterMap.source.stringValue == 'giftregistry' || (request.httpParameterMap.source.stringValue == 'wishlist' && empty(request.httpParameterMap.format))}" scope="page"/>
 
 <isobject object="${pdict.Product}" view="detail">
 	<div id="pdpMain" class="pdp-main"  itemscope itemtype="http://schema.org/Product">				

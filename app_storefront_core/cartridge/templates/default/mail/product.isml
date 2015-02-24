@@ -15,8 +15,8 @@
 				<table  style="${Resource.msg('email.containertable','email',null)}">
 					<tr>
 						<td colspan="2" style="${Resource.msg('email.tablecell','email',null)}">
-							<p><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></p>
-							<p><a href='<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlValue}"/></a></p>
+							<p><isprint value="${session.forms.sendtofriend.message.htmlValue}"/></p>
+							<p><a href='<isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${session.forms.sendtofriend.messagelinktext.htmlValue}"/></a></p>
 						</td>
 					</tr>
 					<tr>

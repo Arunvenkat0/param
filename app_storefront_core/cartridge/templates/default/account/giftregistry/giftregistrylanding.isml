@@ -35,14 +35,14 @@
 			<div class="login-box-content">
 				<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>
 
-				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.login.htmlName}_register">
+				<form action="${URLUtils.https('GiftRegistry-SubmitFormLanding')}" method="post" id="${session.forms.login.htmlName}_register">
 					<fieldset>
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}">
+							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.login.register.htmlName}">
 								${Resource.msg('global.createnowbutton','locale',null)}
 							</button>
 						</div>
-						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+						<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
 					</fieldset>
 				</form>
 

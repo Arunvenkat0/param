@@ -12,11 +12,11 @@
 				<th>${Resource.msg('registrylist.dateheader','account',null)}</th>
 			</tr>
 			
-			<isloop items="${pdict.CurrentForms.productlists.items}" var="item" status="loopstate">
+			<isloop items="${session.forms.productlists.items}" var="item" status="loopstate">
 			
 			<tr <isif condition="${loopstate.first}">class="first"<iselseif condition="${loopstate.last}">class="last"</isif>>
 				<td>
-					<form action="${URLUtils.continueURL()}" method="post" id="${'RegistrySelect_' + item.object.UUID}">
+					<form action="${URLUtils.https('GiftRegistry-SelectProductListInteraction')}" method="post" id="${'RegistrySelect_' + item.object.UUID}">
 						<fieldset>
 							<input type="hidden" name="${item.select.htmlName}"/>
 							<button type="submit" class="button-secondary" name="${'RegistrySelect_' + item.object.UUID}">

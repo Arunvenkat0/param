@@ -6,7 +6,7 @@
 
 		<isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
-		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}_navigation">
+		<form action="${URLUtils.httpsContinue()}" method="post" id="${session.forms.giftregistry.htmlName}_navigation">
 			<isif condition="${pdict.ProductList != null}">
 				<isset name="currentpage" value="shipping" scope="pdict" />
 				<div class="page-content-tab-navigaton">
@@ -17,7 +17,7 @@
 
 	<div class="page-content-tab-wrapper">
 
-		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}" name="${pdict.CurrentForms.giftregistry.htmlName}">
+		<form action="${URLUtils.https('GiftRegistry-EditAddresses')}" method="post" id="${session.forms.giftregistry.htmlName}" name="${session.forms.giftregistry.htmlName}">
 
 			<h2>${Resource.msg('addresses.beforeheader','account',null)}</h2>
 
@@ -30,23 +30,23 @@
 				<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</legend>
 
-			<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+			<isif condition="${customer.profile.addressBook.addresses.size() > 0}">
 
 				<div class="select-address">
 
 					<div class="form-row">
 
-						<label for="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}">
+						<label for="${session.forms.giftregistry.eventaddress.addressBeforeList.htmlName}">
 							${Resource.msg('global.selectaddress','locale',null)}
 						</label>
 
-						<select name="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}" id="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}" class="input-select">
+						<select name="${session.forms.giftregistry.eventaddress.addressBeforeList.htmlName}" id="${session.forms.giftregistry.eventaddress.addressBeforeList.htmlName}" class="input-select">
 							<option value="" selected="selected">Select</option>
-							<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
+							<isif condition="${customer.profile.addressBook.addresses.size() == 0}">
 								<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
 							<iselse/>
-								<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
-									<isif condition="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlValue == address.ID}">
+								<isloop items="${customer.profile.addressBook.addresses}" var="address">
+									<isif condition="${session.forms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlValue == address.ID}">
 										<option value="${address.ID}" selected="selected">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
 									<iselse/>
 										<option value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
@@ -62,13 +62,13 @@
 			</isif>
 
 
-				<input type="hidden" name="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlName}" value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value}"/>
+				<input type="hidden" name="${session.forms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlName}" value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.addressid.value}"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.firstname}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.firstname}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.lastname}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.lastname}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address1}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.address1}" type="input"/>
 
 				<div class="form-field-tooltip  with-helper-text">
 					(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
@@ -79,17 +79,17 @@
 					</a>)
 				</div>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address2}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.address2}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.country}" type="select"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.country}" type="select"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.states.state}" type="select"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.states.state}" type="select"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.city}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.city}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.postal}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.postal}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.phone}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressBeforeEvent.phone}" type="input"/>
 
 				<div class="form-field-tooltip  with-helper-text">
 					(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
@@ -116,23 +116,23 @@
 					<button type="button" class="usepreevent">${Resource.msg('address.usepreevent', 'account', null)}</button>
 				</div>
 				
-				<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+				<isif condition="${customer.profile.addressBook.addresses.size() > 0}">
 
 					<div class="select-address">
 
 						<div class="form-row">
 
-							<label for="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}">
+							<label for="${session.forms.giftregistry.eventaddress.addressBeforeList.htmlName}">
 								${Resource.msg('global.selectaddress','locale',null)}
 							</label>
 
-							<select name="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterList.htmlName}" id="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterList.htmlName}" class="input-select">
+							<select name="${session.forms.giftregistry.eventaddress.addressAfterList.htmlName}" id="${session.forms.giftregistry.eventaddress.addressAfterList.htmlName}" class="input-select">
 								<option value="" selected="selected">Select</option>
-								<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
+								<isif condition="${customer.profile.addressBook.addresses.size() == 0}">
 									<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
 								<iselse/>
-									<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
-										<isif condition="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlValue == address.ID}">
+									<isloop items="${customer.profile.addressBook.addresses}" var="address">
+										<isif condition="${session.forms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlValue == address.ID}">
 											<option value="${address.ID}" selected="selected">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
 										<iselse/>
 											<option value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/></option>
@@ -148,13 +148,13 @@
 				</isif>
 
 
-				<input type="hidden" name="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlName}" value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value}"/>
+				<input type="hidden" name="${session.forms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlName}" value="${session.forms.giftregistry.eventaddress.addressAfterEvent.addressid.value}"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.firstname}" type="input">
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.firstname}" type="input">
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.lastname}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.lastname}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address1}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.address1}" type="input"/>
 
 				<div class="form-field-tooltip  with-helper-text">
 					(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
@@ -165,17 +165,17 @@
 					</a>)
 				</div>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address2}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.address2}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.country}" type="select"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.country}" type="select"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.states.state}" type="select"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.states.state}" type="select"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.city}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.city}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.postal}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.postal}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.phone}" type="input"/>
+				<isinputfield formfield="${session.forms.giftregistry.eventaddress.addressAfterEvent.phone}" type="input"/>
 
 			    <div class="form-field-tooltip  with-helper-text">
 			    	(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
@@ -188,10 +188,10 @@
 
 				<div class="form-row form-row-button">
 					<isif condition="${pdict.ProductList == null}">
-						<button class="previous cancel" type="submit" value="&laquo; ${Resource.msg('global.previous','locale',null)}" name="${pdict.CurrentForms.giftregistry.eventaddress.back.htmlName}"><span>&laquo; ${Resource.msg('global.previous','locale',null)}</span></button>
-						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}">${Resource.msg('global.continue','locale',null)}</button>
+						<button class="previous cancel" type="submit" value="&laquo; ${Resource.msg('global.previous','locale',null)}" name="${session.forms.giftregistry.eventaddress.back.htmlName}"><span>&laquo; ${Resource.msg('global.previous','locale',null)}</span></button>
+						<button type="submit" name="${session.forms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.continue','locale',null)}">${Resource.msg('global.continue','locale',null)}</button>
 					<iselse/>
-						<button type="submit" name="${pdict.CurrentForms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}">${Resource.msg('global.apply','locale',null)}</button>
+						<button type="submit" name="${session.forms.giftregistry.eventaddress.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}">${Resource.msg('global.apply','locale',null)}</button>
 					</isif>
 				</div>
 
@@ -202,7 +202,7 @@
 	</div>
 <isscript>
 	importScript("util/ViewHelpers.ds");
-	var addressForm = pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent;
+	var addressForm = session.forms.giftregistry.eventaddress.addressBeforeEvent;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>

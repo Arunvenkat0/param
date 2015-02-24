@@ -44,7 +44,7 @@
 			<isif condition="${pdict.p_showshipmentinfo}">
 				<iscomment>the url to edit shipping depends on the checkout scenario</iscomment>
 				<isset name="editUrl" value="${URLUtils.https('COShipping-Start')}" scope="page"/>
-				<isif condition="${pdict.CurrentForms.multishipping.entered.value}">
+				<isif condition="${session.forms.multishipping.entered.value}">
 					<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-StartShipments')}" scope="page"/>
 				</isif>
 				<isloop items="${LineItemCtnr.shipments}" var="Shipment" status="loopstatus">

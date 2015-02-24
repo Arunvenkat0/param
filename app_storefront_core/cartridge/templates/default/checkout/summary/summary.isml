@@ -13,7 +13,7 @@
 
 	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
 	
-	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
+	<isif condition="${!session.forms.multishipping.entered.value}">
     	<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	<iselse/>
 		<ischeckoutprogressindicator step="4" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>

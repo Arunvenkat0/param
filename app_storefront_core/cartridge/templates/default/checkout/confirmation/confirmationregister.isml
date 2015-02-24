@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment> TEMPLATENAME: confirmationregister.isml </iscomment>
 <iscomment>Provide a create account form for unregistered customers</iscomment>
-<isif condition="${!pdict.CurrentCustomer.authenticated}">
+<isif condition="${!customer.authenticated}">
 
 	<div class="login-box login-create-account clearfix">	
 	
@@ -13,14 +13,14 @@
 				
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 				<fieldset>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
-					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
-					<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>	
+					<isinputfield formfield="${session.forms.profile.customer.firstname}" type="input"/>
+					<isinputfield formfield="${session.forms.profile.customer.lastname}" type="input"/>
+					<isinputfield formfield="${session.forms.profile.customer.email}" type="input"/>
+					<isinputfield formfield="${session.forms.profile.customer.emailconfirm}" type="input"/>
+					<isinputfield formfield="${session.forms.profile.login.password}" type="password"/>
+					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password"/>
+					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
+					<input type="hidden" name="${session.forms.profile.secureKeyHtmlName}" value="${session.forms.profile.secureKeyValue}"/>	
 				</fieldset>
 			</form>
 			

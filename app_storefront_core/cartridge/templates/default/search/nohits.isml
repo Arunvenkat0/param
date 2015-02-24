@@ -38,7 +38,7 @@
 					    // instantiate and configure the SuggestModel
 					    var suggestModel = new dw.suggest.SuggestModel();
 					    // set search phrase
-					    suggestModel.setSearchPhrase(pdict.CurrentHttpParameterMap.q.value);
+					    suggestModel.setSearchPhrase(request.httpParameterMap.q.value);
 					</isscript>
 					<isif condition="${suggestModel != null}">          
 					    <!-- get some suggested content -->
