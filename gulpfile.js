@@ -196,7 +196,11 @@ gulp.task('css:styleguide', function () {
 });
 
 gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide', 'connect:styleguide'], function () {
-	gulp.watch('styleguide/scss/*.scss', ['css:styleguide']);
+	var styles = paths.css.map(function (path) {
+		return path.src + '*.scss';
+	});
+	styles.push('styleguide/scss/*.scss');
+	gulp.watch(styles, ['css:styleguide']);
 });
 
 // deploy to github pages
