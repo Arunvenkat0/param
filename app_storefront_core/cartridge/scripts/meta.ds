@@ -2,20 +2,39 @@
  * @module meta
  */
 
+var HOME_BREADCRUMB = {
+    name : dw.web.Resource.msg('global.home','locale',null),
+    url  : dw.web.URLUtils.httpHome()
+};
+
+/**
+ * Constructor for metadata singleton
+ *
+ * This should be initialized via the current context object (product, category, asset or folder) and can
+ * be used to retrieve the page metadata, breadcrumbs and to render the accumulated information to the client
+ */
 var Meta = function(){
     this.data = {
         page : {
             title : "",
             description :"",
             keywords : ""
-        }
+        },
+        // supports elements with properties name and url
+        breadcrumbs : [ HOME_BREADCRUMB ]
     }
 }
 
 Meta.prototype = {
+    /**
+     * The core contion of the class which updates the internal data represenation with teh given information
+     *
+     * @param  {Object|dw.catalog.Product|dw.catalog.Category|dw.content.Content|dw.content.Folder} object The object to update with
+     */
     update : function(object){
         // check if it is a system object
         if(object.class){
+            // update metadata
             var title = object.pageTitle;
             if(!title && "name" in object){
                 title = object.name;
@@ -31,6 +50,22 @@ Meta.prototype = {
             }
 
             this.updatePageMetaData();
+
+            // update breadcrumbs
+            if(object.class == '[JavaClass dw.content.Content]'){
+                var path = require('~/cartridge/scripts/object/Content').get(object).getFolderPath();
+                this.data.breadcrumbs = path.map(function(folder){
+                    return {
+                        name : folder.displayName
+                    }
+                });
+                this.data.breadcrumbs.unshift(HOME_BREADCRUMB);
+                this.data.breadcrumbs.push({
+                    name : object.name,
+                    url : dw.web.URLUtils.url('Page-Show','cid',object.ID)
+                });
+                dw.system.Logger.debug("Content breadcrumbs calculated: "+JSON.stringify(this.data.breadcrumbs));
+            }
         }else{
             if(object.pageTitle){
                 this.data.page.title = object.pageTitle;
@@ -44,12 +79,28 @@ Meta.prototype = {
             // @TODO do an _.extend(this.data, object) of the passed object
         }
     },
+    /**
+     * Update the Page Metadata with the current internal data
+     */
     updatePageMetaData : function(){
         var pageMetaData = request.pageMetaData;
         pageMetaData.title = this.data.page.title;
         pageMetaData.keywords = this.data.page.keywords;
         pageMetaData.description = this.data.page.description;
     },
+    /**
+     * Get teh breadcrumbs for the current page
+     *
+     * @return {Array} an array containing the breadcrumb items
+     */
+    getBreadcrumbs : function(){
+        return this.data.breadcrumbs || [];
+    },
+    /**
+     * Dumps the internally held data into teh DOM
+     *
+     * @return {String} A div with a data attribute containing all data as JSON
+     */
     renderClientData : function(){
         return '<div class="page-context" data-dw-context="'+JSON.stringify(this.data)+'" />'
     }

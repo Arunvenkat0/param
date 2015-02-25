@@ -29,7 +29,9 @@ function show()
 
     response.renderTemplate(content.template || 'content/content/contentpage', {
         Content: content,
-        ContentSearchResult: ContentSearchResult
+        ContentSearchResult: ContentSearchResult,
+        // @FIXME This should not be required, but a require in the template will create a new meta instance
+        Meta: require('~/cartridge/scripts/meta')
     });
 }
 

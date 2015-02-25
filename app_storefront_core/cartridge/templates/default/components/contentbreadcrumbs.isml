@@ -1,10 +1,11 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<div class="breadcrumb">
-	<iscomment>HOME BREADCRUMB</iscomment>
-	<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home','locale',null)}">${Resource.msg('global.home','locale',null)}</a>
 
-	<iscomment> SHOW CONTENT NAME </iscomment>
-	<isif condition="${pdict.Content != null}">
-		<a class="breadcrumb-element" href="${URLUtils.url('Page-Show','cid',pdict.Content.ID)}" title="${pdict.Content.name}">${pdict.Content.name}</a>
-	</isif>
+<div class="breadcrumb">
+	<isloop iterator="${pdict.Meta.getBreadcrumbs()}" alias="Item">
+        <isif condition="${Item.url}">
+	        <a href="${Item.url}" class="breadcrumb-element" title="${Item.name}">${Item.name}</a>
+        <iselse>
+            <span>${item.name}</span>
+        </isif>
+    </isloop>
 </div><!-- END: breadcrumb -->
