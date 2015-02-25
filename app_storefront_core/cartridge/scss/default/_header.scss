@@ -198,7 +198,7 @@ nav[role="navigation"] {
 		}
 	}
 	a {
-		color: $mantis;
+		color: $citrus;
 		display: block;
 		font-size: 1.2em;
 		padding: 0.9rem 1rem;
@@ -220,7 +220,7 @@ nav[role="navigation"] {
 		border: none;
 	}
 	.menu-item-toggle {
-		color: $mantis;
+		color: $citrus;
 		cursor: pointer;
 		float: left;
 		line-height: 1.1;
@@ -259,7 +259,7 @@ nav[role="navigation"] {
 				width: 100%;
 			}
 			&:hover {
-				background-color: darken($mantis, 10%);
+				background-color: darken($citrus, 10%);
 				color: $white;
 			}
 		}
@@ -290,7 +290,7 @@ nav[role="navigation"] {
 			display: block;
 		}
 		a {
-			color: $mantis;
+			color: $citrus;
 			&:hover {
 				text-decoration: underline;
 			}
@@ -345,7 +345,7 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		display: block;
 		a {
-			color: darken($mantis, 20%);
+			color: darken($citrus, 20%);
 			font-weight: normal;
 			font-size: 1em;
 			padding: 0;
