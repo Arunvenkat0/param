@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
-	<field formid="state" label="forms.state" type="string" mandatory="true" binding="stateCode" missing-error="forms.address.state.missing" value-error="forms.address.field.invalid">
+	<field formid="state" label="resource.state" type="string" mandatory="true" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
 			
-			<option optionid="" 	label="forms.select" 		value=""/>
+			<option optionid="" 	label="resource.select" 		value=""/>
 			
 			<!-- regular US states -->
 			<option optionid="AL" 	label="state.us.alabama" 		value="AL"/>
@@ -93,10 +93,10 @@
 	</field>
 	
 	
-	<field formid="stateUS" label="forms.state" type="string" mandatory="false" binding="stateCodeUS" missing-error="forms.address.state.missing" value-error="forms.address.field.invalid">
+	<field formid="stateUS" label="resource.state" type="string" mandatory="false" binding="stateCodeUS" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
 			
-			<option optionid="" 	label="forms.select" 		value=""/>
+			<option optionid="" 	label="resource.select" 		value=""/>
 			
 			<!-- regular US states -->
 			<option optionid="AL" 	label="state.us.alabama" 		value="AL"/>
@@ -167,10 +167,10 @@
 		</options>	
 	</field>
 	
-	<field formid="stateCA" label="forms.province" type="string" mandatory="false" binding="stateCodeCA" missing-error="forms.address.state.missing" value-error="forms.address.field.invalid">
+	<field formid="stateCA" label="resource.province" type="string" mandatory="false" binding="stateCodeCA" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
 			
-			<option optionid="" 	label="forms.select" 		value=""/>
+			<option optionid="" 	label="resource.select" 		value=""/>
 			
 			<!-- Canadian provinces and territories -->
 			
@@ -190,10 +190,10 @@
 			
 		</options>	
 	</field>
-	<field formid="stateUSCA" label="forms.stateprovince" type="string" mandatory="true" binding="stateCode" missing-error="forms.address.state.missing" value-error="forms.address.field.invalid">
+	<field formid="stateUSCA" label="resource.stateprovince" type="string" mandatory="true" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
 			
-			<option optionid="" 	label="forms.select" 		value=""/>
+			<option optionid="" 	label="resource.select" 		value=""/>
 			
 			<!-- regular US states -->
 			<option optionid="AL" 	label="state.us.alabama" 		value="AL"/>
@@ -281,10 +281,10 @@
 			
 		</options>	
 	</field>
-	<field formid="stateDE" label="forms.state.other" type="string" mandatory="false" binding="stateCodeDE" missing-error="forms.address.state.missing" value-error="forms.address.field.invalid">
+	<field formid="stateDE" label="resource.state.other" type="string" mandatory="false" binding="stateCodeDE" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
 			
-			<option optionid="" 	label="forms.select" 		value=""/>					
+			<option optionid="" 	label="resource.select" 		value=""/>					
 			
 			<!-- Other -->
 			<option optionid="OTHER" label="state.us.other" 	value="OTHER"/>

@@ -13,7 +13,7 @@
 	    missing-error="creditcard.numbermissingerror" value-error="creditcard.numbervalueerror"/>
 
 	<!-- field for credit card expiration month -->
-    <field formid="month" label="forms.month" type="integer" mandatory="true" binding="creditCardExpirationMonth"
+    <field formid="month" label="resource.month" type="integer" mandatory="true" binding="creditCardExpirationMonth"
       	missing-error="creditcard.monthmissingerror" value-error="creditcard.yearvalueerror">
         <options>
             <option label="month.january" 	value="01"/>
@@ -35,7 +35,7 @@
 		field for credit card expiration year; 
 		a value error (credit card is expired is only displayed for this field) 
 	-->
-    <field formid="year" label="forms.year" type="integer" mandatory="true" binding="creditCardExpirationYear"
+    <field formid="year" label="resource.year" type="integer" mandatory="true" binding="creditCardExpirationYear"
       	missing-error="creditcard.yearmissingerror">
         <options>
             <option optionid="2015" label="year.2015" value="2015"/>

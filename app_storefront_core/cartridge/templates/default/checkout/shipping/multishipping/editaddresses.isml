@@ -37,7 +37,7 @@
 			<div class="form-row">
 				<label for="${pdict.CurrentForms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
 				</label> <select class="input-select-multiship" name="${addresses.htmlName}">
-					<option value="newAddress" selected="selected">${Resource.msg('forms.multishipping.editaddress.select.newaddress','forms',null)}</option>
+					<option value="newAddress" selected="selected">${Resource.msg('multishipping.editaddress.select.newaddress','forms',null)}</option>
 					<isloop items="${addresses.options}" var="option">
 						<isset name="address" value="${option.object}" scope="page" />
 						<isif condition="${!empty(address.ID)}">

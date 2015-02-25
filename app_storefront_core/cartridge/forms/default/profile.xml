@@ -16,7 +16,7 @@
 	
 		<field formid="username" 
 			label="label.username" 
-			description="forms.5_100characters" 
+			description="resource.5_100characters" 
 			type="string" 
 			mandatory="true" 
 			binding="login" 
@@ -24,11 +24,11 @@
 			parse-error="profile.usernameerror"
 			value-error="profile.usernametaken" />
 			   
-		<field formid="password" label="label.password" description="forms.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
-			   range-error="forms.8_255characters" />	
+		<field formid="password" label="label.password" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
+			   range-error="resource.8_255characters" />	
 		
 		<field formid="passwordconfirm" label="profile.passwordconfirm" type="string" mandatory="true" min-length="8" max-length="255"
-			   range-error="forms.8_255characters"	
+			   range-error="resource.8_255characters"	
 			   value-error="profile.passwordnomatch"/>
 			   
 		<field formid="question" label="profile.accountquestion" type="string" mandatory="true" binding="passwordQuestion">

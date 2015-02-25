@@ -2,21 +2,21 @@
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 
 	<list formid="items">
-			<action formid="select" valid-form="false" label="forms.select"/>
+			<action formid="select" valid-form="false" label="resource.select"/>
 	</list>
 
 	<group formid="search">
 
-		<field formid="registrantFirstName" label="forms.giftregistry.registrantFirstName" regexp="[^*?]*" type="string" mandatory="true"
-				parse-error="forms.giftregistry.registrantFirstName.parse-error"/>
+		<field formid="registrantFirstName" label="giftregistry.registrantFirstName" regexp="[^*?]*" type="string" mandatory="true"
+				parse-error="giftregistry.registrantFirstName.parse-error"/>
 
-		<field formid="registrantLastName" label="forms.giftregistry.registrantLastName" regexp="[^*?]*" type="string" mandatory="true"
-			missing-error="forms.giftregistry.registrantLastName.missing-error" parse-error="forms.giftregistry.registrantLastName.parse-error"/>
+		<field formid="registrantLastName" label="giftregistry.registrantLastName" regexp="[^*?]*" type="string" mandatory="true"
+			missing-error="giftregistry.registrantLastName.missing-error" parse-error="giftregistry.registrantLastName.parse-error"/>
 
-		<field formid="eventType" label="forms.giftregistry.eventType" type="string" mandatory="false"
-			missing-error="forms.giftregistry.eventType.missing-error">
+		<field formid="eventType" label="giftregistry.eventType" type="string" mandatory="false"
+			missing-error="giftregistry.eventType.missing-error">
 			<options>
-				<option optionid="blank" label="forms.select" value=""/>
+				<option optionid="blank" label="resource.select" value=""/>
 				<option optionid="wedding" label="giftregistry.wedding" value="Wedding"/>
 				<option optionid="weddingshower" label="giftregistry.weddingshower" value="Wedding Shower"/>
 				<option optionid="babyshower" label="giftregistry.babyshower" value="Baby Shower"/>
@@ -24,13 +24,13 @@
 			</options>
 		</field>
 
-		<field formid="eventName" label="forms.giftregistry.eventName" type="string" mandatory="false" />
+		<field formid="eventName" label="giftregistry.eventName" type="string" mandatory="false" />
 
-		<field formid="eventCity" label="forms.giftregistry.eventCity" type="string" mandatory="false" />
+		<field formid="eventCity" label="giftregistry.eventCity" type="string" mandatory="false" />
 
-		<field formid="eventState" label="forms.giftregistry.eventState" type="string" mandatory="false">
+		<field formid="eventState" label="giftregistry.eventState" type="string" mandatory="false">
 			<options>
-				<option optionid="" 	label="forms.select" 		value=""/>
+				<option optionid="" 	label="resource.select" 		value=""/>
 
 				<!-- regular US states -->
 				<option optionid="AL" 	label="state.us.alabama" 		value="AL"/>
@@ -118,9 +118,9 @@
 			</options>
 		</field>
 
-		<field formid="eventCountry" label="forms.giftregistry.eventCountry" type="string" mandatory="false">
+		<field formid="eventCountry" label="giftregistry.eventCountry" type="string" mandatory="false">
 			<options>
-				<option optionid="" 	label="forms.select"	value=""/>
+				<option optionid="" 	label="resource.select"	value=""/>
 				<option optionid="US" 	label="country.unitedstates"	value="US"/>
 				<option optionid="DE" 	label="country.germany" 	value="DE"/>
 				<option optionid="CA" 	label="country.canada" 	value="CA"/>

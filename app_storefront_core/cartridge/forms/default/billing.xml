@@ -13,19 +13,19 @@
 	</list>
 
 	<!-- form for creating and editing billing address -->
-	<group formid="billingAddress" form-error="forms.address.invalid" >
+	<group formid="billingAddress" form-error="address.invalid" >
 
 		<!-- use fields from billing address definition -->
 		<include formid="addressFields" name="billingaddress"/>
 
 		<!-- optional flags -->
-		<field formid="addToAddressBook" label="forms.checkout.addtoaddressbook" type="boolean" mandatory="false" />
-		<field formid="addToEmailList" label="forms.checkout.addtoemaillist" type="boolean" mandatory="false" />
+		<field formid="addToAddressBook" label="checkout.addtoaddressbook" type="boolean" mandatory="false" />
+		<field formid="addToEmailList" label="checkout.addtoemaillist" type="boolean" mandatory="false" />
 
 		<!-- email field is contained in separate form group to enable binding to customer profile -->
 		<group formid="email">
 			
-			<field formid="emailAddress" label="billing.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" binding="email" max-length="50" missing-error="forms.address.email.invalid" range-error="forms.address.email.invalid" parse-error="forms.address.email.invalid" value-error="forms.address.email.invalid"/>
+			<field formid="emailAddress" label="billing.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" binding="email" max-length="50" missing-error="address.email.invalid" range-error="address.email.invalid" parse-error="address.email.invalid" value-error="address.email.invalid"/>
 		
 		</group>
 	
