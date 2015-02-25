@@ -25,13 +25,13 @@ function show()
     var GetContentResultResult = SearchController.GetContentResult();
     var ContentSearchResult = GetContentResultResult.ContentSearchResult;
 
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(content);
-
+    require('~/cartridge/scripts/meta').update(content);
 
     response.renderTemplate(content.template || 'content/content/contentpage', {
         Content: content,
-        ContentSearchResult: ContentSearchResult
+        ContentSearchResult: ContentSearchResult,
+        // @FIXME This should not be required, but a require in the template will create a new meta instance
+        Meta: require('~/cartridge/scripts/meta')
     });
 }
 

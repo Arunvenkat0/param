@@ -1,0 +1,220 @@
+/** @module object/Product */
+
+var AbstractHelper = require('./AbstractHelper');
+
+/**
+ * Product helper providing enhanced product functionality
+ * @class module:object/Product~Product
+ */
+var Product = AbstractHelper.extend(
+/** @lends module:object/Product~Product.prototype */
+{
+	/**
+	 * Use this method to get a new instance for a given product.
+	 */
+	get : function(parameter) {
+		var obj = null;
+		if (typeof parameter === 'string') {
+			obj = dw.catalog.ProductMgr.getProduct(parameter);
+		} else if (typeof parameter === 'object') {
+			obj = parameter;
+		}
+		return new Product(obj);
+	},
+
+	getDefaultURL : function(httpProtocol) {
+		var product = this.object;
+		var protocol = httpProtocol || request.httpProtocol || 'http';
+		var productUrl = dw.web.URLUtils[protocol]('Product-Show', 'pid', product.ID);
+
+		return productUrl;
+	},
+
+	/**
+	 * Return the default variant or the first variant if none defined
+	 *
+	 * @param  {boolean} onlyAvailable If set to true only available products are returned
+	 * @return {dw.catalog.Product} the variant
+	 */
+	getDefaultVariant : function( onlyAvailable ) {
+		var product = this.object;
+		onlyAvailable = typeof onlyAvailable == 'undefined' ? true : onlyAvailable;
+		var firstProduct = !empty(product.getVariationModel().variants) ?
+								( product.getVariationModel().getDefaultVariant() || this.getDefaultVariant() ) :
+								null;
+		if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && this.getAvailabilityModel(firstProduct).availability == 0)) {
+			var variantsIterator = product.getVariants().iterator();
+			while(variantsIterator.hasNext()) {
+				var variant = variantsIterator.next();
+				if (variant.onlineFlag && this.getAvailabilityModel(variant).availability > 0) {
+					firstProduct = variant;
+					break;
+				}
+			}
+		}
+		return firstProduct;
+	},
+
+	/**
+	 * This function used to get selected ProductVariationAttributeValue
+	 *
+	 * @param {String} variationAttribute
+	 *
+	 * @returns {dw.catalog.ProductVariationAttributeValue}
+	 */
+	getSelectedAttributeValue : function( variationAttribute ) {
+		var pvm = this.isVariant() ? this.getMasterProduct().getVariationModel() : this.getVariationModel(),
+			pva = pvm.getProductVariationAttribute(variationAttribute),
+			selectedAttributeValue;
+
+		if (!empty(pva)) {
+			selectedAttributeValue = pvm.getSelectedValue(pva);
+			if (empty(selectedAttributeValue)) {
+				var variant;
+				if (this.isVariant()) {
+					variant = this.object;
+				} else {
+					if (!empty(pvm.defaultVariant)) {
+						variant = pvm.defaultVariant;
+					} else if (pvm.variants.length > 0) {
+						variant = pvm.variants[0];
+					}
+				}
+				if (!empty(variant)) {
+					selectedAttributeValue = pvm.getVariationValue(variant, pva);
+				}
+			}
+		}
+		return selectedAttributeValue;
+	},
+
+	/**
+	 * This function is used to get the product variant for the given custom attribute name and value
+	 *
+	 * @param {String} attrValue The custom attribute value
+	 * @param {String} attrName The custom attribute name
+	 *
+	 * @returns {dw.catalog.Product}
+	 */
+	getVariantForVariationAttributeValue : function(attrValue, attrName)  {
+		var variants,
+			newProduct = this.object;
+
+		if ("isVariant" in newProduct && newProduct.isVariant()) {
+			variants = newProduct.getVariationModel().getVariants();
+		} else {
+			variants = newProduct.getVariants();
+		}
+
+		if (empty(variants)) {
+			return newProduct;
+		}
+
+		for each (var variant in variants) {
+			if (variant.onlineFlag) {
+				newProduct = variant;
+				if (this.hasValue(variant.custom[attrName], attrValue)) {
+					break;
+				}
+			}
+		}
+
+		return newProduct;
+	},
+
+	/**
+	 * This function is used to check if the given object is equal or has the given value
+	 *
+	 * @param {Object} object The object can be a string or a dw.value.EnumValue
+	 * @param {String} value The value to check
+	 *
+	 * @returns {Boolean}
+	 */
+	hasValue : function(object, value) {
+		if (empty(value)) {
+			return true;
+		} else if (object == value) {
+			return true;
+		} else if (object[0] instanceof dw.value.EnumValue) {
+			// enumerate through the multiple values of the custom attribute
+			for each (var val in object) {
+				if (val == value) {
+					return true;
+				}
+			}
+		}
+		return false;
+	},
+
+	getStandardPrice : function(priceModel) {
+		var priceModel = priceModel || this.object.priceModel;
+		if ((typeof priceModel == 'undefined') || (priceModel == null) || !priceModel.getPrice().available) {
+			//There is currently no way to check if the list pricebook is actually
+			//assigned to the site.  Therefore, we do a sanity check:  If the
+			//product has no price according to standard price lookup rules,
+			//then we know the list price book is not assigned to the site.
+			//(The converse is not true so this check is not perfect.)
+			return dw.value.Money.NOT_AVAILABLE;
+		} else if (('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)) {
+			return priceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault);
+		} else {
+			return priceModel.getPrice();
+		}
+	},
+
+	getProductCategory : function() {
+		var product = this.object;
+
+		if(empty(product)) return null;
+
+		var masterProduct = product.isVariant() ? product.getVariationModel().getMaster() : product,
+			category = masterProduct && masterProduct.getPrimaryCategory(),
+			productCategories;
+
+		if ( category == null ) {
+			productCategories = masterProduct.getCategories().iterator();
+
+			if ( productCategories.hasNext() ) {
+				category = productCategories.next();
+			}
+		}
+
+		return category;
+	},
+
+    /**
+     * Function used to return the top-most category of the product
+     * @return {dw.catalog.Category}
+     */
+    getProductTopCategory : function() {
+        var category = this.getProductCategory();
+        if (category) {
+            while (category.parent && !category.parent.root) {
+                category = category.parent;
+            }
+        }
+        return category;
+    },
+
+    /**
+     * Function that returns a string that represents the category paths of that category up to the root category,
+     * also known as the 'breadcrumbs' in webpages
+     * @param category {dw.catalog.Category} The category of which to return the breadcrumbs
+     * @return {String}
+     */
+    getBreadcrumbs : function(category){
+        if (empty(category)) return null;
+
+        var categoryBreadcrambs = [];
+        while (category.ID != 'root') {
+            categoryBreadcrambs.unshift(category.displayName);
+            category = category.parent;
+        }
+
+        return categoryBreadcrambs.join(':').replace('&', '&amp;');
+    }
+
+});
+
+/** The product class */
+module.exports = new Product();

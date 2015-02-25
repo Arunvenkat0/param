@@ -1,0 +1,99 @@
+/** @module object/AbstractHelper */
+
+
+var Class = require('~/cartridge/scripts/util/Class').Class;
+
+/**
+ * Abstract class for all modules following the <strong>Global Helper Concept</strong>.
+ *
+ * @see https://loreal.atlassian.net/wiki/display/LOR/Global+Helpers+Concept
+ */
+var AbstractHelper = Class.extend(
+/** @lends module:util/helper/AbstractHelper~AbstractHelper.prototype */
+{
+	/** default JSON attribute name */
+	_defaultJSONField : "jsonData",
+
+	/**
+	 * Property holding the wrapped object which is initialized in the child classes. Usually
+	 *  the this.get() method is used to obtain a record
+	 */
+	object : null,
+
+	/**
+	 * AbstractHelper constructor
+	 * @constructs
+	 */
+	init : function(obj){
+		this.object = obj;
+		this._record = obj;
+		return this;
+	},
+
+	/**
+	 * Returns a wrapped object instance. This method needs to be implemented by the sub classes
+	 *
+	 * @abstract
+	 * @return {Void}
+	 */
+	get : function (parameter : Object) : Object {
+		Logger.warn("Generic helper access method 'get()' not implemented for subclass");
+		return new AbstractHelper({custom:{}});
+	},
+
+	/**
+	 * Get value from prepopulated object.
+	 * If the key is point-delimited trying to parse JSON
+	 * If not - trying to obtain a value from "custom" property of an object
+	 * @return {Object}
+	 */
+	getValue : function (key : String) : Object {
+		if (empty(key) || !this.object) {
+			return null;
+		}
+
+		// add any special value handling here (i.e. automatic handling of JSON)
+		value = this.object.custom[key];
+
+		return value;
+	},
+
+	/**
+	 * Set value to prepopulated object.
+	 * If the key is point-delimited trying to parse JSON and set up a target value
+	 * @return {Boolean}
+	 */
+	setValue : function (key : String, value : Object) : Boolean {
+		// this will works under trnasactional nodes
+		if (!this.object || empty(key)) {
+			return false;
+		}
+
+		try {
+			this.object.custom[key] = value;
+		} catch (e) {
+			return false;
+		}
+	},
+
+	/**
+	* Fallback to use wrapped object's native functions in case method is not defined.
+	* The logic will try to invoke method for this.object, and throw TypeError if the method does not exist
+	*
+	* @param {String} methodName
+	* @param {Array} methodArgs
+	*
+	* @return {*} Record function result (or exception if function not exists)
+	*
+	* @throws {TypeError}
+	*/
+	__noSuchMethod__ : function(methodName, methodArgs) {
+		if (methodName in this.object && 'function' === typeof this.object[methodName]) {
+			return this.object[methodName].apply(this.object, methodArgs);
+		}
+		// If we get here, the method hasn't been found
+		throw new TypeError;
+	}
+});
+
+module.exports = AbstractHelper;
