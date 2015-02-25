@@ -1,3 +1,4 @@
+'use strict';
 /** @module object/Product */
 
 var AbstractHelper = require('./AbstractHelper');
@@ -38,11 +39,11 @@ var Product = AbstractHelper.extend(
 	 */
 	getDefaultVariant : function( onlyAvailable ) {
 		var product = this.object;
-		onlyAvailable = typeof onlyAvailable == 'undefined' ? true : onlyAvailable;
+		onlyAvailable = typeof onlyAvailable === 'undefined' ? true : onlyAvailable;
 		var firstProduct = !empty(product.getVariationModel().variants) ?
 								( product.getVariationModel().getDefaultVariant() || this.getDefaultVariant() ) :
 								null;
-		if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && this.getAvailabilityModel(firstProduct).availability == 0)) {
+		if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && this.getAvailabilityModel(firstProduct).availability === 0)) {
 			var variantsIterator = product.getVariants().iterator();
 			while(variantsIterator.hasNext()) {
 				var variant = variantsIterator.next();
@@ -100,7 +101,7 @@ var Product = AbstractHelper.extend(
 		var variants,
 			newProduct = this.object;
 
-		if ("isVariant" in newProduct && newProduct.isVariant()) {
+		if ('isVariant' in newProduct && newProduct.isVariant()) {
 			variants = newProduct.getVariationModel().getVariants();
 		} else {
 			variants = newProduct.getVariants();
@@ -133,12 +134,12 @@ var Product = AbstractHelper.extend(
 	hasValue : function(object, value) {
 		if (empty(value)) {
 			return true;
-		} else if (object == value) {
+		} else if (object === value) {
 			return true;
 		} else if (object[0] instanceof dw.value.EnumValue) {
 			// enumerate through the multiple values of the custom attribute
 			for each (var val in object) {
-				if (val == value) {
+				if (val === value) {
 					return true;
 				}
 			}
@@ -147,8 +148,8 @@ var Product = AbstractHelper.extend(
 	},
 
 	getStandardPrice : function(priceModel) {
-		var priceModel = priceModel || this.object.priceModel;
-		if ((typeof priceModel == 'undefined') || (priceModel == null) || !priceModel.getPrice().available) {
+		priceModel = priceModel || this.object.priceModel;
+		if ((typeof priceModel === 'undefined') || (priceModel === null) || !priceModel.getPrice().available) {
 			//There is currently no way to check if the list pricebook is actually
 			//assigned to the site.  Therefore, we do a sanity check:  If the
 			//product has no price according to standard price lookup rules,
@@ -165,13 +166,15 @@ var Product = AbstractHelper.extend(
 	getProductCategory : function() {
 		var product = this.object;
 
-		if(empty(product)) return null;
+		if(empty(product)){
+			return null;
+		}
 
 		var masterProduct = product.isVariant() ? product.getVariationModel().getMaster() : product,
 			category = masterProduct && masterProduct.getPrimaryCategory(),
 			productCategories;
 
-		if ( category == null ) {
+		if ( category === null ) {
 			productCategories = masterProduct.getCategories().iterator();
 
 			if ( productCategories.hasNext() ) {
@@ -203,10 +206,12 @@ var Product = AbstractHelper.extend(
      * @return {String}
      */
     getBreadcrumbs : function(category){
-        if (empty(category)) return null;
+        if (empty(category)) {
+			return null;
+		}
 
         var categoryBreadcrambs = [];
-        while (category.ID != 'root') {
+        while (category.ID !== 'root') {
             categoryBreadcrambs.unshift(category.displayName);
             category = category.parent;
         }

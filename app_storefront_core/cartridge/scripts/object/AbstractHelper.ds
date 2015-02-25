@@ -1,3 +1,4 @@
+'use strict';
 /** @module object/AbstractHelper */
 
 
@@ -12,7 +13,7 @@ var AbstractHelper = Class.extend(
 /** @lends module:util/helper/AbstractHelper~AbstractHelper.prototype */
 {
 	/** default JSON attribute name */
-	_defaultJSONField : "jsonData",
+	_defaultJSONField : 'jsonData',
 
 	/**
 	 * Property holding the wrapped object which is initialized in the child classes. Usually
@@ -36,8 +37,8 @@ var AbstractHelper = Class.extend(
 	 * @abstract
 	 * @return {Void}
 	 */
-	get : function (parameter : Object) : Object {
-		Logger.warn("Generic helper access method 'get()' not implemented for subclass");
+	get : function () {
+		dw.system.Logger.warn('Generic helper access method "get()" not implemented for subclass');
 		return new AbstractHelper({custom:{}});
 	},
 
@@ -47,13 +48,13 @@ var AbstractHelper = Class.extend(
 	 * If not - trying to obtain a value from "custom" property of an object
 	 * @return {Object}
 	 */
-	getValue : function (key : String) : Object {
+	getValue : function (key) {
 		if (empty(key) || !this.object) {
 			return null;
 		}
 
 		// add any special value handling here (i.e. automatic handling of JSON)
-		value = this.object.custom[key];
+		var value = this.object.custom[key];
 
 		return value;
 	},
@@ -63,7 +64,7 @@ var AbstractHelper = Class.extend(
 	 * If the key is point-delimited trying to parse JSON and set up a target value
 	 * @return {Boolean}
 	 */
-	setValue : function (key : String, value : Object) : Boolean {
+	setValue : function (key, value) {
 		// this will works under trnasactional nodes
 		if (!this.object || empty(key)) {
 			return false;
@@ -92,7 +93,7 @@ var AbstractHelper = Class.extend(
 			return this.object[methodName].apply(this.object, methodArgs);
 		}
 		// If we get here, the method hasn't been found
-		throw new TypeError;
+		throw new TypeError();
 	}
 });
 

@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Module for category related functionality.
  *
@@ -16,7 +17,7 @@ var Category = AbstractHelper.extend(
 	/**
 	 * Use this method to get a new instance for a given category.
 	 */
-	get : function(parameter : Object) {
+	get : function(parameter) {
 		var obj = null;
 		if (typeof parameter === 'string') {
 			obj = dw.catalog.CatalogMgr.getCategory(parameter);
@@ -43,14 +44,14 @@ var Category = AbstractHelper.extend(
 	 * @param {Boolean} renderAllCategories Return all online subcategories if true.
 	 * @return {Array} subcategories  : Array Subcategories for menu
 	 */
-	getMenuCategories : function(renderAllCategories : Boolean) : Array {
+	getMenuCategories : function(renderAllCategories) {
 	    var subcategories = this.object.getOnlineSubCategories(),
-			result : Array = [];
+			result = [];
 		if (renderAllCategories) {
 			return subcategories;
 		}
 	    if( !empty( subcategories ) ){
-	        for each( let subcategory : dw.catalog.Category in subcategories ) {
+	        for each( let subcategory in subcategories ) {
 	        	if( ('showInMenu' in subcategory.custom) && subcategory.custom.showInMenu.valueOf() ) {
 	        		result.push(subcategory);
 	        	}
@@ -62,9 +63,9 @@ var Category = AbstractHelper.extend(
 	/**
 	Returns top level online categories list if exists, otherwise returns sibling online categories list if exists otherwise returns empty list
 	*/
-	getTopLevelCategories: function() {
-		if (this.object.getParent() != null) {
-			if (this.object.getParent().getParent() != null) {
+	getTopLevelCategories : function() {
+		if (this.object.getParent() !== null) {
+			if (this.object.getParent().getParent() !== null) {
 				return this.object.getParent().getParent().getOnlineSubCategories();
 			} else {
 				return this.object.getParent().getOnlineSubCategories();
@@ -82,8 +83,8 @@ var Category = AbstractHelper.extend(
  */
 Category.getTopLevelCategory = function() {
     var siteCatalog = dw.catalog.CatalogMgr.getSiteCatalog();
-    return (siteCatalog != null) ? siteCatalog.getRoot() : null;
-}
+    return (siteCatalog !== null) ? siteCatalog.getRoot() : null;
+};
 
 /** The category class */
 module.exports = new Category();

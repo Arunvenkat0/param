@@ -1,3 +1,4 @@
+'use strict';
 /** @module object/Profile */
 
 var AbstractHelper = require('./AbstractHelper');
@@ -71,7 +72,7 @@ var Profile = AbstractHelper.extend(
 	 */
 	isDefaultShippingAddress : function (address) {
 		var defaultShippingAddress = this.getDefaultShippingAddress();
-		return defaultShippingAddress && address && defaultShippingAddress.ID == address.ID;
+		return defaultShippingAddress && address && defaultShippingAddress.ID === address.ID;
 	},
 
 	/**
@@ -80,7 +81,7 @@ var Profile = AbstractHelper.extend(
 	 */
 	isDefaultBillingAddress : function (address) {
 		var defaultBillingAddress = this.getDefaultBillingAddress();
-		return defaultBillingAddress && address && defaultBillingAddress.ID == address.ID;
+		return defaultBillingAddress && address && defaultBillingAddress.ID === address.ID;
 	}
 
 });
