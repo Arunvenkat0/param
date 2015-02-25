@@ -1,0 +1,58 @@
+/**
+ * @module meta
+ */
+
+var Meta = function(){
+    this.data = {
+        page : {
+            title : "",
+            description :"",
+            keywords : ""
+        }
+    }
+}
+
+Meta.prototype = {
+    update : function(object){
+        // check if it is a system object
+        if(object.class){
+            var title = object.pageTitle;
+            if(!title && "name" in object){
+                title = object.name;
+            }else if(!title && "displayName" in object){
+                title = object.displayName;
+            }
+            this.data.page.title = title;
+            if(object.pageKeywords){
+                this.data.page.keywords = object.pageKeywords;
+            }
+            if(object.pageDescription){
+                this.data.page.description = object.pageDescription;
+            }
+
+            this.updatePageMetaData();
+        }else{
+            if(object.pageTitle){
+                this.data.page.title = object.pageTitle;
+            }
+            if(object.pageKeywords){
+                this.data.page.keywords = object.pageKeywords;
+            }
+            if(object.pageDescription){
+                this.data.page.description = object.pageDescription;
+            }
+            // @TODO do an _.extend(this.data, object) of the passed object
+        }
+    },
+    updatePageMetaData : function(){
+        var pageMetaData = request.pageMetaData;
+        pageMetaData.title = this.data.page.title;
+        pageMetaData.keywords = this.data.page.keywords;
+        pageMetaData.description = this.data.page.description;
+    },
+    renderClientData : function(){
+        return '<div class="page-context" data-dw-context="'+JSON.stringify(this.data)+'" />'
+    }
+}
+
+module.exports = new Meta();

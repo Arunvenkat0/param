@@ -25,9 +25,7 @@ function show()
     var GetContentResultResult = SearchController.GetContentResult();
     var ContentSearchResult = GetContentResultResult.ContentSearchResult;
 
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(content);
-
+    require('~/cartridge/scripts/meta').update(content);
 
     response.renderTemplate(content.template || 'content/content/contentpage', {
         Content: content,
