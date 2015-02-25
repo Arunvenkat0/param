@@ -24,7 +24,7 @@ function initializeAddressForm() {
 		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
+		var url = util.appendParamToURL($form.attr('action'), 'format', 'ajax');
 		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
@@ -120,7 +120,7 @@ function initAddressEvents() {
 		e.preventDefault();
 		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
-				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
+				url: util.appendParamToURL($(this).attr('href'), 'format', 'ajax'),
 				dataType: 'json'
 			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
