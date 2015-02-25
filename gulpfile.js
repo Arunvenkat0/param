@@ -204,8 +204,8 @@ gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide
 });
 
 // deploy to github pages
-gulp.task('deploy:styleguide', function () {
+gulp.task('deploy:styleguide', ['js:styleguide', 'css:styleguide'], function () {
 	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
-	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'])
+	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'], {base: 'styleguide'})
 		.pipe(deploy(options));
 });
