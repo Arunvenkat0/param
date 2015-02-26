@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Renders the home page.
  *
@@ -11,9 +12,8 @@ var g = require('./dw/guard');
  */
 function show()
 {
-    var web = require('./dw/web');
-    web.updatePageMetaDataForFolder(dw.content.ContentMgr.getSiteLibrary().root, dw.system.Site.getCurrent().name,
-            "SiteGenesis, Reference Application", "SiteGenesis");
+    var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
+    require('~/cartridge/scripts/meta').update(rootFolder);
 
     response.renderTemplate('content/home/homepage');
 }

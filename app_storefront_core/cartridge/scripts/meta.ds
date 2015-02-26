@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @module meta
  */
@@ -16,14 +17,14 @@ var HOME_BREADCRUMB = {
 var Meta = function(){
     this.data = {
         page : {
-            title : "",
-            description :"",
-            keywords : ""
+            title : '',
+            description : '',
+            keywords : ''
         },
         // supports elements with properties name and url
         breadcrumbs : [ HOME_BREADCRUMB ]
-    }
-}
+    };
+};
 
 Meta.prototype = {
     /**
@@ -36,9 +37,9 @@ Meta.prototype = {
         if(object.class){
             // update metadata
             var title = object.pageTitle;
-            if(!title && "name" in object){
+            if(!title && 'name' in object){
                 title = object.name;
-            }else if(!title && "displayName" in object){
+            }else if(!title && 'displayName' in object){
                 title = object.displayName;
             }
             this.data.page.title = title;
@@ -52,19 +53,19 @@ Meta.prototype = {
             this.updatePageMetaData();
 
             // update breadcrumbs
-            if(object.class == '[JavaClass dw.content.Content]'){
+            if(object.class === '[JavaClass dw.content.Content]'){
                 var path = require('~/cartridge/scripts/object/Content').get(object).getFolderPath();
                 this.data.breadcrumbs = path.map(function(folder){
                     return {
                         name : folder.displayName
-                    }
+                    };
                 });
                 this.data.breadcrumbs.unshift(HOME_BREADCRUMB);
                 this.data.breadcrumbs.push({
                     name : object.name,
                     url : dw.web.URLUtils.url('Page-Show','cid',object.ID)
                 });
-                dw.system.Logger.debug("Content breadcrumbs calculated: "+JSON.stringify(this.data.breadcrumbs));
+                dw.system.Logger.debug('Content breadcrumbs calculated: '+JSON.stringify(this.data.breadcrumbs));
             }
         }else{
             if(object.pageTitle){
@@ -89,7 +90,7 @@ Meta.prototype = {
         pageMetaData.description = this.data.page.description;
     },
     /**
-     * Get teh breadcrumbs for the current page
+     * Get the breadcrumbs for the current page
      *
      * @return {Array} an array containing the breadcrumb items
      */
@@ -102,8 +103,8 @@ Meta.prototype = {
      * @return {String} A div with a data attribute containing all data as JSON
      */
     renderClientData : function(){
-        return '<div class="page-context" data-dw-context="'+JSON.stringify(this.data)+'" />'
+        return '<div class="page-context" data-dw-context="'+JSON.stringify(this.data)+'" />';
     }
-}
+};
 
 module.exports = new Meta();

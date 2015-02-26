@@ -1,3 +1,4 @@
+'use strict';
 /* jshint indent:false,white:false */
 
 /** @module object/Content */
@@ -14,7 +15,7 @@ var Content = AbstractHelper.extend(
 	/**
 	 * Use this method to get a new instance for a given category.
 	 */
-	get : function(parameter : Object) {
+	get : function(parameter) {
 		var obj = null;
 		if (typeof parameter === 'string') {
 			obj = dw.content.ContentMgr.getContent(parameter);
@@ -29,7 +30,7 @@ var Content = AbstractHelper.extend(
 	 *  or creating new link of content page for current asset
 	 *	@returns {String} URL
 	 */
-	getLink : function() : String {
+	getLink : function() {
 		if( !this.object ) {
 			return null;
 		}
@@ -41,11 +42,12 @@ var Content = AbstractHelper.extend(
 	 *	@param {String} folderId - folder id
 	 *	@returns {Boolean} true if asset is in specified folder
 	 */
-	isInFolder : function( folderId : String ) : Boolean {
+	isInFolder : function( folderId ) {
 		if ( this.object && !empty( this.object.folders ) ) {
 			for ( let index in this.object.folders ) {
-				if ( this.object.folders[index].ID == folderId )
+				if ( this.object.folders[index].ID === folderId ){
 					return true;
+				}
 			}
 		}
 		return false;
@@ -86,7 +88,7 @@ var Content = AbstractHelper.extend(
 		if ( this.object ) {
 			var folder = this.getDefaultFolder();
 			if(folder){
-		        while (folder.ID != 'root') {
+		        while (folder.ID !== 'root') {
 		            path.unshift(folder);
 		            folder = folder.parent;
 		        }

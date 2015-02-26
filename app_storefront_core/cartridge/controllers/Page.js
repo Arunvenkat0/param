@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Renders the a content page or include.
  *
