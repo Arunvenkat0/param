@@ -8,6 +8,9 @@
 	"name": "$charcoal",
 	"code": "#424242"
 }, {
+	"name": "$citrus",
+	"code": "#84bd00"
+}, {
 	"name": "$dark-gray",
 	"code": "#aaa"
 }, {
@@ -20,9 +23,6 @@
 	"name": "$islamic-green",
 	"code": "#019328"
 }, {
-	"name": "$mantis",
-	"code": "#88c14b"
-}, {
 	"name": "$night-rider",
 	"code": "#333"
 }, {
@@ -31,6 +31,9 @@
 }, {
 	"name": "$pacific-blue",
 	"code": "#00a4e4"
+}, {
+	"name": "$rain-forest",
+	"code": "#64772d"
 }, {
 	"name": "$sangria",
 	"code": "#990000"
