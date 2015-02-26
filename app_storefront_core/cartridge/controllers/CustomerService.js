@@ -43,7 +43,7 @@ function ContactUs()
  */
 function Submit()
 {
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'send')

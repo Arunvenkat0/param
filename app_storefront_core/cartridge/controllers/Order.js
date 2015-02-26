@@ -55,7 +55,7 @@ function History()
 // problems
 function Orders()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'show')

@@ -65,8 +65,6 @@ function show(args)
 
     
     var CouponStatus = null;
-    var RegistrationStatus = false;
-
 
     var GetExistingBasketResult = GetExistingBasket();
     var Basket = GetExistingBasketResult.Basket;
@@ -108,7 +106,8 @@ function showCart(args)
     response.renderTemplate('checkout/cart/cart', {
         EnableCheckout: EnableCheckout,
         Basket: Basket,
-        ProductAddedToWishlist: args.ProductAddedToWishlist
+        ProductAddedToWishlist: args.ProductAddedToWishlist,
+        RegistrationStatus: false
     });
 }
 
@@ -121,7 +120,7 @@ function SubmitForm()
     // TODO this should actually trigger a redirect to avoid multiple form
     // submissions!
 
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'addCoupon')

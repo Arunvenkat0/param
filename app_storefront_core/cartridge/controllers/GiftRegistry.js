@@ -52,7 +52,7 @@ function loggedIn(action)
 
 function SubmitFormLanding()
 {
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'search')
@@ -98,7 +98,7 @@ function Start()
 function registrymain()
 {
     // TODO this should trigger some redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'create')
@@ -233,7 +233,7 @@ function createOne()
 function EventParticipant()
 {
     // TODO this should be some redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'back')
@@ -265,7 +265,7 @@ function showAddresses()
 function ParticipantAddresses()
 {
     // TODO this should trigger some redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'back')
@@ -344,7 +344,7 @@ function showConfirmation()
 function Confirmation()
 {
     // TODO this should trigger some redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'back')
@@ -532,7 +532,7 @@ function selectOne()
 function SelectProductListInteraction()
 {
     // TODO this should end in a redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'select')
@@ -580,7 +580,7 @@ function showEditParticipantForm()
 // TODO this is probably never called?
 function EditEventParticipant()
 {
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'back')
@@ -709,7 +709,7 @@ function showPurchases()
 function ShowPurchasesInteraction()
 {
     // TODO this should end in a redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'navEvent')
@@ -759,7 +759,7 @@ function ShowRegistry(args)
 function ShowRegistryInteraction()
 {
     // TODO this should end in redirects
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'addGiftCertificate')
@@ -777,7 +777,7 @@ function ShowRegistryInteraction()
 	    }
 	    else if (TriggeredAction.formId == 'addToCart')
 	    {
-	        if (CurrentForms.giftregistry.items.triggeredAction.parent.object.type == CurrentForms.giftregistry.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE)
+	        if (CurrentForms.giftregistry.items.triggeredFormAction.parent.object.type == CurrentForms.giftregistry.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
 	        {
 	            var GiftCertController = require('./GiftCert');
 	            GiftCertController.Purchase();
@@ -918,7 +918,7 @@ function showSearch(args)
 function SearchGiftRegistry()
 {
     // TODO this should end with a redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'search')
@@ -1122,7 +1122,7 @@ function showAddresses()
 function EditAddresses()
 {
     // TODO this should end in some redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'back')

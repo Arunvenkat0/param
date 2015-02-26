@@ -35,7 +35,7 @@ function Add()
  */
 function AddForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'cancel')
@@ -160,7 +160,7 @@ function Edit()
 function EditForm()
 {
     // TODO this should all be cleaned up
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'cancel')

@@ -54,7 +54,7 @@ function MultiShippingAddresses()
 
     
     // TODO this should end in a redirect
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'save')
@@ -116,7 +116,7 @@ function MultiShippingMethods()
     var CurrentForms = session.forms;
 
     
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'save')
@@ -321,7 +321,7 @@ function EditForm()
 
     
     // TODO this should end with redirects
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'cancel')

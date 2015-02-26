@@ -61,7 +61,7 @@ function Show()
 // TODO fix form in template?
 function ShowInteraction()
 {
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'purchaseGiftCertificate')

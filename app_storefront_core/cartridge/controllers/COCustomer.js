@@ -56,7 +56,7 @@ function LoginForm()
 
     
 	// TODO this should all end in a redirect?
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'login')

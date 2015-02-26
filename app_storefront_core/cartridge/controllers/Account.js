@@ -303,7 +303,7 @@ function EditProfileError()
 
 function EditForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'cancel')
@@ -342,7 +342,7 @@ function PasswordResetDialog()
  */
 function PasswordResetDialogForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'cancel')
@@ -404,7 +404,7 @@ function passwordReset()
  */
 function PasswordResetForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'send')
@@ -479,7 +479,7 @@ function SetNewPassword()
 
 function SetNewPasswordForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'cancel')
@@ -574,7 +574,7 @@ function StartRegister()
 // account/user/registration_edit
 function RegistrationForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'confirm')
@@ -643,7 +643,7 @@ function requireLogin(args)
 
 function LoginForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'findorder')
@@ -742,7 +742,8 @@ function Connect()
              * create a storefront account that is already in the BM
              */
             response.renderTemplate('account/login/accountlogin', {
-                TargetPipeline : 'Account-Show'
+                TargetPipeline : 'Account-Show',
+                RegistrationStatus: RegistrationStatus
             });
             return;
         }

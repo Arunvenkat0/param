@@ -7,7 +7,7 @@ var wl = require('./lib/wishlist');
 function LandingForm()
 {
     // TODO use redirect for response
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'register')
@@ -60,7 +60,7 @@ function WishListForm()
     var CurrentForms = session.forms;
 
 
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'addGiftCertificate')
@@ -75,7 +75,7 @@ function WishListForm()
         }
         else if (TriggeredAction.formId == 'addToCart')
         {
-            if (CurrentForms.wishlist.items.triggeredAction.parent.object.type == CurrentForms.wishlist.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE)
+            if (CurrentForms.wishlist.items.triggeredFormAction.parent.object.type == CurrentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
                 // TODO redirect?
                 var GiftCertController = require('./GiftCert');

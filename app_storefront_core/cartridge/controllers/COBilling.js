@@ -80,7 +80,7 @@ function Billing()
 
     
 	// TODO this should trigger a redirect?
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'applyCoupon')
@@ -683,7 +683,7 @@ function EditBillingAddress()
     var CurrentForms = session.forms;
 
     
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'apply')

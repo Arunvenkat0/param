@@ -85,7 +85,7 @@ function SingleShipping()
 {
     var CurrentForms = session.forms;
 
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'save')
@@ -572,7 +572,7 @@ function EditShippingAddress()
     var CurrentForms = session.forms;
 
     
-	var TriggeredAction = request.triggeredAction;
+	var TriggeredAction = request.triggeredFormAction;
 	if (TriggeredAction != null)
 	{
 	    if (TriggeredAction.formId == 'apply')

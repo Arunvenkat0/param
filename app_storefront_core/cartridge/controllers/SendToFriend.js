@@ -63,7 +63,7 @@ function SendToFriendForm()
 {
     // TODO this should end in some redirect
     // but sometimes this is called with GET and not with POST
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'edit')

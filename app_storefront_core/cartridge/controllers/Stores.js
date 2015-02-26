@@ -21,7 +21,7 @@ function FindStores()
 {
     var storeLocatorForm = session.forms.storelocator;
 
-	var action = request.triggeredAction;
+	var action = request.triggeredFormAction;
 	if (action != null)
 	{
 	    if (action.formId == 'findbycountry')

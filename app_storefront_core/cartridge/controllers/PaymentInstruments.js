@@ -49,7 +49,7 @@ function Add()
 
 function PaymentForm()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'create')
@@ -151,7 +151,7 @@ function create()
  */
 function Delete()
 {
-    var TriggeredAction = request.triggeredAction;
+    var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         new dw.system.Pipelet('RemoveCustomerPaymentInstrument').execute({
