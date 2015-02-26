@@ -787,7 +787,7 @@ exports.SetNewPasswordConfirm   = g.httpsGet(SetNewPasswordConfirm);
 exports.StartRegister           = g.httpsGet(StartRegister);
 exports.RegistrationForm        = g.httpsPost(RegistrationForm);
 exports.LoginForm               = g.httpsPost(LoginForm);
-exports.IncludeNavigation       = g.https(IncludeNavigation);
+exports.IncludeNavigation       = g.get(IncludeNavigation);
 exports.Connect                 = g.https(Connect);
 
 /*
