@@ -9,7 +9,7 @@
 <div id="browser-check">
 <noscript>
 	<div class="browser-compatibility-alert">
-		<p class="browser-error">${Resource.msg('browsertoolscheck.javascript','components',null)}</p>		
+		<p class="browser-error">${Resource.msg('global.browsertoolscheck.javascript','locale',null)}</p>		
 	</div>
 </noscript>
 </div>

@@ -1,4 +1,5 @@
 .product-tile {
+	@extend %clearfix;
 	color: $nobel;
 	position: relative;
 	text-align: center;
@@ -13,15 +14,15 @@
 		font-family: $serif;
 		font-size: 1.2em;
 		font-style: italic;
-		margin: 13px 0 2px;
+		margin-top: 1em;
+		height: 3em;
+		overflow: auto;
 	}
 	.product-pricing .product-standard-price {
 		text-decoration: line-through;
 	}
 	.grid-tile & .product-swatches {
-		bottom: -9px;
-		position: absolute;
-		right: 0;
+		float: right;
 	}
 	.product-swatches-all {
 		cursor: pointer;
@@ -65,9 +66,7 @@
 		text-transform: uppercase;
 	}
 	.product-compare {
-		bottom: -5px;
-		left: 5px;
-		position: absolute;
+		float: left;
 		width: 40px;
 		line-height: 11px;
 		label {
@@ -81,31 +80,15 @@
 			margin: 0;
 		}
 	}
-	.pr_stars {
-		height: auto;
-		position: relative;
-		left: 8px;
-	}
-	.prSnippetTitle {
-		float: left;
-	}
-	.prSnippetReadReviews {
-		display: none;
-	}
-	.prSnippetRatingUnclickable {
-		float: left;
-	}
-	.prSnippetNumberOfRatingsText,
-	.pr-snippet-review-count,
-	.pr-snippet-read-write,
-	.pr-snippet-social-bar,
-	.pr-clear {
-		display: none;
-	}
-	.pr-snippet-stars {
-		float: none;
-		margin: 0 auto;
-		width: 115px;
+	.product-review {
+		margin-bottom: 1em;
+		.rating-title {
+			display: inline-block;
+			margin-right: 1em;
+		}
+		.rating {
+			display: inline-block;
+		}
 	}
 }
 

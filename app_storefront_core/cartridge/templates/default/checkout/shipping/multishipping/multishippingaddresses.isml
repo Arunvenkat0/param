@@ -14,7 +14,7 @@
 <div class="checkout">
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="1" multishipping="true"/>
-   	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
+   	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
 	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.multishipping.addressSelection.htmlName}" class="checkout-multi-shipping address">
 	<div class="checkoutmultishipping">
 		<table class="item-list"  cellspacing="0">
@@ -184,7 +184,7 @@
 							</td>
 							<td class="shippingaddress">
 								<isif condition="${!empty(store) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}" />
-									<span class="label">${Resource.msg('cart.store.storepickupaddress','storepickup',null)}</span>
+									<span class="label">${Resource.msg('cart.store.storepickupaddress','checkout',null)}</span>
 									<div><isprint value="${store.name}"/></div>
 									<div><isprint value="${store.address1}"/></div>
 									<isif condition="${!empty(store.address2)}">

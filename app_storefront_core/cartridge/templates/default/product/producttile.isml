@@ -198,6 +198,12 @@
 			</div>
 		</isif>
 
+		<iscomment>Rating</iscomment>
+		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+		<isif condition="${showrating && !Product.productSet}">
+			<isinclude template="product/components/reviewsmini"/>
+		</isif>
+
 		<iscomment>Compare</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<isif condition="${showcompare}">
@@ -242,14 +248,6 @@
 						<label for="${'cc-'+Product.UUID}">Compare</label>
 					</isif>
 				</div>
-			</isif>
-		</isif>
-
-		<iscomment>Rating</iscomment>
-		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
-		<isif condition="${showrating}">
-			<isif condition="${!Product.productSet}">
-				<isinclude template="product/components/reviewsmini"/>
 			</isif>
 		</isif>
 

@@ -9,7 +9,7 @@ If you are not using the build cartridge the comments can be safely removed.
 <iscomment>the page title calculated by the app </iscomment>
 
 <isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
-	<title>${pdict.CurrentPageMetaData.title} | ${Resource.msg('site.name', 'common', null)} | ${Resource.msg('revisioninfo.revisionnumber', 'revisioninfo', null)}</title>
+	<title>${pdict.CurrentPageMetaData.title} | ${Resource.msg('global.site.name', 'locale', null)} | ${Resource.msg('revisioninfo.revisionnumber', 'revisioninfo', null)}</title>
 <iselse/>
   <title><isprint value="${pdict.CurrentPageMetaData.title}" encoding="off" /></title>
 </isif>
@@ -42,6 +42,10 @@ If you are not using the build cartridge the comments can be safely removed.
 <!--  UI -->
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" />
 
+<!--[if lte IE 8]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/chuckcarpenter/REM-unit-polyfill/master/js/rem.min.js" type="text/javascript"></script>
+<![endif]-->
 <iscomment>Insert meta tag for the "Google-Verification" feature to verify that you are the owner of this site.</iscomment>
 <isif condition="${'GoogleVerificationTag' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.GoogleVerificationTag!=''}">
     <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.GoogleVerificationTag}"/>" />

@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/07/48/tomtom__go__720-en_US-meta.js'] = {metadata:[{rid:7000133,date:20090409,rating:5,helpfulScore:0,expertLevel:0,batch:1,images:0}]};

@@ -2,7 +2,7 @@
 <isdecorate template="account/giftregistry/pt_giftregistry">
 	<isinclude template="util/modules"/>
 
-		<h1>${Resource.msg('giftregistry.title','account',null)}</h1>
+		<h1>${Resource.msg('account.giftregistry.title','account',null)}</h1>
 
 		<isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
@@ -19,9 +19,9 @@
 
 		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}" name="${pdict.CurrentForms.giftregistry.htmlName}">
 
-			<h2>${Resource.msg('addresses.beforeheader','account',null)}</h2>
+			<h2>${Resource.msg('account.giftregistry.addresses.beforeheader','account',null)}</h2>
 
-			<p>${Resource.msg('addresses.beforemessage','account',null)}</p>
+			<p>${Resource.msg('account.giftregistry.addresses.beforemessage','account',null)}</p>
 
 			<fieldset name="address-before">
 
@@ -102,9 +102,9 @@
 
 			</fieldset>
 
-			<h2>${Resource.msg('addresses.postheader','account',null)}</h2>
+			<h2>${Resource.msg('account.giftregistry.addresses.postheader','account',null)}</h2>
 
-			<p>${Resource.msg('addresses.postmessage','account',null)}</p>
+			<p>${Resource.msg('account.giftregistry.addresses.postmessage','account',null)}</p>
 
 			<fieldset name="address-after">
 
@@ -113,7 +113,7 @@
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield', 'locale', null)}</em></span></div>
 				</legend>
 				<div class="form-row form-row-button">
-					<button type="button" class="usepreevent">${Resource.msg('address.usepreevent', 'account', null)}</button>
+					<button type="button" class="usepreevent">${Resource.msg('account.giftregistry.addresses.usepreevent', 'account', null)}</button>
 				</div>
 				
 				<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">

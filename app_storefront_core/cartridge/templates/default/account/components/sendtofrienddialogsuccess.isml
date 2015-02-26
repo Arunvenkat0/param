@@ -7,6 +7,6 @@
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
-	<h2>${Resource.msg('sendtoafrienddialog.confirmation','account',null)}</h2>
+	<h2>${Resource.msg('account.components.sendtoafrienddialog.confirmation','account',null)}</h2>
 	<button type="button" class="close-button">${Resource.msg('global.close','locale',null)}</button>
 </isdecorate>

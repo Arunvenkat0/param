@@ -40,15 +40,18 @@ var sendToFriend = {
 			});
 	},
 	initializeDialog: function (eventDelegate) {
+		// detect withCredentials support to do CORS from HTTP to HTTPS
+		// with browsers do not support withCredentials (mainly IE 8 and 9), fall back to page reload
+		if (!'withCredentials' in new XMLHttpRequest()) {
+			return;
+		}
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
-			var url = this.href;
 			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
-			url = util.appendParamsToUrl(this.href, data);
-			url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
+			var url = util.appendParamsToUrl(this.href, data);
 
 			dialog.open({
 				target: '#send-to-friend-dialog',

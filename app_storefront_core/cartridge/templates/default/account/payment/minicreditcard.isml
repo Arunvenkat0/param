@@ -36,5 +36,5 @@
 	<isprint value="${ccOwner}"/><br />
 	<isprint value="${ccType}"/><br />
 	<isprint value="${ccNumber}"/><br />
-	${Resource.msg('minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/>
+	${Resource.msg('account.payment.minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/>
 </isif>

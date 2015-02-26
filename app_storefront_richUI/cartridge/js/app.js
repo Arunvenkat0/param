@@ -11,6 +11,7 @@ var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
+	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
 	searchsuggest = require('./searchsuggest'),
 	searchsuggestbeta = require('./searchsuggest-beta'),
@@ -132,13 +133,6 @@ function initializeEvents() {
 		// 	e.preventDefault();
 		// }
 	});
-
-	// grid toggle
-	$('.toggle-grid').on('click', function () {
-		$('.search-result-content').toggleClass('wide-tiles');
-		$(this).toggleClass('wide');
-	});
-
 }
 /**
  * @private
@@ -180,6 +174,7 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
+		rating.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations

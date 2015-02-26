@@ -2,7 +2,7 @@
 <isdecorate template="account/pt_account">
 	<isinclude template="util/modules"/>
 	
-	<h1>${Resource.msg('giftcert.giftcertificates', 'checkout', null)}</h1>
+	<h1>${Resource.msg('giftcertpurchase.giftcertificates', 'checkout', null)}</h1>
 	
 	<div class="gift-certificate-purchase clearfix">
 	

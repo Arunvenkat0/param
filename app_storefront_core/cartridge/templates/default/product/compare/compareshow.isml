@@ -2,18 +2,18 @@
 <isdecorate template="product/compare/pt_compare">
 <isinclude template="util/modules"/>
 
-	<a href="${URLUtils.http('Cart-ContinueShopping')}" class="back" title="${Resource.msg('compareshow.back', 'product', null)}">
-		${Resource.msg('compareshow.back', 'product', null)}
+	<a href="${URLUtils.http('Cart-ContinueShopping')}" class="back" title="${Resource.msg('product.compareshow.back', 'product', null)}">
+		${Resource.msg('product.compareshow.back', 'product', null)}
 	</a>
 
 	<a class="compare-print print-page button">
 		${Resource.msg('global.print', 'locale', null)}
 	</a>
 
-	<h1>${Resource.msg('compareshow.header', 'product', null)}</h1>
+	<h1>${Resource.msg('product.compareshow.header', 'product', null)}</h1>
 	<isif condition="${pdict.CurrentForms.compare.categories.options.optionsCount > 1}">
 		<form class="category-switch" action="${URLUtils.url('Compare-Show')}" method="post">
-			<label for="compare-category-list">${Resource.msg('compareshow.othercompareitems', 'product', null)}</label>
+			<label for="compare-category-list">${Resource.msg('product.compareshow.othercompareitems', 'product', null)}</label>
 			<select id="compare-category-list" name="category" size="1" class="input-select">
 				<isloop items="${pdict.CurrentForms.compare.categories.options}" var="cat">
 					<option value="${cat.optionId}" <isif condition="${cat.optionId == pdict.CurrentForms.compare.object.category}">selected="selected"</isif>>${Resource.msg(cat.label, 'forms', null)}</option>
@@ -67,7 +67,7 @@
 						<a class="action" href="${URLUtils.https('Wishlist-Add', 'pid', pid)}">${Resource.msg('global.addtowishlist', 'locale', null)}</a>
 						<a class="action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pid)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
 						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', pdict.CurrentHttpParameterMap.category.stringValue)}" scope="page"/>
-						<a class="action remove-link" href="${removeUrl}" title="${Resource.msg('compareshow.removeitem', 'product', null)}">${Resource.msg('compareshow.removeitem', 'product', null)}</a>
+						<a class="action remove-link" href="${removeUrl}" title="${Resource.msg('product.compareshow.removeitem', 'product', null)}">${Resource.msg('product.compareshow.removeitem', 'product', null)}</a>
 					</th>
 				</isloop>
 			</tr>
@@ -132,6 +132,6 @@
 		</isif>
 	</table>
 
-	<p><a href="${URLUtils.http('Cart-ContinueShopping')}" class="back floatleft" title="${Resource.msg('compareshow.back', 'product', null)}">${Resource.msg('compareshow.back', 'product', null)}</a></p>
+	<p><a href="${URLUtils.http('Cart-ContinueShopping')}" class="back floatleft" title="${Resource.msg('product.compareshow.back', 'product', null)}">${Resource.msg('product.compareshow.back', 'product', null)}</a></p>
 
 </isdecorate>

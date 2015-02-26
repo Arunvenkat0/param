@@ -5,7 +5,7 @@
 
 		<isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
-		<h1>${Resource.msg('giftregistry.title','account',null)}</h1>
+		<h1>${Resource.msg('account.giftregistry.title','account',null)}</h1>
 
 		<isif condition="${pdict.ProductList != null}">
 			<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.event.htmlName}_navigation">
@@ -23,7 +23,7 @@
 			<fieldset>
 
 				<legend>
-					${Resource.msg('eventparticipant.eventinfo','account',null)}
+					${Resource.msg('account.giftregistry.eventparticipant.eventinfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 
@@ -44,11 +44,11 @@
 			<fieldset>
 
 				<legend>
-					${Resource.msg('eventparticipant.participants','account',null)}
+					${Resource.msg('account.giftregistry.eventparticipant.participants','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 
-				<h2>${Resource.msg('eventparticipant.first','account',null)}</h2>
+				<h2>${Resource.msg('account.giftregistry.eventparticipant.first','account',null)}</h2>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.participant.role}" type="select"/>
 
@@ -58,7 +58,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.participant.email}" type="input"/>
 
-				<h2>${Resource.msg('eventparticipant.second','account',null)}</h2>
+				<h2>${Resource.msg('account.giftregistry.eventparticipant.second','account',null)}</h2>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.coParticipant.role}" type="select"/>
 

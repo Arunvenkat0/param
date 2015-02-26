@@ -17,7 +17,7 @@
 		 	<form action="${URLUtils.url('Search-Show')}" method="get">
 				<fieldset>
 				<div class="form-row label-above">
-					<label for="q">${Resource.msg('nohits.searchlabel','search',null)}</label>
+					<label for="q">${Resource.msg('search.nohits.searchlabel','search',null)}</label>
 					<input type="text" name="q" value="" class="input-text" />
 					<button type="submit" value="${Resource.msg('global.go','locale',null)}" name="simplesearch">
 						${Resource.msg('global.go','locale',null)}

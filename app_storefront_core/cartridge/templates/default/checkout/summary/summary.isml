@@ -11,7 +11,7 @@
 
 <isreportcheckout checkoutstep="${5}" checkoutname="${'OrderSummary'}"/>
 
-	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
+	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
 
 	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
     	<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>

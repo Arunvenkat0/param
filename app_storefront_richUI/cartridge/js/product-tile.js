@@ -23,6 +23,14 @@ function initQuickViewButtons() {
 		});
 	});
 }
+
+function gridViewToggle() {
+	$('.toggle-grid').on('click', function () {
+		$('.search-result-content').toggleClass('wide-tiles');
+		$(this).toggleClass('wide');
+	});
+}
+
 /**
  * @private
  * @function
@@ -32,7 +40,7 @@ function initQuickViewButtons() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-
+	gridViewToggle();
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest('.product-tile'),

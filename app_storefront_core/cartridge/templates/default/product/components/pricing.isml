@@ -106,11 +106,11 @@ if ( pdict.Product.variationGroup )
 			</div>		
 		<iselse/>	
 			<isif condition="${ShowStandardPrice}">
-				<span class="price-standard"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse/>${Resource.msg('pricing.noprice','product',null)}</isif></span>
+				<span class="price-standard"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
 			</isif>
 			<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 			
-			<span class="price-sales"><isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}"><isprint value="${SalesPrice}"/><iselse/>${Resource.msg('pricing.noprice','product',null)}</isif></span>
+			<span class="price-sales"><isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}"><isprint value="${SalesPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
 					
 		</isif>
 		
@@ -128,25 +128,25 @@ if ( pdict.Product.variationGroup )
 					<isset name="scaledPriceTagOpened" value="${true}" scope="PAGE"/>
 					<div class="price-tiered">
 						<isif condition="${PriceTable.getPercentage(Quantity) > 0}">
-							${Resource.msg('pricing.payless','product',null)}
+							${Resource.msg('product.pricing.payless','product',null)}
 						<iselse/>
-							${Resource.msg('pricing.paymore','product',null)}
+							${Resource.msg('product.pricing.paymore','product',null)}
 						</isif>
 				</isif>
 	
 				<isset name="NextQuantity" value="${PriceTable.getNextQuantity(Quantity)}" scope="PAGE"/>	
 			<div class="price-tiered-values">
 					<isif condition="${NextQuantity != null}">						
-						<isprint value="${Quantity}" formatter="#"/><isif condition="${Quantity != NextQuantity.getValue()-1}"><span class="divider">${Resource.msg('global.symbol.dash','locale',null)}</span><isprint value="${NextQuantity.getValue()-1}" formatter="#"/></isif> ${Resource.msg('pricing.items','product',null)}						
+						<isprint value="${Quantity}" formatter="#"/><isif condition="${Quantity != NextQuantity.getValue()-1}"><span class="divider">${Resource.msg('global.symbol.dash','locale',null)}</span><isprint value="${NextQuantity.getValue()-1}" formatter="#"/></isif> ${Resource.msg('product.pricing.items','product',null)}						
 					<iselse/>						
-						<isprint value="${Quantity}" formatter="#"/> ${Resource.msg('pricing.more','product',null)}						
+						<isprint value="${Quantity}" formatter="#"/> ${Resource.msg('product.pricing.more','product',null)}						
 					</isif>
 					<iscomment>
 						show percentages based on shown list price if list price is shown at all,
 					 	otherwise show it based on effective price
 					</iscomment>
 					<isprint value="${PriceTable.getPrice(Quantity)}"/>
-					(<isif condition="${ShowStandardPrice}"><isprint value="${PriceTable.getPrice(Quantity).percentLessThan(StandardPrice)}" formatter="#"/><iselse/><isprint value="${PriceTable.getPercentage(Quantity)}" formatter="#"/></isif>${Resource.msg('pricing.off','product',null)})
+					(<isif condition="${ShowStandardPrice}"><isprint value="${PriceTable.getPrice(Quantity).percentLessThan(StandardPrice)}" formatter="#"/><iselse/><isprint value="${PriceTable.getPercentage(Quantity)}" formatter="#"/></isif>${Resource.msg('product.pricing.off','product',null)})
 				</div>
 			</isif>
 		</isloop>

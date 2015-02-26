@@ -23,6 +23,7 @@
 }
 
 .pdp-main {
+	@extend %clearfix;
 	ul {
 		list-style: none outside none;
 		margin: 0;
@@ -123,10 +124,17 @@
 		font-size: 0.6em;
 		line-height: 1.5em;
 	}
-	.product-review-links {
-		overflow: hidden;
-		li {
-			margin-right: 1em;
+	.product-review {
+		@extend %clearfix;
+		margin-left: 0.5em;
+		.rating-title {
+			float: left;
+			width: 25%;
+			text-transform: uppercase;
+		}
+		.rating {
+			float: left;
+			width: 75%;
 		}
 	}
 	.product-main-attributes {

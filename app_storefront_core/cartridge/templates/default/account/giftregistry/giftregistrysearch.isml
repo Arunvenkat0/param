@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="gift-registry-advanced">
-			<a href="#" class="toggle">${Resource.msg('giftregistry.advanced','account',null)}</a>
+			<a href="#" class="toggle">${Resource.msg('account.giftregistry.advanced','account',null)}</a>
 			<div class="toggle-content">
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventName}" type="input"  maxlength="255"/>
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventMonth}" type="select" rowclass="event-month"/>

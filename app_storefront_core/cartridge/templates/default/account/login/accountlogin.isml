@@ -10,17 +10,17 @@
 		
 		<div class="login-box login-order-track">	
 			
-			<h2 class="section-header">${Resource.msg('accountlogin.orderheader','account',null)}
+			<h2 class="section-header">${Resource.msg('account.login.orderheader','account',null)}
 			<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</h2>	
 		
 			<div class="login-box-content clearfix">			
 								
-				<p>${Resource.msg('accountlogin.checkmessage','account',null)}</p>				
+				<p>${Resource.msg('account.login.checkmessage','account',null)}</p>				
 		
 				<iscomment>Order Not Found Error Message</iscomment>
 				<isif condition="${pdict.OrderNotFound != null}">
-					<div class="error-form">${Resource.msg('accountlogin.ordererror','account',null)}</div>
+					<div class="error-form">${Resource.msg('account.login.ordererror','account',null)}</div>
 				</isif>				
 		
 				<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.ordertrack.htmlName}">
@@ -33,8 +33,8 @@
 						<isinputfield formfield="${pdict.CurrentForms.ordertrack.postalCode}" type="input"/>
 						
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('accountlogin.orderbutton','account',null)}" name="${pdict.CurrentForms.ordertrack.findorder.htmlName}">
-								${Resource.msg('accountlogin.orderbutton','account',null)}
+							<button type="submit" value="${Resource.msg('account.login.orderbutton','account',null)}" name="${pdict.CurrentForms.ordertrack.findorder.htmlName}">
+								${Resource.msg('account.login.orderbutton','account',null)}
 							</button>
 						</div>
 						

@@ -29,7 +29,7 @@
 
 		<div id="main" role="main" class="page-content clearfix">
 
-			<isbreadcrumbs bcurl1="${URLUtils.https('Stores-Find')}" bctext1="${Resource.msg('header.storelocator','components',null)}"/>
+			<isbreadcrumbs bcurl1="${URLUtils.https('Stores-Find')}" bctext1="${Resource.msg('global.header.storelocator','locale',null)}"/>
 
 			<div id="primary" class="primary-content">
 				<isreplace/>

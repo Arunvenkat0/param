@@ -13,7 +13,7 @@
 	<iscomment>Report this checkout step</iscomment>
 	<isreportcheckout checkoutstep="4" checkoutname="${'Billing'}"/>
 
-	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
+	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
 
 	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		checkout progress indicator

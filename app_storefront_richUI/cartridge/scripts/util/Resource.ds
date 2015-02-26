@@ -3,12 +3,12 @@
  *
  */
 
-var ResourceHelper = {
+function ResourceHelper() {}
 	/**
 	 * Get the client-side constants
 	 * @returns {Object} An objects key key-value pairs holding the constants
 	 */
-	getConstants: function(pageContext) {
+	ResourceHelper.getConstants = function(pageContext) {
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 		return {
 			AVAIL_STATUS_IN_STOCK 		: ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK,
@@ -16,20 +16,21 @@ var ResourceHelper = {
 			AVAIL_STATUS_BACKORDER 		: ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER,
 			AVAIL_STATUS_NOT_AVAILABLE 	: ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE
 		};
-	},
+	}
 	/**
 	 * Get the client-side resources of a given page
 	 * @returns {Object} An objects key key-value pairs holding the resources
 	 */
-	getResources: function(pageContext) {
+	ResourceHelper.getResources = function(pageContext) {
 		var Resource = require('dw/web/Resource');
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 
 		// application resources
 		var resources = {
 				// Common
-				I_AGREE							: Resource.msg('i_agree', 'common', null),
-				CLOSE 							: Resource.msg('close', 'common', null),
+				I_AGREE							: Resource.msg('global.i_agree', 'locale', null),
+				CLOSE 							: Resource.msg('global.close', 'locale', null),
+				NO_THANKS						: Resource.msg('global.nothanks', 'locale', null),
 
 				// Checkout
 				SHIP_QualifiesFor 				: Resource.msg('shipment.qualifiesfor', 'checkout', null),
@@ -46,7 +47,7 @@ var ResourceHelper = {
 				BONUS_PRODUCT_MAX 				: Resource.msg('product.bonusproductsmax', 'product', null),
 				BONUS_PRODUCT_TOOMANY 			: Resource.msg('product.bonusproductstoomany', 'product', null),
 				SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext', 'search', null),
-				SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('forms.subscribe.email.default', 'forms', 'Email Address'),
+				SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('subscribe.email.default', 'forms', 'Email Address'),
 
 				CURRENCY_SYMBOL					: dw.util.Currency.getCurrency(dw.system.Site.current.currencyCode).symbol,
 				MISSINGVAL						: Resource.msg('global.missingval', 'locale', null),
@@ -63,20 +64,20 @@ var ResourceHelper = {
 				COMPARE_REMOVE_FAIL				: Resource.msg('productcomparewidget.removefail', 'search', null),
 				COMPARE_ADD_FAIL				: Resource.msg('productcomparewidget.addfail', 'search', null),
 				ADD_TO_CART_FAIL				: Resource.msg('cart.unableToAdd', 'checkout', null),
-				REGISTRY_SEARCH_ADVANCED_CLOSE	: Resource.msg('giftregistry.closeadvanced', 'account', null),
+				REGISTRY_SEARCH_ADVANCED_CLOSE	: Resource.msg('account.giftregistry.closeadvanced', 'account', null),
 				GIFT_CERT_INVALID				: Resource.msg('billing.giftcertinvalid', 'checkout', null),
 				GIFT_CERT_BALANCE				: Resource.msg('billing.giftcertbalance', 'checkout', null),
 				GIFT_CERT_AMOUNT_INVALID		: Resource.msg('giftcert.amountvalueerror', 'forms', null),
 				GIFT_CERT_MISSING				: Resource.msg('billing.giftcertidmissing', 'checkout', null),
 				INVALID_OWNER                   : Resource.msg('billing.ownerparseerror', 'checkout', null),
 				COUPON_CODE_MISSING				: Resource.msg('cart.COUPON_CODE_MISSING', 'checkout',  null),
-				COOKIES_DISABLED				: Resource.msg('browsertoolscheck.cookies', 'components', null),
+				COOKIES_DISABLED				: Resource.msg('global.browsertoolscheck.cookies', 'locale', null),
 				BML_AGREE_TO_TERMS				: Resource.msg('bml.termserror', 'forms', null),
-				CHAR_LIMIT_MSG					: Resource.msg('forms.character.limit', 'forms', null),
-				CONFIRM_DELETE					: Resource.msg('forms.confirm.delete', 'forms', null),
-				TITLE_GIFTREGISTRY				: Resource.msg('forms.title.giftregistry', 'forms', null),
-				TITLE_ADDRESS					: Resource.msg('forms.title.address', 'forms', null),
-				TITLE_CREDITCARD				: Resource.msg('forms.title.creditcard', 'forms', null),
+				CHAR_LIMIT_MSG					: Resource.msg('character.limit', 'forms', null),
+				CONFIRM_DELETE					: Resource.msg('confirm.delete', 'forms', null),
+				TITLE_GIFTREGISTRY				: Resource.msg('title.giftregistry', 'forms', null),
+				TITLE_ADDRESS					: Resource.msg('title.address', 'forms', null),
+				TITLE_CREDITCARD				: Resource.msg('title.creditcard', 'forms', null),
 				SERVER_CONNECTION_ERROR 		: Resource.msg('global.serverconnection', 'locale', 'Server connection failed!'),
 				IN_STOCK_DATE					: Resource.msg('global.inStockDate', 'locale', null),
 				ITEM_STATUS_NOTAVAILABLE		: Resource.msg('global.allnotavailable', 'locale', null),
@@ -88,10 +89,10 @@ var ResourceHelper = {
 				SET_PREFERRED_STORE				: Resource.msg('storelist.lightbox.setpreferredstore', 'storepickup', null),
 				ENTER_ZIP						: Resource.msg('storelist.lightbox.enterzip', 'storepickup', null),
 				INVALID_ZIP						: Resource.msg('storelist.lightbox.invalidpostalcode', 'storepickup', null),
-				SEARCH							: Resource.msg('storelist.lightbox.search', 'storepickup', null),
+				SEARCH							: Resource.msg('global.search', 'locale', null),
 				CHANGE_LOCATION					: Resource.msg('storelist.lightbox.changelocation', 'storepickup', null),
 				CONTINUE_WITH_STORE				: Resource.msg('storelist.lightbox.continuewithstore', 'storepickup', null),
-				CONTINUE						: Resource.msg('storelist.lightbox.continue', 'storepickup', null),
+				CONTINUE						: Resource.msg('global.continue', 'locale', null),
 				SEE_MORE						: Resource.msg('storelist.lightbox.seemore', 'storepickup', null),
 				SEE_LESS						: Resource.msg('storelist.lightbox.seeless', 'storepickup', null)
 		};
@@ -109,12 +110,12 @@ var ResourceHelper = {
 		resources["REMAIN_" + ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE] = Resource.msg('global.remainingnotavailable', 'locale', null);
 
 		return resources;
-	},
+	}
 	/**
 	 * Get the client-side URLs of a given page
 	 * @returns {Object} An objects key key-value pairs holding the URLs
 	 */
-	getUrls: function(pageContext) {
+	ResourceHelper.getUrls = function(pageContext) {
 		var URLUtils = require('dw/web/URLUtils');
 		var Resource = require('dw/web/Resource');
 
@@ -158,8 +159,6 @@ var ResourceHelper = {
 				giftCardCheckBalance		: URLUtils.https('COBilling-GetGiftCertificateBalance').toString(),
 				redeemGiftCert				: URLUtils.https('COBilling-RedeemGiftCertificateJson').toString(),
 				addCoupon					: URLUtils.https('Cart-AddCouponJson').toString(),
-				powerReviewsFullJs			: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '/pwr/engine/js/full.js').toString(),
-				powerReviewsZip				: URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, null, '').toString(),
 				storeLocatorPage			: URLUtils.https('StoreInventory-Find').toString(),
 				storesInventory				: URLUtils.https('StoreInventory-Inventory').toString(),
 				storesLookup				: URLUtils.https('StoreInventory-Lookup').toString(),
@@ -174,12 +173,12 @@ var ResourceHelper = {
 		};
 		return urls;
 
-	},
+	}
 	/**
 	 * Get the client-side preferences of a given page
 	 * @returns {Object} An objects key key-value pairs holding the preferences
 	 */
-	getPreferences: function(pageContext) {
+	ResourceHelper.getPreferences = function(pageContext) {
 		var cookieHintAsset = dw.content.ContentMgr.getContent('cookie_hint');
 		return {
 			LISTING_INFINITE_SCROLL: (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') ? true : false),
@@ -188,18 +187,15 @@ var ResourceHelper = {
 			STORE_PICKUP: dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
 			COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false
 		};
-	},
+	}
 	/**
 	 * Get the client-side user settings
 	 * @returns {Object} An objects key key-value pairs holding the settings
 	 */
-	getUserSettings: function(pageContext) {
+	ResourceHelper.getUserSettings = function(pageContext) {
 		var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
 		return {
 			zip: session.custom.zipcode == "null" ? null : session.custom.zipcode,
 			storeId: session.custom.storeId == "null" ? null : session.custom.storeId
 		};
 	}
-}
-
-module.exports = ResourceHelper;

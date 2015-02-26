@@ -119,7 +119,7 @@ ul li.onorder {color:red;}
 					<isif condition="${item.type == p_productli.TYPE_GIFT_CERTIFICATE}">
 						<a href="${URLUtils.https('GiftCert-Purchase', 'from', pdict.CurrentForms.sendtofriend.friendsname.htmlValue, 'recipient', pdict.CurrentForms.sendtofriend.yourname.htmlValue)}" style="font-weight:bold;line-height:24pt">${Resource.msg('global.giftcertificate','locale',null)}</a>
 					<iselseif condition="${item.product == null || !item.product.availabilityModel.orderable}">
-						${Resource.msg('displayproductlistitems.notavailable','product',null)}
+						${Resource.msg('product.displayproductlistitems.notavailable','product',null)}
 					<iselse/>
 						<a href="${URLUtils.http('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
 					</isif>
