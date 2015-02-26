@@ -2378,73 +2378,51 @@ var ajax =  require('../../ajax'),
 	util = require('../../util');
 
 var updateContainer = function (data) {
-	var $availabilityMsgContainer = $('#pdpMain .availability .availability-msg'),
-		$availabilityMsg;
+	var $availabilityMsg = $('#pdpMain .availability .availability-msg');
+	var message; // this should be lexically scoped, when `let` is supported (ES6)
 	if (!data) {
-		$availabilityMsgContainer.html(Resources.ITEM_STATUS_NOTAVAILABLE);
+		$availabilityMsg.html(Resources.ITEM_STATUS_NOTAVAILABLE);
 		return;
 	}
-
-	$availabilityMsgContainer.empty();
-
+	$availabilityMsg.empty()
 	// Look through levels ... if msg is not empty, then create span el
 	if (data.levels.IN_STOCK > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('in-stock-msg');
-		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 			// Just in stock
-			$availabilityMsg.text(Resources.IN_STOCK);
+			message = Resources.IN_STOCK;
 		} else {
 			// In stock with conditions ...
-			$availabilityMsg.text(data.inStockMsg);
+			message = data.inStockMsg;
 		}
+		$availabilityMsg.append('<p class="in-stock-msg">' + message + '</p>');
 	}
 	if (data.levels.PREORDER > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.preorder-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('preorder-msg');
-		}
 		if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-			// Just in stock
-			$availabilityMsg.text(Resources.PREORDER);
+			message = Resources.PREORDER;
 		} else {
-			$availabilityMsg.text(data.preOrderMsg);
+			message = data.preOrderMsg;
 		}
+		$availabilityMsg.append('<p class="preorder-msg">' + message + '</p>');
 	}
 	if (data.levels.BACKORDER > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.backorder-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('backorder-msg');
-		}
 		if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-			// Just in stock
-			$availabilityMsg.text(Resources.BACKORDER);
+			message = Resources.BACKORDER;
 		} else {
-			$availabilityMsg.text(data.backOrderMsg);
+			message = data.backOrderMsg;
 		}
+		$availabilityMsg.append('<p class="backorder-msg">' + message + '</p>');
 	}
 	if (data.inStockDate !== '') {
-		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-date-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('in-stock-date-msg');
-		}
-		$availabilityMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
+		$availabilityMsg.append('<p class="in-stock-date-msg">' + String.format(Resources.IN_STOCK_DATE, data.inStockDate) + '</p>');
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.not-available-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('not-available-msg');
-		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-			$availabilityMsg.text(Resources.NOT_AVAILABLE);
+			message = Resources.NOT_AVAILABLE;
 		} else {
-			$availabilityMsg.text(Resources.REMAIN_NOT_AVAILABLE);
+			message = Resources.REMAIN_NOT_AVAILABLE;
 		}
+		$availabilityMsg.append('<p class="not-available-msg">' + message + '</p>');
 	}
-
-	$availabilityMsgContainer.append($availabilityMsg);
 };
 
 var getAvailability = function () {
@@ -4128,20 +4106,18 @@ var storeinventory = {
 			options: {
 				title: Resources.STORE_NEAR_YOU,
 				width: 500,
-				buttons: [
-					{
-						text: Resources.SEARCH,
-						click: function () {
-							var zipCode = $('#user-zip').val();
-							if (validateZipCode(zipCode)) {
-								self.setUserZip(zipCode);
-								if (callback) {
-									callback(zipCode);
-								}
+				buttons: [{
+					text: Resources.SEARCH,
+					click: function () {
+						var zipCode = $('#user-zip').val();
+						if (validateZipCode(zipCode)) {
+							self.setUserZip(zipCode);
+							if (callback) {
+								callback(zipCode);
 							}
 						}
 					}
-				],
+				}],
 				open: function () {
 					$('#user-zip').on('keypress', function (e) {
 						if (e.which === 13) {
@@ -4180,24 +4156,22 @@ var storeinventory = {
 			html: storeList,
 			options: {
 				title: Resources.SELECT_STORE + ' - ' + User.zip,
-				buttons: [
-					{
+				buttons: [{
 						text: Resources.CHANGE_LOCATION,
-						click: function () {
-							self.setUserZip(null);
-							// trigger the event to start the process all over again
-							$('.set-preferred-store').trigger('click');
-						}.bind(this)
-					}, {
-						text: Resources.CONTINUE,
-						click: function () {
-							if (options.continueCallback) {
-								options.continueCallback(stores);
-							}
-							dialog.close();
+					click: function () {
+						self.setUserZip(null);
+						// trigger the event to start the process all over again
+						$('.set-preferred-store').trigger('click');
+					}.bind(this)
+				}, {
+					text: Resources.CONTINUE,
+					click: function () {
+						if (options.continueCallback) {
+							options.continueCallback(stores);
 						}
+						dialog.close();
 					}
-				],
+				}],
 				open: function () {
 					$('.select-store-button').on('click', function (e) {
 						e.preventDefault();
