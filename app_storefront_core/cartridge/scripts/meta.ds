@@ -36,17 +36,20 @@ Meta.prototype = {
         // check if it is a system object
         if(object.class){
             // update metadata
-            var title = object.pageTitle;
+            var title = null;
+            if ('pageTitle' in object) {
+            	title = object.pageTitle;
+            }
             if(!title && 'name' in object){
                 title = object.name;
             }else if(!title && 'displayName' in object){
                 title = object.displayName;
             }
             this.data.page.title = title;
-            if(object.pageKeywords){
+            if('pageKeywords' in object && object.pageKeywords){
                 this.data.page.keywords = object.pageKeywords;
             }
-            if(object.pageDescription){
+            if('pageDescription' in object && object.pageDescription){
                 this.data.page.description = object.pageDescription;
             }
 
@@ -67,7 +70,7 @@ Meta.prototype = {
                 });
                 dw.system.Logger.debug('Content breadcrumbs calculated: '+JSON.stringify(this.data.breadcrumbs));
             }
-        }else{
+        } else {
             if(object.pageTitle){
                 this.data.page.title = object.pageTitle;
             }

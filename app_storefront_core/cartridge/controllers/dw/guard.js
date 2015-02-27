@@ -4,6 +4,38 @@
  */
 
 /**
+ * This method contains the login procedure specific for the customer account,
+ * e.g. order tracking. After login, it redirects to the provided target action.
+ */
+function requireLogin(args)
+{
+    var forms = session.forms;
+
+    f.clearFormElement(forms.ordertrack);
+    f.clearFormElement(forms.login);
+
+    if (customer.registered)
+    {
+        forms.login.username.value = customer.profile.credentials.login;
+        forms.login.rememberme.value = true;
+    }
+
+    w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent('myaccount-login'));
+
+    // set the redirect destination
+    session.forms.login.targetAction.value = args.TargetAction;
+    
+    if (!empty(args.TargetParameters))
+    {
+        session.forms.login.targetParameters.value = JSON.stringify(args.TargetParameters);
+    }
+    
+    response.renderTemplate('account/login/accountlogin', {
+        RegistrationStatus : false
+    });
+}
+	
+/**
  * Guard that ensures that the provided action is only executed when the request is secure (e.g. the schema is HTTPS).
  * If it is not secure, the provided error handler is called. If no error handler is provided, by default a switch to
  * HTTPS is attempted.
@@ -13,7 +45,7 @@
  */
 function https(action, error)
 {
-    return expose(function()
+	return expose(function()
     {
         if (request.isHttpSecure())
         {
@@ -65,6 +97,51 @@ function switchToHttps()
     return true;
 }
 
+var Filters = {
+	https : function() {return request.isHttpSecure()},
+	http : function() {return !this.https()},
+	get : function() {return request.httpMethod == 'GET'},
+	post : function() {return request.httpMethod == 'POST'},
+	loggedIn : function() {return customer.authenticated}
+}
+
+	
+/**
+ * Generic function, which allows to filter multiple request types
+ */	
+function filter (filters, action, error) {
+	return expose(function() {
+		var filtersPassed = true;
+				
+		for (var i = 0; i < filters.length; i++) {
+			if (!error) {
+				if (filters[i] == 'https') {
+					error = switchToHttps;
+				} else if (filters[i] == 'loggedIn') {
+					error = requireLogin;
+				} else {
+					error = function() {};
+				}
+				
+			}
+			
+			if (filtersPassed) {
+				filtersPassed = Filters[filters[i]].apply(Filters)
+			}
+		}
+		
+		
+		if (filtersPassed) {
+			return action();
+		} else {
+			return error();
+		}
+	});
+	
+}
+
+	 
+	
 /**
  * Guard that only accepts POST requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
  */
@@ -156,3 +233,4 @@ exports.httpsPost = function(action)
 exports.switchToHttps = switchToHttps;
 
 exports.transactional = transactional;
+exports.filter = filter;
