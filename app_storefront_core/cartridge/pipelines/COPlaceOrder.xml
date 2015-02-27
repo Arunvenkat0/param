@@ -244,7 +244,7 @@
         <text-node>
           <description>Responsible for placing the order and set the order status to 'New'</description>
         </text-node>
-        <node-display x="17" y="3"/>
+        <node-display x="18" y="3"/>
       </node>
     </segment>
   </branch>
@@ -743,7 +743,7 @@
                   <simple-transition/>
                   <node>
                     <end-node name="error"/>
-                    <node-display x="0" y="6"/>
+                    <node-display x="0" y="3"/>
                   </node>
                 </segment>
               </branch>
@@ -786,36 +786,6 @@
             </simple-transition>
             <node>
               <call-node start-name-ref="Mail-SecureSend"/>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="target" x="0" y="-1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="true"/>
-                <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/SetOrderStatus.ds"/>
-                <key-binding alias="test" key="ScriptLog"/>
-                <key-binding alias="Order" key="Order"/>
-              </pipelet-node>
-              <node-display x="0" y="2"/>
-              <branch basename="b4" source-connector="error">
-                <transition target-connector="in1" target-path="./+1">
-                  <transition-display>
-                    <bend-point relative-to="source" x="1" y="0"/>
-                    <bend-point relative-to="target" x="1" y="0"/>
-                  </transition-display>
-                </transition>
-              </branch>
-            </node>
-            <transition target-connector="in1" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
               <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
@@ -980,45 +950,80 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
     <segment>
       <node>
         <start-node call-mode="private" name="PlaceOrder" secure="false"/>
-        <node-display x="17" y="4"/>
+        <node-display x="18" y="4"/>
       </node>
-      <simple-transition/>
+      <simple-transition transaction-control="begin">
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="PlaceOrder" pipelet-set-identifier="bc_api">
           <key-binding alias="Order" key="Order"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
         <branch basename="b2" source-connector="error">
-          <transition target-connector="in">
+          <transition target-connector="in1" target-path="./b3.1"/>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="checkout/SetOrderStatus.ds"/>
+          <key-binding alias="Order" key="Order"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in2">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="source" x="2" y="0"/>
             </transition-display>
           </transition>
           <segment>
             <node>
+              <join-node/>
+              <node-display x="1" y="-1"/>
+            </node>
+            <simple-transition transaction-control="rollback">
+              <transition-display>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <end-node name="error"/>
-              <node-display orientation="horizontal" x="1" y="0"/>
+              <node-display orientation="horizontal" x="2" y="0"/>
             </node>
           </segment>
         </branch>
       </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node custom-name="Confirm order" pipelet-name="Eval" pipelet-set-identifier="bc_api">
-          <config-property key="Expression" value="Order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED)"/>
-          <config-property key="Transactional" value="true"/>
-          <key-binding alias="Result" key="Result"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
+      <simple-transition transaction-control="commit">
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <end-node/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
       </node>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_14">
+    <segment>
+      <node>
+        <text-node>
+          <description>Mark order as EXPORT_STATUS_READY and CONFIRMATION_STATUS_CONFIRMED</description>
+        </text-node>
+        <node-display x="17" y="7"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_15">
     <segment>
       <node>
         <text-node>
@@ -1028,7 +1033,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_15">
+  <branch basename="_ANONYMOUS_BRANCH_16">
     <segment>
       <node>
         <text-node>
@@ -1038,7 +1043,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_16">
+  <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
         <text-node>
@@ -1048,7 +1053,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_17">
+  <branch basename="_ANONYMOUS_BRANCH_18">
     <segment>
       <node>
         <text-node>
@@ -1058,7 +1063,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
+  <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
         <text-node>
@@ -1177,7 +1182,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_20">
+  <branch basename="_ANONYMOUS_BRANCH_21">
     <segment>
       <node>
         <text-node>
@@ -1354,7 +1359,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1364,7 +1369,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_24">
+  <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
         <text-node>
@@ -1374,7 +1379,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1393,7 +1398,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in2" target-path="/Start.2/b2.3"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
+  <branch basename="_ANONYMOUS_BRANCH_28">
     <segment>
       <node>
         <text-node>
@@ -1412,7 +1417,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in1" target-path="/Start.2/b2.4"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1422,7 +1427,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_30">
+  <branch basename="_ANONYMOUS_BRANCH_31">
     <segment>
       <node>
         <text-node>
@@ -1441,7 +1446,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       <transition target-connector="in1" target-path="/Start.2/b2.4/b2.2"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_32">
+  <branch basename="_ANONYMOUS_BRANCH_33">
     <segment>
       <node>
         <text-node>
@@ -1608,7 +1613,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_36">
+  <branch basename="_ANONYMOUS_BRANCH_37">
     <segment>
       <node>
         <text-node>
@@ -1618,7 +1623,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_37">
+  <branch basename="_ANONYMOUS_BRANCH_38">
     <segment>
       <node>
         <text-node>
@@ -1628,7 +1633,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_38">
+  <branch basename="_ANONYMOUS_BRANCH_39">
     <segment>
       <node>
         <text-node>
@@ -1638,17 +1643,17 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
+  <branch basename="_ANONYMOUS_BRANCH_40">
     <segment>
       <node>
         <text-node>
-          <description>Mark order as EXPORT_STATUS_READY.</description>
+          <description>Order successfully created, communicate status back to calling pipeline.</description>
         </text-node>
         <node-display x="1" y="33"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_40">
+  <branch basename="_ANONYMOUS_BRANCH_41">
     <segment>
       <node>
         <text-node>
@@ -1752,16 +1757,6 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
             <transition target-connector="in2" target-path="/Submit.1/b3.3"/>
           </segment>
         </branch>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_43">
-    <segment>
-      <node>
-        <text-node>
-          <description>Order successfully created, communicate status back to calling pipeline.</description>
-        </text-node>
-        <node-display x="1" y="36"/>
       </node>
     </segment>
   </branch>

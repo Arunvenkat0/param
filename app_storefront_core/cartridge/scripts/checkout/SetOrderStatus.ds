@@ -12,6 +12,9 @@ function execute( pdict : PipelineDictionary ) : Number
 
 	// set the export status to EXPORT_STATUS_READY
 	order.setExportStatus(Order.EXPORT_STATUS_READY);
+	
+	// set the confirmation status to confirmed
+   	order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED)
    
    	return PIPELET_NEXT;
 }
