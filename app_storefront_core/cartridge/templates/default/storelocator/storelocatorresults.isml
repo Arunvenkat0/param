@@ -13,7 +13,7 @@
 		<a href="${URLUtils.url('Stores-Find')}">&lt;&lt; ${Resource.msg('storelocator.storelocatorresults.backtolocator','storelocator',null)}</a>
 
 		<div class="store-locator-header">
-			${Resource.msg('storelocator.storelocatorresults.allstores','storelocator',null)} {pdict.SearchString}
+			${Resource.msg('storelocator.storelocatorresults.allstores','storelocator',null)} ${pdict.SearchString}
 			<isif condition="${pdict.SearchString == 'US'}">${Resource.msg('country.unitedstates','forms',null)}</isif>
 			<isif condition="${pdict.SearchString == 'DE'}">${Resource.msg('country.germany','forms',null)}</isif>
 			<isif condition="${pdict.SearchString == 'CA'}">${Resource.msg('country.canada','forms',null)}</isif>

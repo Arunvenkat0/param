@@ -1,0 +1,43 @@
+var Resource = require('dw/web/Resource');
+
+
+/**
+ * Generates variables consumed by template storelocator/storelocatorresults
+ * 
+ * @param {dw.util.Iterator} storesIterator Search result for stores
+ * @param {String} searchType Initial search criteria. Supported values are findbyzip, findbystate and findbycountry
+ * @param {String} searchKey The value used to find Stores
+ * 
+ */
+function generate (storesIterator, searchType, searchKey) {
+    /** variables consumed by template storelocator/storelocatorresults */
+    var storelocatorresultsparams = {};
+    /** Search result for stores */
+	storelocatorresultsparams.Stores = storesIterator;
+    /**  Number of found Stores */
+    storelocatorresultsparams.StoresCount = 0;
+    
+    // determine number of found stores
+	if (!empty(storesIterator)) {
+		if ('length' in storesIterator) {
+			storelocatorresultsparams.StoresCount = storesIterator.length;	
+		} else {
+			storelocatorresultsparams.StoresCount = storesIterator.getCount();	
+		}
+	}
+    	
+    /**  Initial search criteria. Supported values are findbyzip, findbystate and findbycountry */
+    storelocatorresultsparams.Type = searchType;
+    var searchTerm = searchKey;
+    
+    // @TODO also have a mapping with state codes 
+    if (searchType == 'findbycountry') {
+    	searchTerm = Resource.msg('country.codes.' + searchKey,'forms',null);
+    }
+    	
+    /**  Print out on what has been searched for */
+    storelocatorresultsparams.SearchString = Resource.msgf('storelocator.storelocatorresults.' + searchType, 'storelocator', null, searchTerm);
+	return storelocatorresultsparams;
+}
+
+exports.generate = generate;
