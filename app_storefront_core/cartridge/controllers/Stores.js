@@ -1,12 +1,12 @@
 'use strict';
 
 /* API Includes */
-var ContentMgr = require('dw/content/ContentMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
 var guard = require('./dw/guard');
+var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
 var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');			
 var pageMeta = require('~/cartridge/scripts/meta');
 
@@ -15,7 +15,7 @@ var pageMeta = require('~/cartridge/scripts/meta');
  */
 function find() {
 	storeLocatorForm.clear();	
-    pageMeta.update(ContentMgr.getContent("store-locator"));
+    pageMeta.update(storeLocatorAsset);
     response.renderTemplate('storelocator/storelocator');
     return response;
 };
@@ -24,7 +24,7 @@ function find() {
  * The form handler. This form is submitted with GET.
  */
 function findStores() {
-    pageMeta.update(ContentMgr.getContent("store-locator"));
+    pageMeta.update(storeLocatorAsset);
 	/* Option A - jQuery Like 
 	storeLocatorForm.on('findbycountry', function(storeLocatorForm) {
 		var searchKey = storeLocatorForm.address.country.value;

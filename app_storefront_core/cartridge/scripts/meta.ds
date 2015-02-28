@@ -33,6 +33,10 @@ Meta.prototype = {
      * @param  {Object|dw.catalog.Product|dw.catalog.Category|dw.content.Content|dw.content.Folder} object The object to update with
      */
     update : function(object){
+        // check if opbject wrapped in AbstractHelper
+        if ('object' in object) {
+        	object = object.object;	
+        }
         // check if it is a system object
         if(object.class){
             // update metadata

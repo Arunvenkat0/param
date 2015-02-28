@@ -643,7 +643,9 @@ function requireLogin(args)
 
 function LoginForm()
 {
-    var TriggeredAction = request.triggeredFormAction;
+    
+	
+var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null)
     {
         if (TriggeredAction.formId == 'findorder')
@@ -682,19 +684,16 @@ function LoginForm()
 
             // login successful
             // redirect to the origin who triggered the login process
-            if (!empty(targetAction))
-            {
-                if (empty(targetParameters))
-                {
+            if (request.httpParameterMap.original.submitted) {
+                //@TODO make sure only path, no hosts are allowed as redirect target 
+            	response.redirect(decodeURI(request.httpParameterMap.original.value));
+            } else if (!empty(targetAction)) {
+                if (empty(targetParameters)) {
                     response.redirect(dw.web.URLUtils.https(targetAction));
-                }
-                else
-                {
+                } else {
                     response.redirect(dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters)));
                 }
-            }
-            else
-            {
+            } else {
                 response.redirect(dw.web.URLUtils.https('Account-Show'));
             }
             return;

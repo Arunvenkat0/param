@@ -1,6 +1,11 @@
 'use strict';
 /* jshint indent:false,white:false */
 
+/*
+usage
+var form = require('~/cartridge/scripts/object/Form');			
+*/
+
 /** @module object/Form */
 
 var AbstractHelper = require('./AbstractHelper');
@@ -50,6 +55,10 @@ var Form = AbstractHelper.extend(
 	
 	clear : function() {
 		this.object.clearFormElement();	
+	},
+	
+	setValue : function (key,value) {
+		this.object[key].value = value;	
 	}
 	
 });

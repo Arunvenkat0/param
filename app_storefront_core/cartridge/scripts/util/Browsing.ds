@@ -1,0 +1,26 @@
+/**
+ *	recovers the last url from the click stream
+ */
+
+function lastUrl() {
+	var maxClicksToCheck = 3;
+	var location = dw.web.URLUtils.url('Home-Show');
+	var clicks = session.clickStream.clicks;
+	if (clicks.size() > 0) {
+		var click = clicks[clicks.size()-1];
+		location = dw.web.URLUtils.url(click.pipelineName);
+		if(!empty(click.queryString) && click.queryString.indexOf('=')!= -1){
+			var params = click.queryString.split('&');
+			for each (var param in params) {
+				var name = param.split('=')[0];
+				var value = param.split('=')[1];
+				location.append(name, value);
+			}	
+		}
+	}
+	return location;		
+}
+
+exports.lastUrl = lastUrl;
+//add url parser (libUrl)
+//add continue shopping here 

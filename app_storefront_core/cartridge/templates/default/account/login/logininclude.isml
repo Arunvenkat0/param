@@ -42,8 +42,9 @@
 				</div>
 				
 				<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
-
-                <isif condition="${!empty(session.forms.login.targetAction.value)}">
+				<isif condition="${request.httpParameterMap.original.submitted}">
+					<input type="hidden" name="original" value="${encodeURI(request.httpParameterMap.original.value)}" />
+                <iselseif condition="${!empty(session.forms.login.targetAction.value)}">
 	                <input type="hidden" name="${session.forms.login.targetAction.htmlName}" value="${session.forms.login.targetAction.value}" />
 	                <input type="hidden" name="${session.forms.login.targetParameters.htmlName}" value="${session.forms.login.targetParameters.value}" />
                 </isif>

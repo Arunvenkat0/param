@@ -2,37 +2,28 @@
  * This is a collection of decorators for functions which performs several security checks.
  * They can be combined with each other to configure the necessary constraints for a function that is exposed to the Internet.
  */
+var form = require('~/cartridge/scripts/object/Form');			
+var content = require('~/cartridge/scripts/object/Content');
+var browsing = require('~/cartridge/scripts/util/Browsing');
+var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * This method contains the login procedure specific for the customer account,
  * e.g. order tracking. After login, it redirects to the provided target action.
  */
-function requireLogin(args)
+function requireLogin()
 {
-    var forms = session.forms;
-
-    f.clearFormElement(forms.ordertrack);
-    f.clearFormElement(forms.login);
+    form.get('ordertrack').clear();
+    var loginForm = form.get('login');
+    loginForm.clear();
+    
 
     if (customer.registered)
     {
-        forms.login.username.value = customer.profile.credentials.login;
-        forms.login.rememberme.value = true;
+    	loginForm.setValue('username', customer.profile.credentials.login);
+    	loginForm.setValue('rememberme', true);
     }
-
-    w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent('myaccount-login'));
-
-    // set the redirect destination
-    session.forms.login.targetAction.value = args.TargetAction;
-    
-    if (!empty(args.TargetParameters))
-    {
-        session.forms.login.targetParameters.value = JSON.stringify(args.TargetParameters);
-    }
-    
-    response.renderTemplate('account/login/accountlogin', {
-        RegistrationStatus : false
-    });
+    response.redirect(dw.web.URLUtils.https('Account-Show','original', browsing.lastUrl()));
 }
 	
 /**
@@ -112,24 +103,35 @@ var Filters = {
 function filter (filters, action, error) {
 	return expose(function() {
 		var filtersPassed = true;
-				
+		var errors = [];		
 		for (var i = 0; i < filters.length; i++) {
 			if (!error) {
 				if (filters[i] == 'https') {
 					error = switchToHttps;
 				} else if (filters[i] == 'loggedIn') {
 					error = requireLogin;
-				} else {
-					error = function() {};
 				}
 				
 			}
 			
 			if (filtersPassed) {
 				filtersPassed = Filters[filters[i]].apply(Filters)
+			} 
+			
+			if (!filtersPassed) {
+				errors.push(filters[i]);
 			}
+			
+			
 		}
 		
+		if ( !error ) {
+			error = function() {
+				var url = dw.web.URLUtils.url('Error-Start','guardmismatch', errors.join('|'));
+			    response.redirect(url);
+			    return response;
+			};
+		}
 		
 		if (filtersPassed) {
 			return action();
