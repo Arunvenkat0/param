@@ -5,54 +5,53 @@
  * @module Page
  */
 
-var g = require('./dw/guard');
-var ContentMgr = require('dw/content/ContentMgr');
-
+var guard = require('./dw/guard');
+var contents = require('~/cartridge/scripts/object/Content');
+var pageMeta = require('~/cartridge/scripts/meta');
 /**
  * Renders a content page based on the rendering template configured for the page or a default rendering template.
  */
-function show()
-{
+function show() {
     var assetId = request.httpParameterMap.cid.stringValue;
-    var content = ContentMgr.getContent(assetId);
-    if (!content)
-    {
+    var content = contents.get(assetId).object;
+    if (!content || !content) {
+    	response.setStatus(404);
         response.renderTemplate('error/notfound');
-        return;
+        return response;
+    } else {
+	    // @TODO replace with search module call
+	    var contentSearchResult = require('./Search').GetContentResult().ContentSearchResult;
+	
+	    pageMeta.update(content);
+	
+	    response.renderTemplate(content.template || 'content/content/contentpage', {
+	        Content: content,
+	        ContentSearchResult: contentSearchResult,
+	        // @FIXME This should not be required, but a require in the template will create a new meta instance
+	        Meta: pageMeta
+	    });
+	    
+	    return response;
     }
-
-    // @TODO replace with search module call
-    var SearchController = require('./Search');
-    var GetContentResultResult = SearchController.GetContentResult();
-    var ContentSearchResult = GetContentResultResult.ContentSearchResult;
-
-    require('~/cartridge/scripts/meta').update(content);
-
-    response.renderTemplate(content.template || 'content/content/contentpage', {
-        Content: content,
-        ContentSearchResult: ContentSearchResult,
-        // @FIXME This should not be required, but a require in the template will create a new meta instance
-        Meta: require('~/cartridge/scripts/meta')
-    });
 }
 
 
 /**
  * Renders a content asset in order to include it into other pages via remote include.
  */
-function include()
-{
+function include() {
     var assetId = request.httpParameterMap.cid.stringValue;
-    var content = ContentMgr.getContent(assetId);
+    var content = contents.get(assetId).object;
 
     response.renderTemplate('content/content/contentassetinclude', {
     	Content: content
     });
+    return response;
 }
 
 
 /*
  * Export the publicly available controller methods
  */
-exports.Show    = g.get(show);
-exports.Include = g.get(include);
+exports.Show    = guard.filter(['get'],show);
+exports.Include = guard.filter(['get'],include);

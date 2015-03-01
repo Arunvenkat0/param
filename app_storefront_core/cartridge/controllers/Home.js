@@ -5,26 +5,26 @@
  * @module Home
  */
 
-var g = require('./dw/guard');
+var guard = require('./dw/guard');
 
 /**
- * Renders the whole menu to use as a remote include. It's cached.
+ * Renders the home page.
  */
-function show()
-{
+function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
     require('~/cartridge/scripts/meta').update(rootFolder);
 
     response.renderTemplate('content/home/homepage');
+    return response;
 }
 
 /**
  * Remote include for the header
  * This is designed as a remote include to achieve optimal caching results for the header
  */
-function includeHeader()
-{
+function includeHeader() {
     response.renderTemplate('components/header/header');
+    return response;
 }
 
 
@@ -34,9 +34,9 @@ function includeHeader()
  *
  * @deprecated Converted into a template include
  */
-function includeHeaderMenu()
-{
+function includeHeaderMenu() {
     response.renderTemplate('components/header/headermenu');
+    return response;
 }
 
 
@@ -46,54 +46,54 @@ function includeHeaderMenu()
  * This is designed as a remote include as it represents dynamic session information and must not be
  * cached.
  */
-function includeHeaderCustomerInfo()
-{
+function includeHeaderCustomerInfo() {
     response.renderTemplate('components/header/headercustomerinfo');
+    return response;
 }
 
 
-function errorNotFound()
-{
-    response.renderTemplate('error/notfound');
+function errorNotFound() {
+	response.setStatus(404);
+	response.renderTemplate('error/notfound');
+    return response;
 }
 
 // @TODO As we want to have a responsive layout, do we really need the below?
-function mobileSite()
-{
+function mobileSite() {
     session.custom.device = 'mobile';
-
     response.renderTemplate('components/changelayout');
+    return response;
 }
 
-
-function fullSite()
-{
+// @TODO remove - not responsive - maybe replace with a css class forcing the layout
+function fullSite() {
     session.custom.device = 'fullsite';
-
     response.renderTemplate('components/changelayout');
+    return response;
 }
 
-
-function setLayout()
-{
+// @TODO remove - not responsive
+function setLayout() {
     response.renderTemplate('components/setlayout');
+    return response;
 }
 
 
-function deviceLayouts()
-{
-    response.renderTemplate('util/devicelayouts');
+// @TODO remove - not responsive
+function deviceLayouts() {
+	response.renderTemplate('util/devicelayouts');
+	return response;
 }
 
 /*
  * Export the publicly available controller methods
  */
-exports.Show                        = g.get(show);
-exports.IncludeHeader               = g.get(includeHeader);
-//exports.IncludeHeaderMenu           = g.get(includeHeaderMenu);
-exports.IncludeHeaderCustomerInfo   = g.get(includeHeaderCustomerInfo);
-exports.ErrorNotFound               = g.get(errorNotFound);
-exports.MobileSite                  = g.get(mobileSite);
-exports.FullSite                    = g.get(fullSite);
-exports.SetLayout                   = g.get(setLayout);
-exports.DeviceLayouts               = g.get(deviceLayouts);
+exports.Show                        = guard.filter(['get'],show);
+exports.IncludeHeader               = guard.filter(['get'],includeHeader);
+//exports.IncludeHeaderMenu           = guard.filter(['get'],includeHeaderMenu);
+exports.IncludeHeaderCustomerInfo   = guard.filter(['get'],includeHeaderCustomerInfo);
+exports.ErrorNotFound               = guard.filter(['get'],errorNotFound);
+exports.MobileSite                  = guard.filter(['get'],mobileSite);
+exports.FullSite                    = guard.filter(['get'],fullSite);
+exports.SetLayout                   = guard.filter(['get'],setLayout);
+exports.DeviceLayouts               = guard.filter(['get'],deviceLayouts);
