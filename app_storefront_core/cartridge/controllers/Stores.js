@@ -7,31 +7,31 @@ var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 /* Script Modules */
 var guard = require('./dw/guard');
 var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
-var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');			
+var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * Provides a form to locate stores by geographical information.
  */
 function find() {
-	storeLocatorForm.clear();	
+	storeLocatorForm.clear();
     pageMeta.update(storeLocatorAsset);
     response.renderTemplate('storelocator/storelocator');
     return response;
-};
+}
 
 /**
  * The form handler. This form is submitted with GET.
  */
 function findStores() {
     pageMeta.update(storeLocatorAsset);
-	/* Option A - jQuery Like 
+	/* Option A - jQuery Like
 	storeLocatorForm.on('findbycountry', function(storeLocatorForm) {
 		var searchKey = storeLocatorForm.address.country.value;
 		var stores = SystemObjectMgr.querySystemObjects('Store', 'countryCode = {0}', 'countryCode desc', searchKey);
 		return {'stores' : stores, 'searchKey' : searchKey};
-	});	
-	
+	});
+
 	storeLocatorForm.on('findbystate' : function(storeLocatorForm) {
 		var searchKey = storeLocatorForm.address.states.stateUSCA.htmlValue;
 		var stores = null;
@@ -40,7 +40,7 @@ function findStores() {
 	    }
 		return {'stores' : stores, 'searchKey' : searchKey};
 	});
-	
+
 	storeLocatorForm.on('findbyzip' : function(storeLocatorForm) {
     	var searchKey = storeLocatorForm.postalCode.value;
     	var storesMgrResult = StoreMgr.searchStoresByPostalCode(storeLocatorForm.countryCode.value, searchKey, storeLocatorForm.distanceUnit.value, storeLocatorForm.maxdistance.value);
@@ -59,15 +59,15 @@ function findStores() {
 			} else {
 				return {'stores' : stores, 'searchKey' : searchKey};
 			}
-		},	
+		},
 		'findbystate' : function(formgroup) {
 			var searchKey = formgroup.address.states.stateUSCA.htmlValue;
 			var stores = null;
-			
+
 			if (!empty(searchKey)) {
 				stores = SystemObjectMgr.querySystemObjects('Store', 'stateCode = {0}', 'stateCode desc', searchKey);
 			}
-			
+
 			if (empty(stores)) {
 				return null;
 			} else {
@@ -84,20 +84,20 @@ function findStores() {
 				return {'stores' : stores, 'searchKey' : searchKey};
 			}
 		}
-	});		
+	});
 
 	/* Option C - Explicite Magic */
 	//Get From GIT
-	
+
 	if (searchResult) {
 		// generate object, with fields to be used inside the template
-		var params = require('~/cartridge/scripts/templatebridge/storelocatorresults').generate(searchResult.stores, storeLocatorForm.action, searchResult.searchKey); 
+		var params = require('~/cartridge/scripts/templatebridge/storelocatorresults').generate(searchResult.stores, storeLocatorForm.action, searchResult.searchKey);
 		response.renderTemplate('storelocator/storelocatorresults', params);
-	} else { 
+	} else {
 		response.renderTemplate('storelocator/storelocator', {'Stores':''});
 	}
 	return response;
-};
+}
 
 /**
  * Renders the details of a store.
@@ -106,10 +106,10 @@ function details() {
     var storeID = request.httpParameterMap.StoreID.value;
     var store = dw.catalog.StoreMgr.getStore(storeID);
     pageMeta.update(store);
-	
+
 	response.renderTemplate('storelocator/storedetails', {Store: store});
 	return response;
-};
+}
 
 /*
  * Exposed web methods

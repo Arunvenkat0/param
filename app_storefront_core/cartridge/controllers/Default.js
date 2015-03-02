@@ -1,3 +1,5 @@
+'use strict';
+
 var g = require('./dw/guard');
 
 function Start()
