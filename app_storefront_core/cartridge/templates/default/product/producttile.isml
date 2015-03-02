@@ -204,53 +204,6 @@
 			<isinclude template="product/components/reviewsmini"/>
 		</isif>
 
-		<iscomment>Compare</iscomment>
-		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
-		<isif condition="${showcompare}">
-			<iscomment>
-				Render the compare checkbox, if search result is based on a category context.
-				The checkbox is displayed if either the category or one of its parent categories
-				has the custom attribute "enableCompare" set to true.
-			</iscomment>
-			<isscript>importScript("product/ProductUtils.ds")</isscript>
-			<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value)}">
-				<div class="product-compare">
-					<isif condition="${!Product.productSet && !Product.bundle}">
-						<isscript>
-							// mark the compare checkbox checked if the current product is
-							// in the current comparison list for the current category
-							importScript( "catalog/libCompareList.ds" );
-
-							var comparison = GetProductCompareList();
-							var comparisonProducts = null;
-							var checkedStr = '';
-							// Set the category
-							if (!empty(pdict.ProductSearchResult && !empty(pdict.ProductSearchResult.category))) {
-								comparison.setCategory(pdict.ProductSearchResult.category.ID);
-							}
-
-							if (comparison) {
-								comparisonProducts = comparison.getProducts();
-							}
-							if (!empty(comparisonProducts)) {
-								var pIt = comparisonProducts.iterator();
-								var productId = null;
-								while (pIt.hasNext()) {
-									productId = pIt.next();
-									if (productId == Product.ID) {
-										checkedStr = 'checked="checked"';
-										break;
-									}
-								}
-							}
-						</isscript>
-						<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
-						<label for="${'cc-'+Product.UUID}">Compare</label>
-					</isif>
-				</div>
-			</isif>
-		</isif>
-
 		<iscomment>Swatches</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<isif condition="${showswatches}">
@@ -312,6 +265,53 @@
 						</isloop>
 					</ul><!-- .swatch-list -->
 				</div><!-- .product-swatches -->
+			</isif>
+		</isif>
+
+		<iscomment>Compare</iscomment>
+		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+		<isif condition="${showcompare}">
+			<iscomment>
+				Render the compare checkbox, if search result is based on a category context.
+				The checkbox is displayed if either the category or one of its parent categories
+				has the custom attribute "enableCompare" set to true.
+			</iscomment>
+			<isscript>importScript("product/ProductUtils.ds")</isscript>
+			<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value)}">
+				<div class="product-compare">
+					<isif condition="${!Product.productSet && !Product.bundle}">
+						<isscript>
+							// mark the compare checkbox checked if the current product is
+							// in the current comparison list for the current category
+							importScript( "catalog/libCompareList.ds" );
+
+							var comparison = GetProductCompareList();
+							var comparisonProducts = null;
+							var checkedStr = '';
+							// Set the category
+							if (!empty(pdict.ProductSearchResult && !empty(pdict.ProductSearchResult.category))) {
+								comparison.setCategory(pdict.ProductSearchResult.category.ID);
+							}
+
+							if (comparison) {
+								comparisonProducts = comparison.getProducts();
+							}
+							if (!empty(comparisonProducts)) {
+								var pIt = comparisonProducts.iterator();
+								var productId = null;
+								while (pIt.hasNext()) {
+									productId = pIt.next();
+									if (productId == Product.ID) {
+										checkedStr = 'checked="checked"';
+										break;
+									}
+								}
+							}
+						</isscript>
+						<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
+						<label for="${'cc-'+Product.UUID}">Compare</label>
+					</isif>
+				</div>
 			</isif>
 		</isif>
 	</div><!--  END: .product-tile -->
