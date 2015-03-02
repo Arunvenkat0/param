@@ -931,7 +931,8 @@ module.exports = function () {
 
 var ajax = require('./ajax'),
 	util = require('./util'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	imagesLoaded = require('imagesloaded');
 
 var dialog = {
 	/**
@@ -964,61 +965,70 @@ var dialog = {
 
 		// create the dialog
 		this.$container = $target;
-		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
+		this.$container.dialog(_.merge({}, this.settings, params.options || {}));
 	},
 	/**
 	 * @function
-	 * @description Opens a dialog using the given url (options.url) or html (options.html)
-	 * @param {Object} options
-	 * @param {Object} options.url should contain the url
-	 * @param {String} options.html contains the html of the dialog content
+	 * @description Opens a dialog using the given url (params.url) or html (params.html)
+	 * @param {Object} params
+	 * @param {Object} params.url should contain the url
+	 * @param {String} params.html contains the html of the dialog content
 	 */
-	open: function (options) {
+	open: function (params) {
 		// close any open dialog
 		this.close();
-		this.create(options);
-		this.replace(options);
+		this.create(params);
+		this.replace(params);
 	},
 	/**
 	 * @description populate the dialog with html content, then open it
-	 * @param {String} html
 	 **/
-	openWithContent: function (html) {
+	openWithContent: function (params) {
+		var content, position, callback;
+
 		if (!this.$container) { return; }
-		this.$container.empty().html(html);
+		content = params.content || params.html;
+		if (!content) { return; }
+		this.$container.empty().html(content);
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
-		this.$container.dialog('option', 'position', {
-			my: 'center',
-			at: 'center',
-			of: window
-		});
+
+		if (params.options) {
+			position = params.options.position;
+		}
+		if (!position) {
+			position = this.settings.position;
+		}
+		imagesLoaded(this.$container).on('done', function () {
+			this.$container.dialog('option', 'position', position);
+		}.bind(this))
+
+		callback = (typeof params.callback === 'function') ? params.callback : function () {};
+		callback();
 	},
 	/**
 	 * @description Replace the content of current dialog
-	 * @param {object} options
-	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
-	 * @param {string} options.html - If no url property is provided, use html provided to replace
+	 * @param {object} params
+	 * @param {string} params.url - If the url property is provided, an ajax call is performed to get the content to replace
+	 * @param {string} params.html - If no url property is provided, use html provided to replace
 	 */
-	replace: function (options) {
+	replace: function (params) {
 		if (!this.$container) {
 			return;
 		}
-		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
-		if (options.url) {
-			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
+		if (params.url) {
+			params.url = util.appendParamToURL(params.url, 'format', 'ajax');
 			ajax.load({
-				url: options.url,
-				data: options.data,
+				url: params.url,
+				data: params.data,
 				callback: function (response) {
-					this.openWithContent(response);
-					callback();
+					params.content = response;
+					this.openWithContent(params);
 				}.bind(this)
 			});
-		} else if (options.html) {
-			this.openWithContent(options.html);
-			callback();
+		} else if (params.html) {
+			this.openWithContent(params);
 		}
 	},
 	/**
@@ -1083,13 +1093,19 @@ var dialog = {
 		width: '800',
 		close: function () {
 			$(this).dialog('close');
+		},
+		position: {
+			my: 'center',
+			at: 'center',
+			of: window,
+			collision: 'flipfit'
 		}
 	}
 };
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":48,"imagesloaded":51,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
