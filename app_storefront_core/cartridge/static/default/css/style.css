@@ -2960,11 +2960,9 @@ ul.product-availability-list {
   padding-top: 10px; }
 
 .multishipprogress div, .multishipprogress .step-3 {
-  background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;
   display: inline;
   padding: 1em; }
 .multishipprogress .step-4 {
-  background: none repeat scroll 0 0 transparent;
   padding-right: 0; }
 
 .checkout-multi-shipping .cart-row .gift-message-text {
@@ -3720,11 +3718,9 @@ h1 .account-logout {
   margin: 0.3em 0 0.5em; }
 
 .multishipprogress div, .multishipprogress .step-3 {
-  background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;
   display: inline;
   padding: 1em; }
 .multishipprogress .step-4 {
-  background: none repeat scroll 0 0 transparent;
   padding-right: 0; }
 
 .multishipaddressestable {
