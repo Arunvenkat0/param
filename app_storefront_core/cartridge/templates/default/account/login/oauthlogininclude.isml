@@ -1,8 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${pdict.CurrentSession.customer.anonymous || pdict.CurrentSession.customer.externallyAuthenticated}">
 	<isif condition="${pdict.CurrentSession.customer.anonymous}">
+		<p>${Resource.msg('global.or','locale',null)}</p>
 		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
 	<iselse/>
+		<p>${Resource.msg('global.or','locale',null)}</p>
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
 	<iscomment>Login Unsuccessful Error Message</iscomment>
@@ -74,6 +76,5 @@
 			<input type="hidden" name="rememberme" id="rememberme" value="">
 			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}" value="${pdict.CurrentForms.oauthlogin.secureKeyValue}"/>			
 		</fieldset>
-		<p>${Resource.msgf('logininclude.oauthdetails','account',"")}</p>
 	</form>		
 </isif>
