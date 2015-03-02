@@ -18,7 +18,6 @@
 <div class="checkout multiship">
     <iscomment>checkout progress indicator</iscomment>
     <ischeckoutprogressindicator step="2" multishipping="true"/>
-	<h1>${Resource.msg('pt_checkout.breadcrumb','checkout',null)}</h1>
 	<form action="${URLUtils.continueURL()}" method="post" class="address checkout-multi-shipping address">
 		<div class="checkoutmultishipping">
 			<isloop items="${pdict.CurrentForms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">

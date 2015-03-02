@@ -1747,7 +1747,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Help?&amp;nbsp;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Help?&amp;nbsp;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
