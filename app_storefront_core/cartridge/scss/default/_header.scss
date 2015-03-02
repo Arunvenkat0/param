@@ -129,8 +129,8 @@ nav[role="navigation"] {
 
 .header-search {
 	width: 100%;
+	background-color: $dim-gray;
 	@media screen and (min-width: 768px) {
-		background-color: $dim-gray;
 		position: absolute;
 		right: 7%;
 		top: 2.2em;
@@ -151,6 +151,7 @@ nav[role="navigation"] {
 		}
 	}
 	input[type="text"] {
+		background-color: transparent;
 		border: none;
 		color: $white;
 		float: left;
@@ -160,8 +161,6 @@ nav[role="navigation"] {
 		width: 85%; // default for older browser
 		width: calc(100% - 2.5rem);
 		@media screen and (min-width: 768px) {
-			background-color: transparent;
-			color: $white;
 			width: 14rem;
 			&:focus {
 				border-bottom-color: $night-rider;
