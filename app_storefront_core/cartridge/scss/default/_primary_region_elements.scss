@@ -22,6 +22,7 @@
 .primary-content {
 	h2 {
 		font-size: 1.3em;
+		text-transform: uppercase;
 	}
 	h3 {
 		font-size: 1.15em;
@@ -78,7 +79,7 @@
 	position: relative;
 	text-transform: uppercase;
 	.dialog-required {
-		text-transform: initial;
+		text-transform: none;
 	}
 }
 

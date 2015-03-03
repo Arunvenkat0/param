@@ -94,11 +94,12 @@ legend {
 }
 
 .dialog-required {
+	display: inline;
 	font-size: 12px;
 	font-weight: 400;
 	position: relative;
-	float: right;
 	padding: 2px 0;
+	text-transform: none
 	em {
 		color: $night-rider;
 	}
