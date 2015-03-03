@@ -18,7 +18,7 @@
 	.item-quantity-details {
 		padding-left: 0;
 		.item-user-actions {
-			line-height: 1.4em;
+			line-height: 1.4;
 			width: 100px;
 			a, button {
 				display: block;
@@ -150,8 +150,8 @@
 .cart-action-continue-shopping {
 	float: right;
 	button.button-text {
-		line-height: 50px;
-		padding-right: 1.0em;
+		line-height: 39px;
+		margin-right: 1.0em;
 	}
 }
 
@@ -171,7 +171,8 @@
 }
 
 .cart-actions-top {
-	padding-bottom: 1.0em;
+	margin-top: .5rem;
+	padding-bottom: 1em;
 	.cart-action-continue-shopping {
 		float: none;
 	}

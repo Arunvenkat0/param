@@ -23,6 +23,7 @@
 }
 
 .menu-toggle {
+	background-color: transparent;
 	border: none;
 	color: $night-rider;
 	display: block;
@@ -31,6 +32,9 @@
 	padding: 0.5em;
 	@media screen and (min-width: 768px) {
 		display: none;
+	}
+	&:hover {
+		background-color: transparent;
 	}
 	.menu-icon {
 		font-size: 2em;
@@ -194,7 +198,7 @@ nav[role="navigation"] {
 		}
 	}
 	a {
-		color: $mantis;
+		color: $citrus;
 		display: block;
 		font-size: 1.2em;
 		padding: 0.9rem 1rem;
@@ -216,12 +220,12 @@ nav[role="navigation"] {
 		border: none;
 	}
 	.menu-item-toggle {
-		color: $mantis;
+		color: $citrus;
 		cursor: pointer;
 		float: left;
 		line-height: 1.1;
 		padding: 1rem 0.8rem;
-		transition: background-color 0.5s;
+		transition: background-color 0.3s;
 		width: 2.1rem;
 		&:hover {
 			background-color: darken($night-rider, 10%);
@@ -231,7 +235,7 @@ nav[role="navigation"] {
 		}
 	}
 	a {
-		transition: background-color 0.5s, color 0.5s;
+		transition: background-color 0.3s, color 0.3s;
 		&:hover {
 			background-color: darken($night-rider, 10%);
 		}
@@ -255,7 +259,7 @@ nav[role="navigation"] {
 				width: 100%;
 			}
 			&:hover {
-				background-color: darken($mantis, 10%);
+				background-color: darken($citrus, 10%);
 				color: $white;
 			}
 		}
@@ -286,7 +290,7 @@ nav[role="navigation"] {
 			display: block;
 		}
 		a {
-			color: $mantis;
+			color: $citrus;
 			&:hover {
 				text-decoration: underline;
 			}
@@ -341,7 +345,7 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		display: block;
 		a {
-			color: darken($mantis, 20%);
+			color: darken($citrus, 20%);
 			font-weight: normal;
 			font-size: 1em;
 			padding: 0;

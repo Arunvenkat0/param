@@ -10,8 +10,10 @@
 		top: 2.2em;
 		right: 0;
 	}
-	a {
-		color: $pacific-blue;
+	.mini-cart-name {
+		a {
+			color: $pacific-blue;
+		}
 	}
 }
 
@@ -21,6 +23,7 @@
 		font-size: 2em;
 	}
 	.minicart-quantity {
+		color: $citrus;
 		font-size: 1.5em;
 		margin-left: 0.3em;
 	}
@@ -116,10 +119,13 @@
 	width: 50%;
 }
 
+.mini-cart-totals {
+	text-align: center;
+}
+
 .mini-cart-subtotals {
 	font-weight: 700;
 	padding: 1em 0 0;
-	text-align: center;
 	.label {
 		margin: 0 20px 0 0;
 	}
@@ -132,13 +138,6 @@
 	font-style: italic;
 	margin: 1em 2em;
 	padding: 1em;
-	text-align: center;
-}
-
-.mini-cart-link-cart {
-	display: block;
-	margin: 1em 2em;
-	width: auto;
 }
 
 .mini-cart-link-checkout {

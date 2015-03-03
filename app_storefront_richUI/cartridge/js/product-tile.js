@@ -7,7 +7,7 @@ function initQuickViewButtons() {
 	$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
-			$qvButton = $('<a id="quickviewbutton"/>');
+			$qvButton = $('<a id="quickviewbutton" class="quickview">Quick View<i class="fa fa-arrows-alt"></i></a>');
 		}
 		var $link = $(this).find('.thumb-link');
 		$qvButton.attr({
