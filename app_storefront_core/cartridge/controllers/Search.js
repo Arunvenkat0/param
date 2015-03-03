@@ -1,23 +1,23 @@
 var g = require('./dw/guard');
 
 /**
- * Renders a full featured product search result page. 
+ * Renders a full featured product search result page.
  * If the http parameter "format" is set to "ajax" only the product grid is rendered instead of the full page.
  */
 function Show()
 {
 	var CurrentHttpParameterMap = request.httpParameterMap;
-	
+
 	if (CurrentHttpParameterMap.format.stringValue == 'ajax' || CurrentHttpParameterMap.format.stringValue == 'page-element')
 	{
 		showProductGrid();
 		return;
 	}
-	
+
 	var SearchRedirectURLResult = new dw.system.Pipelet('SearchRedirectURL').execute({
 			SearchPhrase: CurrentHttpParameterMap.q.value
 	});
-	
+
 	if (SearchRedirectURLResult.result == PIPELET_NEXT)
 	{
 	    var Location = SearchRedirectURLResult.Location;
@@ -28,7 +28,7 @@ function Show()
 		});
 		return;
 	}
-	
+
 	var SearchResult = new dw.system.Pipelet('Search', {
 		SearchContent: true,
 		SearchProduct: true,
@@ -55,16 +55,16 @@ function Show()
 		RefineByPhrasePrefix: 	'prefv',
 		SortingRuleID: 			CurrentHttpParameterMap.srule.value
 	});
-	
+
     var ContentSearchResult = SearchResult.ContentSearchModel;
     var ProductSearchResult = SearchResult.ProductSearchModel;
-        
+
     if (ProductSearchResult.emptyQuery && ContentSearchResult.emptyQuery)
     {
     	response.redirect(dw.web.URLUtils.abs('Home-Show'));
     	return;
     }
-    
+
     if (ProductSearchResult.count <= 0)
     {
     	response.renderTemplate('search/nohits', {
@@ -73,7 +73,7 @@ function Show()
     	});
     	return;
    	}
-		
+
 	if ((ProductSearchResult.count > 1) || (ProductSearchResult.refinedSearch) || (ContentSearchResult.count > 0))
 	{
 		var PagingResult = new dw.system.Pipelet('Paging', {
@@ -84,13 +84,13 @@ function Show()
 			PageSize: 		CurrentHttpParameterMap.sz.getIntValue(12) <= 60 ? CurrentHttpParameterMap.sz.intValue : null,
 			Start: 			CurrentHttpParameterMap.start.intValue
 		});
-		
+
 		var ProductPagingModel = PagingResult.PagingModel;
-				
+
 		var web = require('./dw/web');
 		web.updatePageMetaDataForCategory(ProductSearchResult.category);
 
-		
+
 		if (ProductSearchResult.categorySearch && !ProductSearchResult.refinedCategorySearch && !empty(ProductSearchResult.category.template))
 		{
 			// dynamic template
@@ -99,7 +99,7 @@ function Show()
 				ContentSearchResult : ContentSearchResult,
 				ProductPagingModel : ProductPagingModel
 			});
-			
+
 			return;
 		}
 		else
@@ -109,7 +109,7 @@ function Show()
 				ContentSearchResult : ContentSearchResult,
 				ProductPagingModel : ProductPagingModel
 			});
-			
+
 			return;
 		}
 	}
@@ -123,11 +123,11 @@ function Show()
 			ProductSearchModel:	ProductSearchResult
 		});
 		var ProductID = GetProductIDsResult.ProductID;
-		
+
 		response.renderTemplate('util/redirect', {
 			Location: dw.web.URLUtils.http('Product-Show', 'pid', ProductID)
 		});
-		
+
 		return;
 	}
 }
@@ -140,7 +140,7 @@ function ShowContent()
 {
 	var CurrentHttpParameterMap = request.httpParameterMap;
 
-	
+
 	var SearchResult = new dw.system.Pipelet('Search', {
 		SearchContent: true,
 	    SearchProduct: true,
@@ -167,33 +167,33 @@ function ShowContent()
 	});
     var ProductSearchResult = SearchResult.ProductSearchModel;
     var ContentSearchResult = SearchResult.ContentSearchModel;
-  
+
   	if (ProductSearchResult.emptyQuery && ContentSearchResult.emptyQuery)
   	{
   		response.redirect(dw.web.URLUtils.abs('Home-Show'));
     	return;
   	}
-  	
+
   	if (ContentSearchResult.count <= 0)
   	{
   		response.renderTemplate('search/nohits', {
   			ProductSearchResult: ProductSearchResult,
   			ContentSearchResult: ContentSearchResult
   		});
-  		return;  		
+  		return;
   	}
-  	
+
 	var PagingResult = new dw.system.Pipelet('Paging', {
   		DefaultPageSize: 16
   	}).execute({
   		Objects: ContentSearchResult.content,
   		ObjectsCount: ContentSearchResult.count,
-  		PageSize: pageSize,
+  		PageSize: CurrentHttpParameterMap.pageSize.value,
   		Start: CurrentHttpParameterMap.start.intValue
   	});
-  	
+
   	var ContentPagingModel = PagingResult.PagingModel;
-  	
+
   	if (ContentSearchResult.folderSearch && !ContentSearchResult.refinedFolderSearch && !empty(ContentSearchResult.folder.template))
   	{
   		// dynamic template
@@ -230,15 +230,15 @@ function GetSuggestions()
 		response.renderTemplate('search/suggestionsbeta');
 		return;
 	}
-	
+
 	var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
-		MaxSuggestions: 10, 
+		MaxSuggestions: 10,
 		SearchPhrase: CurrentHttpParameterMap.q.value
 	});
-	
+
 	response.renderTemplate('search/suggestions', {
 		Suggestions: GetSearchSuggestionsResult.Suggestions
-	});	
+	});
 }
 
 
@@ -279,7 +279,7 @@ function showProductGrid()
 
     var ProductSearchResult = SearchResult.ProductSearchModel;
     var ContentSearchResult = SearchResult.ContentSearchModel;
-    
+
     var PagingResult = new dw.system.Pipelet('Paging', {
         DefaultPageSize: 12
     }).execute({
@@ -288,16 +288,16 @@ function showProductGrid()
         Start:          CurrentHttpParameterMap.start.intValue,
         ObjectsCount:   ProductSearchResult.count
     });
-    
+
     var ProductPagingModel = PagingResult.PagingModel;
-    
+
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && CurrentHttpParameterMap.format.stringValue == 'page-element')
     {
         response.renderTemplate('search/productgridwrapper', {
             ProductSearchResult: ProductSearchResult,
             ProductPagingModel: ProductPagingModel
         });
-        return;     
+        return;
     }
     else
     {
@@ -331,7 +331,7 @@ function GetProductResult()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
 
-    
+
     var SearchResult = new dw.system.Pipelet('Search', {
         SearchContent: false,
         SearchProduct: true,
@@ -366,7 +366,7 @@ function GetContentResult()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
 
-    
+
     var SearchResult = new dw.system.Pipelet('Search', {
         SearchContent: true,
         SearchProduct: true,
