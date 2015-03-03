@@ -1270,10 +1270,8 @@ nav[role="navigation"] {
       position: absolute;
       top: 2.2em;
       right: 0; } }
-  #mini-cart a {
+  #mini-cart .mini-cart-name a {
     color: #00a4e4; }
-  #mini-cart .mini-cart-link-cart {
-    color: #fff; }
 
 .mini-cart-label {
   margin: 0 10px 0 0; }
