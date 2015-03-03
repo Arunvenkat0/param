@@ -9,6 +9,7 @@ var guard = require('./dw/guard');
 var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
 var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Provides a form to locate stores by geographical information.
@@ -16,7 +17,9 @@ var pageMeta = require('~/cartridge/scripts/meta');
 function find() {
 	storeLocatorForm.clear();
     pageMeta.update(storeLocatorAsset);
-    response.renderTemplate('storelocator/storelocator');
+
+    view.get('StoreLocator')
+		.render('storelocator/storelocator');
     return response;
 }
 
@@ -57,7 +60,7 @@ function findStores() {
 			if (empty(stores)) {
 				return null;
 			} else {
-				return {'stores' : stores, 'searchKey' : searchKey};
+				return {'stores' : stores, 'searchKey' : searchKey, 'type': 'findbycountry'};
 			}
 		},
 		'findbystate' : function(formgroup) {
@@ -71,7 +74,7 @@ function findStores() {
 			if (empty(stores)) {
 				return null;
 			} else {
-				return {'stores' : stores, 'searchKey' : searchKey};
+				return {'stores' : stores, 'searchKey' : searchKey, 'type': 'findbystate'};
 			}
 		},
 		'findbyzip' : function(formgroup) {
@@ -81,7 +84,7 @@ function findStores() {
 	    	if (empty(stores)) {
 				return null;
 			} else {
-				return {'stores' : stores, 'searchKey' : searchKey};
+				return {'stores' : stores, 'searchKey' : searchKey, 'type': 'findbyzip'};
 			}
 		}
 	});
@@ -90,11 +93,11 @@ function findStores() {
 	//Get From GIT
 
 	if (searchResult) {
-		// generate object, with fields to be used inside the template
-		var params = require('~/cartridge/scripts/templatebridge/storelocatorresults').generate(searchResult.stores, storeLocatorForm.action, searchResult.searchKey);
-		response.renderTemplate('storelocator/storelocatorresults', params);
+		view.get('StoreLocator',searchResult)
+			.render('storelocator/storelocatorresults');
 	} else {
-		response.renderTemplate('storelocator/storelocator', {'Stores':''});
+		view.get('StoreLocator')
+			.render('storelocator/storelocator');
 	}
 	return response;
 }
@@ -107,7 +110,8 @@ function details() {
     var store = dw.catalog.StoreMgr.getStore(storeID);
     pageMeta.update(store);
 
-	response.renderTemplate('storelocator/storedetails', {Store: store});
+	view.get('StoreDetails',{Store:store})
+		.render('storelocator/storedetails');
 	return response;
 }
 

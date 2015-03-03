@@ -7,10 +7,10 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
 /**
  * Abstract class for all modules following the <strong>Global Helper Concept</strong>.
  *
- * @see https://loreal.atlassian.net/wiki/display/LOR/Global+Helpers+Concept
+ * @see https://bitbucket.org/demandware/sitegenesis-community/wiki/Home
  */
 var AbstractHelper = Class.extend(
-/** @lends module:util/helper/AbstractHelper~AbstractHelper.prototype */
+/** @lends module:object/AbstractHelper~AbstractHelper.prototype */
 {
 	/** default JSON attribute name */
 	_defaultJSONField : 'jsonData',
