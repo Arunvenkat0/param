@@ -93,6 +93,11 @@
 	.select-store-button {
 		margin-top: 1em;
 	}
+	&.selected {
+		.select-store-button {
+			@extend button.simple;
+		}
+	}
 }
 
 .store-list-pdp-container {
