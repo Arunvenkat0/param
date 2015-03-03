@@ -6,6 +6,7 @@
  */
 
 var guard = require('./dw/guard');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Renders the home page.
@@ -14,7 +15,7 @@ function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
     require('~/cartridge/scripts/meta').update(rootFolder);
 
-    response.renderTemplate('content/home/homepage');
+    view.get('Home').render('content/home/homepage');
     return response;
 }
 
@@ -23,7 +24,7 @@ function show() {
  * This is designed as a remote include to achieve optimal caching results for the header
  */
 function includeHeader() {
-    response.renderTemplate('components/header/header');
+    view.get('Home').render('components/header/header');
     return response;
 }
 
@@ -35,7 +36,7 @@ function includeHeader() {
  * @deprecated Converted into a template include
  */
 function includeHeaderMenu() {
-    response.renderTemplate('components/header/headermenu');
+    view.get('Home').render('components/header/headermenu');
     return response;
 }
 
@@ -47,41 +48,41 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    response.renderTemplate('components/header/headercustomerinfo');
+    view.get('Home').render('components/header/headercustomerinfo');
     return response;
 }
 
 
 function errorNotFound() {
 	response.setStatus(404);
-	response.renderTemplate('error/notfound');
+    view.get('Home').render('error/notfound');
     return response;
 }
 
 // @TODO As we want to have a responsive layout, do we really need the below?
 function mobileSite() {
     session.custom.device = 'mobile';
-    response.renderTemplate('components/changelayout');
+    view.get('Home').render('components/changelayout');
     return response;
 }
 
 // @TODO remove - not responsive - maybe replace with a css class forcing the layout
 function fullSite() {
     session.custom.device = 'fullsite';
-    response.renderTemplate('components/changelayout');
+    view.get('Home').render('components/changelayout');
     return response;
 }
 
 // @TODO remove - not responsive
 function setLayout() {
-    response.renderTemplate('components/setlayout');
+    view.get('Home').render('components/setlayout');
     return response;
 }
 
 
 // @TODO remove - not responsive
 function deviceLayouts() {
-	response.renderTemplate('util/devicelayouts');
+    view.get('Home').render('util/devicelayouts');
 	return response;
 }
 

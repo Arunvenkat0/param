@@ -8,6 +8,8 @@
 var guard = require('./dw/guard');
 var contents = require('~/cartridge/scripts/object/Content');
 var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
+
 /**
  * Renders a content page based on the rendering template configured for the page or a default rendering template.
  */
@@ -21,16 +23,14 @@ function show() {
     } else {
 	    // @TODO replace with search module call
 	    var contentSearchResult = require('./Search').GetContentResult().ContentSearchResult;
-	
+
 	    pageMeta.update(content);
-	
-	    response.renderTemplate(content.template || 'content/content/contentpage', {
-	        Content: content,
-	        ContentSearchResult: contentSearchResult,
-	        // @FIXME This should not be required, but a require in the template will create a new meta instance
-	        Meta: pageMeta
-	    });
-	    
+
+        view.get('Page', {
+            Content: content,
+            ContentSearchResult: contentSearchResult, Meta : pageMeta
+        }).render(content.template || 'content/content/contentpage');
+
 	    return response;
     }
 }
@@ -43,9 +43,10 @@ function include() {
     var assetId = request.httpParameterMap.cid.stringValue;
     var content = contents.get(assetId).object;
 
-    response.renderTemplate('content/content/contentassetinclude', {
-    	Content: content
-    });
+    view.get('Page', {
+        Content: content,
+    }).render(content.template || 'content/content/contentassetinclude');
+
     return response;
 }
 

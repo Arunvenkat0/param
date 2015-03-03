@@ -35,7 +35,7 @@ Meta.prototype = {
     update : function(object){
         // check if opbject wrapped in AbstractHelper
         if ('object' in object) {
-        	object = object.object;	
+        	object = object.object;
         }
         // check if it is a system object
         if(object.class){
@@ -60,7 +60,7 @@ Meta.prototype = {
             this.updatePageMetaData();
 
             // update breadcrumbs
-            if(object.class === '[JavaClass dw.content.Content]'){
+            if((object.class+'') === '[JavaClass dw.content.Content]'){
                 var path = require('~/cartridge/scripts/object/Content').get(object).getFolderPath();
                 this.data.breadcrumbs = path.map(function(folder){
                     return {

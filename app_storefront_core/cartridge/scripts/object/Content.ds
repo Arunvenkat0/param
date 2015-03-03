@@ -1,8 +1,8 @@
 'use strict';
 /* jshint indent:false,white:false */
-/* 
-usage 
-var content = require('~/cartridge/scripts/object/Content');	
+/*
+usage
+var content = require('~/cartridge/scripts/object/Content');
 
 */
 
@@ -99,7 +99,7 @@ var Content = AbstractHelper.extend(
 		        }
 			}
 		}
-		return [];
+		return path;
 	}
 
 });
