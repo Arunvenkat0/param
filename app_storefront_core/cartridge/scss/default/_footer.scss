@@ -1,32 +1,78 @@
 #footer {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+	background-color: #84bd00;
 	clear: both;
-	font-size: 0.9em;
-	padding: 2em 0.5em;
-	text-align: center;
+	letter-spacing: 1px;
+}
+.footerTable {
+	display: table;
+	footer {
+		display: table-row;
+	}
+	.footerCell {
+		display: block;
+		padding: 1.5em;
+		width:100%;
+		@media screen and (min-width: 768px) {
+			display: table-cell;
+			width: 25%;		
+		}
+	}
+	h3 {
+		text-transform: uppercase;
+	}
 	.menu-footer {
 		float: none;
 		margin: 1em 0;
 		padding: 0;
-		text-align: center;
-		text-transform: uppercase;
 		li {
-			display: inline;
 			float: none;
-			padding: 0 0.5em;
+			line-height: 2.5em;
+			list-style: none !important;
 		}
 	}
-	a:hover {
-		text-decoration: underline;
+	a {
+		color: $white;
+		&:hover {
+			color: $very-light-gray;
+			text-decoration: none;
+		}
+	}
+	ul.social-links {
+		padding-bottom:2em;
+		li {
+		display: inline;
+		padding-right: 0.5em;
+		}
+	}
+}
+
+#email-alert-signup {
+	white-space: nowrap;
+	input {
+		&[type="text"] {
+			border: none;
+			margin-left: 0;
+			width: 15em;
+		}
+	}
+	button {
+		background-color: $dark-gray;
+		border: none;
+		color: $white;
+		height: 31px;
+		padding: 0;
+		width: 31px;
 	}
 }
 
 .copyright {
-	color: $nobel;
+	color: $white;
+	text-align: center;
 }
 
 .postscript {
-	color: $nobel;
+	color: $white;
 	font-family: $serif;
 	font-style: italic;
+	text-align: center;
 }

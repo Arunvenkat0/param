@@ -1629,31 +1629,66 @@ nav[role="navigation"] {
   background: none repeat scroll 0 0 transparent; }
 
 #footer {
-  background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+  background-color: #84bd00;
   clear: both;
-  font-size: 0.9em;
-  padding: 2em 0.5em;
-  text-align: center; }
-  #footer .menu-footer {
+  letter-spacing: 1px; }
+
+.footerTable {
+  display: table; }
+  .footerTable footer {
+    display: table-row; }
+  .footerTable .footerCell {
+    display: block;
+    padding: 1.5em;
+    width: 100%; }
+    @media screen and (min-width: 768px) {
+      .footerTable .footerCell {
+        display: table-cell;
+        width: 25%; } }
+  .footerTable h3 {
+    text-transform: uppercase; }
+  .footerTable .menu-footer {
     float: none;
     margin: 1em 0;
-    padding: 0;
-    text-align: center;
-    text-transform: uppercase; }
-    #footer .menu-footer li {
-      display: inline;
+    padding: 0; }
+    .footerTable .menu-footer li {
       float: none;
-      padding: 0 0.5em; }
-  #footer a:hover {
-    text-decoration: underline; }
+      line-height: 2.5em;
+      list-style: none !important; }
+  .footerTable a {
+    color: #fff; }
+    .footerTable a:hover {
+      color: #ccc;
+      text-decoration: none; }
+  .footerTable ul.social-links {
+    padding-bottom: 2em; }
+    .footerTable ul.social-links li {
+      display: inline;
+      padding-right: 0.5em; }
+
+#email-alert-signup {
+  white-space: nowrap; }
+  #email-alert-signup input[type="text"] {
+    border: none;
+    margin-left: 0;
+    width: 15em; }
+  #email-alert-signup button {
+    background-color: #aaa;
+    border: none;
+    color: #fff;
+    height: 31px;
+    padding: 0;
+    width: 31px; }
 
 .copyright {
-  color: #999; }
+  color: #fff;
+  text-align: center; }
 
 .postscript {
-  color: #999;
+  color: #fff;
   font-family: Georgia, serif;
-  font-style: italic; }
+  font-style: italic;
+  text-align: center; }
 
 .swatch-black a {
   background-color: #000000 !important; }
@@ -2618,11 +2653,13 @@ button.add-all-to-cart {
 
 .cart-coupon-code {
   float: left;
-  width: 50%; }
+  width: 53%; }
   .cart-coupon-code input {
     margin-left: 0; }
   .cart-coupon-code .error {
     padding-top: 0.4em; }
+  .cart-coupon-code #update-cart {
+    margin-left: .6em; }
 
 .cart-order-totals {
   float: right;
@@ -3517,11 +3554,6 @@ h1 .account-logout {
   float: left;
   width: 33%; }
 
-.home-bottom {
-  clear: both;
-  overflow: hidden;
-  padding: 2em 0; }
-
 .home-bottom-right .jcarousel-nav {
   color: #00a4e4;
   cursor: pointer;
@@ -3603,24 +3635,6 @@ h1 .account-logout {
   max-width: 319px;
   text-indent: -999em;
   width: 100%; }
-
-#email-alert-signup {
-  display: block;
-  margin: 0 0 0 33px;
-  width: 910px; }
-  #email-alert-signup label {
-    color: #999;
-    float: left;
-    padding: 0.5em 0 !important;
-    text-transform: uppercase;
-    width: 50%; }
-  #email-alert-signup input[type="text"] {
-    float: left;
-    padding: 0.7em 0.5em;
-    width: 30%; }
-  #email-alert-signup input[type="image"] {
-    float: left;
-    padding-left: 0.1em; }
 
 .ui-dialog #listings-nav {
   float: right;

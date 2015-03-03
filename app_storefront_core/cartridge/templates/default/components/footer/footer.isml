@@ -8,13 +8,26 @@
 
 <div id="footer" role="contentinfo">
 
-	<footer>
-		<iscontentasset aid="footer-copy"/>
-	</footer>
-
-</div><!-- /footer -->
+	<div class="footerTable">
+		<footer>
+			<div class="footerCell">
+				<isslot id="home-bottom" description="Bottom content below flash banner " context="global" />
+			</div>
+			<div class="footerCell">
+				<iscontentasset aid="footer-account"/>
+			</div>
+			<div class="footerCell">
+				<iscontentasset aid="footer-support"/>
+			</div>
+			<div class="footerCell">
+				<iscontentasset aid="footer-about"/>
+			</div>
+		</footer>
+	</div>
 	
-
+	<iscontentasset aid="footer-copy"/>	
+	
+</div><!-- /footer -->
 
 <iscomment>
 	Customer registration can happen everywhere in the page flow. As special tag in the pdict
