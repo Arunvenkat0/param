@@ -380,8 +380,8 @@ button, .button, .buttonstyle, input[type="button"] {
   font-weight: 400;
   padding: 0.5em 2em;
   text-align: center;
-  -webkit-transition: all 0.5s ease;
-          transition: all 0.5s ease; }
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
   button.large, .button.large, .button-fancy-large, .buttonstyle.large, input[type="button"].large {
     font-size: 1.35em;
     text-transform: uppercase; }
@@ -1158,8 +1158,8 @@ nav[role="navigation"] {
     float: left;
     line-height: 1.1;
     padding: 1rem 0.8rem;
-    -webkit-transition: background-color 0.5s;
-            transition: background-color 0.5s;
+    -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
     width: 2.1rem; }
     .level-1 > li .menu-item-toggle:hover {
       background-color: #1a1a1a; }
@@ -1167,8 +1167,8 @@ nav[role="navigation"] {
       .level-1 > li .menu-item-toggle {
         display: none; } }
   .level-1 > li a {
-    -webkit-transition: background-color 0.5s, color 0.5s;
-            transition: background-color 0.5s, color 0.5s; }
+    -webkit-transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s; }
     .level-1 > li a:hover {
       background-color: #1a1a1a; }
     @media screen and (min-width: 768px) {
@@ -1716,7 +1716,7 @@ nav[role="navigation"] {
     height: auto;
     position: relative; }
     .product-tile .product-image .quickview {
-      background-color: rgba(132, 189, 0, 0.7);
+      background-color: rgba(132, 189, 0, 0.8);
       color: #fff;
       display: none;
       width: 7em;
@@ -2698,6 +2698,7 @@ button.add-all-to-cart {
       margin-top: 1em; }
 
 .cart-actions-top {
+  margin-top: .5rem;
   padding-bottom: 1em; }
   .cart-actions-top .cart-action-continue-shopping {
     float: none; }

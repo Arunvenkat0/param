@@ -225,7 +225,7 @@ nav[role="navigation"] {
 		float: left;
 		line-height: 1.1;
 		padding: 1rem 0.8rem;
-		transition: background-color 0.5s;
+		transition: background-color 0.3s;
 		width: 2.1rem;
 		&:hover {
 			background-color: darken($night-rider, 10%);
@@ -235,7 +235,7 @@ nav[role="navigation"] {
 		}
 	}
 	a {
-		transition: background-color 0.5s, color 0.5s;
+		transition: background-color 0.3s, color 0.3s;
 		&:hover {
 			background-color: darken($night-rider, 10%);
 		}
