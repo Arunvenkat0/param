@@ -11,7 +11,7 @@
 	<div class="footerTable">
 		<footer>
 			<div class="footerCell">
-				<isslot id="home-bottom" description="Bottom content below flash banner " context="global" />
+				<isslot id="footer-column" description="Content in column 1 of the Footer" context="global" />
 			</div>
 			<div class="footerCell">
 				<iscontentasset aid="footer-account"/>
