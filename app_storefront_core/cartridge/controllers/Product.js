@@ -229,78 +229,63 @@ function Productnav() {
 function Variation() {
 	var product = Product.get(request.httpParameterMap.pid.stringValue);
 
-	if (product.isVisible()) {
+    if (product.isVisible()) {
 
-		var productView = view.get('Product', {
-			product : product
-		});
+        var productView = view.get('Product', {
+            product : product
+        });
 
-		var currentOptionModel = productView.getProductOptionSelections(request.httpParameterMap);
-		var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        var currentVariationModel = productVariationSelections.ProductVariationModel;
 
-		var currentVariationModel = productVariationSelections.ProductVariationModel;
-		var productVariationModels = productVariationSelections.ProductVariationModels;
-		product = Product.get(productVariationSelections.SelectedProduct);
-		/* TODO
-		 // TODO this is apparently nowhere set to true..
-		 var resetAttributes = false;
+        product = Product.get(productVariationSelections.SelectedProduct);
 
-		 if (Product.master) {
-		 var ScriptResult = new dw.system.Pipelet('Script', {
-		 Transactional : false,
-		 OnError       : 'PIPELET_ERROR',
-		 ScriptFile    : 'product/GetDefaultVariant.ds'
-		 }).execute({
-		 Prod                  : Product,
-		 CurrentVariationModel : CurrentVariationModel
-		 });
-		 // TODO scope
-		 var DefaultVariant = ScriptResult.newProduct;
+        // TODO this is apparently nowhere set to true..
+        var resetAttributes = false;
 
-		 resetAttributes = false;
-		 }
+        if (product.isMaster()) {
+            product = product.getDefaultVariant();
+            resetAttributes = false;
+        }
 
-		 if (empty(CurrentHttpParameterMap.format.stringValue)) {
-		 response.renderTemplate('product/product', {
-		 Product               : Product,
-		 CurrentVariationModel : CurrentVariationModel
-		 });
-		 return;
-		 }
+        if (!request.httpParameterMap.format.stringValue) {
+            view.get('Product', {
+                product               : product,
+                CurrentVariationModel : currentVariationModel
+            }).renderTemplate('product/product');
+        }
+        else if (request.httpParameterMap.source.stringValue !== 'bonus') {
+            view.get('Product', {
+                product         : product,
+                GetImages       : true,
+                resetAttributes : resetAttributes
+            }).renderTemplate('product/productcontent');
+        }
+        else {
+            // TODO - refactor once basket can be retrieved via API
+            var CartController = require('./Cart');
+            var GetBasketResult = CartController.GetBasket();
 
-		 if (CurrentHttpParameterMap.source.stringValue != 'bonus') {
-		 response.renderTemplate('product/productcontent', {
-		 Product         : Product,
-		 GetImages       : true,
-		 resetAttributes : resetAttributes
-		 });
-		 return;
-		 }
+            var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+            var bonusDiscountLineItem = null;
 
-		 var CartController = require('./Cart');
-		 var GetBasketResult = CartController.GetBasket();
-		 var Basket = GetBasketResult.Basket;
+            for (var i = 0; i < bonusDiscountLineItems.length; i++) {
+                if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+                    bonusDiscountLineItem = bonusDiscountLineItems[i];
+                    break;
+                }
+            }
 
-		 var ScriptResult = new dw.system.Pipelet('Script', {
-		 Transactional : false,
-		 OnError       : 'PIPELET_ERROR',
-		 ScriptFile    : 'cart/GetBonusDiscountLineItem.ds'
-		 }).execute({
-		 BonusDiscountLineItems : Basket.bonusDiscountLineItems,
-		 uuid                   : CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue
-		 });
-		 var BonusDiscountLineItem = ScriptResult.BonusDiscountLineItem;
-
-		 response.renderTemplate('product/components/bonusproduct', {
-		 Product               : Product,
-		 CurrentVariationModel : CurrentVariationModel,
-		 BonusDiscountLineItem : BonusDiscountLineItem
-		 });
-		 */
-	}
-	else {
-		response.renderTemplate('error/notfound');
-	}
+            view.get('Product', {
+                product               : product,
+                CurrentVariationModel : currentVariationModel,
+                BonusDiscountLineItem : BonusDiscountLineItem
+            }).renderTemplate('product/components/bonusproduct');
+        }
+    }
+    else {
+        response.renderTemplate('error/notfound');
+    }
 }
 
 /**
