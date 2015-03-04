@@ -8,18 +8,18 @@
 
 <div id="footer" role="contentinfo">
 
-	<div class="footerTable">
+	<div class="footer-table">
 		<footer>
-			<div class="footerCell">
+			<div class="footer-cell">
 				<isslot id="footer-column" description="Content in column 1 of the Footer" context="global" />
 			</div>
-			<div class="footerCell">
+			<div class="footer-cell">
 				<iscontentasset aid="footer-account"/>
 			</div>
-			<div class="footerCell">
+			<div class="footer-cell">
 				<iscontentasset aid="footer-support"/>
 			</div>
-			<div class="footerCell">
+			<div class="footer-cell">
 				<iscontentasset aid="footer-about"/>
 			</div>
 		</footer>

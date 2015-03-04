@@ -1,14 +1,14 @@
 #footer {
-	background-color: #84bd00;
+	background-color: $citrus;
 	clear: both;
 	letter-spacing: 1px;
 }
-.footerTable {
+.footer-table {
 	display: table;
 	footer {
 		display: table-row;
 	}
-	.footerCell {
+	.footer-cell {
 		display: block;
 		padding: 1.5em;
 		width:100%;
