@@ -9,14 +9,14 @@
  * @return {String} The name of the decorator template to be used
  */
 exports.decorate = function(decoratorName, customValues){
-	var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
+    var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
 
-	var noDecoration = ['ajax'];
+    var noDecoration = ['ajax'];
 
-	if (noDecoration.indexOf(pageFormat) > -1 && (!customValues || customValues.indexOf(pageFormat) > -1) ) {
-		decoratorName = 'util/pt_empty';
-	}
-	return decoratorName;
+    if (noDecoration.indexOf(pageFormat) > -1 && (!customValues || customValues.indexOf(pageFormat) > -1)) {
+        decoratorName = 'util/pt_empty';
+    }
+    return decoratorName;
 };
 
 /**
@@ -26,12 +26,12 @@ exports.decorate = function(decoratorName, customValues){
  * @param  {object} parameters The parameters to pass to the view
  * @return {object/View}       The view object instance
  */
-exports.get = function(viewName, parameters){
-	var View;
-	try{
-		View = require('./view/'+viewName+'View');
-	}catch(e){
-		View = require('./view/View');
-	}
-	return new View(parameters || {});
+exports.get = function (viewName, parameters) {
+    var View;
+    try {
+        View = require('./view/' + viewName + 'View');
+    } catch (e) {
+        View = require('./view/View');
+    }
+    return new View(parameters || {});
 };
