@@ -17,8 +17,8 @@
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" attribute1="autocomplete" value1="off"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
 					<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>	
 				</fieldset>
