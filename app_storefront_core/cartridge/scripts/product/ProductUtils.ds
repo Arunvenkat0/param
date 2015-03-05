@@ -187,7 +187,9 @@ function ProductUtils(pdict : PipelineDictionary) {
 		isVariantAvailable : getVariantAvailability
 	};	
 }
-
+/**
+ * @deprecated use object/Product.getAvailability instead.
+ */
 ProductUtils.getAvailability = function(item : Product, quantity : Object) {
 	var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
 	/* product availability */

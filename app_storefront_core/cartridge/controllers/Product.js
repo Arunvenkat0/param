@@ -1,10 +1,11 @@
 'use strict';
 
 /* API Includes */
+var Category = require('~/cartridge/scripts/object/Category');
 var PagingModel = require('dw/web/PagingModel');
 var Product = require('~/cartridge/scripts/object/Product');
-var ProductUtils = require('~/cartridge/scripts/product/ProductUtils');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+var Search = require('~/cartridge/scripts/object/Search');
 
 /* Script Modules */
 var guard = require('./dw/guard');
@@ -38,7 +39,7 @@ function Show() {
         productView.render(product.getTemplate() || 'product/product');
     }
     else {
-        response.renderTemplate('error/notfound');
+        view.get('ProductNotFound').render('error/notfound');
     }
 
 }
@@ -99,29 +100,7 @@ function Detail() {
         productView.render(product.getTemplate() || 'product/productdetail');
     }
     else {
-        response.renderTemplate('error/notfound');
-        return;
-    }
-
-}
-
-/**
- * Returns product variants data as a JSON. Called via product.js
- * (loadVariation). Input: pid (required) - product ID
- */
-function GetVariants() {
-
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
-
-    if (product.isVisible()) {
-        var productView = view.get('Product', {product : product});
-        productView.CurrentVariationModel = productView.getProductVariationSelections(request.httpParameterMap).ProductVariationModel;
-
-        // TODO render directly as JSON response
-        productView.render(product.getTemplate() || 'product/components/variationsjson');
-    }
-    else {
-        response.renderTemplate('error/notfound');
+        view.get('ProductNotFound').render('error/notfound');
     }
 
 }
@@ -136,11 +115,10 @@ function GetAvailability() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        // TODO render directly as JSON
-        view.get('Product', {product : product}).render('product/components/availabilityjson');
+        response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
-        response.renderTemplate('error/notfound');
+        view.get('ProductNotFound').render('error/notfound');
     }
 
 }
@@ -180,40 +158,21 @@ function Productnav() {
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
-        var categoryID = null;
+        var category = null;
 
         if (params.cgid) {
-            categoryID = params.cgid.value;
-        } else if (product.getPrimaryCategory()) {
-            categoryID = product.getPrimaryCategory().getID();
-        } else if (product.getVariationModel().getMaster()) {
-            categoryID = product.getVariationModel().getMaster().getPrimaryCategory().getID();
+            category = Category.get(params.cgid.value);
+        }
+        else if (product.getPrimaryCategory()) {
+            category = product.getPrimaryCategory();
+        }
+        else if (product.getVariationModel().getMaster()) {
+            category = product.getVariationModel().getMaster().getPrimaryCategory();
         }
 
-        // construct the search
-        var productSearchModel = new ProductSearchModel();
-
-        // TODO
-        //productSearchModel.setDisallowOfflineCategory(true);
-        productSearchModel.setRecursiveCategorySearch(true);
-
-        categoryID && productSearchModel.setCategoryID(categoryID);
-        params.q.value && productSearchModel.setSearchPhrase(params.q.value);
-        params.pmin.doubleValue && productSearchModel.setPriceMin(params.pmin.doubleValue);
-        params.pmax.doubleValue && productSearchModel.setPriceMax(params.pmax.doubleValue);
-        params.psortb1.value && productSearchModel.setSortingCondition(params.psortb1.value, params.psortd1.intValue);
-        params.psortb2.value && productSearchModel.setSortingCondition(params.psortb2.value, params.psortd2.intValue);
-        params.psortb3.value && productSearchModel.setSortingCondition(params.psortb3.value, params.psortd3.intValue);
-
-        var sortingRule = params.srule.value ? require('dw/catalog/CatalogMgr').getSortingRule(params.srule.value) : null;
-        sortingRule && productSearchModel.setSortingRule(sortingRule);
-
-        var nameMap = params.getParameterMap("prefn");
-        var valueMap = params.getParameterMap("prefv");
-
-        for (var i in nameMap) {
-            valueMap[i] && productSearchModel.addRefinementValues(nameMap[i], valueMap[i]);
-        }
+        // construct the search based on the HTTP params & set the categoryID
+        var productSearchModel = Search.initializeProductSearchModel(params);
+        category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
 
         // execute the product search
         productSearchModel.search();
@@ -229,7 +188,7 @@ function Productnav() {
         });
     }
     else {
-        response.renderTemplate('error/notfound');
+        view.get('ProductNotFound').render('error/notfound');
     }
 
 }
@@ -239,7 +198,7 @@ function Productnav() {
  */
 function Variation() {
 
-	var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
 
@@ -291,12 +250,12 @@ function Variation() {
             view.get('Product', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
-                BonusDiscountLineItem : BonusDiscountLineItem
+                BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
         }
     }
     else {
-        response.renderTemplate('error/notfound');
+        view.get('ProductNotFound').render('error/notfound');
     }
 
 }
@@ -308,38 +267,29 @@ function VariationPS() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
-	if (product.isVisible()) {
+    if (product.isVisible()) {
 
-		var productView = view.get('Product', {
-			product : product
-		});
+        var productView = view.get('Product', {
+            product : product
+        });
 
-		var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
-		product = Product.get(productVariationSelections.SelectedProduct);
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        product = Product.get(productVariationSelections.SelectedProduct);
 
-		if (product.isMaster()) {
-			product = Product.get(product.getDefaultVariant());
-		}
+        if (product.isMaster()) {
+            product = Product.get(product.getDefaultVariant());
+        }
 
-		if (!request.httpParameterMap.format.stringValue) {
-			view.get('Product', {product : product}).render('product/product');
-		}
-		else {
-			view.get('Product', {product : product}).render('product/components/productsetproduct');
-		}
-	}
-	else {
-		response.renderTemplate('error/notfound');
-	}
-
-}
-
-/**
- * Renders the product detail page within the context of a category.
- */
-function ShowInCategory() {
-
-	Show();
+        if (request.httpParameterMap.format.stringValue) {
+            view.get('Product', {product : product}).render('product/components/productsetproduct');
+        }
+        else {
+            view.get('Product', {product : product}).render('product/product');
+        }
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
 
 }
 
@@ -348,14 +298,9 @@ function ShowInCategory() {
  */
 function IncludeLastVisited() {
 
-	var GetLastVisitedProductsResult = new dw.system.Pipelet('GetLastVisitedProducts').execute({
-		MaxLength : 3
-	});
-	var LastVisitedProducts = GetLastVisitedProductsResult.Products;
-
-	response.renderTemplate('product/lastvisited', {
-		LastVisitedProducts : LastVisitedProducts
-	});
+    response.renderTemplate('product/lastvisited', {
+        LastVisitedProducts : require('~/cartridge/scripts/object/RecentlyViewedItems').getRecentlyViewedProducts(3)
+    });
 
 }
 
@@ -364,23 +309,23 @@ function IncludeLastVisited() {
  */
 function GetBonusProducts() {
 
-	// TODO - refactor once basket can be retrieved via API
-	var CartController = require('./Cart');
-	var GetBasketResult = CartController.GetBasket();
+    // TODO - refactor once basket can be retrieved via API
+    var CartController = require('./Cart');
+    var GetBasketResult = CartController.GetBasket();
 
-	var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
-	var bonusDiscountLineItem = null;
+    var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+    var bonusDiscountLineItem = null;
 
-	for (var i = 0; i < bonusDiscountLineItems.length; i++) {
-		if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
-			bonusDiscountLineItem = bonusDiscountLineItems[i];
-			break;
-		}
-	}
+    for (var i = 0; i < bonusDiscountLineItems.length; i++) {
+        if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+            bonusDiscountLineItem = bonusDiscountLineItems[i];
+            break;
+        }
+    }
 
-	response.renderTemplate('product/bonusproductgrid', {
-		BonusDiscountLineItem : bonusDiscountLineItem
-	});
+    response.renderTemplate('product/bonusproductgrid', {
+        BonusDiscountLineItem : bonusDiscountLineItem
+    });
 
 }
 
@@ -389,17 +334,17 @@ function GetBonusProducts() {
  */
 function GetSetItem() {
 
-	var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
 
-	if (product.isVisible()) {
-		view.get('Product', {
-			product : product,
-			isSet   : true
-		}).render('product/components/productsetproduct');
-	}
-	else {
-		response.renderTemplate('error/notfound');
-	}
+    if (product.isVisible()) {
+        view.get('Product', {
+            product : product,
+            isSet   : true
+        }).render('product/components/productsetproduct');
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
 
 }
 
@@ -408,13 +353,11 @@ function GetSetItem() {
  */
 exports.Show = guard.get(Show);
 exports.Detail = guard.get(Detail);
-exports.GetVariants = guard.get(GetVariants);
 exports.GetAvailability = guard.get(GetAvailability);
 exports.HitTile = guard.get(HitTile);
 exports.Productnav = guard.get(Productnav);
 exports.Variation = guard.get(Variation);
 exports.VariationPS = guard.get(VariationPS);
-exports.ShowInCategory = guard.get(ShowInCategory);
 exports.IncludeLastVisited = guard.get(IncludeLastVisited);
 exports.GetBonusProducts = guard.get(GetBonusProducts);
 exports.GetSetItem = guard.get(GetSetItem);
