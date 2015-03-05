@@ -1,14 +1,14 @@
-#footer {
+footer {
 	background-color: $citrus;
 	clear: both;
 	letter-spacing: 1px;
 }
-.footer-table {
+.footer-container {
 	display: table;
 	footer {
 		display: table-row;
 	}
-	.footer-cell {
+	.footer-item {
 		display: block;
 		padding: 1.5em;
 		width:100%;
@@ -48,12 +48,10 @@
 
 #email-alert-signup {
 	white-space: nowrap;
-	input {
-		&[type="text"] {
-			border: none;
-			margin-left: 0;
-			width: 15em;
-		}
+	input[type="text"] {
+		border: none;
+		margin-left: 0;
+		width: 15em;
 	}
 	button {
 		background-color: $dark-gray;
@@ -66,11 +64,13 @@
 }
 
 .copyright {
+	background-color: $citrus;
 	color: $white;
 	text-align: center;
 }
 
 .postscript {
+	background-color: $citrus;
 	color: $white;
 	font-family: $serif;
 	font-style: italic;

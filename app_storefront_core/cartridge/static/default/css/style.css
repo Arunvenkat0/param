@@ -1628,41 +1628,41 @@ nav[role="navigation"] {
 .nav .toggle span {
   background: none repeat scroll 0 0 transparent; }
 
-#footer {
+footer {
   background-color: #84bd00;
   clear: both;
   letter-spacing: 1px; }
 
-.footerTable {
+.footer-container {
   display: table; }
-  .footerTable footer {
+  .footer-container footer {
     display: table-row; }
-  .footerTable .footerCell {
+  .footer-container .footer-item {
     display: block;
     padding: 1.5em;
     width: 100%; }
     @media screen and (min-width: 768px) {
-      .footerTable .footerCell {
+      .footer-container .footer-item {
         display: table-cell;
         width: 25%; } }
-  .footerTable h3 {
+  .footer-container h3 {
     text-transform: uppercase; }
-  .footerTable .menu-footer {
+  .footer-container .menu-footer {
     float: none;
     margin: 1em 0;
     padding: 0; }
-    .footerTable .menu-footer li {
+    .footer-container .menu-footer li {
       float: none;
       line-height: 2.5em;
       list-style: none !important; }
-  .footerTable a {
+  .footer-container a {
     color: #fff; }
-    .footerTable a:hover {
+    .footer-container a:hover {
       color: #ccc;
       text-decoration: none; }
-  .footerTable ul.social-links {
+  .footer-container ul.social-links {
     padding-bottom: 2em; }
-    .footerTable ul.social-links li {
+    .footer-container ul.social-links li {
       display: inline;
       padding-right: 0.5em; }
 
@@ -1681,10 +1681,12 @@ nav[role="navigation"] {
     width: 31px; }
 
 .copyright {
+  background-color: #84bd00;
   color: #fff;
   text-align: center; }
 
 .postscript {
+  background-color: #84bd00;
   color: #fff;
   font-family: Georgia, serif;
   font-style: italic;
