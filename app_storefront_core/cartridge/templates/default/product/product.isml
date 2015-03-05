@@ -93,6 +93,15 @@
 		}
 	}
 
+	// product options
+	var options;
+	if (pdict.CurrentOptionModel) {
+		options = pdict.CurrentOptionModel.getOptions();
+		for (var i = 0; i < options.length; i++) {
+			urlParams[options[i].htmlName] = pdict.CurrentOptionModel.getSelectedOptionValue(options[i]).ID;
+		}
+	}
+
 	// construct the urlArgs array with params names and values
 	for (var param in urlParams) {
 		urlArgs.push(param);
