@@ -62,8 +62,9 @@ var Product = AbstractHelper.extend(
 
             if (this.object.isProductSet()) {
                 var productSetProducts = this.object.getProductSetProducts();
-               	
-               	for (var i = 0; i < productSetProducts.length; i++) {
+
+                var i = null;
+                for (i = 0; i < productSetProducts.length; i++) {
                     if (productSetProducts[i].isOnline()) {
                         onlineProductSetProducts.add(productSetProducts[i]);
                     }
@@ -81,9 +82,9 @@ var Product = AbstractHelper.extend(
          */
         isVisible : function () {
 
-	        if (!this.object) {
-		        return false;
-	        }
+            if (!this.object) {
+                return false;
+            }
 
             if (!this.isOnline()) {
                 return false;

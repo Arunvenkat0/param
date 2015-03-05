@@ -81,14 +81,14 @@ var ProductVariationSelection = ({
             }
 
             var variationProduct = ProductMgr.getProduct(pid);
-            
+
             if (variationProduct) {
 
                 if (!(variationProduct.isVariant() || variationProduct.isMaster() || variationProduct.isVariationGroup())) {
                     continue;
                 }
-                
-				productVariationModels.put(variationProduct, variationProduct.getVariationModel());
+
+                productVariationModels.put(variationProduct, variationProduct.getVariationModel());
                 var size = parameterMap.getParameterMap(pidPrefix).getParameterCount();
                 if (parameterMap.getParameterMap(pidPrefix).getParameterCount() === 0) {
                     continue;
@@ -166,7 +166,7 @@ var ProductVariationSelection = ({
         // 2. If we got a value selection for ALL attributes, let's try to
         // find a variant that fits this combination
         if (selections.size() === var_attrs.size()) {
-        	var variants = variationModel.getVariants(selections); 
+            var variants = variationModel.getVariants(selections);
             if (!variants.isEmpty()) {
                 // We are done here! Let's select the first variant on the model
                 // and return the model and the variant
@@ -203,7 +203,7 @@ var ProductVariationSelection = ({
         var i = remaining_attr_ids.size();
 
         while (i > 0) {
-			var variants = variationModel.getVariants(selections);
+            var variants = variationModel.getVariants(selections);
             if (!variants.isEmpty()) // found one!
             {
                 break;
