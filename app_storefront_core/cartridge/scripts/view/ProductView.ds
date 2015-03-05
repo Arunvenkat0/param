@@ -35,7 +35,7 @@ var ProductView = View.extend(
          * @returns {{ProductVariationModels: dw.util.LinkedHashMap, ProductVariationModel: dw.catalog.ProductVariationModel, SelectedProduct: dw.catalog.Product}}
          */
         getProductVariationSelections : function (parameterMap, optionalCustomPrefix) {
-            return require('~/cartridge/scripts/util/ProductVariationSelection').getProductVariationSelections(this.object, parameterMap, optionalCustomPrefix);
+            return require('~/cartridge/scripts/util/ProductVariationSelection').getProductVariationSelections(this.product.object, parameterMap, optionalCustomPrefix);
         },
 
         /**
@@ -58,7 +58,7 @@ var ProductView = View.extend(
          * @returns {{ProductOptionModels: dw.util.LinkedHashMap, ProductOptionModel: dw.catalog.ProductOptionModel}}
          */
         getProductOptionSelections : function (parameterMap, optionalCustomPrefix) {
-            return require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(this.object, parameterMap, optionalCustomPrefix);
+            return require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(this.product.object, parameterMap, optionalCustomPrefix);
         },
 
         init : function (params) {

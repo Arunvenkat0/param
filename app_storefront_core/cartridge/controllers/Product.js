@@ -244,7 +244,7 @@ function Variation() {
         var resetAttributes = false;
 
         if (product.isMaster()) {
-            product = product.getDefaultVariant();
+            product = Product.get(product.getDefaultVariant());
             resetAttributes = false;
         }
 
@@ -252,14 +252,14 @@ function Variation() {
             view.get('Product', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel
-            }).renderTemplate('product/product');
+            }).render('product/product');
         }
         else if (request.httpParameterMap.source.stringValue !== 'bonus') {
             view.get('Product', {
                 product         : product,
                 GetImages       : true,
                 resetAttributes : resetAttributes
-            }).renderTemplate('product/productcontent');
+            }).render('product/productcontent');
         }
         else {
             // TODO - refactor once basket can be retrieved via API
@@ -280,7 +280,7 @@ function Variation() {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : BonusDiscountLineItem
-            }).renderTemplate('product/components/bonusproduct');
+            }).render('product/components/bonusproduct');
         }
     }
     else {
