@@ -1,6 +1,9 @@
 'use strict';
-
-/** @module controller/Product */
+/**
+ * TODO
+ *
+ * @module controller/Product
+ */
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
@@ -17,7 +20,7 @@ var view = require('~/cartridge/scripts/_view');
  * Renders a full product detail page. If the http parameter "format" is set to
  * "json" the product details are rendered as JSON response.
  */
-function Show() {
+function show() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -49,38 +52,7 @@ function Show() {
  * Renders a full product detail page. If the http parameter "format" is set to
  * "json" the product details are rendered as JSON response.
  */
-function Show_NoViews() {
-
-    var pid = request.httpParameterMap.pid.stringValue;
-    var product = Product.get(pid);
-
-    if (product.isVisible()) {
-        pageMeta.update(product);
-
-        var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
-        var productVariationSelections = require('~/cartridge/scripts/util/ProductVariationSelection').getProductVariationSelections(product, request.httpParameterMap);
-
-        response.renderTemplate(product.getTemplate() || 'product/product', {
-            Product                : product.object,
-            DefaultVariant         : product.getDefaultVariant(),
-            CurrentOptionModel     : productOptionSelections.ProductOptionModel,
-            ProductOptionModels    : productOptionSelections.ProductOptionModels,
-            CurrentVariationModel  : productVariationSelections.ProductVariationModel,
-            ProductVariationModels : productVariationSelections.ProductVariationModels
-        });
-    }
-    else {
-        response.renderTemplate('error/notfound');
-    }
-
-}
-
-
-/**
- * Renders a full product detail page. If the http parameter "format" is set to
- * "json" the product details are rendered as JSON response.
- */
-function Detail() {
+function detail() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -111,7 +83,7 @@ function Detail() {
  * (reloadAvailability). Input: pid (required) - product ID quantity (required) -
  * the quantity to use for determining availability
  */
-function GetAvailability() {
+function getAvailability() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -127,7 +99,7 @@ function GetAvailability() {
 /**
  * TODO
  */
-function HitTile() {
+function hitTile() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -153,7 +125,7 @@ function HitTile() {
 /**
  * TODO
  */
-function Productnav() {
+function productNavigatio() {
 
     var params = request.httpParameterMap;
     var product = Product.get(params.pid.stringValue);
@@ -203,7 +175,7 @@ function Productnav() {
 /**
  * TODO
  */
-function Variation() {
+function variation() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -270,7 +242,7 @@ function Variation() {
 /**
  * TODO
  */
-function VariationPS() {
+function variationPS() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -303,7 +275,7 @@ function VariationPS() {
 /**
  * Renders the last visited products based on the session information.
  */
-function IncludeLastVisited() {
+function includeLastVisited() {
 
     response.renderTemplate('product/lastvisited', {
         LastVisitedProducts : require('~/cartridge/scripts/object/RecentlyViewedItems').getRecentlyViewedProducts(3)
@@ -314,7 +286,7 @@ function IncludeLastVisited() {
 /**
  * Renders a list of bonus products for a bonus discount line item.
  */
-function GetBonusProducts() {
+function getBonusProducts() {
 
     // TODO - refactor once basket can be retrieved via API
     var CartController = require('./Cart');
@@ -339,7 +311,7 @@ function GetBonusProducts() {
 /**
  * TODO
  */
-function GetSetItem() {
+function getSetItem() {
 
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
@@ -358,13 +330,13 @@ function GetSetItem() {
 /*
  * Web exposed methods
  */
-exports.Show = guard.get(Show);
-exports.Detail = guard.get(Detail);
-exports.GetAvailability = guard.get(GetAvailability);
-exports.HitTile = guard.get(HitTile);
-exports.Productnav = guard.get(Productnav);
-exports.Variation = guard.get(Variation);
-exports.VariationPS = guard.get(VariationPS);
-exports.IncludeLastVisited = guard.get(IncludeLastVisited);
-exports.GetBonusProducts = guard.get(GetBonusProducts);
-exports.GetSetItem = guard.get(GetSetItem);
+exports.Show                = guard.filter(['get'], show);
+exports.Detail              = guard.filter(['get'], detail);
+exports.GetAvailability     = guard.filter(['get'], getAvailability);
+exports.HitTile             = guard.filter(['get'], hitTile);
+exports.Productnav          = guard.filter(['get'], productNavigatio);
+exports.Variation           = guard.filter(['get'], variation);
+exports.VariationPS         = guard.filter(['get'], variationPS);
+exports.IncludeLastVisited  = guard.filter(['get'], includeLastVisited);
+exports.GetBonusProducts    = guard.filter(['get'], getBonusProducts);
+exports.GetSetItem          = guard.filter(['get'], getSetItem);

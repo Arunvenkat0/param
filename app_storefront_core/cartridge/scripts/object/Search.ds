@@ -1,6 +1,9 @@
 'use strict';
-
-/** @module object/Search */
+/**
+ * TODO
+ *
+ * @module object/Search
+ */
 
 /* API Includes */
 var CatalogMgr = require('dw/catalog/CatalogMgr');
