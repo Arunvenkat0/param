@@ -39,8 +39,8 @@
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" attribute1="autocomplete" value1="off"/>
 				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
