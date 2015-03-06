@@ -1,5 +1,5 @@
 .top-banner {
-	@extend .clearfix;
+	height: 87px;
 	padding-top: 0.5em;
 	position: relative;
 	* {
@@ -50,22 +50,20 @@ nav[role="navigation"] {
 	color: $white;
 	@media screen and (min-width: 768px) {
 		left: auto;
-		position: static;
-		top: auto;
-		width: auto;
+		width: 100%;
 		color: $night-rider;
 	}
 }
 
 .header-banner {
-	border-bottom: 5px solid darken($dim-gray, 10%);
-	padding: 0.8em 1rem;
-	text-transform: uppercase;
+	display: none;
 	@media screen and (min-width: 768px) {
-		border: none;
-		margin-top: 4.5em;
-		position: absolute;
-		right: 0;
+		display:block;
+		.header-promotion {
+			background-color: $rain-forest;
+			color: #fff;
+			text-align: center;
+		}
 	}
 }
 
@@ -74,8 +72,9 @@ nav[role="navigation"] {
 	text-transform: uppercase;
 	@media screen and (min-width: 768px) {
 		font-size: 0.9em;
-		position: absolute;
-		right: 0;
+		float: right;
+		margin-top: -7.6em;
+		padding: 0 70px 0 270px;
 	}
 	li {
 		border-top: 1px solid darken($night-rider, 10%);
@@ -87,13 +86,28 @@ nav[role="navigation"] {
 		&:first-child {
 			border: none;
 		}
-
+		i {
+			padding: 0 8px 0 0;
+		}
 		@media screen and (min-width: 768px) {
 			background-color: transparent;
 			border-top: none;
 			float: left;
 			margin: 0.3em 0.8em 0;
 			padding: 0;
+			text-align: center;
+			a {
+				transition: color 500ms ease;
+				&:hover {
+					color:$citrus;
+					text-decoration: none;
+					}
+				i {
+					display: block;
+					font-size: 2em;
+					padding: 0;
+				}
+			}
 			&:hover {
 				background-color: transparent;
 			}
@@ -136,10 +150,13 @@ nav[role="navigation"] {
 	width: 100%;
 	background-color: $dim-gray;
 	@media screen and (min-width: 768px) {
-		position: absolute;
-		right: 7%;
-		top: 2.2em;
-		width: 16rem;
+		background-color: $white;
+		border: 1px solid $nobel;
+		border-radius: 10px;
+		color: $nobel;
+		height: 2.5em;
+		margin: 1em auto 0;
+		width: 300px;
 		z-index: 1;
 	}
 	label {
@@ -151,6 +168,7 @@ nav[role="navigation"] {
 		}
 		@media screen and (min-width: 768px) {
 			float: right;
+			padding: 0.5rem 0.7rem;
 			width: auto;
 		}
 	}
@@ -164,10 +182,7 @@ nav[role="navigation"] {
 		width: 85%; // default for older browser
 		width: calc(100% - 2.5rem);
 		@media screen and (min-width: 768px) {
-			width: 13.6rem;
-			&:focus {
-				border-bottom-color: $night-rider;
-			}
+			height: 1.9rem;
 		}
 	}
 	legend {
@@ -181,9 +196,9 @@ nav[role="navigation"] {
 	padding: 0;
 	text-transform: uppercase;
 	@media screen and (min-width: 768px) {
-		border: none;
-		float: right;
-		margin-top: 7em;
+		border-bottom: 1px solid $very-light-gray;
+		margin-top: .7em;
+		padding: 0 6%;
 		width: 100%;
 	}
 	li {
@@ -204,6 +219,7 @@ nav[role="navigation"] {
 		padding: 0.9rem 1rem;
 		width: 100%;
 		@media screen and (min-width: 768px) {
+			font-size: 1em;
 			width: auto;
 		}
 		@media screen and (min-width: 960px) {
