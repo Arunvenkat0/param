@@ -51,9 +51,11 @@
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}
 				</a>
+				<i class="fa fa-chevron-right"></i>
 			<iselse/>
 				<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.shippingaddresses','checkout',null)}
+				<i class="fa fa-chevron-right"></i>
 			</isif>
 		</div><!-- END: step1 -->
 		
@@ -63,9 +65,11 @@
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}
 				</a>
+				<i class="fa fa-chevron-right"></i>
 			<iselse/>
 				<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.shippingmethods','checkout',null)}
+				<i class="fa fa-chevron-right"></i>
 			</isif>
 		</div><!-- END: step2 -->
 		
@@ -76,9 +80,11 @@
 					<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 				</a>
+				<i class="fa fa-chevron-right"></i>
 			<iselse/>
 				<span>${Resource.msg('checkoutprogressindicator.step3','checkout',null)}</span>
 				${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
+				<i class="fa fa-chevron-right"></i>
 			</isif>
 		</div><!-- END: step3 -->
 		
@@ -125,9 +131,11 @@
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}
 					</a>
+					<i class="fa fa-chevron-right"></i>
 				<iselse/>
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.shipping','checkout',null)}
+					<i class="fa fa-chevron-right"></i>
 				</isif>
 			</div><!-- END: step1 -->
 			
@@ -137,9 +145,11 @@
 						<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 					</a>
+					<i class="fa fa-chevron-right"></i>
 				<iselse/>
 					<span>${Resource.msg('checkoutprogressindicator.step2','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
+					<i class="fa fa-chevron-right"></i>
 				</isif>
 			</div><!-- END: step2 -->
 
@@ -165,9 +175,11 @@
 						<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 						${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
 					</a>
+					<i class="fa fa-chevron-right"></i>
 				<iselse/>
 					<span>${Resource.msg('checkoutprogressindicator.step1','checkout',null)}</span>
 					${Resource.msg('checkoutprogressindicator.billing','checkout',null)}
+					<i class="fa fa-chevron-right"></i>
 				</isif>
 			</div><!-- END: step2 -->
 			
