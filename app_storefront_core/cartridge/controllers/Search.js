@@ -22,7 +22,8 @@ function show() {
     var params = request.httpParameterMap;
 
     if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
-        showProductGrid();
+        // TODO refactor and merge showProductGrid() code into here
+	    showProductGrid();
         return;
     }
 
@@ -172,8 +173,7 @@ function getSuggestions() {
      * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
      */
     if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
-        response.renderTemplate('search/suggestionsbeta');
-        return;
+	    view.get().render('search/suggestionsbeta');
     }
     else {
         // TODO - refactor once search suggestion can be retrieved via th script API
@@ -243,6 +243,6 @@ function showProductGrid() {
 /*
  * Web exposed methods
  */
-exports.Show = guard.filter(['get'], show);
-exports.ShowContent = guard.filter(['get'], showContent);
-exports.GetSuggestions = guard.filter(['get'], getSuggestions);
+exports.Show            = guard.filter(['get'], show);
+exports.ShowContent     = guard.filter(['get'], showContent);
+exports.GetSuggestions  = guard.filter(['get'], getSuggestions);
