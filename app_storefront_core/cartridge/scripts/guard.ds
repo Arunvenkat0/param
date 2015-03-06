@@ -1,0 +1,276 @@
+'use strict';
+
+/**
+ * This is a collection of decorators for functions which performs several security checks.
+ * They can be combined with each other to configure the necessary constraints for a function that is exposed to the Internet.
+ *
+ * @module guard
+ *
+ * @example
+ * <caption>Example of an Account controller</caption>
+ * function show() {
+ *     // shows account landing page
+ * }
+ *
+ * // allow only GET requests via HTTPS for logged in users
+ * exports.Show = require('~/guard').filter(['post','https','loggedIn'],show);
+ */
+var form = require('~/cartridge/scripts/object/Form');
+
+/**
+ * This method contains the login procedure specific for the customer account,
+ * e.g. order tracking. After login, it redirects to the provided target action.
+ */
+function requireLogin()
+{
+    form.get('ordertrack').clear();
+    var loginForm = form.get('login');
+    loginForm.clear();
+
+
+    if (customer.registered)
+    {
+        loginForm.setValue('username', customer.profile.credentials.login);
+        loginForm.setValue('rememberme', true);
+    }
+    response.redirect(dw.web.URLUtils.https('Account-Show','original', browsing.lastUrl()));
+}
+
+/**
+ * Guard that ensures that the provided action is only executed when the request is secure (e.g. the schema is HTTPS).
+ * If it is not secure, the provided error handler is called. If no error handler is provided, by default a switch to
+ * HTTPS is attempted.
+ *
+ * @param action the action to the executed if the request is HTTPS
+ * @param error the optional error handler which should be called if the request is not HTTPS
+ */
+function https(action, error)
+{
+    return expose(function()
+    {
+        if (request.isHttpSecure())
+        {
+            dw.system.Logger.debug('*** guard https ok');
+
+            action();
+            return;
+        }
+
+        if (error !== null)
+        {
+            dw.system.Logger.debug('*** guard non-https access to "' + action.name +
+                '" denied, calling error handler');
+
+            error();
+            return;
+        }
+
+        // no error handler, use default behavior
+        dw.system.Logger.debug('*** guard non-https access to "' + action.name +
+            '" denied, calling default handler');
+
+        // try to switch to https
+        switchToHttps();
+    });
+}
+
+/**
+ * Performs a protocol switch for the URL of the current request to HTTPS. Responds with a redirect to the client.
+ *
+ * @return false, if switching is not possible (for example, because its a POST request)
+ */
+function switchToHttps()
+{
+    if (request.httpMethod !== 'GET')
+    {
+        // switching is not possible, send error 403 (forbidden)
+        response.sendError(403);
+        return false;
+    }
+
+    var url = 'https://' + request.httpHost + request.httpPath;
+
+    if (!empty(request.httpQueryString))
+    {
+        url += '?' + request.httpQueryString;
+    }
+
+    response.redirect(url);
+    return true;
+}
+
+var Filters = {
+    https : function() {return request.isHttpSecure();},
+    http : function() {return !this.https();},
+    get : function() {return request.httpMethod === 'GET';},
+    post : function() {return request.httpMethod === 'POST';},
+    loggedIn : function() {return customer.authenticated;}
+};
+
+
+/**
+ * Generic function, which allows to filter multiple request types
+ */
+function filter (filters, action, error) {
+    return expose(function() {
+        var filtersPassed = true;
+        var errors = [];
+        for (var i = 0; i < filters.length; i++) {
+            if (!error) {
+                if (filters[i] === 'https') {
+                    error = switchToHttps;
+                } else if (filters[i] === 'loggedIn') {
+                    error = requireLogin;
+                }
+
+            }
+
+            if (filtersPassed) {
+                filtersPassed = Filters[filters[i]].apply(Filters);
+            }
+
+            if (!filtersPassed) {
+                errors.push(filters[i]);
+            }
+
+
+        }
+
+        if ( !error ) {
+            error = function() {
+                var url = dw.web.URLUtils.url('Error-Start','guardmismatch', errors.join('|'));
+                response.redirect(url);
+                return response;
+            };
+        }
+
+        if (filtersPassed) {
+            return action();
+        } else {
+            return error();
+        }
+    });
+
+}
+
+
+
+/**
+ * Guard that only accepts POST requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
+ */
+function post(action)
+{
+    return expose(function()
+    {
+        if (request.httpMethod !== 'POST')
+        {
+            dw.system.Logger.debug('*** guard non-post access to "' + action.name + '" denied for ' +
+                request.httpMethod);
+
+            // send method not allowed
+            response.sendError(405);
+            return;
+        }
+
+        dw.system.Logger.debug('*** guard post ok');
+
+        action();
+    });
+}
+
+/**
+ * Guard that only accepts GET requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
+ */
+function get(action)
+{
+    return expose(function()
+    {
+        if (request.httpMethod !== 'GET')
+        {
+            dw.system.Logger.debug('*** guard non-get access to "' + action.name + '" denied for ' +
+                request.httpMethod);
+
+            // send method not allowed
+            response.sendError(405);
+            return;
+        }
+
+        dw.system.Logger.debug('*** guard get ok');
+
+        action();
+    });
+}
+
+/**
+ * Exposes the given action to be accessible from the web. The action gets a property which marks it as exposed. This
+ * property is checked by the platform.
+ */
+function expose(action)
+{
+    action.public = true;
+    return action;
+}
+
+/**
+ * Executes the given action in a transactional context. This allows for atomic changes in the database.
+ */
+function transactional(action)
+{
+    var txn = require('dw/system/Transaction');
+    txn.begin();
+
+    action();
+
+    txn.commit();
+}
+
+/*
+ * Module exports
+ */
+/** @see module:guard~https */
+exports.https = https;
+/** @see module:guard~get */
+exports.get = get;
+/** @see module:guard~post */
+exports.post = post;
+/** @see module:guard~expose */
+exports.all = expose;
+
+// often needed combinations
+/**
+ * @see module:guard~https
+ * @see module:guard~get
+ */
+exports.httpsGet = function(action)
+{
+    return https(get(action));
+};
+
+/**
+ * @see module:guard~https
+ * @see module:guard~post
+ */
+exports.httpsPost = function(action)
+{
+    return https(post(action));
+};
+
+exports.switchToHttps = switchToHttps;
+
+exports.transactional = transactional;
+
+/**
+ * Use this method to combine different filters, typically this is used to secure methods when exporting
+ * them as publicly avaiblable endpoints in controllers.
+ *
+ * @example
+ * // allow only GET requests for the Show endpoint
+ * exports.Show = require('~/guard').filter(['get'],show);
+ *
+ * // allow only POST requests via HTTPS for the Find endpoint
+ * exports.Find = require('~/guard').filter(['post','https'],find);
+ *
+ * // allow only logged in customer via HTTPS for the Profile endpoint
+ * exports.Profile = require('~/guard').filter(['https','loggedIn'],profile);
+ */
+exports.filter = filter;
