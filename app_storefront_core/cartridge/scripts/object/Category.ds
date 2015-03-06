@@ -51,7 +51,7 @@ var Category = AbstractHelper.extend(
 			return subcategories;
 		}
 	    if( !empty( subcategories ) ){
-	        for( let subcategory in subcategories ) {
+	        for each( let subcategory in subcategories ) {
 	        	if( ('showInMenu' in subcategory.custom) && subcategory.custom.showInMenu.valueOf() ) {
 	        		result.push(subcategory);
 	        	}
