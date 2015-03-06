@@ -268,7 +268,7 @@ var Product = AbstractHelper.extend(
             var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
 
             /* product availability */
-            var avm = this.object.getAvailabilityModel();
+            var avm = this.getAvailabilityModel();
 
             var availability = {
                 status           : avm.getAvailabilityStatus(),
@@ -282,11 +282,11 @@ var Product = AbstractHelper.extend(
 
             var avmLevels = dw.catalog.ProductAvailabilityLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
             availability.isAvailable = avmLevels.notAvailable.value == 0;
-            availability.inStockMsg = Resource.msgf('global.quantityinstock', 'locale', "", avmLevels.inStock.value.toFixed());
-            availability.preOrderMsg = Resource.msgf('global.quantitypreorder', 'locale', "", avmLevels.preorder.value.toFixed());
-            availability.backOrderMsg = Resource.msgf('global.quantitybackorder', 'locale', "", avmLevels.backorder.value.toFixed());
+            availability.inStockMsg = dw.web.Resource.msgf('global.quantityinstock', 'locale', "", avmLevels.inStock.value.toFixed());
+            availability.preOrderMsg = dw.web.Resource.msgf('global.quantitypreorder', 'locale', "", avmLevels.preorder.value.toFixed());
+            availability.backOrderMsg = dw.web.Resource.msgf('global.quantitybackorder', 'locale', "", avmLevels.backorder.value.toFixed());
             if (avm && avm.inventoryRecord && !empty(avm.inventoryRecord.inStockDate)) {
-                availability.inStockDateMsg = Resource.msgf('global.inStockDate', 'locale', "", avm.inventoryRecord.inStockDate.toDateString());
+                availability.inStockDateMsg = dw.web.Resource.msgf('global.inStockDate', 'locale', "", avm.inventoryRecord.inStockDate.toDateString());
             }
 
             availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK] = avmLevels.inStock.value;
