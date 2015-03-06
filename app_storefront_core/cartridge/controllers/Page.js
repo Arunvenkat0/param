@@ -18,7 +18,7 @@ function show() {
     var content = contents.get(assetId).object;
     if (!content || !content) {
     	response.setStatus(404);
-        response.renderTemplate('error/notfound');
+        view.get().render('error/notfound');
         return response;
     } else {
 	    // @TODO replace with search module call
@@ -26,7 +26,7 @@ function show() {
 
 	    pageMeta.update(content);
 
-        view.get('Page', {
+        view.get({
             Content: content,
             ContentSearchResult: contentSearchResult, Meta : pageMeta
         }).render(content.template || 'content/content/contentpage');
@@ -43,7 +43,7 @@ function include() {
     var assetId = request.httpParameterMap.cid.stringValue;
     var content = contents.get(assetId).object;
 
-    view.get('Page', {
+    view.get({
         Content: content,
     }).render(content.template || 'content/content/contentassetinclude');
 
