@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @module view
+ */
 
 /**
  * Get the decorator templates which is typically the passed template but in case of an AJAX request it is

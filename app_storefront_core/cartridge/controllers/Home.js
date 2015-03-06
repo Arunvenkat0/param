@@ -2,7 +2,7 @@
 /**
  * Renders the home page.
  *
- * @module Home
+ * @module controller/Home
  */
 
 var guard = require('./dw/guard');
@@ -89,12 +89,20 @@ function deviceLayouts() {
 /*
  * Export the publicly available controller methods
  */
+/** @see module:controller/Home~show */
 exports.Show                        = guard.filter(['get'],show);
+/** @see module:controller/Home~includeHeader */
 exports.IncludeHeader               = guard.filter(['get'],includeHeader);
 //exports.IncludeHeaderMenu           = guard.filter(['get'],includeHeaderMenu);
+/** @see module:controller/Home~includeHeaderCustomerInfo */
 exports.IncludeHeaderCustomerInfo   = guard.filter(['get'],includeHeaderCustomerInfo);
+/** @see module:controller/Home~errorNotFound */
 exports.ErrorNotFound               = guard.filter(['get'],errorNotFound);
+/** @see module:controller/Home~mobileSite */
 exports.MobileSite                  = guard.filter(['get'],mobileSite);
+/** @see module:controller/Home~fullSite */
 exports.FullSite                    = guard.filter(['get'],fullSite);
+/** @see module:controller/Home~setLayout */
 exports.SetLayout                   = guard.filter(['get'],setLayout);
+/** @see module:controller/Home~deviceLayouts */
 exports.DeviceLayouts               = guard.filter(['get'],deviceLayouts);

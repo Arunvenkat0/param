@@ -2,7 +2,7 @@
 /**
  * Renders the a content page or include.
  *
- * @module Page
+ * @module controller/Page
  */
 
 var guard = require('./dw/guard');
@@ -54,5 +54,7 @@ function include() {
 /*
  * Export the publicly available controller methods
  */
+/** @see module:controller/Page~show */
 exports.Show    = guard.filter(['get'],show);
+/** @see module:controller/Page~include */
 exports.Include = guard.filter(['get'],include);

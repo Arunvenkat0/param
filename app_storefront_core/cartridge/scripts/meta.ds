@@ -13,6 +13,8 @@ var HOME_BREADCRUMB = {
  *
  * This should be initialized via the current context object (product, category, asset or folder) and can
  * be used to retrieve the page metadata, breadcrumbs and to render the accumulated information to the client
+ *
+ * @class
  */
 var Meta = function(){
     this.data = {
@@ -28,7 +30,7 @@ var Meta = function(){
 
 Meta.prototype = {
     /**
-     * The core contion of the class which updates the internal data represenation with teh given information
+     * The core method of this class which updates the internal data represenation with the given information
      *
      * @param  {Object|dw.catalog.Product|dw.catalog.Category|dw.content.Content|dw.content.Folder} object The object to update with
      *
@@ -36,7 +38,9 @@ Meta.prototype = {
      * // using a product object
      * meta.update(product);
      * // using a plain object
-     * meta.update({resources : { 'MY_RESOURCE' : dw.web.Resource.msg('my.resource','mybundle',null) }})
+     * meta.update({resources : {
+     *     'MY_RESOURCE' : dw.web.Resource.msg('my.resource','mybundle',null)
+     * }});
      * // using a string
      * meta.update('account.landing')
      */
@@ -125,4 +129,5 @@ Meta.prototype = {
     }
 };
 
+/** @type {Meta} Singleton instance for meta data handling */
 module.exports = new Meta();

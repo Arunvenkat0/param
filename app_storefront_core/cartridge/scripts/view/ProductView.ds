@@ -5,11 +5,8 @@ var View = require('./View');
 
 /**
  * View for store locator functionality.
- *
- * @class module:view/StoreLocatorView~StoreLocatorView
  */
 var ProductView = View.extend(
-    /** @lends module:view/ProductView~ProductView.prototype */
     {
         /**
          * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
@@ -61,6 +58,9 @@ var ProductView = View.extend(
             return require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(this.product.object, parameterMap, optionalCustomPrefix);
         },
 
+        /**
+         * @constructor module:view/ProductView~ProductView
+         */
         init : function (params) {
             this._super(params);
 
