@@ -5,7 +5,7 @@
         <isif condition="${Item.url}">
 	        <a href="${Item.url}" class="breadcrumb-element" title="${Item.name}">${Item.name}</a>
         <iselse>
-            <span>${item.name}</span>
+            <span class="breadcrumb-element">${Item.name}</span>
         </isif>
     </isloop>
 </div><!-- END: breadcrumb -->

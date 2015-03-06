@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @module view
+ */
 
 /**
  * Get the decorator templates which is typically the passed template but in case of an AJAX request it is
@@ -7,8 +10,11 @@
  * @param decoratorName {String} the name of the decorator template to use
  * @param  customValues {Array} Array of parameter values for 'format' which indicate an AJAX response
  * @return {String} The name of the decorator template to be used
+ *
+ * @example
+ * <isdecorate template="${require('~/view').decorate('path/to/decorator')}">
  */
-exports.decorate = function(decoratorName, customValues){
+exports.decorate = function (decoratorName, customValues) {
     var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
 
     var noDecoration = ['ajax'];
@@ -25,11 +31,30 @@ exports.decorate = function(decoratorName, customValues){
  * @param  {string} viewName   The name of the view
  * @param  {object} parameters The parameters to pass to the view
  * @return {object/View}       The view object instance
+ *
+ * @example
+ * // use anonymous view
+ * require('~/view').get().render('path/to/template');
+ *
+ * // or use a named view
+ * var product = dw.catalog.ProductMgr.getProduct('123456');
+ * require('~/view').get("view/ProductView",{
+ *     product : product,
+ *     showRecommendations : false
+ * }).render('path/to/template');
  */
 exports.get = function (viewName, parameters) {
     var View;
     try {
-        View = require('./view/' + viewName + 'View');
+        if (typeof viewName === 'string') {
+            View = require('./' + viewName);
+        }
+        else {
+            // use first argument as parameters if not a string
+            // to allow for anonymous views
+            parameters = viewName;
+            throw 'Not a named view';
+        }
     } catch (e) {
         View = require('./view/View');
     }

@@ -13,6 +13,8 @@ var HOME_BREADCRUMB = {
  *
  * This should be initialized via the current context object (product, category, asset or folder) and can
  * be used to retrieve the page metadata, breadcrumbs and to render the accumulated information to the client
+ *
+ * @class
  */
 var Meta = function(){
     this.data = {
@@ -28,14 +30,24 @@ var Meta = function(){
 
 Meta.prototype = {
     /**
-     * The core contion of the class which updates the internal data represenation with teh given information
+     * The core method of this class which updates the internal data represenation with the given information
      *
      * @param  {Object|dw.catalog.Product|dw.catalog.Category|dw.content.Content|dw.content.Folder} object The object to update with
+     *
+     * @example
+     * // using a product object
+     * meta.update(product);
+     * // using a plain object
+     * meta.update({resources : {
+     *     'MY_RESOURCE' : dw.web.Resource.msg('my.resource','mybundle',null)
+     * }});
+     * // using a string
+     * meta.update('account.landing')
      */
     update : function(object){
-        // check if opbject wrapped in AbstractHelper
+        // check if object wrapped in AbstractHelper and get system object if so get the system object
         if ('object' in object) {
-        	object = object.object;	
+        	object = object.object;
         }
         // check if it is a system object
         if(object.class){
@@ -59,8 +71,8 @@ Meta.prototype = {
 
             this.updatePageMetaData();
 
-            // update breadcrumbs
-            if(object.class === '[JavaClass dw.content.Content]'){
+            // Update breadcrumbs for content
+            if(object.class === dw.content.Content){
                 var path = require('~/cartridge/scripts/object/Content').get(object).getFolderPath();
                 this.data.breadcrumbs = path.map(function(folder){
                     return {
@@ -74,6 +86,9 @@ Meta.prototype = {
                 });
                 dw.system.Logger.debug('Content breadcrumbs calculated: '+JSON.stringify(this.data.breadcrumbs));
             }
+        } else if(typeof object === 'string'){
+            // @TODO Should ideally allow to pass something like account.overview, account.wishlist etc.
+            // and at least generate the breadcrumbs & page title
         } else {
             if(object.pageTitle){
                 this.data.page.title = object.pageTitle;
@@ -114,4 +129,5 @@ Meta.prototype = {
     }
 };
 
+/** @type {Meta} Singleton instance for meta data handling */
 module.exports = new Meta();

@@ -18,7 +18,7 @@ function find() {
     storeLocatorForm.clear();
     pageMeta.update(storeLocatorAsset);
 
-    view.get('StoreLocator')
+    view.get('view/StoreLocatorView')
         .render('storelocator/storelocator');
     return response;
 }
@@ -93,10 +93,10 @@ function findStores() {
     //Get From GIT
 
     if (searchResult) {
-        view.get('StoreLocator',searchResult)
+        view.get('view/StoreLocatorView',searchResult)
             .render('storelocator/storelocatorresults');
     } else {
-        view.get('StoreLocator')
+        view.get('view/StoreLocatorView')
             .render('storelocator/storelocator');
     }
     return response;
@@ -110,7 +110,7 @@ function details() {
     var store = dw.catalog.StoreMgr.getStore(storeID);
     pageMeta.update(store);
 
-    view.get('StoreDetails',{Store:store})
+    view.get({Store:store})
         .render('storelocator/storedetails');
     return response;
 }

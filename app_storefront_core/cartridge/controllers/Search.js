@@ -11,6 +11,8 @@ var Search = require('~/cartridge/scripts/object/Search');
 
 /* Script Modules */
 var guard = require('./dw/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Renders a full featured product search result page.
@@ -30,10 +32,8 @@ function show() {
     });
 
     if (SearchRedirectURLResult.result === PIPELET_NEXT) {
-        var Location = SearchRedirectURLResult.Location;
-
         response.renderTemplate('util/redirect', {
-            Location : Location,
+            Location : SearchRedirectURLResult.Location,
             CacheTag : true
         });
         return;
@@ -52,7 +52,7 @@ function show() {
     }
     else if (productSearchModel.count > 0) {
 
-        if ((productSearchModel.count > 1) || (productSearchModel.refinedSearch) || (contentSearchModel.count > 0)) {
+        if ((productSearchModel.count > 1) || productSearchModel.refinedSearch || (contentSearchModel.count > 0)) {
             var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
             params.start.intValue && productPagingModel.setStart(params.start.intValue);
 
@@ -63,22 +63,22 @@ function show() {
                 productPagingModel.setPageSize(12);
             }
 
-            require('./dw/web').updatePageMetaDataForCategory(productSearchModel.category);
+	        productSearchModel.category && pageMeta.update(productSearchModel.category);
 
             if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
                 // dynamic template
-                response.renderTemplate(productSearchModel.category.template, {
+                view.get({
                     ProductSearchResult : productSearchModel,
                     ContentSearchResult : contentSearchModel,
                     ProductPagingModel  : productPagingModel
-                });
+                }).render(productSearchModel.category.template);
             }
             else {
-                response.renderTemplate('rendering/category/categoryproducthits', {
+                view.get({
                     ProductSearchResult : productSearchModel,
                     ContentSearchResult : contentSearchModel,
                     ProductPagingModel  : productPagingModel
-                });
+                }).render('rendering/category/categoryproducthits');
             }
         }
         else {
@@ -94,7 +94,7 @@ function show() {
                 var iter = productSearchModel.getProductSearchHits();
                 if (iter.hasNext()) {
                     var productSearchHit = iter.next();
-                    if (productSearchHit.getRepresentedProducts().size() == 1) {
+                    if (productSearchHit.getRepresentedProducts().size() === 1) {
                         productID = productSearchHit.getFirstRepresentedProduct().getID();
                     }
                 }
@@ -109,10 +109,10 @@ function show() {
         }
     }
     else {
-        response.renderTemplate('search/nohits', {
+        view.get({
             ProductSearchResult : productSearchModel,
             ContentSearchResult : contentSearchModel
-        });
+        }).render('search/nohits');
     }
 }
 
@@ -142,25 +142,25 @@ function showContent() {
 
         if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
             // dynamic template
-            response.renderTemplate(contentSearchModel.folder.template, {
+            view.get({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ContentPagingModel  : contentPagingModel
-            });
+            }).render(contentSearchModel.folder.template);
         }
         else {
-            response.renderTemplate('rendering/folder/foldercontenthits', {
+            view.get({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ContentPagingModel  : contentPagingModel
-            });
+            }).render('rendering/folder/foldercontenthits');
         }
     }
     else {
-        response.renderTemplate('search/nohits', {
+        view.get({
             ProductSearchResult : productSearchModel,
             ContentSearchResult : contentSearchModel
-        });
+        }).render('search/nohits');
     }
 }
 
@@ -171,20 +171,22 @@ function getSuggestions() {
     /*
      * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
      */
-    if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy == 'true')) {
+    if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
         response.renderTemplate('search/suggestionsbeta');
         return;
     }
+    else {
+        // TODO - refactor once search suggestion can be retrieved via th script API
+        var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
+            MaxSuggestions : 10,
+            SearchPhrase   : request.httpParameterMap.q.value
+        });
 
-    // TODO - refactor once search suggestion can be retrieved via th script API
-    var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
-        MaxSuggestions : 10,
-        SearchPhrase   : request.httpParameterMap.q.value
-    });
+        view.get({
+            Suggestions : GetSearchSuggestionsResult.Suggestions
+        }).render('search/suggestions');
 
-    response.renderTemplate('search/suggestions', {
-        Suggestions : GetSearchSuggestionsResult.Suggestions
-    });
+    }
 }
 
 
@@ -214,50 +216,33 @@ function showProductGrid() {
     }
 
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && params.format.stringValue === 'page-element') {
-        response.renderTemplate('search/productgridwrapper', {
+        view.get({
             ProductSearchResult : productSearchModel,
             ProductPagingModel  : productPagingModel
-        });
+        }).render('search/productgridwrapper');
     }
     else {
         if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
             // dynamic template
-            response.renderTemplate(ProductSearchResult.category.template, {
+            view.get({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ProductPagingModel  : productPagingModel
-            });
+            }).render(productSearchModel.category.template);
         }
         else {
-            response.renderTemplate('rendering/category/categoryproducthits', {
+            view.get({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ProductPagingModel  : productPagingModel
-            });
+            }).render('rendering/category/categoryproducthits');
         }
     }
-}
-
-/**
- * Executes a content search and puts the ContentSearchResult into the pipeline dictionary for convenient reuse.
- */
-function getContentResult() {
-
-    var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
-    contentSearchModel.search();
-
-    return contentSearchModel;
-
 }
 
 /*
  * Web exposed methods
  */
-exports.Show            = guard.filter(['get'], show);
-exports.ShowContent     = guard.filter(['get'], showContent);
-exports.GetSuggestions  = guard.filter(['get'], getSuggestions);
-
-/*
- * Local methods
- */
-exports.GetContentResult = getContentResult;
+exports.Show = guard.filter(['get'], show);
+exports.ShowContent = guard.filter(['get'], showContent);
+exports.GetSuggestions = guard.filter(['get'], getSuggestions);

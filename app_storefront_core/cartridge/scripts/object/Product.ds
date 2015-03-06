@@ -179,9 +179,9 @@ var Product = AbstractHelper.extend(
                 return true;
             } else if (object[0] instanceof dw.value.EnumValue) {
                 // enumerate through the multiple values of the custom attribute
-                for each(var val in object)
+                for(var prop in object)
                 {
-                    if (val === value) {
+                    if (object[prop] === value) {
                         return true;
                     }
                 }

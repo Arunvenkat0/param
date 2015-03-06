@@ -2,20 +2,21 @@
 /**
  * Renders the home page.
  *
- * @module Home
+ * @module controller/Home
  */
 
 var guard = require('./dw/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Renders the home page.
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
-    require('~/cartridge/scripts/meta').update(rootFolder);
+    pageMeta.update(rootFolder);
 
-    response.renderTemplate('content/home/homepage');
-    return response;
+    view.get().render('content/home/homepage');
 }
 
 /**
@@ -23,8 +24,7 @@ function show() {
  * This is designed as a remote include to achieve optimal caching results for the header
  */
 function includeHeader() {
-    response.renderTemplate('components/header/header');
-    return response;
+    view.get().render('components/header/header');
 }
 
 
@@ -35,8 +35,7 @@ function includeHeader() {
  * @deprecated Converted into a template include
  */
 function includeHeaderMenu() {
-    response.renderTemplate('components/header/headermenu');
-    return response;
+    view.get().render('components/header/headermenu');
 }
 
 
@@ -47,53 +46,55 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    response.renderTemplate('components/header/headercustomerinfo');
-    return response;
+    view.get().render('components/header/headercustomerinfo');
 }
 
 
 function errorNotFound() {
-	response.setStatus(404);
-	response.renderTemplate('error/notfound');
-    return response;
+    response.setStatus(404);
+    view.get().render('error/notfound');
 }
 
 // @TODO As we want to have a responsive layout, do we really need the below?
 function mobileSite() {
     session.custom.device = 'mobile';
-    response.renderTemplate('components/changelayout');
-    return response;
+    view.get().render('components/changelayout');
 }
 
 // @TODO remove - not responsive - maybe replace with a css class forcing the layout
 function fullSite() {
     session.custom.device = 'fullsite';
-    response.renderTemplate('components/changelayout');
-    return response;
+    view.get().render('components/changelayout');
 }
 
 // @TODO remove - not responsive
 function setLayout() {
-    response.renderTemplate('components/setlayout');
-    return response;
+    view.get().render('components/setlayout');
 }
 
 
 // @TODO remove - not responsive
 function deviceLayouts() {
-	response.renderTemplate('util/devicelayouts');
-	return response;
+    view.get().render('util/devicelayouts');
 }
 
 /*
  * Export the publicly available controller methods
  */
-exports.Show                        = guard.filter(['get'],show);
-exports.IncludeHeader               = guard.filter(['get'],includeHeader);
+/** @see module:controller/Home~show */
+exports.Show = guard.filter(['get'], show);
+/** @see module:controller/Home~includeHeader */
+exports.IncludeHeader = guard.filter(['get'], includeHeader);
 //exports.IncludeHeaderMenu           = guard.filter(['get'],includeHeaderMenu);
-exports.IncludeHeaderCustomerInfo   = guard.filter(['get'],includeHeaderCustomerInfo);
-exports.ErrorNotFound               = guard.filter(['get'],errorNotFound);
-exports.MobileSite                  = guard.filter(['get'],mobileSite);
-exports.FullSite                    = guard.filter(['get'],fullSite);
-exports.SetLayout                   = guard.filter(['get'],setLayout);
-exports.DeviceLayouts               = guard.filter(['get'],deviceLayouts);
+/** @see module:controller/Home~includeHeaderCustomerInfo */
+exports.IncludeHeaderCustomerInfo = guard.filter(['get'], includeHeaderCustomerInfo);
+/** @see module:controller/Home~errorNotFound */
+exports.ErrorNotFound = guard.filter(['get'], errorNotFound);
+/** @see module:controller/Home~mobileSite */
+exports.MobileSite = guard.filter(['get'], mobileSite);
+/** @see module:controller/Home~fullSite */
+exports.FullSite = guard.filter(['get'], fullSite);
+/** @see module:controller/Home~setLayout */
+exports.SetLayout = guard.filter(['get'], setLayout);
+/** @see module:controller/Home~deviceLayouts */
+exports.DeviceLayouts = guard.filter(['get'], deviceLayouts);

@@ -27,7 +27,7 @@ function show() {
     if (product.isVisible()) {
         pageMeta.update(product);
 
-        var productView = view.get('Product', {
+        var productView = view.get('view/ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -43,7 +43,8 @@ function show() {
         productView.render(product.getTemplate() || 'product/product');
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+        response.setStatus(404);
+        view.get().render('error/notfound');
     }
 
 }
@@ -57,7 +58,7 @@ function detail() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('Product', {
+        var productView = view.get('view/ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -73,7 +74,8 @@ function detail() {
         productView.render(product.getTemplate() || 'product/productdetail');
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+	    view.get().render('error/notfound');
     }
 
 }
@@ -91,7 +93,8 @@ function getAvailability() {
         response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+	    view.get().render('error/notfound');
     }
 
 }
@@ -104,7 +107,7 @@ function hitTile() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('Product', {
+        var productView = view.get('view/ProductView', {
             product       : product,
             showswatches  : true,
             showpricing   : true,
@@ -125,7 +128,7 @@ function hitTile() {
 /**
  * TODO
  */
-function productNavigatio() {
+function productNavigation() {
 
     var params = request.httpParameterMap;
     var product = Product.get(params.pid.stringValue);
@@ -160,14 +163,15 @@ function productNavigatio() {
         productPagingModel.setPageSize(3);
         productPagingModel.setStart(params.start.intValue - 2);
 
-        view.get('ProductNavigation', {
+        view.get({
             ProductPagingModel  : productPagingModel,
             ProductSearchResult : productSearchModel
         }).render('search/productnav');
 
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+	    view.get().render('error/notfound');
     }
 
 }
@@ -181,7 +185,7 @@ function variation() {
 
     if (product.isVisible()) {
 
-        var productView = view.get('Product', {
+        var productView = view.get('view/ProductView', {
             product : product
         });
 
@@ -213,28 +217,29 @@ function variation() {
                 }
             }
 
-            view.get('Product', {
+            view.get('view/ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
         }
         else if (request.httpParameterMap.format.stringValue) {
-            view.get('Product', {
+            view.get('view/ProductView', {
                 product         : product,
                 GetImages       : true,
                 resetAttributes : resetAttributes
             }).render('product/productcontent');
         }
         else {
-            view.get('Product', {
+            view.get('view/ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel
             }).render('product/product');
         }
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+        view.get().render('error/notfound');
     }
 
 }
@@ -248,7 +253,7 @@ function variationPS() {
 
     if (product.isVisible()) {
 
-        var productView = view.get('Product', {
+        var productView = view.get('view/ProductView', {
             product : product
         });
 
@@ -260,14 +265,15 @@ function variationPS() {
         }
 
         if (request.httpParameterMap.format.stringValue) {
-            view.get('Product', {product : product}).render('product/components/productsetproduct');
+            view.get('view/ProductView', {product : product}).render('product/components/productsetproduct');
         }
         else {
-            view.get('Product', {product : product}).render('product/product');
+            view.get('view/ProductView', {product : product}).render('product/product');
         }
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+	    view.get().render('error/notfound');
     }
 
 }
@@ -302,9 +308,9 @@ function getBonusProducts() {
         }
     }
 
-    response.renderTemplate('product/bonusproductgrid', {
+    view.get({
         BonusDiscountLineItem : bonusDiscountLineItem
-    });
+    }).render('product/bonusproductgrid');
 
 }
 
@@ -316,13 +322,14 @@ function getSetItem() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        view.get('Product', {
+        view.get('view/ProductView', {
             product : product,
             isSet   : true
         }).render('product/components/productsetproduct');
     }
     else {
-        view.get('ProductNotFound').render('error/notfound');
+	    response.setStatus(404);
+	    view.get().render('error/notfound');
     }
 
 }
@@ -334,7 +341,7 @@ exports.Show                = guard.filter(['get'], show);
 exports.Detail              = guard.filter(['get'], detail);
 exports.GetAvailability     = guard.filter(['get'], getAvailability);
 exports.HitTile             = guard.filter(['get'], hitTile);
-exports.Productnav          = guard.filter(['get'], productNavigatio);
+exports.Productnav          = guard.filter(['get'], productNavigation);
 exports.Variation           = guard.filter(['get'], variation);
 exports.VariationPS         = guard.filter(['get'], variationPS);
 exports.IncludeLastVisited  = guard.filter(['get'], includeLastVisited);

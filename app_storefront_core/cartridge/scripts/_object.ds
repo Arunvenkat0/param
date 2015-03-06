@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * @module object
+ */
 
 /**
  * Deep copies all all object properties from source to target
