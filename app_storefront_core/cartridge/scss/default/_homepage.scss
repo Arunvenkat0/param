@@ -80,12 +80,6 @@
 	width: 33%;
 }
 
-.home-bottom {
-	clear: both;
-	overflow: hidden;
-	padding: 2em 0;
-}
-
 .home-bottom-right {
 	.jcarousel-nav {
 		color: $pacific-blue;
@@ -190,28 +184,3 @@
 	text-indent: -999em;
 	width: 100%;
 }
-
-#email-alert-signup {
-	display: block;
-	margin: 0 0 0 33px;
-	width: 910px;
-	label {
-		color: $nobel;
-		float: left;
-		padding: 0.5em 0 !important;
-		text-transform: uppercase;
-		width: 50%;
-	}
-	input {
-		&[type="text"] {
-			float: left;
-			padding: 0.7em 0.5em;
-			width: 30%;
-		}
-		&[type="image"] {
-			float: left;
-			padding-left: 0.1em;
-		}
-	}
-}
-

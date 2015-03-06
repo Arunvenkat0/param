@@ -2,9 +2,9 @@
 <iscache type="relative" hour="24"/>
 
 <iscomment>
-	This template renders the slot content of the bottom category landing slot
-	in case the slot content is of type Content Asset.
-	Note, only one content asset is rendered.
+	This template renders the slot content of a content asset
+	using only the body of the content.
+	Note, only one content asset body is rendered.
 </iscomment>
 
 <iscomment>make sure we have content at all</iscomment>

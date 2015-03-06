@@ -495,6 +495,17 @@ Here you will find answers to your questions about shopping at our online store,
             </html>
         </content>
     </slot-configuration>
+    
+    <slot-configuration slot-id="footer-column" context="global" configuration-id="footer-social-email" assigned-to-site="true">
+        <description>Footer slot containing the social icons and email form.</description>
+        <template>slots/content/contentassetbody.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <content-assets>
+                <content-asset content-id="footer-social-email"/>
+            </content-assets>
+        </content>
+    </slot-configuration>
 
     <slot-configuration slot-id="header-banner" context="global" configuration-id="free2dayshiporderover300" default="true" assigned-to-site="true">
         <description>HTML slot for Free 2 Day Shipping</description>
@@ -559,16 +570,6 @@ Here you will find answers to your questions about shopping at our online store,
                 <product product-id="25593363"/>
                 <product product-id="25686571"/>
             </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom" context="global" configuration-id="homepage-bottom-promos" default="true" assigned-to-site="true">
-        <template>slots/content/homebottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <content-assets>
-                <content-asset content-id="home-bottom"/>
-            </content-assets>
         </content>
     </slot-configuration>
 
