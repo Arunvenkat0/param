@@ -187,37 +187,11 @@ function ProductUtils(pdict : PipelineDictionary) {
 		isVariantAvailable : getVariantAvailability
 	};	
 }
-
+/**
+ * @deprecated use object/Product.getAvailability instead.
+ */
 ProductUtils.getAvailability = function(item : Product, quantity : Object) {
-	var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
-	/* product availability */
-	var avm : ProductAvailabilityModel = item.availabilityModel;
-	
-	var availability = {
-		status:avm.availabilityStatus,
-		statusQuantity:qty,
-		inStock:avm.inStock,
-		ats:empty(avm.inventoryRecord) ? 0 : avm.inventoryRecord.ATS.value.toFixed(),
-		inStockDate:empty(avm.inventoryRecord) || empty(avm.inventoryRecord.inStockDate) ? "" : avm.inventoryRecord.inStockDate.toDateString(),
-		availableForSale:avm.availability>0,		 		
-		levels : {}
-	};
-	
-	var avmLevels = ProductAvailabilityLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
-	availability.isAvailable = avmLevels.notAvailable.value==0;
-	availability.inStockMsg = Resource.msgf('global.quantityinstock','locale',"", avmLevels.inStock.value.toFixed());
-	availability.preOrderMsg = Resource.msgf('global.quantitypreorder','locale',"", avmLevels.preorder.value.toFixed());
-	availability.backOrderMsg = Resource.msgf('global.quantitybackorder','locale',"", avmLevels.backorder.value.toFixed());
-	if (avm && avm.inventoryRecord && !empty(avm.inventoryRecord.inStockDate)) {
-		availability.inStockDateMsg = Resource.msgf('global.inStockDate','locale',"", avm.inventoryRecord.inStockDate.toDateString());
-	}
-	
-	availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK] = avmLevels.inStock.value;
-	availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER] = avmLevels.preorder.value;
-	availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER] = avmLevels.backorder.value;
-	availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE] = avmLevels.notAvailable.value;
-	
-	return availability;	
+	return require('~/cartridge/scripts/object/Product').get(item).getAvailability(quantity);
 }
 
 ProductUtils.getProductJson = function(item : Product, args : PipelineDictionary) : String {

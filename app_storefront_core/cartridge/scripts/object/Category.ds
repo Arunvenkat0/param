@@ -5,7 +5,7 @@
  * @module object/Category
  */
 
-var AbstractHelper = require('app_lora/cartridge/scripts/util/helper/AbstractHelper');
+var AbstractHelper = require('./AbstractHelper');
 
 /**
  * Category helper providing enhanced category functionality

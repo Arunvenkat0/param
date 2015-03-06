@@ -1,556 +1,370 @@
-var g = require('./dw/guard');
+'use strict';
+
+/** @module controller/Product */
+
+/* API Includes */
+var PagingModel = require('dw/web/PagingModel');
+var Product = require('~/cartridge/scripts/object/Product');
+var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+var Search = require('~/cartridge/scripts/object/Search');
+
+/* Script Modules */
+var guard = require('./dw/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Renders a full product detail page. If the http parameter "format" is set to
  * "json" the product details are rendered as JSON response.
  */
-function Show()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-    var CurrentVariationModel = GetProductResult.CurrentVariationModel;
-    
-    
-    var web = require('./dw/web');			
-    web.updatePageMetaDataForProduct(Product, 
-            Product.name + " - " + dw.system.Site.getCurrent().name,
-            Product.shortDescription != null ? Product.shortDescription.getMarkup() : "",
-            Product.name);
-    
-		
-    if (Product.template != null)
-    {
-    	response.renderTemplate(Product.template, {
-    		Product: Product
-    	});
-    	return;
+function Show() {
+
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+
+    if (product.isVisible()) {
+        pageMeta.update(product);
+
+        var productView = view.get('Product', {
+            product        : product,
+            DefaultVariant : product.getDefaultVariant()
+        });
+
+        var productOptionSelections = productView.getProductOptionSelections(request.httpParameterMap);
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+
+        productView.CurrentOptionModel = productOptionSelections.ProductOptionModel;
+        productView.ProductOptionModels = productOptionSelections.ProductOptionModels;
+        productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
+        productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
+
+        productView.render(product.getTemplate() || 'product/product');
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
     }
 
-    var DefaultVariant = null;
-    
-	if (Product.master)
-	{
-		var ScriptResult = new dw.system.Pipelet('Script', {
-		    Transactional: 	false,
-		    OnError: 		'PIPELET_ERROR',
-		    ScriptFile: 	'product/GetDefaultVariant.ds'
-		}).execute({
-		    Prod: Product,
-		    CurrentVariationModel: CurrentVariationModel
-		});
-	    DefaultVariant = ScriptResult.newProduct;
-	}
-		
-	response.renderTemplate('product/product', {
-		Product: Product,
-		CurrentVariationModel : CurrentVariationModel,
-		DefaultVariant: DefaultVariant
-	});
-}
-	
-	
-/**
- * Determines a product based on the given ID.
- */
-function GetProduct()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-	if (!CurrentHttpParameterMap.pid.stringValue)
-	{
-		return {
-		    error: true
-		};		
-	}
-
-	var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-		ProductID: CurrentHttpParameterMap.pid.stringValue
-	});
-    var Product = GetProductResult.Product;
-
-	if (Product.productSet)
-	{
-		var HandleOfflineSetProductsResult = HandleOfflineSetProducts(Product);
-		if (HandleOfflineSetProductsResult.error)
-		{
-			return {
-	            error: true
-	        };
-		}
-	}
-
-	var UpdateProductVariationSelectionsResult = new dw.system.Pipelet('UpdateProductVariationSelections').execute({
-	    Product: Product
-	});
-	var CurrentVariationModel = UpdateProductVariationSelectionsResult.ProductVariationModel;
-	var Product = UpdateProductVariationSelectionsResult.SelectedProduct;
-	var ProductVariationModels = UpdateProductVariationSelectionsResult.ProductVariationModels;
-	
-		
-	var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-		Product: Product
-	});
-	var CurrentOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
-	var ProductOptionModels = UpdateProductOptionSelectionsResult.ProductOptionModels;
-	
-	
-	return {
-		Product: Product,
-		CurrentVariationModel: CurrentVariationModel
-	};
 }
 
 /**
  * Renders a full product detail page. If the http parameter "format" is set to
  * "json" the product details are rendered as JSON response.
  */
-function Detail()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-    var CurrentVariationModel = GetProductResult.CurrentVariationModel;
+function Show_NoViews() {
 
-    
-	if (Product.template != null)
-	{
-		response.renderTemplate(Product.template, {
-			Product: Product,
-			CurrentVariationModel: CurrentVariationModel
-		});
-	}
-	else
-	{
-		response.renderTemplate('product/productdetail', {
-			Product: Product,
-			CurrentVariationModel: CurrentVariationModel
-		});	
-	}
+    var pid = request.httpParameterMap.pid.stringValue;
+    var product = Product.get(pid);
+
+    if (product.isVisible()) {
+        pageMeta.update(product);
+
+        var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
+        var productVariationSelections = require('~/cartridge/scripts/util/ProductVariationSelection').getProductVariationSelections(product, request.httpParameterMap);
+
+        response.renderTemplate(product.getTemplate() || 'product/product', {
+            Product                : product.object,
+            DefaultVariant         : product.getDefaultVariant(),
+            CurrentOptionModel     : productOptionSelections.ProductOptionModel,
+            ProductOptionModels    : productOptionSelections.ProductOptionModels,
+            CurrentVariationModel  : productVariationSelections.ProductVariationModel,
+            ProductVariationModels : productVariationSelections.ProductVariationModels
+        });
+    }
+    else {
+        response.renderTemplate('error/notfound');
+    }
+
 }
 
 
 /**
- * Returns product variants data as a JSON. Called via product.js
- * (loadVariation). Input: pid (required) - product ID
+ * Renders a full product detail page. If the http parameter "format" is set to
+ * "json" the product details are rendered as JSON response.
  */
-function GetVariants()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-    var CurrentVariationModel = GetProductResult.CurrentVariationModel;
+function Detail() {
 
-    // TODO render directly as JSON response
-    response.renderTemplate('product/components/variationsjson', {
-    	Product: Product,
-    	CurrentVariationModel: CurrentVariationModel
-    });
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+
+    if (product.isVisible()) {
+        var productView = view.get('Product', {
+            product        : product,
+            DefaultVariant : product.getDefaultVariant()
+        });
+
+        var productOptionSelections = productView.getProductOptionSelections(request.httpParameterMap);
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+
+        productView.CurrentOptionModel = productOptionSelections.ProductOptionModel;
+        productView.ProductOptionModels = productOptionSelections.ProductOptionModels;
+        productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
+        productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
+
+        productView.render(product.getTemplate() || 'product/productdetail');
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
+
 }
-
 
 /**
  * Returns product availability data as a JSON object. Called via product.js
  * (reloadAvailability). Input: pid (required) - product ID quantity (required) -
- * the quantity to use for determining avalability
+ * the quantity to use for determining availability
  */
-function GetAvailability()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
+function GetAvailability() {
 
-    // TODO render directly as JSON
-    response.renderTemplate('product/components/availabilityjson', {
-    	Product: Product
-    });
-}
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
 
-	
-function HitTile()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-
-    
-    response.renderTemplate('product/producttile', {
-    	product: Product,
-    	showswatches : true,
-    	showpricing : true,
-    	showpromotion : true,
-    	showrating : true,
-    	showcompare : true
-    });
-}
-
-	
-/**
- * Determine if at least there is 1 online SetProduct in case it is s Product
- * Set. If all of the Set Products are offline then we return not found view.
- */
-function Productnav()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-    var CurrentVariationModel = GetProductResult.CurrentVariationModel;
-
-    
-    var CategoryID = null;
-	if (CurrentHttpParameterMap.cgid)
-	{
-		CategoryID = CurrentHttpParameterMap.cgid.value;
-	}
-	else if (Product.primaryCategory)
-	{
-		CategoryID = Product.primaryCategory.ID;
-	}
-	else if (Product.variationModel.master)
-	{
-		CategoryID = Product.variationModel.master.primaryCategory.ID;
-	}
-
-	var SearchResult = new dw.system.Pipelet('Search', {
-	    SearchContent: true,
-	    SearchProduct: true,
-	    DisallowOfflineCategory: true,
-	    RecursiveCategorySearch: true,
-	    RecursiveFolderSearch: true	
-	}).execute({
-	    SearchPhrase: CurrentHttpParameterMap.q.value,
-	    SortBy1: CurrentHttpParameterMap.psortb1.value,
-	    SortBy1Direction: CurrentHttpParameterMap.psortd1.intValue,
-	    SortBy2: CurrentHttpParameterMap.psortb2.value,
-	    SortBy2Direction: CurrentHttpParameterMap.psortd2.intValue,
-	    SortBy3: CurrentHttpParameterMap.psortb3.value,
-	    SortBy3Direction: CurrentHttpParameterMap.psortd3.intValue,
-	    PriceMin: CurrentHttpParameterMap.pmin.doubleValue,
-	    PriceMax: CurrentHttpParameterMap.pmax.doubleValue,
-	    CategoryID: CategoryID,
-	    ContentID: CurrentHttpParameterMap.cid.value,
-	    FolderID: CurrentHttpParameterMap.fdid.value,
-	    RefineByNamePrefix: 'prefn',
-	    RefineByPhrasePrefix: 'prefv',
-	    SortingRuleID: CurrentHttpParameterMap.srule.value
-	});
-	var ContentSearchResult = SearchResult.ContentSearchModel;
-    var ProductSearchResult = SearchResult.ProductSearchModel;
-    
-
-	var PagingResult = new dw.system.Pipelet('Paging', {
-	    DefaultPageSize: 12
-	}).execute({
-	    Objects: ProductSearchResult.productSearchHits,
-	    PageSize: 3,
-	    Start: CurrentHttpParameterMap.start.intValue - 2,
-	    ObjectsCount: ProductSearchResult.count
-	});
-    var ProductPagingModel = PagingResult.PagingModel;
-		
-
-    response.renderTemplate('search/productnav', {
-		ProductPagingModel: ProductPagingModel,
-		ProductSearchResult: ProductSearchResult
-	});
-}
-
-
-function HandleOfflineSetProducts(Product)
-{
-	for each(var SetProduct in Product.getProductSetProducts())
-    {
-        if (SetProduct.online)
-        {
-        	return {
-        	    SetProduct : SetProduct
-        	};
-       	}
+    if (product.isVisible()) {
+        response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
-    
-    return {
-        error: true
-    };
-}
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
 
+}
 
 /**
- * Returns true if at least one SetProduct is online otherwise false i.e. when
- * all SetProducts are offline. Expects Product instance
+ * TODO
  */
-function Variation()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function HitTile() {
 
-	if (!CurrentHttpParameterMap.pid.stringValue)
-	{
-		response.renderTemplate('error/notfound');
-		return;
-	}
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
 
-	var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-		ProductID: CurrentHttpParameterMap.pid.stringValue
-	});
-	if (GetProductResult.result == PIPELET_ERROR)
-	{
-		response.renderTemplate('error/notfound');
-		return;
-	}
-	var Product = GetProductResult.Product;
+    if (product.isVisible()) {
+        var productView = view.get('Product', {
+            product       : product,
+            showswatches  : true,
+            showpricing   : true,
+            showpromotion : true,
+            showrating    : true,
+            showcompare   : true
+        });
 
-		
-	var UpdateProductVariationSelectionsResult = new dw.system.Pipelet('UpdateProductVariationSelections').execute({
-	    Product: Product
-	});
-    var CurrentVariationModel = UpdateProductVariationSelectionsResult.ProductVariationModel;
-    var Product = UpdateProductVariationSelectionsResult.SelectedProduct;
-    var ProductVariationModels = UpdateProductVariationSelectionsResult.ProductVariationModels;
-		
-    
-    var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-	    Product: Product
-	});
-    var CurrentOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
+        // special handling for dictionary key 'product' as the template requires it in lower case
+        delete productView.Product;
+        productView.product = product.object;
 
-    // TODO this is apparently nowhere set to true..
-	var resetAttributes = false;
+        productView.render(product.getTemplate() || 'product/producttile');
+    }
 
-	if (Product.master)
-	{
-		var ScriptResult = new dw.system.Pipelet('Script', {
-		    Transactional: false,
-		    OnError: 'PIPELET_ERROR',
-		    ScriptFile: 'product/GetDefaultVariant.ds'
-		}).execute({
-		    Prod: Product,
-		    CurrentVariationModel: CurrentVariationModel
-		});
-		// TODO scope
-		var DefaultVariant = ScriptResult.newProduct;
-
-		resetAttributes = false;
-	}
-
-	if (empty(CurrentHttpParameterMap.format.stringValue))
-	{
-		response.renderTemplate('product/product', {
-    		Product: Product,
-    		CurrentVariationModel: CurrentVariationModel
-		});
-		return;
-	}
-	
-	if (CurrentHttpParameterMap.source.stringValue != 'bonus')
-	{
-		response.renderTemplate('product/productcontent', {
-			Product: Product,
-			GetImages: true,
-			resetAttributes: resetAttributes
-		});
-		return;
-	}
-
-	
-	var CartController = require('./Cart');
-	var GetBasketResult = CartController.GetBasket();
-	var Basket = GetBasketResult.Basket;
-	
-
-	var ScriptResult = new dw.system.Pipelet('Script', {
-	    Transactional: false,
-	    OnError: 'PIPELET_ERROR',
-	    ScriptFile: 'cart/GetBonusDiscountLineItem.ds'
-	}).execute({
-	    BonusDiscountLineItems: Basket.bonusDiscountLineItems,
-	    uuid: CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue
-	});
-	var BonusDiscountLineItem = ScriptResult.BonusDiscountLineItem;
-			
-	
-	response.renderTemplate('product/components/bonusproduct', {
-		Product: Product,
-		CurrentVariationModel: CurrentVariationModel,
-		BonusDiscountLineItem: BonusDiscountLineItem
-	});
 }
-
-	
-function VariationPS()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-    if (!CurrentHttpParameterMap.pid.stringValue)
-	{
-		response.renderTemplate('error/notfound');
-		return;
-	}
-
-	var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-		ProductID: CurrentHttpParameterMap.pid.stringValue
-	});
-	if (GetProductResult.result == PIPELET_ERROR)
-	{
-		response.renderTemplate('error/notfound');
-		return;
-	}
-	var Product = GetProductResult.Product;
-
-		
-	var UpdateProductVariationSelectionsResult = new dw.system.Pipelet('UpdateProductVariationSelections').execute({
-	    Product: Product
-	});
-    var CurrentVariationModel = UpdateProductVariationSelectionsResult.ProductVariationModel;
-    var ProductVariationModels = UpdateProductVariationSelectionsResult.ProductVariationModels;
-    var Product = UpdateProductVariationSelectionsResult.SelectedProduct;
-	
-	
-	if (Product.master)
-	{
-		var ScriptResult = new dw.system.Pipelet('Script', {
-		    Transactional: false,
-		    OnError: 'PIPELET_ERROR',
-		    ScriptFile: 'product/GetDefaultVariant.ds'
-		}).execute({
-		    Prod: Product,
-		    CurrentVariationModel: CurrentVariationModel
-		});
-		Product = ScriptResult.newProduct;
-	}
-
-		
-	if (empty(CurrentHttpParameterMap.format.stringValue))
-	{
-		response.renderTemplate('product/product', {
-    		Product: Product,
-		    CurrentVariationModel: CurrentVariationModel
-		});
-		return;
-	}
-	else
-	{
-		response.renderTemplate('product/components/productsetproduct', {
-			Product: Product
-		});
-		return;
-	}
-}
-
 
 /**
- * Renders the product detail page within the context of a category.
+ * TODO
  */
-function ShowInCategory()
-{
-    Show();
+function Productnav() {
+
+    var params = request.httpParameterMap;
+    var product = Product.get(params.pid.stringValue);
+
+    if (product.isVisible()) {
+
+        // construct the search based on the HTTP params & set the categoryID
+        var productSearchModel = Search.initializeProductSearchModel(params);
+
+        // need to reset pid in search
+        productSearchModel.setProductID(null);
+
+        // special handling if no category ID is given in URL
+        if (!params.cgid.value) {
+            var category = null;
+
+            if (product.getPrimaryCategory()) {
+                category = product.getPrimaryCategory();
+            }
+            else if (product.getVariationModel().getMaster()) {
+                category = product.getVariationModel().getMaster().getPrimaryCategory();
+            }
+
+            category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
+        }
+
+        // execute the product search
+        productSearchModel.search();
+
+        // construct the paging model
+        var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
+        productPagingModel.setPageSize(3);
+        productPagingModel.setStart(params.start.intValue - 2);
+
+        view.get('ProductNavigation', {
+            ProductPagingModel  : productPagingModel,
+            ProductSearchResult : productSearchModel
+        }).render('search/productnav');
+
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
+
 }
 
+/**
+ * TODO
+ */
+function Variation() {
+
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+
+    if (product.isVisible()) {
+
+        var productView = view.get('Product', {
+            product : product
+        });
+
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        var currentVariationModel = productVariationSelections.ProductVariationModel;
+
+        product = Product.get(productVariationSelections.SelectedProduct);
+
+        // TODO this is apparently nowhere set to true..
+        var resetAttributes = false;
+
+        if (product.isMaster()) {
+            product = Product.get(product.getDefaultVariant());
+            resetAttributes = false;
+        }
+
+        if (request.httpParameterMap.source.stringValue === 'bonus') {
+            // TODO - refactor once basket can be retrieved via API
+            var CartController = require('./Cart');
+            var GetBasketResult = CartController.GetBasket();
+
+            var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+            var bonusDiscountLineItem = null;
+
+            for (var i = 0; i < bonusDiscountLineItems.length; i++) {
+                if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+                    bonusDiscountLineItem = bonusDiscountLineItems[i];
+                    break;
+                }
+            }
+
+            view.get('Product', {
+                product               : product,
+                CurrentVariationModel : currentVariationModel,
+                BonusDiscountLineItem : bonusDiscountLineItem
+            }).render('product/components/bonusproduct');
+        }
+        else if (request.httpParameterMap.format.stringValue) {
+            view.get('Product', {
+                product         : product,
+                GetImages       : true,
+                resetAttributes : resetAttributes
+            }).render('product/productcontent');
+        }
+        else {
+            view.get('Product', {
+                product               : product,
+                CurrentVariationModel : currentVariationModel
+            }).render('product/product');
+        }
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
+
+}
 
 /**
- * Renders the last visisted products based on the session information.
+ * TODO
  */
-function IncludeLastVisited()
-{
-    var GetLastVisitedProductsResult = new dw.system.Pipelet('GetLastVisitedProducts').execute({
-	    MaxLength: 3
-	});
-    var LastVisitedProducts = GetLastVisitedProductsResult.Products;
+function VariationPS() {
 
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+
+    if (product.isVisible()) {
+
+        var productView = view.get('Product', {
+            product : product
+        });
+
+        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        product = Product.get(productVariationSelections.SelectedProduct);
+
+        if (product.isMaster()) {
+            product = Product.get(product.getDefaultVariant());
+        }
+
+        if (request.httpParameterMap.format.stringValue) {
+            view.get('Product', {product : product}).render('product/components/productsetproduct');
+        }
+        else {
+            view.get('Product', {product : product}).render('product/product');
+        }
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
+
+}
+
+/**
+ * Renders the last visited products based on the session information.
+ */
+function IncludeLastVisited() {
 
     response.renderTemplate('product/lastvisited', {
-		LastVisitedProducts: LastVisitedProducts
-	});
-}
+        LastVisitedProducts : require('~/cartridge/scripts/object/RecentlyViewedItems').getRecentlyViewedProducts(3)
+    });
 
+}
 
 /**
  * Renders a list of bonus products for a bonus discount line item.
  */
-function GetBonusProducts()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function GetBonusProducts() {
 
+    // TODO - refactor once basket can be retrieved via API
     var CartController = require('./Cart');
     var GetBasketResult = CartController.GetBasket();
-    var Basket = GetBasketResult.Basket;
 
-    
-	var ScriptResult = new dw.system.Pipelet('Script', {
-	    Transactional: false,
-	    OnError: 'PIPELET_ERROR',
-	    ScriptFile: 'cart/GetBonusDiscountLineItem.ds',
-	}).execute({
-	    uuid: CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue,
-	    BonusDiscountLineItems: Basket.bonusDiscountLineItems
-	});
-    var BonusDiscountLineItem = ScriptResult.BonusDiscountLineItem;
+    var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+    var bonusDiscountLineItem = null;
 
+    for (var i = 0; i < bonusDiscountLineItems.length; i++) {
+        if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+            bonusDiscountLineItem = bonusDiscountLineItems[i];
+            break;
+        }
+    }
 
     response.renderTemplate('product/bonusproductgrid', {
-		BonusDiscountLineItem: BonusDiscountLineItem
-	});
+        BonusDiscountLineItem : bonusDiscountLineItem
+    });
+
 }
 
-
-function GetSetItem()
-{
-    var GetProductResult = GetProduct();
-    if (GetProductResult.error)
-    {
-    	response.renderTemplate('error/notfound');
-		return;    	
-   	}
-    var Product = GetProductResult.Product;
-
-	
-	response.renderTemplate('product/components/productsetproduct', {
-		Product: Product,
-		isSet: true
-	});
-}
-
-
-/*
- * Module exports
+/**
+ * TODO
  */
+function GetSetItem() {
+
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+
+    if (product.isVisible()) {
+        view.get('Product', {
+            product : product,
+            isSet   : true
+        }).render('product/components/productsetproduct');
+    }
+    else {
+        view.get('ProductNotFound').render('error/notfound');
+    }
+
+}
 
 /*
  * Web exposed methods
  */
-exports.Show                = g.get(Show);
-exports.Detail              = g.get(Detail);
-exports.GetVariants         = g.get(GetVariants);
-exports.GetAvailability     = g.get(GetAvailability);
-exports.HitTile             = g.get(HitTile);
-exports.Productnav          = g.get(Productnav);
-exports.Variation           = g.get(Variation);
-exports.VariationPS         = g.get(VariationPS);
-exports.ShowInCategory      = g.get(ShowInCategory);
-exports.IncludeLastVisited  = g.get(IncludeLastVisited);
-exports.GetBonusProducts    = g.get(GetBonusProducts);
-exports.GetSetItem          = g.get(GetSetItem);
+exports.Show = guard.get(Show);
+exports.Detail = guard.get(Detail);
+exports.GetAvailability = guard.get(GetAvailability);
+exports.HitTile = guard.get(HitTile);
+exports.Productnav = guard.get(Productnav);
+exports.Variation = guard.get(Variation);
+exports.VariationPS = guard.get(VariationPS);
+exports.IncludeLastVisited = guard.get(IncludeLastVisited);
+exports.GetBonusProducts = guard.get(GetBonusProducts);
+exports.GetSetItem = guard.get(GetSetItem);
