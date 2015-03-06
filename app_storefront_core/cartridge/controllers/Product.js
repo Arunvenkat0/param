@@ -219,20 +219,7 @@ function Variation() {
             resetAttributes = false;
         }
 
-        if (!request.httpParameterMap.format.stringValue) {
-            view.get('Product', {
-                product               : product,
-                CurrentVariationModel : currentVariationModel
-            }).render('product/product');
-        }
-        else if (request.httpParameterMap.source.stringValue !== 'bonus') {
-            view.get('Product', {
-                product         : product,
-                GetImages       : true,
-                resetAttributes : resetAttributes
-            }).render('product/productcontent');
-        }
-        else {
+        if (request.httpParameterMap.source.stringValue === 'bonus') {
             // TODO - refactor once basket can be retrieved via API
             var CartController = require('./Cart');
             var GetBasketResult = CartController.GetBasket();
@@ -252,6 +239,19 @@ function Variation() {
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
+        }
+        else if (request.httpParameterMap.format.stringValue) {
+            view.get('Product', {
+                product         : product,
+                GetImages       : true,
+                resetAttributes : resetAttributes
+            }).render('product/productcontent');
+        }
+        else {
+            view.get('Product', {
+                product               : product,
+                CurrentVariationModel : currentVariationModel
+            }).render('product/product');
         }
     }
     else {
