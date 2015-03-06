@@ -2,7 +2,7 @@
 
 <div class="login-box login-account">
 	
-	<h2>${Resource.msg('logininclude.customersheader','account',null)}
+	<h2 class="section-header">${Resource.msg('logininclude.customersheader','account',null)}
 	<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 	</h2>	
 	
@@ -28,18 +28,18 @@
 			
 				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" xhtmlclass="email-input" p_dynamic="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
 				
-				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" xhtmlclass="password-input" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}" attribute1="autocomplete" value1="off"/>
-							
+				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" xhtmlclass="password-input" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}" />
+				
+				<isinputfield formfield="${pdict.CurrentForms.login.rememberme}" type="checkbox" rowclass="label-inline"/>
+				
 				<div class="form-row form-row-button">
 					<button type="submit" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}">
 						${Resource.msg('global.login','locale',null)}
 					</button>
-					<isinputfield formfield="${pdict.CurrentForms.login.rememberme}" type="checkbox" rowclass="label-inline login-rememberme"/>
+					<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('logininclude.forgotpassword','account',null)}" data-dlg-action='{"test":100}' data-dlg-options='{"width":700,"height":250}'>
+						${Resource.msg('logininclude.forgotpassword','account',null)}
+					</a>
 				</div>
-				
-				<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('logininclude.forgotpassword','account',null)}" data-dlg-action='{"test":100}' data-dlg-options='{"width":700,"height":250}'>
-					${Resource.msg('logininclude.forgotpassword','account',null)}
-				</a>
 				
 				<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 				
@@ -47,11 +47,8 @@
 			
 		</form>
 		</isif>
-		
-		<div class="login-oauth">
-			<isinclude template="account/login/oauthlogininclude"/>
-		</div>
-		
+		<isinclude template="account/login/oauthlogininclude"/>
+	
 	</div>
 	
 </div>
