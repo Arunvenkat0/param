@@ -1,35 +1,86 @@
 'use strict';
 
+/** @module object/Search */
+
+/* API Includes */
+var CatalogMgr = require('dw/catalog/CatalogMgr');
+var ContentSearchModel = require('dw/content/ContentSearchModel');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
+/**
+ * TODO
+ *
+ * @type {{initializeProductSearchModel: Function, initializeContentSearchModel: Function}}
+ */
 var Search = ({
 
-    initializeProductSearchModel : function (httpParameterMap) {
+    /**
+     * TODO
+     *
+     * @param searchModel
+     * @param httpParameterMap
+     * @returns {*}
+     */
+    initializeSearchModel : function (searchModel, httpParameterMap) {
+        httpParameterMap.q.value && searchModel.setSearchPhrase(httpParameterMap.q.value);
+        httpParameterMap.psortb1.value && httpParameterMap.psortd1.intValue && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
+        httpParameterMap.psortb2.value && httpParameterMap.psortd2.intValue && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
+        httpParameterMap.psortb3.value && httpParameterMap.psortd3.intValue && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
 
-        var productSearchModel = new ProductSearchModel();
+        var nameMap = httpParameterMap.getParameterMap('prefn');
+        var valueMap = httpParameterMap.getParameterMap('prefv');
+
+        for (var i in nameMap) {
+            valueMap[i] && searchModel.addRefinementValues(nameMap[i], valueMap[i]);
+        }
+
+        return searchModel;
+    },
+
+    /**
+     * TODO
+     *
+     * @param httpParameterMap
+     * @returns {ProductSearchModel}
+     */
+    initializeProductSearchModel : function (httpParameterMap) {
+        var productSearchModel = this.initializeSearchModel(new ProductSearchModel(), httpParameterMap);
 
         productSearchModel.setRecursiveCategorySearch(true);
 
-        httpParameterMap.q.value && productSearchModel.setSearchPhrase(httpParameterMap.q.value);
+        httpParameterMap.pid.value && productSearchModel.setProductID(httpParameterMap.pid.value);
         httpParameterMap.pmin.doubleValue && productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);
         httpParameterMap.pmax.doubleValue && productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
-        httpParameterMap.psortb1.value && productSearchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
-        httpParameterMap.psortb2.value && productSearchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
-        httpParameterMap.psortb3.value && productSearchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
 
-        var sortingRule = httpParameterMap.srule.value ? require('dw/catalog/CatalogMgr').getSortingRule(httpParameterMap.srule.value) : null;
+        var sortingRule = httpParameterMap.srule.value ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
         sortingRule && productSearchModel.setSortingRule(sortingRule);
 
-        var nameMap = httpParameterMap.getParameterMap("prefn");
-        var valueMap = httpParameterMap.getParameterMap("prefv");
-
-        for (var i in nameMap) {
-            valueMap[i] && productSearchModel.addRefinementValues(nameMap[i], valueMap[i]);
+        // only add category to search model if the category is online
+        if (httpParameterMap.cgid.value) {
+            var category = CatalogMgr.getCategory(httpParameterMap.cgid.value);
+            category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
         }
 
         return productSearchModel;
+    },
 
+    /**
+     * TODO
+     *
+     * @param httpParameterMap
+     * @returns {ContentSearchModel}
+     */
+    initializeContentSearchModel : function (httpParameterMap) {
+        var contentSearchModel = this.initializeSearchModel(new ContentSearchModel(), httpParameterMap);
+
+        contentSearchModel.setRecursiveFolderSearch(true);
+
+        httpParameterMap.cid.value && contentSearchModel.setContentID(httpParameterMap.cid.value);
+        httpParameterMap.fdid.value && contentSearchModel.setFolderID(httpParameterMap.fdid.value);
+
+        return contentSearchModel;
     }
+
 });
 
 module.exports = Search;

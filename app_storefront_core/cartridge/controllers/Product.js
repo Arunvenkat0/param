@@ -1,7 +1,8 @@
 'use strict';
 
+/** @module controller/Product */
+
 /* API Includes */
-var Category = require('~/cartridge/scripts/object/Category');
 var PagingModel = require('dw/web/PagingModel');
 var Product = require('~/cartridge/scripts/object/Product');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
@@ -53,10 +54,7 @@ function Show_NoViews() {
     var pid = request.httpParameterMap.pid.stringValue;
     var product = Product.get(pid);
 
-    if (!product.isVisible()) {
-        response.renderTemplate('error/notfound');
-    }
-    else {
+    if (product.isVisible()) {
         pageMeta.update(product);
 
         var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
@@ -70,6 +68,9 @@ function Show_NoViews() {
             CurrentVariationModel  : productVariationSelections.ProductVariationModel,
             ProductVariationModels : productVariationSelections.ProductVariationModels
         });
+    }
+    else {
+        response.renderTemplate('error/notfound');
     }
 
 }
@@ -158,21 +159,26 @@ function Productnav() {
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
-        var category = null;
-
-        if (params.cgid) {
-            category = Category.get(params.cgid.value);
-        }
-        else if (product.getPrimaryCategory()) {
-            category = product.getPrimaryCategory();
-        }
-        else if (product.getVariationModel().getMaster()) {
-            category = product.getVariationModel().getMaster().getPrimaryCategory();
-        }
 
         // construct the search based on the HTTP params & set the categoryID
         var productSearchModel = Search.initializeProductSearchModel(params);
-        category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
+
+        // need to reset pid in search
+        productSearchModel.setProductID(null);
+
+        // special handling if no category ID is given in URL
+        if (!params.cgid.value) {
+            var category = null;
+
+            if (product.getPrimaryCategory()) {
+                category = product.getPrimaryCategory();
+            }
+            else if (product.getVariationModel().getMaster()) {
+                category = product.getVariationModel().getMaster().getPrimaryCategory();
+            }
+
+            category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
+        }
 
         // execute the product search
         productSearchModel.search();
@@ -182,10 +188,11 @@ function Productnav() {
         productPagingModel.setPageSize(3);
         productPagingModel.setStart(params.start.intValue - 2);
 
-        response.renderTemplate('search/productnav', {
+        view.get('ProductNavigation', {
             ProductPagingModel  : productPagingModel,
             ProductSearchResult : productSearchModel
-        });
+        }).render('search/productnav');
+
     }
     else {
         view.get('ProductNotFound').render('error/notfound');

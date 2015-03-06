@@ -1,8 +1,12 @@
 'use strict';
 
+/** @module object/RecentlyViewedItems */
+
+/* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var ProductMgr = require('dw/catalog/ProductMgr');
 
+/* Constants */
 var PRODUCT_ID_PARAMETER_NAME = "pid";
 var PRODUCT_PIPELINE_NAMES = new ArrayList(
     'Product-Show',
