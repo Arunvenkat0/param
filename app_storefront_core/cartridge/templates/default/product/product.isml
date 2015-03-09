@@ -6,92 +6,16 @@
 </iscomment>
 
 <isscript>
-	var productDetailUrl = URLUtils.url('Product-Detail', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue, 'uuid', pdict.CurrentHttpParameterMap.uuid.stringValue, 'Quantity',pdict.CurrentHttpParameterMap.Quantity.stringValue);
-
-	var queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string'),
-		queryStringArray = [],
-		colorValue;
-
-	//helper variables
-	if (queryString) {
-		queryStringArray = queryString.split('&');
-	}
-
-	for (var x = 0; x < queryStringArray.length; x++) {
-		var parameter = queryStringArray[x];
-		if (parameter.indexOf('color') != -1) {
-			colorValue = parameter.split('=')[1];
-		}
-	}
-
-	var variantSelected = false,
-		PVM,
-		variant;
-	if (pdict.CurrentVariationModel && pdict.CurrentVariationModel.selectedVariant) {
-		PVM = pdict.CurrentVariationModel;
-		variant = PVM.selectedVariant;
-		variantSelected = true;
-	} else {
-		PVM = pdict.Product.variationModel;
-	}
-
-	// use default or first variant if it is not selected
-	if (!variantSelected) {
-		if (PVM.defaultVariant) {
-			variant = PVM.defaultVariant;
-		} else {
-			if (!PVM.variants.isEmpty()) {
-				variant = PVM.variants[0];
-			}
-		}
-	}
-
-	if (variant != null) {
-		for (var i = 0; i < PVM.productVariationAttributes.length; i++) {
-			var VA = PVM.productVariationAttributes[i],
-				valength = PVM.getAllValues(VA).length,
-				vaId = VA.getAttributeID(),
-				vaValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value,
-				selectedValue;
-
-			// for variation group products, select the values which are configured
-			if (pdict.Product.variationGroup) {
-				vaValue = PVM.getSelectedValue(PVM.getProductVariationAttribute(vaId)).value;
-			}
-
-			switch (vaId) {
-				case 'size':
-					if (valength == 1 || variantSelected) {
-						selectedValue = vaValue;
-					}
-					break;
-				case 'color':
-					if (!colorValue) {
-						if (variantSelected) {
-							selectedValue = vaValue;
-						}
-					} else {
-						selectedValue = colorValue;
-					}
-					break;
-				default:
-					if (variantSelected) {
-						selectedValue = vaValue;
-					}
-					break;
-			}
-			if (selectedValue) {
-				productDetailUrl += '&dwvar_' + vaId + '=' + selectedValue;
-			}
-		}
+	importScript('product/GetProductDetailUrl.ds');
+	var productDetailUrl = GetProductDetailUrl(pdict);
+	var source = pdict.CurrentHttpParameterMap.source.stringValue;
+	var format = pdict.CurrentHttpParameterMap.format.stringValue;
+	var DecoratorTemplate = 'product/pt_productdetails';
+	if (format == 'ajax' || source == 'search' || source == 'quickview' || source == 'giftregistry' || source == 'wishlist') {
+		DecoratorTemplate = 'util/pt_empty';
 	}
 </isscript>
 
-<isset name="DecoratorTemplate" value="product/pt_productdetails" scope="PAGE"/>
-<iscomment>pwr = power review write</iscomment>
-<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.pwr.stringValue == 'true' || pdict.CurrentHttpParameterMap.source.stringValue == 'search' || pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist' }">
-	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
-</isif>
 <isdecorate template="${DecoratorTemplate}">
 	<isinclude url="${productDetailUrl}"/>
 </isdecorate>

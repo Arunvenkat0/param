@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${pdict.CurrentSession.customer.anonymous || pdict.CurrentSession.customer.externallyAuthenticated}">
 	<isif condition="${pdict.CurrentSession.customer.anonymous}">
-		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheader','account',"")}</p>	
+		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheader','account',"")}</p>
 	<iselse/>
 		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
@@ -61,7 +61,7 @@
 				 class="oAuthIcon"
 				 id='SinaWeibo'
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"				 
+				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"
 				 />
 			</isif>
 
@@ -70,15 +70,14 @@
 				 class="oAuthIcon"
 				 id='VKontakte'
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/VKontakte.png')}"				 
+				 src="${URLUtils.staticURL('/images/VKontakte.png')}"
 				 />
 			</isif>
 
 			<input type="hidden" name="rememberme" id="rememberme" value="">
-			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}" 
+			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}"
 				value="${pdict.CurrentForms.oauthlogin.secureKeyValue}"/>
 			<input type="hidden" name="OAuthProvider" id="OAuthProvider" value=""/>
 		</fieldset>
-		<p>${Resource.msgf('account.login.logininclude.oauthdetails','account',"")}</p>
-	</form>		
+	</form>
 </isif>

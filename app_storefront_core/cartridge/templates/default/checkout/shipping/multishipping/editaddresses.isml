@@ -10,7 +10,6 @@
 <isif condition="${DecoratorTemplate == 'checkout/pt_checkout'}">
 	<iscomment>checkout progress indicator</iscomment>
 	<ischeckoutprogressindicator step="1" multishipping="true" />
-	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
 </isif>
 
 <h1>

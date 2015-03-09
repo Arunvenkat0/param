@@ -11,15 +11,13 @@
 
 <isreportcheckout checkoutstep="${5}" checkoutname="${'OrderSummary'}"/>
 
-	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
-
 	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
-    	<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
+		<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	<iselse/>
 		<ischeckoutprogressindicator step="4" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
-    <isif condition="${pdict.PlaceOrderError != null}">
+	<isif condition="${pdict.PlaceOrderError != null}">
 		<div class="error-form">${Resource.msg(pdict.PlaceOrderError.code,'checkout',null)}</div>
 	</isif>
 
@@ -226,7 +224,7 @@
 							Submit Order
 						</button>
 					</div>
-			    </fieldset>
+				</fieldset>
 			</form>
 
 		</div>

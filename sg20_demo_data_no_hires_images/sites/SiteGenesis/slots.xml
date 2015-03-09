@@ -447,6 +447,20 @@ Here you will find answers to your questions about shopping at our online store,
             </html>
         </content>
     </slot-configuration>
+    
+    <slot-configuration slot-id="cart-empty" context="global" configuration-id="cartempty-lastvisited" assigned-to-site="true">
+        <description>Slot for products which displays below the empty cart message.</description>
+        <template>slots/product/product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Product Recommendations</callout-msg>
+        <content>
+            <products>
+                <product product-id="008885535488"/>
+                <product product-id="013742003048"/>
+                <product product-id="095068990509"/>
+            </products>
+        </content>
+    </slot-configuration>
 
     <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="electronics" configuration-id="electronics-cameras" default="true" assigned-to-site="true">
         <template>slots/category/catlandingslotbanner.isml</template>
@@ -479,6 +493,17 @@ Here you will find answers to your questions about shopping at our online store,
             <html>
                 <body xml:lang="x-default">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
             </html>
+        </content>
+    </slot-configuration>
+    
+    <slot-configuration slot-id="footer-column" context="global" configuration-id="footer-social-email" assigned-to-site="true">
+        <description>Footer slot containing the social icons and email form.</description>
+        <template>slots/content/contentassetbody.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <content-assets>
+                <content-asset content-id="footer-social-email"/>
+            </content-assets>
         </content>
     </slot-configuration>
 
@@ -545,16 +570,6 @@ Here you will find answers to your questions about shopping at our online store,
                 <product product-id="25593363"/>
                 <product product-id="25686571"/>
             </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom" context="global" configuration-id="homepage-bottom-promos" default="true" assigned-to-site="true">
-        <template>slots/content/homebottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <content-assets>
-                <content-asset content-id="home-bottom"/>
-            </content-assets>
         </content>
     </slot-configuration>
 

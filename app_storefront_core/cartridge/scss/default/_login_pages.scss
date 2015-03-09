@@ -1,13 +1,29 @@
+.checkoutlogin {
+	margin: 4em auto;
+	width: 80%;
+	.col-1 {
+	border-right: 1px solid $gainsboro;
+	}
+}
 .login-box {
-	background: none repeat scroll 0 0 $gainsboro;
-	margin: 0 0 2em;
 	h3 {
 		margin: 0;
+	}
+	p {
+		margin: 1em 0;
+	}
+	.error {
+		margin-left: 0;
 	}
 }
 
 .login-box-content {
-	padding: 0.5em 1.5em;
+	padding: 1em 2em 1em 0;
+}
+
+.login-rememberme {
+	display: inline-block;
+	margin-left: .5em;
 }
 
 #OAuthProvider {

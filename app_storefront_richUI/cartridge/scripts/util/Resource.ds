@@ -49,7 +49,7 @@ function ResourceHelper() {}
 				SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext', 'search', null),
 				SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('subscribe.email.default', 'forms', 'Email Address'),
 
-				CURRENCY_SYMBOL					: dw.util.Currency.getCurrency(dw.system.Site.current.currencyCode).symbol,
+				CURRENCY_SYMBOL					: dw.util.Currency.getCurrency(dw.system.Site.current.getDefaultCurrency()).symbol,
 				MISSINGVAL						: Resource.msg('global.missingval', 'locale', null),
 				SERVER_ERROR 					: Resource.msg('global.servererror', 'locale', null),
 				MISSING_LIB 					: Resource.msg('global.missinglib', 'locale', null),

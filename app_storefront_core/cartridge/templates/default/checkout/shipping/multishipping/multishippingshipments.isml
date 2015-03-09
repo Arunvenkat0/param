@@ -16,9 +16,8 @@
 
 
 <div class="checkout multiship">
-    <iscomment>checkout progress indicator</iscomment>
-    <ischeckoutprogressindicator step="2" multishipping="true"/>
-	<h1>${Resource.msg('global.checkout','locale',null)}</h1>
+	<iscomment>checkout progress indicator</iscomment>
+	<ischeckoutprogressindicator step="2" multishipping="true"/>
 	<form action="${URLUtils.continueURL()}" method="post" class="address checkout-multi-shipping address">
 		<div class="checkoutmultishipping">
 			<isloop items="${pdict.CurrentForms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">
@@ -34,30 +33,30 @@
 							<tr class="cart-row">
 								<td colspan="4">${Resource.msg('multishippingshipments.gcshipment','checkout',null)}</td>
 							</tr>
-			                <tr class="cart-row">
-			                  <td colspan="2">${Resource.msg('global.product','locale',null)}</td>
-			                  <td>${Resource.msg('global.quantity','locale',null)}</td>
-			                  <td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
-			                </tr>
-			                <tr class="cart-row">
-			                  <isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
-			                    <td class="item-image">
-			                      <img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" />
-			                    </td>
-			                    <td class="detailscolumn">
-			                      <div><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - (<isprint value="${giftCertLI.getPrice()}"/>)</div>
-			                      <div><isprint value="${giftCertLI.recipientName}"/> - (<isprint value="${giftCertLI.recipientEmail}"/>)</div>
-			                    </td>
-			                    <td class="item-quantity">
-			                      1
-			                    </td>
-			                    <td class="item-quantity-details" >
-			                      ${Resource.msg('global.deliveredviaemail','locale',null)}
-			                    </td>          
-			                  </isloop>                
-			                </tr>							
+							<tr class="cart-row">
+								<td colspan="2">${Resource.msg('global.product','locale',null)}</td>
+								<td>${Resource.msg('global.quantity','locale',null)}</td>
+								<td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
+							</tr>
+							<tr class="cart-row">
+								<isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
+									<td class="item-image">
+										<img src="${URLUtils.staticURL('/images/gift_cert.gif')}" alt="${GiftCertificate.object.lineItemText}" />
+									</td>
+									<td class="detailscolumn">
+										<div><span class="name">${Resource.msg('global.giftcertificate','locale',null)}</span> - (<isprint value="${giftCertLI.getPrice()}"/>)</div>
+										<div><isprint value="${giftCertLI.recipientName}"/> - (<isprint value="${giftCertLI.recipientEmail}"/>)</div>
+									</td>
+									<td class="item-quantity">
+										1
+									</td>
+									<td class="item-quantity-details" >
+										${Resource.msg('global.deliveredviaemail','locale',null)}
+									</td>
+								</isloop>
+							</tr>
 						<iselse/>
-						
+
 							<iscomment>shipping promotions for this shipment</iscomment>
 							<isif condition="${shipment.shippingPriceAdjustments.size() > 0}">
 								<isloop items="${shipment.shippingPriceAdjustments}" var="shippingPA">
@@ -69,7 +68,7 @@
 									</isif>
 								</isloop>
 							</isif>
-							
+
 							<iscomment>get the shipping model for the shipment, which is used to calculate the shipping costs</iscomment>
 							<isscript>
 								var shippingModel : dw.order.ShipmentShippingModel = dw.order.ShippingMgr.getShipmentShippingModel( shipment );
@@ -97,11 +96,11 @@
 											</isif>
 										</isloop>
 									</select>
-								</isif>	
+								</isif>
 								</td>
 							</tr>
 						</isif>
-						
+
 						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
 						<isif condition="${pliloopstate.first}">
 						<tr class="cart-row">
@@ -109,9 +108,9 @@
 							<td>${Resource.msg('global.quantity','locale',null)}</td>
 							<td>${Resource.msg('multishippingshipments.shippingdetails','checkout',null)}</td>
 						</tr>
-						</isif>						
+						</isif>
 						<tr class="cart-row">
-							
+
 							<td class="item-image">
 								<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 									<img src="${productLineItem.product.getImage('small',0).getURL()}" alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}"/>
@@ -122,12 +121,12 @@
 									<div class="bonus-item">${Resource.msg('global.bonus','locale',null)}</div>
 								</isif>
 							</td>
-							
+
 							<td class="item-details">
 								<iscomment>Display product line and product using module</iscomment>
 								<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 							</td>
-							
+
 							<td class="item-quantity">
 								<isprint value="${productLineItem.quantity}" />
 							</td>
@@ -145,15 +144,15 @@
 										<div><isprint value="${address.countryCode}"/></div>
 										<div>
 											<isif condition="${shipment.custom.shipmentType == 'instore'}">
-												<a href="${URLUtils.https('Cart-Show')}">${Resource.msg('global.edit','locale',null)}</a>	
+												<a href="${URLUtils.https('Cart-Show')}">${Resource.msg('global.edit','locale',null)}</a>
 											<iselse/>
-												<a href="${URLUtils.https('COShippingMultiple-Start')}">${Resource.msg('global.edit','locale',null)}</a>	
+												<a href="${URLUtils.https('COShippingMultiple-Start')}">${Resource.msg('global.edit','locale',null)}</a>
 											</isif>
 										</div>
 									</isif>
 							    </td>
-							 </isif>							
-						</tr>	
+							 </isif>
+						</tr>
 					</isloop>
 						<iscomment>Shipment gift options</iscomment>
 						<isif condition="${shipment.productLineItems.size() > 0}">
@@ -169,7 +168,7 @@
 										<input class="input-radio js-isgiftyes" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftyes${shipmentItem.itemIndex}" value="true" <isif condition="${shipmentItem.isGift.value}">checked="checked"</isif> /> Yes
 										<input class="input-radio js-isgiftno" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftno${shipmentItem.itemIndex}" value="false" <isif condition="${!shipmentItem.isGift.value}">checked="checked"</isif> /> No
 									</div>
-									<isinputfield rowclass="gift-message-text" formfield="${shipmentItem.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>									
+									<isinputfield rowclass="gift-message-text" formfield="${shipmentItem.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
 								</isif>
 								</td>
 							</tr>
@@ -189,6 +188,5 @@
 		</div><!-- END: continuecheckout -->
 	</form>
 </div> <!-- end checkout div -->
-
 
 </isdecorate>

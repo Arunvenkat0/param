@@ -1,69 +1,3 @@
-button,
-.button,
-.buttonstyle,
-input[type="button"] {
-	background: none repeat scroll 0 0 $white;
-	border-color: $very-light-gray;
-	border-style: solid;
-	border-width: 1px 1px 4px;
-	color: $pacific-blue;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 1.1em;
-	font-weight: 700;
-	padding: 0.6em 2em 0.5em;
-	text-align: center;
-}
-
-button[disabled],
-input[disabled] {
-	color: $very-light-gray;
-}
-
-.button-fancy-small {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
-	color: $white !important;
-	font-size: 1em;
-	font-weight: 400;
-	text-transform: uppercase;
-}
-
-.button-fancy-medium {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
-	color: $white !important;
-	font-weight: 400;
-	text-transform: uppercase;
-}
-
-.button-fancy-large {
-	background: url("../images/interface/ui-wht-tran-grad-52.png") repeat-x scroll 0 0 $pacific-blue;
-	color: $white !important;
-	font-size: 1.75em;
-	font-weight: 400;
-	padding: 0.5em 1em;
-	text-transform: uppercase;
-}
-
-.button-fancy-small[disabled],
-.button-fancy-medium[disabled],
-.button-fancy-large[disabled] {
-	opacity: 0.5;
-}
-
-.button-text {
-	background: none repeat scroll 0 0 transparent;
-	border: 0 none;
-	font-weight: 400;
-	padding: 0;
-}
-
-.button-full-width {
-	padding-left: 0;
-	padding-right: 0;
-	text-align: center;
-	width: 100%;
-}
-
 .js .simple-submit {
 	display: none;
 }
@@ -94,11 +28,12 @@ legend {
 }
 
 .dialog-required {
+	display: inline;
 	font-size: 12px;
 	font-weight: 400;
 	position: relative;
-	float: right;
 	padding: 2px 0;
+	text-transform: none
 	em {
 		color: $night-rider;
 	}

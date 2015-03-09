@@ -22,8 +22,19 @@ module.exports = View.extend({
 						column: 2
 					}),
 					new DemoModel({
-						code: require('../../templates/elements/buttonFancylarge.hbs')(),
-						column: 2
+						code: require('../../templates/elements/buttonLarge.hbs')()
+					}),
+					new DemoModel({
+						code: require('../../templates/elements/buttonRaised.hbs')()
+					}),
+					new DemoModel({
+						code: require('../../templates/elements/buttonSimple.hbs')()
+					}),
+					new DemoModel({
+						code: require('../../templates/elements/buttonDisabled.hbs')()
+					}),
+					new DemoModel({
+						code: require('../../templates/elements/buttonIcon.hbs')()
 					})
 				]
 			})

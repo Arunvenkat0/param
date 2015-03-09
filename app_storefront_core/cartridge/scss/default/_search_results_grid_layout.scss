@@ -177,36 +177,6 @@
 		width: 91%;
 	}
 	.product-tile {
-		height: 166px !important;
-		.product-image {
-			float: left;
-			width: 40%;
-		}
-		.product-name,
-		.product-pricing,
-		.product-promo,
-		.pr_stars,
-		.product-swatches {
-			float: left;
-			text-align: left;
-			width: 55%;
-			margin-bottom: 5px;
-		}
-		.product-name {
-			margin-top: 0px;
-		}
-		.pr-snippet-stars {
-			margin: 0;
-		}
-		.pr_stars {
-			left: -5px;
-		}
-		.product-compare {
-			left: 40.5%;
-			width: 32px;
-			bottom: 5px;
-			line-height: 12px;
-		}
 		.product-swatches {
 			bottom: auto;
 			left: auto;

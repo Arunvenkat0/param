@@ -23,20 +23,11 @@
 
 .multishipprogress {
 	div, .step-3 {
-		background: url("../images/interface/icon-checkout-indicator.png") no-repeat scroll right center transparent;
 		display: inline;
 		padding: 1em;
 	}
 	.step-4 {
-		background: none repeat scroll 0 0 transparent;
 		padding-right: 0;
-	}
-}
-
-.checkout-progress-indicator {
-	font-size: 1em;
-	div {
-		padding: 20px;
 	}
 }
 

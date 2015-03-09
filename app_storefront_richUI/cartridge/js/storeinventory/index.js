@@ -74,20 +74,18 @@ var storeinventory = {
 			options: {
 				title: Resources.STORE_NEAR_YOU,
 				width: 500,
-				buttons: [
-					{
-						text: Resources.SEARCH,
-						click: function () {
-							var zipCode = $('#user-zip').val();
-							if (validateZipCode(zipCode)) {
-								self.setUserZip(zipCode);
-								if (callback) {
-									callback(zipCode);
-								}
+				buttons: [{
+					text: Resources.SEARCH,
+					click: function () {
+						var zipCode = $('#user-zip').val();
+						if (validateZipCode(zipCode)) {
+							self.setUserZip(zipCode);
+							if (callback) {
+								callback(zipCode);
 							}
 						}
 					}
-				],
+				}],
 				open: function () {
 					$('#user-zip').on('keypress', function (e) {
 						if (e.which === 13) {
@@ -126,24 +124,22 @@ var storeinventory = {
 			html: storeList,
 			options: {
 				title: Resources.SELECT_STORE + ' - ' + User.zip,
-				buttons: [
-					{
+				buttons: [{
 						text: Resources.CHANGE_LOCATION,
-						click: function () {
-							self.setUserZip(null);
-							// trigger the event to start the process all over again
-							$('.set-preferred-store').trigger('click');
-						}.bind(this)
-					}, {
-						text: Resources.CONTINUE,
-						click: function () {
-							if (options.continueCallback) {
-								options.continueCallback(stores);
-							}
-							dialog.close();
+					click: function () {
+						self.setUserZip(null);
+						// trigger the event to start the process all over again
+						$('.set-preferred-store').trigger('click');
+					}.bind(this)
+				}, {
+					text: Resources.CONTINUE,
+					click: function () {
+						if (options.continueCallback) {
+							options.continueCallback(stores);
 						}
+						dialog.close();
 					}
-				],
+				}],
 				open: function () {
 					$('.select-store-button').on('click', function (e) {
 						e.preventDefault();
