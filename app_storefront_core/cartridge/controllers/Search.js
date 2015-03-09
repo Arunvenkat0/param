@@ -21,7 +21,7 @@ var view = require('~/cartridge/scripts/_view');
  */
 function show() {
 
-	var params = request.httpParameterMap;
+    var params = request.httpParameterMap;
 
     if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
         // TODO refactor and merge showProductGrid() code into here
