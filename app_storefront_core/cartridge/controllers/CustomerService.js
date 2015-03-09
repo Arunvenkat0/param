@@ -7,6 +7,7 @@
 
 /* API Includes */
 var Mail = require('dw/net/Mail');
+var Status = require('dw/system/Status');
 var Template = require('dw/util/Template');
 
 /* Script Modules */
@@ -68,10 +69,14 @@ function submit() {
             mail.setContent(template.render());
 
             return mail.send();
+        },
+        'error' : function (formgroup) {
+            // no special error handling in case the form is invalid
+            return null;
         }
     });
 
-    if (contactUsResult && (contactUsResult.getStatus() === dw.system.Status.OK)) {
+    if (contactUsResult && (contactUsResult.getStatus() === Status.OK)) {
         view.get('view/CustomerServiceView', {
             ConfirmationMessage : 'edit'
         }).render('content/contactus');

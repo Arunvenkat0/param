@@ -57,7 +57,7 @@ function include() {
 /*
  * Export the publicly available controller methods
  */
-/** @see module:controller/Page~show */
+/* @see module:controller/Page~show */
 exports.Show = guard.filter(['get'], show);
-/** @see module:controller/Page~include */
+/* @see module:controller/Page~include */
 exports.Include = guard.filter(['get'], include);

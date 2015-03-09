@@ -8,6 +8,7 @@
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Default entry point when www.mydomain.com is opened
@@ -24,7 +25,7 @@ function start() {
  */
 function offline() {
 
-    response.renderTemplate('error/siteoffline');
+    view.get().render('error/siteoffline');
 
 }
 
@@ -35,7 +36,7 @@ function offline() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Default~start */
+/* @see module:controller/Default~start */
 exports.Start = guard.filter(['get'], start);
-/** @see module:controller/Default~offline */
+/* @see module:controller/Default~offline */
 exports.Offline = guard.filter(['get'], offline);

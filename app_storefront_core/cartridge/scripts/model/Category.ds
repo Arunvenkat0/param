@@ -1,9 +1,6 @@
 'use strict';
-/**
- * Module for category related functionality.
- *
- * @module model/Category
- */
+
+/** @module model/Category */
 
 var AbstractHelper = require('./AbstractHelper');
 
@@ -12,7 +9,7 @@ var AbstractHelper = require('./AbstractHelper');
  * @class module:model/Category ~Category
  */
 var Category = AbstractHelper.extend(
-    /** @lends module:model/Category ~Category.prototype */
+    /** @lends module:model/Category~Category.prototype */
     {
         /**
          * Use this method to get a new instance for a given category.
@@ -51,12 +48,10 @@ var Category = AbstractHelper.extend(
             if (renderAllCategories) {
                 return subcategories;
             }
-            if (!empty(subcategories)) {
-                for each(let subcategory in subcategories
-            )
-                {
-                    if (('showInMenu' in subcategory.custom) && subcategory.custom.showInMenu.valueOf()) {
-                        result.push(subcategory);
+            if (subcategories) {
+                for (i = 0; i < subcategories.length; i++) {
+                    if (('showInMenu' in subcategories[i].custom) && subcategories[i].custom.showInMenu.valueOf()) {
+                        result.push(subcategories[i]);
                     }
                 }
             }

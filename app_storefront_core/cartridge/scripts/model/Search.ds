@@ -11,9 +11,8 @@ var ContentSearchModel = require('dw/content/ContentSearchModel');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
 /**
- * TODO
- *
- * @type {{initializeProductSearchModel: Function, initializeContentSearchModel: Function}}
+ * Search model providing enhanced search functionality
+ * @class module:model/Search~Search
  */
 var Search = ({
 

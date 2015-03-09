@@ -20,7 +20,7 @@ var Form = AbstractHelper.extend(
         action : null,
 
         /**
-         * Use this method to get a new instance for a given category.
+         * Use this method to get a new instance for a given form reference or form object.
          * @param formReference demandware form id (/forms/$name$.xml) or demandware form object
          */
         get : function (formReference) {
@@ -42,13 +42,21 @@ var Form = AbstractHelper.extend(
         },
 
         /**
-         *    executes an action submitted in the request.
-         *  @param {Object} formHandler Implementation of each possible form action
+         * Executes an action submitted in the request.
+         * @param {Object} formHandler Implementation of each possible form action
          */
         handleAction : function (formHandler) {
+            // check whether an action is defined (e.g, if the form is invalid)
             if (!this.action) {
-                dw.system.Logger.warn('Action handler called without action ' + this.object.formId);
-                return null;
+                // check whether there is an explicit error handler defined
+                if ('error' in formHandler) {
+                    return formHandler['error'].apply(formHandler, [this.object]);
+                }
+                // log a warning and return null if no explicit error handler is defined
+                else {
+                    dw.system.Logger.warn('Action handler called without action ' + this.object.formId);
+                    return null;
+                }
             }
             else {
                 return formHandler[this.action].apply(formHandler, [this.object]);

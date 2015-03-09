@@ -17,6 +17,7 @@ var PRODUCT_PIPELINE_NAMES = new ArrayList(
  * Model holding information about last visited items based on the current session. Currently only products are
  * supported.
  *
+ * @class module:model/RecentlyViewedItems~RecentlyViewedItems
  * @type {{getRecentlyViewedProducts: Function}}
  */
 var RecentlyViewedItems = ({
@@ -85,4 +86,5 @@ var RecentlyViewedItems = ({
     }
 });
 
+/** The RecentlyViewedItems class */
 module.exports = RecentlyViewedItems;
