@@ -1,13 +1,14 @@
 'use strict';
+
 /**
- * TODO
+ * Controller handling search, category and family pages.
  *
  * @module controller/Search
  */
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
-var Search = require('~/cartridge/scripts/object/Search');
+var Search = require('~/cartridge/scripts/model/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -19,11 +20,12 @@ var view = require('~/cartridge/scripts/_view');
  * If the http parameter "format" is set to "ajax" only the product grid is rendered instead of the full page.
  */
 function show() {
-    var params = request.httpParameterMap;
+
+	var params = request.httpParameterMap;
 
     if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
         // TODO refactor and merge showProductGrid() code into here
-	    showProductGrid();
+        showProductGrid();
         return;
     }
 
@@ -55,16 +57,16 @@ function show() {
 
         if ((productSearchModel.count > 1) || productSearchModel.refinedSearch || (contentSearchModel.count > 0)) {
             var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
-            params.start.intValue && productPagingModel.setStart(params.start.intValue);
+            params.start.submitted && productPagingModel.setStart(params.start.intValue);
 
-            if (params.sz.intValue && request.httpParameterMap.sz.intValue <= 60) {
+            if (params.sz.submitted && request.httpParameterMap.sz.intValue <= 60) {
                 productPagingModel.setPageSize(params.sz.intValue);
             }
             else {
                 productPagingModel.setPageSize(12);
             }
 
-	        productSearchModel.category && pageMeta.update(productSearchModel.category);
+            productSearchModel.category && pageMeta.update(productSearchModel.category);
 
             if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
                 // dynamic template
@@ -115,6 +117,7 @@ function show() {
             ContentSearchResult : contentSearchModel
         }).render('search/nohits');
     }
+
 }
 
 
@@ -139,7 +142,7 @@ function showContent() {
 
         var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
         contentPagingModel.setPageSize(16);
-        params.start.intValue && contentPagingModel.setStart(params.start.intValue);
+        params.start.submitted && contentPagingModel.setStart(params.start.intValue);
 
         if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
             // dynamic template
@@ -163,17 +166,19 @@ function showContent() {
             ContentSearchResult : contentSearchModel
         }).render('search/nohits');
     }
+
 }
 
 /**
  * Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  */
 function getSuggestions() {
+
     /*
      * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
      */
     if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
-	    view.get().render('search/suggestionsbeta');
+        view.get().render('search/suggestionsbeta');
     }
     else {
         // TODO - refactor once search suggestion can be retrieved via th script API
@@ -187,6 +192,7 @@ function getSuggestions() {
         }).render('search/suggestions');
 
     }
+
 }
 
 
@@ -206,9 +212,9 @@ function showProductGrid() {
     contentSearchModel.search();
 
     var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
-    params.start.intValue && productPagingModel.setStart(params.start.intValue);
+    params.start.submitted && productPagingModel.setStart(params.start.intValue);
 
-    if (params.sz.intValue && params.sz.intValue <= 60) {
+    if (params.sz.submitted && params.sz.intValue <= 60) {
         productPagingModel.setPageSize(params.sz.intValue);
     }
     else {
@@ -238,11 +244,15 @@ function showProductGrid() {
             }).render('rendering/category/categoryproducthits');
         }
     }
+
 }
 
 /*
  * Web exposed methods
  */
+/* @see module:controller/Search~show */
 exports.Show            = guard.filter(['get'], show);
+/* @see module:controller/Search~showContent */
 exports.ShowContent     = guard.filter(['get'], showContent);
+/* @see module:controller/Search~getSuggestions */
 exports.GetSuggestions  = guard.filter(['get'], getSuggestions);

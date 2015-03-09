@@ -1,15 +1,17 @@
 'use strict';
+
 /**
- * TODO
+ * Renders product detail pages, snippets/includes used on product detail pages as well as product tiles for product
+ * listings.
  *
  * @module controller/Product
  */
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
-var Product = require('~/cartridge/scripts/object/Product');
+var Product = require('~/cartridge/scripts/model/Product');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
-var Search = require('~/cartridge/scripts/object/Search');
+var Search = require('~/cartridge/scripts/model/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -74,8 +76,8 @@ function detail() {
         productView.render(product.getTemplate() || 'product/productdetail');
     }
     else {
-	    response.setStatus(404);
-	    view.get().render('error/notfound');
+        response.setStatus(404);
+        view.get().render('error/notfound');
     }
 
 }
@@ -93,14 +95,14 @@ function getAvailability() {
         response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
-	    response.setStatus(404);
-	    view.get().render('error/notfound');
+        response.setStatus(404);
+        view.get().render('error/notfound');
     }
 
 }
 
 /**
- * TODO
+ * Renders a product tile, e.g. used within family and search result pages.
  */
 function hitTile() {
 
@@ -126,7 +128,8 @@ function hitTile() {
 }
 
 /**
- * TODO
+ * Renders a navigation include on product detail pages. Provides next/back links for customers to traverse a product
+ * list, like search result list etc.
  */
 function productNavigation() {
 
@@ -170,14 +173,14 @@ function productNavigation() {
 
     }
     else {
-	    response.setStatus(404);
-	    view.get().render('error/notfound');
+        response.setStatus(404);
+        view.get().render('error/notfound');
     }
 
 }
 
 /**
- * TODO
+ * Renders variation selection controls for the given PID.
  */
 function variation() {
 
@@ -245,7 +248,7 @@ function variation() {
 }
 
 /**
- * TODO
+ * Renders variation selection controls for the product set item identified by the given PID.
  */
 function variationPS() {
 
@@ -284,7 +287,7 @@ function variationPS() {
 function includeLastVisited() {
 
     response.renderTemplate('product/lastvisited', {
-        LastVisitedProducts : require('~/cartridge/scripts/object/RecentlyViewedItems').getRecentlyViewedProducts(3)
+        LastVisitedProducts : require('~/cartridge/scripts/model/RecentlyViewedItems').getRecentlyViewedProducts(3)
     });
 
 }
@@ -315,7 +318,7 @@ function getBonusProducts() {
 }
 
 /**
- * TODO
+ * Renders a set item view for the given PID.
  */
 function getSetItem() {
 
@@ -337,13 +340,23 @@ function getSetItem() {
 /*
  * Web exposed methods
  */
+/* @see module:controller/Product~show */
 exports.Show                = guard.filter(['get'], show);
+/* @see module:controller/Product~detail */
 exports.Detail              = guard.filter(['get'], detail);
+/* @see module:controller/Product~getAvailability */
 exports.GetAvailability     = guard.filter(['get'], getAvailability);
+/* @see module:controller/Product~hitTile */
 exports.HitTile             = guard.filter(['get'], hitTile);
+/* @see module:controller/Product~productNavigation */
 exports.Productnav          = guard.filter(['get'], productNavigation);
+/* @see module:controller/Product~variation */
 exports.Variation           = guard.filter(['get'], variation);
+/* @see module:controller/Product~variationPS */
 exports.VariationPS         = guard.filter(['get'], variationPS);
+/* @see module:controller/Product~includeLastVisited */
 exports.IncludeLastVisited  = guard.filter(['get'], includeLastVisited);
+/* @see module:controller/Product~getBonusProducts */
 exports.GetBonusProducts    = guard.filter(['get'], getBonusProducts);
+/* @see module:controller/Product~getSetItem */
 exports.GetSetItem          = guard.filter(['get'], getSetItem);

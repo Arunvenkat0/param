@@ -1,0 +1,91 @@
+'use strict';
+/** @module model/Profile */
+
+var AbstractHelper = require('./AbstractHelper');
+
+/**
+ * Profile helper providing enhanced profile functionality
+ * @class module:model/Profile~Profile
+ */
+var Profile = AbstractHelper.extend(
+/** @lends module:model/Profile~Profile.prototype */
+{
+	/**
+	 * Use this method to get a new instance for a given product.
+	 */
+	get : function(parameter) {
+		var obj = null;
+		if (typeof parameter === 'string') {
+			obj = dw.customer.CustomerMgr.getProfile(parameter);
+		} else if (typeof parameter === 'object') {
+			obj = parameter;
+		}else{
+			obj = customer.profile;
+		}
+		return new Profile(obj);
+	},
+
+	/**
+	 * Retrieve preferred customer address
+	 */
+	getPreferredAddress : function () {
+		return this.object.getAddressBook().getPreferredAddress();
+	},
+
+	/**
+	 * Retrieve default customer shipping address
+	 */
+	getDefaultShippingAddress : function () {
+		return this.getPreferredAddress();
+	},
+
+	/**
+	 * Retrieve default customer billing address
+	 */
+	getDefaultBillingAddress : function () {
+		return this.getPreferredAddress;
+	},
+
+	/**
+	 * Set default customer shipping address
+	 * @param {CustomerAddress} address - new default shipping address
+	 */
+	setDefaultShippingAddress : function (address) {
+		if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
+			this.object.addressBook.setPreferredAddress(address);
+		}
+	},
+
+	/**
+	 * Set default customer billing address
+	 * @param {CustomerAddress} address - new default billing address
+	 */
+	setDefaultBillingAddress : function (address) {
+		if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
+			this.object.addressBook.setPreferredAddress(address);
+		}
+	},
+
+	/**
+	 * Check if address is default shipping
+	 * @param {CustomerAddress} address - address for checking
+	 */
+	isDefaultShippingAddress : function (address) {
+		var defaultShippingAddress = this.getDefaultShippingAddress();
+		return defaultShippingAddress && address && defaultShippingAddress.ID === address.ID;
+	},
+
+	/**
+	 * Check if address is default billing
+	 * @param {CustomerAddress} address - address for checking
+	 */
+	isDefaultBillingAddress : function (address) {
+		var defaultBillingAddress = this.getDefaultBillingAddress();
+		return defaultBillingAddress && address && defaultBillingAddress.ID === address.ID;
+	}
+
+});
+
+
+/** The profile class */
+module.exports = new Profile();

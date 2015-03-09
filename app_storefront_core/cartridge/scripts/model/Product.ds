@@ -1,15 +1,15 @@
 'use strict';
 
-/** @module object/Product */
+/** @module model/Product */
 
 var AbstractHelper = require('./AbstractHelper');
 
 /**
  * Product helper providing enhanced product functionality
- * @class module:object/Product~Product
+ * @class module:model/Product~Product
  */
 var Product = AbstractHelper.extend(
-    /** @lends module:object/Product~Product.prototype */
+    /** @lends module:model/Product~Product.prototype */
     {
         /**
          * Use this method to get a new instance for a given product.

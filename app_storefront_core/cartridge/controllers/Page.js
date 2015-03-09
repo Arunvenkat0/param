@@ -1,13 +1,13 @@
 'use strict';
 /**
- * Renders the a content page or include.
+ * Renders a content page or a content include.
  *
  * @module controller/Page
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/object/Content');
-var Search = require('~/cartridge/scripts/object/Search');
+var Content = require('~/cartridge/scripts/model/Content');
+var Search = require('~/cartridge/scripts/model/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -59,6 +59,5 @@ function include() {
  */
 /** @see module:controller/Page~show */
 exports.Show = guard.filter(['get'], show);
-
 /** @see module:controller/Page~include */
 exports.Include = guard.filter(['get'], include);

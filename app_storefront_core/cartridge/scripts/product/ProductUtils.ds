@@ -188,10 +188,10 @@ function ProductUtils(pdict : PipelineDictionary) {
 	};	
 }
 /**
- * @deprecated use object/Product.getAvailability instead.
+ * @deprecated use model/Product.getAvailability instead.
  */
 ProductUtils.getAvailability = function(item : Product, quantity : Object) {
-	return require('~/cartridge/scripts/object/Product').get(item).getAvailability(quantity);
+	return require('~/cartridge/scripts/model/Product').get(item).getAvailability(quantity);
 }
 
 ProductUtils.getProductJson = function(item : Product, args : PipelineDictionary) : String {

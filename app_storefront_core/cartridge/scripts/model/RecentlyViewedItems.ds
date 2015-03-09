@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module object/RecentlyViewedItems */
+/** @module model/RecentlyViewedItems */
 
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');

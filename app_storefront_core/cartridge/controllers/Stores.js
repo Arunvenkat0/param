@@ -1,13 +1,19 @@
 'use strict';
 
+/**
+ * Renders store finder and store detail pages.
+ *
+ * @module controller/Stores
+ */
+
 /* API Includes */
 var StoreMgr = require('dw/catalog/StoreMgr');
 var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
-var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');
+var storeLocatorAsset = require('~/cartridge/scripts/model/Content').get('store-locator');
+var storeLocatorForm = require('~/cartridge/scripts/model/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/_view');
 
@@ -15,44 +21,22 @@ var view = require('~/cartridge/scripts/_view');
  * Provides a form to locate stores by geographical information.
  */
 function find() {
+
     storeLocatorForm.clear();
     pageMeta.update(storeLocatorAsset);
 
     view.get('view/StoreLocatorView')
         .render('storelocator/storelocator');
-    return response;
+
 }
 
 /**
  * The form handler. This form is submitted with GET.
  */
 function findStores() {
+
     pageMeta.update(storeLocatorAsset);
-    /* Option A - jQuery Like
-    storeLocatorForm.on('findbycountry', function(storeLocatorForm) {
-        var searchKey = storeLocatorForm.address.country.value;
-        var stores = SystemObjectMgr.querySystemObjects('Store', 'countryCode = {0}', 'countryCode desc', searchKey);
-        return {'stores' : stores, 'searchKey' : searchKey};
-    });
 
-    storeLocatorForm.on('findbystate' : function(storeLocatorForm) {
-        var searchKey = storeLocatorForm.address.states.stateUSCA.htmlValue;
-        var stores = null;
-        if (!empty(searchKey)) {
-            stores = SystemObjectMgr.querySystemObjects('Store', 'stateCode = {0}', 'stateCode desc', searchKey);
-        }
-        return {'stores' : stores, 'searchKey' : searchKey};
-    });
-
-    storeLocatorForm.on('findbyzip' : function(storeLocatorForm) {
-        var searchKey = storeLocatorForm.postalCode.value;
-        var storesMgrResult = StoreMgr.searchStoresByPostalCode(storeLocatorForm.countryCode.value, searchKey, storeLocatorForm.distanceUnit.value, storeLocatorForm.maxdistance.value);
-        var stores = storesMgrResult.keySet();
-        return {'stores' : stores, 'searchKey' : searchKey};
-    });
-    */
-
-    /*Option B - EXT Like*/
     var searchResult = storeLocatorForm.handleAction({
         'findbycountry' : function(formgroup) {
             var searchKey = formgroup.address.country.value;
@@ -89,9 +73,6 @@ function findStores() {
         }
     });
 
-    /* Option C - Explicite Magic */
-    //Get From GIT
-
     if (searchResult) {
         view.get('view/StoreLocatorView',searchResult)
             .render('storelocator/storelocatorresults');
@@ -99,25 +80,29 @@ function findStores() {
         view.get('view/StoreLocatorView')
             .render('storelocator/storelocator');
     }
-    return response;
+
 }
 
 /**
  * Renders the details of a store.
  */
 function details() {
+
     var storeID = request.httpParameterMap.StoreID.value;
     var store = dw.catalog.StoreMgr.getStore(storeID);
     pageMeta.update(store);
 
     view.get({Store:store})
         .render('storelocator/storedetails');
-    return response;
+
 }
 
 /*
  * Exposed web methods
  */
-exports.Find        = guard.filter(['get'],find);
-exports.FindStores  = guard.filter(['get'],findStores);
-exports.Details     = guard.filter(['get'],details);
+/** @see module:controller/Stores~find */
+exports.Find        = guard.filter(['get'], find);
+/** @see module:controller/Stores~findStores */
+exports.FindStores  = guard.filter(['get'], findStores);
+/** @see module:controller/Stores~details */
+exports.Details     = guard.filter(['get'], details);

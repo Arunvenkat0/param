@@ -1,15 +1,17 @@
 'use strict';
 /**
- * TODO
+ * Controller handling customer service related pages, like help desk as well as the contact us form.
  *
  * @module controller/CustomerService
  */
 
 /* API Includes */
+var Mail = require('dw/net/Mail');
+var Template = require('dw/util/Template');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var contactUsForm = require('~/cartridge/scripts/object/Form').get('contactus');
+var contactUsForm = require('~/cartridge/scripts/model/Form').get('contactus');
 var view = require('~/cartridge/scripts/_view');
 
 /**
@@ -55,8 +57,8 @@ function submit() {
     var contactUsResult = contactUsForm.handleAction({
         'send' : function (formgroup) {
 
-            var template = new dw.util.Template('mail/contactus');
-            var mail = new dw.net.Mail();
+            var template = new Template('mail/contactus');
+            var mail = new Mail();
 
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the
             // user's email for demonstration.
@@ -87,7 +89,11 @@ function submit() {
 /*
  * Web exposed methods
  */
+/* @see module:controller/CustomerService~show */
 exports.Show        = guard.filter(['get', 'https'], show);
+/* @see module:controller/CustomerService~leftNav */
 exports.LeftNav     = guard.filter(['get', 'https'], leftNav);
+/* @see module:controller/CustomerService~contactUs */
 exports.ContactUs   = guard.filter(['get', 'https'], contactUs);
+/* @see module:controller/CustomerService~submit */
 exports.Submit      = guard.filter(['post', 'https'], submit);

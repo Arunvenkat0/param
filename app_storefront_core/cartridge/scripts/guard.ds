@@ -15,7 +15,7 @@
  * // allow only GET requests via HTTPS for logged in users
  * exports.Show = require('~/guard').filter(['get','https','loggedIn'],show);
  */
-var form = require('~/cartridge/scripts/object/Form');
+var form = require('~/cartridge/scripts/model/Form');
 
 /**
  * This method contains the login procedure specific for the customer account,

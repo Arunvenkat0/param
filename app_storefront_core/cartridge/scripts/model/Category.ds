@@ -2,17 +2,17 @@
 /**
  * Module for category related functionality.
  *
- * @module object/Category
+ * @module model/Category
  */
 
 var AbstractHelper = require('./AbstractHelper');
 
 /**
  * Category helper providing enhanced category functionality
- * @class module:object/Category ~Category
+ * @class module:model/Category ~Category
  */
 var Category = AbstractHelper.extend(
-/** @lends module:object/Category ~Category.prototype */
+/** @lends module:model/Category ~Category.prototype */
 {
 	/**
 	 * Use this method to get a new instance for a given category.
