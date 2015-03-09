@@ -1,8 +1,18 @@
-var g = require('./dw/guard');
+'use strict';
 
 /**
- * Pipeline is called by the system to handle URL mappings (static mappings and mapping rules). 
- * The mappings are configured in Business Manager. This Pipeline is highly performance cricitcal, 
+ * Controller handling site map requests.
+ *
+ * @module controller/RedirectURL
+ */
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/_view');
+
+/**
+ * Pipeline is called by the system to handle URL mappings (static mappings and mapping rules).
+ * The mappings are configured in Business Manager. This Pipeline is highly performance cricitcal,
  * because it is frequently called in case of explot scans. Please follow these rules:
  * - no or only few database calls
  * - simple (static) template response
@@ -10,46 +20,38 @@ var g = require('./dw/guard');
  * In:
  * OriginalURL
  */
-function Start()
-{
+function start() {
+
+    // TODO - rework
     var RedirectURLResult = new dw.system.Pipelet('RedirectURL').execute();
-    if (RedirectURLResult.result == PIPELET_ERROR)
-    {
-        response.renderTemplate('util/redirecterror');
-        return;
+
+    if (RedirectURLResult.result === PIPELET_ERROR) {
+        view.get().render('util/redirecterrorutil/redirecterror');
     }
-    var Location = RedirectURLResult.Location;
-
-
-    response.renderTemplate('util/redirectpermanent', {
-    	Location: Location
-    });
+    else {
+        view.get({
+            Location : RedirectURLResult.Location
+        }).render('util/redirectpermanent');
+    }
 }
 
-
 /**
- * Hostname-only URLs (e.g. http://sitegenesis.com/) cannot be redirected using the URL mapping framework. 
- * Instead specify this pipeline in site's aliases in Business Manager. Per default a redirect to the homepage is 
- * performed. The hostname in the URL is site's HTTP Hostname - if configured in Business Manager. 
- * Also, you can provide an URL to redirect to (parameter Location). 
+ * Hostname-only URLs (e.g. http://sitegenesis.com/) cannot be redirected using the URL mapping framework.
+ * Instead specify this pipeline in site's aliases in Business Manager. Per default a redirect to the homepage is
+ * performed. The hostname in the URL is site's HTTP Hostname - if configured in Business Manager.
+ * Also, you can provide an URL to redirect to (parameter Location).
  * Example for aliases:
  * Redirect http[s]://sitegenesis.com/ to http://www.sitegenesis.com/:
  * sitegenesis.com,,RedirectURL-Hostname,Location,http://www.sitegenesis.com/
  * In:
  * Location (optional)
  */
-function Hostname()
-{
-    var Location = request.httpParameterMap.Location.stringValue;
-    
-    if (empty(Location))
-    {
-        Location = dw.web.URLUtils.httpHome();
-    }
+function hostName() {
 
-    response.renderTemplate('util/redirectpermanent', {
-    	Location: Location
-    });
+    view.get({
+        Location : request.httpParameterMap.Location.stringValue || dw.web.URLUtils.httpHome()
+    }).render('util/redirectpermanent');
+
 }
 
 
@@ -60,5 +62,7 @@ function Hostname()
 /*
  * Web exposed methods
  */
-exports.Start       = g.get(Start);
-exports.Hostname    = g.get(Hostname);
+/* @see module:controller/RedirectURL~start */
+exports.Start = guard.filter(['get'], start);
+/* @see module:controller/RedirectURL~hostName */
+exports.Hostname = guard.filter(['get'], hostName);

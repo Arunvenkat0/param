@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * Controller handling customer service related pages, like help desk as well as the contact us form.
  *
