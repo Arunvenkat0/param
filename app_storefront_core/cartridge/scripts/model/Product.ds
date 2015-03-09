@@ -262,7 +262,11 @@ var Product = AbstractHelper.extend(
         },
 
 	    /**
-	     * TODO
+	     * Function that returns a JSON object holding availability information for the current product and the given
+	     * quantity.
+	     *
+	     * @param quantity {String}
+	     * @returns {{status: *, statusQuantity: number, inStock: *, ats: number, inStockDate: string, availableForSale: boolean, levels: {}}}
 	     */
 	    getAvailability : function (quantity) {
             var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
@@ -281,7 +285,7 @@ var Product = AbstractHelper.extend(
             };
 
             var avmLevels = dw.catalog.ProductAvailabilityLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
-            availability.isAvailable = avmLevels.notAvailable.value == 0;
+            availability.isAvailable = avmLevels.notAvailable.value === 0;
             availability.inStockMsg = dw.web.Resource.msgf('global.quantityinstock', 'locale', "", avmLevels.inStock.value.toFixed());
             availability.preOrderMsg = dw.web.Resource.msgf('global.quantitypreorder', 'locale', "", avmLevels.preorder.value.toFixed());
             availability.backOrderMsg = dw.web.Resource.msgf('global.quantitybackorder', 'locale', "", avmLevels.backorder.value.toFixed());
