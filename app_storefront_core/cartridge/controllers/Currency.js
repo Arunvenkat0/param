@@ -43,5 +43,5 @@ function setSessionCurrency() {
 /*
  * Web exposed methods
  */
-/* @see module:controller/Currency~setSessionCurrency */
+/** @see module:controller/Currency~setSessionCurrency */
 exports.SetSessionCurrency = guard.filter(['get'], setSessionCurrency);

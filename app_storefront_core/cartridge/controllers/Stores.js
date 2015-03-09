@@ -100,9 +100,9 @@ function details() {
 /*
  * Exposed web methods
  */
-/* @see module:controller/Stores~find */
+/** @see module:controller/Stores~find */
 exports.Find        = guard.filter(['get'], find);
-/* @see module:controller/Stores~findStores */
+/** @see module:controller/Stores~findStores */
 exports.FindStores  = guard.filter(['get'], findStores);
-/* @see module:controller/Stores~details */
+/** @see module:controller/Stores~details */
 exports.Details     = guard.filter(['get'], details);

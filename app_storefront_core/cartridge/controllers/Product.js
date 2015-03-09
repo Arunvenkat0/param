@@ -340,23 +340,23 @@ function getSetItem() {
 /*
  * Web exposed methods
  */
-/* @see module:controller/Product~show */
+/** @see module:controller/Product~show */
 exports.Show                = guard.filter(['get'], show);
-/* @see module:controller/Product~detail */
+/*v @see module:controller/Product~detail */
 exports.Detail              = guard.filter(['get'], detail);
-/* @see module:controller/Product~getAvailability */
+/*v @see module:controller/Product~getAvailability */
 exports.GetAvailability     = guard.filter(['get'], getAvailability);
-/* @see module:controller/Product~hitTile */
+/** @see module:controller/Product~hitTile */
 exports.HitTile             = guard.filter(['get'], hitTile);
-/* @see module:controller/Product~productNavigation */
+/** @see module:controller/Product~productNavigation */
 exports.Productnav          = guard.filter(['get'], productNavigation);
-/* @see module:controller/Product~variation */
+/** @see module:controller/Product~variation */
 exports.Variation           = guard.filter(['get'], variation);
-/* @see module:controller/Product~variationPS */
+/** @see module:controller/Product~variationPS */
 exports.VariationPS         = guard.filter(['get'], variationPS);
-/* @see module:controller/Product~includeLastVisited */
+/** @see module:controller/Product~includeLastVisited */
 exports.IncludeLastVisited  = guard.filter(['get'], includeLastVisited);
-/* @see module:controller/Product~getBonusProducts */
+/** @see module:controller/Product~getBonusProducts */
 exports.GetBonusProducts    = guard.filter(['get'], getBonusProducts);
-/* @see module:controller/Product~getSetItem */
+/** @see module:controller/Product~getSetItem */
 exports.GetSetItem          = guard.filter(['get'], getSetItem);

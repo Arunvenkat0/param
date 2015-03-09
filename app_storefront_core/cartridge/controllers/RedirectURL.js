@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller handling site map requests.
+ * Controller handling URL redirects.
  *
  * @module controller/RedirectURL
  */
@@ -12,8 +12,8 @@ var view = require('~/cartridge/scripts/_view');
 
 /**
  * Pipeline is called by the system to handle URL mappings (static mappings and mapping rules).
- * The mappings are configured in Business Manager. This Pipeline is highly performance cricitcal,
- * because it is frequently called in case of explot scans. Please follow these rules:
+ * The mappings are configured in Business Manager. This Pipeline is highly performance critical,
+ * because it is frequently called in case of exploit scans. Please follow these rules:
  * - no or only few database calls
  * - simple (static) template response
  * - caching the result page is a must
@@ -62,7 +62,7 @@ function hostName() {
 /*
  * Web exposed methods
  */
-/* @see module:controller/RedirectURL~start */
+/** @see module:controller/RedirectURL~start */
 exports.Start = guard.filter(['get'], start);
-/* @see module:controller/RedirectURL~hostName */
+/** @see module:controller/RedirectURL~hostName */
 exports.Hostname = guard.filter(['get'], hostName);

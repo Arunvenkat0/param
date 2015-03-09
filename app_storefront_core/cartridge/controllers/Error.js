@@ -67,7 +67,7 @@ function forbidden() {
 /*
  * Web exposed methods
  */
-/* @see module:controller/Error~start */
+/** @see module:controller/Error~start */
 exports.Start = guard.all(start);
-/* @see module:controller/Error~forbidden */
+/** @see module:controller/Error~forbidden */
 exports.Forbidden = guard.all(forbidden);

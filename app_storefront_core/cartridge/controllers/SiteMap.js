@@ -46,7 +46,7 @@ function start() {
 /*
  * Web exposed methods
  */
-/* @see module:controller/SiteMap~google */
+/** @see module:controller/SiteMap~google */
 exports.Google = guard.filter(['get'], google);
-/* @see module:controller/SiteMap~start */
+/** @see module:controller/SiteMap~start */
 exports.Start = guard.filter(['get'], start);
