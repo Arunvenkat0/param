@@ -12,7 +12,7 @@ var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 var Search = require('~/cartridge/scripts/object/Search');
 
 /* Script Modules */
-var guard = require('./dw/guard');
+var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/_view');
 

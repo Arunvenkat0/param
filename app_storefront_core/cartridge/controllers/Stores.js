@@ -5,7 +5,7 @@ var StoreMgr = require('dw/catalog/StoreMgr');
 var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
-var guard = require('./dw/guard');
+var guard = require('~/cartridge/scripts/guard');
 var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
 var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
