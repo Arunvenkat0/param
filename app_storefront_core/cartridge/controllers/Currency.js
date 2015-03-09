@@ -1,22 +1,38 @@
-var g = require('./dw/guard');
+'use strict';
 
 /**
- * This pipeline is used in an ajax call to set the session variable 'currency'.
+ * Controller used to update the current session currency.
+ *
+ * @module controller/Currency
  */
-function SetSessionCurrency()
-{
-    var SetSessionCurrencyResult = new dw.system.Pipelet('SetSessionCurrency').execute({
-        CurrencyCode: request.httpParameterMap.currencyMnemonic.value
-    });
-    if (SetSessionCurrencyResult.result == PIPELET_NEXT)
-    {
-        var CartController = require('./Cart');
-        CartController.Calculate();
+
+/* API Includes */
+var Currency = require('dw/util/Currency');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+
+/**
+ * This controller is used in an ajax call to set the session variable 'currency'.
+ */
+function setSessionCurrency() {
+
+    var currencyMnemonic = request.httpParameterMap.currencyMnemonic.value;
+
+    if (currencyMnemonic) {
+        var currency = Currency.getCurrency(currencyMnemonic);
+        if (currency) {
+            session.setCurrency(currency);
+
+            var CartController = require('./Cart');
+            CartController.Calculate();
+        }
     }
 
     response.renderJSON({
-        success: true
+        success : true
     });
+
 }
 
 
@@ -27,4 +43,5 @@ function SetSessionCurrency()
 /*
  * Web exposed methods
  */
-exports.SetSessionCurrency = g.get(SetSessionCurrency);
+/* @see module:controller/Currency~setSessionCurrency */
+exports.SetSessionCurrency = guard.filter(['get'], setSessionCurrency);
