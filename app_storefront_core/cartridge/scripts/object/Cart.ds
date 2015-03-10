@@ -1,0 +1,224 @@
+'use strict';
+/**
+ * Module for cart related functionality.
+ *
+ * @module object/Cart
+ */
+
+/* API Includes */
+var AbstractHelper = require('./AbstractHelper');
+var Product = require('~/cartridge/scripts/object/Product');
+var Transaction = require('dw/system/Transaction');
+
+/**
+ * Category helper providing enhanced category functionality
+ * @class module:object/Cart~Cart
+ */
+var Cart = AbstractHelper.extend(
+    /** @lends module:object/Cart~Cart.prototype */
+    {
+        /**
+         * Use this method to get a new instance for a given basket.
+         */
+        get : function (parameter) {
+            var obj = null;
+
+            if (!parameter) {
+                // TODO
+                var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+                    Create : false
+                }).execute();
+
+                if (GetBasketResult.result !== PIPELET_ERROR) {
+                    obj = GetBasketResult.Basket;
+                }
+            }
+            else if (typeof parameter === 'object') {
+                obj = parameter;
+            }
+            return new Cart(obj);
+        },
+
+	    /**
+	     * TODO
+	     */
+        calculate : function () {
+
+            Transaction.begin();
+            dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
+            Transaction.commit();
+
+        },
+
+        /**
+         * TODO
+         *
+         * @param plid
+         * @param itemid
+         * @param quantity
+         * @param cgid
+         * @returns {null}
+         */
+        addProductListItem : function (productListItem, quantity, cgid) {
+
+            if (productListItem) {
+
+	            var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(productListItem.getProduct(), request.httpParameterMap);
+
+                // TODO
+                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
+                    Basket             : this.object,
+                    ProductOptionModel : productOptionSelections.ProductOptionModel,
+                    Quantity           : quantity,
+                    Category           : dw.catalog.CatalogMgr.getCategory(cgid),
+                    ProductListItem    : productListItem
+                });
+                if (AddProductToBasketResult.result === PIPELET_ERROR) {
+                    return null;
+                }
+
+                this.calculate();
+            }
+
+            return;
+        },
+
+        /**
+         * TODO
+         *
+         * @param pid
+         * @param quantity
+         * @param cgid
+         */
+        addProductItem : function (product, quantity, cgid) {
+
+            if (product) {
+                var previousBonusDiscountLineItems = this.getBonusDiscountLineItems();
+
+                if (product.productSet) {
+                    // TODO
+                    //addProductSetProducts();
+                }
+                else {
+
+                    var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
+
+                    // TODO
+                    var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
+                        Basket             : this.object,
+                        Product            : product,
+                        ProductOptionModel : productOptionSelections.ProductOptionModel,
+                        Quantity           : quantity,
+                        Category           : dw.catalog.CatalogMgr.getCategory(cgid)
+                    });
+
+                    if (AddProductToBasketResult.result === PIPELET_ERROR) {
+                        return;
+                    }
+                    var ProductLineItem = AddProductToBasketResult.ProductLineItem;
+
+                    if (product.bundle) {
+                        // TODO
+                        //replaceBundleLineItemProducts();
+                    }
+                }
+
+                this.calculate();
+                // TODO
+                // newBonusDiscountLineItem(Basket, previousBonusDiscountLineItems);
+            }
+
+            return;
+        },
+
+        addCoupon : function (couponCode) {
+            if (couponCode) {
+
+                var AddCouponToBasket2Result = new dw.system.Pipelet('AddCouponToBasket2').execute({
+                    Basket     : this.object,
+                    CouponCode : couponCode
+                });
+
+                if (AddCouponToBasket2Result.result !== PIPELET_ERROR) {
+                    this.calculate();
+                    return {'CouponStatus' : AddCouponToBasket2Result.Status};
+                }
+            }
+
+            return;
+        },
+
+        removeCouponLineItem : function (couponLineItem) {
+            new dw.system.Pipelet('RemoveCouponLineItem').execute({
+                CouponLineItem : formgroup.couponLineItem().object
+            });
+
+            return;
+        },
+
+        removeGiftCertificateLineItem : function (giftCertificateLineItem) {
+            new dw.system.Pipelet('RemoveGiftCertificateLineItem').execute({
+                GiftCertificateLineItem : giftCertificateLineItem
+            });
+
+            return;
+        },
+
+        removeProductLineItem : function (productLineItem) {
+            new dw.system.Pipelet('RemoveProductLineItem').execute({
+                ProductLineItem : productLineItem
+            });
+
+            return;
+        },
+
+        getProductLineItemByUUID : function (lineItemUUID) {
+            var plis = this.getProductLineItems();
+            var lineItem = null;
+
+            for (var i = 0, il = plis.length; i < il; i++) {
+                var item = plis[i];
+                if ((lineItemUUID != null && item.UUID === lineItemUUID)) {
+                    lineItem = item;
+                    break;
+                }
+            }
+
+            return lineItem;
+        },
+
+	    getProductLineItemByPID : function (pid) {
+		    var plis = this.getProductLineItems();
+		    var lineItem = null;
+
+		    for (var i = 0, il = plis.length; i < il; i++) {
+			    var item = plis[i];
+			    if ((pid != null && item.productID === pid)) {
+				    lineItem = item;
+				    break;
+			    }
+		    }
+
+		    return lineItem;
+	    },
+
+	    getBundledProductLineItemByPID : function (bundleLineItem, pid) {
+		    var plis = bundleLineItem.getBundledProductLineItems();
+		    var lineItem = null;
+
+		    for (var i = 0, il = plis.length; i < il; i++) {
+			    var item = plis[i];
+			    if ((pid != null && item.productID === pid)) {
+				    lineItem = item;
+				    break;
+			    }
+		    }
+
+		    return lineItem;
+	    }
+
+    });
+
+
+/** The cart class */
+module.exports = new Cart();

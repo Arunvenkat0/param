@@ -1,6 +1,9 @@
 var g = require('./dw/guard');
 var f = require('./dw/form');
 
+/* API Includes */
+var Cart = require('~/cartridge/scripts/object/Cart');
+
 /**
  * Handles all customer login related storefront processes.
  */
@@ -51,8 +54,7 @@ function Process()
     {
     	return loginFailed();
     }
-    
-    
+
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
         Login: loginForm.username.value,
         Password: loginForm.password.value,
@@ -392,19 +394,12 @@ function OAuthReentryVKontakte()
 
 function Logout()
 {
-    var forms = session.forms;
-    
     new dw.system.Pipelet('LogoutCustomer').execute();
-    
-    f.clearFormElement(forms.login);
-    f.clearFormElement(forms.profile);
-    
 
-    // TODO this should be triggered by a hook (afterLogout)
-    var CartController = require('./Cart');
-    CartController.Calculate();
-    
-    
+	//session.forms.login.clearFormElement();
+	//session.forms.profile.clearFormElement();
+	//Cart.get().calculate();
+
     response.redirect(dw.web.URLUtils.https('Account-Show'));
 }
 

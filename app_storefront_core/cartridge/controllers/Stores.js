@@ -15,7 +15,7 @@ var guard = require('~/cartridge/scripts/guard');
 var storeLocatorAsset = require('~/cartridge/scripts/model/Content').get('store-locator');
 var storeLocatorForm = require('~/cartridge/scripts/model/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Provides a form to locate stores by geographical information.
