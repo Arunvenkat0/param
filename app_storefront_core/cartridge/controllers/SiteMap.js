@@ -1,4 +1,14 @@
-var g = require('./dw/guard');
+'use strict';
+
+/**
+ * Controller handling site map requests.
+ *
+ * @module controller/SiteMap
+ */
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * This pipeline is used to serve requests for Google XML site maps.
@@ -6,25 +16,26 @@ var g = require('./dw/guard');
  * # process sitemaps
  * RewriteRule ^/(sitemap([^/]*))$ /on/demandware.store/%{HTTP_HOST}/-/SiteMap-Google?name=$1 [PT,L]
  */
-function Google()
-{
+function google() {
+    // TODO - rework
     var SendGoogleSiteMapResult = new dw.system.Pipelet('SendGoogleSiteMap').execute({
-        FileName: request.httpParameterMap.name.stringValue
+        FileName : request.httpParameterMap.name.stringValue
     });
-    if (SendGoogleSiteMapResult.result == PIPELET_ERROR)
-    {
-        response.renderTemplate('sitemap/http_404');
+    if (SendGoogleSiteMapResult.result === PIPELET_ERROR) {
+        view.get().render('sitemap/http_404');
     }
-    else
-	{
-        response.renderTemplate('sitemap/http_200');
+    else {
+        view.get().render('sitemap/http_200');
     }
 }
 
+/**
+ *
+ */
+function start() {
 
-function Start()
-{
-    response.renderTemplate('sitemap/sitemap');
+    view.get().render('sitemap/sitemap');
+
 }
 
 
@@ -35,5 +46,7 @@ function Start()
 /*
  * Web exposed methods
  */
-exports.Google  = g.get(Google);
-exports.Start   = g.get(Start);
+/** @see module:controller/SiteMap~google */
+exports.Google = guard.filter(['get'], google);
+/** @see module:controller/SiteMap~start */
+exports.Start = guard.filter(['get'], start);

@@ -1,411 +1,258 @@
-var g = require('./dw/guard');
+'use strict';
+
+/**
+ * Controller handling search, category and family pages.
+ *
+ * @module controller/Search
+ */
+
+/* API Includes */
+var PagingModel = require('dw/web/PagingModel');
+var Search = require('~/cartridge/scripts/model/Search');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/_view');
 
 /**
  * Renders a full featured product search result page.
  * If the http parameter "format" is set to "ajax" only the product grid is rendered instead of the full page.
  */
-function Show()
-{
-	var CurrentHttpParameterMap = request.httpParameterMap;
+function show() {
 
-	if (CurrentHttpParameterMap.format.stringValue == 'ajax' || CurrentHttpParameterMap.format.stringValue == 'page-element')
-	{
-		showProductGrid();
-		return;
-	}
+    var params = request.httpParameterMap;
 
-	var SearchRedirectURLResult = new dw.system.Pipelet('SearchRedirectURL').execute({
-			SearchPhrase: CurrentHttpParameterMap.q.value
-	});
-
-	if (SearchRedirectURLResult.result == PIPELET_NEXT)
-	{
-	    var Location = SearchRedirectURLResult.Location;
-
-		response.renderTemplate('util/redirect', {
-			Location: Location,
-			CacheTag: true
-		});
-		return;
-	}
-
-	var SearchResult = new dw.system.Pipelet('Search', {
-		SearchContent: true,
-		SearchProduct: true,
-		DisallowOfflineCategory: true,
-		RecursiveCategorySearch: true,
-		RecursiveFolderSearch: true
-	}).execute({
-		SearchPhrase: 			CurrentHttpParameterMap.q.value,
-		SortBy1: 				CurrentHttpParameterMap.psortb1.value,
-		SortBy1Direction: 		CurrentHttpParameterMap.psortd1.intValue,
-		SortBy2: 				CurrentHttpParameterMap.psortb2.value,
-		SortBy2Direction: 		CurrentHttpParameterMap.psortd2.intValue,
-		SortBy3: 				CurrentHttpParameterMap.psortb3.value,
-		SortBy3Direction: 		CurrentHttpParameterMap.psortd3.intValue,
-		PriceMin: 				CurrentHttpParameterMap.pmin.doubleValue,
-		PriceMax: 				CurrentHttpParameterMap.pmax.doubleValue,
-		RefineBy5Name: 			null,
-		RefineBy5Phrase: 		null,
-		CategoryID: 			CurrentHttpParameterMap.cgid.value,
-		ProductID: 				CurrentHttpParameterMap.pid.value,
-		ContentID: 				CurrentHttpParameterMap.cid.value,
-		FolderID: 				CurrentHttpParameterMap.fdid.value,
-		RefineByNamePrefix: 	'prefn',
-		RefineByPhrasePrefix: 	'prefv',
-		SortingRuleID: 			CurrentHttpParameterMap.srule.value
-	});
-
-    var ContentSearchResult = SearchResult.ContentSearchModel;
-    var ProductSearchResult = SearchResult.ProductSearchModel;
-
-    if (ProductSearchResult.emptyQuery && ContentSearchResult.emptyQuery)
-    {
-    	response.redirect(dw.web.URLUtils.abs('Home-Show'));
-    	return;
+    if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
+        // TODO refactor and merge showProductGrid() code into here
+        showProductGrid();
+        return;
     }
 
-    if (ProductSearchResult.count <= 0)
-    {
-    	response.renderTemplate('search/nohits', {
-    		ProductSearchResult: ProductSearchResult,
-    		ContentSearchResult: ContentSearchResult
-    	});
-    	return;
-   	}
+    // TODO - replace with script API equivalent once available
+    var SearchRedirectURLResult = new dw.system.Pipelet('SearchRedirectURL').execute({
+        SearchPhrase : params.q.value
+    });
 
-	if ((ProductSearchResult.count > 1) || (ProductSearchResult.refinedSearch) || (ContentSearchResult.count > 0))
-	{
-		var PagingResult = new dw.system.Pipelet('Paging', {
-			DefaultPageSize : 12
-		}).execute({
-			Objects:		ProductSearchResult.productSearchHits,
-			ObjectsCount: 	ProductSearchResult.count,
-			PageSize: 		CurrentHttpParameterMap.sz.getIntValue(12) <= 60 ? CurrentHttpParameterMap.sz.intValue : null,
-			Start: 			CurrentHttpParameterMap.start.intValue
-		});
+    if (SearchRedirectURLResult.result === PIPELET_NEXT) {
+        response.renderTemplate('util/redirect', {
+            Location : SearchRedirectURLResult.Location,
+            CacheTag : true
+        });
+        return;
+    }
 
-		var ProductPagingModel = PagingResult.PagingModel;
+    // construct the search based on the HTTP params & set the categoryID
+    var productSearchModel = Search.initializeProductSearchModel(params);
+    var contentSearchModel = Search.initializeContentSearchModel(params);
 
-		var web = require('./dw/web');
-		web.updatePageMetaDataForCategory(ProductSearchResult.category);
+    // execute the product search
+    productSearchModel.search();
+    contentSearchModel.search();
 
+    if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
+        response.redirect(dw.web.URLUtils.abs('Home-Show'));
+    }
+    else if (productSearchModel.count > 0) {
 
-		if (ProductSearchResult.categorySearch && !ProductSearchResult.refinedCategorySearch && !empty(ProductSearchResult.category.template))
-		{
-			// dynamic template
-			response.renderTemplate(ProductSearchResult.category.template, {
-				ProductSearchResult : ProductSearchResult,
-				ContentSearchResult : ContentSearchResult,
-				ProductPagingModel : ProductPagingModel
-			});
+        if ((productSearchModel.count > 1) || productSearchModel.refinedSearch || (contentSearchModel.count > 0)) {
+            var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
+            params.start.submitted && productPagingModel.setStart(params.start.intValue);
 
-			return;
-		}
-		else
-		{
-			response.renderTemplate('rendering/category/categoryproducthits', {
-				ProductSearchResult : ProductSearchResult,
-				ContentSearchResult : ContentSearchResult,
-				ProductPagingModel : ProductPagingModel
-			});
+            if (params.sz.submitted && request.httpParameterMap.sz.intValue <= 60) {
+                productPagingModel.setPageSize(params.sz.intValue);
+            }
+            else {
+                productPagingModel.setPageSize(12);
+            }
 
-			return;
-		}
-	}
-	else
-	{
-		var GetProductIDsResult = new dw.system.Pipelet('Script', {
-			OnError: 'PIPELET_ERROR',
-			ScriptFile: 'search/GetProductID.ds',
-			Transactional: false
-		}).execute({
-			ProductSearchModel:	ProductSearchResult
-		});
-		var ProductID = GetProductIDsResult.ProductID;
+            productSearchModel.category && pageMeta.update(productSearchModel.category);
 
-		response.renderTemplate('util/redirect', {
-			Location: dw.web.URLUtils.http('Product-Show', 'pid', ProductID)
-		});
+            if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
+                // dynamic template
+                view.get({
+                    ProductSearchResult : productSearchModel,
+                    ContentSearchResult : contentSearchModel,
+                    ProductPagingModel  : productPagingModel
+                }).render(productSearchModel.category.template);
+            }
+            else {
+                view.get({
+                    ProductSearchResult : productSearchModel,
+                    ContentSearchResult : contentSearchModel,
+                    ProductPagingModel  : productPagingModel
+                }).render('rendering/category/categoryproducthits');
+            }
+        }
+        else {
+            var targetProduct = productSearchModel.getProducts().next();
+            var productID = null;
 
-		return;
-	}
+            // If the target was not a master, simply use the product ID
+            if (targetProduct.isMaster()) {
+
+                // In the case a variation master, the master is the representative for
+                // all it's variants. If there is only one variant, return the variant's
+                // product ID.
+                var iter = productSearchModel.getProductSearchHits();
+                if (iter.hasNext()) {
+                    var productSearchHit = iter.next();
+                    if (productSearchHit.getRepresentedProducts().size() === 1) {
+                        productID = productSearchHit.getFirstRepresentedProduct().getID();
+                    }
+                }
+            }
+            else {
+                productID = targetProduct.getID();
+            }
+
+            response.renderTemplate('util/redirect', {
+                Location : dw.web.URLUtils.http('Product-Show', 'pid', productID)
+            });
+        }
+    }
+    else {
+        view.get({
+            ProductSearchResult : productSearchModel,
+            ContentSearchResult : contentSearchModel
+        }).render('search/nohits');
+    }
+
 }
 
 
 /**
  * Renders a full featured content search result page.
  */
-function ShowContent()
-{
-	var CurrentHttpParameterMap = request.httpParameterMap;
+function showContent() {
 
+    var params = request.httpParameterMap;
 
-	var SearchResult = new dw.system.Pipelet('Search', {
-		SearchContent: true,
-	    SearchProduct: true,
-	    DisallowOfflineCategory: true,
-	    RecursiveCategorySearch: true,
-	    RecursiveFolderSearch: true
-	}).execute({
-		SearchPhrase:			CurrentHttpParameterMap.q.value,
-		SortBy1:				CurrentHttpParameterMap.psortb1.value,
-		SortBy1Direction:		CurrentHttpParameterMap.psortd1.intValue,
-		SortBy2:				CurrentHttpParameterMap.psortb2.value,
-		SortBy2Direction:		CurrentHttpParameterMap.psortd2.intValue,
-		SortBy3:				CurrentHttpParameterMap.psortb3.value,
-		SortBy3Direction:		CurrentHttpParameterMap.psortd3.intValue,
-		PriceMin:				CurrentHttpParameterMap.pmin.doubleValue,
-		PriceMax:				CurrentHttpParameterMap.pmax.doubleValue,
-		CategoryID:				CurrentHttpParameterMap.cgid.value,
-		ProductID: 				CurrentHttpParameterMap.pid.value,
-		ContentID: 				CurrentHttpParameterMap.cid.value,
-		FolderID: 				CurrentHttpParameterMap.fdid.value,
-		RefineByNamePrefix: 	'prefn',
-		RefineByPhrasePrefix: 	'prefv',
-		OrderableProductsOnly: 	null
-	});
-    var ProductSearchResult = SearchResult.ProductSearchModel;
-    var ContentSearchResult = SearchResult.ContentSearchModel;
+    var productSearchModel = Search.initializeProductSearchModel(params);
+    var contentSearchModel = Search.initializeContentSearchModel(params);
 
-  	if (ProductSearchResult.emptyQuery && ContentSearchResult.emptyQuery)
-  	{
-  		response.redirect(dw.web.URLUtils.abs('Home-Show'));
-    	return;
-  	}
+    // execute the product search
+    productSearchModel.search();
+    contentSearchModel.search();
 
-  	if (ContentSearchResult.count <= 0)
-  	{
-  		response.renderTemplate('search/nohits', {
-  			ProductSearchResult: ProductSearchResult,
-  			ContentSearchResult: ContentSearchResult
-  		});
-  		return;
-  	}
+    if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
+        response.redirect(dw.web.URLUtils.abs('Home-Show'));
+    }
+    else if (contentSearchModel.count > 0) {
 
-	var PagingResult = new dw.system.Pipelet('Paging', {
-  		DefaultPageSize: 16
-  	}).execute({
-  		Objects: ContentSearchResult.content,
-  		ObjectsCount: ContentSearchResult.count,
-  		PageSize: CurrentHttpParameterMap.pageSize.value,
-  		Start: CurrentHttpParameterMap.start.intValue
-  	});
+        var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
+        contentPagingModel.setPageSize(16);
+        params.start.submitted && contentPagingModel.setStart(params.start.intValue);
 
-  	var ContentPagingModel = PagingResult.PagingModel;
+        if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
+            // dynamic template
+            view.get({
+                ProductSearchResult : productSearchModel,
+                ContentSearchResult : contentSearchModel,
+                ContentPagingModel  : contentPagingModel
+            }).render(contentSearchModel.folder.template);
+        }
+        else {
+            view.get({
+                ProductSearchResult : productSearchModel,
+                ContentSearchResult : contentSearchModel,
+                ContentPagingModel  : contentPagingModel
+            }).render('rendering/folder/foldercontenthits');
+        }
+    }
+    else {
+        view.get({
+            ProductSearchResult : productSearchModel,
+            ContentSearchResult : contentSearchModel
+        }).render('search/nohits');
+    }
 
-  	if (ContentSearchResult.folderSearch && !ContentSearchResult.refinedFolderSearch && !empty(ContentSearchResult.folder.template))
-  	{
-  		// dynamic template
-  		response.renderTemplate(ContentSearchResult.folder.template, {
-  			ProductSearchResult: ProductSearchResult,
-  			ContentSearchResult: ContentSearchResult,
-  			ContentPagingModel: ContentPagingModel
-  		});
-  		return;
-  	}
-  	else
-  	{
-  		response.renderTemplate('rendering/folder/foldercontenthits', {
-  			ProductSearchResult: ProductSearchResult,
-  			ContentSearchResult: ContentSearchResult,
-  			ContentPagingModel: ContentPagingModel
-  		});
-  		return;
-  	}
 }
 
 /**
  * Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  */
-function GetSuggestions()
-{
-	var CurrentHttpParameterMap = request.httpParameterMap;
+function getSuggestions() {
 
-	/*
-	 * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
-	 */
-	if (!(CurrentHttpParameterMap.legacy && CurrentHttpParameterMap.legacy == 'true'))
-	{
-		response.renderTemplate('search/suggestionsbeta');
-		return;
-	}
+    /*
+     * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
+     */
+    if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
+        view.get().render('search/suggestionsbeta');
+    }
+    else {
+        // TODO - refactor once search suggestion can be retrieved via th script API
+        var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
+            MaxSuggestions : 10,
+            SearchPhrase   : request.httpParameterMap.q.value
+        });
 
-	var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
-		MaxSuggestions: 10,
-		SearchPhrase: CurrentHttpParameterMap.q.value
-	});
+        view.get({
+            Suggestions : GetSearchSuggestionsResult.Suggestions
+        }).render('search/suggestions');
 
-	response.renderTemplate('search/suggestions', {
-		Suggestions: GetSearchSuggestionsResult.Suggestions
-	});
+    }
+
 }
 
 
 /**
  * Renders the partial content of the product grid of a search result as rich html.
  */
-function showProductGrid()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function showProductGrid() {
 
-    var SearchResult = new dw.system.Pipelet('Search', {
-        SearchContent:              true,
-        SearchProduct:              true,
-        DisallowOfflineCategory:    true,
-        RecursiveCategorySearch:    true,
-        RecursiveFolderSearch:      true
-    }).execute({
-        SearchPhrase:           CurrentHttpParameterMap.q.value,
-        SortBy1:                CurrentHttpParameterMap.psortb1.value,
-        SortBy1Direction:       CurrentHttpParameterMap.psortd1.intValue,
-        SortBy2:                CurrentHttpParameterMap.psortb2.value,
-        SortBy2Direction:       CurrentHttpParameterMap.psortd2.intValue,
-        SortBy3:                CurrentHttpParameterMap.psortb3.value,
-        SortBy3Direction:       CurrentHttpParameterMap.psortd3.intValue,
-        PriceMin:               CurrentHttpParameterMap.pmin.doubleValue,
-        PriceMax:               CurrentHttpParameterMap.pmax.doubleValue,
-        RefineBy5Name:          null,
-        RefineBy5Phrase:        null,
-        CategoryID:             CurrentHttpParameterMap.cgid.value,
-        ProductID:              CurrentHttpParameterMap.pid.value,
-        ContentID:              CurrentHttpParameterMap.cid.value,
-        RefineByNamePrefix:     'prefn',
-        RefineByPhrasePrefix:   'prefv',
-        OrderableProductsOnly:  null,
-        SortingRuleID:          CurrentHttpParameterMap.srule.value,
-        FolderID:               CurrentHttpParameterMap.fid.value
-    });
+    var params = request.httpParameterMap;
 
-    var ProductSearchResult = SearchResult.ProductSearchModel;
-    var ContentSearchResult = SearchResult.ContentSearchModel;
+    // construct the search based on the HTTP params & set the categoryID
+    var productSearchModel = Search.initializeProductSearchModel(params);
+    var contentSearchModel = Search.initializeContentSearchModel(params);
 
-    var PagingResult = new dw.system.Pipelet('Paging', {
-        DefaultPageSize: 12
-    }).execute({
-        Objects:        ProductSearchResult.productSearchHits,
-        PageSize:       CurrentHttpParameterMap.sz.getIntValue(12) <= 60 ? CurrentHttpParameterMap.sz.intValue : null,
-        Start:          CurrentHttpParameterMap.start.intValue,
-        ObjectsCount:   ProductSearchResult.count
-    });
+    // execute the product search
+    productSearchModel.search();
+    contentSearchModel.search();
 
-    var ProductPagingModel = PagingResult.PagingModel;
+    var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
+    params.start.submitted && productPagingModel.setStart(params.start.intValue);
 
-    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && CurrentHttpParameterMap.format.stringValue == 'page-element')
-    {
-        response.renderTemplate('search/productgridwrapper', {
-            ProductSearchResult: ProductSearchResult,
-            ProductPagingModel: ProductPagingModel
-        });
-        return;
+    if (params.sz.submitted && params.sz.intValue <= 60) {
+        productPagingModel.setPageSize(params.sz.intValue);
     }
-    else
-    {
-        if (ProductSearchResult.categorySearch && !ProductSearchResult.refinedCategorySearch && !empty(ProductSearchResult.category.template))
-        {
+    else {
+        productPagingModel.setPageSize(12);
+    }
+
+    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && params.format.stringValue === 'page-element') {
+        view.get({
+            ProductSearchResult : productSearchModel,
+            ProductPagingModel  : productPagingModel
+        }).render('search/productgridwrapper');
+    }
+    else {
+        if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
             // dynamic template
-            response.renderTemplate(ProductSearchResult.category.template, {
-                ProductSearchResult: ProductSearchResult,
-                ContentSearchResult: ContentSearchResult,
-                ProductPagingModel: ProductPagingModel
-            });
-            return;
+            view.get({
+                ProductSearchResult : productSearchModel,
+                ContentSearchResult : contentSearchModel,
+                ProductPagingModel  : productPagingModel
+            }).render(productSearchModel.category.template);
         }
-        else
-        {
-            response.renderTemplate('rendering/category/categoryproducthits', {
-                ProductSearchResult: ProductSearchResult,
-                ContentSearchResult: ContentSearchResult,
-                ProductPagingModel: ProductPagingModel
-            });
-            return;
+        else {
+            view.get({
+                ProductSearchResult : productSearchModel,
+                ContentSearchResult : contentSearchModel,
+                ProductPagingModel  : productPagingModel
+            }).render('rendering/category/categoryproducthits');
         }
     }
+
 }
-
-/**
- * Executes a product search and puts the ProductSearchResult into the pipeline dictionary for convenient reuse.
- * This is also used in Product pipeline for product navigation i.e. next/prev.
- */
-function GetProductResult()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-
-    var SearchResult = new dw.system.Pipelet('Search', {
-        SearchContent: false,
-        SearchProduct: true,
-        DisallowOfflineCategory: true,
-        RecursiveCategorySearch: true
-    }).execute({
-        SearchPhrase: CurrentHttpParameterMap.q.value,
-        SortBy1: CurrentHttpParameterMap.psortb1.value,
-        SortBy1Direction: CurrentHttpParameterMap.psortd1.intValue,
-        SortBy2: CurrentHttpParameterMap.psortb2.value,
-        SortBy2Direction: CurrentHttpParameterMap.psortd2.intValue,
-        SortBy3: CurrentHttpParameterMap.psortb3.value,
-        SortBy3Direction: CurrentHttpParameterMap.psortd3.intValue,
-        PriceMin: CurrentHttpParameterMap.pmin.doubleValue,
-        PriceMax: CurrentHttpParameterMap.pmax.doubleValue,
-        CategoryID: CurrentHttpParameterMap.cgid.value,
-        RefineByNamePrefix: 'prefn',
-        RefineByPhrasePrefix: 'prefv',
-        SortingRuleID: CurrentHttpParameterMap.srule.value
-    });
-    var ProductSearchResult = SearchResult.ProductSearchModel;
-
-    return {
-        ProductSearchResult: ProductSearchResult
-    };
-}
-
-/**
- * Executes a content search and puts the ContentSearchResult into the pipeline dictionary for convenient reuse.
- */
-function GetContentResult()
-{
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-
-    var SearchResult = new dw.system.Pipelet('Search', {
-        SearchContent: true,
-        SearchProduct: true,
-        DisallowOfflineCategory: true,
-        RecursiveCategorySearch: true,
-        RecursiveFolderSearch: true
-    }).execute({
-        SearchPhrase: CurrentHttpParameterMap.q.value,
-        SortBy1: CurrentHttpParameterMap.psortb1.value,
-        SortBy1Direction: CurrentHttpParameterMap.psortd1.intValue,
-        SortBy2: CurrentHttpParameterMap.psortb2.value,
-        SortBy2Direction: CurrentHttpParameterMap.psortd2.intValue,
-        SortBy3: CurrentHttpParameterMap.psortb3.value,
-        SortBy3Direction: CurrentHttpParameterMap.psortd3.intValue,
-        FolderID: CurrentHttpParameterMap.fdid.value,
-        RefineByNamePrefix: 'prefn',
-        RefineByPhrasePrefix: 'prefv'
-    });
-    var ContentSearchResult = SearchResult.ContentSearchModel;
-
-    return {
-        ContentSearchResult: ContentSearchResult
-    };
-}
-
-
-/*
- * Module exports
- */
 
 /*
  * Web exposed methods
  */
-exports.Show            = g.get(Show);
-exports.ShowContent     = g.get(ShowContent);
-exports.GetSuggestions  = g.get(GetSuggestions);
-
-/*
- * Local methods
- */
-exports.GetProductResult = GetProductResult;
-exports.GetContentResult = GetContentResult;
+/** @see module:controller/Search~show */
+exports.Show            = guard.filter(['get'], show);
+/** @see module:controller/Search~showContent */
+exports.ShowContent     = guard.filter(['get'], showContent);
+/** @see module:controller/Search~getSuggestions */
+exports.GetSuggestions  = guard.filter(['get'], getSuggestions);

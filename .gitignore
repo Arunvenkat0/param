@@ -4,4 +4,4 @@ target
 .settings/
 node_modules
 *.log
-*.swp
+.idea/

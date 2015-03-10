@@ -1,6 +1,9 @@
 'use strict';
-
-/** @module object/Search */
+/**
+ * TODO
+ *
+ * @module model/Search
+ */
 
 /* API Includes */
 var CatalogMgr = require('dw/catalog/CatalogMgr');
@@ -8,9 +11,8 @@ var ContentSearchModel = require('dw/content/ContentSearchModel');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
 /**
- * TODO
- *
- * @type {{initializeProductSearchModel: Function, initializeContentSearchModel: Function}}
+ * Search model providing enhanced search functionality
+ * @class module:model/Search~Search
  */
 var Search = ({
 
@@ -22,10 +24,10 @@ var Search = ({
      * @returns {*}
      */
     initializeSearchModel : function (searchModel, httpParameterMap) {
-        httpParameterMap.q.value && searchModel.setSearchPhrase(httpParameterMap.q.value);
-        httpParameterMap.psortb1.value && httpParameterMap.psortd1.intValue && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
-        httpParameterMap.psortb2.value && httpParameterMap.psortd2.intValue && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
-        httpParameterMap.psortb3.value && httpParameterMap.psortd3.intValue && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
+        httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
+        httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
+        httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
+        httpParameterMap.psortb3.submitted && httpParameterMap.psortd3.submitted && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
 
         var nameMap = httpParameterMap.getParameterMap('prefn');
         var valueMap = httpParameterMap.getParameterMap('prefv');
@@ -48,15 +50,15 @@ var Search = ({
 
         productSearchModel.setRecursiveCategorySearch(true);
 
-        httpParameterMap.pid.value && productSearchModel.setProductID(httpParameterMap.pid.value);
-        httpParameterMap.pmin.doubleValue && productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);
-        httpParameterMap.pmax.doubleValue && productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
+        httpParameterMap.pid.submitted && productSearchModel.setProductID(httpParameterMap.pid.value);
+        httpParameterMap.pmin.submitted && productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);
+        httpParameterMap.pmax.submitted && productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
 
-        var sortingRule = httpParameterMap.srule.value ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
+        var sortingRule = httpParameterMap.srule.submitted ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
         sortingRule && productSearchModel.setSortingRule(sortingRule);
 
         // only add category to search model if the category is online
-        if (httpParameterMap.cgid.value) {
+        if (httpParameterMap.cgid.submitted) {
             var category = CatalogMgr.getCategory(httpParameterMap.cgid.value);
             category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
         }
@@ -75,8 +77,8 @@ var Search = ({
 
         contentSearchModel.setRecursiveFolderSearch(true);
 
-        httpParameterMap.cid.value && contentSearchModel.setContentID(httpParameterMap.cid.value);
-        httpParameterMap.fdid.value && contentSearchModel.setFolderID(httpParameterMap.fdid.value);
+        httpParameterMap.cid.submitted && contentSearchModel.setContentID(httpParameterMap.cid.value);
+        httpParameterMap.fdid.submitted && contentSearchModel.setFolderID(httpParameterMap.fdid.value);
 
         return contentSearchModel;
     }
