@@ -1,11 +1,13 @@
 'use strict';
+
 /**
  * Renders the home page.
  *
  * @module controller/Home
  */
 
-var guard = require('./dw/guard');
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/_view');
 
 /**
@@ -13,10 +15,9 @@ var view = require('~/cartridge/scripts/_view');
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
-    require('~/cartridge/scripts/meta').update(rootFolder);
+    pageMeta.update(rootFolder);
 
     view.get().render('content/home/homepage');
-    return response;
 }
 
 /**
@@ -25,7 +26,6 @@ function show() {
  */
 function includeHeader() {
     view.get().render('components/header/header');
-    return response;
 }
 
 
@@ -37,7 +37,6 @@ function includeHeader() {
  */
 function includeHeaderMenu() {
     view.get().render('components/header/headermenu');
-    return response;
 }
 
 
@@ -49,60 +48,63 @@ function includeHeaderMenu() {
  */
 function includeHeaderCustomerInfo() {
     view.get().render('components/header/headercustomerinfo');
-    return response;
 }
 
-
+/**
+ * TODO
+ */
 function errorNotFound() {
-	response.setStatus(404);
+    response.setStatus(404);
     view.get().render('error/notfound');
-    return response;
 }
 
-// @TODO As we want to have a responsive layout, do we really need the below?
+/**
+ * TODO As we want to have a responsive layout, do we really need the below?
+ */
 function mobileSite() {
     session.custom.device = 'mobile';
     view.get().render('components/changelayout');
-    return response;
 }
 
-// @TODO remove - not responsive - maybe replace with a css class forcing the layout
+/**
+ * TODO remove - not responsive - maybe replace with a css class forcing the layout
+ */
 function fullSite() {
     session.custom.device = 'fullsite';
     view.get().render('components/changelayout');
-    return response;
 }
 
-// @TODO remove - not responsive
+/**
+ * TODO remove - not responsive
+ */
 function setLayout() {
     view.get().render('components/setlayout');
-    return response;
 }
 
-
-// @TODO remove - not responsive
+/**
+ * TODO remove - not responsive
+ */
 function deviceLayouts() {
     view.get().render('util/devicelayouts');
-	return response;
 }
 
 /*
  * Export the publicly available controller methods
  */
 /** @see module:controller/Home~show */
-exports.Show                        = guard.filter(['get'],show);
+exports.Show = guard.filter(['get'], show);
 /** @see module:controller/Home~includeHeader */
-exports.IncludeHeader               = guard.filter(['get'],includeHeader);
+exports.IncludeHeader = guard.filter(['get'], includeHeader);
 //exports.IncludeHeaderMenu           = guard.filter(['get'],includeHeaderMenu);
 /** @see module:controller/Home~includeHeaderCustomerInfo */
-exports.IncludeHeaderCustomerInfo   = guard.filter(['get'],includeHeaderCustomerInfo);
+exports.IncludeHeaderCustomerInfo = guard.filter(['get'], includeHeaderCustomerInfo);
 /** @see module:controller/Home~errorNotFound */
-exports.ErrorNotFound               = guard.filter(['get'],errorNotFound);
+exports.ErrorNotFound = guard.filter(['get'], errorNotFound);
 /** @see module:controller/Home~mobileSite */
-exports.MobileSite                  = guard.filter(['get'],mobileSite);
+exports.MobileSite = guard.filter(['get'], mobileSite);
 /** @see module:controller/Home~fullSite */
-exports.FullSite                    = guard.filter(['get'],fullSite);
+exports.FullSite = guard.filter(['get'], fullSite);
 /** @see module:controller/Home~setLayout */
-exports.SetLayout                   = guard.filter(['get'],setLayout);
+exports.SetLayout = guard.filter(['get'], setLayout);
 /** @see module:controller/Home~deviceLayouts */
-exports.DeviceLayouts               = guard.filter(['get'],deviceLayouts);
+exports.DeviceLayouts = guard.filter(['get'], deviceLayouts);
