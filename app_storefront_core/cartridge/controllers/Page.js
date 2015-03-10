@@ -22,6 +22,7 @@ function show() {
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if (!content) {
+        dw.system.Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);
         response.setStatus(404);
         view.get().render('error/notfound');
     }
@@ -47,10 +48,13 @@ function include() {
 
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
-    view.get({
-        Content : content
-    }).render(content.template || 'content/content/contentassetinclude');
-
+    if(content){
+        view.get({
+            Content : content
+        }).render(content.template || 'content/content/contentassetinclude');
+    }else{
+        dw.system.Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
+    }
 }
 
 
