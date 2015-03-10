@@ -10,19 +10,19 @@
 		creation date, payment information, order totals and shipments of
 		the order.
 	</iscomment>
-	
+
 		<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
-		
-		<a class="print-page">${Resource.msg('confirmation.print','checkout',null)}</a>
-		
+
+		<button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button>
+
 		<div class="confirmation-message">
 			<iscontentasset aid="confirmation-message" />
 		</div>
-		
+
 		<div class="order-confirmation-details">
 			<isorderdetails order="${pdict.Order}"/>
 		</div>
-		
+
 		<div class="actions">
 			<a href="${URLUtils.http('Cart-ContinueShopping')}" class="continue button">
 				${Resource.msg('confirmation.returnshop','checkout',null)}

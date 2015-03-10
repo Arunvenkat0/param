@@ -12,15 +12,15 @@ module.exports = function (grunt) {
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
 
+	var paths = require('./package.json').paths;
+
 	grunt.initConfig({
 		watch: {
 			sass: {
-				files: ['app_storefront_core/cartridge/scss/*.scss'],
-				tasks: ['scss']
-			},
-			js: {
-				files: ['app_storefront_richUI/cartridge/js/**/*.js'],
-				tasks: ['browserify:watch']
+				files: paths.css.map(function (path) {
+					return path.src + '*.scss';
+				}),
+				tasks: ['css']
 			}
 		},
 		sass: {
@@ -29,32 +29,35 @@ module.exports = function (grunt) {
 					style: 'expanded',
 					sourcemap: true
 				},
-				files: {
-					'app_storefront_core/cartridge/static/default/css/style.css': 'app_storefront_core/cartridge/scss/style.scss'
-				}
+				files: paths.css.map(function (path) {
+					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
+				})
 			}
 		},
 		autoprefixer: {
 			dev: {
-				src: 'app_storefront_core/cartridge/static/default/css/style.css',
-				dest: 'app_storefront_core/cartridge/static/default/css/style.css'
+				files: paths.css.map(function (path) {
+					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
+				})
 			}
 		},
 		browserify: {
 			dist: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				}
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}]
 			},
 			watch: {
-				files: {
-					'app_storefront_richUI/cartridge/static/default/js/app.js': 'app_storefront_richUI/cartridge/js/app.js'
-				},
+				files: [{
+					src: paths.js.src + 'app.js',
+					dest: paths.js.dest + 'app.js'
+				}],
 				options: {
 					watch: true
 				}
 			},
-			browserTest: {
+			test: {
 				files: [{
 					expand: true,
 					cwd: 'test/unit/browser/',
@@ -64,7 +67,7 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			browserTest: {
+			test: {
 				options: {
 					port: config.port,
 					base: 'test/unit/browser'
@@ -85,12 +88,12 @@ module.exports = function (grunt) {
 			target: ['app_storefront_richUI/cartridge/js/**/*.js']
 		},
 		mochaTest: {
-			ui: {
+			application: {
 				options: {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/ui/' + config.suite + '/**/*.js', '!test/ui/webdriver/*']
+				src: ['test/application/' + config.suite + '/**/*.js', '!test/application/webdriver/*']
 			},
 			unit: {
 				options: {
@@ -102,9 +105,9 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.registerTask('scss', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['scss', 'browserify:dist', 'watch']);
+	grunt.registerTask('css', ['sass', 'autoprefixer']);
+	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
-	grunt.registerTask('ui-test', ['mochaTest:ui']);
-	grunt.registerTask('unit-test', ['browserify:browserTest', 'connect:browserTest', 'mochaTest:unit'])
+	grunt.registerTask('test:application', ['mochaTest:application']);
+	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
 }

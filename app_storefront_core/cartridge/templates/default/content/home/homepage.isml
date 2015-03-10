@@ -25,7 +25,4 @@
 		
 	</div>
 	
-	<div class="home-bottom">
-		<isslot id="home-bottom" description="Bottom content below flash banner " context="global" />
-	</div>
 </isdecorate>

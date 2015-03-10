@@ -17,8 +17,8 @@
 					<isinputfield formfield="${session.forms.profile.customer.lastname}" type="input"/>
 					<isinputfield formfield="${session.forms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${session.forms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${session.forms.profile.login.password}" type="password"/>
-					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password"/>
+					<isinputfield formfield="${session.forms.profile.login.password}" type="password" type="password" attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password" type="password" attribute1="autocomplete" value1="off"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
 					<input type="hidden" name="${session.forms.profile.secureKeyHtmlName}" value="${session.forms.profile.secureKeyValue}"/>	
 				</fieldset>

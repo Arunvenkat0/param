@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/03/64/nintendo__wii__console-en_US-meta.js'] = {metadata:[{rid:7325393,date:20090421,rating:5,helpfulScore:0,oid:7663616,batch:1,images:0}]};

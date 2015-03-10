@@ -42,9 +42,7 @@
 	<isinclude template="product/components/pricing"/>
 
 	<isif condition="${!isQuickView}">
-		<div class="product-review-links">
-			<isinclude template="product/components/reviewsmini"/>
-		</div>
+		<isinclude template="product/components/reviewsmini"/>
 	</isif>
 
 	<isset name="showTieredPrice" value="${false}" scope="page"/>
@@ -170,12 +168,7 @@
 				<li><a class="wl-action" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
 				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
 			</isif>
-			<li><a class="send-to-friend"
-				   title="${Resource.msg('product.sendfriend','product',null)}"
-				   href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">
-				   ${Resource.msg('product.sendfriend','product',null)}
-				   </a>
-			</li>
+			<li><a class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.https('SendToFriend-Start', 'pid', pdict.Product.ID, 'source', 'productdetail')}">${Resource.msg('product.sendfriend','product',null)}</a></li>
 		</ul>
 
 		<div class="addthis_toolbox addthis_default_style"></div>

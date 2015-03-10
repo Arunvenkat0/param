@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/00/47/contents.js'] = {"locales":{"en_US":{"pkodak__v1273":{"reviews":{"review_count":1,"avg":"5"}}}}};

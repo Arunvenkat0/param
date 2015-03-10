@@ -1,8 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${session.customer.anonymous || session.customer.externallyAuthenticated}">
 	<isif condition="${session.customer.anonymous}">
-		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
+		<p>${Resource.msg('global.or','locale',null)}</p>
+        <p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
 	<iselse/>
+		<p>${Resource.msg('global.or','locale',null)}</p>
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
 	<iscomment>Login Unsuccessful Error Message</iscomment>
@@ -74,6 +76,5 @@
 			<input type="hidden" name="rememberme" id="rememberme" value="">
 			<input type="hidden" name="${session.forms.oauthlogin.secureKeyHtmlName}" value="${session.forms.oauthlogin.secureKeyValue}"/>			
 		</fieldset>
-		<p>${Resource.msgf('logininclude.oauthdetails','account',"")}</p>
 	</form>		
 </isif>

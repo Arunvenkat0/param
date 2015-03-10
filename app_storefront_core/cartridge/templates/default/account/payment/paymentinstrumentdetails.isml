@@ -34,9 +34,11 @@
 					<button id="applyBtn" type="submit" name="${session.forms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 						${Resource.msg('global.apply','locale',null)}
 					</button>	
-					<a href="${URLUtils.url('PaymentInstruments-List')}" class="button-secondary" >
+					
+					<button class="cancel cancel-button" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
 						${Resource.msg('global.cancel','locale',null)}
-					</a>
+					</button>
+					
 				</div>
 				
 				<input type="hidden" name="${session.forms.paymentinstruments.secureKeyHtmlName}" value="${session.forms.paymentinstruments.secureKeyValue}"/>

@@ -29,16 +29,11 @@
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
-		<div id="main" role="main" class="primary-focus clearfix">
+		<div id="main" role="main" class="full-width clearfix">
 
-			<isbreadcrumbs bcurl1="${URLUtils.url('Cart-Show')}" bctext1="${Resource.msg('pt_cart.breadcrumb','checkout',null)}"/>
 
 			<div id="primary" class="primary-content">
 				<isreplace/>
-			</div>
-
-			<div id="secondary" class="nav">
-				<isinclude template="checkout/cart/rightcolumn"/>
 			</div>
 
 		</div>

@@ -10,7 +10,7 @@
 		
 		<div class="login-box login-general clearfix">	
 		
-			<h2 class="section-header">${Resource.msg('wishlist.searchheader','account',null)}</h2>
+			<h2>${Resource.msg('wishlist.searchheader','account',null)}</h2>
 			
 			<div class="login-box-content">
 			
@@ -28,7 +28,7 @@
 	
 		<div class="login-box login-create-account clearfix">
 			
-			<h2 class="section-header">${Resource.msg('landing.createheader','account',null)}</h2>
+			<h2>${Resource.msg('landing.createheader','account',null)}</h2>
 			
 			<div class="login-box-content">
 			

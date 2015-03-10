@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/06/54/samsung__ln46a950-en_US-meta.js'] = {metadata:[{rid:6991721,date:20090409,rating:4,helpfulScore:0,expertLevel:0,batch:1,images:1},{rid:6970818,date:20090407,rating:5,helpfulScore:0,expertLevel:0,batch:1,images:0},{rid:6981427,date:20090408,rating:3,helpfulScore:0,expertLevel:0,batch:1,images:0}]};

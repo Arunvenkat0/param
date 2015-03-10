@@ -20,5 +20,5 @@ describe('Product Tile', function () {
 	});
 	after(function (done) {
 		client.end(done);
-	})
-})
+	});
+});

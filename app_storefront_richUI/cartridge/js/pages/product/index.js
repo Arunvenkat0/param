@@ -9,7 +9,6 @@ var dialog = require('../../dialog'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability'),
 	image = require('./image'),
-	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
 	productSet = require('./productSet'),
 	recommendations = require('./recommendations'),
@@ -20,7 +19,6 @@ var dialog = require('../../dialog'),
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
-	powerReviews();
 	productNav();
 	recommendations();
 	tooltip.init();
@@ -45,15 +43,12 @@ function initializeEvents() {
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
-		e.preventDefault();
-
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-		window.location.href = url;
+		this.setAttribute(href, url);
 	});
 
 	// product options

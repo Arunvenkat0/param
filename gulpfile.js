@@ -2,10 +2,12 @@
 
 var browserify = require('browserify'),
 	connect = require('gulp-connect'),
+	deploy = require('gulp-gh-pages'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
 	jshint = require('gulp-jshint'),
+	merge = require('merge-stream'),
 	minimist = require('minimist'),
 	mocha = require('gulp-mocha'),
 	sass = require('gulp-sass'),
@@ -15,30 +17,26 @@ var browserify = require('browserify'),
 	watchify = require('watchify'),
 	xtend = require('xtend');
 
-var paths = {
-	scss: {
-		src: './app_storefront_core/cartridge/scss/*.scss',
-		dest: './app_storefront_core/cartridge/static/default/css'
-	},
-	js: {
-		src: './app_storefront_richUI/cartridge/js/app.js',
-		dest: './app_storefront_richUI/cartridge/static/default/js'
-	}
-}
+var paths = require('./package.json').paths;
 
 var watching = false;
 gulp.task('enable-watch-mode', function () { watching = true })
 
-gulp.task('scss', function () {
-	gulp.src(paths.scss.src)
-		.pipe(sass())
-		.pipe(prefix({cascade: true}))
-		.pipe(gulp.dest(paths.scss.dest));
+gulp.task('css', function () {
+	var streams = merge();
+	paths.css.forEach(function (path) {
+		streams.add(gulp.src(path.src + '*.scss')
+			.pipe(sass())
+			.pipe(prefix({cascade: true}))
+			.pipe(gulp.dest(path.dest)));
+	});
+	return streams;
+
 });
 
 gulp.task('js', function () {
 	var opts = {
-		entries: paths.js.src,
+		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
 		debug: (gutil.env.type === 'development')
 	}
 	if (watching) {
@@ -80,7 +78,7 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
-gulp.task('ui-test', function () {
+gulp.task('test:application', function () {
 	var opts = minimist(process.argv.slice(2));
 	// default option to all
 	var suite = opts.suite || '*';
@@ -91,7 +89,7 @@ gulp.task('ui-test', function () {
 	var reporter = opts.reporter || 'spec';
 	// default timeout to 10s
 	var timeout = opts.timeout || 10000;
-	return gulp.src(['test/ui/' + suite + '/**/*.js', '!test/ui/webdriver/*'], {read: false})
+	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
@@ -101,7 +99,7 @@ gulp.task('ui-test', function () {
 var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
 var filter = require('gulp-filter');
-gulp.task('test-browserify', function () {
+gulp.task('js:test', function () {
 	var browserified = transform(function (filename) {
 		var b = browserify(filename);
 		return b.bundle();
@@ -115,7 +113,7 @@ gulp.task('test-browserify', function () {
 		.pipe(gulp.dest('test/unit/browser'));
 });
 
-gulp.task('test-connect', function () {
+gulp.task('connect:test', function () {
 	var opts = minimist(process.argv.slice(2));
 	var port = opts.port || 7000;
 	return connect.server({
@@ -123,7 +121,7 @@ gulp.task('test-connect', function () {
 		port: port
 	});
 });
-gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
+gulp.task('test:unit', ['js:test', 'connect:test'], function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
@@ -138,6 +136,76 @@ gulp.task('unit-test', ['test-browserify', 'test-connect'], function () {
 		})
 });
 
-gulp.task('watch', ['enable-watch-mode', 'js'], function () {
-	gulp.watch(paths.scss.src, ['scss']);
+gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
+	gulp.watch(paths.css.map(function (path) {
+		return path.src + '*.scss';
+	}), ['css']);
+});
+
+var hbsfy = require('hbsfy');
+var styleguideWatching = false;
+gulp.task('styleguide-watching', function () {styleguideWatching = true});
+gulp.task('js:styleguide', function () {
+	var opts = {
+		entries: ['./styleguide/js/main.js'],
+		debug: (gutil.env.type === 'development')
+	}
+	if (styleguideWatching) {
+		opts = xtend(opts, watchify.args);
+	}
+	var bundler = browserify(opts);
+	if (styleguideWatching) {
+		bundler = watchify(bundler);
+	}
+
+	// transforms
+	bundler.transform(hbsfy);
+
+	bundler.on('update', function (ids) {
+		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
+		gutil.log('Rebunlding...');
+		bundle();
+	});
+
+	var bundle = function () {
+		return bundler
+			.bundle()
+			.on('error', function (e) {
+				gutil.log('Browserify Error', gutil.colors.red(e));
+			})
+			.pipe(source('main.js'))
+			.pipe(gulp.dest('./styleguide/dist'));
+	};
+	return bundle();
+});
+
+gulp.task('connect:styleguide', function () {
+	var opts = minimist(process.argv.slice(2));
+	var port = opts.port || 8000;
+	return connect.server({
+		root: 'styleguide',
+		port: port
+	});
+});
+
+gulp.task('css:styleguide', function () {
+	return gulp.src('styleguide/scss/*.scss')
+		.pipe(sass())
+		.pipe(prefix({cascade: true}))
+		.pipe(gulp.dest('styleguide/dist'));
+});
+
+gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide', 'connect:styleguide'], function () {
+	var styles = paths.css.map(function (path) {
+		return path.src + '*.scss';
+	});
+	styles.push('styleguide/scss/*.scss');
+	gulp.watch(styles, ['css:styleguide']);
+});
+
+// deploy to github pages
+gulp.task('deploy:styleguide', ['js:styleguide', 'css:styleguide'], function () {
+	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
+	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'], {base: 'styleguide'})
+		.pipe(deploy(options));
 });

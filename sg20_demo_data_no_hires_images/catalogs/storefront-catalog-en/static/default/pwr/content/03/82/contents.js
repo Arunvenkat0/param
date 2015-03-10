@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/03/82/contents.js'] = {locales:{}};

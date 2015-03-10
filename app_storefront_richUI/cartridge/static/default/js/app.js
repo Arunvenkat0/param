@@ -12,6 +12,7 @@ var dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	mulitcurrency = require('./multicurrency'),
 	page = require('./page'),
+	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
 	searchsuggest = require('./searchsuggest'),
 	searchsuggestbeta = require('./searchsuggest-beta'),
@@ -117,6 +118,22 @@ function initializeEvents() {
 			}
 		});
 	});
+
+	// main menu toggle
+	$('.menu-toggle').on('click', function () {
+		$('#wrapper').toggleClass('menu-active');
+	});
+	$('.menu-category li .menu-item-toggle').on('click', function (e) {
+		e.preventDefault();
+		var $parentLi = $(e.target).closest('li');
+		$parentLi.siblings('li').removeClass('active').find('.menu-item-toggle').removeClass('fa-chevron-up active').addClass('fa-chevron-right');
+		$parentLi.toggleClass('active');
+		$(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
+		// if there are nested menu, don't navigate away
+		// if ($this.has('ul').length) {
+		// 	e.preventDefault();
+		// }
+	});
 }
 /**
  * @private
@@ -158,6 +175,7 @@ var app = {
 		tooltip.init();
 		minicart.init();
 		validator.init();
+		rating.init();
 		searchplaceholder.init();
 		mulitcurrency.init();
 		// execute page specific initializations
@@ -187,7 +205,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
+},{"./cookieprivacy":5,"./dialog":6,"./jquery-ext":9,"./minicart":10,"./multicurrency":11,"./page":12,"./pages/account":13,"./pages/cart":14,"./pages/checkout":18,"./pages/compare":21,"./pages/product":26,"./pages/registry":31,"./pages/search":32,"./pages/storefront":33,"./pages/storelocator":34,"./pages/wishlist":35,"./rating":39,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":47,"./util":48,"./validator":49}],2:[function(require,module,exports){
 'use strict';
 
 var progress = require('./progress'),
@@ -263,7 +281,10 @@ var load = function (options) {
 	$.ajax({
 		dataType: 'html',
 		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data
+		data: options.data,
+		xhrFields: {
+			withCredentials: true
+		}
 	})
 	.done(function (response) {
 		// success
@@ -293,7 +314,7 @@ var load = function (options) {
 exports.getJson = getJson;
 exports.load = load;
 
-},{"./progress":38,"./util":48}],3:[function(require,module,exports){
+},{"./progress":37,"./util":48}],3:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -321,9 +342,11 @@ function getBonusProducts() {
 			options: {}
 		};
 		var a, alen, bp = selectedList[i];
-		for (a = 0, alen = bp.options.length; a < alen; a++) {
-			var opt = bp.options[a];
-			p.options = {optionName:opt.name, optionValue:opt.value};
+		if (bp.options) {
+			for (a = 0, alen = bp.options.length; a < alen; a++) {
+				var opt = bp.options[a];
+				p.options = {optionName:opt.name, optionValue:opt.value};
+			}
 		}
 		o.bonusproducts.push({product:p});
 	}
@@ -349,13 +372,17 @@ var selectedItemTemplate = function (data) {
 		'<ul class="item-attributes">',
 		attributes,
 		'<ul>',
-		'<li>',
+		'<li>'
 	].join('\n');
 };
 
 // hide swatches that are not selected or not part of a Product Variation Group
 var hideSwatches = function () {
 	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+	// prevent unselecting the selected variant
+	$('.bonus-product-item .swatches .selected').on('click', function () {
+		return false;
+	});
 };
 
 /**
@@ -904,7 +931,8 @@ module.exports = function () {
 
 var ajax = require('./ajax'),
 	util = require('./util'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	imagesLoaded = require('imagesloaded');
 
 var dialog = {
 	/**
@@ -937,57 +965,70 @@ var dialog = {
 
 		// create the dialog
 		this.$container = $target;
-		this.$container.dialog($.extend(true, {}, this.settings, params.options || {}));
+		this.$container.dialog(_.merge({}, this.settings, params.options || {}));
 	},
 	/**
 	 * @function
-	 * @description Opens a dialog using the given url (options.url) or html (options.html)
-	 * @param {Object} options
-	 * @param {Object} options.url should contain the url
-	 * @param {String} options.html contains the html of the dialog content
+	 * @description Opens a dialog using the given url (params.url) or html (params.html)
+	 * @param {Object} params
+	 * @param {Object} params.url should contain the url
+	 * @param {String} params.html contains the html of the dialog content
 	 */
-	open: function (options) {
+	open: function (params) {
 		// close any open dialog
 		this.close();
-		this.create(options);
-		this.replace(options);
+		this.create(params);
+		this.replace(params);
 	},
 	/**
 	 * @description populate the dialog with html content, then open it
-	 * @param {String} html
 	 **/
-	openWithContent: function (html) {
+	openWithContent: function (params) {
+		var content, position, callback;
+
 		if (!this.$container) { return; }
-		this.$container.empty().html(html);
+		content = params.content || params.html;
+		if (!content) { return; }
+		this.$container.empty().html(content);
 		if (!this.$container.dialog('isOpen')) {
 			this.$container.dialog('open');
 		}
-		this.$container.dialog('option', 'position', 'center');
+
+		if (params.options) {
+			position = params.options.position;
+		}
+		if (!position) {
+			position = this.settings.position;
+		}
+		imagesLoaded(this.$container).on('done', function () {
+			this.$container.dialog('option', 'position', position);
+		}.bind(this))
+
+		callback = (typeof params.callback === 'function') ? params.callback : function () {};
+		callback();
 	},
 	/**
 	 * @description Replace the content of current dialog
-	 * @param {object} options
-	 * @param {string} options.url - If the url property is provided, an ajax call is performed to get the content to replace
-	 * @param {string} options.html - If no url property is provided, use html provided to replace
+	 * @param {object} params
+	 * @param {string} params.url - If the url property is provided, an ajax call is performed to get the content to replace
+	 * @param {string} params.html - If no url property is provided, use html provided to replace
 	 */
-	replace: function (options) {
+	replace: function (params) {
 		if (!this.$container) {
 			return;
 		}
-		var callback = (typeof options.callback === 'function') ? options.callback : function () {};
-		if (options.url) {
-			options.url = util.appendParamToURL(options.url, 'format', 'ajax');
+		if (params.url) {
+			params.url = util.appendParamToURL(params.url, 'format', 'ajax');
 			ajax.load({
-				url: options.url,
-				data: options.data,
+				url: params.url,
+				data: params.data,
 				callback: function (response) {
-					this.openWithContent(response);
-					callback();
+					params.content = response;
+					this.openWithContent(params);
 				}.bind(this)
 			});
-		} else if (options.html) {
-			this.openWithContent(options.html);
-			callback();
+		} else if (params.html) {
+			this.openWithContent(params);
 		}
 	},
 	/**
@@ -1052,13 +1093,19 @@ var dialog = {
 		width: '800',
 		close: function () {
 			$(this).dialog('close');
+		},
+		position: {
+			my: 'center',
+			at: 'center',
+			of: window,
+			collision: 'flipfit'
 		}
 	}
 };
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":48,"lodash":54}],7:[function(require,module,exports){
+},{"./ajax":2,"./util":48,"imagesloaded":51,"lodash":54}],7:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1186,13 +1233,14 @@ var minicart = {
 		this.$content = this.$el.find('.mini-cart-content');
 
 		var $productList = this.$el.find('.mini-cart-products');
-		$productList.children().not(':first').addClass('collapsed');
-		$productList.find('.mini-cart-product').append('<div class="mini-cart-toggler">&nbsp;</div>');
+		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
+		$('.mini-cart-product').not(':first').addClass('collapsed')
+			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
-		$productList.toggledList({
-			toggleClass: 'collapsed',
-			triggerSelector: '.mini-cart-toggler',
-			eventName: 'click'});
+		$('.mini-cart-toggle').on('click', function (e) {
+			$(this).toggleClass('fa-caret-down fa-caret-right');
+			$(this).closest('.mini-cart-product').toggleClass('collapsed');
+		});
 
 		// events
 		this.$el.find('.mini-cart-total').on('mouseenter', function () {
@@ -1207,8 +1255,6 @@ var minicart = {
 			timer.clear();
 			timer.start(30, this.close.bind(this));
 		}.bind(this));
-
-		this.$el.find('.mini-cart-close').on('click', this.close);
 	},
 	/**
 	 * @function
@@ -1260,7 +1306,7 @@ exports.init = function () {
 		ajax.getJson({
 			url: util.appendParamsToUrl(Urls.currencyConverter, {
 				format: 'ajax',
-				currencyMnemonic: $('.currency-converter').val()
+				currencyMnemonic: $('.currency-converter select').val()
 			}),
 			callback: function () {
 				location.reload();
@@ -1324,7 +1370,7 @@ function initializeAddressForm() {
 		if (!$form.valid()) {
 			return false;
 		}
-		var url = util.appendParamsToUrl($form.attr('action'), {format: 'ajax'});
+		var url = util.appendParamToURL($form.attr('action'), 'format', 'ajax');
 		var applyName = $form.find('.apply-button').attr('name');
 		var options = {
 			url: url,
@@ -1420,7 +1466,7 @@ function initAddressEvents() {
 		e.preventDefault();
 		if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
 			$.ajax({
-				url: util.appendParamsToUrl($(this).attr('href'), {format: 'ajax'}),
+				url: util.appendParamToURL($(this).attr('href'), 'format', 'ajax'),
 				dataType: 'json'
 			}).done(function (data) {
 				if (data.status.toLowerCase() === 'ok') {
@@ -1557,7 +1603,7 @@ function initializeEvents() {
 			source: 'cart'
 		});
 	})
-	.on('click', '.bonus-item-actions a', function (e) {
+	.on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
 		e.preventDefault();
 		bonusProductsView.show(this.href);
 	});
@@ -1576,7 +1622,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":38,"../storeinventory/cart":44,"./account":13}],15:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -2185,7 +2231,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../tooltip":47,"../../util":48,"./formPrepare":17}],21:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2229,7 +2275,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":12,"../product-tile":37,"../quickview":39,"./product/addToCart":23}],22:[function(require,module,exports){
+},{"../ajax":2,"../page":12,"../product-tile":36,"../quickview":38,"./product/addToCart":23}],22:[function(require,module,exports){
 /* global addthis */
 
 'use strict';
@@ -2348,73 +2394,51 @@ var ajax =  require('../../ajax'),
 	util = require('../../util');
 
 var updateContainer = function (data) {
-	var $availabilityMsgContainer = $('#pdpMain .availability .availability-msg'),
-		$availabilityMsg;
+	var $availabilityMsg = $('#pdpMain .availability .availability-msg');
+	var message; // this should be lexically scoped, when `let` is supported (ES6)
 	if (!data) {
-		$availabilityMsgContainer.html(Resources.ITEM_STATUS_NOTAVAILABLE);
+		$availabilityMsg.html(Resources.ITEM_STATUS_NOTAVAILABLE);
 		return;
 	}
-
-	$availabilityMsgContainer.empty();
-
+	$availabilityMsg.empty()
 	// Look through levels ... if msg is not empty, then create span el
 	if (data.levels.IN_STOCK > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('in-stock-msg');
-		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
 			// Just in stock
-			$availabilityMsg.text(Resources.IN_STOCK);
+			message = Resources.IN_STOCK;
 		} else {
 			// In stock with conditions ...
-			$availabilityMsg.text(data.inStockMsg);
+			message = data.inStockMsg;
 		}
+		$availabilityMsg.append('<p class="in-stock-msg">' + message + '</p>');
 	}
 	if (data.levels.PREORDER > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.preorder-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('preorder-msg');
-		}
 		if (data.levels.IN_STOCK === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-			// Just in stock
-			$availabilityMsg.text(Resources.PREORDER);
+			message = Resources.PREORDER;
 		} else {
-			$availabilityMsg.text(data.preOrderMsg);
+			message = data.preOrderMsg;
 		}
+		$availabilityMsg.append('<p class="preorder-msg">' + message + '</p>');
 	}
 	if (data.levels.BACKORDER > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.backorder-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('backorder-msg');
-		}
 		if (data.levels.IN_STOCK === 0 && data.levels.PREORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
-			// Just in stock
-			$availabilityMsg.text(Resources.BACKORDER);
+			message = Resources.BACKORDER;
 		} else {
-			$availabilityMsg.text(data.backOrderMsg);
+			message = data.backOrderMsg;
 		}
+		$availabilityMsg.append('<p class="backorder-msg">' + message + '</p>');
 	}
 	if (data.inStockDate !== '') {
-		$availabilityMsg = $availabilityMsgContainer.find('.in-stock-date-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('in-stock-date-msg');
-		}
-		$availabilityMsg.text(String.format(Resources.IN_STOCK_DATE, data.inStockDate));
+		$availabilityMsg.append('<p class="in-stock-date-msg">' + String.format(Resources.IN_STOCK_DATE, data.inStockDate) + '</p>');
 	}
 	if (data.levels.NOT_AVAILABLE > 0) {
-		$availabilityMsg = $availabilityMsgContainer.find('.not-available-msg');
-		if ($availabilityMsg.length === 0) {
-			$availabilityMsg = $('<p/>').addClass('not-available-msg');
-		}
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.IN_STOCK === 0) {
-			$availabilityMsg.text(Resources.NOT_AVAILABLE);
+			message = Resources.NOT_AVAILABLE;
 		} else {
-			$availabilityMsg.text(Resources.REMAIN_NOT_AVAILABLE);
+			message = Resources.REMAIN_NOT_AVAILABLE;
 		}
+		$availabilityMsg.append('<p class="not-available-msg">' + message + '</p>');
 	}
-
-	$availabilityMsgContainer.append($availabilityMsg);
 };
 
 var getAvailability = function () {
@@ -2530,7 +2554,6 @@ var dialog = require('../../dialog'),
 	addToCart = require('./addToCart'),
 	availability = require('./availability'),
 	image = require('./image'),
-	powerReviews = require('./powerReviews'),
 	productNav = require('./productNav'),
 	productSet = require('./productSet'),
 	recommendations = require('./recommendations'),
@@ -2541,7 +2564,6 @@ var dialog = require('../../dialog'),
  */
 function initializeDom() {
 	$('#pdpMain .product-detail .product-tabs').tabs();
-	powerReviews();
 	productNav();
 	recommendations();
 	tooltip.init();
@@ -2566,15 +2588,12 @@ function initializeEvents() {
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '.wl-action', function (e) {
-		e.preventDefault();
-
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
-		window.location.href = url;
+		this.setAttribute(href, url);
 	});
 
 	// product options
@@ -2607,36 +2626,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./powerReviews":27,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],27:[function(require,module,exports){
-'use strict';
-
-var dialog = require('../../dialog');
-
-module.exports = function () {
-	if ($('#pwrwritediv').length > 0) {
-		var options = $.extend(true, {}, dialog.settings, {
-			autoOpen: true,
-			height: 750,
-			width: 650,
-			dialogClass: 'writereview',
-			title: 'Product Review',
-			resizable: false
-		});
-
-		dialog.create({
-			target: $('#pwrwritediv'),
-			options: options
-		});
-	}
-
-	$('#pdpMain').on('click', '.prSnippetLink', function (e) {
-		e.preventDefault();
-		$('.product-tabs').tabs('select', '#tab4');
-		$('html, body').scrollTop($('#tab4').offset().top);
-	});
-};
-
-},{"../../dialog":6}],28:[function(require,module,exports){
+},{"../../dialog":6,"../../send-to-friend":43,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./availability":24,"./image":25,"./productNav":27,"./productSet":28,"./recommendations":29,"./variant":30}],27:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2663,7 +2653,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":48}],29:[function(require,module,exports){
+},{"../../ajax":2,"../../util":48}],28:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2713,7 +2703,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],30:[function(require,module,exports){
+},{"../../ajax":2,"../../tooltip":47,"../../util":48,"./addToCart":23}],29:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2748,7 +2738,7 @@ module.exports = function () {
 		});
 };
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 var addThis = require('./addThis'),
@@ -2794,7 +2784,7 @@ var updateContent = function (href) {
 module.exports = function () {
 	var $pdpMain = $('#pdpMain');
 	// hover on swatch - should update main image with swatch image
-	$pdpMain.on('hover', '.swatchanchor', function () {
+	$pdpMain.on('mouseenter mouseleave', '.swatchanchor', function () {
 		var largeImg = $(this).data('lgimg'),
 			$imgZoom = $pdpMain.find('.main-image'),
 			$mainImage = $pdpMain.find('.primary-image');
@@ -2825,7 +2815,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],32:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addThis":22,"./addToCart":23,"./image":25}],31:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2925,7 +2915,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":39,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],33:[function(require,module,exports){
+},{"../ajax":2,"../quickview":38,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],32:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3115,7 +3105,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":48}],33:[function(require,module,exports){
 'use strict';
 exports.init = function () {
 	$('#homepage-slider')
@@ -3174,7 +3164,7 @@ exports.init = function () {
 		});
 };
 
-},{}],35:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3187,7 +3177,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":6}],36:[function(require,module,exports){
+},{"../dialog":6}],35:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3208,7 +3198,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],37:[function(require,module,exports){
+},{"../page":12,"../send-to-friend":43,"../util":48,"./product/addToCart":23}],36:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3218,7 +3208,7 @@ function initQuickViewButtons() {
 	$('.tiles-container .product-image').on('mouseenter', function () {
 		var $qvButton = $('#quickviewbutton');
 		if ($qvButton.length === 0) {
-			$qvButton = $('<a id="quickviewbutton"/>');
+			$qvButton = $('<a id="quickviewbutton" class="quickview">Quick View<i class="fa fa-arrows-alt"></i></a>');
 		}
 		var $link = $(this).find('.thumb-link');
 		$qvButton.attr({
@@ -3234,6 +3224,14 @@ function initQuickViewButtons() {
 		});
 	});
 }
+
+function gridViewToggle() {
+	$('.toggle-grid').on('click', function () {
+		$('.search-result-content').toggleClass('wide-tiles');
+		$(this).toggleClass('wide');
+	});
+}
+
 /**
  * @private
  * @function
@@ -3243,7 +3241,7 @@ function initQuickViewButtons() {
  */
 function initializeEvents() {
 	initQuickViewButtons();
-
+	gridViewToggle();
 	$('.swatch-list').on('mouseleave', function () {
 		// Restore current thumb image
 		var $tile = $(this).closest('.product-tile'),
@@ -3312,7 +3310,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":39,"imagesloaded":51}],38:[function(require,module,exports){
+},{"./quickview":38,"imagesloaded":51}],37:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3345,7 +3343,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3365,7 +3363,11 @@ var makeUrl = function (url, source, productListID) {
 };
 
 var removeParam = function (url) {
-	return url.substring(0, url.indexOf('?'));
+	if (url.indexOf('?') !== -1) {
+		return url.substring(0, url.indexOf('?'));
+	} else {
+		return url;
+	}
 };
 
 var quickview = {
@@ -3460,7 +3462,53 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],40:[function(require,module,exports){
+},{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],39:[function(require,module,exports){
+/**
+ * copied from https://github.com/darkskyapp/string-hash
+ */
+function hash(str) {
+	var hash = 5381,
+		i = str.length;
+
+	while (i) {
+		hash = (hash * 33) ^ str.charCodeAt(--i);
+	}
+	/* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+	* integers. Since we want the results to be always positive, convert the
+	* signed int to an unsigned by doing an unsigned bitshift. */
+	return hash >>> 0;
+}
+
+module.exports = {
+	init: function () {
+		$('.product-review').each(function (index, review) {
+			var pid = $(review).data('pid');
+			if (!pid) {
+				return;
+			}
+			// rating range from 2 - 5
+			var rating = hash(pid.toString()) % 30 / 10 + 2;
+			var baseRating = Math.floor(rating);
+			var starsCount = 0;
+			for (var i = 0; i < baseRating; i++) {
+				$('.rating', review).append('<i class="fa fa-star"></i>');
+				starsCount++;
+			}
+			// give half star for anything in between
+			if (rating > baseRating) {
+				$('.rating', review).append('<i class="fa fa-star-half-o"></i>');
+				starsCount++;
+			}
+			if (starsCount < 5) {
+				for (var j = 0; j < 5 - starsCount; j++) {
+					$('.rating', review).append('<i class="fa fa-star-o"></i>');
+				}
+			}
+		});
+	}
+};
+
+},{}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3878,15 +3926,18 @@ var sendToFriend = {
 			});
 	},
 	initializeDialog: function (eventDelegate) {
+		// detect withCredentials support to do CORS from HTTP to HTTPS
+		// with browsers do not support withCredentials (mainly IE 8 and 9), fall back to page reload
+		if (!'withCredentials' in new XMLHttpRequest()) {
+			return;
+		}
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
 			e.preventDefault();
-			var url = this.href;
 			var data = util.getQueryStringParams($('.pdpForm').serialize());
 			if (data.cartAction) {
 				delete data.cartAction;
 			}
-			url = util.appendParamsToUrl(this.href, data);
-			url = this.protocol + '//' + this.hostname + ((url.charAt(0) === '/') ? url : ('/' + url));
+			var url = util.appendParamsToUrl(this.href, data);
 
 			dialog.open({
 				target: '#send-to-friend-dialog',
@@ -3930,19 +3981,19 @@ var cartInventory = {
 			.text(storeStatusText);
 		$lineItem.find('.instore-delivery .delivery-option').removeAttr('disabled').trigger('click');
 	},
-	cartSelectStore: function () {
+	cartSelectStore: function (selectedStore) {
 		var self = this;
 		inventory.getStoresInventory(this.uuid).then(function (stores) {
 			inventory.selectStoreDialog({
 				stores: stores,
-				selectedStoreId: self.selectedStore,
+				selectedStoreId: selectedStore,
 				selectedStoreText: Resources.SELECTED_STORE,
 				continueCallback: function () {},
 				selectStoreCallback: self.setSelectedStore.bind(self)
 			});
 		}).done();
 	},
-	setDeliveryOption: function (value) {
+	setDeliveryOption: function (value, storeId) {
 		// set loading state
 		$('.item-delivery-options')
 			.addClass('loading')
@@ -3954,7 +4005,7 @@ var cartInventory = {
 		};
 		if (value === 'store') {
 			data.storepickup = true;
-			data.storeid = this.selectedStore;
+			data.storeid = storeId;
 		} else {
 			data.storepickup = false;
 		}
@@ -3974,19 +4025,20 @@ var cartInventory = {
 		$('.item-delivery-options .set-preferred-store').on('click', function (e) {
 			e.preventDefault();
 			self.uuid = $(this).data('uuid');
-			self.selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
+			var selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
 			if (!User.zip) {
 				inventory.zipPrompt(function () {
-					self.cartSelectStore();
+					self.cartSelectStore(selectedStore);
 				});
 			} else {
-				self.cartSelectStore();
+				self.cartSelectStore(selectedStore);
 			}
 		});
 		$('.item-delivery-options .delivery-option').on('click', function () {
 			// reset the uuid
+			var selectedStore = $(this).closest('.instore-delivery').find('.selected-store-address').data('storeId');
 			self.uuid = $(this).closest('.cart-row').data('uuid');
-			self.setDeliveryOption($(this).val());
+			self.setDeliveryOption($(this).val(), selectedStore);
 		});
 	}
 };
@@ -4070,20 +4122,18 @@ var storeinventory = {
 			options: {
 				title: Resources.STORE_NEAR_YOU,
 				width: 500,
-				buttons: [
-					{
-						text: Resources.SEARCH,
-						click: function () {
-							var zipCode = $('#user-zip').val();
-							if (validateZipCode(zipCode)) {
-								self.setUserZip(zipCode);
-								if (callback) {
-									callback(zipCode);
-								}
+				buttons: [{
+					text: Resources.SEARCH,
+					click: function () {
+						var zipCode = $('#user-zip').val();
+						if (validateZipCode(zipCode)) {
+							self.setUserZip(zipCode);
+							if (callback) {
+								callback(zipCode);
 							}
 						}
 					}
-				],
+				}],
 				open: function () {
 					$('#user-zip').on('keypress', function (e) {
 						if (e.which === 13) {
@@ -4122,24 +4172,22 @@ var storeinventory = {
 			html: storeList,
 			options: {
 				title: Resources.SELECT_STORE + ' - ' + User.zip,
-				buttons: [
-					{
+				buttons: [{
 						text: Resources.CHANGE_LOCATION,
-						click: function () {
-							self.setUserZip(null);
-							// trigger the event to start the process all over again
-							$('.set-preferred-store').trigger('click');
-						}.bind(this)
-					}, {
-						text: Resources.CONTINUE,
-						click: function () {
-							if (options.continueCallback) {
-								options.continueCallback(stores);
-							}
-							dialog.close();
+					click: function () {
+						self.setUserZip(null);
+						// trigger the event to start the process all over again
+						$('.set-preferred-store').trigger('click');
+					}.bind(this)
+				}, {
+					text: Resources.CONTINUE,
+					click: function () {
+						if (options.continueCallback) {
+							options.continueCallback(stores);
 						}
+						dialog.close();
 					}
-				],
+				}],
 				open: function () {
 					$('.select-store-button').on('click', function (e) {
 						e.preventDefault();
@@ -4297,6 +4345,8 @@ exports.init = function () {
 
 'use strict';
 
+var _ = require('lodash');
+
 var util = {
 	/**
 	 * @function
@@ -4312,6 +4362,19 @@ var util = {
 		}
 		var separator = url.indexOf('?') !== -1 ? '&' : '?';
 		return url + separator + name + '=' + encodeURIComponent(value);
+	},
+	/**
+	 * @function
+	 * @description appends the parameters to the given url and returns the changed url
+	 * @param {String} url the url to which the parameters will be added
+	 * @param {Object} params
+	 */
+	appendParamsToUrl: function (url, params) {
+		var _url = url;
+		_.each(params, function (value, name) {
+			_url = this.appendParamToURL(_url, name, value);
+		}.bind(this));
+		return _url;
 	},
 	/**
 	 * @function
@@ -4352,26 +4415,6 @@ var util = {
 				(left + width) > window.document.documentElement.scrollLeft
 			);
 		}
-	},
-	/**
-	 * @function
-	 * @description appends the parameters to the given url and returns the changed url
-	 * @param {String} url the url to which the parameters will be added
-	 * @param {String} params a JSON string with the parameters
-	 */
-	appendParamsToUrl: function (url, params) {
-		var uri = this.getUri(url),
-			includeHash = arguments.length < 3 ? false : arguments[2];
-
-		var qsParams = $.extend(uri.queryParams, params);
-		var result = uri.path + '?' + $.param(qsParams);
-		if (includeHash) {
-			result += uri.hash;
-		}
-		if (result.indexOf('http') < 0 && result.charAt(0) !== '/') {
-			result = '/' + result;
-		}
-		return result;
 	},
 
 	/**
@@ -4448,44 +4491,6 @@ var util = {
 			}
 		);
 		return params;
-	},
-	/**
-	 * @function
-	 * @description Returns an URI-Object from a given element with the following properties:
-	 * - protocol
-	 * - host
-	 * - hostname
-	 * - port
-	 * - path
-	 * - query
-	 * - queryParams
-	 * - hash
-	 * - url
-	 * - urlWithQuery
-	 * @param {Object} o The HTML-Element
-	 */
-	getUri: function (o) {
-		var a;
-		if (o.tagName && $(o).attr('href')) {
-			a = o;
-		} else if (typeof o === 'string') {
-			a = document.createElement('a');
-			a.href = o;
-		} else {
-			return null;
-		}
-		return {
-			protocol: a.protocol, //http:
-			host: a.host, //www.myexample.com
-			hostname: a.hostname, //www.myexample.com'
-			port: a.port, //:80
-			path: a.pathname, // /sub1/sub2
-			query: a.search, // ?param1=val1&param2=val2
-			queryParams: a.search.length > 1 ? this.getQueryStringParams(a.search.substr(1)) : {},
-			hash: a.hash, // #OU812,5150
-			url: a.protocol + '//' + a.host + a.pathname,
-			urlWithQuery: a.protocol + '//' + a.host + a.port + a.pathname + a.search
-		};
 	},
 
 	fillAddressFields: function (address, $form) {
@@ -4604,7 +4609,7 @@ var util = {
 
 module.exports = util;
 
-},{}],49:[function(require,module,exports){
+},{"lodash":54}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -5153,7 +5158,7 @@ function makeArray( obj ) {
 
 },{"eventie":52,"wolfy87-eventemitter":53}],52:[function(require,module,exports){
 /*!
- * eventie v1.0.5
+ * eventie v1.0.6
  * event binding helper
  *   eventie.bind( elem, 'click', myFn )
  *   eventie.unbind( elem, 'click', myFn )
@@ -5233,17 +5238,17 @@ if ( typeof define === 'function' && define.amd ) {
   window.eventie = eventie;
 }
 
-})( this );
+})( window );
 
 },{}],53:[function(require,module,exports){
 /*!
- * EventEmitter v4.2.9 - git.io/ee
- * Oliver Caldwell
- * MIT license
+ * EventEmitter v4.2.11 - git.io/ee
+ * Unlicense - http://unlicense.org/
+ * Oliver Caldwell - http://oli.me.uk/
  * @preserve
  */
 
-(function () {
+;(function () {
     'use strict';
 
     /**
@@ -12762,7 +12767,10 @@ Promise.denodeify = function (fn, argumentCount) {
         if (err) reject(err)
         else resolve(res)
       })
-      fn.apply(self, args)
+      var res = fn.apply(self, args)
+      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+        resolve(res)
+      }
     })
   }
 }

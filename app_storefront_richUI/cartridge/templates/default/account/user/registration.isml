@@ -48,8 +48,8 @@
 				<isif condition="${!session.customer.externallyAuthenticated}">
 					<isinputfield formfield="${session.forms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${session.forms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${session.forms.profile.login.password}" type="password"/>
-					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password"/>
+					<isinputfield formfield="${session.forms.profile.login.password}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
 				<iselse/>
 					<isinputfield formfield="${session.forms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>

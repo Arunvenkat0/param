@@ -1,5 +1,9 @@
-## Official tags
-Please ignore tags that are in the format `sitegen-14.x.x.x`. Use tags in format `v14.x.x` instead.
+# Welcome to the SiteGenesis repository
+
+# Purpose
+This is the primary repository for Demandware's SiteGenesis development team.  The 'master' branch contains the HEAD code of our development activities.  The HEAD branch has not been released and should be treated "as is".  For 'released' versions of SiteGenesis, either look at our TAGS or consult the Community Branch at [https://bitbucket.org/demandware/sitegenesis-community](https://bitbucket.org/demandware/sitegenesis-community).
+
+Only authorized members of the SiteGenesis developement team can modify the 'master' branch, however, we encourage all other Demandware employees and friends to fork this repository, and submit pull requests according to Contribution Guidelines outlined in [How to contribute to SiteGenesis (Internal Guide)](https://intranet.demandware.com/confluence/pages/viewpage.action?pageId=166199408)
 
 # Demo Storefront Data
 
@@ -31,38 +35,76 @@ Upload the resulting file to your site and import it.
 
 # Test Automation
 
-## Overview
+Please read the README.md file in the test directory, but essentially, we have a series of application and unit tests that are runnable from the commandline using either 'grunt' or 'gulp'.  The README.md in the test directory will guide in installing and running the tools that you need for executing these tests.
 
-Within the folder `test/storefront_automation` you can find a complete testsuite of automated storefront tests
-created with and for the [XLT](http://www.xceptance-loadtest.com/). Watch this [screencast](http://youtu.be/Ykx4DcKo-mc) for a quick start.
+Please note: the tests that we are offering is not a complete, fixed set of tests.  This is a living directory which we will continue to add to as our team is able.  We also encourage any reader of this document to use these tests as a model and to enhance this capability by adding their own tests.
 
-The documentation of the test suite can be found in `test/storefront_automation/doc/testcases_manual.html`. It also explains how to create a new version of the documentation based on your latest changes.
+# How to Use
+## Build tools
+Starting with 15.1, SiteGenesis supports both [gulp](http://gulpjs.com) and [Grunt](http://gruntjs.com) as build tools.
 
-## How to run with ANT?
+### Getting started
+- Pull down the latest copy of SiteGenesis. If you're reading this doc, it is likely that you already have a version of SG with the build tool config.
+- `cd` into the `sitegenesis` directory.
+- Install node modules:
+```sh
+$ npm install
+```
+This assumes that you already have `npm` installed on your command line. If not, please [install node](http://nodejs.org/download/) first.
+If you encounter an error, please try and address that first, either by Googling or [contacting us](mailto:tnguyen@demandware.com).
+- Install either `gulp` or `grunt` (see below).
 
-You can run the entire test suite with the Script Developer in Firefox and watch the tests live. See the screencast for more info.
+#### gulp
+Install gulp globally
+```sh
+$ npm install -g gulp
+```
 
-The test suite also gained the ability to be executed from Eclipse or ANT directly by utilizing WebDrivers. Currently ChromeDriver and FirefoxDriver work fine. IEDrivers has not been tried yet. PhantomJS is similar to Chrome and therefore should work as well. You can find some details about getting WebDriver to work with XLT [here](http://blog.xceptance.com/2013/04/23/webdrivers-in-xlt-how-to-run-test-cases-in-multiple-browser/).
+#### grunt
+Install the grunt command line tools
+```sh
+$ npm install -g grunt-cli
+```
 
-The following steps explain quickly, how you can run the tests via ANT and use this either for build machines or a more automate local execution on your machine. This should work on any OS. Please make sure that you adjust the path names according to your OS style. The following examples are for OS X and Linux.
+Now that you have gulp (or grunt) and its dependencies installed, you can start using it in your workflow.
 
-* Download [XLT](http://www.xceptance-loadtest.com/products/xlt/download.html) and unzip it.
-* You need Java 7 and ANT installed on your machine.
-* You need Chrome and Firefox as well.
-* When you want to run Chrome tests, you have to download the [ChromeDriver binary](http://code.google.com/p/chromedriver/downloads/list).
-* Adjust the path to XLT in the `<testsuite>/build.properties` file: `xlt.home.dir = /home/user/xlt`
-* Check `<testsuite>/config/project.properties` and pick the driver you want and adjust the other related properties too:
- * Pick the driver to use: `webdriver = chrome`
- * Adjust the location of the Chrome binary: `webdriver.chrome.binary.location = /home/location/chromdriver`
- * Set the screen size if needed: `webdriver.screensize.[width|height] = 1200` You can also set the screensize for the responsive tests.
-* Open a shell and go to `<testsuite>` and run `ant compile` just to make sure the basics are set right.
-* Run `ant test.java` and enjoy the magic happening.
 
-At the end of the test, a JUnit report will be compiled and can be found in `<testsuite>/results/`.
+### SCSS
+Before authoring SCSS, make sure to check out the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_core/cartridge/scss/README.md?at=master) in `app_storefront_core/cartridge/scss` directory.
 
-## Tool
+#### `gulp css`
+This task does 2 things:
+- Compile `.scss` code into `.css`
+- [Auto-prefix](https://github.com/ai/autoprefixer) for vendor prefixes
 
-For more information about XLT, please visit http://www.xceptance-loadtest.com/. You can
-download the tool for free and browse the [documentation](http://www.xceptance-loadtest.com/releases/xlt/latest/user-manual.html "XLT Documentation") online.
+This task is also run automatically on any `.scss` file change by using the `gulp watch` task.
 
-Updated: 6/13/14
+The equivalent task for grunt, `grunt css`, is also available.
+
+### JS
+Before authoring JS, make sure to checkout the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_richUI/cartridge/js/README.md?at=master) in `app_storefront_richUI/cartridge/js` directory.
+
+The new modular JavaScript architecture relies on [browserify](https://github.com/substack/node-browserify) to compile JS code written in CommonJS standard.
+
+#### `gulp js`
+
+Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront_richUI/cartridge/js/app.js`, and the bundled js is output to `app_storefront_richUI/cartridge/static/default/js/app.js`.
+
+This task is also run automatically on any `.js` file change by using the `gulp watch` task.
+
+The equivalent task for grunt, `grunt js`, is also available.
+
+#### `gulp jscs` and `gulp jshint`
+Run code format and style validators. New code must not have any errors reported before being accepted.
+
+The equivalent tasks for grunt, `grunt jscs` and `grunt jshint`, are also available.
+
+### Watching
+To make the development process easier, running `gulp` on the command line will run the default task and automatically watch any changes in both `scss` and `js` code to run the right compilers.
+
+For JavaScript, when watching is happening, [watchify](https://github.com/substack/watchify) is used instead of browserify for faster bundling by taking advantage of caching.
+
+The equivalent default task for grunt, `grunt`, is also available.
+
+
+Updated: 2/13/15

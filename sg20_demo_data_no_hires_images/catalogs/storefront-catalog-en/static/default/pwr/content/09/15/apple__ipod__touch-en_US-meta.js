@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/09/15/apple__ipod__touch-en_US-meta.js'] = {metadata:[{rid:7435515,date:20090430,rating:5,helpfulScore:0,oid:7791908,batch:1,images:1}]};

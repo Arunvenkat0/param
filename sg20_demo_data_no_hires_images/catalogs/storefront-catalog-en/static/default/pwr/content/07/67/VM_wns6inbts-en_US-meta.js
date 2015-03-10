@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/07/67/VM_wns6inbts-en_US-meta.js'] = {metadata:[{rid:6992072,date:20090409,rating:4,helpfulScore:0,expertLevel:0,batch:1,images:1},{rid:6981857,date:20090408,rating:2,helpfulScore:0,expertLevel:0,batch:1,images:0},{rid:6970820,date:20090407,rating:2,helpfulScore:0,expertLevel:0,batch:1,images:0}]};

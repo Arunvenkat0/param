@@ -18,7 +18,7 @@ function initializeEvents() {
 			source: 'cart'
 		});
 	})
-	.on('click', '.bonus-item-actions a', function (e) {
+	.on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
 		e.preventDefault();
 		bonusProductsView.show(this.href);
 	});

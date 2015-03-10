@@ -6,8 +6,8 @@
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('disableResponsiveDesign')}">
 
 	<!--  responsive NOT enabled -->
-	
-<iselse/>	
+
+<iselse/>
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
 	<isif condition="${empty(session.custom.device) 
@@ -15,7 +15,6 @@
 		|| session.custom.device == 'tablet' 
 		|| session.custom.device == 'desktop'}">
 		<isset name="siteUrl" value="${URLUtils.url('Home-FullSite')}" scope="page"/>
-		<script src="${URLUtils.staticURL('/js/responsive.js')}"></script>
 
 		<script type="text/javascript">
 			if (window.jQuery) {
@@ -38,7 +37,7 @@
 				});
 			}
 		</script>
-	
+
 	<iselse/>
 		<isset name="siteUrl" value="${URLUtils.url('Home-MobileSite')}" scope="page"/>
 		<script type="text/javascript">
@@ -64,4 +63,4 @@
 
 	</isif>
 
-</isif>	
+</isif>

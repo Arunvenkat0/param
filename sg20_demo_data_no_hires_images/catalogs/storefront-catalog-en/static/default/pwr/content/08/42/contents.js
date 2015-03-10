@@ -1,1 +1,0 @@
-POWERREVIEWS.common.gResult['content/08/42/contents.js'] = {"locales":{"en_US":{"p27402":{"reviews":{"review_count":1,"avg":"1"}}}}};

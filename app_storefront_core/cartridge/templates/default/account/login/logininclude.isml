@@ -53,8 +53,11 @@
 			
 		</form>
 		</isif>
-		<isinclude template="account/login/oauthlogininclude"/>
-	
+		
+		<div class="login-oauth">
+			<isinclude template="account/login/oauthlogininclude"/>
+		</div>
+		
 	</div>
 	
 </div>

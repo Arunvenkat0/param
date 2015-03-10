@@ -6,9 +6,9 @@
 		${Resource.msg('compareshow.back', 'product', null)}
 	</a>
 
-	<a class="compare-print print-page button">
+	<button class="compare-print print-page">
 		${Resource.msg('global.print', 'locale', null)}
-	</a>
+	</button>
 
 	<h1>${Resource.msg('compareshow.header', 'product', null)}</h1>
 	<isif condition="${session.forms.compare.categories.options.optionsCount > 1}">

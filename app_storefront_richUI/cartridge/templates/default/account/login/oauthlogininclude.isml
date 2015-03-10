@@ -1,6 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${session.customer.anonymous || session.customer.externallyAuthenticated}">
 	<isif condition="${session.customer.anonymous}">
+		<p>${Resource.msg('global.or','locale',null)}</p>
 		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
 	<iselse/>
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
@@ -79,6 +80,5 @@
 				value="${session.forms.oauthlogin.secureKeyValue}"/>
 			<input type="hidden" name="OAuthProvider" id="OAuthProvider" value=""/>
 		</fieldset>
-		<p>${Resource.msgf('logininclude.oauthdetails','account',"")}</p>
 	</form>		
 </isif>
