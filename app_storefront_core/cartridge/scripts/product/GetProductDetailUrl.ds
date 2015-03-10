@@ -31,7 +31,7 @@ function GetProductOptions(ProductOptionModel) {
  **/
 function GetVariationAttributes(pdict) {
 	var variationAttributes = {},
-		queryString = pdict.CurrentRequest.getHttpHeaders().get('x-is-query_string'),
+		queryString = request.getHttpHeaders().get('x-is-query_string'),
 		queryStringArray = [],
 		colorValue;
 
@@ -122,9 +122,9 @@ function GetProductDetailUrl(pdict) {
 	var urlArgs = ['Product-Detail'];
 	var urlParams = {
 		pid: pdict.Product.ID,
-		source: pdict.CurrentHttpParameterMap.source.stringValue,
-		uuid: pdict.CurrentHttpParameterMap.uuid.stringValue,
-		Quantity: pdict.CurrentHttpParameterMap.Quantity.stringValue
+		source: request.httpParameterMap.source.stringValue,
+		uuid: request.httpParameterMap.uuid.stringValue,
+		Quantity: request.httpParameterMap.Quantity.stringValue
 	};
 
 	var variationAttributes = GetVariationAttributes(pdict);
