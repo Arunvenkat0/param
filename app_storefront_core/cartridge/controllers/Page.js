@@ -28,6 +28,7 @@ function show() {
     }
     else {
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
+        contentSearchModel.setContentID(null);
         contentSearchModel.search();
 
         pageMeta.update(content);
