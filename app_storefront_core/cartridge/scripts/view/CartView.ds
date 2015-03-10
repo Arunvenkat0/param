@@ -1,0 +1,64 @@
+'use strict';
+
+/** @module view/CartView */
+var View = require('./View');
+
+var Cart = require('~/cartridge/scripts/object/Cart');
+var FormGroup = require('dw/web/FormGroup');
+
+
+/**
+ * View for store locator functionality.
+ */
+var CartView = View.extend({
+
+    /**
+     * TODO
+     */
+    prepareView : function() {
+
+        var cart = this.Basket;
+        if (cart) {
+
+            // refresh shipments
+            session.forms.cart.shipments.copyFrom(cart.shipments);
+            // refresh coupons
+            session.forms.cart.coupons.copyFrom(cart.couponLineItems);
+
+            Cart.get(cart).calculate();
+
+            var ScriptResult = new dw.system.Pipelet('Script', {
+                ScriptFile    : 'cart/ValidateCartForCheckout.ds',
+                Transactional : false
+            }).execute({
+                    Basket      : cart,
+                    ValidateTax : false
+                });
+
+            this.EnableCheckout = ScriptResult.EnableCheckout;
+            this.WishList = customer.authenticated ? require('~/cartridge/controllers/lib/wishlist').fetchWishList() : null;
+        }
+
+        return;
+    },
+
+    /**
+     * @constructor module:view/CartView~CartView
+     */
+    init : function (params) {
+        this._super(params);
+
+        this.Basket = params.cart.object;
+
+        return this;
+    },
+
+    render : function (params) {
+
+        this.prepareView();
+        return this._super(params);
+    }
+
+});
+
+module.exports = CartView;

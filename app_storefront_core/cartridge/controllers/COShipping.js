@@ -1,5 +1,8 @@
 var g = require('./dw/guard');
 
+/* API Includes */
+var Cart = require('~/cartridge/scripts/object/Cart');
+
 /**
  * Single Shipping Scenario
  * -----------------------------
@@ -10,64 +13,52 @@ var g = require('./dw/guard');
 /**
  * Starting point for single shipping scenario
  */
-function Start()
-{
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
-        CartController.Show();
+function Start() {
+    var cart = Cart.get();
+
+    if (!cart.object) {
+        require('./Cart').Show();
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
-    
-    
+
     /*
      * Redirect to multi shipping scenario if more than one physical shipment is
      * contained in the basket.
      */
     var requiresMultiShippingResult = requiresMultiShipping({
-        Basket: Basket
+        Basket : cart.object
     });
-    if (requiresMultiShippingResult.yes)
-    {
-        var COShippingMultipleController = require('./COShippingMultiple');
-        COShippingMultipleController.Start();
+
+    if (requiresMultiShippingResult.yes) {
+        require('./COShippingMultiple').Start();
         return;
     }
 
-    
     initForms({
-        Basket: Basket
+        Basket : cart.object
     });
 
-    
     /*
      * Clean shipments.
      */
     var PrepareShipmentsResult = PrepareShipments({
-        Basket: Basket
+        Basket : cart.object
     });
-    var HomeDeliveries = PrepareShipmentsResult.HomeDeliveries;
-    
-    
-    var CalculateResult = CartController.Calculate();
 
-    
+    cart.calculate();
+
     /*
      * Go to billing step, if we have no product line items, but only gift
      * certificates in the basket. Shipping step is not required.
      */
-    if (Basket.productLineItems.size() == 0)
-    {
-        var COBillingController = require('./COBilling');
-        COBillingController.Start();
+    if (cart.getProductLineItems().size() == 0) {
+        require('./COBilling').Start();
         return;
     }
 
     showSingleShipping({
-        Basket: Basket,
-        HomeDeliveries: HomeDeliveries
+        Basket         : cart.object,
+        HomeDeliveries : PrepareShipmentsResult.HomeDeliveries
     });
 }
 

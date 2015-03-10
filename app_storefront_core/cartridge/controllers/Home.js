@@ -6,7 +6,7 @@
  */
 
 var guard = require('./dw/guard');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders the home page.

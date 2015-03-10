@@ -9,7 +9,7 @@ var guard = require('./dw/guard');
 var storeLocatorAsset = require('~/cartridge/scripts/object/Content').get('store-locator');
 var storeLocatorForm = require('~/cartridge/scripts/object/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Provides a form to locate stores by geographical information.

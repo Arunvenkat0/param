@@ -8,7 +8,7 @@
 var guard = require('./dw/guard');
 var contents = require('~/cartridge/scripts/object/Content');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a content page based on the rendering template configured for the page or a default rendering template.

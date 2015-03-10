@@ -11,7 +11,7 @@ var Search = require('~/cartridge/scripts/object/Search');
 /* Script Modules */
 var guard = require('./dw/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a full product detail page. If the http parameter "format" is set to
