@@ -75,7 +75,7 @@ function addProduct() {
     }
 
     if (params.format.stringValue === 'ajax') {
-        view.get('Cart', {
+        view.get('view/CartView', {
             cart : cart
         }).render('checkout/cart/minicart');
     }
@@ -93,7 +93,7 @@ function Show() {
     session.forms.cart.shipments.invalidateFormElement();
     session.forms.login.invalidateFormElement();
 
-    view.get('Cart', {cart : Cart.get(), RegistrationStatus : false}).render('checkout/cart/cart');
+    view.get('view/CartView', {cart : Cart.get(), RegistrationStatus : false}).render('checkout/cart/cart');
 
 }
 
@@ -212,7 +212,7 @@ function submitForm() {
 
     if (formResult) {
         pageMeta.update(cartAsset);
-        view.get('Cart', formResult).render('checkout/cart/cart');
+        view.get('view/CartView', formResult).render('checkout/cart/cart');
     }
 
 }
@@ -375,7 +375,7 @@ function addToWishlist() {
 
     var AddProductResult = require('./Wishlist').AddProduct();
 
-    view.get('Cart', {
+    view.get('view/CartView', {
         cart                   : Cart.get(),
         ProductAddedToWishlist : productID
     }).render('checkout/cart/cart');
