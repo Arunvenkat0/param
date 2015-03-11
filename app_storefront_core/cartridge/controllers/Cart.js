@@ -43,27 +43,27 @@ function addProduct() {
 
         var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
 
-        if (!lineItem) {
+	    if (lineItem) {
 
-            view.get('Cart', {
-                Basket : cart
-            }).render('checkout/cart/cart');
+		    editLineItem(lineItem);
 
-            return;
-        }
+		    if (params.format.stringValue.toLowerCase() === 'ajax') {
+			    response.renderTemplate('checkout/cart/refreshcart');
+			    return;
+		    }
+		    else {
+			    response.redirect(dw.web.URLUtils.url('Cart-Show'));
+			    return;
+		    }
+	    }
 	    else {
 
-	        editLineItem(lineItem);
+		    view.get('Cart', {
+			    Basket : cart
+		    }).render('checkout/cart/cart');
 
-	        if (params.format.stringValue.toLowerCase() === 'ajax') {
-		        response.renderTemplate('checkout/cart/refreshcart');
-		        return;
-	        }
-	        else {
-		        response.redirect(dw.web.URLUtils.url('Cart-Show'));
-		        return;
-	        }
-        }
+		    return;
+	    }
     }
     // add product list item
     else if (params.plid.stringValue) {
@@ -109,8 +109,7 @@ function addProduct() {
 	    var newBonusDiscountLineItem = null;
 	    var newBonusDiscountLineItems  = cart.getBonusDiscountLineItems().iterator();
 
-	    while (newBonusDiscountLineItems.hasNext())
-	    {
+	    while (newBonusDiscountLineItems.hasNext()) {
 		    var newItem  = newBonusDiscountLineItems.next();
 		    if (!previousBonusDiscountLineItems.contains(newItem))
 		    {
@@ -144,6 +143,9 @@ function Show() {
 
 }
 
+/**
+ * 
+ */
 function submitForm() {
     // we have no existing state, so resolve the basket again
     var cart = Cart.get();
@@ -247,6 +249,7 @@ function submitForm() {
         'updateCart' : function (formgroup) {
 
 	        Transaction.begin();
+
             // remove zero quantity line items
             for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
                 var shipmentItem = session.forms.cart.shipments[i];
@@ -280,7 +283,7 @@ function submitForm() {
 
 
 /**
- * Redirects the user to the last visited catalog URL as implemented in the custom script.
+ * Redirects the user to the last visited catalog URL.
  */
 function continueShopping() {
 
@@ -365,33 +368,6 @@ function miniCart() {
 	view.get({Basket : Cart.get().object}).render('checkout/cart/minicart');
 
 }
-
-
-/**
- * Adds multiple products to the basket. Uses multiple product IDs separated by comma.
- */
-function addProductSetProducts() {
-    var params = request.httpParameterMap;
-	var cart = Cart.get();
-
-    var childPids = params.childPids.stringValue.split(",");
-    var childQtys = params.childQtys.stringValue.split(",");
-    var counter = 0;
-
-	for(var i = 0; i < childPids.length; i++) {
-		var childProduct = Product.get(childPids[i]).object;
-
-        if (childProduct.productSet) {
-            counter++;
-            continue;
-        }
-
-		var childProductOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap).ProductOptionModel;
-		cart.addProductItem(childProduct, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
-        counter++;
-    }
-}
-
 
 /**
  * Adds the product with the given ID to the wish list.

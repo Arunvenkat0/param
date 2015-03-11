@@ -90,8 +90,7 @@ function SingleShipping()
 	            return;
 	        }
 	        var Basket = GetExistingBasketResult.Basket;
-	        
-	        
+
 	        var handleShippingSettingsResult = handleShippingSettings({
 	            Basket: Basket
 	        });

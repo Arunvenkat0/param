@@ -146,6 +146,11 @@ var Cart = AbstractHelper.extend(
             return;
         },
 
+	    /**
+	     *
+	     * @param couponCode
+	     * @returns {{CouponStatus: (Status|*|deleteAddress.Status|pdict.Status)}}
+	     */
         addCoupon : function (couponCode) {
             if (couponCode) {
 
@@ -198,8 +203,12 @@ var Cart = AbstractHelper.extend(
             return;
         },
 
+	    /**
+	     *
+	     * @param giftCertificateLineItem
+	     */
         removeGiftCertificateLineItem : function (giftCertificateLineItem) {
-	        this.removeCouponLineItem(couponLineItem);
+
 	        // TODO - add check whether the given lineitem actually belongs to this cart object
             new dw.system.Pipelet('RemoveGiftCertificateLineItem').execute({
                 GiftCertificateLineItem : giftCertificateLineItem
@@ -226,13 +235,10 @@ var Cart = AbstractHelper.extend(
 	    },
 
 	    /**
-	     * This script checks for product line items that have a quantity of 0 or empty and will
-	     * remove them from the cart.
+	     *
+	     * @param lineItemUUID
+	     * @returns {*}
 	     */
-	    removeZeroQuantityLineItems : function () {
-
-	    },
-
 	    getProductLineItemByUUID : function (lineItemUUID) {
 		    var plis = this.getProductLineItems();
             var lineItem = null;
@@ -248,6 +254,12 @@ var Cart = AbstractHelper.extend(
             return lineItem;
         },
 
+	    /**
+	     *
+	     * @param bundleLineItem
+	     * @param pid
+	     * @returns {*}
+	     */
 	    getBundledProductLineItemByPID : function (bundleLineItem, pid) {
 		    // TODO - add check whether the given lineitem actually belongs to this cart object
 		    var plis = bundleLineItem.getBundledProductLineItems();
@@ -264,6 +276,11 @@ var Cart = AbstractHelper.extend(
 		    return lineItem;
 	    },
 
+	    /**
+	     *
+	     * @param lineItemUUID
+	     * @returns {*}
+	     */
 	    getBonusDiscountLineItemByUUID : function (lineItemUUID) {
 		    var plis = this.getBonusDiscountLineItems();
 		    var lineItem = null;
