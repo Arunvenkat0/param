@@ -7,6 +7,7 @@
  */
 
 /* API Includes */
+var ArrayList = require('dw/util/ArrayList');
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
@@ -37,6 +38,7 @@ function addProduct() {
 
     var cart = Cart.get(getBasket());
 
+	// update product lineitem
     if (params.uuid.stringValue) {
 
         var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
@@ -54,7 +56,7 @@ function addProduct() {
 	        editLineItem(lineItem);
 
 	        if (params.format.stringValue.toLowerCase() === 'ajax') {
-		        response.renderTemplate('checkout/cart/refreshcart', {});
+		        response.renderTemplate('checkout/cart/refreshcart');
 		        return;
 	        }
 	        else {
@@ -63,21 +65,65 @@ function addProduct() {
 	        }
         }
     }
+    // add product list item
     else if (params.plid.stringValue) {
 
         var productList = ProductListMgr.getProductList(params.plid.stringValue);
         cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
 
     }
+    // add product
     else {
 
-        cart.addProductItem(Product.get(params.pid.stringValue).object, params.Quantity.doubleValue, params.cgid.value);
+	    var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
 
+	    var product = Product.get(params.pid.stringValue).object;
+
+	    if (product.productSet)
+	    {
+		    var childPids = params.childPids.stringValue.split(",");
+		    var childQtys = params.childQtys.stringValue.split(",");
+		    var counter = 0;
+
+		    for(var i = 0; i < childPids.length; i++) {
+			    var childProduct = Product.get(childPids[i]).object;
+
+			    if (childProduct.productSet) {
+				    counter++;
+				    continue;
+			    }
+
+			    var childProductOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap).ProductOptionModel;
+			    cart.addProductItem(childProduct, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
+			    counter++;
+		    }
+	    }
+	    else {
+	        var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+	        cart.addProductItem(product, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
+	    }
+
+	    /**
+	     * When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
+	     */
+	    var newBonusDiscountLineItem = null;
+	    var newBonusDiscountLineItems  = cart.getBonusDiscountLineItems().iterator();
+
+	    while (newBonusDiscountLineItems.hasNext())
+	    {
+		    var newItem  = newBonusDiscountLineItems.next();
+		    if (!previousBonusDiscountLineItems.contains(newItem))
+		    {
+			    newBonusDiscountLineItem = newItem;
+			    break;
+		    }
+	    }
     }
 
     if (params.format.stringValue === 'ajax') {
         view.get('view/CartView', {
-            cart : cart
+            cart : cart,
+	        BonusDiscountLineItem : newBonusDiscountLineItem
         }).render('checkout/cart/minicart');
     }
     else {
@@ -122,26 +168,18 @@ function submitForm() {
             }
         },
         'calculateTotal'        : function (formgroup) {
-            return {cart : cart};
+            // nothing to do here as re-calculation happens during view anyways
+	        return {cart : cart};
         },
         'checkoutCart'          : function (formgroup) {
-	        var ScriptResult = new dw.system.Pipelet('Script', {
-		        ScriptFile    : 'cart/ValidateCartForCheckout.ds',
-		        Transactional : false
-	        }).execute({
-			        Basket      : cart.object,
-			        ValidateTax : false
-		        });
+	        var validationResult = cart.validateForCheckout();
 
-	        var BasketStatus = ScriptResult.BasketStatus;
-	        var EnableCheckout = ScriptResult.EnableCheckout;
-
-	        if (ScriptResult.result !== PIPELET_ERROR) {
+	        if (validationResult.EnableCheckout) {
 		        require('./COCustomer').Start();
 		        return null;
 	        }
 	        else {
-		        return {cart : cart, BasketStatus : ScriptResult.BasketStatus, EnableCheckout : ScriptResult.EnableCheckout};
+		        return {cart : cart, BasketStatus : validationResult.BasketStatus, EnableCheckout : validationResult.EnableCheckout};
 	        }
         },
         'continueShopping'      : function (formgroup) {
@@ -149,16 +187,24 @@ function submitForm() {
             return null;
         },
         'deleteCoupon'          : function (formgroup) {
+	        Transaction.begin();
             cart.removeCouponLineItem(formgroup.getTriggeredAction().object);
+	        Transaction.commit();
             return {cart : cart};
         },
         'deleteGiftCertificate' : function (formgroup) {
-            cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
-            return {cart : cart};
+	        Transaction.begin();
+	        cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
+	        Transaction.commit();
+
+	        return {cart : cart};
         },
         'deleteProduct'         : function (formgroup) {
+	        Transaction.begin();
             cart.removeProductLineItem(formgroup.getTriggeredAction().object);
-            return {cart : cart};
+	        Transaction.commit();
+
+	        return {cart : cart};
         },
         'editLineItem'          : function (formgroup) {
             var editLineItemResult = editLineItem(formgroup.getTriggeredAction().object);
@@ -200,11 +246,12 @@ function submitForm() {
         },
         'updateCart' : function (formgroup) {
 
+	        Transaction.begin();
             // remove zero quantity line items
-            for (var i = 0; i < session.forms.cart.shipments.length; i++) {
-                var shipmentItem = session.forms.cart.shipments;
+            for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
+                var shipmentItem = session.forms.cart.shipments[i];
 
-                for (var j = 0; j < shipmentItem.items; j++) {
+                for (var j = 0; j < shipmentItem.items.childCount; j++) {
                     var item = shipmentItem.items[j];
 
                     if (item.quantity.value === 0) {
@@ -214,7 +261,8 @@ function submitForm() {
             }
 
             session.forms.cart.shipments.accept();
-            checkInStoreProducts(cart.object);
+	        cart.checkInStoreProducts();
+	        Transaction.commit();
 
             return {cart : cart};
         },
@@ -262,78 +310,57 @@ function continueShopping() {
  * Updates an existing product line item with a new product, new options, and/or a new quantity. params: just like
  * miniaddproduct i.e. pid, options, quantiy.
  */
-function editLineItem(CurrentLineItem) {
+function editLineItem(lineItem) {
 
-    if (!product) {
-        product = Product.get(request.httpParameterMap.pid.stringValue);
-    }
-
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
 	var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
 
     new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-        ProductLineItem    : CurrentLineItem,
+        ProductLineItem    : lineItem,
         NewProduct         : product,
         Quantity           : request.httpParameterMap.Quantity.doubleValue,
         ProductOptionModel : productOptionSelections.ProductOptionModel
     });
 
     if (product.bundle) {
-        replaceBundleLineItemProducts(CurrentLineItem);
-        return;
+
+	    /**
+	     * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
+	     * variants then we have to manually replace the master products with the selected variants which gets passed in the
+	     * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+	     * pids of the bundled products which are variations
+	     */
+	    if (params.childPids.stringValue) {
+		    var childPids = params.childPids.stringValue.split(",");
+
+		    for(var i = 0; i < childPids.length; i++) {
+			    var childProduct = Product.get(childPids[i]).object;
+
+			    if (childProduct) {
+				    // why is this needed ?
+				    require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, params);
+
+				    var foundLineItem = null;
+				    foundLineItem = cart.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+
+				    if (foundLineItem) {
+					    foundLineItem.replaceProduct(childProduct);
+				    }
+			    }
+		    }
+	    }
     }
+
+	return;
 
 }
-
-/**
- * Determines some needed objects based on the current form values.
- */
-
-/**
- * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
- * variants then we have to manually replace the master products with the selected variants which gets passed in the
- * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
- * pids of the bundled products which are variations
- */
-function replaceBundleLineItemProducts(bundleLineItem) {
-    var params = request.httpParameterMap;
-	var cart = Cart.get();
-
-    if (!params.childPids.stringValue) {
-        return;
-    }
-	else {
-	    var childPids = params.childPids.stringValue.split(",");
-
-	    for(var i = 0; i < childPids.length; i++) {
-            var childProduct = Product.get(childPids[i]).object;
-
-            if (childProduct) {
-                // why is this needed ?
-                require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap);
-
-                var foundLineItem = null;
-	            foundLineItem = cart.getBundledProductLineItemByPID(bundleLineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
-
-                if (foundLineItem) {
-                    new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-                        ProductLineItem : foundLineItem,
-                        NewProduct      : childProduct
-                    });
-                }
-            }
-        }
-    }
-}
-
 
 /**
  * The cart page provides various actions to be performed, e.g. line item editing, coupon redemption etc.
  */
 function miniCart() {
 
-    response.renderTemplate('checkout/cart/minicart', {
-        Basket : Cart.get().object
-    });
+	view.get({Basket : Cart.get().object}).render('checkout/cart/minicart');
 
 }
 
@@ -358,14 +385,7 @@ function addProductSetProducts() {
         }
 
 		var childProductOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap).ProductOptionModel;
-
-        var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-            Basket             : cart.object,
-            Product            : childProduct,
-            ProductOptionModel : childProductOptionModel,
-            Quantity           : parseInt(childQtys[counter]),
-            Category           : dw.catalog.CatalogMgr.getCategory(params.cgid.value)
-        });
+		cart.addProductItem(childProduct, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
         counter++;
     }
 }
@@ -386,7 +406,7 @@ function addToWishlist() {
         return;
     }
 
-    var AddProductResult = require('./Wishlist').AddProduct();
+    require('./Wishlist').AddProduct();
 
     view.get('view/CartView', {
         cart                   : Cart.get(),
@@ -397,10 +417,7 @@ function addToWishlist() {
 
 
 /**
- * Determines an existing basket from the current session. If a basket wasn't found, the pipeline ends in a named end
- * node "error". This node can be used in other pipelines such as the checkout pipelines in order to access the basket.
- * This pipeline does not create a new basket. Calling pipelines are responsible to properly react on the "error" end
- * node.
+ * TODO: deprecate
  */
 function getExistingBasket() {
 
@@ -434,13 +451,12 @@ function getBasket() {
  */
 function calculate() {
 
-    var txn = require('dw/system/Transaction');
-    txn.begin();
+	Transaction.begin();
 
     var cart = Cart.get();
     cart.calculate();
 
-    txn.commit();
+	Transaction.commit();
 
     return cart.object;
 }
@@ -452,32 +468,24 @@ function addBonusProduct() {
 
 	Transaction.begin();
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/ParseBonusProductsJSON.ds'
-    }).execute({CurrentHttpParameterMap : request.httpParameterMap});
-
-	if (ScriptResult.result === PIPELET_ERROR) {
-		Transaction.rollback();
-
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
-    var productsJSON = ScriptResult.Products;
-
 	var cart = Cart.get();
-	var bonusDiscountLineItem = cart.getBonusDiscountLineItemByUUID(request.httpParameterMap.bonusDiscountLineItemUUID.stringValue);
 
+	// parse bonus product JSON
+	var data = JSON.parse(request.httpParameterMap.getRequestBodyAsString());
+	var productsJSON  = new ArrayList();
+
+	for( var h = 0; h < data.bonusproducts.length; h++) {
+		productsJSON.addAt(0, data.bonusproducts[h].product);
+	}
+
+	var bonusDiscountLineItem = cart.getBonusDiscountLineItemByUUID(request.httpParameterMap.bonusDiscountLineItemUUID.stringValue);
 	cart.removeBonusDiscountLineItemProducts(bonusDiscountLineItem);
 
 	for(var i = 0; i < productsJSON.length; i++) {
 		var product = Product.get(productsJSON[i].pid).object;
 
 		if (!product) {
-            txn.rollback();
+			Transaction.rollback();
 
             response.renderJSON({
                 success : false
@@ -485,109 +493,54 @@ function addBonusProduct() {
             return;
         }
 
-        cart.addBonusProduct(bonusDiscountLineItem, product);
+        cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty));
 
         if (product.bundle) {
-            addBonusProductBundle();
+
+	        var childPids = productsJSON[i].childPids.split(",");
+
+	        for (var j = 0; j < childPids.length; j++) {
+		        var childProduct = Product.get(childPids[j]).object;
+
+		        if (!childProduct) {
+
+			        var ScriptResult = new dw.system.Pipelet('Script', {
+				        Transactional : false,
+				        OnError       : 'PIPELET_ERROR',
+				        ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
+			        }).execute({
+					        SelectedOptions : new dw.util.ArrayList(product.options),
+					        Product         : childProduct
+				        });
+
+			        var foundLineItem = cart.getBundledProductLineItemByPID(ProductLineItem.bundledProductLineItems, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+
+			        if (foundLineItem) {
+				        foundLineItem.replaceProduct(childProduct);
+			        }
+		        }
+	        }
         }
     }
 
     calculate();
+	Transaction.commit();
 
     response.renderJSON({
         success : true
     });
 
-	Transaction.commit();
 }
-
 
 /**
- * Add a sub product to the bonus product bundle.
+ * Called during checkout.
+ * TODO: Needs to be reviewed once checkout works.
  */
-function addBonusProductBundle() {
-    var childPids = product.childPids.split(",");
-
-	for(var i = 0; i < childPids.length; i++) {
-		var childPid = childPids[i];
-        var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-            ProductID : childPid
-        });
-        if (GetProductResult.result == PIPELET_ERROR) {
-            continue;
-        }
-        var ChildProduct = GetProductResult.Product;
-
-
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
-        }).execute({
-                SelectedOptions : new dw.util.ArrayList(product.options),
-                Product         : ChildProduct,
-            });
-        if (ScriptResult.result == PIPELET_ERROR) {
-            continue;
-        }
-        var ProductOptionModel = ScriptResult.ProductOptionModel;
-
-
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'cart/FindLineItem.ds'
-        }).execute({
-                pid              : (ChildProduct.isVariant() ? ChildProduct.masterProduct.ID : ChildProduct.ID),
-                ProductLineItems : ProductLineItem.bundledProductLineItems
-            });
-        if (ScriptResult.result == PIPELET_ERROR) {
-            continue;
-        }
-        var FoundLineItem = ScriptResult.FoundLineItem;
-
-
-        if (empty(FoundLineItem)) {
-            continue;
-        }
-
-
-        new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-            ProductLineItem : FoundLineItem,
-            NewProduct      : ChildProduct
-        });
-    }
-}
-
-
-/**
- * When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
- */
-function newBonusDiscountLineItem(Basket, PreviousBonusDiscountLineItems) {
-    var BonusDiscountLineItems = Basket.getBonusDiscountLineItems();
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/CheckForNewBonusDiscountLineItem.ds'
-    }).execute({
-            NewBonusDiscountLineItems      : BonusDiscountLineItems,
-            PreviousBonusDiscountLineItems : PreviousBonusDiscountLineItems,
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        return null;
-    }
-
-    return {
-        BonusDiscountLineItem : ScriptResult.BonusDiscountLineItem
-    };
-}
-
 function addCouponJson() {
-    var couponCode = request.httpParameterMap.couponCode.stringValue;
 
-	var couponStatus = Cart.get().addCoupon(couponCode);
+	var couponCode = request.httpParameterMap.couponCode.stringValue;
+	var cart = Cart.get();
+	var couponStatus = cart.addCoupon(couponCode);
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
 
@@ -595,30 +548,11 @@ function addCouponJson() {
 		    status      : couponStatus.code,
 		    message     : dw.web.Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
 		    success     : !couponStatus.error,
-		    baskettotal : Basket.adjustedMerchandizeTotalGrossPrice.value,
+		    baskettotal : cart.object.adjustedMerchandizeTotalGrossPrice.value,
 		    CouponCode  : couponCode
 	    });
     }
 }
-
-/**
- * This Pipeline will check the instore qty against the store inventory in the case that the pli's qtyt has been
- * updated.
- */
-function checkInStoreProducts(basket) {
-    if (!dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
-        return null;
-    }
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/storepickup/CheckStoreInLineItem.ds'
-    }).execute({
-            Basket : basket
-        });
-}
-
 
 /*
  * Module exports

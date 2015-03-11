@@ -27,15 +27,9 @@ var CartView = View.extend({
 
             Cart.get(cart).calculate();
 
-            var ScriptResult = new dw.system.Pipelet('Script', {
-                ScriptFile    : 'cart/ValidateCartForCheckout.ds',
-                Transactional : false
-            }).execute({
-                    Basket      : cart,
-                    ValidateTax : false
-                });
-
-            this.EnableCheckout = ScriptResult.EnableCheckout;
+            var validationResult = Cart.get(cart).validateForCheckout();
+            this.EnableCheckout = validationResult.EnableCheckout;
+	        this.BasketStatus = validationResult.BasketStatus;
             this.WishList = customer.authenticated ? require('~/cartridge/controllers/lib/wishlist').fetchWishList() : null;
         }
 

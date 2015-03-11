@@ -8,6 +8,8 @@
 /* API Includes */
 var AbstractHelper = require('./AbstractHelper');
 var Product = require('~/cartridge/scripts/model/Product');
+var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
+var StoreMgr = require('dw/catalog/StoreMgr');
 var Transaction = require('dw/system/Transaction');
 
 /**
@@ -44,6 +46,7 @@ var Cart = AbstractHelper.extend(
 	     */
         calculate : function () {
 
+		    // TODO: move transaction handling to controller
             Transaction.begin();
             dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
             Transaction.commit();
@@ -90,42 +93,54 @@ var Cart = AbstractHelper.extend(
          * @param quantity
          * @param cgid
          */
-        addProductItem : function (product, quantity, cgid) {
+        addProductItem : function (product, quantity, cgid, productOptionModel) {
 
             if (product) {
-                var previousBonusDiscountLineItems = this.getBonusDiscountLineItems();
 
-                if (product.productSet) {
-                    // TODO
-                    //addProductSetProducts();
+                // TODO
+                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
+                    Basket             : this.object,
+                    Product            : product,
+                    ProductOptionModel : productOptionModel,
+                    Quantity           : quantity,
+                    Category           : dw.catalog.CatalogMgr.getCategory(cgid)
+                });
+
+                if (AddProductToBasketResult.result === PIPELET_ERROR) {
+                    return;
                 }
-                else {
+                var ProductLineItem = AddProductToBasketResult.ProductLineItem;
 
-                    var productOptionSelections = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap);
+                if (product.bundle) {
+	                /**
+	                 * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
+	                 * variants then we have to manually replace the master products with the selected variants which gets passed in the
+	                 * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+	                 * pids of the bundled products which are variations
+	                 */
+	                if (request.httpParameterMap.childPids.stringValue) {
+		                var childPids = request.httpParameterMap.childPids.stringValue.split(",");
 
-                    // TODO
-                    var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-                        Basket             : this.object,
-                        Product            : product,
-                        ProductOptionModel : productOptionSelections.ProductOptionModel,
-                        Quantity           : quantity,
-                        Category           : dw.catalog.CatalogMgr.getCategory(cgid)
-                    });
+		                for (var i = 0; i < childPids.length; i++) {
+			                var childProduct = Product.get(childPids[i]).object;
 
-                    if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                        return;
-                    }
-                    var ProductLineItem = AddProductToBasketResult.ProductLineItem;
+			                if (childProduct) {
+				                // why is this needed ?
+				                require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap);
 
-                    if (product.bundle) {
-                        // TODO
-                        //replaceBundleLineItemProducts();
-                    }
+				                var foundLineItem = null;
+				                foundLineItem = cart.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+
+				                if (foundLineItem) {
+					                foundLineItem.replaceProduct(childProduct);
+				                }
+			                }
+		                }
+	                }
                 }
 
                 this.calculate();
-                // TODO
-                // newBonusDiscountLineItem(Basket, previousBonusDiscountLineItems);
+
             }
 
             return;
@@ -161,14 +176,14 @@ var Cart = AbstractHelper.extend(
 	     * @param bonusDiscountLineItem
 	     * @param product
 	     */
-        addBonusProduct : function (bonusDiscountLineItem, product) {
+        addBonusProduct : function (bonusDiscountLineItem, product, selectedOptions, quantity) {
 
             var ScriptResult = new dw.system.Pipelet('Script', {
                 Transactional : false,
                 OnError       : 'PIPELET_ERROR',
                 ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
             }).execute({
-                    SelectedOptions : new dw.util.ArrayList(product.options),
+                    SelectedOptions : selectedOptions,
                     Product         : product
                 });
 
@@ -176,32 +191,18 @@ var Cart = AbstractHelper.extend(
                 Basket                : this.object,
                 BonusDiscountLineItem : bonusDiscountLineItem,
                 Product               : product,
-                Quantity              : parseInt(product.qty),
+                Quantity              : quantity,
                 ProductOptionModel    : ScriptResult.ProductOptionModel
             });
 
             return;
         },
 
-        removeCouponLineItem : function (couponLineItem) {
-            new dw.system.Pipelet('RemoveCouponLineItem').execute({
-                CouponLineItem : couponLineItem
-            });
-
-            return;
-        },
-
         removeGiftCertificateLineItem : function (giftCertificateLineItem) {
+	        this.removeCouponLineItem(couponLineItem);
+	        // TODO - add check whether the given lineitem actually belongs to this cart object
             new dw.system.Pipelet('RemoveGiftCertificateLineItem').execute({
                 GiftCertificateLineItem : giftCertificateLineItem
-            });
-
-            return;
-        },
-
-        removeProductLineItem : function (productLineItem) {
-            new dw.system.Pipelet('RemoveProductLineItem').execute({
-                ProductLineItem : productLineItem
             });
 
             return;
@@ -213,6 +214,7 @@ var Cart = AbstractHelper.extend(
 	     * @param bonusDiscountLineItem
 	     */
 	    removeBonusDiscountLineItemProducts : function (bonusDiscountLineItem) {
+		    // TODO - add check whether the given lineitem actually belongs to this cart object
             var plis = bonusDiscountLineItem.getBonusProductLineItems();
 
             for (var i = 0; i < plis.length; i++) {
@@ -231,7 +233,6 @@ var Cart = AbstractHelper.extend(
 
 	    },
 
-
 	    getProductLineItemByUUID : function (lineItemUUID) {
 		    var plis = this.getProductLineItems();
             var lineItem = null;
@@ -247,22 +248,8 @@ var Cart = AbstractHelper.extend(
             return lineItem;
         },
 
-	    getProductLineItemByPID : function (pid) {
-		    var plis = this.getProductLineItems();
-		    var lineItem = null;
-
-		    for (var i = 0, il = plis.length; i < il; i++) {
-			    var item = plis[i];
-			    if ((pid != null && item.productID === pid)) {
-				    lineItem = item;
-				    break;
-			    }
-		    }
-
-		    return lineItem;
-	    },
-
 	    getBundledProductLineItemByPID : function (bundleLineItem, pid) {
+		    // TODO - add check whether the given lineitem actually belongs to this cart object
 		    var plis = bundleLineItem.getBundledProductLineItems();
 		    var lineItem = null;
 
@@ -290,8 +277,61 @@ var Cart = AbstractHelper.extend(
 		    }
 
 		    return lineItem;
-	    }
+	    },
 
+	    /**
+	     * This function will checks the instore qty against the store inventory in the case that the pli's qtyt has
+	     * been updated.
+	     */
+        checkInStoreProducts : function () {
+		    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
+
+			    var allProductLineItems = this.getAllProductLineItems();
+			    for (var i = 0; i < allProductLineItems.length; i++) {
+				    var pli = allProductLineItems[i];
+
+				    //skip none instore pli's
+				    if (pli.custom.fromStoreId) {
+					    //check the qty against the inventory of the store with matching storeID,
+					    //in the event that the cart is being updated with a new qty
+					    var store = StoreMgr.getStore(pli.custom.fromStoreId);
+					    var storeinventory = ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
+
+					    if (storeinventory.getRecord(pli.productID).ATS.value >= pli.quantityValue) {
+						    pli.custom.fromStoreId = store.ID;
+						    pli.setProductInventoryList(storeinventory);
+
+					    }
+					    else {
+						    //the in store line item will be reset to a regular home delivery item.
+						    pli.custom.fromStoreId = "";
+						    pli.setProductInventoryList(null);
+						    pli.setShipment(basket.getDefaultShipment());
+					    }
+				    }
+			    }
+		    }
+
+		    return;
+	    },
+
+	    /**
+	     *
+	     * @returns {*}
+	     */
+	    validateForCheckout : function () {
+
+		    var result = new dw.system.Pipelet('Script', {
+			    ScriptFile    : 'cart/ValidateCartForCheckout.ds',
+			    Transactional : false
+		    }).execute({
+				    Basket      : this.object,
+				    ValidateTax : false
+			    });
+
+		    return result;
+
+	    }
     });
 
 
