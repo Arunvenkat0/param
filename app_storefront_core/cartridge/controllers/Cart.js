@@ -284,24 +284,26 @@ function submitForm() {
  */
 function continueShopping() {
 
-    var location = null;
-    var list = session.getClickStream().getClicks();
-    for (var i = list.size() - 1; i >= 0; i--) {
-        var click = list[i];
-        switch (click.getPipelineName()) {
-            case "Product-Show":
-            case "Search-Show":
-                // catalog related click
-                // replace well-known http parameter names "source" and "format" to avoid loading partial page markup only
-                location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=");
-        }
-    }
+	var location = null;
+	var list = session.getClickStream().getClicks();
+	(function () {
+	for (var i = list.size() - 1; i >= 0; i--) {
+		var click = list[i];
+		switch (click.getPipelineName()) {
+			case "Product-Show":
+			case "Search-Show":
+				// catalog related click
+				// replace well-known http parameter names "source" and "format" to avoid loading partial page markup only
+				location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=");
+				return;
+		}
+    }}());
 
     if (location) {
         response.redirect(location);
     }
     else {
-        response.redirect(URLUtils.httpHome());
+        response.redirect(dw.web.URLUtils.httpHome());
     }
 
 }
