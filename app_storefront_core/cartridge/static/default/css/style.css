@@ -979,7 +979,8 @@ div.error {
 .primary-logo {
   margin: 0.2em auto;
   width: 200px;
-  height: 38px; }
+  height: 38px;
+  z-index: 1; }
   @media screen and (min-width: 768px) {
     .primary-logo {
       left: 0.5em;
