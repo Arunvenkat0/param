@@ -2,20 +2,20 @@
 /**
  * Module for cart related functionality.
  *
- * @module object/Cart
+ * @module model/Cart
  */
 
 /* API Includes */
 var AbstractHelper = require('./AbstractHelper');
-var Product = require('~/cartridge/scripts/object/Product');
+var Product = require('~/cartridge/scripts/model/Product');
 var Transaction = require('dw/system/Transaction');
 
 /**
  * Category helper providing enhanced category functionality
- * @class module:object/Cart~Cart
+ * @class module:model/Cart~Cart
  */
 var Cart = AbstractHelper.extend(
-    /** @lends module:object/Cart~Cart.prototype */
+    /** @lends module:model/Cart~Cart.prototype */
     {
         /**
          * Use this method to get a new instance for a given basket.

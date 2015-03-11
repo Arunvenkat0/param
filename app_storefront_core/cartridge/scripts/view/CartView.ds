@@ -3,7 +3,7 @@
 /** @module view/CartView */
 var View = require('./View');
 
-var Cart = require('~/cartridge/scripts/object/Cart');
+var Cart = require('~/cartridge/scripts/model/Cart');
 var FormGroup = require('dw/web/FormGroup');
 
 

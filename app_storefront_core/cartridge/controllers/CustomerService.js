@@ -14,7 +14,7 @@ var Template = require('dw/util/Template');
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var contactUsForm = require('~/cartridge/scripts/model/Form').get('contactus');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders the customer service overview page.

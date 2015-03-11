@@ -8,7 +8,7 @@
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * This pipeline is used to serve requests for Google XML site maps.

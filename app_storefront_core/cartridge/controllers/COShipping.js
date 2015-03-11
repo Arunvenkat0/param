@@ -1,7 +1,7 @@
 var g = require('./dw/guard');
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/object/Cart');
+var Cart = require('~/cartridge/scripts/model/Cart');
 
 /**
  * Single Shipping Scenario

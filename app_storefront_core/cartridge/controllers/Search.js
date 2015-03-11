@@ -13,7 +13,7 @@ var Search = require('~/cartridge/scripts/model/Search');
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a full featured product search result page.

@@ -7,15 +7,15 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/object/Cart');
-var Product = require('~/cartridge/scripts/object/Product');
+var Cart = require('~/cartridge/scripts/model/Cart');
+var Product = require('~/cartridge/scripts/model/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var cartAsset = require('~/cartridge/scripts/object/Content').get('cart');
+var cartAsset = require('~/cartridge/scripts/model/Content').get('cart');
 var guard = require('~/cartridge/scripts/guard');
-var cartForm = require('~/cartridge/scripts/object/Form').get('cart');
+var cartForm = require('~/cartridge/scripts/model/Form').get('cart');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 

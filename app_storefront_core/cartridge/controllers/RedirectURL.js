@@ -8,7 +8,7 @@
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Pipeline is called by the system to handle URL mappings (static mappings and mapping rules).

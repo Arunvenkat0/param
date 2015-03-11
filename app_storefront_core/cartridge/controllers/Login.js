@@ -2,7 +2,7 @@ var g = require('./dw/guard');
 var f = require('./dw/form');
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/object/Cart');
+var Cart = require('~/cartridge/scripts/model/Cart');
 
 /**
  * Handles all customer login related storefront processes.
