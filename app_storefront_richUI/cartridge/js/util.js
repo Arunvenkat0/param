@@ -35,6 +35,21 @@ var util = {
 	},
 	/**
 	 * @function
+	 * @description extract the query string from URL
+	 * @param {String} url the url to extra query string from
+	 **/
+	getQueryString: function (url) {
+		var qs;
+		if (!_.isString(url)) { return; }
+		var a = document.createElement('a');
+		a.href = url;
+		if (a.search) {
+			qs = a.search.substr(1); // remove the leading ?
+		}
+		return qs;
+	},
+	/**
+	 * @function
 	 * @description
 	 * @param {String}
 	 * @param {String}
