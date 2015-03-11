@@ -19,7 +19,6 @@ var cartForm = require('~/cartridge/scripts/object/Form').get('cart');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 
-
 /**
  * Should be used only for simple UI
  */
@@ -50,16 +49,18 @@ function addProduct() {
 
             return;
         }
+	    else {
 
-        editLineItem(lineItem);
+	        editLineItem(lineItem);
 
-        if (params.format.stringValue.toLowerCase() === 'ajax') {
-            response.renderTemplate('checkout/cart/refreshcart', {});
-            return;
-        }
-        else {
-            response.redirect(dw.web.URLUtils.url('Cart-Show'));
-            return;
+	        if (params.format.stringValue.toLowerCase() === 'ajax') {
+		        response.renderTemplate('checkout/cart/refreshcart', {});
+		        return;
+	        }
+	        else {
+		        response.redirect(dw.web.URLUtils.url('Cart-Show'));
+		        return;
+	        }
         }
     }
     else if (params.plid.stringValue) {
