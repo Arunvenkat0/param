@@ -148,9 +148,44 @@ var Cart = AbstractHelper.extend(
             return;
         },
 
+	    /**
+	     * Adds a bonus product to the Basket associated with the specified BonusDiscountLineItem. The pipelet creates
+	     * and returns a ProductLineItem, by assigning the specified Product and Quantity to the specified Basket. The
+	     * function adds the new ProductLineItem to the default shipment.
+	     * The passed product must be one of the products associated with the BonusDiscountLineItem or the process will
+	     * fail. The process does NOT validate if the number of bonus products exceeds the maximum allowed by the bonus
+	     * discount. This is the job of application logic.
+	     * Function always creates a new product line item, regardless of the value of the site preference
+	     * 'Add Product Behavior'.
+	     *
+	     * @param bonusDiscountLineItem
+	     * @param product
+	     */
+        addBonusProduct : function (bonusDiscountLineItem, product) {
+
+            var ScriptResult = new dw.system.Pipelet('Script', {
+                Transactional : false,
+                OnError       : 'PIPELET_ERROR',
+                ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
+            }).execute({
+                    SelectedOptions : new dw.util.ArrayList(product.options),
+                    Product         : product
+                });
+
+            var AddBonusProductToBasketResult = new dw.system.Pipelet('AddBonusProductToBasket').execute({
+                Basket                : this.object,
+                BonusDiscountLineItem : bonusDiscountLineItem,
+                Product               : product,
+                Quantity              : parseInt(product.qty),
+                ProductOptionModel    : ScriptResult.ProductOptionModel
+            });
+
+            return;
+        },
+
         removeCouponLineItem : function (couponLineItem) {
             new dw.system.Pipelet('RemoveCouponLineItem').execute({
-                CouponLineItem : formgroup.couponLineItem().object
+                CouponLineItem : couponLineItem
             });
 
             return;
@@ -172,8 +207,33 @@ var Cart = AbstractHelper.extend(
             return;
         },
 
-        getProductLineItemByUUID : function (lineItemUUID) {
-            var plis = this.getProductLineItems();
+	    /**
+	     * Deletes all the products associated with a bonus discount line item.
+	     *
+	     * @param bonusDiscountLineItem
+	     */
+	    removeBonusDiscountLineItemProducts : function (bonusDiscountLineItem) {
+            var plis = bonusDiscountLineItem.getBonusProductLineItems();
+
+            for (var i = 0; i < plis.length; i++) {
+                var pli = plis[i];
+                if (pli.product != null) {
+                    this.removeProductLineItem(pli);
+                }
+            }
+	    },
+
+	    /**
+	     * This script checks for product line items that have a quantity of 0 or empty and will
+	     * remove them from the cart.
+	     */
+	    removeZeroQuantityLineItems : function () {
+
+	    },
+
+
+	    getProductLineItemByUUID : function (lineItemUUID) {
+		    var plis = this.getProductLineItems();
             var lineItem = null;
 
             for (var i = 0, il = plis.length; i < il; i++) {
@@ -209,6 +269,21 @@ var Cart = AbstractHelper.extend(
 		    for (var i = 0, il = plis.length; i < il; i++) {
 			    var item = plis[i];
 			    if ((pid != null && item.productID === pid)) {
+				    lineItem = item;
+				    break;
+			    }
+		    }
+
+		    return lineItem;
+	    },
+
+	    getBonusDiscountLineItemByUUID : function (lineItemUUID) {
+		    var plis = this.getBonusDiscountLineItems();
+		    var lineItem = null;
+
+		    for (var i = 0, il = plis.length; i < il; i++) {
+			    var item = plis[i];
+			    if ((lineItemUUID != null && item.UUID === lineItemUUID)) {
 				    lineItem = item;
 				    break;
 			    }

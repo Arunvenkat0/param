@@ -125,11 +125,24 @@ function submitForm() {
             return {cart : cart};
         },
         'checkoutCart'          : function (formgroup) {
-            var startCheckoutResult = startCheckout();
-            if (!startCheckoutResult.error) {
-                return null;
-            }
-            return {cart : cart};
+	        var ScriptResult = new dw.system.Pipelet('Script', {
+		        ScriptFile    : 'cart/ValidateCartForCheckout.ds',
+		        Transactional : false
+	        }).execute({
+			        Basket      : cart.object,
+			        ValidateTax : false
+		        });
+
+	        var BasketStatus = ScriptResult.BasketStatus;
+	        var EnableCheckout = ScriptResult.EnableCheckout;
+
+	        if (ScriptResult.result !== PIPELET_ERROR) {
+		        require('./COCustomer').Start();
+		        return null;
+	        }
+	        else {
+		        return {cart : cart, BasketStatus : ScriptResult.BasketStatus, EnableCheckout : ScriptResult.EnableCheckout};
+	        }
         },
         'continueShopping'      : function (formgroup) {
             continueShopping();
@@ -211,11 +224,10 @@ function submitForm() {
         }
     });
 
-    if (formResult) {
+	if (formResult) {
         pageMeta.update(cartAsset);
         view.get('view/CartView', formResult).render('checkout/cart/cart');
     }
-
 }
 
 
@@ -434,37 +446,9 @@ function calculate() {
 }
 
 /**
- * Start the checkout process.
- */
-function startCheckout() {
-    var basket = calculate();
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        ScriptFile    : 'cart/ValidateCartForCheckout.ds',
-        Transactional : false
-    }).execute({
-            Basket      : Basket,
-            ValidateTax : false
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        return {
-            error : true
-        };
-    }
-    var BasketStatus = ScriptResult.BasketStatus;
-    var EnableCheckout = ScriptResult.EnableCheckout;
-
-	require('./COCustomer').Start();
-
-    return;
-}
-
-
-/**
  * Add bonus product to cart.
  */
 function addBonusProduct() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
 
 	Transaction.begin();
 
@@ -472,66 +456,27 @@ function addBonusProduct() {
         Transactional : false,
         OnError       : 'PIPELET_ERROR',
         ScriptFile    : 'cart/ParseBonusProductsJSON.ds'
-    }).execute();
-    if (ScriptResult.result == PIPELET_ERROR) {
-        txn.rollback();
+    }).execute({CurrentHttpParameterMap : request.httpParameterMap});
+
+	if (ScriptResult.result === PIPELET_ERROR) {
+		Transaction.rollback();
 
         response.renderJSON({
             success : false
         });
         return;
     }
-    var Products = ScriptResult.Products;
+    var productsJSON = ScriptResult.Products;
 
-    var Basket = getBasket();
+	var cart = Cart.get();
+	var bonusDiscountLineItem = cart.getBonusDiscountLineItemByUUID(request.httpParameterMap.bonusDiscountLineItemUUID.stringValue);
 
+	cart.removeBonusDiscountLineItemProducts(bonusDiscountLineItem);
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/GetBonusDiscountLineItem.ds'
-    }).execute({
-            uuid                   : CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue,
-            BonusDiscountLineItems : Basket.bonusDiscountLineItems
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        txn.rollback();
+	for(var i = 0; i < productsJSON.length; i++) {
+		var product = Product.get(productsJSON[i].pid).object;
 
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
-    var BonusDiscountLineItem = ScriptResult.BonusDiscountLineItem;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/RemoveBonusDiscountLineItemProducts.ds'
-    }).execute({
-            bonusDiscountLineItem : BonusDiscountLineItem,
-            Basket                : Basket
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        txn.rollback();
-
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
-
-
-    for each(var product
-in
-    Products
-)
-    {
-        var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-            ProductID : product.pid
-        });
-        if (GetProductResult.result == PIPELET_ERROR) {
+		if (!product) {
             txn.rollback();
 
             response.renderJSON({
@@ -539,47 +484,10 @@ in
             });
             return;
         }
-        var Product = GetProductResult.Product;
 
+        cart.addBonusProduct(bonusDiscountLineItem, product);
 
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'cart/UpdateProductOptionSelections.ds',
-        }).execute({
-                SelectedOptions : new dw.util.ArrayList(product.options),
-                Product         : Product
-            });
-        if (ScriptResult.result == PIPELET_ERROR) {
-            txn.rollback();
-
-            response.renderJSON({
-                success : false
-            });
-            return;
-        }
-        var ProductOptionModel = ScriptResult.ProductOptionModel;
-
-
-        var AddBonusProductToBasketResult = new dw.system.Pipelet('AddBonusProductToBasket').execute({
-            Basket                : Basket,
-            BonusDiscountLineItem : BonusDiscountLineItem,
-            Product               : Product,
-            Quantity              : parseInt(product.qty),
-            ProductOptionModel    : ProductOptionModel
-        });
-        if (AddBonusProductToBasketResult.result == PIPELET_ERROR) {
-            txn.rollback();
-
-            response.renderJSON({
-                success : false
-            });
-            return;
-        }
-        var ProductLineItem = AddBonusProductToBasketResult.ProductLineItem;
-
-
-        if (Product.bundle) {
+        if (product.bundle) {
             addBonusProductBundle();
         }
     }
@@ -600,11 +508,8 @@ in
 function addBonusProductBundle() {
     var childPids = product.childPids.split(",");
 
-    for each(var childPid
-in
-    childPids
-)
-    {
+	for(var i = 0; i < childPids.length; i++) {
+		var childPid = childPids[i];
         var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
             ProductID : childPid
         });
