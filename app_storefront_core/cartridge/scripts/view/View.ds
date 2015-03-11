@@ -39,8 +39,12 @@ var View = Class.extend(
             this.View = this;
             // provide Meta
             this.Meta = require('~/cartridge/scripts/meta');
-
-            response.renderTemplate(templateName, this);
+            try{
+                response.renderTemplate(templateName, this);
+            }catch(e){
+                dw.system.Logger.error('Error while rendering template '+templateName);
+                throw e;
+            }
             return this;
         }
     });

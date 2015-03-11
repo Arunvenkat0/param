@@ -129,5 +129,8 @@ Meta.prototype = {
     }
 };
 
-/** @type {Meta} Singleton instance for meta data handling */
+/**
+ * Singleton instance for meta data handling
+ * @type {module:meta~Meta}
+ */
 module.exports = new Meta();
