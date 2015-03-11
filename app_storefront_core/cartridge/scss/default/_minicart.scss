@@ -3,6 +3,9 @@
 	right: 1.6em;
 	top: .5em;
 	z-index: 20;
+	@media screen and (min-width: 768px) {
+		top: 1.8em;
+	}
 	.mini-cart-name {
 		a {
 			color: $pacific-blue;
@@ -25,7 +28,7 @@
 			border-radius: 10px;
 			color: $white;
 			font-size: .7em;
-			padding: .15em;
+			padding: .15em .4em;
 			position: absolute;
 			right: 0;
 			top: 0;
