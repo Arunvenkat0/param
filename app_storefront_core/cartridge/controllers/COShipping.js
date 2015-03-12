@@ -82,14 +82,12 @@ function SingleShipping()
 	    if (TriggeredAction.formId == 'save')
 	    {
 	        // this is a new request, so we have to resolve the context again
-	        var CartController = require('./Cart');
-	        var GetExistingBasketResult = CartController.GetExistingBasket();
-	        if (GetExistingBasketResult.error)
-	        {
+		    var Basket = Cart.get();
+
+		    if (!Basket.object) {
 	            CartController.Show();
 	            return;
 	        }
-	        var Basket = GetExistingBasketResult.Basket;
 
 	        var handleShippingSettingsResult = handleShippingSettings({
 	            Basket: Basket
@@ -174,18 +172,14 @@ function SelectShippingMethod()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
+	var Basket = Cart.get();
+
+	if (!Basket.object) {
         response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
         });
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -252,18 +246,14 @@ function UpdateShippingMethodList()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
+	var Basket = Cart.get();
+
+	if (!Basket.object) {
         // TODO don't mix process and view pipelines
         // TODO this should end with a template
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
         OnError: 'PIPELET_ERROR',
@@ -369,12 +359,7 @@ function UpdateShippingMethodList()
 function GetApplicableShippingMethodsJSON()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
-
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    var Basket = GetExistingBasketResult.Basket;
-    
+	var Basket = Cart.get();
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
@@ -491,7 +476,6 @@ function PrepareShipments(args)
         };
     }
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -679,16 +663,12 @@ function UpdateAddressDetails()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
+	var Basket = Cart.get();
+
+	if (!Basket.object) {
         CartController.Show();
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
-
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,

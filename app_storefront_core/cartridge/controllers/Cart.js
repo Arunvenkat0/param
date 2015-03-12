@@ -11,13 +11,13 @@ var ArrayList = require('dw/util/ArrayList');
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
-var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var cartAsset = require('~/cartridge/scripts/model/Content').get('cart');
 var guard = require('~/cartridge/scripts/guard');
 var cartForm = require('~/cartridge/scripts/model/Form').get('cart');
 var pageMeta = require('~/cartridge/scripts/meta');
+var transaction = require('~/cartridge/scripts/transaction');
 var view = require('~/cartridge/scripts/view');
 
 /**
@@ -144,7 +144,7 @@ function Show() {
 }
 
 /**
- * 
+ *
  */
 function submitForm() {
     // we have no existing state, so resolve the basket again
@@ -189,33 +189,41 @@ function submitForm() {
             return null;
         },
         'deleteCoupon'          : function (formgroup) {
-	        Transaction.begin();
-            cart.removeCouponLineItem(formgroup.getTriggeredAction().object);
-	        Transaction.commit();
+            transaction.managed(function () {
+                cart.removeCouponLineItem(formgroup.getTriggeredAction().object);
+            });
+
             return {cart : cart};
         },
         'deleteGiftCertificate' : function (formgroup) {
-	        Transaction.begin();
-	        cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
-	        Transaction.commit();
+            transaction.managed(function () {
+                cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
+            });
 
 	        return {cart : cart};
         },
         'deleteProduct'         : function (formgroup) {
-	        Transaction.begin();
-            cart.removeProductLineItem(formgroup.getTriggeredAction().object);
-	        Transaction.commit();
+	        transaction.managed(function () {
+		        cart.removeProductLineItem(formgroup.getTriggeredAction().object);
+	        });
+	        /*
+	        transaction.managed(function () {
+                cart.removeProductLineItem(formgroup.getTriggeredAction().object);
+	        });*/
 
 	        return {cart : cart};
         },
         'editLineItem'          : function (formgroup) {
-            var editLineItemResult = editLineItem(formgroup.getTriggeredAction().object);
 
-            if (editLineItemResult) {
-                cart.calculate();
-                response.renderTemplate('checkout/cart/refreshcart');
-                return null;
-            }
+	        transaction.managed(function () {
+		        var editLineItemResult = editLineItem(formgroup.getTriggeredAction().object);
+
+		        if (editLineItemResult) {
+			        cart.calculate();
+			        response.renderTemplate('checkout/cart/refreshcart');
+			        return null;
+		        }
+	        });
 
             return {cart : cart};
         },
@@ -237,7 +245,10 @@ function submitForm() {
         },
         'register'              : function (formgroup) {
             require('./Account').StartRegister();
-            cart.calculate();
+            transaction.managed(function () {
+                cart.calculate();
+            });
+
             response.redirect(dw.web.URLUtils.https('Cart-Show'));
 
             return null;
@@ -248,24 +259,24 @@ function submitForm() {
         },
         'updateCart' : function (formgroup) {
 
-	        Transaction.begin();
+	        transaction.managed(function () {
 
-            // remove zero quantity line items
-            for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
-                var shipmentItem = session.forms.cart.shipments[i];
+		        // remove zero quantity line items
+		        for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
+			        var shipmentItem = session.forms.cart.shipments[i];
 
-                for (var j = 0; j < shipmentItem.items.childCount; j++) {
-                    var item = shipmentItem.items[j];
+			        for (var j = 0; j < shipmentItem.items.childCount; j++) {
+				        var item = shipmentItem.items[j];
 
-                    if (item.quantity.value === 0) {
-                        cart.removeProductLineItem(item.object);
-                    }
-                }
-            }
+				        if (item.quantity.value === 0) {
+					        cart.removeProductLineItem(item.object);
+				        }
+			        }
+		        }
 
-            session.forms.cart.shipments.accept();
-	        cart.checkInStoreProducts();
-	        Transaction.commit();
+		        session.forms.cart.shipments.accept();
+		        cart.checkInStoreProducts();
+	        });
 
             return {cart : cart};
         },
@@ -411,15 +422,8 @@ function getExistingBasket() {
  */
 function getBasket() {
 
-    var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-        Create : true
-    }).execute();
+	return Cart.goc().object;
 
-    if (GetBasketResult.result == PIPELET_ERROR) {
-        return null;
-    }
-
-    return GetBasketResult.Basket;
 }
 
 
@@ -429,12 +433,10 @@ function getBasket() {
  */
 function calculate() {
 
-	Transaction.begin();
-
-    var cart = Cart.get();
-    cart.calculate();
-
-	Transaction.commit();
+	var cart = Cart.get();
+	transaction.managed(function () {
+		cart.calculate();
+	});
 
     return cart.object;
 }
@@ -444,65 +446,66 @@ function calculate() {
  */
 function addBonusProduct() {
 
-	Transaction.begin();
+	transaction.unmanaged(function (transaction) {
 
-	var cart = Cart.get();
+		var cart = Cart.get();
 
-	// parse bonus product JSON
-	var data = JSON.parse(request.httpParameterMap.getRequestBodyAsString());
-	var productsJSON  = new ArrayList();
+		// parse bonus product JSON
+		var data = JSON.parse(request.httpParameterMap.getRequestBodyAsString());
+		var productsJSON = new ArrayList();
 
-	for( var h = 0; h < data.bonusproducts.length; h++) {
-		productsJSON.addAt(0, data.bonusproducts[h].product);
-	}
+		for (var h = 0; h < data.bonusproducts.length; h++) {
+			productsJSON.addAt(0, data.bonusproducts[h].product);
+		}
 
-	var bonusDiscountLineItem = cart.getBonusDiscountLineItemByUUID(request.httpParameterMap.bonusDiscountLineItemUUID.stringValue);
-	cart.removeBonusDiscountLineItemProducts(bonusDiscountLineItem);
+		var bonusDiscountLineItem = cart.getBonusDiscountLineItemByUUID(request.httpParameterMap.bonusDiscountLineItemUUID.stringValue);
+		cart.removeBonusDiscountLineItemProducts(bonusDiscountLineItem);
 
-	for(var i = 0; i < productsJSON.length; i++) {
-		var product = Product.get(productsJSON[i].pid).object;
+		for (var i = 0; i < productsJSON.length; i++) {
+			var product = Product.get(productsJSON[i].pid).object;
 
-		if (!product) {
-			Transaction.rollback();
+			if (!product) {
+				transaction.rollback();
 
-            response.renderJSON({
-                success : false
-            });
-            return;
-        }
+				response.renderJSON({
+					success : false
+				});
+				return;
+			}
 
-        cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty));
+			cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty));
 
-        if (product.bundle) {
+			if (product.bundle) {
 
-	        var childPids = productsJSON[i].childPids.split(",");
+				var childPids = productsJSON[i].childPids.split(",");
 
-	        for (var j = 0; j < childPids.length; j++) {
-		        var childProduct = Product.get(childPids[j]).object;
+				for (var j = 0; j < childPids.length; j++) {
+					var childProduct = Product.get(childPids[j]).object;
 
-		        if (!childProduct) {
+					if (!childProduct) {
 
-			        var ScriptResult = new dw.system.Pipelet('Script', {
-				        Transactional : false,
-				        OnError       : 'PIPELET_ERROR',
-				        ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
-			        }).execute({
-					        SelectedOptions : new dw.util.ArrayList(product.options),
-					        Product         : childProduct
-				        });
+						var ScriptResult = new dw.system.Pipelet('Script', {
+							Transactional : false,
+							OnError       : 'PIPELET_ERROR',
+							ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
+						}).execute({
+								SelectedOptions : new dw.util.ArrayList(product.options),
+								Product         : childProduct
+							});
 
-			        var foundLineItem = cart.getBundledProductLineItemByPID(ProductLineItem.bundledProductLineItems, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+						var foundLineItem = cart.getBundledProductLineItemByPID(ProductLineItem.bundledProductLineItems, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
-			        if (foundLineItem) {
-				        foundLineItem.replaceProduct(childProduct);
-			        }
-		        }
-	        }
-        }
-    }
+						if (foundLineItem) {
+							foundLineItem.replaceProduct(childProduct);
+						}
+					}
+				}
+			}
+		}
 
-    calculate();
-	Transaction.commit();
+		calculate();
+		transaction.commit();
+	});
 
     response.renderJSON({
         success : true
@@ -516,9 +519,13 @@ function addBonusProduct() {
  */
 function addCouponJson() {
 
-	var couponCode = request.httpParameterMap.couponCode.stringValue;
-	var cart = Cart.get();
-	var couponStatus = cart.addCoupon(couponCode);
+    var couponCode = request.httpParameterMap.couponCode.stringValue;
+    var cart = Cart.get();
+
+    var couponStatus = null;
+    transaction.managed(function () {
+        couponStatus = cart.addCoupon(couponCode);
+    });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
 

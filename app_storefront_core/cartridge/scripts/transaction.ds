@@ -1,0 +1,46 @@
+'use strict';
+/**
+ * @module transaction
+ */
+
+var Transaction = require('dw/system/Transaction');
+
+/**
+ *
+ * @param callback
+ */
+exports.managed = function(callback){
+	Transaction.begin();
+
+	try {
+		if(typeof callback === 'function') {
+			callback();
+		};
+		Transaction.commit();
+	}
+	catch (e) {
+		Transaction.rollback();
+	}
+};
+
+/**
+ *
+ * @param callback
+ */
+exports.unmanaged = function(callback) {
+	Transaction.begin();
+
+	if(typeof callback === 'function') {
+		callback(this);
+	};
+};
+
+/**
+ *
+ */
+exports.commit = function(){Transaction.commit()};
+
+/**
+ *
+ */
+exports.rollback = function(){Transaction.rollback()};

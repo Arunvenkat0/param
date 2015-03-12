@@ -10,7 +10,6 @@ var AbstractHelper = require('./AbstractHelper');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
-var Transaction = require('dw/system/Transaction');
 
 /**
  * Category helper providing enhanced category functionality
@@ -19,9 +18,12 @@ var Transaction = require('dw/system/Transaction');
 var Cart = AbstractHelper.extend(
     /** @lends module:model/Cart~Cart.prototype */
     {
-        /**
-         * Use this method to get a new instance for a given basket.
-         */
+	    /**
+	     * Use this method to get a new instance for the current or a given basket.
+	     *
+	     * @param parameter
+	     * @returns {Cart}
+	     */
         get : function (parameter) {
             var obj = null;
 
@@ -42,14 +44,30 @@ var Cart = AbstractHelper.extend(
         },
 
 	    /**
+	     * Use this method to get or create a new instance of a basket
+	     c
+	     */
+	    goc : function () {
+		    var obj = null;
+
+		    var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+			    Create : true
+		    }).execute();
+
+		    if (GetBasketResult.result !== PIPELET_ERROR) {
+			    obj = GetBasketResult.Basket;
+		    }
+
+		    return new Cart(obj);
+
+	    },
+
+	    /**
 	     * TODO
 	     */
         calculate : function () {
 
-		    // TODO: move transaction handling to controller
-            Transaction.begin();
             dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
-            Transaction.commit();
 
         },
 

@@ -25,7 +25,9 @@ var CartView = View.extend({
             // refresh coupons
             session.forms.cart.coupons.copyFrom(cart.couponLineItems);
 
-            Cart.get(cart).calculate();
+	        require('~/cartridge/scripts/transaction').managed(function () {
+                Cart.get(cart).calculate();
+            });
 
             var validationResult = Cart.get(cart).validateForCheckout();
             this.EnableCheckout = validationResult.EnableCheckout;
