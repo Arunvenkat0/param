@@ -20,7 +20,7 @@ function Do()
     
     var deviceType = ScriptResult.device;
 
-    CurrentSession.custom.device = deviceType;
+    session.custom.device = deviceType;
 }
 
 
