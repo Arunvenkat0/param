@@ -2,6 +2,7 @@ var g = require('./dw/guard');
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
+var Transaction = require('~/cartridge/scripts/transaction');
 
 /**
  * Single Shipping Scenario
@@ -45,7 +46,9 @@ function Start() {
         Basket : cart.object
     });
 
-    cart.calculate();
+	Transaction.autocommit(function () {
+		cart.calculate();
+	});
 
     /*
      * Go to billing step, if we have no product line items, but only gift
@@ -68,7 +71,7 @@ function showSingleShipping(args)
     var web = require('./dw/web');
     web.updatePageMetaData("SiteGenesis Checkout");
 
-    response.renderTemplate('checkout/shipping/singleshipping', args);
+	args ? response.renderTemplate('checkout/shipping/singleshipping', args) : response.renderTemplate('checkout/shipping/singleshipping');
 }
 
 
@@ -82,10 +85,10 @@ function SingleShipping()
 	    if (TriggeredAction.formId == 'save')
 	    {
 	        // this is a new request, so we have to resolve the context again
-		    var Basket = Cart.get();
+		    var Basket = Cart.get().object;
 
-		    if (!Basket.object) {
-	            CartController.Show();
+		    if (!Basket) {
+			    require('./Cart').Show();
 	            return;
 	        }
 
@@ -94,13 +97,16 @@ function SingleShipping()
 	        });
 	        if (handleShippingSettingsResult.error)
 	        {
-	            showSingleShipping();
+	            showSingleShipping({
+		            Basket         : Basket,
+		            HomeDeliveries : PrepareShipments({Basket : Basket})
+	            });
 	            return;
 	        }
 
 	        saveAddress();
 
-	        updateInStoreMessage();
+	        updateInStoreMessage(Basket);
 
 	        /*
              * Mark step as fulfilled.
@@ -221,8 +227,7 @@ function SelectShippingMethod()
     }
 
 
-    var CalculateResult = CartController.Calculate();
-    
+    require('./Cart').Calculate();
 
     response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
         Basket: Basket
@@ -246,9 +251,9 @@ function UpdateShippingMethodList()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-	var Basket = Cart.get();
+	var Basket = Cart.get().object;
 
-	if (!Basket.object) {
+	if (!Basket) {
         // TODO don't mix process and view pipelines
         // TODO this should end with a template
         return;
@@ -297,8 +302,8 @@ function UpdateShippingMethodList()
             continue;
         }
 
-        
-        var CalculateResult = CartController.Calculate();
+
+		require('./Cart').Calculate();
         
 
         var ScriptResult = new dw.system.Pipelet('Script', {
@@ -359,7 +364,7 @@ function UpdateShippingMethodList()
 function GetApplicableShippingMethodsJSON()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
-	var Basket = Cart.get();
+	var Basket = Cart.get().object;
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
@@ -663,10 +668,10 @@ function UpdateAddressDetails()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-	var Basket = Cart.get();
+	var Basket = Cart.get().object;
 
-	if (!Basket.object) {
-        CartController.Show();
+	if (!Basket) {
+		require('./Cart').Show();
         return;
     }
 
@@ -714,7 +719,7 @@ function UpdateAddressDetails()
 /**
  * Binds the store message from the user to the shipment.
  */
-function updateInStoreMessage()
+function updateInStoreMessage(Basket)
 {
     var CurrentForms = session.forms;
 

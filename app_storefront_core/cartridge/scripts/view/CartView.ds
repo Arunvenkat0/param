@@ -25,7 +25,7 @@ var CartView = View.extend({
             // refresh coupons
             session.forms.cart.coupons.copyFrom(cart.couponLineItems);
 
-	        require('~/cartridge/scripts/transaction').managed(function () {
+            require('~/cartridge/scripts/transaction').autocommit(function () {
                 Cart.get(cart).calculate();
             });
 

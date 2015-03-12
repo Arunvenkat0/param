@@ -1227,8 +1227,9 @@ function SaveCreditCard()
     
     if (!(CurrentCustomer.authenticated && CurrentForms.billing.paymentMethods.creditCard.saveCard.value))
     {
-        // TODO what to return?
-    	return;
+        return {
+    	    error: true
+    	};
     }
 
     var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
