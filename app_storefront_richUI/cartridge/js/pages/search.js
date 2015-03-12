@@ -121,7 +121,7 @@ function initializeEvents() {
 		if (catparent.length > 0 || folderparent.length > 0) {
 			return true;
 		} else {
-			var uri = util.getUri(this);
+			var uri = util.getQueryString(this.href);
 			if (uri.query.length > 1) {
 				window.location.hash = uri.query.substring(1);
 			} else {
@@ -158,18 +158,18 @@ function initializeEvents() {
 	// handle sorting change
 	$main.on('change', '.sort-by select', function () {
 		var refineUrl = $(this).find('option:selected').val();
-		var uri = util.getUri(refineUrl);
-		window.location.hash = uri.query.substr(1);
+		var queryString = util.getQueryString(refineUrl);
+		window.location.hash = queryString;
 		return false;
 	})
 	.on('change', '.items-per-page select', function () {
 		var refineUrl = $(this).find('option:selected').val();
+		var queryString = util.getQueryString(refineUrl);
 		if (refineUrl === 'INFINITE_SCROLL') {
 			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
 		} else {
 			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
-			var uri = util.getUri(refineUrl);
-			window.location.hash = uri.query.substr(1);
+			window.location.hash = queryString;
 		}
 		return false;
 	});
