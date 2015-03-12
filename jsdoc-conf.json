@@ -1,0 +1,23 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.(ds|js)(doc)?$"
+        //"excludePattern": "(^|\\/|\\\\)_"
+    },
+    //"plugins": ["plugins/demandwarescript"],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": true
+        }
+    },
+    "opts": {
+        //"template": "templates/dw",
+        "recurse": true,
+        "lenient": true,
+        "tutorials": "tutorials"
+    }
+}
