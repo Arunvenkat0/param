@@ -2,13 +2,13 @@
 
 /** @module model/Product */
 
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 
 /**
  * Product helper providing enhanced product functionality
  * @class module:model/Product~Product
  */
-var Product = AbstractHelper.extend(
+var Product = AbstractModel.extend(
     /** @lends module:model/Product~Product.prototype */
     {
         /**

@@ -1,13 +1,13 @@
 'use strict';
 /** @module model/Profile */
 
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 
 /**
  * Profile helper providing enhanced profile functionality
  * @class module:model/Profile~Profile
  */
-var Profile = AbstractHelper.extend(
+var Profile = AbstractModel.extend(
     /** @lends module:model/Profile~Profile.prototype */
     {
         /**

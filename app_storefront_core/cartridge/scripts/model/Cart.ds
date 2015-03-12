@@ -6,7 +6,7 @@
  */
 
 /* API Includes */
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
@@ -15,7 +15,7 @@ var StoreMgr = require('dw/catalog/StoreMgr');
  * Category helper providing enhanced category functionality
  * @class module:model/Cart~Cart
  */
-var Cart = AbstractHelper.extend(
+var Cart = AbstractModel.extend(
     /** @lends module:model/Cart~Cart.prototype */
     {
         /**

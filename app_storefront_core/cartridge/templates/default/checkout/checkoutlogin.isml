@@ -26,7 +26,7 @@
 				</isif>
 				<iscomment>new customer</iscomment>
 				<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>
-				<form action="${URLUtils.httpsContinue()}" method="post">
+				<form action="${URLUtils.https('COCustomer-LoginForm')}" method="post">
 					<fieldset>
 						<div class="form-row form-row-button">
 							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.login.register.htmlName}"><span>${Resource.msg('global.createnowbutton','locale',null)}</span></button>

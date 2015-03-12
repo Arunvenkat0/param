@@ -44,7 +44,8 @@ function start() {
         /*
          * Direct to first checkout step if already authenticated
          */
-	    require('./COShipping').Start();
+	    response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+	    //require('./COShipping').Start();
         return;
     }
 
@@ -112,5 +113,5 @@ function showLoginForm() {
  */
 /** @see module:controller/COCustomer~start */
 exports.Start = guard.filter(['https'], start);
-/** @see module:controller/COCustomer~loginForm */
+/** @see module:controller/COCustomer~showLoginForm */
 exports.LoginForm = guard.filter(['https', 'post'], showLoginForm);

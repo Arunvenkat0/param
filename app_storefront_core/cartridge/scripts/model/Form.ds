@@ -8,13 +8,13 @@
 
 /** @module model/Form */
 
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 
 /**
  * Form helper providing enhanced Form functionality
  * @class module:model/Form~Form
  */
-var Form = AbstractHelper.extend(
+var Form = AbstractModel.extend(
     /** @lends module:model/Form~Form.prototype */
     {
         action : null,

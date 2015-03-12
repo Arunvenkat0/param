@@ -1,5 +1,5 @@
 'use strict';
-/** @module model/AbstractHelper */
+/** @module model/AbstractModel */
 
 
 var Class = require('~/cartridge/scripts/util/Class').Class;
@@ -9,8 +9,8 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
  *
  * @see https://bitbucket.org/demandware/sitegenesis-community/wiki/Home
  */
-var AbstractHelper = Class.extend(
-/** @lends module:model/AbstractHelper~AbstractHelper.prototype */
+var AbstractModel = Class.extend(
+/** @lends module:model/AbstractModel~AbstractModel.prototype */
 {
 	/** default JSON attribute name */
 	_defaultJSONField : 'jsonData',
@@ -22,7 +22,7 @@ var AbstractHelper = Class.extend(
 	object : null,
 
 	/**
-	 * AbstractHelper constructor
+	 * AbstractModel constructor
 	 * @constructs
 	 */
 	init : function(obj){
@@ -39,7 +39,7 @@ var AbstractHelper = Class.extend(
 	 */
 	get : function () {
 		dw.system.Logger.warn('Generic helper access method "get()" not implemented for subclass');
-		return new AbstractHelper({custom:{}});
+		return new AbstractModel({custom:{}});
 	},
 
 	/**
@@ -97,4 +97,4 @@ var AbstractHelper = Class.extend(
 	}
 });
 
-module.exports = AbstractHelper;
+module.exports = AbstractModel;
