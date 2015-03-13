@@ -105,7 +105,8 @@ module.exports = function (grunt) {
 		},
 	    jsdoc: {
 	        dist : {
-	            src: ['app_storefront_core/cartridge/scripts/model/*.ds',
+	            src: ['app_storefront_core/cartridge/controllers/README.md',
+	            	'app_storefront_core/cartridge/scripts/model/*.ds',
 	            	'app_storefront_core/cartridge/scripts/*.ds',
 	            	'app_storefront_core/cartridge/controllers/*.js',
 	            	'app_storefront_core/cartridge/scripts/view/*.ds'],

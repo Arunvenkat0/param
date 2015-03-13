@@ -1,0 +1,7 @@
+# Welcome to Next Generation SiteGenesis
+
+This SiteGenesis is now fully standard Javascript compliant using the new [Controllers]{@tutorial Controllers} concept to handle incoming requests. The controllers integrate nicely into a fully redesigned MVC concept which also includes [Models]{@tutorial Models} and [View]{@tutorial Views}.
+
+This documentation is meant to serve as a reference to quickly lookup supported functionality and is fully based on the documentation inside the code. You can continue to maintain these [JSDoc comments](http://usejsdoc.org/) to generate a similar documentation for your own project.
+
+Enjoy!
