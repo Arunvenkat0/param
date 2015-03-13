@@ -59,7 +59,7 @@
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
-                <key-binding alias="(CurrentHttpParameterMap.q.value).replace('-', ' ')" key="From_0"/>
+                <key-binding alias="(CurrentHttpParameterMap.q.value).replace(/-/g, ' ')" key="From_0"/>
                 <key-binding alias="SearchPhrase" key="To_0"/>
                 <key-binding alias="null" key="From_1"/>
                 <key-binding alias="null" key="To_1"/>
