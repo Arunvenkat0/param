@@ -295,7 +295,6 @@ function Inventory()
     response.renderJSON(stores);
 }
 
-
 /**
  * Gets/Sets the preferred store for the session object
  */
@@ -412,7 +411,6 @@ exports.ShowSelectedStoreCore   = g.get(ShowSelectedStoreCore);
 exports.ShowAvailableStores     = g.get(ShowAvailableStores);
 exports.CartSetZipCodeCore      = g.get(CartSetZipCodeCore);
 exports.SetZipCodeCore          = g.get(SetZipCodeCore);
-exports.SetPreferredStoreCore   = g.get(SetPreferredStoreCore);
 exports.SetStoreCore            = g.get(SetStoreCore);
 exports.Inventory               = g.get(Inventory);
 exports.SetPreferredStore       = g.get(SetPreferredStore);

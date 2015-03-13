@@ -1,5 +1,9 @@
 var g = require('./dw/guard');
 
+/* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
+var Transaction = require('~/cartridge/scripts/transaction');
+
 /**
  * Single Shipping Scenario
  * -----------------------------
@@ -10,64 +14,54 @@ var g = require('./dw/guard');
 /**
  * Starting point for single shipping scenario
  */
-function Start()
-{
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
-        CartController.Show();
+function Start() {
+    var cart = Cart.get();
+
+    if (!cart.object) {
+        require('./Cart').Show();
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
-    
-    
+
     /*
      * Redirect to multi shipping scenario if more than one physical shipment is
      * contained in the basket.
      */
     var requiresMultiShippingResult = requiresMultiShipping({
-        Basket: Basket
+        Basket : cart.object
     });
-    if (requiresMultiShippingResult.yes)
-    {
-        var COShippingMultipleController = require('./COShippingMultiple');
-        COShippingMultipleController.Start();
+
+    if (requiresMultiShippingResult.yes) {
+        require('./COShippingMultiple').Start();
         return;
     }
 
-    
     initForms({
-        Basket: Basket
+        Basket : cart.object
     });
 
-    
     /*
      * Clean shipments.
      */
     var PrepareShipmentsResult = PrepareShipments({
-        Basket: Basket
+        Basket : cart.object
     });
-    var HomeDeliveries = PrepareShipmentsResult.HomeDeliveries;
-    
-    
-    var CalculateResult = CartController.Calculate();
 
-    
+	Transaction.autocommit(function () {
+		cart.calculate();
+	});
+
     /*
      * Go to billing step, if we have no product line items, but only gift
      * certificates in the basket. Shipping step is not required.
      */
-    if (Basket.productLineItems.size() == 0)
-    {
-        var COBillingController = require('./COBilling');
-        COBillingController.Start();
+    if (cart.getProductLineItems().size() == 0) {
+        require('./COBilling').Start();
         return;
     }
 
     showSingleShipping({
-        Basket: Basket,
-        HomeDeliveries: HomeDeliveries
+        Basket         : cart.object,
+        HomeDeliveries : PrepareShipmentsResult.HomeDeliveries
     });
 }
 
@@ -77,7 +71,7 @@ function showSingleShipping(args)
     var web = require('./dw/web');
     web.updatePageMetaData("SiteGenesis Checkout");
 
-    response.renderTemplate('checkout/shipping/singleshipping', args);
+	args ? response.renderTemplate('checkout/shipping/singleshipping', args) : response.renderTemplate('checkout/shipping/singleshipping');
 }
 
 
@@ -91,28 +85,28 @@ function SingleShipping()
 	    if (TriggeredAction.formId == 'save')
 	    {
 	        // this is a new request, so we have to resolve the context again
-	        var CartController = require('./Cart');
-	        var GetExistingBasketResult = CartController.GetExistingBasket();
-	        if (GetExistingBasketResult.error)
-	        {
-	            CartController.Show();
+		    var Basket = Cart.get().object;
+
+		    if (!Basket) {
+			    require('./Cart').Show();
 	            return;
 	        }
-	        var Basket = GetExistingBasketResult.Basket;
-	        
-	        
+
 	        var handleShippingSettingsResult = handleShippingSettings({
 	            Basket: Basket
 	        });
 	        if (handleShippingSettingsResult.error)
 	        {
-	            showSingleShipping();
+	            showSingleShipping({
+		            Basket         : Basket,
+		            HomeDeliveries : PrepareShipments({Basket : Basket})
+	            });
 	            return;
 	        }
 
 	        saveAddress();
 
-	        updateInStoreMessage();
+	        updateInStoreMessage(Basket);
 
 	        /*
              * Mark step as fulfilled.
@@ -184,18 +178,14 @@ function SelectShippingMethod()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
+	var Basket = Cart.get();
+
+	if (!Basket.object) {
         response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
         });
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -237,8 +227,7 @@ function SelectShippingMethod()
     }
 
 
-    var CalculateResult = CartController.Calculate();
-    
+    require('./Cart').Calculate();
 
     response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
         Basket: Basket
@@ -262,18 +251,14 @@ function UpdateShippingMethodList()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
+	var Basket = Cart.get().object;
+
+	if (!Basket) {
         // TODO don't mix process and view pipelines
         // TODO this should end with a template
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
         OnError: 'PIPELET_ERROR',
@@ -317,8 +302,8 @@ function UpdateShippingMethodList()
             continue;
         }
 
-        
-        var CalculateResult = CartController.Calculate();
+
+		require('./Cart').Calculate();
         
 
         var ScriptResult = new dw.system.Pipelet('Script', {
@@ -379,12 +364,7 @@ function UpdateShippingMethodList()
 function GetApplicableShippingMethodsJSON()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
-
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    var Basket = GetExistingBasketResult.Basket;
-    
+	var Basket = Cart.get().object;
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
@@ -501,7 +481,6 @@ function PrepareShipments(args)
         };
     }
 
-    
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -689,16 +668,12 @@ function UpdateAddressDetails()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-    
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
-    {
-        CartController.Show();
+	var Basket = Cart.get().object;
+
+	if (!Basket) {
+		require('./Cart').Show();
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
-
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
@@ -744,7 +719,7 @@ function UpdateAddressDetails()
 /**
  * Binds the store message from the user to the shipment.
  */
-function updateInStoreMessage()
+function updateInStoreMessage(Basket)
 {
     var CurrentForms = session.forms;
 

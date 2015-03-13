@@ -857,7 +857,7 @@
 				</fieldset>
 			</form>
 
-			<form class="cart-action-continue-shopping" action="${URLUtils.http('Cart-SubmitForm')}" method="post" name="${session.forms.cart.dynamicHtmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${session.forms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${session.forms.cart.continueShopping.htmlName}">
 						<i class="fa fa-angle-double-left left"></i>${Resource.msg('global.continueshopping','locale',null)}

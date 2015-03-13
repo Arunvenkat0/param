@@ -9,7 +9,7 @@
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Called by the system when an error was not handled locally (general error

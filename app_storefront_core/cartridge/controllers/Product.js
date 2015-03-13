@@ -8,6 +8,7 @@
  */
 
 /* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
 var PagingModel = require('dw/web/PagingModel');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
@@ -16,7 +17,7 @@ var Search = require('~/cartridge/scripts/model/Search');
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a full product detail page. If the http parameter "format" is set to
@@ -206,11 +207,7 @@ function variation() {
         }
 
         if (request.httpParameterMap.source.stringValue === 'bonus') {
-            // TODO - refactor once basket can be retrieved via API
-            var CartController = require('./Cart');
-            var GetBasketResult = CartController.GetBasket();
-
-            var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+	        var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
             var bonusDiscountLineItem = null;
 
             for (var i = 0; i < bonusDiscountLineItems.length; i++) {
@@ -297,11 +294,7 @@ function includeLastVisited() {
  */
 function getBonusProducts() {
 
-    // TODO - refactor once basket can be retrieved via API
-    var CartController = require('./Cart');
-    var GetBasketResult = CartController.GetBasket();
-
-    var bonusDiscountLineItems = GetBasketResult.Basket.BonusDiscountLineItems;
+    var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
     var bonusDiscountLineItem = null;
 
     for (var i = 0; i < bonusDiscountLineItems.length; i++) {

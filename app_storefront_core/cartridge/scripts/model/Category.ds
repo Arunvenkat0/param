@@ -2,13 +2,13 @@
 
 /** @module model/Category */
 
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 
 /**
  * Category helper providing enhanced category functionality
  * @class module:model/Category ~Category
  */
-var Category = AbstractHelper.extend(
+var Category = AbstractModel.extend(
     /** @lends module:model/Category~Category.prototype */
     {
         /**

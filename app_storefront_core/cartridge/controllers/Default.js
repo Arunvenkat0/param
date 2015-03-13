@@ -8,7 +8,7 @@
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/_view');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Default entry point when www.mydomain.com is opened

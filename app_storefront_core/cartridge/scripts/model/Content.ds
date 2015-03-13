@@ -7,13 +7,13 @@
 
 /** @module model/Content */
 
-var AbstractHelper = require('./AbstractHelper');
+var AbstractModel = require('./AbstractModel');
 
 /**
  * Content helper providing enhanced content functionality
  * @class module:model/Content~Content
  */
-var Content = AbstractHelper.extend(
+var Content = AbstractModel.extend(
     /** @lends module:model/Content~Content.prototype */
     {
         /**

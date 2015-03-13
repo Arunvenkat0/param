@@ -1,4 +1,21 @@
-var g = require('./dw/guard');
+'use strict';
+
+/**
+ * TODO
+ *
+ * @module controller/COCustomer
+ */
+
+/* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
+var Transaction = require('~/cartridge/scripts/transaction');
+
+/* Script Modules */
+var loginAsset = require('~/cartridge/scripts/model/Content').get('myaccount-login');
+var guard = require('~/cartridge/scripts/guard');
+var loginForm = require('~/cartridge/scripts/model/Form').get('login');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Pipeline implements the first step of the cart checkout process, which is to ask the customer to login, 
@@ -8,131 +25,84 @@ var g = require('./dw/guard');
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)
  */
-function Start()
-{
-    var CurrentForms = session.forms;
-    var CurrentCustomer = customer;
+function start() {
+    /**
+     * Prepares the checkout initially: removes all payment instruments from the basket and clears all
+     * forms used in the checkout process, when the customer enters the checkout. The single steps (shipping, billing etc.)
+     * may not contain the form clearing in order to support navigating forth and back in the checkout steps without losing
+     * already entered form values.
+     */
+    session.forms.singleshipping.clearFormElement();
+    session.forms.multishipping.clearFormElement();
+    session.forms.billing.clearFormElement();
 
-    
-    prepareCheckout();
+    Transaction.autocommit(function () {
+        Cart.goc().removeAllPaymentInstruments;
+    });
 
-    if (CurrentCustomer.authenticated)
-    {
-    	/*
-    	 * Direct to first checkout step if already authenticated
-    	 */
-    	var COShippingController = require('./COShipping');
-        COShippingController.Start();
+    if (customer.authenticated) {
+        /*
+         * Direct to first checkout step if already authenticated
+         */
+	    response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+	    //require('./COShipping').Start();
         return;
     }
 
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.login);
+    session.forms.login.clearFormElement();
 
-    if (CurrentCustomer.registered)
-    {
-    	/*
-    	 * Prepopulate login form field with customer's login name
-    	 */
-    	CurrentForms.login.username.value = CurrentCustomer.profile.credentials.login;
+    if (customer.registered) {
+        /*
+         * Prepopulate login form field with customer's login name
+         */
+        session.forms.login.username.value = customer.profile.credentials.login;
     }
 
-
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-login"));
-
-    showLogin();
+	pageMeta.update(loginAsset);
+	view.get().render('checkout/checkoutlogin');
 }
 
-function showLogin()
-{
-	response.renderTemplate('checkout/checkoutlogin');
-}
+function showLoginForm() {
+	var formResult = loginForm.handleAction({
+		'login'        : function (formgroup) {
+			var Login = session.forms.login.username.value;
+			var Password = session.forms.login.password.value;
+			var RememberMe = session.forms.login.rememberme.value;
 
+			// TODO do not perform login ourselves?
+			/*
+			 * Delegate login to appropriate authentication pipeline and react on success/failure
+			 */
+			var ProcessResult = require('./Login').Process();
+			if (ProcessResult.login_failed) {
+				view.get().render('checkout/checkoutlogin');
+				return;
+			}
 
-function LoginForm()
-{
-    var CurrentForms = session.forms;
+			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
 
-    
-	// TODO this should all end in a redirect?
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null)
-	{
-	    if (TriggeredAction.formId == 'login')
-	    {
-	        var Login = CurrentForms.login.username.value;
-	        var Password = CurrentForms.login.password.value;
-	        var RememberMe = CurrentForms.login.rememberme.value;
+			return;
+		},
+		'register'     : function (formgroup) {
+			//require('./Account').Register();
+			//response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+			response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
 
-	        // TODO do not perform login ourselves?
-	        /*
-	         * Delegate login to appropriate authentication pipeline and react on success/failure
-	         */
-	        var LoginController = require('./Login');
-	        var ProcessResult = LoginController.Process();
-	        if (ProcessResult.login_failed)
-	        {
-	        	showLogin();
-	        	return;
-	        }
+			return;
+		},
+		'unregistered' : function (formgroup) {
+			//require('./COShipping').Start();
+			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
 
-	        response.redirect(dw.web.URLUtils.https('COShipping-Start'));
-	        return;
-	    }
-	    else if (TriggeredAction.formId == 'register')
-	    {
-	        // TODO requireRegistration like login?
-	        var AccountController = require('./Account');
-	        var RegisterResult = AccountController.Register();
+			return;
+		}
+	});
 
-            response.redirect(dw.web.URLUtils.https('COShipping-Start'));
-	        return;
-	    }
-	    else if (TriggeredAction.formId == 'unregistered')
-	    {
-	        var COShippingController = require('./COShipping');
-	        COShippingController.Start();
-	        return;
-	    }
+	if (formResult) {
+		pageMeta.update(loginAsset);
+		view.get().render('checkout/checkoutlogin');
 	}
-	
-	showLogin();
 }
-
-
-/**
- * Prepares the checkout initially: removes all payment instruments from the basket and clears all 
- * forms used in the checkout process, when the customer enters the checkout. The single steps (shipping, billing etc.) 
- * may not contain the form clearing in order to support navigating forth and back in the checkout steps without losing 
- * already entered form values.
- */
-function prepareCheckout()
-{
-    var CurrentForms = session.forms;
-
-    
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.singleshipping);
-    form.clearFormElement(CurrentForms.multishipping);
-    form.clearFormElement(CurrentForms.billing);
-
-
-    var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-        Create: true
-    }).execute();
-    if (GetBasketResult.result == PIPELET_NEXT)
-    {
-        var txn = require('dw/system/Transaction');
-        txn.begin();
-        
-        var Basket = GetBasketResult.Basket;
-        Basket.removeAllPaymentInstruments();
-        
-        txn.commit();
-    }
-}
-
 
 /*
  * Module exports
@@ -141,6 +111,7 @@ function prepareCheckout()
 /*
  * Web exposed methods
  */
-// TODO called with GET and POST
-exports.Start               = g.https(Start);
-exports.LoginForm           = g.httpsPost(LoginForm);
+/** @see module:controller/COCustomer~start */
+exports.Start = guard.filter(['https'], start);
+/** @see module:controller/COCustomer~showLoginForm */
+exports.LoginForm = guard.filter(['https', 'post'], showLoginForm);
