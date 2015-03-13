@@ -30,14 +30,14 @@ module.exports = function (grunt) {
 					sourcemap: true
 				},
 				files: paths.css.map(function (path) {
-					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
+					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'};
 				})
 			}
 		},
 		autoprefixer: {
 			dev: {
 				files: paths.css.map(function (path) {
-					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
+					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'};
 				})
 			}
 		},
@@ -102,12 +102,24 @@ module.exports = function (grunt) {
 				},
 				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
 			}
-		}
+		},
+	    jsdoc: {
+	        dist : {
+	            src: ['app_storefront_core/cartridge/scripts/model/*.ds',
+	            	'app_storefront_core/cartridge/scripts/*.ds',
+	            	'app_storefront_core/cartridge/controllers/*.js',
+	            	'app_storefront_core/cartridge/scripts/view/*.ds'],
+	            options:{
+		            destination: 'doc',
+		            configure: './jsdoc-conf.json'
+	            }
+	        }
+	    }
 	});
 
 	grunt.registerTask('css', ['sass', 'autoprefixer']);
 	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
 	grunt.registerTask('js', ['browserify:dist']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
-	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
-}
+	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit']);
+};

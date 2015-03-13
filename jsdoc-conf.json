@@ -4,9 +4,7 @@
     },
     "source": {
         "includePattern": ".+\\.(ds|js)(doc)?$"
-        //"excludePattern": "(^|\\/|\\\\)_"
     },
-    //"plugins": ["plugins/demandwarescript"],
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": false,
@@ -15,7 +13,6 @@
         }
     },
     "opts": {
-        //"template": "templates/dw",
         "recurse": true,
         "lenient": true,
         "tutorials": "tutorials"
