@@ -59,6 +59,9 @@ function start() {
 
 }
 
+/**
+ * TODO
+ */
 function showLoginForm() {
 	var formResult = loginForm.handleAction({
 		'login'        : function (formgroup) {

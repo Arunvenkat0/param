@@ -475,9 +475,77 @@ var Cart = AbstractModel.extend(
             }
 
             return physicalShipments;
-        }
+        },
 
+	    /**
+	     * Cleans the shipments of the current basket by putting all gift certificate line items to single, possibly
+	     * new shipments (one shipment per gift certificate line item).
+	     */
+ 	    updateGiftCertificateShipments : function () {
 
+		    // list of line items
+		    var giftCertificatesLI = new ArrayList();
+
+		    // find gift certificates in shipments which have
+		    // product line items and gift certificate line items merged
+		    var shipments = this.getShipments();
+
+		    for (var i = 0; i < shipments.length; i++) {
+			    var shipment = shipments[i];
+
+			    // skip shipment if no gift certificates are contained
+			    if (shipment.giftCertificateLineItems.size() == 0) {
+				    continue;
+			    }
+
+			    // skip shipment if no products and just one gift certificate is contained
+			    if (shipment.productLineItems.size() == 0 && shipment.giftCertificateLineItems.size() == 1) {
+				    continue;
+			    }
+
+			    // if there are gift certificates add them to the list
+			    if (shipment.giftCertificateLineItems.size() > 0) {
+				    giftCertificatesLI.addAll(shipment.giftCertificateLineItems);
+			    }
+		    }
+
+		    // create a shipment for each gift certificate line item
+		    for (var i = 0; i < giftCertificatesLI.length; i++) {
+			    var newShipmentID = this.determineUniqueShipmentID("Shipment #");
+			    giftCertificatesLI[i].setShipment(this.createShipment(newShipmentID));
+		    }
+	    },
+
+	    /**
+	     * Determines a unique shipment ID for shipments in the curent cart and the given base ID. The function appends
+	     * a counter to the base ID and checks the existence of the resulting ID. If the resulting ID is unique this ID
+	     * is returned, if not the counter is incremented and checked again.
+	     *
+	     * @param baseID
+	     * @returns {*}
+	     */
+	    determineUniqueShipmentID : function (baseID) {
+		    var counter = 1;
+		    var shipment = null;
+		    var candidateID = baseID + "" + counter;
+
+		    while (shipment == null) {
+			    shipment = this.getShipment(candidateID);
+			    if (shipment != null) {
+				    // this ID is already taken, increment the counter
+				    // and try the next one
+				    counter++;
+				    candidateID = baseID + "" + counter;
+				    shipment = null;
+			    }
+			    else {
+				    return candidateID;
+			    }
+		    }
+
+		    // should never go here
+		    return null;
+	    }
     });
 
 

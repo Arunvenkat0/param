@@ -13,6 +13,7 @@
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Form = require('~/cartridge/scripts/model/Form');
 var HashMap = require('dw/util/HashMap');
+var Profile = require('~/cartridge/scripts/model/Profile');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Transaction = require('~/cartridge/scripts/transaction');
 
@@ -39,9 +40,7 @@ function start() {
 		return;
 	}
 
-	initForms({
-		Basket : cart.object
-	});
+	initForms(cart);
 
 	/*
 	 * Clean shipments.
@@ -106,7 +105,13 @@ function singleShipping() {
 				return;
 			}
 
-			saveAddress();
+			/**
+			 * Attempts to save the used shipping address in the customer address book.
+			 */
+			if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
+				Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
+			}
+
 			updateInStoreMessage(Basket);
 
 			/*
@@ -122,8 +127,7 @@ function singleShipping() {
 			return;
 		}
 		else if (TriggeredAction.formId == 'shipToMultiple') {
-			var COShippingMultipleController = require('./COShippingMultiple');
-			COShippingMultipleController.Start();
+			require('./COShippingMultiple').Start();
 			return;
 		}
 	}
@@ -137,13 +141,12 @@ function singleShipping() {
  * shipping address of default shipment if address exists, otherwise -
  * preselects shipping method in list if set at shipment
  */
-function initForms(args) {
-	var Basket = args.Basket;
+function initForms(cart) {
 
-	if (Basket.defaultShipment.shippingAddress) {
-		Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(Basket.getDefaultShipment().getShippingAddress());
-		Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(Basket.getDefaultShipment().getShippingAddress());
-		Form.get(session.forms.singleshipping.shippingAddress).updateWithObject(Basket.getDefaultShipment());
+	if (cart.getDefaultShipment().getShippingAddress()) {
+		Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(cart.getDefaultShipment().getShippingAddress());
+		Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(cart.getDefaultShipment().getShippingAddress());
+		Form.get(session.forms.singleshipping.shippingAddress).updateWithObject(cart.getDefaultShipment());
 	}
 	else {
 		if (customer.authenticated && customer.registered && customer.addressBook.preferredAddress) {
@@ -152,9 +155,9 @@ function initForms(args) {
 		}
 	}
 
-	session.forms.singleshipping.shippingAddress.shippingMethodID.value = Basket.defaultShipment.shippingMethodID;
+	session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-	return {};
+	return;
 }
 
 
@@ -418,19 +421,7 @@ function handleShippingSettings(args) {
 function prepareShipments(args) {
 	var cart = Cart.get(args.Basket);
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/UpdateGiftCertificateShipments.ds'
-	}).execute({
-			Basket : cart.object
-		});
-	if (ScriptResult.result == PIPELET_ERROR) {
-		return {
-			error : true
-		};
-	}
-
+	cart.updateGiftCertificateShipments();
 	cart.removeEmptyShipments();
 
 	return inStoreFormInit({
@@ -496,30 +487,6 @@ function editShippingAddress() {
 	response.renderTemplate('checkout/shipping/shippingaddressdetails');
 }
 
-
-/**
- * Attempts to save the used shipping address in the customer address book.
- */
-function saveAddress() {
-
-	if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : true,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/AddAddressToAddressBook.ds'
-		}).execute({
-				Profile      : customer.profile,
-				OrderAddress : Basket.getDefaultShipment().getShippingAddress()
-			});
-		if (ScriptResult.result == PIPELET_ERROR) {
-			return {
-				error : true
-			};
-		}
-	}
-}
-
-
 /**
  * Checks if the basket requires a multi shipping checkout by determining the
  * physical shipments of the basket. If more than one physical shipment is
@@ -564,7 +531,7 @@ function updateAddressDetails() {
 	Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(address);
 	Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(address);
 
-	if (Basket.defaultShipment.shippingAddress != null) {
+	if (Basket.getDefaultShipment().getShippingAddress() != null) {
 		new dw.system.Pipelet('Script', {
 			Transactional : true,
 			OnError       : 'PIPELET_ERROR',

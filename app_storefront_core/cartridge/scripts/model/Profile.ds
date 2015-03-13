@@ -84,6 +84,93 @@ var Profile = AbstractModel.extend(
         isDefaultBillingAddress : function (address) {
             var defaultBillingAddress = this.getDefaultBillingAddress();
             return defaultBillingAddress && address && defaultBillingAddress.ID === address.ID;
+        },
+
+        /**
+         * This script attempts to add the given address to the address book of the current profile. The address
+         * attribute "city" is used to generate the address ID within the address book.
+         *
+         * @param addressToAdd
+         * @returns {*}
+         */
+        addAddressToAddressBook : function (addressToAdd) {
+
+            var addressBook = this.getAddressBook();
+
+            if (addressToAdd) {
+                // get a possible equivalent address from the address book
+                var address = null;
+
+                for each(address in addressBook.addresses) {
+                    if (address.isEquivalentAddress(addressToAdd)) {
+                        break;
+                    }
+                }
+
+                // create the new address, if no equivalent address was found
+                // and copy the address attributes
+                if (address == null) {
+                    // get a unique address ID
+                    var addressID = this.determineUniqueAddressID(addressToAdd.city);
+
+                    // check on empty address ID
+                    if (!addressID) {
+                        Logger.debug("Cannot add address to address book, with empty address ID.");
+                        return;
+                    }
+	                else {
+	                    address = addressBook.createAddress(addressID);
+	                    address.setFirstName(addressToAdd.firstName);
+	                    address.setLastName(addressToAdd.lastName);
+	                    address.setAddress1(addressToAdd.address1);
+	                    address.setAddress2(addressToAdd.address2);
+	                    address.setCity(addressToAdd.city);
+	                    address.setPostalCode(addressToAdd.postalCode);
+	                    address.setStateCode(addressToAdd.stateCode);
+	                    address.setCountryCode(addressToAdd.countryCode.value);
+                    }
+                }
+
+                // update the phone in either the equivalent found address
+                // or in the newly created address
+                address.setPhone(addressToAdd.phone);
+            }
+        },
+
+	    /**
+	     * Determines a unique address ID for an address to be save the profiles address book. The function first checks
+	     * the city as the candidate ID or appends a counter to the city (if already used as address ID) and checks
+	     * the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not the
+	     * counter is incremented and checked again.
+	     *
+	     * @param city
+	     * @returns {*}
+	     */
+	    determineUniqueAddressID : function (city) {
+            var counter = 0;
+
+            // check, if attribute "city" is set and has a value
+            if (city) {
+	            // initialize the candidate ID
+	            var candidateID = city;
+	            var existingAddress = null;
+
+	            while (existingAddress == null) {
+		            existingAddress = this.getAddressBook().getAddress(candidateID);
+		            if (existingAddress != null) {
+			            // this ID is already taken, increment the counter
+			            // and try the next one
+			            counter++;
+			            candidateID = city + "-" + counter;
+			            existingAddress = null;
+		            }
+		            else {
+			            return candidateID;
+		            }
+	            }
+            }
+
+	        return null;
         }
 
     });
