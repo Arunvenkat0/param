@@ -7,6 +7,7 @@
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
+var ArrayList = require('dw/util/ArrayList');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
@@ -431,7 +432,52 @@ var Cart = AbstractModel.extend(
 
             return result;
 
+        },
+
+	    /**
+	     * The function removes all empty shipments of the current cart.
+	     */
+	    removeEmptyShipments : function () {
+            // get the list of shipments
+            var shipments = this.getShipments();
+
+            for (var i = 0; i < shipments.length; i++) {
+                var shipment = shipments[i];
+
+                if (!shipment.isDefault()) {
+                    if (shipment.getProductLineItems().isEmpty() && shipment.getGiftCertificateLineItems().isEmpty()) {
+                        this.removeShipment(shipment);
+                    }
+                }
+
+            }
+        },
+
+	    /**
+	     * Determines the physical shipments of the current cart. Physical shipments are shipments which contain at
+	     * least one product line item. A shipment which contains only gift certificates is not a physical shipment.
+	     *
+	     * @returns {*}
+	     */
+        getPhysicalShipments : function () {
+
+            // list of physical shipments
+            var physicalShipments = new ArrayList();
+
+            // find physical shipments
+            var shipments = this.getShipments();
+
+            for (var i = 0; i < shipments.length; i++) {
+                var shipment = shipments[i];
+                if (!shipment.getProductLineItems().isEmpty() && shipment.custom.shipmentType != 'instore') {
+                    physicalShipments.add(shipment);
+                }
+            }
+
+            return physicalShipments;
         }
+
+
     });
 
 

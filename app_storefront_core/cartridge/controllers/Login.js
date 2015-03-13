@@ -13,75 +13,63 @@ var Cart = require('~/cartridge/scripts/model/Cart');
  */
 function Process()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-    var loginForm = session.forms.login;
-
-
-    if (CurrentHttpParameterMap.OAuthProvider.stringValue)
-    {
+    if (request.httpParameterMap.OAuthProvider.stringValue) {
         new dw.system.Pipelet('Script', {
-            Transactional: false,
-            OnError: 'PIPELET_ERROR',
-            ScriptFile: 'account/login/oauth/PreInitiateOAuthLogin.ds',
+            Transactional : false,
+            OnError       : 'PIPELET_ERROR',
+            ScriptFile    : 'account/login/oauth/PreInitiateOAuthLogin.ds',
         }).execute();
-        
 
         var InitiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
-            AuthorizationURL: Location,
-            OAuthProviderID: CurrentHttpParameterMap.OAuthProvider.stringValue
+            AuthorizationURL : Location,
+            OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
         });
-        if (InitiateOAuthLoginResult.result == PIPELET_ERROR)
-        {
-        	oAuthFailed();
-        	return;
+        if (InitiateOAuthLoginResult.result == PIPELET_ERROR) {
+            oAuthFailed();
+            return;
         }
-        var Location = InitiateOAuthLoginResult.AuthorizationURL;
-        
-        
+
         response.renderTemplate('util/redirect.isml', {
-            Location: Location
+            Location : InitiateOAuthLoginResult.AuthorizationURL
         });
         return;
     }
-    
-    
-    var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-        Login: loginForm.username.value
-    });
-    var TempCustomer = GetCustomerResult.Customer;
+    else {
+        var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
+            Login : session.forms.login.username.value
+        });
+        var TempCustomer = GetCustomerResult.Customer;
 
-    if (typeof(TempCustomer) != 'undefined'&& TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked)
-    {
-    	return loginFailed();
-    }
-
-    var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
-        Login: loginForm.username.value,
-        Password: loginForm.password.value,
-        RememberMe: loginForm.rememberme.value
-    });
-    if (LoginCustomerResult.result == PIPELET_ERROR)
-    {
-        if (typeof(TempCustomer) != 'undefined' && TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked)
-        {
-            var m = require('./dw/mail');
-            m.sendMail({
-                MailFrom : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
-                MailSubject : dw.web.Resource.msg('email.youraccount','email',null),
-                MailTemplate : "mail/lockoutemail",
-                MailTo : TempCustomer.profile.email
-            });
+        if (typeof(TempCustomer) != 'undefined' && TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked) {
+            return loginFailed();
         }
-    	
-    	return loginFailed();
-    }
-    
-    
-    f.clearFormElement(loginForm);
 
-    return {
-        login_succeeded: true
-    };
+        var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
+            Login      : session.forms.login.username.value,
+            Password   : session.forms.login.password.value,
+            RememberMe : session.forms.login.rememberme.value
+        });
+        if (LoginCustomerResult.result == PIPELET_ERROR) {
+            if (typeof(TempCustomer) != 'undefined' && TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked) {
+                var m = require('./dw/mail');
+                m.sendMail({
+                    MailFrom     : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
+                    MailSubject  : dw.web.Resource.msg('email.youraccount', 'email', null),
+                    MailTemplate : "mail/lockoutemail",
+                    MailTo       : TempCustomer.profile.email
+                });
+            }
+
+            return loginFailed();
+        }
+
+
+        f.clearFormElement(session.forms.login);
+
+        return {
+            login_succeeded : true
+        };
+    }
 }
 
 function loginFailed()

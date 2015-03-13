@@ -40,4 +40,4 @@ function startCheckout() {
  * Web exposed methods
  */
 /** @see module:controller/ABTestEvent~startCheckout */
-exports.StartCheckout = guard.filter(['get'], startCheckout);
+exports.StartCheckout = guard.ensure(['get'], startCheckout);

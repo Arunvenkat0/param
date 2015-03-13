@@ -131,16 +131,14 @@ function submitForm() {
             }
         },
         'logout'                : function (formgroup) {
-            require('./Login').Logout();
-            return null;
+	        new dw.system.Pipelet('LogoutCustomer').execute();
+	        return {cart : cart};
         },
         'register'              : function (formgroup) {
             require('./Account').StartRegister();
             Transaction.autocommit(function () {
                 cart.calculate();
             });
-
-            response.redirect(dw.web.URLUtils.https('Cart-Show'));
 
             return null;
         },
@@ -491,21 +489,21 @@ function addCouponJson() {
  * Web exposed methods
  */
 /** @see module:controller/Cart~addProduct */
-exports.AddProduct = guard.filter(['post'], addProduct);
+exports.AddProduct = guard.ensure(['post'], addProduct);
 /** @see module:controller/Cart~show */
-exports.Show = guard.filter(['get', 'https'], show);
+exports.Show = guard.ensure(['get', 'https'], show);
 /** @see module:controller/Cart~submitForm */
-exports.SubmitForm = guard.filter(['post', 'https'], submitForm);
+exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
 /** @see module:controller/Cart~continueShopping */
-exports.ContinueShopping = guard.filter(['post', 'https'], continueShopping);
+exports.ContinueShopping = guard.ensure(['post', 'https'], continueShopping);
 /** @see module:controller/Cart~addCouponJson */
-exports.AddCouponJson = guard.filter(['get', 'https'], addCouponJson);
+exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controller/Cart~miniCart */
-exports.MiniCart = guard.filter(['get'], miniCart);
+exports.MiniCart = guard.ensure(['get'], miniCart);
 /** @see module:controller/Cart~addToWishlist */
-exports.AddToWishlist = guard.filter(['get', 'https'], addToWishlist);
-/** @see module:controller/Cart~addBonusProduct */
-exports.AddBonusProduct = guard.filter(['post'], addBonusProductJson);
+exports.AddToWishlist = guard.ensure(['get', 'https'], addToWishlist);
+/** @see module:controller/Cart~addBonusProductJson */
+exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
 
 /*
  * Local methods

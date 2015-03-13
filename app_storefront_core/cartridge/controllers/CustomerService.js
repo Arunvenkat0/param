@@ -96,10 +96,10 @@ function submit() {
  * Web exposed methods
  */
 /** @see module:controller/CustomerService~show */
-exports.Show        = guard.filter(['get', 'https'], show);
+exports.Show        = guard.ensure(['get', 'https'], show);
 /** @see module:controller/CustomerService~leftNav */
-exports.LeftNav     = guard.filter(['get', 'https'], leftNav);
+exports.LeftNav     = guard.ensure(['get', 'https'], leftNav);
 /** @see module:controller/CustomerService~contactUs */
-exports.ContactUs   = guard.filter(['get', 'https'], contactUs);
+exports.ContactUs   = guard.ensure(['get', 'https'], contactUs);
 /** @see module:controller/CustomerService~submit */
-exports.Submit      = guard.filter(['post', 'https'], submit);
+exports.Submit      = guard.ensure(['post', 'https'], submit);

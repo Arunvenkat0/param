@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * TODO
+ * Controller implements the first step of the cart checkout process, which is to ask the customer to login, register or
+ * checkout anonymously.
  *
  * @module controller/COCustomer
  */
@@ -16,11 +17,6 @@ var guard = require('~/cartridge/scripts/guard');
 var loginForm = require('~/cartridge/scripts/model/Form').get('login');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
-
-/**
- * Pipeline implements the first step of the cart checkout process, which is to ask the customer to login, 
- * register or checkout anonymously.
- */
 
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)
@@ -40,58 +36,52 @@ function start() {
         Cart.goc().removeAllPaymentInstruments;
     });
 
+	/*
+	 * Direct to first checkout step if already authenticated
+	 */
     if (customer.authenticated) {
-        /*
-         * Direct to first checkout step if already authenticated
-         */
 	    response.redirect(dw.web.URLUtils.https('COShipping-Start'));
-	    //require('./COShipping').Start();
         return;
     }
+	else {
+	    session.forms.login.clearFormElement();
 
-    session.forms.login.clearFormElement();
+	    /*
+	     * Prepopulate login form field with customer's login name
+	     */
+	    if (customer.registered) {
+		    session.forms.login.username.value = customer.profile.credentials.login;
+	    }
 
-    if (customer.registered) {
-        /*
-         * Prepopulate login form field with customer's login name
-         */
-        session.forms.login.username.value = customer.profile.credentials.login;
+	    pageMeta.update(loginAsset);
+	    view.get().render('checkout/checkoutlogin');
     }
 
-	pageMeta.update(loginAsset);
-	view.get().render('checkout/checkoutlogin');
 }
 
 function showLoginForm() {
 	var formResult = loginForm.handleAction({
 		'login'        : function (formgroup) {
-			var Login = session.forms.login.username.value;
-			var Password = session.forms.login.password.value;
-			var RememberMe = session.forms.login.rememberme.value;
-
-			// TODO do not perform login ourselves?
 			/*
 			 * Delegate login to appropriate authentication pipeline and react on success/failure
 			 */
-			var ProcessResult = require('./Login').Process();
-			if (ProcessResult.login_failed) {
-				view.get().render('checkout/checkoutlogin');
-				return;
-			}
+			var loginResult = require('./Login').Process();
 
-			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
-
-			return;
+            if (loginResult.login_succeeded) {
+                response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+                return;
+            }
+            else {
+	            return {};
+            }
 		},
 		'register'     : function (formgroup) {
-			//require('./Account').Register();
-			//response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+			// TODO - redirect to COShipping-Start after registration was successful
 			response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
 
 			return;
 		},
 		'unregistered' : function (formgroup) {
-			//require('./COShipping').Start();
 			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
 
 			return;
@@ -112,6 +102,6 @@ function showLoginForm() {
  * Web exposed methods
  */
 /** @see module:controller/COCustomer~start */
-exports.Start = guard.filter(['https'], start);
+exports.Start = guard.ensure(['https'], start);
 /** @see module:controller/COCustomer~showLoginForm */
-exports.LoginForm = guard.filter(['https', 'post'], showLoginForm);
+exports.LoginForm = guard.ensure(['https', 'post'], showLoginForm);

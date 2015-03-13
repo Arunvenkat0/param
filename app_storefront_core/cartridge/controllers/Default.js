@@ -37,6 +37,6 @@ function offline() {
  * Web exposed methods
  */
 /** @see module:controller/Default~start */
-exports.Start = guard.filter(['get'], start);
+exports.Start = guard.ensure(['get'], start);
 /** @see module:controller/Default~offline */
-exports.Offline = guard.filter(['get'], offline);
+exports.Offline = guard.ensure(['get'], offline);

@@ -251,8 +251,8 @@ function showProductGrid() {
  * Web exposed methods
  */
 /** @see module:controller/Search~show */
-exports.Show            = guard.filter(['get'], show);
+exports.Show            = guard.ensure(['get'], show);
 /** @see module:controller/Search~showContent */
-exports.ShowContent     = guard.filter(['get'], showContent);
+exports.ShowContent     = guard.ensure(['get'], showContent);
 /** @see module:controller/Search~getSuggestions */
-exports.GetSuggestions  = guard.filter(['get'], getSuggestions);
+exports.GetSuggestions  = guard.ensure(['get'], getSuggestions);

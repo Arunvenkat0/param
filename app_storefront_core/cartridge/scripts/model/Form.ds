@@ -63,13 +63,24 @@ var Form = AbstractModel.extend(
             }
         },
 
-        clear : function () {
-            this.object.clearFormElement();
-        },
+	    /**
+	     * Updates the  form with the corresponding property values from the given object.
+	     *
+	     * @param updateObject the object
+	     * @param clear optional, if true, the form is cleared first before updating it
+	     */
+	    updateWithObject : function (updateObject, clear) {
 
-        setValue : function (key, value) {
-            this.object[key].value = value;
-        }
+		    clear = (typeof clear !== 'undefined') ? clear : false;
+
+		    var UpdateFormWithObjectPipelet = new dw.system.Pipelet('UpdateFormWithObject', {
+			    Clear : clear
+		    });
+		    UpdateFormWithObjectPipelet.execute({
+			    Form   : this.object,
+			    Object : updateObject
+		    });
+	    }
 
     });
 
