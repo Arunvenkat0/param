@@ -8,8 +8,11 @@
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
+var Money = require('dw/value/Money');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
+var PromotionMgr = require('dw/campaign/PromotionMgr');
+var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 
 /**
@@ -545,8 +548,284 @@ var Cart = AbstractModel.extend(
 
 		    // should never go here
 		    return null;
-	    }
-    });
+	    },
+
+	    /**
+	     * Creates a shipping address for the shipment with the given shipment ID.
+	     *
+	     * @param shipmentID
+	     * @returns {*}
+	     */
+        createShipmentShippingAddress : function (shipmentID) {
+
+            var shipment = this.getShipment(shipmentID);
+            var shippingAddress = shipment.getShippingAddress();
+
+            // if the shipment has no shipping address yet, create one
+            if (shippingAddress === null) {
+                shippingAddress = shipment.createShippingAddress();
+            }
+
+            return shippingAddress;
+
+        },
+
+	    /**
+         * This script scans the basket and consildates items that are going to the same store, it also creates shipmets
+         * with shipment type and method for the rest of checkout.
+         *
+         * @returns {boolean} Boolean used to show the shipping form fields if there is a home delivery found in the basket.
+         */
+        consolidateInStoreShipments : function () {
+
+            var sliArrayList = new ArrayList();
+            var homeDeliveries = false;
+
+            var plis = this.getAllProductLineItems();
+            for (var i = 0; i < plis.length; i++) {
+                var pli = plis[i];
+
+                if (pli.custom.fromStoreId == null) {
+                    //skip none instore pli's
+                    homeDeliveries = true;
+                    continue;
+                }
+                if (pli.shipment.shippingMethod && pli.shipment.shippingMethod.custom.storePickupEnabled) {
+                    //check to see if the storeid has changed
+                    if (pli.custom.fromStoreId == pli.shipment.custom.fromStoreId) {
+                        if (pli.shipment.shippingAddress != null) {
+                            continue;
+                        }
+                        else {
+                            //create the shipment address to reflect the new store address
+                            var shippingAddress = new ShippingAddress();
+                            var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                            var orderAddress = pli.shipment.createShippingAddress();
+                            shippingAddress.storeAddressTo(orderAddress, storeObject);
+                            continue;
+                        }
+                    }
+                    else {
+	                    var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                        //change the shipment address to reflect the new store address
+                        pli.shipment.shippingAddress.setFirstName('');
+                        pli.shipment.shippingAddress.setLastName(storeObject.name);
+                        pli.shipment.shippingAddress.setAddress1(storeObject.address1);
+                        pli.shipment.shippingAddress.setAddress2(storeObject.address2);
+                        pli.shipment.shippingAddress.setCity(storeObject.city);
+                        pli.shipment.shippingAddress.setPostalCode(storeObject.postalCode);
+                        pli.shipment.shippingAddress.setStateCode(storeObject.stateCode);
+                        pli.shipment.shippingAddress.setCountryCode(storeObject.custom.countryCodeValue);
+                        pli.shipment.shippingAddress.setPhone(storeObject.phone);
+                        pli.shipment.custom.fromStoreId = pli.custom.fromStoreId;
+                        continue;
+                    }
+                }
+
+                //check to see if we are creating a new shipment or adding to an existing one
+                if (sliArrayList.contains(pli.custom.fromStoreId)) {
+                    //add the pli to the existing shipment
+                    //loop through to find the shipment with the storeid and set it as the shipment for the pli
+                    var shipments = this.getShipments();
+                    for (var j = 0; j < this.getShipments().length; j++) {
+                        var inStoreShipment = shipments[j];
+
+                        if (inStoreShipment.custom.fromStoreId != null && (pli.custom.fromStoreId == inStoreShipment.custom.fromStoreId)) {
+                            //have found an existing shipment that has the correct address
+                            pli.setShipment(inStoreShipment);
+                        }
+
+                    }
+
+                }
+                else {
+                    //create a new shipment to put this pli in
+                    var shipment = null;
+                    shipment = this.createShipment(UUIDUtils.createUUID());
+                    shipment.custom.fromStoreId = pli.custom.fromStoreId;
+                    shipment.custom.shipmentType = 'instore';
+
+                    var inStoreShippingMethod = null;
+                    //loop over the shipping methods and pick the instore one
+
+                    var shippingMethods = new ArrayList(ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods());
+                    for (var k = 0; k < shippingMethods.length; k++) {
+                        var shippingMethod = shippingMethods[k];
+
+                        if (shippingMethod.custom.storePickupEnabled) {
+                            shipment.setShippingMethod(shippingMethod);
+                        }
+
+                    }
+
+                    var shippingAddress = new ShippingAddress();
+	                var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                    var orderAddress = shipment.createShippingAddress();
+                    shippingAddress.storeAddressTo(orderAddress, storeObject);
+                    pli.setShipment(shipment);
+
+                }
+
+                sliArrayList.add(pli.custom.fromStoreId);
+            }
+
+            return homeDeliveries;
+        },
+
+	    /**
+	     * This script updates the shipping method of the given shipment. If a shipping method ID is  given, the given shipping method used to update the shipment.
+	     *
+	     * @param shippingMethod
+	     * @returns {{shippingExclDiscounts: *, shippingInclDiscounts: *, productShippingCosts: Array, productShippingDiscounts: ArrayList, shippingPriceAdjustments: Array, shippingPriceAdjustmentsTotal: Money, surchargeAdjusted: Money, baseShipping: *, baseShippingAdjusted: *}}
+	     */
+        preCalculateShipping : function (shippingMethod) {
+
+            var shipment = this.getDefaultShipment();
+
+	        if (shipment != null) {
+                var currencyCode = this.getCurrencyCode();
+                var discountPlan = PromotionMgr.getDiscounts(this.object),
+                    productShippingCosts = [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
+                    productShippingDiscounts = new ArrayList(), // list holds all products shipping discounts NOT promotions e.g. fixed shipping discount or free shipping for individual products discount
+                    productIter = this.getAllProductLineItems().iterator(),
+                    priceAdjArray = [], // array to hold shipping price adjustments data (we have to create objects since price adjustments get lost after applying a shipping method
+                    priceAdjIter = shipment.getShippingPriceAdjustments().iterator(),
+                    priceAdjTotal = new Money(0.0, currencyCode), // total of all price adjustments
+                    surchargeTotal = new Money(0.0, currencyCode), // total of all surcharges
+                    adustedSurchargeTotal = new Money(0.0, currencyCode); // total of all surcharges minus price adjustments
+
+                // iterate over all products in the basket
+                // and calculate their shipping cost and shipping discounts
+                while (productIter.hasNext()) {
+                    var pli = productIter.next();
+                    var product = pli.product;
+                    if (product != null) {
+                        var psc = ShippingMgr.getProductShippingModel(product).getShippingCost(shippingMethod);
+                        productShippingCosts[productShippingCosts.length] = {
+                            "name"         : product.name,
+                            "shippingCost" : psc,
+                            "qty"          : pli.getQuantity()
+                        };
+						if (psc != null && psc.getAmount() != null && psc.isSurcharge()) {
+                            // update the surcharge totals
+                            surchargeTotal = surchargeTotal.add(psc.getAmount());
+                            adustedSurchargeTotal = adustedSurchargeTotal.add(psc.getAmount());
+                        }
+                        //productShippingDiscounts.addAll(discountPlan.getProductShippingDiscounts(pli));
+                        //productShippingDiscounts.addAll(pli.shippingLineItem.priceAdjustments);
+                        if (pli.shippingLineItem != null) {
+                            var pdiscountsiter = pli.shippingLineItem.priceAdjustments.iterator();
+                            while (pdiscountsiter.hasNext()) {
+                                var priceAdj = pdiscountsiter.next();
+                                if (priceAdj != null && priceAdj.promotion !== null) {
+                                    if (pli.shippingLineItem.isSurcharge()) {
+                                        // adjust the surchage total value
+                                        adustedSurchargeTotal = adustedSurchargeTotal.add(priceAdj.price);
+                                    }
+                                    productShippingDiscounts.add({
+                                        "price"      : priceAdj.price,
+                                        "calloutMsg" : priceAdj.promotion.calloutMsg
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // iterate over all shipping price adjustments and
+                // grab price and calloutMsg objects
+                while (priceAdjIter.hasNext()) {
+                    var priceAdj = priceAdjIter.next();
+                    if (priceAdj != null && priceAdj.promotion !== null) {
+                        priceAdjTotal = priceAdjTotal.add(priceAdj.price);
+                        priceAdjArray[priceAdjArray.length] = {
+                            "price"      : priceAdj.price,
+                            "calloutMsg" : priceAdj.promotion.calloutMsg
+                        };
+                    }
+                }
+
+                var baseShipping = this.getShippingTotalPrice().subtract(surchargeTotal);
+                var baseShippingAdjusted = null;
+                if (priceAdjTotal >= 0) {
+                    baseShippingAdjusted = baseShipping.subtract(priceAdjTotal);
+                }
+                else {
+                    baseShippingAdjusted = baseShipping.add(priceAdjTotal);
+                }
+
+                return {
+                    "shippingExclDiscounts"         : this.getShippingTotalPrice(),
+                    "shippingInclDiscounts"         : this.getAdjustedShippingTotalPrice(),
+                    "productShippingCosts"          : productShippingCosts,
+                    "productShippingDiscounts"      : productShippingDiscounts,
+                    "shippingPriceAdjustments"      : priceAdjArray,
+                    "shippingPriceAdjustmentsTotal" : priceAdjTotal,
+                    "surchargeAdjusted"             : adustedSurchargeTotal,
+                    "baseShipping"                  : baseShipping,
+                    "baseShippingAdjusted"          : baseShippingAdjusted
+                };
+            }
+	    },
+
+        /**
+         * This script sets the shipping method of the given shipment to the passed method.  The list of allowed shipping
+         * methods may be passed in as a parameter.  If not, then it is retrieved using ShipmentShippingModel.getApplicableShippingMetods().
+         * If the passed shipping method is not in this list, then the script uses the default shipping method.
+         * If the default shipping method is not in the list, the script uses the first method in the list.
+         *
+         * @param shipmentID The ID of the shipment to update the shipping method for.
+         * @param shippingMethodID The ID of the shipping method to set for the shipment.
+         * @param shippingMethod The shipping method to set for the shipment.
+         * @param shippingMethods The list of applicable shipping methods.
+         */
+        updateShipmentShippingMethod : function (shipmentID, shippingMethodID, shippingMethod, shippingMethods) {
+
+            var shipment = this.getShipment(shipmentID);
+
+            if (!shippingMethods) {
+                shippingMethods = ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods();
+            }
+
+            // 1) Try to set the shipment shipping method to the passed one.
+            for (var i = 0; i < shippingMethods.length; i++) {
+                var method = shippingMethods[i];
+
+                if (!shippingMethod) {
+                    if (!method.ID.equals(shippingMethodID)) {
+                        continue;
+                    }
+                }
+                else {
+                    if (method != shippingMethod) {
+                        continue;
+                    }
+
+                }
+
+                // set this shipping method
+                shipment.setShippingMethod(method);
+                return;
+            }
+
+            var defaultShippingMethod = ShippingMgr.getDefaultShippingMethod();
+            if (shippingMethods.contains(defaultShippingMethod)) {
+                // 2) Set the default shipping method if it is applicable.
+                shipment.setShippingMethod(defaultShippingMethod);
+            }
+            else if (shippingMethods.length > 0) {
+                // 3) Set the first shipping method in the applicable list.
+                shipment.setShippingMethod(shippingMethods.iterator().next());
+            }
+            else {
+                // 4) Invalidate the current shipping method selection.
+                shipment.setShippingMethod(null);
+            }
+
+            return;
+        }
+
+});
 
 
 /** The cart class */

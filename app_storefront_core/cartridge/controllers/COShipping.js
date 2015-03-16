@@ -19,202 +19,175 @@ var Transaction = require('~/cartridge/scripts/transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
+var singleShippingForm = require('~/cartridge/scripts/model/Form').get('singleshipping');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Starting point for single shipping scenario
  */
 function start() {
-	var cart = Cart.get();
+    var cart = Cart.get();
 
-	if (!cart.object) {
-		require('./Cart').Show();
-		return;
-	}
+    if (cart.object) {
+        /*
+         * Redirect to multi shipping scenario if more than one physical shipment is
+         * contained in the basket.
+         */
+	    var physicalShipments = cart.getPhysicalShipments();
+	    if (!(dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping') && physicalShipments && physicalShipments.size() > 1)) {
 
-	/*
-	 * Redirect to multi shipping scenario if more than one physical shipment is
-	 * contained in the basket.
-	 */
-	if (requiresMultiShipping(cart)) {
-		require('./COShippingMultiple').Start();
-		return;
-	}
+	        /**
+	         * Initializes the address and shipping method form: - prepopulates form with shipping address of default
+	         * shipment if address exists, otherwise preselects shipping method in list if set at shipment
+	         */
+	        if (cart.getDefaultShipment().getShippingAddress()) {
+		        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(cart.getDefaultShipment().getShippingAddress());
+		        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(cart.getDefaultShipment().getShippingAddress());
+		        Form.get(session.forms.singleshipping.shippingAddress).updateWithObject(cart.getDefaultShipment());
+	        }
+	        else {
+		        if (customer.authenticated && customer.registered && customer.addressBook.preferredAddress) {
+			        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(customer.addressBook.preferredAddress);
+			        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(customer.addressBook.preferredAddress);
+		        }
+	        }
+	        session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-	initForms(cart);
+            /*
+             * Clean shipments.
+             */
+            var homeDeliveries = prepareShipments();
 
-	/*
-	 * Clean shipments.
-	 */
-	var homeDeliveries = prepareShipments({
-		Basket : cart.object
-	}).HomeDeliveries;
+            Transaction.autocommit(function () {
+                cart.calculate();
+            });
 
-	Transaction.autocommit(function () {
-		cart.calculate();
-	});
+            /*
+             * Go to billing step, if we have no product line items, but only gift
+             * certificates in the basket. Shipping step is not required.
+             */
+            if (cart.getProductLineItems().size() === 0) {
+                require('./COBilling').Start();
+                return;
+            }
+            else {
 
-	/*
-	 * Go to billing step, if we have no product line items, but only gift
-	 * certificates in the basket. Shipping step is not required.
-	 */
-	if (cart.getProductLineItems().size() == 0) {
-		require('./COBilling').Start();
-		return;
-	}
+                require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
 
-	require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
-
-	response.renderTemplate('checkout/shipping/singleshipping', {
-		Basket         : cart.object,
-		HomeDeliveries : homeDeliveries
-	});
+                view.get({
+                    Basket         : cart.object,
+                    HomeDeliveries : homeDeliveries
+                }).render('checkout/shipping/singleshipping');
+            }
+        }
+        else {
+            require('./COShippingMultiple').Start();
+            return;
+        }
+    }
+    else {
+        require('./Cart').Show();
+        return;
+    }
 
 }
-
-
-function showSingleShipping(args) {
-	require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
-
-	args ? response.renderTemplate('checkout/shipping/singleshipping', args) : response.renderTemplate('checkout/shipping/singleshipping');
-}
-
 
 function singleShipping() {
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null) {
-		if (TriggeredAction.formId == 'save') {
-			// this is a new request, so we have to resolve the context again
-			var Basket = Cart.get().object;
 
-			if (!Basket) {
-				require('./Cart').Show();
-				return;
-			}
+    var formResult = singleShippingForm.handleAction({
+	    'save'           : function (formgroup) {
+		    var cart = Cart.get();
+		    if (cart.object) {
 
-			var handleShippingSettingsResult = handleShippingSettings({
-				Basket : Basket
-			});
-			if (handleShippingSettingsResult.error) {
+			    handleShippingSettings(cart);
 
-				require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
-				response.renderTemplate('checkout/shipping/singleshipping', {
-					Basket         : Basket,
-					HomeDeliveries : prepareShipments({Basket : Basket}).HomeDeliveries
-				});
+			    /**
+			     * Attempts to save the used shipping address in the customer address book.
+			     */
+			    if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
+				    Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
+			    }
 
-				return;
-			}
+			    /**
+			     * Binds the store message from the user to the shipment.
+			     */
+			    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
-			/**
-			 * Attempts to save the used shipping address in the customer address book.
-			 */
-			if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
-				Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
-			}
+				    if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).updateObjectWithForm(cart.getShipments())) {
+					    require('./Cart').Show();
+					    return;
+				    }
+			    }
 
-			updateInStoreMessage(Basket);
+			    /*
+			     * Mark step as fulfilled.
+			     */
+			    session.forms.singleshipping.fulfilled.value = true;
 
-			/*
-			 * Mark step as fulfilled.
-			 */
-			session.forms.singleshipping.fulfilled.value = true;
+			    require('./COBilling').Start();
+			    return;
+		    }
+		    else {
+			    require('./Cart').Show();
+			    return;
+		    }
+	    },
+	    'selectAddress'  : function (formgroup) {
 
-			require('./COBilling').Start();
-			return;
-		}
-		else if (TriggeredAction.formId == 'selectAddress') {
-			updateAddressDetails();
-			return;
-		}
-		else if (TriggeredAction.formId == 'shipToMultiple') {
-			require('./COShippingMultiple').Start();
-			return;
-		}
-	}
+		    updateAddressDetails(Cart.get());
+		    require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
+		    view.get().render('checkout/shipping/singleshipping');
 
-	require('./dw/web').updatePageMetaData("SiteGenesis Checkout");
-	response.renderTemplate('checkout/shipping/singleshipping');
+		    return;
+	    },
+	    'shipToMultiple' : function (formgroup) {
+		    require('./COShippingMultiple').Start();
+		    return;
+	    }
+    });
+
 }
-
-/**
- * Initializes the address and shipping method form: - prepopulates form with
- * shipping address of default shipment if address exists, otherwise -
- * preselects shipping method in list if set at shipment
- */
-function initForms(cart) {
-
-	if (cart.getDefaultShipment().getShippingAddress()) {
-		Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(cart.getDefaultShipment().getShippingAddress());
-		Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(cart.getDefaultShipment().getShippingAddress());
-		Form.get(session.forms.singleshipping.shippingAddress).updateWithObject(cart.getDefaultShipment());
-	}
-	else {
-		if (customer.authenticated && customer.registered && customer.addressBook.preferredAddress) {
-			Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(customer.addressBook.preferredAddress);
-			Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(customer.addressBook.preferredAddress);
-		}
-	}
-
-	session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
-
-	return;
-}
-
 
 /**
  * Select a shipping method for the default shipment. Sets the shipping method
  * and returns the result as JSON response.
  */
-function selectShippingMethod() {
-	var Basket = Cart.get();
+function selectShippingMethod(cart) {
 
-	if (!Basket.object) {
-		response.renderTemplate('checkout/shipping/selectshippingmethodjson', {});
+	var cart = Cart.get();
+
+	if (cart.object) {
+
+		var ScriptResult = new dw.system.Pipelet('Script', {
+			Transactional : true,
+			OnError       : 'PIPELET_ERROR',
+			ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
+		}).execute({
+				Basket     : cart.object,
+				City       : request.httpParameterMap.city.stringValue,
+				Country    : request.httpParameterMap.countryCode.stringValue,
+				PostalCode : request.httpParameterMap.postalCode.stringValue,
+				State      : request.httpParameterMap.stateCode.stringValue,
+				Address1   : request.httpParameterMap.address1.stringValue,
+				Address2   : request.httpParameterMap.address2.stringValue
+			});
+		if (ScriptResult.result === PIPELET_ERROR) {
+			view.get({Basket : cart.object}).render('checkout/shipping/selectshippingmethodjson');
+			return;
+		}
+
+        Transaction.autocommit(function () {
+            cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, ScriptResult.ShippingMethods);
+            cart.calculate();
+        });
+
+		view.get({Basket : cart.object}).render('checkout/shipping/selectshippingmethodjson');
 		return;
 	}
-
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
-	}).execute({
-			Basket     : Basket,
-			City       : request.httpParameterMap.city.stringValue,
-			Country    : request.httpParameterMap.countryCode.stringValue,
-			PostalCode : request.httpParameterMap.postalCode.stringValue,
-			State      : request.httpParameterMap.stateCode.stringValue,
-			Address1   : request.httpParameterMap.address1.stringValue,
-			Address2   : request.httpParameterMap.address2.stringValue
-		});
-	if (ScriptResult.result == PIPELET_ERROR) {
-		response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
-			Basket : Basket
-		});
+	else {
+		view.get().render('checkout/shipping/selectshippingmethodjson');
 		return;
 	}
-	var ApplicableShippingMethods = ScriptResult.ShippingMethods;
-
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/UpdateShipmentShippingMethod.ds'
-	}).execute({
-			ShippingMethodID : request.httpParameterMap.shippingMethodID.stringValue,
-			Shipment         : Basket.defaultShipment,
-			ShippingMethods  : ApplicableShippingMethods
-		});
-	if (ScriptResult.result == PIPELET_ERROR) {
-		response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
-			Basket : Basket
-		});
-		return;
-	}
-
-	require('./Cart').Calculate();
-
-	response.renderTemplate('checkout/shipping/selectshippingmethodjson', {
-		Basket : Basket
-	});
 }
 
 /**
@@ -230,98 +203,63 @@ function selectShippingMethod() {
  * selection.
  */
 function updateShippingMethodList() {
-	var cart = Cart.get().object;
 
-	if (!Basket) {
-		// TODO don't mix process and view pipelines
-		// TODO this should end with a template
-		return;
-	}
+	var cart = Cart.get();
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : false,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
-	}).execute({
-			Basket     : cart.object,
-			City       : request.httpParameterMap.city.stringValue,
-			Country    : request.httpParameterMap.countryCode.stringValue,
-			PostalCode : request.httpParameterMap.postalCode.stringValue,
-			State      : request.httpParameterMap.stateCode.stringValue,
-			Address1   : request.httpParameterMap.address1.stringValue,
-			Address2   : request.httpParameterMap.address2.stringValue
-		});
-	var applicableShippingMethods = ScriptResult.ShippingMethods;
+    if (!cart.object) {
+        // TODO don't mix process and view pipelines
+        // TODO this should end with a template
+        return;
+    }
 
-	var shippingCosts = new HashMap();
-	var currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
+    var ScriptResult = new dw.system.Pipelet('Script', {
+        Transactional : false,
+        OnError       : 'PIPELET_ERROR',
+        ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
+    }).execute({
+            Basket     : cart.object,
+            City       : request.httpParameterMap.city.stringValue,
+            Country    : request.httpParameterMap.countryCode.stringValue,
+            PostalCode : request.httpParameterMap.postalCode.stringValue,
+            State      : request.httpParameterMap.stateCode.stringValue,
+            Address1   : request.httpParameterMap.address1.stringValue,
+            Address2   : request.httpParameterMap.address2.stringValue
+        });
+    var applicableShippingMethods = ScriptResult.ShippingMethods;
 
-	/*
-	 * Transaction controls are for fine tuning the performance of the data base
-	 * interactions when calculating shipping methods
-	 */
-	Transaction.begin();
+    var shippingCosts = new HashMap();
+    var currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
 
-	for (var i = 0; i < applicableShippingMethods.length; i++) {
-		var method = applicableShippingMethods[i];
+    /*
+     * Transaction controls are for fine tuning the performance of the data base
+     * interactions when calculating shipping methods
+     */
+    Transaction.begin();
 
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : true,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/UpdateShipmentShippingMethod.ds'
-		}).execute({
-				ShippingMethodID : method.getID(),
-				Shipment         : cart.getDefaultShipment(),
-				ShippingMethod   : method,
-				ShippingMethods  : ApplicableShippingMethods
-			});
-		if (ScriptResult.result == PIPELET_ERROR) {
-			continue;
-		}
+    for (var i = 0; i < applicableShippingMethods.length; i++) {
+        var method = applicableShippingMethods[i];
 
-		cart.calculate();
+        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
+        cart.calculate();
 
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : true,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/PreCalculateShipping.ds'
-		}).execute({
-				Basket : cart.object,
-				Method : method
-			});
-		if (ScriptResult.result !== PIPELET_ERROR) {
-			shippingCosts.put(method.getID(), ScriptResult.ShippingCost);
-		}
-	}
+        shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
+    }
 
-	// TODO what the heck?
-	Transaction.rollback();
+    // TODO what the heck?
+    Transaction.rollback();
 
+    Transaction.autocommit(function () {
+	    cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), currentShippingMethod.getID(), currentShippingMethod, applicableShippingMethods);
+        cart.calculate();
+    });
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/UpdateShipmentShippingMethod.ds'
-	}).execute({
-			ShippingMethodID : currentShippingMethod.getID(),
-			Shipment         : cart.getDefaultShipment(),
-			ShippingMethod   : currentShippingMethod,
-			ShippingMethods  : applicableShippingMethods
-		});
+    session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-	if (ScriptResult.result !== PIPELET_ERROR) {
-		Transaction.autocommit(function () {
-			cart.calculate();
-		});
-	}
-
-	session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
-
-	response.renderTemplate('checkout/shipping/shippingmethods', {
-		Basket                    : cart.object,
-		ApplicableShippingMethods : applicableShippingMethods,
-		ShippingCosts             : shippingCosts
-	});
+    view.get({
+        Basket                    : cart.object,
+        ApplicableShippingMethods : applicableShippingMethods,
+        ShippingCosts             : shippingCosts
+    }).render('checkout/shipping/shippingmethods');
 }
 
 
@@ -332,27 +270,23 @@ function updateShippingMethodList() {
  * address parameters included in the request parameters.
  */
 function getApplicableShippingMethodsJSON() {
-	var Basket = Cart.get().object;
+    var Basket = Cart.get().object;
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : false,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
-	}).execute({
-			Basket     : Basket,
-			City       : request.httpParameterMap.city.stringValue,
-			Country    : request.httpParameterMap.countryCode.stringValue,
-			PostalCode : request.httpParameterMap.postalCode.stringValue,
-			State      : request.httpParameterMap.stateCode.stringValue,
-			Address1   : request.httpParameterMap.address1.stringValue,
-			Address2   : request.httpParameterMap.address2.stringValue
-		});
-	var ApplicableShippingMethods = ScriptResult.ShippingMethods;
+    var ScriptResult = new dw.system.Pipelet('Script', {
+        Transactional : false,
+        OnError       : 'PIPELET_ERROR',
+        ScriptFile    : 'checkout/GetApplicableShippingMethods.ds'
+    }).execute({
+            Basket     : Basket,
+            City       : request.httpParameterMap.city.stringValue,
+            Country    : request.httpParameterMap.countryCode.stringValue,
+            PostalCode : request.httpParameterMap.postalCode.stringValue,
+            State      : request.httpParameterMap.stateCode.stringValue,
+            Address1   : request.httpParameterMap.address1.stringValue,
+            Address2   : request.httpParameterMap.address2.stringValue
+        });
 
-
-	response.renderTemplate('checkout/shipping/shippingmethodsjson', {
-		ApplicableShippingMethods : ApplicableShippingMethods
-	});
+	view.get({ApplicableShippingMethods : ScriptResult.ShippingMethods}).render('checkout/shipping/shippingmethodsjson');
 }
 
 
@@ -361,54 +295,35 @@ function getApplicableShippingMethodsJSON() {
  * address details and gift options to the basket's default shipment - set the
  * selected shipping method at the default shipment
  */
-function handleShippingSettings(args) {
-	var Basket = args.Basket;
+function handleShippingSettings(cart) {
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/CreateShipmentShippingAddress.ds'
-	}).execute({
-			AddressForm     : session.forms.singleshipping.shippingAddress,
-			Shipment        : Basket.defaultShipment,
-			GiftOptionsForm : session.forms.singleshipping.shippingAddress,
-		});
-	if (ScriptResult.result == PIPELET_ERROR) {
-		return {
-			error : true
-		};
-	}
+	Transaction.autocommit(function () {
+		var defaultShipment = cart.getDefaultShipment();
+		var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
-	new dw.system.Pipelet('Script', {
-		Transactional : true,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'checkout/UpdateShipmentShippingMethod.ds'
-	}).execute({
-			ShippingMethodID : session.forms.singleshipping.shippingAddress.shippingMethodID.value,
-			Shipment         : Basket.defaultShipment
-		});
+		shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
+		shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
+		shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
+		shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
+		shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
+		shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
+		shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
+		shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
+		shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
+		defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
+		defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
 
-	require('./Cart').Calculate();
+		cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), session.forms.singleshipping.shippingAddress.shippingMethodID.value, null, null);
+		cart.calculate();
 
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : false,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'cart/ValidateCartForCheckout.ds'
-	}).execute({
-			Basket      : Basket,
-			ValidateTax : true
-		});
+		var validationResult = cart.validateForCheckout();
 
-	if (ScriptResult.result == PIPELET_ERROR) {
-		require('./Cart').Show();
-		return;
-	}
-	var BasketStatus = ScriptResult.BasketStatus;
-	var EnableCheckout = ScriptResult.EnableCheckout;
+		var BasketStatus = validationResult.BasketStatus;
+		var EnableCheckout = validationResult.EnableCheckout;
 
-	return {
-		next : true
-	};
+	});
+
+	return;
 }
 
 
@@ -418,15 +333,31 @@ function handleShippingSettings(args) {
  * second step empty shipments are removed. This start node can be called by any
  * checkout step to clean existing shipments according to these conditions.
  */
-function prepareShipments(args) {
-	var cart = Cart.get(args.Basket);
+function prepareShipments() {
 
-	cart.updateGiftCertificateShipments();
-	cart.removeEmptyShipments();
+	var cart = Cart.get();
 
-	return inStoreFormInit({
-		Basket : cart.object
+	var homeDeliveries = Transaction.autocommit(function () {
+
+		var homeDeliveries = false;
+
+		cart.updateGiftCertificateShipments();
+		cart.removeEmptyShipments();
+
+		if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
+			homeDeliveries = cart.consolidateInStoreShipments();
+
+			session.forms.singleshipping.inStoreShipments.shipments.clearFormElement();
+			Form.get(session.forms.singleshipping.inStoreShipments.shipments).updateWithObject(cart.getShipments());
+		}
+		else {
+			homeDeliveries = true;
+		}
+
+		return homeDeliveries;
 	});
+
+    return homeDeliveries;
 }
 
 
@@ -438,168 +369,101 @@ function prepareShipments(args) {
  */
 function editAddress() {
 
-	session.forms.shippingaddress.clearFormElement();
+    session.forms.shippingaddress.clearFormElement();
 
-	var shippingAddress = customer.getAddressBook().getAddress(request.httpParameterMap.addressID.stringValue);
+    var shippingAddress = customer.getAddressBook().getAddress(request.httpParameterMap.addressID.stringValue);
 
-	if (shippingAddress) {
-		Form.get(session.forms.shippingaddress).updateWithObject(shippingAddress);
-		Form.get(session.forms.shippingaddress.states).updateWithObject(shippingAddress);
-	}
+    if (shippingAddress) {
+        Form.get(session.forms.shippingaddress).updateWithObject(shippingAddress);
+        Form.get(session.forms.shippingaddress.states).updateWithObject(shippingAddress);
+    }
 
-	response.renderTemplate('checkout/shipping/shippingaddressdetails');
+	view.get().render('checkout/shipping/shippingaddressdetails');
 }
 
 function editShippingAddress() {
 
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null) {
-		if (TriggeredAction.formId == 'apply') {
-			var form = require('./dw/form');
-			if (!form.updateObjectWithForm(ShippingAddress, session.forms.shippingaddress)) {
-				response.renderTemplate('checkout/shipping/shippingaddressdetails');
-				return;
-			}
+    var TriggeredAction = request.triggeredFormAction;
+    if (TriggeredAction != null) {
+        if (TriggeredAction.formId == 'apply') {
 
-			if (!form.updateObjectWithForm(ShippingAddress, session.forms.shippingaddress.states)) {
-				response.renderTemplate('checkout/shipping/shippingaddressdetails');
-				return;
-			}
+            Form.get(session.forms.shippingaddress).updateObjectWithForm(ShippingAddress);
 
-			response.renderTemplate('components/dialog/dialogapply', {});
-			return;
-		}
-		else if (TriggeredAction.formId == 'remove') {
-			var RemoveCustomerAddressResult = new dw.system.Pipelet('RemoveCustomerAddress').execute({
-				Address  : session.forms.shippingaddress.object,
-				Customer : customer
-			});
-			if (RemoveCustomerAddressResult.result == PIPELET_ERROR) {
-				response.renderTemplate('checkout/shipping/shippingaddressdetails');
-				return;
-			}
+            if (!Form.get(session.forms.shippingaddress).updateObjectWithForm(ShippingAddress)) {
+	            view.get().render('checkout/shipping/shippingaddressdetails');
+                return;
+            }
 
-			response.renderTemplate('components/dialog/dialogdelete', {});
-			return;
-		}
-	}
+            if (!Form.get(session.forms.shippingaddress.states).updateObjectWithForm(ShippingAddress)) {
+	            view.get().render('checkout/shipping/shippingaddressdetails');
+                return;
+            }
 
-	response.renderTemplate('checkout/shipping/shippingaddressdetails');
+	        view.get().render('components/dialog/dialogapply');
+            return;
+        }
+        else if (TriggeredAction.formId == 'remove') {
+            var RemoveCustomerAddressResult = new dw.system.Pipelet('RemoveCustomerAddress').execute({
+                Address  : session.forms.shippingaddress.object,
+                Customer : customer
+            });
+            if (RemoveCustomerAddressResult.result === PIPELET_ERROR) {
+	            view.get().render('checkout/shipping/shippingaddressdetails');
+                return;
+            }
+
+	        view.get().render('components/dialog/dialogdelete');
+            return;
+        }
+    }
+
+	view.get().render('checkout/shipping/shippingaddressdetails');
 }
 
-/**
- * Checks if the basket requires a multi shipping checkout by determining the
- * physical shipments of the basket. If more than one physical shipment is
- * contained in the basket a multi shipping checkout is required. The node ends
- * on named end nodes "yes" and "no" in order to communicates back to the
- * calling node.
- */
-function requiresMultiShipping(cart) {
+function updateAddressDetails(cart) {
 
-    var physicalShipments = cart.getPhysicalShipments();
+    if (cart.object) {
 
-    if (physicalShipments && physicalShipments.size() > 1 && dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')) {
-        return true;
+        var addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
+        var segments = addressID.split("??");
+
+        var customer = null;
+        var lookupID = null;
+
+        if (segments.length > 1) {
+            var profile = dw.customer.CustomerMgr.queryProfile("email = {0}", segments[0]);
+            customer = profile.getCustomer();
+            lookupID = segments[1];
+        }
+
+        var address = customer.getAddressBook().getAddress(lookupID);
+        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(address);
+        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(address);
+
+        Transaction.autocommit(function () {
+            var defaultShipment = cart.getDefaultShipment();
+            var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
+
+            shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
+            shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
+            shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
+            shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
+            shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
+            shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
+            shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
+            shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
+            shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
+            defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
+            defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
+        });
+
+        start();
     }
     else {
-        return false;
+        require('./Cart').Show();
+        return;
     }
 }
-
-
-function updateAddressDetails() {
-	var Basket = Cart.get().object;
-
-	if (!Basket) {
-		require('./Cart').Show();
-		return;
-	}
-
-	var ScriptResult = new dw.system.Pipelet('Script', {
-		Transactional : false,
-		OnError       : 'PIPELET_ERROR',
-		ScriptFile    : 'account/addressbook/GetAddressCustomer.ds'
-	}).execute({
-			AddressId       : empty(request.httpParameterMap.addressID.value) ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value,
-			CurrentCustomer : customer
-		});
-	var LookupCustomer = ScriptResult.Customer;
-	var addressId = ScriptResult.LookupId;
-
-	var address = LookupCustomer.getAddressBook().getAddress(addressId);
-
-	Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(address);
-	Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(address);
-
-	if (Basket.getDefaultShipment().getShippingAddress() != null) {
-		new dw.system.Pipelet('Script', {
-			Transactional : true,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/CreateShipmentShippingAddress.ds'
-		}).execute({
-				AddressForm     : session.forms.singleshipping.shippingAddress,
-				Shipment        : Basket.defaultShipment,
-				GiftOptionsForm : session.forms.singleshipping.shippingAddress
-			});
-	}
-
-	start();
-}
-
-
-/**
- * Binds the store message from the user to the shipment.
- */
-function updateInStoreMessage(Basket) {
-	if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
-
-		if (!require('./dw/form').updateObjectWithForm(Basket.shipments, session.forms.singleshipping.inStoreShipments.shipments)) {
-			require('./Cart').Show();
-
-			return;
-		}
-	}
-}
-
-
-/**
- * Used to initialize the single shipping form with instore pick up shipments
- */
-function inStoreFormInit(args) {
-	var Basket = args.Basket;
-	var HomeDeliveries = false;
-
-	if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : true,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/storepickup/InStoreShipments.ds'
-		}).execute({
-				Basket : Basket
-			});
-		if (ScriptResult.result == PIPELET_ERROR) {
-			// TODO either return something - or render something!
-			var CartController = require('./Cart');
-			CartController.Show();
-			return {
-				error : true
-			};
-		}
-		HomeDeliveries = ScriptResult.homedeliveries;
-
-		session.forms.singleshipping.inStoreShipments.shipments.clearFormElement();
-
-		Form.get(session.forms.singleshipping.inStoreShipments.shipments).updateWithObject(Basket.getShipments());
-	}
-	else {
-		HomeDeliveries = true;
-	}
-
-	return {
-		HomeDeliveries : HomeDeliveries
-	};
-}
-
 
 /*
  * Module exports

@@ -63,24 +63,46 @@ var Form = AbstractModel.extend(
             }
         },
 
-	    /**
-	     * Updates the  form with the corresponding property values from the given object.
-	     *
-	     * @param updateObject the object
-	     * @param clear optional, if true, the form is cleared first before updating it
-	     */
-	    updateWithObject : function (updateObject, clear) {
+        /**
+         * Updates the  form with the corresponding property values from the given object.
+         *
+         * @param updateObject the object
+         * @param clear optional, if true, the form is cleared first before updating it
+         */
+        updateWithObject : function (updateObject, clear) {
 
-		    clear = (typeof clear !== 'undefined') ? clear : false;
+            clear = (typeof clear !== 'undefined') ? clear : false;
 
-		    var UpdateFormWithObjectPipelet = new dw.system.Pipelet('UpdateFormWithObject', {
-			    Clear : clear
-		    });
-		    UpdateFormWithObjectPipelet.execute({
-			    Form   : this.object,
-			    Object : updateObject
-		    });
-	    }
+            var UpdateFormWithObjectPipelet = new dw.system.Pipelet('UpdateFormWithObject', {
+                Clear : clear
+            });
+            UpdateFormWithObjectPipelet.execute({
+                Form   : this.object,
+                Object : updateObject
+            });
+        },
+
+        /**
+         * Updates the given Object with the corresponding property values contained in the Form.
+         *
+         * @param updateObject
+         * @returns {boolean}
+         */
+        updateObjectWithForm : function (updateObject) {
+
+            var UpdateObjectWithFormPipelet = new dw.system.Pipelet('UpdateObjectWithForm');
+            var UpdateObjectWithFormResult = UpdateObjectWithFormPipelet.execute({
+                Form   : this.object,
+                Object : updateObject
+            });
+
+            if (UpdateObjectWithFormResult.result === PIPELET_ERROR) {
+                return false;
+            }
+
+            return true;
+
+        }
 
     });
 

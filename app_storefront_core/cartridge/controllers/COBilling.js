@@ -20,8 +20,7 @@ function Start()
     }
 
     var Basket = GetExistingBasketResult.Basket;
-    
-    
+
     initForms({
         Basket: Basket
     });
@@ -34,8 +33,7 @@ function Start()
 function start(args)
 {
     var Basket = args.Basket;
-    
-    
+
     var COShippingController = require('./COShipping');
     var PrepareShipmentsResult = COShippingController.PrepareShipments({
         Basket: Basket

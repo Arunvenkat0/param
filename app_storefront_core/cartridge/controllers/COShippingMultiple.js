@@ -1,5 +1,8 @@
 var g = require('./dw/guard');
 
+/* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
+
 /**
  * Multi Shipping Scenario
  * ---------------------------
@@ -12,41 +15,26 @@ var g = require('./dw/guard');
  */
 function Start()
 {
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error)
+	var cart = Cart.get();
+
+	if (!cart.object)
     {
-        CartController.Show();
+	    require('./Cart').Show();
         return;
     }
-    var Basket = GetExistingBasketResult.Basket;
-    
-    
-    initSessionAddressBook();
-    
-    separateQuantities();
+
+    initSessionAddressBook(cart.object);
+    separateQuantities(cart.object);
 
     initAddressForms({
-        Basket: Basket
+        Basket: cart.object
     });
     
+    var PrepareShipmentsResult = require('./COShipping').PrepareShipments();
+    require('./Cart').Calculate();
 
-    var COShippingController = require('./COShipping');
-    var PrepareShipmentsResult = COShippingController.PrepareShipments();
-
-    
-    var CalculateResult = CartController.Calculate();
-    
-    
-    showShippingMultiple();
+	response.renderTemplate('checkout/shipping/multishipping/multishippingaddresses');
 }
-
-
-function showShippingMultiple()
-{
-    response.renderTemplate('checkout/shipping/multishipping/multishippingaddresses');
-}
-
 
 function MultiShippingAddresses()
 {
@@ -62,7 +50,7 @@ function MultiShippingAddresses()
 	        var handleAddressSelectionsResult = handleAddressSelections();
 	        if (handleAddressSelectionsResult.error)
 	        {
-	            showShippingMultiple();
+		        response.renderTemplate('checkout/shipping/multishipping/multishippingaddresses');
 	            
 	            CurrentForms.multishipping.addressSelection.fulfilled.value = true;
 
@@ -71,8 +59,8 @@ function MultiShippingAddresses()
 	        }
 	    }
 	}
-	
-    showShippingMultiple();
+
+	response.renderTemplate('checkout/shipping/multishipping/multishippingaddresses');
 }
 
 
@@ -163,10 +151,11 @@ function initAddressForms(args)
     {
         var form = require('./dw/form');
         form.clearFormElement(CurrentForms.multishipping.addressSelection);
-        form.updateFormWithObject(CurrentForms.multishipping.addressSelection.quantityLineItems, QuantityLineItems);
+        //form.updateFormWithObject(CurrentForms.multishipping.addressSelection.quantityLineItems, QuantityLineItems);
     }
 
-    
+
+	/*
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: false,
         OnError: 'PIPELET_ERROR',
@@ -185,7 +174,7 @@ function initAddressForms(args)
     if (!empty(ShippingAddresses))
     {
         initShippingAddresses();
-    }
+    }*/
 }
 
 
@@ -208,7 +197,7 @@ function initShippingAddresses()
 /**
  * Stores session and customer addresses in sessionAddressBook attribute.
  */
-function initSessionAddressBook()
+function initSessionAddressBook(Basket)
 {
     var CurrentCustomer = customer;
     
@@ -230,7 +219,6 @@ function initShipmentForms()
 {
     var CurrentForms = session.forms;
 
-    
     var form = require('./dw/form');
     form.clearFormElement(CurrentForms.multishipping.shippingOptions);
     form.updateFormWithObject(CurrentForms.multishipping.shippingOptions.shipments, Basket.shipments);
@@ -421,7 +409,7 @@ function handleShippingSettings()
 /**
  * Creates for each quantity of ProductLineItems new QuantityLineItems helper objects.
  */
-function separateQuantities()
+function separateQuantities(Basket)
 {
 	for each(var PLI in Basket.productLineItems)
 	{
@@ -431,8 +419,8 @@ function separateQuantities()
 	        ScriptFile: 'checkout/multishipping/SeperateQuantities.ds',
 	    }).execute({
 	        CBasket: Basket,
-	        ProductLineItem: PLI,
-	        QuantityLineItemsIn: QuantityLineItems
+	        ProductLineItem: PLI
+	        //QuantityLineItemsIn: QuantityLineItems
 	    });
 	    var QuantityLineItems = ScriptResult.QuantityLineItemsOut;
 	}
