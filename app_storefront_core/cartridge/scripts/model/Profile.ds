@@ -101,7 +101,8 @@ var Profile = AbstractModel.extend(
                 // get a possible equivalent address from the address book
                 var address = null;
 
-                for each(address in addressBook.addresses) {
+	            for (var i = 0; i < addressBook.addresses.length; i++) {
+		            address = addressBook.addresses[i];
                     if (address.isEquivalentAddress(addressToAdd)) {
                         break;
                     }
@@ -138,10 +139,10 @@ var Profile = AbstractModel.extend(
         },
 
 	    /**
-	     * Determines a unique address ID for an address to be save the profiles address book. The function first checks
-	     * the city as the candidate ID or appends a counter to the city (if already used as address ID) and checks
-	     * the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not the
-	     * counter is incremented and checked again.
+	     * Determines a unique address ID for an address to be saved in the profiles address book. The function first
+	     * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and
+	     * checks the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not
+	     * the counter is incremented and checked again.
 	     *
 	     * @param city
 	     * @returns {*}
