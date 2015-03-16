@@ -68,18 +68,21 @@ var Form = AbstractModel.extend(
          *
          * @param updateObject the object
          * @param clear optional, if true, the form is cleared first before updating it
+         * @returns {Form}
          */
-        updateWithObject : function (updateObject, clear) {
+        copyFrom : function (updateObject, clear) {
 
             clear = (typeof clear !== 'undefined') ? clear : false;
 
-            var UpdateFormWithObjectPipelet = new dw.system.Pipelet('UpdateFormWithObject', {
-                Clear : clear
-            });
-            UpdateFormWithObjectPipelet.execute({
-                Form   : this.object,
-                Object : updateObject
-            });
+            if (clear) {
+                this.object.clear();
+            }
+            else {
+                // update the form
+                this.object.copyFrom(updateObject);
+            }
+
+            return this;
         },
 
         /**
@@ -88,19 +91,15 @@ var Form = AbstractModel.extend(
          * @param updateObject
          * @returns {boolean}
          */
-        updateObjectWithForm : function (updateObject) {
+        copyTo : function (updateObject) {
 
-            var UpdateObjectWithFormPipelet = new dw.system.Pipelet('UpdateObjectWithForm');
-            var UpdateObjectWithFormResult = UpdateObjectWithFormPipelet.execute({
-                Form   : this.object,
-                Object : updateObject
-            });
-
-            if (UpdateObjectWithFormResult.result === PIPELET_ERROR) {
+	        try {
+                this.object.copyTo(updateObject);
+                return true;
+            }
+            catch (e) {
                 return false;
             }
-
-            return true;
 
         }
 

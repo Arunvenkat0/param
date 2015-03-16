@@ -41,14 +41,14 @@ function start() {
 	         * shipment if address exists, otherwise preselects shipping method in list if set at shipment
 	         */
 	        if (cart.getDefaultShipment().getShippingAddress()) {
-		        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(cart.getDefaultShipment().getShippingAddress());
-		        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(cart.getDefaultShipment().getShippingAddress());
-		        Form.get(session.forms.singleshipping.shippingAddress).updateWithObject(cart.getDefaultShipment());
+		        Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(cart.getDefaultShipment().getShippingAddress());
+		        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(cart.getDefaultShipment().getShippingAddress());
+		        Form.get(session.forms.singleshipping.shippingAddress).copyFrom(cart.getDefaultShipment());
 	        }
 	        else {
 		        if (customer.authenticated && customer.registered && customer.addressBook.preferredAddress) {
-			        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(customer.addressBook.preferredAddress);
-			        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(customer.addressBook.preferredAddress);
+			        Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(customer.addressBook.preferredAddress);
+			        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(customer.addressBook.preferredAddress);
 		        }
 	        }
 	        session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
@@ -113,7 +113,7 @@ function singleShipping() {
 			     */
 			    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
-				    if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).updateObjectWithForm(cart.getShipments())) {
+				    if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyTo(cart.getShipments())) {
 					    require('./Cart').Show();
 					    return;
 				    }
@@ -348,7 +348,7 @@ function prepareShipments() {
 			homeDeliveries = cart.consolidateInStoreShipments();
 
 			session.forms.singleshipping.inStoreShipments.shipments.clearFormElement();
-			Form.get(session.forms.singleshipping.inStoreShipments.shipments).updateWithObject(cart.getShipments());
+			Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyFrom(cart.getShipments());
 		}
 		else {
 			homeDeliveries = true;
@@ -374,8 +374,8 @@ function editAddress() {
     var shippingAddress = customer.getAddressBook().getAddress(request.httpParameterMap.addressID.stringValue);
 
     if (shippingAddress) {
-        Form.get(session.forms.shippingaddress).updateWithObject(shippingAddress);
-        Form.get(session.forms.shippingaddress.states).updateWithObject(shippingAddress);
+        Form.get(session.forms.shippingaddress).copyFrom(shippingAddress);
+        Form.get(session.forms.shippingaddress.states).copyFrom(shippingAddress);
     }
 
 	view.get().render('checkout/shipping/shippingaddressdetails');
@@ -386,21 +386,14 @@ function editShippingAddress() {
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null) {
         if (TriggeredAction.formId == 'apply') {
-
-            Form.get(session.forms.shippingaddress).updateObjectWithForm(ShippingAddress);
-
-            if (!Form.get(session.forms.shippingaddress).updateObjectWithForm(ShippingAddress)) {
-	            view.get().render('checkout/shipping/shippingaddressdetails');
+            if (!Form.get(session.forms.shippingaddress).copyTo(ShippingAddress) || !Form.get(session.forms.shippingaddress.states).copyTo(ShippingAddress)) {
+                view.get().render('checkout/shipping/shippingaddressdetails');
                 return;
             }
-
-            if (!Form.get(session.forms.shippingaddress.states).updateObjectWithForm(ShippingAddress)) {
-	            view.get().render('checkout/shipping/shippingaddressdetails');
+	        else {
+	            view.get().render('components/dialog/dialogapply');
                 return;
             }
-
-	        view.get().render('components/dialog/dialogapply');
-            return;
         }
         else if (TriggeredAction.formId == 'remove') {
             var RemoveCustomerAddressResult = new dw.system.Pipelet('RemoveCustomerAddress').execute({
@@ -427,18 +420,18 @@ function updateAddressDetails(cart) {
         var addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
         var segments = addressID.split("??");
 
-        var customer = null;
-        var lookupID = null;
+        var lookupCustomer = customer;
+        var lookupID = addressID;
 
         if (segments.length > 1) {
             var profile = dw.customer.CustomerMgr.queryProfile("email = {0}", segments[0]);
-            customer = profile.getCustomer();
+	        lookupCustomer = profile.getCustomer();
             lookupID = segments[1];
         }
 
-        var address = customer.getAddressBook().getAddress(lookupID);
-        Form.get(session.forms.singleshipping.shippingAddress.addressFields).updateWithObject(address);
-        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).updateWithObject(address);
+        var address = lookupCustomer.getAddressBook().getAddress(lookupID);
+        Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(address);
+        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(address);
 
         Transaction.autocommit(function () {
             var defaultShipment = cart.getDefaultShipment();
