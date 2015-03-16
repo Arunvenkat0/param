@@ -54,12 +54,35 @@
         </pipelet-node>
         <node-display orientation="horizontal" x="0" y="1"/>
         <branch basename="b3" source-connector="error">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="(CurrentHttpParameterMap.q.value).replace(/-/g, ' ')" key="From_0"/>
+                <key-binding alias="SearchPhrase" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Search" pipelet-set-identifier="bc_api">
                 <config-property key="SearchContent" value="true"/>
@@ -67,7 +90,7 @@
                 <config-property key="DisallowOfflineCategory" value="true"/>
                 <config-property key="RecursiveCategorySearch" value="true"/>
                 <config-property key="RecursiveFolderSearch" value="true"/>
-                <key-binding alias="CurrentHttpParameterMap.q.value" key="SearchPhrase"/>
+                <key-binding alias="SearchPhrase" key="SearchPhrase"/>
                 <key-binding alias="CurrentHttpParameterMap.psortb1.value" key="SortBy1"/>
                 <key-binding alias="CurrentHttpParameterMap.psortd1.intValue" key="SortBy1Direction"/>
                 <key-binding alias="CurrentHttpParameterMap.psortb2.value" key="SortBy2"/>
@@ -528,7 +551,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Set CacheTag to true so that the redirect template will set the &lt;iscache&gt;.</description>
+          <description>Filter the SearchPhrase (remove '-', for instance (RAP-2889))</description>
         </text-node>
         <node-display x="3" y="5"/>
       </node>
@@ -538,9 +561,19 @@
     <segment>
       <node>
         <text-node>
+          <description>Set CacheTag to true so that the redirect template will set the &lt;iscache&gt;.</description>
+        </text-node>
+        <node-display x="3" y="6"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_10">
+    <segment>
+      <node>
+        <text-node>
           <description>Renders the partial content of the product grid of a search result as rich html.</description>
         </text-node>
-        <node-display x="1" y="17"/>
+        <node-display x="1" y="18"/>
       </node>
     </segment>
   </branch>
@@ -548,7 +581,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="ShowProductGrid" secure="false"/>
-        <node-display x="1" y="18"/>
+        <node-display x="1" y="19"/>
       </node>
       <simple-transition/>
       <node>
@@ -653,24 +686,24 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_11">
+  <branch basename="_ANONYMOUS_BRANCH_12">
     <segment>
       <node>
         <text-node>
           <description>Executes a product search and puts the ProductSearchResult into the pipeline dictionary for convenient reuse.
 This is also used in Product pipeline for product navigation i.e. next/prev.</description>
         </text-node>
-        <node-display width="2" x="4" y="17"/>
+        <node-display width="2" x="4" y="18"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_12">
+  <branch basename="_ANONYMOUS_BRANCH_13">
     <segment>
       <node>
         <text-node>
           <description>Executes a content search and puts the ContentSearchResult into the pipeline dictionary for convenient reuse.</description>
         </text-node>
-        <node-display x="7" y="17"/>
+        <node-display x="7" y="18"/>
       </node>
     </segment>
   </branch>
@@ -678,7 +711,7 @@ This is also used in Product pipeline for product navigation i.e. next/prev.</de
     <segment>
       <node>
         <start-node call-mode="private" name="GetProductResult" secure="false"/>
-        <node-display x="4" y="18"/>
+        <node-display x="4" y="19"/>
       </node>
       <simple-transition/>
       <node>
@@ -718,7 +751,7 @@ This is also used in Product pipeline for product navigation i.e. next/prev.</de
     <segment>
       <node>
         <start-node call-mode="private" name="GetContentResult" secure="false"/>
-        <node-display x="7" y="18"/>
+        <node-display x="7" y="19"/>
       </node>
       <simple-transition/>
       <node>
