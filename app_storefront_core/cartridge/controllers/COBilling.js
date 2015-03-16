@@ -410,9 +410,10 @@ function adjustGiftCertificates()
     }
     var gcIdList = ScriptResult.gcIdList;
 
-    
-	for each(var gcID in gcIdList)
-	{
+
+	for (var i = 0; i < gcIdList.length; i++) {
+		var gcID = gcIdList[i];
+
 	    var ScriptResult = new dw.system.Pipelet('Script', {
 	        Transactional: true,
 	        OnError: 'PIPELET_ERROR',
@@ -427,8 +428,8 @@ function adjustGiftCertificates()
 
     var gcID = null;
 
-	for each(var gcID in gcIdList)
-	{
+	for (var j = 0; j < gcIdList.length; j++) {
+		var gcID = gcIdList[j];
 	    var ScriptResult = new dw.system.Pipelet('Script', {
 	        ScriptFile: 'checkout/CreateGiftCertificatePaymentInstrument.ds',
 	        Transactional: true,
@@ -1135,9 +1136,9 @@ function updatePaymentForms()
     form.setFormOptions(CurrentForms.billing.paymentMethods.creditCard.type,
             dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(CurrentCustomer,CurrentHttpParameterMap.countryCode.value,PaymentAmount));
 
-    
-	for each(var ValidPaymentInstrument in ValidPaymentInstruments)
-	{
+	for (var i = 0; i < ValidPaymentInstruments.length; i++) {
+		var ValidPaymentInstrument = ValidPaymentInstruments[i];
+		
 	    if (ValidPaymentInstrument.paymentMethod == dw.order.PaymentInstrument.METHOD_CREDIT_CARD)
 	    {
 	    	// TODO performance of long expressions
@@ -1259,9 +1260,9 @@ function SaveCreditCard()
     	};
     }
 
-    
-	for each(var creditcard in CreditCards)
-	{
+	for (var i = 0; i < CreditCards.length; i++) {
+		var creditcard = CreditCards[i];
+		
 	    if (creditcard.maskedCreditCardNumber == NewCreditCard.maskedCreditCardNumber && creditcard.creditCardType == NewCreditCard.creditCardType)
 	    {
 	        new dw.system.Pipelet('RemoveCustomerPaymentInstrument').execute({

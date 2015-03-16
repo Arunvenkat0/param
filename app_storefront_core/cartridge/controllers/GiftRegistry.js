@@ -1312,8 +1312,8 @@ function updateAll()
 
     
     // TODO do in a single transaction
-	for each(var Item in CurrentForms.giftregistry.items)
-	{
+	for (var i = 0; i < CurrentForms.giftregistry.items.length; i++) {
+		var Item = CurrentForms.giftregistry.items[i];
 	    if (!form.updateObjectWithForm(Item.object, Item))
 	    {
 	        return {

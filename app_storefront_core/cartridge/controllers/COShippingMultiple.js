@@ -185,9 +185,9 @@ function initShippingAddresses()
 {
     var CurrentForms = session.forms;
 
-    
-	for each(var quantityLineItem in CurrentForms.multishipping.addressSelection.quantityLineItems)
-	{
+	for (var i = 0; i < CurrentForms.multishipping.addressSelection.quantityLineItems.length; i++) {
+		var quantityLineItem = CurrentForms.multishipping.addressSelection.quantityLineItems[i];
+		
 	    var form = require('./dw/form');
 	    form.setFormOptions(quantityLineItem.addressList, ShippingAddresses);
 	}
@@ -234,9 +234,9 @@ function initShippingMethods()
 {
     var CurrentForms = session.forms;
 
-    
-	for each(var ShipmentForm in CurrentForms.multishipping.shippingOptions.shipments)
-	{
+
+	for (var i = 0; i < CurrentForms.multishipping.shippingOptions.shipments.length; i++) {
+		var ShipmentForm = CurrentForms.multishipping.shippingOptions.shipments[i];
         var ShippingMethods = dw.order.ShippingMgr.getShipmentShippingModel(ShipmentForm.object).applicableShippingMethods;
     
         var form = require('./dw/form');
@@ -384,9 +384,9 @@ function handleShippingSettings()
 {
     var CurrentForms = session.forms;
 
-    
-	for each(var ShipmentForm in CurrentForms.multishipping.shippingOptions.shipments)
-	{
+	for (var i = 0; i < CurrentForms.multishipping.shippingOptions.shipments.length; i++) {
+		var ShipmentForm = CurrentForms.multishipping.shippingOptions.shipments[i];
+		
         if (ShipmentForm.shippingMethodID.selectedOptionObject != null)
         {
             new dw.system.Pipelet('SetShippingMethod').execute({
@@ -411,8 +411,9 @@ function handleShippingSettings()
  */
 function separateQuantities(Basket)
 {
-	for each(var PLI in Basket.productLineItems)
-	{
+	for (var i = 0; i < Basket.productLineItems.length; i++) {
+		var PLI = Basket.productLineItems[i];
+
 	    var ScriptResult = new dw.system.Pipelet('Script', {
 	        Transactional: false,
 	        OnError: 'PIPELET_ERROR',

@@ -384,8 +384,9 @@ function getProductFromLineItem()
     
     var Basket = GetExistingBasketResult.Basket;
 
-    for each(var LineItem in Basket.productLineItems)
-    {
+	for (var i = 0; i < Basket.productLineItems.length; i++) {
+		var LineItem = Basket.productLineItems[i];
+
         if (LineItem.UUID == CurrentHttpParameterMap.pid.stringValue)
         {
             return {

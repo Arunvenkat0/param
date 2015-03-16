@@ -32,8 +32,9 @@ function HandlePayments(args)
         };
     }
 
-	for each(var PaymentInstrument in Order.paymentInstruments)
-	{
+	for (var i = 0; i < Order.paymentInstruments.length; i++) {
+		var PaymentInstrument = Order.paymentInstruments[i];
+
 	    if (dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor == null)
 	    {
 	        var txn = require('dw/system/Transaction');
@@ -421,10 +422,10 @@ function PlaceOrder(args)
 function createGiftCertificates(args)
 {
     var Order = args.Order;
-    
 
-    for each(var GiftCertificateLineItem in Order.giftCertificateLineItems)
-	{
+	for (var i = 0; i < Order.giftCertificateLineItems.length; i++) {
+		var GiftCertificateLineItem = Order.giftCertificateLineItems[i];
+
         var CreateGiftCertificateResult = new dw.system.Pipelet('CreateGiftCertificate').execute({
             Amount: GiftCertificateLineItem.netPrice.value,
             RecipientEmail: GiftCertificateLineItem.recipientEmail,
