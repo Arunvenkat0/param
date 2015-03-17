@@ -823,7 +823,25 @@ var Cart = AbstractModel.extend(
             }
 
             return;
-        }
+        },
+
+	    getApplicableShippingMethods : function (countryCode, stateCode, postalCode, city, address1, address2) {
+
+		    // Construct an address from request parameters.
+		    var addressObj = new Object();
+
+		    // SiteGenesis-specific default used to define list of shipping methods shown by default.
+		    // Modify as needed.
+		    addressObj.countryCode = (countryCode == null || StringUtils.trim(countryCode) == "") ? "US" : StringUtils.trim(countryCode);
+		    addressObj.stateCode = (stateCode == null || StringUtils.trim(stateCode) == "") ? "NY" : StringUtils.trim(stateCode);
+		    addressObj.postalCode = postalCode && StringUtils.trim(postalCode);
+		    addressObj.city = ity && StringUtils.trim(city);
+		    addressObj.address1 = address1 && StringUtils.trim(address1);
+		    addressObj.address2 = address2 && StringUtils.trim(address2);
+
+		    // Retrieve the list of applicabnle shipping methods for the given shipment and address.
+		    return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment());
+	    }
 
 });
 
