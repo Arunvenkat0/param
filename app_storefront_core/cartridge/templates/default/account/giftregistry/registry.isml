@@ -19,7 +19,7 @@
 			<isif condition="${empty(pdict.ProductList.giftCertificateItem)}">
 				<div class="add-gift-cert">
 					<button type="submit" value="${Resource.msg('account.giftregistry.addgiftcert','account',null)}" name="${pdict.CurrentForms.giftregistry.addGiftCertificate.htmlName}">
-						Add Gift Certificate
+						${Resource.msg('giftregistry.addgiftcertificate', 'forms', null)}
 					</button>
 					<p>${Resource.msg('account.giftregistry.addgiftcertmessage','account',null)}</p>
 				</div>

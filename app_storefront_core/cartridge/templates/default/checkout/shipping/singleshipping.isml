@@ -149,8 +149,8 @@
 					<iscomment>Is this a gift</iscomment>
 					<div class="form-row">
 						<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
-						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> Yes
-						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> No
+						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.yes', 'locale', null)}
+						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.no', 'locale', null)}
 					</div>
 
 					<isinputfield rowclass="gift-message-text" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
