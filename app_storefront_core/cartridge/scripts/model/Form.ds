@@ -1,12 +1,14 @@
 'use strict';
 /* jshint indent:false,white:false */
 
-/*
- usage
- var form = require('~/cartridge/scripts/model/Form');
+/**
+ * Module for form related functionality.
+ *
+ * usage
+ * var form = require('~/cartridge/scripts/model/Form');
+ *
+ * @module model/Cart
  */
-
-/** @module model/Form */
 
 var AbstractModel = require('./AbstractModel');
 
@@ -15,7 +17,7 @@ var AbstractModel = require('./AbstractModel');
  * @class module:model/Form~Form
  */
 var Form = AbstractModel.extend(
-    /** @lends module:model/Form~Form.prototype */
+	/** @lends module:model/Form~Form.prototype */
     {
         action : null,
 

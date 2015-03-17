@@ -17,7 +17,7 @@
 		class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 </h1>
 
-<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${session.forms.multishipping.editAddress.htmlName}">
+<form method="post" action="${URLUtils.https('COShippingMultiple-EditForm')}" id="edit-address-form" class="address" name="${session.forms.multishipping.editAddress.htmlName}">
 	<fieldset>
 		<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 			<!-- Use the error code value to build an appropriate error message -->

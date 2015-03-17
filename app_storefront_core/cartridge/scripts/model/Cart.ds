@@ -14,6 +14,7 @@ var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
+var StringUtils = require('dw/util/StringUtils');
 
 /**
  * Category helper providing enhanced category functionality
@@ -832,15 +833,15 @@ var Cart = AbstractModel.extend(
 
 		    // SiteGenesis-specific default used to define list of shipping methods shown by default.
 		    // Modify as needed.
-		    addressObj.countryCode = (countryCode == null || StringUtils.trim(countryCode) == "") ? "US" : StringUtils.trim(countryCode);
-		    addressObj.stateCode = (stateCode == null || StringUtils.trim(stateCode) == "") ? "NY" : StringUtils.trim(stateCode);
+		    addressObj.countryCode = (countryCode === null || StringUtils.trim(countryCode) === "") ? "US" : StringUtils.trim(countryCode);
+		    addressObj.stateCode = (stateCode === null || StringUtils.trim(stateCode) === "") ? "NY" : StringUtils.trim(stateCode);
 		    addressObj.postalCode = postalCode && StringUtils.trim(postalCode);
-		    addressObj.city = ity && StringUtils.trim(city);
+		    addressObj.city = city && StringUtils.trim(city);
 		    addressObj.address1 = address1 && StringUtils.trim(address1);
 		    addressObj.address2 = address2 && StringUtils.trim(address2);
 
 		    // Retrieve the list of applicabnle shipping methods for the given shipment and address.
-		    return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment());
+		    return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(addressObj);
 	    }
 
 });
