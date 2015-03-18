@@ -16,11 +16,17 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 		watch: {
-			sass: {
+			dev: {
 				files: paths.css.map(function (path) {
 					return path.src + '*.scss';
 				}),
-				tasks: ['css']
+				tasks: ['css:dev']
+			},
+			styleguide: {
+				files: paths.css.map(function (path) {
+					return path.src + '*.scss';
+				}).push('styleguide/scss/*.scss'),
+				tasks: ['css:styleguide']
 			}
 		},
 		sass: {
@@ -32,6 +38,11 @@ module.exports = function (grunt) {
 				files: paths.css.map(function (path) {
 					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
 				})
+			},
+			styleguide: {
+				files: [{
+					'styleguide/dist/main.css': 'styleguide/scss/main.scss'
+				}]
 			}
 		},
 		autoprefixer: {
@@ -39,16 +50,21 @@ module.exports = function (grunt) {
 				files: paths.css.map(function (path) {
 					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
 				})
+			},
+			styleguide: {
+				files: [{
+					'styleguide/dist/main.css': 'styleguide/dist/main.css'
+				}]
 			}
 		},
 		browserify: {
-			dist: {
+			dev: {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
 				}]
 			},
-			watch: {
+			watch_dev: {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
@@ -64,6 +80,25 @@ module.exports = function (grunt) {
 					src: ['*.js', '!*.out.js'],
 					dest: 'test/unit/browser/dist'
 				}]
+			},
+			styleguide: {
+				files: [{
+					src: 'styleguide/js/main.js',
+					dest: 'styleguide/dist/main.js'
+				}],
+				options: {
+					transform: ['hbsfy']
+				}
+			},
+			watch_styleguide: {
+				files: [{
+					src: 'styleguide/js/main.js',
+					dest: 'styleguide/dist/main.js'
+				}],
+				options: {
+					transform: ['hbsfy'],
+					watch: true
+				}
 			}
 		},
 		connect: {
@@ -71,6 +106,12 @@ module.exports = function (grunt) {
 				options: {
 					port: config.port,
 					base: 'test/unit/browser'
+				}
+			},
+			styleguide: {
+				options: {
+					port: grunt.option('port') || 8000,
+					base: 'styleguide'
 				}
 			}
 		},
@@ -102,12 +143,26 @@ module.exports = function (grunt) {
 				},
 				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
 			}
+		},
+		'gh-pages': {
+			styleguide: {
+				src: ['dist/**', 'index.html', 'lib/**/*'],
+				options: {
+					base: 'styleguide',
+					clone: 'styleguide/.tmp',
+					message: 'Update ' + new Date().toISOString(),
+					repo: require('./styleguide/deploy.json').options.remoteUrl
+				}
+			}
 		}
 	});
 
-	grunt.registerTask('css', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
-	grunt.registerTask('js', ['browserify:dist']);
+	grunt.registerTask('css:dev', ['sass:dev', 'autoprefixer:dev']);
+	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
+	grunt.registerTask('default', ['css:dev', 'browserify:watch_dev', 'watch:dev']);
+	grunt.registerTask('js', ['browserify:dev']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
-	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit'])
+	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit']);
+	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watch_styleguide', 'connect:styleguide', 'watch:styleguide']);
+	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
 }
