@@ -20,5 +20,5 @@ The optional parameters which can be passed will be passed on to the constructor
 
 All views provide the following dictionary keys:
 
-* `CurrentMeta` - the meta object for this request
-* `CurrentView` - a reference to the view itself
+* `Meta` - the meta object for this request
+* `View` - a reference to the view itself

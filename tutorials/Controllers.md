@@ -19,10 +19,10 @@ To properly document controllers as modules use the following appraoch.
  */
  
 /**
- * Start node description
+ * Description of the url entry point. On pipelines used to be called start node.
  */
 function show() { }
  
 /** @see module:controller/XYZ~show */
-exports.Show    = guard.filter(['get'],show);
+exports.Show    = guard.ensure(['get'],show);
 ```

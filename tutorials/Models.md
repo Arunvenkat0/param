@@ -2,7 +2,7 @@
 
 Models typically wrap a system object and provide related functionalities which are not part of the Demandware API. Per convention model modules are named like the corresponding object and located under scripts/model. All models provide a get method which accept an instance of the system object or its semantic ID (where applicable).
 
-Example of an Account controller
+Example to instantiate a Content model
 ```
 // get content markup
 require('~/model/Content').get('footer-include').getMarkup();
