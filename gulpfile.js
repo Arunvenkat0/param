@@ -1,6 +1,7 @@
 'use strict';
 
 var browserify = require('browserify'),
+	buffer = require('vinyl-buffer'),
 	connect = require('gulp-connect'),
 	deploy = require('gulp-gh-pages'),
 	gulp = require('gulp'),
@@ -12,6 +13,7 @@ var browserify = require('browserify'),
 	mocha = require('gulp-mocha'),
 	sass = require('gulp-sass'),
 	source = require('vinyl-source-stream'),
+	sourcemaps = require('gulp-sourcemaps'),
 	stylish = require('jshint-stylish'),
 	prefix = require('gulp-autoprefixer'),
 	watchify = require('watchify'),
@@ -55,13 +57,19 @@ gulp.task('js', function () {
 		rebundle();
 	});
 
+	bundler.on('log', gutil.log);
+
 	function rebundle () {
-		return bundler
-			.bundle()
+		return bundler.bundle()
 			.on('error', function (e) {
 				gutil.log('Browserify Error', gutil.colors.red(e));
 			})
 			.pipe(source('app.js'))
+			// sourcemaps
+				.pipe(buffer())
+				.pipe(sourcemaps.init({loadMaps: true}))
+				.pipe(sourcemaps.write('./'))
+			//
 			.pipe(gulp.dest(paths.js.dest));
 	}
 	return rebundle();
