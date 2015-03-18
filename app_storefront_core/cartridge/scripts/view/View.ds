@@ -39,6 +39,9 @@ var View = Class.extend(
             this.View = this;
             // provide Meta
             this.Meta = require('~/cartridge/scripts/meta');
+            // backward compatibility
+            this.CurrentForms = session.forms;
+            this.CurrentHttpParameterMap = request.httpParameterMap;
             try{
                 response.renderTemplate(templateName, this);
             }catch(e){

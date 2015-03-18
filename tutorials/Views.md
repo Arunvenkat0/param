@@ -22,3 +22,5 @@ All views provide the following dictionary keys:
 
 * `Meta` - the meta object for this request
 * `View` - a reference to the view itself
+* `CurrentForms` - for backward compatibility reasons
+* `CurrentHttpParameterMap` - for backward compatibility reasons
