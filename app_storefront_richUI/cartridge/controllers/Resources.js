@@ -1,19 +1,26 @@
+'use strict';
+/**
+ * Renders a content page or a content include.
+ *
+ * @module controller/Resources
+ */
+
 /**
  * Pipeline for dynamically generated page resources (js, css)
  */
-function Load()
+function load()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
-    /*
-     * Resource Template
-     */
-    var resourceTemplate = 'resources/' + CurrentHttpParameterMap.t.stringValue;
+    var resourceTemplate = 'resources/' + request.httpParameterMap.t.stringValue;
 
     response.renderTemplate(resourceTemplate);
 }
 
 /*
- * Module exports
+ * Export the publicly available controller methods
  */
-exports.Load = Load;
+/**
+ * @see module:controller/Resources~load
+ * @deprecated Use <code>require('meta').addResource('some.message.key','bundlename')</code>
+ * instead to pass data to the client
+ */
+exports.Load = load;

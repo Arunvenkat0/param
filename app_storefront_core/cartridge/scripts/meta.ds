@@ -24,7 +24,8 @@ var Meta = function(){
             keywords : ''
         },
         // supports elements with properties name and url
-        breadcrumbs : [ HOME_BREADCRUMB ]
+        breadcrumbs : [ HOME_BREADCRUMB ],
+        resources : {}
     };
 };
 
@@ -118,6 +119,23 @@ Meta.prototype = {
      */
     getBreadcrumbs : function(){
         return this.data.breadcrumbs || [];
+    },
+    /**
+     * Adds a resource key to meta, the key of the given bundle is simply dumped to a data
+     * attribute and can be consumed by the client.
+     *
+     * @example
+     * // on the server
+     * require('meta').addResource('some.message.key','bundlename');
+     * // on the client
+     * console.log(app.resources['some.message.key']);
+     *
+     * @param {string} key          The resource key
+     * @param {string} bundle       The bundle name
+     * @param {string} defaultValue Optional default value, empty string otherwise
+     */
+    addResource : function(key, bundle, defaultValue){
+        this.data.resources[key] = dw.web.Resource.msg(key, bundle, defaultValue || '');
     },
     /**
      * Dumps the internally held data into teh DOM
