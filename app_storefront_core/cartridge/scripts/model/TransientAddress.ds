@@ -5,11 +5,46 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
 var CustomerAddress = require('dw/customer/CustomerAddress');
 
 /**
+ * All system address fields
+ * @type {Array}
+ */
+var ADDRESS_FIELDS = [
+    'firstName',
+    'lastName',
+    'address1',
+    'address2',
+    'city',
+    'postalCode',
+    'stateCode',
+    'countryCode',
+    'phone'];
+
+/**
+ * Internal helper to call all address fields from "from" to "to"
+ * @param  {Object} from The object providing the address fields to copy
+ * @param  {Object} to   The object the fields are copied to
+ */
+function copyFields(from, to){
+    // copy system fields
+    ADDRESS_FIELDS.forEach(function(fieldName){
+        to[fieldName] = from[fieldName];
+    });
+    // copy custom fields
+    if('custom' in from && 'custom' in to){
+        for(var i in from.custom){
+            to.custom[i] = from.custom[i];
+        }
+    }
+}
+
+/**
  * Transient representation of an address.
  *
  * @class module:model/TransientAddress~TransientAddress
  */
-var TransientAddress = Class.extend({
+var TransientAddress = Class.extend(
+/** @lends module:model/TransientAddress~TransientAddress.prototype */
+{
     UUID        : null,
     ID          : null,
     firstName   : null,
@@ -21,6 +56,7 @@ var TransientAddress = Class.extend({
     stateCode   : null,
     countryCode : null,
     phone       : null,
+    custom      : {},
 
     /**
      * The UUID of the reference address. It is set when the attributes
@@ -33,15 +69,7 @@ var TransientAddress = Class.extend({
      * Copies the attributes of this address to the given order address.
      */
     copyTo : function (toAddress) {
-        toAddress.setFirstName(this.firstName);
-        toAddress.setLastName(this.lastName);
-        toAddress.setAddress1(this.address1);
-        toAddress.setAddress2(this.address2);
-        toAddress.setCity(this.city);
-        toAddress.setPostalCode(this.postalCode);
-        toAddress.setStateCode(this.stateCode);
-        toAddress.setCountryCode(this.countryCode);
-        toAddress.setPhone(this.phone);
+        copyFields(this, toAddress);
     },
 
     /**
@@ -70,17 +98,9 @@ var TransientAddress = Class.extend({
             this.ID = fromAddress.ID;
         }
 
-        this.firstName = fromAddress.firstName;
-        this.lastName = fromAddress.lastName;
-        this.address1 = fromAddress.address1;
-        this.address2 = fromAddress.address2;
-        this.city = fromAddress.city;
-        this.postalCode = fromAddress.postalCode;
-        this.stateCode = fromAddress.stateCode;
-        this.countryCode = fromAddress.countryCode;
-        this.phone = fromAddress.phone;
+        copyFields(fromAddress, this);
 
-        if (fromAddress.countryCode.value != null) {
+        if (fromAddress.countryCode.value !== null) {
             this.countryCode = fromAddress.countryCode.value;
         }
         else {
@@ -88,12 +108,12 @@ var TransientAddress = Class.extend({
         }
 
         // if we copy from a customer address, we set the address ID and UUID
-        if (('ID' in fromAddress) && (fromAddress instanceof CustomerAddress || (fromAddress.ID != null && fromAddress.UUID != null))) {
+        if (('ID' in fromAddress) && (fromAddress instanceof CustomerAddress || (fromAddress.ID !== null && fromAddress.UUID !== null))) {
             this.ID = fromAddress.ID;
             this.referenceAddressUUID = fromAddress.UUID;
         }
 
-        if ('referenceAddressUUID' in fromAddress && fromAddress.referenceAddressUUID != null) {
+        if ('referenceAddressUUID' in fromAddress && fromAddress.referenceAddressUUID !== null) {
             this.referenceAddressUUID = fromAddress.referenceAddressUUID;
         }
     },
@@ -106,25 +126,29 @@ var TransientAddress = Class.extend({
 
         for (var i = 0; i < addresses.length; i++) {
             var address = addresses[i];
-            if (this.referenceAddressUUID != null && (address.referenceAddressUUID != null)) {
+            if (this.referenceAddressUUID !== null && (address.referenceAddressUUID !== null)) {
                 if (this.referenceAddressUUID.equals(address.referenceAddressUUID)) {
                     return true;
                 }
             }
             else {
-                if (this.firstName == address.firstName &&
-                    this.lastName == address.lastName &&
-                    this.address1 == address.address1 &&
-                    this.address2 == address.address2 &&
-                    this.city == address.city &&
-                    this.postalCode == address.postalCode &&
-                    this.stateCode == address.stateCode &&
-                    this.countryCode == address.countryCode &&
-                    this.phone == address.phone) {
+                if (this.equals(address)) {
                     return true;
                 }
             }
         }
+    },
+
+    /**
+     * Returns true if the relevant fields of the addresses are all equal
+     * @param  {Object} address The address to compare the transient address to
+     * @return {boolean}         true if both addresses are equal, false otherwise
+     */
+    equals : function (address){
+        var that = this;
+        return ADDRESS_FIELDS.every(function(fieldName){
+            return that[fieldName] === address[fieldName];
+        });
     }
 });
 
