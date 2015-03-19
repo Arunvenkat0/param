@@ -9,6 +9,7 @@
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
 var Money = require('dw/value/Money');
+var PaymentInstrument = require('dw/order/PaymentInstrument');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
@@ -120,7 +121,7 @@ var Cart = AbstractModel.extend(
 
             if (product) {
 
-                // TODO
+	            // TODO
                 var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
                     Basket             : this.object,
                     Product            : product,
@@ -152,7 +153,7 @@ var Cart = AbstractModel.extend(
                                 require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap);
 
                                 var foundLineItem = null;
-                                foundLineItem = cart.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+                                foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
                                 if (foundLineItem) {
                                     foundLineItem.replaceProduct(childProduct);
@@ -350,7 +351,7 @@ var Cart = AbstractModel.extend(
                             //the in store line item will be reset to a regular home delivery item.
                             pli.custom.fromStoreId = "";
                             pli.setProductInventoryList(null);
-                            pli.setShipment(basket.getDefaultShipment());
+                            pli.setShipment(this.getDefaultShipment());
                         }
                     }
                 }
@@ -842,7 +843,148 @@ var Cart = AbstractModel.extend(
 
 		    // Retrieve the list of applicabnle shipping methods for the given shipment and address.
 		    return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(addressObj);
-	    }
+	    },
+
+	    /**
+	     * Calculates the amount to be payed by a non-gift certificate payment instrument based on the given basket.
+	     * The method subtracts the amount of all redeemed gift certificates from the order total and returns this
+	     * value.
+	     */
+	    getNonGiftCertificateAmount : function () {
+		    // the total redemption amount of all gift certificate payment instruments in the basket
+		    var giftCertTotal = new Money(0.0, this.getCurrencyCode());
+
+		    // get the list of all gift certificate payment instruments
+		    var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments();
+		    var iter = gcPaymentInstrs.iterator();
+		    var orderPI = null;
+
+		    // sum the total redemption amount
+		    while (iter.hasNext()) {
+			    orderPI = iter.next();
+			    giftCertTotal = giftCertTotal.add(orderPI.getPaymentTransaction().getAmount());
+		    }
+
+		    // get the order total
+		    var orderTotal = this.getTotalGrossPrice();
+
+		    // calculate the amount to charge for the payment instrument
+		    // this is the remaining open order total which has to be paid
+		    var amountOpen = orderTotal.subtract(giftCertTotal);
+
+		    // return the open amount
+		    return amountOpen;
+	    },
+
+	    /**
+	     * Removes a gift certificate payment instrument with the given gift certificate ID
+	     * from the basket.
+	     */
+	    removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
+
+		    // iterate over the list of payment instruments
+		    var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments(giftCertificateID);
+		    var iter = gcPaymentInstrs.iterator();
+		    var existingPI= null;
+
+		    // remove (possible multiple) gift certificate payment
+		    // instruments for this gift certificate ID
+		    while (iter.hasNext()) {
+			    existingPI = iter.next();
+			    this.removePaymentInstrument(existingPI);
+		    }
+
+		    return;
+	    },
+
+	    /**
+	     * Deletes multiple payment instruments.
+	     *
+	     * @param paymentInstruments
+	     */
+	    removePaymentInstruments : function (paymentInstruments) {
+
+		    for (var i = 0; i < paymentInstruments.length; i++) {
+			    var pi = paymentInstruments[i];
+			    this.removePaymentInstrument(pi);
+		    }
+
+	    },
+
+	    /**
+	     * This script calculates the total amount of an order that will be paid for by gift certificate payment
+	     * instruments. The remaining open amount (if there is any) will be applied to the non-gift certificate payment
+	     * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
+	     * payment instrument is used for the payment.
+	     */
+	    calculatePaymentTransactionTotal : function () {
+
+		    // get all payment instruments for the basket
+            var iter = this.getPaymentInstruments().iterator();
+            var paymentInstrument = null;
+            var nonGCPaymentInstrument = null;
+            var giftCertTotal = new Money(0.0, this.getCurrencyCode());
+
+            // locate any non-gift certificate payment instrument
+            while (iter.hasNext()) {
+                paymentInstrument = iter.next();
+                if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstrument.getPaymentMethod())) {
+                    giftCertTotal = giftCertTotal.add(paymentInstrument.getPaymentTransaction().getAmount());
+                    continue;
+                }
+
+                // we captured the non-gift certificate payment instrument
+                nonGCPaymentInstrument = paymentInstrument;
+                break;
+            }
+
+            // get the order total
+            var orderTotal = this.getTotalGrossPrice();
+
+            // if we found gift certificate payment and non-gift certificate payment
+            // instrument we are done
+            if (!nonGCPaymentInstrument) {
+                // if we have no other payment types and the gift certificate
+                // doesn't cover the order we need to error out.
+                if (giftCertTotal < orderTotal) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            // calculate the amount to be charged for the
+            // non-gift certificate payment instrument
+            var amount = this.getNonGiftCertificateAmount();
+
+            // now set the non-gift certificate payment instrument total.
+            if (amount.value <= 0.0) {
+                var zero = new Money(0, amount.getCurrencyCode());
+                nonGCPaymentInstrument.getPaymentTransaction().setAmount(zero);
+            }
+            else {
+                nonGCPaymentInstrument.getPaymentTransaction().setAmount(amount);
+            }
+
+		    return true;
+	    },
+
+	    /**
+	     * Creates a list of gift certificate ids from gift certificate payment instruments.
+	     *
+	     * @returns {dw.util.ArrayList}
+	     */
+        getGiftCertIdList : function () {
+	        var gcIdList = new ArrayList();
+	        var gcPIIter = this.getGiftCertificatePaymentInstruments.iterator();
+
+	        while (gcPIIter.hasNext()) {
+		        gcIdList.add((gcPIIter.next()).getGiftCertificateCode());
+	        }
+
+	        return gcIdList;
+        }
 
 });
 

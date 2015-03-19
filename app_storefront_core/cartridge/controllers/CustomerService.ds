@@ -46,7 +46,7 @@ function leftNav() {
  */
 function contactUs() {
 
-    contactUsForm.clear();
+    contactUsForm.clearFormElement();
     view.get('view/CustomerServiceView').render('content/contactus');
 
 }

@@ -7,9 +7,11 @@
  *
  */
 var HashMap = require("dw/util").HashMap,
+	Logger = require("dw/system").Logger,
 	PromotionMgr = require("dw/campaign").PromotionMgr,
 	ShippingMgr = require("dw/order").ShippingMgr,
 	ShippingLocation = require("dw/order").ShippingLocation,
+	Status = require("dw/system").Status,
 	TaxMgr = require("dw/order").TaxMgr;
 
 /**

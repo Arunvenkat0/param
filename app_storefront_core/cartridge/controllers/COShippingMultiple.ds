@@ -17,6 +17,8 @@ var Transaction = require('~/cartridge/scripts/transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var multiShippingForm = require('~/cartridge/scripts/model/Form').get('multishipping');
 var view = require('~/cartridge/scripts/view');
 
 /**
@@ -74,11 +76,9 @@ function start() {
  * TODO
  */
 function multiShippingAddresses() {
-    // TODO this should end in a redirect
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null) {
-        if (TriggeredAction.formId == 'save') {
 
+	multiShippingForm.handleAction({
+		'save'           : function (formgroup) {
             var cart = Cart.get();
             var ScriptResult = new dw.system.Pipelet('Script', {
                 Transactional : true,
@@ -99,10 +99,12 @@ function multiShippingAddresses() {
                 startShipments();
                 return;
             }
+			else {
+	            view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
+	            return;
+            }
         }
-    }
-
-    view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
+    });
 }
 
 

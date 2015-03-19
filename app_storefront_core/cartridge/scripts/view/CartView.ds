@@ -5,6 +5,7 @@ var View = require('./View');
 
 var Cart = require('~/cartridge/scripts/model/Cart');
 var FormGroup = require('dw/web/FormGroup');
+var Transaction = require('dw/system/Transaction');
 
 
 /**
@@ -25,7 +26,7 @@ var CartView = View.extend({
             // refresh coupons
             session.forms.cart.coupons.copyFrom(cart.couponLineItems);
 
-            require('~/cartridge/scripts/transaction').autocommit(function () {
+	        Transaction.wrap(function () {
                 Cart.get(cart).calculate();
             });
 

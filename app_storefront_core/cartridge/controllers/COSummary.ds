@@ -1,83 +1,64 @@
-var g = require('./dw/guard');
+'use strict';
 
 /**
  * This pipeline implements the last step of the checkout. A successful handling
  * of billing address and payment method selection leads to this pipeline. It
  * provides the customer with a last overview of the basket prior to confirm the
  * final order creation.
+ *
+ * @module controller/COSummary
  */
+
+/* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
+var Transaction = require('dw/system/Transaction');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * This pipeline renders the summary page prior to order creation.
  */
-function Start()
-{
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
+function start() {
+    var cart = Cart.get();
 
-    var Basket = GetExistingBasketResult.Basket;
-
-
-    /*
-     * Checks whether all payment methods are still applicable. Recalculates all
-     * existing non-gift certificate payment instruments totals according to
-     * redeemed gift certificates or additional discounts granted through coupon
-     * redemptions on this page.
-     */
-    var COBillingController = require('./COBilling');
-    var ValidatePaymentResult = COBillingController.ValidatePayment({
-        Basket : Basket
-    });
-    if (ValidatePaymentResult.error)
-    {
-        COBillingController.Start();
+    // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
+    // instruments totals according to redeemed gift certificates or additional discounts granted through coupon
+    // redemptions on this page.
+    if (require('./COBilling').ValidatePayment(cart).error) {
+        require('./COBilling').Start();
         return;
     }
 
-
-    var CalculateResult = CartController.Calculate();
-
-    var web = require('./dw/web');
-    web.updatePageMetaData("SiteGenesis Checkout");
-
-    response.renderTemplate('checkout/summary/summary', {
-        Basket : Basket
+    Transaction.wrap(function () {
+        cart.calculate();
     });
-}
 
+    pageMeta.update({pageTitle : 'SiteGenesis Checkout'});
+    view.get({
+	    Basket : cart.object
+    }).render('checkout/summary/summary');
+}
 
 /**
  * This pipeline is called upon the "Place Order" action triggered by the
  * customer.
  */
-function Submit()
-{
-    /*
-     * Call the responsible pipeline which does the actual place order action
-     * and any payment authorization. The called pipeline must exit with a named
-     * end node "order_created" if the order was created successfully or any
-     * other end node, if the order creation failed.
-     */
-    var COPlaceOrderController = require('./COPlaceOrder');
-    var StartResult = COPlaceOrderController.Start();
-    if (StartResult.error)
-    {
-        Start();
+function submit() {
+    // Call the responsible pipeline which does the actual place order action and any payment authorization. The called
+    // pipeline must exit with a named end node "order_created" if the order was created successfully or any other end
+    // node, if the order creation failed.
+    var placeOrderResult = require('./COPlaceOrder').Start();
+    if (placeOrderResult.error) {
+        start();
         return;
     }
-    // TODO in all other cases, some template was already shown... This should
-    // be cleaned up!
-    if (StartResult.order_created)
-    {
-        var Order = StartResult.Order;
-
-
-        ShowConfirmation({
-            Order : Order
-        });
+    else if (placeOrderResult.order_created) {
+        showConfirmation(placeOrderResult.Order);
     }
 }
-
 
 /**
  * This pipeline renders the order confirmation page after the successful order
@@ -85,43 +66,23 @@ function Submit()
  * provides a "Create Account" form. This pipeline is responsible to handle the
  * account creation.
  */
-function ShowConfirmation(args)
-{
-    var CurrentForms = session.forms;
-    var Order = args.Order;
-
-    if (!customer.authenticated)
-    {
-        initGuestAccountCreation(Order);
+function showConfirmation(order) {
+    if (!customer.authenticated) {
+        // Initializes the account creation form for guest checkouts, by populating the first and last name with the
+        // used billing address.
+        session.forms.profile.customer.firstname.value = order.billingAddress.firstName;
+        session.forms.profile.customer.lastname.value = order.billingAddress.lastName;
+        session.forms.profile.customer.email.value = order.customerEmail;
     }
 
-    var web = require('./dw/web');
-    web.updatePageMetaData("SiteGenesis Checkout Confirmation");
+    session.forms.profile.login.passwordconfirm.clearFormElement();
+    session.forms.profile.login.password.clearFormElement();
 
-
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.profile.login.passwordconfirm);
-    form.clearFormElement(CurrentForms.profile.login.password);
-
-    response.renderTemplate('checkout/confirmation/confirmation', {
-        Order : Order
-    });
+    pageMeta.update({pageTitle : 'SiteGenesis Checkout Confirmation'});
+    view.get({
+        Order : order
+    }).render('checkout/confirmation/confirmation');
 }
-
-
-/**
- * Initializes the account creation form for guest checkouts, by populating the
- * first and last name with the used billing address.
- */
-function initGuestAccountCreation(order)
-{
-    var profileForm = session.forms.profile;
-
-    profileForm.customer.firstname.value = order.billingAddress.firstName;
-    profileForm.customer.lastname.value = order.billingAddress.lastName;
-    profileForm.customer.email.value = order.customerEmail;
-}
-
 
 /*
  * Module exports
@@ -130,11 +91,12 @@ function initGuestAccountCreation(order)
 /*
  * Web exposed methods
  */
-// TODO also called with POST from Billing form handler
-exports.Start   = g.https(Start);
-exports.Submit  = g.httpsPost(Submit);
+/** @see module:controller/COSummary~Start */
+exports.Start = guard.ensure(['https'], start);
+/** @see module:controller/COSummary~Submit */
+exports.Submit = guard.ensure(['https', 'post'], submit);
 
 /*
  * Local method
  */
-exports.ShowConfirmation = ShowConfirmation;
+exports.ShowConfirmation = showConfirmation;
