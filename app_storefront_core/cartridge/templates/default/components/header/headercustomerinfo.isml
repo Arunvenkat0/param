@@ -1,24 +1,25 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
-	<iscomment>Multi currency</iscomment>
-	<isinclude template="components/header/multicurrency"/>
 	<isset name="customer" value="${pdict.CurrentCustomer}" scope="page"/>
-	<isset name="notStr" value="${Resource.msg('global.headercustomerinfo.not', 'locale', null)}" scope="page"/>
-	<isset name="loginStr" value="${Resource.msg('global.login', 'locale', null)}" scope="page"/>
 
-	<iscomment>User has session, but not currently active (welcome back)</iscomment>
 	<li class="user-info">
+		<iscomment>User has session, but not authenticated</iscomment>
 		<isif condition="${customer.registered && !customer.authenticated}">
-			<a title="${loginStr}" href="${URLUtils.https('Account-Show')}"id="menuLink1" class="user-account-login"><i class="fa fa-user"></i>Account</a>
+			<a class="user-account-login" href="${URLUtils.https('Account-Show')}" id="menuLink1" title="${Resource.msg('label.login', 'components', null)}">
+				<i class="fa fa-user"></i>
+				<span>${Resource.msg('label.login', 'components', null)}</span>
+			</a>
 		<iscomment>User has sesssion and is validated</iscomment>
 		<iselseif condition="${customer.registered}">
-			<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink', 'locale', null)} ">
+			<a class="user-account" href="${URLUtils.https('Account-Show')}" title="<isprint value="${customer.profile.firstName}"/> <isprint value="${customer.profile.lastName}"/>">
 				<i class="fa fa-user"></i>
-				<isprint value="${customer.profile.firstName}"/>
-				<isprint value="${customer.profile.lastName}"/>
+				<span>${Resource.msg('label.account', 'components', null)}</span>
 			</a>
 		<iscomment>User has no session</iscomment>
 		<iselse/>
-			<a title="${loginStr}" href="${URLUtils.https('Account-Show')}"id="menuLink1" class="user-logi"><i class="fa fa-user"></i>Account</a>
+			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('label.login', 'components', null)}">
+				<i class="fa fa-user"></i>
+				<span>${Resource.msg('label.login', 'components', null)}</span>
+			</a>
 		</isif>
 	</li>

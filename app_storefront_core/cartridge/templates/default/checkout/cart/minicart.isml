@@ -28,14 +28,16 @@
 			// add the gift certificates to cart quantity
 			cartQty += pdict.Basket.giftCertificateLineItems.size();
 		</isscript>
-		<a href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}" class="mini-cart-link">
-			<i class="minicart-icon fa fa-shopping-cart fa-2x"></i>
-			<span class="minicart-quantity"><isprint value="${cartQty}" formatter="##" /></span>
+		<a class="mini-cart-link" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">
+			<i class="minicart-icon fa fa-shopping-cart"></i>
+			<span class="minicart-quantity">
+				<isprint value="${cartQty}" formatter="##" />
+			</span>
 		</a>
 	<iselse/>
-		<a href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}" class="mini-cart-link mini-cart-empty">
-			<i class="fa fa-shopping-cart fa-2x"></i>
-			<span class="minicart-quantity">Cart</span>
+		<a class="mini-cart-link mini-cart-empty" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">
+			<i class="fa fa-shopping-cart"></i>
+			<span class="minicart-quantity"></span>
 		</a>
 	</isif>
 </div>

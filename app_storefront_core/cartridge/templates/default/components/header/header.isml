@@ -3,13 +3,12 @@
 
 <iscomment>SLOT CONFIGURATION:  SLOT/ID: header-banner</iscomment>
 <div class="header-banner">
-	<isslot id="header-banner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<isslot id="header-banner" description="Slot above the site header" context="global" />
 </div>
-
 <div class="top-banner" role="banner">
 	<button class="menu-toggle"><i class="menu-icon fa fa-bars"></i><span class="visually-hidden">Menu</span></button>
 	<h1 class="primary-logo">
-		<a href="${URLUtils.url('Home-Show')}">
+		<a href="${URLUtils.url('Home-Show')}" title="${Resource.msg('global.storename','locale',null)}  ${Resource.msg('global.home','locale',null)}">
 			<img src="${URLUtils.staticURL('/images/logo.png')}" alt="${Resource.msg('global.storename','locale',null)}">
 			<span class="visually-hidden">${Resource.msg('global.storename','locale',null)}</span>
 		</a>
@@ -29,9 +28,9 @@
 
 			<iscomment>Store Locator</iscomment>
 			<li>
-				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('header.storelocator','components',null)}">
+				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('link.storelocator','components',null)}">
 					<i class="fa fa-map-marker"></i>
-					${Resource.msg('link.storelocator','components',null)}
+					<span>${Resource.msg('label.storelocator', 'components', null)}</span>
 				</a>
 			</li>
 
@@ -39,6 +38,9 @@
 			<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
 
 		</ul>
+
+		<iscomment>Multi-Currency Selection</iscomment>
+		<isinclude template="components/header/multicurrency"/>
 
 	</nav>
 

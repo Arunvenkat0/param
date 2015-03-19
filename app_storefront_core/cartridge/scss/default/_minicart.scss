@@ -1,42 +1,50 @@
 #mini-cart {
 	position: absolute;
 	right: 1.6em;
-	top: .5em;
+	top: .2em;
 	z-index: 20;
 	@media screen and (min-width: 768px) {
-		top: 1.8em;
+		right: 5em;
+		top: -0.2em;
 	}
 	.mini-cart-name {
 		a {
-			color: $pacific-blue;
+			color: $citrus;
 		}
 	}
 }
 
 .mini-cart-total {
 	position: relative;
-	a.mini-cart-link {
+	.mini-cart-link {
 		color: $citrus;
-		font-size: 1.6em;
-		text-align:center;
 		text-transform: uppercase;
 		i {
-			display: block;
+			font-size: 3em;
 		}
 		.minicart-quantity {
 			background-color: $sangria;
 			border-radius: 10px;
 			color: $white;
-			font-size: .7em;
-			padding: .15em .4em;
+			padding: 1px 4px;
 			position: absolute;
 			right: 0;
+			text-align: center;
 			top: 0;
 		}
 	}
-	a.mini-cart-empty {
+}
+
+.mini-cart-total {
+	.mini-cart-empty {
+		color: $nobel;
+		transition: color 500ms ease;
+		&:hover {
+			color:$citrus;
+			text-decoration: none;
+		}
 		.minicart-quantity {
-			display:none;
+			visibility: hidden;
 		}
 	}
 }
