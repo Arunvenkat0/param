@@ -13,7 +13,7 @@
  * }
  *
  * // allow only GET requests via HTTPS for logged in users
- * exports.Show = require('~/guard').filter(['get','https','loggedIn'],show);
+ * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
 var form = require('~/cartridge/scripts/model/Form');
 
@@ -109,9 +109,9 @@ var Filters = {
 
 
 /**
- * Generic function, which allows to filter multiple request types
+ * Generic function, which allows to ensure multiple request types
  */
-function filter (filters, action, error) {
+function ensure (filters, action, error) {
     return expose(function() {
         var filtersPassed = true;
         var errors = [];
@@ -265,12 +265,12 @@ exports.transactional = transactional;
  *
  * @example
  * // allow only GET requests for the Show endpoint
- * exports.Show = require('~/guard').filter(['get'],show);
+ * exports.Show = require('~/guard').ensure(['get'],show);
  *
  * // allow only POST requests via HTTPS for the Find endpoint
- * exports.Find = require('~/guard').filter(['post','https'],find);
+ * exports.Find = require('~/guard').ensure(['post','https'],find);
  *
  * // allow only logged in customer via HTTPS for the Profile endpoint
- * exports.Profile = require('~/guard').filter(['https','loggedIn'],profile);
+ * exports.Profile = require('~/guard').ensure(['https','loggedIn'],profile);
  */
-exports.filter = filter;
+exports.ensure = ensure;

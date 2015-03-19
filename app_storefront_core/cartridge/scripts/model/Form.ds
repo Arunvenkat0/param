@@ -1,12 +1,14 @@
 'use strict';
 /* jshint indent:false,white:false */
 
-/*
- usage
- var form = require('~/cartridge/scripts/model/Form');
+/**
+ * Module for form related functionality.
+ *
+ * usage
+ * var form = require('~/cartridge/scripts/model/Form');
+ *
+ * @module model/Cart
  */
-
-/** @module model/Form */
 
 var AbstractModel = require('./AbstractModel');
 
@@ -15,7 +17,7 @@ var AbstractModel = require('./AbstractModel');
  * @class module:model/Form~Form
  */
 var Form = AbstractModel.extend(
-    /** @lends module:model/Form~Form.prototype */
+	/** @lends module:model/Form~Form.prototype */
     {
         action : null,
 
@@ -63,12 +65,44 @@ var Form = AbstractModel.extend(
             }
         },
 
-        clear : function () {
-            this.object.clearFormElement();
+        /**
+         * Updates the  form with the corresponding property values from the given object.
+         *
+         * @param updateObject the object
+         * @param clear optional, if true, the form is cleared first before updating it
+         * @returns {Form}
+         */
+        copyFrom : function (updateObject, clear) {
+
+            clear = (typeof clear !== 'undefined') ? clear : false;
+
+            if (clear) {
+                this.object.clear();
+            }
+            else {
+                // update the form
+                this.object.copyFrom(updateObject);
+            }
+
+            return this;
         },
 
-        setValue : function (key, value) {
-            this.object[key].value = value;
+        /**
+         * Updates the given Object with the corresponding property values contained in the Form.
+         *
+         * @param updateObject
+         * @returns {boolean}
+         */
+        copyTo : function (updateObject) {
+
+	        try {
+                this.object.copyTo(updateObject);
+                return true;
+            }
+            catch (e) {
+                return false;
+            }
+
         }
 
     });

@@ -11,7 +11,7 @@ var ArrayList = require('dw/util/ArrayList');
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
-var Transaction = require('~/cartridge/scripts/transaction');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var cartAsset = require('~/cartridge/scripts/model/Content').get('cart');
@@ -28,7 +28,10 @@ function show() {
     session.forms.cart.shipments.invalidateFormElement();
     session.forms.login.invalidateFormElement();
 
-    view.get('view/CartView', {cart : Cart.get(), RegistrationStatus : false}).render('checkout/cart/cart');
+    view.get('view/CartView', {
+	    cart : Cart.get(),
+	    RegistrationStatus : false
+    }).render('checkout/cart/cart');
 
 }
 
@@ -43,7 +46,7 @@ function submitForm() {
         'addCoupon'             : function (formgroup) {
             if (formgroup.couponCode.htmlValue) {
 
-                var status = Transaction.autocommit(function () {
+                var status = Transaction.wrap(function () {
                         return cart.addCoupon(formgroup.couponCode.htmlValue);
                     }
                 );
@@ -85,21 +88,21 @@ function submitForm() {
             return null;
         },
         'deleteCoupon'          : function (formgroup) {
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.removeCouponLineItem(formgroup.getTriggeredAction().object)
             });
 
             return {cart : cart};
         },
         'deleteGiftCertificate' : function (formgroup) {
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object)
             });
 
             return {cart : cart};
         },
         'deleteProduct'         : function (formgroup) {
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.removeProductLineItem(formgroup.getTriggeredAction().object)
             });
 
@@ -110,7 +113,7 @@ function submitForm() {
             var product = Product.get(request.httpParameterMap.pid.stringValue).object;
             var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.updateLineItem(formgroup.getTriggeredAction().object, product, productOptionModel)
                 cart.calculate();
             });
@@ -131,16 +134,14 @@ function submitForm() {
             }
         },
         'logout'                : function (formgroup) {
-            require('./Login').Logout();
-            return null;
+	        new dw.system.Pipelet('LogoutCustomer').execute();
+	        return {cart : cart};
         },
         'register'              : function (formgroup) {
             require('./Account').StartRegister();
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.calculate();
             });
-
-            response.redirect(dw.web.URLUtils.https('Cart-Show'));
 
             return null;
         },
@@ -150,7 +151,7 @@ function submitForm() {
         },
         'updateCart'            : function (formgroup) {
 
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
 
                 // remove zero quantity line items
                 for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
@@ -199,7 +200,7 @@ function addProduct() {
         return;
     }
 
-    var cart = Cart.get(getBasket());
+	var cart = Cart.goc();
 
     // update product lineitem
     if (params.uuid.stringValue) {
@@ -211,7 +212,7 @@ function addProduct() {
 	        var product = Product.get(request.httpParameterMap.pid.stringValue).object;
 	        var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.updateLineItem(lineItem, product, productOptionModel)
             });
 
@@ -237,7 +238,7 @@ function addProduct() {
     else if (params.plid.stringValue) {
 
         var productList = ProductListMgr.getProductList(params.plid.stringValue);
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
         });
 
@@ -264,7 +265,7 @@ function addProduct() {
 
                 var childProductOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap).ProductOptionModel;
 
-                Transaction.autocommit(function () {
+                Transaction.wrap(function () {
                     cart.addProductItem(childProduct, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
                 });
                 counter++;
@@ -273,7 +274,7 @@ function addProduct() {
         else {
             var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.addProductItem(product, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
             });
         }
@@ -375,7 +376,7 @@ function getBasket() {
 function calculate() {
 
     var cart = Cart.get();
-    Transaction.autocommit(function () {
+    Transaction.wrap(function () {
         cart.calculate();
     });
 
@@ -448,7 +449,7 @@ function addBonusProductJson() {
         }
     }
 
-    calculate();
+    cart.calculate();
     Transaction.commit();
 
     response.renderJSON({
@@ -467,7 +468,7 @@ function addCouponJson() {
     var cart = Cart.get();
 
     var couponStatus = null;
-    Transaction.autocommit(function () {
+    Transaction.wrap(function () {
         couponStatus = cart.addCoupon(couponCode);
     });
 
@@ -491,21 +492,21 @@ function addCouponJson() {
  * Web exposed methods
  */
 /** @see module:controller/Cart~addProduct */
-exports.AddProduct = guard.filter(['post'], addProduct);
+exports.AddProduct = guard.ensure(['post'], addProduct);
 /** @see module:controller/Cart~show */
-exports.Show = guard.filter(['get', 'https'], show);
+exports.Show = guard.ensure(['https'], show);
 /** @see module:controller/Cart~submitForm */
-exports.SubmitForm = guard.filter(['post', 'https'], submitForm);
+exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
 /** @see module:controller/Cart~continueShopping */
-exports.ContinueShopping = guard.filter(['post', 'https'], continueShopping);
+exports.ContinueShopping = guard.ensure(['post', 'https'], continueShopping);
 /** @see module:controller/Cart~addCouponJson */
-exports.AddCouponJson = guard.filter(['get', 'https'], addCouponJson);
+exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controller/Cart~miniCart */
-exports.MiniCart = guard.filter(['get'], miniCart);
+exports.MiniCart = guard.ensure(['get'], miniCart);
 /** @see module:controller/Cart~addToWishlist */
-exports.AddToWishlist = guard.filter(['get', 'https'], addToWishlist);
-/** @see module:controller/Cart~addBonusProduct */
-exports.AddBonusProduct = guard.filter(['post'], addBonusProductJson);
+exports.AddToWishlist = guard.ensure(['get', 'https'], addToWishlist);
+/** @see module:controller/Cart~addBonusProductJson */
+exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
 
 /*
  * Local methods

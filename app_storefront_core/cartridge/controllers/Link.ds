@@ -45,10 +45,10 @@ function Page() {
  * Web exposed methods
  */
 /** @see module:controller/Link~category */
-exports.Category = guard.filter(['get'], category);
+exports.Category = guard.ensure(['get'], category);
 /** @see module:controller/Link~categoryProduct */
-exports.CategoryProduct = guard.filter(['get'], categoryProduct);
+exports.CategoryProduct = guard.ensure(['get'], categoryProduct);
 /** @see module:controller/Link~product */
-exports.Product = guard.filter(['get'], product);
+exports.Product = guard.ensure(['get'], product);
 /** @see module:controller/Link~page */
-exports.Page = guard.filter(['get'], page);
+exports.Page = guard.ensure(['get'], page);

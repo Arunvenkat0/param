@@ -1,0 +1,102 @@
+'use strict';
+
+/**
+ * This pipeline implements the last step of the checkout. A successful handling
+ * of billing address and payment method selection leads to this pipeline. It
+ * provides the customer with a last overview of the basket prior to confirm the
+ * final order creation.
+ *
+ * @module controller/COSummary
+ */
+
+/* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
+var Transaction = require('dw/system/Transaction');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+
+/**
+ * This pipeline renders the summary page prior to order creation.
+ */
+function start() {
+    var cart = Cart.get();
+
+    // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
+    // instruments totals according to redeemed gift certificates or additional discounts granted through coupon
+    // redemptions on this page.
+    if (require('./COBilling').ValidatePayment(cart).error) {
+        require('./COBilling').Start();
+        return;
+    }
+
+    Transaction.wrap(function () {
+        cart.calculate();
+    });
+
+    pageMeta.update({pageTitle : 'SiteGenesis Checkout'});
+    view.get({
+	    Basket : cart.object
+    }).render('checkout/summary/summary');
+}
+
+/**
+ * This pipeline is called upon the "Place Order" action triggered by the
+ * customer.
+ */
+function submit() {
+    // Call the responsible pipeline which does the actual place order action and any payment authorization. The called
+    // pipeline must exit with a named end node "order_created" if the order was created successfully or any other end
+    // node, if the order creation failed.
+    var placeOrderResult = require('./COPlaceOrder').Start();
+    if (placeOrderResult.error) {
+        start();
+        return;
+    }
+    else if (placeOrderResult.order_created) {
+        showConfirmation(placeOrderResult.Order);
+    }
+}
+
+/**
+ * This pipeline renders the order confirmation page after the successful order
+ * creation. If a non registered customer has checked out, the confirmation page
+ * provides a "Create Account" form. This pipeline is responsible to handle the
+ * account creation.
+ */
+function showConfirmation(order) {
+    if (!customer.authenticated) {
+        // Initializes the account creation form for guest checkouts, by populating the first and last name with the
+        // used billing address.
+        session.forms.profile.customer.firstname.value = order.billingAddress.firstName;
+        session.forms.profile.customer.lastname.value = order.billingAddress.lastName;
+        session.forms.profile.customer.email.value = order.customerEmail;
+    }
+
+    session.forms.profile.login.passwordconfirm.clearFormElement();
+    session.forms.profile.login.password.clearFormElement();
+
+    pageMeta.update({pageTitle : 'SiteGenesis Checkout Confirmation'});
+    view.get({
+        Order : order
+    }).render('checkout/confirmation/confirmation');
+}
+
+/*
+ * Module exports
+ */
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controller/COSummary~Start */
+exports.Start = guard.ensure(['https'], start);
+/** @see module:controller/COSummary~Submit */
+exports.Submit = guard.ensure(['https', 'post'], submit);
+
+/*
+ * Local method
+ */
+exports.ShowConfirmation = showConfirmation;

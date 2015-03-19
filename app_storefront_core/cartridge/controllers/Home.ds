@@ -92,19 +92,19 @@ function deviceLayouts() {
  * Export the publicly available controller methods
  */
 /** @see module:controller/Home~show */
-exports.Show = guard.filter(['get'], show);
+exports.Show = guard.ensure(['get'], show);
 /** @see module:controller/Home~includeHeader */
-exports.IncludeHeader = guard.filter(['get'], includeHeader);
-//exports.IncludeHeaderMenu           = guard.filter(['get'],includeHeaderMenu);
+exports.IncludeHeader = guard.ensure(['get'], includeHeader);
+//exports.IncludeHeaderMenu           = guard.ensure(['get'],includeHeaderMenu);
 /** @see module:controller/Home~includeHeaderCustomerInfo */
-exports.IncludeHeaderCustomerInfo = guard.filter(['get'], includeHeaderCustomerInfo);
+exports.IncludeHeaderCustomerInfo = guard.ensure(['get'], includeHeaderCustomerInfo);
 /** @see module:controller/Home~errorNotFound */
-exports.ErrorNotFound = guard.filter(['get'], errorNotFound);
+exports.ErrorNotFound = guard.ensure(['get'], errorNotFound);
 /** @see module:controller/Home~mobileSite */
-exports.MobileSite = guard.filter(['get'], mobileSite);
+exports.MobileSite = guard.ensure(['get'], mobileSite);
 /** @see module:controller/Home~fullSite */
-exports.FullSite = guard.filter(['get'], fullSite);
+exports.FullSite = guard.ensure(['get'], fullSite);
 /** @see module:controller/Home~setLayout */
-exports.SetLayout = guard.filter(['get'], setLayout);
+exports.SetLayout = guard.ensure(['get'], setLayout);
 /** @see module:controller/Home~deviceLayouts */
-exports.DeviceLayouts = guard.filter(['get'], deviceLayouts);
+exports.DeviceLayouts = guard.ensure(['get'], deviceLayouts);

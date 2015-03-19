@@ -65,7 +65,7 @@ var AbstractModel = Class.extend(
 	 * @return {Boolean}
 	 */
 	setValue : function (key, value) {
-		// this will works under trnasactional nodes
+		// this will works under transactional nodes
 		if (!this.object || empty(key)) {
 			return false;
 		}
