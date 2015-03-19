@@ -17,7 +17,7 @@ var HashMap = require('dw/util/HashMap');
 var Profile = require('~/cartridge/scripts/model/Profile');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Site = require('dw/system/Site');
-var Transaction = require('~/cartridge/scripts/transaction');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -62,7 +62,7 @@ function start() {
              */
             var homeDeliveries = prepareShipments();
 
-            Transaction.autocommit(function () {
+            Transaction.wrap(function () {
                 cart.calculate();
             });
 
@@ -171,7 +171,7 @@ function selectShippingMethod(cart) {
             request.httpParameterMap.address1.stringValue,
             request.httpParameterMap.address2.stringValue);
 
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
             cart.calculate();
         });
@@ -232,7 +232,7 @@ function updateShippingMethodList() {
         // TODO what the heck?
         Transaction.rollback();
 
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), currentShippingMethod.getID(), currentShippingMethod, applicableShippingMethods);
             cart.calculate();
         });
@@ -280,7 +280,7 @@ function getApplicableShippingMethodsJSON() {
  */
 function handleShippingSettings(cart) {
 
-    Transaction.autocommit(function () {
+    Transaction.wrap(function () {
         var defaultShipment = cart.getDefaultShipment();
         var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
@@ -320,7 +320,7 @@ function prepareShipments() {
 
     var cart = Cart.get();
 
-    var homeDeliveries = Transaction.autocommit(function () {
+    var homeDeliveries = Transaction.wrap(function () {
 
         var homeDeliveries = false;
 
@@ -415,7 +415,7 @@ function updateAddressDetails() {
         Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(address);
         Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(address);
 
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             var defaultShipment = cart.getDefaultShipment();
             var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 

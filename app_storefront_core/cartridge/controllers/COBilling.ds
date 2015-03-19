@@ -18,6 +18,8 @@ var Profile = require('~/cartridge/scripts/model/Profile');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var billingForm = require('~/cartridge/scripts/model/Form').get('billing');
+var billingAddressForm = require('~/cartridge/scripts/model/Form').get('billingaddress');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -91,58 +93,57 @@ function returnToForm(cart) {
  */
 function billing() {
 
-	// TODO this should trigger a redirect?
-	var TriggeredAction = request.triggeredFormAction;
+    billingForm.handleAction({
+        'applyCoupon'      : function (formgroup) {
+            var couponCode = request.httpParameterMap.couponCode.stringValue || request.httpParameterMap.dwfrm_billing_couponCode.stringValue;
 
-	if (TriggeredAction !== null) {
-		if (TriggeredAction.formId === 'applyCoupon') {
-			var couponCode = request.httpParameterMap.couponCode.stringValue || request.httpParameterMap.dwfrm_billing_couponCode.stringValue;
+            // TODO what happened to this start node?
+            require('./Cart').AddCoupon(couponCode);
 
-			// TODO what happened to this start node?
-			require('./Cart').AddCoupon(couponCode);
+            handleCoupon();
+            return;
+        },
+        'creditCardSelect' : function (formgroup) {
+            updateCreditCardSelection();
+            return;
+        },
+        'paymentSelect'    : function (formgroup) {
+	        var selectedPaymentID = request.httpParameterMap.dwfrm_billing_paymentMethods_selectedPaymentMethodID.stringValue;
+	        // ToDo - pass parameter ?
+	        Start();
+            return;
+        },
+        'redeemGiftCert'   : function (formgroup) {
+            redeemGiftCertificate(session.forms.billing.giftCertCode.htmlValue);
+            returnToForm();
+            return;
+        },
+        'save'             : function (formgroup) {
+            var cart = Cart.get();
 
-			handleCoupon();
-			return;
-		}
-		else if (TriggeredAction.formId === 'creditCardSelect') {
-			updateCreditCardSelection();
-			return;
-		}
-		else if (TriggeredAction.formId === 'paymentSelect') {
-			updatePaymentMethodSelection();
-			return;
-		}
-		else if (TriggeredAction.formId === 'redeemGiftCert') {
-			redeemGiftCertificate(session.forms.billing.giftCertCode.htmlValue);
-			returnToForm();
-			return;
-		}
-		else if (TriggeredAction.formId === 'save') {
-			var cart = Cart.get();
+	        if (!resetPaymentForms() || !validateBilling() || !handleBillingAddress(cart) || // Performs validation steps, based upon the entered billing address and address options.
+		        !handlePaymentSelection(cart)) { // Performs payment method specific checks, such as credit card verification.
+		        returnToForm(cart);
+	        }
+	        else {
 
-			if (!resetPaymentForms() || !validateBilling() || !handleBillingAddress(cart) || // Performs validation steps, based upon the entered billing address and address options.
-				!handlePaymentSelection(cart)) { // Performs payment method specific checks, such as credit card verification.
-				returnToForm(cart);
-			}
+		        if (customer.authenticated && session.forms.billing.billingAddress.addToAddressBook.value) {
+			        Profile.get(customer.profile).addAddressToAddressBook(cart.getBillingAddress());
+		        }
 
-			if (customer.authenticated && session.forms.billing.billingAddress.addToAddressBook.value) {
-				Profile.get(customer.profile).addAddressToAddressBook(cart.getBillingAddress());
-			}
+		        // Mark step as fulfilled
+		        session.forms.billing.fulfilled.value = true;
 
-			// Mark step as fulfilled
-			session.forms.billing.fulfilled.value = true;
-
-			// A successful billing page will jump to the next checkout step.
-			require('./COSummary').Start();
-			return;
-		}
-		else if (TriggeredAction.formId === 'selectAddress') {
-			updateAddressDetails();
-			return;
-		}
-	}
-
-	//returnToForm();
+		        // A successful billing page will jump to the next checkout step.
+		        require('./COSummary').Start();
+		        return;
+	        }
+        },
+        'selectAddress'    : function (formgroup) {
+            updateAddressDetails();
+            return;
+        }
+    });
 }
 
 /**
@@ -440,38 +441,30 @@ function editAddress() {
  * TODO
  */
 function editBillingAddress() {
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null) {
-		if (TriggeredAction.formId == 'apply') {
 
-			if (!form.updateObjectWithForm(BillingAddress, session.forms.billingaddress)) {
-				view.get().render('checkout/billing/billingaddressdetails');
-				return;
-			}
-			else {
-				view.get().render('components/dialog/dialogapply');
-				return;
-			}
-		}
-		else if (TriggeredAction.formId == 'remove') {
-
-			if (ProductListMgr.getProductLists(session.forms.billingaddress.object).isempty()) {
-
-				customer.getAddressBook().removeAddress(session.forms.billingaddress.object);
-				view.get().render('components/dialog/dialogdelete');
-				return;
-
-			}
-			else {
-
-				view.get().render('checkout/billing/billingaddressdetails');
-				return;
-
-			}
-		}
-	}
-
-	view.get().render('checkout/billing/billingaddressdetails');
+	billingAddressForm.handleAction({
+	    'apply'  : function (formgroup) {
+		    if (!form.updateObjectWithForm(BillingAddress, session.forms.billingaddress)) {
+			    view.get().render('checkout/billing/billingaddressdetails');
+			    return;
+		    }
+		    else {
+			    view.get().render('components/dialog/dialogapply');
+			    return;
+		    }
+	    },
+	    'remove' : function (formgroup) {
+		    if (ProductListMgr.getProductLists(session.forms.billingaddress.object).isEmpty()) {
+			    customer.getAddressBook().removeAddress(session.forms.billingaddress.object);
+			    view.get().render('components/dialog/dialogdelete');
+			    return;
+		    }
+		    else {
+			    view.get().render('checkout/billing/billingaddressdetails');
+			    return;
+		    }
+	    }
+    });
 }
 
 /**
@@ -483,17 +476,10 @@ function editBillingAddress() {
 function handlePaymentSelection(cart) {
 
 	if (empty(session.forms.billing.paymentMethods.selectedPaymentMethodID.value)) {
-		if (cart.getTotalGrossPrice() > 0) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return cart.getTotalGrossPrice() > 0;
 	}
 
-	/*
-	 * skip the payment handling if the whole payment was made using gift cert
-	 */
+	// skip the payment handling if the whole payment was made using gift cert
 	if (session.forms.billing.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_GIFT_CERTIFICATE)) {
 		return {
 			ok : true
@@ -517,10 +503,10 @@ function handlePaymentSelection(cart) {
 	 * The handle pipeline is responsible for payment provider / payment method
 	 * specific form validation and payment instrument creation.
 	 */
-	var HandlePipeline = PaymentMgr.getPaymentMethod(session.forms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID;
+	var handlePipeline = PaymentMgr.getPaymentMethod(session.forms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID;
 
 	// TODO support lookup from other cartridges in the site
-    return require('./lib/payment/' + HandlePipeline).Handle({
+    return require('./lib/payment/' + handlePipeline).Handle({
         Basket : cart.object
     });
 }
@@ -532,8 +518,18 @@ function handlePaymentSelection(cart) {
 function getGiftCertificateBalance() {
 	var giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(request.httpParameterMap.giftCertificateID.value);
 
-	// TODO render directly as JSON
-	view.get({GiftCertificate : giftCertificate}).render('checkout/giftcert/giftcertdetailsjson');
+	if (giftCertificate && giftCertificate.isEnabled())
+	{
+		response.renderJSON({
+			ID: giftCertificate.getGiftCertificateCode(),
+			balance: dw.util.StringUtils.formatMoney(giftCertificate.getBalance())
+		});
+	}
+	else {
+		response.renderJSON({
+			error : dw.web.Resource.msg('billing.giftcertinvalid', 'checkout', null)
+		});
+	}
 }
 
 /**
@@ -547,7 +543,6 @@ function selectCreditCard() {
 
 	var applicableCreditCards = initCreditCardList(cart).ApplicableCreditCards;
 
-	var uuid = request.httpParameterMap.creditCardUUID.value;
 	var selectedCreditCard = null;
 
 	// ensure mandatory parameter 'CreditCardUUID' and 'CustomerPaymentInstruments'
@@ -568,7 +563,9 @@ function selectCreditCard() {
 		}
 	}
 
-	view.get({SelectedCreditCard : selectedCreditCard}).render('checkout/billing/creditcardjson');
+	view.get({
+		SelectedCreditCard : selectedCreditCard
+	}).render('checkout/billing/creditcardjson');
 }
 
 function updateCreditCardSelection() {
@@ -576,7 +573,7 @@ function updateCreditCardSelection() {
 
 	var applicableCreditCards = initCreditCardList(cart).ApplicableCreditCards;
 
-	var UUID = !empty(request.httpParameterMap.creditCardUUID.value) ? request.httpParameterMap.creditCardUUID.value : request.httpParameterMap.dwfrm_billing_paymentMethods_creditCardList.stringValue;
+	var UUID = request.httpParameterMap.creditCardUUID.value ? request.httpParameterMap.creditCardUUID.value : request.httpParameterMap.dwfrm_billing_paymentMethods_creditCardList.stringValue;
 
 	var selectedCreditCard = null;
 	if (UUID && applicableCreditCards && !applicableCreditCards.empty) {
@@ -607,15 +604,6 @@ function updateCreditCardSelection() {
 
 	initCreditCardList(cart);
 	start(cart);
-}
-
-/**
- * TODO
- */
-function updatePaymentMethodSelection() {
-	var selectedPaymentID = request.httpParameterMap.dwfrm_billing_paymentMethods_selectedPaymentMethodID.stringValue;
-
-	Start();
 }
 
 /**
@@ -682,26 +670,6 @@ function resetPaymentForms() {
 	}
 
 	return true;
-}
-
-function updatePaymentForms() {
-	session.forms.billing.billingAddress.addressFields.country.value = request.httpParameterMap.countryCode.value;
-
-	session.forms.billing.paymentMethods.selectedPaymentMethodID.setOptions(PaymentMgr.getApplicablePaymentMethods(customer, request.httpParameterMap.countryCode.value, paymentAmount.value).iterator());
-	session.forms.billing.paymentMethods.creditCard.type.setOptions(PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(customer, request.httpParameterMap.countryCode.value, paymentAmount.value).iterator());
-
-	for (var i = 0; i < ValidPaymentInstruments.length; i++) {
-		var ValidPaymentInstrument = ValidPaymentInstruments[i];
-
-		if (ValidPaymentInstrument.paymentMethod == PaymentInstrument.METHOD_CREDIT_CARD) {
-			// TODO performance of long expressions
-			session.forms.billing.paymentMethods.creditCard.number.value = ValidPaymentInstrument.creditCardNumber;
-			session.forms.billing.paymentMethods.creditCard.owner.value = ValidPaymentInstrument.creditCardHolder;
-			session.forms.billing.paymentMethods.creditCard.type.value = ValidPaymentInstrument.creditCardType;
-			session.forms.billing.paymentMethods.creditCard.month.value = ValidPaymentInstrument.creditCardExpirationMonth;
-			session.forms.billing.paymentMethods.creditCard.year.value = ValidPaymentInstrument.creditCardExpirationYear;
-		}
-	}
 }
 
 /**
@@ -772,6 +740,10 @@ function saveCreditCard() {
 	}
 }
 
+/**
+ * TODO
+ * @returns {boolean}
+ */
 function validateBilling() {
 	if (!session.forms.billing.billingAddress.valid) {
 		return false;
@@ -815,8 +787,6 @@ exports.GetGiftCertificateBalance = guard.ensure(['https', 'get'], getGiftCertif
 exports.SelectCreditCard = guard.ensure(['https', 'get'], selectCreditCard);
 /** @see module:controller/COBilling~updateCreditCardSelection */
 exports.UpdateCreditCardSelection = guard.ensure(['https', 'get'], updateCreditCardSelection);
-/** @see module:controller/COBilling~updatePaymentMethodSelection */
-exports.UpdatePaymentMethodSelection = guard.ensure(['https', 'get'], updatePaymentMethodSelection);
 /** @see module:controller/COBilling~billing */
 exports.Billing = guard.ensure(['https'], billing);
 /** @see module:controller/COBilling~editBillingAddress */

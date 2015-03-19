@@ -28,7 +28,10 @@ function show() {
     session.forms.cart.shipments.invalidateFormElement();
     session.forms.login.invalidateFormElement();
 
-    view.get('view/CartView', {cart : Cart.get(), RegistrationStatus : false}).render('checkout/cart/cart');
+    view.get('view/CartView', {
+	    cart : Cart.get(),
+	    RegistrationStatus : false
+    }).render('checkout/cart/cart');
 
 }
 

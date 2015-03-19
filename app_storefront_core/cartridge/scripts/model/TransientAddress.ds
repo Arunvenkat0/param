@@ -1,0 +1,132 @@
+'use strict';
+
+/** @module model/TransientAddress */
+var Class = require('~/cartridge/scripts/util/Class').Class;
+var CustomerAddress = require('dw/customer/CustomerAddress');
+
+/**
+ * Transient representation of an address.
+ *
+ * @class module:model/TransientAddress~TransientAddress
+ */
+var TransientAddress = Class.extend({
+    UUID        : null,
+    ID          : null,
+    firstName   : null,
+    lastName    : null,
+    address1    : null,
+    address2    : null,
+    city        : null,
+    postalCode  : null,
+    stateCode   : null,
+    countryCode : null,
+    phone       : null,
+
+    /**
+     * The UUID of the reference address. It is set when the attributes
+     * are copied from a given customer or order address and is used
+     * to preselect addresses on a per product line item base.
+     */
+    referenceAddressUUID : null,
+
+    /**
+     * Copies the attributes of this address to the given order address.
+     */
+    copyTo : function (toAddress) {
+        toAddress.setFirstName(this.firstName);
+        toAddress.setLastName(this.lastName);
+        toAddress.setAddress1(this.address1);
+        toAddress.setAddress2(this.address2);
+        toAddress.setCity(this.city);
+        toAddress.setPostalCode(this.postalCode);
+        toAddress.setStateCode(this.stateCode);
+        toAddress.setCountryCode(this.countryCode);
+        toAddress.setPhone(this.phone);
+    },
+
+    /**
+     * Copies the attributes of a store's address to the given order address.
+     */
+    storeAddressTo : function (toAddress, storeObject) {
+        toAddress.setFirstName('');
+        toAddress.setLastName(storeObject.name);
+        toAddress.setAddress1(storeObject.address1);
+        toAddress.setAddress2(storeObject.address2);
+        toAddress.setCity(storeObject.city);
+        toAddress.setPostalCode(storeObject.postalCode);
+        toAddress.setStateCode(storeObject.stateCode);
+        toAddress.setCountryCode(storeObject.custom.countryCodeValue);
+        toAddress.setPhone(storeObject.phone);
+    },
+
+    /**
+     * Copies the attributes from the given customer address or
+     * order address to this address. The function supports both
+     * copying from CustomerAddress as well as from OrderAddress.
+     */
+    copyFrom : function (fromAddress) {
+        // if we copy from a customer address, we set the address ID
+        if (fromAddress instanceof CustomerAddress) {
+            this.ID = fromAddress.ID;
+        }
+
+        this.firstName = fromAddress.firstName;
+        this.lastName = fromAddress.lastName;
+        this.address1 = fromAddress.address1;
+        this.address2 = fromAddress.address2;
+        this.city = fromAddress.city;
+        this.postalCode = fromAddress.postalCode;
+        this.stateCode = fromAddress.stateCode;
+        this.countryCode = fromAddress.countryCode;
+        this.phone = fromAddress.phone;
+
+        if (fromAddress.countryCode.value != null) {
+            this.countryCode = fromAddress.countryCode.value;
+        }
+        else {
+            this.countryCode = fromAddress.countryCode;
+        }
+
+        // if we copy from a customer address, we set the address ID and UUID
+        if (('ID' in fromAddress) && (fromAddress instanceof CustomerAddress || (fromAddress.ID != null && fromAddress.UUID != null))) {
+            this.ID = fromAddress.ID;
+            this.referenceAddressUUID = fromAddress.UUID;
+        }
+
+        if ('referenceAddressUUID' in fromAddress && fromAddress.referenceAddressUUID != null) {
+            this.referenceAddressUUID = fromAddress.referenceAddressUUID;
+        }
+    },
+
+    /**
+     * New function for multi-shipping checkout
+     * Checks if the address already exists in an array of addresses
+     */
+    addressExists : function (addresses) {
+
+        for (var i = 0; i < addresses.length; i++) {
+            var address = addresses[i];
+            if (this.referenceAddressUUID != null && (address.referenceAddressUUID != null)) {
+                if (this.referenceAddressUUID.equals(address.referenceAddressUUID)) {
+                    return true;
+                }
+            }
+            else {
+                if (this.firstName == address.firstName &&
+                    this.lastName == address.lastName &&
+                    this.address1 == address.address1 &&
+                    this.address2 == address.address2 &&
+                    this.city == address.city &&
+                    this.postalCode == address.postalCode &&
+                    this.stateCode == address.stateCode &&
+                    this.countryCode == address.countryCode &&
+                    this.phone == address.phone) {
+                    return true;
+                }
+            }
+        }
+    }
+});
+
+/** The TransientAddress class */
+module.exports = TransientAddress;

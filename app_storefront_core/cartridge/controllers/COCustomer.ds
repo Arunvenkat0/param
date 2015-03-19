@@ -9,7 +9,7 @@
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
-var Transaction = require('~/cartridge/scripts/transaction');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var loginAsset = require('~/cartridge/scripts/model/Content').get('myaccount-login');
@@ -32,7 +32,7 @@ function start() {
     session.forms.multishipping.clearFormElement();
     session.forms.billing.clearFormElement();
 
-    Transaction.autocommit(function () {
+    Transaction.wrap(function () {
         Cart.goc().removeAllPaymentInstruments;
     });
 

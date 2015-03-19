@@ -8,6 +8,7 @@
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
+var HashMap = require('dw/util/HashMap');
 var Money = require('dw/value/Money');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var Product = require('~/cartridge/scripts/model/Product');
@@ -16,6 +17,8 @@ var PromotionMgr = require('dw/campaign/PromotionMgr');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var StringUtils = require('dw/util/StringUtils');
+var TransientAddress = require('~/cartridge/scripts/model/TransientAddress');
+var UUIDUtils = require('dw/util/UUIDUtils');
 
 /**
  * Category helper providing enhanced category functionality
@@ -600,7 +603,7 @@ var Cart = AbstractModel.extend(
                         }
                         else {
                             //create the shipment address to reflect the new store address
-                            var shippingAddress = new ShippingAddress();
+                            var shippingAddress = new TransientAddress();
                             var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                             var orderAddress = pli.shipment.createShippingAddress();
                             shippingAddress.storeAddressTo(orderAddress, storeObject);
@@ -660,7 +663,7 @@ var Cart = AbstractModel.extend(
 
                     }
 
-                    var shippingAddress = new ShippingAddress();
+                    var shippingAddress = new TransientAddress();
 	                var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                     var orderAddress = shipment.createShippingAddress();
                     shippingAddress.storeAddressTo(orderAddress, storeObject);
@@ -984,10 +987,150 @@ var Cart = AbstractModel.extend(
 	        }
 
 	        return gcIdList;
+        },
+
+	    /**
+	     * This script creates new ProductLineItems and Shipments from the List of the address selections with help of
+	     * a data structure (address and product relations through HashMaps).
+	     *
+	     * @param {dw.web.FormList} quantityLineItems
+	     * @returns {*}
+	     */
+	    mergeQuantities : function (quantityLineItems) {
+
+		    var addressRelations = new HashMap();
+		    var defaultShippingSet = false;
+
+		    /**
+		     * Build new data structure through HashMaps from address-products-relations (stored in FormList)
+		     * to build the new ProductLineItems in dependency to their addresses and quantities
+		     *
+		     * address relation:    +===============+=================+
+             *                      |    Key        |    Value        |
+             *                      +===============+=================+
+             *                      |    address1   |    products1  --|------->    product relation 1:    +===============+===============+
+             *                      +---------------+-----------------+                                   |    Key        |    Value      |
+             *                      |    address2   |    products2  --|--->    product relation 2         +===============+===============+
+             *                      +---------------+-----------------+                                   |   productID1  |   quantity1   |
+             *                      |    ...        |    ...          |                                   +---------------+---------------+
+             *                                                                                            |   productID2  |   quantity2   |
+             *                                                                                            +---------------+---------------+
+             *                                                                                            |    ...        |    ...        |
+             */
+
+		    for (var i = 0; i < quantityLineItems.getChildCount(); i++) {
+			    var qli = quantityLineItems[i];
+                var selectedAddress = qli.addressList.selectedOptionObject;
+                var productID = qli.object.productID;
+
+                var productOptionID = qli.object.optionID;
+                productID = productID + '.' + productOptionID;
+
+                if (selectedAddress == null) {
+                    return false;
+                }
+
+                if (addressRelations.containsKey(selectedAddress)) {
+                    var productRelations = addressRelations.get(selectedAddress);
+                    if (productRelations.containsKey(productID)) {
+                        var quantity = productRelations.get(productID);
+                        productRelations.put(productID, quantity + 1);
+                    }
+                    else {
+                        productRelations.put(productID, 1);
+                    }
+                }
+                else {
+                    var productRelations = new HashMap();
+                    productRelations.put(productID, 1);
+                    addressRelations.put(selectedAddress, productRelations);
+                }
+            }
+
+            //Remove all ProductLineItems and Shipments to create new ones
+		    var plis = this.getProductLineItems();
+		    for (var i = 0; i < plis.length; i++) {
+			    var pli = plis[i];
+                if (empty(pli.custom.fromStoreId)) {
+	                this.removeProductLineItem(pli);
+                }
+            }
+
+		    var shipments = this.getShipments();
+		    for (var i = 0; i < shipments.length; i++) {
+			    var shipment = shipments[i];
+                //if the shipment is for a gift certificate or the default shipment, it will not be removed from the cart
+                if (!shipment.isDefault() && !(shipment.giftCertificateLineItems.length > 0) && shipment.custom.shipmentType !== 'instore') {
+	                this.removeShipment(shipment);
+                }
+            }
+
+            // Build new ProductLineItems and Shipments with the new created data structure
+            var addresses = addressRelations.keySet();
+
+		    for (var i = 0; i < addresses.length; i++) {
+			    var address = addresses[i];
+                var shipment = null;
+                var orderAddress = null;
+                if (!defaultShippingSet) {
+                    shipment = this.getDefaultShipment();
+                    defaultShippingSet = true;
+                }
+                else {
+                    shipment = this.createShipment(address.UUID);
+                }
+                orderAddress = shipment.createShippingAddress();
+
+			    var shippingAddress = new TransientAddress();
+                shippingAddress.UUID = UUIDUtils.createUUID();
+                shippingAddress.copyFrom(address);
+                shippingAddress.copyTo(orderAddress);
+
+                var productRelations = addressRelations.get(address);
+                var products = productRelations.keySet();
+
+                var product_ID = '';
+                var optionID = '';
+
+			    for (var j = 0; j < products.length; j++) {
+				    var product = products[j];
+                    var splitarray = product.split('.');
+                    product_ID = splitarray[0];
+                    optionID = splitarray[1];
+
+                    var pli = this.createProductLineItem(product_ID, shipment);
+                    pli.setQuantityValue(productRelations.get(product));
+
+                    //re-assign the option product based on the optionID
+                    if (optionID !== 'na') {
+                        var productOptionModel = pli.product.getOptionModel();
+                        var productOptions = productOptionModel.getOptions();
+                        var pliOptionArrayList = new ArrayList(productOptions);
+                        var productOption = pliOptionArrayList[0];
+
+                        var options = productOptionModel.getOptionValues(productOption).iterator();
+                        while (options.hasNext()) {
+
+                            var optionValue = options.next();
+
+                            // if the option id equals the selection option id, set the selected option
+                            if (optionValue.getID() === optionID) {
+
+                                var pliOptionProducts = new ArrayList(pli.optionProductLineItems);
+
+	                            for (var k = 0; k < pliOptionProducts.length; k++) {
+		                            pliOptionProducts[k].updateOptionValue(optionValue);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
 });
-
 
 /** The cart class */
 module.exports = new Cart();

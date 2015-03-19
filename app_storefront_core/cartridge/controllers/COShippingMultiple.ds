@@ -13,7 +13,7 @@
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Form = require('~/cartridge/scripts/model/Form');
 var ShippingMgr = require('dw/order/ShippingMgr');
-var Transaction = require('~/cartridge/scripts/transaction');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -60,11 +60,13 @@ function start() {
         initAddressForms(cart.object, quantityLineItems);
 
         require('./COShipping').PrepareShipments();
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             cart.calculate();
         });
 
-        view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
+        view.get({
+            Basket : cart.object
+        }).render('checkout/shipping/multishipping/multishippingaddresses');
     }
     else {
         require('./Cart').Show();
@@ -77,20 +79,16 @@ function start() {
  */
 function multiShippingAddresses() {
 
-	multiShippingForm.handleAction({
-		'save'           : function (formgroup) {
+    multiShippingForm.handleAction({
+        'save' : function (formgroup) {
             var cart = Cart.get();
-            var ScriptResult = new dw.system.Pipelet('Script', {
-                Transactional : true,
-                OnError       : 'PIPELET_ERROR',
-                ScriptFile    : 'checkout/multishipping/MergeQuantities.ds'
-            }).execute({
-                    QuantityLineItems : session.forms.multishipping.addressSelection.quantityLineItems,
-                    CBasket           : cart.object
-                });
-            if (ScriptResult.result !== PIPELET_ERROR) {
 
-                Transaction.autocommit(function () {
+            var result = Transaction.wrap(function () {
+                return cart.mergeQuantities(session.forms.multishipping.addressSelection.quantityLineItems);
+            });
+
+            if (result) {
+                Transaction.wrap(function () {
                     cart.calculate();
                 });
 
@@ -99,14 +97,15 @@ function multiShippingAddresses() {
                 startShipments();
                 return;
             }
-			else {
-	            view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
-	            return;
+            else {
+                view.get({
+                    Basket : cart.object
+                }).render('checkout/shipping/multishipping/multishippingaddresses');
+                return;
             }
         }
     });
 }
-
 
 /**
  * The second step of multi shipping: renders a page with each shipment, providing a shipping method selection per shipment.
@@ -131,11 +130,13 @@ function startShipments() {
             shipmentForm.shippingMethodID.setOptions(shippingMethods.iterator());
         }
 
-        Transaction.autocommit(function () {
+        Transaction.wrap(function () {
             cart.calculate();
         });
 
-        view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingshipments');
+        view.get({
+            Basket : cart.object
+        }).render('checkout/shipping/multishipping/multishippingshipments');
     }
     else {
         require('./Cart').Show();
@@ -147,21 +148,21 @@ function startShipments() {
  * TODO
  */
 function multiShippingMethods() {
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null) {
-        if (TriggeredAction.formId == 'save') {
+    multiShippingForm.handleAction({
+        'save' : function (formgroup) {
             for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
-                var ShipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
+                var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
 
-                if (ShipmentForm.shippingMethodID.selectedOptionObject != null) {
-                    new dw.system.Pipelet('SetShippingMethod').execute({
-                        Shipment       : ShipmentForm.object,
-                        ShippingMethod : ShipmentForm.shippingMethodID.selectedOptionObject
-                    });
+                if (shipmentForm.shippingMethodID.selectedOptionObject != null) {
+	                Transaction.wrap(function () {
+		                shipmentForm.getObject().setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject)
+	                });
                 }
 
-                if (!Form.get(ShipmentForm).copyTo(ShipmentForm.object)) {
-                    view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
+                if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
+                    view.get({
+                        Basket : cart.object
+                    }).render('checkout/shipping/multishipping/multishippingaddresses');
                     return;
                 }
                 else {
@@ -172,13 +173,9 @@ function multiShippingMethods() {
                     return;
                 }
             }
-
         }
-    }
-
-    view.get({Basket : cart.object}).render('checkout/shipping/multishipping/multishippingaddresses');
+    });
 }
-
 
 /**
  * Initializes the forms for the multi address selection.
@@ -254,13 +251,12 @@ function editAddresses() {
  */
 function editForm() {
 
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null) {
-        if (TriggeredAction.formId == 'cancel') {
+    multiShippingForm.handleAction({
+        'cancel'        : function (formgroup) {
             start();
             return;
-        }
-        else if (TriggeredAction.formId == 'save') {
+        },
+        'save'          : function (formgroup) {
             var addEditAddressResult = addEditAddress();
             if (addEditAddressResult.error) {
                 view.get().render('checkout/shipping/multishipping/editaddresses');
@@ -269,53 +265,24 @@ function editForm() {
 
             start();
             return;
-        }
-        else if (TriggeredAction.formId == 'selectAddress') {
+        },
+        'selectAddress' : function (formgroup) {
             if (!session.forms.multishipping.editAddress.addressList.selectedOption) {
 
                 session.forms.multishipping.editAddress.clearFormElement();
-	            editAddresses();
+                editAddresses();
 
                 return;
             }
 
             Form.get(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             Form.get(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
-	        view.get({Basket : cart.object}).render('checkout/shipping/multishipping/editaddresses');
+            view.get({Basket : cart.object}).render('checkout/shipping/multishipping/editaddresses');
 
-	        return;
+            return;
         }
-    }
-
-}
-
-
-/**
- * Handles the address selection per quantity line item and derives possibly multiple shipments from it.
- */
-function handleAddressSelections() {
-    var cart = Cart.get();
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'checkout/multishipping/MergeQuantities.ds'
-    }).execute({
-            QuantityLineItems : session.forms.multishipping.addressSelection.quantityLineItems,
-            CBasket           : cart.object
-        });
-    if (ScriptResult.result === PIPELET_ERROR) {
-        return {
-            error : true
-        };
-    }
-
-    Transaction.autocommit(function () {
-        cart.calculate();
     });
-
 }
-
 
 /**
  * Handles the settings per shipment, like shipping method selection and gift options.
@@ -393,7 +360,6 @@ function addEditAddressJSON() {
         success : addEditAddressResult.success
     });
 }
-
 
 /*
  * Module exports
