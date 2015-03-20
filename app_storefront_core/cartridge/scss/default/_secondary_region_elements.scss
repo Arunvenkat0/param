@@ -1,5 +1,5 @@
 #secondary a {
-	color: $pacific-blue;
+	color: $citrus;
 }
 
 #category-level-1 {
@@ -26,7 +26,6 @@
 	a {
 		&.active {
 			color: $black;
-			font-family: $serif;
 			font-style: italic;
 			font-weight: normal;
 		}
@@ -42,7 +41,6 @@
 		&.active {
 			background-position: left -47px;
 			color: $black;
-			font-family: $serif;
 			font-style: italic;
 		}
 	}
@@ -116,7 +114,7 @@
 				padding: 0.2em 0.8em;
 			}
 			&.selected a {
-				border-color: $pacific-blue;
+				border-color: $citrus;
 				font-weight: bold;
 			}
 			&.unselectable a {

@@ -66,7 +66,7 @@
 		padding: 3px 0 0;
 		width: 55px;
 		&.selected {
-			border-color: $pacific-blue;
+			border-color: $citrus;
 		}
 	}
 	// thumbnail image
@@ -95,7 +95,6 @@
 	}
 	.product-name {
 		float: right;
-		font-family: $serif;
 		font-size: 1.8em;
 		font-style: italic;
 		font-weight: 400;
@@ -182,10 +181,8 @@
 		}
 		.selected-value {
 			border: 0 none;
-			color: $dim-gray;
-			font-family: $serif;
-			font-style: italic;
-			padding: 0.5em 0 0 2em;
+			color: $citrus;
+			padding: .9em 0 0 .7em;
 		}
 		.size-chart-link {
 			clear: both;
@@ -199,7 +196,7 @@
 	.swatches li {
 		float: left;
 		&:hover a, &.selected a {
-			border-color: $pacific-blue;
+			border-color: $citrus;
 		}
 		&.unselectable {
 			a {
@@ -219,26 +216,28 @@
 			-moz-border-right-colors: none;
 			-moz-border-top-colors: none;
 			border-color: $gainsboro;
-			border-radius: 5px 5px 5px 5px;
+			border-radius: 3px;
 			border-style: solid;
 			border-width: 1px 1px 3px;
 			display: block;
 			margin: 0 0.3em 0.3em 0.2em;
-			padding: 0.3em 0.6em;
+			padding: .58em 0;
+			text-align: center;
+			width: 32px;
 		}
 	}
 	.color li {
 		border: 2px solid $white;
 		border-radius: 5px 5px 5px 5px;
 		&:hover, &.selected {
-			border-color: $pacific-blue;
+			border-color: $citrus;
 		}
 		&:hover a, &.selected a {
 			border-color: $white;
 		}
 		a {
 			border: 1px solid $gainsboro;
-			height: 22px;
+			height: 32px;
 			margin: 0;
 			padding: 0;
 			width: 32px;
@@ -305,7 +304,6 @@
 		padding: 2em 0;
 		width: 350px;
 		h2 {
-			font-family: $serif;
 			font-size: 2em;
 			font-style: italic;
 			font-weight: 400;

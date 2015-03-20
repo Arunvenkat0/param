@@ -1,8 +1,8 @@
 .breadcrumb {
-	font-size: 1.2em;
+	font-size: 1em;
 	line-height: 1.5;
-	margin: 0 0 5px;
-	padding: 0 10px;
+	margin: 0;
+	padding: 2px 8px;
 	li {
 		display: inline;
 		list-style: none outside none;
@@ -17,12 +17,11 @@
 .breadcrumb-element {
 	&:after {
 		color: $very-light-gray;
-		content: '>';
+		content: '/';
 		margin-left: 5px;
 	}
 	&:last-child {
-		font-family: $serif;
-		font-style: italic;
+		font-weight: 700;
 		&:after {
 			content: '';
 		}
@@ -30,8 +29,7 @@
 }
 
 .breadcrumb-refinement {
-	font-family: $serif;
-	font-style: italic;
+	font-weight: 700;
 	&:after {
 		content: attr(data-divider);
 		font-style: normal;
@@ -54,7 +52,6 @@
 .breadcrumb-relax {
 	background: none;
 	color: $sangria;
-	font-family: $sans-serif;
 	font-style: normal;
 	padding: 0 0 0 3px;
 }
@@ -62,8 +59,6 @@
 .breadcrumb-result-text a,
 .breadcrumb .searchphraselink {
 	background: none;
-	color: $pacific-blue;
-	font-family: $serif;
-	font-style: italic;
+	color: $citrus;
 	padding: 0;
 }

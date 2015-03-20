@@ -171,7 +171,6 @@
 .order-summary-footer {
 	position: relative;
 	h2 {
-		font-family: $serif;
 		font-size: 2em;
 		font-style: italic;
 		font-weight: normal;
@@ -212,7 +211,6 @@
 		}
 	}
 	#primary h2 {
-		font-family: $serif;
 		font-size: 2em;
 		font-style: italic;
 		font-weight: normal;
@@ -223,7 +221,7 @@
 }
 
 .confirmation-message {
-	border-bottom: 3px solid $pacific-blue;
+	border-bottom: 3px solid $citrus;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 }

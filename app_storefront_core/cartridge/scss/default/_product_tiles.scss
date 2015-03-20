@@ -32,9 +32,7 @@
 		}
 	}
 	.product-name {
-		font-family: $serif;
 		font-size: 1.2em;
-		font-style: italic;
 		margin-top: 1em;
 		height: 3em;
 		overflow: auto;
@@ -81,7 +79,7 @@
 			}
 		}
 		.selected img, img:hover {
-			border-color: $pacific-blue;
+			border-color: $citrus;
 		}
 	}
 	.product-promo {
@@ -117,7 +115,7 @@
 		height: auto !important; // overwrite synced heights set on element
 		.product-image {
 			float: left;
-			width: 40%;
+			padding-right: 20px;
 		}
 		.product-name,
 		.product-pricing,
@@ -126,10 +124,15 @@
 		.product-review {
 			float: left;
 			text-align: left;
-			width: 55%;
+			width: 65%;
 		}
 		.product-name {
+			font-size: 1.5em;
+			height: auto;
 			margin-top: 0;
+		}
+		.product-pricing {
+			font-size: 1.3em;
 		}
 		.product-swatches {
 			margin-bottom: 1em;

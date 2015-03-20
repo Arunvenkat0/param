@@ -27,8 +27,8 @@
 </script>
 <div class="pagination">
 	<div class="results-hits">
-		<span class="toggle-grid"><i class="fa fa-th" data-option="column"></i><i class="fa fa-th-list" data-option="wide"></i></span>
-		${Resource.msg('global.paginginformation.showing', 'locale', null)}
+		<span class="toggle-grid"><i class="fa fa-th fa-lg" data-option="column"></i><i class="fa fa-th-list fa-lg" data-option="wide"></i></span>
+		${Resource.msg('pagecomponents.paginginformation.showing', 'pagecomponents', null)}
 		<isif condition="${!empty(pdict.OrderPagingModel) || !dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
 			<isprint value="${StringUtils.formatInteger(showingStart)}"/> - <isprint value="${StringUtils.formatInteger(showingEnd)}"/> ${Resource.msg('paginginformation.of', 'search', null)}
 		</isif>
@@ -39,10 +39,10 @@
 		<ul>
 		<isif condition="${(currentPage > 0) && (maxPage > 4)}">
 			<li class="first-last">
-				<a class="page-first" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><span>&lt;&lt;</span></a>
+				<a class="page-first" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><i class="fa fa-angle-double-left fa-lg"></i></a>
 			</li>
 			<li class="first-last">
-				<a class="page-previous" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><span>&lt;</span></a>
+				<a class="page-previous" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><i class="fa fa-angle-left fa-lg"></i></a>
 			</li>
 		</isif>
 
@@ -62,10 +62,10 @@
 
 			<isif condition="${(current < totalCount - pageSize) && (maxPage > 4)}">
 				<li class="first-last">
-					<a class="page-next" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><span>&gt;</span></a>
+					<a class="page-next" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><i class="fa fa-angle-right fa-lg"></i></a>
 				</li>
 				<li class="first-last">
-					<a class="page-last" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><span>&gt;&gt;</span></a>
+					<a class="page-last" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><i class="fa fa-angle-double-right fa-lg"></i></a>
 				</li>
 			</isif>
 		</isif>
