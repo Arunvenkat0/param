@@ -79,10 +79,9 @@ var Form = AbstractModel.extend(
             if (clear) {
                 this.object.clear();
             }
-            else {
-                // update the form
-                this.object.copyFrom(updateObject);
-            }
+
+            // update the form
+            this.object.copyFrom(updateObject);
 
             return this;
         },

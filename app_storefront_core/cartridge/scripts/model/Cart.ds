@@ -124,7 +124,7 @@ var Cart = AbstractModel.extend(
 
             if (product) {
 
-	            // TODO
+                // TODO
                 var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
                     Basket             : this.object,
                     Product            : product,
@@ -442,10 +442,10 @@ var Cart = AbstractModel.extend(
 
         },
 
-	    /**
-	     * The function removes all empty shipments of the current cart.
-	     */
-	    removeEmptyShipments : function () {
+        /**
+         * The function removes all empty shipments of the current cart.
+         */
+        removeEmptyShipments : function () {
             // get the list of shipments
             var shipments = this.getShipments();
 
@@ -461,12 +461,12 @@ var Cart = AbstractModel.extend(
             }
         },
 
-	    /**
-	     * Determines the physical shipments of the current cart. Physical shipments are shipments which contain at
-	     * least one product line item. A shipment which contains only gift certificates is not a physical shipment.
-	     *
-	     * @returns {*}
-	     */
+        /**
+         * Determines the physical shipments of the current cart. Physical shipments are shipments which contain at
+         * least one product line item. A shipment which contains only gift certificates is not a physical shipment.
+         *
+         * @returns {*}
+         */
         getPhysicalShipments : function () {
 
             // list of physical shipments
@@ -485,82 +485,82 @@ var Cart = AbstractModel.extend(
             return physicalShipments;
         },
 
-	    /**
-	     * Cleans the shipments of the current basket by putting all gift certificate line items to single, possibly
-	     * new shipments (one shipment per gift certificate line item).
-	     */
- 	    updateGiftCertificateShipments : function () {
+        /**
+         * Cleans the shipments of the current basket by putting all gift certificate line items to single, possibly
+         * new shipments (one shipment per gift certificate line item).
+         */
+        updateGiftCertificateShipments : function () {
 
-		    // list of line items
-		    var giftCertificatesLI = new ArrayList();
+            // list of line items
+            var giftCertificatesLI = new ArrayList();
 
-		    // find gift certificates in shipments which have
-		    // product line items and gift certificate line items merged
-		    var shipments = this.getShipments();
+            // find gift certificates in shipments which have
+            // product line items and gift certificate line items merged
+            var shipments = this.getShipments();
 
-		    for (var i = 0; i < shipments.length; i++) {
-			    var shipment = shipments[i];
+            for (var i = 0; i < shipments.length; i++) {
+                var shipment = shipments[i];
 
-			    // skip shipment if no gift certificates are contained
-			    if (shipment.giftCertificateLineItems.size() == 0) {
-				    continue;
-			    }
+                // skip shipment if no gift certificates are contained
+                if (shipment.giftCertificateLineItems.size() == 0) {
+                    continue;
+                }
 
-			    // skip shipment if no products and just one gift certificate is contained
-			    if (shipment.productLineItems.size() == 0 && shipment.giftCertificateLineItems.size() == 1) {
-				    continue;
-			    }
+                // skip shipment if no products and just one gift certificate is contained
+                if (shipment.productLineItems.size() == 0 && shipment.giftCertificateLineItems.size() == 1) {
+                    continue;
+                }
 
-			    // if there are gift certificates add them to the list
-			    if (shipment.giftCertificateLineItems.size() > 0) {
-				    giftCertificatesLI.addAll(shipment.giftCertificateLineItems);
-			    }
-		    }
+                // if there are gift certificates add them to the list
+                if (shipment.giftCertificateLineItems.size() > 0) {
+                    giftCertificatesLI.addAll(shipment.giftCertificateLineItems);
+                }
+            }
 
-		    // create a shipment for each gift certificate line item
-		    for (var i = 0; i < giftCertificatesLI.length; i++) {
-			    var newShipmentID = this.determineUniqueShipmentID("Shipment #");
-			    giftCertificatesLI[i].setShipment(this.createShipment(newShipmentID));
-		    }
-	    },
+            // create a shipment for each gift certificate line item
+            for (var i = 0; i < giftCertificatesLI.length; i++) {
+                var newShipmentID = this.determineUniqueShipmentID("Shipment #");
+                giftCertificatesLI[i].setShipment(this.createShipment(newShipmentID));
+            }
+        },
 
-	    /**
-	     * Determines a unique shipment ID for shipments in the curent cart and the given base ID. The function appends
-	     * a counter to the base ID and checks the existence of the resulting ID. If the resulting ID is unique this ID
-	     * is returned, if not the counter is incremented and checked again.
-	     *
-	     * @param baseID
-	     * @returns {*}
-	     */
-	    determineUniqueShipmentID : function (baseID) {
-		    var counter = 1;
-		    var shipment = null;
-		    var candidateID = baseID + "" + counter;
+        /**
+         * Determines a unique shipment ID for shipments in the curent cart and the given base ID. The function appends
+         * a counter to the base ID and checks the existence of the resulting ID. If the resulting ID is unique this ID
+         * is returned, if not the counter is incremented and checked again.
+         *
+         * @param baseID
+         * @returns {*}
+         */
+        determineUniqueShipmentID : function (baseID) {
+            var counter = 1;
+            var shipment = null;
+            var candidateID = baseID + "" + counter;
 
-		    while (shipment == null) {
-			    shipment = this.getShipment(candidateID);
-			    if (shipment != null) {
-				    // this ID is already taken, increment the counter
-				    // and try the next one
-				    counter++;
-				    candidateID = baseID + "" + counter;
-				    shipment = null;
-			    }
-			    else {
-				    return candidateID;
-			    }
-		    }
+            while (shipment == null) {
+                shipment = this.getShipment(candidateID);
+                if (shipment != null) {
+                    // this ID is already taken, increment the counter
+                    // and try the next one
+                    counter++;
+                    candidateID = baseID + "" + counter;
+                    shipment = null;
+                }
+                else {
+                    return candidateID;
+                }
+            }
 
-		    // should never go here
-		    return null;
-	    },
+            // should never go here
+            return null;
+        },
 
-	    /**
-	     * Creates a shipping address for the shipment with the given shipment ID.
-	     *
-	     * @param shipmentID
-	     * @returns {*}
-	     */
+        /**
+         * Creates a shipping address for the shipment with the given shipment ID.
+         *
+         * @param shipmentID
+         * @returns {*}
+         */
         createShipmentShippingAddress : function (shipmentID) {
 
             var shipment = this.getShipment(shipmentID);
@@ -575,7 +575,7 @@ var Cart = AbstractModel.extend(
 
         },
 
-	    /**
+        /**
          * This script scans the basket and consildates items that are going to the same store, it also creates shipmets
          * with shipment type and method for the rest of checkout.
          *
@@ -611,7 +611,7 @@ var Cart = AbstractModel.extend(
                         }
                     }
                     else {
-	                    var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                        var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                         //change the shipment address to reflect the new store address
                         pli.shipment.shippingAddress.setFirstName('');
                         pli.shipment.shippingAddress.setLastName(storeObject.name);
@@ -664,7 +664,7 @@ var Cart = AbstractModel.extend(
                     }
 
                     var shippingAddress = new TransientAddress();
-	                var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                    var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                     var orderAddress = shipment.createShippingAddress();
                     shippingAddress.storeAddressTo(orderAddress, storeObject);
                     pli.setShipment(shipment);
@@ -677,17 +677,17 @@ var Cart = AbstractModel.extend(
             return homeDeliveries;
         },
 
-	    /**
-	     * This script updates the shipping method of the given shipment. If a shipping method ID is  given, the given shipping method used to update the shipment.
-	     *
-	     * @param shippingMethod
-	     * @returns {{shippingExclDiscounts: *, shippingInclDiscounts: *, productShippingCosts: Array, productShippingDiscounts: ArrayList, shippingPriceAdjustments: Array, shippingPriceAdjustmentsTotal: Money, surchargeAdjusted: Money, baseShipping: *, baseShippingAdjusted: *}}
-	     */
+        /**
+         * This script updates the shipping method of the given shipment. If a shipping method ID is  given, the given shipping method used to update the shipment.
+         *
+         * @param shippingMethod
+         * @returns {{shippingExclDiscounts: *, shippingInclDiscounts: *, productShippingCosts: Array, productShippingDiscounts: ArrayList, shippingPriceAdjustments: Array, shippingPriceAdjustmentsTotal: Money, surchargeAdjusted: Money, baseShipping: *, baseShippingAdjusted: *}}
+         */
         preCalculateShipping : function (shippingMethod) {
 
             var shipment = this.getDefaultShipment();
 
-	        if (shipment != null) {
+            if (shipment != null) {
                 var currencyCode = this.getCurrencyCode();
                 var discountPlan = PromotionMgr.getDiscounts(this.object),
                     productShippingCosts = [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
@@ -711,7 +711,7 @@ var Cart = AbstractModel.extend(
                             "shippingCost" : psc,
                             "qty"          : pli.getQuantity()
                         };
-						if (psc != null && psc.getAmount() != null && psc.isSurcharge()) {
+                        if (psc != null && psc.getAmount() != null && psc.isSurcharge()) {
                             // update the surcharge totals
                             surchargeTotal = surchargeTotal.add(psc.getAmount());
                             adustedSurchargeTotal = adustedSurchargeTotal.add(psc.getAmount());
@@ -771,7 +771,7 @@ var Cart = AbstractModel.extend(
                     "baseShippingAdjusted"          : baseShippingAdjusted
                 };
             }
-	    },
+        },
 
         /**
          * This script sets the shipping method of the given shipment to the passed method.  The list of allowed shipping
@@ -830,99 +830,99 @@ var Cart = AbstractModel.extend(
             return;
         },
 
-	    getApplicableShippingMethods : function (countryCode, stateCode, postalCode, city, address1, address2) {
+        getApplicableShippingMethods : function (countryCode, stateCode, postalCode, city, address1, address2) {
 
-		    // Construct an address from request parameters.
-		    var addressObj = new Object();
+            // Construct an address from request parameters.
+            var addressObj = new Object();
 
-		    // SiteGenesis-specific default used to define list of shipping methods shown by default.
-		    // Modify as needed.
-		    addressObj.countryCode = (countryCode === null || StringUtils.trim(countryCode) === "") ? "US" : StringUtils.trim(countryCode);
-		    addressObj.stateCode = (stateCode === null || StringUtils.trim(stateCode) === "") ? "NY" : StringUtils.trim(stateCode);
-		    addressObj.postalCode = postalCode && StringUtils.trim(postalCode);
-		    addressObj.city = city && StringUtils.trim(city);
-		    addressObj.address1 = address1 && StringUtils.trim(address1);
-		    addressObj.address2 = address2 && StringUtils.trim(address2);
+            // SiteGenesis-specific default used to define list of shipping methods shown by default.
+            // Modify as needed.
+            addressObj.countryCode = (countryCode === null || StringUtils.trim(countryCode) === "") ? "US" : StringUtils.trim(countryCode);
+            addressObj.stateCode = (stateCode === null || StringUtils.trim(stateCode) === "") ? "NY" : StringUtils.trim(stateCode);
+            addressObj.postalCode = postalCode && StringUtils.trim(postalCode);
+            addressObj.city = city && StringUtils.trim(city);
+            addressObj.address1 = address1 && StringUtils.trim(address1);
+            addressObj.address2 = address2 && StringUtils.trim(address2);
 
-		    // Retrieve the list of applicabnle shipping methods for the given shipment and address.
-		    return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(addressObj);
-	    },
+            // Retrieve the list of applicabnle shipping methods for the given shipment and address.
+            return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(addressObj);
+        },
 
-	    /**
-	     * Calculates the amount to be payed by a non-gift certificate payment instrument based on the given basket.
-	     * The method subtracts the amount of all redeemed gift certificates from the order total and returns this
-	     * value.
-	     */
-	    getNonGiftCertificateAmount : function () {
-		    // the total redemption amount of all gift certificate payment instruments in the basket
-		    var giftCertTotal = new Money(0.0, this.getCurrencyCode());
+        /**
+         * Calculates the amount to be payed by a non-gift certificate payment instrument based on the given basket.
+         * The method subtracts the amount of all redeemed gift certificates from the order total and returns this
+         * value.
+         */
+        getNonGiftCertificateAmount : function () {
+            // the total redemption amount of all gift certificate payment instruments in the basket
+            var giftCertTotal = new Money(0.0, this.getCurrencyCode());
 
-		    // get the list of all gift certificate payment instruments
-		    var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments();
-		    var iter = gcPaymentInstrs.iterator();
-		    var orderPI = null;
+            // get the list of all gift certificate payment instruments
+            var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments();
+            var iter = gcPaymentInstrs.iterator();
+            var orderPI = null;
 
-		    // sum the total redemption amount
-		    while (iter.hasNext()) {
-			    orderPI = iter.next();
-			    giftCertTotal = giftCertTotal.add(orderPI.getPaymentTransaction().getAmount());
-		    }
+            // sum the total redemption amount
+            while (iter.hasNext()) {
+                orderPI = iter.next();
+                giftCertTotal = giftCertTotal.add(orderPI.getPaymentTransaction().getAmount());
+            }
 
-		    // get the order total
-		    var orderTotal = this.getTotalGrossPrice();
+            // get the order total
+            var orderTotal = this.getTotalGrossPrice();
 
-		    // calculate the amount to charge for the payment instrument
-		    // this is the remaining open order total which has to be paid
-		    var amountOpen = orderTotal.subtract(giftCertTotal);
+            // calculate the amount to charge for the payment instrument
+            // this is the remaining open order total which has to be paid
+            var amountOpen = orderTotal.subtract(giftCertTotal);
 
-		    // return the open amount
-		    return amountOpen;
-	    },
+            // return the open amount
+            return amountOpen;
+        },
 
-	    /**
-	     * Removes a gift certificate payment instrument with the given gift certificate ID
-	     * from the basket.
-	     */
-	    removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
+        /**
+         * Removes a gift certificate payment instrument with the given gift certificate ID
+         * from the basket.
+         */
+        removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
 
-		    // iterate over the list of payment instruments
-		    var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments(giftCertificateID);
-		    var iter = gcPaymentInstrs.iterator();
-		    var existingPI= null;
+            // iterate over the list of payment instruments
+            var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments(giftCertificateID);
+            var iter = gcPaymentInstrs.iterator();
+            var existingPI = null;
 
-		    // remove (possible multiple) gift certificate payment
-		    // instruments for this gift certificate ID
-		    while (iter.hasNext()) {
-			    existingPI = iter.next();
-			    this.removePaymentInstrument(existingPI);
-		    }
+            // remove (possible multiple) gift certificate payment
+            // instruments for this gift certificate ID
+            while (iter.hasNext()) {
+                existingPI = iter.next();
+                this.removePaymentInstrument(existingPI);
+            }
 
-		    return;
-	    },
+            return;
+        },
 
-	    /**
-	     * Deletes multiple payment instruments.
-	     *
-	     * @param paymentInstruments
-	     */
-	    removePaymentInstruments : function (paymentInstruments) {
+        /**
+         * Deletes multiple payment instruments.
+         *
+         * @param paymentInstruments
+         */
+        removePaymentInstruments : function (paymentInstruments) {
 
-		    for (var i = 0; i < paymentInstruments.length; i++) {
-			    var pi = paymentInstruments[i];
-			    this.removePaymentInstrument(pi);
-		    }
+            for (var i = 0; i < paymentInstruments.length; i++) {
+                var pi = paymentInstruments[i];
+                this.removePaymentInstrument(pi);
+            }
 
-	    },
+        },
 
-	    /**
-	     * This script calculates the total amount of an order that will be paid for by gift certificate payment
-	     * instruments. The remaining open amount (if there is any) will be applied to the non-gift certificate payment
-	     * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
-	     * payment instrument is used for the payment.
-	     */
-	    calculatePaymentTransactionTotal : function () {
+        /**
+         * This script calculates the total amount of an order that will be paid for by gift certificate payment
+         * instruments. The remaining open amount (if there is any) will be applied to the non-gift certificate payment
+         * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
+         * payment instrument is used for the payment.
+         */
+        calculatePaymentTransactionTotal : function () {
 
-		    // get all payment instruments for the basket
+            // get all payment instruments for the basket
             var iter = this.getPaymentInstruments().iterator();
             var paymentInstrument = null;
             var nonGCPaymentInstrument = null;
@@ -970,42 +970,42 @@ var Cart = AbstractModel.extend(
                 nonGCPaymentInstrument.getPaymentTransaction().setAmount(amount);
             }
 
-		    return true;
-	    },
-
-	    /**
-	     * Creates a list of gift certificate ids from gift certificate payment instruments.
-	     *
-	     * @returns {dw.util.ArrayList}
-	     */
-        getGiftCertIdList : function () {
-	        var gcIdList = new ArrayList();
-	        var gcPIIter = this.getGiftCertificatePaymentInstruments.iterator();
-
-	        while (gcPIIter.hasNext()) {
-		        gcIdList.add((gcPIIter.next()).getGiftCertificateCode());
-	        }
-
-	        return gcIdList;
+            return true;
         },
 
-	    /**
-	     * This script creates new ProductLineItems and Shipments from the List of the address selections with help of
-	     * a data structure (address and product relations through HashMaps).
-	     *
-	     * @param {dw.web.FormList} quantityLineItems
-	     * @returns {*}
-	     */
-	    mergeQuantities : function (quantityLineItems) {
+        /**
+         * Creates a list of gift certificate ids from gift certificate payment instruments.
+         *
+         * @returns {dw.util.ArrayList}
+         */
+        getGiftCertIdList : function () {
+            var gcIdList = new ArrayList();
+            var gcPIIter = this.getGiftCertificatePaymentInstruments.iterator();
 
-		    var addressRelations = new HashMap();
-		    var defaultShippingSet = false;
+            while (gcPIIter.hasNext()) {
+                gcIdList.add((gcPIIter.next()).getGiftCertificateCode());
+            }
 
-		    /**
-		     * Build new data structure through HashMaps from address-products-relations (stored in FormList)
-		     * to build the new ProductLineItems in dependency to their addresses and quantities
-		     *
-		     * address relation:    +===============+=================+
+            return gcIdList;
+        },
+
+        /**
+         * This script creates new ProductLineItems and Shipments from the List of the address selections with help of
+         * a data structure (address and product relations through HashMaps).
+         *
+         * @param {dw.web.FormList} quantityLineItems
+         * @returns {*}
+         */
+        mergeQuantities : function (quantityLineItems) {
+
+            var addressRelations = new HashMap();
+            var defaultShippingSet = false;
+
+            /**
+             * Build new data structure through HashMaps from address-products-relations (stored in FormList)
+             * to build the new ProductLineItems in dependency to their addresses and quantities
+             *
+             * address relation:    +===============+=================+
              *                      |    Key        |    Value        |
              *                      +===============+=================+
              *                      |    address1   |    products1  --|------->    product relation 1:    +===============+===============+
@@ -1018,8 +1018,8 @@ var Cart = AbstractModel.extend(
              *                                                                                            |    ...        |    ...        |
              */
 
-		    for (var i = 0; i < quantityLineItems.getChildCount(); i++) {
-			    var qli = quantityLineItems[i];
+            for (var i = 0; i < quantityLineItems.getChildCount(); i++) {
+                var qli = quantityLineItems[i];
                 var selectedAddress = qli.addressList.selectedOptionObject;
                 var productID = qli.object.productID;
 
@@ -1048,28 +1048,28 @@ var Cart = AbstractModel.extend(
             }
 
             //Remove all ProductLineItems and Shipments to create new ones
-		    var plis = this.getProductLineItems();
-		    for (var i = 0; i < plis.length; i++) {
-			    var pli = plis[i];
+            var plis = this.getProductLineItems();
+            for (var i = 0; i < plis.length; i++) {
+                var pli = plis[i];
                 if (empty(pli.custom.fromStoreId)) {
-	                this.removeProductLineItem(pli);
+                    this.removeProductLineItem(pli);
                 }
             }
 
-		    var shipments = this.getShipments();
-		    for (var i = 0; i < shipments.length; i++) {
-			    var shipment = shipments[i];
+            var shipments = this.getShipments();
+            for (var i = 0; i < shipments.length; i++) {
+                var shipment = shipments[i];
                 //if the shipment is for a gift certificate or the default shipment, it will not be removed from the cart
                 if (!shipment.isDefault() && !(shipment.giftCertificateLineItems.length > 0) && shipment.custom.shipmentType !== 'instore') {
-	                this.removeShipment(shipment);
+                    this.removeShipment(shipment);
                 }
             }
 
             // Build new ProductLineItems and Shipments with the new created data structure
             var addresses = addressRelations.keySet();
 
-		    for (var i = 0; i < addresses.length; i++) {
-			    var address = addresses[i];
+            for (var i = 0; i < addresses.length; i++) {
+                var address = addresses[i];
                 var shipment = null;
                 var orderAddress = null;
                 if (!defaultShippingSet) {
@@ -1081,7 +1081,7 @@ var Cart = AbstractModel.extend(
                 }
                 orderAddress = shipment.createShippingAddress();
 
-			    var shippingAddress = new TransientAddress();
+                var shippingAddress = new TransientAddress();
                 shippingAddress.UUID = UUIDUtils.createUUID();
                 shippingAddress.copyFrom(address);
                 shippingAddress.copyTo(orderAddress);
@@ -1092,8 +1092,8 @@ var Cart = AbstractModel.extend(
                 var product_ID = '';
                 var optionID = '';
 
-			    for (var j = 0; j < products.length; j++) {
-				    var product = products[j];
+                for (var j = 0; j < products.length; j++) {
+                    var product = products[j];
                     var splitarray = product.split('.');
                     product_ID = splitarray[0];
                     optionID = splitarray[1];
@@ -1118,8 +1118,8 @@ var Cart = AbstractModel.extend(
 
                                 var pliOptionProducts = new ArrayList(pli.optionProductLineItems);
 
-	                            for (var k = 0; k < pliOptionProducts.length; k++) {
-		                            pliOptionProducts[k].updateOptionValue(optionValue);
+                                for (var k = 0; k < pliOptionProducts.length; k++) {
+                                    pliOptionProducts[k].updateOptionValue(optionValue);
                                 }
                             }
                         }
@@ -1130,7 +1130,7 @@ var Cart = AbstractModel.extend(
             return true;
         }
 
-});
+    });
 
 /** The cart class */
 module.exports = new Cart();
