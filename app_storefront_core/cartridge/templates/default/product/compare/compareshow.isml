@@ -6,7 +6,7 @@
 		${Resource.msg('product.compareshow.back', 'product', null)}
 	</a>
 
-	<button class="compare-print print-page">
+	<button class="print-page" value="${Resource.msg('global.print', 'locale', null)}">
 		${Resource.msg('global.print', 'locale', null)}
 	</button>
 
@@ -30,6 +30,10 @@
 					<isset name="compareProduct" value="${dw.catalog.ProductMgr.getProduct(productID)}" scope="page"/>
 
 					<th class="product" style="width: ${90 / pdict.CompareList.products.length}%">
+
+						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', pdict.CurrentHttpParameterMap.category.stringValue)}" scope="page"/>
+						<a class="remove-link" href="${removeUrl}" title="${Resource.msg('compareshow.removeitem', 'product', null)}"><i class="fa fa-remove fa-lg"></i></a>
+
 						<iscomment>render a full featured product tile</iscomment>
 						<isproducttile product="${compareProduct}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}"/>
 
@@ -66,8 +70,6 @@
 						</isif>
 						<a class="action" href="${URLUtils.https('Wishlist-Add', 'pid', pid)}">${Resource.msg('global.addtowishlist', 'locale', null)}</a>
 						<a class="action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pid)}">${Resource.msg('global.addtogiftregistry', 'locale', null)}</a>
-						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', pdict.CurrentHttpParameterMap.category.stringValue)}" scope="page"/>
-						<a class="action remove-link" href="${removeUrl}" title="${Resource.msg('product.compareshow.removeitem', 'product', null)}">${Resource.msg('product.compareshow.removeitem', 'product', null)}</a>
 					</th>
 				</isloop>
 			</tr>
@@ -132,6 +134,8 @@
 		</isif>
 	</table>
 
-	<p><a href="${URLUtils.http('Cart-ContinueShopping')}" class="back floatleft" title="${Resource.msg('product.compareshow.back', 'product', null)}">${Resource.msg('product.compareshow.back', 'product', null)}</a></p>
+	<a href="${URLUtils.http('Cart-ContinueShopping')}" class="back" title="${Resource.msg('compareshow.back', 'product', null)}">
+		${Resource.msg('compareshow.back', 'product', null)}
+	</a>
 
 </isdecorate>

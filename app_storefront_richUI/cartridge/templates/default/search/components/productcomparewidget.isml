@@ -32,7 +32,7 @@
 				<isloop items="${products}" var="item" status="Status">
 					<div class="compare-item<isif condition="${!empty(item.id)}"> active</isif>" <isif condition="${!empty(item.uuid)}">data-uuid="${item.uuid}"</isif> <isif condition="${!empty(item.id)}">data-itemid="${item.id}"</isif>>
 						<div class="compare-item-number"><isprint value="${Status.index + 1}" style="INTEGER" /></div>
-						<a class="compare-item-remove">x</a>
+						<a class="compare-item-remove"><i class="fa fa-remove"></i></a>
 						<isif condition="${!empty(item.id)}">
 							<img class="compare-item-image" src="${item.imgSrc}" alt="${item.imgAlt}"/>
 						</isif>
@@ -40,8 +40,8 @@
 				</isloop>
 			</div>
 			<div class="compare-buttons">
-				<button id="compare-items-button" value="${Resource.msg('productcomparewidget.compareitemsbutton', 'search', null)}" <isif condition="${plen < 2}">disabled="disabled"</isif>><span>${Resource.msg('productcomparewidget.compareitemsbutton', 'search', null)}</span></button>
-				<button id="clear-compared-items" value="${Resource.msg('productcomparewidget.clearall', 'search', null)}"><span>${Resource.msg('productcomparewidget.clearall', 'search', null)}</span></button>
+				<button id="compare-items-button" value="${Resource.msg('productcomparewidget.compareitemsbutton', 'search', null)}" <isif condition="${plen < 2}">disabled="disabled"</isif>>${Resource.msg('productcomparewidget.compareitemsbutton', 'search', null)}</button>
+				<button class="simple" id="clear-compared-items" value="${Resource.msg('productcomparewidget.clearall', 'search', null)}">${Resource.msg('productcomparewidget.clearall', 'search', null)}</button>
 			</div>
 		</div>
 	</div>

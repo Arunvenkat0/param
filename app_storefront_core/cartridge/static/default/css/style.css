@@ -1995,6 +1995,13 @@ footer {
 .disable-infinite-scroll .search-result-content .page-element {
   display: none; }
 
+.pt_product-compare .full-width {
+  padding: 0 1.25em; }
+  .pt_product-compare .full-width .print-page {
+    float: right; }
+  .pt_product-compare .full-width .back {
+    padding: 1em 0; }
+
 .compare-items {
   clear: both;
   margin: 3.5em 2em 0;
@@ -2018,11 +2025,12 @@ footer {
   text-align: center;
   width: 55px; }
   .compare-item .compare-item-remove {
-    background-color: #00a4e4;
+    background-color: #990000;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     display: none;
-    padding: 0 3px;
+    padding: 0 2px;
     position: absolute;
     right: 0;
     top: 0;
@@ -2043,10 +2051,6 @@ footer {
 .compare-buttons {
   float: left;
   padding: 0.7em 0 0; }
-
-.compare-print {
-  float: right;
-  margin: 0 0 10px; }
 
 .category-switch {
   margin-bottom: 2em; }
@@ -2070,6 +2074,10 @@ footer {
   border-collapse: collapse;
   table-layout: fixed;
   width: 100%; }
+  #compare-table th {
+    padding: .5em; }
+  #compare-table th:first-of-type {
+    background-color: #e0e0e0; }
   #compare-table a:hover {
     text-decoration: underline; }
   #compare-table .attribute-row {
@@ -2084,7 +2092,15 @@ footer {
     border-right: 1px solid #ccc; }
   #compare-table .action {
     display: block;
-    padding: 0.2em 0; }
+    padding: 0.5em 0; }
+  #compare-table a.remove-link {
+    color: #999;
+    display: block;
+    text-align: right;
+    transition: color 500ms ease; }
+    #compare-table a.remove-link:hover {
+      color: #84bd00;
+      text-decoration: none; }
   #compare-table .value, #compare-table .product {
     border-left: 1px solid #ccc; }
   #compare-table .product {
@@ -2094,6 +2110,9 @@ footer {
     content: ', '; }
   #compare-table .value .value-item:last-child:after {
     content: ''; }
+  #compare-table .product-tile .product-name {
+    height: auto;
+    margin: .2em 0 1em 0; }
   #compare-table .product-tile .swatch-list {
     display: inline-block; }
   #compare-table .product-image {

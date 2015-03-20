@@ -25,7 +25,7 @@
 
 <body>
 
-	<div id="wrapper" class="pt_product-details">
+	<div id="wrapper" class="pt_product-compare">
 
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
