@@ -36,9 +36,7 @@ function start() {
         Cart.goc().removeAllPaymentInstruments;
     });
 
-	/*
-	 * Direct to first checkout step if already authenticated
-	 */
+	// Direct to first checkout step if already authenticated
     if (customer.authenticated) {
 	    response.redirect(dw.web.URLUtils.https('COShipping-Start'));
         return;
@@ -46,9 +44,7 @@ function start() {
 	else {
 	    session.forms.login.clearFormElement();
 
-	    /*
-	     * Prepopulate login form field with customer's login name
-	     */
+	    // Prepopulate login form field with customer's login name
 	    if (customer.registered) {
 		    session.forms.login.username.value = customer.profile.credentials.login;
 	    }
@@ -65,9 +61,7 @@ function start() {
 function showLoginForm() {
 	var formResult = loginForm.handleAction({
 		'login'        : function (formgroup) {
-			/*
-			 * Delegate login to appropriate authentication pipeline and react on success/failure
-			 */
+			// Delegate login to appropriate authentication pipeline and react on success/failure
 			var loginResult = require('./Login').Process();
 
             if (loginResult.login_succeeded) {
