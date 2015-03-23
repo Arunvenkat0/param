@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
+	config.type = grunt.option('type') || '';
 
 	var paths = require('./package.json').paths;
 
@@ -62,7 +63,12 @@ module.exports = function (grunt) {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
-				}]
+				}],
+				options: {
+					browserifyOptions: {
+						debug: (config.type === 'development')
+					}
+				}
 			},
 			watch_dev: {
 				files: [{
@@ -99,6 +105,14 @@ module.exports = function (grunt) {
 					transform: ['hbsfy'],
 					watch: true
 				}
+			}
+		},
+		external_sourcemap: {
+			browserify: {
+				files: [{
+					dest: paths.js.dest,
+					src: paths.js.dest + 'app.js'
+				}]
 			}
 		},
 		connect: {
@@ -157,10 +171,15 @@ module.exports = function (grunt) {
 		}
 	});
 
+	grunt.registerTask('sourcemap', function () {
+		if (config.type === 'development') {
+			grunt.task.run(['external_sourcemap:browserify']);
+		}
+	});
 	grunt.registerTask('css:dev', ['sass:dev', 'autoprefixer:dev']);
 	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
 	grunt.registerTask('default', ['css:dev', 'browserify:watch_dev', 'watch:dev']);
-	grunt.registerTask('js', ['browserify:dev']);
+	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit']);
 	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watch_styleguide', 'connect:styleguide', 'watch:styleguide']);

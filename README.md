@@ -106,5 +106,10 @@ For JavaScript, when watching is happening, [watchify](https://github.com/substa
 
 The equivalent default task for grunt, `grunt`, is also available.
 
+### Sourcemaps
+For sourcemaps support, run `gulp` or `grunt` in development mode by specificying `type` flag, i.e. `:; gulp --type development`.
 
-Updated: 2/13/15
+We only support external sourcemaps because Eclipse tend to crash with inline sourcemaps.
+As a result, if you're using Grunt, sourcemaps is only available when the build steps are run explicitly, i.e. `grunt js --type development`. Sourcemaps is not enabled during `watch` mode.
+
+Updated: 3/19/15
