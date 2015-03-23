@@ -94,7 +94,7 @@ nav[role="navigation"] {
 			text-align: center;
 			a {
 				color: $nobel;
-				transition: color 500ms ease;
+				transition: color .5s ease;
 				&:hover {
 					color:$citrus;
 					text-decoration: none;
@@ -155,9 +155,6 @@ nav[role="navigation"] {
 			margin-left: 0;
 			padding: 0 1px;
 			width: auto;
-			select:focus {
-				outline: none;
-			}
 		}
 	}
 }
