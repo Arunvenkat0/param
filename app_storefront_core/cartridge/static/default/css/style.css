@@ -2612,7 +2612,8 @@ button.add-all-to-cart {
 #cart-table .header-total-price {
   text-align: right; }
 #cart-table .item-image {
-  text-align: center; }
+  text-align: center;
+  width: 7em; }
 #cart-table .item-quantity {
   text-align: center; }
   #cart-table .item-quantity input {
