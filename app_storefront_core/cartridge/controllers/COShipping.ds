@@ -57,25 +57,19 @@ function start() {
             }
             session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-            /*
-             * Clean shipments.
-             */
+            // Clean shipments.
             var homeDeliveries = prepareShipments();
 
             Transaction.wrap(function () {
                 cart.calculate();
             });
 
-            /*
-             * Go to billing step, if we have no product line items, but only gift
-             * certificates in the basket. Shipping step is not required.
-             */
+            // Go to billing step, if we have no product line items, but only gift certificates in the basket, Shipping step is not required.
             if (cart.getProductLineItems().size() === 0) {
                 require('./COBilling').Start();
                 return;
             }
             else {
-
 	            pageMeta.update({pageTitle : "SiteGenesis Checkout"});
                 view.get({
                     Basket         : cart.object,
@@ -246,9 +240,8 @@ function updateShippingMethodList() {
         }).render('checkout/shipping/shippingmethods');
     }
     else {
-        // TODO don't mix process and view pipelines
-        // TODO this should end with a template
-        return;
+	    require('./Cart').Show();
+	    return;
     }
 }
 
@@ -267,7 +260,7 @@ function getApplicableShippingMethodsJSON() {
         request.httpParameterMap.postalCode.stringValue,
         request.httpParameterMap.city.stringValue,
         request.httpParameterMap.address1.stringValue,
-        request.httpParameterMap.address2.stringValue)
+        request.httpParameterMap.address2.stringValue);
 
     view.get({ApplicableShippingMethods : applicableShippingMethods}).render('checkout/shipping/shippingmethodsjson');
 }

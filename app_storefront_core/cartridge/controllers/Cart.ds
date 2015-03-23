@@ -279,9 +279,7 @@ function addProduct() {
             });
         }
 
-        /**
-         * When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
-         */
+        // When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
         var newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
     }
 

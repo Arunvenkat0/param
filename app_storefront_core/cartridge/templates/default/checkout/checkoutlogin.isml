@@ -50,7 +50,7 @@
 
 	<div class="col-2">
 		<iscomment>returning customer</iscomment>
-		<isset name="FormController" value="${'COCustomer-LoginForm'}" scope="page"/>
+		<isset name="FormController" value="${'COCustomer-LoginForm'}" scope="pdict"/>
 		<isinclude template="account/login/logininclude"/>
 	</div>
 </div>

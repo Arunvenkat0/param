@@ -1,0 +1,30 @@
+'use strict';
+
+/** @module model/Order */
+
+var AbstractModel = require('./AbstractModel');
+
+/**
+ * Order helper providing enhanced order functionality
+ * @class module:model/Order~Order
+ */
+var Order = AbstractModel.extend(
+	/** @lends module:model/Order~Order.prototype */
+	{
+		/**
+		 * Use this method to get a new instance for a given product.
+		 */
+		get : function (parameter) {
+			var obj = null;
+			if (typeof parameter === 'string') {
+				obj = dw.order.OrderMgr.getOrder(parameter);
+			} else if (typeof parameter === 'object') {
+				obj = parameter;
+			}
+			return new Order(obj);
+		}
+
+	});
+
+/** The order class */
+module.exports = new Order();

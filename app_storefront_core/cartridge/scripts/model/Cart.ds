@@ -9,8 +9,10 @@
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
 var HashMap = require('dw/util/HashMap');
+var List = require('dw/util/List');
 var Money = require('dw/value/Money');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
+var PaymentMgr = require('dw/order/PaymentMgr');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
@@ -919,7 +921,9 @@ var Cart = AbstractModel.extend(
          * instruments. The remaining open amount (if there is any) will be applied to the non-gift certificate payment
          * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
          * payment instrument is used for the payment.
-         */
+	     *
+	     * @returns {boolean}
+	     */
         calculatePaymentTransactionTotal : function () {
 
             // get all payment instruments for the basket
@@ -1128,7 +1132,138 @@ var Cart = AbstractModel.extend(
             }
 
             return true;
+        },
+
+	    /**
+	     * TODO
+	     *
+	     * @param customer
+	     * @param countryCode
+	     * @param amount
+	     * @returns {*}
+	     */
+        validatePaymentInstruments : function (customer, countryCode, amount) {
+
+            var paymentInstruments = this.getPaymentInstruments();
+
+            // get applicable payment methods
+            var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
+
+            // get applicable payment cards from CREDIT_CARD payment method
+            var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
+            var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
+
+            // collects all not applicable payment instruments
+            var validPaymentInstruments = new ArrayList(paymentInstruments);
+            var invalidPaymentInstruments = new ArrayList();
+
+            // get payment instruments from basket
+
+            for (var i = 0; i < paymentInstruments.length; i++) {
+                var pi = paymentInstruments[i];
+                // ignore gift certificate payment instruments
+                if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
+                    continue;
+                }
+
+                // get payment method
+                var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
+
+                // check, whether payment method is still applicable
+                if (method != null && methods.contains(method)) {
+                    // in case of method CREDIT_CARD, check payment cards
+                    if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
+                        // get payment card
+                        var card = PaymentMgr.getPaymentCard(pi.creditCardType);
+
+                        // check, whether payment card is still applicable
+                        if (card != null && cards.contains(card)) {
+                            continue;
+                        }
+                    }
+                    else {
+                        // continue, if method is applicable
+                        continue;
+                    }
+                }
+
+                // collect invalid payment instruments
+                invalidPaymentInstruments.add(pi);
+                validPaymentInstruments.remove(pi);
+            }
+
+            if (!invalidPaymentInstruments.empty) {
+	            return {
+		            InvalidPaymentInstruments : invalidPaymentInstruments,
+		            ValidPaymentInstruments   : validPaymentInstruments
+	            };
+            }
+            else {
+                return {
+                    ValidPaymentInstruments   : validPaymentInstruments
+                };
+            }
+        },
+
+	    /**
+	     * Creates a gift certificate payment instrument from the given gift certificate ID for the given basket. The
+	     * script attempts to redeem the current balance of the gift certificate. If the current balance exceeds the
+	     * order total, this amount is redeemed and the balance is lowered.
+	     *
+	     * @param giftCertificate The Gift Certificate.
+	     * @returns {*} The created Payment instrument.
+	     */
+	    createGiftCertificatePaymentInstrument : function (giftCertificate) {
+
+            // remove any duplicates
+            // iterate over the list of payment instruments to check
+            // if the gift certificate is already being used as payment instrument
+            var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments(giftCertificate.getGiftCertificateCode()).iterator();
+            var existingPI = null;
+
+            // remove found gift certificates, since we don't want duplicates
+            while (gcPaymentInstrs.hasNext()) {
+                existingPI = gcPaymentInstrs.next();
+	            this.removePaymentInstrument(existingPI);
+            }
+
+            // fetch the balance and the order total
+            var balance = giftCertificate.getBalance();
+            var orderTotal = this.getTotalGrossPrice();
+
+            // assume to redeem the remaining balance
+            var amountToRedeem = balance;
+
+            // because there may be multiple gift certificates, we adjust the amount being applied to the current
+            // gift certificate based on the order total minus the aggregate amount of the current gift certificates.
+            // the total redemption amount of all gift certificates for the basket
+            var giftCertTotal = new Money(0.0, this.getCurrencyCode());
+
+            // iterate over the list of gift certificate payment instruments
+            // and update the total redemption amount
+            var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments().iterator();
+            var orderPI = null;
+
+            while (gcPaymentInstrs.hasNext()) {
+                orderPI = gcPaymentInstrs.next();
+                giftCertTotal = giftCertTotal.add(orderPI.getPaymentTransaction().getAmount());
+            }
+
+            // calculate the remaining order balance
+            // this is the remaining open order total which has to be paid
+            var orderBalance = orderTotal.subtract(giftCertTotal);
+
+            // the redemption amount exceeds the order balance
+            // use the order balance as maximum redemption amount
+            if (orderBalance < amountToRedeem) {
+                // use the remaining order balance
+                amountToRedeem = orderBalance;
+            }
+
+            // create a payment instrument from this gift certificate
+            return this.object.createGiftCertificatePaymentInstrument(giftCertificate.getGiftCertificateCode(), amountToRedeem);
         }
+
 
     });
 
