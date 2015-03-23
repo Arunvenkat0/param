@@ -16,6 +16,7 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
+var QuantityLineItem = require('~/cartridge/scripts/model/QuantityLineItem');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var StringUtils = require('dw/util/StringUtils');
@@ -75,6 +76,8 @@ var Cart = AbstractModel.extend(
 
         /**
          * TODO
+         *
+         * @transactional
          */
         calculate : function () {
 
@@ -89,6 +92,7 @@ var Cart = AbstractModel.extend(
          * @param itemid
          * @param quantity
          * @param cgid
+         *
          * @returns {null}
          */
         addProductListItem : function (productListItem, quantity, cgid) {
@@ -384,6 +388,13 @@ var Cart = AbstractModel.extend(
             return;
         },
 
+	    /**
+	     * TODO
+	     *
+	     * @param lineItem
+	     * @param product
+	     * @param productOptionModel
+	     */
         updateLineItem : function (lineItem, product, productOptionModel) {
 
             new dw.system.Pipelet('ReplaceLineItemProduct').execute({
@@ -832,6 +843,17 @@ var Cart = AbstractModel.extend(
             return;
         },
 
+	    /**
+	     * TODO
+	     *
+	     * @param countryCode
+	     * @param stateCode
+	     * @param postalCode
+	     * @param city
+	     * @param address1
+	     * @param address2
+	     * @returns {*}
+	     */
         getApplicableShippingMethods : function (countryCode, stateCode, postalCode, city, address1, address2) {
 
             // Construct an address from request parameters.
@@ -1262,8 +1284,33 @@ var Cart = AbstractModel.extend(
 
             // create a payment instrument from this gift certificate
             return this.object.createGiftCertificatePaymentInstrument(giftCertificate.getGiftCertificateCode(), amountToRedeem);
-        }
+        },
 
+        /**
+         *
+         * @param pli
+         * @param quantityLineItems
+         * @returns {*}
+         */
+        separateQuantities : function (pli, quantityLineItems) {
+
+            var quantity = pli.quantityValue;
+
+            // Create new ArrayList if there are no QLIs
+            if (!quantityLineItems) {
+                quantityLineItems = new ArrayList();
+            }
+
+            // Create for each quantity of the ProductLineItem a new QuantityLineItem
+            for (var i = 0; i < quantity; i++) {
+                //skipping plis that are using the instore pick up shipping method
+                if (empty(pli.custom.fromStoreId)) {
+                    quantityLineItems.add(new QuantityLineItem(pli));
+                }
+            }
+
+            return quantityLineItems;
+        }
 
     });
 
