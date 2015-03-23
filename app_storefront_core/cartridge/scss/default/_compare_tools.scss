@@ -100,10 +100,10 @@
 	width: 100%;
 	th {
 		padding: .5em
-	}
-	th:first-of-type {
+		&:first-of-type {
 		background-color: $gainsboro;
-	}
+		}
+	&
 	a {
 		&:hover {
 			text-decoration: underline;
@@ -128,7 +128,7 @@
 		display: block;
 		padding: 0.5em 0;
 	}
-	a.remove-link {
+	.remove-link {
 		color: $nobel;
 		display: block;
 		text-align: right;
