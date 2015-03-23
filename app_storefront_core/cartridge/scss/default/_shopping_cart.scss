@@ -4,9 +4,10 @@
 	}
 	.item-image {
 		text-align: center;
+		width: 7em;
 	}
 	.item-quantity {
-		width: 3em;
+		text-align: center;
 		input {
 			margin: 0;
 			padding: 0.7em 0.2em;
@@ -211,7 +212,6 @@ ul.product-availability-list {
 	padding: 0;
 	li {
 		list-style: none outside none;
-		margin: 3px 0;
 	}
 	.on-order, .not-available {
 		color: $sangria;

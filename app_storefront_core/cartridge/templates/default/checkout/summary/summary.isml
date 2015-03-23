@@ -27,7 +27,7 @@
 				<tr>
 					<th class="section-header"  colspan="2">${Resource.msg('global.product','locale',null)}</th>
 					<th class="section-header"  colspan="2">${Resource.msg('global.qty','locale',null)}</th>
-					<th class="section-header">${Resource.msg('global.price','locale',null)}</th>
+					<th class="section-header header-total-price">${Resource.msg('global.totalprice','locale',null)}</th>
 				</tr>
 			</thead>
 
@@ -205,11 +205,6 @@
 
 		<div class="order-summary-footer">
 
-			<div class="summary-help">
-				<iscontentasset aid="cs-contact-number"/>
-			</div>
-
-
 			<div class="place-order-totals">
 				<isordertotals p_lineitemctnr="${pdict.Basket}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('summary.ordertotal','checkout',null)}"/>
 			</div>
@@ -221,7 +216,7 @@
 							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
 						</a>
 						<button class="button-fancy-large" type="submit" name="submit" value="${Resource.msg('global.submitorder','locale',null)}">
-							Submit Order
+							${Resource.msg('global.submitorder','locale',null)}
 						</button>
 					</div>
 			    </fieldset>
