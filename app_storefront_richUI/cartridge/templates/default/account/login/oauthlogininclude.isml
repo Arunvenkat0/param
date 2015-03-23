@@ -1,15 +1,13 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isif condition="${pdict.CurrentSession.customer.anonymous || pdict.CurrentSession.customer.externallyAuthenticated}">
 	<isif condition="${pdict.CurrentSession.customer.anonymous}">
-		<p>${Resource.msg('global.or','locale',null)}</p>
-		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
+		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheader','account',"")}</p>
 	<iselse/>
-		<p>${Resource.msg('global.or','locale',null)}</p>
-		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
+		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
 	<iscomment>Login Unsuccessful Error Message</iscomment>
 	<isif condition="${!pdict.CurrentForms.oauthlogin.loginsucceeded.valid}">
-		<div class="error-form">${Resource.msgf('logininclude.oauthloginerror','account',"")}</div>
+		<div class="error-form">${Resource.msgf('account.login.logininclude.oauthloginerror','account',"")}</div>
 	</isif>
 
 	<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${pdict.CurrentForms.oauthlogin.htmlName}">
@@ -63,7 +61,7 @@
 				 class="oAuthIcon"
 				 id='SinaWeibo'
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"				 
+				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"
 				 />
 			</isif>
 
@@ -72,14 +70,14 @@
 				 class="oAuthIcon"
 				 id='VKontakte'
 				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/VKontakte.png')}"				 
+				 src="${URLUtils.staticURL('/images/VKontakte.png')}"
 				 />
 			</isif>
 
 			<input type="hidden" name="rememberme" id="rememberme" value="">
-			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}" 
+			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}"
 				value="${pdict.CurrentForms.oauthlogin.secureKeyValue}"/>
 			<input type="hidden" name="OAuthProvider" id="OAuthProvider" value=""/>
 		</fieldset>
-	</form>		
+	</form>
 </isif>

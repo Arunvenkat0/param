@@ -11,12 +11,12 @@
 		<isslot id="noresult-banner" description="Banner for searches with no hits" context="global"/>
 	</div>
 
-	<h1>${Resource.msg('nohits.header','search',null)}</h1>
+	<h1>${Resource.msg('search.nohits.header','search',null)}</h1>
 
 	<div class="section-header">
 		
 		<p>
-			${Resource.msg('nohits.message','search',null)} 
+			${Resource.msg('search.nohits.message','search',null)} 
 			<span class="no-hits-search-term">
 				<isprint value="${pdict.ProductSearchResult.searchPhrase}"/>
 			</span>
@@ -27,7 +27,7 @@
 			<p>
 				<iscomment>this isif is to keep the search suggestions consistent</iscomment>
 				<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions')}">
-					${Resource.msg('nohits.didyoumean','search',null)}
+					${Resource.msg('search.nohits.didyoumean','search',null)}
 					<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}">
 						<isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/>
 					</a>
@@ -47,7 +47,7 @@
 		                <isset name="suggestedPhrases" value="${productSuggestions.getSuggestedPhrases()}" scope="page"/>
 		                <isset name="suggestedProductTerms" value="${productSuggestions.getSuggestedTerms()}" scope="page"/>                   
 		                <isif condition="${suggestedPhrases.hasNext()}">
-							${Resource.msg('nohits.didyoumean','search',null)}
+							${Resource.msg('search.nohits.didyoumean','search',null)}
 							<a href="${URLUtils.url('Search-Show', 'q', suggestedPhrases.next().getPhrase())}">
 								<isloop items="${suggestedProductTerms}" alias="suggestedTerms" status="loopstate">
 									<isif condition="${!suggestedTerms.isEmpty()}">
@@ -75,9 +75,9 @@
 	<iscomment>render a link to content search results if any content was found</iscomment>
 	<isif condition="${!empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
 		<p class="no-hits-content-results">
-			${Resource.msg('nohits.found','search',null)} 
+			${Resource.msg('search.nohits.found','search',null)} 
 			<a href="${pdict.ContentSearchResult.url('Search-ShowContent')}">
-				${Resource.msgf('nohits.contenthits','search',null,pdict.ContentSearchResult.count)}
+				${Resource.msgf('search.nohits.contenthits','search',null,pdict.ContentSearchResult.count)}
 			</a>
 		</p>
 	</isif>
@@ -90,7 +90,7 @@
 	 	<form action="${URLUtils.url('Search-Show')}" method="get">
 			<fieldset>
 				<div class="form-row label-above">
-					<label for="q">${Resource.msg('nohits.searchlabel','search',null)}</label>
+					<label for="q">${Resource.msg('search.nohits.searchlabel','search',null)}</label>
 					<input type="text" class="input-text" name="q" value="" />
 					<button type="submit" value="${Resource.msg('global.go','locale',null)}" name="simplesearch">
 						${Resource.msg('global.go','locale',null)}

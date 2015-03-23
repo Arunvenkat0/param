@@ -14,7 +14,7 @@
 
 		<div class="store-locator-header">
 			${Resource.msg('storelocator.storelocatorresults.allstores','storelocator',null)}
-			<isif condition="${pdict.SearchString == 'US'}">${Resource.msg('forms.the','forms',null)}${Resource.msg('country.unitedstates','forms',null)}</isif>
+			<isif condition="${pdict.SearchString == 'US'}">${Resource.msg('country.the.unitedstates','forms',null)}</isif>
 			<isif condition="${pdict.SearchString == 'DE'}">${Resource.msg('country.germany','forms',null)}</isif>
 			<isif condition="${pdict.SearchString == 'CA'}">${Resource.msg('country.canada','forms',null)}</isif>
 		</div>

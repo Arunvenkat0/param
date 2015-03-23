@@ -20,6 +20,6 @@
 	
 	<isif condition="${!empty(pdict.CurrentHttpParameterMap.pid)}">
 		<a href="${URLUtils.url('Product-Show','pid', pdict.CurrentHttpParameterMap.pid)}">${Resource.msg('storelist.backtopdp','storepickup',null)}</a>
-		<br /><a href="${URLUtils.url('Cart-Show')}">${Resource.msg('pt_cart.breadcrumb','checkout',null)}</a>		
+		<br /><a href="${URLUtils.url('Cart-Show')}">${Resource.msg('storelist.cart','storepickup',null)}</a>		
 	</isif>
 </div>

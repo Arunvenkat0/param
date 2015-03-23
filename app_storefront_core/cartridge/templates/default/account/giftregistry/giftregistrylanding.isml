@@ -2,7 +2,7 @@
 <isdecorate template="account/giftregistry/pt_giftregistry">
 <isinclude template="util/modules"/>
 
-	<h1>${Resource.msg('giftregistry.title','account',null)} Login</h1>
+	<h1>${Resource.msg('account.giftregistry.title','account',null)} Login</h1>
 
 	<div class="col-1">
 
@@ -10,13 +10,13 @@
 
 		<div class="login-box login-search-gift clearfix">
 
-			<h2>${Resource.msg('giftregistry.searchheader','account',null)}
+			<h2>${Resource.msg('account.giftregistry.searchheader','account',null)}
 			<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</h2>
 
 			<div class="login-box-content">
 
-				<p>${Resource.msg('giftregistry.searchmessage','account',null)}</p>
+				<p>${Resource.msg('account.giftregistry.searchmessage','account',null)}</p>
 
 				<isinclude template="account/giftregistry/giftregistrysearch"/>
 

@@ -19,11 +19,11 @@
 <isinclude template="util/reporting/ReportSourceCodes.isml"/>
 
 <head>
-	<title>${Resource.msg('redirect.title','common',null)}</title>
+	<title>${Resource.msg('global.redirect.title','locale',null)}</title>
 	<meta http-equiv="refresh" content="0; url=${pdict.Location}">
 	<meta http-equiv="Robots" content="noindex, follow" />
 </head>
 <body>
-	${Resource.msg('redirect.title','common',null)} <a href="${pdict.Location}" title="${Resource.msg('redirect.title','common',null)} ${pdict.Location}">${pdict.Location}</a>
+	${Resource.msg('global.redirect.title','locale',null)} <a href="${pdict.Location}" title="${Resource.msg('redirect.title','common',null)} ${pdict.Location}">${pdict.Location}</a>
 </body>
 </html>

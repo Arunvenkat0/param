@@ -32,9 +32,9 @@
 			<field formid="shipmentUUID" binding="UUID" type="string"/>
 	
 			<!-- gift options -->
-			<field formid="isGift" label="forms.checkout.shipment.isgift" type="boolean" default-value="false" binding="gift" mandatory="false" />
-			<field formid="giftMessage" label="forms.checkout.shipment.giftmessage" type="string" binding="giftMessage" mandatory="false" />
-			<field formid="storePickupMessage" label="forms.store.storemessage" type="string" binding="custom.storePickupMessage" mandatory="false" />	
+			<field formid="isGift" label="checkout.shipment.isgift" type="boolean" default-value="false" binding="gift" mandatory="false" />
+			<field formid="giftMessage" label="checkout.shipment.giftmessage" type="string" binding="giftMessage" mandatory="false" />
+			<field formid="storePickupMessage" label="store.storemessage" type="string" binding="custom.storePickupMessage" mandatory="false" />	
 
 			<!-- shipping method selection -->
 			<field formid="shippingMethodID" type="string" mandatory="true" binding="shippingMethodID">
@@ -46,7 +46,7 @@
 		<action formid="save" valid-form="true"/>
 	</group>
 	
-	<group formid="editAddress" form-error="forms.address.invalid">
+	<group formid="editAddress" form-error="address.invalid">
 		<field formid="addressList" type="string" mandatory="true">
 			<options optionid-binding="UUID" value-binding="UUID" label-binding="ID" />
 		</field>
@@ -54,7 +54,7 @@
 		<!-- use fields from shipping address definition -->
 		<include formid="addressFields" name="shippingaddress"/>
 	
-		<field formid="addToAddressBook" label="forms.checkout.addtoaddressbook" type="boolean" mandatory="false" />
+		<field formid="addToAddressBook" label="checkout.addtoaddressbook" type="boolean" mandatory="false" />
 	
 		<action formid="selectAddress" valid-form="false"/>
 		<action formid="save" valid-form="true"/>

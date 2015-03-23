@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
-	<field formid="day" label="forms.day" type="integer" mandatory="true"
+	<field formid="day" label="resource.day" type="integer" mandatory="true"
 			missing-error="bml.dayerror">
 		<options>
-			<option label="forms.day" value=""/>
+			<option label="resource.day" value=""/>
 			<option label="day.001" value="01"/>
 			<option label="day.002" value="02"/>
 			<option label="day.003" value="03"/>
@@ -37,10 +37,10 @@
 			<option label="day.031" value="31"/>
 		</options>
 	</field>
-	<field formid="month" label="forms.month" type="integer" mandatory="true"
+	<field formid="month" label="resource.month" type="integer" mandatory="true"
 			missing-error="bml.montherror">
 		<options>
-			<option label="forms.month" value=""/>
+			<option label="resource.month" value=""/>
 			<option label="month.january" value="01"/>
 			<option label="month.february" value="02"/>
 			<option label="month.march" value="03"/>
@@ -55,10 +55,10 @@
 			<option label="month.december" value="12"/>
 		</options>
 	</field>
-	<field formid="year" label="forms.year" type="integer" mandatory="true"
+	<field formid="year" label="resource.year" type="integer" mandatory="true"
 			missing-error="bml.yearerror" value-error="bml.valueerror">
 		<options>
-			<option label="forms.year" value=""/>
+			<option label="resource.year" value=""/>
 			<option label="year.2000" value="2000"/>
 			<option label="year.1999" value="1999"/>
 			<option label="year.1998" value="1998"/>

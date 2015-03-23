@@ -3,7 +3,7 @@
 
 <isinclude template="util/modules"/>
 
-<h2>${Resource.msg('horizontalcarousel.featuredproducts','slots',null)}</h2>
+<h2>${Resource.msg('global.carousel.featuredproducts','locale',null)}</h2>
 
 <ul id="horizontal-carousel" class="horizontal-carousel">
 	<isloop items="${slotcontent.content}" var="product">

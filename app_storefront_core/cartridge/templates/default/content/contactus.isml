@@ -5,8 +5,8 @@
 
 		<isif condition="${!empty(pdict.ConfirmationMessage)}">
 			<div class="confirmation-message">
-				<p>${Resource.msg('forms.contactus.messagesent','forms',null)}</p> 
-				<p>${Resource.msg('forms.contactus.messagerequires','forms',null)}</p>
+				<p>${Resource.msg('contactus.messagesent','forms',null)}</p> 
+				<p>${Resource.msg('contactus.messagerequires','forms',null)}</p>
 			</div>
 		<iselse/>
 		

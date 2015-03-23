@@ -27,7 +27,7 @@ function getStoreAvailabilityMessage(store : dw.catalog.Store, product : dw.cata
 		var storeInventoryListId : String = store.custom.inventoryListId;
 		var productInventoryList : ProductInventoryList = null;
 		var productInventoryrecord : ProductInventoryRecord = null;
-		var availabilityMessage : String = Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+		var availabilityMessage : String = Resource.msg('global.instock','locale',null); //"In stock"
 		
 		// check for Inventory Availability	
 		if (storeInventoryListId != null) {
@@ -44,27 +44,27 @@ function getStoreAvailabilityMessage(store : dw.catalog.Store, product : dw.cata
 					if (productInventoryrecord.ATS.value >= 1) {
 						
 						//Instock
-						availabilityMessage = Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+						availabilityMessage = Resource.msg('global.instock','locale',null); //"In stock"
 							
 					} else {
 						
 						// not available as ATS is less than 1
-						availabilityMessage = Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+						availabilityMessage = Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
 					}
 						
 				} else {
 					// not available as Inventory Record doesn't exist
-					availabilityMessage = Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+					availabilityMessage = Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
 				}
 									
 			} else {
 				// not available as Inventory List doesn't exist
-				availabilityMessage = Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+				availabilityMessage = Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
 			}
 			
 		} else {
 			// not available as Store Inventory is not set
-			availabilityMessage = Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+			availabilityMessage = Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
 		}
 	
     return availabilityMessage;

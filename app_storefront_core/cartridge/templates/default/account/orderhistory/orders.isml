@@ -2,11 +2,11 @@
 <isdecorate template="account/orderhistory/pt_orderhistory">
 	<isinclude template="util/modules"/>
 	
-	<h1>${Resource.msg('orders.orderhistory','account',null)}</h1>
+	<h1>${Resource.msg('account.orders.orderhistory','account',null)}</h1>
 	
 		<isif condition="${pdict.OrderPagingModel.empty}">
 			
-			<div class="no_orders">${Resource.msg('orders.noorders','account',null)}</div>
+			<div class="no_orders">${Resource.msg('account.orders.noorders','account',null)}</div>
 		
 		<iselse/>
 		
@@ -23,12 +23,12 @@
 				<li>
 					<div class="order-history-header">
 					
-						<button type="submit"  value="${Resource.msg('orders.orderdetail','account',null)}" name="${order.show.htmlName}">
-							${Resource.msg('orders.orderdetail','account',null)}
+						<button type="submit"  value="${Resource.msg('account.orders.orderdetail','account',null)}" name="${order.show.htmlName}">
+							${Resource.msg('account.orders.orderdetail','account',null)}
 						</button>
 						
 						<div class="order-date">
-							<span class="label">${Resource.msg('orders.datelabel','account',null)}</span>
+							<span class="label">${Resource.msg('account.orders.datelabel','account',null)}</span>
 							<span class="value"><isprint value="${order.object.creationDate}" /></span>
 						</div>
 		
@@ -36,7 +36,7 @@
 						<isinclude template="account/orderhistory/orderstatusinclude" />
 		
 						<div class="order-number">
-							<span class="label">${Resource.msg('orders.numberlabel','account',null)}</span>
+							<span class="label">${Resource.msg('account.orders.numberlabel','account',null)}</span>
 							<span class="value"><isprint value="${order.object.orderNo}" /></span>
 						</div>
 	
@@ -52,21 +52,21 @@
 								<isif condition="${shipmentloopstate.first}">
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
-											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','checkout',null)}</td>
 										<iselse/>
-											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</td>
+											<th class="order-shipped-to">${Resource.msg('account.orders.shippedto','account',null)}</td>
 										</isif>	
-										<th class="order-items">${Resource.msg('orders.items','account',null)}</td>
-										<th class="order-total-price">${Resource.msg('orders.ordertotal','account',null)}</td>
+										<th class="order-items">${Resource.msg('account.orders.items','account',null)}</td>
+										<th class="order-total-price">${Resource.msg('account.orders.ordertotal','account',null)}</td>
 									</tr>
 								<iselse/>
 									<tr>
 										<isif condition="${!empty(Shipment.custom.shipmentType) && Shipment.custom.shipmentType == 'instore'}">
-											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','storepickup',null)}</td>
+											<th class="order-shipped-to">${Resource.msg('cart.store.instorepickup','checkout',null)}</td>
 										<iselse/>									
-											<th class="order-shipped-to">${Resource.msg('orders.shippedto','account',null)}</th>
+											<th class="order-shipped-to">${Resource.msg('account.orders.shippedto','account',null)}</th>
 										</isif>						
-										<th class="order-items">${Resource.msg('orders.items','account',null)}</th>
+										<th class="order-items">${Resource.msg('account.orders.items','account',null)}</th>
 										<th></th>
 									</tr>
 								</isif>

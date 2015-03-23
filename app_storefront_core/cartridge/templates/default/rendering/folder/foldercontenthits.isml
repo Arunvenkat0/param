@@ -5,7 +5,7 @@
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
 		<isif condition="${!(pdict.CurrentHttpParameterMap.q == '')}">
-			<h2>${Resource.msgf('foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
+			<h2>${Resource.msgf('rendering.foldercontenthits.yoursearch','rendering',null,pdict.ContentSearchResult.count)}</h2>
 		</isif>
 	
 		<isif condition="${pdict.ContentSearchResult.folder != null}">
@@ -15,9 +15,9 @@
    		<iscomment>link back to product search result</iscomment>
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
 				<isif condition="${pdict.ProductSearchResult.count > 0}">
-					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('foldercontenthits.backtoproducts','rendering',null)}</a>
+					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('rendering.foldercontenthits.backtoproducts','rendering',null)}</a>
 				<iselse/>
-					<p>${Resource.msgf('foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
+					<p>${Resource.msgf('rendering.foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
 				</isif>
 			</isif>
 	
@@ -52,7 +52,7 @@
 					<p>
 						<isprint value="${asset.description}"/>
 						<a href="${articleURL}" class="readmore">
-							${Resource.msg('foldercontenthits.readmore','rendering',null)}
+							${Resource.msg('rendering.foldercontenthits.readmore','rendering',null)}
 						</a>
 					</p>
 				</li>
@@ -62,9 +62,9 @@
 			
 			<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}" />
 				<isif condition="${pdict.ProductSearchResult.count > 0}">
-					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('foldercontenthits.backtoproducts','rendering',null)}</a>
+					<a href="${pdict.ProductSearchResult.url('Search-Show')}">${Resource.msg('rendering.foldercontenthits.backtoproducts','rendering',null)}</a>
 				<iselse/>
-					<p>${Resource.msgf('foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
+					<p>${Resource.msgf('rendering.foldercontenthits.noproducts','rendering',null,pdict.ProductSearchResult.searchPhrase)}</p>
 				</isif>
 			</isif>
 			

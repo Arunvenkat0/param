@@ -26,9 +26,9 @@
 		<isif condition="${recProducts.size() > 0}">
 			<h2>
 				<isif condition="${pdict.Product.productSet}">
-					${Resource.msg('recommendations.productsets','product',null)}
+					${Resource.msg('product.recommendations.productsets','product',null)}
 				<iselse/>
-					${Resource.msg('recommendations.products','product',null)}
+					${Resource.msg('product.recommendations.products','product',null)}
 				</isif>
 			</h2>
 			<div id="carousel-recommendations">
@@ -115,8 +115,8 @@
 					<iscomment>Restore the Product instance</iscomment>
 					<isset name="Product" value="${pdict.mainProduct}" scope="pdict"/>
 				</ul>
-				<a class="jcarousel-nav jcarousel-prev" href="${'#'}"><span class="visually-hidden">Prev</span></a>
-				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">Next</span></a>
+				<a class="jcarousel-nav jcarousel-prev" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
+				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
 			</div>
 		</isif>
 	</div>
