@@ -509,7 +509,7 @@ Here you will find answers to your questions about shopping at our online store,
 
     <slot-configuration slot-id="header-banner" context="global" configuration-id="free2dayshiporderover300" default="true" assigned-to-site="true">
         <description>HTML slot for Free 2 Day Shipping</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
+	<template>slots/html/header-promotion.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
