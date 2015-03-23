@@ -2076,8 +2076,8 @@ footer {
   width: 100%; }
   #compare-table th {
     padding: .5em; }
-  #compare-table th:first-of-type {
-    background-color: #e0e0e0; }
+    #compare-table th:first-of-type {
+      background-color: #e0e0e0; }
   #compare-table a:hover {
     text-decoration: underline; }
   #compare-table .attribute-row {
@@ -2093,12 +2093,12 @@ footer {
   #compare-table .action {
     display: block;
     padding: 0.5em 0; }
-  #compare-table a.remove-link {
+  #compare-table .remove-link {
     color: #999;
     display: block;
     text-align: right;
     transition: color 500ms ease; }
-    #compare-table a.remove-link:hover {
+    #compare-table .remove-link:hover {
       color: #84bd00;
       text-decoration: none; }
   #compare-table .value, #compare-table .product {

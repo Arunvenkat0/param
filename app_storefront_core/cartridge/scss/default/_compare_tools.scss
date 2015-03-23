@@ -99,11 +99,11 @@
 	table-layout: fixed;
 	width: 100%;
 	th {
-		padding: .5em
+		padding: .5em;
 		&:first-of-type {
-		background-color: $gainsboro;
+			background-color: $gainsboro;
 		}
-	&
+	}
 	a {
 		&:hover {
 			text-decoration: underline;
