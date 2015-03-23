@@ -17,7 +17,6 @@ var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var multiShippingForm = require('~/cartridge/scripts/model/Form').get('multishipping');
 var view = require('~/cartridge/scripts/view');
 
@@ -42,19 +41,8 @@ function start() {
         // Creates for each quantity of ProductLineItems new QuantityLineItems helper objects.
         var quantityLineItems = null;
         var plis = cart.getProductLineItems();
-        for (var i = 0; i < plis.length; i++) {
-            var pli = plis[i];
-
-            var ScriptResult = new dw.system.Pipelet('Script', {
-                Transactional : false,
-                OnError       : 'PIPELET_ERROR',
-                ScriptFile    : 'checkout/multishipping/SeperateQuantities.ds'
-            }).execute({
-                    CBasket             : cart.object,
-                    ProductLineItem     : pli,
-                    QuantityLineItemsIn : quantityLineItems
-                });
-            quantityLineItems = ScriptResult.QuantityLineItemsOut;
+	    for (var i = 0; i < plis.length; i++) {
+	        quantityLineItems = cart.separateQuantities(plis[i], quantityLineItems);
         }
 
         initAddressForms(cart.object, quantityLineItems);

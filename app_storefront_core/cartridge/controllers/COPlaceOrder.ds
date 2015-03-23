@@ -34,7 +34,7 @@ function handlePayments(order) {
         return {};
     }
 
-	var paymentInstruments = order.getPaymentInstruments();
+    var paymentInstruments = order.getPaymentInstruments();
 
     if (paymentInstruments.length != 0) {
         return {
@@ -132,7 +132,7 @@ function start() {
         }
 
         // Handle used addresses and credit cards.
-	    var saveCCResult = require('./COBilling').SaveCreditCard();
+        var saveCCResult = require('./COBilling').SaveCreditCard();
 
         if (!saveCCResult) {
             return {
@@ -153,13 +153,13 @@ function start() {
 
         var handlePaymentsResult = handlePayments(order);
         if (handlePaymentsResult.error) {
-	        OrderMgr.failOrder(order);
-	        return {error : true};
+            OrderMgr.failOrder(order);
+            return {error : true};
 
         }
         else if (handlePaymentsResult.missingPaymentInfo) {
-	        OrderMgr.failOrder(order);
-	        return {error : true};
+            OrderMgr.failOrder(order);
+            return {error : true};
         }
 
         return submitImpl(order);
@@ -168,25 +168,25 @@ function start() {
 
 function submitImpl(order) {
 
-	var orderPlacementStatus = Transaction.wrap(function () {
-		if (OrderMgr.placeOrder(order) === Status.ERROR) {
-			OrderMgr.failOrder(order);
-			return false;
-		}
+    var orderPlacementStatus = Transaction.wrap(function () {
+        if (OrderMgr.placeOrder(order) === Status.ERROR) {
+            OrderMgr.failOrder(order);
+            return false;
+        }
 
-		order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
+        order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
 
-		return true;
-	});
+        return true;
+    });
 
-	if (orderPlacementStatus === Status.ERROR) {
-	    return {error : true};
+    if (orderPlacementStatus === Status.ERROR) {
+        return {error : true};
     }
 
     // Creates purchased gift certificates with this order.
     if (!createGiftCertificates(order)) {
-	    OrderMgr.failOrder(order);
-	    return {error : true};
+        OrderMgr.failOrder(order);
+        return {error : true};
     }
 
     // Send order confirmation and clear used forms within the checkout process.
@@ -204,7 +204,10 @@ function submitImpl(order) {
     order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
     order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
 
-    clearForms();
+    // Clears all forms used in the checkout process.
+    session.forms.singleshipping.clearFormElement();
+    session.forms.multishipping.clearFormElement();
+    session.forms.billing.clearFormElement();
 
     return {
         Order         : order,
@@ -232,20 +235,6 @@ function createOrder(cart) {
         Order : CreateOrder2Result.Order
     };
 }
-
-/**
- * Clears all forms used in the checkout process.
- */
-function clearForms() {
-    session.forms.singleshipping.clearFormElement();
-    session.forms.multishipping.clearFormElement();
-    session.forms.billing.clearFormElement();
-}
-
-/*
- * These pipelines contain past order creation logic. However, they must be
- * called within the transaction.
- */
 
 /**
  * Creates a gift certificate for each gift certificate line item in the order
@@ -289,11 +278,11 @@ function createGiftCertificates(order) {
  */
 function submitPaymentJSON() {
 
-	var order = Order.get(request.httpParameterMap.order_id.stringValue);
-	if (!order.object || (request.httpParameterMap.order_token.stringValue != order.getOrderToken())) {
-		view.get().render('checkout/components/faults');
-		return;
-	}
+    var order = Order.get(request.httpParameterMap.order_id.stringValue);
+    if (!order.object || (request.httpParameterMap.order_token.stringValue != order.getOrderToken())) {
+        view.get().render('checkout/components/faults');
+        return;
+    }
 
     if (!order) {
         view.get().render('checkout/components/faults');
@@ -317,6 +306,10 @@ function submitPaymentJSON() {
     }
 }
 
+/**
+ * TODO
+ * @returns {*}
+ */
 function copyPaymentInfo() {
     session.forms.billing.paymentMethods.clearFormElement();
 
@@ -345,8 +338,8 @@ function copyPaymentInfo() {
  */
 function submit() {
 
-	var order = Order.get(request.httpParameterMap.order_id.stringValue);
-	if (!order.object || (request.httpParameterMap.order_token.stringValue != order.getOrderToken())) {
+    var order = Order.get(request.httpParameterMap.order_id.stringValue);
+    if (!order.object || (request.httpParameterMap.order_token.stringValue != order.getOrderToken())) {
         require('./COSummary').Start();
         return;
     }

@@ -37,7 +37,7 @@ function start() {
             cart.calculate();
         });
 
-        pageMeta.update({pageTitle : 'SiteGenesis Checkout'});
+	    pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
         view.get({
             Basket : cart.object
         }).render('checkout/summary/summary');

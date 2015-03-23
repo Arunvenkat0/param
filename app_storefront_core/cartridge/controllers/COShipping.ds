@@ -15,6 +15,7 @@ var CustomerMgr = require('dw/customer/CustomerMgr');
 var Form = require('~/cartridge/scripts/model/Form');
 var HashMap = require('dw/util/HashMap');
 var Profile = require('~/cartridge/scripts/model/Profile');
+var Resource = require('dw/web/Resource');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Site = require('dw/system/Site');
 var Transaction = require('dw/system/Transaction');
@@ -70,7 +71,7 @@ function start() {
                 return;
             }
             else {
-	            pageMeta.update({pageTitle : "SiteGenesis Checkout"});
+                pageMeta.update({pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
                 view.get({
                     Basket         : cart.object,
                     HomeDeliveries : homeDeliveries
@@ -135,7 +136,7 @@ function singleShipping() {
         'selectAddress'  : function (formgroup) {
             updateAddressDetails(Cart.get());
 
-            pageMeta.update({pageTitle : "SiteGenesis Checkout"});
+	        pageMeta.update({pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
             view.get().render('checkout/shipping/singleshipping');
 
             return;
@@ -240,11 +241,10 @@ function updateShippingMethodList() {
         }).render('checkout/shipping/shippingmethods');
     }
     else {
-	    require('./Cart').Show();
-	    return;
+        require('./Cart').Show();
+        return;
     }
 }
-
 
 /**
  * Determine the list of applicable shipping methods for the default shipment of
@@ -264,7 +264,6 @@ function getApplicableShippingMethodsJSON() {
 
     view.get({ApplicableShippingMethods : applicableShippingMethods}).render('checkout/shipping/shippingmethodsjson');
 }
-
 
 /**
  * Handles the selected shipping address and shipping method: - copies the
@@ -302,7 +301,6 @@ function handleShippingSettings(cart) {
     return;
 }
 
-
 /**
  * Prepares shipments by separating all gift certificate line items from product
  * line items and creating one shipment per gift certificate to purchase. As
@@ -335,7 +333,6 @@ function prepareShipments() {
 
     return homeDeliveries;
 }
-
 
 /**
  * Renders a form dialog to edit an address. The dialog is supposed to be opened
@@ -388,7 +385,7 @@ function editShippingAddress() {
  * TODO
  */
 function updateAddressDetails() {
-	var cart = Cart.get();
+    var cart = Cart.get();
 
     if (cart.object) {
 
