@@ -2,7 +2,7 @@
 	font-size: 1em;
 	line-height: 1.5;
 	margin: 0;
-	padding: 2px 8px;
+	padding: .1em .7em;
 	li {
 		display: inline;
 		list-style: none outside none;
@@ -18,7 +18,7 @@
 	&:after {
 		color: $very-light-gray;
 		content: '/';
-		margin-left: 5px;
+		margin-left: .4em;
 	}
 	&:last-child {
 		font-weight: 700;
@@ -53,7 +53,7 @@
 	background: none;
 	color: $sangria;
 	font-style: normal;
-	padding: 0 0 0 3px;
+	padding: 0 0 0 .4em;
 }
 
 .breadcrumb-result-text a,
