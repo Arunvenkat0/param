@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					sourcemap: true
+					sourceMap: (config.type === 'development')
 				},
 				files: paths.css.map(function (path) {
 					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
