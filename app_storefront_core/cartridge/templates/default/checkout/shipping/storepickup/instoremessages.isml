@@ -31,7 +31,7 @@
 
 	</div>
 	<div class="instore-shipment-method">
-		<span>${Resource.msg('forms.shippingmethod','forms',null)}</span> :
+		<span>${Resource.msg('resource.shippingmethod','forms',null)}</span> :
 		<isprint value="${shipment.object.shippingMethod.displayName}"/> 
 		<isprint value="${shippingModel.getShippingCost(shipment.object.shippingMethod).getAmount()}"/> 
 		(<isprint value="${shipment.object.shippingMethod.description}"/>)

@@ -5,7 +5,7 @@
 <div id="breadcrumb_left" class="breadcrumb breadcrumb_left">
 
 	<iscomment>bread crumb home link</iscomment>
-	<li><a href="${URLUtils.httpHome()}">${Resource.msg('pagecomponents.breadcrumbs.home','pagecomponents',null)}</a></li>
+	<li><a href="${URLUtils.httpHome()}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a></li>
 
 	<iscomment>
 		the category context is determined based on the product search
@@ -63,7 +63,7 @@
 		<isloop items="${path}" var="cat" status="loopstate">
 			<isif condition="${loopstate.last}">
 				<a class="category-back" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}">
-					<isprint value="${Resource.msg('product.leftbreadcrumbintrotext','product',null)}" encoding="off" />
+					<isprint value="${Resource.msg('product.breadcrumb.leftintrotext','product',null)}" encoding="off" />
 					&nbsp;${cat.displayName}
 				</a>
 			</isif>

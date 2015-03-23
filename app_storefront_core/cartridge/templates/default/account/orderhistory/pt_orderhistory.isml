@@ -4,7 +4,7 @@
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
-
+       
 <head>
 
 	<isscript>
@@ -32,9 +32,9 @@
 		<div id="main" role="main" class="page-content clearfix">
 
 			<isif condition="${empty(pdict.Order)}">
-				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('orders.orderhistory','account',null)}"/>
+				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${Resource.msg('account.orders.orderhistory','account',null)}"/>
 			<iselse/>
-				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bcurl2="${URLUtils.https('Order-History')}" bctext2="${Resource.msg('orders.orderhistory','account',null)}" bctext3="${pdict.Order.orderNo}"/>
+				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bcurl2="${URLUtils.https('Order-History')}" bctext2="${Resource.msg('account.orders.orderhistory','account',null)}" bctext3="${pdict.Order.orderNo}"/>
 			</isif>
 
 			<div id="primary" class="primary-content">

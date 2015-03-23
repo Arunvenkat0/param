@@ -52,7 +52,7 @@
 <isif condition="${!empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
 	<div class="back">
 		<a href="${pdict.ContentSearchResult.url('Search-ShowContent')}">
-			${Resource.msg('foldercontenthits.backtoresults','rendering',null)}
+			${Resource.msg('rendering.foldercontenthits.backtoresults','rendering',null)}
 		</a>
 	</div>
 </isif>

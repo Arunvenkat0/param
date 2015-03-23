@@ -13,12 +13,12 @@
 	<isslot id="account-banner" description="Banner for My Account pages" context="global" />
 	
 	<div id="addresses">
-		<h1>${Resource.msg('addresslist.header','account',null)}</h1>
+		<h1>${Resource.msg('account.addressbook.addresslist.header','account',null)}</h1>
 		
 		<div class="section-header">
-			${Resource.msg('addresslist.header','account',null)}
-			<a class="section-header-note address-create" title="${Resource.msg('addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
-				${Resource.msg('addresslist.create','account',null)}
+			${Resource.msg('account.addressbook.addresslist.header','account',null)}
+			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
+				${Resource.msg('account.addressbook.addresslist.create','account',null)}
 			</a>
 		</div>
 	

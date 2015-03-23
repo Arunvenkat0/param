@@ -454,7 +454,7 @@
           <key-binding alias="null" key="To_8"/>
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
-          <key-binding alias="dw.web.Resource.msg('account.editaccount','account',null)" key="From_1"/>
+          <key-binding alias="dw.web.Resource.msg('account.user.registration.editaccount','account',null)" key="From_1"/>
           <key-binding alias="bctext2" key="To_1"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -847,7 +847,7 @@
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
                 <key-binding alias="MailFrom" key="To_0"/>
-                <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                <key-binding alias="dw.web.Resource.msg('resource.passwordassistance','email',null)" key="From_1"/>
                 <key-binding alias="MailSubject" key="To_1"/>
                 <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="From_2"/>
                 <key-binding alias="MailTemplate" key="To_2"/>
@@ -1068,7 +1068,7 @@
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
                 <key-binding alias="MailFrom" key="To_0"/>
-                <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                <key-binding alias="dw.web.Resource.msg('resource.passwordassistance','email',null)" key="From_1"/>
                 <key-binding alias="MailSubject" key="To_1"/>
                 <key-binding alias="&quot;mail/resetpasswordemail&quot;" key="From_2"/>
                 <key-binding alias="MailTemplate" key="To_2"/>
@@ -1364,7 +1364,7 @@
                             <config-property key="Transactional" value="false"/>
                             <key-binding alias="dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')" key="From_0"/>
                             <key-binding alias="MailFrom" key="To_0"/>
-                            <key-binding alias="dw.web.Resource.msg('email.passwordassistance','email',null)" key="From_1"/>
+                            <key-binding alias="dw.web.Resource.msg('resource.passwordassistance','email',null)" key="From_1"/>
                             <key-binding alias="MailSubject" key="To_1"/>
                             <key-binding alias="&quot;mail/passwordchangedemail&quot;" key="From_2"/>
                             <key-binding alias="MailTemplate" key="To_2"/>

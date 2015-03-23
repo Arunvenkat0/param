@@ -50,7 +50,7 @@
 
 					<isif condition="${pdict.ContentSearchResult.isRefinedByAttributeValue(definition.attributeID, value.value)}">
 						<isif condition="${!values.first}">
-							<span>${Resource.msg('pagecomponents.breadcrumbs.refinements.valuedevider','pagecomponents',null)}</span>
+							<span>${Resource.msg('global.breadcrumbs.refinements.valuedevider','locale',null)}</span>
 						</isif>
 						<span class="refinement-value">
 							<isprint value="${value.displayValue}"/>

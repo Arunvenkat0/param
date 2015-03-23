@@ -82,7 +82,7 @@
 	</div>
 
 	<div id="thumbnails" class="product-thumbnails">
-		<h2>${Resource.msg('productthumbnails.title','product',null)}</h2>
+		<h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2>
 		<ul>
 			<isloop items="${pdict.ProductSetList}" var="product" status="loopstatus">
 				<isset name="lgImage" value="${product.getImages('large')[0]}" scope="page" />

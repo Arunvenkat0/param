@@ -1,2 +1,2 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<h2>${Resource.msg('reviews.header', 'product', null)}</h2>
+<h2>${Resource.msg('product.reviews.header', 'product', null)}</h2>

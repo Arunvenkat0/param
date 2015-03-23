@@ -2,7 +2,7 @@
 <div class="form-row label-inline">
 
 	<isif condition="${empty(lineItem.custom.fromStoreId)}">
-		<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','storepickup',null)}</label>
+		<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','checkout',null)}</label>
 	</isif>
 
 	<iscomment>Product Existence and Product Availability</iscomment>
@@ -38,7 +38,7 @@
 
 	<div name="${lineItem.getUUID()}-sp" class="form-row label-inline">
 	
-		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','storepickup',null)}</label>
+		<label for="deliver-options-home">${Resource.msg('cart.store.instorepickup','checkout',null)}</label>
 	
 		<iscomment>Store Address</iscomment>
 		<input type="hidden" class="storeid" name="${lineItem.getUUID()}-store" value="${!empty(store) ? store.ID : ''}">	
@@ -51,9 +51,9 @@
 		<div name="${lineItem.UUID}-stock" class="selected-store-availability">
 		<isif condition="${!empty(store)}">
 			<isif condition="${!empty(storeinventoryATS) && storeinventoryATS >= lineItem.quantityValue}">
-				<span class="store-in-stock">${StringUtils.format(Resource.msg('cart.store.availableinstore','storepickup',null))}</span>
+				<span class="store-in-stock">${StringUtils.format(Resource.msg('global.instock','locale',null))}</span>
 			<iselse/>
-				<span class="store-error">${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}</span>			
+				<span class="store-error">${StringUtils.format(Resource.msg('cart.store.notavailable','checkout',null))}</span>			
 			</isif>
 		</isif>
 		</div>

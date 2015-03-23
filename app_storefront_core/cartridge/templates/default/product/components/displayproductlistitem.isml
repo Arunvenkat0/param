@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class="notavailable">
-			${Resource.msg('displayproductlistitems.notavailable','product',null)}
+			${Resource.msg('product.displayproductlistitems.notavailable','product',null)}
 		</div>
 		
 	<iselseif condition="${!p_productli.product.availabilityModel.orderable}">
@@ -52,7 +52,7 @@
 		</div>
 
 		<div class="notavailable">
-			${Resource.msg('displayproductlistitems.notavailable','product',null)}
+			${Resource.msg('product.displayproductlistitems.notavailable','product',null)}
 		</div>
 		
 	<iselse/>

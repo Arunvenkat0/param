@@ -5,7 +5,7 @@
 				value="home"
 				<isif condition="${lineItem.custom.fromStoreId == null}">checked</isif>/>
 	</isif>
-	<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','storepickup',null)}</label>
+	<label for="deliver-options-home">${Resource.msg('cart.store.homedelivery','checkout',null)}</label>
 
 	<iscomment>Product Existence and Product Availability</iscomment>
 	<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
@@ -41,7 +41,7 @@
 				<isif condition="${typeof storeinventoryATS == 'undefined' || empty(storeinventoryATS) || storeinventoryATS < lineItem.quantityValue}">disabled </isif>
 				<isif condition="${lineItem.custom.fromStoreId != null}">checked</isif>/>
 
-		<label for="deliver-options-store">${Resource.msg('cart.store.instorepickup', 'storepickup', null)}</label>
+		<label for="deliver-options-store">${Resource.msg('cart.store.instorepickup', 'checkout', null)}</label>
 
 		<iscomment>Store Address</iscomment>
 		<isif condition="${!empty(store)}">
@@ -51,10 +51,10 @@
 			</div>
 			<isif condition="${!empty(storeinventoryATS) && storeinventoryATS >= lineItem.quantityValue}">
 				<isset name="status" value="store-in-stock" scope="page" />
-				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.availableinstore','storepickup',null))}" scope="page" />
+				<isset name="statusText" value="${StringUtils.format(Resource.msg('global.instock','locale',null))}" scope="page" />
 			<iselse/>
 				<isset name="status" value="store-error" scope="page" />
-				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.notavailable','storepickup',null))}" scope="page" />
+				<isset name="statusText" value="${StringUtils.format(Resource.msg('cart.store.notavailable','checkout',null))}" scope="page" />
 			</isif>
 			<div class="selected-store-availability" data-status="${status}">${statusText}</div>
 		<iselse>
