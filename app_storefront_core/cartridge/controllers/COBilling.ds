@@ -10,11 +10,13 @@
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Form = require('~/cartridge/scripts/model/Form');
+var GiftCertificate = require('dw/order/GiftCertificate');
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Profile = require('~/cartridge/scripts/model/Profile');
+var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
@@ -77,7 +79,7 @@ function start(cart) {
  * TODO
  * @param cart
  */
-function returnToForm(cart) {
+function returnToForm(cart, params) {
 
 	if (!empty(cart.getPaymentInstrument()) && cart.getPaymentInstrument().getPaymentMethod() === PaymentInstrument.METHOD_GIFT_CERTIFICATE) {
 		Form.get(session.forms.billing).copyFrom({
@@ -85,7 +87,12 @@ function returnToForm(cart) {
 		});
 	}
 
-	view.get({Basket : cart.object}).render('checkout/billing/billing');
+	if (params) {
+		view.get(require('~/object').extend(params, {Basket : cart.object})).render('checkout/billing/billing');
+	}
+	else {
+		view.get({Basket : cart.object}).render('checkout/billing/billing');
+	}
 }
 
 /**
@@ -114,15 +121,21 @@ function billing() {
             return;
         },
         'redeemGiftCert'   : function (formgroup) {
-            redeemGiftCertificate(session.forms.billing.giftCertCode.htmlValue);
-            returnToForm();
-            return;
+            var status = redeemGiftCertificate(session.forms.billing.giftCertCode.htmlValue);
+	        if (!status.isError()) {
+                returnToForm(Cart.get(), {NewGCPaymentInstrument: status.getDetail("NewGCPaymentInstrument")});
+	        }
+	        else {
+		        returnToForm(Cart.get());
+	        }
+
+	        return;
         },
         'save'             : function (formgroup) {
             var cart = Cart.get();
 
 	        if (!resetPaymentForms() || !validateBilling() || !handleBillingAddress(cart) || // Performs validation steps, based upon the entered billing address and address options.
-		        !handlePaymentSelection(cart)) { // Performs payment method specific checks, such as credit card verification.
+		        handlePaymentSelection(cart).error) { // Performs payment method specific checks, such as credit card verification.
 		        returnToForm(cart);
 	        }
 	        else {
@@ -207,21 +220,11 @@ function initCreditCardList(cart) {
 
 	session.forms.billing.paymentMethods.creditCard.type.setOptions(applicablePaymentCards.iterator());
 
-	if (customer.authenticated) {
+	var applicableCreditCards = null;
 
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : false,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/ValidatePaymentInstruments.ds'
-		}).execute({
-				CountryCode        : countryCode,
-				Customer           : customer,
-				PaymentAmount      : paymentAmount.value,
-				PaymentInstruments : customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD)
-			});
-		if (ScriptResult.result == PIPELET_NEXT) {
-			var applicableCreditCards = ScriptResult.ValidPaymentInstruments;
-		}
+	if (customer.authenticated) {
+		applicableCreditCards =
+			    Profile.get().validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
 	}
 
 	return {
@@ -236,35 +239,39 @@ function initCreditCardList(cart) {
  * added gift certificates to reflect order total changes.
  */
 function adjustGiftCertificates() {
-	var cart = Cart.get();
+    var cart = Cart.get();
 
-	if (cart.object) {
-		var gcIdList = cart.getGiftCertIdList();
+    if (cart.object) {
+        var gcIdList = cart.getGiftCertIdList();
 
-		for (var i = 0; i < gcIdList.length; i++) {
-			var gcID = gcIdList[i];
-			cart.removeGiftCertificatePaymentInstrument(gcID);
-		}
+        Transaction.wrap(function () {
+            for (var i = 0; i < gcIdList.length; i++) {
+                cart.removeGiftCertificatePaymentInstrument(gcIdList[i]);
+            }
 
-		var gcID = null;
+            var gcID = null;
 
-		for (var j = 0; j < gcIdList.length; j++) {
-			var gcID = gcIdList[j];
-			var ScriptResult = new dw.system.Pipelet('Script', {
-				ScriptFile    : 'checkout/CreateGiftCertificatePaymentInstrument.ds',
-				Transactional : true,
-				OnError       : 'PIPELET_ERROR'
-			}).execute({
-					Basket            : Basket,
-					GiftCertificateID : gcID
-				});
-			var NewGCPaymentInstrument = ScriptResult.PaymentInstrument;
-			var GiftCertStatus = ScriptResult.Status;
-		}
-	}
-	else {
-		return;
-	}
+            for (var j = 0; j < gcIdList.length; j++) {
+                var gcID = gcIdList[j];
+
+                var gc = GiftCertificateMgr.getGiftCertificateByCode(gcID);
+
+                if (gc && // make sure exists
+                    gc.isEnabled() &&  // make sure it is enabled
+                    (gc.getStatus() !== GiftCertificate.STATUS_PENDING) && // make sure it is available for use
+                    (gc.getStatus() !== GiftCertificate.STATUS_REDEEMED) && // make sure it has not been fully redeemed
+                    gc.balance.currencyCode === cart.getCurrencyCode()) { // make sure the GC is in the right currency
+
+                    cart.createGiftCertificatePaymentInstrument(gc);
+                }
+            }
+        });
+
+	    return;
+    }
+    else {
+        return;
+    }
 }
 
 /**
@@ -277,30 +284,40 @@ function redeemGiftCertificate(giftCertCode) {
 
 	var cart = Cart.get();
 
-    if (!cart.object) {
-        return {
-            code  : 'BASKET_NOT_FOUND',
-            error : true
-        };
-    }
-    else {
+	if (cart.object) {
+		// fetch the gift certificate
+		var gc = GiftCertificateMgr.getGiftCertificateByCode(giftCertCode);
 
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            ScriptFile    : 'checkout/CreateGiftCertificatePaymentInstrument.ds',
-            Transactional : true,
-            OnError       : 'PIPELET_ERROR'
-        }).execute({
-                Basket            : cart.object,
-                GiftCertificateID : giftCertCode
-            });
-        if (ScriptResult.result === PIPELET_NEXT) {
-            var NewGCPaymentInstrument = ScriptResult.PaymentInstrument;
+		if (!gc) { // make sure exists
+			return new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_NOT_FOUND);
+		}
+		else if (!gc.isEnabled()) { // make sure it is enabled
+			return new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_DISABLED);
+		}
+		else if (gc.getStatus() === GiftCertificate.STATUS_PENDING) { // make sure it is available for use
+			return new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_PENDING);
+		}
+		else if (gc.getStatus() === GiftCertificate.STATUS_REDEEMED) { // make sure it has not been fully redeemed
+			return new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_INSUFFICIENT_BALANCE);
+		}
+		else if (!(gc.balance.currencyCode === cart.getCurrencyCode())) {// make sure the GC is in the right currency
+			return new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_CURRENCY_MISMATCH);
+		}
+		else {
+			var newGCPaymentInstrument = Transaction.wrap(function () {
+				var gcPaymentInstrument = cart.createGiftCertificatePaymentInstrument(gc);
+				cart.calculate();
+				return gcPaymentInstrument;
+			});
 
-            cart.calculate();
-        }
-
-        return ScriptResult.Status;
-    }
+			var status = new Status(Status.OK);
+			status.addDetail("NewGCPaymentInstrument", newGCPaymentInstrument);
+			return status;
+		}
+	}
+	else {
+		return new Status(Status.ERROR, 'BASKET_NOT_FOUND');
+	}
 }
 
 /**
@@ -414,7 +431,7 @@ function handleCoupon() {
 		adjustGiftCertificates();
 	}
 
-	returnToForm();
+	returnToForm(Cart.get());
 }
 
 /**
@@ -444,7 +461,7 @@ function editBillingAddress() {
 
 	billingAddressForm.handleAction({
 	    'apply'  : function (formgroup) {
-		    if (!form.updateObjectWithForm(BillingAddress, session.forms.billingaddress)) {
+		    if (!Form.get(session.forms.billingaddress).copyTo(session.forms.billingaddress.object)) {
 			    view.get().render('checkout/billing/billingaddressdetails');
 			    return;
 		    }
@@ -476,7 +493,16 @@ function editBillingAddress() {
 function handlePaymentSelection(cart) {
 
 	if (empty(session.forms.billing.paymentMethods.selectedPaymentMethodID.value)) {
-		return cart.getTotalGrossPrice() > 0;
+		if (cart.getTotalGrossPrice() > 0) {
+			return {
+				error : true
+			};
+		}
+		else {
+			return {
+				ok : true
+			};
+		}
 	}
 
 	// skip the payment handling if the whole payment was made using gift cert
@@ -568,6 +594,9 @@ function selectCreditCard() {
 	}).render('checkout/billing/creditcardjson');
 }
 
+/**
+ * TODO
+ */
 function updateCreditCardSelection() {
 	var cart = Cart.get();
 
@@ -680,31 +709,22 @@ function validatePayment(cart) {
 	if (session.forms.billing.fulfilled.value) {
 
 		var paymentAmount = cart.getNonGiftCertificateAmount();
+		var countryCode = session.forms.billing.billingAddress.addressFields.country.value;
 
-		var ScriptResult = new dw.system.Pipelet('Script', {
-			Transactional : false,
-			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/ValidatePaymentInstruments.ds'
-		}).execute({
-				CountryCode        : session.forms.billing.billingAddress.addressFields.country.value,
-				Customer           : customer,
-				PaymentAmount      : paymentAmount.value,
-				PaymentInstruments : cart.getPaymentInstruments()
-			});
-		if (ScriptResult.result == PIPELET_NEXT) {
+		var invalidPaymentInstruments =
+			    cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value).InvalidPaymentInstruments;
 
-			if (cart.calculatePaymentTransactionTotal()) {
-				return {};
-			}
+		if (!invalidPaymentInstruments && cart.calculatePaymentTransactionTotal()) {
+			return true;
+		}
+		else {
+			session.forms.billing.fulfilled.value = false;
+			return false;
 		}
 	}
-
-	var PaymentStatus = new dw.system.Status(dw.system.Status.ERROR);
-	session.forms.billing.fulfilled.value = false;
-
-	return {
-		error : true
-	};
+	else {
+		return false;
+	}
 }
 
 /**

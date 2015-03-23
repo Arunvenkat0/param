@@ -4,10 +4,8 @@
 /**
  * Module for form related functionality.
  *
- * usage
- * var form = require('~/cartridge/scripts/model/Form');
  *
- * @module model/Cart
+ * @module model/Form
  */
 
 var AbstractModel = require('./AbstractModel');

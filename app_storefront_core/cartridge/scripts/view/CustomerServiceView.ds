@@ -47,6 +47,7 @@ var CustomerServiceView = View.extend({
      */
     init : function (params) {
         this._super(params);
+	    this.CustomerServiceLinks = this.getCustomerServiceLinks();
 
         return this;
     }
