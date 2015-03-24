@@ -1,20 +1,28 @@
-var g = require('./dw/guard');
+'use strict';
 
 /**
- * This is the pipeline hook for the reporting events. Typically no modifications are needed here. 
+ * This is the pipeline hook for the reporting events. Typically no modifications are needed here.
+ * Demandware analytics is based on log file analysis. Log file entries are generated using remote includes in page templates.
+ *
+ * @module controller/ReportingEvent
+ */
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/view');
+
+/**
+ * This is the pipeline hook for the reporting events. Typically no modifications are needed here.
  * Demandware analytics is based on log file analysis. Log file entries are generated using remote includes in page templates.
  */
-function Start()
+function start()
 {
-    response.renderTemplate('util/reporting/reporting');
+    view.get().render('util/reporting/reporting');
 }
 
 
 /*
- * Module exports
- */
-
-/*
  * Web exposed methods
  */
-exports.Start = g.get(Start);
+/** @see module:controller/ReportingEvent~start */
+exports.Start = guard.ensure(['get'], start);
