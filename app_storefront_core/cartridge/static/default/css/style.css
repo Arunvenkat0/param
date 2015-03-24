@@ -380,7 +380,8 @@ button, .button, .buttonstyle, input[type="button"] {
   font-weight: 400;
   padding: 0.5em 2em;
   text-align: center;
-  transition: all 0.3s ease; }
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
   button.large, .button.large, .button-fancy-large, .buttonstyle.large, input[type="button"].large {
     font-size: 1.35em;
     text-transform: uppercase; }
@@ -428,7 +429,8 @@ button, .button, .buttonstyle, input[type="button"] {
   margin: auto;
   max-width: 960px;
   position: relative;
-  transition: left 0.2s ease-in;
+  -webkit-transition: left 0.2s ease-in;
+          transition: left 0.2s ease-in;
   width: 960px; }
   #wrapper.menu-active {
     left: 20em; }
@@ -973,13 +975,15 @@ div.error {
     box-sizing: border-box; }
 
 .primary-logo {
+  height: 38px;
+  padding: 1px 0;
   margin: 0 auto;
   width: 200px;
-  height: 38px;
   z-index: 1; }
   @media screen and (min-width: 768px) {
     .primary-logo {
       left: 0.5em;
+      padding: 0;
       position: absolute; } }
 
 .menu-toggle {
@@ -1012,23 +1016,12 @@ nav[role="navigation"] {
       color: #333; } }
 
 .header-banner {
-<<<<<<< HEAD
-  display: none; }
-  @media screen and (min-width: 768px) {
-    .header-banner {
-      display: block; }
-      .header-banner .header-promotion {
-	background-color: #64772d;
-	color: #fff;
-	text-align: center; } }
-=======
   display: block; }
   .header-banner .header-promotion {
     background-color: #64772d;
     color: #fff;
     padding: 3px 0 2px;
     text-align: center; }
->>>>>>> RAP-3200 Added Currency Selector to New Header Design
 
 .menu-utility-user {
   padding: 0;
@@ -1038,7 +1031,7 @@ nav[role="navigation"] {
       font-size: 0.9em;
       position: absolute;
       right: 9.7em;
-      top: -.1em; } }
+      top: -.2em; } }
   .menu-utility-user li {
     border-top: 1px solid #1a1a1a;
     list-style: none;
@@ -1055,37 +1048,22 @@ nav[role="navigation"] {
         background-color: transparent;
         border-top: none;
         float: left;
-<<<<<<< HEAD
-        margin: 0.3em 0.8em 0;
-	padding: 0;
-	text-align: center; }
-	.menu-utility-user li a {
-	  color: #999;
-	  transition: color 500ms ease; }
-	  .menu-utility-user li a:hover {
-	    color: #84bd00;
-	    text-decoration: none; }
-	  .menu-utility-user li a i {
-	    display: block;
-	    font-size: 2em;
-	    padding: 0; }
-=======
-	margin: 0.3em 1.5em 0;
+        margin: 0.3em 1.5em 0;
         padding: 0;
         text-align: center; }
         .menu-utility-user li a {
           color: #999;
-          transition: color 500ms ease; }
+          -webkit-transition: color .5s ease;
+                  transition: color .5s ease; }
           .menu-utility-user li a:hover {
             color: #84bd00;
             text-decoration: none; }
           .menu-utility-user li a i {
             display: block;
-	    font-size: 3em;
+            font-size: 3em;
             padding: 0; }
-	  .menu-utility-user li a span {
-	    display: none; }
->>>>>>> RAP-3200 Added Currency Selector to New Header Design
+          .menu-utility-user li a span {
+            display: none; }
         .menu-utility-user li:hover {
           background-color: transparent; }
         .menu-utility-user li:first-child {
@@ -1115,18 +1093,16 @@ nav[role="navigation"] {
       top: .9em;
       width: auto; }
       .currency-converter select {
-	background-color: transparent;
-	background-image: none;
-	border: none;
-	box-shadow: none;
-	color: #aaa;
-	font-weight: 700;
-	height: auto;
-	margin-left: 0;
-	padding: 0 1px;
-        width: auto; }
-	.currency-converter select select:focus {
-	  outline: none; } }
+        background-color: transparent;
+        background-image: none;
+        border: none;
+        box-shadow: none;
+        color: #aaa;
+        font-weight: 700;
+        height: auto;
+        margin-left: 0;
+        padding: 0 1px;
+        width: auto; } }
 
 .header-search {
   color: #fff;
@@ -1150,9 +1126,9 @@ nav[role="navigation"] {
       font-size: 1.3em; }
     @media screen and (min-width: 768px) {
       .header-search label {
-	float: right;
-	padding: 0.35rem 0.7rem;
-	width: auto; } }
+        float: right;
+        padding: 0.35rem 0.7rem;
+        width: auto; } }
   .header-search input[type="text"] {
     background-color: transparent;
     border: none;
@@ -1164,7 +1140,7 @@ nav[role="navigation"] {
     width: calc(100% - 2.5rem); }
     @media screen and (min-width: 768px) {
       .header-search input[type="text"] {
-	height: 1.9rem; } }
+        height: 1.9rem; } }
   .header-search legend {
     background: none repeat scroll 0 0 transparent; }
 
@@ -1195,7 +1171,7 @@ nav[role="navigation"] {
     width: 100%; }
     @media screen and (min-width: 768px) {
       .menu-category a {
-	font-size: 1em;
+        font-size: 1em;
         width: auto; } }
     @media screen and (min-width: 960px) {
       .menu-category a {
@@ -1211,7 +1187,8 @@ nav[role="navigation"] {
     float: left;
     line-height: 1.1;
     padding: 1rem 0.8rem;
-    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
     width: 2.1rem; }
     .level-1 > li .menu-item-toggle:hover {
       background-color: #1a1a1a; }
@@ -1219,7 +1196,8 @@ nav[role="navigation"] {
       .level-1 > li .menu-item-toggle {
         display: none; } }
   .level-1 > li a {
-    transition: background-color 0.3s, color 0.3s; }
+    -webkit-transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s; }
     .level-1 > li a:hover {
       background-color: #1a1a1a; }
     @media screen and (min-width: 768px) {
@@ -1323,12 +1301,12 @@ nav[role="navigation"] {
 
 .mini-cart-total {
   position: relative; }
-  .mini-cart-total a.mini-cart-link {
+  .mini-cart-total .mini-cart-link {
     color: #84bd00;
     text-transform: uppercase; }
-    .mini-cart-total a.mini-cart-link i {
+    .mini-cart-total .mini-cart-link i {
       font-size: 3em; }
-    .mini-cart-total a.mini-cart-link .minicart-quantity {
+    .mini-cart-total .mini-cart-link .minicart-quantity {
       background-color: #990000;
       border-radius: 10px;
       color: #fff;
@@ -1338,13 +1316,14 @@ nav[role="navigation"] {
       text-align: center;
       top: 0; }
 
-.mini-cart-total a.mini-cart-empty {
+.mini-cart-total .mini-cart-empty {
   color: #999;
-  transition: color 500ms ease; }
-  .mini-cart-total a.mini-cart-empty:hover {
+  -webkit-transition: color 500ms ease;
+          transition: color 500ms ease; }
+  .mini-cart-total .mini-cart-empty:hover {
     color: #84bd00;
     text-decoration: none; }
-  .mini-cart-total a.mini-cart-empty .minicart-quantity {
+  .mini-cart-total .mini-cart-empty .minicart-quantity {
     visibility: hidden; }
 
 .mini-cart-content {
@@ -3181,7 +3160,7 @@ h1 .account-logout {
   .list-share .share-option {
     box-sizing: border-box;
     width: 30%;
-    margin-right: 3.3333333%;
+    margin-right: 3.33333%;
     float: left;
     word-wrap: break-word; }
     .list-share .share-option a {
