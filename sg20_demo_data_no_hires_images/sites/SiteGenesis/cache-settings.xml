@@ -6,11 +6,11 @@
             <page-cache-enabled>false</page-cache-enabled>
         </development>
         <staging>
-            <static-cache-ttl>86400</static-cache-ttl>
+            <static-cache-ttl>2592000</static-cache-ttl>
             <page-cache-enabled>true</page-cache-enabled>
         </staging>
         <production>
-            <static-cache-ttl>86400</static-cache-ttl>
+            <static-cache-ttl>2592000</static-cache-ttl>
             <page-cache-enabled>true</page-cache-enabled>
         </production>
     </settings>
