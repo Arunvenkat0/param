@@ -39,7 +39,7 @@
             <preference preference-id="SpellCheckingIndexThreshold">0.3</preference>
             <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
             <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
-            <preference preference-id="StaticCacheTTL">86400</preference>
+            <preference preference-id="StaticCacheTTL">2592000</preference>
         </development>
         <staging>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
@@ -65,7 +65,7 @@
             <preference preference-id="SpellCheckingIndexThreshold">0.3</preference>
             <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
             <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
-            <preference preference-id="StaticCacheTTL">86400</preference>
+            <preference preference-id="StaticCacheTTL">2592000</preference>
         </production>
     </standard-preferences>
     <custom-preferences>
