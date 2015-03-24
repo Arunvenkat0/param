@@ -1,3 +1,15 @@
+.pt_product-compare {
+	.full-width {
+		padding: 0 1.25em;
+		.print-page {
+			float: right;
+		}
+		.back {
+			padding: 1em 0;
+		}
+	}
+}
+
 .compare-items {
 	clear: both;
 	margin: 3.5em 2em 0;
@@ -25,11 +37,12 @@
 	text-align: center;
 	width: 55px;
 	.compare-item-remove {
-		background-color: $pacific-blue;
+		background-color: $sangria;
+		border-radius: 5px;
 		color: $white;
 		cursor: pointer;
 		display: none;
-		padding: 0 3px;
+		padding: 0 2px;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -59,11 +72,6 @@
 	padding: 0.7em 0 0;
 }
 
-.compare-print {
-	float: right;
-	margin: 0 0 10px;
-}
-
 .category-switch {
 	@extend .clearfix;
 	margin-bottom: 2em;
@@ -90,6 +98,12 @@
 	border-collapse: collapse;
 	table-layout: fixed;
 	width: 100%;
+	th {
+		padding: .5em;
+		&:first-of-type {
+			background-color: $gainsboro;
+		}
+	}
 	a {
 		&:hover {
 			text-decoration: underline;
@@ -112,7 +126,17 @@
 	}
 	.action {
 		display: block;
-		padding: 0.2em 0;
+		padding: 0.5em 0;
+	}
+	.remove-link {
+		color: $nobel;
+		display: block;
+		text-align: right;
+		transition: color 500ms ease;
+		&:hover {
+			color: $citrus;
+			text-decoration: none;
+		}
 	}
 	.value,
 	.product {
@@ -135,6 +159,10 @@
 		}
 	}
 	.product-tile {
+		.product-name {
+			height: auto;
+			margin: .2em 0 1em 0;
+		}
 		.swatch-list {
 			display: inline-block;
 		}
