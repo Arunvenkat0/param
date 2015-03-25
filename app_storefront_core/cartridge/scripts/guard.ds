@@ -15,25 +15,20 @@
  * // allow only GET requests via HTTPS for logged in users
  * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
-var form = require('~/cartridge/scripts/model/Form');
+var browsing = require('~/cartridge/scripts/util/Browsing');
+var LOGGER   = dw.system.Logger.getLogger('guard');
 
 /**
- * This method contains the login procedure specific for the customer account,
- * e.g. order tracking. After login, it redirects to the provided target action.
+ * This method contains the login to handle a not logged in customer
  */
 function requireLogin()
 {
-    form.get('ordertrack').clear();
-    var loginForm = form.get('login');
-    loginForm.clear();
-
-
-    if (customer.registered)
-    {
-        loginForm.setValue('username', customer.profile.credentials.login);
-        loginForm.setValue('rememberme', true);
+    if(customer.authenticated){
+        return true;
     }
-    response.redirect(dw.web.URLUtils.https('Account-Show','original', browsing.lastUrl()));
+
+    response.redirect(dw.web.URLUtils.https('Login-Show','original', browsing.lastUrl()));
+    return false;
 }
 
 /**
@@ -116,23 +111,18 @@ function ensure (filters, action, error) {
         var filtersPassed = true;
         var errors = [];
         for (var i = 0; i < filters.length; i++) {
-            if (!error) {
+            LOGGER.info('Ensuring "{0}" for action {1}...',filters[i],action.name);
+
+            filtersPassed = Filters[filters[i]].apply(Filters);
+            if (!filtersPassed) {
+                errors.push(filters[i]);
                 if (filters[i] === 'https') {
                     error = switchToHttps;
                 } else if (filters[i] === 'loggedIn') {
                     error = requireLogin;
                 }
-
+                break;
             }
-
-            if (filtersPassed) {
-                filtersPassed = Filters[filters[i]].apply(Filters);
-            }
-
-            if (!filtersPassed) {
-                errors.push(filters[i]);
-            }
-
 
         }
 
@@ -145,8 +135,10 @@ function ensure (filters, action, error) {
         }
 
         if (filtersPassed) {
+            LOGGER.info('...passed.');
             return action();
         } else {
+            LOGGER.info('...failed. {0}',error.name);
             return error();
         }
     });
@@ -157,48 +149,23 @@ function ensure (filters, action, error) {
 
 /**
  * Guard that only accepts POST requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
+ *
+ * @deprecated
  */
 function post(action)
 {
-    return expose(function()
-    {
-        if (request.httpMethod !== 'POST')
-        {
-            dw.system.Logger.debug('*** guard non-post access to "' + action.name + '" denied for ' +
-                request.httpMethod);
+    return ensure(['post'], action);
 
-            // send method not allowed
-            response.sendError(405);
-            return;
-        }
-
-        dw.system.Logger.debug('*** guard post ok');
-
-        action();
-    });
 }
 
 /**
  * Guard that only accepts GET requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
+ *
+ * @deprecated
  */
 function get(action)
 {
-    return expose(function()
-    {
-        if (request.httpMethod !== 'GET')
-        {
-            dw.system.Logger.debug('*** guard non-get access to "' + action.name + '" denied for ' +
-                request.httpMethod);
-
-            // send method not allowed
-            response.sendError(405);
-            return;
-        }
-
-        dw.system.Logger.debug('*** guard get ok');
-
-        action();
-    });
+    return ensure(['get'], action);
 }
 
 /**
@@ -227,35 +194,45 @@ function transactional(action)
 /*
  * Module exports
  */
-/** @see module:guard~https */
+/** @see module:guard~https
+ * @deprecated
+ */
 exports.https = https;
-/** @see module:guard~get */
+/** @see module:guard~get
+ * @deprecated
+ */
 exports.get = get;
-/** @see module:guard~post */
+/** @see module:guard~post
+ * @deprecated
+ */
 exports.post = post;
 /** @see module:guard~expose */
 exports.all = expose;
+/**
+ * Use this method to guard actions which are only to be called via remote include
+ */
+exports.include = expose;
 
 // often needed combinations
 /**
  * @see module:guard~https
  * @see module:guard~get
+ * @deprecated Use ensure(['https','get'], action) instead
  */
 exports.httpsGet = function(action)
 {
-    return https(get(action));
+    return ensure(['https','get'], action);
 };
 
 /**
  * @see module:guard~https
  * @see module:guard~post
+ * @deprecated Use ensure(['https','post'], action) instead
  */
 exports.httpsPost = function(action)
 {
-    return https(post(action));
+    return ensure(['https','post'], action);
 };
-
-exports.switchToHttps = switchToHttps;
 
 exports.transactional = transactional;
 

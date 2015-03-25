@@ -22,13 +22,19 @@ var Form = AbstractModel.extend(
         action : null,
 
         /**
-         * Use this method to get a new instance for a given form reference or form object.
+         * Use this method to get a new instance for a given form reference or form object. Calling
+         * this method on a wrapped instance using a string argument returns the corresponding form group
+         *
          * @param formReference demandware form id (/forms/$name$.xml) or demandware form object
          */
         get : function (formReference) {
             var formInstance = null;
             if (typeof formReference === 'string') {
-                formInstance = session.forms[formReference];
+                if(this.object){
+                    formInstance = this.object[formReference];
+                }else{
+                    formInstance = session.forms[formReference];
+                }
             }
             else if (typeof formReference === 'object') {
                 formInstance = formReference;
@@ -79,10 +85,7 @@ var Form = AbstractModel.extend(
             if (clear) {
                 this.object.clear();
             }
-            else {
-                // update the form
-                this.object.copyFrom(updateObject);
-            }
+            this.object.copyFrom(updateObject);
 
             return this;
         },
@@ -103,6 +106,13 @@ var Form = AbstractModel.extend(
                 return false;
             }
 
+        },
+
+        /**
+         * Clears the wrapped form instance
+         */
+        clear : function (){
+            this.object.clearFormElement();
         }
 
     });

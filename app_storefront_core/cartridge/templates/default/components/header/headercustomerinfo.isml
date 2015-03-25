@@ -3,7 +3,6 @@
 
 	<iscomment>Multi currency</iscomment>
 	<isinclude template="components/header/multicurrency"/>
-	<isset name="customer" value="${pdict.customer}" scope="page"/>
 	<isset name="notStr" value="${Resource.msg('headercustomerinfo.not', 'components', null)}" scope="page"/>
 	<isset name="loginStr" value="${Resource.msg('global.login', 'locale', null)}" scope="page"/>
 

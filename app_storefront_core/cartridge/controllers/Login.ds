@@ -9,6 +9,97 @@ var Cart = require('~/cartridge/scripts/model/Cart');
  */
 
 /**
+ * This method contains the login procedure specific for the customer account,
+ * e.g. order tracking. After login, it redirects to the provided target action.
+ */
+function show(args)
+{
+    var forms = session.forms;
+
+    f.clearFormElement(forms.ordertrack);
+    f.clearFormElement(forms.login);
+
+    if (customer.registered)
+    {
+        forms.login.username.value = customer.profile.credentials.login;
+        forms.login.rememberme.value = true;
+    }
+
+    //w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent('myaccount-login'));
+
+    response.renderTemplate('account/login/accountlogin', {
+        RegistrationStatus : false
+    });
+}
+
+function loginForm()
+{
+    var TriggeredAction = request.triggeredFormAction;
+    if (TriggeredAction !== null)
+    {
+        if (TriggeredAction.formId === 'findorder')
+        {
+            var OrderController = require('./Order');
+            var FindResult = OrderController.Find();
+            if (FindResult.error)
+            {
+                // TODO redirect
+                response.renderTemplate('account/login/accountlogin', {
+                    OrderNotFound : true
+                });
+                return;
+            }
+            // TODO redirect
+            response.renderTemplate('account/orderhistory/orderdetails', {
+                Order : FindResult.Order
+            });
+            return;
+        }
+        else if (TriggeredAction.formId === 'login')
+        {
+            // get the target action which requested this login step before the
+            // form is cleared
+            var targetAction = session.forms.login.targetAction.value;
+            var targetParameters = session.forms.login.targetParameters.value;
+
+            var LoginController = require('./Login');
+            var ProcessResult = LoginController.Process();
+            if (ProcessResult.login_failed)
+            {
+                // TODO redirect
+                response.renderTemplate('account/login/accountlogin');
+                return;
+            }
+
+            // login successful
+            // redirect to the origin who triggered the login process
+            if (request.httpParameterMap.original.submitted) {
+                //@TODO make sure only path, no hosts are allowed as redirect target
+                dw.system.Logger.info('Redirecting to {0}',request.httpParameterMap.original.value);
+                response.redirect(decodeURI(request.httpParameterMap.original.value));
+                return;
+            } else if (!empty(targetAction)) {
+                if (empty(targetParameters)) {
+                    response.redirect(dw.web.URLUtils.https(targetAction));
+                } else {
+                    response.redirect(dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters)));
+                }
+            } else {
+                response.redirect(dw.web.URLUtils.https('Account-Show'));
+            }
+            return;
+        }
+        else if (TriggeredAction.formId === 'register')
+        {
+            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            return;
+        }
+    }
+
+    response.redirect(dw.web.URLUtils.https('Account-Show'));
+}
+
+/**
  * This is a central place to login a user from the login form.
  */
 function Process()
@@ -75,7 +166,7 @@ function Process()
 function loginFailed()
 {
     f.invalidateFormElement(session.forms.login.loginsucceeded);
-    
+
     return {
         login_failed: true
     };
@@ -84,14 +175,14 @@ function loginFailed()
 function oAuthFailed()
 {
     f.invalidateFormElement(session.forms.oauthlogin.loginsucceeded);
-    
+
     postFinalizeOAuthLogin();
 }
 
 function oAuthSuccess()
 {
     f.clearFormElement(session.forms.oauthlogin);
-    
+
     postFinalizeOAuthLogin();
 }
 
@@ -99,7 +190,7 @@ function oAuthSuccess()
 function postFinalizeOAuthLogin()
 {
     // to continue to the destination (preserved in the session before InitiateOAuthLogin pipelet)
-    var Location = session.custom['ContinuationURL']; 
+    var Location = session.custom['ContinuationURL'];
 
     delete session.custom['ContinuationURL'];
 
@@ -160,7 +251,7 @@ function OAuthReentryGoogle()
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
 
-    
+
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -193,7 +284,7 @@ function OAuthReentryGooglePlus()
     var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-    
+
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
@@ -208,7 +299,7 @@ function OAuthReentryGooglePlus()
     	oAuthFailed();
     	return;
     }
-    
+
     oAuthSuccess();
 }
 
@@ -227,7 +318,7 @@ function OAuthReentryMicrosoft()
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
 
-    
+
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
@@ -259,7 +350,7 @@ function OAuthReentryFacebook()
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-    
+
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
@@ -292,7 +383,7 @@ function OAuthReentryGitHub()
     var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-    
+
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
@@ -325,7 +416,7 @@ function OAuthReentrySinaWeibo()
     var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-    
+
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
@@ -361,7 +452,7 @@ function OAuthReentryVKontakte()
     var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
     var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
     var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-    
+
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional: true,
@@ -399,6 +490,8 @@ function Logout()
 /*
  * Web exposed methods
  */
+exports.Show                    = g.httpsGet(show);
+exports.LoginForm               = g.httpsPost(loginForm);
 exports.OAuthReentryLinkedIn    = g.httpsGet(OAuthReentryLinkedIn);
 exports.OAuthReentryGoogle      = g.httpsGet(OAuthReentryGoogle);
 exports.OAuthReentryGooglePlus  = g.httpsGet(OAuthReentryGooglePlus);
