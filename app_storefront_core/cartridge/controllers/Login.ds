@@ -1,36 +1,34 @@
 'use strict';
 
 /**
- * Renders the home page.
+ * Handles all customer login related storefront processes.
  *
- * @module controller/Home
+ * @module controller/Login
  */
 
-var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/model/Form');
-var loginForm = Form.get('login');
+var guard          = require('~/cartridge/scripts/guard');
+var pageMeta       = require('~/cartridge/scripts/meta');
+var view           = require('~/cartridge/scripts/view');
+var Form           = require('~/cartridge/scripts/model/Form');
+var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
 
 var LOGIN_TEMPLATE = 'account/login/accountlogin';
-var LOGGER   = dw.system.Logger.getLogger('login');
+var LOGGER         = dw.system.Logger.getLogger('login');
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
-var Customer = require('~/cartridge/scripts/model/Customer');
+var Cart        = require('~/cartridge/scripts/model/Cart');
+var Customer    = require('~/cartridge/scripts/model/Customer');
+var Transaction = require('dw/system/Transaction');
 
 /**
- * Handles all customer login related storefront processes.
+ * This method contains the login page preparation and display, it is called from various
+ * places implicitly when 'loggedIn' is ensured via the {@link module:guard}.
  */
-
-/**
- * This method contains the login procedure specific for the customer account,
- * e.g. order tracking. After login, it redirects to the provided target action.
- */
-function show(args)
+function show()
 {
     loginForm.clear();
+    oauthLoginForm.clear();
     Form.get('ordertrack').clear();
 
     if (customer.registered)
@@ -46,16 +44,40 @@ function show(args)
     }).render(LOGIN_TEMPLATE);
 }
 
+/**
+ * Internal function which reads the URL that should be redirected to after successful login
+ * @return {dw.web.Url} The URL to redirect to in case of success
+ */
+function getTargetUrl()
+{
+    // get the target action which requested this login step before the
+    // form is cleared
+    // @TODO Remove this session based action passing
+    var targetAction = session.forms.login.targetAction.value;
+    var targetParameters = session.forms.login.targetParameters.value;
+
+    if (request.httpParameterMap.original.submitted) {
+        //@TODO make sure only path, no hosts are allowed as redirect target
+        dw.system.Logger.info('Redirecting to "{0}" after successful login',request.httpParameterMap.original.value);
+        return decodeURI(request.httpParameterMap.original.value);
+    } else if (!empty(targetAction)) {
+        if (empty(targetParameters)) {
+            return dw.web.URLUtils.https(targetAction);
+        } else {
+            return dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters));
+        }
+    } else {
+        return dw.web.URLUtils.https('Account-Show');
+    }
+}
+
+/**
+ * Handles the login form actions
+ */
 function handleLoginForm()
 {
     loginForm.handleAction({
         'login'     : function () {
-            // get the target action which requested this login step before the
-            // form is cleared
-            // @TODO Remove this session based action passing
-            var targetAction = session.forms.login.targetAction.value;
-            var targetParameters = session.forms.login.targetParameters.value;
-
             var success = Customer.login(session.forms.login.username.value, session.forms.login.password.value, session.forms.login.rememberme.value);
 
             if(!success){
@@ -68,20 +90,8 @@ function handleLoginForm()
 
             // In case of successful login
             // redirect to the origin who triggered the login process
-            if (request.httpParameterMap.original.submitted) {
-                //@TODO make sure only path, no hosts are allowed as redirect target
-                dw.system.Logger.info('Redirecting to "{0}" after successful login',request.httpParameterMap.original.value);
-                response.redirect(decodeURI(request.httpParameterMap.original.value));
-                return;
-            } else if (!empty(targetAction)) {
-                if (empty(targetParameters)) {
-                    response.redirect(dw.web.URLUtils.https(targetAction));
-                } else {
-                    response.redirect(dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters)));
-                }
-            } else {
-                response.redirect(dw.web.URLUtils.https('Account-Show'));
-            }
+            response.redirect(getTargetUrl());
+
             return;        },
         'register'  : function () {
             response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
@@ -104,19 +114,23 @@ function handleLoginForm()
             return;
         },
         'error' : function(){
-            show();
+            view.get().render(LOGIN_TEMPLATE);
+            return;
         }
     });
 
 }
 
+/**
+ * Handles the OAuth login form
+ */
 function handleOAuthLoginForm()
 {
     oauthLoginForm.handleAction({
         'login'     : function () {
             if (request.httpParameterMap.OAuthProvider.stringValue) {
                 session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
-                session.custom.ContinuationURL = dw.web.URLUtils.https('Login-OAuthReentry').toString();
+                session.custom.ContinuationURL = getTargetUrl().toString();
 
                 LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
                     session.custom.RememberMe,session.custom.ContinuationURL);
@@ -192,291 +206,228 @@ function oldProcess()
     };
 }
 
+function oAuthFailed()
+{
+    session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+    finishOAuthLogin();
+}
 function oAuthSuccess()
 {
     session.forms.oauthlogin.clearFormElement();
     finishOAuthLogin();
 }
 
+function handleOAuthReentry()
+{
+    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
+    if (FinalizeOAuthLoginResult.result === PIPELET_ERROR)
+    {
+        oAuthFailed();
+        return;
+    }
+    var responseText = FinalizeOAuthLoginResult.ResponseText;
+    var oAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
+    var accessToken = FinalizeOAuthLoginResult.AccessToken;
+    // var refreshToken = FinalizeOAuthLoginResult.RefreshToken;
+    // var accessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
+    // var errorStatus = FinalizeOAuthLoginResult.ErrorStatus;
 
+
+    if (null === oAuthProviderID) {
+        LOGGER.warn('OAuth provider id is null.');
+        oAuthFailed();
+        return;
+    }
+    LOGGER.debug('{0} response:\n{1}', oAuthProviderID, responseText);
+    if (null !== responseText) {
+        //wheather to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
+        var rememberMe = session.custom.RememberMe;
+        delete session.custom.RememberMe;
+
+        // LinkedIn returns XML
+        var extProfile = {};
+        if(oAuthProviderID === 'LinkedIn'){
+            var responseReader = new dw.io.Reader(responseText);
+            var xmlStreamReader = new dw.io.XMLStreamReader(responseReader);
+            while (xmlStreamReader.hasNext())
+            {
+                if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT)
+                {
+                    var localElementName = xmlStreamReader.getLocalName();
+                    // ignore the top level person element and read the rest into a plain object
+                    if (localElementName !== 'person')
+                    {
+                        extProfile[localElementName] = xmlStreamReader.getElementText();
+                    }
+                }
+            }
+            xmlStreamReader.close();
+            responseReader.close();
+        }else{
+            // all other providers JSON (as they should)
+            extProfile = JSON.parse(responseText);
+            if (null === extProfile) {
+                LOGGER.warn('Data could not be extracted from the response:\n{0}', responseText);
+                oAuthFailed();
+                return;
+            }
+            if(oAuthProviderID === 'VKontakte'){
+                // they use JSON, but thought it would be cool to add some extra top level elements
+                extProfile = extProfile.response[0];
+            }
+        }
+
+        // This is always id or uid for all providers
+        var userId = extProfile.id || extProfile.uid;
+        if (!userId) {
+            LOGGER.warn( 'Undefined user identifier - make sure you are mapping the correct property from the response.' +
+                ' We are mapping "id" which is not available in the response: \n', extProfile);
+            oAuthFailed();
+            return;
+        }
+        LOGGER.debug('Parsed UserId "{0}" from response: {1}', userId, JSON.stringify(extProfile));
+
+        if(oAuthProviderID === 'SinaWeibo'){
+            // requires additional requests to get the info
+            extProfile = getSinaWeiboAccountInfo(accessToken, userId);
+        }
+
+        var profile = dw.customer.CustomerMgr.getExternallyAuthenticatedCustomerProfile(oAuthProviderID, userId);
+        var customer;
+
+        if (profile === null)
+        {
+            Transaction.wrap(function(){
+                LOGGER.debug('User id: '+userId+' not found, creating a new profile.');
+                customer = dw.customer.CustomerMgr.createExternallyAuthenticatedCustomer(oAuthProviderID, userId);
+                profile = customer.getProfile();
+                var firstName, lastName, email;
+
+                // Dear friends of generic code, now it becomes interesting
+                if (extProfile.name) {
+                    // Google comes with a name property
+                    firstName = extProfile.name.givenName;
+                    lastName = extProfile.name.familyName;
+                }else{
+                    // The other providers use some of these, GitHub & SinaWeibo have just a 'name'
+                    firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
+                    lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
+                }
+                email =  extProfile['email-address'] || extProfile.email;
+                if(!email){
+                    var emails = extProfile.emails;
+                    if (emails && emails.length) {
+                        //first element of the array would be the account email according to Google:
+                        profile.setEmail(extProfile.emails[0].value);
+                    }else{
+                        email = emails['preferred'] || extProfile['emails.account'] || extProfile['emails.personal'] ||
+                            extProfile['emails.business'];
+                    }
+                }
+                LOGGER.debug('Updating profile with "{0} {1} - {2}".',firstName, lastName,email);
+                profile.setFirstName(firstName);
+                profile.setLastName(lastName);
+                profile.setEmail(email);
+            });
+        } else {
+            customer = profile.getCustomer();
+        }
+        var credentials = profile.getCredentials();
+        if (credentials.isEnabled()) {
+            Transaction.wrap(function(){
+                dw.customer.CustomerMgr.loginExternallyAuthenticatedCustomer(oAuthProviderID, userId, rememberMe);
+            });
+            LOGGER.debug( 'Logged in external customer with id: {0}', userId);
+        } else {
+            LOGGER.warn( 'Customer attempting to login into a disabled profile: {0} with id: {1}',
+                profile.getCustomer().getCustomerNo(), userId);
+            oAuthFailed();
+            return;
+        }
+    } else {
+        LOGGER.warn('Response from provider is empty');
+        oAuthFailed();
+        return;
+    }
+
+
+    oAuthSuccess();
+}
+
+/**
+ * Get Sina Weibo account into via addtional requests
+ * @param  {String} accessToken The OAuth access token
+ * @param  {String} userId      The OAuth user ID
+ * @return {Object}             Account info
+ * @todo Migrate httpClient calls to dw.svc.*
+ */
+function getSinaWeiboAccountInfo(accessToken, userId){
+    var name, email;
+    if (null === accessToken) {
+        LOGGER.warn('Exiting because the AccessToken input parameter is null.');
+        return null;
+    }
+    var accessTokenSuffix = '?access_token=' + accessToken;
+    var http = new dw.net.HTTPClient();
+    http.setTimeout(30000); //30 secs
+
+    //Obtain the name:
+    //http://open.weibo.com/wiki/2/users/show/en -> https://api.weibo.com/2/users/show.json
+    var urlUser = 'https://api.weibo.com/2/users/show.json' + accessTokenSuffix +
+        '&uid=' + userId;
+    http.open( 'GET', urlUser );
+    http.send();
+    var resultName  = http.getText();
+    if (200 !== http.statusCode) {
+        LOGGER.warn('Got an error calling:' + urlUser +
+            '. The status code is:' + http.statusCode + ' ,the text is:' + resultName +
+            ' and the error text is:' + http.getErrorText());
+        return null;
+    } else {
+        var weiboUser = JSON.parse(resultName);
+        if (null === weiboUser) {
+            LOGGER.warn('Name could not be extracted from the response:' + resultName);
+            return null;
+        } else {
+            name = weiboUser.name;
+        }
+    }
+
+    //Obtain the email:
+    //http://open.weibo.com/wiki/2/account/profile/email -> https://api.weibo.com/2/account/profile/email.json
+    var urlEmail  = 'https://api.weibo.com/2/account/profile/email.json' + accessTokenSuffix;
+    http.open( 'GET', urlEmail );
+    http.send();
+    var resultEmail  = http.getText();
+    if (200 !== http.statusCode) {//!
+        LOGGER.warn('Email could not be retrieved. Got an error calling:' + urlUser +
+            '. The status code is:' + http.statusCode + ' ,the text is:' + resultEmail +
+            ' and the error text is:' + http.getErrorText() +
+            '. Make sure your application is authorized by Weibo to request email info (usually need to be successfully audited by them.)');
+    } else {
+        var weiboEmail  = JSON.parse(resultEmail);// in the format: ('[{"Email": "weibo_api_tech@sina.com"}]');
+        if (null === weiboEmail) {
+            LOGGER.warn('Email could not be extracted from the response:' + resultEmail);
+        } else {
+            var emails  = weiboEmail;
+            if (emails && 0 < emails.length) {
+                //first element of the array would be the account email according to Google:
+                email = emails[0].Email;
+            }
+        }
+    }
+    return {name : name, email : email};
+}
+
+/**
+ * Internal helper to finish the OAuth login
+ */
 function finishOAuthLogin()
 {
     // to continue to the destination (preserved in the session before InitiateOAuthLogin pipelet)
-    var location = session.custom['ContinuationURL'];
-    delete session.custom['ContinuationURL'];
+    var location = session.custom.ContinuationURL;
+    delete session.custom.ContinuationURL;
     response.redirect(location);
-}
-
-
-function OAuthReentryLinkedIn()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromLinkedInProviderAndLogin.ds'
-    }).execute({
-        OAuthProviderId: OAuthProviderID,
-        ResponseText: ResponseText
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-/**
- * This is the reentry point after an OAuth login, i.e., its URL is passed to the OAuth provider as the redirect URL.
- */
-function OAuthReentryGoogle()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromGoogleProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-
-function OAuthReentryGooglePlus()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromGooglePlusProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-function OAuthReentryMicrosoft()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromMicrosoftProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-function OAuthReentryFacebook()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromFacebookProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-function OAuthReentryGitHub()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromGitHubProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-function OAuthReentrySinaWeibo()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromSinaWeiboProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
-}
-
-/**
- * Logs out the authenticated customer
- */
-function OAuthReentryVKontakte()
-{
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-    var ResponseText = FinalizeOAuthLoginResult.ResponseText;
-    var AccessToken = FinalizeOAuthLoginResult.AccessToken;
-    var RefreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    var AccessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    var OAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var ErrorStatus = FinalizeOAuthLoginResult.ErrorStatus;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/login/oauth/ObtainAccountFromVKontakteProviderAndLogin.ds'
-    }).execute({
-        ResponseText: ResponseText,
-        OAuthProviderID: OAuthProviderID,
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-    	oAuthFailed();
-    	return;
-    }
-
-    oAuthSuccess();
 }
 
 function Logout()
@@ -488,27 +439,37 @@ function Logout()
 	//Cart.get().calculate();
 
     response.redirect(dw.web.URLUtils.https('Account-Show'));
+    return;
 }
-
-
-/*
- * Module exports
- */
 
 /*
  * Web exposed methods
  */
+/** @see module:controller/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
+/** @see module:controller/Login~handleLoginForm */
 exports.LoginForm               = guard.ensure(['https','post'], handleLoginForm);
+/** @see module:controller/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
-exports.OAuthReentryLinkedIn    = guard.ensure(['https','get'], OAuthReentryLinkedIn);
-exports.OAuthReentryGoogle      = guard.ensure(['https','get'], OAuthReentryGoogle);
-exports.OAuthReentryGooglePlus  = guard.ensure(['https','get'], OAuthReentryGooglePlus);
-exports.OAuthReentryMicrosoft   = guard.ensure(['https','get'], OAuthReentryMicrosoft);
-exports.OAuthReentryFacebook    = guard.ensure(['https','get'], OAuthReentryFacebook);
-exports.OAuthReentryGitHub      = guard.ensure(['https','get'], OAuthReentryGitHub);
-exports.OAuthReentrySinaWeibo   = guard.ensure(['https','get'], OAuthReentrySinaWeibo);
-exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], OAuthReentryVKontakte);
+/** @see module:controller/Login~handleOAuthReentry */
+exports.OAuthReentry            = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryLinkedIn    = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryGoogle      = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryGooglePlus  = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryMicrosoft   = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryFacebook    = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryGitHub      = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentrySinaWeibo   = guard.ensure(['https','get'], handleOAuthReentry);
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], handleOAuthReentry);
+/** @see module:controller/Login~show */
 exports.Logout                  = guard.all(Logout);
 
 /*

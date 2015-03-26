@@ -63,6 +63,6 @@ function hostName() {
  * Web exposed methods
  */
 /** @see module:controller/RedirectURL~start */
-exports.Start = guard.ensure(['get'], start);
+exports.Start = guard.ensure([], start);
 /** @see module:controller/RedirectURL~hostName */
-exports.Hostname = guard.ensure(['get'], hostName);
+exports.Hostname = guard.ensure([], hostName);
