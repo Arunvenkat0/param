@@ -94,24 +94,40 @@ function switchToHttps()
     return true;
 }
 
+/**
+ * The available filters for endpoints, the names of the methods can be used in {@link module:guard~ensure}
+ * @namespace
+ */
 var Filters = {
+    /** Action must be accessed via HTTPS */
     https : function() {return request.isHttpSecure();},
+    /** Action must be accessed via HTTP */
     http : function() {return !this.https();},
+    /** Action must be accessed via a GET request */
     get : function() {return request.httpMethod === 'GET';},
+    /** Action must be accessed via a POST request */
     post : function() {return request.httpMethod === 'POST';},
-    loggedIn : function() {return customer.authenticated;}
+    /** Action must only be accessed authenticated csutomers */
+    loggedIn : function() {return customer.authenticated;},
+    /** Action must only be used as remote include */
+    include : function() {return true;}
 };
 
 
 /**
- * Generic function, which allows to ensure multiple request types
+ * This function should be used to secure public endpoints
+ *
+ * @param  {string[]} filters The filters which need to be passed to access the page
+ * @param  {function} action  The action which represents the resource to show
+ * @see module:guard~Filters
  */
-function ensure (filters, action, error) {
+function ensure (filters, action) {
     return expose(function() {
+        var error;
         var filtersPassed = true;
         var errors = [];
         for (var i = 0; i < filters.length; i++) {
-            LOGGER.info('Ensuring "{0}" for action {1}...',filters[i],action.name);
+            LOGGER.info('Ensuring "{0}"...',filters[i]  );
 
             filtersPassed = Filters[filters[i]].apply(Filters);
             if (!filtersPassed) {
@@ -208,10 +224,6 @@ exports.get = get;
 exports.post = post;
 /** @see module:guard~expose */
 exports.all = expose;
-/**
- * Use this method to guard actions which are only to be called via remote include
- */
-exports.include = expose;
 
 // often needed combinations
 /**

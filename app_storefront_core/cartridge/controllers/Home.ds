@@ -94,10 +94,10 @@ function deviceLayouts() {
 /** @see module:controller/Home~show */
 exports.Show = guard.ensure(['get'], show);
 /** @see module:controller/Home~includeHeader */
-exports.IncludeHeader = guard.ensure(['get'], includeHeader);
-//exports.IncludeHeaderMenu           = guard.ensure(['get'],includeHeaderMenu);
+exports.IncludeHeader = guard.ensure(['include'], includeHeader);
+//exports.IncludeHeaderMenu           = guard.ensure(['include'],includeHeaderMenu);
 /** @see module:controller/Home~includeHeaderCustomerInfo */
-exports.IncludeHeaderCustomerInfo = guard.ensure(['get'], includeHeaderCustomerInfo);
+exports.IncludeHeaderCustomerInfo = guard.ensure(['include'], includeHeaderCustomerInfo);
 /** @see module:controller/Home~errorNotFound */
 exports.ErrorNotFound = guard.ensure(['get'], errorNotFound);
 /** @see module:controller/Home~mobileSite */

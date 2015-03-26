@@ -2,7 +2,7 @@
 <isif condition="${session.customer.anonymous || session.customer.externallyAuthenticated}">
 	<isif condition="${session.customer.anonymous}">
 		<p>${Resource.msg('global.or','locale',null)}</p>
-		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>	
+		<p>${Resource.msgf('logininclude.oauthcustomersheader','account',"")}</p>
 	<iselse/>
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
@@ -11,7 +11,10 @@
 		<div class="error-form">${Resource.msgf('logininclude.oauthloginerror','account',"")}</div>
 	</isif>
 
-	<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${session.forms.oauthlogin.htmlName}">
+	<isif condition="${typeof FormController !== undefined}">
+		<isset name="FormController" value="${'Login-OAuthLoginForm'}" scope="page"/>
+	</isif>
+	<form action="${FormController}" method="post" class="clearfix" id="${session.forms.oauthlogin.htmlName}">
 		<fieldset>
 
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('GooglePlus' == session.customer.profile.credentials.authenticationProviderID))}">
@@ -62,7 +65,7 @@
 				 class="oAuthIcon"
 				 id='SinaWeibo'
 				 name="${session.forms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"				 
+				 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"
 				 />
 			</isif>
 
@@ -71,14 +74,14 @@
 				 class="oAuthIcon"
 				 id='VKontakte'
 				 name="${session.forms.oauthlogin.login.htmlName}"
-				 src="${URLUtils.staticURL('/images/VKontakte.png')}"				 
+				 src="${URLUtils.staticURL('/images/VKontakte.png')}"
 				 />
 			</isif>
 
 			<input type="hidden" name="rememberme" id="rememberme" value="">
-			<input type="hidden" name="${session.forms.oauthlogin.secureKeyHtmlName}" 
+			<input type="hidden" name="${session.forms.oauthlogin.secureKeyHtmlName}"
 				value="${session.forms.oauthlogin.secureKeyValue}"/>
 			<input type="hidden" name="OAuthProvider" id="OAuthProvider" value=""/>
 		</fieldset>
-	</form>		
+	</form>
 </isif>
