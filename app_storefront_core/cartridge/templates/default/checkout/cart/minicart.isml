@@ -13,7 +13,6 @@
 
 <iscomment> the mini cart total which is always visible</iscomment>
 <div class="mini-cart-total">
-	<span class="mini-cart-label"><i class="minicart-icon fa fa-shopping-cart"></i><span class="visually-hidden">${Resource.msg('minicart.label','checkout',null)}</span>
 	<isif condition="${(pdict.Basket != null) && (pdict.Basket.productLineItems.size() + pdict.Basket.giftCertificateLineItems.size() > 0 )}">
 		<isscript>
 			// calculate the total number of items in the cart by adding quantities together
@@ -29,11 +28,17 @@
 			// add the gift certificates to cart quantity
 			cartQty += pdict.Basket.giftCertificateLineItems.size();
 		</isscript>
-		<a href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}" class="mini-cart-link">
-			<span class="minicart-quantity"><isprint value="${cartQty}" formatter="##" /></span>
+		<a class="mini-cart-link" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">
+			<i class="minicart-icon fa fa-shopping-cart"></i>
+			<span class="minicart-quantity">
+				<isprint value="${cartQty}" formatter="##" />
+			</span>
 		</a>
 	<iselse/>
-		<span class="minicart-quantity"></span>
+		<a class="mini-cart-link mini-cart-empty" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">
+			<i class="fa fa-shopping-cart"></i>
+			<span class="minicart-quantity"></span>
+		</a>
 	</isif>
 </div>
 
