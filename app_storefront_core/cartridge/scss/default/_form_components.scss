@@ -8,7 +8,7 @@ legend {
 	font-size: 1.1em;
 	font-weight: 700;
 	margin: 0;
-	padding: 14px 2% 10px;
+	padding: 1.16em 2% .83em;
 	position: relative;
 	text-transform: uppercase;
 	width: 96%;
@@ -20,7 +20,7 @@ legend {
 		font-weight: 400;
 		position: relative;
 		text-transform: none;
-		padding: 0 .5;
+		padding: 0 .5em;
 		em {
 			color: $night-rider;
 		}
@@ -32,7 +32,7 @@ legend {
 	font-size: 12px;
 	font-weight: 400;
 	position: relative;
-	padding: 2px 0;
+	padding: .16em 0;
 	text-transform: none
 	em {
 		color: $night-rider;
@@ -58,7 +58,7 @@ label {
 	text-align: right;
 	width: 22%;
 	span {
-		margin-right: 5px;
+		margin-right: .42em;
 	}
 }
 
@@ -197,7 +197,7 @@ div.error {
 	.form-row {
 		clear: none;
 		float: left;
-		margin: 5px 2% 0 0;
+		margin: .42em 2% 0 0;
 		width: 28%;
 	}
 	label {
@@ -211,7 +211,7 @@ div.error {
 	}
 	.form-row-button {
 		float: left;
-		margin: 30px 0 0;
+		margin: 2.5em 0 0;
 		width: 10%;
 	}
 	button {

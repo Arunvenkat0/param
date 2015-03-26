@@ -3,21 +3,21 @@
 }
 
 #category-level-1 {
-	a {
-		&.refinement-link {
-			background: none repeat scroll 0 0 transparent;
-			padding: 0 0 0 10px;
-		}
-		&.active {
-			font-weight: bold;
-		}
-	}
 	li {
-		&.expandable {
-			background: url("../images/interface/icon-category-expand-off.png") no-repeat scroll 2px 5px transparent;
+		color: $dim-gray;
+		display: block;
+		.refinement-link {
+			background: none repeat scroll 0 0 transparent;
+			padding: 0 0 0 1em;
 		}
-		&.active {
-			background-position: -490px 5px;
+		&.expandable {
+			.refinement-link {
+				padding: 0 0 0 .4em;
+			}
+			.active {
+				font-weight: bold;
+				padding: 0 0 0 .2em;
+			}
 		}
 	}
 }
@@ -25,33 +25,24 @@
 #category-level-2 {
 	a {
 		&.active {
-			color: $black;
-			font-style: italic;
-			font-weight: normal;
+			color: $night-rider;
+			font-weight: 700;
 		}
 		&.refinement-link {
-			margin: 0 0 0 6px;
+			margin: 0 0 0 .4em;
 			padding: 0;
 		}
 	}
-	li {
-		&.expandable {
-			background: url("../images/interface/icon-refine-link-arrow.png") no-repeat scroll left 6px transparent;
-		}
-		&.active {
-			background-position: left -47px;
-			color: $black;
-			font-style: italic;
-		}
-	}
 }
-
+#category-level-2 {
+	padding: .5em .1em 0 .7em;
+}
 #category-level-3 {
-	padding: 5px 0 0;
+	padding: .3em 0 0;
 	a {
 		&.refinement-link {
 			font-style: normal;
-			margin: 0 0 0 15px;
+			margin: 0 0 0 .9em;
 			padding: 0;
 		}
 		&.active {}
@@ -63,22 +54,24 @@
 }
 
 .refinement-header {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
+	background-color: $white-smoke;
+	border-top: 1px solid $gainsboro;
 	display: block;
 	font-size: 1.1em;
 	font-weight: bold;
-	letter-spacing: 1.5px;
+	letter-spacing: 0.125em;
 	margin: 0;
-	padding: 14px 9px 9px;
+	padding: 1.15em .75em .75em;
 	text-transform: uppercase;
 }
 
 .refinement h3 {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
+	background-color: $white-smoke;
+	border-top: 1px solid $gainsboro;
 	font-size: 1.1em;
-	letter-spacing: 1.5px;
+	letter-spacing: 0.125em;
 	margin: 0;
-	padding: 14px 9px 9px;
+	padding: 1.15em .75em .75em;
 	text-transform: uppercase;
 	.ie7 & {
 		clear: both;
@@ -87,29 +80,35 @@
 
 .refinement {
 	h3 {
-		span {
-			background: url("../images/interface/icon-refinement-block-arrow.png") no-repeat scroll left -87px transparent;
-			padding: 0 0 0 20px;
-		}
-		&.expanded span {
-			background-position: left top;
+		i {
+			color: $rain-forest
 		}
 	}
 	ul {
 		list-style: none outside none;
 		margin: 0;
-		padding: 8px 7px 5px;
+		padding: .65em .55em .4em;
 	}
 	li {
-		padding: 3px 2px 5px 5px;
+		padding: .5em;
 	}
 	ul {
+		li {
+			i {
+				color: $gainsboro;
+			}
+			&.selected {
+				i {
+					color: $rain-forest;
+				}
+			}
+		}
 		&.swatches li {
 			float: left;
-			padding: 2px;
+			padding: .16em;
 			a {
 				border: 2px solid $gainsboro;
-				border-radius: 6px 6px 6px 6px;
+				border-radius: .5em;
 				display: block;
 				padding: 0.2em 0.8em;
 			}
@@ -135,15 +134,13 @@
 		top: 1.1em;
 	}
 	.refinement-link {
-		background: url("../images/interface/icon-refine-link-check.png") no-repeat scroll left top transparent;
 		border: 0 none;
-		padding: 0 0 0 1.5em;
 	}
 	.selected .refinement-link {
 		background-position: left bottom;
 	}
 	.refinement-top-level {
-		padding: 12px;
+		padding: 1em;
 	}
 }
 
@@ -156,27 +153,26 @@
 	ul {
 		border: 0 none;
 		list-style: none outside none;
-		margin: 7px 0;
+		margin: .58em 0;
 		padding: 0;
 		li {
 			list-style: none outside none !important;
-			margin: 0 0 7px !important;
+			margin: 0 0 .58em !important;
 		}
 	}
 	.toggle {
-		background: url("../images/interface/icon-toggle-arrow.png") no-repeat scroll left 12px transparent;
 		border: 0 none;
 		display: block;
 		font-size: 1em;
 		font-weight: 700;
-		margin: 10px 0 7px;
-		padding: 8px 0 0 15px;
+		margin: .83em 0 .58em;
+		padding: .65em 0 0 1.25em;
 		text-transform: uppercase;
+		span {
+			background: none repeat scroll 0 0 transparent;
+		}
 	}
 	.expanded {
 		background-position: left -96px;
-	}
-	.toggle span {
-		background: none repeat scroll 0 0 transparent;
 	}
 }

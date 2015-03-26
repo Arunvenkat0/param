@@ -4,7 +4,7 @@
 	padding-bottom: 1em;
 	div {
 		display: inline;
-		padding: 0 10px 0 0;
+		padding: 0 .83em 0 0;
 	}
 	span {
 		text-transform: uppercase;
@@ -17,7 +17,7 @@
 		color: $night-rider;
 	}
 	i {
-		padding-left: 10px;
+		padding-left: .83em;
 		color: $very-light-gray;
 	}
 	.step-3 {
@@ -32,11 +32,11 @@
 }
 
 .shipping-method {
-	margin-top: 22px;
+	margin-top: 1.83em;
 	label {
 		display: inline;
 		float: none !important;
-		padding-right: 5px !important;
+		padding-right: .42em !important;
 	}
 	.shipping-description {
 		display: inline;
@@ -137,11 +137,11 @@
 	.order-totals-table {
 		width: 90%;
 		td {
-			padding: 5px 0 0;
+			padding: .42em 0 0;
 		}
 		.order-total td {
 			font-size: 0.9em;
-			padding: 10px 0 0 5px;
+			padding: .83em 0 0 .42em;
 		}
 	}
 }
@@ -156,7 +156,7 @@
 }
 
 .order-component-block {
-	margin: 20px 0;
+	margin: 1.67em 0;
 	.section-header a {
 		float: right;
 		font-weight: normal;
@@ -186,7 +186,7 @@
 .submit-order {
 	clear: both;
 	display: block;
-	padding: 20px 0 0;
+	padding: 1.67em 0 0;
 	text-align: right;
 	.back-to-cart {
 		font-size: 1.1em;
@@ -204,7 +204,7 @@
 		font-size: 2.5em;
 	}
 	.order-shipment-table {
-		margin: 0 0 20px;
+		margin: 0 0 1.67em;
 		.order-shipment-details {
 			border-right: 1px solid $gainsboro;
 			min-width: 200px;
@@ -222,8 +222,8 @@
 
 .confirmation-message {
 	border-bottom: 3px solid $citrus;
-	margin-bottom: 20px;
-	padding-bottom: 20px;
+	margin-bottom: 1.67em;
+	padding-bottom: 1.67em;
 }
 
 .order-discount {
@@ -231,16 +231,16 @@
 }
 
 .gift-cert-used {
-	padding: 10px 0;
+	padding: .83em 0;
 }
 
 .order-detail-options {
 	border-top: 1px solid $gainsboro;
-	margin: 20px 0 0;
-	padding: 20px 0 0;
+	margin: 1.67em 0 0;
+	padding: 1.67em 0 0;
 	text-align: right;
 	a {
-		margin: 0 10px;
+		margin: 0 .83em;
 	}
 }
 
@@ -255,7 +255,7 @@
 .pt_checkout #main,
 .pt_cart #main,
 .pt_order-confirmation #main {
-	padding: 0 14px;
+	padding: 0 1.15em;
 }
 
 .pt_cart .breadcrumb {
@@ -263,7 +263,7 @@
 }
 
 .pt_order-confirmation .order-confirmation-details .content-header {
-	margin: 7px 0 !important;
+	margin: .6em 0 !important;
 }
 
 .order-shipment-details {
@@ -290,5 +290,5 @@
 
 .billing-error {
 	color: red;
-	margin: 0 0 10px 24%;
+	margin: 0 0 .83em 24%;
 }
