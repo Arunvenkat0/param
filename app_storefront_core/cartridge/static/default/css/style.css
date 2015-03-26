@@ -564,7 +564,7 @@ legend {
   font-size: 1.1em;
   font-weight: 700;
   margin: 0;
-  padding: 14px 2% 10px;
+  padding: 1.16em 2% .83em;
   position: relative;
   text-transform: uppercase;
   width: 96%; }
@@ -575,7 +575,7 @@ legend {
     font-weight: 400;
     position: relative;
     text-transform: none;
-    padding: 0 .5; }
+    padding: 0 .5em; }
     legend span em {
       color: #333; }
 
@@ -584,7 +584,7 @@ legend {
   font-size: 12px;
   font-weight: 400;
   position: relative;
-  padding: 2px 0;
+  padding: .16em 0;
   text-transform: none em;
   text-transform-color: #333; }
 
@@ -606,7 +606,7 @@ label {
   text-align: right;
   width: 22%; }
   .form-label-text span {
-    margin-right: 5px; }
+    margin-right: .42em; }
 
 .form-row {
   clear: both;
@@ -712,7 +712,7 @@ div.error {
 .form-inline .form-row {
   clear: none;
   float: left;
-  margin: 5px 2% 0 0;
+  margin: .42em 2% 0 0;
   width: 28%; }
 .form-inline label {
   padding: 0 0 0.75em;
@@ -723,7 +723,7 @@ div.error {
   width: 95%; }
 .form-inline .form-row-button {
   float: left;
-  margin: 30px 0 0;
+  margin: 2.5em 0 0;
   width: 10%; }
 .form-inline button {
   padding-left: 0;
@@ -895,7 +895,7 @@ div.error {
 .product-listing-1x4 {
   background: none repeat scroll 0 0 #fff;
   overflow: hidden;
-  padding: 10px 0; }
+  padding: .83em 0; }
   .product-listing-1x4 .search-result-items .grid-tile {
     margin: 0 1% 0 2%;
     width: 18%; }
@@ -903,12 +903,12 @@ div.error {
 .account-nav-asset {
   background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
   line-height: 1.5em;
-  margin: 40px 10px;
-  padding: 10px 0; }
+  margin: 3.33em .83em;
+  padding: .83em 0; }
   .account-nav-asset h2 {
     font-style: italic;
     font-weight: 400;
-    margin: 14px 0 20px; }
+    margin: 1.16em 0 1.66em; }
 
 .content-asset p {
   line-height: 1.6em;
@@ -932,21 +932,21 @@ div.error {
     height: 80px;
     list-style: none outside none !important;
     margin: 0 0 0 4%;
-    padding: 20px 0 0;
+    padding: 1.66em 0 0;
     position: relative;
     width: 46%; }
     .content-asset .account-options li a {
       display: block;
       font-size: 1.5em;
-      line-height: 30px;
-      padding: 0 0 0 55px; }
+      line-height: 2.5em;
+      padding: 0 0 0 4.58em; }
     .content-asset .account-options li img {
       left: 0;
       position: absolute;
-      top: 10px; }
+      top: .83em; }
     .content-asset .account-options li p {
       margin: 0;
-      padding-left: 55px; }
+      padding-left: 4.58em; }
 
 .browser-compatibility-alert {
   background: url("../images/interface/icon-alert.png") no-repeat scroll 1em 1em #faeded;
@@ -1410,7 +1410,7 @@ nav[role="navigation"] {
 
 .breadcrumb {
   font-size: 1em;
-  line-height: 1.5;
+  line-height: 1em;
   margin: 0;
   padding: .1em .7em; }
   .breadcrumb li {
@@ -1442,8 +1442,8 @@ nav[role="navigation"] {
   background-color: rgba(132, 189, 0, 0.3);
   display: inline-block;
   border-radius: 3px;
-  margin: 0 5px 5px 0;
-  padding: 0 5px; }
+  margin: 0 .42em .42em 0;
+  padding: 0 .42em; }
 
 .breadcrumb-relax {
   background: none;
@@ -1572,18 +1572,18 @@ nav[role="navigation"] {
   display: block;
   font-size: 1.1em;
   font-weight: bold;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.125em;
   margin: 0;
-  padding: 14px 9px 9px;
+  padding: 1.15em .75em .75em;
   text-transform: uppercase; }
 
 .refinement h3 {
   background-color: #efefef;
   border-top: 1px solid #e0e0e0;
   font-size: 1.1em;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.125em;
   margin: 0;
-  padding: 14px 9px 9px;
+  padding: 1.15em .75em .75em;
   text-transform: uppercase; }
   .ie7 .refinement h3 {
     clear: both; }
@@ -1593,7 +1593,7 @@ nav[role="navigation"] {
 .refinement ul {
   list-style: none outside none;
   margin: 0;
-  padding: 8px 7px 5px; }
+  padding: .65em .55em .4em; }
 .refinement li {
   padding: .5em; }
 .refinement ul li i {
@@ -1602,10 +1602,10 @@ nav[role="navigation"] {
   color: #64772d; }
 .refinement ul.swatches li {
   float: left;
-  padding: 2px; }
+  padding: .16em; }
   .refinement ul.swatches li a {
     border: 2px solid #e0e0e0;
-    border-radius: 6px 6px 6px 6px;
+    border-radius: .5em;
     display: block;
     padding: 0.2em 0.8em; }
   .refinement ul.swatches li.selected a {
@@ -1628,7 +1628,7 @@ nav[role="navigation"] {
 .refinement .selected .refinement-link {
   background-position: left bottom; }
 .refinement .refinement-top-level {
-  padding: 12px; }
+  padding: 1em; }
 
 .scrollable {
   height: 10em;
@@ -1637,18 +1637,18 @@ nav[role="navigation"] {
 .nav ul {
   border: 0 none;
   list-style: none outside none;
-  margin: 7px 0;
+  margin: .58em 0;
   padding: 0; }
   .nav ul li {
     list-style: none outside none !important;
-    margin: 0 0 7px !important; }
+    margin: 0 0 .58em !important; }
 .nav .toggle {
   border: 0 none;
   display: block;
   font-size: 1em;
   font-weight: 700;
-  margin: 10px 0 7px;
-  padding: 8px 0 0 15px;
+  margin: .83em 0 .58em;
+  padding: .65em 0 0 1.25em;
   text-transform: uppercase; }
   .nav .toggle span {
     background: none repeat scroll 0 0 transparent; }
@@ -2044,7 +2044,7 @@ footer {
   background-color: #e0e0e0;
   float: left;
   height: 55px;
-  margin-right: 13px;
+  margin-right: 1.08em;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -2054,7 +2054,7 @@ footer {
     color: #fff;
     cursor: pointer;
     display: none;
-    padding: 0 2px;
+    padding: 0 .16em;
     position: absolute;
     right: 0;
     top: 0;
@@ -2064,7 +2064,7 @@ footer {
   .compare-item .compare-item-number {
     color: #ccc;
     font-size: 3em;
-    margin-top: 6px; }
+    margin-top: .5em; }
 
 .compare-item-image {
   max-width: 100%;
@@ -2820,7 +2820,7 @@ ul.product-availability-list {
   padding-bottom: 1em; }
   .checkout-progress-indicator div {
     display: inline;
-    padding: 0 10px 0 0; }
+    padding: 0 .83em 0 0; }
   .checkout-progress-indicator span {
     text-transform: uppercase; }
   .checkout-progress-indicator .active span {
@@ -2829,7 +2829,7 @@ ul.product-availability-list {
   .checkout-progress-indicator a {
     color: #333; }
   .checkout-progress-indicator i {
-    padding-left: 10px;
+    padding-left: .83em;
     color: #ccc; }
   .checkout-progress-indicator .step-3 {
     padding-right: 0; }
@@ -2838,11 +2838,11 @@ ul.product-availability-list {
   height: 3em; }
 
 .shipping-method {
-  margin-top: 22px; }
+  margin-top: 1.83em; }
   .shipping-method label {
     display: inline;
     float: none !important;
-    padding-right: 5px !important; }
+    padding-right: .42em !important; }
   .shipping-method .shipping-description {
     display: inline; }
 
@@ -2918,10 +2918,10 @@ ul.product-availability-list {
   .checkout-order-totals .order-totals-table {
     width: 90%; }
     .checkout-order-totals .order-totals-table td {
-      padding: 5px 0 0; }
+      padding: .42em 0 0; }
     .checkout-order-totals .order-totals-table .order-total td {
       font-size: 0.9em;
-      padding: 10px 0 0 5px; }
+      padding: .83em 0 0 .42em; }
 
 .place-order-totals {
   clear: both; }
@@ -2930,7 +2930,7 @@ ul.product-availability-list {
     width: 50%; }
 
 .order-component-block {
-  margin: 20px 0; }
+  margin: 1.67em 0; }
   .order-component-block .section-header a {
     float: right;
     font-weight: normal; }
@@ -2954,7 +2954,7 @@ ul.product-availability-list {
 .submit-order {
   clear: both;
   display: block;
-  padding: 20px 0 0;
+  padding: 1.67em 0 0;
   text-align: right; }
   .submit-order .back-to-cart {
     font-size: 1.1em; }
@@ -2966,7 +2966,7 @@ ul.product-availability-list {
 .pt_order-confirmation h1 {
   font-size: 2.5em; }
 .pt_order-confirmation .order-shipment-table {
-  margin: 0 0 20px; }
+  margin: 0 0 1.67em; }
   .pt_order-confirmation .order-shipment-table .order-shipment-details {
     border-right: 1px solid #e0e0e0;
     min-width: 200px; }
@@ -2979,22 +2979,22 @@ ul.product-availability-list {
 
 .confirmation-message {
   border-bottom: 3px solid #84bd00;
-  margin-bottom: 20px;
-  padding-bottom: 20px; }
+  margin-bottom: 1.67em;
+  padding-bottom: 1.67em; }
 
 .order-discount {
   color: #990000; }
 
 .gift-cert-used {
-  padding: 10px 0; }
+  padding: .83em 0; }
 
 .order-detail-options {
   border-top: 1px solid #e0e0e0;
-  margin: 20px 0 0;
-  padding: 20px 0 0;
+  margin: 1.67em 0 0;
+  padding: 1.67em 0 0;
   text-align: right; }
   .order-detail-options a {
-    margin: 0 10px; }
+    margin: 0 .83em; }
 
 .summary .edit {
   position: absolute;
@@ -3004,13 +3004,13 @@ ul.product-availability-list {
   line-height: 1.5em; }
 
 .pt_checkout #main, .pt_cart #main, .pt_order-confirmation #main {
-  padding: 0 14px; }
+  padding: 0 1.15em; }
 
 .pt_cart .breadcrumb {
   padding-left: 0; }
 
 .pt_order-confirmation .order-confirmation-details .content-header {
-  margin: 7px 0 !important; }
+  margin: .6em 0 !important; }
 
 .order-shipment-details .label, .order-shipment-details .firstname, .order-shipment-details .lastname {
   font-weight: bold; }
@@ -3028,7 +3028,7 @@ ul.product-availability-list {
 
 .billing-error {
   color: red;
-  margin: 0 0 10px 24%; }
+  margin: 0 0 .83em 24%; }
 
 .shippingaddress .select-address {
   width: 100%;
@@ -3181,7 +3181,7 @@ h1 .account-logout {
   border: 1px solid #efefef;
   margin-bottom: -1px;
   overflow: auto;
-  padding: 10px; }
+  padding: .83em; }
   .pt_gift-registry .add-gift-cert p {
     color: #999;
     font-style: italic;
@@ -3204,7 +3204,7 @@ h1 .account-logout {
 
 .page-content-tab-wrapper {
   border: 1px solid #efefef;
-  padding: 5px; }
+  padding: .42em; }
 
 .gift-reg-purchases .item-purchased-by dd {
   float: left;
@@ -3232,16 +3232,17 @@ h1 .account-logout {
 
 .gift-certificate-purchase {
   background: none repeat scroll 0 0 #efefef;
-  padding: 10px; }
+  margin-bottom: 1em;
+  padding: .83em; }
   .gift-certificate-purchase .content-asset {
     float: left;
     width: 50%; }
     .gift-certificate-purchase .content-asset img {
-      margin: 20px 0; }
+      margin: 1.66em 0; }
   .gift-certificate-purchase form {
     background: none repeat scroll 0 0 #fff;
     float: right;
-    padding: 0 20px 20px;
+    padding: 0 1.66em 1.66em;
     width: 40%; }
     .gift-certificate-purchase form .input-text, .gift-certificate-purchase form .input-textarea {
       width: 90%; }
@@ -3253,33 +3254,34 @@ h1 .account-logout {
     .gift-certificate-purchase form .form-row-button {
       clear: none;
       float: left;
-      margin: 25px 0 0 20px;
+      margin: 2.1em 0 0 1.66em;
       width: 50%; }
   .gift-certificate-purchase .cert-amount .form-caption {
-    margin: 20px 0 0;
+    margin: 1.66em 0 0;
     position: absolute;
     width: 40%; }
   .gift-certificate-purchase .cert-amount.error {
-    padding-bottom: 35px; }
+    padding-bottom: 2.92em; }
   .gift-certificate-purchase span.error {
     margin-left: 2%; }
 
 .check-balance {
   border-bottom: 1px solid #e0e0e0;
-  margin: 0 0 20px;
-  padding: 0 0 20px; }
+  margin: 0 0 1.66em;
+  padding: 0 0 1.66em; }
 
 .gift-cert-balance {
   float: left;
   width: 40%; }
+  .gift-cert-balance label {
+    display: none; }
   .gift-cert-balance input {
     margin-top: 0;
-    width: 90%; }
+    width: 93%; }
   .gift-cert-balance .form-caption {
     margin-left: 0; }
 
 .gift-cert-balance-submit {
-  padding-top: 13px;
   clear: none;
   float: left; }
 
