@@ -22,7 +22,7 @@
 				<div class="error-form">${Resource.msg('logininclude.locked','account',null)}</div>
 			<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && (pdict.TempCustomer.profile.credentials.remainingLoginAttempts == 1)}">
 				<div class="error-form">${Resource.msg('logininclude.willbelocked','account',null)}</div>
-			<iselseif condition="${pdict.RegistrationStatus != false && pdict.RegistrationStatus.code == 'CustomerAlreadyExistError'}">
+			<iselseif condition="${pdict.RegistrationStatus != null &&  pdict.RegistrationStatus != false && pdict.RegistrationStatus.code == 'CustomerAlreadyExistError'}">
 				<div class="error-form">${Resource.msg('logininclude.loginfberror','account',null)}</div>
 			<iselseif condition="${!session.forms.login.loginsucceeded.valid}">
 				<div class="error-form">${Resource.msg('logininclude.loginerror','account',null)}</div>

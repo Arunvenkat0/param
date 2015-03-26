@@ -1,8 +1,24 @@
-var g = require('./dw/guard');
-var f = require('./dw/form');
+'use strict';
+
+/**
+ * Renders the home page.
+ *
+ * @module controller/Home
+ */
+
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/model/Form');
+var loginForm = Form.get('login');
+var oauthLoginForm = Form.get('oauthlogin');
+
+var LOGIN_TEMPLATE = 'account/login/accountlogin';
+var LOGGER   = dw.system.Logger.getLogger('login');
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
+var Customer = require('~/cartridge/scripts/model/Customer');
 
 /**
  * Handles all customer login related storefront processes.
@@ -14,68 +30,47 @@ var Cart = require('~/cartridge/scripts/model/Cart');
  */
 function show(args)
 {
-    var forms = session.forms;
-
-    f.clearFormElement(forms.ordertrack);
-    f.clearFormElement(forms.login);
+    loginForm.clear();
+    Form.get('ordertrack').clear();
 
     if (customer.registered)
     {
-        forms.login.username.value = customer.profile.credentials.login;
-        forms.login.rememberme.value = true;
+        loginForm.object.username.value = customer.profile.credentials.login;
+        loginForm.object.rememberme.value = true;
     }
 
-    //w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent('myaccount-login'));
+    pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
-    response.renderTemplate('account/login/accountlogin', {
+    view.get({
         RegistrationStatus : false
-    });
+    }).render(LOGIN_TEMPLATE);
 }
 
-function loginForm()
+function handleLoginForm()
 {
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null)
-    {
-        if (TriggeredAction.formId === 'findorder')
-        {
-            var OrderController = require('./Order');
-            var FindResult = OrderController.Find();
-            if (FindResult.error)
-            {
-                // TODO redirect
-                response.renderTemplate('account/login/accountlogin', {
-                    OrderNotFound : true
-                });
-                return;
-            }
-            // TODO redirect
-            response.renderTemplate('account/orderhistory/orderdetails', {
-                Order : FindResult.Order
-            });
-            return;
-        }
-        else if (TriggeredAction.formId === 'login')
-        {
+    loginForm.handleAction({
+        'login'     : function () {
             // get the target action which requested this login step before the
             // form is cleared
+            // @TODO Remove this session based action passing
             var targetAction = session.forms.login.targetAction.value;
             var targetParameters = session.forms.login.targetParameters.value;
 
-            var LoginController = require('./Login');
-            var ProcessResult = LoginController.Process();
-            if (ProcessResult.login_failed)
-            {
-                // TODO redirect
-                response.renderTemplate('account/login/accountlogin');
+            var success = Customer.login(session.forms.login.username.value, session.forms.login.password.value, session.forms.login.rememberme.value);
+
+            if(!success){
+                session.forms.login.loginsucceeded.invalidateFormElement();
+                view.get().render(LOGIN_TEMPLATE);
                 return;
+            }else{
+                loginForm.clear();
             }
 
-            // login successful
+            // In case of successful login
             // redirect to the origin who triggered the login process
             if (request.httpParameterMap.original.submitted) {
                 //@TODO make sure only path, no hosts are allowed as redirect target
-                dw.system.Logger.info('Redirecting to {0}',request.httpParameterMap.original.value);
+                dw.system.Logger.info('Redirecting to "{0}" after successful login',request.httpParameterMap.original.value);
                 response.redirect(decodeURI(request.httpParameterMap.original.value));
                 return;
             } else if (!empty(targetAction)) {
@@ -87,116 +82,129 @@ function loginForm()
             } else {
                 response.redirect(dw.web.URLUtils.https('Account-Show'));
             }
-            return;
-        }
-        else if (TriggeredAction.formId === 'register')
-        {
+            return;        },
+        'register'  : function () {
             response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            return;        },
+        'findOrder' : function () {
+            var OrderController = require('./Order');
+            var FindResult = OrderController.Find();
+            if (FindResult.error)
+            {
+                // TODO redirect
+                response.renderTemplate(LOGIN_TEMPLATE, {
+                    OrderNotFound : true
+                });
+                return;
+            }
+            // TODO redirect
+            view.get({
+                Order : FindResult.Order
+            }).render('account/orderhistory/orderdetails');
+            return;
+        },
+        'error' : function(){
+            show();
+        }
+    });
+
+}
+
+function handleOAuthLoginForm()
+{
+    oauthLoginForm.handleAction({
+        'login'     : function () {
+            if (request.httpParameterMap.OAuthProvider.stringValue) {
+                session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
+                session.custom.ContinuationURL = dw.web.URLUtils.https('Login-OAuthReentry').toString();
+
+                LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
+                    session.custom.RememberMe,session.custom.ContinuationURL);
+
+                var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
+                    OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
+                });
+                if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
+                    session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+                    finishOAuthLogin();
+
+                    // show login page with error
+                    view.get().render(LOGIN_TEMPLATE);
+                    return;
+                }
+
+                response.redirect(initiateOAuthLoginResult.AuthorizationURL);
+            }
+            return;
+        },
+        'error' : function(){
+            view.get().render(LOGIN_TEMPLATE);
             return;
         }
-    }
-
-    response.redirect(dw.web.URLUtils.https('Account-Show'));
+    });
 }
 
 /**
  * This is a central place to login a user from the login form.
+ * @deprecated Only kept until all controllers are migrated, functionality has been moved to other methods
  */
-function Process()
+function process()
 {
+    // handle OAuth login
     if (request.httpParameterMap.OAuthProvider.stringValue) {
-        new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'account/login/oauth/PreInitiateOAuthLogin.ds',
-        }).execute();
+        session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
+        session.custom.ContinuationURL = dw.web.URLUtils.https('Login-OAuthReentry').toString();
 
-        var InitiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
-            AuthorizationURL : Location,
+        LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
+            session.custom.RememberMe,session.custom.ContinuationURL);
+
+        var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
             OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
         });
-        if (InitiateOAuthLoginResult.result == PIPELET_ERROR) {
-            oAuthFailed();
-            return;
+        if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
+            session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+            finishOAuthLogin();
+            return false;
         }
 
-        response.renderTemplate('util/redirect.isml', {
-            Location : InitiateOAuthLoginResult.AuthorizationURL
-        });
-        return;
-    }
-    else {
-        var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-            Login : session.forms.login.username.value
-        });
-        var TempCustomer = GetCustomerResult.Customer;
+        response.redirect(initiateOAuthLoginResult.AuthorizationURL);
+        return false;
+    } else {
+        // handle 'normal' login
+        var success = Customer.login(session.forms.login.username.value, session.forms.login.password.value, session.forms.login.rememberme.value);
 
-        if (typeof(TempCustomer) != 'undefined' && TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked) {
-            return loginFailed();
+        if(!success){
+            session.forms.login.loginsucceeded.invalidateFormElement();
+        }else{
+            loginForm.clear();
         }
-
-        var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
-            Login      : session.forms.login.username.value,
-            Password   : session.forms.login.password.value,
-            RememberMe : session.forms.login.rememberme.value
-        });
-        if (LoginCustomerResult.result == PIPELET_ERROR) {
-            if (typeof(TempCustomer) != 'undefined' && TempCustomer != null && TempCustomer.profile != null && TempCustomer.profile.credentials.locked) {
-                var m = require('./dw/mail');
-                m.sendMail({
-                    MailFrom     : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
-                    MailSubject  : dw.web.Resource.msg('email.youraccount', 'email', null),
-                    MailTemplate : "mail/lockoutemail",
-                    MailTo       : TempCustomer.profile.email
-                });
-            }
-
-            return loginFailed();
-        }
-
-
-        f.clearFormElement(session.forms.login);
-
-        return {
-            login_succeeded : true
-        };
+        return success;
     }
 }
 
-function loginFailed()
+/**
+ * @deprecated Only kept until all controllers are migrated
+ */
+function oldProcess()
 {
-    f.invalidateFormElement(session.forms.login.loginsucceeded);
-
     return {
-        login_failed: true
+        login_succeeded : process()
     };
-}
-
-function oAuthFailed()
-{
-    f.invalidateFormElement(session.forms.oauthlogin.loginsucceeded);
-
-    postFinalizeOAuthLogin();
 }
 
 function oAuthSuccess()
 {
-    f.clearFormElement(session.forms.oauthlogin);
-
-    postFinalizeOAuthLogin();
+    session.forms.oauthlogin.clearFormElement();
+    finishOAuthLogin();
 }
 
 
-function postFinalizeOAuthLogin()
+function finishOAuthLogin()
 {
     // to continue to the destination (preserved in the session before InitiateOAuthLogin pipelet)
-    var Location = session.custom['ContinuationURL'];
-
+    var location = session.custom['ContinuationURL'];
     delete session.custom['ContinuationURL'];
-
-    response.renderTemplate('util/redirect.isml', {
-    	Location: Location
-    });
+    response.redirect(location);
 }
 
 
@@ -473,10 +481,10 @@ function OAuthReentryVKontakte()
 
 function Logout()
 {
-    new dw.system.Pipelet('LogoutCustomer').execute();
+    Customer.logout();
 
-	//session.forms.login.clearFormElement();
-	//session.forms.profile.clearFormElement();
+	session.forms.login.clearFormElement();
+	session.forms.profile.clearFormElement();
 	//Cart.get().calculate();
 
     response.redirect(dw.web.URLUtils.https('Account-Show'));
@@ -490,19 +498,20 @@ function Logout()
 /*
  * Web exposed methods
  */
-exports.Show                    = g.httpsGet(show);
-exports.LoginForm               = g.httpsPost(loginForm);
-exports.OAuthReentryLinkedIn    = g.httpsGet(OAuthReentryLinkedIn);
-exports.OAuthReentryGoogle      = g.httpsGet(OAuthReentryGoogle);
-exports.OAuthReentryGooglePlus  = g.httpsGet(OAuthReentryGooglePlus);
-exports.OAuthReentryMicrosoft   = g.httpsGet(OAuthReentryMicrosoft);
-exports.OAuthReentryFacebook    = g.httpsGet(OAuthReentryFacebook);
-exports.OAuthReentryGitHub      = g.httpsGet(OAuthReentryGitHub);
-exports.OAuthReentrySinaWeibo   = g.httpsGet(OAuthReentrySinaWeibo);
-exports.OAuthReentryVKontakte   = g.httpsGet(OAuthReentryVKontakte);
-exports.Logout                  = g.all(Logout);
+exports.Show                    = guard.ensure(['https'], show);
+exports.LoginForm               = guard.ensure(['https','post'], handleLoginForm);
+exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
+exports.OAuthReentryLinkedIn    = guard.ensure(['https','get'], OAuthReentryLinkedIn);
+exports.OAuthReentryGoogle      = guard.ensure(['https','get'], OAuthReentryGoogle);
+exports.OAuthReentryGooglePlus  = guard.ensure(['https','get'], OAuthReentryGooglePlus);
+exports.OAuthReentryMicrosoft   = guard.ensure(['https','get'], OAuthReentryMicrosoft);
+exports.OAuthReentryFacebook    = guard.ensure(['https','get'], OAuthReentryFacebook);
+exports.OAuthReentryGitHub      = guard.ensure(['https','get'], OAuthReentryGitHub);
+exports.OAuthReentrySinaWeibo   = guard.ensure(['https','get'], OAuthReentrySinaWeibo);
+exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], OAuthReentryVKontakte);
+exports.Logout                  = guard.all(Logout);
 
 /*
  * Local methods
  */
-exports.Process                 = Process;
+exports.Process                 = oldProcess;
