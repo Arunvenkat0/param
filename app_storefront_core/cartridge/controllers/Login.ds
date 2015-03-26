@@ -304,21 +304,25 @@ function handleOAuthReentry()
                 var firstName, lastName, email;
 
                 // Dear friends of generic code, now it becomes interesting
-                if (extProfile.name) {
-                    // Google comes with a name property
+
+                // Google comes with a name property which holds first & last name
+                if (typeof extProfile.name === 'object') {
                     firstName = extProfile.name.givenName;
                     lastName = extProfile.name.familyName;
                 }else{
-                    // The other providers use some of these, GitHub & SinaWeibo have just a 'name'
+                    // The other providers use one of these, GitHub & SinaWeibo have just a 'name'
                     firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
                     lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
                 }
+                // NOw the various email addresses, let's start with the simple one's
                 email =  extProfile['email-address'] || extProfile.email;
                 if(!email){
                     var emails = extProfile.emails;
+                    // Google comes with an array
                     if (emails && emails.length) {
                         //first element of the array would be the account email according to Google:
                         profile.setEmail(extProfile.emails[0].value);
+                    // while MS comes with an object
                     }else{
                         email = emails['preferred'] || extProfile['emails.account'] || extProfile['emails.personal'] ||
                             extProfile['emails.business'];
