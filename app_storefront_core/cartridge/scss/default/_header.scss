@@ -106,7 +106,7 @@ nav[role="navigation"] {
 		color: $white;
 		text-decoration: none;
 		&:active {
-			color: $pacific-blue;
+			color: $citrus;
 		}
 		@media screen and (min-width: 768px) {
 			color: $night-rider;
@@ -304,7 +304,6 @@ nav[role="navigation"] {
 				> a {
 					padding: 0.5em 1rem;
 					text-transform: none;
-					font-size: 1.5em;
 				}
 			}
 		}

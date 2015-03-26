@@ -11,7 +11,7 @@
 .product-listing-1x4 {
 	background: none repeat scroll 0 0 $white;
 	overflow: hidden;
-	padding: 10px 0;
+	padding: .83em 0;
 	.search-result-items .grid-tile {
 		margin: 0 1% 0 2%;
 		width: 18%;
@@ -21,13 +21,12 @@
 .account-nav-asset {
 	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
 	line-height: 1.5em;
-	margin: 40px 10px;
-	padding: 10px 0;
+	margin: 3.33em .83em;
+	padding: .83em 0;
 	h2 {
-		font-family: $serif;
 		font-style: italic;
 		font-weight: 400;
-		margin: 14px 0 20px;
+		margin: 1.16em 0 1.66em;
 	}
 }
 
@@ -60,23 +59,23 @@
 			height: 80px;
 			list-style: none outside none !important;
 			margin: 0 0 0 4%;
-			padding: 20px 0 0;
+			padding: 1.66em 0 0;
 			position: relative;
 			width: 46%;
 			a {
 				display: block;
 				font-size: 1.5em;
-				line-height: 30px;
-				padding: 0 0 0 55px;
+				line-height: 2.5em;
+				padding: 0 0 0 4.58em;
 			}
 			img {
 				left: 0;
 				position: absolute;
-				top: 10px;
+				top: .83em;
 			}
 			p {
 				margin: 0;
-				padding-left: 55px;
+				padding-left: 4.58em;
 			}
 		}
 	}

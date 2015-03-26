@@ -67,9 +67,8 @@
 				<iselse/>
 				
 					<h3 class="toggle">
-						<span>
-							<isprint value="${RefinementDefinition.getDisplayName()}"/>
-						</span>
+						<i class="fa fa-chevron-circle-down"></i>
+						<isprint value="${RefinementDefinition.getDisplayName()}"/>
 					</h3>
 					
 					<iscategoryrefinementvalues searchmodel="${pdict.ProductSearchResult}" categorylevel="1"/>
@@ -82,9 +81,8 @@
 		<isif condition="${RefinementDefinition.isAttributeRefinement()}">
 
 			<h3 class="toggle">
-				<span>
-					<isprint value="${RefinementDefinition.getDisplayName()}"/>
-				</span>
+				<i class="fa fa-chevron-circle-down"></i>
+				<isprint value="${RefinementDefinition.getDisplayName()}"/>
 			</h3>
 
 			<isif condition="${pdict.ProductSearchResult.isRefinedByAttribute(RefinementDefinition.attributeID)}">
@@ -139,11 +137,17 @@
 					<isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
 						<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
 							<li class="selected">
-								<a href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+								<a href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+									<i class="fa fa-check-square-o fa-lg"></i>
+									<isprint value="${RefinementValue.getDisplayValue()}"/>
+								</a>
 							</li>
 						<iselse/>
 							<li>
-								<a href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+								<a href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+									<i class="fa fa-square-o fa-lg"></i>
+									<isprint value="${RefinementValue.getDisplayValue()}"/>
+								</a>
 							</li>
 						</isif>							
 					</isloop>
@@ -156,9 +160,8 @@
 		<isif condition="${RefinementDefinition.isPriceRefinement()}">
 		
 			<h3 class="toggle">
-				<span>
-					<isprint value="${RefinementDefinition.getDisplayName()}"/>
-				</span>
+				<i class="fa fa-chevron-circle-down"></i>
+				<isprint value="${RefinementDefinition.getDisplayName()}"/>
 			</h3>
 	
 			<isif condition="${pdict.ProductSearchResult.refinedByPrice}">
@@ -171,11 +174,17 @@
 			<isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
 				<isif condition="${pdict.ProductSearchResult.isRefinedByPriceRange(RefinementValue.valueFrom,RefinementValue.valueTo)}">
 					<li class="selected">
-						<a class="refinement-link" title="${Resource.msg('global.remove','locale',null)} ${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'))}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+						<a class="refinement-link" title="${Resource.msg('global.remove','locale',null)} ${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'))}">
+							<i class="fa fa-check-square-o fa-lg"></i>
+							<isprint value="${RefinementValue.getDisplayValue()}"/>
+						</a>
 					</li>
 				<iselse/>
 					<li>
-						<a class="refinement-link" title="${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+						<a class="refinement-link" title="${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
+							<i class="fa fa-square-o fa-lg"></i>
+							<isprint value="${RefinementValue.getDisplayValue()}"/>
+						</a>
 					</li>
 				</isif>
 			</isloop>

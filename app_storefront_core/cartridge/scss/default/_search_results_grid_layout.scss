@@ -86,12 +86,6 @@
 		float: left;
 		list-style: none;
 		padding: 0 0.5em;
-		&.first-last a {
-			background-color: $pacific-blue;
-			color: $white;
-			font-size: 0.9em;
-			padding: 0 2px;
-		}
 	}
 }
 
@@ -160,11 +154,11 @@
 		margin-right: 0.3em;
 	}
 	[data-option="column"] {
-		color: $pacific-blue;
+		color: $citrus;
 	}
 	&.wide {
 		[data-option="wide"] {
-			color: $pacific-blue;
+			color: $citrus;
 		}
 		[data-option="column"] {
 			color: $dim-gray;

@@ -807,7 +807,7 @@
 						</button>
 
 						<iscomment>Update Cart</iscomment>
-						<button type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
+						<button class="simple" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
 							${Resource.msg('global.updatecart','locale',null)}
 						</button>
 

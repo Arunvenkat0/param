@@ -44,7 +44,7 @@
 				<isloop items="${RefinementValues}" var="RefinementValue">
 					<iscomment>get the category object</iscomment>
 					<isset name="categoryObj" value="${dw.catalog.CatalogMgr.getCategory( RefinementValue.getValue() )}" scope="page"/>
-					<li <isif condition="${Refinements.getNextLevelCategoryRefinementValues(categoryObj).size() > 0}">class="expandable<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif>"</isif>>
+					<li <isif condition="${Refinements.getNextLevelCategoryRefinementValues(categoryObj).size() > 0}">class="expandable fa fa-angle-right<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active fa-angle-down</isif>"</isif>>
 						<iscomment>render the actual link</iscomment>
 						<a class="refinement-link <isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif>" title="${RefinementValue.getDisplayValue()}" href="${SearchModel.urlRefineCategory('Search-Show',RefinementValue.getValue())}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
 
@@ -61,14 +61,16 @@
 		<isif condition="${Category.onlineSubCategories.size() > 0}">
 			<ul id="category-level-${CategoryLevel.toFixed()}">
 				<isloop items="${Category.onlineSubCategories}" var="SubCategory">
-					<li <isif condition="${SubCategory.onlineSubCategories.size() > 0}">class="expandable<isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>"</isif>>
+					<li <isif condition="${SubCategory.onlineSubCategories.size() > 0}">class="expandable fa fa-angle-right<isif condition="${IDPath.contains(SubCategory.ID)}"> active fa-angle-down</isif>"</isif>>
 						<iscomment>render the actual link</iscomment>
 						<isif condition="${SearchModel.categorySearch}">
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show', SubCategory.ID)}" scope="page"/>
 						<iselse/>                        
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
 						</isif>
-						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${SubCategory.displayName}" href="${refineLinkUrl}"><isprint value="${SubCategory.displayName}"/></a>
+						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${SubCategory.displayName}" href="${refineLinkUrl}">
+							<isprint value="${SubCategory.displayName}"/>
+						</a>
 
 						<iscomment>display the next level refinement values of the category in case it is part of the category path</iscomment>
 						<isif condition="${(CategoryPath != null) && (CategoryPath.size() > 0) && (IDPath.contains(SubCategory.ID))}">
