@@ -5,21 +5,21 @@
 	<li class="user-info">
 		<iscomment>User has session, but not authenticated</iscomment>
 		<isif condition="${customer.registered && !customer.authenticated}">
-			<a class="user-account-login" href="${URLUtils.https('Account-Show')}" id="menuLink1" title="${Resource.msg('label.login', 'components', null)}">
+			<a class="user-account-login" href="${URLUtils.https('Account-Show')}" id="menuLink1" title="${Resource.msg('global.login', 'locale', null)}">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('label.login', 'components', null)}</span>
+				<span>${Resource.msg('global.login', 'locale', null)}</span>
 			</a>
 		<iscomment>User has sesssion and is validated</iscomment>
 		<iselseif condition="${customer.registered}">
 			<a class="user-account" href="${URLUtils.https('Account-Show')}" title="<isprint value="${customer.profile.firstName}"/> <isprint value="${customer.profile.lastName}"/>">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('label.account', 'components', null)}</span>
+				<span>${Resource.msg('global.accountbreadcrumb', 'locale', null)}</span>
 			</a>
 		<iscomment>User has no session</iscomment>
 		<iselse/>
-			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('label.login', 'components', null)}">
+			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('label.login', 'components', null)}</span>
+				<span>${Resource.msg('global.login', 'locale', null)}</span>
 			</a>
 		</isif>
 	</li>
