@@ -1,0 +1,71 @@
+'use strict';
+
+/*
+ usage
+ var content = require('~/cartridge/scripts/model/Customer');
+ */
+
+/** @module model/Customer */
+
+var AbstractModel = require('./AbstractModel');
+var CustomerMgr = require('dw/customer/CustomerMgr');
+var Transaction = require('dw/system/Transaction');
+/**
+ * Customer helper providing enhanced content functionality
+ * @class module:model/Customer~Customer
+ */
+var Customer = AbstractModel.extend(
+/** @lends module:model/Customer~Customer.prototype */
+{
+
+
+});
+
+/**
+ * Use this method to get the the current customer or pass in a customer instance.
+ */
+exports.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'undefined') {
+        obj = customer;
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new Customer(obj);
+};
+
+exports.login = function(username, password, rememberMe){
+    var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
+        Login : username
+    });
+    var TempCustomer = GetCustomerResult.Customer;
+
+    // @TODO customer locked currently not handled
+    if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+        return false;
+    }
+
+    var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
+        Login      : username,
+        Password   : password,
+        RememberMe : rememberMe
+    });
+    if (LoginCustomerResult.result === PIPELET_ERROR) {
+        if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+            require('./dw/mail').sendMail({
+                MailFrom     : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
+                MailSubject  : dw.web.Resource.msg('email.youraccount', 'email', null),
+                MailTemplate : 'mail/lockoutemail',
+                MailTo       : TempCustomer.profile.email
+            });
+        }
+
+        return false;
+    }
+    return true;
+};
+
+exports.logout = function(){
+    new dw.system.Pipelet('LogoutCustomer').execute();
+};
