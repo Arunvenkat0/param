@@ -134,8 +134,8 @@
 		</isif>
 	</table>
 
-	<a href="${URLUtils.http('Cart-ContinueShopping')}" class="back" title="${Resource.msg('compareshow.back', 'product', null)}">
-		${Resource.msg('compareshow.back', 'product', null)}
+	<a href="${URLUtils.http('Cart-ContinueShopping')}" class="back" title="${Resource.msg('product.compareshow.back', 'product', null)}">
+		${Resource.msg('product.compareshow.back', 'product', null)}
 	</a>
 
 </isdecorate>
