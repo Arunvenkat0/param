@@ -27,7 +27,6 @@ var AbstractModel = Class.extend(
 	 */
 	init : function(obj){
 		this.object = obj;
-		this._record = obj;
 		return this;
 	},
 
