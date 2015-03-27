@@ -1,7 +1,6 @@
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	util = require('./util'),
 	validator = require('./validator');
 
@@ -10,7 +9,7 @@ var sendToFriend = {
 		$('#send-to-friend-dialog')
 			.on('click', '.preview-button, .send-button, .edit-button', function (e) {
 				e.preventDefault();
-				var $form = $('#send-to-friend-form')
+				var $form = $('#send-to-friend-form');
 				$form.validate();
 				if (!$form.valid()) {
 					return false;
@@ -42,7 +41,7 @@ var sendToFriend = {
 	initializeDialog: function (eventDelegate) {
 		// detect withCredentials support to do CORS from HTTP to HTTPS
 		// with browsers do not support withCredentials (mainly IE 8 and 9), fall back to page reload
-		if (!'withCredentials' in new XMLHttpRequest()) {
+		if (!('withCredentials' in new XMLHttpRequest())) {
 			return;
 		}
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {

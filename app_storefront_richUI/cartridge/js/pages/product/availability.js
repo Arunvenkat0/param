@@ -10,7 +10,7 @@ var updateContainer = function (data) {
 		$availabilityMsg.html(Resources.ITEM_STATUS_NOTAVAILABLE);
 		return;
 	}
-	$availabilityMsg.empty()
+	$availabilityMsg.empty();
 	// Look through levels ... if msg is not empty, then create span el
 	if (data.levels.IN_STOCK > 0) {
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {

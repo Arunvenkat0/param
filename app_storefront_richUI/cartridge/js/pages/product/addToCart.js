@@ -53,7 +53,7 @@ var addToCart = function (e) {
 var addAllToCart = function (e) {
 	e.preventDefault();
 	var $productForms = $('#product-set-list').find('form').toArray();
-	Promise.all(_.map($productForms, addItemToCart))
+	TPromise.all(_.map($productForms, addItemToCart))
 		.then(function (responses) {
 			dialog.close();
 			// show the final response only, which would include all the other items

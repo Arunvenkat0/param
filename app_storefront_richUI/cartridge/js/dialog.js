@@ -73,7 +73,7 @@ var dialog = {
 		}
 		imagesLoaded(this.$container).on('done', function () {
 			this.$container.dialog('option', 'position', position);
-		}.bind(this))
+		}.bind(this));
 
 		callback = (typeof params.callback === 'function') ? params.callback : function () {};
 		callback();

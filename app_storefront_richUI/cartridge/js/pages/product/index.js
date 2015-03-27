@@ -42,13 +42,13 @@ function initializeEvents() {
 	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
-	$pdpMain.on('click', '.wl-action', function (e) {
+	$pdpMain.on('click', '.wl-action', function () {
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		this.setAttribute(href, url);
+		this.setAttribute('href', url);
 	});
 
 	// product options

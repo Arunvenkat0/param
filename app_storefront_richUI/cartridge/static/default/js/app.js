@@ -396,7 +396,6 @@ function updateSummary() {
 		$bonusProductList.find('li.selected-bonus-item').remove();
 	} else {
 		var ulList = $bonusProductList.find('ul.selected-bonus-items').first();
-		var itemTemplate = ulList.children('.selected-item-template').first();
 		var i, len;
 		for (i = 0, len = selectedList.length; i < len; i++) {
 			var item = selectedList[i];
@@ -1002,7 +1001,7 @@ var dialog = {
 		}
 		imagesLoaded(this.$container).on('done', function () {
 			this.$container.dialog('option', 'position', position);
-		}.bind(this))
+		}.bind(this));
 
 		callback = (typeof params.callback === 'function') ? params.callback : function () {};
 		callback();
@@ -1232,12 +1231,11 @@ var minicart = {
 		this.$el = $('#mini-cart');
 		this.$content = this.$el.find('.mini-cart-content');
 
-		var $productList = this.$el.find('.mini-cart-products');
 		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
 		$('.mini-cart-product').not(':first').addClass('collapsed')
 			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
-		$('.mini-cart-toggle').on('click', function (e) {
+		$('.mini-cart-toggle').on('click', function () {
 			$(this).toggleClass('fa-caret-down fa-caret-right');
 			$(this).closest('.mini-cart-product').toggleClass('collapsed');
 		});
@@ -2362,7 +2360,7 @@ var addToCart = function (e) {
 var addAllToCart = function (e) {
 	e.preventDefault();
 	var $productForms = $('#product-set-list').find('form').toArray();
-	Promise.all(_.map($productForms, addItemToCart))
+	TPromise.all(_.map($productForms, addItemToCart))
 		.then(function (responses) {
 			dialog.close();
 			// show the final response only, which would include all the other items
@@ -2400,7 +2398,7 @@ var updateContainer = function (data) {
 		$availabilityMsg.html(Resources.ITEM_STATUS_NOTAVAILABLE);
 		return;
 	}
-	$availabilityMsg.empty()
+	$availabilityMsg.empty();
 	// Look through levels ... if msg is not empty, then create span el
 	if (data.levels.IN_STOCK > 0) {
 		if (data.levels.PREORDER === 0 && data.levels.BACKORDER === 0 && data.levels.NOT_AVAILABLE === 0) {
@@ -2587,13 +2585,13 @@ function initializeEvents() {
 	}
 
 	// Add to Wishlist and Add to Gift Registry links behaviors
-	$pdpMain.on('click', '.wl-action', function (e) {
+	$pdpMain.on('click', '.wl-action', function () {
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
 		if (data.cartAction) {
 			delete data.cartAction;
 		}
 		var url = util.appendParamsToUrl(this.href, data);
-		this.setAttribute(href, url);
+		this.setAttribute('href', url);
 	});
 
 	// product options
@@ -3463,10 +3461,12 @@ var quickview = {
 module.exports = quickview;
 
 },{"./dialog":6,"./pages/product":26,"./util":48,"lodash":54}],39:[function(require,module,exports){
+'use strict';
+
 /**
  * copied from https://github.com/darkskyapp/string-hash
  */
-function hash(str) {
+function hashFn(str) {
 	var hash = 5381,
 		i = str.length;
 
@@ -3479,6 +3479,14 @@ function hash(str) {
 	return hash >>> 0;
 }
 
+/**
+ * Create rating based on hash ranging from 2-5
+ * @param pid
+ */
+function getRating(pid) {
+	return hashFn(pid.toString()) % 30 / 10 + 2;
+}
+
 module.exports = {
 	init: function () {
 		$('.product-review').each(function (index, review) {
@@ -3487,7 +3495,7 @@ module.exports = {
 				return;
 			}
 			// rating range from 2 - 5
-			var rating = hash(pid.toString()) % 30 / 10 + 2;
+			var rating = getRating(pid);
 			var baseRating = Math.floor(rating);
 			var starsCount = 0;
 			for (var i = 0; i < baseRating; i++) {
@@ -3886,8 +3894,7 @@ module.exports = searchsuggest;
 },{"./util":48}],43:[function(require,module,exports){
 'use strict';
 
-var ajax = require('./ajax'),
-	dialog = require('./dialog'),
+var dialog = require('./dialog'),
 	util = require('./util'),
 	validator = require('./validator');
 
@@ -3896,7 +3903,7 @@ var sendToFriend = {
 		$('#send-to-friend-dialog')
 			.on('click', '.preview-button, .send-button, .edit-button', function (e) {
 				e.preventDefault();
-				var $form = $('#send-to-friend-form')
+				var $form = $('#send-to-friend-form');
 				$form.validate();
 				if (!$form.valid()) {
 					return false;
@@ -3928,7 +3935,7 @@ var sendToFriend = {
 	initializeDialog: function (eventDelegate) {
 		// detect withCredentials support to do CORS from HTTP to HTTPS
 		// with browsers do not support withCredentials (mainly IE 8 and 9), fall back to page reload
-		if (!'withCredentials' in new XMLHttpRequest()) {
+		if (!('withCredentials' in new XMLHttpRequest())) {
 			return;
 		}
 		$(eventDelegate).on('click', '.send-to-friend', function (e) {
@@ -3957,7 +3964,7 @@ var sendToFriend = {
 
 module.exports = sendToFriend;
 
-},{"./ajax":2,"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
+},{"./dialog":6,"./util":48,"./validator":49}],44:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');

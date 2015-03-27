@@ -21,12 +21,11 @@ var minicart = {
 		this.$el = $('#mini-cart');
 		this.$content = this.$el.find('.mini-cart-content');
 
-		var $productList = this.$el.find('.mini-cart-products');
 		$('.mini-cart-product').eq(0).find('.mini-cart-toggle').addClass('fa-caret-down');
 		$('.mini-cart-product').not(':first').addClass('collapsed')
 			.find('.mini-cart-toggle').addClass('fa-caret-right');
 
-		$('.mini-cart-toggle').on('click', function (e) {
+		$('.mini-cart-toggle').on('click', function () {
 			$(this).toggleClass('fa-caret-down fa-caret-right');
 			$(this).closest('.mini-cart-product').toggleClass('collapsed');
 		});

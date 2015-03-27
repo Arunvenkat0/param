@@ -1,7 +1,9 @@
+'use strict';
+
 /**
  * copied from https://github.com/darkskyapp/string-hash
  */
-function hash(str) {
+function hashFn(str) {
 	var hash = 5381,
 		i = str.length;
 
@@ -14,6 +16,14 @@ function hash(str) {
 	return hash >>> 0;
 }
 
+/**
+ * Create rating based on hash ranging from 2-5
+ * @param pid
+ */
+function getRating(pid) {
+	return hashFn(pid.toString()) % 30 / 10 + 2;
+}
+
 module.exports = {
 	init: function () {
 		$('.product-review').each(function (index, review) {
@@ -22,7 +32,7 @@ module.exports = {
 				return;
 			}
 			// rating range from 2 - 5
-			var rating = hash(pid.toString()) % 30 / 10 + 2;
+			var rating = getRating(pid);
 			var baseRating = Math.floor(rating);
 			var starsCount = 0;
 			for (var i = 0; i < baseRating; i++) {

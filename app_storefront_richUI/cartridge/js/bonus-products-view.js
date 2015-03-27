@@ -79,7 +79,6 @@ function updateSummary() {
 		$bonusProductList.find('li.selected-bonus-item').remove();
 	} else {
 		var ulList = $bonusProductList.find('ul.selected-bonus-items').first();
-		var itemTemplate = ulList.children('.selected-item-template').first();
 		var i, len;
 		for (i = 0, len = selectedList.length; i < len; i++) {
 			var item = selectedList[i];
