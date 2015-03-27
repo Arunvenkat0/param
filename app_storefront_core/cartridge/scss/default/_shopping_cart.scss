@@ -13,7 +13,7 @@
 			padding: 0.7em 0.2em;
 			text-align: right;
 			text-indent: 0;
-			width: 2.5em;
+			width: 2.8em;
 		}
 	}
 	.item-quantity-details {
@@ -47,7 +47,7 @@
 	.price-unadjusted {
 		color: $dim-gray;
 		display: block;
-		margin: 0 0 5px;
+		margin: 0 0 .42em;
 		span {
 			text-decoration: line-through;
 		}
@@ -55,7 +55,7 @@
 	.price-adjusted-total {
 		color: $dim-gray;
 		display: block;
-		margin: 5px 0 0;
+		margin: .42em 0 0;
 		span {
 			color: $sangria;
 		}
@@ -79,7 +79,7 @@
 }
 
 .cart-footer {
-	margin: 10px 0;
+	margin: .83em 0;
 	overflow: hidden;
 }
 
@@ -110,7 +110,7 @@
 		display: none;
 	}
 	td {
-		padding: 5px 0;
+		padding: .42em 0;
 		text-align: right !important;
 		word-break: break-all;
 		+ td {
@@ -150,7 +150,7 @@
 .cart-action-continue-shopping {
 	float: right;
 	button.button-text {
-		line-height: 39px;
+		line-height: 3.25em;
 		margin-right: 1.0em;
 	}
 }
@@ -224,7 +224,7 @@ ul.product-availability-list {
 		font-style: italic;
 	}
 	.not-user {
-		margin: 10px 0;
+		margin: .83em 0;
 	}
 }
 

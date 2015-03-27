@@ -2663,7 +2663,7 @@ button.add-all-to-cart {
     padding: 0.7em 0.2em;
     text-align: right;
     text-indent: 0;
-    width: 2.5em; }
+    width: 2.8em; }
 #cart-table .item-quantity-details {
   padding-left: 0; }
   #cart-table .item-quantity-details .item-user-actions {
@@ -2686,13 +2686,13 @@ button.add-all-to-cart {
 #cart-table .price-unadjusted {
   color: #666;
   display: block;
-  margin: 0 0 5px; }
+  margin: 0 0 .42em; }
   #cart-table .price-unadjusted span {
     text-decoration: line-through; }
 #cart-table .price-adjusted-total {
   color: #666;
   display: block;
-  margin: 5px 0 0; }
+  margin: .42em 0 0; }
   #cart-table .price-adjusted-total span {
     color: #990000; }
 #cart-table .gift-cert-delivery {
@@ -2710,7 +2710,7 @@ button.add-all-to-cart {
     vertical-align: middle; }
 
 .cart-footer {
-  margin: 10px 0;
+  margin: .83em 0;
   overflow: hidden; }
 
 .cart-coupon-code {
@@ -2732,7 +2732,7 @@ button.add-all-to-cart {
 .order-totals-table th {
   display: none; }
 .order-totals-table td {
-  padding: 5px 0;
+  padding: .42em 0;
   text-align: right !important;
   word-break: break-all; }
   .order-totals-table td + td {
@@ -2759,7 +2759,7 @@ button.add-all-to-cart {
 .cart-action-continue-shopping {
   float: right; }
   .cart-action-continue-shopping button.button-text {
-    line-height: 39px;
+    line-height: 3.25em;
     margin-right: 1em; }
 
 .cart-recommendations {
@@ -2810,7 +2810,7 @@ ul.product-availability-list {
   font-size: 1.2em;
   font-style: italic; }
 .account-welcome .not-user {
-  margin: 10px 0; }
+  margin: .83em 0; }
 
 #password-reset {
   white-space: nowrap; }
