@@ -14,9 +14,9 @@
 
 		<isif condition="${!customer.externallyAuthenticated}">
 		<p>${Resource.msg('logininclude.registered','account',null)}</p>
-		
+
 		<form action="${URLUtils.https(pdict.FormController)}" method="post" class="clearfix" id="${session.forms.login.htmlName}">
-			
+
 			<iscomment>Login Unsuccessful Error Message</iscomment>
 			<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
 				<div class="error-form">${Resource.msg('logininclude.locked','account',null)}</div>
