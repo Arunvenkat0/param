@@ -42,6 +42,7 @@ var View = Class.extend(
             // backward compatibility
             this.CurrentForms = session.forms;
             this.CurrentHttpParameterMap = request.httpParameterMap;
+            this.CurrentCustomer = customer;
             try{
                 response.renderTemplate(templateName, this);
             }catch(e){
