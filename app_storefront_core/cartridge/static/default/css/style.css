@@ -376,7 +376,6 @@ button, .button, .buttonstyle, input[type="button"] {
   cursor: pointer;
   display: inline-block;
   font-size: 1.1em;
-  font-weight: 700;
   font-weight: 400;
   padding: 0.5em 2em;
   text-align: center;
@@ -403,6 +402,8 @@ button, .button, .buttonstyle, input[type="button"] {
     border-color: #ccc;
     color: #666;
     opacity: 0.5; }
+  button a, .button a, .buttonstyle a, input[type="button"] a {
+    color: #fff !important; }
   button i.left, .button i.left, .buttonstyle i.left, input[type="button"] i.left {
     margin-right: 0.6em; }
   button i.right, .button i.right, .buttonstyle i.right, input[type="button"] i.right {
@@ -3151,14 +3152,8 @@ h1 .account-logout {
   background-color: #efefef;
   border-top: 1px solid #d5d5d5;
   padding: 2em; }
-  .list-share .share-option {
-    box-sizing: border-box;
-    width: 30%;
-    margin-right: 3.33333%;
-    float: left;
-    word-wrap: break-word; }
-    .list-share .share-option a {
-      display: block; }
+  .list-share .share-option a {
+    display: block; }
   .list-share .list-title {
     float: left; }
   .list-share .print-page {

@@ -71,9 +71,11 @@
 					${Resource.msg('wishlist.listpublic','account',null)}
 				</button>
 			</isif>
-			<a id="send-to-friend" class="button share-option send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.UUID, 'source','wishlist')}">
-				${Resource.msg('wishlist.sendwishlist','account',null)}
-			</a>
+			<span class="buttonstyle">
+				<a id="send-to-friend" class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.UUID, 'source','wishlist')}">
+					${Resource.msg('wishlist.sendwishlist','account',null)}
+				</a>
+			</span>
 			<div class="share-option">
 				${Resource.msg('wishlist.copylabel','account',null)}:
 				<a href="${URLUtils.https('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}">

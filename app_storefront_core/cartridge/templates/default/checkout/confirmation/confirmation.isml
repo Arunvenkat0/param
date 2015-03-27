@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="actions">
-			<a href="${URLUtils.http('Cart-ContinueShopping')}" class="continue button">
+			<a href="${URLUtils.http('Cart-ContinueShopping')}" class="continue">
 				${Resource.msg('confirmation.returnshop','checkout',null)}
 			</a>
 		</div>
