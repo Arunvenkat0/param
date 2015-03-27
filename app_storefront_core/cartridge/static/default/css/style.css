@@ -346,7 +346,7 @@ body {
   font-size: 12px; }
 
 a {
-  color: #333;
+  color: #84bd00;
   outline: medium none;
   overflow: hidden;
   text-decoration: none; }
@@ -403,7 +403,9 @@ button, .button, .buttonstyle, input[type="button"] {
     color: #666;
     opacity: 0.5; }
   button a, .button a, .buttonstyle a, input[type="button"] a {
-    color: #fff !important; }
+    color: #fff; }
+    button a:hover, .button a:hover, .buttonstyle a:hover, input[type="button"] a:hover {
+      color: #84bd00; }
   button i.left, .button i.left, .buttonstyle i.left, input[type="button"] i.left {
     margin-right: 0.6em; }
   button i.right, .button i.right, .buttonstyle i.right, input[type="button"] i.right {
@@ -3406,8 +3408,6 @@ h1 .account-logout {
       text-align: right;
       margin-left: 3px; }
 
-.js .ui-dialog-content a {
-  color: #84bd00; }
 .js .ui-dialog-content .product-col-1 {
   padding: 13px 1%;
   width: 39%; }
