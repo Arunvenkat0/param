@@ -82,6 +82,7 @@ body {
 		@extend %clearfix;
 		border: 1px dashed $very-light-gray;
 		box-sizing: border-box;
+		font-size: 12px; // match sitegenesis font size
 		margin: 1rem 0;
 		padding: 1em;
 		position: relative;
