@@ -53,7 +53,7 @@
 			
 	<form method="post" class="suppress check-balance" action="${URLUtils.url('GiftCert-CheckBalance')}">
 		<fieldset>
-			<isinputfield formfield="${pdict.CurrentForms.giftcert.balance.giftCertID}" type="input" rowClass="label-hidden label-inline gift-cert-balance"/>
+			<isinputfield formfield="${pdict.CurrentForms.giftcert.balance.giftCertID}" type="input" rowClass="label-above gift-cert-balance"/>
 			<div class="form-row gift-cert-balance-submit">
 				<button type="submit" id="CheckBalanceButton" value="${Resource.msg('global.checkbalance', 'locale', null)}">
 					${Resource.msg('global.checkbalance', 'locale', null)}
