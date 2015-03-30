@@ -8,16 +8,7 @@ var CustomerAddress = require('dw/customer/CustomerAddress');
  * All system address fields
  * @type {Array}
  */
-var ADDRESS_FIELDS = [
-    'firstName',
-    'lastName',
-    'address1',
-    'address2',
-    'city',
-    'postalCode',
-    'stateCode',
-    'countryCode',
-    'phone'];
+var ADDRESS_FIELDS = require('~/cartridge/scripts/config').address.fields;
 
 /**
  * Internal helper to call all address fields from "from" to "to"
