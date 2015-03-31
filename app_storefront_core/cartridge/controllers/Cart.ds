@@ -114,7 +114,7 @@ function submitForm() {
             var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
             Transaction.wrap(function () {
-                cart.updateLineItem(formgroup.getTriggeredAction().object, product, productOptionModel)
+                cart.updateLineItem(formgroup.getTriggeredAction().object, product, request.httpParameterMap.Quantity.doubleValue, productOptionModel)
                 cart.calculate();
             });
 

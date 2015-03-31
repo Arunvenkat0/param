@@ -189,7 +189,12 @@ var Product = AbstractModel.extend(
             return false;
         },
 
-        getStandardPrice : function (priceModel) {
+	    /**
+	     * TODO
+	     * @param priceModel
+	     * @returns {*}
+	     */
+	    getStandardPrice : function (priceModel) {
             priceModel = priceModel || this.object.priceModel;
             if ((typeof priceModel === 'undefined') || (priceModel === null) || !priceModel.getPrice().available) {
                 //There is currently no way to check if the list pricebook is actually
@@ -205,7 +210,11 @@ var Product = AbstractModel.extend(
             }
         },
 
-        getProductCategory : function () {
+	    /**
+	     * TODO
+	     * @returns {*}
+	     */
+	    getProductCategory : function () {
             var product = this.object;
 
             if (!product) {

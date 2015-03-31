@@ -76,25 +76,20 @@ var Cart = AbstractModel.extend(
         },
 
         /**
-         * TODO
+         * Triggers the cart calculation by executing the hook 'dw.ocapi.shop.basket.calculate'.
          *
          * @transactional
          */
         calculate : function () {
-
             dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
-
         },
 
         /**
-         * TODO
+         * Adds a product list item to the cart.
          *
-         * @param plid
-         * @param itemid
-         * @param quantity
-         * @param cgid
-         *
-         * @returns {null}
+         * @param {dw.customer.ProductListItem} productListItem - The product list item whose associated product is to be added to the basket.
+         * @param {Number} quantity - The quantity of the product.
+         * @param {String} cgid - ID of the category context to be stored with the product line item.
          */
         addProductListItem : function (productListItem, quantity, cgid) {
 
@@ -111,27 +106,25 @@ var Cart = AbstractModel.extend(
                     ProductListItem    : productListItem
                 });
                 if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                    return null;
+                    return;
                 }
 
                 this.calculate();
             }
-
-            return;
         },
 
         /**
-         * TODO
+         * Adds a product to the cart.
          *
-         * @param pid
-         * @param quantity
-         * @param cgid
+         * @param {String} pid - ID of the product that is to be added to the basket.
+         * @param {Number} quantity - The quantity of the product.
+         * @param {String} cgid - ID of the category context to be stored with the product line item.
+         * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
          */
         addProductItem : function (product, quantity, cgid, productOptionModel) {
 
             if (product) {
 
-                // TODO
                 var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
                     Basket             : this.object,
                     Product            : product,
@@ -143,7 +136,6 @@ var Cart = AbstractModel.extend(
                 if (AddProductToBasketResult.result === PIPELET_ERROR) {
                     return;
                 }
-                var ProductLineItem = AddProductToBasketResult.ProductLineItem;
 
                 if (product.bundle) {
                     /**
@@ -181,9 +173,43 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Validates the supplied coupon code and, if the coupon code is valid, applies them to the basket.
+         * While applying the coupon code the pipelet adds a new CouponLineItem to the basket based on the supplied coupon code. The coupon code gets set at the CouponLineItem.
+         * A coupon code can be invalid because of the following reasons:
+         *  <ul>
+         *  <li>The coupon code is already added to the basket</li>
+         *  <li>A coupon code of the same coupon is already in basket. Adding a single coupon code of this coupon is sufficient to enable a promotion.
+         *  Adding another coupon code of the same coupon does not make sense since the promotion is already enabled by the previously added code.</li>
+         *  <li>The numbers of redemptions of this coupon code is 1 and the code as already been redeemed.</li>
+         *  <li>The numbers of redemptions of this coupon code is > 1 and the maximum numbers of redemptions of this coupon code has already been reached.
+         *  The calculation of the redempetions is based on the number of redemptions of this coupon code in past plus the number of redemptions of other coupon codes of the same coupon in the past.</li>
+         *  <li>The maximum number of times this coupon can be redeemed per customer has already been reached.</li>
+         *  <li>The maximum number of times this coupon can be redeemed by a customer within a given time period has already been reached.
+         *  The calculation of the redempetions is based on the the number of redemptions of this coupon code in past plus the number of redemptions
+         *  of other coupon codes of the same coupon in the past.</li>
+         *  <li>The coupon code is unknown to the system</li>
+         *  <li>The coupon is not enabled</li>
+         *  <li>There exists no active promotion to which the coupon is assigned</li>
+         *  </ul>
+         * In this case, no CouponLineItem is added to the basket, the returned "Status" object contains the details of
+         * why the coupon was invalid. Status: The status object representing a detailed result of the operation. The
+         * status property (Status.status) will be set to 0 if the coupon was successfully applied or 1 otherwise. The
+         * code property (Status.code) will be set to one of the following values:
+         *  <ul>
+         *  <li>"OK" = The coupon was applied to the basket.</li>
+         *  <li>CouponStatusCodes.COUPON_CODE_ALREADY_IN_BASKET = Indicates that coupon code has already been added to basket.</li>
+         *  <li>CouponStatusCodes.COUPON_ALREADY_IN_BASKET = Indicates that another code of the same MultiCode/System coupon has already been added to basket.</li>
+         *  <li>CouponStatusCodes.COUPON_CODE_ALREADY_REDEEMED = Indicates that code of MultiCode/System coupon has already been redeemed.</li>
+         *  <li>CouponStatusCodes.COUPON_CODE_UNKNOWN = Indicates that coupon not found for given coupon code or that the code itself was not found.</li>
+         *  <li>CouponStatusCodes.COUPON_DISABLED = Indicates that coupon is not enabled.</li>
+         *  <li>CouponStatusCodes.REDEMPTION_LIMIT_EXCEEDED = Indicates that number of redemptions per code exceeded.</li>
+         *  <li>CouponStatusCodes.CUSTOMER_REDEMPTION_LIMIT_EXCEEDED = Indicates that number of redemptions per code and customer exceeded.</li>
+         *  <li>CouponStatusCodes.TIMEFRAME_REDEMPTION_LIMIT_EXCEEDED = Indicates that number of redemptions per code, customer and time exceeded.</li>
+         *  <li>CouponStatusCodes.NO_ACTIVE_PROMOTION = Indicates that coupon is not assigned to an active promotion.</li>
+         * </ul>
          *
-         * @param couponCode
-         * @returns {{CouponStatus: (Status|*|deleteAddress.Status|pdict.Status)}}
+         * @param {String} couponCode - The code of the coupon to add.
+         * @returns {dw.system.Status} The "Status" object containing details of the add to cart action. See above.
          */
         addCoupon : function (couponCode) {
             if (couponCode) {
@@ -193,27 +219,28 @@ var Cart = AbstractModel.extend(
                     CouponCode : couponCode
                 });
 
-                if (AddCouponToBasket2Result.result !== PIPELET_ERROR) {
-                    this.calculate();
-                    return {'CouponStatus' : AddCouponToBasket2Result.Status};
-                }
+                this.calculate();
+                return {'CouponStatus' : AddCouponToBasket2Result.Status};
             }
-
-            return;
         },
 
         /**
-         * Adds a bonus product to the Basket associated with the specified BonusDiscountLineItem. The pipelet creates
-         * and returns a ProductLineItem, by assigning the specified Product and Quantity to the specified Basket. The
-         * function adds the new ProductLineItem to the default shipment.
+         * Adds a bonus product to the cart associated with the specified BonusDiscountLineItem. The function creates
+         * and returns a ProductLineItem, by assigning the specified Product and Quantity to the cart. The function adds
+         * the new ProductLineItem to the default shipment.
          * The passed product must be one of the products associated with the BonusDiscountLineItem or the process will
          * fail. The process does NOT validate if the number of bonus products exceeds the maximum allowed by the bonus
          * discount. This is the job of application logic.
          * Function always creates a new product line item, regardless of the value of the site preference
          * 'Add Product Behavior'.
          *
-         * @param bonusDiscountLineItem
-         * @param product
+         * @param {dw.order.BonusDiscountLineItem} bonusDiscountLineItem - Line item representing an applied BonusChoiceDiscount in the basket. The
+         * product must be in the bonus product list of this discount.
+         * @param {dw.catalog.Product} product - The product that is to be added to the basket.
+         * @param {dw.util.ArrayList} selectedOptions - Product option array of optionName/optionValue pairs.
+         * @param {Number} quantity - The quantity of the product.
+         *
+         * @returns {dw.order.ProductLineItem} The newly created product line item.
          */
         addBonusProduct : function (bonusDiscountLineItem, product, selectedOptions, quantity) {
 
@@ -242,8 +269,8 @@ var Cart = AbstractModel.extend(
         },
 
         /**
-         *
-         * @param giftCertificateLineItem
+         * Removes a gift certificate line item from the basket.
+         * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem - The gift certificate to remove from the basket.
          */
         removeGiftCertificateLineItem : function (giftCertificateLineItem) {
 
@@ -258,7 +285,8 @@ var Cart = AbstractModel.extend(
         /**
          * Deletes all the products associated with a bonus discount line item.
          *
-         * @param bonusDiscountLineItem
+         * @param {dw.order.BonusDiscountLineItem} bonusDiscountLineItem - The bonus discount line item to remove the
+         * product line items for.
          */
         removeBonusDiscountLineItemProducts : function (bonusDiscountLineItem) {
             // TODO - add check whether the given lineitem actually belongs to this cart object
@@ -273,9 +301,10 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Returns the product line item of the cart having the given UUID.
          *
-         * @param lineItemUUID
-         * @returns {*}
+         * @param {String} lineItemUUID - The UUID of the line item.
+         * @returns {dw.order.ProductLineItem} The product line item or null if not found.
          */
         getProductLineItemByUUID : function (lineItemUUID) {
             var plis = this.getProductLineItems();
@@ -293,10 +322,13 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Searches the bundled line items of the given bundle line item for a line item linking to a product with the
+         * given ID.
          *
-         * @param bundleLineItem
-         * @param pid
-         * @returns {*}
+         * @param {dw.order.ProductLineItem} bundleLineItem - The bundle product line item which bundled items are
+         * search for a line item having the given product id.
+         * @param {String} pid - The product identifier to find the bundled product line item for.
+         * @returns {dw.order.ProductLineItem} The product line item or null if not found.
          */
         getBundledProductLineItemByPID : function (bundleLineItem, pid) {
             // TODO - add check whether the given lineitem actually belongs to this cart object
@@ -315,9 +347,10 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Returns the bonus discount line item of the cart having the given UUID.
          *
-         * @param lineItemUUID
-         * @returns {*}
+         * @param {String} lineItemUUID - The UUID of the bonus discount line item.
+         * @returns {dw.order.BonusDiscountLineItem} The bonus discount line item or null if not found.
          */
         getBonusDiscountLineItemByUUID : function (lineItemUUID) {
             var plis = this.getBonusDiscountLineItems();
@@ -366,15 +399,14 @@ var Cart = AbstractModel.extend(
                     }
                 }
             }
-
-            return;
         },
 
         /**
-         * TODO
+         * Checks to see if a new bonus discount line item has been created by providing a list of 'previous' discount
+         * line items.
          *
-         * @param previousBonusDiscountLineItems
-         * @returns {*}
+         * @param {dw.util.Collection} previousBonusDiscountLineItems - base line collection of bonus discount line items.
+         * @returns {dw.order.BonusDiscountLineItem} The newly created bonus discount line item.
          */
         getNewBonusDiscountLineItem : function (previousBonusDiscountLineItems) {
             if (previousBonusDiscountLineItems) {
@@ -389,19 +421,21 @@ var Cart = AbstractModel.extend(
             return;
         },
 
-	    /**
-	     * TODO
-	     *
-	     * @param lineItem
-	     * @param product
-	     * @param productOptionModel
-	     */
-        updateLineItem : function (lineItem, product, productOptionModel) {
+        /**
+         * Replaces the current product of the specified product line item with the specified product.
+         *
+         * @param {dw.order.ProductLineItem} lineItem - The product line item.
+         * @param {dw.catalog.Product} product - The new product.
+         * @param {Number} quantity - The quantity of the product line item after replacement.
+         * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
+         */
+
+        updateLineItem : function (lineItem, product, quantity, productOptionModel) {
 
             new dw.system.Pipelet('ReplaceLineItemProduct').execute({
                 ProductLineItem    : lineItem,
                 NewProduct         : product,
-                Quantity           : request.httpParameterMap.Quantity.doubleValue,
+                Quantity           : quantity,
                 ProductOptionModel : productOptionModel
             });
 
@@ -856,23 +890,23 @@ var Cart = AbstractModel.extend(
             return;
         },
 
-	    /**
-	     * Retrieves the list of applicable shipping methods for a given shipment and a full or partial shipping address.
-	     * A shipping method is applicable if it does not exclude any of the products in the shipment, and does not
-	     * exclude the specified address.
-	     *
-	     * @param {module:model/TransientAddress~TransientAddress} address - The address to get the applicable shipping
-	     * methods for.
-	     * @returns {dw.util.Collection} The list of applicable shipping methods for the default shipment and the given address.
-	     */
-	    getApplicableShippingMethods : function (address) {
-		    // Modify as needed.
-		    if (!address.countryCode) {
-				address.countryCode = "US";
-		    }
-		    if (!address.stateCode) {
-			    address.stateCode = "NY";
-		    }
+        /**
+         * Retrieves the list of applicable shipping methods for a given shipment and a full or partial shipping address.
+         * A shipping method is applicable if it does not exclude any of the products in the shipment, and does not
+         * exclude the specified address.
+         *
+         * @param {module:model/TransientAddress~TransientAddress} address - The address to get the applicable shipping
+         * methods for.
+         * @returns {dw.util.Collection} The list of applicable shipping methods for the default shipment and the given address.
+         */
+        getApplicableShippingMethods : function (address) {
+            // Modify as needed.
+            if (!address.countryCode) {
+                address.countryCode = "US";
+            }
+            if (!address.stateCode) {
+                address.stateCode = "NY";
+            }
 
             // Retrieve the list of applicable shipping methods for the given shipment and address.
             return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(address);
@@ -882,9 +916,9 @@ var Cart = AbstractModel.extend(
          * Calculates the amount to be payed by a non-gift certificate payment instrument based on the given basket.
          * The method subtracts the amount of all redeemed gift certificates from the order total and returns this
          * value.
-	     *
-	     * @returns {dw.value.Money} The amount to be payed by a non-giftcertificate payment instrument.
-	     */
+         *
+         * @returns {dw.value.Money} The amount to be payed by a non-giftcertificate payment instrument.
+         */
         getNonGiftCertificateAmount : function () {
             // the total redemption amount of all gift certificate payment instruments in the basket
             var giftCertTotal = new Money(0.0, this.getCurrencyCode());
@@ -914,9 +948,9 @@ var Cart = AbstractModel.extend(
         /**
          * Removes a gift certificate payment instrument with the given gift certificate ID
          * from the basket.
-	     *
-	     * @param {String} giftCertificateID - The ID of the gif certificate to remove the payment instrument for.
-	     */
+         *
+         * @param {String} giftCertificateID - The ID of the gif certificate to remove the payment instrument for.
+         */
         removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
 
             // iterate over the list of payment instruments
@@ -953,9 +987,9 @@ var Cart = AbstractModel.extend(
          * instruments. The remaining open amount (if there is any) will be applied to the non-gift certificate payment
          * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
          * payment instrument is used for the payment.
-	     *
-	     * @returns {boolean} false in the case of an error, true otherwise.
-	     */
+         *
+         * @returns {boolean} false in the case of an error, true otherwise.
+         */
         calculatePaymentTransactionTotal : function () {
 
             // get all payment instruments for the basket
@@ -1166,17 +1200,17 @@ var Cart = AbstractModel.extend(
             return true;
         },
 
-	    /**
-	     * Verifies whether existing non-gift-certificate payment instrument method / cards are still applicable on
-	     * base of the given attributes. Returns the collection of valid and invalid payment instruments.
-	     *
-	     * @param {dw.customer.Customer} customer - The current customer.
-	     * @param {String} countryCode - The country code.
-	     * @param {Number} amount - The payment amount.
-	     *
-	     * @returns {dw.util.Collection} ValidPaymentInstruments - The collection of valid payment instruments.
-	     * @returns {dw.util.Collection} InvalidPaymentInstruments - The collection of invalid payment instruments.
-	     */
+        /**
+         * Verifies whether existing non-gift-certificate payment instrument method / cards are still applicable on
+         * base of the given attributes. Returns the collection of valid and invalid payment instruments.
+         *
+         * @param {dw.customer.Customer} customer - The current customer.
+         * @param {String} countryCode - The country code.
+         * @param {Number} amount - The payment amount.
+         *
+         * @returns {dw.util.Collection} ValidPaymentInstruments - The collection of valid payment instruments.
+         * @returns {dw.util.Collection} InvalidPaymentInstruments - The collection of invalid payment instruments.
+         */
         validatePaymentInstruments : function (customer, countryCode, amount) {
 
             var paymentInstruments = this.getPaymentInstruments();
@@ -1228,27 +1262,27 @@ var Cart = AbstractModel.extend(
             }
 
             if (!invalidPaymentInstruments.empty) {
-	            return {
-		            InvalidPaymentInstruments : invalidPaymentInstruments,
-		            ValidPaymentInstruments   : validPaymentInstruments
-	            };
+                return {
+                    InvalidPaymentInstruments : invalidPaymentInstruments,
+                    ValidPaymentInstruments   : validPaymentInstruments
+                };
             }
             else {
                 return {
-                    ValidPaymentInstruments   : validPaymentInstruments
+                    ValidPaymentInstruments : validPaymentInstruments
                 };
             }
         },
 
-	    /**
-	     * Creates a gift certificate payment instrument from the given gift certificate ID for the given basket. The
-	     * script attempts to redeem the current balance of the gift certificate. If the current balance exceeds the
-	     * order total, this amount is redeemed and the balance is lowered.
-	     *
-	     * @param {dw.order.GiftCertificate} giftCertificate - The Gift Certificate.
-	     * @returns {dw.order.PaymentInstrument} The created PaymentInstrument.
-	     */
-	    createGiftCertificatePaymentInstrument : function (giftCertificate) {
+        /**
+         * Creates a gift certificate payment instrument from the given gift certificate ID for the given basket. The
+         * script attempts to redeem the current balance of the gift certificate. If the current balance exceeds the
+         * order total, this amount is redeemed and the balance is lowered.
+         *
+         * @param {dw.order.GiftCertificate} giftCertificate - The Gift Certificate.
+         * @returns {dw.order.PaymentInstrument} The created PaymentInstrument.
+         */
+        createGiftCertificatePaymentInstrument : function (giftCertificate) {
 
             // remove any duplicates
             // iterate over the list of payment instruments to check
@@ -1259,7 +1293,7 @@ var Cart = AbstractModel.extend(
             // remove found gift certificates, since we don't want duplicates
             while (gcPaymentInstrs.hasNext()) {
                 existingPI = gcPaymentInstrs.next();
-	            this.removePaymentInstrument(existingPI);
+                this.removePaymentInstrument(existingPI);
             }
 
             // fetch the balance and the order total
@@ -1300,7 +1334,7 @@ var Cart = AbstractModel.extend(
         },
 
         /**
-         * Creates for each quantity of a ProductLineItem a new	QuantityLineItem helper object, where the important data
+         * Creates for each quantity of a ProductLineItem a new    QuantityLineItem helper object, where the important data
          * is stored at.
          *
          * @param {dw.order.ProductLineItem} pli - The ProductLineItem.
@@ -1327,131 +1361,131 @@ var Cart = AbstractModel.extend(
             return quantityLineItems;
         },
 
-	    /**
-	     * Loads customer addresses and shipment addresses and stores them into the session address book attribute of the cart, if it is available and configured in BM.
-	     *
-	     * @param {dw.customer.Customer} customer - The customer to load the addresses from.
-	     */
-	    initAddressBook : function (customer) {
+        /**
+         * Loads customer addresses and shipment addresses and stores them into the session address book attribute of the cart, if it is available and configured in BM.
+         *
+         * @param {dw.customer.Customer} customer - The customer to load the addresses from.
+         */
+        initAddressBook : function (customer) {
 
-		    var shipments = this.getShipments();
+            var shipments = this.getShipments();
 
-		    // Load addresses from Customer Address Book
-		    if (customer.registered && customer.addressBook){
-			    for (var i = 0; i < customer.addressBook.addresses.length; i++) {
-				    this.addAddressToAddressBook(customer.addressBook.addresses[i]);
-			    }
-		    }
+            // Load addresses from Customer Address Book
+            if (customer.registered && customer.addressBook) {
+                for (var i = 0; i < customer.addressBook.addresses.length; i++) {
+                    this.addAddressToAddressBook(customer.addressBook.addresses[i]);
+                }
+            }
 
-		    // Load addresses from Shipments excluding instore shipments
-		    if (shipments){
-			    for (var i = 0; i < shipments.length; i++) {
-				    var shipment = shipments[i];
-				    if (shipment.shippingAddress && shipment.custom.shipmentType !== 'instore'){
-					    this.addAddressToAddressBook(shipment.getShippingAddress());
-				    }
-			    }
-		    }
+            // Load addresses from Shipments excluding instore shipments
+            if (shipments) {
+                for (var i = 0; i < shipments.length; i++) {
+                    var shipment = shipments[i];
+                    if (shipment.shippingAddress && shipment.custom.shipmentType !== 'instore') {
+                        this.addAddressToAddressBook(shipment.getShippingAddress());
+                    }
+                }
+            }
         },
 
-	    /**
-	     * Returns all addresses of the carts address book. The addresses are stored as a JSON object in a custom
-	     * attribute names 'sessionAddressBook'.
-	     *
-	     * @returns {dw.util.ArrayList} An ArrayList containing a addresses of the addresses stored in the carts address
-	     * book.
-	     */
-	    getAddressBookAddresses : function () {
-		    var addressBook = new Object();
-		    var addresses = new ArrayList();
+        /**
+         * Returns all addresses of the carts address book. The addresses are stored as a JSON object in a custom
+         * attribute names 'sessionAddressBook'.
+         *
+         * @returns {dw.util.ArrayList} An ArrayList containing a addresses of the addresses stored in the carts address
+         * book.
+         */
+        getAddressBookAddresses : function () {
+            var addressBook = new Object();
+            var addresses = new ArrayList();
 
-		    if (!empty(this.object.describe().getCustomAttributeDefinition('sessionAddressBook'))){
+            if (!empty(this.object.describe().getCustomAttributeDefinition('sessionAddressBook'))) {
 
-			    // Session addresses availability check
-			    if (this.object.custom.sessionAddressBook){
-				    try {
-					    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
-					    addresses.add(addressBook.addresses);
-				    } catch (error){
-					    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
-					    return null;
-				    }
-			    }
+                // Session addresses availability check
+                if (this.object.custom.sessionAddressBook) {
+                    try {
+                        addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+                        addresses.add(addressBook.addresses);
+                    } catch (error) {
+                        MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+                        return null;
+                    }
+                }
 
-			    return addresses;
-		    }
+                return addresses;
+            }
 
-		    return null;
+            return null;
         },
 
-	    /**
-	     * Adds the given address to the address book of the cart.
-	     *
-	     * @param {module:model/TransientAddress~TransientAddress} addressToAdd - The address to add.
-	     */
-	    addAddressToAddressBook : function (addressToAdd) {
-		    var address = new TransientAddress();
-		    var addressBook = new Object();
+        /**
+         * Adds the given address to the address book of the cart.
+         *
+         * @param {module:model/TransientAddress~TransientAddress} addressToAdd - The address to add.
+         */
+        addAddressToAddressBook : function (addressToAdd) {
+            var address = new TransientAddress();
+            var addressBook = new Object();
 
-		    if (addressToAdd){
+            if (addressToAdd) {
 
-			    // Try to parse incoming JSON string
-			    if (this.object.custom.sessionAddressBook){
-				    try {
-					    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
-				    } catch (error){
-					    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
-					    return;
-				    }
-			    }
+                // Try to parse incoming JSON string
+                if (this.object.custom.sessionAddressBook) {
+                    try {
+                        addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+                    } catch (error) {
+                        MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+                        return;
+                    }
+                }
 
-			    // Check if JSON object already has addresses
-			    if (!(addressBook.addresses instanceof Array)){
-				    addressBook.addresses = new Array();
-			    }
+                // Check if JSON object already has addresses
+                if (!(addressBook.addresses instanceof Array)) {
+                    addressBook.addresses = new Array();
+                }
 
-			    // Copy referenceAddress to address object to be stringified
-			    address.copyFrom(addressToAdd);
-			    address.UUID = addressToAdd.UUID;
-			    // Add address if not already existing
-			    if (!address.addressExists(addressBook.addresses)){
-				    addressBook.addresses.push(address);
-			    }
-		    }
+                // Copy referenceAddress to address object to be stringified
+                address.copyFrom(addressToAdd);
+                address.UUID = addressToAdd.UUID;
+                // Add address if not already existing
+                if (!address.addressExists(addressBook.addresses)) {
+                    addressBook.addresses.push(address);
+                }
+            }
 
-		    this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
-	    },
+            this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
+        },
 
-	    /**
-	     * Updates the given address in the carts address book.
-	     *
-	     * @param {module:model/TransientAddress~TransientAddress} addressToUpdate - The address to update.
-	     */
-	    updateAddressBookAddress : function (addressToUpdate) {
-		    var addresses = new Array();
-		    var addressBook = new Object();
+        /**
+         * Updates the given address in the carts address book.
+         *
+         * @param {module:model/TransientAddress~TransientAddress} addressToUpdate - The address to update.
+         */
+        updateAddressBookAddress : function (addressToUpdate) {
+            var addresses = new Array();
+            var addressBook = new Object();
 
-		    if (addressToUpdate && this.object.custom.sessionAddressBook){
-			    try {
-				    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
-			    } catch (error){
-				    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
-				    return;
-			    }
+            if (addressToUpdate && this.object.custom.sessionAddressBook) {
+                try {
+                    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+                } catch (error) {
+                    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+                    return;
+                }
 
-			    addresses = addressBook.addresses;
+                addresses = addressBook.addresses;
 
-			    for (var i = 0; i < addresses.length; i++){
-				    if (addresses[i].UUID == addressToUpdate.UUID){
-					    addressToUpdate.ID = addresses[i].ID;
-					    addressToUpdate.referenceAddressUUID = addresses[i].referenceAddressUUID;
-					    addressBook.addresses[i] = addressToUpdate;
-				    }
-			    }
+                for (var i = 0; i < addresses.length; i++) {
+                    if (addresses[i].UUID == addressToUpdate.UUID) {
+                        addressToUpdate.ID = addresses[i].ID;
+                        addressToUpdate.referenceAddressUUID = addresses[i].referenceAddressUUID;
+                        addressBook.addresses[i] = addressToUpdate;
+                    }
+                }
 
-			    this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
-		    }
-	    }
+                this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
+            }
+        }
 
     });
 
