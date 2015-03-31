@@ -1,0 +1,50 @@
+/**
+ * This module contains helper functions for the wishlist handling.
+ */
+
+/* API Includes */
+var AbstractModel = require('./AbstractModel');
+
+/**
+ * Whislist helper providing enhanced Whislist functionality
+ * @class module:model/Whislist~Whislist
+ */
+var Whislist = AbstractModel.extend(
+ /** @lends module:model/Whislist~Whislist.prototype */
+	{
+		/**
+		 * Gets or creates a wish list for the current customer.
+		 * 
+		 * @return  the product list
+		 */
+		fetchWishList : function()
+		{
+		    var ProductList = null;
+		
+		    var GetProductListsResult = new dw.system.Pipelet('GetProductLists').execute({
+		        Customer : customer,
+		        Type : dw.customer.ProductList.TYPE_WISH_LIST
+		    });
+		    var ProductLists = GetProductListsResult.ProductLists;
+		
+		
+		    if (ProductLists.size() > 0)
+		    {
+		        ProductList = ProductLists.iterator().next();
+		    }
+		    else
+		    {
+		        var CreateProductListResult = new dw.system.Pipelet('CreateProductList').execute({
+		            Type : dw.customer.ProductList.TYPE_WISH_LIST,
+		            Customer : customer
+		        });
+		        ProductList = CreateProductListResult.ProductList;
+		    }
+		
+		    return ProductList;
+		}
+
+	});
+
+/** The account class */
+module.exports = new Whislist();

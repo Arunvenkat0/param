@@ -1,26 +1,41 @@
-var g = require('./dw/guard');
-var wl = require('./lib/wishlist');
+'use strict';
+
+/**
+ * Controller : wishlist
+ *
+ * @module controller/Whishlist
+ */
+
+/* API Includes */
+var Transaction = require('dw/system/Transaction');
+var Wishlist = require('~/cartridge/scripts/model/Wishlist');
+var Product = require('~/cartridge/scripts/model/Product');
+var ProductList = require('~/cartridge/scripts/model/ProductList');
+
+/* Script Modules */
+var accountLogin = require('~/cartridge/scripts/model/Content').get('myaccount-login');
+var wishlistAsset = require('~/cartridge/scripts/model/Content').get('myaccount-wishlist');
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/model/Form');
+var wishlistForm = Form.get('wishlist');
 
 /**
  * Forms handling for the landing page
  */
 function LandingForm()
-{
-    // TODO use redirect for response
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        if (TriggeredAction.formId == 'register')
-        {
-            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
-            return;
-        }
-        else if (TriggeredAction.formId == 'search')
-        {
+{  
+    var formResult = wishlistForm.handleAction({
+        'register'             : function (formgroup) {
+           response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+           return;
+        },
+        'search'             : function (formgroup) {
             Search();
             return;
-        }
-    }
+        }    
+    });
 }
 
 
@@ -29,25 +44,17 @@ function LandingForm()
  */
 function Show()
 {
-    var form = require('./dw/form');
-    form.clearFormElement(session.forms.wishlist);
+    pageMeta.update(wishlistAsset);
 
-    var ProductList = wl.fetchWishList();
+    wishlistForm.clear();
 
-
-    form.updateFormWithObject(session.forms.wishlist.items, ProductList.items);
-
-
+    var productList = ProductList.get();
+    wishlistForm.get('items').copyFrom(productList.object.items);
     // init address book
-    form.updateFormWithObject(session.forms.wishlist.addressbook.addresses, customer.profile.addressBook.addresses);
+    wishlistForm.get('addressbook').get('addresses').copyFrom(customer.profile.addressBook.addresses);
 
-
-    var w = require('./dw/web');
-    w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-wishlist"));
-
-
-    response.renderTemplate('account/wishlist/wishlist', {
-        ProductList : ProductList
+    view.get().render('account/wishlist/wishlist', {
+        ProductList : productList
     });
 }
 
@@ -57,25 +64,30 @@ function Show()
  */
 function WishListForm()
 {
-    var CurrentForms = session.forms;
+    var productList = ProductList.get();
+    var formResult = wishlistForm.handleAction({
+        'addGiftCertificate'     : function (formgroup) {
+            var AddGiftCertificateToProductListResult = new dw.system.Pipelet('AddGiftCertificateToProductList')
+                    .execute({
+                        ProductList : productList.object,
+                        Priority : 0
+                    });
+        },
+        'deleteItem'     : function (formgroup) {
+            productList.remove(request.triggeredFormAction.object);
+        },
+        'updateItem'     : function (formgroup) {
+            Form.get(request.triggeredFormAction.parent).copyTo(request.triggeredFormAction.object);
+        }
+    });
 
 
     var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
+    if (TriggeredAction !== null)
     {
-        if (TriggeredAction.formId == 'addGiftCertificate')
+        if (TriggeredAction.formId === 'addToCart')
         {
-            var ProductList = wl.fetchWishList();
-
-            var AddGiftCertificateToProductListResult = new dw.system.Pipelet('AddGiftCertificateToProductList')
-                    .execute({
-                        ProductList : ProductList,
-                        Priority : 0
-                    });
-        }
-        else if (TriggeredAction.formId == 'addToCart')
-        {
-            if (CurrentForms.wishlist.items.triggeredFormAction.parent.object.type == CurrentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
+            if (CurrentForms.wishlist.items.triggeredFormAction.parent.object.type === CurrentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
                 // TODO redirect?
                 var GiftCertController = require('./GiftCert');
@@ -90,45 +102,36 @@ function WishListForm()
                 return;
             }
         }
-        else if (TriggeredAction.formId == 'deleteItem')
-        {
-            var RemoveProductListItemResult = new dw.system.Pipelet('RemoveProductListItem').execute({
-                ProductListItem : TriggeredAction.object
-            });
-        }
-        else if (TriggeredAction.formId == 'selectAddressWishlist')
+        else if (TriggeredAction.formId === 'selectAddressWishlist')
         {
             SetShippingAddress();
             return;
         }
-        else if (TriggeredAction.formId == 'setItemPrivate')
+        else if (TriggeredAction.formId === 'setItemPrivate')
         {
-            var txn = require('dw/system/Transaction');
-            txn.begin();
+            Transaction.begin();
 
             TriggeredAction.object.public = false;
 
-            txn.commit();
+            Transaction.commit();
         }
-        else if (TriggeredAction.formId == 'setItemPublic')
+        else if (TriggeredAction.formId === 'setItemPublic')
         {
-            var txn = require('dw/system/Transaction');
-            txn.begin();
+            Transaction.begin();
 
             TriggeredAction.object.public = true;
 
-            txn.commit();
+            Transaction.commit();
         }
-        else if (TriggeredAction.formId == 'setListPrivate')
+        else if (TriggeredAction.formId === 'setListPrivate')
         {
-            var ProductList = wl.fetchWishList();
+            var ProductList = Wishlist.fetchWishList();
 
-            var txn = require('dw/system/Transaction');
-            txn.begin();
+            Transaction.begin();
 
             ProductList.public = false;
 
-            txn.commit();
+            Transaction.commit();
 
 
             new dw.system.Pipelet('Script', {
@@ -139,16 +142,15 @@ function WishListForm()
                 ProductList : ProductList
             });
         }
-        else if (TriggeredAction.formId == 'setListPublic')
+        else if (TriggeredAction.formId === 'setListPublic')
         {
-            var ProductList = wl.fetchWishList();
+            var ProductList = Wishlist.fetchWishList();
 
-            var txn = require('dw/system/Transaction');
-            txn.begin();
+            Transaction.begin();
 
             ProductList.public = true;
 
-            txn.commit();
+            Transaction.commit();
 
             new dw.system.Pipelet('Script', {
                 Transactional : true,
@@ -157,11 +159,6 @@ function WishListForm()
             }).execute({
                 ProductList : ProductList
             });
-        }
-        else if (TriggeredAction.formId == 'updateItem')
-        {
-            var form = require('./dw/form');
-            form.updateObjectWithForm(TriggeredAction.object, TriggeredAction.parent);
         }
     }
 
@@ -176,11 +173,8 @@ function ShowOther()
 {
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
-
-
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.wishlist.send);
-
+    
+    CurrentForms.wishlist.send.clearFormElement();
 
     var ProductList = null;
 
@@ -193,12 +187,11 @@ function ShowOther()
     {
         ProductList = GetProductListResult.ProductList;
 
-
-        form.updateFormWithObject(CurrentForms.wishlist.items, ProductList.items);
+		Form.get(CurrentForms.wishlist.items).copyFrom(ProductList.items);
     }
 
-    response.renderTemplate('account/wishlist/wishlist', {
-        ProductList: ProductList
+    view.get().render('account/wishlist/wishlist', {
+        ProductList : productList
     });
 }
 
@@ -242,7 +235,7 @@ function AddProduct(args)
     var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
 
 
-    var ProductList = wl.fetchWishList();
+    var ProductList = Wishlist.fetchWishList();
 
 
     new dw.system.Pipelet('AddProductToProductList').execute({
@@ -264,49 +257,11 @@ function AddProduct(args)
  */
 function Add()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var product = Product.get(request.httpParameterMap.pid.stringValue).object;
+    var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-    var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : CurrentHttpParameterMap.pid.getStringValue("")
-    });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
-        Show();
-        return;
-    }
-    var Product = GetProductResult.Product;
-
-
-    var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-        Product : Product
-    });
-    var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
-
-
-    var ProductList = wl.fetchWishList();
-
-
-    var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-        Product : Product
-    });
-    var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
-
-
-    var AddProductToProductListResult = new dw.system.Pipelet('AddProductToProductList').execute({
-        Product : Product,
-        ProductList : ProductList,
-        Quantity : 1,
-        ProductOptionModel : ProductOptionModel
-    });
-    var ProductListItem = AddProductToProductListResult.ProductListItem;
-
-
-    var txn = require('dw/system/Transaction');
-    txn.begin();
-
-    ProductListItem.public = ProductList.public;
-
-    txn.commit();
+    var productList = ProductList.get();
+    productList.addProduct(product, 1, productOptionModel);
 
     Show();
 }
@@ -334,17 +289,14 @@ function Search()
         });
         var ProductLists = SearchProductListsResult.ProductLists;
 
-
-        var form = require('./dw/form');
-        form.updateFormWithObject(CurrentForms.wishlist.productlists, ProductLists);
-
+        Form.get(CurrentForms.wishlist.productlists).copyFrom(ProductLists);
 
         SearchFirstName = CurrentForms.wishlist.search.firstname.value;
         SearchLastName = CurrentForms.wishlist.search.lastname.value;
         SearchEmail = CurrentForms.wishlist.search.email.value;
 
 
-        form.clearFormElement(CurrentForms.wishlist.search);
+        CurrentForms.wishlist.search.clearFormElement();
     }
     else
     {
@@ -353,7 +305,7 @@ function Search()
         SearchEmail = CurrentForms.wishlist.search.email.value;
     }
 
-    response.renderTemplate('account/wishlist/wishlistresults', {
+    view.get().render('account/wishlist/wishlistresults', {
         SearchFirstName : SearchFirstName,
         SearchLastName : SearchLastName,
         SearchEmail : SearchEmail
@@ -387,14 +339,13 @@ function SetShippingAddress()
     }
 
 
-    var ProductList = wl.fetchWishList();
+    var ProductList = Wishlist.fetchWishList();
 
-    var txn = require('dw/system/Transaction');
-    txn.begin();
+    Transaction.begin();
     
     ProductList.setShippingAddress(Address);
 
-    txn.commit();
+    Transaction.commit();
     
     Show();
 }
@@ -407,41 +358,25 @@ function ReplaceProductListItem()
 {
     var plid = request.httpParameterMap.uuid.stringValue;
 
-    var ProductList = wl.fetchWishList();
+    var ProductList = Wishlist.fetchWishList();
 
 
     var productListItem = ProductList.getItem(plid);
     if (productListItem != null)
     {
-        var txn = require('dw/system/Transaction');
-        txn.begin();
+        Transaction.begin();
     
         ProductList.removeItem(productListItem);
 
         // TODO ProductList already resolved
         var AddProductResult = AddProduct();
 
-        txn.commit();
+        Transaction.commit();
     }
 
     // TODO rendering an empty template this seems pretty useless
-    response.renderTemplate('account/wishlist/refreshwishlist');
+    view.get().render('account/wishlist/refreshwishlist');
 }
-
-
-/*
- * Private helpers
- */
-
-function clearForms()
-{
-    var CurrentForms = session.forms;
-
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.wishlist);
-    form.clearFormElement(CurrentForms.login);
-}
-
 
 /**
  * A guard function which ensures that the user is logged in before the action can be executed.
@@ -461,8 +396,7 @@ function loggedIn(action)
         action();
     };
 }
-
-
+		
 /**
  * Contains the login procedure specific for the wishlist.
  */
@@ -479,9 +413,7 @@ function requireLogin(args)
         loginForm.rememberme.value = true;
     }
 
-
-    var w = require('./dw/web');
-    w.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-login"));
+	pageMeta.update(accountLogin);
 
     loginForm.targetAction.value = args.TargetAction;
     loginForm.targetParameters.value = (args.TargetParameters != null) ? JSON.stringify(args.TargetParameters) : null;
@@ -491,6 +423,13 @@ function requireLogin(args)
     });
 }
 
+function clearForms()
+{
+    var CurrentForms = session.forms;
+
+    CurrentForms.wishlist.clearFormElement();
+    CurrentForms.login.clearFormElement();
+}
 
 /*
  * Module exports
@@ -500,21 +439,28 @@ function requireLogin(args)
  * Web exposed methods
  */
 // own wishlist
-exports.Add                     = g.httpsGet(loggedIn(Add));
-exports.Show                    = g.httpsGet(loggedIn(Show));
-exports.ReplaceProductListItem  = g.httpsGet(loggedIn(ReplaceProductListItem));
-exports.SetShippingAddress      = g.httpsGet(loggedIn(SetShippingAddress));
+/** @see module:controller/Whishlist~Add */
+exports.Add = guard.ensure(['get', 'https'], loggedIn(Add));
+/** @see module:controller/Whishlist~Show */
+exports.Show = guard.ensure(['get', 'https'], loggedIn(Show));
+/** @see module:controller/Whishlist~ReplaceProductListItem */
+exports.ReplaceProductListItem = guard.ensure(['get', 'https'], loggedIn(ReplaceProductListItem));
+/** @see module:controller/Whishlist~SetShippingAddress */
+exports.SetShippingAddress = guard.ensure(['get', 'https'], loggedIn(SetShippingAddress));
 
 // others wishlist
-exports.Search                  = g.httpsPost(Search);
-exports.ShowOther               = g.httpsGet(ShowOther);
+/** @see module:controller/Whishlist~Search */
+exports.Search                  = guard.ensure(['get', 'https'], Search);
+/** @see module:controller/Whishlist~ShowOther */
+exports.ShowOther               = guard.ensure(['get', 'https'], ShowOther);
 
 // form handlers
-exports.LandingForm             = g.httpsPost(LandingForm);
-exports.WishListForm            = g.httpsPost(loggedIn(WishListForm));
+/** @see module:controller/Whishlist~LandingForm */
+exports.LandingForm             = guard.ensure(['post', 'https'], LandingForm);
+/** @see module:controller/Whishlist~WishListForm */
+exports.WishListForm            = guard.ensure(['post', 'https'], loggedIn(WishListForm));
 
 /*
  * Local methods
  */
 exports.AddProduct              = AddProduct;
-exports.requireLogin            = requireLogin;
