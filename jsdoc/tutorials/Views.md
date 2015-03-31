@@ -1,5 +1,3 @@
-# The View Concept
-
 The views are supposed to provide auxiliary functionality for the templates, the super class view/View provides some base infrastructure which is shared by all views.
 
 ## Usage

@@ -16,7 +16,7 @@
         "recurse": true,
         "lenient": true,
         "template": "jsdoc/template",
-        "tutorials": "tutorials"
+        "tutorials": "jsdoc/tutorials"
     },
     "plugins": ["jsdoc/demandware"]
 }

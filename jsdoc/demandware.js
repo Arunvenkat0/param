@@ -22,7 +22,7 @@ exports.handlers = {
                     for(var j = 0; j < names.length; j++){
                         var name = names[j];
                         if(name.indexOf('dw.') === 0){
-                            //logger.warn(name);
+                            //  logger.warn(name);
                         }
                     }
                 }

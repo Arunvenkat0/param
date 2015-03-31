@@ -1,5 +1,3 @@
-# The Controller Concept
-
 All controllers need to be placed in the controllers directory to work correctly. They serve as entry points for external and internal (remote includes) requests.
 
 Here are a few important aspects
