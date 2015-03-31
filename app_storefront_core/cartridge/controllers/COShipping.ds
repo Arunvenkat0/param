@@ -34,17 +34,12 @@ function start() {
     var cart = Cart.get();
 
     if (cart.object) {
-        /*
-         * Redirect to multi shipping scenario if more than one physical shipment is
-         * contained in the basket.
-         */
+        // redirect to multi shipping scenario if more than one physical shipment is contained in the basket.
         var physicalShipments = cart.getPhysicalShipments();
         if (!(Site.getCurrent().getCustomPreferenceValue('enableMultiShipping') && physicalShipments && physicalShipments.size() > 1)) {
 
-            /**
-             * Initializes the address and shipping method form: - prepopulates form with shipping address of default
-             * shipment if address exists, otherwise preselects shipping method in list if set at shipment
-             */
+            // Initializes the address and shipping method form: - prepopulates form with shipping address of default
+            // shipment if address exists, otherwise preselects shipping method in list if set at shipment
             if (cart.getDefaultShipment().getShippingAddress()) {
                 Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(cart.getDefaultShipment().getShippingAddress());
                 Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(cart.getDefaultShipment().getShippingAddress());
@@ -102,16 +97,12 @@ function singleShipping() {
 
                 handleShippingSettings(cart);
 
-                /**
-                 * Attempts to save the used shipping address in the customer address book.
-                 */
+                // Attempts to save the used shipping address in the customer address book.
                 if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
                     Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
                 }
 
-                /**
-                 * Binds the store message from the user to the shipment.
-                 */
+                // Binds the store message from the user to the shipment.
                 if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
                     if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyTo(cart.getShipments())) {
@@ -120,9 +111,7 @@ function singleShipping() {
                     }
                 }
 
-                /*
-                 * Mark step as fulfilled.
-                 */
+                // Mark step as fulfilled.
                 session.forms.singleshipping.fulfilled.value = true;
 
                 require('./COBilling').Start();
@@ -208,15 +197,11 @@ function updateShippingMethodList() {
 
         var shippingCosts = new HashMap();
         var currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
-        /*
-         * Transaction controls are for fine tuning the performance of the data base
-         * interactions when calculating shipping methods
-         */
 
+        // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
         Transaction.begin();
 
-        for (var i = 0; i < applicableShippingMethods.
-            length; i++) {
+        for (var i = 0; i < applicableShippingMethods.length; i++) {
             var method = applicableShippingMethods[i];
 
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
@@ -224,7 +209,6 @@ function updateShippingMethodList() {
             shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
         }
 
-        // TODO what the heck?
         Transaction.rollback();
 
         Transaction.wrap(function () {
@@ -293,6 +277,7 @@ function handleShippingSettings(cart) {
 
         var validationResult = cart.validateForCheckout();
 
+	    // TODO - what are those variables used for, do they need to be returned ?
         var BasketStatus = validationResult.BasketStatus;
         var EnableCheckout = validationResult.EnableCheckout;
 

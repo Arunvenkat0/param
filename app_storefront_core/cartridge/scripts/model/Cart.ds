@@ -11,6 +11,7 @@ var ArrayList = require('dw/util/ArrayList');
 var HashMap = require('dw/util/HashMap');
 var List = require('dw/util/List');
 var Money = require('dw/value/Money');
+var MultiShippingLogger = dw.system.Logger.getLogger("multishipping");
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Product = require('~/cartridge/scripts/model/Product');
@@ -265,7 +266,7 @@ var Cart = AbstractModel.extend(
 
             for (var i = 0; i < plis.length; i++) {
                 var pli = plis[i];
-                if (pli.product != null) {
+                if (pli.product) {
                     this.removeProductLineItem(pli);
                 }
             }
@@ -282,7 +283,7 @@ var Cart = AbstractModel.extend(
 
             for (var i = 0, il = plis.length; i < il; i++) {
                 var item = plis[i];
-                if ((lineItemUUID != null && item.UUID === lineItemUUID)) {
+                if ((lineItemUUID && item.UUID === lineItemUUID)) {
                     lineItem = item;
                     break;
                 }
@@ -304,7 +305,7 @@ var Cart = AbstractModel.extend(
 
             for (var i = 0, il = plis.length; i < il; i++) {
                 var item = plis[i];
-                if ((pid != null && item.productID === pid)) {
+                if ((pid && item.productID === pid)) {
                     lineItem = item;
                     break;
                 }
@@ -324,7 +325,7 @@ var Cart = AbstractModel.extend(
 
             for (var i = 0, il = plis.length; i < il; i++) {
                 var item = plis[i];
-                if ((lineItemUUID != null && item.UUID === lineItemUUID)) {
+                if ((lineItemUUID && item.UUID === lineItemUUID)) {
                     lineItem = item;
                     break;
                 }
@@ -552,7 +553,7 @@ var Cart = AbstractModel.extend(
 
             while (shipment == null) {
                 shipment = this.getShipment(candidateID);
-                if (shipment != null) {
+                if (shipment) {
                     // this ID is already taken, increment the counter
                     // and try the next one
                     counter++;
@@ -611,7 +612,7 @@ var Cart = AbstractModel.extend(
                 if (pli.shipment.shippingMethod && pli.shipment.shippingMethod.custom.storePickupEnabled) {
                     //check to see if the storeid has changed
                     if (pli.custom.fromStoreId == pli.shipment.custom.fromStoreId) {
-                        if (pli.shipment.shippingAddress != null) {
+                        if (pli.shipment.shippingAddress) {
                             continue;
                         }
                         else {
@@ -648,7 +649,7 @@ var Cart = AbstractModel.extend(
                     for (var j = 0; j < this.getShipments().length; j++) {
                         var inStoreShipment = shipments[j];
 
-                        if (inStoreShipment.custom.fromStoreId != null && (pli.custom.fromStoreId == inStoreShipment.custom.fromStoreId)) {
+                        if (inStoreShipment.custom.fromStoreId && (pli.custom.fromStoreId == inStoreShipment.custom.fromStoreId)) {
                             //have found an existing shipment that has the correct address
                             pli.setShipment(inStoreShipment);
                         }
@@ -700,7 +701,7 @@ var Cart = AbstractModel.extend(
 
             var shipment = this.getDefaultShipment();
 
-            if (shipment != null) {
+            if (shipment) {
                 var currencyCode = this.getCurrencyCode();
                 var discountPlan = PromotionMgr.getDiscounts(this.object),
                     productShippingCosts = [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
@@ -717,25 +718,25 @@ var Cart = AbstractModel.extend(
                 while (productIter.hasNext()) {
                     var pli = productIter.next();
                     var product = pli.product;
-                    if (product != null) {
+                    if (product) {
                         var psc = ShippingMgr.getProductShippingModel(product).getShippingCost(shippingMethod);
                         productShippingCosts[productShippingCosts.length] = {
                             "name"         : product.name,
                             "shippingCost" : psc,
                             "qty"          : pli.getQuantity()
                         };
-                        if (psc != null && psc.getAmount() != null && psc.isSurcharge()) {
+                        if (psc && psc.getAmount() && psc.isSurcharge()) {
                             // update the surcharge totals
                             surchargeTotal = surchargeTotal.add(psc.getAmount());
                             adustedSurchargeTotal = adustedSurchargeTotal.add(psc.getAmount());
                         }
                         //productShippingDiscounts.addAll(discountPlan.getProductShippingDiscounts(pli));
                         //productShippingDiscounts.addAll(pli.shippingLineItem.priceAdjustments);
-                        if (pli.shippingLineItem != null) {
+                        if (pli.shippingLineItem) {
                             var pdiscountsiter = pli.shippingLineItem.priceAdjustments.iterator();
                             while (pdiscountsiter.hasNext()) {
                                 var priceAdj = pdiscountsiter.next();
-                                if (priceAdj != null && priceAdj.promotion !== null) {
+                                if (priceAdj && priceAdj.promotion !== null) {
                                     if (pli.shippingLineItem.isSurcharge()) {
                                         // adjust the surchage total value
                                         adustedSurchargeTotal = adustedSurchargeTotal.add(priceAdj.price);
@@ -754,7 +755,7 @@ var Cart = AbstractModel.extend(
                 // grab price and calloutMsg objects
                 while (priceAdjIter.hasNext()) {
                     var priceAdj = priceAdjIter.next();
-                    if (priceAdj != null && priceAdj.promotion !== null) {
+                    if (priceAdj && priceAdj.promotion !== null) {
                         priceAdjTotal = priceAdjTotal.add(priceAdj.price);
                         priceAdjArray[priceAdjArray.length] = {
                             "price"      : priceAdj.price,
@@ -1052,7 +1053,7 @@ var Cart = AbstractModel.extend(
                 var productOptionID = qli.object.optionID;
                 productID = productID + '.' + productOptionID;
 
-                if (selectedAddress == null) {
+                if (selectedAddress === null) {
                     return false;
                 }
 
@@ -1173,7 +1174,7 @@ var Cart = AbstractModel.extend(
 
             // get applicable payment cards from CREDIT_CARD payment method
             var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
-            var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
+            var cards = ccMethod ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
 
             // collects all not applicable payment instruments
             var validPaymentInstruments = new ArrayList(paymentInstruments);
@@ -1192,14 +1193,14 @@ var Cart = AbstractModel.extend(
                 var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
 
                 // check, whether payment method is still applicable
-                if (method != null && methods.contains(method)) {
+                if (method && methods.contains(method)) {
                     // in case of method CREDIT_CARD, check payment cards
                     if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
                         // get payment card
                         var card = PaymentMgr.getPaymentCard(pi.creditCardType);
 
                         // check, whether payment card is still applicable
-                        if (card != null && cards.contains(card)) {
+                        if (card && cards.contains(card)) {
                             continue;
                         }
                     }
@@ -1310,7 +1311,130 @@ var Cart = AbstractModel.extend(
             }
 
             return quantityLineItems;
-        }
+        },
+
+	    /**
+	     * TODO
+	     *
+	     * @param customer
+	     * @returns {null}
+	     */
+	    initAddressBook : function (customer) {
+
+		    var shipments = this.getShipments();
+
+		    // Load addresses from Customer Address Book
+		    if (customer.registered && customer.addressBook){
+			    for (var i = 0; i < customer.addressBook.addresses.length; i++) {
+				    this.addAddressToAddressBook(customer.addressBook.addresses[i]);
+			    }
+		    }
+
+		    // Load addresses from Shipments excluding instore shipments
+		    if (shipments){
+			    for (var i = 0; i < shipments.length; i++) {
+				    var shipment = shipments[i];
+				    if (shipment.shippingAddress && shipment.custom.shipmentType !== 'instore'){
+					    this.addAddressToAddressBook(shipment.getShippingAddress());
+				    }
+			    }
+		    }
+        },
+
+	    /**
+	     * TODO
+	     * @returns {*}
+	     */
+	    getAddressBookAddresses : function () {
+		    var addressBook = new Object();
+		    var addresses = new ArrayList();
+
+		    if (!empty(this.object.describe().getCustomAttributeDefinition('sessionAddressBook'))){
+
+			    // Session addresses availability check
+			    if (this.object.custom.sessionAddressBook){
+				    try {
+					    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+					    addresses.add(addressBook.addresses);
+				    } catch (error){
+					    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+					    return null;
+				    }
+			    }
+
+			    return addresses;
+		    }
+
+		    return null;
+        },
+
+	    /**
+	     * TODO
+	     * @param address
+	     */
+	    addAddressToAddressBook : function (addressToAdd) {
+		    var address = new TransientAddress();
+		    var addressBook = new Object();
+
+		    if (addressToAdd){
+
+			    // Try to parse incoming JSON string
+			    if (this.object.custom.sessionAddressBook){
+				    try {
+					    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+				    } catch (error){
+					    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+					    return;
+				    }
+			    }
+
+			    // Check if JSON object already has addresses
+			    if (!(addressBook.addresses instanceof Array)){
+				    addressBook.addresses = new Array();
+			    }
+
+			    // Copy referenceAddress to address object to be stringified
+			    address.copyFrom(addressToAdd);
+			    address.UUID = addressToAdd.UUID;
+			    // Add address if not already existing
+			    if (!address.addressExists(addressBook.addresses)){
+				    addressBook.addresses.push(address);
+			    }
+		    }
+
+		    this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
+	    },
+
+	    /**
+	     * TODO
+	     *
+	     * @param addressToUpdate
+	     */
+	    updateAddressBookAddress : function (addressToUpdate) {
+		    var addresses = new Array();
+		    var addressBook = new Object();
+
+		    if (addressToUpdate && this.object.custom.sessionAddressBook){
+			    try {
+				    addressBook = JSON.parse(this.object.custom.sessionAddressBook);
+			    } catch (error){
+				    MultiShippingLogger.error(Resource.msgf("multishipping.error.parsejson", "checkout", null, error));
+				    return;
+			    }
+
+			    addresses = addressBook.addresses;
+
+			    for (var i = 0; i < addresses.length; i++){
+				    if (addresses[i].UUID == addressToUpdate.UUID){
+					    addressToUpdate.ID = addresses[i].ID;
+					    addressToUpdate.referenceAddressUUID = addresses[i].referenceAddressUUID;
+					    addressBook.addresses[i] = addressToUpdate;
+				    }
+			    }
+
+			    this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
+		    }
+	    }
 
     });
 

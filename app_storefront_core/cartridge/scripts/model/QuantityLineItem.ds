@@ -24,19 +24,19 @@ var QuantityLineItem = Class.extend(
         init : function (pli) {
 
             this.quantity = new Quantity(1, pli.quantity.getUnit());
-	        this.lineItemText = pli.lineItemText;
-	        this.productID = pli.productID;
-	        this.pliUUID = pli.UUID;
+            this.lineItemText = pli.lineItemText;
+            this.productID = pli.productID;
+            this.pliUUID = pli.UUID;
 
             //persisting the optionID, if the product does not have an option is set to 'na'
             if (pli.optionProductLineItems.size() > 0) {
                 for (var iter = pli.optionProductLineItems.iterator(); iter.hasNext();) {
                     var item = iter.next();
-	                this.optionID = item.optionValueID;
+                    this.optionID = item.optionValueID;
                 }
             }
             else {
-	            this.optionID = 'na';
+                this.optionID = 'na';
             }
 
         }

@@ -11,6 +11,7 @@
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
+var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
@@ -37,7 +38,7 @@ function start() {
             cart.calculate();
         });
 
-	    pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
+        pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
         view.get({
             Basket : cart.object
         }).render('checkout/summary/summary');
@@ -80,7 +81,7 @@ function showConfirmation(order) {
     session.forms.profile.login.passwordconfirm.clearFormElement();
     session.forms.profile.login.password.clearFormElement();
 
-    pageMeta.update({pageTitle : 'SiteGenesis Checkout Confirmation'});
+    pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
     view.get({
         Order : order
     }).render('checkout/confirmation/confirmation');

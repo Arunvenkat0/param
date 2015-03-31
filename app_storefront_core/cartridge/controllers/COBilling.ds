@@ -72,7 +72,7 @@ function start(cart) {
         cart.calculate();
     });
 
-    pageMeta.update({pageTitle : 'SiteGenesis Checkout'});
+    pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
     returnToForm(cart);
 }
 
@@ -88,7 +88,7 @@ function returnToForm(cart, params) {
         });
     }
 
-	pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
+    pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
 
     if (params) {
         view.get(require('~/object').extend(params, {Basket : cart.object})).render('checkout/billing/billing');
@@ -737,29 +737,31 @@ function validatePayment(cart) {
  */
 function saveCreditCard() {
 
-    if (customer.authenticated && session.forms.billing.paymentMethods.creditCard.saveCard.value) {
-        var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-        var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
+	if (!(customer.authenticated && session.forms.billing.paymentMethods.creditCard.saveCard.value)) {
+		return true;
+	}
+	else {
 
-        newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
-        newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
-        newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
-        newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
-        newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
+		var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
+		var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
 
-        for (var i = 0; i < creditCards.length; i++) {
-            var creditcard = creditCards[i];
+		// coy the credit card details to the payment instrument
+		newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
+		newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
+		newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
+		newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
+		newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
 
-            if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
-                customer.getProfile().getWallet().removePaymentInstrument(creditcard);
-            }
-        }
+		for (var i = 0; i < creditCards.length; i++) {
+			var creditcard = creditCards[i];
 
-        return true;
-    }
-    else {
-        return false;
-    }
+			if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
+				customer.getProfile().getWallet().removePaymentInstrument(creditcard);
+			}
+		}
+
+		return true;
+	}
 }
 
 /**

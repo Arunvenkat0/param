@@ -106,8 +106,8 @@ var Profile = AbstractModel.extend(
                 // get a possible equivalent address from the address book
                 var address = null;
 
-	            for (var i = 0; i < addressBook.addresses.length; i++) {
-		            address = addressBook.addresses[i];
+                for (var i = 0; i < addressBook.addresses.length; i++) {
+                    address = addressBook.addresses[i];
                     if (address.isEquivalentAddress(addressToAdd)) {
                         break;
                     }
@@ -124,16 +124,16 @@ var Profile = AbstractModel.extend(
                         Logger.debug("Cannot add address to address book, with empty address ID.");
                         return;
                     }
-	                else {
-	                    address = addressBook.createAddress(addressID);
-	                    address.setFirstName(addressToAdd.firstName);
-	                    address.setLastName(addressToAdd.lastName);
-	                    address.setAddress1(addressToAdd.address1);
-	                    address.setAddress2(addressToAdd.address2);
-	                    address.setCity(addressToAdd.city);
-	                    address.setPostalCode(addressToAdd.postalCode);
-	                    address.setStateCode(addressToAdd.stateCode);
-	                    address.setCountryCode(addressToAdd.countryCode.value);
+                    else {
+                        address = addressBook.createAddress(addressID);
+                        address.setFirstName(addressToAdd.firstName);
+                        address.setLastName(addressToAdd.lastName);
+                        address.setAddress1(addressToAdd.address1);
+                        address.setAddress2(addressToAdd.address2);
+                        address.setCity(addressToAdd.city);
+                        address.setPostalCode(addressToAdd.postalCode);
+                        address.setStateCode(addressToAdd.stateCode);
+                        address.setCountryCode(addressToAdd.countryCode.value);
                     }
                 }
 
@@ -141,117 +141,118 @@ var Profile = AbstractModel.extend(
                 // or in the newly created address
                 address.setPhone(addressToAdd.phone);
             }
+
+            return address;
         },
 
-	    /**
-	     * Determines a unique address ID for an address to be saved in the profiles address book. The function first
-	     * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and
-	     * checks the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not
-	     * the counter is incremented and checked again.
-	     *
-	     * @param city
-	     * @returns {*}
-	     */
-	    determineUniqueAddressID : function (city) {
+        /**
+         * Determines a unique address ID for an address to be saved in the profiles address book. The function first
+         * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and
+         * checks the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not
+         * the counter is incremented and checked again.
+         *
+         * @param city
+         * @returns {*}
+         */
+        determineUniqueAddressID : function (city) {
             var counter = 0;
 
             // check, if attribute "city" is set and has a value
             if (city) {
-	            // initialize the candidate ID
-	            var candidateID = city;
-	            var existingAddress = null;
+                // initialize the candidate ID
+                var candidateID = city;
+                var existingAddress = null;
 
-	            while (existingAddress == null) {
-		            existingAddress = this.getAddressBook().getAddress(candidateID);
-		            if (existingAddress != null) {
-			            // this ID is already taken, increment the counter
-			            // and try the next one
-			            counter++;
-			            candidateID = city + "-" + counter;
-			            existingAddress = null;
-		            }
-		            else {
-			            return candidateID;
-		            }
-	            }
+                while (existingAddress == null) {
+                    existingAddress = this.getAddressBook().getAddress(candidateID);
+                    if (existingAddress != null) {
+                        // this ID is already taken, increment the counter
+                        // and try the next one
+                        counter++;
+                        candidateID = city + "-" + counter;
+                        existingAddress = null;
+                    }
+                    else {
+                        return candidateID;
+                    }
+                }
             }
 
-	        return null;
+            return null;
         },
 
-	    /**
-	     *
-	     *
-	     * @param countryCode
-	     * @param amount
-	     * @returns {*}
-	     */
-	    validateWalletPaymentInstruments : function (paymentInstruments, countryCode, amount) {
+        /**
+         *
+         *
+         * @param countryCode
+         * @param amount
+         * @returns {*}
+         */
+        validateWalletPaymentInstruments : function (paymentInstruments, countryCode, amount) {
 
-		    // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
-		    var paymentInstruments = this.getWallet().getPaymentInstruments()
-		    var customer = this.getCustomer();
+            // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
+            var paymentInstruments = this.getWallet().getPaymentInstruments()
+            var customer = this.getCustomer();
 
-		    // get applicable payment methods
-		    var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
+            // get applicable payment methods
+            var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
 
-		    // get applicable payment cards from CREDIT_CARD payment method
-		    var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
-		    var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
+            // get applicable payment cards from CREDIT_CARD payment method
+            var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
+            var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
 
-		    // collects all not applicable payment instruments
-		    var validPaymentInstruments = new ArrayList(paymentInstruments);
-		    var invalidPaymentInstruments = new ArrayList();
+            // collects all not applicable payment instruments
+            var validPaymentInstruments = new ArrayList(paymentInstruments);
+            var invalidPaymentInstruments = new ArrayList();
 
-		    for (var i = 0; i < paymentInstruments.length; i++) {
-			    var pi = paymentInstruments[i];
-			    // ignore gift certificate payment instruments
-			    if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
-				    continue;
-			    }
+            for (var i = 0; i < paymentInstruments.length; i++) {
+                var pi = paymentInstruments[i];
+                // ignore gift certificate payment instruments
+                if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
+                    continue;
+                }
 
-			    // get payment method
-			    var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
+                // get payment method
+                var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
 
-			    // check, whether payment method is still applicable
-			    if (method != null && methods.contains(method)) {
-				    // in case of method CREDIT_CARD, check payment cards
-				    if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
-					    // get payment card
-					    var card = PaymentMgr.getPaymentCard(pi.creditCardType);
+                // check, whether payment method is still applicable
+                if (method != null && methods.contains(method)) {
+                    // in case of method CREDIT_CARD, check payment cards
+                    if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
+                        // get payment card
+                        var card = PaymentMgr.getPaymentCard(pi.creditCardType);
 
-					    // check, whether payment card is still applicable
-					    if (card != null && cards.contains(card)) {
-						    continue;
-					    }
-				    }
-				    else {
-					    // continue, if method is applicable
-					    continue;
-				    }
-			    }
+                        // check, whether payment card is still applicable
+                        if (card != null && cards.contains(card)) {
+                            continue;
+                        }
+                    }
+                    else {
+                        // continue, if method is applicable
+                        continue;
+                    }
+                }
 
-			    // collect invalid payment instruments
-			    invalidPaymentInstruments.add(pi);
-			    validPaymentInstruments.remove(pi);
-		    }
+                // collect invalid payment instruments
+                invalidPaymentInstruments.add(pi);
+                validPaymentInstruments.remove(pi);
+            }
 
-		    if (!invalidPaymentInstruments.empty) {
-			    return {
-				    InvalidPaymentInstruments : invalidPaymentInstruments,
-				    ValidPaymentInstruments   : validPaymentInstruments
-			    };
-		    }
-		    else {
-			    return {
-				    ValidPaymentInstruments   : validPaymentInstruments
-			    };
-		    }
+            if (!invalidPaymentInstruments.empty) {
+                return {
+                    InvalidPaymentInstruments : invalidPaymentInstruments,
+                    ValidPaymentInstruments   : validPaymentInstruments
+                };
+            }
+            else {
+                return {
+                    ValidPaymentInstruments : validPaymentInstruments
+                };
+            }
 
-	    }
+        }
 
     });
-
 
 /** The profile class */
 module.exports = new Profile();
