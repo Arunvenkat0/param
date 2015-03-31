@@ -1,8 +1,6 @@
 'use strict';
 
 /**
- * Multi Shipping Scenario
- * ---------------------------
  * This controller implements the logic for the multiple shipping scenario. It is responsible for dealing with more
  * than one shipments, respectively multiple shipping addresses as well as multiple selected shipping methods.
  *
@@ -140,9 +138,9 @@ function multiShippingMethods() {
                 var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
 
                 if (shipmentForm.shippingMethodID.selectedOptionObject !== null) {
-	                Transaction.wrap(function () {
-		                shipmentForm.getObject().setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
-	                });
+                    Transaction.wrap(function () {
+                        shipmentForm.getObject().setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
+                    });
                 }
 
                 if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
@@ -175,7 +173,7 @@ function initAddressForms(cart, quantityLineItems) {
         Form.get(session.forms.multishipping.addressSelection.quantityLineItems).copyFrom(quantityLineItems);
     }
 
-	var addresses = cart.getAddressBookAddresses();
+    var addresses = cart.getAddressBookAddresses();
 
     if (!addresses) {
         start();
@@ -202,16 +200,16 @@ function editAddresses() {
 
         session.forms.multishipping.editAddress.clearFormElement();
 
-	    var addresses = cart.getAddressBookAddresses();
+        var addresses = cart.getAddressBookAddresses();
 
-	    if (!addresses) {
+        if (!addresses) {
             start();
             return;
         }
-	    else {
+        else {
             session.forms.multishipping.editAddress.addressList.setOptions(addresses.iterator());
             view.get({Basket : cart.object}).render('checkout/shipping/multishipping/editaddresses');
-	    }
+        }
 
         return;
     }
@@ -265,10 +263,10 @@ function editForm() {
 function handleShippingSettings() {
     for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
 
-	    var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
-	    var shipment = shipmentForm.object;
+        var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
+        var shipment = shipmentForm.object;
 
-	    shipment.setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
+        shipment.setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
 
         if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
             return {error : true};
@@ -297,42 +295,42 @@ function addEditAddress() {
 
         // Handle customer address book update process
         if (addToCustomerAddressBook && addToCustomerAddressBook === true) {
-	        if (referenceAddress) {
-		        // Get address from adress book
-		        if (referenceAddress.ID) {
-			        customerAddress = Profile.get().getAddessBook().getAddress(referenceAddress.ID);
-		        }
-	        }
-	        else {
-		        customerAddress = Transaction.wrap(function () {
-			        return Profile.get().addAddressToAddressBook(newAddress);
-		        });
-		        newAddress.ID = customerAddress.ID;
-		        newAddress.referenceAddressUUID = customerAddress.getUUID();
-	        }
+            if (referenceAddress) {
+                // Get address from adress book
+                if (referenceAddress.ID) {
+                    customerAddress = Profile.get().getAddessBook().getAddress(referenceAddress.ID);
+                }
+            }
+            else {
+                customerAddress = Transaction.wrap(function () {
+                    return Profile.get().addAddressToAddressBook(newAddress);
+                });
+                newAddress.ID = customerAddress.ID;
+                newAddress.referenceAddressUUID = customerAddress.getUUID();
+            }
 
             if (customerAddress) {
                 var helperAddress = new TransientAddress();
                 helperAddress.copyFrom(newAddress);
-	            Transaction.wrap(function () {
-		            helperAddress.copyTo(customerAddress);
-	            });
+                Transaction.wrap(function () {
+                    helperAddress.copyTo(customerAddress);
+                });
             }
         }
 
         // Handle session address book update process
-	    if (referenceAddress) {
-		    // Update Address
-		    newAddress.UUID = referenceAddress.UUID;
-		    Transaction.wrap(function () {
-			    cart.updateAddressBookAddress(newAddress);
-		    });
-	    }
-	    else {
-		    Transaction.wrap(function () {
-			    cart.addAddressToAddressBook(newAddress);
-		    });
-	    }
+        if (referenceAddress) {
+            // Update Address
+            newAddress.UUID = referenceAddress.UUID;
+            Transaction.wrap(function () {
+                cart.updateAddressBookAddress(newAddress);
+            });
+        }
+        else {
+            Transaction.wrap(function () {
+                cart.addAddressToAddressBook(newAddress);
+            });
+        }
 
         for (var i = 0; i < session.forms.multishipping.addressSelection.quantityLineItems.childCount; i++) {
             var quantityLineItem = session.forms.multishipping.addressSelection.quantityLineItems[i];

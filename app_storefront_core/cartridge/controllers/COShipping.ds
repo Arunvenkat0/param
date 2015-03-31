@@ -19,6 +19,7 @@ var Resource = require('dw/web/Resource');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Site = require('dw/system/Site');
 var Transaction = require('dw/system/Transaction');
+var TransientAddress = require('~/cartridge/scripts/model/TransientAddress');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -147,13 +148,15 @@ function selectShippingMethod(cart) {
 
     if (cart.object) {
 
-        var applicableShippingMethods = cart.getApplicableShippingMethods(
-            request.httpParameterMap.countryCode.stringValue,
-            request.httpParameterMap.stateCode.stringValue,
-            request.httpParameterMap.postalCode.stringValue,
-            request.httpParameterMap.city.stringValue,
-            request.httpParameterMap.address1.stringValue,
-            request.httpParameterMap.address2.stringValue);
+	    var address = new TransientAddress();
+	    address.countryCode = request.httpParameterMap.countryCode.stringValue;
+	    address.stateCode = request.httpParameterMap.stateCode.stringValue;
+	    address.postalCode = request.httpParameterMap.postalCode.stringValue;
+	    address.city = request.httpParameterMap.city.stringValue;
+	    address.address1 = request.httpParameterMap.address1.stringValue;
+	    address.address2 = request.httpParameterMap.address2.stringValue;
+
+        var applicableShippingMethods = cart.getApplicableShippingMethods(address);
 
         Transaction.wrap(function () {
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);

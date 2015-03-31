@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * This pipeline is responsible to create an order from the current basket. It's a pure processing pipeline and does no page
- * rendering. The pipeline is used by the checkout and is called upon the triggered place order action.
- * It contains the actual logic to authorize the payment and create the order. The pipeline communicates the result
+ * This controller is responsible to create an order from the current basket. It's a pure processing controller and does
+ * no page rendering. The controller is used by the checkout and is called upon the triggered place order action.
+ * It contains the actual logic to authorize the payment and create the order. The controller communicates the result
  * of the order creation process by named end nodes and uses a status object PlaceOrderError to set proper error states.
  * The calling pipeline is responsible to react on these end nodes and to evaluate the error status.
  *
@@ -50,7 +50,7 @@ function handlePayments(order) {
             if (PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor() === null) {
 
                 Transaction.wrap(function () {
-	                paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
+                    paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
                 });
             }
             else {
@@ -71,7 +71,10 @@ function handlePayments(order) {
                 // dynamic call node to authorization pipeline
                 // TODO support global lookup of controller from site cartridge list
                 var PaymentProcessor = require('./lib/payment/' + AuthorizationPipeline);
-                var AuthorizationResult = PaymentProcessor.Authorize({'PaymentInstrument' : paymentInstrument, 'OrderNo' : order.getOrderNo});
+                var AuthorizationResult = PaymentProcessor.Authorize({
+                    'PaymentInstrument' : paymentInstrument,
+                    'OrderNo'           : order.getOrderNo
+                });
 
                 if (AuthorizationResult.not_supported || AuthorizationResult.error) {
                     return {
@@ -92,81 +95,81 @@ function handlePayments(order) {
 function start() {
     var cart = Cart.get();
 
-	if (cart.object) {
-		// Clean shipments.
-		require('./COShipping').PrepareShipments(cart);
+    if (cart.object) {
+        // Clean shipments.
+        require('./COShipping').PrepareShipments(cart);
 
-		// Make sure there are valid shipping address, accounting for gift certificate that would not have one.
-		if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
-			require('./COShipping').Start();
-			return {};
-		}
+        // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
+        if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
+            require('./COShipping').Start();
+            return {};
+        }
 
-		// Make sure, the billing step has been fulfilled, otherwise restart checkout.
-		if (!session.forms.billing.fulfilled.value) {
-			require('./COCustomer').Start();
-			return {};
-		}
+        // Make sure, the billing step has been fulfilled, otherwise restart checkout.
+        if (!session.forms.billing.fulfilled.value) {
+            require('./COCustomer').Start();
+            return {};
+        }
 
-		Transaction.wrap(function () {
-			cart.calculate();
-		});
+        Transaction.wrap(function () {
+            cart.calculate();
+        });
 
-		if (!require('./COBilling').ValidatePayment(cart)) {
-			require('./COBilling').Start();
-			return {};
-		}
+        if (!require('./COBilling').ValidatePayment(cart)) {
+            require('./COBilling').Start();
+            return {};
+        }
 
-		var validationResult = cart.validateForCheckout();
+        var validationResult = cart.validateForCheckout();
 
-		// TODO - what are those used for - do they need to be returned/passed to a template ?
-		var BasketStatus = validationResult.BasketStatus;
-		var EnableCheckout = validationResult.EnableCheckout;
+        // TODO - what are those used for - do they need to be returned/passed to a template ?
+        var BasketStatus = validationResult.BasketStatus;
+        var EnableCheckout = validationResult.EnableCheckout;
 
-		// Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
-		// back to billing page.
-		if (!cart.calculatePaymentTransactionTotal()) {
-			require('./COBilling').Start();
-			return {};
-		}
+        // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
+        // back to billing page.
+        if (!cart.calculatePaymentTransactionTotal()) {
+            require('./COBilling').Start();
+            return {};
+        }
 
-		// Handle used addresses and credit cards.
-		var saveCCResult = require('./COBilling').SaveCreditCard();
+        // Handle used addresses and credit cards.
+        var saveCCResult = require('./COBilling').SaveCreditCard();
 
-		if (!saveCCResult) {
-			return {
-				error           : true,
-				PlaceOrderError : new Status(Status.ERROR, "confirm.error.technical")
-			};
-		}
+        if (!saveCCResult) {
+            return {
+                error           : true,
+                PlaceOrderError : new Status(Status.ERROR, "confirm.error.technical")
+            };
+        }
 
-		// Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
-		// 'Created'.
-		var createOrderResult = createOrder(cart);
-		if (createOrderResult.error) {
-			// TODO - need to pass BasketStatus to Cart-Show ?
-			var BasketStatus = new Status(Status.ERROR);
-			require('./Cart').Show();
-			return {};
-		}
-		var order = createOrderResult.Order;
+        // Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
+        // 'Created'.
+        var createOrderResult = createOrder(cart);
+        if (createOrderResult.error) {
+            // TODO - need to pass BasketStatus to Cart-Show ?
+            var BasketStatus = new Status(Status.ERROR);
+            require('./Cart').Show();
+            return {};
+        }
+        var order = createOrderResult.Order;
 
-		var handlePaymentsResult = handlePayments(order);
-		if (handlePaymentsResult.error) {
-			OrderMgr.failOrder(order);
-			return {error : true};
-		}
-		else if (handlePaymentsResult.missingPaymentInfo) {
-			OrderMgr.failOrder(order);
-			return {error : true};
-		}
+        var handlePaymentsResult = handlePayments(order);
+        if (handlePaymentsResult.error) {
+            OrderMgr.failOrder(order);
+            return {error : true};
+        }
+        else if (handlePaymentsResult.missingPaymentInfo) {
+            OrderMgr.failOrder(order);
+            return {error : true};
+        }
 
-		return submitImpl(order);
-	}
-	else {
-		require('./Cart').Show();
-		return {};
-	}
+        return submitImpl(order);
+    }
+    else {
+        require('./Cart').Show();
+        return {};
+    }
 }
 
 /**
@@ -210,10 +213,10 @@ function submitImpl(order) {
     mail.send();
 
     // Mark order as EXPORT_STATUS_READY.
-	Transaction.wrap(function () {
-	    order.setExportStatus(Order.EXPORT_STATUS_READY);
-	    order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
-	});
+    Transaction.wrap(function () {
+        order.setExportStatus(Order.EXPORT_STATUS_READY);
+        order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
+    });
 
     // Clears all forms used in the checkout process.
     session.forms.singleshipping.clearFormElement();
@@ -290,26 +293,26 @@ function createGiftCertificates(order) {
 function submitPaymentJSON() {
 
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
-	if (order.object && (request.httpParameterMap.order_token.stringValue === order.getOrderToken())) {
-		var copyPaymentInfoResult = copyPaymentInfo();
-		if (copyPaymentInfoResult.error) {
-			view.get().render('checkout/components/faults');
-			return;
-		}
+    if (order.object && (request.httpParameterMap.order_token.stringValue === order.getOrderToken())) {
+        var copyPaymentInfoResult = copyPaymentInfo();
+        if (copyPaymentInfoResult.error) {
+            view.get().render('checkout/components/faults');
+            return;
+        }
 
-		var handlePaymentsResult = handlePayments();
-		if (handlePaymentsResult.error) {
-			view.get().render('checkout/components/faults');
-			return;
-		}
+        var handlePaymentsResult = handlePayments();
+        if (handlePaymentsResult.error) {
+            view.get().render('checkout/components/faults');
+            return;
+        }
 
-		view.get({}).render('checkout/components/payment_methods_success');
+        view.get({}).render('checkout/components/payment_methods_success');
 
-	}
-	else {
-		view.get().render('checkout/components/faults');
-		return;
-	}
+    }
+    else {
+        view.get().render('checkout/components/faults');
+        return;
+    }
 }
 
 /**
@@ -357,10 +360,6 @@ function submit() {
     require('./COSummary').ShowConfirmation();
 }
 
-/**
- * Order successfully created, communicate status back to calling pipeline.
- * TODO ????
- */
 /*
  * Module exports
  */

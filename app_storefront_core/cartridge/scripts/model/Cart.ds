@@ -35,13 +35,12 @@ var Cart = AbstractModel.extend(
          * Use this method to get a new instance for the current or a given basket.
          *
          * @param parameter
-         * @returns {Cart}
+         * @returns {module:model/Cart~Cart}
          */
         get : function (parameter) {
             var obj = null;
 
             if (!parameter) {
-                // TODO
                 var GetBasketResult = new dw.system.Pipelet('GetBasket', {
                     Create : false
                 }).execute();
@@ -58,7 +57,8 @@ var Cart = AbstractModel.extend(
 
         /**
          * Use this method to get or create a new instance of a basket
-         c
+         *
+         * @returns {module:model/Cart~Cart}
          */
         goc : function () {
             var obj = null;
@@ -439,8 +439,19 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Implements a typical shopping cart checkout validation. Some parts of the validation script are specific to
+         * the reference application logic and might not be applicable to our customer's storefront applications.
+         * However, the shopping cart validation script can be customized to meet specific needs and requirements.
          *
-         * @returns {*}
+         * The script implements the validation of the shopping cart against specific
+         * conditions. This includes the following steps:
+         * - validate that total price is not N/A
+         * - validate that all products in the basket are still in site catalog and online
+         * - validate that all coupon codes in the basket are valid
+         * - validate that the taxes can be calculated for all products in the basket (if ValidateTax in put paramter is true)
+         *
+         * @returns {dw.system.Status} BasketStatus
+         * @returns {Boolean} EnableCheckout
          */
         validateForCheckout : function () {
 
@@ -479,7 +490,7 @@ var Cart = AbstractModel.extend(
          * Determines the physical shipments of the current cart. Physical shipments are shipments which contain at
          * least one product line item. A shipment which contains only gift certificates is not a physical shipment.
          *
-         * @returns {*}
+         * @returns {dw.util.ArrayList} List of physical shipments.
          */
         getPhysicalShipments : function () {
 
@@ -539,12 +550,12 @@ var Cart = AbstractModel.extend(
         },
 
         /**
-         * Determines a unique shipment ID for shipments in the curent cart and the given base ID. The function appends
+         * Determines a unique shipment ID for shipments in the current cart and the given base ID. The function appends
          * a counter to the base ID and checks the existence of the resulting ID. If the resulting ID is unique this ID
          * is returned, if not the counter is incremented and checked again.
          *
-         * @param baseID
-         * @returns {*}
+         * @param {String} baseID - The base ID.
+         * @returns {String} Calculated shipment ID.
          */
         determineUniqueShipmentID : function (baseID) {
             var counter = 1;
@@ -572,8 +583,8 @@ var Cart = AbstractModel.extend(
         /**
          * Creates a shipping address for the shipment with the given shipment ID.
          *
-         * @param shipmentID
-         * @returns {*}
+         * @param {String} shipmentID - The ID of the shipment to create the shipping address for.
+         * @returns {dw.order.OrderAddress} The created shipping address.
          */
         createShipmentShippingAddress : function (shipmentID) {
 
@@ -692,9 +703,10 @@ var Cart = AbstractModel.extend(
         },
 
         /**
-         * This script updates the shipping method of the given shipment. If a shipping method ID is  given, the given shipping method used to update the shipment.
+         * This script updates the shipping method of the given shipment. If a shipping method ID is  given, the given
+         * shipping method used to update the shipment.
          *
-         * @param shippingMethod
+         * @param {dw.order.ShippingMethod} shippingMethod
          * @returns {{shippingExclDiscounts: *, shippingInclDiscounts: *, productShippingCosts: Array, productShippingDiscounts: ArrayList, shippingPriceAdjustments: Array, shippingPriceAdjustmentsTotal: Money, surchargeAdjusted: Money, baseShipping: *, baseShippingAdjusted: *}}
          */
         preCalculateShipping : function (shippingMethod) {
@@ -793,10 +805,10 @@ var Cart = AbstractModel.extend(
          * If the passed shipping method is not in this list, then the script uses the default shipping method.
          * If the default shipping method is not in the list, the script uses the first method in the list.
          *
-         * @param shipmentID The ID of the shipment to update the shipping method for.
-         * @param shippingMethodID The ID of the shipping method to set for the shipment.
-         * @param shippingMethod The shipping method to set for the shipment.
-         * @param shippingMethods The list of applicable shipping methods.
+         * @param {String} shipmentID - The ID of the shipment to update the shipping method for.
+         * @param {String} shippingMethodID - The ID of the shipping method to set for the shipment.
+         * @param {dw.order.ShippingMethod} shippingMethod - The shipping method to set for the shipment.
+         * @param {dw.util.Collection} shippingMethods - The list of applicable shipping methods.
          */
         updateShipmentShippingMethod : function (shipmentID, shippingMethodID, shippingMethod, shippingMethods) {
 
@@ -816,7 +828,7 @@ var Cart = AbstractModel.extend(
                     }
                 }
                 else {
-                    if (method != shippingMethod) {
+                    if (method !== shippingMethod) {
                         continue;
                     }
 
@@ -845,39 +857,34 @@ var Cart = AbstractModel.extend(
         },
 
 	    /**
-	     * TODO
+	     * Retrieves the list of applicable shipping methods for a given shipment and a full or partial shipping address.
+	     * A shipping method is applicable if it does not exclude any of the products in the shipment, and does not
+	     * exclude the specified address.
 	     *
-	     * @param countryCode
-	     * @param stateCode
-	     * @param postalCode
-	     * @param city
-	     * @param address1
-	     * @param address2
-	     * @returns {*}
+	     * @param {module:model/TransientAddress~TransientAddress} address - The address to get the applicable shipping
+	     * methods for.
+	     * @returns {dw.util.Collection} The list of applicable shipping methods for the default shipment and the given address.
 	     */
-        getApplicableShippingMethods : function (countryCode, stateCode, postalCode, city, address1, address2) {
+	    getApplicableShippingMethods : function (address) {
+		    // Modify as needed.
+		    if (!address.countryCode) {
+				address.countryCode = "US";
+		    }
+		    if (!address.stateCode) {
+			    address.stateCode = "NY";
+		    }
 
-            // Construct an address from request parameters.
-            var addressObj = new Object();
-
-            // SiteGenesis-specific default used to define list of shipping methods shown by default.
-            // Modify as needed.
-            addressObj.countryCode = (countryCode === null || StringUtils.trim(countryCode) === "") ? "US" : StringUtils.trim(countryCode);
-            addressObj.stateCode = (stateCode === null || StringUtils.trim(stateCode) === "") ? "NY" : StringUtils.trim(stateCode);
-            addressObj.postalCode = postalCode && StringUtils.trim(postalCode);
-            addressObj.city = city && StringUtils.trim(city);
-            addressObj.address1 = address1 && StringUtils.trim(address1);
-            addressObj.address2 = address2 && StringUtils.trim(address2);
-
-            // Retrieve the list of applicabnle shipping methods for the given shipment and address.
-            return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(addressObj);
+            // Retrieve the list of applicable shipping methods for the given shipment and address.
+            return ShippingMgr.getShipmentShippingModel(this.getDefaultShipment()).getApplicableShippingMethods(address);
         },
 
         /**
          * Calculates the amount to be payed by a non-gift certificate payment instrument based on the given basket.
          * The method subtracts the amount of all redeemed gift certificates from the order total and returns this
          * value.
-         */
+	     *
+	     * @returns {dw.value.Money} The amount to be payed by a non-giftcertificate payment instrument.
+	     */
         getNonGiftCertificateAmount : function () {
             // the total redemption amount of all gift certificate payment instruments in the basket
             var giftCertTotal = new Money(0.0, this.getCurrencyCode());
@@ -907,7 +914,9 @@ var Cart = AbstractModel.extend(
         /**
          * Removes a gift certificate payment instrument with the given gift certificate ID
          * from the basket.
-         */
+	     *
+	     * @param {String} giftCertificateID - The ID of the gif certificate to remove the payment instrument for.
+	     */
         removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
 
             // iterate over the list of payment instruments
@@ -928,7 +937,7 @@ var Cart = AbstractModel.extend(
         /**
          * Deletes multiple payment instruments.
          *
-         * @param paymentInstruments
+         * @param {dw.util.Collection} paymentInstruments The payment instruments to remove.
          */
         removePaymentInstruments : function (paymentInstruments) {
 
@@ -945,7 +954,7 @@ var Cart = AbstractModel.extend(
          * instrument (such as a credit card). Note, that this script assumes that only one non-gift certificate
          * payment instrument is used for the payment.
 	     *
-	     * @returns {boolean}
+	     * @returns {boolean} false in the case of an error, true otherwise.
 	     */
         calculatePaymentTransactionTotal : function () {
 
@@ -1003,7 +1012,7 @@ var Cart = AbstractModel.extend(
         /**
          * Creates a list of gift certificate ids from gift certificate payment instruments.
          *
-         * @returns {dw.util.ArrayList}
+         * @returns {dw.util.ArrayList} The list of gift certificate IDs.
          */
         getGiftCertIdList : function () {
             var gcIdList = new ArrayList();
@@ -1021,7 +1030,7 @@ var Cart = AbstractModel.extend(
          * a data structure (address and product relations through HashMaps).
          *
          * @param {dw.web.FormList} quantityLineItems
-         * @returns {*}
+         * @returns {boolean} false in the case of an error, true otherwise.
          */
         mergeQuantities : function (quantityLineItems) {
 
@@ -1158,12 +1167,15 @@ var Cart = AbstractModel.extend(
         },
 
 	    /**
-	     * TODO
+	     * Verifies whether existing non-gift-certificate payment instrument method / cards are still applicable on
+	     * base of the given attributes. Returns the collection of valid and invalid payment instruments.
 	     *
-	     * @param customer
-	     * @param countryCode
-	     * @param amount
-	     * @returns {*}
+	     * @param {dw.customer.Customer} customer - The current customer.
+	     * @param {String} countryCode - The country code.
+	     * @param {Number} amount - The payment amount.
+	     *
+	     * @returns {dw.util.Collection} ValidPaymentInstruments - The collection of valid payment instruments.
+	     * @returns {dw.util.Collection} InvalidPaymentInstruments - The collection of invalid payment instruments.
 	     */
         validatePaymentInstruments : function (customer, countryCode, amount) {
 
@@ -1233,8 +1245,8 @@ var Cart = AbstractModel.extend(
 	     * script attempts to redeem the current balance of the gift certificate. If the current balance exceeds the
 	     * order total, this amount is redeemed and the balance is lowered.
 	     *
-	     * @param giftCertificate The Gift Certificate.
-	     * @returns {*} The created Payment instrument.
+	     * @param {dw.order.GiftCertificate} giftCertificate - The Gift Certificate.
+	     * @returns {dw.order.PaymentInstrument} The created PaymentInstrument.
 	     */
 	    createGiftCertificatePaymentInstrument : function (giftCertificate) {
 
@@ -1288,10 +1300,12 @@ var Cart = AbstractModel.extend(
         },
 
         /**
+         * Creates for each quantity of a ProductLineItem a new	QuantityLineItem helper object, where the important data
+         * is stored at.
          *
-         * @param pli
-         * @param quantityLineItems
-         * @returns {*}
+         * @param {dw.order.ProductLineItem} pli - The ProductLineItem.
+         * @param {dw.util.ArrayList} quantityLineItems - The incoming/existing QuantityLineItems.
+         * @returns {dw.util.ArrayList} The sparated QuantityLineItems.
          */
         separateQuantities : function (pli, quantityLineItems) {
 
@@ -1314,10 +1328,9 @@ var Cart = AbstractModel.extend(
         },
 
 	    /**
-	     * TODO
+	     * Loads customer addresses and shipment addresses and stores them into the session address book attribute of the cart, if it is available and configured in BM.
 	     *
-	     * @param customer
-	     * @returns {null}
+	     * @param {dw.customer.Customer} customer - The customer to load the addresses from.
 	     */
 	    initAddressBook : function (customer) {
 
@@ -1342,8 +1355,11 @@ var Cart = AbstractModel.extend(
         },
 
 	    /**
-	     * TODO
-	     * @returns {*}
+	     * Returns all addresses of the carts address book. The addresses are stored as a JSON object in a custom
+	     * attribute names 'sessionAddressBook'.
+	     *
+	     * @returns {dw.util.ArrayList} An ArrayList containing a addresses of the addresses stored in the carts address
+	     * book.
 	     */
 	    getAddressBookAddresses : function () {
 		    var addressBook = new Object();
@@ -1369,8 +1385,9 @@ var Cart = AbstractModel.extend(
         },
 
 	    /**
-	     * TODO
-	     * @param address
+	     * Adds the given address to the address book of the cart.
+	     *
+	     * @param {module:model/TransientAddress~TransientAddress} addressToAdd - The address to add.
 	     */
 	    addAddressToAddressBook : function (addressToAdd) {
 		    var address = new TransientAddress();
@@ -1406,9 +1423,9 @@ var Cart = AbstractModel.extend(
 	    },
 
 	    /**
-	     * TODO
+	     * Updates the given address in the carts address book.
 	     *
-	     * @param addressToUpdate
+	     * @param {module:model/TransientAddress~TransientAddress} addressToUpdate - The address to update.
 	     */
 	    updateAddressBookAddress : function (addressToUpdate) {
 		    var addresses = new Array();

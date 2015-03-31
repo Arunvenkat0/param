@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This pipeline implements the billing logic. It is used by both the single shipping and the multi shipping
+ * This controller implements the billing logic. It is used by both the single shipping and the multi shipping
  * scenario and is responsible for providing the payment method selection as well as entering a billing address.
  *
  * @module controller/COBilling
@@ -737,31 +737,31 @@ function validatePayment(cart) {
  */
 function saveCreditCard() {
 
-	if (!(customer.authenticated && session.forms.billing.paymentMethods.creditCard.saveCard.value)) {
-		return true;
-	}
-	else {
+    if (!(customer.authenticated && session.forms.billing.paymentMethods.creditCard.saveCard.value)) {
+        return true;
+    }
+    else {
 
-		var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-		var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
+        var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
+        var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
 
-		// coy the credit card details to the payment instrument
-		newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
-		newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
-		newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
-		newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
-		newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
+        // coy the credit card details to the payment instrument
+        newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
+        newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
+        newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
+        newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
+        newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
 
-		for (var i = 0; i < creditCards.length; i++) {
-			var creditcard = creditCards[i];
+        for (var i = 0; i < creditCards.length; i++) {
+            var creditcard = creditCards[i];
 
-			if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
-				customer.getProfile().getWallet().removePaymentInstrument(creditcard);
-			}
-		}
+            if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
+                customer.getProfile().getWallet().removePaymentInstrument(creditcard);
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 }
 
 /**
