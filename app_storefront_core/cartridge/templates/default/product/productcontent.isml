@@ -163,11 +163,11 @@
 	</iscomment>
 
 	<div class="product-actions">
-		<a data-service="facebook" title="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank"><i class="fa fa-facebook-official"></i></a>
-		<a data-service="twitter" title="Share on Twitter" href="https://twitter.com/intent/tweet/?url=" target="_blank"><i class="fa fa-twitter"></i></a>
-		<a data-service="google-plus" title="Share on Google+" href="https://plus.google.com/share?url=" target="_blank"><i class="fa fa-google-plus"></i></a>
-		<a data-service="pinterest" title="Share on Pinterest" href="https://www.pinterest.com/create/button/?url=" target="_blank"><i class="fa fa-pinterest"></i></a>
-		<a data-action="email" title="Email" href="mailto:" data-subject="${pdict.Product.name}" target="_blank"><i class="fa fa-envelope"></i></a>
+		<a class="share-icon" data-service="facebook" title="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank"><i class="fa fa-facebook-official"></i></a>
+		<a class="share-icon" data-service="twitter" title="Share on Twitter" href="https://twitter.com/intent/tweet/?url=" target="_blank"><i class="fa fa-twitter"></i></a>
+		<a class="share-icon" data-service="google-plus" title="Share on Google+" href="https://plus.google.com/share?url=" target="_blank"><i class="fa fa-google-plus"></i></a>
+		<a class="share-icon" data-service="pinterest" title="Share on Pinterest" href="https://www.pinterest.com/create/button/?url=" target="_blank"><i class="fa fa-pinterest"></i></a>
+		<a class="share-icon" data-action="email" title="Email" href="mailto:" data-subject="${pdict.Product.name}" target="_blank"><i class="fa fa-envelope"></i></a>
 
 		<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
 			<a data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>

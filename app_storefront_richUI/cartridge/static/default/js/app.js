@@ -2585,7 +2585,7 @@ function initializeEvents() {
 	});
 
 	// prevent default behavior of thumbnail link and add this Button
-	$pdpMain.on('click', '.thumbnail-link, .addthis_toolbox a, .unselectable a', function (e) {
+	$pdpMain.on('click', '.thumbnail-link, .unselectable a', function (e) {
 		e.preventDefault();
 	});
 
@@ -2722,8 +2722,7 @@ module.exports = function () {
 },{}],29:[function(require,module,exports){
 'use strict';
 
-var //addThis = require('./addThis'),
-	addToCart = require('./addToCart'),
+var addToCart = require('./addToCart'),
 	ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
@@ -2751,7 +2750,6 @@ var updateContent = function (href) {
 		url: util.appendParamsToUrl(href, params),
 		target: $('#product-content'),
 		callback: function () {
-			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
 				productStoreInventory.init();
@@ -17498,7 +17496,6 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
 },{}],54:[function(require,module,exports){
 'use strict';
 
@@ -17920,8 +17917,6 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-
-},{"_process":49}]},{},[1])
-
+},{"_process":49}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
