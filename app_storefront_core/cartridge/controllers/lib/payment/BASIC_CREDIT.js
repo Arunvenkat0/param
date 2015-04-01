@@ -82,7 +82,10 @@ function Handle(args)
  */
 function Authorize(args)
 {
-    var GetPaymentProcessorResult = new dw.system.Pipelet('GetPaymentProcessor').execute({
+	var PaymentInstrument = args.PaymentInstrument;
+	var OrderNo = args.OrderNo;
+
+	var GetPaymentProcessorResult = new dw.system.Pipelet('GetPaymentProcessor').execute({
         ID: "BASIC_CREDIT"
     });
     if (GetPaymentProcessorResult.result == PIPELET_ERROR)

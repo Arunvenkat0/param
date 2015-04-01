@@ -91,7 +91,7 @@ var TransientAddress = Class.extend(
 
         copyFields(fromAddress, this);
 
-        if (fromAddress.countryCode.value !== null) {
+        if (fromAddress.countryCode.value !== null && typeof fromAddress.countryCode.value != 'undefined') {
             this.countryCode = fromAddress.countryCode.value;
         }
         else {
