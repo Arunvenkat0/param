@@ -29,14 +29,14 @@ function show() {
     session.forms.login.invalidateFormElement();
 
     view.get('view/CartView', {
-	    cart : Cart.get(),
-	    RegistrationStatus : false
+        cart               : Cart.get(),
+        RegistrationStatus : false
     }).render('checkout/cart/cart');
 
 }
 
 /**
- *
+ * Form handler for the cart form.
  */
 function submitForm() {
     // we have no existing state, so resolve the basket again
@@ -70,8 +70,8 @@ function submitForm() {
             var validationResult = cart.validateForCheckout();
 
             if (validationResult.EnableCheckout) {
-				//require('./COCustomer').Start();
-	            response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
+                //require('./COCustomer').Start();
+                response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
 
                 return null;
             }
@@ -114,7 +114,7 @@ function submitForm() {
             var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
             Transaction.wrap(function () {
-                cart.updateLineItem(formgroup.getTriggeredAction().object, product, productOptionModel)
+                cart.updateLineItem(formgroup.getTriggeredAction().object, product, request.httpParameterMap.Quantity.doubleValue, productOptionModel)
                 cart.calculate();
             });
 
@@ -134,8 +134,8 @@ function submitForm() {
             }
         },
         'logout'                : function (formgroup) {
-	        new dw.system.Pipelet('LogoutCustomer').execute();
-	        return {cart : cart};
+            new dw.system.Pipelet('LogoutCustomer').execute();
+            return {cart : cart};
         },
         'register'              : function (formgroup) {
             require('./Account').StartRegister();
@@ -200,7 +200,7 @@ function addProduct() {
         return;
     }
 
-	var cart = Cart.goc();
+    var cart = Cart.goc();
 
     // update product lineitem
     if (params.uuid.stringValue) {
@@ -209,8 +209,8 @@ function addProduct() {
 
         if (lineItem) {
 
-	        var product = Product.get(request.httpParameterMap.pid.stringValue).object;
-	        var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+            var product = Product.get(request.httpParameterMap.pid.stringValue).object;
+            var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
             Transaction.wrap(function () {
                 cart.updateLineItem(lineItem, product, productOptionModel)
@@ -279,9 +279,7 @@ function addProduct() {
             });
         }
 
-        /**
-         * When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
-         */
+        // When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
         var newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
     }
 
@@ -302,7 +300,7 @@ function addProduct() {
  */
 function continueShopping() {
 
-	var location = require('~/cartridge/scripts/util/Browsing').lastCatalogURL();
+    var location = require('~/cartridge/scripts/util/Browsing').lastCatalogURL();
 
     if (location) {
         response.redirect(location);
@@ -346,9 +344,8 @@ function addToWishlist() {
 
 }
 
-
 /**
- * TODO: deprecate
+ * @deprecated
  */
 function getExistingBasket() {
     return {
@@ -356,22 +353,21 @@ function getExistingBasket() {
     };
 }
 
-
 /**
  * Determines an existing basket from the current session. If a basket wasn't found, a new basket is created. If a new
  * basket couldn't be created, the pipeline ends in a named end node "error". Calling pipelines are responsible to
  * properly react on the "error" end node.
+ *
+ * @deprecated
  */
 function getBasket() {
-
     return Cart.goc().object;
-
 }
-
 
 /**
  * Calculates an existing basket. Call this pipeline always if the changes to the basket content is made (e.g. addition
  * or removal of a product or gift certificate or setting of a shipping method).
+ * @deprecated
  */
 function calculate() {
 
@@ -498,7 +494,7 @@ exports.Show = guard.ensure(['https'], show);
 /** @see module:controller/Cart~submitForm */
 exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
 /** @see module:controller/Cart~continueShopping */
-exports.ContinueShopping = guard.ensure(['post', 'https'], continueShopping);
+exports.ContinueShopping = guard.ensure(['https'], continueShopping);
 /** @see module:controller/Cart~addCouponJson */
 exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controller/Cart~miniCart */

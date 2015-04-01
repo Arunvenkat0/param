@@ -4,10 +4,8 @@
 /**
  * Module for form related functionality.
  *
- * usage
- * var form = require('~/cartridge/scripts/model/Form');
  *
- * @module model/Cart
+ * @module model/Form
  */
 
 var AbstractModel = require('./AbstractModel');
@@ -17,7 +15,7 @@ var AbstractModel = require('./AbstractModel');
  * @class module:model/Form~Form
  */
 var Form = AbstractModel.extend(
-	/** @lends module:model/Form~Form.prototype */
+    /** @lends module:model/Form~Form.prototype */
     {
         action : null,
 
@@ -85,6 +83,8 @@ var Form = AbstractModel.extend(
             if (clear) {
                 this.object.clear();
             }
+
+            // update the form
             this.object.copyFrom(updateObject);
 
             return this;
@@ -98,7 +98,7 @@ var Form = AbstractModel.extend(
          */
         copyTo : function (updateObject) {
 
-	        try {
+            try {
                 this.object.copyTo(updateObject);
                 return true;
             }
@@ -111,7 +111,7 @@ var Form = AbstractModel.extend(
         /**
          * Clears the wrapped form instance
          */
-        clear : function (){
+        clear : function () {
             this.object.clearFormElement();
         }
 
