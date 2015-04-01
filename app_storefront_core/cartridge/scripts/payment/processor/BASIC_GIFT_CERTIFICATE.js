@@ -14,12 +14,14 @@ function Authorize(args) {
     var paymentInstrument = args.PaymentInstrument;
     var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
 
-    Transaction.wrap(function () {
-        paymentInstrument.paymentTransaction.transactionID = orderNo;
-        paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
-    });
+    Transaction.begin();
+
+    paymentInstrument.paymentTransaction.transactionID = orderNo;
+    paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
 
     var status = GiftCertificateMgr.redeemGiftCertificate(paymentInstrument);
+
+    Transaction.commit();
 
     if (status.isError()) {
         return {error : true};
