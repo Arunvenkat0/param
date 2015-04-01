@@ -181,28 +181,21 @@
 	<div class="product-actions">
 		<h2 class="visually-hidden">Product Actions</h2>
 
-		<ul class="menu">
-			<isif condition="${pdict.isBundle}">
-				<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
-				<iselse/>
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
-				</isif>
-				<li><a class="wl-action" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
-				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
-			</isif>
-			<li>
-				<a class="send-to-friend"
-				   title="${Resource.msg('product.sendfriend','product',null)}"
-				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.ProductSet.ID, 'source', 'productdetail')}">
-				   ${Resource.msg('product.sendfriend','product',null)}
-				</a>
-			</li>
-		</ul>
+		<a data-service="facebook" title="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank"><i class="fa fa-facebook-official"></i></a>
+		<a data-service="twitter" title="Share on Twitter" href="https://twitter.com/intent/tweet/?url=" target="_blank"><i class="fa fa-twitter"></i></a>
+		<a data-service="google-plus" title="Share on Google+" href="https://plus.google.com/share?url=" target="_blank"><i class="fa fa-google-plus"></i></a>
+		<a data-service="pinterest" title="Share on Pinterest" href="https://www.pinterest.com/create/button/?url=" target="_blank"><i class="fa fa-pinterest"></i></a>
+		<a data-action="email" title="Email" href="mailto:" data-subject="${pdict.Product.name}" target="_blank"><i class="fa fa-envelope"></i></a>
 
-		<!-- AddThis Button BEGIN -->
-		<div class="addthis_toolbox addthis_default_style "></div>
-		<!-- AddThis Button END -->
+		<isif condition="${pdict.isBundle}">
+			<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
+				<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
+			<iselse/>
+				<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
+			</isif>
+			<a data-action="wishlist" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
+			<a data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
+		</isif>
 
 	</div><!--  end details block -->
 

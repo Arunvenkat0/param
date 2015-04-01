@@ -1,7 +1,6 @@
 'use strict';
 
-var addThis = require('./addThis'),
-	addToCart = require('./addToCart'),
+var addToCart = require('./addToCart'),
 	ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
@@ -29,7 +28,6 @@ var updateContent = function (href) {
 		url: util.appendParamsToUrl(href, params),
 		target: $('#product-content'),
 		callback: function () {
-			addThis();
 			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
 				productStoreInventory.init();

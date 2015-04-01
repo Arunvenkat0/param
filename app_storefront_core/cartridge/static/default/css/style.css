@@ -1023,6 +1023,7 @@ nav[role="navigation"] {
     text-align: center; }
 
 .menu-utility-user {
+  margin: 0;
   padding: 0;
   text-transform: uppercase; }
   @media screen and (min-width: 768px) {
@@ -2388,8 +2389,6 @@ footer {
     float: right; }
     .pdp-main .product-actions .social-actions li {
       margin: 0 0.2em; }
-  .pdp-main .product-actions .addthis_toolbox {
-    float: right; }
 .pdp-main .recommendations {
   clear: left;
   padding: 2em 0;
