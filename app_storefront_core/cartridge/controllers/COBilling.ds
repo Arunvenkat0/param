@@ -400,17 +400,7 @@ function updateAddressDetails() {
 
         var billingAddress = cart.getBillingAddress();
 
-        if (billingAddress) {
-            billingAddress.setFirstName(session.forms.billing.billingAddress.firstName.value);
-            billingAddress.setLastName(session.forms.billing.billingAddress.lastName.value);
-            billingAddress.setAddress1(session.forms.billing.billingAddress.address1.value);
-            billingAddress.setAddress2(session.forms.billing.billingAddress.address2.value);
-            billingAddress.setCity(session.forms.billing.billingAddress.city.value);
-            billingAddress.setPostalCode(session.forms.billing.billingAddress.postal.value);
-            billingAddress.setStateCode(session.forms.billing.billingAddress.states.state.value);
-            billingAddress.setCountryCode(session.forms.billing.billingAddress.country.value);
-            billingAddress.setPhone(session.forms.billing.billingAddress.phone.value);
-        }
+        billingAddress && Form.get(session.forms.billing.billingAddress.addressFields).copyTo(billingAddress);
 
         initCreditCardList(cart);
         start(cart);
@@ -571,7 +561,6 @@ function selectCreditCard() {
     var cart = Cart.get();
 
     var applicableCreditCards = initCreditCardList(cart).ApplicableCreditCards;
-
     var selectedCreditCard = null;
 
     // ensure mandatory parameter 'CreditCardUUID' and 'CustomerPaymentInstruments'
@@ -581,7 +570,7 @@ function selectCreditCard() {
         // find credit card in payment instruments
         var instrumentsIter = applicableCreditCards.iterator();
         while (instrumentsIter.hasNext()) {
-            creditCardInstrument = instrumentsIter.next();
+            var creditCardInstrument = instrumentsIter.next();
             if (request.httpParameterMap.creditCardUUID.value.equals(creditCardInstrument.UUID)) {
                 selectedCreditCard = creditCardInstrument;
             }
@@ -653,15 +642,7 @@ function handleBillingAddress(cart) {
             billingAddress = cart.createBillingAddress();
         }
 
-        billingAddress.setFirstName(session.forms.billing.billingAddress.addressFields.firstName.value);
-        billingAddress.setLastName(session.forms.billing.billingAddress.addressFields.lastName.value);
-        billingAddress.setAddress1(session.forms.billing.billingAddress.addressFields.address1.value);
-        billingAddress.setAddress2(session.forms.billing.billingAddress.addressFields.address2.value);
-        billingAddress.setCity(session.forms.billing.billingAddress.addressFields.city.value);
-        billingAddress.setPostalCode(session.forms.billing.billingAddress.addressFields.postal.value);
-        billingAddress.setStateCode(session.forms.billing.billingAddress.addressFields.states.state.value);
-        billingAddress.setCountryCode(session.forms.billing.billingAddress.addressFields.country.value);
-        billingAddress.setPhone(session.forms.billing.billingAddress.addressFields.phone.value);
+	    Form.get(session.forms.billing.billingAddress.addressFields).copyTo(billingAddress);
 
         cart.setCustomerEmail(session.forms.billing.billingAddress.email.emailAddress.value);
     });
