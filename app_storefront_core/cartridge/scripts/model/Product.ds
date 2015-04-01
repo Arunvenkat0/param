@@ -12,13 +12,14 @@ var Product = AbstractModel.extend(
     /** @lends module:model/Product~Product.prototype */
     {
         /**
-         * Use this method to get a new instance for a given product.
+         * Use this method to get a new instance for a given product or product ID.
          */
         get : function (parameter) {
             var obj = null;
             if (typeof parameter === 'string') {
                 obj = dw.catalog.ProductMgr.getProduct(parameter);
-            } else if (typeof parameter === 'object') {
+            }
+            else if (typeof parameter === 'object') {
                 obj = parameter;
             }
             return new Product(obj);
@@ -115,10 +116,12 @@ var Product = AbstractModel.extend(
                     var variant;
                     if (this.isVariant()) {
                         variant = this.object;
-                    } else {
+                    }
+                    else {
                         if (!empty(pvm.defaultVariant)) {
                             variant = pvm.defaultVariant;
-                        } else if (pvm.variants.length > 0) {
+                        }
+                        else if (pvm.variants.length > 0) {
                             variant = pvm.variants[0];
                         }
                     }
@@ -144,7 +147,8 @@ var Product = AbstractModel.extend(
 
             if ('isVariant' in newProduct && newProduct.isVariant()) {
                 variants = newProduct.getVariationModel().getVariants();
-            } else {
+            }
+            else {
                 variants = newProduct.getVariants();
             }
 
@@ -175,79 +179,19 @@ var Product = AbstractModel.extend(
         hasValue : function (object, value) {
             if (!value) {
                 return true;
-            } else if (object === value) {
+            }
+            else if (object === value) {
                 return true;
-            } else if (object[0] instanceof dw.value.EnumValue) {
+            }
+            else if (object[0] instanceof dw.value.EnumValue) {
                 // enumerate through the multiple values of the custom attribute
-                for(var prop in object)
-                {
+                for (var prop in object) {
                     if (object[prop] === value) {
                         return true;
                     }
                 }
             }
             return false;
-        },
-
-	    /**
-	     * TODO
-	     * @param priceModel
-	     * @returns {*}
-	     */
-	    getStandardPrice : function (priceModel) {
-            priceModel = priceModel || this.object.priceModel;
-            if ((typeof priceModel === 'undefined') || (priceModel === null) || !priceModel.getPrice().available) {
-                //There is currently no way to check if the list pricebook is actually
-                //assigned to the site.  Therefore, we do a sanity check:  If the
-                //product has no price according to standard price lookup rules,
-                //then we know the list price book is not assigned to the site.
-                //(The converse is not true so this check is not perfect.)
-                return dw.value.Money.NOT_AVAILABLE;
-            } else if (('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)) {
-                return priceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault);
-            } else {
-                return priceModel.getPrice();
-            }
-        },
-
-	    /**
-	     * TODO
-	     * @returns {*}
-	     */
-	    getProductCategory : function () {
-            var product = this.object;
-
-            if (!product) {
-                return null;
-            }
-
-            var masterProduct = product.isVariant() ? product.getVariationModel().getMaster() : product,
-                category = masterProduct && masterProduct.getPrimaryCategory(),
-                productCategories;
-
-            if (category === null) {
-                productCategories = masterProduct.getCategories().iterator();
-
-                if (productCategories.hasNext()) {
-                    category = productCategories.next();
-                }
-            }
-
-            return category;
-        },
-
-        /**
-         * Function used to return the top-most category of the product
-         * @return {dw.catalog.Category}
-         */
-        getProductTopCategory : function () {
-            var category = this.getProductCategory();
-            if (category) {
-                while (category.parent && !category.parent.root) {
-                    category = category.parent;
-                }
-            }
-            return category;
         },
 
         /**
@@ -270,14 +214,14 @@ var Product = AbstractModel.extend(
             return categoryBreadcrambs.join(':').replace('&', '&amp;');
         },
 
-	    /**
-	     * Function that returns a JSON object holding availability information for the current product and the given
-	     * quantity.
-	     *
-	     * @param quantity {String}
-	     * @returns {{status: *, statusQuantity: number, inStock: *, ats: number, inStockDate: string, availableForSale: boolean, levels: {}}}
-	     */
-	    getAvailability : function (quantity) {
+        /**
+         * Function that returns a JSON object holding availability information for the current product and the given
+         * quantity.
+         *
+         * @param quantity {String}
+         * @returns {{status: *, statusQuantity: number, inStock: *, ats: number, inStockDate: string, availableForSale: boolean, levels: {}}}
+         */
+        getAvailability : function (quantity) {
             var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
 
             /* product availability */

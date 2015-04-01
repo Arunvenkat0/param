@@ -1485,6 +1485,44 @@ var Cart = AbstractModel.extend(
 
                 this.object.custom.sessionAddressBook = JSON.stringify(addressBook);
             }
+        },
+
+	    /**
+	     * Creates an Order based on the cart. If the order could be created successfully, it will be in status CREATED.
+	     * The cart will be removed from the session and marked for removal.
+	     *
+	     * If the order could not be created the function returns null, if any of the following conditions are encountered:
+	     * <ul>
+	     * <li>any of the totals (net, gross, tax) of the basket is N/A</li>
+	     * <li>any of the product items is not available</li>
+	     * <li>any campaign-based coupon in the basket is invalid (see dw.order.CouponLineItem.isValid())</li>
+	     * <li>the basket represents an order being edited, but the order has been already been replaced by another order</li>
+	     * <li>the basket represents an order being edited, but the customer associated with the original order is not the same as the current customer</li>
+	     * </ul>
+	     * All empty shipments of the basket are removed before creating the order. A shipment is empty if it contains
+	     * no product or gift certificate line items all total prices (net, gross, tax) are 0.0.
+	     *
+	     * The function decrements inventory for all products contained in the order. (Means the 'reserve inventory for
+	     * order' functionality must not be sub-sequently called.) The function redeems all coupons contained in the order.
+	     *
+	     * If the cart contains product or gift certificate line items associated with product list items, the function
+	     * updates the purchase the product list items. For example, if the basket contains an item added from a gift
+	     * registry, the purchase history of the respective gift registry item is updated.
+	     *
+	     * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
+	     */
+        createOrder : function () {
+            var CreateOrder2Result = new dw.system.Pipelet('CreateOrder2', {
+                CreateCustomerNo : true
+            }).execute({
+                    Basket : this.object
+                });
+            if (CreateOrder2Result.result === PIPELET_ERROR) {
+                return null;
+            }
+            else {
+                return CreateOrder2Result.Order;
+            }
         }
 
     });

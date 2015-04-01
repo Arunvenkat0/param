@@ -36,7 +36,7 @@ function show() {
 }
 
 /**
- *
+ * Form handler for the cart form.
  */
 function submitForm() {
     // we have no existing state, so resolve the basket again
