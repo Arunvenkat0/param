@@ -1523,6 +1523,21 @@ var Cart = AbstractModel.extend(
             else {
                 return CreateOrder2Result.Order;
             }
+        },
+
+	    /**
+	     * Determines if the cart already contains payment instruments of the given payment method and removes them
+	     * from the basket.
+	     *
+	     * @param {String} method - Name of the payment method
+	     */
+        removeExistingPaymentInstruments : function (method) {
+            var iter = this.getPaymentInstruments(method).iterator();
+
+            // remove them
+            while (iter.hasNext()) {
+                this.removePaymentInstrument(iter.next());
+            }
         }
 
     });

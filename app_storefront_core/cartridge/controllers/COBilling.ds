@@ -15,6 +15,7 @@ var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Profile = require('~/cartridge/scripts/model/Profile');
 var Resource = require('dw/web/Resource');
@@ -523,12 +524,7 @@ function handlePaymentSelection(cart) {
      * The handle pipeline is responsible for payment provider / payment method
      * specific form validation and payment instrument creation.
      */
-    var handlePipeline = PaymentMgr.getPaymentMethod(session.forms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID;
-
-    // TODO support lookup from other cartridges in the site
-    return require('./lib/payment/' + handlePipeline).Handle({
-        Basket : cart.object
-    });
+	return PaymentProcessor.handle(cart.object, session.forms.billing.paymentMethods.selectedPaymentMethodID.value);
 }
 
 /**
