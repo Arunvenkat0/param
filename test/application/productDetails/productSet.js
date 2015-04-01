@@ -4,7 +4,7 @@ var config = require('../webdriver/config');
 
 describe('Product Details Page - Set', function () {
 	before(function (done) {
-		client.init().url(config.url, done);
+		client.init().url(config.url + '/home', done);
 	});
 	it('- Product Details for Set', function (done) {
 		client

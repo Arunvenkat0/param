@@ -128,10 +128,11 @@ Other configurations are also available, see below.
 
 ```json
 {
-	"url": "http://example.demandware.net/on/demandware.store/Sites-SiteGenesis-Site",
+	"url": "http://example.demandware.net/s/SiteGenesis",
 	"client": "phantomjs"
 }
 ```
+*Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
 
 - Run the test
 

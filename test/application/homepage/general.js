@@ -8,7 +8,7 @@ describe('Homepage General #C84584', function () {
 	});
 	describe('Main carousel links (does not work with phantomjs)', function () {
 		beforeEach(function (done) {
-			client.url(config.url, done);
+			client.url(config.url + '/home', done);
 		});
 		it('#1 should go to New Arrivals for Womens', function (done) {
 			client
@@ -106,7 +106,7 @@ describe('Homepage General #C84584', function () {
 	describe('Vertical carousel', function () {
 		var verticalCarousel = '#vertical-carousel';
 		before(function (done) {
-			client.url(config.url, done);
+			client.url(config.url + '/home', done);
 		});
 		it('#1 should be Classic Pant', function (done) {
 			client
