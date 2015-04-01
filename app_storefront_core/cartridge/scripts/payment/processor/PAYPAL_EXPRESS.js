@@ -28,7 +28,7 @@ function Handle(args) {
 function Authorize(args) {
     var orderNo = args.OrderNo;
     var paymentInstrument = args.PaymentInstrument;
-    var paymentProcessor = PaymentMgr.getPaymentMethod("PAYPAL_EXPRESS").getPaymentProcessor();
+    var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
 
     Transaction.wrap(function () {
         paymentInstrument.paymentTransaction.transactionID = orderNo;

@@ -191,7 +191,7 @@ var Profile = AbstractModel.extend(
         validateWalletPaymentInstruments : function (paymentInstruments, countryCode, amount) {
 
             // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
-            var paymentInstruments = this.getWallet().getPaymentInstruments()
+            var paymentInstruments = this.getWallet().getPaymentInstruments();
             var customer = this.getCustomer();
 
             // get applicable payment methods

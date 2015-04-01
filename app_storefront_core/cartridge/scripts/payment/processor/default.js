@@ -1,11 +1,11 @@
+'use strict';
+
 /**
  * Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields.
  * If the verification was successful a credit card payment instrument is created.
  */
 function Handle(args) {
-    return {
-        not_supported : true
-    };
+    return {not_supported : true};
 }
 
 /**
@@ -14,9 +14,7 @@ function Handle(args) {
  * logic to authorize credit card payment.
  */
 function Authorize(args) {
-    return {
-        not_supported : true
-    };
+    return {not_supported : true};
 }
 
 /*

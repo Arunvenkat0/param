@@ -1,6 +1,7 @@
 'use strict';
 
 /* API Includes */
+var Cart = require('~/cartridge/scripts/model/Cart');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
 
@@ -34,9 +35,7 @@ function Handle(args) {
                 Status         : CreditCardStatus
             });
 
-        return {
-            error : true
-        };
+        return {error : true};
     }
 
     Transaction.wrap(function () {
@@ -50,9 +49,7 @@ function Handle(args) {
         paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.year.value;
     });
 
-    return {
-        success : true
-    };
+    return {success : true};
 }
 
 /**
@@ -63,7 +60,7 @@ function Handle(args) {
 function Authorize(args) {
     var orderNo = args.OrderNo;
     var paymentInstrument = args.PaymentInstrument;
-    var paymentProcessor = PaymentMgr.getPaymentMethod("BASIC_CREDIT").getPaymentProcessor();
+    var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
 
     Transaction.wrap(function () {
         paymentInstrument.paymentTransaction.transactionID = orderNo;
