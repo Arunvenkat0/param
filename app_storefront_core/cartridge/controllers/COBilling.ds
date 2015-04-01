@@ -12,6 +12,7 @@ var Cart = require('~/cartridge/scripts/model/Cart');
 var Form = require('~/cartridge/scripts/model/Form');
 var GiftCertificate = require('dw/order/GiftCertificate');
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
+var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var ProductListMgr = require('dw/customer/ProductListMgr');
