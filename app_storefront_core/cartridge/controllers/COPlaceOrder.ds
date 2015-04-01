@@ -13,7 +13,7 @@
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
 var Mail = require('dw/net/Mail');
-var Order = require('dw/order/Order');
+var Order = require('~/cartridge/scripts/model/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Resource = require('dw/web/Resource');
@@ -216,8 +216,8 @@ function submitImpl(order) {
 
     // Mark order as EXPORT_STATUS_READY.
     Transaction.wrap(function () {
-        order.setExportStatus(Order.EXPORT_STATUS_READY);
-        order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
+        order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
+        order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
     });
 
     // Clears all forms used in the checkout process.

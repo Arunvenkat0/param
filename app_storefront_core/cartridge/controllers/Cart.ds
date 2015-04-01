@@ -494,7 +494,7 @@ exports.Show = guard.ensure(['https'], show);
 /** @see module:controller/Cart~submitForm */
 exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
 /** @see module:controller/Cart~continueShopping */
-exports.ContinueShopping = guard.ensure(['post', 'https'], continueShopping);
+exports.ContinueShopping = guard.ensure(['https'], continueShopping);
 /** @see module:controller/Cart~addCouponJson */
 exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controller/Cart~miniCart */
