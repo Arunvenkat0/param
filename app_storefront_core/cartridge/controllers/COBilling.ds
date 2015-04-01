@@ -602,7 +602,7 @@ function updateCreditCardSelection() {
         // find credit card in payment instruments
         var instrumentsIter = applicableCreditCards.iterator();
         while (instrumentsIter.hasNext()) {
-            creditCardInstrument = instrumentsIter.next();
+            var creditCardInstrument = instrumentsIter.next();
             if (UUID.equals(creditCardInstrument.UUID)) {
                 selectedCreditCard = creditCardInstrument;
             }
@@ -621,7 +621,7 @@ function updateCreditCardSelection() {
         return;
     }
 
-    Form.get(session.forms.billing.paymentMethods.creditCard).copyFrom(SelectedCreditCard);
+    Form.get(session.forms.billing.paymentMethods.creditCard).copyFrom(selectedCreditCard);
 
     initCreditCardList(cart);
     start(cart);

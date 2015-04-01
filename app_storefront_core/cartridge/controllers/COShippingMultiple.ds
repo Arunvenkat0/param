@@ -134,22 +134,22 @@ function startShipments() {
 function multiShippingMethods() {
     multiShippingForm.handleAction({
         'save' : function (formgroup) {
-            for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
-                var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
+	        Transaction.wrap(function () {
+		        for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
+                    var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
 
-                if (shipmentForm.shippingMethodID.selectedOptionObject !== null) {
-                    Transaction.wrap(function () {
+                    if (shipmentForm.shippingMethodID.selectedOptionObject !== null) {
                         shipmentForm.getObject().setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
-                    });
-                }
+                    }
 
-                if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
-                    view.get({
-                        Basket : cart.object
-                    }).render('checkout/shipping/multishipping/multishippingaddresses');
-                    return;
+                    if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
+                        view.get({
+                            Basket : Cart.get().object
+                        }).render('checkout/shipping/multishipping/multishippingaddresses');
+                        return;
+                    }
                 }
-            }
+            });
 
             // Mark step as fulfilled.
             session.forms.multishipping.shippingOptions.fulfilled.value = true;
@@ -250,28 +250,11 @@ function editForm() {
 
             Form.get(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             Form.get(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
-            view.get({Basket : cart.object}).render('checkout/shipping/multishipping/editaddresses');
+            view.get({Basket : Cart.get().object}).render('checkout/shipping/multishipping/editaddresses');
 
             return;
         }
     });
-}
-
-/**
- * Handles the settings per shipment, like shipping method selection and gift options.
- */
-function handleShippingSettings() {
-    for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
-
-        var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
-        var shipment = shipmentForm.object;
-
-        shipment.setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
-
-        if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
-            return {error : true};
-        }
-    }
 }
 
 /**
