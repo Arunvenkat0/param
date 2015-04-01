@@ -14,7 +14,7 @@ var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/model/Form');
-var giftRegistryForm = require('~/cartridge/scripts/model/Form').get('giftRegistry');
+var giftRegistryForm = Form.get('giftRegistry');
 var accountLogin = require('~/cartridge/scripts/model/Content').get('myaccount-login');
 var accountGiftRegistry = require('~/cartridge/scripts/model/Content').get('myaccount-giftregistry');
 
@@ -137,7 +137,7 @@ function registrymain()
  */
 function AddProduct()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var currentHttpParameterMap = request.httpParameterMap;
     
     // TODO this function looks exactly the same as like AddProduct in Wishlist
     // TODO where should this come from?
@@ -145,9 +145,9 @@ function AddProduct()
     
     if (Product == null)
     {
-        if (CurrentHttpParameterMap.pid.stringValue != null)
+        if (currentHttpParameterMap.pid.stringValue != null)
         {
-            var ProductID = CurrentHttpParameterMap.pid.stringValue;
+            var ProductID = currentHttpParameterMap.pid.stringValue;
         
             var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
                 ProductID: ProductID
@@ -201,7 +201,7 @@ function AddProduct()
     }).execute({
         Product: Product,
         ProductList: ProductList,
-        Quantity: CurrentHttpParameterMap.Quantity.getIntValue(),
+        Quantity: currentHttpParameterMap.Quantity.getIntValue(),
         ProductOptionModel: ProductOptionModel,
         Priority: 2
     });
@@ -242,7 +242,7 @@ function EventParticipant()
         'confirm'             : function (formgroup) {
             if (customer.profile.addressBook.addresses.size() == 0)
 	        {
-	            CurrentForms.giftregistry.eventaddress.beforeEventAddress.value = "newaddress";
+	            currentForms.giftregistry.eventaddress.beforeEventAddress.value = "newaddress";
 	        }
 	        
 	        showAddresses();
@@ -268,21 +268,21 @@ function ParticipantAddresses()
 	            OnError: 'PIPELET_ERROR',
 	            ScriptFile: 'account/giftregistry/CopyAddressFormFields.ds'
 	        }).execute({
-	            GiftRegistryForm: CurrentForms.giftregistry
+	            GiftRegistryForm: currentForms.giftregistry
 	        });
 	        
 	        response.renderTemplate('account/giftregistry/eventparticipant');
 	        return;
         },
         'confirm'             : function (formgroup) {
-            if (CurrentForms.giftregistry.copyAddress.checked)
+            if (currentForms.giftregistry.copyAddress.checked)
 	        {
 	            new dw.system.Pipelet('Script', {
 	                Transactional: false,
 	                OnError: 'PIPELET_ERROR',
 	                ScriptFile: 'account/giftregistry/AssignPostEventShippingAddress.ds'
 	            }).execute({
-	                GiftRegistryForm: CurrentForms.giftregistry
+	                GiftRegistryForm: currentForms.giftregistry
 	            });
 	        }
 	        
@@ -303,19 +303,19 @@ function ParticipantAddresses()
         }   
     });
 
-	if (!CurrentForms.giftregistry.eventaddress.valid)
+	if (!currentForms.giftregistry.eventaddress.valid)
     {
 	    showAddresses();
 	    return;
     }
 
-	if (CurrentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress' && !CurrentForms.giftregistry.eventaddress.addressBeforeEvent.valid)
+	if (currentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress' && !currentForms.giftregistry.eventaddress.addressBeforeEvent.valid)
     {
         showAddresses();
         return;
     }
 
-    if (CurrentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress' && !CurrentForms.giftregistry.eventaddress.addressAfterEvent.valid)
+    if (currentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress' && !currentForms.giftregistry.eventaddress.addressAfterEvent.valid)
     {
         showAddresses();
         return;
@@ -342,12 +342,12 @@ function Confirmation()
             /*
 	         * If the product list isn't null then confirm has been called via the browser back button
 	         */	        
-	        if (CurrentForms.giftregistry.object != null)
+	        if (currentForms.giftregistry.object != null)
 	        {
 	            var GetProductListResult = new dw.system.Pipelet('GetProductList', {
 	                Create: false
 	            }).execute({
-	                ProductListID: CurrentForms.giftregistry.object.UUID
+	                ProductListID: currentForms.giftregistry.object.UUID
 	            });
 	            if (GetProductListResult.result == PIPELET_NEXT)
 	            {
@@ -360,17 +360,17 @@ function Confirmation()
 	            }
 	        }
 
-	        if (CurrentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress')
+	        if (currentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress')
 	        {
 	            var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-	                AddressID: CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value,
+	                AddressID: currentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value,
 	                Customer: customer
 	            });
 	            if (GetCustomerAddressResult.result == PIPELET_NEXT)
 	            {
 	                var Address = GetCustomerAddressResult.Address;
 
-	                CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.invalidateFormElement();
+	                currentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.invalidateFormElement();
 	                
 	                ShowAddresses();
 	                return;	                
@@ -378,17 +378,17 @@ function Confirmation()
 	        }
 
 	        
-	        if (CurrentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress')
+	        if (currentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress')
 	        {
 	            var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-	                AddressID: CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value,
+	                AddressID: currentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value,
 	                Customer: customer
 	            });
 	            if (GetCustomerAddressResult.result == PIPELET_NEXT)
 	            {
 	                var Address = GetCustomerAddressResult.Address;
 
-	                CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.invalidateFormElement();
+	                currentForms.giftregistry.eventaddress.addressAfterEvent.addressid.invalidateFormElement();
 
 	                ShowAddresses();
                     return;                 
@@ -403,15 +403,13 @@ function Confirmation()
 	        var ProductList = CreateProductListResult.ProductList;
 
 	        
-	        Transaction.begin();
+	       Transaction.wrap(function () {
+                      ProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
+	        		  ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
+                    }
+                );
 	        
-	        ProductList.eventState = CurrentForms.giftregistry.event.eventaddress.states.state.value;
-	        ProductList.eventCountry = CurrentForms.giftregistry.event.eventaddress.country.value;
-	        
-	        Transaction.commit();
-
-	        
-	        if (!Form.get(ProductList).copyFrom(CurrentForms.giftregistry.event))
+	        if (!Form.get(ProductList).copyFrom(currentForms.giftregistry.event))
 	        {
 	            return {
 	                error: true
@@ -432,7 +430,7 @@ function Confirmation()
 	        }
 	        var ProductListRegistrant = CreateProductListRegistrantResult.ProductListRegistrant;
 	    
-			if (!Form.get(ProductListRegistrant).copyFrom(CurrentForms.giftregistry.event.participant))
+			if (!Form.get(ProductListRegistrant).copyFrom(currentForms.giftregistry.event.participant))
 	        {
                 return {
                     error: true
@@ -440,7 +438,7 @@ function Confirmation()
 	        }
 
 	        
-	        if (!(CurrentForms.giftregistry.event.coParticipant.role.selectedOption == null || CurrentForms.giftregistry.event.coParticipant.role.selectedOption.htmlValue == ''))
+	        if (!(currentForms.giftregistry.event.coParticipant.role.selectedOption == null || currentForms.giftregistry.event.coParticipant.role.selectedOption.htmlValue == ''))
 	        {
 	            var CreateProductListRegistrantResult = new dw.system.Pipelet('CreateProductListRegistrant', {
 	                CreateCoRegistrant: true
@@ -455,7 +453,7 @@ function Confirmation()
 	            }
 	            var ProductListRegistrant = CreateProductListRegistrantResult.ProductListRegistrant;
 	            
-	            if (!Form.get(ProductListRegistrant).copyFrom(CurrentForms.giftregistry.event.coParticipant))
+	            if (!Form.get(ProductListRegistrant).copyFrom(currentForms.giftregistry.event.coParticipant))
 	            {
 	                return {
 	                    error: true
@@ -469,7 +467,7 @@ function Confirmation()
 	            Transactional: true
 	        }).execute({
 	            ProductList: ProductList,
-	            GiftRegistryForm: CurrentForms.giftregistry,
+	            GiftRegistryForm: currentForms.giftregistry,
 	            Customer: customer
 	        });
 	        if (ScriptResult.result == PIPELET_ERROR)
@@ -493,11 +491,11 @@ function Confirmation()
  */
 function selectOne()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
     
-    Form.get(CurrentForms.productlists.items).copyTo(ProductLists);
+    Form.get(currentForms.productlists.items).copyTo(ProductLists);
 
-    response.renderTemplate('account/giftregistry/registryselect');
+    view.get().render('account/giftregistry/registryselect');
 }
 
     
@@ -521,22 +519,20 @@ function SelectProductListInteraction()
 
 function editEvent()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
-    
-    var form = require('./dw/form');
-    CurrentForms.giftregistry.clearFormElement();
-    Form.get(CurrentForms.giftregistry.event).copyTo(ProductLists);
-    Form.get(CurrentForms.giftregistry.event.participant).copyTo(ProductList.registrant);
+    Form.get('giftregistry').clear();
+    Form.get(currentForms.giftregistry.event).copyTo(ProductLists);
+    Form.get(currentForms.giftregistry.event.participant).copyTo(ProductList.registrant);
     
     if (ProductList.coRegistrant != null)
     {
-        Form.get(CurrentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant);
+        Form.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant);
     }
 
     
-    CurrentForms.giftregistry.event.eventaddress.states.state.value = ProductList.eventState;
-    CurrentForms.giftregistry.event.eventaddress.country.value = ProductList.eventCountry;
+    currentForms.giftregistry.event.eventaddress.states.state.value = ProductList.eventState;
+    currentForms.giftregistry.event.eventaddress.country.value = ProductList.eventCountry;
 
     
     showEditParticipantForm();
@@ -545,7 +541,7 @@ function editEvent()
 
 function showEditParticipantForm()
 {
-    response.renderTemplate('account/giftregistry/eventparticipant');
+    view.get().render('account/giftregistry/eventparticipant');
 }
 
 // TODO this is probably never called?
@@ -565,7 +561,7 @@ function EditEventParticipant()
 	    else if (TriggeredAction.formId == 'confirm')
 	    {
 	        var form = require('./dw/form');
-	        if (!form.updateObjectWithForm(ProductList, CurrentForms.giftregistry.event))
+	        if (!form.updateObjectWithForm(ProductList, currentForms.giftregistry.event))
 	        {
 	            return {
                     error: true
@@ -573,7 +569,7 @@ function EditEventParticipant()
 	        }
 
 
-	        if (!form.updateObjectWithForm(ProductList.registrant, CurrentForms.giftregistry.event.participant))
+	        if (!form.updateObjectWithForm(ProductList.registrant, currentForms.giftregistry.event.participant))
 	        {
 	            return {
                     error: true
@@ -583,8 +579,8 @@ function EditEventParticipant()
 
 	        Transaction.begin();
 	        
-	        ProductList.eventState = CurrentForms.giftregistry.event.eventaddress.states.state.value;
-	        ProductList.eventCountry = CurrentForms.giftregistry.event.eventaddress.country.value;
+	        ProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
+	        ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
 	        
 	        Transaction.commit();
 
@@ -592,7 +588,7 @@ function EditEventParticipant()
 	        if (ProductList.coRegistrant != null)
 	        {
 	            var form = require('./dw/form');
-	            if (!form.updateObjectWithForm(ProductList.coRegistrant, CurrentForms.giftregistry.event.coParticipant))
+	            if (!form.updateObjectWithForm(ProductList.coRegistrant, currentForms.giftregistry.event.coParticipant))
 	            {
 	                return {
 	                    error: true
@@ -601,7 +597,7 @@ function EditEventParticipant()
 	        }
 	        else
 	        {
-	            if (!(CurrentForms.giftregistry.event.coParticipant.role.selectedOption == null || CurrentForms.giftregistry.event.coParticipant.role.selectedOption.htmlValue == ''))
+	            if (!(currentForms.giftregistry.event.coParticipant.role.selectedOption == null || currentForms.giftregistry.event.coParticipant.role.selectedOption.htmlValue == ''))
 	            {
 	                var CreateProductListRegistrantResult = new dw.system.Pipelet('CreateProductListRegistrant', {
 	                    CreateCoRegistrant: true
@@ -618,7 +614,7 @@ function EditEventParticipant()
 	                
 	                
 	                var form = require('./dw/form');
-	                if (!form.updateObjectWithForm(ProductList.coRegistrant, CurrentForms.giftregistry.event.coParticipant))
+	                if (!form.updateObjectWithForm(ProductList.coRegistrant, currentForms.giftregistry.event.coParticipant))
 	                {
 	                    return {
 	                        error: true
@@ -657,12 +653,12 @@ function EditEventParticipant()
 
 function showPurchases()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
     
     var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.giftregistry.purchases);
-    form.updateFormWithObject(CurrentForms.giftregistry.purchases, ProductList.purchases);
+    form.clearFormElement(currentForms.giftregistry.purchases);
+    form.updateFormWithObject(currentForms.giftregistry.purchases, ProductList.purchases);
 
     
     showPurchases();
@@ -747,7 +743,7 @@ function ShowRegistryInteraction()
 	    }
 	    else if (TriggeredAction.formId == 'addToCart')
 	    {
-	        if (CurrentForms.giftregistry.items.triggeredFormAction.parent.object.type == CurrentForms.giftregistry.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
+	        if (currentForms.giftregistry.items.triggeredFormAction.parent.object.type == currentForms.giftregistry.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
 	        {
 	            var GiftCertController = require('./GiftCert');
 	            GiftCertController.Purchase();
@@ -852,22 +848,22 @@ function ShowRegistryInteraction()
  */
 function Search()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
     
     var SearchProductListsResult = new dw.system.Pipelet('SearchProductLists', {
         PublicOnly: true
     }).execute({
-        EventType: CurrentForms.productlists.search.eventType.value,
-        EventCity: CurrentForms.productlists.search.eventCity.value,
-        EventState: CurrentForms.productlists.search.eventState.value,
-        EventCountry: CurrentForms.productlists.search.eventCountry.value,
-        RegistrantFirstName: CurrentForms.productlists.search.registrantFirstName.value,
-        RegistrantLastName: CurrentForms.productlists.search.registrantLastName.value,
+        EventType: currentForms.productlists.search.eventType.value,
+        EventCity: currentForms.productlists.search.eventCity.value,
+        EventState: currentForms.productlists.search.eventState.value,
+        EventCountry: currentForms.productlists.search.eventCountry.value,
+        RegistrantFirstName: currentForms.productlists.search.registrantFirstName.value,
+        RegistrantLastName: currentForms.productlists.search.registrantLastName.value,
         Type: dw.customer.ProductList.TYPE_GIFT_REGISTRY,
-        EventMonth: CurrentForms.productlists.search.eventMonth.value,
-        EventYear: CurrentForms.productlists.search.eventYear.value,
-        EventName: CurrentForms.productlists.search.eventName.value
+        EventMonth: currentForms.productlists.search.eventMonth.value,
+        EventYear: currentForms.productlists.search.eventYear.value,
+        EventName: currentForms.productlists.search.eventName.value
     });
     var ProductLists = SearchProductListsResult.ProductLists;
 
@@ -907,7 +903,7 @@ function SearchGiftRegistry()
  */
 function ShowRegistryByID()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var currentHttpParameterMap = request.httpParameterMap;
     
     if (!customer.authenticated)
     {
@@ -919,7 +915,7 @@ function ShowRegistryByID()
     var GetProductListResult = new dw.system.Pipelet('GetProductList', {
         Create: false
     }).execute({
-        ProductListID: CurrentHttpParameterMap.ProductListID.value
+        ProductListID: currentHttpParameterMap.ProductListID.value
     });
     if (GetProductListResult.result == PIPELET_ERROR)
     {
@@ -946,34 +942,30 @@ function ShowRegistryByID()
 
 function updateAddressDetails()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-    var CurrentForms = session.forms;
+    var currentHttpParameterMap = request.httpParameterMap;
+    var currentForms = session.forms;
 
     if (AddressFormType == "before")
     {
         var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID: empty(CurrentHttpParameterMap.addressID.value)?CurrentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressBeforeList.value:CurrentHttpParameterMap.addressID.value,
+            AddressID: empty(currentHttpParameterMap.addressID.value)?currentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressBeforeList.value:currentHttpParameterMap.addressID.value,
             Customer: customer
         });
         var Address = GetCustomerAddressResult.Address;
-        
-        
-        var form = require('./dw/form');
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressBeforeEvent, Address);
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressBeforeEvent.states, Address);
+          
+        From.get(currentForms.giftregistry.eventaddress.addressBeforeEvent).copyfrom(Address);
+        From.get(currentForms.giftregistry.eventaddress.addressBeforeEvent.states).copyfrom(Address);
     }
     else
     {
         var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID: empty(CurrentHttpParameterMap.addressID.value)?CurrentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressAfterList.value:CurrentHttpParameterMap.addressID.value,
+            AddressID: empty(currentHttpParameterMap.addressID.value)?currentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressAfterList.value:currentHttpParameterMap.addressID.value,
             Customer: customer
         });
         var Address = GetCustomerAddressResult.Address;
 
-        
-        var form = require('./dw/form');
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressAfterEvent, Address);
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressAfterEvent.states, Address);
+        From.get(currentForms.giftregistry.eventaddress.addressAfterEvent).copyfrom(Address);
+        From.get(currentForms.giftregistry.eventaddress.addressAfterEvent.states).copyfrom(Address);
     }
     
     
@@ -986,13 +978,13 @@ function updateAddressDetails()
  */
 function ReplaceProductListItem()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var currentHttpParameterMap = request.httpParameterMap;
 
     
     var GetProductListResult = new dw.system.Pipelet('GetProductList', {
         Create: false
     }).execute({
-        ProductListID: CurrentHttpParameterMap.productlistid.stringValue
+        ProductListID: currentHttpParameterMap.productlistid.stringValue
     });
     if (GetProductListResult.result == PIPELET_ERROR)
     {
@@ -1009,18 +1001,18 @@ function ReplaceProductListItem()
         ScriptFile: 'account/ReplaceProductListItem.ds'
     }).execute({
         ProductList: ProductList,
-        plid: CurrentHttpParameterMap.uuid.stringValue
+        plid: currentHttpParameterMap.uuid.stringValue
     });
     if (ScriptResult.result == PIPELET_ERROR)
     {
-        response.renderTemplate('account/giftregistry/refreshgiftregistry', {
+        view.get().render('account/giftregistry/refreshgiftregistry', {
         });
         return;
     }
 
     
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID: CurrentHttpParameterMap.pid.stringValue
+        ProductID: currentHttpParameterMap.pid.stringValue
     });
     if (GetProductResult.result == PIPELET_ERROR)
     {
@@ -1042,13 +1034,13 @@ function ReplaceProductListItem()
     }).execute({
         Product: Product,
         ProductList: ProductList,
-        Quantity: CurrentHttpParameterMap.Quantity.doubleValue,
+        Quantity: currentHttpParameterMap.Quantity.doubleValue,
         ProductOptionModel: ProductOptionModel,
         Priority: 2
     });
 
     
-    response.renderTemplate('account/giftregistry/refreshgiftregistry', {
+    view.get().render('account/giftregistry/refreshgiftregistry', {
     });
 }
 
@@ -1058,24 +1050,23 @@ function ReplaceProductListItem()
  */
 function editAddresses()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
     
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.giftregistry);
+    Form.get('giftregistry').clear();
 
     
     if (ProductList.shippingAddress != null)
     {
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressBeforeEvent, ProductList.shippingAddress);
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressBeforeEvent.states, ProductList.shippingAddress);
+        Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent).copyFrom(ProductList.shippingAddress);
+        Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent.states).copyFrom(ProductList.shippingAddress);
     }
     
     
     if (ProductList.postEventShippingAddress != null)
     {
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressAfterEvent, ProductList.postEventShippingAddress);
-        form.updateFormWithObject(CurrentForms.giftregistry.eventaddress.addressAfterEvent.states, ProductList.postEventShippingAddress);
+        Form.get(currentForms.giftregistry.eventaddress.addressAfterEvent).copyFrom(ProductList.postEventShippingAddress);
+        Form.get(currentForms.giftregistry.eventaddress.addressAfterEvent.states).copyFrom(ProductList.postEventShippingAddress);
     }
     
     showAddresses();
@@ -1084,61 +1075,54 @@ function editAddresses()
 
 function showAddresses()
 {
-    response.renderTemplate('account/giftregistry/addresses');
+    view.get().render('account/giftregistry/addresses');
 }
 
 
 // @secure
 function EditAddresses()
 {
-    // TODO this should end in some redirect
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null)
-	{
-	    if (TriggeredAction.formId == 'back')
-	    {
-	        ShowRegistry({
+    
+    var formResult = giftRegistryForm.handleAction({
+    	'back'             : function (formgroup) {
+           ShowRegistry({
 	            ProductList: ProductList
 	        });
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'confirm')
-	    {
-	        confirm();
+        },
+        'confirm'             : function (formgroup) {
+           confirm();
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'navEvent')
-	    {
-	        editEvent();
+        },
+        'navEvent'             : function (formgroup) {
+           editEvent();
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'navPurchases')
-	    {
-	        showPurchases();
+        },
+        'navPurchases'             : function (formgroup) {
+           showPurchases();
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'navRegistry')
-	    {
-	        ShowRegistry({
+        },
+        'navRegistry'             : function (formgroup) {
+           ShowRegistry({
 	            ProductList: ProductList
 	        });
 	        return;
-	    }
-	}
+        }     
+    });
 
-	if (!CurrentForms.giftregistry.eventaddress.valid)
+	if (!currentForms.giftregistry.eventaddress.valid)
     {
 	    showAddresses();
 	    return;
     }
 
-	if (CurrentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress' && !CurrentForms.giftregistry.eventaddress.addressBeforeEvent.valid)
+	if (currentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress' && !currentForms.giftregistry.eventaddress.addressBeforeEvent.valid)
     {
         showAddresses();
         return;
     }
 	
-    if (CurrentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress' && !CurrentForms.giftregistry.eventaddress.addressAfterEvent.valid)
+    if (currentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress' && !currentForms.giftregistry.eventaddress.addressAfterEvent.valid)
     {
         showAddresses();
         return;
@@ -1150,18 +1134,17 @@ function EditAddresses()
 
 function confirm()
 {
-    if (CurrentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress')
+    if (currentForms.giftregistry.eventaddress.beforeEventAddress.value == 'newaddress')
     {
         var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID: CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value,
+            AddressID: currentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value,
             Customer: customer
         });
         if (GetCustomerAddressResult.result == PIPELET_NEXT)
         {
             var Address = GetCustomerAddressResult.Address;
 
-            var form = require('./dw/form');
-            form.invalidateFormElement(CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid);            
+            currentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.invalidateFormElement();            
             
             showAddresses();
             return;
@@ -1170,10 +1153,10 @@ function confirm()
     }
 
 
-    if (CurrentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress')
+    if (currentForms.giftregistry.eventaddress.afterEventAddress.value == 'newaddress')
     {
         var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID: CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value,
+            AddressID: currentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value,
             Customer: customer
         });
         if (GetCustomerAddressResult.result == PIPELET_NEXT)
@@ -1181,7 +1164,7 @@ function confirm()
             var Address = GetCustomerAddressResult.Address;
 
             var form = require('./dw/form');
-            form.invalidateFormElement(CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid);
+            form.invalidateFormElement(currentForms.giftregistry.eventaddress.addressAfterEvent.addressid);
 
             showAddresses();
             return;
@@ -1194,7 +1177,7 @@ function confirm()
     }).execute({
         ProductList: ProductList,
         Customer: customer,
-        GiftRegistryForm: CurrentForms.giftregistry
+        GiftRegistryForm: currentForms.giftregistry
     });
     if (ScriptResult.result == PIPELET_ERROR)
     {
@@ -1215,7 +1198,7 @@ function confirm()
 // @secure
 function Delete()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var currentHttpParameterMap = request.httpParameterMap;
 
     
     var TargetPipeline = "GiftRegistry-Delete";
@@ -1232,7 +1215,7 @@ function Delete()
     var GetProductListResult = new dw.system.Pipelet('GetProductList', {
         Create: false
     }).execute({
-        ProductListID: CurrentHttpParameterMap.ProductListID.value
+        ProductListID: currentHttpParameterMap.ProductListID.value
     });
     if (GetProductListResult.result == PIPELET_NEXT)
     {
@@ -1265,26 +1248,18 @@ function create()
     }
 
     createOne();
-    
-
-    // TODO redirect?
-    /*ShowRegistry({
-        ProductList: ProductList
-    });*/
+ 
 }
 
 
 function updateAll()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
-    var form = require('./dw/form');
-
-    
     // TODO do in a single transaction
-	for (var i = 0; i < CurrentForms.giftregistry.items.length; i++) {
-		var Item = CurrentForms.giftregistry.items[i];
-	    if (!form.updateObjectWithForm(Item.object, Item))
+	for (var i = 0; i < currentForms.giftregistry.items.length; i++) {
+		var Item = currentForms.giftregistry.items[i];
+	    if (!Form.get(Item).copyTo(Item))
 	    {
 	        return {
 	            error: true
@@ -1324,9 +1299,9 @@ exports.SubmitFormLanding = guard.ensure(['post', 'https'], SubmitFormLanding);
 /** @see module:controller/GiftRegistry~registrymain */
 exports.registrymain = guard.ensure(['post', 'https'], registrymain);
 /** @see module:controller/GiftRegistry~Start */
-exports.Start = guard.ensure(['get', 'https'], loggedIn(Start));
+exports.Start = guard.ensure(['get', 'https', 'loggedIn'], Start);
 /** @see module:controller/GiftRegistry~AddProduct */
-exports.AddProduct = guard.ensure(['get', 'https'], loggedIn(AddProduct));
+exports.AddProduct = guard.ensure(['get', 'https', 'loggedIn'], AddProduct);
 
 /*
  * Local methods

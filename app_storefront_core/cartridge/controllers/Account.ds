@@ -20,7 +20,7 @@ var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/model/Form');
-var accountForm = require('~/cartridge/scripts/model/Form').get('myaccount');
+var accountForm = Form.get('myaccount');
 
 
 /*
@@ -30,7 +30,7 @@ var accountForm = require('~/cartridge/scripts/model/Form').get('myaccount');
 /**
  * Renders the account overview.
  */
-function Show()
+function show()
 {
     pageMeta.update(accountHomeAsset);
     
@@ -53,8 +53,7 @@ function EditProfile()
     Form.get(CurrentForms.profile.login).copyFrom(CurrentCustomer.profile.credentials);
     Form.get(CurrentForms.profile.addressbook.addresses).copyFrom(CurrentCustomer.profile.addressBook.addresses);
 
-    var Status = null;
-	pageMeta.update(accountPersonalDataAsset);
+    pageMeta.update(accountPersonalDataAsset);
     
     response.renderTemplate('account/user/registration_edit', {
         bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
@@ -86,7 +85,7 @@ function EditForm()
     
     var formResult = accountForm.handleAction({
     	'cancel'             : function (formgroup) {
-           session.forms.profile.clearFormElement();
+           Form.get('profile').clear()
 
             response.redirect(dw.web.URLUtils.https('Account-Show'));
             return;
@@ -110,9 +109,9 @@ function EditForm()
 function PasswordResetDialog()
 {
     
-    session.forms.requestpassword.clearFormElement();
+    Form.get('requestpassword').clear();
    
-    response.renderTemplate('account/password/requestpasswordresetdialog');
+    view.get().render('account/password/requestpasswordresetdialog');
 }
 
 /**
@@ -123,7 +122,7 @@ function PasswordResetDialogForm()
     
     var formResult = accountForm.handleAction({
     	'cancel'             : function (formgroup) {
-           response.renderTemplate('account/password/requestpasswordresetdialog');
+    	  view.get().render('account/password/requestpasswordresetdialog');
            return;
         },
         'send'             : function (formgroup) {
@@ -151,8 +150,8 @@ function PasswordResetDialogForm()
 
                 params.ErrorCode = null;
                 params.ShowContinue = true;
-
-                response.renderTemplate('account/password/requestpasswordreset_confirm', params);
+				
+				view.get().render('account/password/requestpasswordreset_confirm', params);
                 return;
             }
         }    
@@ -169,9 +168,8 @@ function PasswordResetDialogForm()
  */
 function passwordReset()
 {
-    session.forms.requestpassword.clearFormElement();
-
-    response.renderTemplate('account/password/requestpasswordreset');
+    Form.get('requestpassword').clear();
+	view.get().render('account/password/requestpasswordreset');
 }
 
 /**
@@ -186,7 +184,7 @@ function PasswordResetForm()
             });
             if (GetCustomerResult.result == PIPELET_ERROR)
             {
-                response.renderTemplate('account/password/requestpasswordreset', {
+                view.get().render('account/password/requestpasswordreset', {
                     ErrorCode : 'notfounderror'
                 });
                 return;
@@ -206,7 +204,7 @@ function PasswordResetForm()
         	mail.setContent(template.render());
         	mail.send();
 
-            response.renderTemplate('account/password/requestpasswordreset_confirm', {
+			view.get().render('account/password/requestpasswordreset_confirm', {
                 ErrorCode : null
             });
             return;
@@ -214,7 +212,7 @@ function PasswordResetForm()
     });
     
     // TODO redirect
-    response.renderTemplate('account/password/requestpasswordreset', {
+    view.get().render('account/password/requestpasswordreset', {
         ErrorCode : 'formnotvalid'
     });
 }
@@ -225,19 +223,18 @@ function PasswordResetForm()
  */
 function SetNewPassword()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-    var CurrentForms = session.forms;
+    var currentHttpParameterMap = request.httpParameterMap;
+    
+    Form.get('resetpassword').clear();
 
-    CurrentForms.resetpassword.clearFormElement();
-
-    if (CurrentHttpParameterMap.Token == null)
+    if (currentHttpParameterMap.Token == null)
     {
         passwordReset();
         return;
     }
 
     var ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-        Token : CurrentHttpParameterMap.Token.getStringValue()
+        Token : currentHttpParameterMap.Token.getStringValue()
     });
     if (ValidateResetPasswordTokenResult.result == PIPELET_ERROR)
     {
@@ -245,22 +242,25 @@ function SetNewPassword()
         return;
     }
     var Customer = ValidateResetPasswordTokenResult.Customer;
-
-    response.renderTemplate('account/password/setnewpassword');
+	
+	view.get().render('account/password/setnewpassword');
 }
 
 function SetNewPasswordForm()
 {
+    var currentHttpParameterMap = request.httpParameterMap;
+    var currentForms = session.forms;
+    
     var formResult = accountForm.handleAction({
     	'cancel'             : function (formgroup) {
-           response.renderTemplate('account/password/setnewpassword');
+           view.get().render('account/password/setnewpassword');
            return;
         },
         'send'             : function (formgroup) {
            // TODO redirects
 
             var ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-                Token : CurrentHttpParameterMap.Token.getStringValue()
+                Token : currentHttpParameterMap.Token.getStringValue()
             });
             if (ValidateResetPasswordTokenResult.result == PIPELET_ERROR)
             {
@@ -269,23 +269,23 @@ function SetNewPasswordForm()
             }
             var Customer = ValidateResetPasswordTokenResult.Customer;
 
-            if (CurrentForms.resetpassword.password.value != CurrentForms.resetpassword.passwordconfirm.value)
+            if (currentForms.resetpassword.password.value != currentForms.resetpassword.passwordconfirm.value)
             {
-                CurrentForms.resetpassword.passwordconfirm.invalidateFormElement();
+                currentForms.resetpassword.passwordconfirm.invalidateFormElement();
 
-                response.renderTemplate('account/password/setnewpassword');
+                view.get().render('account/password/setnewpassword');
                 return;
             }
 
             var ResetCustomerPasswordWithTokenResult = new dw.system.Pipelet('ResetCustomerPasswordWithToken')
                     .execute({
                         Customer : Customer,
-                        Token : CurrentHttpParameterMap.Token.stringValue,
-                        Password : CurrentForms.resetpassword.password.htmlValue
+                        Token : currentHttpParameterMap.Token.stringValue,
+                        Password : currentForms.resetpassword.password.htmlValue
                     });
             if (ResetCustomerPasswordWithTokenResult.result == PIPELET_ERROR)
             {
-                response.renderTemplate('account/password/setnewpassword', {
+                view.get().render('account/password/setnewpassword', {
                     ErrorCode : 'invalidpassworderror'
                 });
                 return;
@@ -306,14 +306,14 @@ function SetNewPasswordForm()
     
 
     // TODO redirects
-    response.renderTemplate('account/password/setnewpassword', {
+    view.get().render('account/password/setnewpassword', {
         ErrorCode : 'formnotvalid'
     });
 }
 
 function SetNewPasswordConfirm()
 {
-    response.renderTemplate('account/password/setnewpassword_confirm', {});
+    view.get().render('account/password/setnewpassword_confirm', {});
 }
 
 /**
@@ -324,14 +324,14 @@ function StartRegister()
 {
     var forms = session.forms;
 
-    forms.profile.clearFormElement();
+    Form.get('profile').clear();
 
     if (forms.login.username.value != null)
     {
         forms.profile.customer.email.value = forms.login.username.value;
     }
 
-    response.renderTemplate('account/user/registration');
+	view.get().render('account/user/registration');
 }
 
 // Originally, there is only one template account/user/registration
@@ -348,98 +348,31 @@ function RegistrationForm()
            if (!Account.createAccount())
             {
                 // TODO redirect
-                response.renderTemplate('account/user/registration');
+                view.get().render('account/user/registration');
                 return;
             }
 
-            session.forms.profile.clearFormElement();
+            Form.get('profile').clear()
 
             // TODO originally there is a return to the calling pipeline
             // this is not possible anymore because we have not preserved the
             // callstack accross multiple requests
             response.redirect(dw.web.URLUtils.https('Account-Show', ['registration', true]));
 
-            /*
-            var LoginController = require('./Login');
-            LoginController.Redirect({
-                TargetPipeline : 'Account-Show',
-                TargetPipelineParams : 'registration=true'
-            });
-            */
             return;
         }    
     });
     
-    response.renderTemplate('account/user/registration');
+    view.get().render('account/user/registration');
 }
 
-
-function LoginForm()
-{
-    var formResult = accountForm.handleAction({
-        'findorder'             : function (formgroup) {
-           var OrderController = require('./Order');
-            var FindResult = OrderController.Find();
-            if (FindResult.error)
-            {
-                // TODO redirect
-                response.renderTemplate('account/login/accountlogin', {
-                    OrderNotFound : true
-                });
-                return;
-            }
-            // TODO redirect
-            response.renderTemplate('account/orderhistory/orderdetails', {
-                Order : FindResult.Order
-            });
-            return;
-        },
-        'login'             : function (formgroup) {
-           // get the target action which requested this login step before the
-            // form is cleared
-            var targetAction = session.forms.login.targetAction.value;
-            var targetParameters = session.forms.login.targetParameters.value;
-
-            var LoginController = require('./Login');
-            var ProcessResult = LoginController.Process();
-            if (ProcessResult.login_failed)
-            {
-                // TODO redirect
-                response.renderTemplate('account/login/accountlogin');
-                return;
-            }
-
-            // login successful
-            // redirect to the origin who triggered the login process
-            if (request.httpParameterMap.original.submitted) {
-                //@TODO make sure only path, no hosts are allowed as redirect target 
-            	response.redirect(decodeURI(request.httpParameterMap.original.value));
-            } else if (!empty(targetAction)) {
-                if (empty(targetParameters)) {
-                    response.redirect(dw.web.URLUtils.https(targetAction));
-                } else {
-                    response.redirect(dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters)));
-                }
-            } else {
-                response.redirect(dw.web.URLUtils.https('Account-Show'));
-            }
-            return;
-        }, 
-        'register'             : function (formgroup) {
-           response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
-           return;
-        }   
-    });
-
-    response.redirect(dw.web.URLUtils.https('Account-Show'));
-}
 
 /**
  * Renders the account navigation.
  */
 function IncludeNavigation()
 {
-    response.renderTemplate('account/accountnavigation');
+    view.get().render('account/accountnavigation');
 }
 
 /**
@@ -447,7 +380,7 @@ function IncludeNavigation()
  */
 function Connect()
 {
-    var CurrentForms = session.forms;
+    var currentForms = session.forms;
 
     var ScriptResult = new dw.system.Pipelet('Script', {
         Transactional : false,
@@ -458,15 +391,15 @@ function Connect()
     {
         if (RegistrationStatus.code == 'CustomerAlreadyExistError')
         {
-            CurrentForms.login.username.value = FacebookUser.registration.email;
+            currentForms.login.username.value = FacebookUser.registration.email;
 
-            CurrentForms.login.loginsucceeded.invalidateFormElement();
+            currentForms.login.loginsucceeded.invalidateFormElement();
 
             /*
              * Used when user has attempted to use their facebook account to
              * create a storefront account that is already in the BM
              */
-            response.renderTemplate('account/login/accountlogin', {
+            view.get().render('account/login/accountlogin', {
                 TargetPipeline : 'Account-Show',
                 RegistrationStatus: RegistrationStatus
             });
@@ -475,8 +408,7 @@ function Connect()
 
         // TODO where to go from here?
         response.redirect(dw.web.URLUtils.https('Account-Show'));
-        //var LoginController = require('./Login');
-        //LoginController.Redirect({});
+        
         return;
     }
     var FacebookJSON = ScriptResult.FacebookJSON;
@@ -492,56 +424,6 @@ function Connect()
     response.redirect(dw.web.URLUtils.https('Account-Show'));
 }
 
-/**
- * A guard function which ensures that the user is logged in before the action can be executed.
- */
-function loggedIn(action)
-{
-    return function()
-    {
-        if (!customer.authenticated)
-        {
-            requireLogin({
-                TargetAction : 'Account-Show'
-            });
-            return;
-        }
-
-        action();
-    };
-}	
-
-/**
- * This method contains the login procedure specific for the customer account,
- * e.g. order tracking. After login, it redirects to the provided target action.
- */
-function requireLogin(args)
-{
-    var forms = session.forms;
-
-    session.forms.ordertrack.invalidateFormElement();
-    session.forms.login.invalidateFormElement();
-
-    if (customer.registered)
-    {
-        session.forms.login.username.value = customer.profile.credentials.login;
-        session.forms.login.rememberme.value = true;
-    }
-
-	pageMeta.update(accountLogin);
-
-    // set the redirect destination
-    session.forms.login.targetAction.value = args.TargetAction;
-    
-    if (!empty(args.TargetParameters))
-    {
-        session.forms.login.targetParameters.value = JSON.stringify(args.TargetParameters);
-    }
-    
-    response.renderTemplate('account/login/accountlogin', {
-        RegistrationStatus : false
-    });
-}
 
 /*
  * Module exports
@@ -551,13 +433,13 @@ function requireLogin(args)
  * Web exposed methods
  */
 /** @see module:controller/Account~Show */
-exports.Show = guard.ensure(['get', 'https'], loggedIn(Show));
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
 /** @see module:controller/Account~EditProfile */
-exports.EditProfile = guard.ensure(['get', 'https'], loggedIn(EditProfile));
+exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], EditProfile);
 /** @see module:controller/Account~EditProfileError */
-exports.EditProfileError = guard.ensure(['get', 'https'], loggedIn(EditProfileError));
+exports.EditProfileError = guard.ensure(['get', 'https', 'loggedIn'], EditProfileError);
 /** @see module:controller/Account~EditForm */
-exports.EditForm = guard.ensure(['post', 'https'], loggedIn(EditForm));
+exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], EditForm);
 /** @see module:controller/Account~PasswordResetDialog */
 exports.PasswordResetDialog = guard.ensure(['get', 'https'], PasswordResetDialog);
 /** @see module:controller/Account~PasswordResetDialogForm */
@@ -574,8 +456,6 @@ exports.SetNewPasswordConfirm = guard.ensure(['get', 'https'], SetNewPasswordCon
 exports.StartRegister = guard.ensure(['get', 'https'], StartRegister);
 /** @see module:controller/Account~RegistrationForm */
 exports.RegistrationForm = guard.ensure(['post', 'https'], RegistrationForm);
-/** @see module:controller/Account~LoginForm */
-exports.LoginForm = guard.ensure(['post', 'https'], LoginForm);
 /** @see module:controller/Account~IncludeNavigation */
 exports.IncludeNavigation = guard.ensure(['get'], IncludeNavigation);
 /** @see module:controller/Account~Connect */
