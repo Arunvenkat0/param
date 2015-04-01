@@ -4,6 +4,21 @@
  */
 
 var logger = require('jsdoc/util/logger');
+var helper = require('jsdoc/util/templateHelper');
+
+var registerInforPortalLinks = function(p){
+    if(p.type && p.type.names){
+        var names = p.type.names;
+        for(var j = 0; j < names.length; j++){
+            var name = names[j];
+            if(name.indexOf('dw.') === 0){
+                //  logger.warn(name);
+                //  https://info.demandware.com/DOC3/topic/com.demandware.dochelp/DWAPP-15.3-API-doc/scriptapi/html/api/class_dw_net_FTPClient.html?cp=0_20_2_8_0
+                helper.registerLink(name, 'https://info.demandware.com/DOC3/topic/com.demandware.dochelp/DWAPP-15.3-API-doc/scriptapi/html/api/class_'+name.split('.').join('_')+'.html');
+            }
+        }
+    }
+};
 
 exports.handlers = {
     beforeParse: function(e) {
@@ -14,18 +29,16 @@ exports.handlers = {
     },
     newDoclet : function(e) {
         var params = e.doclet.params;
+        var i;
         if(params){
-            for(var i = 0; i < params.length; i++){
-                var p = params[i];
-                if(p.type && p.type.names){
-                    var names = p.type.names;
-                    for(var j = 0; j < names.length; j++){
-                        var name = names[j];
-                        if(name.indexOf('dw.') === 0){
-                            //  logger.warn(name);
-                        }
-                    }
-                }
+            for(i = 0; i < params.length; i++){
+                registerInforPortalLinks(params[i]);
+            }
+        }
+        var returns = e.doclet.returns;
+        if(returns){
+            for(i = 0; i < returns.length; i++){
+                registerInforPortalLinks(returns[i]);
             }
         }
     }
