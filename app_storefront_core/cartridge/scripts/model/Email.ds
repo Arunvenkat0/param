@@ -18,45 +18,45 @@ var AbstractModel = require('./AbstractModel');
  *     });
  */
 var Email = AbstractModel.extend(
-/** @lends module:model/Email~Email.prototype */
-{
-    template : null,
-    init : function(template, recipient) {
-        this._super(new dw.net.Mail());
-        this.template = template;
+    /** @lends module:model/Email~Email.prototype */
+    {
+        template : null,
+        init     : function (template, recipient) {
+            this._super(new dw.net.Mail());
+            this.template = template;
 
-        // prepare the email object
-        var mail = this.object;
-        mail.addTo(recipient);
-        mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
-    },
+            // prepare the email object
+            var mail = this.object;
+            mail.addTo(recipient);
+            mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
+        },
 
-    send : function(args){
-        // Add some default keys
-        var params = require('~/cartridge/scripts/object').convertToHashMap(args);
-        params.CurrentForms = session.forms;
-        params.CurrentHttpParameterMap = request.httpParameterMap;
-        params.CurrentCustomer = customer;
+        send : function (args) {
+            // Add some default keys
+            var params = require('~/cartridge/scripts/object').convertToHashMap(args);
+            params.CurrentForms = session.forms;
+            params.CurrentHttpParameterMap = request.httpParameterMap;
+            params.CurrentCustomer = customer;
 
-        // create a body template
-        var contentTemplate = new dw.util.Template(this.template);
-        params.put('MainContent', contentTemplate.render(params).text);
+            // create a body template
+            var contentTemplate = new dw.util.Template(this.template);
+            params.put('MainContent', contentTemplate.render(params).text);
 
-        // @TODO Enable this to allow for a shared pt_email which creates consistent header/footer
-        // integrate the body in the global content
-        //var template = new dw.util.Template('mail/pt_email');
-        //var content = template.render(params);
+            // @TODO Enable this to allow for a shared pt_email which creates consistent header/footer
+            // integrate the body in the global content
+            //var template = new dw.util.Template('mail/pt_email');
+            //var content = template.render(params);
 
-        // set the content and send
-        this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
-        return this.object.send();
-    },
+            // set the content and send
+            this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
+            return this.object.send();
+        },
 
-    __noSuchMethod__ :function(methodName, methodArgs){
-        var result = this._super(methodName, methodArgs);
-        return result === this.object ? this : result;
-    }
-});
+        __noSuchMethod__ : function (methodName, methodArgs) {
+            var result = this._super(methodName, methodArgs);
+            return result === this.object ? this : result;
+        }
+    });
 
 /**
  * Use this method to get a wrapped email instance.

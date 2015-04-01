@@ -12,7 +12,7 @@
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
-var Mail = require('dw/net/Mail');
+var Email = require('~/cartridge/scripts/model/Email');
 var Order = require('~/cartridge/scripts/model/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
@@ -204,15 +204,11 @@ function submitImpl(order) {
     }
 
     // Send order confirmation and clear used forms within the checkout process.
-    var template = new Template('mail/orderconfirmation');
-    var mail = new Mail();
-
-    mail.addTo(order.getCustomerEmail());
-    mail.setFrom(Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'));
-    mail.setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + " " + order.getOrderNo()).toString());
-    mail.setContent(template.render());
-
-    mail.send();
+    Email.get('mail/orderconfirmation', order.getCustomerEmail())
+        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + " " + order.getOrderNo()).toString())
+        .send({
+            Order : order
+        });
 
     // Mark order as EXPORT_STATUS_READY.
     Transaction.wrap(function () {
@@ -241,20 +237,16 @@ function createGiftCertificates(order) {
 
 	if (giftCertificates) {
 
-		var template = new Template('mail/giftcert');
-
 		for (var i = 0; i < giftCertificates.length; i++) {
 			var giftCertificate = giftCertificates[i];
 
-			var mail = new Mail();
-
-			mail.addTo(giftCertificate.recipientEmail);
-			mail.setFrom(Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'));
-			mail.setSubject(Resource.msg('email.ordergcemsg', 'email', null) + " " + giftCertificate.senderName);
-			mail.setContent(template.render());
-
-			mail.send();
-		}
+            // Send order confirmation and clear used forms within the checkout process.
+            Email.get('mail/giftcert', giftCertificate.recipientEmail)
+                .setSubject(Resource.msg('email.ordergcemsg', 'email', null) + " " + giftCertificate.senderName)
+                .send({
+		            GiftCertificate : giftCertificate
+                });
+        }
 
 		return true;
 	}
