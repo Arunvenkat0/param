@@ -12,7 +12,7 @@ var Transaction = require('dw/system/Transaction');
 function Authorize(args) {
     var orderNo = args.OrderNo;
     var paymentInstrument = args.PaymentInstrument;
-    var paymentProcessor = PaymentMgr.getPaymentMethod("BASIC_GIFT_CERTIFICATE").getPaymentProcessor();
+    var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
 
     Transaction.wrap(function () {
         paymentInstrument.paymentTransaction.transactionID = orderNo;
