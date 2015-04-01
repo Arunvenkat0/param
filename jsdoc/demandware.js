@@ -11,10 +11,11 @@ var registerInforPortalLinks = function(p){
         var names = p.type.names;
         for(var j = 0; j < names.length; j++){
             var name = names[j];
-            if(name.indexOf('dw.') === 0){
+            if(name.indexOf('dw.') === 0 || ['Object','String','Array','Boolean','Date','Number','XML','RegExp'].indexOf(name) > -1){
                 //  logger.warn(name);
                 //  https://info.demandware.com/DOC3/topic/com.demandware.dochelp/DWAPP-15.3-API-doc/scriptapi/html/api/class_dw_net_FTPClient.html?cp=0_20_2_8_0
-                helper.registerLink(name, 'https://info.demandware.com/DOC3/topic/com.demandware.dochelp/DWAPP-15.3-API-doc/scriptapi/html/api/class_'+name.split('.').join('_')+'.html');
+                var urlName = name.indexOf('dw.') === 0 ? name.split('.').join('_') : 'TopLevel_'+name;
+                helper.registerLink(name, 'https://info.demandware.com/DOC3/topic/com.demandware.dochelp/DWAPP-15.3-API-doc/scriptapi/html/api/class_'+urlName+'.html');
             }
         }
     }
