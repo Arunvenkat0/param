@@ -87,6 +87,7 @@ var Cart = AbstractModel.extend(
         /**
          * Adds a product list item to the cart.
          *
+         * @transactional
          * @param {dw.customer.ProductListItem} productListItem - The product list item whose associated product is to be added to the basket.
          * @param {Number} quantity - The quantity of the product.
          * @param {String} cgid - ID of the category context to be stored with the product line item.
@@ -116,6 +117,7 @@ var Cart = AbstractModel.extend(
         /**
          * Adds a product to the cart.
          *
+         * @transactional
          * @param {String} pid - ID of the product that is to be added to the basket.
          * @param {Number} quantity - The quantity of the product.
          * @param {String} cgid - ID of the category context to be stored with the product line item.
@@ -208,6 +210,7 @@ var Cart = AbstractModel.extend(
          *  <li>CouponStatusCodes.NO_ACTIVE_PROMOTION = Indicates that coupon is not assigned to an active promotion.</li>
          * </ul>
          *
+         * @transactional
          * @param {String} couponCode - The code of the coupon to add.
          * @returns {dw.system.Status} The "Status" object containing details of the add to cart action. See above.
          */
@@ -234,6 +237,7 @@ var Cart = AbstractModel.extend(
          * Function always creates a new product line item, regardless of the value of the site preference
          * 'Add Product Behavior'.
          *
+         * @transactional
          * @param {dw.order.BonusDiscountLineItem} bonusDiscountLineItem - Line item representing an applied BonusChoiceDiscount in the basket. The
          * product must be in the bonus product list of this discount.
          * @param {dw.catalog.Product} product - The product that is to be added to the basket.
@@ -270,6 +274,8 @@ var Cart = AbstractModel.extend(
 
         /**
          * Removes a gift certificate line item from the basket.
+         *
+         * @transactional
          * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem - The gift certificate to remove from the basket.
          */
         removeGiftCertificateLineItem : function (giftCertificateLineItem) {
@@ -285,6 +291,7 @@ var Cart = AbstractModel.extend(
         /**
          * Deletes all the products associated with a bonus discount line item.
          *
+         * @transactional
          * @param {dw.order.BonusDiscountLineItem} bonusDiscountLineItem - The bonus discount line item to remove the
          * product line items for.
          */
@@ -370,6 +377,8 @@ var Cart = AbstractModel.extend(
         /**
          * This function will checks the instore qty against the store inventory in the case that the pli's qtyt has
          * been updated.
+         *
+         * @transactional
          */
         checkInStoreProducts : function () {
             if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
@@ -424,12 +433,12 @@ var Cart = AbstractModel.extend(
         /**
          * Replaces the current product of the specified product line item with the specified product.
          *
+         * @transactional
          * @param {dw.order.ProductLineItem} lineItem - The product line item.
          * @param {dw.catalog.Product} product - The new product.
          * @param {Number} quantity - The quantity of the product line item after replacement.
          * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
          */
-
         updateLineItem : function (lineItem, product, quantity, productOptionModel) {
 
             new dw.system.Pipelet('ReplaceLineItemProduct').execute({
@@ -503,6 +512,8 @@ var Cart = AbstractModel.extend(
 
         /**
          * The function removes all empty shipments of the current cart.
+         *
+         * @transactional
          */
         removeEmptyShipments : function () {
             // get the list of shipments
@@ -547,6 +558,8 @@ var Cart = AbstractModel.extend(
         /**
          * Cleans the shipments of the current basket by putting all gift certificate line items to single, possibly
          * new shipments (one shipment per gift certificate line item).
+         *
+         * @transactional
          */
         updateGiftCertificateShipments : function () {
 
@@ -617,6 +630,7 @@ var Cart = AbstractModel.extend(
         /**
          * Creates a shipping address for the shipment with the given shipment ID.
          *
+         * @transactional
          * @param {String} shipmentID - The ID of the shipment to create the shipping address for.
          * @returns {dw.order.OrderAddress} The created shipping address.
          */
@@ -638,6 +652,7 @@ var Cart = AbstractModel.extend(
          * This script scans the basket and consildates items that are going to the same store, it also creates shipmets
          * with shipment type and method for the rest of checkout.
          *
+         * @transactional
          * @returns {boolean} Boolean used to show the shipping form fields if there is a home delivery found in the basket.
          */
         consolidateInStoreShipments : function () {
@@ -749,15 +764,15 @@ var Cart = AbstractModel.extend(
 
             if (shipment) {
                 var currencyCode = this.getCurrencyCode();
-                var discountPlan = PromotionMgr.getDiscounts(this.object),
-                    productShippingCosts = [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
+                var discountPlan             = PromotionMgr.getDiscounts(this.object),
+                    productShippingCosts     = [], // array to hold product level shipping costs (fixed or surcharges), each entry is an object containing product name and shipping cost
                     productShippingDiscounts = new ArrayList(), // list holds all products shipping discounts NOT promotions e.g. fixed shipping discount or free shipping for individual products discount
-                    productIter = this.getAllProductLineItems().iterator(),
-                    priceAdjArray = [], // array to hold shipping price adjustments data (we have to create objects since price adjustments get lost after applying a shipping method
-                    priceAdjIter = shipment.getShippingPriceAdjustments().iterator(),
-                    priceAdjTotal = new Money(0.0, currencyCode), // total of all price adjustments
-                    surchargeTotal = new Money(0.0, currencyCode), // total of all surcharges
-                    adustedSurchargeTotal = new Money(0.0, currencyCode); // total of all surcharges minus price adjustments
+                    productIter              = this.getAllProductLineItems().iterator(),
+                    priceAdjArray            = [], // array to hold shipping price adjustments data (we have to create objects since price adjustments get lost after applying a shipping method
+                    priceAdjIter             = shipment.getShippingPriceAdjustments().iterator(),
+                    priceAdjTotal            = new Money(0.0, currencyCode), // total of all price adjustments
+                    surchargeTotal           = new Money(0.0, currencyCode), // total of all surcharges
+                    adustedSurchargeTotal    = new Money(0.0, currencyCode); // total of all surcharges minus price adjustments
 
                 // iterate over all products in the basket
                 // and calculate their shipping cost and shipping discounts
@@ -839,6 +854,7 @@ var Cart = AbstractModel.extend(
          * If the passed shipping method is not in this list, then the script uses the default shipping method.
          * If the default shipping method is not in the list, the script uses the first method in the list.
          *
+         * @transactional
          * @param {String} shipmentID - The ID of the shipment to update the shipping method for.
          * @param {String} shippingMethodID - The ID of the shipping method to set for the shipment.
          * @param {dw.order.ShippingMethod} shippingMethod - The shipping method to set for the shipment.
@@ -949,6 +965,7 @@ var Cart = AbstractModel.extend(
          * Removes a gift certificate payment instrument with the given gift certificate ID
          * from the basket.
          *
+         * @transactional
          * @param {String} giftCertificateID - The ID of the gif certificate to remove the payment instrument for.
          */
         removeGiftCertificatePaymentInstrument : function (giftCertificateID) {
@@ -971,6 +988,7 @@ var Cart = AbstractModel.extend(
         /**
          * Deletes multiple payment instruments.
          *
+         * @transactional
          * @param {dw.util.Collection} paymentInstruments The payment instruments to remove.
          */
         removePaymentInstruments : function (paymentInstruments) {
@@ -1063,6 +1081,7 @@ var Cart = AbstractModel.extend(
          * This script creates new ProductLineItems and Shipments from the List of the address selections with help of
          * a data structure (address and product relations through HashMaps).
          *
+         * @transactional
          * @param {dw.web.FormList} quantityLineItems
          * @returns {boolean} false in the case of an error, true otherwise.
          */
@@ -1279,6 +1298,7 @@ var Cart = AbstractModel.extend(
          * script attempts to redeem the current balance of the gift certificate. If the current balance exceeds the
          * order total, this amount is redeemed and the balance is lowered.
          *
+         * @transactional
          * @param {dw.order.GiftCertificate} giftCertificate - The Gift Certificate.
          * @returns {dw.order.PaymentInstrument} The created PaymentInstrument.
          */
@@ -1363,6 +1383,7 @@ var Cart = AbstractModel.extend(
 
         /**
          * Loads customer addresses and shipment addresses and stores them into the session address book attribute of the cart, if it is available and configured in BM.
+         * @transactional
          *
          * @param {dw.customer.Customer} customer - The customer to load the addresses from.
          */
@@ -1421,6 +1442,7 @@ var Cart = AbstractModel.extend(
         /**
          * Adds the given address to the address book of the cart.
          *
+         * @transactional
          * @param {module:model/TransientAddress~TransientAddress} addressToAdd - The address to add.
          */
         addAddressToAddressBook : function (addressToAdd) {
@@ -1459,6 +1481,7 @@ var Cart = AbstractModel.extend(
         /**
          * Updates the given address in the carts address book.
          *
+         * @transactional
          * @param {module:model/TransientAddress~TransientAddress} addressToUpdate - The address to update.
          */
         updateAddressBookAddress : function (addressToUpdate) {
@@ -1487,30 +1510,31 @@ var Cart = AbstractModel.extend(
             }
         },
 
-	    /**
-	     * Creates an Order based on the cart. If the order could be created successfully, it will be in status CREATED.
-	     * The cart will be removed from the session and marked for removal.
-	     *
-	     * If the order could not be created the function returns null, if any of the following conditions are encountered:
-	     * <ul>
-	     * <li>any of the totals (net, gross, tax) of the basket is N/A</li>
-	     * <li>any of the product items is not available</li>
-	     * <li>any campaign-based coupon in the basket is invalid (see dw.order.CouponLineItem.isValid())</li>
-	     * <li>the basket represents an order being edited, but the order has been already been replaced by another order</li>
-	     * <li>the basket represents an order being edited, but the customer associated with the original order is not the same as the current customer</li>
-	     * </ul>
-	     * All empty shipments of the basket are removed before creating the order. A shipment is empty if it contains
-	     * no product or gift certificate line items all total prices (net, gross, tax) are 0.0.
-	     *
-	     * The function decrements inventory for all products contained in the order. (Means the 'reserve inventory for
-	     * order' functionality must not be sub-sequently called.) The function redeems all coupons contained in the order.
-	     *
-	     * If the cart contains product or gift certificate line items associated with product list items, the function
-	     * updates the purchase the product list items. For example, if the basket contains an item added from a gift
-	     * registry, the purchase history of the respective gift registry item is updated.
-	     *
-	     * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
-	     */
+        /**
+         * Creates an Order based on the cart. If the order could be created successfully, it will be in status CREATED.
+         * The cart will be removed from the session and marked for removal.
+         *
+         * If the order could not be created the function returns null, if any of the following conditions are encountered:
+         * <ul>
+         * <li>any of the totals (net, gross, tax) of the basket is N/A</li>
+         * <li>any of the product items is not available</li>
+         * <li>any campaign-based coupon in the basket is invalid (see dw.order.CouponLineItem.isValid())</li>
+         * <li>the basket represents an order being edited, but the order has been already been replaced by another order</li>
+         * <li>the basket represents an order being edited, but the customer associated with the original order is not the same as the current customer</li>
+         * </ul>
+         * All empty shipments of the basket are removed before creating the order. A shipment is empty if it contains
+         * no product or gift certificate line items all total prices (net, gross, tax) are 0.0.
+         *
+         * The function decrements inventory for all products contained in the order. (Means the 'reserve inventory for
+         * order' functionality must not be sub-sequently called.) The function redeems all coupons contained in the order.
+         *
+         * If the cart contains product or gift certificate line items associated with product list items, the function
+         * updates the purchase the product list items. For example, if the basket contains an item added from a gift
+         * registry, the purchase history of the respective gift registry item is updated.
+         *
+         * @transactional
+         * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
+         */
         createOrder : function () {
             var CreateOrder2Result = new dw.system.Pipelet('CreateOrder2', {
                 CreateCustomerNo : true
@@ -1522,6 +1546,22 @@ var Cart = AbstractModel.extend(
             }
             else {
                 return CreateOrder2Result.Order;
+            }
+        },
+
+        /**
+         * Determines if the cart already contains payment instruments of the given payment method and removes them
+         * from the basket.
+         *
+         * @transactional
+         * @param {String} method - Name of the payment method
+         */
+        removeExistingPaymentInstruments : function (method) {
+            var iter = this.getPaymentInstruments(method).iterator();
+
+            // remove them
+            while (iter.hasNext()) {
+                this.removePaymentInstrument(iter.next());
             }
         }
 

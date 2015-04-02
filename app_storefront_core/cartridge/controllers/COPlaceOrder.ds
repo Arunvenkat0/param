@@ -16,6 +16,7 @@ var Email = require('~/cartridge/scripts/model/Email');
 var Order = require('~/cartridge/scripts/model/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var Status = require('dw/system/Status');
@@ -66,17 +67,9 @@ function handlePayments(order) {
                  * dw.system.Status object into the pipeline dictionary under key
                  * PlaceOrderError, which contains provider specific error messages.
                  */
-                var AuthorizationPipeline = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor().ID;
+                var authorizationResult = PaymentProcessor.authorize(order, paymentInstrument);
 
-                // dynamic call node to authorization pipeline
-                // TODO support global lookup of controller from site cartridge list
-                var PaymentProcessor = require('./lib/payment/' + AuthorizationPipeline);
-                var AuthorizationResult = PaymentProcessor.Authorize({
-                    'PaymentInstrument' : paymentInstrument,
-                    'OrderNo'           : order.getOrderNo
-                });
-
-                if (AuthorizationResult.not_supported || AuthorizationResult.error) {
+                if (authorizationResult.not_supported || authorizationResult.error) {
                     return {
                         error : true
                     };

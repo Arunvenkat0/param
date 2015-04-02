@@ -186,6 +186,14 @@ function addAttribs(f) {
     f.attribs = util.format('<span class="type-signature">%s</span>', attribsString);
 }
 
+function addTransactional(f) {
+    var transactional = f.transactional;
+    
+    if (transactional) {
+      f.signature =  f.signature + '<span class="transactional"/><img src="./styles/transactional.png" alt="Requires Transaction"></span>'
+    }
+}
+
 function shortenPaths(files, commonPrefix) {
     Object.keys(files).forEach(function(file) {
         files[file].shortened = files[file].resolved.replace(commonPrefix, '')
@@ -335,7 +343,7 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = '<h2><a href="index.html">Home</a></h2>';
+    var nav = '<h2 class="homeleft"><a href="index.html">Home</a></h2>';
     var seen = {};
     var seenTutorials = {};
 
@@ -522,6 +530,7 @@ exports.publish = function(taffyData, opts, tutorials) {
             addSignatureParams(doclet);
             addSignatureReturns(doclet);
             addAttribs(doclet);
+            addTransactional(doclet);
         }
     });
 

@@ -15,6 +15,7 @@ var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Profile = require('~/cartridge/scripts/model/Profile');
 var Resource = require('dw/web/Resource');
@@ -523,12 +524,7 @@ function handlePaymentSelection(cart) {
      * The handle pipeline is responsible for payment provider / payment method
      * specific form validation and payment instrument creation.
      */
-    var handlePipeline = PaymentMgr.getPaymentMethod(session.forms.billing.paymentMethods.selectedPaymentMethodID.value).paymentProcessor.ID;
-
-    // TODO support lookup from other cartridges in the site
-    return require('./lib/payment/' + handlePipeline).Handle({
-        Basket : cart.object
-    });
+	return PaymentProcessor.handle(cart.object, session.forms.billing.paymentMethods.selectedPaymentMethodID.value);
 }
 
 /**
@@ -723,24 +719,37 @@ function saveCreditCard() {
         return true;
     }
     else {
+	    // TODO - remove pipelet code once APP-30656 is fixed
+	    // var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
+	    var creditCards = new dw.util.ArrayList();
 
-        var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-        var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
+	    var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+		    Customer : customer,
+		    PaymentMethod : PaymentInstrument.METHOD_CREDIT_CARD
+	    });
 
-        // coy the credit card details to the payment instrument
-        newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
-        newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
-        newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
-        newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
-        newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
+	    if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
+		    creditCards = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
+	    }
 
-        for (var i = 0; i < creditCards.length; i++) {
-            var creditcard = creditCards[i];
+        Transaction.wrap(function () {
+            var newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
 
-            if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
-                customer.getProfile().getWallet().removePaymentInstrument(creditcard);
+            // coy the credit card details to the payment instrument
+            newCreditCard.setCreditCardHolder(session.forms.billing.paymentMethods.creditCard.owner.value);
+            newCreditCard.setCreditCardNumber(session.forms.billing.paymentMethods.creditCard.number.value);
+            newCreditCard.setCreditCardExpirationMonth(session.forms.billing.paymentMethods.creditCard.month.value);
+            newCreditCard.setCreditCardExpirationYear(session.forms.billing.paymentMethods.creditCard.year.value);
+            newCreditCard.setCreditCardType(session.forms.billing.paymentMethods.creditCard.type.value);
+
+            for (var i = 0; i < creditCards.length; i++) {
+                var creditcard = creditCards[i];
+
+                if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
+                    customer.getProfile().getWallet().removePaymentInstrument(creditcard);
+                }
             }
-        }
+        });
 
         return true;
     }
