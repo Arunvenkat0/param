@@ -188,11 +188,21 @@ var Profile = AbstractModel.extend(
          * @param amount
          * @returns {*}
          */
-        validateWalletPaymentInstruments : function (paymentInstruments, countryCode, amount) {
+        validateWalletPaymentInstruments : function (countryCode, amount) {
 
             // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
-            var paymentInstruments = this.getWallet().getPaymentInstruments();
-            var customer = this.getCustomer();
+            // TODO - remove pipelet code once APP-30656 is fixed
+            //var paymentInstruments = this.getWallet().getPaymentInstruments()
+	        var customer = this.getCustomer();
+	        var paymentInstruments = new ArrayList();
+
+	        var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+		        Customer : customer
+	        });
+
+	        if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
+		        paymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
+	        }
 
             // get applicable payment methods
             var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
