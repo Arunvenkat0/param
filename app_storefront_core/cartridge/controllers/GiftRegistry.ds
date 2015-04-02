@@ -14,9 +14,10 @@ var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/model/Form');
+var content = require('~/cartridge/scripts/model/Content');
 var giftRegistryForm = Form.get('giftRegistry');
-var accountLogin = require('~/cartridge/scripts/model/Content').get('myaccount-login');
-var accountGiftRegistry = require('~/cartridge/scripts/model/Content').get('myaccount-giftregistry');
+var accountLogin = content.get('myaccount-login');
+var accountGiftRegistry = content.get('myaccount-giftregistry');
 
 /**
  * The GiftRegistry pipeline contains a set of workflows that allow you to create and maintain one or more Gift Registries.

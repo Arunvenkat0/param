@@ -8,13 +8,13 @@
 
 /* API Includes */
 var Transaction = require('dw/system/Transaction');
-var Wishlist = require('~/cartridge/scripts/model/Wishlist');
 var Product = require('~/cartridge/scripts/model/Product');
 var ProductList = require('~/cartridge/scripts/model/ProductList');
 
 /* Script Modules */
-var accountLogin = require('~/cartridge/scripts/model/Content').get('myaccount-login');
-var wishlistAsset = require('~/cartridge/scripts/model/Content').get('myaccount-wishlist');
+var content = require('~/cartridge/scripts/model/Content');
+var accountLogin = content.get('myaccount-login');
+var wishlistAsset = content.get('myaccount-wishlist');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -87,7 +87,7 @@ function WishListForm()
     {
         if (TriggeredAction.formId === 'addToCart')
         {
-            if (CurrentForms.wishlist.items.triggeredFormAction.parent.object.type === CurrentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
+            if (currentForms.wishlist.items.triggeredFormAction.parent.object.type === currentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
                 // TODO redirect?
                 var GiftCertController = require('./GiftCert');
@@ -123,7 +123,7 @@ function WishListForm()
         }
         else if (TriggeredAction.formId === 'setListPrivate')
         {
-            var ProductList = Wishlist.get();
+            var ProductList = ProductList.get();
 
             Transaction.wrap(function () {
                          ProductList.public = false;
@@ -141,7 +141,7 @@ function WishListForm()
         }
         else if (TriggeredAction.formId === 'setListPublic')
         {
-            var ProductList = Wishlist.get();
+            var ProductList = ProductList.get();
 
             
             Transaction.wrap(function () {
@@ -168,23 +168,23 @@ function WishListForm()
  */
 function ShowOther()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-    var CurrentForms = session.forms;
+    var currentHttpParameterMap = request.httpParameterMap;
+    var currentForms = session.forms;
     
-    CurrentForms.wishlist.send.clearFormElement();
+    Form.get('wishlist.send').clear();
 
     var ProductList = null;
 
     var GetProductListResult = new dw.system.Pipelet('GetProductList', {
         Create : false
     }).execute({
-        ProductListID : CurrentHttpParameterMap.WishListID.value
+        ProductListID : currentHttpParameterMap.WishListID.value
     });
     if (GetProductListResult.result == PIPELET_NEXT)
     {
         ProductList = GetProductListResult.ProductList;
 
-		Form.get(CurrentForms.wishlist.items).copyFrom(ProductList.items);
+		Form.get(currentForms.wishlist.items).copyFrom(ProductList.items);
     }
 
     view.get().render('account/wishlist/wishlist', {
@@ -232,13 +232,13 @@ function AddProduct(args)
     var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
 
 
-    var ProductList = Wishlist.get();
+    var ProductList = ProductList.get();
 
 
     new dw.system.Pipelet('AddProductToProductList').execute({
         Product : product,
         ProductList : ProductList,
-        Quantity : CurrentHttpParameterMap.Quantity.doubleValue,
+        Quantity : currentHttpParameterMap.Quantity.doubleValue,
         ProductOptionModel : ProductOptionModel
     });
 
@@ -280,26 +280,26 @@ function Search()
             PublicOnly : true
         }).execute({
             Type : dw.customer.ProductList.TYPE_WISH_LIST,
-            OwnerFirstName : CurrentForms.wishlist.search.firstname.value,
-            OwnerLastName : CurrentForms.wishlist.search.lastname.value,
-            OwnerEmail : CurrentForms.wishlist.search.email.value
+            OwnerFirstName : currentForms.wishlist.search.firstname.value,
+            OwnerLastName : currentForms.wishlist.search.lastname.value,
+            OwnerEmail : currentForms.wishlist.search.email.value
         });
         var ProductLists = SearchProductListsResult.ProductLists;
 
-        Form.get(CurrentForms.wishlist.productlists).copyFrom(ProductLists);
+        Form.get(currentForms.wishlist.productlists).copyFrom(ProductLists);
 
-        SearchFirstName = CurrentForms.wishlist.search.firstname.value;
-        SearchLastName = CurrentForms.wishlist.search.lastname.value;
-        SearchEmail = CurrentForms.wishlist.search.email.value;
+        SearchFirstName = currentForms.wishlist.search.firstname.value;
+        SearchLastName = currentForms.wishlist.search.lastname.value;
+        SearchEmail = currentForms.wishlist.search.email.value;
 
 
-        CurrentForms.wishlist.search.clearFormElement();
+        currentForms.wishlist.search.clearFormElement();
     }
     else
     {
-        SearchFirstName = CurrentForms.wishlist.search.firstname.value;
-        SearchLastName = CurrentForms.wishlist.search.lastname.value;
-        SearchEmail = CurrentForms.wishlist.search.email.value;
+        SearchFirstName = currentForms.wishlist.search.firstname.value;
+        SearchLastName = currentForms.wishlist.search.lastname.value;
+        SearchEmail = currentForms.wishlist.search.email.value;
     }
 
     view.get().render('account/wishlist/wishlistresults', {
@@ -336,7 +336,7 @@ function SetShippingAddress()
     }
 
 
-    var ProductList = Wishlist.get();
+    var ProductList = ProductList.get();
 
     Transaction.wrap(function () {
                          ProductList.setShippingAddress(Address);
@@ -353,7 +353,7 @@ function ReplaceProductListItem()
 {
     var plid = request.httpParameterMap.uuid.stringValue;
 
-    var ProductList = Wishlist.get();
+    var ProductList = ProductList.get();
 
 
     var productListItem = ProductList.getItem(plid);

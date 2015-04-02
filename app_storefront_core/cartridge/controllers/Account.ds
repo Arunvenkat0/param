@@ -7,15 +7,16 @@
  */
 
 /* API Includes */
-var Mail = require('dw/net/Mail');
+var Email = require('~/cartridge/scripts/model/Email');
 var Account = require('~/cartridge/scripts/model/Account');
 var Transaction = require('dw/system/Transaction');
 var Template = require('dw/util/Template');
 
 /* Script Modules */
-var accountHomeAsset = require('~/cartridge/scripts/model/Content').get('myaccount-home');
-var accountPersonalDataAsset = require('~/cartridge/scripts/model/Content').get('myaccount-personaldata');
-var accountLogin = require('~/cartridge/scripts/model/Content').get('myaccount-login');
+var content = require('~/cartridge/scripts/model/Content');
+var accountHomeAsset = content.get('myaccount-home');
+var accountPersonalDataAsset = content.get('myaccount-personaldata');
+var accountLogin = content.get('myaccount-login');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -140,13 +141,9 @@ function PasswordResetDialogForm()
                 });
                 var ResetPasswordToken = GenerateResetPasswordTokenResult.ResetPasswordToken;
 
-				var template = new Template('mail/resetpasswordemail');
-                var mail = new Mail();
-                mail.addTo(Customer.profile.email);
-            	mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'));
-            	mail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
-            	mail.setContent(template.render());
-            	mail.send();
+				Email.get('mail/resetpasswordemail', Customer.profile.email)
+				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
+		        .send({});
 
                 params.ErrorCode = null;
                 params.ShowContinue = true;
@@ -157,7 +154,7 @@ function PasswordResetDialogForm()
         }    
     });
     
-    response.renderTemplate('account/password/requestpasswordresetdialog', {
+    view.get().render('account/password/requestpasswordresetdialog', {
         ErrorCode : 'formnotvalid'
     });
 }
@@ -196,13 +193,9 @@ function PasswordResetForm()
             });
             var ResetPasswordToken = GenerateResetPasswordTokenResult.ResetPasswordToken;
 
-            var template = new Template('mail/resetpasswordemail');
-            var mail = new Mail();
-            mail.addTo(Customer.profile.email);
-        	mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'));
-        	mail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
-        	mail.setContent(template.render());
-        	mail.send();
+            Email.get('mail/resetpasswordemail', Customer.profile.email)
+				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
+		        .send({});
 
 			view.get().render('account/password/requestpasswordreset_confirm', {
                 ErrorCode : null
@@ -291,13 +284,9 @@ function SetNewPasswordForm()
                 return;
             }
             
-            var template = new Template('mail/passwordchangedemail');
-            var mail = new Mail();
-            mail.addTo(Customer.profile.email);
-        	mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'));
-        	mail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
-        	mail.setContent(template.render());
-        	mail.send();
+            Email.get('mail/passwordchangedemail', Customer.profile.email)
+				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
+		        .send({});
 
             response.redirect(dw.web.URLUtils.https('Account-SetNewPasswordConfirm'));
             return;
