@@ -72,8 +72,6 @@ tt, code, kbd, samp {
 #main {
     float: left;
     width: 70%;
-    background-image: url('logo.png');
-    background-repeat: no-repeat;
 }
 
 article dl {
@@ -107,7 +105,7 @@ nav
     margin-top: 28px;
     width: 30%;
     box-sizing: border-box;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #84bd00;
     padding-left: 16px;
 }
 
@@ -140,6 +138,8 @@ footer {
     margin-top: 12px;
     font-style: italic;
     font-size: 90%;
+    color: #fff;
+    background: #84bd00;
 }
 
 h1, h2, h3, h4 {
@@ -353,4 +353,30 @@ h6
 
 .disabled {
     color: #454545;
+}
+
+.logo {
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.homeleft {
+    border-radius: 1em;
+    border-style: solid;
+    display: inline-block;
+    border-color: #84bd00;
+    background: none repeat scroll 0 0 #84bd00;
+    padding: 9px 20px 9px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 200px;
+    font-size: 20px;
+}
+
+.homeleft a{
+   color: #FFFFFF;
+}
+
+.transactional img{
+   vertical-align:bottom;
 }
