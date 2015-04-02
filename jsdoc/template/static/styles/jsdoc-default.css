@@ -380,3 +380,7 @@ h6
 .transactional img{
    vertical-align:bottom;
 }
+
+#search {
+   width: 250px;
+}

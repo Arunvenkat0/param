@@ -304,10 +304,10 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
         items.forEach(function(item) {
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li>' + linktoFn('', item.name) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn('', item.name) + '</li>';
             }
             else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, '')) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn(item.longname, item.name.replace(/^module:/, '')) + '</li>';
                 itemsSeen[item.longname] = true;
             }
         });
@@ -343,7 +343,8 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = '<h2 class="homeleft"><a href="index.html">Home</a></h2>';
+    var nav = '<h2 class="homeleft"><a href="index.html">Home</a></h2><div class="search"><input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations"></div>';
+    
     var seen = {};
     var seenTutorials = {};
 
