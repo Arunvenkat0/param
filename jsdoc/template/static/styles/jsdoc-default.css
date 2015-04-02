@@ -387,3 +387,12 @@ h6
 #search {
    width: 250px;
 }
+
+.methods.itemMembers {
+   font-size: 80%;
+   padding-left: 25px;
+}
+
+.methods.itemMembers li {
+   margin-top: 0px;
+}

@@ -304,12 +304,26 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
         items.forEach(function(item) {
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn('', item.name) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn('', item.name);
             }
             else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn(item.longname, item.name.replace(/^module:/, '')) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '">' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
                 itemsSeen[item.longname] = true;
             }
+            
+            item.methods = find({
+                    kind: 'function',
+                    memberof: item.longname
+                });
+            
+            if (item.methods && item.methods.length > 0) {
+              itemsNav += '<ul class="methods itemMembers" style="display: none;"><span class="subtitle">Methods</span>';
+              item.methods.forEach(function (v) {
+                  itemsNav += '<li data-name="' + v.longname + '">' + linktoFn(v.longname, v.name) + '</li>';
+              });
+              itemsNav += '</ul>';
+            }
+            itemsNav += '</li>';
         });
 
         if (itemsNav !== '') {
