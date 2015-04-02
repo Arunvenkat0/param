@@ -126,9 +126,7 @@ var Account = AbstractModel.extend(
 		        return false;
 		    }
 		
-		    //if (Form.get(newCustomer.profile).copyTo(profileForm.customer))
-		    var f = require('~/cartridge/controllers/dw/form');
-		    if (!f.updateObjectWithForm(newCustomer.profile, profileForm.customer))
+		    if (!Form.get(profileForm.customer).copyTo(newCustomer.profile))
 		    {
 		        Transaction.rollback();
 		        profileForm.invalidateFormElement();
@@ -224,9 +222,7 @@ var Account = AbstractModel.extend(
 		        return false;
 		    }
 			
-		    //if (!Form.get(customer.profile).copyFrom(profileForm.customer))
-		    var f = require('~/cartridge/controllers/dw/form');
-		    if (!f.updateObjectWithForm(customer.profile, profileForm.customer))
+		    if (!Form.get(profileForm.customer).copyFromcustomer.profile())
 		    {
 		        Transaction.rollback();
 		        return false;

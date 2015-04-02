@@ -17,7 +17,7 @@ var Whislist = AbstractModel.extend(
 		 * 
 		 * @return  the product list
 		 */
-		fetchWishList : function()
+		get : function()
 		{
 		    var ProductList = null;
 		

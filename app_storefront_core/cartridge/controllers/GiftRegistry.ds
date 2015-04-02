@@ -7,7 +7,7 @@
  */
 
 /* API Includes */
-
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -21,50 +21,6 @@ var accountGiftRegistry = require('~/cartridge/scripts/model/Content').get('myac
 /**
  * The GiftRegistry pipeline contains a set of workflows that allow you to create and maintain one or more Gift Registries.
  */
-
-/**
- * Controls the login, which is required to access gift registry related actions.
- */
-function requireLogin(args)
-{
-    var loginForm = session.forms.login;
-
-    if (customer.registered)
-    {
-        loginForm.username.value = customer.profile.credentials.login;
-        loginForm.rememberme.value = true;
-    }
-
-
-    pageMeta.update(accountLogin);
-
-    loginForm.targetAction.value = args.TargetAction;
-    loginForm.targetParameters.value = (args.TargetParameters != null) ? JSON.stringify(args.TargetParameters) : null;
- 
-    response.renderTemplate('account/giftregistry/giftregistrylanding', {
-        RegistrationStatus : false
-    });
-}
-
-
-/**
- * A guard function which ensures that the user is logged in before the action can be executed.
- */
-function loggedIn(action)
-{
-    return function()
-    {
-        if (!customer.authenticated)
-        {
-            requireLogin({
-                TargetAction : 'GiftRegistry-' + action.name
-            });
-            return;
-        }
-
-        action();
-    };
-}
 
 
 function SubmitFormLanding()
@@ -88,7 +44,7 @@ function Start()
 {
     var productListsForm = session.forms.productlists;
     
-    productListsForm.clearFormElement();
+    Form.get('productListsForm').clear();
 
     var GetProductListsResult = new dw.system.Pipelet('GetProductLists').execute({
         Customer: customer,
@@ -100,7 +56,7 @@ function Start()
 
     pageMeta.update(accountGiftRegistry);
     
-    response.renderTemplate('account/giftregistry/registrylist');
+    view.get().render('account/giftregistry/registrylist');
 }
 
 
@@ -118,7 +74,7 @@ function registrymain()
 	        {
 	            productListsForm.search.eventYear.invalidateFormElement();
 
-	            response.renderTemplate('account/giftregistry/registrylist');
+	            view.get().render('account/giftregistry/registrylist');
 	            return;
 	        }
 	        
@@ -127,7 +83,7 @@ function registrymain()
         }    
     });
 	
-    response.renderTemplate('account/giftregistry/registrylist');
+    view.get().render('account/giftregistry/registrylist');
 }
 
 
@@ -228,7 +184,7 @@ function createOne()
     participantForm.lastName.value = customer.profile.lastName;
     participantForm.email.value = customer.profile.email;
     
-    response.renderTemplate('account/giftregistry/eventparticipant');
+    view.get().render('account/giftregistry/eventparticipant');
 }
 
 
@@ -249,13 +205,13 @@ function EventParticipant()
         }    
     });
     
-    response.renderTemplate('account/giftregistry/eventparticipant');
+    view.get().render('account/giftregistry/eventparticipant');
 }
 
 
 function showAddresses()
 {
-    response.renderTemplate('account/giftregistry/addresses');
+    view.get().render('account/giftregistry/addresses');
 }
 
 
@@ -271,7 +227,7 @@ function ParticipantAddresses()
 	            GiftRegistryForm: currentForms.giftregistry
 	        });
 	        
-	        response.renderTemplate('account/giftregistry/eventparticipant');
+	        view.get().render('account/giftregistry/eventparticipant');
 	        return;
         },
         'confirm'             : function (formgroup) {
@@ -327,7 +283,7 @@ function ParticipantAddresses()
 
 function showConfirmation()
 {
-    response.renderTemplate('account/giftregistry/giftregistryconfirmation');
+    view.get().render('account/giftregistry/giftregistryconfirmation');
 }
 
 
@@ -560,8 +516,7 @@ function EditEventParticipant()
 	    }
 	    else if (TriggeredAction.formId == 'confirm')
 	    {
-	        var form = require('./dw/form');
-	        if (!form.updateObjectWithForm(ProductList, currentForms.giftregistry.event))
+	        if (!Form.get(currentForms.giftregistry.event).copyTo(ProductList))
 	        {
 	            return {
                     error: true
@@ -569,26 +524,23 @@ function EditEventParticipant()
 	        }
 
 
-	        if (!form.updateObjectWithForm(ProductList.registrant, currentForms.giftregistry.event.participant))
+	        if (!Form.get(currentForms.giftregistry.event.participant).copyTo(ProductList.registrant))
 	        {
 	            return {
                     error: true
                 };
 	        }
 	        
-
-	        Transaction.begin();
-	        
-	        ProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
+	        Transaction.wrap(function () {
+                          ProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
 	        ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
-	        
-	        Transaction.commit();
+                    }
+                );
 
 	        
 	        if (ProductList.coRegistrant != null)
 	        {
-	            var form = require('./dw/form');
-	            if (!form.updateObjectWithForm(ProductList.coRegistrant, currentForms.giftregistry.event.coParticipant))
+	            if (!Form.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant))
 	            {
 	                return {
 	                    error: true
@@ -613,8 +565,7 @@ function EditEventParticipant()
 	                var ProductListRegistrant = CreateProductListRegistrantResult.ProductListRegistrant;
 	                
 	                
-	                var form = require('./dw/form');
-	                if (!form.updateObjectWithForm(ProductList.coRegistrant, currentForms.giftregistry.event.coParticipant))
+	                if (!From.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant))
 	                {
 	                    return {
 	                        error: true
@@ -656,9 +607,8 @@ function showPurchases()
     var currentForms = session.forms;
 
     
-    var form = require('./dw/form');
-    form.clearFormElement(currentForms.giftregistry.purchases);
-    form.updateFormWithObject(currentForms.giftregistry.purchases, ProductList.purchases);
+    currentForms.giftregistry.purchases.clearFormElement();
+    Form.get(currentForms.giftregistry.purchases).copyFrom(ProductList.purchases);
 
     
     showPurchases();
@@ -667,35 +617,29 @@ function showPurchases()
 
 function showPurchases()
 {
-    response.renderTemplate('account/giftregistry/purchases');
+    view.get().render('account/giftregistry/purchases');
 }
 
 
 // @secure    
 function ShowPurchasesInteraction()
 {
-    // TODO this should end in a redirect
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null)
-	{
-	    if (TriggeredAction.formId == 'navEvent')
-	    {
-	        editEvent();
+    var formResult = giftRegistryForm.handleAction({
+    	'navEvent'             : function (formgroup) {
+           editEvent();
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'navRegistry')
-	    {
-	        ShowRegistry({
+        },
+        'navRegistry'             : function (formgroup) {
+           ShowRegistry({
 	            ProductList: ProductList
 	        });
 	        return;
-	    }
-	    else if (TriggeredAction.formId == 'navShipping')
-	    {
-	        editAddresses();
+        }, 
+        'navShipping'             : function (formgroup) {
+           editAddresses();
 	        return;
-	    }
-	}
+        }   
+    });
 	
 	showPurchases();
 }
@@ -706,16 +650,15 @@ function ShowPurchasesInteraction()
  */
 function ShowRegistry(args)
 {
-    var giftregistryForm = session.forms.giftregistry;
+    var giftregistryForm = Form.get('giftregistry');
 
     var ProductList = args.ProductList;
     
-    var form = require('./dw/form');
-    form.updateFormWithObject(giftregistryForm, ProductList, true);
-    form.updateFormWithObject(giftregistryForm.event, ProductList, true);
+    Form.get(giftregistryForm).copyFrom(ProductList);
+    Form.get(giftregistryForm.event).copyFrom(ProductList);
 
     
-    response.renderTemplate('account/giftregistry/registry', {
+    view.get().render('account/giftregistry/registry', {
         Status : null,
         ProductList : ProductList
     });
@@ -768,7 +711,7 @@ function ShowRegistryInteraction()
 	        {
 	            var Status = new dw.system.Status(dw.system.Status.ERROR, "delete.restriction");
 
-	            response.renderTemplate('account/giftregistry/registry', {
+	            view.get().render('account/giftregistry/registry', {
 	                Status: Status
 	            });
 	            return;
@@ -799,12 +742,10 @@ function ShowRegistryInteraction()
 	    }
 	    else if (TriggeredAction.formId == 'setPrivate')
 	    {
-	        var txn = require('dw/system/Transaction');
-	        txn.begin();
-	        
-	        ProductList.public = false;
-	        
-	        txn.commit();
+	        Transaction.wrap(function () {
+                         ProductList.public = false;
+                    }
+                );
 
 	        ShowRegistry({
 	            ProductList: ProductList
@@ -813,12 +754,10 @@ function ShowRegistryInteraction()
 	    }
 	    else if (TriggeredAction.formId == 'setPublic')
 	    {
-	        var txn = require('dw/system/Transaction');
-	        txn.begin();
-	        
-	        ProductList.public = true;
-	        
-	        txn.commit();
+	        Transaction.wrap(function () {
+                         ProductList.public = true;
+                    }
+                );
 
             ShowRegistry({
                 ProductList: ProductList
@@ -837,7 +776,7 @@ function ShowRegistryInteraction()
 	}
 	
 	// TODO
-    response.renderTemplate('account/giftregistry/registry', {
+    view.get().render('account/giftregistry/registry', {
         
     });
 }
@@ -875,7 +814,7 @@ function Search()
 
 function showSearch(args)
 {
-    response.renderTemplate('account/giftregistry/giftregistryresults', {
+    view.get().render('account/giftregistry/giftregistryresults', {
         ProductLists: args.ProductLists
     });
 }
@@ -883,16 +822,13 @@ function showSearch(args)
 
 function SearchGiftRegistry()
 {
-    // TODO this should end with a redirect
-	var TriggeredAction = request.triggeredFormAction;
-	if (TriggeredAction != null)
-	{
-	    if (TriggeredAction.formId == 'search')
-	    {
-	        Search();
+    // TODO this should end with a redirect	
+	var formResult = giftRegistryForm.handleAction({
+    	'search'             : function (formgroup) {
+           Search();
 	        return;
-	    }
-	}
+        }
+    });
 
     showSearch();
 }
@@ -1163,8 +1099,7 @@ function confirm()
         {
             var Address = GetCustomerAddressResult.Address;
 
-            var form = require('./dw/form');
-            form.invalidateFormElement(currentForms.giftregistry.eventaddress.addressAfterEvent.addressid);
+            currentForms.giftregistry.eventaddress.addressAfterEvent.addressid.invalidateFormElement();
 
             showAddresses();
             return;

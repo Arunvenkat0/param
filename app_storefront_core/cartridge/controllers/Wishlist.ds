@@ -3,7 +3,7 @@
 /**
  * Controller : wishlist
  *
- * @module controller/Whishlist
+ * @module controller/Wishlist
  */
 
 /* API Includes */
@@ -109,11 +109,10 @@ function WishListForm()
         }
         else if (TriggeredAction.formId === 'setItemPrivate')
         {
-            Transaction.begin();
-
-            TriggeredAction.object.public = false;
-
-            Transaction.commit();
+            Transaction.wrap(function () {
+                         ProductList.public = false;
+                    }
+                );
         }
         else if (TriggeredAction.formId === 'setItemPublic')
         {
@@ -124,7 +123,7 @@ function WishListForm()
         }
         else if (TriggeredAction.formId === 'setListPrivate')
         {
-            var ProductList = Wishlist.fetchWishList();
+            var ProductList = Wishlist.get();
 
             Transaction.wrap(function () {
                          ProductList.public = false;
@@ -142,7 +141,7 @@ function WishListForm()
         }
         else if (TriggeredAction.formId === 'setListPublic')
         {
-            var ProductList = Wishlist.fetchWishList();
+            var ProductList = Wishlist.get();
 
             
             Transaction.wrap(function () {
@@ -233,7 +232,7 @@ function AddProduct(args)
     var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
 
 
-    var ProductList = Wishlist.fetchWishList();
+    var ProductList = Wishlist.get();
 
 
     new dw.system.Pipelet('AddProductToProductList').execute({
@@ -337,7 +336,7 @@ function SetShippingAddress()
     }
 
 
-    var ProductList = Wishlist.fetchWishList();
+    var ProductList = Wishlist.get();
 
     Transaction.wrap(function () {
                          ProductList.setShippingAddress(Address);
@@ -354,7 +353,7 @@ function ReplaceProductListItem()
 {
     var plid = request.httpParameterMap.uuid.stringValue;
 
-    var ProductList = Wishlist.fetchWishList();
+    var ProductList = Wishlist.get();
 
 
     var productListItem = ProductList.getItem(plid);
