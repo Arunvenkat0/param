@@ -134,12 +134,15 @@ nav li {
 
 footer {
     display: block;
-    padding: 6px;
+    padding: 6px 6px 50px;
     margin-top: 12px;
-    font-style: italic;
     font-size: 90%;
     color: #fff;
     background: #84bd00;
+}
+
+footer a {
+    color: #fff;
 }
 
 h1, h2, h3, h4 {
