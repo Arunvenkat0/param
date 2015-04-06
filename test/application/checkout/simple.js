@@ -4,7 +4,7 @@ var config = require('../webdriver/config');
 
 describe('Checkout Simple Product', function () {
 	before(function (done) {
-		client.init().url(config.url, done);
+		client.init().url(config.url + '/home', done);
 	});
 	it('add a suit to cart', function (done) {
 		client
