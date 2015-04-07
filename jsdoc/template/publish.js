@@ -303,13 +303,38 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         var itemsNav = '';
 
         items.forEach(function(item) {
+            item.methods = find({
+                kind: 'function',
+                memberof: item.longname
+            });
+
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li>' + linktoFn('', item.name) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '">';
+                if (item.methods && item.methods.length > 0) {
+                    itemsNav += '+';
+                }
+                itemsNav += '</span>' + linktoFn('', item.name);
             }
             else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, '')) + '</li>';
+                itemsNav += '<li class="item" data-name="' + item.longname + '"><span class="expand">';
+                if (item.methods && item.methods.length > 0) {
+                    itemsNav += '+';
+                }
+                else {
+                    itemsNav += '&nbsp;';
+                }
+                itemsNav += '</span>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
                 itemsSeen[item.longname] = true;
             }
+            
+            if (item.methods && item.methods.length > 0) {
+              itemsNav += '<ul class="methods itemMembers" style="display: none;"><span class="subtitle">Methods</span>';
+              item.methods.forEach(function (v) {
+                  itemsNav += '<li data-name="' + v.longname + '">' + linktoFn(v.longname, v.name) + '</li>';
+              });
+              itemsNav += '</ul>';
+            }
+            itemsNav += '</li>';
         });
 
         if (itemsNav !== '') {
@@ -343,7 +368,8 @@ function linktoExternal(longName, name) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = '<h2 class="homeleft"><a href="index.html">Home</a></h2>';
+    var nav = '<h2 class="homeleft"><a href="index.html">Home</a></h2><div class="search"><input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations"></div>';
+    
     var seen = {};
     var seenTutorials = {};
 

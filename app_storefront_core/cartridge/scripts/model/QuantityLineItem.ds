@@ -21,6 +21,11 @@ var QuantityLineItem = Class.extend(
         pliUUID      : null,
         optionID     : null,
 
+        /**
+         * The constructor.
+         * @constructs
+         * @param {dw.order.ProductLineItem} pli The ProductLineItem to create the QuantityLineItem from.
+         */
         init : function (pli) {
 
             this.quantity = new Quantity(1, pli.quantity.getUnit());

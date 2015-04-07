@@ -1,6 +1,6 @@
 'use strict';
 /**
- * TODO
+ * Module for search related functionality.
  *
  * @module model/Search
  */
@@ -17,11 +17,11 @@ var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 var Search = ({
 
     /**
-     * TODO
+     * Initializes the given search model using the given HttpParameterMap.
      *
-     * @param searchModel
-     * @param httpParameterMap
-     * @returns {*}
+     * @param {dw.catalog.SearchModel} searchModel SearchModel to initialize.
+     * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read common search parameters from.
+     * @returns {dw.catalog.SearchModel} Initialized search model.
      */
     initializeSearchModel : function (searchModel, httpParameterMap) {
         httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
@@ -40,10 +40,10 @@ var Search = ({
     },
 
     /**
-     * TODO
+     * Creates and initializes a {dw.catalog.ProductSearchModel} based on the given http parameters.
      *
-     * @param httpParameterMap
-     * @returns {ProductSearchModel}
+     * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read product search parameters from.
+     * @returns {dw.catalog.ProductSearchModel} Created and initialized product serach model.
      */
     initializeProductSearchModel : function (httpParameterMap) {
         var productSearchModel = this.initializeSearchModel(new ProductSearchModel(), httpParameterMap);
@@ -67,10 +67,10 @@ var Search = ({
     },
 
     /**
-     * TODO
+     * Creates and initializes a {dw.content.ContentSearchModel} based on the given http parameters.
      *
-     * @param httpParameterMap
-     * @returns {ContentSearchModel}
+     * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read content search parameters from.
+     * @returns {dw.content.ContentSearchModel} Created and initialized product serach model.
      */
     initializeContentSearchModel : function (httpParameterMap) {
         var contentSearchModel = this.initializeSearchModel(new ContentSearchModel(), httpParameterMap);

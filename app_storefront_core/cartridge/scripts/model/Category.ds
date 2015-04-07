@@ -47,7 +47,7 @@ var Category = AbstractModel.extend(
          */
         getMenuCategories : function (renderAllCategories) {
             var subcategories = this.object.getOnlineSubCategories(),
-                result = [];
+                result        = [];
             if (renderAllCategories) {
                 return subcategories;
             }

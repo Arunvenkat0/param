@@ -134,12 +134,15 @@ nav li {
 
 footer {
     display: block;
-    padding: 6px;
+    padding: 6px 6px 50px;
     margin-top: 12px;
-    font-style: italic;
     font-size: 90%;
     color: #fff;
     background: #84bd00;
+}
+
+footer a {
+    color: #fff;
 }
 
 h1, h2, h3, h4 {
@@ -378,5 +381,27 @@ h6
 }
 
 .transactional img{
-   vertical-align:bottom;
+   vertical-align: middle;
+   padding: 4px;
+}
+
+#search {
+   width: 250px;
+}
+
+.methods.itemMembers {
+   font-size: 90%;
+   padding-left: 15px;
+}
+
+.methods.itemMembers li {
+   margin-top: 0px;
+}
+
+.expand {
+   font-size: 80%;
+   margin-right: 2px;
+   min-width: 10px;
+   display: inline-block;
+   color: #84bd00;
 }
