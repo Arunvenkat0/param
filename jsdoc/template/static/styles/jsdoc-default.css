@@ -381,7 +381,8 @@ h6
 }
 
 .transactional img{
-   vertical-align:bottom;
+   vertical-align: middle;
+   padding: 4px;
 }
 
 #search {
@@ -390,9 +391,16 @@ h6
 
 .methods.itemMembers {
    font-size: 90%;
-   padding-left: 10px;
+   padding-left: 15px;
 }
 
 .methods.itemMembers li {
    margin-top: 0px;
+}
+
+.expand {
+   font-size: 80%;
+   margin-right: 2px;
+   min-width: 10px;
+   display: inline-block;
 }

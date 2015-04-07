@@ -303,18 +303,29 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
         var itemsNav = '';
 
         items.forEach(function(item) {
+            item.methods = find({
+                kind: 'function',
+                memberof: item.longname
+            });
+
             if ( !hasOwnProp.call(item, 'longname') ) {
-                itemsNav += '<li class="item" data-name="' + item.longname + '"><span class="title">' + linktoFn('', item.name);
+                itemsNav += '<li class="item" data-name="' + item.longname + '">';
+                if (item.methods && item.methods.length > 0) {
+                    itemsNav += '+';
+                }
+                itemsNav += '</span>' + linktoFn('', item.name);
             }
             else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
-                itemsNav += '<li class="item" data-name="' + item.longname + '"><span class="title">' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
+                itemsNav += '<li class="item" data-name="' + item.longname + '"><span class="expand">';
+                if (item.methods && item.methods.length > 0) {
+                    itemsNav += '+';
+                }
+                else {
+                    itemsNav += '&nbsp;';
+                }
+                itemsNav += '</span>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
                 itemsSeen[item.longname] = true;
             }
-            
-            item.methods = find({
-                    kind: 'function',
-                    memberof: item.longname
-                });
             
             if (item.methods && item.methods.length > 0) {
               itemsNav += '<ul class="methods itemMembers" style="display: none;"><span class="subtitle">Methods</span>';
@@ -323,7 +334,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
               });
               itemsNav += '</ul>';
             }
-            itemsNav += '</span></li>';
+            itemsNav += '</li>';
         });
 
         if (itemsNav !== '') {
