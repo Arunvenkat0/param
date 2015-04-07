@@ -6,7 +6,7 @@
  * This controller implements the logic for the default (single) shipping scenario. It is responsible for dealing with
  * one shipment only, respectively one shipping addresses as well as one shipping method.
  *
- * @module controller/COShipping
+ * @module controllers/COShipping
  */
 
 /* API Includes */
@@ -429,21 +429,21 @@ function updateAddressDetails() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COShipping~start */
+/** @see module:controllers/COShipping~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controller/COShipping~selectShippingMethod */
+/** @see module:controllers/COShipping~selectShippingMethod */
 exports.SelectShippingMethod = guard.ensure(['https', 'get'], selectShippingMethod);
-/** @see module:controller/COShipping~updateShippingMethodList */
+/** @see module:controllers/COShipping~updateShippingMethodList */
 exports.UpdateShippingMethodList = guard.ensure(['https', 'get'], updateShippingMethodList);
-/** @see module:controller/COShipping~getApplicableShippingMethodsJSON */
+/** @see module:controllers/COShipping~getApplicableShippingMethodsJSON */
 exports.GetApplicableShippingMethodsJSON = guard.ensure(['https', 'get'], getApplicableShippingMethodsJSON);
-/** @see module:controller/COShipping~editAddress */
+/** @see module:controllers/COShipping~editAddress */
 exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
-/** @see module:controller/COShipping~updateAddressDetails */
+/** @see module:controllers/COShipping~updateAddressDetails */
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
-/** @see module:controller/COShipping~singleShipping */
+/** @see module:controllers/COShipping~singleShipping */
 exports.SingleShipping = guard.ensure(['https', 'post'], singleShipping);
-/** @see module:controller/COShipping~editShippingAddress */
+/** @see module:controllers/COShipping~editShippingAddress */
 exports.EditShippingAddress = guard.ensure(['https', 'post'], editShippingAddress);
 
 /*

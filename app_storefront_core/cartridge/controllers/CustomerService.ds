@@ -3,7 +3,7 @@
 /**
  * Controller handling customer service related pages, like help desk as well as the contact us form.
  *
- * @module controller/CustomerService
+ * @module controllers/CustomerService
  */
 
 /* API Includes */
@@ -74,11 +74,11 @@ function submit() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/CustomerService~show */
+/** @see module:controllers/CustomerService~show */
 exports.Show = guard.ensure(['get'], show);
-/** @see module:controller/CustomerService~leftNav */
+/** @see module:controllers/CustomerService~leftNav */
 exports.LeftNav = guard.ensure(['get'], leftNav);
-/** @see module:controller/CustomerService~contactUs */
+/** @see module:controllers/CustomerService~contactUs */
 exports.ContactUs = guard.ensure(['get', 'https'], contactUs);
-/** @see module:controller/CustomerService~submit */
+/** @see module:controllers/CustomerService~submit */
 exports.Submit = guard.ensure(['post', 'https'], submit);

@@ -4,7 +4,7 @@
  * This controller implements the billing logic. It is used by both the single shipping and the multi shipping
  * scenario and is responsible for providing the payment method selection as well as entering a billing address.
  *
- * @module controller/COBilling
+ * @module controllers/COBilling
  */
 
 /* API Includes */
@@ -784,27 +784,27 @@ function validateBilling() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COBilling~Start */
+/** @see module:controllers/COBilling~Start */
 exports.Start = guard.ensure(['https'], Start);
-/** @see module:controller/COBilling~redeemGiftCertificateJson */
+/** @see module:controllers/COBilling~redeemGiftCertificateJson */
 exports.RedeemGiftCertificateJson = guard.ensure(['https', 'get'], redeemGiftCertificateJson);
-/** @see module:controller/COBilling~removeGiftCertificate */
+/** @see module:controllers/COBilling~removeGiftCertificate */
 exports.RemoveGiftCertificate = guard.ensure(['https', 'get'], removeGiftCertificate);
-/** @see module:controller/COBilling~updateSummary */
+/** @see module:controllers/COBilling~updateSummary */
 exports.UpdateSummary = guard.ensure(['https', 'get'], updateSummary);
-/** @see module:controller/COBilling~updateAddressDetails */
+/** @see module:controllers/COBilling~updateAddressDetails */
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
-/** @see module:controller/COBilling~editAddress */
+/** @see module:controllers/COBilling~editAddress */
 exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
-/** @see module:controller/COBilling~getGiftCertificateBalance */
+/** @see module:controllers/COBilling~getGiftCertificateBalance */
 exports.GetGiftCertificateBalance = guard.ensure(['https', 'get'], getGiftCertificateBalance);
-/** @see module:controller/COBilling~selectCreditCard */
+/** @see module:controllers/COBilling~selectCreditCard */
 exports.SelectCreditCard = guard.ensure(['https', 'get'], selectCreditCard);
-/** @see module:controller/COBilling~updateCreditCardSelection */
+/** @see module:controllers/COBilling~updateCreditCardSelection */
 exports.UpdateCreditCardSelection = guard.ensure(['https', 'get'], updateCreditCardSelection);
-/** @see module:controller/COBilling~billing */
+/** @see module:controllers/COBilling~billing */
 exports.Billing = guard.ensure(['https'], billing);
-/** @see module:controller/COBilling~editBillingAddress */
+/** @see module:controllers/COBilling~editBillingAddress */
 exports.EditBillingAddress = guard.ensure(['https', 'post'], editBillingAddress);
 
 /*

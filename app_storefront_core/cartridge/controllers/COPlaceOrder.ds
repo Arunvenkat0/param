@@ -7,7 +7,7 @@
  * of the order creation process by named end nodes and uses a status object PlaceOrderError to set proper error states.
  * The calling pipeline is responsible to react on these end nodes and to evaluate the error status.
  *
- * @module controller/COPlaceOrder
+ * @module controllers/COPlaceOrder
  */
 
 /* API Includes */
@@ -321,9 +321,9 @@ function submit() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COPlaceOrder~submitPaymentJSON */
+/** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.SubmitPaymentJSON = guard.ensure(['https'], submitPaymentJSON);
-/** @see module:controller/COPlaceOrder~submitPaymentJSON */
+/** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.Submit = guard.ensure(['https'], submit);
 
 /*

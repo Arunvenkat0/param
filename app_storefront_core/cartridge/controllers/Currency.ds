@@ -3,7 +3,7 @@
 /**
  * Controller used to update the current session currency.
  *
- * @module controller/Currency
+ * @module controllers/Currency
  */
 
 /* API Includes */
@@ -45,5 +45,5 @@ function setSessionCurrency() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Currency~setSessionCurrency */
+/** @see module:controllers/Currency~setSessionCurrency */
 exports.SetSessionCurrency = guard.ensure(['get'], setSessionCurrency);
