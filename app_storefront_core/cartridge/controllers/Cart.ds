@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller implementing cart related functionality like add tp/remove from cart for products, coupons, product list
+ * Controller implementing cart related functionality like add to / remove from cart for products, coupons, product list
  * items etc.
  *
  * @module controllers/Cart
