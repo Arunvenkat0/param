@@ -6,7 +6,7 @@
  * provides the customer with a last overview of the basket prior to confirm the
  * final order creation.
  *
- * @module controller/COSummary
+ * @module controllers/COSummary
  */
 
 /* API Includes */
@@ -94,9 +94,9 @@ function showConfirmation(order) {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COSummary~Start */
+/** @see module:controllers/COSummary~Start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controller/COSummary~Submit */
+/** @see module:controllers/COSummary~Submit */
 exports.Submit = guard.ensure(['https', 'post'], submit);
 
 /*

@@ -4,7 +4,7 @@
  * This controller implements the logic for the multiple shipping scenario. It is responsible for dealing with more
  * than one shipments, respectively multiple shipping addresses as well as multiple selected shipping methods.
  *
- * @module controller/COShippingMultiple
+ * @module controllers/COShippingMultiple
  */
 
 /* API Includes */
@@ -343,17 +343,17 @@ function addEditAddressJSON() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COShippingMultiple~start */
+/** @see module:controllers/COShippingMultiple~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controller/COShippingMultiple~startShipments */
+/** @see module:controllers/COShippingMultiple~startShipments */
 exports.StartShipments = guard.ensure(['https', 'get'], startShipments);
-/** @see module:controller/COShippingMultiple~editAddresses */
+/** @see module:controllers/COShippingMultiple~editAddresses */
 exports.EditAddresses = guard.ensure(['https', 'get'], editAddresses);
-/** @see module:controller/COShippingMultiple~addEditAddressJSON */
+/** @see module:controllers/COShippingMultiple~addEditAddressJSON */
 exports.AddEditAddressJSON = guard.ensure(['https', 'get'], addEditAddressJSON);
-/** @see module:controller/COShippingMultiple~multiShippingAddresses */
+/** @see module:controllers/COShippingMultiple~multiShippingAddresses */
 exports.MultiShippingAddresses = guard.ensure(['https', 'post'], multiShippingAddresses);
-/** @see module:controller/COShippingMultiple~multiShippingMethods */
+/** @see module:controllers/COShippingMultiple~multiShippingMethods */
 exports.MultiShippingMethods = guard.ensure(['https', 'post'], multiShippingMethods);
-/** @see module:controller/COShippingMultiple~editForm */
+/** @see module:controllers/COShippingMultiple~editForm */
 exports.EditForm = guard.ensure(['https', 'post'], editForm);

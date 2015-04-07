@@ -3,7 +3,7 @@
 /**
  * Renders store finder and store detail pages.
  *
- * @module controller/Stores
+ * @module controllers/Stores
  */
 
 /* API Includes */
@@ -100,9 +100,9 @@ function details() {
 /*
  * Exposed web methods
  */
-/** @see module:controller/Stores~find */
+/** @see module:controllers/Stores~find */
 exports.Find        = guard.ensure(['get'], find);
-/** @see module:controller/Stores~findStores */
+/** @see module:controllers/Stores~findStores */
 exports.FindStores  = guard.ensure(['get'], findStores);
-/** @see module:controller/Stores~details */
+/** @see module:controllers/Stores~details */
 exports.Details     = guard.ensure(['get'], details);

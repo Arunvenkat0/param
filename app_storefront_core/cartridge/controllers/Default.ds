@@ -3,7 +3,7 @@
 /**
  * Default entry point when www.mydomain.com is opened
  *
- * @module controller/Default
+ * @module controllers/Default
  */
 
 /* Script Modules */
@@ -36,7 +36,7 @@ function offline() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Default~start */
+/** @see module:controllers/Default~start */
 exports.Start = guard.ensure(['get'], start);
-/** @see module:controller/Default~offline */
+/** @see module:controllers/Default~offline */
 exports.Offline = guard.ensure(['get'], offline);

@@ -3,7 +3,7 @@
 /**
  * Controller handling URL redirects.
  *
- * @module controller/RedirectURL
+ * @module controllers/RedirectURL
  */
 
 /* Script Modules */
@@ -62,7 +62,7 @@ function hostName() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/RedirectURL~start */
+/** @see module:controllers/RedirectURL~start */
 exports.Start = guard.ensure([], start);
-/** @see module:controller/RedirectURL~hostName */
+/** @see module:controllers/RedirectURL~hostName */
 exports.Hostname = guard.ensure([], hostName);

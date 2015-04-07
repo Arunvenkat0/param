@@ -4,7 +4,7 @@
  * Controller implements the first step of the cart checkout process, which is to ask the customer to login, register or
  * checkout anonymously.
  *
- * @module controller/COCustomer
+ * @module controllers/COCustomer
  */
 
 /* API Includes */
@@ -98,7 +98,7 @@ function showLoginForm() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COCustomer~start */
+/** @see module:controllers/COCustomer~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controller/COCustomer~showLoginForm */
+/** @see module:controllers/COCustomer~showLoginForm */
 exports.LoginForm = guard.ensure(['https', 'post'], showLoginForm);

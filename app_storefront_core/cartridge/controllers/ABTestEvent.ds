@@ -5,7 +5,7 @@
  * checkout in the storefront.  This event is recorded only fore the purposes of updating AB-test statistics and
  * does not affect the basket.  This pipeline does not ordinarily need to be modified.
  *
- * @module controller/ABTestEvent
+ * @module controllers/ABTestEvent
  */
 
 /* API Includes */
@@ -39,5 +39,5 @@ function startCheckout() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/ABTestEvent~startCheckout */
+/** @see module:controllers/ABTestEvent~startCheckout */
 exports.StartCheckout = guard.ensure(['get'], startCheckout);
