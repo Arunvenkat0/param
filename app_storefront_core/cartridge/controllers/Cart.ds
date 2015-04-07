@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * TODO
+ * Controller implementing cart related functionality like add tp/remove from cart for products, coupons, product list
+ * items etc.
  *
  * @module controller/Cart
  */
@@ -185,7 +186,7 @@ function submitForm() {
 }
 
 /**
- * Should be used only for simple UI
+ * Adds a product to the cart. Should be used only for simple UI.
  */
 function addProduct() {
     var params = request.httpParameterMap;
@@ -345,7 +346,9 @@ function addToWishlist() {
 }
 
 /**
- * @deprecated
+ * Determines an existing basket from the current session.
+ * 
+ * @deprecated Use {@link module:model/Cart~Cart#get} instead.
  */
 function getExistingBasket() {
     return {
@@ -358,7 +361,7 @@ function getExistingBasket() {
  * basket couldn't be created, the pipeline ends in a named end node "error". Calling pipelines are responsible to
  * properly react on the "error" end node.
  *
- * @deprecated
+ * @deprecated Use {@link module:model/Cart~Cart#goc} instead.
  */
 function getBasket() {
     return Cart.goc().object;
@@ -367,7 +370,8 @@ function getBasket() {
 /**
  * Calculates an existing basket. Call this pipeline always if the changes to the basket content is made (e.g. addition
  * or removal of a product or gift certificate or setting of a shipping method).
- * @deprecated
+ *
+ * @deprecated Use {@link module:model/Cart~Cart#calculate} instead.
  */
 function calculate() {
 
@@ -455,8 +459,7 @@ function addBonusProductJson() {
 }
 
 /**
- * Called during checkout.
- * TODO: Needs to be reviewed once checkout works.
+ * Adds a coupon to the cart using JSON. Called during checkout.
  */
 function addCouponJson() {
 
