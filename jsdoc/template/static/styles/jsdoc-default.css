@@ -391,11 +391,13 @@ h6
 
 .methods.itemMembers {
    font-size: 90%;
-   padding-left: 15px;
+   padding-left: 20px;
+   margin-top: 5px;
 }
 
 .methods.itemMembers li {
    margin-top: 0px;
+   margin-left: 5px;
 }
 
 .expand {
