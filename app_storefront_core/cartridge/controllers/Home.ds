@@ -28,7 +28,6 @@ function includeHeader() {
     view.get().render('components/header/header');
 }
 
-
 /**
  * Renders the category navigation and the menu to use as a remote include. It's
  * cached.
@@ -38,7 +37,6 @@ function includeHeader() {
 function includeHeaderMenu() {
     view.get().render('components/header/headermenu');
 }
-
 
 /**
  * Renders customer information.
@@ -95,7 +93,7 @@ function deviceLayouts() {
 exports.Show = guard.ensure(['get'], show);
 /** @see module:controllers/Home~includeHeader */
 exports.IncludeHeader = guard.ensure(['include'], includeHeader);
-//exports.IncludeHeaderMenu           = guard.ensure(['include'],includeHeaderMenu);
+//exports.IncludeHeaderMenu = guard.ensure(['include'],includeHeaderMenu);
 /** @see module:controllers/Home~includeHeaderCustomerInfo */
 exports.IncludeHeaderCustomerInfo = guard.ensure(['include'], includeHeaderCustomerInfo);
 /** @see module:controllers/Home~errorNotFound */
