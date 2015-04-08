@@ -1,0 +1,14 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isscript>
+	var Countries = require('~/cartridge/scripts/util/Countries');
+	var GetCurrentUrl = require('~/cartridge/scripts/util/GetCurrentUrl');
+	var countries = Countries.getCountries();
+	var currentCountry = Countries.getCurrentCountry(pdict);
+</isscript>
+<select class="country-selector">
+	<isloop items="${countries}" var="country">
+		<isset name="locale" value="${country.locales[0]}" scope="page">
+		<isset name="currentLocale" value="${pdict.CurrentRequest.locale === locale ? 'selected' : ''}" scope="page">
+		<option data-href="${GetCurrentUrl(pdict, locale)}" ${currentLocale} value="${locale}">${country.name[locale]}</option>
+	</isloop>
+</select>

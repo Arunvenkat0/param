@@ -1,0 +1,26 @@
+'use strict';
+
+/**
+ * @description Generate URL for the current request with locale
+ * @param {PipelineDictionary} pdict the pipeline dictionary object of current request
+ * @param {string} locale the locale
+ */
+module.exports = function GetCurrentUrl(pdict, locale) {
+	var currentAction = pdict.CurrentSession.clickStream.last.pipelineName;
+	var siteId = dw.system.Site.getCurrent().getID();
+	var urlAction = new dw.web.URLAction(currentAction, siteId, locale);
+	var parameterMap = pdict.CurrentHttpParameterMap;
+	var parameters = [urlAction];
+
+	// iterate over current request's parameters, put them into the URL
+	for (var key in parameterMap) {
+		if (parameterMap.hasOwnProperty(key)) {
+			// ignore the lang parameter
+			if (key === 'lang') {
+				continue;
+			}
+			parameters.push(new dw.web.URLParameter(key, parameterMap[key]));
+		}
+	}
+	return URLUtils.url.apply(null, parameters);
+};
