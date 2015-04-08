@@ -1,176 +1,138 @@
-var g = require('./dw/guard');
+'use strict';
 
-/*
+/**
  * Creating, modifying and showing of a product comparison.
+ * @module controllers/Compare
  */
+
+/* API Includes */
+var Category = require('~/cartridge/scripts/model/Category');
+var Form = require('~/cartridge/scripts/model/Form');
+var Product = require('~/cartridge/scripts/model/Product');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Expects: - category: category ID
  */
-function Show()
-{
+function Show() {
     var compareForm = session.forms.compare;
 
-
     var ScriptResult = new dw.system.Pipelet('Script', {
-        ScriptFile : 'catalog/GetCompareList.ds',
+        ScriptFile    : 'catalog/GetCompareList.ds',
         Transactional : false
     }).execute({
-        SelectedCategory : request.httpParameterMap.category.value
-    });
+            SelectedCategory : request.httpParameterMap.category.value
+        });
     var CompareList = ScriptResult.CompareList;
 
+    Form.get(compareForm).copyFrom(CompareList);
+    compareForm.categories.setOptions(CompareList.categories);
 
-    var form = require('./dw/form');
-    form.updateFormWithObject(compareForm, CompareList);
-    form.setFormOptions(compareForm.categories, CompareList.categories);
-
-
-    response.renderTemplate('product/compare/compareshow', {
-        CompareList : CompareList
-    });
+    view.get({CompareList : CompareList}).render('product/compare/compareshow');
 }
-
 
 /**
  * Expects: - pid: SKU - category: category ID
  */
-function AddProduct()
-{
-    var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : request.httpParameterMap.pid.value
-    });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
+function AddProduct() {
+
+    var product = Product.get(request.httpParameterMap.pid.value);
+    var category = Category.get(request.httpParameterMap.category.value);
+
+    if (!product.object || !category.object) {
         response.renderJSON({
             success : false
         });
         return;
     }
-    var Product = GetProductResult.Product;
+    else {
 
+        var ScriptResult = new dw.system.Pipelet('Script', {
+            Transactional : false,
+            OnError       : 'PIPELET_ERROR',
+            ScriptFile    : 'catalog/AddToCompareList.ds'
+        }).execute({
+                Category : category.object,
+                Product  : product.object
+            });
 
-    var GetCategoryResult = new dw.system.Pipelet('GetCategory').execute({
-        CategoryID : request.httpParameterMap.category.value
-    });
-    if (GetCategoryResult.result == PIPELET_ERROR)
-    {
+        if (ScriptResult.result === PIPELET_ERROR) {
+            response.renderJSON({
+                success : false
+            });
+            return;
+        }
+
         response.renderJSON({
-            success : false
+            success : true
         });
-        return;
     }
-    var Category = GetCategoryResult.Category;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError : 'PIPELET_ERROR',
-        ScriptFile : 'catalog/AddToCompareList.ds'
-    }).execute({
-        Category : Category,
-        Product : Product
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
-
-
-    response.renderJSON({
-        success : true
-    });
 }
 
 /**
  * Parameters: - pid: SKU - category: category ID
  */
-function RemoveProduct()
-{
-    var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : request.httpParameterMap.pid.value
-    });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
+function RemoveProduct() {
+
+    var product = Product.get(request.httpParameterMap.pid.value);
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!product.object || !category.object) {
         response.renderJSON({
             success : false
         });
         return;
     }
-    var Product = GetProductResult.Product;
+    else {
 
+        var ScriptResult = new dw.system.Pipelet('Script', {
+            ScriptFile    : 'catalog/RemoveFromCompareList.ds',
+            Transactional : false
+        }).execute({
+                Product  : product.object,
+                Category : category.object
+            });
+        if (ScriptResult.result === PIPELET_ERROR) {
+            response.renderJSON({
+                success : false
+            });
+            return;
+        }
 
-    var GetCategoryResult = new dw.system.Pipelet('GetCategory').execute({
-        CategoryID : request.httpParameterMap.category.value
-    });
-    if (GetCategoryResult.result == PIPELET_ERROR)
-    {
         response.renderJSON({
-            success : false
+            success : true
         });
-        return;
     }
-    var Category = GetCategoryResult.Category;
-
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        ScriptFile : 'catalog/RemoveFromCompareList.ds',
-        Transactional : false
-    }).execute({
-        Product : Product,
-        Category : Category
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
-
-
-    response.renderJSON({
-        success : true
-    });
 }
 
 /**
  * Parameters: - category: category ID
  */
-function Controls()
-{
-    var GetCategoryResult = new dw.system.Pipelet('GetCategory').execute({
-        CategoryID : request.httpParameterMap.category.value
-    });
-    if (GetCategoryResult.result == PIPELET_ERROR)
-    {
-        response.renderTemplate('search/components/productcomparewidget');
+function Controls() {
+
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category.object) {
+        view.get().render('search/components/productcomparewidget');
         return;
     }
-    var Category = GetCategoryResult.Category;
+    else {
 
+        var ScriptResult = new dw.system.Pipelet('Script', {
+            ScriptFile    : 'catalog/GetCompareList.ds',
+            Transactional : false
+        }).execute({
+                SelectedCategory : request.httpParameterMap.category.value
+            });
+        if (ScriptResult.result === PIPELET_ERROR) {
+            response.renderTemplate('search/components/productcomparewidget');
+            return;
+        }
+        var CompareList = ScriptResult.CompareList;
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        ScriptFile : 'catalog/GetCompareList.ds',
-        Transactional : false
-    }).execute({
-        SelectedCategory : request.httpParameterMap.category.value
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-        response.renderTemplate('search/components/productcomparewidget');
-        return;
+        view.get({CompareList : CompareList, Category : category.object}).render('search/components/productcomparewidget');
     }
-    var CompareList = ScriptResult.CompareList;
-
-
-    response.renderTemplate('search/components/productcomparewidget', {
-        CompareList : CompareList,
-        Category : Category
-    });
 }
 
 /*
@@ -180,7 +142,11 @@ function Controls()
 /*
  * Web exposed methods
  */
-exports.Show            = g.get(Show);
-exports.AddProduct      = g.get(AddProduct);
-exports.RemoveProduct   = g.get(RemoveProduct);
-exports.Controls        = g.get(Controls);
+/** @see module:controllers/Compare~Show */
+exports.Show = guard.all(Show);
+/** @see module:controllers/Compare~AddProduct */
+exports.AddProduct = guard.ensure(['get'], AddProduct);
+/** @see module:controllers/Compare~RemoveProduct */
+exports.RemoveProduct = guard.ensure(['get'], RemoveProduct);
+/** @see module:controllers/Compare~Controls */
+exports.Controls = guard.ensure(['get'], Controls);
