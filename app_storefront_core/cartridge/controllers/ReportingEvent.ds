@@ -14,11 +14,9 @@ var view = require('~/cartridge/scripts/view');
 /**
  * This is main method to handle all reporting events
  */
-function start()
-{
+function start() {
     view.get().render('util/reporting/reporting');
 }
-
 
 /*
  * Web exposed methods
