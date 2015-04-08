@@ -18,8 +18,7 @@ var addressForm = Form.get('address');
 /**
  * List addresses in customer profile Input: (none)
  */
-function List()
-{
+function List() {
    pageMeta.update(address);
 
    view.get().render('account/addressbook/addresslist');
@@ -29,8 +28,7 @@ function List()
  * Renders a dialog providing functionality to add a new address to the address
  * book.
  */
-function add()
-{
+function add() {
     Form.get('profile').clear();
 
     view.get().render('account/addressbook/addressdetails', {
@@ -42,8 +40,7 @@ function add()
 /**
  * The form handler.
  */
-function AddForm()
-{
+function AddForm() {
     
     var formResult = addressForm.handleAction({   
         'cancel'             : function (formgroup) {
@@ -101,8 +98,7 @@ function AddForm()
  * 
  * @returns true, if the address was created
  */
-function create()
-{
+function create() {
     var profileForm = session.forms.profile;
 
     var CreateCustomerAddressResult = new dw.system.Pipelet('CreateCustomerAddress').execute({
@@ -117,7 +113,7 @@ function create()
     }
     var Address = CreateCustomerAddressResult.Address;
 
-    if (!Form.get(profileForm.address=.copyTo(Address))
+    if (!Form.get(profileForm.address).copyTo(Address))
     {
         return false;
     }
@@ -134,8 +130,7 @@ function create()
 /**
  * Renders a dialog providing functionality to edit an existing address.
  */
-function Edit()
-{
+function Edit() {
     var profileForm = session.forms.profile;
     Form.get('profile').clear();
 
@@ -164,8 +159,7 @@ function Edit()
 }
 
 
-function EditForm()
-{
+function editForm() {
     
     var formResult = addressForm.handleAction({   
         'cancel'             : function (formgroup) {
@@ -229,8 +223,7 @@ function EditForm()
     response.redirect(dw.web.URLUtils.https('Address-List'));
 }
 
-function edit()
-{
+function edit() {
     var profileForm = session.forms.profile;
 
     // get address to be edited
@@ -283,8 +276,7 @@ function edit()
 /**
  * Sets the default address.
  */
-function SetDefault()
-{
+function SetDefault() {
     var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
         AddressID : decodeURIComponent(request.httpParameterMap.AddressID.value),
         Customer : customer
@@ -294,18 +286,12 @@ function SetDefault()
         List();
         return;
     }
-    var CustomerAddress = GetCustomerAddressResult.Address;
-
-
-    new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError : 'PIPELET_ERROR',
-        ScriptFile : 'account/addressbook/SetDefaultAddress.ds'
-    }).execute({
-        CustomerAddress : CustomerAddress,
-        CurrentCustomer : customer
-    });
-
+    var customerAddress = GetCustomerAddressResult.Address;
+    
+	var customer : dw.customer.Customer = customer;
+	var addressBook : dw.customer.AddressBook = customer.profile.addressBook;
+	addressBook.setPreferredAddress(customerAddress);
+    
     List();
 }
 
@@ -314,8 +300,7 @@ function SetDefault()
  * Returns a customer address as JSON response. Required to fill address form
  * with selected address from address book.
  */
-function GetAddressDetails()
-{
+function GetAddressDetails() {
     var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
         AddressID : decodeURIComponent(request.httpParameterMap.addressID.value),
         Customer : customer
@@ -331,8 +316,7 @@ function GetAddressDetails()
 /**
  * Deletes an existing address.
  */
-function Delete()
-{
+function Delete() {
     session.forms.profile.address.addressid.value = decodeURIComponent(request.httpParameterMap.AddressID.value);
 
     var deleteAddressResult = deleteAddress();
@@ -353,8 +337,7 @@ function Delete()
 }
 
 
-function deleteAddress()
-{
+function deleteAddress() {
     var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
         AddressID : session.forms.profile.address.addressid.value,
         Customer : customer
@@ -403,7 +386,7 @@ exports.AddForm = guard.ensure(['post', 'https', 'loggedIn'], AddForm);
 /** @see module:controller/Address~Edit */
 exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], Edit);
 /** @see module:controller/Address~EditForm */
-exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], EditForm);
+exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], EditForm);
 /** @see module:controller/Address~SetDefault */
 exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], SetDefault);
 /** @see module:controller/Address~GetAddressDetails */

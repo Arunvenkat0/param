@@ -8,7 +8,7 @@
 
 /* API Includes */
 var Email = require('~/cartridge/scripts/model/Email');
-var Account = require('~/cartridge/scripts/model/Account');
+var Account = require('~/cartridge/scripts/model/Customer');
 var Transaction = require('dw/system/Transaction');
 var Template = require('dw/util/Template');
 
@@ -334,7 +334,7 @@ function RegistrationForm()
 {
     var formResult = accountForm.handleAction({
         'confirm'             : function (formgroup) {
-           if (!Account.createAccount())
+           if (!Customer.createAccount())
             {
                 // TODO redirect
                 view.get().render('account/user/registration');
@@ -404,7 +404,7 @@ function Connect()
     var FacebookUser = ScriptResult.FacebookUser;
     var RegistrationStatus = ScriptResult.RegistrationStatus;
 
-    if (!Account.createAccount())
+    if (!Customer.createAccount())
     {
         response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
         return;
