@@ -212,7 +212,7 @@ function add() {
     var productList = ProductList.get();
     productList.addProduct(product, 1, productOptionModel);
 
-    Show();
+    response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
 
@@ -272,7 +272,7 @@ function setShippingAddress() {
                          ProductList.setShippingAddress(address);
                     }
                 );
-    Show();
+    response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
 
