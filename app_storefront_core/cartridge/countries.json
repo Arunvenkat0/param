@@ -1,8 +1,8 @@
 [{
 	"countryCode": "US",
-	"name": [{
-		"default": "United States"
-	}],
+	"name": {
+		"en_US": "United States"
+	},
 	"locales": ["en_US"],
 	"currencyCode": "USD",
 	"taxation": "net",
@@ -97,11 +97,10 @@
 	}
 }, {
 	"countryCode": "JP",
-	"name": [
-		{"default": "Japan"},
-		{"ja_JP": "日本"},
-		{"en_JP": "Japan"}
-	],
+	"name": {
+		"ja_JP": "日本",
+		"en_JP": "Japan"
+	},
 	"locales": ["ja_JP", "en_JP"],
 	"currencyCode": "JPY",
 	"taxation": "gross",
@@ -202,11 +201,10 @@
 	}
 }, {
 	"countryCode": "CN",
-	"name": [
-		{"default": "China"},
-		{"zh_CN": "中国"},
-		{"en_CN": "China"}
-	],
+	"name": {
+		"zh_CN": "中国",
+		"en_CN": "China"
+	},
 	"locales": ["zh_CN", "en_CN"],
 	"currencyCode": "CNY",
 	"taxation": "gross",
@@ -307,10 +305,9 @@
 	}
 }, {
 	"countryCode": "FR",
-	"name": [
-		{"default": "France"},
-		{"fr-FR": "France"}
-	],
+	"name": {
+		"fr-FR": "France"
+	},
 	"locales": ["fr_FR"],
 	"currencyCode": "EUR",
 	"taxation": "gross",
@@ -394,10 +391,9 @@
 	}
 }, {
 	"countryCode": "IT",
-	"name": [
-		{"default": "Italy"},
-		{"it-IT": "Italia"}
-	],
+	"name": {
+		"it-IT": "Italia"
+	},
 	"locales": ["it_IT"],
 	"currencyCode": "EUR",
 	"taxation": "gross",
