@@ -83,7 +83,7 @@ function wishListForm() {
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction !== null)
     {
-        if (TriggeredAction.formId == 'addToCart')
+        if (TriggeredAction.formId === 'addToCart')
         {
             if (currentForms.wishlist.items.triggeredFormAction.parent.object.type === currentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
@@ -100,26 +100,26 @@ function wishListForm() {
                 return;
             }
         }
-        else if (TriggeredAction.formId == 'selectAddressWishlist')
+        else if (TriggeredAction.formId === 'selectAddressWishlist')
         {
             SetShippingAddress();
             return;
         }
-        else if (TriggeredAction.formId == 'setItemPrivate')
+        else if (TriggeredAction.formId === 'setItemPrivate')
         {
             Transaction.wrap(function () {
                          ProductList.public = false;
                     }
                 );
         }
-        else if (TriggeredAction.formId == 'setItemPublic')
+        else if (TriggeredAction.formId === 'setItemPublic')
         {
             Transaction.wrap(function () {
                           TriggeredAction.object.public = true;
                     }
                 );
         }
-        else if (TriggeredAction.formId == 'setListPrivate')
+        else if (TriggeredAction.formId === 'setListPrivate')
         {
             var ProductList = ProductList.get();
 
@@ -135,7 +135,7 @@ function wishListForm() {
 		    	anItem.setPublic(false);
 		    }
         }
-        else if (TriggeredAction.formId == 'setListPublic')
+        else if (TriggeredAction.formId === 'setListPublic')
         {
             var ProductList = ProductList.get();
 
@@ -222,38 +222,33 @@ function add() {
 function search() {
     var currentForms = session.forms;
 
-    var SearchFirstName, SearchLastName, SearchEmail = null;
+    var searchFirstName, searchLastName, searchEmail = null;
 
     if (currentForms.wishlist.search.valid
             && (!empty(currentForms.wishlist.search.email.value) || (!empty(currentForms.wishlist.search.firstname.value) && !empty(currentForms.wishlist.search.lastname.value))))
     {
-       var SearchProductListsResult = new dw.system.Pipelet('SearchProductLists', {
-            PublicOnly : true
-        }).execute({
-            Type : dw.customer.ProductList.TYPE_WISH_LIST,
-            OwnerFirstName : currentForms.wishlist.search.firstname.value,
-            OwnerLastName : currentForms.wishlist.search.lastname.value,
-            OwnerEmail : currentForms.wishlist.search.email.value
-        });
+       
+       var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname.value + " AND OwnerLastName = " + currentForms.wishlist.search.lastname.value + " AND OwnerEmail = " + currentForms.wishlist.search.email.value;
+	   var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
 
-        SearchFirstName = currentForms.wishlist.search.firstname.value;
-        SearchLastName = currentForms.wishlist.search.lastname.value;
-        SearchEmail = currentForms.wishlist.search.email.value;
+        searchFirstName = currentForms.wishlist.search.firstname.value;
+        searchLastName = currentForms.wishlist.search.lastname.value;
+        searchEmail = currentForms.wishlist.search.email.value;
 
 
         currentForms.wishlist.search.clearFormElement();
     }
     else
     {
-        SearchFirstName = currentForms.wishlist.search.firstname.value;
-        SearchLastName = currentForms.wishlist.search.lastname.value;
-        SearchEmail = currentForms.wishlist.search.email.value;
+        searchFirstName = currentForms.wishlist.search.firstname.value;
+        searchLastName = currentForms.wishlist.search.lastname.value;
+        searchEmail = currentForms.wishlist.search.email.value;
     }
 
     view.get().render('account/wishlist/wishlistresults', {
-        SearchFirstName : SearchFirstName,
-        SearchLastName : SearchLastName,
-        SearchEmail : SearchEmail
+        SearchFirstName : searchFirstName,
+        SearchLastName : searchLastName,
+        SearchEmail : searchEmail
     });
 }
 
