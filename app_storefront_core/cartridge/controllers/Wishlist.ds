@@ -228,7 +228,7 @@ function search() {
             && (!empty(currentForms.wishlist.search.email.value) || (!empty(currentForms.wishlist.search.firstname.value) && !empty(currentForms.wishlist.search.lastname.value))))
     {
        
-       var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname.value + " AND OwnerLastName = " + currentForms.wishlist.search.lastname.value + " AND OwnerEmail = " + currentForms.wishlist.search.email.value;
+       var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname + " AND OwnerLastName = " + currentForms.wishlist.search.lastname + " AND OwnerEmail = " + currentForms.wishlist.search.email;
 	   var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
 
         searchFirstName = currentForms.wishlist.search.firstname.value;
