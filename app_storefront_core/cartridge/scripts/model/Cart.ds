@@ -28,54 +28,12 @@ var UUIDUtils = require('dw/util/UUIDUtils');
  * Cart helper providing enhanced cart functionality
  * @class module:model/Cart~Cart
  * @extends module:model/AbstractModel
+ *
+ * @param {dw.order.Basket} obj The basket object to enhance/wrap.
  */
 var Cart = AbstractModel.extend(
     /** @lends module:model/Cart~Cart.prototype */
     {
-        /**
-         * Use this method to get a new instance for the current or a given basket.
-         *
-         * @param parameter
-         * @returns {module:model/Cart~Cart}
-         */
-        get : function (parameter) {
-            var obj = null;
-
-            if (!parameter) {
-                var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-                    Create : false
-                }).execute();
-
-                if (GetBasketResult.result !== PIPELET_ERROR) {
-                    obj = GetBasketResult.Basket;
-                }
-            }
-            else if (typeof parameter === 'object') {
-                obj = parameter;
-            }
-            return new Cart(obj);
-        },
-
-        /**
-         * Use this method to get or create a new instance of a basket
-         *
-         * @returns {module:model/Cart~Cart}
-         */
-        goc : function () {
-            var obj = null;
-
-            var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-                Create : true
-            }).execute();
-
-            if (GetBasketResult.result !== PIPELET_ERROR) {
-                obj = GetBasketResult.Basket;
-            }
-
-            return new Cart(obj);
-
-        },
-
         /**
          * Triggers the cart calculation by executing the hook 'dw.ocapi.shop.basket.calculate'.
          *
@@ -1568,5 +1526,49 @@ var Cart = AbstractModel.extend(
 
     });
 
+/**
+ * Use this method to get a new instance for the current or a given basket.
+ *
+ * @param parameter
+ * @returns {module:model/Cart~Cart}
+ */
+Cart.get = function (parameter) {
+    var obj = null;
+
+    if (!parameter) {
+        var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+            Create : false
+        }).execute();
+
+        if (GetBasketResult.result !== PIPELET_ERROR) {
+            obj = GetBasketResult.Basket;
+        }
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new Cart(obj);
+};
+
+/**
+ * Use this method to get or create a new instance of a basket
+ *
+ * @returns {module:model/Cart~Cart}
+ */
+Cart.goc = function () {
+    var obj = null;
+
+    var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+        Create : true
+    }).execute();
+
+    if (GetBasketResult.result !== PIPELET_ERROR) {
+        obj = GetBasketResult.Basket;
+    }
+
+    return new Cart(obj);
+
+};
+
 /** The cart class */
-module.exports = new Cart();
+module.exports = Cart;
