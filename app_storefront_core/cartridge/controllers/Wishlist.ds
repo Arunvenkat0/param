@@ -220,33 +220,23 @@ function add() {
  * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
  */
 function search() {
-    var currentForms = session.forms;
+    var wishlistSearchform = Form.get(wishlist.search);
 
     var searchFirstName, searchLastName, searchEmail = null;
+
+    searchFirstName = wishlistSearchform.firstname.value;
+    searchLastName = wishlistSearchform.lastname.value;
+    searchEmail = wishlistSearchform.email.value;
 
     if (currentForms.wishlist.search.valid
             && (!empty(currentForms.wishlist.search.email.value) || (!empty(currentForms.wishlist.search.firstname.value) && !empty(currentForms.wishlist.search.lastname.value))))
     {
        
        var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname + " AND OwnerLastName = " + currentForms.wishlist.search.lastname + " AND OwnerEmail = " + currentForms.wishlist.search.email;
-	   var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
-
-		var productLists = SearchProductListsResult.ProductLists;
-
-        Form.get(currentForms.wishlist.productlists).copyFrom(productLists);
-        
-        searchFirstName = currentForms.wishlist.search.firstname.value;
-        searchLastName = currentForms.wishlist.search.lastname.value;
-        searchEmail = currentForms.wishlist.search.email.value;
+    var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
 
 
-        currentForms.wishlist.search.clearFormElement();
-    }
-    else
-    {
-        searchFirstName = currentForms.wishlist.search.firstname.value;
-        searchLastName = currentForms.wishlist.search.lastname.value;
-        searchEmail = currentForms.wishlist.search.email.value;
+        wishlistSearchform.clear();
     }
 
     view.get().render('account/wishlist/wishlistresults', {
