@@ -22,5 +22,7 @@ module.exports = function GetCurrentUrl(pdict, locale) {
 			parameters.push(new dw.web.URLParameter(key, parameterMap[key]));
 		}
 	}
-	return URLUtils.url.apply(null, parameters);
+	return pdict.CurrentRequest.httpProtocol + '://' +
+		pdict.CurrentRequest.httpHost +
+		URLUtils.url.apply(null, parameters);
 };
