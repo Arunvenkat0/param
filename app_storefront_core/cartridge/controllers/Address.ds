@@ -18,7 +18,7 @@ var addressForm = Form.get('address');
 /**
  * List addresses in customer profile Input: (none)
  */
-function List() {
+function list() {
    pageMeta.update(address);
 
    view.get().render('account/addressbook/addresslist');
@@ -40,7 +40,7 @@ function add() {
 /**
  * The form handler.
  */
-function AddForm() {
+function addForm() {
     
     var formResult = addressForm.handleAction({   
         'cancel'             : function (formgroup) {
@@ -122,7 +122,7 @@ function create() {
 /**
  * Renders a dialog providing functionality to edit an existing address.
  */
-function Edit() {
+function edit() {
     var profileForm = session.forms.profile;
     Form.get('profile').clear();
 
@@ -251,7 +251,7 @@ function edit() {
 /**
  * Sets the default address.
  */
-function SetDefault() {
+function setDefault() {
     
     var getCustomerAddressResult = dw.customer.AddressBook.getAddress(decodeURIComponent(request.httpParameterMap.AddressID.value));
     
@@ -261,7 +261,7 @@ function SetDefault() {
 	var addressBook : dw.customer.AddressBook = customer.profile.addressBook;
 	addressBook.setPreferredAddress(customerAddress);
     
-    List();
+    response.redirect(dw.web.URLUtils.https('Address-List'));
 }
 
 
@@ -290,7 +290,7 @@ function Delete() {
 
     if (request.httpParameterMap.format.stringValue != 'ajax')
     {
-        List();
+        response.redirect(dw.web.URLUtils.https('Address-List'));
         return;
     }
     
@@ -333,18 +333,18 @@ function deleteAddress() {
  * Web exposed methods
  */
 /** @see module:controller/Address~List */
-exports.List = guard.ensure(['get', 'https', 'loggedIn'], List);
+exports.List = guard.ensure(['get', 'https', 'loggedIn'], list);
 /** @see module:controller/Address~Add */
-exports.Add = guard.ensure(['get', 'https', 'loggedIn'], Add);
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
 /** @see module:controller/Address~AddForm */
-exports.AddForm = guard.ensure(['post', 'https', 'loggedIn'], AddForm);
+exports.AddForm = guard.ensure(['post', 'https', 'loggedIn'], addForm);
 /** @see module:controller/Address~Edit */
-exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], Edit);
+exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], edit);
 /** @see module:controller/Address~EditForm */
-exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], EditForm);
+exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
 /** @see module:controller/Address~SetDefault */
-exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], SetDefault);
+exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], setDefault);
 /** @see module:controller/Address~GetAddressDetails */
-exports.GetAddressDetails = guard.ensure(['get', 'https', 'loggedIn'], GetAddressDetails);
+exports.GetAddressDetails = guard.ensure(['get', 'https', 'loggedIn'], getAddressDetails);
 /** @see module:controller/Address~Delete */
 exports.Delete = guard.ensure(['get', 'https', 'loggedIn'], Delete);

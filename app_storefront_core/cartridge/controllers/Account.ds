@@ -8,7 +8,7 @@
 
 /* API Includes */
 var Email = require('~/cartridge/scripts/model/Email');
-var Account = require('~/cartridge/scripts/model/Customer');
+var Customer = require('~/cartridge/scripts/model/Customer');
 var Transaction = require('dw/system/Transaction');
 var Template = require('dw/util/Template');
 
@@ -41,7 +41,7 @@ function show()
 /**
  * Updates the profile of an authenticated customer.
  */
-function EditProfile()
+function editProfile()
 {
     var CurrentForms = session.forms;
     var CurrentCustomer = customer;
@@ -67,7 +67,7 @@ function EditProfile()
  * from previous attempt to keep the error messages. This is shown after an
  * update has failed.
  */
-function EditProfileError()
+function editProfileError()
 {
     var TargetPipeline = 'Account-EditProfile';
 
@@ -143,7 +143,7 @@ function passwordResetDialogForm()
 
 				Email.get('mail/resetpasswordemail', Customer.profile.email)
 				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({});
+		        .send({}));
 
                 params.ErrorCode = null;
                 params.ShowContinue = true;
@@ -195,7 +195,7 @@ function passwordResetForm()
 
             Email.get('mail/resetpasswordemail', Customer.profile.email)
 				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({});
+		        .send({}));
 
 			view.get().render('account/password/requestpasswordreset_confirm', {
                 ErrorCode : null
@@ -286,7 +286,7 @@ function setNewPasswordForm()
             
             Email.get('mail/passwordchangedemail', customer.profile.email)
 				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({});
+		        .send({}));
 
             response.redirect(dw.web.URLUtils.https('Account-SetNewPasswordConfirm'));
             return;
@@ -353,6 +353,71 @@ function registrationForm()
     });
     
     view.get().render('account/user/registration');
+}
+
+function loginForm() {
+  
+var TriggeredAction = request.triggeredFormAction;
+    if (TriggeredAction != null)
+    {
+        if (TriggeredAction.formId == 'findorder')
+        {
+            var OrderController = require('./Order');
+            var FindResult = OrderController.Find();
+            if (FindResult.error)
+            {
+                // TODO redirect
+                response.renderTemplate('account/login/accountlogin', {
+                    OrderNotFound : true
+                });
+                return;
+            }
+            // TODO redirect
+            response.renderTemplate('account/orderhistory/orderdetails', {
+                Order : FindResult.Order
+            });
+            return;
+        }
+        else if (TriggeredAction.formId == 'login')
+        {
+            // get the target action which requested this login step before the
+            // form is cleared
+            var targetAction = session.forms.login.targetAction.value;
+            var targetParameters = session.forms.login.targetParameters.value;
+
+            var LoginController = require('./Login');
+            var ProcessResult = LoginController.Process();
+            if (ProcessResult.login_failed)
+            {
+                // TODO redirect
+                response.renderTemplate('account/login/accountlogin');
+                return;
+            }
+
+            // login successful
+            // redirect to the origin who triggered the login process
+            if (request.httpParameterMap.original.submitted) {
+                //@TODO make sure only path, no hosts are allowed as redirect target 
+            	response.redirect(decodeURI(request.httpParameterMap.original.value));
+            } else if (!empty(targetAction)) {
+                if (empty(targetParameters)) {
+                    response.redirect(dw.web.URLUtils.https(targetAction));
+                } else {
+                    response.redirect(dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters)));
+                }
+            } else {
+                response.redirect(dw.web.URLUtils.https('Account-Show'));
+            }
+            return;
+        }
+        else if (TriggeredAction.formId == 'register')
+        {
+            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            return;
+        }
+    }
+
+    response.redirect(dw.web.URLUtils.https('Account-Show'));
 }
 
 
@@ -422,30 +487,32 @@ function connect()
  * Web exposed methods
  */
 /** @see module:controller/Account~Show */
-exports.show = guard.ensure(['get', 'https', 'loggedIn'], show);
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
 /** @see module:controller/Account~EditProfile */
-exports.editProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
+exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
 /** @see module:controller/Account~EditProfileError */
-exports.editProfileError = guard.ensure(['get', 'https', 'loggedIn'], editProfileError);
+exports.EditProfileError = guard.ensure(['get', 'https', 'loggedIn'], editProfileError);
 /** @see module:controller/Account~EditForm */
-exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
+exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
 /** @see module:controller/Account~PasswordResetDialog */
-exports.easswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
+exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
 /** @see module:controller/Account~PasswordResetDialogForm */
-exports.passwordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
+exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
 /** @see module:controller/Account~PasswordResetForm */
-exports.passwordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
+exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
 /** @see module:controller/Account~SetNewPassword */
-exports.setNewPassword = guard.ensure(['get', 'https'], setNewPassword);
+exports.SetNewPassword = guard.ensure(['get', 'https'], setNewPassword);
 /** @see module:controller/Account~SetNewPasswordForm */
-exports.setNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
+exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
 /** @see module:controller/Account~SetNewPasswordConfirm */
-exports.setNewPasswordConfirm = guard.ensure(['get', 'https'], setNewPasswordConfirm);
+exports.SetNewPasswordConfirm = guard.ensure(['get', 'https'], setNewPasswordConfirm);
 /** @see module:controller/Account~StartRegister */
-exports.startRegister = guard.ensure(['get', 'https'], startRegister);
+exports.StartRegister = guard.ensure(['get', 'https'], startRegister);
 /** @see module:controller/Account~RegistrationForm */
-exports.registrationForm = guard.ensure(['post', 'https'], registrationForm);
+exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
+/** @see module:controller/Account~LoginForm */
+exports.LoginForm = guard.ensure(['get', 'https'], loginForm);
 /** @see module:controller/Account~IncludeNavigation */
-exports.includeNavigation = guard.ensure(['get'], includeNavigation);
+exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);
 /** @see module:controller/Account~Connect */
-exports.connect = guard.ensure(['https'], connect);
+exports.Connect = guard.ensure(['https'], connect);

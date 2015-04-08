@@ -220,6 +220,7 @@ function add() {
  * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
  */
 function search() {
+    var currentForms = session.forms;
     var wishlistSearchform = Form.get(wishlist.search);
 
     var searchFirstName, searchLastName, searchEmail = null;
@@ -233,8 +234,9 @@ function search() {
     {
        
        var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname + " AND OwnerLastName = " + currentForms.wishlist.search.lastname + " AND OwnerEmail = " + currentForms.wishlist.search.email;
-    var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
-
+       var searchProductListsResult = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
+		
+	   Form.get(currentForms.wishlist.productlists).copyFrom(searchProductListsResult);
 
         wishlistSearchform.clear();
     }

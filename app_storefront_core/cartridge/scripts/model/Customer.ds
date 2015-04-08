@@ -58,7 +58,7 @@ exports.login = function(username, password, rememberMe){
         if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
             Email.get('mail/lockoutemail', TempCustomer.profile.email)
 				.setSubject((dw.web.Resource.msg('email.youraccount', 'email', null))
-		        .send({});
+		        .send({}));
         }
 
         return false;
@@ -108,7 +108,7 @@ exports.createCustomer = function (login, password)
  * @param password the password of the current customer
  * @return true, if the login / password was updated
  */
-export.setLogin = function (customer, login, password)
+exports.setLogin = function (customer, login, password)
 {
     if ((customer == null) || (login == null) || (password == null))
     {
@@ -271,7 +271,7 @@ exports.editAccount = function ()
         return false;
     }
 	
-    if (!Form.get(profileForm.customer).copyFrom(customer.profile())
+    if (!Form.get(profileForm.customer).copyFrom(customer.profile()))
     {
         Transaction.rollback();
         return false;
