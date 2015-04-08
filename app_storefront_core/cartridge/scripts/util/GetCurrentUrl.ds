@@ -8,6 +8,9 @@
 module.exports = function GetCurrentUrl(pdict, locale) {
 	var currentAction = pdict.CurrentSession.clickStream.last.pipelineName;
 	var siteId = dw.system.Site.getCurrent().getID();
+	if (!locale) {
+		locale = 'default';
+	}
 	var urlAction = new dw.web.URLAction(currentAction, siteId, locale);
 	var parameterMap = pdict.CurrentHttpParameterMap;
 	var parameters = [urlAction];
