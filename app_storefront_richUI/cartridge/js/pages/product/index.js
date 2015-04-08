@@ -38,23 +38,6 @@ function initializeEvents() {
 		productStoreInventory.init();
 	}
 
-	// Share actions
-	// Social share
-	var $actions = $('.product-actions');
-	var url = encodeURIComponent(window.location.href);
-	var subject = '';
-	var $email;
-
-	$actions.find('[data-service="facebook"]').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + url);
-	$actions.find('[data-service="twitter"]').attr('href', 'https://twitter.com/intent/tweet/?url=' + url);
-	$actions.find('[data-service="google-plus"]').attr('href', 'https://plus.google.com/share?url=' + url);
-	$actions.find('[data-service="pinterest"]').attr('href', 'https://www.pinterest.com/pin/create/button/?url=' + url);
-
-	// email
-	$email = $actions.find('[data-action="email"]');
-	subject = encodeURIComponent($email.data('subject'));
-	$email.attr('href', 'mailto:name@email.com?subject=' + subject + '&body=' + url);
-
 	// Add to Wishlist and Add to Gift Registry links behaviors
 	$pdpMain.on('click', '[data-action="wishlist"], [data-action="gift-registry"]', function () {
 		var data = util.getQueryStringParams($('.pdpForm').serialize());
