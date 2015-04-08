@@ -13,18 +13,21 @@ var Transaction = require('dw/system/Transaction');
 /**
  * Customer helper providing enhanced content functionality
  * @class module:model/Customer~Customer
+ *
+ * @param parameter {dw.customer.Customer} The customer object to enhance/wrap.
  */
 var Customer = AbstractModel.extend(
-/** @lends module:model/Customer~Customer.prototype */
-{
-
-
-});
+    /** @lends module:model/Customer~Customer.prototype */
+    {});
 
 /**
  * Use this method to get the the current customer or pass in a customer instance.
+ *
+ * @param parameter {dw.customer.Customer=} The customer object to enhance/wrap. If NULL the current customer is
+ * retrieved from the session.
+ * @returns {module:model/Customer~Customer}
  */
-exports.get = function (parameter) {
+Customer.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'undefined') {
         obj = customer;
@@ -35,7 +38,18 @@ exports.get = function (parameter) {
     return new Customer(obj);
 };
 
-exports.login = function(username, password, rememberMe){
+/**
+ * Authenticates the current session using the supplied Login and Password. If a different customer is currently
+ * authenticated in the session, then this customer is "logged out" and her/his privacy and form data are deleted.
+ *
+ * @param username {String} Login name.
+ * @param password {String} Password.
+ * @param rememberMe {Boolean=} Optional Boolean value indicating if the customer wants to be remembered on the current
+ * computer. If a value of True is supplied a cookie identifying the customer is stored upon successful login. If a value
+ * of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.
+ * @returns {boolean}
+ */
+Customer.login = function (username, password, rememberMe) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : username
     });
@@ -66,6 +80,12 @@ exports.login = function(username, password, rememberMe){
     return true;
 };
 
-exports.logout = function(){
+/**
+ * Logs out the customer currently logged into the storefront.
+ */
+Customer.logout = function () {
     new dw.system.Pipelet('LogoutCustomer').execute();
 };
+
+/** The customer class */
+module.exports = Customer;

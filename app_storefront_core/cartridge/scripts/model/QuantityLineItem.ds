@@ -11,21 +11,24 @@ var Quantity = require('dw/value/Quantity');
  * creation of new PLIs for each quantity.
  *
  * @class module:model/QuantityLineItem~QuantityLineItem
+ * @extends module:util/Class
+ *
+ * @param {dw.order.ProductLineItem} pli The ProductLineItem to create the QuantityLineItem from.
  */
 var QuantityLineItem = Class.extend(
     /** @lends module:model/QuantityLineItem~QuantityLineItem.prototype */
     {
+        /** */
         productID    : null,
+        /** */
         lineItemText : null,
+        /** */
         quantity     : null,
+        /** */
         pliUUID      : null,
+        /** */
         optionID     : null,
 
-        /**
-         * The constructor.
-         * @constructs
-         * @param {dw.order.ProductLineItem} pli The ProductLineItem to create the QuantityLineItem from.
-         */
         init : function (pli) {
 
             this.quantity = new Quantity(1, pli.quantity.getUnit());

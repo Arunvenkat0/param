@@ -1529,7 +1529,8 @@ var Cart = AbstractModel.extend(
 /**
  * Use this method to get a new instance for the current or a given basket.
  *
- * @param parameter
+ * @param parameter {dw.order.Basket=} The basket object to enhance/wrap. If NULL the basket is retrieved from
+ * the current session, if existing.
  * @returns {module:model/Cart~Cart}
  */
 Cart.get = function (parameter) {
@@ -1551,7 +1552,7 @@ Cart.get = function (parameter) {
 };
 
 /**
- * Use this method to get or create a new instance of a basket
+ * Use this method to get or create a new instance of a basket.
  *
  * @returns {module:model/Cart~Cart}
  */
