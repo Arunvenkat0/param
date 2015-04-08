@@ -41,7 +41,7 @@ var Category = AbstractModel.extend(
                 return subcategories;
             }
             if (subcategories) {
-                for (i = 0; i < subcategories.length; i++) {
+                for (var i = 0; i < subcategories.length; i++) {
                     if (('showInMenu' in subcategories[i].custom) && subcategories[i].custom.showInMenu.valueOf()) {
                         result.push(subcategories[i]);
                     }
