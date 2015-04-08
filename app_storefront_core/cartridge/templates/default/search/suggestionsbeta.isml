@@ -164,7 +164,7 @@
                         	<isloop items="${suggestedProducts}" alias="suggestedProduct" status="loopstate">
                             	<isset name="productSearchHit" value="${suggestedProduct.getProductSearchHit()}" scope="page"/>
                                 <isset name="product" value="${productSearchHit.getProduct()}" scope="page"/>
-                             	<div class="product-suggestion <isif condition="${loopstate.last}">lastproduct</isif>">
+                             	<div class="product-suggestion">
                                 	<isset name="productImage" value="${product.getImage('small')}" scope="page"/>
                                 		<div class="product-image">
                                         	<isif condition="${productImage != null}">
