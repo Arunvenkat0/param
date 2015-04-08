@@ -231,6 +231,10 @@ function search() {
        var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname + " AND OwnerLastName = " + currentForms.wishlist.search.lastname + " AND OwnerEmail = " + currentForms.wishlist.search.email;
 	   var SearchProductListsResult : dw.util.SeekableIterator = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
 
+		var productLists = SearchProductListsResult.ProductLists;
+
+        Form.get(currentForms.wishlist.productlists).copyFrom(productLists);
+        
         searchFirstName = currentForms.wishlist.search.firstname.value;
         searchLastName = currentForms.wishlist.search.lastname.value;
         searchEmail = currentForms.wishlist.search.email.value;
