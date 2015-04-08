@@ -101,24 +101,16 @@ function AddForm() {
 function create() {
     var profileForm = session.forms.profile;
 
-    var CreateCustomerAddressResult = new dw.system.Pipelet('CreateCustomerAddress').execute({
-        AddressID : profileForm.address.addressid.value,
-        Customer : customer
-    });
-    if (CreateCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        profileForm.address.addressid.invalidateFormElement();
+    var  createCustomerAddressResult = dw.customer.AddressBook.createAddress(profileForm.address.addressid.value);
+    
+    var address = createCustomerAddressResult.Address;
 
-        return false;
-    }
-    var Address = CreateCustomerAddressResult.Address;
-
-    if (!Form.get(profileForm.address).copyTo(Address))
+    if (!Form.get(profileForm.address).copyTo(address))
     {
         return false;
     }
 
-    if (!Form.get(profileForm.address.states).copyForm(Address))
+    if (!Form.get(profileForm.address.states).copyForm(address))
     {
         return false;
     }
@@ -135,20 +127,20 @@ function Edit() {
     Form.get('profile').clear();
 
 
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
+    var getCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
         AddressID : decodeURIComponent(request.httpParameterMap.AddressID.value),
         Customer : customer
     });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
+    if (getCustomerAddressResult.result == PIPELET_ERROR)
     {
         view.get().render('components/dialog/closedialog');
         return;
     }
-    var Address = GetCustomerAddressResult.Address;
+    var address = getCustomerAddressResult.Address;
 
 
-    Form.get(profileForm.address).copyFrom(Address);
-    Form.get(profileForm.address.states).copyFrom(Address);
+    Form.get(profileForm.address).copyFrom(address);
+    Form.get(profileForm.address.states).copyFrom(address);
 
 
     view.get().render('account/addressbook/addressdetails', {
@@ -227,43 +219,26 @@ function edit() {
     var profileForm = session.forms.profile;
 
     // get address to be edited
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : request.httpParameterMap.addressid.value,
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        profileForm.address.addressid.invalidateFormElement();
-
-        return false;
-    }
-    var Address = GetCustomerAddressResult.Address;
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(request.httpParameterMap.addressid.value);
+    
+    var address = getCustomerAddressResult.Address;
     
 
     // check if new address id is already taken
-    if (Address.ID != profileForm.address.addressid.value)
+    if (address.ID != profileForm.address.addressid.value)
     {
-        var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID : profileForm.address.addressid.value,
-            Customer : customer
-        });
-        if (GetCustomerAddressResult.result == PIPELET_NEXT)
-        {
-            profileForm.address.addressid.invalidateFormElement();
-    
-            return false;
-        }
+        var getCustomerAddressResult = dw.customer.AddressBook.getAddress(profileForm.address.addressid.value);
     }
 
     
-    if (!Form.get(profileForm.address).copyTo(Address))
+    if (!Form.get(profileForm.address).copyTo(address))
     {
         profileForm.address.addressid.invalidateFormElement();
 
         return false;
     }
 
-    if (!Form.get(profileForm.address.states).copyTo(Address))
+    if (!Form.get(profileForm.address.states).copyTo(address))
     {
         profileForm.address.addressid.invalidateFormElement();
 
@@ -277,16 +252,10 @@ function edit() {
  * Sets the default address.
  */
 function SetDefault() {
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : decodeURIComponent(request.httpParameterMap.AddressID.value),
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        List();
-        return;
-    }
-    var customerAddress = GetCustomerAddressResult.Address;
+    
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(decodeURIComponent(request.httpParameterMap.AddressID.value));
+    
+    var customerAddress = getCustomerAddressResult.Address;
     
 	var customer : dw.customer.Customer = customer;
 	var addressBook : dw.customer.AddressBook = customer.profile.addressBook;
@@ -300,15 +269,13 @@ function SetDefault() {
  * Returns a customer address as JSON response. Required to fill address form
  * with selected address from address book.
  */
-function GetAddressDetails() {
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : decodeURIComponent(request.httpParameterMap.addressID.value),
-        Customer : customer
-    });
-    var Address = GetCustomerAddressResult.Address;
+function getAddressDetails() {
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(request.httpParameterMap.addressID.value);
+    
+    var address = getCustomerAddressResult.Address;
 
     view.get().render('account/addressbook/addressjson', {
-        Address : Address
+        Address : address
     });
 }
 
@@ -338,31 +305,19 @@ function Delete() {
 
 
 function deleteAddress() {
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : session.forms.profile.address.addressid.value,
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        return {
-            failed : true
-        };
-    }
-    var Address = GetCustomerAddressResult.Address;
+    var GetCustomerAddressResult = dw.customer.AddressBook.getAddress(session.forms.profile.address.addressid.value);
+    
+    var address = GetCustomerAddressResult.Address;
 
-    var RemoveCustomerAddressResult = new dw.system.Pipelet('RemoveCustomerAddress').execute({
-        Address : Address,
-        Customer : customer
-    });
-    if (RemoveCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        var Status = new dw.system.Status(dw.system.Status.ERROR,
-                dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST);
-        return {
-            failed : true,
-            Status : Status
-        };
-    }
+    var RemoveCustomerAddressResult = dw.customer.AddressBook.removeAddress(address);
+    
+   	var Status = new dw.system.Status(dw.system.Status.ERROR,
+            dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST);
+    return {
+        failed : true,
+        Status : Status
+    };
+    
 
     return {
         ok : true
