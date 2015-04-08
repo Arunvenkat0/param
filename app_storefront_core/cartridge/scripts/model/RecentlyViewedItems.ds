@@ -18,7 +18,6 @@ var PRODUCT_PIPELINE_NAMES = new ArrayList(
  * supported.
  *
  * @class module:model/RecentlyViewedItems~RecentlyViewedItems
- * @type {{getRecentlyViewedProducts: Function}}
  */
 var RecentlyViewedItems = ({
 

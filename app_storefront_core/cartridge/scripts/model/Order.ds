@@ -9,24 +9,13 @@ var ArrayList = require('dw/util/ArrayList');
 /**
  * Order helper providing enhanced order functionality
  * @class module:model/Order~Order
+ * @extends module:model/AbstractModel
+ *
+ * @param {dw.order.Order} obj The order object to enhance/wrap.
  */
 var Order = AbstractModel.extend(
     /** @lends module:model/Order~Order.prototype */
     {
-        /**
-         * Use this method to get a new instance for a given order or order number.
-         */
-        get : function (parameter) {
-            var obj = null;
-            if (typeof parameter === 'string') {
-                obj = dw.order.OrderMgr.getOrder(parameter);
-            }
-            else if (typeof parameter === 'object') {
-                obj = parameter;
-            }
-            return new Order(obj);
-        },
-
         /**
          * Creates gift certificates for all gift certificate line items of this order.
          *
@@ -61,5 +50,22 @@ var Order = AbstractModel.extend(
 
     });
 
+/**
+ * Use this method to get a new instance for a given order or order number.
+ *
+ * @param parameter {dw.order.Order | String} The order object to enhance/wrap or the order ID of the order object.
+ * @returns {module:model/Order~Order}
+ */
+Order.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'string') {
+        obj = dw.order.OrderMgr.getOrder(parameter);
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new Order(obj);
+};
+
 /** The order class */
-module.exports = new Order();
+module.exports = Order;

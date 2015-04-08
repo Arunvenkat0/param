@@ -1,10 +1,17 @@
 'use strict';
-/** @module model/AbstractModel */
 
+/**
+ * @module model/AbstractModel
+ */
+
+/* API Includes */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 
 /**
  * Abstract class for all modules following the <strong>Global Helper Concept</strong>.
+ *
+ * @class module:model/AbstractModel~AbstractModel
+ * @extends module:util/Class
  *
  * @see https://bitbucket.org/demandware/sitegenesis-community/wiki/Home
  */
@@ -16,13 +23,14 @@ var AbstractModel = Class.extend(
 
         /**
          * Property holding the wrapped object which is initialized in the child classes. Usually
-         *  the this.get() method is used to obtain a record
+         * the this.get() method is used to obtain a record
          */
         object : null,
 
         /**
          * AbstractModel constructor
-         * @constructs
+         * @constructs AbstractModel
+         * @param obj {Object}
          */
         init : function (obj) {
             this.object = obj;
@@ -95,4 +103,5 @@ var AbstractModel = Class.extend(
         }
     });
 
+/** The AbstractModel class */
 module.exports = AbstractModel;
