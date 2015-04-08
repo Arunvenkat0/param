@@ -32,6 +32,29 @@ exports.extend = function (target, source) {
 };
 
 /**
+ * Access given properties of an object recursively
+ *
+ * @param {Object} object The object
+ * @param {String} propertyString The property string, i.e. 'data.myValue.prop1'
+ * @return {Object} The value of the given property or undefined
+ * @example
+ * var prop1 = require('~/object').resolve(obj, 'data.myValue.prop1')
+ */
+exports.resolve = function (object, propertyString) {
+	var result = object;
+	var propPath = propertyString.split('.');
+
+	propPath.forEach(function(prop){
+		if(result && prop in result){
+			result = result[prop];
+		}else{
+			result = undefined;
+		}
+	});
+	return result;
+};
+
+/**
  * Returns an array containing all object values
  *
  * @param {Object} object
