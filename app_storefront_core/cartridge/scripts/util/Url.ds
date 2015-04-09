@@ -5,7 +5,7 @@
  * @param {PipelineDictionary} pdict the pipeline dictionary object of current request
  * @param {string} locale the locale
  */
-module.exports = function GetCurrentUrl(pdict, locale) {
+module.exports.getCurrent = function getCurrent(pdict, locale) {
 	var currentAction = pdict.CurrentSession.clickStream.last.pipelineName;
 	var siteId = dw.system.Site.getCurrent().getID();
 	if (!locale) {
