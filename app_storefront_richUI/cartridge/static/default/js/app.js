@@ -10,7 +10,7 @@
 
 var dialog = require('./dialog'),
 	minicart = require('./minicart'),
-	mulitcurrency = require('./multicurrency'),
+	multicurrency = require('./multicurrency'),
 	page = require('./page'),
 	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
@@ -177,7 +177,7 @@ var app = {
 		validator.init();
 		rating.init();
 		searchplaceholder.init();
-		mulitcurrency.init();
+		multicurrency.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
 		var ns = page.ns;
