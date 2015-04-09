@@ -13,7 +13,7 @@ var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/model/Form');
 var content = require('~/cartridge/scripts/model/Content');
 var address = content.get('myaccount-addresses');
-var addressForm = Form.get('address');
+var addressForm = Form.get('customeraddress');
 
 /**
  * List addresses in customer profile Input: (none)
@@ -64,7 +64,25 @@ function addForm() {
 
             response.redirect(dw.web.URLUtils.https('Address-List'));
             return;
-        }   
+        },
+        'edit'             : function (formgroup) {
+            if (!create())
+            {
+                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                return;
+            }
+            
+            if (request.httpParameterMap.format.stringValue == 'ajax')
+            {
+                response.renderJSON({
+                    success : true
+                });
+                return;
+            }
+
+            response.redirect(dw.web.URLUtils.https('Address-List'));
+            return;
+        }
     });
     
 

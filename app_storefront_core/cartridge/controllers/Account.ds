@@ -507,7 +507,7 @@ exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm)
 /** @see module:controller/Account~SetNewPasswordConfirm */
 exports.SetNewPasswordConfirm = guard.ensure(['get', 'https'], setNewPasswordConfirm);
 /** @see module:controller/Account~StartRegister */
-exports.StartRegister = guard.ensure(['get', 'https'], startRegister);
+exports.StartRegister = guard.ensure(['https'], startRegister);
 /** @see module:controller/Account~RegistrationForm */
 exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
 /** @see module:controller/Account~LoginForm */
