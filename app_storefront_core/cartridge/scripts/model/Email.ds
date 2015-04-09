@@ -21,6 +21,9 @@ var AbstractModel = require('./AbstractModel');
  *          Customer : Customer,
  *          ResetPasswordToken : ResetPasswordToken
  *     });
+ *
+ * @param {String} template The template which should be rendered and then be sent as email.
+ * @param {String} recipient The email address to which the text of the rendered template should be send.
  */
 var Email = AbstractModel.extend(
     /** @lends module:model/Email~Email.prototype */
@@ -35,17 +38,6 @@ var Email = AbstractModel.extend(
             var mail = this.object;
             mail.addTo(recipient);
             mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
-        },
-
-        /**
-         * Use this method to get a wrapped email instance.
-         *
-         * @param {String} template The template which should be rendered and then be sent as email.
-         * @param {String} recipient The email address to which the text of the rendered template should be send.
-         * @returns {module:model/Email~Email}
-         */
-        get : function (template, recipient) {
-            return new Email(template, recipient);
         },
 
         /**
@@ -84,5 +76,16 @@ var Email = AbstractModel.extend(
         }
     });
 
+/**
+ * Use this method to get a wrapped email instance.
+ *
+ * @param {String} template The template which should be rendered and then be sent as email.
+ * @param {String} recipient The email address to which the text of the rendered template should be send.
+ * @returns {module:model/Email~Email}
+ */
+Email.get = function (template, recipient) {
+    return new Email(template, recipient);
+};
+
 /** The cart class */
-module.exports = new Email();
+module.exports = Email;

@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * @module util/ProductVariationSelection
+ */
+
 var ArrayList = require('dw/util/ArrayList');
 var HashMap = require('dw/util/HashMap');
 var LinkedHashMap = require('dw/util/LinkedHashMap');
@@ -10,218 +14,219 @@ var FORM_SEPARATOR_CHAR = "_";
 /**
  * TODO
  *
- * @type {{getProductVariationSelections: Function}}
+ * @class module:util/ProductVariationSelection~ProductVariationSelection
  */
-var ProductVariationSelection = ({
+function ProductVariationSelection() {
 
-    /**
-     * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
-     * for one or multiple products. The function uses the given HttpParameterMap and so the request parameters do not
-     * have to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
-     * "{prefix_}{pid}_varAttrID={varAttrValueID}". A custom prefix can be set using the "optionalCustomPrefix" parameter.
-     * Otherwise, the default prefix "dwvar_" is used. {pid} is the product id. Example: "dwvar_PN00050_color=red". For
-     * each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
-     * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
-     * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
-     * with the product instance as the key and the ProductVariationModel as the value. For backwards compatibility reasons,
-     * the function accepts an optional Product instance as input parameter. The product may either be a master or a variant.
-     * If specified, the function returns the ProductVariationModel for this product as "ProductVariationModel" and also as
-     * element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant which matches
-     * the attributes selected in the HttpParameterMap as closely as possible. The matching product is returned under the
-     * key "SelectedProduct". If the passed product is neither a master or a variant, then the product itself is simply
-     * returned under the key "SelectedProduct". No value will be returned under the "SelectedProduct" key unless a Product
-     * instance was passed to the function.
-     *
-     * @param product {dw.catalog.Product} Optional master product or variant for which to process variation value selections.
-     * If nothing passed, then the system processes all HTTP request parameters in the current HttpParameterMap beginning with "dwvar_".
-     * @param parameterMap {dw.web.HttpParameterMap} Variation value selections as HTTP parameters.
-     * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwvar_" is assumed.
-     *
-     * @returns {{ProductVariationModels: dw.util.LinkedHashMap, ProductVariationModel: dw.catalog.ProductVariationModel, SelectedProduct: dw.catalog.Product}}
-     */
-    getProductVariationSelections : function (product, parameterMap, optionalCustomPrefix) {
-        var formPrefix = optionalCustomPrefix ? optionalCustomPrefix : "dwvar_";
+};
 
-        // create a new empty map for product option models
-        var productVariationModels = new LinkedHashMap();
-        var selectedProducts = new LinkedHashMap();
-        var selectedProduct = null;
-        var variationModel = null;
+/**
+ * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
+ * for one or multiple products. The function uses the given HttpParameterMap and so the request parameters do not
+ * have to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
+ * "{prefix_}{pid}_varAttrID={varAttrValueID}". A custom prefix can be set using the "optionalCustomPrefix" parameter.
+ * Otherwise, the default prefix "dwvar_" is used. {pid} is the product id. Example: "dwvar_PN00050_color=red". For
+ * each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
+ * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
+ * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
+ * with the product instance as the key and the ProductVariationModel as the value. For backwards compatibility reasons,
+ * the function accepts an optional Product instance as input parameter. The product may either be a master or a variant.
+ * If specified, the function returns the ProductVariationModel for this product as "ProductVariationModel" and also as
+ * element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant which matches
+ * the attributes selected in the HttpParameterMap as closely as possible. The matching product is returned under the
+ * key "SelectedProduct". If the passed product is neither a master or a variant, then the product itself is simply
+ * returned under the key "SelectedProduct". No value will be returned under the "SelectedProduct" key unless a Product
+ * instance was passed to the function.
+ *
+ * @param product {dw.catalog.Product} Optional master product or variant for which to process variation value selections.
+ * If nothing passed, then the system processes all HTTP request parameters in the current HttpParameterMap beginning with "dwvar_".
+ * @param parameterMap {dw.web.HttpParameterMap} Variation value selections as HTTP parameters.
+ * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwvar_" is assumed.
+ *
+ * @returns {{ProductVariationModels: dw.util.LinkedHashMap, ProductVariationModel: dw.catalog.ProductVariationModel, SelectedProduct: dw.catalog.Product}}
+ */
+ProductVariationSelection.getProductVariationSelections = function (product, parameterMap, optionalCustomPrefix) {
+    var formPrefix = optionalCustomPrefix ? optionalCustomPrefix : "dwvar_";
 
-        // get all form records for the prefix
-        var params = parameterMap.getParameterMap(formPrefix).getParameterNames();
+    // create a new empty map for product option models
+    var productVariationModels = new LinkedHashMap();
+    var selectedProducts = new LinkedHashMap();
+    var selectedProduct = null;
+    var variationModel = null;
 
-        var i;
-        for (i = 0; i < params.length; i++) {
-            var pid = "";
-            var pidPrefix = formPrefix;
-            var key = params[i];
+    // get all form records for the prefix
+    var params = parameterMap.getParameterMap(formPrefix).getParameterNames();
 
-            // loop through the string
-            var j = 0;
-            while (j < key.length) {
-                // a separator character?
-                if (key.charAt(j) === FORM_SEPARATOR_CHAR) {
-                    // a second following?
+    var i;
+    for (i = 0; i < params.length; i++) {
+        var pid = "";
+        var pidPrefix = formPrefix;
+        var key = params[i];
+
+        // loop through the string
+        var j = 0;
+        while (j < key.length) {
+            // a separator character?
+            if (key.charAt(j) === FORM_SEPARATOR_CHAR) {
+                // a second following?
+                j++;
+                if (j < key.length && key.charAt(j) === FORM_SEPARATOR_CHAR) {
                     j++;
-                    if (j < key.length && key.charAt(j) === FORM_SEPARATOR_CHAR) {
-                        j++;
-                        pid += FORM_SEPARATOR_CHAR;
-                    }
-                    // a single one
-                    else {
-                        pidPrefix += key.substring(0, j);
-                        break;
-                    }
+                    pid += FORM_SEPARATOR_CHAR;
                 }
+                // a single one
                 else {
-                    pid += key.charAt(j);
-                    j++;
+                    pidPrefix += key.substring(0, j);
+                    break;
                 }
             }
-
-            var variationProduct = ProductMgr.getProduct(pid);
-
-            if (variationProduct) {
-
-                if (!(variationProduct.isVariant() || variationProduct.isMaster() || variationProduct.isVariationGroup())) {
-                    continue;
-                }
-
-                productVariationModels.put(variationProduct, variationProduct.getVariationModel());
-                var size = parameterMap.getParameterMap(pidPrefix).getParameterCount();
-                if (parameterMap.getParameterMap(pidPrefix).getParameterCount() === 0) {
-                    continue;
-                }
-                selectedProducts.put(variationProduct, this.updateProductVariationSelection(variationProduct.getVariationModel(), variationProduct, parameterMap.getParameterMap(pidPrefix)));
+            else {
+                pid += key.charAt(j);
+                j++;
             }
         }
 
-        if (product) {
-            // do nothing if the product is not a master, variation product or variation group product
-            if (!(product.isVariant() || product.isMaster() || product.isVariationGroup())) {
+        var variationProduct = ProductMgr.getProduct(pid);
+
+        if (variationProduct) {
+
+            if (!(variationProduct.isVariant() || variationProduct.isMaster() || variationProduct.isVariationGroup())) {
+                continue;
+            }
+
+            productVariationModels.put(variationProduct, variationProduct.getVariationModel());
+            var size = parameterMap.getParameterMap(pidPrefix).getParameterCount();
+            if (parameterMap.getParameterMap(pidPrefix).getParameterCount() === 0) {
+                continue;
+            }
+            selectedProducts.put(variationProduct, this.updateProductVariationSelection(variationProduct.getVariationModel(), variationProduct, parameterMap.getParameterMap(pidPrefix)));
+        }
+    }
+
+    if (product) {
+        // do nothing if the product is not a master, variation product or variation group product
+        if (!(product.isVariant() || product.isMaster() || product.isVariationGroup())) {
+            selectedProduct = product;
+        }
+        else {
+            // try to get the variation model from the map
+            if (!productVariationModels.containsKey(product)) {
+                // no dwvar_pid for the current product defined get the variation model from product
+                variationModel = product.getVariationModel();
                 selectedProduct = product;
             }
             else {
-                // try to get the variation model from the map
-                if (!productVariationModels.containsKey(product)) {
-                    // no dwvar_pid for the current product defined get the variation model from product
-                    variationModel = product.getVariationModel();
-                    selectedProduct = product;
-                }
-                else {
-                    // store the variation model from the map in pipeline dictionary
-                    variationModel = productVariationModels.get(product);
-                    selectedProduct = selectedProducts.containsKey(product) ? selectedProducts.get(product) : product;
-                }
+                // store the variation model from the map in pipeline dictionary
+                variationModel = productVariationModels.get(product);
+                selectedProduct = selectedProducts.containsKey(product) ? selectedProducts.get(product) : product;
             }
         }
-
-        return {
-            ProductVariationModels : productVariationModels,
-            ProductVariationModel  : variationModel,
-            SelectedProduct        : selectedProduct
-        };
-    },
-
-    /**
-     * TODO
-     * @param variationModel
-     * @param product
-     * @param paramMap
-     * @returns {*}
-     */
-    updateProductVariationSelection : function (variationModel, product, paramMap) {
-        var selectedProduct = null;
-
-        // -----------------------------------------------------------------
-        // Now we parse and evaluate selection parameters
-        // -----------------------------------------------------------------
-
-        // 1. Get the http param for each variation attribute in the defined
-        // order
-        // stop if param for one attribute is not found
-        // we therefore enforce an order to select values
-        // map used to store attributes and their selections in a sorted order
-        var selections = new HashMap();
-
-        var var_attrs = variationModel.getProductVariationAttributes();
-        var var_attrs_it = var_attrs.iterator();
-        while (var_attrs_it.hasNext()) {
-            var attr = var_attrs_it.next();
-
-            var httpParam = paramMap.get(attr.getID());
-            if (!httpParam) {
-                // continue with the next attribute see APP-15154
-                continue;
-            }
-            var value = httpParam.getStringValue();
-            if (!value || value.length < 1) {
-                // continue with the next attribute see APP-15154
-                continue;
-            }
-            selections.put(attr.getID(), value);
-        }
-
-        // 2. If we got a value selection for ALL attributes, let's try to
-        // find a variant that fits this combination
-        if (selections.size() === var_attrs.size()) {
-            var variants = variationModel.getVariants(selections);
-            if (!variants.isEmpty()) {
-                // We are done here! Let's select the first variant on the model
-                // and return the model and the variant
-                var firstMatch = variants.iterator().next();
-
-                // TODO - selectVariant function not available
-                //variationModel.selectVariant(firstMatch);
-
-                return firstMatch;
-            }
-        }
-
-        // since a variation model is pre-selected with its variant
-        // we want to explicitely unset this selection, since we haven't
-        // found a variant
-
-        // TODO - unselectVariant function not available
-        //variationModel.unselectVariant();
-
-        // since we did not find a matching product, we can put the product
-        // master into the dictionary
-        if (product.isVariant()) {
-            selectedProduct = product.getVariationModel().getMaster();
-        }
-        else {
-            selectedProduct = product;
-        }
-
-        // 3. Now let's try to get at least one variant for the selections.
-        // If no variant is found, delete the last attribute from the
-        // selections list and try again. We do this until we found
-        // at a valid variant
-        var remaining_attr_ids = new ArrayList(selections.keySet());
-        var i = remaining_attr_ids.size();
-
-        while (i > 0) {
-            var variants = variationModel.getVariants(selections);
-            if (!variants.isEmpty()) // found one!
-            {
-                break;
-            }
-            selections.remove(remaining_attr_ids.get(i - 1));
-            i -= 1;
-        }
-
-        // 4. Select the variation attributes for which we found a variant
-        var remaining_attrs = selections.keySet().iterator();
-        while (remaining_attrs.hasNext()) {
-            var remaining_attr = remaining_attrs.next();
-
-            // TODO - selectAttributeValue function not available
-            //variationModel.selectAttributeValue(remaining_attr, selections.get(remaining_attr));
-        }
-        return selectedProduct;
     }
-});
+
+    return {
+        ProductVariationModels : productVariationModels,
+        ProductVariationModel  : variationModel,
+        SelectedProduct        : selectedProduct
+    };
+};
+
+/**
+ * TODO
+ * @param variationModel
+ * @param product
+ * @param paramMap
+ * @returns {*}
+ */
+ProductVariationSelection.updateProductVariationSelection = function (variationModel, product, paramMap) {
+    var selectedProduct = null;
+
+    // -----------------------------------------------------------------
+    // Now we parse and evaluate selection parameters
+    // -----------------------------------------------------------------
+
+    // 1. Get the http param for each variation attribute in the defined
+    // order
+    // stop if param for one attribute is not found
+    // we therefore enforce an order to select values
+    // map used to store attributes and their selections in a sorted order
+    var selections = new HashMap();
+
+    var var_attrs = variationModel.getProductVariationAttributes();
+    var var_attrs_it = var_attrs.iterator();
+    while (var_attrs_it.hasNext()) {
+        var attr = var_attrs_it.next();
+
+        var httpParam = paramMap.get(attr.getID());
+        if (!httpParam) {
+            // continue with the next attribute see APP-15154
+            continue;
+        }
+        var value = httpParam.getStringValue();
+        if (!value || value.length < 1) {
+            // continue with the next attribute see APP-15154
+            continue;
+        }
+        selections.put(attr.getID(), value);
+    }
+
+    // 2. If we got a value selection for ALL attributes, let's try to
+    // find a variant that fits this combination
+    if (selections.size() === var_attrs.size()) {
+        var variants = variationModel.getVariants(selections);
+        if (!variants.isEmpty()) {
+            // We are done here! Let's select the first variant on the model
+            // and return the model and the variant
+            var firstMatch = variants.iterator().next();
+
+            // TODO - selectVariant function not available
+            //variationModel.selectVariant(firstMatch);
+
+            return firstMatch;
+        }
+    }
+
+    // since a variation model is pre-selected with its variant
+    // we want to explicitely unset this selection, since we haven't
+    // found a variant
+
+    // TODO - unselectVariant function not available
+    //variationModel.unselectVariant();
+
+    // since we did not find a matching product, we can put the product
+    // master into the dictionary
+    if (product.isVariant()) {
+        selectedProduct = product.getVariationModel().getMaster();
+    }
+    else {
+        selectedProduct = product;
+    }
+
+    // 3. Now let's try to get at least one variant for the selections.
+    // If no variant is found, delete the last attribute from the
+    // selections list and try again. We do this until we found
+    // at a valid variant
+    var remaining_attr_ids = new ArrayList(selections.keySet());
+    var i = remaining_attr_ids.size();
+
+    while (i > 0) {
+        var variants = variationModel.getVariants(selections);
+        if (!variants.isEmpty()) // found one!
+        {
+            break;
+        }
+        selections.remove(remaining_attr_ids.get(i - 1));
+        i -= 1;
+    }
+
+    // 4. Select the variation attributes for which we found a variant
+    var remaining_attrs = selections.keySet().iterator();
+    while (remaining_attrs.hasNext()) {
+        var remaining_attr = remaining_attrs.next();
+
+        // TODO - selectAttributeValue function not available
+        //variationModel.selectAttributeValue(remaining_attr, selections.get(remaining_attr));
+    }
+    return selectedProduct;
+}
 
 module.exports = ProductVariationSelection;

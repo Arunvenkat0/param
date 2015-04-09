@@ -110,7 +110,11 @@ var Filters = {
     /** Action must only be accessed authenticated csutomers */
     loggedIn : function() {return customer.authenticated;},
     /** Action must only be used as remote include */
-    include : function() {return true;}
+    include : function() {
+        // the main request will be something like kjhNd1UlX_80AgAK-0-00, all includes
+        // have incremented trailing counters
+        return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
+    }
 };
 
 

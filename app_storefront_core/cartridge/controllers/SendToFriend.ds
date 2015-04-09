@@ -1,12 +1,16 @@
-var g = require('./dw/guard');
+'use strict';
+
+/** @module controllers/SendToFriend */
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
 
 /**
  * SendToFriend allows the use of dialog to gather email info to send to a
  * friend. A template that uses this dialog can set some of the values ahead of
  * time. Please look at wishlist.isml or registry.isml
  */
-function Start()
-{
+function Start() {
     // TODO when embedded in a product page without https, the feature does not work
     // because the customer is not known and anonymous
     // seems to be cause by JavaScript dialogs which do not sent HTTP cookies correctly
@@ -14,16 +18,12 @@ function Start()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var sendToFriendForm = session.forms.sendtofriend;
 
-
-    var form = require('./dw/form');
-    form.clearFormElement(sendToFriendForm);
-
+    session.forms.sendtofriend.clearFormElement();
 
     var Product = null;
     var ProductOptionModel = null;
 
-    if (CurrentHttpParameterMap.pid.stringValue)
-    {
+    if (CurrentHttpParameterMap.pid.stringValue) {
         Product = dw.catalog.ProductMgr.getProduct(CurrentHttpParameterMap.pid);
 
         var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
@@ -31,7 +31,6 @@ function Start()
         });
         ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
     }
-
 
     // TODO not needed by template?
     /*
@@ -43,15 +42,13 @@ function Start()
      * GetProductListResult.ProductList; }
      */
 
-    if (customer.authenticated)
-    {
+    if (customer.authenticated) {
         sendToFriendForm.yourname.htmlValue = customer.profile.firstName + " " + customer.profile.lastName;
     }
 
-
     response.renderTemplate('account/components/sendtofrienddialog', {
-        ViewMode : 'Edit',
-        Product : Product,
+        ViewMode           : 'Edit',
+        Product            : Product,
         ProductOptionModel : ProductOptionModel
     });
 }
@@ -59,51 +56,43 @@ function Start()
 /**
  * The form handler.
  */
-function SendToFriendForm()
-{
+function SendToFriendForm() {
     // TODO this should end in some redirect
     // but sometimes this is called with GET and not with POST
     var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        if (TriggeredAction.formId == 'edit')
-        {
+    if (TriggeredAction != null) {
+        if (TriggeredAction.formId == 'edit') {
             response.renderTemplate('account/components/sendtofrienddialog', {
                 ViewMode : 'Edit'
             });
             return;
         }
-        else if (TriggeredAction.formId == 'preview')
-        {
+        else if (TriggeredAction.formId == 'preview') {
             var pid = request.httpParameterMap.pid;
 
             var sendToFriendForm = session.forms.sendtofriend;
 
-            if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value)
-            {
-                var form = require('./dw/form');
-                form.invalidateFormElement(sendToFriendForm.confirmfriendsemail);
+            if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value) {
+                sendToFriendForm.confirmfriendsemail.invalidateFormElement();
             }
 
             var Product = null;
             var ProductOptionModel = null;
 
-            if (typeof (pid) != 'undefined' && pid != null)
-            {
+            if (typeof (pid) != 'undefined' && pid != null) {
                 var GetProductResult = getProduct(pid);
                 Product = GetProductResult.Product;
                 ProductOptionModel = GetProductResult.ProductOptionModel;
             }
 
             response.renderTemplate('account/components/sendtofrienddialog', {
-                ViewMode : 'preview',
-                Product : Product,
+                ViewMode           : 'preview',
+                Product            : Product,
                 ProductOptionModel : ProductOptionModel
             });
             return;
         }
-        else if (TriggeredAction.formId == 'send')
-        {
+        else if (TriggeredAction.formId == 'send') {
             send();
             return;
         }
@@ -111,28 +100,24 @@ function SendToFriendForm()
 
     // TODO what is this?
     /*
-    if (session.forms.sendtofriend.valid)
-    {
-        send();
-        return;
-    }
-    */
-
+     if (session.forms.sendtofriend.valid)
+     {
+     send();
+     return;
+     }
+     */
 
     // TODO view mode?
     response.renderTemplate('account/components/sendtofrienddialog');
 }
 
-
-function send()
-{
+function send() {
     var CurrentHttpParameterMap = request.httpParameterMap;
     var pid = request.httpParameterMap.pid;
 
     var sendToFriendForm = session.forms.sendtofriend;
 
-    if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value)
-    {
+    if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value) {
         var form = require('./dw/form');
         form.invalidateFormElement(sendToFriendForm.confirmfriendsemail);
 
@@ -145,34 +130,28 @@ function send()
      * Product List Email
      */
     // TODO where should this come from? plid?
-    if (typeof (ProductList) != 'undefined' && ProductList != null)
-    {
+    if (typeof (ProductList) != 'undefined' && ProductList != null) {
         var m = require('./dw/mail');
         m.sendMail({
-            MailFrom : customer.profile.email,
-            MailSubjet : sendToFriendForm.subject.value,
+            MailFrom     : customer.profile.email,
+            MailSubjet   : sendToFriendForm.subject.value,
             MailTemplate : "mail/productlist",
-            MailTo : sendToFriendForm.friendsemail.value
+            MailTo       : sendToFriendForm.friendsemail.value
         });
 
-
-        if (empty(CurrentHttpParameterMap.format.stringValue))
-        {
-            if (empty(ProductList.eventCity))
-            {
+        if (empty(CurrentHttpParameterMap.format.stringValue)) {
+            if (empty(ProductList.eventCity)) {
                 var WishlistController = require('./Wishlist');
                 WishlistController.Show();
                 return;
             }
-            else
-            {
+            else {
                 var GiftRegistryController = require('./GiftRegistry');
                 GiftRegistryController.ShowRegistry();
                 return;
             }
         }
-        else
-        {
+        else {
             response.renderTemplate('account/components/sendtofrienddialogsuccess', {
                 ViewMode : 'edit'
             });
@@ -183,64 +162,55 @@ function send()
     /*
      * Product Email
      */
-    if (typeof (pid) != 'undefined' && pid != null)
-    {
+    if (typeof (pid) != 'undefined' && pid != null) {
         var GetProductResult = getProduct(pid);
         var CurrentCustomer = customer;
-        
+
         var m = require('./dw/mail');
         m.sendMail({
-            MailFrom : customer.profile.email,
-            MailSubject : sendToFriendForm.subject.value,
+            MailFrom     : customer.profile.email,
+            MailSubject  : sendToFriendForm.subject.value,
             MailTemplate : "mail/product",
-            MailTo : sendToFriendForm.friendsemail.value
+            MailTo       : sendToFriendForm.friendsemail.value
         });
 
-
-        if (empty(CurrentHttpParameterMap.format.stringValue))
-        {
+        if (empty(CurrentHttpParameterMap.format.stringValue)) {
             var ProductController = require('./Product');
             ProductController.Show();
             return;
         }
     }
-    else
-    {
+    else {
         /*
          * Default
          */
         var m = require('./dw/mail');
         m.sendMail({
-            MailFrom : customer.profile.email,
-            MailSubject : sendToFriendForm.subject.value,
+            MailFrom     : customer.profile.email,
+            MailSubject  : sendToFriendForm.subject.value,
             MailTemplate : "mail/productlistdefault",
-            MailTo : sendToFriendForm.friendsemail.value
+            MailTo       : sendToFriendForm.friendsemail.value
         });
     }
-
 
     response.renderTemplate('account/components/sendtofrienddialogsuccess', {
         ViewMode : 'edit'
     });
 }
 
-
 /**
  * Get a product and any product options that have been selected.
  */
-function getProduct(pid)
-{
+function getProduct(pid) {
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
         ProductID : pid.stringValue
     });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
+    if (GetProductResult.result == PIPELET_ERROR) {
         return {
             error : true
         };
     }
     var Product = GetProductResult.Product;
-
 
     var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
         Product : Product
@@ -248,22 +218,20 @@ function getProduct(pid)
     var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
 
     return {
-        Product : Product,
+        Product            : Product,
         ProductOptionModel : ProductOptionModel
     };
 }
-
 
 /**
  * This pipeline is used to ensure that storefront users using the send to a
  * friend feature are logged in
  */
-function Login()
-{
+function Login() {
     var accountController = require('./Account');
     accountController.requireLogin({
-        TargetAction : 'SendToFriend-Start',
-        TargetParameters : [ 'pid', request.httpParameterMap.pid.stringValue ]
+        TargetAction     : 'SendToFriend-Start',
+        TargetParameters : ['pid', request.httpParameterMap.pid.stringValue]
     });
 }
 
@@ -274,8 +242,9 @@ function Login()
 /*
  * Web exposed methods
  */
-exports.Start = g.httpsGet(Start);
-
-// TODO rich UI uses GET, normal UI uses POST
-exports.SendToFriendForm = g.https(SendToFriendForm);
-exports.Login = g.httpsGet(Login);
+/** @see module:controllers/SendToFriend~Start */
+exports.Start = guard.ensure(['https', 'get'], Start);
+/** @see module:controllers/SendToFriend~SendToFriendForm */
+exports.SendToFriendForm = guard.ensure(['https'], SendToFriendForm);
+/** @see module:controllers/SendToFriend~Login */
+exports.Login = guard.ensure(['https'], Login);

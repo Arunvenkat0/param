@@ -10,6 +10,7 @@ var PaymentMgr = require('dw/order/PaymentMgr');
  * Demandware platform.
  *
  * @class module:model/PaymentProcessor~PaymentProcessor
+ * @extends module:util/Class
  */
 var PaymentProcessor = Class.extend({
     /** @lends module:model/PaymentProcessor~PaymentProcessor.prototype */

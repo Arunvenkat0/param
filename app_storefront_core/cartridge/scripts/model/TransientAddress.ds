@@ -4,13 +4,13 @@
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var CustomerAddress = require('dw/customer/CustomerAddress');
 
-/**
+/*
  * All system address fields
  * @type {Array}
  */
 var ADDRESS_FIELDS = require('~/cartridge/scripts/config').address.fields;
 
-/**
+/*
  * Internal helper to call all address fields from "from" to "to"
  * @param  {Object} from The object providing the address fields to copy
  * @param  {Object} to   The object the fields are copied to
@@ -32,6 +32,7 @@ function copyFields(from, to){
  * Transient representation of an address.
  *
  * @class module:model/TransientAddress~TransientAddress
+ * @extends module:util/Class
  */
 var TransientAddress = Class.extend(
 /** @lends module:model/TransientAddress~TransientAddress.prototype */

@@ -7,24 +7,13 @@ var AbstractModel = require('./AbstractModel');
 /**
  * Product helper providing enhanced product functionality
  * @class module:model/Product~Product
+ * @extends module:model/AbstractModel
+ *
+ * @param {dw.catalog.Product} obj The product object to enhance/wrap.
  */
 var Product = AbstractModel.extend(
     /** @lends module:model/Product~Product.prototype */
     {
-        /**
-         * Use this method to get a new instance for a given product or product ID.
-         */
-        get : function (parameter) {
-            var obj = null;
-            if (typeof parameter === 'string') {
-                obj = dw.catalog.ProductMgr.getProduct(parameter);
-            }
-            else if (typeof parameter === 'object') {
-                obj = parameter;
-            }
-            return new Product(obj);
-        },
-
         /**
          * Return the default variant or the first variant if none defined
          *
@@ -256,5 +245,22 @@ var Product = AbstractModel.extend(
 
     });
 
+/**
+ * Use this method to get a new instance for a given product or product ID.
+ *
+ * @param parameter {(dw.catalog.Product|String)} The product object to enhance/wrap or the product ID of the product object.
+ * @returns {module:model/Product~Product}
+ */
+Product.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'string') {
+        obj = dw.catalog.ProductMgr.getProduct(parameter);
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new Product(obj);
+};
+
 /** The product class */
-module.exports = new Product();
+module.exports = Product;
