@@ -1,6 +1,9 @@
-@import "normalize";
-// @import "icomoon";
 @import "variables";
+
+// lib
+@import "lib/normalize";
+@import "lib/flag-icon-css/flag-icon";
+
 @import "base_elements";
 @import "page_layouts";
 @import "jqueryui";
