@@ -271,7 +271,7 @@ exports.editAccount = function ()
         return false;
     }
 	
-    if (!Form.get(profileForm.customer).copyFrom(customer.profile()))
+    if (!Form.get(profileForm.customer).copyFrom(customer.profile))
     {
         Transaction.rollback();
         return false;
