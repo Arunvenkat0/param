@@ -26,7 +26,7 @@ exports.handlers = {
         // make E4X parsable (code becomes unusable but for doc generation OK)
         e.source = e.source.replace(/::\[/g,'[').replace(/::/g,'');
         // remove for each loops
-        e.source = e.source.replace(/for each ?\(/g,'for');
+        e.source = e.source.replace(/for each\s?\(/g,'for (');
     },
     newDoclet : function(e) {
         var params = e.doclet.params;
