@@ -92,7 +92,7 @@ function editForm()
             return;
         },
         'confirm'             : function (formgroup) {
-           if (Account.editAccount())
+           if (Customer.editAccount())
             {
                 // success
                 response.redirect(dw.web.URLUtils.https('Account-Show'));
