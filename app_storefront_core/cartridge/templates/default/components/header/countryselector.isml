@@ -3,7 +3,7 @@
 	var Countries = require('~/cartridge/scripts/util/Countries');
 	var Url = require('~/cartridge/scripts/util/Url');
 	var countries = Countries.getCountries();
-	var currentCountry = Countries.getCurrentCountry(pdict);
+	var currentCountry = Countries.getCurrent(pdict);
 </isscript>
 <select class="country-selector">
 	<isloop items="${countries}" var="country">

@@ -28,7 +28,7 @@ module.exports.getCountries = function getCountries() {
  * @param {PipelineDictionary} pdict the current pdict object
  * @return {object} country the object containing the country's settings
  */
-module.exports.getCurrentCountry = function getCurrentCountry(pdict) {
+module.exports.getCurrent = function getCurrent(pdict) {
 	var currentLocale = dw.util.Locale.getLocale(pdict.CurrentRequest.locale);
 	var country;
 	if (!currentLocale) {
