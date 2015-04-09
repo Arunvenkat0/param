@@ -9,6 +9,6 @@
 	<isloop items="${countries}" var="country">
 		<isset name="locale" value="${country.locales[0]}" scope="page">
 		<isset name="currentLocale" value="${pdict.CurrentRequest.locale === locale ? 'selected' : ''}" scope="page">
-		<option data-href="${Url.getCurrent(pdict, locale)}" ${currentLocale} value="${locale}">${country.name[locale]}</option>
+		<option data-href="${Url.getCurrent(pdict, locale)}" data-currency="${country.currencyCode}" ${currentLocale} value="${locale}">${country.name[locale]}</option>
 	</isloop>
 </select>

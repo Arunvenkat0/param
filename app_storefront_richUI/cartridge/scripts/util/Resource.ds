@@ -38,7 +38,7 @@ function ResourceHelper() {}
 
 			// Registry resources
 			REG_ADDR_ERROR 					: Resource.msg('global.couldntloadaddress', 'locale', null),
-			
+
          	// bonus products messages
 			BONUS_PRODUCT 					: Resource.msg('product.bonusproduct', 'product', null),
 			BONUS_PRODUCTS 					: Resource.msg('product.bonusproducts', 'product', null),
@@ -48,7 +48,7 @@ function ResourceHelper() {}
 			BONUS_PRODUCT_TOOMANY 			: Resource.msg('product.bonusproductstoomany', 'product', null),
 			SIMPLE_SEARCH 					: Resource.msg('simplesearch.searchtext', 'search', null),
 			SUBSCRIBE_EMAIL_DEFAULT			: Resource.msg('subscribe.email.default', 'forms', 'Email Address'),
-			
+
 			CURRENCY_SYMBOL					: dw.util.Currency.getCurrency(dw.system.Site.current.getDefaultCurrency()).symbol,
 			MISSINGVAL						: Resource.msg('global.missingval', 'locale', null),
 			SERVER_ERROR 					: Resource.msg('global.servererror', 'locale', null),
@@ -168,7 +168,7 @@ function ResourceHelper() {}
 			setZipCode					: URLUtils.url('StoreInventory-SetZipCode').toString(),
 			getZipCode					: URLUtils.url('StoreInventory-GetZipCode').toString(),
 			billing						: URLUtils.url('COBilling-Start').toString(),
-			currencyConverter			: URLUtils.url('Currency-SetSessionCurrency').toString(),
+			setSessionCurrency			: URLUtils.url('Currency-SetSessionCurrency').toString(),
 			addEditAddress				: URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
 			cookieHint 					: URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString()
 		};

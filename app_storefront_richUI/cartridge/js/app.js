@@ -7,7 +7,8 @@
 
 'use strict';
 
-var dialog = require('./dialog'),
+var countries = require('./countries'),
+	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	multicurrency = require('./multicurrency'),
 	page = require('./page'),
@@ -171,6 +172,7 @@ var app = {
 		initializeEvents();
 
 		// init specific global components
+		countries.init();
 		tooltip.init();
 		minicart.init();
 		validator.init();
