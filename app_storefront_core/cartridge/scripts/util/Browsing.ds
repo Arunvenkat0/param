@@ -10,9 +10,8 @@
  */
 exports.lastUrl  = function lastUrl() {
 	var location = dw.web.URLUtils.url('Home-Show');
-	var clicks = session.clickStream.clicks;
-	if (clicks.size() > 0) {
-		var click = clicks.last;
+	var click = session.clickStream.last;
+	if (click) {
 		location = dw.web.URLUtils.url(click.pipelineName);
 		if(!empty(click.queryString) && click.queryString.indexOf('=')!== -1){
 			var params = click.queryString.split('&');
