@@ -21,13 +21,18 @@ var LOGGER   = dw.system.Logger.getLogger('guard');
 /**
  * This method contains the login to handle a not logged in customer
  */
-function requireLogin()
+function requireLogin(params)
 {
     if(customer.authenticated){
         return true;
     }
+    var redirectUrl = dw.web.URLUtils.https('Login-Show','original', browsing.lastUrl());
 
-    response.redirect(dw.web.URLUtils.https('Login-Show','original', browsing.lastUrl()));
+    if(params && params.scope){
+        redirectUrl.append('scope', params.scope);
+    }
+
+    response.redirect(redirectUrl);
     return false;
 }
 
@@ -123,9 +128,10 @@ var Filters = {
  *
  * @param  {string[]} filters The filters which need to be passed to access the page
  * @param  {function} action  The action which represents the resource to show
+ * @param  {Object}   params  Additional parameters which are passed to all filters and the action
  * @see module:guard~Filters
  */
-function ensure (filters, action) {
+function ensure (filters, action, params) {
     return expose(function() {
         var error;
         var filtersPassed = true;
@@ -156,10 +162,10 @@ function ensure (filters, action) {
 
         if (filtersPassed) {
             LOGGER.info('...passed.');
-            return action();
+            return action(params);
         } else {
             LOGGER.info('...failed. {0}',error.name);
-            return error();
+            return error(params);
         }
     });
 

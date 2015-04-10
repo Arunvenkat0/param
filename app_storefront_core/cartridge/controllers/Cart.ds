@@ -124,13 +124,13 @@ function submitForm() {
         },
         'login'                 : function (formgroup) {
             // TODO should not be processed here at all
-            var ProcessResult = require('./Login').Process();
+            var success = require('./Login').Process();
 
-            if (ProcessResult.loginSucceeded) {
+            if (success) {
                 response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
                 return null;
             }
-            else if (ProcessResult.loginFailed) {
+            else if (!success) {
                 return {cart : cart};
             }
         },
@@ -497,7 +497,7 @@ exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controllers/Cart~miniCart */
 exports.MiniCart = guard.ensure(['get'], miniCart);
 /** @see module:controllers/Cart~addToWishlist */
-exports.AddToWishlist = guard.ensure(['get', 'https','loggedIn'], addToWishlist);
+exports.AddToWishlist = guard.ensure(['get', 'https','loggedIn'], addToWishlist, { scope : 'wishlist' });
 /** @see module:controllers/Cart~addBonusProductJson */
 exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
 

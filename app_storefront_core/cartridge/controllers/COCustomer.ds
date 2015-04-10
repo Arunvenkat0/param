@@ -33,7 +33,7 @@ function start() {
     session.forms.billing.clearFormElement();
 
     Transaction.wrap(function () {
-        Cart.goc().removeAllPaymentInstruments;
+        Cart.goc().removeAllPaymentInstruments();
     });
 
     // Direct to first checkout step if already authenticated
@@ -50,7 +50,9 @@ function start() {
         }
 
         pageMeta.update(loginAsset);
-        view.get().render('checkout/checkoutlogin');
+        view.get({
+            ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
+        }).render('checkout/checkoutlogin');
     }
 
 }
@@ -62,9 +64,8 @@ function showLoginForm() {
     var formResult = loginForm.handleAction({
         'login'        : function (formgroup) {
             // Delegate login to appropriate authentication pipeline and react on success/failure
-            var loginResult = require('./Login').Process();
-
-            if (loginResult.login_succeeded) {
+            // @TODO find better solution
+            if (require('./Login').Process()) {
                 response.redirect(dw.web.URLUtils.https('COShipping-Start'));
                 return;
             }
@@ -87,7 +88,9 @@ function showLoginForm() {
 
     if (formResult) {
         pageMeta.update(loginAsset);
-        view.get().render('checkout/checkoutlogin');
+        view.get({
+            ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
+        }).render('checkout/checkoutlogin');
     }
 }
 

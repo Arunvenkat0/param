@@ -39,9 +39,19 @@ function show()
 
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
-    view.get('views/LoginView',{
+    var v = view.get('views/LoginView',{
         RegistrationStatus : false
-    }).render();
+    });
+    if(request.httpParameterMap.scope.submitted){
+        switch(request.httpParameterMap.scope.stringValue){
+            case 'wishlist':
+                // @TODO update metadata for wishlist login
+                v.template = 'account/wishlist/wishlistlanding';
+                break;
+            default:
+        }
+    }
+    v.render();
 }
 
 /**
@@ -194,16 +204,6 @@ function process()
         }
         return success;
     }
-}
-
-/**
- * @deprecated Only kept until all controllers are migrated
- */
-function oldProcess()
-{
-    return {
-        login_succeeded : process()
-    };
 }
 
 function oAuthFailed()
@@ -479,4 +479,4 @@ exports.Logout                  = guard.all(Logout);
 /*
  * Local methods
  */
-exports.Process                 = oldProcess;
+exports.Process                 = process;

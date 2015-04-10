@@ -244,13 +244,13 @@ function replaceProductListItem() {
  */
 // own wishlist
 /** @see module:controllers/Whishlist~Add */
-exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, { scope : 'wishlist' });
 /** @see module:controllers/Whishlist~Show */
-exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, { scope : 'wishlist' });
 /** @see module:controllers/Whishlist~ReplaceProductListItem */
-exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem);
+exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, { scope : 'wishlist' });
 /** @see module:controllers/Whishlist~SetShippingAddress */
-exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress);
+exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, { scope : 'wishlist' });
 
 // others wishlist
 /** @see module:controllers/Whishlist~Search */
@@ -262,4 +262,4 @@ exports.ShowOther               = guard.ensure(['get', 'https'], showOther);
 /** @see module:controllers/Whishlist~LandingForm */
 exports.LandingForm             = guard.ensure(['post', 'https'], landingForm);
 /** @see module:controllers/Whishlist~WishListForm */
-exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm);
+exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, { scope : 'wishlist' });
