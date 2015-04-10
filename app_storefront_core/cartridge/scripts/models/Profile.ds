@@ -95,52 +95,54 @@ var Profile = AbstractModel.extend(
          * This script attempts to add the given address to the address book of the current profile. The address
          * attribute "city" is used to generate the address ID within the address book.
          *
+         * @transactional
          * @param addressToAdd
          * @returns {*}
          */
         addAddressToAddressBook : function (addressToAdd) {
-
             var addressBook = this.getAddressBook();
+            // get a possible equivalent address from the address book
+            var address = null;
+            var that    = this;
 
-            if (addressToAdd) {
-                // get a possible equivalent address from the address book
-                var address = null;
-
-                for (var i = 0; i < addressBook.addresses.length; i++) {
-                    address = addressBook.addresses[i];
-                    if (address.isEquivalentAddress(addressToAdd)) {
-                        break;
+            dw.system.Transaction.wrap(function(){
+                if (addressToAdd) {
+                    for (var i = 0; i < addressBook.addresses.length; i++) {
+                        address = addressBook.addresses[i];
+                        if (address.isEquivalentAddress(addressToAdd)) {
+                            break;
+                        }
                     }
+
+                    // create the new address, if no equivalent address was found
+                    // and copy the address attributes
+                    if (address === null) {
+                        // get a unique address ID
+                        var addressID = that.determineUniqueAddressID(addressToAdd.city);
+
+                        // check on empty address ID
+                        if (!addressID) {
+                            dw.system.Logger.debug("Cannot add address to address book, with empty address ID.");
+                            return;
+                        }
+                        else {
+                            address = addressBook.createAddress(addressID);
+                            address.setFirstName(addressToAdd.firstName);
+                            address.setLastName(addressToAdd.lastName);
+                            address.setAddress1(addressToAdd.address1);
+                            address.setAddress2(addressToAdd.address2);
+                            address.setCity(addressToAdd.city);
+                            address.setPostalCode(addressToAdd.postalCode);
+                            address.setStateCode(addressToAdd.stateCode);
+                            address.setCountryCode(addressToAdd.countryCode.value);
+                        }
+                    }
+
+                    // update the phone in either the equivalent found address
+                    // or in the newly created address
+                    address.setPhone(addressToAdd.phone);
                 }
-
-                // create the new address, if no equivalent address was found
-                // and copy the address attributes
-                if (address == null) {
-                    // get a unique address ID
-                    var addressID = this.determineUniqueAddressID(addressToAdd.city);
-
-                    // check on empty address ID
-                    if (!addressID) {
-                        Logger.debug("Cannot add address to address book, with empty address ID.");
-                        return;
-                    }
-                    else {
-                        address = addressBook.createAddress(addressID);
-                        address.setFirstName(addressToAdd.firstName);
-                        address.setLastName(addressToAdd.lastName);
-                        address.setAddress1(addressToAdd.address1);
-                        address.setAddress2(addressToAdd.address2);
-                        address.setCity(addressToAdd.city);
-                        address.setPostalCode(addressToAdd.postalCode);
-                        address.setStateCode(addressToAdd.stateCode);
-                        address.setCountryCode(addressToAdd.countryCode.value);
-                    }
-                }
-
-                // update the phone in either the equivalent found address
-                // or in the newly created address
-                address.setPhone(addressToAdd.phone);
-            }
+            });
 
             return address;
         },
