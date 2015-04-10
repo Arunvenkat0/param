@@ -326,17 +326,11 @@ function miniCart() {
  */
 function addToWishlist() {
     var productID = request.httpParameterMap.pid.stringValue;
+    var product = Product.get(productID).object;
+    var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-    if (!customer.authenticated) {
-        // login via the wishlist login page, but return here
-        require('./Wishlist').requireLogin({
-            TargetAction     : 'Cart-AddToWishlist',
-            TargetParameters : ['pid', productID]
-        });
-        return;
-    }
-
-    require('./Wishlist').AddProduct();
+    var productList = require('~/cartridge/scripts/models/ProductList').get();
+    productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
     view.get('views/CartView', {
         cart                   : Cart.get(),
@@ -411,7 +405,7 @@ function addBonusProductJson() {
         if (lineItem && product) {
             if (product.isBundle()) {
 
-                var childPids = productsJSON[i].childPids.split(",");
+                var childPids = productsJSON[i].childPids.split(',');
 
                 for (var j = 0; j < childPids.length; j++) {
                     var childProduct = Product.get(childPids[j]).object;
@@ -503,7 +497,7 @@ exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** @see module:controllers/Cart~miniCart */
 exports.MiniCart = guard.ensure(['get'], miniCart);
 /** @see module:controllers/Cart~addToWishlist */
-exports.AddToWishlist = guard.ensure(['get', 'https'], addToWishlist);
+exports.AddToWishlist = guard.ensure(['get', 'https','loggedIn'], addToWishlist);
 /** @see module:controllers/Cart~addBonusProductJson */
 exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
 

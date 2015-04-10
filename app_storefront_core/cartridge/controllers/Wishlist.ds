@@ -135,41 +135,23 @@ function showOther() {
     }).render('account/wishlist/wishlist');
 }
 
-
 /**
- * Expects: Product or ProductID or pid
+ * Uses request parameters to add a product
  */
-// this is called from the cart
 function addProduct() {
-    var currentHttpParameterMap = request.httpParameterMap;
-
-
-    // TODO var Product = args.Product;
     var product = Product.get(request.httpParameterMap.pid.stringValue).object;
     var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
     var productList = ProductList.get();
-
-	productList.addProduct(product, currentHttpParameterMap.Quantity.doubleValue, productOptionModel);
-
-
-    return {
-        ok : true
-    };
+    productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue || 1, productOptionModel);
 }
-
 
 /**
  * Adds a product given by the http parameter "pid" to the wishlist and displays
  * the updated wishlist.
  */
 function add() {
-    var product = Product.get(request.httpParameterMap.pid.stringValue).object;
-    var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
-
-    var productList = ProductList.get();
-    productList.addProduct(product, 1, productOptionModel);
-
+    addProduct();
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
@@ -230,7 +212,6 @@ function setShippingAddress() {
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
-
 /**
  * Replaces an item in the wish list.
  */
@@ -246,9 +227,7 @@ function replaceProductListItem() {
 
         Transaction.wrap(function () {
             ProductList.removeItem(productListItem);
-
-	        // TODO ProductList already resolved
-	        var result = addProduct();
+            addProduct();
         });
     }
 
@@ -284,8 +263,3 @@ exports.ShowOther               = guard.ensure(['get', 'https'], showOther);
 exports.LandingForm             = guard.ensure(['post', 'https'], landingForm);
 /** @see module:controllers/Whishlist~WishListForm */
 exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm);
-
-/*
- * Local methods
- */
-exports.AddProduct              = addProduct;

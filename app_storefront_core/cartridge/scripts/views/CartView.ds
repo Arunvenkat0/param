@@ -33,7 +33,7 @@ var CartView = View.extend({
             var validationResult = Cart.get(cart).validateForCheckout();
             this.EnableCheckout = validationResult.EnableCheckout;
 	        this.BasketStatus = validationResult.BasketStatus;
-            this.WishList = customer.authenticated ? require('~/cartridge/controllers/lib/wishlist').fetchWishList() : null;
+            this.WishList = customer.authenticated ? require('~/cartridge/scripts/models/ProductList').get() : null;
         }
 
         return;
