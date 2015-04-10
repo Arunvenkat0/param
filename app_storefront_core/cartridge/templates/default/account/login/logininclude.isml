@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
-<isif condition="${typeof FormController !== undefined}">
-	<isset name="FormController" value="${'Login-LoginForm'}" scope="page"/>
+<isif condition="${pdict.FormHandlerURL === null}">
+	<isset name="FormHandlerURL" value="${'Login-LoginForm'}" scope="pdict"/>
 </isif>
 
 <div class="login-box login-account">
@@ -15,7 +15,7 @@
 		<isif condition="${!customer.externallyAuthenticated}">
 		<p>${Resource.msg('logininclude.registered','account',null)}</p>
 
-		<form action="${URLUtils.https(pdict.FormController)}" method="post" class="clearfix" id="${session.forms.login.htmlName}">
+		<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${session.forms.login.htmlName}">
 
 			<iscomment>Login Unsuccessful Error Message</iscomment>
 			<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">

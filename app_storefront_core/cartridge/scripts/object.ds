@@ -20,7 +20,8 @@ exports.extend = function (target, source) {
 	for (var i = 1; i < arguments.length; i++) {
 		_source = arguments[i];
 		for (var prop in _source) {
-			if ('object' === typeof _source[prop]) {
+			// recurse for non-API objects
+			if (_source[prop] && 'object' === typeof _source[prop] && !_source[prop].class) {
 				target[prop] = this.extend(target[prop], _source[prop]);
 			} else {
 				target[prop] = _source[prop];

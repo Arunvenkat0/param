@@ -1,0 +1,18 @@
+'use strict';
+
+/** @module view/LoginView */
+var View = require('./View');
+
+/**
+ * The view for the login page
+ *
+ * @class
+ * @extends module:view/View~View
+ */
+module.exports = View.extend({
+
+    FormHandlerURL : dw.web.URLUtils.https('Login-LoginForm'),
+
+    template       : 'account/login/accountlogin'
+
+});

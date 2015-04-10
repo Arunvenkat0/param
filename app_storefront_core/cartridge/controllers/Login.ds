@@ -39,9 +39,9 @@ function show()
 
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
-    view.get({
+    view.get('view/LoginView',{
         RegistrationStatus : false
-    }).render(LOGIN_TEMPLATE);
+    }).render();
 }
 
 /**
@@ -82,7 +82,7 @@ function handleLoginForm()
 
             if(!success){
                 session.forms.login.loginsucceeded.invalidateFormElement();
-                view.get().render(LOGIN_TEMPLATE);
+                view.get('view/LoginView').render();
                 return;
             }else{
                 loginForm.clear();
@@ -114,7 +114,7 @@ function handleLoginForm()
             return;
         },
         'error' : function(){
-            view.get().render(LOGIN_TEMPLATE);
+            view.get('view/LoginView').render();
             return;
         }
     });
@@ -143,7 +143,7 @@ function handleOAuthLoginForm()
                     finishOAuthLogin();
 
                     // show login page with error
-                    view.get().render(LOGIN_TEMPLATE);
+                    view.get('view/LoginView').render();
                     return;
                 }
 
@@ -152,7 +152,7 @@ function handleOAuthLoginForm()
             return;
         },
         'error' : function(){
-            view.get().render(LOGIN_TEMPLATE);
+            view.get('view/LoginView').render();
             return;
         }
     });

@@ -23,7 +23,9 @@ var View = Class.extend(
          */
         init : function (params) {
             // copy all properties of params to the view
-            object.extend(this, params);
+            if(params){
+                object.extend(this, params);
+            }
 
             return this;
         },
@@ -35,6 +37,7 @@ var View = Class.extend(
          * @return {Void}
          */
         render : function (templateName) {
+            templateName = templateName || this.template;
             // provide reference to View itself
             this.View = this;
             // provide Meta
