@@ -11,7 +11,7 @@ var View = require('./View');
  */
 module.exports = View.extend({
 
-    FormHandlerURL : dw.web.URLUtils.https('Login-LoginForm'),
+    ContinueURL : dw.web.URLUtils.https('Login-LoginForm'),
 
     template       : 'account/login/accountlogin'
 

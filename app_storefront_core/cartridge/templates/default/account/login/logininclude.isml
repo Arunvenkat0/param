@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
-<isif condition="${pdict.FormHandlerURL === null}">
-	<isset name="FormHandlerURL" value="${'Login-LoginForm'}" scope="pdict"/>
+<isif condition="${pdict.ContinueURL === null}">
+	<isset name="ContinueURL" value="${URLUtils.https('Login-LoginForm')}" scope="pdict"/>
 </isif>
 
 <div class="login-box login-account">
