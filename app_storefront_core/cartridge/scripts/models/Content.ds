@@ -2,22 +2,22 @@
 
 /*
  usage
- var content = require('~/cartridge/scripts/model/Content');
+ var content = require('~/cartridge/scripts/models/Content');
  */
 
-/** @module model/Content */
+/** @module models/Content */
 
 var AbstractModel = require('./AbstractModel');
 
 /**
  * Content helper providing enhanced content functionality
- * @class module:model/Content~Content
+ * @class module:models/Content~Content
  *
- * @extends module:model/AbstractModel
+ * @extends module:models/AbstractModel
  * @param parameter {dw.content.Content} The content object to enhance/wrap.
  */
 var Content = AbstractModel.extend(
-    /** @lends module:model/Content~Content.prototype */
+    /** @lends module:models/Content~Content.prototype */
     {
         /**
          *    Get navigation link from custom attribute "pipelineLink"
@@ -97,7 +97,7 @@ var Content = AbstractModel.extend(
  * Use this method to get a new instance for a given content.
  *
  * @param parameter {(dw.content.Content|String)} The content object to enhance/wrap or the cotnent ID of the content object.
- * @returns {module:model/Content~Content}
+ * @returns {module:models/Content~Content}
  */
 Content.get = function (parameter) {
     var obj = null;

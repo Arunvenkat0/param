@@ -8,17 +8,17 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
-var Form = require('~/cartridge/scripts/model/Form');
-var Profile = require('~/cartridge/scripts/model/Profile');
+var Cart = require('~/cartridge/scripts/models/Cart');
+var Form = require('~/cartridge/scripts/models/Form');
+var Profile = require('~/cartridge/scripts/models/Profile');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Transaction = require('dw/system/Transaction');
-var TransientAddress = require('~/cartridge/scripts/model/TransientAddress');
+var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var multiShippingForm = require('~/cartridge/scripts/model/Form').get('multishipping');
+var multiShippingForm = require('~/cartridge/scripts/models/Form').get('multishipping');
 var view = require('~/cartridge/scripts/view');
 
 /**

@@ -9,15 +9,15 @@
 
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
-var Cart = require('~/cartridge/scripts/model/Cart');
-var Product = require('~/cartridge/scripts/model/Product');
+var Cart = require('~/cartridge/scripts/models/Cart');
+var Product = require('~/cartridge/scripts/models/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var cartAsset = require('~/cartridge/scripts/model/Content').get('cart');
+var cartAsset = require('~/cartridge/scripts/models/Content').get('cart');
 var guard = require('~/cartridge/scripts/guard');
-var cartForm = require('~/cartridge/scripts/model/Form').get('cart');
+var cartForm = require('~/cartridge/scripts/models/Form').get('cart');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 
@@ -29,7 +29,7 @@ function show() {
     session.forms.cart.shipments.invalidateFormElement();
     session.forms.login.invalidateFormElement();
 
-    view.get('view/CartView', {
+    view.get('views/CartView', {
         cart               : Cart.get(),
         RegistrationStatus : false
     }).render('checkout/cart/cart');
@@ -181,7 +181,7 @@ function submitForm() {
 
     if (formResult) {
         pageMeta.update(cartAsset);
-        view.get('view/CartView', formResult).render('checkout/cart/cart');
+        view.get('views/CartView', formResult).render('checkout/cart/cart');
     }
 }
 
@@ -285,7 +285,7 @@ function addProduct() {
     }
 
     if (params.format.stringValue === 'ajax') {
-        view.get('view/CartView', {
+        view.get('views/CartView', {
             cart                  : cart,
             BonusDiscountLineItem : newBonusDiscountLineItem
         }).render('checkout/cart/minicart');
@@ -338,7 +338,7 @@ function addToWishlist() {
 
     require('./Wishlist').AddProduct();
 
-    view.get('view/CartView', {
+    view.get('views/CartView', {
         cart                   : Cart.get(),
         ProductAddedToWishlist : productID
     }).render('checkout/cart/cart');
@@ -348,7 +348,7 @@ function addToWishlist() {
 /**
  * Determines an existing basket from the current session.
  *
- * @deprecated Use {@link module:model/Cart~Cart#get} instead.
+ * @deprecated Use {@link module:models/Cart~Cart#get} instead.
  */
 function getExistingBasket() {
     return {
@@ -361,7 +361,7 @@ function getExistingBasket() {
  * basket couldn't be created, the pipeline ends in a named end node "error". Calling pipelines are responsible to
  * properly react on the "error" end node.
  *
- * @deprecated Use {@link module:model/Cart~Cart#goc} instead.
+ * @deprecated Use {@link module:models/Cart~Cart#goc} instead.
  */
 function getBasket() {
     return Cart.goc().object;
@@ -371,7 +371,7 @@ function getBasket() {
  * Calculates an existing basket. Call this pipeline always if the changes to the basket content is made (e.g. addition
  * or removal of a product or gift certificate or setting of a shipping method).
  *
- * @deprecated Use {@link module:model/Cart~Cart#calculate} instead.
+ * @deprecated Use {@link module:models/Cart~Cart#calculate} instead.
  */
 function calculate() {
 

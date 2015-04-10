@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @module model/AbstractModel
+ * @module models/AbstractModel
  */
 
 /* API Includes */
@@ -10,13 +10,13 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
 /**
  * Abstract class for all modules following the <strong>Global Helper Concept</strong>.
  *
- * @class module:model/AbstractModel~AbstractModel
+ * @class module:models/AbstractModel~AbstractModel
  * @extends module:util/Class
  *
  * @see https://bitbucket.org/demandware/sitegenesis-community/wiki/Home
  */
 var AbstractModel = Class.extend(
-    /** @lends module:model/AbstractModel~AbstractModel.prototype */
+    /** @lends module:models/AbstractModel~AbstractModel.prototype */
     {
         /** default JSON attribute name */
         _defaultJSONField : 'jsonData',

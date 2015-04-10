@@ -2,7 +2,7 @@
 /**
  * Module for cart related functionality.
  *
- * @module model/Cart
+ * @module models/Cart
  */
 
 /* API Includes */
@@ -14,25 +14,25 @@ var Money = require('dw/value/Money');
 var MultiShippingLogger = dw.system.Logger.getLogger("multishipping");
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var Product = require('~/cartridge/scripts/model/Product');
+var Product = require('~/cartridge/scripts/models/Product');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
-var QuantityLineItem = require('~/cartridge/scripts/model/QuantityLineItem');
+var QuantityLineItem = require('~/cartridge/scripts/models/QuantityLineItem');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var StringUtils = require('dw/util/StringUtils');
-var TransientAddress = require('~/cartridge/scripts/model/TransientAddress');
+var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 /**
  * Cart helper providing enhanced cart functionality
- * @class module:model/Cart~Cart
- * @extends module:model/AbstractModel
+ * @class module:models/Cart~Cart
+ * @extends module:models/AbstractModel
  *
  * @param {dw.order.Basket} obj The basket object to enhance/wrap.
  */
 var Cart = AbstractModel.extend(
-    /** @lends module:model/Cart~Cart.prototype */
+    /** @lends module:models/Cart~Cart.prototype */
     {
         /**
          * Triggers the cart calculation by executing the hook 'dw.ocapi.shop.basket.calculate'.
@@ -870,7 +870,7 @@ var Cart = AbstractModel.extend(
          * A shipping method is applicable if it does not exclude any of the products in the shipment, and does not
          * exclude the specified address.
          *
-         * @param {module:model/TransientAddress~TransientAddress} address - The address to get the applicable shipping
+         * @param {module:models/TransientAddress~TransientAddress} address - The address to get the applicable shipping
          * methods for.
          * @returns {dw.util.Collection} The list of applicable shipping methods for the default shipment and the given address.
          */
@@ -1402,7 +1402,7 @@ var Cart = AbstractModel.extend(
          * Adds the given address to the address book of the cart.
          *
          * @transactional
-         * @param {module:model/TransientAddress~TransientAddress} addressToAdd - The address to add.
+         * @param {module:models/TransientAddress~TransientAddress} addressToAdd - The address to add.
          */
         addAddressToAddressBook : function (addressToAdd) {
             var address = new TransientAddress();
@@ -1441,7 +1441,7 @@ var Cart = AbstractModel.extend(
          * Updates the given address in the carts address book.
          *
          * @transactional
-         * @param {module:model/TransientAddress~TransientAddress} addressToUpdate - The address to update.
+         * @param {module:models/TransientAddress~TransientAddress} addressToUpdate - The address to update.
          */
         updateAddressBookAddress : function (addressToUpdate) {
             var addresses = new Array();
@@ -1531,7 +1531,7 @@ var Cart = AbstractModel.extend(
  *
  * @param parameter {dw.order.Basket=} The basket object to enhance/wrap. If NULL the basket is retrieved from
  * the current session, if existing.
- * @returns {module:model/Cart~Cart}
+ * @returns {module:models/Cart~Cart}
  */
 Cart.get = function (parameter) {
     var obj = null;
@@ -1554,7 +1554,7 @@ Cart.get = function (parameter) {
 /**
  * Use this method to get or create a new instance of a basket.
  *
- * @returns {module:model/Cart~Cart}
+ * @returns {module:models/Cart~Cart}
  */
 Cart.goc = function () {
     var obj = null;

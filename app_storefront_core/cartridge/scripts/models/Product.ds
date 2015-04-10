@@ -1,18 +1,18 @@
 'use strict';
 
-/** @module model/Product */
+/** @module models/Product */
 
 var AbstractModel = require('./AbstractModel');
 
 /**
  * Product helper providing enhanced product functionality
- * @class module:model/Product~Product
- * @extends module:model/AbstractModel
+ * @class module:models/Product~Product
+ * @extends module:models/AbstractModel
  *
  * @param {dw.catalog.Product} obj The product object to enhance/wrap.
  */
 var Product = AbstractModel.extend(
-    /** @lends module:model/Product~Product.prototype */
+    /** @lends module:models/Product~Product.prototype */
     {
         /**
          * Return the default variant or the first variant if none defined
@@ -249,7 +249,7 @@ var Product = AbstractModel.extend(
  * Use this method to get a new instance for a given product or product ID.
  *
  * @param parameter {(dw.catalog.Product|String)} The product object to enhance/wrap or the product ID of the product object.
- * @returns {module:model/Product~Product}
+ * @returns {module:models/Product~Product}
  */
 Product.get = function (parameter) {
     var obj = null;

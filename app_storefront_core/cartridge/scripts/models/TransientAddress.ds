@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module model/TransientAddress */
+/** @module models/TransientAddress */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var CustomerAddress = require('dw/customer/CustomerAddress');
 
@@ -31,11 +31,11 @@ function copyFields(from, to){
 /**
  * Transient representation of an address.
  *
- * @class module:model/TransientAddress~TransientAddress
+ * @class module:models/TransientAddress~TransientAddress
  * @extends module:util/Class
  */
 var TransientAddress = Class.extend(
-/** @lends module:model/TransientAddress~TransientAddress.prototype */
+/** @lends module:models/TransientAddress~TransientAddress.prototype */
 {
     UUID        : null,
     ID          : null,

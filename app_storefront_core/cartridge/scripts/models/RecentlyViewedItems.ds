@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module model/RecentlyViewedItems */
+/** @module models/RecentlyViewedItems */
 
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
@@ -17,7 +17,7 @@ var PRODUCT_PIPELINE_NAMES = new ArrayList(
  * Model holding information about last visited items based on the current session. Currently only products are
  * supported.
  *
- * @class module:model/RecentlyViewedItems~RecentlyViewedItems
+ * @class module:models/RecentlyViewedItems~RecentlyViewedItems
  */
 var RecentlyViewedItems = ({
 

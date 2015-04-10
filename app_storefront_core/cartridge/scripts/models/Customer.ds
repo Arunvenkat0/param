@@ -2,25 +2,25 @@
 
 /*
  usage
- var content = require('~/cartridge/scripts/model/Customer');
+ var content = require('~/cartridge/scripts/models/Customer');
  */
 
-/** @module model/Customer */
+/** @module models/Customer */
 
 var AbstractModel = require('./AbstractModel');
 var CustomerMgr = require('dw/customer/CustomerMgr');
 var Transaction = require('dw/system/Transaction');
-var Form = require('~/cartridge/scripts/model/Form');
-var Email = require('~/cartridge/scripts/model/Email');
+var Form = require('~/cartridge/scripts/models/Form');
+var Email = require('~/cartridge/scripts/models/Email');
 
 /**
  * Customer helper providing enhanced content functionality
- * @class module:model/Customer~Customer
+ * @class module:models/Customer~Customer
  *
  * @param parameter {dw.customer.Customer} The customer object to enhance/wrap.
  */
 var Customer = AbstractModel.extend(
-    /** @lends module:model/Customer~Customer.prototype */
+    /** @lends module:models/Customer~Customer.prototype */
     {});
 
 /**
@@ -28,7 +28,7 @@ var Customer = AbstractModel.extend(
  *
  * @param parameter {dw.customer.Customer=} The customer object to enhance/wrap. If NULL the current customer is
  * retrieved from the session.
- * @returns {module:model/Customer~Customer}
+ * @returns {module:models/Customer~Customer}
  */
 Customer.get = function (parameter) {
     var obj = null;

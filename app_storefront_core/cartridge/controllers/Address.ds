@@ -3,15 +3,15 @@
 /**
  * Controller : Address
  *
- * @module controller/Address
+ * @module controllers/Address
  */
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/model/Form');
-var content = require('~/cartridge/scripts/model/Content');
+var Form = require('~/cartridge/scripts/models/Form');
+var content = require('~/cartridge/scripts/models/Content');
 var address = content.get('myaccount-addresses');
 var addressForm = Form.get('customeraddress');
 
@@ -275,8 +275,8 @@ function setDefault() {
     
     var customerAddress = getCustomerAddressResult.Address;
     
-	var customer : dw.customer.Customer = customer;
-	var addressBook : dw.customer.AddressBook = customer.profile.addressBook;
+	var customer = customer;
+	var addressBook = customer.profile.addressBook;
 	addressBook.setPreferredAddress(customerAddress);
     
     response.redirect(dw.web.URLUtils.https('Address-List'));
@@ -350,19 +350,19 @@ function deleteAddress() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Address~List */
+/** @see module:controllers/Address~List */
 exports.List = guard.ensure(['get', 'https', 'loggedIn'], list);
-/** @see module:controller/Address~Add */
+/** @see module:controllers/Address~Add */
 exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
-/** @see module:controller/Address~AddForm */
+/** @see module:controllers/Address~AddForm */
 exports.AddForm = guard.ensure(['post', 'https', 'loggedIn'], addForm);
-/** @see module:controller/Address~Edit */
+/** @see module:controllers/Address~Edit */
 exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], edit);
-/** @see module:controller/Address~EditForm */
+/** @see module:controllers/Address~EditForm */
 exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
-/** @see module:controller/Address~SetDefault */
+/** @see module:controllers/Address~SetDefault */
 exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], setDefault);
-/** @see module:controller/Address~GetAddressDetails */
+/** @see module:controllers/Address~GetAddressDetails */
 exports.GetAddressDetails = guard.ensure(['get', 'https', 'loggedIn'], getAddressDetails);
-/** @see module:controller/Address~Delete */
+/** @see module:controllers/Address~Delete */
 exports.Delete = guard.ensure(['get', 'https', 'loggedIn'], Delete);

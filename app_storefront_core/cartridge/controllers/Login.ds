@@ -9,7 +9,7 @@
 var guard          = require('~/cartridge/scripts/guard');
 var pageMeta       = require('~/cartridge/scripts/meta');
 var view           = require('~/cartridge/scripts/view');
-var Form           = require('~/cartridge/scripts/model/Form');
+var Form           = require('~/cartridge/scripts/models/Form');
 var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
 
@@ -17,8 +17,8 @@ var LOGIN_TEMPLATE = 'account/login/accountlogin';
 var LOGGER         = dw.system.Logger.getLogger('login');
 
 /* API Includes */
-var Cart        = require('~/cartridge/scripts/model/Cart');
-var Customer    = require('~/cartridge/scripts/model/Customer');
+var Cart        = require('~/cartridge/scripts/models/Cart');
+var Customer    = require('~/cartridge/scripts/models/Customer');
 var Transaction = require('dw/system/Transaction');
 
 /**
@@ -39,7 +39,7 @@ function show()
 
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
-    view.get('view/LoginView',{
+    view.get('views/LoginView',{
         RegistrationStatus : false
     }).render();
 }
@@ -82,7 +82,7 @@ function handleLoginForm()
 
             if(!success){
                 session.forms.login.loginsucceeded.invalidateFormElement();
-                view.get('view/LoginView').render();
+                view.get('views/LoginView').render();
                 return;
             }else{
                 loginForm.clear();
@@ -114,7 +114,7 @@ function handleLoginForm()
             return;
         },
         'error' : function(){
-            view.get('view/LoginView').render();
+            view.get('views/LoginView').render();
             return;
         }
     });
@@ -143,7 +143,7 @@ function handleOAuthLoginForm()
                     finishOAuthLogin();
 
                     // show login page with error
-                    view.get('view/LoginView').render();
+                    view.get('views/LoginView').render();
                     return;
                 }
 
@@ -152,7 +152,7 @@ function handleOAuthLoginForm()
             return;
         },
         'error' : function(){
-            view.get('view/LoginView').render();
+            view.get('views/LoginView').render();
             return;
         }
     });

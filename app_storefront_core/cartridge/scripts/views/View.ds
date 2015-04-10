@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module view/View */
+/** @module views/View */
 
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var object = require('~/cartridge/scripts/object');
@@ -11,7 +11,7 @@ var object = require('~/cartridge/scripts/object');
  * @see https://bitbucket.org/demandware/sitegenesis-community/wiki/Home
  */
 var View = Class.extend(
-    /** @lends module:view/View~View.prototype */
+    /** @lends module:views/View~View.prototype */
     {
 
         /**

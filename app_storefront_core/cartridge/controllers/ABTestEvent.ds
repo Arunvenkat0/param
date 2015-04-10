@@ -9,7 +9,7 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
+var Cart = require('~/cartridge/scripts/models/Cart');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');

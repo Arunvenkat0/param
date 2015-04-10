@@ -1,9 +1,9 @@
 'use strict';
 
-/** @module view/CartView */
+/** @module views/CartView */
 var View = require('./View');
 
-var Cart = require('~/cartridge/scripts/model/Cart');
+var Cart = require('~/cartridge/scripts/models/Cart');
 var FormGroup = require('dw/web/FormGroup');
 var Transaction = require('dw/system/Transaction');
 
@@ -40,7 +40,7 @@ var CartView = View.extend({
     },
 
     /**
-     * @constructor module:view/CartView~CartView
+     * @constructor module:views/CartView~CartView
      */
     init : function (params) {
         this._super(params);

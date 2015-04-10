@@ -12,8 +12,8 @@ var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var storeLocatorAsset = require('~/cartridge/scripts/model/Content').get('store-locator');
-var storeLocatorForm = require('~/cartridge/scripts/model/Form').get('storelocator');
+var storeLocatorAsset = require('~/cartridge/scripts/models/Content').get('store-locator');
+var storeLocatorForm = require('~/cartridge/scripts/models/Form').get('storelocator');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 
@@ -25,7 +25,7 @@ function find() {
     storeLocatorForm.clear();
     pageMeta.update(storeLocatorAsset);
 
-    view.get('view/StoreLocatorView')
+    view.get('views/StoreLocatorView')
         .render('storelocator/storelocator');
 
 }
@@ -77,11 +77,11 @@ function findStores() {
     });
 
     if (searchResult) {
-        view.get('view/StoreLocatorView', searchResult)
+        view.get('views/StoreLocatorView', searchResult)
             .render('storelocator/storelocatorresults');
     }
     else {
-        view.get('view/StoreLocatorView')
+        view.get('views/StoreLocatorView')
             .render('storelocator/storelocator');
     }
 

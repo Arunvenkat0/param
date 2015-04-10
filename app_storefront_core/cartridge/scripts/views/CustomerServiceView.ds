@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module view/CustomerServiceView */
+/** @module views/CustomerServiceView */
 var View = require('./View');
 
 /* API Includes */
@@ -43,7 +43,7 @@ var CustomerServiceView = View.extend({
     },
 
     /**
-     * @constructor module:view/CustomerServiceView~CustomerServiceView
+     * @constructor module:views/CustomerServiceView~CustomerServiceView
      */
     init : function (params) {
         this._super(params);

@@ -3,7 +3,7 @@
 /**
  * Module for search related functionality.
  *
- * @module model/Search
+ * @module models/Search
  */
 
 /* API Includes */
@@ -13,7 +13,7 @@ var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
 /**
  * Search model providing enhanced search functionality
- * @class module:model/Search~Search
+ * @class module:models/Search~Search
  */
 var Search = ({
 
