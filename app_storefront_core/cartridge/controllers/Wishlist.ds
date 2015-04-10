@@ -7,25 +7,24 @@
  */
 
 /* API Includes */
-var Transaction = require('dw/system/Transaction');
+var CustomerMgr = require('dw/customer/CustomerMgr');
+var Form = require('~/cartridge/scripts/models/Form');
 var Product = require('~/cartridge/scripts/models/Product');
 var ProductList = require('~/cartridge/scripts/models/ProductList');
-var CustomerMgr = require('dw/customer/CustomerMgr');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var content = require('~/cartridge/scripts/models/Content');
-var accountLogin = content.get('myaccount-login');
 var wishlistAsset = content.get('myaccount-wishlist');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/models/Form');
 var wishlistForm = Form.get('wishlist');
 
 /**
  * Forms handling for the landing page
  */
-function landingForm() {  
+function landingForm() {
     var formResult = wishlistForm.handleAction({
         'register'             : function (formgroup) {
            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
@@ -34,7 +33,7 @@ function landingForm() {
         'search'             : function (formgroup) {
             Search();
             return;
-        }    
+        }
     });
 }
 
@@ -52,9 +51,9 @@ function show() {
     // init address book
     wishlistForm.get('addressbook').get('addresses').copyFrom(customer.profile.addressBook.addresses);
 
-    view.get().render('account/wishlist/wishlist', {
-        ProductList : productList
-    });
+    view.get({
+        ProductList : productList.object
+    }).render('account/wishlist/wishlist');
 }
 
 
@@ -62,7 +61,7 @@ function show() {
  * Forms handler for processing wish lists.
  */
 function wishListForm() {
-    var productList = ProductList.get();
+    var productList = require('~/cartridge/scripts/model/ProductList').get();
     var formResult = wishlistForm.handleAction({
         'addGiftCertificate'     : function (formgroup) {
             var AddGiftCertificateToProductListResult = new dw.system.Pipelet('AddGiftCertificateToProductList')
@@ -71,15 +70,35 @@ function wishListForm() {
                         Priority : 0
                     });
         },
-        'deleteItem'     : function (formgroup) {
-            productList.remove(request.triggeredFormAction.object);
+        'deleteItem'     : function (formgroup, action) {
+            dw.system.Logger.info('Deleting product {0} from wishlist.',action.object.productID);
+            productList.remove(action.object);
         },
-        'updateItem'     : function (formgroup) {
-            Form.get(request.triggeredFormAction.parent).copyTo(request.triggeredFormAction.object);
+        'updateItem'     : function (formgroup, action) {
+            dw.system.Logger.info('Updating product {0} on wishlist.',action.object.productID);
+            Form.get(action.parent).copyTo(action.object);
+        },
+        'setItemPrivate' : function(formgroup, action){
+            Transaction.wrap(function () {
+                  action.object.public = false;
+            });
+        },
+        'setItemPublic' : function(formgroup, action){
+            Transaction.wrap(function () {
+                  action.object.public = true;
+            });
+        },
+        'setListPrivate' : function(){
+            dw.system.Logger.info('Customer {0} set wishlist private.',customer.ID);
+            productList.setPublic(true);
+        },
+        'setListPublic' : function(){
+            dw.system.Logger.info('Customer {0} set wishlist public.',customer.ID);
+            productList.setPublic(false);
         }
     });
 
-
+    // @TODO move these last two action into wishlistForm.handleAction()
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction !== null)
     {
@@ -162,16 +181,13 @@ function wishListForm() {
  * Expects: UserID
  */
 function showOther() {
-    var currentHttpParameterMap = request.httpParameterMap;
-    var currentForms = session.forms;
-    
     Form.get('wishlist.send').clear();
 
-    var productList = Product.get(request.httpParameterMap.pid.stringValue).object;
+    var productList = ProductList.get();
 
-    view.get().render('account/wishlist/wishlist', {
-        ProductList : productList
-    });
+    view.get({
+        ProductList : productList.object
+    }).render('account/wishlist/wishlist');
 }
 
 
@@ -193,7 +209,7 @@ function addProduct(args) {
     var productList = ProductList.get();
 
 	productList.addProduct(product, currentHttpParameterMap.Quantity.doubleValue, productOptionModel);
-   
+
 
     return {
         ok : true
@@ -220,25 +236,23 @@ function add() {
  * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
  */
 function search() {
-    var currentForms = session.forms;
-    var wishlistSearchform = Form.get(currentForms.wishlist.search);
+    var form = session.forms.wishlist.search;
 
     var searchFirstName, searchLastName, searchEmail = null;
 
-    searchFirstName = wishlistSearchform.object.firstname.value;
-    searchLastName = wishlistSearchform.object.lastname.value;
-    searchEmail = wishlistSearchform.object.email.value;
+    searchFirstName = form.firstname.value;
+    searchLastName = form.lastname.value;
+    searchEmail = form.email.value;
 
-    if (currentForms.wishlist.search.valid
-            && (!empty(currentForms.wishlist.search.email.value) || (!empty(currentForms.wishlist.search.firstname.value) && !empty(currentForms.wishlist.search.lastname.value))))
+    if (form.valid && (!empty(searchFirstName) || (!empty(searchLastName) && !empty(searchEmail))))
     {
-       
-       var queryString = "OwnerFirstName = " + currentForms.wishlist.search.firstname + " AND OwnerLastName = " + currentForms.wishlist.search.lastname + " AND OwnerEmail = " + currentForms.wishlist.search.email;
-       var searchProductListsResult = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
-		
-	   Form.get(currentForms.wishlist.productlists).copyFrom(searchProductListsResult);
+        var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
+            searchLastName + ' AND OwnerEmail = ' + searchEmail;
+        var productLists = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
 
-        wishlistSearchform.clear();
+        Form.get('wishlist.productlists').copyFrom(productLists);
+
+        Form.get(form).clear();
     }
 
     view.get().render('account/wishlist/wishlistresults', {
@@ -262,18 +276,16 @@ function setShippingAddress() {
     {
         var GetCustomerAddressResult = dw.customer.AddressBook.getAddress(empty(currentHttpParameterMap.AddressID.stringValue) ? currentHttpParameterMap.editAddress.stringValue
                             : currentHttpParameterMap.AddressID.stringValue);
-          
-         
+
+
         address = GetCustomerAddressResult.Address;
     }
 
 
     var ProductList = ProductList.get();
-
     Transaction.wrap(function () {
-                         ProductList.setShippingAddress(address);
-                    }
-                );
+         ProductList.setShippingAddress(address);
+    });
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
@@ -288,16 +300,15 @@ function replaceProductListItem() {
 
 
     var productListItem = ProductList.getItem(plid);
-    if (productListItem != null)
+    if (productListItem !== null)
     {
-        
-        Transaction.wrap(function () {
-                ProductList.removeItem(productListItem);
 
-		        // TODO ProductList already resolved
-		        var AddProductResult = addProduct();
-                    }
-                );
+        Transaction.wrap(function () {
+            ProductList.removeItem(productListItem);
+
+	        // TODO ProductList already resolved
+	        var result = addProduct();
+        });
     }
 
     // TODO rendering an empty template this seems pretty useless
