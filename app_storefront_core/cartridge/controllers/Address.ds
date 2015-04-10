@@ -1,30 +1,37 @@
-var g = require('./dw/guard');
-var f = require('./dw/form');
+'use strict';
 
 /**
- * Address management at customer profile
+ * Controller : Address
+ *
+ * @module controller/Address
  */
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/model/Form');
+var content = require('~/cartridge/scripts/model/Content');
+var address = content.get('myaccount-addresses');
+var addressForm = Form.get('customeraddress');
 
 /**
  * List addresses in customer profile Input: (none)
  */
-function List()
-{
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-addresses"));
+function list() {
+   pageMeta.update(address);
 
-    response.renderTemplate('account/addressbook/addresslist');
+   view.get().render('account/addressbook/addresslist');
 }
 
 /**
  * Renders a dialog providing functionality to add a new address to the address
  * book.
  */
-function Add()
-{
-    f.clearFormElement(session.forms.profile);
+function add() {
+    Form.get('profile').clear();
 
-    response.renderTemplate('account/addressbook/addressdetails', {
+    view.get().render('account/addressbook/addressdetails', {
         Action : 'add',
         FormAction: 'Address-AddForm'
     });
@@ -33,18 +40,32 @@ function Add()
 /**
  * The form handler.
  */
-function AddForm()
-{
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        if (TriggeredAction.formId == 'cancel')
-        {
+function addForm() {
+    
+    var formResult = addressForm.handleAction({   
+        'cancel'             : function (formgroup) {
             response.redirect(dw.web.URLUtils.https('Address-List'));
             return;
-        }
-        else if (TriggeredAction.formId == 'create')
-        {
+        }, 
+        'create'             : function (formgroup) {
+            if (!create())
+            {
+                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                return;
+            }
+            
+            if (request.httpParameterMap.format.stringValue == 'ajax')
+            {
+                response.renderJSON({
+                    success : true
+                });
+                return;
+            }
+
+            response.redirect(dw.web.URLUtils.https('Address-List'));
+            return;
+        },
+        'edit'             : function (formgroup) {
             if (!create())
             {
                 response.redirect(dw.web.URLUtils.https('Address-Add'));
@@ -62,7 +83,8 @@ function AddForm()
             response.redirect(dw.web.URLUtils.https('Address-List'));
             return;
         }
-    }
+    });
+    
 
     // TODO what is this? Does this make sense?
     if (session.forms.profile.address.valid)
@@ -94,28 +116,19 @@ function AddForm()
  * 
  * @returns true, if the address was created
  */
-function create()
-{
+function create() {
     var profileForm = session.forms.profile;
 
-    var CreateCustomerAddressResult = new dw.system.Pipelet('CreateCustomerAddress').execute({
-        AddressID : profileForm.address.addressid.value,
-        Customer : customer
-    });
-    if (CreateCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        f.invalidateFormElement(profileForm.address.addressid);
+    var  createCustomerAddressResult = dw.customer.AddressBook.createAddress(profileForm.address.addressid.value);
+    
+    var address = createCustomerAddressResult.Address;
 
-        return false;
-    }
-    var Address = CreateCustomerAddressResult.Address;
-
-    if (!f.updateObjectWithForm(Address, profileForm.address))
+    if (!Form.get(profileForm.address).copyTo(address))
     {
         return false;
     }
 
-    if (!f.updateObjectWithForm(Address, profileForm.address.states))
+    if (!Form.get(profileForm.address.states).copyForm(address))
     {
         return false;
     }
@@ -127,29 +140,28 @@ function create()
 /**
  * Renders a dialog providing functionality to edit an existing address.
  */
-function Edit()
-{
+function edit() {
     var profileForm = session.forms.profile;
-    f.clearFormElement(profileForm);
+    Form.get('profile').clear();
 
 
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
+    var getCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
         AddressID : decodeURIComponent(request.httpParameterMap.AddressID.value),
         Customer : customer
     });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
+    if (getCustomerAddressResult.result == PIPELET_ERROR)
     {
-        response.renderTemplate('components/dialog/closedialog');
+        view.get().render('components/dialog/closedialog');
         return;
     }
-    var Address = GetCustomerAddressResult.Address;
+    var address = getCustomerAddressResult.Address;
 
 
-    f.updateFormWithObject(profileForm.address, Address);
-    f.updateFormWithObject(profileForm.address.states, Address);
+    Form.get(profileForm.address).copyFrom(address);
+    Form.get(profileForm.address.states).copyFrom(address);
 
 
-    response.renderTemplate('account/addressbook/addressdetails', {
+    view.get().render('account/addressbook/addressdetails', {
         Action : 'edit',
         FormAction: 'Address-EditForm',
         Address: Address
@@ -157,23 +169,18 @@ function Edit()
 }
 
 
-function EditForm()
-{
-    // TODO this should all be cleaned up
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        if (TriggeredAction.formId == 'cancel')
-        {
+function editForm() {
+    
+    var formResult = addressForm.handleAction({   
+        'cancel'             : function (formgroup) {
             response.redirect(dw.web.URLUtils.https('Address-List'));
             return;
-        }
-        // TODO how should this be possible at all? There is no create button.
-        else if (TriggeredAction.formId == 'create')
-        {
-            if (!edit())
+        }, 
+        'create'             : function (formgroup) {
+            if (!create())
             {
-                response.redirect(dw.web.URLUtils.https('Address-List'));
+                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                return;
             }
             
             if (request.httpParameterMap.format.stringValue == 'ajax')
@@ -183,9 +190,8 @@ function EditForm()
                 });
                 return;
             }
-        }
-        else if (TriggeredAction.formId == 'edit')
-        {
+        },
+        'edit'             : function (formgroup) {
             if (!session.forms.profile.address.valid)
             {
                 response.redirect(dw.web.URLUtils.https('Address-List'));
@@ -205,9 +211,8 @@ function EditForm()
                 });
                 return;
             }
-        }
-        else if (TriggeredAction.formId == 'remove')
-        {
+        },
+        'remove'             : function (formgroup) {
             var DeleteAddressResult = deleteAddress();
             if (DeleteAddressResult.failed)
             {
@@ -222,56 +227,38 @@ function EditForm()
                 });
                 return;
             }
-        }
-    }
+        }   
+    });
 
     response.redirect(dw.web.URLUtils.https('Address-List'));
 }
 
-function edit()
-{
+function edit() {
     var profileForm = session.forms.profile;
 
     // get address to be edited
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : request.httpParameterMap.addressid.value,
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        f.invalidateFormElement(profileForm.address.addressid);
-
-        return false;
-    }
-    var Address = GetCustomerAddressResult.Address;
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(request.httpParameterMap.addressid.value);
+    
+    var address = getCustomerAddressResult.Address;
     
 
     // check if new address id is already taken
-    if (Address.ID != profileForm.address.addressid.value)
+    if (address.ID != profileForm.address.addressid.value)
     {
-        var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-            AddressID : profileForm.address.addressid.value,
-            Customer : customer
-        });
-        if (GetCustomerAddressResult.result == PIPELET_NEXT)
-        {
-            f.invalidateFormElement(profileForm.address.addressid);
-    
-            return false;
-        }
+        var getCustomerAddressResult = dw.customer.AddressBook.getAddress(profileForm.address.addressid.value);
     }
 
     
-    if (!f.updateObjectWithForm(Address, profileForm.address))
+    if (!Form.get(profileForm.address).copyTo(address))
     {
-        f.invalidateFormElement(profileForm.address.addressid);
+        profileForm.address.addressid.invalidateFormElement();
 
         return false;
     }
 
-    if (!f.updateObjectWithForm(Address, profileForm.address.states))
+    if (!Form.get(profileForm.address.states).copyTo(address))
     {
-        f.invalidateFormElement(profileForm.address.addressid);
+        profileForm.address.addressid.invalidateFormElement();
 
         return false;
     }
@@ -282,30 +269,17 @@ function edit()
 /**
  * Sets the default address.
  */
-function SetDefault()
-{
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : decodeURIComponent(request.httpParameterMap.AddressID.value),
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        List();
-        return;
-    }
-    var CustomerAddress = GetCustomerAddressResult.Address;
-
-
-    new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError : 'PIPELET_ERROR',
-        ScriptFile : 'account/addressbook/SetDefaultAddress.ds'
-    }).execute({
-        CustomerAddress : CustomerAddress,
-        CurrentCustomer : customer
-    });
-
-    List();
+function setDefault() {
+    
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(decodeURIComponent(request.httpParameterMap.AddressID.value));
+    
+    var customerAddress = getCustomerAddressResult.Address;
+    
+	var customer : dw.customer.Customer = customer;
+	var addressBook : dw.customer.AddressBook = customer.profile.addressBook;
+	addressBook.setPreferredAddress(customerAddress);
+    
+    response.redirect(dw.web.URLUtils.https('Address-List'));
 }
 
 
@@ -313,16 +287,13 @@ function SetDefault()
  * Returns a customer address as JSON response. Required to fill address form
  * with selected address from address book.
  */
-function GetAddressDetails()
-{
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : decodeURIComponent(request.httpParameterMap.addressID.value),
-        Customer : customer
-    });
-    var Address = GetCustomerAddressResult.Address;
+function getAddressDetails() {
+    var getCustomerAddressResult = dw.customer.AddressBook.getAddress(request.httpParameterMap.addressID.value);
+    
+    var address = getCustomerAddressResult.Address;
 
-    response.renderTemplate('account/addressbook/addressjson', {
-        Address : Address
+    view.get().render('account/addressbook/addressjson', {
+        Address : address
     });
 }
 
@@ -330,15 +301,14 @@ function GetAddressDetails()
 /**
  * Deletes an existing address.
  */
-function Delete()
-{
+function Delete() {
     session.forms.profile.address.addressid.value = decodeURIComponent(request.httpParameterMap.AddressID.value);
 
     var deleteAddressResult = deleteAddress();
 
     if (request.httpParameterMap.format.stringValue != 'ajax')
     {
-        List();
+        response.redirect(dw.web.URLUtils.https('Address-List'));
         return;
     }
     
@@ -352,64 +322,26 @@ function Delete()
 }
 
 
-function deleteAddress()
-{
-    var GetCustomerAddressResult = new dw.system.Pipelet('GetCustomerAddress').execute({
-        AddressID : session.forms.profile.address.addressid.value,
-        Customer : customer
-    });
-    if (GetCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        return {
-            failed : true
-        };
-    }
-    var Address = GetCustomerAddressResult.Address;
+function deleteAddress() {
+    var GetCustomerAddressResult = dw.customer.AddressBook.getAddress(session.forms.profile.address.addressid.value);
+    
+    var address = GetCustomerAddressResult.Address;
 
-    var RemoveCustomerAddressResult = new dw.system.Pipelet('RemoveCustomerAddress').execute({
-        Address : Address,
-        Customer : customer
-    });
-    if (RemoveCustomerAddressResult.result == PIPELET_ERROR)
-    {
-        var Status = new dw.system.Status(dw.system.Status.ERROR,
-                dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST);
-        return {
-            failed : true,
-            Status : Status
-        };
-    }
+    var RemoveCustomerAddressResult = dw.customer.AddressBook.removeAddress(address);
+    
+   	var Status = new dw.system.Status(dw.system.Status.ERROR,
+            dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST);
+    return {
+        failed : true,
+        Status : Status
+    };
+    
 
     return {
         ok : true
     };
 }
 
-/*
- * Private helpers
- */
-
-/**
- * Decorator which ensures that the embedded action is only performed when the
- * customer is authenticated. If not, a login form is displayed which returns to
- * the address list after successful authentication.
- */
-function loggedIn(action)
-{
-    return function()
-    {
-        if (!customer.authenticated)
-        {
-            var accountController = require('./Account');
-            accountController.requireLogin({
-                TargetAction : 'Address-List'
-            });
-            return;
-        }
-
-        action();
-    };
-}
 
 /*
  * Module exports
@@ -418,11 +350,19 @@ function loggedIn(action)
 /*
  * Web exposed methods
  */
-exports.List                = g.httpsGet(loggedIn(List));
-exports.Add                 = g.httpsGet(loggedIn(Add));
-exports.AddForm             = g.httpsPost(loggedIn(AddForm));
-exports.Edit                = g.httpsGet(loggedIn(Edit));
-exports.EditForm            = g.httpsPost(loggedIn(EditForm));
-exports.SetDefault          = g.httpsGet(loggedIn(SetDefault));
-exports.GetAddressDetails   = g.httpsGet(loggedIn(GetAddressDetails));
-exports.Delete              = g.https(loggedIn(Delete));
+/** @see module:controller/Address~List */
+exports.List = guard.ensure(['get', 'https', 'loggedIn'], list);
+/** @see module:controller/Address~Add */
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
+/** @see module:controller/Address~AddForm */
+exports.AddForm = guard.ensure(['post', 'https', 'loggedIn'], addForm);
+/** @see module:controller/Address~Edit */
+exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], edit);
+/** @see module:controller/Address~EditForm */
+exports.editForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
+/** @see module:controller/Address~SetDefault */
+exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], setDefault);
+/** @see module:controller/Address~GetAddressDetails */
+exports.GetAddressDetails = guard.ensure(['get', 'https', 'loggedIn'], getAddressDetails);
+/** @see module:controller/Address~Delete */
+exports.Delete = guard.ensure(['get', 'https', 'loggedIn'], Delete);

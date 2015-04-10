@@ -14,7 +14,7 @@
 		<h1>${Resource.msg('editaddress.editaddress','account',null)}</h1>
 	</isif>
 
-	<form method="post" action="${URLUtils.https(pdict.FormAction)}" id="edit-address-form" name="${session.forms.profile.address.htmlName}">
+	<form method="post" action="${URLUtils.https('Address-AddForm')}" id="edit-address-form" name="${session.forms.profile.address.htmlName}">
 		<fieldset>
 			<legend>
 				Address Details

@@ -1,0 +1,71 @@
+'use strict';
+
+/*
+ usage
+ var content = require('~/cartridge/scripts/model/ProductList');
+ */
+
+/** @module model/ProductList */
+
+var AbstractModel = require('./AbstractModel');
+var ProductListMgr = require('dw/customer/ProductListMgr');
+var Transaction = require('dw/system/Transaction');
+/**
+ * ProductList helper providing enhanced content functionality
+ * @class module:model/ProductList~ProductList
+ */
+var ProductList = AbstractModel.extend(
+    /** @lends module:model/ProductList~ProductList.prototype */
+    {
+        /**
+         * Use this method to get the wishlist for the current customer. The method will create a new wishlist
+         * on the fly unless an instance of a product list is passed
+         */
+        get : function (parameter) {
+            var obj = null;
+            if (typeof parameter === 'undefined') {
+                obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+                if(obj.empty){
+                    Transaction.wrap(function(){
+                        obj = ProductListMgr.createProductList(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+                    });
+                }else{
+                    obj = obj[0];
+                }
+            }
+            else if (typeof parameter === 'object') {
+                obj = parameter;
+            }
+            return new ProductList(obj);
+        },
+
+        /**
+         * Remove the given item from the wishlist
+         *
+         * @param  {dw.customer.ProductListItem} item The item to remove
+         */
+        remove : function(item){
+            this.object.removeItem(item);
+        },
+
+        addProduct : function(product, quantity, optionModel){
+            Transaction.begin();
+
+            var item = this.object.createProductItem(product);
+            if(quantity && !isNaN(quantity)){
+                item.setQuantityValue(quantity);
+            }
+            if(optionModel){
+                item.setOptionModel(optionModel);
+            }
+            // inherit public flag from the wishlist
+            item.setPublic(this.object.public);
+
+            Transaction.commit();
+            return item;
+        }
+
+    });
+
+/** The content class */
+module.exports = new ProductList();
