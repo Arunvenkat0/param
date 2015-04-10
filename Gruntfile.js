@@ -105,11 +105,11 @@ module.exports = function (grunt) {
 		},
 	    jsdoc: {
 	        dist : {
-	            src: ['app_storefront_core/cartridge/controllers/README.md',
-	            	'app_storefront_core/cartridge/scripts/model/*.ds',
+	            src: ['jsdoc/README.md',
+	            	'app_storefront_core/cartridge/scripts/models/*.ds',
 	            	'app_storefront_core/cartridge/scripts/*.ds',
 	            	'app_storefront_core/cartridge/controllers/*.ds',
-	            	'app_storefront_core/cartridge/scripts/view/*.ds',
+	            	'app_storefront_core/cartridge/scripts/views/*.ds',
 	            	'app_storefront_core/cartridge/scripts/util/Class.ds',
 	            	'app_storefront_core/cartridge/scripts/util/Browsing.ds'],
 	            options:{

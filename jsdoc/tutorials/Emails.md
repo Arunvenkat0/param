@@ -2,13 +2,13 @@ In various places throughout the application emails are being sent to notify the
 
 ```
 // sending a simple welcome email
-equire('~/models/Email').get('mail/welcome',Customer.profile.email).send();
+require('~/models/Email').get('mail/welcome',customer.profile.email).send();
 
 // send an email to a customer's mail address providing additional data for the email template
-require('~/models/Email').get('mail/resetpasswordemail',Customer.profile.email)
+require('~/models/Email').get('mail/resetpasswordemail',customer.profile.email)
     .setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null)).send({
-        Customer : Customer,
-        ResetPasswordToken : ResetPasswordToken
+        Customer : customer,
+        ResetPasswordToken : resetPasswordToken
     });
 ```
 
