@@ -1,7 +1,7 @@
 'use strict';
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
+var Cart = require('~/cartridge/scripts/models/Cart');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
 

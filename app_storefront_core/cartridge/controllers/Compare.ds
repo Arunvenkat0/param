@@ -6,9 +6,9 @@
  */
 
 /* API Includes */
-var Category = require('~/cartridge/scripts/model/Category');
-var Form = require('~/cartridge/scripts/model/Form');
-var Product = require('~/cartridge/scripts/model/Product');
+var Category = require('~/cartridge/scripts/models/Category');
+var Form = require('~/cartridge/scripts/models/Form');
+var Product = require('~/cartridge/scripts/models/Product');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');

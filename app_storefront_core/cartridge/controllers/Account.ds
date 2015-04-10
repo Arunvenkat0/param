@@ -3,24 +3,24 @@
 /**
  * Controller : account
  *
- * @module controller/Account
+ * @module controllers/Account
  */
 
 /* API Includes */
-var Email = require('~/cartridge/scripts/model/Email');
-var Customer = require('~/cartridge/scripts/model/Customer');
+var Email = require('~/cartridge/scripts/models/Email');
+var Customer = require('~/cartridge/scripts/models/Customer');
 var Transaction = require('dw/system/Transaction');
 var Template = require('dw/util/Template');
 
 /* Script Modules */
-var content = require('~/cartridge/scripts/model/Content');
+var content = require('~/cartridge/scripts/models/Content');
 var accountHomeAsset = content.get('myaccount-home');
 var accountPersonalDataAsset = content.get('myaccount-personaldata');
 var accountLogin = content.get('myaccount-login');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/model/Form');
+var Form = require('~/cartridge/scripts/models/Form');
 var accountForm = Form.get('myaccount');
 
 
@@ -486,33 +486,33 @@ function connect()
 /*
  * Web exposed methods
  */
-/** @see module:controller/Account~Show */
+/** @see module:controllers/Account~Show */
 exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
-/** @see module:controller/Account~EditProfile */
+/** @see module:controllers/Account~EditProfile */
 exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
-/** @see module:controller/Account~EditProfileError */
+/** @see module:controllers/Account~EditProfileError */
 exports.EditProfileError = guard.ensure(['get', 'https', 'loggedIn'], editProfileError);
-/** @see module:controller/Account~EditForm */
+/** @see module:controllers/Account~EditForm */
 exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
-/** @see module:controller/Account~PasswordResetDialog */
+/** @see module:controllers/Account~PasswordResetDialog */
 exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
-/** @see module:controller/Account~PasswordResetDialogForm */
+/** @see module:controllers/Account~PasswordResetDialogForm */
 exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
-/** @see module:controller/Account~PasswordResetForm */
+/** @see module:controllers/Account~PasswordResetForm */
 exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
-/** @see module:controller/Account~SetNewPassword */
+/** @see module:controllers/Account~SetNewPassword */
 exports.SetNewPassword = guard.ensure(['get', 'https'], setNewPassword);
-/** @see module:controller/Account~SetNewPasswordForm */
+/** @see module:controllers/Account~SetNewPasswordForm */
 exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
-/** @see module:controller/Account~SetNewPasswordConfirm */
+/** @see module:controllers/Account~SetNewPasswordConfirm */
 exports.SetNewPasswordConfirm = guard.ensure(['get', 'https'], setNewPasswordConfirm);
-/** @see module:controller/Account~StartRegister */
+/** @see module:controllers/Account~StartRegister */
 exports.StartRegister = guard.ensure(['https'], startRegister);
-/** @see module:controller/Account~RegistrationForm */
+/** @see module:controllers/Account~RegistrationForm */
 exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
-/** @see module:controller/Account~LoginForm */
+/** @see module:controllers/Account~LoginForm */
 exports.LoginForm = guard.ensure(['get', 'https'], loginForm);
-/** @see module:controller/Account~IncludeNavigation */
+/** @see module:controllers/Account~IncludeNavigation */
 exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);
-/** @see module:controller/Account~Connect */
+/** @see module:controllers/Account~Connect */
 exports.Connect = guard.ensure(['https'], connect);

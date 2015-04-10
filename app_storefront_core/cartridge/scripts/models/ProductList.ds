@@ -2,20 +2,20 @@
 
 /*
  usage
- var content = require('~/cartridge/scripts/model/ProductList');
+ var content = require('~/cartridge/scripts/models/ProductList');
  */
 
-/** @module model/ProductList */
+/** @module models/ProductList */
 
 var AbstractModel = require('./AbstractModel');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 /**
  * ProductList helper providing enhanced content functionality
- * @class module:model/ProductList~ProductList
+ * @class module:models/ProductList~ProductList
  */
 var ProductList = AbstractModel.extend(
-    /** @lends module:model/ProductList~ProductList.prototype */
+    /** @lends module:models/ProductList~ProductList.prototype */
     {
         /**
          * Use this method to get the wishlist for the current customer. The method will create a new wishlist

@@ -8,7 +8,7 @@
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
-var Search = require('~/cartridge/scripts/model/Search');
+var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');

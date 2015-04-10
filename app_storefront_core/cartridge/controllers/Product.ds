@@ -8,11 +8,11 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
+var Cart = require('~/cartridge/scripts/models/Cart');
 var PagingModel = require('dw/web/PagingModel');
-var Product = require('~/cartridge/scripts/model/Product');
+var Product = require('~/cartridge/scripts/models/Product');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
-var Search = require('~/cartridge/scripts/model/Search');
+var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -30,7 +30,7 @@ function show() {
     if (product.isVisible()) {
         pageMeta.update(product);
 
-        var productView = view.get('view/ProductView', {
+        var productView = view.get('views/ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -61,7 +61,7 @@ function detail() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('view/ProductView', {
+        var productView = view.get('views/ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -110,7 +110,7 @@ function hitTile() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('view/ProductView', {
+        var productView = view.get('views/ProductView', {
             product       : product,
             showswatches  : true,
             showpricing   : true,
@@ -189,7 +189,7 @@ function variation() {
 
     if (product.isVisible()) {
 
-        var productView = view.get('view/ProductView', {
+        var productView = view.get('views/ProductView', {
             product : product
         });
 
@@ -217,21 +217,21 @@ function variation() {
                 }
             }
 
-            view.get('view/ProductView', {
+            view.get('views/ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
         }
         else if (request.httpParameterMap.format.stringValue) {
-            view.get('view/ProductView', {
+            view.get('views/ProductView', {
                 product         : product,
                 GetImages       : true,
                 resetAttributes : resetAttributes
             }).render('product/productcontent');
         }
         else {
-            view.get('view/ProductView', {
+            view.get('views/ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel
             }).render('product/product');
@@ -253,7 +253,7 @@ function variationPS() {
 
     if (product.isVisible()) {
 
-        var productView = view.get('view/ProductView', {
+        var productView = view.get('views/ProductView', {
             product : product
         });
 
@@ -265,10 +265,10 @@ function variationPS() {
         }
 
         if (request.httpParameterMap.format.stringValue) {
-            view.get('view/ProductView', {product : product}).render('product/components/productsetproduct');
+            view.get('views/ProductView', {product : product}).render('product/components/productsetproduct');
         }
         else {
-            view.get('view/ProductView', {product : product}).render('product/product');
+            view.get('views/ProductView', {product : product}).render('product/product');
         }
     }
     else {
@@ -284,7 +284,7 @@ function variationPS() {
 function includeLastVisited() {
 
     response.renderTemplate('product/lastvisited', {
-        LastVisitedProducts : require('~/cartridge/scripts/model/RecentlyViewedItems').getRecentlyViewedProducts(3)
+        LastVisitedProducts : require('~/cartridge/scripts/models/RecentlyViewedItems').getRecentlyViewedProducts(3)
     });
 
 }
@@ -318,7 +318,7 @@ function getSetItem() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        view.get('view/ProductView', {
+        view.get('views/ProductView', {
             product : product,
             isSet   : true
         }).render('product/components/productsetproduct');

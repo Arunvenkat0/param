@@ -10,22 +10,22 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
+var Cart = require('~/cartridge/scripts/models/Cart');
 var CustomerMgr = require('dw/customer/CustomerMgr');
-var Form = require('~/cartridge/scripts/model/Form');
+var Form = require('~/cartridge/scripts/models/Form');
 var HashMap = require('dw/util/HashMap');
-var Profile = require('~/cartridge/scripts/model/Profile');
+var Profile = require('~/cartridge/scripts/models/Profile');
 var Resource = require('dw/web/Resource');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Site = require('dw/system/Site');
 var Transaction = require('dw/system/Transaction');
-var TransientAddress = require('~/cartridge/scripts/model/TransientAddress');
+var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var singleShippingForm = require('~/cartridge/scripts/model/Form').get('singleshipping');
-var shippingAddressForm = require('~/cartridge/scripts/model/Form').get('shippingaddress');
+var singleShippingForm = require('~/cartridge/scripts/models/Form').get('singleshipping');
+var shippingAddressForm = require('~/cartridge/scripts/models/Form').get('shippingaddress');
 var view = require('~/cartridge/scripts/view');
 
 /**

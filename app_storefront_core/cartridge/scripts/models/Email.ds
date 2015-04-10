@@ -3,7 +3,7 @@
 /**
  * Module for mail related functionality.
  *
- * @module model/Email
+ * @module models/Email
  */
 
 /* API Includes */
@@ -11,12 +11,12 @@ var AbstractModel = require('./AbstractModel');
 
 /**
  * Email helper providing enhanced email functionality
- * @class module:model/Email~Email
+ * @class module:models/Email~Email
  *
- * @extends module:model/AbstractModel
+ * @extends module:models/AbstractModel
  * @extends dw.net.Mail
  * @example
- * require('~/model/Email').get('mail/resetpasswordemail', Customer.profile.email)
+ * require('~/models/Email').get('mail/resetpasswordemail', Customer.profile.email)
  *     .setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null)).send({
  *          Customer : Customer,
  *          ResetPasswordToken : ResetPasswordToken
@@ -26,7 +26,7 @@ var AbstractModel = require('./AbstractModel');
  * @param {String} recipient The email address to which the text of the rendered template should be send.
  */
 var Email = AbstractModel.extend(
-    /** @lends module:model/Email~Email.prototype */
+    /** @lends module:models/Email~Email.prototype */
     {
         template : null,
 
@@ -81,7 +81,7 @@ var Email = AbstractModel.extend(
  *
  * @param {String} template The template which should be rendered and then be sent as email.
  * @param {String} recipient The email address to which the text of the rendered template should be send.
- * @returns {module:model/Email~Email}
+ * @returns {module:models/Email~Email}
  */
 Email.get = function (template, recipient) {
     return new Email(template, recipient);

@@ -1,5 +1,5 @@
 'use strict';
-/** @module model/Profile */
+/** @module models/Profile */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -10,10 +10,10 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 
 /**
  * Profile helper providing enhanced profile functionality
- * @class module:model/Profile~Profile
+ * @class module:models/Profile~Profile
  */
 var Profile = AbstractModel.extend(
-    /** @lends module:model/Profile~Profile.prototype */
+    /** @lends module:models/Profile~Profile.prototype */
     {
         /**
          * Use this method to get a new instance for a given product.

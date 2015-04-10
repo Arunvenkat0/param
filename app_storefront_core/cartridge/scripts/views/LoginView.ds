@@ -1,13 +1,13 @@
 'use strict';
 
-/** @module view/LoginView */
+/** @module views/LoginView */
 var View = require('./View');
 
 /**
  * The view for the login page
  *
  * @class
- * @extends module:view/View~View
+ * @extends module:views/View~View
  */
 module.exports = View.extend({
 

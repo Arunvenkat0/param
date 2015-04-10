@@ -6,8 +6,8 @@
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/model/Content');
-var Search = require('~/cartridge/scripts/model/Search');
+var Content = require('~/cartridge/scripts/models/Content');
+var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');

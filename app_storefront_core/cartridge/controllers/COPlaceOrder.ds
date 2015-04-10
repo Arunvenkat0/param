@@ -11,12 +11,12 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
-var Email = require('~/cartridge/scripts/model/Email');
-var Order = require('~/cartridge/scripts/model/Order');
+var Cart = require('~/cartridge/scripts/models/Cart');
+var Email = require('~/cartridge/scripts/models/Email');
+var Order = require('~/cartridge/scripts/models/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
+var PaymentProcessor = require('~/cartridge/scripts/models/PaymentProcessor');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var Status = require('dw/system/Status');

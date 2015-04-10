@@ -8,23 +8,23 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/model/Cart');
-var Form = require('~/cartridge/scripts/model/Form');
+var Cart = require('~/cartridge/scripts/models/Cart');
+var Form = require('~/cartridge/scripts/models/Form');
 var GiftCertificate = require('dw/order/GiftCertificate');
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
+var PaymentProcessor = require('~/cartridge/scripts/models/PaymentProcessor');
 var ProductListMgr = require('dw/customer/ProductListMgr');
-var Profile = require('~/cartridge/scripts/model/Profile');
+var Profile = require('~/cartridge/scripts/models/Profile');
 var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var billingForm = require('~/cartridge/scripts/model/Form').get('billing');
-var billingAddressForm = require('~/cartridge/scripts/model/Form').get('billingaddress');
+var billingForm = require('~/cartridge/scripts/models/Form').get('billing');
+var billingAddressForm = require('~/cartridge/scripts/models/Form').get('billingaddress');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');

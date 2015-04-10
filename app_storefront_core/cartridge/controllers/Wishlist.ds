@@ -3,23 +3,23 @@
 /**
  * Controller : wishlist
  *
- * @module controller/Wishlist
+ * @module controllers/Wishlist
  */
 
 /* API Includes */
 var Transaction = require('dw/system/Transaction');
-var Product = require('~/cartridge/scripts/model/Product');
-var ProductList = require('~/cartridge/scripts/model/ProductList');
+var Product = require('~/cartridge/scripts/models/Product');
+var ProductList = require('~/cartridge/scripts/models/ProductList');
 var CustomerMgr = require('dw/customer/CustomerMgr');
 
 /* Script Modules */
-var content = require('~/cartridge/scripts/model/Content');
+var content = require('~/cartridge/scripts/models/Content');
 var accountLogin = content.get('myaccount-login');
 var wishlistAsset = content.get('myaccount-wishlist');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/model/Form');
+var Form = require('~/cartridge/scripts/models/Form');
 var wishlistForm = Form.get('wishlist');
 
 /**
@@ -128,8 +128,8 @@ function wishListForm() {
                     }
                 );
 
-            var items : dw.util.Iterator = ProductList.items.iterator();
-		    var anItem : dw.customer.ProductListItem = null;
+            var items = ProductList.items.iterator();
+		    var anItem = null;
 		    while( items.hasNext() ) {
 		    	anItem = items.next();
 		    	anItem.setPublic(false);
@@ -145,8 +145,8 @@ function wishListForm() {
                     }
                 );
 
-            var items : dw.util.Iterator = ProductList.items.iterator();
-		    var anItem : dw.customer.ProductListItem = null;
+            var items = ProductList.items.iterator();
+		    var anItem = null;
 		    while( items.hasNext() ) {
 		    	anItem = items.next();
 		    	anItem.setPublic(true);
@@ -312,25 +312,25 @@ function replaceProductListItem() {
  * Web exposed methods
  */
 // own wishlist
-/** @see module:controller/Whishlist~Add */
+/** @see module:controllers/Whishlist~Add */
 exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
-/** @see module:controller/Whishlist~Show */
+/** @see module:controllers/Whishlist~Show */
 exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
-/** @see module:controller/Whishlist~ReplaceProductListItem */
+/** @see module:controllers/Whishlist~ReplaceProductListItem */
 exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem);
-/** @see module:controller/Whishlist~SetShippingAddress */
+/** @see module:controllers/Whishlist~SetShippingAddress */
 exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress);
 
 // others wishlist
-/** @see module:controller/Whishlist~Search */
+/** @see module:controllers/Whishlist~Search */
 exports.Search                  = guard.ensure(['post', 'https'], search);
-/** @see module:controller/Whishlist~ShowOther */
+/** @see module:controllers/Whishlist~ShowOther */
 exports.ShowOther               = guard.ensure(['get', 'https'], showOther);
 
 // form handlers
-/** @see module:controller/Whishlist~LandingForm */
+/** @see module:controllers/Whishlist~LandingForm */
 exports.LandingForm             = guard.ensure(['post', 'https'], landingForm);
-/** @see module:controller/Whishlist~WishListForm */
+/** @see module:controllers/Whishlist~WishListForm */
 exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm);
 
 /*

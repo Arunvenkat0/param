@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module view/ProductView */
+/** @module views/ProductView */
 var View = require('./View');
 
 /**
@@ -59,7 +59,7 @@ var ProductView = View.extend(
         },
 
         /**
-         * @constructor module:view/ProductView~ProductView
+         * @constructor module:views/ProductView~ProductView
          */
         init : function (params) {
             this._super(params);

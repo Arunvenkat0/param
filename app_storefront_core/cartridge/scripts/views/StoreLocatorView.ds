@@ -1,5 +1,5 @@
 'use strict';
-/** @module view/StoreLocatorView */
+/** @module views/StoreLocatorView */
 
 var Resource = require('dw/web/Resource');
 var View = require('./View');
@@ -15,7 +15,7 @@ var StoreLocatorView = View.extend(
      * @param {object} params stores (Search result for stores), type (Supported values are findbyzip, findbystate and findbycountry)
      * searchKey (The value used to find Stores) properties are supported
      *
-     * @constructor module:view/StoreLocatorView~StoreLocatorView
+     * @constructor module:views/StoreLocatorView~StoreLocatorView
      */
     init : function (params) {
     	/** backward compatibility to URLUtils.continueURL() methods in old templates **/
@@ -55,5 +55,5 @@ var StoreLocatorView = View.extend(
     }
 });
 
-/** @see module:view/StoreLocatorView~StoreLocatorView */
+/** @see module:views/StoreLocatorView~StoreLocatorView */
 module.exports = StoreLocatorView;
