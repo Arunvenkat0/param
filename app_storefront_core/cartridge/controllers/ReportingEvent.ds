@@ -4,7 +4,7 @@
  * This is the module hook for the reporting events. Typically no modifications are needed here.
  * Demandware analytics is based on log file analysis. Log file entries are generated using remote includes in page templates.
  *
- * @module controller/ReportingEvent
+ * @module controllers/ReportingEvent
  */
 
 /* Script Modules */
@@ -14,14 +14,12 @@ var view = require('~/cartridge/scripts/view');
 /**
  * This is main method to handle all reporting events
  */
-function start()
-{
+function start() {
     view.get().render('util/reporting/reporting');
 }
-
 
 /*
  * Web exposed methods
  */
-/** @see module:controller/ReportingEvent~start */
+/** @see module:controllers/ReportingEvent~start */
 exports.Start = guard.ensure(['get'], start);

@@ -24,7 +24,7 @@
 
 		<div class="login-box-content clearfix">
 
-			<form action="${pdict.FindStoresUrl}" method="get" id="${session.forms.storelocator.htmlName}">
+			<form action="${URLUtils.continueURL()}" method="get" id="${session.forms.storelocator.htmlName}">
 				<fieldset>
 
 					<input type="hidden" name="${session.forms.storelocator.countryCode.htmlName}" value="US" />
@@ -43,7 +43,7 @@
 				</fieldset>
 			</form>
 
-			<form action="${pdict.FindStoresUrl}" method="get" id="${session.forms.storelocator.htmlName}_state">
+			<form action="${URLUtils.continueURL()}" method="get" id="${session.forms.storelocator.htmlName}_state">
 				<fieldset>
 
 					<isinputfield formfield="${session.forms.storelocator.address.states.stateUSCA}" type="select" mandatory="false"/>
@@ -73,7 +73,7 @@
 
 		<div class="login-box-content clearfix">
 
-			<form action="${pdict.FindStoresUrl}" method="get" id="${session.forms.storelocator.htmlName}_int">
+			<form action="${URLUtils.continueURL()}" method="get" id="${session.forms.storelocator.htmlName}_int">
 				<fieldset>
 
 					<isinputfield formfield="${session.forms.storelocator.address.country}" type="select" mandatory="false"/>

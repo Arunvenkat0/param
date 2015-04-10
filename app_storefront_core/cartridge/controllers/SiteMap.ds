@@ -3,7 +3,7 @@
 /**
  * Controller handling site map requests.
  *
- * @module controller/SiteMap
+ * @module controllers/SiteMap
  */
 
 /* Script Modules */
@@ -46,7 +46,7 @@ function start() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/SiteMap~google */
+/** @see module:controllers/SiteMap~google */
 exports.Google = guard.ensure(['get'], google);
-/** @see module:controller/SiteMap~start */
+/** @see module:controllers/SiteMap~start */
 exports.Start = guard.ensure(['get'], start);

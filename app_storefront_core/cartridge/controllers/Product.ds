@@ -4,7 +4,7 @@
  * Renders product detail pages, snippets/includes used on product detail pages as well as product tiles for product
  * listings.
  *
- * @module controller/Product
+ * @module controllers/Product
  */
 
 /* API Includes */
@@ -333,23 +333,23 @@ function getSetItem() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Product~show */
+/** @see module:controllers/Product~show */
 exports.Show                = guard.ensure(['get'], show);
-/*v @see module:controller/Product~detail */
+/*v @see module:controllers/Product~detail */
 exports.Detail              = guard.ensure(['get'], detail);
-/*v @see module:controller/Product~getAvailability */
+/*v @see module:controllers/Product~getAvailability */
 exports.GetAvailability     = guard.ensure(['get'], getAvailability);
-/** @see module:controller/Product~hitTile */
+/** @see module:controllers/Product~hitTile */
 exports.HitTile             = guard.ensure(['get'], hitTile);
-/** @see module:controller/Product~productNavigation */
+/** @see module:controllers/Product~productNavigation */
 exports.Productnav          = guard.ensure(['get'], productNavigation);
-/** @see module:controller/Product~variation */
+/** @see module:controllers/Product~variation */
 exports.Variation           = guard.ensure(['get'], variation);
-/** @see module:controller/Product~variationPS */
+/** @see module:controllers/Product~variationPS */
 exports.VariationPS         = guard.ensure(['get'], variationPS);
-/** @see module:controller/Product~includeLastVisited */
+/** @see module:controllers/Product~includeLastVisited */
 exports.IncludeLastVisited  = guard.ensure(['get'], includeLastVisited);
-/** @see module:controller/Product~getBonusProducts */
+/** @see module:controllers/Product~getBonusProducts */
 exports.GetBonusProducts    = guard.ensure(['get'], getBonusProducts);
-/** @see module:controller/Product~getSetItem */
+/** @see module:controllers/Product~getSetItem */
 exports.GetSetItem          = guard.ensure(['get'], getSetItem);

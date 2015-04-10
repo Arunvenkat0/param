@@ -16,18 +16,21 @@ var Email = require('~/cartridge/scripts/model/Email');
 /**
  * Customer helper providing enhanced content functionality
  * @class module:model/Customer~Customer
+ *
+ * @param parameter {dw.customer.Customer} The customer object to enhance/wrap.
  */
 var Customer = AbstractModel.extend(
-/** @lends module:model/Customer~Customer.prototype */
-{
-
-
-});
+    /** @lends module:model/Customer~Customer.prototype */
+    {});
 
 /**
  * Use this method to get the the current customer or pass in a customer instance.
+ *
+ * @param parameter {dw.customer.Customer=} The customer object to enhance/wrap. If NULL the current customer is
+ * retrieved from the session.
+ * @returns {module:model/Customer~Customer}
  */
-exports.get = function (parameter) {
+Customer.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'undefined') {
         obj = customer;
@@ -38,7 +41,18 @@ exports.get = function (parameter) {
     return new Customer(obj);
 };
 
-exports.login = function(username, password, rememberMe){
+/**
+ * Authenticates the current session using the supplied Login and Password. If a different customer is currently
+ * authenticated in the session, then this customer is "logged out" and her/his privacy and form data are deleted.
+ *
+ * @param username {String} Login name.
+ * @param password {String} Password.
+ * @param rememberMe {Boolean=} Optional Boolean value indicating if the customer wants to be remembered on the current
+ * computer. If a value of True is supplied a cookie identifying the customer is stored upon successful login. If a value
+ * of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.
+ * @returns {boolean}
+ */
+Customer.login = function (username, password, rememberMe) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : username
     });
@@ -66,14 +80,17 @@ exports.login = function(username, password, rememberMe){
     return true;
 };
 
-exports.logout = function(){
+/**
+ * Logs out the customer currently logged into the storefront.
+ */
+Customer.logout = function () {
     new dw.system.Pipelet('LogoutCustomer').execute();
 };
 
 /**
  * Looks up a customer by its login.
  */
-exports.getCustomerByLogin = function (login)
+Customer.getCustomerByLogin = function (login)
 {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : login
@@ -86,7 +103,7 @@ exports.getCustomerByLogin = function (login)
     return GetCustomerResult.Customer;
 };
 		
-exports.createCustomer = function (login, password)
+Customer.createCustomer = function (login, password)
 {
     var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
         Login : login,
@@ -108,7 +125,7 @@ exports.createCustomer = function (login, password)
  * @param password the password of the current customer
  * @return true, if the login / password was updated
  */
-exports.setLogin = function (customer, login, password)
+Customer.setLogin = function (customer, login, password)
 {
     if ((customer == null) || (login == null) || (password == null))
     {
@@ -118,7 +135,7 @@ exports.setLogin = function (customer, login, password)
     return customer.profile.credentials.setLogin(login, password);
 };
 
-exports.loginCustomer = function (login, password, rememberMe)
+Customer.loginCustomer = function (login, password, rememberMe)
 {
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
         Login : login,
@@ -134,7 +151,7 @@ exports.loginCustomer = function (login, password, rememberMe)
  * 
  * @return true, if the account was created successfully
  */
-exports.createAccount = function ()
+Customer.createAccount = function ()
 {
     var profileForm = session.forms.profile;
 
@@ -209,7 +226,7 @@ exports.createAccount = function ()
  * Checks the given user name on existence and ends on a named end node to
  * communicated the status back.
  */
-exports.checkUserName = function ()
+Customer.checkUserName = function ()
 {
     var profileForm = session.forms.profile;
 
@@ -229,7 +246,7 @@ exports.checkUserName = function ()
     return false;
 };
 		
-exports.editAccount = function ()
+Customer.editAccount = function ()
 {
     var profileForm = session.forms.profile;
 
@@ -283,3 +300,6 @@ exports.editAccount = function ()
 
     return true;
 };
+
+/** The customer class */
+module.exports = Customer;

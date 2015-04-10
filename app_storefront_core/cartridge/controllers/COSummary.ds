@@ -6,11 +6,12 @@
  * provides the customer with a last overview of the basket prior to confirm the
  * final order creation.
  *
- * @module controller/COSummary
+ * @module controllers/COSummary
  */
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
+var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
@@ -27,19 +28,21 @@ function start() {
     // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
     // instruments totals according to redeemed gift certificates or additional discounts granted through coupon
     // redemptions on this page.
-    if (require('./COBilling').ValidatePayment(cart).error) {
+    if (!require('./COBilling').ValidatePayment(cart)) {
         require('./COBilling').Start();
         return;
     }
+    else {
 
-    Transaction.wrap(function () {
-        cart.calculate();
-    });
+        Transaction.wrap(function () {
+            cart.calculate();
+        });
 
-    pageMeta.update({pageTitle : 'SiteGenesis Checkout'});
-    view.get({
-	    Basket : cart.object
-    }).render('checkout/summary/summary');
+        pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
+        view.get({
+            Basket : cart.object
+        }).render('checkout/summary/summary');
+    }
 }
 
 /**
@@ -78,7 +81,7 @@ function showConfirmation(order) {
     session.forms.profile.login.passwordconfirm.clearFormElement();
     session.forms.profile.login.password.clearFormElement();
 
-    pageMeta.update({pageTitle : 'SiteGenesis Checkout Confirmation'});
+    pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
     view.get({
         Order : order
     }).render('checkout/confirmation/confirmation');
@@ -91,9 +94,9 @@ function showConfirmation(order) {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COSummary~Start */
+/** @see module:controllers/COSummary~Start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controller/COSummary~Submit */
+/** @see module:controllers/COSummary~Submit */
 exports.Submit = guard.ensure(['https', 'post'], submit);
 
 /*

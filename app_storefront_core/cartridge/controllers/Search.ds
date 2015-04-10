@@ -3,7 +3,7 @@
 /**
  * Controller handling search, category and family pages.
  *
- * @module controller/Search
+ * @module controllers/Search
  */
 
 /* API Includes */
@@ -250,9 +250,9 @@ function showProductGrid() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Search~show */
+/** @see module:controllers/Search~show */
 exports.Show            = guard.ensure(['get'], show);
-/** @see module:controller/Search~showContent */
+/** @see module:controllers/Search~showContent */
 exports.ShowContent     = guard.ensure(['get'], showContent);
-/** @see module:controller/Search~getSuggestions */
+/** @see module:controllers/Search~getSuggestions */
 exports.GetSuggestions  = guard.ensure(['get'], getSuggestions);

@@ -3,7 +3,7 @@
 /**
  * Handles all customer login related storefront processes.
  *
- * @module controller/Login
+ * @module controllers/Login
  */
 
 var guard          = require('~/cartridge/scripts/guard');
@@ -449,31 +449,31 @@ function Logout()
 /*
  * Web exposed methods
  */
-/** @see module:controller/Login~show */
+/** @see module:controllers/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
-/** @see module:controller/Login~handleLoginForm */
+/** @see module:controllers/Login~handleLoginForm */
 exports.LoginForm               = guard.ensure(['https','post'], handleLoginForm);
-/** @see module:controller/Login~handleOAuthLoginForm */
+/** @see module:controllers/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
-/** @see module:controller/Login~handleOAuthReentry */
+/** @see module:controllers/Login~handleOAuthReentry */
 exports.OAuthReentry            = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryLinkedIn    = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryGoogle      = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryGooglePlus  = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryMicrosoft   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryFacebook    = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryGitHub      = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentrySinaWeibo   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controller/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
 exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @see module:controller/Login~show */
+/** @see module:controllers/Login~show */
 exports.Logout                  = guard.all(Logout);
 
 /*

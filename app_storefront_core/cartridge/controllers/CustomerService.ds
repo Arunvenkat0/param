@@ -3,11 +3,11 @@
 /**
  * Controller handling customer service related pages, like help desk as well as the contact us form.
  *
- * @module controller/CustomerService
+ * @module controllers/CustomerService
  */
 
 /* API Includes */
-var Mail = require('dw/net/Mail');
+var Email = require('~/cartridge/scripts/model/Email');
 var Status = require('dw/system/Status');
 var Template = require('dw/util/Template');
 
@@ -20,56 +20,36 @@ var view = require('~/cartridge/scripts/view');
  * Renders the customer service overview page.
  */
 function show() {
-
-    var customerServiceView = view.get('view/CustomerServiceView');
-
-    customerServiceView.CustomerServiceLinks = customerServiceView.getCustomerServiceLinks();
-    customerServiceView.render('content/customerservice');
+    view.get('view/CustomerServiceView').render('content/customerservice');
 }
-
 
 /**
  * Renders the left hand navigation.
  */
 function leftNav() {
-
-    var customerServiceView = view.get('view/CustomerServiceView');
-
-    customerServiceView.CustomerServiceLinks = customerServiceView.getCustomerServiceLinks();
-    customerServiceView.render('content/customerserviceleftnav');
-
+    view.get('view/CustomerServiceView').render('content/customerserviceleftnav');
 }
-
 
 /**
  * Provides a contact us form which sends an email to the configured customer service email address.
  */
 function contactUs() {
-
     contactUsForm.clearFormElement();
     view.get('view/CustomerServiceView').render('content/contactus');
-
 }
 
 /**
  * The form handler.
  */
 function submit() {
-
     var contactUsResult = contactUsForm.handleAction({
         'send'  : function (formgroup) {
-
-            var template = new Template('mail/contactus');
-            var mail = new Mail();
-
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the
             // user's email for demonstration.
-            mail.addTo(formgroup.email.value);
-            mail.setFrom(formgroup.email.value);
-            mail.setSubject(formgroup.myquestion.value);
-            mail.setContent(template.render());
-
-            return mail.send();
+            return Email.get('mail/contactus', formgroup.email.value)
+                .setFrom(formgroup.email.value)
+                .setSubject(formgroup.myquestion.value)
+                .send({});
         },
         'error' : function (formgroup) {
             // no special error handling in case the form is invalid
@@ -85,7 +65,6 @@ function submit() {
     else {
         view.get('view/CustomerServiceView').render('content/contactus');
     }
-
 }
 
 /*
@@ -95,11 +74,11 @@ function submit() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/CustomerService~show */
-exports.Show = guard.ensure(['get', 'https'], show);
-/** @see module:controller/CustomerService~leftNav */
-exports.LeftNav = guard.ensure(['get', 'https'], leftNav);
-/** @see module:controller/CustomerService~contactUs */
+/** @see module:controllers/CustomerService~show */
+exports.Show = guard.ensure(['get'], show);
+/** @see module:controllers/CustomerService~leftNav */
+exports.LeftNav = guard.ensure(['get'], leftNav);
+/** @see module:controllers/CustomerService~contactUs */
 exports.ContactUs = guard.ensure(['get', 'https'], contactUs);
-/** @see module:controller/CustomerService~submit */
+/** @see module:controllers/CustomerService~submit */
 exports.Submit = guard.ensure(['post', 'https'], submit);

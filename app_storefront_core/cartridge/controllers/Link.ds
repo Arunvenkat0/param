@@ -5,7 +5,7 @@
  * content assets could link to that pipeline only. For all new code link to the respective
  * pipeline directly (Search-Show, Product-Show, etc.)
  *
- * @module controller/Link
+ * @module controllers/Link
  */
 
 /* Script Modules */
@@ -56,11 +56,11 @@ function page() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Link~category */
+/** @see module:controllers/Link~category */
 exports.Category = guard.ensure(['get'], category);
-/** @see module:controller/Link~categoryProduct */
+/** @see module:controllers/Link~categoryProduct */
 exports.CategoryProduct = guard.ensure(['get'], categoryProduct);
-/** @see module:controller/Link~product */
+/** @see module:controllers/Link~product */
 exports.Product = guard.ensure(['get'], product);
-/** @see module:controller/Link~page */
+/** @see module:controllers/Link~page */
 exports.Page = guard.ensure(['get'], page);

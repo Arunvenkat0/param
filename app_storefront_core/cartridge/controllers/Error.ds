@@ -4,7 +4,7 @@
  * This pipeline is called whenever a technical error occurs while processing a
  * request. A standard error page will be shown.
  *
- * @module controller/Error
+ * @module controllers/Error
  */
 
 /* Script Modules */
@@ -67,7 +67,7 @@ function forbidden() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/Error~start */
+/** @see module:controllers/Error~start */
 exports.Start = guard.all(start);
-/** @see module:controller/Error~forbidden */
+/** @see module:controllers/Error~forbidden */
 exports.Forbidden = guard.all(forbidden);

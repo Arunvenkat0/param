@@ -3,7 +3,7 @@
 /** @module view/View */
 
 var Class = require('~/cartridge/scripts/util/Class').Class;
-var object = require('~/cartridge/scripts/_object');
+var object = require('~/cartridge/scripts/object');
 
 /**
  * Base class for all modules following the <strong>View Concept</strong>.

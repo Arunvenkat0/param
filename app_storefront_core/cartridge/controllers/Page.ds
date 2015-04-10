@@ -2,7 +2,7 @@
 /**
  * Renders a content page or a content include.
  *
- * @module controller/Page
+ * @module controllers/Page
  */
 
 /* API Includes */
@@ -62,7 +62,7 @@ function include() {
 /*
  * Export the publicly available controller methods
  */
-/** @see module:controller/Page~show */
+/** @see module:controllers/Page~show */
 exports.Show = guard.ensure(['get'], show);
-/** @see module:controller/Page~include */
+/** @see module:controllers/Page~include */
 exports.Include = guard.ensure(['include'], include);

@@ -1,0 +1,22 @@
+{
+    "Controllers": {
+        "title": "The Controller concept"
+    },
+    "Models": {
+        "title": "The Model concept"
+    },
+    "Views": {
+        "title": "The View concept"
+    },
+    "Emails": {
+        "title": "Sending Emails"
+    },
+    "Extensions": {
+        "title": "Extension Points",
+        "children": {
+            "Payment": {
+                "title": "Payment processing"
+            }
+        }
+    }
+}

@@ -1,17 +1,27 @@
 'use strict';
 
 /**
- * This pipeline is responsible to create an order from the current basket. It's a pure processing pipeline and does no page
- * rendering. The pipeline is used by the checkout and is called upon the triggered place order action.
- * It contains the actual logic to authorize the payment and create the order. The pipeline communicates the result
+ * This controller is responsible to create an order from the current basket. It's a pure processing controller and does
+ * no page rendering. The controller is used by the checkout and is called upon the triggered place order action.
+ * It contains the actual logic to authorize the payment and create the order. The controller communicates the result
  * of the order creation process by named end nodes and uses a status object PlaceOrderError to set proper error states.
  * The calling pipeline is responsible to react on these end nodes and to evaluate the error status.
  *
- * @module controller/COPlaceOrder
+ * @module controllers/COPlaceOrder
  */
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/model/Cart');
+var Email = require('~/cartridge/scripts/model/Email');
+var Order = require('~/cartridge/scripts/model/Order');
+var OrderMgr = require('dw/order/OrderMgr');
+var PaymentMgr = require('dw/order/PaymentMgr');
+var PaymentProcessor = require('~/cartridge/scripts/model/PaymentProcessor');
+var Resource = require('dw/web/Resource');
+var Site = require('dw/system/Site');
+var Status = require('dw/system/Status');
+var Template = require('dw/util/Template');
+var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -23,54 +33,47 @@ var guard = require('~/cartridge/scripts/guard');
  * instrument is of an unknown payment method. If a payment method has no
  * payment processor assigned, the payment is deemed as authorized.
  */
-function handlePayments(args) {
-    var Order = args.Order;
+function handlePayments(order) {
 
-    if (Order.getTotalNetPrice() != 0.00) {
-        return {};
-    }
+    if (order.getTotalNetPrice() !== 0.00) {
 
-    if (Order.paymentInstruments.length != 0) {
-        return {
-            missingPaymentInfo : true
-        };
-    }
+        var paymentInstruments = order.getPaymentInstruments();
 
-    for (var i = 0; i < Order.paymentInstruments.length; i++) {
-        var PaymentInstrument = Order.paymentInstruments[i];
-
-        if (dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor == null) {
-            var txn = require('dw/system/Transaction');
-            txn.begin();
-
-            PaymentInstrument.paymentTransaction.transactionID = Order.orderNo;
-
-            txn.commit();
+        if (paymentInstruments.length === 0) {
+            return {
+                missingPaymentInfo : true
+            };
         }
-        else {
-            /*
-             * An Authorization Pipeline is being dynamically called based on a
-             * concatenation of the current Payment-Processor and a constant
-             * suffix (-Authorize). For example: Credit Cards processor ID =
-             * BASIC_CREDIT Authorization Pipeline = BASIC_CREDIT-Authorize
-             *
-             * The authorization pipeline must end in a named "error" end node
-             * to communicate any authorization error back to this pipeline.
-             * Additionally the authorization pipeline may put a
-             * dw.system.Status object into the pipeline dictonary under key
-             * PlaceOrderError, which contains provider specific error messages.
-             */
-            var AuthorizationPipeline = dw.order.PaymentMgr.getPaymentMethod(PaymentInstrument.paymentMethod).paymentProcessor.ID;
 
-            // dynamic call node to authorization pipeline
-            // TODO support global lookup of controller from site cartridge list
-            var PaymentProcessor = require('./lib/payment/' + AuthorizationPipeline);
-            var AuthorizationResult = PaymentProcessor.Authorize();
+        for (var i = 0; i < paymentInstruments.length; i++) {
+            var paymentInstrument = paymentInstruments[i];
 
-            if (AuthorizationResult.not_supported || AuthorizationResult.error) {
-                return {
-                    error : true
-                };
+            if (PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor() === null) {
+
+                Transaction.wrap(function () {
+                    paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
+                });
+            }
+            else {
+                /*
+                 * An Authorization Pipeline is being dynamically called based on a
+                 * concatenation of the current Payment-Processor and a constant
+                 * suffix (-Authorize). For example: Credit Cards processor ID =
+                 * BASIC_CREDIT Authorization Pipeline = BASIC_CREDIT-Authorize
+                 *
+                 * The authorization pipeline must end in a named "error" end node
+                 * to communicate any authorization error back to this pipeline.
+                 * Additionally the authorization pipeline may put a
+                 * dw.system.Status object into the pipeline dictionary under key
+                 * PlaceOrderError, which contains provider specific error messages.
+                 */
+                var authorizationResult = PaymentProcessor.authorize(order, paymentInstrument);
+
+                if (authorizationResult.not_supported || authorizationResult.error) {
+                    return {
+                        error : true
+                    };
+                }
             }
         }
     }
@@ -83,380 +86,214 @@ function handlePayments(args) {
  * since it is supposed to be called by pipelines only.
  */
 function start() {
-	var cart = Cart.get();
-    if (!cart.object) {
-        require('./Cart').Show();
-        return {};
-    }
-    else {
+    var cart = Cart.get();
 
+	if (cart.object) {
         // Clean shipments.
-        var PrepareShipmentsResult = require('./COShipping').PrepareShipments(cart);
+        require('./COShipping').PrepareShipments(cart);
 
         // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
-        if (cart.getProductLineItems().size() > 0) {
-            if (cart.getDefaultShipment().getShippingAddress() == null) {
-	            require('./COShipping').Start();
-                return {};
-            }
+        if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
+            require('./COShipping').Start();
+            return {};
         }
 
         // Make sure, the billing step has been fulfilled, otherwise restart checkout.
         if (!session.forms.billing.fulfilled.value) {
-	        require('./COCustomer').Start();
+            require('./COCustomer').Start();
             return {};
         }
 
-        var CalculateResult = require('./Cart').Calculate();
+        Transaction.wrap(function () {
+            cart.calculate();
+        });
 
-        var ValidatePaymentResult = require('./COBilling').ValidatePayment(cart);
-        if (ValidatePaymentResult.error) {
-	        require('./COBilling').Start();
+        if (!require('./COBilling').ValidatePayment(cart)) {
+            require('./COBilling').Start();
             return {};
         }
 
-        // Validate the cart against availability and price calculation.
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            ScriptFile    : 'cart/ValidateCartForCheckout.ds',
-            Transactional : false
-        }).execute({
-                Basket      : cart.object,
-                ValidateTax : true
-            });
-        if (ScriptResult.result == PIPELET_ERROR) {
-	        require('./Cart').Show();
-            return {};
-        }
-        var BasketStatus = ScriptResult.BasketStatus;
-        var EnableCheckout = ScriptResult.EnableCheckout;
+        var validationResult = cart.validateForCheckout();
+
+        // TODO - what are those used for - do they need to be returned/passed to a template ?
+        var BasketStatus = validationResult.BasketStatus;
+        var EnableCheckout = validationResult.EnableCheckout;
 
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            ScriptFile    : 'checkout/CalculatePaymentTransactionTotals.ds',
-            Transactional : true,
-            OnError       : 'PIPELET_ERROR'
-        }).execute({
-                Basket : cart.object
-            });
-        var PaymentStatus = ScriptResult.PaymentStatus;
-        if (ScriptResult.result == PIPELET_ERROR) {
-            if (PaymentStatus.getStatus() == Status.ERROR) {
-	            require('./COBilling').Start();
-                return {};
-            }
-            else {
-	            require('./Cart').Show();
-                return {};
-            }
+        if (!cart.calculatePaymentTransactionTotal()) {
+            require('./COBilling').Start();
+            return {};
         }
 
         // Handle used addresses and credit cards.
-        var processPersonalInformationResult = processPersonalInformation();
-        if (processPersonalInformationResult.error) {
-            var PlaceOrderError = new dw.system.Status(dw.system.Status.ERROR, "confirm.error.technical");
+        var saveCCResult = require('./COBilling').SaveCreditCard();
+
+        if (!saveCCResult) {
             return {
                 error           : true,
-                PlaceOrderError : PlaceOrderError
+                PlaceOrderError : new Status(Status.ERROR, "confirm.error.technical")
             };
         }
 
         // Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
         // 'Created'.
-        var createOrderResult = createOrder(cart);
-        if (createOrderResult.error) {
-            var BasketStatus = new dw.system.Status(dw.system.Status.ERROR);
-	        require('./Cart').Show();
-            return {};
+        var order = cart.createOrder();
+
+        if (!order) {
+            // TODO - need to pass BasketStatus to Cart-Show ?
+            var BasketStatus = new Status(Status.ERROR);
+            require('./Cart').Show();
+
+	        return {};
         }
-        var Order = createOrderResult.Order;
+        else {
+            var handlePaymentsResult = handlePayments(order);
+            if (handlePaymentsResult.error) {
+                OrderMgr.failOrder(order);
+                return {error : true};
+            }
+            else if (handlePaymentsResult.missingPaymentInfo) {
+                OrderMgr.failOrder(order);
+                return {error : true};
+            }
 
-	    var handlePaymentsResult = handlePayments({
-		    Order : Order
-	    });
-	    if (handlePaymentsResult.error) {
-		    return failOrder({
-			    PlaceOrderError : new dw.system.Status(dw.system.Status.ERROR, "confirm.error.declined")
-		    });
-
-	    } else if (handlePaymentsResult.missingPaymentInfo) {
-		    return failOrder({
-			    PlaceOrderError : new dw.system.Status(dw.system.Status.ERROR, "confirm.error.session")
-		    });
-	    }
-
-	    return submitImpl({Order : Order});
+            return submitImpl(order);
+        }
+    }
+    else {
+        require('./Cart').Show();
+        return {};
     }
 }
 
-function submitImpl(args) {
-    var Order = args.Order;
+/**
+ * Submit order implementation.
+ *
+ * @param order
+ * @returns {*}
+ */
+function submitImpl(order) {
 
-    /*
-     * Sets the Order status to 'New'.
-     */
-    var PlaceOrderResult = placeOrder({
-        Order : Order
+    var orderPlacementStatus = Transaction.wrap(function () {
+        if (OrderMgr.placeOrder(order) === Status.ERROR) {
+            OrderMgr.failOrder(order);
+            return false;
+        }
+
+        order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
+
+        return true;
     });
-    if (PlaceOrderResult.error) {
-        return failOrder({
-            PlaceOrderError : new dw.system.Status(dw.system.Status.ERROR, "confirm.error.technical")
-        });
+
+    if (orderPlacementStatus === Status.ERROR) {
+        return {error : true};
     }
 
-    /*
-     * Creates purchased gift certificates with this order.
-     */
-    var createGiftCertificatesResult = createGiftCertificates({
-        Order : Order
-    });
-    if (createGiftCertificatesResult.error) {
-        return failOrder({
-            PlaceOrderError : new dw.system.Status(dw.system.Status.ERROR, "confirm.error.technical")
-        });
+    // Creates purchased gift certificates with this order.
+    if (!createGiftCertificates(order)) {
+        OrderMgr.failOrder(order);
+        return {error : true};
     }
 
-    /*
-     * Send order confirmation and clear used forms within the checkout process.
-     */
-    var m = require('./dw/mail');
-    m.sendMail({
-        MailFrom     : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
-        MailSubject  : (dw.web.Resource.msg('order.orderconfirmation-email.001', 'order', null) + " " + Order.orderNo).toString(),
-        MailTemplate : 'mail/orderconfirmation',
-        MailTo       : Order.customerEmail
-    });
-
-    /*
-     * Mark order as EXPORT_STATUS_READY.
-     */
-    new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'checkout/SetOrderStatus.ds'
-    }).execute({
-            Order : Order
+    // Send order confirmation and clear used forms within the checkout process.
+    Email.get('mail/orderconfirmation', order.getCustomerEmail())
+        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + " " + order.getOrderNo()).toString())
+        .send({
+            Order : order
         });
 
-    clearForms();
+    // Mark order as EXPORT_STATUS_READY.
+    Transaction.wrap(function () {
+        order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
+        order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
+    });
+
+    // Clears all forms used in the checkout process.
+    session.forms.singleshipping.clearFormElement();
+    session.forms.multishipping.clearFormElement();
+    session.forms.billing.clearFormElement();
 
     return {
-        Order         : Order,
+        Order         : order,
         order_created : true
     };
 }
 
 /**
- * All errors must explicitly call FailOrder, to revive the Basket … or the
- * customer order will remain unaccessible
- */
-function failOrder(args) {
-    var Order = args.Order;
-
-    new dw.system.Pipelet('FailOrder').execute({
-        Order : Order
-    });
-
-    return {
-        error : true
-    };
-}
-
-/**
- * Responsible for creating the order, set the order status to 'Created'
- */
-function createOrder(cart) {
-
-    var CreateOrder2Result = new dw.system.Pipelet('CreateOrder2', {
-        CreateCustomerNo : true
-    }).execute({
-            Basket : cart.object
-        });
-    if (CreateOrder2Result.result == PIPELET_ERROR) {
-        return {
-            error : true
-        };
-    }
-    var Order = CreateOrder2Result.Order;
-    return {
-        Order : Order
-    };
-}
-
-/**
- * Clears all forms used in the checkout process.
- */
-function clearForms() {
-    session.forms.singleshipping.clearFormElement();
-    session.forms.multishipping.clearFormElement();
-    session.forms.billing.clearFormElement();
-}
-
-/**
- * Responsible for placing the order and set the order status to 'New'
- */
-function placeOrder(args) {
-    var Order = args.Order;
-
-    var PlaceOrderResult = new dw.system.Pipelet('PlaceOrder').execute({
-        Order : Order
-    });
-    if (PlaceOrderResult.result == PIPELET_ERROR) {
-        return {
-            error : true
-        };
-    }
-
-    var txn = require('dw/system/Transaction');
-    txn.begin();
-
-    Order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
-
-    txn.commit();
-
-    return {};
-}
-
-/*
- * These pipelines contain past order creation logic. However, they must be
- * called within the transaction.
- */
-
-/**
  * Creates a gift certificate for each gift certificate line item in the order
  * and sends an email to the gift certificate receiver.
  */
-function createGiftCertificates(args) {
-    var Order = args.Order;
+function createGiftCertificates(order) {
 
-    for (var i = 0; i < Order.giftCertificateLineItems.length; i++) {
-        var GiftCertificateLineItem = Order.giftCertificateLineItems[i];
+	var giftCertificates = Order.get(order).createGiftCertificates();
 
-        var CreateGiftCertificateResult = new dw.system.Pipelet('CreateGiftCertificate').execute({
-            Amount                  : GiftCertificateLineItem.netPrice.value,
-            RecipientEmail          : GiftCertificateLineItem.recipientEmail,
-            RecipientName           : GiftCertificateLineItem.recipientName,
-            SenderName              : GiftCertificateLineItem.senderName,
-            GiftCertificateLineItem : GiftCertificateLineItem,
-            Message                 : GiftCertificateLineItem.message,
-            OrderNo                 : Order.orderNo
-        });
-        if (CreateGiftCertificateResult.result == PIPELET_ERROR) {
-            return {
-                error : true
-            };
+	if (giftCertificates) {
+
+		for (var i = 0; i < giftCertificates.length; i++) {
+			var giftCertificate = giftCertificates[i];
+
+            // Send order confirmation and clear used forms within the checkout process.
+            Email.get('mail/giftcert', giftCertificate.recipientEmail)
+                .setSubject(Resource.msg('email.ordergcemsg', 'email', null) + " " + giftCertificate.senderName)
+                .send({
+		            GiftCertificate : giftCertificate
+                });
         }
-        var GiftCertificate = CreateGiftCertificateResult.GiftCertificate;
 
-        var m = require('./dw/mail');
-        m.sendMail({
-            MailFrom     : dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail'),
-            MailSubject  : dw.web.Resource.msg('email.ordergcemsg', 'email', null) + " " + GiftCertificate.senderName,
-            MailTemplate : "mail/giftcert",
-            MailTo       : GiftCertificate.recipientEmail
-        });
-    }
-
-    return {};
-}
-
-/**
- * This pipeline is responsible to process information supplied by the user
- * during the checkout and saves a used credit card to the customer payment
- * instruments.
- */
-function processPersonalInformation() {
-    var SaveCreditCardResult = require('./COBilling').SaveCreditCard();
-    if (SaveCreditCardResult.error) {
-        return {
-            error : true
-        };
-    }
-    return {};
-}
-
-function getOrder() {
-    if (!empty(Order)) {
-        return {};
-    }
-
-    if (empty(request.httpParameterMap.order_id.stringValue)) {
-        return {
-            error : true
-        }
-    }
-
-    var GetOrderResult = new dw.system.Pipelet('GetOrder').execute({
-        OrderNo : request.httpParameterMap.order_id.stringValue
-    });
-    if (GetOrderResult.result == PIPELET_ERROR) {
-        return {
-            error : true
-        }
-    }
-    var Order = GetOrderResult.Order;
-
-    if (request.httpParameterMap.order_token.stringValue != Order.getOrderToken()) {
-        return {
-            error : true
-        }
-    }
-
-    return {
-        Order : Order
-    };
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 /**
  * Asynchronous Callbacks for OCAPI. These functions result in a JSON response.
  */
 function submitPaymentJSON() {
-    var getOrderResult = getOrder();
-    if (getOrderResult.error) {
-        faultsJSON();
+
+    var order = Order.get(request.httpParameterMap.order_id.stringValue);
+    if (order.object && (request.httpParameterMap.order_token.stringValue === order.getOrderToken())) {
+
+	    session.forms.billing.paymentMethods.clearFormElement();
+
+	    var requestObject = JSON.parse(request.httpParameterMap.requestBodyAsString);
+	    var form = session.forms.billing.paymentMethods;
+
+	    for( var requestObjectItem in requestObject ) {
+		    var asyncPaymentMethodResponse = requestObject[requestObjectItem];
+
+		    var terms = requestObjectItem.split('_');
+		    if (terms[0] === "creditCard" && terms[1] === "number")
+			    form["creditCard"]["number"].setValue(asyncPaymentMethodResponse);
+		    else if (terms[0] === "creditCard" && terms[1] === "cvn")
+			    form["creditCard"]["cvn"].setValue(asyncPaymentMethodResponse);
+		    else if (terms[0] === "creditCard" && terms[1] === "month")
+			    form["creditCard"]["month"].setValue(Number(asyncPaymentMethodResponse));
+		    else if (terms[0] === "creditCard" && terms[1] === "year")
+			    form["creditCard"]["year"].setValue(Number(asyncPaymentMethodResponse));
+		    else if (terms[0] === "creditCard" && terms[1] === "owner")
+			    form["creditCard"]["owner"].setValue(asyncPaymentMethodResponse);
+		    else if (terms[0] === "creditCard" && terms[1] === "type")
+			    form["creditCard"]["type"].setValue(asyncPaymentMethodResponse);
+		    else if (terms[0] === "selectedPaymentMethodID")
+			    form["selectedPaymentMethodID"].setValue(asyncPaymentMethodResponse);
+	    }
+
+	    if (require('./COBilling').HandlePaymentSelection(cart).error || handlePayments().error) {
+		    view.get().render('checkout/components/faults');
+		    return;
+	    }
+	    else {
+            view.get({}).render('checkout/components/payment_methods_success');
+		    return;
+	    }
+    }
+    else {
+        view.get().render('checkout/components/faults');
         return;
     }
-
-    var copyPaymentInfoResult = copyPaymentInfo();
-    if (copyPaymentInfoResult.error) {
-        faultsJSON();
-        return;
-    }
-
-    var handlePaymentsResult = handlePayments();
-    if (handlePaymentsResult.error) {
-        faultsJSON();
-        return;
-    }
-
-    response.renderTemplate('checkout/components/payment_methods_success', {});
-}
-
-function faultsJSON() {
-    response.renderTemplate('checkout/components/faults');
-}
-
-function copyPaymentInfo() {
-    session.forms.billing.paymentMethods.clearFormElement();
-
-    new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'checkout/CopyPaymentMethodsFromOCAPIRequest.ds'
-    }).execute({
-            PaymentMethodsForm : session.forms.billing.paymentMethods,
-            HttpParamMap       : request.httpParameterMap
-        });
-
-    // Order?
-    var HandlePaymentSelectionResult = require('./COBilling').HandlePaymentSelection(cart);
-    if (HandlePaymentSelectionResult.error) {
-        return {
-            error : true
-        };
-    }
-
-    return {};
 }
 
 /*
@@ -464,25 +301,19 @@ function copyPaymentInfo() {
  */
 function submit() {
 
-    var getOrderResult = getOrder();
-    if (getOrderResult.error) {
-	    require('./COSummary').Start();
+    var order = Order.get(request.httpParameterMap.order_id.stringValue);
+    if (!order.object || (request.httpParameterMap.order_token.stringValue !== order.getOrderToken())) {
+        require('./COSummary').Start();
+        return;
+    }
+    else if (submitImpl().error) {
+        require('./COSummary').Start();
         return;
     }
 
-    var placeOrderResult = submitImpl();
-    if (placeOrderResult.error) {
-	    require('./COSummary').Start();
-        return;
-    }
-
-	require('./COSummary').ShowConfirmation();
+    require('./COSummary').ShowConfirmation();
 }
 
-/**
- * Order successfully created, communicate status back to calling pipeline.
- * TODO ????
- */
 /*
  * Module exports
  */
@@ -490,9 +321,9 @@ function submit() {
 /*
  * Web exposed methods
  */
-/** @see module:controller/COPlaceOrder~submitPaymentJSON */
+/** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.SubmitPaymentJSON = guard.ensure(['https'], submitPaymentJSON);
-/** @see module:controller/COPlaceOrder~submitPaymentJSON */
+/** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.Submit = guard.ensure(['https'], submit);
 
 /*
