@@ -34,8 +34,9 @@ var ProductList = AbstractModel.extend(
                 }else{
                     obj = obj[0];
                 }
-            }
-            else if (typeof parameter === 'object') {
+            } else if (typeof parameter === 'string') {
+                obj = ProductListMgr.getProductList(parameter);
+            } else if (typeof parameter === 'object') {
                 obj = parameter;
             }
             return new ProductList(obj);
@@ -94,7 +95,7 @@ var ProductList = AbstractModel.extend(
                 while( items.hasNext() ) {
                     var anItem = items.next();
                     anItem.setPublic(isPublic);
-            }
+                }
             });
         }
 

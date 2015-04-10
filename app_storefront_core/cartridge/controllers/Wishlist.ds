@@ -7,7 +7,6 @@
  */
 
 /* API Includes */
-var CustomerMgr = require('dw/customer/CustomerMgr');
 var Form = require('~/cartridge/scripts/models/Form');
 var Product = require('~/cartridge/scripts/models/Product');
 var ProductList = require('~/cartridge/scripts/models/ProductList');
@@ -25,13 +24,13 @@ var wishlistForm = Form.get('wishlist');
  * Forms handling for the landing page
  */
 function landingForm() {
-    var formResult = wishlistForm.handleAction({
-        'register'             : function (formgroup) {
+    wishlistForm.handleAction({
+        'register'             : function () {
            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
            return;
         },
-        'search'             : function (formgroup) {
-            Search();
+        'search'             : function () {
+            search();
             return;
         }
     });
@@ -62,13 +61,13 @@ function show() {
  */
 function wishListForm() {
     var productList = require('~/cartridge/scripts/models/ProductList').get();
-    var formResult = wishlistForm.handleAction({
+    wishlistForm.handleAction({
         'addGiftCertificate'     : function (formgroup) {
-            var AddGiftCertificateToProductListResult = new dw.system.Pipelet('AddGiftCertificateToProductList')
-                    .execute({
-                        ProductList : productList.object,
-                        Priority : 0
-                    });
+            new dw.system.Pipelet('AddGiftCertificateToProductList')
+                .execute({
+                    ProductList : productList.object,
+                    Priority : 0
+                });
         },
         'deleteItem'     : function (formgroup, action) {
             dw.system.Logger.info('Deleting product {0} from wishlist.',action.object.productID);
@@ -90,21 +89,18 @@ function wishListForm() {
         },
         'setListPrivate' : function(){
             dw.system.Logger.info('Customer {0} set wishlist private.',customer.ID);
-            productList.setPublic(true);
+            productList.setPublic(false);
         },
         'setListPublic' : function(){
             dw.system.Logger.info('Customer {0} set wishlist public.',customer.ID);
-            productList.setPublic(false);
-        }
-    });
-
-    // @TODO move these last two action into wishlistForm.handleAction()
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null)
-    {
-        if (TriggeredAction.formId === 'addToCart')
-        {
-            if (currentForms.wishlist.items.triggeredFormAction.parent.object.type === currentForms.wishlist.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
+            productList.setPublic(true);
+        },
+        'selectAddressWishlist' : function(){
+            setShippingAddress();
+            return;
+        },
+        'addToCart' : function(formgroup){
+            if (formgroup.items.triggeredFormAction.parent.object.type === formgroup.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
                 // TODO redirect?
                 var GiftCertController = require('./GiftCert');
@@ -119,59 +115,7 @@ function wishListForm() {
                 return;
             }
         }
-        else if (TriggeredAction.formId === 'selectAddressWishlist')
-        {
-            SetShippingAddress();
-            return;
-        }
-        else if (TriggeredAction.formId === 'setItemPrivate')
-        {
-            Transaction.wrap(function () {
-                         ProductList.public = false;
-                    }
-                );
-        }
-        else if (TriggeredAction.formId === 'setItemPublic')
-        {
-            Transaction.wrap(function () {
-                          TriggeredAction.object.public = true;
-                    }
-                );
-        }
-        else if (TriggeredAction.formId === 'setListPrivate')
-        {
-            var ProductList = ProductList.get();
-
-            Transaction.wrap(function () {
-                         ProductList.public = false;
-                    }
-                );
-
-            var items = ProductList.items.iterator();
-		    var anItem = null;
-		    while( items.hasNext() ) {
-		    	anItem = items.next();
-		    	anItem.setPublic(false);
-		    }
-        }
-        else if (TriggeredAction.formId === 'setListPublic')
-        {
-            var ProductList = ProductList.get();
-
-
-            Transaction.wrap(function () {
-                         ProductList.public = true;
-                    }
-                );
-
-            var items = ProductList.items.iterator();
-		    var anItem = null;
-		    while( items.hasNext() ) {
-		    	anItem = items.next();
-		    	anItem.setPublic(true);
-		    }
-        }
-    }
+    });
 
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
@@ -183,7 +127,8 @@ function wishListForm() {
 function showOther() {
     Form.get('wishlist.send').clear();
 
-    var productList = ProductList.get();
+    var productList = ProductList.get(request.httpParameterMap.WishListID.value);
+    Form.get('wishlist.items').copyFrom(productList.object.items);
 
     view.get({
         ProductList : productList.object
@@ -195,16 +140,13 @@ function showOther() {
  * Expects: Product or ProductID or pid
  */
 // this is called from the cart
-function addProduct(args) {
+function addProduct() {
     var currentHttpParameterMap = request.httpParameterMap;
 
 
     // TODO var Product = args.Product;
-    var product = null;
-
     var product = Product.get(request.httpParameterMap.pid.stringValue).object;
     var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
-
 
     var productList = ProductList.get();
 
@@ -244,22 +186,29 @@ function search() {
     searchLastName = form.lastname.value;
     searchEmail = form.email.value;
 
-    if (form.valid && (!empty(searchFirstName) || (!empty(searchLastName) && !empty(searchEmail))))
+    if (form.valid && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail)))
     {
-        var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
-            searchLastName + ' AND OwnerEmail = ' + searchEmail;
-        var productLists = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
+        // @TODO API is different from pipelet SearchProductLists
+        // var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
+        //     searchLastName + ' AND OwnerEmail = ' + searchEmail;
+        // var productLists = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
+        var productLists = new dw.system.Pipelet('SearchProductLists').execute({
+            OwnerFirstName : searchFirstName,
+            OwnerLastName : searchLastName,
+            OwnerEmail : searchEmail,
+            Type : dw.customer.ProductList.TYPE_WISH_LIST
+        }).ProductLists;
 
         Form.get('wishlist.productlists').copyFrom(productLists);
 
         Form.get(form).clear();
     }
 
-    view.get().render('account/wishlist/wishlistresults', {
+    view.get({
         SearchFirstName : searchFirstName,
         SearchLastName : searchLastName,
         SearchEmail : searchEmail
-    });
+    }).render('account/wishlist/wishlistresults');
 }
 
 
@@ -267,24 +216,16 @@ function search() {
  * Set the shipping address for the wish list. Expects: AddressID
  */
 function setShippingAddress() {
-    var currentHttpParameterMap = request.httpParameterMap;
-
     var address = null;
+    var addressId = request.httpParameterMap.AddressID.stringValue || request.httpParameterMap.editAddress.stringValue;
 
-
-    if (!currentHttpParameterMap.AddressID.empty || !currentHttpParameterMap.editAddress.empty)
-    {
-        var GetCustomerAddressResult = dw.customer.AddressBook.getAddress(empty(currentHttpParameterMap.AddressID.stringValue) ? currentHttpParameterMap.editAddress.stringValue
-                            : currentHttpParameterMap.AddressID.stringValue);
-
-
-        address = GetCustomerAddressResult.Address;
+    if (addressId) {
+        address = dw.customer.AddressBook.getAddress(addressId);
     }
 
-
-    var ProductList = ProductList.get();
+    var productList = ProductList.get();
     Transaction.wrap(function () {
-         ProductList.setShippingAddress(address);
+         productList.setShippingAddress(address);
     });
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
