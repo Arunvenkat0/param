@@ -78,6 +78,24 @@ var ProductList = AbstractModel.extend(
                 return item;
             });
             return null;
+        },
+
+        /**
+         * Sets the list public/private
+         *
+         * @transactional
+         * @param {Boolean} isPublic the value the public flag should be set to
+         */
+        setPublic : function(isPublic){
+            var list = this.object;
+            Transaction.wrap(function(){
+                list.setPublic(isPublic);
+                var items = list.items.iterator();
+                while( items.hasNext() ) {
+                    var anItem = items.next();
+                    anItem.setPublic(isPublic);
+            }
+            });
         }
 
     });
