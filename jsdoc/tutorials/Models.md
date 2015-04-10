@@ -3,7 +3,7 @@ Models typically wrap a system object and provide related functionalities which 
 Example to instantiate a Content model
 ```
 // get content markup
-require('~/model/Content').get('footer-include').getMarkup();
+require('~/models/Content').get('footer-include').getMarkup();
 ```
 
 The above example will return the markup of the asset footer-include. Now why do we need this and don't just use `dw.catalog.ContentMgr.getContent('footer-include').custom.body.markupText`? The benefit is that the model will handle all kinds of error conditions that i.e. in a templates you do not need any wrapping isif statements which handle cases such as the asset not existing, body not being defined etc. - this will give you the asset's HTML or an empty string.

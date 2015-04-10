@@ -8,7 +8,7 @@ require('~/view').get().render('path/to/template');
 
 
 // or use a named view
-require('~/view').get("view/ProductView",{
+require('~/view').get("views/ProductView",{
     product : product,
     showRecommendations : false
 }).render('path/to/template');

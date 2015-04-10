@@ -61,7 +61,7 @@ function show() {
  * Forms handler for processing wish lists.
  */
 function wishListForm() {
-    var productList = require('~/cartridge/scripts/model/ProductList').get();
+    var productList = require('~/cartridge/scripts/models/ProductList').get();
     var formResult = wishlistForm.handleAction({
         'addGiftCertificate'     : function (formgroup) {
             var AddGiftCertificateToProductListResult = new dw.system.Pipelet('AddGiftCertificateToProductList')
@@ -158,7 +158,7 @@ function wishListForm() {
         {
             var ProductList = ProductList.get();
 
-            
+
             Transaction.wrap(function () {
                          ProductList.public = true;
                     }
