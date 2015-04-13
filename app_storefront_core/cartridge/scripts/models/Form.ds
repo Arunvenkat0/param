@@ -49,7 +49,7 @@ var Form = AbstractModel.extend(
         handleAction : function (formHandler) {
             // check whether an action is defined (e.g, if the form is invalid)
             var action = request.triggeredFormAction;
-            if (!action.formId) {
+            if (!action || !action.formId) {
                 // check whether there is an explicit error handler defined
                 if ('error' in formHandler) {
                     return formHandler.error.apply(formHandler, [this.object, action]);

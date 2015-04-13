@@ -1,163 +1,153 @@
-var g = require('./dw/guard');
+'use strict';
 
 /**
  * Displays credit card information and other payment related information and
  * lets the user change it.
+ *
+ * @module controllers/PaymentInstruments
  */
+
+/* API includes */
+var Transaction = require('dw/system/Transaction');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var Form = require('~/cartridge/scripts/models/Form');
+var paymentForm = Form.get('paymentinstruments');
+var view = require('~/cartridge/scripts/view');
+
 
 /**
  * Renders a list of the saved credit card payment instruments of the current
  * customer.
  */
-function List()
+function list()
 {
-    var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
-        PaymentMethod : dw.order.PaymentInstrument.METHOD_CREDIT_CARD,
-        Customer : customer
-    });
-    var PaymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
+    // var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+    //     PaymentMethod : dw.order.PaymentInstrument.METHOD_CREDIT_CARD,
+    //     Customer : customer
+    // });
+    var wallet = customer.getProfile().getWallet();
+    var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
+    paymentForm.clear();
+    paymentForm.get('creditcards.storedcards').copyFrom(paymentInstruments);
 
-    var form = require('./dw/form');
-    form.clearFormElement(session.forms.paymentinstruments);
-    form.updateFormWithObject(session.forms.paymentinstruments.creditcards.storedcards, PaymentInstruments);
+    pageMeta.update(dw.content.ContentMgr.getContent('myaccount-paymentsettings'));
 
-
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-paymentsettings"));
-
-    response.renderTemplate('account/payment/paymentinstrumentlist', {
-        PaymentInstruments : PaymentInstruments
-    });
+    view.get({
+        PaymentInstruments : paymentInstruments
+    }).render('account/payment/paymentinstrumentlist');
 }
 
 
 /**
  * Provides functionality to add a new credit card payment instrument to the
  * saved payment instruments of the current customer.
+ *
+ * @param {boolean} clearForm true or missing will clear the form before displaying the page, false will skip it
  */
-function Add()
+function add(clearForm)
 {
-    var form = require('./dw/form');
-    form.clearFormElement(session.forms.paymentinstruments);
-    form.setFormOptions(session.forms.paymentinstruments.creditcards.newcreditcard.type, dw.order.PaymentMgr
-            .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards);
-
-    response.renderTemplate('account/payment/paymentinstrumentdetails');
+    if(clearForm !== false){
+        paymentForm.clear();
+    }
+    paymentForm.get('creditcards.newcreditcard.type').setOptions(dw.order.PaymentMgr
+            .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
+    view.get().render('account/payment/paymentinstrumentdetails');
 }
 
-
-function PaymentForm()
+/**
+ * Handles the submitted form for creating payment instruments
+ */
+function handlePaymentForm()
 {
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        if (TriggeredAction.formId == 'create')
-        {
+    paymentForm.handleAction({
+        'create' : function(){
             if (!create())
             {
-                // TODO this should be a redirect
-                // must show the problems in the form
-                response.renderTemplate('account/payment/paymentinstrumentdetails');
+                add(false);
                 return;
+            }else{
+                response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
             }
+        },
+        'error' : function(){
+            add(false);
         }
-    }
+    });
 
-    // TODO what is this?
-    /*
-    if (session.forms.paymentinstruments.creditcards.valid)
-    {
-        create();
-        return;
-    }
-    */
-
-    response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+    //response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
 }
 
-
+/**
+ * Creates a new payment instrument
+ * @return {boolean} True in case of success, false otherwise
+ */
 function create()
 {
     if (!verifyCreditCard())
     {
         return false;
     }
-    
-    
-    var newCreditCardForm = session.forms.paymentinstruments.creditcards.newcreditcard;
-    
-    
-    var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
-        PaymentMethod : dw.order.PaymentInstrument.METHOD_CREDIT_CARD,
-        Customer : customer
-    });
-    var PaymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
 
-    
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError : 'PIPELET_ERROR',
-        ScriptFile : 'account/payment/DuplicateCheck.ds'
-    }).execute({
-        NoIn : newCreditCardForm.number.value,
-        PIList : PaymentInstruments
-    });
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-        return false;
-    }
-    var DuplicateCard = ScriptResult.Duplicate;
-    var OldCard = ScriptResult.OldCard;
+    var newCreditCardForm = Form.get('paymentinstruments.creditcards.newcreditcard');
+    var ccNumber = newCreditCardForm.object.number.value;
 
-    
-    var txn = require('dw/system/Transaction');
-    txn.begin();
-    
+    var wallet = customer.getProfile().getWallet();
+    var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-    var CreateCustomerPaymentInstrumentResult = new dw.system.Pipelet('CreateCustomerPaymentInstrument').execute({
-        PaymentMethod : dw.order.PaymentInstrument.METHOD_CREDIT_CARD,
-        Customer : customer
-    });
-    var PaymentInstrument = CreateCustomerPaymentInstrumentResult.PaymentInstrument;
-
-
-    var form = require('./dw/form');
-    if (!form.updateObjectWithForm(PaymentInstrument, newCreditCardForm))
-    {
-        txn.rollback();
-
-        return false;
+    var DuplicateCard;
+    var OldCard;
+    for each(var card in paymentInstruments) {
+        if (card.creditCardNumber === ccNumber) {
+            DuplicateCard = true;
+            OldCard = card;
+            break;
+        }
     }
 
-    if (DuplicateCard)
-    {
-        new dw.system.Pipelet('RemoveCustomerPaymentInstrument').execute({
-            PaymentInstrument : OldCard
-        });
-    }
+    Transaction.begin();
+        var PaymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-    txn.commit();
+        if (!newCreditCardForm.copyTo(PaymentInstrument)) {
+            Transaction.rollback();
 
-    var form = require('./dw/form');
-    form.clearFormElement(session.forms.paymentinstruments);
-    
+            return false;
+        }
+
+        if (DuplicateCard)
+        {
+            wallet.removePaymentInstrument(OldCard);
+        }
+    Transaction.commit();
+
+    paymentForm.clear();
+
     return true;
 }
 
 
 /**
  * Deletes a saved credit card payment instrument.
+ *
+ * @TODO Should be moved into handlePaymentForm
  */
 function Delete()
 {
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
-    {
-        new dw.system.Pipelet('RemoveCustomerPaymentInstrument').execute({
-            PaymentInstrument : TriggeredAction.object
-        });
-    }
+    paymentForm.handleAction({
+        'remove' : function(formGroup, action){
+            Transaction.wrap(function(){
+                var wallet = customer.getProfile().getWallet();
+                wallet.removePaymentInstrument(action.object);
+            });
+
+        },
+        'error' : function(){
+            // @TODO When could this happen
+        }
+    });
 
     response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
 }
@@ -168,7 +158,9 @@ function Delete()
  */
 
 /**
- * Verifies a credit card.
+ * Verifies if the entered credit card details are valid.
+ *
+ * @returns {boolean} True in case of success, false otherwise
  */
 function verifyCreditCard()
 {
@@ -183,53 +175,57 @@ function verifyCreditCard()
         ExpirationYear : newCreditCardForm.year.value,
         CardSecurityCode : newCreditCardForm.cvn.value
     });
-    if (VerifyPaymentCardResult.result == PIPELET_ERROR)
+    if (VerifyPaymentCardResult.result === PIPELET_ERROR)
     {
-        var Status = VerifyPaymentCardResult.Status;
+        var status = VerifyPaymentCardResult.Status;
 
-        new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError : 'PIPELET_ERROR',
-            ScriptFile : 'checkout/InvalidatePaymentCardFormElements.ds'
-        }).execute({
-            CreditCardForm : newCreditCardForm,
-            Status : Status
-        });
+        // verify that we have a status object and a valid credit card form
+        if( !status || !newCreditCardForm.valid )
+        {
+            return false;
+        }
 
+        // we are fine, if status is OK
+        if( status.status === dw.system.Status.OK )
+        {
+            return true;
+        }
+
+        // invalidate the payment card form elements
+        var items = status.items.iterator();
+        while( items.hasNext() )
+        {
+            var item = items.next();
+
+            switch( item.code )
+            {
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
+                    newCreditCardForm.number.invalidateFormElement();
+                    continue;
+
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE:
+                    newCreditCardForm.month.invalidateFormElement();
+                    newCreditCardForm.year.invalidateFormElement();
+                    continue;
+
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_SECURITY_CODE:
+                    newCreditCardForm.cvn.invalidateFormElement();
+            }
+        }
         return false;
     }
 
     return true;
 }
 
-/**
- * A decorator which ensures that only authenticated customers can access the functions.
- */
-function loggedIn(action)
-{
-    return function()
-    {
-        if (!customer.authenticated)
-        {
-            var accountController = require('./Account');
-            accountController.requireLogin({
-                TargetAction : 'PaymentInstruments-List'
-            });
-            return;
-        }
-        
-        action();
-    };
-}
-
-/*
- * Module exports
- */
-
 /*
  * Web exposed methods
  */
-exports.List            = g.httpsGet(loggedIn(List));
-exports.Add             = g.httpsGet(loggedIn(Add));
-exports.PaymentForm     = g.httpsPost(loggedIn(PaymentForm));
-exports.Delete          = g.https(loggedIn(Delete));
+/** @see module:controllers/PaymentInstruments~list */
+exports.List            = guard.ensure(['https', 'get', 'loggedIn'], list);
+/** @see module:controllers/PaymentInstruments~add */
+exports.Add             = guard.ensure(['https', 'get', 'loggedIn'], add);
+/** @see module:controllers/PaymentInstruments~handlePaymentForm */
+exports.PaymentForm     = guard.ensure(['https', 'post', 'loggedIn'], handlePaymentForm);
+/** @see module:controllers/PaymentInstruments~Delete */
+exports.Delete          = guard.ensure(['https', 'loggedIn'], Delete);
