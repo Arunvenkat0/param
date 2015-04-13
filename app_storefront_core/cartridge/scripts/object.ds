@@ -94,3 +94,19 @@ exports.convertToHashMap = function (object) {
 
 	return hashmap;
 };
+
+/**
+ * Convert the given Map to a plain object
+ *
+ * @param object {dw.util.Map}
+ * @return {Object} all the data which will be used in mail template.
+ */
+exports.fromHashMap = function (map) {
+	var object = {};
+
+	for each(var entry in map.entrySet()) {
+		object[entry.key] = entry.value;
+	}
+
+	return object;
+};

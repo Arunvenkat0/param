@@ -39,6 +39,31 @@ function requireLogin(params)
 }
 
 /**
+ * Performs a protocol switch for the URL of the current request to HTTPS. Responds with a redirect to the client.
+ *
+ * @return false, if switching is not possible (for example, because its a POST request)
+ */
+function switchToHttps()
+{
+    if (request.httpMethod !== 'GET')
+    {
+        // switching is not possible, send error 403 (forbidden)
+        response.sendError(403);
+        return false;
+    }
+
+    var url = 'https://' + request.httpHost + request.httpPath;
+
+    if (!empty(request.httpQueryString))
+    {
+        url += '?' + request.httpQueryString;
+    }
+
+    response.redirect(url);
+    return true;
+}
+
+/**
  * The available filters for endpoints, the names of the methods can be used in {@link module:guard~ensure}
  * @namespace
  */
@@ -71,10 +96,12 @@ var Filters = {
  * @see module:guard
  */
 function ensure (filters, action, params) {
-    return expose(function() {
+    return expose(function(args) {
         var error;
         var filtersPassed = true;
         var errors = [];
+        params = require('~/cartridge/scripts/object').extend(params,args);
+
         for (var i = 0; i < filters.length; i++) {
             LOGGER.debug('Ensuring guard "{0}"...',filters[i]  );
 
@@ -93,9 +120,7 @@ function ensure (filters, action, params) {
 
         if ( !error ) {
             error = function() {
-                var url = dw.web.URLUtils.url('Error-Start','guardmismatch', errors.join('|'));
-                response.redirect(url);
-                return response;
+                throw new Error('Guard(s) '+errors.join('|')+' did not match the incoming request.');
             };
         }
 

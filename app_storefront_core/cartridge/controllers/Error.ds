@@ -13,10 +13,14 @@ var view = require('~/cartridge/scripts/view');
 
 /**
  * Called by the system when an error was not handled locally (general error
- * page). In: PipelineName ErrorText
+ * page).
+ *
+ * @param {Object} args The arguments
+ * @param {String} args.ErrorText The error message
+ * @param {String} args.ControllerName The controller which caused the error
+ * @param {String} args.CurrentStartNodeName The endpoint name causing the error
  */
 function start(args) {
-
     /*
      * Determine if it was an ajax request by looking at
      * X-Requested-With=XMLHttpRequest request header. This header is set by
@@ -25,23 +29,25 @@ function start(args) {
      */
     var nodecorator = false;
 
-    if (request.getHttpHeaders().get("x-requested-with") === "XMLHttpRequest") {
-        var format = request.httpParameterMap.format.stringValue || "";
+    if (request.getHttpHeaders().get('x-requested-with') === 'XMLHttpRequest') {
+        var format = request.httpParameterMap.format.stringValue || '';
         nodecorator = true;
 
         // the requested output format is json so the error response needs to be json
-        if (format === "json") {
+        if (format === 'json') {
             response.renderJSON({
                 Success      : false,
-                LogRequestID : request.requestID.indexOf('-') > 0 ? request.requestID.substr(0, request.requestID.indexOf('-')) : request.requestID
+                LogRequestID : request.requestID.split('-')[0]
             });
 
             return;
         }
     }
 
+    // @FIXME Correct would be to set a 4xx status code but that breaks the page as it utilized remote includes
+    //response.setStatus(403);
     view.get({
-        PipelineName : args.PipelineName,
+        PipelineName : args.ControllerName,
         CurrentStartNodeName : args.CurrentStartNodeName,
         ErrorText    : args.ErrorText,
         nodecorator  : nodecorator
@@ -53,16 +59,10 @@ function start(args) {
  * Called by the system when a session hijacking was detected.
  */
 function forbidden() {
-
-	// TODO replace with Script API equivalent
-	new dw.system.Pipelet('LogoutCustomer').execute();
+	require('~/cartridge/scripts/models/Customer').logout();
     view.get().render('error/forbidden');
 
 }
-
-/*
- * Module exports
- */
 
 /*
  * Web exposed methods
