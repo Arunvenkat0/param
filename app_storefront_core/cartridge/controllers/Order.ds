@@ -4,18 +4,14 @@
  * Manages the order history of a registered user.
  *
  * @module controllers/Order
- * @todo  Requires cleanup
  */
-
 
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
+var PagingModel = require('dw/web/PagingModel');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var orderAsset = require('~/cartridge/scripts/model/Content').get('myaccount-orderhistory');
-var orderListForm = require('~/cartridge/scripts/model/Form').get('orders.orderlist');
-var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 
 /**
@@ -23,52 +19,42 @@ var view = require('~/cartridge/scripts/view');
  */
 function history()
 {
-    var orders = new dw.system.Pipelet('SearchSystemObject', {
-        ObjectType : 'Order',
-        SearchExpression : 'customerNo={1} AND status!={2}'
-    }).execute({
-        SortBy1 : "creationDate",
-        SortBy1Direction : 2,
-        Search1Value : customer.profile.customerNo,
-        Search2Value : dw.order.Order.ORDER_STATUS_REPLACED
-    });
-        
-    var OrdersUnpaged = orders.SearchResult;
-    var OrdersUnpagedCount = orders.SearchResultCount;
+    var orders = OrderMgr.searchOrders('customerNo={0} AND status!={1}', 'creationDate desc',
+                                        customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
+    var orderListForm = session.forms.orders.orderlist;
 
-
-    var PagingResult = new dw.system.Pipelet('Paging', {
-        DefaultPageSize : 5
-    }).execute({
-        Objects : OrdersUnpaged,
-        PageSize : 5,
-        ObjectsCount : OrdersUnpagedCount,
-        Start : request.httpParameterMap.start.intValue
-    });
-    var OrderPagingModel = PagingResult.PagingModel;
-
+    var parameterMap = request.httpParameterMap;
+    var pageSize = parameterMap.sz.intValue || 5;
+    var start = parameterMap.start.intValue || 0;
+    var orderPagingModel = new PagingModel(orders, orders.count);
+    orderPagingModel.setPageSize(pageSize);
+    orderPagingModel.setStart(start);
 
     session.forms.orders.orderlist.invalidateFormElement();
-    pageMeta.update(orderAsset);
-    view.get('Order', {OrderPagingModel : OrderPagingModel}).render('account/orderhistory/orders');
-    
-    return response;
+    var form = require('./dw/form');
+    form.clearFormElement(orderListForm);
+    form.updateFormWithObject(orderListForm, orderPagingModel.pageElements);
+
+    var web = require('./dw/web');
+    web.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
+
+    view.get({OrderPagingModel : orderPagingModel}).render('account/orderhistory/orders');
 }
 
 
-// TODO this should be a simple GET request to avoid refresh / back button
-// problems
+/**
+ * Renders the order detail page
+ */
 function orders()
 {
     var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null)
+    if (TriggeredAction !== null)
     {
-        if (TriggeredAction.formId == 'show')
+        if (TriggeredAction.formId === 'show')
         {
             var Order = TriggeredAction.object;
 
             view.get('OrderDetails', {Order : Order}).render('account/orderhistory/orderdetails');
-        
             return response;
         }
     }
@@ -84,30 +70,24 @@ function orders()
  */
 function track()
 {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var parameterMap = request.httpParameterMap;
 
-    if (empty(CurrentHttpParameterMap.orderID.stringValue))
+    if (empty(parameterMap.orderID.stringValue))
     {
         view.get('OrderDetails').render('account/orderhistory/orderdetails');
         return response;
     }
 
-    var searchKey = CurrentHttpParameterMap.orderID.stringValue;
-    searchKey = dw.order.Order.ORDER_STATUS_REPLACED;
-    var SearchSystemObjectResult = SystemObjectMgr.querySystemObjects('Order', 'UUID={1} AND status!={2}', '', searchKey);
-    var Orders = SearchSystemObjectResult.SearchResult;
+    var uuid = parameterMap.orderID.stringValue;
+    var orders = OrderMgr.searchOrders('UUID={0} AND status!={1}', 'creationDate desc', uuid, dw.order.Order.ORDER_STATUS_REPLACED);
 
-    if (empty(Orders))
+    if (empty(orders))
     {
         view.get('OrderDetails').render('account/orderhistory/orderdetails');
-        return response;
     }
 
-
-    var Order = Orders.next();
-
+    var Order = orders.next();
     view.get('OrderDetails', { Order : Order }).render('account/orderhistory/orderdetails');
-    return response;
 }
 
 
@@ -120,28 +100,27 @@ function track()
 function find()
 {
     var orderTrackForm = session.forms.ordertrack;
+    var orderNumber = orderTrackForm.orderNumber.value;
+    var orderFormEmail = orderTrackForm.orderEmail.value;
 
-    if (empty(orderTrackForm.orderNumber.value) || empty(orderTrackForm.postalCode.value)
-            || empty(orderTrackForm.orderEmail.value))
+    if (empty(orderNumber) || empty(orderTrackForm.postalCode.value)
+            || empty(orderFormEmail))
     {
         return {
             error : true
         };
     }
 
-    var searchKey = dw.order.Order.ORDER_STATUS_REPLACED;
-    var orderTrack = SystemObjectMgr.querySystemObjects('Order', 'orderNo={1} AND status!={2}', 'creationDate 2', searchKey);
+    var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNumber, dw.order.Order.ORDER_STATUS_REPLACED);
 
-    var Orders = orderTrack.SearchResult;
-
-    if (empty(Orders))
+    if (empty(orders))
     {
         return {
             error : true
         };
     }
 
-    var FoundOrder = Orders.next();
+    var FoundOrder = orders.next();
 
     if (!FoundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
     {
@@ -152,7 +131,7 @@ function find()
 
     var Order = FoundOrder;
 
-    if (Order.customerEmail != orderTrackForm.orderEmail.value)
+    if (Order.customerEmail !== orderFormEmail)
     {
         return {
             error : true
@@ -196,11 +175,11 @@ function loggedIn(action)
 /*
  * Web exposed methods
  */
-exports.History = guard.ensure(['get', 'https'],loggedIn(history));
-exports.Orders = guard.ensure(['post', 'https'],loggedIn(orders));
-exports.Track = guard.ensure(['get', 'https'],orders);
+exports.History = guard.ensure(['get', 'https', 'loggedIn'], history);
+exports.Orders = guard.ensure(['post', 'https', 'loggedIn'], orders);
+exports.Track = guard.ensure(['get', 'https'], orders);
 
 /*
  * Local methods
  */
-exports.find = find;
+exports.Find = find;
