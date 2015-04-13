@@ -52,7 +52,9 @@ function includeHeaderCustomerInfo() {
  * TODO
  */
 function errorNotFound() {
-    response.setStatus(404);
+    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+    // remote includes which the WA won't resolve
+    response.setStatus(410);
     view.get().render('error/notfound');
 }
 

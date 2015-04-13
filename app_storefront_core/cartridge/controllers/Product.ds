@@ -46,7 +46,9 @@ function show() {
         productView.render(product.getTemplate() || 'product/product');
     }
     else {
-        response.setStatus(404);
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
         view.get().render('error/notfound');
     }
 
@@ -77,7 +79,9 @@ function detail() {
         productView.render(product.getTemplate() || 'product/productdetail');
     }
     else {
-        response.setStatus(404);
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
         view.get().render('error/notfound');
     }
 
@@ -96,7 +100,9 @@ function getAvailability() {
         response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
-        response.setStatus(404);
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
         view.get().render('error/notfound');
     }
 
@@ -174,7 +180,9 @@ function productNavigation() {
 
     }
     else {
-        response.setStatus(404);
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
         view.get().render('error/notfound');
     }
 
@@ -238,7 +246,9 @@ function variation() {
         }
     }
     else {
-	    response.setStatus(404);
+	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
         view.get().render('error/notfound');
     }
 
@@ -272,7 +282,9 @@ function variationPS() {
         }
     }
     else {
-	    response.setStatus(404);
+	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
 	    view.get().render('error/notfound');
     }
 
@@ -324,7 +336,9 @@ function getSetItem() {
         }).render('product/components/productsetproduct');
     }
     else {
-	    response.setStatus(404);
+	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        response.setStatus(410);
 	    view.get().render('error/notfound');
     }
 
