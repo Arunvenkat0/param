@@ -6,7 +6,7 @@ var View = require('./View');
 /**
  * The view for the login page
  *
- * @class
+ * @class LoginView
  * @extends module:views/View~View
  */
 module.exports = View.extend({

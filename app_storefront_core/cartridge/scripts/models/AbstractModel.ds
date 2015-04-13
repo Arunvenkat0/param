@@ -29,7 +29,7 @@ var AbstractModel = Class.extend(
 
         /**
          * AbstractModel constructor
-         * @constructs AbstractModel
+         * @constructs module:models/AbstractModel~AbstractModel
          * @param obj {Object}
          */
         init : function (obj) {

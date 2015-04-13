@@ -8,10 +8,9 @@ var ArrayList = require('dw/util/ArrayList');
 var ContentMgr = require('dw/content/ContentMgr');
 var LinkedHashMap = require('dw/util/LinkedHashMap');
 
-/**
- * TODO
- */
-var CustomerServiceView = View.extend({
+var CustomerServiceView = View.extend(
+/** @lends module:views/CustomerServiceView~CustomerServiceView.prototype */
+{
 
     /**
      * Determines the customer navigation from the folder structure in the content library. Returns the list of
@@ -43,7 +42,8 @@ var CustomerServiceView = View.extend({
     },
 
     /**
-     * @constructor module:views/CustomerServiceView~CustomerServiceView
+     * @constructs
+     * @extends module:views/View~View
      */
     init : function (params) {
         this._super(params);

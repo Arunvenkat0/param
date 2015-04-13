@@ -4,18 +4,17 @@
 var Resource = require('dw/web/Resource');
 var View = require('./View');
 
-/**
- * View for store locator functionality.
- */
 var StoreLocatorView = View.extend(
+/** @lends module:views/StoreLocatorView~StoreLocatorView.prototype */
 {
     /**
-     * Generates variables consumed by template storelocator/storelocatorresults
+     * Generates the view consumed by template storelocator/storelocatorresults
      *
      * @param {object} params stores (Search result for stores), type (Supported values are findbyzip, findbystate and findbycountry)
      * searchKey (The value used to find Stores) properties are supported
      *
-     * @constructor module:views/StoreLocatorView~StoreLocatorView
+     * @constructs
+     * @extends module:views/View~View
      */
     init : function (params) {
     	/** backward compatibility to URLUtils.continueURL() methods in old templates **/
@@ -55,5 +54,4 @@ var StoreLocatorView = View.extend(
     }
 });
 
-/** @see module:views/StoreLocatorView~StoreLocatorView */
 module.exports = StoreLocatorView;

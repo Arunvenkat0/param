@@ -7,11 +7,9 @@ var Cart = require('~/cartridge/scripts/models/Cart');
 var FormGroup = require('dw/web/FormGroup');
 var Transaction = require('dw/system/Transaction');
 
-
-/**
- * View for store locator functionality.
- */
-var CartView = View.extend({
+var CartView = View.extend(
+/** @lends module:views/CartView~CartView.prototype */
+{
 
     /**
      * TODO
@@ -40,7 +38,9 @@ var CartView = View.extend({
     },
 
     /**
-     * @constructor module:views/CartView~CartView
+     * View for store locator functionality.
+     * @extends module:views/View~View
+     * @constructs module:views/CartView~CartView
      */
     init : function (params) {
         this._super(params);
