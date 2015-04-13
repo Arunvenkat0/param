@@ -243,23 +243,23 @@ function replaceProductListItem() {
  * Web exposed methods
  */
 // own wishlist
-/** @see module:controllers/Whishlist~Add */
+/** @see module:controllers/Wishlist~Add */
 exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, { scope : 'wishlist' });
-/** @see module:controllers/Whishlist~Show */
+/** @see module:controllers/Wishlist~Show */
 exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, { scope : 'wishlist' });
-/** @see module:controllers/Whishlist~ReplaceProductListItem */
+/** @see module:controllers/Wishlist~ReplaceProductListItem */
 exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, { scope : 'wishlist' });
-/** @see module:controllers/Whishlist~SetShippingAddress */
+/** @see module:controllers/Wishlist~SetShippingAddress */
 exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, { scope : 'wishlist' });
 
 // others wishlist
-/** @see module:controllers/Whishlist~Search */
+/** @see module:controllers/Wishlist~Search */
 exports.Search                  = guard.ensure(['post', 'https'], search);
-/** @see module:controllers/Whishlist~ShowOther */
+/** @see module:controllers/Wishlist~ShowOther */
 exports.ShowOther               = guard.ensure(['get', 'https'], showOther);
 
 // form handlers
-/** @see module:controllers/Whishlist~LandingForm */
+/** @see module:controllers/Wishlist~LandingForm */
 exports.LandingForm             = guard.ensure(['post', 'https'], landingForm);
-/** @see module:controllers/Whishlist~WishListForm */
+/** @see module:controllers/Wishlist~WishListForm */
 exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, { scope : 'wishlist' });
