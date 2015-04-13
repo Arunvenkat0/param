@@ -20,6 +20,8 @@ var LOGGER   = dw.system.Logger.getLogger('guard');
 
 /**
  * This method contains the login to handle a not logged in customer
+ *
+ * @param {Object} params Parameters passed along by by ensure
  */
 function requireLogin(params)
 {
@@ -34,69 +36,6 @@ function requireLogin(params)
 
     response.redirect(redirectUrl);
     return false;
-}
-
-/**
- * Guard that ensures that the provided action is only executed when the request is secure (e.g. the schema is HTTPS).
- * If it is not secure, the provided error handler is called. If no error handler is provided, by default a switch to
- * HTTPS is attempted.
- *
- * @param action the action to the executed if the request is HTTPS
- * @param error the optional error handler which should be called if the request is not HTTPS
- */
-function https(action, error)
-{
-    return expose(function()
-    {
-        if (request.isHttpSecure())
-        {
-            dw.system.Logger.debug('*** guard https ok');
-
-            action();
-            return;
-        }
-
-        if (error !== null)
-        {
-            dw.system.Logger.debug('*** guard non-https access to "' + action.name +
-                '" denied, calling error handler');
-
-            error();
-            return;
-        }
-
-        // no error handler, use default behavior
-        dw.system.Logger.debug('*** guard non-https access to "' + action.name +
-            '" denied, calling default handler');
-
-        // try to switch to https
-        switchToHttps();
-    });
-}
-
-/**
- * Performs a protocol switch for the URL of the current request to HTTPS. Responds with a redirect to the client.
- *
- * @return false, if switching is not possible (for example, because its a POST request)
- */
-function switchToHttps()
-{
-    if (request.httpMethod !== 'GET')
-    {
-        // switching is not possible, send error 403 (forbidden)
-        response.sendError(403);
-        return false;
-    }
-
-    var url = 'https://' + request.httpHost + request.httpPath;
-
-    if (!empty(request.httpQueryString))
-    {
-        url += '?' + request.httpQueryString;
-    }
-
-    response.redirect(url);
-    return true;
 }
 
 /**
@@ -122,14 +61,14 @@ var Filters = {
     }
 };
 
-
 /**
- * This function should be used to secure public endpoints
+ * This function should be used to secure public endpoints by applying a set of predefined filters.
  *
  * @param  {string[]} filters The filters which need to be passed to access the page
  * @param  {function} action  The action which represents the resource to show
  * @param  {Object}   params  Additional parameters which are passed to all filters and the action
  * @see module:guard~Filters
+ * @see module:guard
  */
 function ensure (filters, action, params) {
     return expose(function() {
@@ -137,7 +76,7 @@ function ensure (filters, action, params) {
         var filtersPassed = true;
         var errors = [];
         for (var i = 0; i < filters.length; i++) {
-            LOGGER.info('Ensuring "{0}"...',filters[i]  );
+            LOGGER.debug('Ensuring guard "{0}"...',filters[i]  );
 
             filtersPassed = Filters[filters[i]].apply(Filters);
             if (!filtersPassed) {
@@ -161,37 +100,14 @@ function ensure (filters, action, params) {
         }
 
         if (filtersPassed) {
-            LOGGER.info('...passed.');
+            LOGGER.debug('...passed.');
             return action(params);
         } else {
-            LOGGER.info('...failed. {0}',error.name);
+            LOGGER.debug('...failed. {0}',error.name);
             return error(params);
         }
     });
 
-}
-
-
-
-/**
- * Guard that only accepts POST requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
- *
- * @deprecated
- */
-function post(action)
-{
-    return ensure(['post'], action);
-
-}
-
-/**
- * Guard that only accepts GET requests. For other methods, an HTTP error 405 (Not Allowed) is sent.
- *
- * @deprecated
- */
-function get(action)
-{
-    return ensure(['get'], action);
 }
 
 /**
@@ -204,34 +120,9 @@ function expose(action)
     return action;
 }
 
-/**
- * Executes the given action in a transactional context. This allows for atomic changes in the database.
- */
-function transactional(action)
-{
-    var txn = require('dw/system/Transaction');
-    txn.begin();
-
-    action();
-
-    txn.commit();
-}
-
 /*
  * Module exports
  */
-/** @see module:guard~https
- * @deprecated
- */
-exports.https = https;
-/** @see module:guard~get
- * @deprecated
- */
-exports.get = get;
-/** @see module:guard~post
- * @deprecated
- */
-exports.post = post;
 /** @see module:guard~expose */
 exports.all = expose;
 
@@ -255,8 +146,6 @@ exports.httpsPost = function(action)
 {
     return ensure(['https','post'], action);
 };
-
-exports.transactional = transactional;
 
 /**
  * Use this method to combine different filters, typically this is used to secure methods when exporting
