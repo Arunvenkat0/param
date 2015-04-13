@@ -1,6 +1,8 @@
 'use strict';
 
 /**
+ * <h3>Multiple Shipping Scenario</h3>
+ *
  * This controller implements the logic for the multiple shipping scenario. It is responsible for dealing with more
  * than one shipments, respectively multiple shipping addresses as well as multiple selected shipping methods.
  *

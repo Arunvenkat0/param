@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Single Shipping Scenario
- * -----------------------------
+ * <h3>Single Shipping Scenario</h3>
+ *
  * This controller implements the logic for the default (single) shipping scenario. It is responsible for dealing with
  * one shipment only, respectively one shipping addresses as well as one shipping method.
  *

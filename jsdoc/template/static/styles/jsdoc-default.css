@@ -141,8 +141,8 @@ footer {
     background: #84bd00;
 }
 
-footer a {
-    color: #fff;
+footer a, footer a:visited, footer a:active {
+    color: #ed9;
 }
 
 h1, h2, h3, h4 {
