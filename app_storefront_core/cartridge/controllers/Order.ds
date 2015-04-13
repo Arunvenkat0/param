@@ -2,6 +2,9 @@ var g = require('./dw/guard');
 
 /**
  * Manages the order history of a registered user.
+ *
+ * @module controllers/Order
+ * @todo  Requires cleanup
  */
 
 /**

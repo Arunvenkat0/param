@@ -2,6 +2,9 @@ var g = require('./dw/guard');
 
 /**
  * Gift Certificate related workflows
+ *
+ * @module controllers/GiftCert
+ * @todo  Requires cleanup
  */
 
 /**
