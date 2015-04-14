@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Gift Certificate related workflows
+ * Gift Certificate purchase related business logic
  *
  * @module controllers/GiftCert
  */
@@ -28,6 +28,9 @@ function purchase()
     showPurchase();
 }
 
+/**
+ * Internal helper which prepares and shows teh purchase page without clearing the form
+ */
 function showPurchase()
 {
     var parameterMap = request.httpParameterMap;
@@ -60,8 +63,26 @@ function showPurchase()
 
     view.get({
         bctext1 : 'gc',
-        bcurl1 : null
+        bcurl1 : null,
+        ContinueURL : dw.web.URLUtils.https('GiftCert-AddToBasket')
     }).render('checkout/giftcert/giftcertpurchase');
+}
+
+/**
+ * Internal helper to show errors on the purchase page
+ * @param  {[type]} args [description]
+ */
+function showError(args)
+{
+    if (request.httpParameterMap.format.stringValue === 'ajax') {
+        view.get({
+            GeneralError : args.GeneralError,
+            FormErrors : args.FormErrors || new dw.util.HashMap()
+        }).render('checkout/giftcert/giftcertaddtobasketjson');
+        return;
+    }
+
+    showPurchase();
 }
 
 
@@ -94,7 +115,8 @@ function edit()
     purchaseForm.amount.value = giftCertificateLineItem.price.value;
 
     view.get({
-        GiftCertificateLineItem : giftCertificateLineItem
+        GiftCertificateLineItem : giftCertificateLineItem,
+        ContinueURL : dw.web.URLUtils.https('GiftCert-Update')
     }).render('checkout/giftcert/giftcertpurchase');
 }
 
@@ -135,7 +157,7 @@ function checkBalance()
  */
 function addToBasket()
 {
-    processToBasket(false);
+    processAddToBasket(createGiftCert);
 }
 
 /**
@@ -143,11 +165,14 @@ function addToBasket()
  */
 function update()
 {
-    processToBasket(true);
+    processAddToBasket(updateGiftCert);
 }
 
-
-function processToBasket(updating)
+/**
+ * Internal helper which creates/updates the GiftCert
+ * @param  {function} action The gift certificat action to execute
+ */
+function processAddToBasket(action)
 {
     var form = session.forms.giftcert.purchase;
     // Validate confirmation of email address
@@ -186,31 +211,14 @@ function processToBasket(updating)
         return;
     }
 
-    var giftCertificateLineItem = null;
+    var giftCertificateLineItem = action(cart);
 
-    if (updating)
+    if (!giftCertificateLineItem)
     {
-        giftCertificateLineItem = updateGiftCert(cart);
-        if (!giftCertificateLineItem)
-        {
-            dw.system.Logger.error('Updating gift certificate lineitem failed.');
-            showError({
-                GeneralError : dw.web.Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
-            });
-            return;
-        }
-    }
-    else
-    {
-        giftCertificateLineItem = createGiftCert(cart);
-        if (!giftCertificateLineItem)
-        {
-            dw.system.Logger.error('Creating gift certificate lineitem failed.');
-            showError({
-                GeneralError : dw.web.Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
-            });
-            return;
-        }
+        showError({
+            GeneralError : dw.web.Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
+        });
+        return;
     }
 
     Transaction.wrap(function () {
@@ -226,26 +234,15 @@ function processToBasket(updating)
         return;
     }
 
-
     response.redirect(dw.web.URLUtils.https('Cart-Show'));
 }
 
-function showError(args)
-{
-    if (request.httpParameterMap.format.stringValue === 'ajax') {
-        view.get({
-            GeneralError : args.GeneralError,
-            FormErrors : args.FormErrors || new dw.util.HashMap()
-        }).render('checkout/giftcert/giftcertaddtobasketjson');
-        return;
-    }
-
-    showPurchase();
-}
-
-
 /**
- * Parameters - lineItemID: gift certificate line item UUID
+ * Shows the minicart
+ *
+ * @param {Object} args
+ * @param {String} args.lineItemId The OD of the Gift Certificate lineitem
+ * @TODO Check why normal minicart cannot be used
  */
 function showMiniCart()
 {
@@ -263,11 +260,6 @@ function showMiniCart()
         GiftCertificateLineItem: giftCertificateLineItem
     }).render('checkout/cart/minicart');
 }
-
-
-/*
- * Private helpers
- */
 
 /**
  * Creates a gift certificate in the customer basket using form input values.
@@ -339,7 +331,7 @@ function updateGiftCert(cart)
         giftCertificateLineItem.recipientEmail = purchaseForm.recipientEmail.value;
         giftCertificateLineItem.message = purchaseForm.message.value;
         giftCertificateLineItem.basePrice = new dw.value.Money(purchaseForm.amount.value,
-        giftCertificateLineItem.basePrice.currencyCode);
+            giftCertificateLineItem.basePrice.currencyCode);
         giftCertificateLineItem.grossPrice = new dw.value.Money(purchaseForm.amount.value,
             giftCertificateLineItem.grossPrice.currencyCode);
         giftCertificateLineItem.netPrice = new dw.value.Money(purchaseForm.amount.value,

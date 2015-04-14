@@ -83,7 +83,7 @@ exports.keys = function (object) {
  * @param object {Object}
  * @return {dw.util.HashMap} all the data which will be used in mail template.
  */
-exports.convertToHashMap = function (object) {
+exports.toHashMap = function (object) {
 	var hashmap = new dw.util.HashMap();
 
 	for (var key in object) {
