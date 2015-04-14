@@ -13,141 +13,79 @@ var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var content = require('~/cartridge/scripts/models/Content');
-var accountHomeAsset = content.get('myaccount-home');
-var accountPersonalDataAsset = content.get('myaccount-personaldata');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/models/Form');
-var accountForm = Form.get('myaccount');
 
-
-/*
- * Public controller methods
- */
+/* Public controller methods */
 
 /**
  * Renders the account overview.
  */
-function show()
-{
+function show() {
+	var accountHomeAsset = content.get('myaccount-home');
     pageMeta.update(accountHomeAsset);
-
     view.get().render('account/accountoverview');
 }
 
 /**
  * Updates the profile of an authenticated customer.
  */
-function editProfile()
-{
-    var CurrentForms = session.forms;
-    var CurrentCustomer = customer;
-
-    CurrentForms.profile.clearFormElement();
-
-    Form.get(CurrentForms.profile.customer).copyFrom(CurrentCustomer.profile);
-    Form.get(CurrentForms.profile.login).copyFrom(CurrentCustomer.profile.credentials);
-    Form.get(CurrentForms.profile.addressbook.addresses).copyFrom(CurrentCustomer.profile.addressBook.addresses);
-
+function editProfile() {
+	if (!request.httpParameterMap.invalid.submitted) { 
+	    Form.get('profile').clear();
+	
+	    Form.get('profile.customer').copyFrom(customer.profile);
+	    Form.get('profile.login').copyFrom(customer.profile.credentials);
+	    Form.get('profile.addressbook.addresses').copyFrom(customer.profile.addressBook.addresses);	
+	}
+	
+    var accountPersonalDataAsset = content.get('myaccount-personaldata');
     pageMeta.update(accountPersonalDataAsset);
-
-    response.renderTemplate('account/user/registration_edit', {
+    // @FIXME bctext2 should generate out of pagemeta - also action?! 
+    view.get({
         bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
         Action : 'edit'
-    });
+    }).render('account/user/registration_edit');
 }
 
 /**
- * Updates the profile of an authenticated customer. Does not clear the form
- * from previous attempt to keep the error messages. This is shown after an
- * update has failed.
+ *	Handles the form submission on profile update of edit profile
  */
-function editProfileError()
-{
-    pageMeta.update(accountPersonalDataAsset);
-
-    response.renderTemplate('account/user/registration_edit', {
-        bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
-        Action : 'edit'
-    });
-}
-
-function editForm()
-{
-
-    var formResult = accountForm.handleAction({
-    	'cancel'             : function (formgroup) {
-           Form.get('profile').clear()
-
-            response.redirect(dw.web.URLUtils.https('Account-Show'));
-            return;
+function editForm() {
+    var formResult = Form.get('profile').handleAction({
+    	'cancel' : function (formgroup) {
+			Form.get('profile').clear()
+			response.redirect(dw.web.URLUtils.https('Account-Show'));
         },
-        'confirm'             : function (formgroup) {
-           if (Customer.editAccount())
-            {
-                // success
-                response.redirect(dw.web.URLUtils.https('Account-Show'));
-                return;
-            }
+        'confirm' : function (formgroup) {
+        	var profileUpdateValidation = true;
+        	if (!Customer.checkUserName()) {
+		        Form.get('profile.customer.email').invalidate();
+		        profileUpdateValidation = false;
+		    }
+		
+		    if (Form.get('profile.customer.email').value() != Form.get('profile.customer.emailconfirm').value()) {
+		        Form.get('profile.customer.emailconfirm').invalidate();
+		        profileUpdateValidation = false;
+		    }
+		
+		    if (Form.get('profile.login.password').value() != Form.get('profile.login.passwordconfirm').value()) {
+		        Form.get('profile.login.passwordconfirm').invalidate();
+		        profileUpdateValidation = false;
+		    }
+		
+        	if (profileUpdateValidation)  {
+				profileUpdateValidation = Customer.editAccount(Form.get('profile.customer.email').value(), Form.get('profile.login.password').value(), Form.get('profile'));
+        	}
+        	
+			if (profileUpdateValidation) {
+				response.redirect(dw.web.URLUtils.https('Account-Show'));
+           	} else {
+				response.redirect(dw.web.URLUtils.https('Account-EditProfile','invalid','true'));
+			}
         }
-    });
-
-    response.redirect(dw.web.URLUtils.https('Account-EditProfileError'));
-}
-
-/**
- * Renders the password reset dialog.
- */
-function passwordResetDialog()
-{
-
-    Form.get('requestpassword').clear();
-
-    view.get().render('account/password/requestpasswordresetdialog');
-}
-
-/**
- * Handles the password reset form.
- */
-function passwordResetDialogForm()
-{
-
-    var formResult = accountForm.handleAction({
-    	'cancel'             : function (formgroup) {
-    	  view.get().render('account/password/requestpasswordresetdialog');
-           return;
-        },
-        'send'             : function (formgroup) {
-           var params = {};
-
-            var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-                Login : session.forms.requestpassword.email.htmlValue
-            });
-            if (GetCustomerResult.result != PIPELET_ERROR)
-            {
-                var Customer = GetCustomerResult.Customer;
-
-                var GenerateResetPasswordTokenResult = new dw.system.Pipelet('GenerateResetPasswordToken').execute({
-                    Customer : Customer
-                });
-                var ResetPasswordToken = GenerateResetPasswordTokenResult.ResetPasswordToken;
-
-				Email.get('mail/resetpasswordemail', Customer.profile.email)
-				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({}));
-
-                params.ErrorCode = null;
-                params.ShowContinue = true;
-
-				view.get().render('account/password/requestpasswordreset_confirm', params);
-                return;
-            }
-        }
-    });
-
-    view.get().render('account/password/requestpasswordresetdialog', {
-        ErrorCode : 'formnotvalid'
     });
 }
 
@@ -155,50 +93,66 @@ function passwordResetDialogForm()
  * Renders the password reset screen. This is very similar to the password reset
  * dialog but has screen-based interaction instead of popup interaction.
  */
-function passwordReset()
-{
+function passwordReset() {
     Form.get('requestpassword').clear();
 	view.get().render('account/password/requestpasswordreset');
 }
-
 /**
  * The form handler for password resets.
  */
-function passwordResetForm()
-{
-    var formResult = accountForm.handleAction({
-        'send'             : function (formgroup) {
-           var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-                Login : CurrentForms.requestpassword.email.htmlValue
-            });
-            if (GetCustomerResult.result == PIPELET_ERROR)
-            {
-                view.get().render('account/password/requestpasswordreset', {
-                    ErrorCode : 'notfounderror'
-                });
-                return;
+function passwordResetForm() {
+    passwordResetFormHandler('account/password/requestpasswordreset');
+}
+
+/**
+ * Renders the password reset dialog.
+ */
+function passwordResetDialog() {
+	// @FIXME reimplement using dialogify
+    Form.get('requestpassword').clear();
+    view.get().render('account/password/requestpasswordresetdialog');
+}
+
+/**
+ * Handles the password reset form.
+ */
+function passwordResetDialogForm() {
+	// @FIXME reimplement using dialogify
+	passwordResetFormHandler('account/password/requestpasswordresetdialog');
+}
+
+
+/** 
+ * 	@private
+ *	Utility, which handles form submits from dialog based and full page based password reset
+ */
+function passwordResetFormHandler(templateName) {
+	var formResult = Form.get('profile').handleAction({
+    	'cancel' : function (formgroup, action) {
+			view.get().render(templateName);
+        },
+        'send' : function (formgroup, action) {
+			var resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
+           
+            if (!empty(resettingCustomer)) {
+                var resetPasswordToken = resettingCustomer.generatePasswordResetToken();
+
+				var passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
+				passwordemail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+				passwordemail.send({ResetPasswordToken:resetPasswordToken});
+
+				view.get({ErrorCode : null, ShowContinue : true}).render('account/password/requestpasswordreset_confirm');
+            } else {
+            	view.get({
+        			ErrorCode : 'formnotvalid'
+			    }).render(templateName);
             }
-            var Customer = GetCustomerResult.Customer;
-
-            var GenerateResetPasswordTokenResult = new dw.system.Pipelet('GenerateResetPasswordToken').execute({
-                Customer : Customer
-            });
-            var resetPasswordToken = GenerateResetPasswordTokenResult.ResetPasswordToken;
-
-            Email.get('mail/resetpasswordemail', Customer.profile.email)
-				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({}));
-
-			view.get().render('account/password/requestpasswordreset_confirm', {
-                ErrorCode : null
-            });
-            return;
+        },
+        'error' : function (formgroup, action) {
+        	view.get({
+        			ErrorCode : 'formnotvalid'
+			}).render(templateName);
         }
-    });
-
-    // TODO redirect
-    view.get().render('account/password/requestpasswordreset', {
-        ErrorCode : 'formnotvalid'
     });
 }
 
@@ -206,141 +160,116 @@ function passwordResetForm()
  * Renders the screen for setting a new password. If token not valid, just
  * quietly forward to PasswordReset screen. This is the link sent by email.
  */
-function setNewPassword()
-{
-    var currentHttpParameterMap = request.httpParameterMap;
-
+function setNewPassword() {
     Form.get('resetpassword').clear();
 
-    if (currentHttpParameterMap.Token == null)
-    {
-        passwordReset();
-        return;
-    }
-
-    var ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-        Token : currentHttpParameterMap.Token.getStringValue()
-    });
-    if (ValidateResetPasswordTokenResult.result == PIPELET_ERROR)
-    {
-        passwordReset();
-        return;
-    }
-    var Customer = ValidateResetPasswordTokenResult.Customer;
-
-	view.get().render('account/password/setnewpassword');
+	var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+	if (empty(resettingCustomer)) {
+    	response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+   	} else {
+		view.get().render('account/password/setnewpassword');
+	}
 }
 
-function setNewPasswordForm()
-{
-    var currentHttpParameterMap = request.httpParameterMap;
-    var currentForms = session.forms;
+/**
+ *	Handles the set new password form submit
+ */
+function setNewPasswordForm() {
 
-    var formResult = accountForm.handleAction({
-    	'cancel'             : function (formgroup) {
-           view.get().render('account/password/setnewpassword');
-           return;
+    var formResult = Form.get('profile').handleAction({
+		'cancel' : function (formgroup) {
+			view.get().render('account/password/setnewpassword');
+           	return;
         },
-        'send'             : function (formgroup) {
-           // TODO redirects
+        'send' : function (formgroup) {
+			var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+           	if (empty(resettingCustomer)) {
+           		response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+            } else { 
 
-            var ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-                Token : currentHttpParameterMap.Token.getStringValue()
-            });
-            if (ValidateResetPasswordTokenResult.result == PIPELET_ERROR)
-            {
-                passwordReset();
-                return;
-            }
-            var customer = ValidateResetPasswordTokenResult.Customer;
-
-            if (currentForms.resetpassword.password.value != currentForms.resetpassword.passwordconfirm.value)
-            {
-                currentForms.resetpassword.passwordconfirm.invalidateFormElement();
-
-                view.get().render('account/password/setnewpassword');
-                return;
-            }
-
-            var ResetCustomerPasswordWithTokenResult = new dw.system.Pipelet('ResetCustomerPasswordWithToken')
-                    .execute({
-                        Customer : customer,
-                        Token : currentHttpParameterMap.Token.stringValue,
-                        Password : currentForms.resetpassword.password.htmlValue
-                    });
-            if (ResetCustomerPasswordWithTokenResult.result == PIPELET_ERROR)
-            {
-                view.get().render('account/password/setnewpassword', {
-                    ErrorCode : 'invalidpassworderror'
-                });
-                return;
-            }
-
-            Email.get('mail/passwordchangedemail', customer.profile.email)
-				.setSubject((dw.web.Resource.msg('email.passwordassistance', 'email', null))
-		        .send({}));
-
-            response.redirect(dw.web.URLUtils.https('Account-SetNewPasswordConfirm'));
-            return;
-          }
-    });
-
-
-    // TODO redirects
-    view.get().render('account/password/setnewpassword', {
-        ErrorCode : 'formnotvalid'
+            	if (Form.get('resetpassword.password').value() != Form.get('resetpassword.passwordconfirm').value()) {
+                	Form.get('resetpassword.passwordconfirm').invalidate();
+                	view.get().render('account/password/setnewpassword');
+            	} else {
+            	
+					var success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(),Form.get('resetpassword.password').value());
+	            	if (!success) {
+					    view.get({
+					        ErrorCode : 'formnotvalid'
+					    }).render('account/password/setnewpassword');
+	            	} else {
+		            	var passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
+						passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+				        passwordchangedmail.send({});
+				        
+					    view.get().render('account/password/setnewpassword_confirm');
+					}
+            	}
+           	}
+		}
     });
 }
 
-function setNewPasswordConfirm()
-{
-    view.get().render('account/password/setnewpassword_confirm', {});
-}
+
+
 
 /**
  * Start the customer registration process and renders customer registration
  * page.
  */
-function startRegister()
-{
-    var forms = session.forms;
+function startRegister() {
 
-    Form.get('profile').clear();
-
-    if (forms.login.username.value != null)
-    {
-        forms.profile.customer.email.value = forms.login.username.value;
+	Form.get('profile').clear();
+    
+    if (Form.get('login.username').value() != null) {
+       Form.get('profileForm.customer.email').value() = Form.get('login.username').value();
     }
 
 	view.get().render('account/user/registration');
 }
 
-// Originally, there is only one template account/user/registration
-// with a form which triggers either the registration or the edit handler
-// (depending on the pipeline which defines other continuations for the same
-// template).
-// Now, there are two templates:
-// account/user/registration
-// account/user/registration_edit
-function registrationForm()
-{
-    var formResult = accountForm.handleAction({
-        'confirm'             : function (formgroup) {
-           if (!Customer.createAccount())
-            {
+/**
+ * Handles registration form submit
+ */
+function registrationForm() {
+    var formResult = Form.get('profile').handleAction({
+        'confirm' : function (formgroup) {
+        	
+        	var email = Form.get('profile.customer.email').value();
+		    var emailConfirmation = Form.get('profile.customer.emailconfirm').value();
+			var profileValidation = true;
+		    if (email != emailConfirmation) {
+		        Form.get('profile.customer.emailconfirm').invalidate();
+		        profileCreatedSuccessFull = false;
+		    }
+		
+		    var password = Form.get('profile.login.password').value();
+		    var passwordConfirmation = Form.get('profile.login.passwordconfirm').value();
+		
+		    if (password != passwordConfirmation) {
+		        Form.get('profile.login.passwordconfirm').invalidate();
+		        profileValidation = false;
+		    }
+		
+		    // check if login is already taken
+		    var existingCustomer = Customer.getCustomerByLogin(email);
+		    if (existingCustomer != null) {
+		        Form.get('profile.customer.email').invalidate();
+		        profileValidation =false;
+		    }
+		    
+        	if (profileValidation) {
+           		profileValidation = Customer.createAccount(email, password, Form.get('profile'));
+        	}
+           	if (!profileValidation) {
                 // TODO redirect
                 view.get().render('account/user/registration');
                 return;
-            }
-
-            Form.get('profile').clear()
-
-            // TODO originally there is a return to the calling pipeline
-            // this is not possible anymore because we have not preserved the
-            // callstack accross multiple requests
-            response.redirect(dw.web.URLUtils.https('Account-Show', ['registration', true]));
-
-            return;
+            } else {
+	            Form.get('profile').clear()
+	            response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+	            return;
+           	}	      
         }
     });
 
@@ -350,78 +279,23 @@ function registrationForm()
 /**
  * Renders the account navigation.
  */
-function includeNavigation()
-{
+function includeNavigation() {
     view.get().render('account/accountnavigation');
 }
 
-/**
- * Facebook Connect for registration
- */
-function connect()
-{
-    var currentForms = session.forms;
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError : 'PIPELET_ERROR',
-        ScriptFile : 'account/user/connect.ds'
-    }).execute();
-    if (ScriptResult.result == PIPELET_ERROR)
-    {
-        if (RegistrationStatus.code == 'CustomerAlreadyExistError')
-        {
-            currentForms.login.username.value = FacebookUser.registration.email;
+/* Web exposed methods */
 
-            currentForms.login.loginsucceeded.invalidateFormElement();
-
-            /*
-             * Used when user has attempted to use their facebook account to
-             * create a storefront account that is already in the BM
-             */
-            view.get().render('account/login/accountlogin', {
-                TargetPipeline : 'Account-Show',
-                RegistrationStatus: RegistrationStatus
-            });
-            return;
-        }
-
-        // TODO where to go from here?
-        response.redirect(dw.web.URLUtils.https('Account-Show'));
-
-        return;
-    }
-    var FacebookJSON = ScriptResult.FacebookJSON;
-    var FacebookUser = ScriptResult.FacebookUser;
-    var RegistrationStatus = ScriptResult.RegistrationStatus;
-
-    if (!Customer.createAccount())
-    {
-        response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
-        return;
-    }
-
-    response.redirect(dw.web.URLUtils.https('Account-Show'));
-}
-
-
-/*
- * Module exports
- */
-
-/*
- * Web exposed methods
- */
 /** @see module:controllers/Account~Show */
 exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
 /** @see module:controllers/Account~EditProfile */
 exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
-/** @see module:controllers/Account~EditProfileError */
-exports.EditProfileError = guard.ensure(['get', 'https', 'loggedIn'], editProfileError);
 /** @see module:controllers/Account~EditForm */
 exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
 /** @see module:controllers/Account~PasswordResetDialog */
 exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
+/** @see module:controllers/Account~PasswordReset */
+exports.PasswordReset = guard.ensure(['get', 'https'], passwordReset);
 /** @see module:controllers/Account~PasswordResetDialogForm */
 exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
 /** @see module:controllers/Account~PasswordResetForm */
@@ -430,13 +304,9 @@ exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
 exports.SetNewPassword = guard.ensure(['get', 'https'], setNewPassword);
 /** @see module:controllers/Account~SetNewPasswordForm */
 exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
-/** @see module:controllers/Account~SetNewPasswordConfirm */
-exports.SetNewPasswordConfirm = guard.ensure(['get', 'https'], setNewPasswordConfirm);
 /** @see module:controllers/Account~StartRegister */
 exports.StartRegister = guard.ensure(['https'], startRegister);
 /** @see module:controllers/Account~RegistrationForm */
 exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
 /** @see module:controllers/Account~IncludeNavigation */
 exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);
-/** @see module:controllers/Account~Connect */
-exports.Connect = guard.ensure(['https'], connect);

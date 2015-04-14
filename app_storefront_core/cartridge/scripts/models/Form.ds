@@ -113,6 +113,27 @@ var Form = AbstractModel.extend(
          */
         clear : function () {
             this.object.clearFormElement();
+        },
+        /**
+         * Invalidates the wrapped form instance
+         */
+        invalidate : function () {
+            this.object.invalidateFormElement();
+        },
+
+        /**
+         * gets value of wrapped form elelement
+         */
+        value : function () {
+            return this.object.value;
+        },
+        
+        /**
+         * gets bound object of wrapped form elelement
+         */
+        getBinding : function () {
+            var dwForm = this.object;
+			return dwForm.object;
         }
 
     });
