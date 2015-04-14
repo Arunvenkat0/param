@@ -13,6 +13,8 @@ var PagingModel = require('dw/web/PagingModel');
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var view = require('~/cartridge/scripts/view');
+var orderListForm = require('~/cartridge/scripts/models/Form').get('orders.orderlist');
+var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * Renders a page with the order history of the current logged in customer.
@@ -21,7 +23,6 @@ function history()
 {
     var orders = OrderMgr.searchOrders('customerNo={0} AND status!={1}', 'creationDate desc',
                                         customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
-    var orderListForm = session.forms.orders.orderlist;
 
     var parameterMap = request.httpParameterMap;
     var pageSize = parameterMap.sz.intValue || 5;
@@ -30,13 +31,11 @@ function history()
     orderPagingModel.setPageSize(pageSize);
     orderPagingModel.setStart(start);
 
-    session.forms.orders.orderlist.invalidateFormElement();
-    var form = require('./dw/form');
-    form.clearFormElement(orderListForm);
-    form.updateFormWithObject(orderListForm, orderPagingModel.pageElements);
+    orderListForm.invalidate();
+    orderListForm.clear();
+    orderListForm.copyFrom(orderPagingModel.pageElements);
 
-    var web = require('./dw/web');
-    web.updatePageMetaDataForContent(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
+    pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
 
     view.get({OrderPagingModel : orderPagingModel}).render('account/orderhistory/orders');
 }
@@ -47,19 +46,17 @@ function history()
  */
 function orders()
 {
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null)
-    {
-        if (TriggeredAction.formId === 'show')
-        {
-            var Order = TriggeredAction.object;
+    orderListForm.handleAction({
+        'show': function () {
+            var Order = request.triggeredFormAction.object;
 
             view.get('OrderDetails', {Order : Order}).render('account/orderhistory/orderdetails');
-            return response;
+        },
+        'error': function () {
+            response.redirect(dw.web.URLUtils.https('Order-History'));
         }
-    }
+    });
 
-    response.redirect(dw.web.URLUtils.https('Order-History'));
 }
 
 
@@ -120,16 +117,16 @@ function find()
         };
     }
 
-    var FoundOrder = orders.next();
+    var foundOrder = orders.next();
 
-    if (!FoundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
+    if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
     {
         return {
             error : true
         };
     }
 
-    var Order = FoundOrder;
+    var Order = foundOrder;
 
     if (Order.customerEmail !== orderFormEmail)
     {
