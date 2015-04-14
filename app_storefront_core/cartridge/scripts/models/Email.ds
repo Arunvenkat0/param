@@ -51,7 +51,7 @@ var Email = AbstractModel.extend(
          */
         send : function (args) {
             // Add some default keys
-            var params = require('~/cartridge/scripts/object').convertToHashMap(args);
+            var params = require('~/cartridge/scripts/object').toHashMap(args);
             params.CurrentForms = session.forms;
             params.CurrentHttpParameterMap = request.httpParameterMap;
             params.CurrentCustomer = customer;
