@@ -41,15 +41,17 @@ footer {
 			text-decoration: none;
 		}
 	}
-	ul.social-links {
-		padding-bottom:2em;
-		li {
-		display: inline;
-		padding-right: 0.5em;
-		}
-	}
 }
 
+.social-links {
+	padding-bottom:2em;
+	li {
+	display: inline;
+	float: none;
+	padding-right: 0.5em;
+	}
+}
+	
 #email-alert-signup {
 	white-space: nowrap;
 	input[type="text"] {

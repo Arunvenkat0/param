@@ -4,8 +4,8 @@
 	top: .2em;
 	z-index: 20;
 	@media screen and (min-width: 768px) {
-		right: 5em;
-		top: -0.2em;
+		right: 5.7em;
+		top: -0.1em;
 	}
 	.mini-cart-name {
 		a {
@@ -44,7 +44,9 @@
 			text-decoration: none;
 		}
 		.minicart-quantity {
-			visibility: hidden;
+			background-color: $white;
+			border: 1px solid $nobel;
+			color: $nobel;
 		}
 	}
 }
