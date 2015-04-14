@@ -3649,42 +3649,6 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="addThisConnectEnabled">
-                <display-name xml:lang="x-default">AddThis Connect Enabled</display-name>
-                <description xml:lang="x-default">The check box used to determine if the AddThis Widget should be visible in the storefront.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>true</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisPubID">
-                <display-name xml:lang="x-default">AddThis PubID</display-name>
-                <description xml:lang="x-default">The application ID that will be used with AddThis Connect.</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>xa-4ea5d98601c1dc84</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="addThisVersion">
-                <display-name xml:lang="x-default">AddThis Version</display-name>
-                <description xml:lang="x-default">Version of addThis</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>250</default-value>
-            </attribute-definition>     			
-            <attribute-definition attribute-id="addThisDomready">
-                <display-name xml:lang="x-default">Domready</display-name>
-                <description xml:lang="x-default">If defined, the AddThis script will assume it's been added to the page after the DOM is ready. Useful when dynamically adding AddThis to a page after the latter has finished loading.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>true</default-value>
-            </attribute-definition>
             <attribute-definition attribute-id="buildNotificationEmailList">
                 <display-name xml:lang="x-default">Build Notification Email List</display-name>
                 <description xml:lang="x-default">Semi colon separated list</description>
@@ -3770,7 +3734,7 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <min-length>0</min-length>
                 <field-length>0</field-length>
                 <default-value>Account-Connect</default-value>
-            </attribute-definition>            
+            </attribute-definition>
             <attribute-definition attribute-id="listPriceDefault">
                 <display-name xml:lang="x-default">Default List Price Book ID</display-name>
                 <type>string</type>
@@ -3989,11 +3953,7 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <attribute attribute-id="countryCode"/>
                 <attribute attribute-id="storeLookupUnit"/>
                 <attribute attribute-id="storeLookupMaxDistance"/>
-                <attribute attribute-id="addThisConnectEnabled"/>
-                <attribute attribute-id="addThisVersion"/>
-                <attribute attribute-id="addThisPubID"/>
-                <attribute attribute-id="addThisDomready"/>
-                <attribute attribute-id="customerServiceEmail"/> 
+                <attribute attribute-id="customerServiceEmail"/>
                 <attribute attribute-id="enhancedSearchSuggestions"/>
                 <attribute attribute-id="enableMultiCurrency"/>
             </attribute-group>
