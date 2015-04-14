@@ -1522,6 +1522,19 @@ var Cart = AbstractModel.extend(
             while (iter.hasNext()) {
                 this.removePaymentInstrument(iter.next());
             }
+        },
+
+        getGiftCertificateLineItemByUUID : function(uuid){
+            if(!this.object){
+                return null;
+            }
+            for (var it = this.object.getGiftCertificateLineItems().iterator(); it.hasNext(); ) {
+                var item = it.next();
+                if (item.getUUID() === uuid) {
+                    return item;
+                }
+            }
+            return null;
         }
 
     });
