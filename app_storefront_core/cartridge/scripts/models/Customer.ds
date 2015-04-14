@@ -1,9 +1,9 @@
 'use strict';
 
 /*
- usage
- var content = require('~/cartridge/scripts/models/Customer');
- */
+usage
+var content = require('~/cartridge/scripts/models/Customer');
+*/
 
 /** @module models/Customer */
 
@@ -20,48 +20,49 @@ var Email = require('~/cartridge/scripts/models/Email');
  * @param parameter {dw.customer.Customer} The customer object to enhance/wrap.
  */
 var Customer = AbstractModel.extend(
-    /** @lends module:models/Customer~Customer.prototype */
-    {
-    
-    	/**
-		 * Checks validity of a password reset token
-		 * @transactional
-		 */
-		resetPasswordByToken : function (token, password) {
-			var customerInstance = this;
-			var resetCustomerPasswordWithTokenResult;
-			Transaction.wrap(function () {
-				resetCustomerPasswordWithTokenResult = new dw.system.Pipelet('ResetCustomerPasswordWithToken').execute({
-					Customer : customerInstance.object,
-					Token : token,
-					Password : password
-				});
-			});    
-			    
-			if (resetCustomerPasswordWithTokenResult.result == PIPELET_ERROR) {
-				return false;
-			} else  {
-				return true;	
-			}
-		},
-		
-		/**
-	 	 * Checks validity of a password reset token
-		 * @transactional
-	 	 */
-		generatePasswordResetToken : function () {
-			var token;
-			var customerInstance = this;
-			Transaction.wrap(function () {
-				var GenerateResetPasswordTokenResult = new dw.system.Pipelet('GenerateResetPasswordToken').execute({
-				    Customer : customerInstance.object
-				});
-				token = GenerateResetPasswordTokenResult.ResetPasswordToken;
-			});
-			return token;
-		}
-    
-	});
+/** @lends module:models/Customer~Customer.prototype */
+{
+
+    /**
+     * Checks validity of a password reset token
+     * @transactional
+     */
+    resetPasswordByToken : function(token, password) {
+        var customerInstance, resetCustomerPasswordWithTokenResult, result;
+        customerInstance = this;
+
+        Transaction.wrap(function() {
+            resetCustomerPasswordWithTokenResult = new dw.system.Pipelet('ResetCustomerPasswordWithToken').execute({
+                Customer : customerInstance.object,
+                Token : token,
+                Password : password
+            });
+        });
+
+        if (resetCustomerPasswordWithTokenResult.result === PIPELET_ERROR) {
+            result = false;
+        } else {
+            result = true;
+        }
+        return result;
+    },
+
+    /**
+     * Checks validity of a password reset token
+     * @transactional
+     */
+    generatePasswordResetToken : function() {
+        var token, customerInstance;
+        customerInstance = this;
+        Transaction.wrap(function() {
+            var GenerateResetPasswordTokenResult = new dw.system.Pipelet('GenerateResetPasswordToken').execute({
+                Customer : customerInstance.object
+            });
+            token = GenerateResetPasswordTokenResult.ResetPasswordToken;
+        });
+        return token;
+    }
+});
 
 /**
  * Use this method to get the the current customer or pass in a customer instance.
@@ -70,12 +71,11 @@ var Customer = AbstractModel.extend(
  * retrieved from the session.
  * @returns {module:models/Customer~Customer}
  */
-Customer.get = function (parameter) {
+Customer.get = function(parameter) {
     var obj = null;
-    if (typeof parameter === 'undefined') {
+    if ( typeof parameter === 'undefined') {
         obj = customer;
-    }
-    else if (typeof parameter === 'object') {
+    } else if ( typeof parameter === 'object') {
         obj = parameter;
     }
     return new Customer(obj);
@@ -92,27 +92,27 @@ Customer.get = function (parameter) {
  * of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.
  * @returns {boolean}
  */
-Customer.login = function (username, password, rememberMe) {
-    var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
+Customer.login = function(username, password, rememberMe) {
+    var GetCustomerResult, TempCustomer, LoginCustomerResult;
+
+    GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : username
     });
-    var TempCustomer = GetCustomerResult.Customer;
+    TempCustomer = GetCustomerResult.Customer;
 
     // @TODO customer locked currently not handled
-    if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+    if ( typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
         return false;
     }
 
-    var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
-        Login      : username,
-        Password   : password,
+    LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
+        Login : username,
+        Password : password,
         RememberMe : rememberMe
     });
     if (LoginCustomerResult.result === PIPELET_ERROR) {
-        if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
-            Email.get('mail/lockoutemail', TempCustomer.profile.email)
-				.setSubject((dw.web.Resource.msg('email.youraccount', 'email', null))
-		        .send({}));
+        if ( typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+            Email.get('mail/lockoutemail', TempCustomer.profile.email).setSubject((dw.web.Resource.msg('email.youraccount', 'email', null)).send({}));
         }
 
         return false;
@@ -124,18 +124,18 @@ Customer.login = function (username, password, rememberMe) {
 /**
  * Logs out the customer currently logged into the storefront.
  */
-Customer.logout = function () {
+Customer.logout = function() {
     new dw.system.Pipelet('LogoutCustomer').execute();
 };
 
 /**
  * Looks up a customer by its login.
  */
-Customer.getCustomerByLogin = function (login) {
+Customer.getCustomerByLogin = function(login) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : login
     });
-    if (GetCustomerResult.result == PIPELET_ERROR) {
+    if (GetCustomerResult.result === PIPELET_ERROR) {
         return null;
     }
 
@@ -143,65 +143,65 @@ Customer.getCustomerByLogin = function (login) {
 };
 
 /**
- * 	Registers customer
+ * Registers customer
  */
-Customer.createCustomer = function (login, password) {
+Customer.createCustomer = function(login, password) {
     var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
         Login : login,
         Password : password
     });
-    if (CreateCustomerResult.result == PIPELET_ERROR) {
+    if (CreateCustomerResult.result === PIPELET_ERROR) {
         return null;
     }
 
     return this.get(CreateCustomerResult.Customer);
 };
-		
+
 /**
  * Sets the customers login.
- * 
+ *
  * @param customer the customer
  * @param login the user name of the customer
  * @param password the password of the current customer
  * @return true, if the login / password was updated
  */
-Customer.setLogin = function (customerToSet, login, password) {
+Customer.setLogin = function(customerToSet, login, password) {
     //@FIXME Put on customer scope vs. passing in customer
-    if ((customerToSet == null) || (login == null) || (password == null) || (customerToSet.profile == null))
-    {
+    if ((customerToSet === null) || (login === null) || (password === null) || (customerToSet.profile === null)) {
         return false;
     }
-	var result = customerToSet.profile.credentials.setLogin(login, password);
+    var result = customerToSet.profile.credentials.setLogin(login, password);
     return result;
 };
 
 /**
- * 	Logs in customer using login and password
+ * Logs in customer using login and password
  */
-Customer.loginCustomer = function (login, password, rememberMe) {
+Customer.loginCustomer = function(login, password, rememberMe) {
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
         Login : login,
         Password : password,
         RememberMe : rememberMe
     });
-	//@FIXME return customer instance on sucess
-    return (LoginCustomerResult.result != PIPELET_ERROR);
+    //@FIXME return customer instance on sucess
+    return (LoginCustomerResult.result !== PIPELET_ERROR);
 };
-		
+
 /**
  * Creates a new customer account.
- * @transactional 
+ * @transactional
  * @return true, if the account was created successfully
  */
-Customer.createAccount = function (email, password, form) {
+Customer.createAccount = function(email, password, form) {
 
     Transaction.begin();
 
     // create the new customer
-    var newCustomer = Customer.createCustomer(email, password);
-    if (newCustomer == null || newCustomer.object == null) {
+    var newCustomer, rememberMe;
+    newCustomer = Customer.createCustomer(email, password);
+    if (newCustomer === null || newCustomer.object === null) {
         Transaction.rollback();
-       	form.invalidate();
+        form.invalidate();
         return false;
     }
 
@@ -219,32 +219,33 @@ Customer.createAccount = function (email, password, form) {
     }
 
     Transaction.commit();
-	
-	Form.get('login').copyTo(newCustomer.object.profile.credentials);
-    
-    var rememberMe = Form.get('profile.login.rememberme').value();
+
+    Form.get('login').copyTo(newCustomer.object.profile.credentials);
+
+    rememberMe = Form.get('profile.login.rememberme').value();
 
     // login the customer
     return Customer.loginCustomer(email, password, rememberMe);
 };
-		
+
 /**
  * Checks the given user name on existence and ends on a named end node to
  * communicated the status back.
  */
-Customer.checkUserName = function () {
+Customer.checkUserName = function() {
     //@FIXME get email as parameter
-    var profileForm = session.forms.profile;
+    var profileForm, GetCustomerResult;
 
-    if (customer.profile.credentials.login == profileForm.customer.email.value) {
+    profileForm = session.forms.profile;
+
+    if (customer.profile.credentials.login === profileForm.customer.email.value) {
         return true;
     }
 
-    var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-        Login : profileForm.customer.email.value,
+    GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
+        Login : profileForm.customer.email.value
     });
-    if (GetCustomerResult.result == PIPELET_ERROR)
-    {
+    if (GetCustomerResult.result === PIPELET_ERROR) {
         return true;
     }
 
@@ -254,49 +255,48 @@ Customer.checkUserName = function () {
 /**
  * Checks validity of a password reset token
  */
-Customer.getByPasswordResetToken = function (token) {
-	if (empty(token)) {
-		return null;
-	} else {
-		var ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-			Token : token
+Customer.getByPasswordResetToken = function(token) {
+    var result, ValidateResetPasswordTokenResult;
+    if (empty(token)) {
+        result = null;
+    } else {
+        ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
+            Token : token
         });
-        
-		if (ValidateResetPasswordTokenResult.result == PIPELET_ERROR) {
-			return null;
-		} else {
-			return Customer.get(ValidateResetPasswordTokenResult.Customer);	
-		} 
-	}
-};
 
+        if (ValidateResetPasswordTokenResult.result === PIPELET_ERROR) {
+            result = null;
+        } else {
+            result = Customer.get(ValidateResetPasswordTokenResult.Customer);
+        }
+    }
+    return result;
+};
 
 /**
  *	Update customer object with form
- *	@transactional 
- */		
-Customer.editAccount = function (email, password, form) {
-    
+ *	@transactional
+ */
+Customer.editAccount = function(email, password, form) {
+
     Transaction.begin();
 
     var SetCustomerPasswordResult = new dw.system.Pipelet('SetCustomerPassword').execute({
         Password : password,
         Customer : customer
     });
-    if (SetCustomerPasswordResult.result == PIPELET_ERROR)
-    {
+    if (SetCustomerPasswordResult.result === PIPELET_ERROR) {
         Transaction.rollback();
         return false;
     }
-    
+
     if (!Customer.setLogin(customer, email, password)) {
         Transaction.rollback();
         return false;
     }
-	
-    if (!Form.get('profile.customer').copyTo(customer.profile))
-    {
-       	Transaction.rollback();
+
+    if (!Form.get('profile.customer').copyTo(customer.profile)) {
+        Transaction.rollback();
         return false;
     }
 

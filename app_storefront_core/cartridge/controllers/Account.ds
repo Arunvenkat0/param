@@ -9,7 +9,6 @@
 /* API Includes */
 var Email = require('~/cartridge/scripts/models/Email');
 var Customer = require('~/cartridge/scripts/models/Customer');
-var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var content = require('~/cartridge/scripts/models/Content');
@@ -24,7 +23,7 @@ var Form = require('~/cartridge/scripts/models/Form');
  * Renders the account overview.
  */
 function show() {
-	var accountHomeAsset = content.get('myaccount-home');
+    var accountHomeAsset = content.get('myaccount-home');
     pageMeta.update(accountHomeAsset);
     view.get().render('account/accountoverview');
 }
@@ -33,17 +32,17 @@ function show() {
  * Updates the profile of an authenticated customer.
  */
 function editProfile() {
-	if (!request.httpParameterMap.invalid.submitted) { 
-	    Form.get('profile').clear();
-	
-	    Form.get('profile.customer').copyFrom(customer.profile);
-	    Form.get('profile.login').copyFrom(customer.profile.credentials);
-	    Form.get('profile.addressbook.addresses').copyFrom(customer.profile.addressBook.addresses);	
-	}
-	
+    if (!request.httpParameterMap.invalid.submitted) {
+        Form.get('profile').clear();
+
+        Form.get('profile.customer').copyFrom(customer.profile);
+        Form.get('profile.login').copyFrom(customer.profile.credentials);
+        Form.get('profile.addressbook.addresses').copyFrom(customer.profile.addressBook.addresses);
+    }
+
     var accountPersonalDataAsset = content.get('myaccount-personaldata');
     pageMeta.update(accountPersonalDataAsset);
-    // @FIXME bctext2 should generate out of pagemeta - also action?! 
+    // @FIXME bctext2 should generate out of pagemeta - also action?!
     view.get({
         bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
         Action : 'edit'
@@ -51,40 +50,40 @@ function editProfile() {
 }
 
 /**
- *	Handles the form submission on profile update of edit profile
+ * Handles the form submission on profile update of edit profile
  */
 function editForm() {
-    var formResult = Form.get('profile').handleAction({
-    	'cancel' : function (formgroup) {
-			Form.get('profile').clear()
-			response.redirect(dw.web.URLUtils.https('Account-Show'));
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            Form.get('profile').clear();
+            response.redirect(dw.web.URLUtils.https('Account-Show'));
         },
-        'confirm' : function (formgroup) {
-        	var profileUpdateValidation = true;
-        	if (!Customer.checkUserName()) {
-		        Form.get('profile.customer.email').invalidate();
-		        profileUpdateValidation = false;
-		    }
-		
-		    if (Form.get('profile.customer.email').value() != Form.get('profile.customer.emailconfirm').value()) {
-		        Form.get('profile.customer.emailconfirm').invalidate();
-		        profileUpdateValidation = false;
-		    }
-		
-		    if (Form.get('profile.login.password').value() != Form.get('profile.login.passwordconfirm').value()) {
-		        Form.get('profile.login.passwordconfirm').invalidate();
-		        profileUpdateValidation = false;
-		    }
-		
-        	if (profileUpdateValidation)  {
-				profileUpdateValidation = Customer.editAccount(Form.get('profile.customer.email').value(), Form.get('profile.login.password').value(), Form.get('profile'));
-        	}
-        	
-			if (profileUpdateValidation) {
-				response.redirect(dw.web.URLUtils.https('Account-Show'));
-           	} else {
-				response.redirect(dw.web.URLUtils.https('Account-EditProfile','invalid','true'));
-			}
+        'confirm' : function() {
+            var profileUpdateValidation = true;
+            if (!Customer.checkUserName()) {
+                Form.get('profile.customer.email').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (Form.get('profile.customer.email').value() !== Form.get('profile.customer.emailconfirm').value()) {
+                Form.get('profile.customer.emailconfirm').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (Form.get('profile.login.password').value() !== Form.get('profile.login.passwordconfirm').value()) {
+                Form.get('profile.login.passwordconfirm').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (profileUpdateValidation) {
+                profileUpdateValidation = Customer.editAccount(Form.get('profile.customer.email').value(), Form.get('profile.login.password').value(), Form.get('profile'));
+            }
+
+            if (profileUpdateValidation) {
+                response.redirect(dw.web.URLUtils.https('Account-Show'));
+            } else {
+                response.redirect(dw.web.URLUtils.https('Account-EditProfile', 'invalid', 'true'));
+            }
         }
     });
 }
@@ -95,8 +94,51 @@ function editForm() {
  */
 function passwordReset() {
     Form.get('requestpassword').clear();
-	view.get().render('account/password/requestpasswordreset');
+    view.get().render('account/password/requestpasswordreset');
 }
+
+/**
+ * @private
+ * Utility, which handles form submits from dialog based and full page
+ * based password reset
+ */
+function passwordResetFormHandler(templateName) {
+    var resetPasswordToken, passwordemail;
+
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            view.get().render(templateName);
+        },
+        'send' : function() {
+            var resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
+
+            if (!empty(resettingCustomer)) {
+                resetPasswordToken = resettingCustomer.generatePasswordResetToken();
+
+                passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
+                passwordemail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                passwordemail.send({
+                    ResetPasswordToken : resetPasswordToken
+                });
+
+                view.get({
+                    ErrorCode : null,
+                    ShowContinue : true
+                }).render('account/password/requestpasswordreset_confirm');
+            } else {
+                view.get({
+                    ErrorCode : 'formnotvalid'
+                }).render(templateName);
+            }
+        },
+        'error' : function() {
+            view.get({
+                ErrorCode : 'formnotvalid'
+            }).render(templateName);
+        }
+    });
+}
+
 /**
  * The form handler for password resets.
  */
@@ -108,7 +150,7 @@ function passwordResetForm() {
  * Renders the password reset dialog.
  */
 function passwordResetDialog() {
-	// @FIXME reimplement using dialogify
+    // @FIXME reimplement using dialogify
     Form.get('requestpassword').clear();
     view.get().render('account/password/requestpasswordresetdialog');
 }
@@ -117,43 +159,8 @@ function passwordResetDialog() {
  * Handles the password reset form.
  */
 function passwordResetDialogForm() {
-	// @FIXME reimplement using dialogify
-	passwordResetFormHandler('account/password/requestpasswordresetdialog');
-}
-
-
-/** 
- * 	@private
- *	Utility, which handles form submits from dialog based and full page based password reset
- */
-function passwordResetFormHandler(templateName) {
-	var formResult = Form.get('profile').handleAction({
-    	'cancel' : function (formgroup, action) {
-			view.get().render(templateName);
-        },
-        'send' : function (formgroup, action) {
-			var resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
-           
-            if (!empty(resettingCustomer)) {
-                var resetPasswordToken = resettingCustomer.generatePasswordResetToken();
-
-				var passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
-				passwordemail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
-				passwordemail.send({ResetPasswordToken:resetPasswordToken});
-
-				view.get({ErrorCode : null, ShowContinue : true}).render('account/password/requestpasswordreset_confirm');
-            } else {
-            	view.get({
-        			ErrorCode : 'formnotvalid'
-			    }).render(templateName);
-            }
-        },
-        'error' : function (formgroup, action) {
-        	view.get({
-        			ErrorCode : 'formnotvalid'
-			}).render(templateName);
-        }
-    });
+    // @FIXME reimplement using dialogify
+    passwordResetFormHandler('account/password/requestpasswordresetdialog');
 }
 
 /**
@@ -163,55 +170,53 @@ function passwordResetFormHandler(templateName) {
 function setNewPassword() {
     Form.get('resetpassword').clear();
 
-	var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
-	if (empty(resettingCustomer)) {
-    	response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
-   	} else {
-		view.get().render('account/password/setnewpassword');
-	}
+    var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+    if (empty(resettingCustomer)) {
+        response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+    } else {
+        view.get().render('account/password/setnewpassword');
+    }
 }
 
 /**
- *	Handles the set new password form submit
+ * Handles the set new password form submit
  */
 function setNewPasswordForm() {
 
-    var formResult = Form.get('profile').handleAction({
-		'cancel' : function (formgroup) {
-			view.get().render('account/password/setnewpassword');
-           	return;
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            view.get().render('account/password/setnewpassword');
+            return;
         },
-        'send' : function (formgroup) {
-			var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
-           	if (empty(resettingCustomer)) {
-           		response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
-            } else { 
+        'send' : function() {
+            var resettingCustomer, success, passwordchangedmail;
+            resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+            if (empty(resettingCustomer)) {
+                response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+            } else {
 
-            	if (Form.get('resetpassword.password').value() != Form.get('resetpassword.passwordconfirm').value()) {
-                	Form.get('resetpassword.passwordconfirm').invalidate();
-                	view.get().render('account/password/setnewpassword');
-            	} else {
-            	
-					var success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(),Form.get('resetpassword.password').value());
-	            	if (!success) {
-					    view.get({
-					        ErrorCode : 'formnotvalid'
-					    }).render('account/password/setnewpassword');
-	            	} else {
-		            	var passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
-						passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
-				        passwordchangedmail.send({});
-				        
-					    view.get().render('account/password/setnewpassword_confirm');
-					}
-            	}
-           	}
-		}
+                if (Form.get('resetpassword.password').value() !== Form.get('resetpassword.passwordconfirm').value()) {
+                    Form.get('resetpassword.passwordconfirm').invalidate();
+                    view.get().render('account/password/setnewpassword');
+                } else {
+
+                    success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), Form.get('resetpassword.password').value());
+                    if (!success) {
+                        view.get({
+                            ErrorCode : 'formnotvalid'
+                        }).render('account/password/setnewpassword');
+                    } else {
+                        passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
+                        passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                        passwordchangedmail.send({});
+
+                        view.get().render('account/password/setnewpassword_confirm');
+                    }
+                }
+            }
+        }
     });
 }
-
-
-
 
 /**
  * Start the customer registration process and renders customer registration
@@ -219,57 +224,58 @@ function setNewPasswordForm() {
  */
 function startRegister() {
 
-	Form.get('profile').clear();
-    
-    if (Form.get('login.username').value() != null) {
-       Form.get('profileForm.customer.email').value() = Form.get('login.username').value();
+    Form.get('profile').clear();
+
+    if (Form.get('login.username').value() !== null) {
+        Form.get('profileForm.customer.email').object.value = Form.get('login.username').object.value;
     }
 
-	view.get().render('account/user/registration');
+    view.get().render('account/user/registration');
 }
 
 /**
  * Handles registration form submit
  */
 function registrationForm() {
-    var formResult = Form.get('profile').handleAction({
-        'confirm' : function (formgroup) {
-        	
-        	var email = Form.get('profile.customer.email').value();
-		    var emailConfirmation = Form.get('profile.customer.emailconfirm').value();
-			var profileValidation = true;
-		    if (email != emailConfirmation) {
-		        Form.get('profile.customer.emailconfirm').invalidate();
-		        profileCreatedSuccessFull = false;
-		    }
-		
-		    var password = Form.get('profile.login.password').value();
-		    var passwordConfirmation = Form.get('profile.login.passwordconfirm').value();
-		
-		    if (password != passwordConfirmation) {
-		        Form.get('profile.login.passwordconfirm').invalidate();
-		        profileValidation = false;
-		    }
-		
-		    // check if login is already taken
-		    var existingCustomer = Customer.getCustomerByLogin(email);
-		    if (existingCustomer != null) {
-		        Form.get('profile.customer.email').invalidate();
-		        profileValidation =false;
-		    }
-		    
-        	if (profileValidation) {
-           		profileValidation = Customer.createAccount(email, password, Form.get('profile'));
-        	}
-           	if (!profileValidation) {
+    Form.get('profile').handleAction({
+        'confirm' : function() {
+            var email, emailConfirmation, profileValidation, password, passwordConfirmation, existingCustomer;
+            
+            email = Form.get('profile.customer.email').value();
+            emailConfirmation = Form.get('profile.customer.emailconfirm').value();
+            profileValidation = true;
+            
+            if (email !== emailConfirmation) {
+                Form.get('profile.customer.emailconfirm').invalidate();
+                profileValidation = false;
+            }
+
+            password = Form.get('profile.login.password').value();
+            passwordConfirmation = Form.get('profile.login.passwordconfirm').value();
+
+            if (password !== passwordConfirmation) {
+                Form.get('profile.login.passwordconfirm').invalidate();
+                profileValidation = false;
+            }
+
+            // check if login is already taken
+            existingCustomer = Customer.getCustomerByLogin(email);
+            if (existingCustomer !== null) {
+                Form.get('profile.customer.email').invalidate();
+                profileValidation = false;
+            }
+
+            if (profileValidation) {
+                profileValidation = Customer.createAccount(email, password, Form.get('profile'));
+            }
+
+            if (!profileValidation) {
                 // TODO redirect
                 view.get().render('account/user/registration');
-                return;
             } else {
-	            Form.get('profile').clear()
-	            response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
-	            return;
-           	}	      
+                Form.get('profile').clear();
+                response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+            }
         }
     });
 
@@ -282,7 +288,6 @@ function registrationForm() {
 function includeNavigation() {
     view.get().render('account/accountnavigation');
 }
-
 
 /* Web exposed methods */
 
