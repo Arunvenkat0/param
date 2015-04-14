@@ -1353,10 +1353,10 @@ nav[role="navigation"] {
           display: block; } }
     .menu-utility-user .user-info .menu-panel .menu-links .user-logout {
       color: #fff;
-      padding: 0.5em 2em;
+      padding: 0.5em 1em;
       margin: 1em;
       text-transform: uppercase;
-      width: 90%; }
+      width: 80%; }
       .menu-utility-user .user-info .menu-panel .menu-links .user-logout:hover {
         color: #84bd00; }
   .menu-utility-user .user-info .menu-panel h3 {
