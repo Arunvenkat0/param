@@ -21,12 +21,6 @@
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.jcarousel.min.js')}" type="text/javascript"></script>
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.validate.min.js')}" type="text/javascript"></script>
 <script src="${URLUtils.staticURL('/lib/jquery/jquery.zoom.min.js')}" ></script>
-<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisConnectEnabled')}">
-	<isset name="addThisPubID" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisPubID')}" scope="page" />
-	<isset name="addThisVersion" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisVersion')}" scope="page" />
-	<isset name="addThisDomready" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('addThisDomready')}" scope="page" />
-	<script src="//s7.addthis.com/js/${addThisVersion}/addthis_widget.js#pubid=${addThisPubID}&domready=${addThisDomready == true ? '1' : '0'}" type="text/javascript"></script>
-</isif>
 <script type="text/javascript"><isinclude template="resources/appresources"/></script>
 <script src="${URLUtils.staticURL('/js/app.js')}"></script>
 <isif condition="${!('pageContext' in this) || empty(pageContext)}">

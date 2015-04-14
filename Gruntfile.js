@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					sourceMap: (config.type === 'development')
+					sourceMap: (config.type === 'development' || config.type === 'dev')
 				},
 				files: paths.css.map(function (path) {
 					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 				}],
 				options: {
 					browserifyOptions: {
-						debug: (config.type === 'development')
+						debug: (config.type === 'development' || config.type === 'dev')
 					}
 				}
 			},
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('sourcemap', function () {
-		if (config.type === 'development') {
+		if (config.type === 'development' || config.type === 'dev') {
 			grunt.task.run(['external_sourcemap:browserify']);
 		}
 	});

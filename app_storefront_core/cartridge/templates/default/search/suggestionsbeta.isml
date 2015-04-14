@@ -164,18 +164,18 @@
                         	<isloop items="${suggestedProducts}" alias="suggestedProduct" status="loopstate">
                             	<isset name="productSearchHit" value="${suggestedProduct.getProductSearchHit()}" scope="page"/>
                                 <isset name="product" value="${productSearchHit.getProduct()}" scope="page"/>
-                             	<div class="search-suggestion-right-panel-product<isif condition="${loopstate.last}">-last</isif>">
+                             	<div class="product-suggestion">
                                 	<isset name="productImage" value="${product.getImage('small')}" scope="page"/>
-                                		<div class="search-suggestion-right-panel-product-image">
+                                		<div class="product-image">
                                         	<isif condition="${productImage != null}">
                                           		<img src="${productImage.getURL()}" alt="${productImage.alt}" title="${productImage.title}" />
                                           	<iselse/>
                                          		<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${product.name}" title="${product.name}" />
                                         	</isif>
                                         </div>
-                                   		<div class="search-suggestion-right-panel-product-details">
-                                        	<div class="search-suggestion-right-panel-product-name"><a class="search-suggestion-normal-link" href="${URLUtils.url('Product-Show', 'pid', product.getID())}"><isprint value="${product.name}" /></a></div>
-                                           	<div class="search-suggestion-right-panel-product-price">${Resource.msg('search.suggest.from','search',null)} <isprint value="${productSearchHit.getMinPrice()}" /></div>
+                                   		<div class="product-details">
+                                        	<div class="product-name"><a class="search-suggestion-normal-link" href="${URLUtils.url('Product-Show', 'pid', product.getID())}"><isprint value="${product.name}" /></a></div>
+                                           	<div class="product-price">${Resource.msg('search.suggest.from','search',null)} <isprint value="${productSearchHit.getMinPrice()}" /></div>
                                      	</div>
                           		</div>
                         	</isloop>
