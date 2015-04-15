@@ -34,7 +34,7 @@
 			<isinclude template="components/browsertoolscheck"/>
 		</div>
 
-	    <isinclude template="components/footer/footer"/>
+		<isinclude template="components/footer/footer"/>
 		<isinclude template="content/home/pt_storefront_VARS"/>
 
 	</div><!--  /wrapper -->

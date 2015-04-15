@@ -24,7 +24,6 @@
 <body>
 
 	<div id="wrapper" class="pt_product-details">
-		<isinclude template="components/header/countryselector"/>
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
 
 		<div id="main" role="main" class="full-width clearfix">
