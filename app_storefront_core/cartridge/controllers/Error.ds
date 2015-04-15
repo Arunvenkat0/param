@@ -42,18 +42,23 @@ function start(args) {
 
             return;
         }
+    }else{
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // remote includes which the WA won't resolve
+        if('isIncludeRequest' in request){
+            if(request.isIncludeRequest()){
+                nodecorator = true;
+            }else{
+                response.setStatus(410);
+            }
+        }
+        view.get({
+            PipelineName : args.ControllerName,
+            CurrentStartNodeName : args.CurrentStartNodeName,
+            ErrorText    : args.ErrorText,
+            nodecorator  : false
+        }).render('error/generalerror');
     }
-
-    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
-    // remote includes which the WA won't resolve
-    response.setStatus(410);
-    view.get({
-        PipelineName : args.ControllerName,
-        CurrentStartNodeName : args.CurrentStartNodeName,
-        ErrorText    : args.ErrorText,
-        nodecorator  : nodecorator
-    }).render('error/generalerror');
-
 }
 
 /**
