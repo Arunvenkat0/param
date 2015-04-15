@@ -33,7 +33,7 @@
 						<isinputfield formfield="${session.forms.ordertrack.postalCode}" type="input"/>
 
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('accountlogin.orderbutton','account',null)}" name="${session.forms.ordertrack.findorder.htmlName}">
+							<button type="submit" value="${Resource.msg('accountlogin.orderbutton','account',null)}" name="${session.forms.ordertrack.findOrder.htmlName}">
 								${Resource.msg('accountlogin.orderbutton','account',null)}
 							</button>
 						</div>

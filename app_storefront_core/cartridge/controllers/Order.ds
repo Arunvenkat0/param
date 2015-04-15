@@ -13,7 +13,8 @@ var PagingModel = require('dw/web/PagingModel');
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var view = require('~/cartridge/scripts/view');
-var orderListForm = require('~/cartridge/scripts/models/Form').get('orders.orderlist');
+var Form = require('~/cartridge/scripts/models/Form');
+var orderListForm = Form.get('orders.orderlist');
 var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
@@ -88,59 +89,6 @@ function track()
 }
 
 
-/**
- * This pipeline is intended to find an order by its order number and the postal
- * code of the billing address. The pipeline is used by the login page and end
- * on a named end node "ok" if the order was found or ends with a named end node
- * "error" to report back to the calling pipeline.
- */
-function find()
-{
-    var orderTrackForm = session.forms.ordertrack;
-    var orderNumber = orderTrackForm.orderNumber.value;
-    var orderFormEmail = orderTrackForm.orderEmail.value;
-
-    if (empty(orderNumber) || empty(orderTrackForm.postalCode.value)
-            || empty(orderFormEmail))
-    {
-        return {
-            error : true
-        };
-    }
-
-    var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNumber, dw.order.Order.ORDER_STATUS_REPLACED);
-
-    if (empty(orders))
-    {
-        return {
-            error : true
-        };
-    }
-
-    var foundOrder = orders.next();
-
-    if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
-    {
-        return {
-            error : true
-        };
-    }
-
-    var Order = foundOrder;
-
-    if (Order.customerEmail !== orderFormEmail)
-    {
-        return {
-            error : true
-        };
-    }
-
-    return {
-        ok : true,
-        Order : Order
-    };
-}
-
 /*
  * Private methods
  */
@@ -175,8 +123,3 @@ function loggedIn(action)
 exports.History = guard.ensure(['get', 'https', 'loggedIn'], history);
 exports.Orders = guard.ensure(['post', 'https', 'loggedIn'], orders);
 exports.Track = guard.ensure(['get', 'https'], orders);
-
-/*
- * Local methods
- */
-exports.Find = find;
