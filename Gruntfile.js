@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
-	config.type = grunt.option('type') || '';
+	config.sourcemaps = !!grunt.option('sourcemaps');
 
 	var paths = require('./package.json').paths;
 
@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 			dev: {
 				options: {
 					style: 'expanded',
-					sourceMap: (config.type === 'development' || config.type === 'dev')
+					sourceMap: (config.sourcemaps)
 				},
 				files: paths.css.map(function (path) {
 					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 				}],
 				options: {
 					browserifyOptions: {
-						debug: (config.type === 'development' || config.type === 'dev')
+						debug: (config.sourcemaps)
 					}
 				}
 			},
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('sourcemap', function () {
-		if (config.type === 'development' || config.type === 'dev') {
+		if (config.sourcemaps) {
 			grunt.task.run(['external_sourcemap:browserify']);
 		}
 	});
