@@ -9,10 +9,10 @@
 
 /* API Includes */
 var Cart = require('~/cartridge/scripts/models/Cart');
+var Content = require('~/cartridge/scripts/models/Content');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var loginAsset = require('~/cartridge/scripts/models/Content').get('myaccount-login');
 var guard = require('~/cartridge/scripts/guard');
 var loginForm = require('~/cartridge/scripts/models/Form').get('login');
 var pageMeta = require('~/cartridge/scripts/meta');
@@ -49,7 +49,9 @@ function start() {
             session.forms.login.username.value = customer.profile.credentials.login;
         }
 
+        var loginAsset = Content.get('myaccount-login');
         pageMeta.update(loginAsset);
+        
         view.get({
             ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');
@@ -87,7 +89,9 @@ function showLoginForm() {
     });
 
     if (formResult) {
+    	var loginAsset = Content.get('myaccount-login');
         pageMeta.update(loginAsset);
+        
         view.get({
             ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');

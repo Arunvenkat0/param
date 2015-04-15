@@ -11,7 +11,7 @@ var Email = require('~/cartridge/scripts/models/Email');
 var Customer = require('~/cartridge/scripts/models/Customer');
 
 /* Script Modules */
-var content = require('~/cartridge/scripts/models/Content');
+var Content = require('~/cartridge/scripts/models/Content');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -23,8 +23,9 @@ var Form = require('~/cartridge/scripts/models/Form');
  * Renders the account overview.
  */
 function show() {
-    var accountHomeAsset = content.get('myaccount-home');
+    var accountHomeAsset = Content.get('myaccount-home');
     pageMeta.update(accountHomeAsset);
+    
     view.get().render('account/accountoverview');
 }
 
@@ -40,7 +41,7 @@ function editProfile() {
         Form.get('profile.addressbook.addresses').copyFrom(customer.profile.addressBook.addresses);
     }
 
-    var accountPersonalDataAsset = content.get('myaccount-personaldata');
+    var accountPersonalDataAsset = Content.get('myaccount-personaldata');
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     view.get({

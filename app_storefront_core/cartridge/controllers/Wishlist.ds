@@ -7,13 +7,13 @@
  */
 
 /* API Includes */
+var Content = require('~/cartridge/scripts/models/Content');
 var Form = require('~/cartridge/scripts/models/Form');
 var Product = require('~/cartridge/scripts/models/Product');
 var ProductList = require('~/cartridge/scripts/models/ProductList');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var content = require('~/cartridge/scripts/models/Content');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -40,7 +40,7 @@ function landingForm() {
  * Renders the wishlist page.
  */
 function show() {
-	var wishlistAsset = content.get('myaccount-wishlist');
+	var wishlistAsset = Content.get('myaccount-wishlist');
     pageMeta.update(wishlistAsset);
 
     wishlistForm.clear();
