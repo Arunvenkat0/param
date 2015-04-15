@@ -330,14 +330,24 @@ function getSetItem() {
 
 }
 
+/**
+ * Renders the product detail page within the context of a category.
+ * Note: this start node is not obsolete and needs to remain as it's by some hardcoded platform rewrite rules.
+ */
+function showInCategory() {
+    show();
+}
+
 /*
  * Web exposed methods
  */
 /** @see module:controllers/Product~show */
 exports.Show                = guard.ensure(['get'], show);
-/*v @see module:controllers/Product~detail */
+/** @see module:controllers/Product~showInCategory */
+exports.ShowInCategory      = guard.ensure(['get'], showInCategory);
+/** @see module:controllers/Product~detail */
 exports.Detail              = guard.ensure(['get'], detail);
-/*v @see module:controllers/Product~getAvailability */
+/** @see module:controllers/Product~getAvailability */
 exports.GetAvailability     = guard.ensure(['get'], getAvailability);
 /** @see module:controllers/Product~hitTile */
 exports.HitTile             = guard.ensure(['get'], hitTile);
