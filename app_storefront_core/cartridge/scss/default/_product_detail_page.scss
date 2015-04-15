@@ -24,8 +24,9 @@
 
 .pdp-main {
 	@extend %clearfix;
+	margin: 0 1%;
 	ul {
-		list-style: none outside none;
+		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
@@ -38,7 +39,6 @@
 	.product-col-1 {
 		float: left;
 		width: 37%;
-		margin-left: 1%;
 	}
 	.product-primary-image {
 		max-width: 100%;
