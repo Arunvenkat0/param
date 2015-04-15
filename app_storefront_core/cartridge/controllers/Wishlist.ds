@@ -14,7 +14,6 @@ var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var content = require('~/cartridge/scripts/models/Content');
-var wishlistAsset = content.get('myaccount-wishlist');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
@@ -41,6 +40,7 @@ function landingForm() {
  * Renders the wishlist page.
  */
 function show() {
+	var wishlistAsset = content.get('myaccount-wishlist');
     pageMeta.update(wishlistAsset);
 
     wishlistForm.clear();
