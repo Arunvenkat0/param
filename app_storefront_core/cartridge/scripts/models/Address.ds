@@ -15,7 +15,30 @@ var Form = require('~/cartridge/scripts/models/Form');
 var Address = AbstractModel.extend(
 /** @lends module:models/Address~Address.prototype */
 {
+    /**
+     * Removes the address.
+     * Note that the deletion will fail in case the address is still associated with a product list
+     *
+     * @transactional
+     * @return {Boolean} true if the address was successfully deleted, false otherwise
+     */
+    remove : function () {
+        var addressBook = customer.profile.addressBook;
+        var address = this.object;
+        if(!address){
+            return false
+        }
 
+        var listsWithAddress = dw.customer.ProductListMgr.getProductLists(address);
+        if(!listsWithAddress.empty){
+            return false;
+        }
+        Transaction.wrap(function(){
+            addressBook.removeAddress(address);
+        });
+
+        return true;
+    }
 
 });
 
@@ -41,7 +64,7 @@ Address.get = function (parameter) {
  *
  * @transactional
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
- * @returns {Boolean} true if the address was successfully created, false otherwise
+ * @returns {module:models/Address~Address} The created address
  */
 Address.create = function(addressForm) {
     var addressBook = customer.profile.addressBook;
@@ -51,16 +74,16 @@ Address.create = function(addressForm) {
 
         if(addressForm){
             if (!Form.get(addressForm).copyTo(address)){
-                return false;
+                return null;
             }
 
             if('states' in addressForm){
                 if (!Form.get(addressForm.states).copyTo(address)){
-                    return false;
+                    return null;
                 }
             }
         }
-        return true;
+        return new Address(address);
     });
 };
 
@@ -69,7 +92,7 @@ Address.create = function(addressForm) {
  *
  * @transactional
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
- * @returns {Boolean} true if the address was successfully updated, false otherwise
+ * @returns {module:models/Address~Address} The updated address
  */
 Address.update = function (addressId, addressForm) {
     // get address to be edited
@@ -86,18 +109,18 @@ Address.update = function (addressId, addressForm) {
         if(addressForm){
             if (!Form.get(addressForm).copyTo(address)){
                 addressForm.invalidateFormElement();
-                return false;
+                return null;
             }
 
             if('states' in addressForm){
                 if (!Form.get(addressForm.states).copyTo(address)){
                     addressForm.invalidateFormElement();
-                    return false;
+                    return null;
                 }
             }
         }
 
-        return true;
+        return new Address(address);
     });
 };
 
@@ -108,20 +131,10 @@ Address.update = function (addressId, addressForm) {
  * @transactional
  * @param {String} addressId The ID of the address to delete
  * @return {Boolean} true if the address was successfully deleted, false otherwise
+ * @see module:models/Address~Address#remove
  */
 Address.remove = function (addressId) {
-    var addressBook = customer.profile.addressBook;
-    var address = addressBook.getAddress(addressId);
-
-    var listsWithAddress = dw.customer.ProductListMgr.getProductLists(address);
-    if(!listsWithAddress.empty){
-        return false;
-    }
-    Transaction.wrap(function(){
-        addressBook.removeAddress(address);
-    });
-
-    return true;
+    return Address.get(addressId).remove();
 };
 
 /** The order class */
