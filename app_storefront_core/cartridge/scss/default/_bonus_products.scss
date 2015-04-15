@@ -49,3 +49,12 @@
 		}
 	}
 }
+
+.bonus-discount-container {
+	.promo-details {
+		display: none;
+		&.visible {
+			display: block;
+		}
+	}
+}

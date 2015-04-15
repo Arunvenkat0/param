@@ -12,11 +12,9 @@ p_discount_line_item : discount line item
 			<isprint value="${empty(pdict.p_discount_line_item.promotion.calloutMsg) ? '' : pdict.p_discount_line_item.promotion.calloutMsg.markup}" encoding="off"/>
 		</div>
 
-		<a class="tooltip" href="#">
-			${Resource.msg('product.promotiondetails','product',null)}
-			<div class="tooltip-content">
-				<isprint value="${empty(pdict.p_discount_line_item.promotion.details) ? '' : pdict.p_discount_line_item.promotion.details.markup}"/>
-			</div>
-		</a>
+		<a class="show-promo-details" href="#">${Resource.msg('product.promotiondetails','product',null)}</a>
+		<div class="promo-details">
+			<isprint value="${empty(pdict.p_discount_line_item.promotion.details) ? '' : pdict.p_discount_line_item.promotion.details.markup}"/>
+		</div>
 	</div><!-- /.bonusdiscountcontainer -->
 </isif>

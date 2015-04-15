@@ -242,7 +242,7 @@ function initializeGrid () {
 var bonusProductsView = {
 	/**
 	 * @function
-	 * @description Loads the list of bonus products into quick view dialog
+	 * @description Open the list of bonus products selection dialog
 	 */
 	show: function (url) {
 		var $bonusProduct = $('#bonus-product-dialog');
@@ -251,13 +251,7 @@ var bonusProductsView = {
 			target: $bonusProduct,
 			url: url,
 			options: {
-				position: {
-					my: 'center',
-					at: 'top',
-					of: window
-				},
 				width: 795,
-				dialogClass: 'quickview',
 				title: Resources.BONUS_PRODUCTS
 			},
 			callback: function () {
@@ -268,18 +262,19 @@ var bonusProductsView = {
 	},
 	/**
 	 * @function
-	 * @description
+	 * @description Open bonus product promo prompt dialog
 	 */
 	loadBonusOption: function () {
 		var	self = this,
-			$bonusDiscountContainer = $('.bonus-discount-container').clone();
-		if ($bonusDiscountContainer.length === 0) { return; }
+			bonusDiscountContainer = document.querySelector('.bonus-discount-container');
+		if (!bonusDiscountContainer) { return; }
 
 		// get the html from minicart, then trash it
-		$('.bonus-discount-container').remove();
+		var bonusDiscountContainerHtml = bonusDiscountContainer.outerHTML;
+		bonusDiscountContainer.parentNode.removeChild(bonusDiscountContainer);
 
 		dialog.open({
-			html: $bonusDiscountContainer.html(),
+			html: bonusDiscountContainerHtml,
 			options: {
 				width: 400,
 				title: Resources.BONUS_PRODUCT,
@@ -300,6 +295,12 @@ var bonusProductsView = {
 						$(this).dialog('close');
 					}
 				}]
+			},
+			callback: function () {
+				// show hide promo details
+				$('.show-promo-details').on('click', function () {
+					$('.promo-details').toggleClass('visible');
+				});
 			}
 		});
 	}

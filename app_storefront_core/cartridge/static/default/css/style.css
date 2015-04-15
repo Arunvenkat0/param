@@ -1023,6 +1023,7 @@ nav[role="navigation"] {
     text-align: center; }
 
 .menu-utility-user {
+  margin: 0;
   padding: 0;
   text-transform: uppercase; }
   @media screen and (min-width: 768px) {
@@ -2587,6 +2588,11 @@ button.add-all-to-cart {
     position: absolute; }
     .bonus-product-list .selected-bonus-item .remove-link:hover {
       color: #424242; }
+
+.bonus-discount-container .promo-details {
+  display: none; }
+  .bonus-discount-container .promo-details.visible {
+    display: block; }
 
 .send-to-friend-product {
   border-bottom: 1px solid #e0e0e0;
