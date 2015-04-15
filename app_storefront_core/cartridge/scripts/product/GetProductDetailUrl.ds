@@ -73,16 +73,21 @@ function GetVariationAttributes(pdict) {
 		for (var i = 0; i < PVM.productVariationAttributes.length; i++) {
 			var VA = PVM.productVariationAttributes[i],
 				valength = PVM.getAllValues(VA).length,
-				vaId = VA.getAttributeID(),
-				vaValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value,
-				selectedValue;
+                attributeDefinitionId = VA.getAttributeID(),
+                vaId = VA.getID(),
+                // @TODO why use `PVM.getProductVariationAttribute(vaId)` below instead of just `VA`?
+                vaValue = PVM.getVariationValue(variant, PVM.getProductVariationAttribute(vaId)).value,
+                selectedValue;
+            
+			var vaValue = PVM.getVariationValue(variant, VA).value;
+			var selectedValue;
 
 			// for variation group products, select the values which are configured
 			if (pdict.Product.variationGroup) {
-				vaValue = PVM.getSelectedValue(PVM.getProductVariationAttribute(vaId)).value;
+				vaValue = PVM.getSelectedValue(VA).value;
 			}
 
-			switch (vaId) {
+			switch (attributeDefinitionId) {
 				case 'size':
 					if (valength == 1 || variantSelected) {
 						selectedValue = vaValue;
