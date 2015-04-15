@@ -48,8 +48,8 @@ function history()
 function orders()
 {
     orderListForm.handleAction({
-        'show': function () {
-            var Order = request.triggeredFormAction.object;
+        'show': function (formGroup, action) {
+            var Order = action.object;
 
             view.get('OrderDetails', {Order : Order}).render('account/orderhistory/orderdetails');
         },

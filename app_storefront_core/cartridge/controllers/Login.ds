@@ -138,16 +138,14 @@ function handleLoginForm()
                 return;
             }
 
-            var Order = foundOrder;
-
-            if (Order.customerEmail !== orderFormEmail)
+            if (foundOrder.customerEmail !== orderFormEmail)
             {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
 
             view.get({
-                Order : Order
+                Order : foundOrder
             }).render('account/orderhistory/orderdetails');
         },
         'error' : function(){
