@@ -70,7 +70,9 @@ function showPurchase()
 
 /**
  * Internal helper to show errors on the purchase page
- * @param  {[type]} args [description]
+ * @param  {Object} args
+ * @param  {dw.util.Map} args.FormErrors
+ * @param  {String} args.GeneralError
  */
 function showError(args)
 {

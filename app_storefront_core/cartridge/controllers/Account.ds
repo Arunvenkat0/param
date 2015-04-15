@@ -98,9 +98,9 @@ function passwordReset() {
 }
 
 /**
- * @private
  * Utility, which handles form submits from dialog based and full page
  * based password reset
+ * @private
  */
 function passwordResetFormHandler(templateName) {
     var resetPasswordToken, passwordemail;
@@ -240,11 +240,11 @@ function registrationForm() {
     Form.get('profile').handleAction({
         'confirm' : function() {
             var email, emailConfirmation, profileValidation, password, passwordConfirmation, existingCustomer;
-            
+
             email = Form.get('profile.customer.email').value();
             emailConfirmation = Form.get('profile.customer.emailconfirm').value();
             profileValidation = true;
-            
+
             if (email !== emailConfirmation) {
                 Form.get('profile.customer.emailconfirm').invalidate();
                 profileValidation = false;

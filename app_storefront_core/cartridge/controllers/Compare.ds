@@ -6,38 +6,42 @@
  */
 
 /* API Includes */
-var Category = require('~/cartridge/scripts/models/Category');
 var Form = require('~/cartridge/scripts/models/Form');
 var Product = require('~/cartridge/scripts/models/Product');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 var view = require('~/cartridge/scripts/view');
+var Category = require('~/cartridge/scripts/models/Category');
+var Compare = require('~/cartridge/scripts/models/Compare');
 
 /**
  * Expects: - category: category ID
  */
-function Show() {
+function show() {
     var compareForm = session.forms.compare;
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        ScriptFile    : 'catalog/GetCompareList.ds',
-        Transactional : false
-    }).execute({
-            SelectedCategory : request.httpParameterMap.category.value
-        });
-    var CompareList = ScriptResult.CompareList;
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.setCategory(request.httpParameterMap.category.value);
 
-    Form.get(compareForm).copyFrom(CompareList);
-    compareForm.categories.setOptions(CompareList.categories);
+    // Store selected compare list properties in a map
+    var map = new dw.util.HashMap();
+    map.put('categories', comparison.getCategories());
+    map.put('products', comparison.getProducts());
+    map.put('attributegroups', comparison.getAttributeGroups());
+    map.put('category', comparison.getCategory());
 
-    view.get({CompareList : CompareList}).render('product/compare/compareshow');
+    Form.get(compareForm).copyFrom(map);
+    compareForm.categories.setOptions(map.categories);
+
+    view.get({CompareList : map}).render('product/compare/compareshow');
 }
 
 /**
  * Expects: - pid: SKU - category: category ID
  */
-function AddProduct() {
+function addProduct() {
 
     var product = Product.get(request.httpParameterMap.pid.value);
     var category = Category.get(request.httpParameterMap.category.value);
@@ -49,22 +53,10 @@ function AddProduct() {
         return;
     }
     else {
-
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'catalog/AddToCompareList.ds'
-        }).execute({
-                Category : category.object,
-                Product  : product.object
-            });
-
-        if (ScriptResult.result === PIPELET_ERROR) {
-            response.renderJSON({
-                success : false
-            });
-            return;
-        }
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        comparison.add(product.object, category.object);
+        comparison.setCategory(category.getID());
 
         response.renderJSON({
             success : true
@@ -75,7 +67,7 @@ function AddProduct() {
 /**
  * Parameters: - pid: SKU - category: category ID
  */
-function RemoveProduct() {
+function removeProduct() {
 
     var product = Product.get(request.httpParameterMap.pid.value);
     var category = Category.get(request.httpParameterMap.category.value);
@@ -86,20 +78,10 @@ function RemoveProduct() {
         return;
     }
     else {
-
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            ScriptFile    : 'catalog/RemoveFromCompareList.ds',
-            Transactional : false
-        }).execute({
-                Product  : product.object,
-                Category : category.object
-            });
-        if (ScriptResult.result === PIPELET_ERROR) {
-            response.renderJSON({
-                success : false
-            });
-            return;
-        }
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        comparison.remove(product.object, category.object);
+        comparison.setCategory(category.getID());
 
         response.renderJSON({
             success : true
@@ -110,7 +92,7 @@ function RemoveProduct() {
 /**
  * Parameters: - category: category ID
  */
-function Controls() {
+function controls() {
 
     var category = Category.get(request.httpParameterMap.category.value);
     if (!category.object) {
@@ -118,35 +100,20 @@ function Controls() {
         return;
     }
     else {
-
-        var ScriptResult = new dw.system.Pipelet('Script', {
-            ScriptFile    : 'catalog/GetCompareList.ds',
-            Transactional : false
-        }).execute({
-                SelectedCategory : request.httpParameterMap.category.value
-            });
-        if (ScriptResult.result === PIPELET_ERROR) {
-            response.renderTemplate('search/components/productcomparewidget');
-            return;
-        }
-        var CompareList = ScriptResult.CompareList;
-
-        view.get({CompareList : CompareList, Category : category.object}).render('search/components/productcomparewidget');
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        view.get({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
     }
 }
-
-/*
- * Module exports
- */
 
 /*
  * Web exposed methods
  */
 /** @see module:controllers/Compare~Show */
-exports.Show = guard.all(Show);
+exports.Show = guard.all(show);
 /** @see module:controllers/Compare~AddProduct */
-exports.AddProduct = guard.ensure(['get'], AddProduct);
+exports.AddProduct = guard.ensure(['get'], addProduct);
 /** @see module:controllers/Compare~RemoveProduct */
-exports.RemoveProduct = guard.ensure(['get'], RemoveProduct);
+exports.RemoveProduct = guard.ensure(['get'], removeProduct);
 /** @see module:controllers/Compare~Controls */
-exports.Controls = guard.ensure(['get'], Controls);
+exports.Controls = guard.ensure(['get'], controls);
