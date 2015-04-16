@@ -12,7 +12,7 @@ var Transaction         = require('dw/system/Transaction');
 var GiftCertificateMgr  = require('dw/order/GiftCertificateMgr');
 
 /* Script Modules */
-var guard = require('~/cartridges/scripts/guard');
+var guard = require('~/cartridge/scripts/guard');
 var Form = require('~/cartridge/scripts/models/Form');
 var Cart = require('~/cartridge/scripts/models/Cart');
 var giftcertForm = Form.get('giftcert');
