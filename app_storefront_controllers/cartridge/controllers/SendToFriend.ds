@@ -35,7 +35,7 @@ function Start() {
     // TODO not needed by template?
     /*
      * var ProductList = null;
-     * 
+     *
      * if (CurrentHttpParameterMap.plid.stringValue) { var GetProductListResult =
      * new dw.system.Pipelet('GetProductList', { Create : false }).execute({
      * ProductListID : CurrentHttpParameterMap.plid.value }); ProductList =
@@ -65,7 +65,7 @@ function SendToFriendForm() {
         if (TriggeredAction.formId == 'edit') {
             response.renderTemplate('account/components/sendtofrienddialog', {
                 ViewMode    : 'Edit',
-                ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')       
+                ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
             });
             return;
         }
@@ -123,8 +123,7 @@ function send() {
     var sendToFriendForm = session.forms.sendtofriend;
 
     if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value) {
-        var form = require('./dw/form');
-        form.invalidateFormElement(sendToFriendForm.confirmfriendsemail);
+        sendToFriendForm.confirmfriendsemail.invalidateFormElement();
 
         // TODO view mode?
         response.renderTemplate('account/components/sendtofrienddialog', {
@@ -138,13 +137,10 @@ function send() {
      */
     // TODO where should this come from? plid?
     if (typeof (ProductList) != 'undefined' && ProductList != null) {
-        var m = require('./dw/mail');
-        m.sendMail({
-            MailFrom     : customer.profile.email,
-            MailSubjet   : sendToFriendForm.subject.value,
-            MailTemplate : "mail/productlist",
-            MailTo       : sendToFriendForm.friendsemail.value
-        });
+        require('~/cartridge/scripts/models/Email').get('mail/productlist', sendToFriendForm.friendsemail.value)
+            .setSubject(sendToFriendForm.subject.value)
+            .setFrom(customer.profile.email).send();
+
 
         if (empty(CurrentHttpParameterMap.format.stringValue)) {
             if (empty(ProductList.eventCity)) {
@@ -173,13 +169,9 @@ function send() {
         var GetProductResult = getProduct(pid);
         var CurrentCustomer = customer;
 
-        var m = require('./dw/mail');
-        m.sendMail({
-            MailFrom     : customer.profile.email,
-            MailSubject  : sendToFriendForm.subject.value,
-            MailTemplate : "mail/product",
-            MailTo       : sendToFriendForm.friendsemail.value
-        });
+        require('~/cartridge/scripts/models/Email').get('mail/product', sendToFriendForm.friendsemail.value)
+            .setSubject(sendToFriendForm.subject.value)
+            .setFrom(customer.profile.email).send();
 
         if (empty(CurrentHttpParameterMap.format.stringValue)) {
             var ProductController = require('./Product');
@@ -191,13 +183,10 @@ function send() {
         /*
          * Default
          */
-        var m = require('./dw/mail');
-        m.sendMail({
-            MailFrom     : customer.profile.email,
-            MailSubject  : sendToFriendForm.subject.value,
-            MailTemplate : "mail/productlistdefault",
-            MailTo       : sendToFriendForm.friendsemail.value
-        });
+        require('~/cartridge/scripts/models/Email').get('mail/productlistdefault', sendToFriendForm.friendsemail.value)
+            .setSubject(sendToFriendForm.subject.value)
+            .setFrom(customer.profile.email).send();
+
     }
 
     response.renderTemplate('account/components/sendtofrienddialogsuccess', {

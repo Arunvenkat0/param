@@ -1,4 +1,4 @@
-var g = require('./dw/guard');
+var g = require('~/cartridges/scripts/guard');
 
 /**
  * Renders a public gift registry, which can be accessed by people other than the owner.
@@ -11,9 +11,7 @@ function Show()
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
 
-
-    var form = require('./dw/form');
-    form.clearFormElement(CurrentForms.giftregistry);
+    CurrentForms.giftregistry.clearFormElement();
 
 
     var ProductListID = CurrentHttpParameterMap.ID.stringValue;
@@ -38,9 +36,8 @@ function Show()
 
             if (ProductList.public)
             {
-                var form = require('./dw/form');
-                form.updateFormWithObject(CurrentForms.giftregistry.items, ProductList.publicItems);
-                form.updateFormWithObject(CurrentForms.giftregistry.event, ProductList);
+                CurrentForms.giftregistry.items.copyFrom(ProductList.publicItems);
+                CurrentForms.giftregistry.event.copyFrom(ProductList);
             }
             else
             {

@@ -1,4 +1,4 @@
-var g = require('./dw/guard');
+var g = require('~/cartridges/scripts/guard');
 
 /**
  * Handles PowerReview Request (Product Reviews)
