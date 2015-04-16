@@ -25,7 +25,7 @@ var Form = require('~/cartridge/scripts/models/Form');
 function show() {
     var accountHomeAsset = Content.get('myaccount-home');
     pageMeta.update(accountHomeAsset);
-    
+
     view.get().render('account/accountoverview');
 }
 
@@ -282,7 +282,15 @@ function registrationForm() {
                 }).render('account/user/registration');
             } else {
                 Form.get('profile').clear();
-                response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+                var target = session.custom.TargetLocation;
+                if(target){
+                    delete session.custom.TargetLocation;
+                    //@TODO make sure only path, no hosts are allowed as redirect target
+                    dw.system.Logger.info('Redirecting to "{0}" after successful login',target);
+                    response.redirect(target);
+                }else{
+                    response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+                }
             }
         }
     });
