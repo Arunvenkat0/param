@@ -1,62 +1,41 @@
 'use strict';
 
-/** @module controllers/StoreInventory */
+/**
+ * This module handles in store functionality which is mostly used on the PDP
+ *
+ * @module controllers/StoreInventory
+ * @TODO Simplify the logic, there is no need to return the stores as JSON to render them in the client
+ */
 
 /* Script Modules */
-var guard = require('~/cartridge/scripts/guard');
+var guard   = require('~/cartridge/scripts/guard');
+var Cart    = require('~/cartridge/scripts/models/Cart');
+var view    = require('~/cartridge/scripts/view');
+var Product = require('~/cartridge/scripts/models/Product');
 
 /**
- * Sets the store for s given line item (requires rich_UI cartrdige)
+ * Sets the store for a given line item (requires rich_UI cartrdige)
  */
-function SetStore() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function setStore() {
+    var parameterMap = request.httpParameterMap;
 
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error) {
-        CartController.Show();
-        return;
-    }
+    var cart = Cart.get();
 
-    var Basket = GetExistingBasketResult.Basket;
+    var result = setStoreInLineItem( cart.object, parameterMap.plid.stringValue, parameterMap.storeid.stringValue,
+        parameterMap.storepickup.stringValue );
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/storepickup/SetStoreInLineItem.ds'
-    }).execute({
-            Basket       : Basket,
-            LineItemUUID : CurrentHttpParameterMap.plid.stringValue,
-            StoreId      : CurrentHttpParameterMap.storeid.stringValue,
-            StorePickup  : CurrentHttpParameterMap.storepickup.stringValue
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        var ErrorCode = ScriptResult.ErrorCode;
-
+    if (result.ErrorCode) {
         response.renderJSON({
             success   : false,
-            ErrorCode : ErrorCode
+            ErrorCode : result.ErrorCode
         });
         return;
     }
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'checkout/RemoveEmptyShipments.ds'
-    }).execute({
-            Basket : Basket
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        response.renderJSON({
-            success : false
-        });
-        return;
-    }
+    cart.removeEmptyShipments();
 
-    // TODO bug in original pipeline?
-    if (empty(session.custom.storeId) && !empty(CurrentHttpParameterMap.storeid)) {
-        session.custom.storeId = CurrentHttpParameterMap.storeid.value;
+    if (empty(session.custom.storeId) && !empty(parameterMap.storeid.value)) {
+        session.custom.storeId = parameterMap.storeid.value;
     }
 
     response.renderJSON({
@@ -67,11 +46,11 @@ function SetStore() {
 /**
  * These pipelines are used when the UI cartridge is not in the cartridge path.
  */
-function ShowSelectedStoreCore() {
+function showSelectedStoreCore() {
     session.custom.storeId = request.httpParameterMap.storeId.value;
 
-    if ((session.custom.zipcode != null) && (session.custom.storeId != null)) {
-        response.renderTemplate('storelocator/storepickup/coreshowselectedstore');
+    if ((session.custom.zipcode !== null) && (session.custom.storeId !== null)) {
+        view.get().render('storelocator/storepickup/coreshowselectedstore');
         return;
     }
 
@@ -81,10 +60,13 @@ function ShowSelectedStoreCore() {
 /**
  * TODO
  */
-function showSetStore() {
-    if (session.custom.zipcode != null) {
+function showSetStore(stores, storeAvailabilityMap) {
+    if (session.custom.zipcode !== null) {
         // TODO Stores and storeAvailabilityMap expected?
-        response.renderTemplate('storelocator/storepickup/coresetstore', {});
+        view.get({
+            Stores : stores,
+            storeAvailabilityMap : storeAvailabilityMap
+        }).render('storelocator/storepickup/coresetstore');
         return;
     }
 
@@ -95,103 +77,62 @@ function showSetStore() {
  * TODO
  */
 function showZipCode() {
-    response.renderTemplate('storelocator/storepickup/corezipcode', {});
+    view.get().render('storelocator/storepickup/corezipcode');
 }
 
 /**
  * TODO
  */
-function ShowAvailableStores() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
+function showAvailableStores() {
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
 
-    var LookupByZipCodeResult = lookupByZipCode();
-    var Stores = LookupByZipCodeResult.Stores;
+    var stores = lookupByZipCode().Stores;
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
 
-    var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : CurrentHttpParameterMap.pid.stringValue
-    });
-    var Product = GetProductResult.Product;
-    if (GetProductResult.result == PIPELET_ERROR) {
-        var GetProductFromLineItemResult = GetProductFromLineItem();
-        Product = GetProductFromLineItemResult.Product;
-    }
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'storelocator/storepickup/InventoryLookup.ds'
-    }).execute({
-            stores  : Stores,
-            product : Product
-        });
-
-    var storeAvailabilityMap = ScriptResult.storeAvailability;
-
-    // TODO what is done with it?
-
-    showSetStore();
+    showSetStore(stores, storeAvailabilityMap);
 }
 
 /**
  * TODO
  */
-function CartSetZipCodeCore() {
-    if (session.custom.zipcode != null) {
-        ShowAvailableStores();
+function cartSetZipCodeCore() {
+    if (session.custom.zipcode !== null) {
+        showAvailableStores();
     }
     else {
-        SetZipCodeCore();
+        setZipCodeCore();
     }
 }
 
 /**
  * TODO
  */
-function SetZipCodeCore() {
+function setZipCodeCore() {
     showZipCode();
 }
 /**
  * TODO
  */
-function SetStoreCore() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
-
+function setStoreCore() {
     var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error) {
+    var parameterMap = request.httpParameterMap;
+
+    var cart = Cart.get();
+
+    var result = setStoreInLineItem( cart.object, parameterMap.plid.stringValue, parameterMap.storeid.stringValue,
+        parameterMap.storepickup.stringValue );
+
+    if (result.ErrorCode) {
+        // @FIXME Pass the error to the cart controller
         CartController.Show();
         return;
     }
 
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'cart/storepickup/SetStoreInLineItem.ds'
-    }).execute({
-            Basket       : Basket,
-            LineItemUUID : CurrentHttpParameterMap.plid.stringValue,
-            StoreId      : CurrentHttpParameterMap.storeid.stringValue,
-            StorePickup  : CurrentHttpParameterMap.storepickup.stringValue
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        var ErrorCode = ScriptResult.ErrorCode;
+    cart.removeEmptyShipments();
 
-        CartController.Show();
-        return;
-    }
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : true,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'checkout/RemoveEmptyShipments.ds'
-    }).execute({
-            Basket : Basket
-        });
-    if (ScriptResult.result == PIPELET_ERROR) {
-        CartController.Show();
-        return;
+    if (empty(session.custom.storeId) && !empty(parameterMap.storeid.value)) {
+        session.custom.storeId = parameterMap.storeid.value;
     }
 
     CartController.Show();
@@ -204,45 +145,27 @@ function SetStoreCore() {
  *
  * Sample URL to call ....Stores-Inventory?pid=2239622&zipCode=01803
  */
-function Inventory() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function inventory() {
+    var storesList = lookupByZipCode().Stores;
 
-    var LookupByZipCodeResult = lookupByZipCode();
-    var Stores = LookupByZipCodeResult.Stores;
-
-    var PLI = null;
-
-    var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : request.httpParameterMap.pid.stringValue
-    });
-    var Product = GetProductResult.Product;
-    if (GetProductResult.result == PIPELET_ERROR) {
-        var GetProductFromLineItemResult = getProductFromLineItem();
-        Product = GetProductFromLineItemResult.Product;
-        PLI = GetProductFromLineItemResult.PLI;
+    var product = Product.get(request.httpParameterMap.pid.stringValue).object;
+    var lineitem;
+    // @FIXME Why can pid be a lineitem ID?
+    if(!product){
+        lineitem = getProductLineItem(request.httpParameterMap.pid.stringValue);
+        product  = lineitem.product;
     }
-
-    var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        OnError       : 'PIPELET_ERROR',
-        ScriptFile    : 'storelocator/storepickup/InventoryLookup.ds'
-    }).execute({
-            stores  : Stores,
-            product : Product,
-            pid     : request.httpParameterMap.pid.stringValue,
-            pli     : PLI
-        });
-    var storeAvailabilityMap = ScriptResult.storeAvailability;
+    var storeAvailabilityMap = getStoreAvailabilityMap(storesList, product, lineitem);
 
     // create JSON representation
     var stores = [];
 
-    for (var i = 0, len = Stores.length; i < len; i++) {
-        var store = Stores[i];
+    for (var i = 0, len = storesList.length; i < len; i++) {
+        var store = storesList[i];
 
         // this may need to be changed to ("inventoryListId" in store.custom) ?
         // store.custom.inventoryListId : "";
-        var inventoryListId = store.custom.inventoryListId || "";
+        var inventoryListId = store.custom.inventoryListId || '';
         var inventoryList = dw.catalog.ProductInventoryMgr.getInventoryList(inventoryListId);
         var inventoryRec = inventoryList ? inventoryList.getRecord(Product.ID) : null;
 
@@ -250,14 +173,14 @@ function Inventory() {
             break;
         }
 
-        if (storeAvailabilityMap.get(store.ID) == null) {
+        if (storeAvailabilityMap.get(store.ID) === null) {
             continue;
         }
 
         stores.push({
             storeId     : store.ID,
             status      : storeAvailabilityMap.get(store.ID),
-            statusclass : storeAvailabilityMap.get(store.ID) == Resource.msg('cart.store.availableinstore', 'storepickup', null) ? 'store-in-stock' : 'store-error',
+            statusclass : storeAvailabilityMap.get(store.ID) === dw.web.Resource.msg('cart.store.availableinstore', 'storepickup', null) ? 'store-in-stock' : 'store-error',
             quantity    : inventoryRec ? inventoryRec.ATS.value : 0,
             address1    : store.address1,
             city        : store.city,
@@ -270,39 +193,36 @@ function Inventory() {
 }
 
 /**
- * Gets/Sets the preferred store for the session object
+ * Sets the preferred store to the session
  */
-function SetPreferredStore() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function setPreferredStore() {
+    session.custom.storeId = request.httpParameterMap.storeId.value;
 
-    session.custom.storeId = CurrentHttpParameterMap.storeId.value;
-
-    response.renderJSON([{
-        storeId : session.custom.storeId
-    }]);
+    getPreferredStore();
 }
 
-function GetPreferredStore() {
+/**
+ * Gets the preferred store from the session
+ */
+function getPreferredStore() {
     response.renderJSON([{
         storeId : session.custom.storeId
     }]);
 }
 
 /**
- * Gets/Sets the users zip code for the session object
+ * Sets the users zip code for at the session
  */
-function SetZipCode() {
+function setZipCode() {
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
 
-    response.renderJSON([{
-        zip : session.custom.zipcode
-    }]);
+    getZipCode();
 }
 
 /**
- * TODO
+ * Gets the users zip code from the session
  */
-function GetZipCode() {
+function getZipCode() {
     response.renderJSON([{
         zip : session.custom.zipcode
     }]);
@@ -317,24 +237,17 @@ function GetZipCode() {
  * the the radius and units of distance
  */
 function lookupByZipCode() {
-    var getNearestStoresResult = new dw.system.Pipelet('GetNearestStores', {
-        DistanceUnit : 'mi',
-    }).execute({
-            PostalCode   : request.httpParameterMap.zipCode.value,
-            CountryCode  : dw.system.Site.getCurrent().getCustomPreferenceValue('countryCode').value,
-            DistanceUnit : dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').value,
-            MaxDistance  : new Number(dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupMaxDistance').value)
-        });
-    var nearestStores = getNearestStoresResult.Stores;
+    var nearestStores = dw.catalog.StoreMgr.searchStoresByPostalCode(
+        dw.system.Site.getCurrent().getCustomPreferenceValue('countryCode').value,
+        request.httpParameterMap.zipCode.value,
+        'mi',
+        Number(dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupMaxDistance').value));
 
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
 
-    var stores = nearestStores.keySet();
-    var storesCount = nearestStores.size();
-
     return {
-        Stores      : stores,
-        StoresCount : storesCount
+        Stores      : nearestStores.keySet(),
+        StoresCount : nearestStores.size()
     };
 }
 
@@ -342,57 +255,179 @@ function lookupByZipCode() {
  * Assumes that the pid refers to a product line item instead of a product
  * object for determining products availability.
  */
-function getProductFromLineItem() {
-    var CurrentHttpParameterMap = request.httpParameterMap;
+function getProductLineItem(uuid) {
+    var cart = Cart.get();
+    for (var i = 0; i < cart.object.productLineItems.length; i++) {
+        var lineItem = cart.object.productLineItems[i];
 
-    var CartController = require('./Cart');
-    var GetExistingBasketResult = CartController.GetExistingBasket();
-    if (GetExistingBasketResult.error) {
-        return {};
-    }
-
-    var Basket = GetExistingBasketResult.Basket;
-
-    for (var i = 0; i < Basket.productLineItems.length; i++) {
-        var LineItem = Basket.productLineItems[i];
-
-        if (LineItem.UUID == CurrentHttpParameterMap.pid.stringValue) {
-            return {
-                Product : LineItem.product,
-                PLI     : LineItem
-            };
+        if (lineItem.UUID === uuid) {
+            return lineItem;
         }
     }
 
-    return {};
+    return null;
 }
 
-/*
- * Module exports
+/**
+ * Set the store and its inventory list at the given lineitem
+ *
+ * @param {dw.order.Basket} basket      The current basket
+ * @param {String} liUUID      The UUID of the line item
+ * @param {String} storeId     The ID of the store
+ * @param {String} storepickup
  */
+function setStoreInLineItem( basket, liUUID, storeId, storepickup )
+{
+    var args = {};
+    var lineItemItr = basket.allProductLineItems.iterator();
+    var productLineItem;
+
+    while (lineItemItr.hasNext()) {
+        productLineItem = lineItemItr.next();
+        if (productLineItem.UUID === liUUID) {
+            if (storepickup.equalsIgnoreCase('true')) {
+                if(productLineItem.product.custom.availableForInStorePickup) {
+                    if(!empty(storeId)) {
+                        var store = dw.catalog.StoreMgr.getStore(storeId);
+                        if(!empty(store) && !empty(store.custom.inventoryListId)) {
+                            var storeinventory = dw.catalog.ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
+                            if(!empty(storeinventory)) {
+                                if(!empty(storeinventory.getRecord(productLineItem.productID)) && storeinventory.getRecord(productLineItem.productID).ATS.value >= productLineItem.quantityValue) {
+
+                                    productLineItem.custom.fromStoreId = store.ID;
+                                    productLineItem.setProductInventoryList(storeinventory);
+
+                                } else {
+                                    args.ErrorCode = 'Not available in that quantity';
+                                    return;
+                                }
+                            } else {
+                                args.ErrorCode = 'Store inventory list does not exist';
+                                return;
+                            }
+                        } else {
+                            args.ErrorCode = 'Store object not available';
+                            return;
+                        }
+                    } else {
+                        args.ErrorCode = 'No store ID available';
+                        return;
+                    }
+                } else {
+                    args.ErrorCode = 'Product not in store available';
+                    return;
+                }
+            } else {
+                productLineItem.custom.fromStoreId='';
+                productLineItem.setProductInventoryList(null);
+                //loop over the shipments to find the one with out instore to assign it to
+                //productLineItem.shipment = null;
+                //var shipmentToDelete
+                //check if the default shipment is instore or not
+                productLineItem.setShipment(basket.getDefaultShipment());
+            }
+            break;
+        }
+    }
+
+    return args;
+}
+
+/**
+ * Get store availability for the given product
+ *
+ * @param  {dw.util.Collection} stores          The stores
+ * @param  {dw.catalog.Product} product         The product to get the availability for
+ * @param  {dw.order.ProductLineItem} productLineItem The line item for the product
+ * @return {dw.util.HashMap}                 The availability map
+ */
+function getStoreAvailabilityMap( stores, product, productLineItem ) {
+    var storesItr = stores.iterator();
+    var store = null;
+    var storeAvailabilityMessage = '';
+    var storeAvailabilityMap = new dw.util.HashMap();
+
+    while (storesItr.hasNext()) {
+
+        store = storesItr.next();
+        storeAvailabilityMessage = getStoreAvailabilityMessage(store, product);
+        // the inventory check is for a pli consider the qty value for available stores
+        if(productLineItem){
+            var storeinventory = dw.catalog.ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
+            if(!empty(storeinventory.getRecord(productLineItem.productID)) && storeinventory.getRecord(productLineItem.productID).ATS.value >= productLineItem.quantityValue) {
+                storeAvailabilityMap.put(store.ID, storeAvailabilityMessage);
+            }
+        }else{
+            storeAvailabilityMap.put(store.ID, storeAvailabilityMessage);
+        }
+    }
+
+    return storeAvailabilityMap;
+}
+
+/**
+ * Get the availability message for a given store and product
+ * @param  {dw.catalog.Store} store   The store
+ * @param  {dw.catalog.Product} product The product
+ * @return {String}         The localized message
+ */
+function getStoreAvailabilityMessage(store, product) {
+    var storeInventoryListId = store.custom.inventoryListId;
+    var productInventoryList = null;
+    var productInventoryrecord = null;
+    var availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+
+    // check for Inventory Availability
+    if (storeInventoryListId !== null) {
+        productInventoryList = dw.catalog.ProductInventoryMgr.getInventoryList(storeInventoryListId);
+        if (productInventoryList !== null) {
+            productInventoryrecord = productInventoryList.getRecord(product.ID);
+            if (productInventoryrecord !== null ) {
+                if (productInventoryrecord.ATS.value >= 1) {
+                    //Instock
+                    availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+                } else {
+                    // not available as ATS is less than 1
+                    availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+                }
+            } else {
+                // not available as Inventory Record doesn't exist
+                availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+            }
+        } else {
+            // not available as Inventory List doesn't exist
+            availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+        }
+    } else {
+        // not available as Store Inventory is not set
+        availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+    }
+
+    return availabilityMessage;
+}
 
 /*
  * Web exposed methods
  */
 /** @see module:controllers/StoreInventory~SetStore */
-exports.SetStore = guard.ensure(['get'], SetStore);
+exports.SetStore = guard.ensure(['get'], setStore);
 /** @see module:controllers/StoreInventory~ShowSelectedStoreCore */
-exports.ShowSelectedStoreCore = guard.ensure(['get'], ShowSelectedStoreCore);
+exports.ShowSelectedStoreCore = guard.ensure(['get'], showSelectedStoreCore);
 /** @see module:controllers/StoreInventory~ShowAvailableStores */
-exports.ShowAvailableStores = guard.ensure(['get'], ShowAvailableStores);
+exports.ShowAvailableStores = guard.ensure(['get'], showAvailableStores);
 /** @see module:controllers/StoreInventory~CartSetZipCodeCore */
-exports.CartSetZipCodeCore = guard.ensure(['get'], CartSetZipCodeCore);
+exports.CartSetZipCodeCore = guard.ensure(['get'], cartSetZipCodeCore);
 /** @see module:controllers/StoreInventory~SetZipCodeCore */
-exports.SetZipCodeCore = guard.ensure(['get'], SetZipCodeCore);
+exports.SetZipCodeCore = guard.ensure(['post'], setZipCodeCore);
 /** @see module:controllers/StoreInventory~SetStoreCore */
-exports.SetStoreCore = guard.ensure(['get'], SetStoreCore);
+exports.SetStoreCore = guard.ensure(['get'], setStoreCore);
 /** @see module:controllers/StoreInventory~Inventory */
-exports.Inventory = guard.ensure(['get'], Inventory);
+exports.Inventory = guard.ensure(['get'], inventory);
 /** @see module:controllers/StoreInventory~SetPreferredStore */
-exports.SetPreferredStore = guard.ensure(['get'], SetPreferredStore);
+exports.SetPreferredStore = guard.ensure(['post'], setPreferredStore);
 /** @see module:controllers/StoreInventory~GetPreferredStore */
-exports.GetPreferredStore = guard.ensure(['get'], GetPreferredStore);
+exports.GetPreferredStore = guard.ensure(['get'], getPreferredStore);
 /** @see module:controllers/StoreInventory~SetZipCode */
-exports.SetZipCode = guard.ensure(['get'], SetZipCode);
+exports.SetZipCode = guard.ensure(['post'], setZipCode);
 /** @see module:controllers/StoreInventory~GetZipCode */
-exports.GetZipCode = guard.ensure(['get'], GetZipCode);
+exports.GetZipCode = guard.ensure(['get'], getZipCode);
