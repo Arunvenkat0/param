@@ -23,7 +23,7 @@ var view = require('~/cartridge/scripts/view');
 function find() {
 	var storeLocatorForm = Form.get('storelocator');
     storeLocatorForm.clear();
-    
+
     var storeLocatorAsset = Content.get('store-locator');
     pageMeta.update(storeLocatorAsset);
 
@@ -110,6 +110,6 @@ function details() {
 /** @see module:controllers/Stores~find */
 exports.Find = guard.ensure(['get'], find);
 /** @see module:controllers/Stores~findStores */
-exports.FindStores = guard.ensure(['get'], findStores);
+exports.FindStores = guard.ensure(['post'], findStores);
 /** @see module:controllers/Stores~details */
 exports.Details = guard.ensure(['get'], details);
