@@ -4,7 +4,7 @@
 </isscript>
 <iscomment><!--Display the remaining products as list--></iscomment>
 
-<ul id="search-result-items" class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(request.httpParameterMap.format.value) ? (request.httpParameterMap.format.value) : ''}">
+<ul id="search-result-items" class="search-result-items tiles-container clearfix ${ProductGridUtils.getCompareClass(pdict.category)} ${!empty(pdict.CurrentHttpParameterMap.format.value) ? (pdict.CurrentHttpParameterMap.format.value) : ''}">
 	<isloop items="${pdict.pagingmodel.pageElements}" var="LoopProductHit" status="loopstate">
 
 		<li class="grid-tile ${(loopstate.index % 3 == 0) ? 'new-row' : ''}"  data-colors-to-show="${ProductGridUtils.getRepresentedVariationValueIDs(LoopProductHit,'color').join(',')}">
@@ -12,7 +12,7 @@
 			<iscomment><!--display a tile per product--></iscomment>
 			<isobject object="${LoopProductHit}" view="searchhit">
 				<iscomment><!-- Self contained product information. Can be cached separately even if search finds this product in different categories or positions within the grid  --></iscomment>
-				<isinclude url="${ProductGridUtils.buildHitTileURL(LoopProductHit, request.httpParameterMap.cgid.value)}"/>
+				<isinclude url="${ProductGridUtils.buildHitTileURL(LoopProductHit, pdict.CurrentHttpParameterMap.cgid.value)}"/>
 			</isobject>
 
 		</li>

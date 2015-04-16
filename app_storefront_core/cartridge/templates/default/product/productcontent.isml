@@ -2,12 +2,12 @@
 	<isscript>
 		importScript("product/ProductUtils.ds");
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
-		var qs = ProductUtils.getQueryString(request.httpParameterMap, ["source", "uuid", "Quantity"]);
+		var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ["source", "uuid", "Quantity"]);
 		if (qs && qs.length>0) { url+="&"+qs; }
 	</isscript>
 	<isinclude url="${url}"/>
 <iselse/>
-	<isset name="isQuickView" value="${request.httpParameterMap.source.stringValue == 'quickview' || request.httpParameterMap.source.stringValue == 'cart' || request.httpParameterMap.source.stringValue == 'giftregistry' || request.httpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 	<isscript>
 		var masterId = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID;
 		var avm = pdict.Product.availabilityModel;
@@ -63,7 +63,7 @@
 	<div class="product-add-to-cart">
 		<h2 class="visually-hidden">Product Actions</h2>
 
-		<form action="${URLUtils.continueURL()}" method="post" id="${session.forms.product.addtocart.dynamicHtmlName}" class="pdpForm">
+		<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm">
 			<fieldset>
 
 			<legend class="visually-hidden">Add to cart options</legend>
@@ -73,7 +73,7 @@
 			<div class="inventory">
 				<div class="quantity">
 					<label for="Quantity">${isQuickView ? Resource.msg('global.qty','locale',null) : Resource.msg('global.quantity','locale',null) }</label>
-					<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(request.httpParameterMap.Quantity.stringValue) ? 1 : request.httpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
+					<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 				</div>
 			</div>
 
@@ -81,13 +81,13 @@
 
 			<isscript>
 				var updateSources = ["cart", "giftregistry", "wishlist"];
-				var source = request.httpParameterMap.source.stringValue;
+				var source = pdict.CurrentHttpParameterMap.source.stringValue;
 				var buttonTitle = dw.web.Resource.msg('global.addtocart','locale','Add to Cart');
 				var plid = null;
 				if( updateSources.indexOf(source)>-1 ){
 					buttonTitle = dw.web.Resource.msg('global.update','locale','Update');
-					if( request.httpParameterMap.productlistid && request.httpParameterMap.productlistid.stringValue ) {
-						plid = request.httpParameterMap.productlistid.stringValue;
+					if( pdict.CurrentHttpParameterMap.productlistid && pdict.CurrentHttpParameterMap.productlistid.stringValue ) {
+						plid = pdict.CurrentHttpParameterMap.productlistid.stringValue;
 					}
 				} else {
 					// Only pass on white-listed sources
@@ -97,8 +97,8 @@
 
 			<isset name="cartAction" value="add" scope="page"/>
 
-			<isif condition="${request.httpParameterMap.uuid.stringValue}">
-				<input type="hidden" name="uuid" id="uuid" value="${request.httpParameterMap.uuid.stringValue}" />
+			<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
+				<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
 				<isset name="cartAction" value="update" scope="page"/>
 			</isif>
 			<isif condition="${source}">
@@ -141,11 +141,11 @@
 					<span class="label">${Resource.msg('global.availability','locale',null)}:&nbsp;</span>
 					<span class="value"><isinclude template="product/components/availability"/></span>
 					<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-						<isif condition="${empty(request.httpParameterMap.uuid.value)}">
+						<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
 							<div id="${pdict.Product.ID}" class="availability-results store-stock">
 							<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
 						<iselse/>
-							<div id="${request.httpParameterMap.uuid.value}" class="availability-results store-stock">
+							<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock">
 						</isif>
 							</div>
 					</isif>

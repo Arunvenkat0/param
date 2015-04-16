@@ -4,5 +4,5 @@
  <field formid="orderEmail" label="forms.ordertrack.orderEmail" type="string" mandatory="true" binding="orderEmail" missing-error="forms.ordertrack.orderEmail.missing-error"/>
  <field formid="postalCode" label="forms.ordertrack.postalCode" type="string" mandatory="true" binding="postalCode" missing-error="forms.errorzip" parse-error="forms.errorzip" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" value-error="forms.errorzip"/>
  
- <action formid="findorder" valid-form="false"/>	
+ <action formid="findOrder" valid-form="false"/>
 </form>

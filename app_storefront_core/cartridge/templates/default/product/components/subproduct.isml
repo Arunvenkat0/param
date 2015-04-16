@@ -43,7 +43,7 @@
 				<isscript>
 					// ensure a unique form name and make the name reuseable, because the call to
 					// dynamicHtmlName always creates a different name
-					var uniqueFormID : String = session.forms.product.addtocart.dynamicHtmlName;
+					var uniqueFormID : String = pdict.CurrentForms.product.addtocart.dynamicHtmlName;
 				</isscript>
 				<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${uniqueFormID}" class="productsetsubform">
 					<div id="pdpATCDivsubProduct${pdict.ProductCount}Div" class="addtocartbar">
@@ -51,7 +51,7 @@
 							<input type="hidden" name="pid" value="${pdict.Product.ID}" />
 							<div class="quantity">
 								<label for="qty-input-${uniqueFormID}">${Resource.msg('global.qty','locale',null)}:</label>
-								<input class="quantityinput" id="qty-input-${uniqueFormID}" value="${Number(empty(request.httpParameterMap.Quantity.stringValue) ? 1 : request.httpParameterMap.Quantity.stringValue).toFixed()}"/>
+								<input class="quantityinput" id="qty-input-${uniqueFormID}" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}"/>
 							</div>
 							<button type="submit" value="${Resource.msg('global.addtocart','locale',null)}" class="addtocartbutton"><span>${Resource.msg('global.addtocart','locale',null)}</span></button>
 						</div>

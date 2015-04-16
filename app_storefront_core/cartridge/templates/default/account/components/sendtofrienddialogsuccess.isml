@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 <isset name="DecoratorTemplate" value="product/pt_productdetails" scope="page"/>
 
-<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' }">
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' }">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 

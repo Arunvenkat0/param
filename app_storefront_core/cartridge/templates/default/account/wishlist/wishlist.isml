@@ -10,21 +10,21 @@
 		<isinclude template="account/wishlist/wishlistsearch"/>
 	</div>
 
-	<isset name="formID" value="${session.forms.wishlist.htmlName + '_items'}" scope="page"/>
+	<isset name="formID" value="${pdict.CurrentForms.wishlist.htmlName + '_items'}" scope="page"/>
 
 	<iscomment>wishlist items form</iscomment>
 
-	<form action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${session.forms.wishlist.htmlName}_shipping">
+	<form action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
 
 	<fieldset>
 
 	<isif condition="${customer == pdict.ProductList.owner}">
-		<isif condition="${customer.profile.addressBook.addresses.size() > 0}">
+		<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 			<div class="form-row label-above">
 				<label for="editAddress">${Resource.msg('wishlist.addresslabel','account',null)}</label>
 				<select class="input-select" name="editAddress" id="editAddress">
 					<option value="">${Resource.msg('wishlist.noshippingaddress','account',null)}</option>
-					<isloop items="${customer.profile.addressBook.addresses}" var="address">
+					<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
 						<option
 						<isif condition="${pdict.ProductList.shippingAddress != null && pdict.ProductList.shippingAddress.ID == address.ID}">
 							selected="selected"
@@ -34,7 +34,7 @@
 					</isloop>
 				</select>
 
-				<button class="simple-submit" name="${session.forms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >
+				<button class="simple-submit" name="${pdict.CurrentForms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >
 					Select
 				</button>
 
@@ -46,7 +46,7 @@
 
 		<isif condition="${pdict.ProductList.giftCertificateItem == null}">
 			<div class="form-row">
-				<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${session.forms.wishlist.addGiftCertificate.htmlName}">
+				<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
 					Add Gift Certificate
 				</button>
 				<p>${Resource.msg('wishlist.addgiftcertmessage','account',null)}</p>
@@ -60,14 +60,14 @@
 	</form>
 
 
-	<form class="list-share" action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${session.forms.wishlist.htmlName}_share">
+	<form class="list-share" action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
 		<isif condition="${customer == pdict.ProductList.owner}">
 			<isif condition="${pdict.ProductList.public}">
-				<button class="share-option" type="submit" value="Continue" name="${session.forms.wishlist.setListPrivate.htmlName}">
+				<button class="share-option" type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPrivate.htmlName}">
 					${Resource.msg('wishlist.listprivate','account',null)}
 				</button>
 			<iselse/>
-				<button class="share-option" type="submit" value="Continue" name="${session.forms.wishlist.setListPublic.htmlName}">
+				<button class="share-option" type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPublic.htmlName}">
 					${Resource.msg('wishlist.listpublic','account',null)}
 				</button>
 			</isif>
@@ -90,7 +90,7 @@
 		</isif>
 	</form>
 
-		<isif condition="${empty(session.forms.wishlist.items)}">
+		<isif condition="${empty(pdict.CurrentForms.wishlist.items)}">
 			<h2>${Resource.msg('wishlist.empty','account',null)}</h2>
 			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('wishlist.emptyadd','account',null)}</a>
 		<iselse/>
@@ -101,7 +101,7 @@
 					<th class="item-availablity">Availability</th>
 					<th class="item-actions">Options</th>
 				</tr>
-				<isloop items="${session.forms.wishlist.items}" var="item" status="loopstate">
+				<isloop items="${pdict.CurrentForms.wishlist.items}" var="item" status="loopstate">
 					<isif condition="${((customer == pdict.ProductList.owner) || (customer != pdict.ProductList.owner && item.public.value && (item.object.product != null || item.object.TYPE_GIFT_CERTIFICATE)))}">
 						<tr>
 							<td class="item-image">

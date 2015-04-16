@@ -128,13 +128,13 @@
 					if (Product.productSet) {
 						price.class = 'product-set-price';
 						price.value = Resource.msg('global.buyall', 'locale', null);
-					} else if ((Product.master || Product.variationGroup) && request.httpParameterMap.pricerange.stringValue == 'true') {
+					} else if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
 						// Product master or variation group price range depending on the represented variants
 						price.class = 'product-sales-price';
-						price.value = dw.util.StringUtils.formatMoney(dw.value.Money(request.httpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(request.httpParameterMap.maxprice, currencyCode));
+						price.value = dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode));
 					} else {
 						// For product master or variation group without a price range get the pricing from first variant
-						if ((Product.master || Product.variationGroup) && request.httpParameterMap.pricerange.stringValue != 'true') {
+						if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
 							PriceModelSource = Product.variants[0];
 						}
 						// Regular pricing through price model of the product. If the product is an option product, we have to initialize the product price model with the option model.
@@ -156,7 +156,7 @@
 					var prices = [];
 					var SalesPrice, ShowStandardPrice, extraPrice;
 					// simulate the same if else block from before the template include break
-					if (!Product.productSet && request.httpParameterMap.pricerange.stringValue != 'true') {
+					if (!Product.productSet && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
 						SalesPrice = PriceModel.getPrice();
 						ShowStandardPrice = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1;
 						if (ShowStandardPrice) {
@@ -277,7 +277,7 @@
 				has the custom attribute "enableCompare" set to true.
 			</iscomment>
 			<isscript>importScript("product/ProductUtils.ds")</isscript>
-			<isif condition="${!empty(request.httpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(request.httpParameterMap.cgid.value)}">
+			<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value)}">
 				<div class="product-compare">
 					<isif condition="${!Product.productSet && !Product.bundle}">
 						<isscript>

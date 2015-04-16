@@ -8,7 +8,7 @@
 
 <iscomment>the url to edit shipping addresses depends on the checkout scenario</iscomment>
 <isset name="editUrl" value="${URLUtils.https('COShipping-Start')}" scope="page"/>
-<isif condition="${session.forms.multishipping.entered.value}">
+<isif condition="${pdict.CurrentForms.multishipping.entered.value}">
 	<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
 </isif>
 

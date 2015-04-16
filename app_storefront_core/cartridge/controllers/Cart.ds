@@ -10,12 +10,12 @@
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var Cart = require('~/cartridge/scripts/models/Cart');
+var Content = require('~/cartridge/scripts/models/Content');
 var Product = require('~/cartridge/scripts/models/Product');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var cartAsset = require('~/cartridge/scripts/models/Content').get('cart');
 var guard = require('~/cartridge/scripts/guard');
 var cartForm = require('~/cartridge/scripts/models/Form').get('cart');
 var pageMeta = require('~/cartridge/scripts/meta');
@@ -180,7 +180,9 @@ function submitForm() {
     });
 
     if (formResult) {
+    	var cartAsset = Content.get('cart');
         pageMeta.update(cartAsset);
+
         view.get('views/CartView', formResult).render('checkout/cart/cart');
     }
 }

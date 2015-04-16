@@ -12,11 +12,11 @@
 	</div>
 
 
-	<form action="${URLUtils.https('GiftRegistry-registrymain')}" method="post" id="${session.forms.giftregistry.htmlName}">	
+	<form action="${URLUtils.https('GiftRegistry-registrymain')}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}">	
 		<fieldset>
 			
 			<div class="form-row create-new-registry">
-				<button type="submit" value="${Resource.msg('registrylist.newregistry','account',null)}" name="${session.forms.giftregistry.create.htmlName}">
+				<button type="submit" value="${Resource.msg('registrylist.newregistry','account',null)}" name="${pdict.CurrentForms.giftregistry.create.htmlName}">
 					${Resource.msg('registrylist.newregistry','account',null)}
 				</button>
 				<p>${Resource.msg('registrylist.newregistrydescription','account',null)}</p>
@@ -25,7 +25,7 @@
 		</fieldset>
 	</form>	
 		
-		<isif condition="${!empty(session.forms.productlists.items)}">
+		<isif condition="${!empty(pdict.CurrentForms.productlists.items)}">
 
 				<h1>${Resource.msg('registrylist.registriesheader','account',null)}</h1>
 
@@ -40,7 +40,7 @@
 						<th class="section-header hdr-options">${Resource.msg('global.delete','locale',null)}</th>				
 					</tr>
 					
-					<isloop items="${session.forms.productlists.items}" var="item" status="loopstate">
+					<isloop items="${pdict.CurrentForms.productlists.items}" var="item" status="loopstate">
 						<tr class="<isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 							<td class="event-name"><isprint value="${item.object.name}"/></td>
 							<td class="event-type"><isprint value="${item.object.eventType}"/></td>

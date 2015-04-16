@@ -19,6 +19,7 @@ var LOGGER         = dw.system.Logger.getLogger('login');
 /* API Includes */
 var Cart        = require('~/cartridge/scripts/models/Cart');
 var Customer    = require('~/cartridge/scripts/models/Customer');
+var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
 
 /**
@@ -102,26 +103,50 @@ function handleLoginForm()
             // redirect to the origin who triggered the login process
             response.redirect(getTargetUrl());
 
-            return;        },
+            return;
+        },
         'register'  : function () {
             response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
-            return;        },
+            return;
+        },
         'findOrder' : function () {
-            var OrderController = require('./Order');
-            var FindResult = OrderController.Find();
-            if (FindResult.error)
+            var orderTrackForm = Form.get('ordertrack').object;
+            var orderNumber = orderTrackForm.orderNumber.value;
+            var orderFormEmail = orderTrackForm.orderEmail.value;
+
+            if (empty(orderNumber) || empty(orderTrackForm.postalCode.value)
+                || empty(orderFormEmail))
             {
-                // TODO redirect
-                response.renderTemplate(LOGIN_TEMPLATE, {
-                    OrderNotFound : true
-                });
+                response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
-            // TODO redirect
+
+            var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNumber,
+                dw.order.Order.ORDER_STATUS_REPLACED);
+
+            if (empty(orders))
+            {
+                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                return;
+            }
+
+            var foundOrder = orders.next();
+
+            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
+            {
+                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                return;
+            }
+
+            if (foundOrder.customerEmail !== orderFormEmail)
+            {
+                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                return;
+            }
+
             view.get({
-                Order : FindResult.Order
+                Order : foundOrder
             }).render('account/orderhistory/orderdetails');
-            return;
         },
         'error' : function(){
             view.get('views/LoginView').render();

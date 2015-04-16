@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 <isset name="DecoratorTemplate" value="account/pt_account" scope="page"/>
 
-<isif condition="${request.httpParameterMap.format.stringValue == 'ajax' || request.httpParameterMap.ajax.stringValue == 'true' }">
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.ajax.stringValue == 'true' }">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
 
@@ -16,32 +16,32 @@
 
 			<fieldset>
 
-				<isinputfield formfield="${session.forms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" maxlength="40" size="40" attribute1="autocomplete" value1="off"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" maxlength="40" size="40" attribute1="autocomplete" value1="off"/>
 
-				<isinputfield formfield="${session.forms.paymentinstruments.creditcards.newcreditcard.type}" type="select"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.type}" type="select"/>
 
-				<isinputfield formfield="${session.forms.paymentinstruments.creditcards.newcreditcard.number}" p_dynamic="true" type="input" maxlength="16" size="17" attribute1="autocomplete" value1="off"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" p_dynamic="true" type="input" maxlength="16" size="17" attribute1="autocomplete" value1="off"/>
 
 				<div class="form-label-text">
 					${Resource.msg('paymentinstrumentdetails.expires','account',null)}
 				</div>
 
-				<isinputfield formfield="${session.forms.paymentinstruments.creditcards.newcreditcard.month}" type="select"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.month}" type="select"/>
 
-				<isinputfield formfield="${session.forms.paymentinstruments.creditcards.newcreditcard.year}" type="select"/>
+				<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.year}" type="select"/>
 
 				<div class="form-row form-row-button">
-					<button id="applyBtn" type="submit" name="${session.forms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
+					<button id="applyBtn" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 						${Resource.msg('global.apply','locale',null)}
 					</button>
 
-					<button class="cancel cancel-button" type="submit" name="${session.forms.paymentinstruments.creditcards.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
+					<button class="cancel cancel-button" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
 						${Resource.msg('global.cancel','locale',null)}
 					</button>
 
 				</div>
 
-				<input type="hidden" name="${session.forms.paymentinstruments.secureKeyHtmlName}" value="${session.forms.paymentinstruments.secureKeyValue}"/>
+				<input type="hidden" name="${pdict.CurrentForms.paymentinstruments.secureKeyHtmlName}" value="${pdict.CurrentForms.paymentinstruments.secureKeyValue}"/>
 
 			</fieldset>
 

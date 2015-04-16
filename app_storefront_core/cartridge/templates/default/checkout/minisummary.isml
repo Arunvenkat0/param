@@ -44,7 +44,7 @@
 	</div>
 
 	<iscomment>render single shipment boxes</iscomment>
-	<isif condition="${session.forms.multishipping.entered != true}">
+	<isif condition="${pdict.CurrentForms.multishipping.entered != true}">
 		<isinclude template="checkout/shipping/minishipments"/>
 	</isif>
 	

@@ -56,7 +56,7 @@ function start(args) {
             PipelineName : args.ControllerName,
             CurrentStartNodeName : args.CurrentStartNodeName,
             ErrorText    : args.ErrorText,
-            nodecorator  : false
+            nodecorator  : nodecorator
         }).render('error/generalerror');
     }
 }

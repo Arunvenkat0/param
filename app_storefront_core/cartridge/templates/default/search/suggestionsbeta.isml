@@ -15,7 +15,7 @@
     var suggestModel = new dw.suggest.SuggestModel();
 
     // set search phrase
-    suggestModel.setSearchPhrase(request.httpParameterMap.q.value);
+    suggestModel.setSearchPhrase(pdict.CurrentHttpParameterMap.q.value);
 
     // set max number of suggestions to display
     suggestModel.setMaxSuggestions(5);

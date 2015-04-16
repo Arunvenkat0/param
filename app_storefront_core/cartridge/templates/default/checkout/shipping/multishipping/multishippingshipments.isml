@@ -20,7 +20,7 @@
     <ischeckoutprogressindicator step="2" multishipping="true"/>
 	<form action="${URLUtils.https('COShippingMultiple-MultiShippingMethods')}" method="post" class="address checkout-multi-shipping address">
 		<div class="checkoutmultishipping">
-			<isloop items="${session.forms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">
+			<isloop items="${pdict.CurrentForms.multishipping.shippingOptions.shipments}" var="shipmentItem" status="shipmentloop">
 				<isset name="shipment" value="${shipmentItem.object}" scope="page"/>
 				<table class="item-list"  cellspacing="0">
 					<thead>
@@ -164,7 +164,7 @@
 									</div>
 								<iselse/>
 									<div class="form-row">
-										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(session.forms.singleshipping.shippingAddress.isGift.label,'forms',null)}</label>
+										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}</label>
 										<input class="input-radio js-isgiftyes" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftyes${shipmentItem.itemIndex}" value="true" <isif condition="${shipmentItem.isGift.value}">checked="checked"</isif> /> Yes
 										<input class="input-radio js-isgiftno" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftno${shipmentItem.itemIndex}" value="false" <isif condition="${!shipmentItem.isGift.value}">checked="checked"</isif> /> No
 									</div>
@@ -183,7 +183,7 @@
 
 		<div class="formactions">
 			<div class="continuecheckoutbutton">
-				<button class="button-fancy-large" type="submit" name="${session.forms.multishipping.shippingOptions.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
+				<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.multishipping.shippingOptions.save.htmlName}" value="${Resource.msg('global.continuecheckoutbrief','locale',null)}"><span>${Resource.msg('global.continuecheckoutbrief','locale',null)}</span></button>
 			</div><!-- END: continuecheckoutbutton -->
 		</div><!-- END: continuecheckout -->
 	</form>

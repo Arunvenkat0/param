@@ -30,11 +30,11 @@
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 				<isif condition="${!session.customer.externallyAuthenticated}">
-					<isinputfield formfield="${session.forms.profile.customer.firstname}" type="input"/>
-					<isinputfield formfield="${session.forms.profile.customer.lastname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
 				<iselse/>
-					<isinputfield formfield="${session.forms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
-					<isinputfield formfield="${session.forms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
 			</fieldset>
 
@@ -46,14 +46,14 @@
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
 				<isif condition="${!session.customer.externallyAuthenticated}">
-					<isinputfield formfield="${session.forms.profile.customer.email}" type="input"/>
-					<isinputfield formfield="${session.forms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${session.forms.profile.login.password}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
-					<isinputfield formfield="${session.forms.profile.login.passwordconfirm}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" type="password"  attribute1="autocomplete" value1="off"/>
 				<iselse/>
-					<isinputfield formfield="${session.forms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
-				<isinputfield formfield="${session.forms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
+				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>
@@ -61,12 +61,12 @@
 				</div>
 
 				<div class="form-row form-row-button">
-					<button type="submit" value="${Resource.msg('global.apply','locale',null)}" name="${session.forms.profile.confirm.htmlName}">
+					<button type="submit" value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}">
 						${Resource.msg('global.apply','locale',null)}
 					</button>
 				</div>
 
-				<input type="hidden" name="${session.forms.profile.secureKeyHtmlName}" value="${session.forms.profile.secureKeyValue}"/>
+				<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
 
 			</fieldset>
 

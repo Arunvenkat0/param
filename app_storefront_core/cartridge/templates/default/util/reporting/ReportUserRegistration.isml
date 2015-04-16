@@ -7,7 +7,7 @@
 	DO NOT CHANGE THE LOCALE HERE. It just serves the purpose of logging the information
 	to the analytics log file. The customer will never see it and the analytics module expects en_US.
 </iscomment>
-<isif condition="${!empty(pdict.ReportingMarker_SuccessfulRegistration)||request.httpParameterMap.registration.submitted}">
+<isif condition="${!empty(pdict.ReportingMarker_SuccessfulRegistration)||pdict.CurrentHttpParameterMap.registration.submitted}">
 	<isscript>
 		var locale = 'en_US';
 	</isscript>

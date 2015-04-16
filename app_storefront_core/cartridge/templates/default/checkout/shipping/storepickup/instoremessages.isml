@@ -10,7 +10,7 @@
 	
 </isscript>	
 	
-<isloop items="${session.forms.singleshipping.inStoreShipments.shipments}" var="shipment" status="shipmentloopstatus">
+<isloop items="${pdict.CurrentForms.singleshipping.inStoreShipments.shipments}" var="shipment" status="shipmentloopstatus">
 
 	<iscomment></iscomment>
 	<isif condition="${shipment.object.custom.shipmentType != 'instore' || shipment.object.shippingMethod == null}"> 

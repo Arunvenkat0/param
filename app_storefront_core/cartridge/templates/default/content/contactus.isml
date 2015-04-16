@@ -18,22 +18,22 @@
 			
 				<fieldset>
 					
-					<isinputfield formfield="${session.forms.contactus.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.firstname}" type="input"/>
 					
-					<isinputfield formfield="${session.forms.contactus.lastname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.lastname}" type="input"/>
 					
-					<isinputfield formfield="${session.forms.contactus.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.email}" type="input"/>
 					
-					<isinputfield formfield="${session.forms.contactus.phone}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.phone}" type="input"/>
 					
-					<isinputfield formfield="${session.forms.contactus.ordernumber}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.ordernumber}" type="input"/>
 					
-					<isinputfield formfield="${session.forms.contactus.myquestion}" type="select"/>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.myquestion}" type="select"/>
 					
-					<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${session.forms.contactus.comment}" type="textarea"/>
+					<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.contactus.comment}" type="textarea"/>
 					
 					<div class="form-row form-row-button">
-						<button id="sendBtn" type="submit" value="${Resource.msg('global.send','locale',null)}" name="${session.forms.contactus.send.htmlName}">
+						<button id="sendBtn" type="submit" value="${Resource.msg('global.send','locale',null)}" name="${pdict.CurrentForms.contactus.send.htmlName}">
 							${Resource.msg('global.submit','locale',null)}
 						</button>
 					</div>

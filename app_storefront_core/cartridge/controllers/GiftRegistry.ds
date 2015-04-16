@@ -7,6 +7,7 @@
  */
 
 /* API Includes */
+var Content = require('~/cartridge/scripts/models/Content');
 var Transaction = require('dw/system/Transaction');
 var ProductList = require('~/cartridge/scripts/models/ProductList');
 
@@ -15,10 +16,7 @@ var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/models/Form');
-var content = require('~/cartridge/scripts/models/Content');
 var giftRegistryForm = Form.get('giftregistry');
-var accountLogin = content.get('myaccount-login');
-var accountGiftRegistry = content.get('myaccount-giftregistry');
 
 /**
  * Controls the login, which is required to access gift registry related actions.
@@ -54,7 +52,7 @@ function start() {
 
 	Form.get(productListsForm.items).copyFrom(ProductLists);
     
-
+    var accountGiftRegistry = Content.get('myaccount-giftregistry');
     pageMeta.update(accountGiftRegistry);
 
     view.get().render('account/giftregistry/registrylist');
