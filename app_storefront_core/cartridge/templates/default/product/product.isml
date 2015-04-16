@@ -8,8 +8,8 @@
 <isscript>
 	importScript('product/GetProductDetailUrl.ds');
 	var productDetailUrl = GetProductDetailUrl(pdict);
-	var source = request.httpParameterMap.source.stringValue;
-	var format = request.httpParameterMap.format.stringValue;
+	var source = pdict.CurrentHttpParameterMap.source.stringValue;
+	var format = pdict.CurrentHttpParameterMap.format.stringValue;
 	var DecoratorTemplate = 'product/pt_productdetails';
 	if (format == 'ajax' || source == 'search' || source == 'quickview' || source == 'giftregistry' || source == 'wishlist') {
 		DecoratorTemplate = 'util/pt_empty';

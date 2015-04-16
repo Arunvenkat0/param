@@ -10,7 +10,7 @@
 		
 		<iselse/>
 		
-			<form action="${URLUtils.https('Order-Orders')}" method="post" id="${session.forms.orders.htmlName}">
+			<form action="${URLUtils.https('Order-Orders')}" method="post" id="${pdict.CurrentForms.orders.htmlName}">
 			
 			<div class="search-result-options">
 				<ispagingbar pageurl="${URLUtils.https('Order-History')}" pagingmodel="${pdict.OrderPagingModel}"/>
@@ -18,7 +18,7 @@
 			
 			<ul class="search-result-items">
 			
-			<isloop items="${session.forms.orders.orderlist}" var="order" status="orderloopstate">
+			<isloop items="${pdict.CurrentForms.orders.orderlist}" var="order" status="orderloopstate">
 				
 				<li>
 					<div class="order-history-header">

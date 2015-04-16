@@ -11,9 +11,9 @@
 			<form action="${URLUtils.httpsContinue()}" method="post">
 				<fieldset>
 					<div class="createaccountbutton">
-						<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.login.register.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
+						<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
 					</div><!-- END: createaccountbutton -->
-					<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
+					<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 				</fieldset>
 			</form>
 			<div class="createbenefits clearfix">

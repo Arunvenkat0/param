@@ -16,7 +16,7 @@
 	importPackage(dw.system);
 	importPackage(dw.util);
 	importScript('product/ProductUtils.ds');
-	var qs = ProductUtils.getQueryString(request.httpParameterMap, ['source', 'uuid']),
+	var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ['source', 'uuid']),
 		qsAppend = qs.length == 0 ? '' : ('&' + qs),
 		pUtil = new ProductUtils(pdict),
 		PVM = pdict.CurrentVariationModel != null ? pdict.CurrentVariationModel : pdict.Product.variationModel,
@@ -72,8 +72,8 @@
 
 										if (pdict.Product.variationGroup) {
 											variationGroup = pdict.Product;
-										} else if (request.httpParameterMap.vgid) {
-											variationGroup = dw.catalog.ProductMgr.getProduct(request.httpParameterMap.vgid);
+										} else if (pdict.CurrentHttpParameterMap.vgid) {
+											variationGroup = dw.catalog.ProductMgr.getProduct(pdict.CurrentHttpParameterMap.vgid);
 										}
 										if (variationGroup) {
 											linkURL += '&vgid=' + variationGroup.ID;
@@ -165,7 +165,7 @@
 									}
 								</isscript>
 								<isif condition="${isAvailable}">
-									<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${request.httpParameterMap.source.stringValue||'detail'}<isif condition="${empty(request.httpParameterMap.uuid)}">&uuid=${request.httpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
+									<option value="${PVM.urlSelectVariationValue('Product-Variation', VA, VV)}&source=${pdict.CurrentHttpParameterMap.source.stringValue||'detail'}<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid)}">&uuid=${pdict.CurrentHttpParameterMap.uuid.stringValue}</isif>" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>' <isprint value="${selected}" encoding="off"/>>
 											<isprint value="${(VV.displayValue||VV.value)}"/>
 									</option>
 								</isif>

@@ -3,8 +3,8 @@
 	<isscript>
 		importScript("product/ProductUtils.ds");
 		var compareEnabled = false;
-		if (!empty(request.httpParameterMap.cgid.value)) {
-			compareEnabled = ProductUtils.isCompareEnabled(request.httpParameterMap.cgid.value);
+		if (!empty(pdict.CurrentHttpParameterMap.cgid.value)) {
+			compareEnabled = ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value);
 		}
 	</isscript>
 

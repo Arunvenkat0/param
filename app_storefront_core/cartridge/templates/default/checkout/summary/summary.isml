@@ -11,7 +11,7 @@
 
 <isreportcheckout checkoutstep="${5}" checkoutname="${'OrderSummary'}"/>
 
-	<isif condition="${!session.forms.multishipping.entered.value}">
+	<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
     	<ischeckoutprogressindicator step="3" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	<iselse/>
 		<ischeckoutprogressindicator step="4" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>

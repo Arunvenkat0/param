@@ -7,7 +7,7 @@
 
 	<isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
-	<form action="${URLUtils.https('GiftRegistry-ShowRegistryInteraction')}" method="post" id="${session.forms.giftregistry.htmlName}">
+	<form action="${URLUtils.https('GiftRegistry-ShowRegistryInteraction')}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}">
 		<isif condition="${pdict.ProductList != null}">
 			<isset name="currentpage" value="registry" scope="pdict" />
 			<div class="page-content-tab-navigaton">
@@ -18,7 +18,7 @@
 		<fieldset>
 			<isif condition="${empty(pdict.ProductList.giftCertificateItem)}">
 				<div class="add-gift-cert">
-					<button type="submit" value="${Resource.msg('giftregistry.addgiftcert','account',null)}" name="${session.forms.giftregistry.addGiftCertificate.htmlName}">
+					<button type="submit" value="${Resource.msg('giftregistry.addgiftcert','account',null)}" name="${pdict.CurrentForms.giftregistry.addGiftCertificate.htmlName}">
 						Add Gift Certificate
 					</button>
 					<p>${Resource.msg('giftregistry.addgiftcertmessage','account',null)}</p>
@@ -27,11 +27,11 @@
 
 			<div class="list-share">
 				<isif condition="${pdict.ProductList.public}">
-					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${session.forms.giftregistry.setPrivate.htmlName}">
+					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
 						${Resource.msg('giftregistry.makeregprivate','account',null)}
 					</button>
 				<iselse/>
-					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${session.forms.giftregistry.setPublic.htmlName}">
+					<button class="share-option" type="submit" value="${Resource.msg('giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
 						${Resource.msg('giftregistry.makeregpublic','account',null)}
 					</button>
 				</isif>
@@ -50,14 +50,14 @@
 	</form>
 
 	<div class="page-content-tab-wrapper">
-		<isset name="formID" value="${session.forms.giftregistry.items.htmlName}" scope="page"/>
+		<isset name="formID" value="${pdict.CurrentForms.giftregistry.items.htmlName}" scope="page"/>
 		<fieldset>
 		<iscomment>These vars are used by the above specified pipeline</iscomment>
 		<input type="hidden" name="productListID" value="${pdict.ProductList.ID}" />
 		<input type="hidden" name="selectedItemID" value="" />
 
 		<h2><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}" timezone="utc"/></h2>
-		<isif condition="${empty(session.forms.giftregistry.items)}">
+		<isif condition="${empty(pdict.CurrentForms.giftregistry.items)}">
 			<p>${Resource.msg('giftregistry.giftregnoitems','account',null)}</p>
 			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('giftregistry.emptyadd','account',null)}</a>
 		<iselseif condition="${pdict.Status != null && pdict.Status.isError()}">
@@ -73,7 +73,7 @@
 					<th class="item-actions">Options</th>
 				</tr>
 
-			<isloop items="${session.forms.giftregistry.items}" var="item" status="loopstate">
+			<isloop items="${pdict.CurrentForms.giftregistry.items}" var="item" status="loopstate">
 				<tr class=" <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 					<td class="item-image">
 						<isdisplayproductimage p_productli="${item.object}" p_size="small" />

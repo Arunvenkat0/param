@@ -8,30 +8,30 @@
 
 	<iscomment>User has session, but not currently active (welcome back)</iscomment>
 	<li class="user-info">
-		<isif condition="${customer.registered && !customer.authenticated}">
+		<isif condition="${pdict.CurrentCustomer.registered && !customer.authenticated}">
 			${Resource.msg('headercustomerinfo.welcomeback', 'components', null)}
-			<isprint value="${customer.profile.firstName}"/>
-			<isprint value="${customer.profile.lastName}"/>
+			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
+			<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
 			- <a title="${loginStr}" href="${URLUtils.https('Account-Show')}" class="user-account-login">
 				${loginStr}
 			</a>
-			<a class="not-user" title="${notStr} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
+			<a class="not-user" title="${notStr} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 				(
 					${notStr}
-					<isprint value="${customer.profile.firstName}"/>?
+					<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?
 				)
 			</a>
 		<iscomment>User has sesssion and is validated</iscomment>
-		<iselseif condition="${customer.registered}">
+		<iselseif condition="${pdict.CurrentCustomer.registered}">
 			${Resource.msg('headercustomerinfo.welcome', 'components', null)}
 			<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink', 'locale', null)} ">
-				<isprint value="${customer.profile.firstName}"/>
-				<isprint value="${customer.profile.lastName}"/>
+				<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
+				<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>
 			</a>
-			<a class="not-user" title="${notStr} ${customer.profile.firstName} ${customer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
+			<a class="not-user" title="${notStr} ${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Login-Logout')}">
 				(
 					${notStr}
-					<isprint value="${customer.profile.firstName}"/>?
+					<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>?
 				)
 			</a>
 		<iscomment>User has no session</iscomment>

@@ -19,8 +19,8 @@ a {
 <body>
 	<div class="previewpanel" id="previewPanel">		
 		<div class="previewfield stfmessage">
-			<span class="value"><isprint value="${session.forms.sendtofriend.message.htmlValue}"/></span>	
-			<a href='<isprint value="${session.forms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${session.forms.sendtofriend.messagelinktext.htmlValue}"/></a>			
+			<span class="value"><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></span>	
+			<a href='<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlValue}"/></a>			
 		</div>											
 	</div>
 </body>

@@ -19,37 +19,37 @@
 		<dt>${Resource.msg('giftregistryconfirmation.participants','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.event.participant.firstName.htmlValue}"/>
-				<isprint value="${session.forms.giftregistry.event.participant.lastName.htmlValue}"/>	
-				<isif condition="${session.forms.giftregistry.event.coParticipant.firstName.htmlValue != '' || session.forms.giftregistry.event.coParticipant.lastName.htmlValue != ''}">,</isif>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.participant.firstName.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.participant.lastName.htmlValue}"/>	
+				<isif condition="${pdict.CurrentForms.giftregistry.event.coParticipant.firstName.htmlValue != '' || pdict.CurrentForms.giftregistry.event.coParticipant.lastName.htmlValue != ''}">,</isif>
 			</div>
 			<div>
-				<isprint value="${session.forms.giftregistry.event.coParticipant.firstName.htmlValue}"/>
-				<isprint value="${session.forms.giftregistry.event.coParticipant.lastName.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.coParticipant.firstName.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.coParticipant.lastName.htmlValue}"/>
 			</div>
 		</dd>
 		
 		<dt>${Resource.msg('giftregistryconfirmation.eventtype','account',null)}</dt>
 		<dd>
-			<div><isprint value="${session.forms.giftregistry.event.type.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.event.type.htmlValue}"/></div>
 		</dd>
 		
 		<dt>${Resource.msg('giftregistryconfirmation.eventname','account',null)}</dt>
 		<dd>
-			<div><isprint value="${session.forms.giftregistry.event.name.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.event.name.htmlValue}"/></div>
 		</dd>
 		
 		<dt>${Resource.msg('giftregistryconfirmation.eventdate','account',null)}</dt>
 		<dd>
-			<div><isprint value="${session.forms.giftregistry.event.date.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.event.date.htmlValue}"/></div>
 		</dd>
 		
 		<dt>${Resource.msg('giftregistryconfirmation.eventlocation','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.event.town.htmlValue}"/>,
-				<isprint value="${session.forms.giftregistry.event.eventaddress.states.state.htmlValue}"/>
-				<isprint value="${session.forms.giftregistry.event.eventaddress.country.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.town.htmlValue}"/>,
+				<isprint value="${pdict.CurrentForms.giftregistry.event.eventaddress.states.state.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.eventaddress.country.htmlValue}"/>
 			</div>
 		</dd>
 
@@ -62,19 +62,19 @@
 		<dt>${Resource.msg('giftregistryconfirmation.registrant','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.event.participant.firstName.htmlValue}"/> 
-				<isprint value="${session.forms.giftregistry.event.participant.lastName.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.participant.firstName.htmlValue}"/> 
+				<isprint value="${pdict.CurrentForms.giftregistry.event.participant.lastName.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.event.participant.email.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.event.participant.email.htmlValue}"/></div>
 		</dd>
 		
 		<dt>${Resource.msg('giftregistryconfirmation.registrant2','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.event.coParticipant.firstName.htmlValue}"/> 
-				<isprint value="${session.forms.giftregistry.event.coParticipant.lastName.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.event.coParticipant.firstName.htmlValue}"/> 
+				<isprint value="${pdict.CurrentForms.giftregistry.event.coParticipant.lastName.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.event.coParticipant.email.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.event.coParticipant.email.htmlValue}"/></div>
 		</dd>
 		
 	</dl>
@@ -86,43 +86,43 @@
 		<dt>${Resource.msg('giftregistryconfirmation.preshipping','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.firstname.htmlValue}"/>	
-				<isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.lastname.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.firstname.htmlValue}"/>	
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.lastname.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.address1.htmlValue}"/></div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.address2.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address1.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address2.htmlValue}"/></div>
 			<div>
-				<isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.city.htmlValue}"/>,
-				<isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.states.state.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.city.htmlValue}"/>,
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.states.state.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressBeforeEvent.postal.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.postal.htmlValue}"/></div>
 		</dd>
 
 
 		<dt>${Resource.msg('giftregistryconfirmation.postshipping','account',null)}</dt>
 		<dd>
 			<div>
-				<isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.firstname.htmlValue}"/>	
-				<isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.lastname.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.firstname.htmlValue}"/>	
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.lastname.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.address1.htmlValue}"/></div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.address2.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address1.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address2.htmlValue}"/></div>
 			<div>
-				<isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.city.htmlValue}"/>,
-				<isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.states.state.htmlValue}"/>
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.city.htmlValue}"/>,
+				<isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.states.state.htmlValue}"/>
 			</div>
-			<div><isprint value="${session.forms.giftregistry.eventaddress.addressAfterEvent.postal.htmlValue}"/></div>
+			<div><isprint value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.postal.htmlValue}"/></div>
 		</dd>
 		
 	</dl>
 
-	<form action="${URLUtils.https('GiftRegistry-Confirmation')}" method="post" id="${session.forms.giftregistry.event.htmlName}">
+	<form action="${URLUtils.https('GiftRegistry-Confirmation')}" method="post" id="${pdict.CurrentForms.giftregistry.event.htmlName}">
 		<div class="form-row form-row-button">
 			<isif condition="${pdict.ProductList == null}">
-				<button class="button-text" type="submit" value="${Resource.msg('global.previous','locale',null)}" name="${session.forms.giftregistry.eventaddress.back.htmlName}">&laquo; <span>${Resource.msg('global.previous','locale',null)}</span></button>			
-				<button type="submit" name="${session.forms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.submit','locale',null)}"><span>${Resource.msg('global.submit','locale',null)}</span></button>
+				<button class="button-text" type="submit" value="${Resource.msg('global.previous','locale',null)}" name="${pdict.CurrentForms.giftregistry.eventaddress.back.htmlName}">&laquo; <span>${Resource.msg('global.previous','locale',null)}</span></button>			
+				<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.submit','locale',null)}"><span>${Resource.msg('global.submit','locale',null)}</span></button>
 			<iselse/>
-				<button type="submit" name="${session.forms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+				<button type="submit" name="${pdict.CurrentForms.giftregistry.event.confirm.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 			</isif>
 		</div>
 	</form>	

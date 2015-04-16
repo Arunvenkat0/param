@@ -18,9 +18,9 @@
 				<form action="${URLUtils.https('COCustomer-LoginForm')}" method="post">
 				<fieldset>
 					<div class="form-row formbuttonrow">
-						<button type="submit" value="${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}" name="${session.forms.login.unregistered.htmlName}"><span>${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}</span></button>
+						<button type="submit" value="${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}" name="${pdict.CurrentForms.login.unregistered.htmlName}"><span>${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}</span></button>
 					</div>
-					<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
+					<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 				</fieldset>
 				</form>
 				</isif>
@@ -29,9 +29,9 @@
 				<form action="${URLUtils.https('COCustomer-LoginForm')}" method="post">
 					<fieldset>
 						<div class="form-row form-row-button">
-							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${session.forms.login.register.htmlName}"><span>${Resource.msg('global.createnowbutton','locale',null)}</span></button>
+							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}"><span>${Resource.msg('global.createnowbutton','locale',null)}</span></button>
 						</div>
-						<input type="hidden" name="${session.forms.login.secureKeyHtmlName}" value="${session.forms.login.secureKeyValue}"/>
+						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 					</fieldset>
 				</form>
 

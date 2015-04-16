@@ -73,7 +73,7 @@
 
 		var rList 		= pdict.ProductPagingModel.pageElements.asList();
 		var listSize 	= rList.size();
-		var start 		= request.httpParameterMap.start.intValue;
+		var start 		= pdict.CurrentHttpParameterMap.start.intValue;
 
 		var totalCount = pdict.ProductPagingModel.count;
 		var prevProd = null, prevProdHit = null;

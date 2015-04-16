@@ -125,7 +125,7 @@
 	    			
 	    			</label>
     			
-    				<input class="input-radio" type="radio" name="${session.forms.singleshipping.shippingAddress.shippingMethodID.htmlName}" id="shipping-method-${shippingMethod.ID}" value="${shippingMethod.ID}" <isif condition="${(empty(session.forms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (session.forms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">checked="checked"</isif> /> 
+    				<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.htmlName}" id="shipping-method-${shippingMethod.ID}" value="${shippingMethod.ID}" <isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">checked="checked"</isif> /> 
     			
 	    			<isif condition="${!empty(shippingMethod.description)}">
 	    				<div class="form-caption">(<isprint value="${shippingMethod.description}"/>)</div>

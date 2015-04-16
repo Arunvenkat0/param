@@ -5,7 +5,7 @@
 	<isif condition="${!empty(customer)}">
 		<isinclude url="${URLUtils.url('ReportingEvent-Start',
 			'ID', 	'UserOrders',
-			'Count', StringUtils.formatNumber(customer.orderHistory.orderCount, '#,##0'))}"/>
+			'Count', StringUtils.formatNumber(pdict.CurrentCustomer.orderHistory.orderCount, '#,##0'))}"/>
 	</isif>
 
 	<iscomment>

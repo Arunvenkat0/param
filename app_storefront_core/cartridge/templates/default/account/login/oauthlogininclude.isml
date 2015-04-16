@@ -8,11 +8,11 @@
 		<p>${Resource.msgf('logininclude.oauthcustomersheaderreturning','account',"")}</p>
 	</isif>
 	<iscomment>Login Unsuccessful Error Message</iscomment>
-	<isif condition="${!session.forms.oauthlogin.loginsucceeded.valid}">
+	<isif condition="${!pdict.CurrentForms.oauthlogin.loginsucceeded.valid}">
 		<div class="error-form">${Resource.msgf('logininclude.oauthloginerror','account',"")}</div>
 	</isif>
 
-	<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${session.forms.oauthlogin.htmlName}">
+	<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${pdict.CurrentForms.oauthlogin.htmlName}">
 		<fieldset>
 		
 			<select  name="OAuthProvider" id="OAuthProvider" >
@@ -28,53 +28,53 @@
 		
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('GooglePlus' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GooglePlus login"
-			 	name="${session.forms.oauthlogin.login.htmlName}"
+			 	name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
 			 	src="${URLUtils.staticURL('/images/Google.png')}"
 			 	/>
 			</isif>
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('LinkedIn' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="LinkedIn login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
 			 	 src="${URLUtils.staticURL('/images/LinkedIn.png')}"
 				 />
 			</isif>
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('Microsoft' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Microsoft login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
 			 	 src="${URLUtils.staticURL('/images/Microsoft.png')}"
 				 />
 			</isif>
 
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('Facebook' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Facebook login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
 			 	 src="${URLUtils.staticURL('/images/Facebook.png')}"
 				 />
 			</isif>
 
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('GitHub' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GitHub login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
   			 	 src="${URLUtils.staticURL('/images/GitHub.png')}"
 				 />
 			</isif>
 
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('SinaWeibo' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="SinaWeibo login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
   			 	 src="${URLUtils.staticURL('/images/SinaWeibo.png')}"
 				 />
 			</isif>
 
 			<isif condition="${session.customer.anonymous || (session.customer.externallyAuthenticated && ('VKontakte' == session.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="VKontakte login"
-				 name="${session.forms.oauthlogin.login.htmlName}"
+				 name="${pdict.CurrentForms.oauthlogin.login.htmlName}"
   			 	 src="${URLUtils.staticURL('/images/VKontakte.png')}"
 				 />
 			</isif>
 
 			<input type="hidden" name="rememberme" id="rememberme" value="">
-			<input type="hidden" name="${session.forms.oauthlogin.secureKeyHtmlName}" value="${session.forms.oauthlogin.secureKeyValue}"/>			
+			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}" value="${pdict.CurrentForms.oauthlogin.secureKeyValue}"/>			
 		</fieldset>
 	</form>		
 </isif>

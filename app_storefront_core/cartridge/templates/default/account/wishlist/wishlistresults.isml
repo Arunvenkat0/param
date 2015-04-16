@@ -10,7 +10,7 @@
 		</div>
 
 
-		<isif condition="${!empty(session.forms.wishlist.productlists)}">
+		<isif condition="${!empty(pdict.CurrentForms.wishlist.productlists)}">
 
 			<table class="item-list">
 				<tr>
@@ -20,7 +20,7 @@
 					<th class="section-header"><!-- empty --></th>
 				</tr>
 
-				<isloop items="${session.forms.wishlist.productlists}" var="ProductList" status="loopstate">
+				<isloop items="${pdict.CurrentForms.wishlist.productlists}" var="ProductList" status="loopstate">
 					<tr>
 						<td class="last-name">
 							<isprint value="${ProductList.object.owner.profile.lastName}"/>
