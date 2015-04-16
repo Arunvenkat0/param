@@ -8,10 +8,8 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
 var PagingModel = require('dw/web/PagingModel');
 var Product = require('~/cartridge/scripts/models/Product');
-var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
@@ -215,6 +213,7 @@ function variation() {
         }
 
         if (request.httpParameterMap.source.stringValue === 'bonus') {
+            var Cart = require('~/cartridge/scripts/models/Cart');
 	        var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
             var bonusDiscountLineItem = null;
 
@@ -305,7 +304,7 @@ function includeLastVisited() {
  * Renders a list of bonus products for a bonus discount line item.
  */
 function getBonusProducts() {
-
+    var Cart = require('~/cartridge/scripts/models/Cart');
     var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
     var bonusDiscountLineItem = null;
 

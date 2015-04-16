@@ -47,6 +47,8 @@ var View = Class.extend(
             this.CurrentHttpParameterMap = request.httpParameterMap;
             this.CurrentCustomer = customer;
             this.CurrentSession = session;
+            this.CurrentPageMetaData = request.pageMetaData;
+            this.CurrentRequest = request;
             try{
                 response.renderTemplate(templateName, this);
             }catch(e){
