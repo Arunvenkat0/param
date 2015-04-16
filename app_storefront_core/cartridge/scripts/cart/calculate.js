@@ -86,7 +86,7 @@ exports.calculate = function(basket)
 	// =====            DONE                         =====
     // ===================================================
 
-	return new Status(Status.OK);
+	return new dw.system.Status(dw.system.Status.OK);
 }
 
 /**
@@ -268,7 +268,7 @@ function calculateTax (basket)
 			var lineItem : LineItem = shipmentLineItems.next();
 			var taxClassID : String = lineItem.taxClassID;
 
-			Logger.debug("1. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+			dw.system.Logger.debug("1. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
 
 			// do not touch line items with fix tax rate
 			if(taxClassID == TaxMgr.customRateTaxClassID)
@@ -285,7 +285,7 @@ function calculateTax (basket)
 			// if we have no tax class, we cannot calculate tax
 			if(taxClassID == null)
 			{
-				Logger.debug("Line Item {0} has invalid Tax Class {1}", lineItem.lineItemText, lineItem.taxClassID);
+				dw.system.Logger.debug("Line Item {0} has invalid Tax Class {1}", lineItem.lineItemText, lineItem.taxClassID);
 				continue;
 			}
 
@@ -299,7 +299,7 @@ function calculateTax (basket)
 
 			// calculate the tax of the line item
 	    lineItem.updateTax(taxRate);
-			Logger.debug("2. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+			dw.system.Logger.debug("2. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
 	}
 	}
 
