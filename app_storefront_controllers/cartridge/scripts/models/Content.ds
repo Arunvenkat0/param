@@ -1,0 +1,114 @@
+'use strict';
+
+/*
+ usage
+ var content = require('~/cartridge/scripts/models/Content');
+ */
+
+/** @module models/Content */
+
+var AbstractModel = require('./AbstractModel');
+
+/**
+ * Content helper providing enhanced content functionality
+ * @class module:models/Content~Content
+ *
+ * @extends module:models/AbstractModel
+ * @param parameter {dw.content.Content} The content object to enhance/wrap.
+ */
+var Content = AbstractModel.extend(
+    /** @lends module:models/Content~Content.prototype */
+    {
+        /**
+         *    Get navigation link from custom attribute "pipelineLink"
+         *  or creating new link of content page for current asset
+         *    @returns {String} URL
+         */
+        getLink : function () {
+            if (!this.object) {
+                return null;
+            }
+
+            return dw.web.URLUtils.url('Page-Show', 'cid', this.object.ID);
+        },
+
+        /**
+         *    @param {String} folderId - folder id
+         *    @returns {Boolean} true if asset is in specified folder
+         */
+        isInFolder : function (folderId) {
+            if (this.object && !empty(this.object.folders)) {
+                for (let index in this.object.folders) {
+                    if (this.object.folders[index].ID === folderId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
+
+        /**
+         *  Returns actual markup of the asset in case defined, otherwise returns an empty string
+         *    @returns {String} url
+         */
+        getMarkup : function () {
+            var body = this.getValue('body');
+            return body && body.markup || '';
+        },
+
+        /**
+         * Returns the default folder which is either the classificationFolder or the first folder the asset is
+         * assigned to
+         *
+         * @return {dw.content.Folder} The default folder for this asset
+         */
+        getDefaultFolder : function () {
+            var folder = null;
+            if (this.object) {
+                folder = this.object.classificationFolder;
+                if (!folder && !this.object.folders.empty) {
+                    folder = this.object.folders[0];
+                }
+            }
+            return folder;
+        },
+
+        /**
+         * Returns an array containing the folder path of the default folder
+         * @return {Array} The fodler path for this asset
+         */
+        getFolderPath : function () {
+            var path = [];
+            if (this.object) {
+                var folder = this.getDefaultFolder();
+                if (folder) {
+                    while (folder.ID !== 'root') {
+                        path.unshift(folder);
+                        folder = folder.parent;
+                    }
+                }
+            }
+            return path;
+        }
+
+    });
+
+/**
+ * Use this method to get a new instance for a given content.
+ *
+ * @param parameter {(dw.content.Content|String)} The content object to enhance/wrap or the cotnent ID of the content object.
+ * @returns {module:models/Content~Content}
+ */
+Content.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'string') {
+        obj = dw.content.ContentMgr.getContent(parameter);
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new Content(obj);
+};
+
+/** The content class */
+module.exports = Content;

@@ -1,0 +1,128 @@
+'use strict';
+
+/**
+ * Manages the order history of a registered user.
+ *
+ * @module controllers/Order
+ */
+
+/* API Includes */
+var OrderMgr = require('dw/order/OrderMgr');
+var PagingModel = require('dw/web/PagingModel');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/models/Form');
+var orderListForm = Form.get('orders.orderlist');
+var pageMeta = require('~/cartridge/scripts/meta');
+
+/**
+ * Renders a page with the order history of the current logged in customer.
+ */
+function history()
+{
+    var orders = OrderMgr.searchOrders('customerNo={0} AND status!={1}', 'creationDate desc',
+                                        customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
+
+    var parameterMap = request.httpParameterMap;
+    var pageSize = parameterMap.sz.intValue || 5;
+    var start = parameterMap.start.intValue || 0;
+    var orderPagingModel = new PagingModel(orders, orders.count);
+    orderPagingModel.setPageSize(pageSize);
+    orderPagingModel.setStart(start);
+
+    orderListForm.invalidate();
+    orderListForm.clear();
+    orderListForm.copyFrom(orderPagingModel.pageElements);
+
+    pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
+
+    view.get({
+    	OrderPagingModel   : orderPagingModel,
+    	ContinueURL        : dw.web.URLUtils.https('Order-Orders')
+    }).render('account/orderhistory/orders');
+}
+
+
+/**
+ * Renders the order detail page
+ */
+function orders()
+{
+    orderListForm.handleAction({
+        'show': function (formGroup, action) {
+            var Order = action.object;
+
+            view.get('OrderDetails', {Order : Order}).render('account/orderhistory/orderdetails');
+        },
+        'error': function () {
+            response.redirect(dw.web.URLUtils.https('Order-History'));
+        }
+    });
+
+}
+
+
+/**
+ * Renders a page with details of a single order. The pipeline is intended to
+ * render the order details by the UUID of the order, therefore can also be used
+ * for unregistered customers to track the status of their orders.
+ */
+function track()
+{
+    var parameterMap = request.httpParameterMap;
+
+    if (empty(parameterMap.orderID.stringValue))
+    {
+        view.get('OrderDetails').render('account/orderhistory/orderdetails');
+        return response;
+    }
+
+    var uuid = parameterMap.orderID.stringValue;
+    var orders = OrderMgr.searchOrders('UUID={0} AND status!={1}', 'creationDate desc', uuid, dw.order.Order.ORDER_STATUS_REPLACED);
+
+    if (empty(orders))
+    {
+        view.get('OrderDetails').render('account/orderhistory/orderdetails');
+    }
+
+    var Order = orders.next();
+    view.get('OrderDetails', { Order : Order }).render('account/orderhistory/orderdetails');
+}
+
+
+/*
+ * Private methods
+ */
+
+/**
+ * Decorator which ensures that the customer is authenticated.
+ */
+function loggedIn(action)
+{
+    return function()
+    {
+        if (!customer.authenticated)
+        {
+            var accountController = require('./Account');
+            accountController.requireLogin({
+                TargetAction : 'Order-History'
+            });
+            return;
+        }
+
+        action();
+    };
+}
+
+/*
+ * Module exports
+ */
+
+/*
+ * Web exposed methods
+ */
+exports.History = guard.ensure(['get', 'https', 'loggedIn'], history);
+exports.Orders = guard.ensure(['post', 'https', 'loggedIn'], orders);
+exports.Track = guard.ensure(['get', 'https'], orders);

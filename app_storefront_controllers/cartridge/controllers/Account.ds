@@ -1,0 +1,327 @@
+'use strict';
+
+/**
+ * Controller : account
+ *
+ * @module controllers/Account
+ */
+
+/* API Includes */
+var Email = require('~/cartridge/scripts/models/Email');
+var Customer = require('~/cartridge/scripts/models/Customer');
+
+/* Script Modules */
+var Content = require('~/cartridge/scripts/models/Content');
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/models/Form');
+
+/* Public controller methods */
+
+/**
+ * Renders the account overview.
+ */
+function show() {
+    var accountHomeAsset = Content.get('myaccount-home');
+    pageMeta.update(accountHomeAsset);
+    
+    view.get().render('account/accountoverview');
+}
+
+/**
+ * Updates the profile of an authenticated customer.
+ */
+function editProfile() {
+    if (!request.httpParameterMap.invalid.submitted) {
+        Form.get('profile').clear();
+
+        Form.get('profile.customer').copyFrom(customer.profile);
+        Form.get('profile.login').copyFrom(customer.profile.credentials);
+        Form.get('profile.addressbook.addresses').copyFrom(customer.profile.addressBook.addresses);
+    }
+
+    var accountPersonalDataAsset = Content.get('myaccount-personaldata');
+    pageMeta.update(accountPersonalDataAsset);
+    // @FIXME bctext2 should generate out of pagemeta - also action?!
+    view.get({
+        bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
+        Action : 'edit',
+        ContinueURL : dw.web.URLUtils.https('Account-EditForm')
+    }).render('account/user/registration');
+}
+
+/**
+ * Handles the form submission on profile update of edit profile
+ */
+function editForm() {
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            Form.get('profile').clear();
+            response.redirect(dw.web.URLUtils.https('Account-Show'));
+        },
+        'confirm' : function() {
+            var profileUpdateValidation = true;
+            if (!Customer.checkUserName()) {
+                Form.get('profile.customer.email').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (Form.get('profile.customer.email').value() !== Form.get('profile.customer.emailconfirm').value()) {
+                Form.get('profile.customer.emailconfirm').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (Form.get('profile.login.password').value() !== Form.get('profile.login.passwordconfirm').value()) {
+                Form.get('profile.login.passwordconfirm').invalidate();
+                profileUpdateValidation = false;
+            }
+
+            if (profileUpdateValidation) {
+                profileUpdateValidation = Customer.editAccount(Form.get('profile.customer.email').value(), Form.get('profile.login.password').value(), Form.get('profile'));
+            }
+
+            if (profileUpdateValidation) {
+                response.redirect(dw.web.URLUtils.https('Account-Show'));
+            } else {
+                response.redirect(dw.web.URLUtils.https('Account-EditProfile', 'invalid', 'true'));
+            }
+        }
+    });
+}
+
+/**
+ * Renders the password reset screen. This is very similar to the password reset
+ * dialog but has screen-based interaction instead of popup interaction.
+ */
+function passwordReset() {
+    Form.get('requestpassword').clear();
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('Account-PasswordResetForm')
+    }).render('account/password/requestpasswordreset');
+}
+
+/**
+ * Utility, which handles form submits from dialog based and full page
+ * based password reset
+ * @private
+ */
+function passwordResetFormHandler(templateName) {
+    var resetPasswordToken, passwordemail;
+
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            view.get().render(templateName);
+        },
+        'send' : function() {
+            var resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
+
+            if (!empty(resettingCustomer)) {
+                resetPasswordToken = resettingCustomer.generatePasswordResetToken();
+
+                passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
+                passwordemail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                passwordemail.send({
+                    ResetPasswordToken : resetPasswordToken
+                });
+
+                view.get({
+                    ErrorCode : null,
+                    ShowContinue : true
+                }).render('account/password/requestpasswordreset_confirm');
+            } else {
+                view.get({
+                    ErrorCode : 'formnotvalid'
+                }).render(templateName);
+            }
+        },
+        'error' : function() {
+            view.get({
+                ErrorCode : 'formnotvalid'
+            }).render(templateName);
+        }
+    });
+}
+
+/**
+ * The form handler for password resets.
+ */
+function passwordResetForm() {
+    passwordResetFormHandler('account/password/requestpasswordreset');
+}
+
+/**
+ * Renders the password reset dialog.
+ */
+function passwordResetDialog() {
+    // @FIXME reimplement using dialogify
+    Form.get('requestpassword').clear();
+    view.get().render('account/password/requestpasswordresetdialog');
+}
+
+/**
+ * Handles the password reset form.
+ */
+function passwordResetDialogForm() {
+    // @FIXME reimplement using dialogify
+    passwordResetFormHandler('account/password/requestpasswordresetdialog');
+}
+
+/**
+ * Renders the screen for setting a new password. If token not valid, just
+ * quietly forward to PasswordReset screen. This is the link sent by email.
+ */
+function setNewPassword() {
+    Form.get('resetpassword').clear();
+
+    var resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+    if (empty(resettingCustomer)) {
+        response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+    } else {
+        view.get().render('account/password/setnewpassword');
+    }
+}
+
+/**
+ * Handles the set new password form submit
+ */
+function setNewPasswordForm() {
+
+    Form.get('profile').handleAction({
+        'cancel' : function() {
+            view.get().render('account/password/setnewpassword');
+            return;
+        },
+        'send' : function() {
+            var resettingCustomer, success, passwordchangedmail;
+            resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+            if (empty(resettingCustomer)) {
+                response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+            } else {
+
+                if (Form.get('resetpassword.password').value() !== Form.get('resetpassword.passwordconfirm').value()) {
+                    Form.get('resetpassword.passwordconfirm').invalidate();
+                    view.get().render('account/password/setnewpassword');
+                } else {
+
+                    success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), Form.get('resetpassword.password').value());
+                    if (!success) {
+                        view.get({
+                            ErrorCode : 'formnotvalid'
+                        }).render('account/password/setnewpassword');
+                    } else {
+                        passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
+                        passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                        passwordchangedmail.send({});
+
+                        view.get().render('account/password/setnewpassword_confirm');
+                    }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * Start the customer registration process and renders customer registration
+ * page.
+ */
+function startRegister() {
+
+    Form.get('profile').clear();
+
+    if (Form.get('login.username').value() !== null) {
+        Form.get('profile.customer.email').object.value = Form.get('login.username').object.value;
+    }
+
+    view.get({
+        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+    }).render('account/user/registration');
+}
+
+/**
+ * Handles registration form submit
+ */
+function registrationForm() {
+    Form.get('profile').handleAction({
+        'confirm' : function() {
+            var email, emailConfirmation, profileValidation, password, passwordConfirmation, existingCustomer;
+
+            email = Form.get('profile.customer.email').value();
+            emailConfirmation = Form.get('profile.customer.emailconfirm').value();
+            profileValidation = true;
+
+            if (email !== emailConfirmation) {
+                Form.get('profile.customer.emailconfirm').invalidate();
+                profileValidation = false;
+            }
+
+            password = Form.get('profile.login.password').value();
+            passwordConfirmation = Form.get('profile.login.passwordconfirm').value();
+
+            if (password !== passwordConfirmation) {
+                Form.get('profile.login.passwordconfirm').invalidate();
+                profileValidation = false;
+            }
+
+            // check if login is already taken
+            existingCustomer = Customer.getCustomerByLogin(email);
+            if (existingCustomer !== null) {
+                Form.get('profile.customer.email').invalidate();
+                profileValidation = false;
+            }
+
+            if (profileValidation) {
+                profileValidation = Customer.createAccount(email, password, Form.get('profile'));
+            }
+
+            if (!profileValidation) {
+                // TODO redirect
+                view.get({
+                	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+                }).render('account/user/registration');
+            } else {
+                Form.get('profile').clear();
+                response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+            }
+        }
+    });
+
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+    }).render('account/user/registration');
+}
+
+/**
+ * Renders the account navigation.
+ */
+function includeNavigation() {
+    view.get().render('account/accountnavigation');
+}
+
+/* Web exposed methods */
+
+/** @see module:controllers/Account~Show */
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
+/** @see module:controllers/Account~EditProfile */
+exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
+/** @see module:controllers/Account~EditForm */
+exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
+/** @see module:controllers/Account~PasswordResetDialog */
+exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
+/** @see module:controllers/Account~PasswordReset */
+exports.PasswordReset = guard.ensure(['get', 'https'], passwordReset);
+/** @see module:controllers/Account~PasswordResetDialogForm */
+exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
+/** @see module:controllers/Account~PasswordResetForm */
+exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
+/** @see module:controllers/Account~SetNewPassword */
+exports.SetNewPassword = guard.ensure(['get', 'https'], setNewPassword);
+/** @see module:controllers/Account~SetNewPasswordForm */
+exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
+/** @see module:controllers/Account~StartRegister */
+exports.StartRegister = guard.ensure(['https'], startRegister);
+/** @see module:controllers/Account~RegistrationForm */
+exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
+/** @see module:controllers/Account~IncludeNavigation */
+exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);

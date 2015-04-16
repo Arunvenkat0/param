@@ -1,0 +1,179 @@
+'use strict';
+
+/**
+ * Controller : Address
+ *
+ * @module controllers/Address
+ */
+
+/* API Includes */
+var Transaction         = require('dw/system/Transaction');
+
+/* Script Modules */
+var guard = require('~/cartridge/scripts/guard');
+var pageMeta = require('~/cartridge/scripts/meta');
+var view = require('~/cartridge/scripts/view');
+var Form = require('~/cartridge/scripts/models/Form');
+var Address = require('~/cartridge/scripts/models/Address');
+var Content = require('~/cartridge/scripts/models/Content');
+var addressForm = Form.get('customeraddress');
+
+/**
+ * List addresses in customer profile Input: (none)
+ */
+function list() {
+   pageMeta.update(Content.get('myaccount-addresses').object);
+
+   view.get().render('account/addressbook/addresslist');
+}
+
+/**
+ * Renders a dialog providing functionality to add a new address to the address
+ * book.
+ */
+function add() {
+    Form.get('profile').clear();
+
+    view.get({
+        Action : 'add',
+        ContinueURL: dw.web.URLUtils.https('Address-Form')
+    }).render('account/addressbook/addressdetails');
+}
+
+/**
+ * The form handler.
+ */
+function handleForm() {
+
+    var success = addressForm.handleAction({
+        'cancel'             : function () {
+            return false;
+        },
+        'create'             : function () {
+            if (!session.forms.profile.address.valid || !Address.create(session.forms.profile.address))
+            {
+                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                return false;
+            }
+
+            return true;
+        },
+        'edit'             : function () {
+            if (!session.forms.profile.address.valid ||
+                !Address.update(request.httpParameterMap.addressid.value,
+                    session.forms.profile.address))
+            {
+                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                return false;
+            }
+
+            return true;
+        },
+        'error'             : function () {
+            return false;
+        },
+        'remove'             : function () {
+            if (Address.remove(session.forms.profile.address.addressid.value)) {
+                return false;
+            }
+        }
+    });
+
+    if (request.httpParameterMap.format.stringValue === 'ajax')
+    {
+        response.renderJSON({
+            success : success
+        });
+        return;
+    }
+
+    response.redirect(dw.web.URLUtils.https('Address-List'));
+}
+
+/**
+ * Renders a dialog providing functionality to edit an existing address.
+ */
+function edit() {
+    var profileForm = session.forms.profile;
+    Form.get('profile').clear();
+
+    // get address to be edited
+    var addressBook = customer.profile.addressBook;
+    var address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
+
+    Form.get(profileForm.address).copyFrom(address);
+    Form.get(profileForm.address.states).copyFrom(address);
+
+    view.get({
+        Action : 'edit',
+        ContinueURL: dw.web.URLUtils.https('Address-Form'),
+        Address: address
+    }).render('account/addressbook/addressdetails');
+}
+
+/**
+ * Sets the default address.
+ */
+function setDefault() {
+    var addressBook = customer.profile.addressBook;
+    var address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
+
+    Transaction.wrap(function(){
+	   addressBook.setPreferredAddress(address);
+    });
+
+    response.redirect(dw.web.URLUtils.https('Address-List'));
+}
+
+
+/**
+ * Returns a customer address as JSON response. Required to fill address form
+ * with selected address from address book.
+ */
+function getAddressDetails() {
+    var addressBook = customer.profile.addressBook;
+    var address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
+
+    view.get({
+        Address : address
+    }).render('account/addressbook/addressjson');
+}
+
+
+/**
+ * Deletes an existing address.
+ */
+function Delete() {
+    var deleteAddressResult = Address.remove(decodeURIComponent(request.httpParameterMap.AddressID.value));
+
+    if (request.httpParameterMap.format.stringValue !== 'ajax')
+    {
+        response.redirect(dw.web.URLUtils.https('Address-List'));
+        return;
+    }
+
+    response.renderJSON({
+        status : deleteAddressResult ? 'OK' : dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,
+        message : deleteAddressResult ? '' : dw.web.Resource.msg('addressdetails.' +
+                dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
+    });
+}
+
+/*
+ * Web exposed methods
+ */
+
+/** @see module:controllers/Address~list */
+exports.List = guard.ensure(['get', 'https', 'loggedIn'], list);
+/** @see module:controllers/Address~add */
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
+/** @see module:controllers/Address~Edit */
+exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], edit);
+/** @see module:controllers/Address~handleorm */
+exports.Form = guard.ensure(['post', 'https', 'loggedIn'], handleForm);
+/** @see module:controllers/Address~SetDefault */
+exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], setDefault);
+/** @see module:controllers/Address~GetAddressDetails */
+exports.GetAddressDetails = guard.ensure(['get', 'https', 'loggedIn'], getAddressDetails);
+/** @see module:controllers/Address~Delete */
+exports.Delete = guard.ensure(['https', 'loggedIn'], Delete);

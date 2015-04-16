@@ -1,0 +1,34 @@
+'use strict';
+
+/**
+ * The handler module for a source code redirect.
+ *
+ * @module controllers/SourceCodeRedirect
+ */
+
+var guard = require('~/cartridge/scripts/guard');
+var view = require('~/cartridge/scripts/view');
+
+/**
+ * The handler function for a source code redirect.
+ */
+function start()
+{
+    var sourceCodeRedirectURLResult = new dw.system.Pipelet('SourceCodeRedirectURL').execute();
+    if (sourceCodeRedirectURLResult.result === PIPELET_ERROR)
+    {
+        require('./Home').Show();
+        return;
+    }
+    var location = sourceCodeRedirectURLResult.Location;
+
+    view.get().render('util/redirect', {
+    	Location: location
+    });
+}
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controllers/SourceCodeRedirect~start */
+exports.Start = guard.ensure(['get'], start);
