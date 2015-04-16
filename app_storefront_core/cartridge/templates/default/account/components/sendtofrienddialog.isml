@@ -256,7 +256,7 @@
 					<dt>${Resource.msg('global.from','locale',null)}:</dt>
 					<dd>
 						<isprint value="${pdict.CurrentForms.sendtofriend.yourname.htmlValue}"/><br />
-						<isprint value="${user.profile.email}"/>
+						<isprint value="${pdict.CurrentUser.profile.email}"/>
 					</dd>
 
 					<dt>${Resource.msg('sendtoafrienddialog.subject','account',null)}</dt>
@@ -303,7 +303,7 @@
 	</div>
 </form>
 </isif>
-<isif condition="${!customer.registered}">
+<isif condition="${!pdict.CurrentCustomer.registered}">
 	<div class="send-to-friend-login-message">
 		<span>
 			${Resource.msg('sendtoafrienddialog.unregistereduser','account',null)}
