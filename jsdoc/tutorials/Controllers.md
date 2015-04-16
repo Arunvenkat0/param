@@ -6,7 +6,7 @@ Here are a few important aspects
 * All controllers should use the View concept to render template output.
 * Controllers should only define public endpoints (including endpoints required for remote includes), all other functionality should be located in modules.
 
-To properly document controllers as modules use the following appraoch.
+To properly document controllers as modules we recommend the following approach.
 
 ```
 'use strict';
@@ -24,3 +24,5 @@ function show() { }
 /** @see module:controller/XYZ~show */
 exports.Show    = guard.ensure(['get'],show);
 ```
+
+Please note the use of the [guard concept]{@module:guard} which allows developers to easily declare access restrictions for the given endpoint such as request method or protocol.

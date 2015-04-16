@@ -1,6 +1,11 @@
 {
     "Controllers": {
-        "title": "The Controller concept"
+        "title": "The Controller concept",
+        "children": {
+            "CreateController": {
+                "title": "How to create a new Controller"
+            }
+        }
     },
     "Models": {
         "title": "The Model concept"

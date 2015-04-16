@@ -475,19 +475,21 @@ var Cart = AbstractModel.extend(
          * @transactional
          */
         removeEmptyShipments : function () {
+            var that = this;
             // get the list of shipments
-            var shipments = this.getShipments();
+            var shipments = that.getShipments();
 
-            for (var i = 0; i < shipments.length; i++) {
-                var shipment = shipments[i];
+            dw.system.Transaction.wrap(function(){
+                for (var i = 0; i < shipments.length; i++) {
+                    var shipment = shipments[i];
 
-                if (!shipment.isDefault()) {
-                    if (shipment.getProductLineItems().isEmpty() && shipment.getGiftCertificateLineItems().isEmpty()) {
-                        this.removeShipment(shipment);
+                    if (!shipment.isDefault()) {
+                        if (shipment.getProductLineItems().isEmpty() && shipment.getGiftCertificateLineItems().isEmpty()) {
+                                that.removeShipment(shipment);
+                        }
                     }
                 }
-
-            }
+            });
         },
 
         /**
