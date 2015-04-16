@@ -90,24 +90,18 @@ function start() {
  */
 function singleShipping() {
 
-    dw.system.Logger.error("1");
     singleShippingForm.handleAction({
         'save' : function(formgroup) {
             var cart = Cart.get();
             
-            dw.system.Logger.error("1");
             if (cart.object) {
-	            dw.system.Logger.error("2");
 
                 handleShippingSettings(cart);
 
-	            dw.system.Logger.error("3");
                 // Attempts to save the used shipping address in the customer address book.
                 if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
                     Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
                 }
-	            dw.system.Logger.error("4");
-
                 // Binds the store message from the user to the shipment.
                 if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
@@ -116,7 +110,6 @@ function singleShipping() {
                         return;
                     }
                 }
-	            dw.system.Logger.error("4");
 
                 // Mark step as fulfilled.
                 session.forms.singleshipping.fulfilled.value = true;
