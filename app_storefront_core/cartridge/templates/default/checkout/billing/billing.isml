@@ -23,7 +23,7 @@
 		<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
-	<form action="${URLUtils.https('COBilling-Billing')}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address">
+	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address">
 
 	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		billing address
@@ -42,7 +42,7 @@
 		</legend>
 
 		<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
-		<isif condition="${pdict.CurrentCustomer.authenticated && customer.profile.addressBook.addresses.size() > 0}">
+		<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 			<div class="select-address">
 				<div class="form-row">
 					<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
@@ -50,7 +50,7 @@
 					</label>
 					<isscript>
 						importScript("cart/CartUtils.ds");
-						var customerAddresses = CartUtils.getAddressList(pdict.Basket, customer, false);
+						var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
 					</isscript>
 					<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" />
 				</div>

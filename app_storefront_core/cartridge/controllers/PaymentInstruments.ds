@@ -55,7 +55,9 @@ function add(clearForm)
     }
     paymentForm.get('creditcards.newcreditcard.type').setOptions(dw.order.PaymentMgr
             .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
-    view.get().render('account/payment/paymentinstrumentdetails');
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
+    }).render('account/payment/paymentinstrumentdetails');
 }
 
 /**

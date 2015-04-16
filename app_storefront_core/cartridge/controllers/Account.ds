@@ -46,8 +46,9 @@ function editProfile() {
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     view.get({
         bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
-        Action : 'edit'
-    }).render('account/user/registration_edit');
+        Action : 'edit',
+        ContinueURL : dw.web.URLUtils.https('Account-EditForm')
+    }).render('account/user/registration');
 }
 
 /**
@@ -95,7 +96,9 @@ function editForm() {
  */
 function passwordReset() {
     Form.get('requestpassword').clear();
-    view.get().render('account/password/requestpasswordreset');
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('Account-PasswordResetForm')
+    }).render('account/password/requestpasswordreset');
 }
 
 /**
@@ -231,7 +234,9 @@ function startRegister() {
         Form.get('profileForm.customer.email').object.value = Form.get('login.username').object.value;
     }
 
-    view.get().render('account/user/registration');
+    view.get({
+        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+    }).render('account/user/registration');
 }
 
 /**
@@ -272,7 +277,9 @@ function registrationForm() {
 
             if (!profileValidation) {
                 // TODO redirect
-                view.get().render('account/user/registration');
+                view.get({
+                	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+                }).render('account/user/registration');
             } else {
                 Form.get('profile').clear();
                 response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
@@ -280,7 +287,9 @@ function registrationForm() {
         }
     });
 
-    view.get().render('account/user/registration');
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+    }).render('account/user/registration');
 }
 
 /**

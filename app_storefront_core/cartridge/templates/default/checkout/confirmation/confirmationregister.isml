@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment> TEMPLATENAME: confirmationregister.isml </iscomment>
 <iscomment>Provide a create account form for unregistered customers</iscomment>
-<isif condition="${!customer.authenticated}">
+<isif condition="${!pdict.CurrentCustomer.authenticated}">
 
 	<div class="login-box login-create-account clearfix">	
 	
@@ -13,10 +13,10 @@
 				
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 				<fieldset>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.lastname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.emailconfirm}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" type="password" attribute1="autocomplete" value1="off"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" type="password" attribute1="autocomplete" value1="off"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>

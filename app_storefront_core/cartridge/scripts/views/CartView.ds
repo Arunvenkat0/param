@@ -46,6 +46,9 @@ var CartView = View.extend(
         this._super(params);
 
         this.Basket = params.cart.object;
+        
+        /** backward compatibility to URLUtils.continueURL() methods in old templates **/
+        this.ContinueURL = dw.web.URLUtils.abs('Cart-SubmitForm')
 
         return this;
     },

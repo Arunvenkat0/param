@@ -10,10 +10,10 @@
 <iselse/>
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
-	<isif condition="${empty(session.custom.device) 
-		|| session.custom.device == 'mobile' 
-		|| session.custom.device == 'tablet' 
-		|| session.custom.device == 'desktop'}">
+	<isif condition="${empty(pdict.CurrentSession.custom.device) 
+		|| pdict.CurrentSession.custom.device == 'mobile' 
+		|| pdict.CurrentSession.custom.device == 'tablet' 
+		|| pdict.CurrentSession.custom.device == 'desktop'}">
 		<isset name="siteUrl" value="${URLUtils.url('Home-FullSite')}" scope="page"/>
 
 		<script type="text/javascript">

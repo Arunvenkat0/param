@@ -38,7 +38,10 @@ function history()
 
     pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
 
-    view.get({OrderPagingModel : orderPagingModel}).render('account/orderhistory/orders');
+    view.get({
+    	OrderPagingModel   : orderPagingModel,
+    	ContinueURL        : dw.web.URLUtils.https('Order-Orders')
+    }).render('account/orderhistory/orders');
 }
 
 

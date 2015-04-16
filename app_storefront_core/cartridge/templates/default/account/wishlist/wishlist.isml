@@ -14,11 +14,11 @@
 
 	<iscomment>wishlist items form</iscomment>
 
-	<form action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
+	<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
 
 	<fieldset>
 
-	<isif condition="${customer == pdict.ProductList.owner}">
+	<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
 		<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 			<div class="form-row label-above">
 				<label for="editAddress">${Resource.msg('wishlist.addresslabel','account',null)}</label>
@@ -60,8 +60,8 @@
 	</form>
 
 
-	<form class="list-share" action="${URLUtils.https('Wishlist-WishListForm')}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
-		<isif condition="${customer == pdict.ProductList.owner}">
+	<form class="list-share" action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
+		<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
 			<isif condition="${pdict.ProductList.public}">
 				<button class="share-option" type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPrivate.htmlName}">
 					${Resource.msg('wishlist.listprivate','account',null)}
@@ -102,7 +102,7 @@
 					<th class="item-actions">Options</th>
 				</tr>
 				<isloop items="${pdict.CurrentForms.wishlist.items}" var="item" status="loopstate">
-					<isif condition="${((customer == pdict.ProductList.owner) || (customer != pdict.ProductList.owner && item.public.value && (item.object.product != null || item.object.TYPE_GIFT_CERTIFICATE)))}">
+					<isif condition="${((pdict.CurrentCustomer == pdict.ProductList.owner) || (pdict.CurrentCustomer != pdict.ProductList.owner && item.public.value && (item.object.product != null || item.object.TYPE_GIFT_CERTIFICATE)))}">
 						<tr>
 							<td class="item-image">
 								<isdisplayproductimage p_productli="${item.object}" p_size="small" />
@@ -111,7 +111,7 @@
 								<isdisplayproductlistitem p_productli="${item.object}"/>
 
 								<isif condition="${item.object.type != item.object.TYPE_GIFT_CERTIFICATE && item.object.product != null}">
-									<isif condition="${customer == pdict.ProductList.owner}">
+									<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
 										<a name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'uuid',item.object.ID)}" title="" >
 											${Resource.msg('global.editdetails','locale',null)}
 										</a>
@@ -124,10 +124,10 @@
 							</td>
 
 							<td class="item-dashboard">
-								<form action="${URLUtils.https('Wishlist-WishListForm')}" method="post" name="${item.htmlName}">
+								<form action="${URLUtils.httpsContinue()}" method="post" name="${item.htmlName}">
 									<fieldset>
 										<input type="hidden" name="productListID" value="${pdict.ProductList.ID}"/>
-										<isset name="isListOwner" value="${customer == pdict.ProductList.owner}" scope="page"/>
+										<isset name="isListOwner" value="${pdict.CurrentCustomer == pdict.ProductList.owner}" scope="page"/>
 										<div class="item-option option-date-added">
 											<span class="label">${Resource.msg('wishlist.dateadded','account',null)}</span>
 											<span class="value"><isprint value="${item.object.creationDate}" formatter="MMMMM dd, yyyy"/></span>

@@ -34,14 +34,14 @@ ul li.onorder {color:red;}
 </table>
 <div style="border:1px solid #CCCCCC;margin:0;padding:0;">
 	<h3 style="background-color:#CCCCCC;color:black;font-size:1.3em;font-weight:bold;margin:0;padding:5px 0;text-align:center;">
-		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}"> 			<isprint value="${pdict.ProductList.name}"/>
-		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
+		<isif condition="${pdict.ProductList.type == dw.pdict.CurrentCustomer.ProductList.TYPE_GIFT_REGISTRY}"> 			<isprint value="${pdict.ProductList.name}"/>
+		<iselseif condition="${pdict.ProductList.type == dw.pdict.CurrentCustomer.ProductList.TYPE_WISH_LIST}">
 			${Resource.msg('productlist.wishlistemailheader','account',null)}
 		</isif>
 	</h3>
 	<div style="border-bottom:1px solid #CCCCCC;padding:5px 10px;">
     	<div style="margin:0 0 7px;text-align:center;"><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></div>
-		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
+		<isif condition="${pdict.ProductList.type == dw.pdict.CurrentCustomer.ProductList.TYPE_GIFT_REGISTRY}">
 			<table style="margin:auto;width:65%;">
 		         <tr>
 		             <td style="font-weight:bold"><b><isprint value="${pdict.ProductList.registrant.role}"/>:</b></td>
@@ -70,7 +70,7 @@ ul li.onorder {color:red;}
 		    <div style="margin:7px 0 0 0;text-align:center;">
      			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitgr','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitgr','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
      		</div>
-		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
+		<iselseif condition="${pdict.ProductList.type == dw.pdict.CurrentCustomer.ProductList.TYPE_WISH_LIST}">
 			<table>
 		         <tr>
 		             <td style="font-weight:bold"><b>${Resource.msg('global.from','locale',null)}:</b></td>
@@ -78,7 +78,7 @@ ul li.onorder {color:red;}
 		         </tr>
 		         <tr>
 		             <td></td>
-		             <td><isprint value="${pdict.customer.profile.email}"/></td>
+		             <td><isprint value="${pdict.pdict.CurrentCustomer.profile.email}"/></td>
 		         </tr>
 		    </table>
 			<div style="margin:7px 0 0 0;text-align:center;">

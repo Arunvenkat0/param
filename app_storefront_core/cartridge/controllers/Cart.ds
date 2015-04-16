@@ -230,7 +230,7 @@ function addProduct() {
         }
         else {
 
-            view.get('Cart', {
+            view.get('views/CartView', {
                 Basket : cart
             }).render('checkout/cart/cart');
 

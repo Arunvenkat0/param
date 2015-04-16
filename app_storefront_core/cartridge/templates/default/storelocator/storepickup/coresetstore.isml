@@ -9,7 +9,7 @@
 
 
 	<isloop items="${pdict.Stores}" var="Store" status="loopstate">
-		<isif condition="${session.custom.storeId == Store.ID}"><br />${Resource.msg('storelist.lightbox.selectedstore','storepickup',null)}</isif>
+		<isif condition="${pdict.CurrentSession.custom.storeId == Store.ID}"><br />${Resource.msg('storelist.lightbox.selectedstore','storepickup',null)}</isif>
 		<br />		${Store.name};
 		<br />		${Store.address1};
 		<isif condition="${Store.address2}"><br />${Store.address2}</isif>

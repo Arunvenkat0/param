@@ -13,7 +13,7 @@
 		</isif>
 
 		<iscomment>Only enable the facebook registration if the customer isn't authenticated</iscomment>
-		<isif condition="${!customer.authenticated &&
+		<isif condition="${!pdict.CurrentCustomer.authenticated &&
 							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookConnectEnabled')) &&
 							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookAppID') != null) &&
 							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookURI') != null)
@@ -29,12 +29,12 @@
 					${Resource.msg('registration.name','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
+				<isif condition="${!pdict.CurrentSession.pdict.CurrentCustomer.externallyAuthenticated}">
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.lastname}" type="input"/>
 				<iselse/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
 			</fieldset>
 
@@ -45,15 +45,15 @@
 					${Resource.msg('registration.logininfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
+				<isif condition="${!pdict.CurrentSession.pdict.CurrentCustomer.externallyAuthenticated}">
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.emailconfirm}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"/>
 				<iselse/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.email}" type="input" attribute1="disabled" value1="disabled"/>
 				</isif>
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
+				<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>

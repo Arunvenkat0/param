@@ -12,7 +12,7 @@
 
 	<h1>${Resource.msg('paymentinstrumentlist.addcard','account',null)}</h1>
 
-		<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.https('PaymentInstruments-PaymentForm')}"  method="post" id="newcreditcard">
+		<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.httpsContinue()}"  method="post" id="newcreditcard">
 
 			<fieldset>
 

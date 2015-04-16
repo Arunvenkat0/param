@@ -14,7 +14,7 @@
 
 	<isinclude url="${URLUtils.url('ReportingEvent-Start',
 					'ID', 				'AccountOpen',
-					'TotalUserCount', 	 StringUtils.formatNumber(dw.customer.CustomerMgr.registeredCustomerCount, '#,##0', locale)
+					'TotalUserCount', 	 StringUtils.formatNumber(dw.pdict.CurrentCustomer.CustomerMgr.registeredCustomerCount, '#,##0', locale)
 					)}"/>
 
 	<iscomment>Remove the marker to prevent double counting</iscomment>

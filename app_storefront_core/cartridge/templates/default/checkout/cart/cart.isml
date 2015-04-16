@@ -5,7 +5,7 @@
 
 	<isset name="enableCheckout" value="${pdict.EnableCheckout}" scope="page" />
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
-	<isset name="store" value="${dw.catalog.StoreMgr.getStore(session.custom.storeId)}" scope="page" />
+	<isset name="store" value="${dw.catalog.StoreMgr.getStore(pdict.CurrentSession.custom.storeId)}" scope="page" />
 	</isif>
 	<isslot id="cart-banner" description="Banner for Cart page"	context="global" />
 
@@ -58,7 +58,7 @@
 	<isif condition="${pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems))}">
 		<div class="cart-empty">
 			<h1>${Resource.msg('cart.cartempty','checkout',null)}</h1>
-			<form class="cart-action-continue-shopping" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${pdict.CurrentForms.cart.htmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.htmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 						&#171; ${Resource.msg('global.continueshopping','locale',null)}
@@ -72,7 +72,7 @@
 		<iscomment>show checkout and continue shopping buttons above cart</iscomment>
 		<div class="cart-actions cart-actions-top">
 			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
-			<form class="cart-action-checkout" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
+			<form class="cart-action-checkout" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
 				<fieldset>
 					<isif condition="${enableCheckout}">
 						<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
@@ -86,7 +86,7 @@
 				</fieldset>
 			</form>
 
-			<form class="cart-action-continue-shopping" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 						<i class="fa fa-angle-double-left left"></i>${Resource.msg('global.continueshopping','locale',null)}
@@ -113,7 +113,7 @@
 		</isif>
 
 		<iscomment>show the basket when we have data</iscomment>
-		<form action="${URLUtils.https('Cart-SubmitForm')}" method="post"	name="${pdict.CurrentForms.cart.htmlName}" id="cart-items-form">
+		<form action="${URLUtils.httpContinue()}" method="post"	name="${pdict.CurrentForms.cart.htmlName}" id="cart-items-form">
 			<fieldset>
 				<iscomment>This button is hidden but required to ensure that update cart is called whenever the "enter" key is pressed in an input field</iscomment>
 				<button class="visually-hidden" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}"></button>
@@ -451,11 +451,11 @@
 										<iscomment>product list info</iscomment>
 										<isif condition="${GiftCertificate.object.productListItem != null}">
 											<span class="product-list-item">
-												<isif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_WISH_LIST}">
+												<isif condition="${GiftCertificate.object.productListItem.list.type == dw.pdict.CurrentCustomer.ProductList.TYPE_WISH_LIST}">
 													<a href="${URLUtils.url('Wishlist-ShowOther','WishListID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.wishlistitem','checkout',null)}">
 														${Resource.msg('displayliproduct.wishlistitem','product',null)}
 													</a>
-												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
+												<iselseif condition="${GiftCertificate.object.productListItem.list.type == dw.pdict.CurrentCustomer.ProductList.TYPE_GIFT_REGISTRY}">
 													<a href="${URLUtils.https('GiftRegistryCustomer-Show','ID', GiftCertificate.object.productListItem.list.ID)}" title="${Resource.msg('cart.registryitem','checkout',null)}">
 														${Resource.msg('cart.registryitem','checkout',null)}
 													</a>
@@ -843,7 +843,7 @@
 		<div class="cart-actions">
 
 			<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
-			<form class="cart-action-checkout" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
+			<form class="cart-action-checkout" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="checkout-form">
 				<fieldset>
 					<isif condition="${enableCheckout}">
 						<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
@@ -857,7 +857,7 @@
 				</fieldset>
 			</form>
 
-			<form class="cart-action-continue-shopping" action="${URLUtils.https('Cart-SubmitForm')}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.continueshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 						<i class="fa fa-angle-double-left left"></i>${Resource.msg('global.continueshopping','locale',null)}

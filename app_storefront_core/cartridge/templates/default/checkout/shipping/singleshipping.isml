@@ -54,7 +54,7 @@
 
 
 					<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
-					<isif condition="${pdict.CurrentCustomer.authenticated && customer.profile.addressBook.addresses.size() > 0}">
+					<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 
 						<div class="select-address">
 

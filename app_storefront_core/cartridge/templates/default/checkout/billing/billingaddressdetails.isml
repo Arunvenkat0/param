@@ -6,7 +6,7 @@
 	The dialog supports editing an existing address and removing an address.
 </iscomment>
 <div id="AddressForm" class="edit_address_form" >
-	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.https('COBilling-EditBillingAddress')}">
+	<form method="post" name="EditAddressForm" id="EditAddressForm" action="${URLUtils.continueURL()}">
 		<fieldset>
 			<div id="editprofile" class="editaddress">
 				<div class="keynote">

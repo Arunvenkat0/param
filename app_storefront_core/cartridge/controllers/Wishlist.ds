@@ -51,7 +51,8 @@ function show() {
     wishlistForm.get('addressbook').get('addresses').copyFrom(customer.profile.addressBook.addresses);
 
     view.get({
-        ProductList : productList.object
+        ProductList : productList.object,
+        ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
 }
 
@@ -131,7 +132,8 @@ function showOther() {
     Form.get('wishlist.items').copyFrom(productList.object.items);
 
     view.get({
-        ProductList : productList.object
+        ProductList : productList.object,
+        ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
 }
 

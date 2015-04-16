@@ -24,8 +24,8 @@
 <isif condition="${lineItem.product.custom.availableForInStorePickup}">
 	<isif condition="${!empty(lineItem.custom.fromStoreId)}">
 		<isset name="store" value="${dw.catalog.StoreMgr.getStore(lineItem.custom.fromStoreId)}" scope="page"/>
-	<iselseif condition="${!empty(session.custom.storeId)}">
-		<isset name="store" value="${dw.catalog.StoreMgr.getStore(session.custom.storeId)}" scope="page"/>
+	<iselseif condition="${!empty(pdict.CurrentSession.custom.storeId)}">
+		<isset name="store" value="${dw.catalog.StoreMgr.getStore(pdict.CurrentSession.custom.storeId)}" scope="page"/>
 	<iselse/>
 		<isset name="store" value="${null}" scope="page"/>
 	</isif>

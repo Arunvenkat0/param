@@ -10,7 +10,7 @@
 		
 		<iselse/>
 		
-			<form action="${URLUtils.https('Order-Orders')}" method="post" id="${pdict.CurrentForms.orders.htmlName}">
+			<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.orders.htmlName}">
 			
 			<div class="search-result-options">
 				<ispagingbar pageurl="${URLUtils.https('Order-History')}" pagingmodel="${pdict.OrderPagingModel}"/>

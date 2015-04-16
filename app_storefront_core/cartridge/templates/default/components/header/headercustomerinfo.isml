@@ -8,7 +8,7 @@
 
 	<iscomment>User has session, but not currently active (welcome back)</iscomment>
 	<li class="user-info">
-		<isif condition="${pdict.CurrentCustomer.registered && !customer.authenticated}">
+		<isif condition="${pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
 			${Resource.msg('headercustomerinfo.welcomeback', 'components', null)}
 			<isprint value="${pdict.CurrentCustomer.profile.firstName}"/>
 			<isprint value="${pdict.CurrentCustomer.profile.lastName}"/>

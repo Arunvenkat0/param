@@ -49,7 +49,8 @@ function Start() {
     response.renderTemplate('account/components/sendtofrienddialog', {
         ViewMode           : 'Edit',
         Product            : Product,
-        ProductOptionModel : ProductOptionModel
+        ProductOptionModel : ProductOptionModel,
+        ContinueURL        : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
     });
 }
 
@@ -63,7 +64,8 @@ function SendToFriendForm() {
     if (TriggeredAction != null) {
         if (TriggeredAction.formId == 'edit') {
             response.renderTemplate('account/components/sendtofrienddialog', {
-                ViewMode : 'Edit'
+                ViewMode    : 'Edit',
+                ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')       
             });
             return;
         }
@@ -88,7 +90,8 @@ function SendToFriendForm() {
             response.renderTemplate('account/components/sendtofrienddialog', {
                 ViewMode           : 'preview',
                 Product            : Product,
-                ProductOptionModel : ProductOptionModel
+                ProductOptionModel : ProductOptionModel,
+                ContinueURL        : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
             });
             return;
         }
@@ -108,7 +111,9 @@ function SendToFriendForm() {
      */
 
     // TODO view mode?
-    response.renderTemplate('account/components/sendtofrienddialog');
+    response.renderTemplate('account/components/sendtofrienddialog', {
+        ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+    });
 }
 
 function send() {
@@ -122,7 +127,9 @@ function send() {
         form.invalidateFormElement(sendToFriendForm.confirmfriendsemail);
 
         // TODO view mode?
-        response.renderTemplate('account/components/sendtofrienddialog');
+        response.renderTemplate('account/components/sendtofrienddialog', {
+        	ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+        });
         return;
     }
 

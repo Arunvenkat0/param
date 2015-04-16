@@ -93,10 +93,16 @@ function returnToForm(cart, params) {
     pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
 
     if (params) {
-        view.get(require('~/object').extend(params, {Basket : cart.object})).render('checkout/billing/billing');
+        view.get(require('~/object').extend(params, {
+        	Basket      : cart.object,
+        	ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
+        })).render('checkout/billing/billing');
     }
     else {
-        view.get({Basket : cart.object}).render('checkout/billing/billing');
+        view.get({
+        	Basket      : cart.object,
+        	ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
+        }).render('checkout/billing/billing');
     }
 }
 
@@ -446,7 +452,9 @@ function editAddress() {
         Form.get(session.forms.billingaddress.states).copyFrom(address);
     }
 
-    view.get().render('checkout/billing/billingaddressdetails');
+    view.get({
+        ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+    }).render('checkout/billing/billingaddressdetails');
 }
 
 /**
@@ -457,7 +465,9 @@ function editBillingAddress() {
     billingAddressForm.handleAction({
         'apply'  : function (formgroup) {
             if (!Form.get(session.forms.billingaddress).copyTo(session.forms.billingaddress.object)) {
-                view.get().render('checkout/billing/billingaddressdetails');
+                view.get({
+                    ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+                }).render('checkout/billing/billingaddressdetails');
                 return;
             }
             else {
@@ -472,7 +482,9 @@ function editBillingAddress() {
                 return;
             }
             else {
-                view.get().render('checkout/billing/billingaddressdetails');
+                view.get({
+                    ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+                }).render('checkout/billing/billingaddressdetails');
                 return;
             }
         }

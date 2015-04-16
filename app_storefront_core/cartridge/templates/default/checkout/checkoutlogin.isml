@@ -15,7 +15,7 @@
 			<div class="login-box-content clearfix">
 				<isif condition="${!pdict.CurrentCustomer.registered}">
 				<p>${Resource.msg('checkoutlogin.guestmessage','checkout',null)}</p>
-				<form action="${URLUtils.https('COCustomer-LoginForm')}" method="post">
+				<form action="${URLUtils.httpsContinue()}" method="post">
 				<fieldset>
 					<div class="form-row formbuttonrow">
 						<button type="submit" value="${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}" name="${pdict.CurrentForms.login.unregistered.htmlName}"><span>${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}</span></button>
@@ -26,7 +26,7 @@
 				</isif>
 				<iscomment>new customer</iscomment>
 				<p>${Resource.msg('globalaccount.createmessage','locale',null)}</p>
-				<form action="${URLUtils.https('COCustomer-LoginForm')}" method="post">
+				<form action="${URLUtils.httpsContinue()}" method="post">
 					<fieldset>
 						<div class="form-row form-row-button">
 							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}"><span>${Resource.msg('global.createnowbutton','locale',null)}</span></button>
@@ -50,7 +50,6 @@
 
 	<div class="col-2">
 		<iscomment>returning customer</iscomment>
-		<isset name="FormController" value="${'COCustomer-LoginForm'}" scope="pdict"/>
 		<isinclude template="account/login/logininclude"/>
 	</div>
 </div>

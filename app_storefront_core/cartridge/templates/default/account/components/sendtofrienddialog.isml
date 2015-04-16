@@ -43,7 +43,7 @@
 
 <isdecorate template="${DecoratorTemplate}">
 <isif condition="${pdict.CurrentCustomer.registered}">
-<form action="${URLUtils.https('SendToFriend-SendToFriendForm')}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
+<form action="${URLUtils.continueURL()}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 	<div id="send-to-friend-main">
 		<isif condition="${IsRegistry || IsWishList || IsProductDetail}">
 			<h1>${Resource.msg('global.sendtoafriend','locale',null)}</h1>
