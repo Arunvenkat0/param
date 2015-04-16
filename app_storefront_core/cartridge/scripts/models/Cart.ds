@@ -479,7 +479,7 @@ var Cart = AbstractModel.extend(
             // get the list of shipments
             var shipments = that.getShipments();
 
-            Transaction.wrap(function(){
+            dw.system.Transaction.wrap(function(){
                 for (var i = 0; i < shipments.length; i++) {
                     var shipment = shipments[i];
 
