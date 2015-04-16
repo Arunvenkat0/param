@@ -134,6 +134,10 @@ function singleShipping() {
         'shipToMultiple' : function(formgroup) {
             require('./COShippingMultiple').Start();
             return;
+        },
+        'error' : function(formgroup) {
+			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+            return;
         }
     });
 }
