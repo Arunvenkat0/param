@@ -25,4 +25,4 @@ function show() { }
 exports.Show    = guard.ensure(['get'],show);
 ```
 
-Please note the use of the [guard concept]{@module:guard} which allows developers to easily declare access restrictions for the given endpoint such as request method or protocol.
+Please note the use of the [guard concept]{@link module:guard} which allows developers to easily declare access restrictions for the given endpoint such as request method or protocol.
