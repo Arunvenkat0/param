@@ -9,17 +9,16 @@ var View = require('./View');
  * @class LoginView
  * @extends module:views/View~View
  */
-module.exports = View.extend({
+module.exports = View.extend(
+/** @lends module:views/View~View.prototype*/
+{
 
     // does not work, hence workaround via init()
     //ContinueURL : dw.web.URLUtils.https('Login-LoginForm'),
 
     template       : 'account/login/accountlogin',
     /**
-     * Generates the view consumed by template storelocator/storelocatorresults
-     *
-     * @param {object} params stores (Search result for stores), type (Supported values are findbyzip, findbystate and findbycountry)
-     * searchKey (The value used to find Stores) properties are supported
+     * Generates the view consumed by the login templates
      *
      * @constructs
      * @extends module:views/View~View
