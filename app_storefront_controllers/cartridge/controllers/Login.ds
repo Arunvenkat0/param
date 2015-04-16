@@ -13,11 +13,9 @@ var Form           = require('~/cartridge/scripts/models/Form');
 var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
 
-var LOGIN_TEMPLATE = 'account/login/accountlogin';
 var LOGGER         = dw.system.Logger.getLogger('login');
 
 /* API Includes */
-var Cart        = require('~/cartridge/scripts/models/Cart');
 var Customer    = require('~/cartridge/scripts/models/Customer');
 var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
@@ -40,6 +38,11 @@ function show()
 
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
+    // save return URL in session
+    if (request.httpParameterMap.original.submitted) {
+        session.custom.TargetLocation = request.httpParameterMap.original.value;
+    }
+
     var v = view.get('views/LoginView',{
         RegistrationStatus : false
     });
@@ -61,22 +64,12 @@ function show()
  */
 function getTargetUrl()
 {
-    // get the target action which requested this login step before the
-    // form is cleared
-    // @TODO Remove this session based action passing
-    var targetAction = session.forms.login.targetAction.value;
-    var targetParameters = session.forms.login.targetParameters.value;
-
-    if (request.httpParameterMap.original.submitted) {
+    if (session.custom.TargetLocation) {
+        var target = session.custom.TargetLocation;
+        delete session.custom.TargetLocation;
         //@TODO make sure only path, no hosts are allowed as redirect target
-        dw.system.Logger.info('Redirecting to "{0}" after successful login',request.httpParameterMap.original.value);
-        return decodeURI(request.httpParameterMap.original.value);
-    } else if (!empty(targetAction)) {
-        if (empty(targetParameters)) {
-            return dw.web.URLUtils.https(targetAction);
-        } else {
-            return dw.web.URLUtils.https(targetAction, JSON.parse(targetParameters));
-        }
+        dw.system.Logger.info('Redirecting to "{0}" after successful login',target);
+        return decodeURI(target);
     } else {
         return dw.web.URLUtils.https('Account-Show');
     }

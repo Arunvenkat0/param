@@ -275,6 +275,7 @@ function getProductLineItem(uuid) {
  * @param {String} liUUID      The UUID of the line item
  * @param {String} storeId     The ID of the store
  * @param {String} storepickup
+ * @transactional
  */
 function setStoreInLineItem( basket, liUUID, storeId, storepickup )
 {
@@ -282,53 +283,55 @@ function setStoreInLineItem( basket, liUUID, storeId, storepickup )
     var lineItemItr = basket.allProductLineItems.iterator();
     var productLineItem;
 
-    while (lineItemItr.hasNext()) {
-        productLineItem = lineItemItr.next();
-        if (productLineItem.UUID === liUUID) {
-            if (storepickup.equalsIgnoreCase('true')) {
-                if(productLineItem.product.custom.availableForInStorePickup) {
-                    if(!empty(storeId)) {
-                        var store = dw.catalog.StoreMgr.getStore(storeId);
-                        if(!empty(store) && !empty(store.custom.inventoryListId)) {
-                            var storeinventory = dw.catalog.ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
-                            if(!empty(storeinventory)) {
-                                if(!empty(storeinventory.getRecord(productLineItem.productID)) && storeinventory.getRecord(productLineItem.productID).ATS.value >= productLineItem.quantityValue) {
+    dw.system.Transaction.wrap(function(){
+        while (lineItemItr.hasNext()) {
+            productLineItem = lineItemItr.next();
+            if (productLineItem.UUID === liUUID) {
+                if (storepickup.equalsIgnoreCase('true')) {
+                    if(productLineItem.product.custom.availableForInStorePickup) {
+                        if(!empty(storeId)) {
+                            var store = dw.catalog.StoreMgr.getStore(storeId);
+                            if(!empty(store) && !empty(store.custom.inventoryListId)) {
+                                var storeinventory = dw.catalog.ProductInventoryMgr.getInventoryList(store.custom.inventoryListId);
+                                if(!empty(storeinventory)) {
+                                    if(!empty(storeinventory.getRecord(productLineItem.productID)) && storeinventory.getRecord(productLineItem.productID).ATS.value >= productLineItem.quantityValue) {
 
-                                    productLineItem.custom.fromStoreId = store.ID;
-                                    productLineItem.setProductInventoryList(storeinventory);
+                                        productLineItem.custom.fromStoreId = store.ID;
+                                        productLineItem.setProductInventoryList(storeinventory);
 
+                                    } else {
+                                        args.ErrorCode = 'Not available in that quantity';
+                                        return;
+                                    }
                                 } else {
-                                    args.ErrorCode = 'Not available in that quantity';
+                                    args.ErrorCode = 'Store inventory list does not exist';
                                     return;
                                 }
                             } else {
-                                args.ErrorCode = 'Store inventory list does not exist';
+                                args.ErrorCode = 'Store object not available';
                                 return;
                             }
                         } else {
-                            args.ErrorCode = 'Store object not available';
+                            args.ErrorCode = 'No store ID available';
                             return;
                         }
                     } else {
-                        args.ErrorCode = 'No store ID available';
+                        args.ErrorCode = 'Product not in store available';
                         return;
                     }
                 } else {
-                    args.ErrorCode = 'Product not in store available';
-                    return;
+                    productLineItem.custom.fromStoreId='';
+                    productLineItem.setProductInventoryList(null);
+                    //loop over the shipments to find the one with out instore to assign it to
+                    //productLineItem.shipment = null;
+                    //var shipmentToDelete
+                    //check if the default shipment is instore or not
+                    productLineItem.setShipment(basket.getDefaultShipment());
                 }
-            } else {
-                productLineItem.custom.fromStoreId='';
-                productLineItem.setProductInventoryList(null);
-                //loop over the shipments to find the one with out instore to assign it to
-                //productLineItem.shipment = null;
-                //var shipmentToDelete
-                //check if the default shipment is instore or not
-                productLineItem.setShipment(basket.getDefaultShipment());
+                break;
             }
-            break;
         }
-    }
+    });
 
     return args;
 }
