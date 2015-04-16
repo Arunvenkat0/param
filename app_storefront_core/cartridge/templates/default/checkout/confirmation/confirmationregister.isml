@@ -13,10 +13,10 @@
 				
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 				<fieldset>
-					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.firstname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.lastname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.email}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.pdict.CurrentCustomer.emailconfirm}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" type="password" attribute1="autocomplete" value1="off"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" type="password" attribute1="autocomplete" value1="off"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>

@@ -231,7 +231,7 @@ function startRegister() {
     Form.get('profile').clear();
 
     if (Form.get('login.username').value() !== null) {
-        Form.get('profileForm.customer.email').object.value = Form.get('login.username').object.value;
+        Form.get('profile.customer.email').object.value = Form.get('login.username').object.value;
     }
 
     view.get({
