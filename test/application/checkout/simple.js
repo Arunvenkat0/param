@@ -80,7 +80,7 @@ describe('Checkout Simple Product', function () {
 	});
 	it('fill out billing page', function (done) {
 		client
-			.setValue('[name$="billing_billingAddress_email_emailAddress"', 'jsmith@demandware.com')
+			.setValue('[name$="billing_billingAddress_email_emailAddress"]', 'jsmith@demandware.com')
 			.setValue('[name$="billing_paymentMethods_creditCard_owner"]', 'John Smith')
 			.setValue('[name$="billing_paymentMethods_creditCard_number"]', '4111111111111111')
 			.selectByIndex('[name$="billing_paymentMethods_creditCard_year"]', 2)
