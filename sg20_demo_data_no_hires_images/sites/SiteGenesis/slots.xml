@@ -93,10 +93,7 @@
         <content>
             <products>
                 <product product-id="008884303989"/>
-                <product product-id="008884303996"/>
-                <product product-id="008884304047"/>
                 <product product-id="008884304054"/>
-                <product product-id="008884304085"/>
                 <product product-id="008885004533"/>
             </products>
         </content>
@@ -455,9 +452,9 @@ Here you will find answers to your questions about shopping at our online store,
         <callout-msg xml:lang="x-default">Product Recommendations</callout-msg>
         <content>
             <products>
-                <product product-id="008885535488"/>
-                <product product-id="013742003048"/>
-                <product product-id="095068990509"/>
+                <product product-id="008884303989"/>
+                <product product-id="008884304054"/>
+                <product product-id="008885004533"/>
             </products>
         </content>
     </slot-configuration>
