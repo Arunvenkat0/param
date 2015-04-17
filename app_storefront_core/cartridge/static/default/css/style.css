@@ -2667,6 +2667,11 @@ button.add-all-to-cart {
     .bonus-product-list .selected-bonus-item .remove-link:hover {
       color: #424242; }
 
+.bonus-discount-container .promo-details {
+  display: none; }
+  .bonus-discount-container .promo-details.visible {
+    display: block; }
+
 .send-to-friend-product {
   border-bottom: 1px solid #e0e0e0;
   border-top: 1px solid #e0e0e0;
