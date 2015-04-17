@@ -27,13 +27,12 @@ gulp.task('enable-watch-mode', function () { watching = true })
 
 gulp.task('css', function () {
 	var streams = merge();
-	var development = (gutil.env.type === 'development' || gutil.env.type === 'dev');
 	paths.css.forEach(function (path) {
 		streams.add(gulp.src(path.src + '*.scss')
 			.pipe(gif(development, sourcemaps.init()))
 			.pipe(sass())
 			.pipe(prefix({cascade: true}))
-			.pipe(gif(development, sourcemaps.write('./')))
+			.pipe(gif(gutil.env.sourcemaps, sourcemaps.write('./')))
 			.pipe(gulp.dest(path.dest)));
 	});
 	return streams;
@@ -42,7 +41,7 @@ gulp.task('css', function () {
 gulp.task('js', function () {
 	var opts = {
 		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
-		debug: (gutil.env.type === 'development' || gutil.env.type === 'dev')
+		debug: (gutil.env.sourcemaps)
 	}
 	if (watching) {
 		opts = xtend(opts, watchify.args);
@@ -159,7 +158,7 @@ gulp.task('styleguide-watching', function () {styleguideWatching = true});
 gulp.task('js:styleguide', function () {
 	var opts = {
 		entries: ['./styleguide/js/main.js'],
-		debug: (gutil.env.type === 'development' || gutil.env.type === 'dev')
+		debug: (gutil.env.sourcemaps)
 	}
 	if (styleguideWatching) {
 		opts = xtend(opts, watchify.args);
