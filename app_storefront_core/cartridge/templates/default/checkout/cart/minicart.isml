@@ -37,7 +37,7 @@
 	<iselse/>
 		<a class="mini-cart-link mini-cart-empty" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">
 			<i class="fa fa-shopping-cart"></i>
-			<span class="minicart-quantity"></span>
+			<span class="minicart-quantity">0</span>
 		</a>
 	</isif>
 </div>

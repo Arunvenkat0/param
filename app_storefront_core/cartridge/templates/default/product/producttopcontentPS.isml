@@ -180,29 +180,17 @@
 
 	<div class="product-actions">
 		<h2 class="visually-hidden">Product Actions</h2>
+		<isinclude template="components/socialsharing"/>
 
-		<ul class="menu">
-			<isif condition="${pdict.isBundle}">
-				<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
-				<iselse/>
-					<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
-				</isif>
-				<li><a class="wl-action" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a></li>
-				<li><a class="wl-action" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a></li>
+		<isif condition="${pdict.isBundle}">
+			<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
+				<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
+			<iselse/>
+				<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
 			</isif>
-			<li>
-				<a class="send-to-friend"
-				   title="${Resource.msg('product.sendfriend','product',null)}"
-				   href="${URLUtils.http('SendToFriend-Start', 'pid', pdict.ProductSet.ID, 'source', 'productdetail')}">
-				   ${Resource.msg('product.sendfriend','product',null)}
-				</a>
-			</li>
-		</ul>
-
-		<!-- AddThis Button BEGIN -->
-		<div class="addthis_toolbox addthis_default_style "></div>
-		<!-- AddThis Button END -->
+			<a data-action="wishlist" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
+			<a data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
+		</isif>
 
 	</div><!--  end details block -->
 

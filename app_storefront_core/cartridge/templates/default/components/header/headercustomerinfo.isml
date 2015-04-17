@@ -5,21 +5,94 @@
 	<li class="user-info">
 		<iscomment>User has session, but not authenticated</iscomment>
 		<isif condition="${customer.registered && !customer.authenticated}">
-			<a class="user-account-login" href="${URLUtils.https('Account-Show')}" id="menuLink1" title="${Resource.msg('global.login', 'locale', null)}">
+			<a class="user-account-login" href="${URLUtils.https('Account-Show')}" id="menuLink1" title="${Resource.msg('global.accountlink', 'locale', null)}">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('global.login', 'locale', null)}</span>
+				<span>${Resource.msg('global.accountlink', 'locale', null)}</span>
 			</a>
+			<div class="menu-panel user-noauth">
+				<div class="menu-slot">
+					<isslot id="header-usermenu" description="Slot the is part of the user dropdown menu for site above 768 width" context="global" />
+				</div>
+				<div class="menu-links">
+					<h3>${customer.profile.firstName} ${customer.profile.lastName}</h3>
+					<ul>
+						<li>
+							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Account-Show')}" class="user-account-login">
+								${Resource.msg('global.accountlink', 'locale', null)}
+							</a>
+						</li>
+						<li>
+							<a class="user-logout buttonstyle" title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}">
+								${Resource.msg('global.logout', 'locale', null)}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		<iscomment>User has sesssion and is validated</iscomment>
 		<iselseif condition="${customer.registered}">
 			<a class="user-account" href="${URLUtils.https('Account-Show')}" title="<isprint value="${customer.profile.firstName}"/> <isprint value="${customer.profile.lastName}"/>">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('global.accountbreadcrumb', 'locale', null)}</span>
+				<span>${Resource.msg('global.accountlink', 'locale', null)}</span>
 			</a>
+			<div class="menu-panel user-auth">
+				<div class="menu-slot">
+					<isslot id="header-usermenu" description="Slot the is part of the user dropdown menu for site above 768 width" context="global" />
+				</div>
+				<div class="menu-links">
+					<ul>
+						<li class="user-name">
+							<h3><isprint value="${customer.profile.firstName}"/> <isprint value="${customer.profile.lastName}"/></h3>
+						</li>
+						<li class="user-account">
+							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Account-Show')}">
+								${Resource.msg('global.accountlink', 'locale', null)}
+							</a>
+						</li>
+						
+						<li>
+							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Order-History')}">
+								${Resource.msg('global.link.orders', 'locale', null)}
+							</a>
+						</li>					
+						<li>
+							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Wishlist-Show')}">
+								${Resource.msg('global.header.wishlistlink', 'locale', null)}
+							</a>
+						</li>					
+						<li>
+							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('GiftRegistry-Start')}">
+								${Resource.msg('global.header.registrylink', 'locale', null)}
+							</a>
+						</li>					
+						<li>
+							<a class="user-logout buttonstyle" title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}">
+								${Resource.msg('global.logout', 'locale', null)}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		<iscomment>User has no session</iscomment>
 		<iselse/>
 			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">
 				<i class="fa fa-user"></i>
 				<span>${Resource.msg('global.login', 'locale', null)}</span>
 			</a>
+			<div class="menu-panel user-none">
+				<div class="menu-slot">
+					<isslot id="header-usermenu" description="Slot the is part of the user dropdown menu for site above 768 width" context="global" />
+				</div>
+				<div class="menu-links">
+					<ul>
+						<li>
+							<a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">${Resource.msg('global.login', 'locale', null)}</a>
+						</li>
+						<li>
+							<a title="${Resource.msg('global.register', 'locale', null)}" href="${URLUtils.https('Account-StartRegister')}" class="user-register">${Resource.msg('global.register','locale',null)}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</isif>
 	</li>
