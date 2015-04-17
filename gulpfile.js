@@ -29,7 +29,7 @@ gulp.task('css', function () {
 	var streams = merge();
 	paths.css.forEach(function (path) {
 		streams.add(gulp.src(path.src + '*.scss')
-			.pipe(gif(development, sourcemaps.init()))
+			.pipe(gif(gutil.env.sourcemaps, sourcemaps.init()))
 			.pipe(sass())
 			.pipe(prefix({cascade: true}))
 			.pipe(gif(gutil.env.sourcemaps, sourcemaps.write('./')))
