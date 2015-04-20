@@ -3,14 +3,8 @@
 /** @module views/LoginView */
 var View = require('./View');
 
-/**
- * The view for the login page
- *
- * @class LoginView
- * @extends module:views/View~View
- */
 module.exports = View.extend(
-/** @lends module:views/View~View.prototype*/
+/** @lends module:views/LoginView.prototype*/
 {
 
     // does not work, hence workaround via init()
@@ -20,7 +14,7 @@ module.exports = View.extend(
     /**
      * Generates the view consumed by the login templates
      *
-     * @constructs
+     * @constructs module:views/LoginView
      * @extends module:views/View~View
      */
     init : function (params) {
