@@ -27,7 +27,6 @@ var app = require('~/cartridge/scripts/app');
 var billingForm = require('~/cartridge/scripts/models/Form').get('billing');
 var billingAddressForm = require('~/cartridge/scripts/models/Form').get('billingaddress');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * Starting point for billing. After a successful shipping setup both COShipping
@@ -74,6 +73,7 @@ function start(cart) {
         cart.calculate();
     });
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
     returnToForm(cart);
 }
@@ -90,6 +90,7 @@ function returnToForm(cart, params) {
         });
     }
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
 
     if (params) {

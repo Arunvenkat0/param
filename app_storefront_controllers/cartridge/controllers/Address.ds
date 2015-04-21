@@ -12,7 +12,6 @@ var Transaction         = require('dw/system/Transaction');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var Form = require('~/cartridge/scripts/models/Form');
 var Address = require('~/cartridge/scripts/models/Address');
 var Content = require('~/cartridge/scripts/models/Content');
@@ -22,6 +21,7 @@ var addressForm = Form.get('customeraddress');
  * List addresses in customer profile Input: (none)
  */
 function list() {
+   var pageMeta = require('~/cartridge/scripts/meta');
    pageMeta.update(Content.get('myaccount-addresses').object);
 
    app.getView().render('account/addressbook/addresslist');

@@ -16,7 +16,6 @@ var Transaction = require('dw/system/Transaction');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var loginForm = require('~/cartridge/scripts/models/Form').get('login');
-var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)
@@ -50,6 +49,8 @@ function start() {
         }
 
         var loginAsset = Content.get('myaccount-login');
+        
+        var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(loginAsset);
         
         app.getView({
@@ -90,6 +91,8 @@ function showLoginForm() {
 
     if (formResult) {
     	var loginAsset = Content.get('myaccount-login');
+        
+        var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(loginAsset);
         
         app.getView({

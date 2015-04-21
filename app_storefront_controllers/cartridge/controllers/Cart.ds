@@ -19,7 +19,6 @@ var Transaction = require('dw/system/Transaction');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var cartForm = require('~/cartridge/scripts/models/Form').get('cart');
-var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * Renders the basket content.
@@ -181,6 +180,8 @@ function submitForm() {
 
     if (formResult) {
     	var cartAsset = Content.get('cart');
+        
+        var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
         app.getView('CartView', formResult).render('checkout/cart/cart');

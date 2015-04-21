@@ -15,7 +15,6 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var Form = require('~/cartridge/scripts/models/Form');
 var orderListForm = Form.get('orders.orderlist');
-var pageMeta = require('~/cartridge/scripts/meta');
 
 /**
  * Renders a page with the order history of the current logged in customer.
@@ -36,6 +35,7 @@ function history()
     orderListForm.clear();
     orderListForm.copyFrom(orderPagingModel.pageElements);
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
 
     app.getView({

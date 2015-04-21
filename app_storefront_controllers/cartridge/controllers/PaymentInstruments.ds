@@ -13,7 +13,6 @@ var Transaction = require('dw/system/Transaction');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var Form = require('~/cartridge/scripts/models/Form');
 var paymentForm = Form.get('paymentinstruments');
 
@@ -34,6 +33,7 @@ function list()
     paymentForm.clear();
     paymentForm.get('creditcards.storedcards').copyFrom(paymentInstruments);
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-paymentsettings'));
 
     app.getView({

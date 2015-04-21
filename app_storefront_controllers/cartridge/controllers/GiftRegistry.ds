@@ -14,7 +14,6 @@ var ProductList = require('~/cartridge/scripts/models/ProductList');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var Form = require('~/cartridge/scripts/models/Form');
 var giftRegistryForm = Form.get('giftregistry');
 
@@ -53,6 +52,8 @@ function start() {
 	Form.get(productListsForm.items).copyFrom(ProductLists);
     
     var accountGiftRegistry = Content.get('myaccount-giftregistry');
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(accountGiftRegistry);
 
     app.getView().render('account/giftregistry/registrylist');

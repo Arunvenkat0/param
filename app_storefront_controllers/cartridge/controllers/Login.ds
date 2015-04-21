@@ -8,7 +8,6 @@
 
 var app            = require('~/cartridge/scripts/app');
 var guard          = require('~/cartridge/scripts/guard');
-var pageMeta       = require('~/cartridge/scripts/meta');
 var Form           = require('~/cartridge/scripts/models/Form');
 var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
@@ -36,6 +35,7 @@ function show()
         loginForm.object.rememberme.value = true;
     }
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
     // save return URL in session

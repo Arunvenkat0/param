@@ -24,7 +24,6 @@ var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var singleShippingForm = require('~/cartridge/scripts/models/Form').get('singleshipping');
 var shippingAddressForm = require('~/cartridge/scripts/models/Form').get('shippingaddress');
 
@@ -65,6 +64,7 @@ function start() {
                 require('./COBilling').Start();
                 return;
             } else {
+                var pageMeta = require('~/cartridge/scripts/meta');
                 pageMeta.update({
                     pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
                 });
@@ -124,6 +124,7 @@ function singleShipping() {
         'selectAddress' : function(formgroup) {
             updateAddressDetails(Cart.get());
 
+            var pageMeta = require('~/cartridge/scripts/meta');
             pageMeta.update({
                 pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
             });
