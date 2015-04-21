@@ -45,7 +45,7 @@ function editProfile() {
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     view.get({
-        bctext2 : dw.web.Resource.msg('account.editaccount', 'account', null),
+        bctext2 : dw.web.Resource.msg('account.user.registration.editaccount', 'account', null),
         Action : 'edit',
         ContinueURL : dw.web.URLUtils.https('Account-EditForm')
     }).render('account/user/registration');
@@ -106,12 +106,14 @@ function passwordReset() {
  * based password reset
  * @private
  */
-function passwordResetFormHandler(templateName) {
+function passwordResetFormHandler(templateName, continueURL) {
     var resetPasswordToken, passwordemail;
 
     Form.get('profile').handleAction({
         'cancel' : function() {
-            view.get().render(templateName);
+            view.get({
+            	ContinueURL : continueURL
+            }).render(templateName);
         },
         'send' : function() {
             var resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
@@ -127,17 +129,20 @@ function passwordResetFormHandler(templateName) {
 
                 view.get({
                     ErrorCode : null,
-                    ShowContinue : true
+                    ShowContinue : true,
+                    ContinueURL : continueURL
                 }).render('account/password/requestpasswordreset_confirm');
             } else {
                 view.get({
-                    ErrorCode : 'formnotvalid'
+                    ErrorCode : 'formnotvalid',
+                    ContinueURL : continueURL
                 }).render(templateName);
             }
         },
         'error' : function() {
             view.get({
-                ErrorCode : 'formnotvalid'
+                ErrorCode : 'formnotvalid',
+                ContinueURL : continueURL
             }).render(templateName);
         }
     });
@@ -147,7 +152,7 @@ function passwordResetFormHandler(templateName) {
  * The form handler for password resets.
  */
 function passwordResetForm() {
-    passwordResetFormHandler('account/password/requestpasswordreset');
+    passwordResetFormHandler('account/password/requestpasswordreset', dw.web.URLUtils.https('Account-PasswordResetForm'));
 }
 
 /**
@@ -156,7 +161,9 @@ function passwordResetForm() {
 function passwordResetDialog() {
     // @FIXME reimplement using dialogify
     Form.get('requestpassword').clear();
-    view.get().render('account/password/requestpasswordresetdialog');
+    view.get({
+        ContinueURL : dw.web.URLUtils.https('Account-PasswordResetDialogForm')
+    }).render('account/password/requestpasswordresetdialog');
 }
 
 /**
@@ -164,7 +171,7 @@ function passwordResetDialog() {
  */
 function passwordResetDialogForm() {
     // @FIXME reimplement using dialogify
-    passwordResetFormHandler('account/password/requestpasswordresetdialog');
+    passwordResetFormHandler('account/password/requestpasswordresetdialog', dw.web.URLUtils.https('Account-PasswordResetDialogForm'));
 }
 
 /**
@@ -178,7 +185,9 @@ function setNewPassword() {
     if (empty(resettingCustomer)) {
         response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
     } else {
-        view.get().render('account/password/setnewpassword');
+        view.get({
+        	ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+        }).render('account/password/setnewpassword');
     }
 }
 
@@ -189,7 +198,9 @@ function setNewPasswordForm() {
 
     Form.get('profile').handleAction({
         'cancel' : function() {
-            view.get().render('account/password/setnewpassword');
+            view.get({
+            	ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+            }).render('account/password/setnewpassword');
             return;
         },
         'send' : function() {
@@ -201,13 +212,16 @@ function setNewPasswordForm() {
 
                 if (Form.get('resetpassword.password').value() !== Form.get('resetpassword.passwordconfirm').value()) {
                     Form.get('resetpassword.passwordconfirm').invalidate();
-                    view.get().render('account/password/setnewpassword');
+                    view.get({
+                        ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+                    }).render('account/password/setnewpassword');
                 } else {
 
                     success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), Form.get('resetpassword.password').value());
                     if (!success) {
                         view.get({
-                            ErrorCode : 'formnotvalid'
+                            ErrorCode : 'formnotvalid',
+                            ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
                         }).render('account/password/setnewpassword');
                     } else {
                         passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);

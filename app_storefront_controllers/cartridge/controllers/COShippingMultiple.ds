@@ -51,7 +51,8 @@ function start() {
         });
 
         view.get({
-            Basket : cart.object
+            Basket      : cart.object,
+            ContinueURL : dw.web.URLUtils.https('COShippingMultiple-MultiShippingAddresses')
         }).render('checkout/shipping/multishipping/multishippingaddresses');
     }
     else {
@@ -85,7 +86,8 @@ function multiShippingAddresses() {
             }
             else {
                 view.get({
-                    Basket : cart.object
+                    Basket      : cart.object,
+                    ContinueURL : dw.web.URLUtils.https('COShippingMultiple-MultiShippingAddresses')            
                 }).render('checkout/shipping/multishipping/multishippingaddresses');
                 return;
             }
@@ -121,7 +123,8 @@ function startShipments() {
         });
 
         view.get({
-            Basket : cart.object
+            Basket      : cart.object,
+            ContinueURL : dw.web.URLUtils.https('COShippingMultiple-MultiShippingMethods')
         }).render('checkout/shipping/multishipping/multishippingshipments');
     }
     else {
@@ -146,8 +149,9 @@ function multiShippingMethods() {
 
                     if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
                         view.get({
-                            Basket : Cart.get().object
-                        }).render('checkout/shipping/multishipping/multishippingaddresses');
+                            Basket      : Cart.get().object,
+                            ContinueURL : dw.web.URLUtils.https('COShippingMultiple-MultiShippingMethods')
+                        }).render('checkout/shipping/multishipping/multishippingshipments');
                         return;
                     }
                 }
@@ -210,7 +214,10 @@ function editAddresses() {
         }
         else {
             session.forms.multishipping.editAddress.addressList.setOptions(addresses.iterator());
-            view.get({Basket : cart.object}).render('checkout/shipping/multishipping/editaddresses');
+            view.get({
+            	Basket         : cart.object,
+            	ContinueURL    : dw.web.URLUtils.https('COShippingMultiple-EditForm')
+            }).render('checkout/shipping/multishipping/editaddresses');
         }
 
         return;
@@ -234,7 +241,9 @@ function editForm() {
         'save'          : function (formgroup) {
             var addEditAddressResult = addEditAddress();
             if (addEditAddressResult.error) {
-                view.get().render('checkout/shipping/multishipping/editaddresses');
+                view.get({
+                	ContinueURL    : dw.web.URLUtils.https('COShippingMultiple-EditForm')
+                }).render('checkout/shipping/multishipping/editaddresses');
                 return;
             }
 
@@ -252,7 +261,10 @@ function editForm() {
 
             Form.get(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             Form.get(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
-            view.get({Basket : Cart.get().object}).render('checkout/shipping/multishipping/editaddresses');
+            view.get({
+            	Basket : Cart.get().object,
+                ContinueURL    : dw.web.URLUtils.https('COShippingMultiple-EditForm')
+            }).render('checkout/shipping/multishipping/editaddresses');
 
             return;
         }

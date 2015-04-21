@@ -127,7 +127,9 @@ function singleShipping() {
             pageMeta.update({
                 pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
             });
-            view.get().render('checkout/shipping/singleshipping');
+            view.get({
+                    ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping')
+            }).render('checkout/shipping/singleshipping');
 
             return;
         },
@@ -348,7 +350,9 @@ function editAddress() {
         Form.get(session.forms.shippingaddress.states).copyFrom(shippingAddress);
     }
 
-    view.get().render('checkout/shipping/shippingaddressdetails');
+    view.get({
+    	ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
+    }).render('checkout/shipping/shippingaddressdetails');
 }
 
 /**
@@ -359,7 +363,9 @@ function editShippingAddress() {
     var formResult = shippingAddressForm.handleAction({
         'apply' : function(formgroup) {
             if (!Form.get(session.forms.shippingaddress).copyTo(ShippingAddress) || !Form.get(session.forms.shippingaddress.states).copyTo(ShippingAddress)) {
-                view.get().render('checkout/shipping/shippingaddressdetails');
+                view.get({
+                    ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
+                }).render('checkout/shipping/shippingaddressdetails');
                 return;
             } else {
                 view.get().render('components/dialog/dialogapply');

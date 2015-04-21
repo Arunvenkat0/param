@@ -83,7 +83,8 @@ function showConfirmation(order) {
 
     pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
     view.get({
-        Order : order
+        Order       : order,
+        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
     }).render('checkout/confirmation/confirmation');
 }
 
