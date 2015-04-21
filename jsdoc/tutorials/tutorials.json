@@ -4,6 +4,9 @@
         "children": {
             "CreateController": {
                 "title": "How to create a new Controller"
+            },
+            "CachingResponses": {
+                "title": "How to cache responses"
             }
         }
     },
