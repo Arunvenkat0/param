@@ -7,17 +7,16 @@
  */
 
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var View = require('~/cartridge/scripts/views/View');
+var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders the home page.
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
-    pageMeta.update(rootFolder);
+    require('~/cartridge/scripts/meta').update(rootFolder);
 
-    new View().render('content/home/homepage');
+    view.get().render('content/home/homepage');
 }
 
 /**
@@ -25,7 +24,7 @@ function show() {
  * This is designed as a remote include to achieve optimal caching results for the header
  */
 function includeHeader() {
-    new View().render('components/header/header');
+    view.get().render('components/header/header');
 }
 
 /**
@@ -35,7 +34,7 @@ function includeHeader() {
  * @deprecated Converted into a template include
  */
 function includeHeaderMenu() {
-    new View().render('components/header/headermenu');
+    view.get().render('components/header/headermenu');
 }
 
 /**
@@ -45,7 +44,7 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    new View().render('components/header/headercustomerinfo');
+    view.get().render('components/header/headercustomerinfo');
 }
 
 /**
@@ -55,7 +54,7 @@ function errorNotFound() {
     // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
     // remote includes which the WA won't resolve
     response.setStatus(410);
-    new View().render('error/notfound');
+    view.get().render('error/notfound');
 }
 
 /**
@@ -63,7 +62,7 @@ function errorNotFound() {
  */
 function mobileSite() {
     session.custom.device = 'mobile';
-    new View().render('components/changelayout');
+    view.get().render('components/changelayout');
 }
 
 /**
@@ -71,21 +70,21 @@ function mobileSite() {
  */
 function fullSite() {
     session.custom.device = 'fullsite';
-    new View().render('components/changelayout');
+    view.get().render('components/changelayout');
 }
 
 /**
  * TODO remove - not responsive
  */
 function setLayout() {
-    new View().render('components/setlayout');
+    view.get().render('components/setlayout');
 }
 
 /**
  * TODO remove - not responsive
  */
 function deviceLayouts() {
-    new View().render('util/devicelayouts');
+    view.get().render('util/devicelayouts');
 }
 
 /*

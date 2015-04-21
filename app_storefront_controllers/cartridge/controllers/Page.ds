@@ -7,11 +7,9 @@
 
 /* API Includes */
 var Content = require('~/cartridge/scripts/models/Content');
-var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
 var view = require('~/cartridge/scripts/view');
 
 /**
@@ -29,11 +27,12 @@ function show() {
         view.get().render('error/notfound');
     }
     else {
+        var Search = require('~/cartridge/scripts/models/Search');
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
 
-        pageMeta.update(content);
+        require('~/cartridge/scripts/meta').update(content);
 
         view.get({
             Content             : content,
