@@ -6,18 +6,19 @@
  * @module controllers/Home
  */
 
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var View = require('~/cartridge/scripts/views/View');
 
 /**
  * Renders the home page.
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
+
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(rootFolder);
 
-    new View().render('content/home/homepage');
+    app.getView().render('content/home/homepage');
 }
 
 /**
@@ -25,7 +26,7 @@ function show() {
  * This is designed as a remote include to achieve optimal caching results for the header
  */
 function includeHeader() {
-    new View().render('components/header/header');
+    app.getView().render('components/header/header');
 }
 
 /**
@@ -35,7 +36,7 @@ function includeHeader() {
  * @deprecated Converted into a template include
  */
 function includeHeaderMenu() {
-    new View().render('components/header/headermenu');
+    app.getView().render('components/header/headermenu');
 }
 
 /**
@@ -45,7 +46,7 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    new View().render('components/header/headercustomerinfo');
+    app.getView().render('components/header/headercustomerinfo');
 }
 
 /**
@@ -55,7 +56,7 @@ function errorNotFound() {
     // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
     // remote includes which the WA won't resolve
     response.setStatus(410);
-    new View().render('error/notfound');
+    app.getView().render('error/notfound');
 }
 
 /**
@@ -63,7 +64,7 @@ function errorNotFound() {
  */
 function mobileSite() {
     session.custom.device = 'mobile';
-    new View().render('components/changelayout');
+    app.getView().render('components/changelayout');
 }
 
 /**
@@ -71,21 +72,21 @@ function mobileSite() {
  */
 function fullSite() {
     session.custom.device = 'fullsite';
-    new View().render('components/changelayout');
+    app.getView().render('components/changelayout');
 }
 
 /**
  * TODO remove - not responsive
  */
 function setLayout() {
-    new View().render('components/setlayout');
+    app.getView().render('components/setlayout');
 }
 
 /**
  * TODO remove - not responsive
  */
 function deviceLayouts() {
-    new View().render('util/devicelayouts');
+    app.getView().render('util/devicelayouts');
 }
 
 /*
