@@ -7,8 +7,8 @@
  */
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Pipeline is called by the system to handle URL mappings (static mappings and mapping rules).
@@ -26,10 +26,10 @@ function start() {
     var RedirectURLResult = new dw.system.Pipelet('RedirectURL').execute();
 
     if (RedirectURLResult.result === PIPELET_ERROR) {
-        view.get().render('util/redirecterrorutil/redirecterror');
+        app.getView().render('util/redirecterrorutil/redirecterror');
     }
     else {
-        view.get({
+        app.getView({
             Location : RedirectURLResult.Location
         }).render('util/redirectpermanent');
     }
@@ -48,7 +48,7 @@ function start() {
  */
 function hostName() {
 
-    view.get({
+    app.getView({
         Location : request.httpParameterMap.Location.stringValue || dw.web.URLUtils.httpHome()
     }).render('util/redirectpermanent');
 

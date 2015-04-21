@@ -7,15 +7,14 @@
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
 var Form = require('~/cartridge/scripts/models/Form');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Provides a form to locate stores by geographical information.
@@ -24,18 +23,18 @@ function find() {
 	var storeLocatorForm = Form.get('storelocator');
     storeLocatorForm.clear();
 
+    var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
     pageMeta.update(storeLocatorAsset);
 
-    view.get('views/StoreLocatorView')
-        .render('storelocator/storelocator');
-
+    app.getView('StoreLocatorView').render('storelocator/storelocator');
 }
 
 /**
  * The form handler. This form is submitted with GET.
  */
 function findStores() {
+    var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
     pageMeta.update(storeLocatorAsset);
 
@@ -80,11 +79,11 @@ function findStores() {
     });
 
     if (searchResult) {
-        view.get('views/StoreLocatorView', searchResult)
+        app.getView('StoreLocatorView', searchResult)
             .render('storelocator/storelocatorresults');
     }
     else {
-        view.get('views/StoreLocatorView')
+        app.getView('StoreLocatorView')
             .render('storelocator/storelocator');
     }
 
@@ -99,7 +98,7 @@ function details() {
     var store = dw.catalog.StoreMgr.getStore(storeID);
     pageMeta.update(store);
 
-    view.get({Store : store})
+    app.getView({Store : store})
         .render('storelocator/storedetails');
 
 }

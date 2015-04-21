@@ -7,16 +7,12 @@
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
 var Form = require('~/cartridge/scripts/models/Form');
-var Product = require('~/cartridge/scripts/models/Product');
-var ProductList = require('~/cartridge/scripts/models/ProductList');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 var wishlistForm = Form.get('wishlist');
 
 /**
@@ -40,17 +36,21 @@ function landingForm() {
  * Renders the wishlist page.
  */
 function show() {
+	var Content = app.getModel('Content');
 	var wishlistAsset = Content.get('myaccount-wishlist');
+
+	var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(wishlistAsset);
 
     wishlistForm.clear();
 
+    var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();
     wishlistForm.get('items').copyFrom(productList.object.items);
     // init address book
     wishlistForm.get('addressbook').get('addresses').copyFrom(customer.profile.addressBook.addresses);
 
-    view.get({
+    app.getView({
         ProductList : productList.object,
         ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
@@ -128,10 +128,11 @@ function wishListForm() {
 function showOther() {
     Form.get('wishlist.send').clear();
 
+    var ProductList = app.getModel('ProductList');
     var productList = ProductList.get(request.httpParameterMap.WishListID.value);
     Form.get('wishlist.items').copyFrom(productList.object.items);
 
-    view.get({
+    app.getView({
         ProductList : productList.object,
         ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
@@ -141,9 +142,11 @@ function showOther() {
  * Uses request parameters to add a product
  */
 function addProduct() {
+	var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue).object;
     var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
+    var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue || 1, productOptionModel);
 }
@@ -188,7 +191,7 @@ function search() {
         Form.get(form).clear();
     }
 
-    view.get({
+    app.getView({
         SearchFirstName : searchFirstName,
         SearchLastName : searchLastName,
         SearchEmail : searchEmail
@@ -207,6 +210,7 @@ function setShippingAddress() {
         address = dw.customer.AddressBook.getAddress(addressId);
     }
 
+    var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();
     Transaction.wrap(function () {
          productList.setShippingAddress(address);
@@ -220,6 +224,7 @@ function setShippingAddress() {
 function replaceProductListItem() {
     var plid = request.httpParameterMap.uuid.stringValue;
 
+    var ProductList = app.getModel('ProductList');
     var ProductList = ProductList.get();
 
 
@@ -234,7 +239,7 @@ function replaceProductListItem() {
     }
 
     // TODO rendering an empty template this seems pretty useless
-    view.get().render('account/wishlist/refreshwishlist');
+    app.getView().render('account/wishlist/refreshwishlist');
 }
 
 /*

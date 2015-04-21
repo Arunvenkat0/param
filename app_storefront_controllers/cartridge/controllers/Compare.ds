@@ -10,8 +10,8 @@ var Form = require('~/cartridge/scripts/models/Form');
 var Product = require('~/cartridge/scripts/models/Product');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 var Category = require('~/cartridge/scripts/models/Category');
 var Compare = require('~/cartridge/scripts/models/Compare');
 
@@ -35,7 +35,7 @@ function show() {
     Form.get(compareForm).copyFrom(map);
     compareForm.categories.setOptions(map.categories);
 
-    view.get({CompareList : map}).render('product/compare/compareshow');
+    app.getView({CompareList : map}).render('product/compare/compareshow');
 }
 
 /**
@@ -96,13 +96,13 @@ function controls() {
 
     var category = Category.get(request.httpParameterMap.category.value);
     if (!category.object) {
-        view.get().render('search/components/productcomparewidget');
+        app.getView().render('search/components/productcomparewidget');
         return;
     }
     else {
         // Get the product comparison object from the session or create a new one
         var comparison = Compare.get();
-        view.get({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
+        app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
     }
 }
 

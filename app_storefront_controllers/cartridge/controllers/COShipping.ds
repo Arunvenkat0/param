@@ -22,11 +22,11 @@ var Transaction = require('dw/system/Transaction');
 var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var singleShippingForm = require('~/cartridge/scripts/models/Form').get('singleshipping');
 var shippingAddressForm = require('~/cartridge/scripts/models/Form').get('shippingaddress');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Starting point for single shipping scenario
@@ -68,7 +68,7 @@ function start() {
                 pageMeta.update({
                     pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
                 });
-                view.get({
+                app.getView({
                     ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping'),
                     Basket : cart.object,
                     HomeDeliveries : homeDeliveries
@@ -127,7 +127,7 @@ function singleShipping() {
             pageMeta.update({
                 pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
             });
-            view.get({
+            app.getView({
                     ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping')
             }).render('checkout/shipping/singleshipping');
 
@@ -169,12 +169,12 @@ function selectShippingMethod(cart) {
             cart.calculate();
         });
 
-        view.get({
+        app.getView({
             Basket : cart.object
         }).render('checkout/shipping/selectshippingmethodjson');
         return;
     } else {
-        view.get().render('checkout/shipping/selectshippingmethodjson');
+        app.getView.render('checkout/shipping/selectshippingmethodjson');
         return;
     }
 }
@@ -229,7 +229,7 @@ function updateShippingMethodList() {
 
         session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-        view.get({
+        app.getView({
             Basket : cart.object,
             ApplicableShippingMethods : applicableShippingMethods,
             ShippingCosts : shippingCosts
@@ -259,7 +259,7 @@ function getApplicableShippingMethodsJSON() {
 
     var applicableShippingMethods = cart.getApplicableShippingMethods(address);
 
-    view.get({
+    app.getView({
         ApplicableShippingMethods : applicableShippingMethods
     }).render('checkout/shipping/shippingmethodsjson');
 }
@@ -350,7 +350,7 @@ function editAddress() {
         Form.get(session.forms.shippingaddress.states).copyFrom(shippingAddress);
     }
 
-    view.get({
+    app.getView({
     	ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
     }).render('checkout/shipping/shippingaddressdetails');
 }
@@ -363,19 +363,19 @@ function editShippingAddress() {
     var formResult = shippingAddressForm.handleAction({
         'apply' : function(formgroup) {
             if (!Form.get(session.forms.shippingaddress).copyTo(ShippingAddress) || !Form.get(session.forms.shippingaddress.states).copyTo(ShippingAddress)) {
-                view.get({
+                app.getView({
                     ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
                 }).render('checkout/shipping/shippingaddressdetails');
                 return;
             } else {
-                view.get().render('components/dialog/dialogapply');
+                app.getView().render('components/dialog/dialogapply');
                 return;
             }
         },
         'remove' : function(formgroup) {
             customer.getAddressBook().removeAddress(session.forms.shippingaddress.object);
 
-            view.get().render('components/dialog/dialogdelete');
+            app.getView().render('components/dialog/dialogdelete');
             return;
         }
     });

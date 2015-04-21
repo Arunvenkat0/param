@@ -11,8 +11,8 @@ var OrderMgr = require('dw/order/OrderMgr');
 var PagingModel = require('dw/web/PagingModel');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/models/Form');
 var orderListForm = Form.get('orders.orderlist');
 var pageMeta = require('~/cartridge/scripts/meta');
@@ -38,7 +38,7 @@ function history()
 
     pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
 
-    view.get({
+    app.getView({
     	OrderPagingModel   : orderPagingModel,
     	ContinueURL        : dw.web.URLUtils.https('Order-Orders')
     }).render('account/orderhistory/orders');
@@ -54,7 +54,7 @@ function orders()
         'show': function (formGroup, action) {
             var Order = action.object;
 
-            view.get('OrderDetails', {Order : Order}).render('account/orderhistory/orderdetails');
+            app.getView({Order : Order}).render('account/orderhistory/orderdetails');
         },
         'error': function () {
             response.redirect(dw.web.URLUtils.https('Order-History'));
@@ -75,7 +75,7 @@ function track()
 
     if (empty(parameterMap.orderID.stringValue))
     {
-        view.get('OrderDetails').render('account/orderhistory/orderdetails');
+        app.getView().render('account/orderhistory/orderdetails');
         return response;
     }
 
@@ -84,11 +84,11 @@ function track()
 
     if (empty(orders))
     {
-        view.get('OrderDetails').render('account/orderhistory/orderdetails');
+        app.getView().render('account/orderhistory/orderdetails');
     }
 
     var Order = orders.next();
-    view.get('OrderDetails', { Order : Order }).render('account/orderhistory/orderdetails');
+    app.getView({ Order : Order }).render('account/orderhistory/orderdetails');
 }
 
 

@@ -8,8 +8,8 @@
  */
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Called by the system when an error was not handled locally (general error
@@ -52,7 +52,7 @@ function start(args) {
                 response.setStatus(410);
             }
         }
-        view.get({
+        app.getView({
             PipelineName : args.ControllerName,
             CurrentStartNodeName : args.CurrentStartNodeName,
             ErrorText    : args.ErrorText,
@@ -65,9 +65,8 @@ function start(args) {
  * Called by the system when a session hijacking was detected.
  */
 function forbidden() {
-	require('~/cartridge/scripts/models/Customer').logout();
-    view.get().render('error/forbidden');
-
+	app.getModel('Customer').logout();
+    app.getView().render('error/forbidden');
 }
 
 /*

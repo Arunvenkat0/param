@@ -10,9 +10,9 @@
 var Transaction         = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/models/Form');
 var Address = require('~/cartridge/scripts/models/Address');
 var Content = require('~/cartridge/scripts/models/Content');
@@ -24,7 +24,7 @@ var addressForm = Form.get('customeraddress');
 function list() {
    pageMeta.update(Content.get('myaccount-addresses').object);
 
-   view.get().render('account/addressbook/addresslist');
+   app.getView().render('account/addressbook/addresslist');
 }
 
 /**
@@ -34,7 +34,7 @@ function list() {
 function add() {
     Form.get('profile').clear();
 
-    view.get({
+    app.getView({
         Action : 'add',
         ContinueURL: dw.web.URLUtils.https('Address-Form')
     }).render('account/addressbook/addressdetails');
@@ -104,7 +104,7 @@ function edit() {
     Form.get(profileForm.address).copyFrom(address);
     Form.get(profileForm.address.states).copyFrom(address);
 
-    view.get({
+    app.getView({
         Action : 'edit',
         ContinueURL: dw.web.URLUtils.https('Address-Form'),
         Address: address
@@ -134,7 +134,7 @@ function getAddressDetails() {
     var addressBook = customer.profile.addressBook;
     var address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
 
-    view.get({
+    app.getView({
         Address : address
     }).render('account/addressbook/addressjson');
 }

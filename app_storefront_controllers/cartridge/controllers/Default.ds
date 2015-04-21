@@ -7,14 +7,14 @@
  */
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Called when site is turned offline (not live)
  */
 function offline() {
-    view.get().render('error/siteoffline');
+    app.getView().render('error/siteoffline');
 }
 
 /*
@@ -25,6 +25,6 @@ function offline() {
  * Web exposed methods
  */
 /** @see module:controllers/Home~show */
-exports.Start = require('./Home').Show;
+exports.Start = app.getController('Home').Show;
 /** @see module:controllers/Default~offline */
 exports.Offline = guard.ensure(['get'], offline);

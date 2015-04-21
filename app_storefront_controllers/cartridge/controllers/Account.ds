@@ -11,10 +11,10 @@ var Email = require('~/cartridge/scripts/models/Email');
 var Customer = require('~/cartridge/scripts/models/Customer');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var Content = require('~/cartridge/scripts/models/Content');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 var Form = require('~/cartridge/scripts/models/Form');
 
 /* Public controller methods */
@@ -26,7 +26,7 @@ function show() {
     var accountHomeAsset = Content.get('myaccount-home');
     pageMeta.update(accountHomeAsset);
 
-    view.get().render('account/accountoverview');
+    app.getView().render('account/accountoverview');
 }
 
 /**
@@ -44,7 +44,7 @@ function editProfile() {
     var accountPersonalDataAsset = Content.get('myaccount-personaldata');
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
-    view.get({
+    app.getView({
         bctext2 : dw.web.Resource.msg('account.user.registration.editaccount', 'account', null),
         Action : 'edit',
         ContinueURL : dw.web.URLUtils.https('Account-EditForm')
@@ -96,7 +96,7 @@ function editForm() {
  */
 function passwordReset() {
     Form.get('requestpassword').clear();
-    view.get({
+    app.getView({
     	ContinueURL : dw.web.URLUtils.https('Account-PasswordResetForm')
     }).render('account/password/requestpasswordreset');
 }
@@ -111,7 +111,7 @@ function passwordResetFormHandler(templateName, continueURL) {
 
     Form.get('profile').handleAction({
         'cancel' : function() {
-            view.get({
+            app.getView({
             	ContinueURL : continueURL
             }).render(templateName);
         },
@@ -127,20 +127,20 @@ function passwordResetFormHandler(templateName, continueURL) {
                     ResetPasswordToken : resetPasswordToken
                 });
 
-                view.get({
+                app.getView({
                     ErrorCode : null,
                     ShowContinue : true,
                     ContinueURL : continueURL
                 }).render('account/password/requestpasswordreset_confirm');
             } else {
-                view.get({
+                app.getView({
                     ErrorCode : 'formnotvalid',
                     ContinueURL : continueURL
                 }).render(templateName);
             }
         },
         'error' : function() {
-            view.get({
+            app.getView({
                 ErrorCode : 'formnotvalid',
                 ContinueURL : continueURL
             }).render(templateName);
@@ -161,7 +161,7 @@ function passwordResetForm() {
 function passwordResetDialog() {
     // @FIXME reimplement using dialogify
     Form.get('requestpassword').clear();
-    view.get({
+    app.getView({
         ContinueURL : dw.web.URLUtils.https('Account-PasswordResetDialogForm')
     }).render('account/password/requestpasswordresetdialog');
 }
@@ -185,7 +185,7 @@ function setNewPassword() {
     if (empty(resettingCustomer)) {
         response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
     } else {
-        view.get({
+        app.getView({
         	ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
         }).render('account/password/setnewpassword');
     }
@@ -198,7 +198,7 @@ function setNewPasswordForm() {
 
     Form.get('profile').handleAction({
         'cancel' : function() {
-            view.get({
+            app.getView({
             	ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
             }).render('account/password/setnewpassword');
             return;
@@ -212,14 +212,14 @@ function setNewPasswordForm() {
 
                 if (Form.get('resetpassword.password').value() !== Form.get('resetpassword.passwordconfirm').value()) {
                     Form.get('resetpassword.passwordconfirm').invalidate();
-                    view.get({
+                    app.getView({
                         ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
                     }).render('account/password/setnewpassword');
                 } else {
 
                     success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), Form.get('resetpassword.password').value());
                     if (!success) {
-                        view.get({
+                        app.getView({
                             ErrorCode : 'formnotvalid',
                             ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
                         }).render('account/password/setnewpassword');
@@ -228,7 +228,7 @@ function setNewPasswordForm() {
                         passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
                         passwordchangedmail.send({});
 
-                        view.get().render('account/password/setnewpassword_confirm');
+                        app.getView().render('account/password/setnewpassword_confirm');
                     }
                 }
             }
@@ -248,7 +248,7 @@ function startRegister() {
         Form.get('profile.customer.email').object.value = Form.get('login.username').object.value;
     }
 
-    view.get({
+    app.getView({
         ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
@@ -291,7 +291,7 @@ function registrationForm() {
 
             if (!profileValidation) {
                 // TODO redirect
-                view.get({
+                app.getView({
                 	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
                 }).render('account/user/registration');
             } else {
@@ -309,7 +309,7 @@ function registrationForm() {
         }
     });
 
-    view.get({
+    app.getView({
     	ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
@@ -318,7 +318,7 @@ function registrationForm() {
  * Renders the account navigation.
  */
 function includeNavigation() {
-    view.get().render('account/accountnavigation');
+    app.getView().render('account/accountnavigation');
 }
 
 /* Web exposed methods */

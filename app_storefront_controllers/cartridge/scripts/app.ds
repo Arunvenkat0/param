@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 /**
  * @module app
  */
@@ -45,4 +46,11 @@ exports.getView = function(viewName, parameters) {
         View = require('./views/View');
     }
     return new View(parameters || {});
+};
+
+/**
+ * Returns the controller with the given name.
+ */
+exports.getController = function(controllerName) {
+    return require('~/cartridge/controllers/' + controllerName);
 };

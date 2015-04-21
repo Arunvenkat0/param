@@ -11,9 +11,9 @@ var PagingModel = require('dw/web/PagingModel');
 var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a full featured product search result page.
@@ -70,14 +70,14 @@ function show() {
 
             if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
                 // dynamic template
-                view.get({
+                app.getView({
                     ProductSearchResult : productSearchModel,
                     ContentSearchResult : contentSearchModel,
                     ProductPagingModel  : productPagingModel
                 }).render(productSearchModel.category.template);
             }
             else {
-                view.get({
+                app.getView({
                     ProductSearchResult : productSearchModel,
                     ContentSearchResult : contentSearchModel,
                     ProductPagingModel  : productPagingModel
@@ -112,7 +112,7 @@ function show() {
         }
     }
     else {
-        view.get({
+        app.getView({
             ProductSearchResult : productSearchModel,
             ContentSearchResult : contentSearchModel
         }).render('search/nohits');
@@ -146,14 +146,14 @@ function showContent() {
 
         if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
             // dynamic template
-            view.get({
+            app.getView({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ContentPagingModel  : contentPagingModel
             }).render(contentSearchModel.folder.template);
         }
         else {
-            view.get({
+            app.getView({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ContentPagingModel  : contentPagingModel
@@ -161,7 +161,7 @@ function showContent() {
         }
     }
     else {
-        view.get({
+        app.getView({
             ProductSearchResult : productSearchModel,
             ContentSearchResult : contentSearchModel
         }).render('search/nohits');
@@ -178,7 +178,7 @@ function getSuggestions() {
      * Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).
      */
     if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
-        view.get().render('search/suggestionsbeta');
+        app.getView().render('search/suggestionsbeta');
     }
     else {
         // TODO - refactor once search suggestion can be retrieved via th script API
@@ -187,7 +187,7 @@ function getSuggestions() {
             SearchPhrase   : request.httpParameterMap.q.value
         });
 
-        view.get({
+        app.getView({
             Suggestions : GetSearchSuggestionsResult.Suggestions
         }).render('search/suggestions');
 
@@ -222,7 +222,7 @@ function showProductGrid() {
     }
 
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll') && params.format.stringValue === 'page-element') {
-        view.get({
+        app.getView({
             ProductSearchResult : productSearchModel,
             ProductPagingModel  : productPagingModel
         }).render('search/productgridwrapper');
@@ -230,14 +230,14 @@ function showProductGrid() {
     else {
         if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
             // dynamic template
-            view.get({
+            app.getView({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ProductPagingModel  : productPagingModel
             }).render(productSearchModel.category.template);
         }
         else {
-            view.get({
+            app.getView({
                 ProductSearchResult : productSearchModel,
                 ContentSearchResult : contentSearchModel,
                 ProductPagingModel  : productPagingModel

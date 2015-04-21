@@ -12,11 +12,11 @@ var Transaction         = require('dw/system/Transaction');
 var GiftCertificateMgr  = require('dw/order/GiftCertificateMgr');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var Form = require('~/cartridge/scripts/models/Form');
 var Cart = require('~/cartridge/scripts/models/Cart');
 var giftcertForm = Form.get('giftcert');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders the page to purchase a gift certificate.
@@ -61,7 +61,7 @@ function showPurchase()
         }
     }
 
-    view.get({
+    app.getView({
         bctext1 : 'gc',
         bcurl1 : null,
         ContinueURL : dw.web.URLUtils.https('GiftCert-AddToBasket')
@@ -77,7 +77,7 @@ function showPurchase()
 function showError(args)
 {
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-        view.get({
+        app.getView({
             GeneralError : args.GeneralError,
             FormErrors : args.FormErrors || new dw.util.HashMap()
         }).render('checkout/giftcert/giftcertaddtobasketjson');
@@ -116,7 +116,7 @@ function edit()
     purchaseForm.message.value = giftCertificateLineItem.message;
     purchaseForm.amount.value = giftCertificateLineItem.price.value;
 
-    view.get({
+    app.getView({
         GiftCertificateLineItem : giftCertificateLineItem,
         ContinueURL : dw.web.URLUtils.https('GiftCert-Update')
     }).render('checkout/giftcert/giftcertpurchase');
@@ -229,7 +229,7 @@ function processAddToBasket(action)
 
     if (request.httpParameterMap.format.stringValue === 'ajax')
     {
-        view.get({
+        app.getView({
             FormErrors : formErrors,
             GiftCertificateLineItem : giftCertificateLineItem
         }).render('checkout/giftcert/giftcertaddtobasketjson');
@@ -257,7 +257,7 @@ function showMiniCart()
     if(!giftCertificateLineItem){
         return;
     }
-    view.get({
+    app.getView({
         Basket : cart.object,
         GiftCertificateLineItem: giftCertificateLineItem
     }).render('checkout/cart/minicart');

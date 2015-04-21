@@ -24,6 +24,7 @@ var Template = require('dw/util/Template');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
@@ -282,16 +283,16 @@ function submitPaymentJSON() {
 	    }
 
 	    if (require('./COBilling').HandlePaymentSelection(cart).error || handlePayments().error) {
-		    view.get().render('checkout/components/faults');
+		    app.getView().render('checkout/components/faults');
 		    return;
 	    }
 	    else {
-            view.get({}).render('checkout/components/payment_methods_success');
+            app.getView().render('checkout/components/payment_methods_success');
 		    return;
 	    }
     }
     else {
-        view.get().render('checkout/components/faults');
+        app.getView().render('checkout/components/faults');
         return;
     }
 }

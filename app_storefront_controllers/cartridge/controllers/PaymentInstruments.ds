@@ -11,11 +11,11 @@
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
 var Form = require('~/cartridge/scripts/models/Form');
 var paymentForm = Form.get('paymentinstruments');
-var view = require('~/cartridge/scripts/view');
 
 
 /**
@@ -36,7 +36,7 @@ function list()
 
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-paymentsettings'));
 
-    view.get({
+    app.getView({
         PaymentInstruments : paymentInstruments
     }).render('account/payment/paymentinstrumentlist');
 }
@@ -55,7 +55,7 @@ function add(clearForm)
     }
     paymentForm.get('creditcards.newcreditcard.type').setOptions(dw.order.PaymentMgr
             .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
-    view.get({
+    app.getView({
     	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
     }).render('account/payment/paymentinstrumentdetails');
 }

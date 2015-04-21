@@ -6,9 +6,9 @@
  * @module controllers/Login
  */
 
+var app            = require('~/cartridge/scripts/app');
 var guard          = require('~/cartridge/scripts/guard');
 var pageMeta       = require('~/cartridge/scripts/meta');
-var view           = require('~/cartridge/scripts/view');
 var Form           = require('~/cartridge/scripts/models/Form');
 var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
@@ -43,7 +43,7 @@ function show()
         session.custom.TargetLocation = request.httpParameterMap.original.value;
     }
 
-    var v = view.get('views/LoginView',{
+    var v = app.getView('LoginView',{
         RegistrationStatus : false
     });
     if(request.httpParameterMap.scope.submitted){
@@ -86,7 +86,7 @@ function handleLoginForm()
 
             if(!success){
                 session.forms.login.loginsucceeded.invalidateFormElement();
-                view.get('views/LoginView').render();
+                app.getView('LoginView').render();
                 return;
             }else{
                 loginForm.clear();
@@ -137,12 +137,12 @@ function handleLoginForm()
                 return;
             }
 
-            view.get({
+            app.getView({
                 Order : foundOrder
             }).render('account/orderhistory/orderdetails');
         },
         'error' : function(){
-            view.get('views/LoginView').render();
+            app.getView('LoginView').render();
             return;
         }
     });
@@ -171,7 +171,7 @@ function handleOAuthLoginForm()
                     finishOAuthLogin();
 
                     // show login page with error
-                    view.get('views/LoginView').render();
+                    app.getView('LoginView').render();
                     return;
                 }
 
@@ -180,7 +180,7 @@ function handleOAuthLoginForm()
             return;
         },
         'error' : function(){
-            view.get('views/LoginView').render();
+            app.getView('LoginView').render();
             return;
         }
     });
