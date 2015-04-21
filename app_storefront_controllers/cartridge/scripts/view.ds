@@ -24,39 +24,3 @@ exports.decorate = function(decoratorName, customValues){
 	}
 	return decoratorName;
 };
-
-/**
- * Get a view for the given Name
- *
- * @param  {string} viewName   The name of the view
- * @param  {object} parameters The parameters to pass to the view
- * @return {object/View}       The view object instance
- *
- * @example
- * // use anonymous view
- * require('~/view').get().render('path/to/template');
- *
- * // or use a named view
- * var product = dw.catalog.ProductMgr.getProduct('123456');
- * require('~/view').get("views/ProductView",{
- *     product : product,
- *     showRecommendations : false
- * }).render('path/to/template');
- */
-exports.get = function (viewName, parameters) {
-	var View;
-	try {
-		if (typeof viewName === 'string') {
-			View = require('./' + viewName);
-		}
-		else {
-			// use first argument as parameters if not a string
-			// to allow for anonymous views
-			parameters = viewName;
-			throw 'Not a named view';
-		}
-	} catch (e) {
-		View = require('./views/View');
-	}
-	return new View(parameters || {});
-};
