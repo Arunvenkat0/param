@@ -99,6 +99,14 @@ section
     font-weight: lighter;
 }
 
+svg.icon.icon-menu {
+    width: 4em;
+    height: 4em;
+    color: #84bd00;
+    fill: currentcolor;
+    display: none;
+}
+
 nav
 {
     font-size: 90%;
@@ -410,6 +418,7 @@ h6
 
 /* Mobile layout */
 @media only screen and (max-width: 700px){
+    svg.icon.icon-menu { display: inline; }
     nav {
         float : left;
         width : 100%;
