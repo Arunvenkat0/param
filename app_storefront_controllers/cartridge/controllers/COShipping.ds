@@ -88,7 +88,7 @@ function start() {
 
             // Go to billing step, if we have no product line items, but only gift certificates in the basket, Shipping step is not required.
             if (cart.getProductLineItems().size() === 0) {
-                require('./COBilling').Start();
+                app.getController('COBilling').Start();
             } else {
                 pageMeta = require('~/cartridge/scripts/meta');
                 pageMeta.update({
@@ -101,11 +101,11 @@ function start() {
                 }).render('checkout/shipping/singleshipping');
             }
         } else {
-            require('./COShippingMultiple').Start();
+            app.getController('COShippingMultiple').Start();
             return;
         }
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 
@@ -193,7 +193,7 @@ function updateAddressDetails() {
 
         start();
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
     }
 }
 
@@ -226,10 +226,10 @@ function singleShipping() {
                 // Mark step as fulfilled.
                 session.forms.singleshipping.fulfilled.value = true;
                 // @FIXME redirect
-                require('./COBilling').Start();
+                app.getController('COBilling').Start();
             } else {
                 // @FIXME redirect
-                require('./Cart').Show();
+                app.getController('Cart').Show();
             }
         },
         'selectAddress' : function(formgroup) {
@@ -246,7 +246,7 @@ function singleShipping() {
             return;
         },
         'shipToMultiple' : function(formgroup) {
-            require('./COShippingMultiple').Start();
+            app.getController('COShippingMultiple').Start();
             return;
         },
         'error' : function(formgroup) {
@@ -347,8 +347,7 @@ function updateShippingMethodList() {
             ShippingCosts : shippingCosts
         }).render('checkout/shipping/shippingmethods');
     } else {
-        require('./Cart').Show();
-        return;
+        app.getController('Cart').Show();
     }
 }
 
