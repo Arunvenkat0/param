@@ -37,13 +37,13 @@ function showPurchase()
 
 
     if (parameterMap.from.stringValue || parameterMap.recipient.stringValue) {
-        purchaseForm.object.from.value = parameterMap.from.stringValue;
-        purchaseForm.object.recipient.value = parameterMap.recipient.stringValue;
+        purchaseForm.setValue('from', parameterMap.from.stringValue);
+        purchaseForm.setValue('recipient', parameterMap.recipient.stringValue);
     }
 
 
     if (customer.registered) {
-        purchaseForm.object.from.value = customer.profile.firstName + ' ' + customer.profile.lastName;
+        purchaseForm.setValue('from', customer.profile.firstName + ' ' + customer.profile.lastName);
     }
 
 
@@ -51,11 +51,11 @@ function showPurchase()
         var productList = ProductList.get(parameterMap.plid.value).object;
         if (productList)
         {
-            purchaseForm.object.recipient.value = productList.owner.profile.firstName + ' ' +
-                productList.owner.profile.lastName;
-            purchaseForm.object.recipientEmail.value = productList.owner.profile.email;
-            purchaseForm.object.confirmRecipientEmail.value = productList.owner.profile.email;
-            purchaseForm.object.lineItemId.value = parameterMap.itemid.stringValue;
+            purchaseForm.setValue('recipient', productList.owner.profile.firstName + ' ' +
+                productList.owner.profile.lastName);
+            purchaseForm.setValue('recipientEmail', productList.owner.profile.email);
+            purchaseForm.setValue('confirmRecipientEmail', productList.owner.profile.email);
+            purchaseForm.setValue('lineItemId', parameterMap.itemid.stringValue);
         }
     }
 
@@ -107,13 +107,13 @@ function edit()
     giftcertForm.clear();
 
     var purchaseForm = app.getForm('giftcert.purchase');
-    purchaseForm.object.lineItemId.value = giftCertificateLineItem.UUID;
-    purchaseForm.object.from.value = giftCertificateLineItem.senderName;
-    purchaseForm.object.recipient.value = giftCertificateLineItem.recipientName;
-    purchaseForm.object.recipientEmail.value = giftCertificateLineItem.recipientEmail;
-    purchaseForm.object.confirmRecipientEmail.value = giftCertificateLineItem.recipientEmail;
-    purchaseForm.object.message.value = giftCertificateLineItem.message;
-    purchaseForm.object.amount.value = giftCertificateLineItem.price.value;
+    purchaseForm.setValue('lineItemId', giftCertificateLineItem.UUID);
+    purchaseForm.setValue('from', giftCertificateLineItem.senderName);
+    purchaseForm.setValue('recipient', giftCertificateLineItem.recipientName);
+    purchaseForm.setValue('recipientEmail', giftCertificateLineItem.recipientEmail);
+    purchaseForm.setValue('confirmRecipientEmail', giftCertificateLineItem.recipientEmail);
+    purchaseForm.setValue('message', giftCertificateLineItem.message);
+    purchaseForm.setValue('amount', giftCertificateLineItem.price.value);
 
     app.getView({
         GiftCertificateLineItem : giftCertificateLineItem,
