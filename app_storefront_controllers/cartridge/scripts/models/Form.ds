@@ -145,10 +145,21 @@ var Form = AbstractModel.extend(
         },
         
         /**
-         * Returns the value of a sub-element. If the group name is not defined, the value of this form element will be returned.
+         * Returns the value of a sub-element.
          */
         getValue : function(groupName) {
-        	return groupName ? get(groupName).value() : value();
+        	return this.get(groupName).value();
+        },
+
+        /**
+         * Sets the value of a sub-element.
+         */
+        setValue : function(groupName, value) {
+            var obj = this.get(groupName).object;
+            if (obj)
+            {
+            	obj.value = value;
+            }
         },
 
         /**

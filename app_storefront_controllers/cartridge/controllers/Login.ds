@@ -34,8 +34,8 @@ function show()
 
     if (customer.registered)
     {
-        loginForm.object.username.value = customer.profile.credentials.login;
-        loginForm.object.rememberme.value = true;
+        loginForm.setValue('username', customer.profile.credentials.login);
+        loginForm.setValue('rememberme', true);
     }
 
     var pageMeta = require('~/cartridge/scripts/meta');
@@ -90,7 +90,7 @@ function handleLoginForm()
     var loginForm = app.getForm('login');
     loginForm.handleAction({
         'login'     : function () {
-            var success = Customer.login(loginForm.get('username').value(), loginForm.get('password').value(), loginForm.get('rememberme').value());
+            var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
             if(!success){
                 loginForm.get('loginsucceeded').invalidate();
@@ -110,11 +110,11 @@ function handleLoginForm()
             response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
             return;
         },
-        'findOrder' : function () {
-            var orderTrackForm = app.getForm('ordertrack').object;
-            var orderNumber = orderTrackForm.get('orderNumber').value();
-            var orderFormEmail = orderTrackForm.get('orderEmail').value();
-            var orderPostalCode = orderTrackForm.get('postalCode').value();
+        'findorder' : function () {
+            var orderTrackForm = app.getForm('ordertrack');
+            var orderNumber = orderTrackForm.getValue('orderNumber');
+            var orderFormEmail = orderTrackForm.getValue('orderEmail');
+            var orderPostalCode = orderTrackForm.getValue('postalCode');
 
             if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail))
             {
@@ -229,7 +229,7 @@ function process()
         // handle 'normal' login
         var loginForm = app.getForm('login');
         
-        var success = Customer.login(loginForm.get('username').value(), loginForm.get('password').value(), loginForm.get('rememberme').value());
+        var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
         if(!success){
             loginForm.get('loginsucceeded').invalidate();
