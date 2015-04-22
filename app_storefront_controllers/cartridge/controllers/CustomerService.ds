@@ -7,14 +7,15 @@
  */
 
 /* API Includes */
-var Email = require('~/cartridge/scripts/models/Email');
 var Status = require('dw/system/Status');
 var Template = require('dw/util/Template');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var contactUsForm = require('~/cartridge/scripts/models/Form').get('contactus');
+
+var contactUsForm = app.getModel('Form').get('contactus');
+var Email = app.getModel('Email');
 
 /**
  * Renders the customer service overview page.

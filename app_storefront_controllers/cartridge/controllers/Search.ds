@@ -8,7 +8,6 @@
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
-var Search = require('~/cartridge/scripts/models/Search');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -42,6 +41,7 @@ function show() {
     }
 
     // construct the search based on the HTTP params & set the categoryID
+    var Search = app.getModel('Search');
     var productSearchModel = Search.initializeProductSearchModel(params);
     var contentSearchModel = Search.initializeContentSearchModel(params);
 
@@ -131,6 +131,7 @@ function showContent() {
 
     var params = request.httpParameterMap;
 
+    var Search = app.getModel('Search');
     var productSearchModel = Search.initializeProductSearchModel(params);
     var contentSearchModel = Search.initializeContentSearchModel(params);
 
@@ -207,6 +208,7 @@ function showProductGrid() {
     var params = request.httpParameterMap;
 
     // construct the search based on the HTTP params & set the categoryID
+    var Search = app.getModel('Search');
     var productSearchModel = Search.initializeProductSearchModel(params);
     var contentSearchModel = Search.initializeContentSearchModel(params);
 
