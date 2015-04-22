@@ -10,18 +10,19 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
-var Form = require('~/cartridge/scripts/models/Form');
-var Profile = require('~/cartridge/scripts/models/Profile');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Transaction = require('dw/system/Transaction');
-var TransientAddress = require('~/cartridge/scripts/models/TransientAddress');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var multiShippingForm = require('~/cartridge/scripts/models/Form').get('multishipping');
+
+var Cart = app.getModel('Cart');
+var Form = app.getModel('Form');
+var Profile = app.getModel('Profile');
+var TransientAddress = app.getModel('TransientAddress');
+var multiShippingForm = Form.get('multishipping');
 
 /**
  * Starting point for multi shipping scenario. Renders a page providing address selection for each product line item.

@@ -7,14 +7,15 @@
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
 var Transaction = require('dw/system/Transaction');
-var ProductList = require('~/cartridge/scripts/models/ProductList');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var Form = require('~/cartridge/scripts/models/Form');
+
+var Content = app.getModel('Content');
+var ProductList = app.getModel('ProductList');
+var Form = app.getModel('Form');
 var giftRegistryForm = Form.get('giftregistry');
 
 /**

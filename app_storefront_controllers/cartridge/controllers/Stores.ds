@@ -7,14 +7,13 @@
  */
 
 /* API Includes */
-var Form = require('~/cartridge/scripts/models/Form');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
+var Form = require('~/cartridge/scripts/models/Form');
 
 /**
  * Provides a form to locate stores by geographical information.
@@ -25,6 +24,8 @@ function find() {
 
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     app.getView('StoreLocatorView').render('storelocator/storelocator');
@@ -36,6 +37,8 @@ function find() {
 function findStores() {
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     var storeLocatorForm = Form.get('storelocator');
@@ -96,6 +99,8 @@ function details() {
 
     var storeID = request.httpParameterMap.StoreID.value;
     var store = dw.catalog.StoreMgr.getStore(storeID);
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(store);
 
     app.getView({Store : store})

@@ -11,12 +11,8 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
-var Email = require('~/cartridge/scripts/models/Email');
-var Order = require('~/cartridge/scripts/models/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var PaymentProcessor = require('~/cartridge/scripts/models/PaymentProcessor');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var Status = require('dw/system/Status');
@@ -26,6 +22,11 @@ var Transaction = require('dw/system/Transaction');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
+
+var Cart = app.getModel('Cart');
+var Email = app.getModel('Email');
+var Order = app.getModel('Order');
+var PaymentProcessor = app.getModel('PaymentProcessor');
 
 /**
  * Responsible for payment handling. This pipeline calls the specific

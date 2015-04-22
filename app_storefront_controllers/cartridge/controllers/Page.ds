@@ -6,10 +6,6 @@
  * @module controllers/Page
  */
 
-/* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
-var Search = require('~/cartridge/scripts/models/Search');
-
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -19,6 +15,7 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
+    var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if (!content) {
@@ -29,6 +26,7 @@ function show() {
         app.getView().render('error/notfound');
     }
     else {
+    	var Search = app.getModel('Search');
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
@@ -50,6 +48,7 @@ function show() {
  */
 function include() {
 
+    var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if(content){
