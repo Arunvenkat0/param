@@ -7,18 +7,18 @@
  */
 
 /* API Includes */
-var Form = require('~/cartridge/scripts/models/Form');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var wishlistForm = Form.get('wishlist');
+
 
 /**
  * Forms handling for the landing page
  */
 function landingForm() {
+    var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
         'register'             : function () {
            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
@@ -42,6 +42,7 @@ function show() {
 	var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(wishlistAsset);
 
+    var wishlistForm = app.getForm('wishlist');
     wishlistForm.clear();
 
     var ProductList = app.getModel('ProductList');
@@ -62,6 +63,8 @@ function show() {
  */
 function wishListForm() {
     var productList = require('~/cartridge/scripts/models/ProductList').get();
+
+    var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
         'addGiftCertificate'     : function (formgroup) {
             new dw.system.Pipelet('AddGiftCertificateToProductList')
@@ -76,7 +79,7 @@ function wishListForm() {
         },
         'updateItem'     : function (formgroup, action) {
             dw.system.Logger.info('Updating product {0} on wishlist.',action.object.productID);
-            Form.get(action.parent).copyTo(action.object);
+            app.getForm(action.parent).copyTo(action.object);
         },
         'setItemPrivate' : function(formgroup, action){
             Transaction.wrap(function () {
@@ -126,11 +129,12 @@ function wishListForm() {
  * Expects: UserID
  */
 function showOther() {
-    Form.get('wishlist.send').clear();
+    var wishlistForm = app.getForm('wishlist');
+    wishlistForm.get('send').clear();
 
     var ProductList = app.getModel('ProductList');
     var productList = ProductList.get(request.httpParameterMap.WishListID.value);
-    Form.get('wishlist.items').copyFrom(productList.object.items);
+    wishlistForm.get('items').copyFrom(productList.object.items);
 
     app.getView({
         ProductList : productList.object,
@@ -165,15 +169,15 @@ function add() {
  * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
  */
 function search() {
-    var form = session.forms.wishlist.search;
+    var searchForm = app.getForm('wishlist.search');
 
     var searchFirstName, searchLastName, searchEmail = null;
 
-    searchFirstName = form.firstname.value;
-    searchLastName = form.lastname.value;
-    searchEmail = form.email.value;
+    searchFirstName = searchForm.get('firstname').value();
+    searchLastName = searchForm.get('lastname').value();
+    searchEmail = searchForm.get('email').value();
 
-    if (form.valid && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail)))
+    if (searchForm.valid() && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail)))
     {
         // @TODO API is different from pipelet SearchProductLists
         // var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
@@ -186,9 +190,9 @@ function search() {
             Type : dw.customer.ProductList.TYPE_WISH_LIST
         }).ProductLists;
 
-        Form.get('wishlist.productlists').copyFrom(productLists);
+        app.getForm('wishlist.productlists').copyFrom(productLists);
 
-        Form.get(form).clear();
+        searchForm.clear();
     }
 
     app.getView({

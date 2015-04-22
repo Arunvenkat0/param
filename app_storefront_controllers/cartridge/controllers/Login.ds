@@ -15,9 +15,6 @@ var app            = require('~/cartridge/scripts/app');
 var guard          = require('~/cartridge/scripts/guard');
 
 var Customer       = app.getModel('Customer');
-var Form           = app.getModel('Form');
-var loginForm      = Form.get('login');
-var oauthLoginForm = Form.get('oauthlogin');
 
 var LOGGER         = dw.system.Logger.getLogger('login');
 
@@ -27,9 +24,13 @@ var LOGGER         = dw.system.Logger.getLogger('login');
  */
 function show()
 {
+    var loginForm = app.getForm('login');
     loginForm.clear();
+    
+    var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.clear();
-    Form.get('ordertrack').clear();
+    
+    app.getForm('ordertrack').clear();
 
     if (customer.registered)
     {
@@ -82,12 +83,13 @@ function getTargetUrl()
  */
 function handleLoginForm()
 {
+    var loginForm = app.getForm('login');
     loginForm.handleAction({
         'login'     : function () {
-            var success = Customer.login(session.forms.login.username.value, session.forms.login.password.value, session.forms.login.rememberme.value);
+            var success = Customer.login(loginForm.get('username').value(), loginForm.get('password').value(), loginForm.get('rememberme').value());
 
             if(!success){
-                session.forms.login.loginsucceeded.invalidateFormElement();
+                loginForm.get('loginsucceeded').invalidate();
                 app.getView('LoginView').render();
                 return;
             }else{
@@ -105,12 +107,12 @@ function handleLoginForm()
             return;
         },
         'findOrder' : function () {
-            var orderTrackForm = Form.get('ordertrack').object;
-            var orderNumber = orderTrackForm.orderNumber.value;
-            var orderFormEmail = orderTrackForm.orderEmail.value;
+            var orderTrackForm = app.getForm('ordertrack').object;
+            var orderNumber = orderTrackForm.get('orderNumber').value();
+            var orderFormEmail = orderTrackForm.get('orderEmail').value();
+            var orderPostalCode = orderTrackForm.get('postalCode').value();
 
-            if (empty(orderNumber) || empty(orderTrackForm.postalCode.value)
-                || empty(orderFormEmail))
+            if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail))
             {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
@@ -127,7 +129,7 @@ function handleLoginForm()
 
             var foundOrder = orders.next();
 
-            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderTrackForm.postalCode.value.toUpperCase()))
+            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderPostalCode.toUpperCase()))
             {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
@@ -156,6 +158,7 @@ function handleLoginForm()
  */
 function handleOAuthLoginForm()
 {
+    var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.handleAction({
         'login'     : function () {
             if (request.httpParameterMap.OAuthProvider.stringValue) {
@@ -169,7 +172,7 @@ function handleOAuthLoginForm()
                     OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
                 });
                 if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
-                    session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+                    oauthLoginForm.get('loginsucceeded').invalidate();
                     finishOAuthLogin();
 
                     // show login page with error
@@ -206,7 +209,8 @@ function process()
             OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
         });
         if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
-            session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+            var oauthLoginForm = app.getForm('oauthlogin');
+            oauthLoginForm.get('loginsucceeded').invalidate();
             finishOAuthLogin();
             return false;
         }
@@ -215,7 +219,9 @@ function process()
         return false;
     } else {
         // handle 'normal' login
-        var success = Customer.login(session.forms.login.username.value, session.forms.login.password.value, session.forms.login.rememberme.value);
+        var loginForm = app.getForm('login');
+        
+        var success = Customer.login(loginForm.get('username').value(), session.forms.login.password.value, session.forms.login.rememberme.value);
 
         if(!success){
             session.forms.login.loginsucceeded.invalidateFormElement();

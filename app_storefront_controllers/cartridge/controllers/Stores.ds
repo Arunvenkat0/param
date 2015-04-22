@@ -13,13 +13,13 @@ var SystemObjectMgr = require('dw/object/SystemObjectMgr');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var Form = require('~/cartridge/scripts/models/Form');
+
 
 /**
  * Provides a form to locate stores by geographical information.
  */
 function find() {
-	var storeLocatorForm = Form.get('storelocator');
+	var storeLocatorForm = app.getForm('storelocator');
     storeLocatorForm.clear();
 
     var Content = app.getModel('Content');
@@ -41,7 +41,7 @@ function findStores() {
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
-    var storeLocatorForm = Form.get('storelocator');
+    var storeLocatorForm = app.getForm('storelocator');
     var searchResult = storeLocatorForm.handleAction({
         'findbycountry' : function (formgroup) {
             var searchKey = formgroup.address.country.value;

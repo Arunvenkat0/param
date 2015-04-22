@@ -13,8 +13,6 @@ var Transaction = require('dw/system/Transaction');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var Form = require('~/cartridge/scripts/models/Form');
-var paymentForm = Form.get('paymentinstruments');
 
 
 /**
@@ -30,6 +28,7 @@ function list()
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
+    var paymentForm = app.getForm('paymentinstruments');
     paymentForm.clear();
     paymentForm.get('creditcards.storedcards').copyFrom(paymentInstruments);
 
@@ -50,11 +49,14 @@ function list()
  */
 function add(clearForm)
 {
+    var paymentForm = app.getForm('paymentinstruments');
+
     if(clearForm !== false){
         paymentForm.clear();
     }
     paymentForm.get('creditcards.newcreditcard.type').setOptions(dw.order.PaymentMgr
             .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
+
     app.getView({
     	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
     }).render('account/payment/paymentinstrumentdetails');
@@ -65,6 +67,7 @@ function add(clearForm)
  */
 function handlePaymentForm()
 {
+    var paymentForm = app.getForm('paymentinstruments');
     paymentForm.handleAction({
         'create' : function(){
             if (!create())
@@ -94,8 +97,9 @@ function create()
         return false;
     }
 
-    var newCreditCardForm = Form.get('paymentinstruments.creditcards.newcreditcard');
-    var ccNumber = newCreditCardForm.object.number.value;
+    var paymentForm = app.getForm('paymentinstruments');
+    var newCreditCardForm = paymentForm.get('creditcards.newcreditcard');
+    var ccNumber = newCreditCardForm.get('number').value();
 
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
@@ -111,9 +115,9 @@ function create()
     }
 
     Transaction.begin();
-        var PaymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+        var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-        if (!newCreditCardForm.copyTo(PaymentInstrument)) {
+        if (!newCreditCardForm.copyTo(paymentInstrument)) {
             Transaction.rollback();
 
             return false;
@@ -138,6 +142,7 @@ function create()
  */
 function Delete()
 {
+    var paymentForm = app.getForm('paymentinstruments');
     paymentForm.handleAction({
         'remove' : function(formGroup, action){
             Transaction.wrap(function(){
@@ -166,23 +171,23 @@ function Delete()
  */
 function verifyCreditCard()
 {
-    var newCreditCardForm = session.forms.paymentinstruments.creditcards.newcreditcard;
+    var newCreditCardForm = app.getForm('paymentinstruments.creditcards.newcreditcard');
 
     var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
         VerifySecurityCode : false
     }).execute({
-        PaymentCard : dw.order.PaymentMgr.getPaymentCard(newCreditCardForm.type.value),
-        CardNumber : newCreditCardForm.number.value,
-        ExpirationMonth : newCreditCardForm.month.value,
-        ExpirationYear : newCreditCardForm.year.value,
-        CardSecurityCode : newCreditCardForm.cvn.value
+        PaymentCard : dw.order.PaymentMgr.getPaymentCard(newCreditCardForm.get('type').value()),
+        CardNumber : newCreditCardForm.get('number').value(),
+        ExpirationMonth : newCreditCardForm.get('month').value(),
+        ExpirationYear : newCreditCardForm.get('year').value(),
+        CardSecurityCode : newCreditCardForm.get('cvn').value()
     });
     if (VerifyPaymentCardResult.result === PIPELET_ERROR)
     {
         var status = VerifyPaymentCardResult.Status;
 
         // verify that we have a status object and a valid credit card form
-        if( !status || !newCreditCardForm.valid )
+        if( !status || !newCreditCardForm.valid() )
         {
             return false;
         }
@@ -202,16 +207,16 @@ function verifyCreditCard()
             switch( item.code )
             {
                 case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
-                    newCreditCardForm.number.invalidateFormElement();
+                    newCreditCardForm.get('number').invalidate();
                     continue;
 
                 case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE:
-                    newCreditCardForm.month.invalidateFormElement();
-                    newCreditCardForm.year.invalidateFormElement();
+                    newCreditCardForm.get('month').invalidate();
+                    newCreditCardForm.get('year').invalidate();
                     continue;
 
                 case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_SECURITY_CODE:
-                    newCreditCardForm.cvn.invalidateFormElement();
+                    newCreditCardForm.get('cvn').invalidate();
             }
         }
         return false;
