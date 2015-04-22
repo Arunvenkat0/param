@@ -217,7 +217,7 @@ function process()
             OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
         });
         if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
-            var oauthLoginForm = app.getForm('oauthlogin');
+            var oauthLoginForm = app.getForm('oauthlogin.');
             oauthLoginForm.get('loginsucceeded').invalidate();
             finishOAuthLogin();
             return false;
@@ -229,10 +229,10 @@ function process()
         // handle 'normal' login
         var loginForm = app.getForm('login');
         
-        var success = Customer.login(loginForm.get('username').value(), session.forms.login.password.value, session.forms.login.rememberme.value);
+        var success = Customer.login(loginForm.get('username').value(), loginForm.get('password').value(), loginForm.get('rememberme').value());
 
         if(!success){
-            session.forms.login.loginsucceeded.invalidateFormElement();
+            loginForm.get('loginsucceeded').invalidate();
         }else{
             loginForm.clear();
         }
@@ -242,12 +242,12 @@ function process()
 
 function oAuthFailed()
 {
-    session.forms.oauthlogin.loginsucceeded.invalidateFormElement();
+    app.getForm('oauthlogin').get('loginsucceeded').invalidate();
     finishOAuthLogin();
 }
 function oAuthSuccess()
 {
-    session.forms.oauthlogin.clearFormElement();
+    app.getForm('oauthlogin').clear();
     finishOAuthLogin();
 }
 
@@ -472,8 +472,8 @@ function Logout()
 {
     Customer.logout();
 
-	session.forms.login.clearFormElement();
-	session.forms.profile.clearFormElement();
+	app.getForm('login').clear();
+	app.getForm('profile').clear();
 	//Cart.get().calculate();
 
     response.redirect(dw.web.URLUtils.https('Account-Show'));

@@ -115,16 +115,26 @@ var Form = AbstractModel.extend(
         },
 
         /**
-         * Clears the wrapped form instance
+         * Clears the wrapped form instance.
          */
         clear : function () {
             this.object.clearFormElement();
         },
+        
         /**
-         * Invalidates the wrapped form instance
+         * Invalidates the wrapped form instance.
+         *
+         * @param error an optional key for an error message
          */
-        invalidate : function () {
-            this.object.invalidateFormElement();
+        invalidate : function (error) {
+        	if (error)
+        	{
+                this.object.invalidateFormElement(error);
+        	}
+        	else
+        	{
+                this.object.invalidateFormElement();
+        	}
         },
 
         /**
@@ -132,6 +142,13 @@ var Form = AbstractModel.extend(
          */
         value : function () {
             return this.object.value;
+        },
+        
+        /**
+         * Returns the value of a sub-element. If the group name is not defined, the value of this form element will be returned.
+         */
+        getValue : function(groupName) {
+        	return groupName ? get(groupName).value() : value();
         },
 
         /**
