@@ -21,40 +21,66 @@ var Transaction = require('dw/system/Transaction');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Cart = app.getModel('Cart');
-var Profile = app.getModel('Profile');
-var TransientAddress = app.getModel('TransientAddress');
-var Form = app.getModel('Form');
-var singleShippingForm = Form.get('singleshipping');
-var shippingAddressForm = Form.get('shippingaddress');
+/**
+ * Prepares shipments by separating all gift certificate line items from product
+ * line items and creating one shipment per gift certificate to purchase. As
+ * second step empty shipments are removed. This start node can be called by any
+ * checkout step to clean existing shipments according to these conditions.
+ */
+function prepareShipments() {
+    var cart, homeDeliveries;
+    cart = app.getModel('Cart').get();
+
+    homeDeliveries = Transaction.wrap(function() {
+
+        homeDeliveries = false;
+
+        cart.updateGiftCertificateShipments();
+        cart.removeEmptyShipments();
+
+        if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
+            homeDeliveries = cart.consolidateInStoreShipments();
+
+            session.forms.singleshipping.inStoreShipments.shipments.clearFormElement();
+            app.getForm(session.forms.singleshipping.inStoreShipments.shipments).copyFrom(cart.getShipments());
+        } else {
+            homeDeliveries = true;
+        }
+
+        return homeDeliveries;
+    });
+
+    return homeDeliveries;
+}
 
 /**
  * Starting point for single shipping scenario
  */
 function start() {
-    var cart = Cart.get();
+    var cart, physicalShipments, pageMeta, homeDeliveries;
+    cart = app.getModel('Cart').get();
 
     if (cart.object) {
         // redirect to multi shipping scenario if more than one physical shipment is contained in the basket.
-        var physicalShipments = cart.getPhysicalShipments();
+        physicalShipments = cart.getPhysicalShipments();
         if (!(Site.getCurrent().getCustomPreferenceValue('enableMultiShipping') && physicalShipments && physicalShipments.size() > 1)) {
 
             // Initializes the address and shipping method form: - prepopulates form with shipping address of default
             // shipment if address exists, otherwise preselects shipping method in list if set at shipment
             if (cart.getDefaultShipment().getShippingAddress()) {
-                Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(cart.getDefaultShipment().getShippingAddress());
-                Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(cart.getDefaultShipment().getShippingAddress());
-                Form.get(session.forms.singleshipping.shippingAddress).copyFrom(cart.getDefaultShipment());
+                app.getForm(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(cart.getDefaultShipment().getShippingAddress());
+                app.getForm(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(cart.getDefaultShipment().getShippingAddress());
+                app.getForm(session.forms.singleshipping.shippingAddress).copyFrom(cart.getDefaultShipment());
             } else {
                 if (customer.authenticated && customer.registered && customer.addressBook.preferredAddress) {
-                    Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(customer.addressBook.preferredAddress);
-                    Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(customer.addressBook.preferredAddress);
+                    app.getForm(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(customer.addressBook.preferredAddress);
+                    app.getForm(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(customer.addressBook.preferredAddress);
                 }
             }
             session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
             // Clean shipments.
-            var homeDeliveries = prepareShipments();
+            homeDeliveries = prepareShipments();
 
             Transaction.wrap(function() {
                 cart.calculate();
@@ -63,9 +89,8 @@ function start() {
             // Go to billing step, if we have no product line items, but only gift certificates in the basket, Shipping step is not required.
             if (cart.getProductLineItems().size() === 0) {
                 require('./COBilling').Start();
-                return;
             } else {
-                var pageMeta = require('~/cartridge/scripts/meta');
+                pageMeta = require('~/cartridge/scripts/meta');
                 pageMeta.update({
                     pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
                 });
@@ -87,26 +112,112 @@ function start() {
 }
 
 /**
+ * Handles the selected shipping address and shipping method: - copies the
+ * address details and gift options to the basket's default shipment - set the
+ * selected shipping method at the default shipment
+ */
+function handleShippingSettings(cart) {
+
+    Transaction.wrap(function() {
+        var defaultShipment, shippingAddress, validationResult, BasketStatus, EnableCheckout;
+        defaultShipment = cart.getDefaultShipment();
+        shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
+
+        shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
+        shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
+        shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
+        shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
+        shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
+        shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
+        shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
+        shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
+        shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
+        defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
+        defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
+
+        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), session.forms.singleshipping.shippingAddress.shippingMethodID.value, null, null);
+        cart.calculate();
+
+        validationResult = cart.validateForCheckout();
+
+        // TODO - what are those variables used for, do they need to be returned ?
+        BasketStatus = validationResult.BasketStatus;
+        EnableCheckout = validationResult.EnableCheckout;
+
+    });
+
+    return;
+}
+
+/**
+ * TODO
+ */
+function updateAddressDetails() {
+    var cart, addressID, segments, lookupCustomer, lookupID, address, defaultShipment, shippingAddress, profile;
+    cart = app.getModel('Cart').get();
+
+    if (cart.object) {
+
+        addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
+        segments = addressID.split("??");
+
+        lookupCustomer = customer;
+        lookupID = addressID;
+
+        if (segments.length > 1) {
+            profile = CustomerMgr.queryProfile("email = {0}", segments[0]);
+            lookupCustomer = profile.getCustomer();
+            lookupID = segments[1];
+        }
+
+        address = lookupCustomer.getAddressBook().getAddress(lookupID);
+        app.getForm(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(address);
+        app.getForm(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(address);
+
+        Transaction.wrap(function() {
+            defaultShipment = cart.getDefaultShipment();
+            shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
+
+            shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
+            shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
+            shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
+            shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
+            shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
+            shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
+            shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
+            shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
+            shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
+            defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
+            defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
+        });
+
+        start();
+    } else {
+        require('./Cart').Show();
+    }
+}
+
+/**
  * TODO
  */
 function singleShipping() {
-
+    var singleShippingForm = app.getForm('singleshipping');
     singleShippingForm.handleAction({
         'save' : function(formgroup) {
-            var cart = Cart.get();
-            
+            var cart = app.getModel('Cart').get();
+
             if (cart.object) {
 
                 handleShippingSettings(cart);
 
                 // Attempts to save the used shipping address in the customer address book.
                 if (customer.authenticated && session.forms.singleshipping.shippingAddress.addToAddressBook.value) {
-                    Profile.get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
+                    app.getModel('Profile').get(customer.profile).addAddressToAddressBook(cart.getDefaultShipment().getShippingAddress());
                 }
                 // Binds the store message from the user to the shipment.
                 if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
-                    if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyTo(cart.getShipments())) {
+                    if (!app.getForm(session.forms.singleshipping.inStoreShipments.shipments).copyTo(cart.getShipments())) {
                         require('./Cart').Show();
                         return;
                     }
@@ -114,23 +225,22 @@ function singleShipping() {
 
                 // Mark step as fulfilled.
                 session.forms.singleshipping.fulfilled.value = true;
-
+                // @FIXME redirect
                 require('./COBilling').Start();
-                return;
             } else {
+                // @FIXME redirect
                 require('./Cart').Show();
-                return;
             }
         },
         'selectAddress' : function(formgroup) {
-            updateAddressDetails(Cart.get());
+            updateAddressDetails(app.getModel('Cart').get());
 
             var pageMeta = require('~/cartridge/scripts/meta');
             pageMeta.update({
                 pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
             });
             app.getView({
-                    ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping')
+                ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping')
             }).render('checkout/shipping/singleshipping');
 
             return;
@@ -140,7 +250,7 @@ function singleShipping() {
             return;
         },
         'error' : function(formgroup) {
-			response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+            response.redirect(dw.web.URLUtils.https('COShipping-Start'));
             return;
         }
     });
@@ -150,13 +260,14 @@ function singleShipping() {
  * Select a shipping method for the default shipment. Sets the shipping method
  * and returns the result as JSON response.
  */
-function selectShippingMethod(cart) {
-
-    var cart = Cart.get();
+function selectShippingMethod() {
+    var cart, address, applicableShippingMethods, TransientAddress;
+    TransientAddress = app.getModel('TransientAddress');
+    cart = app.getModel('Cart').get();
 
     if (cart.object) {
 
-        var address = new TransientAddress();
+        address = new TransientAddress();
         address.countryCode = request.httpParameterMap.countryCode.stringValue;
         address.stateCode = request.httpParameterMap.stateCode.stringValue;
         address.postalCode = request.httpParameterMap.postalCode.stringValue;
@@ -164,7 +275,7 @@ function selectShippingMethod(cart) {
         address.address1 = request.httpParameterMap.address1.stringValue;
         address.address2 = request.httpParameterMap.address2.stringValue;
 
-        var applicableShippingMethods = cart.getApplicableShippingMethods(address);
+        applicableShippingMethods = cart.getApplicableShippingMethods(address);
 
         Transaction.wrap(function() {
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
@@ -174,10 +285,8 @@ function selectShippingMethod(cart) {
         app.getView({
             Basket : cart.object
         }).render('checkout/shipping/selectshippingmethodjson');
-        return;
     } else {
         app.getView.render('checkout/shipping/selectshippingmethodjson');
-        return;
     }
 }
 
@@ -194,12 +303,13 @@ function selectShippingMethod(cart) {
  * selection.
  */
 function updateShippingMethodList() {
-
-    var cart = Cart.get();
+    var i, cart, address, applicableShippingMethods, shippingCosts, currentShippingMethod, method, TransientAddress;
+    TransientAddress = app.getModel('TransientAddress');
+    cart = app.getModel('Cart').get();
 
     if (cart.object) {
 
-        var address = new TransientAddress();
+        address = new TransientAddress();
         address.countryCode = request.httpParameterMap.countryCode.stringValue;
         address.stateCode = request.httpParameterMap.stateCode.stringValue;
         address.postalCode = request.httpParameterMap.postalCode.stringValue;
@@ -207,15 +317,15 @@ function updateShippingMethodList() {
         address.address1 = request.httpParameterMap.address1.stringValue;
         address.address2 = request.httpParameterMap.address2.stringValue;
 
-        var applicableShippingMethods = cart.getApplicableShippingMethods(address);
-        var shippingCosts = new HashMap();
-        var currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
+        applicableShippingMethods = cart.getApplicableShippingMethods(address);
+        shippingCosts = new HashMap();
+        currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
 
         // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
         Transaction.begin();
 
-        for (var i = 0; i < applicableShippingMethods.length; i++) {
-            var method = applicableShippingMethods[i];
+        for ( i = 0; i < applicableShippingMethods.length; i += 1) {
+            method = applicableShippingMethods[i];
 
             cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
             cart.calculate();
@@ -249,9 +359,11 @@ function updateShippingMethodList() {
  * address parameters included in the request parameters.
  */
 function getApplicableShippingMethodsJSON() {
-    var cart = Cart.get();
+    var cart, address, applicableShippingMethods, TransientAddress;
+    TransientAddress = app.getModel('TransientAddress');
+    cart = app.getModel('Cart').get();
 
-    var address = new TransientAddress();
+    address = new TransientAddress();
     address.countryCode = request.httpParameterMap.countryCode.stringValue;
     address.stateCode = request.httpParameterMap.stateCode.stringValue;
     address.postalCode = request.httpParameterMap.postalCode.stringValue;
@@ -259,80 +371,11 @@ function getApplicableShippingMethodsJSON() {
     address.address1 = request.httpParameterMap.address1.stringValue;
     address.address2 = request.httpParameterMap.address2.stringValue;
 
-    var applicableShippingMethods = cart.getApplicableShippingMethods(address);
+    applicableShippingMethods = cart.getApplicableShippingMethods(address);
 
     app.getView({
         ApplicableShippingMethods : applicableShippingMethods
     }).render('checkout/shipping/shippingmethodsjson');
-}
-
-/**
- * Handles the selected shipping address and shipping method: - copies the
- * address details and gift options to the basket's default shipment - set the
- * selected shipping method at the default shipment
- */
-function handleShippingSettings(cart) {
-
-    Transaction.wrap(function() {
-        var defaultShipment = cart.getDefaultShipment();
-        var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
-
-        shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
-        shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
-        shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
-        shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
-        shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
-        shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
-        shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
-        shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
-        shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
-        defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
-        defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
-
-        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), session.forms.singleshipping.shippingAddress.shippingMethodID.value, null, null);
-        cart.calculate();
-
-        var validationResult = cart.validateForCheckout();
-
-        // TODO - what are those variables used for, do they need to be returned ?
-        var BasketStatus = validationResult.BasketStatus;
-        var EnableCheckout = validationResult.EnableCheckout;
-
-    });
-
-    return;
-}
-
-/**
- * Prepares shipments by separating all gift certificate line items from product
- * line items and creating one shipment per gift certificate to purchase. As
- * second step empty shipments are removed. This start node can be called by any
- * checkout step to clean existing shipments according to these conditions.
- */
-function prepareShipments() {
-
-    var cart = Cart.get();
-
-    var homeDeliveries = Transaction.wrap(function() {
-
-        var homeDeliveries = false;
-
-        cart.updateGiftCertificateShipments();
-        cart.removeEmptyShipments();
-
-        if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
-            homeDeliveries = cart.consolidateInStoreShipments();
-
-            session.forms.singleshipping.inStoreShipments.shipments.clearFormElement();
-            Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyFrom(cart.getShipments());
-        } else {
-            homeDeliveries = true;
-        }
-
-        return homeDeliveries;
-    });
-
-    return homeDeliveries;
 }
 
 /**
@@ -348,12 +391,12 @@ function editAddress() {
     var shippingAddress = customer.getAddressBook().getAddress(request.httpParameterMap.addressID.stringValue);
 
     if (shippingAddress) {
-        Form.get(session.forms.shippingaddress).copyFrom(shippingAddress);
-        Form.get(session.forms.shippingaddress.states).copyFrom(shippingAddress);
+        app.getForm(session.forms.shippingaddress).copyFrom(shippingAddress);
+        app.getForm(session.forms.shippingaddress.states).copyFrom(shippingAddress);
     }
 
     app.getView({
-    	ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
+        ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
     }).render('checkout/shipping/shippingaddressdetails');
 }
 
@@ -361,17 +404,18 @@ function editAddress() {
  * TODO
  */
 function editShippingAddress() {
-
-    var formResult = shippingAddressForm.handleAction({
+    var shippingAddressForm, formResult;
+    shippingAddressForm = app.getForm('shippingaddress');
+    formResult = shippingAddressForm.handleAction({
         'apply' : function(formgroup) {
-            if (!Form.get(session.forms.shippingaddress).copyTo(ShippingAddress) || !Form.get(session.forms.shippingaddress.states).copyTo(ShippingAddress)) {
+            var object = {};
+            // @FIXME what is this statement used for?
+            if (!app.getForm(session.forms.shippingaddress).copyTo(object) || !app.getForm(session.forms.shippingaddress.states).copyTo(object)) {
                 app.getView({
                     ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
                 }).render('checkout/shipping/shippingaddressdetails');
-                return;
             } else {
                 app.getView().render('components/dialog/dialogapply');
-                return;
             }
         },
         'remove' : function(formgroup) {
@@ -383,54 +427,6 @@ function editShippingAddress() {
     });
 
     return;
-}
-
-/**
- * TODO
- */
-function updateAddressDetails() {
-    var cart = Cart.get();
-
-    if (cart.object) {
-
-        var addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
-        var segments = addressID.split("??");
-
-        var lookupCustomer = customer;
-        var lookupID = addressID;
-
-        if (segments.length > 1) {
-            var profile = CustomerMgr.queryProfile("email = {0}", segments[0]);
-            lookupCustomer = profile.getCustomer();
-            lookupID = segments[1];
-        }
-
-        var address = lookupCustomer.getAddressBook().getAddress(lookupID);
-        Form.get(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(address);
-        Form.get(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(address);
-
-        Transaction.wrap(function() {
-            var defaultShipment = cart.getDefaultShipment();
-            var shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
-
-            shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
-            shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
-            shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
-            shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
-            shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
-            shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
-            shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
-            shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
-            shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
-            defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
-            defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
-        });
-
-        start();
-    } else {
-        require('./Cart').Show();
-        return;
-    }
 }
 
 /*
