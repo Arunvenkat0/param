@@ -61,7 +61,13 @@ var Form = AbstractModel.extend(
                 }
             }
             else {
-                return formHandler[action.formId].apply(formHandler, [this.object, action]);
+                if(formHandler[action.formId]){
+                    return formHandler[action.formId].apply(formHandler, [this.object, action]);
+                }else{
+                    dw.system.Logger.error('Action handler for action "{0}"" not defined.', action.formId);
+                    // throw an error as this is an implementation bug
+                    throw new Error('Form handler undefined');
+                }
             }
         },
 
@@ -109,16 +115,26 @@ var Form = AbstractModel.extend(
         },
 
         /**
-         * Clears the wrapped form instance
+         * Clears the wrapped form instance.
          */
         clear : function () {
             this.object.clearFormElement();
         },
+        
         /**
-         * Invalidates the wrapped form instance
+         * Invalidates the wrapped form instance.
+         *
+         * @param error an optional key for an error message
          */
-        invalidate : function () {
-            this.object.invalidateFormElement();
+        invalidate : function (error) {
+        	if (error)
+        	{
+                this.object.invalidateFormElement(error);
+        	}
+        	else
+        	{
+                this.object.invalidateFormElement();
+        	}
         },
 
         /**
@@ -128,6 +144,24 @@ var Form = AbstractModel.extend(
             return this.object.value;
         },
         
+        /**
+         * Returns the value of a sub-element.
+         */
+        getValue : function(groupName) {
+        	return this.get(groupName).value();
+        },
+
+        /**
+         * Sets the value of a sub-element.
+         */
+        setValue : function(groupName, value) {
+            var obj = this.get(groupName).object;
+            if (obj)
+            {
+            	obj.value = value;
+            }
+        },
+
         /**
          * gets bound object of wrapped form elelement
          */

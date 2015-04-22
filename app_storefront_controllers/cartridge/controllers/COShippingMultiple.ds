@@ -19,10 +19,8 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 var Cart = app.getModel('Cart');
-var Form = app.getModel('Form');
 var Profile = app.getModel('Profile');
 var TransientAddress = app.getModel('TransientAddress');
-var multiShippingForm = Form.get('multishipping');
 
 /**
  * Starting point for multi shipping scenario. Renders a page providing address selection for each product line item.
@@ -66,6 +64,7 @@ function start() {
  * TODO
  */
 function multiShippingAddresses() {
+    var multiShippingForm = app.getForm('multishipping');
 
     multiShippingForm.handleAction({
         'save' : function (formgroup) {
@@ -80,7 +79,7 @@ function multiShippingAddresses() {
                     cart.calculate();
                 });
 
-                session.forms.multishipping.addressSelection.fulfilled.value = true;
+                multiShippingForm.setValue('addressSelection.fulfilled', true);
 
                 startShipments();
                 return;
@@ -112,7 +111,8 @@ function startShipments() {
         Form.get(session.forms.multishipping.shippingOptions.shipments).copyFrom(cart.getShipments());
 
         // Initializes the shipping method list for each shipment.
-        for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
+        var count = session.forms.multishipping.shippingOptions.shipments.childCount;
+        for (var i = 0; i < count; i++) {
             var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
             var shippingMethods = ShippingMgr.getShipmentShippingModel(shipmentForm.object).applicableShippingMethods;
 
@@ -138,10 +138,13 @@ function startShipments() {
  * TODO
  */
 function multiShippingMethods() {
+    var multiShippingForm = app.getForm('multishipping');
+	
     multiShippingForm.handleAction({
         'save' : function (formgroup) {
 	        Transaction.wrap(function () {
-		        for (var i = 0; i < session.forms.multishipping.shippingOptions.shipments.childCount; i++) {
+	        	var count = session.forms.multishipping.shippingOptions.shipments.childCount;
+		        for (var i = 0; i < count; i++) {
                     var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
 
                     if (shipmentForm.shippingMethodID.selectedOptionObject !== null) {
@@ -233,6 +236,7 @@ function editAddresses() {
  * TODO
  */
 function editForm() {
+    var multiShippingForm = app.getForm('multishipping');
 
     multiShippingForm.handleAction({
         'cancel'        : function (formgroup) {

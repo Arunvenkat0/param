@@ -13,8 +13,7 @@ var PagingModel = require('dw/web/PagingModel');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var Form = require('~/cartridge/scripts/models/Form');
-var orderListForm = Form.get('orders.orderlist');
+
 
 /**
  * Renders a page with the order history of the current logged in customer.
@@ -31,6 +30,7 @@ function history()
     orderPagingModel.setPageSize(pageSize);
     orderPagingModel.setStart(start);
 
+    var orderListForm = app.getForm('orders.orderlist');
     orderListForm.invalidate();
     orderListForm.clear();
     orderListForm.copyFrom(orderPagingModel.pageElements);
@@ -50,6 +50,7 @@ function history()
  */
 function orders()
 {
+    var orderListForm = app.getForm('orders.orderlist');
     orderListForm.handleAction({
         'show': function (formGroup, action) {
             var Order = action.object;

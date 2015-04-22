@@ -31,8 +31,7 @@ function show() {
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
 
-        var pageMeta = require('~/cartridge/scripts/meta');
-        pageMeta.update(content);
+        require('~/cartridge/scripts/meta').update(content);
 
         app.getView({
             Content             : content,

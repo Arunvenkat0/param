@@ -14,38 +14,36 @@ var GiftCertificateMgr  = require('dw/order/GiftCertificateMgr');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Form = app.getModel('Form');
 var Cart = app.getModel('Cart');
 var ProductList = app.getModel('ProductList');
-var giftcertForm = Form.get('giftcert');
 
 /**
  * Renders the page to purchase a gift certificate.
  */
 function purchase()
 {
-    giftcertForm.clear();
+    app.getForm('giftcert').clear();
 
     showPurchase();
 }
 
 /**
- * Internal helper which prepares and shows teh purchase page without clearing the form
+ * Internal helper which prepares and shows the purchase page without clearing the form
  */
 function showPurchase()
 {
     var parameterMap = request.httpParameterMap;
-    var purchaseForm = session.forms.giftcert.purchase;
+    var purchaseForm = app.getForm('giftcert.purchase');
 
 
     if (parameterMap.from.stringValue || parameterMap.recipient.stringValue) {
-        purchaseForm.from.value = parameterMap.from.stringValue;
-        purchaseForm.recipient.value = parameterMap.recipient.stringValue;
+        purchaseForm.setValue('from', parameterMap.from.stringValue);
+        purchaseForm.setValue('recipient', parameterMap.recipient.stringValue);
     }
 
 
     if (customer.registered) {
-        purchaseForm.from.value = customer.profile.firstName + ' ' + customer.profile.lastName;
+        purchaseForm.setValue('from', customer.profile.firstName + ' ' + customer.profile.lastName);
     }
 
 
@@ -53,12 +51,11 @@ function showPurchase()
         var productList = ProductList.get(parameterMap.plid.value).object;
         if (productList)
         {
-
-            purchaseForm.recipient.value = productList.owner.profile.firstName + ' ' +
-                productList.owner.profile.lastName;
-            purchaseForm.recipientEmail.value = productList.owner.profile.email;
-            purchaseForm.confirmRecipientEmail.value = productList.owner.profile.email;
-            purchaseForm.lineItemId.value = parameterMap.itemid.stringValue;
+            purchaseForm.setValue('recipient', productList.owner.profile.firstName + ' ' +
+                productList.owner.profile.lastName);
+            purchaseForm.setValue('recipientEmail', productList.owner.profile.email);
+            purchaseForm.setValue('confirmRecipientEmail', productList.owner.profile.email);
+            purchaseForm.setValue('lineItemId', parameterMap.itemid.stringValue);
         }
     }
 
@@ -106,16 +103,17 @@ function edit()
         return;
     }
 
+    var giftcertForm = app.getForm('giftcert');
     giftcertForm.clear();
 
-    var purchaseForm = session.forms.giftcert.purchase;
-    purchaseForm.lineItemId.value = giftCertificateLineItem.UUID;
-    purchaseForm.from.value = giftCertificateLineItem.senderName;
-    purchaseForm.recipient.value = giftCertificateLineItem.recipientName;
-    purchaseForm.recipientEmail.value = giftCertificateLineItem.recipientEmail;
-    purchaseForm.confirmRecipientEmail.value = giftCertificateLineItem.recipientEmail;
-    purchaseForm.message.value = giftCertificateLineItem.message;
-    purchaseForm.amount.value = giftCertificateLineItem.price.value;
+    var purchaseForm = app.getForm('giftcert.purchase');
+    purchaseForm.setValue('lineItemId', giftCertificateLineItem.UUID);
+    purchaseForm.setValue('from', giftCertificateLineItem.senderName);
+    purchaseForm.setValue('recipient', giftCertificateLineItem.recipientName);
+    purchaseForm.setValue('recipientEmail', giftCertificateLineItem.recipientEmail);
+    purchaseForm.setValue('confirmRecipientEmail', giftCertificateLineItem.recipientEmail);
+    purchaseForm.setValue('message', giftCertificateLineItem.message);
+    purchaseForm.setValue('amount', giftCertificateLineItem.price.value);
 
     app.getView({
         GiftCertificateLineItem : giftCertificateLineItem,
@@ -177,20 +175,25 @@ function update()
  */
 function processAddToBasket(action)
 {
-    var form = session.forms.giftcert.purchase;
+    var purchaseForm = app.getForm('giftcert.purchase');
+	
     // Validate confirmation of email address
-    if (form.recipientEmail.valid && form.confirmRecipientEmail.valid && (form.recipientEmail.value !== form.confirmRecipientEmail.value)) {
-        form.confirmRecipientEmail.invalidateFormElement('giftcert.confirmrecipientemailvalueerror');
+    var recipientEmailForm = purchaseForm.get('recipientEmail');
+    var confirmRecipientEmailForm = purchaseForm.get('confirmRecipientEmail');
+      
+    if (recipientEmailForm.valid() && confirmRecipientEmailForm.valid() && (recipientEmailForm.value() !== confirmRecipientEmailForm.value)) {
+        confirmRecipientEmailForm.invalidate('giftcert.confirmrecipientemailvalueerror');
     }
 
     // Validate amount in range
-    if (form.amount.valid && ((form.amount.value < 5) || (form.amount.value > 5000))) {
-        form.amount.invalidateFormElement('giftcert.amountvalueerror');
+    var amountForm = purchaseForm.get('amount');
+    if (amountForm.valid() && ((amountForm.value() < 5) || (amountForm.value() > 5000))) {
+        amountForm.invalidate('giftcert.amountvalueerror');
     }
 
     // Extract any error messages from validation
     var formErrors = new dw.util.HashMap();
-    for (var i = 0; i < form.getChildCount(); i++) {
+    for (var i = 0; i < purchaseForm.object.getChildCount(); i++) {
         var field = form[i];
         if (!field.isValid()) {
             formErrors.put(field.getHtmlName(), dw.web.Resource.msg(field.getError(), 'forms', null));
@@ -272,17 +275,17 @@ function showMiniCart()
  */
 function createGiftCert(cart)
 {
-    var purchaseForm = session.forms.giftcert.purchase;
+    var purchaseForm = app.getForm('giftcert.purchase');
 
-    var CurrentHttpParameterMap = request.httpParameterMap;
+    var plid = request.httpParameterMap.plid.stringValue;
 
     var productListItem = null;
 
-    if (CurrentHttpParameterMap.plid.stringValue)
+    if (plid)
     {
-        var productList = ProductList.get(CurrentHttpParameterMap.plid.stringValue).object;
+        var productList = ProductList.get(plid).object;
         if (productList) {
-            productListItem = productList.getItem(purchaseForm.lineItemId.value);
+            productListItem = productList.getItem(purchaseForm.get('lineItemId').value());
         }
     }
 
@@ -292,12 +295,12 @@ function createGiftCert(cart)
     // });
 
     var AddGiftCertificateToBasketResult = new dw.system.Pipelet('AddGiftCertificateToBasket').execute({
-        Amount : purchaseForm.amount.value,
+        Amount : purchaseForm.get('amount').value(),
         Basket : cart.object,
-        RecipientEmail : purchaseForm.recipientEmail.value,
-        RecipientName : purchaseForm.recipient.value,
-        SenderName : purchaseForm.from.value,
-        Message : purchaseForm.message.value,
+        RecipientEmail : purchaseForm.get('recipientEmail').value(),
+        RecipientName : purchaseForm.get('recipient').value(),
+        SenderName : purchaseForm.get('from').value(),
+        Message : purchaseForm.get('message').value(),
         ProductListItem : productListItem,
         // TODO originally Shipment : Shipment, but where should this come from?
         Shipment : null
@@ -320,25 +323,24 @@ function createGiftCert(cart)
  */
 function updateGiftCert(cart)
 {
-    var purchaseForm = session.forms.giftcert.purchase;
+    var purchaseForm = app.getForm('giftcert.purchase');
 
-    var giftCertificateLineItem = cart.getGiftCertificateLineItemByUUID(purchaseForm.lineItemId.value);
+    var giftCertificateLineItem = cart.getGiftCertificateLineItemByUUID(purchaseForm.get('lineItemId').value());
     if(!giftCertificateLineItem){
         return null;
     }
 
     Transaction.begin();
 
-        giftCertificateLineItem.senderName = purchaseForm.from.value;
-        giftCertificateLineItem.recipientName = purchaseForm.recipient.value;
-        giftCertificateLineItem.recipientEmail = purchaseForm.recipientEmail.value;
-        giftCertificateLineItem.message = purchaseForm.message.value;
-        giftCertificateLineItem.basePrice = new dw.value.Money(purchaseForm.amount.value,
-            giftCertificateLineItem.basePrice.currencyCode);
-        giftCertificateLineItem.grossPrice = new dw.value.Money(purchaseForm.amount.value,
-            giftCertificateLineItem.grossPrice.currencyCode);
-        giftCertificateLineItem.netPrice = new dw.value.Money(purchaseForm.amount.value,
-            giftCertificateLineItem.netPrice.currencyCode);
+        giftCertificateLineItem.senderName = purchaseForm.get('from').value();
+        giftCertificateLineItem.recipientName = purchaseForm.get('recipient').value();
+        giftCertificateLineItem.recipientEmail = purchaseForm.get('recipientEmail').value();
+        giftCertificateLineItem.message = purchaseForm.get('message').value();
+        
+        var amount = purchaseForm.get('amount').value();
+        giftCertificateLineItem.basePrice = new dw.value.Money(amount, giftCertificateLineItem.basePrice.currencyCode);
+        giftCertificateLineItem.grossPrice = new dw.value.Money(amount, giftCertificateLineItem.grossPrice.currencyCode);
+        giftCertificateLineItem.netPrice = new dw.value.Money(amount, giftCertificateLineItem.netPrice.currencyCode);
 
     Transaction.commit();
 

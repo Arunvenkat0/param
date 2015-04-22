@@ -74,13 +74,14 @@ function showConfirmation(order) {
     if (!customer.authenticated) {
         // Initializes the account creation form for guest checkouts, by populating the first and last name with the
         // used billing address.
-        session.forms.profile.customer.firstname.value = order.billingAddress.firstName;
-        session.forms.profile.customer.lastname.value = order.billingAddress.lastName;
-        session.forms.profile.customer.email.value = order.customerEmail;
+        var customerForm = app.getForm('profile.customer');
+        customerForm.setValue('firstname', order.billingAddress.firstName);
+        customerForm.setValue('lastname', order.billingAddress.lastName);
+        customerForm.setValue('email', order.customerEmail);
     }
 
-    session.forms.profile.login.passwordconfirm.clearFormElement();
-    session.forms.profile.login.password.clearFormElement();
+    app.getForm('profile.login.passwordconfirm').clear();
+    app.getForm('profile.login.password').clear();
 
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});

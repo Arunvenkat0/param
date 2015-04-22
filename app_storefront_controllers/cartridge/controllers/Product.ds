@@ -21,8 +21,7 @@ function show() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var pageMeta = require('~/cartridge/scripts/meta');
-        pageMeta.update(product);
+        require('~/cartridge/scripts/meta').update(product);
 
         var productView = app.getView('ProductView', {
             product        : product,
@@ -162,7 +161,9 @@ function productNavigation() {
                 category = product.getVariationModel().getMaster().getPrimaryCategory();
             }
 
-            category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
+            if(category && category.isOnline()){
+                productSearchModel.setCategoryID(category.getID());
+            }
         }
 
         // execute the product search

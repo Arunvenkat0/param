@@ -14,7 +14,6 @@ var Template = require('dw/util/Template');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var contactUsForm = app.getModel('Form').get('contactus');
 var Email = app.getModel('Email');
 
 /**
@@ -35,7 +34,7 @@ function leftNav() {
  * Provides a contact us form which sends an email to the configured customer service email address.
  */
 function contactUs() {
-    contactUsForm.clearFormElement();
+    app.getForm('contactus').clear();
     app.getView('CustomerServiceView').render('content/contactus');
 }
 
@@ -43,6 +42,8 @@ function contactUs() {
  * The form handler.
  */
 function submit() {
+	var contactUsForm = app.getForm('contactus');
+	
     var contactUsResult = contactUsForm.handleAction({
         'send'  : function (formgroup) {
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the

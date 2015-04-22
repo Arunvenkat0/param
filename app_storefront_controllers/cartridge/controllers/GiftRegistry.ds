@@ -51,7 +51,7 @@ function start() {
     var ProductLists = GetProductListsResult.ProductLists;
 
 	Form.get(productListsForm.items).copyFrom(ProductLists);
-    
+
     var accountGiftRegistry = Content.get('myaccount-giftregistry');
     
     var pageMeta = require('~/cartridge/scripts/meta');
@@ -379,7 +379,7 @@ function confirmation() {
 		        ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
 			 }
                 );
-	       
+
 
 
 	        if (!Form.get(currentForms.giftregistry.event).copyTo(ProductList))
@@ -402,7 +402,7 @@ function confirmation() {
                 };
 	        }
 	        var ProductListRegistrant = CreateProductListRegistrantResult.ProductListRegistrant;
-			
+
 			if (!Form.get(currentForms.giftregistry.event.participant).copyTo(ProductListRegistrant))
 	        {
                 return {
@@ -557,7 +557,7 @@ function editEventParticipant() {
 	        		  ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
                     }
                 );
-                
+
 	        if (ProductList.coRegistrant !== null)
 	        {
 	            if (!Form.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant))
@@ -1133,7 +1133,7 @@ function confirm() {
             return;
         }
     }
-    
+
     var productList = ProductList.get();
 
     var ScriptResult = new dw.system.Pipelet('Script', {
@@ -1221,7 +1221,7 @@ function updateAll() {
 /** @see module:controllers/GiftRegistry~Confirmation */
 exports.Confirmation = guard.ensure(['post', 'https'], confirmation);
 /** @see module:controllers/GiftRegistry~Confirmation */
-exports.Delete = guard.ensure(['get', 'https'], Delete); 
+exports.Delete = guard.ensure(['get', 'https'], Delete);
 /** @see module:controllers/GiftRegistry~EditAddresses */
 exports.EditAddresses = guard.ensure(['post', 'https'], editAddresses);
 /** @see module:controllers/GiftRegistry~EventParticipant */
@@ -1233,15 +1233,15 @@ exports.SelectProductListInteraction = guard.ensure(['post', 'https'], selectPro
 /** @see module:controllers/GiftRegistry~ShowPurchasesInteraction */
 exports.ShowPurchasesInteraction = guard.ensure(['post', 'https'], showPurchasesInteraction);
 /** @see module:controllers/GiftRegistry~ShowRegistryByID */
-exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID); 
+exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID);
 /** @see module:controllers/GiftRegistry~ShowRegistryInteraction */
-exports.ShowRegistryInteraction = guard.ensure(['get', 'https'], showRegistryInteraction); 
+exports.ShowRegistryInteraction = guard.ensure(['get', 'https'], showRegistryInteraction);
 /** @see module:controllers/GiftRegistry~SubmitFormLanding */
 exports.SubmitFormLanding = guard.ensure(['post', 'https'], submitFormLanding);
 /** @see module:controllers/GiftRegistry~registrymain */
 exports.registrymain = guard.ensure(['post', 'https'], registrymain);
 /** @see module:controllers/GiftRegistry~Start */
-exports.Start = guard.ensure(['get', 'https', 'loggedIn'], start);
+exports.Start = guard.ensure(['get', 'https', 'loggedIn'], start, {scope : 'giftregistry'});
 /** @see module:controllers/GiftRegistry~AddProduct */
 exports.AddProduct = guard.ensure(['get', 'https', 'loggedIn'], addProduct);
 
