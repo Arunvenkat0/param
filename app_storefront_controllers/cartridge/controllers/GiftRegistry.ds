@@ -7,15 +7,15 @@
  */
 
 /* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
 var Transaction = require('dw/system/Transaction');
-var ProductList = require('~/cartridge/scripts/models/ProductList');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
-var Form = require('~/cartridge/scripts/models/Form');
+
+var Content = app.getModel('Content');
+var ProductList = app.getModel('ProductList');
+var Form = app.getModel('Form');
 var giftRegistryForm = Form.get('giftregistry');
 
 /**
@@ -53,9 +53,11 @@ function start() {
 	Form.get(productListsForm.items).copyFrom(ProductLists);
 
     var accountGiftRegistry = Content.get('myaccount-giftregistry');
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(accountGiftRegistry);
 
-    view.get().render('account/giftregistry/registrylist');
+    app.getView().render('account/giftregistry/registrylist');
 }
 
 
@@ -77,7 +79,7 @@ function registrymain() {
 	        {
 	            productListsForm.search.eventYear.invalidateFormElement();
 
-	            view.get().render('account/giftregistry/registrylist');
+	            app.getView().render('account/giftregistry/registrylist');
 	            return;
 	        }
 
@@ -86,7 +88,7 @@ function registrymain() {
 	    }
 	}
 
-    view.get().render('account/giftregistry/registrylist');
+    app.getView().render('account/giftregistry/registrylist');
 }
 
 
@@ -186,7 +188,7 @@ function createOne()
     participantForm.lastName.value = customer.profile.lastName;
     participantForm.email.value = customer.profile.email;
 
-    view.get().render('account/giftregistry/eventparticipant');
+    app.getView().render('account/giftregistry/eventparticipant');
 }
 
 
@@ -215,7 +217,7 @@ function eventParticipant() {
 
 function showAddresses()
 {
-    view.get().render('account/giftregistry/addresses');
+    app.getView().render('account/giftregistry/addresses');
 }
 
 
@@ -234,7 +236,7 @@ function participantAddresses() {
 	            GiftRegistryForm: currentForms.giftregistry
 	        });
 
-	        view.get().render('account/giftregistry/eventparticipant');
+	        app.getView().render('account/giftregistry/eventparticipant');
 	        return;
 	    }
 	    else if (TriggeredAction.formId === 'confirm')
@@ -293,7 +295,7 @@ function participantAddresses() {
 
 function showConfirmation()
 {
-    view.get().render('account/giftregistry/giftregistryconfirmation');
+    app.getView().render('account/giftregistry/giftregistryconfirmation');
 }
 
 
@@ -467,7 +469,7 @@ function selectOne()
 
     Form.get(currentForms.productlists.items).copyFrom(ProductLists);
 
-    view.get().render('account/giftregistry/registryselect');
+    app.getView().render('account/giftregistry/registryselect');
 }
 
 
@@ -517,7 +519,7 @@ function editEvent()
 
 function showEditParticipantForm()
 {
-    view.get().render('account/giftregistry/eventparticipant');
+    app.getView().render('account/giftregistry/eventparticipant');
 }
 
 // TODO this is probably never called?
@@ -635,7 +637,7 @@ function showPurchases()
 
 function showPurchases()
 {
-    view.get().render('account/giftregistry/purchases');
+    app.getView().render('account/giftregistry/purchases');
 }
 
 
@@ -680,7 +682,7 @@ function showRegistry(args) {
     Form.get(giftregistryForm.event).copyFrom(ProductList);
 
 
-    view.get().render('account/giftregistry/registry', {
+    app.getView().render('account/giftregistry/registry', {
         Status : null,
         ProductList : ProductList
     });
@@ -732,7 +734,7 @@ function showRegistryInteraction() {
 	        {
 	            var Status = new dw.system.Status(dw.system.Status.ERROR, "delete.restriction");
 
-	            view.get().render('account/giftregistry/registry', {
+	            app.getView().render('account/giftregistry/registry', {
 	                Status: Status
 	            });
 	            return;
@@ -797,7 +799,7 @@ function showRegistryInteraction() {
 	}
 
 	// TODO
-    view.get().render('account/giftregistry/registry', {
+    app.getView().render('account/giftregistry/registry', {
 
     });
 }
@@ -834,7 +836,7 @@ function search() {
 
 function showSearch(args)
 {
-    view.get().render('account/giftregistry/giftregistryresults', {
+    app.getView().render('account/giftregistry/giftregistryresults', {
         ProductLists: args.ProductLists
     });
 }
@@ -962,7 +964,7 @@ function replaceProductListItem() {
     });
     if (ScriptResult.result === PIPELET_ERROR)
     {
-        view.get().render('account/giftregistry/refreshgiftregistry', {
+        app.getView().render('account/giftregistry/refreshgiftregistry', {
         });
         return;
     }
@@ -997,7 +999,7 @@ function replaceProductListItem() {
     });
 
 
-    view.get().render('account/giftregistry/refreshgiftregistry', {
+    app.getView().render('account/giftregistry/refreshgiftregistry', {
     });
 }
 
@@ -1030,7 +1032,7 @@ function editAddresses() {
 
 
 function showAddresses() {
-    view.get().render('account/giftregistry/addresses');
+    app.getView().render('account/giftregistry/addresses');
 }
 
 

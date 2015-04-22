@@ -7,13 +7,9 @@
  * @module controllers/Product
  */
 
-/* API Includes */
-var PagingModel = require('dw/web/PagingModel');
-var Product = require('~/cartridge/scripts/models/Product');
-
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a full product detail page. If the http parameter "format" is set to
@@ -21,12 +17,13 @@ var view = require('~/cartridge/scripts/view');
  */
 function show() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
 
-        var productView = view.get('views/ProductView', {
+        var productView = app.getView('ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -45,7 +42,7 @@ function show() {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -56,10 +53,11 @@ function show() {
  */
 function detail() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('views/ProductView', {
+        var productView = app.getView('ProductView', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -78,7 +76,7 @@ function detail() {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -90,6 +88,7 @@ function detail() {
  */
 function getAvailability() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
@@ -99,7 +98,7 @@ function getAvailability() {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -109,10 +108,11 @@ function getAvailability() {
  */
 function hitTile() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = view.get('views/ProductView', {
+        var productView = app.getView('ProductView', {
             product       : product,
             showswatches  : true,
             showpricing   : true,
@@ -135,14 +135,16 @@ function hitTile() {
  * list, like search result list etc.
  */
 function productNavigation() {
-    var Search = require('~/cartridge/scripts/models/Search');
 
     var params = request.httpParameterMap;
+
+    var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
 
         // construct the search based on the HTTP params & set the categoryID
+        var Search = app.getModel('Search');
         var productSearchModel = Search.initializeProductSearchModel(params);
 
         // need to reset pid in search
@@ -168,11 +170,12 @@ function productNavigation() {
         productSearchModel.search();
 
         // construct the paging model
+        var PagingModel = require('dw/web/PagingModel');
         var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
         productPagingModel.setPageSize(3);
         productPagingModel.setStart(params.start.intValue - 2);
 
-        view.get({
+        app.getView({
             ProductPagingModel  : productPagingModel,
             ProductSearchResult : productSearchModel
         }).render('search/productnav');
@@ -182,7 +185,7 @@ function productNavigation() {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -192,11 +195,12 @@ function productNavigation() {
  */
 function variation() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
 
-        var productView = view.get('views/ProductView', {
+        var productView = app.getView('ProductView', {
             product : product
         });
 
@@ -215,7 +219,7 @@ function variation() {
 
         if (request.httpParameterMap.source.stringValue === 'bonus') {
             var Cart = require('~/cartridge/scripts/models/Cart');
-	        var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
+            var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
             var bonusDiscountLineItem = null;
 
             for (var i = 0; i < bonusDiscountLineItems.length; i++) {
@@ -225,31 +229,31 @@ function variation() {
                 }
             }
 
-            view.get('views/ProductView', {
+            app.getView('ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
         }
         else if (request.httpParameterMap.format.stringValue) {
-            view.get('views/ProductView', {
+            app.getView('ProductView', {
                 product         : product,
                 GetImages       : true,
                 resetAttributes : resetAttributes
             }).render('product/productcontent');
         }
         else {
-            view.get('views/ProductView', {
+            app.getView('ProductView', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel
             }).render('product/product');
         }
     }
     else {
-	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -259,11 +263,12 @@ function variation() {
  */
 function variationPS() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
 
-        var productView = view.get('views/ProductView', {
+        var productView = app.getView('ProductView', {
             product : product
         });
 
@@ -275,17 +280,17 @@ function variationPS() {
         }
 
         if (request.httpParameterMap.format.stringValue) {
-            view.get('views/ProductView', {product : product}).render('product/components/productsetproduct');
+            app.getView('ProductView', {product : product}).render('product/components/productsetproduct');
         }
         else {
-            view.get('views/ProductView', {product : product}).render('product/product');
+            app.getView('ProductView', {product : product}).render('product/product');
         }
     }
     else {
-	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-	    view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }
@@ -316,7 +321,7 @@ function getBonusProducts() {
         }
     }
 
-    view.get({
+    app.getView({
         BonusDiscountLineItem : bonusDiscountLineItem
     }).render('product/bonusproductgrid');
 
@@ -327,19 +332,20 @@ function getBonusProducts() {
  */
 function getSetItem() {
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        view.get('views/ProductView', {
+        app.getView('ProductView', {
             product : product,
             isSet   : true
         }).render('product/components/productsetproduct');
     }
     else {
-	    // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
+        // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-	    view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
 
 }

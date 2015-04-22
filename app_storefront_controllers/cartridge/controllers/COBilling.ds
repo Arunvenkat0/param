@@ -23,11 +23,10 @@ var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var billingForm = require('~/cartridge/scripts/models/Form').get('billing');
 var billingAddressForm = require('~/cartridge/scripts/models/Form').get('billingaddress');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Starting point for billing. After a successful shipping setup both COShipping
@@ -74,6 +73,7 @@ function start(cart) {
         cart.calculate();
     });
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
     returnToForm(cart);
 }
@@ -90,16 +90,17 @@ function returnToForm(cart, params) {
         });
     }
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
 
     if (params) {
-        view.get(require('~/object').extend(params, {
+        app.getView(require('~/object').extend(params, {
         	Basket      : cart.object,
         	ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
         })).render('checkout/billing/billing');
     }
     else {
-        view.get({
+        app.getView({
         	Basket      : cart.object,
         	ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
         }).render('checkout/billing/billing');
@@ -385,7 +386,7 @@ function updateSummary() {
         cart.calculate();
     });
 
-    view.get({
+    app.getView({
         checkoutstep : 4,
         Basket       : cart.object
     }).render('checkout/minisummary');
@@ -452,7 +453,7 @@ function editAddress() {
         Form.get(session.forms.billingaddress.states).copyFrom(address);
     }
 
-    view.get({
+    app.getView({
         ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
     }).render('checkout/billing/billingaddressdetails');
 }
@@ -465,24 +466,24 @@ function editBillingAddress() {
     billingAddressForm.handleAction({
         'apply'  : function (formgroup) {
             if (!Form.get(session.forms.billingaddress).copyTo(session.forms.billingaddress.object)) {
-                view.get({
+                app.getView({
                     ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
                 return;
             }
             else {
-                view.get().render('components/dialog/dialogapply');
+                app.getView().render('components/dialog/dialogapply');
                 return;
             }
         },
         'remove' : function (formgroup) {
             if (ProductListMgr.getProductLists(session.forms.billingaddress.object).isEmpty()) {
                 customer.getAddressBook().removeAddress(session.forms.billingaddress.object);
-                view.get().render('components/dialog/dialogdelete');
+                app.getView().render('components/dialog/dialogdelete');
                 return;
             }
             else {
-                view.get({
+                app.getView({
                     ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
                 return;
@@ -589,7 +590,7 @@ function selectCreditCard() {
         }
     }
 
-    view.get({
+    app.getView({
         SelectedCreditCard : selectedCreditCard
     }).render('checkout/billing/creditcardjson');
 }

@@ -1,22 +1,21 @@
 'use strict';
+
 /**
  * Renders a content page or a content include.
  *
  * @module controllers/Page
  */
 
-/* API Includes */
-var Content = require('~/cartridge/scripts/models/Content');
-
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders a content page based on the rendering template configured for the page or a default rendering template.
  */
 function show() {
 
+    var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if (!content) {
@@ -24,17 +23,17 @@ function show() {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
-        view.get().render('error/notfound');
+        app.getView().render('error/notfound');
     }
     else {
-        var Search = require('~/cartridge/scripts/models/Search');
+    	var Search = app.getModel('Search');
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
 
         require('~/cartridge/scripts/meta').update(content);
 
-        view.get({
+        app.getView({
             Content             : content,
             ContentSearchResult : contentSearchModel
         }).render(content.template || 'content/content/contentpage');
@@ -48,10 +47,11 @@ function show() {
  */
 function include() {
 
+    var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if(content){
-        view.get({
+        app.getView({
             Content : content
         }).render(content.template || 'content/content/contentassetinclude');
     }else{

@@ -8,10 +8,8 @@
  */
 
 /* Script Modules */
+var app     = require('~/cartridge/scripts/app');
 var guard   = require('~/cartridge/scripts/guard');
-var Cart    = require('~/cartridge/scripts/models/Cart');
-var view    = require('~/cartridge/scripts/view');
-var Product = require('~/cartridge/scripts/models/Product');
 
 /**
  * Sets the store for a given line item (requires rich_UI cartrdige)
@@ -19,6 +17,7 @@ var Product = require('~/cartridge/scripts/models/Product');
 function setStore() {
     var parameterMap = request.httpParameterMap;
 
+    var Cart = app.getModel('Cart');
     var cart = Cart.get();
 
     var result = setStoreInLineItem( cart.object, parameterMap.plid.stringValue, parameterMap.storeid.stringValue,
@@ -50,7 +49,7 @@ function showSelectedStoreCore() {
     session.custom.storeId = request.httpParameterMap.storeId.value;
 
     if ((session.custom.zipcode !== null) && (session.custom.storeId !== null)) {
-        view.get().render('storelocator/storepickup/coreshowselectedstore');
+        app.getView().render('storelocator/storepickup/coreshowselectedstore');
         return;
     }
 
@@ -63,7 +62,7 @@ function showSelectedStoreCore() {
 function showSetStore(stores, storeAvailabilityMap) {
     if (session.custom.zipcode !== null) {
         // TODO Stores and storeAvailabilityMap expected?
-        view.get({
+        app.getView({
             Stores : stores,
             storeAvailabilityMap : storeAvailabilityMap
         }).render('storelocator/storepickup/coresetstore');
@@ -77,7 +76,7 @@ function showSetStore(stores, storeAvailabilityMap) {
  * TODO
  */
 function showZipCode() {
-    view.get().render('storelocator/storepickup/corezipcode');
+    app.getView().render('storelocator/storepickup/corezipcode');
 }
 
 /**
@@ -87,6 +86,8 @@ function showAvailableStores() {
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
 
     var stores = lookupByZipCode().Stores;
+    
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
     var storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
 
@@ -115,9 +116,10 @@ function setZipCodeCore() {
  * TODO
  */
 function setStoreCore() {
-    var CartController = require('./Cart');
+    var CartController = app.getController('Cart');
     var parameterMap = request.httpParameterMap;
 
+    var Cart = app.getModel('Cart');
     var cart = Cart.get();
 
     var result = setStoreInLineItem( cart.object, parameterMap.plid.stringValue, parameterMap.storeid.stringValue,
@@ -148,6 +150,7 @@ function setStoreCore() {
 function inventory() {
     var storesList = lookupByZipCode().Stores;
 
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue).object;
     var lineitem;
     // @FIXME Why can pid be a lineitem ID?
@@ -256,6 +259,7 @@ function lookupByZipCode() {
  * object for determining products availability.
  */
 function getProductLineItem(uuid) {
+    var Cart = app.getModel('Cart');
     var cart = Cart.get();
     for (var i = 0; i < cart.object.productLineItems.length; i++) {
         var lineItem = cart.object.productLineItems[i];

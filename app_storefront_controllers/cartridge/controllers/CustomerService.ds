@@ -7,27 +7,28 @@
  */
 
 /* API Includes */
-var Email = require('~/cartridge/scripts/models/Email');
 var Status = require('dw/system/Status');
 var Template = require('dw/util/Template');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var contactUsForm = require('~/cartridge/scripts/models/Form').get('contactus');
-var view = require('~/cartridge/scripts/view');
+
+var contactUsForm = app.getModel('Form').get('contactus');
+var Email = app.getModel('Email');
 
 /**
  * Renders the customer service overview page.
  */
 function show() {
-    view.get('views/CustomerServiceView').render('content/customerservice');
+    app.getView('CustomerServiceView').render('content/customerservice');
 }
 
 /**
  * Renders the left hand navigation.
  */
 function leftNav() {
-    view.get('views/CustomerServiceView').render('content/customerserviceleftnav');
+    app.getView('CustomerServiceView').render('content/customerserviceleftnav');
 }
 
 /**
@@ -35,7 +36,7 @@ function leftNav() {
  */
 function contactUs() {
     contactUsForm.clearFormElement();
-    view.get('views/CustomerServiceView').render('content/contactus');
+    app.getView('CustomerServiceView').render('content/contactus');
 }
 
 /**
@@ -58,12 +59,12 @@ function submit() {
     });
 
     if (contactUsResult && (contactUsResult.getStatus() === Status.OK)) {
-        view.get('views/CustomerServiceView', {
+        app.getView('CustomerServiceView', {
             ConfirmationMessage : 'edit'
         }).render('content/contactus');
     }
     else {
-        view.get('views/CustomerServiceView').render('content/contactus');
+        app.getView('CustomerServiceView').render('content/contactus');
     }
 }
 

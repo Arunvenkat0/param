@@ -8,14 +8,14 @@
  */
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * This is main method to handle all reporting events
  */
 function start() {
-    view.get().render('util/reporting/reporting');
+    app.getView().render('util/reporting/reporting');
 }
 
 /*

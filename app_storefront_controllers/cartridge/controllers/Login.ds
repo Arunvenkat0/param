@@ -6,19 +6,20 @@
  * @module controllers/Login
  */
 
+/* API Includes */
+var OrderMgr = require('dw/order/OrderMgr');
+var Transaction = require('dw/system/Transaction');
+
+/* Script Modules */
+var app            = require('~/cartridge/scripts/app');
 var guard          = require('~/cartridge/scripts/guard');
-var pageMeta       = require('~/cartridge/scripts/meta');
-var view           = require('~/cartridge/scripts/view');
-var Form           = require('~/cartridge/scripts/models/Form');
+
+var Customer       = app.getModel('Customer');
+var Form           = app.getModel('Form');
 var loginForm      = Form.get('login');
 var oauthLoginForm = Form.get('oauthlogin');
 
 var LOGGER         = dw.system.Logger.getLogger('login');
-
-/* API Includes */
-var Customer    = require('~/cartridge/scripts/models/Customer');
-var OrderMgr = require('dw/order/OrderMgr');
-var Transaction = require('dw/system/Transaction');
 
 /**
  * This method contains the login page preparation and display, it is called from various
@@ -36,6 +37,7 @@ function show()
         loginForm.object.rememberme.value = true;
     }
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
     // save return URL in session
@@ -43,7 +45,7 @@ function show()
         session.custom.TargetLocation = request.httpParameterMap.original.value;
     }
 
-    var v = view.get('views/LoginView',{
+    var v = app.getView('LoginView',{
         RegistrationStatus : false
     });
     if(request.httpParameterMap.scope.submitted){
@@ -90,7 +92,7 @@ function handleLoginForm()
 
             if(!success){
                 session.forms.login.loginsucceeded.invalidateFormElement();
-                view.get('views/LoginView').render();
+                app.getView('LoginView').render();
                 return;
             }else{
                 loginForm.clear();
@@ -141,7 +143,7 @@ function handleLoginForm()
                 return;
             }
 
-            view.get({
+            app.getView({
                 Order : foundOrder
             }).render('account/orderhistory/orderdetails');
         },
@@ -150,7 +152,7 @@ function handleLoginForm()
             return;
         },
         'error' : function(){
-            view.get('views/LoginView').render();
+            app.getView('LoginView').render();
             return;
         }
     });
@@ -179,7 +181,7 @@ function handleOAuthLoginForm()
                     finishOAuthLogin();
 
                     // show login page with error
-                    view.get('views/LoginView').render();
+                    app.getView('LoginView').render();
                     return;
                 }
 
@@ -188,7 +190,7 @@ function handleOAuthLoginForm()
             return;
         },
         'error' : function(){
-            view.get('views/LoginView').render();
+            app.getView('LoginView').render();
             return;
         }
     });

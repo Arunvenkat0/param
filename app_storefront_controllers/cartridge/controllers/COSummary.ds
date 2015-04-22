@@ -10,14 +10,14 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
+
+var Cart = app.getModel('Cart');
 
 /**
  * This pipeline renders the summary page prior to order creation.
@@ -38,8 +38,9 @@ function start() {
             cart.calculate();
         });
 
+        var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
-        view.get({
+        app.getView({
             Basket : cart.object
         }).render('checkout/summary/summary');
     }
@@ -81,8 +82,9 @@ function showConfirmation(order) {
     session.forms.profile.login.passwordconfirm.clearFormElement();
     session.forms.profile.login.password.clearFormElement();
 
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
-    view.get({
+    app.getView({
         Order       : order,
         ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
     }).render('checkout/confirmation/confirmation');

@@ -16,10 +16,9 @@ var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var cartForm = require('~/cartridge/scripts/models/Form').get('cart');
-var pageMeta = require('~/cartridge/scripts/meta');
-var view = require('~/cartridge/scripts/view');
 
 /**
  * Renders the basket content.
@@ -29,7 +28,7 @@ function show() {
     session.forms.cart.shipments.invalidateFormElement();
     session.forms.login.invalidateFormElement();
 
-    view.get('views/CartView', {
+    app.getView('CartView', {
         cart               : Cart.get(),
         RegistrationStatus : false
     }).render('checkout/cart/cart');
@@ -181,9 +180,11 @@ function submitForm() {
 
     if (formResult) {
     	var cartAsset = Content.get('cart');
+        
+        var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
-        view.get('views/CartView', formResult).render('checkout/cart/cart');
+        app.getView('CartView', formResult).render('checkout/cart/cart');
     }
 }
 
@@ -230,7 +231,7 @@ function addProduct() {
         }
         else {
 
-            view.get('views/CartView', {
+            app.getView('CartView', {
                 Basket : cart
             }).render('checkout/cart/cart');
 
@@ -287,7 +288,7 @@ function addProduct() {
     }
 
     if (params.format.stringValue === 'ajax') {
-        view.get('views/CartView', {
+        app.getView('CartView', {
             cart                  : cart,
             BonusDiscountLineItem : newBonusDiscountLineItem
         }).render('checkout/cart/minicart');
@@ -319,7 +320,7 @@ function continueShopping() {
  */
 function miniCart() {
 
-    view.get({Basket : Cart.get().object}).render('checkout/cart/minicart');
+    app.getView({Basket : Cart.get().object}).render('checkout/cart/minicart');
 
 }
 
@@ -334,7 +335,7 @@ function addToWishlist() {
     var productList = require('~/cartridge/scripts/models/ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
-    view.get('views/CartView', {
+    app.getView('CartView', {
         cart                   : Cart.get(),
         ProductAddedToWishlist : productID
     }).render('checkout/cart/cart');
