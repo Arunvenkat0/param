@@ -4,6 +4,7 @@
  *
  * @module models/Cart
  */
+var Transaction = require('dw/system/Transaction');
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -83,54 +84,55 @@ var Cart = AbstractModel.extend(
          * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
          */
         addProductItem : function (product, quantity, cgid, productOptionModel) {
-
-            if (product) {
-
-                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-                    Basket             : this.object,
-                    Product            : product,
-                    ProductOptionModel : productOptionModel,
-                    Quantity           : quantity,
-                    Category           : dw.catalog.CatalogMgr.getCategory(cgid)
-                });
-
-                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                    return;
-                }
-
-                if (product.bundle) {
-                    /**
-                     * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
-                     * variants then we have to manually replace the master products with the selected variants which gets passed in the
-                     * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
-                     * pids of the bundled products which are variations
-                     */
-                    if (request.httpParameterMap.childPids.stringValue) {
-                        var childPids = request.httpParameterMap.childPids.stringValue.split(",");
-
-                        for (var i = 0; i < childPids.length; i++) {
-                            var childProduct = Product.get(childPids[i]).object;
-
-                            if (childProduct) {
-                                // why is this needed ?
-                                require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap);
-
-                                var foundLineItem = null;
-                                foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
-
-                                if (foundLineItem) {
-                                    foundLineItem.replaceProduct(childProduct);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                this.calculate();
-
-            }
-
-            return;
+		    var cart = this;
+		    Transaction.wrap(function() {
+				var i;
+	            if (product) {
+					
+	                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
+	                    Basket             : cart.object,
+	                    Product            : product,
+	                    ProductOptionModel : productOptionModel,
+	                    Quantity           : quantity,
+	                    Category           : dw.catalog.CatalogMgr.getCategory(cgid)
+	                });
+	
+	                if (AddProductToBasketResult.result === PIPELET_ERROR) {
+	                    return;
+	                }
+	
+	                if (product.bundle) {
+	                    /**
+	                     * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
+	                     * variants then we have to manually replace the master products with the selected variants which gets passed in the
+	                     * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+	                     * pids of the bundled products which are variations
+	                     */
+	                    if (request.httpParameterMap.childPids.stringValue) {
+	                        var childPids = request.httpParameterMap.childPids.stringValue.split(",");
+	
+	                        for (i = 0; i < childPids.length; i++) {
+	                            var childProduct = Product.get(childPids[i]).object;
+	
+	                            if (childProduct) {
+	                                // why is this needed ?
+	                                require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap);
+	
+	                                var foundLineItem = null;
+	                                foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+	
+	                                if (foundLineItem) {
+	                                    foundLineItem.replaceProduct(childProduct);
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	
+	                cart.calculate();
+	
+	            }
+			});
         },
 
         /**
@@ -1553,9 +1555,8 @@ Cart.get = function (parameter) {
 
     if (!parameter) {
         var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-            Create : false
+            Create : true
         }).execute();
-
         if (GetBasketResult.result !== PIPELET_ERROR) {
             obj = GetBasketResult.Basket;
         }
@@ -1583,7 +1584,6 @@ Cart.goc = function () {
     }
 
     return new Cart(obj);
-
 };
 
 /** The cart class */
