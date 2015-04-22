@@ -14,7 +14,6 @@ var Template = require('dw/util/Template');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Email = app.getModel('Email');
 
 /**
  * Renders the customer service overview page.
@@ -48,6 +47,7 @@ function submit() {
         'send'  : function (formgroup) {
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the
             // user's email for demonstration.
+            var Email = app.getModel('Email');
             return Email.get('mail/contactus', formgroup.email.value)
                 .setFrom(formgroup.email.value)
                 .setSubject(formgroup.myquestion.value)

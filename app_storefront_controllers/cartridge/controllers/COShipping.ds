@@ -62,7 +62,7 @@ function start() {
 
             // Go to billing step, if we have no product line items, but only gift certificates in the basket, Shipping step is not required.
             if (cart.getProductLineItems().size() === 0) {
-                require('./COBilling').Start();
+                app.getController('COBilling').Start();
                 return;
             } else {
                 var pageMeta = require('~/cartridge/scripts/meta');
@@ -76,11 +76,11 @@ function start() {
                 }).render('checkout/shipping/singleshipping');
             }
         } else {
-            require('./COShippingMultiple').Start();
+            app.getController('COShippingMultiple').Start();
             return;
         }
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 
@@ -107,7 +107,7 @@ function singleShipping() {
                 if (Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')) {
 
                     if (!Form.get(session.forms.singleshipping.inStoreShipments.shipments).copyTo(cart.getShipments())) {
-                        require('./Cart').Show();
+                        app.getController('Cart').Show();
                         return;
                     }
                 }
@@ -115,10 +115,10 @@ function singleShipping() {
                 // Mark step as fulfilled.
                 session.forms.singleshipping.fulfilled.value = true;
 
-                require('./COBilling').Start();
+                app.getController('COBilling').Start();
                 return;
             } else {
-                require('./Cart').Show();
+                app.getController('Cart').Show();
                 return;
             }
         },
@@ -136,7 +136,7 @@ function singleShipping() {
             return;
         },
         'shipToMultiple' : function(formgroup) {
-            require('./COShippingMultiple').Start();
+            app.getController('COShippingMultiple').Start();
             return;
         },
         'error' : function(formgroup) {
@@ -237,7 +237,7 @@ function updateShippingMethodList() {
             ShippingCosts : shippingCosts
         }).render('checkout/shipping/shippingmethods');
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 }
@@ -428,7 +428,7 @@ function updateAddressDetails() {
 
         start();
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 }

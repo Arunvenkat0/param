@@ -96,7 +96,7 @@ function submitForm() {
             validationResult = cart.validateForCheckout();
 
             if (validationResult.EnableCheckout) {
-                //require('./COCustomer').Start();
+                //app.getController('COCustomer').Start();
                 response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
 
             } else {
@@ -155,7 +155,7 @@ function submitForm() {
         'login' : function(formgroup) {
             // TODO should not be processed here at all
             var success, result;
-            success = require('./Login').Process();
+            success = app.getController('Login').Process();
 
             if (success) {
                 response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
@@ -173,7 +173,7 @@ function submitForm() {
             };
         },
         'register' : function(formgroup) {
-            require('./Account').StartRegister();
+            app.getController('Account').StartRegister();
             Transaction.wrap(function() {
                 cart.calculate();
             });
@@ -181,7 +181,7 @@ function submitForm() {
             return null;
         },
         'unregistered' : function(formgroup) {
-            require('./COShipping').Start();
+            app.getController('COShipping').Start();
             return null;
         },
         'updateCart' : function(formgroup) {
@@ -235,12 +235,12 @@ function addProduct() {
     template = 'checkout/cart/minicart';
 
     if (params.source && params.source.stringValue === 'giftregistry' && params.cartAction && params.cartAction.stringValue === 'update') {
-        require('./GiftRegistry').ReplaceProductListItem();
+        app.getController('GiftRegistry').ReplaceProductListItem();
         return;
     }
 
     if (params.source && params.source.stringValue === 'wishlist' && params.cartAction && params.cartAction.stringValue === 'update') {
-        require('./Wishlist').ReplaceProductListItem();
+        app.getController('Wishlist').ReplaceProductListItem();
         return;
     }
 
@@ -339,7 +339,7 @@ function addToWishlist() {
     product = Product.get(productID).object;
     productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
 
-    productList = require('~/cartridge/scripts/models/ProductList').get();
+    productList = app.getModel('ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
     app.getView('CartView', {

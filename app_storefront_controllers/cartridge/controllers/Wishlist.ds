@@ -62,7 +62,7 @@ function show() {
  * Forms handler for processing wish lists.
  */
 function wishListForm() {
-    var productList = require('~/cartridge/scripts/models/ProductList').get();
+    var productList = app.getModel('ProductList').get();
 
     var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
@@ -107,14 +107,14 @@ function wishListForm() {
             if (formgroup.items.triggeredFormAction.parent.object.type === formgroup.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
             {
                 // TODO redirect?
-                var GiftCertController = require('./GiftCert');
+                var GiftCertController = app.getController('GiftCert');
                 GiftCertController.Purchase();
                 return;
             }
             else
             {
                 // TODO redirect?
-                var CartController = require('./Cart');
+                var CartController = app.getController('Cart');
                 CartController.AddProduct();
                 return;
             }

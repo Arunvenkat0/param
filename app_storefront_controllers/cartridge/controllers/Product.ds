@@ -218,7 +218,7 @@ function variation() {
         }
 
         if (request.httpParameterMap.source.stringValue === 'bonus') {
-            var Cart = require('~/cartridge/scripts/models/Cart');
+            var Cart = app.getModel('Cart');
             var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
             var bonusDiscountLineItem = null;
 
@@ -301,7 +301,7 @@ function variationPS() {
 function includeLastVisited() {
 
     response.renderTemplate('product/lastvisited', {
-        LastVisitedProducts : require('~/cartridge/scripts/models/RecentlyViewedItems').getRecentlyViewedProducts(3)
+        LastVisitedProducts : app.getModel('RecentlyViewedItems').getRecentlyViewedProducts(3)
     });
 
 }
@@ -310,7 +310,7 @@ function includeLastVisited() {
  * Renders a list of bonus products for a bonus discount line item.
  */
 function getBonusProducts() {
-    var Cart = require('~/cartridge/scripts/models/Cart');
+    var Cart = app.getModel('Cart');
     var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
     var bonusDiscountLineItem = null;
 

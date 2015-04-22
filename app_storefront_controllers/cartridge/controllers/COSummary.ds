@@ -28,8 +28,9 @@ function start() {
     // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
     // instruments totals according to redeemed gift certificates or additional discounts granted through coupon
     // redemptions on this page.
-    if (!require('./COBilling').ValidatePayment(cart)) {
-        require('./COBilling').Start();
+    var COBilling = app.getController('COBilling');
+    if (!COBilling.ValidatePayment(cart)) {
+        COBilling.Start();
         return;
     }
     else {
@@ -54,7 +55,7 @@ function submit() {
     // Call the responsible pipeline which does the actual place order action and any payment authorization. The called
     // pipeline must exit with a named end node "order_created" if the order was created successfully or any other end
     // node, if the order creation failed.
-    var placeOrderResult = require('./COPlaceOrder').Start();
+    var placeOrderResult = app.getController('COPlaceOrder').Start();
     if (placeOrderResult.error) {
         start();
         return;

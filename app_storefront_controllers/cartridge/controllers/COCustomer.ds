@@ -68,7 +68,7 @@ function showLoginForm() {
         'login'        : function (formgroup) {
             // Delegate login to appropriate authentication pipeline and react on success/failure
             // @TODO find better solution
-            if (require('./Login').Process()) {
+            if (app.getController('Login').Process()) {
                 response.redirect(dw.web.URLUtils.https('COShipping-Start'));
                 return;
             }
