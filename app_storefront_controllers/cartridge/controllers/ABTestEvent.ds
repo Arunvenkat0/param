@@ -9,7 +9,7 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
+var app = require('~/cartridge/scripts/app');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
@@ -18,26 +18,24 @@ var guard = require('~/cartridge/scripts/guard');
  * TODO
  */
 function startCheckout() {
-    var cart = Cart.get();
+    var cart = app.getModel('Cart').get();
 
     if (cart) {
         new dw.system.Pipelet('StartCheckout').execute({
             Basket : cart.object
         });
-
         response.renderTemplate('util/reporting/reporting');
-    }
-    else {
+    } else {
         response.renderTemplate('util/reporting/reporting');
     }
 }
 
 /*
- * Module exports
- */
+* Module exports
+*/
 
 /*
- * Web exposed methods
- */
+* Web exposed methods
+*/
 /** @see module:controllers/ABTestEvent~startCheckout */
 exports.StartCheckout = guard.ensure(['get'], startCheckout);

@@ -61,7 +61,13 @@ var Form = AbstractModel.extend(
                 }
             }
             else {
-                return formHandler[action.formId].apply(formHandler, [this.object, action]);
+                if(formHandler[action.formId]){
+                    return formHandler[action.formId].apply(formHandler, [this.object, action]);
+                }else{
+                    dw.system.Logger.error('Action handler for action "{0}"" not defined.', action.formId);
+                    // throw an error as this is an implementation bug
+                    throw new Error('Form handler undefined');
+                }
             }
         },
 
@@ -127,7 +133,7 @@ var Form = AbstractModel.extend(
         value : function () {
             return this.object.value;
         },
-        
+
         /**
          * gets bound object of wrapped form elelement
          */

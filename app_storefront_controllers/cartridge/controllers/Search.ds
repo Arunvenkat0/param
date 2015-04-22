@@ -56,7 +56,9 @@ function show() {
 
         if ((productSearchModel.count > 1) || productSearchModel.refinedSearch || (contentSearchModel.count > 0)) {
             var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
-            params.start.submitted && productPagingModel.setStart(params.start.intValue);
+            if(params.start.submitted){
+                productPagingModel.setStart(params.start.intValue);
+            }
 
             if (params.sz.submitted && request.httpParameterMap.sz.intValue <= 60) {
                 productPagingModel.setPageSize(params.sz.intValue);
@@ -65,10 +67,8 @@ function show() {
                 productPagingModel.setPageSize(12);
             }
 
-            if (productSearchModel.category)
-            {
-                var pageMeta = require('~/cartridge/scripts/meta');
-            	pageMeta.update(productSearchModel.category);
+            if(productSearchModel.category) {
+                require('~/cartridge/scripts/meta').update(productSearchModel.category);
             }
 
             if (productSearchModel.categorySearch && !productSearchModel.refinedCategorySearch && productSearchModel.category.template) {
@@ -146,7 +146,9 @@ function showContent() {
 
         var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
         contentPagingModel.setPageSize(16);
-        params.start.submitted && contentPagingModel.setStart(params.start.intValue);
+        if(params.start.submitted){
+            contentPagingModel.setStart(params.start.intValue);
+        }
 
         if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
             // dynamic template
@@ -217,7 +219,9 @@ function showProductGrid() {
     contentSearchModel.search();
 
     var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
-    params.start.submitted && productPagingModel.setStart(params.start.intValue);
+    if(params.start.submitted){
+        productPagingModel.setStart(params.start.intValue);
+    }
 
     if (params.sz.submitted && params.sz.intValue <= 60) {
         productPagingModel.setPageSize(params.sz.intValue);

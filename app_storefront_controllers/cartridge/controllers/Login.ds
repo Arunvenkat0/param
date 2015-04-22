@@ -55,6 +55,10 @@ function show()
                 // @TODO update metadata for wishlist login
                 v.template = 'account/wishlist/wishlistlanding';
                 break;
+            case 'giftregistry':
+                // @TODO update metadata for giftregistry login
+                v.template = 'account/giftregistry/giftregistrylanding';
+                break;
             default:
         }
     }
@@ -144,6 +148,10 @@ function handleLoginForm()
             app.getView({
                 Order : foundOrder
             }).render('account/orderhistory/orderdetails');
+        },
+        'search' : function(){
+            require('./GiftRegistry').SearchGiftRegistry();
+            return;
         },
         'error' : function(){
             app.getView('LoginView').render();

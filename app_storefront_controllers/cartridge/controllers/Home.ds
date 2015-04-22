@@ -14,9 +14,7 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
-
-    var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(rootFolder);
+    require('~/cartridge/scripts/meta').update(rootFolder);
 
     app.getView().render('content/home/homepage');
 }
