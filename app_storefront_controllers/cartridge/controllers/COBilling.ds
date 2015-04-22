@@ -101,7 +101,7 @@ function returnToForm(cart, params) {
  */
 function start(cart) {
 
-    require('./COShipping').PrepareShipments();
+    app.getController('COShipping').PrepareShipments();
 
     Transaction.wrap(function() {
         cart.calculate();
@@ -167,7 +167,7 @@ function publicStart() {
 
         start(cart);
     } else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
     }
 }
 
@@ -445,7 +445,7 @@ function updateAddressDetails() {
         start(cart);
     } else {
         //@FIXME redirect
-        require('./Cart').Show();
+        app.getController('Cart').Show();
     }
 }
 
@@ -459,7 +459,7 @@ function billing() {
             var couponCode = request.httpParameterMap.couponCode.stringValue || request.httpParameterMap.dwfrm_billing_couponCode.stringValue;
 
             // TODO what happened to this start node?
-            require('./Cart').AddCoupon(couponCode);
+            app.getController('Cart').AddCoupon(couponCode);
 
             handleCoupon();
             return;
@@ -503,7 +503,7 @@ function billing() {
                 app.getForm('billing').object.fulfilled.value = true;
 
                 // A successful billing page will jump to the next checkout step.
-                require('./COSummary').Start();
+                app.getController('COSummary').Start();
                 return;
             }
         },

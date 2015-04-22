@@ -44,7 +44,7 @@ function start() {
 
         initAddressForms(cart, quantityLineItems);
 
-        require('./COShipping').PrepareShipments();
+        app.getController('COShipping').PrepareShipments();
         Transaction.wrap(function () {
             cart.calculate();
         });
@@ -55,7 +55,7 @@ function start() {
         }).render('checkout/shipping/multishipping/multishippingaddresses');
     }
     else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 }
@@ -103,7 +103,7 @@ function startShipments() {
 
     if (cart.object) {
 
-        require('./COShipping').PrepareShipments();
+        app.getController('COShipping').PrepareShipments();
 
         // Initializes the forms for the multi shipment setting.
         session.forms.multishipping.shippingOptions.clearFormElement();
@@ -129,7 +129,7 @@ function startShipments() {
         }).render('checkout/shipping/multishipping/multishippingshipments');
     }
     else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 }
@@ -164,7 +164,7 @@ function multiShippingMethods() {
             // Mark step as fulfilled.
             session.forms.multishipping.shippingOptions.fulfilled.value = true;
 
-            require('./COBilling').Start();
+            app.getController('COBilling').Start();
             return;
         }
     });
@@ -227,7 +227,7 @@ function editAddresses() {
         return;
     }
     else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return;
     }
 }

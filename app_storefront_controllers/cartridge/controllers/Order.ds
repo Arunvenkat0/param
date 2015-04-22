@@ -94,30 +94,6 @@ function track()
 
 
 /*
- * Private methods
- */
-
-/**
- * Decorator which ensures that the customer is authenticated.
- */
-function loggedIn(action)
-{
-    return function()
-    {
-        if (!customer.authenticated)
-        {
-            var accountController = require('./Account');
-            accountController.requireLogin({
-                TargetAction : 'Order-History'
-            });
-            return;
-        }
-
-        action();
-    };
-}
-
-/*
  * Module exports
  */
 

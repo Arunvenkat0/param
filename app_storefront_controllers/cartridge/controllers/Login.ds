@@ -150,7 +150,7 @@ function handleLoginForm()
             }).render('account/orderhistory/orderdetails');
         },
         'search' : function(){
-            require('./GiftRegistry').SearchGiftRegistry();
+            app.getController('GiftRegistry').SearchGiftRegistry();
             return;
         },
         'error' : function(){

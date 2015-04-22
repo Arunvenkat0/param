@@ -92,17 +92,17 @@ function start() {
 
 	if (cart.object) {
         // Clean shipments.
-        require('./COShipping').PrepareShipments(cart);
+        app.getController('COShipping').PrepareShipments(cart);
 
         // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
         if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
-            require('./COShipping').Start();
+            app.getController('COShipping').Start();
             return {};
         }
 
         // Make sure, the billing step has been fulfilled, otherwise restart checkout.
         if (!session.forms.billing.fulfilled.value) {
-            require('./COCustomer').Start();
+            app.getController('COCustomer').Start();
             return {};
         }
 
@@ -110,8 +110,8 @@ function start() {
             cart.calculate();
         });
 
-        if (!require('./COBilling').ValidatePayment(cart)) {
-            require('./COBilling').Start();
+        if (!COBilling').ValidatePayment(cart)) {
+            app.getController('COBilling').Start();
             return {};
         }
 
@@ -124,12 +124,12 @@ function start() {
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
         if (!cart.calculatePaymentTransactionTotal()) {
-            require('./COBilling').Start();
+            app.getController('COBilling').Start();
             return {};
         }
 
         // Handle used addresses and credit cards.
-        var saveCCResult = require('./COBilling').SaveCreditCard();
+        var saveCCResult = app.getController('COBilling').SaveCreditCard();
 
         if (!saveCCResult) {
             return {
@@ -145,7 +145,7 @@ function start() {
         if (!order) {
             // TODO - need to pass BasketStatus to Cart-Show ?
             var BasketStatus = new Status(Status.ERROR);
-            require('./Cart').Show();
+            app.getController('Cart').Show();
 
 	        return {};
         }
@@ -164,7 +164,7 @@ function start() {
         }
     }
     else {
-        require('./Cart').Show();
+        app.getController('Cart').Show();
         return {};
     }
 }
@@ -283,7 +283,7 @@ function submitPaymentJSON() {
 			    form["selectedPaymentMethodID"].setValue(asyncPaymentMethodResponse);
 	    }
 
-	    if (require('./COBilling').HandlePaymentSelection(cart).error || handlePayments().error) {
+	    if (app.getController('COBilling').HandlePaymentSelection(cart).error || handlePayments().error) {
 		    app.getView().render('checkout/components/faults');
 		    return;
 	    }
@@ -305,15 +305,15 @@ function submit() {
 
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
     if (!order.object || (request.httpParameterMap.order_token.stringValue !== order.getOrderToken())) {
-        require('./COSummary').Start();
+        app.getController('COSummary').Start();
         return;
     }
     else if (submitImpl().error) {
-        require('./COSummary').Start();
+        app.getController('COSummary').Start();
         return;
     }
 
-    require('./COSummary').ShowConfirmation();
+    app.getController('COSummary').ShowConfirmation();
 }
 
 /*
