@@ -8,7 +8,7 @@
  * Returns the model for the given name. The model is expected under the models directory.
  */
 exports.getModel = function(modelName) {
-	return require('./models/' + modelName);
+    return require('./models/' + modelName);
 };
 
 /**
@@ -33,19 +33,39 @@ exports.getModel = function(modelName) {
 exports.getView = function(viewName, parameters) {
     var View;
     try {
-        if (typeof viewName === 'string') {
+
+        if ( typeof viewName === 'string') {
             View = require('./views/' + viewName);
-        }
-        else {
+        } else {
             // use first argument as parameters if not a string
             // to allow for anonymous views
             parameters = viewName;
-            throw 'Not a named view';
+            View = require('./views/View');
         }
     } catch (e) {
         View = require('./views/View');
     }
     return new View(parameters || {});
+};
+
+/**
+ * Use this method to get a new instance for a given form reference or form object.
+ *
+ * @param formReference {dw.web.FormElement|String} Demandware form id (/forms/$name$.xml) or Demandware form object.
+ * @returns {module:models/Form~Form}
+ */
+exports.getForm = function(formReference) {
+    var formInstance, Form;
+    
+    Form = require('~/cartridge/scripts/models/Form');
+    formInstance = null;
+    if ( typeof formReference === 'string') {
+        formInstance = require('~/cartridge/scripts/object').resolve(session.forms, formReference);
+    } else if ( typeof formReference === 'object') {
+        formInstance = formReference;
+    }
+
+    return new Form(formInstance);
 };
 
 /**
