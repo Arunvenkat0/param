@@ -55,6 +55,8 @@
     "proxyquire": "^1.4.0",
     "q": "^1.4.1",
     "vinyl-buffer": "^1.0.0",
+    "require-inject": "^1.2.0",
+    "sinon": "^1.14.1",
     "vinyl-source-stream": "^1.0.0",
     "vinyl-transform": "^1.0.0",
     "watchify": "^3.2.1",
