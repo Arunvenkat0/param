@@ -8,14 +8,14 @@
  */
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
-var Content = require('~/cartridge/scripts/models/Content');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var loginForm = require('~/cartridge/scripts/models/Form').get('login');
+
+var Cart = require('~/cartridge/scripts/models/Cart');
+var Content = require('~/cartridge/scripts/models/Content');
 
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)
@@ -27,9 +27,9 @@ function start() {
      * may not contain the form clearing in order to support navigating forth and back in the checkout steps without losing
      * already entered form values.
      */
-    session.forms.singleshipping.clearFormElement();
-    session.forms.multishipping.clearFormElement();
-    session.forms.billing.clearFormElement();
+    app.getForm('singleshipping').clear();
+    app.getForm('multishipping').clear();
+    app.getForm('billing').clear();
 
     Transaction.wrap(function () {
         Cart.goc().removeAllPaymentInstruments();
@@ -41,11 +41,12 @@ function start() {
         return;
     }
     else {
-        session.forms.login.clearFormElement();
+    	var loginForm = app.getForm('login');
+    	loginForm.clear();
 
         // Prepopulate login form field with customer's login name
         if (customer.registered) {
-            session.forms.login.username.value = customer.profile.credentials.login;
+            loginForm.setValue('username', customer.profile.credentials.login);
         }
 
         var loginAsset = Content.get('myaccount-login');
@@ -64,6 +65,8 @@ function start() {
  * TODO
  */
 function showLoginForm() {
+    var loginForm = app.getForm('login');
+
     var formResult = loginForm.handleAction({
         'login'        : function (formgroup) {
             // Delegate login to appropriate authentication pipeline and react on success/failure

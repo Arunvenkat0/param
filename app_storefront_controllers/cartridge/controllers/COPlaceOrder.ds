@@ -91,12 +91,15 @@ function start() {
     var cart = Cart.get();
 
 	if (cart.object) {
+		
+		var COShipping = app.getController('COShipping');
+		 
         // Clean shipments.
-        app.getController('COShipping').PrepareShipments(cart);
+        COShipping.PrepareShipments(cart);
 
         // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
         if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
-            app.getController('COShipping').Start();
+            COShipping.Start();
             return {};
         }
 
@@ -110,8 +113,10 @@ function start() {
             cart.calculate();
         });
 
-        if (!COBilling').ValidatePayment(cart)) {
-            app.getController('COBilling').Start();
+        var COBilling = app.getController('COBilling');
+
+        if (!COBilling.ValidatePayment(cart)) {
+            COBilling.Start();
             return {};
         }
 
@@ -124,12 +129,12 @@ function start() {
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
         if (!cart.calculatePaymentTransactionTotal()) {
-            app.getController('COBilling').Start();
+            COBilling.Start();
             return {};
         }
 
         // Handle used addresses and credit cards.
-        var saveCCResult = app.getController('COBilling').SaveCreditCard();
+        var saveCCResult = COBilling.SaveCreditCard();
 
         if (!saveCCResult) {
             return {

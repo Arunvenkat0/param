@@ -12,7 +12,6 @@ var Transaction = require('dw/system/Transaction');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
-var addressForm = app.getForm('customeraddress');
 
 /**
  * List addresses in customer profile Input: (none)
@@ -43,6 +42,8 @@ function add() {
 function handleForm() {
 	var Address, success;
 	Address = app.getModel('Address');
+    
+    var addressForm = app.getForm('customeraddress');
     
     success = addressForm.handleAction({
         'cancel' : function() {

@@ -9,7 +9,6 @@
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Form = app.getModel('Form');
 var Product = app.getModel('Product');
 var Category = app.getModel('Category');
 var Compare = app.getModel('Compare');
@@ -18,7 +17,7 @@ var Compare = app.getModel('Compare');
  * Expects: - category: category ID
  */
 function show() {
-    var compareForm = session.forms.compare;
+    var compareForm = app.getForm('compare');
 
     // Get the product comparison object from the session or create a new one
     var comparison = Compare.get();
@@ -31,8 +30,8 @@ function show() {
     map.put('attributegroups', comparison.getAttributeGroups());
     map.put('category', comparison.getCategory());
 
-    Form.get(compareForm).copyFrom(map);
-    compareForm.categories.setOptions(map.categories);
+    compareForm.copyFrom(map);
+    compareForm.object.categories.setOptions(map.categories);
 
     app.getView({CompareList : map}).render('product/compare/compareshow');
 }

@@ -108,7 +108,7 @@ function startShipments() {
         // Initializes the forms for the multi shipment setting.
         session.forms.multishipping.shippingOptions.clearFormElement();
 
-        Form.get(session.forms.multishipping.shippingOptions.shipments).copyFrom(cart.getShipments());
+        app.getForm(session.forms.multishipping.shippingOptions.shipments).copyFrom(cart.getShipments());
 
         // Initializes the shipping method list for each shipment.
         var count = session.forms.multishipping.shippingOptions.shipments.childCount;
@@ -151,7 +151,7 @@ function multiShippingMethods() {
                         shipmentForm.getObject().setShippingMethod(shipmentForm.shippingMethodID.selectedOptionObject);
                     }
 
-                    if (!Form.get(shipmentForm).copyTo(shipmentForm.object)) {
+                    if (!app.getForm(shipmentForm).copyTo(shipmentForm.object)) {
                         app.getView({
                             Basket      : Cart.get().object,
                             ContinueURL : dw.web.URLUtils.https('COShippingMultiple-MultiShippingMethods')
@@ -180,7 +180,7 @@ function initAddressForms(cart, quantityLineItems) {
 
     if (!session.forms.multishipping.addressSelection.fulfilled.value) {
         session.forms.multishipping.addressSelection.clearFormElement();
-        Form.get(session.forms.multishipping.addressSelection.quantityLineItems).copyFrom(quantityLineItems);
+        app.getForm(session.forms.multishipping.addressSelection.quantityLineItems).copyFrom(quantityLineItems);
     }
 
     var addresses = cart.getAddressBookAddresses();
@@ -264,8 +264,8 @@ function editForm() {
                 return;
             }
 
-            Form.get(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
-            Form.get(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
+            app.getForm(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
+            app.getForm(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             app.getView({
             	Basket : Cart.get().object,
                 ContinueURL    : dw.web.URLUtils.https('COShippingMultiple-EditForm')
@@ -286,7 +286,7 @@ function addEditAddress() {
     var newAddress = new TransientAddress();
     newAddress.UUID = UUIDUtils.createUUID();
 
-    if (!Form.get(session.forms.multishipping.editAddress.addressFields).copyTo(newAddress) || !Form.get(session.forms.multishipping.editAddress.addressFields.states).copyTo(newAddress)) {
+    if (!app.getForm(session.forms.multishipping.editAddress.addressFields).copyTo(newAddress) || !app.getForm(session.forms.multishipping.editAddress.addressFields.states).copyTo(newAddress)) {
         return {success : false, error : true};
     }
     else {
