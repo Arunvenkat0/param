@@ -148,7 +148,7 @@ function showOther() {
 function addProduct() {
 	var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue).object;
-    var productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+    var productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
 
     var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();

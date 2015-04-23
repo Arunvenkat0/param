@@ -142,7 +142,7 @@ function submitForm() {
         'editLineItem' : function(formgroup) {
             var product, productOptionModel;
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
-            productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
 
             Transaction.wrap(function() {
                 cart.updateLineItem(formgroup.getTriggeredAction().object, product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
@@ -254,7 +254,7 @@ function addProduct() {
         if (lineItem) {
 
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
-            productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
 
             Transaction.wrap(function() {
                 cart.updateLineItem(lineItem, product, productOptionModel);
@@ -292,13 +292,13 @@ function addProduct() {
                 childProduct = Product.get(childPids[i]).object;
 
                 if (!childProduct.productSet) {
-                    childProductOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(childProduct, request.httpParameterMap).ProductOptionModel;
+                    childProductOptionModel = childProduct.updateProductOptionSelections(request.httpParameterMap);
                     cart.addProductItem(childProduct, parseInt(childQtys[counter], 10), params.cgid.value, childProductOptionModel);
                 }
                 counter += 1;
             }
         } else {
-            productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
             cart.addProductItem(product, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
         }
 
@@ -337,7 +337,7 @@ function addToWishlist() {
 
     productID = request.httpParameterMap.pid.stringValue;
     product = Product.get(productID).object;
-    productOptionModel = require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(product, request.httpParameterMap).ProductOptionModel;
+    productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
 
     productList = app.getModel('ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);

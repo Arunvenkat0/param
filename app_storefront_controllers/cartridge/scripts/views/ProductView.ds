@@ -34,29 +34,6 @@ var ProductView = View.extend(
         },
 
         /**
-         * The purpose of this function is to process option value selections, and calculate and return the ProductOptionModels
-         * for one or multiple products. Option value selections must be specified as HTTP parameters in the following form:
-         * {prefix_}{pid}_optionID={optionValueID}. A custom prefix can be set using the 'optionalCustomPrefix" parameter. Otherwise,
-         * the default prefix 'dwopt_' is used. {pid} is the product id. Example: dwopt_PN00049_memory=2GB. For each product
-         * specified as {pid}, a ProductOptionModel instance is created and returned as an element of the 'ProductOptionModels'
-         * hashmap output parameter. The function validates both option id and option value id and selects the option in the
-         * related ProductOptionModel instance. If an option is not specified as HTTP parameter, or the specified optionValueID
-         * is invalid, the default option value of this option is selected. Invalid optionIDs are silently ignored. The
-         * function returns a map of ProductOptionModels with the product instance as the key and the ProductOptionModel as
-         * the value. For compatibility reasons, the function does still accept an individual product instance as input
-         * parameter. If specified, the function returns the ProductOptionModel for this product as 'ProductOptionModel' and
-         * also as element of the 'ProductOptionModels' hashmap parameter.
-         *
-         * @param parameterMap {dw.web.HttpParameterMap} Product option selections as HTTP parameters.
-         * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwopt_" is assumed.
-         *
-         * @returns {{ProductOptionModels: dw.util.LinkedHashMap, ProductOptionModel: dw.catalog.ProductOptionModel}}
-         */
-        getProductOptionSelections : function (parameterMap, optionalCustomPrefix) {
-            return require('~/cartridge/scripts/util/ProductOptionSelection').getProductOptionSelections(this.product.object, parameterMap, optionalCustomPrefix);
-        },
-
-        /**
          * View for store locator functionality.
          *
          * @constructs

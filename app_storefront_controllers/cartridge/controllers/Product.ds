@@ -28,11 +28,9 @@ function show() {
             DefaultVariant : product.getDefaultVariant()
         });
 
-        var productOptionSelections = productView.getProductOptionSelections(request.httpParameterMap);
         var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
 
-        productView.CurrentOptionModel = productOptionSelections.ProductOptionModel;
-        productView.ProductOptionModels = productOptionSelections.ProductOptionModels;
+        productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
         productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
         productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
 
@@ -62,11 +60,9 @@ function detail() {
             DefaultVariant : product.getDefaultVariant()
         });
 
-        var productOptionSelections = productView.getProductOptionSelections(request.httpParameterMap);
         var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
 
-        productView.CurrentOptionModel = productOptionSelections.ProductOptionModel;
-        productView.ProductOptionModels = productOptionSelections.ProductOptionModels;
+        productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
         productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
         productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
 
