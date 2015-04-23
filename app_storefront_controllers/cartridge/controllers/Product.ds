@@ -299,11 +299,9 @@ function variationPS() {
  * Renders the last visited products based on the session information.
  */
 function includeLastVisited() {
-
-    response.renderTemplate('product/lastvisited', {
+    app.getView({
         LastVisitedProducts : app.getModel('RecentlyViewedItems').getRecentlyViewedProducts(3)
-    });
-
+    }).render('product/lastvisited');
 }
 
 /**
