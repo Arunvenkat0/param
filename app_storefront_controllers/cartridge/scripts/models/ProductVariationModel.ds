@@ -1,0 +1,83 @@
+'use strict';
+/** @module models/ProductVariationModel */
+
+/* API Includes */
+var AbstractModel = require('./AbstractModel');
+
+/**
+ * ProductVariationModel helper providing enhanced profile functionality
+ * @class module:models/ProductVariationModel~ProductVariationModel
+ */
+var ProductVariationModel = AbstractModel.extend(
+    /** @lends module:models/ProductVariationModel~ProductVariationModel.prototype */
+    {
+        /**
+         * Use this method to get a new instance for a given product.
+         */
+        init : function (parameter) {
+            var instance = this._super(parameter);
+            this.initProperties(['productVariationAttributes','defaultVariant', 'master', 'productVariationAttributes', 'selectedVariant', 'variants', 'variationGroups' ]);
+            this.selectionMap = new dw.util.HashMap();
+            return instance;
+        },
+
+        setSelectedVariationValue : function (variationAttribute, variationAttributeValue) {
+            this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
+        },
+
+        getSelectedVariant : function () {
+            var filteredList = this.object.getVariants(this.selectionMap);
+            if (filteredList.size() === 1) {
+                return filteredList[0];
+            } else {
+                return null;
+            }
+        },
+
+        isSelectedAttributeValue : function (variationAttribute, variationAttributeValue) {
+            return this.selectionMap.get(variationAttribute.ID) === variationAttributeValue.ID;
+        },
+
+        getVariationAttributeValue : function (variationAttribute, variationAttributeValueID) {
+            if (!empty(variationAttributeValueID)) {
+                var allValues = this.object.getAllValues(variationAttribute);
+                for (var i = 0; i< allValues.length; i++) {
+                    if (allValues[i].ID == variationAttributeValueID) {
+                        return allValues[i];
+                    }
+                }
+            }
+            return null;
+        },
+
+        getSelectedValue : function(variationAttribute) {
+            if (!empty(variationAttribute)) {
+                return this.getVariationAttributeValue(variationAttribute, this.selectionMap.get(variationAttribute.ID));
+            } else {
+                return null;
+            }
+        },
+
+        urlSelectVariationValue : function (action, variationAttribute, variationAttributeValue) {
+            var url = this.object.urlSelectVariationValue(action, variationAttribute, variationAttributeValue);
+            var entrySet = this.selectionMap.entrySet();
+            for (var i = 0; i < entrySet.length; i++) {
+                var entry = entrySet[i];
+                var urlKey = 'dwvar_' + this.object.master.ID + '_' + entry.key;
+                if (url.indexOf(urlKey) === -1) {
+                    if (url.indexOf('?') === -1) {
+                        url += '?';
+                    } else {
+                        url += '&';
+                    }
+                    url += urlKey + '=' +  entry.value;
+                }
+            }
+            return url;
+
+        }
+
+    });
+
+/** The profile class */
+module.exports = ProductVariationModel;
