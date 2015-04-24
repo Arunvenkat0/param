@@ -22,7 +22,7 @@
 							</a>
 						</li>
 						<li>
-							<a class="user-logout buttonstyle" title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}">
+							<a title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}" class="user-logout buttonstyle">
 								${Resource.msg('global.logout', 'locale', null)}
 							</a>
 						</li>
@@ -51,22 +51,22 @@
 						</li>
 						
 						<li>
-							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Order-History')}">
+							<a title="${Resource.msg('global.link.orders', 'locale', null)}" href="${URLUtils.https('Order-History')}">
 								${Resource.msg('global.link.orders', 'locale', null)}
 							</a>
 						</li>					
 						<li>
-							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('Wishlist-Show')}">
+							<a title="${Resource.msg('global.header.wishlistlink', 'locale', null)}" href="${URLUtils.https('Wishlist-Show')}">
 								${Resource.msg('global.header.wishlistlink', 'locale', null)}
 							</a>
 						</li>					
 						<li>
-							<a title="${Resource.msg('global.accountlink', 'locale', null)}" href="${URLUtils.https('GiftRegistry-Start')}">
+							<a title="${Resource.msg('global.header.registrylink', 'locale', null)}" href="${URLUtils.https('GiftRegistry-Start')}">
 								${Resource.msg('global.header.registrylink', 'locale', null)}
 							</a>
 						</li>					
 						<li>
-							<a class="user-logout buttonstyle" title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}">
+							<a title="${Resource.msg('global.logout', 'locale', null)}" href="${URLUtils.https('Login-Logout')}" class="user-logout buttonstyle">
 								${Resource.msg('global.logout', 'locale', null)}
 							</a>
 						</li>
@@ -75,7 +75,7 @@
 			</div>
 		<iscomment>User has no session</iscomment>
 		<iselse/>
-			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">
+			<a title="${Resource.msg('global.login', 'locale', null)}" href="${URLUtils.https('Account-Show')}" class="user-login" id="menuLink1">
 				<i class="fa fa-user"></i>
 				<span>${Resource.msg('global.login', 'locale', null)}</span>
 			</a>
@@ -86,7 +86,7 @@
 				<div class="menu-links">
 					<ul>
 						<li>
-							<a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">${Resource.msg('global.login', 'locale', null)}</a>
+							<a title="${Resource.msg('global.login', 'locale', null)}" href="${URLUtils.https('Account-Show')}">${Resource.msg('global.login', 'locale', null)}</a>
 						</li>
 						<li>
 							<a title="${Resource.msg('global.register', 'locale', null)}" href="${URLUtils.https('Account-StartRegister')}" class="user-register">${Resource.msg('global.register','locale',null)}</a>
