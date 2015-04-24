@@ -18,9 +18,6 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
 var AbstractModel = Class.extend(
     /** @lends module:models/AbstractModel~AbstractModel.prototype */
     {
-        /** default JSON attribute name */
-        _defaultJSONField : 'jsonData',
-
         /**
          * Property holding the wrapped object which is initialized in the child classes. Usually
          * the this.get() method is used to obtain a record
@@ -83,16 +80,50 @@ var AbstractModel = Class.extend(
             }
         },
 
-        initProperties : function(properties) {
+        initProperties : function() {
             var instance = this;
+            // properties.forEach(function(property) {
+            //     instance.__defineGetter__(
+            //         property,
+            //         function(){
+            //           return instance.object[property];
+            //         }
+            //     );
+            // });
+            var duration = new Date().getTime();
+            var properties = [];
+            for(var property in instance.object){
+                properties.push(property);
+            }
             properties.forEach(function(property) {
-                instance.__defineGetter__(
-                    property,
-                    function(){
-                      return instance.object[property];
+                if(property.indexOf('get') === 0){
+                    // remove get and lowercase first character, i.e. getOnline -> online
+                    var propertyName = property.substring(3,4).toLowerCase() + property.substring(4);
+                    // only define if there is a corresponding property as well
+                    if(properties.indexOf(propertyName) > -1){
+                        //dw.system.Logger.debug('Defining property get access for {0}',propertyName);
+                        instance.__defineGetter__(
+                            propertyName,
+                            (property in instance)?function(){return instance[property]}:function(){return instance.object[propertyName];}
+                        );
                     }
-                );
+                }
+                // handle setters
+                // if(property.indexOf('set') === 0){
+                //     // remove get and lowercase first character, i.e. getOnline -> online
+                //     propertyName = property.substring(3,4).toLowerCase() + property.substring(4);
+                //     // only define if there is a corresponding property as well
+                //     if(properties.indexOf(propertyName) > -1){
+                //         dw.system.Logger.debug('Defining property set access for {0}',propertyName);
+                //         instance.__defineSetter__(
+                //             propertyName,
+                //             (property in instance)?instance[property]:function(v){return instance.object[propertyName].call(instance.object, v);}
+                //         );
+                //     }
+                // }
             });
+            duration = new Date().getTime() - duration;
+            dw.system.Logger.info('{0}ms to define properties',duration);
         },
 
         /**

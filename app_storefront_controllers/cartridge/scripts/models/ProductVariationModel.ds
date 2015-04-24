@@ -12,19 +12,30 @@ var ProductVariationModel = AbstractModel.extend(
     /** @lends module:models/ProductVariationModel~ProductVariationModel.prototype */
     {
         /**
-         * Use this method to get a new instance for a given product.
+         * Use this method to get a new instance for a given product variation model.
          */
         init : function (parameter) {
             var instance = this._super(parameter);
-            this.initProperties(['productVariationAttributes','defaultVariant', 'master', 'productVariationAttributes', 'selectedVariant', 'variants', 'variationGroups' ]);
+            this.initProperties();
             this.selectionMap = new dw.util.HashMap();
             return instance;
         },
 
+        /**
+         * Update the model with given variation attribute to the given value
+         *
+         * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
+         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
+         */
         setSelectedVariationValue : function (variationAttribute, variationAttributeValue) {
             this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
         },
 
+        /**
+         * Get the currently selected variant or null if none
+         *
+         * @return {dw.catalog.Variant} the selected variant
+         */
         getSelectedVariant : function () {
             var filteredList = this.object.getVariants(this.selectionMap);
             if (filteredList.size() === 1) {
@@ -34,15 +45,28 @@ var ProductVariationModel = AbstractModel.extend(
             }
         },
 
+        /**
+         * Check if the given attribute/value combination is currently selected
+         *
+         * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
+         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
+         * @returns {Boolean} true if the value is selected
+         */
         isSelectedAttributeValue : function (variationAttribute, variationAttributeValue) {
             return this.selectionMap.get(variationAttribute.ID) === variationAttributeValue.ID;
         },
 
+        /**
+         * Returns the ProductVariationAttrbuteValue object for the given attribute and the value ID
+         *
+         * @param {dw.catalog.ProductVariationAttrbute} variationAttribute      the attribute
+         * @param {String}                      variationAttributeValueID       the variation attribute value ID
+         */
         getVariationAttributeValue : function (variationAttribute, variationAttributeValueID) {
             if (!empty(variationAttributeValueID)) {
                 var allValues = this.object.getAllValues(variationAttribute);
                 for (var i = 0; i< allValues.length; i++) {
-                    if (allValues[i].ID == variationAttributeValueID) {
+                    if (allValues[i].ID === variationAttributeValueID) {
                         return allValues[i];
                     }
                 }
@@ -50,6 +74,12 @@ var ProductVariationModel = AbstractModel.extend(
             return null;
         },
 
+        /**
+         * Get the currently selsected value for a given attribute
+         *
+         * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute
+         * @return {dw.catalog.ProductVariationAttrbuteValue}               the attribute value or null
+         */
         getSelectedValue : function(variationAttribute) {
             if (!empty(variationAttribute)) {
                 return this.getVariationAttributeValue(variationAttribute, this.selectionMap.get(variationAttribute.ID));
@@ -79,5 +109,5 @@ var ProductVariationModel = AbstractModel.extend(
 
     });
 
-/** The profile class */
+/** The model class */
 module.exports = ProductVariationModel;
