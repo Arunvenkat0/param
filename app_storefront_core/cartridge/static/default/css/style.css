@@ -642,7 +642,7 @@ select {
   height: auto; }
 
 input[type="checkbox"], input[type="radio"] {
-  margin: 1em 2%; }
+  margin: 1em 1% 1em 2%; }
 
 .label-inline label {
   display: inline-block;
@@ -2934,6 +2934,9 @@ ul.product-availability-list {
   .shipping-method .shipping-description {
     display: inline; }
 
+.gift-message-text.hidden {
+  display: none; }
+
 .redemption {
   color: #990000; }
   .redemption .success {
@@ -3139,9 +3142,6 @@ ul.product-availability-list {
   padding: 1em; }
 .multishipprogress .step-4 {
   padding-right: 0; }
-
-.checkout-multi-shipping .cart-row .gift-message-text {
-  display: none; }
 
 .pt_checkout #cart-table .cart-row .shipment-label {
   font-weight: 700;

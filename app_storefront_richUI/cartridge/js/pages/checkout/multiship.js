@@ -11,23 +11,15 @@ var address = require('./address'),
  */
 function initMultiGiftMessageBox() {
 	$.each($('.item-list'), function () {
-		var $this = $(this),
-			$isGiftYes = $this.find('.js-isgiftyes'),
-			$isGiftNo = $this.find('.js-isgiftno'),
-			$giftMessage = $this.find('.gift-message-text');
+		var $this = $(this);
+		var $giftMessage = $this.find('.gift-message-text');
 
 		//handle initial load
-		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display', 'block');
-		}
+		$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 
 		//set event listeners
 		$this.on('change', function () {
-			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display', 'block');
-			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display', 'none');
-			}
+			$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 		});
 	});
 }
