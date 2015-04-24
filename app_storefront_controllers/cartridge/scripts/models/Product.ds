@@ -3,6 +3,7 @@
 /** @module models/Product */
 
 var AbstractModel = require('./AbstractModel');
+var app = require('~/cartridge/scripts/app');
 
 /**
  * Product helper providing enhanced product functionality
@@ -14,6 +15,60 @@ var AbstractModel = require('./AbstractModel');
 var Product = AbstractModel.extend(
     /** @lends module:models/Product~Product.prototype */
     {
+            /**
+         * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
+         * for one or multiple products. The function uses the given HttpParameterMap and so the request parameters do not
+         * have to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
+         * "{prefix_}{pid}_varAttrID={varAttrValueID}". A custom prefix can be set using the "optionalCustomPrefix" parameter.
+         * Otherwise, the default prefix "dwvar_" is used. {pid} is the product id. Example: "dwvar_PN00050_color=red". For
+         * each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
+         * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
+         * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
+         * with the product instance as the key and the ProductVariationModel as the value. For backwards compatibility reasons,
+         * the function accepts an optional Product instance as input parameter. The product may either be a master or a variant.
+         * If specified, the function returns the ProductVariationModel for this product as "ProductVariationModel" and also as
+         * element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant which matches
+         * the attributes selected in the HttpParameterMap as closely as possible. The matching product is returned under the
+         * key "SelectedProduct". If the passed product is neither a master or a variant, then the product itself is simply
+         * returned under the key "SelectedProduct". No value will be returned under the "SelectedProduct" key unless a Product
+         * instance was passed to the function.
+         *
+         * @param parameterMap {dw.web.HttpParameterMap} Variation value selections as HTTP parameters.
+         * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwvar_" is assumed.
+         *
+         * @returns {dw.catalog.ProductVariationModel}
+         */
+        updateVariationSelection : function (parameterMap, optionalCustomPrefix) {
+            var formPrefix = optionalCustomPrefix || 'dwvar_';
+
+            // get all variation related parameters for the prefix
+            var params = parameterMap.getParameterMap(formPrefix+
+                            this.object.ID.replace(/_/g,'__')+'_');
+            var paramNames = params.getParameterNames();
+            var ProductVariationModel = app.getModel('ProductVariationModel');
+            var variationModel = new ProductVariationModel(this.object.getVariationModel());
+
+            for (var k = 0; k < paramNames.length; k++) {
+                var attributeID   = paramNames[k];
+                var valueID       = params.get(attributeID).getStringValue();
+                dw.system.Logger.info('Updating variation attribute "{0}" to "{1}".',attributeID, valueID);
+
+                if (valueID) {
+                    var variationAttribute = variationModel.getProductVariationAttribute(attributeID);
+
+                    if (variationAttribute && valueID) {
+
+                        // @TODO API does not exist
+                        var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
+                        if (variationAttributeValue) {
+                            // @TODO API does not exist
+                            variationModel.setSelectedVariationValue(variationAttribute, variationAttributeValue);
+                        }
+                    }
+                }
+            }
+            return variationModel;
+        },
         /**
          * The purpose of this function is to process option value selections, and calculate and return the ProductOptionModels
          * for one or multiple products. Option value selections must be specified as HTTP parameters in the following form:
@@ -37,8 +92,7 @@ var Product = AbstractModel.extend(
         updateOptionSelection : function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwopt_';
 
-            dw.system.Logger.error(this.object.ID);
-            // get all form records for the prefix
+            // get all option related parameters for the prefix
             var params = parameterMap.getParameterMap(formPrefix+
                             this.object.ID.replace(/_/g,'__')+'_');
             var paramNames = params.getParameterNames();

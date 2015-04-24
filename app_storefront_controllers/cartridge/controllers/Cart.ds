@@ -142,7 +142,7 @@ function submitForm() {
         'editLineItem' : function(formgroup) {
             var product, productOptionModel;
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
-            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
+            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
             Transaction.wrap(function() {
                 cart.updateLineItem(formgroup.getTriggeredAction().object, product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
@@ -254,7 +254,7 @@ function addProduct() {
         if (lineItem) {
 
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
-            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
+            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
             Transaction.wrap(function() {
                 cart.updateLineItem(lineItem, product, productOptionModel);
@@ -281,25 +281,25 @@ function addProduct() {
         Product = app.getModel('Product');
 
         previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
-        product = Product.get(params.pid.stringValue).object;
+        product = Product.get(params.pid.stringValue);
 
-        if (product.productSet) {
+        if (product.isProductSet()) {
             childPids = params.childPids.stringValue.split(",");
             childQtys = params.childQtys.stringValue.split(",");
             counter = 0;
 
             for ( i = 0; i < childPids.length; i += 1) {
-                childProduct = Product.get(childPids[i]).object;
+                childProduct = Product.get(childPids[i]);
 
-                if (!childProduct.productSet) {
-                    childProductOptionModel = childProduct.updateProductOptionSelections(request.httpParameterMap);
-                    cart.addProductItem(childProduct, parseInt(childQtys[counter], 10), params.cgid.value, childProductOptionModel);
+                if (childProduct.object && !childProduct.isProductSet()) {
+                    childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
+                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter], 10), params.cgid.value, childProductOptionModel);
                 }
                 counter += 1;
             }
         } else {
-            productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
-            cart.addProductItem(product, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
+            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
+            cart.addProductItem(product.object, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
         }
 
         // When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
@@ -337,7 +337,7 @@ function addToWishlist() {
 
     productID = request.httpParameterMap.pid.stringValue;
     product = Product.get(productID).object;
-    productOptionModel = product.updateProductOptionSelections(request.httpParameterMap);
+    productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
     productList = app.getModel('ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);

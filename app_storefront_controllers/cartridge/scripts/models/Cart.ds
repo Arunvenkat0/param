@@ -56,7 +56,7 @@ var Cart = AbstractModel.extend(
 
             if (productListItem) {
 
-                var productOptionSelections = Product.get(productListItem.getProduct()).updateProductOptionSelections(request.httpParameterMap);
+                var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
 
                 // TODO
                 var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({

@@ -28,11 +28,8 @@ function show() {
             DefaultVariant : product.getDefaultVariant()
         });
 
-        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
-
         productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
-        productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
-        productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
+        productView.CurrentVariationModel = product.updateVariationSelection(request.httpParameterMap);
 
         productView.render(product.getTemplate() || 'product/product');
     }
@@ -60,11 +57,8 @@ function detail() {
             DefaultVariant : product.getDefaultVariant()
         });
 
-        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
-
         productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
-        productView.CurrentVariationModel = productVariationSelections.ProductVariationModel;
-        productView.ProductVariationModels = productVariationSelections.ProductVariationModels;
+        productView.CurrentVariationModel = product.updateVariationSelection(request.httpParameterMap);
 
         productView.render(product.getTemplate() || 'product/productdetail');
     }
@@ -196,14 +190,12 @@ function variation() {
 
     if (product.isVisible()) {
 
-        var productView = app.getView('ProductView', {
-            product : product
-        });
+        var currentVariationModel = product.updateVariationSelection(request.httpParameterMap);
+        var selectedProduct = Product.get(currentVariationModel.getSelectedVariant());
 
-        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
-        var currentVariationModel = productVariationSelections.ProductVariationModel;
-
-        product = Product.get(productVariationSelections.SelectedProduct);
+        if (!empty(selectedProduct.object)) {
+            product = selectedProduct;
+        }
 
         // TODO this is apparently nowhere set to true..
         var resetAttributes = false;
@@ -235,7 +227,8 @@ function variation() {
             app.getView('ProductView', {
                 product         : product,
                 GetImages       : true,
-                resetAttributes : resetAttributes
+                resetAttributes : resetAttributes,
+                CurrentVariationModel : currentVariationModel
             }).render('product/productcontent');
         }
         else {

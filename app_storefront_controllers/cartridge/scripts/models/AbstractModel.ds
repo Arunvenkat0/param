@@ -83,6 +83,18 @@ var AbstractModel = Class.extend(
             }
         },
 
+        initProperties : function(properties) {
+            var instance = this;
+            properties.forEach(function(property) {
+                instance.__defineGetter__(
+                    property,
+                    function(){
+                      return instance.object[property];
+                    }
+                );
+            });
+        },
+
         /**
          * Fallback to use wrapped object's native functions in case method is not defined.
          * The logic will try to invoke method for this.object, and throw TypeError if the method does not exist
@@ -99,6 +111,7 @@ var AbstractModel = Class.extend(
                 return this.object[methodName].apply(this.object, methodArgs);
             }
             // If we get here, the method hasn't been found
+            dw.system.Logger.error('Method "{0}" does not exist for {1}',methodName,this.object.class);
             throw new TypeError();
         }
     });
