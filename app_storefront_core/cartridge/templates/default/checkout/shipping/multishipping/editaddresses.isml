@@ -63,17 +63,7 @@
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address1}" type="input" />
 
-		<div class="form-field-tooltip">
-			(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}"
-				class="tooltip">
-				${Resource.msg('singleshipping.apofpo','checkout',null)}
-				<div class="tooltip-content" data-layout="small">
-					<iscontentasset aid="apo-fpo" />
-				</div>
-			</a>)
-		</div>
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input" />
+		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input"  helpcid="apo-fpo" helplabel="${Resource.msg('singleshipping.apofpo', 'checkout', null)}"/>
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.country}" type="select" />
 
@@ -90,16 +80,7 @@
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" />
-
-		<div class="form-field-tooltip with-helper-text">
-			(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
-				${Resource.msg('singleshipping.phonerequired','checkout',null)}
-				<div class="tooltip-content" data-layout="small">
-					<iscontentasset aid="help-telephone" />
-				</div>
-			</a>)
-		</div>
+		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
 
 		<iscomment>Add address to Address Book</iscomment>
 		<isif condition="${pdict.CurrentCustomer.authenticated}"> <isinputfield

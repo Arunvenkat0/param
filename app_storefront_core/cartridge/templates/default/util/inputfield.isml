@@ -18,5 +18,6 @@ var inputField = require('~/cartridge/scripts/common/inputField')(pdict);
 	<isif condition="${!pdict.value || pdict.value === 'true'}">
 		<isprint value="${inputField.input}" encoding="off"/>
 	</isif>
+	<isprint value="${inputField.help}" encoding="off"/>
 	<isprint value="${inputField.caption}" encoding="off"/>
 </div>
