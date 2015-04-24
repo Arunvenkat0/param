@@ -3,13 +3,13 @@
 var inputElements = [
 	'input',
 	'select',
-	'textarea'
+	'textarea',
+	'radio'
 ];
 var inputElementTypes = [
 	'text',
 	'password',
 	'checkbox',
-	'radio',
 	'hidden',
 	'number',
 	'range',
@@ -182,19 +182,34 @@ module.exports = function (pdict) {
 			var inputClass = 'input-text';
 			if (type === 'checkbox') {
 				inputClass = 'input-checkbox';
+				if (pdict.formfield.checked) {
+					checked = 'checked="checked"';
+				}
 			}
 			if (type === 'hidden') {
 				inputClass = '';
 			}
-			if ((type === 'checkbox' || type === 'radio') && pdict.formfield.checked) {
-				checked = 'checked="checked"';
-			}
+
 			input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
 			break;
 		case 'textarea':
 			input = '<textarea class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			input += value;
 			input += '</textarea>';
+			break;
+		// treat radio as its own element, as each option is an input element
+		case 'radio':
+			var options = [];
+			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
+				var option = pdict.formfield.options[optionKey];
+				var value = option.value;
+				var checked = '';
+				if (option.checked) {
+					checked = 'checked="checked"';
+				}
+				options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + Resource.msg(option.label, 'forms', null));
+			});
+			input += options.join('');
 			break;
 	}
 

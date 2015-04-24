@@ -171,8 +171,8 @@ var storeinventory = {
 	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
-		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function () {
-			$(this).parent().siblings('.gift-message-text').toggle($(this).checked);
+		$checkoutForm.on('click', 'input[name$="_shippingAddress_isGift"]', function () {
+			$(this).parent().siblings('.gift-message-text').toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val());
 		});
 	}
 };

@@ -43,6 +43,12 @@
 	}
 }
 
+.gift-message-text {
+	&.hidden {
+		display: none;
+	}
+}
+
 .redemption {
 	.success {
 		color: $islamic-green;

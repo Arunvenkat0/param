@@ -1950,23 +1950,15 @@ var address = require('./address'),
  */
 function initMultiGiftMessageBox() {
 	$.each($('.item-list'), function () {
-		var $this = $(this),
-			$isGiftYes = $this.find('.js-isgiftyes'),
-			$isGiftNo = $this.find('.js-isgiftno'),
-			$giftMessage = $this.find('.gift-message-text');
+		var $this = $(this);
+		var $giftMessage = $this.find('.gift-message-text');
 
 		//handle initial load
-		if ($isGiftYes.is(':checked')) {
-			$giftMessage.css('display', 'block');
-		}
+		$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 
 		//set event listeners
 		$this.on('change', function () {
-			if ($isGiftYes.is(':checked')) {
-				$giftMessage.css('display', 'block');
-			} else if ($isGiftNo.is(':checked')) {
-				$giftMessage.css('display', 'none');
-			}
+			$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 		});
 	});
 }
@@ -2082,7 +2074,7 @@ var shippingMethods;
  */
 function giftMessageBox() {
 	// show gift message box, if shipment is gift
-	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
+	$('.gift-message-text').toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 }
 
 /**
@@ -2215,9 +2207,7 @@ exports.init = function () {
 		continueSelector: '[name$="shippingAddress_save"]',
 		formSelector:'[id$="singleshipping_shippingAddress"]'
 	});
-	$('#is-gift-yes, #is-gift-no').on('click', function () {
-		giftMessageBox();
-	});
+	$('input[name$="_shippingAddress_isGift"]').on('click', giftMessageBox);
 
 	$('.address').on('change',
 		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',
@@ -2514,7 +2504,6 @@ module.exports.replaceImages = replaceImages;
 'use strict';
 
 var dialog = require('../../dialog'),
-	sendToFriend = require('../../send-to-friend'),
 	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),
@@ -2591,7 +2580,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":6,"../../send-to-friend":42,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":22,"./availability":23,"./image":24,"./productNav":26,"./productSet":27,"./recommendations":28,"./variant":29}],26:[function(require,module,exports){
+},{"../../dialog":6,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":22,"./availability":23,"./image":24,"./productNav":26,"./productSet":27,"./recommendations":28,"./variant":29}],26:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -4191,8 +4180,8 @@ var storeinventory = {
 	shippingLoad: function () {
 		var $checkoutForm = $('.address');
 		$checkoutForm.off('click');
-		$checkoutForm.on('click', '.is-gift-yes, .is-gift-no', function () {
-			$(this).parent().siblings('.gift-message-text').toggle($(this).checked);
+		$checkoutForm.on('click', 'input[name$="_shippingAddress_isGift"]', function () {
+			$(this).parent().siblings('.gift-message-text').toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val());
 		});
 	}
 };
@@ -17480,7 +17469,6 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
 },{}],54:[function(require,module,exports){
 'use strict';
 
@@ -17902,8 +17890,6 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-
-},{"_process":49}]},{},[1])
-
+},{"_process":49}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
