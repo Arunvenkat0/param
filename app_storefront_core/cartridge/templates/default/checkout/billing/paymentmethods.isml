@@ -19,7 +19,7 @@
 					<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
 					<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/>:</label>
 
-					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" 
+					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}"
 						<isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
 				</div>
 
@@ -87,19 +87,7 @@
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off"/>
-			<isif condition="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn.error == null}">
-			<div class="form-field-tooltip cvn-tip">
-			<iselse/>
-			<div class="form-field-tooltip cvn-tip-error">
-			</isif>
-				(<a href="${URLUtils.url('Page-Show', 'cid', 'checkout-security-code')}" class="tooltip">
-					${Resource.msg('billing.linkcvn','checkout',null)}
-					<div class="tooltip-content" data-layout="small tooltip-cvn">
-						<iscontentasset aid="checkout-security-code">
-					</div>
-				</a>)
-			</div>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off" helpcid="checkout-security-code" helplabel="${Resource.msg('billing.linkcvn', 'checkout', null)}"/>
 
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
 				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox" rowclass="label-inline form-indent"/>

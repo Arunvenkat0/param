@@ -1,5 +1,7 @@
 'use strict';
 
+var ContentMgr = require('dw/content/ContentMgr');
+
 var inputElements = [
 	'input',
 	'select',
@@ -87,7 +89,7 @@ module.exports = function (pdict) {
 	var label = '';
 	var type = pdict.type;
 	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue);
-	var element, name, id, rowClass, fieldClass, caption;
+	var element, name, id, rowClass, fieldClass, caption, help;
 
 	// default type is 'text' for 'input' element
 	if (type === 'input') {
@@ -221,12 +223,27 @@ module.exports = function (pdict) {
 	} else {
 		message = Resource.msg(pdict.formfield.description, 'forms', null);
 	}
-	caption = '<span class="form-caption ' + (hasError ? 'error-message' : '') + '">' + message + '</span>';
+	caption = '<div class="form-caption ' + (hasError ? 'error-message' : '') + '">' + message + '</div>';
+
+	// help text
+	if (pdict.helpcid && pdict.helplabel) {
+		help = [
+			'<div class="form-field-tooltip">',
+			'<a href="' + URLUtils.url('Page-Show', 'cid', pdict.helpcid) + '" class="tooltip">',
+			pdict.helplabel,
+			'<div class="tooltip-content" data-layout="small">',
+			ContentMgr.getContent(pdict.helpcid).custom.body,
+			'</div>',
+			'</a>',
+			'</div>'
+		].join('');
+	}
 
 	return {
 		rowClass: rowClass,
 		label: label,
 		input: input,
-		caption: caption
+		caption: caption,
+		help: help
 	};
 };
