@@ -79,14 +79,6 @@ module.exports = function (grunt) {
 					watch: true
 				}
 			},
-			test: {
-				files: [{
-					expand: true,
-					cwd: 'test/unit/browser/',
-					src: ['*.js', '!*.out.js'],
-					dest: 'test/unit/browser/dist'
-				}]
-			},
 			styleguide: {
 				files: [{
 					src: 'styleguide/js/main.js',
@@ -116,12 +108,6 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			test: {
-				options: {
-					port: config.port,
-					base: 'test/unit/browser'
-				}
-			},
 			styleguide: {
 				options: {
 					port: grunt.option('port') || 8000,
@@ -155,7 +141,7 @@ module.exports = function (grunt) {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
+				src: ['test/unit/' + config.suite + '/**/*.js']
 			}
 		},
 		'gh-pages': {
@@ -181,7 +167,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['css:dev', 'browserify:watch_dev', 'watch:dev']);
 	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
-	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit']);
+	grunt.registerTask('test:unit', ['mochaTest:unit']);
 	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watch_styleguide', 'connect:styleguide', 'watch:styleguide']);
 	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
 }

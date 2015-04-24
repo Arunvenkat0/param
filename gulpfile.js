@@ -106,44 +106,16 @@ gulp.task('test:application', function () {
 		}));
 });
 
-var transform = require('vinyl-transform');
-var rename = require('gulp-rename');
-var filter = require('gulp-filter');
-gulp.task('js:test', function () {
-	var browserified = transform(function (filename) {
-		var b = browserify(filename);
-		return b.bundle();
-	});
-
-	return gulp.src(['test/unit/browser/*.js', '!test/unit/browser/*.out.js'])
-		.pipe(browserified)
-		.pipe(rename(function (path) {
-			path.dirname += '/dist';
-		}))
-		.pipe(gulp.dest('test/unit/browser'));
-});
-
-gulp.task('connect:test', function () {
-	var opts = minimist(process.argv.slice(2));
-	var port = opts.port || 7000;
-	return connect.server({
-		root: 'test/unit/browser',
-		port: port
-	});
-});
-gulp.task('test:unit', ['js:test', 'connect:test'], function () {
+gulp.task('test:unit', function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
 	var suite = opts.suite || '*';
-	gulp.src(['test/unit/' + suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*'], {read: false})
+	return gulp.src(['test/unit/' + suite + '/**/*.js'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
-		}))
-		.on('end', function () {
-			connect.serverClose();
-		})
+		}));
 });
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
