@@ -110,7 +110,7 @@ function GetVariationAttributes(pdict) {
 					break;
 			}
 			if (selectedValue) {
-				variationAttributes['dwvar_' + vaId] = selectedValue;
+				variationAttributes['dwvar_' + pdict.Product.ID + '_' + vaId] = selectedValue;
 			}
 		}
 	}
