@@ -30,40 +30,40 @@
 		var selectableColors : dw.util.Collection = new dw.util.ArrayList(),
 			imageSize = 'medium',
 			PVM : dw.catalog.ProductVariationModel = Product.variationModel,
-			colorVarAttr, selectedColor, imageSource, image;
+            colorVarAttr = null, selectedColor = null, imageSource = null, image = null;
 		if (PVM) {
 			colorVarAttr = PVM.getProductVariationAttribute('color');
 			if (colorVarAttr) {
 				selectableColors = PVM.getFilteredValues(colorVarAttr);
-				if (Product.variationGroup) {
-					imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
-					if (!imageSource) {
-						if (!PVM.variants.isEmpty()) {
-							imageSource = PVM.defaultVariant;
-							if (imageSource) {
-								selectedColor = PVM.getVariationValue(imageSource, colorVarAttr);
-							}
-						}
-					}
-				} else if (Product.isMaster() && PVM.defaultVariant) {
-					if (colorVarAttr) {
+			}
+			if (Product.variationGroup) {
+				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
+				if (!imageSource) {
+					if (!PVM.variants.isEmpty()) {
 						imageSource = PVM.defaultVariant;
-						selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
-					} else {
-						imageSource = PVM.master;
-					}
-				} else if (Product.isVariant()) {
-					imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
-					if (!imageSource) {
-						if (!PVM.variants.isEmpty()) {
-							imageSource = PVM.variants[0];
-							selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+						if (imageSource) {
+							selectedColor = PVM.getVariationValue(imageSource, colorVarAttr);
 						}
 					}
-				} else {
-					// standard product, product set or bundle
-					imageSource = Product;
 				}
+			} else if (Product.isMaster() && PVM.defaultVariant) {
+				if (colorVarAttr) {
+					imageSource = PVM.defaultVariant;
+					selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+				} else {
+					imageSource = PVM.master;
+				}
+			} else if (Product.isVariant()) {
+				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
+				if (!imageSource) {
+					if (!PVM.variants.isEmpty()) {
+						imageSource = PVM.variants[0];
+						selectedColor = imageSource.variationModel.getSelectedValue(colorVarAttr);
+					}
+				}
+			} else {
+				// standard product, product set or bundle
+				imageSource = Product;
 			}
 		} else {
 			imageSource = Product;
