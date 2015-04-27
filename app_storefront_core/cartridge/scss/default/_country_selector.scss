@@ -1,5 +1,31 @@
 .country-selector {
-	padding: 1rem;
+	color: $white;
+	position: absolute;
+	top: .1rem;
+	right: .2rem;
+	z-index: 30;
+	.selector {
+		background-color: $white;
+		border-radius: 3px;
+		box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
+		display: none;
+		margin-top: 1rem;
+		padding: 1rem;
+		&.active {
+			display: block;
+		}
+	}
+	.current-country {
+		cursor: pointer;
+		// prevent the text from shifting left to accommmodate the selector width
+		&.selector-active {
+			position: absolute;
+			right: 0;
+		}
+		.selector-icon {
+			margin-let: .5rem;
+		}
+	}
 	.country {
 		margin-bottom: .5rem;
 	}

@@ -5543,7 +5543,27 @@ h1 .account-logout {
   color: #999; }
 
 .country-selector {
-  padding: 1rem; }
+  color: #fff;
+  position: absolute;
+  top: .1rem;
+  right: .2rem;
+  z-index: 30; }
+  .country-selector .selector {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.3);
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem; }
+    .country-selector .selector.active {
+      display: block; }
+  .country-selector .current-country {
+    cursor: pointer; }
+    .country-selector .current-country.selector-active {
+      position: absolute;
+      right: 0; }
+    .country-selector .current-country .selector-icon {
+      margin-let: .5rem; }
   .country-selector .country {
     margin-bottom: .5rem; }
   .country-selector .locale {

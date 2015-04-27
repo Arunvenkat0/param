@@ -4,16 +4,24 @@
 	var Url = require('~/cartridge/scripts/util/Url');
 	var countries = Countries.getCountries();
 	var currentCountry = Countries.getCurrent(pdict);
+	var currentLocale = pdict.CurrentRequest.locale;
 </isscript>
 
 <div class="country-selector">
-	<isloop items="${countries}" var="country">
-		<isset name="defaultLocale" value="${country.locales[0]}" scope="page">
-		<div class="country">
-			<i class="flag-icon flag-icon-${country.countryCode.toLowerCase()}"></i>
-			<isloop items="${country.locales}" var="locale">
-				<a href="${Url.getCurrent(pdict, locale)}" data-currency="${country.currencyCode}" data-locale="${locale}" class="locale${pdict.CurrentRequest.locale === defaultLocale ? ' selected' : ''}">${country.name[locale]}</a>
-			</isloop>
-		</div>
-	</isloop>
+	<div class="current-country">
+		<i class="flag-icon flag-icon-${currentCountry.countryCode.toLowerCase()}"></i>
+		<span>${currentCountry.name[currentLocale]}</span>
+		<i class="fa fa-angle-down selector-icon"></i>
+	</div>
+	<div class="selector">
+		<isloop items="${countries}" var="country">
+			<isset name="defaultLocale" value="${country.locales[0]}" scope="page">
+			<div class="country">
+				<i class="flag-icon flag-icon-${country.countryCode.toLowerCase()}"></i>
+				<isloop items="${country.locales}" var="locale">
+					<a href="${Url.getCurrent(pdict, locale)}" data-currency="${country.currencyCode}" data-locale="${locale}" class="locale${currentLocale === defaultLocale ? ' selected' : ''}">${country.name[locale]}</a>
+				</isloop>
+			</div>
+		</isloop>
+	</div>
 </div>
