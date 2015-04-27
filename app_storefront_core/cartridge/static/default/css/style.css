@@ -5563,7 +5563,7 @@ h1 .account-logout {
       position: absolute;
       right: 0; }
     .country-selector .current-country .selector-icon {
-      margin-let: .5rem; }
+      margin-left: .3rem; }
   .country-selector .country {
     margin-bottom: .5rem; }
   .country-selector .locale {
