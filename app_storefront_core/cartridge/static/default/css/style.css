@@ -863,19 +863,22 @@ div.error {
   display: none; }
 
 .ui-tooltip.ui-widget-content {
-  background: #fff;
-  box-shadow: none; }
+  background: #333;
+  border-radius: 3px;
+  box-shadow: 2px 3px 3px 0 #999;
+  color: #fff; }
 
 .ui-tooltip-content {
-  padding: 0.5em; }
+  padding: 0.3em; }
   .ui-tooltip-content .recommendation-tooltip-header {
-    background-color: #ccc;
     font-size: 1.2em;
     font-weight: bold;
     padding: 0.5em; }
-    .ui-tooltip-content .recommendation-tooltip-header .product-price .price-standard {
-      color: #999;
-      text-decoration: line-through; }
+    .ui-tooltip-content .recommendation-tooltip-header .product-price {
+      font-weight: 100; }
+      .ui-tooltip-content .recommendation-tooltip-header .product-price .price-standard {
+        color: #999;
+        text-decoration: line-through; }
   .ui-tooltip-content .recommendation-tooltip-description, .ui-tooltip-content .recommendation-tooltip-attributes {
     padding: 0.8em; }
   .ui-tooltip-content .shipping-method-cost {
