@@ -1,7 +1,6 @@
 'use strict';
 
 var dialog = require('../../dialog'),
-	sendToFriend = require('../../send-to-friend'),
 	productStoreInventory = require('../../storeinventory/product'),
 	tooltip = require('../../tooltip'),
 	util = require('../../util'),

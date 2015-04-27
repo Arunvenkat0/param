@@ -13,7 +13,7 @@ var shippingMethods;
  */
 function giftMessageBox() {
 	// show gift message box, if shipment is gift
-	$('.gift-message-text').toggle($('#is-gift-yes')[0].checked);
+	$('.gift-message-text').toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
 }
 
 /**
@@ -146,9 +146,7 @@ exports.init = function () {
 		continueSelector: '[name$="shippingAddress_save"]',
 		formSelector:'[id$="singleshipping_shippingAddress"]'
 	});
-	$('#is-gift-yes, #is-gift-no').on('click', function () {
-		giftMessageBox();
-	});
+	$('input[name$="_shippingAddress_isGift"]').on('click', giftMessageBox);
 
 	$('.address').on('change',
 		'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_zip"]',

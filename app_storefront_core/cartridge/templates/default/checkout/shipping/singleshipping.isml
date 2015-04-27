@@ -98,16 +98,7 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address1}" type="input"/>
 
-					<div class="form-field-tooltip">
-						(<a href="${URLUtils.url('Page-Show', 'cid', 'apo-fpo')}" class="tooltip">
-							${Resource.msg('singleshipping.apofpo','checkout',null)}
-							<div class="tooltip-content"  data-layout="small">
-									<iscontentasset aid="apo-fpo"/>
-							</div>
-						</a>)
-					</div>
-
-					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address2}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.address2}" type="input" helpcid="apo-fpo" helplabel="${Resource.msg('singleshipping.apofpo', 'checkout', null)}"/>
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.country}" type="select"/>
 
@@ -127,16 +118,7 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.postal}" type="input"/>
 
-					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input"/>
-
-					<div class="form-field-tooltip with-helper-text">
-						(<a href="${URLUtils.url('Page-Show', 'cid', 'help-telephone')}" class="tooltip">
-							${Resource.msg('singleshipping.phonerequired','checkout',null)}
-							<div class="tooltip-content"  data-layout="small">
-								<iscontentasset aid="help-telephone"/>
-							</div>
-						</a>)
-					</div>
+					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired','checkout',null)}"/>
 
 					<iscomment>Add address to Address Book</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated}">
@@ -147,11 +129,7 @@
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox" rowclass="form-indent label-inline"/>
 
 					<iscomment>Is this a gift</iscomment>
-					<div class="form-row">
-						<label for="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}"><isprint value="${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}"/></label>
-						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-yes" value="true" <isif condition="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.yes', 'locale', null)}
-						<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.isGift.htmlName}" id="is-gift-no" value="false" <isif condition="${!pdict.CurrentForms.singleshipping.shippingAddress.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.no', 'locale', null)}
-					</div>
+					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.isGift}" type="radio"/>
 
 					<isinputfield rowclass="gift-message-text" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
 

@@ -621,10 +621,14 @@ label {
 
 input[type="text"], input[type="number"], input[type="password"] {
   border: 1px solid #aaa;
+  box-sizing: border-box;
   margin-left: 2%;
+  margin-bottom: .3rem;
   padding: 0.7em 0.5em;
   text-indent: 0;
-  width: 49.5966%; }
+  width: 50%; }
+  .form-row input[type="text"], .form-row input[type="number"], .form-row input[type="password"] {
+    float: left; }
 
 textarea {
   border: 1px solid #aaa;
@@ -642,7 +646,7 @@ select {
   height: auto; }
 
 input[type="checkbox"], input[type="radio"] {
-  margin: 1em 2%; }
+  margin: 1em 1% 1em 2%; }
 
 .label-inline label {
   display: inline-block;
@@ -679,7 +683,7 @@ input[type="checkbox"], input[type="radio"] {
     margin-left: 0; }
 
 .form-caption {
-  display: block;
+  clear: left;
   margin: 1% 0 1% 24%;
   width: auto; }
 
@@ -766,12 +770,10 @@ div.error {
   color: #990000; }
 
 .form-field-tooltip {
-  float: right;
-  margin: -36px 0 0;
-  width: 21%; }
-
-.with-helper-text {
-  margin-top: -59px; }
+  float: left;
+  margin-left: 3%;
+  padding-top: .75em;
+  width: 23%; }
 
 .char-count {
   display: block;
@@ -2939,6 +2941,9 @@ ul.product-availability-list {
   .shipping-method .shipping-description {
     display: inline; }
 
+.gift-message-text.hidden {
+  display: none; }
+
 .redemption {
   color: #990000; }
   .redemption .success {
@@ -2962,30 +2967,19 @@ ul.product-availability-list {
 .payment-method-expanded {
   display: block; }
 
-.cvn-tip {
-  float: left;
-  margin: -38px 0 0 40%;
-  width: auto; }
-
-.cvn-tip-error {
-  float: left;
-  margin: -78px 0 0 40%;
-  width: auto; }
-
 .month, .year, .day {
   clear: none;
   float: left;
   margin: 0 0 2% 2%; }
-
-.month select, .year select, .day select {
-  margin: 0;
-  width: auto; }
+  .month select, .year select, .day select {
+    margin: 0;
+    width: auto; }
 
 .month .form-caption {
   margin-left: 0; }
 
 .cvn input {
-  width: 50px !important; }
+  width: 50px; }
 
 .bml-terms-and-conditions {
   border: 1px solid #aaa;
@@ -3144,9 +3138,6 @@ ul.product-availability-list {
   padding: 1em; }
 .multishipprogress .step-4 {
   padding-right: 0; }
-
-.checkout-multi-shipping .cart-row .gift-message-text {
-  display: none; }
 
 .pt_checkout #cart-table .cart-row .shipment-label {
   font-weight: 700;

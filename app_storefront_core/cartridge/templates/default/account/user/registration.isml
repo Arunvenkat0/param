@@ -21,11 +21,11 @@
 					<span>&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 				</legend>
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="text"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="text"/>
 				<iselse/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="text" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="text" attribute1="disabled" value1="disabled"/>
 				</isif>
 			</fieldset>
 
