@@ -3,6 +3,7 @@
 	"name": {
 		"en_US": "United States"
 	},
+	"continent": "North America",
 	"locales": ["en_US"],
 	"currencyCode": "USD",
 	"taxation": "net",
@@ -101,6 +102,7 @@
 		"ja_JP": "日本",
 		"en_JP": "Japan"
 	},
+	"continent": "Asia",
 	"locales": ["ja_JP", "en_JP"],
 	"currencyCode": "JPY",
 	"taxation": "gross",
@@ -205,6 +207,7 @@
 		"zh_CN": "中国",
 		"en_CN": "China"
 	},
+	"continent": "Asia",
 	"locales": ["zh_CN", "en_CN"],
 	"currencyCode": "CNY",
 	"taxation": "gross",
@@ -308,6 +311,7 @@
 	"name": {
 		"fr_FR": "Français"
 	},
+	"continent": "Europe",
 	"locales": ["fr_FR"],
 	"currencyCode": "EUR",
 	"taxation": "gross",
@@ -394,6 +398,7 @@
 	"name": {
 		"it_IT": "Italia"
 	},
+	"continent": "Europe",
 	"locales": ["it_IT"],
 	"currencyCode": "EUR",
 	"taxation": "gross",

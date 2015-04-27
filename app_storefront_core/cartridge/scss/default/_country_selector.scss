@@ -25,6 +25,14 @@
 		.selector-icon {
 			margin-left: .3rem;
 		}
+		.flag-icon {
+			border: none;
+		}
+	}
+	.continent-name {
+		color: $sangria;
+		margin-top: 0;
+		margin-bottom: .5rem;
 	}
 	.country {
 		margin-bottom: .5rem;
@@ -43,6 +51,7 @@
 		}
 	}
 	.flag-icon {
+		border: 1px solid $gainsboro;
 		margin-right: .3rem;
 	}
 }
