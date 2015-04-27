@@ -5542,6 +5542,23 @@ h1 .account-logout {
 .search-suggestion-left-panel-parent-category {
   color: #999; }
 
+.country-selector {
+  padding: 1rem; }
+  .country-selector .country {
+    margin-bottom: .5rem; }
+  .country-selector .locale {
+    border-right: 1px solid #e0e0e0;
+    display: inline-block;
+    padding: 0 .3rem;
+    vertical-align: middle; }
+    .country-selector .locale:first-of-type {
+      padding-left: 0; }
+    .country-selector .locale:last-of-type {
+      border-right: none;
+      padding-right: 0; }
+  .country-selector .flag-icon {
+    margin-right: .3rem; }
+
 @media screen and (max-width: 767px) {
   body {
     -webkit-text-size-adjust: none; }

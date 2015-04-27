@@ -5,10 +5,15 @@
 	var countries = Countries.getCountries();
 	var currentCountry = Countries.getCurrent(pdict);
 </isscript>
-<select class="country-selector">
+
+<div class="country-selector">
 	<isloop items="${countries}" var="country">
-		<isset name="locale" value="${country.locales[0]}" scope="page">
-		<isset name="currentLocale" value="${pdict.CurrentRequest.locale === locale ? 'selected' : ''}" scope="page">
-		<option data-href="${Url.getCurrent(pdict, locale)}" data-currency="${country.currencyCode}" ${currentLocale} value="${locale}">${country.name[locale]}</option>
+		<isset name="defaultLocale" value="${country.locales[0]}" scope="page">
+		<div class="country">
+			<i class="flag-icon flag-icon-${country.countryCode.toLowerCase()}"></i>
+			<isloop items="${country.locales}" var="locale">
+				<a href="${Url.getCurrent(pdict, locale)}" data-currency="${country.currencyCode}" data-locale="${locale}" class="locale${pdict.CurrentRequest.locale === defaultLocale ? ' selected' : ''}">${country.name[locale]}</a>
+			</isloop>
+		</div>
 	</isloop>
-</select>
+</div>

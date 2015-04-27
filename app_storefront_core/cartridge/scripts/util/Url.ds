@@ -29,8 +29,8 @@ exports.getCurrent = function getCurrent(pdict, locale) {
 			}
 			parameters.push(new URLParameter(key, parameterMap[key]));
 		}
-		args.push(new dw.web.URLParameter(param[0], param[1]));
 	}
+
 	return pdict.CurrentRequest.httpProtocol + '://' +
 		pdict.CurrentRequest.httpHost +
 		URLUtils.url.apply(null, args);
