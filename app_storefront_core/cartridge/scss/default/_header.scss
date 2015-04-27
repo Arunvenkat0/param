@@ -7,14 +7,13 @@
 
 .primary-logo {
 	height: 38px; // height of image
-	padding: 1px 0;
+	padding: .1em 0 0 0;
 	margin: 0 auto;
 	width: 200px; // width of image
 	z-index: 1;
 	@media screen and (min-width: 768px) {
-		left: 0.5em;
-		padding: 0;
-		position: absolute;
+		margin: 0;
+		padding: 0.3em 0 0 .5em;
 	}
 }
 
@@ -39,16 +38,18 @@
 
 nav[role="navigation"] {
 	@extend .clearfix;
-	left: -20em;
-	width: 20em;
-	position: absolute;
-	top: 0;
 	color: $white;
+	left: -20em;
+	margin-top: 0;
+	position: absolute;
+	width: 20em;
+	top: 0;
 	@media screen and (min-width: 768px) {
+		color: $night-rider;
 		left: auto;
+		margin-top: -4em;
 		position: static;
 		width: 100%;
-		color: $night-rider;
 	}
 }
 
@@ -73,7 +74,7 @@ nav[role="navigation"] {
 		margin-top: 0;
 		position: absolute;
 		right: .8em;
-		top: .9em;
+		top: 1.4em;
 		width: auto;
 		select {
 			background-color: transparent;
@@ -145,8 +146,7 @@ nav[role="navigation"] {
 	text-transform: uppercase;
 	@media screen and (min-width: 768px) {
 		border-bottom: 1px solid $very-light-gray;
-		margin-top: 1.35em;
-		padding: 0 6%;
+		margin: 1.35em auto 0;
 		width: 100%;
 	}
 	li {
@@ -326,7 +326,7 @@ nav[role="navigation"] {
 	@media screen and (min-width: 768px) {
 		position: absolute;
 		right: 9.7em;
-		top: -.2em;
+		top: .2em;
 	}
 	li {
 		border-top: 1px solid darken($night-rider, 10%);
@@ -403,7 +403,13 @@ nav[role="navigation"] {
 					height: auto;
 				}
 			}
-		}	
+		}
+		.user-none {
+			display: none;
+			@media screen and (min-width: 768px) {
+				display: block;
+			}
+		}
 		.menu-panel {
 			@media screen and (min-width: 768px) {
 				background-color: $white;

@@ -75,9 +75,9 @@
 			</div>
 		<iscomment>User has no session</iscomment>
 		<iselse/>
-			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">
+			<a class="user-login" id="menuLink1" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)} / ${Resource.msg('global.register', 'locale', null)}">
 				<i class="fa fa-user"></i>
-				<span>${Resource.msg('global.login', 'locale', null)}</span>
+				<span>${Resource.msg('global.login', 'locale', null)} / ${Resource.msg('global.register', 'locale', null)}</span>
 			</a>
 			<div class="menu-panel user-none">
 				<div class="menu-slot">
