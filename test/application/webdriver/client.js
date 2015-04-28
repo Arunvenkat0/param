@@ -8,4 +8,5 @@ var client = require('webdriverio').remote({
 	logLevel: 'silent'
 });
 
+
 module.exports = client;
