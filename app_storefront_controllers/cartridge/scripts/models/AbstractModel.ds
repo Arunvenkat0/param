@@ -104,7 +104,7 @@ var AbstractModel = Class.extend(
                         //dw.system.Logger.debug('Defining property get access for {0}',propertyName);
                         instance.__defineGetter__(
                             propertyName,
-                            (property in instance)?function(){return instance[property]}:function(){return instance.object[propertyName];}
+                            (property in instance)?function(){return instance[property]()}:function(){return instance.object[propertyName];}
                         );
                     }
                 }

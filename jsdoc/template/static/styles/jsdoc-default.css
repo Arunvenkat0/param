@@ -52,7 +52,7 @@ a:hover {
 header
 {
     display: block;
-    padding: 0px 4px;
+    padding: 0;
 }
 
 tt, code, kbd, samp {
@@ -100,9 +100,9 @@ section
 }
 
 svg.icon.icon-menu {
-    width: 4em;
-    height: 4em;
-    color: #84bd00;
+    width: 3em;
+    height: 3em;
+    color: #dfd;
     fill: currentcolor;
     display: none;
 }
@@ -365,8 +365,8 @@ h6
 }
 
 .logo {
-    margin-top: 15px;
-    margin-left: 5px;
+    margin-top: 10px;
+    margin-left: 3em;
 }
 
 .homeleft {
@@ -419,6 +419,16 @@ h6
 /* Mobile layout */
 @media only screen and (max-width: 700px){
     svg.icon.icon-menu { display: inline; }
+    a.menu-icon {
+         position: fixed;
+         background-color: #84bd00;
+         padding:0 7px;
+    }
+    header {
+        background-color: #84bd00;
+        opacity: 0.7;
+        width: 100%;
+    }
     nav {
         float : left;
         width : 100%;
