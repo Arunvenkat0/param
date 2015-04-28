@@ -15,8 +15,18 @@
  * @module util/Class
  */
 
+/**
+ * Base class which allows simple inheritance.
+ *
+ * @class module:util/Class~Class
+ * @example
+ * var MyClass = Class.extends({
+ *     init : function(){
+ *         // do some construction
+ *     }
+ * })
+ */
 // Hack, because vars cannot be imported in DW, only functions
-/** @class module:util/Class~Class */
 function Class() {};
 
 (function () {
@@ -28,7 +38,7 @@ function Class() {};
     // The base Class implementation (does nothing)
     //this.Class = function(){};
 
-    // Create a new Class that inherits from this class
+    /** Create a new Class that inherits from this class */
     Class.extend = function (prop) {
         var _super = this.prototype;
 
