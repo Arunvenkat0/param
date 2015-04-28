@@ -2684,31 +2684,49 @@ nav[role="navigation"] {
       border-bottom: none;
       padding: 0;
       position: absolute;
-      top: .1rem;
+      top: -1rem;
       right: .2rem;
-      z-index: 30; } }
+      z-index: 30;
+      width: auto; } }
   .country-selector .selector {
-    background-color: #fff;
-    border-radius: 3px;
-    box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.3);
     display: none;
-    margin-top: 1rem;
-    padding: 1rem; }
+    margin-top: .5rem;
+    padding-left: 1rem; }
     .country-selector .selector.active {
       display: block; }
+    @media screen and (min-width: 768px) {
+      .country-selector .selector {
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.3);
+	margin-top: 1rem;
+	padding: 1rem; } }
   .country-selector .current-country {
     cursor: pointer; }
     .country-selector .current-country.selector-active {
-      position: absolute;
-      right: 0; }
+      border-bottom: 1px solid #1a1a1a;
+      padding-bottom: .5rem; }
+    @media screen and (min-width: 768px) {
+      .country-selector .current-country.selector-active {
+	border-bottom: none;
+	padding-bottom: 0;
+	position: absolute;
+	right: 0; } }
     .country-selector .current-country .selector-icon {
-      margin-left: .3rem; }
+      margin-right: .3rem; }
+      @media screen and (min-width: 768px) {
+	.country-selector .current-country .selector-icon {
+	  float: right;
+	  margin-right: 0;
+	  margin-left: .3rem; } }
     .country-selector .current-country .flag-icon {
       border: none; }
   .country-selector .continent-name {
-    color: #990000;
     margin-top: 0;
     margin-bottom: .5rem; }
+    @media screen and (min-width: 768px) {
+      .country-selector .continent-name {
+	color: #990000; } }
   .country-selector .country {
     margin-bottom: .5rem; }
   .country-selector .locale {

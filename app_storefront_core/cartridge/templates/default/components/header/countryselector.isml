@@ -10,9 +10,9 @@
 <isif condition="${Number(Countries.getCountries().length) > 1}">
 	<div class="country-selector">
 		<div class="current-country">
+			<i class="fa fa-angle-down selector-icon"></i>
 			<i class="flag-icon flag-icon-${currentCountry.countryCode.toLowerCase()}"></i>
 			<span>${currentCountry.name[currentLocale]}</span>
-			<i class="fa fa-angle-down selector-icon"></i>
 		</div>
 		<div class="selector">
 			<isloop items="${continents}" var="continent">

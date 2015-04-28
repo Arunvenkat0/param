@@ -7,39 +7,59 @@
 		border-bottom: none;
 		padding: 0;
 		position: absolute;
-		top: .1rem;
+		top: -1rem;
 		right: .2rem;
 		z-index: 30;
+		width: auto;
 	}
 	.selector {
-		background-color: $white;
-		border-radius: 3px;
-		box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
 		display: none;
-		margin-top: 1rem;
-		padding: 1rem;
+		margin-top: .5rem;
+		padding-left: 1rem;
 		&.active {
 			display: block;
 		}
+		@media screen and (min-width: 768px) {
+			background-color: $white;
+			border-radius: 3px;
+			box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
+			margin-top: 1rem;
+			padding: 1rem;
+		}
 	}
 	.current-country {
-		cursor: pointer;
-		// prevent the text from shifting left to accommmodate the selector width
 		&.selector-active {
-			position: absolute;
-			right: 0;
+			border-bottom: 1px solid darken($night-rider, 10%);
+			padding-bottom: .5rem;
+		}
+		cursor: pointer;
+		@media screen and (min-width: 768px) {
+			&.selector-active {
+				border-bottom: none;
+				padding-bottom: 0;
+				// prevent the text from shifting left to accommmodate the selector width
+				position: absolute;
+				right: 0;
+			}
 		}
 		.selector-icon {
-			margin-left: .3rem;
+			margin-right: .3rem;
+			@media screen and (min-width: 768px) {
+				float: right;
+				margin-right: 0;
+				margin-left: .3rem;
+			}
 		}
 		.flag-icon {
 			border: none;
 		}
 	}
 	.continent-name {
-		color: $sangria;
 		margin-top: 0;
 		margin-bottom: .5rem;
+		@media screen and (min-width: 768px) {
+			color: $sangria;
+		}
 	}
 	.country {
 		margin-bottom: .5rem;
