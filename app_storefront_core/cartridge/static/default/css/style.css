@@ -875,7 +875,7 @@ div.error {
     font-weight: bold;
     padding: 0.5em; }
     .ui-tooltip-content .recommendation-tooltip-header .product-price {
-      font-weight: 100; }
+      font-weight: 400; }
       .ui-tooltip-content .recommendation-tooltip-header .product-price .price-standard {
         color: #999;
         text-decoration: line-through; }
