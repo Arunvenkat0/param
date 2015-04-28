@@ -45,7 +45,7 @@ function getCountriesGroupedBy(group) {
 function getCurrent(pdict) {
 	var currentLocale = dw.util.Locale.getLocale(pdict.CurrentRequest.locale);
 	var country;
-	if (!currentLocale) {
+	if (!currentLocale.country) {
 		return;
 	}
 	for (var i = 0; i < countries.length; i++) {
