@@ -1,5 +1,13 @@
 {
 	"hooks": [
+        {
+            "name": "dw.system.request.onSession",
+            "script": "./request/OnSession.ds"
+        },
+        {
+            "name": "dw.system.request.onRequest",
+            "script": "./request/OnRequest.ds"
+        },
 		{
 			"name": "app.payment.processor.default",
 			"script": "./payment/processor/default.js"
