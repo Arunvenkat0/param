@@ -977,15 +977,14 @@ div.error {
 
 .primary-logo {
   height: 38px;
-  padding: 1px 0;
+  padding: .1em 0 0 0;
   margin: 0 auto;
   width: 200px;
   z-index: 1; }
   @media screen and (min-width: 768px) {
     .primary-logo {
-      left: 0.5em;
-      padding: 0;
-      position: absolute; } }
+      margin: 0;
+      padding: 0.3em 0 0 .5em; } }
 
 .menu-toggle {
   background-color: transparent;
@@ -1004,17 +1003,19 @@ div.error {
     font-size: 2em; }
 
 nav[role="navigation"] {
+  color: #fff;
   left: -20em;
-  width: 20em;
+  margin-top: 0;
   position: absolute;
-  top: 0;
-  color: #fff; }
+  width: 20em;
+  top: 0; }
   @media screen and (min-width: 768px) {
     nav[role="navigation"] {
+      color: #333;
       left: auto;
+      margin-top: -4em;
       position: static;
-      width: 100%;
-      color: #333; } }
+      width: 100%; } }
 
 .header-banner {
   display: block; }
@@ -1035,7 +1036,7 @@ nav[role="navigation"] {
       margin-top: 0;
       position: absolute;
       right: .8em;
-      top: .9em;
+      top: 1.4em;
       width: auto; }
       .currency-converter select {
         background-color: transparent;
@@ -1099,8 +1100,7 @@ nav[role="navigation"] {
   @media screen and (min-width: 768px) {
     .menu-category {
       border-bottom: 1px solid #ccc;
-      margin-top: 1.35em;
-      padding: 0 6%;
+      margin: 1.35em auto 0;
       width: 100%; } }
   .menu-category li {
     list-style: none;
@@ -1241,7 +1241,7 @@ nav[role="navigation"] {
     .menu-utility-user {
       position: absolute;
       right: 9.7em;
-      top: -.2em; } }
+      top: .2em; } }
   .menu-utility-user li {
     border-top: 1px solid #1a1a1a;
     list-style: none;
@@ -1303,6 +1303,11 @@ nav[role="navigation"] {
           opacity: 1;
           visibility: visible;
           height: auto; } }
+  .menu-utility-user .user-info .user-none {
+    display: none; }
+    @media screen and (min-width: 768px) {
+      .menu-utility-user .user-info .user-none {
+        display: block; } }
   @media screen and (min-width: 768px) {
     .menu-utility-user .user-info .menu-panel {
       background-color: #fff;
@@ -1375,7 +1380,7 @@ nav[role="navigation"] {
   @media screen and (min-width: 768px) {
     #mini-cart {
       right: 5.7em;
-      top: -0.1em; } }
+      top: .5em; } }
   #mini-cart .mini-cart-name a {
     color: #84bd00; }
 
