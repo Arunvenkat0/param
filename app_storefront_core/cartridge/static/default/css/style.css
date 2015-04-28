@@ -1767,7 +1767,7 @@ input[type="button"] {
           transition: left 0.2s ease-in;
   width: 960px; }
   #wrapper.menu-active {
-    left: 20em; }
+    left: 50%; }
   @media screen and (min-width: 768px) {
     #wrapper.menu-active {
       left: auto; } }
@@ -2358,10 +2358,10 @@ div.error {
 
 nav[role="navigation"] {
   color: #fff;
-  left: -20em;
+  left: -50%;
   margin-top: 0;
   position: absolute;
-  width: 20em;
+  width: 50%;
   top: 0; }
   @media screen and (min-width: 768px) {
     nav[role="navigation"] {

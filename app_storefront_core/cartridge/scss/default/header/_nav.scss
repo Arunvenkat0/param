@@ -1,10 +1,10 @@
 nav[role="navigation"] {
 	@extend .clearfix;
 	color: $white;
-	left: -20em;
+	left: -50%;
 	margin-top: 0;
 	position: absolute;
-	width: 20em;
+	width: 50%;
 	top: 0;
 	@media screen and (min-width: 768px) {
 		color: $night-rider;
