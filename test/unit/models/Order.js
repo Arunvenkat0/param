@@ -9,8 +9,8 @@ var sinon = require('sinon');
 var mockRequire = require('proxyquire');
 var mockAbstractModel = {
     extend: function () {
-        return function (input_param) {
-            return { orderNo: input_param };
+        return function (inputParam) {
+            return { orderNo: inputParam };
         };
     },
     '@noCallThru': true
@@ -19,8 +19,8 @@ var mockAbstractModel = {
 var mockArrayList = { '@noCallThru': true };
 
 var mockOrderMgr = {
-    getOrder: function (input_param) {
-        return input_param;
+    getOrder: function (inputParam) {
+        return inputParam;
     },
     '@noCallThru': true
 };
