@@ -4,6 +4,8 @@
 */
 
 importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.catalog );
 
 /**
  * Gets a list of online categories that have the showInMenu attribute set to true.
@@ -11,16 +13,22 @@ importPackage( dw.system );
  * @input Category: category A Category list
  * @output subcategories: Array Subcategories for menu
  */
-function getSubcategoriesInMenuForCategory(Category : dw.catalog.Category) : Object {
-	var Subcategories = Category.getOnlineSubCategories();
+function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	var result = [];
-	if (!empty(Subcategories)) {
-		for each(var Subcategory : dw.catalog.Category in Subcategories) {
-			if (('showInMenu' in Subcategory.custom) && Subcategory.custom.showInMenu.valueOf()) {
-				result.push(Subcategory);
-			}
+	
+	var psm : ProductSearchModel = new ProductSearchModel();
+	psm.setCategoryID(category.getID());
+	psm.search();
+	var psr : ProductSearchRefinements = psm.getRefinements();
+	var level1 : Collection = psr.getNextLevelCategoryRefinementValues(CatalogMgr.getCategory(category.getID()));
+
+	for each (var psrv : ProductSearchRefinementValue in level1) {
+		var subCategory :  Category = CatalogMgr.getCategory(psrv.value);
+		if (('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()) {
+				result.push(subCategory);
 		}
 	}
+	
 	return result;
 }
 
