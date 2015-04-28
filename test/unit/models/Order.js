@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect;
 var sinon = require('sinon');
+var describe = require('mocha').describe;
+var it = require('mocha').it;
 
 /**
  * Mocks
