@@ -11,21 +11,24 @@
 }
 
 .ui-tooltip.ui-widget-content {
-	background: $white;
-	box-shadow: none;
+  	background: $night-rider;
+  	border-radius: 3px;
+  	box-shadow: 2px 3px 3px 0 $nobel;
+  	color: $white;
 }
 
-
 .ui-tooltip-content {
-	padding: 0.5em;
+	padding: 0.3em;
 	.recommendation-tooltip-header {
-		background-color: $very-light-gray;
 		font-size: 1.2em;
 		font-weight: bold;
 		padding: 0.5em;
-		.product-price .price-standard {
-			color: $nobel;
-			text-decoration: line-through;
+		.product-price {
+			font-weight: 400;
+			.price-standard {
+				color: $nobel;
+				text-decoration: line-through;
+			}
 		}
 	}
 	.recommendation-tooltip-description,
