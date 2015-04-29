@@ -4,7 +4,6 @@
 */
 
 importPackage( dw.system );
-importPackage( dw.util );
 importPackage( dw.catalog );
 
 /**
@@ -25,7 +24,7 @@ function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	for each (var psrv : ProductSearchRefinementValue in level1) {
 		var subCategory :  Category = CatalogMgr.getCategory(psrv.value);
 		if (('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu) {
-				result.push(subCategory);
+			result.push(subCategory);
 		}
 	}
 	
