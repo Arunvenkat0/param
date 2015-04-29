@@ -8,7 +8,7 @@
 		<ul class="search-result-items tiles-container">
 			<isloop items="${pdict.LastVisitedProducts}" var="product" begin="0" end="2">
 				<li class="grid-tile">
-					<isproducttile product="${product}" showswatches="${false}" showpricing="${true}" showpromotion="${true}" showrating="${false}"/>
+					<isinclude url="${URLUtils.url('Product-HitTile','pid',product.ID,'showswatches','false','showpricing','false','showpromotion','true','showrating','false')}">
 				</li>
 			</isloop>
 		</ul>
