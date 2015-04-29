@@ -708,10 +708,12 @@ div.error {
   background: none repeat scroll 0 0 transparent; }
 
 .error-form {
-  background: url("../images/interface/icon-alert.png") no-repeat scroll left top transparent;
+  background-color: #cebdb3;
+  border: 1px solid #990000;
+  border-radius: .5em;
   color: #990000;
-  margin: 1em 0;
-  padding: 0.5em 0 0 4em; }
+  margin: 0.5em 0;
+  padding: 0.8em; }
 
 .form-inline form {
   padding: 0 0 2em;
@@ -954,11 +956,11 @@ div.error {
       padding-left: 4.58em; }
 
 .browser-compatibility-alert {
-  background: url("../images/interface/icon-alert.png") no-repeat scroll 1em 1em #faeded;
-  border: 1px solid;
-  color: #990000;
-  margin: 1em;
-  padding: 0.5em 4em; }
+  background-color: #990000;
+  color: #fff;
+  font-size: 1.3em;
+  line-height: 2em;
+  padding: 0.8em; }
 
 .folder-slot {
   border-style: solid;

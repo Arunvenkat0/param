@@ -82,11 +82,11 @@
 }
 
 .browser-compatibility-alert {
-	background: url("../images/interface/icon-alert.png") no-repeat scroll 1em 1em $tutu;
-	border: 1px solid;
-	color: $sangria;
-	margin: 1em;
-	padding: 0.5em 4em;
+	background-color: $sangria;
+	color: $white;
+	font-size: 1.3em;
+	line-height: 2em;
+	padding: 0.8em;
 }
 
 .folder-slot{
