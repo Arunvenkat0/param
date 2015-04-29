@@ -24,7 +24,7 @@
             <preference preference-id="SiteDefaultLocale">default</preference>
             <preference preference-id="SiteLibrary">SiteGenesisSharedLibrary</preference>
             <preference preference-id="SiteInventoryList">inventory</preference>
-            <preference preference-id="SiteLocales">en_US:default</preference>
+            <preference preference-id="SiteLocales">en_US</preference>
             <preference preference-id="SitePriceBooks">eur-list-prices:eur-sale-prices:usd-list-prices:usd-sale-prices</preference>
             <preference preference-id="StorefrontURLsEnabled">true</preference>
         </all-instances>
