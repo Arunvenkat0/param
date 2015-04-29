@@ -18,7 +18,7 @@
 		<div class="selector">
 			<isloop items="${continents}" var="continent">
 				<div class="continent">
-					<h4 class="continent-name">${continent}</h4>
+					<h4 class="continent-name">${Resource.msg('global.continent.' + continent, 'locale', null)}</h4>
 					<isloop items="${countriesGrouped[continent]}" var="country">
 						<isset name="defaultLocale" value="${country.locales[0]}" scope="page">
 						<div class="country">
