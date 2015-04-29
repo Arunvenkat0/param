@@ -1555,7 +1555,7 @@ Cart.get = function (parameter) {
 
     if (!parameter) {
         var GetBasketResult = new dw.system.Pipelet('GetBasket', {
-            Create : true
+            Create : false
         }).execute();
         if (GetBasketResult.result !== PIPELET_ERROR) {
             obj = GetBasketResult.Basket;
