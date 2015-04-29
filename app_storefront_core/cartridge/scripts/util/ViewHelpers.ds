@@ -20,11 +20,11 @@ function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	psm.setCategoryID(category.getID());
 	psm.search();
 	var psr : ProductSearchRefinements = psm.getRefinements();
-	var level1 : Collection = psr.getNextLevelCategoryRefinementValues(CatalogMgr.getCategory(category.getID()));
+	var level1 : Collection = psr.getNextLevelCategoryRefinementValues(category);
 
 	for each (var psrv : ProductSearchRefinementValue in level1) {
 		var subCategory :  Category = CatalogMgr.getCategory(psrv.value);
-		if (('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()) {
+		if (('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu) {
 				result.push(subCategory);
 		}
 	}
