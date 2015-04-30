@@ -191,10 +191,11 @@ function variation() {
     if (product.isVisible()) {
 
         var currentVariationModel = product.updateVariationSelection(request.httpParameterMap);
-        var selectedProduct = Product.get(currentVariationModel.getSelectedVariant());
 
-        if (!empty(selectedProduct.object)) {
-            product = selectedProduct;
+        var selectedVariant = currentVariationModel.getSelectedVariant();
+        if (selectedVariant)
+        {
+        	product = Product.get(selectedVariant);
         }
 
         // TODO this is apparently nowhere set to true..

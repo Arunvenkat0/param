@@ -147,12 +147,12 @@ function showOther() {
  */
 function addProduct() {
 	var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue).object;
+    var product = Product.get(request.httpParameterMap.pid.stringValue);
     var productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
     var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();
-    productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue || 1, productOptionModel);
+    productList.addProduct(product.object, request.httpParameterMap.Quantity.doubleValue || 1, productOptionModel);
 }
 
 /**

@@ -28,7 +28,7 @@ var TransientAddress = app.getModel('TransientAddress');
 function start() {
     var cart = Cart.get();
 
-    if (cart.object) {
+    if (cart) {
 
         // Stores session and customer addresses in sessionAddressBook attribute.
         Transaction.wrap(function () {
@@ -101,7 +101,7 @@ function multiShippingAddresses() {
 function startShipments() {
     var cart = Cart.get();
 
-    if (cart.object) {
+    if (cart) {
 
         app.getController('COShipping').PrepareShipments();
 
@@ -206,7 +206,7 @@ function initAddressForms(cart, quantityLineItems) {
 function editAddresses() {
     var cart = Cart.get();
 
-    if (cart.object) {
+    if (cart) {
 
         session.forms.multishipping.editAddress.clearFormElement();
 

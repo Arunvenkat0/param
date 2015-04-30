@@ -53,7 +53,7 @@ function submitForm() {
     // we have no existing state, so resolve the basket again
     var cart, formResult, cartForm, cartAsset, pageMeta;
     cartForm = app.getForm('cart');
-    cart = app.getModel('Cart').get();
+    cart = app.getModel('Cart').goc();
 
     formResult = cartForm.handleAction({
         'addCoupon' : function(formgroup) {
@@ -244,7 +244,7 @@ function addProduct() {
         return;
     }
 
-    cart = app.getModel('Cart').get();
+    cart = app.getModel('Cart').goc();
 
     // update product lineitem
     if (params.uuid.stringValue) {
@@ -322,8 +322,9 @@ function addProduct() {
 function miniCart() {
     var Product = app.getModel('Product');
 
+    var cart = app.getModel('Cart').get();
     app.getView({
-        Basket : app.getModel('Cart').get().object
+        Basket : cart ? cart.object : null
     }).render('checkout/cart/minicart');
 
 }
@@ -350,49 +351,11 @@ function addToWishlist() {
 }
 
 /**
- * Determines an existing basket from the current session.
- *
- * @deprecated Use {@link module:models/Cart~Cart#get} instead.
- */
-function getExistingBasket() {
-    return {
-        Basket : app.getModel('Cart').get().object
-    };
-}
-
-/**
- * Determines an existing basket from the current session. If a basket wasn't found, a new basket is created. If a new
- * basket couldn't be created, the pipeline ends in a named end node "error". Calling pipelines are responsible to
- * properly react on the "error" end node.
- *
- * @deprecated Use {@link module:models/Cart~Cart#goc} instead.
- */
-function getBasket() {
-    return app.getModel('Cart').get().object;
-}
-
-/**
- * Calculates an existing basket. Call this pipeline always if the changes to the basket content is made (e.g. addition
- * or removal of a product or gift certificate or setting of a shipping method).
- *
- * @deprecated Use {@link module:models/Cart~Cart#calculate} instead.
- */
-function calculate() {
-
-    var cart = app.getModel('Cart').get();
-    Transaction.wrap(function() {
-        cart.calculate();
-    });
-
-    return cart.object;
-}
-
-/**
  * Add bonus product to cart.
  */
 function addBonusProductJson() {
     var h, i, j, cart, data, productsJSON, bonusDiscountLineItem, product, lineItem, childPids, childProduct, ScriptResult, foundLineItem, Product;
-    cart = app.getModel('Cart').get();
+    cart = app.getModel('Cart').goc();
     Product = app.getModel('Product');
 
     // parse bonus product JSON
@@ -469,7 +432,7 @@ function addCouponJson() {
     var couponCode, cart, couponStatus;
 
     couponCode = request.httpParameterMap.couponCode.stringValue;
-    cart = app.getModel('Cart').get();
+    cart = app.getModel('Cart').goc();
 
     Transaction.wrap(function() {
         couponStatus = cart.addCoupon(couponCode);
@@ -512,10 +475,3 @@ exports.AddToWishlist = guard.ensure(['get', 'https', 'loggedIn'], addToWishlist
 });
 /** @see module:controllers/Cart~addBonusProductJson */
 exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
-
-/*
- * Local methods
- */
-exports.GetExistingBasket = getExistingBasket;
-exports.GetBasket = getBasket;
-exports.Calculate = calculate;

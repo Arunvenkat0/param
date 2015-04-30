@@ -16,23 +16,6 @@ var Profile = AbstractModel.extend(
     /** @lends module:models/Profile~Profile.prototype */
     {
         /**
-         * Use this method to get a new instance for a given product.
-         */
-        get : function (parameter) {
-            var obj = null;
-            if (typeof parameter === 'string') {
-                obj = dw.customer.CustomerMgr.getProfile(parameter);
-            }
-            else if (typeof parameter === 'object') {
-                obj = parameter;
-            }
-            else {
-                obj = customer.profile;
-            }
-            return new Profile(obj);
-        },
-
-        /**
          * Retrieve preferred customer address
          */
         getPreferredAddress : function () {
@@ -265,6 +248,24 @@ var Profile = AbstractModel.extend(
         }
 
     });
+    
+/**
+ * Use this method to get a new instance for a given product.
+ */
+Profile.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'string') {
+        obj = dw.customer.CustomerMgr.getProfile(parameter);
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    else {
+        obj = customer.profile;
+    }
+    return new Profile(obj);
+};
+
 
 /** The profile class */
-module.exports = new Profile();
+module.exports = Profile;
