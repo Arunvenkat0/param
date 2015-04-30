@@ -53,6 +53,7 @@ header
 {
     display: block;
     padding: 0;
+    margin-bottom: 10px;
 }
 
 tt, code, kbd, samp {
@@ -73,6 +74,9 @@ tt, code, kbd, samp {
 #main {
     float: left;
     width: 70%;
+    background-color: white;
+    z-index: 1;
+    position: relative;
 }
 
 article dl {
@@ -147,6 +151,7 @@ footer {
     font-size: 90%;
     color: #fff;
     background: #84bd00;
+    position: relative;
 }
 
 footer a, footer a:visited, footer a:active {
@@ -229,8 +234,8 @@ h6
 }
 
 .details { margin-top: 14px; border-left: 2px solid #DDD; }
-.details dt { width: 120px; float: left; padding-left: 10px;  padding-top: 6px; }
-.details dd { margin-left: 70px; }
+.details dt { width: 9em; float: left; padding-left: 10px;  padding-top: 6px; }
+.details dd { }
 .details ul { margin: 0; }
 .details ul { list-style-type: none; }
 .details li { margin-left: 30px; padding-top: 6px; }
@@ -366,7 +371,7 @@ h6
 
 .logo {
     margin-top: 10px;
-    margin-left: 3em;
+    margin-left: 6em;
 }
 
 .homeleft {
@@ -416,29 +421,80 @@ h6
    color: #84bd00;
 }
 
+/* Nav Trigger */
+.nav-trigger {
+    /* critical styles - hide the checkbox input */
+    position: fixed;
+    clip: rect(0, 0, 0, 0);
+    bottom:0;
+    right:0;
+}
+
+label[for="nav-trigger"] {
+    /* critical positioning styles */
+    position: fixed;
+    padding:0 7px;
+    left: 5px; top: 5px;
+    z-index: 2;
+
+    /* non-critical apperance styles */
+    /* height: 30px;
+    width: 30px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+    background-size: contain; */
+}
+
+/* Make the Magic Happen */
+.nav-trigger + label, #main {
+  transition: left 0.2s;
+}
+
+.nav-trigger:checked + label {
+  left: 80%;
+}
+
+.nav-trigger:checked ~ #main, .nav-trigger:checked ~ footer {
+  left: 80%;
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+}
+
+.nav-trigger:checked ~ nav {
+  display: inline;
+}
+
 /* Mobile layout */
 @media only screen and (max-width: 700px){
+    body { line-height: 1}
     svg.icon.icon-menu { display: inline; }
-    a.menu-icon {
-         position: fixed;
-         background-color: #84bd00;
-         padding:0 7px;
-    }
-    header {
+    #main > header {
         background-color: #84bd00;
         opacity: 0.7;
         width: 100%;
     }
     nav {
-        float : left;
-        width : 100%;
         border: none;
+        float: left;
         font-size: 100%;
-    }
+        width: 76%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        overflow: auto;
+        display: none;
+   }
     #main {
         width: 100%;
     }
     h1 { font-size: 1.6em; font-weight: bold; }
-    h2 h3 { font-size: 1.3em; }
-    h4 h5 { font-size: 1.1em; }
+    h2, h3 { font-size: 1.3em; }
+    h4, h5 { font-size: 1.1em; }
+    section { font-size: 0.9em; }
+    .details { font-size: 0.8em; }
+    table.params { font-size: 0.9em; }
+    .prettyprint code { font-size: 0.75em; }
 }
