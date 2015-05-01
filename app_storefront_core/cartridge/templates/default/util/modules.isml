@@ -225,6 +225,12 @@
 	attribute="p_show_expiration"
 />
 
+<ismodule template="util/dynamicform.isml"
+	name="dynamicform"
+	attribute="formobject"
+	attribute="formdata"
+/>
+
 <iscomment>define reusable input field and label rendering</iscomment>
 <ismodule template="util/inputfield.isml"
 	name="inputfield"
@@ -235,7 +241,7 @@
 	attribute="xhtmlclass"
 	attribute="label"
 	attribute="value"
-	attribute="p_dynamic"
+	attribute="dynamicname"
 	attribute="attribute1"
 	attribute="value1"
 	attribute="attribute2"

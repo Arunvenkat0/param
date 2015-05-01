@@ -29,25 +29,43 @@
 				</span>
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.addressid}" type="input"/>
+			<isscript>
+				var addressDetailsForm = [{
+					name: "addressid",
+					type: "input"
+				}, {
+					name: "firstname",
+					type: "input"
+				}, {
+					name: "lastname",
+					type: "input"
+				}, {
+					name: "address1",
+					type: "input"
+				}, {
+					name: "address2",
+					type: "input"
+				}, {
+					name: "country",
+					type: "select"
+				}, {
+					name: "states.state",
+					type: "select"
+				}, {
+					name: "city",
+					type: "input"
+				}, {
+					name: "postal",
+					type: "input"
+				}, {
+					name: "phone",
+					type: "input",
+					helpcid: "help-telephone",
+					helplabel: Resource.msg('singleshipping.phonerequired', 'checkout', null)
+				}];
+			</isscript>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.firstname}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.lastname}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address1}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address2}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.country}" type="select"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.states.state}" type="select"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.city}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.postal}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
+			<isdynamicform formobject="${pdict.CurrentForms.profile.address}" formdata="${addressDetailsForm}" />
 
 			<div class="form-row form-row-button">
 				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
