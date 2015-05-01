@@ -1,6 +1,8 @@
 'use strict';
 
 var ContentMgr = require('dw/content/ContentMgr');
+var StringUtils = require('dw/util/StringUtils');
+var Resource = require('dw/web/Resource');
 
 var inputElements = [
 	'input',
