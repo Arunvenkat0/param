@@ -10,7 +10,6 @@ var cartPage = new CartPage(client);
 var ProductDetailPage = require('../webdriver/pageObjects/productDetailPage');
 var productDetailPage = new ProductDetailPage(client);
 
-var HOST = config.url;
 var PAGE_URL_PATH = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
 
 
@@ -18,8 +17,8 @@ describe('Cart - Simple', function () {
 
 	before(function () {
 		return client.init().then(function () {
-			return productDetailPage.addToCart(HOST + PAGE_URL_PATH).then(function() {
-				return cartPage.navigateTo(HOST);
+			return productDetailPage.addToCart(PAGE_URL_PATH).then(function() {
+				return cartPage.navigateTo();
 			});
 		});
 	});
@@ -29,25 +28,25 @@ describe('Cart - Simple', function () {
 	});
 
 	it('should display the correct number of rows', function () {
-		return cartPage.getLineItems().then(function (rows) {
+		return cartPage.getItemList().then(function (rows) {
 			assert.equal(1, rows.value.length);
 		});
 	});
 
 	it('should display the correct name', function () {
-		return cartPage.getLineItemNameByRow(1).then(function (name) {
+		return cartPage.getItemNameByRow(1).then(function (name) {
 			assert.equal('Straight Leg Trousers', name);
 		});
 	});
 
 	it('should display the correct color', function () {
-		return cartPage.getLineItemAttrByRow(1, 'color').then(function (color) {
+		return cartPage.getItemAttrByRow(1, 'color').then(function (color) {
 			assert.equal(color, 'Black');
 		});
 	});
 
 	it('should display the correct size', function () {
-		return cartPage.getLineItemAttrByRow(1, 'size').then(function (size) {
+		return cartPage.getItemAttrByRow(1, 'size').then(function (size) {
 			assert.equal(size, '29');
 		});
 	});

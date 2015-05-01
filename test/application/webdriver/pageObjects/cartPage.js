@@ -1,59 +1,70 @@
 'use strict';
 
 var BaseClass = require('./BaseClass');
-var CART_PATH = '/cart';
+const CART_PATH = '/cart';
+const CSS_CART_ROW = '.cart-row';
+const CSS_CART_EMPTY = '.cart-empty';
+const CSS_BUTTON_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
 
 
 class CartPage extends BaseClass {
+
 	constructor(client) {
 		super(client);
+		this.basePath = CART_PATH;
 	}
 
-	navigateTo (host) {
-		return this.client.url(host + CART_PATH);
+	// Pseudo private methods
+	_createCssNthCartRow (idx) {
+		return CSS_CART_ROW + ':nth-child(' + idx + ')';
 	}
 
+	_createCssUpdateQtyInput (idx) {
+		return [this._createCssNthCartRow(idx), '.item-quantity input'].join(' ');
+	}
+
+	// Public methods
 	removeLineItemByRow (rowNum) {
-		return this.client.click('.cart-row:nth-child(' + rowNum + ') .item-user-actions button[value="Remove"]');
+		return this.client.click(this._createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]');
 	}
 
-	isCartEmpty (rowNum) {
-		return this.client.isExisting('.cart-empty');
+	isCartEmpty () {
+		return this.client.isExisting(CSS_CART_EMPTY);
 	}
 
-	getLineItems () {
-		return this.client.elements('.item-list .cart-row');
+	getItemList () {
+		return this.client.elements('.item-list ' + CSS_CART_ROW);
 	}
 
-	getLineItemNameByRow (rowNum) {
-		return this.client.getText('.cart-row:nth-child(' + rowNum + ') .name');
+	getItemNameByRow (rowNum) {
+		return this.client.getText(this._createCssNthCartRow(rowNum) + ' .name');
 	}
 
-	getLineItemAttrByRow (rowNum, attr) {
-		return this.client.getText('.cart-row:nth-child(' + rowNum + ') .attribute[data-attribute="' + attr + '"] .value');
+	getItemAttrByRow (rowNum, attr) {
+		return this.client.getText(this._createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value');
 	}
 
 	updateQuantityByRow (rowNum, value) {
 		return this.client
-			.setValue('.cart-row:nth-child(' + rowNum + ') .item-quantity input', value)
-			.click('.cart-footer button[name$="_updateCart"]')
-			.getValue('.cart-row:nth-child(1) .item-quantity input');
+			.setValue(this._createCssUpdateQtyInput(rowNum), value)
+			.click(CSS_BUTTON_UPDATE_CART)
+			.getValue(this._createCssUpdateQtyInput(rowNum));
 	}
 
 	getPriceByRow (rowNum) {
-		return this.client.getText('.cart-row:nth-child(' + rowNum + ') .item-total .price-total');
+		return this.client.getText(this._createCssNthCartRow(rowNum) + ' .item-total .price-total');
 	}
 
 	updateSizeByRow (rowNum, sizeIndex) {
 		return this.client
-			.click('.cart-row:nth-child(' + rowNum + ') .item-details .item-edit-details a')
+			.click(this._createCssNthCartRow(rowNum) + ' .item-details .item-edit-details a')
 			.waitForExist('.ui-dialog')
 			.click('.ui-dialog .product-variations .swatches.size li:nth-child(' + sizeIndex +') a')
 			.pause(500)
 			.click('.ui-dialog #add-to-cart')
 			// wait for the page to refresh, which happens after a 500 timeout by default
 			.pause(1500)
-			.getText('.cart-row:nth-child(' + rowNum + ') .attribute[data-attribute="size"] .value');
+			.getText(this._createCssNthCartRow(rowNum)+ ' .attribute[data-attribute="size"] .value');
 	}
 }
 

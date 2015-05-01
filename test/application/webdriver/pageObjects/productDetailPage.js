@@ -3,14 +3,12 @@
 var BaseClass = require('./BaseClass');
 var assert = require('chai').assert;
 
+const CSS_ADD_TO_CART = '#add-to-cart';
+
 
 class ProductDetailPage extends BaseClass {
 	constructor (client) {
 		super(client);
-	}
-
-	navigateTo (urlPath) {
-		return this.client.url(urlPath);
 	}
 
 	addToCart (pdpUrl) {
@@ -19,11 +17,11 @@ class ProductDetailPage extends BaseClass {
 			.waitForExist('.product-variations')
 			.click('.swatches.size li:nth-child(2) a')
 			.pause(500)
-			.isEnabled('#add-to-cart', function (err, enabled) {
+			.isEnabled(CSS_ADD_TO_CART, function (err, enabled) {
 				assert.equal(err, undefined);
 				assert.ok(enabled, 'Add to Cart button is not enabled');
 			})
-			.click('#add-to-cart');
+			.click(CSS_ADD_TO_CART);
 	}
 }
 
