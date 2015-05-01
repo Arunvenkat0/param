@@ -188,10 +188,12 @@ div.error {
 }
 
 .error-form {
-	background: url("../images/interface/icon-alert.png") no-repeat scroll left top transparent;
+	background-color: $stark-white;
+	border: 1px solid $sangria;
+	border-radius: .5em;
 	color: $sangria;
-	margin: 1em 0;
-	padding: 0.5em 0 0 4em;
+	margin: 0.5em 0;
+	padding: 0.8em;
 }
 
 .form-inline {

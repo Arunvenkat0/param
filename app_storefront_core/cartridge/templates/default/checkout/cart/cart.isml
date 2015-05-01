@@ -97,7 +97,8 @@
 
 		<iscomment>prevent checkout if any product price is N/A or if invalid coupons</iscomment>
 		<isif condition="${pdict.BasketStatus != null && pdict.BasketStatus.error}">
-			<div class="error-form ">
+			<div class="error-form">
+				<i class="fa fa-exclamation-triangle fa-2x pull-left"></i>
 				<isif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='CouponError'}">
 					${Resource.msg('cart.cartcouponinvalid','checkout',null)}
 				<iselseif condition="${pdict.BasketStatus.code != null && pdict.BasketStatus.code=='TaxError'}">
@@ -106,6 +107,13 @@
 					${pdict.BasketStatus.code}
 					${Resource.msg('cart.carterror','checkout',null)}
 				</isif>
+			</div>
+		</isif>
+		
+		<isif condition="${!enableCheckout}">
+			<div class="error-form">
+				<i class="fa fa-exclamation-triangle fa-2x pull-left"></i>
+				${Resource.msg('cart.limitedQuantity','checkout',null)}
 			</div>
 		</isif>
 
@@ -826,13 +834,6 @@
 						</isif>
 					</div>
 				</div>
-
-				<isif condition="${!enableCheckout}">
-					<div class="error-message">
-						${Resource.msg('cart.limited','checkout',null)}:
-						${Resource.msg('cart.limitedQuantity','checkout',null)}
-					</div>
-				</isif>
 
 			</fieldset>
 		</form>
