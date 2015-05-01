@@ -1068,8 +1068,6 @@ nav[role="navigation"] {
       position: relative;
       width: 300px;
       z-index: 1; } }
-  .header-search label {
-    display: none; }
   .header-search input[type="text"] {
     background-color: transparent;
     border: none;
@@ -1086,16 +1084,14 @@ nav[role="navigation"] {
     background-color: transparent;
     border: none;
     color: #999;
-    padding: 0.7em 0.5em 0.3em; }
+    padding: .7em .5em; }
     @media screen and (min-width: 768px) {
       .header-search button {
-        padding: 0.3em 0.5em; } }
+        padding: .4em .5em; } }
     .header-search button:hover {
       color: #84bd00; }
     .header-search button i {
       font-size: 1.4em; }
-  .header-search legend {
-    background: none repeat scroll 0 0 transparent; }
 
 .menu-category {
   border-bottom: 5px solid #4d4d4d;
