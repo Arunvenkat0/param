@@ -46,17 +46,17 @@
 							<a href="${URLUtils.https('Order-History')}" title="${Resource.msg('global.link.orders', 'locale', null)}">
 								${Resource.msg('global.link.orders', 'locale', null)}
 							</a>
-						</li>					
+						</li>
 						<li>
 							<a href="${URLUtils.https('Wishlist-Show')}" title="${Resource.msg('global.header.wishlistlink', 'locale', null)}">
 								${Resource.msg('global.header.wishlistlink', 'locale', null)}
 							</a>
-						</li>					
+						</li>
 						<li>
 							<a href="${URLUtils.https('GiftRegistry-Start')}" title="${Resource.msg('global.header.registrylink', 'locale', null)}">
 								${Resource.msg('global.header.registrylink', 'locale', null)}
 							</a>
-						</li>					
+						</li>
 						<li>
 							<a class="user-logout buttonstyle" href="${URLUtils.https('Login-Logout')}" title="${Resource.msg('global.logout', 'locale', null)}">
 								${Resource.msg('global.logout', 'locale', null)}
@@ -74,7 +74,6 @@
 			</a>
 			<div class="menu-panel user-none">
 				<div class="menu-links">
-					<h3>${Resource.msg('account.header', 'account', null)}</h3>
 					<ul>
 						<li>
 							<a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.login', 'locale', null)}">${Resource.msg('global.login', 'locale', null)}</a>
