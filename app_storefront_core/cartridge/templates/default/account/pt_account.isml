@@ -30,12 +30,6 @@
 
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
-			<div id="browser-check">
-				<div class="browser-compatibility-alert">
-					<i class="fa fa-exclamation-triangle fa-2x pull-left"></i>
-					<p class="browser-error">${Resource.msg('global.browsertoolscheck.javascript','locale',null)}</p>		
-				</div>
-			</div>
 			<isif condition="${!empty(pdict.bctext2)}">
 				<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="${Resource.msg('account.header','account',null)}" bctext2="${pdict.bctext2}"/>
 			<iselse/>
