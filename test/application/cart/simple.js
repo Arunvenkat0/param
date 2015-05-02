@@ -16,11 +16,9 @@ var PAGE_URL_PATH = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA
 describe('Cart - Simple', function () {
 
 	before(function () {
-		return client.init().then(function () {
-			return productDetailPage.addToCart(PAGE_URL_PATH).then(function() {
-				return cartPage.navigateTo();
-			});
-		});
+		return client.init()
+			.then(productDetailPage.addToCart(PAGE_URL_PATH))
+			.then(cartPage.navigateTo());
 	});
 
 	after(function () {
