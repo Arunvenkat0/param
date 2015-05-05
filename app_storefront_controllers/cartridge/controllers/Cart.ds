@@ -428,17 +428,14 @@ function addBonusProductJson() {
                             OnError : 'PIPELET_ERROR',
                             ScriptFile : 'cart/UpdateProductOptionSelections.ds'
                         }).execute({
-                            SelectedOptions : new dw.util.ArrayList(product.options),
+                            SelectedOptions : new dw.util.ArrayList(productsJSON[i].options),
                             Product : childProduct
                         });
 
                         foundLineItem = cart.getBundledProductLineItemByPID(lineItem.getBundledProductLineItems(), (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
                         if (foundLineItem) {
-                            new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-                                ProductLineItem : foundLineItem,
-                                NewProduct : childProduct
-                            });
+                            foundLineItem.replaceProduct(childProduct);
                         }
                     }
                 }

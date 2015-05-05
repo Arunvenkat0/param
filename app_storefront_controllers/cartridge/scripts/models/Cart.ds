@@ -41,7 +41,7 @@ var Cart = AbstractModel.extend(
          * @transactional
          */
         calculate : function () {
-            dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
+            dw.system.HookMgr.callHook('dw.ocapi.shop.basket.calculate', 'calculate', this.object);
         },
 
         /**
@@ -109,7 +109,7 @@ var Cart = AbstractModel.extend(
 	                     * pids of the bundled products which are variations
 	                     */
 	                    if (request.httpParameterMap.childPids.stringValue) {
-	                        var childPids = request.httpParameterMap.childPids.stringValue.split(",");
+	                        var childPids = request.httpParameterMap.childPids.stringValue.split(',');
 
 	                        for (i = 0; i < childPids.length; i++) {
 	                            var childProduct = Product.get(childPids[i]).object;
@@ -208,7 +208,8 @@ var Cart = AbstractModel.extend(
          * @returns {dw.order.ProductLineItem} The newly created product line item.
          */
         addBonusProduct : function (bonusDiscountLineItem, product, selectedOptions, quantity) {
-
+            // var productModel = Product.get(product);
+            // productModel.updateOptionSelection();
             var ScriptResult = new dw.system.Pipelet('Script', {
                 Transactional : false,
                 OnError       : 'PIPELET_ERROR',
@@ -218,19 +219,7 @@ var Cart = AbstractModel.extend(
                     Product         : product
                 });
 
-            var AddBonusProductToBasketResult = new dw.system.Pipelet('AddBonusProductToBasket').execute({
-                Basket                : this.object,
-                BonusDiscountLineItem : bonusDiscountLineItem,
-                Product               : product,
-                Quantity              : quantity,
-                ProductOptionModel    : ScriptResult.ProductOptionModel
-            });
-
-            if (AddBonusProductToBasketResult.result !== PIPELET_ERROR) {
-                return AddBonusProductToBasketResult.ProductLineItem;
-            }
-
-            return null;
+            return this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult.ProductOptionModel, shipment);
         },
 
         /**
@@ -362,7 +351,7 @@ var Cart = AbstractModel.extend(
                         }
                         else {
                             //the in store line item will be reset to a regular home delivery item.
-                            pli.custom.fromStoreId = "";
+                            pli.custom.fromStoreId = '';
                             pli.setProductInventoryList(null);
                             pli.setShipment(this.getDefaultShipment());
                         }
@@ -402,6 +391,9 @@ var Cart = AbstractModel.extend(
          */
         updateLineItem : function (lineItem, product, quantity, productOptionModel) {
 
+            // lineItem.replaceProduct(product);
+            // lineItem.setQuantityValue(quantity);
+            // but how to set the option model?
             new dw.system.Pipelet('ReplaceLineItemProduct').execute({
                 ProductLineItem    : lineItem,
                 NewProduct         : product,
@@ -418,7 +410,7 @@ var Cart = AbstractModel.extend(
                  * pids of the bundled products which are variations
                  */
                 if (request.httpParameterMap.childPids.stringValue) {
-                    var childPids = request.httpParameterMap.childPids.stringValue.split(",");
+                    var childPids = request.httpParameterMap.childPids.stringValue.split(',');
 
                     for (var i = 0; i < childPids.length; i++) {
                         var childProduct = Product.get(childPids[i]).object;
@@ -431,10 +423,7 @@ var Cart = AbstractModel.extend(
                             foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
                             if (foundLineItem) {
-                                new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-                                    ProductLineItem : foundLineItem,
-                                    NewProduct      : childProduct
-                                });
+                                foundLineItem.replaceProduct(childProduct);
                             }
                         }
                     }
@@ -510,7 +499,7 @@ var Cart = AbstractModel.extend(
 
             for (var i = 0; i < shipments.length; i++) {
                 var shipment = shipments[i];
-                if (!shipment.getProductLineItems().isEmpty() && shipment.custom.shipmentType != 'instore') {
+                if (!shipment.getProductLineItems().isEmpty() && shipment.custom.shipmentType !== 'instore') {
                     physicalShipments.add(shipment);
                 }
             }
@@ -537,12 +526,12 @@ var Cart = AbstractModel.extend(
                 var shipment = shipments[i];
 
                 // skip shipment if no gift certificates are contained
-                if (shipment.giftCertificateLineItems.size() == 0) {
+                if (shipment.giftCertificateLineItems.size() === 0) {
                     continue;
                 }
 
                 // skip shipment if no products and just one gift certificate is contained
-                if (shipment.productLineItems.size() == 0 && shipment.giftCertificateLineItems.size() == 1) {
+                if (shipment.productLineItems.size() === 0 && shipment.giftCertificateLineItems.size() === 1) {
                     continue;
                 }
 
@@ -554,7 +543,7 @@ var Cart = AbstractModel.extend(
 
             // create a shipment for each gift certificate line item
             for (var i = 0; i < giftCertificatesLI.length; i++) {
-                var newShipmentID = this.determineUniqueShipmentID("Shipment #");
+                var newShipmentID = this.determineUniqueShipmentID('Shipment #');
                 giftCertificatesLI[i].setShipment(this.createShipment(newShipmentID));
             }
         },
@@ -570,15 +559,15 @@ var Cart = AbstractModel.extend(
         determineUniqueShipmentID : function (baseID) {
             var counter = 1;
             var shipment = null;
-            var candidateID = baseID + "" + counter;
+            var candidateID = baseID + '' + counter;
 
-            while (shipment == null) {
+            while (shipment === null) {
                 shipment = this.getShipment(candidateID);
                 if (shipment) {
                     // this ID is already taken, increment the counter
                     // and try the next one
                     counter++;
-                    candidateID = baseID + "" + counter;
+                    candidateID = baseID + '' + counter;
                     shipment = null;
                 }
                 else {
@@ -622,33 +611,34 @@ var Cart = AbstractModel.extend(
 
             var sliArrayList = new ArrayList();
             var homeDeliveries = false;
+            var storeObject, shippingAddress, orderAddress;
 
             var plis = this.getAllProductLineItems();
             for (var i = 0; i < plis.length; i++) {
                 var pli = plis[i];
 
-                if (pli.custom.fromStoreId == null) {
+                if (pli.custom.fromStoreId === null) {
                     //skip none instore pli's
                     homeDeliveries = true;
                     continue;
                 }
                 if (pli.shipment.shippingMethod && pli.shipment.shippingMethod.custom.storePickupEnabled) {
                     //check to see if the storeid has changed
-                    if (pli.custom.fromStoreId == pli.shipment.custom.fromStoreId) {
+                    if (pli.custom.fromStoreId === pli.shipment.custom.fromStoreId) {
                         if (pli.shipment.shippingAddress) {
                             continue;
                         }
                         else {
                             //create the shipment address to reflect the new store address
-                            var shippingAddress = new TransientAddress();
-                            var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
-                            var orderAddress = pli.shipment.createShippingAddress();
+                            shippingAddress = new TransientAddress();
+                            storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                            orderAddress = pli.shipment.createShippingAddress();
                             shippingAddress.storeAddressTo(orderAddress, storeObject);
                             continue;
                         }
                     }
                     else {
-                        var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                        storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                         //change the shipment address to reflect the new store address
                         pli.shipment.shippingAddress.setFirstName('');
                         pli.shipment.shippingAddress.setLastName(storeObject.name);
@@ -672,7 +662,7 @@ var Cart = AbstractModel.extend(
                     for (var j = 0; j < this.getShipments().length; j++) {
                         var inStoreShipment = shipments[j];
 
-                        if (inStoreShipment.custom.fromStoreId && (pli.custom.fromStoreId == inStoreShipment.custom.fromStoreId)) {
+                        if (inStoreShipment.custom.fromStoreId && (pli.custom.fromStoreId === inStoreShipment.custom.fromStoreId)) {
                             //have found an existing shipment that has the correct address
                             pli.setShipment(inStoreShipment);
                         }
@@ -700,9 +690,9 @@ var Cart = AbstractModel.extend(
 
                     }
 
-                    var shippingAddress = new TransientAddress();
-                    var storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
-                    var orderAddress = shipment.createShippingAddress();
+                    shippingAddress = new TransientAddress();
+                    storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
+                    orderAddress = shipment.createShippingAddress();
                     shippingAddress.storeAddressTo(orderAddress, storeObject);
                     pli.setShipment(shipment);
 
@@ -745,9 +735,9 @@ var Cart = AbstractModel.extend(
                     if (product) {
                         var psc = ShippingMgr.getProductShippingModel(product).getShippingCost(shippingMethod);
                         productShippingCosts[productShippingCosts.length] = {
-                            "name"         : product.name,
-                            "shippingCost" : psc,
-                            "qty"          : pli.getQuantity()
+                            'name'         : product.name,
+                            'shippingCost' : psc,
+                            'qty'          : pli.getQuantity()
                         };
                         if (psc && psc.getAmount() && psc.isSurcharge()) {
                             // update the surcharge totals
@@ -1462,7 +1452,7 @@ var Cart = AbstractModel.extend(
                 addresses = addressBook.addresses;
 
                 for (var i = 0; i < addresses.length; i++) {
-                    if (addresses[i].UUID == addressToUpdate.UUID) {
+                    if (addresses[i].UUID === addressToUpdate.UUID) {
                         addressToUpdate.ID = addresses[i].ID;
                         addressToUpdate.referenceAddressUUID = addresses[i].referenceAddressUUID;
                         addressBook.addresses[i] = addressToUpdate;
