@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
 	This template is used in every page to render warning messages if certain
-	functionality which is necessary to use the website (like cookies and Javascript) 
+	functionality which is necessary to use the website (like cookies and Javascript)
 	is disabled in the client browser.
 </iscomment>
 
@@ -9,7 +9,8 @@
 <div id="browser-check">
 <noscript>
 	<div class="browser-compatibility-alert">
-		<p class="browser-error">${Resource.msg('global.browsertoolscheck.javascript','locale',null)}</p>		
+		<i class="fa fa-exclamation-triangle fa-2x pull-left"></i>
+		<p class="browser-error">${Resource.msg('global.browsertoolscheck.javascript','locale',null)}</p>
 	</div>
 </noscript>
 </div>

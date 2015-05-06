@@ -129,10 +129,10 @@ function initializeEvents() {
 		$parentLi.siblings('li').removeClass('active').find('.menu-item-toggle').removeClass('fa-chevron-up active').addClass('fa-chevron-right');
 		$parentLi.toggleClass('active');
 		$(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
-		// if there are nested menu, don't navigate away
-		// if ($this.has('ul').length) {
-		// 	e.preventDefault();
-		// }
+	});
+	$('.user-account').on('click', function (e) {
+		e.preventDefault();
+		$(this).parent('.user-info').toggleClass('active');
 	});
 }
 /**
