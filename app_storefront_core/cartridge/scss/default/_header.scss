@@ -378,30 +378,28 @@ nav[role="navigation"] {
 		@media screen and (min-width: 768px) {
 			position: relative;
 			transition: color .5s ease;
-			&:hover {
+			&.active {
 				.user-login {
 					color: $citrus;
 				}
-				.menu-panel {
+				.user-panel {
 					opacity: 1;
 					visibility: visible;
 				}
 			}
 		}
-		.menu-panel {
+		.user-panel {
 			margin-top: .5rem;
 			text-align: left;
-			transition: all 1s ease;
-			&.user-auth {
-				h3 {
-					display: none;
-					@media screen and (min-width: 768px) {
-						display: block;
-					}
-				}
-			}
-			&.user-none {
+			transition: all .3s ease;
+			h3 {
 				display: none;
+				margin: 0;
+				padding-bottom: .7em;
+				text-transform: uppercase;
+				@media screen and (min-width: 768px) {
+					display: block;
+				}
 			}
 			@media screen and (min-width: 768px) {
 				background-color: $white;
@@ -415,38 +413,31 @@ nav[role="navigation"] {
 				right: -1.5rem;
 				visibility: hidden;
 				z-index: 20;
-				&.user-none {
-					display: block;
+			}
+			.user-links {
+				padding-left: 1.5rem;
+				@media screen and (min-width: 768px) {
+					padding-left: 0;
 				}
 			}
 			a {
 				color: $citrus;
-				line-height: 1.5;
-			}
-			.menu-links {
-				li {
-					float: none;
-					margin-left: 1.5em;
-					text-align: left;
-					@media screen and (min-width: 768px) {
-						margin-left: 0;
-					}
-					a {
-						display: block;
-					}
-				}
-				.user-logout {
-					color: $white;
-					margin: .5rem auto;
-					text-transform: uppercase;
-					&:hover {
-						color: $citrus;
-					}
+				display: block;
+				padding: .5rem 0;
+				@media screen and (min-width: 768px) {
+					padding: 0;
+					margin-bottom: .5rem;
 				}
 			}
-			h3 {
-				padding-bottom: .7em;
+			.user-logout {
+				color: $white;
+				margin-top: .5rem;
+				padding: 0.5em 2em;
 				text-transform: uppercase;
+				&:hover {
+					color: $citrus;
+				}
+
 			}
 		}
 	}
