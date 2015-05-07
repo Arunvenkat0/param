@@ -104,15 +104,17 @@ function create()
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-    var DuplicateCard;
-    var OldCard;
-    for each(var card in paymentInstruments) {
-        if (card.creditCardNumber === ccNumber) {
-            DuplicateCard = true;
-            OldCard = card;
-            break;
-        }
-    }
+    var duplicateCard;
+    var oldCard;
+    
+    for (var i = 0; i < paymentInstruments.length; i++) {
+		var card = paymentInstruments[i];
+		if (card.creditCardNumber === ccNumber) {
+			duplicateCard = true;
+			oldCard = card;
+			break;
+		}
+	}
 
     Transaction.begin();
         var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
@@ -123,10 +125,10 @@ function create()
             return false;
         }
 
-        if (DuplicateCard)
-        {
-            wallet.removePaymentInstrument(OldCard);
+        if (duplicateCard) {
+            wallet.removePaymentInstrument(oldCard);
         }
+    
     Transaction.commit();
 
     paymentForm.clear();
