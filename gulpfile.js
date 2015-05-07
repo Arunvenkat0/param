@@ -41,7 +41,7 @@ gulp.task('css', function () {
 gulp.task('js', function () {
 	var opts = {
 		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
-		debug: (gutil.env.sourcemaps)
+		debug: gutil.env.sourcemaps
 	}
 	if (watching) {
 		opts = xtend(opts, watchify.args);
