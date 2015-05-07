@@ -6,15 +6,15 @@
 	<h2>${slotcontent.calloutMsg}</h2>
 	
 	<ul class="search-result-items tiles-container">
-		<isloop items="${slotcontent.content}" var="product" begin="0" end="3">
+		<isloop items="${slotcontent.content}" var="product" >
 			<isobject object="${product}" view="recommendation">
 				<li class="grid-tile"> 
 					<isinclude url="${URLUtils.url('Product-HitTile', 
-						'pid',product.ID, 
-						'showswatches','true', 
-						'showpricing','true', 
-						'showpromotion','true', 
-						'showrating','true')}"/>
+						'pid', product.ID, 
+						'showswatches', 'true', 
+						'showpricing', 'true', 
+						'showpromotion', 'true', 
+						'showrating', 'true')}"/>
 				</li>
 			</isobject>
 		</isloop>
