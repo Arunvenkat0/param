@@ -137,7 +137,7 @@ function send() {
      */
     // TODO where should this come from? plid?
     if (typeof (ProductList) != 'undefined' && ProductList != null) {
-        require('~/cartridge/scripts/models/Email').get('mail/productlist', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/productlist', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 
@@ -169,7 +169,7 @@ function send() {
         var GetProductResult = getProduct(pid);
         var CurrentCustomer = customer;
 
-        require('~/cartridge/scripts/models/Email').get('mail/product', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/product', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 
@@ -183,7 +183,7 @@ function send() {
         /*
          * Default
          */
-        require('~/cartridge/scripts/models/Email').get('mail/productlistdefault', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/productlistdefault', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 

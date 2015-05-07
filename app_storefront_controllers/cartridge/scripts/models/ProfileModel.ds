@@ -1,5 +1,5 @@
 'use strict';
-/** @module models/Profile */
+/** @module models/ProfileModel */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -10,10 +10,10 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 
 /**
  * Profile helper providing enhanced profile functionality
- * @class module:models/Profile~Profile
+ * @class module:models/ProfileModel~ProfileModel
  */
-var Profile = AbstractModel.extend(
-    /** @lends module:models/Profile~Profile.prototype */
+var ProfileModel = AbstractModel.extend(
+    /** @lends module:models/ProfileModel~ProfileModel.prototype */
     {
         /**
          * Retrieve preferred customer address
@@ -252,7 +252,7 @@ var Profile = AbstractModel.extend(
 /**
  * Use this method to get a new instance for a given product.
  */
-Profile.get = function (parameter) {
+ProfileModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.customer.CustomerMgr.getProfile(parameter);
@@ -263,9 +263,9 @@ Profile.get = function (parameter) {
     else {
         obj = customer.profile;
     }
-    return new Profile(obj);
+    return new ProfileModel(obj);
 };
 
 
 /** The profile class */
-module.exports = Profile;
+module.exports = ProfileModel;

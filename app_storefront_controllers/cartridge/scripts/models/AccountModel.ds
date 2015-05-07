@@ -2,23 +2,23 @@
 /**
  * Module for cart related functionality.
  *
- * @module models/Account
+ * @module models/AccountModel
  */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var Transaction = require('dw/system/Transaction');
-var Form = require('~/cartridge/scripts/models/Form');
+var Form = require('~/cartridge/scripts/models/FormModel');
 var guard = require('~/cartridge/scripts/guard');
 var pageMeta = require('~/cartridge/scripts/meta');
-var accountLogin = require('~/cartridge/scripts/models/Content').get('myaccount-login');
+var accountLogin = require('~/cartridge/scripts/models/ContentModel').get('myaccount-login');
 
 /**
  * Account helper providing enhanced account functionality
- * @class module:models/Account~Account
+ * @class module:models/AccountModel~AccountModel
  */
-var Account = AbstractModel.extend(
- /** @lends module:models/Account~Account.prototype */
+var AccountModel = AbstractModel.extend(
+ /** @lends module:models/AccountModel~AccountModel.prototype */
 	{
 	
 		/**
@@ -238,4 +238,4 @@ var Account = AbstractModel.extend(
 	});
 
 /** The account class */
-module.exports = new Account();
+module.exports = new AccountModel();

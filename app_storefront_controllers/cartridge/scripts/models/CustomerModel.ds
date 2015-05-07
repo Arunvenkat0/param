@@ -2,25 +2,25 @@
 
 /*
 usage
-var content = require('~/cartridge/scripts/models/Customer');
+var content = require('~/cartridge/scripts/models/CustomerModel');
 */
 
-/** @module models/Customer */
+/** @module models/CustomerModel */
 
 var AbstractModel = require('./AbstractModel');
 var CustomerMgr = require('dw/customer/CustomerMgr');
 var Transaction = require('dw/system/Transaction');
-var Form = require('~/cartridge/scripts/models/Form');
-var Email = require('~/cartridge/scripts/models/Email');
+var Form = require('~/cartridge/scripts/models/FormModel');
+var Email = require('~/cartridge/scripts/models/EmailModel');
 
 /**
  * Customer helper providing enhanced content functionality
- * @class module:models/Customer~Customer
+ * @class module:models/CustomerModel~CustomerModel
  *
  * @param parameter {dw.customer.Customer} The customer object to enhance/wrap.
  */
-var Customer = AbstractModel.extend(
-/** @lends module:models/Customer~Customer.prototype */
+var CustomerModel = AbstractModel.extend(
+/** @lends module:models/CustomerModel~CustomerModel.prototype */
 {
 
     /**
@@ -69,16 +69,16 @@ var Customer = AbstractModel.extend(
  *
  * @param parameter {dw.customer.Customer=} The customer object to enhance/wrap. If NULL the current customer is
  * retrieved from the session.
- * @returns {module:models/Customer~Customer}
+ * @returns {module:models/CustomerModel~CustomerModel}
  */
-Customer.get = function(parameter) {
+CustomerModel.get = function(parameter) {
     var obj = null;
     if ( typeof parameter === 'undefined') {
         obj = customer;
     } else if ( typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Customer(obj);
+    return new CustomerModel(obj);
 };
 
 /**
@@ -92,7 +92,7 @@ Customer.get = function(parameter) {
  * of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.
  * @returns {boolean}
  */
-Customer.login = function(username, password, rememberMe) {
+CustomerModel.login = function(username, password, rememberMe) {
     var GetCustomerResult, TempCustomer, LoginCustomerResult;
 
     GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
@@ -124,14 +124,14 @@ Customer.login = function(username, password, rememberMe) {
 /**
  * Logs out the customer currently logged into the storefront.
  */
-Customer.logout = function() {
+CustomerModel.logout = function() {
     new dw.system.Pipelet('LogoutCustomer').execute();
 };
 
 /**
  * Looks up a customer by its login.
  */
-Customer.getCustomerByLogin = function(login) {
+CustomerModel.getCustomerByLogin = function(login) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
         Login : login
     });
@@ -145,7 +145,7 @@ Customer.getCustomerByLogin = function(login) {
 /**
  * Registers customer
  */
-Customer.createCustomer = function(login, password) {
+CustomerModel.createCustomer = function(login, password) {
     var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
         Login : login,
         Password : password
@@ -165,7 +165,7 @@ Customer.createCustomer = function(login, password) {
  * @param password the password of the current customer
  * @return true, if the login / password was updated
  */
-Customer.setLogin = function(customerToSet, login, password) {
+CustomerModel.setLogin = function(customerToSet, login, password) {
     //@FIXME Put on customer scope vs. passing in customer
     if ((customerToSet === null) || (login === null) || (password === null) || (customerToSet.profile === null)) {
         return false;
@@ -177,7 +177,7 @@ Customer.setLogin = function(customerToSet, login, password) {
 /**
  * Logs in customer using login and password
  */
-Customer.loginCustomer = function(login, password, rememberMe) {
+CustomerModel.loginCustomer = function(login, password, rememberMe) {
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
         Login : login,
         Password : password,
@@ -192,7 +192,7 @@ Customer.loginCustomer = function(login, password, rememberMe) {
  * @transactional
  * @return true, if the account was created successfully
  */
-Customer.createAccount = function(email, password, form) {
+CustomerModel.createAccount = function(email, password, form) {
 
     Transaction.begin();
 
@@ -232,7 +232,7 @@ Customer.createAccount = function(email, password, form) {
  * Checks the given user name on existence and ends on a named end node to
  * communicated the status back.
  */
-Customer.checkUserName = function() {
+CustomerModel.checkUserName = function() {
     //@FIXME get email as parameter
     var profileForm, GetCustomerResult;
 
@@ -255,7 +255,7 @@ Customer.checkUserName = function() {
 /**
  * Checks validity of a password reset token
  */
-Customer.getByPasswordResetToken = function(token) {
+CustomerModel.getByPasswordResetToken = function(token) {
     var result, ValidateResetPasswordTokenResult;
     if (empty(token)) {
         result = null;
@@ -277,7 +277,7 @@ Customer.getByPasswordResetToken = function(token) {
  *	Update customer object with form
  *	@transactional
  */
-Customer.editAccount = function(email, password, form) {
+CustomerModel.editAccount = function(email, password, form) {
 
     Transaction.begin();
 
@@ -308,4 +308,4 @@ Customer.editAccount = function(email, password, form) {
 };
 
 /** The customer class */
-module.exports = Customer;
+module.exports = CustomerModel;

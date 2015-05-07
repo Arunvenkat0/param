@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module models/Category */
+/** @module models/CategoryModel */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -9,13 +9,13 @@ var CatalogMgr = require('dw/catalog/CatalogMgr');
 
 /**
  * Category helper providing enhanced category functionality
- * @class module:models/Category~Category
+ * @class module:models/CategoryModel~CategoryModel
  * @extends module:models/AbstractModel
  *
  * @param {dw.catalog.Category} obj The category object to enhance/wrap.
  */
-var Category = AbstractModel.extend(
-    /** @lends module:models/Category~Category.prototype */
+var CategoryModel = AbstractModel.extend(
+    /** @lends module:models/CategoryModel~CategoryModel.prototype */
     {
         /**
          *    Prints out category's alternative url if maintained on custom attribute
@@ -73,9 +73,9 @@ var Category = AbstractModel.extend(
  *
  * @param parameter {(dw.catalog.Category|String)} The category object to enhance/wrap or the category ID of the category
  * object.
- * @returns {module:models/Category~Category}
+ * @returns {module:models/CategoryModel~CategoryModel}
  */
-Category.get = function (parameter) {
+CategoryModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = CatalogMgr.getCategory(parameter);
@@ -83,7 +83,7 @@ Category.get = function (parameter) {
     else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Category(obj);
+    return new CategoryModel(obj);
 };
 
 /**
@@ -91,10 +91,10 @@ Category.get = function (parameter) {
  *
  * @returns {dw.catalog.Category} The root catalog category
  */
-Category.getTopLevelCategory = function () {
+CategoryModel.getTopLevelCategory = function () {
     var siteCatalog = CatalogMgr.getSiteCatalog();
     return (siteCatalog !== null) ? siteCatalog.getRoot() : null;
 };
 
 /** The category class */
-module.exports = Category;
+module.exports = CategoryModel;

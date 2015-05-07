@@ -46,7 +46,7 @@ function show()
         session.custom.TargetLocation = request.httpParameterMap.original.value;
     }
 
-    var v = app.getView('LoginView',{
+    var v = app.getView('Login',{
         RegistrationStatus : false
     });
     if(request.httpParameterMap.scope.submitted){
@@ -94,7 +94,7 @@ function handleLoginForm()
 
             if(!success){
                 loginForm.get('loginsucceeded').invalidate();
-                app.getView('LoginView').render();
+                app.getView('Login').render();
                 return;
             }else{
                 loginForm.clear();
@@ -154,7 +154,7 @@ function handleLoginForm()
             return;
         },
         'error' : function(){
-            app.getView('LoginView').render();
+            app.getView('Login').render();
             return;
         }
     });
@@ -184,7 +184,7 @@ function handleOAuthLoginForm()
                     finishOAuthLogin();
 
                     // show login page with error
-                    app.getView('LoginView').render();
+                    app.getView('Login').render();
                     return;
                 }
 
@@ -193,7 +193,7 @@ function handleOAuthLoginForm()
             return;
         },
         'error' : function(){
-            app.getView('LoginView').render();
+            app.getView('Login').render();
             return;
         }
     });

@@ -271,7 +271,7 @@ function showMiniCart()
  * Creates a gift certificate in the customer basket using form input values.
  * The form must be valid before calling this pipeline.
  *
- * @param {module:models/Cart~Cart} cart the current cart
+ * @param {module:models/CartModel~CartModel} cart the current cart
  */
 function createGiftCert(cart)
 {
@@ -319,7 +319,7 @@ function createGiftCert(cart)
  * Updates a gift certificate in the customer basket using form input values.
  * The form must be valid before calling this pipeline.
  *
- * @param {module:models/Cart~Cart} cart the current cart
+ * @param {module:models/CartModel~CartModel} cart the current cart
  */
 function updateGiftCert(cart)
 {

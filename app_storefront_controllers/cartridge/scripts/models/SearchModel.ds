@@ -3,7 +3,7 @@
 /**
  * Module for search related functionality.
  *
- * @module models/Search
+ * @module models/SearchModel
  */
 
 /* API Includes */
@@ -13,9 +13,9 @@ var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
 /**
  * Search model providing enhanced search functionality
- * @class module:models/Search~Search
+ * @class module:models/SearchModel~SearchModel
  */
-var Search = ({
+var SearchModel = ({
 
 });
 
@@ -26,7 +26,7 @@ var Search = ({
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read common search parameters from.
  * @returns {dw.catalog.SearchModel} Initialized search model.
  */
-Search.initializeSearchModel = function (searchModel, httpParameterMap) {
+SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
     httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
     httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
     httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
@@ -48,7 +48,7 @@ Search.initializeSearchModel = function (searchModel, httpParameterMap) {
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read product search parameters from.
  * @returns {dw.catalog.ProductSearchModel} Created and initialized product serach model.
  */
-Search.initializeProductSearchModel = function (httpParameterMap) {
+SearchModel.initializeProductSearchModel = function (httpParameterMap) {
     var productSearchModel = this.initializeSearchModel(new ProductSearchModel(), httpParameterMap);
 
     productSearchModel.setRecursiveCategorySearch(true);
@@ -75,7 +75,7 @@ Search.initializeProductSearchModel = function (httpParameterMap) {
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read content search parameters from.
  * @returns {dw.content.ContentSearchModel} Created and initialized product serach model.
  */
-Search.initializeContentSearchModel = function (httpParameterMap) {
+SearchModel.initializeContentSearchModel = function (httpParameterMap) {
     var contentSearchModel = this.initializeSearchModel(new ContentSearchModel(), httpParameterMap);
 
     contentSearchModel.setRecursiveFolderSearch(true);
@@ -86,4 +86,4 @@ Search.initializeContentSearchModel = function (httpParameterMap) {
     return contentSearchModel;
 };
 
-module.exports = Search;
+module.exports = SearchModel;

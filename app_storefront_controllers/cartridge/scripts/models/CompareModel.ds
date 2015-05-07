@@ -5,7 +5,7 @@
  * method access the compare data. The compare data itself is stored as
  * a JSON string in the privacy attributes of the session.
  *
- * @module models/Compare
+ * @module models/CompareModel
  */
 
 /**
@@ -426,7 +426,7 @@ function CompareList(){
 /**
  * Returns the product compare list, possibly restored using JSON data from the session.
  *
- * @return {models/Compare~CompareList} The compare list
+ * @return {models/CompareModel~CompareList} The compare list
  */
 exports.get = function ()
 {

@@ -1,19 +1,19 @@
 'use strict';
 
-/** @module models/Product */
+/** @module models/ProductModel */
 
 var AbstractModel = require('./AbstractModel');
 var app = require('~/cartridge/scripts/app');
 
 /**
  * Product helper providing enhanced product functionality
- * @class module:models/Product~Product
+ * @class module:models/ProductModel~ProductModel
  * @extends module:models/AbstractModel
  *
  * @param {dw.catalog.Product} obj The product object to enhance/wrap.
  */
-var Product = AbstractModel.extend(
-    /** @lends module:models/Product~Product.prototype */
+var ProductModel = AbstractModel.extend(
+    /** @lends module:models/ProductModel~ProductModel.prototype */
     {
             /**
          * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
@@ -45,7 +45,7 @@ var Product = AbstractModel.extend(
             var params = parameterMap.getParameterMap(formPrefix+
                             this.object.ID.replace(/_/g,'__')+'_');
             var paramNames = params.getParameterNames();
-            var ProductVariationModel = app.getModel('ProductVariationModel');
+            var ProductVariationModel = app.getModel('ProductVariation');
             var variationModel = new ProductVariationModel(this.object.getVariationModel());
 
             for (var k = 0; k < paramNames.length; k++) {
@@ -353,9 +353,9 @@ var Product = AbstractModel.extend(
  * Use this method to get a new instance for a given product or product ID.
  *
  * @param parameter {(dw.catalog.Product|String)} The product object to enhance/wrap or the product ID of the product object.
- * @returns {module:models/Product~Product}
+ * @returns {module:models/ProductModel~ProductModel}
  */
-Product.get = function (parameter) {
+ProductModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.catalog.ProductMgr.getProduct(parameter);
@@ -363,8 +363,8 @@ Product.get = function (parameter) {
     else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Product(obj);
+    return new ProductModel(obj);
 };
 
 /** The product class */
-module.exports = Product;
+module.exports = ProductModel;

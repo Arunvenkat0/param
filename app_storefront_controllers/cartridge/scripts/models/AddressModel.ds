@@ -1,19 +1,19 @@
 'use strict';
 
-/** @module models/Address */
+/** @module models/AddressModel */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
-var Transaction         = require('dw/system/Transaction');
-var Form = require('~/cartridge/scripts/models/Form');
+var Transaction = require('dw/system/Transaction');
+var Form = require('~/cartridge/scripts/models/FormModel');
 
 /**
  * Address helper providing enhanced address related functionality
- * @class module:models/Address~Address
+ * @class module:models/AddressModel~AddressModel
  * @extends module:models/AbstractModel
  */
-var Address = AbstractModel.extend(
-/** @lends module:models/Address~Address.prototype */
+var AddressModel = AbstractModel.extend(
+/** @lends module:models/AddressModel~AddressModel.prototype */
 {
     /**
      * Removes the address.
@@ -48,7 +48,7 @@ var Address = AbstractModel.extend(
  * Use this method to get a new instance for a given address or address ID.
  *
  * @param parameter {dw.order.OrderAddress|dw.customer.CustomerAddress|String} The address object to enhance/wrap or an address ID
- * @returns {module:models/Address~Address}
+ * @returns {module:models/AddressModel~AddressModel}
  */
 Address.get = function (parameter) {
     var obj = null;
@@ -66,9 +66,9 @@ Address.get = function (parameter) {
  *
  * @transactional
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
- * @returns {module:models/Address~Address} The created address
+ * @returns {module:models/AddressModel~AddressModel} The created address
  */
-Address.create = function(addressForm) {
+AddressModel.create = function(addressForm) {
     var addressBook = customer.profile.addressBook;
 
     return Transaction.wrap(function(){
@@ -85,7 +85,7 @@ Address.create = function(addressForm) {
                 }
             }
         }
-        return new Address(address);
+        return new AddressModel(address);
     });
 };
 
@@ -94,9 +94,9 @@ Address.create = function(addressForm) {
  *
  * @transactional
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
- * @returns {module:models/Address~Address} The updated address
+ * @returns {module:models/AddressModel~AddressModel} The updated address
  */
-Address.update = function (addressId, addressForm) {
+AddressModel.update = function (addressId, addressForm) {
     // get address to be edited
     var addressBook = customer.profile.addressBook;
     var address = addressBook.getAddress(addressId);
@@ -122,7 +122,7 @@ Address.update = function (addressId, addressForm) {
             }
         }
 
-        return new Address(address);
+        return new AddressModel(address);
     });
 };
 
@@ -133,11 +133,11 @@ Address.update = function (addressId, addressForm) {
  * @transactional
  * @param {String} addressId The ID of the address to delete
  * @return {Boolean} true if the address was successfully deleted, false otherwise
- * @see module:models/Address~Address#remove
+ * @see module:models/AddressModel~AddressModel#remove
  */
-Address.remove = function (addressId) {
+AddressModel.remove = function (addressId) {
     return Address.get(addressId).remove();
 };
 
 /** The order class */
-module.exports = Address;
+module.exports = AddressModel;

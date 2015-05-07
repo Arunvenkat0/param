@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module models/Order */
+/** @module models/OrderModel */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -8,13 +8,13 @@ var ArrayList = require('dw/util/ArrayList');
 
 /**
  * Order helper providing enhanced order functionality
- * @class module:models/Order~Order
+ * @class module:models/OrderModel~OrderModel
  * @extends module:models/AbstractModel
  *
  * @param {dw.order.Order} obj The order object to enhance/wrap.
  */
-var Order = AbstractModel.extend(
-    /** @lends module:models/Order~Order.prototype */
+var OrderModel = AbstractModel.extend(
+    /** @lends module:models/OrderModel~OrderModel.prototype */
     {
         /**
          * Creates gift certificates for all gift certificate line items of this order.
@@ -54,9 +54,9 @@ var Order = AbstractModel.extend(
  * Use this method to get a new instance for a given order or order number.
  *
  * @param parameter {dw.order.Order | String} The order object to enhance/wrap or the order ID of the order object.
- * @returns {module:models/Order~Order}
+ * @returns {module:models/OrderModel~OrderModel}
  */
-Order.get = function (parameter) {
+OrderModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.order.OrderMgr.getOrder(parameter);
@@ -64,8 +64,8 @@ Order.get = function (parameter) {
     else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Order(obj);
+    return new OrderModel(obj);
 };
 
 /** The order class */
-module.exports = Order;
+module.exports = OrderModel;

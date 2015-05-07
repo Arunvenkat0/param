@@ -2,20 +2,20 @@
 
 /*
  usage
- var content = require('~/cartridge/scripts/models/ProductList');
+ var content = require('~/cartridge/scripts/models/ProductListModel');
  */
 
-/** @module models/ProductList */
+/** @module models/ProductListModel */
 
 var AbstractModel = require('./AbstractModel');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 /**
  * ProductList helper providing enhanced content functionality
- * @class module:models/ProductList~ProductList
+ * @class module:models/ProductListModel~ProductListModel
  */
-var ProductList = AbstractModel.extend(
-    /** @lends module:models/ProductList~ProductList.prototype */
+var ProductListModel = AbstractModel.extend(
+    /** @lends module:models/ProductListModel~ProductListModel.prototype */
     {
         /**
          * Remove the given item from the wishlist
@@ -82,7 +82,7 @@ var ProductList = AbstractModel.extend(
  *
  * @transactional
  */
-ProductList.get = function (parameter) {
+ProductListModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'undefined') {
         obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
@@ -95,11 +95,11 @@ ProductList.get = function (parameter) {
         }
     } else if (typeof parameter === 'string') {
         obj = ProductListMgr.getProductList(parameter);
-    } else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new ProductList(obj);
+    return new ProductListModel(obj);
 };
 
 /** The ProductList class */
-module.exports = ProductList;
+module.exports = ProductListModel;

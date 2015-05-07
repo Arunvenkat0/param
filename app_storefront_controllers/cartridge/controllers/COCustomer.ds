@@ -14,8 +14,8 @@ var Transaction = require('dw/system/Transaction');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Cart = require('~/cartridge/scripts/models/Cart');
-var Content = require('~/cartridge/scripts/models/Content');
+var Cart = require('~/cartridge/scripts/models/CartModel');
+var Content = require('~/cartridge/scripts/models/ContentModel');
 
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)

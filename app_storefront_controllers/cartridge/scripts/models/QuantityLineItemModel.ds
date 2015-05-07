@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module models/QuantityLineItem */
+/** @module models/QuantityLineItemModel */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 
 /* API Includes */
@@ -10,13 +10,13 @@ var Quantity = require('dw/value/Quantity');
  * Helper object to store ProductLineItem information for each quantity. Used in Multi-Shipping Checkout to save
  * creation of new PLIs for each quantity.
  *
- * @class module:models/QuantityLineItem~QuantityLineItem
+ * @class module:models/QuantityLineItemModel~QuantityLineItemModel
  * @extends module:util/Class
  *
  * @param {dw.order.ProductLineItem} pli The ProductLineItem to create the QuantityLineItem from.
  */
-var QuantityLineItem = Class.extend(
-    /** @lends module:models/QuantityLineItem~QuantityLineItem.prototype */
+var QuantityLineItemModel = Class.extend(
+    /** @lends module:models/QuantityLineItemModel~QuantityLineItemModel.prototype */
     {
         /** */
         productID    : null,
@@ -52,4 +52,4 @@ var QuantityLineItem = Class.extend(
     });
 
 /** The QuantityLineItem class */
-module.exports = QuantityLineItem;
+module.exports = QuantityLineItemModel;

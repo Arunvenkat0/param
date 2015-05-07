@@ -39,7 +39,7 @@ function show() {
 
     cartForm.get('shipments').invalidate();
 
-    app.getView('CartView', {
+    app.getView('Cart', {
         cart : app.getModel('Cart').get(),
         RegistrationStatus : false
     }).render('checkout/cart/cart');
@@ -222,7 +222,7 @@ function submitForm() {
         pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
-        app.getView('CartView', formResult).render('checkout/cart/cart');
+        app.getView('Cart', formResult).render('checkout/cart/cart');
     }
 }
 
@@ -265,7 +265,7 @@ function addProduct() {
             }
         } else {
 
-            app.getView('CartView', {
+            app.getView('Cart', {
                 Basket : cart
             }).render('checkout/cart/cart');
 
@@ -307,7 +307,7 @@ function addProduct() {
     }
 
     if (params.format.stringValue === 'ajax') {
-        app.getView('CartView', {
+        app.getView('Cart', {
             cart : cart,
             BonusDiscountLineItem : newBonusDiscountLineItem
         }).render(template);
@@ -343,7 +343,7 @@ function addToWishlist() {
     productList = app.getModel('ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
-    app.getView('CartView', {
+    app.getView('Cart', {
         cart : app.getModel('Cart').get(),
         ProductAddedToWishlist : productID
     }).render('checkout/cart/cart');

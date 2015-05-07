@@ -4,24 +4,24 @@
 /**
  * Module for form related functionality.
  *
- * @module models/Form
+ * @module models/FormModel
  */
 
 var AbstractModel = require('./AbstractModel');
 
 /**
  * Form helper providing enhanced Form functionality
- * @class module:models/Form~Form
+ * @class module:models/FormModel~FormModel
  * @extends module:models/AbstractModel
  */
-var Form = AbstractModel.extend(
-    /** @lends module:models/Form~Form.prototype */
+var FormModel = AbstractModel.extend(
+    /** @lends module:models/FormModel~FormModel.prototype */
     {
         get : function (groupName) {
             if(this.object){
-                return Form.get(require('~/cartridge/scripts/object').resolve(this.object,groupName));
+                return FormModel.get(require('~/cartridge/scripts/object').resolve(this.object,groupName));
             }
-            return new Form();
+            return new FormModel();
         },
         /**
          * Each form action should define a form action callback
@@ -35,9 +35,9 @@ var Form = AbstractModel.extend(
          * Handle the submitted form action or call the error handler in case the form is not valid. If the form does
          * not validate the TriggeredAction would be null.
          *
-         * @param {Object<string|module:models/Form~ActionCallback>} formHandler Callbacks for each possible form action
+         * @param {Object<string|module:models/FormModel~ActionCallback>} formHandler Callbacks for each possible form action
          * @example
-         * require('~/models/Form').get('login').handleAction({
+         * require('~/models/FormModel').get('login').handleAction({
          *     "login" : function(formgroup, action){
          *         // handle login button
          *     },
@@ -76,7 +76,7 @@ var Form = AbstractModel.extend(
          *
          * @param updateObject the object
          * @param clear optional, if true, the form is cleared first before updating it
-         * @returns {module:models/Form~Form}
+         * @returns {module:models/FormModel~FormModel}
          */
         copyFrom : function (updateObject, clear) {
 
@@ -176,9 +176,9 @@ var Form = AbstractModel.extend(
  * Use this method to get a new instance for a given form reference or form object.
  *
  * @param formReference {dw.web.FormElement|String} Demandware form id (/forms/$name$.xml) or Demandware form object.
- * @returns {module:models/Form~Form}
+ * @returns {module:models/FormModel~FormModel}
  */
-Form.get = function (formReference) {
+FormModel.get = function (formReference) {
     var formInstance = null;
     if (typeof formReference === 'string') {
         formInstance = require('~/cartridge/scripts/object').resolve(session.forms,formReference);
@@ -187,8 +187,8 @@ Form.get = function (formReference) {
         formInstance = formReference;
     }
 
-    return new Form(formInstance);
+    return new FormModel(formInstance);
 };
 
 /** The Form class */
-module.exports = Form;
+module.exports = FormModel
