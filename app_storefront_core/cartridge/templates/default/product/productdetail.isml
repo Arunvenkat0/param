@@ -17,3 +17,4 @@
 		</isif>
 	</div><!--/pdpMain -->
 </isobject>
+<isslot id="test-recomm-prod-anchor" description="Product page slot" context="global" context-object="${pdict.Product}"/>

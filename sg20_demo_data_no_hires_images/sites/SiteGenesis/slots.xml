@@ -215,6 +215,15 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
+    <slot-configuration slot-id="test-recomm-prod-anchor" context="global" configuration-id="Product Recommendations - Recently Viewed from CQ" default="true" assigned-to-site="true">
+        <template>slots/recommendation/product_1x4_recomm.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Recently Viewed Products</callout-msg>
+        <content>
+            <recommendation recommendation-rule="recently-viewed"/>
+        </content>
+    </slot-configuration>
+
     <slot-configuration slot-id="cat-banner" context="category" context-id="electronics-televisions-flat-screen" configuration-id="banner-Electronics-Televisions-Flat Screen" default="true" assigned-to-site="true">
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>
@@ -456,6 +465,15 @@ Here you will find answers to your questions about shopping at our online store,
                 <product product-id="008884304054"/>
                 <product product-id="008885004533"/>
             </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cart-empty" context="global" configuration-id="cartempty-lastvisited-recs" assigned-to-site="true">
+        <template>slots/recommendation/product_1x4_recomm.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Product Recommendations - Recently Viewed from CQ</callout-msg>
+        <content>
+            <recommendation recommendation-rule="recently-viewed"/>
         </content>
     </slot-configuration>
 
