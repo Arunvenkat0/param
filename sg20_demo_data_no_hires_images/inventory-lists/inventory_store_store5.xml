@@ -5,6 +5,7 @@
             <default-instock>false</default-instock>
             <description>Inventory list for store: Short Electro</description>
             <use-bundle-inventory-only>false</use-bundle-inventory-only>
+            <on-order>false</on-order>
         </header>
 
         <records>
