@@ -515,8 +515,7 @@ button, .button, .buttonstyle, input[type="button"] {
       margin: 0;
       padding: 0; }
   .ui-dialog h1, .ui-dialog h2 {
-    font-size: 1.8em;
-    font-style: italic;
+    font-size: 1.75em;
     font-weight: 400;
     margin: 5px 158px 5px 0; }
   .ui-dialog .dialog-required {
@@ -1077,6 +1076,17 @@ nav[role="navigation"] {
       position: relative;
       width: 300px;
       z-index: 1; } }
+  .header-search label {
+    margin: 0;
+    padding: .7rem;
+    width: 2.5rem; }
+    .header-search label:before {
+      font-size: 1.3em; }
+    @media screen and (min-width: 768px) {
+      .header-search label {
+        float: right;
+        padding: 0.35rem 0.7rem;
+        width: auto; } }
   .header-search input[type="text"] {
     background-color: transparent;
     border: none;
@@ -1085,22 +1095,12 @@ nav[role="navigation"] {
     padding-left: 1rem;
     height: 2.3rem;
     width: 85%;
-    width: calc(100% - 2.2rem); }
+    width: calc(100% - 2.5rem); }
     @media screen and (min-width: 768px) {
       .header-search input[type="text"] {
         height: 1.9rem; } }
-  .header-search button {
-    background-color: transparent;
-    border: none;
-    color: #999;
-    padding: .7em .5em; }
-    @media screen and (min-width: 768px) {
-      .header-search button {
-        padding: .4em .5em; } }
-    .header-search button:hover {
-      color: #84bd00; }
-    .header-search button i {
-      font-size: 1.4em; }
+  .header-search legend {
+    background: none repeat scroll 0 0 transparent; }
 
 .menu-category {
   border-bottom: 5px solid #4d4d4d;
@@ -1526,7 +1526,6 @@ nav[role="navigation"] {
 
 .primary-content h1 {
   font-size: 1.75em;
-  font-style: italic;
   font-weight: 400;
   margin: 0 0 14px; }
 
@@ -2305,12 +2304,7 @@ footer {
 .pdp-main form .input-select {
   width: auto; }
 .pdp-main .product-name {
-  float: right;
-  font-size: 1.8em;
-  font-style: italic;
-  font-weight: 400;
-  margin: 26px 158px 4px 0;
-  width: 43%; }
+  margin: 0; }
 .pdp-main .product-number {
   color: #ccc;
   font-size: 0.9em;
@@ -3474,9 +3468,6 @@ h1 .account-logout {
     max-width: 100%; }
 .js .ui-dialog-content .product-col-2 {
   padding: 20px 0;
-  width: 58%; }
-.js .ui-dialog-content .pdp-main h1.product-name {
-  margin: .4em 0 0.1em;
   width: 58%; }
 .js .ui-dialog-content .pdp-main .product-set-list {
   border: 1px solid #e0e0e0;
