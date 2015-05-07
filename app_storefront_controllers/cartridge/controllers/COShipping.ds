@@ -60,7 +60,7 @@ function start() {
     var cart, physicalShipments, pageMeta, homeDeliveries;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
         // redirect to multi shipping scenario if more than one physical shipment is contained in the basket.
         physicalShipments = cart.getPhysicalShipments();
         if (!(Site.getCurrent().getCustomPreferenceValue('enableMultiShipping') && physicalShipments && physicalShipments.size() > 1)) {
@@ -156,7 +156,7 @@ function updateAddressDetails() {
     var cart, addressID, segments, lookupCustomer, lookupID, address, defaultShipment, shippingAddress, profile;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
 
         addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
         segments = addressID.split("??");
@@ -206,7 +206,7 @@ function singleShipping() {
         'save' : function(formgroup) {
             var cart = app.getModel('Cart').get();
 
-            if (cart.object) {
+            if (cart) {
 
                 handleShippingSettings(cart);
 
@@ -265,7 +265,7 @@ function selectShippingMethod() {
     TransientAddress = app.getModel('TransientAddress');
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
 
         address = new TransientAddress();
         address.countryCode = request.httpParameterMap.countryCode.stringValue;
@@ -307,7 +307,7 @@ function updateShippingMethodList() {
     TransientAddress = app.getModel('TransientAddress');
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
 
         address = new TransientAddress();
         address.countryCode = request.httpParameterMap.countryCode.stringValue;

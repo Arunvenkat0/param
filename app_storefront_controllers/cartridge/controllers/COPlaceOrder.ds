@@ -90,7 +90,7 @@ function handlePayments(order) {
 function start() {
     var cart = Cart.get();
 
-	if (cart.object) {
+	if (cart) {
 		
 		var COShipping = app.getController('COShipping');
 		 

@@ -45,7 +45,7 @@ var CartView = View.extend(
     init : function (params) {
         this._super(params);
 
-        this.Basket = params.cart.object;
+        this.Basket = params.cart ? params.cart.object : null;
         
         /** backward compatibility to URLUtils.continueURL() methods in old templates **/
         this.ContinueURL = dw.web.URLUtils.abs('Cart-SubmitForm')

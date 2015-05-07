@@ -131,7 +131,11 @@ function initCreditCardList(cart) {
     applicableCreditCards = null;
 
     if (customer.authenticated) {
-        applicableCreditCards = app.getModel('Profile').get().validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
+    	var profile = app.getModel('Profile').get();
+    	if (profile)
+    	{
+        	applicableCreditCards = profile.validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
+    	}
     }
 
     return {
@@ -148,7 +152,7 @@ function publicStart() {
     var cart, applicablePaymentMethods;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
 
         // Initializes all forms of the billing page including: - address form - email address - coupon form
         initAddressForm(cart);
@@ -180,7 +184,7 @@ function adjustGiftCertificates() {
     var i, j, cart, gcIdList, gcID, gc;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
         gcIdList = cart.getGiftCertIdList();
 
         Transaction.wrap(function() {
@@ -237,7 +241,7 @@ function redeemGiftCertificate(giftCertCode) {
     var cart, gc, newGCPaymentInstrument, gcPaymentInstrument, status, result;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
         // fetch the gift certificate
         gc = GiftCertificateMgr.getGiftCertificateByCode(giftCertCode);
 
@@ -430,7 +434,7 @@ function updateAddressDetails() {
     var cart, address, billingAddress;
     cart = app.getModel('Cart').get();
 
-    if (cart.object) {
+    if (cart) {
 
         address = customer.getAddressBook().getAddress(empty(request.httpParameterMap.addressID.value) ? request.httpParameterMap.dwfrm_billing_addressList.value : request.httpParameterMap.addressID.value);
 

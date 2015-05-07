@@ -18,31 +18,6 @@ var ProductList = AbstractModel.extend(
     /** @lends module:models/ProductList~ProductList.prototype */
     {
         /**
-         * Use this method to get the wishlist for the current customer. The method will create a new wishlist
-         * on the fly unless an instance of a product list is passed
-         *
-         * @transactional
-         */
-        get : function (parameter) {
-            var obj = null;
-            if (typeof parameter === 'undefined') {
-                obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
-                if(obj.empty){
-                    Transaction.wrap(function(){
-                        obj = ProductListMgr.createProductList(customer, dw.customer.ProductList.TYPE_WISH_LIST);
-                    });
-                }else{
-                    obj = obj[0];
-                }
-            } else if (typeof parameter === 'string') {
-                obj = ProductListMgr.getProductList(parameter);
-            } else if (typeof parameter === 'object') {
-                obj = parameter;
-            }
-            return new ProductList(obj);
-        },
-
-        /**
          * Remove the given item from the wishlist
          *
          * @transactional
@@ -71,7 +46,7 @@ var ProductList = AbstractModel.extend(
                     item.setQuantityValue(quantity);
                 }
                 if(optionModel){
-                    item.setOptionModel(optionModel);
+                    item.setProductOptionModel(optionModel);
                 }
                 // inherit public flag from the wishlist
                 item.setPublic(list.public);
@@ -100,6 +75,31 @@ var ProductList = AbstractModel.extend(
         }
 
     });
+    
+/**
+ * Use this method to get the wishlist for the current customer. The method will create a new wishlist
+ * on the fly unless an instance of a product list is passed
+ *
+ * @transactional
+ */
+ProductList.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'undefined') {
+        obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+        if(obj.empty){
+            Transaction.wrap(function(){
+                obj = ProductListMgr.createProductList(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+            });
+        }else{
+            obj = obj[0];
+        }
+    } else if (typeof parameter === 'string') {
+        obj = ProductListMgr.getProductList(parameter);
+    } else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new ProductList(obj);
+};
 
-/** The content class */
-module.exports = new ProductList();
+/** The ProductList class */
+module.exports = ProductList;

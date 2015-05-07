@@ -93,7 +93,7 @@ function showError(args)
 function edit()
 {
     var cart = Cart.get();
-    if (!cart.object) {
+    if (!cart) {
         purchase();
         return;
     }
@@ -209,7 +209,7 @@ function processAddToBasket(action)
     }
 
     var cart = Cart.goc();
-    if (!cart.object)
+    if (!cart)
     {
         showError({
             GeneralError : dw.web.Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
@@ -253,7 +253,7 @@ function processAddToBasket(action)
 function showMiniCart()
 {
     var cart = Cart.get();
-    if (!cart.object)
+    if (!cart)
     {
         return;
     }

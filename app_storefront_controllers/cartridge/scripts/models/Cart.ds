@@ -41,7 +41,7 @@ var Cart = AbstractModel.extend(
          * @transactional
          */
         calculate : function () {
-            dw.system.HookMgr.callHook('dw.ocapi.shop.basket.calculate', 'calculate', this.object);
+            dw.system.HookMgr.callHook("dw.ocapi.shop.basket.calculate", "calculate", this.object);
         },
 
         /**
@@ -55,22 +55,25 @@ var Cart = AbstractModel.extend(
         addProductListItem : function (productListItem, quantity, cgid) {
 
             if (productListItem) {
-
-                var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
-
-                // TODO
-                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-                    Basket             : this.object,
-                    ProductOptionModel : productOptionSelections.ProductOptionModel,
-                    Quantity           : quantity,
-                    Category           : dw.catalog.CatalogMgr.getCategory(cgid),
-                    ProductListItem    : productListItem
-                });
-                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                    return;
-                }
-
-                this.calculate();
+			    var cart = this;
+	
+			    Transaction.wrap(function() {
+	                var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
+	
+	                // TODO
+	                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
+	                    Basket             : cart.object,
+	                    ProductOptionModel : productOptionSelections,
+	                    Quantity           : quantity,
+	                    Category           : dw.catalog.CatalogMgr.getCategory(cgid),
+	                    ProductListItem    : productListItem
+	                });
+	                if (AddProductToBasketResult.result === PIPELET_ERROR) {
+	                    return;
+	                }
+	
+	                cart.calculate();
+			    });
             }
         },
 
@@ -1554,7 +1557,7 @@ Cart.get = function (parameter) {
     else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Cart(obj);
+    return (obj !== null) ? new Cart(obj) : null;
 };
 
 /**

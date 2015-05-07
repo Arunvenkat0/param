@@ -261,14 +261,17 @@ function lookupByZipCode() {
 function getProductLineItem(uuid) {
     var Cart = app.getModel('Cart');
     var cart = Cart.get();
-    for (var i = 0; i < cart.object.productLineItems.length; i++) {
-        var lineItem = cart.object.productLineItems[i];
-
-        if (lineItem.UUID === uuid) {
-            return lineItem;
-        }
+    if (cart)
+    {
+	    for (var i = 0; i < cart.object.productLineItems.length; i++) {
+	        var lineItem = cart.object.productLineItems[i];
+	
+	        if (lineItem.UUID === uuid) {
+	            return lineItem;
+	        }
+	    }
     }
-
+    
     return null;
 }
 
