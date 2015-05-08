@@ -20,6 +20,7 @@ var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
 var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
