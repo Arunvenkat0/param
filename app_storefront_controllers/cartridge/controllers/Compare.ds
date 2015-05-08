@@ -5,6 +5,9 @@
  * @module controllers/Compare
  */
 
+/* API Includes */
+var HashMap = require('dw/util/HashMap');
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -24,7 +27,7 @@ function show() {
     comparison.setCategory(request.httpParameterMap.category.value);
 
     // Store selected compare list properties in a map
-    var map = new dw.util.HashMap();
+    var map = new HashMap();
     map.put('categories', comparison.getCategories());
     map.put('products', comparison.getProducts());
     map.put('attributegroups', comparison.getAttributeGroups());

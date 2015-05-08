@@ -1,3 +1,9 @@
+'use strict';
+
+/* API Includes */
+var Pipelet = require('dw/system/Pipelet');
+
+/* Script Modules */
 var g = require('~/cartridges/scripts/guard');
 
 /**

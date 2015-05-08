@@ -9,6 +9,7 @@
 
 /* API includes */
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -58,7 +59,7 @@ function add(clearForm)
             .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
 
     app.getView({
-    	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
+    	ContinueURL : URLUtils.https('PaymentInstruments-PaymentForm')
     }).render('account/payment/paymentinstrumentdetails');
 }
 
@@ -75,7 +76,7 @@ function handlePaymentForm()
                 add(false);
                 return;
             }else{
-                response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+                response.redirect(URLUtils.https('PaymentInstruments-List'));
             }
         },
         'error' : function(){
@@ -83,7 +84,7 @@ function handlePaymentForm()
         }
     });
 
-    //response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+    //response.redirect(URLUtils.https('PaymentInstruments-List'));
 }
 
 /**
@@ -158,7 +159,7 @@ function Delete()
         }
     });
 
-    response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+    response.redirect(URLUtils.https('PaymentInstruments-List'));
 }
 
 

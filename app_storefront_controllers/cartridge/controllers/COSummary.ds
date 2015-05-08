@@ -12,6 +12,7 @@
 /* API Includes */
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -88,7 +89,7 @@ function showConfirmation(order) {
     pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
     app.getView({
         Order       : order,
-        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
+        ContinueURL : URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
     }).render('checkout/confirmation/confirmation');
 }
 
