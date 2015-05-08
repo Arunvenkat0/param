@@ -7,6 +7,7 @@
  */
 
 /* API Includes */
+var ContentMgr = require('dw/content/ContentMgr');
 var OrderMgr = require('dw/order/OrderMgr');
 var PagingModel = require('dw/web/PagingModel');
 
@@ -36,7 +37,7 @@ function history()
     orderListForm.copyFrom(orderPagingModel.pageElements);
 
     var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(dw.content.ContentMgr.getContent("myaccount-orderhistory"));
+    pageMeta.update(ContentMgr.getContent("myaccount-orderhistory"));
 
     app.getView({
     	OrderPagingModel   : orderPagingModel,

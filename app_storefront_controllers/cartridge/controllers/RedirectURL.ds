@@ -6,6 +6,9 @@
  * @module controllers/RedirectURL
  */
 
+/* API Includes */
+var URLUtils = require('dw/web/URLUtils');
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -49,7 +52,7 @@ function start() {
 function hostName() {
 
     app.getView({
-        Location : request.httpParameterMap.Location.stringValue || dw.web.URLUtils.httpHome()
+        Location : request.httpParameterMap.Location.stringValue || URLUtils.httpHome()
     }).render('util/redirectpermanent');
 
 }

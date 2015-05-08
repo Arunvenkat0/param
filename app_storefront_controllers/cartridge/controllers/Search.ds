@@ -8,6 +8,7 @@
 
 /* API Includes */
 var PagingModel = require('dw/web/PagingModel');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -50,7 +51,7 @@ function show() {
     contentSearchModel.search();
 
     if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
-        response.redirect(dw.web.URLUtils.abs('Home-Show'));
+        response.redirect(URLUtils.abs('Home-Show'));
     }
     else if (productSearchModel.count > 0) {
 
@@ -110,7 +111,7 @@ function show() {
             }
 
             response.renderTemplate('util/redirect', {
-                Location : dw.web.URLUtils.http('Product-Show', 'pid', productID)
+                Location : URLUtils.http('Product-Show', 'pid', productID)
             });
         }
     }
@@ -140,7 +141,7 @@ function showContent() {
     contentSearchModel.search();
 
     if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
-        response.redirect(dw.web.URLUtils.abs('Home-Show'));
+        response.redirect(URLUtils.abs('Home-Show'));
     }
     else if (contentSearchModel.count > 0) {
 
