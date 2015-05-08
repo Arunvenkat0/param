@@ -4,6 +4,7 @@
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
+var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 var Form = require('~/cartridge/scripts/models/FormModel');
 
@@ -31,7 +32,7 @@ var AddressModel = AbstractModel.extend(
         var priceModel;
 		/** @type {dw.campaign.ABTestMgr} */
 		priceModel = Form.get('form');
-        var listsWithAddress = dw.customer.ProductListMgr.getProductLists(address);
+        var listsWithAddress = ProductListMgr.getProductLists(address);
         if(!listsWithAddress.empty){
             return false;
         }
