@@ -1,31 +1,24 @@
 'use strict';
 
-var BaseClass = require('./BaseClass');
-var CHECKOUT_PATH = '/checkout';
-
-const BTN_CHECKOUT_AS_GUEST = '[name$="login_unregistered"]';
-const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
-const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
-const BTN_PLACE_ORDER = 'button[name$="submit"]';
-const BREADCRUMB_NAV_HEADER = '.checkout-progress-indicator';
-const BREADCRUMB_SHIPPING = BREADCRUMB_NAV_HEADER + ' .step-1';
-const BREADCRUMB_BILLING = BREADCRUMB_NAV_HEADER + ' .step-2';
-const BREADCRUMB_PLACE_ORDER = BREADCRUMB_NAV_HEADER + ' .step-3';
-const CKBX_USE_AS_BILLING_ADDRESS = '[name$="shippingAddress_useAsBillingAddress"]';
-const CSS_FIELD_SUFFIX = '"]';
-const LABEL_ORDER_THANK_YOU = '.primary-content h1';
+var BaseClass = require('./Base');
 
 
 class CheckoutPage extends BaseClass {
 	constructor(client, loggingLevel) {
 		super(client, loggingLevel);
-		this.basePath = CHECKOUT_PATH;
+		this.basePath = '/checkout';
+
+		this.btnContinueBillingSave = 'button[name$="billing_save"]';
+		this.btnContinueShippingSave = '[name$="shippingAddress_save"]';
+		this.btnPlaceOrder = 'button[name$="submit"]';
+		this.breadcrumbNavHeader = '.checkout-progress-indicator';
+		this.ckbxUseAsBillingAddress = '[name$="shippingAddress_useAsBillingAddress"]';
+		this.labelOrderThankYou = '.primary-content h1';
 	}
 
-	checkoutAsGuest () {
-		return this.client
-			.click(BTN_CHECKOUT_AS_GUEST)
-			.getAttribute(BREADCRUMB_SHIPPING, 'class');
+	pressBtnCheckoutAsGuest () {
+		debugger;
+		return this.client.click('[name$="login_unregistered"]');
 	}
 
 	_populateField (fieldType, selector, value) {
@@ -102,43 +95,15 @@ class CheckoutPage extends BaseClass {
 	}
 
 	checkUseAsBillingAddress () {
-		return this.client.click(CKBX_USE_AS_BILLING_ADDRESS);
+		return this.client.click(this.ckbxUseAsBillingAddress);
 	}
 
-	canSaveShippingAddress () {
-		return this.client.isEnabled(BTN_CONTINUE_SHIPPING_SAVE);
+	getLabelOrderConfirmation () {
+		return this.client.getText(this.labelOrderThankYou);
 	}
 
-	saveShippingAddress () {
-		return this.client.click(BTN_CONTINUE_SHIPPING_SAVE);
-	}
-
-	hasShippingAddressBeenSaved () {
-		return this.client.getAttribute(BREADCRUMB_BILLING, 'class');
-	}
-
-	isBillingContinueButtonEnabled () {
-		return this.client.isEnabled(BTN_CONTINUE_BILLING_SAVE);
-	}
-
-	pressBillingContinueBtn () {
-		return this.client.click(BTN_CONTINUE_BILLING_SAVE);
-	}
-
-	isBillingInfoSaved () {
-		return this.client.getAttribute(BREADCRUMB_PLACE_ORDER, 'class');
-	}
-
-	isPlaceOrderButtonEnabled () {
-		return this.client.isEnabled(BTN_PLACE_ORDER);
-	}
-
-	clickSubmitButtion () {
-		return this.client.click(BTN_PLACE_ORDER);
-	}
-
-	isOrderSubmitted () {
-		return this.client.getText(LABEL_ORDER_THANK_YOU);
+	getActiveBreadCrumb () {
+		return this.client.getText(this.breadcrumbNavHeader + ' .active');
 	}
 }
 

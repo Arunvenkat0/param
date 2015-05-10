@@ -4,29 +4,29 @@ var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
 var loggingLevel = 'info';
-var CheckoutPage = require('../webdriver/pageObjects/checkoutPage');
+var CheckoutPage = require('../webdriver/pageObjects/checkout');
 var checkoutPage = new CheckoutPage(client, loggingLevel);
-var ProductDetailPage = require('../webdriver/pageObjects/productDetailPage');
+var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
 var productDetailPage = new ProductDetailPage(client, loggingLevel);
 
 
-describe.only('Checkout Simple Product', function () {
-	var shippingFields = new Map();
-	shippingFields.set('firstName', 'John');
-	shippingFields.set('lastName', 'Smith');
-	shippingFields.set('address1', '5 Wall St');
-	shippingFields.set('country', 'US');
-	shippingFields.set('states_state', 'MA');
-	shippingFields.set('city', 'Burlington');
-	shippingFields.set('postal', '01803');
-	shippingFields.set('phone', '7814251267');
+describe('Checkout Simple Product', () => {
+	var shippingFormData = new Map();
+	shippingFormData.set('firstName', 'John');
+	shippingFormData.set('lastName', 'Smith');
+	shippingFormData.set('address1', '5 Wall St');
+	shippingFormData.set('country', 'US');
+	shippingFormData.set('states_state', 'MA');
+	shippingFormData.set('city', 'Burlington');
+	shippingFormData.set('postal', '01803');
+	shippingFormData.set('phone', '7814251267');
 
-	var billingFields = new Map();
-	billingFields.set('emailAddress', 'jsmith@demandware.com');
-	billingFields.set('creditCard_owner', 'John Smith');
-	billingFields.set('creditCard_number', '4111111111111111');
-	billingFields.set('creditCard_year', 2);
-	billingFields.set('creditCard_cvn', '987');
+	var billingFormData = new Map();
+	billingFormData.set('emailAddress', 'jsmith@demandware.com');
+	billingFormData.set('creditCard_owner', 'John Smith');
+	billingFormData.set('creditCard_number', '4111111111111111');
+	billingFormData.set('creditCard_year', 2);
+	billingFormData.set('creditCard_cvn', '987');
 
 	before(() => {
 		var resourcePath = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
@@ -37,7 +37,7 @@ describe.only('Checkout Simple Product', function () {
 		standardProduct.set('sizeIndex', sizeIndex);
 
 		return client.init()
-			// Performs tasks to add to car through one combined call:
+			// Performs tasks to add to cart through one combined call:
 			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
 
 			// OR, through granular calls:
@@ -52,7 +52,7 @@ describe.only('Checkout Simple Product', function () {
 	after(() => client.end());
 
 	it('should allow checkout as guest', () =>
-		checkoutPage.checkoutAsGuest()
+		checkoutPage.pressBtnCheckoutAsGuest()
 			/**
 			 * attribute may come back as "step-1 active" or
 			 * "step-1 inactive".  If the latter,
@@ -60,45 +60,47 @@ describe.only('Checkout Simple Product', function () {
 			 * resolves as true.  Splitting the string into an array
 			 * correctly evaluates the condition.
 			 */
-			.then(attribute => assert.include(attribute.split(' '), 'active'))
+			.then(() => checkoutPage.getActiveBreadCrumb())
+			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 1: Shipping'))
 	);
 
 	// Fill in Shipping Form
 	it('should allow saving of Shipping form when required fields filled', () =>
-		checkoutPage.fillOutShippingForm(shippingFields)
+		checkoutPage.fillOutShippingForm(shippingFormData)
 			.then(() => checkoutPage.checkUseAsBillingAddress())
-			.then(() => checkoutPage.canSaveShippingAddress())
+			.then(() => client.isEnabled(checkoutPage.btnContinueShippingSave))
 			.then(savable => assert.ok(savable))
 	);
 
 	it('should redirect to the Billing page after Shipping saved', () =>
-		checkoutPage.saveShippingAddress()
-			.then(() => checkoutPage.hasShippingAddressBeenSaved())
-			.then(billingStepActive => assert.include(billingStepActive.split(' '), 'active'))
+		client.click(checkoutPage.btnContinueShippingSave)
+			.then(() => checkoutPage.getActiveBreadCrumb())
+			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
 	);
 
 	// Fill in Billing Form
 	it('should allow saving of Billing Form when required fields filled', () =>
-		checkoutPage.fillOutBillingForm(billingFields)
+		checkoutPage.fillOutBillingForm(billingFormData)
 			// click outside to enable continue button
-			.then(() => checkoutPage.isBillingContinueButtonEnabled())
+			.then(() => client.isEnabled(checkoutPage.btnContinueBillingSave))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should redirect to the Place Order page after Billing saved', () =>
-		checkoutPage.pressBillingContinueBtn()
-			.then(() => checkoutPage.isBillingInfoSaved())
-			.then(attribute =>assert.include(attribute.split(' '), 'active'))
+		client.click(checkoutPage.btnContinueBillingSave)
+			.then(() => checkoutPage.getActiveBreadCrumb())
+			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 3: Place Order'))
 	);
 
-	it('should enable the Place Order when Place Order page reached', () =>
-		checkoutPage.isPlaceOrderButtonEnabled()
+	it('should enable the Place Order button when Place Order page reached', () =>
+		client.isEnabled(checkoutPage.btnPlaceOrder)
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should redirect to Order Confirmation page after a successful order submission', () =>
-		checkoutPage.clickSubmitButtion()
-			.then(() => checkoutPage.isOrderSubmitted())
+		client.click(checkoutPage.btnPlaceOrder)
+			.then(() => checkoutPage.getLabelOrderConfirmation())
+			//.then(() => client.getText(checkoutPage.labelOrderThankYou))
 			.then(title => assert.equal(title, 'Thank you for your order.'))
 	);
 
