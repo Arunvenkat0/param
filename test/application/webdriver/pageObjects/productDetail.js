@@ -1,6 +1,6 @@
 'use strict';
 
-var BaseClass = require('./BaseClass');
+var BaseClass = require('./Base');
 var assert = require('chai').assert;
 
 const CSS_ADD_TO_CART = '#add-to-cart';

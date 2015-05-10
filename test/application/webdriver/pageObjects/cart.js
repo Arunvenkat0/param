@@ -1,39 +1,40 @@
 'use strict';
 
-var BaseClass = require('./BaseClass');
-const CART_PATH = '/cart';
-const CSS_CART_ROW = '.cart-row';
-const CSS_CART_EMPTY = '.cart-empty';
-const CSS_BUTTON_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
+var BaseClass = require('./Base');
 
 
 class CartPage extends BaseClass {
 
 	constructor(client) {
 		super(client);
-		this.basePath = CART_PATH;
+		this.basePath = '/cart';
+
+		this.cssCartEmpty = '.cart-empty';
+		this.cssCartRow = '.cart-row';
+		this.btnUpdateCart = '.cart-footer button[name$="_updateCart"]';
 	}
 
 	// Pseudo private methods
 	_createCssNthCartRow (idx) {
-		return CSS_CART_ROW + ':nth-child(' + idx + ')';
+		return this.cssCartRow + ':nth-child(' + idx + ')';
 	}
 
 	_createCssUpdateQtyInput (idx) {
-		return [this._createCssNthCartRow(idx), '.item-quantity input'].join(' ');
+		return [ this._createCssNthCartRow(idx), '.item-quantity input' ].join(' ');
 	}
 
 	// Public methods
-	removeLineItemByRow (rowNum) {
-		return this.client.click(this._createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]');
+	removeItemByRow (rowNum) {
+		var linkRemoveItem = this._createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]';
+		return this.client.click(linkRemoveItem);
 	}
 
-	isCartEmpty () {
-		return this.client.isExisting(CSS_CART_EMPTY);
+	verifyCartEmpty () {
+		return this.client.isExisting(this.cssCartEmpty);
 	}
 
 	getItemList () {
-		return this.client.elements('.item-list ' + CSS_CART_ROW);
+		return this.client.elements('.item-list ' + this.cssCartRow);
 	}
 
 	getItemNameByRow (rowNum) {
@@ -47,7 +48,7 @@ class CartPage extends BaseClass {
 	updateQuantityByRow (rowNum, value) {
 		return this.client
 			.setValue(this._createCssUpdateQtyInput(rowNum), value)
-			.click(CSS_BUTTON_UPDATE_CART)
+			.click(this.btnUpdateCart)
 			.getValue(this._createCssUpdateQtyInput(rowNum));
 	}
 
