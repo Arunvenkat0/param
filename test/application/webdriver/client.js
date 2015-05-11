@@ -1,5 +1,6 @@
+'use strict';
+
 var config = require('./config');
-var Promise = require('promise');
 
 var client = require('webdriverio').remote({
 	desiredCapabilities: {
@@ -7,6 +8,5 @@ var client = require('webdriverio').remote({
 	},
 	logLevel: 'silent'
 });
-
 
 module.exports = client;

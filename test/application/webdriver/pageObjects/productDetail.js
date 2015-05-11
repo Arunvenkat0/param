@@ -3,8 +3,6 @@
 var Base = require('./base');
 var assert = require('chai').assert;
 
-
-
 class ProductDetailPage extends Base {
 	constructor (client, loggingLevel) {
 		super(client, loggingLevel);

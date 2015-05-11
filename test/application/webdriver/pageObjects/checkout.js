@@ -2,7 +2,6 @@
 
 var Base = require('./base');
 
-
 class CheckoutPage extends Base {
 	constructor(client, loggingLevel) {
 		super(client, loggingLevel);
@@ -19,7 +18,7 @@ class CheckoutPage extends Base {
 	}
 
 	_populateField (fieldType, selector, value) {
-		switch(fieldType) {
+		switch (fieldType) {
 			case 'input':
 				this.client.setValue(selector, value);
 				break;
@@ -103,6 +102,5 @@ class CheckoutPage extends Base {
 		return this.client.getText('.checkout-progress-indicator .active');
 	}
 }
-
 
 module.exports = CheckoutPage;

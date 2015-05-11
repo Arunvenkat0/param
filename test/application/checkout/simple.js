@@ -2,12 +2,10 @@
 
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
-var config = require('../webdriver/config');
 var CheckoutPage = require('../webdriver/pageObjects/checkout');
 var checkoutPage = new CheckoutPage(client);
 var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
 var productDetailPage = new ProductDetailPage(client);
-
 
 describe('Checkout Simple Product', () => {
 	var shippingFormData = new Map();

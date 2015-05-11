@@ -2,9 +2,7 @@
 
 var Base = require('./base');
 
-
 class CartPage extends Base {
-
 	constructor(client) {
 		super(client);
 		this.basePath = '/cart';
@@ -20,7 +18,7 @@ class CartPage extends Base {
 	}
 
 	_createCssUpdateQtyInput (idx) {
-		return [ this._createCssNthCartRow(idx), '.item-quantity input' ].join(' ');
+		return [this._createCssNthCartRow(idx), '.item-quantity input'].join(' ');
 	}
 
 	// Public methods
@@ -47,8 +45,7 @@ class CartPage extends Base {
 	}
 
 	updateQuantityByRow (rowNum, value) {
-		return this.client
-			.setValue(this._createCssUpdateQtyInput(rowNum), value)
+		return this.client.setValue(this._createCssUpdateQtyInput(rowNum), value)
 			.click(this.btnUpdateCart)
 			.getValue(this._createCssUpdateQtyInput(rowNum));
 	}
