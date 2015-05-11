@@ -53,10 +53,25 @@ exports.getView = function(viewName, parameters) {
  *
  * @param formReference {dw.web.FormElement|String} Demandware form id (/forms/$name$.xml) or Demandware form object.
  * @returns {module:models/FormModel~FormModel}
+ * @example
+ * // simple form preparation
+ * var form = require('~/app').getForm('registration');
+ * form.clear();
+ *
+ * // handling the form submit
+ * var form = require('~/app').getForm('registration');
+ * form.handleAction({
+ *     'register' : function(formGroup, action){
+ *         // handle the action here
+ *     },
+ *     'error'    : function(){
+ *         // handle form errors here
+ *     }
+ * });
  */
 exports.getForm = function(formReference) {
     var formInstance, FormModel;
-    
+
     FormModel = require('~/cartridge/scripts/models/FormModel');
     formInstance = null;
     if ( typeof formReference === 'string') {

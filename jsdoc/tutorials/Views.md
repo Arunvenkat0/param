@@ -4,11 +4,11 @@ The views are supposed to provide auxiliary functionality for the templates, the
 
 ```
 // use anonymous view
-require('~/view').get().render('path/to/template');
+require('~/app').getView().render('path/to/template');
 
 
 // or use a named view
-require('~/view').get("views/ProductView",{
+require('~/app').getView("Product",{
     product : product,
     showRecommendations : false
 }).render('path/to/template');

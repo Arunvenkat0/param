@@ -5,7 +5,7 @@ In various places throughout the application emails are being sent to notify the
 require('~/models/Email').get('mail/welcome',customer.profile.email).send();
 
 // send an email to a customer's mail address providing additional data for the email template
-require('~/models/Email').get('mail/resetpasswordemail',customer.profile.email)
+require('~/app').getModel('Email').get('mail/resetpasswordemail',customer.profile.email)
     .setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null)).send({
         Customer : customer,
         ResetPasswordToken : resetPasswordToken
