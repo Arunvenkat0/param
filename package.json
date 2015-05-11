@@ -15,6 +15,7 @@
   "devDependencies": {
     "ampersand-model": "^5.0.0",
     "ampersand-view": "^7.2.0",
+    "babel": "^5.2.6",
     "browserify": "^10.1.1",
     "chai": "^2.1.0",
     "grunt-autoprefixer": "^3.0.0",

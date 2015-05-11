@@ -22,8 +22,10 @@ var browserify = require('browserify'),
 
 var paths = require('./package.json').paths;
 
+require('babel/register');
+
 var watching = false;
-gulp.task('enable-watch-mode', function () { watching = true })
+gulp.task('enable-watch-mode', function () {watching = true;});
 
 gulp.task('css', function () {
 	var streams = merge();
@@ -42,7 +44,7 @@ gulp.task('js', function () {
 	var opts = {
 		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
 		debug: gutil.env.sourcemaps
-	}
+	};
 	if (watching) {
 		opts = xtend(opts, watchify.args);
 	}
@@ -126,12 +128,12 @@ gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
 
 var hbsfy = require('hbsfy');
 var styleguideWatching = false;
-gulp.task('styleguide-watching', function () {styleguideWatching = true});
+gulp.task('styleguide-watching', function () {styleguideWatching = true;});
 gulp.task('js:styleguide', function () {
 	var opts = {
 		entries: ['./styleguide/js/main.js'],
 		debug: (gutil.env.sourcemaps)
-	}
+	};
 	if (styleguideWatching) {
 		opts = xtend(opts, watchify.args);
 	}

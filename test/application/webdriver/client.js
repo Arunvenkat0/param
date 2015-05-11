@@ -1,5 +1,6 @@
+'use strict';
+
 var config = require('./config');
-var Promise = require('promise');
 
 var client = require('webdriverio').remote({
 	desiredCapabilities: {
