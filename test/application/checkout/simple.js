@@ -3,11 +3,10 @@
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
-var loggingLevel = 'info';
 var CheckoutPage = require('../webdriver/pageObjects/checkout');
-var checkoutPage = new CheckoutPage(client, loggingLevel);
+var checkoutPage = new CheckoutPage(client);
 var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
-var productDetailPage = new ProductDetailPage(client, loggingLevel);
+var productDetailPage = new ProductDetailPage(client);
 
 
 describe('Checkout Simple Product', () => {
@@ -37,15 +36,7 @@ describe('Checkout Simple Product', () => {
 		standardProduct.set('sizeIndex', sizeIndex);
 
 		return client.init()
-			// Performs tasks to add to cart through one combined call:
 			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
-
-			// OR, through granular calls:
-			//.then(() => productDetailPage.navigateTo(resourcePath))
-			//.then(() => productDetailPage.selectSizeByIndex(sizeIndex))
-			//.then(() => productDetailPage.isAddToCartEnabled())
-			//.then(() => productDetailPage.pressBtnAddToCart())
-
 			.then(() => checkoutPage.navigateTo());
 	});
 
@@ -103,6 +94,4 @@ describe('Checkout Simple Product', () => {
 			//.then(() => client.getText(checkoutPage.labelOrderThankYou))
 			.then(title => assert.equal(title, 'Thank you for your order.'))
 	);
-
-	describe('another test suite', () => {});
 });

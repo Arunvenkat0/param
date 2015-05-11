@@ -17,7 +17,6 @@ class CheckoutPage extends BaseClass {
 	}
 
 	pressBtnCheckoutAsGuest () {
-		debugger;
 		return this.client.click('[name$="login_unregistered"]');
 	}
 
