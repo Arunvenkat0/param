@@ -1,20 +1,20 @@
 'use strict';
 
-var Base = require('./base');
+import Base from './base';
 
-class CartPage extends Base {
+export const CSS_CART_EMPTY = '.cart-empty';
+export const CSS_CART_ROW = '.cart-row';
+export const BTN_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
+
+export default class CartPage extends Base {
 	constructor(client) {
 		super(client);
 		this.basePath = '/cart';
-
-		this.cssCartEmpty = '.cart-empty';
-		this.cssCartRow = '.cart-row';
-		this.btnUpdateCart = '.cart-footer button[name$="_updateCart"]';
 	}
 
 	// Pseudo private methods
 	_createCssNthCartRow (idx) {
-		return this.cssCartRow + ':nth-child(' + idx + ')';
+		return CSS_CART_ROW + ':nth-child(' + idx + ')';
 	}
 
 	_createCssUpdateQtyInput (idx) {
@@ -28,13 +28,13 @@ class CartPage extends Base {
 	}
 
 	verifyCartEmpty () {
-		return this.client.isExisting(this.cssCartEmpty);
+		return this.client.isExisting(CSS_CART_EMPTY);
 	}
 
 	getItemList () {
 		return this.client
-			.waitForExist('.cart-row')
-			.elements('.item-list ' + this.cssCartRow);
+			.waitForExist('.item-list ' + CSS_CART_ROW)
+			.elements('.item-list ' + CSS_CART_ROW);
 	}
 
 	getItemNameByRow (rowNum) {
@@ -48,7 +48,7 @@ class CartPage extends Base {
 
 	updateQuantityByRow (rowNum, value) {
 		return this.client.setValue(this._createCssUpdateQtyInput(rowNum), value)
-			.click(this.btnUpdateCart)
+			.click(BTN_UPDATE_CART)
 			.getValue(this._createCssUpdateQtyInput(rowNum));
 	}
 
@@ -65,9 +65,6 @@ class CartPage extends Base {
 			.click('.ui-dialog #add-to-cart')
 			// wait for the page to refresh, which happens after a 500 timeout by default
 			.pause(1500)
-			.getText(this._createCssNthCartRow(rowNum)+ ' .attribute[data-attribute="size"] .value');
+			.getText(this._createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 	}
 }
-
-
-module.exports = CartPage;

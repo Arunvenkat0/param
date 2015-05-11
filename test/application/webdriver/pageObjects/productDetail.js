@@ -1,21 +1,13 @@
 'use strict';
 
-var Base = require('./base');
-var assert = require('chai').assert;
+import Base from './base';
 
-class ProductDetailPage extends Base {
+export const BTN_ADD_TO_CART = '#add-to-cart';
+export const INPUT_QUANTITY = '#Quantity';
+
+export default class ProductDetailPage extends Base {
 	constructor (client, loggingLevel) {
 		super(client, loggingLevel);
-
-		this.btnAddToCart = '#add-to-cart';
-		this.inputQuantity = '#Quantity';
-	}
-
-	isAddToCartEnabled () {
-		return this.client.isEnabled(this.btnAddToCart)
-			.then(function (enabled) {
-				assert.ok(enabled);
-			});
 	}
 
 	selectColorByIndex (idx) {
@@ -28,11 +20,11 @@ class ProductDetailPage extends Base {
 	}
 
 	setQuantity (value) {
-		return this.client.setValue(this.inputQuantity, value);
+		return this.client.setValue(INPUT_QUANTITY, value);
 	}
 
 	pressBtnAddToCart () {
-		return this.client.click(this.btnAddToCart);
+		return this.client.click(BTN_ADD_TO_CART);
 	}
 
 	/**
@@ -57,12 +49,8 @@ class ProductDetailPage extends Base {
 			this.selectSizeByIndex(product.get('sizeIndex'));
 		}
 
-		this.isAddToCartEnabled();
 		this.pressBtnAddToCart();
 
 		return this.client;
 	}
 }
-
-
-module.exports = ProductDetailPage;

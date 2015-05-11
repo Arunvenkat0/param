@@ -1,7 +1,7 @@
-var config = require('../config');
+import config from '../config';
 
 
-class Base {
+export default class Base {
 	constructor(client, loggingLevel='info'){
 		this.client = client;
 		this.loggingLevel = loggingLevel;
@@ -22,6 +22,3 @@ class Base {
 		return this.client.url(url);
 	}
 }
-
-
-module.exports = Base;

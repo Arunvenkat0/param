@@ -1,16 +1,16 @@
 'use strict';
 
-var Base = require('./base');
+import Base from './base';
 
-class CheckoutPage extends Base {
+export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
+export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
+export const BTN_PLACE_ORDER = 'button[name$="submit"]';
+export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
+
+export default class CheckoutPage extends Base {
 	constructor(client, loggingLevel) {
 		super(client, loggingLevel);
 		this.basePath = '/checkout';
-
-		this.btnContinueBillingSave = 'button[name$="billing_save"]';
-		this.btnContinueShippingSave = '[name$="shippingAddress_save"]';
-		this.btnPlaceOrder = 'button[name$="submit"]';
-		this.labelOrderThankYou = '.primary-content h1';
 	}
 
 	pressBtnCheckoutAsGuest () {
@@ -44,9 +44,8 @@ class CheckoutPage extends Base {
 		fieldTypeMap.set('postal', 'input');
 		fieldTypeMap.set('phone', 'input');
 
-		var fieldPrefix = 'shippingAddress_addressFields_';
 		for (var [key, value] of shippingData) {
-			var selector = '[name$="' + fieldPrefix + key + '"]';
+			var selector = '[name$="shippingAddress_addressFields_' + key + '"]';
 			this._populateField(fieldTypeMap.get(key), selector, value);
 		}
 
@@ -96,12 +95,10 @@ class CheckoutPage extends Base {
 	}
 
 	getLabelOrderConfirmation () {
-		return this.client.getText(this.labelOrderThankYou);
+		return this.client.getText(LABEL_ORDER_THANK_YOU);
 	}
 
 	getActiveBreadCrumb () {
 		return this.client.getText('.checkout-progress-indicator .active');
 	}
 }
-
-module.exports = CheckoutPage;
