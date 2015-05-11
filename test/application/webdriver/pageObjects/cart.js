@@ -42,7 +42,8 @@ class CartPage extends BaseClass {
 	}
 
 	getItemAttrByRow (rowNum, attr) {
-		return this.client.getText(this._createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value');
+		var itemAttr = this._createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value';
+		return this.client.getText(itemAttr);
 	}
 
 	updateQuantityByRow (rowNum, value) {

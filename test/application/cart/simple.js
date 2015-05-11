@@ -10,16 +10,21 @@ var cartPage = new CartPage(client);
 var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
 var productDetailPage = new ProductDetailPage(client);
 
-var PAGE_URL_PATH = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
-
 
 describe('Cart - Simple', () => {
 
-	before(() =>
-		client.init()
-			.then(() => productDetailPage.addToCart(PAGE_URL_PATH))
-			.then(() => cartPage.navigateTo())
-	);
+	before(() => {
+		var resourcePath = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
+		var sizeIndex = 2;
+
+		var standardProduct = new Map();
+		standardProduct.set('resourcePath', resourcePath);
+		standardProduct.set('sizeIndex', sizeIndex);
+
+		return client.init()
+			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
+			.then(() => cartPage.navigateTo());
+	});
 
 	after(() => client.end());
 
