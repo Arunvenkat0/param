@@ -25,9 +25,9 @@
 				<h2 class="visually-hidden">Product Options</h2>
 				<ul>
 				<isloop items="${POM.options}" var="Option">
-					<li class="attribute">
-						<span class="label"><isprint value="${Option.getDisplayName()}"/>:</span>
-						<span class="value">
+					<li class="attribute option-dropdown">
+						<span class="label"><isprint value="${Option.getDisplayName()}"/></span>
+						<div class="value">
 							<select id="${Option.htmlName}" name="${Option.htmlName}" class="product-option input-select">
 								<isloop items="${POM.getOptionValues(Option)}" var="OptionValue">
 									<isif condition="${POM.isSelectedOptionValue(Option, OptionValue)}">
@@ -42,7 +42,7 @@
 									<option value="${OptionValue.ID}" data-combined="${dw.util.StringUtils.formatMoney(combinedPrice)}" <isprint value="${selected}" encoding="off"/>>[<isprint value="${POM.getPrice(OptionValue)}"/>] <isprint value="${OptionValue.getDisplayValue()}"/></option>
 								</isloop>
 							</select>
-						</span>
+						</div>
 					</li>
 				</isloop>
 				</ul>

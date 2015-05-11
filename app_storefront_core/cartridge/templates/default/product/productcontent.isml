@@ -29,6 +29,21 @@
 	<div class="product-number">
 		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
+
+	<iscomment>
+		reviews
+		=============================================================
+	</iscomment>
+
+	<isif condition="${!isQuickView}">
+		<isinclude template="product/components/reviewsmini"/>
+	</isif>
+
+	<iscomment>
+		view detail link for quick view
+		=============================================================
+	</iscomment>
+
 	<isif condition="${isQuickView}">
 		<!-- shown only in quick view -->
 		<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
@@ -40,10 +55,6 @@
 
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
-
-	<isif condition="${!isQuickView}">
-		<isinclude template="product/components/reviewsmini"/>
-	</isif>
 
 	<isset name="showTieredPrice" value="${false}" scope="page"/>
 	<isinclude template="product/components/promotions"/>
