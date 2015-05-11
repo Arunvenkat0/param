@@ -32,7 +32,9 @@ class CartPage extends Base {
 	}
 
 	getItemList () {
-		return this.client.elements('.item-list ' + this.cssCartRow);
+		return this.client
+			.waitForExist('.cart-row')
+			.elements('.item-list ' + this.cssCartRow);
 	}
 
 	getItemNameByRow (rowNum) {
