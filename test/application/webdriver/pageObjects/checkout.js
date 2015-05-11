@@ -1,9 +1,9 @@
 'use strict';
 
-var BaseClass = require('./Base');
+var Base = require('./base');
 
 
-class CheckoutPage extends BaseClass {
+class CheckoutPage extends Base {
 	constructor(client, loggingLevel) {
 		super(client, loggingLevel);
 		this.basePath = '/checkout';

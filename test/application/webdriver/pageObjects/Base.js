@@ -1,7 +1,7 @@
 var config = require('../config');
 
 
-class BaseClass {
+class Base {
 	constructor(client, loggingLevel='info'){
 		this.client = client;
 		this.loggingLevel = loggingLevel;
@@ -24,4 +24,4 @@ class BaseClass {
 }
 
 
-module.exports = BaseClass;
+module.exports = Base;

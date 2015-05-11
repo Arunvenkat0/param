@@ -1,9 +1,9 @@
 'use strict';
 
-var BaseClass = require('./Base');
+var Base = require('./base');
 
 
-class CartPage extends BaseClass {
+class CartPage extends Base {
 
 	constructor(client) {
 		super(client);
