@@ -83,7 +83,8 @@ class CheckoutPage extends Base {
 
 		for (var [key, value] of billingFields) {
 			var fieldType = fieldMap.get(key).type;
-			var selector = lastFilledField = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
+			var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
+			lastFilledField = selector;
 			this._populateField(fieldType, selector, value);
 		}
 
