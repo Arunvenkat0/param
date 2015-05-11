@@ -72,7 +72,6 @@ describe('Checkout Simple Product', () => {
 	// Fill in Billing Form
 	it('should allow saving of Billing Form when required fields filled', () =>
 		checkoutPage.fillOutBillingForm(billingFormData)
-			// click outside to enable continue button
 			.then(() => client.isEnabled(checkoutPage.btnContinueBillingSave))
 			.then(enabled => assert.ok(enabled))
 	);
@@ -91,7 +90,6 @@ describe('Checkout Simple Product', () => {
 	it('should redirect to Order Confirmation page after a successful order submission', () =>
 		client.click(checkoutPage.btnPlaceOrder)
 			.then(() => checkoutPage.getLabelOrderConfirmation())
-			//.then(() => client.getText(checkoutPage.labelOrderThankYou))
 			.then(title => assert.equal(title, 'Thank you for your order.'))
 	);
 });

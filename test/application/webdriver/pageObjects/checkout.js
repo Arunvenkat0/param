@@ -11,8 +11,6 @@ class CheckoutPage extends BaseClass {
 		this.btnContinueBillingSave = 'button[name$="billing_save"]';
 		this.btnContinueShippingSave = '[name$="shippingAddress_save"]';
 		this.btnPlaceOrder = 'button[name$="submit"]';
-		this.breadcrumbNavHeader = '.checkout-progress-indicator';
-		this.ckbxUseAsBillingAddress = '[name$="shippingAddress_useAsBillingAddress"]';
 		this.labelOrderThankYou = '.primary-content h1';
 	}
 
@@ -94,7 +92,7 @@ class CheckoutPage extends BaseClass {
 	}
 
 	checkUseAsBillingAddress () {
-		return this.client.click(this.ckbxUseAsBillingAddress);
+		return this.client.click('[name$="shippingAddress_useAsBillingAddress"]');
 	}
 
 	getLabelOrderConfirmation () {
@@ -102,7 +100,7 @@ class CheckoutPage extends BaseClass {
 	}
 
 	getActiveBreadCrumb () {
-		return this.client.getText(this.breadcrumbNavHeader + ' .active');
+		return this.client.getText('.checkout-progress-indicator .active');
 	}
 }
 
