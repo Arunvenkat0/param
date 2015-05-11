@@ -10,7 +10,8 @@
 </isscript>
 
 <div class="breadcrumb">
-	<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a>
+	<iscomment>HOME BREADCRUMB: Commented out based on best practices</iscomment>
+	<!-- <a href="${URLUtils.httpHome()}" class="breadcrumb-element breadcrumb-home" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a> -->
 
 	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
 		<isif condition="${empty(pagingModel)}">

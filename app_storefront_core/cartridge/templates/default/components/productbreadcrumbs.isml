@@ -4,8 +4,8 @@
 </iscomment>
 <div class="breadcrumb">
 
-	<iscomment>bread crumb home link</iscomment>
-	<a class="breadcrumb-element" href="${URLUtils.httpHome()}" title="${Resource.msg('global.breadcrumbs.home', 'locale', null)}">${Resource.msg('global.breadcrumbs.home', 'locale', null)}</a>
+	<iscomment>HOME BREADCRUMB: Commented out based on best practices</iscomment>
+	<!-- <a class="breadcrumb-element breadcrumb-home" href="${URLUtils.httpHome()}" title="${Resource.msg('global.breadcrumbs.home', 'locale', null)}">${Resource.msg('global.breadcrumbs.home', 'locale', null)}</a> -->
 
 	<iscomment>
 		the category context is determined based on the product search
