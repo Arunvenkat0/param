@@ -5,7 +5,7 @@ import Base from './base';
 export const BTN_ADD_TO_CART = '#add-to-cart';
 export const INPUT_QUANTITY = '#Quantity';
 
-export default class ProductDetailPage extends Base {
+export class ProductDetailPage extends Base {
 	constructor (client, loggingLevel) {
 		super(client, loggingLevel);
 	}

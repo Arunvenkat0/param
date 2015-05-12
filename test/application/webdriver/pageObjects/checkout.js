@@ -7,7 +7,7 @@ export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name$="submit"]';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
 
-export default class CheckoutPage extends Base {
+export class CheckoutPage extends Base {
 	constructor(client, loggingLevel) {
 		super(client, loggingLevel);
 		this.basePath = '/checkout';

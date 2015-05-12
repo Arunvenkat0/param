@@ -6,7 +6,7 @@ export const CSS_CART_EMPTY = '.cart-empty';
 export const CSS_CART_ROW = '.cart-row';
 export const BTN_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
 
-export default class CartPage extends Base {
+export class CartPage extends Base {
 	constructor(client) {
 		super(client);
 		this.basePath = '/cart';
