@@ -1956,20 +1956,22 @@ label {
   margin-left: 24.5%;
   width: 62%; }
 
+.field-wrapper {
+  margin-bottom: .5rem;
+  margin-left: 2%;
+  width: 50%; }
+  .form-row .field-wrapper {
+    float: left; }
+
 input[type="text"],
 input[type="number"],
 input[type="password"] {
   border: 1px solid #aaa;
   box-sizing: border-box;
-  margin-left: 2%;
   margin-bottom: .3rem;
   padding: 0.7em 0.5em;
   text-indent: 0;
-  width: 50%; }
-  .form-row input[type="text"],
-  .form-row input[type="number"],
-  .form-row input[type="password"] {
-    float: left; }
+  width: 100%; }
 
 textarea {
   border: 1px solid #aaa;
@@ -1979,9 +1981,10 @@ textarea {
   width: 49.5966%; }
 
 select {
-  text-indent: 0;
-  margin-left: 2%;
-  width: 51.6%; }
+  background-color: #fff;
+  margin-bottom: .3rem;
+  width: 100%;
+  height: 2rem; }
 
 .search-result-options select {
   height: auto; }
@@ -2043,14 +2046,9 @@ input[type="checkbox"], input[type="radio"] {
   border-color: #990000;
   color: #990000; }
 
-span.error {
-  background: none repeat scroll 0 0 transparent;
-  clear: left;
-  display: block;
-  margin: 1% 2% 2% 24%; }
-
+span.error,
 div.error {
-  background: none repeat scroll 0 0 transparent; }
+  background: none; }
 
 .error-form {
   background-color: #cebdb3;

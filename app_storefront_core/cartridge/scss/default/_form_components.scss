@@ -72,19 +72,24 @@ label {
 	width: 62%;
 }
 
+.field-wrapper {
+	margin-bottom: .5rem;
+	margin-left: 2%;
+	width: 50%;
+	.form-row & {
+		float: left;
+	}
+}
+
 input[type="text"],
 input[type="number"],
 input[type="password"] {
 	border: 1px solid $dark-gray;
 	box-sizing: border-box;
-	margin-left: 2%;
 	margin-bottom: .3rem;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
-	width: 50%;
-	.form-row & {
-		float: left;
-	}
+	width: 100%;
 }
 
 
@@ -97,9 +102,10 @@ textarea {
 }
 
 select {
-	text-indent: 0;
-	margin-left: 2%;
-	width: 51.6%;
+	background-color: #fff; // set background color to make height work
+	margin-bottom: .3rem;
+	width: 100%;
+	height: 2rem;
 }
 
 .search-result-options select {
@@ -177,15 +183,9 @@ input[type="checkbox"], input[type="radio"] {
 	color: $sangria;
 }
 
-span.error {
-	background: none repeat scroll 0 0 transparent;
-	clear: left;
-	display: block;
-	margin: 1% 2% 2% 24%;
-}
-
+span.error,
 div.error {
-	background: none repeat scroll 0 0 transparent;
+	background: none;
 }
 
 .error-form {
