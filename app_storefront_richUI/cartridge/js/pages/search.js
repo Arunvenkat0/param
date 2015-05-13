@@ -121,9 +121,9 @@ function initializeEvents() {
 		if (catparent.length > 0 || folderparent.length > 0) {
 			return true;
 		} else {
-			var uri = util.getQueryString(this.href);
-			if (uri.query.length > 1) {
-				window.location.hash = uri.query.substring(1);
+			var query = util.getQueryString(this.href);
+			if (query.length > 1) {
+				window.location.hash = query;
 			} else {
 				window.location.href = this.href;
 			}
