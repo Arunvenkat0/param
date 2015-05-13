@@ -66,6 +66,17 @@
         </content>
     </slot-configuration>
 
+    <slot-configuration slot-id="header-usermenu" context="global" configuration-id="header-social-email" assigned-to-site="true">
+        <description>Header user menu slot containing the social icons and email form for 768 and above.</description>
+        <template>slots/content/menu-slot.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <content-assets>
+                <content-asset content-id="footer-social-email"/>
+            </content-assets>
+        </content>
+    </slot-configuration>
+
     <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="New Slot Configuration - 2012-02-07 15:52:46" assigned-to-site="false">
         <description>test of this</description>
         <template>slots/product/product_1x2.isml</template>
