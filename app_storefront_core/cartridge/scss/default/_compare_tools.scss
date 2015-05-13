@@ -98,10 +98,14 @@
 	table-layout: fixed;
 	width: 100%;
 	th {
+		overflow: hidden;
 		padding: .5em;
 		&:first-of-type {
 			background-color: $gainsboro;
 		}
+	}
+	td {
+		overflow: hidden;
 	}
 	a {
 		&:hover {
