@@ -30,42 +30,56 @@
 			</isif>
 
 			<isscript>
-				var addressDetailsForm = [{
-					name: "addressid",
-					type: "input"
-				}, {
-					name: "firstname",
-					type: "input"
-				}, {
-					name: "lastname",
-					type: "input"
-				}, {
-					name: "address1",
-					type: "input"
-				}, {
-					name: "address2",
-					type: "input"
-				}, {
-					name: "country",
-					type: "select"
-				}, {
-					name: "states.state",
-					type: "select"
-				}, {
-					name: "city",
-					type: "input"
-				}, {
-					name: "postal",
-					type: "input"
-				}, {
-					name: "phone",
-					type: "input",
-					helpcid: "help-telephone",
-					helplabel: Resource.msg('singleshipping.phonerequired', 'checkout', null)
-				}];
+				var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
+				var addressDetailsForm = {
+					addressid: {
+						type: "input"
+					},
+					firstname: {
+						type: "input"
+					},
+					lastname: {
+						type: "input"
+					},
+					address1: {
+						type: "input"
+					},
+					address2: {
+						type: "input"
+					},
+					country: {
+						type: "select"
+					},
+					states: {
+						isFormGroup: true,
+						childField: "state",
+						type: "select"
+					},
+					city: {
+						type: "input"
+					},
+					postal: {
+						type: "input"
+					},
+					postalUS: {
+						skip: true
+					},
+					postalCA: {
+						skip: true
+					},
+					postalDE: {
+						skip: true
+					},
+					phone: {
+						type: "input",
+						helpcid: "help-telephone",
+						helplabel: Resource.msg('singleshipping.phonerequired', 'checkout', null)
+					}
+				};
+				var form = dynamicForm(pdict.CurrentForms.profile.address, addressDetailsForm);
 			</isscript>
 
-			<isdynamicform formobject="${pdict.CurrentForms.profile.address}" formdata="${addressDetailsForm}" />
+			<isprint value="${form}" encoding="off"/>
 
 			<div class="form-row form-row-button">
 				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
