@@ -35,8 +35,8 @@
 		<iscomment>Display the list of bonus products</iscomment>
 		<isif condition="${pdict.BonusDiscountLineItem.bonusProducts.size() == 1}"><!-- one item --></isif>
 
-		<isloop items="${pdict.BonusDiscountLineItem.bonusProducts}" var="LoopProductHit" status="loopstate">
-			<isset name="hasDefaultVariant" value="${!empty(LoopProductHit.variationModel.defaultVariant)}" scope="page"/>
+		<isloop items="${pdict.BonusDiscountLineItem.bonusProducts}" var="LoopProductHit">
+			<isset name="hasDefaultVariant" value="${!empty(LoopProductHit.variationModel)}" scope="page"/>
 			<isset name="Product" value="${hasDefaultVariant ? LoopProductHit : LoopProductHit.variationModel.defaultVariant}" scope="pdict"/>
 
 			<div class="bonus-product-item" id="${'item-'+pdict.Product.UUID}">
