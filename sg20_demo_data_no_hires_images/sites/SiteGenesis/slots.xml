@@ -226,7 +226,7 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="test-recomm-prod-anchor" context="global" configuration-id="Product Recommendations - Recently Viewed from CQ" default="true" assigned-to-site="true">
+    <slot-configuration slot-id="recomm-prod-anchor" context="global" configuration-id="Product Recommendations - Recently Viewed from CQ" default="true" assigned-to-site="true">
         <template>slots/recommendation/product_1x4_recomm.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">Recently Viewed Products</callout-msg>
