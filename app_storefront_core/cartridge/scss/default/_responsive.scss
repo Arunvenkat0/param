@@ -840,17 +840,3 @@
 	}	
 
 }
-
-@media screen and (min-width: 767px) and (max-width: 960px) {
-	.user-panel .menu-slot{
-		width:13.5rem;
-	}
-}
-
-@media screen and (min-width: 0px) and (max-width: 767px) {
-	.user-panel{
-		.menu-slot{
-			display:none;
-		}
-	}
-}

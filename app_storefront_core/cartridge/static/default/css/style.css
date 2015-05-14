@@ -1080,6 +1080,7 @@ div.error {
     margin: 0.5em 0em; }
 
 .menu-slot {
+  display: none;
   border-top: 1px solid #faeded;
   margin-top: 0.5em;
   padding-top: 1.5em; }
@@ -1087,8 +1088,11 @@ div.error {
     padding-left: 0; }
     .menu-slot .social-links li {
       padding-left: 0;
-      display: inline-block;
-      border-top: none 0; }
+      display: inline-block; }
+  @media screen and (min-width: 768px) {
+    .menu-slot {
+      width: 13.5rem;
+      display: block; } }
 
 .top-banner {
   position: relative; }
@@ -4848,14 +4852,6 @@ h1 .account-logout {
     float: none; }
     .pt_content-search-result .pagination .results-hits {
       float: none; } }
-
-@media screen and (min-width: 767px) and (max-width: 960px) {
-  .user-panel .menu-slot {
-    width: 13.5rem; } }
-
-@media screen and (min-width: 0px) and (max-width: 767px) {
-  .user-panel .menu-slot {
-    display: none; } }
 
 @media print {
   .pt_order-confirmation #mini-cart,
