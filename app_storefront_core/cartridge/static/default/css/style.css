@@ -4849,6 +4849,10 @@ h1 .account-logout {
     .pt_content-search-result .pagination .results-hits {
       float: none; } }
 
+@media screen and (min-width: 0px) and (max-width: 767px) {
+  .user-panel .menu-slot {
+    display: none; } }
+
 @media print {
   .pt_order-confirmation #mini-cart,
   .pt_order-confirmation .menu-utility-user,
