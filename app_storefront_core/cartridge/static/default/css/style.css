@@ -1083,8 +1083,12 @@ div.error {
   border-top: 1px solid #faeded;
   margin-top: 0.5em;
   padding-top: 1.5em; }
-  .menu-slot .social-links li {
-    padding: 0.1em; }
+  .menu-slot .social-links {
+    padding-left: 0; }
+    .menu-slot .social-links li {
+      padding-left: 0;
+      display: inline-block;
+      border-top: none 0; }
 
 .top-banner {
   position: relative; }
@@ -1894,7 +1898,7 @@ footer {
       text-decoration: none; }
 
 .social-links {
-  padding-bottom: 2em; }
+  padding-left: 0; }
   .social-links li {
     display: inline;
     float: none;

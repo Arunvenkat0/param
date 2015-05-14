@@ -107,8 +107,11 @@
 	margin-top: 0.5em;
 	padding-top: 1.5em;
 	.social-links {
+		padding-left: 0;
 		li {
-			padding: 0.1em;
+			padding-left: 0;
+			display: inline-block;
+			border-top: none 0;
 		}
 	}
 }
