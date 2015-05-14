@@ -46,36 +46,45 @@
 	margin-left: 1em;
 }
 
-.search-suggestion-normal-link {}
-
 .search-suggestion-left-panel-hit {
 	margin-left: 1em;
 }
 
-.search-suggestion-normal-link:hover,
 .search-suggestion-left-panel-hitgroup-link:hover,
 .search-suggestion-left-panel-hit:hover {
 	text-decoration: underline;
 }
 
 .product-suggestion {
-	padding: .5em;
-	.product-image {
-		display: inline-block;
-		text-align: center;
-		width: 25%;
-	}
-	.product-details {
-		display: inline;
-		float: right;
-		padding: .5em 0 0 .5em;
-		width: 70%;
+	.product-link {
+		border: 1px solid $white;
+		border-top: 1px solid $very-light-gray;
+		display: block;
+		padding: .5em;
+		&:hover,
+		&:focus {
+			background-color: $gainsboro;
+			border: 1px solid $very-light-gray;
+		}
+		.product-image {
+			display: inline-block;
+			text-align: center;
+			width: 25%;
+		}
+		.product-details {
+			display: inline;
+			float: right;
+			padding-top: .5em;
+			width: 70%;
+			.product-price {
+				color: $black;
+			}
+		}
 	}
 }
 
 .search-phrase-suggestion {
-	margin-top: 1em;
-	margin-left: 1em;
+	margin: 1em;
 }
 
 .search-suggestion-right-panel {
