@@ -103,7 +103,7 @@
 }
 
 .menu-slot {
-	display:none;
+	display: none;
 	border-top: 1px solid $tutu;
 	margin-top: 0.5em;
 	padding-top: 1.5em;
@@ -115,7 +115,7 @@
 		}
 	}
 	@media screen and (min-width: 768px) {
-		width:13.5rem;
-		display:block;
+		width: 13.5rem;
+		display: block;
 	}
 }
