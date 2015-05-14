@@ -1,14 +1,10 @@
 'use strict';
 
-var assert = require('chai').assert;
-var client = require('../webdriver/client');
-var config = require('../webdriver/config');
-
-var CartPage = require('../webdriver/pageObjects/cart');
-var cartPage = new CartPage(client);
-
-var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
-var productDetailPage = new ProductDetailPage(client);
+import {assert} from 'chai';
+import client from '../webdriver/client';
+import config from '../webdriver/config';
+import * as cartPage from '../webdriver/pageObjects/cart';
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 
 describe('Cart - Simple', () => {

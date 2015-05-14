@@ -1,68 +1,55 @@
 'use strict';
 
-var Base = require('./base');
-var assert = require('chai').assert;
+import client from '../client';
+import config from '../config';
 
-class ProductDetailPage extends Base {
-	constructor (client, loggingLevel) {
-		super(client, loggingLevel);
+export const BTN_ADD_TO_CART = '#add-to-cart';
+export const INPUT_QUANTITY = '#Quantity';
 
-		this.btnAddToCart = '#add-to-cart';
-		this.inputQuantity = '#Quantity';
-	}
-
-	isAddToCartEnabled () {
-		return this.client.isEnabled(this.btnAddToCart)
-			.then(function (enabled) {
-				assert.ok(enabled);
-			});
-	}
-
-	selectColorByIndex (idx) {
-		this.client.click('.swatches.color li:nth-child(' + idx + ') a');
-	}
-
-	selectSizeByIndex (idx) {
-		this.client.click('.swatches.size li:nth-child(' + idx + ') a');
-		return this.client.pause(500);
-	}
-
-	setQuantity (value) {
-		return this.client.setValue(this.inputQuantity, value);
-	}
-
-	pressBtnAddToCart () {
-		return this.client.click(this.btnAddToCart);
-	}
-
-	/**
-	 * Adds a Product Variation to the Cart
-	 *
-	 * @param {Map} product Product Map comprised of the following:
-	 * @param {String} product.resourcePath - Product Detail Page URL resource path
-	 * @param {Number} [product.colorIndex] - If product variations with Color,
-	 *     this represents the index value for the color options
-	 * @param {number} [product.sizeIndex]  - If product variations with Size,
-	 *     this represents the index value for the size options
-	 */
-	addProductVariationToCart (product) {
-		this.navigateTo(product.get('resourcePath'));
-
-		// The order of these two conditionals is important, as the selection
-		// of the Color value drives the available Size options (if available).
-		if (product.has('colorIndex')) {
-			this.selectColorByIndex(product.get('colorIndex'));
-		}
-		if (product.has('sizeIndex')) {
-			this.selectSizeByIndex(product.get('sizeIndex'));
-		}
-
-		this.isAddToCartEnabled();
-		this.pressBtnAddToCart();
-
-		return this.client;
-	}
+export function navigateTo (path = basePath) {
+	return client.url(config.url + path);
 }
 
+export function selectColorByIndex (idx) {
+	client.click('.swatches.color li:nth-child(' + idx + ') a');
+}
 
-module.exports = ProductDetailPage;
+export function selectSizeByIndex (idx) {
+	client.click('.swatches.size li:nth-child(' + idx + ') a');
+	return client.pause(500);
+}
+
+export function setQuantity (value) {
+	return client.setValue(INPUT_QUANTITY, value);
+}
+
+export function pressBtnAddToCart () {
+	return client.click(BTN_ADD_TO_CART);
+}
+
+/**
+ * Adds a Product Variation to the Cart
+ *
+ * @param {Map} product Product Map comprised of the following:
+ * @param {String} product.resourcePath - Product Detail Page URL resource path
+ * @param {Number} [product.colorIndex] - If product variations with Color,
+ *     this represents the index value for the color options
+ * @param {number} [product.sizeIndex]  - If product variations with Size,
+ *     this represents the index value for the size options
+ */
+export function addProductVariationToCart (product) {
+	navigateTo(product.get('resourcePath'));
+
+	// The order of these two conditionals is important, as the selection
+	// of the Color value drives the available Size options (if available).
+	if (product.has('colorIndex')) {
+		selectColorByIndex(product.get('colorIndex'));
+	}
+	if (product.has('sizeIndex')) {
+		selectSizeByIndex(product.get('sizeIndex'));
+	}
+
+	pressBtnAddToCart();
+
+	return client;
+}

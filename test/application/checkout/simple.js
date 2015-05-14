@@ -1,11 +1,11 @@
 'use strict';
 
-var assert = require('chai').assert;
-var client = require('../webdriver/client');
-var CheckoutPage = require('../webdriver/pageObjects/checkout');
-var checkoutPage = new CheckoutPage(client);
-var ProductDetailPage = require('../webdriver/pageObjects/productDetail');
-var productDetailPage = new ProductDetailPage(client);
+import {assert} from 'chai';
+
+import client from '../webdriver/client';
+import * as checkoutPage from '../webdriver/pageObjects/checkout';
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
+
 
 describe('Checkout Simple Product', () => {
 	var shippingFormData = new Map();
@@ -57,12 +57,12 @@ describe('Checkout Simple Product', () => {
 	it('should allow saving of Shipping form when required fields filled', () =>
 		checkoutPage.fillOutShippingForm(shippingFormData)
 			.then(() => checkoutPage.checkUseAsBillingAddress())
-			.then(() => client.isEnabled(checkoutPage.btnContinueShippingSave))
+			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 			.then(savable => assert.ok(savable))
 	);
 
 	it('should redirect to the Billing page after Shipping saved', () =>
-		client.click(checkoutPage.btnContinueShippingSave)
+		client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE)
 			.then(() => checkoutPage.getActiveBreadCrumb())
 			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
 	);
@@ -70,23 +70,23 @@ describe('Checkout Simple Product', () => {
 	// Fill in Billing Form
 	it('should allow saving of Billing Form when required fields filled', () =>
 		checkoutPage.fillOutBillingForm(billingFormData)
-			.then(() => client.isEnabled(checkoutPage.btnContinueBillingSave))
+			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should redirect to the Place Order page after Billing saved', () =>
-		client.click(checkoutPage.btnContinueBillingSave)
+		client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
 			.then(() => checkoutPage.getActiveBreadCrumb())
 			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 3: Place Order'))
 	);
 
 	it('should enable the Place Order button when Place Order page reached', () =>
-		client.isEnabled(checkoutPage.btnPlaceOrder)
+		client.isEnabled(checkoutPage.BTN_PLACE_ORDER)
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should redirect to Order Confirmation page after a successful order submission', () =>
-		client.click(checkoutPage.btnPlaceOrder)
+		client.click(checkoutPage.BTN_PLACE_ORDER)
 			.then(() => checkoutPage.getLabelOrderConfirmation())
 			.then(title => assert.equal(title, 'Thank you for your order.'))
 	);
