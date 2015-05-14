@@ -3,9 +3,6 @@
 
 <div class="breadcrumb">
 
-	<iscomment>HOME BREADCRUMB: Commented out based on best practices</iscomment>
-	<!-- <a href="${URLUtils.httpHome()}" class="breadcrumb-element breadcrumb-home" title="${Resource.msg('global.home', 'locale', null)}">${Resource.msg('global.home', 'locale', null)}</a> -->
-
 	<iscomment>SEARCH PHRASE INFO </iscomment>
 	<isif condition="${!empty(pdict.ContentSearchResult) && !empty(pdict.ContentSearchResult.searchPhrase)}">
 		<span class="breadcrumb-element resultstext">
