@@ -3778,11 +3778,6 @@ footer {
     cursor: pointer;
     max-width: 53px; }
   .product-thumbnails h2 {
-    text-transform: uppercase;
-    font-family: Arial, sans-serif;
-    font-size: 1.5em;
-    font-style: normal;
-    font-weight: bold;
     margin: .83em 0; }
 
 .pdp-main .product-col-2 {
@@ -3794,7 +3789,8 @@ footer {
 
 .pdp-main .product-number {
   color: #ccc;
-  font-size: 0.9em; }
+  font-size: 0.65rem;
+  padding-bottom: .4em; }
 
 .pdp-main .product-price {
   font-size: 1.5rem;
@@ -3814,8 +3810,7 @@ footer {
 
 .pdp-main .product-review .rating {
   color: #990000;
-  float: left;
-  width: 75%; }
+  padding-bottom: .4em; }
 
 .pdp-main .product-main-attributes .attribute {
   padding: 0.2em 0; }
@@ -3901,25 +3896,23 @@ footer {
       border-style: solid;
       border-width: 1px 1px 3px;
       display: block;
-      line-height: 3.5em;
+      line-height: 3.5;
       min-height: 42px;
       min-width: 42px;
       margin: 0 0.7em 0.7em 0;
-      padding: 0 0.05em;
+      padding: 0.08em;
       text-align: center;
       white-space: nowrap; }
       @media screen and (min-width: 768px) {
         .product-variations .swatches li a,
         .product-options .swatches li a {
-          line-height: 2.7em;
+          line-height: 2.7;
           min-height: 32px;
-          min-width: 32px;
-          padding: 0 0.05em; } }
+          min-width: 32px; } }
   .product-variations .color li a,
   .product-options .color li a {
     height: 42px;
     line-height: 0;
-    padding: 2px;
     width: 42px; }
     @media screen and (min-width: 768px) {
       .product-variations .color li a,
