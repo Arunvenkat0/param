@@ -3,11 +3,8 @@
 import {assert} from 'chai';
 import client from '../webdriver/client';
 import config from '../webdriver/config';
-import * as cartModule from '../webdriver/pageObjects/cart';
-import * as pdpModule from '../webdriver/pageObjects/productDetail';
-
-var cartPage = new cartModule.CartPage(client);
-var productDetailPage = new pdpModule.ProductDetailPage(client);
+import * as cartPage from '../webdriver/pageObjects/cart';
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 
 describe('Cart - Simple', () => {
