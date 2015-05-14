@@ -103,12 +103,19 @@
 }
 
 .menu-slot {
+	display: none;
 	border-top: 1px solid $tutu;
 	margin-top: 0.5em;
 	padding-top: 1.5em;
 	.social-links {
+		padding-left: 0;
 		li {
-			padding: 0.1em;
+			display: inline-block;
+			padding-left: 0;
 		}
+	}
+	@media screen and (min-width: 768px) {
+		width: 13.5rem;
+		display: block;
 	}
 }
