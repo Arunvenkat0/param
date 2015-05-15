@@ -3,7 +3,7 @@
 import {assert} from 'chai';
 
 import client from '../webdriver/client';
-import * as checkoutPage from '../webdriver/pageObjects/checkout0';
+import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 
