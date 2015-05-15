@@ -3,7 +3,7 @@
 import client from '../client';
 import config from '../config';
 
-export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="dwfrm_billing_save"]';
+export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name$="submit"]';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
@@ -82,8 +82,7 @@ export function fillOutBillingForm (billingFields) {
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
 		_populateField(fieldType, selector, value);
 	}
-
-	return client;
+	return client.pause(200);
 }
 
 export function checkUseAsBillingAddress () {

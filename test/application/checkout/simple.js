@@ -63,8 +63,8 @@ describe('Checkout Simple Product', () => {
 	// Fill in Billing Form
 	it('should allow saving of Billing Form when required fields filled', () =>
 		checkoutPage.fillOutBillingForm(billingFormData)
-			.then(() => client.pause(200))
 			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+			.then(enabled => assert.ok(enabled))
 		);
 
 	it('should redirect to the Place Order page after Billing saved', () =>
