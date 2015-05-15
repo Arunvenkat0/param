@@ -28,14 +28,19 @@
 		margin-top: 0;
 	}
 	.ui-dialog-titlebar-close {
+		background-color: transparent;
 		border: 0 none;
 		border-radius: 0 0 0 0;
 		height: 32px;
 		margin: 0;
+		opacity: .5;
 		padding: 0;
 		right: 0;
 		top: 0;
 		width: 32px;
+		&:hover {
+			opacity: 1;
+		}
 		span {
 			margin: 0;
 			padding: 0;
