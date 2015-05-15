@@ -3,7 +3,7 @@
 import client from '../client';
 import config from '../config';
 
-export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
+export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="dwfrm_billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name$="submit"]';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
@@ -77,18 +77,13 @@ export function fillOutBillingForm (billingFields) {
 		fieldPrefix: 'billing_paymentMethods_'
 	});
 
-	// Keeps track of most recently filled in field.  Will be used to insert
-	// a tab character to remove focus from it before form submission
-	var lastFilledField;
-
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		lastFilledField = selector;
 		_populateField(fieldType, selector, value);
 	}
 
-	return client.addValue(lastFilledField, 'Tab');
+	return client;
 }
 
 export function checkUseAsBillingAddress () {
