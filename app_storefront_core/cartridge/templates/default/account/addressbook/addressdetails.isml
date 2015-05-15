@@ -32,21 +32,6 @@
 			<isscript>
 				var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
 				var addressDetailsForm = {
-					addressid: {
-						type: "input"
-					},
-					firstname: {
-						type: "input"
-					},
-					lastname: {
-						type: "input"
-					},
-					address1: {
-						type: "input"
-					},
-					address2: {
-						type: "input"
-					},
 					country: {
 						type: "select"
 					},
@@ -54,12 +39,6 @@
 						isFormGroup: true,
 						childField: "state",
 						type: "select"
-					},
-					city: {
-						type: "input"
-					},
-					postal: {
-						type: "input"
 					},
 					postalUS: {
 						skip: true

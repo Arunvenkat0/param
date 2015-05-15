@@ -49,9 +49,10 @@ module.exports = function (formObject, formData) {
 		var formElement = formObject[formElementName];
 		var fieldData = formData[formElementName];
 		if (formElement instanceof FormField) {
-			if (!fieldData.skip) {
-				form += parseFormField(formElement, fieldData);
+			if (fieldData && fieldData.skip) {
+				continue;
 			}
+			form += parseFormField(formElement, fieldData);
 		} else if (formElement instanceof FormGroup) {
 			if (fieldData && fieldData.isFormGroup && fieldData.childField) {
 				var childFieldElement = formElement[fieldData.childField];
