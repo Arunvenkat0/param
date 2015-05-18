@@ -99,6 +99,90 @@ Other configurations are also available, see below.
 This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
 Other configurations are also available, see below.
 
+### Test user accounts
+
+Here are some generic test accounts that are used in the application tests suite, 
+along with their differences for testing different scenarios:
+( **Note** : The password for each account is **Test123!** )
+
+<table cellspacing=1 cellpadding=2 border=1>
+<thead>
+	<tr>
+		<th>Email</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Address1:</th>
+		<th>City</th>
+		<th>State Code</th>
+		<th>Postal Code</th>
+		<th>Country Code</th>
+		<th>Phone</th>
+		<th>AddressID</th>
+		<th>Preferred Address</th>
+		<th>Gender</th>
+	</tr>
+</thead>
+<tr>
+	<td align='center'>testuser1@demandware.com</td>
+	<td align='center'>Test1</td>
+	<td align='center'>User1</td>
+	<td align='center'>104 Presidential Way</td>
+	<td align='center'>Woburn</td>
+	<td align='center'>MA</td>
+	<td align='center'>01801</td>
+	<td align='center'>US</td>
+	<td align='center'>781-555-1212</td>
+	<td align='center'>Home</td>
+	<td align='center'>&#10004;</td>
+	<td align='center'>F</td>
+</tr>
+<tr>
+	<td align='center'></td>
+	<td align='center'>Test1</td>
+	<td align='center'>User1</td>
+	<td align='center'>91 Middlesex Tpke</td>
+	<td align='center'>Woburn</td>
+	<td align='center'>MA</td>
+	<td align='center'>01801</td>
+	<td align='center'>US</td>
+	<td align='center'>781-555-1212</td>
+	<td align='center'>Work</td>
+	<td align='center'></td>
+	<td align='center'></td>
+</tr>
+
+<tr>
+	<td align='center'>testuser2@demandware.com</td>
+	<td align='center'>Test2</td>
+	<td align='center'>User2</td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'>M</td>
+</tr>
+
+<tr>
+	<td align='center'>testuser3@demandware.com</td>
+	<td align='center'>Test3</td>
+	<td align='center'>User3</td>
+	<td align='center'>3486 Mission St</td>
+	<td align='center'>San Francisco</td>
+	<td align='center'>CA</td>
+	<td align='center'>94110</td>
+	<td align='center'>US</td>
+	<td align='center'>415-555-1212</td>
+	<td align='center'>Mom's</td>
+	<td align='center'>&#10004;</td>
+	<td align='center'>F</td>
+</tr>
+
+</table>
+
 ### Options
 The following options are supported on the command line:
 
