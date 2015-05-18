@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <customers xmlns="http://www.demandware.com/xml/impex/customer/2006-10-31">
+
+     <customer customer-no="S0000006">
+        <credentials>
+            <login>wsobchak@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$1wBbA4uUUmJ5kKRFWs7mEA==$ATbUTqa2N/6srhYAsibdvvFYESFfPfwe8FehRn7FJWQ=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Walter</first-name>
+            <second-name/>
+            <last-name>Sobchak</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>wsobchak@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-05-15T18:59:49.770Z</creation-date>
+            <last-login-time>2015-05-15T18:59:49.845Z</last-login-time>
+            <last-visit-time>2015-05-15T18:59:49.845Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="104 presidential way" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Walter</first-name>
+                <second-name/>
+                <last-name>Sobchak</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>104 presidential way</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Woburn</city>
+                <postal-code>01801</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>3333333333</phone>
+            </address>
+            <address address-id="10 presidential way" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Walter</first-name>
+                <second-name/>
+                <last-name>Sobchak</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>10 presidential ways</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>woburn</city>
+                <postal-code>01801</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>9009009000</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
     <customer customer-no="S00000005">
         <credentials>
             <login>patricia@demandware.com</login>
