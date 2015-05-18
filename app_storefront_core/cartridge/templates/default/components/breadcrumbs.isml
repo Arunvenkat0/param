@@ -7,9 +7,6 @@
 </iscomment>
 
 <div class="breadcrumb">
-	<iscomment>HOME BREADCRUMB</iscomment>
-	<a class="breadcrumb-element" href="${URLUtils.httpHome()}" title="${Resource.msg('global.home','locale',null)}">${Resource.msg('global.home','locale',null)}</a></li>
-
 	<iscomment>FIRST BREADCRUMB</iscomment>
 	<isif condition="${pdict.bctext1 != null}">
 		<a class="breadcrumb-element" <isif condition="${pdict.bcurl1 != null}">href="${pdict.bcurl1}"</isif> title="${pdict.bctext1}">${pdict.bctext1}</a>
