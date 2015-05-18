@@ -77,18 +77,12 @@ export function fillOutBillingForm (billingFields) {
 		fieldPrefix: 'billing_paymentMethods_'
 	});
 
-	// Keeps track of most recently filled in field.  Will be used to insert
-	// a tab character to remove focus from it before form submission
-	var lastFilledField;
-
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		lastFilledField = selector;
 		_populateField(fieldType, selector, value);
 	}
-
-	return client.addValue(lastFilledField, 'Tab');
+	return client.pause(200);
 }
 
 export function checkUseAsBillingAddress () {

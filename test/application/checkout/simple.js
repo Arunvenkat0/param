@@ -42,13 +42,6 @@ describe('Checkout Simple Product', () => {
 
 	it('should allow checkout as guest', () =>
 		checkoutPage.pressBtnCheckoutAsGuest()
-			/**
-			 * attribute may come back as "step-1 active" or
-			 * "step-1 inactive".  If the latter,
-			 * assert.include(attribute, 'active') still
-			 * resolves as true.  Splitting the string into an array
-			 * correctly evaluates the condition.
-			 */
 			.then(() => checkoutPage.getActiveBreadCrumb())
 			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 1: Shipping'))
 	);
@@ -72,7 +65,7 @@ describe('Checkout Simple Product', () => {
 		checkoutPage.fillOutBillingForm(billingFormData)
 			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 			.then(enabled => assert.ok(enabled))
-	);
+		);
 
 	it('should redirect to the Place Order page after Billing saved', () =>
 		client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
