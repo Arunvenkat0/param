@@ -43,6 +43,7 @@
     "gulp-util": "^3.0.0",
     "handlebars": "^3.0.1",
     "hbsfy": "^2.2.1",
+    "jscs": "^1.13.1",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^3.1.0",
     "merge-stream": "^0.1.7",
@@ -58,7 +59,8 @@
     "xtend": "^4.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/unit/**/*.js",
+    "lint": "jshint app_storefront_richUI/cartridge/js --reporter node_modules/jshint-stylish/stylish.js && jscs app_storefront_richUI/cartridge/js"
   },
   "repository": {
     "type": "git",
