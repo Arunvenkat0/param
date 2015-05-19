@@ -3,6 +3,7 @@
 var URLAction = require('dw/web/URLAction');
 var URLParameter = require('dw/web/URLParameter');
 var URLUtils = require('dw/web/URLUtils');
+var Site = require('dw/system/Site');
 
 /**
  * @description Generate URL for the current request with locale
@@ -11,8 +12,7 @@ var URLUtils = require('dw/web/URLUtils');
  */
 exports.getCurrent = function getCurrent(pdict, locale) {
 	var currentAction = pdict.CurrentSession.clickStream.last.pipelineName;
-	var queryString = pdict.CurrentSession.clickStream.last.queryString;
-	var siteId = dw.system.Site.getCurrent().getID();
+	var siteId = Site.getCurrent().getID();
 	if (!locale) {
 		locale = 'default';
 	}
@@ -33,5 +33,5 @@ exports.getCurrent = function getCurrent(pdict, locale) {
 
 	return pdict.CurrentRequest.httpProtocol + '://' +
 		pdict.CurrentRequest.httpHost +
-		URLUtils.url.apply(null, args);
+		URLUtils.url.apply(null, parameters);
 };
