@@ -60,7 +60,7 @@
   },
   "scripts": {
     "test": "mocha test/unit/**/*.js",
-    "lint": "jshint app_storefront_richUI/cartridge/js --reporter node_modules/jshint-stylish/stylish.js && jscs app_storefront_richUI/cartridge/js"
+    "lint": "jshint . --reporter node_modules/jshint-stylish/stylish.js && jscs ."
   },
   "repository": {
     "type": "git",
