@@ -29,25 +29,36 @@
 				</span>
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.addressid}" type="input"/>
+			<isscript>
+				var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
+				var addressDetailsForm = {
+					country: {
+						type: "select"
+					},
+					states: {
+						isFormGroup: true,
+						childField: "state",
+						type: "select"
+					},
+					postalUS: {
+						skip: true
+					},
+					postalCA: {
+						skip: true
+					},
+					postalDE: {
+						skip: true
+					},
+					phone: {
+						type: "input",
+						helpcid: "help-telephone",
+						helplabel: Resource.msg('singleshipping.phonerequired', 'checkout', null)
+					}
+				};
+				var form = dynamicForm(pdict.CurrentForms.profile.address, addressDetailsForm);
+			</isscript>
 
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.firstname}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.lastname}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address1}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.address2}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.country}" type="select"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.states.state}" type="select"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.city}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.postal}" type="input"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.profile.address.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
+			<isprint value="${form}" encoding="off"/>
 
 			<div class="form-row form-row-button">
 				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
