@@ -7,9 +7,10 @@
 
 'use strict';
 
-var dialog = require('./dialog'),
+var countries = require('./countries'),
+	dialog = require('./dialog'),
 	minicart = require('./minicart'),
-	mulitcurrency = require('./multicurrency'),
+	multicurrency = require('./multicurrency'),
 	page = require('./page'),
 	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
@@ -171,12 +172,13 @@ var app = {
 		initializeEvents();
 
 		// init specific global components
+		countries.init();
 		tooltip.init();
 		minicart.init();
 		validator.init();
 		rating.init();
 		searchplaceholder.init();
-		mulitcurrency.init();
+		multicurrency.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
 		var ns = page.ns;

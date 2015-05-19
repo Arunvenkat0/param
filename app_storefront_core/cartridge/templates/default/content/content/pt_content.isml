@@ -8,34 +8,33 @@
 <head>
 
 	<isinclude template="util/modules"/>
-	
+
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="content/content/pt_content_UI"/>
 
-	<iscomment>Add template-specific header information here.</iscomment>	
-		
+	<iscomment>Add template-specific header information here.</iscomment>
+
 </head>
 
 <body>
 
 	<div id="wrapper" class="pt_content">
-	
 		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
-		
+
 		<div id="main" role="main" class="full-width clearfix">
-			<isinclude template="components/browsertoolscheck"/>		
+			<isinclude template="components/browsertoolscheck"/>
 			<isinclude template="components/contentbreadcrumbs"/>
-		
-			<div id="primary" class="primary-content">			
-				<isreplace/>			
+
+			<div id="primary" class="primary-content">
+				<isreplace/>
 			</div>
-			
+
 		</div>
-	
-	
+
+
 		<isinclude template="components/footer/footer"/>
 		<isinclude template="content/content/pt_content_VARS"/>
-		
+
 	</div>
 </body>
 </html>

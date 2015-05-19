@@ -1,6 +1,9 @@
-@import "normalize";
-// @import "icomoon";
 @import "variables";
+
+// lib
+@import "lib/normalize";
+@import "lib/flag-icon-css/flag-icon";
+
 @import "base_elements";
 @import "page_layouts";
 @import "jqueryui";
@@ -8,7 +11,7 @@
 @import "product_lists";
 @import "base_tooltip";
 @import "content_assets_slots";
-@import "header";
+@import "header/header";
 @import "minicart";
 @import "breadcrumbs";
 @import "primary_region_elements";

@@ -122,7 +122,7 @@ gulp.task('test:unit', function () {
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
 	gulp.watch(paths.css.map(function (path) {
-		return path.src + '*.scss';
+		return path.src + '**/*.scss';
 	}), ['css']);
 });
 
@@ -181,7 +181,7 @@ gulp.task('css:styleguide', function () {
 
 gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide', 'connect:styleguide'], function () {
 	var styles = paths.css.map(function (path) {
-		return path.src + '*.scss';
+		return path.src + '**/*.scss';
 	});
 	styles.push('styleguide/scss/*.scss');
 	gulp.watch(styles, ['css:styleguide']);

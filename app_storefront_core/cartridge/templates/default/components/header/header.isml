@@ -39,6 +39,9 @@
 
 		</ul>
 
+		<iscomment>Country Selector</iscomment>
+		<isinclude template="components/header/countryselector"/>
+
 		<iscomment>Multi-Currency Selection</iscomment>
 		<isinclude template="components/header/multicurrency"/>
 
