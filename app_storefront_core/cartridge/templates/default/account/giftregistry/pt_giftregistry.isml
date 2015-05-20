@@ -28,7 +28,7 @@
 
 	<div id="wrapper" class="pt_gift-registry">
 
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="clearfix page-content">
 			<isinclude template="components/browsertoolscheck"/>

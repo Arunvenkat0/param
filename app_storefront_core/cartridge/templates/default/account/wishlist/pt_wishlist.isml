@@ -23,7 +23,7 @@
 <body>
 	<div id="wrapper" class="pt_wish-list">
 
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="page-content clearfix">
 
