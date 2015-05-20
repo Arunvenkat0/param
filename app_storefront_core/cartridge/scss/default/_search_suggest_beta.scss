@@ -1,12 +1,10 @@
 #search-suggestions {
 	background-color: $white;
 	border: 1px solid $nobel;
-	border-radius: 10px;
 	box-shadow: 0 3px 3px 0 rgba(0,0,0,.25);
-	top: 28px;
 	right: 0;
 	position: absolute;
-	z-index: 8184;
+	z-index: 10;
 }
 
 .search-suggestion-wrapper {
@@ -56,29 +54,29 @@
 }
 
 .product-suggestion {
-	.product-link {
-		border: 1px solid $white;
-		border-top: 1px solid $very-light-gray;
-		display: block;
-		padding: .5em;
-		&:hover,
-		&:focus {
-			background-color: $gainsboro;
-			border: 1px solid $very-light-gray;
+	border: 1px solid $white;
+	border-top: 1px solid $very-light-gray;
+	padding: .5em;
+	&:hover,
+	&:focus {
+		background-color: $gainsboro;
+		border: 1px solid $very-light-gray;
+	}
+	.product-image {
+		display: inline-block;
+		text-align: center;
+		width: 25%;
+		img {
+			max-width: 100%;
 		}
-		.product-image {
-			display: inline-block;
-			text-align: center;
-			width: 25%;
-		}
-		.product-details {
-			display: inline;
-			float: right;
-			padding-top: .5em;
-			width: 70%;
-			.product-price {
-				color: $black;
-			}
+	}
+	.product-details {
+		display: inline;
+		float: right;
+		padding-top: .5em;
+		width: 70%;
+		.product-price {
+			color: $black;
 		}
 	}
 }
