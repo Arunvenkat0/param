@@ -3659,9 +3659,12 @@ footer {
   table-layout: fixed;
   width: 100%; }
   #compare-table th {
+    overflow: hidden;
     padding: .5em; }
     #compare-table th:first-of-type {
       background-color: #e0e0e0; }
+  #compare-table td {
+    overflow: hidden; }
   #compare-table a:hover {
     text-decoration: underline; }
   #compare-table .attribute-row {
