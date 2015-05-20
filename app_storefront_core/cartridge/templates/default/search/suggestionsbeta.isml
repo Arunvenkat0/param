@@ -165,6 +165,7 @@
                             	<isset name="productSearchHit" value="${suggestedProduct.getProductSearchHit()}" scope="page"/>
                                 <isset name="product" value="${productSearchHit.getProduct()}" scope="page"/>
                              	<div class="product-suggestion">
+					<a class="product-link" href="${URLUtils.url('Product-Show', 'pid', product.getID())}">
                                 	<isset name="productImage" value="${product.getImage('small')}" scope="page"/>
                                 		<div class="product-image">
                                         	<isif condition="${productImage != null}">
@@ -174,9 +175,10 @@
                                         	</isif>
                                         </div>
                                    		<div class="product-details">
-                                        	<div class="product-name"><a class="search-suggestion-normal-link" href="${URLUtils.url('Product-Show', 'pid', product.getID())}"><isprint value="${product.name}" /></a></div>
+						<div class="product-name"><isprint value="${product.name}" /></div>
                                            	<div class="product-price">${Resource.msg('search.suggest.from','search',null)} <isprint value="${productSearchHit.getMinPrice()}" /></div>
                                      	</div>
+				     </a>
                           		</div>
                         	</isloop>
                         </isif>
