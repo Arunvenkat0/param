@@ -15523,27 +15523,27 @@
             </price-table>
 
             <price-table product-id="S2510211">
-                <amount quantity="1">288.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
             <price-table product-id="apple-ipod-classic-black-120g">
-                <amount quantity="1">143.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
             <price-table product-id="apple-ipod-classic-silver-120g">
-                <amount quantity="1">158.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
             <price-table product-id="canon-powershot-sd1100-is">
-                <amount quantity="1">288.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
             <price-table product-id="sony-kdl-40w4100">
-                <amount quantity="1">1080.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
             <price-table product-id="sony-ps3-bundle">
-                <amount quantity="1">323.00</amount>
+                <amount quantity="1">00.00</amount>
             </price-table>
 
         </price-tables>
