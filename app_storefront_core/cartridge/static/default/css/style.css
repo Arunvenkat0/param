@@ -1851,8 +1851,7 @@ input[type="button"] {
       padding: 0; }
   .ui-dialog h1,
   .ui-dialog h2 {
-    font-size: 1.8em;
-    font-style: italic;
+    font-size: 1.75em;
     font-weight: 400;
     margin: 5px 158px 5px 0; }
   .ui-dialog .dialog-required {
@@ -2992,7 +2991,6 @@ nav[role="navigation"] {
 
 .primary-content h1 {
   font-size: 1.75em;
-  font-style: italic;
   font-weight: 400;
   margin: 0 0 14px; }
 
@@ -3803,12 +3801,7 @@ footer {
   width: auto; }
 
 .pdp-main .product-name {
-  float: right;
-  font-size: 1.8em;
-  font-style: italic;
-  font-weight: 400;
-  margin: 26px 158px 4px 0;
-  width: 43%; }
+  margin: 0; }
 
 .pdp-main .product-number {
   color: #ccc;
@@ -5037,10 +5030,6 @@ h1 .account-logout {
 
 .js .ui-dialog-content .product-col-2 {
   padding: 20px 0;
-  width: 58%; }
-
-.js .ui-dialog-content .pdp-main h1.product-name {
-  margin: 0.4em 0 0.1em;
   width: 58%; }
 
 .js .ui-dialog-content .pdp-main .product-set-list {
