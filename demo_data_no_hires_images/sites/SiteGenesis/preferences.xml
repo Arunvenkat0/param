@@ -24,8 +24,8 @@
             <preference preference-id="SiteDefaultLocale">en_US</preference>
             <preference preference-id="SiteLibrary">SiteGenesisSharedLibrary</preference>
             <preference preference-id="SiteInventoryList">inventory</preference>
-            <preference preference-id="SiteLocales">en_US:default</preference>
-            <preference preference-id="SitePriceBooks">eur-list-prices:eur-sale-prices:usd-list-prices:usd-sale-prices</preference>
+            <preference preference-id="SiteLocales">default:fr_FR:it_IT:ja_JP:zh_CN:en_US</preference>
+            <preference preference-id="SitePriceBooks">cny-list-prices:cny-sale-prices:eur-list-prices:eur-sale-prices:jpy-list-prices:jpy-sale-prices:usd-list-prices:usd-sale-prices</preference>
             <preference preference-id="StorefrontURLsEnabled">true</preference>
         </all-instances>
         <development>
