@@ -41,10 +41,9 @@ var searchsuggest = {
 	 * @description Configures parameters and required object instances
 	 */
 	init: function (container, defaultValue) {
-		var $searchContainer = $(container),
-			$searchForm = $searchContainer.find('form[name="simpleSearch"]'),
-			$searchField = $searchForm.find('input[name="q"]'),
-			fieldDefault = defaultValue;
+		var $searchContainer = $(container);
+		var $searchForm = $searchContainer.find('form[name="simpleSearch"]');
+		var $searchField = $searchForm.find('input[name="q"]');
 
 		// disable browser auto complete
 		$searchField.attr('autocomplete', 'off');
@@ -55,13 +54,15 @@ var searchsuggest = {
 				// create results container if needed
 				$resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
 			}
-			if ($searchField.val() === fieldDefault) {
+			if ($searchField.val() === defaultValue) {
 				$searchField.val('');
 			}
 		});
 		// on blur listener
-		$searchField.blur(function () {
-			setTimeout(this.clearResults, 200);
+		$(document).on('click', function (e) {
+			if (!$searchContainer.is(e.target)) {
+				setTimeout(this.clearResults, 200);
+			}
 		}.bind(this));
 		// on key up listener
 		$searchField.keyup(function (e) {
