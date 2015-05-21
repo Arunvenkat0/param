@@ -45,9 +45,9 @@
 			<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
 			<isif condition="${swatchAttributes.indexOf(vaId) >= 0}">
 				<li class="attribute">
-					<span class="label">
+					<div class="label">
 						 ${Resource.msg('global.select', 'locale', null)} <isprint value="${VA.displayName}"/>
-					</span>
+					</div>
 					<div class="value">
 						<ul class="swatches ${vaId.toLowerCase()}">
 							<isset name="selectedSwatch" value="${''}" scope="page"/>

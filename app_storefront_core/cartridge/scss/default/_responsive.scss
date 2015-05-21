@@ -62,7 +62,6 @@
 		display: none;
 	}
 	.print-page,
-	.size-chart-link,
 	.tooltip,
 	#tooltip {
 		display: none !important;
@@ -139,8 +138,8 @@
 		max-width: 220px;
 	}
 	.primary-content h1 {
-		font-size: 1.5em;
-		margin: 10px 0;
+		font-size: 1.5rem;
+		margin: .625rem 0;
 	}
 	#quickviewbutton {
 		display: none !important;
@@ -220,8 +219,7 @@
 	}
 	.pdp-main {
 		.product-col-1,
-		.product-col-2,
-		.product-name {
+		.product-col-2 {
 			clear: both;
 			float: none;
 			margin: 0;
@@ -662,10 +660,10 @@
 			float: none;
 			.results-hits{
 				float:none;
-			}				
-		}		
+			}
+		}
 	}
-	
+
 
 }
 
@@ -827,8 +825,8 @@
 			float: none;
 			.results-hits{
 				float:none;
-			}				
-		}		
-	}	
+			}
+		}
+	}
 
 }

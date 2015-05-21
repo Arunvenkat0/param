@@ -55,28 +55,30 @@
 }
 
 .product-thumbnails {
-	clear: both;
-	display: inline-block;
-	padding: 0px 0.5em;
+	ul {
+		@extend %clearfix;
+	}
 	// thumbnail
 	.thumb {
-		border-top: 5px solid $white;
+		border-bottom: 5px solid $white;
 		float: left;
-		margin: 0 5px 0 0;
-		padding: 3px 0 0;
-		width: 55px;
+		margin-right: .5rem;
+		padding-top: 1px;
+		width: 3.4375rem;
 		&.selected {
 			border-color: $citrus;
 		}
 	}
 	// thumbnail image
-	.productthumbnail {
+	img {
 		border: 1px solid $very-light-gray;
+		box-sizing: border-box;
 		cursor: pointer;
-		max-width: 53px;
+		max-width: 100%;
+		height: auto;
 	}
 	h2 {
-		margin: .83em 0;
+		margin: 1rem 0 .3rem;
 	}
 }
 
@@ -84,14 +86,19 @@
 	.product-col-2 {
 		float: right;
 		width: 59.5%;
+		.price-standard {
+			border-right: 1px solid $gainsboro;
+			padding-right: .5rem;
+		}
 	}
 	.product-name {
-		margin: 0;
+		margin-top: 1rem;
+		margin-bottom: .3rem;
 	}
 	.product-number {
 		color: $very-light-gray;
 		font-size: 0.65rem;
-		padding-bottom: .4em;
+		margin-bottom: .5rem;
 	}
 	.product-price {
 		font-size: 1.5rem;
@@ -100,21 +107,17 @@
 			color: $nobel;
 			text-decoration: line-through;
 		}
-	}
-	.product-col-2 .price-standard {
-		border-right: 1px solid $gainsboro;
-		padding-right: 8px;
-	}
-	.product-price .price-tiered {
-		color: $sangria;
-		font-size: 0.6em;
-		line-height: 1.5em;
+		.price-tiered {
+			color: $sangria;
+			font-size: 0.6em;
+			line-height: 1.5em;
+		}
 	}
 	.product-review {
 		@extend %clearfix;
+		margin-bottom: .5rem;
 		.rating {
 			color: $sangria;
-			padding-bottom: .4em;
 		}
 	}
 	.product-main-attributes {
@@ -143,12 +146,10 @@
 		overflow: hidden;
 		padding: 0;
 		position: relative;
-		h3, .label {
-			clear: both;
+		h3,
+		.label {
 			font-weight: bold;
-			margin: 0;
-			padding: 4px 0 0;
-			text-align: left;
+			margin-bottom: .3rem;
 			text-transform: uppercase;
 		}
 		.value {
@@ -182,8 +183,11 @@
 	}
 	.swatches li {
 		float: left;
-		&:hover a, &.selected a {
-			border-color: $citrus;
+		&:hover,
+		&.selected {
+			a {
+				border-color: $citrus;
+			}
 		}
 		&.unselectable {
 			a {
@@ -194,7 +198,6 @@
 				a {
 					border-color: $gainsboro;
 				}
-				border-color: $gainsboro;
 			}
 		}
 		a {
@@ -203,39 +206,31 @@
 			border-width: 1px 1px 3px;
 			display: block;
 			line-height: 3.5;
-			min-height: 42px;
-			min-width: 42px;
-			margin: 0 0.7em 0.7em 0;
-			padding: 0.08em;
+			min-height: 2.625rem;
+			min-width: 2.625rem;
+			margin: 0 .5rem .5rem 0;
+			padding: 1px;
 			text-align: center;
 			white-space: nowrap;
 			@media screen and (min-width: 768px) {
 				line-height: 2.7;
-				min-height: 32px;
-				min-width: 32px;
+				min-height: 2rem;
+				min-width: 2rem;
 			}
 		}
 	}
 	.color li {
 		a {
-			height: 42px;
 			line-height: 0;
-			width: 42px;
+			width: 2.625rem;
+			height: 2.625rem;
 			@media screen and (min-width: 768px) {
-				height: 32px;
-				width: 32px;
-			}
-			&:hover, &.selected {
-				border-color: $citrus;
+				width: 2rem;
+				height: 2rem;
 			}
 			img {
-				height: 100%;
 				width: 100%;
-			}
-		}
-		&.unselectable {
-			a {
-				color: transparent;
+				height: 100%;
 			}
 		}
 	}
