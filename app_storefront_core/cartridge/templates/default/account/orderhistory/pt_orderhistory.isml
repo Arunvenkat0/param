@@ -4,7 +4,7 @@
 <!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
-       
+
 <head>
 
 	<isscript>
@@ -27,7 +27,7 @@
 <body>
 	<div id="wrapper" class="pt_order">
 
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="page-content clearfix">
 

@@ -27,7 +27,7 @@
 
 	<div id="wrapper" class="pt_product-compare">
 
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="full-width clearfix">
 			<isinclude template="components/browsertoolscheck"/>

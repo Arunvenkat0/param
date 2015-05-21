@@ -21,7 +21,6 @@
             <pipelines>
                 <pipeline>Default-Start</pipeline>
                 <pipeline>Home-Show</pipeline>
-                <pipeline>Home-IncludeHeader</pipeline>
                 <pipeline>Home-IncludeHeaderMenu</pipeline>
             </pipelines>
         </page-cache-partition>

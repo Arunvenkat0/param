@@ -17,21 +17,21 @@ exports.getCurrent = function getCurrent(pdict, locale) {
 		locale = 'default';
 	}
 	var urlAction = new URLAction(currentAction, siteId, locale);
+	var args = [urlAction];
 	var parameterMap = pdict.CurrentHttpParameterMap;
-	var parameters = [urlAction];
 
 	// iterate over current request's parameters, put them into the URL
-	for (var key in parameterMap) {
-		if (parameterMap.hasOwnProperty(key)) {
+	for (var p in parameterMap) {
+		if (parameterMap.hasOwnProperty(p)) {
 			// ignore the lang parameter
-			if (key === 'lang') {
+			if (p === 'lang') {
 				continue;
 			}
-			parameters.push(new URLParameter(key, parameterMap[key]));
+			args.push(new URLParameter(p, parameterMap[p]));
 		}
 	}
 
 	return pdict.CurrentRequest.httpProtocol + '://' +
 		pdict.CurrentRequest.httpHost +
-		URLUtils.url.apply(null, parameters);
+		URLUtils.url.apply(null, args);
 };

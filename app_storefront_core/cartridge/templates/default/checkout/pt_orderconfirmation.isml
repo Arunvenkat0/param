@@ -27,7 +27,7 @@
 <body>
 	<div id="wrapper" class="pt_order-confirmation">
 		<isinclude template="components/header/countryselector"/>
-		<isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
+		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="clearfix primary-focus">
 
