@@ -3,7 +3,9 @@
   display: table;
   clear: both; }
 
-.visually-hidden, #homepage-slides .slide h2, #homepage-slides .slide span {
+.visually-hidden, .month label,
+.year label,
+.day label, #homepage-slides .slide h2, #homepage-slides .slide span {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -1929,12 +1931,25 @@ legend {
 
 label {
   display: block;
-  float: left;
   font-size: 1.1em;
   font-weight: 700;
-  padding: 0.75em 0 0;
-  text-align: right;
-  width: 22%; }
+  margin-bottom: .3rem; }
+  .form-horizontal label {
+    float: left;
+    margin-top: .5rem;
+    margin-bottom: 0;
+    text-align: right;
+    width: 22%; }
+  .label-inline label {
+    display: inline-block;
+    float: none;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 0;
+    width: auto; }
+  .label-above label {
+    margin-bottom: .3rem;
+    width: auto; }
 
 .form-label-text {
   display: block;
@@ -1949,25 +1964,33 @@ label {
 
 .form-row {
   clear: both;
-  margin: 0 0 1em; }
+  margin: 0.5rem 0 1rem; }
 
-.form-row-button {
-  margin-left: 24.5%;
+.form-horizontal .form-row-button {
+  margin-left: 24%;
   width: 62%; }
 
 .field-wrapper {
+  box-sizing: border-box;
   margin-bottom: .5rem;
-  margin-left: 2%;
-  width: 50%; }
-  .form-row .field-wrapper {
-    float: left; }
+  width: 100%; }
+  .form-horizontal .field-wrapper {
+    float: left;
+    padding-left: 2%;
+    width: 50%; }
+  .label-inline .field-wrapper {
+    padding-left: 0;
+    width: auto; }
+  .label-above .field-wrapper {
+    float: none;
+    padding-left: 0;
+    width: auto; }
 
 input[type="text"],
 input[type="number"],
 input[type="password"] {
   border: 1px solid #aaa;
   box-sizing: border-box;
-  margin-bottom: .3rem;
   padding: 0.7em 0.5em;
   text-indent: 0;
   width: 100%; }
@@ -1981,57 +2004,30 @@ textarea {
 
 select {
   background-color: #fff;
-  margin-bottom: .3rem;
   width: 100%;
   height: 2rem; }
+  .search-result-options select {
+    height: auto; }
 
-.search-result-options select {
-  height: auto; }
-
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   margin: 1em 1% 1em 2%; }
-
-.label-inline label {
-  display: inline-block;
-  float: none;
-  font-size: 1em;
-  font-weight: 400;
-  text-align: left;
-  width: 90%; }
-
-.label-inline input {
-  float: left;
-  margin: 0.8em 2%; }
-
-.label-above label {
-  float: none;
-  text-align: left;
-  width: auto; }
-
-.label-above input, .label-above select, .label-above textarea {
-  margin-left: 0; }
-
-.label-above .form-caption {
-  margin-left: 0;
-  width: auto; }
-
-.label-removed label {
-  left: -999em;
-  position: absolute; }
-
-.label-hidden label {
-  text-align: left;
-  text-indent: -999em; }
-
-.form-indent {
-  margin-left: 24%; }
-  .form-indent .form-caption {
-    margin-left: 0; }
+  .label-inline input[type="checkbox"],
+  .label-inline input[type="radio"] {
+    margin: 0 0.3rem 0 0; }
 
 .form-caption {
   clear: left;
-  margin: 1% 0 1% 24%;
   width: auto; }
+  .form-horizontal .form-caption {
+    margin-left: 24%; }
+  .label-above .form-caption {
+    margin-left: 0; }
+  .form-indent .form-caption {
+    margin-left: 0; }
+
+.form-indent {
+  margin-left: 24%; }
 
 .error-message {
   border: 2px solid #990000;
@@ -2086,27 +2082,6 @@ div.error {
   padding-right: 0;
   width: 100%; }
 
-.login-box-content label {
-  float: none;
-  font-size: 1.1em;
-  text-align: left;
-  width: auto; }
-
-.login-box-content input[type="text"], .login-box-content input[type="password"] {
-  margin-left: 0;
-  width: 87%; }
-
-.login-box-content textarea {
-  margin-left: 0;
-  width: 87%; }
-
-.login-box-content .form-caption, .login-box-content input[type="checkbox"], .login-box-content select {
-  margin-left: 0; }
-
-.login-box-content .form-row-button {
-  margin-left: 0;
-  width: auto; }
-
 .row-inline {
   display: inline; }
   .row-inline label {
@@ -2131,10 +2106,6 @@ div.error {
 .char-count {
   display: block;
   margin-left: 24%; }
-
-.label-inline label {
-  padding: 0;
-  padding-left: 0.25em; }
 
 .item-list {
   margin-bottom: 1em; }
@@ -4321,10 +4292,10 @@ button.add-all-to-cart {
   float: left;
   width: 53%; }
   .cart-coupon-code input {
-    margin-left: 0; }
+    width: 50%; }
   .cart-coupon-code .error {
     padding-top: 0.4em; }
-  .cart-coupon-code #update-cart {
+  .cart-coupon-code button {
     margin-left: .6em; }
 
 .cart-order-totals {
@@ -4442,9 +4413,6 @@ ul.product-availability-list {
   .checkout-progress-indicator .step-3 {
     padding-right: 0; }
 
-.address select {
-  height: 3em; }
-
 .shipping-method {
   margin-top: 1.83em; }
   .shipping-method label {
@@ -4457,6 +4425,9 @@ ul.product-availability-list {
 .gift-message-text.hidden {
   display: none; }
 
+.billing-coupon-code .form-row {
+  width: 50%; }
+
 .redemption {
   color: #990000; }
   .redemption .success {
@@ -4464,14 +4435,10 @@ ul.product-availability-list {
   .redemption span.error {
     margin-left: 0; }
 
-.payment-method-options {
-  padding-left: 24%; }
-  .payment-method-options .form-row {
-    clear: none;
-    float: left;
-    width: 30%; }
-  .payment-method-options label {
-    width: auto; }
+.payment-method-options .form-row {
+  clear: none;
+  float: left;
+  width: 30%; }
 
 .payment-method {
   clear: both;
@@ -4489,13 +4456,12 @@ ul.product-availability-list {
   .month select,
   .year select,
   .day select {
-    margin: 0;
     width: auto; }
 
 .month .form-caption {
   margin-left: 0; }
 
-.cvn input {
+.cvn .field-wrapper {
   width: 50px; }
 
 .bml-terms-and-conditions {
@@ -5504,10 +5470,6 @@ h1 .account-logout {
   padding: 1em 0 1em 0;
   width: 100px; }
 
-.label-inline input {
-  float: left;
-  margin: 0; }
-
 .instore-shipping-option {
   width: 100%; }
 
@@ -5640,13 +5602,6 @@ h1 .account-logout {
   legend {
     padding: 14px 30% 10px 2%;
     width: 68%; }
-  .label-inline input {
-    height: 2em;
-    margin: 0;
-    padding: 0; }
-  .label-inline label {
-    margin: 0;
-    padding: 0.5em 0 0 1em; }
   .form-field-tooltip {
     display: none; }
   .print-page,

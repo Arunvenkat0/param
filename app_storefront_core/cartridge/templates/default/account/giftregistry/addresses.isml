@@ -17,7 +17,7 @@
 
 	<div class="page-content-tab-wrapper">
 
-		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.htmlName}" name="${pdict.CurrentForms.giftregistry.htmlName}">
+		<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="${pdict.CurrentForms.giftregistry.htmlName}" name="${pdict.CurrentForms.giftregistry.htmlName}">
 
 			<h2>${Resource.msg('account.giftregistry.addresses.beforeheader','account',null)}</h2>
 

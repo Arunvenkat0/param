@@ -18,7 +18,7 @@
 
 	<div class="page-content-tab-wrapper">
 
-		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.giftregistry.event.htmlName}" name="${pdict.CurrentForms.giftregistry.event.htmlName}">
+		<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="${pdict.CurrentForms.giftregistry.event.htmlName}" name="${pdict.CurrentForms.giftregistry.event.htmlName}">
 
 			<fieldset>
 

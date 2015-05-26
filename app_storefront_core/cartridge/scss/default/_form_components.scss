@@ -41,12 +41,28 @@ legend {
 
 label {
 	display: block;
-	float: left;
 	font-size: 1.1em;
 	font-weight: 700;
-	padding: 0.75em 0 0;
-	text-align: right;
-	width: 22%;
+	margin-bottom: .3rem;
+	.form-horizontal & {
+		float: left;
+		margin-top: .5rem;
+		margin-bottom: 0;
+		text-align: right;
+		width: 22%;
+	}
+	.label-inline & {
+		display: inline-block;
+		float: none;
+		font-size: 1em;
+		font-weight: 400;
+		margin-top: 0;
+		width: auto;
+	}
+	.label-above & {
+		margin-bottom: .3rem;
+		width: auto;
+	}
 }
 
 .form-label-text {
@@ -64,20 +80,33 @@ label {
 
 .form-row {
 	clear: both;
-	margin: 0 0 1em;
+	margin: .5rem 0 1rem;
 }
 
 .form-row-button {
-	margin-left: 24.5%;
-	width: 62%;
+	.form-horizontal & {
+		margin-left: 24%;
+		width: 62%;
+	}
 }
 
 .field-wrapper {
+	box-sizing: border-box;
 	margin-bottom: .5rem;
-	margin-left: 2%;
-	width: 50%;
-	.form-row & {
+	width: 100%;
+	.form-horizontal & {
 		float: left;
+		padding-left: 2%;
+		width: 50%;
+	}
+	.label-inline & {
+		padding-left: 0;
+		width: auto;
+	}
+	.label-above & {
+		float: none;
+		padding-left: 0;
+		width: auto;
 	}
 }
 
@@ -86,7 +115,6 @@ input[type="number"],
 input[type="password"] {
 	border: 1px solid $dark-gray;
 	box-sizing: border-box;
-	margin-bottom: .3rem;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
 	width: 100%;
@@ -103,70 +131,37 @@ textarea {
 
 select {
 	background-color: #fff; // set background color to make height work
-	margin-bottom: .3rem;
 	width: 100%;
 	height: 2rem;
+	.search-result-options & {
+		height: auto;
+	}
 }
 
-.search-result-options select {
-	height: auto;
-}
-
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
 	margin: 1em 1% 1em 2%;
-}
-
-.label-inline {
-	label {
-		display: inline-block;
-		float: none;
-		font-size: 1em;
-		font-weight: 400;
-		text-align: left;
-		width: 90%;
-	}
-	input {
-		float: left;
-		margin: 0.8em 2%;
-	}
-}
-
-.label-above {
-	label {
-		float: none;
-		text-align: left;
-		width: auto;
-	}
-	input, select, textarea {
-		margin-left: 0;
-	}
-	.form-caption {
-		margin-left: 0;
-		width: auto;
-	}
-}
-
-.label-removed label {
-	left: -999em;
-	position: absolute;
-}
-
-.label-hidden label {
-	text-align: left;
-	text-indent: -999em;
-}
-
-.form-indent {
-	margin-left: 24%;
-	.form-caption {
-		margin-left: 0;
+	.label-inline & {
+		margin: 0 .3rem 0 0;
 	}
 }
 
 .form-caption {
 	clear: left;
-	margin: 1% 0 1% 24%;
 	width: auto;
+	.form-horizontal & {
+		margin-left: 24%;
+	}
+	.label-above & {
+		margin-left: 0;
+	}
+	.form-indent & {
+		margin-left: 0;
+	}
+}
+
+.form-indent {
+	margin-left: 24%;
 }
 
 .error-message {
@@ -229,32 +224,6 @@ div.error {
 	}
 }
 
-.login-box-content {
-	label {
-		float: none;
-		font-size: 1.1em;
-		text-align: left;
-		width: auto;
-	}
-	input {
-		&[type="text"], &[type="password"] {
-			margin-left: 0;
-			width: 87%;
-		}
-	}
-	textarea {
-		margin-left: 0;
-		width: 87%;
-	}
-	.form-caption, input[type="checkbox"], select {
-		margin-left: 0;
-	}
-	.form-row-button {
-		margin-left: 0;
-		width: auto;
-	}
-}
-
 .row-inline {
 	display: inline;
 	label {
@@ -284,9 +253,4 @@ div.error {
 .char-count {
 	display: block;
 	margin-left: 24%;
-}
-
-.label-inline label {
-  padding: 0;
-  padding-left: 0.25em;
 }

@@ -25,12 +25,6 @@
 	}
 }
 
-.address {
-	select {
-		height: 3em;
-	}
-}
-
 .shipping-method {
 	margin-top: 1.83em;
 	label {
@@ -49,6 +43,12 @@
 	}
 }
 
+.billing-coupon-code {
+	.form-row {
+		width: 50%;
+	}
+}
+
 .redemption {
 	.success {
 		color: $islamic-green;
@@ -60,14 +60,10 @@
 }
 
 .payment-method-options {
-	padding-left: 24%;
 	.form-row {
 		clear: none;
 		float: left;
 		width: 30%;
-	}
-	label {
-		width: auto;
 	}
 }
 
@@ -86,8 +82,10 @@
 	clear: none;
 	float: left;
 	margin: 0 0 2% 2%;
+	label {
+		@extend .visually-hidden;
+	}
 	select {
-		margin: 0;
 		width: auto;
 	}
 }
@@ -96,7 +94,7 @@
 	margin-left: 0;
 }
 
-.cvn input {
+.cvn .field-wrapper {
 	width: 50px;
 }
 
