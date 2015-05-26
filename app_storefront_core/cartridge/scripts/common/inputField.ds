@@ -92,8 +92,9 @@ module.exports = function (pdict) {
 	var attributes = '';
 	var label = '';
 	var type = pdict.type;
-	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue);
-	var element, name, id, rowClass, fieldClass, caption, help;
+	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue) || '';
+	var help = '';
+	var element, name, id, rowClass, fieldClass, caption;
 
 	// default type is 'text' for 'input' element
 	if (type === 'input') {
@@ -159,9 +160,9 @@ module.exports = function (pdict) {
 	// label
 	label = '<label for="' + name + '">';
 	if (pdict.formfield.mandatory) {
-		label += '<span class="required-indicator">&#8226;</span>';
+		label += '<span class="required-indicator">&#8226; </span>';
 	}
-	label += '<span> ' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+	label += '<span>' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
 	label += '</label>';
 
 	// input
@@ -228,13 +229,13 @@ module.exports = function (pdict) {
 
 	// caption - error message or description
 	var hasError = !!pdict.formfield.error;
-	var message;
+	var message = '';
 	if (hasError) {
 		message = Resource.msg(pdict.formfield.error, 'forms', null);
-	} else {
+	} else if (pdict.formfield.description) {
 		message = Resource.msg(pdict.formfield.description, 'forms', null);
 	}
-	caption = '<div class="form-caption ' + (hasError ? 'error-message' : '') + '">' + message + '</div>';
+	caption = '<div class="form-caption' + (hasError ? ' error-message' : '') + '">' + message + '</div>';
 
 	// help text
 	if (pdict.helpcid && pdict.helplabel) {
