@@ -1,4 +1,4 @@
-.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .store-list-pdp-container .store-list-item:after {
+.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .store-list-pdp-container .store-list-item:after, .search-suggestion-wrapper:after, .product-suggestion:after {
   content: "";
   display: table;
   clear: both; }
@@ -5539,49 +5539,40 @@ h1 .account-logout {
   display: inline;
   margin-left: 2%; }
 
-#search-suggestions {
+.search-suggestion-wrapper {
   background-color: #fff;
   border: 1px solid #999;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
-  right: 0;
-  position: absolute;
-  z-index: 10; }
+  width: 100%; }
+  @media screen and (min-width: 768px) {
+    .search-suggestion-wrapper.full {
+      margin-left: -75%;
+      width: 175%; }
+      .search-suggestion-wrapper.full .phrase-suggestions {
+	width: 42.8571429%;
+	float: left; }
+      .search-suggestion-wrapper.full .product-suggestions {
+	width: 57.1428571%;
+	float: right; } }
+  .search-suggestion-wrapper .hitgroup {
+    color: #666;
+    margin: 0.7rem 0 0.7rem 0.7rem; }
+    .search-suggestion-wrapper .hitgroup .header {
+      margin: 0 0 0.5rem 0; }
+    .search-suggestion-wrapper .hitgroup .hit {
+      display: block;
+      margin-left: 1rem;
+      margin-bottom: .5rem; }
+      .search-suggestion-wrapper .hitgroup .hit:hover {
+	text-decoration: underline; }
+    .search-suggestion-wrapper .hitgroup .parent-category {
+      color: #999; }
 
-.search-suggestion-wrapper {
-  width: 300px; }
-
-.search-suggestion-wrapper-full {
-  width: 621px; }
-
-.search-suggestion-contents {
-  position: relative; }
-
-.search-suggestion-left-panel {
-  width: 300px;
-  float: left; }
-
-.search-suggestion-right-panel {
-  width: 300px;
-  float: left; }
-
-.search-suggestion-left-panel-hitgroup-header {
-  height: auto;
-  font-weight: bold;
-  margin: 0 0 8px 0; }
-
-.search-suggestion-left-panel-hitgroup {
-  color: #666;
-  margin: 10px 0 10px 10px; }
-
-.search-suggestion-left-panel-hitgroup-link {
-  margin-left: 1em; }
-
-.search-suggestion-left-panel-hit {
-  margin-left: 1em; }
-
-.search-suggestion-left-panel-hitgroup-link:hover,
-.search-suggestion-left-panel-hit:hover {
-  text-decoration: underline; }
+.phrase-suggestions {
+  border-top: 1px solid #ccc; }
+  @media screen and (min-width: 768px) {
+    .phrase-suggestions {
+      border-top: none; } }
 
 .product-suggestion {
   border: 1px solid #fff;
@@ -5592,37 +5583,28 @@ h1 .account-logout {
     background-color: #e0e0e0;
     border: 1px solid #ccc; }
   .product-suggestion .product-image {
-    display: inline-block;
+    float: left;
     text-align: center;
     width: 25%; }
     .product-suggestion .product-image img {
       max-width: 100%; }
   .product-suggestion .product-details {
-    display: inline;
     float: right;
     padding-top: .5em;
     width: 70%; }
     .product-suggestion .product-details .product-price {
       color: #000; }
 
-.search-phrase-suggestion {
+.search-phrase {
+  color: #999;
   margin: 1em; }
-
-.search-suggestion-right-panel .whole-phrase {
-  font-style: italic; }
-
-.search-suggestion-right-panel .search-suggest-guess {
-  text-decoration: underline;
-  font-weight: bold; }
-
-.search-suggestion-right-panel .first-term-italic {
-  font-style: italic; }
-
-.search-suggestion-right-panel .first-term-bold {
-  font-weight: bold; }
-
-.search-suggestion-left-panel-parent-category {
-  color: #999; }
+  .search-phrase .completed {
+    font-style: italic; }
+    .search-phrase .completed .original {
+      text-decoration: underline;
+      font-weight: bold; }
+  .search-phrase .corrected {
+    font-weight: bold; }
 
 @media screen and (max-width: 767px) {
   body {
