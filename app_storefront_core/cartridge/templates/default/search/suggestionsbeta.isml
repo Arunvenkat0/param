@@ -17,7 +17,7 @@
 				<isif condition="${suggest.product.phrases.hasNext()}">
 					<div class="search-phrase">
 						${Resource.msg('search.suggest.searchfor', 'search', null)}
-						"<a href="${URLUtils.url('Search-Show', 'q', suggest.product.phrases.next().getPhrase())}">
+						&quot;<a href="${URLUtils.url('Search-Show', 'q', suggest.product.phrases.next().getPhrase())}">
 							<isloop items="${suggest.product.terms}" alias="suggestedTerms">
 								<isif condition="${!suggestedTerms.isEmpty()}">
 									<isset name="firstTerm" value="${suggestedTerms.getFirstTerm()}" scope="page"/>
@@ -30,7 +30,7 @@
 									</isif>
 								</isif>
 							</isloop>
-						</a>" ?
+						</a>&quot; ?
 					</div>
 				</isif>
 
