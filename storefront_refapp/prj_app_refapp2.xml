@@ -32,7 +32,7 @@
         </copy>
     </target>
 
-    <!-- create app cartridge The idea is to first copy the source to the target 
+    <!-- create app cartridge The idea is to first copy the source to the target
         folder, then rename files and folders and eventually apply changes. -->
     <target name="generate" depends="clean">
         <echo level="info">
@@ -48,8 +48,8 @@
 	 	<copy todir="${app.target}/app_storefront_richUI">
 			<fileset dir="${dw.build.source}/../app_storefront_richUI"/>
 		</copy>
-	 	<copy todir="${app.target}/sg20_demo_data_no_hires_images">
-			<fileset dir="${dw.build.source}/../sg20_demo_data_no_hires_images"/>
+	 	<copy todir="${app.target}/demo_data_no_hires_images">
+			<fileset dir="${dw.build.source}/../demo_data_no_hires_images"/>
 		</copy>
 
         <!-- remove all single line TODO comments from JS and ISML -->

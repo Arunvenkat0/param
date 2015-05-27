@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project name="custombuild.storefront_refapp" xmlns:ivy="antlib:org.apache.ivy.ant">
-    
+
     <property name="app.name" value="project_${cartridge.name}" />
-    <property name="refapp.data" value="sg20_demo_data_no_hires_images" />
-    
+    <property name="refapp.data" value="demo_data_no_hires_images" />
+
     <condition property="jdk.artifactId" value="jdk-linux-i586">
         <isset property="os.family.linux" />
     </condition>
@@ -15,7 +15,7 @@
     </condition>
 
     <include file="${dw.antlib}/cartridgebuild.generate.xml"/>
-    
+
     <target name="precopy"/>
     <target name="postcopy"/>
     <target name="precompile"/>
@@ -30,18 +30,18 @@
         <move todir="${cartridge.build}/${app.name}/demosite-creation">
                 <fileset dir="${cartridge.build}/${app.name}/${refapp.data}"/>
         </move>
-        
+
         <!-- build the demosite-creation.zip out of what we downloaded from Nexus -->
         <zip destfile="${cartridge.dist}/demosite-creation.zip"
             basedir="${cartridge.build}/${app.name}"
             includes="demosite-creation/**/*"
         />
-        
+
         <!-- copy geolocation XML files from "build/project_storefront_refapp/demosite-creation/geolocations" directory to a directory "build/geolocation-sample/geolocations" -->
-        <copy todir="${cartridge.build}/geolocation-sample/geolocations" >  
-            <fileset dir="${cartridge.build}/${app.name}/demosite-creation/geolocations" includes="**"/>  
+        <copy todir="${cartridge.build}/geolocation-sample/geolocations" >
+            <fileset dir="${cartridge.build}/${app.name}/demosite-creation/geolocations" includes="**"/>
         </copy>
-        
+
         <!-- build the geolocation-sample.zip out of what we downloaded from Nexus -->
         <zip destfile="${cartridge.dist}/geolocation-sample.zip"
             basedir="${cartridge.build}"
@@ -49,10 +49,10 @@
         />
     </target>
     <target name="postdeploy">
-        <delete dir="${dw.instance.system}/resources/cartridges/${cartridge.name}" /> 
+        <delete dir="${dw.instance.system}/resources/cartridges/${cartridge.name}" />
     </target>
     <target name="finally"/>
-        
+
     <target name="retrieve.jdk">
         <taskdef resource="org/apache/ivy/ant/antlib.xml"
                  uri="antlib:org.apache.ivy.ant"
@@ -61,7 +61,7 @@
         <ivy:resolve file="${cartridge.base}/ivy.xml" refresh="true" />
         <ivy:retrieve pattern="${cartridge.build}/tgz/[artifact].tar.gz" sync="false" conf="compile" />
     </target>
-	
+
     <target name="copy.jdk">
         <mkdir dir="${dw.instance.dependencies}" />
         <mkdir dir="${cartridge.dist}/jdk.unpack" />
@@ -78,7 +78,7 @@
         <chmod file="${dw.instance.java.home}/bin/*" perm="755"/>
         <delete dir="${cartridge.dist}/jdk.unpack" />
     </target>
-	
+
 </project>
 
 
