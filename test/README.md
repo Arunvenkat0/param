@@ -60,7 +60,14 @@ The tests are contained in suites, which are represented as directories. For exa
 	:; npm install --production -g selenium-standalone@latest
 	:; selenium-standalone install # see note [2]
 	```
-The above 2 steps are only needed once.
+
+- Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
+testdata directory from the app_storefront_core/cartridge to the "Impex/src"
+directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src).
+You will need to login with a valid Business Manager account that has been
+assigned the role of Administrator.
+
+The above 3 steps are only needed once.
 
 ### Application tests
 
@@ -72,23 +79,44 @@ After installing the dependencies, start selenium server each time you wish to r
 
 It's important to keep this command-line instance running in the background. Open a new terminal window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
 
-- Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
+1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
-```javascript
+ ```javascript
 {
 	"url": "http://example.demandware.net/s/SiteGenesis",
 	"client": "phantomjs"
 }
 ```
-*Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
+ *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
 
-- Run the test
+1. Reset test data
 
-```sh
+ To ensure that the application tests can consistently compare results with their
+expected values, we have implemented a process to reset test data.  During the 
+SiteGenesis build process, a job called, TestDataReset, is created and available
+to run.  **Note:** By default, the site associated with the job is SiteGenesis.
+If you are using a different site, please alter the job to point to it.
+
+ Before running a test, please reset the data by following these steps:
+ 
+ a. Go to Business Manager > Administration > Job Schedules
+
+    https://&lt;sandbox_host&gt;/on/demandware.store/Sites-Site/default/SMCScheduler-DisplayAll?SelectedMenuItem=operations&CurrentMenuItemId=operations&menuname=Job%20Schedules&mainmenuname=Operations
+
+ b. Click on the TestDataReset link, which will redirect you to the Job Detail page.
+
+ c. Click the Run button, wait a moment, then periodically click the Refresh
+button under the "TestDataReset - History" section until the Status column reports
+"Finished".  The Error column should display "None".  At this point, you can run
+the application tests.
+
+1. Run the test
+
+ ```sh
 $ gulp test:application
 ```
 
-This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
+ This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
 Other configurations are also available, see below.
 
 ### Unit tests
