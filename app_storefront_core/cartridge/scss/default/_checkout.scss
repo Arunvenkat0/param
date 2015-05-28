@@ -115,24 +115,14 @@
 }
 
 .checkout-mini-cart {
-	background: none repeat scroll 0 0 $white-smoke;
+	background-color: $white-smoke;
 	max-height: 330px;
 	overflow: auto;
 }
 
 .checkout-order-totals {
-	background: none repeat scroll 0 0 $white-smoke;
-	padding: 0.5em 1em;
-	.order-totals-table {
-		width: 90%;
-		td {
-			padding: .42em 0 0;
-		}
-		.order-total td {
-			font-size: 0.9em;
-			padding: .83em 0 0 .42em;
-		}
-	}
+	background-color: $white-smoke;
+	padding: 0.3rem .5rem;
 }
 
 .place-order-totals {

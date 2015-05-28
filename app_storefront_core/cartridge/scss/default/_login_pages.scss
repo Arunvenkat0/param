@@ -2,7 +2,9 @@
 	margin: 4em auto;
 	width: 80%;
 	.col-1 {
-	border-right: 1px solid $gainsboro;
+		@media screen and (min-width: 768px) {
+			border-right: 1px solid $gainsboro;
+		}
 	}
 }
 .login-box {
@@ -15,10 +17,6 @@
 	.error {
 		margin-left: 0;
 	}
-}
-
-.login-box-content {
-	padding: 1em 2em 1em 0;
 }
 
 .login-rememberme {

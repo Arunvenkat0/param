@@ -17,7 +17,7 @@
 		class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 </h1>
 
-<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">
+<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="form-horizontal address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">
 	<fieldset>
 		<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 			<!-- Use the error code value to build an appropriate error message -->
@@ -35,24 +35,27 @@
 		<div class="select-address address-list" data-addresses="${JSON.stringify(addressesArr)}">
 			<div class="form-row">
 				<label for="${pdict.CurrentForms.multishipping.editAddress.addressList.htmlName}">${Resource.msg('global.selectaddressmessage','locale',null)}:
-				</label> <select class="input-select-multiship" name="${addresses.htmlName}">
-					<option value="newAddress" selected="selected">${Resource.msg('multishipping.editaddress.select.newaddress','forms',null)}</option>
-					<isloop items="${addresses.options}" var="option">
-						<isset name="address" value="${option.object}" scope="page" />
-						<isif condition="${!empty(address.ID)}">
-							<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page" />
-						<iselse>
-							<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page" />
-						</isif>
-						<option value="${option.optionId}" <isif condition="${option.selected}">selected="selected</isif>>
-							<isprint value="${prefix}" />
-							<isprint value="${address.address1}" />,
-							<isprint value="${address.city}" />,
-							<isprint value="${address.stateCode}" />,
-							<isprint value="${address.postalCode}" />
-						</option>
-					</isloop>
-				</select>
+				</label>
+				<div class="field-wrapper">
+					<select class="input-select-multiship" name="${addresses.htmlName}">
+						<option value="newAddress" selected="selected">${Resource.msg('multishipping.editaddress.select.newaddress','forms',null)}</option>
+						<isloop items="${addresses.options}" var="option">
+							<isset name="address" value="${option.object}" scope="page" />
+							<isif condition="${!empty(address.ID)}">
+								<isset name="prefix" value="${'(' + address.ID + ')'}" scope="page" />
+							<iselse>
+								<isset name="prefix" value="${address.firstName + ' ' + address.lastName + ','}" scope="page" />
+							</isif>
+							<option value="${option.optionId}" <isif condition="${option.selected}">selected="selected</isif>>
+								<isprint value="${prefix}" />
+								<isprint value="${address.address1}" />,
+								<isprint value="${address.city}" />,
+								<isprint value="${address.stateCode}" />,
+								<isprint value="${address.postalCode}" />
+							</option>
+						</isloop>
+					</select>
+				</div>
 			</div>
 
 		</div>

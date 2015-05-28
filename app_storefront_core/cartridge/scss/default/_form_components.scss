@@ -97,9 +97,13 @@ label {
 	.form-horizontal & {
 		float: left;
 		padding-left: 2%;
-		width: 50%;
+		width: 76%;
+		@media screen and (min-width: 768px) {
+			width: 50%;
+		}
 	}
 	.label-inline & {
+		float: left;
 		padding-left: 0;
 		width: auto;
 	}
@@ -112,21 +116,13 @@ label {
 
 input[type="text"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+textarea {
 	border: 1px solid $dark-gray;
 	box-sizing: border-box;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
 	width: 100%;
-}
-
-
-textarea {
-	border: 1px solid $dark-gray;
-	margin-left: 2%;
-	padding: 0.7em 0.5em;
-	text-indent: 0;
-	width: 49.5966%;
 }
 
 select {
@@ -197,12 +193,6 @@ div.error {
 		padding: 0 0 2em;
 		width: 98%;
 	}
-	.form-row {
-		clear: none;
-		float: left;
-		margin: .42em 2% 0 0;
-		width: 28%;
-	}
 	label {
 		padding: 0 0 0.75em;
 		text-transform: uppercase;
@@ -211,11 +201,6 @@ div.error {
 	input[type="text"], select {
 		margin-left: 0;
 		width: 95%;
-	}
-	.form-row-button {
-		float: left;
-		margin: 2.5em 0 0;
-		width: 10%;
 	}
 	button {
 		padding-left: 0;
