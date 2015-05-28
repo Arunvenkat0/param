@@ -23,17 +23,34 @@
 
 // Store inventory
 
-.availability-block {
-	clear: both;
-	.availability {
-		width: 100%;
+.availability-web {
+	padding: 0 0 1em 0;
+	label {
+		float: none; 
+	}
+	.availability-novariation {
+		color: #999;
+		font-style: italic;
+	}
+}
+.availability-storepickup {
+	.availability-instore,
+	.availability-web {
+		background-color: $gainsboro;
+		padding: 1em;
+	}
+	.availability-web {
+		float: none;
+	}
+	.availability-instore {
+		margin-bottom: 1.5em;
 	}
 }
 
 .in-stock-msg,
 .is-in-stock,
 [data-status="store-in-stock"] {
-	color: $islamic-green;
+	color: $rain-forest;
 }
 
 .not-available-msg,
