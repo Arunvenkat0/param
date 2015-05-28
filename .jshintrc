@@ -9,6 +9,8 @@
 	"strict": true,
 	"jquery": true,
 	"browserify": true,
+	"esnext": true,
+	"mocha": true,
 	"globals": {
 		"SitePreferences": true,
 		"Urls": true,
