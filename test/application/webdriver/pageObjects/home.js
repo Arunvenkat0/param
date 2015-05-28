@@ -13,23 +13,18 @@ export function navigateTo(path = basePath) {
 }
 
 /**
- * @description move to a specific slide of the main carousel
+ * Move to a specific slide of the main carousel
  * @param {number} position - slide position, start from 1
  */
 export function mainCarouselSlide(position) {
 	var carouselControlSelector = MAIN_CAROUSEL + ' .jcarousel-control a:nth-child(' + position + ')';
 	return client.waitForExist(carouselControlSelector)
-		.then(() => client.click(carouselControlSelector))
-		.then(() => {
-			// only wait for slider transition if not the first slide
-			if (position !== 1) {
-				return client.pause(500);
-			}
-		});
+		// wait 500ms after carousel transition
+		.then(() => client.click(carouselControlSelector)).pause(500)
 }
 
 /**
- * @description move to a specific slide of the vertical carousel
+ * Move to a specific slide of the vertical carousel
  * @param {number} position - slide position, start from 1
  */
 export function verticalCarouselSlide(position) {
@@ -39,13 +34,13 @@ export function verticalCarouselSlide(position) {
 			if (position !== 1) {
 				return client.click(carouselNextSelector)
 					// wait for carousel transition
-					.then(() => client.pause(500));
+					.pause(500);
 			}
 		});
 }
 
 /**
- * @description check if a vertical carousel slide is visible
+ * Check if a vertical carousel slide is visible
  * @param {number} position - slide position, start from 1
  */
 export function isVerticalCarouselSlideVisible(position) {
@@ -54,10 +49,10 @@ export function isVerticalCarouselSlideVisible(position) {
 }
 
 /**
- * @description get name of product in a vertical carousel slide
+ * Get name of product in a vertical carousel slide
  * @param {number} position - slide position, start from 1
  */
 export function getVerticalCarouselProductName(position) {
-	var slideProductNameSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ')  .product-name a';
+	var slideProductNameSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-name a';
 	return client.getText(slideProductNameSelector);
 }

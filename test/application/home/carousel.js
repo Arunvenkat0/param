@@ -8,6 +8,7 @@ import * as common from '../webdriver/pageObjects/common';
 
 describe('Homepage General #C84584', () => {
 	before(() => client.init());
+	after(() => client.end());
 	describe('Main carousel links', () => {
 		beforeEach(() => homePage.navigateTo());
 		it('#1 should go to New Arrivals for Womens', () =>
@@ -47,7 +48,6 @@ describe('Homepage General #C84584', () => {
 	});
 	describe('Vertical carousel', () => {
 		before(() => homePage.navigateTo());
-		after(() => client.end());
 		it('#1 should be Classic Pant', () =>
 			homePage.verticalCarouselSlide(1)
 				.then(() => homePage.isVerticalCarouselSlideVisible(1))
