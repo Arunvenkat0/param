@@ -203,7 +203,7 @@
 												</isif>
 												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
 													<isif condition="${!isInWishList && !empty(lineItem.product)}">
-														<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addtowishlist','locale',null)}">
+														<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addthisitemtowishlist.title','locale',null)}">
 															${Resource.msg('global.addtowishlist','locale',null)}
 														</a>
 													</isif>
