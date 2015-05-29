@@ -221,7 +221,7 @@
 							<isprint value="${Resource.msg('summary.editcart','checkout',null)}" encoding="off" />
 						</a>
 						<button class="button-fancy-large" type="submit" name="submit" value="${Resource.msg('global.submitorder','locale',null)}">
-							Submit Order
+							${Resource.msg('global.submitorder','locale',null)}
 						</button>
 					</div>
 				</fieldset>
