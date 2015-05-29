@@ -7,9 +7,6 @@
 		}
 		p {
 			font-size: 1.3em;
-			font-style: italic;
-			margin: 0;
-			padding: 0.5em 2em;
 		}
 	}
 	.add-gift-cert {
@@ -29,7 +26,7 @@
 }
 
 .page-content-tab-navigaton button {
-	background: none repeat scroll 0 0 $gainsboro;
+	background-color: $gainsboro;
 	border-color: $white-smoke;
 	border-width: 1px;
 	color: $nobel;
@@ -38,7 +35,7 @@
 	font-weight: 400;
 	margin: 0 0 -1px;
 	&.selected {
-		background: none repeat scroll 0 0 $white;
+		background-color: $white;
 		border-bottom: 1px solid $white;
 	}
 }
@@ -71,13 +68,8 @@
 }
 
 .gift-registry-advanced {
-	clear: both;
+	@extend %clearfix;
 	.toggle-content {
 		display: none;
-		overflow: hidden;
-		padding: 1em 0;
-	}
-	.event-month, .event-city {
-		clear: both;
 	}
 }

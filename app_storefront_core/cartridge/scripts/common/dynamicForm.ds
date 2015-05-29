@@ -47,7 +47,10 @@ module.exports = function (formObject, formData) {
 	var form = '';
 	for (var formElementName in formObject) {
 		var formElement = formObject[formElementName];
-		var fieldData = formData[formElementName];
+		var fieldData;
+		if (formData) {
+			fieldData = formData[formElementName]
+		}
 		if (formElement instanceof FormField) {
 			if (fieldData && fieldData.skip) {
 				continue;

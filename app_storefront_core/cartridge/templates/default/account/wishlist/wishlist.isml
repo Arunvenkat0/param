@@ -6,9 +6,7 @@
 
 	<h1>${Resource.msg('wishlist.searchheader','account',null)}:</h1>
 
-	<div class="form-inline">
-		<isinclude template="account/wishlist/wishlistsearch"/>
-	</div>
+	<isinclude template="account/wishlist/wishlistsearch"/>
 
 	<isset name="formID" value="${pdict.CurrentForms.wishlist.htmlName + '_items'}" scope="page"/>
 
@@ -37,12 +35,8 @@
 				<button class="simple-submit" name="${pdict.CurrentForms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >
 					Select
 				</button>
-
 			</div>
-
-
 		</isif>
-
 
 		<isif condition="${pdict.ProductList.giftCertificateItem == null}">
 			<div class="form-row">
@@ -54,11 +48,8 @@
 		</isif>
 
 	</isif>
-
 	</fieldset>
-
 	</form>
-
 
 	<form class="list-share" action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
 		<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
@@ -71,11 +62,9 @@
 					${Resource.msg('wishlist.listpublic','account',null)}
 				</button>
 			</isif>
-			<span class="buttonstyle">
-				<a id="send-to-friend" class="send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.UUID, 'source','wishlist')}">
-					${Resource.msg('wishlist.sendwishlist','account',null)}
-				</a>
-			</span>
+			<a id="send-to-friend" class="share-option buttonstyle send-to-friend" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start','plid',pdict.ProductList.UUID, 'source','wishlist')}">
+				${Resource.msg('wishlist.sendwishlist','account',null)}
+			</a>
 			<div class="share-option">
 				${Resource.msg('wishlist.copylabel','account',null)}:
 				<a href="${URLUtils.https('Wishlist-ShowOther', 'WishListID', pdict.ProductList.UUID)}">

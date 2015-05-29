@@ -21,7 +21,7 @@
 			<isinclude template="account/facebook/facebookregistration"/>
 		</isif>
 
-		<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
+		<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="RegistrationForm">
 
 			<fieldset>
 

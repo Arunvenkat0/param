@@ -1,30 +1,81 @@
 #cart-table {
+	thead {
+		display: none;
+		@media screen and (min-width: 768px) {
+			display: table-header-group;
+		}
+	}
+	td {
+		box-sizing: border-box;
+		padding: 5px;
+	}
 	.header-total-price {
 		text-align: right;
 	}
 	.item-image {
+		float: left;
 		text-align: center;
-		width: 7em;
+		width: 40%;
+		@media screen and (min-width: 768px) {
+			float: none;
+			width: 7rem;
+		}
+	}
+	.item-details {
+		float: left;
+		width: 60%;
+		@media screen and (min-width: 768px) {
+			float: none;
+			width: auto;
+		}
+		.name {
+			font-size: 1rem;
+		}
 	}
 	.item-quantity {
+		clear: left;
+		float: left;
 		text-align: center;
+		width: 40%;
+		@media screen and (min-width: 768px) {
+			clear: none;
+			float: none;
+			text-align: left;
+			width: auto;
+		}
 		input {
-			margin: 0;
-			padding: 0.7em 0.2em;
-			text-align: right;
-			text-indent: 0;
-			width: 2.8em;
+			width: 2.5rem;
 		}
 	}
 	.item-quantity-details {
-		padding-left: 0;
+		clear: left;
+		float: left;
+		text-align: center;
+		width: 40%;
+		@media screen and (min-width: 768px) {
+			clear: none;
+			float: none;
+			text-align: left;
+			width: auto;
+		}
 		.item-user-actions {
-			line-height: 1.4;
-			width: 100px;
-			a, button {
+			a,
+			button {
 				display: block;
-				font-size: 0.9em;
+				width: 100%;
+				margin: .3rem 0;
+				@media screen and (min-width: 768px) {
+					width: auto;
+				}
 			}
+		}
+	}
+	.item-price {
+		float: left;
+		width: 60%;
+		@media screen and (min-width: 768px) {
+			float: none;
+			width: auto;
 		}
 	}
 	.price-promotion {
@@ -37,11 +88,21 @@
 		}
 	}
 	.item-total {
+		float: left;
+		font-size: 1rem;
 		font-weight: 700;
 		text-align: right;
+		width: 100%;
 		word-wrap: break-word;
+		@media screen and (min-width: 768px) {
+			float: none;
+			font-size: 1em;
+			width: auto;
+		}
 		.promo-adjustment {
-			width: 120px;
+			@media screen and (min-width: 768px) {
+				width: 7.5rem;
+			}
 		}
 	}
 	.price-unadjusted {
@@ -79,65 +140,62 @@
 }
 
 .cart-footer {
+	@extend %clearfix;
 	margin: .83em 0;
-	overflow: hidden;
 }
 
 .cart-coupon-code {
-	float: left;
-	width: 53%;
+	@media screen and (min-width: 768px) {
+		float: left;
+		width: 60%;
+	}
 	input {
-		margin-left: 0;
+		margin-bottom: .5rem;
+		width: 35%;
+		@media screen and (min-width: 768px) {
+			width: 45%;
+		}
 	}
 	.error {
 		padding-top: 0.4em;
 	}
-	#update-cart {
+	button {
 		margin-left: .6em;
 	}
 }
 
 .cart-order-totals {
-	float: right;
-	width: 40%;
-	button {
+	margin: 1rem 0;
+	@media screen and (min-width: 768px) {
 		float: right;
+		margin-top: 0;
+		width: 40%;
 	}
 }
 
 .order-totals-table {
-	th {
-		display: none;
-	}
 	td {
-		padding: .42em 0;
-		text-align: right !important;
-		word-break: break-all;
-		+ td {
-			word-break: normal;
-		}
+		padding: .3rem 0;
+		text-align: right;
+
+	}
+	.order-totals-item {
+		width: 60%;
+	}
+
+	.order-totals-value {
+		width: 40%;
+	}
+
+	.order-subtotal {
+		font-weight: 700;
 	}
 	.order-total {
-		font-size: 1.3em;
+		font-size: 1rem;
 		font-weight: 700;
 	}
 }
 
-.order-totals-item {
-	width: 60%;
-}
-
-.order-totals-value {
-	width: 40%;
-}
-
-.order-subtotal {
-	font-weight: 700;
-}
-
-#secondary .order-totals-table .order-shipping a {
-	display: none;
-}
 
 .cart-actions {
 	@extend %clearfix;

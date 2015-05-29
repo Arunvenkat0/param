@@ -1,65 +1,6 @@
 @media screen and (max-width: 767px) {
-	body {
-		-webkit-text-size-adjust: none;
-	}
 	div, img {
 		max-width: 100%;
-	}
-	input[type="text"],
-	input[type="password"],
-	textarea,
-	select {
-		width: 90%;
-	}
-	.form-row-button {
-		margin-left: 0;
-	}
-	.login-box-content label,
-	label,
-	.form-caption,
-	.form-label-text {
-		float: none;
-		margin: 2%;
-		text-align: left;
-		width: auto;
-	}
-	.login-box-content {
-		input[type="text"],
-		input[type="password"] {
-			width: 90%;
-		}
-	}
-	.form-inline {
-		.form-row {
-			width: 90%;
-		}
-		label {
-			padding: 0;
-		}
-		button {
-			width: 50% !important;
-		}
-	}
-	.form-indent {
-		margin-left: 2%;
-	}
-	legend {
-		padding: 14px 30% 10px 2%;
-		width: 68%;
-	}
-	.label-inline {
-		input {
-			height: 2em;
-			margin: 0;
-			padding: 0;
-		}
-		label {
-			margin: 0;
-			padding: .5em 0 0 1em;
-		}
-	}
-	.form-field-tooltip {
-		display: none;
 	}
 	.print-page,
 	.tooltip,
@@ -310,86 +251,6 @@
 	.pt_cart #secondary {
 		display: none;
 	}
-	#cart-table {
-		thead {
-			display: none;
-		}
-		td {
-			display: block;
-			padding: 5px;
-		}
-		.item-image {
-			float: left;
-			text-align: center;
-			width: 40%;
-		}
-		.item-details {
-			float: left;
-			width: 53%;
-			.product-list-item .name {
-				font-size: 1.3em;
-			}
-		}
-		.item-quantity {
-			clear: both;
-			float: left;
-			text-align: center;
-			width: 40%;
-			input {
-				text-align: center;
-				width: 50px;
-			}
-		}
-		.item-quantity-details {
-			float: left;
-			font-size: .9em;
-			width: 44%;
-		}
-		.item-price {
-			clear: both;
-			float: left;
-			margin-left: 42%;
-			width: 44%;
-		}
-		.item-total {
-			float: right;
-			font-size: 1.3em !important;
-			text-align: right !important;
-			width: 96%;
-		}
-	}
-	.cart-coupon-code {
-		.input-text {
-			width: 50%;
-		}
-		clear: both;
-		float: none;
-		width: 100%;
-		button {
-			margin: 5px 0 0 .5em;
-		}
-	}
-	.cart-actions {
-		margin: auto;
-		overflow: hidden;
-	}
-	.cart-order-totals {
-		border-top: 1px solid #D9D9D9;
-		clear: both;
-		float: none;
-		margin: 20px 0;
-		padding: 20px 2%;
-		width: 96%;
-		button {
-			margin: 0 0 20px;
-		}
-		td {
-			width: 50%;
-		}
-	}
-	#cart-table .item-total .promo-adjustment {
-		width: auto;
-	}
 	.pdp-main .product-col-1 {
 		margin-left: 0;
 	}
@@ -510,13 +371,6 @@
 			th {
 				display: none;
 			}
-		}
-	}
-	table.item-list {
-		td,
-		.section-header {
-			font-size: .9em !important;
-			padding: .3em;
 		}
 	}
 	.order-shipment-table .section-header {
@@ -752,10 +606,6 @@
 		width: auto;
 	}
 	#cart-table {
-		font-size: .9em;
-		td {
-			padding: 3px;
-		}
 		.item-user-actions {
 			width: 72px;
 		}

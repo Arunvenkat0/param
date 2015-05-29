@@ -9,18 +9,19 @@
 			<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 		</legend>
 
-		<div class="payment-method-options">
+		<div class="payment-method-options form-indent">
 			<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
 
 				<iscomment>Ignore GIFT_CERTIFICATE method, GCs are handled separately before other payment methods.</iscomment>
 				<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)}"><iscontinue/></isif>
 
-				<div class="form-row">
+				<div class="form-row label-inline">
 					<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
-					<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/>:</label>
+					<label for="is-${radioID}"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/></label>
 
-					<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}"
-						<isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
+					<div class="field-wrapper">
+						<input type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> />
+					</div>
 				</div>
 
 			</isloop>
@@ -83,9 +84,9 @@
 
 			<span class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate','checkout',null)}</span>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month label-removed"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year label-removed"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off" helpcid="checkout-security-code" helplabel="${Resource.msg('billing.linkcvn', 'checkout', null)}"/>
 
@@ -106,9 +107,9 @@
 			<p class="form-caption">${Resource.msg('billing.bmlhelp','checkout',null)}</p>
 
 		    <span class="form-label-text"><span class="required-indicator">&#8226;</span>Date of Birth:</span>
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.year}" type="select" rowclass="year label-removed"/>
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.month}" type="select" rowclass="month label-removed"/>
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.day}" type="select" rowclass="day label-removed"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.year}" type="select" rowclass="year"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.month}" type="select" rowclass="month"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.day}" type="select" rowclass="day"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.ssn}" type="input" xhtmlclass="ssn"/>
 
