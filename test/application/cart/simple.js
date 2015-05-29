@@ -2,7 +2,6 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import config from '../webdriver/config';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
