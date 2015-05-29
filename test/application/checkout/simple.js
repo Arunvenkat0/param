@@ -6,7 +6,6 @@ import client from '../webdriver/client';
 import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
-
 describe('Checkout Simple Product', () => {
 	var shippingFormData = new Map();
 	shippingFormData.set('firstName', 'John');
