@@ -61,7 +61,7 @@
 		<h2><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}" timezone="utc"/></h2>
 		<isif condition="${empty(pdict.CurrentForms.giftregistry.items)}">
 			<p>${Resource.msg('giftregistry.giftregnoitems','account',null)}</p>
-			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('account.giftregistry.emptyadd','account',null)}</a>
+			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">${Resource.msg('giftregistry.emptyadd','account',null)}</a>
 		<iselseif condition="${pdict.Status != null && pdict.Status.isError()}">
 			<span class="form-error">
 				<isprint value="${Resource.msgf('giftregistry.' + pdict.Status.code,'giftregistry',null, pdict.Status.parameters)}"/>
