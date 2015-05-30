@@ -27,12 +27,12 @@
 
 			<div class="list-share">
 				<isif condition="${pdict.ProductList.public}">
-					<button class="share-option" type="submit" value="${Resource.msg('account.giftregistry.makeregprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
-						${Resource.msg('account.giftregistry.makeregprivate','account',null)}
+					<button class="share-option" type="submit" value="${Resource.msg('wishlist.listprivate','account',null)}" name="${pdict.CurrentForms.giftregistry.setPrivate.htmlName}">
+						${Resource.msg('wishlist.listprivate','account',null)}
 					</button>
 				<iselse/>
-					<button class="share-option" type="submit" value="${Resource.msg('account.giftregistry.makeregpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
-						${Resource.msg('account.giftregistry.makeregpublic','account',null)}
+					<button class="share-option" type="submit" value="${Resource.msg('wishlist.listpublic','account',null)}" name="${pdict.CurrentForms.giftregistry.setPublic.htmlName}">
+						${Resource.msg('wishlist.listpublic','account',null)}
 					</button>
 				</isif>
 				<isif condition="${pdict.ProductList.public}">
