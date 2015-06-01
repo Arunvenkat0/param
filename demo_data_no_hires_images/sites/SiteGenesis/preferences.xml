@@ -19,7 +19,7 @@
             <preference preference-id="ProductChangeFrequency">daily</preference>
             <preference preference-id="ProductPriority">0.5</preference>
             <preference preference-id="SiteCatalog">storefront-catalog-en</preference>
-            <preference preference-id="SiteCurrencies">USD:EUR</preference>
+            <preference preference-id="SiteCurrencies">USD:EUR:JPY:CNY</preference>
 	    <preference preference-id="SiteCustomerList">SiteGenesis</preference>            
             <preference preference-id="SiteDefaultLocale">default</preference>
             <preference preference-id="SiteLibrary">SiteGenesisSharedLibrary</preference>
