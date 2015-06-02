@@ -219,6 +219,387 @@ along with their differences for testing different scenarios:
 
 </table>
 
+
+### Test products
+
+<table border="1" cellspacing="1" cellpadding="2">
+<thead>
+<tr>
+<th>Type</th>
+<th>Product ID</th>
+<th>Display Name</th>
+<th>Color</th>
+<th>Size</th>
+<th>Width</th>
+<th>Product Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="vertical-align: top;">
+<strong>Option Product</strong>
+</td>
+<td style="vertical-align: top;"><strong>samsung-ln55a950</strong></td>
+<td style="vertical-align: top;"><strong>Samsung Series 9 55" LCD High Definition Television</strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong>tvWarranty</strong></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>VariationMaster</strong></td>
+<td style="vertical-align: top;"><strong>25686514</strong></td>
+<td style="vertical-align: top;"><strong>Navy Single Pleat Wool Suit</strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548258</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy<br />(NAVYWL)</td>
+<td style="vertical-align: top;">46</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548265</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">48</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548227</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">42</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548197</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">39</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548234</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">43</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548203</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">40</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548241</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">44</td>
+<td style="vertical-align: top;">Regular</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548432</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">40</td>
+<td style="vertical-align: top;">Long</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548487</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">46</td>
+<td style="vertical-align: top;">Long</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548456</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">42</td>
+<td style="vertical-align: top;">Long</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548319</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">38</td>
+<td style="vertical-align: top;">Short</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548357</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">42</td>
+<td style="vertical-align: top;">Short</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548371</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">44</td>
+<td style="vertical-align: top;">Short</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">750518548296</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Navy</td>
+<td style="vertical-align: top;">36</td>
+<td style="vertical-align: top;">Short</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>Set</strong></td>
+<td style="vertical-align: top;"><strong>spring-look</strong></td>
+<td style="vertical-align: top;"><strong>Spring Look</strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong>25517787<br />(Master Product)</strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong>Long Sleeve Raglan Button Out Turtle Neck</strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701642808268</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Fire Red Multi</td>
+<td style="vertical-align: top;">S</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701642808251</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Fire Red Multi</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701642808244</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Fire Red Multi</td>
+<td style="vertical-align: top;">L</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701642808275</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Fire Red Multi</td>
+<td style="vertical-align: top;">XL</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">25553432<br />(Master Product)</span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Trouser Leg Pant</span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701643489442</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Chino<br />(JJ493XX)</td>
+<td style="vertical-align: top;">16</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">701643489398</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">midnight navy<br />(JJ0VWXX)</td>
+<td style="vertical-align: top;">6</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">25791388<br />(Master Product)</span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Zacco</span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Black (BLKBKPA)</span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431040</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">6</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431057</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">6.5</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431064</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">7</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431071</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">7.5</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431088</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">8</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431095</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">8.5</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431101</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">9</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431118</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">9.5</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">740357431125</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">Black</td>
+<td style="vertical-align: top;">10</td>
+<td style="vertical-align: top;">M</td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"><strong>Bundle</strong></td>
+<td style="vertical-align: top;"><strong>microsoft-xbox360-bundle</strong></td>
+<td style="vertical-align: top;"><strong>Xbox 360 Bundle</strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong></strong></td>
+<td style="vertical-align: top;"><strong>consoleWarranty</strong></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">microsoft-xbox360-console</td>
+<td style="vertical-align: top;">Microsoft X-Box 360 Game Console</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">consoleWarranty</td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">easports-fight-night-round-3-xbox360</td>
+<td style="vertical-align: top;">Fight Night: Round 3 (for X-Box 360)</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">rockstar-games-grand-theft-auto-iv-xbox360</td>
+<td style="vertical-align: top;">Grand Theft Auto 4 (for X-Box 360)</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;">sierra-the-bourne-conspiracy-xbox360</td>
+<td style="vertical-align: top;">Robert Ludlum's: The Bourne Conspiracy (for X-Box 360)</td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+<td style="vertical-align: top;"></td>
+</tr>
+</tbody>
+</table>
+
 ### Options
 The following options are supported on the command line:
 
