@@ -42,6 +42,10 @@
                 <amount quantity="1">89.00</amount>
             </price-table>
 
+            <price-table product-id="701643489398">
+                <amount quantity="1">89.00</amount>
+            </price-table>
+
             <price-table product-id="740357431057">
                 <amount quantity="1">99.00</amount>
             </price-table>
@@ -173,6 +177,10 @@
                 <amount quantity="1">6400</amount>
             </price-table>
 
+            <price-table product-id="701643489398">
+                <amount quantity="1">6400</amount>
+            </price-table>
+
             <price-table product-id="740357431057">
                 <amount quantity="1">7100</amount>
             </price-table>
@@ -294,7 +302,7 @@
             <currency>USD</currency>
             <display-name xml:lang="x-default">Sale Prices</display-name>
             <online-flag>true</online-flag>
-            <parent>usd-list-prices</parent>
+            <parent>jpy-list-prices</parent>
         </header>
 
         <price-tables>
@@ -458,6 +466,10 @@
                 <amount quantity="1">64.00</amount>
             </price-table>
 
+            <price-table product-id="701643489398">
+                <amount quantity="1">64.00</amount>
+            </price-table>
+
             <price-table product-id="740357431057">
                 <amount quantity="1">71.00</amount>
             </price-table>
@@ -475,6 +487,10 @@
             </price-table>
 
             <price-table product-id="701643489442">
+                <amount quantity="1">64.00</amount>
+            </price-table>
+
+            <price-table product-id="701643489398">
                 <amount quantity="1">64.00</amount>
             </price-table>
 
@@ -583,7 +599,7 @@
             <currency>USD</currency>
             <display-name xml:lang="x-default">Sale Prices</display-name>
             <online-flag>true</online-flag>
-            <parent>usd-list-prices</parent>
+            <parent>eur-list-prices</parent>
         </header>
 
         <price-tables>
@@ -620,6 +636,10 @@
                 <amount quantity="1">64.08</amount>
             </price-table>
 
+            <price-table product-id="701643489398">
+                <amount quantity="1">64.08</amount>
+            </price-table>
+
             <price-table product-id="740357431057">
                 <amount quantity="1">71.28</amount>
             </price-table>
@@ -637,6 +657,10 @@
             </price-table>
 
             <price-table product-id="701643489442">
+                <amount quantity="1">64.08</amount>
+            </price-table>
+
+            <price-table product-id="701643489398">
                 <amount quantity="1">64.08</amount>
             </price-table>
 
@@ -755,6 +779,10 @@
                 <amount quantity="1">89.00</amount>
             </price-table>
 
+            <price-table product-id="701643489398">
+                <amount quantity="1">89.00</amount>
+            </price-table>
+
             <price-table product-id="740357431057">
                 <amount quantity="1">99.00</amount>
             </price-table>
@@ -772,6 +800,10 @@
             </price-table>
 
             <price-table product-id="701643489442">
+                <amount quantity="1">89.00</amount>
+            </price-table>
+
+            <price-table product-id="701643489398">
                 <amount quantity="1">89.00</amount>
             </price-table>
 
