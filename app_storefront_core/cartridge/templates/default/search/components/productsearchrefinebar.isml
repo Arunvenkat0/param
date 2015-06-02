@@ -94,7 +94,7 @@
 				<iscomment>Special handling for color and size refinement selection</iscomment>
 				<isif condition="${RefinementDefinition.attributeID.equals('refinementColor') || RefinementDefinition.attributeID.equals('size')}">
 
-					<ul class="clearfix swatches ${RefinementDefinition.getDisplayName()}">
+					<ul class="clearfix swatches ${RefinementDefinition.getAttributeID()}">
 					
 						<iscomment>render the actual swatches</iscomment>
 						<isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">

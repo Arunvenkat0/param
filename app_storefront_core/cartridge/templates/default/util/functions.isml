@@ -5,7 +5,7 @@
 <isscript>
 	function cleanupID(s) {
 		if(s!=null)
-			return s.replace( new RegExp( "[^a-z0-9_\-]", "gi" ), "_" );
+			return s.replace( new RegExp( "[^a-z0-9_\-]", "gi" ), "_" ).toLowerCase();
 		else
 			return s;	
 	}
