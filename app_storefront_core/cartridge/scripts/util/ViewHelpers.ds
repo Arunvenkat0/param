@@ -17,6 +17,7 @@ function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	
 	var psm : ProductSearchModel = new ProductSearchModel();
 	psm.setCategoryID(category.getID());
+	psm.setPriceMin(0.01);
 	psm.search();
 	var psr : ProductSearchRefinements = psm.getRefinements();
 	var level1 : Collection = psr.getNextLevelCategoryRefinementValues(category);
