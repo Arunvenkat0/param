@@ -1,4 +1,4 @@
-.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .gift-registry-advanced:after, .store-list-pdp-container .store-list-item:after, .search-suggestion-wrapper:after, .product-suggestion:after {
+.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .form-row:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .gift-registry-advanced:after, .store-list-pdp-container .store-list-item:after, .search-suggestion-wrapper:after, .product-suggestion:after {
   content: "";
   display: table;
   clear: both; }
@@ -1963,7 +1963,6 @@ label {
     margin-right: .42em; }
 
 .form-row {
-  clear: both;
   margin: 0.5rem 0 1rem; }
 
 .form-horizontal .form-row-button {
@@ -1996,6 +1995,7 @@ input[type="password"],
 textarea {
   border: 1px solid #aaa;
   box-sizing: border-box;
+  height: 2rem;
   padding: 0.7em 0.5em;
   text-indent: 0;
   width: 100%; }
