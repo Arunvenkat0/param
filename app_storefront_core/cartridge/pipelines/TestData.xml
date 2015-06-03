@@ -60,11 +60,15 @@
           </transition>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="ImportInventoryLists" pipelet-set-identifier="bc_api">
           <key-binding alias="&quot;testdata/inventory-list/inventory.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;DELETE&quot;" key="ImportMode"/>
+          <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
           <key-binding alias="null" key="ErrorCode"/>
           <key-binding alias="null" key="ErrorMsg"/>
           <key-binding alias="null" key="LogFileName"/>
@@ -82,8 +86,8 @@
       </node>
       <simple-transition/>
       <node>
-        <pipelet-node pipelet-name="ImportInventoryLists" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/inventory-list/inventory.xml&quot;" key="ImportFile"/>
+        <pipelet-node pipelet-name="ImportPriceBooks" pipelet-set-identifier="bc_api">
+          <key-binding alias="&quot;testdata/pricebook/pricebooks.xml&quot;" key="ImportFile"/>
           <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
           <key-binding alias="null" key="ErrorCode"/>
           <key-binding alias="null" key="ErrorMsg"/>
@@ -92,46 +96,6 @@
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b5" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ImportPriceBooks" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/pricebook/pricebooks.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;DELETE&quot;" key="ImportMode"/>
-          <key-binding alias="null" key="ErrorCode"/>
-          <key-binding alias="null" key="ErrorMsg"/>
-          <key-binding alias="null" key="LogFileName"/>
-          <key-binding alias="null" key="Status"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b6" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ImportPriceBooks" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/pricebook/pricebooks.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
-          <key-binding alias="null" key="ErrorCode"/>
-          <key-binding alias="null" key="ErrorMsg"/>
-          <key-binding alias="null" key="LogFileName"/>
-          <key-binding alias="null" key="Status"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b7" source-connector="error">
           <transition target-connector="in1" target-path="./+1">
             <transition-display>
               <bend-point relative-to="source" x="1" y="0"/>
