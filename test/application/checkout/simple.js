@@ -88,17 +88,21 @@ describe('Checkout Simple Product', () => {
 
 	describe.only('Checkout as Returning Customer', () => {
 		it('test', () => {
-			testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(function (prices) {
-				console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices);
-			});
-
-			testData.getInventoryByProductIdPromise('701642808244').then(function (inventory) {
-				console.log('\ninv for 701642808244:', inventory);
-			});
-
-			testData.getCustomerByLoginPromise('testuser1@demandware.com').then(function (customer) {
-				console.log('\ntestuser1@demandware.com =', customer);
-			});
+			//testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(function (prices) {
+			//	console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices);
+			//});
+            //
+			//testData.getInventoryByProductIdPromise('701642808244').then(function (inventory) {
+			//	console.log('\ninv for 701642808244:', inventory);
+			//});
+            //
+			//testData.getCustomerByLoginPromise('testuser1@demandware.com').then(function (customer) {
+			//	console.log('\ntestuser1@demandware.com =', customer);
+			//});
+			testData.getProductsPromise().then(function(data) {
+				console.log('\n\n[Test] resolved');
+				//console.log('data =', data);
+			})
 		});
 	});
 });

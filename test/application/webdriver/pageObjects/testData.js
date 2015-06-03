@@ -7,6 +7,7 @@ import _ from 'lodash';
 // Test data will be lazy loaded into these variables through Promise resolutions
 let catalogElectronics = null;
 let catalogApparel = null;
+let catalogs = null;
 let customers = null;
 let inventory = null;
 let pricebooks = null;
@@ -24,6 +25,8 @@ let filePaths = {
 let defaultPassword = 'Test123!';
 let priceTypes = ['list', 'sale'];
 
+let standardProductId = 'samsung-ln55a950';
+
 /**
  * Reads and parses test data for a particular subject
  *
@@ -31,14 +34,121 @@ let priceTypes = ['list', 'sale'];
  * @returns {Promise} - JSON object with the subject test data
  */
 function _getSubjectTestDataPromise (subject) {
-	let promise = new Promise(resolve => {
+	return new Promise(resolve => {
 		fs.readFile(filePaths[subject], (err, data) => {
 			let parser = xml2js.Parser();
 			parser.parseString(data, (err, result) => resolve(result));
 		});
 	});
+}
 
-	return promise;
+/**
+ * Loads Price Books test data
+ *
+ * @returns {Promise} - JSON object with pricebooks test data
+ */
+export function getProductsPromise () {
+	return Promise.all([apparelPromise, electronicsPromise])
+		.then(data => {
+			//console.log('allPromise resolved');
+			//console.log('data =', data);
+			return data;
+		});
+}
+
+var apparelPromise = new Promise(resolve =>  {
+	if(catalogApparel) {
+		//console.log('[apparelPromise] if');
+		resolve(catalogApparel);
+	} else {
+		//console.log('[apparelPromise] else');
+		_getSubjectTestDataPromise('catalogApparel').then(results => {
+			//pricebooks = _parsePriceBooks(results.pricebooks.pricebook);
+			catalogApparel = _parseApparelCatalog(results.catalog);
+			console.log('[apparelPromise] catalogApparel =', JSON.stringify(catalogApparel));
+			resolve(catalogApparel);
+			//resolve(catalogApparel);
+		});
+	}
+});
+var electronicsPromise = new Promise(resolve =>  {
+	if(catalogElectronics) {
+		resolve(catalogElectronics);
+	} else {
+		_getSubjectTestDataPromise('catalogElectronics').then(results => {
+			//console.log('[electronicsPromise] results =', results);
+			//pricebooks = _parsePriceBooks(results.pricebooks.pricebook);
+			resolve(results);
+			//resolve(catalogApparel);
+		});
+	}
+});
+
+function _parseApparelCatalog (fileData) {
+	//console.log('[_parseApparelCatalog] called. fileData =', JSON.stringify(fileData));
+	let products = {};
+	for (let product of fileData.product) {
+		let id = product['$']['product-id'];
+
+		if (_isProductSet(product)) {
+			console.log('Product Set found!');
+		} else if (_isProductVariationMaster(product)) {
+			console.log('Product Variation Master found!');
+		} else if (_isSimpleProduct(product)) {
+			console.log('Simple Product found!');
+		}
+		products[id] = {
+			ean: product['ean'][0],
+			upc: product['upc'][0],
+			unit: product['unit'][0],
+			minOrderQuantity: +product['min-order-quantity'][0],
+			stepQuantity: +product['step-quantity'][0],
+			onlineFlag: !!product['online-flag'][0],
+			availableFlag: !!product['available-flag'][0],
+			searchableFlag: !!product['searchable-flag'][0],
+			taxClassId: product['tax-class-id'] ? product['tax-class-id'][0] : null
+		};
+
+		products[id].pageAttributes = !product['page-attributes'][0] ? {} :
+			{
+				pageTitle: product['page-attributes'][0]['page-title'][0]['_'],
+				pageDescription: product['page-attributes'][0]['page-description'][0]['_']
+			};
+
+		products[id].customAttributes = {};
+		if (product.hasOwnProperty('custom-attributes')) {
+			let customAttrs = product['custom-attributes'][0]['custom-attribute'];
+			for (let attr of customAttrs) {
+				let key = attr['$']['attribute-id'];
+				let value = attr['_'];
+				products[id].customAttributes[key] = value;
+			}
+		}
+
+	}
+
+	//for (let ca of fileData['category-assignment']) {
+	//	console.log('[_parseApparelCatalog] category-assignment =', ca);
+	//}
+	console.log('[_parseApparelCatalog] products =', products);
+
+	return products;
+}
+
+function _isProductSet (product) {
+	return product.hasOwnProperty('product-set-products');
+}
+
+function _isProductVariationMaster (product) {
+	return product.hasOwnProperty('variations');
+}
+
+function _isSimpleProduct (product) {
+	return !_isProductSet(product) && !_isProductVariationMaster(product);
+}
+
+function _parseElectronicsCatalog (fileData) {
+	console.log('[_parseElectronicsCatalog] fileData =', JSON.stringify(fileData));
 }
 
 /**
@@ -280,4 +390,8 @@ export function getCustomerByLoginPromise (login) {
 
 function _pickCustomer (login) {
 	return _.findWhere(customers, {'login': login});
+}
+
+export function getProductStandard () {
+	return;
 }
