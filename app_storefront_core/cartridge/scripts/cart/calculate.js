@@ -10,7 +10,7 @@
  */
 var HashMap = require('dw/util/HashMap');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
-var ShippingMgr = require('dw/order/ShippingMrg');
+var ShippingMgr = require('dw/order/ShippingMgr');
 var ShippingLocation = require('dw/order/ShippingLocation');
 var TaxMgr = require('dw/order/TaxMgr');
 var Logger = require('dw/system/Logger');
