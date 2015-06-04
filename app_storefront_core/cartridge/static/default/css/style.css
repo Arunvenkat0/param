@@ -381,7 +381,7 @@ th {
   background-repeat: no-repeat;
   position: relative;
   display: inline-block;
-  width: 1.33333em;
+  width: 1.3333333333em;
   line-height: 1em; }
   .flag-icon:before {
     content: '\00a0'; }
@@ -3100,7 +3100,7 @@ nav[role="navigation"] {
     background-image: url("../images/interface/icon-color-swatch-unselectable.png");
     background-position: right top; }
 
-.refinement ul.Color li a {
+.refinement ul.refinementColor li a {
   height: 23px;
   padding: 0;
   text-indent: -999em;
