@@ -32,10 +32,7 @@ function unsanitizeOR( anURL ) {
  *
  **/
 function cleanupID(s) {
-	if(s!=null)
-		return s.replace( new RegExp( "[^a-z0-9_\-]", "gi" ), "_" ).toLowerCase();
-	else
-		return s;	
+	return (s === null) ? s : s.replace(new RegExp( "[^a-z0-9_\-]", "gi" ), "_" ).toLowerCase();
 }
 
 function ProductUtils(pdict : PipelineDictionary) {
