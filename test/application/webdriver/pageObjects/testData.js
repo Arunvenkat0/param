@@ -5,9 +5,7 @@ import xml2js from 'xml2js';
 import _ from 'lodash';
 
 // Test data will be lazy loaded into these variables through Promise resolutions
-let catalogElectronics = null;
-let catalogApparel = null;
-let catalogs = null;
+let catalog = {};
 let customers = null;
 let inventory = null;
 let pricebooks = null;
@@ -27,8 +25,66 @@ let priceTypes = ['list', 'sale'];
 
 let standardProductId = 'samsung-ln55a950';
 
+export function getProductByIdPromise (productId) {
+	return new Promise((resolve, reject) => {
+		if (_.keys(catalog)) {
+			_getProductFromCatalog(productId, resolve);
+		} else {
+			_getProductsPromise().then(() => {
+				_getProductFromCatalog(productId, resolve);
+			})
+		}
+	});
+}
+
+function _getProductFromCatalog (productId, resolve) {
+	let product = catalog[productId];
+	return product ? resolve(product) : resolve('Product not found');
+}
+
 /**
- * Reads and parses test data for a particular subject
+ * Returns a Promise that, when resolved, will return a JSON object of a
+ *   specific customer's test data
+ *
+ * @param {string} login - test customer's login value
+ * @returns {Promise} - JSON object with customer's test data
+ */
+export function getCustomerByLoginPromise (login) {
+	return new Promise(resolve => {
+		if (customers) {
+			resolve(_pickCustomer(login));
+		} else {
+			_getCustomersPromise().then(() => resolve(_pickCustomer(login)));
+		}
+	});
+}
+
+export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
+	return new Promise(resolve => {
+		if (pricebooks) {
+			resolve(_getPricesForProduct(productId, priceTypes, currencyCode));
+		} else {
+			_getPriceBooksPromise().then(() =>
+					resolve(_getPricesForProduct(productId, priceTypes, currencyCode))
+			);
+		}
+	});
+}
+
+export function getInventoryByProductIdPromise (id) {
+	return new Promise(resolve => {
+		if (inventory) {
+			resolve(_.findWhere(inventory, {productId: id}));
+		} else {
+			_getInventoryPromise().then(() =>
+					resolve(_.findWhere(inventory, {productId: id}))
+			);
+		}
+	});
+}
+
+/**
+ * Reads and parses test data XML file(s) for a particular subject
  *
  * @param {string} subject - Test data subject to be retrieved
  * @returns {Promise} - JSON object with the subject test data
@@ -47,92 +103,71 @@ function _getSubjectTestDataPromise (subject) {
  *
  * @returns {Promise} - JSON object with pricebooks test data
  */
-export function getProductsPromise () {
-	return Promise.all([apparelPromise, electronicsPromise])
-		.then(data => {
-			//console.log('allPromise resolved');
-			//console.log('data =', data);
-			return data;
-		});
+export function _getProductsPromise () {
+	if (_.keys(catalog)) {
+		return Promise.resolve(catalog);
+	} else {
+		return Promise.all([apparelPromise, electronicsPromise])
+			.then(() => {
+				return catalog;
+			});
+	}
 }
 
 var apparelPromise = new Promise(resolve =>  {
-	if(catalogApparel) {
-		//console.log('[apparelPromise] if');
-		resolve(catalogApparel);
-	} else {
-		//console.log('[apparelPromise] else');
-		_getSubjectTestDataPromise('catalogApparel').then(results => {
-			//pricebooks = _parsePriceBooks(results.pricebooks.pricebook);
-			catalogApparel = _parseApparelCatalog(results.catalog);
-			console.log('[apparelPromise] catalogApparel =', JSON.stringify(catalogApparel));
-			resolve(catalogApparel);
-			//resolve(catalogApparel);
-		});
-	}
-});
-var electronicsPromise = new Promise(resolve =>  {
-	if(catalogElectronics) {
-		resolve(catalogElectronics);
-	} else {
-		_getSubjectTestDataPromise('catalogElectronics').then(results => {
-			//console.log('[electronicsPromise] results =', results);
-			//pricebooks = _parsePriceBooks(results.pricebooks.pricebook);
-			resolve(results);
-			//resolve(catalogApparel);
-		});
-	}
+	return _getSubjectTestDataPromise('catalogApparel').then(results => {
+		_parseCatalog(results.catalog);
+		resolve();
+	});
 });
 
-function _parseApparelCatalog (fileData) {
-	//console.log('[_parseApparelCatalog] called. fileData =', JSON.stringify(fileData));
-	let products = {};
+var electronicsPromise = new Promise(resolve =>  {
+	return _getSubjectTestDataPromise('catalogElectronics').then(results => {
+		_parseCatalog(results.catalog);
+		resolve();
+	});
+});
+
+function _parseCatalog (fileData) {
 	for (let product of fileData.product) {
 		let id = product['$']['product-id'];
+		let productType = _getProductType(product);
 
-		if (_isProductSet(product)) {
-			console.log('Product Set found!');
-		} else if (_isProductVariationMaster(product)) {
-			console.log('Product Variation Master found!');
-		} else if (_isSimpleProduct(product)) {
-			console.log('Simple Product found!');
+		switch (productType) {
+			case 'simple':
+				catalog[id] = new ProductSimple(product);
+				break;
+			case 'variationMaster':
+				catalog[id] = new ProductVariationMaster(product);
+				break;
+			case 'set':
+				catalog[id] = new ProductSet(product);
+				break;
+			////case 'bundle':
+			//	catalog['id'] = new ProductBundle(product);
+			//	break;
 		}
-		products[id] = {
-			ean: product['ean'][0],
-			upc: product['upc'][0],
-			unit: product['unit'][0],
-			minOrderQuantity: +product['min-order-quantity'][0],
-			stepQuantity: +product['step-quantity'][0],
-			onlineFlag: !!product['online-flag'][0],
-			availableFlag: !!product['available-flag'][0],
-			searchableFlag: !!product['searchable-flag'][0],
-			taxClassId: product['tax-class-id'] ? product['tax-class-id'][0] : null
-		};
-
-		products[id].pageAttributes = !product['page-attributes'][0] ? {} :
-			{
-				pageTitle: product['page-attributes'][0]['page-title'][0]['_'],
-				pageDescription: product['page-attributes'][0]['page-description'][0]['_']
-			};
-
-		products[id].customAttributes = {};
-		if (product.hasOwnProperty('custom-attributes')) {
-			let customAttrs = product['custom-attributes'][0]['custom-attribute'];
-			for (let attr of customAttrs) {
-				let key = attr['$']['attribute-id'];
-				let value = attr['_'];
-				products[id].customAttributes[key] = value;
-			}
-		}
-
 	}
 
 	//for (let ca of fileData['category-assignment']) {
-	//	console.log('[_parseApparelCatalog] category-assignment =', ca);
+	//	console.log('[_parseCatalog] category-assignment =', ca);
 	//}
-	console.log('[_parseApparelCatalog] products =', products);
 
-	return products;
+	return;
+}
+
+function _getProductType (product) {
+	if (_isProductSet(product)) {
+		return 'set';
+	} else if (_isProductVariationMaster(product)) {
+		return 'variationMaster';
+	} else if (_isProductSimple(product)) {
+		return 'simple';
+	} else if (_isProductBundle(product)) {
+		return 'bundle';
+	} else {
+		return 'unknown';
+	}
 }
 
 function _isProductSet (product) {
@@ -143,12 +178,97 @@ function _isProductVariationMaster (product) {
 	return product.hasOwnProperty('variations');
 }
 
-function _isSimpleProduct (product) {
-	return !_isProductSet(product) && !_isProductVariationMaster(product);
+function _isProductBundle (product) {
+	return product.hasOwnProperty('bundled-products');
+}
+
+function _isProductSimple (product) {
+	return !_isProductSet(product)
+		&& !_isProductVariationMaster(product)
+		&& !_isProductBundle(product);
 }
 
 function _parseElectronicsCatalog (fileData) {
 	console.log('[_parseElectronicsCatalog] fileData =', JSON.stringify(fileData));
+}
+
+class ProductBase {
+	constructor (product) {
+		this.id = product['$']['product-id'];
+		this.ean = product['ean'][0];
+		this.upc = product['upc'][0];
+		this.unit = product['unit'][0];
+		this.minOrderQuantity = +product['min-order-quantity'][0];
+		this.stepQuantity = +product['step-quantity'][0];
+		this.onlineFlag = !!product['online-flag'][0];
+		this.availableFlag = !!product['available-flag'][0];
+		this.searchableFlag = !!product['searchable-flag'][0];
+		this.taxClassId = product['tax-class-id'] ? product['tax-class-id'][0] : null
+	}
+}
+
+class VariationMasterAndSimple extends ProductBase {
+	constructor (product) {
+		super(product);
+		this.taxClassId = product['tax-class-id'];
+		this.customAttributes = {};
+
+		if (product.hasOwnProperty('custom-attributes')) {
+			let customAttrs = product['custom-attributes'][0]['custom-attribute'];
+			for (let attr of customAttrs) {
+				let key = attr['$']['attribute-id'];
+				let value = attr['_'];
+				this.customAttributes[key] = value;
+			}
+		}
+
+	}
+}
+
+class ProductSimple extends VariationMasterAndSimple {
+	constructor (product) {
+		super(product);
+		this.type = 'simple';
+	}
+}
+
+class VariationMasterAndSet extends ProductBase {
+	constructor (product) {
+		super(product);
+		this.displayName = product['display-name'][0]['_'];
+		this.shortDescription = product['short-description'][0]['_'];
+		this.longDescription = product['long-description'][0]['_'];
+
+		// TODO: Process images
+	}
+}
+
+class ProductSet extends VariationMasterAndSet {
+	constructor (product) {
+		super(product);
+		this.type = 'set';
+		this.productSetProducts = [];
+
+		var productSet = product['product-set-products'][0]['product-set-product'];
+		for (let product of productSet) {
+			this.productSetProducts.push(product['$']['product-id']);
+		}
+	}
+
+}
+
+class ProductVariationMaster extends VariationMasterAndSet {
+	constructor (product) {
+		super(product);
+		this.type = 'variationMaster';
+	}
+}
+
+class ProductBundle extends ProductBase {
+	constructor (product) {
+		super(product);
+		this.type = 'bundle';
+	}
 }
 
 /**
@@ -157,7 +277,7 @@ function _parseElectronicsCatalog (fileData) {
  * @returns {Promise} - JSON object with pricebooks test data
  */
 function _getPriceBooksPromise () {
-	let promise = new Promise(resolve => {
+	return new Promise(resolve => {
 		if (pricebooks) {
 			resolve(pricebooks);
 		} else {
@@ -167,8 +287,6 @@ function _getPriceBooksPromise () {
 			});
 		}
 	});
-
-	return promise;
 }
 
 function _parsePriceBooks (priceBooks) {
@@ -201,19 +319,6 @@ function _parsePriceBooks (priceBooks) {
 	return priceBookList;
 }
 
-export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
-	let promise = new Promise(resolve => {
-		if (pricebooks) {
-			resolve(_getPricesForProduct(productId, priceTypes, currencyCode));
-		} else {
-			_getPriceBooksPromise().then(() =>
-				resolve(_getPricesForProduct(productId, priceTypes, currencyCode))
-			);
-		}
-	});
-	return promise;
-}
-
 function _getPricesForProduct (productId, priceTypes, currencyCode = 'usd') {
 	let prices = {};
 
@@ -235,7 +340,7 @@ function _getPriceBookName (priceType, currencyCode = 'usd') {
  * @returns {Promise} - JSON object with inventory test data
  */
 function _getInventoryPromise () {
-	let promise = new Promise(resolve => {
+	return new Promise(resolve => {
 		if (inventory) {
 			resolve(inventory);
 		} else {
@@ -247,8 +352,6 @@ function _getInventoryPromise () {
 			});
 		}
 	});
-
-	return promise;
 }
 
 function _parseInventoryItems (inventoryItems) {
@@ -271,26 +374,13 @@ function _parseInventoryItems (inventoryItems) {
 	return inventoryList;
 }
 
-export function getInventoryByProductIdPromise (id) {
-	let promise = new Promise(resolve => {
-		if (inventory) {
-			resolve(_.findWhere(inventory, {productId: id}));
-		} else {
-			_getInventoryPromise().then(() =>
-				resolve(_.findWhere(inventory, {productId: id}))
-			);
-		}
-	});
-	return promise;
-}
-
 /**
  * Loads Customers test data
  *
  * @returns {Promise} - JSON object with customers test data
  */
 function _getCustomersPromise () {
-	let promise = new Promise(resolve => {
+	return new Promise(resolve => {
 		if (customers) {
 			resolve(customers);
 		} else {
@@ -300,8 +390,6 @@ function _getCustomersPromise () {
 			});
 		}
 	});
-
-	return promise;
 }
 
 function _parseCustomers (rawCustomers) {
@@ -368,30 +456,6 @@ function _parseAddresses (rawAddresses) {
 
 	return addresses;
 }
-
-/**
- * Returns a Promise that, when resolved, will return a JSON object of a
- *   specific customer's test data
- *
- * @param {string} login - test customer's login value
- * @returns {Promise} - JSON object with customer's test data
- */
-export function getCustomerByLoginPromise (login) {
-	let promise = new Promise(resolve => {
-		if (customers) {
-			resolve(_pickCustomer(login));
-		} else {
-			_getCustomersPromise().then(() => resolve(_pickCustomer(login)));
-		}
-	});
-
-	return promise;
-}
-
 function _pickCustomer (login) {
 	return _.findWhere(customers, {'login': login});
-}
-
-export function getProductStandard () {
-	return;
 }

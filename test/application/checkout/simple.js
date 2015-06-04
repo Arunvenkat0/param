@@ -33,9 +33,9 @@ describe('Checkout Simple Product', () => {
 		standardProduct.set('resourcePath', resourcePath);
 		standardProduct.set('sizeIndex', sizeIndex);
 
-		//return client.init();
-			//.then(() => productDetailPage.addProductVariationToCart(standardProduct))
-			//.then(() => checkoutPage.navigateTo());
+		//return client.init()
+		//	.then(() => productDetailPage.addProductVariationToCart(standardProduct))
+		//	.then(() => checkoutPage.navigateTo());
 	});
 
 	after(() => client.end());
@@ -88,21 +88,24 @@ describe('Checkout Simple Product', () => {
 
 	describe.only('Checkout as Returning Customer', () => {
 		it('test', () => {
-			//testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(function (prices) {
-			//	console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices);
-			//});
-            //
-			//testData.getInventoryByProductIdPromise('701642808244').then(function (inventory) {
-			//	console.log('\ninv for 701642808244:', inventory);
-			//});
-            //
-			//testData.getCustomerByLoginPromise('testuser1@demandware.com').then(function (customer) {
-			//	console.log('\ntestuser1@demandware.com =', customer);
-			//});
-			testData.getProductsPromise().then(function(data) {
+			testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(function (prices) {
+				console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices);
+			});
+
+			testData.getInventoryByProductIdPromise('701642808244').then(function (inventory) {
+				console.log('\ninv for 701642808244:', inventory);
+			});
+
+			testData.getCustomerByLoginPromise('testuser1@demandware.com').then(function (customer) {
+				console.log('\ntestuser1@demandware.com =', customer);
+			});
+			testData._getProductsPromise().then(function(data) {
 				console.log('\n\n[Test] resolved');
-				//console.log('data =', data);
-			})
+				console.log('data =', data);
+			});
+			testData.getProductByIdPromise('701642808244').then(product =>
+				console.log('[Test:getProductByIdPromise] product =', product)
+			);
 		});
 	});
 });
