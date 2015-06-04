@@ -79,7 +79,7 @@ label {
 }
 
 .form-row {
-	clear: both;
+	@extend %clearfix;
 	margin: .5rem 0 1rem;
 }
 
@@ -120,6 +120,7 @@ input[type="password"],
 textarea {
 	border: 1px solid $dark-gray;
 	box-sizing: border-box;
+	height: 2rem;
 	padding: 0.7em 0.5em;
 	text-indent: 0;
 	width: 100%;
