@@ -30,7 +30,7 @@
 						<td class="event-type"><isprint value="${giftRegistry.eventType}"/></td>
 						<td class="event-date"><isprint value="${giftRegistry.eventDate}"/></td>
 						<td class="event-location"><isprint value="${giftRegistry.eventCity}"/>, <isprint value="${giftRegistry.eventState}"/></td>
-						<td class="event-view"><a href="${URLUtils.url('GiftRegistryCustomer-Show','ID',giftRegistry.ID)}">View</a></td>
+						<td class="event-view"><a href="${URLUtils.url('GiftRegistryCustomer-Show','ID',giftRegistry.ID)}">${Resource.msg('wishlistresult.view','account',null)}</a></td>
 					</tr>
 				</isloop>
 			</table>
