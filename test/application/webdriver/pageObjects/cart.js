@@ -61,7 +61,7 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 	return client
 		.click(_createCssNthCartRow(rowNum) + ' .item-details .item-edit-details a')
 		.waitForExist('.ui-dialog')
-		.click('.ui-dialog .product-variations .swatches.size li:nth-child(' + sizeIndex +') a')
+		.click('.ui-dialog .product-variations .swatches.size li:nth-child(' + sizeIndex + ') a')
 		.pause(500)
 		.click('.ui-dialog #add-to-cart')
 		// wait for the page to refresh, which happens after a 500 timeout by default

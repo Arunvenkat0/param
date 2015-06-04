@@ -1,4 +1,5 @@
 {
+	"esnext": true,
 	"disallowKeywordsOnNewLine": ["else"],
 	"disallowMixedSpacesAndTabs": true,
 	"disallowNewlineBeforeBlockStatements": true,
@@ -22,5 +23,6 @@
 	"requireSpacesInConditionalExpression": true,
 	"requireSpacesInNamedFunctionExpression": {
 		"beforeOpeningCurlyBrace": true
-	}
+	},
+	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
 }

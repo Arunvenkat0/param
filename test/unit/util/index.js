@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 var util = require('../../../app_storefront_richUI/cartridge/js/util');
 
