@@ -1,5 +1,5 @@
 {
-  "_v":"14.2",
+  "_v":"15.4",
   "clients":
   [ 
     {
@@ -8,26 +8,31 @@
       [
         {
           "resource_id":"/customers",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/customers/{customer_no}",
+          "resource_id":"/customers/*",
+          "methods":["get","patch","delete"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/customers/{customer_no}/addresses",
+          "resource_id":"/customers/*/addresses",
+          "methods":["get","post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/customers/{customer_no}/addresses/{address_id}",
+          "resource_id":"/customers/*/addresses/*",
+          "methods":["get","patch","delete"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
           "resource_id":"/customer_search",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         }
