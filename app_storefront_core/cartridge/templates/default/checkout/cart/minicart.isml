@@ -63,7 +63,7 @@
 				<isslot id="minicart-banner" description="This is the banner within the minicart, directly above the View Cart/Checkout link." context="global" />
 			</div>
 
-			<a class="button mini-cart-link-cart" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart','checkout',null)}">${Resource.msg('minicart.viewcart','checkout',null)}</a>
+			<a class="button mini-cart-link-cart" href="${URLUtils.https('Cart-Show')}" title="${Resource.msg('minicart.viewcart.title','checkout',null)}">${Resource.msg('minicart.viewcart','checkout',null)}</a>
 
 			<a class="mini-cart-link-checkout" href="${URLUtils.https('COCustomer-Start')}" title="${Resource.msg('minicart.directcheckout','checkout',null)}">${Resource.msg('minicart.directcheckout','checkout',null)} &raquo;</a>
 		</div>
