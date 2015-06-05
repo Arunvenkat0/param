@@ -9,6 +9,7 @@
 	<isinclude template="account/wishlist/wishlistsearch"/>
 
 	<isset name="formID" value="${pdict.CurrentForms.wishlist.htmlName + '_items'}" scope="page"/>
+	<isset name="isListOwner" value="${pdict.CurrentCustomer == pdict.ProductList.owner && pdict.TargetPipeline == 'Wishlist-Show'}" scope="page"/>
 
 	<iscomment>wishlist items form</iscomment>
 
@@ -16,7 +17,7 @@
 
 	<fieldset>
 
-	<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
+	<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner && isListOwner}">
 		<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 			<div class="form-row label-above">
 				<label for="editAddress">${Resource.msg('wishlist.addresslabel','account',null)}</label>
@@ -38,7 +39,7 @@
 			</div>
 		</isif>
 
-		<isif condition="${pdict.ProductList.giftCertificateItem == null}">
+		<isif condition="${pdict.ProductList.giftCertificateItem == null && isListOwner}">
 			<div class="form-row">
 				<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
 					${Resource.msg('giftregistry.addgiftcertificate', 'forms', null)}
@@ -118,7 +119,6 @@
 								<form action="${URLUtils.httpsContinue()}" method="post" name="${item.htmlName}">
 									<fieldset>
 										<input type="hidden" name="productListID" value="${pdict.ProductList.ID}"/>
-										<isset name="isListOwner" value="${pdict.CurrentCustomer == pdict.ProductList.owner}" scope="page"/>
 										<div class="item-option option-date-added">
 											<span class="label">${Resource.msg('wishlist.dateadded','account',null)}</span>
 											<span class="value"><isprint value="${item.object.creationDate}" formatter="MMMMM dd, yyyy"/></span>

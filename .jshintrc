@@ -1,5 +1,4 @@
 {
-	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,
 	"quotmark": "single",
@@ -11,6 +10,7 @@
 	"browserify": true,
 	"esnext": true,
 	"mocha": true,
+	"multistr": true,
 	"globals": {
 		"SitePreferences": true,
 		"Urls": true,

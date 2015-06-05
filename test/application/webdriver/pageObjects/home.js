@@ -20,7 +20,7 @@ export function mainCarouselSlide(position) {
 	var carouselControlSelector = MAIN_CAROUSEL + ' .jcarousel-control a:nth-child(' + position + ')';
 	return client.waitForExist(carouselControlSelector)
 		// wait 500ms after carousel transition
-		.then(() => client.click(carouselControlSelector)).pause(500)
+		.then(() => client.click(carouselControlSelector)).pause(500);
 }
 
 /**

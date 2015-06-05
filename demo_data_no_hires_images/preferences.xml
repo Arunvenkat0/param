@@ -3,7 +3,7 @@
     <standard-preferences>
         <all-instances>
             <preference preference-id="ActiveLocales">en_CA:zh:it:en_US:ja_JP:de_DE:it_IT:fr_FR:zh_CN:de:default:fr:en:fr_CA:es:nl:ja</preference>
-            <preference preference-id="CustomCartridges">bm_custom_plugin</preference>
+            <preference preference-id="CustomCartridges">sitegenesis_storefront_core:bm_custom_plugin</preference>
             <preference preference-id="CustomProductListColumns">custom.color:custom.refinementColor</preference>
             <preference preference-id="InstanceTimezone">US/Eastern</preference>
         </all-instances>

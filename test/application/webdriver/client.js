@@ -13,6 +13,7 @@ var client = webdriverio.remote({
 var loggingLevel = 'info';
 if (loggingLevel === 'debug') {
 	client.on('error', function (e) {
+		//jshint devel:true
 		console.log('\n\n[WebdriverIO Error start]\n');
 		console.log('e.body.value = ', e.body.value);
 		console.log('\n[WebDriverIO Error end]\n\n');
