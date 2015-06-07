@@ -88,28 +88,28 @@ describe('Checkout Simple Product', () => {
 
 	describe.only('Checkout as Returning Customer', () => {
 		it('test', () => {
-			//testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
-			//	console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
-			//);
-            //
-			//testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
-			//	console.log('\ninv for 701642808244:', JSON.stringify(inventory))
-			//);
-            //
-			//testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
-			//	console.log('\ntestuser1@demandware.com =', customer)
-			//);
-            //
-			//testData.getProductByIdPromise('sierra-the-bourne-conspiracy-xbox360').then(product =>
-			//	console.log('\nproduct =', product)
-			//);
+			testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
+				console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
+			);
+
+			testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
+				console.log('\ninv for 701642808244:', JSON.stringify(inventory))
+			);
+
+			testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
+				console.log('\ntestuser1@demandware.com =', customer)
+			);
+
+            testData.getProductByIdPromise('rockstar-games-grand-theft-auto-iv-xbox360').then(product =>
+				console.log('\nproduct =', JSON.stringify(product, null, 2))
+            );
 
 			testData.getProductStandard().then(product =>
 					console.log('\nProduct Standard =', product)
 			);
 
 			testData.getProductVariationMaster().then(product =>
-					console.log('\nProduct Variation Master =', product)
+					console.log('\nProduct Variation Master =', JSON.stringify(product, null, 2))
 			);
 
 			testData.getProductSet().then(product =>

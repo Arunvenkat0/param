@@ -22,8 +22,10 @@ export function getCatalog () {
 export function getProductsPromise () {
 	return new Promise(resolve => {
 		if (_.size(catalog)) {
+			console.log('[getProductsPromise] if');
 			resolve();
 		} else {
+			console.log('[getProductsPromise] else');
 			main.getSubjectTestDataPromise('catalogApparel')
 				.then(results => _parseCatalog(results.catalog))
 				.then(() => main.getSubjectTestDataPromise('catalogElectronics'))
@@ -53,7 +55,7 @@ function _parseCatalog (fileData) {
 		let productType = _getProductType(product);
 
 		switch (productType) {
-			case 'simple':
+			case 'standard':
 				catalog[id] = new ProductStandard(product);
 				break;
 			case 'variationMaster':
@@ -82,7 +84,7 @@ function _getProductType (product) {
 	} else if (_isProductVariationMaster(product)) {
 		return 'variationMaster';
 	} else if (_isProductStandard(product)) {
-		return 'simple';
+		return 'standard';
 	} else if (_isProductBundle(product)) {
 		return 'bundle';
 	} else {
@@ -111,6 +113,7 @@ function _isProductStandard (product) {
 class AbstractProductBase {
 	constructor (product) {
 		this.id = product['$']['product-id'];
+		this.type = _getProductType(product);
 		this.ean = product['ean'][0];
 		this.upc = product['upc'][0];
 		this.unit = product['unit'][0];
@@ -120,73 +123,158 @@ class AbstractProductBase {
 		this.availableFlag = !!product['available-flag'][0];
 		this.searchableFlag = !!product['searchable-flag'][0];
 		this.taxClassId = product['tax-class-id'] ? product['tax-class-id'][0] : null;
+
+		if (_.size(product['online-from'])) {
+			this.onlineFrom = new Date(product['online-from'][0]);
+		}
+		if (_.size(product['brand'])) {
+			this.brand = product.brand[0];
+		}
+		if (_.size(product['page-attributes'])) {
+			this.pageAttributes = _parsePageAttrs(product['page-attributes'][0]);
+		}
+		if (_.size(product['custom-attributes'])) {
+			this.customAttributes = _parseCustomAttrs(product['custom-attributes'][0]['custom-attribute']);
+		}
+		if (_.size(product['images'])) {
+			this.images = _parseImages(product.images[0]);
+		}
+
+		if (product.hasOwnProperty('display-name')) {
+			this.displayName = product['display-name'][0]['_'];
+		}
+		if (product.hasOwnProperty('short-description')) {
+			this.shortDescription = product['short-description'][0]['_'];
+		}
+		if (product.hasOwnProperty('long-description')) {
+			this.longDescription = product['long-description'][0]['_'];
+		}
+		if (product.hasOwnProperty('classification-category')) {
+			this.classificationCategory = product['classification-category'];
+		}
+		if (product.hasOwnProperty('options')) {
+			this.options = _parseOptions(product['options']);
+		}
+
+		//this.rawData = JSON.stringify(product);  // REMOVEME:  Dev Testing only
 	}
 
 	toString () {
-		return JSON.stringify(this, null, 2);
+		return JSON.stringify(this);
 	}
 }
 
-class AbstractVariationMasterAndSimple extends AbstractProductBase {
+class ProductStandard extends AbstractProductBase {
 	constructor (product) {
 		super(product);
-		this.taxClassId = product['tax-class-id'];
-		this.customAttributes = {};
-
-		if (product.hasOwnProperty('custom-attributes')) {
-			let customAttrs = product['custom-attributes'][0]['custom-attribute'];
-			for (let attr of customAttrs) {
-				let key = attr['$']['attribute-id'];
-				let value = attr['_'];
-				this.customAttributes[key] = value;
-			}
-		}
-
 	}
 }
 
-class AbstractVariationMasterAndSet extends AbstractProductBase {
+class ProductSet extends AbstractProductBase {
 	constructor (product) {
 		super(product);
-		this.displayName = product['display-name'][0]['_'];
-		this.shortDescription = product['short-description'][0]['_'];
-		this.longDescription = product['long-description'][0]['_'];
-
-		// TODO: Process images
-	}
-}
-
-class ProductStandard extends AbstractVariationMasterAndSimple {
-	constructor (product) {
-		super(product);
-		this.type = 'simple';
-	}
-}
-
-class ProductSet extends AbstractVariationMasterAndSet {
-	constructor (product) {
-		super(product);
-		this.type = 'set';
 		this.productSetProducts = [];
 
 		var productSet = product['product-set-products'][0]['product-set-product'];
-		for (let product of productSet) {
-			this.productSetProducts.push(product['$']['product-id']);
-		}
+		this.productSetProducts = _.pluck(productSet, '$.product-id');
 	}
 
 }
 
-class ProductVariationMaster extends AbstractVariationMasterAndSet {
+class ProductVariationMaster extends AbstractProductBase {
 	constructor (product) {
 		super(product);
-		this.type = 'variationMaster';
+
+		let self = this;
+		this.variationAttributes = [];
+		let variationAttrs = product.variations[0].attributes[0]['variation-attribute'];
+
+		_.each(variationAttrs, function (value) {
+			let proxy = {};
+
+			_.each(value['$'], function (val, key) {
+				let camelizedKey = main.convertToCamelCase(key);
+				proxy[camelizedKey] = val;
+			});
+
+			_.each(value['variation-attribute-values'][0]['variation-attribute-value'], function (val) {
+				proxy.values = {
+					value: val.$.value,
+					displayValue: val['display-value'][0]['_']
+				};
+			});
+
+			self.variationAttributes.push(proxy);
+		});
+
+		this.variants = _.pluck(product.variations[0].variants[0].variant, '$.product-id');
 	}
 }
 
 class ProductBundle extends AbstractProductBase {
 	constructor (product) {
 		super(product);
-		this.type = 'bundle';
+
+		let bundleProducts = product['bundled-products'][0]['bundled-product'];
+		this.bundleProducts = _.pluck(bundleProducts, '$.product-id');
 	}
+}
+
+function _parseImages (images) {
+	var imageList = images['image-group'];
+	var parsed = [];
+
+	for(let image of imageList) {
+		 /**
+		  * It's possible for a raw XML catalog file to contain two separate
+		  * entries for the same viewType:  One with a variant-value and one
+		  * without.  We wish to avoid creating a duplicate.
+		  */
+		if (_.any(parsed, 'viewType', image['$']['view-type']) &&
+			image['$'].hasOwnProperty('variation-value'))
+		{
+			let proxy = _.findWhere(parsed, {viewType: image['$']['view-type']});
+				proxy.variationValue = image['$']['variation-value'];
+		} else {
+			let proxy = {
+				viewType: image['$']['view-type'],
+				paths: []
+			};
+
+			for (let path of image['image']) {
+				proxy.paths.push(path['$'].path);
+			}
+
+			parsed.push(proxy);
+		}
+	}
+
+	return parsed;
+}
+
+function _parsePageAttrs(attrs) {
+	let proxy = {};
+
+	_.each(attrs, function (value, key) {
+		let camelizedKey = main.convertToCamelCase(key);
+		proxy[camelizedKey] = value[0]['_'];
+	});
+
+	return proxy;
+}
+
+function _parseCustomAttrs(attrs) {
+	let proxy = {};
+
+	for (let attr of attrs) {
+		let key = attr['$']['attribute-id'];
+		let value = attr['_'];
+		proxy[key] = value;
+	}
+
+	return proxy;
+}
+
+function _parseOptions (options) {
+	return _.pluck(options, 'shared-option[0].$.option-id');
 }

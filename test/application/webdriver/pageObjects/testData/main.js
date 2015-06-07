@@ -21,13 +21,15 @@ let filePaths = {
 	customers: demoDataDir + '/sites/SiteGenesis/customers.xml'
 };
 
-let productStandardId = 'samsung-ln55a950';
-let productVariationMaster = '25686514';
-let productSetId = 'spring-look';
-let productBundleId = 'microsoft-xbox360-bundle';
+let catalog = products.getCatalog();
+
+let standardProductId = '750518548296';
+let variationMasterProductId = '25686514';
+let setProductId = 'spring-look';
+let bundleProductId = 'microsoft-xbox360-bundle';
 
 
-/* COMMON */
+/* COMMON FUNCTIONS */
 
 /**
  * Reads and parses test data XML file(s) for a particular subject
@@ -38,9 +40,17 @@ let productBundleId = 'microsoft-xbox360-bundle';
 export function getSubjectTestDataPromise (subject) {
 	return new Promise(resolve =>
 			fs.readFile(filePaths[subject], (err, data) => {
+				console.log('[getSubjectTestDataPromise] fs.readFile called. subject:', subject);
 				let parser = xml2js.Parser();
 				parser.parseString(data, (err, result) => resolve(result));
 			})
+	);
+}
+
+// Adapted from http://stackoverflow.com/questions/10425287/convert-dash-separated-string-to-camelcase#answer-10425344
+export function convertToCamelCase (str) {
+	return str.toLowerCase().replace(/-(.)/g, (match, group1)  =>
+		group1.toUpperCase()
 	);
 }
 
@@ -55,11 +65,14 @@ export function getSubjectTestDataPromise (subject) {
 export function getProductByIdPromise (productId) {
 	return new Promise(resolve => {
 		if (_.size(products.getCatalog())) {
+			console.log('[getProductByIdPromise] if');
 			products.getProductFromCatalog(productId, resolve);
 		} else {
-			products.getProductsPromise().then(() =>
-				products.getProductFromCatalog(productId, resolve)
-			)
+			console.log('[getProductByIdPromise] else');
+			products.getProductsPromise().then(() => {
+				catalog = products.getCatalog();
+				return products.getProductFromCatalog(productId, resolve);
+			})
 		}
 	});
 }
@@ -70,7 +83,7 @@ export function getProductByIdPromise (productId) {
  * @returns {Promise.Object} - ProductStandard instance
  */
 export function getProductStandard () {
-	return Promise.resolve(getProductByIdPromise(productStandardId));
+	return Promise.resolve(getProductByIdPromise(standardProductId));
 }
 
 /**
@@ -79,7 +92,7 @@ export function getProductStandard () {
  * @returns {Promise.Object} - ProductVariationMaster instance
  */
 export function getProductVariationMaster () {
-	return Promise.resolve(getProductByIdPromise(productVariationMaster));
+	return Promise.resolve(getProductByIdPromise(variationMasterProductId));
 }
 
 /**
@@ -88,7 +101,7 @@ export function getProductVariationMaster () {
  * @returns {Promise.Object} - ProductSet instance
  */
 export function getProductSet () {
-	return Promise.resolve(getProductByIdPromise(productSetId));
+	return Promise.resolve(getProductByIdPromise(setProductId));
 }
 
 /**
@@ -97,7 +110,7 @@ export function getProductSet () {
  * @returns {Promise.Object} - ProductBundle instance
  */
 export function getProductBundle () {
-	return Promise.resolve(getProductByIdPromise(productBundleId));
+	return Promise.resolve(getProductByIdPromise(bundleProductId));
 }
 
 /* CUSTOMERS */
