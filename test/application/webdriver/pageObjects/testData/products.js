@@ -15,9 +15,9 @@ export function getCatalog () {
 }
 
 /**
- * Loads Products Catalog test data
+ * Loads Catalog test data
  *
- * @returns {Promise} - JSON object with products test data
+ * @returns {Promise.Object} - Catalog test data
  */
 export function getProductsPromise () {
 	return new Promise(resolve => {
@@ -39,8 +39,8 @@ export function getProductsPromise () {
  *
  * @param {string} productId - Product ID
  * @param {function} resolve - A Promise's resolve function
- * @returns {Promise.resolve} - Promise resolution with retrieved Product object
- *     or null if not found
+ * @returns {Promise.<Object, null>} - Promise resolution with retrieved Product*
+ *     instance or null if not found
  */
 export function getProductFromCatalog (productId, resolve) {
 	let product = catalog[productId];
@@ -54,7 +54,7 @@ function _parseCatalog (fileData) {
 
 		switch (productType) {
 			case 'simple':
-				catalog[id] = new ProductSimple(product);
+				catalog[id] = new ProductStandard(product);
 				break;
 			case 'variationMaster':
 				catalog[id] = new ProductVariationMaster(product);
@@ -62,9 +62,9 @@ function _parseCatalog (fileData) {
 			case 'set':
 				catalog[id] = new ProductSet(product);
 				break;
-			////case 'bundle':
-			//	catalog['id'] = new ProductBundle(product);
-			//	break;
+			case 'bundle':
+				catalog[id] = new ProductBundle(product);
+				break;
 		}
 	}
 
@@ -81,7 +81,7 @@ function _getProductType (product) {
 		return 'set';
 	} else if (_isProductVariationMaster(product)) {
 		return 'variationMaster';
-	} else if (_isProductSimple(product)) {
+	} else if (_isProductStandard(product)) {
 		return 'simple';
 	} else if (_isProductBundle(product)) {
 		return 'bundle';
@@ -102,13 +102,13 @@ function _isProductBundle (product) {
 	return product.hasOwnProperty('bundled-products');
 }
 
-function _isProductSimple (product) {
+function _isProductStandard (product) {
 	return !_isProductSet(product)
 		&& !_isProductVariationMaster(product)
 		&& !_isProductBundle(product);
 }
 
-class ProductBase {
+class AbstractProductBase {
 	constructor (product) {
 		this.id = product['$']['product-id'];
 		this.ean = product['ean'][0];
@@ -119,11 +119,15 @@ class ProductBase {
 		this.onlineFlag = !!product['online-flag'][0];
 		this.availableFlag = !!product['available-flag'][0];
 		this.searchableFlag = !!product['searchable-flag'][0];
-		this.taxClassId = product['tax-class-id'] ? product['tax-class-id'][0] : null
+		this.taxClassId = product['tax-class-id'] ? product['tax-class-id'][0] : null;
+	}
+
+	toString () {
+		return JSON.stringify(this, null, 2);
 	}
 }
 
-class VariationMasterAndSimple extends ProductBase {
+class AbstractVariationMasterAndSimple extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 		this.taxClassId = product['tax-class-id'];
@@ -141,14 +145,7 @@ class VariationMasterAndSimple extends ProductBase {
 	}
 }
 
-class ProductSimple extends VariationMasterAndSimple {
-	constructor (product) {
-		super(product);
-		this.type = 'simple';
-	}
-}
-
-class VariationMasterAndSet extends ProductBase {
+class AbstractVariationMasterAndSet extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 		this.displayName = product['display-name'][0]['_'];
@@ -159,7 +156,14 @@ class VariationMasterAndSet extends ProductBase {
 	}
 }
 
-class ProductSet extends VariationMasterAndSet {
+class ProductStandard extends AbstractVariationMasterAndSimple {
+	constructor (product) {
+		super(product);
+		this.type = 'simple';
+	}
+}
+
+class ProductSet extends AbstractVariationMasterAndSet {
 	constructor (product) {
 		super(product);
 		this.type = 'set';
@@ -173,14 +177,14 @@ class ProductSet extends VariationMasterAndSet {
 
 }
 
-class ProductVariationMaster extends VariationMasterAndSet {
+class ProductVariationMaster extends AbstractVariationMasterAndSet {
 	constructor (product) {
 		super(product);
 		this.type = 'variationMaster';
 	}
 }
 
-class ProductBundle extends ProductBase {
+class ProductBundle extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 		this.type = 'bundle';

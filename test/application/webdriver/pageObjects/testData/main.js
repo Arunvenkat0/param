@@ -21,10 +21,30 @@ let filePaths = {
 	customers: demoDataDir + '/sites/SiteGenesis/customers.xml'
 };
 
-let standardProductId = 'samsung-ln55a950';
+let productStandardId = 'samsung-ln55a950';
+let productVariationMaster = '25686514';
 let productSetId = 'spring-look';
 let productBundleId = 'microsoft-xbox360-bundle';
 
+
+/* COMMON */
+
+/**
+ * Reads and parses test data XML file(s) for a particular subject
+ *
+ * @param {string} subject - Test data subject to be retrieved
+ * @returns {Promise} - JSON object with the subject test data
+ */
+export function getSubjectTestDataPromise (subject) {
+	return new Promise(resolve =>
+			fs.readFile(filePaths[subject], (err, data) => {
+				let parser = xml2js.Parser();
+				parser.parseString(data, (err, result) => resolve(result));
+			})
+	);
+}
+
+/* PRODUCTS */
 
 /**
  * Returns a Promise that returns a JSON object of a specific product's test data
@@ -33,7 +53,7 @@ let productBundleId = 'microsoft-xbox360-bundle';
  * @returns {Promise} - JSON object of product
  */
 export function getProductByIdPromise (productId) {
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		if (_.size(products.getCatalog())) {
 			products.getProductFromCatalog(productId, resolve);
 		} else {
@@ -43,6 +63,44 @@ export function getProductByIdPromise (productId) {
 		}
 	});
 }
+
+/**
+ * Returns a Promise that returns a Product Standard instance
+ *
+ * @returns {Promise.Object} - ProductStandard instance
+ */
+export function getProductStandard () {
+	return Promise.resolve(getProductByIdPromise(productStandardId));
+}
+
+/**
+ * Returns a Promise that returns a ProductVariationMaster instance
+ *
+ * @returns {Promise.Object} - ProductVariationMaster instance
+ */
+export function getProductVariationMaster () {
+	return Promise.resolve(getProductByIdPromise(productVariationMaster));
+}
+
+/**
+ * Returns a Promise that returns a ProductSet instance
+ *
+ * @returns {Promise.Object} - ProductSet instance
+ */
+export function getProductSet () {
+	return Promise.resolve(getProductByIdPromise(productSetId));
+}
+
+/**
+ * Returns a Promise that returns a ProductBundle instance
+ *
+ * @returns {Promise.Object} - ProductBundle instance
+ */
+export function getProductBundle () {
+	return Promise.resolve(getProductByIdPromise(productBundleId));
+}
+
+/* CUSTOMERS */
 
 /**
  * Returns a Promise that returns a JSON object of a specific customer's test data
@@ -61,6 +119,8 @@ export function getCustomerByLoginPromise (login) {
 		}
 	});
 }
+
+/* PRICES */
 
 /**
  * Returns a Promise that returns a JSON object with a specific product's prices
@@ -82,6 +142,8 @@ export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
 	});
 }
 
+/* INVENTORY */
+
 /**
  * Returns a Promise that returns a JSON object with a specific product's
  *     inventory test data
@@ -100,19 +162,4 @@ export function getInventoryByProductIdPromise (productId) {
 			);
 		}
 	});
-}
-
-/**
- * Reads and parses test data XML file(s) for a particular subject
- *
- * @param {string} subject - Test data subject to be retrieved
- * @returns {Promise} - JSON object with the subject test data
- */
-export function getSubjectTestDataPromise (subject) {
-	return new Promise(resolve =>
-		fs.readFile(filePaths[subject], (err, data) => {
-			let parser = xml2js.Parser();
-			parser.parseString(data, (err, result) => resolve(result));
-		})
-	);
 }

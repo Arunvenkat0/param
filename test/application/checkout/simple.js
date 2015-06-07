@@ -88,20 +88,36 @@ describe('Checkout Simple Product', () => {
 
 	describe.only('Checkout as Returning Customer', () => {
 		it('test', () => {
-			testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
-				console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
+			//testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
+			//	console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
+			//);
+            //
+			//testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
+			//	console.log('\ninv for 701642808244:', JSON.stringify(inventory))
+			//);
+            //
+			//testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
+			//	console.log('\ntestuser1@demandware.com =', customer)
+			//);
+            //
+			//testData.getProductByIdPromise('sierra-the-bourne-conspiracy-xbox360').then(product =>
+			//	console.log('\nproduct =', product)
+			//);
+
+			testData.getProductStandard().then(product =>
+					console.log('\nProduct Standard =', product)
 			);
 
-			testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
-				console.log('\ninv for 701642808244:', JSON.stringify(inventory))
+			testData.getProductVariationMaster().then(product =>
+					console.log('\nProduct Variation Master =', product)
 			);
 
-			testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
-				console.log('\ntestuser1@demandware.com =', customer)
+			testData.getProductSet().then(product =>
+					console.log('\nProduct Set =', product)
 			);
 
-			testData.getProductByIdPromise('sierra-the-bourne-conspiracy-xbox360').then(product =>
-				console.log('\nproduct =', product)
+			testData.getProductBundle().then(product =>
+					console.log('\nProduct Bundle =', product)
 			);
 		});
 	});
