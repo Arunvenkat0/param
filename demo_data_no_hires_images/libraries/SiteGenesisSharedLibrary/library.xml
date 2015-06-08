@@ -1958,21 +1958,21 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         </custom-attributes>
     </content>
 
-<content content-id="footer-support">
-    <display-name xml:lang="x-default">Footer Support Links</display-name>
-    <online-flag>true</online-flag>
-    <searchable-flag>false</searchable-flag>
-    <page-attributes/>
-    <custom-attributes>
-        <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Customer Service&lt;/h3&gt;&#13;
-            &lt;ul class="menu-footer menu pipe"&gt;&#13;
-            &lt;li&gt;&lt;a href="$httpsUrl('CustomerService-ContactUs')$" title="Go to Content Us"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
-            &lt;li&gt;&lt;a href="$httpsURL('GiftCert-Purchase')$" title="Go to Gift Certificates"&gt;Gift Certificates&lt;/a&gt;&lt;/li&gt;&#13;
-            &lt;li&gt;&lt;a href="$url('CustomerService-Show','aid','customer-service')$" title="Go to Help"&gt;Help&lt;/a&gt;&lt;/li&gt;&#13;
-            &lt;li&gt;&lt;a href="$url('SiteMap-Start')$" title="Go to Site Map"&gt;Site Map&lt;/a&gt;&lt;/li&gt;&#13;
-            &lt;/ul&gt;&lt;!-- END: footer_support --&gt;</custom-attribute>
-    </custom-attributes>
-</content>
+    <content content-id="footer-support">
+        <display-name xml:lang="x-default">Footer Support Links</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Customer Service&lt;/h3&gt;&#13;
+                &lt;ul class="menu-footer menu pipe"&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsUrl('CustomerService-ContactUs')$" title="Go to Contact Us"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('GiftCert-Purchase')$" title="Go to Gift Certificates"&gt;Gift Certificates&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('CustomerService-Show','aid','customer-service')$" title="Go to Help"&gt;Help&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('SiteMap-Start')$" title="Go to Site Map"&gt;Site Map&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;/ul&gt;&lt;!-- END: footer_support --&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
 
     <content content-id="gift-additional-details">
         <display-name xml:lang="x-default">Gift Certificate Additonal Details</display-name>
