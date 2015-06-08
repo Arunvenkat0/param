@@ -67,11 +67,11 @@ directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/we
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
 
-- Add the 'app_storefront_core cartridge' to the Business Manager Sites-Site
+- Add the 'app_storefront_core' cartridge to the Business Manager Sites-Site
 Settings:
     1. Go to `Business Manager > Administration > Manage Sites` 
     1. Click on the Manage the Business Manager Site link
-    1. Set the `Cartridges` field to `app_storefront_core:bm_custom_plugin'
+    1. Set the `Cartridges` field to `app_storefront_core:bm_custom_plugin`
 
 The above 4 steps are only needed once.
 
