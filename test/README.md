@@ -45,7 +45,7 @@ Application tests' webdriver configurations are in the `webdriver` directory.
 
 The tests are contained in suites, which are represented as directories. For example, the above structure contains Application test suites `homepage` and `productDetails`, and Unit test suite `util`.
 
-## Run the tests
+## Test Setup
 
 - Install all dependencies
 
@@ -67,7 +67,15 @@ directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/we
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
 
-The above 3 steps are only needed once.
+- Add the 'app_storefront_core cartridge' to the Business Manager Sites-Site
+Settings:
+    1. Go to `Business Manager > Administration > Manage Sites` 
+    1. Click on the Manage the Business Manager Site link
+    1. Set the `Cartridges` field to `app_storefront_core:bm_custom_plugin'
+
+The above 4 steps are only needed once.
+
+## Run the tests
 
 ### Application tests
 
