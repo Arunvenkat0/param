@@ -5,7 +5,7 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
-import * as testData from '../webdriver/pageObjects/testData/main';
+//import * as testData from '../webdriver/pageObjects/testData/main';
 
 describe('Checkout Simple Product', () => {
 	var shippingFormData = new Map();
@@ -33,9 +33,9 @@ describe('Checkout Simple Product', () => {
 		standardProduct.set('resourcePath', resourcePath);
 		standardProduct.set('sizeIndex', sizeIndex);
 
-		//return client.init()
-		//	.then(() => productDetailPage.addProductVariationToCart(standardProduct))
-		//	.then(() => checkoutPage.navigateTo());
+		return client.init()
+			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
+			.then(() => checkoutPage.navigateTo());
 	});
 
 	after(() => client.end());
@@ -87,38 +87,90 @@ describe('Checkout Simple Product', () => {
 	});
 
 	describe.only('Checkout as Returning Customer', () => {
-		it('test', () => {
-			testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
-				console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
-			);
+		//let invTop;
+		//beforeEach(function () {
+		//	testData.getInventoryByProductIdPromise('701642808244')
+		//		.then(inv => {
+		//			invTop = inv;
+		//			console.log('\n[getInventoryByProductIdPromise] inv for 701642808244:', inv)
+		//		});
+		//});
+		//beforeEach(function () {
+		//	testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd')
+		//		.then(prices => {
+		//			console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', JSON.stringify(prices, null, 2));
+		//		});
+		//});
+		//beforeEach(function () {
+		//	testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
+		//		console.log('\ntestuser1@demandware.com =', customer)
+		//	);
+		//});
+		//beforeEach(function () {
+		//	testData.getProductByIdPromise('rockstar-games-grand-theft-auto-iv-xbox360').then(product =>
+		//		console.log('\nproduct =', JSON.stringify(product, null, 2))
+		//	);
+		//});
+		//beforeEach(function () {
+		//	testData.getProductStandard().then(product =>
+		//		console.log('\nProduct Standard =', JSON.stringify(product, null, 2))
+		//	);
+		//});
+		//beforeEach(function () {
+		//	testData.getProductVariationMaster().then(product =>
+		//		console.log('\nProduct Variation Master =', JSON.stringify(product, null, 2))
+		//	);
+		//});
+		//beforeEach(function () {
+		//	testData.getProductSet().then(product =>
+		//		console.log('\nProduct Set =', JSON.stringify(product, null, 2))
+		//	);
+		//});
+		//beforeEach(function () {
+		//	testData.getProductBundle().then(product =>
+		//		console.log('\nProduct Bundle =', JSON.stringify(product, null, 2))
+		//	);
+		//});
+		//beforeEach(function () {
+		//	return
+		//});
 
-			testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
-				console.log('\ninv for 701642808244:', JSON.stringify(inventory))
-			);
+			it('test', () => {
+			//testData.getPricesByProductIdPromise('sierra-the-bourne-conspiracy-xbox360', 'usd').then(prices =>
+			//	console.log('\nprices for sierra-the-bourne-conspiracy-xbox360 =', prices)
+			//);
 
-			testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
-				console.log('\ntestuser1@demandware.com =', customer)
-			);
+			//testData.getInventoryByProductIdPromise('701642808244').then(inventory =>
+			//	console.log('\ninv for 701642808244:', JSON.stringify(inventory))
+			//);
 
-            testData.getProductByIdPromise('rockstar-games-grand-theft-auto-iv-xbox360').then(product =>
-				console.log('\nproduct =', JSON.stringify(product, null, 2))
-            );
+			//console.log('invTop =', invTop);
 
-			testData.getProductStandard().then(product =>
-					console.log('\nProduct Standard =', product)
-			);
+			//testData.getCustomerByLoginPromise('testuser1@demandware.com').then(customer =>
+			//	console.log('\ntestuser1@demandware.com =', customer)
+			//);
 
-			testData.getProductVariationMaster().then(product =>
-					console.log('\nProduct Variation Master =', JSON.stringify(product, null, 2))
-			);
+            //testData.getProductByIdPromise('rockstar-games-grand-theft-auto-iv-xbox360').then(product =>
+				//console.log('\nproduct =', JSON.stringify(product, null, 2))
+            //);
 
-			testData.getProductSet().then(product =>
-					console.log('\nProduct Set =', product)
-			);
+			//testData.getProductStandard().then(product =>
+			//		console.log('\nProduct Standard =', product)
+			//);
 
-			testData.getProductBundle().then(product =>
-					console.log('\nProduct Bundle =', product)
-			);
+			//testData.getProductVariationMaster().then(product =>
+			//		console.log('\nProduct Variation Master =', JSON.stringify(product, null, 2))
+			//);
+
+			//testData.getProductSet().then(product =>
+			//		console.log('\nProduct Set =', product)
+			//);
+
+			//testData.getProductBundle().then(product =>
+			//		console.log('\nProduct Bundle =', product)
+			//);
+
+			//console.log('parsedData =', testData.parsedData);
 		});
 	});
 });

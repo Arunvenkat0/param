@@ -1,81 +1,50 @@
 'use strict';
 
 import _ from 'lodash';
-import * as main from './main.js';
-
-let catalog = {};
 
 /**
- * Gets the product catalog
+ * Retrieves Product from Catalog
  *
- * @returns {Object} - Product catalog
- */
-export function getCatalog () {
-	return catalog;
-}
-
-/**
- * Loads Catalog test data
- *
- * @returns {Promise.Object} - Catalog test data
- */
-export function getProductsPromise () {
-	return new Promise(resolve => {
-		if (_.size(catalog)) {
-			console.log('[getProductsPromise] if');
-			resolve();
-		} else {
-			console.log('[getProductsPromise] else');
-			main.getSubjectTestDataPromise('catalogApparel')
-				.then(results => _parseCatalog(results.catalog))
-				.then(() => main.getSubjectTestDataPromise('catalogElectronics'))
-				.then(results => _parseCatalog(results.catalog))
-				.then(() => resolve());
-		}
-	});
-}
-
-/**
- * Retrieves Product from Catalog and executes provide Promise resolve function
- *    with this Product
- *
+ * @param {Object} parsedData - Subject data parsed from XML files
  * @param {string} productId - Product ID
- * @param {function} resolve - A Promise's resolve function
- * @returns {Promise.<Object, null>} - Promise resolution with retrieved Product*
- *     instance or null if not found
+ * @returns {Object} - Product instance
  */
-export function getProductFromCatalog (productId, resolve) {
-	let product = catalog[productId];
-	return product ? resolve(product) : resolve(null);
+export function getProductFromCatalog (parsedData, productId) {
+	return _getCatalogData(parsedData)[productId];
 }
 
-function _parseCatalog (fileData) {
-	for (let product of fileData.product) {
-		let id = product['$']['product-id'];
+function _getCatalogData (parsedData) {
+	return _.merge(parsedData.catalogApparel, parsedData.catalogElectronics);
+}
+
+export function parseCatalog (fileData) {
+	var proxy = {};
+	for (let product of fileData.catalog.product) {
+		let id = product.$['product-id'];
 		let productType = _getProductType(product);
 
 		switch (productType) {
 			case 'standard':
-				catalog[id] = new ProductStandard(product);
+				proxy[id] = new ProductStandard(product);
 				break;
 			case 'variationMaster':
-				catalog[id] = new ProductVariationMaster(product);
+				proxy[id] = new ProductVariationMaster(product);
 				break;
 			case 'set':
-				catalog[id] = new ProductSet(product);
+				proxy[id] = new ProductSet(product);
 				break;
 			case 'bundle':
-				catalog[id] = new ProductBundle(product);
+				proxy[id] = new ProductBundle(product);
 				break;
 		}
 	}
 
 	// TODO: Process category-assignment field
 	//for (let ca of fileData['category-assignment']) {
-	//	console.log('[_parseCatalog] category-assignment =', ca);
+	//	console.log('[parseCatalog] category-assignment =', ca);
 	//}
 
-	return;
+	return proxy;
 }
 
 function _getProductType (product) {
@@ -105,18 +74,18 @@ function _isProductBundle (product) {
 }
 
 function _isProductStandard (product) {
-	return !_isProductSet(product)
-		&& !_isProductVariationMaster(product)
-		&& !_isProductBundle(product);
+	return !_isProductSet(product) &&
+			!_isProductVariationMaster(product) &&
+			!_isProductBundle(product);
 }
 
 class AbstractProductBase {
 	constructor (product) {
-		this.id = product['$']['product-id'];
+		this.id = product.$['product-id'];
 		this.type = _getProductType(product);
-		this.ean = product['ean'][0];
-		this.upc = product['upc'][0];
-		this.unit = product['unit'][0];
+		this.ean = product.ean[0];
+		this.upc = product.upc[0];
+		this.unit = product.unit[0];
 		this.minOrderQuantity = +product['min-order-quantity'][0];
 		this.stepQuantity = +product['step-quantity'][0];
 		this.onlineFlag = !!product['online-flag'][0];
@@ -127,7 +96,7 @@ class AbstractProductBase {
 		if (_.size(product['online-from'])) {
 			this.onlineFrom = new Date(product['online-from'][0]);
 		}
-		if (_.size(product['brand'])) {
+		if (_.size(product.brand)) {
 			this.brand = product.brand[0];
 		}
 		if (_.size(product['page-attributes'])) {
@@ -136,27 +105,25 @@ class AbstractProductBase {
 		if (_.size(product['custom-attributes'])) {
 			this.customAttributes = _parseCustomAttrs(product['custom-attributes'][0]['custom-attribute']);
 		}
-		if (_.size(product['images'])) {
+		if (_.size(product.images)) {
 			this.images = _parseImages(product.images[0]);
 		}
 
 		if (product.hasOwnProperty('display-name')) {
-			this.displayName = product['display-name'][0]['_'];
+			this.displayName = product['display-name'][0]._;
 		}
 		if (product.hasOwnProperty('short-description')) {
-			this.shortDescription = product['short-description'][0]['_'];
+			this.shortDescription = product['short-description'][0]._;
 		}
 		if (product.hasOwnProperty('long-description')) {
-			this.longDescription = product['long-description'][0]['_'];
+			this.longDescription = product['long-description'][0]._;
 		}
 		if (product.hasOwnProperty('classification-category')) {
 			this.classificationCategory = product['classification-category'];
 		}
 		if (product.hasOwnProperty('options')) {
-			this.options = _parseOptions(product['options']);
+			this.options = _parseOptions(product.options);
 		}
-
-		//this.rawData = JSON.stringify(product);  // REMOVEME:  Dev Testing only
 	}
 
 	toString () {
@@ -192,15 +159,14 @@ class ProductVariationMaster extends AbstractProductBase {
 		_.each(variationAttrs, function (value) {
 			let proxy = {};
 
-			_.each(value['$'], function (val, key) {
-				let camelizedKey = main.convertToCamelCase(key);
-				proxy[camelizedKey] = val;
+			_.each(value.$, function (val, key) {
+				proxy[_.camelCase(key)] = val;
 			});
 
 			_.each(value['variation-attribute-values'][0]['variation-attribute-value'], function (val) {
 				proxy.values = {
 					value: val.$.value,
-					displayValue: val['display-value'][0]['_']
+					displayValue: val['display-value'][0]._
 				};
 			});
 
@@ -224,25 +190,24 @@ function _parseImages (images) {
 	var imageList = images['image-group'];
 	var parsed = [];
 
-	for(let image of imageList) {
-		 /**
-		  * It's possible for a raw XML catalog file to contain two separate
-		  * entries for the same viewType:  One with a variant-value and one
-		  * without.  We wish to avoid creating a duplicate.
-		  */
-		if (_.any(parsed, 'viewType', image['$']['view-type']) &&
-			image['$'].hasOwnProperty('variation-value'))
-		{
-			let proxy = _.findWhere(parsed, {viewType: image['$']['view-type']});
-				proxy.variationValue = image['$']['variation-value'];
+	for (let image of imageList) {
+		/**
+		 * It's possible for a raw XML catalog file to contain two separate
+		 * entries for the same viewType:  One with a variant-value and one
+		 * without.  We wish to avoid creating a duplicate.
+		 */
+		if (_.any(parsed, 'viewType', image.$['view-type']) &&
+			image.$.hasOwnProperty('variation-value')) {
+			let proxy = _.findWhere(parsed, {viewType: image.$['view-type']});
+				proxy.variationValue = image.$['variation-value'];
 		} else {
 			let proxy = {
-				viewType: image['$']['view-type'],
+				viewType: image.$['view-type'],
 				paths: []
 			};
 
-			for (let path of image['image']) {
-				proxy.paths.push(path['$'].path);
+			for (let path of image.image) {
+				proxy.paths.push(path.$.path);
 			}
 
 			parsed.push(proxy);
@@ -256,8 +221,7 @@ function _parsePageAttrs(attrs) {
 	let proxy = {};
 
 	_.each(attrs, function (value, key) {
-		let camelizedKey = main.convertToCamelCase(key);
-		proxy[camelizedKey] = value[0]['_'];
+		proxy[_.camelCase(key)] = value[0]._;
 	});
 
 	return proxy;
@@ -267,8 +231,8 @@ function _parseCustomAttrs(attrs) {
 	let proxy = {};
 
 	for (let attr of attrs) {
-		let key = attr['$']['attribute-id'];
-		let value = attr['_'];
+		let key = attr.$['attribute-id'];
+		let value = attr._;
 		proxy[key] = value;
 	}
 
