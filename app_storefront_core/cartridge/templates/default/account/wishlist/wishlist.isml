@@ -53,7 +53,7 @@
 	</form>
 
 	<form class="list-share" action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
-		<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
+		<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner && isListOwner}">
 			<isif condition="${pdict.ProductList.public}">
 				<button class="share-option" type="submit" value="Continue" name="${pdict.CurrentForms.wishlist.setListPrivate.htmlName}">
 					${Resource.msg('wishlist.listprivate','account',null)}
