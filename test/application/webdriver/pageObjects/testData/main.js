@@ -14,26 +14,26 @@ export let defaultPassword = 'Test123!';
 let demoDataDir = 'demo_data_no_hires_images';
 let coreTestDataDir = 'app_storefront_core/cartridge/testdata';
 let subjectMeta = {
-    catalogElectronics: {
-        filePath: coreTestDataDir + '/catalog/electronics.xml',
-        parser: products.parseCatalog
-    },
-    catalogApparel: {
-        filePath: coreTestDataDir + '/catalog/apparel.xml',
-        parser: products.parseCatalog
-    },
-    inventory: {
-        filePath: coreTestDataDir + '/inventory-list/inventory.xml',
-        parser: inventory.parseInventoryItems
-    },
-    pricebooks: {
-        filePath: coreTestDataDir + '/pricebook/pricebooks.xml',
-        parser: prices.parsePriceBooks
-    },
-    customers: {
-        filePath: demoDataDir + '/sites/SiteGenesis/customers.xml',
-        parser: customers.parseCustomers
-    }
+	catalogElectronics: {
+		filePath: coreTestDataDir + '/catalog/electronics.xml',
+		parser: products.parseCatalog
+	},
+	catalogApparel: {
+		filePath: coreTestDataDir + '/catalog/apparel.xml',
+		parser: products.parseCatalog
+	},
+	inventory: {
+		filePath: coreTestDataDir + '/inventory-list/inventory.xml',
+		parser: inventory.parseInventoryItems
+	},
+	pricebooks: {
+		filePath: coreTestDataDir + '/pricebook/pricebooks.xml',
+		parser: prices.parsePriceBooks
+	},
+	customers: {
+		filePath: demoDataDir + '/sites/SiteGenesis/customers.xml',
+		parser: customers.parseCustomers
+	}
 };
 
 let standardProductId = '750518548296';
@@ -46,12 +46,12 @@ export let parsedData = {};
 _.each(_.keys(subjectMeta), _loadAndJsonifyXmlData);
 
 function _loadAndJsonifyXmlData (subject) {
-    fs.readFile(subjectMeta[subject].filePath, (err, data) => {
-        let parser = xml2js.Parser();
-        parser.parseString(data, (err, result) => {
-            parsedData[subject] = subjectMeta[subject].parser(result);
-        });
-    });
+	fs.readFile(subjectMeta[subject].filePath, (err, data) => {
+		let parser = xml2js.Parser();
+		parser.parseString(data, (err, result) => {
+		parsedData[subject] = subjectMeta[subject].parser(result);
+		});
+	});
 }
 
 /* PRODUCTS */
@@ -63,7 +63,7 @@ function _loadAndJsonifyXmlData (subject) {
  * @returns {Promise.Object} - JSON object of product
  */
 export function getProductByIdPromise (productId) {
-    return Promise.resolve(products.getProductFromCatalog(parsedData, productId));
+	return Promise.resolve(products.getProductFromCatalog(parsedData, productId));
 }
 
 /**
@@ -72,7 +72,7 @@ export function getProductByIdPromise (productId) {
  * @returns {Promise.Object} - ProductStandard instance
  */
 export function getProductStandard () {
-    return Promise.resolve(getProductByIdPromise(standardProductId));
+	return Promise.resolve(getProductByIdPromise(standardProductId));
 }
 
 /**
@@ -81,7 +81,7 @@ export function getProductStandard () {
  * @returns {Promise.Object} - ProductVariationMaster instance
  */
 export function getProductVariationMaster () {
-    return Promise.resolve(getProductByIdPromise(variationMasterProductId));
+	return Promise.resolve(getProductByIdPromise(variationMasterProductId));
 }
 
 /**
@@ -90,7 +90,7 @@ export function getProductVariationMaster () {
  * @returns {Promise.Object} - ProductSet instance
  */
 export function getProductSet () {
-    return Promise.resolve(getProductByIdPromise(setProductId));
+	return Promise.resolve(getProductByIdPromise(setProductId));
 }
 
 /**
@@ -99,7 +99,7 @@ export function getProductSet () {
  * @returns {Promise.Object} - ProductBundle instance
  */
 export function getProductBundle () {
-    return Promise.resolve(getProductByIdPromise(bundleProductId));
+	return Promise.resolve(getProductByIdPromise(bundleProductId));
 }
 
 /* CUSTOMERS */
@@ -111,7 +111,7 @@ export function getProductBundle () {
  * @returns {Promise.Object} - JSON object with Customer's test data
  */
 export function getCustomerByLoginPromise (login) {
-    return Promise.resolve(customers.getCustomer(parsedData.customers, login));
+	return Promise.resolve(customers.getCustomer(parsedData.customers, login));
 }
 
 /* PRICES */
@@ -125,7 +125,7 @@ export function getCustomerByLoginPromise (login) {
  * @returns {Promise.Object} - Product* instance
  */
 export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
-    return Promise.resolve(prices.getPricesForProduct(parsedData.pricebooks, productId, currencyCode));
+	return Promise.resolve(prices.getPricesForProduct(parsedData.pricebooks, productId, currencyCode));
 }
 
 /* INVENTORY */
@@ -138,5 +138,5 @@ export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
  * @returns {Promise} - JSON object of product's inventory values
  */
 export function getInventoryByProductIdPromise (productId) {
-    return Promise.resolve(_.findWhere(parsedData.inventory, {productId: productId}));
+	return Promise.resolve(_.findWhere(parsedData.inventory, {productId: productId}));
 }
