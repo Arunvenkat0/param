@@ -36,11 +36,11 @@
 				</a> |
 			</isif>
 			
-			<a href="${URLUtils.url('Address-Edit','AddressID', encodeURIComponent(address.ID))}" class="address-edit">
+			<a href="${URLUtils.url('Address-Edit','AddressID', encodeURIComponent(address.ID))}" title="${Resource.msg('global.edit','locale',null)} ${Resource.msg('account.addressbook.addressinclude.label.suffix','account',null)}" class="address-edit">
 				${Resource.msg('global.edit','locale',null)}
 			</a> |
 			
-			<a href="${URLUtils.url('Address-Delete','AddressID', encodeURIComponent(address.ID))}" title="${Resource.msg('account.addressbook.addressinclude.delete','account',null)}" class="address-delete delete">
+			<a href="${URLUtils.url('Address-Delete','AddressID', encodeURIComponent(address.ID))}" title="${Resource.msg('account.addressbook.addressinclude.delete','account',null)} ${Resource.msg('account.addressbook.addressinclude.label.suffix','account',null)}" class="address-delete delete">
 				${Resource.msg('account.addressbook.addressinclude.delete','account',null)}
 			</a>
 			
