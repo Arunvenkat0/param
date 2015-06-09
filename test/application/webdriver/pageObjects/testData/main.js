@@ -10,6 +10,11 @@ import * as products from './products.js';
 import * as prices from './prices.js';
 
 export let defaultPassword = 'Test123!';
+export let creditCard1 = {
+	number: '4111111111111111',
+	yearIndex: 2,
+	cvn: 987
+};
 
 let demoDataDir = 'demo_data_no_hires_images';
 let coreTestDataDir = 'app_storefront_core/cartridge/testdata';

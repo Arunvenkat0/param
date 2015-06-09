@@ -47,33 +47,43 @@ The tests are contained in suites, which are represented as directories. For exa
 
 ## Test Setup
 
-- Install all dependencies
+1. Install all dependencies
 
-	```shell
-	:; npm install
-	```
+    ```shell
+    :; npm install
+    ```
 
-- Install phantomjs and standalone Selenium driver
+1. Install phantomjs and standalone Selenium driver
 
-	```shell
-	:; npm install -g phantomjs # see note [1]
-	:; npm install --production -g selenium-standalone@latest
-	:; selenium-standalone install # see note [2]
-	```
+    ```shell
+    :; npm install -g phantomjs # see note [1]
+    :; npm install --production -g selenium-standalone@latest
+    :; selenium-standalone install # see note [2]
+    ```
 
-- Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
+1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
 testdata directory from the app_storefront_core/cartridge to the "Impex/src"
 directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src).
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
 
-- Add the 'app_storefront_core' cartridge to the Business Manager Sites-Site
+1. Add the `app_storefront_core` cartridge to the Business Manager Sites-Site
 Settings:
-	1. Go to `Business Manager > Administration > Manage Sites` 
-	1. Click on the Manage the Business Manager Site link
-	1. Set the `Cartridges` field to `app_storefront_core:bm_custom_plugin`
+    1. Go to **Business Manager > Administration > Manage Sites** 
+    1. Click on the Manage the **Business Manager** Site link
+    1. Set the **Cartridges** field to **app_storefront_core:bm_custom_plugin**
 
-The above 4 steps are only needed once.
+1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
+
+    ```javascript
+    {
+        "url": "https://example.demandware.net/s/SiteGenesis",
+        "client": "phantomjs"
+    }
+    ```
+ *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
+
+These 5 steps only need to be performed once.
 
 ## Run the tests
 
@@ -87,41 +97,29 @@ After installing the dependencies, start selenium server each time you wish to r
 
 It's important to keep this command-line instance running in the background. Open a new terminal window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
 
-1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
-
- ```javascript
-{
-	"url": "http://example.demandware.net/s/SiteGenesis",
-	"client": "phantomjs"
-}
-```
- *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
-
 1. Reset test data
 
- To ensure that the application tests can consistently compare results with their
+    To ensure that the application tests can consistently compare results with their
 expected values, we have implemented a process to reset test data.  During the 
-SiteGenesis build process, a job called, TestDataReset, is created and available
+SiteGenesis build process, a job called, **TestDataReset**, is created and available
 to run.  **Note:** By default, the site associated with the job is SiteGenesis.
 If you are using a different site, please alter the job to point to it.
 
- Before running a test, please reset the data by following these steps:
- 
- a. Go to Business Manager > Administration > Job Schedules
+    Before running a test, please reset the data by following these steps:
 
-	https://&lt;sandbox_host&gt;/on/demandware.store/Sites-Site/default/SMCScheduler-DisplayAll?SelectedMenuItem=operations&CurrentMenuItemId=operations&menuname=Job%20Schedules&mainmenuname=Operations
+    a. Go to **Business Manager > Administration > Job Schedules**
 
- b. Click on the TestDataReset link, which will redirect you to the Job Detail page.
+    b. Click on the **TestDataReset** link, which will redirect you to the Job Detail page.
 
- c. Click the Run button, wait a moment, then periodically click the Refresh
-button under the "TestDataReset - History" section until the Status column reports
-"Finished".  The Error column should display "None".  At this point, you can run
+    c. Click the Run button, wait a moment, then periodically click the Refresh
+button under the **TestDataReset - History** section until the Status column reports
+**Finished**.  The Error column should display **None**.  At this point, you can run
 the application tests.
 
 1. Run the test
 
- ```sh
-$ gulp test:application
+    ```sh
+:; gulp test:application
 ```
 
  This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
@@ -613,3 +611,4 @@ The following options are supported on the command line:
 *[2] Selenium version 2.44.0 is not compatible with PhantomJS (see https://code.google.com/p/selenium/issues/detail?id=8088). In order to circumvent this, install version 2.43.1 instead: `selenium-standalone install --version=2.43.1`.*
 
 *[3] You might need to use the flag `--version=2.43.1` to start the server as well, similar to note [2].*
+ 

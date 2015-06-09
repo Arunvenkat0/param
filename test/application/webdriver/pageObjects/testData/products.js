@@ -191,6 +191,12 @@ class ProductVariationMaster extends AbstractProductBase {
 
 	}
 
+	getUrlResourcePath () {
+		let path = this.classificationCategory.replace(/-/g, '/');
+		let productId = this.id;
+		return `/${path}/${productId}.html`;
+	}
+
 	getVariantProductIds () {
 		return this.variants;
 	}
