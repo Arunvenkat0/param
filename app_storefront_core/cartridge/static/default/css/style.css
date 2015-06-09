@@ -381,7 +381,7 @@ th {
   background-repeat: no-repeat;
   position: relative;
   display: inline-block;
-  width: 1.3333333333em;
+  width: 1.33333em;
   line-height: 1em; }
   .flag-icon:before {
     content: '\00a0'; }
@@ -1952,7 +1952,6 @@ label {
     width: auto; }
 
 .form-label-text {
-  display: block;
   float: left;
   font-size: 1.1em;
   font-weight: 700;
@@ -1965,9 +1964,11 @@ label {
 .form-row {
   margin: 0.5rem 0 1rem; }
 
-.form-horizontal .form-row-button {
-  margin-left: 24%;
-  width: 62%; }
+.form-row-button {
+  clear: left; }
+  .form-horizontal .form-row-button {
+    margin-left: 24%;
+    width: 62%; }
 
 .field-wrapper {
   box-sizing: border-box;
@@ -4507,8 +4508,13 @@ ul.product-availability-list {
 .month .form-caption {
   margin-left: 0; }
 
-.cvn .field-wrapper {
-  width: 50px; }
+.cvn {
+  clear: left; }
+  .cvn .field-wrapper {
+    width: 50px; }
+
+.ssn {
+  clear: left; }
 
 .bml-terms-and-conditions {
   border: 1px solid #aaa;

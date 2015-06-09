@@ -94,8 +94,15 @@
 	margin-left: 0;
 }
 
-.cvn .field-wrapper {
-	width: 50px;
+.cvn {
+	clear: left;
+	.field-wrapper {
+		width: 50px;
+	}
+}
+
+.ssn {
+	clear: left;
 }
 
 .bml-terms-and-conditions {
