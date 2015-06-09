@@ -13,43 +13,35 @@
 
 	<iscomment>wishlist items form</iscomment>
 
-	<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
+	<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
+		<fieldset>
+		<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner && isListOwner}">
+			<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+				<div class="form-row">
+					<label for="editAddress">${Resource.msg('wishlist.addresslabel', 'account', null)}</label>
+					<div class="field-wrapper">
+						<select class="input-select" name="editAddress" id="editAddress">
+							<option value="">${Resource.msg('wishlist.noshippingaddress', 'account', null)}</option>
+							<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
+								<option <isif condition="${pdict.ProductList.shippingAddress != null && pdict.ProductList.shippingAddress.ID == address.ID}">selected="selected"</isif> value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/>
+								</option>
+							</isloop>
+						</select>
+					</div>
+					<button class="simple-submit" name="${pdict.CurrentForms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >${Resource.msg('global.select', 'locale', null)}</button>
+				</div>
+			</isif>
 
-	<fieldset>
-
-	<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner && isListOwner}">
-		<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
-			<div class="form-row label-above">
-				<label for="editAddress">${Resource.msg('wishlist.addresslabel','account',null)}</label>
-				<select class="input-select" name="editAddress" id="editAddress">
-					<option value="">${Resource.msg('wishlist.noshippingaddress','account',null)}</option>
-					<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address">
-						<option
-						<isif condition="${pdict.ProductList.shippingAddress != null && pdict.ProductList.shippingAddress.ID == address.ID}">
-							selected="selected"
-						</isif>
-							value="${address.ID}">(<isprint value="${address.ID}"/>) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/>
-						</option>
-					</isloop>
-				</select>
-
-				<button class="simple-submit" name="${pdict.CurrentForms.wishlist.selectAddressWishlist.htmlName}" type="submit" value="Go" >
-					Select
-				</button>
-			</div>
+			<isif condition="${pdict.ProductList.giftCertificateItem == null && isListOwner}">
+				<div class="form-row">
+					<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
+						${Resource.msg('giftregistry.addgiftcertificate', 'forms', null)}
+					</button>
+					<p>${Resource.msg('wishlist.addgiftcertmessage','account',null)}</p>
+				</div>
+			</isif>
 		</isif>
-
-		<isif condition="${pdict.ProductList.giftCertificateItem == null && isListOwner}">
-			<div class="form-row">
-				<button type="submit" value="${Resource.msg('wishlist.addgiftcert','account',null)}" name="${pdict.CurrentForms.wishlist.addGiftCertificate.htmlName}">
-					${Resource.msg('giftregistry.addgiftcertificate', 'forms', null)}
-				</button>
-				<p>${Resource.msg('wishlist.addgiftcertmessage','account',null)}</p>
-			</div>
-		</isif>
-
-	</isif>
-	</fieldset>
+		</fieldset>
 	</form>
 
 	<form class="list-share" action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.wishlist.htmlName}_share">
