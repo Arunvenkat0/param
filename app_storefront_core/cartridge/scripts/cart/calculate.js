@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @module calculate.js
  *
@@ -6,11 +8,13 @@
  * these tools via the OCAPI 'hook' mechanism
  *
  */
-var HashMap = require("dw/util").HashMap,
-	PromotionMgr = require("dw/campaign").PromotionMgr,
-	ShippingMgr = require("dw/order").ShippingMgr,
-	ShippingLocation = require("dw/order").ShippingLocation,
-	TaxMgr = require("dw/order").TaxMgr;
+var HashMap = require('dw/util/HashMap');
+var PromotionMgr = require('dw/campaign/PromotionMgr');
+var ShippingMgr = require('dw/order/ShippingMgr');
+var ShippingLocation = require('dw/order/ShippingLocation');
+var TaxMgr = require('dw/order/TaxMgr');
+var Logger = require('dw/system/Logger');
+var Status = require('dw/system/Status');
 
 /**
  * @function calculate
@@ -21,8 +25,7 @@ var HashMap = require("dw/util").HashMap,
  *
  * @param {object} basket The basket to be calculated
  */
-exports.calculate = function(basket)
-{
+exports.calculate = function(basket) {
     // ===================================================
 	// =====   CALCULATE PRODUCT LINE ITEM PRICES    =====
     // ===================================================
@@ -86,8 +89,8 @@ exports.calculate = function(basket)
 	// =====            DONE                         =====
     // ===================================================
 
-	return new dw.system.Status(dw.system.Status.OK);
-}
+	return new Status(Status.OK);
+};
 
 /**
  * @function calculateProductPrices
@@ -97,48 +100,43 @@ exports.calculate = function(basket)
  *
  * @param {object} basket The basket containing the elements to be computed
  */
-function calculateProductPrices (basket)
-{
+function calculateProductPrices (basket) {
 	// get total quantities for all products contained in the basket
-	var productQuantities : HashMap = basket.getProductQuantities();
+	var productQuantities = basket.getProductQuantities();
+	var productQuantitiesIt = productQuantities.keySet().iterator();
 
 	// get product prices for the accumulated product quantities
-	var productPrices : HashMap = new HashMap();
+	var productPrices = new HashMap();
 
-	for each(var product : Product in productQuantities.keySet())
-	{
-		var quantity : Quantity = productQuantities.get(product);
-		productPrices.put(product, product.priceModel.getPrice(quantity));
+	while (productQuantitiesIt.hasNext()) {
+		var prod = productQuantitiesIt.next();
+		var quantity = productQuantities.get(prod);
+		productPrices.put(prod, prod.priceModel.getPrice(quantity));
 	}
 
 	// iterate all product line items of the basket and set prices
-	var productLineItems : Iterator = basket.getAllProductLineItems().iterator();
-	while(productLineItems.hasNext())
-	{
-		var productLineItem : ProductLineItem = productLineItems.next();
+	var productLineItems = basket.getAllProductLineItems().iterator();
+	while (productLineItems.hasNext()) {
+		var productLineItem = productLineItems.next();
 
 		// handle non-catalog products
-		if(!productLineItem.catalogProduct)
-		{
+		if (!productLineItem.catalogProduct) {
 			productLineItem.setPriceValue(productLineItem.basePrice.valueOrNull);
 			continue;
 		}
 
-		var product : Product = productLineItem.product;
+		var product = productLineItem.product;
 
 		// handle option line items
-		if(productLineItem.optionProductLineItem)
-		{
+		if (productLineItem.optionProductLineItem) {
 			// for bonus option line items, we do not update the price
 			// the price is set to 0.0 by the promotion engine
-			if(!productLineItem.bonusProductLineItem)
-			{
+			if (!productLineItem.bonusProductLineItem) {
 				productLineItem.updateOptionPrice();
 			}
 		}
 		// handle bundle line items, but only if they're not a bonus
-		else if(productLineItem.bundledProductLineItem)
-		{
+		else if (productLineItem.bundledProductLineItem) {
 			// no price is set for bundled product line items
 		}
 		// handle bonus line items
@@ -146,18 +144,16 @@ function calculateProductPrices (basket)
 		// we update this price here to the actual product price just to
 		// provide the total customer savings in the storefront
 		// we have to update the product price as well as the bonus adjustment
-		else if(productLineItem.bonusProductLineItem && product != null)
-		{
-			var price : Money = product.priceModel.price;
+		else if (productLineItem.bonusProductLineItem && product !== null) {
+			var price = product.priceModel.price;
 			productLineItem.setPriceValue(price.valueOrNull);
 			// get the product quantity
-			var quantity : Quantity = productLineItem.quantity;
+			var quantity2 = productLineItem.quantity;
 			// we assume that a bonus line item has only one price adjustment
-			var adjustments : Collection = productLineItem.priceAdjustments;
-			if(!adjustments.isEmpty())
-			{
-				var adjustment : PriceAdjustment = adjustments.iterator().next();
-				var adjustmentPrice : Money = price.multiply(quantity.value).multiply(-1.0);
+			var adjustments = productLineItem.priceAdjustments;
+			if (!adjustments.isEmpty()) {
+				var adjustment = adjustments.iterator().next();
+				var adjustmentPrice = price.multiply(quantity2.value).multiply(-1.0);
 				adjustment.setPriceValue(adjustmentPrice.valueOrNull);
 			}
 		}
@@ -167,13 +163,11 @@ function calculateProductPrices (basket)
 		// policy
 
 		// handle product line items unrelated to product
-		else if(product == null)
-		{
+		else if (product === null) {
 			productLineItem.setPriceValue(null);
 		}
 		// handle normal product line items
-		else
-		{
+		else {
 			productLineItem.setPriceValue(productPrices.get(product).valueOrNull);
 		}
     }
@@ -187,12 +181,10 @@ function calculateProductPrices (basket)
  *
  * @param {object} basket The basket containing the gift certificates
  */
-function calculateGiftCertificatePrices (basket)
-{
-	var giftCertificates : Iterator = basket.getGiftCertificateLineItems().iterator();
-	while(giftCertificates.hasNext())
-	{
-		var giftCertificate : GiftCertificateLineItem = giftCertificates.next();
+function calculateGiftCertificatePrices (basket) {
+	var giftCertificates = basket.getGiftCertificateLineItems().iterator();
+	while(giftCertificates.hasNext()) {
+		var giftCertificate = giftCertificates.next();
 		giftCertificate.setPriceValue(giftCertificate.basePrice.valueOrNull);
 	}
 }
@@ -216,111 +208,94 @@ function calculateGiftCertificatePrices (basket)
  *
  * @param {object} basket The basket containing the elements for which taxes need to be calculated
  */
-function calculateTax (basket)
-{
-	var shipments : Iterator = basket.getShipments().iterator();
-	while(shipments.hasNext())
-	{
-		var shipment : Shipment = shipments.next();
+function calculateTax (basket) {
+	var shipments = basket.getShipments().iterator();
+	while (shipments.hasNext()) {
+		var shipment = shipments.next();
 
 		// first we reset all tax fields of all the line items
 		// of the shipment
-		var shipmentLineItems : Iterator = shipment.getAllLineItems().iterator();
-		while(shipmentLineItems.hasNext())
-		{
-			var lineItem : LineItem = shipmentLineItems.next();
+		var shipmentLineItems = shipment.getAllLineItems().iterator();
+		while (shipmentLineItems.hasNext()) {
+			var _lineItem = shipmentLineItems.next();
 			// do not touch tax rate for fix rate items
-			if(lineItem.taxClassID == TaxMgr.customRateTaxClassID)
-			{
-				lineItem.updateTax(lineItem.taxRate);
-			}
-			else
-			{
-				lineItem.updateTax(null);
+			if (_lineItem.taxClassID === TaxMgr.customRateTaxClassID) {
+				_lineItem.updateTax(_lineItem.taxRate);
+			} else {
+				_lineItem.updateTax(null);
 			}
 		}
 
 		// identify the appropriate tax jurisdiction
-		var taxJurisdictionID : String = null;
+		var taxJurisdictionID = null;
 
 		// if we have a shipping address, we can determine a tax jurisdiction for it
-		if(shipment.shippingAddress != null)
-		{
-			var location : ShippingLocation = new ShippingLocation(shipment.shippingAddress);
+		if (shipment.shippingAddress !== null) {
+			var location = new ShippingLocation(shipment.shippingAddress);
 			taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
 		}
 
-		if(taxJurisdictionID == null)
-		{
+		if (taxJurisdictionID === null) {
 			taxJurisdictionID = TaxMgr.defaultTaxJurisdictionID;
 		}
 
 		// if we have no tax jurisdiction, we cannot calculate tax
-		if(taxJurisdictionID == null)
-		{
+		if (taxJurisdictionID === null) {
 			continue;
 		}
 
 		// shipping address and tax juridisction are available
-		var shipmentLineItems : Iterator = shipment.getAllLineItems().iterator();
-		while(shipmentLineItems.hasNext())
-		{
-			var lineItem : LineItem = shipmentLineItems.next();
-			var taxClassID : String = lineItem.taxClassID;
+		var shipmentLineItems2 = shipment.getAllLineItems().iterator();
+		while (shipmentLineItems2.hasNext()) {
+			var lineItem = shipmentLineItems2.next();
+			var taxClassID = lineItem.taxClassID;
 
-			dw.system.Logger.debug("1. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+			Logger.debug('1. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
 
 			// do not touch line items with fix tax rate
-			if(taxClassID == TaxMgr.customRateTaxClassID)
-			{
+			if (taxClassID === TaxMgr.customRateTaxClassID) {
 				continue;
 			}
 
 			// line item does not define a valid tax class; let's fall back to default tax class
-			if(taxClassID == null)
-			{
+			if (taxClassID === null) {
 				taxClassID = TaxMgr.defaultTaxClassID;
 			}
 
 			// if we have no tax class, we cannot calculate tax
-			if(taxClassID == null)
-			{
-				dw.system.Logger.debug("Line Item {0} has invalid Tax Class {1}", lineItem.lineItemText, lineItem.taxClassID);
+			if (taxClassID === null) {
+				Logger.debug('Line Item {0} has invalid Tax Class {1}', lineItem.lineItemText, lineItem.taxClassID);
 				continue;
 			}
 
 			// get the tax rate
-			var taxRate : Number = TaxMgr.getTaxRate(taxClassID, taxJurisdictionID);
+			var taxRate = TaxMgr.getTaxRate(taxClassID, taxJurisdictionID);
 			// w/o a valid tax rate, we cannot calculate tax for the line item
-			if(taxRate == null)
-			{
+			if (taxRate === null) {
 				continue;
 			}
 
 			// calculate the tax of the line item
 	    lineItem.updateTax(taxRate);
-			dw.system.Logger.debug("2. Line Item {0} with Tax Class {1} and Tax Rate {2}", lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+		Logger.debug('2. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
 	}
 	}
 
 	// besides shipment line items, we need to calculate tax for possible order-level price adjustments
-    // this includes order-level shipping price adjustments
-    if(!basket.getPriceAdjustments().empty || !basket.getShippingPriceAdjustments().empty)
-    {
+	// this includes order-level shipping price adjustments
+	if (!basket.getPriceAdjustments().empty || !basket.getShippingPriceAdjustments().empty) {
 	// calculate a mix tax rate from
-	var basketPriceAdjustmentsTaxRate : Number = (basket.getMerchandizeTotalGrossPrice().value / basket.getMerchandizeTotalNetPrice().value) - 1;
+	var basketPriceAdjustmentsTaxRate = (basket.getMerchandizeTotalGrossPrice().value / basket.getMerchandizeTotalNetPrice().value) - 1;
 
-	    var basketPriceAdjustments : Iterator = basket.getPriceAdjustments().iterator();
-	    while(basketPriceAdjustments.hasNext())
-	    {
-			var basketPriceAdjustment : PriceAdjustment = basketPriceAdjustments.next();
+		var basketPriceAdjustments = basket.getPriceAdjustments().iterator();
+		while (basketPriceAdjustments.hasNext()) {
+			var basketPriceAdjustment = basketPriceAdjustments.next();
 			basketPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
-	    }
+		}
 
-	    var basketShippingPriceAdjustments : Iterator = basket.getShippingPriceAdjustments().iterator();
-	    while(basketShippingPriceAdjustments.hasNext())
-	    {
-			var basketShippingPriceAdjustment : PriceAdjustment = basketShippingPriceAdjustments.next();
+		var basketShippingPriceAdjustments = basket.getShippingPriceAdjustments().iterator();
+		while (basketShippingPriceAdjustments.hasNext()) {
+			var basketShippingPriceAdjustment = basketShippingPriceAdjustments.next();
 			basketShippingPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
 	    }
 	}

@@ -66,4 +66,4 @@ module.exports = View.extend({
 		}));
 		return this;
 	}
-})
+});

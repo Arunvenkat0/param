@@ -1932,7 +1932,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="copyright"&gt;&amp;copy; 2004-2015 Demandware or its affiliates. All rights reserved.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/div&gt;&#13;
-                &lt;!-- SG.15.6.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.6.0.5 --&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -1966,9 +1966,10 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Customer Service&lt;/h3&gt;&#13;
                 &lt;ul class="menu-footer menu pipe"&gt;&#13;
-                &lt;li&gt;&lt;a href="$httpsUrl('CustomerService-ContactUs')$"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('CustomerService-Show','aid','customer-service')$"&gt;Help&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('SiteMap-Start')$"&gt;Site Map&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsUrl('CustomerService-ContactUs')$" title="Go to Contact Us"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('GiftCert-Purchase')$" title="Go to Gift Certificates"&gt;Gift Certificates&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('CustomerService-Show','aid','customer-service')$" title="Go to Help"&gt;Help&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('SiteMap-Start')$" title="Go to Site Map"&gt;Site Map&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;&lt;!-- END: footer_support --&gt;</custom-attribute>
         </custom-attributes>
     </content>

@@ -56,14 +56,14 @@
 		<td class="order-payment-instruments">
 			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
-				   <div class="orderpaymentinstrumentsgc">
-						   <span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
-				           <span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
-				           <span class="payment-amount">
-				              <span class="label">${Resource.msg('global.amount','locale',null)}:</span>
-				              <span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
-				           </span>
-				    </div>
+					<div class="orderpaymentinstrumentsgc">
+						<span class="label"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></span>
+						<span class="value"><isprint value="${paymentInstr.maskedGiftCertificateCode}"/></span>
+						<span class="payment-amount">
+							<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
+							<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+						</span>
+					</div>
 				<iselse/>
 					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
 					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>
@@ -166,8 +166,7 @@
 									</isloop>
 								</isif>
 							</isif>
-					    </td>
-
+						</td>
 
 					</tr>
 				</isloop>
@@ -227,16 +226,16 @@
 						</td>
 						<td class="order-shipment-details">
 							<div class="order-shipment-address">
-					    		<span class="label">${Resource.msg('order.orderdetails.giftcertshippingaddress','order',null)}</span>
-					    		<div class="order-gift-cert-to">
+								<span class="label">${Resource.msg('order.orderdetails.giftcertshippingaddress','order',null)}</span>
+								<div class="order-gift-cert-to">
 									<span class="value"><isprint value="${giftCertificateLineItem.recipientName}"/></span>
 									<span class="value"><isprint value="${giftCertificateLineItem.recipientEmail}"/></span>
 								</div>
-					    	</div>
+							</div>
 							<div class="shipping-method">
-					    		<span class="label">${Resource.msg('order.orderdetails.shippingmethod','order',null)}</span>
-					    		<span class="value">${Resource.msg('order.orderdetails.giftcertshipping','order',null)}</span>
-					    	</div>
+								<span class="label">${Resource.msg('order.orderdetails.shippingmethod','order',null)}</span>
+								<span class="value">${Resource.msg('order.orderdetails.giftcertshipping','order',null)}</span>
+							</div>
 						</td>
 					</tr>
 				</isloop>

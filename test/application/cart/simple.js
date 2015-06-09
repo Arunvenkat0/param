@@ -2,7 +2,6 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import config from '../webdriver/config';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
@@ -45,7 +44,7 @@ describe('Cart - Simple', () => {
 	it('should display the correct size', () =>
 		cartPage
 			.getItemAttrByRow(1, 'size')
-			.then(size => assert.equal(size, '30'))
+			.then(size => assert.equal(size, '29'))
 	);
 
 	it('should update quantity in cart', () =>
@@ -63,7 +62,7 @@ describe('Cart - Simple', () => {
 	it('should change size', () =>
 		cartPage
 			.updateSizeByRow(1, 5)
-			.then(size => assert.equal(size, '33'))
+			.then(size => assert.equal(size, '32'))
 	);
 
 	it('should remove product from cart', () =>

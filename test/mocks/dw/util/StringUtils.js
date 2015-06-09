@@ -4,4 +4,4 @@ module.exports = {
 	stringToHtml: function (str) {
 		return str;
 	}
-}
+};

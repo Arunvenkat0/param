@@ -4,10 +4,10 @@ var MainView = require('./views/main');
 var NavView = require('./views/nav');
 require('./handlebars');
 
-var nav = new NavView({
+new NavView({
 	el: document.querySelector('#nav')
 }).render();
 
-var main = new MainView({
+new MainView({
 	el: document.querySelector('#main')
 }).render();

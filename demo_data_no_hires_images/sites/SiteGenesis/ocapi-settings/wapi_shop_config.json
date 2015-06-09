@@ -1,5 +1,5 @@
 {
-  "_v":"13.6",
+  "_v":"15.4",
   "clients":
   [ 
     {
@@ -8,105 +8,161 @@
       "resources":
       [
         {
-          "resource_id":"/account/{id}",
+          "resource_id":"/account/*",
+          "methods":["get","patch"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
           "resource_id":"/account/register",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
           "resource_id":"/account/login",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
           "resource_id":"/account/logout",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/account/{id}/addresses",
+          "resource_id":"/account/*/addresses",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}",
+          "resource_id":"/account/*/addresses/*",
+          "methods":["get","patch","put","delete"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/add",
+          "resource_id":"/basket/*",
+          "methods":["get","patch"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout",
+          "resource_id":"/basket/*/add",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/set_shipping_address",
+          "resource_id":"/basket/*/checkout",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/set_billing_address",
+          "resource_id":"/basket/*/checkout/set_shipping_address",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/set_shipping_method",
+          "resource_id":"/basket/*/checkout/set_billing_address",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/set_customer_info",
+          "resource_id":"/basket/*/checkout/set_shipping_method",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/set_payment_method",
+          "resource_id":"/basket/*/checkout/set_customer_info",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/shipping_methods",
+          "resource_id":"/basket/*/checkout/shipping_methods",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/payment_methods",
+          "resource_id":"/basket/*/checkout/payment_instruments",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/basket/{id}/checkout/submit",
+          "resource_id":"/basket/*/checkout/payment_instruments/*",
+          "methods":["patch","delete"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/basket/*/checkout/payment_methods",
+          "methods":["get"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/basket/*/checkout/submit",
+          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         }, 
         {
-          "resource_id":"/categories/{id}",
+          "resource_id":"/categories/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}",
+          "resource_id":"/product_lists/*",
+          "methods":["get"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/product_lists",
+          "methods":["get"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/product_lists/*/items",
+          "methods":["get","post"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/product_lists/*/items/*",
+          "methods":["patch","delete"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/products/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/images",
+          "resource_id":"/products/*/images",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/availability",
+          "resource_id":"/products/*/availability",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "config":{
@@ -116,7 +172,8 @@
           "cache_time":60
         },
         {
-          "resource_id":"/products/{id}/prices",
+          "resource_id":"/products/*/prices",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "config":{
@@ -125,61 +182,71 @@
           "cache_time":300
         },
         {
-          "resource_id":"/products/{id}/links",
+          "resource_id":"/products/*/links",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/promotions",
+          "resource_id":"/products/*/promotions",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/options",
+          "resource_id":"/products/*/options",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/set_products",
+          "resource_id":"/products/*/set_products",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/bundled_products",
+          "resource_id":"/products/*/bundled_products",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/links",
+          "resource_id":"/products/*/links",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/products/{id}/variations",
+          "resource_id":"/products/*/variations",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/product_search",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/product_search/availability",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":60
         },
         {
           "resource_id":"/product_search/images",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "config":{
@@ -191,63 +258,91 @@
         },
         {
           "resource_id":"/product_search/prices",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":300
         },
         {
           "resource_id":"/product_search/variations",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/promotions",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/promotions/{id}",
+          "resource_id":"/promotions/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/site",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/folders/{id}",
+          "resource_id":"/folders/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/content_search",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },        
         {
-          "resource_id":"/content/{id}",
+          "resource_id":"/content/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
           "resource_id":"/stores",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
         },
         {
-          "resource_id":"/stores/{id}",
+          "resource_id":"/stores/*",
+          "methods":["get"],
           "read_attributes":"(**)",
           "write_attributes":"(**)",
           "cache_time":900
+        },
+        {
+          "resource_id":"/orders/*",
+          "methods":["get"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/orders/*/payment_authorize",
+          "methods":["post"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/orders",
+          "methods":["get"],
+          "read_attributes":"(**)",
+          "write_attributes":"(**)"
         }        
       ]
     }
