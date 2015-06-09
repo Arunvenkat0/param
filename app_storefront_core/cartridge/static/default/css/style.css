@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Crete+Round:400,400italic);
-.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .gift-registry-advanced:after, .store-list-pdp-container .store-list-item:after, .search-suggestion-wrapper:after, .product-suggestion:after {
+.clearfix:after, nav[role="navigation"]:after, .level-2 > ul:after, .category-switch:after, .form-row:after, .menu-category:after, .level-1 > li:after, .product-tile:after, .compare-items-panel:after, .pdp-main:after, .product-thumbnails ul:after, .pdp-main .product-review:after, .bonus-product-list .bonus-product-item:after, .bonus-product-list .bonus-product-list-footer:after, .cart-footer:after, .cart-actions:after, .cart-recommendations .product-listing:after, .cart-empty:after, .cart-empty .product-listing:after, .list-share:after, .gift-registry-advanced:after, .store-list-pdp-container .store-list-item:after, .search-suggestion-wrapper:after, .product-suggestion:after {
   content: "";
   display: table;
   clear: both; }
@@ -1999,7 +1999,6 @@ label {
     margin-right: .42em; }
 
 .form-row {
-  clear: both;
   margin: 0.5rem 0 1rem; }
 
 .form-horizontal .form-row-button {
@@ -2032,6 +2031,7 @@ input[type="password"],
 textarea {
   border: 1px solid #aaa;
   box-sizing: border-box;
+  height: 2rem;
   padding: 0.7em 0.5em;
   text-indent: 0;
   width: 100%; }
@@ -2286,7 +2286,7 @@ div.error {
   margin: 1em 0; }
 
 .content-asset ul li {
-  list-style: square outside none !important; }
+  list-style: square outside none; }
 
 .content-asset ol li {
   list-style: decimal outside none; }
@@ -2412,8 +2412,7 @@ div.error {
       color: #aaa;
       display: inline; }
     #homepage-slides .slide2 .banner-message .banner-text3 {
-      color: #000;
-      text-indent: 1rem; }
+      color: #000; }
   #homepage-slides .slide3 .banner-message {
     left: 3%; }
     #homepage-slides .slide3 .banner-message .banner-text1 {
@@ -2437,16 +2436,13 @@ div.error {
     #homepage-slides .slide4 .banner-message .banner-text2 {
       color: #fff; }
     #homepage-slides .slide4 .banner-message .banner-text3 {
-      color: #fff;
-      text-indent: 3.6rem; }
+      color: #fff; }
   #homepage-slides .slide5 .banner-message {
     left: 3%; }
     #homepage-slides .slide5 .banner-message .banner-text1 {
       color: #00629b; }
     #homepage-slides .slide5 .banner-message .banner-text2 {
-      color: #990000;
-      margin-top: -0.4em;
-      text-indent: 0.5em; }
+      color: #990000; }
     #homepage-slides .slide5 .banner-message .banner-text3 {
       color: #fff; }
 
@@ -3353,7 +3349,7 @@ nav[role="navigation"] {
     background-image: url("../images/interface/icon-color-swatch-unselectable.png");
     background-position: right top; }
 
-.refinement ul.Color li a {
+.refinement ul.refinementColor li a {
   height: 23px;
   padding: 0;
   text-indent: -999em;
