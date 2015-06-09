@@ -35,7 +35,7 @@
 								(<a class="store-details-link"
 									target="_blank" id="${Store.ID}"
 									href="${URLUtils.url('Stores-Details','StoreID', Store.ID)}"
-									title="${Resource.msg('storelocator.storelocatorresults.storedetails','storelocator',null)}"
+									title="${Resource.msg('storelocator.storelocatorresults.storedetails.label.prefix','storelocator',null)} ${Resource.msg('storelocator.storelocatorresults.storedetails','storelocator',null)}"
 									data-dlg-options='{"width":900,"height":600}'>${Resource.msg('storelocator.storelocatorresults.storedetails','storelocator',null)}</a>)
 							</div>
 
