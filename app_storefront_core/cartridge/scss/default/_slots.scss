@@ -44,8 +44,10 @@
 	address {
 		margin: 1em 0;
 	}
-	ul li {
-		list-style: square outside none !important;
+	ul {
+		li {
+			list-style: square outside none;
+		}
 	}
 	ol li {
 		list-style: decimal outside none;
