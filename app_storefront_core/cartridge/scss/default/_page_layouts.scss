@@ -14,6 +14,24 @@
 			left: auto;
 		}
 	}
+	@media screen and (max-width: 767px) {
+		border: 0;
+		max-width: 100%;
+		min-width: 320px;
+		width: 100%;
+	}
+	@media screen and (min-width: 768px) and (max-width: 959px) {
+		width: 760px;
+	}
+	@media screen and (max-width: 480px) {
+		&.pt_gift-registry {
+			font-size: 12px;
+		}
+	}
+	&.pt_storefront {
+		max-width: 100%;
+		width: 100%;
+	}
 }
 
 .primary-content {
