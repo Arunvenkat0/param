@@ -2,6 +2,6 @@
 <div class="breadcrumb">
 	<iscomment> SHOW CONTENT NAME </iscomment>
 	<isif condition="${pdict.Content != null}">
-		<a class="breadcrumb-element" href="${URLUtils.url('Page-Show','cid',pdict.Content.ID)}" title="${Resource.msg('global.breadcrumbs.title.prefix.goto','locale',null)} ${pdict.Content.name}">${pdict.Content.name}</a>
+		<a class="breadcrumb-element" href="${URLUtils.url('Page-Show','cid',pdict.Content.ID)}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${pdict.Content.name}">${pdict.Content.name}</a>
 	</isif>
 </div><!-- END: breadcrumb -->

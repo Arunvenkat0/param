@@ -57,7 +57,7 @@
 
 		<iscomment>display the path</iscomment>
 		<isloop items="${path}" var="cat" status="loopstate">
-			<a class="breadcrumb-element" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}" title="${Resource.msg('global.breadcrumbs.title.prefix.goto','locale',null)} ${cat.displayName}">${cat.displayName}</a>
+			<a class="breadcrumb-element" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}">${cat.displayName}</a>
 		</isloop>
 
 		<iscomment>append product name</iscomment>
