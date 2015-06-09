@@ -180,7 +180,7 @@
 					</li>
 				<iselse/>
 					<li>
-						<a class="refinement-link" title="${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
+						<a class="refinement-link" title="${Resource.msg('global.pricerefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
 							<i class="fa fa-square-o fa-lg"></i>
 							<isprint value="${RefinementValue.getDisplayValue()}"/>
 						</a>
