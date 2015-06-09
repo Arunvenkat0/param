@@ -22,33 +22,39 @@ export function parseCustomers (rawCustomers) {
 	let parsedCustomers = [];
 
 	for (let customer of rawCustomers.customers.customer) {
-		let profile = customer.profile[0];
-
-		let proxy = {
-			login: customer.credentials[0].login[0],
-			salutation: profile.salutation[0],
-			title: profile.title[0],
-			firstName: profile['first-name'][0],
-			lastName: profile['last-name'][0],
-			suffix: profile.suffix[0],
-			company: profile['company-name'][0],
-			jobTitle: profile['job-title'][0],
-			email: profile.email[0],
-			phoneHome: profile['phone-home'][0],
-			phoneWork: profile['phone-business'][0],
-			phoneMobile: profile['phone-mobile'][0],
-			fax: profile.fax[0],
-			gender: profile.gender[0] === '1' ? 'M' : 'F'
-		};
-
-		if (customer.hasOwnProperty('addresses')) {
-			proxy.addresses = _parseAddresses(customer.addresses[0].address);
-		}
-
-		parsedCustomers.push(proxy);
+		parsedCustomers.push(new Customer(customer));
 	}
 
 	return parsedCustomers;
+}
+
+class Customer {
+	constructor (customer) {
+		let profile = customer.profile[0];
+
+		this.login = customer.credentials[0].login[0];
+		this.salutation = profile.salutation[0];
+		this.title = profile.title[0];
+		this.firstName = profile['first-name'][0];
+		this.lastName = profile['last-name'][0];
+		this.suffix = profile.suffix[0];
+		this.company = profile['company-name'][0];
+		this.jobTitle = profile['job-title'][0];
+		this.email = profile.email[0];
+		this.phoneHome = profile['phone-home'][0];
+		this.phoneWork = profile['phone-business'][0];
+		this.phoneMobile = profile['phone-mobile'][0];
+		this.fax = profile.fax[0];
+		this.gender = profile.gender[0] === '1' ? 'M' : 'F';
+
+		if (customer.hasOwnProperty('addresses')) {
+			this.addresses = _parseAddresses(customer.addresses[0].address);
+		}
+	}
+
+	getPreferredAddress () {
+		return _.findWhere(this.addresses, {preferred: true});
+	}
 }
 
 function _parseAddresses (rawAddresses) {
