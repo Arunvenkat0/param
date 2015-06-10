@@ -133,6 +133,13 @@ Other configurations are also available, see below.
 This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
 Other configurations are also available, see below.
 
+### Options
+The following options are supported on the command line:
+
+- `reporter`: (default: `spec`) see [all available options](http://mochajs.org/#reporters).
+- `timeout`: (default: `10000`)
+- `suite`: (default: `all`)
+
 ### Test user accounts
 
 Here are some generic test accounts that are used in the application tests suite, 
@@ -598,14 +605,33 @@ along with their differences for testing different scenarios:
 </tbody>
 </table>
 
-### Options
-The following options are supported on the command line:
+# Troubleshooting
 
-- `reporter`: (default: `spec`) see [all available options](http://mochajs.org/#reporters).
-- `timeout`: (default: `10000`)
-- `suite`: (default: `all`)
+1. **Couldn't connect to selenium server error**
 
-### Notes
+    This is likely due to the Selenium server not being started.  Assuming that
+    `npm install` has already been run, from a Terminal, please type:
+    `selenium-standalone start`
+
+1. **Tests have been succeeding, and with no code changes, tests are suddenly
+failing**
+
+    - Has the TestDataReset job been run?  It is possible that a test has been
+      run so often that inventory values have been depleted, and certain options
+      are no longer available.
+
+    - Another potential area to check is whether Promises in before and beforeEach
+      hooks are prepended with `return` as this is needed by Mocha as part of
+      its Promises implementation.
+
+1. **Other Tips**
+
+    - Check the Selenium log in the Terminal where `selenium-standalone start`
+      was executed for potential clues as to what may have occurred when a
+      test failed.
+
+
+# Notes
 *[1] You do not need to install `phantomjs` globally if `./node_modules/bin` is in your `$PATH`.*
 
 *[2] Selenium version 2.44.0 is not compatible with PhantomJS (see https://code.google.com/p/selenium/issues/detail?id=8088). In order to circumvent this, install version 2.43.1 instead: `selenium-standalone install --version=2.43.1`.*

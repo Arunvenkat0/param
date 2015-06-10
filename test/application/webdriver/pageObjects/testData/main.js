@@ -67,7 +67,7 @@ function _loadAndJsonifyXmlData (subject) {
  * @param {string} productId - product ID
  * @returns {Promise.Object} - JSON object of product
  */
-export function getProductByIdPromise (productId) {
+export function getProductById (productId) {
 	return Promise.resolve(products.getProductFromCatalog(parsedData, productId));
 }
 
@@ -77,7 +77,7 @@ export function getProductByIdPromise (productId) {
  * @returns {Promise.Object} - ProductStandard instance
  */
 export function getProductStandard () {
-	return Promise.resolve(getProductByIdPromise(standardProductId));
+	return Promise.resolve(getProductById(standardProductId));
 }
 
 /**
@@ -86,7 +86,7 @@ export function getProductStandard () {
  * @returns {Promise.Object} - ProductVariationMaster instance
  */
 export function getProductVariationMaster () {
-	return Promise.resolve(getProductByIdPromise(variationMasterProductId));
+	return Promise.resolve(getProductById(variationMasterProductId));
 }
 
 /**
@@ -95,7 +95,7 @@ export function getProductVariationMaster () {
  * @returns {Promise.Object} - ProductSet instance
  */
 export function getProductSet () {
-	return Promise.resolve(getProductByIdPromise(setProductId));
+	return Promise.resolve(getProductById(setProductId));
 }
 
 /**
@@ -104,7 +104,7 @@ export function getProductSet () {
  * @returns {Promise.Object} - ProductBundle instance
  */
 export function getProductBundle () {
-	return Promise.resolve(getProductByIdPromise(bundleProductId));
+	return Promise.resolve(getProductById(bundleProductId));
 }
 
 /* CUSTOMERS */
@@ -115,7 +115,7 @@ export function getProductBundle () {
  * @param {string} login - test customer's login value
  * @returns {Promise.Object} - JSON object with Customer's test data
  */
-export function getCustomerByLoginPromise (login) {
+export function getCustomerByLogin (login) {
 	return Promise.resolve(customers.getCustomer(parsedData.customers, login));
 }
 
@@ -129,7 +129,7 @@ export function getCustomerByLoginPromise (login) {
  * @param {string} currencyCode - currency code for price book selection
  * @returns {Promise.Object} - Product* instance
  */
-export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
+export function getPricesByProductId (productId, currencyCode = 'usd') {
 	return Promise.resolve(prices.getPricesForProduct(parsedData.pricebooks, productId, currencyCode));
 }
 
@@ -142,6 +142,6 @@ export function getPricesByProductIdPromise (productId, currencyCode = 'usd') {
  * @param {string} productId - product ID
  * @returns {Promise} - JSON object of product's inventory values
  */
-export function getInventoryByProductIdPromise (productId) {
+export function getInventoryByProductId (productId) {
 	return Promise.resolve(_.findWhere(parsedData.inventory, {productId: productId}));
 }

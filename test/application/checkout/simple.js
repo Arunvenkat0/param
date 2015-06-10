@@ -39,7 +39,7 @@ describe('Checkout', () => {
 	});
 
 	before(() => {
-		return testData.getCustomerByLoginPromise(login)
+		return testData.getCustomerByLogin(login)
 			.then(cust => {
 				customer = cust;
 
