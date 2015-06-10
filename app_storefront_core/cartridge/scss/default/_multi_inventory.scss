@@ -28,6 +28,9 @@
 	label {
 		float: none; 
 	}
+	p {
+		margin: 0;
+	}
 	.availability-novariation {
 		color: #999;
 		font-style: italic;
@@ -51,6 +54,7 @@
 .is-in-stock,
 [data-status="store-in-stock"] {
 	color: $rain-forest;
+	font-weight: 700;
 }
 
 .not-available-msg,
@@ -58,13 +62,14 @@
 .not-available,
 .out-of-stock,
 .store-error, {
-	color: $sangria;
+	color: $teal;
 }
 
 .on-order,
 .preorder-msg,
 .backorder-msg {
-	color: $cerulean;
+	color: $teal;
+	font-weight: 700;
 }
 
 .availability-results {
