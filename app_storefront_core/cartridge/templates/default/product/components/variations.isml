@@ -93,9 +93,9 @@
 									</isscript>
 									<li class="${swatchClass}">
 										<isif condition="${selectable}">
-											<a class="swatchanchor" href="${linkURL}" title="${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+											<a class="swatchanchor" href="${linkURL}" title="${Resource.msg('product.variations.label', 'product', null)} ${displayValue}" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 												<isif condition="${vaId == 'color' && !empty(swImage)}">
-													<img src="${swImage.getURL()}" title="${displayValue}">
+													<img src="${swImage.getURL()}" title="${Resource.msg('product.variations.label', 'product', null)} ${displayValue}">
 												<iselse/>
 													<isprint value="${displayValue}"/>
 												</isif>
