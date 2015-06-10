@@ -4,21 +4,31 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
-
+import * as testData from '../webdriver/pageObjects/testData/main';
 
 describe('Cart - Simple', () => {
 
+	let resourcePath;
+	let productVariationMaster;
+
+	before(() => client.init());
+
 	before(() => {
-		var resourcePath = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
-		var sizeIndex = 2;
-
-		var standardProduct = new Map();
-		standardProduct.set('resourcePath', resourcePath);
-		standardProduct.set('sizeIndex', sizeIndex);
-
-		return client.init()
-			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
-			.then(() => cartPage.navigateTo());
+		return testData.getProductVariationMaster()
+			.then(variationMaster => productVariationMaster = variationMaster)
+			.then(() => resourcePath = productVariationMaster.getUrlResourcePath())
+			.then(() => {
+				let product = new Map();
+				product.set('resourcePath', resourcePath);
+				product.set('colorIndex', 1);
+				product.set('sizeIndex', 2);
+				product.set('widthIndex', 1);
+				return product;
+			})
+			.then(product =>
+				productDetailPage.addProductVariationToCart(product)
+					.then(() => cartPage.navigateTo())
+			);
 	});
 
 	after(() => client.end());
@@ -32,19 +42,25 @@ describe('Cart - Simple', () => {
 	it('should display the correct name', () =>
 		cartPage
 			.getItemNameByRow(1)
-			.then(name => assert.equal('Straight Leg Trousers', name))
+			.then(name => assert.equal('Navy Single Pleat Wool Suit', name))
 	);
 
 	it('should display the correct color', () =>
 		cartPage
 			.getItemAttrByRow(1, 'color')
-			.then(color => assert.equal(color, 'Black'))
+			.then(color => assert.equal(color, 'Navy'))
 	);
 
 	it('should display the correct size', () =>
 		cartPage
 			.getItemAttrByRow(1, 'size')
-			.then(size => assert.equal(size, '29'))
+			.then(size => assert.equal(size, '38'))
+	);
+
+	it('should display the correct width', () =>
+			cartPage
+				.getItemAttrByRow(1, 'width')
+				.then(size => assert.equal(size, 'Short'))
 	);
 
 	it('should update quantity in cart', () =>
@@ -56,13 +72,13 @@ describe('Cart - Simple', () => {
 	it('should update price in cart when quantity updated', () =>
 		cartPage
 			.getPriceByRow(1)
-			.then(price => assert.equal(price, '$675.00'))
+			.then(price => assert.equal(price, '$899.97'))
 	);
 
 	it('should change size', () =>
 		cartPage
 			.updateSizeByRow(1, 5)
-			.then(size => assert.equal(size, '32'))
+			.then(size => assert.equal(size, '42'))
 	);
 
 	it('should remove product from cart', () =>
