@@ -12,4 +12,13 @@ exports.init = function () {
 			return $(this).find('.tooltip-content').html();
 		}
 	});
+
+	$('.share-link').on('click', function (e) {
+		e.preventDefault();
+		var target = $(this).data('target');
+		if (!target) {
+			return;
+		}
+		$(target).toggleClass('active');
+	});
 };

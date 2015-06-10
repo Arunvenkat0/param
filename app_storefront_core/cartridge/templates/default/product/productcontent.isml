@@ -174,6 +174,11 @@
 	</iscomment>
 
 	<div class="product-actions">
+		<isscript>
+			var Url = require('~/cartridge/scripts/util/Url');
+			var url = Url.getCurrent(pdict);
+			var title = pdict.Product.name;
+		</isscript>
 		<isinclude template="components/socialsharing"/>
 
 		<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
