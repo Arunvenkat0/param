@@ -106,16 +106,16 @@
 					<div class="availability-storepickup">
 						<div class="availability-web">
 							<i class="fa fa-truck fa-lg pull-left"></i>
-							<label for="Stock">Available for Shipping</label>
+							<label for="Stock">${Resource.msg('product.webstock','product',null)}</label>
 							<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">			
 								<span class="value"><isinclude template="product/components/availability"/></span>
 							<iselse/>
-								<div class="availability-novariation">Select Styles for Availability</div>
+								<div class="availability-novariation">${Resource.msg('product.selectforstock','product',null)}</div>
 							</isif>						
 						</div>
 						<div class="availability-instore">
 							<i class="fa fa-briefcase fa-lg pull-left"></i>
-							<label for="Stock">Available for Pick Up</label>						
+							<label for="Stock">${Resource.msg('product.instorestock','product',null)}</label>						
 							<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
 								<div id="${pdict.Product.ID}" class="availability-results store-stock">
 									<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
@@ -131,7 +131,7 @@
 						<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">			
 							<span class="value"><isinclude template="product/components/availability"/></span>
 						<iselse/>
-							<div class="availability-novariation">Select Styles for Availability</div>
+							<div class="availability-novariation">${Resource.msg('product.selectforstock','product',null)}</div>
 						</isif>
 					</div>					
 				</isif>
