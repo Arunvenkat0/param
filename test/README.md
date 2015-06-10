@@ -146,13 +146,37 @@ Here are some generic test accounts that are used in the application tests suite
 along with their differences for testing different scenarios:
 ( **Note** : The password for each account is **Test123!** )
 
-<table cellspacing=1 cellpadding=2 border=1>
+<style type='text/css'>
+	td {
+		vertical-align: top;
+	}
+	table {
+		border: 1px solid red;
+		padding: 2px;
+	}
+	.test-users, .center {
+		text-align: center;
+	}
+	.test-users, .test-data {
+		padding: 2px;
+	}
+	.variation-master {
+		color: #0000ff;
+		font-weight: bold;
+		font-style: italic;
+	}
+	.top-level-product {
+		font-weight: bold;
+	}
+
+</style>
+<table class="test-users">
 <thead>
 <tr>
 	<th>Email</th>
 	<th>First Name</th>
 	<th>Last Name</th>
-	<th>Address1:</th>
+	<th>Address1</th>
 	<th>City</th>
 	<th>State Code</th>
 	<th>Postal Code</th>
@@ -164,62 +188,62 @@ along with their differences for testing different scenarios:
 </tr>
 </thead>
 <tr>
-	<td align='center'>testuser1@demandware.com</td>
-	<td align='center'>Test1</td>
-	<td align='center'>User1</td>
-	<td align='center'>104 Presidential Way</td>
-	<td align='center'>Woburn</td>
-	<td align='center'>MA</td>
-	<td align='center'>01801</td>
-	<td align='center'>US</td>
-	<td align='center'>781-555-1212</td>
-	<td align='center'>Home</td>
-	<td align='center'>&#10004;</td>
-	<td align='center'>F</td>
+	<td>testuser1@demandware.com</td>
+	<td>Test1</td>
+	<td>User1</td>
+	<td>104 Presidential Way</td>
+	<td>Woburn</td>
+	<td>MA</td>
+	<td>01801</td>
+	<td>US</td>
+	<td>781-555-1212</td>
+	<td>Home</td>
+	<td>&#10004;</td>
+	<td>F</td>
 </tr>
 <tr>
-	<td align='center'></td>
-	<td align='center'>Test1</td>
-	<td align='center'>User1</td>
-	<td align='center'>91 Middlesex Tpke</td>
-	<td align='center'>Woburn</td>
-	<td align='center'>MA</td>
-	<td align='center'>01801</td>
-	<td align='center'>US</td>
-	<td align='center'>781-555-1212</td>
-	<td align='center'>Work</td>
-	<td align='center'></td>
-	<td align='center'></td>
-</tr>
-
-<tr>
-	<td align='center'>testuser2@demandware.com</td>
-	<td align='center'>Test2</td>
-	<td align='center'>User2</td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'></td>
-	<td align='center'>M</td>
+	<td></td>
+	<td>Test1</td>
+	<td>User1</td>
+	<td>91 Middlesex Tpke</td>
+	<td>Woburn</td>
+	<td>MA</td>
+	<td>01801</td>
+	<td>US</td>
+	<td>781-555-1212</td>
+	<td>Work</td>
+	<td></td>
+	<td></td>
 </tr>
 
 <tr>
-	<td align='center'>testuser3@demandware.com</td>
-	<td align='center'>Test3</td>
-	<td align='center'>User3</td>
-	<td align='center'>3486 Mission St</td>
-	<td align='center'>San Francisco</td>
-	<td align='center'>CA</td>
-	<td align='center'>94110</td>
-	<td align='center'>US</td>
-	<td align='center'>415-555-1212</td>
-	<td align='center'>Mom's</td>
-	<td align='center'>&#10004;</td>
-	<td align='center'>F</td>
+	<td>testuser2@demandware.com</td>
+	<td>Test2</td>
+	<td>User2</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>M</td>
+</tr>
+
+<tr>
+	<td>testuser3@demandware.com</td>
+	<td>Test3</td>
+	<td>User3</td>
+	<td>3486 Mission St</td>
+	<td>San Francisco</td>
+	<td>CA</td>
+	<td>94110</td>
+	<td>US</td>
+	<td>415-555-1212</td>
+	<td>Mom's</td>
+	<td>&#10004;</td>
+	<td>F</td>
 </tr>
 
 </table>
@@ -227,7 +251,7 @@ along with their differences for testing different scenarios:
 
 ### Test products
 
-<table border="1" cellspacing="1" cellpadding="2">
+<table class='test-data'>
 <thead>
 <tr>
 	<th>Type</th>
@@ -240,367 +264,367 @@ along with their differences for testing different scenarios:
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td style="vertical-align: top;">
-	<strong>Option Product</strong>
+<tr class='top-level-product'>
+	<td>
+	Option Product
 	</td>
-<td style="vertical-align: top;"><strong>samsung-ln55a950</strong></td>
-	<td style="vertical-align: top;"><strong>Samsung Series 9 55" LCD High Definition Television</strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong>tvWarranty</strong></td>
+<td>samsung-ln55a950</td>
+	<td>Samsung Series 9 55" LCD High Definition Television</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>tvWarranty</td>
+</tr>
+<tr class='top-level-product'>
+	<td>VariationMaster</td>
+	<td>25686514</td>
+	<td>Navy Single Pleat Wool Suit</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"><strong>VariationMaster</strong></td>
-	<td style="vertical-align: top;"><strong>25686514</strong></td>
-	<td style="vertical-align: top;"><strong>Navy Single Pleat Wool Suit</strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
+	<td></td>
+	<td>750518548258</td>
+	<td></td>
+	<td>Navy<br />(NAVYWL)</td>
+	<td class='center'>46</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548258</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy<br />(NAVYWL)</td>
-	<td style="vertical-align: top;">46</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548265</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>48</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548265</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">48</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548227</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>42</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548227</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">42</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548197</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>39</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548197</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">39</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548234</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>43</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548234</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">43</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548203</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>40</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548203</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">40</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548241</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>44</td>
+	<td class='center'>Regular</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548241</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">44</td>
-	<td style="vertical-align: top;">Regular</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548432</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>40</td>
+	<td class='center'>Long</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548432</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">40</td>
-	<td style="vertical-align: top;">Long</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548487</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>46</td>
+	<td class='center'>Long</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548487</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">46</td>
-	<td style="vertical-align: top;">Long</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548456</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>42</td>
+	<td class='center'>Long</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548456</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">42</td>
-	<td style="vertical-align: top;">Long</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548319</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>38</td>
+	<td class='center'>Short</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548319</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">38</td>
-	<td style="vertical-align: top;">Short</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548357</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>42</td>
+	<td class='center'>Short</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548357</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">42</td>
-	<td style="vertical-align: top;">Short</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548371</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>44</td>
+	<td class='center'>Short</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548371</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">44</td>
-	<td style="vertical-align: top;">Short</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>750518548296</td>
+	<td></td>
+	<td>Navy</td>
+	<td class='center'>36</td>
+	<td class='center'>Short</td>
+	<td></td>
+</tr>
+<tr class='top-level-product'>
+	<td>Set</td>
+	<td>spring-look</td>
+	<td>Spring Look</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr class='variation-master'>
+	<td></td>
+	<td>25517787<br />(Master Product)</td>
+	<td>Long Sleeve Raglan Button Out Turtle Neck</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">750518548296</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Navy</td>
-	<td style="vertical-align: top;">36</td>
-	<td style="vertical-align: top;">Short</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>701642808268</td>
+	<td></td>
+	<td>Fire Red Multi</td>
+	<td class='center'>S</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"><strong>Set</strong></td>
-	<td style="vertical-align: top;"><strong>spring-look</strong></td>
-	<td style="vertical-align: top;"><strong>Spring Look</strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
+	<td></td>
+	<td>701642808251</td>
+	<td></td>
+	<td>Fire Red Multi</td>
+	<td class='center'>M</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong>25517787<br />(Master Product)</strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong>Long Sleeve Raglan Button Out Turtle Neck</strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
-	<td style="vertical-align: top;"><em><span style="color: #0000ff;"><strong></strong></span></em></td>
+	<td></td>
+	<td>701642808244</td>
+	<td></td>
+	<td>Fire Red Multi</td>
+	<td class='center'>L</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701642808268</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Fire Red Multi</td>
-	<td style="vertical-align: top;">S</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>701642808275</td>
+	<td></td>
+	<td>Fire Red Multi</td>
+	<td class='center'>XL</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr class='variation-master'>
+	<td></td>
+	<td>25553432<br />(Master Product)</td>
+	<td>Trouser Leg Pant</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701642808251</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Fire Red Multi</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>701643489442</td>
+	<td></td>
+	<td>Chino<br />(JJ493XX)</td>
+	<td class='center'>16</td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701642808244</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Fire Red Multi</td>
-	<td style="vertical-align: top;">L</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>701643489398</td>
+	<td></td>
+	<td>midnight navy<br />(JJ0VWXX)</td>
+	<td class='center'>6</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr class='variation-master'>
+	<td></td>
+	<td>25791388<br />(Master Product)</td>
+	<td>Zacco</td>
+	<td>Black (BLKBKPA)</td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701642808275</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Fire Red Multi</td>
-	<td style="vertical-align: top;">XL</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431040</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>6</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">25553432<br />(Master Product)</span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Trouser Leg Pant</span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+	<td></td>
+	<td>740357431057</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>6.5</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701643489442</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Chino<br />(JJ493XX)</td>
-	<td style="vertical-align: top;">16</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431064</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>7</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">701643489398</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">midnight navy<br />(JJ0VWXX)</td>
-	<td style="vertical-align: top;">6</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431071</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>7.5</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">25791388<br />(Master Product)</span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Zacco</span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;">Black (BLKBKPA)</span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
-	<td style="vertical-align: top;"><em><strong><span style="color: #0000ff;"></span></strong></em></td>
+	<td></td>
+	<td>740357431088</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>8</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431040</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">6</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431095</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>8.5</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431057</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">6.5</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431101</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>9</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431064</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">7</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431118</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>9.5</td>
+	<td class='center'>M</td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431071</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">7.5</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>740357431125</td>
+	<td></td>
+	<td>Black</td>
+	<td class='center'>10</td>
+	<td class='center'>M</td>
+	<td></td>
+</tr>
+<tr class='top-level-product'>
+	<td>Bundle</td>
+	<td>microsoft-xbox360-bundle</td>
+	<td>Xbox 360 Bundle</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>consoleWarranty</td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431088</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">8</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>microsoft-xbox360-console</td>
+	<td>Microsoft X-Box 360 Game Console</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>consoleWarranty</td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431095</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">8.5</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>easports-fight-night-round-3-xbox360</td>
+	<td>Fight Night: Round 3 (for X-Box 360)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431101</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">9</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>rockstar-games-grand-theft-auto-iv-xbox360</td>
+	<td>Grand Theft Auto 4 (for X-Box 360)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 <tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431118</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">9.5</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">740357431125</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">Black</td>
-	<td style="vertical-align: top;">10</td>
-	<td style="vertical-align: top;">M</td>
-	<td style="vertical-align: top;"></td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"><strong>Bundle</strong></td>
-	<td style="vertical-align: top;"><strong>microsoft-xbox360-bundle</strong></td>
-	<td style="vertical-align: top;"><strong>Xbox 360 Bundle</strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong></strong></td>
-	<td style="vertical-align: top;"><strong>consoleWarranty</strong></td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">microsoft-xbox360-console</td>
-	<td style="vertical-align: top;">Microsoft X-Box 360 Game Console</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">consoleWarranty</td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">easports-fight-night-round-3-xbox360</td>
-	<td style="vertical-align: top;">Fight Night: Round 3 (for X-Box 360)</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">rockstar-games-grand-theft-auto-iv-xbox360</td>
-	<td style="vertical-align: top;">Grand Theft Auto 4 (for X-Box 360)</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-</tr>
-<tr>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;">sierra-the-bourne-conspiracy-xbox360</td>
-	<td style="vertical-align: top;">Robert Ludlum's: The Bourne Conspiracy (for X-Box 360)</td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
-	<td style="vertical-align: top;"></td>
+	<td></td>
+	<td>sierra-the-bourne-conspiracy-xbox360</td>
+	<td>Robert Ludlum's: The Bourne Conspiracy (for X-Box 360)</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 </tr>
 </tbody>
 </table>
