@@ -1,4 +1,5 @@
 {
+	"esnext": true,
 	"disallowKeywordsOnNewLine": ["else"],
 	"disallowMixedSpacesAndTabs": true,
 	"disallowNewlineBeforeBlockStatements": true,
@@ -8,7 +9,7 @@
 	"disallowSpacesInsideParentheses": true,
 	"disallowTrailingWhitespace": true,
 	"disallowTrailingComma": true,
-	"excludeFiles": ["**/static/**", "**/scripts/**", "node_modules/**", "test/**", "storefront_refapp/**", "docs/**", "**/lib/**", "**/dist/**"],
+	"excludeFiles": ["**/static/**", "**/scripts/**", "node_modules/**", "storefront_refapp/**", "docs/**", "**/lib/**", "**/dist/**"],
 	"requireBlocksOnNewline": 1,
 	"requireCommaBeforeLineBreak": true,
 	"requireSpaceAfterBinaryOperators": true,
@@ -22,5 +23,6 @@
 	"requireSpacesInConditionalExpression": true,
 	"requireSpacesInNamedFunctionExpression": {
 		"beforeOpeningCurlyBrace": true
-	}
+	},
+	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
 }

@@ -6,7 +6,7 @@ import config from '../config';
 export const BTN_ADD_TO_CART = '#add-to-cart';
 export const INPUT_QUANTITY = '#Quantity';
 
-export function navigateTo (path = basePath) {
+export function navigateTo (path) {
 	return client.url(config.url + path);
 }
 

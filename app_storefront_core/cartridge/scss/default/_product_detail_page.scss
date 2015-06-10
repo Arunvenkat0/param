@@ -390,30 +390,29 @@
 		}
 	}
 	.product-tabs {
-		border: 0 none;
-		margin: 25px 0 0;
-	}
-}
-
-.print-page {
-	cursor: pointer;
-}
-
-.pdp-main .product-tabs .print-page {
-	float: right;
-}
-
-.pdp-main {
-	.product-tabs .tab-content {
-		min-height: 100px;
-		ul {
-			list-style-type: disc;
-			margin-left: 2em;
+		border: none;
+		margin: 1.5rem 0 0;
+		.print-page {
+			right: 0;
+			position: absolute;
 		}
-		ol {
-			list-style-type: decimal;
-			margin-left: 2em;
-			padding: 0px;
+		.tabs-menu {
+			height: 2.4rem;
+			li a {
+				padding: 0.6rem 1rem;
+			}
+		}
+		.tab-content {
+			min-height: 6.25rem;
+			ul {
+				list-style-type: disc;
+				margin-left: 2rem;
+			}
+			ol {
+				list-style-type: decimal;
+				margin-left: 2rem;
+				padding: 0;
+			}
 		}
 	}
 	.product-set-list {

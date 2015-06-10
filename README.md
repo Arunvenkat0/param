@@ -15,18 +15,18 @@ Because of file size constraints, the demo store data distribution is broken int
 
 If you need to install high resolution images, you will need to perform 2 separate import steps.
 
-    % git pull sg20_demo_data_no_hires_images
+    % git pull demo_data_no_hires_images
 
 When you want to install the high resolution images, you can do that, following the same procedure.
 
-    % git pull sg20_demo_data_only_hires_images
+    % git pull demo_data_only_hires_images
 
 
 ## Zipping the files
 
 On the Mac, you should use the commandline `zip` command to make sure the folder structure is created properly.
 
-    % zip -r sg20_demo_data_no_hires_images sg20_demo_data_no_hires_images
+    % zip -r demo_data_no_hires_images demo_data_no_hires_images
 
 
 ## Upload and import the site

@@ -39,7 +39,7 @@
 
 			<li <isif condition="${Refinements.getNextLevelFolderRefinementValues(folderObj).size() > 0}">class="expandable<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif>"</isif>>
 				<iscomment>render the actual link</iscomment>
-				<a class="<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif> refinement-link " title="${RefinementValue.getDisplayValue()}" href="${SearchModel.urlRefineFolder('Search-ShowContent',RefinementValue.getValue())}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+				<a class="<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif> refinement-link " title="${Resource.msg('global.folderrefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}" href="${SearchModel.urlRefineFolder('Search-ShowContent',RefinementValue.getValue())}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
 
 				<iscomment>display the next level refinement values of the folder in case it is part of the folder path</iscomment>
 				<isif condition="${(FolderPath != null) && (FolderPath.size() > 0) && (IDPath.contains(RefinementValue.getValue()))}">

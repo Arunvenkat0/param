@@ -1,6 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
-<isinclude template="util/functions"/>
 
 <iscomment>Added to access unsanitizeOR()</iscomment>
 <isscript>
@@ -94,7 +93,7 @@
 				<iscomment>Special handling for color and size refinement selection</iscomment>
 				<isif condition="${RefinementDefinition.attributeID.equals('refinementColor') || RefinementDefinition.attributeID.equals('size')}">
 
-					<ul class="clearfix swatches ${RefinementDefinition.getDisplayName()}">
+					<ul class="clearfix swatches ${RefinementDefinition.getAttributeID()}">
 					
 						<iscomment>render the actual swatches</iscomment>
 						<isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
@@ -181,7 +180,7 @@
 					</li>
 				<iselse/>
 					<li>
-						<a class="refinement-link" title="${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
+						<a class="refinement-link" title="${Resource.msg('global.pricerefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
 							<i class="fa fa-square-o fa-lg"></i>
 							<isprint value="${RefinementValue.getDisplayValue()}"/>
 						</a>

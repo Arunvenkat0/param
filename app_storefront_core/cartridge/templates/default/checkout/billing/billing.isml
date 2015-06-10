@@ -23,7 +23,7 @@
 		<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 	</isif>
 
-	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address">
+	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address form-horizontal">
 
 	<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		billing address
@@ -126,9 +126,9 @@
 			</isif>
 		</legend>
 
-		<div class="form-indent">
-
+		<div class="form-indent billing-coupon-code">
 		<iscomment>coupon code / gift certificate area</iscomment>
+
 			<isif condition="${gcApplicable == 'true'}">
 				<iscontentasset aid="checkout-giftcertcoupon-help"/>
 			<iselse/>

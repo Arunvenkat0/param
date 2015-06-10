@@ -43,12 +43,15 @@
     "gulp-util": "^3.0.0",
     "handlebars": "^3.0.1",
     "hbsfy": "^2.2.1",
+    "jscs": "^1.13.1",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^3.1.0",
     "merge-stream": "^0.1.7",
     "minimist": "^1.1.0",
     "mocha": "^2.0.1",
     "phantomjs": "^1.9.9",
+    "proxyquire": "^1.4.0",
+    "q": "^1.4.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "vinyl-transform": "^1.0.0",
@@ -57,7 +60,8 @@
     "xtend": "^4.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/unit/**/*.js",
+    "lint": "jshint . --reporter node_modules/jshint-stylish/stylish.js && jscs ."
   },
   "repository": {
     "type": "git",

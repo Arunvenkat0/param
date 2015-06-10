@@ -45,7 +45,7 @@ Application tests' webdriver configurations are in the `webdriver` directory.
 
 The tests are contained in suites, which are represented as directories. For example, the above structure contains Application test suites `homepage` and `productDetails`, and Unit test suite `util`.
 
-## Run the tests
+## Test Setup
 
 - Install all dependencies
 
@@ -60,7 +60,22 @@ The tests are contained in suites, which are represented as directories. For exa
 	:; npm install --production -g selenium-standalone@latest
 	:; selenium-standalone install # see note [2]
 	```
-The above 2 steps are only needed once.
+
+- Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
+testdata directory from the app_storefront_core/cartridge to the "Impex/src"
+directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src).
+You will need to login with a valid Business Manager account that has been
+assigned the role of Administrator.
+
+- Add the 'app_storefront_core' cartridge to the Business Manager Sites-Site
+Settings:
+    1. Go to `Business Manager > Administration > Manage Sites` 
+    1. Click on the Manage the Business Manager Site link
+    1. Set the `Cartridges` field to `app_storefront_core:bm_custom_plugin`
+
+The above 4 steps are only needed once.
+
+## Run the tests
 
 ### Application tests
 
@@ -72,23 +87,44 @@ After installing the dependencies, start selenium server each time you wish to r
 
 It's important to keep this command-line instance running in the background. Open a new terminal window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
 
-- Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
+1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
-```javascript
+ ```javascript
 {
 	"url": "http://example.demandware.net/s/SiteGenesis",
 	"client": "phantomjs"
 }
 ```
-*Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
+ *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
 
-- Run the test
+1. Reset test data
 
-```sh
+ To ensure that the application tests can consistently compare results with their
+expected values, we have implemented a process to reset test data.  During the 
+SiteGenesis build process, a job called, TestDataReset, is created and available
+to run.  **Note:** By default, the site associated with the job is SiteGenesis.
+If you are using a different site, please alter the job to point to it.
+
+ Before running a test, please reset the data by following these steps:
+ 
+ a. Go to Business Manager > Administration > Job Schedules
+
+    https://&lt;sandbox_host&gt;/on/demandware.store/Sites-Site/default/SMCScheduler-DisplayAll?SelectedMenuItem=operations&CurrentMenuItemId=operations&menuname=Job%20Schedules&mainmenuname=Operations
+
+ b. Click on the TestDataReset link, which will redirect you to the Job Detail page.
+
+ c. Click the Run button, wait a moment, then periodically click the Refresh
+button under the "TestDataReset - History" section until the Status column reports
+"Finished".  The Error column should display "None".  At this point, you can run
+the application tests.
+
+1. Run the test
+
+ ```sh
 $ gulp test:application
 ```
 
-This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
+ This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
 Other configurations are also available, see below.
 
 ### Unit tests
@@ -98,6 +134,90 @@ Other configurations are also available, see below.
 ```
 This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
 Other configurations are also available, see below.
+
+### Test user accounts
+
+Here are some generic test accounts that are used in the application tests suite, 
+along with their differences for testing different scenarios:
+( **Note** : The password for each account is **Test123!** )
+
+<table cellspacing=1 cellpadding=2 border=1>
+<thead>
+	<tr>
+		<th>Email</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Address1:</th>
+		<th>City</th>
+		<th>State Code</th>
+		<th>Postal Code</th>
+		<th>Country Code</th>
+		<th>Phone</th>
+		<th>AddressID</th>
+		<th>Preferred Address</th>
+		<th>Gender</th>
+	</tr>
+</thead>
+<tr>
+	<td align='center'>testuser1@demandware.com</td>
+	<td align='center'>Test1</td>
+	<td align='center'>User1</td>
+	<td align='center'>104 Presidential Way</td>
+	<td align='center'>Woburn</td>
+	<td align='center'>MA</td>
+	<td align='center'>01801</td>
+	<td align='center'>US</td>
+	<td align='center'>781-555-1212</td>
+	<td align='center'>Home</td>
+	<td align='center'>&#10004;</td>
+	<td align='center'>F</td>
+</tr>
+<tr>
+	<td align='center'></td>
+	<td align='center'>Test1</td>
+	<td align='center'>User1</td>
+	<td align='center'>91 Middlesex Tpke</td>
+	<td align='center'>Woburn</td>
+	<td align='center'>MA</td>
+	<td align='center'>01801</td>
+	<td align='center'>US</td>
+	<td align='center'>781-555-1212</td>
+	<td align='center'>Work</td>
+	<td align='center'></td>
+	<td align='center'></td>
+</tr>
+
+<tr>
+	<td align='center'>testuser2@demandware.com</td>
+	<td align='center'>Test2</td>
+	<td align='center'>User2</td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'></td>
+	<td align='center'>M</td>
+</tr>
+
+<tr>
+	<td align='center'>testuser3@demandware.com</td>
+	<td align='center'>Test3</td>
+	<td align='center'>User3</td>
+	<td align='center'>3486 Mission St</td>
+	<td align='center'>San Francisco</td>
+	<td align='center'>CA</td>
+	<td align='center'>94110</td>
+	<td align='center'>US</td>
+	<td align='center'>415-555-1212</td>
+	<td align='center'>Mom's</td>
+	<td align='center'>&#10004;</td>
+	<td align='center'>F</td>
+</tr>
+
+</table>
 
 ### Options
 The following options are supported on the command line:

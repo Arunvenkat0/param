@@ -14,7 +14,7 @@
 		<h1>${Resource.msg('account.addressbook.editaddress.editaddress','account',null)}</h1>
 	</isif>
 
-	<form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
+	<form method="post" class="form-horizontal" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
 		<fieldset>
 			<legend>
 				Address Details
@@ -31,31 +31,8 @@
 
 			<isscript>
 				var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
-				var addressDetailsForm = {
-					country: {
-						type: "select"
-					},
-					states: {
-						isFormGroup: true,
-						childField: "state",
-						type: "select"
-					},
-					postalUS: {
-						skip: true
-					},
-					postalCA: {
-						skip: true
-					},
-					postalDE: {
-						skip: true
-					},
-					phone: {
-						type: "input",
-						helpcid: "help-telephone",
-						helplabel: Resource.msg('singleshipping.phonerequired', 'checkout', null)
-					}
-				};
-				var form = dynamicForm(pdict.CurrentForms.profile.address, addressDetailsForm);
+				var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
+				var form = dynamicForm(pdict.CurrentForms.profile.address, currentCountry.dynamicForms.addressDetails);
 			</isscript>
 
 			<isprint value="${form}" encoding="off"/>

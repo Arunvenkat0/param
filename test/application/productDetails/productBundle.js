@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
