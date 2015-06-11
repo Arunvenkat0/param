@@ -2438,7 +2438,7 @@ div.error {
       color: #fff;
       display: inline; }
     #homepage-slides .slide3 .banner-message .banner-text3 {
-      color: #fff; }
+      color: #000; }
   #homepage-slides .slide4 .banner-message {
     right: 3%; }
     #homepage-slides .slide4 .banner-message .banner-text1 {
@@ -2453,11 +2453,13 @@ div.error {
     #homepage-slides .slide4 .banner-message .banner-text3 {
       color: #fff; }
   #homepage-slides .slide5 .banner-message {
-    left: 3%; }
+    left: 15%; }
     #homepage-slides .slide5 .banner-message .banner-text1 {
-      color: #00629b; }
+      color: #00629b;
+      display: inline; }
     #homepage-slides .slide5 .banner-message .banner-text2 {
-      color: #990000; }
+      color: #990000;
+      display: inline; }
     #homepage-slides .slide5 .banner-message .banner-text3 {
       color: #fff; }
 
