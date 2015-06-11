@@ -42,8 +42,8 @@
 						</a>
 					</span>
 					<p class="share-option">${Resource.msg('registry.copypaste','account',null)}
-						<a href="${URLUtils.http('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}" title="${Resource.msg('registry.copypaste','account',null)}">
-							<isprint value="${URLUtils.http('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}"/>
+						<a href="${URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}" title="${Resource.msg('registry.copypaste','account',null)}">
+							<isprint value="${URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}"/>
 						</a>
 					</p>
 				</isif>
