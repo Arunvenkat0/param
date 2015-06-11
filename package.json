@@ -74,7 +74,20 @@
       {
         "src": "app_storefront_core/cartridge/scss/default/",
         "dest": "app_storefront_core/cartridge/static/default/css/"
-      }
+      },      {
+        "src": "app_storefront_core/cartridge/scss/fr_FR/",
+        "dest": "app_storefront_core/cartridge/static/fr_FR/css/"
+      },      {
+        "src": "app_storefront_core/cartridge/scss/it_IT/",
+        "dest": "app_storefront_core/cartridge/static/it_IT/css/"
+      },      {
+        "src": "app_storefront_core/cartridge/scss/ja_JP/",
+        "dest": "app_storefront_core/cartridge/static/ja_JP/css/"
+      },
+      {
+        "src": "app_storefront_core/cartridge/scss/zh_CN/",
+        "dest": "app_storefront_core/cartridge/static/zh_CN/css/"
+      }      
     ],
     "js": {
       "src": "app_storefront_richUI/cartridge/js/",
