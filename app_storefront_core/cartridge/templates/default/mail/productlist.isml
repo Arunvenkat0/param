@@ -40,7 +40,6 @@ ul li.onorder {color:red;}
 		</isif>
 	</h3>
 	<div style="border-bottom:1px solid #CCCCCC;padding:5px 10px;">
-    	<div style="margin:0 0 7px;text-align:center;"><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></div>
 		<isif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_GIFT_REGISTRY}">
 			<table style="margin:auto;width:65%;">
 		         <tr>
@@ -67,9 +66,7 @@ ul li.onorder {color:red;}
 		            <td><isprint value="${pdict.ProductList.eventCity}"/>, <isprint value="${pdict.ProductList.eventState}"/></td>
 		         </tr>
 		    </table>
-		    <div style="margin:7px 0 0 0;text-align:center;">
-     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitgr','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitgr','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
-     		</div>
+		    
 		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 			<table>
 		         <tr>
@@ -81,9 +78,6 @@ ul li.onorder {color:red;}
 		             <td><isprint value="${pdict.CurrentCustomer.profile.email}"/></td>
 		         </tr>
 		    </table>
-			<div style="margin:7px 0 0 0;text-align:center;">
-     			<span style="font-weight:bold;padding:0 5px 0 0;">${Resource.msg('productlist.visitwishlist','account',null)}:</span><a href="<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>" title="${Resource.msg('productlist.visitwishlist','account',null)}"><isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/></a>
-     		</div>
 		</isif>
  	</div>
 <table style="width:100%">
@@ -116,9 +110,7 @@ ul li.onorder {color:red;}
 							<isif condition="${item.priority==5}">${Resource.msg('productlist.5','account',null)}</isif>
 						</div>
 					</isif>
-					<isif condition="${item.type == p_productli.TYPE_GIFT_CERTIFICATE}">
-						<a href="${URLUtils.https('GiftCert-Purchase', 'from', pdict.CurrentForms.sendtofriend.friendsname.htmlValue, 'recipient', pdict.CurrentForms.sendtofriend.yourname.htmlValue)}" style="font-weight:bold;line-height:24pt">${Resource.msg('global.giftcertificate','locale',null)}</a>
-					<iselseif condition="${item.product == null || !item.product.availabilityModel.orderable}">
+					<isif condition="${item.product == null || !item.product.availabilityModel.orderable}">
 						${Resource.msg('product.displayproductlistitems.notavailable','product',null)}
 					<iselse/>
 						<a href="${URLUtils.http('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
