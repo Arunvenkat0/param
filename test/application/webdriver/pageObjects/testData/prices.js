@@ -18,7 +18,7 @@ export function getPricesForProduct (priceBooks, productId, currencyCode = 'usd'
 	for (let type of priceTypes) {
 		let products = priceBooks[_getPriceBookName(type, currencyCode)].products;
 		let price = _.findWhere(products, {productId: productId});
-		prices[type] = price ? _.result(price, 'amount') : null;
+		prices[type] = price ? _.result(price, 'amount') : undefined;
 	}
 	return prices;
 }

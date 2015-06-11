@@ -127,7 +127,6 @@ class AbstractProductBase {
 			this.longDescription = product['long-description'][0]._;
 		}
 		if (product.hasOwnProperty('classification-category')) {
-			//var category = product['classification-category'] || categoryAssignments[this.id];
 			var category = product['classification-category'];
 			this.classificationCategory = category;
 		}

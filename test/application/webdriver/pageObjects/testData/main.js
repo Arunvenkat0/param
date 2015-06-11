@@ -9,8 +9,8 @@ import * as inventory from './inventory.js';
 import * as products from './products.js';
 import * as prices from './prices.js';
 
-export let defaultPassword = 'Test123!';
-export let creditCard1 = {
+export const defaultPassword = 'Test123!';
+export const creditCard1 = {
 	number: '4111111111111111',
 	yearIndex: 2,
 	cvn: 987
@@ -21,30 +21,30 @@ let coreTestDataDir = 'app_storefront_core/cartridge/testdata';
 let subjectMeta = {
 	catalogElectronics: {
 		filePath: coreTestDataDir + '/catalog/electronics.xml',
-		parser: products.parseCatalog
+		processor: products.parseCatalog
 	},
 	catalogApparel: {
 		filePath: coreTestDataDir + '/catalog/apparel.xml',
-		parser: products.parseCatalog
+		processor: products.parseCatalog
 	},
 	inventory: {
 		filePath: coreTestDataDir + '/inventory-list/inventory.xml',
-		parser: inventory.parseInventoryItems
+		processor: inventory.parseInventoryItems
 	},
 	pricebooks: {
 		filePath: coreTestDataDir + '/pricebook/pricebooks.xml',
-		parser: prices.parsePriceBooks
+		processor: prices.parsePriceBooks
 	},
 	customers: {
 		filePath: demoDataDir + '/sites/SiteGenesis/customers.xml',
-		parser: customers.parseCustomers
+		processor: customers.parseCustomers
 	}
 };
 
-let standardProductId = '750518548296';
-let variationMasterProductId = '25686514';
-let setProductId = 'spring-look';
-let bundleProductId = 'microsoft-xbox360-bundle';
+const standardProductId = '750518548296';
+const variationMasterProductId = '25686514';
+const setProductId = 'spring-look';
+const bundleProductId = 'microsoft-xbox360-bundle';
 
 // Load and parse XML data to JSON
 export let parsedData = {};
@@ -54,7 +54,7 @@ function _loadAndJsonifyXmlData (subject) {
 	fs.readFile(subjectMeta[subject].filePath, (err, data) => {
 		let parser = xml2js.Parser();
 		parser.parseString(data, (err, result) => {
-		parsedData[subject] = subjectMeta[subject].parser(result);
+		parsedData[subject] = subjectMeta[subject].processor(result);
 		});
 	});
 }
