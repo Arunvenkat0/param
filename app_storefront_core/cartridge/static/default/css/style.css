@@ -3611,7 +3611,8 @@ footer {
     overflow: hidden;
     padding: .5em; }
     #compare-table th:first-of-type {
-      background-color: #e0e0e0; }
+      background-color: #e0e0e0;
+      width: 4rem; }
   #compare-table td {
     overflow: hidden; }
   #compare-table a:hover {
@@ -3625,16 +3626,17 @@ footer {
     #compare-table .attribute-row:nth-child(2n) {
       background-color: #efefef; }
   #compare-table .product-attribute {
-    border-right: 1px solid #ccc; }
+    border-right: 1px solid #ccc;
+    word-break: break-all; }
   #compare-table .action {
     display: block;
     padding: 0.5em 0; }
   #compare-table .remove-link {
     color: #999;
-    display: block;
-    text-align: right;
-    -webkit-transition: color 500ms ease;
-            transition: color 500ms ease; }
+    float: right;
+    padding: .3rem;
+    -webkit-transition: color 0.5s ease;
+            transition: color 0.5s ease; }
     #compare-table .remove-link:hover {
       color: #84bd00;
       text-decoration: none; }
