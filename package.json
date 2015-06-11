@@ -44,6 +44,7 @@
     "handlebars": "^3.0.1",
     "hbsfy": "^2.2.1",
     "jscs": "^1.13.1",
+    "jshint": "^2.8.0",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^3.1.0",
     "merge-stream": "^0.1.7",
@@ -57,6 +58,7 @@
     "vinyl-transform": "^1.0.0",
     "watchify": "^3.2.1",
     "webdriverio": "^2.2.3",
+    "xml2js": "^0.4.8",
     "xtend": "^4.0.0"
   },
   "scripts": {
