@@ -176,8 +176,8 @@
 	<div class="product-actions">
 		<isscript>
 			var Url = require('~/cartridge/scripts/util/Url');
-			var url = Url.getCurrent(pdict);
-			var title = pdict.Product.name;
+			pdict.url = Url.getCurrent(pdict);
+			pdict.title = pdict.Product.name;
 		</isscript>
 		<isinclude template="components/socialsharing"/>
 
