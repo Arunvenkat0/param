@@ -105,7 +105,7 @@
 							
 							<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
 								<li class="selected ${swatchID}">
-									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('global.colorrefinement.selected.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}">
+									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.colorrefinement.selected.label','locale',null, RefinementValue.getDisplayValue())}">
 										<isprint value="${RefinementValue.getDisplayValue()}">
 									</a>
 								</li>
@@ -117,7 +117,7 @@
 								</li>
 							<iselse/>
 								<li class="${swatchID}">
-									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('global.colorrefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}">
+									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.colorrefinement.label','locale',null, RefinementValue.getDisplayValue())}">
 										<isprint value="${RefinementValue.getDisplayValue()}"/>
 									</a>
 								</li>
