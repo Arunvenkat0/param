@@ -1900,10 +1900,10 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;About&lt;/h3&gt;&#13;
                 &lt;ul class="menu-footer menu pipe"&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'about-us')$"&gt; About Us&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'terms')$"&gt;Terms&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'jobs-landing')$"&gt;Jobs&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'about-us')$" title="Go to About Us"&gt;About Us&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$" title="Go to Privacy"&gt;Privacy&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'terms')$" title="Go to Terms"&gt;Terms&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'jobs-landing')$"title="Go to Jobs"&gt;Jobs&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;&lt;!-- END: footer_about --&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -1916,10 +1916,10 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Account&lt;/h3&gt;&#13;
                 &lt;ul class="menu-footer menu pipe"&gt;&#13;
-                &lt;li&gt;&lt;a href="$httpsURL('Account-Show')$" title="My Account"&gt;My Account&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$httpsURL('Order-History')$" title="Check Order"&gt;Check Order&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$httpsURL('Wishlist-Show')$" title="Wish List"&gt;Wish List&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$httpsURL('GiftRegistry-Start')$" title="Gift Registry"&gt;Gift Registry&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('Account-Show')$" title="Go to My Account"&gt;My Account&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('Order-History')$" title="Go to Check Order"&gt;Check Order&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('Wishlist-Show')$" title="Go to Wish List"&gt;Wish List&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$httpsURL('GiftRegistry-Start')$" title="Go to Gift Registry"&gt;Gift Registry&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;&lt;!-- END: footer-account --&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -1945,10 +1945,10 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Follow Us&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" href="https://twitter.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="Go to LinkedIn" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Go to Facebook" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Go to Twitter" href="https://twitter.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="Go to YouTube" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;						&#13;
                 &lt;h3&gt;Get special offers &amp; news on the latest styles&lt;/h3&gt;&#13;
                 &lt;form action="#" method="post" id="email-alert-signup"&gt;&#13;
