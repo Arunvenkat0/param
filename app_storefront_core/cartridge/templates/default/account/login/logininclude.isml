@@ -37,7 +37,7 @@
 					<isinputfield formfield="${pdict.CurrentForms.login.rememberme}" type="checkbox" rowclass="label-inline login-rememberme"/>
 				</div>
 
-				<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('account.login.logininclude.forgotpassword.label','account',null)}" data-dlg-action='{"test":100}' data-dlg-options='{"width":700,"height":250}'>
+				<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('account.login.logininclude.forgotpassword.label','account',null)}">
 					${Resource.msg('account.login.logininclude.forgotpassword','account',null)}
 				</a>
 
