@@ -218,7 +218,7 @@
 				display: inline;
 			}
 			.banner-text3 {
-				color: $white;
+				color: $black;
 			}
 		}
 	}
@@ -243,12 +243,14 @@
 	}
 	.slide5 {
 		.banner-message {
-			left: 3%;	
+			left: 15%;	
 			.banner-text1 {
 				color: $cerulean;
+				display: inline;
 			}
 			.banner-text2 {
 				color: $sangria;
+				display: inline;
 			}
 			.banner-text3 {
 				color: $white;
