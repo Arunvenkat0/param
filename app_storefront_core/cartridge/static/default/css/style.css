@@ -381,7 +381,7 @@ th {
   background-repeat: no-repeat;
   position: relative;
   display: inline-block;
-  width: 1.3333333333em;
+  width: 1.33333em;
   line-height: 1em; }
   .flag-icon:before {
     content: '\00a0'; }
@@ -1938,8 +1938,11 @@ label {
     float: left;
     margin-top: .5rem;
     margin-bottom: 0;
-    text-align: right;
-    width: 22%; }
+    width: 100%; }
+    @media screen and (min-width: 768px) {
+      .form-horizontal label {
+        text-align: right;
+        width: 25%; } }
   .label-inline label {
     display: inline-block;
     float: none;
@@ -1952,7 +1955,6 @@ label {
     width: auto; }
 
 .form-label-text {
-  display: block;
   float: left;
   font-size: 1.1em;
   font-weight: 700;
@@ -1965,9 +1967,12 @@ label {
 .form-row {
   margin: 0.5rem 0 1rem; }
 
-.form-horizontal .form-row-button {
-  margin-left: 24%;
-  width: 62%; }
+.form-row-button {
+  clear: left; }
+  @media screen and (min-width: 768px) {
+    .form-horizontal .form-row-button {
+      margin-left: 27%;
+      width: 62%; } }
 
 .field-wrapper {
   box-sizing: border-box;
@@ -1975,10 +1980,10 @@ label {
   width: 100%; }
   .form-horizontal .field-wrapper {
     float: left;
-    padding-left: 2%;
     width: 76%; }
     @media screen and (min-width: 768px) {
       .form-horizontal .field-wrapper {
+        padding-left: 2%;
         width: 50%; } }
   .label-inline .field-wrapper {
     float: left;
@@ -2017,15 +2022,17 @@ input[type="radio"] {
 .form-caption {
   clear: left;
   width: auto; }
-  .form-horizontal .form-caption {
-    margin-left: 24%; }
+  @media screen and (min-width: 768px) {
+    .form-horizontal .form-caption {
+      margin-left: 27%; } }
   .label-above .form-caption {
     margin-left: 0; }
   .form-indent .form-caption {
     margin-left: 0; }
 
-.form-indent {
-  margin-left: 24%; }
+@media screen and (min-width: 768px) {
+  .form-indent {
+    margin-left: 27%; } }
 
 .error-message {
   border: 2px solid #990000;
@@ -2088,11 +2095,11 @@ div.error {
   float: left;
   margin-left: 3%;
   padding-top: .75em;
-  width: 23%; }
+  width: 20%; }
 
 .char-count {
   display: block;
-  margin-left: 24%; }
+  margin-left: 27%; }
 
 .item-list {
   margin-bottom: 1em; }
@@ -2131,42 +2138,37 @@ div.error {
 
 .item-dashboard {
   color: #aaa;
-  width: 250px; }
+  width: 16rem; }
   .item-dashboard label {
-    display: inline;
-    float: none;
-    font-weight: 400; }
+    font-weight: normal;
+    width: auto; }
+  .item-dashboard .field-wrapper {
+    width: auto; }
+  .item-dashboard .option-quantity-desired input {
+    width: 3rem; }
+  .item-dashboard .value {
+    margin-top: .5rem; }
+  .item-dashboard .form-row {
+    margin: 0; }
   .item-dashboard input,
   .item-dashboard .value,
-  .item-dashboard .option-toggle-public label {
-    color: #333; }
-  .item-dashboard input {
-    padding: 0.2em;
-    width: 2em; }
-  .item-dashboard .input-text {
-    margin: 0;
-    text-align: center; }
-  .item-dashboard .input-select {
-    margin: 0;
-    padding: 8px;
-    width: auto;
-    height: auto;
+  .item-dashboard select
+.option-toggle-public label {
     color: #333; }
   .item-dashboard .input-checkbox {
     margin: 0 5px; }
-  .item-dashboard .item-option {
-    margin: 0 0 0.5em; }
-    .item-dashboard .item-option .form-row {
-      display: inline; }
-  .item-dashboard .option-add-to-cart .label, .item-dashboard .option-add-to-cart label {
-    color: #333;
-    font-size: 1.1em;
-    font-weight: 700;
-    text-transform: uppercase; }
-  .item-dashboard .option-add-to-cart input {
-    padding: 0.5em 0;
-    width: 50px;
-    margin-right: 1em; }
+  .item-dashboard .option-add-to-cart {
+    margin-top: .5rem; }
+    .item-dashboard .option-add-to-cart label {
+      color: #333;
+      float: left;
+      font-weight: 700;
+      margin: 0.5rem 0.5rem 0 0;
+      text-transform: uppercase;
+      width: auto; }
+    .item-dashboard .option-add-to-cart input {
+      width: 3rem;
+      margin-right: 1em; }
   .item-dashboard .option-quantity-purchased span.exceeded {
     color: #990000; }
 
@@ -4507,8 +4509,13 @@ ul.product-availability-list {
 .month .form-caption {
   margin-left: 0; }
 
-.cvn .field-wrapper {
-  width: 50px; }
+.cvn {
+  clear: left; }
+  .cvn .field-wrapper {
+    width: 50px; }
+
+.ssn {
+  clear: left; }
 
 .bml-terms-and-conditions {
   border: 1px solid #aaa;
