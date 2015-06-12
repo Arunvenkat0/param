@@ -180,6 +180,11 @@
 
 	<div class="product-actions">
 		<h2 class="visually-hidden">Product Actions</h2>
+		<isscript>
+			var Url = require('~/cartridge/scripts/util/Url');
+			pdict.url = Url.getCurrent(pdict);	
+			pdict.title = pdict.Product.name;
+		</isscript>
 		<isinclude template="components/socialsharing"/>
 
 		<isif condition="${pdict.isBundle}">

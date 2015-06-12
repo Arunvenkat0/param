@@ -381,7 +381,7 @@ th {
   background-repeat: no-repeat;
   position: relative;
   display: inline-block;
-  width: 1.3333333333em;
+  width: 1.33333em;
   line-height: 1em; }
   .flag-icon:before {
     content: '\00a0'; }
@@ -4140,51 +4140,6 @@ button.add-all-to-cart {
   .bonus-discount-container .promo-details.visible {
     display: block; }
 
-.send-to-friend-product {
-  border-bottom: 1px solid #e0e0e0;
-  border-top: 1px solid #e0e0e0;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-right: 22%;
-  overflow: hidden;
-  padding: 20px 0; }
-  .send-to-friend-product .product-image {
-    float: left;
-    width: 36%; }
-    .send-to-friend-product .product-image img {
-      max-width: 80%; }
-  .send-to-friend-product .product-description {
-    float: left;
-    width: 63%; }
-    .send-to-friend-product .product-description h2 {
-      margin-right: 0; }
-    .send-to-friend-product .product-description .value {
-      font-weight: bold; }
-    .send-to-friend-product .product-description h2 {
-      font-size: 1.2em;
-      font-style: italic; }
-    .send-to-friend-product .product-description dt {
-      clear: both;
-      float: left;
-      margin: 10px 0 0 0;
-      width: 100px; }
-    .send-to-friend-product .product-description dd {
-      float: left;
-      margin: 10px 0 0 0;
-      width: 200px; }
-
-#send-to-friend-main .send-to-friend-sender-label {
-  padding-top: 0; }
-
-#send-to-friend-main .send-to-friend-sender {
-  margin-left: 2%;
-  padding: 0.7em 0.5em;
-  text-indent: 0;
-  width: 49.5966%; }
-
-#send-to-friend-dialog .send-to-friend-login-message {
-  padding: 2em 0em 2em; }
-
 .sizinginformation {
   border: 0 none;
   padding: 10px; }
@@ -4771,25 +4726,33 @@ h1 .account-logout {
   float: left; }
 
 .list-share {
-  background-color: #efefef;
   border-top: 1px solid #d5d5d5;
   padding: 2em; }
   .list-share .share-option {
     box-sizing: border-box;
     display: block;
     margin-bottom: .5rem;
-    width: 100%; }
-    @media screen and (min-width: 768px) {
-      .list-share .share-option {
-        float: left;
-        margin-left: 1%;
-        width: 32.666666667%; }
-        .list-share .share-option:first-child {
-          margin-left: 0; } }
+    float: left; }
+  .list-share .share-options {
+    text-align: center;
+    margin-bottom: .5rem;
+    font-size: 1.7em;
+    float: left;
+    margin-left: 1rem;
+    margin-top: 0.3rem; }
+    .list-share .share-options .share-title {
+      display: inline; }
   .list-share .list-title {
     float: left; }
   .list-share .print-page {
     float: right; }
+  .list-share .share-link {
+    cursor: pointer; }
+  .list-share .share-link-content {
+    display: none; }
+    .list-share .share-link-content.active {
+      display: block;
+      float: left; }
 
 .event-info {
   margin: 1em; }

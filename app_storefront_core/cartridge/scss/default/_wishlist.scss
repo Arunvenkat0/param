@@ -18,21 +18,23 @@
 
 .list-share {
 	@extend %clearfix;
-	background-color: $white-smoke;
 	border-top: 1px solid darken($white-smoke, 10%);
 	padding: 2em;
 	.share-option {
 		box-sizing: border-box;
 		display: block;
 		margin-bottom: .5rem;
-		width: 100%;
-		@media screen and (min-width: 768px) {
-			float: left;
-			margin-left: 1%;
-			width: 32.666666667%;
-			&:first-child {
-				margin-left: 0;
-			}
+		float: left;
+	}
+	.share-options {
+		text-align: center;
+		margin-bottom: .5rem;
+		font-size: 1.7em;
+		float: left;
+		margin-left: 1rem;
+		margin-top: 0.3rem;
+		.share-title {
+			display: inline;
 		}
 	}
 	.list-title {
@@ -40,6 +42,16 @@
 	}
 	.print-page {
 		float: right;
+	}
+	.share-link {
+		cursor: pointer;
+	}
+	.share-link-content {
+		display: none;
+		&.active {
+			display: block;
+			float: left;
+		}
 	}
 }
 
