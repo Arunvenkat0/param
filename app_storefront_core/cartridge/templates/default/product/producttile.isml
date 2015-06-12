@@ -112,7 +112,7 @@
 		<iscomment>Product Name</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<div class="product-name">
-			<a class="name-link" href="${productUrl}" title="${Resource.msg('product.label.prefix','product',null)} ${Product.name}">
+			<a class="name-link" href="${productUrl}" title="${Resource.msgf('product.label','product',null, Product.name)}">
 				<isprint value="${Product.name}"/>
 			</a>
 		</div>

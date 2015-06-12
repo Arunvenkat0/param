@@ -86,7 +86,7 @@
 				<div class="mini-cart-name">
 					<isset name="itemUrl" value="${empty(productLineItem.categoryID) ? URLUtils.http('Product-Show','pid', productLineItem.productID) : URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" scope="page"/>
 
-					<a href="${itemUrl}"><isprint value="${productLineItem.productName}"/></a>
+					<a href="${itemUrl}" title="${Resource.msgf('product.label','product',null, productLineItem.productName)}"><isprint value="${productLineItem.productName}"/></a>
 				</div>
 
 				<div class="mini-cart-attributes">
