@@ -3,6 +3,7 @@
 var Handlebars = require('hbsfy/runtime');
 
 Handlebars.registerHelper('log', function (stuff) {
+	//jshint devel:true
 	console.log(stuff);
 });
 

@@ -28,7 +28,7 @@
 
 			<iscomment>Store Locator</iscomment>
 			<li>
-				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('global.header.storelocator', 'locale', null)}">
+				<a href="${URLUtils.http('Stores-Find')}" title="${Resource.msg('global.header.storelocator.label', 'locale', null)}">
 					<i class="fa fa-map-marker"></i>
 					<span>${Resource.msg('global.header.storelocator', 'locale', null)}</span>
 				</a>

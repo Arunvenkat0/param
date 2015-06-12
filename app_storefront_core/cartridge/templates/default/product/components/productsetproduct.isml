@@ -12,7 +12,7 @@
 
 	<div class="product-set-details">
 		<h1 class="product-name">
-			<a class="item-name" href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">
+			<a class="item-name" href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('product.label','product',null, pdict.Product.name)}">
 				<isprint value="${pdict.Product.name}"/>
 			</a>
 		</h1>

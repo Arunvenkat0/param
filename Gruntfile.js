@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 	var config = {};
 	// mocha ui tests
 	config.suite = grunt.option('suite') || '*';
-	if (config.suite === 'all') { config.suite === '*'; }
+	if (config.suite === 'all') { config.suite = '*'; }
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 					sourceMap: (config.sourcemaps)
 				},
 				files: paths.css.map(function (path) {
-					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'}
+					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'};
 				})
 			},
 			styleguide: {
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 		autoprefixer: {
 			dev: {
 				files: paths.css.map(function (path) {
-					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'}
+					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'};
 				})
 			},
 			styleguide: {
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
 					}
 				}
 			},
-			watch_dev: {
+			watchDev: {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
 					transform: ['hbsfy']
 				}
 			},
-			watch_styleguide: {
+			watchStyleguide: {
 				files: [{
 					src: 'styleguide/js/main.js',
 					dest: 'styleguide/dist/main.js'
@@ -165,10 +165,10 @@ module.exports = function (grunt) {
 	});
 	grunt.registerTask('css:dev', ['sass:dev', 'autoprefixer:dev']);
 	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
-	grunt.registerTask('default', ['css:dev', 'browserify:watch_dev', 'watch:dev']);
+	grunt.registerTask('default', ['css:dev', 'browserify:watchDev', 'watch:dev']);
 	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
-	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watch_styleguide', 'connect:styleguide', 'watch:styleguide']);
+	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
 	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
-}
+};

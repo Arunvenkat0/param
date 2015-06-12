@@ -43,7 +43,7 @@
 			<iselse/>
 				<isset name="catLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', pdict.ProductSearchResult.searchPhrase), cat.ID)}" scope="page"/>
 			</isif>
-			<a class="breadcrumb-element" href="${catLinkUrl}" title="${cat.displayName}">${cat.displayName}</a>
+			<a class="breadcrumb-element" href="${catLinkUrl}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}">${cat.displayName}</a>
 		</isloop>
 
 	</isif>

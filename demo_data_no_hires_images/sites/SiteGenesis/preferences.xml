@@ -35,11 +35,7 @@
             <preference preference-id="RobotsTxtContent"/>
             <preference preference-id="RobotsTxtMode">Cartridge</preference>
             <preference preference-id="SearchSuggestions">Disabled</preference>
-            <preference preference-id="SpellCheckingEnabled">Enabled</preference>
-            <preference preference-id="SpellCheckingIndexThreshold">0.3</preference>
-            <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
-            <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
-            <preference preference-id="StaticCacheTTL">86400</preference>
+            <preference preference-id="StaticCacheTTL">2592000</preference>
         </development>
         <staging>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
@@ -48,10 +44,6 @@
             <preference preference-id="RobotsTxtContent"/>
             <preference preference-id="RobotsTxtMode">Cartridge</preference>
             <preference preference-id="SearchSuggestions">Enabled</preference>
-            <preference preference-id="SpellCheckingEnabled">Enabled</preference>
-            <preference preference-id="SpellCheckingIndexThreshold">0.3</preference>
-            <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
-            <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
             <preference preference-id="StaticCacheTTL">0</preference>
         </staging>
         <production>
@@ -61,18 +53,14 @@
             <preference preference-id="RobotsTxtContent"/>
             <preference preference-id="RobotsTxtMode">Cartridge</preference>
             <preference preference-id="SearchSuggestions">Disabled</preference>
-            <preference preference-id="SpellCheckingEnabled">Enabled</preference>
-            <preference preference-id="SpellCheckingIndexThreshold">0.3</preference>
-            <preference preference-id="SpellCheckingSmoothAccuracy">0.5</preference>
-            <preference preference-id="SpellCheckingStrictAccuracy">0.9</preference>
-            <preference preference-id="StaticCacheTTL">86400</preference>
+            <preference preference-id="StaticCacheTTL">2592000</preference>
         </production>
     </standard-preferences>
     <custom-preferences>
         <all-instances/>
         <development/>
         <staging>
-            <preference preference-id="buildNotificationEmailList">agarikipati@demandware.com; swhite@demandware.com; awatson@pixelmedia.com; tpatten@pixelmedia.com; kmccloskey@demandware.com; jmoody@demandware.com; syoung@demandware.com; bnoel@demandware.com</preference>
+            <preference preference-id="buildNotificationEmailList"></preference>
             <preference preference-id="disableResponsiveDesign">false</preference>
             <preference preference-id="slideshoweffect">growX</preference>
         </staging>

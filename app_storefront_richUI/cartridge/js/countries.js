@@ -1,7 +1,5 @@
 'use strict';
 
-var util = require('./util');
-
 exports.init = function init () {
 	$('.country-selector .current-country').on('click', function () {
 		$('.country-selector .selector').toggleClass('active');
@@ -10,7 +8,7 @@ exports.init = function init () {
 	// set currency first before reload
 	$('.country-selector .selector .locale').on('click', function (e) {
 		e.preventDefault();
-		var url = this.href
+		var url = this.href;
 		var currency = this.getAttribute('data-currency');
 		$.ajax({
 			dataType: 'json',
@@ -25,6 +23,6 @@ exports.init = function init () {
 				throw new Error('Unable to set currency');
 			}
 			window.location.href = url;
-		})
+		});
 	});
-}
+};

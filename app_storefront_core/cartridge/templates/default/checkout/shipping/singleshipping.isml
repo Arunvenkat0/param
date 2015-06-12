@@ -55,40 +55,14 @@
 
 					<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
-
-						<div class="select-address">
-
-							<div class="form-row">
-
-								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
-									${Resource.msg('global.selectaddressmessage','locale',null)}:
-								</label>
+						<div class="select-address form-row">
+							<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
+								${Resource.msg('global.selectaddressmessage','locale',null)}
+							</label>
+							<div class="field-wrapper">
 								<isaddressselectlist p_listId="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
 							</div>
-
-							<div class="form-row form-row-button">
-								<button id="addressSelectGoButton" class="select" name="${pdict.CurrentForms.singleshipping.shippingAddress.selectAddress.htmlName}" type="submit" value="Go" >${Resource.msg('singleshipping.select','checkout',null)}</button>
-							</div>
-
 						</div>
-
-					<iselse/>
-
-						<isif condition="${productListAddresses.size() > 0}">
-
-						<div class="select-address">
-
-							<div class="form-row">
-
-								<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
-									${Resource.msg('global.selectaddressmessage','locale',null)}:
-								</label>
-								<isaddressselectlist p_listid="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" />
-							</div>
-						</div>
-
-						</isif>
-
 					</isif>
 
 
