@@ -135,7 +135,7 @@
 							</isscript>
 							<isif condition="${!empty(sizeChartID)}">
 								<div class="size-chart-link">
-									<a href="${URLUtils.url('Page-Show','cid', sizeChartID)}" target="_blank" title="${Resource.msg('product.variations.sizechart', 'product', null)}">${Resource.msg('product.variations.sizechart', 'product', null)}</a>
+									<a href="${URLUtils.url('Page-Show','cid', sizeChartID)}" target="_blank" title="${Resource.msg('product.variations.sizechart.label', 'product', null)}">${Resource.msg('product.variations.sizechart', 'product', null)}</a>
 								</div>
 								<isscript>
 									sizeChartShown = true;
