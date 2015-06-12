@@ -10,7 +10,7 @@
 	var suggest = SearchSuggest(pdict.CurrentHttpParameterMap.q.value, 5);
 </isscript>
 
-<isif condition="${suggest}">
+<isif condition="${suggest && (suggest.product.available || suggest.phrase.available)}">
 	<div class="search-suggestion-wrapper <isif condition="${suggest.phrase.available && suggest.product.available}">full</isif>">
 		<isif condition="${suggest.product.available}">
 			<div class="product-suggestions">

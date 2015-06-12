@@ -35,6 +35,46 @@ describe('Input Field', function () {
 		});
 	});
 
+	it('text input - with help content asset', function () {
+		var field = inputField({
+			formfield: {
+				htmlName: 'testfield',
+				label: 'Test',
+				valid: true
+			},
+			type: 'text',
+			helplabel: 'Help',
+			helpcid: 'contentasset'
+		});
+		assert.deepEqual(field, {
+			rowClass: '',
+			label: '<label for="testfield"><span>Test</span></label>',
+			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
+			caption: '<div class="form-caption"></div>',
+			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small">contentasset</div></a></div>'
+		});
+	});
+
+	it('text input - with help content asset not found', function () {
+		var field = inputField({
+			formfield: {
+				htmlName: 'testfield',
+				label: 'Test',
+				valid: true
+			},
+			type: 'text',
+			helplabel: 'Help',
+			helpcid: 'notfound'
+		});
+		assert.deepEqual(field, {
+			rowClass: '',
+			label: '<label for="testfield"><span>Test</span></label>',
+			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
+			caption: '<div class="form-caption"></div>',
+			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small"></div></a></div>'
+		});
+	});
+
 	it('checkbox', function () {
 		var field = inputField({
 			formfield: {

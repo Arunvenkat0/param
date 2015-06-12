@@ -16,7 +16,7 @@
 					<!-- Loop Through Customer Service Libraries -->
 					<isloop items="${pdict.CustomerServiceLinks.get(links)}" var="ContentAsset" status="loopcounter">
 						<li>
-							<a href="${URLUtils.url('Page-Show','cid', ContentAsset.name)}" title="${ContentAsset.ID}">
+							<a href="${URLUtils.url('Page-Show','cid', ContentAsset.ID)}" title="${ContentAsset.name}">
 								<isprint value="${ContentAsset.name}"/>
 							</a>
 						</li>

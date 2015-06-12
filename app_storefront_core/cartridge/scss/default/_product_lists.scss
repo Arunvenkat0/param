@@ -43,52 +43,47 @@
 }
 .item-dashboard {
 	color: $dark-gray;
-	width: 250px;
+	width: 16rem;
 	label {
-		display: inline;
-		float: none;
-		font-weight: 400;
+		font-weight: normal;
+		width: auto;
+	}
+	.field-wrapper {
+		width: auto;
+	}
+	.option-quantity-desired {
+		input {
+			width: 3rem;
+		}
+	}
+	.value {
+		margin-top: .5rem;
+	}
+	.form-row {
+		margin: 0;
 	}
 	input,
 	.value,
+	select
 	.option-toggle-public label {
-		color: $night-rider;
-	}
-	input {
-		padding: 0.2em;
-		width: 2em;
-	}
-	.input-text {
-		margin: 0;
-		text-align: center;
-	}
-	.input-select {
-		margin: 0;
-		padding: 8px;
-		width: auto;
-		height:auto;
 		color: $night-rider;
 	}
 	.input-checkbox {
 		margin: 0 5px;
 	}
-	.item-option {
-		margin: 0 0 0.5em;
-		.form-row {
-			display: inline;
-		}
-	}
 	.option-add-to-cart {
-		.label, label {
+		margin-top: .5rem;
+		label {
 			color: $night-rider;
-			font-size: 1.1em;
+			float: left;
 			font-weight: 700;
+			margin: .5rem .5rem 0 0;
 			text-transform: uppercase;
+			width: auto;
 		}
 		input {
-			padding: 0.5em 0;
-			width: 50px;
-			margin-right: 1em
+			width: 3rem;
+			margin-right: 1em;
 		}
 	}
 	.option-quantity-purchased span.exceeded {

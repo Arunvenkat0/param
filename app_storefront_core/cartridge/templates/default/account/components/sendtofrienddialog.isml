@@ -43,7 +43,7 @@
 
 <isdecorate template="${DecoratorTemplate}">
 <isif condition="${pdict.CurrentCustomer.registered}">
-<form action="${URLUtils.continueURL()}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
+<form action="${URLUtils.continueURL()}" method="post" name="${pdict.CurrentForms.sendtofriend.htmlName}" id="send-to-friend-form" class="form-horizontal ${empty(pdict.ViewMode) ? 'edit' : pdict.ViewMode}">
 	<div id="send-to-friend-main">
 		<isif condition="${IsRegistry || IsWishList || IsProductDetail}">
 			<h1>${Resource.msg('global.sendtoafriend','locale',null)}</h1>
@@ -309,11 +309,11 @@
 			${Resource.msg('account.components.sendtoafrienddialog.unregistereduser','account',null)}
 		</span>
 	</div>
-	
+
 	<span class="buttonstyle">
 		<a href="${URLUtils.https('SendToFriend-Login', 'pid', pdict.Product.ID)}" title="">${Resource.msg('account.components.sendtoafrienddialog.unregistereduser.button','account',null)}</a>
 	</span>
-	
+
 	<span class="cancel cancel-button buttonstyle">
 		${Resource.msg('global.cancel','locale',null)}
 	</span>
