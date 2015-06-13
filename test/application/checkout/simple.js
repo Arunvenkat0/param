@@ -6,6 +6,7 @@ import client from '../webdriver/client';
 import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 import * as testData from '../webdriver/pageObjects/testData/main';
+import * as formLogin from '../webdriver/pageObjects/forms/login';
 
 describe('Checkout', () => {
 	let resourcePath;
@@ -19,24 +20,6 @@ describe('Checkout', () => {
 	before(() => client.init());
 
 	after(() => client.end());
-
-	before(() => {
-		return testData.getProductVariationMaster()
-			.then(variationMaster => productVariationMaster = variationMaster)
-			.then(() => resourcePath = productVariationMaster.getUrlResourcePath())
-			.then(() => {
-				let product = new Map();
-				product.set('resourcePath', resourcePath);
-				product.set('colorIndex', 1);
-				product.set('sizeIndex', 2);
-				product.set('widthIndex', 1);
-				return product;
-			})
-			.then(product =>
-				productDetailPage.addProductVariationToCart(product)
-					.then(() => checkoutPage.navigateTo())
-			);
-	});
 
 	before(() => {
 		return testData.getCustomerByLogin(login)
@@ -62,7 +45,27 @@ describe('Checkout', () => {
 			});
 	});
 
+	function addProductVariationMasterToCart () {
+		return testData.getProductVariationMaster()
+			.then(variationMaster => productVariationMaster = variationMaster)
+			.then(() => resourcePath = productVariationMaster.getUrlResourcePath())
+			.then(() => {
+				let product = new Map();
+				product.set('resourcePath', resourcePath);
+				product.set('colorIndex', 1);
+				product.set('sizeIndex', 2);
+				product.set('widthIndex', 1);
+				return product;
+			})
+			.then(product =>
+				productDetailPage.addProductVariationToCart(product)
+					.then(() => checkoutPage.navigateTo())
+		);
+	}
+
 	describe('Checkout as Guest', () => {
+		before(() => addProductVariationMasterToCart());
+
 		it('should allow checkout as guest', () =>
 			checkoutPage.pressBtnCheckoutAsGuest()
 				.then(() => checkoutPage.getActiveBreadCrumb())
@@ -108,4 +111,20 @@ describe('Checkout', () => {
 		);
 	});
 
+	describe('Checkout as Returning Customer', () => {
+		before(() => addProductVariationMasterToCart());
+
+		before(() => formLogin.loginAsDefaultCustomer());
+
+		it('should allow check out as a returning customer', () => {
+			return checkoutPage.fillOutShippingForm(shippingFormData)
+				.then(() => checkoutPage.checkUseAsBillingAddress())
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.click(checkoutPage.BTN_PLACE_ORDER))
+				.then(() => checkoutPage.getLabelOrderConfirmation())
+				.then(title => assert.equal(title, 'Thank you for your order.'));
+		});
+	})
 });

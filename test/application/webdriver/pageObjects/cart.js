@@ -64,7 +64,7 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 		.click('.ui-dialog .product-variations .swatches.size li:nth-child(' + sizeIndex + ') a')
 		.pause(500)
 		.click('.ui-dialog #add-to-cart')
-		// wait for the page to refresh, which happens after a 500 timeout by default
+		// wait for the page to reload, which completes after about 1500 ms
 		.pause(1500)
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 }
