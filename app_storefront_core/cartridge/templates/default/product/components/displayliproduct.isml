@@ -32,9 +32,9 @@
 		<iselseif condition="${!productLineItem.product.isSearchable()}">
 			<isprint value="${productLineItem.lineItemText}"/>
 		<iselseif condition="${productLineItem.categoryID != null}">
-			<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="${productLineItem.productName}"><isprint value="${productLineItem.lineItemText}"/></a>
+			<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="${Resource.msgf('product.label','product',null, productLineItem.productName)}"><isprint value="${productLineItem.lineItemText}"/></a>
 		<iselse/>
-			<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID)}" title="${productLineItem.productName}"><isprint value="${productLineItem.lineItemText}"/></a>
+			<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID)}" title="${Resource.msgf('product.label','product',null, productLineItem.productName)}"><isprint value="${productLineItem.lineItemText}"/></a>
 		</isif>
 	</div>
 </isif>

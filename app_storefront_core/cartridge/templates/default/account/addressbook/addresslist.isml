@@ -17,7 +17,7 @@
 		
 		<div class="section-header">
 			${Resource.msg('account.addressbook.addresslist.header','account',null)}
-			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create','account',null)}" href="${URLUtils.url('Address-Add')}" >
+			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create.label','account',null)}" href="${URLUtils.url('Address-Add')}" >
 				${Resource.msg('account.addressbook.addresslist.create','account',null)}
 			</a>
 		</div>

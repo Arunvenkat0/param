@@ -6,7 +6,7 @@
 	<h1>${Resource.msg('account.paymentinstrumentlist.header','account',null)}</h1>
 	<div class="section-header">
 		${Resource.msg('account.paymentinstrumentlist.header','account',null)}
-		<a class="section-header-note add-card" href="${URLUtils.url('PaymentInstruments-Add')}" title="${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}">
+		<a class="section-header-note add-card" href="${URLUtils.url('PaymentInstruments-Add')}" title="${Resource.msg('account.paymentinstrumentlist.addcard.label','account',null)}">
 			${Resource.msg('account.paymentinstrumentlist.addcard','account',null)}
 		</a>
 	</div>
