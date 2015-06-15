@@ -32,7 +32,7 @@ describe('Wishlist', () => {
 			baseUrl: 'mailto:name@email.com'
 		},
 		shareLinkIcon: {
-		 	selector: '.share-lilnk',
+		 	selector: wishListPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content.active'
@@ -53,33 +53,31 @@ describe('Wishlist', () => {
 	it('should display a Facebook icon and link', () => {
 		assert.ok(client.isExisting(socialLinksMap.facebook.selector));
 		return client.getAttribute(socialLinksMap.facebook.selector, 'href')
-			.then(href => {
-				assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl));
-			});
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl)));
 	});
 
 	it('should display a Twitter icon and link', () => {
 		assert.ok(client.isExisting(socialLinksMap.twitter.selector));
 		return client.getAttribute(socialLinksMap.twitter.selector, 'href')
-			.then(href => {
-				assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl));
-			});
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl)));
 	});
 
 	it('should display a Google Plus icon and link', () => {
 		assert.ok(client.isExisting(socialLinksMap.googlePlus.selector));
 		return client.getAttribute(socialLinksMap.googlePlus.selector, 'href')
-			.then(href => {
-				assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl));
-			});
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl)));
+	});
+
+	it('should display a Pinterest icon and link', () => {
+		assert.ok(client.isExisting(socialLinksMap.pinterest.selector));
+		return client.getAttribute(socialLinksMap.pinterest.selector, 'href')
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.pinterest.baseUrl)));
 	});
 
 	it('should display a Mail icon and link', () => {
 		assert.ok(client.isExisting(socialLinksMap.emailLink.selector));
 		return client.getAttribute(socialLinksMap.emailLink.selector, 'href')
-			.then(href => {
-				assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl));
-			});
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl)));
 	});
 
 	it('should display a link icon then link', () => {
