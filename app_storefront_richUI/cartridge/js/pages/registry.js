@@ -3,7 +3,6 @@
 var addProductToCart = require('./product/addToCart'),
 	ajax = require('../ajax'),
 	quickview = require('../quickview'),
-	sendToFriend = require('../send-to-friend'),
 	util = require('../util');
 
 /**
@@ -93,6 +92,6 @@ function initializeEvents() {
 exports.init = function () {
 	initializeEvents();
 	addProductToCart();
-	sendToFriend.initializeDialog('.list-share');
+
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };

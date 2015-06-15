@@ -36,16 +36,19 @@
 					</button>
 				</isif>
 				<isif condition="${pdict.ProductList.public}">
-					<span class="buttonstyle">
-						<a class="send-to-friend share-option" title="${Resource.msg('product.sendfriend','product',null)}" href="${URLUtils.url('SendToFriend-Start', 'plid', pdict.ProductList.ID, 'source', 'registry')}">
-							${Resource.msg('account.giftregistry.button.sendlisttofriend','account',null)}
+					<div class="share-options">
+						<isscript>
+							pdict.url = URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID);
+						</isscript>
+						<isinclude template="components/socialsharing"/>
+						<a class="share-icon share-link" title="${Resource.msg('global.socialshare.link', 'locale', null)}" data-target=".share-link-content"><i class="fa fa-link"></i></a>
+					</div>
+					<div class="share-link-content">	
+						${Resource.msg('registry.share.link','account',null)}:
+						<a href="${pdict.url}" title="${Resource.msg('registry.share.link','account',null)}">
+							<isprint value="${pdict.url}"/>
 						</a>
-					</span>
-					<p class="share-option">${Resource.msg('registry.copypaste','account',null)}
-						<a href="${URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}" title="${Resource.msg('registry.copypaste','account',null)}">
-							<isprint value="${URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID)}"/>
-						</a>
-					</p>
+					</div>
 				</isif>
 			</div>
 		</fieldset>

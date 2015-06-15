@@ -15,12 +15,6 @@
 				<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
 					<tr>
 						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
-							<p><isprint value="${pdict.CurrentForms.sendtofriend.message.htmlValue}"/></p>
-							<p><a href='<isprint value="${pdict.CurrentForms.sendtofriend.messagelink.htmlValue}"/>'><isprint value="${pdict.CurrentForms.sendtofriend.messagelinktext.htmlValue}"/></a></p>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}">
 								<img src="${URLUtils.httpStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
 							</a>
