@@ -238,7 +238,8 @@ module.exports = function (pdict) {
 	caption = '<div class="form-caption' + (hasError ? ' error-message' : '') + '">' + message + '</div>';
 
 	// help text
-	var helplabel;
+	var helplabel = '';
+	var helpcontent = '';
 	if (pdict.helpcid && pdict.helplabel) {
 		if (typeof pdict.helplabel === 'string') {
 			helplabel = pdict.helplabel;
@@ -247,12 +248,15 @@ module.exports = function (pdict) {
 				helplabel = Resource.msg(pdict.helplabel.property, pdict.helplabel.file, null);
 			}
 		}
+		if (ContentMgr.getContent(pdict.helpcid)) {
+			helpcontent = ContentMgr.getContent(pdict.helpcid).custom.body;
+		}
 		help = [
 			'<div class="form-field-tooltip">',
 			'<a href="' + URLUtils.url('Page-Show', 'cid', pdict.helpcid) + '" class="tooltip">',
 			helplabel,
 			'<div class="tooltip-content" data-layout="small">',
-			ContentMgr.getContent(pdict.helpcid).custom.body,
+			helpcontent,
 			'</div>',
 			'</a>',
 			'</div>'

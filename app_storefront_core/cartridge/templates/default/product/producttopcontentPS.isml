@@ -180,6 +180,11 @@
 
 	<div class="product-actions">
 		<h2 class="visually-hidden">Product Actions</h2>
+		<isscript>
+			var Url = require('~/cartridge/scripts/util/Url');
+			pdict.url = Url.getCurrent(pdict);	
+			pdict.title = pdict.Product.name;
+		</isscript>
 		<isinclude template="components/socialsharing"/>
 
 		<isif condition="${pdict.isBundle}">
@@ -188,8 +193,8 @@
 			<iselse/>
 				<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID)}" scope="page"/>
 			</isif>
-			<a data-action="wishlist" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
-			<a data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
+			<a data-action="wishlist" href="${wishlistUrl}" title="${Resource.msg('global.addtowishlist.label','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
+			<a data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID)}" title="${Resource.msg('global.addtogiftregistry.label','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
 		</isif>
 
 	</div><!--  end details block -->

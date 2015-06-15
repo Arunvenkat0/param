@@ -48,7 +48,7 @@
 	</isscript>
 
 	<li class="user-info">
-		<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${title}">
+		<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${Resource.msgf('global.user.label', 'locale', null, title)}">
 			<i class="fa fa-user"></i>
 			<span>${title}</span>
 		</a>
@@ -56,7 +56,7 @@
 			<h3>${title}</h3>
 			<div class="user-links">
 				<isloop items="${links}" var="link">
-					<a class="${link.class}" href="${link.href}" title="${link.title}">${link.title}</a>
+					<a class="${link.class}" href="${link.href}" title="${Resource.msg('global.goto.label.prefix', 'locale', null)} ${link.title}">${link.title}</a>
 				</isloop>
 			</div>
 			<isslot id="header-usermenu" description="Slot the is part of the user dropdown menu for site above 768 width" context="global" />

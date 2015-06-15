@@ -5,81 +5,107 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
+import * as testData from '../webdriver/pageObjects/testData/main';
 
-describe('Checkout Simple Product', () => {
-	var shippingFormData = new Map();
-	shippingFormData.set('firstName', 'John');
-	shippingFormData.set('lastName', 'Smith');
-	shippingFormData.set('address1', '5 Wall St');
-	shippingFormData.set('country', 'US');
-	shippingFormData.set('states_state', 'MA');
-	shippingFormData.set('city', 'Burlington');
-	shippingFormData.set('postal', '01803');
-	shippingFormData.set('phone', '7814251267');
+describe('Checkout', () => {
+	let resourcePath;
+	let customer;
+	let login = 'testuser1@demandware.com';
+	let address;
+	let productVariationMaster;
+	let shippingFormData = new Map();
+	let billingFormData = new Map();
 
-	var billingFormData = new Map();
-	billingFormData.set('emailAddress', 'jsmith@demandware.com');
-	billingFormData.set('creditCard_owner', 'John Smith');
-	billingFormData.set('creditCard_number', '4111111111111111');
-	billingFormData.set('creditCard_year', 2);
-	billingFormData.set('creditCard_cvn', '987');
-
-	before(() => {
-		var resourcePath = '/mens/clothing/pants/82916781.html?dwvar_82916781_color=BDA';
-		var sizeIndex = 2;
-
-		var standardProduct = new Map();
-		standardProduct.set('resourcePath', resourcePath);
-		standardProduct.set('sizeIndex', sizeIndex);
-
-		return client.init()
-			.then(() => productDetailPage.addProductVariationToCart(standardProduct))
-			.then(() => checkoutPage.navigateTo());
-	});
+	before(() => client.init());
 
 	after(() => client.end());
 
-	it('should allow checkout as guest', () =>
-		checkoutPage.pressBtnCheckoutAsGuest()
-			.then(() => checkoutPage.getActiveBreadCrumb())
-			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 1: Shipping'))
-	);
+	before(() => {
+		return testData.getProductVariationMaster()
+			.then(variationMaster => productVariationMaster = variationMaster)
+			.then(() => resourcePath = productVariationMaster.getUrlResourcePath())
+			.then(() => {
+				let product = new Map();
+				product.set('resourcePath', resourcePath);
+				product.set('colorIndex', 1);
+				product.set('sizeIndex', 2);
+				product.set('widthIndex', 1);
+				return product;
+			})
+			.then(product =>
+				productDetailPage.addProductVariationToCart(product)
+					.then(() => checkoutPage.navigateTo())
+			);
+	});
 
-	// Fill in Shipping Form
-	it('should allow saving of Shipping form when required fields filled', () =>
-		checkoutPage.fillOutShippingForm(shippingFormData)
-			.then(() => checkoutPage.checkUseAsBillingAddress())
-			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
-			.then(savable => assert.ok(savable))
-	);
+	before(() => {
+		return testData.getCustomerByLogin(login)
+			.then(cust => {
+				customer = cust;
 
-	it('should redirect to the Billing page after Shipping saved', () =>
-		client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE)
-			.then(() => checkoutPage.getActiveBreadCrumb())
-			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
-	);
+				address = customer.getPreferredAddress();
 
-	// Fill in Billing Form
-	it('should allow saving of Billing Form when required fields filled', () =>
-		checkoutPage.fillOutBillingForm(billingFormData)
-			.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
-			.then(enabled => assert.ok(enabled))
+				shippingFormData.set('firstName', customer.firstName);
+				shippingFormData.set('lastName', customer.lastName);
+				shippingFormData.set('address1', address.address1);
+				shippingFormData.set('country', address.countryCode);
+				shippingFormData.set('states_state', address.stateCode);
+				shippingFormData.set('city', address.city);
+				shippingFormData.set('postal', address.postalCode);
+				shippingFormData.set('phone', address.phone);
+
+				billingFormData.set('emailAddress', customer.email);
+				billingFormData.set('creditCard_owner', customer.firstName + ' ' + customer.lastName);
+				billingFormData.set('creditCard_number', testData.creditCard1.number);
+				billingFormData.set('creditCard_year', testData.creditCard1.yearIndex);
+				billingFormData.set('creditCard_cvn', testData.creditCard1.cvn);
+			});
+	});
+
+	describe('Checkout as Guest', () => {
+		it('should allow checkout as guest', () =>
+			checkoutPage.pressBtnCheckoutAsGuest()
+				.then(() => checkoutPage.getActiveBreadCrumb())
+				.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 1: Shipping'))
 		);
 
-	it('should redirect to the Place Order page after Billing saved', () =>
-		client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
-			.then(() => checkoutPage.getActiveBreadCrumb())
-			.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 3: Place Order'))
-	);
+		// Fill in Shipping Form
+		it('should allow saving of Shipping form when required fields filled', () =>
+			checkoutPage.fillOutShippingForm(shippingFormData)
+				.then(() => checkoutPage.checkUseAsBillingAddress())
+				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(savable => assert.ok(savable))
+		);
 
-	it('should enable the Place Order button when Place Order page reached', () =>
-		client.isEnabled(checkoutPage.BTN_PLACE_ORDER)
-			.then(enabled => assert.ok(enabled))
-	);
+		it('should redirect to the Billing page after Shipping saved', () =>
+			client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE)
+				.then(() => checkoutPage.getActiveBreadCrumb())
+				.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
+		);
 
-	it('should redirect to Order Confirmation page after a successful order submission', () =>
-		client.click(checkoutPage.BTN_PLACE_ORDER)
-			.then(() => checkoutPage.getLabelOrderConfirmation())
-			.then(title => assert.equal(title, 'Thank you for your order.'))
-	);
+		// Fill in Billing Form
+		it('should allow saving of Billing Form when required fields filled', () =>
+			checkoutPage.fillOutBillingForm(billingFormData)
+				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(enabled => assert.ok(enabled))
+			);
+
+		it('should redirect to the Place Order page after Billing saved', () =>
+			client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
+				.then(() => checkoutPage.getActiveBreadCrumb())
+				.then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 3: Place Order'))
+		);
+
+		it('should enable the Place Order button when Place Order page reached', () =>
+			client.isEnabled(checkoutPage.BTN_PLACE_ORDER)
+				.then(enabled => assert.ok(enabled))
+		);
+
+		it('should redirect to Order Confirmation page after a successful order submission', () =>
+			client.click(checkoutPage.BTN_PLACE_ORDER)
+				.then(() => checkoutPage.getLabelOrderConfirmation())
+				.then(title => assert.equal(title, 'Thank you for your order.'))
+		);
+	});
+
 });
