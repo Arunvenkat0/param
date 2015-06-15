@@ -39,10 +39,10 @@
 		<ul>
 		<isif condition="${(currentPage > 0) && (maxPage > 4)}">
 			<li class="first-last">
-				<a class="page-first" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><i class="fa fa-angle-double-left fa-lg"></i></a>
+				<a class="page-first" title="${Resource.msg('global.paginginformation.first.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><i class="fa fa-angle-double-left fa-lg"></i></a>
 			</li>
 			<li class="first-last">
-				<a class="page-previous" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><i class="fa fa-angle-left fa-lg"></i></a>
+				<a class="page-previous" title="${Resource.msg('global.paginginformation.previous.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><i class="fa fa-angle-left fa-lg"></i></a>
 			</li>
 		</isif>
 
@@ -51,10 +51,10 @@
 				<isif condition="${i.index != currentPage}">
 					<li>
 						<iscomment>This long line is needed to avoid extra whitespaces in the link text</iscomment>
-						<a class="page-<isprint value="${i.index + 1}" style="0"/>" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
+						<a class="page-<isprint value="${i.index + 1}" style="0"/>" title="${Resource.msgf('global.paginginformation.goto.label', 'locale', null, i.index + 1)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
 					</li>
 				<iselse/>
-					<li class="current-page">
+					<li class="current-page" title="${Resource.msgf('global.paginginformation.current.label', 'locale', null, i.index + 1)}">
 						<isprint value="${i.index + 1}" style="0"/>
 					</li>
 				</isif>
@@ -62,10 +62,10 @@
 
 			<isif condition="${(current < totalCount - pageSize) && (maxPage > 4)}">
 				<li class="first-last">
-					<a class="page-next" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><i class="fa fa-angle-right fa-lg"></i></a>
+					<a class="page-next" title="${Resource.msg('global.paginginformation.next.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><i class="fa fa-angle-right fa-lg"></i></a>
 				</li>
 				<li class="first-last">
-					<a class="page-last" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><i class="fa fa-angle-double-right fa-lg"></i></a>
+					<a class="page-last" title="${Resource.msg('global.paginginformation.last.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><i class="fa fa-angle-double-right fa-lg"></i></a>
 				</li>
 			</isif>
 		</isif>
