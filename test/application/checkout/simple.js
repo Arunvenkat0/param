@@ -126,5 +126,5 @@ describe('Checkout', () => {
 				.then(() => checkoutPage.getLabelOrderConfirmation())
 				.then(title => assert.equal(title, 'Thank you for your order.'));
 		});
-	})
+	});
 });

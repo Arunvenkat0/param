@@ -1,3 +1,5 @@
+'use strict';
+
 import client from '../../../webdriver/client';
 import * as testData from '../testData/main';
 
@@ -13,8 +15,8 @@ const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
  */
 export function loginAs (login, password) {
 	return client
-		.setValue(INPUT_EMAIL, DEFAULT_RETURNING_CUSTOMER)
-		.setValue(INPUT_PASSWORD, testData.defaultPassword)
+		.setValue(INPUT_EMAIL, login)
+		.setValue(INPUT_PASSWORD, password)
 		.click(BTN_LOGIN);
 }
 

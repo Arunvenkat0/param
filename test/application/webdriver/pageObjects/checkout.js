@@ -2,6 +2,7 @@
 
 import client from '../client';
 import config from '../config';
+import * as formTasks from './forms/tasks';
 
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
@@ -16,20 +17,6 @@ export function navigateTo (path = basePath) {
 
 export function pressBtnCheckoutAsGuest () {
 	return client.click('[name$="login_unregistered"]');
-}
-
-function _populateField (fieldType, selector, value) {
-	switch (fieldType) {
-		case 'input':
-			client.setValue(selector, value);
-			break;
-		case 'selectByValue':
-			client.selectByValue(selector, value);
-			break;
-		case 'selectByIndex':
-			client.selectByIndex(selector, value);
-			break;
-	}
 }
 
 export function fillOutShippingForm (shippingData) {
@@ -47,7 +34,7 @@ export function fillOutShippingForm (shippingData) {
 
 	for (var [key, value] of shippingData) {
 		var selector = '[name$="shippingAddress_addressFields_' + key + '"]';
-		_populateField(fieldTypeMap.get(key), selector, value);
+		formTasks.populateField(selector, value, fieldTypeMap.get(key));
 	}
 
 	return client;
@@ -80,7 +67,7 @@ export function fillOutBillingForm (billingFields) {
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		_populateField(fieldType, selector, value);
+		formTasks.populateField(selector, value, fieldType);
 	}
 	return client.pause(200);
 }
