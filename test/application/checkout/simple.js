@@ -114,7 +114,7 @@ describe('Checkout', () => {
 		);
 	});
 
-	describe.only('Checkout as Returning Customer', () => {
+	describe('Checkout as Returning Customer', () => {
 		before(() => addProductVariationMasterToCart());
 		before(() => checkoutPage.navigateTo());
 		before(() => formLogin.loginAsDefaultCustomer());
