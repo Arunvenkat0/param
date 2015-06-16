@@ -21,7 +21,7 @@
 &lt;p style="padding: 0px 10px;"&gt;10 % de remise pour tout achat de plus de 150 dollars&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;10% di sconto su tutti gli ordini superiori a $ 150&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;10% di sconto su tutti gli ordini superiori a € 150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;ご注文が $150 を超えると 10% 割引&lt;/p&gt;
@@ -185,7 +185,7 @@ Tutto è iniziato da una serie di osservazioni: le innovazioni del modello e-com
         关于 Demandware
     &lt;/h2&gt;
     &lt;p&gt;
-一系列结果向人们表明：eCommerce 销售和营销创新可以产生收益，而大多数企业都要将预算的 80% 拿出来仅仅true为了维持现有的基础设施。eCommerce 的发展步伐日新月异，而大多数企业还true原地踏步。。商家和营销人员感到无所适从，花费比实际销售和营销自己业务要多得多的时间来追逐外包供应商和内部 IT 组织。肯定有更好的办法。
+一系列结果向人们表明：eCommerce 销售和营销创新可以产生收益，而大多数企业都要将预算的 80% 拿出来仅仅是为了维持现有的基础设施。eCommerce 的发展步伐日新月异，而大多数企业还是原地踏步。。商家和营销人员感到无所适从，花费比实际销售和营销自己业务要多得多的时间来追逐外包供应商和内部 IT 组织。肯定有更好的办法。
     &lt;/p&gt;
 &lt;/div&gt;</body>
             </html>
@@ -265,7 +265,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             <html>
                 <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 dollars dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno $ 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を $500 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="电子产品满 500 美元即免费赠送 Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
             </html>
@@ -295,7 +295,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             <html>
                 <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 dollars dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno $ 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を $500 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="电子产品满 500 美元即免费赠送 Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
             </html>
@@ -650,10 +650,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300</body>
-                <body xml:lang="fr-FR">&lt;strong&gt;LIVRAISON GRATUITE en 2 jours&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 dollars</body>
-                <body xml:lang="it-IT">&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A $ 300</body>
-                <body xml:lang="ja-JP">&lt;strong&gt;無料 2 日配送&lt;/strong&gt; $300 を超える注文用</body>
-                <body xml:lang="zh-CN">&lt;strong&gt;免费 2 日快递&lt;/strong&gt; 超过 300 美元的订单</body>
+                <body xml:lang="fr-FR">&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 €</body>
+                <body xml:lang="it-IT">&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A € 300</body>
+                <body xml:lang="ja-JP">ご注文金額が $300 を超えると &lt;strong&gt;2 日配送が無料&lt;/strong&gt;</body>
+                <body xml:lang="zh-CN">超过 300 美元的订单&lt;strong&gt;免费 2 日送达&lt;/strong&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -679,7 +679,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
 &lt;p style="padding: 0px 10px;"&gt;Livraison gratuite par transport terrestre pour les commandes de plus de 150 dollars&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;Spedizione gratuita via terra per ordini superiori a $ 150&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;Spedizione gratuita via terra per ordini superiori a € 150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;注文金額が $150 を超えると通常配送料が無料&lt;/p&gt;
