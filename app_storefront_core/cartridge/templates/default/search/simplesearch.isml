@@ -3,6 +3,6 @@
 	<fieldset>
 		<label class="visually-hidden" for="q">${Resource.msg('global.searchcatalog', 'locale', null)}</label>
 		<input type="text" id="q" name="q" value="" placeholder="${Resource.msg('simplesearch.searchtext', 'search', null)}" />
-		<button type="submit"><i class="fa fa-search"></i></button>
+		<button type="submit"><span class="visually-hidden">${Resource.msg('global.search', 'locale', null)}</span><i class="fa fa-search"></i></button>
 	</fieldset>
 </form>

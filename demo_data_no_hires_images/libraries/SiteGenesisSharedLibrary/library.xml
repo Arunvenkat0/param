@@ -1953,7 +1953,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
                 &lt;h3&gt;Get special offers &amp; news on the latest styles&lt;/h3&gt;&#13;
                 &lt;form action="#" method="post" id="email-alert-signup"&gt;&#13;
                 &lt;input type="text" id="email-alert-address" class="input-text" placeholder="Enter Your Email" value="" /&gt;&#13;
-                &lt;button type="submit" name="home-email" value="Submit" Title="Submit" class="fa fa-envelope" /&gt;&lt;/button&gt;&#13;
+                &lt;button type="submit" name="home-email" value="Submit" Title="Submit" class="fa fa-envelope" /&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Submit&lt;/span&gt;&lt;/button&gt;&#13;
                 &lt;/form&gt;</custom-attribute>
         </custom-attributes>
     </content>
