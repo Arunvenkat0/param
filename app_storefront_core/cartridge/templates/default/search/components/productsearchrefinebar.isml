@@ -105,19 +105,19 @@
 							
 							<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
 								<li class="selected ${swatchID}">
-									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.selected.label','locale',null, RefinementValue.getDisplayValue())}">
+									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.selected.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
 										<isprint value="${RefinementValue.getDisplayValue()}">
 									</a>
 								</li>
 							<iselseif condition="${RefinementValue.hitCount == 0}">
 								<li class="unselectable ${swatchID}">
-									<a id="${swatchID}" title="${Resource.msgf('global.refinement.unselectable.label','locale',null, RefinementValue.getDisplayValue())}">
+									<a id="${swatchID}" title="${Resource.msgf('global.refinement.unselectable.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
 										<isprint value="${RefinementValue.getDisplayValue()}"/>
 									</a>
 								</li>
 							<iselse/>
 								<li class="${swatchID}">
-									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.label','locale',null, RefinementValue.getDisplayValue())}">
+									<a id="${swatchID}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
 										<isprint value="${RefinementValue.getDisplayValue()}"/>
 									</a>
 								</li>
