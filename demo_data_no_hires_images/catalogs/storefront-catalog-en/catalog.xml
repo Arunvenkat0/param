@@ -537,7 +537,7 @@
         <template>rendering/category/categorylanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
-            <page-title xml:lang="fr-FR">Nouveautés femme : chaussures, vêtements d'extérieur, vêtements et accessoires</page-title>
+            <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour femmes.</page-title>
             <page-title xml:lang="it-IT">Calzature, capispalla, abbigliamento e accessori donna</page-title>
             <page-title xml:lang="ja-JP">レディスフットウェア、アウターウェア、衣料、アクセサリー</page-title>
             <page-title xml:lang="zh-CN">女鞋、女装外套、女装及配件</page-title>
@@ -628,7 +628,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
-                        <display-name xml:lang="fr-FR">L</display-name>
+                        <display-name xml:lang="fr-FR">M</display-name>
                         <display-name xml:lang="it-IT">Lu</display-name>
                         <display-name xml:lang="ja-JP">月</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
@@ -676,7 +676,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -708,7 +708,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -764,7 +764,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -780,7 +780,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">9</display-name>
-                        <display-name xml:lang="fr-FR">9.</display-name>
+                        <display-name xml:lang="fr-FR">9</display-name>
                         <display-name xml:lang="it-IT">9</display-name>
                         <display-name xml:lang="ja-JP">9</display-name>
                         <display-name xml:lang="zh-CN">9</display-name>
@@ -804,7 +804,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">11</display-name>
-                        <display-name xml:lang="fr-FR">11.</display-name>
+                        <display-name xml:lang="fr-FR">11</display-name>
                         <display-name xml:lang="it-IT">11</display-name>
                         <display-name xml:lang="ja-JP">11</display-name>
                         <display-name xml:lang="zh-CN">11</display-name>
@@ -828,7 +828,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -1426,7 +1426,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -1440,7 +1440,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -1454,7 +1454,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -1805,7 +1805,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -1819,7 +1819,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -1833,7 +1833,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -2177,7 +2177,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -2191,7 +2191,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -2205,7 +2205,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -2703,7 +2703,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -2719,7 +2719,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">9</display-name>
-                        <display-name xml:lang="fr-FR">9.</display-name>
+                        <display-name xml:lang="fr-FR">9</display-name>
                         <display-name xml:lang="it-IT">9</display-name>
                         <display-name xml:lang="ja-JP">9</display-name>
                         <display-name xml:lang="zh-CN">9</display-name>
@@ -2743,7 +2743,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">11</display-name>
-                        <display-name xml:lang="fr-FR">11.</display-name>
+                        <display-name xml:lang="fr-FR">11</display-name>
                         <display-name xml:lang="it-IT">11</display-name>
                         <display-name xml:lang="ja-JP">11</display-name>
                         <display-name xml:lang="zh-CN">11</display-name>
@@ -3268,7 +3268,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
-                        <display-name xml:lang="fr-FR">L</display-name>
+                        <display-name xml:lang="fr-FR">M</display-name>
                         <display-name xml:lang="it-IT">Lu</display-name>
                         <display-name xml:lang="ja-JP">月</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
@@ -4492,17 +4492,17 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Men's, Women's, Kid's and Electronics Sales</page-title>
-            <page-title xml:lang="fr-FR">Soldes homme, femme et enfant</page-title>
+            <page-title xml:lang="fr-FR">Soldes hommes, femmes, enfants et produits électroniques</page-title>
             <page-title xml:lang="it-IT">Vendita uomo, donna, bambino</page-title>
             <page-title xml:lang="ja-JP">メンズ、レディース、キッズセール</page-title>
             <page-title xml:lang="zh-CN">男士、女士及儿童促销产品</page-title>
             <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, Kid's and Electronics departments at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme et enfant de Demandware.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme, enfant et produits électroniques de Demandware.</page-description>
             <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna e Bambino presso Demandware.</page-description>
             <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズコーナーでディスカウントアイテムをご購入ください。</page-description>
             <page-description xml:lang="zh-CN">在 Demandware 的男士、女士及儿童促销产品部，选购所有的折扣商品。</page-description>
             <page-keywords xml:lang="x-default">sale, sales. mens, womens, kids, electronics</page-keywords>
-            <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, enfant</page-keywords>
+            <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, enfant, produits électroniques</page-keywords>
             <page-keywords xml:lang="it-IT">vendita, vendite. uomo, donna, bambino</page-keywords>
             <page-keywords xml:lang="ja-JP">セール、セール、メンズ、レディース、キッズ</page-keywords>
             <page-keywords xml:lang="zh-CN">促销、折扣、男士、女士、儿童</page-keywords>
@@ -4612,7 +4612,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
-                        <display-name xml:lang="fr-FR">L</display-name>
+                        <display-name xml:lang="fr-FR">M</display-name>
                         <display-name xml:lang="it-IT">Lu</display-name>
                         <display-name xml:lang="ja-JP">月</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
@@ -4660,7 +4660,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -4692,7 +4692,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -4724,7 +4724,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -4884,7 +4884,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -4900,7 +4900,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">9</display-name>
-                        <display-name xml:lang="fr-FR">9.</display-name>
+                        <display-name xml:lang="fr-FR">9</display-name>
                         <display-name xml:lang="it-IT">9</display-name>
                         <display-name xml:lang="ja-JP">9</display-name>
                         <display-name xml:lang="zh-CN">9</display-name>
@@ -4924,7 +4924,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">11</display-name>
-                        <display-name xml:lang="fr-FR">11.</display-name>
+                        <display-name xml:lang="fr-FR">11</display-name>
                         <display-name xml:lang="it-IT">11</display-name>
                         <display-name xml:lang="ja-JP">11</display-name>
                         <display-name xml:lang="zh-CN">11</display-name>
@@ -5503,7 +5503,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
-                        <display-name xml:lang="fr-FR">L</display-name>
+                        <display-name xml:lang="fr-FR">M</display-name>
                         <display-name xml:lang="it-IT">Lu</display-name>
                         <display-name xml:lang="ja-JP">月</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
@@ -5578,7 +5578,7 @@
                 <bucket-definitions>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">3</display-name>
-                        <display-name xml:lang="fr-FR">3.</display-name>
+                        <display-name xml:lang="fr-FR">3</display-name>
                         <display-name xml:lang="it-IT">3</display-name>
                         <display-name xml:lang="ja-JP">3</display-name>
                         <display-name xml:lang="zh-CN">3</display-name>
@@ -5592,7 +5592,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -5648,7 +5648,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -5662,7 +5662,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">9</display-name>
-                        <display-name xml:lang="fr-FR">9.</display-name>
+                        <display-name xml:lang="fr-FR">9</display-name>
                         <display-name xml:lang="it-IT">9</display-name>
                         <display-name xml:lang="ja-JP">9</display-name>
                         <display-name xml:lang="zh-CN">9</display-name>
@@ -5690,7 +5690,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">11</display-name>
-                        <display-name xml:lang="fr-FR">11.</display-name>
+                        <display-name xml:lang="fr-FR">11</display-name>
                         <display-name xml:lang="it-IT">11</display-name>
                         <display-name xml:lang="ja-JP">11</display-name>
                         <display-name xml:lang="zh-CN">11</display-name>
@@ -5704,7 +5704,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
@@ -5871,7 +5871,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">4</display-name>
-                        <display-name xml:lang="fr-FR">4.</display-name>
+                        <display-name xml:lang="fr-FR">4</display-name>
                         <display-name xml:lang="it-IT">4</display-name>
                         <display-name xml:lang="ja-JP">4</display-name>
                         <display-name xml:lang="zh-CN">4</display-name>
@@ -5885,7 +5885,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">8</display-name>
-                        <display-name xml:lang="fr-FR">8.</display-name>
+                        <display-name xml:lang="fr-FR">8</display-name>
                         <display-name xml:lang="it-IT">8</display-name>
                         <display-name xml:lang="ja-JP">8</display-name>
                         <display-name xml:lang="zh-CN">8</display-name>
@@ -5899,7 +5899,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">12</display-name>
-                        <display-name xml:lang="fr-FR">12.</display-name>
+                        <display-name xml:lang="fr-FR">12</display-name>
                         <display-name xml:lang="it-IT">12</display-name>
                         <display-name xml:lang="ja-JP">12</display-name>
                         <display-name xml:lang="zh-CN">12</display-name>
