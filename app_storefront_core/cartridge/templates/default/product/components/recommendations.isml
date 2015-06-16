@@ -115,8 +115,8 @@
 					<iscomment>Restore the Product instance</iscomment>
 					<isset name="Product" value="${pdict.mainProduct}" scope="pdict"/>
 				</ul>
-				<a class="jcarousel-nav jcarousel-prev" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
-				<a class="jcarousel-nav jcarousel-next" href="${'#'}"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
+				<a class="jcarousel-nav jcarousel-prev"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
+				<a class="jcarousel-nav jcarousel-next"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
 			</div>
 		</isif>
 	</div>
