@@ -1,0 +1,84 @@
+'use strict'
+
+import client from '../client';
+import config from '../config';
+import * as formTasks from './forms/tasks';
+
+export const CSS_SHARE_LINK = '.share-link';
+export const USE_PRE_EVENT = '.usepreevent';
+
+const basePath = '/giftregistry';
+
+var configUrl = config.url;
+
+export function navigateTo (path = basePath) {
+	return client.url(config.url + path);
+}
+
+export function pressBtnNewRegistry () {
+	return client.click('[name$="giftregistry_create"]');
+}
+
+export function pressBtnContinueEventForm () {
+	return client.click('[name$="giftregistry_event_confirm"]');
+}
+
+export function pressBtnContinueEventAddressForm () {
+	return client.click('[name$="giftregistry_eventaddress_confirm"]');
+}
+
+export function pressBtnMakeRegistryPublic () {
+	return client.click('[name$="giftregistry_setPublic"]');
+}
+
+export function pressBtnUsePreEventShippingAddress () {
+	return client.click(USE_PRE_EVENT);
+}
+
+export function clickLinkIcon () {
+	return client.click(CSS_SHARE_LINK);
+}
+
+export function fillOutEventForm (eventData) {
+	var fieldTypeMap = new Map();
+
+	fieldTypeMap.set('type', 'selectByValue');
+	fieldTypeMap.set('name', 'input');
+	fieldTypeMap.set('date', 'input');
+	fieldTypeMap.set('eventaddress_country', 'selectByValue');
+	fieldTypeMap.set('eventaddress_states_state', 'selectByValue');
+	fieldTypeMap.set('town', 'input');
+	fieldTypeMap.set('participant_role', 'selectByValue');
+	fieldTypeMap.set('participant_firstName', 'input');
+	fieldTypeMap.set('participant_lastName', 'input');
+	fieldTypeMap.set('participant_email', 'input');
+
+	for (var [key, value] of eventData) {
+		var selector = '[name$="event_' + key + '"]';
+		formTasks.populateField(selector, value, fieldTypeMap.get(key));
+	}
+
+	return client;
+}
+
+export function fillOutEventShippingForm (eventShippingData) {
+	var fieldMapType = new Map();
+
+	fieldMapType.set('firstname', 'input');
+	fieldMapType.set('lastname', 'input');
+	fieldMapType.set('address1', 'input');
+	fieldMapType.set('address2', 'input');
+	fieldMapType.set('country', 'selectByValue');
+	fieldMapType.set('states_state', 'selectByValue');
+	fieldMapType.set('city', 'input');
+	fieldMapType.set('postal', 'input');
+	fieldMapType.set('phone', 'input');
+
+	for (var [key, value] of eventShippingData) {
+		var selector = '[name$="giftregistry_eventaddress_addressBeforeEvent_' + key + '"]';
+		formTasks.populateField(selector, value, fieldMapType.get(key));
+	}
+
+	return client;
+}
+
