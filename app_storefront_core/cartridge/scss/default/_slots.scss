@@ -139,7 +139,10 @@
 		}
 		.banner-message {
 			position: absolute;
-			top: 2%;
+			top: 10%;
+			@media screen and (min-width: 768px) {
+				top: 2%;
+			}
 			.banner-text1 {
 				font-family: $sans-serif-alt;
 				font-size: 2rem;
