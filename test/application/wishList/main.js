@@ -5,6 +5,8 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import * as wishListPage from '../webdriver/pageObjects/wishlist';
 import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
+import * as cartPage from '../webdriver/pageObjects/cart';
+import * as accountPage from '../webdriver/pageObjects/account';
 
 describe('Wishlist', () => {
 	let socialLinks = {
@@ -119,6 +121,67 @@ describe('Wishlist', () => {
 					assert.ok(href.match(socialLinks.shareLinkUrl.regex));
 				})
 		);
+	});
+
+	describe('Gift Certificates',() => {
+		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
+		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
+		var formGiftCertPurchase = '.gift-certificate-purchase';
+		var isGiftCertAdded;
+		var fieldMap = {
+			from: {
+				selector: 'input[id$="giftcert_purchase_from"]'
+			},
+			recipient: {
+				selector: 'input[id$="giftcert_purchase_recipient"]',
+				value: 'Joe Smith'
+
+			},
+			recipientEmail: {
+				selector: 'input[id$="giftcert_purchase_recipientEmail"]',
+				value: 'jsmith@someBogusEmailDomain.tv'
+			},
+			confirmecipientEmail: {
+				selector: 'input[id$="giftcert_purchase_confirmRecipientEmail"]',
+				value: 'jsmith@someBogusEmailDomain.tv'
+			},
+			message: {
+				selector: 'textarea[id$="purchase_message"]',
+				value: 'Congratulations!'
+			},
+			amount: {
+				selector: 'input[id$="purchase_amount"]',
+				value: 250
+			}
+		};
+
+		before(() => accountPage.navigateTo());
+		before(() => loginForm.loginAsDefaultCustomer());
+		before(() => cartPage.emptyCart());
+		before(() => wishListPage.navigateTo());
+
+		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
+			return client.isExisting(giftCertItemSelector)
+				.then(exists => {
+					if (!exists) {
+						wishListPage.clickAddGiftCertButton();
+					}
+				})
+				.then(() => client.click(btnGiftCertAddToCart))
+				.then(() => client.url())
+				.then(url => assert.isTrue(url.value.endsWith('giftcertpurchase')));
+		});
+
+		it('should automatically populate the Your Name field', () => {
+			let defaultCustomer;
+			return testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER)
+				.then(customer => defaultCustomer = customer)
+				.then(() => client.getValue(fieldMap.from.selector))
+				.then(from => {
+					let expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
+					assert.equal(from, expectedYourName);
+				});
+		});
 	});
 });
 
