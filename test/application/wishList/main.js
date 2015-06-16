@@ -35,7 +35,8 @@ describe('Wishlist', () => {
 		 	selector: wishListPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
-			selector: '.share-link-content.active'
+			selector: '.share-link-content.active',
+			baseUrl: wishListPage.configUrl
 		}
 
 	};
@@ -81,11 +82,12 @@ describe('Wishlist', () => {
 	});
 
 	it('should display a link icon then link', () => {
-		// make sure that icon is there
 		assert.ok(client.isExisting(socialLinksMap.shareLinkIcon.selector));
-		return wishListPage.linkActive()
+		return wishListPage.clickLinkIcon()
 			.then( () => {
-				assert.ok(client.isExisting(socialLinksMap.shareLinkUrl.selector))
+				assert.ok(client.isExisting(socialLinksMap.shareLinkUrl.selector));
+				return client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href')
+				.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)));
 			});
 	});
 
