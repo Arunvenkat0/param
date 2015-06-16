@@ -14,8 +14,8 @@
 			</li>
 		</isloop>
 	</ul>
-	<a class="jcarousel-nav jcarousel-prev" href="${'#'}">${Resource.msg('global.previous.abbr', 'locale', null)}</a>
-	<a class="jcarousel-nav jcarousel-next" href="${'#'}">${Resource.msg('global.next', 'locale', null)}</a>
+	<a class="jcarousel-nav jcarousel-prev">${Resource.msg('global.previous.abbr', 'locale', null)}</a>
+	<a class="jcarousel-nav jcarousel-next">${Resource.msg('global.next', 'locale', null)}</a>
 </div>
 
 <!-- END: verticalcarousel -->
