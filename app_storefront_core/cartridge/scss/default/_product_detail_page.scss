@@ -128,14 +128,6 @@
 			padding: 0;
 		}
 	}
-
-	.product-add-to-cart {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
-		clear: both;
-		margin: 1em 0;
-		overflow: hidden;
-		padding: 1.5em 0;
-	}
 }
 
 .product-variations,
@@ -252,35 +244,49 @@
 }
 
 .pdp-main .product-add-to-cart {
+	border-bottom: 1px solid $very-light-gray;
+	border-top: 1px solid $very-light-gray;
+	margin: 0;
+	padding: 1em 0.5em;
+ 	overflow: hidden;
 	.inventory {
 		float: left;
-		margin-top: 0.3em;
-		width: 15%;
+		white-space: nowrap;
 		label {
-			margin-top: 0.3em;
+			display: inline;
+			float: none;
+			text-align: right;
 		}
 		input {
-			margin-left: 0.8em;
-			padding: 0.3em;
-			width: 2em;
+			font-size: 1.5em;
+			height: 50px;
+			width: 50px;
+			margin-right: 0.4em;
+			text-align: center;
+			@media screen and (min-width: 768px) {
+				height: 37px;
+				width: 37px;
+			}
 		}
 	}
 	.product-price {
-		float: left;
-		font-size: 2.2em;
+		font-size: 2em;
 		margin: 0;
+		padding-bottom: .5em;
 		text-align: right;
-		width: 47%;
 	}
 	button {
-		float: right;
-		width: 35%;
+		height: 50px;
+		white-space: nowrap;
+		width: 50%;
+		@media screen and (min-width: 768px) {
+			height: 37px;
+		}
 	}
 }
 
 .pdp-main {
 	.product-actions {
-		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
 		padding: 1.5em 0;
 		a {
 			margin-left: .7em;
@@ -375,24 +381,12 @@
 		z-index: 100;
 	}
 	.promotion {
-		background: url("../images/interface/ui-promo-bg-gray-diag.png") repeat scroll 0 0 transparent;
-		clear: both;
+		border-top: 1px solid #ccc;
 		margin: 1em 0;
-		padding: 4%;
-		.promotion-title {
-			color: $nobel;
-			display: inline-block;
-			font-size: 1.5em;
-			line-height: 1em;
-			text-transform: uppercase;
-			vertical-align: top;
-			width: 20%;
-		}
+		overflow: hidden;
+		padding: 1.5em 1.5em .7em 1.5em;
 		.promotion-callout {
-			display: inline-block;
-			line-height: 1em;
-			vertical-align: top;
-			width: 77%;
+			color: $rain-forest;
 		}
 	}
 	.product-tabs {
@@ -450,9 +444,6 @@
 			margin: 0;
 			width: auto;
 		}
-		.promotion-title {
-			font-size: 1.2em;
-		}
 		.block-add-to-cart {
 			background: none repeat scroll 0 0 $white-smoke;
 			clear: both;
@@ -487,21 +478,6 @@
 				padding-right: 1em;
 			}
 		}
-	}
-	.product-set .product-add-to-cart .product-price {
-		width: 54%;
-	}
-}
-
-button {
-	&.add-to-cart[disabled] {
-		opacity: 0.5;
-	}
-	&.add-all-to-cart {
-		&[disabled] {
-			opacity: 0.5;
-		}
-		display: none;
 	}
 }
 

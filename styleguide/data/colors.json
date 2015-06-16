@@ -29,9 +29,6 @@
 	"name": "$nobel",
 	"code": "#999"
 }, {
-	"name": "$pacific-blue",
-	"code": "#00a4e4"
-}, {
 	"name": "$rain-forest",
 	"code": "#64772d"
 }, {
@@ -40,6 +37,9 @@
 }, {
 	"name": "$stark-white",
 	"code": "#cebdb3"
+}, {
+	"name": "$teal",
+	"code": "#008578"
 }, {
 	"name": "$tutu",
 	"code": "#faeded"
