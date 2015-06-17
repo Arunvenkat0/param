@@ -13,12 +13,27 @@
 
 	<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.httpsContinue()}" class="form-horizontal" method="post" id="newcreditcard">
 		<fieldset>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" maxlength="40" size="40" attribute1="autocomplete" value1="off"/>
+			<isscript>
+				var ownerAttributes = {
+					maxlength: 40,
+					size: 40,
+					autocomplete: 'off'
+				};
+				var numberAttributes = {
+					maxlength: 16,
+					size: 17,
+					autocomplete: 'off'
+				};
+			</isscript>
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" custom="${ownerAttributes}" />
 			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.type}" type="select"/>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" dynamicname="true" type="input" maxlength="16" size="17" attribute1="autocomplete" value1="off"/>
-			<div class="form-label-text"><span class="required-indicator">&#8226; </span>${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}</div>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.month}" rowclass="month" type="select"/>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.year}" rowclass="year" type="select"/>
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" dynamicname="true" type="input" custom="${numberAttributes}"/>
+			<div class="form-label-text">
+				<span class="required-indicator">&#8226; </span>
+				${Resource.msg('account.paymentinstrumentdetails.expires','account',null)}
+			</div>
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.month}" type="select"/>
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.year}" type="select"/>
 			<div class="form-row form-row-button">
 				<button id="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
 					${Resource.msg('global.apply', 'locale', null)}
