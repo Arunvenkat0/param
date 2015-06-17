@@ -2103,111 +2103,306 @@ To redeem a gift certificate, provide the card’s 16-digit number code on the b
         </folder-links>
     </content>
 
-    <content content-id="home-bottom-center">
-        <display-name xml:lang="x-default">Home Bottom Center</display-name>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;Free Shipping&lt;/h2&gt;&#13;
-&lt;p&gt;Get free shipping on orders more that $130&lt;/p&gt;&#13;
-&lt;/div&gt;</custom-attribute>
-        </custom-attributes>
-    </content>
-
-    <content content-id="home-bottom-left">
-        <display-name xml:lang="x-default">Home Bottom Left</display-name>
-        <description xml:lang="x-default">First slot on the left below home page Flash/jQuery scroller</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div id="home-promo-shop-shoes"&gt;&#13;
-	&lt;h2&gt;Shop Shoes&lt;/h2&gt;&#13;
-	&lt;ul&gt;&#13;
-		&lt;li&gt;&lt;span&gt;Shoes:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Heels&lt;/a&gt;&lt;/li&gt;&#13;
-		&lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
-		&lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
-	&lt;/ul&gt;&#13;
-&lt;/div&gt;</custom-attribute>
-        </custom-attributes>
-    </content>
-
-    <content content-id="home-bottom-right">
-        <display-name xml:lang="x-default">Home Bottom Right</display-name>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img height="413" width="320" alt="" src="images/homepage/home_bottom_right.png?$staticlink$" /&gt;</custom-attribute>
-        </custom-attributes>
-    </content>
-
     <content content-id="home-cycle">
-        <display-name xml:lang="x-default">Home Cycle Data</display-name>
-        <description xml:lang="x-default">images/homepage/img01.jpg?$staticlink$</description>
+        <display-name xml:lang="x-default">Home Page Carousel Slot Content</display-name>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;ul id="homepage-slides"&gt;&#13;
-	&lt;li class="slide"&gt;&#13;
-		&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
-			&lt;img src="images/homepage/banners_homepage_05a.jpg?$staticlink$" alt="Spring Arrivals"/&gt;&#13;
-			&lt;h2&gt;Spring New Arrivals&lt;/h2&gt;&#13;
-			&lt;span&gt;Shop Collection&lt;/span&gt;&#13;
-		&lt;/a&gt;&#13;
-	&lt;/li&gt;&#13;
-	&lt;li class="slide"&gt;&#13;
-		&lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
-			&lt;img src="images/homepage/banners_homepage_05b.jpg?$staticlink$" alt="Perfect Companion"/&gt;&#13;
-			&lt;h2&gt;The Perfect Companion&lt;/h2&gt;&#13;
-			&lt;span&gt;Shop Accessories&lt;/span&gt;&#13;
-		&lt;/a&gt;&#13;
-	&lt;/li&gt;&#13;
-	&lt;li class="slide"&gt;&#13;
-		&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
-			&lt;img src="images/homepage/banners_homepage_05c.jpg?$staticlink$" alt="Mens Suits"/&gt;&#13;
-			&lt;h2&gt;Men's Suits&lt;/h2&gt;&#13;
-			&lt;span&gt;Shop Now&lt;/span&gt;&#13;
-		&lt;/a&gt;&#13;
-	&lt;/li&gt;&#13;
-	&lt;li class="slide"&gt;&#13;
-		&lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
-			&lt;img src="images/homepage/banners_homepage_05d.jpg?$staticlink$" alt="Womens Dresses"/&gt;&#13;
-			&lt;h2&gt;Women's Dresses&lt;/h2&gt;&#13;
-			&lt;span&gt;20% off this week only&lt;/span&gt;&#13;
-		&lt;/a&gt;&#13;
-	&lt;/li&gt;&#13;
-	&lt;li class="slide"&gt;&#13;
-		&lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
-			&lt;img src="images/homepage/banners_homepage_05e.jpg?$staticlink$" alt="Summer Shoes"/&gt;&#13;
-			&lt;h2&gt;Flip into Summer&lt;/h2&gt;&#13;
-			&lt;span&gt;Shop Summer Shoes&lt;/span&gt;&#13;
-		&lt;/a&gt;&#13;
-	&lt;/li&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Mens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Suits&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;The&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Perfect Companion&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Womens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Shoes&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Women's Shoes"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Womens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Dresses&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;Spring&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;New Arrivals&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr">&lt;ul id="homepage-slides"&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Pour Des Hommes&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Suits&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Le&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;compagnon idéal&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Des Femmes&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt; Chaussures &lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Des Femmes Chaussures"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Des Femmes&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Robes&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;le printemps&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;nouvelles Arrivées&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it">&lt;ul id="homepage-slides"&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Uomo&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Abiti&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;il&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Perfect Companion&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Da Donna&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Scarpe&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Summer Shoes"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Da Donna&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Abiti&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;la primavera&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Nuovi Arrivi&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja">&lt;ul id="homepage-slides"&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;メンズ&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;スーツ&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;ファッションの&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;必需品&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="ファッションの必需品"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;レディース&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;シューズ&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Summer Shoes"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;レディース&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;ファッション&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;春 新着&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;ファッション&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh">&lt;ul id="homepage-slides"&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;男士西装&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;最佳服装配饰&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;女士鞋类&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Summer Shoes"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;女士连衣裙&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;春季新货到场&lt;/div&gt;&#13;
+        &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
-    <content content-id="home-main">
-        <display-name xml:lang="x-default">Home Main</display-name>
-        <description xml:lang="x-default">Container for Home Page Flash Carousel</description>
+    <content content-id="home-free-shipping-orders-over-150">
+        <display-name xml:lang="x-default">Free Ground Shipping on orders of $150 or more</display-name>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
-        <folder-links>
-            <classification-link folder-id="home-page"/>
-        </folder-links>
-    </content>
-
-    <content content-id="home-right">
-        <display-name xml:lang="x-default">HOME_RIGHT</display-name>
-        <description xml:lang="x-default">Place holder for Product Scroller</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping for order over $150" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Free&lt;/h1&gt;&#13;
+&lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
+&lt;h3&gt;on orders of $150 or more&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr">&lt;img alt="Free Shipping for order over $150" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Gratis&lt;/h1&gt;&#13;
+&lt;h2&gt;rez-de- port&lt;/h2&gt;&#13;
+&lt;h3&gt;sur les commandes de 150 $ ou plus&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it">&lt;img alt="Free Shipping for order over $150" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Gratuito&lt;/h1&gt;&#13;
+&lt;h2&gt;trasporto al suolo&lt;/h2&gt;&#13;
+&lt;h3&gt;su ordini pari $ 150 o più&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja">&lt;img alt="Free Shipping for order over $150" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;フリー&lt;/h1&gt;&#13;
+&lt;h2&gt;地上配送&lt;/h2&gt;&#13;
+&lt;h3&gt;150ドル以上のご注文で&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh">&lt;img alt="Free Shipping for order over $150" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h2&gt;凡购满$150美元以上&lt;/h2&gt;&#13;
+&lt;h3&gt;免平寄邮费&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+        </custom-attributes>
     </content>
 
     <content content-id="inactive-source-code">
@@ -3994,6 +4189,61 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
         <folder-links>
             <classification-link folder-id="size-charts"/>
         </folder-links>
+    </content>
+
+    <content content-id="home-bottom-womens-shoes">
+        <display-name xml:lang="x-default">Shop Women's Shoes</display-name>
+        <description xml:lang="x-default">First slot on the left below home page Flash/jQuery scroller</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1&gt;Shop&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Shoes:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Heels&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr">&lt;h1&gt;Boutique&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Chaussures&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Talons&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Les Trotteurs&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ouvrir Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Boutique"&gt;&lt;img alt="Boutique" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it">&lt;h1&gt;Negozio&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Scarpe&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Tacchi&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Scarpe"&gt;&lt;img alt="Scarpe" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja">&lt;h1&gt;ショップ&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;シューズ&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;踵&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラッツ&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントウ&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh">&lt;h1&gt;购买&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;鞋类&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;高跟鞋&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底鞋&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;开口凉鞋&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="购买"&gt;&lt;img alt="购买" src="https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+        </custom-attributes>
     </content>
 
 </library>
