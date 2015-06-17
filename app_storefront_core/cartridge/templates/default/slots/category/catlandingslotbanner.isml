@@ -12,7 +12,7 @@
 				<iselse/>
 					<!-- No Image Found Blank -->
 				</isif>
-				<span class="visually-hidden">${category.displayName)}</span>
+				<span class="visually-hidden">${category.displayName}</span>
 			</a>					
 		</isloop>
 	</div>
