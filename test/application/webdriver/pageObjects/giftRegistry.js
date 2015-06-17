@@ -9,7 +9,7 @@ export const USE_PRE_EVENT = '.usepreevent';
 
 const basePath = '/giftregistry';
 
-var configUrl = config.url;
+export const configUrl = config.url;
 
 export function navigateTo (path = basePath) {
 	return client.url(config.url + path);

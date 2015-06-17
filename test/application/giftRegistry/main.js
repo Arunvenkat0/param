@@ -33,14 +33,14 @@ describe('giftRegistry', () => {
 			baseUrl: 'https://www.pinterest.com/pin/create/button/'
 		},
 		emailLink: {
-			selector: 'a[data-share=emaillink]',
+			selector: 'a[data-share=email]',
 			baseUrl: 'mailto:name@email.com'
 		},
 		shareLinkIcon: {
 		 	selector: giftRegistryPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
-			selector: '.share-link-content.active',
+			selector: '.share-link-content.active a',
 			baseUrl: giftRegistryPage.configUrl
 		}
 	};
@@ -107,58 +107,52 @@ describe('giftRegistry', () => {
 		.then(visible => assert.isTrue(visible))
 	);
 	
-	// it('should display a Facebook icon and link', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.facebook.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist))
-	// 		.then(() => client.getAttribute(socialLinksMap.facebook.selector, 'href'))
-	// 		.then(href => assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl)));
-	// });
+	it('should display a Facebook icon and link', () => 
+		client.isExisting(socialLinksMap.facebook.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.facebook.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl)))
+	);
 
-	// it('should display a Twitter icon and link', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.twitter.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist))
-	// 		.then(() => client.getAttribute(socialLinksMap.twitter.selector, 'href'))
-	// 		.then(href => assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl)));
-	// });
+	it('should display a Twitter icon and link', () => 
+		client.isExisting(socialLinksMap.twitter.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.twitter.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl)))
+	);
 
-	// it('should display a Google Plus icon and link', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.googlePlus.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist))
-	// 		.then(() => client.getAttribute(socialLinksMap.googlePlus.selector, 'href'))
-	// 		.then(href => assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl)));
-	// });
+	it('should display a Google Plus icon and link', () => 
+		client.isExisting(socialLinksMap.googlePlus.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.googlePlus.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl)))
+	);
 
-	// it('should display a Pinterest icon and link', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.pinterest.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist))
-	// 		.then(() => client.getAttribute(socialLinksMap.pinterest.selector, 'href'))
-	// 		.then(href => assert.isTrue(href.startsWith(socialLinksMap.pinterest.baseUrl)));
-	// });
+	it('should display a Pinterest icon and link', () => 
+		client.isExisting(socialLinksMap.pinterest.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.pinterest.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.pinterest.baseUrl)))
+	);
 
-	// it('should display a Mail icon and link', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.emailLink.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist))
-	// 		.then(() => client.getAttribute(socialLinksMap.emailLink.selector, 'href'))
-	// 		.then(href => assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl)));
-	// });
+	it('should display a Mail icon and link', () => 
+		client.isExisting(socialLinksMap.emailLink.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.emailLink.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl)))
+	);
 
-	// it('should display a link icon', () => {
-	// 	var isLinkExists = false;
-	// 	return client.isExisting(socialLinksMap.shareLinkIcon.selector)
-	// 		.then(doesExist => assert.isTrue(doesExist));
-	// });
+	it('should display a link icon', () => 
+		client.isExisting(socialLinksMap.shareLinkIcon.selector)
+			.then(doesExist => assert.isTrue(doesExist))
+	);
 
-	it('should display a link', () => {
-		var isLinkExists = false;
-		return giftRegistryPage.clickLinkIcon()
-			return client.isExisting(socialLinksMap.shareLinkUrl.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
-				.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)));
-	});
+	it('should display a link', () => 
+		giftRegistryPage.clickLinkIcon()
+			.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
+			.then(doesExist => assert.isTrue(doesExist))
+			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
+			.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)))
+	);
+
 });
