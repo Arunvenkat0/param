@@ -45,9 +45,13 @@ describe('giftRegistry', () => {
 		}
 	};
 
-	before(() => client.init());
+	before(() => client.init()
+		.then(() => giftRegistryPage.navigateTo())
+		.then(() => loginForm.loginAsDefaultCustomer())
+		.then(() => giftRegistryPage.pressBtnNewRegistry())
+	);
 
-	after(() => client.end());
+	
 
 	before(() => {
 		return testData.getCustomerByLogin(login)
@@ -78,42 +82,30 @@ describe('giftRegistry', () => {
 			});
 	});
 
-	before(() => giftRegistryPage.navigateTo());
+	after(() => client.end());
 
-	before(() => loginForm.loginAsDefaultCustomer());
-
-	before(() => giftRegistryPage.pressBtnNewRegistry());
-	
 	it('should fill out the event form', () =>
 		giftRegistryPage.fillOutEventForm(eventFormData)
 			.then(() => client.isEnabled('[name$="giftregistry_event_confirm"]'))
 			.then(enabled => assert.ok(enabled))
 	);
 
-	it('should fill out the event before shipping form', () =>
+	it('should fill out the event shipping form', () =>
 		giftRegistryPage.pressBtnContinueEventForm()
-		.then(() => client.waitForExist('form[name$="giftregistry"]'))
 		.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
-	);
-
-	it('should fill out the event after shipping form', () =>
-		giftRegistryPage.pressBtnUsePreEventShippingAddress()
+		.then(() => giftRegistryPage.pressBtnUsePreEventShippingAddress())
 		.then(() => client.isEnabled('[name$="giftregistry_eventaddress_confirm"]'))
 		.then(enabled => assert.ok(enabled))
 	);
 
-	it('should submit the form', () =>
+	it('should display the event information', () =>
 		giftRegistryPage.pressBtnContinueEventAddressForm()
 		.then(() => client.waitForExist('form[name$="giftregistry_enevt_confirm"]'))
-		.then(() => giftRegistryPage.pressBtnContinueEventForm)
-		//.then(() => client.pause(5000))
+		.then(() => giftRegistryPage.pressBtnContinueEventForm())
+		.then(() => giftRegistryPage.pressBtnMakeRegistryPublic())
+		.then(() => client.isVisible('[class$="share-options"]'))
+		.then(visible => assert.isTrue(visible))
 	);
-
-	it('should make the registry public', () =>
-		giftRegistryPage.pressBtnMakeRegistryPublic()
-	);
-
-
 	
 	// it('should display a Facebook icon and link', () => {
 	// 	var isLinkExists = false;
@@ -161,12 +153,12 @@ describe('giftRegistry', () => {
 	// 		.then(doesExist => assert.isTrue(doesExist));
 	// });
 
-	// it('should display a link', () => {
-	// 	var isLinkExists = false;
-	// 	return wishListPage.clickLinkIcon()
-	// 		return client.isExisting(socialLinksMap.shareLinkUrl.selector)
-	// 			.then(doesExist => assert.isTrue(doesExist))
-	// 			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
-	// 			.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)));
-	// });
+	it('should display a link', () => {
+		var isLinkExists = false;
+		return giftRegistryPage.clickLinkIcon()
+			return client.isExisting(socialLinksMap.shareLinkUrl.selector)
+				.then(doesExist => assert.isTrue(doesExist))
+				.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
+				.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)));
+	});
 });
