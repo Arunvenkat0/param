@@ -38,7 +38,6 @@ var inputElementTypes = [
  * @param {Boolean} pdict.formfield.mandatory - indicate whether the field is mandatory
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
- * @param {String} pdict.htmlName - name of the input element, used if `dynamicname` is not truthy
  * @param {Object} pdict.attributes - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
  * @return {Object} input object that contains `element`, `rowClass`, `label`, `input`, `caption`
  */
@@ -184,16 +183,16 @@ module.exports = function (pdict) {
 	// help text
 	var helplabel = '';
 	var helpcontent = '';
-	if (pdict.helpcid && pdict.helplabel) {
-		if (typeof pdict.helplabel === 'string') {
-			helplabel = pdict.helplabel;
-		} else if (typeof pdict.helplabel === 'object') {
-			if (pdict.helplabel.property && pdict.helplabel.file) {
-				helplabel = Resource.msg(pdict.helplabel.property, pdict.helplabel.file, null);
+	if (pdict.help) {
+		if (typeof pdict.help.label === 'string') {
+			helplabel = pdict.help.label;
+		} else if (typeof pdict.help.label === 'object') {
+			if (pdict.help.label.property && pdict.help.label.file) {
+				helplabel = Resource.msg(pdict.help.label.property, pdict.help.label.file, null);
 			}
 		}
-		if (ContentMgr.getContent(pdict.helpcid)) {
-			helpcontent = ContentMgr.getContent(pdict.helpcid).custom.body;
+		if (ContentMgr.getContent(pdict.help.cid)) {
+			helpcontent = ContentMgr.getContent(pdict.help.cid).custom.body;
 		}
 		help = [
 			'<div class="form-field-tooltip">',

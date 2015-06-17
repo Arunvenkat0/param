@@ -90,8 +90,13 @@
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.month}" type="select" rowclass="month"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year"/>
-
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attributes="${attributes}" helpcid="checkout-security-code" helplabel="${Resource.msg('billing.linkcvn', 'checkout', null)}"/>
+			<isscript>
+				var help = {
+					label: Resource.msg('billing.linkcvn', 'checkout', null),
+					cid: 'checkout-security-code'
+				};
+			</isscript>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attributes="${attributes}" help="${help}"/>
 
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
 				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox" rowclass="label-inline form-indent"/>

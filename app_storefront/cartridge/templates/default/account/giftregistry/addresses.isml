@@ -61,6 +61,16 @@
 
 			</isif>
 
+				<isscript>
+					var helpApofpo = {
+						label: Resource.msg('singleshipping.apofpo', 'checkout', null),
+						cid: 'apo-fpo'
+					};
+					var helpTelephone = {
+						label: Resource.msg('singleshipping.phonerequired', 'checkout', null),
+						cid: 'help-telephone'
+					};
+				</isscript>
 
 				<input type="hidden" name="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.htmlName}" value="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.value}"/>
 
@@ -68,7 +78,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.lastname}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address1}" type="input" helpcid="apo-fpo" helplabel="${Resource.msg('singleshipping.apofpo', 'checkout', null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address1}" type="input" help="${helpApofpo}"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.address2}" type="input"/>
 
@@ -80,7 +90,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.postal}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeEvent.phone}" type="input" help="${helpTelephone}"/>
 
 			</fieldset>
 
@@ -138,7 +148,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address1}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address2}" type="input" helpcid="apo-fpo" helplabel="${Resource.msg('singleshipping.apofpo', 'checkout', null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.address2}" type="input" help="{helpApofpo}"/>
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.country}" type="select"/>
 
@@ -148,7 +158,7 @@
 
 				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.postal}" type="input"/>
 
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.phone}" type="input" help="{helpTelephone}"/>
 
 				<div class="form-row form-row-button">
 					<isif condition="${pdict.ProductList == null}">

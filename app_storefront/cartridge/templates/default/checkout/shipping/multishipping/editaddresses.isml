@@ -60,13 +60,24 @@
 
 		</div>
 
+		<isscript>
+			var helpApofpo = {
+				label: Resource.msg('singleshipping.apofpo', 'checkout', null),
+				cid: 'apo-fpo'
+			};
+			var helpTelephone = {
+				label: Resource.msg('singleshipping.phonerequired', 'checkout', null),
+				cid: 'help-telephone'
+			};
+		</isscript>
+
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.firstName}" type="input" />
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.lastName}" type="input" />
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address1}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input"  helpcid="apo-fpo" helplabel="${Resource.msg('singleshipping.apofpo', 'checkout', null)}"/>
+		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input" help="${helpApofpo}"/>
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.country}" type="select" />
 
@@ -83,7 +94,7 @@
 
 		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input" />
 
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" helpcid="help-telephone" helplabel="${Resource.msg('singleshipping.phonerequired', 'checkout', null)}"/>
+		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" help="${helpTelephone}"/>
 
 		<iscomment>Add address to Address Book</iscomment>
 		<isif condition="${pdict.CurrentCustomer.authenticated}"> <isinputfield
