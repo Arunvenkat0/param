@@ -39,6 +39,9 @@ var inputElementTypes = [
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
  * @param {Object} pdict.attributes - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
+ * @param {Object} pdict.help - help text for the input field
+ * @param {Object | String} pdict.help.label - the label of the help text. If it is an object, it should have `property` and `file` keys to look up the text from a resource bundle.
+ * @param {String} pdict.help.cid - the id of the content asset that contains the help content
  * @return {Object} input object that contains `element`, `rowClass`, `label`, `input`, `caption`
  */
 module.exports = function (pdict) {
@@ -107,7 +110,6 @@ module.exports = function (pdict) {
 	}
 	label += '<span>' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
 	label += '</label>';
-
 
 	var options = [];
 	// input
@@ -183,6 +185,7 @@ module.exports = function (pdict) {
 	// help text
 	var helplabel = '';
 	var helpcontent = '';
+	var helpAsset;
 	if (pdict.help) {
 		if (typeof pdict.help.label === 'string') {
 			helplabel = pdict.help.label;
@@ -191,8 +194,9 @@ module.exports = function (pdict) {
 				helplabel = Resource.msg(pdict.help.label.property, pdict.help.label.file, null);
 			}
 		}
-		if (ContentMgr.getContent(pdict.help.cid)) {
-			helpcontent = ContentMgr.getContent(pdict.help.cid).custom.body;
+		helpAsset = ContentMgr.getContent(pdict.help.cid);
+		if (helpAsset) {
+			helpcontent = helpAsset.custom.body;
 		}
 		help = [
 			'<div class="form-field-tooltip">',
