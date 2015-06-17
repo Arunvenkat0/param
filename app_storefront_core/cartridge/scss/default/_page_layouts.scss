@@ -3,8 +3,6 @@
 	border: 0;
 	left: 0;
 	margin: auto;
-	max-width: 100%;
-	min-width: 320px;
 	position: relative;
 	transition: left 0.2s ease-in;
 	width: 100%;
@@ -12,11 +10,9 @@
 		width: 760px;
 	}
 	@media screen and (min-width: 960px) {
-		max-width: 960px;
 		width: 960px;
 	}
 	&.pt_storefront {
-		max-width: 100%;
 		width: 100%;
 	}
 	&.menu-active {
