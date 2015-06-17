@@ -649,11 +649,11 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
-                <body xml:lang="x-default">&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300</body>
-                <body xml:lang="fr-FR">&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 €</body>
-                <body xml:lang="it-IT">&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A € 300</body>
-                <body xml:lang="ja-JP">ご注文金額が $300 を超えると &lt;strong&gt;2 日配送が無料&lt;/strong&gt;</body>
-                <body xml:lang="zh-CN">超过 300 美元的订单&lt;strong&gt;免费 2 日送达&lt;/strong&gt;</body>
+                <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300&lt;/div&gt;</body>
+                <body xml:lang="fr-FR">&lt;div class="header-promotion"&gt;&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 €&lt;/div&gt;</body>
+                <body xml:lang="it-IT">&lt;div class="header-promotion"&gt;&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A € 300&lt;/div&gt;</body>
+                <body xml:lang="ja-JP">&lt;div class="header-promotion"&gt;ご注文金額が $300 を超えると &lt;strong&gt;2 日配送が無料&lt;/strong&gt;</body>
+                <body xml:lang="zh-CN">&lt;div class="header-promotion"&gt;超过 300 美元的订单&lt;strong&gt;免费 2 日送达&lt;/strong&gt;&lt;/div&gt;</body>
             </html>
         </content>
     </slot-configuration>
