@@ -68,3 +68,13 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 		.pause(1500)
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 }
+
+export function emptyCart () {
+	return navigateTo()
+		.then(() => client.elements('.item-quantity input'))
+		.then(items => items.value.forEach(item =>
+			client.elementIdClear(item.ELEMENT)
+				.elementIdValue(item.ELEMENT, '0')))
+		.then(() => client.pause(500))
+		.then(() => client.click(BTN_UPDATE_CART));
+}
