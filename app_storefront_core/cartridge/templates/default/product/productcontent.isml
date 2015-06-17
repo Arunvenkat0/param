@@ -217,18 +217,21 @@
 		=============================================================
 	</iscomment>
 
-	<div class="product-actions">
+	<div class="product-actions clearfix">
 		<isscript>
 			var Url = require('~/cartridge/scripts/util/Url');
 			pdict.url = Url.getCurrent(pdict);
 			pdict.title = pdict.Product.name;
 		</isscript>
-		<isinclude template="components/socialsharing"/>
-
+		
 		<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
-			<a data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
-			<a data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry.label','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
+			<a class="button simple" data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
+			<a class="button simple" data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry.label','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
 		</isif>
+		
+		<div class="socialsharing">
+			<isinclude template="components/socialsharing"/>
+		</div>
 
 	</div><!--  end details block -->
 	<iscomment>This is ugly, but it works until we can get a better solution</iscomment>
