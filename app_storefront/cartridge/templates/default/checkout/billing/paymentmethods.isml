@@ -73,7 +73,7 @@
 
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off" xhtmlclass="owner"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select"/>
 
@@ -108,7 +108,7 @@
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.month}" type="select" rowclass="month"/>
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.day}" type="select" rowclass="day"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.ssn}" type="input" rowclass="ssn"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.bml.ssn}" type="input"/>
 
 			<div class="bml-terms-and-conditions form-caption">
 				<iscontentasset aid="bml-tc"/>

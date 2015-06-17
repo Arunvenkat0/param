@@ -49,13 +49,17 @@ function getAttributes(pdict) {
 			valueMatch = prop.match(/value(\d)/);
 			if (attrMatch) {
 				attrIndex = attrMatch[1];
-				if (!attributesMap[attrIndex]) attributesMap[attrIndex] = {};
+				if (!attributesMap[attrIndex]) {
+					attributesMap[attrIndex] = {};
+				}
 				attributesMap[attrIndex].key = pdict[prop];
 				attributesCount++;
 			}
 			if (valueMatch) {
 				attrIndex = valueMatch[1];
-				if (!attributesMap[attrIndex]) attributesMap[attrIndex] = {};
+				if (!attributesMap[attrIndex]) {
+					attributesMap[attrIndex] = {};
+				}
 				attributesMap[attrIndex].value = pdict[prop];
 			}
 		}
@@ -79,7 +83,6 @@ function getAttributes(pdict) {
  * @param {Boolean} pdict.formfield.mandatory - indicate whether the field is mandatory
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
  * @param {String} pdict.maxlength - length of input field, except for types `select`, `textarea`, `checkbox`, `radio` and `hidden`.
- * @param {String} pdict.xhtmlclass - class to be added to input field
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
  * @param {String} pdict.htmlName - name of the input element, used if `dynamicname` is not truthy
  * @param {String} pdict.attributeN - name of a custom attribute, where N is any integer, to match with `valueN`
@@ -94,7 +97,8 @@ module.exports = function (pdict) {
 	var type = pdict.type;
 	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue) || '';
 	var help = '';
-	var element, name, id, rowClass, fieldClass, caption;
+	var fieldClass = '';
+	var element, name, id, rowClass, caption;
 
 	// default type is 'text' for 'input' element
 	if (type === 'input') {
@@ -135,7 +139,6 @@ module.exports = function (pdict) {
 	id = name; // for client side validation, id should be same to avoid confusion in case of equalTo rule
 
 	rowClass = pdict.rowclass ? pdict.rowclass : '';
-	fieldClass = pdict.xhtmlclass ? pdict.xhtmlclass : '';
 
 	/*
 	 if it is a phone, country field then add these as css class names as well
@@ -143,7 +146,7 @@ module.exports = function (pdict) {
 	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used
 	*/
 	if (pdict.formfield.formId === 'phone' || pdict.formfield.formId === 'country') {
-		fieldClass += ' ' + pdict.formfield.formId;
+		fieldClass += pdict.formfield.formId;
 	}
 
 	// required
