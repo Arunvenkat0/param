@@ -174,9 +174,9 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">Miscellaneous</display-name>
                         <display-name xml:lang="fr-FR">Autre</display-name>
-                        <display-name xml:lang="it-IT">Varie</display-name>
+                        <display-name xml:lang="it-IT">Vari</display-name>
                         <display-name xml:lang="ja-JP">その他</display-name>
-                        <display-name xml:lang="zh-CN">其他</display-name>
+                        <display-name xml:lang="zh-CN">其它</display-name>
                         <value-list xml:lang="x-default">miscellaneous</value-list>
                         <presentation-id>miscellaneous</presentation-id>
                     </attribute-bucket>
@@ -195,24 +195,24 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
@@ -220,143 +220,143 @@
                         <display-name xml:lang="x-default">€100 - €499.00</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499 €</display-name>
                         <display-name xml:lang="it-IT">€100 - €499,00</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.00</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.00</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.00 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€1000 - €1499.99</display-name>
                         <display-name xml:lang="fr-FR">1 000 € - 1499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€1000 - €1499.99</display-name>
-                        <display-name xml:lang="ja-JP">€1000 - €1499.99</display-name>
+                        <display-name xml:lang="it-IT">€1000 - €1499,99</display-name>
+                        <display-name xml:lang="ja-JP">€1000 ～ €1499.99</display-name>
                         <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€1500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">1 500 € - 1 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€1500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€1500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€1500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€1500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€2000 - €2499.99</display-name>
                         <display-name xml:lang="fr-FR">2 000 € - 2 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€2000 - €2499.99</display-name>
-                        <display-name xml:lang="ja-JP">€2000 - €2499.99</display-name>
+                        <display-name xml:lang="it-IT">€2000 - €2499,99</display-name>
+                        <display-name xml:lang="ja-JP">€2000 ～ €2499.99</display-name>
                         <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€2500 - €4999.99</display-name>
                         <display-name xml:lang="fr-FR">2 500 € - 4999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€2500 - €4999.99</display-name>
-                        <display-name xml:lang="ja-JP">€2500 - €4999.99</display-name>
+                        <display-name xml:lang="it-IT">€2500 - €4999,99</display-name>
+                        <display-name xml:lang="ja-JP">€2500 ～ €4999.99</display-name>
                         <display-name xml:lang="zh-CN">2500 - 4999.99 欧元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€5000 - €9999.99</display-name>
                         <display-name xml:lang="fr-FR">5 000 € - 9999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€5000 - €9999.99</display-name>
-                        <display-name xml:lang="ja-JP">€5000 - €9999.99</display-name>
+                        <display-name xml:lang="it-IT">€5000 - €9999,99</display-name>
+                        <display-name xml:lang="ja-JP">€5000 ～ €9999.99</display-name>
                         <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 999.99 美元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$1,000 - $1,499.99</display-name>
                         <display-name xml:lang="fr-FR">1 000 $ - 1 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$1.000 - $1.499.99</display-name>
-                        <display-name xml:lang="ja-JP">$1,000 - $1,499.99</display-name>
+                        <display-name xml:lang="it-IT">$1.000 - $1.499,99</display-name>
+                        <display-name xml:lang="ja-JP">$1,000 ～ $1,499.99</display-name>
                         <display-name xml:lang="zh-CN">1000 - 1499.99 美元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$1,500 - $1,999.99</display-name>
                         <display-name xml:lang="fr-FR">1 500 $ - 1 999;99 $</display-name>
-                        <display-name xml:lang="it-IT">$1.500 - $1.999.99</display-name>
-                        <display-name xml:lang="ja-JP">$1,500 - $1,999.99</display-name>
+                        <display-name xml:lang="it-IT">$1.500 - $1.999,99</display-name>
+                        <display-name xml:lang="ja-JP">$1,500 ～ $1,999.99</display-name>
                         <display-name xml:lang="zh-CN">1500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$2,000 - $2,499.99</display-name>
                         <display-name xml:lang="fr-FR">2 000 $ - 2 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$2.000 - $2.499.99</display-name>
-                        <display-name xml:lang="ja-JP">$2,000 - $2,499.99</display-name>
+                        <display-name xml:lang="it-IT">$2.000 - $2.499,99</display-name>
+                        <display-name xml:lang="ja-JP">$2,000 ～ $2,499.99</display-name>
                         <display-name xml:lang="zh-CN">2000 - 2499.99 美元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$2,500 - $4,999.99</display-name>
                         <display-name xml:lang="fr-FR">2 500 $ - 4 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$2.500 - $4.999.99</display-name>
-                        <display-name xml:lang="ja-JP">$2,500 - $4,999.99</display-name>
+                        <display-name xml:lang="it-IT">$2.500 - $4.999,99</display-name>
+                        <display-name xml:lang="ja-JP">$2,500 ～ $4,999.99</display-name>
                         <display-name xml:lang="zh-CN">2500 - 4999.99 美元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$5,000  - $9,999.99</display-name>
                         <display-name xml:lang="fr-FR">5 000 $ - 9 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$5.000 - $9.999.99</display-name>
-                        <display-name xml:lang="ja-JP">$5,000  - $9,999.99</display-name>
+                        <display-name xml:lang="it-IT">$5.000 - $9.999,99</display-name>
+                        <display-name xml:lang="ja-JP">$5,000  ～ $9,999.99</display-name>
                         <display-name xml:lang="zh-CN">5000 - 9999.99 美元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$10,000 - $14,999.99</display-name>
                         <display-name xml:lang="fr-FR">10 000 $ - 14 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$10.000 - $14.999.99</display-name>
-                        <display-name xml:lang="ja-JP">$10,000 - $14,999.99</display-name>
+                        <display-name xml:lang="it-IT">$10.000 - $14.999,99</display-name>
+                        <display-name xml:lang="ja-JP">$10,000 ～ $14,999.99</display-name>
                         <display-name xml:lang="zh-CN">10000 - 14999.99 美元</display-name>
                         <threshold>15000</threshold>
                     </price-bucket>
@@ -384,8 +384,8 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="brand" system="true">
                 <display-name xml:lang="x-default">By brand</display-name>
                 <display-name xml:lang="fr-FR">Par marque</display-name>
-                <display-name xml:lang="it-IT">Per marca</display-name>
-                <display-name xml:lang="ja-JP">ブランド別</display-name>
+                <display-name xml:lang="it-IT">Marca</display-name>
+                <display-name xml:lang="ja-JP">ブランド</display-name>
                 <display-name xml:lang="zh-CN">按品牌</display-name>
                 <value-set>search-result</value-set>
                 <sort-mode>value-name</sort-mode>
@@ -409,12 +409,12 @@
             <page-title xml:lang="x-default">Women and Mens New Arrivals in Clothing, Jewlery, Accessories &amp; More</page-title>
             <page-title xml:lang="fr-FR">Nouveautés femme et homme : vêtements, bijoux, accessoires, et plus encore</page-title>
             <page-title xml:lang="it-IT">Nuovi arrivi donna e uomo in abbigliamento, gioielli, accessori e altro</page-title>
-            <page-title xml:lang="ja-JP">衣料、ジュエリー、アクセサリーなどのレディース &amp;amp; メンズ新着</page-title>
+            <page-title xml:lang="ja-JP">衣料、ジュエリー、アクセサリーなどのレディース &amp; メンズ新着</page-title>
             <page-title xml:lang="zh-CN">男士及女士服装、珠宝首饰、配件新品及其他类别新品</page-title>
             <page-description xml:lang="x-default">Shop all new arrivals including women and mens clothing, jewelry, accessories, suits &amp; more at Demandware</page-description>
             <page-description xml:lang="fr-FR">Découvrez toutes les nouveautés femme et homme en vêtements, bijoux, accessoires, costumes, et plus encore sur Demandware</page-description>
-            <page-description xml:lang="it-IT">Scopri tutti i nuovi arrivi nei settori abbigliamento, gioielli, accessori, completi e altro uomo e donna disponibili su Demandware</page-description>
-            <page-description xml:lang="ja-JP">レディース &amp;amp; メンズ衣料、ジュエリー、アクセサリー、スーツなどを初めとする Demandware の全新着アイテムのご購入</page-description>
+            <page-description xml:lang="it-IT">Tutti i nuovi arrivi nei settori abbigliamento, gioielli, accessori, completi e altro uomo e donna disponibili su Demandware</page-description>
+            <page-description xml:lang="ja-JP">レディース &amp; メンズ衣料、ジュエリー、アクセサリー、スーツなどを初めとする Demandware の全新着アイテムのご購入</page-description>
             <page-description xml:lang="zh-CN">在 Demandware 购物，挑选最新的女士及男士服装、珠宝首饰、配件及其他类别商品</page-description>
         </page-attributes>
         <custom-attributes>
@@ -465,7 +465,7 @@
         <page-attributes>
             <page-title xml:lang="x-default">New Arrivals in Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Nouveautés femme : chaussures, vêtements d'extérieur, vêtements et accessoires</page-title>
-            <page-title xml:lang="it-IT">Nuovi arrivi nei reparti calzature, capispalla, abbigliamento e accessori donna</page-title>
+            <page-title xml:lang="it-IT">Nuovi arrivi nei reparti calzature, giacche e cappotti, abbigliamento e accessori donna</page-title>
             <page-title xml:lang="ja-JP">レディスフットウェア、アウターウェア、衣料、アクセサリー新着</page-title>
             <page-title xml:lang="zh-CN">女鞋、女装外套、女装及配件的最新商品</page-title>
             <page-description xml:lang="x-default">New Arrivals in womens fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
@@ -538,7 +538,7 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour femmes.</page-title>
-            <page-title xml:lang="it-IT">Calzature, capispalla, abbigliamento e accessori donna</page-title>
+            <page-title xml:lang="it-IT">Calzature, giacche e cappotti, abbigliamento e accessori donna</page-title>
             <page-title xml:lang="ja-JP">レディスフットウェア、アウターウェア、衣料、アクセサリー</page-title>
             <page-title xml:lang="zh-CN">女鞋、女装外套、女装及配件</page-title>
             <page-description xml:lang="x-default">Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
@@ -577,17 +577,17 @@
         <page-attributes>
             <page-title xml:lang="x-default">Womens Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-title xml:lang="fr-FR">Vêtements femme : vêtements d'extérieur, tops, bas, et plus encore</page-title>
-            <page-title xml:lang="it-IT">Abbigliamento donna tra cui capispalla, camicie e camicette, gonne e pantaloni e altro</page-title>
+            <page-title xml:lang="it-IT">Abbigliamento donna tra cui giacche e cappotti, camicie e camicette, gonne e pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするレディース衣料</page-title>
             <page-title xml:lang="zh-CN">女士服装包括外套、上衣、下装及其他品类</page-title>
             <page-description xml:lang="x-default">Shop Women's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
             <page-description xml:lang="fr-FR">Découvrez nos vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camice. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
+            <page-description xml:lang="it-IT">Abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
             <page-description xml:lang="ja-JP">レディス衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
             <page-description xml:lang="zh-CN">选购女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur femme, tops femme, bas femme</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche e cappotti donna, top donna, gonne e pantaloni donna</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche e cappotti donna, camicie e camicette donna, gonne e pantaloni donna</page-keywords>
             <page-keywords xml:lang="ja-JP">レディースアウター、レディーストップス、レディースボトムス</page-keywords>
             <page-keywords xml:lang="zh-CN">女式外衣、女式上衣、女式下装</page-keywords>
         </page-attributes>
@@ -601,7 +601,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -629,8 +629,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">M</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                         <value-list xml:lang="x-default">M,9MD</value-list>
                     </attribute-bucket>
@@ -1249,80 +1249,80 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€100 - €499.99</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€100 - €499.99</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.99</display-name>
+                        <display-name xml:lang="it-IT">€100 - €499,99</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -1408,7 +1408,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -1588,8 +1588,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -1628,80 +1628,80 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€100 - €499.99</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€100 - €499.99</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.99</display-name>
+                        <display-name xml:lang="it-IT">€100 - €499,99</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -1787,7 +1787,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -1967,8 +1967,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -1997,8 +1997,8 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="waist" system="false">
                 <display-name xml:lang="x-default">Waist</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Vita</display-name>
-                <display-name xml:lang="ja-JP">ウェスト</display-name>
+                <display-name xml:lang="it-IT">Giro vita</display-name>
+                <display-name xml:lang="ja-JP">ウエスト</display-name>
                 <display-name xml:lang="zh-CN">腰围</display-name>
                 <value-set>search-result</value-set>
                 <sort-mode>value-name</sort-mode>
@@ -2029,80 +2029,80 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€100 - €499.99</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€100 - €499.99</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.99</display-name>
+                        <display-name xml:lang="it-IT">€100 - €499,99</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -2115,7 +2115,7 @@
         <display-name xml:lang="x-default">Jackets &amp; Coats</display-name>
         <display-name xml:lang="fr-FR">Vestes et manteaux</display-name>
         <display-name xml:lang="it-IT">Giacche e cappotti</display-name>
-        <display-name xml:lang="ja-JP">ジャケット &amp;amp; コート</display-name>
+        <display-name xml:lang="ja-JP">ジャケット &amp; コート</display-name>
         <display-name xml:lang="zh-CN">夹克和外衣</display-name>
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
@@ -2125,7 +2125,7 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Outerwear Including Jackets &amp; Collections</page-title>
             <page-title xml:lang="fr-FR">Vêtements d'extérieur femme (vestes, etc.)</page-title>
-            <page-title xml:lang="it-IT">Capispalla donna tra cui giacche e collezioni</page-title>
+            <page-title xml:lang="it-IT">Giacche e cappotti donna tra cui giacche e collezioni</page-title>
             <page-title xml:lang="ja-JP">ジャケットやコレクションを初めとするレディースアウターウェア</page-title>
             <page-title xml:lang="zh-CN">女士外套包括夹克外套及其他类别</page-title>
             <page-description xml:lang="x-default">Shop Women's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Demandware.</page-description>
@@ -2135,7 +2135,7 @@
             <page-description xml:lang="zh-CN">选购女士夹克、大衣及外套。Demandware 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
             <page-keywords xml:lang="x-default">womens jackets, womens coats, womens leather jackets, womens waterproof jackets, womens insulated jackets, womens vests, womens water resistant jackets</page-keywords>
             <page-keywords xml:lang="fr-FR">vestes femme, manteaux femme, vestes en cuir femme, vestes imperméables femme, vestes isolantes femme, gilets sans manche, vestes coupe-vent</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche donna, cappotti donna, giacche in pelle donna, giacche impermeabili donna, giacche isolate donna, giubbotti donna, giacche resistenti all’acqua donna</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche donna, cappotti donna, giacche in pelle donna, giacche impermeabili donna, giacche isolate donna, giubbotti donna, giacche resistenti all'acqua donna</page-keywords>
             <page-keywords xml:lang="ja-JP">レディースジャケット、レディースコート、レディースレザージャケット、レディース防水ジャケット、レディース保温ジャケット、レディースベスト、レディース耐水ジャケット</page-keywords>
             <page-keywords xml:lang="zh-CN">女士夹克、女式大衣、女士皮夹克、女士防水夹克、女士绝缘外套、女士背心、女士防水夹克</page-keywords>
         </page-attributes>
@@ -2159,7 +2159,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -2339,8 +2339,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -2379,80 +2379,80 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€100 - €499.99</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€100 - €499.99</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.99</display-name>
+                        <display-name xml:lang="it-IT">€100 - €499,99</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -2652,7 +2652,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -2764,160 +2764,160 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
-                        <display-name xml:lang="it-IT">€0 - €19.99</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €19.99</display-name>
+                        <display-name xml:lang="it-IT">€0 - €19,99</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€20 - €49.99</display-name>
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
-                        <display-name xml:lang="it-IT">€20 - €49.99</display-name>
-                        <display-name xml:lang="ja-JP">€20 - €49.99</display-name>
+                        <display-name xml:lang="it-IT">€20 - €49,99</display-name>
+                        <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€50 - €99.99</display-name>
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
-                        <display-name xml:lang="it-IT">€50 - €99.99</display-name>
-                        <display-name xml:lang="ja-JP">€50 - €99.99</display-name>
+                        <display-name xml:lang="it-IT">€50 - €99,99</display-name>
+                        <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€100 - €499.99</display-name>
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€100 - €499.99</display-name>
-                        <display-name xml:lang="ja-JP">€100 - €499.99</display-name>
+                        <display-name xml:lang="it-IT">€100 - €499,99</display-name>
+                        <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €999.99</display-name>
                         <display-name xml:lang="fr-FR">500 € - 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€500 - €999.99</display-name>
-                        <display-name xml:lang="ja-JP">€500 - €999.99</display-name>
+                        <display-name xml:lang="it-IT">€500 - €999,99</display-name>
+                        <display-name xml:lang="ja-JP">€500 ～ €999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€1000 - €1499.99</display-name>
                         <display-name xml:lang="fr-FR">1 000 € - 1499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€1000 - €1499.99</display-name>
-                        <display-name xml:lang="ja-JP">€1000 - €1499.99</display-name>
+                        <display-name xml:lang="it-IT">€1000 - €1499,99</display-name>
+                        <display-name xml:lang="ja-JP">€1000 ～ €1499.99</display-name>
                         <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€1500 - €1999.99</display-name>
                         <display-name xml:lang="fr-FR">1 500 € - 1 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€1500 - €1999.99</display-name>
-                        <display-name xml:lang="ja-JP">€1500 - €1999.99</display-name>
+                        <display-name xml:lang="it-IT">€1500 - €1999,99</display-name>
+                        <display-name xml:lang="ja-JP">€1500 ～ €1999.99</display-name>
                         <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€2000 - €2499.99</display-name>
                         <display-name xml:lang="fr-FR">2 000 € - 2 499,99 €</display-name>
-                        <display-name xml:lang="it-IT">€2000 - €2499.99</display-name>
-                        <display-name xml:lang="ja-JP">€2000 - €2499.99</display-name>
+                        <display-name xml:lang="it-IT">€2000 - €2499,99</display-name>
+                        <display-name xml:lang="ja-JP">€2000 ～ €2499.99</display-name>
                         <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€2500 - €9999.99</display-name>
                         <display-name xml:lang="fr-FR">2 500 € - 9 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€2500 - €9999.99</display-name>
-                        <display-name xml:lang="ja-JP">€2500 - €9999.99</display-name>
+                        <display-name xml:lang="it-IT">€2500 - €9999,99</display-name>
+                        <display-name xml:lang="ja-JP">€2500 ～ €9999.99</display-name>
                         <display-name xml:lang="zh-CN">2500 - 9999.99 欧元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€5000  - €9999.99</display-name>
                         <display-name xml:lang="fr-FR">5 000 € - 9 999,99 €</display-name>
-                        <display-name xml:lang="it-IT">€5000 - €9999.99</display-name>
-                        <display-name xml:lang="ja-JP">€5000  - €9999.99</display-name>
+                        <display-name xml:lang="it-IT">€5000 - €9999,99</display-name>
+                        <display-name xml:lang="ja-JP">€5000  ～ €9999.99</display-name>
                         <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 999.99 美元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$1000 - $1499.99</display-name>
                         <display-name xml:lang="fr-FR">1 000 $ - 1 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$1000 - $1499.99</display-name>
-                        <display-name xml:lang="ja-JP">$1000 - $1499.99</display-name>
+                        <display-name xml:lang="it-IT">$1000 - $1499,99</display-name>
+                        <display-name xml:lang="ja-JP">$1000 ～ $1499.99</display-name>
                         <display-name xml:lang="zh-CN">1000 - 1499.99 美元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$1500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">1 500 $ - 1 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$1500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$1500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$1500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$1500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">1500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$2000 - $2499.99</display-name>
                         <display-name xml:lang="fr-FR">2 000 $ - 2 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$2000 - $2499.99</display-name>
-                        <display-name xml:lang="ja-JP">$2000 - $2499.99</display-name>
+                        <display-name xml:lang="it-IT">$2000 - $2499,99</display-name>
+                        <display-name xml:lang="ja-JP">$2000 ～ $2499.99</display-name>
                         <display-name xml:lang="zh-CN">2000 - 2499.99 美元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$2500 - $4999.99</display-name>
                         <display-name xml:lang="fr-FR">2 500 $ - 4 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$2500 - $4999.99</display-name>
-                        <display-name xml:lang="ja-JP">$2500 - $4999.99</display-name>
+                        <display-name xml:lang="it-IT">$2500 - $4999,99</display-name>
+                        <display-name xml:lang="ja-JP">$2500 ～ $4999.99</display-name>
                         <display-name xml:lang="zh-CN">2500 - 4999.99 美元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$5000  - $9999.99</display-name>
                         <display-name xml:lang="fr-FR">5 000 $ - 9 999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$5000 - $9999.99</display-name>
-                        <display-name xml:lang="ja-JP">$5000  - $9999.99</display-name>
+                        <display-name xml:lang="it-IT">$5000 - $9999,99</display-name>
+                        <display-name xml:lang="ja-JP">$5000 ～ $9999.99</display-name>
                         <display-name xml:lang="zh-CN">5000 - 9999.99 美元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
@@ -2998,7 +2998,7 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour homme</page-title>
-            <page-title xml:lang="it-IT">Calzature, capispalla, abbigliamento e accessori uomo</page-title>
+            <page-title xml:lang="it-IT">Calzature, giacche e cappotti, abbigliamento e accessori uomo</page-title>
             <page-title xml:lang="ja-JP">メンズフットウェア、アウターウェア、衣料、アクセサリー</page-title>
             <page-title xml:lang="zh-CN">男鞋、男装外套、男装及配件</page-title>
             <page-description xml:lang="x-default">Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
@@ -3037,17 +3037,17 @@
         <page-attributes>
             <page-title xml:lang="x-default">Mens Clothing Including Suits, Tops, Bottoms &amp; More</page-title>
             <page-title xml:lang="fr-FR">Vêtements homme : costumes, hauts, bas, et plus encore</page-title>
-            <page-title xml:lang="it-IT">Abbigliamento da uomo tra cui completi, camicie, pantaloni e altro</page-title>
+            <page-title xml:lang="it-IT">Abbigliamento da uomo tra cui completi, maglie e camicie, pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">スーツ、トップス、ボトムスなどを初めとするメンズ衣料</page-title>
             <page-title xml:lang="zh-CN">男士服装包括西套、上衣、下装及其他品类</page-title>
             <page-description xml:lang="x-default">Shop Men's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Découvrez nos vêtements pour homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camice. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
+            <page-description xml:lang="it-IT">Abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
             <page-description xml:lang="ja-JP">メンズ衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
             <page-description xml:lang="zh-CN">选购男装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur homme, tops homme, bas homme</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camice uomo, pantaloni uomo</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camicie uomo, pantaloni uomo</page-keywords>
             <page-keywords xml:lang="ja-JP">メンズアウター、メンズトップス、メンズボトムス</page-keywords>
             <page-keywords xml:lang="zh-CN">男式外衣、男式上衣、男式下装</page-keywords>
         </page-attributes>
@@ -3076,7 +3076,7 @@
             <page-title xml:lang="zh-CN">商务版及休闲版男士西装</page-title>
             <page-description xml:lang="x-default">Shop Men's suits for business or pleasure. Enjoy from a variety of different styles and cuts at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Découvrez nos costumes masculins pour le bureau ou ailleurs. Demandware vous propose un large choix de styles et de coupes.</page-description>
-            <page-description xml:lang="it-IT">Completi professionali e casual per uomo Scopri un’ampia varietà di stili e tagli disponibili su Demandware.</page-description>
+            <page-description xml:lang="it-IT">Completi professionali e casual per uomo Scopri un'ampia varietà di stili e tagli disponibili su Demandware.</page-description>
             <page-description xml:lang="ja-JP">ビジネスやレジャー向けメンズスーツのご購入さまざまなスタイルとカットのスーツを Demandware でぜひご覧ください。</page-description>
             <page-description xml:lang="zh-CN">选购商务版及休闲版男士西装在 Demandware 尽享不同的款式风格及独特剪裁。</page-description>
         </page-attributes>
@@ -3100,7 +3100,7 @@
                         <display-name xml:lang="x-default">€144 - €180.00</display-name>
                         <display-name xml:lang="fr-FR">144 € - 180 €</display-name>
                         <display-name xml:lang="it-IT">€144 - €180,00</display-name>
-                        <display-name xml:lang="ja-JP">€144 - €180.00</display-name>
+                        <display-name xml:lang="ja-JP">€144 ～ €180.00</display-name>
                         <display-name xml:lang="zh-CN">144 - 180.00 欧元</display-name>
                         <threshold>180</threshold>
                     </price-bucket>
@@ -3116,7 +3116,7 @@
                         <display-name xml:lang="x-default">€181 - €215.00</display-name>
                         <display-name xml:lang="fr-FR">181 € - 215 €</display-name>
                         <display-name xml:lang="it-IT">€181 - €215,00</display-name>
-                        <display-name xml:lang="ja-JP">€181 - €215.00</display-name>
+                        <display-name xml:lang="ja-JP">€181 ～ €215.00</display-name>
                         <display-name xml:lang="zh-CN">181 - 215.00 欧元</display-name>
                         <threshold>216</threshold>
                     </price-bucket>
@@ -3124,7 +3124,7 @@
                         <display-name xml:lang="x-default">€216 - €359.00</display-name>
                         <display-name xml:lang="fr-FR">216 € - 359 €</display-name>
                         <display-name xml:lang="it-IT">€216 - €359,00</display-name>
-                        <display-name xml:lang="ja-JP">€216 - €359.00</display-name>
+                        <display-name xml:lang="ja-JP">€216 ～ €359.00</display-name>
                         <display-name xml:lang="zh-CN">216 - 359.00 欧元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
@@ -3147,24 +3147,24 @@
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$200 - $249.99</display-name>
                         <display-name xml:lang="fr-FR">200 $ - 249,99 $</display-name>
-                        <display-name xml:lang="it-IT">$200 - $249.99</display-name>
-                        <display-name xml:lang="ja-JP">$200 - $249.99</display-name>
+                        <display-name xml:lang="it-IT">$200 - $249,99</display-name>
+                        <display-name xml:lang="ja-JP">$200 ～ $249.99</display-name>
                         <display-name xml:lang="zh-CN">200 - 249.99 美元</display-name>
                         <threshold>250</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$250 - $299.99</display-name>
                         <display-name xml:lang="fr-FR">250 $ - 299,99 $</display-name>
-                        <display-name xml:lang="it-IT">$250 - $299.99</display-name>
-                        <display-name xml:lang="ja-JP">$250 - $299.99</display-name>
+                        <display-name xml:lang="it-IT">$250 - $299,99</display-name>
+                        <display-name xml:lang="ja-JP">$250 ～ $299.99</display-name>
                         <display-name xml:lang="zh-CN">250 - 299.99 美元</display-name>
                         <threshold>300</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$300 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">300 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$300 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$300 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$300 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$300 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">300 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
@@ -3181,7 +3181,7 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -3196,7 +3196,7 @@
         <display-name xml:lang="x-default">Jackets &amp; Coats</display-name>
         <display-name xml:lang="fr-FR">Vestes et manteaux</display-name>
         <display-name xml:lang="it-IT">Giacche e cappotti</display-name>
-        <display-name xml:lang="ja-JP">ジャケット &amp;amp; コート</display-name>
+        <display-name xml:lang="ja-JP">ジャケット &amp; コート</display-name>
         <display-name xml:lang="zh-CN">夹克和外衣</display-name>
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
@@ -3216,7 +3216,7 @@
             <page-description xml:lang="zh-CN">选购男士夹克、大衣及外套。Demandware 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
             <page-keywords xml:lang="x-default">mens jackets, mens coats, mens leather jackets, mens waterproof jackets, mens insulated jackets, mens vests, mens water resistant jackets</page-keywords>
             <page-keywords xml:lang="fr-FR">vestes homme, manteaux homme, vestes en cuir homme, vestes imperméables homme, vestes isolantes homme, gilets sans manche homme, vestes coupe-vent</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche uomo, cappotti uomo, giacche in pelle uomo, giacche impermeabili uomo, giacche isolate uomo, giubbotti uomo, giacche resistenti all’acqua uomo</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche uomo, cappotti uomo, giacche in pelle uomo, giacche impermeabili uomo, giacche isolate uomo, giubbotti uomo, giacche resistenti all'acqua uomo</page-keywords>
             <page-keywords xml:lang="ja-JP">メンズジャケット、メンズコート、メンズレザージャケット、メンズ防水ジャケット、メンズ保温ジャケット、メンズベスト、メンズ耐水ジャケット</page-keywords>
             <page-keywords xml:lang="zh-CN">男士夹克、男士大衣、男士皮夹克、男士防水夹克、男士绝缘夹克、男士背心、男士防水外套</page-keywords>
         </page-attributes>
@@ -3241,7 +3241,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -3269,8 +3269,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">M</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                         <value-list xml:lang="x-default">M</value-list>
                     </attribute-bucket>
@@ -3314,7 +3314,7 @@
                         <display-name xml:lang="x-default">€0 - €14.00</display-name>
                         <display-name xml:lang="fr-FR">0 € - 14,00 €</display-name>
                         <display-name xml:lang="it-IT">€0 - €14,00</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €14.00</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €14.00</display-name>
                         <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
@@ -3322,7 +3322,7 @@
                         <display-name xml:lang="x-default">€14.00 - €35.00</display-name>
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">€14,00 - €35,00</display-name>
-                        <display-name xml:lang="ja-JP">€14.00 - €35.00</display-name>
+                        <display-name xml:lang="ja-JP">€14.00 ～ €35.00</display-name>
                         <display-name xml:lang="zh-CN">14.00 - 35.00 欧元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
@@ -3330,7 +3330,7 @@
                         <display-name xml:lang="x-default">€36 - €71.00</display-name>
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€36 - €71,00</display-name>
-                        <display-name xml:lang="ja-JP">€36 - €71.00</display-name>
+                        <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
                         <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
@@ -3338,7 +3338,7 @@
                         <display-name xml:lang="x-default">€72 - €359.00</display-name>
                         <display-name xml:lang="fr-FR">72 € - 359,00 €</display-name>
                         <display-name xml:lang="it-IT">€72 - €359,00</display-name>
-                        <display-name xml:lang="ja-JP">€72 - €359.00</display-name>
+                        <display-name xml:lang="ja-JP">€72 ～ €359.00</display-name>
                         <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
@@ -3346,47 +3346,47 @@
                         <display-name xml:lang="x-default">€360 - €1439.00</display-name>
                         <display-name xml:lang="fr-FR">360 € - 1 439 €</display-name>
                         <display-name xml:lang="it-IT">€360 - €1439,00</display-name>
-                        <display-name xml:lang="ja-JP">€360 - €1439.00</display-name>
+                        <display-name xml:lang="ja-JP">€360 ～ €1439.00</display-name>
                         <display-name xml:lang="zh-CN">360 - 1439.00 欧元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -3409,12 +3409,12 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Dress Shirts including Striped, Button Down, Non-Iron &amp; More</page-title>
             <page-title xml:lang="fr-FR">Chemises habillées homme : à rayures, boutonnées, sans repassage, et plus encore</page-title>
-            <page-title xml:lang="it-IT">Camicie da uomo tra cui camice a righe, button-down, no stiro e altro</page-title>
+            <page-title xml:lang="it-IT">Camicie da uomo tra cui camicie a righe, button-down, no stiro e altro</page-title>
             <page-title xml:lang="ja-JP">ストライプ、ボタンダウン、ノーアイロンを初めとするメンズドレスシャツ</page-title>
             <page-title xml:lang="zh-CN">男士礼服衬衫包括条纹、系扣上衣及免熨烫衬衣等等</page-title>
             <page-description xml:lang="x-default">Shop Men's dress shirts in a variety of colors and styles including striped, button down, non-iron &amp; more at Demandware</page-description>
             <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des chemises habillées Demandware (à rayures, boutonnées, sans repassage, etc.)</page-description>
-            <page-description xml:lang="it-IT">Camice eleganti da uomo in una varietà di colori e stili tra cui a righine, button-down, no stiro e altro, disponibili su Demandware.</page-description>
+            <page-description xml:lang="it-IT">Camicie eleganti da uomo in una varietà di colori e stili tra cui a righine, button-down, no stiro e altro, disponibili su Demandware.</page-description>
             <page-description xml:lang="ja-JP">ストライプ、ボタンダウン、ノーアイロンなどを初めとするドレスシャツのご購入は Demandware で。さまざまな色とスタイルを取り揃えています。</page-description>
             <page-description xml:lang="zh-CN">在 Demandware 选购各种颜色款式的男士礼服衬衣，包括条纹、系扣上衣及免熨烫衬衣等</page-description>
         </page-attributes>
@@ -3427,7 +3427,7 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -3457,7 +3457,7 @@
             <page-title xml:lang="zh-CN">男士春季短裤</page-title>
             <page-description xml:lang="x-default">Shop Men's spring shorts in cotton. Variety of different fits at Demandware</page-description>
             <page-description xml:lang="fr-FR">Découvrez les shorts homme en coton pour le printemps. Demandware propose une variété de coupes.</page-description>
-            <page-description xml:lang="it-IT">Pantaloncini primaverili in cotone uomo. Un’ampia varietà di modelli disponibili su Demandware</page-description>
+            <page-description xml:lang="it-IT">Pantaloncini primaverili in cotone uomo. Un'ampia varietà di modelli disponibili su Demandware</page-description>
             <page-description xml:lang="ja-JP">メンズスプリング綿ショートパンツのご購入さまざまなオフフィットを Demandware で。</page-description>
             <page-description xml:lang="zh-CN">选购男士春季棉质短裤。Demandware 为您提供不同款式版型</page-description>
         </page-attributes>
@@ -3469,7 +3469,7 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -3499,7 +3499,7 @@
                         <display-name xml:lang="x-default">€18 - €36</display-name>
                         <display-name xml:lang="fr-FR">18 € - 36 €</display-name>
                         <display-name xml:lang="it-IT">€18 - €36</display-name>
-                        <display-name xml:lang="ja-JP">€18 - €36</display-name>
+                        <display-name xml:lang="ja-JP">€18 ～ €36</display-name>
                         <display-name xml:lang="zh-CN">18 - 36 欧元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
@@ -3507,7 +3507,7 @@
                         <display-name xml:lang="x-default">€36 - €71.00</display-name>
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€36 - €71,00</display-name>
-                        <display-name xml:lang="ja-JP">€36 - €71.00</display-name>
+                        <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
                         <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
@@ -3523,7 +3523,7 @@
                         <display-name xml:lang="x-default">under $25</display-name>
                         <display-name xml:lang="fr-FR">moins de 25 $</display-name>
                         <display-name xml:lang="it-IT">sotto $25</display-name>
-                        <display-name xml:lang="ja-JP">$25以下</display-name>
+                        <display-name xml:lang="ja-JP">$25 以下</display-name>
                         <display-name xml:lang="zh-CN">25 美元以下</display-name>
                         <threshold>25</threshold>
                     </price-bucket>
@@ -3531,15 +3531,15 @@
                         <display-name xml:lang="x-default">$25 - $50</display-name>
                         <display-name xml:lang="fr-FR">25 $ - 50 $</display-name>
                         <display-name xml:lang="it-IT">$25 - $50</display-name>
-                        <display-name xml:lang="ja-JP">$25 - $50</display-name>
+                        <display-name xml:lang="ja-JP">$25 ～ $50</display-name>
                         <display-name xml:lang="zh-CN">25 - 50 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
@@ -3605,7 +3605,7 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -3616,8 +3616,8 @@
             <refinement-definition type="attribute" bucket-type="none" attribute-id="waist" system="false">
                 <display-name xml:lang="x-default">Waist</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Vita</display-name>
-                <display-name xml:lang="ja-JP">ウェスト</display-name>
+                <display-name xml:lang="it-IT">Giro vita</display-name>
+                <display-name xml:lang="ja-JP">ウエスト</display-name>
                 <display-name xml:lang="zh-CN">腰围</display-name>
                 <value-set>search-result</value-set>
                 <sort-mode>value-name</sort-mode>
@@ -3649,7 +3649,7 @@
                         <display-name xml:lang="x-default">€0 - €14.00</display-name>
                         <display-name xml:lang="fr-FR">0 € - 14,00 €</display-name>
                         <display-name xml:lang="it-IT">€0 - €14,00</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €14.00</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €14.00</display-name>
                         <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
                         <threshold>14</threshold>
                     </price-bucket>
@@ -3657,7 +3657,7 @@
                         <display-name xml:lang="x-default">€14 - €35.00</display-name>
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">€14 - €35,00</display-name>
-                        <display-name xml:lang="ja-JP">€14 - €35.00</display-name>
+                        <display-name xml:lang="ja-JP">€14 ～ €35.00</display-name>
                         <display-name xml:lang="zh-CN">14 - 35.00 欧元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
@@ -3665,7 +3665,7 @@
                         <display-name xml:lang="x-default">€36 - €71.00</display-name>
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€36 - €71,00</display-name>
-                        <display-name xml:lang="ja-JP">€36 - €71.00</display-name>
+                        <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
                         <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
@@ -3673,55 +3673,55 @@
                         <display-name xml:lang="x-default">€72 - €359.00</display-name>
                         <display-name xml:lang="fr-FR">72 € - 359,00 €</display-name>
                         <display-name xml:lang="it-IT">€72 - €359,00</display-name>
-                        <display-name xml:lang="ja-JP">€72 - €359.00</display-name>
+                        <display-name xml:lang="ja-JP">€72 ～ €359.00</display-name>
                         <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€360 - €1439.99</display-name>
                         <display-name xml:lang="fr-FR">360 € - 1 439,99 €</display-name>
-                        <display-name xml:lang="it-IT">€360 - €1439.99</display-name>
-                        <display-name xml:lang="ja-JP">€360 - €1439.99</display-name>
+                        <display-name xml:lang="it-IT">€360 - €1439,99</display-name>
+                        <display-name xml:lang="ja-JP">€360 ～ €1439.99</display-name>
                         <display-name xml:lang="zh-CN">360 - 1439.99 欧元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$0 - $19.99</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 19,99 $</display-name>
-                        <display-name xml:lang="it-IT">$0 - $19.99</display-name>
-                        <display-name xml:lang="ja-JP">$0 - $19.99</display-name>
+                        <display-name xml:lang="it-IT">$0 - $19,99</display-name>
+                        <display-name xml:lang="ja-JP">$0 ～ $19.99</display-name>
                         <display-name xml:lang="zh-CN">0 - 19.99 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$20 - $49.99</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 49,99 $</display-name>
-                        <display-name xml:lang="it-IT">$20 - $49.99</display-name>
-                        <display-name xml:lang="ja-JP">$20 - $49.99</display-name>
+                        <display-name xml:lang="it-IT">$20 - $49,99</display-name>
+                        <display-name xml:lang="ja-JP">$20 ～ $49.99</display-name>
                         <display-name xml:lang="zh-CN">20 - 49.99 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$50 - $99.99</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 99,99 $</display-name>
-                        <display-name xml:lang="it-IT">$50 - $99.99</display-name>
-                        <display-name xml:lang="ja-JP">$50 - $99.99</display-name>
+                        <display-name xml:lang="it-IT">$50 - $99,99</display-name>
+                        <display-name xml:lang="ja-JP">$50 ～ $99.99</display-name>
                         <display-name xml:lang="zh-CN">50 - 99.99 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$100 - $499.99</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 499,99 $</display-name>
-                        <display-name xml:lang="it-IT">$100 - $499.99</display-name>
-                        <display-name xml:lang="ja-JP">$100 - $499.99</display-name>
+                        <display-name xml:lang="it-IT">$100 - $499,99</display-name>
+                        <display-name xml:lang="ja-JP">$100 ～ $499.99</display-name>
                         <display-name xml:lang="zh-CN">100 - 499.99 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 1999,99 $</display-name>
-                        <display-name xml:lang="it-IT">$500 - $1999.99</display-name>
-                        <display-name xml:lang="ja-JP">$500 - $1999.99</display-name>
+                        <display-name xml:lang="it-IT">$500 - $1999,99</display-name>
+                        <display-name xml:lang="ja-JP">$500 ～ $1999.99</display-name>
                         <display-name xml:lang="zh-CN">500 - 1999.99 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -4462,7 +4462,7 @@
         <display-name xml:lang="zh-CN">隐藏分类</display-name>
         <description xml:lang="x-default">Hidden Category to store categories such as sale etc.</description>
         <description xml:lang="fr-FR">Catégorie masquée (ex : soldes, etc.).</description>
-        <description xml:lang="it-IT">Categoria nascosta per categorie di negozio come vendita, ecc.</description>
+        <description xml:lang="it-IT">Categoria nascosta per categorie di negozio come svendita, ecc.</description>
         <description xml:lang="ja-JP">非表示のカテゴリからセールなどのストアカテゴリへ</description>
         <description xml:lang="zh-CN">隐藏分类以存储像如促销等类别。</description>
         <online-flag>false</online-flag>
@@ -4478,12 +4478,12 @@
     <category category-id="sale">
         <display-name xml:lang="x-default">Sale</display-name>
         <display-name xml:lang="fr-FR">Soldes</display-name>
-        <display-name xml:lang="it-IT">Vendita</display-name>
+        <display-name xml:lang="it-IT">Svendita</display-name>
         <display-name xml:lang="ja-JP">セール</display-name>
         <display-name xml:lang="zh-CN">销售</display-name>
         <description xml:lang="x-default">Sale Category that will be manually populated with products that are currently on sale.</description>
         <description xml:lang="fr-FR">Catégorie Soldes qui sera renseignée manuellement avec les produits actuellement en soldes.</description>
-        <description xml:lang="it-IT">Categoria Vendita che verrà popolata manualmente con i prodotti in vendita al momento.</description>
+        <description xml:lang="it-IT">Categoria Svendita che verrà popolata manualmente con i prodotti in svendita al momento.</description>
         <description xml:lang="ja-JP">現在セール中の製品は、手動でセールカテゴリに追加されます。</description>
         <description xml:lang="zh-CN">促销类别将被手动添加正在进行促销的产品。</description>
         <online-flag>true</online-flag>
@@ -4493,19 +4493,19 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's, Women's, Kid's and Electronics Sales</page-title>
             <page-title xml:lang="fr-FR">Soldes hommes, femmes, enfants et produits électroniques</page-title>
-            <page-title xml:lang="it-IT">Vendita uomo, donna, bambino</page-title>
-            <page-title xml:lang="ja-JP">メンズ、レディース、キッズセール</page-title>
-            <page-title xml:lang="zh-CN">男士、女士及儿童促销产品</page-title>
+            <page-title xml:lang="it-IT">Svendite uomo, donna, bambino ed elettronica</page-title>
+            <page-title xml:lang="ja-JP">メンズ、レディース、キッズ、エレクトロニクス製品のセール商品</page-title>
+            <page-title xml:lang="zh-CN">男士、女士、儿童及电子产品促销</page-title>
             <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, Kid's and Electronics departments at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme, enfant et produits électroniques de Demandware.</page-description>
-            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna e Bambino presso Demandware.</page-description>
-            <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズコーナーでディスカウントアイテムをご購入ください。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 的男士、女士及儿童促销产品部，选购所有的折扣商品。</page-description>
+            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna, Bambino ed Elettronica di Demandware.</page-description>
+            <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズ、エレクトロニクス製品コーナーは、各種ディスカウントアイテムを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Demandware 的男士、女士、儿童及电子产品部，选购所有的折扣商品。</page-description>
             <page-keywords xml:lang="x-default">sale, sales. mens, womens, kids, electronics</page-keywords>
             <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, enfant, produits électroniques</page-keywords>
-            <page-keywords xml:lang="it-IT">vendita, vendite. uomo, donna, bambino</page-keywords>
-            <page-keywords xml:lang="ja-JP">セール、セール、メンズ、レディース、キッズ</page-keywords>
-            <page-keywords xml:lang="zh-CN">促销、折扣、男士、女士、儿童</page-keywords>
+            <page-keywords xml:lang="it-IT">svendita, svendite, uomo, donna, bambino</page-keywords>
+            <page-keywords xml:lang="ja-JP">セール、セール商品、メンズ、レディース、キッズ、エレクトロニクス製品</page-keywords>
+            <page-keywords xml:lang="zh-CN">促销、折扣、男士、女士、儿童, 电子产品</page-keywords>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -4526,17 +4526,17 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Sale on Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les chaussures, vêtements d'extérieur, vêtements et accessoires pour homme</page-title>
-            <page-title xml:lang="it-IT">Calzature, capispalla, abbigliamento e accessori uomo</page-title>
+            <page-title xml:lang="it-IT">Calzature, giacche e cappotti, abbigliamento e accessori in svendita uomo</page-title>
             <page-title xml:lang="ja-JP">フットウェア、アウターウェア、衣料、アクセサリーのメンズセール</page-title>
             <page-title xml:lang="zh-CN">促销男鞋、男装外套、男装及配件</page-title>
             <page-description xml:lang="x-default">Sale on Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
             <page-description xml:lang="fr-FR">Soldes sur la gamme homme. Une ligne de pièces (bottes, vestes, etc.) résistantes aux intempéries pour un confort inégalable jour après jour. Des styles pratiques et faciles à porter peu importe où vous allez.</page-description>
-            <page-description xml:lang="it-IT">Vendita nella gamma di prodotti per uomo. Stivali, giacche e capi di abbigliamento resistenti che offrono comodità e praticità tutti i giorni, ogni giorno. Stili pratici e facili da portare in tutte le occasioni.</page-description>
+            <page-description xml:lang="it-IT">Svendita nella gamma di prodotti per uomo. Stivali, giacche e capi di abbigliamento resistenti che offrono comodità e praticità tutti i giorni, ogni giorno. Stili pratici e facili da portare in tutte le occasioni.</page-description>
             <page-description xml:lang="ja-JP">メンズコーナーのセール耐摩耗性ブーツ、ジャケット、その他衣料。最強に着心地良くデイリーに活躍します。どこへ行く場合でも、実用的で着こなしやすいスタイルです。</page-description>
             <page-description xml:lang="zh-CN">特价销售男士商品范围。耐磨的靴子、外套和其他服装均可时时刻刻带给您无与伦比的舒适体验。无论您出现在何种场合，均可为您打造实用而舒适的风格。</page-description>
             <page-keywords xml:lang="x-default">sale, mens boots, mens shoes, mens clothing, mens apparel, mens jackets</page-keywords>
             <page-keywords xml:lang="fr-FR">soldes, bottines hommes, chaussures hommes, vêtements homme, habillement homme, vestes homme</page-keywords>
-            <page-keywords xml:lang="it-IT">vendita, stivali uomo, scarpe uomo, vestiario uomo, abbigliamento uomo, giacche uomo</page-keywords>
+            <page-keywords xml:lang="it-IT">svendita, stivali uomo, scarpe uomo, vestiario uomo, abbigliamento uomo, giacche uomo</page-keywords>
             <page-keywords xml:lang="ja-JP">セール、メンズブーツ、メンズシューズ、メンズ衣料、メンズアパレル、メンズジャケット</page-keywords>
             <page-keywords xml:lang="zh-CN">特价销售、男士靴子、男鞋、男装、男士服装、男士夹克、男士外套</page-keywords>
         </page-attributes>
@@ -4562,12 +4562,12 @@
         <page-attributes>
             <page-title xml:lang="x-default">Mens Footwear Sales Including Shoes, Boots, Sandals &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les chaussures homme, y compris bottines, sandales, etc.</page-title>
-            <page-title xml:lang="it-IT">Vendita calzature da uomo tra cui scarpe, stivali, sandali e altro</page-title>
+            <page-title xml:lang="it-IT">Calzature da uomo in svendita tra cui scarpe, stivali, sandali e altro</page-title>
             <page-title xml:lang="ja-JP">シューズ、ブーツ、サンダルなどを初めとするメンズフットウェアのセール</page-title>
             <page-title xml:lang="zh-CN">促销男鞋，包括鞋类、靴子、凉鞋等等</page-title>
             <page-description xml:lang="x-default">Shop for Sales Men's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique homme : chaussures, bottines, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Demandware.</page-description>
-            <page-description xml:lang="it-IT">Vendita nei reparti calzature, scarpe, stivali, sandali e altro uomo. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
+            <page-description xml:lang="it-IT">Svendita nei reparti calzature, scarpe, stivali, sandali e altro uomo. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
             <page-description xml:lang="ja-JP">メンズフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Demandware では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
             <page-description xml:lang="zh-CN">选购促销男鞋，包括鞋类、靴子、凉鞋等等。Demandware 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
             <page-keywords xml:lang="x-default">Mens boots, mens shoes, mens sandals, mens sport shoes, mens dress shoes, mens waterproof boots, mens custom boots</page-keywords>
@@ -4585,7 +4585,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -4613,8 +4613,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">M</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                         <value-list xml:lang="x-default">M,9MD</value-list>
                     </attribute-bucket>
@@ -5236,17 +5236,17 @@
         <page-attributes>
             <page-title xml:lang="x-default">Mens Sales on Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les vêtements homme : vêtements d'extérieur, hauts, bas, et plus encore.</page-title>
-            <page-title xml:lang="it-IT">Abbigliamento uomo tra cui capispalla, camicie, pantaloni e altro</page-title>
+            <page-title xml:lang="it-IT">Abbigliamento uomo in svendita tra cui giacche e cappotti, maglie e camicie, pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするメンズ衣料セール</page-title>
             <page-title xml:lang="zh-CN">促销男士服装包括外套、上衣、下装及其他品类</page-title>
             <page-description xml:lang="x-default">Shop Men's Sales on Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Vendita abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camice. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
+            <page-description xml:lang="it-IT">Svendita abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
             <page-description xml:lang="ja-JP">メンズ衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
             <page-description xml:lang="zh-CN">选购促销男士服装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur homme, tops homme, bas homme</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camice uomo, pantaloni uomo</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camicie uomo, pantaloni uomo</page-keywords>
             <page-keywords xml:lang="ja-JP">メンズアウター、メンズトップス、メンズボトムス</page-keywords>
             <page-keywords xml:lang="zh-CN">男式外衣、男式上衣、男式下装</page-keywords>
         </page-attributes>
@@ -5259,7 +5259,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -5285,8 +5285,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -5326,7 +5326,7 @@
         <display-name xml:lang="x-default">Accessories</display-name>
         <display-name xml:lang="fr-FR">Accessoires</display-name>
         <display-name xml:lang="it-IT">Accessori</display-name>
-        <display-name xml:lang="ja-JP">アクセサリ</display-name>
+        <display-name xml:lang="ja-JP">アクセサリー</display-name>
         <display-name xml:lang="zh-CN">配件</display-name>
         <online-flag>false</online-flag>
         <parent>sale-mens</parent>
@@ -5335,12 +5335,12 @@
         <page-attributes>
             <page-title xml:lang="x-default">Men's Accessories Sales on Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les accessoires homme : ceintures, portefeuilles. Gants, chapeaux, montres, bagages et plus encore</page-title>
-            <page-title xml:lang="it-IT">Vendita accessori uomo per cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
+            <page-title xml:lang="it-IT">Accessori uomo in svendita, tra cui cinture e portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
             <page-title xml:lang="ja-JP">ベルト、財布などのメンズアクセサーリセール手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">促销男士配件，包括腰带和钱包。手套、帽子、手表、箱包及其他</page-title>
             <page-description xml:lang="x-default">Shop mens accessories on sale including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires homme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Accessori uomo in vendita tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
+            <page-description xml:lang="it-IT">Svendita accessori uomo tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
             <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするメンズアクセサリーのセール商品ご購入は Demandware で。</page-description>
             <page-description xml:lang="zh-CN">在 Demandware 选购各种促销男士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
@@ -5357,7 +5357,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -5390,8 +5390,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -5454,12 +5454,12 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories Sales</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les chaussures, vêtements d'extérieur, vêtements et accessoires pour femme</page-title>
-            <page-title xml:lang="it-IT">Vendita calzature, capispalla, abbigliamento e accessori donna</page-title>
+            <page-title xml:lang="it-IT">Calzature, giacche e cappotti, abbigliamento e accessori donna in svendita</page-title>
             <page-title xml:lang="ja-JP">レディスフットウェア、アウターウェア、衣料、アクセサリーのセール</page-title>
             <page-title xml:lang="zh-CN">促销女鞋、女装外套、女装及配件</page-title>
             <page-description xml:lang="x-default">Sale on Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
             <page-description xml:lang="fr-FR">Soldes sur la gamme femme. Des chaussures, vestes etc. chic et tendance pour des looks confortables en journée comme en soirée. Des styles pratiques et tendance pour toutes les occasions.</page-description>
-            <page-description xml:lang="it-IT">Vendita gamma di prodotti per donna. Scarpe, giacche e capi di abbigliamento alla moda e di tendenza che offrono comodità e praticità tutti i giorni, ogni giorno. Stili pratici e alla moda per tutte le occasioni.</page-description>
+            <page-description xml:lang="it-IT">Svendita gamma di prodotti per donna. Scarpe, giacche e capi di abbigliamento alla moda e di tendenza che offrono comodità e praticità tutti i giorni, ogni giorno. Stili pratici e alla moda per tutte le occasioni.</page-description>
             <page-description xml:lang="ja-JP">レディースコーナーのセールおしゃれでハイセンスなシューズ、ジャケット、その他の衣類は、最強に着心地良くデイリーに活躍します。どんなシチュエーションでも実用的でおしゃれなスタイルです。</page-description>
             <page-description xml:lang="zh-CN">特价销售女士商品范围。新颖而时尚的鞋履、外套和其他各式服装均可时时刻刻带给您无与伦比的舒适体验。无论任何场合，均可展现实用而时尚的风格。</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, wome sandals, womens clothing, womens apparel, womens jackets</page-keywords>
@@ -5476,7 +5476,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>search-result</value-set>
@@ -5504,8 +5504,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">M</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                         <value-list xml:lang="x-default">9MD</value-list>
                     </attribute-bucket>
@@ -5544,12 +5544,12 @@
         <page-attributes>
             <page-title xml:lang="x-default">Womens Footwear Sales Including Shoes, Boots, Sandals &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les chaussures femme, y compris boots, sandales, etc.</page-title>
-            <page-title xml:lang="it-IT">Vendita calzature donna tra cui scarpe, stivali, sandali e altro</page-title>
+            <page-title xml:lang="it-IT">Calzature donna in svendita tra cui scarpe, stivali, sandali e altro</page-title>
             <page-title xml:lang="ja-JP">シューズ、ブーツ、サンダルなどを初めとするレディースフットウェアのセール</page-title>
             <page-title xml:lang="zh-CN">促销女鞋，包括鞋类、靴子、凉鞋等等</page-title>
             <page-description xml:lang="x-default">Shop for Sales Women's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique femme : chaussures, boots, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Demandware.</page-description>
-            <page-description xml:lang="it-IT">Vendite nei reparti calzature, scarpe, stivali, sandali e altro donna. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
+            <page-description xml:lang="it-IT">Svendite nei reparti calzature, scarpe, stivali, sandali e altro donna. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
             <page-description xml:lang="ja-JP">レディースフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Demandware では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
             <page-description xml:lang="zh-CN">选购促销女鞋，包括鞋类、靴子、凉鞋等等。Demandware 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, womens sandals, womens sport shoes, womens dress shoes, womens waterproof boots, womens custom boots</page-keywords>
@@ -5567,7 +5567,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -5736,7 +5736,7 @@
                         <display-name xml:lang="x-default">€0 - €20</display-name>
                         <display-name xml:lang="fr-FR">0 € - 20 €</display-name>
                         <display-name xml:lang="it-IT">€0 - €20</display-name>
-                        <display-name xml:lang="ja-JP">€0 - €20</display-name>
+                        <display-name xml:lang="ja-JP">€0 ～ €20</display-name>
                         <display-name xml:lang="zh-CN">0 - 20 欧元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
@@ -5744,7 +5744,7 @@
                         <display-name xml:lang="x-default">€14 - €36</display-name>
                         <display-name xml:lang="fr-FR">14 € - 36 €</display-name>
                         <display-name xml:lang="it-IT">€14 - €36</display-name>
-                        <display-name xml:lang="ja-JP">€14 - €36</display-name>
+                        <display-name xml:lang="ja-JP">€14 ～ €36</display-name>
                         <display-name xml:lang="zh-CN">14 - 36 欧元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
@@ -5752,7 +5752,7 @@
                         <display-name xml:lang="x-default">€36 - €72</display-name>
                         <display-name xml:lang="fr-FR">36 € - 72 €</display-name>
                         <display-name xml:lang="it-IT">€36 - €72</display-name>
-                        <display-name xml:lang="ja-JP">€36 - €72</display-name>
+                        <display-name xml:lang="ja-JP">€36 ～ €72</display-name>
                         <display-name xml:lang="zh-CN">36 - 72 欧元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
@@ -5760,7 +5760,7 @@
                         <display-name xml:lang="x-default">€72 - €360</display-name>
                         <display-name xml:lang="fr-FR">72 € - 360 €</display-name>
                         <display-name xml:lang="it-IT">€72 - €360</display-name>
-                        <display-name xml:lang="ja-JP">€72 - €360</display-name>
+                        <display-name xml:lang="ja-JP">€72 ～ €360</display-name>
                         <display-name xml:lang="zh-CN">72 - 360 欧元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
@@ -5768,7 +5768,7 @@
                         <display-name xml:lang="x-default">€360 - €1440</display-name>
                         <display-name xml:lang="fr-FR">360 € - 1 440 €</display-name>
                         <display-name xml:lang="it-IT">€360 - €1440</display-name>
-                        <display-name xml:lang="ja-JP">€360 - €1440</display-name>
+                        <display-name xml:lang="ja-JP">€360 ～ €1440</display-name>
                         <display-name xml:lang="zh-CN">360 - 1440 欧元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
@@ -5776,7 +5776,7 @@
                         <display-name xml:lang="x-default">0$ - 20$</display-name>
                         <display-name xml:lang="fr-FR">0 $ - 20 $</display-name>
                         <display-name xml:lang="it-IT">0$ - 20$</display-name>
-                        <display-name xml:lang="ja-JP">0$ - 20$</display-name>
+                        <display-name xml:lang="ja-JP">0$ ～ 20$</display-name>
                         <display-name xml:lang="zh-CN">0 - 20 美元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
@@ -5784,7 +5784,7 @@
                         <display-name xml:lang="x-default">20$ - 50$</display-name>
                         <display-name xml:lang="fr-FR">20 $ - 50 $</display-name>
                         <display-name xml:lang="it-IT">20$ - 50$</display-name>
-                        <display-name xml:lang="ja-JP">20$ - 50$</display-name>
+                        <display-name xml:lang="ja-JP">20$ ～ 50$</display-name>
                         <display-name xml:lang="zh-CN">20 - 50 美元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
@@ -5792,7 +5792,7 @@
                         <display-name xml:lang="x-default">50$ - 100$</display-name>
                         <display-name xml:lang="fr-FR">50 $ - 100 $</display-name>
                         <display-name xml:lang="it-IT">50$ - 100$</display-name>
-                        <display-name xml:lang="ja-JP">50$ - 100$</display-name>
+                        <display-name xml:lang="ja-JP">50$ ～ 100$</display-name>
                         <display-name xml:lang="zh-CN">50 - 100 美元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
@@ -5800,7 +5800,7 @@
                         <display-name xml:lang="x-default">100$ - 500$</display-name>
                         <display-name xml:lang="fr-FR">100 $ - 500 $</display-name>
                         <display-name xml:lang="it-IT">100$ - 500$</display-name>
-                        <display-name xml:lang="ja-JP">100$ - 500$</display-name>
+                        <display-name xml:lang="ja-JP">100$ ～ 500$</display-name>
                         <display-name xml:lang="zh-CN">100 - 500 美元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
@@ -5808,7 +5808,7 @@
                         <display-name xml:lang="x-default">500$ - 2000$</display-name>
                         <display-name xml:lang="fr-FR">500 $ - 2 000 $</display-name>
                         <display-name xml:lang="it-IT">500$ - 2000$</display-name>
-                        <display-name xml:lang="ja-JP">500$ - 2000$</display-name>
+                        <display-name xml:lang="ja-JP">500$ ～ 2000$</display-name>
                         <display-name xml:lang="zh-CN">500 - 2000 美元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
@@ -5830,17 +5830,17 @@
         <page-attributes>
             <page-title xml:lang="x-default">Womens Clothing Sales Including Outerwear, Tops, Bottoms &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les vêtements femme : vêtements d'extérieur, tops, bas et plus encore</page-title>
-            <page-title xml:lang="it-IT">Vendita abbigliamento donna tra cui capispalla, camicie e camicette, gonne e pantaloni e altro</page-title>
+            <page-title xml:lang="it-IT">Abbigliamento donna in svendita tra cui giacche e cappotti, camicie e camicette, gonne e pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするレディース衣料のセール</page-title>
             <page-title xml:lang="zh-CN">促销女士服装包括外套、上衣、下装及其他品类</page-title>
             <page-description xml:lang="x-default">Shop Women's Clothing Sales. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
             <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Vendita abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camice. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
+            <page-description xml:lang="it-IT">Svendite abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
             <page-description xml:lang="ja-JP">レディース衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
             <page-description xml:lang="zh-CN">选购促销女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur femme, tops femme, bas femme</page-keywords>
-            <page-keywords xml:lang="it-IT">giacche e cappotti donna, top donna, gonne e pantaloni donna</page-keywords>
+            <page-keywords xml:lang="it-IT">giacche e cappotti donna, camicie e camicette donna, gonne e pantaloni donna</page-keywords>
             <page-keywords xml:lang="ja-JP">レディースアウター、レディーストップス、レディースボトムス</page-keywords>
             <page-keywords xml:lang="zh-CN">女式外衣、女式上衣、女式下装</page-keywords>
         </page-attributes>
@@ -5853,7 +5853,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -6033,8 +6033,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
@@ -6067,7 +6067,7 @@
         <display-name xml:lang="x-default">Accessories</display-name>
         <display-name xml:lang="fr-FR">Accessoires</display-name>
         <display-name xml:lang="it-IT">Accessori</display-name>
-        <display-name xml:lang="ja-JP">アクセサリ</display-name>
+        <display-name xml:lang="ja-JP">アクセサリー</display-name>
         <display-name xml:lang="zh-CN">配件</display-name>
         <online-flag>true</online-flag>
         <parent>sale-womens</parent>
@@ -6076,13 +6076,13 @@
         <page-attributes>
             <page-title xml:lang="x-default">Women's Accessories Sales Including Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-title xml:lang="fr-FR">Soldes sur les accessoires femme, notamment ceintures, portefeuilles. Gants, chapeaux, montres, bagages et plus encore</page-title>
-            <page-title xml:lang="it-IT">Vendita accessori donna tra cui cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
-            <page-title xml:lang="ja-JP">ベルト、財布などのレディースアクセサリセール手袋、帽子、腕時計、鞄など</page-title>
+            <page-title xml:lang="it-IT">Accessori donna in svendita tra cui cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
+            <page-title xml:lang="ja-JP">ベルト、財布などのレディースアクセサリーのセール手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">促销女士配件，包括腰带和钱包。手套、帽子、手表、箱包及其他</page-title>
             <page-description xml:lang="x-default">Shop womens accessories sales including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
             <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires femme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Vendita accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーのセール商品ご購入は Demandware で。</page-description>
+            <page-description xml:lang="it-IT">Svendita accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
+            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーのセール商品のご購入は Demandware で。</page-description>
             <page-description xml:lang="zh-CN">在 Demandware 选购各种促销女士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
             <page-keywords xml:lang="fr-FR">accessoires femme, ceintures femme, portefeuilles femme, gants femme, chapeaux femme, lunettes de soleil, gants, chapeaux, écharpes, bagages, sac de voyage, sac à dos, cartable, sac d'ordinateur portable, sac à dos de randonnée, chaussettes femme, chaussettes pour femmes</page-keywords>
@@ -6098,7 +6098,7 @@
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
                 <display-name xml:lang="x-default">Size</display-name>
                 <display-name xml:lang="fr-FR">Taille</display-name>
-                <display-name xml:lang="it-IT">Dimensioni</display-name>
+                <display-name xml:lang="it-IT">Taglia</display-name>
                 <display-name xml:lang="ja-JP">サイズ</display-name>
                 <display-name xml:lang="zh-CN">尺码</display-name>
                 <value-set>refinement-category</value-set>
@@ -6131,8 +6131,8 @@
                     <attribute-bucket>
                         <display-name xml:lang="x-default">M</display-name>
                         <display-name xml:lang="fr-FR">L</display-name>
-                        <display-name xml:lang="it-IT">Lu</display-name>
-                        <display-name xml:lang="ja-JP">月</display-name>
+                        <display-name xml:lang="it-IT">M</display-name>
+                        <display-name xml:lang="ja-JP">M</display-name>
                         <display-name xml:lang="zh-CN">M</display-name>
                     </attribute-bucket>
                     <attribute-bucket>
