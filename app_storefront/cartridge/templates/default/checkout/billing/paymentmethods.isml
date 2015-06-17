@@ -73,17 +73,11 @@
 
 			</isif>
 
-			<isscript>
-				var attributes = {
-					autocomplete: 'off'
-				};
-			</isscript>
-
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attributes="${attributes}"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attributes="${attributes}"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" dynamicname="true"/>
 
 			<div class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}</div>
 
@@ -96,7 +90,7 @@
 					cid: 'checkout-security-code'
 				};
 			</isscript>
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attributes="${attributes}" help="${help}"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" dynamicname="true" help="${help}"/>
 
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
 				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox" rowclass="label-inline form-indent"/>

@@ -16,13 +16,11 @@
 			<isscript>
 				var ownerAttributes = {
 					maxlength: 40,
-					size: 40,
-					autocomplete: 'off'
+					size: 40
 				};
 				var numberAttributes = {
 					maxlength: 16,
-					size: 17,
-					autocomplete: 'off'
+					size: 17
 				};
 			</isscript>
 			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" attributes="${ownerAttributes}" />
