@@ -10,7 +10,7 @@ export const CSS_SHARE_LINK = '.share-link';
 
 const basePath = '/wishlist';
 
-var configUrl = config.url;
+export const configUrl = config.url;
 
 export function navigateTo (path = basePath) {
 	return client.url(config.url + path);
