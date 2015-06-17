@@ -34,7 +34,14 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.confirmRecipientEmail}" type="input" rowClass="label-above"/>
 
-					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.message}" type="textarea" attribute1="rows" value1="5" attribute2="cols" value2="50" rowClass="label-above"  attribute3="data-character-limit" value3="250"/>
+					<isscript>
+						var attributes = {
+							rows: 5,
+							cols: 50,
+							'data-character-limit': 250
+						}
+					</isscript>
+					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.message}" type="textarea" attributes="${attributes}" rowClass="label-above" />
 
 					<isinputfield formfield="${pdict.CurrentForms.giftcert.purchase.amount}" type="input" rowClass="label-above cert-amount"/>
 

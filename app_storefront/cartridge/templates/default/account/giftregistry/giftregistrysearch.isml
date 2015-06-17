@@ -6,8 +6,8 @@
 				maxlength: 255
 			};
 		</isscript>
-		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantLastName}" type="input" custom="${attributes}"/>
-		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantFirstName}" type="input" custom="${attributes}"/>
+		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantLastName}" type="input" attributes="${attributes}"/>
+		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantFirstName}" type="input" attributes="${attributes}"/>
 		<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventType}" type="select"/>
 
 		<div class="gift-registry-advanced">
@@ -16,7 +16,7 @@
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventName}" type="input"/>
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventMonth}" type="select" rowclass="event-month"/>
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventYear}" type="select"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventCity}" type="input" custom="${attributes}" rowclass="event-city"/>
+				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventCity}" type="input" attributes="${attributes}" rowclass="event-city"/>
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventState}" type="select"/>
 				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventCountry}" type="select"/>
 			</div>

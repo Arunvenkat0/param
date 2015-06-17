@@ -33,14 +33,21 @@
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
 				<iselse/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attribute1="disabled" value1="disabled"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" attributes="${disabled}"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" attributes="${disabled}"/>
 				</isif>
 			</fieldset>
 
 
 			<fieldset>
-
+				<isscript>
+					var autocomplete = {
+						autocomplete: 'off'
+					};
+					var disabled = {
+						disabled: 'disabled'
+					}
+				</isscript>
 				<legend>
 					${Resource.msg('account.user.registration.logininfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
@@ -48,10 +55,10 @@
 				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password"  attribute1="autocomplete" value1="off"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" attribute1="autocomplete" value1="off"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" attributes="${autocomplete}"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" attributes="${autocomplete}"/>
 				<iselse/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attribute1="disabled" value1="disabled"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attributes="${disabled}"/>
 				</isif>
 				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
 

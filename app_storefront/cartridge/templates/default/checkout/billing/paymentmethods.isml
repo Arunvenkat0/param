@@ -73,11 +73,17 @@
 
 			</isif>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attribute1="autocomplete" value1="off"/>
+			<isscript>
+				var attributes = {
+					autocomplete: 'off'
+				};
+			</isscript>
+
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" attributes="${attributes}"/>
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attribute1="autocomplete" value1="off"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attributes="${attributes}"/>
 
 			<div class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}</div>
 
@@ -85,7 +91,7 @@
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.year}" type="select"  rowclass="year"/>
 
-			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attribute1="autocomplete" value1="off" helpcid="checkout-security-code" helplabel="${Resource.msg('billing.linkcvn', 'checkout', null)}"/>
+			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" attributes="${attributes}" helpcid="checkout-security-code" helplabel="${Resource.msg('billing.linkcvn', 'checkout', null)}"/>
 
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
 				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox" rowclass="label-inline form-indent"/>

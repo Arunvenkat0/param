@@ -25,9 +25,9 @@
 					autocomplete: 'off'
 				};
 			</isscript>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" custom="${ownerAttributes}" />
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.owner}" type="input" attributes="${ownerAttributes}" />
 			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.type}" type="select"/>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" dynamicname="true" type="input" custom="${numberAttributes}"/>
+			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.number}" dynamicname="true" type="input" attributes="${numberAttributes}"/>
 			<div class="form-label-text">
 				<span class="required-indicator">&#8226; </span>
 				${Resource.msg('account.paymentinstrumentdetails.expires','account',null)}

@@ -32,43 +32,6 @@ var inputElementTypes = [
 ];
 
 /**
- * @description Iterate over all props in pdict, pick out attribute key/value pairs
- * @param {dw.system.PipelineDictionary} pdict
- * @return {Object} attributes an map of attributes key/value pairs
- *   for eg. {1: {key: 'key1', value: 'value1'}, 2: {key: 'key2', value: 'value2'}}
- */
-function getAttributes(pdict) {
-	// Custom Attributes
-	var attributesMap = {};
-	var attributesCount = 0;
-	var attrMatch, valueMatch, attrIndex;
-
-	for (var prop in pdict) {
-		if (pdict.hasOwnProperty(prop)) {
-			attrMatch = prop.match(/attribute(\d)/);
-			valueMatch = prop.match(/value(\d)/);
-			if (attrMatch) {
-				attrIndex = attrMatch[1];
-				if (!attributesMap[attrIndex]) {
-					attributesMap[attrIndex] = {};
-				}
-				attributesMap[attrIndex].key = pdict[prop];
-				attributesCount++;
-			}
-			if (valueMatch) {
-				attrIndex = valueMatch[1];
-				if (!attributesMap[attrIndex]) {
-					attributesMap[attrIndex] = {};
-				}
-				attributesMap[attrIndex].value = pdict[prop];
-			}
-		}
-	}
-
-	return attributesMap;
-}
-
-/**
  * @description Parse inputfield custom element
  * @param {dw.system.PipelineDictionary} pdict
  * @param {dw.web.FormField} pdict.formfield
@@ -76,9 +39,7 @@ function getAttributes(pdict) {
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
  * @param {String} pdict.htmlName - name of the input element, used if `dynamicname` is not truthy
- * @param {String} pdict.attributeN - name of a custom attribute, where N is any integer, to match with `valueN`
- * @param {String} pdict.valueN - value of a custom attribute, where N is any integer, to match with `attributeN`
- * @param {Object} pdict.custom - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
+ * @param {Object} pdict.attributes - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
  * @return {Object} input object that contains `element`, `rowClass`, `label`, `input`, `caption`
  */
 module.exports = function (pdict) {
@@ -107,17 +68,10 @@ module.exports = function (pdict) {
 		return;
 	}
 
-	var attributesMap = getAttributes(pdict);
-	var attributesArray = [];
-	Object.keys(attributesMap).forEach(function (index) {
-		attributesArray.push(attributesMap[index].key + '="' + attributesMap[index].value + '" ');
-	});
-	attributes = attributesArray.join('');
-
 	// custom attributes
-	if (pdict.custom) {
-		Object.keys(pdict.custom).forEach(function (key) {
-			attributes += key + '="' + pdict.custom[key] + '" ';
+	if (pdict.attributes) {
+		Object.keys(pdict.attributes).forEach(function (key) {
+			attributes += key + '="' + pdict.attributes[key] + '" ';
 		});
 	}
 
@@ -155,11 +109,12 @@ module.exports = function (pdict) {
 	label += '<span>' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
 	label += '</label>';
 
+
+	var options = [];
 	// input
 	switch (element) {
 		case 'select':
 			input = '<select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
-			var options = [];
 			// interate over pdict.formfield.options, append to the options array
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
@@ -203,7 +158,6 @@ module.exports = function (pdict) {
 			break;
 		// treat radio as its own element, as each option is an input element
 		case 'radio':
-			var options = [];
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
 				var value = option.value;

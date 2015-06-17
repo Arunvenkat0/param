@@ -105,7 +105,14 @@
 					<iscomment>Is this a gift</iscomment>
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.isGift}" type="radio"/>
 
-					<isinputfield rowclass="gift-message-text" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.giftMessage}" type="textarea" attribute1="rows" value1="4" attribute2="cols" value2="10" attribute3="data-character-limit" value3="250"/>
+					<isscript>
+						var attributes = {
+							rows: 4,
+							cols: 10,
+							'data-character-limit': 250
+						};
+					</isscript>
+					<isinputfield rowclass="gift-message-text" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.giftMessage}" type="textarea" attributes="${attributes}"/>
 
 				</fieldset>
 
