@@ -3751,18 +3751,18 @@ footer {
 
 .pdp-main .product-number {
   color: #ccc;
-  font-size: 0.65rem;
+  font-size: .65rem;
   margin-bottom: .5rem; }
 
 .pdp-main .product-price {
   font-size: 1.5rem;
-  margin-bottom: 0.5em; }
+  margin-bottom: .5em; }
   .pdp-main .product-price .price-standard {
     color: #999;
     text-decoration: line-through; }
   .pdp-main .product-price .price-tiered {
     color: #990000;
-    font-size: 0.6em;
+    font-size: .6em;
     line-height: 1.5em; }
 
 .pdp-main .product-review {
@@ -3771,14 +3771,14 @@ footer {
     color: #990000; }
 
 .pdp-main .product-main-attributes .attribute {
-  padding: 0.2em 0; }
+  padding: .2em 0; }
 
 .pdp-main .product-main-attributes .label {
   padding: 0; }
 
 .product-variations,
 .product-options {
-  margin-left: 0.5em; }
+  margin-left: .5em; }
   .product-variations .attribute,
   .product-options .attribute {
     margin: 1em 0;
@@ -3813,7 +3813,7 @@ footer {
       @media screen and (min-width: 768px) {
         .product-variations .attribute .selected-value,
         .product-options .attribute .selected-value {
-          padding-top: 0.8em; } }
+          padding-top: .8em; } }
     .product-variations .attribute .size-chart-link,
     .product-options .attribute .size-chart-link {
       clear: both;
@@ -3833,7 +3833,7 @@ footer {
     .product-variations .swatches li.unselectable a,
     .product-options .swatches li.unselectable a {
       color: #e0e0e0;
-      opacity: 0.8; }
+      opacity: .8; }
     .product-variations .swatches li.unselectable:hover a,
     .product-options .swatches li.unselectable:hover a {
       border-color: #e0e0e0; }
@@ -3903,7 +3903,7 @@ footer {
       font-size: 1.5em;
       height: 50px;
       width: 50px;
-      margin-right: 0.4em;
+      margin-right: .4em;
       text-align: center; }
       @media screen and (min-width: 768px) {
         .pdp-main .product-add-to-cart .inventory input {
@@ -3926,7 +3926,7 @@ footer {
   padding: 1em 0.5em; }
   .pdp-main .product-actions .socialsharing {
     float: none;
-    margin-right: 0.2rem;
+    margin-right: .2rem;
     padding-top: 1em; }
     @media screen and (min-width: 960px) {
       .pdp-main .product-actions .socialsharing {
@@ -3966,7 +3966,7 @@ footer {
     height: 90px; }
   .pdp-main .recommendations .product-name {
     font-size: 1em;
-    margin: 0.2em 0;
+    margin: .2em 0;
     width: 100%; }
   .pdp-main .recommendations .product-price {
     font-size: 1em; }
@@ -4057,13 +4057,13 @@ footer {
     background: none repeat scroll 0 0 #efefef;
     clear: both;
     overflow: hidden;
-    padding: 0.5em 0; }
+    padding: .5em 0; }
     .pdp-main .product-set-list .block-add-to-cart .inventory {
       float: left;
       margin-left: 22%;
       width: 20%; }
     .pdp-main .product-set-list .block-add-to-cart label {
-      padding: 0.7em 0;
+      padding: .7em 0;
       text-align: left;
       width: 40%; }
     .pdp-main .product-set-list .block-add-to-cart .input-text {
@@ -4077,7 +4077,7 @@ footer {
       width: 35%; }
     .pdp-main .product-set-list .block-add-to-cart button {
       float: right;
-      font-size: 0.9em;
+      font-size: .9em;
       margin: 3px 5px 0 0;
       padding-left: 1em;
       padding-right: 1em; }
