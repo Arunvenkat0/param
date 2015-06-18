@@ -287,15 +287,26 @@
 
 .pdp-main {
 	.product-actions {
-		padding: 1.5em 0;
+		padding: 1em 0.5em;
+		.socialsharing {
+			float: none;
+ 			margin-right: 0.2rem;
+ 			padding-top: 1em;
+ 			@media screen and (min-width: 960px) {
+ 				float: left;
+ 				padding-top: 0;
+ 			}
+		}
 		a {
-			margin-left: .7em;
+			margin-right: .1rem;
 			&.share-icon {
-				margin-left: 0;
-				margin-right: .1em;
-			}
-			i {
-				font-size: 1.4em;
+				color: $nobel;
+				&:hover {
+					color: $citrus;
+				}
+				i {
+				font-size: 2rem;
+				}
 			}
 		}
 	}
@@ -391,7 +402,6 @@
 	}
 	.product-tabs {
 		border: none;
-		margin: 1.5rem 0 0;
 		.print-page {
 			right: 0;
 			position: absolute;
