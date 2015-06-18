@@ -118,22 +118,14 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="New Slot Configuration - 2012-02-07 15:52:46" assigned-to-site="false">
-        <description>test of this</description>
-        <template>slots/product/product_1x2.isml</template>
+    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="free-shipping-orders-over-150" default="true" assigned-to-site="true">
+        <description>This is the free shipping promotion slot at the bottom of the home page.</description>
+        <template>slots/content/homepage/home-bottom-center.isml</template>
         <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Hey look at this</callout-msg>
         <content>
-            <products>
-                <product product-id="008884304016"/>
-                <product product-id="008884304023"/>
-                <product product-id="008884304030"/>
-                <product product-id="008884304047"/>
-                <product product-id="008884304054"/>
-                <product product-id="008884304061"/>
-                <product product-id="008884304085"/>
-                <product product-id="008884304078"/>
-            </products>
+            <content-assets>
+                <content-asset content-id="home-free-shipping-orders-over-150"/>
+            </content-assets>
         </content>
     </slot-configuration>
 
@@ -588,46 +580,14 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="home-bottom-center" default="true" assigned-to-site="true">
-        <template>slots/content/homepage/home-bottom-slot.isml</template>
+    <slot-configuration slot-id="home-bottom-left" context="global" configuration-id="home-bottom-womens-shoes" default="true" assigned-to-site="false">
+        <description>The slot displays on the bottom left of the home page.</description>
+        <template>slots/content/homepage/home-bottom-left.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <content-assets>
-                <content-asset content-id="home-bottom-center"/>
+                <content-asset content-id="home-bottom-womens-shoes"/>
             </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom-left" context="global" configuration-id="home-bottom-left" default="true" assigned-to-site="false">
-        <template>slots/content/homepage/home-bottom-slot.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <content-assets>
-                <content-asset content-id="home-bottom-left"/>
-            </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom-right" context="global" configuration-id="home-bottom-right" default="true" assigned-to-site="false">
-        <template>slots/product/verticalcarousel.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
-        <content>
-            <products>
-                <product product-id="25593016"/>
-                <product product-id="25695189"/>
-                <product product-id="25593363"/>
-                <product product-id="25686571"/>
-            </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-main" context="global" configuration-id="homepage-flash" assigned-to-site="true">
-        <description>HomepageFlash</description>
-        <template>slots/html/homepageflash.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html/>
         </content>
     </slot-configuration>
 

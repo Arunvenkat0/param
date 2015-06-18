@@ -46,7 +46,7 @@
 					<isset name="categoryObj" value="${dw.catalog.CatalogMgr.getCategory( RefinementValue.getValue() )}" scope="page"/>
 					<li <isif condition="${Refinements.getNextLevelCategoryRefinementValues(categoryObj).size() > 0}">class="expandable fa fa-angle-right<isif condition="${IDPath.contains(RefinementValue.getValue())}"> active fa-angle-down</isif>"</isif>>
 						<iscomment>render the actual link</iscomment>
-						<a class="refinement-link <isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif>" title="${Resource.msg('global.categoryrefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}" href="${SearchModel.urlRefineCategory('Search-Show',RefinementValue.getValue())}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
+						<a class="refinement-link <isif condition="${IDPath.contains(RefinementValue.getValue())}"> active</isif>" title="${Resource.msgf('global.categoryrefinement.label','locale',null, RefinementValue.getDisplayValue())}" href="${SearchModel.urlRefineCategory('Search-Show',RefinementValue.getValue())}"><isprint value="${RefinementValue.getDisplayValue()}"/></a>
 
 						<iscomment>display the next level refinement values of the category in case it is part of the category path</iscomment>
 						<isif condition="${(CategoryPath != null) && (CategoryPath.size() > 0) && (IDPath.contains(RefinementValue.getValue()))}">
@@ -68,7 +68,7 @@
 						<iselse/>                        
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
 						</isif>
-						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${Resource.msg('global.categoryrefinement.label.prefix','locale',null)} ${SubCategory.displayName}" href="${refineLinkUrl}">
+						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${Resource.msgf('global.categoryrefinement.label','locale',null, SubCategory.displayName)}" href="${refineLinkUrl}">
 							<isprint value="${SubCategory.displayName}"/>
 						</a>
 
