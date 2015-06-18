@@ -287,6 +287,7 @@
 
 .pdp-main {
 	.product-actions {
+		@extend %clearfix;
 		padding: 1em 0.5em;
 		.socialsharing {
 			float: none;

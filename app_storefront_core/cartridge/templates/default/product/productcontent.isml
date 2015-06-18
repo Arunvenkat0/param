@@ -217,7 +217,7 @@
 		=============================================================
 	</iscomment>
 
-	<div class="product-actions clearfix">
+	<div class="product-actions">
 		<isscript>
 			var Url = require('~/cartridge/scripts/util/Url');
 			pdict.url = Url.getCurrent(pdict);
