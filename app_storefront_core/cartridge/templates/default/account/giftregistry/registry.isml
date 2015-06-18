@@ -43,7 +43,7 @@
 						<isinclude template="components/socialsharing"/>
 						<a class="share-icon share-link" title="${Resource.msg('global.socialshare.link', 'locale', null)}" data-target=".share-link-content"><i class="fa fa-link"></i></a>
 					</div>
-					<div class="share-link-content">	
+					<div class="share-link-content">
 						${Resource.msg('registry.share.link','account',null)}:
 						<a href="${pdict.url}" title="${Resource.msg('registry.share.link','account',null)}">
 							<isprint value="${pdict.url}"/>
@@ -98,42 +98,48 @@
 					</td>
 
 					<td class="item-dashboard">
-						<form action="${URLUtils.continueURL()}" method="post" name="${item.htmlName}">
+						<form action="${URLUtils.continueURL()}" class="form-horizontal" method="post" name="${item.htmlName}">
 						<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
-							<div class="item-option option-date-added">
-								<span class="label">${Resource.msg('registry.dateadded','account',null)}:</span>
-								<span class="value"><isprint value="${item.object.creationDate}" formatter="MMMMM dd, yyyy" /></span>
+							<div class="form-row option-date-added">
+								<label>${Resource.msg('registry.dateadded','account',null)}</label>
+								<div class="field-wrapper">
+									<div class="value"><isprint value="${item.object.creationDate}" formatter="MMMMM dd, yyyy" /></div>
+								</div>
 							</div>
 
 							<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
 								<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
-									<isinputfield formfield="${item.quantity}" type="number" attribute1="min" value1="0" rowclass="item-option option-quantity-desired"/>
+									<isinputfield formfield="${item.quantity}" type="number" attribute1="min" value1="0" rowclass="option-quantity-desired"/>
 								<iselse/>
-									<div class="item-option option-quantity-desired">
-										<span class="label">${Resource.msg('productlist.qtydesired','account',null)}</span>
-										<span class="value"><isprint value="${item.quantity.value}"/></span>
+									<div class="form-row option-quantity-desired">
+										<label>${Resource.msg('productlist.qtydesired','account',null)}</label>
+										<div class="field-wrapper">
+											<div class="value"><isprint value="${item.quantity.value}"/></div>
+										</div>
 									</div>
 								</isif>
 
-								<div class="item-option option-quantity-purchased">
-									<span class="label">${Resource.msg('productlist.qtypurchased','account',null)}</span>
-									<span class="value"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></span>
+								<div class="form-row option-quantity-purchased">
+									<label>${Resource.msg('productlist.qtypurchased','account',null)}</label>
+									<div class="field-wrapper">
+										<div class="value"><isprint value="${item.purchasedQuantity.value}" formatter="#"/></div>
+									</div>
 								</div>
 
 							<iselseif condition="${item.object.type == item.object.TYPE_GIFT_CERTIFICATE}">
 								<!-- Gift Cetificate Qty Message -->
 							</isif>
 
-							<isinputfield formfield="${item.priority}" type="select" rowclass="item-option option-priority"/>
+							<isinputfield formfield="${item.priority}" type="select" rowclass="option-priority"/>
 
-							<isinputfield formfield="${item.public}" type="checkbox" rowclass="item-option option-toggle-public"/>
+							<isinputfield formfield="${item.public}" type="checkbox" rowclass="option-toggle-public label-inline"/>
 
-							<div class="item-option option-update">
+							<div class="option-update">
 								<button name="${item.updateItem.htmlName}" class="button-text update-item" type="submit">${Resource.msg('global.update','locale',null)}</button> |
 								<button name="${item.deleteItem.htmlName}" class="button-text delete-item" type="submit">${Resource.msg('global.remove','locale',null)}</button>
 							</div>
 						</isif>
-						<div class="item-option option-add-to-cart">
+						<div class="option-add-to-cart">
 							<isset name="isGiftCert" value="${item.object.type == item.object.TYPE_GIFT_CERTIFICATE}" scope="page"/>
 							<fieldset>
 								<input type="hidden" name="itemid" value="${item.object.ID}"/>
