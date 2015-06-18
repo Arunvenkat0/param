@@ -68,7 +68,7 @@
 						<iselse/>                        
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
 						</isif>
-						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${Resource.msg('global.categoryrefinement.label.prefix','locale',null)} ${SubCategory.displayName}" href="${refineLinkUrl}">
+						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${Resource.msgf('global.categoryrefinement.label','locale',null, SubCategory.displayName)}" href="${refineLinkUrl}">
 							<isprint value="${SubCategory.displayName}"/>
 						</a>
 
