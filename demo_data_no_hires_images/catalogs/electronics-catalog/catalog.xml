@@ -6905,7 +6905,7 @@ Cover Flow. Plus, view photos and videos in either portrait or landscape.</short
         <min-order-quantity>1</min-order-quantity>
         <step-quantity>1</step-quantity>
         <display-name xml:lang='x-default'>Sony Playstation 3 Game Console</display-name>
-        <short-description xml:lang='x-default'>ncludes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</short-description>
+        <short-description xml:lang='x-default'>Includes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</short-description>
         <online-flag>true</online-flag>
         <available-flag>true</available-flag>
         <searchable-flag>true</searchable-flag>
@@ -6925,12 +6925,12 @@ Cover Flow. Plus, view photos and videos in either portrait or landscape.</short
         <brand>Sony</brand>
         <page-attributes>
             <page-title xml:lang='x-default'>Sony Playstation 3 Game Console</page-title>
-            <page-description xml:lang='x-default'>ncludes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</page-description>
+            <page-description xml:lang='x-default'>Includes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</page-description>
             <page-keywords xml:lang='x-default'>Sony</page-keywords>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id='gameSystemType'>Sony PS3</custom-attribute>
-            <custom-attribute attribute-id='tabDescription'>ncludes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</custom-attribute>
+            <custom-attribute attribute-id='tabDescription'>Includes PLAYSTATION 3 80GB system, DUALSHOCK 3 wireless controller, free PLAYSTATION Network membership, internet ready Wi-Fi, and 80GB of hard disk storage for all your games, music, videos, and photos. Every PS3 comes with a built-in Blu-ray player to give you the best high-definition viewing experience and pristine picture quality. Plus, the PS3 can play your entire catalog of CDs and DVDs.</custom-attribute>
         </custom-attributes>
         <options>
             <shared-option option-id='consoleWarranty'/>
