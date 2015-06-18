@@ -1,14 +1,20 @@
 'use strict';
 
 import {assert} from 'chai';
-
 import client from '../webdriver/client';
 import * as wishListPage from '../webdriver/pageObjects/wishlist';
 import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as accountPage from '../webdriver/pageObjects/account';
+import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase.js';
 
 describe('Wishlist', () => {
+	before(() => client.init());
+	after(() => client.end());
+
+	describe('Social links', () => {
+	let customer;
+	let login = 'testuser1@demandware.com';
 	let socialLinks = {
 		facebook: {
 			selector: 'a[data-share=facebook]',
@@ -123,35 +129,21 @@ describe('Wishlist', () => {
 		);
 	});
 
-	describe('Gift Certificates',() => {
+	describe('Gift Certificates', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
+		var btnAddToCart='#AddToBasketButton';
 		var formGiftCertPurchase = '.gift-certificate-purchase';
 		var isGiftCertAdded;
+		var giftCertFieldMap = new Map();
+		giftCertFieldMap.set('recipient','Joe Smith');
+		giftCertFieldMap.set('recipientEmail','jsmith@someBogusEmailDomain.tv');
+		giftCertFieldMap.set('confirmRecipientEmail','jsmith@someBogusEmailDomain.tv');
+		giftCertFieldMap.set('message','Congratulations!');
+		giftCertFieldMap.set('amount','250');
 		var fieldMap = {
 			from: {
 				selector: 'input[id$="giftcert_purchase_from"]'
-			},
-			recipient: {
-				selector: 'input[id$="giftcert_purchase_recipient"]',
-				value: 'Joe Smith'
-
-			},
-			recipientEmail: {
-				selector: 'input[id$="giftcert_purchase_recipientEmail"]',
-				value: 'jsmith@someBogusEmailDomain.tv'
-			},
-			confirmecipientEmail: {
-				selector: 'input[id$="giftcert_purchase_confirmRecipientEmail"]',
-				value: 'jsmith@someBogusEmailDomain.tv'
-			},
-			message: {
-				selector: 'textarea[id$="purchase_message"]',
-				value: 'Congratulations!'
-			},
-			amount: {
-				selector: 'input[id$="purchase_amount"]',
-				value: 250
 			}
 		};
 
@@ -182,6 +174,18 @@ describe('Wishlist', () => {
 					assert.equal(from, expectedYourName);
 				});
 		});
+		//fill out Gift Certificate checkout form
+		it('should display the correct number of items in cart page',() => {
+			return giftCertPurchasePage.fillOutGiftCertPurchaseForm(giftCertFieldMap)
+				.then(() => giftCertPurchasePage.pressBtnAddToCart())
+				.then(() => cartPage.navigateTo())
+				.then(cartPage.getItemList()
+				.then(rows => assert.equal(1, rows.value.length)));
+			})
+
+		it('should display the correct name in cart page', () =>
+			cartPage.getItemNameByRow(1)
+				.then(name => assert.equal('Gift Certificate', name))
+		);
 	});
 });
-
