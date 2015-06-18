@@ -43,7 +43,7 @@
 						<isinclude template="components/socialsharing"/>
 						<a class="share-icon share-link" title="${Resource.msg('global.socialshare.link', 'locale', null)}" data-target=".share-link-content"><i class="fa fa-link"></i></a>
 					</div>
-					<div class="share-link-content">	
+					<div class="share-link-content">
 						${Resource.msg('registry.share.link','account',null)}:
 						<a href="${pdict.url}" title="${Resource.msg('registry.share.link','account',null)}">
 							<isprint value="${pdict.url}"/>
