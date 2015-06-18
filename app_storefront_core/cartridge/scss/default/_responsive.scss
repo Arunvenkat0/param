@@ -22,12 +22,6 @@
 			overflow: visible;
 		}
 	}
-	#wrapper {
-		border: 0;
-		max-width: 100%;
-		min-width: 320px;
-		width: 100%;
-	}
 	#primary {
 		background: none;
 		border: 0 !important;
@@ -522,9 +516,6 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 959px) {
-	#wrapper {
-		width: 760px;
-	}
 	#secondary {
 		width: 171px;
 	}
@@ -642,9 +633,6 @@
 }
 
 @media screen and (max-width: 480px) {
-	#wrapper.pt_gift-registry {
-		font-size: 12px;
-	}
 	#preferred-store-panel input[type="text"] {
 		width: 49.5966%;
 	}

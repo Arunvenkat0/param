@@ -1,11 +1,20 @@
 #wrapper {
-	background: none repeat scroll 0 0 $white;
+	background-color: $white;
+	border: 0;
 	left: 0;
 	margin: auto;
-	max-width: 960px;
 	position: relative;
 	transition: left 0.2s ease-in;
-	width: 960px;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		width: 760px;
+	}
+	@media screen and (min-width: 960px) {
+		width: 960px;
+	}
+	&.pt_storefront {
+		width: 100%;
+	}
 	&.menu-active {
 		left: 50%;
 	}
