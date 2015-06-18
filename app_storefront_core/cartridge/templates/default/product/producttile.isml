@@ -105,7 +105,7 @@
 			</isif>
 
 			<a class="thumb-link" href="${productUrl}" title="${Product.name}">
-				<img src="${thumbnailUrl}" alt="${thumbnailAlt}" title="${thumbnailTitle}" />
+				<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
 			</a>
 		</div>
 
