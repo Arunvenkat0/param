@@ -1,9 +1,13 @@
 'use strict';
 
+/* globals PIPELET_ERROR */
+
 /* API Includes */
 var Cart = require('~/cartridge/scripts/models/Cart');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
+var Pipelet = require('dw/system/Pipelet');
+var PaymentInstrument = require('dw/order/PaymentInstrument');
 
 /**
  * Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields.
@@ -12,7 +16,7 @@ var Transaction = require('dw/system/Transaction');
 function Handle(args) {
     var cart = Cart.get(args.Basket);
 
-    var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
+    var VerifyPaymentCardResult = new Pipelet('VerifyPaymentCard', {
         VerifySecurityCode : true
     }).execute({
             PaymentCard      : PaymentMgr.getPaymentCard(session.forms.billing.paymentMethods.creditCard.type.value),
@@ -26,7 +30,7 @@ function Handle(args) {
         // TODO is this also return in case of error?
         var CreditCardStatus = VerifyPaymentCardResult.Status;
 
-        new dw.system.Pipelet('Script', {
+        new Pipelet('Script', {
             Transactional : false,
             OnError       : 'PIPELET_ERROR',
             ScriptFile    : 'checkout/InvalidatePaymentCardFormElements.ds'
@@ -39,8 +43,8 @@ function Handle(args) {
     }
 
     Transaction.wrap(function () {
-        cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
-        var paymentInstrument = cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD, cart.getNonGiftCertificateAmount());
+        cart.removeExistingPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
+        var paymentInstrument = cart.createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD, cart.getNonGiftCertificateAmount());
 
         paymentInstrument.creditCardHolder = session.forms.billing.paymentMethods.creditCard.owner.value;
         paymentInstrument.creditCardNumber = session.forms.billing.paymentMethods.creditCard.number.value;

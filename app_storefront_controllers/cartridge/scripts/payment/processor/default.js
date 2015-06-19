@@ -4,7 +4,7 @@
  * Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields.
  * If the verification was successful a credit card payment instrument is created.
  */
-function Handle(args) {
+function Handle() {
     return {not_supported : true};
 }
 
@@ -13,7 +13,7 @@ function Handle(args) {
  * only and setting the order no as the transaction ID. Customizations may use other processors and custom
  * logic to authorize credit card payment.
  */
-function Authorize(args) {
+function Authorize() {
     return {not_supported : true};
 }
 

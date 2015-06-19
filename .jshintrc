@@ -15,6 +15,7 @@
 		"SitePreferences": true,
 		"Urls": true,
 		"Resources": true,
-		"User": true
+		"User": true,
+		"session": true
 	}
 }
