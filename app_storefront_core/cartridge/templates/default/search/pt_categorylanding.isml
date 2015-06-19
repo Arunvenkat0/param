@@ -38,8 +38,6 @@
 		<div id="main" role="main" class="clearfix">
 			<isinclude template="components/browsertoolscheck"/>
 			<iscontent type="text/html" charset="UTF-8" compact="true"/>
-
-			<isinclude template="search/components/productsearchbreadcrumbs"/>
 			
 			<isreplace/>
 	

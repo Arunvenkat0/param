@@ -396,3 +396,98 @@
 		}
 	}
 }
+.category-slot {
+	h1 {
+		color: $white;
+		font-family: $sans-serif-alt;
+		font-size: 3rem;
+		font-weight: 300;
+		position: absolute;
+		text-align: right;
+		top: 2%;
+		right: 2%;
+		@media screen and (min-width: 768px) {
+			font-size: 5rem;
+			font-weight: 100;
+		}
+	}
+	h2 {
+		color: $teal;
+		font-family: $serif;
+		font-size: 1.5rem;
+		font-style: italic;
+		margin: 0;
+		padding: .1rem .5rem;
+	}
+	h3 {
+		background-color: $white;
+		bottom: 0;
+		color: $black;
+		font-family: $sans-serif-alt;
+		font-size: 2rem;
+		font-weight: 300;
+		margin: 0;
+		opacity: .6;
+		padding: .5rem;
+		position: absolute;
+		text-transform: uppercase;
+		width: 100%;
+	}
+	.catlanding-banner {
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+		img {
+			height: auto;
+			width: 100%;
+		}
+	}
+	.category-tile {
+		float: left;
+		overflow: hidden;
+		padding: 0 .15%;
+		position: relative;
+		width: 100%;
+		@media screen and (min-width: 768px) {
+			width: 33%;
+		}
+		img {
+			height: auto;
+			width: 100%;
+		}	
+	}
+	.search-result-items {
+		.grid-tile {
+			box-shadow: none;
+			margin: 0;
+			padding: 0 .15%;
+			width: 100%;
+			@media screen and (min-width: 768px) {
+				width: 33%;
+			}
+			.product-tile {
+				background-color: $gainsboro;
+				margin: 0 .15%;
+		 		padding: 1rem 0;
+		 		width: 100%;
+				.product-name {
+					font-family: $sans-serif-alt;
+					font-size: 1.2rem;
+					font-weight: 100;
+					height: auto;
+					margin-top: .5em;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					a {
+						color: $cerulean;
+					}
+				}
+				.product-pricing {
+					font-family: $sans-serif-alt;
+					font-size: 1rem;
+				}	
+			}
+		}
+	}
+}

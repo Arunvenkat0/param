@@ -13,7 +13,7 @@
 	</iscomment>
 	
 	<div id="primary" class="primary-content">	
-		<isslot id="cat-landing-slotbanner" context="category" description="Large Category Landing Banner" context-object="${pdict.ProductSearchResult.category}"/>		
+		<isslot id="cat-landing-slotbanner" context="category" description="Banner at the top of Category Landing Pages" context-object="${pdict.ProductSearchResult.category}"/>		
 	</div>
 	
 	<div id="secondary" class="refinements">
@@ -21,7 +21,9 @@
 	</div>
 
 	<div class="secondary-content">
-		<isslot id="cat-landing-slotbottom" context="category" description="Category Landing Featured Products or Promotional Content" context-object="${pdict.ProductSearchResult.category}"/>
+		<isslot id="cat-landing-slotbottom" context="category" description="First slot below the Category Banner" context-object="${pdict.ProductSearchResult.category}"/>
+
+		<isslot id="cat-landing-slotbottom2" context="category" description="Second slot below the Category Banner" context-object="${pdict.ProductSearchResult.category}"/>
 	</div>
 		
 </isdecorate>
