@@ -180,6 +180,20 @@
             <index-type>suggest</index-type>
             <index-type>availability</index-type>
         </incremental-reindexing-enabled>
+        <indexed-locales>
+            <locale>en-US</locale>
+            <locale>zh-CN</locale>
+            <locale>fr-FR</locale>
+            <locale>ja-JP</locale>
+            <locale>it-IT</locale>
+            <locale>x-default</locale>
+        </indexed-locales>
+        <stemming xml:lang="en-US">English</stemming>
+        <stemming xml:lang="zh-CN">Chinese</stemming>
+        <stemming xml:lang="fr-FR">French</stemming>
+        <stemming xml:lang="ja-JP">Japanese</stemming>
+        <stemming xml:lang="it-IT">Italian</stemming>
+        <stemming xml:lang="x-default">English</stemming>
     </index-settings>
 </search>
 

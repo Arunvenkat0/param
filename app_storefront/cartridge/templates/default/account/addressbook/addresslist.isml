@@ -8,7 +8,7 @@
 
 <isdecorate template="${DecoratorTemplate}">
 
-	<isset name="bctext2" value="Addresses" scope="pdict"/>
+	<isset name="bctext2" value="${Resource.msg('account.addressbook.addresslist.header','account',null)}" scope="pdict"/>
 
 	<isslot id="account-banner" description="Banner for My Account pages" context="global" />
 	

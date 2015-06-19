@@ -5,7 +5,7 @@
 
 <isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
-	<h1>${Resource.msg('registrycustomer.giftregistries','account',null)}</h1>
+	<h1>${Resource.msg('account.registrycustomer.giftregistries','account',null)}</h1>
 	<div class="form-inline">
 		<isinclude template="account/giftregistry/giftregistrysearch"/>
 	</div>
@@ -20,14 +20,14 @@
 	<div class="event-info">
 		<h3>${Resource.msg('account.giftregistry.userinformation','account',null)}</h3>
 		<dl class="user">
-			<dt>${Resource.msg('registrycustomer.role','account',null)}</dt>
+			<dt>${Resource.msg('account.registrycustomer.role','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.registrant.role}"/></dd>
-			<dt>${Resource.msg('registrycustomer.name','account',null)}</dt>
+			<dt>${Resource.msg('account.registrycustomer.name','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.registrant.firstName}"/>&nbsp;<isprint value="${pdict.ProductList.registrant.lastName}"/></dd>
 			<isif condition="${pdict.ProductList.coRegistrant != null}">
-				<dt>${Resource.msg('registrycustomer.role','account',null)}</dt>
+				<dt>${Resource.msg('account.registrycustomer.role','account',null)}</dt>
 				<dd><isprint value="${pdict.ProductList.coRegistrant.role}"/></dd>
-				<dt>${Resource.msg('registrycustomer.name','account',null)}</dt>
+				<dt>${Resource.msg('account.registrycustomer.name','account',null)}</dt>
 				<dd><isprint value="${pdict.ProductList.coRegistrant.firstName}"/>&nbsp;<isprint value="${pdict.ProductList.coRegistrant.lastName}"/></dd>
 			</isif>
 		</dl>
@@ -35,15 +35,15 @@
 	<div class="event-info">
 		<h3>${Resource.msg('giftregistryconfirmation.eventinfo','account',null)}</h3>
 		<dl class="event">
-			<dt>${Resource.msg('registrycustomer.eventtype','account',null)}</dt>
+			<dt>${Resource.msg('account.registrycustomer.eventtype','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.eventType}"/></dd>
-			<dt>${Resource.msg('registrycustomer.location','account',null)}</dt>
+			<dt>${Resource.msg('account.registrycustomer.location','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.eventCity}"/>,<isprint value="${pdict.ProductList.eventState}"/></dd>
 		</dl>
 	</div>
 
 	<isif condition="${empty(pdict.CurrentForms.giftregistry.items)}">
-		<div class="gift-registry-empty-message">${Resource.msg('registrycustomer.noitems','account',null)}</div>
+		<div class="gift-registry-empty-message">${Resource.msg('account.registrycustomer.noitems','account',null)}</div>
 	</isif>
 
 	<table class="item-list" class="gift-registry-items">
@@ -65,7 +65,7 @@
 				<td class="item-dashboard">
 
 					<div class="item-option option-date-added">
-						<span class="label">${Resource.msg('registrycustomer.dateadded','account',null)}</span>
+						<span class="label">${Resource.msg('account.registrycustomer.dateadded','account',null)}</span>
 						<span class="value"><isprint value="${item.object.creationDate}"/></span>
 					</div>
 
@@ -91,7 +91,7 @@
 						<isif condition="${item.object.priority == option.htmlValue}">
 							<iscomment>priority select box</iscomment>
 							<div class="item-option option-priority">
-								<span class="label">${Resource.msg('registrycustomer.priority','account',null)}</span>
+								<span class="label">${Resource.msg('account.registrycustomer.priority','account',null)}</span>
 								<span class="value">${Resource.msg(option.label,'forms',null)}</span>
 							</div>
 						</isif>

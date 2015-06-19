@@ -112,7 +112,7 @@
 			<div class="product-previous <isif condition="${nextProd != null}">divided</isif>">
 				<a href="${prevProdUrls.pUrl}" title="${prevProdUrls.imgTitle}">
 					<span><img alt="${prevProdUrls.imgAlt}" title="${prevProdUrls.imgTitle}" src="${prevProdUrls.imgUrl}"/></span>
-					&laquo; prev
+					&laquo; ${Resource.msgf('global.previous.abbr','locale',null)}
 				</a>
 			</div>
 		</isif>
@@ -121,7 +121,7 @@
 			<div class="product-next">
 				<a href="${nextProdUrls.pUrl}" title="${nextProdUrls.imgTitle}">
 					<span><img alt="${nextProdUrls.imgAlt}" title="${nextProdUrls.imgTitle}" src="${nextProdUrls.imgUrl}" /></span>
-					next &raquo;
+					${Resource.msgf('global.next','locale',null)} &raquo;
 				</a>
 			</div>
 		</isif>

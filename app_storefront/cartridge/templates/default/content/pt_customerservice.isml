@@ -33,7 +33,7 @@
 
 		<div id="main" role="main" class="page-content clearfix">
 
-			<isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${'Customer Service'}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" />
+			<isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${Resource.msg('global.customerservice','locale',null)}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" />
 
 			<div id="primary" class="primary-content">
 				<section>

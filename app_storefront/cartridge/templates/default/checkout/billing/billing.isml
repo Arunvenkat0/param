@@ -46,7 +46,7 @@
 			<div class="select-address">
 				<div class="form-row">
 					<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
-						Choose an Address
+						${Resource.msg('global.selectaddressmessage','locale',null)}
 					</label>
 					<isscript>
 						importScript("cart/CartUtils.ds");
