@@ -1,0 +1,105 @@
+'use strict';
+
+/*
+ usage
+ var content = require('~/cartridge/scripts/models/ProductList');
+ */
+
+/** @module models/ProductList */
+
+var AbstractModel = require('./AbstractModel');
+var ProductListMgr = require('dw/customer/ProductListMgr');
+var Transaction = require('dw/system/Transaction');
+/**
+ * ProductList helper providing enhanced content functionality
+ * @class module:models/ProductList~ProductList
+ */
+var ProductList = AbstractModel.extend(
+    /** @lends module:models/ProductList~ProductList.prototype */
+    {
+        /**
+         * Remove the given item from the wishlist
+         *
+         * @transactional
+         * @param  {dw.customer.ProductListItem} item The item to remove
+         */
+        remove : function(item){
+            var list = this.object;
+            Transaction.wrap(function(){
+                list.removeItem(item);
+            });
+        },
+
+        /**
+         * Adds a product to the wishlist
+         *
+         * @transactional
+         * @param {dw.catalog.Product} product     The product to add
+         * @param {Number} quantity    The quantity to add
+         * @param {dw.catalog.ProductOptionModel} optionModel The option model for the given product
+         */
+        addProduct : function(product, quantity, optionModel){
+            var list = this.object;
+            Transaction.wrap(function(){
+                var item = list.createProductItem(product);
+                if(quantity && !isNaN(quantity)){
+                    item.setQuantityValue(quantity);
+                }
+                if(optionModel){
+                    item.setProductOptionModel(optionModel);
+                }
+                // inherit public flag from the wishlist
+                item.setPublic(list.public);
+
+                return item;
+            });
+            return null;
+        },
+
+        /**
+         * Sets the list public/private
+         *
+         * @transactional
+         * @param {Boolean} isPublic the value the public flag should be set to
+         */
+        setPublic : function(isPublic){
+            var list = this.object;
+            Transaction.wrap(function(){
+                list.setPublic(isPublic);
+                var items = list.items.iterator();
+                while( items.hasNext() ) {
+                    var anItem = items.next();
+                    anItem.setPublic(isPublic);
+                }
+            });
+        }
+
+    });
+    
+/**
+ * Use this method to get the wishlist for the current customer. The method will create a new wishlist
+ * on the fly unless an instance of a product list is passed
+ *
+ * @transactional
+ */
+ProductList.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'undefined') {
+        obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+        if(obj.empty){
+            Transaction.wrap(function(){
+                obj = ProductListMgr.createProductList(customer, dw.customer.ProductList.TYPE_WISH_LIST);
+            });
+        }else{
+            obj = obj[0];
+        }
+    } else if (typeof parameter === 'string') {
+        obj = ProductListMgr.getProductList(parameter);
+    } else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    return new ProductList(obj);
+};
+
+/** The ProductList class */
+module.exports = ProductList;

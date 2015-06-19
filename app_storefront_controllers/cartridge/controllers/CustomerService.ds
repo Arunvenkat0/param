@@ -1,0 +1,86 @@
+'use strict';
+
+/**
+ * Controller handling customer service related pages, like help desk as well as the contact us form.
+ *
+ * @module controllers/CustomerService
+ */
+
+/* API Includes */
+var Status = require('dw/system/Status');
+var Template = require('dw/util/Template');
+
+/* Script Modules */
+var app = require('~/cartridge/scripts/app');
+var guard = require('~/cartridge/scripts/guard');
+
+
+/**
+ * Renders the customer service overview page.
+ */
+function show() {
+    app.getView('CustomerServiceView').render('content/customerservice');
+}
+
+/**
+ * Renders the left hand navigation.
+ */
+function leftNav() {
+    app.getView('CustomerServiceView').render('content/customerserviceleftnav');
+}
+
+/**
+ * Provides a contact us form which sends an email to the configured customer service email address.
+ */
+function contactUs() {
+    app.getForm('contactus').clear();
+    app.getView('CustomerServiceView').render('content/contactus');
+}
+
+/**
+ * The form handler.
+ */
+function submit() {
+	var contactUsForm = app.getForm('contactus');
+	
+    var contactUsResult = contactUsForm.handleAction({
+        'send'  : function (formgroup) {
+            // Change the MailTo in order to send to the store's customer service email address. It defaults to the
+            // user's email for demonstration.
+            var Email = app.getModel('Email');
+            return Email.get('mail/contactus', formgroup.email.value)
+                .setFrom(formgroup.email.value)
+                .setSubject(formgroup.myquestion.value)
+                .send({});
+        },
+        'error' : function (formgroup) {
+            // no special error handling in case the form is invalid
+            return null;
+        }
+    });
+
+    if (contactUsResult && (contactUsResult.getStatus() === Status.OK)) {
+        app.getView('CustomerServiceView', {
+            ConfirmationMessage : 'edit'
+        }).render('content/contactus');
+    }
+    else {
+        app.getView('CustomerServiceView').render('content/contactus');
+    }
+}
+
+/*
+ * Module exports
+ */
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controllers/CustomerService~show */
+exports.Show = guard.ensure(['get'], show);
+/** @see module:controllers/CustomerService~leftNav */
+exports.LeftNav = guard.ensure(['get'], leftNav);
+/** @see module:controllers/CustomerService~contactUs */
+exports.ContactUs = guard.ensure(['get', 'https'], contactUs);
+/** @see module:controllers/CustomerService~submit */
+exports.Submit = guard.ensure(['post', 'https'], submit);
