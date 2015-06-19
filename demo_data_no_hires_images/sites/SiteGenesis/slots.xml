@@ -31,6 +31,36 @@
         </content>
     </slot-configuration>
 
+    <slot-configuration slot-id="account-banner" context="global" configuration-id="Account Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cart-footer" context="global" configuration-id="CartFooterFeatured" assigned-to-site="true">
+        <description>Featured Products that display in the footer of the cart page, below the cart-actions buttons.</description>
+        <template>slots/product/product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
+        <content>
+            <products>
+                <product product-id="008884303989"/>
+                <product product-id="008884304054"/>
+                <product product-id="008885004533"/>
+            </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="error-banner" context="global" configuration-id="Error Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
     <slot-configuration slot-id="cart-banner" context="global" configuration-id="Global cart slot" assigned-to-site="true">
         <description>Global cart slot</description>
         <template>slots/product/horizontalcarousel.isml</template>
@@ -41,47 +71,6 @@
                 <product product-id="008884304085"/>
                 <product product-id="008885004854"/>
             </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom-right" context="global" configuration-id="this-weeks-deals" default="true" assigned-to-site="true">
-        <description>Product Carousel of This Weeks Deals</description>
-        <template>slots/product/homerightcarousel.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="de">&lt;h2&gt;Angebot der&lt;/h2&gt;
-&lt;h1&gt;Woche&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;
-&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="fr">&lt;h2&gt;cette semaine&lt;/h2&gt;
-&lt;h1&gt;Offres&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="it">&lt;h2&gt;di questa settimana&lt;/h2&gt;
-&lt;h1&gt;offerte&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="ja">&lt;h2&gt;今週の&lt;/h2&gt;
-&lt;h1&gt;取引&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="zh">&lt;h1&gt;本周热卖&lt;/h1&gt;</callout-msg>
-        <content>
-            <products>
-                <product product-id="25591535"/>
-                <product product-id="25686395"/>
-                <product product-id="54736828"/>
-                <product product-id="25590891"/>
-            </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womans-shoes-sweaters-accessories" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-accessories-shoes"/>
-                <category category-id="womens-clothing-tops"/>
-                <category category-id="womens-accessories"/>
-                <category category-id="womens-outfits"/>
-                <category category-id="womens-clothing-dresses"/>
-                <category category-id="womens-clothing-bottoms"/>
-                <category category-id="womens-clothing-jackets"/>
-            </categories>
         </content>
     </slot-configuration>
 
@@ -104,121 +93,6 @@
                 <content-asset content-id="search-promo2"/>
                 <content-asset content-id="search-promo3"/>
             </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="header-usermenu" context="global" configuration-id="header-social-email" assigned-to-site="true">
-        <description>Header user menu slot containing the social icons and email form for 768 and above.</description>
-        <template>slots/content/menu-slot.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <content-assets>
-                <content-asset content-id="footer-social-email"/>
-            </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="New Slot Configuration - 2012-02-07 15:52:46" assigned-to-site="false">
-        <description>test of this</description>
-        <template>slots/product/product_1x2.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Hey look at this</callout-msg>
-        <content>
-            <products>
-                <product product-id="008884304016"/>
-                <product product-id="008884304023"/>
-                <product product-id="008884304030"/>
-                <product product-id="008884304047"/>
-                <product product-id="008884304054"/>
-                <product product-id="008884304061"/>
-                <product product-id="008884304085"/>
-                <product product-id="008884304078"/>
-            </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cart-footer" context="global" configuration-id="CartFooterFeatured" assigned-to-site="true">
-        <description>Featured Products that display in the footer of the cart page, below the cart-actions buttons.</description>
-        <template>slots/product/product_listing.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
-        <content>
-            <products>
-                <product product-id="008884303989"/>
-                <product product-id="008884304054"/>
-                <product product-id="008885004533"/>
-            </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="404-promo" context="global" configuration-id="Promo Zune" default="true" assigned-to-site="true">
-        <description>Free Microsoft Zune With Purchase Of $500 Or More In Electronics</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="error-promo" context="global" configuration-id="Zune Promo Image" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="account-banner" context="global" configuration-id="Account Banner" assigned-to-site="false">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default"></body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="registry-header" context="global" configuration-id="Registry Header" assigned-to-site="false">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default"></body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="error-banner" context="global" configuration-id="Error Banner" assigned-to-site="false">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default"></body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="placeorder-slot" context="global" configuration-id="Placeorder Slot" assigned-to-site="false">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default"></body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="wishlist-banner" context="global" configuration-id="Wishlist Banner" assigned-to-site="false">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default"></body>
-            </html>
         </content>
     </slot-configuration>
 
@@ -261,8 +135,76 @@ Here you will find answers to your questions about shopping at our online store,
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>false</enabled-flag>
         <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="placeorder-slot" context="global" configuration-id="Placeorder Slot" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="404-promo" context="global" configuration-id="Promo Zune" default="true" assigned-to-site="true">
+        <description>Free Microsoft Zune With Purchase Of $500 Or More In Electronics</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
             <html>
-                <body xml:lang="x-default"></body>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="registry-header" context="global" configuration-id="Registry Header" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="wishlist-banner" context="global" configuration-id="Wishlist Banner" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>false</enabled-flag>
+        <content>
+            <html/>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbottom2" context="category" context-id="womens" configuration-id="WomensSubCatProducts" default="true" assigned-to-site="false">
+        <description>Products from sub categories of women</description>
+        <template>slots/product/cat_product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
+        <content>
+            <products>
+                <product product-id="25591494"/>
+                <product product-id="013742002836"/>
+                <product product-id="799927757387"/>
+            </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="error-promo" context="global" configuration-id="Zune Promo Image" assigned-to-site="true">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cart-approachingdiscount" context="global" configuration-id="approachingdiscount" assigned-to-site="false">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">${Resource.msg('approachingpromo.receive','checkout',null)}
+	&lt;isprint value="${approachingdiscount.getDiscount().getPromotion().getCalloutMsg()}" encoding="off"/&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -496,7 +438,7 @@ Here you will find answers to your questions about shopping at our online store,
             </html>
         </content>
     </slot-configuration>
-    
+
     <slot-configuration slot-id="cart-empty" context="global" configuration-id="cartempty-lastvisited" assigned-to-site="true">
         <description>Slot for products which displays below the empty cart message.</description>
         <template>slots/product/product_listing.isml</template>
@@ -544,7 +486,7 @@ Here you will find answers to your questions about shopping at our online store,
             </html>
         </content>
     </slot-configuration>
-    
+
     <slot-configuration slot-id="footer-column" context="global" configuration-id="footer-social-email" assigned-to-site="true">
         <description>Footer slot containing the social icons and email form.</description>
         <template>slots/content/contentassetbody.isml</template>
@@ -556,9 +498,20 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
+    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="free-shipping-orders-over-150" default="true" assigned-to-site="true">
+        <description>This is the free shipping promotion slot at the bottom of the home page.</description>
+        <template>slots/content/homepage/home-bottom-center.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <content-assets>
+                <content-asset content-id="home-free-shipping-orders-over-150"/>
+            </content-assets>
+        </content>
+    </slot-configuration>
+
     <slot-configuration slot-id="header-banner" context="global" configuration-id="free2dayshiporderover300" default="true" assigned-to-site="true">
         <description>HTML slot for Free 2 Day Shipping</description>
-	<template>slots/html/header-promotion.isml</template>
+        <template>slots/html/header-promotion.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
@@ -588,46 +541,25 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="home-bottom-center" default="true" assigned-to-site="true">
-        <template>slots/content/homepage/home-bottom-slot.isml</template>
+    <slot-configuration slot-id="header-usermenu" context="global" configuration-id="header-social-email" assigned-to-site="true">
+        <description>Header user menu slot containing the social icons and email form for 768 and above.</description>
+        <template>slots/content/menu-slot.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <content-assets>
-                <content-asset content-id="home-bottom-center"/>
+                <content-asset content-id="footer-social-email"/>
             </content-assets>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-bottom-left" context="global" configuration-id="home-bottom-left" default="true" assigned-to-site="false">
-        <template>slots/content/homepage/home-bottom-slot.isml</template>
+    <slot-configuration slot-id="home-bottom-left" context="global" configuration-id="home-bottom-womens-shoes" default="true" assigned-to-site="false">
+        <description>The slot displays on the bottom left of the home page.</description>
+        <template>slots/content/homepage/home-bottom-left.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <content-assets>
-                <content-asset content-id="home-bottom-left"/>
+                <content-asset content-id="home-bottom-womens-shoes"/>
             </content-assets>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-bottom-right" context="global" configuration-id="home-bottom-right" default="true" assigned-to-site="false">
-        <template>slots/product/verticalcarousel.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Featured Products</callout-msg>
-        <content>
-            <products>
-                <product product-id="25593016"/>
-                <product product-id="25695189"/>
-                <product product-id="25593363"/>
-                <product product-id="25686571"/>
-            </products>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="home-main" context="global" configuration-id="homepage-flash" assigned-to-site="true">
-        <description>HomepageFlash</description>
-        <template>slots/html/homepageflash.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html/>
         </content>
     </slot-configuration>
 
@@ -928,19 +860,28 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womans-shoes-sweaters-accessories" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
+    <slot-configuration slot-id="home-bottom-right" context="global" configuration-id="this-weeks-deals" default="true" assigned-to-site="true">
+        <description>Product Carousel of This Weeks Deals</description>
+        <template>slots/product/homerightcarousel.isml</template>
         <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="de">&lt;h2&gt;Angebot der&lt;/h2&gt;
+&lt;h1&gt;Woche&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;
+&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="fr">&lt;h2&gt;cette semaine&lt;/h2&gt;
+&lt;h1&gt;Offres&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="it">&lt;h2&gt;di questa settimana&lt;/h2&gt;
+&lt;h1&gt;offerte&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="ja">&lt;h2&gt;今週の&lt;/h2&gt;
+&lt;h1&gt;取引&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="zh">&lt;h1&gt;本周热卖&lt;/h1&gt;</callout-msg>
         <content>
-            <categories>
-                <category category-id="womens-accessories-shoes"/>
-                <category category-id="womens-clothing-tops"/>
-                <category category-id="womens-accessories"/>
-                <category category-id="womens-outfits"/>
-                <category category-id="womens-clothing-dresses"/>
-                <category category-id="womens-clothing-bottoms"/>
-                <category category-id="womens-clothing-jackets"/>
-            </categories>
+            <products>
+                <product product-id="25591535"/>
+                <product product-id="25686395"/>
+                <product product-id="54736828"/>
+                <product product-id="25590891"/>
+            </products>
         </content>
     </slot-configuration>
 
@@ -961,17 +902,6 @@ Here you will find answers to your questions about shopping at our online store,
         <content>
             <categories>
                 <category category-id="womens-accessories-shoes"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-apparel" default="true" assigned-to-site="true">
-        <description>Banner promoting women's clothing promotions</description>
-        <template>slots/category/catlandingslotbanner.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-clothing"/>
             </categories>
         </content>
     </slot-configuration>
@@ -1003,17 +933,6 @@ Here you will find answers to your questions about shopping at our online store,
             <categories>
                 <category category-id="womens-footwear"/>
             </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-greatstyles" assigned-to-site="true">
-        <description>Great Styles banner</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;img alt="Check Out these Great Styles" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-            </html>
         </content>
     </slot-configuration>
 
@@ -1057,10 +976,10 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-shoes-sweaters-accessories" default="true" assigned-to-site="true">
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-shoes-sweaters-accessories" assigned-to-site="true">
         <description>Links to women's categories</description>
         <template>slots/category/categorylandingslotbottom.isml</template>
-        <enabled-flag>true</enabled-flag>
+        <enabled-flag>false</enabled-flag>
         <content>
             <categories>
                 <category category-id="womens-footwear-shoes"/>
@@ -1070,16 +989,33 @@ Here you will find answers to your questions about shopping at our online store,
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-success" assigned-to-site="true">
-        <description>Large banner promoting the season's new styles</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-subcategories" default="true" assigned-to-site="false">
+        <description>Tiles of the subcategories of womens</description>
+        <template>slots/category/category-tile.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Shop in Category</callout-msg>
         <content>
-            <html>
-                <body xml:lang="x-default">&lt;img alt="Dress for Success"  src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-            </html>
+            <categories>
+                <category category-id="womens-clothing"/>
+                <category category-id="womens-jewelry"/>
+                <category category-id="womens-accessories"/>
+            </categories>
         </content>
     </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-tops" default="true" assigned-to-site="true">
+        <description>Slot Banner for Women's Tops</description>
+        <template>slots/category/catlanding-banner.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Shop Women's Tops</callout-msg>
+        <content>
+            <categories>
+                <category category-id="womens"/>
+            </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration-campaign-assignment slot-id="cart-approachingdiscount" context="global" configuration-id="approachingdiscount" campaign-id="electronics-promotions"/>
 
     <slot-configuration-campaign-assignment slot-id="cat-banner" context="category" context-id="mens-clothing-dress-shirts" configuration-id="mens-clothing-dress-shirts" campaign-id="mens-clothing-dress-shirts">
         <rank>10</rank>

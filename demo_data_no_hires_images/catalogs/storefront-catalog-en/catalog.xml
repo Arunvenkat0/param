@@ -314,7 +314,7 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>10.0</position>
-        <template>rendering/category/categorylanding</template>
+        <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-description xml:lang="x-default">Women's range. Fashionable and stylish Shoes, jackets and  all other clothing for unbeatable comfort day in, day out. Practical and fashionable styles wherever the occasion.</page-description>
@@ -325,9 +325,13 @@
             <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$httpsUrl('GiftCert-Purchase')$"&gt;&lt;img width="433" height="80" src="images/WomensMenuBottomBanner.jpg?$staticlink$" alt="Womans Catalog" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/catlanding-banner.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
+            <blocked-refinement-definition type="price"/>
+            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
@@ -347,7 +351,7 @@
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="sizeChartID">kids-clothing</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-clothing.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womensclothing.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
@@ -678,26 +682,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <threshold>20</threshold>
@@ -716,6 +700,26 @@
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
@@ -865,26 +869,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <threshold>20</threshold>
@@ -903,6 +887,26 @@
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
@@ -1066,26 +1070,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <threshold>20</threshold>
@@ -1104,6 +1088,26 @@
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
@@ -1236,26 +1240,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <threshold>20</threshold>
@@ -1274,6 +1258,26 @@
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€500 - €1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
@@ -1386,7 +1390,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-accessories.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womensaccessories.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
@@ -1449,46 +1453,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>0</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $999.99</display-name>
-                        <threshold>1000</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$1000 - $1499.99</display-name>
-                        <threshold>1500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$1500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$2000 - $2499.99</display-name>
-                        <threshold>2500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$2500 - $4999.99</display-name>
-                        <threshold>5000</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$5000  - $9999.99</display-name>
-                        <threshold>10000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €19.99</display-name>
                         <threshold>20</threshold>
@@ -1527,6 +1491,46 @@
                     </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€5000  - €9999.99</display-name>
+                        <threshold>10000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $999.99</display-name>
+                        <threshold>1000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$1000 - $1499.99</display-name>
+                        <threshold>1500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$1500 - $1999.99</display-name>
+                        <threshold>2000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$2000 - $2499.99</display-name>
+                        <threshold>2500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$2500 - $4999.99</display-name>
+                        <threshold>5000</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$5000  - $9999.99</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                 </bucket-definitions>
@@ -1632,6 +1636,26 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>0</cutoff-threshold>
                 <bucket-definitions>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€144 - €180.00</display-name>
+                        <threshold>180</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">under €200</display-name>
+                        <threshold>200</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€181 - €215.00</display-name>
+                        <threshold>216</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">€216 - €359.00</display-name>
+                        <threshold>360</threshold>
+                    </price-bucket>
+                    <price-bucket currency="EUR">
+                        <display-name xml:lang="x-default">over €360</display-name>
+                        <threshold>719999</threshold>
+                    </price-bucket>
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">under $200</display-name>
                         <threshold>200</threshold>
@@ -1651,26 +1675,6 @@
                     <price-bucket currency="USD">
                         <display-name xml:lang="x-default">over $500</display-name>
                         <threshold>999999</threshold>
-                    </price-bucket>
-                    <price-bucket currency="EUR">
-                        <display-name xml:lang="x-default">under €200</display-name>
-                        <threshold>200</threshold>
-                    </price-bucket>
-                    <price-bucket currency="EUR">
-                        <display-name xml:lang="x-default">€144 - €180.00</display-name>
-                        <threshold>180</threshold>
-                    </price-bucket>
-                    <price-bucket currency="EUR">
-                        <display-name xml:lang="x-default">€181 - €215.00</display-name>
-                        <threshold>216</threshold>
-                    </price-bucket>
-                    <price-bucket currency="EUR">
-                        <display-name xml:lang="x-default">€216 - €359.00</display-name>
-                        <threshold>360</threshold>
-                    </price-bucket>
-                    <price-bucket currency="EUR">
-                        <display-name xml:lang="x-default">over €360</display-name>
-                        <threshold>719999</threshold>
                     </price-bucket>
                 </bucket-definitions>
             </refinement-definition>
@@ -1750,26 +1754,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €14.00</display-name>
                         <threshold>20</threshold>
@@ -1789,6 +1773,26 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€360 - €1439.00</display-name>
                         <threshold>1440</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
+                        <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
             </refinement-definition>
@@ -1851,22 +1855,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>0</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">under $25</display-name>
-                        <threshold>25</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$25 - $50</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 and up</display-name>
-                        <threshold>999999</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">under €18</display-name>
                         <threshold>18</threshold>
@@ -1882,6 +1870,22 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€72 and up</display-name>
                         <threshold>719999</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">under $25</display-name>
+                        <threshold>25</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$25 - $50</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 and up</display-name>
+                        <threshold>999999</threshold>
                     </price-bucket>
                 </bucket-definitions>
             </refinement-definition>
@@ -1941,26 +1945,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €14.00</display-name>
                         <threshold>14</threshold>
@@ -1980,6 +1964,26 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€360 - €1439.99</display-name>
                         <threshold>1440</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$0 - $19.99</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$20 - $49.99</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$50 - $99.99</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$100 - $499.99</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">$500 - $1999.99</display-name>
+                        <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
             </refinement-definition>
@@ -3292,26 +3296,6 @@
                 <sort-direction>ascending</sort-direction>
                 <cutoff-threshold>5</cutoff-threshold>
                 <bucket-definitions>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">0$ - 20$</display-name>
-                        <threshold>20</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">20$ - 50$</display-name>
-                        <threshold>50</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">50$ - 100$</display-name>
-                        <threshold>100</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">100$ - 500$</display-name>
-                        <threshold>500</threshold>
-                    </price-bucket>
-                    <price-bucket currency="USD">
-                        <display-name xml:lang="x-default">500$ - 2000$</display-name>
-                        <threshold>2000</threshold>
-                    </price-bucket>
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€0 - €20</display-name>
                         <threshold>20</threshold>
@@ -3331,6 +3315,26 @@
                     <price-bucket currency="EUR">
                         <display-name xml:lang="x-default">€360 - €1440</display-name>
                         <threshold>1440</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">0$ - 20$</display-name>
+                        <threshold>20</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">20$ - 50$</display-name>
+                        <threshold>50</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">50$ - 100$</display-name>
+                        <threshold>100</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">100$ - 500$</display-name>
+                        <threshold>500</threshold>
+                    </price-bucket>
+                    <price-bucket currency="USD">
+                        <display-name xml:lang="x-default">500$ - 2000$</display-name>
+                        <threshold>2000</threshold>
                     </price-bucket>
                 </bucket-definitions>
             </refinement-definition>
@@ -4401,6 +4405,12 @@
         <primary-flag>true</primary-flag>
     </category-assignment>
 
+    <category-assignment category-id="mens-clothing-pants" product-id="42416786-1"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="42416786-2"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="42416786-3"/>
+
     <category-assignment category-id="mens-clothing-pants" product-id="42946931">
         <primary-flag>true</primary-flag>
     </category-assignment>
@@ -4424,6 +4434,24 @@
     <category-assignment category-id="mens-clothing-pants" product-id="73910532">
         <primary-flag>true</primary-flag>
     </category-assignment>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-1"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-2"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-3"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-4"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-5"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-6"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-7"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-8"/>
+
+    <category-assignment category-id="mens-clothing-pants" product-id="73910532-9"/>
 
     <category-assignment category-id="mens-clothing-pants" product-id="82516743">
         <primary-flag>true</primary-flag>
@@ -5982,6 +6010,7 @@
     </category-assignment>
 
     <category-assignment category-id="womens-clothing-dresses" product-id="22956726">
+        <position>auto</position>
         <primary-flag>true</primary-flag>
     </category-assignment>
 
