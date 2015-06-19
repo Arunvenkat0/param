@@ -74,13 +74,13 @@
   "paths": {
     "css": [
       {
-        "src": "app_storefront_core/cartridge/scss/default/",
-        "dest": "app_storefront_core/cartridge/static/default/css/"
+        "src": "app_storefront/cartridge/scss/default/",
+        "dest": "app_storefront/cartridge/static/default/css/"
       }
     ],
     "js": {
-      "src": "app_storefront_core/cartridge/js/",
-      "dest": "app_storefront_core/cartridge/static/default/js/"
+      "src": "app_storefront/cartridge/js/",
+      "dest": "app_storefront/cartridge/static/default/js/"
     }
   }
 }

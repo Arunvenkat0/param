@@ -17,7 +17,7 @@ export const creditCard1 = {
 };
 
 let demoDataDir = 'demo_data_no_hires_images';
-let coreTestDataDir = 'app_storefront_core/cartridge/testdata';
+let coreTestDataDir = 'app_storefront/cartridge/testdata';
 let subjectMeta = {
 	catalogElectronics: {
 		filePath: coreTestDataDir + '/catalog/electronics.xml',
