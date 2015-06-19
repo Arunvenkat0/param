@@ -28,7 +28,7 @@
 
 <div class="product-col-1">
 	<div class="product-primary-image">
-		<img class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+		<img class="primary-image" src="${imageUrl}" alt="${imageAlt}"/>
 	</div>
 </div>
 
