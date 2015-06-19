@@ -62,16 +62,16 @@ The tests are contained in suites, which are represented as directories. For exa
     ```
 
 1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
-testdata directory from the app_storefront_core/cartridge to the "Impex/src"
+testdata directory from the app_storefront/cartridge to the "Impex/src"
 directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src).
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
 
-1. Add the `app_storefront_core` cartridge to the Business Manager Sites-Site
+1. Add the `app_storefront` cartridge to the Business Manager Sites-Site
 Settings:
-    1. Go to **Business Manager > Administration > Manage Sites** 
+    1. Go to **Business Manager > Administration > Manage Sites**
     1. Click on the Manage the **Business Manager** Site link
-    1. Set the **Cartridges** field to **app_storefront_core:bm_custom_plugin**
+    1. Set the **Cartridges** field to **app_storefront:bm_custom_plugin**
 
 1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
@@ -100,7 +100,7 @@ It's important to keep this command-line instance running in the background. Ope
 1. Reset test data
 
     To ensure that the application tests can consistently compare results with their
-expected values, we have implemented a process to reset test data.  During the 
+expected values, we have implemented a process to reset test data.  During the
 SiteGenesis build process, a job called, **TestDataReset**, is created and available
 to run.  **Note:** By default, the site associated with the job is SiteGenesis.
 If you are using a different site, please alter the job to point to it.
@@ -142,7 +142,7 @@ The following options are supported on the command line:
 
 ### Test user accounts
 
-Here are some generic test accounts that are used in the application tests suite, 
+Here are some generic test accounts that are used in the application tests suite,
 along with their differences for testing different scenarios:
 ( **Note** : The password for each account is **Test123!** )
 
@@ -661,4 +661,4 @@ failing**
 *[2] Selenium version 2.44.0 is not compatible with PhantomJS (see https://code.google.com/p/selenium/issues/detail?id=8088). In order to circumvent this, install version 2.43.1 instead: `selenium-standalone install --version=2.43.1`.*
 
 *[3] You might need to use the flag `--version=2.43.1` to start the server as well, similar to note [2].*
- 
+
