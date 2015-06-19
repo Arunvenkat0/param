@@ -1945,10 +1945,10 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Follow Us&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="Go to LinkedIn" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Go to Facebook" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Go to Twitter" href="https://twitter.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="Go to YouTube" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="Go to LinkedIn" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;span class=&quot;visually-hidden&quot;&gt;LinkedIn&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Go to Facebook" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Go to Twitter" href="https://twitter.com/demandware" target="_blank"&gt;&lt;span class=&quot;visually-hidden&quot;&gt;Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="Go to YouTube" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;span class=&quot;visually-hidden&quot;&gt;YouTube&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;						&#13;
                 &lt;h3&gt;Get special offers &amp; news on the latest styles&lt;/h3&gt;&#13;
                 &lt;form action="#" method="post" id="email-alert-signup"&gt;&#13;

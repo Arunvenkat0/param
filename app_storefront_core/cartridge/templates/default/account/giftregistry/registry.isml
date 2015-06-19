@@ -41,7 +41,7 @@
 							pdict.url = URLUtils.https('GiftRegistryCustomer-Show', 'ID', pdict.ProductList.ID);
 						</isscript>
 						<isinclude template="components/socialsharing"/>
-						<a class="share-icon share-link" title="${Resource.msg('global.socialshare.link', 'locale', null)}" data-target=".share-link-content"><i class="fa fa-link"></i></a>
+						<a class="share-icon share-link" title="${Resource.msg('global.socialshare.link.label', 'locale', null)}" data-target=".share-link-content"><i class="fa fa-link"></i><span class="visually-hidden">${Resource.msg('global.socialshare.link', 'locale', null)}</span></a>
 					</div>
 					<div class="share-link-content">
 						${Resource.msg('registry.share.link','account',null)}:
