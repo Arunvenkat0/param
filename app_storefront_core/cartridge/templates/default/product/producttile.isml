@@ -105,7 +105,7 @@
 			</isif>
 
 			<a class="thumb-link" href="${productUrl}" title="${Product.name}">
-				<img src="${thumbnailUrl}" alt="${thumbnailAlt}" title="${thumbnailTitle}" />
+				<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
 			</a>
 		</div>
 
@@ -279,40 +279,42 @@
 			</iscomment>
 			<isscript>importScript("product/ProductUtils.ds")</isscript>
 			<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value)}">
-				<div class="product-compare">
-					<isif condition="${!Product.productSet && !Product.bundle}">
-						<isscript>
-							// mark the compare checkbox checked if the current product is
-							// in the current comparison list for the current category
-							importScript( "catalog/libCompareList.ds" );
+				<isif condition="${!Product.productSet && !Product.bundle}">
+					<isscript>
+						// mark the compare checkbox checked if the current product is
+						// in the current comparison list for the current category
+						importScript( "catalog/libCompareList.ds" );
 
-							var comparison = GetProductCompareList();
-							var comparisonProducts = null;
-							var checkedStr = '';
-							// Set the category
-							if (!empty(pdict.ProductSearchResult && !empty(pdict.ProductSearchResult.category))) {
-								comparison.setCategory(pdict.ProductSearchResult.category.ID);
-							}
+						var comparison = GetProductCompareList();
+						var comparisonProducts = null;
+						var checkedStr = '';
+						// Set the category
+						if (!empty(pdict.ProductSearchResult && !empty(pdict.ProductSearchResult.category))) {
+							comparison.setCategory(pdict.ProductSearchResult.category.ID);
+						}
 
-							if (comparison) {
-								comparisonProducts = comparison.getProducts();
-							}
-							if (!empty(comparisonProducts)) {
-								var pIt = comparisonProducts.iterator();
-								var productId = null;
-								while (pIt.hasNext()) {
-									productId = pIt.next();
-									if (productId == Product.ID) {
-										checkedStr = 'checked="checked"';
-										break;
-									}
+						if (comparison) {
+							comparisonProducts = comparison.getProducts();
+						}
+						if (!empty(comparisonProducts)) {
+							var pIt = comparisonProducts.iterator();
+							var productId = null;
+							while (pIt.hasNext()) {
+								productId = pIt.next();
+								if (productId == Product.ID) {
+									checkedStr = 'checked="checked"';
+									break;
 								}
 							}
-						</isscript>
-						<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
+						}
+					</isscript>
+					<div class="product-compare label-inline">
 						<label for="${'cc-'+Product.UUID}">${Resource.msg('search.compare', 'search', null)}</label>
-					</isif>
-				</div>
+						<div class="field-wrapper">
+							<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
+						</div>
+					</div>
+				</isif>
 			</isif>
 		</isif>
 	</div><!--  END: .product-tile -->

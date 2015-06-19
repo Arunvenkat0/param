@@ -83,7 +83,6 @@
 							<img class="productthumbnail"
 								 src="${img.getURL()}"
 								 alt="${img.alt}"
-								 title="${img.title}"
 								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${'#'}"}'/>
 						</isloop>
 					</isif>
@@ -102,7 +101,6 @@
 							<img class="productthumbnail"
 								 src="${img.getURL()}"
 								 alt="${img.alt}"
-								 title="${img.title}"
 								 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${'#'}"}'/>
 
 						</isloop>

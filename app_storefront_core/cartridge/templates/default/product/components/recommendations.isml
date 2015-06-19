@@ -44,14 +44,14 @@
 								<div class="product-image recommendation_image">
 									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
 										<isif condition="${!empty(pdict.Product.getImage('small',0))}">
-											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}" title="${pdict.Product.getImage('small',0).title}"/>
+											<img src="${pdict.Product.getImage('small',0).getURL()}" alt="${pdict.Product.getImage('small',0).alt}"/>
 										<iselse/>
-											<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pName}" title="${pName}"/>
+											<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${pName}"/>
 										</isif>
 									</a>
 								</div>
 								<div class="product-name">
-									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}" title="${pName}"><isprint value="${pName}"/></a>
+									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('global.goto.label', 'locale', null, pName)}"><isprint value="${pName}"/></a>
 								</div>
 								<isinclude template="product/components/pricing.isml"/>
 								<div class="tooltip-content" data-layout="medium">

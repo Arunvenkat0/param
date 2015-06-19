@@ -7,7 +7,7 @@
 </isscript>
 	<div class="product-set-image">
 		<isset name="smImg" value="${pdict.Product.getImages('small')[0]}" scope="page" />
-		<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}" title="${smImg.title}" />
+		<img class="product-thumbnail" src="${smImg.getURL()}" alt="${smImg.alt}"/>
 	</div>
 
 	<div class="product-set-details">
