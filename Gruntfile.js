@@ -127,7 +127,7 @@ module.exports = function (grunt) {
 				reporter: require('jshint-stylish'),
 				jshintrc: true
 			},
-			target: ['app_storefront_richUI/cartridge/js/**/*.js']
+			target: ['app_storefront_core/cartridge/js/**/*.js']
 		},
 		mochaTest: {
 			application: {

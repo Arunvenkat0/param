@@ -79,8 +79,8 @@
       }
     ],
     "js": {
-      "src": "app_storefront_richUI/cartridge/js/",
-      "dest": "app_storefront_richUI/cartridge/static/default/js/"
+      "src": "app_storefront_core/cartridge/js/",
+      "dest": "app_storefront_core/cartridge/static/default/js/"
     }
   }
 }
