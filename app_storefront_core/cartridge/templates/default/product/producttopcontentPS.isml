@@ -77,7 +77,7 @@
 			<isset name="href" scope="page" value="${'name=product_detail_image'}" />
 		</isif>
 		<a ${href} class="product-image main-image" title="${pdict.Product.name}${imageTitle}">
-			<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${pdict.Product.name}${imageTitle}"/>
+			<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}"/>
 		</a>
 	</div>
 
@@ -99,7 +99,6 @@
 						<img class="productthumbnail"
 							 src="${smImage.getURL()}"
 							 alt="${smImage.alt}"
-							 title="${smImage.title}"
 							 data-lgimg='{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${href}"}'/>
 					</a>
 				</li>
