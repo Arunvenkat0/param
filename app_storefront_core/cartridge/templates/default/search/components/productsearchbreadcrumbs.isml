@@ -61,7 +61,7 @@
 	</isif>
 
 	<iscomment>REFINEMENT INFO </iscomment>
-	<isif condition="${!empty(pdict.ProductSearchResult) && (pdict.ProductSearchResult.refinedByPrice || pdict.ProductSearchResult.refinedByAttribute)}">
+	<isif condition="${!empty(pdict.ProductSearchResult) && ((pdict.ProductSearchResult.refinedByPrice && pdict.ProductSearchResult.priceMax) || pdict.ProductSearchResult.refinedByAttribute)}">
 
 		<isif condition="${(pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice) || (pdict.ProductSearchResult.refinements.refinementDefinitions.size() > 0)}">
 			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.refinedby', 'search', null)}</span>

@@ -17,7 +17,7 @@
 	<form method="post" class="form-horizontal" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
 		<fieldset>
 			<legend>
-				Address Details
+				${Resource.msg('account.addressbook.addressdetails','account',null)}
 				<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 			</legend>
 

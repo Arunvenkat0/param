@@ -48,7 +48,7 @@
 
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>
-					<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" class="privacy-policy" title="${Resource.msg('global.privacypolicy','locale',null)}">${Resource.msg('global.privacypolicy','locale',null)}</a>
+					(<a href="${URLUtils.url('Page-Show', 'cid', 'privacy-policy')}" class="privacy-policy" title="${Resource.msg('global.privacypolicy','locale',null)}">${Resource.msg('global.privacypolicy','locale',null)}</a>)
 				</div>
 
 				<div class="form-row form-row-button">

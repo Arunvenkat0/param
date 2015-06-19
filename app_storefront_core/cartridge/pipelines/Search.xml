@@ -70,7 +70,7 @@
                 <key-binding alias="CurrentHttpParameterMap.psortd2.intValue" key="SortBy2Direction"/>
                 <key-binding alias="CurrentHttpParameterMap.psortb3.value" key="SortBy3"/>
                 <key-binding alias="CurrentHttpParameterMap.psortd3.intValue" key="SortBy3Direction"/>
-                <key-binding alias="CurrentHttpParameterMap.pmin.doubleValue" key="PriceMin"/>
+                <key-binding alias="empty(CurrentHttpParameterMap.pmin.doubleValue) ? 1 : CurrentHttpParameterMap.pmin.doubleValue" key="PriceMin"/>
                 <key-binding alias="CurrentHttpParameterMap.pmax.doubleValue" key="PriceMax"/>
                 <key-binding alias="null" key="RefineBy5Name"/>
                 <key-binding alias="null" key="RefineBy5Phrase"/>

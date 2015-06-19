@@ -2,7 +2,7 @@
 <isdecorate template="account/pt_account">
 <isinclude template="util/modules"/>
 
-	<h1>${Resource.msg('account.header','account',null)} Login</h1>
+	<h1>${Resource.msg('account.header','account',null)} ${Resource.msg('global.login','locale',null)}</h1>
 
 	<div class="col-1">
 
