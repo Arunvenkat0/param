@@ -3,7 +3,6 @@
 import client from '../../../webdriver/client';
 import * as testData from '../testData/main';
 
-export const FORM_LOGIN = '#dwfrm_login';
 export const BTN_LOGIN = 'button[name$="frm_login_login"]';
 export const INPUT_EMAIL = 'input.email-input';
 export const INPUT_PASSWORD = 'input.password-input';

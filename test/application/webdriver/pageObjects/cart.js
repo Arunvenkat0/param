@@ -5,7 +5,9 @@ import config from '../config';
 
 export const CSS_CART_EMPTY = '.cart-empty';
 export const CSS_CART_ROW = '.cart-row';
+export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
+export const BTN_CHECKOUT = 'button[name$="checkoutCart"]';
 
 const basePath = '/cart';
 
@@ -69,12 +71,29 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 }
 
+/**
+ * Retrieves the Cart's Sub-total value
+ *
+ */
+export function getOrderSubTotal () {
+	return client.getText(CSS_ORDER_SUBTOTAL);
+}
+
+/**
+ * Redirects the browser to the Cart page and empties the Cart.
+ *
+ */
 export function emptyCart () {
 	return navigateTo()
 		.then(() => client.elements('.item-quantity input'))
-		.then(items => items.value.forEach(item =>
-			client.elementIdClear(item.ELEMENT)
-				.elementIdValue(item.ELEMENT, '0')))
-		.then(() => client.pause(500))
-		.then(() => client.click(BTN_UPDATE_CART));
+		.then(items => {
+			if (items.value.length) {
+				items.value.forEach(item =>
+					client.elementIdClear(item.ELEMENT)
+						.elementIdValue(item.ELEMENT, '0'));
+
+				return client.pause(500)
+					.then(() => client.click(BTN_UPDATE_CART));
+			}
+		});
 }

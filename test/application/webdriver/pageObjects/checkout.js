@@ -7,7 +7,19 @@ import * as formTasks from './forms/tasks';
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name$="submit"]';
+export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
+export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
+export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
+export const MINI_SECTION_PMT_METHOD = '.mini-payment-instrument';
+export const LINK_EDIT_ORDER_SUMMARY = 'a.section-header-note[href$="cart"]';
+export const LINK_EDIT_SHIPPING_ADDR = MINI_SECTION_SHIPPING_ADDR + ' a';
+export const LINK_EDIT_BILLING_ADDR = MINI_SECTION_BILLING_ADDR + ' a';
+export const LINK_EDIT_PMT_METHOD = MINI_SECTION_PMT_METHOD + ' a';
+export const MINI_SHIPPING_ADDR_DETAILS = MINI_SECTION_SHIPPING_ADDR + ' .details';
+export const MINI_BILLING_ADDR_DETAILS = MINI_SECTION_BILLING_ADDR + ' .details';
+export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
+export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 
 const basePath = '/checkout';
 
@@ -82,4 +94,8 @@ export function getLabelOrderConfirmation () {
 
 export function getActiveBreadCrumb () {
 	return client.getText('.checkout-progress-indicator .active');
+}
+
+export function getOrderSubTotal () {
+	return client.getText(CSS_ORDER_SUBTOTAL);
 }

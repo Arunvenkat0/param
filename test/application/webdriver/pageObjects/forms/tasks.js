@@ -12,14 +12,11 @@ import client from '../../client';
 export function populateField (selector, value, fieldType = 'input') {
 	switch (fieldType) {
 		case 'input':
-			client.setValue(selector, value);
-			break;
+			return client.setValue(selector, value);
 		case 'selectByValue':
-			client.selectByValue(selector, value);
-			break;
+			return client.selectByValue(selector, value);
 		case 'selectByIndex':
-			client.selectByIndex(selector, value);
-			break;
+			return client.selectByIndex(selector, value);
 	}
 }
 
