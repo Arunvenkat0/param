@@ -594,7 +594,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="sizeChartID">kids-clothing</custom-attribute>
+            <custom-attribute attribute-id="sizeChartID">womens-clothing</custom-attribute>
             <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-clothing.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
