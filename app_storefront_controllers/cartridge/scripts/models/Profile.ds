@@ -1,0 +1,271 @@
+'use strict';
+/** @module models/Profile */
+
+/* API Includes */
+var AbstractModel = require('./AbstractModel');
+var ArrayList = require('dw/util/ArrayList');
+var List = require('dw/util/List');
+var PaymentInstrument = require('dw/order/PaymentInstrument');
+var PaymentMgr = require('dw/order/PaymentMgr');
+
+/**
+ * Profile helper providing enhanced profile functionality
+ * @class module:models/Profile~Profile
+ */
+var Profile = AbstractModel.extend(
+    /** @lends module:models/Profile~Profile.prototype */
+    {
+        /**
+         * Retrieve preferred customer address
+         */
+        getPreferredAddress : function () {
+            return this.object.getAddressBook().getPreferredAddress();
+        },
+
+        /**
+         * Retrieve default customer shipping address
+         */
+        getDefaultShippingAddress : function () {
+            return this.getPreferredAddress();
+        },
+
+        /**
+         * Retrieve default customer billing address
+         */
+        getDefaultBillingAddress : function () {
+            return this.getPreferredAddress;
+        },
+
+        /**
+         * Set default customer shipping address
+         * @param {CustomerAddress} address - new default shipping address
+         */
+        setDefaultShippingAddress : function (address) {
+            if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
+                this.object.addressBook.setPreferredAddress(address);
+            }
+        },
+
+        /**
+         * Set default customer billing address
+         * @param {CustomerAddress} address - new default billing address
+         */
+        setDefaultBillingAddress : function (address) {
+            if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
+                this.object.addressBook.setPreferredAddress(address);
+            }
+        },
+
+        /**
+         * Check if address is default shipping
+         * @param {CustomerAddress} address - address for checking
+         */
+        isDefaultShippingAddress : function (address) {
+            var defaultShippingAddress = this.getDefaultShippingAddress();
+            return defaultShippingAddress && address && defaultShippingAddress.ID === address.ID;
+        },
+
+        /**
+         * Check if address is default billing
+         * @param {CustomerAddress} address - address for checking
+         */
+        isDefaultBillingAddress : function (address) {
+            var defaultBillingAddress = this.getDefaultBillingAddress();
+            return defaultBillingAddress && address && defaultBillingAddress.ID === address.ID;
+        },
+
+        /**
+         * This script attempts to add the given address to the address book of the current profile. The address
+         * attribute "city" is used to generate the address ID within the address book.
+         *
+         * @transactional
+         * @param addressToAdd
+         * @returns {*}
+         */
+        addAddressToAddressBook : function (addressToAdd) {
+            var addressBook = this.getAddressBook();
+            // get a possible equivalent address from the address book
+            var address = null;
+            var that    = this;
+
+            dw.system.Transaction.wrap(function(){
+                if (addressToAdd) {
+                    for (var i = 0; i < addressBook.addresses.length; i++) {
+                        address = addressBook.addresses[i];
+                        if (address.isEquivalentAddress(addressToAdd)) {
+                            break;
+                        }
+                    }
+
+                    // create the new address, if no equivalent address was found
+                    // and copy the address attributes
+                    if (address === null) {
+                        // get a unique address ID
+                        var addressID = that.determineUniqueAddressID(addressToAdd.city);
+
+                        // check on empty address ID
+                        if (!addressID) {
+                            dw.system.Logger.debug("Cannot add address to address book, with empty address ID.");
+                            return;
+                        }
+                        else {
+                            address = addressBook.createAddress(addressID);
+                            address.setFirstName(addressToAdd.firstName);
+                            address.setLastName(addressToAdd.lastName);
+                            address.setAddress1(addressToAdd.address1);
+                            address.setAddress2(addressToAdd.address2);
+                            address.setCity(addressToAdd.city);
+                            address.setPostalCode(addressToAdd.postalCode);
+                            address.setStateCode(addressToAdd.stateCode);
+                            address.setCountryCode(addressToAdd.countryCode.value);
+                        }
+                    }
+
+                    // update the phone in either the equivalent found address
+                    // or in the newly created address
+                    address.setPhone(addressToAdd.phone);
+                }
+            });
+
+            return address;
+        },
+
+        /**
+         * Determines a unique address ID for an address to be saved in the profiles address book. The function first
+         * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and
+         * checks the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not
+         * the counter is incremented and checked again.
+         *
+         * @param city
+         * @returns {*}
+         */
+        determineUniqueAddressID : function (city) {
+            var counter = 0;
+
+            // check, if attribute "city" is set and has a value
+            if (city) {
+                // initialize the candidate ID
+                var candidateID = city;
+                var existingAddress = null;
+
+                while (existingAddress == null) {
+                    existingAddress = this.getAddressBook().getAddress(candidateID);
+                    if (existingAddress != null) {
+                        // this ID is already taken, increment the counter
+                        // and try the next one
+                        counter++;
+                        candidateID = city + "-" + counter;
+                        existingAddress = null;
+                    }
+                    else {
+                        return candidateID;
+                    }
+                }
+            }
+
+            return null;
+        },
+
+        /**
+         *
+         *
+         * @param countryCode
+         * @param amount
+         * @returns {*}
+         */
+        validateWalletPaymentInstruments : function (countryCode, amount) {
+
+            // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
+            // TODO - remove pipelet code once APP-30656 is fixed
+            //var paymentInstruments = this.getWallet().getPaymentInstruments()
+	        var customer = this.getCustomer();
+	        var paymentInstruments = new ArrayList();
+
+	        var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+		        Customer : customer
+	        });
+
+	        if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
+		        paymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
+	        }
+
+            // get applicable payment methods
+            var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
+
+            // get applicable payment cards from CREDIT_CARD payment method
+            var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
+            var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
+
+            // collects all not applicable payment instruments
+            var validPaymentInstruments = new ArrayList(paymentInstruments);
+            var invalidPaymentInstruments = new ArrayList();
+
+            for (var i = 0; i < paymentInstruments.length; i++) {
+                var pi = paymentInstruments[i];
+                // ignore gift certificate payment instruments
+                if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
+                    continue;
+                }
+
+                // get payment method
+                var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
+
+                // check, whether payment method is still applicable
+                if (method != null && methods.contains(method)) {
+                    // in case of method CREDIT_CARD, check payment cards
+                    if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
+                        // get payment card
+                        var card = PaymentMgr.getPaymentCard(pi.creditCardType);
+
+                        // check, whether payment card is still applicable
+                        if (card != null && cards.contains(card)) {
+                            continue;
+                        }
+                    }
+                    else {
+                        // continue, if method is applicable
+                        continue;
+                    }
+                }
+
+                // collect invalid payment instruments
+                invalidPaymentInstruments.add(pi);
+                validPaymentInstruments.remove(pi);
+            }
+
+            if (!invalidPaymentInstruments.empty) {
+                return {
+                    InvalidPaymentInstruments : invalidPaymentInstruments,
+                    ValidPaymentInstruments   : validPaymentInstruments
+                };
+            }
+            else {
+                return {
+                    ValidPaymentInstruments : validPaymentInstruments
+                };
+            }
+
+        }
+
+    });
+    
+/**
+ * Use this method to get a new instance for a given product.
+ */
+Profile.get = function (parameter) {
+    var obj = null;
+    if (typeof parameter === 'string') {
+        obj = dw.customer.CustomerMgr.getProfile(parameter);
+    }
+    else if (typeof parameter === 'object') {
+        obj = parameter;
+    }
+    else {
+        obj = customer.profile;
+    }
+    return new Profile(obj);
+};
+
+
+/** The profile class */
+module.exports = Profile;

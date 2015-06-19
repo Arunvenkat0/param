@@ -1,0 +1,30 @@
+'use strict';
+
+/**
+ * Default entry point when www.mydomain.com is opened
+ *
+ * @module controllers/Default
+ */
+
+/* Script Modules */
+var app = require('~/cartridge/scripts/app');
+var guard = require('~/cartridge/scripts/guard');
+
+/**
+ * Called when site is turned offline (not live)
+ */
+function offline() {
+    app.getView().render('error/siteoffline');
+}
+
+/*
+ * Module exports
+ */
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controllers/Home~show */
+exports.Start = app.getController('Home').Show;
+/** @see module:controllers/Default~offline */
+exports.Offline = guard.ensure(['get'], offline);

@@ -1,0 +1,117 @@
+'use strict';
+
+/**
+ * Creating, modifying and showing of a product comparison.
+ * @module controllers/Compare
+ */
+
+/* Script Modules */
+var app = require('~/cartridge/scripts/app');
+var guard = require('~/cartridge/scripts/guard');
+
+var Product = app.getModel('Product');
+var Category = app.getModel('Category');
+var Compare = app.getModel('Compare');
+
+/**
+ * Expects: - category: category ID
+ */
+function show() {
+    var compareForm = app.getForm('compare');
+
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.setCategory(request.httpParameterMap.category.value);
+
+    // Store selected compare list properties in a map
+    var map = new dw.util.HashMap();
+    map.put('categories', comparison.getCategories());
+    map.put('products', comparison.getProducts());
+    map.put('attributegroups', comparison.getAttributeGroups());
+    map.put('category', comparison.getCategory());
+
+    compareForm.copyFrom(map);
+    compareForm.object.categories.setOptions(map.categories);
+
+    app.getView({CompareList : map}).render('product/compare/compareshow');
+}
+
+/**
+ * Expects: - pid: SKU - category: category ID
+ */
+function addProduct() {
+
+    var product = Product.get(request.httpParameterMap.pid.value);
+    var category = Category.get(request.httpParameterMap.category.value);
+
+    if (!product.object || !category.object) {
+        response.renderJSON({
+            success : false
+        });
+        return;
+    }
+    else {
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        comparison.add(product.object, category.object);
+        comparison.setCategory(category.getID());
+
+        response.renderJSON({
+            success : true
+        });
+    }
+}
+
+/**
+ * Parameters: - pid: SKU - category: category ID
+ */
+function removeProduct() {
+
+    var product = Product.get(request.httpParameterMap.pid.value);
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!product.object || !category.object) {
+        response.renderJSON({
+            success : false
+        });
+        return;
+    }
+    else {
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        comparison.remove(product.object, category.object);
+        comparison.setCategory(category.getID());
+
+        response.renderJSON({
+            success : true
+        });
+    }
+}
+
+/**
+ * Parameters: - category: category ID
+ */
+function controls() {
+
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category.object) {
+        app.getView().render('search/components/productcomparewidget');
+        return;
+    }
+    else {
+        // Get the product comparison object from the session or create a new one
+        var comparison = Compare.get();
+        app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
+    }
+}
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controllers/Compare~Show */
+exports.Show = guard.all(show);
+/** @see module:controllers/Compare~AddProduct */
+exports.AddProduct = guard.ensure(['get'], addProduct);
+/** @see module:controllers/Compare~RemoveProduct */
+exports.RemoveProduct = guard.ensure(['get'], removeProduct);
+/** @see module:controllers/Compare~Controls */
+exports.Controls = guard.ensure(['get'], controls);
