@@ -1,16 +1,27 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscomment>
+<isscript>
+	var folder : dw.content.Folder = null;
+	var folderCustomCSS = [];
 
-This template is intentionally empty.
+	// get folder from search context
+	if( !empty(pdict.ContentSearchResult) )	{
+		folder = pdict.ContentSearchResult.folder;
 
+		if (folder != null)	{
+			while( folder.parent != null ) {
+				if( folder.online && ('customCSSFile' in folder.custom) && !empty(folder.custom.customCSSFile))	{
+					folderCustomCSS.push(folder.custom.customCSSFile.getURL().toString());
+				}
+				folder = folder.parent;
+			}
+		}
+	}
+	var ojson = JSON.stringify(folderCustomCSS);
+</isscript>
 
-The purpose is as a place holder for a template, with the same name 'higher up' in the cartridge path.
-
-pt_xxx_UI.isml is 'injected' into pt_xxx.isml, in the <head> element, to enable custom cartridges to add script and css dependencies,
-
-pt_xxx_VARS.isml is 'injected' into pt_xxx.isml, after the footer element (within the <body>, but near the end), for adding <script> elements that are only loaded after the markup is itself loaded.
-
-
-See pt_xxx.isml in app_storefront_core/ and compare pt_xxx_UI.isml with the empty version in core (this file) and the filled in version in app_storefront_richUI.  The purpose should be clear.
-
-</iscomment>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	util.clearDynamicCss();
+	util.loadDynamicCss(<isprint value="${ojson}" encoding="off"/>);
+});
+</script>
