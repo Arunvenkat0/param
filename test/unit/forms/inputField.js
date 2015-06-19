@@ -9,7 +9,7 @@ var StringUtils = require('../../mocks/dw/util/StringUtils');
 var Resource = require('../../mocks/dw/web/Resource');
 var URLUtils = require('../../mocks/dw/web/URLUtils');
 
-var inputField = proxyquire('../../../app_storefront_core/cartridge/scripts/common/inputField.ds', {
+var inputField = proxyquire('../../../app_storefront/cartridge/scripts/common/inputField.ds', {
 	'dw/content/ContentMgr': ContentMgr,
 	'dw/util/StringUtils': StringUtils,
 	'dw/web/Resource': Resource,
