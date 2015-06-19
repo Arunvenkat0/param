@@ -20,6 +20,7 @@ Full-Block-Element: yes
 	<div class="promotion-title">${Resource.msg('product.promotions.special','product',null)}</div>
 	<div class="promotion-callout">
 		<isloop items="${promos}" var="promo">
+		<i class="fa fa-tags fa-2x"></i>
 		<isprint value="${promo.calloutMsg}" encoding="off"/>
 		<isif condition="${! empty(promo.details)}">
 			<a class="tooltip" href="#">
@@ -29,8 +30,6 @@ Full-Block-Element: yes
 				</div>
 			</a>
 		</isif>
-		<iscomment>Break after first promotion display</iscomment>
-		<isbreak/>
 		</isloop>
 	</div>
 </div>

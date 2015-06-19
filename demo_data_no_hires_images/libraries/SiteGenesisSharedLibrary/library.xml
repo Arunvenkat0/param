@@ -15124,4 +15124,59 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
         </folder-links>
     </content>
 
+    <content content-id="home-bottom-womens-shoes">
+        <display-name xml:lang="x-default">Shop Women's Shoes</display-name>
+        <description xml:lang="x-default">First slot on the left below home page Flash/jQuery scroller</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1&gt;Shop&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Shoes:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Heels&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr">&lt;h1&gt;Boutique&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Chaussures&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Talons&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Les Trotteurs&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ouvrir Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Boutique"&gt;&lt;img alt="Boutique" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it">&lt;h1&gt;Negozio&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Scarpe&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Tacchi&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Scarpe"&gt;&lt;img alt="Scarpe" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja">&lt;h1&gt;ショップ&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;シューズ&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;踵&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラッツ&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントウ&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh">&lt;h1&gt;购买&lt;/h1&gt;&#13;
+&#13;
+&lt;ul&gt;&#13;
+    &lt;li&gt;&lt;span&gt;鞋类&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;高跟鞋&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底鞋&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;开口凉鞋&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="购买"&gt;&lt;img alt="购买" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
 </library>

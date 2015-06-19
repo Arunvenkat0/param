@@ -10,7 +10,7 @@
 @import "form_components";
 @import "product_lists";
 @import "base_tooltip";
-@import "content_assets_slots";
+@import "slots";
 @import "header/header";
 @import "minicart";
 @import "breadcrumbs";
@@ -21,10 +21,9 @@
 @import "product_tiles";
 @import "search_results_grid_layout";
 @import "infinite_scroll";
-@import "compare_tools";
+@import "compare";
 @import "product_detail_page";
 @import "bonus_products";
-@import "send_to_friend";
 @import "size_charts";
 @import "shopping_cart";
 @import "checkout";

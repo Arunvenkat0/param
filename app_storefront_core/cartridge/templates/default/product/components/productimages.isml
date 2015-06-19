@@ -38,7 +38,7 @@
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
 	</isif>
 	<a ${href} class="product-image main-image" title="${imageTitle}">
-		<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}" title="${imageTitle}"/>
+		<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}"/>
 	</a>
 </div>
 
@@ -71,7 +71,7 @@
 
 				<li class="thumb${imgSmStatus.first ? ' selected' : ''}">
 					<a ${href} class="thumbnail-link">
-						<img class="productthumbnail" src="${img.getURL()}" alt="${img.alt}" title="${img.title}" data-lgimg='{"url":"${lgImage.getURL()}", "title":"<isprint value="${lgImage.title}" encoding="on"/>", "alt":"<isprint value="${lgImage.alt}" encoding="on"/>", "hires":"${hi_res}"}'/>
+						<img class="productthumbnail" src="${img.getURL()}" alt="${img.alt}" data-lgimg='{"url":"${lgImage.getURL()}", "title":"<isprint value="${lgImage.title}" encoding="on"/>", "alt":"<isprint value="${lgImage.alt}" encoding="on"/>", "hires":"${hi_res}"}'/>
 					</a>
 				</li>
 			</isloop>

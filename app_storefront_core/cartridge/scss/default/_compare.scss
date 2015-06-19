@@ -102,6 +102,7 @@
 		padding: .5em;
 		&:first-of-type {
 			background-color: $gainsboro;
+			width: 4rem;
 		}
 	}
 	td {
@@ -126,6 +127,7 @@
 	}
 	.product-attribute {
 		border-right: 1px solid $very-light-gray;
+		word-break: break-all;
 	}
 	.action {
 		display: block;
@@ -133,9 +135,9 @@
 	}
 	.remove-link {
 		color: $nobel;
-		display: block;
-		text-align: right;
-		transition: color 500ms ease;
+		float: right;
+		padding: .3rem;
+		transition: color .5s ease;
 		&:hover {
 			color: $citrus;
 			text-decoration: none;

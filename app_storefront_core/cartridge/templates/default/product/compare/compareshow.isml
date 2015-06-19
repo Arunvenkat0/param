@@ -22,14 +22,14 @@
 		</form>
 	</isif>
 
-	<table id="compare-table" class="comparisontable tiles-container">
+	<table id="compare-table" class="tiles-container">
 		<thead>
 			<tr>
 				<th></th>
 				<isloop items="${pdict.CompareList.products}" var="productID" status="status">
 					<isset name="compareProduct" value="${dw.catalog.ProductMgr.getProduct(productID)}" scope="page"/>
 
-					<th class="product" style="width: ${90 / pdict.CompareList.products.length}%">
+					<th class="product">
 
 						<isset name="removeUrl" value="${URLUtils.url('Compare-RemoveProduct', 'pid', productID, 'category', pdict.CurrentHttpParameterMap.category.stringValue)}" scope="page"/>
 						<a class="remove-link" href="${removeUrl}" title="${Resource.msg('compareshow.removeitem', 'product', null)}"><i class="fa fa-remove fa-lg"></i></a>
