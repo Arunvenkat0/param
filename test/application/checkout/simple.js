@@ -20,6 +20,7 @@ describe('Checkout', () => {
 	let productVariationMaster;
 	let shippingFormData = new Map();
 	let billingFormData = new Map();
+	let successfulCheckoutTitle = 'Thank you for your order.';
 
 	before(() => client.init());
 
@@ -109,7 +110,7 @@ describe('Checkout', () => {
 		it('should redirect to Order Confirmation page after a successful order submission', () =>
 			client.click(checkoutPage.BTN_PLACE_ORDER)
 				.then(() => checkoutPage.getLabelOrderConfirmation())
-				.then(title => assert.equal(title, 'Thank you for your order.'))
+				.then(title => assert.equal(title, successfulCheckoutTitle))
 		);
 	});
 
@@ -128,7 +129,7 @@ describe('Checkout', () => {
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.click(checkoutPage.BTN_PLACE_ORDER))
 				.then(() => checkoutPage.getLabelOrderConfirmation())
-				.then(title => assert.equal(title, 'Thank you for your order.'));
+				.then(title => assert.equal(title, successfulCheckoutTitle));
 		});
 	});
 
