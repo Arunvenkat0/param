@@ -1,5 +1,4 @@
 {
-	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,
 	"quotmark": "single",
@@ -9,16 +8,19 @@
 	"strict": true,
 	"jquery": true,
 	"browserify": true,
+	"esnext": true,
+	"mocha": true,
+	"multistr": true,
 	"globals": {
 		"SitePreferences": true,
 		"Urls": true,
 		"Resources": true,
 		"User": true,
-                "request": true,
-                "response": true,
-                "session": true,
-                "customer": true,
-                "dw": true,
-                "empty": true
+		"request": true,
+		"response": true,
+		"session": true,
+		"customer": true,
+		"dw": true,
+		"empty": true
 	}
 }
