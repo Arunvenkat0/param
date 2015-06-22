@@ -34,7 +34,7 @@ function show() {
     });
 
     if (SearchRedirectURLResult.result === PIPELET_NEXT) {
-        response.renderTemplate('util/redirect', {
+        ISML.renderTemplate('util/redirect', {
             Location : SearchRedirectURLResult.Location,
             CacheTag : true
         });
@@ -110,7 +110,7 @@ function show() {
                 productID = targetProduct.getID();
             }
 
-            response.renderTemplate('util/redirect', {
+            ISML.renderTemplate('util/redirect', {
                 Location : URLUtils.http('Product-Show', 'pid', productID)
             });
         }

@@ -531,11 +531,13 @@ function redeemGiftCertificateJson() {
     giftCertCode = request.httpParameterMap.giftCertCode.stringValue;
     giftCertStatus = redeemGiftCertificate(giftCertCode);
 
+	let r = require('~/cartridge/scripts/util/Response');
+	
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         // @FIXME we could also build an ajax guard?
-        response.renderJSON({});
+        r.renderJSON({});
     } else {
-        response.renderJSON({
+        r.renderJSON({
             status : giftCertStatus.code,
             success : !giftCertStatus.error,
             message : Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
@@ -638,13 +640,16 @@ function editBillingAddress() {
 function getGiftCertificateBalance() {
     var giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(request.httpParameterMap.giftCertificateID.value);
 
+
+	let r = require('~/cartridge/scripts/util/Response');
+
     if (giftCertificate && giftCertificate.isEnabled()) {
-        response.renderJSON({
+        r.renderJSON({
             ID : giftCertificate.getGiftCertificateCode(),
             balance : StringUtils.formatMoney(giftCertificate.getBalance())
         });
     } else {
-        response.renderJSON({
+        r.renderJSON({
             error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }

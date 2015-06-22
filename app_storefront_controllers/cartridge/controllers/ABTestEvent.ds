@@ -9,6 +9,7 @@
  */
 
 /* API Includes */
+var ISML = require('dw/template/ISML');
 var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
@@ -25,9 +26,9 @@ function startCheckout() {
         new Pipelet('StartCheckout').execute({
             Basket : cart.object
         });
-        response.renderTemplate('util/reporting/reporting');
+        ISML.renderTemplate('util/reporting/reporting');
     } else {
-        response.renderTemplate('util/reporting/reporting');
+        ISML.renderTemplate('util/reporting/reporting');
     }
 }
 

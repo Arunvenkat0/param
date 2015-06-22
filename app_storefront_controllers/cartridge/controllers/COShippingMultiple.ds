@@ -350,7 +350,8 @@ function addEditAddress() {
 function addEditAddressJSON() {
     var addEditAddressResult = addEditAddress();
 
-    response.renderJSON({
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
         address : addEditAddressResult.address,
         success : addEditAddressResult.success
     });

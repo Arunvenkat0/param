@@ -1,6 +1,7 @@
 'use strict';
 
 /* API Includes */
+var ISML = require('dw/template/ISML');
 var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
@@ -58,7 +59,7 @@ function Show()
     }
 
 
-    response.renderTemplate('', {
+    ISML.renderTemplate('', {
     	ProductList: ProductList,
     	Status: Status
     });

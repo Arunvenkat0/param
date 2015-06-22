@@ -32,7 +32,8 @@ function setSessionCurrency() {
         }
     }
 
-    response.renderJSON({
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
         success : true
     });
 

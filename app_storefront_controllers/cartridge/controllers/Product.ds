@@ -81,7 +81,9 @@ function getAvailability() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
+    	let r = require('~/cartridge/scripts/util/Response');
+    	
+        r.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes

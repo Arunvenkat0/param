@@ -143,16 +143,18 @@ function checkBalance()
     if(giftCertID){
         giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(giftCertID);
     }
+    
+	let r = require('~/cartridge/scripts/util/Response');
 
     if (!empty(giftCertificate) && giftCertificate.enabled) {
-        response.renderJSON({
+        r.renderJSON({
             giftCertificate : {
                 ID : giftCertID,
                 balance : StringUtils.formatMoney(giftCertificate.balance)
             }
         });
     } else {
-        response.renderJSON({
+        r.renderJSON({
             error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }

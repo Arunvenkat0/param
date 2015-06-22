@@ -9,6 +9,7 @@
 
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
+var ISML = require('dw/template/ISML');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
@@ -151,7 +152,7 @@ function submitForm() {
                 cart.calculate();
             });
 
-            response.renderTemplate('checkout/cart/refreshcart');
+            ISML.renderTemplate('checkout/cart/refreshcart');
             return null;
         },
         'login' : function(formgroup) {
@@ -408,7 +409,8 @@ function addBonusProductJson() {
         } else {
             Transaction.rollback();
 
-            response.renderJSON({
+            let r = require('~/cartridge/scripts/util/Response');
+			r.renderJSON({
                 success : false
             });
             return;
@@ -418,10 +420,10 @@ function addBonusProductJson() {
     cart.calculate();
     Transaction.commit();
 
-    response.renderJSON({
+    let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
         success : true
     });
-
 }
 
 /**
@@ -438,8 +440,8 @@ function addCouponJson() {
     });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-
-        response.renderJSON({
+        let r = require('~/cartridge/scripts/util/Response');
+        r.renderJSON({
             status : couponStatus.code,
             message : Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
             success : !couponStatus.error,

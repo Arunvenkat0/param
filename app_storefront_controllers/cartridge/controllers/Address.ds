@@ -83,7 +83,9 @@ function handleForm() {
     });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-        response.renderJSON({
+        let r = require('~/cartridge/scripts/util/Response');
+        
+        r.renderJSON({
             success : success
         });
         return;
@@ -157,7 +159,9 @@ function Delete() {
         return;
     }
 
-    response.renderJSON({
+    let r = require('~/cartridge/scripts/util/Response');
+    
+    r.renderJSON({
         status : deleteAddressResult ? 'OK' : dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,
         message : deleteAddressResult ? '' : Resource.msg('addressdetails.' + dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
     });
