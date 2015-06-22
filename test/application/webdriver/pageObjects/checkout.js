@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as formTasks from './forms/tasks';
+import * as formHelpers from './forms/helpers';
 
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
@@ -46,7 +46,7 @@ export function fillOutShippingForm (shippingData) {
 
 	for (var [key, value] of shippingData) {
 		var selector = '[name$="shippingAddress_addressFields_' + key + '"]';
-		formTasks.populateField(selector, value, fieldTypeMap.get(key));
+		formHelpers.populateField(selector, value, fieldTypeMap.get(key));
 	}
 
 	return client;
@@ -79,7 +79,7 @@ export function fillOutBillingForm (billingFields) {
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		formTasks.populateField(selector, value, fieldType);
+		formHelpers.populateField(selector, value, fieldType);
 	}
 	return client.pause(200);
 }

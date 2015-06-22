@@ -9,7 +9,7 @@ import * as homePage from '../webdriver/pageObjects/home';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 import * as testData from '../webdriver/pageObjects/testData/main';
 import * as formLogin from '../webdriver/pageObjects/forms/login';
-import * as formTasks from '../webdriver/pageObjects/forms/tasks';
+import * as formHelpers from '../webdriver/pageObjects/forms/helpers';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
 
 describe('Checkout', () => {
@@ -31,10 +31,10 @@ describe('Checkout', () => {
 			.then(cust => {
 				customer = cust;
 
-				address = cust.getPreferredAddress();
+				address = customer.getPreferredAddress();
 
-				shippingFormData.set('firstName', cust.firstName);
-				shippingFormData.set('lastName', cust.lastName);
+				shippingFormData.set('firstName', customer.firstName);
+				shippingFormData.set('lastName', customer.lastName);
 				shippingFormData.set('address1', address.address1);
 				shippingFormData.set('country', address.countryCode);
 				shippingFormData.set('states_state', address.stateCode);
@@ -42,8 +42,8 @@ describe('Checkout', () => {
 				shippingFormData.set('postal', address.postalCode);
 				shippingFormData.set('phone', address.phone);
 
-				billingFormData.set('emailAddress', cust.email);
-				billingFormData.set('creditCard_owner', cust.firstName + ' ' + cust.lastName);
+				billingFormData.set('emailAddress', customer.email);
+				billingFormData.set('creditCard_owner', customer.firstName + ' ' + customer.lastName);
 				billingFormData.set('creditCard_number', testData.creditCard1.number);
 				billingFormData.set('creditCard_year', testData.creditCard1.yearIndex);
 				billingFormData.set('creditCard_cvn', testData.creditCard1.cvn);
@@ -162,7 +162,7 @@ describe('Checkout', () => {
 		it('should show Shipping Address edits', () => {
 			let address2 = 'Suite 100';
 			return client.click(checkoutPage.LINK_EDIT_SHIPPING_ADDR)
-				.then(() => formTasks.populateField('input[id$="address2"]', address2, 'input'))
+				.then(() => formHelpers.populateField('input[id$="address2"]', address2, 'input'))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
@@ -173,7 +173,7 @@ describe('Checkout', () => {
 		it('should show Billing Address edits', () => {
 			let address2 = 'Apt. 1234';
 			return client.click(checkoutPage.LINK_EDIT_BILLING_ADDR)
-				.then(() => formTasks.populateField('input[id$="address2"]', address2, 'input'))
+				.then(() => formHelpers.populateField('input[id$="address2"]', address2, 'input'))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.getText(checkoutPage.MINI_BILLING_ADDR_DETAILS))

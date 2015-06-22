@@ -88,29 +88,29 @@ export function emptyCart () {
 	return navigateTo()
 		.then(() => client.elements('.item-quantity input'))
 		.then(items => {
-			if (items.value.length) {
-				items.value.forEach(item =>
-					client.elementIdClear(item.ELEMENT)
-						.elementIdValue(item.ELEMENT, '0'));
+			if (!items.value.length) { return; }
 
-				return client.pause(500)
-					.then(() => client.click(BTN_UPDATE_CART))
-					// There are some products, like Gift Certificates, whose
-					// quantities cannot be changed in the Cart. For these, we
-					// must click the Remove link on each.
-					.then(() => client.elements(LINK_REMOVE))
-					.then(removeLinks => {
-						let links = removeLinks.value;
-						if (links.length) {
-							// Because each Remove link results in a page reload,
-							// it is necessary to wait for one remove operation
-							// to complete before clicking on the next Remove
-							// link
-							links.forEach(link => _clickFirstRemoveLink());
-						}
-					});
-			}
-		})
+			items.value.forEach(item =>
+				client.elementIdClear(item.ELEMENT)
+					.elementIdValue(item.ELEMENT, '0'));
+
+			return client.pause(500)
+				.then(() => client.click(BTN_UPDATE_CART))
+				// There are some products, like Gift Certificates, whose
+				// quantities cannot be changed in the Cart. For these, we
+				// must click the Remove link on each.
+				.then(() => client.elements(LINK_REMOVE))
+				.then(removeLinks => {
+					let links = removeLinks.value;
+					if (links.length) {
+						// Because each Remove link results in a page reload,
+						// it is necessary to wait for one remove operation
+						// to complete before clicking on the next Remove
+						// link
+						links.forEach(() => _clickFirstRemoveLink());
+					}
+				});
+		});
 }
 
 /**
@@ -122,5 +122,5 @@ function _clickFirstRemoveLink () {
 		.then(removeLinks => {
 			let links = removeLinks.value;
 			return client.elementIdClick(links[0].ELEMENT);
-		})
+		});
 }
