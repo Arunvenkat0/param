@@ -129,10 +129,12 @@
 					if (Product.productSet) {
 						price.class = 'product-set-price';
 						price.value = Resource.msg('global.buyall', 'locale', null);
+						price.title = Resource.msg('product.setprice', 'product', null);
 					} else if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
 						// Product master or variation group price range depending on the represented variants
 						price.class = 'product-sales-price';
 						price.value = dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode)) + ' - ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.maxprice, currencyCode));
+						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else {
 						// For product master or variation group without a price range get the pricing from first variant
 						if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue != 'true') {
@@ -170,7 +172,7 @@
 							extraPrice.value = SalesPrice;
 						} else {
 							price.class = 'product-sales-price';
-							price.title = 'Sale Price';
+							price.title = Resource.msg('product.saleprice', 'product', null);
 							price.value = SalesPrice;
 						}
 					}
