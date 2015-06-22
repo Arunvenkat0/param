@@ -72,7 +72,7 @@ describe('Cart - Simple', () => {
 	it('should update price in cart when quantity updated', () =>
 		cartPage
 			.getPriceByRow(1)
-			.then(price => assert.equal(price, '$899.97'))
+			.then(updatedItemSubTotal => assert.equal(updatedItemSubTotal, '$899.97'))
 	);
 
 	it('should change size', () =>
