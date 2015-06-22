@@ -16,7 +16,7 @@
 
 <p>
 	${Resource.msg('order.orderdetails.orderplaced','order',null)}
-	<isprint value="${Order.creationDate}" style="DATE_LONG"/>	
+	<isprint value="${Order.creationDate}" style="DATE_LONG"/>
 </p>
 
 <p>
@@ -40,19 +40,19 @@
 			<iselse/>
 				<b>${Resource.msg('order.orderdetails.paymentmethods','order',null)}</b>
 			</isif>
-			
+
 			<iscomment>Render All Payment Instruments</iscomment>
-			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">			
+			<isloop items="${Order.getPaymentInstruments()}" var="paymentInstr" status="piloopstate">
 				<div><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
 				<isif condition="${dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(paymentInstr.paymentMethod)}">
 					<isprint value="${paymentInstr.maskedGiftCertificateCode}"/><br />
-				</isif>	
-				<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>						
+				</isif>
+				<isminicreditcard card="${paymentInstr}" show_expiration="${false}"/>
 				<div>
 					<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
 				</div><!-- END: payment-amount -->
-			</isloop>	
+			</isloop>
 		</td>
 		<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 			<b>${Resource.msg('order.orderdetails.paymenttotal','order',null)}</b>
@@ -60,8 +60,8 @@
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${true}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
 			<iselse/>
 				<isemailordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
-				<br />			
-			</isif> 
+				<br />
+			</isif>
 		</td>
 
 	</tr>
@@ -71,7 +71,7 @@
 <iscomment>render a box for each shipment</iscomment>
 
 	<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
-		
+
 		<p><b>${(Resource.msg('order.orderconfirmation-email.shipmentnumber','order',null)) + shipmentloopstate.count}</b></p>
 
 		<isif condition="${shipment.productLineItems.size() > 0}">
@@ -86,28 +86,28 @@
 						<isif condition="${empty(shipment.custom.shipmentType) || shipment.custom.shipmentType != 'instore'}"/>
 							<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('order.orderdetails.shippingto','order',null)}</th>
 						<iselse/>
-							<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>		
+							<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('cart.store.instorepickup','checkout',null)}</th>
 						</isif>
 					</tr>
 				</thead>
 				<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
 					<tr>
-	
+
 						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<iscomment>Display product line and product using module</iscomment>
 							<isdisplayliproduct p_productli="${productLineItem}" p_editable="${false}"/>
 						</td>
-	
+
 					    <td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 				    		<isprint value="${productLineItem.quantity}"/>
 				    	</td>
-	
+
 					    <td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 					    	<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 					    	<isif condition="${productLineItem.bonusProductLineItem}">
 					    		${Resource.msg('global.bonus','locale',null)}
 					    	<iselse/>
-				            	<isprint value="${productLineItem.adjustedPrice}"/>				    						            
+				            	<isprint value="${productLineItem.adjustedPrice}"/>
 					            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
 									<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
 										<p style="color:#990000;">+ <isprint value="${optionLI.adjustedPrice}"/></p>
@@ -115,7 +115,7 @@
 								</isif>
 							</isif>
 					    </td>
-			
+
 			    		<iscomment>only show shipping address for first pli in shipment</iscomment>
 					    <isif condition="${pliloopstate.first}">
 					    	<isset name="rowSpan" value="${shipment.productLineItems.size()}" scope="page"/>
@@ -195,7 +195,7 @@
 							<div>
 								${Resource.msg('order.orderdetails.giftcertfrom','order',null)}
 									<isprint value="${giftCertificateLineItem.senderName}"/><br />
-									<isprint value="${Order.customerEmail}"/>									
+									<isprint value="${Order.customerEmail}"/>
 							</div>
 						</td>
 						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
@@ -212,11 +212,11 @@
 							<div>
 					    		${Resource.msg('order.orderdetails.shippingmethod','order',null)}
 					    		${Resource.msg('order.orderdetails.giftcertshipping','order',null)}
-					    	</div>							
+					    	</div>
 						</td>
 					</tr>
 				</isloop>
-				
+
 				<iscomment>if shipment is marked as gift</iscomment>
 				<tr>
 					<td colspan="4" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
