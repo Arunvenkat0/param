@@ -17,7 +17,7 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>15.4.0.2-SNAPSHOT</version>
+    <version>15.7.0.1</version>
     <description>SiteGenesis Source</description>
 
 
@@ -48,9 +48,18 @@
                       <copy todir="${project.build.directory}/sg-resources">
                         <fileset dir="${project.basedir}">
                           <include name="app_storefront_*/**" />
-                          <include name="sg20_demo_data_no_hires_images/**" />
                         </fileset>
                       </copy>
+                      <copy todir="${project.build.directory}/sg-resources/demosite-creation">
+                        <fileset dir="${project.basedir}/demo_data_no_hires_images" />
+                      </copy>
+                      <zip destfile="${project.build.directory}/sg-resources/demosite-creation.zip" basedir="${project.build.directory}/sg-resources" includes="demosite-creation/**" />
+                      <delete dir="${project.build.directory}/sg-resources/demosite-creation" />
+                      <copy todir="${project.build.directory}/sg-resources/geolocation-sample/">
+                        <fileset dir="${project.basedir}/demo_data_no_hires_images/" includes="geolocations/**" />
+                      </copy>
+                      <zip destfile="${project.build.directory}/sg-resources/geolocation-sample.zip" basedir="${project.build.directory}/sg-resources" includes="geolocation-sample/**" />
+                      <delete dir="${project.build.directory}/sg-resources/geolocation-sample" />
                     </tasks>
                   </configuration>
                 </execution>

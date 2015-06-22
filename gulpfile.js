@@ -1,8 +1,10 @@
 'use strict';
 
 var browserify = require('browserify'),
+	buffer = require('vinyl-buffer'),
 	connect = require('gulp-connect'),
 	deploy = require('gulp-gh-pages'),
+	gif = require('gulp-if'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jscs = require('gulp-jscs'),
@@ -12,6 +14,7 @@ var browserify = require('browserify'),
 	mocha = require('gulp-mocha'),
 	sass = require('gulp-sass'),
 	source = require('vinyl-source-stream'),
+	sourcemaps = require('gulp-sourcemaps'),
 	stylish = require('jshint-stylish'),
 	prefix = require('gulp-autoprefixer'),
 	watchify = require('watchify'),
@@ -19,26 +22,29 @@ var browserify = require('browserify'),
 
 var paths = require('./package.json').paths;
 
+require('babel/register');
+
 var watching = false;
-gulp.task('enable-watch-mode', function () { watching = true })
+gulp.task('enable-watch-mode', function () {watching = true;});
 
 gulp.task('css', function () {
 	var streams = merge();
 	paths.css.forEach(function (path) {
 		streams.add(gulp.src(path.src + '*.scss')
+			.pipe(gif(gutil.env.sourcemaps, sourcemaps.init()))
 			.pipe(sass())
 			.pipe(prefix({cascade: true}))
+			.pipe(gif(gutil.env.sourcemaps, sourcemaps.write('./')))
 			.pipe(gulp.dest(path.dest)));
 	});
 	return streams;
-
 });
 
 gulp.task('js', function () {
 	var opts = {
 		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
-		debug: (gutil.env.type === 'development')
-	}
+		debug: gutil.env.sourcemaps
+	};
 	if (watching) {
 		opts = xtend(opts, watchify.args);
 	}
@@ -51,17 +57,23 @@ gulp.task('js', function () {
 
 	bundler.on('update', function (ids) {
 		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
-		gutil.log('Rebunlding...');
+		gutil.log('Rebundling...');
 		rebundle();
 	});
 
+	bundler.on('log', gutil.log);
+
 	function rebundle () {
-		return bundler
-			.bundle()
+		return bundler.bundle()
 			.on('error', function (e) {
 				gutil.log('Browserify Error', gutil.colors.red(e));
 			})
 			.pipe(source('app.js'))
+			// sourcemaps
+				.pipe(buffer())
+				.pipe(sourcemaps.init({loadMaps: true}))
+				.pipe(sourcemaps.write('./'))
+			//
 			.pipe(gulp.dest(paths.js.dest));
 	}
 	return rebundle();
@@ -73,7 +85,7 @@ gulp.task('jscs', function () {
 });
 
 gulp.task('jshint', function () {
-	return gulp.src('./app_storefront_richUI/cartridge/js/**/*.js')
+	return gulp.src('./app_storefront/cartridge/js/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
 });
@@ -96,60 +108,32 @@ gulp.task('test:application', function () {
 		}));
 });
 
-var transform = require('vinyl-transform');
-var rename = require('gulp-rename');
-var filter = require('gulp-filter');
-gulp.task('js:test', function () {
-	var browserified = transform(function (filename) {
-		var b = browserify(filename);
-		return b.bundle();
-	});
-
-	return gulp.src(['test/unit/browser/*.js', '!test/unit/browser/*.out.js'])
-		.pipe(browserified)
-		.pipe(rename(function (path) {
-			path.dirname += '/dist';
-		}))
-		.pipe(gulp.dest('test/unit/browser'));
-});
-
-gulp.task('connect:test', function () {
-	var opts = minimist(process.argv.slice(2));
-	var port = opts.port || 7000;
-	return connect.server({
-		root: 'test/unit/browser',
-		port: port
-	});
-});
-gulp.task('test:unit', ['js:test', 'connect:test'], function () {
+gulp.task('test:unit', function () {
 	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
 	var suite = opts.suite || '*';
-	gulp.src(['test/unit/' + suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*'], {read: false})
+	return gulp.src(['test/unit/' + suite + '/**/*.js'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout
-		}))
-		.on('end', function () {
-			connect.serverClose();
-		})
+		}));
 });
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
 	gulp.watch(paths.css.map(function (path) {
-		return path.src + '*.scss';
+		return path.src + '**/*.scss';
 	}), ['css']);
 });
 
 var hbsfy = require('hbsfy');
 var styleguideWatching = false;
-gulp.task('styleguide-watching', function () {styleguideWatching = true});
+gulp.task('styleguide-watching', function () {styleguideWatching = true;});
 gulp.task('js:styleguide', function () {
 	var opts = {
 		entries: ['./styleguide/js/main.js'],
-		debug: (gutil.env.type === 'development')
-	}
+		debug: (gutil.env.sourcemaps)
+	};
 	if (styleguideWatching) {
 		opts = xtend(opts, watchify.args);
 	}
@@ -163,7 +147,7 @@ gulp.task('js:styleguide', function () {
 
 	bundler.on('update', function (ids) {
 		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
-		gutil.log('Rebunlding...');
+		gutil.log('Rebundling...');
 		bundle();
 	});
 
@@ -197,7 +181,7 @@ gulp.task('css:styleguide', function () {
 
 gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide', 'connect:styleguide'], function () {
 	var styles = paths.css.map(function (path) {
-		return path.src + '*.scss';
+		return path.src + '**/*.scss';
 	});
 	styles.push('styleguide/scss/*.scss');
 	gulp.watch(styles, ['css:styleguide']);

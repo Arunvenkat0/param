@@ -1,10 +1,12 @@
+'use strict';
+
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
 var config = require('../webdriver/config');
 
 describe('Product Details Page - Bundle', function () {
 	before(function (done) {
-		client.init().url(config.url, done);
+		client.init().url(config.url + '/home', done);
 	});
 	it('- Product Details for Bundle', function (done) {
 		client

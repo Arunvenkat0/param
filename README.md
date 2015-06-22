@@ -15,18 +15,18 @@ Because of file size constraints, the demo store data distribution is broken int
 
 If you need to install high resolution images, you will need to perform 2 separate import steps.
 
-    % git pull sg20_demo_data_no_hires_images
+    % git pull demo_data_no_hires_images
 
 When you want to install the high resolution images, you can do that, following the same procedure.
 
-    % git pull sg20_demo_data_only_hires_images
+    % git pull demo_data_only_hires_images
 
 
 ## Zipping the files
 
 On the Mac, you should use the commandline `zip` command to make sure the folder structure is created properly.
 
-    % zip -r sg20_demo_data_no_hires_images sg20_demo_data_no_hires_images
+    % zip -r demo_data_no_hires_images demo_data_no_hires_images
 
 
 ## Upload and import the site
@@ -70,7 +70,7 @@ Now that you have gulp (or grunt) and its dependencies installed, you can start 
 
 
 ### SCSS
-Before authoring SCSS, make sure to check out the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_core/cartridge/scss/README.md?at=master) in `app_storefront_core/cartridge/scss` directory.
+Before authoring SCSS, make sure to check out the [README] in `app_storefront/cartridge/scss` directory.
 
 #### `gulp css`
 This task does 2 things:
@@ -82,13 +82,13 @@ This task is also run automatically on any `.scss` file change by using the `gul
 The equivalent task for grunt, `grunt css`, is also available.
 
 ### JS
-Before authoring JS, make sure to checkout the [README](https://bitbucket.org/demandware/sitegenesis/src/1b69dfe0af175b1690a21b15fc16a40aa345775c/app_storefront_richUI/cartridge/js/README.md?at=master) in `app_storefront_richUI/cartridge/js` directory.
+Before authoring JS, make sure to checkout the [README] in `app_storefront/cartridge/js` directory.
 
 The new modular JavaScript architecture relies on [browserify](https://github.com/substack/node-browserify) to compile JS code written in CommonJS standard.
 
 #### `gulp js`
 
-Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront_richUI/cartridge/js/app.js`, and the bundled js is output to `app_storefront_richUI/cartridge/static/default/js/app.js`.
+Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront/cartridge/js/app.js`, and the bundled js is output to `app_storefront/cartridge/static/default/js/app.js`.
 
 This task is also run automatically on any `.js` file change by using the `gulp watch` task.
 
@@ -106,5 +106,10 @@ For JavaScript, when watching is happening, [watchify](https://github.com/substa
 
 The equivalent default task for grunt, `grunt`, is also available.
 
+### Sourcemaps
+For sourcemaps support, run `gulp` or `grunt` in development mode by specificying `type` flag, i.e. `:; gulp --sourcemaps`.
 
-Updated: 2/13/15
+We only support external sourcemaps because Eclipse tend to crash with inline sourcemaps.
+As a result, if you're using Grunt, sourcemaps is only available when the build steps are run explicitly, i.e. `grunt js --sourcemaps`. Sourcemaps is not enabled during `watch` mode.
+
+Updated: 3/19/15

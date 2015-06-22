@@ -2,6 +2,9 @@
 	"name": "$sans-serif",
 	"stack": "Arial, sans-serif"
 }, {
+	"name": "$sans-serif-alt",
+	"stack": "Lato, sans-serif"
+}, {
 	"name": "$serif",
-	"stack": "Georgia, serif"
+	"stack": "Crete Round, serif"
 }]

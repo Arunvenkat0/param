@@ -2,36 +2,49 @@
 
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
+	require('babel/register');
 
 	// command line arguments
 	var config = {};
 	// mocha ui tests
 	config.suite = grunt.option('suite') || '*';
-	if (config.suite === 'all') { config.suite === '*'; }
+	if (config.suite === 'all') { config.suite = '*'; }
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 10000;
 	config.port = grunt.option('port') || 7000;
+	config.sourcemaps = !!grunt.option('sourcemaps');
 
 	var paths = require('./package.json').paths;
 
 	grunt.initConfig({
 		watch: {
-			sass: {
+			dev: {
 				files: paths.css.map(function (path) {
 					return path.src + '*.scss';
 				}),
-				tasks: ['css']
+				tasks: ['css:dev']
+			},
+			styleguide: {
+				files: paths.css.map(function (path) {
+					return path.src + '*.scss';
+				}).push('styleguide/scss/*.scss'),
+				tasks: ['css:styleguide']
 			}
 		},
 		sass: {
 			dev: {
 				options: {
 					style: 'expanded',
-					sourcemap: true
+					sourceMap: (config.sourcemaps)
 				},
 				files: paths.css.map(function (path) {
 					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'};
 				})
+			},
+			styleguide: {
+				files: [{
+					'styleguide/dist/main.css': 'styleguide/scss/main.scss'
+				}]
 			}
 		},
 		autoprefixer: {
@@ -39,16 +52,26 @@ module.exports = function (grunt) {
 				files: paths.css.map(function (path) {
 					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'};
 				})
+			},
+			styleguide: {
+				files: [{
+					'styleguide/dist/main.css': 'styleguide/dist/main.css'
+				}]
 			}
 		},
 		browserify: {
-			dist: {
+			dev: {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
-				}]
+				}],
+				options: {
+					browserifyOptions: {
+						debug: (config.sourcemaps)
+					}
+				}
 			},
-			watch: {
+			watchDev: {
 				files: [{
 					src: paths.js.src + 'app.js',
 					dest: paths.js.dest + 'app.js'
@@ -57,20 +80,39 @@ module.exports = function (grunt) {
 					watch: true
 				}
 			},
-			test: {
+			styleguide: {
 				files: [{
-					expand: true,
-					cwd: 'test/unit/browser/',
-					src: ['*.js', '!*.out.js'],
-					dest: 'test/unit/browser/dist'
+					src: 'styleguide/js/main.js',
+					dest: 'styleguide/dist/main.js'
+				}],
+				options: {
+					transform: ['hbsfy']
+				}
+			},
+			watchStyleguide: {
+				files: [{
+					src: 'styleguide/js/main.js',
+					dest: 'styleguide/dist/main.js'
+				}],
+				options: {
+					transform: ['hbsfy'],
+					watch: true
+				}
+			}
+		},
+		external_sourcemap: {
+			browserify: {
+				files: [{
+					dest: paths.js.dest,
+					src: paths.js.dest + 'app.js'
 				}]
 			}
 		},
 		connect: {
-			test: {
+			styleguide: {
 				options: {
-					port: config.port,
-					base: 'test/unit/browser'
+					port: grunt.option('port') || 8000,
+					base: 'styleguide'
 				}
 			}
 		},
@@ -85,7 +127,7 @@ module.exports = function (grunt) {
 				reporter: require('jshint-stylish'),
 				jshintrc: true
 			},
-			target: ['app_storefront_richUI/cartridge/js/**/*.js']
+			target: ['app_storefront/cartridge/js/**/*.js']
 		},
 		mochaTest: {
 			application: {
@@ -100,23 +142,42 @@ module.exports = function (grunt) {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/unit/' + config.suite + '/**/*.js', '!test/unit/browser/**/*', '!test/unit/webdriver/*']
+				src: ['test/unit/' + config.suite + '/**/*.js']
 			}
 		},
-	    jsdoc: {
-	        dist : {
-	            src: ['jsdoc/README.md', 'app_storefront_controllers/**/*.ds'],
-	            options:{
-		            destination: 'doc',
-		            configure: './jsdoc-conf.json'
-	            }
-	        }
-	    }
+		'gh-pages': {
+			styleguide: {
+				src: ['dist/**', 'index.html', 'lib/**/*'],
+				options: {
+					base: 'styleguide',
+					clone: 'styleguide/.tmp',
+					message: 'Update ' + new Date().toISOString(),
+					repo: require('./styleguide/deploy.json').options.remoteUrl
+				}
+			}
+		},
+		jsdoc: {
+			dist : {
+				src: ['jsdoc/README.md', 'app_storefront_controllers/**/*.ds'],
+				options:{
+					destination: 'doc',
+					configure: './jsdoc-conf.json'
+				}
+			}
+		}
 	});
 
-	grunt.registerTask('css', ['sass', 'autoprefixer']);
-	grunt.registerTask('default', ['css', 'browserify:watch', 'watch']);
-	grunt.registerTask('js', ['browserify:dist']);
+	grunt.registerTask('sourcemap', function () {
+		if (config.sourcemaps) {
+			grunt.task.run(['external_sourcemap:browserify']);
+		}
+	});
+	grunt.registerTask('css:dev', ['sass:dev', 'autoprefixer:dev']);
+	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
+	grunt.registerTask('default', ['css:dev', 'browserify:watchDev', 'watch:dev']);
+	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
-	grunt.registerTask('test:unit', ['browserify:test', 'connect:test', 'mochaTest:unit']);
+	grunt.registerTask('test:unit', ['mochaTest:unit']);
+	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
+	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
 };

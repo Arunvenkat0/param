@@ -1,4 +1,4 @@
-@import "../../app_storefront_core/cartridge/scss/default/style.scss";
+@import "../../app_storefront/cartridge/scss/default/style.scss";
 
 body {
 	background: none;
@@ -17,6 +17,7 @@ body {
 
 // Nav
 #nav {
+	margin-top: 0;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -82,6 +83,7 @@ body {
 		@extend %clearfix;
 		border: 1px dashed $very-light-gray;
 		box-sizing: border-box;
+		font-size: 12px; // match sitegenesis font size
 		margin: 1rem 0;
 		padding: 1em;
 		position: relative;

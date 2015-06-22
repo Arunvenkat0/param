@@ -1,0 +1,70 @@
+#wrapper {
+	background-color: $white;
+	border: 0;
+	left: 0;
+	margin: auto;
+	position: relative;
+	transition: left 0.2s ease-in;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		width: 760px;
+	}
+	@media screen and (min-width: 960px) {
+		width: 960px;
+	}
+	&.pt_storefront {
+		width: 100%;
+	}
+	&.menu-active {
+		left: 50%;
+	}
+	@media screen and (min-width: 768px) {
+		&.menu-active {
+			left: auto;
+		}
+	}
+}
+
+.primary-content {
+	border-left: 1px solid $gainsboro;
+	float: right;
+	margin-left: -1px;
+	padding: 0 0 20px;
+	position: relative;
+	width: 787px;
+	.primary-focus & {
+		border: 0 none;
+		float: left;
+		margin: 0;
+		width: 709px;
+	}
+	.full-width & {
+		border: 0 none;
+		width: 100%;
+	}
+	.page-content & {
+		padding-left: 3%;
+		width: 758px;
+	}
+}
+
+#secondary {
+	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+	border-right: 1px solid $gainsboro;
+	float: left;
+	width: 172px;
+	position: relative;
+	nav {
+		padding-left: 10px;
+		padding-right: 10px;
+		a {
+			margin-left: 15px;
+		}
+	}
+	.primary-focus & {
+		background: none repeat scroll 0 0 transparent;
+		border: 0 none;
+		float: right;
+		width: 210px;
+	}
+}

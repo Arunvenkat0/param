@@ -1,5 +1,7 @@
+'use strict';
+
 var assert = require('assert');
-var util = require('../../../app_storefront_richUI/cartridge/js/util');
+var util = require('../../../app_storefront/cartridge/js/util');
 
 describe('Utils', function () {
 	describe('append param to url', function () {
