@@ -57,7 +57,7 @@ var AbstractModel = Class.extend(
      * @return {Object}
      */
     getValue : function (key) {
-        if (empty(key) || !this.object) {
+        if (empty(key)) {
             return null;
         }
 

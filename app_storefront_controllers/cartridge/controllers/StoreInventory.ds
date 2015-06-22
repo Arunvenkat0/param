@@ -88,9 +88,17 @@ function showAvailableStores() {
     var stores = lookupByZipCode().Stores;
     
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
-    var storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
-
+    var product = Product.get(request.httpParameterMap.pid.stringValue),
+    	storeAvailabilityMap;
+    if (!product)
+    {
+    	storeAvailabilityMap = new dw.util.HashMap();
+    }
+    else
+    {
+    	storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
+    }
+    
     showSetStore(stores, storeAvailabilityMap);
 }
 

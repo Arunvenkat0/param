@@ -20,7 +20,12 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function list() {
     var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(app.getModel('Content').get('myaccount-addresses').object);
+    
+    var content = app.getModel('Content').get('myaccount-addresses');
+	if (content)
+	{
+		pageMeta.update(content.object);
+	}
 
     app.getView().render('account/addressbook/addresslist');
 }

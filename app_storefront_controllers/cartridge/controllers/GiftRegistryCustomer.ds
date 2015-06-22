@@ -27,7 +27,7 @@ function Show()
 
     if (typeof(ProductListID) != 'undefined' && ProductListID != null)
     {
-        var GetProductListResult = new dw.system.Pipelet('GetProductList', {
+        var GetProductListResult = new Pipelet('GetProductList', {
             Create: false
         }).execute({
             ProductListID: ProductListID

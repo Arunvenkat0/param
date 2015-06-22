@@ -45,49 +45,60 @@ function show() {
 function addProduct() {
 
     var product = Product.get(request.httpParameterMap.pid.value);
-    var category = Category.get(request.httpParameterMap.category.value);
-
-    if (!product.object || !category.object) {
+    if (!product) {
         response.renderJSON({
             success : false
         });
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        comparison.add(product.object, category.object);
-        comparison.setCategory(category.getID());
-
+    
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category) {
         response.renderJSON({
-            success : true
+            success : false
         });
+        return;
     }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.add(product.object, category.object);
+    comparison.setCategory(category.getID());
+
+    response.renderJSON({
+        success : true
+    });
 }
 
 /**
  * Parameters: - pid: SKU - category: category ID
  */
-function removeProduct() {
+ function removeProduct() {
 
     var product = Product.get(request.httpParameterMap.pid.value);
-    var category = Category.get(request.httpParameterMap.category.value);
-    if (!product.object || !category.object) {
+    if (!product) {
         response.renderJSON({
             success : false
         });
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        comparison.remove(product.object, category.object);
-        comparison.setCategory(category.getID());
-
+    
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category) {
         response.renderJSON({
-            success : true
+            success : false
         });
+        return;
     }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.remove(product.object, category.object);
+    comparison.setCategory(category.getID());
+
+    response.renderJSON({
+        success : true
+    });
 }
 
 /**
@@ -96,15 +107,14 @@ function removeProduct() {
 function controls() {
 
     var category = Category.get(request.httpParameterMap.category.value);
-    if (!category.object) {
+    if (!category) {
         app.getView().render('search/components/productcomparewidget');
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
-    }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
 }
 
 /*

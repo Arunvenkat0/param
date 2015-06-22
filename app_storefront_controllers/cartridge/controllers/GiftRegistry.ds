@@ -1205,8 +1205,8 @@ function updateAll() {
 
     // TODO do in a single transaction
 	for (var i = 0; i < currentForms.giftregistry.items.length; i++) {
-		var Item = currentForms.giftregistry.items[i];
-	    if (!Form.get(Item).copyTo(Item.object))
+		var item = currentForms.giftregistry.items[i];
+	    if (!Form.get(item).copyTo(item.object))
 	    {
 	        return {
 	            error: true
