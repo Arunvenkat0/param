@@ -198,7 +198,7 @@ CustomerModel.createAccount = function(email, password, form) {
 
     // create the new customer
     var newCustomer, rememberMe;
-    newCustomer = Customer.createCustomer(email, password);
+    newCustomer = CustomerModel.createCustomer(email, password);
     if (newCustomer === null || newCustomer.object === null) {
         Transaction.rollback();
         form.invalidate();
@@ -225,7 +225,7 @@ CustomerModel.createAccount = function(email, password, form) {
     rememberMe = Form.get('profile.login.rememberme').value();
 
     // login the customer
-    return Customer.loginCustomer(email, password, rememberMe);
+    return CustomerModel.loginCustomer(email, password, rememberMe);
 };
 
 /**
@@ -267,7 +267,7 @@ CustomerModel.getByPasswordResetToken = function(token) {
         if (ValidateResetPasswordTokenResult.result === PIPELET_ERROR) {
             result = null;
         } else {
-            result = Customer.get(ValidateResetPasswordTokenResult.Customer);
+            result = CustomerModel.get(ValidateResetPasswordTokenResult.Customer);
         }
     }
     return result;
@@ -290,7 +290,7 @@ CustomerModel.editAccount = function(email, password, form) {
         return false;
     }
 
-    if (!Customer.setLogin(customer, email, password)) {
+    if (!CustomerModel.setLogin(customer, email, password)) {
         Transaction.rollback();
         return false;
     }
