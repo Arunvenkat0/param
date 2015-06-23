@@ -30,7 +30,13 @@
 
 					<isinputfield formfield="${pdict.CurrentForms.contactus.myquestion}" type="select"/>
 
-					<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.contactus.comment}" type="textarea"/>
+					<isscript>
+						var attributes = {
+							rows: 8,
+							cols: 40
+						};
+					</isscript>
+					<isinputfield formfield="${pdict.CurrentForms.contactus.comment}" type="textarea" attributes="${attributes}" />
 
 					<div class="form-row form-row-button">
 						<button id="sendBtn" type="submit" value="${Resource.msg('global.send','locale',null)}" name="${pdict.CurrentForms.contactus.send.htmlName}">

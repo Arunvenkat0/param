@@ -109,7 +109,12 @@
 
 							<isif condition="${item.object.type == item.object.TYPE_PRODUCT}">
 								<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
-									<isinputfield formfield="${item.quantity}" type="number" attribute1="min" value1="0" rowclass="option-quantity-desired"/>
+									<isscript>
+										var attributes = {
+											min: 0
+										};
+									</isscript>
+									<isinputfield formfield="${item.quantity}" type="number" attributes="${attributes}" rowclass="option-quantity-desired"/>
 								<iselse/>
 									<div class="form-row option-quantity-desired">
 										<label>${Resource.msg('productlist.qtydesired','account',null)}</label>

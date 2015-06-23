@@ -232,7 +232,6 @@
 	attribute="type"
 	attribute="maxlength"
 	attribute="size"
-	attribute="xhtmlclass"
 	attribute="label"
 	attribute="value"
 	attribute="dynamicname"

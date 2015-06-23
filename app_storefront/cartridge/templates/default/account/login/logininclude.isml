@@ -26,9 +26,8 @@
 
 			<fieldset>
 
-				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" xhtmlclass="email-input" dynamicname="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" xhtmlclass="password-input" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}" attribute1="autocomplete" value1="off"/>
+				<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" dynamicname="true" requiredtext="${Resource.msg('login.username.missing-error','forms',null)}"/>
+				<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" dynamicname="true" requiredtext="${Resource.msg('login.password.missing-error','forms',null)}"/>
 
 				<div class="form-row form-row-button">
 					<button type="submit" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}">

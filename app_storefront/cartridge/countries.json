@@ -31,10 +31,12 @@
 				"skip": true
 			},
 			"phone": {
-				"helpcid": "help-telephone",
-				"helplabel": {
-					"property": "singleshipping.phonerequired",
-					"file": "checkout"
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
 				}
 			}
 		}

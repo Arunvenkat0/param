@@ -91,7 +91,7 @@
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.phone}" type="input"/>
 
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" xhtmlclass="email" type="input"/>
+		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input"/>
 
 		<iscomment>provide option to add address to address book if customer is authenticated</iscomment>
 		<isif condition="${pdict.CurrentCustomer.authenticated}">
