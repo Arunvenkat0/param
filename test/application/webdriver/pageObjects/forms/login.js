@@ -4,8 +4,8 @@ import client from '../../../webdriver/client';
 import * as testData from '../testData/main';
 
 export const BTN_LOGIN = 'button[name$="frm_login_login"]';
-export const INPUT_EMAIL = 'input.email-input';
-export const INPUT_PASSWORD = 'input.password-input';
+export const INPUT_EMAIL = '.username input';
+export const INPUT_PASSWORD = '.password input';
 
 const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
 
