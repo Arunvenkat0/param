@@ -8,7 +8,7 @@ import * as testData from '../webdriver/pageObjects/testData/main';
 import * as loginForm from '../webdriver/pageObjects/forms/login';
 
 
-describe('giftRegistry', () => {
+describe('Gift Registry', () => {
 	let customer;
 	let login = 'testuser1@demandware.com';
 	let eventFormData = new Map();
@@ -40,7 +40,7 @@ describe('giftRegistry', () => {
 		 	selector: giftRegistryPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
-			selector: '.share-link-content.active a',
+			selector: '.share-link-content a',
 			baseUrl: giftRegistryPage.configUrl
 		}
 	};
@@ -50,8 +50,6 @@ describe('giftRegistry', () => {
 		.then(() => loginForm.loginAsDefaultCustomer())
 		.then(() => giftRegistryPage.pressBtnNewRegistry())
 	);
-
-	
 
 	before(() => {
 		return testData.getCustomerByLogin(login)
@@ -92,19 +90,19 @@ describe('giftRegistry', () => {
 
 	it('should fill out the event shipping form', () =>
 		giftRegistryPage.pressBtnContinueEventForm()
-		.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
-		.then(() => giftRegistryPage.pressBtnUsePreEventShippingAddress())
-		.then(() => client.isEnabled('[name$="giftregistry_eventaddress_confirm"]'))
-		.then(enabled => assert.ok(enabled))
+			.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
+			.then(() => giftRegistryPage.pressBtnUsePreEventShippingAddress())
+			.then(() => client.isEnabled('[name$="giftregistry_eventaddress_confirm"]'))
+			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should display the event information', () =>
 		giftRegistryPage.pressBtnContinueEventAddressForm()
-		.then(() => client.waitForExist('form[name$="giftregistry_enevt_confirm"]'))
-		.then(() => giftRegistryPage.pressBtnContinueEventForm())
-		.then(() => giftRegistryPage.pressBtnMakeRegistryPublic())
-		.then(() => client.isVisible('[class$="share-options"]'))
-		.then(visible => assert.isTrue(visible))
+			.then(() => client.waitForExist('form[name$="giftregistry_enevt_confirm"]'))
+			.then(() => giftRegistryPage.pressBtnContinueEventForm())
+			.then(() => giftRegistryPage.pressBtnMakeRegistryPublic())
+			.then(() => client.isVisible('[class$="share-options"]'))
+			.then(visible => assert.isTrue(visible))
 	);
 	
 	it('should display a Facebook icon and link', () => 
@@ -147,9 +145,9 @@ describe('giftRegistry', () => {
 			.then(doesExist => assert.isTrue(doesExist))
 	);
 
-	it('should display a link', () => 
+	it('should display a URL when chain icon clicked', () => 
 		giftRegistryPage.clickLinkIcon()
-			.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
+			.then(() => client.waitForVisible(socialLinksMap.shareLinkUrl.selector))
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
 			.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)))
