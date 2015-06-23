@@ -47,7 +47,8 @@
                     <tasks>
                       <copy todir="${project.build.directory}/sg-resources">
                         <fileset dir="${project.basedir}">
-                          <include name="app_storefront_*/**" />
+                          <include name="app_storefront" />
+                          <include name="app_storefront_controllers" />
                         </fileset>
                       </copy>
                       <copy todir="${project.build.directory}/sg-resources/demosite-creation">
