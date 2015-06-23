@@ -35,7 +35,7 @@ describe('Wishlist', () => {
 		 	selector: wishListPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
-			selector: '.share-link-content.active a',
+			selector: '.share-link-content a',
 			baseUrl: wishListPage.configUrl
 		}
 
@@ -47,9 +47,9 @@ describe('Wishlist', () => {
 
 	describe('Send to Friend Links', () => {
 
-		before(() => wishListPage.navigateTo());
-
-		before(() => loginForm.loginAsDefaultCustomer());
+		before(() => wishListPage.navigateTo()
+			.then(() => loginForm.loginAsDefaultCustomer())
+		);
 
 		it('should display a Facebook icon and link', () => 
 			client.isExisting(socialLinksMap.facebook.selector)

@@ -12,8 +12,8 @@ const basePath = '/wishlist';
 
 export const configUrl = config.url;
 
-export function navigateTo (path = basePath) {
-	return client.url(config.url + path);
+export function navigateTo () {
+	return client.url(config.url + basePath);
 }
 
 export function clickLinkIcon () {
