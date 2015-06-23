@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as formTasks from './forms/tasks';
+import * as formHelpers from './forms/helpers';
 
 export const CSS_SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
@@ -55,7 +55,7 @@ export function fillOutEventForm (eventData) {
 
 	for (var [key, value] of eventData) {
 		var selector = '[name$="event_' + key + '"]';
-		formTasks.populateField(selector, value, fieldTypeMap.get(key));
+		formHelpers.populateField(selector, value, fieldTypeMap.get(key));
 	}
 
 	return client;
@@ -76,7 +76,7 @@ export function fillOutEventShippingForm (eventShippingData) {
 
 	for (var [key, value] of eventShippingData) {
 		var selector = '[name$="giftregistry_eventaddress_addressBeforeEvent_' + key + '"]';
-		formTasks.populateField(selector, value, fieldMapType.get(key));
+		formHelpers.populateField(selector, value, fieldMapType.get(key));
 	}
 
 	return client;
