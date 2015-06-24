@@ -18,30 +18,37 @@ describe('Gift Registry', () => {
 	let socialLinksMap = {
 		facebook: {
 			selector: 'a[data-share=facebook]',
-			baseUrl: 'https://www.facebook.com/sharer/sharer.php'
+			baseUrl: 'https://www.facebook.com/sharer/sharer.php',
+			regex: '/.*\?.*u=.+/'
 		},
 		twitter: {
 			selector: 'a[data-share=twitter]',
-			baseUrl: 'https://twitter.com/intent/tweet/'
+			baseUrl: 'https://twitter.com/intent/tweet/',
+			regex: '/.*\?.*url=.+/'
 		},
 		googlePlus: {
 			selector: 'a[data-share=googleplus]',
-			baseUrl: 'https://plus.google.com/share'
+			baseUrl: 'https://plus.google.com/share',
+			regex: '/.*\?.*url=.+/'
+
 		},
 		pinterest: {
 			selector: 'a[data-share=pinterest]',
-			baseUrl: 'https://www.pinterest.com/pin/create/button/'
+			baseUrl: 'https://www.pinterest.com/pin/create/button/',
+			regex: '/.*\?.*url=.+/'
 		},
 		emailLink: {
 			selector: 'a[data-share=email]',
-			baseUrl: 'mailto:name@email.com'
+			baseUrl: 'mailto:name@email.com',
+			regex: '/.*\?.*subject=.+\&.*body=.+/'
 		},
 		shareLinkIcon: {
 		 	selector: giftRegistryPage.CSS_SHARE_LINK,
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content a',
-			baseUrl: giftRegistryPage.configUrl
+			baseUrl: giftRegistryPage.configUrl,
+			regex: '/.*\?.*ID=.+/'
 		}
 	};
 
@@ -109,7 +116,10 @@ describe('Gift Registry', () => {
 		client.isExisting(socialLinksMap.facebook.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.facebook.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.facebook.baseUrl))
+				assert.ok(href.match(socialLinksMap.facebook.regex))
+			})
 	);
 
 	it('should display a Twitter icon and link', () => 
