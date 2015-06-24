@@ -32,59 +32,16 @@ var inputElementTypes = [
 ];
 
 /**
- * @description Iterate over all props in pdict, pick out attribute key/value pairs
- * @param {dw.system.PipelineDictionary} pdict
- * @return {Object} attributes an map of attributes key/value pairs
- *   for eg. {1: {key: 'key1', value: 'value1'}, 2: {key: 'key2', value: 'value2'}}
- */
-function getAttributes(pdict) {
-	// Custom Attributes
-	var attributesMap = {};
-	var attributesCount = 0;
-	var maxlength, attrMatch, valueMatch, attrIndex;
-
-	for (var prop in pdict) {
-		if (pdict.hasOwnProperty(prop)) {
-			attrMatch = prop.match(/attribute(\d)/);
-			valueMatch = prop.match(/value(\d)/);
-			if (attrMatch) {
-				attrIndex = attrMatch[1];
-				if (!attributesMap[attrIndex]) attributesMap[attrIndex] = {};
-				attributesMap[attrIndex].key = pdict[prop];
-				attributesCount++;
-			}
-			if (valueMatch) {
-				attrIndex = valueMatch[1];
-				if (!attributesMap[attrIndex]) attributesMap[attrIndex] = {};
-				attributesMap[attrIndex].value = pdict[prop];
-			}
-		}
-	}
-	// maxlength attribute
-	maxlength = pdict.maxlength || pdict.formfield.maxLength;
-	if (maxlength) {
-		attributesMap[attributesCount + 1] = {
-			key: 'maxlength',
-			value: maxlength
-		};
-	}
-
-	return attributesMap;
-}
-
-/**
  * @description Parse inputfield custom element
  * @param {dw.system.PipelineDictionary} pdict
  * @param {dw.web.FormField} pdict.formfield
  * @param {Boolean} pdict.formfield.mandatory - indicate whether the field is mandatory
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
- * @param {String} pdict.maxlength - length of input field, except for types `select`, `textarea`, `checkbox`, `radio` and `hidden`.
- * @param {String} pdict.xhtmlclass - class to be added to input field
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
- * @param {String} pdict.htmlName - name of the input element, used if `dynamicname` is not truthy
- * @param {String} pdict.attributeN - name of a custom attribute, where N is any integer, to match with `valueN`
- * @param {String} pdict.valueN - value of a custom attribute, where N is any integer, to match with `attributeN`
- * @param {Object} pdict.custom - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
+ * @param {Object} pdict.attributes - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
+ * @param {Object} pdict.help - help text for the input field
+ * @param {Object | String} pdict.help.label - the label of the help text. If it is an object, it should have `property` and `file` keys to look up the text from a resource bundle.
+ * @param {String} pdict.help.cid - the id of the content asset that contains the help content
  * @return {Object} input object that contains `element`, `rowClass`, `label`, `input`, `caption`
  */
 module.exports = function (pdict) {
@@ -94,7 +51,8 @@ module.exports = function (pdict) {
 	var type = pdict.type;
 	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue) || '';
 	var help = '';
-	var element, name, id, rowClass, fieldClass, caption;
+	var fieldClass = '';
+	var element, name, id, rowClass, caption;
 
 	// default type is 'text' for 'input' element
 	if (type === 'input') {
@@ -112,21 +70,10 @@ module.exports = function (pdict) {
 		return;
 	}
 
-	var attributesMap = getAttributes(pdict);
-	var attributesArray = [];
-	Object.keys(attributesMap).forEach(function (index) {
-		// avoid maxlength for select, textarea, checkbox, radio and hidden
-		if (attributesMap[index].key === 'maxlength' && (element === 'select' || element === 'textarea' || type === 'checkbox' || type === 'radio' || element === 'hidden')) {
-			return;
-		}
-		attributesArray.push(attributesMap[index].key + '="' + attributesMap[index].value + '" ');
-	});
-	attributes = attributesArray.join('');
-
 	// custom attributes
-	if (pdict.custom) {
-		Object.keys(pdict.custom).forEach(function (key) {
-			attributes += key + '="' + pdict.custom[key] + '" ';
+	if (pdict.attributes) {
+		Object.keys(pdict.attributes).forEach(function (key) {
+			attributes += key + '="' + pdict.attributes[key] + '" ';
 		});
 	}
 
@@ -135,7 +82,6 @@ module.exports = function (pdict) {
 	id = name; // for client side validation, id should be same to avoid confusion in case of equalTo rule
 
 	rowClass = pdict.rowclass ? pdict.rowclass : '';
-	fieldClass = pdict.xhtmlclass ? pdict.xhtmlclass : '';
 
 	/*
 	 if it is a phone, country field then add these as css class names as well
@@ -143,7 +89,7 @@ module.exports = function (pdict) {
 	 please note this is kind of hack (to hard code ids) to avoid mass changes in the templates wherever phone/country is used
 	*/
 	if (pdict.formfield.formId === 'phone' || pdict.formfield.formId === 'country') {
-		fieldClass += ' ' + pdict.formfield.formId;
+		fieldClass += pdict.formfield.formId;
 	}
 
 	// required
@@ -165,11 +111,11 @@ module.exports = function (pdict) {
 	label += '<span>' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
 	label += '</label>';
 
+	var options = [];
 	// input
 	switch (element) {
 		case 'select':
 			input = '<select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
-			var options = [];
 			// interate over pdict.formfield.options, append to the options array
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
@@ -213,7 +159,6 @@ module.exports = function (pdict) {
 			break;
 		// treat radio as its own element, as each option is an input element
 		case 'radio':
-			var options = [];
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
 				var value = option.value;
@@ -240,16 +185,18 @@ module.exports = function (pdict) {
 	// help text
 	var helplabel = '';
 	var helpcontent = '';
-	if (pdict.helpcid && pdict.helplabel) {
-		if (typeof pdict.helplabel === 'string') {
-			helplabel = pdict.helplabel;
-		} else if (typeof pdict.helplabel === 'object') {
-			if (pdict.helplabel.property && pdict.helplabel.file) {
-				helplabel = Resource.msg(pdict.helplabel.property, pdict.helplabel.file, null);
+	var helpAsset;
+	if (pdict.help) {
+		if (typeof pdict.help.label === 'string') {
+			helplabel = pdict.help.label;
+		} else if (typeof pdict.help.label === 'object') {
+			if (pdict.help.label.property && pdict.help.label.file) {
+				helplabel = Resource.msg(pdict.help.label.property, pdict.help.label.file, null);
 			}
 		}
-		if (ContentMgr.getContent(pdict.helpcid)) {
-			helpcontent = ContentMgr.getContent(pdict.helpcid).custom.body;
+		helpAsset = ContentMgr.getContent(pdict.help.cid);
+		if (helpAsset) {
+			helpcontent = helpAsset.custom.body;
 		}
 		help = [
 			'<div class="form-field-tooltip">',

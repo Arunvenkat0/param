@@ -30,12 +30,9 @@
 			</isif>
 
 			<isscript>
-				var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
 				var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
-				var form = dynamicForm(pdict.CurrentForms.profile.address, currentCountry.dynamicForms.addressDetails);
 			</isscript>
-
-			<isprint value="${form}" encoding="off"/>
+			<isdynamicform formobject="${pdict.CurrentForms.profile.address}" formdata="${currentCountry.dynamicForms.addressDetails}"/>
 
 			<div class="form-row form-row-button">
 				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">

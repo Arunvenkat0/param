@@ -1,6 +1,4 @@
-target
 .DS_Store
-.settings/
 node_modules
 *.log
 *.swp

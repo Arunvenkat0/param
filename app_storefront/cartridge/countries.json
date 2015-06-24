@@ -31,10 +31,12 @@
 				"skip": true
 			},
 			"phone": {
-				"helpcid": "help-telephone",
-				"helplabel": {
-					"property": "singleshipping.phonerequired",
-					"file": "checkout"
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
 				}
 			}
 		}
@@ -87,7 +89,7 @@
 }, {
 	"countryCode": "FR",
 	"name": {
-		"fr_FR": "Français"
+		"fr_FR": "France"
 	},
 	"continent": "europe",
 	"locales": ["fr_FR"],

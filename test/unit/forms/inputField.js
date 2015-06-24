@@ -9,7 +9,7 @@ var StringUtils = require('../../mocks/dw/util/StringUtils');
 var Resource = require('../../mocks/dw/web/Resource');
 var URLUtils = require('../../mocks/dw/web/URLUtils');
 
-var inputField = proxyquire('../../../app_storefront/cartridge/scripts/common/inputField.ds', {
+var inputField = proxyquire('../../../app_storefront/cartridge/scripts/common/inputField', {
 	'dw/content/ContentMgr': ContentMgr,
 	'dw/util/StringUtils': StringUtils,
 	'dw/web/Resource': Resource,
@@ -43,8 +43,10 @@ describe('Input Field', function () {
 				valid: true
 			},
 			type: 'text',
-			helplabel: 'Help',
-			helpcid: 'contentasset'
+			help: {
+				label: 'Help',
+				cid: 'contentasset'
+			}
 		});
 		assert.deepEqual(field, {
 			rowClass: '',
@@ -63,8 +65,10 @@ describe('Input Field', function () {
 				valid: true
 			},
 			type: 'text',
-			helplabel: 'Help',
-			helpcid: 'notfound'
+			help: {
+				label: 'Help',
+				cid: 'notfound'
+			}
 		});
 		assert.deepEqual(field, {
 			rowClass: '',
