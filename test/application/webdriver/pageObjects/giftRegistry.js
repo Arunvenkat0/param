@@ -35,10 +35,6 @@ export function pressBtnUsePreEventShippingAddress () {
 	return client.click(USE_PRE_EVENT);
 }
 
-export function clickLinkIcon () {
-	return client.click(CSS_SHARE_LINK);
-}
-
 export function fillOutEventForm (eventData) {
 	var fieldTypeMap = new Map();
 
