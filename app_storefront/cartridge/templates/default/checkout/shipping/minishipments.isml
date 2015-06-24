@@ -23,7 +23,7 @@
 			<isset name="shipmentCount" value="${shipmentCount+1}" scope="page"/>
 			<div class="mini-shipment order-component-block <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 				<iscomment>omit the shipment name, if there is just one shipment</iscomment>
-				<isif condition="${Shipments.size() > 1 && pdict.Basket.productLineItems.size() > 0}"><div class="name">Shipment ${Resource.msg('global.pound','locale',null) + ' ' + shipmentCount}</div></isif>
+				<isif condition="${Shipments.size() > 1 && pdict.Basket.productLineItems.size() > 0}"><div class="name">${Resource.msg('multishippingshipments.shipment','checkout',null)} ${Resource.msgf('global.shipment.count','locale',null, shipmentCount)}</div></isif>
 
 				<h3 class="section-header">
 					<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
