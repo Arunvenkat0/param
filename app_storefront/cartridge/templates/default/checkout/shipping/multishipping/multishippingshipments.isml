@@ -25,7 +25,7 @@
 				<table class="item-list"  cellspacing="0">
 					<thead>
 						<tr>
-							<th class="section-header"  colspan="4">${Resource.msg('multishippingshipments.shipment','checkout',null)} ${Resource.msgf('global.shipment.count','locale',null, shipmentloop.count)}</th>
+							<th class="section-header"  colspan="4">${Resource.msgf('multishippingshipments.shipment','checkout',null, shipmentloop.count)}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,7 +86,7 @@
 											</isif>
 										</isloop>
 								<iselse/>
-										${Resource.msg('cart.store.homedelivery','checkout',null)} ${Resource.msg('multishippingshipments.shipment','checkout',null)} ${Resource.msgf('global.shipment.count','locale',null, shipmentloop.count)}
+										${Resource.msg('cart.store.homedelivery','checkout',null)} ${Resource.msgf('multishippingshipments.shipment','checkout',null, shipmentloop.count)}
 										<isset name="editUrl" value="${URLUtils.https('COShippingMultiple-Start')}" scope="page"/>
 										<select class="selectbox" name="${shipmentItem.shippingMethodID.htmlName}" data-shipmentUUID="${shipment.UUID}">
 										<isloop items="${shipmentItem.shippingMethodID.options}" var="option">

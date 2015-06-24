@@ -42,7 +42,7 @@
 					<isif condition="${pdict.Basket.shipments.size() > 1}">
 						<tr class="cart-row">
 							<td colspan="5">
-								<div class="shipment-label">Shipment ${Resource.msgf('global.shipment.count','locale',null, shipmentCount)}</div>
+								<div class="shipment-label">${Resource.msgf('multishippingshipments.shipment','checkout',null, shipmentCount)}</div>
 							</td>
 						</tr>
 					</isif>
