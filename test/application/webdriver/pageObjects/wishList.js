@@ -15,7 +15,3 @@ export const configUrl = config.url;
 export function navigateTo () {
 	return client.url(config.url + basePath);
 }
-
-export function clickLinkIcon () {
-	return client.click(CSS_SHARE_LINK);
-}

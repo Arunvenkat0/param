@@ -91,8 +91,9 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 		);
 
-		it('should display a link', () => 
-			wishListPage.clickLinkIcon()
+		it('should display a URL when chain icon clicked', () => 
+			client.click(wishListPage.CSS_SHARE_LINK)
+				.then(() => client.waitForVisible(socialLinksMap.shareLinkUrl.selector))
 				.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
