@@ -198,7 +198,7 @@
 <ismodule template="account/addressbook/miniaddress.isml"
 	name="miniaddress"
 	attribute="p_address"
-    attribute="p_productlist"
+	attribute="p_productlist"
 />
 
 <iscomment>
@@ -206,11 +206,11 @@
 	The prefix 'p_' avoids clashes with loop or other variables
 </iscomment>
 <ismodule template="checkout/minishippingaddress.isml"
-    name="minishippingaddress"
-    attribute="p_shipment"
-    attribute="p_editable"
-    attribute="p_showmethod"
-    attribute="p_showpromos"
+	name="minishippingaddress"
+	attribute="p_shipment"
+	attribute="p_editable"
+	attribute="p_showmethod"
+	attribute="p_showpromos"
 />
 
 <iscomment>
@@ -223,6 +223,12 @@
 	attribute="p_card"
 	attribute="p_cc_formfield"
 	attribute="p_show_expiration"
+/>
+
+<ismodule template="util/dynamicform.isml"
+	name="dynamicform"
+	attribute="formobject"
+	attribute="formdata"
 />
 
 <iscomment>define reusable input field and label rendering</iscomment>
@@ -245,32 +251,29 @@
 />
 
 <iscomment>renders a progress indicator for checkout</iscomment>
-<ismodule
-    template="checkout/components/checkoutprogressindicator"
-    name="checkoutprogressindicator"
-    attribute="step"
-    attribute="multishipping"
-    attribute="rendershipping"/>
+<ismodule template="checkout/components/checkoutprogressindicator"
+	name="checkoutprogressindicator"
+	attribute="step"
+	attribute="multishipping"
+	attribute="rendershipping"/>
 
 
 <iscomment>renders order totals information</iscomment>
-<ismodule
-	template="components/order/ordertotals"
-    name="ordertotals"
-    attribute="p_lineitemctnr"
-    attribute="p_showshipmentinfo"
-    attribute="p_shipmenteditable"
-    attribute="p_totallabel"
+<ismodule template="components/order/ordertotals"
+	name="ordertotals"
+	attribute="p_lineitemctnr"
+	attribute="p_showshipmentinfo"
+	attribute="p_shipmenteditable"
+	attribute="p_totallabel"
 />
 
 <iscomment>renders order totals information (email)</iscomment>
-<ismodule
-	template="components/order/ordertotalsemail"
-    name="emailordertotals"
-    attribute="p_lineitemctnr"
-    attribute="p_showshipmentinfo"
-    attribute="p_shipmenteditable"
-    attribute="p_totallabel"
+<ismodule template="components/order/ordertotalsemail"
+	name="emailordertotals"
+	attribute="p_lineitemctnr"
+	attribute="p_showshipmentinfo"
+	attribute="p_shipmenteditable"
+	attribute="p_totallabel"
 />
 
 <iscomment>renders order details</iscomment>
@@ -288,15 +291,13 @@
 />
 
 <iscomment>renders product compare controls</iscomment>
-<ismodule
-    template="product/compare/comparecontrols"
-    name="comparecontrols"
-    attribute="category"
+<ismodule template="product/compare/comparecontrols"
+	name="comparecontrols"
+	attribute="category"
 />
 
 <iscomment>renders mini lineitems for order summary and mini cart</iscomment>
-<ismodule
-	template="checkout/components/minilineitems"
+<ismodule template="checkout/components/minilineitems"
 	name="minilineitems"
 	attribute="p_lineitemctnr"
 	attribute="p_productlineitem"
@@ -305,8 +306,7 @@
 />
 
 <iscomment>masks a given string and appends the given number of * in the beginning of the string</iscomment>
-<ismodule
-	template="util/mask"
+<ismodule template="util/mask"
 	name="mask"
 	attribute="p_string"
 	attribute="p_maskchars"
