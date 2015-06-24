@@ -1,7 +1,6 @@
 {
 	"curly": true,
 	"eqeqeq": true,
-	"quotmark": "single",
 	"undef": true,
 	"unused": true,
 	"browser": true,

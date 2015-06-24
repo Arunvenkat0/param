@@ -4,21 +4,22 @@
 <isif condition="${slotcontent}">
 <div class="product-listing product-listing-1x4">
 	<h2>${slotcontent.calloutMsg}</h2>
-	
+
 	<ul class="search-result-items tiles-container">
 		<isloop items="${slotcontent.content}" var="product" begin="0" end="3">
 			<isobject object="${product}" view="recommendation">
-				<li class="grid-tile"> 
-					<isinclude url="${URLUtils.url('Product-HitTile', 
-						'pid', product.ID, 
-						'showswatches', 'true', 
-						'showpricing', 'true', 
-						'showpromotion', 'true', 
-						'showrating', 'true')}"/>
+				<li class="grid-tile">
+					<isinclude url="${URLUtils.url('Product-HitTile',
+						'pid', product.ID,
+						'showswatches', 'true',
+						'showpricing', 'true',
+						'showpromotion', 'true',
+						'showrating', 'true',
+						'recommendername', slotcontent.custom['__RecommenderName'])}"/>
 				</li>
 			</isobject>
 		</isloop>
 	</ul>
-	
-</div><!-- END: product 1x4 recomm -->
+
+</div>
 </isif>

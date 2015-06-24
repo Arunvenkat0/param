@@ -11,6 +11,7 @@
 	showpromotion	: check, whether to render the promotional messaging (default is false)
 	showrating		: check, whether to render the review rating (default is false)
 	showcompare		: check, whether to render the compare checkbox (default is false)
+	recommendername	: name of the slot CQ recommendation
 </iscomment>
 
 <isset name="Product" value="${pdict.product}" scope="page"/>
@@ -21,6 +22,7 @@
 <isset name="showpromotion" value="${(pdict.showpromotion != null) ? pdict.showpromotion : false}" scope="page"/>
 <isset name="showrating" value="${(pdict.showrating != null) ? pdict.showrating : false}" scope="page"/>
 <isset name="showcompare" value="${(pdict.showcompare != null) ? pdict.showcompare : false}" scope="page"/>
+<isset name="recommendername" value="${(pdict.recommendername != null) ? pdict.recommendername : ''}" scope="page"/>
 
 <isif condition="${!empty(Product)}">
 	<iscomment>
@@ -77,9 +79,12 @@
 		if (selectedColor) {
 			productUrl = Product.variationModel.urlSelectVariationValue('Product-Show', colorVarAttr, selectedColor)
 		}
-	</isscript>
 
-	<div class="product-tile" id="${Product.UUID}" data-itemid="${Product.ID}"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
+		if (recommendername) {
+			recommendername = 'data-recommendername=' + recommendername;
+		}
+	</isscript>
+	<div class="product-tile" ${recommendername} id="${Product.UUID}" data-itemid="${Product.ID}"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
 
 		<iscomment>Image</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>

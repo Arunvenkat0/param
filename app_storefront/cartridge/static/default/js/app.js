@@ -1,4 +1,113 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var progress = require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if (options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data,
+		xhrFields: {
+			withCredentials: true
+		}
+	})
+	.done(function (response) {
+		// success
+		if (options.target) {
+			$(options.target).empty().html(response);
+		}
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+
+exports.getJson = getJson;
+exports.load = load;
+
+},{"./progress":38,"./util":48}],2:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -9,6 +118,7 @@
 'use strict';
 
 var countries = require('./countries'),
+	cq = require('./cq'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	multicurrency = require('./multicurrency'),
@@ -180,6 +290,7 @@ var app = {
 		rating.init();
 		searchplaceholder.init();
 		multicurrency.init();
+		cq.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
 		var ns = page.ns;
@@ -207,116 +318,7 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./countries":6,"./dialog":7,"./jquery-ext":10,"./minicart":11,"./multicurrency":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":26,"./pages/registry":31,"./pages/search":32,"./pages/storefront":33,"./pages/storelocator":34,"./pages/wishlist":35,"./rating":39,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
-'use strict';
-
-var progress = require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'json',
-		url: options.url,
-		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
-		data: options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if (options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'html',
-		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data,
-		xhrFields: {
-			withCredentials: true
-		}
-	})
-	.done(function (response) {
-		// success
-		if (options.target) {
-			$(options.target).empty().html(response);
-		}
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-
-exports.getJson = getJson;
-exports.load = load;
-
-},{"./progress":37,"./util":47}],3:[function(require,module,exports){
+},{"./cookieprivacy":5,"./countries":6,"./cq":7,"./dialog":8,"./jquery-ext":11,"./minicart":12,"./multicurrency":13,"./page":14,"./pages/account":15,"./pages/cart":16,"./pages/checkout":20,"./pages/compare":23,"./pages/product":27,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./rating":40,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":47,"./util":48,"./validator":49}],3:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -627,7 +629,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./dialog":7,"./page":13,"./util":47}],4:[function(require,module,exports){
+},{"./dialog":8,"./page":14,"./util":48}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -882,7 +884,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":13,"./util":47,"promise":56}],5:[function(require,module,exports){
+},{"./page":14,"./util":48,"promise":57}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -928,7 +930,7 @@ module.exports = function () {
 	}
 };
 
-},{"./dialog":7}],6:[function(require,module,exports){
+},{"./dialog":8}],6:[function(require,module,exports){
 'use strict';
 
 exports.init = function init () {
@@ -959,6 +961,48 @@ exports.init = function init () {
 };
 
 },{}],7:[function(require,module,exports){
+'use strict';
+/* global CQuotient */
+
+function clickThruAfter() {
+	var recommenderName = localStorage.getItem('cq.recommenderName');
+	var currentProductId = $('[itemprop="productID"]').val();
+	if (!recommenderName) {return;}
+	var anchors;
+	if (localStorage.getItem('cq.anchors')) {
+		anchors = localStorage.getItem('cq.anchors');
+		localStorage.removeItem('cq.anchors');
+	}
+	CQuotient.activities.push({
+		activityType: 'clickReco',
+		parameters: {
+			cookieId: CQuotient.getCQCookieId(),
+			userId: CQuotient.getCQUserId(),
+			recommenderName: recommenderName,
+			anchors: anchors,
+			products: {
+				id: currentProductId
+			}
+		}
+	});
+	localStorage.removeItem('cq.recommendername');
+}
+
+exports.init = function () {
+	// set cookie before click through from product tile
+	$('body').on('click', '.product-tile[data-recommendername] a', function () {
+		// if currently on a product page, send its productId as the anchor
+		if (window.pageContext.type === 'product') {
+			localStorage.setItem('cq.anchors', $('[itemprop="productID"]').val());
+		}
+		var recommenderName = $(this).parents('.product-tile').data('recommendername');
+		localStorage.setItem('cq.recommenderName', recommenderName);
+	});
+
+	clickThruAfter();
+};
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1137,7 +1181,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":2,"./util":47,"imagesloaded":52,"lodash":55}],8:[function(require,module,exports){
+},{"./ajax":1,"./util":48,"imagesloaded":53,"lodash":56}],9:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1158,7 +1202,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":2,"./util":47}],9:[function(require,module,exports){
+},{"./ajax":1,"./util":48}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1210,7 +1254,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":2,"./minicart":11,"./util":47}],10:[function(require,module,exports){
+},{"./ajax":1,"./minicart":12,"./util":48}],11:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1240,7 +1284,7 @@ module.exports = function () {
 	};
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var util = require('./util'),
@@ -1323,7 +1367,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":47}],12:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":48}],13:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1351,7 +1395,7 @@ exports.init = function () {
 	}
 };
 
-},{"./ajax":2,"./page":13,"./util":47}],13:[function(require,module,exports){
+},{"./ajax":1,"./page":14,"./util":48}],14:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1374,7 +1418,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":47}],14:[function(require,module,exports){
+},{"./util":48}],15:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1613,7 +1657,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":7,"../giftcert":9,"../page":13,"../tooltip":46,"../util":47,"../validator":48}],15:[function(require,module,exports){
+},{"../dialog":8,"../giftcert":10,"../page":14,"../tooltip":47,"../util":48,"../validator":49}],16:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1653,7 +1697,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":38,"../storeinventory/cart":43,"./account":14}],16:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":15}],17:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1682,7 +1726,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":47,"./shipping":21}],17:[function(require,module,exports){
+},{"../../util":48,"./shipping":22}],18:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1880,7 +1924,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":2,"../../giftcard":8,"../../util":47,"./formPrepare":18}],18:[function(require,module,exports){
+},{"../../ajax":1,"../../giftcard":9,"../../util":48,"./formPrepare":19}],19:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1939,7 +1983,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":55}],19:[function(require,module,exports){
+},{"lodash":56}],20:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -1968,7 +2012,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
+},{"./address":17,"./billing":18,"./multiship":21,"./shipping":22}],21:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2090,7 +2134,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":7,"../../util":47,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
+},{"../../dialog":8,"../../util":48,"./address":17,"./formPrepare":19}],22:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2252,7 +2296,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":2,"../../progress":37,"../../tooltip":46,"../../util":47,"./formPrepare":18}],22:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":19}],23:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2296,7 +2340,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":2,"../page":13,"../product-tile":36,"../quickview":38,"./product/addToCart":23}],23:[function(require,module,exports){
+},{"../ajax":1,"../page":14,"../product-tile":37,"../quickview":39,"./product/addToCart":24}],24:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2377,7 +2421,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":7,"../../minicart":11,"../../page":13,"../../util":47,"lodash":55,"promise":56}],24:[function(require,module,exports){
+},{"../../dialog":8,"../../minicart":12,"../../page":14,"../../util":48,"lodash":56,"promise":57}],25:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2445,7 +2489,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":2,"../../util":47}],25:[function(require,module,exports){
+},{"../../ajax":1,"../../util":48}],26:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2532,7 +2576,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":7,"../../util":47}],26:[function(require,module,exports){
+},{"../../dialog":8,"../../util":48}],27:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2612,7 +2656,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":7,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":23,"./availability":24,"./image":25,"./productNav":27,"./productSet":28,"./recommendations":29,"./variant":30}],27:[function(require,module,exports){
+},{"../../dialog":8,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addToCart":24,"./availability":25,"./image":26,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],28:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2639,7 +2683,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../util":47}],28:[function(require,module,exports){
+},{"../../ajax":1,"../../util":48}],29:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2689,7 +2733,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":23}],29:[function(require,module,exports){
+},{"../../ajax":1,"../../tooltip":47,"../../util":48,"./addToCart":24}],30:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2724,7 +2768,7 @@ module.exports = function () {
 		});
 };
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2799,7 +2843,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":2,"../../progress":37,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":23,"./image":25}],31:[function(require,module,exports){
+},{"../../ajax":1,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addToCart":24,"./image":26}],32:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2898,7 +2942,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":2,"../quickview":38,"../util":47,"./product/addToCart":23}],32:[function(require,module,exports){
+},{"../ajax":1,"../quickview":39,"../util":48,"./product/addToCart":24}],33:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3088,7 +3132,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":47}],33:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
 'use strict';
 exports.init = function () {
 	$('#homepage-slider')
@@ -3147,7 +3191,7 @@ exports.init = function () {
 		});
 };
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3160,7 +3204,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":7}],35:[function(require,module,exports){
+},{"../dialog":8}],36:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3179,7 +3223,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":13,"../util":47,"./product/addToCart":23}],36:[function(require,module,exports){
+},{"../page":14,"../util":48,"./product/addToCart":24}],37:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3291,7 +3335,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":38,"imagesloaded":52}],37:[function(require,module,exports){
+},{"./quickview":39,"imagesloaded":53}],38:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3324,7 +3368,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3443,7 +3487,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":7,"./pages/product":26,"./util":47,"lodash":55}],39:[function(require,module,exports){
+},{"./dialog":8,"./pages/product":27,"./util":48,"lodash":56}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3499,7 +3543,7 @@ module.exports = {
 	}
 };
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3525,7 +3569,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3698,7 +3742,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],42:[function(require,module,exports){
+},{"./util":48}],43:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3875,7 +3919,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":47}],43:[function(require,module,exports){
+},{"./util":48}],44:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -3963,7 +4007,7 @@ var cartInventory = {
 
 module.exports = cartInventory;
 
-},{"./":44}],44:[function(require,module,exports){
+},{"./":45}],45:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4145,7 +4189,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":7,"../util":47,"lodash":55,"promise":56}],45:[function(require,module,exports){
+},{"../dialog":8,"../util":48,"lodash":56,"promise":57}],46:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4241,7 +4285,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":44,"lodash":55}],46:[function(require,module,exports){
+},{"./":45,"lodash":56}],47:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4267,7 +4311,7 @@ exports.init = function () {
 	});
 };
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 /* global Countries */
 
 'use strict';
@@ -4551,7 +4595,7 @@ var util = {
 
 module.exports = util;
 
-},{"lodash":55}],48:[function(require,module,exports){
+},{"lodash":56}],49:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4673,7 +4717,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 /*global define:false require:false */
 module.exports = (function(){
 	// Import Events
@@ -4741,7 +4785,7 @@ module.exports = (function(){
 	};
 	return domain
 }).call(this)
-},{"events":50}],50:[function(require,module,exports){
+},{"events":51}],51:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5044,7 +5088,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -5136,7 +5180,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5473,7 +5517,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":53,"wolfy87-eventemitter":54}],53:[function(require,module,exports){
+},{"eventie":54,"wolfy87-eventemitter":55}],54:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5557,7 +5601,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -6031,7 +6075,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -18270,12 +18314,12 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib')
 
-},{"./lib":61}],57:[function(require,module,exports){
+},{"./lib":62}],58:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap/raw');
@@ -18336,13 +18380,13 @@ function Promise(fn) {
   if (typeof fn !== 'function') {
     throw new TypeError('not a function');
   }
-  this._32 = 0;
-  this._8 = null;
-  this._89 = [];
+  this._41 = 0;
+  this._86 = null;
+  this._17 = [];
   if (fn === noop) return;
   doResolve(fn, this);
 }
-Promise._83 = noop;
+Promise._1 = noop;
 
 Promise.prototype.then = function(onFulfilled, onRejected) {
   if (this.constructor !== Promise) {
@@ -18361,24 +18405,24 @@ function safeThen(self, onFulfilled, onRejected) {
   });
 };
 function handle(self, deferred) {
-  while (self._32 === 3) {
-    self = self._8;
+  while (self._41 === 3) {
+    self = self._86;
   }
-  if (self._32 === 0) {
-    self._89.push(deferred);
+  if (self._41 === 0) {
+    self._17.push(deferred);
     return;
   }
   asap(function() {
-    var cb = self._32 === 1 ? deferred.onFulfilled : deferred.onRejected;
+    var cb = self._41 === 1 ? deferred.onFulfilled : deferred.onRejected;
     if (cb === null) {
-      if (self._32 === 1) {
-        resolve(deferred.promise, self._8);
+      if (self._41 === 1) {
+        resolve(deferred.promise, self._86);
       } else {
-        reject(deferred.promise, self._8);
+        reject(deferred.promise, self._86);
       }
       return;
     }
-    var ret = tryCallOne(cb, self._8);
+    var ret = tryCallOne(cb, self._86);
     if (ret === IS_ERROR) {
       reject(deferred.promise, LAST_ERROR);
     } else {
@@ -18406,8 +18450,8 @@ function resolve(self, newValue) {
       then === self.then &&
       newValue instanceof Promise
     ) {
-      self._32 = 3;
-      self._8 = newValue;
+      self._41 = 3;
+      self._86 = newValue;
       finale(self);
       return;
     } else if (typeof then === 'function') {
@@ -18415,21 +18459,21 @@ function resolve(self, newValue) {
       return;
     }
   }
-  self._32 = 1;
-  self._8 = newValue;
+  self._41 = 1;
+  self._86 = newValue;
   finale(self);
 }
 
 function reject(self, newValue) {
-  self._32 = 2;
-  self._8 = newValue;
+  self._41 = 2;
+  self._86 = newValue;
   finale(self);
 }
 function finale(self) {
-  for (var i = 0; i < self._89.length; i++) {
-    handle(self, self._89[i]);
+  for (var i = 0; i < self._17.length; i++) {
+    handle(self, self._17[i]);
   }
-  self._89 = null;
+  self._17 = null;
 }
 
 function Handler(onFulfilled, onRejected, promise){
@@ -18461,7 +18505,7 @@ function doResolve(fn, promise) {
   }
 }
 
-},{"asap/raw":65}],58:[function(require,module,exports){
+},{"asap/raw":66}],59:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -18476,7 +18520,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
   });
 };
 
-},{"./core.js":57}],59:[function(require,module,exports){
+},{"./core.js":58}],60:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -18496,9 +18540,9 @@ var ZERO = valuePromise(0);
 var EMPTYSTRING = valuePromise('');
 
 function valuePromise(value) {
-  var p = new Promise(Promise._83);
-  p._32 = 1;
-  p._8 = value;
+  var p = new Promise(Promise._1);
+  p._41 = 1;
+  p._86 = value;
   return p;
 }
 Promise.resolve = function (value) {
@@ -18535,11 +18579,11 @@ Promise.all = function (arr) {
     function res(i, val) {
       if (val && (typeof val === 'object' || typeof val === 'function')) {
         if (val instanceof Promise && val.then === Promise.prototype.then) {
-          while (val._32 === 3) {
-            val = val._8;
+          while (val._41 === 3) {
+            val = val._86;
           }
-          if (val._32 === 1) return res(i, val._8);
-          if (val._32 === 2) reject(val._8);
+          if (val._41 === 1) return res(i, val._86);
+          if (val._41 === 2) reject(val._86);
           val.then(function (val) {
             res(i, val);
           }, reject);
@@ -18586,7 +18630,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 };
 
-},{"./core.js":57,"asap/raw":65}],60:[function(require,module,exports){
+},{"./core.js":58,"asap/raw":66}],61:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -18604,7 +18648,7 @@ Promise.prototype['finally'] = function (f) {
   });
 };
 
-},{"./core.js":57}],61:[function(require,module,exports){
+},{"./core.js":58}],62:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./core.js');
@@ -18613,7 +18657,7 @@ require('./finally.js');
 require('./es6-extensions.js');
 require('./node-extensions.js');
 
-},{"./core.js":57,"./done.js":58,"./es6-extensions.js":59,"./finally.js":60,"./node-extensions.js":62}],62:[function(require,module,exports){
+},{"./core.js":58,"./done.js":59,"./es6-extensions.js":60,"./finally.js":61,"./node-extensions.js":63}],63:[function(require,module,exports){
 'use strict';
 
 // This file contains then/promise specific extensions that are only useful
@@ -18688,7 +18732,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   });
 }
 
-},{"./core.js":57,"asap":63}],63:[function(require,module,exports){
+},{"./core.js":58,"asap":64}],64:[function(require,module,exports){
 "use strict";
 
 // rawAsap provides everything we need except exception management.
@@ -18756,7 +18800,7 @@ RawTask.prototype.call = function () {
     }
 };
 
-},{"./raw":64}],64:[function(require,module,exports){
+},{"./raw":65}],65:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -18980,7 +19024,7 @@ rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
 // https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -19085,6 +19129,6 @@ function requestFlush() {
 }
 
 }).call(this,require('_process'))
-},{"_process":51,"domain":49}]},{},[1]);
+},{"_process":52,"domain":50}]},{},[2]);
 
 //# sourceMappingURL=app.js.map
