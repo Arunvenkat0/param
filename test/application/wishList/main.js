@@ -94,8 +94,8 @@ describe('Wishlist', () => {
 		it('should display a URL when chain icon clicked', () => 
 			client.click(wishListPage.CSS_SHARE_LINK)
 				.then(() => client.waitForVisible(socialLinksMap.shareLinkUrl.selector))
-				.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
-				.then(doesExist => assert.isTrue(doesExist))
+				.then(() => client.isVisible(socialLinksMap.shareLinkUrl.selector))
+				.then(visible => assert.isTrue(visible))
 				.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
 				.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)))
 		);
