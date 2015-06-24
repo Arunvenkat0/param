@@ -4,15 +4,15 @@ import client from '../client';
 import config from '../config';
 import * as formHelpers from './forms/helpers';
 
-export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
-export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
-export const BTN_PLACE_ORDER = 'button[name$="submit"]';
+export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
+export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
+export const BTN_PLACE_ORDER = 'button[name*="submit"]';
 export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
 export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
 export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
 export const MINI_SECTION_PMT_METHOD = '.mini-payment-instrument';
-export const LINK_EDIT_ORDER_SUMMARY = 'a.section-header-note[href$="cart"]';
+export const LINK_EDIT_ORDER_SUMMARY = 'a.section-header-note[href*="cart"]';
 export const LINK_EDIT_SHIPPING_ADDR = MINI_SECTION_SHIPPING_ADDR + ' a';
 export const LINK_EDIT_BILLING_ADDR = MINI_SECTION_BILLING_ADDR + ' a';
 export const LINK_EDIT_PMT_METHOD = MINI_SECTION_PMT_METHOD + ' a';
@@ -28,7 +28,7 @@ export function navigateTo (path = basePath) {
 }
 
 export function pressBtnCheckoutAsGuest () {
-	return client.click('[name$="login_unregistered"]');
+	return client.click('[name*="login_unregistered"]');
 }
 
 export function fillOutShippingForm (shippingData) {
@@ -45,7 +45,7 @@ export function fillOutShippingForm (shippingData) {
 	fieldTypeMap.set('phone', 'input');
 
 	for (var [key, value] of shippingData) {
-		var selector = '[name$="shippingAddress_addressFields_' + key + '"]';
+		var selector = '[name*="shippingAddress_addressFields_' + key + '"]';
 		formHelpers.populateField(selector, value, fieldTypeMap.get(key));
 	}
 
@@ -78,14 +78,14 @@ export function fillOutBillingForm (billingFields) {
 
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
-		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
+		var selector = '[name*="' + fieldMap.get(key).fieldPrefix + key + '"]';
 		formHelpers.populateField(selector, value, fieldType);
 	}
 	return client.pause(200);
 }
 
 export function checkUseAsBillingAddress () {
-	return client.click('[name$="shippingAddress_useAsBillingAddress"]');
+	return client.click('[name*="shippingAddress_useAsBillingAddress"]');
 }
 
 export function getLabelOrderConfirmation () {

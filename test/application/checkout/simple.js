@@ -162,7 +162,7 @@ describe('Checkout', () => {
 		it('should show Shipping Address edits', () => {
 			let address2 = 'Suite 100';
 			return client.click(checkoutPage.LINK_EDIT_SHIPPING_ADDR)
-				.then(() => formHelpers.populateField('input[id$="address2"]', address2, 'input'))
+				.then(() => formHelpers.populateField('input[id*="address2"]', address2, 'input'))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
@@ -173,7 +173,7 @@ describe('Checkout', () => {
 		it('should show Billing Address edits', () => {
 			let address2 = 'Apt. 1234';
 			return client.click(checkoutPage.LINK_EDIT_BILLING_ADDR)
-				.then(() => formHelpers.populateField('input[id$="address2"]', address2, 'input'))
+				.then(() => formHelpers.populateField('input[id*="address2"]', address2, 'input'))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.getText(checkoutPage.MINI_BILLING_ADDR_DETAILS))

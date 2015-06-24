@@ -6,8 +6,8 @@ import config from '../config';
 export const CSS_CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
 export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
-export const BTN_UPDATE_CART = '.cart-footer button[name$="_updateCart"]';
-export const BTN_CHECKOUT = 'button[name$="checkoutCart"]';
+export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
+export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 
 const basePath = '/cart';
