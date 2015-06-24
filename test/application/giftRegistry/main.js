@@ -150,8 +150,6 @@ describe('Gift Registry', () => {
 			.then(() => client.waitForVisible(socialLinksMap.shareLinkUrl.selector))
 			.then(() => client.isVisible(socialLinksMap.shareLinkUrl.selector))
 			.then(visible => assert.isTrue(visible))
-			.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
-			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
 			.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)))
 	);
