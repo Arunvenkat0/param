@@ -65,7 +65,7 @@
 						<iscomment>render the actual link</iscomment>
 						<isif condition="${SearchModel.categorySearch}">
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show', SubCategory.ID)}" scope="page"/>
-						<iselse/>                        
+						<iselse/>
 							<isset name="refineLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', SearchModel.searchPhrase), SubCategory.ID)}" scope="page"/>
 						</isif>
 						<a class="refinement-link <isif condition="${IDPath.contains(SubCategory.ID)}"> active</isif>" title="${Resource.msgf('global.categoryrefinement.label','locale',null, SubCategory.displayName)}" href="${refineLinkUrl}">

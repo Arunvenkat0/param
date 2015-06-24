@@ -3,12 +3,12 @@
 <isinclude template="util/modules"/>
 
 	<iscontentasset aid="cs-landing"/>
-	
+
 	<isif condition="${!empty(pdict.CustomerServiceLinks)}">
 	<div class="customer-service-directory">
-		
+
 		<isloop items="${pdict.CustomerServiceLinks.keySet()}" var="links" status="loopstate">
-			
+
 			<div class="customer-service-section <isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 
 				<h2><isprint value="${links}"/></h2>
@@ -22,11 +22,11 @@
 						</li>
 					</isloop>
 				</ul>
-				
+
 			</div>
-			
+
 		</isloop>
-		
+
 	</div>
 	</isif>
 
