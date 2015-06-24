@@ -89,7 +89,7 @@
 <iscomment>render a box for each shipment</iscomment>
 
 	<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
-		<div class="content-header">${Resource.msg('multishippingshipments.shipment','checkout',null) + ' '} ${Resource.msg('global.pound','locale',null) + ' ' + shipmentloopstate.count}</div>
+		<div class="content-header">${Resource.msg('multishippingshipments.shipment','checkout',null)} ${Resource.msg('global.pound','locale',null) + ' ' + shipmentloopstate.count}</div>
 
 		<isif condition="${shipment.productLineItems.size() > 0}">
 
