@@ -24,5 +24,6 @@
 	"requireSpacesInNamedFunctionExpression": {
 		"beforeOpeningCurlyBrace": true
 	},
-	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
+	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+	"validateQuoteMarks": "'"
 }

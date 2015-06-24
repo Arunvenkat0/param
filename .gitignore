@@ -5,6 +5,5 @@ node_modules
 *.map
 .idea/
 dw.json
-doc/
-*.project
-*.properties
+demo_data_no_hires_images.zip
+Thumbs.db
