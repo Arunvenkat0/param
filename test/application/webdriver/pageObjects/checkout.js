@@ -2,11 +2,24 @@
 
 import client from '../client';
 import config from '../config';
+import * as formHelpers from './forms/helpers';
 
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name$="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name$="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name$="submit"]';
+export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
+export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
+export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
+export const MINI_SECTION_PMT_METHOD = '.mini-payment-instrument';
+export const LINK_EDIT_ORDER_SUMMARY = 'a.section-header-note[href$="cart"]';
+export const LINK_EDIT_SHIPPING_ADDR = MINI_SECTION_SHIPPING_ADDR + ' a';
+export const LINK_EDIT_BILLING_ADDR = MINI_SECTION_BILLING_ADDR + ' a';
+export const LINK_EDIT_PMT_METHOD = MINI_SECTION_PMT_METHOD + ' a';
+export const MINI_SHIPPING_ADDR_DETAILS = MINI_SECTION_SHIPPING_ADDR + ' .details';
+export const MINI_BILLING_ADDR_DETAILS = MINI_SECTION_BILLING_ADDR + ' .details';
+export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
+export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 
 const basePath = '/checkout';
 
@@ -16,20 +29,6 @@ export function navigateTo (path = basePath) {
 
 export function pressBtnCheckoutAsGuest () {
 	return client.click('[name$="login_unregistered"]');
-}
-
-function _populateField (fieldType, selector, value) {
-	switch (fieldType) {
-		case 'input':
-			client.setValue(selector, value);
-			break;
-		case 'selectByValue':
-			client.selectByValue(selector, value);
-			break;
-		case 'selectByIndex':
-			client.selectByIndex(selector, value);
-			break;
-	}
 }
 
 export function fillOutShippingForm (shippingData) {
@@ -47,7 +46,7 @@ export function fillOutShippingForm (shippingData) {
 
 	for (var [key, value] of shippingData) {
 		var selector = '[name$="shippingAddress_addressFields_' + key + '"]';
-		_populateField(fieldTypeMap.get(key), selector, value);
+		formHelpers.populateField(selector, value, fieldTypeMap.get(key));
 	}
 
 	return client;
@@ -80,7 +79,7 @@ export function fillOutBillingForm (billingFields) {
 	for (var [key, value] of billingFields) {
 		var fieldType = fieldMap.get(key).type;
 		var selector = '[name$="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		_populateField(fieldType, selector, value);
+		formHelpers.populateField(selector, value, fieldType);
 	}
 	return client.pause(200);
 }
@@ -95,4 +94,8 @@ export function getLabelOrderConfirmation () {
 
 export function getActiveBreadCrumb () {
 	return client.getText('.checkout-progress-indicator .active');
+}
+
+export function getOrderSubTotal () {
+	return client.getText(CSS_ORDER_SUBTOTAL);
 }

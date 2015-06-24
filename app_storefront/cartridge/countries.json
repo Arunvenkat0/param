@@ -1,0 +1,117 @@
+[{
+	"countryCode": "US",
+	"name": {
+		"en_US": "United States"
+	},
+	"continent": "northamerica",
+	"locales": ["en_US"],
+	"currencyCode": "USD",
+	"taxation": "net",
+	"priceBooks": [
+		"usd-list-prices",
+		"usd-sale-prices"
+	],
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "select"
+			},
+			"postalUS": {
+				"skip": true
+			},
+			"postalCA": {
+				"skip": true
+			},
+			"postalDE": {
+				"skip": true
+			},
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
+			}
+		}
+	}
+}, {
+	"countryCode": "JP",
+	"name": {
+		"ja_JP": "日本",
+		"en_JP": "Japan"
+	},
+	"continent": "asia",
+	"locales": ["ja_JP", "en_JP"],
+	"currencyCode": "JPY",
+	"taxation": "gross",
+	"priceBooks" : [
+		"jpy-list-prices",
+		"jpy-sale-prices"
+	],
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},
+			"postalUS": {
+				"skip": true
+			},
+			"postalCA": {
+				"skip": true
+			},
+			"postalDE": {
+				"skip": true
+			}
+		}
+	}
+}, {
+	"countryCode": "CN",
+	"name": {
+		"zh_CN": "中国",
+		"en_CN": "China"
+	},
+	"continent": "asia",
+	"locales": ["zh_CN", "en_CN"],
+	"currencyCode": "CNY",
+	"taxation": "gross",
+	"priceBooks" : [
+		"cny-list-prices",
+		"cny-sale-prices"
+	],
+	"dynamicForms": {}
+}, {
+	"countryCode": "FR",
+	"name": {
+		"fr_FR": "Français"
+	},
+	"continent": "europe",
+	"locales": ["fr_FR"],
+	"currencyCode": "EUR",
+	"taxation": "gross",
+	"priceBooks" : [
+		"eur-list-prices",
+		"eur-sale-prices"
+	],
+	"dynamicForms": {}
+}, {
+	"countryCode": "IT",
+	"name": {
+		"it_IT": "Italia"
+	},
+	"continent": "europe",
+	"locales": ["it_IT"],
+	"currencyCode": "EUR",
+	"taxation": "gross",
+	"priceBooks" : [
+		"eur-list-prices",
+		"eur-sale-prices"
+	],
+	"dynamicForms": {}
+}]

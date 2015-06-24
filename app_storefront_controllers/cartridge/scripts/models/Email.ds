@@ -1,0 +1,91 @@
+'use strict';
+
+/**
+ * Module for mail related functionality.
+ *
+ * @module models/Email
+ */
+
+/* API Includes */
+var AbstractModel = require('./AbstractModel');
+
+/**
+ * Email helper providing enhanced email functionality
+ * @class module:models/Email~Email
+ *
+ * @extends module:models/AbstractModel
+ * @extends dw.net.Mail
+ * @example
+ * require('~/models/Email').get('mail/resetpasswordemail', Customer.profile.email)
+ *     .setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null)).send({
+ *          Customer : Customer,
+ *          ResetPasswordToken : ResetPasswordToken
+ *     });
+ *
+ * @param {String} template The template which should be rendered and then be sent as email.
+ * @param {String} recipient The email address to which the text of the rendered template should be send.
+ */
+var Email = AbstractModel.extend(
+    /** @lends module:models/Email~Email.prototype */
+    {
+        template : null,
+
+        init : function (template, recipient) {
+            this._super(new dw.net.Mail());
+            this.template = template;
+
+            // prepare the email object
+            var mail = this.object;
+            mail.addTo(recipient);
+            mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
+        },
+
+        /**
+         * Prepares the email that is queued to the internal mail system for delivery.
+         *
+         * @param args
+         * @returns {dw.system.Status} Status which tells if the mail could be successfully queued ( Status.OK) or not ( Status.ERROR).
+         * If an error is raised, more information about the reason for the failure can be found within the log files.
+         * If the mandatory fields from, content, and subject are empty an IllegalArgumentException is raised. An
+         * llegalArgumentException is raised if neither to, cc nor bcc are set.
+         */
+        send : function (args) {
+            // Add some default keys
+            var params = require('~/cartridge/scripts/object').toHashMap(args);
+            params.CurrentForms = session.forms;
+            params.CurrentHttpParameterMap = request.httpParameterMap;
+            params.CurrentCustomer = customer;
+
+            // create a body template
+            var contentTemplate = new dw.util.Template(this.template);
+            params.put('MainContent', contentTemplate.render(params).text);
+
+            // @TODO Enable this to allow for a shared pt_email which creates consistent header/footer
+            // integrate the body in the global content
+            //var template = new dw.util.Template('mail/pt_email');
+            //var content = template.render(params);
+
+            // set the content and send
+            this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
+            return this.object.send();
+        },
+
+        __noSuchMethod__ : function (methodName, methodArgs) {
+            var result = this._super(methodName, methodArgs);
+            return result === this.object ? this : result;
+        }
+    });
+
+/**
+ * Use this method to get a wrapped email instance.
+ *
+ * @param {String} template The template which should be rendered and then be sent as email.
+ * @param {String} recipient The email address to which the text of the rendered template should be send.
+ * @returns {module:models/Email~Email}
+ */
+Email.get = function (template, recipient) {
+    return new Email(template, recipient);
+};
+
+/** The cart class */
+module.exports = Email;

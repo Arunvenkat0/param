@@ -1,0 +1,238 @@
+'use strict';
+
+/**
+ * Displays credit card information and other payment related information and
+ * lets the user change it.
+ *
+ * @module controllers/PaymentInstruments
+ */
+
+/* API includes */
+var Transaction = require('dw/system/Transaction');
+
+/* Script Modules */
+var app = require('~/cartridge/scripts/app');
+var guard = require('~/cartridge/scripts/guard');
+
+
+/**
+ * Renders a list of the saved credit card payment instruments of the current
+ * customer.
+ */
+function list()
+{
+    // var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+    //     PaymentMethod : dw.order.PaymentInstrument.METHOD_CREDIT_CARD,
+    //     Customer : customer
+    // });
+    var wallet = customer.getProfile().getWallet();
+    var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+
+    var paymentForm = app.getForm('paymentinstruments');
+    paymentForm.clear();
+    paymentForm.get('creditcards.storedcards').copyFrom(paymentInstruments);
+
+    var pageMeta = require('~/cartridge/scripts/meta');
+    pageMeta.update(dw.content.ContentMgr.getContent('myaccount-paymentsettings'));
+
+    app.getView({
+        PaymentInstruments : paymentInstruments
+    }).render('account/payment/paymentinstrumentlist');
+}
+
+
+/**
+ * Provides functionality to add a new credit card payment instrument to the
+ * saved payment instruments of the current customer.
+ *
+ * @param {boolean} clearForm true or missing will clear the form before displaying the page, false will skip it
+ */
+function add(clearForm)
+{
+    var paymentForm = app.getForm('paymentinstruments');
+
+    if(clearForm !== false){
+        paymentForm.clear();
+    }
+    paymentForm.get('creditcards.newcreditcard.type').setOptions(dw.order.PaymentMgr
+            .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
+
+    app.getView({
+    	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
+    }).render('account/payment/paymentinstrumentdetails');
+}
+
+/**
+ * Handles the submitted form for creating payment instruments
+ */
+function handlePaymentForm()
+{
+    var paymentForm = app.getForm('paymentinstruments');
+    paymentForm.handleAction({
+        'create' : function(){
+            if (!create())
+            {
+                add(false);
+                return;
+            }else{
+                response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+            }
+        },
+        'error' : function(){
+            add(false);
+        }
+    });
+
+    //response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+}
+
+/**
+ * Creates a new payment instrument
+ * @return {boolean} True in case of success, false otherwise
+ */
+function create()
+{
+    if (!verifyCreditCard())
+    {
+        return false;
+    }
+
+    var paymentForm = app.getForm('paymentinstruments');
+    var newCreditCardForm = paymentForm.get('creditcards.newcreditcard');
+    var ccNumber = newCreditCardForm.get('number').value();
+
+    var wallet = customer.getProfile().getWallet();
+    var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+
+    var DuplicateCard;
+    var OldCard;
+    for each(var card in paymentInstruments) {
+        if (card.creditCardNumber === ccNumber) {
+            DuplicateCard = true;
+            OldCard = card;
+            break;
+        }
+    }
+
+    Transaction.begin();
+        var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+
+        if (!newCreditCardForm.copyTo(paymentInstrument)) {
+            Transaction.rollback();
+
+            return false;
+        }
+
+        if (DuplicateCard)
+        {
+            wallet.removePaymentInstrument(OldCard);
+        }
+    Transaction.commit();
+
+    paymentForm.clear();
+
+    return true;
+}
+
+
+/**
+ * Deletes a saved credit card payment instrument.
+ *
+ * @TODO Should be moved into handlePaymentForm
+ */
+function Delete()
+{
+    var paymentForm = app.getForm('paymentinstruments');
+    paymentForm.handleAction({
+        'remove' : function(formGroup, action){
+            Transaction.wrap(function(){
+                var wallet = customer.getProfile().getWallet();
+                wallet.removePaymentInstrument(action.object);
+            });
+
+        },
+        'error' : function(){
+            // @TODO When could this happen
+        }
+    });
+
+    response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+}
+
+
+/*
+ * Private helpers
+ */
+
+/**
+ * Verifies if the entered credit card details are valid.
+ *
+ * @returns {boolean} True in case of success, false otherwise
+ */
+function verifyCreditCard()
+{
+    var newCreditCardForm = app.getForm('paymentinstruments.creditcards.newcreditcard');
+
+    var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
+        VerifySecurityCode : false
+    }).execute({
+        PaymentCard : dw.order.PaymentMgr.getPaymentCard(newCreditCardForm.get('type').value()),
+        CardNumber : newCreditCardForm.get('number').value(),
+        ExpirationMonth : newCreditCardForm.get('month').value(),
+        ExpirationYear : newCreditCardForm.get('year').value(),
+        CardSecurityCode : newCreditCardForm.get('cvn').value()
+    });
+    if (VerifyPaymentCardResult.result === PIPELET_ERROR)
+    {
+        var status = VerifyPaymentCardResult.Status;
+
+        // verify that we have a status object and a valid credit card form
+        if( !status || !newCreditCardForm.valid() )
+        {
+            return false;
+        }
+
+        // we are fine, if status is OK
+        if( status.status === dw.system.Status.OK )
+        {
+            return true;
+        }
+
+        // invalidate the payment card form elements
+        var items = status.items.iterator();
+        while( items.hasNext() )
+        {
+            var item = items.next();
+
+            switch( item.code )
+            {
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
+                    newCreditCardForm.get('number').invalidate();
+                    continue;
+
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE:
+                    newCreditCardForm.get('month').invalidate();
+                    newCreditCardForm.get('year').invalidate();
+                    continue;
+
+                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_SECURITY_CODE:
+                    newCreditCardForm.get('cvn').invalidate();
+            }
+        }
+        return false;
+    }
+
+    return true;
+}
+
+/*
+ * Web exposed methods
+ */
+/** @see module:controllers/PaymentInstruments~list */
+exports.List            = guard.ensure(['https', 'get', 'loggedIn'], list);
+/** @see module:controllers/PaymentInstruments~add */
+exports.Add             = guard.ensure(['https', 'get', 'loggedIn'], add);
+/** @see module:controllers/PaymentInstruments~handlePaymentForm */
+exports.PaymentForm     = guard.ensure(['https', 'post', 'loggedIn'], handlePaymentForm);
+/** @see module:controllers/PaymentInstruments~Delete */
+exports.Delete          = guard.ensure(['https', 'loggedIn'], Delete);

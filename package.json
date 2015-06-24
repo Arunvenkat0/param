@@ -74,13 +74,26 @@
   "paths": {
     "css": [
       {
-        "src": "app_storefront_core/cartridge/scss/default/",
-        "dest": "app_storefront_core/cartridge/static/default/css/"
+        "src": "app_storefront/cartridge/scss/default/",
+        "dest": "app_storefront/cartridge/static/default/css/"
+      },      {
+        "src": "app_storefront/cartridge/scss/fr_FR/",
+        "dest": "app_storefront/cartridge/static/fr_FR/css/"
+      },      {
+        "src": "app_storefront/cartridge/scss/it_IT/",
+        "dest": "app_storefront/cartridge/static/it_IT/css/"
+      },      {
+        "src": "app_storefront/cartridge/scss/ja_JP/",
+        "dest": "app_storefront/cartridge/static/ja_JP/css/"
+      },
+      {
+        "src": "app_storefront/cartridge/scss/zh_CN/",
+        "dest": "app_storefront/cartridge/static/zh_CN/css/"
       }
     ],
     "js": {
-      "src": "app_storefront_richUI/cartridge/js/",
-      "dest": "app_storefront_richUI/cartridge/static/default/js/"
+      "src": "app_storefront/cartridge/js/",
+      "dest": "app_storefront/cartridge/static/default/js/"
     }
   }
 }

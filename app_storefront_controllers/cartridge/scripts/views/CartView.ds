@@ -1,0 +1,64 @@
+'use strict';
+
+/** @module views/CartView */
+var View = require('./View');
+
+var Cart = require('~/cartridge/scripts/models/Cart');
+var FormGroup = require('dw/web/FormGroup');
+var Transaction = require('dw/system/Transaction');
+
+var CartView = View.extend(
+/** @lends module:views/CartView~CartView.prototype */
+{
+
+    /**
+     * TODO
+     */
+    prepareView : function() {
+
+        var cart = this.Basket;
+        if (cart) {
+
+            // refresh shipments
+            session.forms.cart.shipments.copyFrom(cart.shipments);
+            // refresh coupons
+            session.forms.cart.coupons.copyFrom(cart.couponLineItems);
+
+	        Transaction.wrap(function () {
+                Cart.get(cart).calculate();
+            });
+
+            var validationResult = Cart.get(cart).validateForCheckout();
+            this.EnableCheckout = validationResult.EnableCheckout;
+	        this.BasketStatus = validationResult.BasketStatus;
+            this.WishList = customer.authenticated ? require('~/cartridge/scripts/models/ProductList').get() : null;
+        }
+
+        return;
+    },
+
+    /**
+     * View for store locator functionality.
+     * @extends module:views/View~View
+     * @constructs module:views/CartView~CartView
+     */
+    init : function (params) {
+        this._super(params);
+
+        this.Basket = params.cart ? params.cart.object : null;
+        
+        /** backward compatibility to URLUtils.continueURL() methods in old templates **/
+        this.ContinueURL = dw.web.URLUtils.abs('Cart-SubmitForm')
+
+        return this;
+    },
+
+    render : function (params) {
+
+        this.prepareView();
+        return this._super(params);
+    }
+
+});
+
+module.exports = CartView;

@@ -1,7 +1,4 @@
-target
 .DS_Store
-.project
-.settings/
 node_modules
 *.log
 *.swp
