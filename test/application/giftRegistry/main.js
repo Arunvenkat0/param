@@ -148,6 +148,8 @@ describe('Gift Registry', () => {
 	it('should display a URL when chain icon clicked', () => 
 		client.click(giftRegistryPage.CSS_SHARE_LINK)
 			.then(() => client.waitForVisible(socialLinksMap.shareLinkUrl.selector))
+			.then(() => client.isVisible(socialLinksMap.shareLinkUrl.selector))
+			.then(visible => assert.isTrue(visible))
 			.then(() => client.isExisting(socialLinksMap.shareLinkUrl.selector))
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
