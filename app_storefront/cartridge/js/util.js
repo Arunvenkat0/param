@@ -185,47 +185,6 @@ var util = {
 	},
 	/**
 	 * @function
-	 * @description Updates the states options to a given country
-	 * @param {String} countrySelect The selected country
-	 */
-	updateStateOptions: function (form) {
-		var $form = $(form),
-			$country = $form.find('select[id$="_country"]'),
-			country = Countries[$country.val()];
-		if ($country.length === 0 || !country) {
-			return;
-		}
-		var arrHtml = [],
-			$stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
-			$postalField = $country.data('postalField') ? $country.data('postalField') : $form.find('input[name$="_postal"]'),
-			$stateLabel = ($stateField.length > 0) ? $form.find('label[for="' + $stateField[0].id + '"] span').not('.required-indicator') : undefined,
-			$postalLabel = ($postalField.length > 0) ? $form.find('label[for="' + $postalField[0].id + '"] span').not('.required-indicator') : undefined,
-			prevStateValue = $stateField.val();
-		// set the label text
-		if ($postalLabel) {
-			$postalLabel.html(country.postalLabel);
-		}
-		if ($stateLabel) {
-			$stateLabel.html(country.regionLabel);
-		} else {
-			return;
-		}
-		var s;
-		for (s in country.regions) {
-			arrHtml.push('<option value="' + s + '">' + country.regions[s] + '</option>');
-		}
-		// clone the empty option item and add to stateSelect
-		var o1 = $stateField.children().first().clone();
-		$stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
-		// if a state was selected previously, save that selection
-		if (prevStateValue && $.inArray(prevStateValue, country.regions)) {
-			$stateField.val(prevStateValue);
-		} else {
-			$stateField[0].selectedIndex = 0;
-		}
-	},
-	/**
-	 * @function
 	 * @description Updates the number of the remaining character
 	 * based on the character limit in a text area
 	 */
