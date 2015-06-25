@@ -215,14 +215,11 @@
 
 <iscomment>
 	define reusable credit card view
-	The prefix 'p_' avoids clashes with loop or other variables
-	Either of the parameters has to be provided, p_card has precedence
 </iscomment>
 <ismodule template="account/payment/minicreditcard.isml"
 	name="minicreditcard"
-	attribute="p_card"
-	attribute="p_cc_formfield"
-	attribute="p_show_expiration"
+	attribute="card"
+	attribute="show_expiration"
 />
 
 <ismodule template="util/dynamicform.isml"
