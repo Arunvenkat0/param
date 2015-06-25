@@ -66,7 +66,7 @@
 					</div>
 				<iselse/>
 					<div class="payment-type"><isprint value="${dw.order.PaymentMgr.getPaymentMethod(paymentInstr.paymentMethod).name}" /></div>
-					<isminicreditcard p_card="${paymentInstr}" p_show_expiration="${false}"/>
+					<isminicreditcard card="${paymentInstr}" show_expiration="${false}"/>
 					<div class="payment-amount">
 						<span class="label">${Resource.msg('global.amount','locale',null)}:</span>
 						<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
@@ -89,7 +89,7 @@
 <iscomment>render a box for each shipment</iscomment>
 
 	<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
-		<div class="content-header">${Resource.msg('multishippingshipments.shipment','checkout',null) +' #' + shipmentloopstate.count}</div>
+		<div class="content-header">${Resource.msgf('multishippingshipments.shipment','checkout',null, shipmentloopstate.count)}</div>
 
 		<isif condition="${shipment.productLineItems.size() > 0}">
 
