@@ -42,7 +42,7 @@ describe('Wishlist', () => {
 		shareLinkUrl: {
 			selector: '.share-link-content a',
 			baseUrl: wishListPage.configUrl,
-			regex: /.*\?.*ID=.+/
+			regex: /.*\?.*WishListID=.+/
 		}
 
 	};
