@@ -19,28 +19,28 @@ describe('Gift Registry', () => {
 		facebook: {
 			selector: 'a[data-share=facebook]',
 			baseUrl: 'https://www.facebook.com/sharer/sharer.php',
-			regex: '/.*\?.*u=.+/'
+			regex: /.*\?.*u=.+/
 		},
 		twitter: {
 			selector: 'a[data-share=twitter]',
 			baseUrl: 'https://twitter.com/intent/tweet/',
-			regex: '/.*\?.*url=.+/'
+			regex: /.*\?.*url=.+/
 		},
 		googlePlus: {
 			selector: 'a[data-share=googleplus]',
 			baseUrl: 'https://plus.google.com/share',
-			regex: '/.*\?.*url=.+/'
+			regex: /.*\?.*url=.+/
 
 		},
 		pinterest: {
 			selector: 'a[data-share=pinterest]',
 			baseUrl: 'https://www.pinterest.com/pin/create/button/',
-			regex: '/.*\?.*url=.+/'
+			regex: /.*\?.*url=.+/
 		},
 		emailLink: {
 			selector: 'a[data-share=email]',
 			baseUrl: 'mailto:name@email.com',
-			regex: '/.*\?.*subject=.+\&.*body=.+/'
+			regex: /.*\&.*body=.+/
 		},
 		shareLinkIcon: {
 		 	selector: giftRegistryPage.CSS_SHARE_LINK,
@@ -48,7 +48,7 @@ describe('Gift Registry', () => {
 		shareLinkUrl: {
 			selector: '.share-link-content a',
 			baseUrl: giftRegistryPage.configUrl,
-			regex: '/.*\?.*ID=.+/'
+			regex: /.*\?.*ID=.+/
 		}
 	};
 
@@ -126,28 +126,40 @@ describe('Gift Registry', () => {
 		client.isExisting(socialLinksMap.twitter.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.twitter.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.twitter.baseUrl))
+				assert.ok(href.match(socialLinksMap.twitter.regex))
+			})
 	);
 
 	it('should display a Google Plus icon and link', () => 
 		client.isExisting(socialLinksMap.googlePlus.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.googlePlus.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.googlePlus.baseUrl))
+				assert.ok(href.match(socialLinksMap.googlePlus.regex))
+			})
 	);
 
 	it('should display a Pinterest icon and link', () => 
 		client.isExisting(socialLinksMap.pinterest.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.pinterest.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.pinterest.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.pinterest.baseUrl))
+				assert.ok(href.match(socialLinksMap.pinterest.regex))
+			})
 	);
 
 	it('should display a Mail icon and link', () => 
 		client.isExisting(socialLinksMap.emailLink.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinksMap.emailLink.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.emailLink.baseUrl))
+				assert.ok(href.match(socialLinksMap.emailLink.regex))
+			})
 	);
 
 	it('should display a link icon', () => 
@@ -161,7 +173,10 @@ describe('Gift Registry', () => {
 			.then(() => client.isVisible(socialLinksMap.shareLinkUrl.selector))
 			.then(visible => assert.isTrue(visible))
 			.then(() => client.getAttribute(socialLinksMap.shareLinkUrl.selector, 'href'))
-			.then(href => assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl)))
+			.then(href => {
+				assert.isTrue(href.startsWith(socialLinksMap.shareLinkUrl.baseUrl))
+				assert.ok(href.match(socialLinksMap.shareLinkUrl.regex))
+			})
 	);
 
 });
