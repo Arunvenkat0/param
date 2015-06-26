@@ -9,9 +9,11 @@
  */
 
 /* API Includes */
-var app = require('~/cartridge/scripts/app');
+var ISML = require('dw/template/ISML');
+var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
@@ -21,12 +23,12 @@ function startCheckout() {
     var cart = app.getModel('Cart').get();
 
     if (cart) {
-        new dw.system.Pipelet('StartCheckout').execute({
+        new Pipelet('StartCheckout').execute({
             Basket : cart.object
         });
-        response.renderTemplate('util/reporting/reporting');
+        ISML.renderTemplate('util/reporting/reporting');
     } else {
-        response.renderTemplate('util/reporting/reporting');
+        ISML.renderTemplate('util/reporting/reporting');
     }
 }
 

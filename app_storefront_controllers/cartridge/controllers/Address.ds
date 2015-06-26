@@ -7,7 +7,9 @@
  */
 
 /* API Includes */
+var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -18,7 +20,12 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function list() {
     var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(app.getModel('Content').get('myaccount-addresses').object);
+    
+    var content = app.getModel('Content').get('myaccount-addresses');
+	if (content)
+	{
+		pageMeta.update(content.object);
+	}
 
     app.getView().render('account/addressbook/addresslist');
 }
@@ -32,7 +39,7 @@ function add() {
 
     app.getView({
         Action : 'add',
-        ContinueURL : dw.web.URLUtils.https('Address-Form')
+        ContinueURL : URLUtils.https('Address-Form')
     }).render('account/addressbook/addressdetails');
 }
 
@@ -51,7 +58,7 @@ function handleForm() {
         },
         'create' : function() {
             if (!session.forms.profile.address.valid || !Address.create(session.forms.profile.address)) {
-                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                response.redirect(URLUtils.https('Address-Add'));
                 return false;
             }
 
@@ -59,7 +66,7 @@ function handleForm() {
         },
         'edit' : function() {
             if (!session.forms.profile.address.valid || !Address.update(request.httpParameterMap.addressid.value, session.forms.profile.address)) {
-                response.redirect(dw.web.URLUtils.https('Address-Add'));
+                response.redirect(URLUtils.https('Address-Add'));
                 return false;
             }
 
@@ -76,13 +83,15 @@ function handleForm() {
     });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-        response.renderJSON({
+        let r = require('~/cartridge/scripts/util/Response');
+        
+        r.renderJSON({
             success : success
         });
         return;
     }
 
-    response.redirect(dw.web.URLUtils.https('Address-List'));
+    response.redirect(URLUtils.https('Address-List'));
 }
 
 /**
@@ -103,7 +112,7 @@ function edit() {
 
     app.getView({
         Action : 'edit',
-        ContinueURL : dw.web.URLUtils.https('Address-Form'),
+        ContinueURL : URLUtils.https('Address-Form'),
         Address : address
     }).render('account/addressbook/addressdetails');
 }
@@ -121,7 +130,7 @@ function setDefault() {
         addressBook.setPreferredAddress(address);
     });
 
-    response.redirect(dw.web.URLUtils.https('Address-List'));
+    response.redirect(URLUtils.https('Address-List'));
 }
 
 /**
@@ -146,13 +155,15 @@ function Delete() {
     var deleteAddressResult = app.getModel('Address').remove(decodeURIComponent(request.httpParameterMap.AddressID.value));
 
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
-        response.redirect(dw.web.URLUtils.https('Address-List'));
+        response.redirect(URLUtils.https('Address-List'));
         return;
     }
 
-    response.renderJSON({
+    let r = require('~/cartridge/scripts/util/Response');
+    
+    r.renderJSON({
         status : deleteAddressResult ? 'OK' : dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,
-        message : deleteAddressResult ? '' : dw.web.Resource.msg('addressdetails.' + dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
+        message : deleteAddressResult ? '' : Resource.msg('addressdetails.' + dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
     });
 }
 

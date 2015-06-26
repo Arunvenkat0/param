@@ -17,13 +17,12 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
-    var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
 
-        var productView = app.getView('ProductView', {
+        var productView = app.getView('Product', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -52,7 +51,7 @@ function detail() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = app.getView('ProductView', {
+        var productView = app.getView('Product', {
             product        : product,
             DefaultVariant : product.getDefaultVariant()
         });
@@ -82,7 +81,9 @@ function getAvailability() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        response.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
+    	let r = require('~/cartridge/scripts/util/Response');
+    	
+        r.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
     }
     else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
@@ -102,7 +103,7 @@ function hitTile() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        var productView = app.getView('ProductView', {
+        var productView = app.getView('Product', {
             product       : product,
             showswatches  : true,
             showpricing   : true,
@@ -218,14 +219,14 @@ function variation() {
                 }
             }
 
-            app.getView('ProductView', {
+            app.getView('Product', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel,
                 BonusDiscountLineItem : bonusDiscountLineItem
             }).render('product/components/bonusproduct');
         }
         else if (request.httpParameterMap.format.stringValue) {
-            app.getView('ProductView', {
+            app.getView('Product', {
                 product         : product,
                 GetImages       : true,
                 resetAttributes : resetAttributes,
@@ -233,7 +234,7 @@ function variation() {
             }).render('product/productcontent');
         }
         else {
-            app.getView('ProductView', {
+            app.getView('Product', {
                 product               : product,
                 CurrentVariationModel : currentVariationModel
             }).render('product/product');
@@ -258,7 +259,7 @@ function variationPS() {
 
     if (product.isVisible()) {
 
-        var productView = app.getView('ProductView', {
+        var productView = app.getView('Product', {
             product : product
         });
 
@@ -270,10 +271,10 @@ function variationPS() {
         }
 
         if (request.httpParameterMap.format.stringValue) {
-            app.getView('ProductView', {product : product}).render('product/components/productsetproduct');
+            app.getView('Product', {product : product}).render('product/components/productsetproduct');
         }
         else {
-            app.getView('ProductView', {product : product}).render('product/product');
+            app.getView('Product', {product : product}).render('product/product');
         }
     }
     else {
@@ -324,7 +325,7 @@ function getSetItem() {
     var product = Product.get(request.httpParameterMap.pid.stringValue);
 
     if (product.isVisible()) {
-        app.getView('ProductView', {
+        app.getView('Product', {
             product : product,
             isSet   : true
         }).render('product/components/productsetproduct');

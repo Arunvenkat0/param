@@ -155,6 +155,15 @@ module.exports = function (grunt) {
 					repo: require('./styleguide/deploy.json').options.remoteUrl
 				}
 			}
+		},
+		jsdoc: {
+			dist : {
+				src: ['jsdoc/README.md', 'app_storefront_controllers/**/*.ds'],
+				options:{
+					destination: 'doc',
+					configure: './jsdoc-conf.json'
+				}
+			}
 		}
 	});
 

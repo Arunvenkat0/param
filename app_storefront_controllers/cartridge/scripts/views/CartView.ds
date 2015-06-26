@@ -3,7 +3,7 @@
 /** @module views/CartView */
 var View = require('./View');
 
-var Cart = require('~/cartridge/scripts/models/Cart');
+var Cart = require('~/cartridge/scripts/models/CartModel');
 var FormGroup = require('dw/web/FormGroup');
 var Transaction = require('dw/system/Transaction');
 
@@ -31,7 +31,7 @@ var CartView = View.extend(
             var validationResult = Cart.get(cart).validateForCheckout();
             this.EnableCheckout = validationResult.EnableCheckout;
 	        this.BasketStatus = validationResult.BasketStatus;
-            this.WishList = customer.authenticated ? require('~/cartridge/scripts/models/ProductList').get() : null;
+            this.WishList = customer.authenticated ? require('~/cartridge/scripts/models/ProductListModel').get() : null;
         }
 
         return;

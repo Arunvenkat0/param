@@ -74,7 +74,7 @@ Meta.prototype = {
 
             // Update breadcrumbs for content
             if(object.class === dw.content.Content){
-                var path = require('~/cartridge/scripts/models/Content').get(object).getFolderPath();
+                var path = require('~/cartridge/scripts/models/ContentModel').get(object).getFolderPath();
                 this.data.breadcrumbs = path.map(function(folder){
                     return {
                         name : folder.displayName

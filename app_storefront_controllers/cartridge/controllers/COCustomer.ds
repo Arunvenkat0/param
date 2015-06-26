@@ -9,13 +9,14 @@
 
 /* API Includes */
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
-var Cart = require('~/cartridge/scripts/models/Cart');
-var Content = require('~/cartridge/scripts/models/Content');
+var Cart = require('~/cartridge/scripts/models/CartModel');
+var Content = require('~/cartridge/scripts/models/ContentModel');
 
 /**
  * First step of the checkout: provide to choose checkout type (returning, guest or create account)
@@ -37,7 +38,7 @@ function start() {
 
     // Direct to first checkout step if already authenticated
     if (customer.authenticated) {
-        response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+        response.redirect(URLUtils.https('COShipping-Start'));
         return;
     }
     else {
@@ -55,7 +56,7 @@ function start() {
         pageMeta.update(loginAsset);
         
         app.getView({
-            ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
+            ContinueURL : URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');
     }
 
@@ -72,7 +73,7 @@ function showLoginForm() {
             // Delegate login to appropriate authentication pipeline and react on success/failure
             // @TODO find better solution
             if (app.getController('Login').Process()) {
-                response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+                response.redirect(URLUtils.https('COShipping-Start'));
                 return;
             }
             else {
@@ -81,12 +82,12 @@ function showLoginForm() {
         },
         'register'     : function (formgroup) {
             // TODO - redirect to COShipping-Start after registration was successful
-            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            response.redirect(URLUtils.https('Account-StartRegister'));
 
             return;
         },
         'unregistered' : function (formgroup) {
-            response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+            response.redirect(URLUtils.https('COShipping-Start'));
 
             return;
         }
@@ -99,7 +100,7 @@ function showLoginForm() {
         pageMeta.update(loginAsset);
         
         app.getView({
-            ContinueURL : dw.web.URLUtils.https('COCustomer-LoginForm')
+            ContinueURL : URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');
     }
 }

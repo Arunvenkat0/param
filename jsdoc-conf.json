@@ -1,0 +1,22 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "includePattern": ".+\\.(ds|js)(doc)?$"
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": true
+        }
+    },
+    "opts": {
+        "recurse": true,
+        "lenient": true,
+        "template": "jsdoc/template",
+        "tutorials": "jsdoc/tutorials"
+    },
+    "plugins": ["jsdoc/demandware"]
+}

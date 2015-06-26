@@ -2,6 +2,9 @@
 
 /** @module controllers/SendToFriend */
 
+/* API Includes */
+var ISML = require('dw/template/ISML');
+
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
 
@@ -46,7 +49,7 @@ function Start() {
         sendToFriendForm.yourname.htmlValue = customer.profile.firstName + " " + customer.profile.lastName;
     }
 
-    response.renderTemplate('account/components/sendtofrienddialog', {
+    ISML.renderTemplate('account/components/sendtofrienddialog', {
         ViewMode           : 'Edit',
         Product            : Product,
         ProductOptionModel : ProductOptionModel,
@@ -63,7 +66,7 @@ function SendToFriendForm() {
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction != null) {
         if (TriggeredAction.formId == 'edit') {
-            response.renderTemplate('account/components/sendtofrienddialog', {
+            ISML.renderTemplate('account/components/sendtofrienddialog', {
                 ViewMode    : 'Edit',
                 ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
             });
@@ -87,7 +90,7 @@ function SendToFriendForm() {
                 ProductOptionModel = GetProductResult.ProductOptionModel;
             }
 
-            response.renderTemplate('account/components/sendtofrienddialog', {
+            ISML.renderTemplate('account/components/sendtofrienddialog', {
                 ViewMode           : 'preview',
                 Product            : Product,
                 ProductOptionModel : ProductOptionModel,
@@ -111,7 +114,7 @@ function SendToFriendForm() {
      */
 
     // TODO view mode?
-    response.renderTemplate('account/components/sendtofrienddialog', {
+    ISML.renderTemplate('account/components/sendtofrienddialog', {
         ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
     });
 }
@@ -126,7 +129,7 @@ function send() {
         sendToFriendForm.confirmfriendsemail.invalidateFormElement();
 
         // TODO view mode?
-        response.renderTemplate('account/components/sendtofrienddialog', {
+        ISML.renderTemplate('account/components/sendtofrienddialog', {
         	ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
         });
         return;
@@ -137,7 +140,7 @@ function send() {
      */
     // TODO where should this come from? plid?
     if (typeof (ProductList) != 'undefined' && ProductList != null) {
-        require('~/cartridge/scripts/models/Email').get('mail/productlist', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/productlist', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 
@@ -155,7 +158,7 @@ function send() {
             }
         }
         else {
-            response.renderTemplate('account/components/sendtofrienddialogsuccess', {
+            ISML.renderTemplate('account/components/sendtofrienddialogsuccess', {
                 ViewMode : 'edit'
             });
             return;
@@ -169,7 +172,7 @@ function send() {
         var GetProductResult = getProduct(pid);
         var CurrentCustomer = customer;
 
-        require('~/cartridge/scripts/models/Email').get('mail/product', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/product', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 
@@ -183,13 +186,13 @@ function send() {
         /*
          * Default
          */
-        require('~/cartridge/scripts/models/Email').get('mail/productlistdefault', sendToFriendForm.friendsemail.value)
+        require('~/cartridge/scripts/models/EmailModel').get('mail/productlistdefault', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
 
     }
 
-    response.renderTemplate('account/components/sendtofrienddialogsuccess', {
+    ISML.renderTemplate('account/components/sendtofrienddialogsuccess', {
         ViewMode : 'edit'
     });
 }

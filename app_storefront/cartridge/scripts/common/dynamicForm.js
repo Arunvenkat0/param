@@ -1,11 +1,7 @@
 'use strict';
 
-var Template = require('dw/util/Template');
-var HashMap = require('dw/util/HashMap');
 var FormField = require('dw/web/FormField');
 var FormGroup = require('dw/web/FormGroup');
-
-var inputFieldTemplate = new Template('util/inputfield.isml');
 
 /**
  * @description parse FormField element, create context and apply inputfield template to generate form field markup
@@ -13,8 +9,8 @@ var inputFieldTemplate = new Template('util/inputfield.isml');
  * @param {Object} fieldData extra data that contains context for the template
  * @return {String} HTML markup of the field
  */
-function parseFormField(field, fieldData) {
-	var context = new HashMap();
+function getFieldContext(field, fieldData) {
+	var context = {};
 	var type;
 	switch (field.type) {
 		case FormField.FIELD_TYPE_BOOLEAN:
@@ -31,37 +27,37 @@ function parseFormField(field, fieldData) {
 			type = 'text';
 			break;
 	}
-	context.put('formfield', field);
-	context.put('type', type);
+	context.formfield = field;
+	context.type = type;
 	if (fieldData) {
 		for (var prop in fieldData) {
 			if (fieldData.hasOwnProperty(prop)) {
-				context.put(prop, fieldData[prop]);
+				context[prop] = fieldData[prop];
 			}
 		}
 	}
-	return inputFieldTemplate.render(context).text;
+	return context;
 }
 
-module.exports = function (formObject, formData) {
-	var form = '';
+module.exports.getFields = function (formObject, formData) {
+	var fields = [];
 	for (var formElementName in formObject) {
 		var formElement = formObject[formElementName];
 		var fieldData;
 		if (formData) {
-			fieldData = formData[formElementName]
+			fieldData = formData[formElementName];
 		}
 		if (formElement instanceof FormField) {
 			if (fieldData && fieldData.skip) {
 				continue;
 			}
-			form += parseFormField(formElement, fieldData);
+			fields.push(getFieldContext(formElement, fieldData));
 		} else if (formElement instanceof FormGroup) {
 			if (fieldData && fieldData.isFormGroup && fieldData.childField) {
 				var childFieldElement = formElement[fieldData.childField];
-				form += parseFormField(childFieldElement, fieldData);
+				fields.push(getFieldContext(childFieldElement, fieldData));
 			}
 		}
 	}
-	return form;
+	return fields;
 };

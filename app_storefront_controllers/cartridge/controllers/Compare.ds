@@ -5,6 +5,9 @@
  * @module controllers/Compare
  */
 
+/* API Includes */
+var HashMap = require('dw/util/HashMap');
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -24,7 +27,7 @@ function show() {
     comparison.setCategory(request.httpParameterMap.category.value);
 
     // Store selected compare list properties in a map
-    var map = new dw.util.HashMap();
+    var map = new HashMap();
     map.put('categories', comparison.getCategories());
     map.put('products', comparison.getProducts());
     map.put('attributegroups', comparison.getAttributeGroups());
@@ -40,51 +43,64 @@ function show() {
  * Expects: - pid: SKU - category: category ID
  */
 function addProduct() {
+	let r = require('~/cartridge/scripts/util/Response');
 
     var product = Product.get(request.httpParameterMap.pid.value);
-    var category = Category.get(request.httpParameterMap.category.value);
-
-    if (!product.object || !category.object) {
-        response.renderJSON({
+    if (!product) {
+        r.renderJSON({
             success : false
         });
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        comparison.add(product.object, category.object);
-        comparison.setCategory(category.getID());
-
-        response.renderJSON({
-            success : true
+    
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category) {
+        r.renderJSON({
+            success : false
         });
+        return;
     }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.add(product.object, category.object);
+    comparison.setCategory(category.getID());
+
+    r.renderJSON({
+        success : true
+    });
 }
 
 /**
  * Parameters: - pid: SKU - category: category ID
  */
-function removeProduct() {
+ function removeProduct() {
+	let r = require('~/cartridge/scripts/util/Response');
 
     var product = Product.get(request.httpParameterMap.pid.value);
-    var category = Category.get(request.httpParameterMap.category.value);
-    if (!product.object || !category.object) {
-        response.renderJSON({
+    if (!product) {
+        r.renderJSON({
             success : false
         });
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        comparison.remove(product.object, category.object);
-        comparison.setCategory(category.getID());
-
-        response.renderJSON({
-            success : true
+    
+    var category = Category.get(request.httpParameterMap.category.value);
+    if (!category) {
+        r.renderJSON({
+            success : false
         });
+        return;
     }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    comparison.remove(product.object, category.object);
+    comparison.setCategory(category.getID());
+
+    r.renderJSON({
+        success : true
+    });
 }
 
 /**
@@ -93,15 +109,14 @@ function removeProduct() {
 function controls() {
 
     var category = Category.get(request.httpParameterMap.category.value);
-    if (!category.object) {
+    if (!category) {
         app.getView().render('search/components/productcomparewidget');
         return;
     }
-    else {
-        // Get the product comparison object from the session or create a new one
-        var comparison = Compare.get();
-        app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
-    }
+    
+    // Get the product comparison object from the session or create a new one
+    var comparison = Compare.get();
+    app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
 }
 
 /*

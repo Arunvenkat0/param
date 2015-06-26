@@ -23,4 +23,3 @@ var ProductView = View.extend(
     });
 
 module.exports = ProductView;
-

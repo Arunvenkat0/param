@@ -2,6 +2,8 @@
 
 /** @module views/View */
 
+var ISML = require('dw/template/ISML');
+
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var object = require('~/cartridge/scripts/object');
 
@@ -47,7 +49,7 @@ var View = Class.extend(
         this.CurrentPageMetaData = request.pageMetaData;
         this.CurrentRequest = request;
         try{
-            response.renderTemplate(templateName, this);
+            ISML.renderTemplate(templateName, this);
         }catch(e){
             dw.system.Logger.error('Error while rendering template '+templateName);
             throw e;

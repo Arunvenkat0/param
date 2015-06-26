@@ -1,3 +1,10 @@
+'use strict';
+
+/* API Includes */
+var ISML = require('dw/template/ISML');
+var Pipelet = require('dw/system/Pipelet');
+
+/* Script Modules */
 var g = require('~/cartridges/scripts/guard');
 
 /**
@@ -21,7 +28,7 @@ function Show()
 
     if (typeof(ProductListID) != 'undefined' && ProductListID != null)
     {
-        var GetProductListResult = new dw.system.Pipelet('GetProductList', {
+        var GetProductListResult = new Pipelet('GetProductList', {
             Create: false
         }).execute({
             ProductListID: ProductListID
@@ -52,7 +59,7 @@ function Show()
     }
 
 
-    response.renderTemplate('', {
+    ISML.renderTemplate('', {
     	ProductList: ProductList,
     	Status: Status
     });

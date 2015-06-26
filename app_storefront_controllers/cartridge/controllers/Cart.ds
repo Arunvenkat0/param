@@ -8,9 +8,12 @@
  */
 
 /* API Includes */
-var ProductListMgr = require('dw/customer/ProductListMgr');
 var ArrayList = require('dw/util/ArrayList');
+var ISML = require('dw/template/ISML');
+var ProductListMgr = require('dw/customer/ProductListMgr');
+var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -26,7 +29,7 @@ function continueShopping() {
     if (location) {
         response.redirect(location);
     } else {
-        response.redirect(dw.web.URLUtils.httpHome());
+        response.redirect(URLUtils.httpHome());
     }
 }
 
@@ -39,7 +42,7 @@ function show() {
 
     cartForm.get('shipments').invalidate();
 
-    app.getView('CartView', {
+    app.getView('Cart', {
         cart : app.getModel('Cart').get(),
         RegistrationStatus : false
     }).render('checkout/cart/cart');
@@ -97,7 +100,7 @@ function submitForm() {
 
             if (validationResult.EnableCheckout) {
                 //app.getController('COCustomer').Start();
-                response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
+                response.redirect(URLUtils.https('COCustomer-Start'));
 
             } else {
                 result = {
@@ -149,7 +152,7 @@ function submitForm() {
                 cart.calculate();
             });
 
-            response.renderTemplate('checkout/cart/refreshcart');
+            ISML.renderTemplate('checkout/cart/refreshcart');
             return null;
         },
         'login' : function(formgroup) {
@@ -158,7 +161,7 @@ function submitForm() {
             success = app.getController('Login').Process();
 
             if (success) {
-                response.redirect(dw.web.URLUtils.https('COCustomer-Start'));
+                response.redirect(URLUtils.https('COCustomer-Start'));
             } else if (!success) {
                 result = {
                     cart : cart
@@ -222,7 +225,7 @@ function submitForm() {
         pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
-        app.getView('CartView', formResult).render('checkout/cart/cart');
+        app.getView('Cart', formResult).render('checkout/cart/cart');
     }
 }
 
@@ -265,7 +268,7 @@ function addProduct() {
             }
         } else {
 
-            app.getView('CartView', {
+            app.getView('Cart', {
                 Basket : cart
             }).render('checkout/cart/cart');
 
@@ -307,12 +310,12 @@ function addProduct() {
     }
 
     if (params.format.stringValue === 'ajax') {
-        app.getView('CartView', {
+        app.getView('Cart', {
             cart : cart,
             BonusDiscountLineItem : newBonusDiscountLineItem
         }).render(template);
     } else {
-        response.redirect(dw.web.URLUtils.url('Cart-Show'));
+        response.redirect(URLUtils.url('Cart-Show'));
     }
 }
 
@@ -343,7 +346,7 @@ function addToWishlist() {
     productList = app.getModel('ProductList').get();
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
-    app.getView('CartView', {
+    app.getView('Cart', {
         cart : app.getModel('Cart').get(),
         ProductAddedToWishlist : productID
     }).render('checkout/cart/cart');
@@ -391,17 +394,14 @@ function addBonusProductJson() {
                             OnError : 'PIPELET_ERROR',
                             ScriptFile : 'cart/UpdateProductOptionSelections.ds'
                         }).execute({
-                            SelectedOptions : new dw.util.ArrayList(product.options),
+                            SelectedOptions : new dw.util.ArrayList(productsJSON[i].options),
                             Product : childProduct
                         });
 
                         foundLineItem = cart.getBundledProductLineItemByPID(lineItem.getBundledProductLineItems(), (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
                         if (foundLineItem) {
-                            new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-                                ProductLineItem : foundLineItem,
-                                NewProduct : childProduct
-                            });
+                            foundLineItem.replaceProduct(childProduct);
                         }
                     }
                 }
@@ -409,7 +409,8 @@ function addBonusProductJson() {
         } else {
             Transaction.rollback();
 
-            response.renderJSON({
+            let r = require('~/cartridge/scripts/util/Response');
+			r.renderJSON({
                 success : false
             });
             return;
@@ -419,10 +420,10 @@ function addBonusProductJson() {
     cart.calculate();
     Transaction.commit();
 
-    response.renderJSON({
+    let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
         success : true
     });
-
 }
 
 /**
@@ -439,10 +440,10 @@ function addCouponJson() {
     });
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
-
-        response.renderJSON({
+        let r = require('~/cartridge/scripts/util/Response');
+        r.renderJSON({
             status : couponStatus.code,
-            message : dw.web.Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
+            message : Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
             success : !couponStatus.error,
             baskettotal : cart.object.adjustedMerchandizeTotalGrossPrice.value,
             CouponCode : couponCode
