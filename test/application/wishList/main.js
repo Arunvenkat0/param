@@ -44,7 +44,6 @@ describe('Wishlist', () => {
 			baseUrl: wishListPage.configUrl,
 			regex: /.*\?.*WishListID=.+/
 		}
-
 	};
 
 	before(() => client.init());
@@ -124,6 +123,5 @@ describe('Wishlist', () => {
 				})
 		);
 	});
-
 });
 
