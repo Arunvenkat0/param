@@ -3,18 +3,17 @@
 /** @module views/LoginView */
 var View = require('./View');
 
-module.exports = View.extend(
-/** @lends module:views/LoginView.prototype*/
+var LoginView = View.extend(
+/** @lends module:views/LoginView~LoginView.prototype */
 {
-
     // does not work, hence workaround via init()
     //ContinueURL : dw.web.URLUtils.https('Login-LoginForm'),
-
     template       : 'account/login/accountlogin',
+    
     /**
      * Generates the view consumed by the login templates
      *
-     * @constructs module:views/LoginView
+     * @constructs
      * @extends module:views/View~View
      */
     init : function (params) {
@@ -23,3 +22,5 @@ module.exports = View.extend(
     }
 
 });
+
+module.exports = LoginView;

@@ -6,6 +6,10 @@
  * @module controllers/Account
  */
 
+/* API includes */
+var Resource = require('dw/web/Resource');
+var URLUtils = require('dw/web/URLUtils');
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -45,9 +49,9 @@ function editProfile() {
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     app.getView({
-        bctext2 : dw.web.Resource.msg('account.user.registration.editaccount', 'account', null),
+        bctext2 : Resource.msg('account.user.registration.editaccount', 'account', null),
         Action : 'edit',
-        ContinueURL : dw.web.URLUtils.https('Account-EditForm')
+        ContinueURL : URLUtils.https('Account-EditForm')
     }).render('account/user/registration');
 }
 
@@ -58,7 +62,7 @@ function editForm() {
     app.getForm('profile').handleAction({
         'cancel' : function() {
             app.getForm('profile').clear();
-            response.redirect(dw.web.URLUtils.https('Account-Show'));
+            response.redirect(URLUtils.https('Account-Show'));
         },
         'confirm' : function() {
             var Customer, profileUpdateValidation;
@@ -83,9 +87,9 @@ function editForm() {
             }
 
             if (profileUpdateValidation) {
-                response.redirect(dw.web.URLUtils.https('Account-Show'));
+                response.redirect(URLUtils.https('Account-Show'));
             } else {
-                response.redirect(dw.web.URLUtils.https('Account-EditProfile', 'invalid', 'true'));
+                response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
             }
         }
     });
@@ -98,7 +102,7 @@ function editForm() {
 function passwordReset() {
     app.getForm('requestpassword').clear();
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('Account-PasswordResetForm')
+        ContinueURL : URLUtils.https('Account-PasswordResetForm')
     }).render('account/password/requestpasswordreset');
 }
 
@@ -126,7 +130,7 @@ function passwordResetFormHandler(templateName, continueURL) {
                 resetPasswordToken = resettingCustomer.generatePasswordResetToken();
 
                 passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
-                passwordemail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                passwordemail.setSubject(Resource.msg('email.passwordassistance', 'email', null));
                 passwordemail.send({
                     ResetPasswordToken : resetPasswordToken
                 });
@@ -156,7 +160,7 @@ function passwordResetFormHandler(templateName, continueURL) {
  * The form handler for password resets.
  */
 function passwordResetForm() {
-    passwordResetFormHandler('account/password/requestpasswordreset', dw.web.URLUtils.https('Account-PasswordResetForm'));
+    passwordResetFormHandler('account/password/requestpasswordreset', URLUtils.https('Account-PasswordResetForm'));
 }
 
 /**
@@ -166,7 +170,7 @@ function passwordResetDialog() {
     // @FIXME reimplement using dialogify
     app.getForm('requestpassword').clear();
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('Account-PasswordResetDialogForm')
+        ContinueURL : URLUtils.https('Account-PasswordResetDialogForm')
     }).render('account/password/requestpasswordresetdialog');
 }
 
@@ -175,7 +179,7 @@ function passwordResetDialog() {
  */
 function passwordResetDialogForm() {
     // @FIXME reimplement using dialogify
-    passwordResetFormHandler('account/password/requestpasswordresetdialog', dw.web.URLUtils.https('Account-PasswordResetDialogForm'));
+    passwordResetFormHandler('account/password/requestpasswordresetdialog', URLUtils.https('Account-PasswordResetDialogForm'));
 }
 
 /**
@@ -190,10 +194,10 @@ function setNewPassword() {
     resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
 
     if (empty(resettingCustomer)) {
-        response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+        response.redirect(URLUtils.https('Account-PasswordReset'));
     } else {
         app.getView({
-            ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+            ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
         }).render('account/password/setnewpassword');
     }
 }
@@ -206,7 +210,7 @@ function setNewPasswordForm() {
     app.getForm('profile').handleAction({
         'cancel' : function() {
             app.getView({
-                ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+                ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
             }).render('account/password/setnewpassword');
             return;
         },
@@ -218,13 +222,13 @@ function setNewPasswordForm() {
             resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
             
             if (empty(resettingCustomer)) {
-                response.redirect(dw.web.URLUtils.https('Account-PasswordReset'));
+                response.redirect(URLUtils.https('Account-PasswordReset'));
             } else {
 
                 if (app.getForm('resetpassword.password').value() !== app.getForm('resetpassword.passwordconfirm').value()) {
                     app.getForm('resetpassword.passwordconfirm').invalidate();
                     app.getView({
-                        ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+                        ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
                     }).render('account/password/setnewpassword');
                 } else {
 
@@ -232,11 +236,11 @@ function setNewPasswordForm() {
                     if (!success) {
                         app.getView({
                             ErrorCode : 'formnotvalid',
-                            ContinueURL : dw.web.URLUtils.https('Account-SetNewPasswordForm')
+                            ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
                         }).render('account/password/setnewpassword');
                     } else {
                         passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
-                        passwordchangedmail.setSubject(dw.web.Resource.msg('email.passwordassistance', 'email', null));
+                        passwordchangedmail.setSubject(Resource.msg('email.passwordassistance', 'email', null));
                         passwordchangedmail.send({});
 
                         app.getView().render('account/password/setnewpassword_confirm');
@@ -260,7 +264,7 @@ function startRegister() {
     }
 
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+        ContinueURL : URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
 
@@ -304,7 +308,7 @@ function registrationForm() {
             if (!profileValidation) {
                 // TODO redirect
                 app.getView({
-                    ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+                    ContinueURL : URLUtils.https('Account-RegistrationForm')
                 }).render('account/user/registration');
             } else {
                 app.getForm('profile').clear();
@@ -315,14 +319,14 @@ function registrationForm() {
                     dw.system.Logger.info('Redirecting to "{0}" after successful login', target);
                     response.redirect(target);
                 } else {
-                    response.redirect(dw.web.URLUtils.https('Account-Show', 'registration', 'true'));
+                    response.redirect(URLUtils.https('Account-Show', 'registration', 'true'));
                 }
             }
         }
     });
 
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('Account-RegistrationForm')
+        ContinueURL : URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
 

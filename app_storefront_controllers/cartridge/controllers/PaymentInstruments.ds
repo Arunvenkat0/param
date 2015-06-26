@@ -9,6 +9,7 @@
 
 /* API includes */
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -58,7 +59,7 @@ function add(clearForm)
             .getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).activePaymentCards.iterator());
 
     app.getView({
-    	ContinueURL : dw.web.URLUtils.https('PaymentInstruments-PaymentForm')
+    	ContinueURL : URLUtils.https('PaymentInstruments-PaymentForm')
     }).render('account/payment/paymentinstrumentdetails');
 }
 
@@ -75,7 +76,7 @@ function handlePaymentForm()
                 add(false);
                 return;
             }else{
-                response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+                response.redirect(URLUtils.https('PaymentInstruments-List'));
             }
         },
         'error' : function(){
@@ -83,7 +84,7 @@ function handlePaymentForm()
         }
     });
 
-    //response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+    //response.redirect(URLUtils.https('PaymentInstruments-List'));
 }
 
 /**
@@ -104,15 +105,17 @@ function create()
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-    var DuplicateCard;
-    var OldCard;
-    for each(var card in paymentInstruments) {
-        if (card.creditCardNumber === ccNumber) {
-            DuplicateCard = true;
-            OldCard = card;
-            break;
-        }
-    }
+    var duplicateCard;
+    var oldCard;
+    
+    for (var i = 0; i < paymentInstruments.length; i++) {
+		var card = paymentInstruments[i];
+		if (card.creditCardNumber === ccNumber) {
+			duplicateCard = true;
+			oldCard = card;
+			break;
+		}
+	}
 
     Transaction.begin();
         var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
@@ -123,10 +126,10 @@ function create()
             return false;
         }
 
-        if (DuplicateCard)
-        {
-            wallet.removePaymentInstrument(OldCard);
+        if (duplicateCard) {
+            wallet.removePaymentInstrument(oldCard);
         }
+    
     Transaction.commit();
 
     paymentForm.clear();
@@ -156,7 +159,7 @@ function Delete()
         }
     });
 
-    response.redirect(dw.web.URLUtils.https('PaymentInstruments-List'));
+    response.redirect(URLUtils.https('PaymentInstruments-List'));
 }
 
 

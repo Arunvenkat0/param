@@ -18,12 +18,12 @@ function XmlProductDescription()
     });
     if (GetProductResult.result == PIPELET_ERROR)
     {
-        response.renderTemplate('error/notfound');
+        ISML.renderTemplate('error/notfound');
         return;
     }
     var Product = GetProductResult.Product;
 
-    response.renderTemplate('product/components/powerreviews-xmlproduct', {
+    ISML.renderTemplate('product/components/powerreviews-xmlproduct', {
         Product : Product
     });
 }
@@ -37,7 +37,7 @@ function WriteReview()
     var ProductID = request.httpParameterMap.pid.stringValue;
     if (empty(ProductID))
     {
-        response.renderTemplate('error/notfound');
+        ISML.renderTemplate('error/notfound');
         return;
     }
 
@@ -46,7 +46,7 @@ function WriteReview()
     });
     if (GetProductResult.result == PIPELET_ERROR)
     {
-        response.renderTemplate('error/notfound');
+        ISML.renderTemplate('error/notfound');
         return;
     }
     var Product = GetProductResult.Product;
@@ -70,7 +70,7 @@ function WriteReview()
     });
     var Location = ScriptResult.lastMatchedClickUrl;
 
-    response.renderTemplate('product/writereview', {
+    ISML.renderTemplate('product/writereview', {
         Location : Location,
         Product : Product
     });

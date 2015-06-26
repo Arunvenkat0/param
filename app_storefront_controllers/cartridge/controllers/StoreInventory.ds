@@ -23,8 +23,10 @@ function setStore() {
     var result = setStoreInLineItem( cart.object, parameterMap.plid.stringValue, parameterMap.storeid.stringValue,
         parameterMap.storepickup.stringValue );
 
+	let r = require('~/cartridge/scripts/util/Response');
+
     if (result.ErrorCode) {
-        response.renderJSON({
+        r.renderJSON({
             success   : false,
             ErrorCode : result.ErrorCode
         });
@@ -37,7 +39,7 @@ function setStore() {
         session.custom.storeId = parameterMap.storeid.value;
     }
 
-    response.renderJSON({
+    r.renderJSON({
         success : true
     });
 }
@@ -88,9 +90,17 @@ function showAvailableStores() {
     var stores = lookupByZipCode().Stores;
     
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
-    var storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
-
+    var product = Product.get(request.httpParameterMap.pid.stringValue),
+    	storeAvailabilityMap;
+    if (!product)
+    {
+    	storeAvailabilityMap = new dw.util.HashMap();
+    }
+    else
+    {
+    	storeAvailabilityMap = getStoreAvailabilityMap(stores, product.object);
+    }
+    
     showSetStore(stores, storeAvailabilityMap);
 }
 
@@ -192,7 +202,8 @@ function inventory() {
         });
     }
 
-    response.renderJSON(stores);
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON(stores);
 }
 
 /**
@@ -208,7 +219,8 @@ function setPreferredStore() {
  * Gets the preferred store from the session
  */
 function getPreferredStore() {
-    response.renderJSON([{
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON([{
         storeId : session.custom.storeId
     }]);
 }
@@ -226,7 +238,8 @@ function setZipCode() {
  * Gets the users zip code from the session
  */
 function getZipCode() {
-    response.renderJSON([{
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON([{
         zip : session.custom.zipcode
     }]);
 }

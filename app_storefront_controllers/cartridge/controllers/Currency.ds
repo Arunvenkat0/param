@@ -12,7 +12,7 @@ var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
 var guard = require('~/cartridge/scripts/guard');
-var Cart = require('~/cartridge/scripts/models/Cart');
+var Cart = require('~/cartridge/scripts/models/CartModel');
 
 /**
  * This controller is used in an ajax call to set the session variable 'currency'.
@@ -32,7 +32,8 @@ function setSessionCurrency() {
         }
     }
 
-    response.renderJSON({
+	let r = require('~/cartridge/scripts/util/Response');
+    r.renderJSON({
         success : true
     });
 

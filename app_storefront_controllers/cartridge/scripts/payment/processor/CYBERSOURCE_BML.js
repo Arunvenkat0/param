@@ -1,10 +1,9 @@
 'use strict';
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
+var Cart = require('~/cartridge/scripts/models/CartModel');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
-var PaymentInstrument = require('dw/order/PaymentInstrument');
 
 /**
  * This is where additional BillMeLaterl integration would go. The current implementation simply creates a payment
@@ -19,8 +18,8 @@ function Handle(args) {
     }
     else {
         Transaction.wrap(function () {
-            cart.removeExistingPaymentInstruments(PaymentInstrument.METHOD_BML);
-            cart.createPaymentInstrument(PaymentInstrument.METHOD_BML, cart.getNonGiftCertificateAmount());
+            cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_BML);
+            cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_BML, cart.getNonGiftCertificateAmount());
         });
 
         return {sucess : true};

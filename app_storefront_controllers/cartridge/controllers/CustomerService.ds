@@ -19,14 +19,14 @@ var guard = require('~/cartridge/scripts/guard');
  * Renders the customer service overview page.
  */
 function show() {
-    app.getView('CustomerServiceView').render('content/customerservice');
+    app.getView('CustomerService').render('content/customerservice');
 }
 
 /**
  * Renders the left hand navigation.
  */
 function leftNav() {
-    app.getView('CustomerServiceView').render('content/customerserviceleftnav');
+    app.getView('CustomerService').render('content/customerserviceleftnav');
 }
 
 /**
@@ -34,7 +34,7 @@ function leftNav() {
  */
 function contactUs() {
     app.getForm('contactus').clear();
-    app.getView('CustomerServiceView').render('content/contactus');
+    app.getView('CustomerService').render('content/contactus');
 }
 
 /**
@@ -60,12 +60,12 @@ function submit() {
     });
 
     if (contactUsResult && (contactUsResult.getStatus() === Status.OK)) {
-        app.getView('CustomerServiceView', {
+        app.getView('CustomerService', {
             ConfirmationMessage : 'edit'
         }).render('content/contactus');
     }
     else {
-        app.getView('CustomerServiceView').render('content/contactus');
+        app.getView('CustomerService').render('content/contactus');
     }
 }
 

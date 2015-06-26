@@ -16,6 +16,7 @@ var Resource = require('dw/web/Resource');
 var ShippingMgr = require('dw/order/ShippingMgr');
 var Site = require('dw/system/Site');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -95,7 +96,7 @@ function start() {
                     pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
                 });
                 app.getView({
-                    ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping'),
+                    ContinueURL : URLUtils.https('COShipping-SingleShipping'),
                     Basket : cart.object,
                     HomeDeliveries : homeDeliveries
                 }).render('checkout/shipping/singleshipping');
@@ -240,7 +241,7 @@ function singleShipping() {
                 pageTitle : Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
             });
             app.getView({
-                ContinueURL : dw.web.URLUtils.https('COShipping-SingleShipping')
+                ContinueURL : URLUtils.https('COShipping-SingleShipping')
             }).render('checkout/shipping/singleshipping');
 
             return;
@@ -250,7 +251,7 @@ function singleShipping() {
             return;
         },
         'error' : function(formgroup) {
-            response.redirect(dw.web.URLUtils.https('COShipping-Start'));
+            response.redirect(URLUtils.https('COShipping-Start'));
             return;
         }
     });
@@ -395,7 +396,7 @@ function editAddress() {
     }
 
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
+        ContinueURL : URLUtils.https('COShipping-EditShippingAddress')
     }).render('checkout/shipping/shippingaddressdetails');
 }
 
@@ -411,7 +412,7 @@ function editShippingAddress() {
             // @FIXME what is this statement used for?
             if (!app.getForm(session.forms.shippingaddress).copyTo(object) || !app.getForm(session.forms.shippingaddress.states).copyTo(object)) {
                 app.getView({
-                    ContinueURL : dw.web.URLUtils.https('COShipping-EditShippingAddress')
+                    ContinueURL : URLUtils.https('COShipping-EditShippingAddress')
                 }).render('checkout/shipping/shippingaddressdetails');
             } else {
                 app.getView().render('components/dialog/dialogapply');

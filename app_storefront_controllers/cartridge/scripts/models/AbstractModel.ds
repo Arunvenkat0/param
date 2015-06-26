@@ -6,6 +6,8 @@
 
 /* API Includes */
 var Class = require('~/cartridge/scripts/util/Class').Class;
+var Logger = require('dw/system/Logger');
+
 
 var AbstractModel = Class.extend(
 /** @lends module:models/AbstractModel~AbstractModel.prototype */
@@ -45,7 +47,7 @@ var AbstractModel = Class.extend(
      * @return {Void}
      */
     get : function () {
-        dw.system.Logger.warn('Generic helper access method "get()" not implemented for subclass');
+        Logger.warn('Generic helper access method "get()" not implemented for subclass');
         return new AbstractModel({custom : {}});
     },
 
@@ -56,7 +58,7 @@ var AbstractModel = Class.extend(
      * @return {Object}
      */
     getValue : function (key) {
-        if (empty(key) || !this.object) {
+        if (empty(key)) {
             return null;
         }
 
@@ -109,7 +111,7 @@ var AbstractModel = Class.extend(
                 propertyName = property.substring(3,4).toLowerCase() + property.substring(4);
                 // only define if there is a corresponding property as well
                 if(properties.indexOf(propertyName) > -1){
-                    //dw.system.Logger.debug('Defining property get access for {0}',propertyName);
+                    //Logger.debug('Defining property get access for {0}',propertyName);
                     instance.__defineGetter__(
                         propertyName,
                         (property in instance)?function(){return instance[property]();}:function(){return instance.object[propertyName];}
@@ -122,7 +124,7 @@ var AbstractModel = Class.extend(
                 propertyName = property.substring(3,4).toLowerCase() + property.substring(4);
                 // only define if there is a corresponding property as well
                 if(properties.indexOf(propertyName) > -1){
-                    //dw.system.Logger.debug('Defining property set access for {0}',propertyName);
+                    //Logger.debug('Defining property set access for {0}',propertyName);
                     instance.__defineSetter__(
                         propertyName,
                         (property in instance)?function(v){return instance[property](v);}:function(v){return instance.object[property](v);}
@@ -131,7 +133,7 @@ var AbstractModel = Class.extend(
             }
         });
         duration = new Date().getTime() - duration;
-        dw.system.Logger.info('{0}ms to define property access',duration);
+        Logger.info('{0}ms to define property access',duration);
     },
 
     /**
@@ -150,7 +152,7 @@ var AbstractModel = Class.extend(
             return this.object[methodName].apply(this.object, methodArgs);
         }
         // If we get here, the method hasn't been found
-        dw.system.Logger.error('Method "{0}" does not exist for {1}',methodName,this.object.class);
+        Logger.error('Method "{0}" does not exist for {1}',methodName,this.object.class);
         throw new TypeError();
     }
 });

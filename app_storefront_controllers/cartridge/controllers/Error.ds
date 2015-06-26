@@ -35,7 +35,8 @@ function start(args) {
 
         // the requested output format is json so the error response needs to be json
         if (format === 'json') {
-            response.renderJSON({
+        	let r = require('~/cartridge/scripts/util/Response');
+            r.renderJSON({
                 Success      : false,
                 LogRequestID : request.requestID.split('-')[0]
             });
