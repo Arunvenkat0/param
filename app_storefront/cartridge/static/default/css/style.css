@@ -2952,31 +2952,6 @@ nav[role="navigation"] {
     padding: 3px 0 2px;
     text-align: center; }
 
-.currency-converter {
-  width: 100%; }
-  .currency-converter select {
-    color: #000;
-    height: 40px;
-    width: 90%; }
-  @media screen and (min-width: 768px) {
-    .currency-converter {
-      margin-top: 0;
-      position: absolute;
-      right: .8em;
-      top: 1.4em;
-      width: auto; }
-      .currency-converter select {
-        background-color: transparent;
-        background-image: none;
-        border: none;
-        box-shadow: none;
-        color: #aaa;
-        font-weight: 700;
-        height: auto;
-        margin-left: 0;
-        padding: 0 1px;
-        width: auto; } }
-
 .header-search {
   color: #fff;
   width: 100%;

@@ -3682,15 +3682,7 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
-            <attribute-definition attribute-id="enableMultiCurrency">
-                <display-name xml:lang="x-default">Enable Multi Currency</display-name>
-                <description xml:lang="x-default">This Boolean enables the use of multi currency in the storefront</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>false</default-value>
-            </attribute-definition>
-             <attribute-definition attribute-id="enableMultiShipping">
+            <attribute-definition attribute-id="enableMultiShipping">
                  <display-name xml:lang="x-default">Enable MultiShipping</display-name>
                  <description xml:lang="x-default">The attribute is used to enable/disable Multi-Shipment Checkout for each site via BM.</description>
                  <type>boolean</type>
@@ -3955,7 +3947,6 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <attribute attribute-id="storeLookupMaxDistance"/>
                 <attribute attribute-id="customerServiceEmail"/>
                 <attribute attribute-id="enhancedSearchSuggestions"/>
-                <attribute attribute-id="enableMultiCurrency"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

@@ -1,113 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-var progress = require('./progress'),
-	util = require('./util');
-
-var currentRequests = [];
-
-/**
- * @function
- * @description Ajax request to get json response
- * @param {Boolean} async  Asynchronous or not
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- */
-var getJson = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'json',
-		url: options.url,
-		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
-		data: options.data || {}
-	})
-	// success
-	.done(function (response) {
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	// failed
-	.fail(function (xhr, textStatus) {
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		if (options.callback) {
-			options.callback(null);
-		}
-	})
-	// executed on success or fail
-	.always(function () {
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-/**
- * @function
- * @description ajax request to load html response in a given container
- * @param {String} url URI for the request
- * @param {Object} data Name/Value pair data request
- * @param {Function} callback  Callback function to be called
- * @param {Object} target Selector or element that will receive content
- */
-var load = function (options) {
-	options.url = util.toAbsoluteUrl(options.url);
-	// return if no url exists or url matches a current request
-	if (!options.url || currentRequests[options.url]) {
-		return;
-	}
-
-	currentRequests[options.url] = true;
-
-	// make the server call
-	$.ajax({
-		dataType: 'html',
-		url: util.appendParamToURL(options.url, 'format', 'ajax'),
-		data: options.data,
-		xhrFields: {
-			withCredentials: true
-		}
-	})
-	.done(function (response) {
-		// success
-		if (options.target) {
-			$(options.target).empty().html(response);
-		}
-		if (options.callback) {
-			options.callback(response);
-		}
-	})
-	.fail(function (xhr, textStatus) {
-		// failed
-		if (textStatus === 'parsererror') {
-			window.alert(Resources.BAD_RESPONSE);
-		}
-		options.callback(null, textStatus);
-	})
-	.always(function () {
-		progress.hide();
-		// remove current request from hash
-		if (currentRequests[options.url]) {
-			delete currentRequests[options.url];
-		}
-	});
-};
-
-exports.getJson = getJson;
-exports.load = load;
-
-},{"./progress":38,"./util":48}],2:[function(require,module,exports){
 /**
  *    (c) 2009-2014 Demandware Inc.
  *    Subject to standard usage terms and conditions
@@ -121,7 +12,6 @@ var countries = require('./countries'),
 	cq = require('./cq'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
-	multicurrency = require('./multicurrency'),
 	page = require('./page'),
 	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
@@ -289,7 +179,6 @@ var app = {
 		validator.init();
 		rating.init();
 		searchplaceholder.init();
-		multicurrency.init();
 		cq.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
@@ -318,7 +207,116 @@ $(document).ready(function () {
 	app.init();
 });
 
-},{"./cookieprivacy":5,"./countries":6,"./cq":7,"./dialog":8,"./jquery-ext":11,"./minicart":12,"./multicurrency":13,"./page":14,"./pages/account":15,"./pages/cart":16,"./pages/checkout":20,"./pages/compare":23,"./pages/product":27,"./pages/registry":32,"./pages/search":33,"./pages/storefront":34,"./pages/storelocator":35,"./pages/wishlist":36,"./rating":40,"./searchplaceholder":41,"./searchsuggest":43,"./searchsuggest-beta":42,"./tooltip":47,"./util":48,"./validator":49}],3:[function(require,module,exports){
+},{"./cookieprivacy":5,"./countries":6,"./cq":7,"./dialog":8,"./jquery-ext":11,"./minicart":12,"./page":13,"./pages/account":14,"./pages/cart":15,"./pages/checkout":19,"./pages/compare":22,"./pages/product":26,"./pages/registry":31,"./pages/search":32,"./pages/storefront":33,"./pages/storelocator":34,"./pages/wishlist":35,"./rating":39,"./searchplaceholder":40,"./searchsuggest":42,"./searchsuggest-beta":41,"./tooltip":46,"./util":47,"./validator":48}],2:[function(require,module,exports){
+'use strict';
+
+var progress = require('./progress'),
+	util = require('./util');
+
+var currentRequests = [];
+
+/**
+ * @function
+ * @description Ajax request to get json response
+ * @param {Boolean} async  Asynchronous or not
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ */
+var getJson = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'json',
+		url: options.url,
+		async: (typeof options.async === 'undefined' || options.async === null) ? true : options.async,
+		data: options.data || {}
+	})
+	// success
+	.done(function (response) {
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	// failed
+	.fail(function (xhr, textStatus) {
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		if (options.callback) {
+			options.callback(null);
+		}
+	})
+	// executed on success or fail
+	.always(function () {
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+/**
+ * @function
+ * @description ajax request to load html response in a given container
+ * @param {String} url URI for the request
+ * @param {Object} data Name/Value pair data request
+ * @param {Function} callback  Callback function to be called
+ * @param {Object} target Selector or element that will receive content
+ */
+var load = function (options) {
+	options.url = util.toAbsoluteUrl(options.url);
+	// return if no url exists or url matches a current request
+	if (!options.url || currentRequests[options.url]) {
+		return;
+	}
+
+	currentRequests[options.url] = true;
+
+	// make the server call
+	$.ajax({
+		dataType: 'html',
+		url: util.appendParamToURL(options.url, 'format', 'ajax'),
+		data: options.data,
+		xhrFields: {
+			withCredentials: true
+		}
+	})
+	.done(function (response) {
+		// success
+		if (options.target) {
+			$(options.target).empty().html(response);
+		}
+		if (options.callback) {
+			options.callback(response);
+		}
+	})
+	.fail(function (xhr, textStatus) {
+		// failed
+		if (textStatus === 'parsererror') {
+			window.alert(Resources.BAD_RESPONSE);
+		}
+		options.callback(null, textStatus);
+	})
+	.always(function () {
+		progress.hide();
+		// remove current request from hash
+		if (currentRequests[options.url]) {
+			delete currentRequests[options.url];
+		}
+	});
+};
+
+exports.getJson = getJson;
+exports.load = load;
+
+},{"./progress":37,"./util":47}],3:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -629,7 +627,7 @@ var bonusProductsView = {
 
 module.exports = bonusProductsView;
 
-},{"./dialog":8,"./page":14,"./util":48}],4:[function(require,module,exports){
+},{"./dialog":8,"./page":13,"./util":47}],4:[function(require,module,exports){
 'use strict';
 
 var page = require('./page'),
@@ -884,7 +882,7 @@ exports.init = function () {
 exports.addProduct = addProduct;
 exports.removeProduct = removeProduct;
 
-},{"./page":14,"./util":48,"promise":57}],5:[function(require,module,exports){
+},{"./page":13,"./util":47,"promise":56}],5:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog');
@@ -973,18 +971,20 @@ function clickThruAfter() {
 		anchors = localStorage.getItem('cq.anchors');
 		localStorage.removeItem('cq.anchors');
 	}
-	CQuotient.activities.push({
-		activityType: 'clickReco',
-		parameters: {
-			cookieId: CQuotient.getCQCookieId(),
-			userId: CQuotient.getCQUserId(),
-			recommenderName: recommenderName,
-			anchors: anchors,
-			products: {
-				id: currentProductId
+	if (window.CQuotient) {
+		CQuotient.activities.push({
+			activityType: 'clickReco',
+			parameters: {
+				cookieId: CQuotient.getCQCookieId(),
+				userId: CQuotient.getCQUserId(),
+				recommenderName: recommenderName,
+				anchors: anchors,
+				products: {
+					id: currentProductId
+				}
 			}
-		}
-	});
+		});
+	}
 	localStorage.removeItem('cq.recommendername');
 }
 
@@ -1181,7 +1181,7 @@ var dialog = {
 
 module.exports = dialog;
 
-},{"./ajax":1,"./util":48,"imagesloaded":53,"lodash":56}],9:[function(require,module,exports){
+},{"./ajax":2,"./util":47,"imagesloaded":52,"lodash":55}],9:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1202,7 +1202,7 @@ exports.checkBalance = function (id, callback) {
 	});
 };
 
-},{"./ajax":1,"./util":48}],10:[function(require,module,exports){
+},{"./ajax":2,"./util":47}],10:[function(require,module,exports){
 'use strict';
 
 var ajax = require('./ajax'),
@@ -1254,7 +1254,7 @@ exports.init = function () {
 	$('#AddToBasketButton').on('click', setAddToCartHandler);
 };
 
-},{"./ajax":1,"./minicart":12,"./util":48}],11:[function(require,module,exports){
+},{"./ajax":2,"./minicart":12,"./util":47}],11:[function(require,module,exports){
 'use strict';
 // jQuery extensions
 
@@ -1367,35 +1367,7 @@ var minicart = {
 
 module.exports = minicart;
 
-},{"./bonus-products-view":3,"./util":48}],13:[function(require,module,exports){
-'use strict';
-
-var ajax = require('./ajax'),
-	page = require('./page'),
-	util = require('./util');
-
-exports.init = function () {
-	//listen to the drop down, and make a ajax call to mulitcurrency pipeline
-	$('.currency-converter').on('change', function () {
-		// request results from server
-		ajax.getJson({
-			url: util.appendParamsToUrl(Urls.setSessionCurrency, {
-				format: 'ajax',
-				currencyMnemonic: $('.currency-converter select').val()
-			}),
-			callback: function () {
-				location.reload();
-			}
-		});
-	});
-
-	//hide the feature if user is in checkout
-	if (page.title === 'Checkout') {
-		$('.mc-class').css('display', 'none');
-	}
-};
-
-},{"./ajax":1,"./page":14,"./util":48}],14:[function(require,module,exports){
+},{"./bonus-products-view":3,"./util":47}],13:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -1418,7 +1390,7 @@ var page = {
 
 module.exports = page;
 
-},{"./util":48}],15:[function(require,module,exports){
+},{"./util":47}],14:[function(require,module,exports){
 'use strict';
 
 var giftcert = require('../giftcert'),
@@ -1653,7 +1625,7 @@ var account = {
 
 module.exports = account;
 
-},{"../dialog":8,"../giftcert":10,"../page":14,"../tooltip":47,"../util":48,"../validator":49}],16:[function(require,module,exports){
+},{"../dialog":8,"../giftcert":10,"../page":13,"../tooltip":46,"../util":47,"../validator":48}],15:[function(require,module,exports){
 'use strict';
 
 var account = require('./account'),
@@ -1693,7 +1665,7 @@ exports.init = function () {
 	account.initCartLogin();
 };
 
-},{"../bonus-products-view":3,"../quickview":39,"../storeinventory/cart":44,"./account":15}],17:[function(require,module,exports){
+},{"../bonus-products-view":3,"../quickview":38,"../storeinventory/cart":43,"./account":14}],16:[function(require,module,exports){
 'use strict';
 
 var util = require('../../util');
@@ -1717,7 +1689,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../util":48,"./shipping":22}],18:[function(require,module,exports){
+},{"../../util":47,"./shipping":21}],17:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -1915,7 +1887,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../ajax":1,"../../giftcard":9,"../../util":48,"./formPrepare":19}],19:[function(require,module,exports){
+},{"../../ajax":2,"../../giftcard":9,"../../util":47,"./formPrepare":18}],18:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -1974,7 +1946,7 @@ exports.init = init;
 exports.validateForm = validateForm;
 exports.validateEl = validateEl;
 
-},{"lodash":56}],20:[function(require,module,exports){
+},{"lodash":55}],19:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2003,7 +1975,7 @@ exports.init = function () {
 	}
 };
 
-},{"./address":17,"./billing":18,"./multiship":21,"./shipping":22}],21:[function(require,module,exports){
+},{"./address":16,"./billing":17,"./multiship":20,"./shipping":21}],20:[function(require,module,exports){
 'use strict';
 
 var address = require('./address'),
@@ -2125,7 +2097,7 @@ exports.init = function () {
 	});
 };
 
-},{"../../dialog":8,"../../util":48,"./address":17,"./formPrepare":19}],22:[function(require,module,exports){
+},{"../../dialog":8,"../../util":47,"./address":16,"./formPrepare":18}],21:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2287,7 +2259,7 @@ exports.init = function () {
 
 exports.updateShippingMethodList = updateShippingMethodList;
 
-},{"../../ajax":1,"../../progress":38,"../../tooltip":47,"../../util":48,"./formPrepare":19}],23:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../tooltip":46,"../../util":47,"./formPrepare":18}],22:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2331,7 +2303,7 @@ exports.init = function () {
 	addProductToCart();
 };
 
-},{"../ajax":1,"../page":14,"../product-tile":37,"../quickview":39,"./product/addToCart":24}],24:[function(require,module,exports){
+},{"../ajax":2,"../page":13,"../product-tile":36,"../quickview":38,"./product/addToCart":23}],23:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2412,7 +2384,7 @@ module.exports = function (target) {
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
 
-},{"../../dialog":8,"../../minicart":12,"../../page":14,"../../util":48,"lodash":56,"promise":57}],25:[function(require,module,exports){
+},{"../../dialog":8,"../../minicart":12,"../../page":13,"../../util":47,"lodash":55,"promise":56}],24:[function(require,module,exports){
 'use strict';
 
 var ajax =  require('../../ajax'),
@@ -2480,7 +2452,7 @@ module.exports = function () {
 	$('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };
 
-},{"../../ajax":1,"../../util":48}],26:[function(require,module,exports){
+},{"../../ajax":2,"../../util":47}],25:[function(require,module,exports){
 'use strict';
 var dialog = require('../../dialog'),
 	util = require('../../util');
@@ -2567,7 +2539,7 @@ module.exports.loadZoom = loadZoom;
 module.exports.setMainImage = setMainImage;
 module.exports.replaceImages = replaceImages;
 
-},{"../../dialog":8,"../../util":48}],27:[function(require,module,exports){
+},{"../../dialog":8,"../../util":47}],26:[function(require,module,exports){
 'use strict';
 
 var dialog = require('../../dialog'),
@@ -2647,7 +2619,7 @@ var product = {
 
 module.exports = product;
 
-},{"../../dialog":8,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addToCart":24,"./availability":25,"./image":26,"./productNav":28,"./productSet":29,"./recommendations":30,"./variant":31}],28:[function(require,module,exports){
+},{"../../dialog":8,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":23,"./availability":24,"./image":25,"./productNav":27,"./productSet":28,"./recommendations":29,"./variant":30}],27:[function(require,module,exports){
 'use strict';
 
 var ajax = require('../../ajax'),
@@ -2674,7 +2646,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":1,"../../util":48}],29:[function(require,module,exports){
+},{"../../ajax":2,"../../util":47}],28:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2724,7 +2696,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":1,"../../tooltip":47,"../../util":48,"./addToCart":24}],30:[function(require,module,exports){
+},{"../../ajax":2,"../../tooltip":46,"../../util":47,"./addToCart":23}],29:[function(require,module,exports){
 'use strict';
 
 /**
@@ -2759,7 +2731,7 @@ module.exports = function () {
 		});
 };
 
-},{}],31:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 var addToCart = require('./addToCart'),
@@ -2834,7 +2806,7 @@ module.exports = function () {
 	});
 };
 
-},{"../../ajax":1,"../../progress":38,"../../storeinventory/product":46,"../../tooltip":47,"../../util":48,"./addToCart":24,"./image":26}],32:[function(require,module,exports){
+},{"../../ajax":2,"../../progress":37,"../../storeinventory/product":45,"../../tooltip":46,"../../util":47,"./addToCart":23,"./image":25}],31:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -2879,8 +2851,7 @@ function populateForm(addressID, $form) {
  * @description Initializes events for the gift registration
  */
 function initializeEvents() {
-	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
-		$eventAddressForm = $('form[name$="_giftregistry"]'),
+	var $eventAddressForm = $('form[name$="_giftregistry"]'),
 		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
 		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
 
@@ -2921,7 +2892,7 @@ exports.init = function () {
 	util.setDeleteConfirmation('.item-list', String.format(Resources.CONFIRM_DELETE, Resources.TITLE_GIFTREGISTRY));
 };
 
-},{"../ajax":1,"../quickview":39,"../util":48,"./product/addToCart":24}],33:[function(require,module,exports){
+},{"../ajax":2,"../quickview":38,"../util":47,"./product/addToCart":23}],32:[function(require,module,exports){
 'use strict';
 
 var compareWidget = require('../compare-widget'),
@@ -3111,7 +3082,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"../compare-widget":4,"../product-tile":37,"../progress":38,"../util":48}],34:[function(require,module,exports){
+},{"../compare-widget":4,"../product-tile":36,"../progress":37,"../util":47}],33:[function(require,module,exports){
 'use strict';
 exports.init = function () {
 	$('#homepage-slider')
@@ -3170,7 +3141,7 @@ exports.init = function () {
 		});
 };
 
-},{}],35:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 var dialog = require('../dialog');
 
@@ -3183,7 +3154,7 @@ exports.init = function () {
 	});
 };
 
-},{"../dialog":8}],36:[function(require,module,exports){
+},{"../dialog":8}],35:[function(require,module,exports){
 'use strict';
 
 var addProductToCart = require('./product/addToCart'),
@@ -3202,7 +3173,7 @@ exports.init = function () {
 	});
 };
 
-},{"../page":14,"../util":48,"./product/addToCart":24}],37:[function(require,module,exports){
+},{"../page":13,"../util":47,"./product/addToCart":23}],36:[function(require,module,exports){
 'use strict';
 
 var imagesLoaded = require('imagesloaded'),
@@ -3314,7 +3285,7 @@ exports.init = function () {
 	initializeEvents();
 };
 
-},{"./quickview":39,"imagesloaded":53}],38:[function(require,module,exports){
+},{"./quickview":38,"imagesloaded":52}],37:[function(require,module,exports){
 'use strict';
 
 var $loader;
@@ -3347,7 +3318,7 @@ var hide = function () {
 exports.show = show;
 exports.hide = hide;
 
-},{}],39:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 'use strict';
 
 var dialog = require('./dialog'),
@@ -3466,7 +3437,7 @@ var quickview = {
 
 module.exports = quickview;
 
-},{"./dialog":8,"./pages/product":27,"./util":48,"lodash":56}],40:[function(require,module,exports){
+},{"./dialog":8,"./pages/product":26,"./util":47,"lodash":55}],39:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3522,7 +3493,7 @@ module.exports = {
 	}
 };
 
-},{}],41:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -3548,7 +3519,7 @@ function initializeEvents() {
 
 exports.init = initializeEvents;
 
-},{}],42:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3721,7 +3692,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":48}],43:[function(require,module,exports){
+},{"./util":47}],42:[function(require,module,exports){
 'use strict';
 
 var util = require('./util');
@@ -3898,7 +3869,7 @@ var searchsuggest = {
 
 module.exports = searchsuggest;
 
-},{"./util":48}],44:[function(require,module,exports){
+},{"./util":47}],43:[function(require,module,exports){
 'use strict';
 
 var inventory = require('./');
@@ -3986,7 +3957,7 @@ var cartInventory = {
 
 module.exports = cartInventory;
 
-},{"./":45}],45:[function(require,module,exports){
+},{"./":44}],44:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4168,7 +4139,7 @@ var storeinventory = {
 
 module.exports = storeinventory;
 
-},{"../dialog":8,"../util":48,"lodash":56,"promise":57}],46:[function(require,module,exports){
+},{"../dialog":8,"../util":47,"lodash":55,"promise":56}],45:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash'),
@@ -4264,7 +4235,7 @@ var productInventory = {
 
 module.exports = productInventory;
 
-},{"./":45,"lodash":56}],47:[function(require,module,exports){
+},{"./":44,"lodash":55}],46:[function(require,module,exports){
 'use strict';
 
 /**
@@ -4290,9 +4261,7 @@ exports.init = function () {
 	});
 };
 
-},{}],48:[function(require,module,exports){
-/* global Countries */
-
+},{}],47:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -4533,7 +4502,7 @@ var util = {
 
 module.exports = util;
 
-},{"lodash":56}],49:[function(require,module,exports){
+},{"lodash":55}],48:[function(require,module,exports){
 'use strict';
 
 var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/,
@@ -4655,7 +4624,7 @@ var validator = {
 
 module.exports = validator;
 
-},{}],50:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 /*global define:false require:false */
 module.exports = (function(){
 	// Import Events
@@ -4723,7 +4692,7 @@ module.exports = (function(){
 	};
 	return domain
 }).call(this)
-},{"events":51}],51:[function(require,module,exports){
+},{"events":50}],50:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5026,7 +4995,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -5077,7 +5046,7 @@ process.nextTick = function (fun) {
         }
     }
     queue.push(new Item(fun, args));
-    if (!draining) {
+    if (queue.length === 1 && !draining) {
         setTimeout(drainQueue, 0);
     }
 };
@@ -5118,7 +5087,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],53:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -5455,7 +5424,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":54,"wolfy87-eventemitter":55}],54:[function(require,module,exports){
+},{"eventie":53,"wolfy87-eventemitter":54}],53:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -5539,7 +5508,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],55:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -6013,11 +5982,11 @@ if ( typeof define === 'function' && define.amd ) {
     }
 }.call(this));
 
-},{}],56:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 (function (global){
 /**
  * @license
- * lodash 3.8.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.9.3 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern -d -o ./index.js`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -6030,7 +5999,7 @@ if ( typeof define === 'function' && define.amd ) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '3.8.0';
+  var VERSION = '3.9.3';
 
   /** Used to compose bitmasks for wrapper metadata. */
   var BIND_FLAG = 1,
@@ -6135,6 +6104,9 @@ if ( typeof define === 'function' && define.amd ) {
   /** Used to detect host constructors (Safari > 5). */
   var reIsHostCtor = /^\[object .+?Constructor\]$/;
 
+  /** Used to detect unsigned integer values. */
+  var reIsUint = /^\d+$/;
+
   /** Used to match latin-1 supplementary letters (excluding mathematical operators). */
   var reLatin1 = /[\xc0-\xd6\xd8-\xde\xdf-\xf6\xf8-\xff]/g;
 
@@ -6169,9 +6141,8 @@ if ( typeof define === 'function' && define.amd ) {
     'Array', 'ArrayBuffer', 'Date', 'Error', 'Float32Array', 'Float64Array',
     'Function', 'Int8Array', 'Int16Array', 'Int32Array', 'Math', 'Number',
     'Object', 'RegExp', 'Set', 'String', '_', 'clearTimeout', 'document',
-    'isFinite', 'parseInt', 'setTimeout', 'TypeError', 'Uint8Array',
-    'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap',
-    'window'
+    'isFinite', 'parseFloat', 'parseInt', 'setTimeout', 'TypeError', 'Uint8Array',
+    'Uint8ClampedArray', 'Uint16Array', 'Uint32Array', 'WeakMap', 'window'
   ];
 
   /** Used to make template sourceURLs easier to identify. */
@@ -6292,29 +6263,40 @@ if ( typeof define === 'function' && define.amd ) {
   /**
    * Used as a reference to the global object.
    *
-   * The `this` value is used if it is the global object to avoid Greasemonkey's
+   * The `this` value is used if it's the global object to avoid Greasemonkey's
    * restricted `window` object, otherwise the `window` object is used.
    */
   var root = freeGlobal || ((freeWindow !== (this && this.window)) && freeWindow) || freeSelf || this;
+
+  /*--------------------------------------------------------------------------*/
 
   /**
    * The base implementation of `compareAscending` which compares values and
    * sorts them in ascending order without guaranteeing a stable sort.
    *
    * @private
-   * @param {*} value The value to compare to `other`.
-   * @param {*} other The value to compare to `value`.
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
    * @returns {number} Returns the sort order indicator for `value`.
    */
   function baseCompareAscending(value, other) {
     if (value !== other) {
-      var valIsReflexive = value === value,
+      var valIsNull = value === null,
+          valIsUndef = value === undefined,
+          valIsReflexive = value === value;
+
+      var othIsNull = other === null,
+          othIsUndef = other === undefined,
           othIsReflexive = other === other;
 
-      if (value > other || !valIsReflexive || (value === undefined && othIsReflexive)) {
+      if ((value > other && !othIsNull) || !valIsReflexive ||
+          (valIsNull && !othIsUndef && othIsReflexive) ||
+          (valIsUndef && othIsReflexive)) {
         return 1;
       }
-      if (value < other || !othIsReflexive || (other === undefined && valIsReflexive)) {
+      if ((value < other && !valIsNull) || !othIsReflexive ||
+          (othIsNull && !valIsUndef && valIsReflexive) ||
+          (othIsUndef && valIsReflexive)) {
         return -1;
       }
     }
@@ -6382,7 +6364,7 @@ if ( typeof define === 'function' && define.amd ) {
   }
 
   /**
-   * Converts `value` to a string if it is not one. An empty string is returned
+   * Converts `value` to a string if it's not one. An empty string is returned
    * for `null` or `undefined` values.
    *
    * @private
@@ -6394,17 +6376,6 @@ if ( typeof define === 'function' && define.amd ) {
       return value;
     }
     return value == null ? '' : (value + '');
-  }
-
-  /**
-   * Used by `_.max` and `_.min` as the default callback for string values.
-   *
-   * @private
-   * @param {string} string The string to inspect.
-   * @returns {number} Returns the code unit of the first character of the string.
-   */
-  function charAtCallback(string) {
-    return string.charCodeAt(0);
   }
 
   /**
@@ -6667,6 +6638,8 @@ if ( typeof define === 'function' && define.amd ) {
     return htmlUnescapes[chr];
   }
 
+  /*--------------------------------------------------------------------------*/
+
   /**
    * Create a new pristine `lodash` function using the given `context` object.
    *
@@ -6727,7 +6700,7 @@ if ( typeof define === 'function' && define.amd ) {
         stringProto = String.prototype;
 
     /** Used to detect DOM support. */
-    var document = (document = context.window) && document.document;
+    var document = (document = context.window) ? document.document : null;
 
     /** Used to resolve the decompiled source of functions. */
     var fnToString = Function.prototype.toString;
@@ -6749,26 +6722,24 @@ if ( typeof define === 'function' && define.amd ) {
 
     /** Used to detect if a method is native. */
     var reIsNative = RegExp('^' +
-      escapeRegExp(objToString)
-      .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+      escapeRegExp(fnToString.call(hasOwnProperty))
+      .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
     );
 
     /** Native method references. */
-    var ArrayBuffer = isNative(ArrayBuffer = context.ArrayBuffer) && ArrayBuffer,
-        bufferSlice = isNative(bufferSlice = ArrayBuffer && new ArrayBuffer(0).slice) && bufferSlice,
+    var ArrayBuffer = getNative(context, 'ArrayBuffer'),
+        bufferSlice = getNative(ArrayBuffer && new ArrayBuffer(0), 'slice'),
         ceil = Math.ceil,
         clearTimeout = context.clearTimeout,
         floor = Math.floor,
-        getOwnPropertySymbols = isNative(getOwnPropertySymbols = Object.getOwnPropertySymbols) && getOwnPropertySymbols,
-        getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf,
+        getPrototypeOf = getNative(Object, 'getPrototypeOf'),
+        parseFloat = context.parseFloat,
         push = arrayProto.push,
-        preventExtensions = isNative(preventExtensions = Object.preventExtensions) && preventExtensions,
-        propertyIsEnumerable = objectProto.propertyIsEnumerable,
-        Set = isNative(Set = context.Set) && Set,
+        Set = getNative(context, 'Set'),
         setTimeout = context.setTimeout,
         splice = arrayProto.splice,
-        Uint8Array = isNative(Uint8Array = context.Uint8Array) && Uint8Array,
-        WeakMap = isNative(WeakMap = context.WeakMap) && WeakMap;
+        Uint8Array = getNative(context, 'Uint8Array'),
+        WeakMap = getNative(context, 'WeakMap');
 
     /** Used to clone array buffers. */
     var Float64Array = (function() {
@@ -6776,44 +6747,21 @@ if ( typeof define === 'function' && define.amd ) {
       // where the array buffer's `byteLength` is not a multiple of the typed
       // array's `BYTES_PER_ELEMENT`.
       try {
-        var func = isNative(func = context.Float64Array) && func,
+        var func = getNative(context, 'Float64Array'),
             result = new func(new ArrayBuffer(10), 0, 1) && func;
       } catch(e) {}
-      return result;
-    }());
-
-    /** Used as `baseAssign`. */
-    var nativeAssign = (function() {
-      // Avoid `Object.assign` in Firefox 34-37 which have an early implementation
-      // with a now defunct try/catch behavior. See https://bugzilla.mozilla.org/show_bug.cgi?id=1103344
-      // for more details.
-      //
-      // Use `Object.preventExtensions` on a plain object instead of simply using
-      // `Object('x')` because Chrome and IE fail to throw an error when attempting
-      // to assign values to readonly indexes of strings.
-      var func = preventExtensions && isNative(func = Object.assign) && func;
-      try {
-        if (func) {
-          var object = preventExtensions({ '1': 0 });
-          object[0] = 1;
-        }
-      } catch(e) {
-        // Only attempt in strict mode.
-        try { func(object, 'xo'); } catch(e) {}
-        return !object[1] && func;
-      }
-      return false;
+      return result || null;
     }());
 
     /* Native method references for those with the same name as other `lodash` methods. */
-    var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray,
-        nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate,
+    var nativeCreate = getNative(Object, 'create'),
+        nativeIsArray = getNative(Array, 'isArray'),
         nativeIsFinite = context.isFinite,
-        nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys,
+        nativeKeys = getNative(Object, 'keys'),
         nativeMax = Math.max,
         nativeMin = Math.min,
-        nativeNow = isNative(nativeNow = Date.now) && nativeNow,
-        nativeNumIsFinite = isNative(nativeNumIsFinite = Number.isFinite) && nativeNumIsFinite,
+        nativeNow = getNative(Date, 'now'),
+        nativeNumIsFinite = getNative(Number, 'isFinite'),
         nativeParseInt = context.parseInt,
         nativeRandom = Math.random;
 
@@ -6822,7 +6770,7 @@ if ( typeof define === 'function' && define.amd ) {
         POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
 
     /** Used as references for the maximum length and index of an array. */
-    var MAX_ARRAY_LENGTH = Math.pow(2, 32) - 1,
+    var MAX_ARRAY_LENGTH = 4294967295,
         MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1,
         HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
 
@@ -6833,13 +6781,15 @@ if ( typeof define === 'function' && define.amd ) {
      * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
      * of an array-like value.
      */
-    var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+    var MAX_SAFE_INTEGER = 9007199254740991;
 
     /** Used to store function metadata. */
     var metaMap = WeakMap && new WeakMap;
 
     /** Used to lookup unminified function names. */
     var realNames = {};
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Creates a `lodash` object which wraps `value` to enable implicit chaining.
@@ -6880,30 +6830,31 @@ if ( typeof define === 'function' && define.amd ) {
      * `filter`, `flatten`, `flattenDeep`, `flow`, `flowRight`, `forEach`,
      * `forEachRight`, `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `functions`,
      * `groupBy`, `indexBy`, `initial`, `intersection`, `invert`, `invoke`, `keys`,
-     * `keysIn`, `map`, `mapValues`, `matches`, `matchesProperty`, `memoize`,
-     * `merge`, `mixin`, `negate`, `omit`, `once`, `pairs`, `partial`, `partialRight`,
-     * `partition`, `pick`, `plant`, `pluck`, `property`, `propertyOf`, `pull`,
-     * `pullAt`, `push`, `range`, `rearg`, `reject`, `remove`, `rest`, `reverse`,
-     * `shuffle`, `slice`, `sort`, `sortBy`, `sortByAll`, `sortByOrder`, `splice`,
-     * `spread`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, `tap`,
-     * `throttle`, `thru`, `times`, `toArray`, `toPlainObject`, `transform`,
-     * `union`, `uniq`, `unshift`, `unzip`, `values`, `valuesIn`, `where`,
-     * `without`, `wrap`, `xor`, `zip`, and `zipObject`
+     * `keysIn`, `map`, `mapKeys`, `mapValues`, `matches`, `matchesProperty`,
+     * `memoize`, `merge`, `method`, `methodOf`, `mixin`, `negate`, `omit`, `once`,
+     * `pairs`, `partial`, `partialRight`, `partition`, `pick`, `plant`, `pluck`,
+     * `property`, `propertyOf`, `pull`, `pullAt`, `push`, `range`, `rearg`,
+     * `reject`, `remove`, `rest`, `restParam`, `reverse`, `set`, `shuffle`,
+     * `slice`, `sort`, `sortBy`, `sortByAll`, `sortByOrder`, `splice`, `spread`,
+     * `take`, `takeRight`, `takeRightWhile`, `takeWhile`, `tap`, `throttle`,
+     * `thru`, `times`, `toArray`, `toPlainObject`, `transform`, `union`, `uniq`,
+     * `unshift`, `unzip`, `unzipWith`, `values`, `valuesIn`, `where`, `without`,
+     * `wrap`, `xor`, `zip`, `zipObject`, `zipWith`
      *
      * The wrapper methods that are **not** chainable by default are:
      * `add`, `attempt`, `camelCase`, `capitalize`, `clone`, `cloneDeep`, `deburr`,
      * `endsWith`, `escape`, `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`,
-     * `findLast`, `findLastIndex`, `findLastKey`, `findWhere`, `first`, `has`,
-     * `identity`, `includes`, `indexOf`, `inRange`, `isArguments`, `isArray`,
-     * `isBoolean`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isError`, `isFinite`
-     * `isFunction`, `isMatch`, `isNative`, `isNaN`, `isNull`, `isNumber`, `isObject`,
-     * `isPlainObject`, `isRegExp`, `isString`, `isUndefined`, `isTypedArray`,
-     * `join`, `kebabCase`, `last`, `lastIndexOf`, `max`, `min`, `noConflict`,
-     * `noop`, `now`, `pad`, `padLeft`, `padRight`, `parseInt`, `pop`, `random`,
-     * `reduce`, `reduceRight`, `repeat`, `result`, `runInContext`, `shift`, `size`,
-     * `snakeCase`, `some`, `sortedIndex`, `sortedLastIndex`, `startCase`, `startsWith`,
-     * `sum`, `template`, `trim`, `trimLeft`, `trimRight`, `trunc`, `unescape`,
-     * `uniqueId`, `value`, and `words`
+     * `findLast`, `findLastIndex`, `findLastKey`, `findWhere`, `first`, `get`,
+     * `gt`, `gte`, `has`, `identity`, `includes`, `indexOf`, `inRange`, `isArguments`,
+     * `isArray`, `isBoolean`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isError`,
+     * `isFinite` `isFunction`, `isMatch`, `isNative`, `isNaN`, `isNull`, `isNumber`,
+     * `isObject`, `isPlainObject`, `isRegExp`, `isString`, `isUndefined`,
+     * `isTypedArray`, `join`, `kebabCase`, `last`, `lastIndexOf`, `lt`, `lte`,
+     * `max`, `min`, `noConflict`, `noop`, `now`, `pad`, `padLeft`, `padRight`,
+     * `parseInt`, `pop`, `random`, `reduce`, `reduceRight`, `repeat`, `result`,
+     * `runInContext`, `shift`, `size`, `snakeCase`, `some`, `sortedIndex`,
+     * `sortedLastIndex`, `startCase`, `startsWith`, `sum`, `template`, `trim`,
+     * `trimLeft`, `trimRight`, `trunc`, `unescape`, `uniqueId`, `value`, and `words`
      *
      * The wrapper method `sample` will return a wrapped value when `n` is provided,
      * otherwise an unwrapped value is returned.
@@ -6980,30 +6931,11 @@ if ( typeof define === 'function' && define.amd ) {
 
     (function(x) {
       var Ctor = function() { this.x = x; },
-          args = arguments,
           object = { '0': x, 'length': x },
           props = [];
 
       Ctor.prototype = { 'valueOf': x, 'y': x };
       for (var key in new Ctor) { props.push(key); }
-
-      /**
-       * Detect if functions can be decompiled by `Function#toString`
-       * (all but Firefox OS certified apps, older Opera mobile browsers, and
-       * the PlayStation 3; forced `false` for Windows 8 apps).
-       *
-       * @memberOf _.support
-       * @type boolean
-       */
-      support.funcDecomp = /\bthis\b/.test(function() { return this; });
-
-      /**
-       * Detect if `Function#name` is supported (all but IE).
-       *
-       * @memberOf _.support
-       * @type boolean
-       */
-      support.funcNames = typeof Function.name == 'string';
 
       /**
        * Detect if the DOM is supported.
@@ -7015,24 +6947,6 @@ if ( typeof define === 'function' && define.amd ) {
         support.dom = document.createDocumentFragment().nodeType === 11;
       } catch(e) {
         support.dom = false;
-      }
-
-      /**
-       * Detect if `arguments` object indexes are non-enumerable.
-       *
-       * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
-       * indexes are non-enumerable. Chrome < 25 and Node.js < 0.11.0 treat
-       * `arguments` object indexes as non-enumerable and fail `hasOwnProperty`
-       * checks for indexes that exceed the number of function parameters and
-       * whose associated argument values are `0`.
-       *
-       * @memberOf _.support
-       * @type boolean
-       */
-      try {
-        support.nonEnumArgs = !propertyIsEnumerable.call(args, 1);
-      } catch(e) {
-        support.nonEnumArgs = true;
       }
     }(1, 0));
 
@@ -7096,6 +7010,8 @@ if ( typeof define === 'function' && define.amd ) {
         '_': lodash
       }
     };
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Creates a lazy wrapper object which wraps `value` to enable lazy evaluation.
@@ -7225,6 +7141,8 @@ if ( typeof define === 'function' && define.amd ) {
       return result;
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Creates a cache object to store key/value pairs.
      *
@@ -7293,6 +7211,8 @@ if ( typeof define === 'function' && define.amd ) {
       return this;
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      *
      * Creates a cache object to store unique values.
@@ -7341,6 +7261,8 @@ if ( typeof define === 'function' && define.amd ) {
         data.hash[value] = true;
       }
     }
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Copies the values of `source` to `array`.
@@ -7425,6 +7347,35 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
+     * A specialized version of `baseExtremum` for arrays which invokes `iteratee`
+     * with one argument: (value).
+     *
+     * @private
+     * @param {Array} array The array to iterate over.
+     * @param {Function} iteratee The function invoked per iteration.
+     * @param {Function} comparator The function used to compare values.
+     * @param {*} exValue The initial extremum value.
+     * @returns {*} Returns the extremum value.
+     */
+    function arrayExtremum(array, iteratee, comparator, exValue) {
+      var index = -1,
+          length = array.length,
+          computed = exValue,
+          result = computed;
+
+      while (++index < length) {
+        var value = array[index],
+            current = +iteratee(value);
+
+        if (comparator(current, computed)) {
+          computed = current;
+          result = value;
+        }
+      }
+      return result;
+    }
+
+    /**
      * A specialized version of `_.filter` for arrays without support for callback
      * shorthands and `this` binding.
      *
@@ -7464,48 +7415,6 @@ if ( typeof define === 'function' && define.amd ) {
 
       while (++index < length) {
         result[index] = iteratee(array[index], index, array);
-      }
-      return result;
-    }
-
-    /**
-     * A specialized version of `_.max` for arrays without support for iteratees.
-     *
-     * @private
-     * @param {Array} array The array to iterate over.
-     * @returns {*} Returns the maximum value.
-     */
-    function arrayMax(array) {
-      var index = -1,
-          length = array.length,
-          result = NEGATIVE_INFINITY;
-
-      while (++index < length) {
-        var value = array[index];
-        if (value > result) {
-          result = value;
-        }
-      }
-      return result;
-    }
-
-    /**
-     * A specialized version of `_.min` for arrays without support for iteratees.
-     *
-     * @private
-     * @param {Array} array The array to iterate over.
-     * @returns {*} Returns the minimum value.
-     */
-    function arrayMin(array) {
-      var index = -1,
-          length = array.length,
-          result = POSITIVE_INFINITY;
-
-      while (++index < length) {
-        var value = array[index];
-        if (value < result) {
-          result = value;
-        }
       }
       return result;
     }
@@ -7640,10 +7549,8 @@ if ( typeof define === 'function' && define.amd ) {
      * @returns {Object} Returns `object`.
      */
     function assignWith(object, source, customizer) {
-      var props = keys(source);
-      push.apply(props, getSymbols(source));
-
       var index = -1,
+          props = keys(source),
           length = props.length;
 
       while (++index < length) {
@@ -7668,11 +7575,11 @@ if ( typeof define === 'function' && define.amd ) {
      * @param {Object} source The source object.
      * @returns {Object} Returns `object`.
      */
-    var baseAssign = nativeAssign || function(object, source) {
+    function baseAssign(object, source) {
       return source == null
         ? object
-        : baseCopy(source, getSymbols(source), baseCopy(source, keys(source), object));
-    };
+        : baseCopy(source, keys(source), object);
+    }
 
     /**
      * The base implementation of `_.at` without support for string collections
@@ -7687,7 +7594,7 @@ if ( typeof define === 'function' && define.amd ) {
       var index = -1,
           isNil = collection == null,
           isArr = !isNil && isArrayLike(collection),
-          length = isArr && collection.length,
+          length = isArr ? collection.length : 0,
           propsLength = props.length,
           result = Array(propsLength);
 
@@ -7828,14 +7735,14 @@ if ( typeof define === 'function' && define.amd ) {
      * @returns {Object} Returns the new object.
      */
     var baseCreate = (function() {
-      function Object() {}
+      function object() {}
       return function(prototype) {
         if (isObject(prototype)) {
-          Object.prototype = prototype;
-          var result = new Object;
-          Object.prototype = null;
+          object.prototype = prototype;
+          var result = new object;
+          object.prototype = null;
         }
-        return result || context.Object();
+        return result || {};
       };
     }());
 
@@ -7940,6 +7847,32 @@ if ( typeof define === 'function' && define.amd ) {
       baseEach(collection, function(value, index, collection) {
         result = !!predicate(value, index, collection);
         return result;
+      });
+      return result;
+    }
+
+    /**
+     * Gets the extremum value of `collection` invoking `iteratee` for each value
+     * in `collection` to generate the criterion by which the value is ranked.
+     * The `iteratee` is invoked with three arguments: (value, index|key, collection).
+     *
+     * @private
+     * @param {Array|Object|string} collection The collection to iterate over.
+     * @param {Function} iteratee The function invoked per iteration.
+     * @param {Function} comparator The function used to compare values.
+     * @param {*} exValue The initial extremum value.
+     * @returns {*} Returns the extremum value.
+     */
+    function baseExtremum(collection, iteratee, comparator, exValue) {
+      var computed = exValue,
+          result = computed;
+
+      baseEach(collection, function(value, index, collection) {
+        var current = +iteratee(value, index, collection);
+        if (comparator(current, computed) || (current === exValue && current === result)) {
+          computed = current;
+          result = value;
+        }
       });
       return result;
     }
@@ -8160,11 +8093,11 @@ if ( typeof define === 'function' && define.amd ) {
       if (pathKey !== undefined && pathKey in toObject(object)) {
         path = [pathKey];
       }
-      var index = -1,
+      var index = 0,
           length = path.length;
 
-      while (object != null && ++index < length) {
-        object = object[path[index]];
+      while (object != null && index < length) {
+        object = object[path[index++]];
       }
       return (index && index == length) ? object : undefined;
     }
@@ -8183,17 +8116,10 @@ if ( typeof define === 'function' && define.amd ) {
      * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
      */
     function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
-      // Exit early for identical values.
       if (value === other) {
         return true;
       }
-      var valType = typeof value,
-          othType = typeof other;
-
-      // Exit early for unlike primitive values.
-      if ((valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object') ||
-          value == null || other == null) {
-        // Return `false` unless both values are `NaN`.
+      if (value == null || other == null || (!isObject(value) && !isObjectLike(other))) {
         return value !== value && other !== other;
       }
       return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
@@ -8244,11 +8170,11 @@ if ( typeof define === 'function' && define.amd ) {
         return equalByTag(object, other, objTag);
       }
       if (!isLoose) {
-        var valWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-            othWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+        var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+            othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
 
-        if (valWrapped || othWrapped) {
-          return equalFunc(valWrapped ? object.value() : object, othWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
+        if (objIsWrapped || othIsWrapped) {
+          return equalFunc(objIsWrapped ? object.value() : object, othIsWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
         }
       }
       if (!isSameTag) {
@@ -8283,41 +8209,43 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @private
      * @param {Object} object The object to inspect.
-     * @param {Array} props The source property names to match.
-     * @param {Array} values The source values to match.
-     * @param {Array} strictCompareFlags Strict comparison flags for source values.
+     * @param {Array} matchData The propery names, values, and compare flags to match.
      * @param {Function} [customizer] The function to customize comparing objects.
      * @returns {boolean} Returns `true` if `object` is a match, else `false`.
      */
-    function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
-      var index = -1,
-          length = props.length,
+    function baseIsMatch(object, matchData, customizer) {
+      var index = matchData.length,
+          length = index,
           noCustomizer = !customizer;
 
-      while (++index < length) {
-        if ((noCustomizer && strictCompareFlags[index])
-              ? values[index] !== object[props[index]]
-              : !(props[index] in object)
+      if (object == null) {
+        return !length;
+      }
+      object = toObject(object);
+      while (index--) {
+        var data = matchData[index];
+        if ((noCustomizer && data[2])
+              ? data[1] !== object[data[0]]
+              : !(data[0] in object)
             ) {
           return false;
         }
       }
-      index = -1;
       while (++index < length) {
-        var key = props[index],
+        data = matchData[index];
+        var key = data[0],
             objValue = object[key],
-            srcValue = values[index];
+            srcValue = data[1];
 
-        if (noCustomizer && strictCompareFlags[index]) {
-          var result = objValue !== undefined || (key in object);
-        } else {
-          result = customizer ? customizer(objValue, srcValue, key) : undefined;
-          if (result === undefined) {
-            result = baseIsEqual(srcValue, objValue, customizer, true);
+        if (noCustomizer && data[2]) {
+          if (objValue === undefined && !(key in object)) {
+            return false;
           }
-        }
-        if (!result) {
-          return false;
+        } else {
+          var result = customizer ? customizer(objValue, srcValue, key) : undefined;
+          if (!(result === undefined ? baseIsEqual(srcValue, objValue, customizer, true) : result)) {
+            return false;
+          }
         }
       }
       return true;
@@ -8350,50 +8278,34 @@ if ( typeof define === 'function' && define.amd ) {
      * @returns {Function} Returns the new function.
      */
     function baseMatches(source) {
-      var props = keys(source),
-          length = props.length;
+      var matchData = getMatchData(source);
+      if (matchData.length == 1 && matchData[0][2]) {
+        var key = matchData[0][0],
+            value = matchData[0][1];
 
-      if (!length) {
-        return constant(true);
-      }
-      if (length == 1) {
-        var key = props[0],
-            value = source[key];
-
-        if (isStrictComparable(value)) {
-          return function(object) {
-            if (object == null) {
-              return false;
-            }
-            return object[key] === value && (value !== undefined || (key in toObject(object)));
-          };
-        }
-      }
-      var values = Array(length),
-          strictCompareFlags = Array(length);
-
-      while (length--) {
-        value = source[props[length]];
-        values[length] = value;
-        strictCompareFlags[length] = isStrictComparable(value);
+        return function(object) {
+          if (object == null) {
+            return false;
+          }
+          return object[key] === value && (value !== undefined || (key in toObject(object)));
+        };
       }
       return function(object) {
-        return object != null && baseIsMatch(toObject(object), props, values, strictCompareFlags);
+        return baseIsMatch(object, matchData);
       };
     }
 
     /**
-     * The base implementation of `_.matchesProperty` which does not which does
-     * not clone `value`.
+     * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
      *
      * @private
      * @param {string} path The path of the property to get.
-     * @param {*} value The value to compare.
+     * @param {*} srcValue The value to compare.
      * @returns {Function} Returns the new function.
      */
-    function baseMatchesProperty(path, value) {
+    function baseMatchesProperty(path, srcValue) {
       var isArr = isArray(path),
-          isCommon = isKey(path) && isStrictComparable(value),
+          isCommon = isKey(path) && isStrictComparable(srcValue),
           pathKey = (path + '');
 
       path = toPath(path);
@@ -8411,9 +8323,9 @@ if ( typeof define === 'function' && define.amd ) {
           key = last(path);
           object = toObject(object);
         }
-        return object[key] === value
-          ? (value !== undefined || (key in object))
-          : baseIsEqual(value, object[key], null, true);
+        return object[key] === srcValue
+          ? (srcValue !== undefined || (key in object))
+          : baseIsEqual(srcValue, object[key], undefined, true);
       };
     }
 
@@ -8433,11 +8345,9 @@ if ( typeof define === 'function' && define.amd ) {
       if (!isObject(object)) {
         return object;
       }
-      var isSrcArr = isArrayLike(source) && (isArray(source) || isTypedArray(source));
-      if (!isSrcArr) {
-        var props = keys(source);
-        push.apply(props, getSymbols(source));
-      }
+      var isSrcArr = isArrayLike(source) && (isArray(source) || isTypedArray(source)),
+          props = isSrcArr ? null : keys(source);
+
       arrayEach(props || source, function(srcValue, key) {
         if (props) {
           key = srcValue;
@@ -8456,7 +8366,7 @@ if ( typeof define === 'function' && define.amd ) {
           if (isCommon) {
             result = srcValue;
           }
-          if ((isSrcArr || result !== undefined) &&
+          if ((result !== undefined || (isSrcArr && !(key in object))) &&
               (isCommon || (result === result ? (result !== value) : (value === value)))) {
             object[key] = result;
           }
@@ -8563,7 +8473,7 @@ if ( typeof define === 'function' && define.amd ) {
     function basePullAt(array, indexes) {
       var length = array ? indexes.length : 0;
       while (length--) {
-        var index = parseFloat(indexes[length]);
+        var index = indexes[length];
         if (index != previous && isIndex(index)) {
           var previous = index;
           splice.call(array, index, 1);
@@ -8876,7 +8786,7 @@ if ( typeof define === 'function' && define.amd ) {
           var mid = (low + high) >>> 1,
               computed = array[mid];
 
-          if (retHighest ? (computed <= value) : (computed < value)) {
+          if ((retHighest ? (computed <= value) : (computed < value)) && computed !== null) {
             low = mid + 1;
           } else {
             high = mid;
@@ -8906,17 +8816,23 @@ if ( typeof define === 'function' && define.amd ) {
       var low = 0,
           high = array ? array.length : 0,
           valIsNaN = value !== value,
+          valIsNull = value === null,
           valIsUndef = value === undefined;
 
       while (low < high) {
         var mid = floor((low + high) / 2),
             computed = iteratee(array[mid]),
+            isDef = computed !== undefined,
             isReflexive = computed === computed;
 
         if (valIsNaN) {
           var setLow = isReflexive || retHighest;
+        } else if (valIsNull) {
+          setLow = isReflexive && isDef && (retHighest || computed != null);
         } else if (valIsUndef) {
-          setLow = isReflexive && (retHighest || computed !== undefined);
+          setLow = isReflexive && (retHighest || isDef);
+        } else if (computed == null) {
+          setLow = false;
         } else {
           setLow = retHighest ? (computed <= value) : (computed < value);
         }
@@ -9106,19 +9022,19 @@ if ( typeof define === 'function' && define.amd ) {
       return restParam(function(object, sources) {
         var index = -1,
             length = object == null ? 0 : sources.length,
-            customizer = length > 2 && sources[length - 2],
-            guard = length > 2 && sources[2],
-            thisArg = length > 1 && sources[length - 1];
+            customizer = length > 2 ? sources[length - 2] : undefined,
+            guard = length > 2 ? sources[2] : undefined,
+            thisArg = length > 1 ? sources[length - 1] : undefined;
 
         if (typeof customizer == 'function') {
           customizer = bindCallback(customizer, thisArg, 5);
           length -= 2;
         } else {
-          customizer = typeof thisArg == 'function' ? thisArg : null;
+          customizer = typeof thisArg == 'function' ? thisArg : undefined;
           length -= (customizer ? 1 : 0);
         }
         if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-          customizer = length < 3 ? null : customizer;
+          customizer = length < 3 ? undefined : customizer;
           length = 1;
         }
         while (++index < length) {
@@ -9243,8 +9159,20 @@ if ( typeof define === 'function' && define.amd ) {
      */
     function createCtorWrapper(Ctor) {
       return function() {
+        // Use a `switch` statement to work with class constructors.
+        // See https://people.mozilla.org/~jorendorff/es6-draft.html#sec-ecmascript-function-objects-call-thisargument-argumentslist
+        // for more details.
+        var args = arguments;
+        switch (args.length) {
+          case 0: return new Ctor;
+          case 1: return new Ctor(args[0]);
+          case 2: return new Ctor(args[0], args[1]);
+          case 3: return new Ctor(args[0], args[1], args[2]);
+          case 4: return new Ctor(args[0], args[1], args[2], args[3]);
+          case 5: return new Ctor(args[0], args[1], args[2], args[3], args[4]);
+        }
         var thisBinding = baseCreate(Ctor.prototype),
-            result = Ctor.apply(thisBinding, arguments);
+            result = Ctor.apply(thisBinding, args);
 
         // Mimic the constructor's `return` behavior.
         // See https://es5.github.io/#x13.2.2 for more details.
@@ -9275,32 +9203,24 @@ if ( typeof define === 'function' && define.amd ) {
      * Creates a `_.max` or `_.min` function.
      *
      * @private
-     * @param {Function} arrayFunc The function to get the extremum value from an array.
-     * @param {boolean} [isMin] Specify returning the minimum, instead of the maximum,
-     *  extremum value.
+     * @param {Function} comparator The function used to compare values.
+     * @param {*} exValue The initial extremum value.
      * @returns {Function} Returns the new extremum function.
      */
-    function createExtremum(arrayFunc, isMin) {
+    function createExtremum(comparator, exValue) {
       return function(collection, iteratee, thisArg) {
         if (thisArg && isIterateeCall(collection, iteratee, thisArg)) {
           iteratee = null;
         }
-        var func = getCallback(),
-            noIteratee = iteratee == null;
-
-        if (!(func === baseCallback && noIteratee)) {
-          noIteratee = false;
-          iteratee = func(iteratee, thisArg, 3);
-        }
-        if (noIteratee) {
-          var isArr = isArray(collection);
-          if (!isArr && isString(collection)) {
-            iteratee = charAtCallback;
-          } else {
-            return arrayFunc(isArr ? collection : toIterable(collection));
+        iteratee = getCallback(iteratee, thisArg, 3);
+        if (iteratee.length == 1) {
+          collection = toIterable(collection);
+          var result = arrayExtremum(collection, iteratee, comparator, exValue);
+          if (!(collection.length && result === exValue)) {
+            return result;
           }
         }
-        return extremumBy(collection, iteratee, isMin);
+        return baseExtremum(collection, iteratee, comparator, exValue);
       };
     }
 
@@ -9363,11 +9283,8 @@ if ( typeof define === 'function' && define.amd ) {
      */
     function createFlow(fromRight) {
       return function() {
-        var length = arguments.length;
-        if (!length) {
-          return function() { return arguments[0]; };
-        }
         var wrapper,
+            length = arguments.length,
             index = fromRight ? length : -1,
             leftIndex = 0,
             funcs = Array(length);
@@ -9377,15 +9294,17 @@ if ( typeof define === 'function' && define.amd ) {
           if (typeof func != 'function') {
             throw new TypeError(FUNC_ERROR_TEXT);
           }
-          var funcName = wrapper ? '' : getFuncName(func);
-          wrapper = funcName == 'wrapper' ? new LodashWrapper([]) : wrapper;
+          if (!wrapper && LodashWrapper.prototype.thru && getFuncName(func) == 'wrapper') {
+            wrapper = new LodashWrapper([]);
+          }
         }
         index = wrapper ? -1 : length;
         while (++index < length) {
           func = funcs[index];
-          funcName = getFuncName(func);
 
-          var data = funcName == 'wrapper' ? getData(func) : null;
+          var funcName = getFuncName(func),
+              data = funcName == 'wrapper' ? getData(func) : null;
+
           if (data && isLaziable(data[0]) && data[1] == (ARY_FLAG | CURRY_FLAG | PARTIAL_FLAG | REARG_FLAG) && !data[4].length && data[9] == 1) {
             wrapper = wrapper[getFuncName(data[0])].apply(wrapper, data[3]);
           } else {
@@ -9398,7 +9317,7 @@ if ( typeof define === 'function' && define.amd ) {
             return wrapper.plant(args[0]).value();
           }
           var index = 0,
-              result = funcs[index].apply(this, args);
+              result = length ? funcs[index].apply(this, args) : args[0];
 
           while (++index < length) {
             result = funcs[index].call(this, result);
@@ -9547,10 +9466,8 @@ if ( typeof define === 'function' && define.amd ) {
           isBindKey = bitmask & BIND_KEY_FLAG,
           isCurry = bitmask & CURRY_FLAG,
           isCurryBound = bitmask & CURRY_BOUND_FLAG,
-          isCurryRight = bitmask & CURRY_RIGHT_FLAG;
-
-      var Ctor = !isBindKey && createCtorWrapper(func),
-          key = func;
+          isCurryRight = bitmask & CURRY_RIGHT_FLAG,
+          Ctor = isBindKey ? null : createCtorWrapper(func);
 
       function wrapper() {
         // Avoid `arguments` object use disqualifying optimizations by
@@ -9597,17 +9514,18 @@ if ( typeof define === 'function' && define.amd ) {
             return result;
           }
         }
-        var thisBinding = isBind ? thisArg : this;
-        if (isBindKey) {
-          func = thisBinding[key];
-        }
+        var thisBinding = isBind ? thisArg : this,
+            fn = isBindKey ? thisBinding[func] : func;
+
         if (argPos) {
           args = reorder(args, argPos);
         }
         if (isAry && ary < args.length) {
           args.length = ary;
         }
-        var fn = (this && this !== root && this instanceof wrapper) ? (Ctor || createCtorWrapper(func)) : func;
+        if (this && this !== root && this instanceof wrapper) {
+          fn = Ctor || createCtorWrapper(func);
+        }
         return fn.apply(thisBinding, args);
       }
       return wrapper;
@@ -9681,10 +9599,10 @@ if ( typeof define === 'function' && define.amd ) {
      */
     function createSortedIndex(retHighest) {
       return function(array, value, iteratee, thisArg) {
-        var func = getCallback(iteratee);
-        return (func === baseCallback && iteratee == null)
+        var callback = getCallback(iteratee);
+        return (iteratee == null && callback === baseCallback)
           ? binaryIndex(array, value, retHighest)
-          : binaryIndexBy(array, value, func(iteratee, thisArg, 1), retHighest);
+          : binaryIndexBy(array, value, callback(iteratee, thisArg, 1), retHighest);
       };
     }
 
@@ -9770,40 +9688,35 @@ if ( typeof define === 'function' && define.amd ) {
     function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
       var index = -1,
           arrLength = array.length,
-          othLength = other.length,
-          result = true;
+          othLength = other.length;
 
       if (arrLength != othLength && !(isLoose && othLength > arrLength)) {
         return false;
       }
-      // Deep compare the contents, ignoring non-numeric properties.
-      while (result && ++index < arrLength) {
+      // Ignore non-index properties.
+      while (++index < arrLength) {
         var arrValue = array[index],
-            othValue = other[index];
+            othValue = other[index],
+            result = customizer ? customizer(isLoose ? othValue : arrValue, isLoose ? arrValue : othValue, index) : undefined;
 
-        result = undefined;
-        if (customizer) {
-          result = isLoose
-            ? customizer(othValue, arrValue, index)
-            : customizer(arrValue, othValue, index);
-        }
-        if (result === undefined) {
-          // Recursively compare arrays (susceptible to call stack limits).
-          if (isLoose) {
-            var othIndex = othLength;
-            while (othIndex--) {
-              othValue = other[othIndex];
-              result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
-              if (result) {
-                break;
-              }
-            }
-          } else {
-            result = (arrValue && arrValue === othValue) || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+        if (result !== undefined) {
+          if (result) {
+            continue;
           }
+          return false;
+        }
+        // Recursively compare arrays (susceptible to call stack limits).
+        if (isLoose) {
+          if (!arraySome(other, function(othValue) {
+                return arrValue === othValue || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
+              })) {
+            return false;
+          }
+        } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB))) {
+          return false;
         }
       }
-      return !!result;
+      return true;
     }
 
     /**
@@ -9868,29 +9781,22 @@ if ( typeof define === 'function' && define.amd ) {
       if (objLength != othLength && !isLoose) {
         return false;
       }
-      var skipCtor = isLoose,
-          index = -1;
-
-      while (++index < objLength) {
-        var key = objProps[index],
-            result = isLoose ? key in other : hasOwnProperty.call(other, key);
-
-        if (result) {
-          var objValue = object[key],
-              othValue = other[key];
-
-          result = undefined;
-          if (customizer) {
-            result = isLoose
-              ? customizer(othValue, objValue, key)
-              : customizer(objValue, othValue, key);
-          }
-          if (result === undefined) {
-            // Recursively compare objects (susceptible to call stack limits).
-            result = (objValue && objValue === othValue) || equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB);
-          }
+      var index = objLength;
+      while (index--) {
+        var key = objProps[index];
+        if (!(isLoose ? key in other : hasOwnProperty.call(other, key))) {
+          return false;
         }
-        if (!result) {
+      }
+      var skipCtor = isLoose;
+      while (++index < objLength) {
+        key = objProps[index];
+        var objValue = object[key],
+            othValue = other[key],
+            result = customizer ? customizer(isLoose ? othValue : objValue, isLoose? objValue : othValue, key) : undefined;
+
+        // Recursively compare objects (susceptible to call stack limits).
+        if (!(result === undefined ? equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB) : result)) {
           return false;
         }
         skipCtor || (skipCtor = key == 'constructor');
@@ -9908,34 +9814,6 @@ if ( typeof define === 'function' && define.amd ) {
         }
       }
       return true;
-    }
-
-    /**
-     * Gets the extremum value of `collection` invoking `iteratee` for each value
-     * in `collection` to generate the criterion by which the value is ranked.
-     * The `iteratee` is invoked with three arguments: (value, index, collection).
-     *
-     * @private
-     * @param {Array|Object|string} collection The collection to iterate over.
-     * @param {Function} iteratee The function invoked per iteration.
-     * @param {boolean} [isMin] Specify returning the minimum, instead of the
-     *  maximum, extremum value.
-     * @returns {*} Returns the extremum value.
-     */
-    function extremumBy(collection, iteratee, isMin) {
-      var exValue = isMin ? POSITIVE_INFINITY : NEGATIVE_INFINITY,
-          computed = exValue,
-          result = computed;
-
-      baseEach(collection, function(value, index, collection) {
-        var current = iteratee(value, index, collection);
-        if ((isMin ? (current < computed) : (current > computed)) ||
-            (current === exValue && current === result)) {
-          computed = current;
-          result = value;
-        }
-      });
-      return result;
     }
 
     /**
@@ -9971,29 +9849,20 @@ if ( typeof define === 'function' && define.amd ) {
      * @param {Function} func The function to query.
      * @returns {string} Returns the function name.
      */
-    var getFuncName = (function() {
-      if (!support.funcNames) {
-        return constant('');
-      }
-      if (constant.name == 'constant') {
-        return baseProperty('name');
-      }
-      return function(func) {
-        var result = func.name,
-            array = realNames[result],
-            length = array ? array.length : 0;
+    function getFuncName(func) {
+      var result = func.name,
+          array = realNames[result],
+          length = array ? array.length : 0;
 
-        while (length--) {
-          var data = array[length],
-              otherFunc = data.func;
-
-          if (otherFunc == null || otherFunc == func) {
-            return data.name;
-          }
+      while (length--) {
+        var data = array[length],
+            otherFunc = data.func;
+        if (otherFunc == null || otherFunc == func) {
+          return data.name;
         }
-        return result;
-      };
-    }());
+      }
+      return result;
+    }
 
     /**
      * Gets the appropriate "indexOf" function. If the `_.indexOf` method is
@@ -10023,15 +9892,34 @@ if ( typeof define === 'function' && define.amd ) {
     var getLength = baseProperty('length');
 
     /**
-     * Creates an array of the own symbols of `object`.
+     * Gets the propery names, values, and compare flags of `object`.
      *
      * @private
      * @param {Object} object The object to query.
-     * @returns {Array} Returns the array of symbols.
+     * @returns {Array} Returns the match data of `object`.
      */
-    var getSymbols = !getOwnPropertySymbols ? constant([]) : function(object) {
-      return getOwnPropertySymbols(toObject(object));
-    };
+    function getMatchData(object) {
+      var result = pairs(object),
+          length = result.length;
+
+      while (length--) {
+        result[length][2] = isStrictComparable(result[length][1]);
+      }
+      return result;
+    }
+
+    /**
+     * Gets the native function at `key` of `object`.
+     *
+     * @private
+     * @param {Object} object The object to query.
+     * @param {string} key The key of the method to get.
+     * @returns {*} Returns the function if it's native, else `undefined`.
+     */
+    function getNative(object, key) {
+      var value = object == null ? undefined : object[key];
+      return isNative(value) ? value : undefined;
+    }
 
     /**
      * Gets the view, applying any `transforms` to the `start` and `end` positions.
@@ -10173,7 +10061,7 @@ if ( typeof define === 'function' && define.amd ) {
      * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
      */
     function isIndex(value, length) {
-      value = +value;
+      value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
       length = length == null ? MAX_SAFE_INTEGER : length;
       return value > -1 && value % 1 == 0 && value < length;
     }
@@ -10230,7 +10118,15 @@ if ( typeof define === 'function' && define.amd ) {
      */
     function isLaziable(func) {
       var funcName = getFuncName(func);
-      return !!funcName && func === lodash[funcName] && funcName in LazyWrapper.prototype;
+      if (!(funcName in LazyWrapper.prototype)) {
+        return false;
+      }
+      var other = lodash[funcName];
+      if (func === other) {
+        return true;
+      }
+      var data = getData(other);
+      return !!data && func === data[0];
     }
 
     /**
@@ -10470,11 +10366,10 @@ if ( typeof define === 'function' && define.amd ) {
     function shimKeys(object) {
       var props = keysIn(object),
           propsLength = props.length,
-          length = propsLength && object.length,
-          support = lodash.support;
+          length = propsLength && object.length;
 
-      var allowIndexes = length && isLength(length) &&
-        (isArray(object) || (support.nonEnumArgs && isArguments(object)));
+      var allowIndexes = !!length && isLength(length) &&
+        (isArray(object) || isArguments(object));
 
       var index = -1,
           result = [];
@@ -10489,7 +10384,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Converts `value` to an array-like object if it is not one.
+     * Converts `value` to an array-like object if it's not one.
      *
      * @private
      * @param {*} value The value to process.
@@ -10506,7 +10401,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Converts `value` to an object if it is not one.
+     * Converts `value` to an object if it's not one.
      *
      * @private
      * @param {*} value The value to process.
@@ -10517,7 +10412,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Converts `value` to property path array if it is not one.
+     * Converts `value` to property path array if it's not one.
      *
      * @private
      * @param {*} value The value to process.
@@ -10546,6 +10441,8 @@ if ( typeof define === 'function' && define.amd ) {
         ? wrapper.clone()
         : new LodashWrapper(wrapper.__wrapped__, wrapper.__chain__, arrayCopy(wrapper.__actions__));
     }
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Creates an array of elements split into groups the length of `size`.
@@ -10614,8 +10511,8 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates an array excluding all values of the provided arrays using
-     * [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+     * Creates an array of unique `array` values not included in the other
+     * provided arrays using [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
      * for equality comparisons.
      *
      * @static
@@ -11088,8 +10985,8 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates an array of unique values in all provided arrays using
-     * [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+     * Creates an array of unique values that are included in all of the provided
+     * arrays using [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
      * for equality comparisons.
      *
      * @static
@@ -11101,27 +10998,19 @@ if ( typeof define === 'function' && define.amd ) {
      * _.intersection([1, 2], [4, 2], [2, 1]);
      * // => [2]
      */
-    function intersection() {
-      var args = [],
-          argsIndex = -1,
-          argsLength = arguments.length,
-          caches = [],
+    var intersection = restParam(function(arrays) {
+      var othLength = arrays.length,
+          othIndex = othLength,
+          caches = Array(length),
           indexOf = getIndexOf(),
           isCommon = indexOf == baseIndexOf,
           result = [];
 
-      while (++argsIndex < argsLength) {
-        var value = arguments[argsIndex];
-        if (isArrayLike(value)) {
-          args.push(value);
-          caches.push((isCommon && value.length >= 120) ? createCache(argsIndex && value) : null);
-        }
+      while (othIndex--) {
+        var value = arrays[othIndex] = isArrayLike(value = arrays[othIndex]) ? value : [];
+        caches[othIndex] = (isCommon && value.length >= 120) ? createCache(othIndex && value) : null;
       }
-      argsLength = args.length;
-      if (argsLength < 2) {
-        return result;
-      }
-      var array = args[0],
+      var array = arrays[0],
           index = -1,
           length = array ? array.length : 0,
           seen = caches[0];
@@ -11130,10 +11019,10 @@ if ( typeof define === 'function' && define.amd ) {
       while (++index < length) {
         value = array[index];
         if ((seen ? cacheIndexOf(seen, value) : indexOf(result, value, 0)) < 0) {
-          argsIndex = argsLength;
-          while (--argsIndex) {
-            var cache = caches[argsIndex];
-            if ((cache ? cacheIndexOf(cache, value) : indexOf(args[argsIndex], value, 0)) < 0) {
+          var othIndex = othLength;
+          while (--othIndex) {
+            var cache = caches[othIndex];
+            if ((cache ? cacheIndexOf(cache, value) : indexOf(arrays[othIndex], value, 0)) < 0) {
               continue outer;
             }
           }
@@ -11144,7 +11033,7 @@ if ( typeof define === 'function' && define.amd ) {
         }
       }
       return result;
-    }
+    });
 
     /**
      * Gets the last element of `array`.
@@ -11650,8 +11539,8 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates an array of unique values, in order, of the provided arrays using
-     * [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+     * Creates an array of unique values, in order, from all of the provided arrays
+     * using [`SameValueZero`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
      * for equality comparisons.
      *
      * @static
@@ -11727,9 +11616,9 @@ if ( typeof define === 'function' && define.amd ) {
         iteratee = isIterateeCall(array, isSorted, thisArg) ? null : isSorted;
         isSorted = false;
       }
-      var func = getCallback();
-      if (!(func === baseCallback && iteratee == null)) {
-        iteratee = func(iteratee, thisArg, 3);
+      var callback = getCallback();
+      if (!(iteratee == null && callback === baseCallback)) {
+        iteratee = callback(iteratee, thisArg, 3);
       }
       return (isSorted && getIndexOf() == baseIndexOf)
         ? sortedUniq(array, iteratee)
@@ -11832,7 +11721,7 @@ if ( typeof define === 'function' && define.amd ) {
     });
 
     /**
-     * Creates an array that is the [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference)
+     * Creates an array of unique values that is the [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference)
      * of the provided arrays.
      *
      * @static
@@ -11936,8 +11825,8 @@ if ( typeof define === 'function' && define.amd ) {
      */
     var zipWith = restParam(function(arrays) {
       var length = arrays.length,
-          iteratee = arrays[length - 2],
-          thisArg = arrays[length - 1];
+          iteratee = length > 2 ? arrays[length - 2] : undefined,
+          thisArg = length > 1 ? arrays[length - 1] : undefined;
 
       if (length > 2 && typeof iteratee == 'function') {
         length -= 2;
@@ -11948,6 +11837,8 @@ if ( typeof define === 'function' && define.amd ) {
       arrays.length = length;
       return unzipWith(arrays, iteratee, thisArg);
     });
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Creates a `lodash` object that wraps `value` with explicit method
@@ -12198,6 +12089,8 @@ if ( typeof define === 'function' && define.amd ) {
     function wrapperValue() {
       return baseWrapperValue(this.__wrapped__, this.__actions__);
     }
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Creates an array of elements corresponding to the given keys, or indexes,
@@ -12690,7 +12583,7 @@ if ( typeof define === 'function' && define.amd ) {
     });
 
     /**
-     * Invokes the method at `path` on each element in `collection`, returning
+     * Invokes the method at `path` of each element in `collection`, returning
      * an array of the results of each invoked method. Any additional arguments
      * are provided to each invoked method. If `methodName` is a function it is
      * invoked for, and `this` bound to, each element in `collection`.
@@ -12718,7 +12611,7 @@ if ( typeof define === 'function' && define.amd ) {
           result = isArrayLike(collection) ? Array(collection.length) : [];
 
       baseEach(collection, function(value) {
-        var func = isFunc ? path : (isProp && value != null && value[path]);
+        var func = isFunc ? path : ((isProp && value != null) ? value[path] : null);
         result[++index] = func ? func.apply(value, args) : invokePath(value, path, args);
       });
       return result;
@@ -12740,7 +12633,7 @@ if ( typeof define === 'function' && define.amd ) {
      * callback returns `true` for elements that have the properties of the given
      * object, else `false`.
      *
-     * Many lodash methods are guarded to work as interatees for methods like
+     * Many lodash methods are guarded to work as iteratees for methods like
      * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
      *
      * The guarded methods are:
@@ -12884,7 +12777,7 @@ if ( typeof define === 'function' && define.amd ) {
      * value. The `iteratee` is bound to `thisArg` and invoked with four arguments:
      * (accumulator, value, index|key, collection).
      *
-     * Many lodash methods are guarded to work as interatees for methods like
+     * Many lodash methods are guarded to work as iteratees for methods like
      * `_.reduce`, `_.reduceRight`, and `_.transform`.
      *
      * The guarded methods are:
@@ -13006,8 +12899,20 @@ if ( typeof define === 'function' && define.amd ) {
         var length = collection.length;
         return length > 0 ? collection[baseRandom(0, length - 1)] : undefined;
       }
-      var result = shuffle(collection);
-      result.length = nativeMin(n < 0 ? 0 : (+n || 0), result.length);
+      var index = -1,
+          result = toArray(collection),
+          length = result.length,
+          lastIndex = length - 1;
+
+      n = nativeMin(n < 0 ? 0 : (+n || 0), length);
+      while (++index < n) {
+        var rand = baseRandom(index, lastIndex),
+            value = result[rand];
+
+        result[rand] = result[index];
+        result[index] = value;
+      }
+      result.length = n;
       return result;
     }
 
@@ -13026,20 +12931,7 @@ if ( typeof define === 'function' && define.amd ) {
      * // => [4, 1, 3, 2]
      */
     function shuffle(collection) {
-      collection = toIterable(collection);
-
-      var index = -1,
-          length = collection.length,
-          result = Array(length);
-
-      while (++index < length) {
-        var rand = baseRandom(0, index);
-        if (index != rand) {
-          result[index] = result[rand];
-        }
-        result[rand] = collection[index];
-      }
-      return result;
+      return sample(collection, POSITIVE_INFINITY);
     }
 
     /**
@@ -13320,6 +13212,8 @@ if ( typeof define === 'function' && define.amd ) {
       return filter(collection, baseMatches(source));
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Gets the number of milliseconds that have elapsed since the Unix epoch
      * (1 January 1970 00:00:00 UTC).
@@ -13337,6 +13231,8 @@ if ( typeof define === 'function' && define.amd ) {
     var now = nativeNow || function() {
       return new Date().getTime();
     };
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * The opposite of `_.before`; this method creates a function that invokes
@@ -13661,12 +13557,13 @@ if ( typeof define === 'function' && define.amd ) {
     var curryRight = createCurry(CURRY_RIGHT_FLAG);
 
     /**
-     * Creates a function that delays invoking `func` until after `wait` milliseconds
-     * have elapsed since the last time it was invoked. The created function comes
-     * with a `cancel` method to cancel delayed invocations. Provide an options
-     * object to indicate that `func` should be invoked on the leading and/or
-     * trailing edge of the `wait` timeout. Subsequent calls to the debounced
-     * function return the result of the last `func` invocation.
+     * Creates a debounced function that delays invoking `func` until after `wait`
+     * milliseconds have elapsed since the last time the debounced function was
+     * invoked. The debounced function comes with a `cancel` method to cancel
+     * delayed invocations. Provide an options object to indicate that `func`
+     * should be invoked on the leading and/or trailing edge of the `wait` timeout.
+     * Subsequent calls to the debounced function return the result of the last
+     * `func` invocation.
      *
      * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
      * on the trailing edge of the timeout only if the the debounced function is
@@ -13980,14 +13877,14 @@ if ( typeof define === 'function' && define.amd ) {
       }
       var memoized = function() {
         var args = arguments,
-            cache = memoized.cache,
-            key = resolver ? resolver.apply(this, args) : args[0];
+            key = resolver ? resolver.apply(this, args) : args[0],
+            cache = memoized.cache;
 
         if (cache.has(key)) {
           return cache.get(key);
         }
         var result = func.apply(this, args);
-        cache.set(key, result);
+        memoized.cache = cache.set(key, result);
         return result;
       };
       memoized.cache = new memoize.Cache;
@@ -14234,12 +14131,12 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates a function that only invokes `func` at most once per every `wait`
-     * milliseconds. The created function comes with a `cancel` method to cancel
-     * delayed invocations. Provide an options object to indicate that `func`
-     * should be invoked on the leading and/or trailing edge of the `wait` timeout.
-     * Subsequent calls to the throttled function return the result of the last
-     * `func` call.
+     * Creates a throttled function that only invokes `func` at most once per
+     * every `wait` milliseconds. The throttled function comes with a `cancel`
+     * method to cancel delayed invocations. Provide an options object to indicate
+     * that `func` should be invoked on the leading and/or trailing edge of the
+     * `wait` timeout. Subsequent calls to the throttled function return the
+     * result of the last `func` call.
      *
      * **Note:** If `leading` and `trailing` options are `true`, `func` is invoked
      * on the trailing edge of the timeout only if the the throttled function is
@@ -14317,6 +14214,8 @@ if ( typeof define === 'function' && define.amd ) {
       return createWrapper(wrapper, PARTIAL_FLAG, null, [value], []);
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Creates a clone of `value`. If `isDeep` is `true` nested objects are cloned,
      * otherwise they are assigned by reference. If `customizer` is provided it is
@@ -14377,8 +14276,9 @@ if ( typeof define === 'function' && define.amd ) {
         customizer = isDeep;
         isDeep = false;
       }
-      customizer = typeof customizer == 'function' && bindCallback(customizer, thisArg, 1);
-      return baseClone(value, isDeep, customizer);
+      return typeof customizer == 'function'
+        ? baseClone(value, isDeep, bindCallback(customizer, thisArg, 1))
+        : baseClone(value, isDeep);
     }
 
     /**
@@ -14427,8 +14327,57 @@ if ( typeof define === 'function' && define.amd ) {
      * // => 20
      */
     function cloneDeep(value, customizer, thisArg) {
-      customizer = typeof customizer == 'function' && bindCallback(customizer, thisArg, 1);
-      return baseClone(value, true, customizer);
+      return typeof customizer == 'function'
+        ? baseClone(value, true, bindCallback(customizer, thisArg, 1))
+        : baseClone(value, true);
+    }
+
+    /**
+     * Checks if `value` is greater than `other`.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is greater than `other`, else `false`.
+     * @example
+     *
+     * _.gt(3, 1);
+     * // => true
+     *
+     * _.gt(3, 3);
+     * // => false
+     *
+     * _.gt(1, 3);
+     * // => false
+     */
+    function gt(value, other) {
+      return value > other;
+    }
+
+    /**
+     * Checks if `value` is greater than or equal to `other`.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is greater than or equal to `other`, else `false`.
+     * @example
+     *
+     * _.gte(3, 1);
+     * // => true
+     *
+     * _.gte(3, 3);
+     * // => true
+     *
+     * _.gte(1, 3);
+     * // => false
+     */
+    function gte(value, other) {
+      return value >= other;
     }
 
     /**
@@ -14591,6 +14540,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @static
      * @memberOf _
+     * @alias eq
      * @category Lang
      * @param {*} value The value to compare.
      * @param {*} other The other value to compare.
@@ -14620,12 +14570,9 @@ if ( typeof define === 'function' && define.amd ) {
      * // => true
      */
     function isEqual(value, other, customizer, thisArg) {
-      customizer = typeof customizer == 'function' && bindCallback(customizer, thisArg, 3);
-      if (!customizer && isStrictComparable(value) && isStrictComparable(other)) {
-        return value === other;
-      }
+      customizer = typeof customizer == 'function' ? bindCallback(customizer, thisArg, 3) : undefined;
       var result = customizer ? customizer(value, other) : undefined;
-      return result === undefined ? baseIsEqual(value, other, customizer) : !!result;
+      return  result === undefined ? baseIsEqual(value, other, customizer) : !!result;
     }
 
     /**
@@ -14727,7 +14674,7 @@ if ( typeof define === 'function' && define.amd ) {
       // Avoid a V8 JIT bug in Chrome 19-20.
       // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
       var type = typeof value;
-      return type == 'function' || (!!value && type == 'object');
+      return !!value && (type == 'object' || type == 'function');
     }
 
     /**
@@ -14770,33 +14717,8 @@ if ( typeof define === 'function' && define.amd ) {
      * // => true
      */
     function isMatch(object, source, customizer, thisArg) {
-      var props = keys(source),
-          length = props.length;
-
-      if (!length) {
-        return true;
-      }
-      if (object == null) {
-        return false;
-      }
-      customizer = typeof customizer == 'function' && bindCallback(customizer, thisArg, 3);
-      object = toObject(object);
-      if (!customizer && length == 1) {
-        var key = props[0],
-            value = source[key];
-
-        if (isStrictComparable(value)) {
-          return value === object[key] && (value !== undefined || (key in object));
-        }
-      }
-      var values = Array(length),
-          strictCompareFlags = Array(length);
-
-      while (length--) {
-        value = values[length] = source[props[length]];
-        strictCompareFlags[length] = isStrictComparable(value);
-      }
-      return baseIsMatch(object, props, values, strictCompareFlags, customizer);
+      customizer = typeof customizer == 'function' ? bindCallback(customizer, thisArg, 3) : undefined;
+      return baseIsMatch(object, getMatchData(source), customizer);
     }
 
     /**
@@ -14936,8 +14858,8 @@ if ( typeof define === 'function' && define.amd ) {
       if (!(value && objToString.call(value) == objectTag)) {
         return false;
       }
-      var valueOf = value.valueOf,
-          objProto = isNative(valueOf) && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
+      var valueOf = getNative(value, 'valueOf'),
+          objProto = valueOf && (objProto = getPrototypeOf(valueOf)) && getPrototypeOf(objProto);
 
       return objProto
         ? (value == objProto || getPrototypeOf(value) == objProto)
@@ -15025,6 +14947,54 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
+     * Checks if `value` is less than `other`.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is less than `other`, else `false`.
+     * @example
+     *
+     * _.lt(1, 3);
+     * // => true
+     *
+     * _.lt(3, 3);
+     * // => false
+     *
+     * _.lt(3, 1);
+     * // => false
+     */
+    function lt(value, other) {
+      return value < other;
+    }
+
+    /**
+     * Checks if `value` is less than or equal to `other`.
+     *
+     * @static
+     * @memberOf _
+     * @category Lang
+     * @param {*} value The value to compare.
+     * @param {*} other The other value to compare.
+     * @returns {boolean} Returns `true` if `value` is less than or equal to `other`, else `false`.
+     * @example
+     *
+     * _.lte(1, 3);
+     * // => true
+     *
+     * _.lte(3, 3);
+     * // => true
+     *
+     * _.lte(3, 1);
+     * // => false
+     */
+    function lte(value, other) {
+      return value <= other;
+    }
+
+    /**
      * Converts `value` to an array.
      *
      * @static
@@ -15076,6 +15046,8 @@ if ( typeof define === 'function' && define.amd ) {
     function toPlainObject(value) {
       return baseCopy(value, keysIn(value));
     }
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Assigns own enumerable properties of source object(s) to the destination
@@ -15416,7 +15388,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Gets the property value of `path` on `object`. If the resolved value is
+     * Gets the property value at `path` of `object`. If the resolved value is
      * `undefined` the `defaultValue` is used in its place.
      *
      * @static
@@ -15474,10 +15446,14 @@ if ( typeof define === 'function' && define.amd ) {
       if (!result && !isKey(path)) {
         path = toPath(path);
         object = path.length == 1 ? object : baseGet(object, baseSlice(path, 0, -1));
+        if (object == null) {
+          return false;
+        }
         path = last(path);
-        result = object != null && hasOwnProperty.call(object, path);
+        result = hasOwnProperty.call(object, path);
       }
-      return result;
+      return result || (isLength(object.length) && isIndex(path, object.length) &&
+        (isArray(object) || isArguments(object)));
     }
 
     /**
@@ -15558,7 +15534,7 @@ if ( typeof define === 'function' && define.amd ) {
      * // => ['0', '1']
      */
     var keys = !nativeKeys ? shimKeys : function(object) {
-      var Ctor = object != null && object.constructor;
+      var Ctor = object == null ? null : object.constructor;
       if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
           (typeof object != 'function' && isArrayLike(object))) {
         return shimKeys(object);
@@ -15597,7 +15573,7 @@ if ( typeof define === 'function' && define.amd ) {
       }
       var length = object.length;
       length = (length && isLength(length) &&
-        (isArray(object) || (support.nonEnumArgs && isArguments(object))) && length) || 0;
+        (isArray(object) || isArguments(object)) && length) || 0;
 
       var Ctor = object.constructor,
           index = -1,
@@ -15784,6 +15760,8 @@ if ( typeof define === 'function' && define.amd ) {
      * // => [['barney', 36], ['fred', 40]] (iteration order is not guaranteed)
      */
     function pairs(object) {
+      object = toObject(object);
+
       var index = -1,
           props = keys(object),
           length = props.length,
@@ -15904,13 +15882,13 @@ if ( typeof define === 'function' && define.amd ) {
 
       var index = -1,
           length = path.length,
-          endIndex = length - 1,
+          lastIndex = length - 1,
           nested = object;
 
       while (nested != null && ++index < length) {
         var key = path[index];
         if (isObject(nested)) {
-          if (index == endIndex) {
+          if (index == lastIndex) {
             nested[key] = value;
           } else if (nested[key] == null) {
             nested[key] = isIndex(path[index + 1]) ? [] : {};
@@ -15960,7 +15938,7 @@ if ( typeof define === 'function' && define.amd ) {
           if (isArr) {
             accumulator = isArray(object) ? new Ctor : [];
           } else {
-            accumulator = baseCreate(isFunction(Ctor) && Ctor.prototype);
+            accumulator = baseCreate(isFunction(Ctor) ? Ctor.prototype : null);
           }
         } else {
           accumulator = {};
@@ -16027,6 +16005,8 @@ if ( typeof define === 'function' && define.amd ) {
     function valuesIn(object) {
       return baseValues(object, keysIn(object));
     }
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * Checks if `n` is between `start` and up to but not including, `end`. If
@@ -16132,6 +16112,8 @@ if ( typeof define === 'function' && define.amd ) {
       return baseRandom(min, max);
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
      *
@@ -16235,7 +16217,7 @@ if ( typeof define === 'function' && define.amd ) {
      * use a third-party library like [_he_](https://mths.be/he).
      *
      * Though the ">" character is escaped for symmetry, characters like
-     * ">" and "/" don't require escaping in HTML and have no special meaning
+     * ">" and "/" don't need escaping in HTML and have no special meaning
      * unless they're part of a tag or unquoted attribute value.
      * See [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
      * (under "semi-related fun fact") for more details.
@@ -16312,7 +16294,7 @@ if ( typeof define === 'function' && define.amd ) {
     });
 
     /**
-     * Pads `string` on the left and right sides if it is shorter than `length`.
+     * Pads `string` on the left and right sides if it's shorter than `length`.
      * Padding characters are truncated if they can't be evenly divided by `length`.
      *
      * @static
@@ -16350,7 +16332,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Pads `string` on the left side if it is shorter than `length`. Padding
+     * Pads `string` on the left side if it's shorter than `length`. Padding
      * characters are truncated if they exceed `length`.
      *
      * @static
@@ -16374,7 +16356,7 @@ if ( typeof define === 'function' && define.amd ) {
     var padLeft = createPadDir();
 
     /**
-     * Pads `string` on the right side if it is shorter than `length`. Padding
+     * Pads `string` on the right side if it's shorter than `length`. Padding
      * characters are truncated if they exceed `length`.
      *
      * @static
@@ -16855,7 +16837,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Truncates `string` if it is longer than the given maximum string length.
+     * Truncates `string` if it's longer than the given maximum string length.
      * The last characters of the truncated string are replaced with the omission
      * string which defaults to "...".
      *
@@ -16997,6 +16979,8 @@ if ( typeof define === 'function' && define.amd ) {
       return string.match(pattern || reWords) || [];
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Attempts to invoke `func`, returning either the result or the caught error
      * object. Any additional arguments are provided to `func` when it is invoked.
@@ -17114,7 +17098,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates a function which performs a deep comparison between a given object
+     * Creates a function that performs a deep comparison between a given object
      * and `source`, returning `true` if the given object has equivalent property
      * values, else `false`.
      *
@@ -17143,7 +17127,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates a function which compares the property value of `path` on a given
+     * Creates a function that compares the property value of `path` on a given
      * object to `value`.
      *
      * **Note:** This method supports comparing arrays, booleans, `Date` objects,
@@ -17154,7 +17138,7 @@ if ( typeof define === 'function' && define.amd ) {
      * @memberOf _
      * @category Utility
      * @param {Array|string} path The path of the property to get.
-     * @param {*} value The value to compare.
+     * @param {*} srcValue The value to match.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17166,17 +17150,19 @@ if ( typeof define === 'function' && define.amd ) {
      * _.find(users, _.matchesProperty('user', 'fred'));
      * // => { 'user': 'fred' }
      */
-    function matchesProperty(path, value) {
-      return baseMatchesProperty(path, baseClone(value, true));
+    function matchesProperty(path, srcValue) {
+      return baseMatchesProperty(path, baseClone(srcValue, true));
     }
 
     /**
-     * Creates a function which invokes the method at `path` on a given object.
+     * Creates a function that invokes the method at `path` on a given object.
+     * Any additional arguments are provided to the invoked method.
      *
      * @static
      * @memberOf _
      * @category Utility
      * @param {Array|string} path The path of the method to invoke.
+     * @param {...*} [args] The arguments to invoke the method with.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17198,13 +17184,15 @@ if ( typeof define === 'function' && define.amd ) {
     });
 
     /**
-     * The opposite of `_.method`; this method creates a function which invokes
-     * the method at a given path on `object`.
+     * The opposite of `_.method`; this method creates a function that invokes
+     * the method at a given path on `object`. Any additional arguments are
+     * provided to the invoked method.
      *
      * @static
      * @memberOf _
      * @category Utility
      * @param {Object} object The object to query.
+     * @param {...*} [args] The arguments to invoke the method with.
      * @returns {Function} Returns the new function.
      * @example
      *
@@ -17248,9 +17236,6 @@ if ( typeof define === 'function' && define.amd ) {
      *   });
      * }
      *
-     * // use `_.runInContext` to avoid conflicts (esp. in Node.js)
-     * var _ = require('lodash').runInContext();
-     *
      * _.mixin({ 'vowels': vowels });
      * _.vowels('fred');
      * // => ['e']
@@ -17265,8 +17250,8 @@ if ( typeof define === 'function' && define.amd ) {
     function mixin(object, source, options) {
       if (options == null) {
         var isObj = isObject(source),
-            props = isObj && keys(source),
-            methodNames = props && props.length && baseFunctions(source, props);
+            props = isObj ? keys(source) : null,
+            methodNames = (props && props.length) ? baseFunctions(source, props) : null;
 
         if (!(methodNames ? methodNames.length : isObj)) {
           methodNames = false;
@@ -17333,7 +17318,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * A no-operation function which returns `undefined` regardless of the
+     * A no-operation function that returns `undefined` regardless of the
      * arguments it receives.
      *
      * @static
@@ -17351,7 +17336,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * Creates a function which returns the property value at `path` on a
+     * Creates a function that returns the property value at `path` on a
      * given object.
      *
      * @static
@@ -17377,7 +17362,7 @@ if ( typeof define === 'function' && define.amd ) {
     }
 
     /**
-     * The opposite of `_.property`; this method creates a function which returns
+     * The opposite of `_.property`; this method creates a function that returns
      * the property value at a given path on `object`.
      *
      * @static
@@ -17531,6 +17516,8 @@ if ( typeof define === 'function' && define.amd ) {
       return baseToString(prefix) + id;
     }
 
+    /*------------------------------------------------------------------------*/
+
     /**
      * Adds two numbers.
      *
@@ -17596,7 +17583,7 @@ if ( typeof define === 'function' && define.amd ) {
      * _.max(users, 'age');
      * // => { 'user': 'fred', 'age': 40 }
      */
-    var max = createExtremum(arrayMax);
+    var max = createExtremum(gt, NEGATIVE_INFINITY);
 
     /**
      * Gets the minimum value of `collection`. If `collection` is empty or falsey
@@ -17645,7 +17632,7 @@ if ( typeof define === 'function' && define.amd ) {
      * _.min(users, 'age');
      * // => { 'user': 'barney', 'age': 36 }
      */
-    var min = createExtremum(arrayMin, true);
+    var min = createExtremum(lt, POSITIVE_INFINITY);
 
     /**
      * Gets the sum of the values in `collection`.
@@ -17683,17 +17670,19 @@ if ( typeof define === 'function' && define.amd ) {
       if (thisArg && isIterateeCall(collection, iteratee, thisArg)) {
         iteratee = null;
       }
-      var func = getCallback(),
+      var callback = getCallback(),
           noIteratee = iteratee == null;
 
-      if (!(func === baseCallback && noIteratee)) {
+      if (!(noIteratee && callback === baseCallback)) {
         noIteratee = false;
-        iteratee = func(iteratee, thisArg, 3);
+        iteratee = callback(iteratee, thisArg, 3);
       }
       return noIteratee
         ? arraySum(isArray(collection) ? collection : toIterable(collection))
         : baseSum(collection, iteratee);
     }
+
+    /*------------------------------------------------------------------------*/
 
     // Ensure wrappers are instances of `baseLodash`.
     lodash.prototype = baseLodash.prototype;
@@ -17842,6 +17831,8 @@ if ( typeof define === 'function' && define.amd ) {
     // Add functions to `lodash.prototype`.
     mixin(lodash, lodash);
 
+    /*------------------------------------------------------------------------*/
+
     // Add functions that return unwrapped values when chaining.
     lodash.add = add;
     lodash.attempt = attempt;
@@ -17863,6 +17854,8 @@ if ( typeof define === 'function' && define.amd ) {
     lodash.findWhere = findWhere;
     lodash.first = first;
     lodash.get = get;
+    lodash.gt = gt;
+    lodash.gte = gte;
     lodash.has = has;
     lodash.identity = identity;
     lodash.includes = includes;
@@ -17892,6 +17885,8 @@ if ( typeof define === 'function' && define.amd ) {
     lodash.kebabCase = kebabCase;
     lodash.last = last;
     lodash.lastIndexOf = lastIndexOf;
+    lodash.lt = lt;
+    lodash.lte = lte;
     lodash.max = max;
     lodash.min = min;
     lodash.noConflict = noConflict;
@@ -17928,6 +17923,7 @@ if ( typeof define === 'function' && define.amd ) {
     lodash.all = every;
     lodash.any = some;
     lodash.contains = includes;
+    lodash.eq = isEqual;
     lodash.detect = find;
     lodash.foldl = reduce;
     lodash.foldr = reduceRight;
@@ -17945,6 +17941,8 @@ if ( typeof define === 'function' && define.amd ) {
       return source;
     }()), false);
 
+    /*------------------------------------------------------------------------*/
+
     // Add functions capable of returning wrapped and unwrapped values when chaining.
     lodash.sample = sample;
 
@@ -17956,6 +17954,8 @@ if ( typeof define === 'function' && define.amd ) {
         return sample(value, n);
       });
     };
+
+    /*------------------------------------------------------------------------*/
 
     /**
      * The semantic version number.
@@ -18184,6 +18184,8 @@ if ( typeof define === 'function' && define.amd ) {
     return lodash;
   }
 
+  /*--------------------------------------------------------------------------*/
+
   // Export lodash.
   var _ = runInContext();
 
@@ -18207,7 +18209,7 @@ if ( typeof define === 'function' && define.amd ) {
     if (moduleExports) {
       (freeModule.exports = _)._ = _;
     }
-    // Export for Narwhal or Rhino -require.
+    // Export for Rhino with CommonJS support.
     else {
       freeExports._ = _;
     }
@@ -18219,12 +18221,12 @@ if ( typeof define === 'function' && define.amd ) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],57:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib')
 
-},{"./lib":62}],58:[function(require,module,exports){
+},{"./lib":61}],57:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap/raw');
@@ -18285,13 +18287,13 @@ function Promise(fn) {
   if (typeof fn !== 'function') {
     throw new TypeError('not a function');
   }
-  this._41 = 0;
-  this._86 = null;
-  this._17 = [];
+  this._32 = 0;
+  this._8 = null;
+  this._89 = [];
   if (fn === noop) return;
   doResolve(fn, this);
 }
-Promise._1 = noop;
+Promise._83 = noop;
 
 Promise.prototype.then = function(onFulfilled, onRejected) {
   if (this.constructor !== Promise) {
@@ -18310,24 +18312,24 @@ function safeThen(self, onFulfilled, onRejected) {
   });
 };
 function handle(self, deferred) {
-  while (self._41 === 3) {
-    self = self._86;
+  while (self._32 === 3) {
+    self = self._8;
   }
-  if (self._41 === 0) {
-    self._17.push(deferred);
+  if (self._32 === 0) {
+    self._89.push(deferred);
     return;
   }
   asap(function() {
-    var cb = self._41 === 1 ? deferred.onFulfilled : deferred.onRejected;
+    var cb = self._32 === 1 ? deferred.onFulfilled : deferred.onRejected;
     if (cb === null) {
-      if (self._41 === 1) {
-        resolve(deferred.promise, self._86);
+      if (self._32 === 1) {
+        resolve(deferred.promise, self._8);
       } else {
-        reject(deferred.promise, self._86);
+        reject(deferred.promise, self._8);
       }
       return;
     }
-    var ret = tryCallOne(cb, self._86);
+    var ret = tryCallOne(cb, self._8);
     if (ret === IS_ERROR) {
       reject(deferred.promise, LAST_ERROR);
     } else {
@@ -18355,8 +18357,8 @@ function resolve(self, newValue) {
       then === self.then &&
       newValue instanceof Promise
     ) {
-      self._41 = 3;
-      self._86 = newValue;
+      self._32 = 3;
+      self._8 = newValue;
       finale(self);
       return;
     } else if (typeof then === 'function') {
@@ -18364,21 +18366,21 @@ function resolve(self, newValue) {
       return;
     }
   }
-  self._41 = 1;
-  self._86 = newValue;
+  self._32 = 1;
+  self._8 = newValue;
   finale(self);
 }
 
 function reject(self, newValue) {
-  self._41 = 2;
-  self._86 = newValue;
+  self._32 = 2;
+  self._8 = newValue;
   finale(self);
 }
 function finale(self) {
-  for (var i = 0; i < self._17.length; i++) {
-    handle(self, self._17[i]);
+  for (var i = 0; i < self._89.length; i++) {
+    handle(self, self._89[i]);
   }
-  self._17 = null;
+  self._89 = null;
 }
 
 function Handler(onFulfilled, onRejected, promise){
@@ -18410,7 +18412,7 @@ function doResolve(fn, promise) {
   }
 }
 
-},{"asap/raw":66}],59:[function(require,module,exports){
+},{"asap/raw":65}],58:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -18425,7 +18427,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
   });
 };
 
-},{"./core.js":58}],60:[function(require,module,exports){
+},{"./core.js":57}],59:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -18445,9 +18447,9 @@ var ZERO = valuePromise(0);
 var EMPTYSTRING = valuePromise('');
 
 function valuePromise(value) {
-  var p = new Promise(Promise._1);
-  p._41 = 1;
-  p._86 = value;
+  var p = new Promise(Promise._83);
+  p._32 = 1;
+  p._8 = value;
   return p;
 }
 Promise.resolve = function (value) {
@@ -18484,11 +18486,11 @@ Promise.all = function (arr) {
     function res(i, val) {
       if (val && (typeof val === 'object' || typeof val === 'function')) {
         if (val instanceof Promise && val.then === Promise.prototype.then) {
-          while (val._41 === 3) {
-            val = val._86;
+          while (val._32 === 3) {
+            val = val._8;
           }
-          if (val._41 === 1) return res(i, val._86);
-          if (val._41 === 2) reject(val._86);
+          if (val._32 === 1) return res(i, val._8);
+          if (val._32 === 2) reject(val._8);
           val.then(function (val) {
             res(i, val);
           }, reject);
@@ -18535,7 +18537,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 };
 
-},{"./core.js":58,"asap/raw":66}],61:[function(require,module,exports){
+},{"./core.js":57,"asap/raw":65}],60:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -18553,7 +18555,7 @@ Promise.prototype['finally'] = function (f) {
   });
 };
 
-},{"./core.js":58}],62:[function(require,module,exports){
+},{"./core.js":57}],61:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./core.js');
@@ -18562,7 +18564,7 @@ require('./finally.js');
 require('./es6-extensions.js');
 require('./node-extensions.js');
 
-},{"./core.js":58,"./done.js":59,"./es6-extensions.js":60,"./finally.js":61,"./node-extensions.js":63}],63:[function(require,module,exports){
+},{"./core.js":57,"./done.js":58,"./es6-extensions.js":59,"./finally.js":60,"./node-extensions.js":62}],62:[function(require,module,exports){
 'use strict';
 
 // This file contains then/promise specific extensions that are only useful
@@ -18637,7 +18639,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   });
 }
 
-},{"./core.js":58,"asap":64}],64:[function(require,module,exports){
+},{"./core.js":57,"asap":63}],63:[function(require,module,exports){
 "use strict";
 
 // rawAsap provides everything we need except exception management.
@@ -18705,7 +18707,7 @@ RawTask.prototype.call = function () {
     }
 };
 
-},{"./raw":65}],65:[function(require,module,exports){
+},{"./raw":64}],64:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -18929,7 +18931,7 @@ rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
 // https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],66:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -19034,6 +19036,6 @@ function requestFlush() {
 }
 
 }).call(this,require('_process'))
-},{"_process":52,"domain":50}]},{},[2]);
+},{"_process":51,"domain":49}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
