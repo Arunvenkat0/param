@@ -61,40 +61,9 @@
 		</div>
 
 		<isscript>
-			var helpApofpo = {
-				label: Resource.msg('singleshipping.apofpo', 'checkout', null),
-				cid: 'apo-fpo'
-			};
-			var helpTelephone = {
-				label: Resource.msg('singleshipping.phonerequired', 'checkout', null),
-				cid: 'help-telephone'
-			};
+			var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
 		</isscript>
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.firstName}" type="input" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.lastName}" type="input" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address1}" type="input" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.address2}" type="input" help="${helpApofpo}"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.country}" type="select" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.state}" type="select" />
-
-		<iscomment> States will be populated via javascript in
-		rich ui. Solution for simple ui is still required. CSS?
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateUS}" type="select" />
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateCA}" type="select" />
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.states.stateDE}" type="select" />
-		</iscomment>
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.city}" type="input" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.postal}" type="input" />
-
-		<isinputfield formfield="${pdict.CurrentForms.multishipping.editAddress.addressFields.phone}" type="input" help="${helpTelephone}"/>
+		<isdynamicform formobject="${pdict.CurrentForms.multishipping.editAddress.addressFields}" formdata="${currentCountry.dynamicForms.addressDetails}"/>
 
 		<iscomment>Add address to Address Book</iscomment>
 		<isif condition="${pdict.CurrentCustomer.authenticated}"> <isinputfield

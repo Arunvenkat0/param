@@ -19,9 +19,4 @@ exports.init = function () {
 		// re-validate the form
 		$form.validate().form();
 	});
-
-	// update state options in case the country changes
-	$('select[id$="_country"]', $form).on('change', function () {
-		util.updateStateOptions($form);
-	});
 };

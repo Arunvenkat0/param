@@ -21,14 +21,14 @@
 				"childField": "state",
 				"type": "select"
 			},
-			"postalUS": {
-				"skip": true
-			},
-			"postalCA": {
-				"skip": true
-			},
-			"postalDE": {
-				"skip": true
+			"address2": {
+				"help": {
+					"cid": "help-apo-fpo",
+					"label": {
+						"property": "singleshipping.apofpo",
+						"file": "checkout"
+					}
+				}
 			},
 			"phone": {
 				"help": {
@@ -99,7 +99,22 @@
 		"eur-list-prices",
 		"eur-sale-prices"
 	],
-	"dynamicForms": {}
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},	
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
+			}
+		}
+	}
 }, {
 	"countryCode": "IT",
 	"name": {
@@ -113,5 +128,20 @@
 		"eur-list-prices",
 		"eur-sale-prices"
 	],
-	"dynamicForms": {}
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},	
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
+			}
+		}
+	}
 }]
