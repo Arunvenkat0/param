@@ -1,7 +1,7 @@
 'use strict';
 
 /* API Includes */
-var Cart = require('~/cartridge/scripts/models/Cart');
+var Cart = require('~/cartridge/scripts/models/CartModel');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
 
@@ -13,8 +13,8 @@ function Handle(args) {
     var cart = Cart.get(args.Basket);
 
     Transaction.wrap(function () {
-        cart.removeExistingPaymentInstruments('PayPal');
-        cart.createPaymentInstrument('PayPal', cart.getNonGiftCertificateAmount());
+        cart.removeExistingPaymentInstruments("PayPal");
+        cart.createPaymentInstrument("PayPal", cart.getNonGiftCertificateAmount());
     });
 
     return {success : true};

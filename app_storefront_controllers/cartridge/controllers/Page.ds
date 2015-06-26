@@ -6,6 +6,9 @@
  * @module controllers/Page
  */
 
+/* API Includes */
+var Logger = require('dw/system/Logger');
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -19,7 +22,7 @@ function show() {
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
     if (!content) {
-        dw.system.Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);
+        Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -55,7 +58,7 @@ function include() {
             Content : content
         }).render(content.template || 'content/content/contentassetinclude');
     }else{
-        dw.system.Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
+        Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
     }
 }
 

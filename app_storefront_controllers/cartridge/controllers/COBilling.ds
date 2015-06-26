@@ -8,15 +8,19 @@
  */
 
 /* API Includes */
+var ArrayList = require('dw/util/ArrayList');
 var GiftCertificate = require('dw/order/GiftCertificate');
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var Pipelet = require('dw/system/Pipelet');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
+var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -85,12 +89,12 @@ function returnToForm(cart, params) {
     if (params) {
         app.getView(require('~/object').extend(params, {
             Basket : cart.object,
-            ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
+            ContinueURL : URLUtils.https('COBilling-Billing')
         })).render('checkout/billing/billing');
     } else {
         app.getView({
             Basket : cart.object,
-            ContinueURL : dw.web.URLUtils.https('COBilling-Billing')
+            ContinueURL : URLUtils.https('COBilling-Billing')
         }).render('checkout/billing/billing');
     }
 }
@@ -527,14 +531,16 @@ function redeemGiftCertificateJson() {
     giftCertCode = request.httpParameterMap.giftCertCode.stringValue;
     giftCertStatus = redeemGiftCertificate(giftCertCode);
 
+	let r = require('~/cartridge/scripts/util/Response');
+	
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         // @FIXME we could also build an ajax guard?
-        response.renderJSON({});
+        r.renderJSON({});
     } else {
-        response.renderJSON({
+        r.renderJSON({
             status : giftCertStatus.code,
             success : !giftCertStatus.error,
-            message : dw.web.Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
+            message : Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
             code : giftCertCode
         });
     }
@@ -595,7 +601,7 @@ function editAddress() {
     }
 
     app.getView({
-        ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+        ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
     }).render('checkout/billing/billingaddressdetails');
 }
 
@@ -608,7 +614,7 @@ function editBillingAddress() {
         'apply' : function(formgroup) {
             if (!app.getForm('billingaddress').copyTo(app.getForm('billingaddress').object)) {
                 app.getView({
-                    ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+                    ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
             } else {
                 app.getView().render('components/dialog/dialogapply');
@@ -620,7 +626,7 @@ function editBillingAddress() {
                 app.getView().render('components/dialog/dialogdelete');
             } else {
                 app.getView({
-                    ContinueURL : dw.web.URLUtils.https('COBilling-EditBillingAddress')
+                    ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
             }
         }
@@ -634,14 +640,17 @@ function editBillingAddress() {
 function getGiftCertificateBalance() {
     var giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(request.httpParameterMap.giftCertificateID.value);
 
+
+	let r = require('~/cartridge/scripts/util/Response');
+
     if (giftCertificate && giftCertificate.isEnabled()) {
-        response.renderJSON({
+        r.renderJSON({
             ID : giftCertificate.getGiftCertificateCode(),
-            balance : dw.util.StringUtils.formatMoney(giftCertificate.getBalance())
+            balance : StringUtils.formatMoney(giftCertificate.getBalance())
         });
     } else {
-        response.renderJSON({
-            error : dw.web.Resource.msg('billing.giftcertinvalid', 'checkout', null)
+        r.renderJSON({
+            error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }
 }
@@ -717,9 +726,9 @@ function saveCreditCard() {
     if (customer.authenticated && app.getForm('billing').object.paymentMethods.creditCard.saveCard.value) {
         // TODO - remove pipelet code once APP-30656 is fixed
         // var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-        creditCards = new dw.util.ArrayList();
+        creditCards = new ArrayList();
 
-        GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
+        GetCustomerPaymentInstrumentsResult = new Pipelet('GetCustomerPaymentInstruments').execute({
             Customer : customer,
             PaymentMethod : PaymentInstrument.METHOD_CREDIT_CARD
         });

@@ -28,7 +28,7 @@ function find() {
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
-    app.getView('StoreLocatorView').render('storelocator/storelocator');
+    app.getView('StoreLocator').render('storelocator/storelocator');
 }
 
 /**
@@ -82,11 +82,11 @@ function findStores() {
     });
 
     if (searchResult) {
-        app.getView('StoreLocatorView', searchResult)
+        app.getView('StoreLocator', searchResult)
             .render('storelocator/storelocatorresults');
     }
     else {
-        app.getView('StoreLocatorView')
+        app.getView('StoreLocator')
             .render('storelocator/storelocator');
     }
 

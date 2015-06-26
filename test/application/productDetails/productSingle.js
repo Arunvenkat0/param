@@ -16,7 +16,7 @@ describe('Product Details Page - single item', function () {
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title$="Modern Blazer"]')
+			.click('[title*="Modern Blazer"]')
 
 			.getText('h1.product-name', function (err, title) {
 				assert.equal(err, undefined);

@@ -1,7 +1,6 @@
 {
 	"curly": true,
 	"eqeqeq": true,
-	"quotmark": "single",
 	"undef": true,
 	"unused": true,
 	"browser": true,
@@ -16,6 +15,11 @@
 		"Urls": true,
 		"Resources": true,
 		"User": true,
-		"session": true
+		"request": true,
+		"response": true,
+		"session": true,
+		"customer": true,
+		"dw": true,
+		"empty": true
 	}
 }

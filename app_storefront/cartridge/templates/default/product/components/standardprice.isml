@@ -18,9 +18,9 @@
 			product has no price according to standard price lookup rules,
 			then we know the list price book is not assigned to the site.
 			(The converse is not true so this check is not perfect.)
-	
+
 			Todo:  Improve this logic.
-	
+
 			The check after the '||' above is to only consider standard prices for cases where the site and
 			the session currencies are the same. This is because currently the "listPriceDefault" property
 			can not be set per currency

@@ -16,7 +16,7 @@ describe('Product Details Page - Set', function () {
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title$="Fall Look"]')
+			.click('[title*="Fall Look"]')
 
 			.getText('#pdpMain > h1.product-name', function (err, title) {
 				assert.equal(err, undefined);

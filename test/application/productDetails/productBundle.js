@@ -16,7 +16,7 @@ describe('Product Details Page - Bundle', function () {
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title$="Playstation 3 Bundle"]')
+			.click('[title*="Playstation 3 Bundle"]')
 
 			.getText('#pdpMain > h1.product-name', function (err, title) {
 				assert.equal(err, undefined);

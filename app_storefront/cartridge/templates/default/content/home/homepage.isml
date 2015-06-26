@@ -10,19 +10,19 @@
 	</div>
 
 	<div class="home-bottom-slots">
-	
+
 		<div class="home-bottom-left">
 			<isslot id="home-bottom-left" description="Bottom content below flash banner - left side" context="global" />
 		</div>
-		
+
 		<div class="home-bottom-center">
 			<isslot id="home-bottom-center" description="Bottom content below flash banner - center side" context="global" />
 		</div>
-		
+
 		<div class="home-bottom-right">
 			<isslot id="home-bottom-right" description="Bottom content below flash banner - right side" context="global" />
 		</div>
-		
+
 	</div>
-	
+
 </isdecorate>
