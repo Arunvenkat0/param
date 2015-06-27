@@ -22,8 +22,8 @@
 			<isif condition="${!empty(billingAddress.address2)}">
 				<div><isprint value="${billingAddress.address2}"/></div>
 			</isif>
-			<div><isprint value="${billingAddress.city}"/>, <isprint value="${billingAddress.stateCode}"/> <isprint value="${billingAddress.postalCode}"/></div>
-			<div><isprint value="${billingAddress.countryCode}"/></div>
+			<div><isprint value="${billingAddress.postalCode}"/> <isprint value="${billingAddress.city}"/></div>
+			<div><isprint value="${Resource.msg("country."+billingAddress.countryCode, "forms", null)}"/></div>
 		</div>
 
 	</div>
