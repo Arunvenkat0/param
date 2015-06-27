@@ -62,34 +62,11 @@
 			</div>
 
 		</isif>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.firstName}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.lastName}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.address1}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.address2}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.country}" type="select"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.state}" type="select"/>
-
-		<iscomment>
-			States will be populated via javascript in rich ui.
-			Solution for simple ui is still required.
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateUS}" type="select"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateCA}" type="select"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.states.stateDE}" type="select"/>
-		</iscomment>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.city}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.postal}" type="input"/>
-
-		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressFields.phone}" type="input"/>
+		
+		<isscript>
+			var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
+		</isscript>
+		<isdynamicform formobject="${pdict.CurrentForms.billing.billingAddress.addressFields}" formdata="${currentCountry.dynamicForms.addressDetails}"/>
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input"/>
 
