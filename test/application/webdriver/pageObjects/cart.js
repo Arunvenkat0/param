@@ -98,29 +98,29 @@ export function emptyCart () {
 	return navigateTo()
 		.then(() => client.elements('.item-quantity input'))
 		.then(items => {
-			if (!items.value.length) { return; }
+			if (items.value.length) {
+				items.value.forEach(item =>
+					client.elementIdClear(item.ELEMENT)
+						.elementIdValue(item.ELEMENT, '0'));
 
-			items.value.forEach(item =>
-				client.elementIdClear(item.ELEMENT)
-					.elementIdValue(item.ELEMENT, '0'));
-
-			return client.pause(500)
-				.then(() => client.click(BTN_UPDATE_CART))
-				// There are some products, like Gift Certificates, whose
-				// quantities cannot be changed in the Cart. For these, we
-				// must click the Remove link on each.
-				.then(() => client.elements(LINK_REMOVE))
-				.then(removeLinks => {
-					let links = removeLinks.value;
-					if (links.length) {
-						// Because each Remove link results in a page reload,
-						// it is necessary to wait for one remove operation
-						// to complete before clicking on the next Remove
-						// link
-						links.forEach(() => _clickFirstRemoveLink());
-					}
-				});
-		});
+				return client.pause(500)
+					.click(BTN_UPDATE_CART)
+			}
+		})
+		// There are some products, like Gift Certificates, whose
+		// quantities cannot be changed in the Cart. For these, we
+		// must click the Remove link on each.
+		.then(() => client.elements(LINK_REMOVE))
+		.then(removeLinks => {
+			if (removeLinks.value.length) {
+				// Because each Remove link results in a page reload,
+				// it is necessary to wait for one remove operation
+				// to complete before clicking on the next Remove
+				// link
+				removeLinks.value.forEach(() => _clickFirstRemoveLink());
+			}
+		})
+		.then(() => client.pause(500));
 }
 
 /**
@@ -129,8 +129,7 @@ export function emptyCart () {
  */
 function _clickFirstRemoveLink () {
 	return client.elements(LINK_REMOVE)
-		.then(removeLinks => {
-			let links = removeLinks.value;
-			return client.elementIdClick(links[0].ELEMENT);
-		});
+		.then(removeLinks =>
+			client.elementIdClick(removeLinks.value[0].ELEMENT)
+		);
 }
