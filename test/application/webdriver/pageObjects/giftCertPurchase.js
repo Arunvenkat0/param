@@ -2,14 +2,15 @@
 
 import client from '../client';
 import config from '../config';
-import * as formTasks from './forms/tasks';
+import * as formHelpers from './helpers/forms/common';
 
 export const BTN_ADD_TO_CART = '#AddToBasketButton';
+export const INPUT_FROM_FIELD = 'input[id$="giftcert_purchase_from"]';
 
 const basePath = '/giftcertpurchase';
 
-export function navigateTo (path = basePath) {
-	return client.url(config.url + path);
+export function navigateTo () {
+	return client.url(config.url + basePath);
 }
 
 export function pressBtnAddToCart () {
@@ -18,6 +19,7 @@ export function pressBtnAddToCart () {
 
 export function fillOutGiftCertPurchaseForm (giftCertPurchaseFields) {
 	var fieldMap = new Map();
+	let fieldsPromise = [];
 
 	fieldMap.set('from', {
 		type: 'input',
@@ -44,13 +46,10 @@ export function fillOutGiftCertPurchaseForm (giftCertPurchaseFields) {
 		type: 'input',
 		fieldSuffix: 'purchase_amount'
 	});
+
 	for (var [key, value] of giftCertPurchaseFields) {
-		var fieldType = fieldMap.get(key).type;
 		var selector = '[id$="' + fieldMap.get(key).fieldSuffix + '"]';
-		//console.log(key, 'fieldType =', fieldType);
-		formTasks.populateField(selector, value.toString());
+		fieldsPromise.push(formHelpers.populateField(selector, value.toString()));
 	}
-	return client.pause(200);
-
-
+	return Promise.all(fieldsPromise);
 }

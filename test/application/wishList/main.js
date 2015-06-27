@@ -2,64 +2,62 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import * as wishListPage from '../webdriver/pageObjects/wishlist';
-import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
-import * as cartPage from '../webdriver/pageObjects/cart';
+import url from 'url';
 import * as accountPage from '../webdriver/pageObjects/account';
-import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase.js';
+import * as cartPage from '../webdriver/pageObjects/cart';
+import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase';
+import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
+import * as navHeader from '../webdriver/pageObjects/navHeader';
+import * as wishListPage from '../webdriver/pageObjects/wishlist';
+import * as testData from '../webdriver/pageObjects/testData/main';
 
 describe('Wishlist', () => {
-	before(() => client.init());
-	after(() => client.end());
-
-	describe('Social links', () => {
-	let customer;
-	let login = 'testuser1@demandware.com';
-	let socialLinks = {
-		facebook: {
-			selector: 'a[data-share=facebook]',
-			baseUrl: 'https://www.facebook.com/sharer/sharer.php',
-			regex: /.*\?.*u=.+/
-		},
-		twitter: {
-			selector: 'a[data-share=twitter]',
-			baseUrl: 'https://twitter.com/intent/tweet/',
-			regex: /.*\?.*url=.+/
-		},
-		googlePlus: {
-			selector: 'a[data-share=googleplus]',
-			baseUrl: 'https://plus.google.com/share',
-			regex: /.*\?.*url=.+/
-		},
-		pinterest: {
-			selector: 'a[data-share=pinterest]',
-			baseUrl: 'https://www.pinterest.com/pin/create/button/',
-			regex: /.*\?.*url=.+/
-		},
-		emailLink: {
-			selector: 'a[data-share=email]',
-			baseUrl: 'mailto:name@email.com',
-			regex: /.*\&.*body=.+/
-		},
-		shareLinkIcon: {
-			selector: wishListPage.CSS_SHARE_LINK
-		},
-		shareLinkUrl: {
-			selector: '.share-link-content a',
-			baseUrl: wishListPage.configUrl,
-			regex: /.*\?.*WishListID=.+/
-		}
-	};
-
 	before(() => client.init());
 
 	after(() => client.end());
 
 	describe('Send to Friend Links', () => {
+		let socialLinks = {
+			facebook: {
+				selector: 'a[data-share=facebook]',
+				baseUrl: 'https://www.facebook.com/sharer/sharer.php',
+				regex: /.*\?.*u=.+/
+			},
+			twitter: {
+				selector: 'a[data-share=twitter]',
+				baseUrl: 'https://twitter.com/intent/tweet/',
+				regex: /.*\?.*url=.+/
+			},
+			googlePlus: {
+				selector: 'a[data-share=googleplus]',
+				baseUrl: 'https://plus.google.com/share',
+				regex: /.*\?.*url=.+/
+			},
+			pinterest: {
+				selector: 'a[data-share=pinterest]',
+				baseUrl: 'https://www.pinterest.com/pin/create/button/',
+				regex: /.*\?.*url=.+/
+			},
+			emailLink: {
+				selector: 'a[data-share=email]',
+				baseUrl: 'mailto:name@email.com',
+				regex: /.*\&.*body=.+/
+			},
+			shareLinkIcon: {
+				selector: wishListPage.CSS_SHARE_LINK
+			},
+			shareLinkUrl: {
+				selector: '.share-link-content a',
+				baseUrl: wishListPage.configUrl,
+				regex: /.*\?.*WishListID=.+/
+			}
+		};
 
 		before(() => wishListPage.navigateTo()
-			.then(() => loginForm.loginAsDefaultCustomer())
+				.then(() => loginForm.loginAsDefaultCustomer())
 		);
+
+		after(() => navHeader.logout());
 
 		it('should display a Facebook icon and link', () =>
 			client.isExisting(socialLinks.facebook.selector)
@@ -132,28 +130,23 @@ describe('Wishlist', () => {
 	describe('Gift Certificates', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
-		var btnAddToCart='#AddToBasketButton';
-		var formGiftCertPurchase = '.gift-certificate-purchase';
-		var isGiftCertAdded;
 		var giftCertFieldMap = new Map();
 		giftCertFieldMap.set('recipient','Joe Smith');
 		giftCertFieldMap.set('recipientEmail','jsmith@someBogusEmailDomain.tv');
 		giftCertFieldMap.set('confirmRecipientEmail','jsmith@someBogusEmailDomain.tv');
 		giftCertFieldMap.set('message','Congratulations!');
 		giftCertFieldMap.set('amount','250');
-		var fieldMap = {
-			from: {
-				selector: 'input[id$="giftcert_purchase_from"]'
-			}
-		};
 
 		before(() => accountPage.navigateTo());
 		before(() => loginForm.loginAsDefaultCustomer());
 		before(() => cartPage.emptyCart());
 		before(() => wishListPage.navigateTo());
 
-		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
-			return client.isExisting(giftCertItemSelector)
+		after(() => cartPage.emptyCart());
+		after(() => navHeader.logout());
+
+		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () =>
+			client.isExisting(giftCertItemSelector)
 				.then(exists => {
 					if (!exists) {
 						wishListPage.clickAddGiftCertButton();
@@ -161,29 +154,32 @@ describe('Wishlist', () => {
 				})
 				.then(() => client.click(btnGiftCertAddToCart))
 				.then(() => client.url())
-				.then(url => assert.isTrue(url.value.endsWith('giftcertpurchase')));
-		});
+				.then(currentUrl => {
+					let parsedUrl = url.parse(currentUrl.value);
+					return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'))
+				})
+		);
 
 		it('should automatically populate the Your Name field', () => {
 			let defaultCustomer;
 			return testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER)
 				.then(customer => defaultCustomer = customer)
-				.then(() => client.getValue(fieldMap.from.selector))
+				.then(() => client.getValue(giftCertPurchasePage.INPUT_FROM_FIELD))
 				.then(from => {
 					let expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
 					assert.equal(from, expectedYourName);
 				});
 		});
-		//fill out Gift Certificate checkout form
-		it('should display the correct number of items in cart page',() => {
-			return giftCertPurchasePage.fillOutGiftCertPurchaseForm(giftCertFieldMap)
+
+		it('should display the correct number of items in cart page',() =>
+			giftCertPurchasePage.fillOutGiftCertPurchaseForm(giftCertFieldMap)
 				.then(() => giftCertPurchasePage.pressBtnAddToCart())
 				.then(() => cartPage.navigateTo())
 				.then(cartPage.getItemList()
-				.then(rows => assert.equal(1, rows.value.length)));
-			})
+				.then(rows => assert.equal(1, rows.value.length)))
+		);
 
-		it('should display the correct name in cart page', () =>
+		it('should display the correct item name in cart page', () =>
 			cartPage.getItemNameByRow(1)
 				.then(name => assert.equal('Gift Certificate', name))
 		);
