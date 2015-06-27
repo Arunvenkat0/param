@@ -33,11 +33,12 @@
 			<isif condition="${ShippingAddress.city != null}">
 				<span>
 					<span class="zip"><isprint value="${ShippingAddress.postalCode}"/></span>
-					<span class="city"><isprint value="${ShippingAddress.city}"/></span>
+					<span class="city"><isprint value="${ShippingAddress.city}"/> </span>
+					<span class="city"><isprint value="${ShippingAddress.stateCode}"/></span>
 				</span>
 			</isif>
 		</div><!-- END:location -->
-		<div class="country"><isprint value="${Resource.msg("country." + ShippingAddress.countryCode, null}"/></div>
+		<div class="country"><isprint value="${Resource.msg("country." + ShippingAddress.countryCode, "forms", null)}"/></div>
 		<div class="phone"><isprint value="${ShippingAddress.phone}"/></div>
 	</div><!-- END:name -->
 

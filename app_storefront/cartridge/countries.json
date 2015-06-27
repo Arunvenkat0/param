@@ -133,6 +133,11 @@
 			"country": {
 				"type": "select"
 			},	
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "select"
+			},
 			"phone": {
 				"help": {
 					"cid": "help-telephone",

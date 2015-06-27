@@ -55,7 +55,7 @@
 						<isif condition="${!empty(address.address2)}">
 							<div><isprint value="${address.address2}"/></div>
 						</isif>
-						<div><isprint value="${address.postalCode}"/> <isprint value="${address.city}"/> </div>
+						<div><isprint value="${address.postalCode}"/> <isprint value="${address.city}"/>  <isprint value="${address.stateCode}"/></div>
 						<div><isprint value="${Resource.msg('country.'+address.countryCode, 'forms', null)}"/></div>
 						<isif condition="${!empty(shipment.shippingMethod)}">
 							<div class="minishipments-method">
