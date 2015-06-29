@@ -6800,10 +6800,6 @@
         <primary-flag>true</primary-flag>
     </category-assignment>
 
-    <category-assignment category-id="electronics-televisions-flat-screen" product-id="TG508">
-        <position>auto</position>
-    </category-assignment>
-
     <category-assignment category-id="electronics-televisions-flat-screen" product-id="vizio-vw46lf">
         <position>auto</position>
         <primary-flag>true</primary-flag>

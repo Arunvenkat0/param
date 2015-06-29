@@ -21,7 +21,7 @@
             <preference preference-id="SiteCatalog">storefront-catalog-en</preference>
             <preference preference-id="SiteCurrencies">USD:EUR:JPY:CNY</preference>
 	    <preference preference-id="SiteCustomerList">SiteGenesis</preference>            
-            <preference preference-id="SiteDefaultLocale">default</preference>
+            <preference preference-id="SiteDefaultLocale">en_US</preference>
             <preference preference-id="SiteLibrary">SiteGenesisSharedLibrary</preference>
             <preference preference-id="SiteInventoryList">inventory</preference>
             <preference preference-id="SiteLocales">default:fr_FR:it_IT:ja_JP:zh_CN:en_US</preference>

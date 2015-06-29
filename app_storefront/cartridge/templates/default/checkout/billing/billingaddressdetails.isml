@@ -12,42 +12,12 @@
 				<div class="keynote">
 					<span class="required">*</span><strong>${Resource.msg('global.requiredfield','locale',null)}</strong></strong>
 				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.firstName}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.lastName}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address1}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.address2}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.country}" type="select"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.states.state}" type="select"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.city}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.postal}" type="input"/>
-
-				</div>
-				<div class="formfield clearfix">
-					<isinputfield formfield="${pdict.CurrentForms.billingaddress.phone}" type="input"/>
-
-				</div>
+				
+				<isscript>
+					var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
+				</isscript>
+				<isdynamicform formobject="${pdict.CurrentForms.billingaddress}" formdata="${currentCountry.dynamicForms.addressDetails}"/>
+			
 			</div>
 		</fieldset>
 		<fieldset>

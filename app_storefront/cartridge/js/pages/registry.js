@@ -66,18 +66,6 @@ function initializeEvents() {
 		populateForm(addressID, $afterAddress);
 	});
 
-	$beforeAddress.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($beforeAddress);
-	});
-
-	$afterAddress.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($afterAddress);
-	});
-
-	$eventInfoForm.on('change', 'select[name$="_country"]', function () {
-		util.updateStateOptions($eventInfoForm);
-	});
-
 	$('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
 		e.preventDefault();
 		var productListID = $('input[name=productListID]').val();

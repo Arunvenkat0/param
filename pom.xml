@@ -17,7 +17,7 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>15.7.0.2</version>
+    <version>15.7.0.3</version>
     <description>SiteGenesis Source</description>
 
 
@@ -47,8 +47,8 @@
                     <tasks>
                       <copy todir="${project.build.directory}/sg-resources">
                         <fileset dir="${project.basedir}">
-                          <include name="app_storefront" />
-                          <include name="app_storefront_controllers" />
+                          <include name="app_storefront*/**" />
+                          <include name="app_storefront_controllers*/**" />
                         </fileset>
                       </copy>
                       <copy todir="${project.build.directory}/sg-resources/demosite-creation">
