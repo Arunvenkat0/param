@@ -52,6 +52,7 @@
 
 .in-stock-msg,
 .is-in-stock,
+.store-in-stock,
 [data-status="store-in-stock"] {
 	color: $rain-forest;
 	font-weight: 700;
@@ -116,12 +117,23 @@
 
 .store-list-pdp-container {
 	margin-top: 1em;
+	.stores-toggle {
+		&:before {
+			content: "\f0d7";
+			font-family: FontAwesome;
+			padding-right: .5rem;
+		}
+	}
+	.collapsed {
+		&:before {
+			content: "\f0da";
+		}
+	}
 	.store-list-pdp {
 		margin-top: 0.5em;
 	}
 	.store-list-item {
 		@extend %clearfix;
-		border-bottom: 1px dotted $very-light-gray;
 		display: none;
 		padding: 0.5em  0.8em;
 		&:last-of-type {
