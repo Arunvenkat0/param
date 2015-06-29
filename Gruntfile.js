@@ -179,6 +179,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
 	grunt.registerTask('build', ['js', 'css']);
+	grunt.registerTask('lint', ['jshint', 'jscs']);
 	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
 	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
 };

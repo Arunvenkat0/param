@@ -123,6 +123,7 @@ gulp.task('test:unit', function () {
 });
 
 gulp.task('build', ['js', 'css']);
+gulp.task('lint', ['jshint', 'jscs']);
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
 	gulp.watch(paths.css.map(function (path) {
