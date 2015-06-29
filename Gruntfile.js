@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 				files: paths.css.map(function (path) {
 					return path.src + '*.scss';
 				}),
-				tasks: ['css:dev']
+				tasks: ['css']
 			},
 			styleguide: {
 				files: paths.css.map(function (path) {
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
 	});
 	grunt.registerTask('css', ['sass:dev', 'autoprefixer:dev']);
 	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
-	grunt.registerTask('default', ['css:dev', 'browserify:watchDev', 'watch:dev']);
+	grunt.registerTask('default', ['css', 'browserify:watchDev', 'watch:dev']);
 	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
