@@ -59,15 +59,6 @@
 		"addressDetails": {
 			"country": {
 				"type": "select"
-			},
-			"postalUS": {
-				"skip": true
-			},
-			"postalCA": {
-				"skip": true
-			},
-			"postalDE": {
-				"skip": true
 			}
 		}
 	}
@@ -103,6 +94,9 @@
 		"addressDetails": {
 			"country": {
 				"type": "select"
+			},
+			"states": {
+				"skip": true
 			},	
 			"phone": {
 				"help": {
