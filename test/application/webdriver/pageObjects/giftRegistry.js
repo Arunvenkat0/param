@@ -60,18 +60,18 @@ export function fillOutEventForm (eventData) {
 export function fillOutEventShippingForm (eventShippingData) {
 	var fieldMapType = new Map();
 
+	fieldMapType.set('addressid', 'input');
 	fieldMapType.set('firstname', 'input');
 	fieldMapType.set('lastname', 'input');
 	fieldMapType.set('address1', 'input');
-	fieldMapType.set('address2', 'input');
-	fieldMapType.set('country', 'selectByValue');
-	fieldMapType.set('states_state', 'selectByValue');
 	fieldMapType.set('city', 'input');
 	fieldMapType.set('postal', 'input');
+	fieldMapType.set('country', 'input');
+	//fieldMapType.set('states_state', 'selectByValue');
 	fieldMapType.set('phone', 'input');
 
 	for (var [key, value] of eventShippingData) {
-		var selector = '[name$="giftregistry_eventaddress_addressBeforeEvent_' + key + '"]';
+		var selector = '[name$="addressBeforeEvent_' + key + '"]';
 		formHelpers.populateField(selector, value, fieldMapType.get(key));
 	}
 
