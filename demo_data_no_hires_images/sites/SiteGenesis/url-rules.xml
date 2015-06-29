@@ -3,16 +3,25 @@
     <general-settings>
         <lower-case-urls>true</lower-case-urls>
         <blank-substitute>%20</blank-substitute>
+        <character-replacements-enabled>false</character-replacements-enabled>
     </general-settings>
+    <locale-settings>
+        <type>parameter</type>
+        <parameter-name>lang</parameter-name>
+    </locale-settings>
     <category-rule>[ category-path, [ attribute, displayName ], / ]</category-rule>
     <category-page-url-override>true</category-page-url-override>
     <category-trailing-slash>true</category-trailing-slash>
+    <category-search-refinement-url-enabled>false</category-search-refinement-url-enabled>
+    <category-search-refinements/>
     <product-rule>[ category ]</product-rule>
     <product-page-url-override>true</product-page-url-override>
     <product-id-separator>/</product-id-separator>
     <folder-rule>[ folder-path, [ attribute, displayName, noname ], / ]</folder-rule>
     <folder-page-url-override>true</folder-page-url-override>
     <folder-trailing-slash>true</folder-trailing-slash>
+    <folder-search-refinement-url-enabled>false</folder-search-refinement-url-enabled>
+    <folder-search-refinements/>
     <content-rule>[ folder ]</content-rule>
     <content-page-url-override>true</content-page-url-override>
     <content-id-separator>/</content-id-separator>
