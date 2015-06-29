@@ -2613,8 +2613,8 @@ div.error {
   font-weight: 300;
   position: absolute;
   text-align: right;
-  top: 2%;
-  right: 2%; }
+  bottom: 2%;
+  left: 2%; }
   @media screen and (min-width: 768px) {
     .category-slot h1 {
       font-size: 5rem;
@@ -2637,7 +2637,7 @@ div.error {
   font-weight: 300;
   margin: 0;
   opacity: .6;
-  padding: .5rem;
+  padding: 2rem;
   position: absolute;
   text-transform: uppercase;
   width: 100%; }
@@ -2672,7 +2672,6 @@ div.error {
     .category-slot .search-result-items .grid-tile {
       width: 33%; } }
   .category-slot .search-result-items .grid-tile .product-tile {
-    background-color: #e0e0e0;
     margin: 0 .15%;
     padding: 1rem 0;
     width: 100%; }
