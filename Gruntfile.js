@@ -172,12 +172,13 @@ module.exports = function (grunt) {
 			grunt.task.run(['external_sourcemap:browserify']);
 		}
 	});
-	grunt.registerTask('css:dev', ['sass:dev', 'autoprefixer:dev']);
+	grunt.registerTask('css', ['sass:dev', 'autoprefixer:dev']);
 	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
 	grunt.registerTask('default', ['css:dev', 'browserify:watchDev', 'watch:dev']);
 	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
 	grunt.registerTask('test:application', ['mochaTest:application']);
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
+	grunt.registerTask('build', ['js', 'css']);
 	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
 	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
 };
