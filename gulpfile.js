@@ -1,31 +1,19 @@
 'use strict';
 
-var browserify = require('browserify'),
-	buffer = require('vinyl-buffer'),
-	connect = require('gulp-connect'),
-	deploy = require('gulp-gh-pages'),
-	gif = require('gulp-if'),
-	gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	jscs = require('gulp-jscs'),
-	jshint = require('gulp-jshint'),
-	merge = require('merge-stream'),
-	minimist = require('minimist'),
-	mocha = require('gulp-mocha'),
-	sass = require('gulp-sass'),
-	source = require('vinyl-source-stream'),
-	sourcemaps = require('gulp-sourcemaps'),
-	stylish = require('jshint-stylish'),
-	prefix = require('gulp-autoprefixer'),
-	watchify = require('watchify'),
-	xtend = require('xtend');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var minimist = require('minimist');
+var sourcemaps = require('gulp-sourcemaps');
 
 var paths = require('./package.json').paths;
+var opts = minimist(process.argv.slice(2));
 
 require('babel/register');
 
-var watching = false;
-gulp.task('enable-watch-mode', function () {watching = true;});
+var gif = require('gulp-if');
+var merge = require('merge-stream');
+var sass = require('gulp-sass');
+var prefix = require('gulp-autoprefixer');
 
 gulp.task('css', function () {
 	var streams = merge();
@@ -39,6 +27,15 @@ gulp.task('css', function () {
 	});
 	return streams;
 });
+
+var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
+var source = require('vinyl-source-stream');
+var watchify = require('watchify');
+var xtend = require('xtend');
+
+var watching = false;
+gulp.task('enable-watch-mode', function () {watching = true;});
 
 gulp.task('js', function () {
 	var opts = {
@@ -79,10 +76,15 @@ gulp.task('js', function () {
 	return rebundle();
 });
 
+var jscs = require('gulp-jscs');
+
 gulp.task('jscs', function () {
 	return gulp.src('**/*.js')
 		.pipe(jscs());
 });
+
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 
 gulp.task('jshint', function () {
 	return gulp.src('./app_storefront/cartridge/js/**/*.js')
@@ -90,8 +92,9 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
+var mocha = require('gulp-mocha');
+
 gulp.task('test:application', function () {
-	var opts = minimist(process.argv.slice(2));
 	// default option to all
 	var suite = opts.suite || '*';
 	if (suite === 'all') {
@@ -109,7 +112,6 @@ gulp.task('test:application', function () {
 });
 
 gulp.task('test:unit', function () {
-	var opts = minimist(process.argv.slice(2));
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
 	var suite = opts.suite || '*';
@@ -163,8 +165,9 @@ gulp.task('js:styleguide', function () {
 	return bundle();
 });
 
+var connect = require('gulp-connect');
+
 gulp.task('connect:styleguide', function () {
-	var opts = minimist(process.argv.slice(2));
 	var port = opts.port || 8000;
 	return connect.server({
 		root: 'styleguide',
@@ -187,7 +190,10 @@ gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide
 	gulp.watch(styles, ['css:styleguide']);
 });
 
+
 // deploy to github pages
+var deploy = require('gulp-gh-pages');
+
 gulp.task('deploy:styleguide', ['js:styleguide', 'css:styleguide'], function () {
 	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
 	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'], {base: 'styleguide'})
