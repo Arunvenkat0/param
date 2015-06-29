@@ -65,9 +65,9 @@ export function fillOutEventShippingForm (eventShippingData) {
 	fieldMapType.set('lastname', 'input');
 	fieldMapType.set('address1', 'input');
 	fieldMapType.set('city', 'input');
+	fieldMapType.set('states_state', 'selectByValue');
 	fieldMapType.set('postal', 'input');
-	fieldMapType.set('country', 'input');
-	//fieldMapType.set('states_state', 'selectByValue');
+	fieldMapType.set('country', 'selectByValue');
 	fieldMapType.set('phone', 'input');
 
 	for (var [key, value] of eventShippingData) {

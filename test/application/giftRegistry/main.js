@@ -81,14 +81,14 @@ describe('Gift Registry', () => {
 				eventFormShippingData.set('lastname', customer.lastName);
 				eventFormShippingData.set('address1', address.address1);
 				eventFormShippingData.set('city', address.city);
+				eventFormShippingData.set('states_state', address.stateCode);
 				eventFormShippingData.set('postal', address.postalCode);
-				eventFormShippingData.set('country', 'United States');
-				//eventFormShippingData.set('states_state', address.stateCode);
+				eventFormShippingData.set('country', address.countryCode);
 				eventFormShippingData.set('phone', address.phone);
 			});
 	});
 
-	//after(() => client.end());
+	after(() => client.end());
 
 	it('should fill out the event form', () =>
 		giftRegistryPage.fillOutEventForm(eventFormData)
