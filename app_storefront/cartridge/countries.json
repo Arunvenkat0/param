@@ -59,7 +59,13 @@
 		"addressDetails": {
 			"country": {
 				"type": "select"
-			}
+			},
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "input"
+			},			
+			
 		}
 	}
 }, {

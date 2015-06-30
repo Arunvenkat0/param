@@ -21,22 +21,27 @@
 		</div>
 	</isif>
 	<div class="name">
-		<span class="firstname"><isprint value="${ShippingAddress.firstName}"/></span>
-		<span class="lastname"><isprint value="${ShippingAddress.lastName}"/></span>
-		<div class="street">
-			<div class="line1"><isprint value="${ShippingAddress.address1}"/></div>
-			<isif condition="${!empty(ShippingAddress.address2)}">
-				<div class="line2"><isprint value="${ShippingAddress.address2}"/></div>
-			</isif>
-		</div><!-- END:street -->
-		<div class="location">
+		<div class="zip">
+			<isprint value="${Resource.msg("country." + ShippingAddress.countryCode, "forms", null)}"/>
+			<isprint value="${ShippingAddress.postalCode}"/>
+		</div>
+
+		<div class="city">
+			<isprint value="${ShippingAddress.stateCode}"/>
 			<isif condition="${ShippingAddress.city != null}">
-				<span class="city"><isprint value="${ShippingAddress.city}"/><span class="statedivider">,&nbsp;</span></span>
+				<isprint value="${ShippingAddress.city}"/> 
 			</isif>
-			<span class="state"><isprint value="${ShippingAddress.stateCode}"/>&nbsp;</span>
-			<span class="zip"><isprint value="${ShippingAddress.postalCode}"/></span>
-		</div><!-- END:location -->
-		<div class="country"><isprint value="${Resource.msg(('country.'+ShippingAddress.countryCode).toLowerCase(), 'forms', null)}"/></div>
+			<isprint value="${ShippingAddress.address1}"/>
+			<isif condition="${!empty(ShippingAddress.address2)}">
+				<isprint value="${ShippingAddress.address2}"/>
+			</isif>
+			
+		</div><!-- END:street -->
+
+		<div class="lastname"><isprint value="${ShippingAddress.lastName}"/><isprint value="${ShippingAddress.firstName}"/></div>
+		
+		<!-- END:location -->
+
 		<div class="phone"><isprint value="${ShippingAddress.phone}"/></div>
 	</div><!-- END:name -->
 
