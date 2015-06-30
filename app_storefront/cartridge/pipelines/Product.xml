@@ -401,18 +401,18 @@ quantity (required) - the quantity to use for determining avalability</descripti
           <config-property key="Transactional" value="false"/>
           <key-binding alias="Product" key="From_0"/>
           <key-binding alias="product" key="To_0"/>
-          <key-binding alias="true" key="From_1"/>
+          <key-binding alias="CurrentHttpParameterMap.showswatches" key="From_1"/>
           <key-binding alias="showswatches" key="To_1"/>
-          <key-binding alias="true" key="From_2"/>
+          <key-binding alias="CurrentHttpParameterMap.showpricing" key="From_2"/>
           <key-binding alias="showpricing" key="To_2"/>
-          <key-binding alias="true" key="From_3"/>
+          <key-binding alias="CurrentHttpParameterMap.showpromotion" key="From_3"/>
           <key-binding alias="showpromotion" key="To_3"/>
-          <key-binding alias="true" key="From_4"/>
+          <key-binding alias="CurrentHttpParameterMap.showrating" key="From_4"/>
           <key-binding alias="showrating" key="To_4"/>
-          <key-binding alias="true" key="From_5"/>
+          <key-binding alias="CurrentHttpParameterMap.showcompare" key="From_5"/>
           <key-binding alias="showcompare" key="To_5"/>
-          <key-binding alias="null" key="From_6"/>
-          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="CurrentHttpParameterMap.recommendername" key="From_6"/>
+          <key-binding alias="recommendername" key="To_6"/>
           <key-binding alias="null" key="From_7"/>
           <key-binding alias="null" key="To_7"/>
           <key-binding alias="null" key="From_8"/>
