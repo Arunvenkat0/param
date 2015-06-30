@@ -76,13 +76,14 @@ describe('Gift Registry', () => {
 				eventFormData.set('participant_lastName', customer.lastName);
 				eventFormData.set('participant_email', customer.email);
 
+				eventFormShippingData.set('addressid', 'test address');
 				eventFormShippingData.set('firstname', customer.firstName);
 				eventFormShippingData.set('lastname', customer.lastName);
 				eventFormShippingData.set('address1', address.address1);
-				eventFormShippingData.set('country', address.countryCode);
-				eventFormShippingData.set('states_state', address.stateCode);
 				eventFormShippingData.set('city', address.city);
+				eventFormShippingData.set('states_state', address.stateCode);
 				eventFormShippingData.set('postal', address.postalCode);
+				eventFormShippingData.set('country', address.countryCode);
 				eventFormShippingData.set('phone', address.phone);
 			});
 	});
