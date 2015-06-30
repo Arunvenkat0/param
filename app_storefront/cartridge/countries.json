@@ -64,8 +64,7 @@
 				"isFormGroup": true,
 				"childField": "state",
 				"type": "input"
-			},			
-			
+			}	
 		}
 	}
 }, {
@@ -82,7 +81,18 @@
 		"cny-list-prices",
 		"cny-sale-prices"
 	],
-	"dynamicForms": {}
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "input"
+			}	
+		}
+	}
 }, {
 	"countryCode": "FR",
 	"name": {
