@@ -8,7 +8,7 @@
     "test": "test"
   },
   "dependencies": {
-    "imagesloaded": "^3.1.18",
+    "imagesloaded": "^3.1.8",
     "lodash": "^3.9.3",
     "promise": "^7.0.3"
   },
