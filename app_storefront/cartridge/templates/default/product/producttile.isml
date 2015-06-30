@@ -37,7 +37,7 @@
 			if (colorVarAttr) {
 				selectableColors = PVM.getFilteredValues(colorVarAttr);
 			}
-			if (Product.variationGroup) {
+			if (Product.variationGroup && colorVarAttr) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (!imageSource) {
 					if (!PVM.variants.isEmpty()) {
@@ -54,7 +54,7 @@
 				} else {
 					imageSource = PVM.master;
 				}
-			} else if (Product.isVariant()) {
+			} else if (Product.isVariant() && colorVarAttr) {
 				imageSource = selectedColor = PVM.getSelectedValue(colorVarAttr);
 				if (!imageSource) {
 					if (!PVM.variants.isEmpty()) {
