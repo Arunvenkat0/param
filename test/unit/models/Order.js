@@ -12,13 +12,13 @@ var mockRequire = require('proxyquire');
 var mockAbstractModel = {
     extend: function () {
         return function (inputParam) {
-            return { orderNo: inputParam };
+            return {orderNo: inputParam};
         };
     },
     '@noCallThru': true
 };
 
-var mockArrayList = { '@noCallThru': true };
+var mockArrayList = {'@noCallThru': true};
 
 var mockOrderMgr = {
     getOrder: function (inputParam) {
@@ -53,7 +53,7 @@ describe('Order model', function () {
         it('should call getOrder when given a string parameter', function () {
             spyOrderMgr.reset();
 
-            Order.get("some param");
+            Order.get('some param');
 
             sinon.assert.calledOnce(spyOrderMgr);
         });
@@ -72,8 +72,8 @@ describe('Order model', function () {
         });
 
         it('should instantiate an Order with an object when given an object', function () {
-            var order = Order.get({ nice: true });
-            expect(order.orderNo).to.deep.equal({ nice: true });
+            var order = Order.get({nice: true});
+            expect(order.orderNo).to.deep.equal({nice: true});
         });
 
         it('should instantiate an Order with null when given null', function () {

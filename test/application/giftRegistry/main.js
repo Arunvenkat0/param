@@ -43,7 +43,7 @@ describe('Gift Registry', () => {
 			regex: /.*\&.*body=.+/
 		},
 		shareLinkIcon: {
-		 	selector: giftRegistryPage.CSS_SHARE_LINK,
+			selector: giftRegistryPage.CSS_SHARE_LINK
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content a',
@@ -112,8 +112,8 @@ describe('Gift Registry', () => {
 			.then(() => client.isVisible('[class$="share-options"]'))
 			.then(visible => assert.isTrue(visible))
 	);
-	
-	it('should display a Facebook icon and link', () => 
+
+	it('should display a Facebook icon and link', () =>
 		client.isExisting(socialLinks.facebook.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinks.facebook.selector, 'href'))
@@ -123,7 +123,7 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should display a Twitter icon and link', () => 
+	it('should display a Twitter icon and link', () =>
 		client.isExisting(socialLinks.twitter.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinks.twitter.selector, 'href'))
@@ -133,7 +133,7 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should display a Google Plus icon and link', () => 
+	it('should display a Google Plus icon and link', () =>
 		client.isExisting(socialLinks.googlePlus.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinks.googlePlus.selector, 'href'))
@@ -143,7 +143,7 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should display a Pinterest icon and link', () => 
+	it('should display a Pinterest icon and link', () =>
 		client.isExisting(socialLinks.pinterest.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinks.pinterest.selector, 'href'))
@@ -153,7 +153,7 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should display a Mail icon and link', () => 
+	it('should display a Mail icon and link', () =>
 		client.isExisting(socialLinks.emailLink.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 			.then(() => client.getAttribute(socialLinks.emailLink.selector, 'href'))
@@ -163,12 +163,12 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should display a link icon', () => 
+	it('should display a link icon', () =>
 		client.isExisting(socialLinks.shareLinkIcon.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 	);
 
-	it('should display a URL when chain icon clicked', () => 
+	it('should display a URL when chain icon clicked', () =>
 		client.click(giftRegistryPage.CSS_SHARE_LINK)
 			.then(() => client.waitForVisible(socialLinks.shareLinkUrl.selector))
 			.then(() => client.isVisible(socialLinks.shareLinkUrl.selector))
