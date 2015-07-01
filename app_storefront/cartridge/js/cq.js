@@ -10,18 +10,20 @@ function clickThruAfter() {
 		anchors = localStorage.getItem('cq.anchors');
 		localStorage.removeItem('cq.anchors');
 	}
-	CQuotient.activities.push({
-		activityType: 'clickReco',
-		parameters: {
-			cookieId: CQuotient.getCQCookieId(),
-			userId: CQuotient.getCQUserId(),
-			recommenderName: recommenderName,
-			anchors: anchors,
-			products: {
-				id: currentProductId
+	if (window.CQuotient) {
+		CQuotient.activities.push({
+			activityType: 'clickReco',
+			parameters: {
+				cookieId: CQuotient.getCQCookieId(),
+				userId: CQuotient.getCQUserId(),
+				recommenderName: recommenderName,
+				anchors: anchors,
+				products: {
+					id: currentProductId
+				}
 			}
-		}
-	});
+		});
+	}
 	localStorage.removeItem('cq.recommendername');
 }
 
