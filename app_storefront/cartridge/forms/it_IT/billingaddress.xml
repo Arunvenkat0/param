@@ -6,7 +6,7 @@
 	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50" missing-error="resource.addresserror" range-error="address.field.invalid" />
 	<field formid="address2" label="resource.address2" type="string" mandatory="false" binding="address2" max-length="50" range-error="address.field.invalid" />
 	<field formid="postal" label="resource.zipcode" type="string" mandatory="true" min-length="5" 
-		max-length="10" binding="postalCode" missing-error="resource.errorzip" description="address.postalcode.example"/>
+		max-length="10" binding="postalCode" missing-error="resource.errorzip" description="address.postalcode.example" regexp="(^(V-|I-)?[0-9]{4}$)"/>
 	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50" missing-error="address.city.missing" range-error="address.field.invalid" />
 		
 	<!-- use set of supported billing countries -->
@@ -22,7 +22,7 @@
 	<!-- phone is optional for billing addresses -->
 	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" 
 		mandatory="true" binding="phone" max-length="20" missing-error="address.phone.missing" 
-		range-error="address.field.invalid"/>
+		range-error="address.field.invalid" regexp="(^(([0-9]{2,4})([-\s\/]{0,1})([0-9]{4,8}))?$)"/>
 		
 	<!-- actions provided by the edit billing address dialog -->
 	<action formid="apply" valid-form="true"/>

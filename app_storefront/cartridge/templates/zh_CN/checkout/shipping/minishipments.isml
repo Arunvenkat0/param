@@ -64,7 +64,7 @@
 							</isif>
 						</div>
 										
-						<div><isprint value="${address.lastName}"/><isprint value="${address.firstName}"/></div>
+						<div><isprint value="${address.lastName}"/> <isprint value="${address.firstName}"/></div>
 			
 						<isif condition="${!empty(shipment.shippingMethod)}">
 							<div class="minishipments-method">

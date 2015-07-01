@@ -38,7 +38,7 @@
 			
 		</div><!-- END:street -->
 
-		<div class="lastname"><isprint value="${ShippingAddress.lastName}"/><isprint value="${ShippingAddress.firstName}"/></div>
+		<div class="lastname"><isprint value="${ShippingAddress.lastName}"/> <isprint value="${ShippingAddress.firstName}"/></div>
 		
 		<!-- END:location -->
 
