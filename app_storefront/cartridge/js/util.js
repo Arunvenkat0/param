@@ -1,5 +1,3 @@
-/* global Countries */
-
 'use strict';
 
 var _ = require('lodash');

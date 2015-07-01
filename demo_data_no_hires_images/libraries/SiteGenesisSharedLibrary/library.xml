@@ -6678,19 +6678,19 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="copyright"&gt;&amp;copy; 2004-2015 Demandware or its affiliates. All rights reserved.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/div&gt;&#13;
-                &lt;!-- SG.15.7.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.7.0.4 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="copyright"&gt;© 2004-2015 Demandware ou ses affiliés. Tous droits réservés.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;Ceci est une boutique de démonstration uniquement. Les commandes NE SERONT PAS traitées.&lt;/div&gt;&#13;
-                &lt;!-- SG.15.7.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.7.0.4 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="copyright"&gt;© 2004-2015 Demandware o società affiliate. Tutti i diritti riservati.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;Questo è un negozio fittizio a scopo dimostrativo. Gli ordini effettuati NON VERRANNO evasi.&lt;/div&gt;&#13;
-                &lt;!-- SG.15.7.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.7.0.4 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div class="copyright"&gt;© 2004-2015 Demandware またはその系列会社。All Rights Reserved.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;これはデモのみを目的とするストアです。注文を確定しても処理されません。&lt;/div&gt;&#13;
-                &lt;!-- SG.15.7.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.7.0.4 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div class="copyright"&gt;© 2004-2015 Demandware 或其附属公司。保留所有权利。&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;此仅为示范商店。所下订单不会被处理。&lt;/div&gt;&#13;
-                &lt;!-- SG.15.7.0.3 --&gt;</custom-attribute>
+                &lt;!-- SG.15.7.0.4 --&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -8074,11 +8074,11 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;If your measurements are in between those listed in the size chart, pick the next larger size.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&lt;!--        &#13;
+&lt;script type="text/javascript"&gt;       &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;Vêtements pour homme&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -8389,11 +8389,11 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;Si après avoir pris vos mesures, vous vous rendez compte que vous êtes entre deux tailles indiquées dans le guide, prenez la taille la plus grande.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;      &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;Abbigliamento uomo&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -8704,11 +8704,11 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;Se le tue misure si trovano a cavallo di due taglie nella tabella, scegli la taglia più grande.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;       &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;メンズ衣料品&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -9019,11 +9019,11 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;サイズ表にリストされている 2 つのサイズの間に該当する場合は、大きい方のサイズをお選びください。&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;       &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;男装&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -9334,11 +9334,11 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;如果您的测量结果介于尺码表所列尺码之间，则请选择下一较大尺码。&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;        &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="size-charts"/>
@@ -12869,11 +12869,11 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;If your measurements are in between those listed in the size chart, pick the next larger size.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&lt;!--        &#13;
+&lt;script type="text/javascript"&gt;        &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;Mode féminine&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -13261,11 +13261,11 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;Si après avoir pris vos mesures, vous vous rendez compte que vous êtes entre deux tailles indiquées dans le guide, prenez la taille la plus grande.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;       &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;Abbigliamento donna&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -13653,11 +13653,11 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;Se le tue misure si trovano a cavallo di due taglie nella tabella, scegli la taglia più grande.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;       &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;レディス衣料品&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -14045,11 +14045,11 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;サイズ表にリストされている 2 つのサイズの間に該当する場合は、大きい方のサイズをお選びください。&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;        &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div class="sizinginformation"&gt;&#13;
 &lt;h2&gt;女装&lt;/h2&gt;&#13;
 &lt;ul&gt;&#13;
@@ -14437,11 +14437,11 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;如果您的测量结果介于尺码表所列尺码之间，则请选择下一较大尺码。&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;/div&gt;&#13;
-&lt;script type="text/javascript"&gt;&amp;lt;!--        &#13;
+&lt;script type="text/javascript"&gt;        &#13;
     jQuery(document).ready(function(){&#13;
         jQuery('.sizinginformation').tabs();&#13;
             });&#13;
-//--&amp;gt;&lt;/script&gt;</custom-attribute>
+&lt;/script&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="size-charts"/>

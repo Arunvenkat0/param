@@ -37,7 +37,7 @@ describe('Wishlist', () => {
 			regex: /.*\&.*body=.+/
 		},
 		shareLinkIcon: {
-		 	selector: wishListPage.CSS_SHARE_LINK,
+			selector: wishListPage.CSS_SHARE_LINK
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content a',
@@ -56,7 +56,7 @@ describe('Wishlist', () => {
 			.then(() => loginForm.loginAsDefaultCustomer())
 		);
 
-		it('should display a Facebook icon and link', () => 
+		it('should display a Facebook icon and link', () =>
 			client.isExisting(socialLinks.facebook.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.facebook.selector, 'href'))
@@ -66,7 +66,7 @@ describe('Wishlist', () => {
 				})
 		);
 
-		it('should display a Twitter icon and link', () => 
+		it('should display a Twitter icon and link', () =>
 			client.isExisting(socialLinks.twitter.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.twitter.selector, 'href'))
@@ -76,7 +76,7 @@ describe('Wishlist', () => {
 				})
 		);
 
-		it('should display a Google Plus icon and link', () => 
+		it('should display a Google Plus icon and link', () =>
 			client.isExisting(socialLinks.googlePlus.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.googlePlus.selector, 'href'))
@@ -86,7 +86,7 @@ describe('Wishlist', () => {
 				})
 		);
 
-		it('should display a Pinterest icon and link', () => 
+		it('should display a Pinterest icon and link', () =>
 			client.isExisting(socialLinks.pinterest.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.pinterest.selector, 'href'))
@@ -96,7 +96,7 @@ describe('Wishlist', () => {
 				})
 		);
 
-		it('should display a Mail icon and link', () => 
+		it('should display a Mail icon and link', () =>
 			client.isExisting(socialLinks.emailLink.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.emailLink.selector, 'href'))
@@ -106,12 +106,12 @@ describe('Wishlist', () => {
 				})
 		);
 
-		it('should display a link icon', () => 
+		it('should display a link icon', () =>
 			client.isExisting(socialLinks.shareLinkIcon.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 		);
 
-		it('should display a URL when chain icon clicked', () => 
+		it('should display a URL when chain icon clicked', () =>
 			client.click(wishListPage.CSS_SHARE_LINK)
 				.then(() => client.waitForVisible(socialLinks.shareLinkUrl.selector))
 				.then(() => client.isVisible(socialLinks.shareLinkUrl.selector))
