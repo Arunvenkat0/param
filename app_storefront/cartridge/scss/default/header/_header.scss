@@ -31,6 +31,34 @@
 	}
 }
 
+.currency-converter {
+	width: 100%;
+	select {
+		color: $black;
+		height: 40px;
+		width: 90%;
+	}
+	@media screen and (min-width: 768px) {
+		margin-top: 0;
+		position: absolute;
+		right: .8em;
+		top: 1.4em;
+		width: auto;
+		select {
+			background-color: transparent;
+			background-image: none;
+			border: none;
+			box-shadow: none;
+			color: $dark-gray;
+			font-weight: 700;
+			height: auto;
+			margin-left: 0;
+			padding: 0 1px;
+			width: auto;
+		}
+	}
+}
+
 .header-search {
 	color: $white;
 	width: 100%;

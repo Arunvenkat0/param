@@ -11,6 +11,7 @@ var countries = require('./countries'),
 	cq = require('./cq'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
+	multicurrency = require('./multicurrency'),
 	page = require('./page'),
 	rating = require('./rating'),
 	searchplaceholder = require('./searchplaceholder'),
@@ -178,6 +179,7 @@ var app = {
 		validator.init();
 		rating.init();
 		searchplaceholder.init();
+		multicurrency.init();
 		cq.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
