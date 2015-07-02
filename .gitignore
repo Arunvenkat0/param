@@ -7,3 +7,5 @@ node_modules
 dw.json
 demo_data_no_hires_images.zip
 Thumbs.db
+app_storefront/cartridge/static/*/css/style.css
+app_storefront/cartridge/static/*/js/app.js
