@@ -4437,7 +4437,7 @@
     </category>
 
     <category category-id="top-seller">
-        <display-name xml:lang="x-default">Top Seller</display-name>
+        <display-name xml:lang="x-default">Top Sellers</display-name>
         <display-name xml:lang="fr-FR">Meilleure vente</display-name>
         <display-name xml:lang="it-IT">I più venduti</display-name>
         <display-name xml:lang="ja-JP">売れ筋商品</display-name>
