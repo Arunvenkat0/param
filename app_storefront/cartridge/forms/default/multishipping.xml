@@ -32,7 +32,12 @@
 			<field formid="shipmentUUID" binding="UUID" type="string"/>
 	
 			<!-- gift options -->
-			<field formid="isGift" label="checkout.shipment.isgift" type="boolean" default-value="false" binding="gift" mandatory="false" />
+			<field formid="isGift" label="checkout.shipment.isgift" type="boolean" default-value="false" binding="gift" mandatory="false" >
+				<options>
+					<option label="checkout.shipment.yes" value="true" />
+					<option label="checkout.shipment.no" value="false" />
+				</options>
+			</field>
 			<field formid="giftMessage" label="checkout.shipment.giftmessage" type="string" binding="giftMessage" mandatory="false" />
 			<field formid="storePickupMessage" label="store.storemessage" type="string" binding="custom.storePickupMessage" mandatory="false" />	
 
