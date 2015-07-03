@@ -7327,39 +7327,54 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;ul id="homepage-slides"&gt;&#13;
-    &lt;li class="slide"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
-            &lt;img src="images/homepage/banners_homepage_05a.jpg?$staticlink$" alt="Spring Arrivals"/&gt;&#13;
-            &lt;h2&gt;Spring New Arrivals&lt;/h2&gt;&#13;
-            &lt;span&gt;Shop Collection&lt;/span&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Mens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Suits&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
-    &lt;li class="slide"&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
-            &lt;img src="images/homepage/banners_homepage_05b.jpg?$staticlink$" alt="Perfect Companion"/&gt;&#13;
-            &lt;h2&gt;The Perfect Companion&lt;/h2&gt;&#13;
-            &lt;span&gt;Shop Accessories&lt;/span&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;The&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Perfect Companion&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
-    &lt;li class="slide"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
-            &lt;img src="images/homepage/banners_homepage_05c.jpg?$staticlink$" alt="Mens Suits"/&gt;&#13;
-            &lt;h2&gt;Men's Suits&lt;/h2&gt;&#13;
-            &lt;span&gt;Shop Now&lt;/span&gt;&#13;
-        &lt;/a&gt;&#13;
-    &lt;/li&gt;&#13;
-    &lt;li class="slide"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
-            &lt;img src="images/homepage/banners_homepage_05d.jpg?$staticlink$" alt="Womens Dresses"/&gt;&#13;
-            &lt;h2&gt;Women's Dresses&lt;/h2&gt;&#13;
-            &lt;span&gt;20% off this week only&lt;/span&gt;&#13;
-        &lt;/a&gt;&#13;
-    &lt;/li&gt;&#13;
-    &lt;li class="slide"&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
-            &lt;img src="images/homepage/banners_homepage_05e.jpg?$staticlink$" alt="Summer Shoes"/&gt;&#13;
-            &lt;h2&gt;Flip into Summer&lt;/h2&gt;&#13;
-            &lt;span&gt;Shop Summer Shoes&lt;/span&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Womens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Shoes&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Women's Shoes"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Womens&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Dresses&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;Spring&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;New Arrivals&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7512,6 +7527,20 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
         </custom-attributes>
+    </content>
+
+    <content content-id="home-free-shipping-orders-over-150">
+        <display-name xml:lang="x-default">Free Ground Shipping on orders of $150 or more</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping for order over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Free&lt;/h1&gt;&#13;
+&lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
+&lt;h3&gt;on orders of $150 or more&lt;/h3&gt;&#13;
+&lt;/div&gt;</custom-attribute>
     </content>
 
     <content content-id="home-main">
