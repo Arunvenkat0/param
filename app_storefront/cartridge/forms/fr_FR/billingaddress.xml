@@ -11,7 +11,7 @@
 	<!-- use set of supported billing countries -->
 	<field formid="country" label="resource.country" type="string" default="fr" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
 		<options>
-			<option optionid="FR" 	label="country.france"	value="fr"/>
+			<option optionid="fr" 	label="country.france"	value="fr"/>
 		</options>	
 	</field>
 

@@ -68,7 +68,7 @@
 			"states": {
 				"isFormGroup": true,
 				"childField": "state",
-				"type": "input"
+				"type": "select"
 			}	
 		}
 	}

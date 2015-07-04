@@ -19,11 +19,10 @@
 	<!-- use global state list -->
 	<include formid="states" name="states"/>
 
-
 	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
 		missing-error="customeraddress.country.missing-error">
 		<options>
-			<option optionid="IT" label="country.italy" value="it"/>
+			<option optionid="it" label="country.italy" value="it"/>
 		</options>
 	</field>
 
