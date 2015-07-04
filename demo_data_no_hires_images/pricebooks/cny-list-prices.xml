@@ -4,6 +4,10 @@
         <header pricebook-id="cny-list-prices">
             <currency>CNY</currency>
             <display-name xml:lang="x-default">List Prices</display-name>
+            <display-name xml:lang="fr-FR">Prix catalogue</display-name>
+            <display-name xml:lang="it-IT">Prezzi di listino</display-name>
+            <display-name xml:lang="ja-JP">定価</display-name>
+            <display-name xml:lang="zh-CN">清单价格</display-name>
             <online-flag>true</online-flag>
         </header>
 
