@@ -1,4 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules.isml"/>
 <iscomment>
 	This template renders the billing address and a list of all payment
 	methods (more precessively payment instruments) used for the payment
@@ -17,13 +18,7 @@
 		</h3>
 
 		<div class="details">
-			<div><isprint value="${billingAddress.firstName}"/> <isprint value="${billingAddress.lastName}"/></div>
-			<div><isprint value="${billingAddress.address1}"/></div>
-			<isif condition="${!empty(billingAddress.address2)}">
-				<div><isprint value="${billingAddress.address2}"/></div>
-			</isif>
-			<div><isprint value="${billingAddress.city}"/>, <isprint value="${billingAddress.stateCode}"/>  <isprint value="${billingAddress.postalCode}"/></div>
-			<div><isprint value="${Resource.msg("country."+billingAddress.countryCode, "forms", null)}"/></div>
+			<isminicheckout_address p_address="${billingAddress}"/>
 		</div>
 
 	</div>

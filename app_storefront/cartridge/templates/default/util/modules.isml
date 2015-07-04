@@ -202,6 +202,22 @@
 />
 
 <iscomment>
+	The locale-specific portion of the miniaddress.isml module
+</iscomment>
+<ismodule template="account/addressbook/miniaddress_localized.isml"
+	name="miniaddress_localized"
+	attribute="p_address"
+/>
+
+<iscomment>
+	The locale-specific portion of the minibillinginfo.isml module
+</iscomment>
+<ismodule template="checkout/components/minicheckout_address.isml"
+	name="minicheckout_address"
+	attribute="p_address"
+/>
+
+<iscomment>
 	define reusable single shipping addresses view
 	The prefix 'p_' avoids clashes with loop or other variables
 </iscomment>

@@ -1,4 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules.isml"/>
+
 <iscomment>
 	This template renders a summary of all shipments of the basket which is
 	used below the order summary at the right hand side in the checkout
@@ -49,14 +51,8 @@
 							<div>(<isprint value="${giftCertLI.recipientEmail}"/>)</div>
 						</isloop>
 					<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}">
-						<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
-						<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
-						<div><isprint value="${address.address1}"/></div>
-						<isif condition="${!empty(address.address2)}">
-							<div><isprint value="${address.address2}"/></div>
-						</isif>
-						<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
-						<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
+						<isminicheckout_address p_address="${shipment.shippingAddress}"/>
+						
 						<isif condition="${!empty(shipment.shippingMethod)}">
 							<div class="minishipments-method">
 								<span>${Resource.msg('order.orderdetails.shippingmethod','order',null)}</span>
