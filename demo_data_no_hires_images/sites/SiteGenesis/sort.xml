@@ -187,7 +187,7 @@
         <sorting-option option-id="best-matches">
             <rule-id>best-matches</rule-id>
             <display-name xml:lang="x-default">Best Matches</display-name>
-            <display-name xml:lang="fr-FR">Meilleurs choix</display-name>
+            <display-name xml:lang="fr-FR">Meilleurs résultats</display-name>
             <display-name xml:lang="it-IT">Migliore corrispondenza</display-name>
             <display-name xml:lang="ja-JP">一致順</display-name>
             <display-name xml:lang="zh-CN">最佳匹配</display-name>
@@ -195,7 +195,7 @@
         <sorting-option option-id="price-low-to-high">
             <rule-id>price-low-to-high</rule-id>
             <display-name xml:lang="x-default">Price Low To High</display-name>
-            <display-name xml:lang="fr-FR">Prix croissants</display-name>
+            <display-name xml:lang="fr-FR">Prix : croissant</display-name>
             <display-name xml:lang="it-IT">Prezzo dal più basso al più alto</display-name>
             <display-name xml:lang="ja-JP">価格が低い順</display-name>
             <display-name xml:lang="zh-CN">价格从低到高</display-name>
@@ -203,7 +203,7 @@
         <sorting-option option-id="price-high-to-low">
             <rule-id>price-high-to-low</rule-id>
             <display-name xml:lang="x-default">Price High To Low</display-name>
-            <display-name xml:lang="fr-FR">Prix décroissants</display-name>
+            <display-name xml:lang="fr-FR">Prix : décroissant</display-name>
             <display-name xml:lang="it-IT">Prezzo dal più alto al più basso</display-name>
             <display-name xml:lang="ja-JP">価格が高い順</display-name>
             <display-name xml:lang="zh-CN">价格从高到低</display-name>
@@ -229,7 +229,7 @@
             <display-name xml:lang="x-default">Brand</display-name>
             <display-name xml:lang="fr-FR">Marque</display-name>
             <display-name xml:lang="it-IT">Marca</display-name>
-            <display-name xml:lang="ja-JP">ブランド</display-name>
+            <display-name xml:lang="ja-JP">ブランド順</display-name>
             <display-name xml:lang="zh-CN">品牌</display-name>
         </sorting-option>
         <sorting-option option-id="most-popular">
@@ -237,7 +237,7 @@
             <display-name xml:lang="x-default">Most Popular</display-name>
             <display-name xml:lang="fr-FR">Les plus populaires</display-name>
             <display-name xml:lang="ja-JP">人気が高い順</display-name>
-            <display-name xml:lang="it-IT">I più diffusi</display-name>
+            <display-name xml:lang="it-IT">I più cercati</display-name>
             <display-name xml:lang="zh-CN">最热门</display-name>
         </sorting-option>
         <sorting-option option-id="top-sellers">

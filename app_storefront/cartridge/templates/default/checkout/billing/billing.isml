@@ -52,7 +52,9 @@
 						importScript("cart/CartUtils.ds");
 						var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
 					</isscript>
-					<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" />
+					<div class="field-wrapper">
+						<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" />
+					</div>
 				</div>
 
 				<div class="form-row form-row-button">

@@ -5,7 +5,7 @@
         <display-name xml:lang="fr-FR">Transport terrestre</display-name>
         <display-name xml:lang="it">Via terra</display-name>
         <display-name xml:lang="it-IT">Via terra</display-name>
-        <display-name xml:lang="ja-JP">通常配送</display-name>
+        <display-name xml:lang="ja-JP">通常便</display-name>
         <display-name xml:lang="zh-CN">陆路</display-name>
         <description xml:lang="x-default">Order received within 7-10 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 7 à 10 jours ouvrés</description>
@@ -165,7 +165,7 @@
         <display-name xml:lang="fr-FR">Le lendemain</display-name>
         <display-name xml:lang="it">Il giorno successivo</display-name>
         <display-name xml:lang="it-IT">Il giorno successivo</display-name>
-        <display-name xml:lang="ja-JP">翌日配送</display-name>
+        <display-name xml:lang="ja-JP">翌日便</display-name>
         <display-name xml:lang="zh-CN">连夜送货</display-name>
         <description xml:lang="x-default">Order received the next business day</description>
         <description xml:lang="fr-FR">Commande reçue le jour ouvré suivant (J+1)</description>
@@ -524,20 +524,6 @@
                     <included-products>
                         <condition-group>
                             <category-condition catalog-id="storefront-catalog-en">
-                                <category-id>electronics-televisions</category-id>
-                            </category-condition>
-                        </condition-group>
-                    </included-products>
-                </products>
-                <cost-per-item>
-                    <surcharge>25.00</surcharge>
-                </cost-per-item>
-            </product-cost-group>
-            <product-cost-group>
-                <products>
-                    <included-products>
-                        <condition-group>
-                            <category-condition catalog-id="storefront-catalog-en">
                                 <category-id>womens-jewelry</category-id>
                             </category-condition>
                         </condition-group>
@@ -545,6 +531,20 @@
                 </products>
                 <cost-per-item>
                     <surcharge>10.00</surcharge>
+                </cost-per-item>
+            </product-cost-group>
+            <product-cost-group>
+                <products>
+                    <included-products>
+                        <condition-group>
+                            <category-condition catalog-id="storefront-catalog-en">
+                                <category-id>electronics-televisions</category-id>
+                            </category-condition>
+                        </condition-group>
+                    </included-products>
+                </products>
+                <cost-per-item>
+                    <surcharge>25.00</surcharge>
                 </cost-per-item>
             </product-cost-group>
         </product-cost-groups>
@@ -832,13 +832,12 @@
         <currency>CNY</currency>
     </shipping-method>
 
-
     <shipping-method method-id="EUR001" default="true">
         <display-name xml:lang="x-default">Ground</display-name>
         <display-name xml:lang="fr-FR">Transport terrestre</display-name>
         <display-name xml:lang="it">Via terra</display-name>
         <display-name xml:lang="it-IT">Via terra</display-name>
-        <display-name xml:lang="ja-JP">通常配送</display-name>
+        <display-name xml:lang="ja-JP">通常便</display-name>
         <display-name xml:lang="zh-CN">陆路</display-name>
         <description xml:lang="x-default">Order received within 7-10 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 7 à 10 jours ouvrés</description>
@@ -998,7 +997,7 @@
         <display-name xml:lang="fr-FR">Le lendemain</display-name>
         <display-name xml:lang="it">Il giorno successivo</display-name>
         <display-name xml:lang="it-IT">Il giorno successivo</display-name>
-        <display-name xml:lang="ja-JP">翌日配送</display-name>
+        <display-name xml:lang="ja-JP">翌日便</display-name>
         <display-name xml:lang="zh-CN">连夜送货</display-name>
         <description xml:lang="x-default">Order received the next business day</description>
         <description xml:lang="fr-FR">Commande reçue le jour ouvré suivant (J+1)</description>
@@ -1177,7 +1176,7 @@
                     </included-products>
                 </products>
                 <cost-per-item>
-                    <surcharge>25.00</surcharge>
+                    <surcharge>25</surcharge>
                 </cost-per-item>
             </product-cost-group>
             <product-cost-group>
@@ -1191,7 +1190,7 @@
                     </included-products>
                 </products>
                 <cost-per-item>
-                    <surcharge>10.00</surcharge>
+                    <surcharge>10</surcharge>
                 </cost-per-item>
             </product-cost-group>
         </product-cost-groups>
@@ -1264,7 +1263,7 @@
                     </included-products>
                 </products>
                 <cost-per-item>
-                    <surcharge>25.00</surcharge>
+                    <surcharge>25</surcharge>
                 </cost-per-item>
             </product-cost-group>
         </product-cost-groups>
@@ -1400,7 +1399,7 @@
                     </included-products>
                 </products>
                 <cost-per-item>
-                    <surcharge>100.00</surcharge>
+                    <surcharge>100</surcharge>
                 </cost-per-item>
             </product-cost-group>
         </product-cost-groups>
@@ -1478,5 +1477,5 @@
         </custom-attributes>
         <currency>JPY</currency>
     </shipping-method>
-    
+
 </shipping>

@@ -3,7 +3,11 @@
     <pricebook>
         <header pricebook-id="jpy-sale-prices">
             <currency>JPY</currency>
-            <display-name xml:lang="x-default">Japanese Sale Prices</display-name>
+            <display-name xml:lang="x-default">Sale Prices</display-name>
+            <display-name xml:lang="fr-FR">Prix en soldes</display-name>
+            <display-name xml:lang="it-IT">Prezzi svendita</display-name>
+            <display-name xml:lang="ja-JP">セール価格</display-name>
+            <display-name xml:lang="zh-CN">优惠价格</display-name>
             <online-flag>true</online-flag>
             <parent>jpy-list-prices</parent>
         </header>
