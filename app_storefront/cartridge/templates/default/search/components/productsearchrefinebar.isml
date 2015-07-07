@@ -86,7 +86,7 @@
 
 			<isif condition="${pdict.ProductSearchResult.isRefinedByAttribute(RefinementDefinition.attributeID)}">
 				<div class="clear-refinement">
-					(<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${pdict.ProductSearchResult.urlRelaxAttribute('Search-Show',RefinementDefinition.attributeID)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>)
+					<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${pdict.ProductSearchResult.urlRelaxAttribute('Search-Show',RefinementDefinition.attributeID)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 				</div>
 			</isif>
 
@@ -165,7 +165,7 @@
 
 			<isif condition="${pdict.ProductSearchResult.refinedByPrice}">
 				<div class="clear-refinement">
-					(<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'))}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>)
+					<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${unsanitizeOR(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'))}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 				</div>
 			</isif>
 
