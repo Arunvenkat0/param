@@ -404,7 +404,6 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>7.0</position>
-        <template>rendering/category/categorylanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women and Mens New Arrivals in Clothing, Jewelry, Accessories &amp; More</page-title>
             <page-title xml:lang="fr-FR">Nouveautés femme et homme : vêtements, bijoux, accessoires, et plus encore</page-title>
