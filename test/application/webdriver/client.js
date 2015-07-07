@@ -3,14 +3,18 @@
 import config from './config';
 import webdriverio from 'webdriverio';
 
-var client = webdriverio.remote({
+import minimist from 'minimist';
+
+let opts = minimist(process.argv.slice(2));
+
+let client = webdriverio.remote({
 	desiredCapabilities: {
-		browserName: config.client || 'phantomjs'
+		browserName: opts.browser || config.client || 'phantomjs'
 	},
 	logLevel: 'silent'
 });
 
-var loggingLevel = 'info';
+let loggingLevel = 'info';
 if (loggingLevel === 'debug') {
 	client.on('error', function (e) {
 		//jshint devel:true

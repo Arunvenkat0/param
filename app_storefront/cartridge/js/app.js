@@ -8,6 +8,7 @@
 'use strict';
 
 var countries = require('./countries'),
+	cq = require('./cq'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	multicurrency = require('./multicurrency'),
@@ -179,6 +180,7 @@ var app = {
 		rating.init();
 		searchplaceholder.init();
 		multicurrency.init();
+		cq.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
 		var ns = page.ns;

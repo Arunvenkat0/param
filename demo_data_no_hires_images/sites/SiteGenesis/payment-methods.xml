@@ -51,6 +51,10 @@
 
     <payment-card card-type="Master">
         <name xml:lang="x-default">Master Card</name>
+        <name xml:lang="fr-FR">Master Card</name>
+        <name xml:lang="it-IT">Master Card</name>
+        <name xml:lang="ja-JP">Master Card</name>
+        <name xml:lang="zh-CN">Master Card（万事达卡）</name>
         <enabled-flag>false</enabled-flag>
         <card-number-settings>
             <enable-checksum-verification>true</enable-checksum-verification>

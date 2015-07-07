@@ -42,8 +42,7 @@ function populateForm(addressID, $form) {
  * @description Initializes events for the gift registration
  */
 function initializeEvents() {
-	var $eventInfoForm = $('form[name$="_giftregistry_event"]'),
-		$eventAddressForm = $('form[name$="_giftregistry"]'),
+	var $eventAddressForm = $('form[name$="_giftregistry"]'),
 		$beforeAddress = $eventAddressForm.find('fieldset[name="address-before"]'),
 		$afterAddress = $eventAddressForm.find('fieldset[name="address-after"]');
 

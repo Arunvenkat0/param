@@ -15,11 +15,11 @@ function initMultiGiftMessageBox() {
 		var $giftMessage = $this.find('.gift-message-text');
 
 		//handle initial load
-		$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
+		$giftMessage.toggleClass('hidden', $('input[name$="_isGift"]:checked', this).val() !== 'true');
 
 		//set event listeners
 		$this.on('change', function () {
-			$giftMessage.toggleClass('hidden', $('input[name$="_shippingAddress_isGift"]:checked').val() !== 'true');
+			$giftMessage.toggleClass('hidden', $('input[name$="_isGift"]:checked', this).val() !== 'true');
 		});
 	});
 }
