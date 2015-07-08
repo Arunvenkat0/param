@@ -9,7 +9,7 @@ var pdpStoreTemplate = function (store) {
 		'<li class="store-list-item ' + (store.storeId === User.storeId ? ' selected' : '') + '">',
 		'	<div class="store-address">' + store.address1 + ', ' + store.city + ' ' + store.stateCode +
 		' ' + store.postalCode + '</div>',
-		'	<div class="store-status ' + store.statusclass + '">' + store.status + '</div>',
+		'	<div class="store-status" data-status="' + store.statusclass + '">' + store.status + '</div>',
 		'</li>'
 	].join(newLine);
 };
