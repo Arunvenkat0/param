@@ -6,7 +6,9 @@
 	"continent": "northamerica",
 	"locales": ["en_US"],
 	"currencyCode": "USD",
-	"taxation": "net",
+	"taxation": {
+		"type": "net"
+	},	
 	"priceBooks": [
 		"usd-list-prices",
 		"usd-sale-prices"
@@ -50,7 +52,10 @@
 	"continent": "asia",
 	"locales": ["ja_JP", "en_JP"],
 	"currencyCode": "JPY",
-	"taxation": "gross",
+	"taxation": {
+		"type": "gross",
+		"rate": 0.1
+	},
 	"priceBooks" : [
 		"jpy-list-prices",
 		"jpy-sale-prices"
@@ -60,15 +65,11 @@
 			"country": {
 				"type": "select"
 			},
-			"postalUS": {
-				"skip": true
-			},
-			"postalCA": {
-				"skip": true
-			},
-			"postalDE": {
-				"skip": true
-			}
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "select"
+			}	
 		}
 	}
 }, {
@@ -80,12 +81,26 @@
 	"continent": "asia",
 	"locales": ["zh_CN", "en_CN"],
 	"currencyCode": "CNY",
-	"taxation": "gross",
+	"taxation": {
+		"type": "gross",
+		"rate": 0.17
+	},
 	"priceBooks" : [
 		"cny-list-prices",
 		"cny-sale-prices"
 	],
-	"dynamicForms": {}
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "input"
+			}	
+		}
+	}
 }, {
 	"countryCode": "FR",
 	"name": {
@@ -94,7 +109,10 @@
 	"continent": "europe",
 	"locales": ["fr_FR"],
 	"currencyCode": "EUR",
-	"taxation": "gross",
+	"taxation": {
+		"type": "gross",
+		"rate": 0.2
+	},
 	"priceBooks" : [
 		"eur-list-prices",
 		"eur-sale-prices"
@@ -103,6 +121,9 @@
 		"addressDetails": {
 			"country": {
 				"type": "select"
+			},
+			"states": {
+				"skip": true
 			},	
 			"phone": {
 				"help": {
@@ -123,7 +144,10 @@
 	"continent": "europe",
 	"locales": ["it_IT"],
 	"currencyCode": "EUR",
-	"taxation": "gross",
+	"taxation": {
+		"type": "gross",
+		"rate": 0.22
+	},
 	"priceBooks" : [
 		"eur-list-prices",
 		"eur-sale-prices"
@@ -133,6 +157,11 @@
 			"country": {
 				"type": "select"
 			},	
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "select"
+			},
 			"phone": {
 				"help": {
 					"cid": "help-telephone",

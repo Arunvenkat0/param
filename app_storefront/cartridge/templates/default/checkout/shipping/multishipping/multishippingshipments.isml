@@ -163,18 +163,14 @@
 							};
 						</isscript>
 						<isif condition="${shipment.productLineItems.size() > 0}">
-							<tr class="cart-row">
+							<tr class="cart-row form-horizontal">
 								<td colspan="4">
 								<isif condition="${shipment.custom.shipmentType == 'instore' && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 									<div class="form-row">
 										<isinputfield rowclass="store-pickup-message-text" formfield="${shipmentItem.storePickupMessage}" type="textarea" attributes="${attributes}"/>
 									</div>
 								<iselse/>
-									<div class="form-row">
-										<label for="isgiftyes${shipmentItem.itemIndex}">${Resource.msg(pdict.CurrentForms.singleshipping.shippingAddress.isGift.label,'forms',null)}</label>
-										<input class="input-radio js-isgiftyes" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftyes${shipmentItem.itemIndex}" value="true" <isif condition="${shipmentItem.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.yes', 'locale', null)}
-										<input class="input-radio js-isgiftno" type="radio" name="${shipmentItem.isGift.htmlName}" id="isgiftno${shipmentItem.itemIndex}" value="false" <isif condition="${!shipmentItem.isGift.value}">checked="checked"</isif> /> ${Resource.msg('global.no', 'locale', null)}
-									</div>
+									<isinputfield formfield="${shipmentItem.isGift}" type="radio"/>
 									<isinputfield rowclass="gift-message-text" formfield="${shipmentItem.giftMessage}" type="textarea" attributes="${attributes}"/>
 								</isif>
 								</td>
