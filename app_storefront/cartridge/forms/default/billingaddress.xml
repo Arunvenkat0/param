@@ -12,9 +12,9 @@
 		missing-error="resource.errorzip"/>
 		
 	<!-- use set of supported billing countries -->
-	<field formid="country" label="resource.country" type="string" default="US" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
+	<field formid="country" label="resource.country" type="string" default="us" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
 		<options>
-			<option optionid="US" 	label="country.unitedstates"	value="US"/>
+			<option optionid="us" 	label="country.unitedstates"	value="us"/>
 		</options>	
 	</field>
 
