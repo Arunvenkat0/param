@@ -70,6 +70,8 @@
 			margin-top: .5rem;
 			text-align: left;
 			transition: all .3s ease;
+			width: 10rem; //For IE
+			width: max-content;
 			h3 {
 				display: none;
 				margin: 0;
@@ -94,6 +96,7 @@
 			}
 			.user-links {
 				padding-left: 1.5rem;
+				text-align: center;
 				@media screen and (min-width: 768px) {
 					padding-left: 0;
 				}
