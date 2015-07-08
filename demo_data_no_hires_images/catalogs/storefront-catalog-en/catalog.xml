@@ -476,7 +476,6 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-success.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
