@@ -117,17 +117,6 @@
 
 .store-list-pdp-container {
 	margin-top: 1em;
-	.stores-toggle {
-		&:before {
-			content: "\f0d7";
-			font-family: FontAwesome;
-			padding-right: .5rem;
-		}
-	}
-	.collapsed {
-		&:before {
-			content: "\f0da";
-		}
 	}
 	.store-list-pdp {
 		margin-top: 0.5em;
