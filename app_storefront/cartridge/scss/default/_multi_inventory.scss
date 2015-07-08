@@ -121,7 +121,6 @@
 	}
 	.store-list-item {
 		@extend %clearfix;
-		border-bottom: 1px dotted $very-light-gray;
 		display: none;
 		padding: 0.5em  0.8em;
 		&:last-of-type {
