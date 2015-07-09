@@ -87,9 +87,9 @@
 			<iscomment>Get Campaign ID</iscomment>
 			<isscript>
 				var campaignID : String = "N/A";
-				if ( priceAdjustment.campaignID != null )
+				if ( shippingAdjustment.campaignID != null )
 				{
-				    campaignID = priceAdjustment.campaignID;
+				    campaignID = shippingAdjustment.campaignID;
 				}
 			</isscript>
 			<isinclude url="${URLUtils.url('ReportingEvent-Start',
