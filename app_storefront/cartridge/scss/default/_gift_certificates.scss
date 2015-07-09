@@ -1,19 +1,25 @@
 .gift-certificate-purchase {
-	background: none repeat scroll 0 0 $white-smoke;
+	background-color: $white-smoke;
 	margin-bottom: 1em;
 	padding: .83em;
 	.content-asset {
-		float: left;
-		width: 50%;
+		@media (min-width: 768px) {
+			float: left;
+			width: 50%;
+		}
 		img {
 			margin: 1.66em 0;
 		}
 	}
 	form {
-		background: none repeat scroll 0 0 $white;
-		float: right;
+		background-color: $white;
+		box-sizing: border-box;
 		padding: 0 1.66em 1.66em;
-		width: 40%;
+		width: 100%;
+		@media (min-width: 768px) {
+			float: left;
+			width: 50%;
+		}
 		.input-text, .input-textarea {
 			width: 90%;
 		}
@@ -22,6 +28,11 @@
 			float: left;
 			margin: 0;
 			width: 40%;
+		}
+		button {
+			margin-top: -4px;
+			width: 12em; //for IE
+			width: max-content;
 		}
 		.form-row-button {
 			clear: none;
