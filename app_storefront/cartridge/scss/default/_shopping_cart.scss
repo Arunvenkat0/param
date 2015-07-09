@@ -267,6 +267,8 @@
 ul.product-availability-list {
 	margin: 0;
 	padding: 0;
+	width: 5em; //for IE
+	width: max-content;
 	li {
 		list-style: none outside none;
 	}
