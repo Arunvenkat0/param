@@ -59,7 +59,7 @@
 	position: absolute;
 	right: 0;
 	top: 2.5em;
-	width: 220px;
+	width: 18rem;
 	#mini-cart:hover & {
 		display: block;
 	}
@@ -140,9 +140,15 @@
 
 .mini-cart-subtotals {
 	font-weight: 700;
-	padding: 1em 0 0;
+	margin: 0 auto;
+	padding-top: .5em;
+	width: 16rem; //for IE
+	width: max-content;
 	.label {
-		margin: 0 20px 0 0;
+		margin: 0 .5rem;
+	}
+	.value {
+		margin-right: .5rem;
 	}
 }
 
@@ -151,8 +157,7 @@
 	border: 1px solid $gainsboro;
 	font-size: 0.9em;
 	font-style: italic;
-	margin: 1em 2em;
-	padding: 1em;
+	margin: 1em 1em;
 }
 
 .mini-cart-link-checkout {
