@@ -16,20 +16,20 @@
 
 <isset name="Product" value="${pdict.product}" scope="page"/>
 
-<iscomment>set default values</iscomment>
-<isset name="showswatches" value="${(pdict.showswatches) ? pdict.showswatches : false}" scope="page"/>
-<isset name="showpricing" value="${(pdict.showpricing) ? pdict.showpricing : false}" scope="page"/>
-<isset name="showpromotion" value="${(pdict.showpromotion) ? pdict.showpromotion : false}" scope="page"/>
-<isset name="showrating" value="${(pdict.showrating) ? pdict.showrating : false}" scope="page"/>
-<isset name="showcompare" value="${(pdict.showcompare) ? pdict.showcompare : false}" scope="page"/>
-<isset name="recommendername" value="${(pdict.recommendername) ? pdict.recommendername : ''}" scope="page"/>
-
 <isif condition="${!empty(Product)}">
 	<iscomment>
 		Get the colors selectable from the current product master or variant range if we
 		need to determine them based on a search result.
 	</iscomment>
 	<isscript>
+		// set default settings
+		var showswatches = pdict.showswatches || false;
+		var showpricing = pdict.showpricing || false;
+		var showpromotion = pdict.showpromotion || false;
+		var showrating = pdict.showrating || false;
+		var showcompare = pdict.showcompare || false;
+		var recommendername = pdict.recommendername || '';
+
 		var selectableColors = new dw.util.ArrayList();
 		var imageSize = 'medium';
 		var PVM = Product.variationModel;
