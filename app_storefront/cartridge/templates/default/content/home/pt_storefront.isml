@@ -24,7 +24,7 @@
 
 </head>
 <body>
-
+	<isset name="showCountrySelector" value="${true}" scope="page"/>
 	<div id="wrapper" class="pt_storefront">
 
 		<isinclude template="components/header/header"/>
@@ -38,6 +38,5 @@
 		<isinclude template="content/home/pt_storefront_VARS"/>
 
 	</div><!--  /wrapper -->
-
 </body>
 </html>
