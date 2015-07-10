@@ -175,7 +175,7 @@
 
 .order-totals-table {
 	td {
-		padding: .3rem 0;
+		padding: .3rem;
 		text-align: right;
 
 	}
@@ -195,8 +195,9 @@
 		font-weight: 700;
 	}
 }
-
-
+.order-value {
+	white-space: nowrap;
+}
 .cart-actions {
 	@extend %clearfix;
 }
@@ -267,6 +268,8 @@
 ul.product-availability-list {
 	margin: 0;
 	padding: 0;
+	width: 5em; //for IE
+	width: max-content;
 	li {
 		list-style: none outside none;
 	}

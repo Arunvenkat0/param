@@ -98,21 +98,6 @@
 				<option optionid="AE" 	label="state.us.armedforcesmiddleeast" 	value="AE"/>
 				<option optionid="AP" 	label="state.us.armedforcespacific" 	value="AP"/>
 
-				<!-- Canadian provinces and territories -->
-				<option optionid="AB" 	label="state.ca.alberta" 				value="AB"/>
-				<option optionid="BC" 	label="state.ca.britishcolumbia" 		value="BC"/>
-				<option optionid="MB" 	label="state.ca.manitoba" 				value="MB"/>
-				<option optionid="NB" 	label="state.ca.newbrunswick" 			value="NB"/>
-				<option optionid="NL" 	label="state.ca.newfoundland" 			value="NL"/>
-				<option optionid="NT" 	label="state.ca.northwestterritories" 	value="NT"/>
-				<option optionid="NS" 	label="state.ca.novascotia" 			value="NS"/>
-				<option optionid="NU" 	label="state.ca.nunavut" 				value="NU"/>
-				<option optionid="ON" 	label="state.ca.ontario" 				value="ON"/>
-				<option optionid="PE" 	label="state.ca.princeedwardisland" 	value="PE"/>
-				<option optionid="QC" 	label="state.ca.quebec" 				value="QC"/>
-				<option optionid="SK" 	label="state.ca.saskatchewan" 			value="SK"/>
-				<option optionid="YT" 	label="state.ca.yukon" 					value="YT"/>
-
 				<!-- Other -->
 				<option optionid="OTHER" label="state.us.other" 				value="OTHER"/>
 			</options>
@@ -120,10 +105,7 @@
 
 		<field formid="eventCountry" label="giftregistry.eventCountry" type="string" mandatory="false">
 			<options>
-				<option optionid="" 	label="resource.select"	value=""/>
 				<option optionid="US" 	label="country.unitedstates"	value="US"/>
-				<option optionid="DE" 	label="country.germany" 	value="DE"/>
-				<option optionid="CA" 	label="country.canada" 	value="CA"/>
 			</options>
 		</field>
 
