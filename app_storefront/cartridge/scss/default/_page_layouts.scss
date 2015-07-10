@@ -36,7 +36,7 @@
 		border: 0 none;
 		float: left;
 		margin: 0;
-		width: 709px;
+		width: 76%;
 	}
 	.full-width & {
 		border: 0 none;
@@ -64,7 +64,9 @@
 	.primary-focus & {
 		background: none repeat scroll 0 0 transparent;
 		border: 0 none;
-		float: right;
-		width: 210px;
+		box-sizing: border-box;
+		float: left;
+		padding-left: .4rem;
+		width: 24%;
 	}
 }

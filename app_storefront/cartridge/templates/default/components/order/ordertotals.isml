@@ -128,7 +128,7 @@
 				</isif>
 
 				<td><isprint value="${pdict.p_totallabel}"/></td>
-				<td><isprint value="${orderTotalValue}"/></td>
+				<td class="order-value"><isprint value="${orderTotalValue}"/></td>
 			</tr>
 		</tbody>
 	</table>
