@@ -17,12 +17,12 @@
 <isset name="Product" value="${pdict.product}" scope="page"/>
 
 <iscomment>set default values</iscomment>
-<isset name="showswatches" value="${(pdict.showswatches != null) ? pdict.showswatches : false}" scope="page"/>
-<isset name="showpricing" value="${(pdict.showpricing != null) ? pdict.showpricing : false}" scope="page"/>
-<isset name="showpromotion" value="${(pdict.showpromotion != null) ? pdict.showpromotion : false}" scope="page"/>
-<isset name="showrating" value="${(pdict.showrating != null) ? pdict.showrating : false}" scope="page"/>
-<isset name="showcompare" value="${(pdict.showcompare != null) ? pdict.showcompare : false}" scope="page"/>
-<isset name="recommendername" value="${(pdict.recommendername != null) ? pdict.recommendername : ''}" scope="page"/>
+<isset name="showswatches" value="${(pdict.showswatches) ? pdict.showswatches : false}" scope="page"/>
+<isset name="showpricing" value="${(pdict.showpricing) ? pdict.showpricing : false}" scope="page"/>
+<isset name="showpromotion" value="${(pdict.showpromotion) ? pdict.showpromotion : false}" scope="page"/>
+<isset name="showrating" value="${(pdict.showrating) ? pdict.showrating : false}" scope="page"/>
+<isset name="showcompare" value="${(pdict.showcompare) ? pdict.showcompare : false}" scope="page"/>
+<isset name="recommendername" value="${(pdict.recommendername) ? pdict.recommendername : ''}" scope="page"/>
 
 <isif condition="${!empty(Product)}">
 	<iscomment>
@@ -81,7 +81,7 @@
 		}
 
 		if (recommendername) {
-			recommendername = 'data-recommendername=' + recommendername;
+			recommendername = 'data-recommendername="' + recommendername + '"';
 		}
 	</isscript>
 	<div class="product-tile" ${recommendername} id="${Product.UUID}" data-itemid="${Product.ID}"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
