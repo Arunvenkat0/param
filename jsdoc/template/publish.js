@@ -13,7 +13,6 @@ var util = require('util');
 var htmlsafe = helper.htmlsafe;
 var linkto = helper.linkto;
 var resolveAuthorLinks = helper.resolveAuthorLinks;
-var scopeToPunc = helper.scopeToPunc;
 var hasOwnProp = Object.prototype.hasOwnProperty;
 
 var data;
@@ -187,7 +186,7 @@ function addTransactional(f) {
     var transactional = f.transactional;
 
     if (transactional) {
-      f.signature =  f.signature + '<span class="transactional"/><img src="./styles/transactional.png" alt="Requires Transaction"></span>'
+      f.signature =  f.signature + '<span class="transactional"/><img src="./styles/transactional.png" alt="Requires Transaction"></span>';
     }
 }
 

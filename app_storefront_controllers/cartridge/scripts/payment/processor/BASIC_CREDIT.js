@@ -10,46 +10,46 @@ var Transaction = require('dw/system/Transaction');
  * If the verification was successful a credit card payment instrument is created.
  */
 function Handle(args) {
-    var cart = Cart.get(args.Basket);
+	var cart = Cart.get(args.Basket);
 
-    var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
-        VerifySecurityCode : true
-    }).execute({
-            PaymentCard      : PaymentMgr.getPaymentCard(session.forms.billing.paymentMethods.creditCard.type.value),
-            CardNumber       : session.forms.billing.paymentMethods.creditCard.number.value,
-            ExpirationMonth  : session.forms.billing.paymentMethods.creditCard.month.value,
-            ExpirationYear   : session.forms.billing.paymentMethods.creditCard.year.value,
-            CardSecurityCode : session.forms.billing.paymentMethods.creditCard.cvn.value
-        });
+	var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
+		VerifySecurityCode : true
+	}).execute({
+			PaymentCard      : PaymentMgr.getPaymentCard(session.forms.billing.paymentMethods.creditCard.type.value),
+			CardNumber       : session.forms.billing.paymentMethods.creditCard.number.value,
+			ExpirationMonth  : session.forms.billing.paymentMethods.creditCard.month.value,
+			ExpirationYear   : session.forms.billing.paymentMethods.creditCard.year.value,
+			CardSecurityCode : session.forms.billing.paymentMethods.creditCard.cvn.value
+		});
 
-    if (VerifyPaymentCardResult.result === PIPELET_ERROR) {
-        // TODO is this also return in case of error?
-        var CreditCardStatus = VerifyPaymentCardResult.Status;
+	if (VerifyPaymentCardResult.result === PIPELET_ERROR) {
+		// TODO is this also return in case of error?
+		var CreditCardStatus = VerifyPaymentCardResult.Status;
 
-        new dw.system.Pipelet('Script', {
-            Transactional : false,
-            OnError       : 'PIPELET_ERROR',
-            ScriptFile    : 'checkout/InvalidatePaymentCardFormElements.ds'
-        }).execute({
-                CreditCardForm : session.forms.billing.paymentMethods.creditCard,
-                Status         : CreditCardStatus
-            });
+		new dw.system.Pipelet('Script', {
+			Transactional : false,
+			OnError       : 'PIPELET_ERROR',
+			ScriptFile    : 'checkout/InvalidatePaymentCardFormElements.ds'
+		}).execute({
+				CreditCardForm : session.forms.billing.paymentMethods.creditCard,
+				Status         : CreditCardStatus
+			});
 
-        return {error : true};
-    }
+		return {error : true};
+	}
 
-    Transaction.wrap(function () {
-        cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
-        var paymentInstrument = cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD, cart.getNonGiftCertificateAmount());
+	Transaction.wrap(function () {
+		cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+		var paymentInstrument = cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD, cart.getNonGiftCertificateAmount());
 
-        paymentInstrument.creditCardHolder = session.forms.billing.paymentMethods.creditCard.owner.value;
-        paymentInstrument.creditCardNumber = session.forms.billing.paymentMethods.creditCard.number.value;
-        paymentInstrument.creditCardType = session.forms.billing.paymentMethods.creditCard.type.value;
-        paymentInstrument.creditCardExpirationMonth = session.forms.billing.paymentMethods.creditCard.month.value;
-        paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.year.value;
-    });
+		paymentInstrument.creditCardHolder = session.forms.billing.paymentMethods.creditCard.owner.value;
+		paymentInstrument.creditCardNumber = session.forms.billing.paymentMethods.creditCard.number.value;
+		paymentInstrument.creditCardType = session.forms.billing.paymentMethods.creditCard.type.value;
+		paymentInstrument.creditCardExpirationMonth = session.forms.billing.paymentMethods.creditCard.month.value;
+		paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.year.value;
+	});
 
-    return {success : true};
+	return {success : true};
 }
 
 /**
@@ -58,16 +58,16 @@ function Handle(args) {
  * logic to authorize credit card payment.
  */
 function Authorize(args) {
-    var orderNo = args.OrderNo;
-    var paymentInstrument = args.PaymentInstrument;
-    var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
+	var orderNo = args.OrderNo;
+	var paymentInstrument = args.PaymentInstrument;
+	var paymentProcessor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
 
-    Transaction.wrap(function () {
-        paymentInstrument.paymentTransaction.transactionID = orderNo;
-        paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
-    });
+	Transaction.wrap(function () {
+		paymentInstrument.paymentTransaction.transactionID = orderNo;
+		paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
+	});
 
-    return {authorized : true};
+	return {authorized : true};
 }
 
 /*

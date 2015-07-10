@@ -2,8 +2,6 @@
 
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var describe = require('mocha').describe;
-var it = require('mocha').it;
 
 /**
  * Mocks
@@ -78,6 +76,7 @@ describe('Order model', function () {
 
         it('should instantiate an Order with null when given null', function () {
             var order = Order.get();
+            /* jshint expr:true */
             expect(order.orderNo).to.be.null;
         });
     });
