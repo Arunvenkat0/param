@@ -44,6 +44,42 @@
 		}
 	}
 }, {
+	"countryCode": "GB",
+	"name": {
+		"en_GB": "United Kingdom"
+	},
+	"continent": "europe",
+	"locales": ["en_GB"],
+	"currencyCode": "GBP",
+	"taxation": {
+		"type": "gross"
+	},	
+	"priceBooks": [
+		"gbp-list-prices",
+		"gbp-sale-prices"
+	],
+	"dynamicForms": {
+		"addressDetails": {
+			"country": {
+				"type": "select"
+			},
+			"states": {
+				"isFormGroup": true,
+				"childField": "state",
+				"type": "input"
+			},
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
+			}
+		}
+	}
+}, {
 	"countryCode": "JP",
 	"name": {
 		"ja_JP": "日本",
@@ -69,6 +105,15 @@
 				"isFormGroup": true,
 				"childField": "state",
 				"type": "select"
+			},
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
 			}	
 		}
 	}
@@ -98,6 +143,15 @@
 				"isFormGroup": true,
 				"childField": "state",
 				"type": "input"
+			},
+			"phone": {
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
 			}	
 		}
 	}
