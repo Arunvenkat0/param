@@ -2,10 +2,12 @@
 <preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
     <standard-preferences>
         <all-instances>
-            <preference preference-id="ActiveLocales">en_CA:zh:it:en_US:ja_JP:de_DE:it_IT:fr_FR:zh_CN:de:default:fr:en:fr_CA:es:nl:ja</preference>
+            <preference preference-id="ActiveLocales">de:it_IT:fr_CA:en:it:fr:fr_FR:ja_JP:es:zh:de_DE:default:en_GB:en_CA:en_US:ja:zh_CN:nl</preference>
             <preference preference-id="CustomCartridges">bm_custom_plugin</preference>
             <preference preference-id="CustomProductListColumns">custom.color:custom.refinementColor</preference>
             <preference preference-id="InstanceTimezone">US/Eastern</preference>
+            <preference preference-id="SystemUseNotificationEnabled">false</preference>
+            <preference preference-id="SystemUseNotificationMandatory">false</preference>
         </all-instances>
         <development/>
         <staging/>

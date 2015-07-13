@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers xmlns="http://www.demandware.com/xml/impex/customer/2006-10-31">
+    <customer customer-no="00000001">
+        <credentials>
+            <login>tnguyen@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$Dn5ko0cxCostHxmA6Mj0Gw==$rDbKkoDKjkwpB23RRttRp5OzRpRFWRmMhxaCwMAElK0=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Tri</first-name>
+            <second-name/>
+            <last-name>Nguyen</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>tnguyen@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-04-30T21:14:07.000Z</creation-date>
+            <last-login-time>2015-04-30T21:14:07.000Z</last-login-time>
+            <last-visit-time>2015-04-30T21:14:07.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <note/>
+    </customer>
+
+    <customer customer-no="00001001">
+        <credentials>
+            <login>lgelberg@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$IdjKkUSA+AbfwDp1oOR3LA==$NDiq9Dm8LeeBsEAX5CBU6BziL5Mwnb2eNuSnUlKvwhI=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Larry</first-name>
+            <second-name/>
+            <last-name>Gelberg</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>lgelberg@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-05-12T15:55:55.000Z</creation-date>
+            <last-login-time>2015-07-12T02:44:30.891Z</last-login-time>
+            <last-visit-time>2015-07-12T02:44:30.891Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Burlington" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Larry</first-name>
+                <second-name/>
+                <last-name>Gelberg</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>5 Wall St. - Floor 6</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Burlington</city>
+                <postal-code>01803</postal-code>
+                <state-code>MA</state-code>
+                <country-code>us</country-code>
+                <phone>6176453283</phone>
+            </address>
+            <address address-id="Ma Maison Francais" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Laurant</first-name>
+                <second-name/>
+                <last-name>Gélberg</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>123 Rue LePew</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Paris</city>
+                <postal-code>F-12345</postal-code>
+                <state-code/>
+                <country-code>fr</country-code>
+                <phone>01 45 34 34 34</phone>
+            </address>
+            <address address-id="My Chinese Address" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>CFirst</first-name>
+                <second-name/>
+                <last-name>CLast</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>CA1</address1>
+                <address2>CA2</address2>
+                <suite/>
+                <postbox/>
+                <city>ChineseCity</city>
+                <postal-code>12345</postal-code>
+                <state-code>ChineseState</state-code>
+                <country-code>cn</country-code>
+                <phone>phone1234</phone>
+            </address>
+            <address address-id="My Italian Home" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Lorenzo</first-name>
+                <second-name/>
+                <last-name>Gelbini</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>123 Via Pepperoni</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Roma</city>
+                <postal-code>V-1234</postal-code>
+                <state-code>PU</state-code>
+                <country-code>it</country-code>
+                <phone>02 12345678</phone>
+            </address>
+            <address address-id="My Japanese Address" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>First</first-name>
+                <second-name/>
+                <last-name>Last</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>Street 123</address1>
+                <address2>Apt 2B</address2>
+                <suite/>
+                <postbox/>
+                <city>Tokyo</city>
+                <postal-code>321-1234</postal-code>
+                <state-code>SomeState</state-code>
+                <country-code>jp</country-code>
+                <phone>321-32</phone>
+            </address>
+            <address address-id="My London Home" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Sir Lawrence of</first-name>
+                <second-name/>
+                <last-name>Gelberg</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>123 Groovy Place</address1>
+                <address2>Suite 1</address2>
+                <suite/>
+                <postbox/>
+                <city>London</city>
+                <postal-code>SW42 4RG</postal-code>
+                <state-code>Worcescester</state-code>
+                <country-code>gb</country-code>
+                <phone>01222 555 555</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="00006501">
+        <credentials>
+            <login>Test1@gmail.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$wi8fdQ5nssGZK7nFB9S7iw==$djSQlAccdbhflo8OduKDlrurs9oXnmmrXlkf4ToeW3U=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Test1</first-name>
+            <second-name/>
+            <last-name>Test1</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>Test1@gmail.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-06-30T16:28:17.000Z</creation-date>
+            <last-login-time>2015-06-30T18:22:21.000Z</last-login-time>
+            <last-visit-time>2015-06-30T18:22:21.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="姿的家庭地址" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>姿</first-name>
+                <second-name/>
+                <last-name>陈</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>民权贝斯街142号6-402房</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>大连</city>
+                <postal-code>116000</postal-code>
+                <state-code>辽宁</state-code>
+                <country-code>cn</country-code>
+                <phone>13902530251</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="00007501">
+        <credentials>
+            <login>onishimura@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$IjVm1X+mWs7s/fdxtNPXrA==$8wcAD3f8xPt0J+AyIb1KCG9jDLERmHukG75b6IhrfEI=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Osamu</first-name>
+            <second-name/>
+            <last-name>Nishimura</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>onishimura@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-07-01T19:55:22.000Z</creation-date>
+            <last-login-time>2015-07-01T19:55:22.000Z</last-login-time>
+            <last-visit-time>2015-07-01T19:55:22.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Office" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Osamu</first-name>
+                <second-name/>
+                <last-name>Nishimura</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>5 Wall Street</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Burlington</city>
+                <postal-code>00010</postal-code>
+                <state-code>MA</state-code>
+                <country-code>us</country-code>
+                <phone>333-333-3333</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="00008001">
+        <credentials>
+            <login>joe@blow.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$MqFJbJKHM3KByS/M6tvMCA==$hmh7sSsjgS82NsGQNBFELCxY0nPA/OlscyKoojfZ8BE=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Joe</first-name>
+            <second-name/>
+            <last-name>Blow</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>joe@blow.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <creation-date>2015-07-05T20:21:10.000Z</creation-date>
+            <last-login-time>2015-07-05T20:21:10.000Z</last-login-time>
+            <last-visit-time>2015-07-05T20:21:10.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <note/>
+    </customer>
+
+    <customer customer-no="D00000001">
+        <credentials>
+            <login>testuser1@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$bqkutW4x877v/wWcmC+Xkw==$mAtW38GoEc/R08nIUV/q0GJobTa2Z2/nkIgqBttOkfg=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Test1</first-name>
+            <second-name/>
+            <last-name>User1</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>testuser1@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <birthday>1988-10-21Z</birthday>
+            <gender>2</gender>
+            <creation-date>2015-05-18T19:19:51.000Z</creation-date>
+            <last-login-time>2015-05-18T20:43:17.000Z</last-login-time>
+            <last-visit-time>2015-05-18T20:43:17.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Home" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Test1</first-name>
+                <second-name/>
+                <last-name>User1</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>104 Presidential Way</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Woburn</city>
+                <postal-code>01801</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>781-555-1212</phone>
+            </address>
+            <address address-id="Work" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Test1</first-name>
+                <second-name/>
+                <last-name>User1</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>91 Middlesex Tpke</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Burlington</city>
+                <postal-code>01803</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>781-555-1212</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="D00000002">
+        <credentials>
+            <login>testuser2@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$U6gHoDj17zG/MZr8SdepoA==$M1xOrw4zPwIeuJEubC2zyJdS8CcXI8xySIFo1vrdt2A=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Test2</first-name>
+            <second-name/>
+            <last-name>User2</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>testuser2@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <gender>1</gender>
+            <creation-date>2015-05-18T19:20:42.000Z</creation-date>
+            <last-login-time>2015-05-18T20:49:06.000Z</last-login-time>
+            <last-visit-time>2015-05-18T20:49:06.000Z</last-visit-time>
+            <preferred-locale>en_US</preferred-locale>
+        </profile>
+        <note/>
+    </customer>
+
+    <customer customer-no="D00000003">
+        <credentials>
+            <login>testuser3@demandware.com</login>
+            <password encrypted="true" encryptionScheme="scrypt">$s0$b0401$qmOLrCtInR0ADEeC0mJejQ==$VAxXCsxvrUZ/Ma7VDcg+yWgStINMEKn2PNE71TPk1t0=</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Test3</first-name>
+            <second-name/>
+            <last-name>User3</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>testuser3@demandware.com</email>
+            <phone-home/>
+            <phone-business/>
+            <phone-mobile/>
+            <fax/>
+            <gender>2</gender>
+            <creation-date>2015-05-18T19:21:31.000Z</creation-date>
+            <last-login-time>2015-05-18T20:49:51.000Z</last-login-time>
+            <last-visit-time>2015-05-18T20:49:51.000Z</last-visit-time>
+            <preferred-locale>en</preferred-locale>
+        </profile>
+        <addresses>
+            <address address-id="Mom's" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Test3</first-name>
+                <second-name/>
+                <last-name>User3</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>3486 Mission St</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>San Francisco</city>
+                <postal-code>94110</postal-code>
+                <state-code>CA</state-code>
+                <country-code>US</country-code>
+                <phone>415-555-1212</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="S00000001">
+        <credentials>
+            <login>jg@demandware.com</login>
+            <password encrypted="true" encryptionScheme="md5">d0d64318f7d984c22f27ba2b9af623c0</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>James</first-name>
+            <second-name/>
+            <last-name>Gate</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>jg@demandware.com</email>
+            <phone-home>123-456-7890</phone-home>
+            <phone-business>123-456-7890</phone-business>
+            <phone-mobile>123-456-7890</phone-mobile>
+            <fax/>
+            <birthday>1976-09-14Z</birthday>
+            <gender>1</gender>
+            <creation-date>2015-04-28T18:30:30.000Z</creation-date>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Boston, MA (Home)" preferred="true">
+                <salutation>Mr.</salutation>
+                <title/>
+                <first-name>James</first-name>
+                <second-name/>
+                <last-name>Gate</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>5 McBride Street</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Jamaica Plain</city>
+                <postal-code>01230</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone/>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="S00000002">
+        <credentials>
+            <login>samadams@demandware.com</login>
+            <password encrypted="true" encryptionScheme="md5">e8da0e8cb8b348794dc9946bc411624b</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title>Founder</title>
+            <first-name>Samuel</first-name>
+            <second-name/>
+            <last-name>Adams</last-name>
+            <suffix/>
+            <company-name>Boston Beer Company</company-name>
+            <job-title/>
+            <email>samadams@demandware.com</email>
+            <phone-home>123-456-7890</phone-home>
+            <phone-business>123-456-7890</phone-business>
+            <phone-mobile>123-456-7890</phone-mobile>
+            <fax>123-456-7890</fax>
+            <birthday>1776-07-04Z</birthday>
+            <gender>1</gender>
+            <creation-date>2015-04-28T18:30:30.000Z</creation-date>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Corporate Headquarters" preferred="true">
+                <salutation>Mr.</salutation>
+                <title>President</title>
+                <first-name>Jim</first-name>
+                <second-name/>
+                <last-name>Koch</last-name>
+                <suffix/>
+                <company-name>Boston Beer Company</company-name>
+                <job-title/>
+                <address1>One Design Center</address1>
+                <address2>Large Building</address2>
+                <suite/>
+                <postbox>PO Box 860</postbox>
+                <city>Boston</city>
+                <postal-code>02210</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>800-456-9056</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="S00000003">
+        <credentials>
+            <login>dude@demandware.com</login>
+            <password encrypted="true" encryptionScheme="md5">249dad93cd8ffd0f4f43f0187f9f236d</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation>Ms.</salutation>
+            <title>Unemployed</title>
+            <first-name>Jeff</first-name>
+            <second-name/>
+            <last-name>Lebowski</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>dude@demandware.com</email>
+            <phone-home>098-765-4321</phone-home>
+            <phone-business>098-765-4321</phone-business>
+            <phone-mobile>098-765-4321</phone-mobile>
+            <fax>098-765-4321</fax>
+            <birthday>2000-12-31Z</birthday>
+            <gender>1</gender>
+            <creation-date>2015-04-28T18:30:30.000Z</creation-date>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Rental Unit" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>The Dude</first-name>
+                <second-name/>
+                <last-name>Lebowski</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>36 Washington Street</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Los Angeles</city>
+                <postal-code>58769</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone/>
+            </address>
+            <address address-id="Bowling Alley" preferred="false">
+                <salutation/>
+                <title>Bowler</title>
+                <first-name>Jeff</first-name>
+                <second-name/>
+                <last-name>Lebowski</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>Lane 10</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Los Angeles</city>
+                <postal-code>11898</postal-code>
+                <state-code>CA</state-code>
+                <country-code>US</country-code>
+                <phone/>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="S00000004">
+        <credentials>
+            <login>jules@demandware.com</login>
+            <password encrypted="true" encryptionScheme="md5">7041273d0e0df6325d04dba6ab5be7ce</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title/>
+            <first-name>Jules</first-name>
+            <second-name/>
+            <last-name>Winnfield</last-name>
+            <suffix/>
+            <company-name/>
+            <job-title/>
+            <email>jules@demandware.com</email>
+            <phone-home/>
+            <phone-business>456-789-1234</phone-business>
+            <phone-mobile>456-789-1234</phone-mobile>
+            <fax/>
+            <birthday>1988-08-08Z</birthday>
+            <gender>1</gender>
+            <creation-date>2015-04-28T18:30:30.000Z</creation-date>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="The Car" preferred="true">
+                <salutation>Mr.</salutation>
+                <title>Enforcer</title>
+                <first-name>Jules</first-name>
+                <second-name/>
+                <last-name>Winnfield</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>4840 W.Irlo Bronson Hwy 192</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Los Angeles</city>
+                <postal-code>34746</postal-code>
+                <state-code>CA</state-code>
+                <country-code>US</country-code>
+                <phone/>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+    <customer customer-no="S00000005">
+        <credentials>
+            <login>patricia@demandware.com</login>
+            <password encrypted="true" encryptionScheme="md5">8798b34c03e0d9e2c04ae1601d9b5250</password>
+            <enabled-flag>true</enabled-flag>
+            <password-question/>
+            <password-answer/>
+        </credentials>
+        <profile>
+            <salutation/>
+            <title>Big Spender</title>
+            <first-name>Patricia</first-name>
+            <second-name/>
+            <last-name>Miller</last-name>
+            <suffix/>
+            <company-name>Demandware</company-name>
+            <job-title/>
+            <email>patricia@demandware.com</email>
+            <phone-home>123-456-789</phone-home>
+            <phone-business>781-756-3700</phone-business>
+            <phone-mobile>123-456-789</phone-mobile>
+            <fax>781-756-3700</fax>
+            <birthday>1900-01-01Z</birthday>
+            <gender>2</gender>
+            <creation-date>2015-04-28T18:30:30.000Z</creation-date>
+            <last-login-time>2009-05-26T14:28:06.000Z</last-login-time>
+            <last-visit-time>2009-05-26T14:28:06.000Z</last-visit-time>
+            <preferred-locale/>
+        </profile>
+        <addresses>
+            <address address-id="Home" preferred="true">
+                <salutation>Ms.</salutation>
+                <title/>
+                <first-name>Patricia</first-name>
+                <second-name/>
+                <last-name>Miller</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>313 West 29th Street</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>New York</city>
+                <postal-code>10001</postal-code>
+                <state-code>NY</state-code>
+                <country-code>US</country-code>
+                <phone/>
+            </address>
+            <address address-id="Work" preferred="false">
+                <salutation>Ms.</salutation>
+                <title/>
+                <first-name>Patricia</first-name>
+                <second-name/>
+                <last-name>Miller</last-name>
+                <suffix/>
+                <company-name>Demandware</company-name>
+                <job-title/>
+                <address1>10 Presidential Way</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Woburn</city>
+                <postal-code>01813</postal-code>
+                <state-code>MA</state-code>
+                <country-code>US</country-code>
+                <phone>781-756-3747</phone>
+            </address>
+        </addresses>
+        <note/>
+    </customer>
+
+</customers>
