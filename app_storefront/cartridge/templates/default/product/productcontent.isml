@@ -27,7 +27,8 @@
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
 
 	<div class="product-number">
-		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
+		<iscomment>Put master ID on a data-attribute to be used by CQuotient</iscomment>
+		${Resource.msg('product.item','product',null)} <span itemprop="productID" data-masterid="${masterId}"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
 
 	<iscomment>
@@ -48,12 +49,12 @@
 		<!-- shown only in quick view -->
 		<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('product.viewdetails','product',null)}</a>
 	</isif>
-	
+
 	<iscomment>
 		product pricing
 		=============================================================
 	</iscomment>
-			
+
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
 	<isset name="showTieredPrice" value="${false}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
@@ -83,71 +84,71 @@
 				product options (Must be inside form)
 				=============================================================
 			</iscomment>
-	
+
 			<h2 class="visually-hidden">Add to cart options</h2>
 			<isinclude template="product/components/options"/>
-			
+
 			<iscomment>
 				product promotions
 				=============================================================
 			</iscomment>
-			
+
 			<isinclude template="product/components/promotions"/>
-	
+
 			<div class="product-add-to-cart">
 				<h2 class="visually-hidden">Product Actions</h2>
-				
+
 				<iscomment>
 					availability
 					=============================================================
 				</iscomment>
-				
-				<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">		
+
+				<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
 					<div class="availability-storepickup">
 						<div class="availability-web">
 							<i class="fa fa-truck fa-lg pull-left"></i>
 							<label for="Stock">${Resource.msg('product.webstock','product',null)}</label>
-							<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">			
+							<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
 								<span class="value"><isinclude template="product/components/availability"/></span>
 							<iselse/>
 								<div class="availability-novariation">${Resource.msg('product.selectforstock','product',null)}</div>
-							</isif>						
+							</isif>
 						</div>
 						<div class="availability-instore">
 							<i class="fa fa-briefcase fa-lg pull-left"></i>
-							<label for="Stock">${Resource.msg('product.instorestock','product',null)}</label>						
+							<label for="Stock">${Resource.msg('product.instorestock','product',null)}</label>
 							<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
 								<div id="${pdict.Product.ID}" class="availability-results availability-msg store-stock">
 									<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
 								</div>
 							<iselse/>
 								<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock"></div>
-							</isif>							
+							</isif>
 						</div>
-					</div>					
-				<iselse/>			
+					</div>
+				<iselse/>
 					<div class="availability-web">
 						<label for="Stock">${Resource.msg('global.availability','locale',null)}</label>
-						<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">			
+						<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
 							<span class="value"><isinclude template="product/components/availability"/></span>
 						<iselse/>
 							<div class="availability-novariation">${Resource.msg('product.selectforstock','product',null)}</div>
 						</isif>
-					</div>					
+					</div>
 				</isif>
-				
+
 				<iscomment>
 					product quantity
 					=============================================================
 				</iscomment>
-			
+
 				<div class="inventory">
 					<div class="quantity">
 						<label for="Quantity">${Resource.msg('global.qty','locale',null)}</label>
 						<input type="text" class="input-text" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 					</div>
 				</div>
-				
+
 				<iscomment>
 					add to cart submit
 					=============================================================
@@ -168,9 +169,9 @@
 						source = null;
 					}
 				</isscript>
-	
+
 				<isset name="cartAction" value="add" scope="page"/>
-	
+
 				<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
 					<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
 					<isset name="cartAction" value="update" scope="page"/>
@@ -223,12 +224,12 @@
 			pdict.url = Url.getCurrent(pdict);
 			pdict.title = pdict.Product.name;
 		</isscript>
-		
+
 		<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
 			<a class="button simple" data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
 			<a class="button simple" data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry.label','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
 		</isif>
-		
+
 		<div class="socialsharing">
 			<isinclude template="components/socialsharing"/>
 		</div>
