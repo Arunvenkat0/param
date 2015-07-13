@@ -56,7 +56,7 @@
 				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attributes="${attributes}"/>
 				</isif>
-				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox" rowclass="form-indent label-inline"/>
+				<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}" type="checkbox"/>
 
 				<div class="form-caption">
 					<span>${Resource.msg('global.email.policy','locale',null)}</span>
