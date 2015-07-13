@@ -107,17 +107,19 @@
 				</isif>
 			</isif>
 
-			<iscomment>tax amount</iscomment>
-			<tr class="order-sales-tax">
-				<td>${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
-				<td>
-					<isif condition="${LineItemCtnr.totalTax.available}">
-						<isprint value="${LineItemCtnr.totalTax}"/>
-					<iselse/>
-						${Resource.msg('order.ordersummary.nodata','order',null)}
-					</isif>
-				</td>
-			</tr>
+			<iscomment>tax amount - Note: only show this field if taxation policy is net</iscomment>
+			<isif condition="${dw.order.TaxMgr.getTaxationPolicy() == dw.order.TaxMgr.TAX_POLICY_NET}">
+				<tr class="order-sales-tax">
+					<td>${Resource.msg('order.ordersummary.ordertax','order',null)}</td>
+					<td>
+						<isif condition="${LineItemCtnr.totalTax.available}">
+							<isprint value="${LineItemCtnr.totalTax}"/>
+						<iselse/>
+							${Resource.msg('order.ordersummary.nodata','order',null)}
+						</isif>
+					</td>
+				</tr>
+			</isif>
 
 			<iscomment>order total</iscomment>
 			<tr class="order-total">
