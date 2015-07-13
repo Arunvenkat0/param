@@ -382,7 +382,7 @@
                 <cutoff-threshold>5</cutoff-threshold>
             </refinement-definition>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="brand" system="true">
-                <display-name xml:lang="x-default">By brand</display-name>
+                <display-name xml:lang="x-default">brand</display-name>
                 <display-name xml:lang="fr-FR">Par marque</display-name>
                 <display-name xml:lang="it-IT">Marca</display-name>
                 <display-name xml:lang="ja-JP">ブランド</display-name>
