@@ -7,7 +7,7 @@
  * basic credit card validation pipeline from processor BASIC_CREDIT.
  */
 function Handle(args) {
-    return require('./BASIC_CREDIT').Handle(args);
+	return require('./BASIC_CREDIT').Handle(args);
 }
 
 /**
@@ -15,8 +15,8 @@ function Handle(args) {
  * supported, that's why the pipeline returns this state back to the calling
  * checkout pipeline.
  */
-function Authorize(args) {
-    return {not_supported : true};
+function Authorize() {
+	return {not_supported : true};
 }
 
 /*

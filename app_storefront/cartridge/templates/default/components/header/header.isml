@@ -40,8 +40,10 @@
 		</ul>
 
 		<iscomment>Country Selector</iscomment>
-		<isinclude template="components/header/countryselector"/>
-
+		<isif condition="${showCountrySelector}">
+			<isinclude template="components/header/countryselector"/>
+		</isif>
+	
 		<iscomment>Multi-Currency Selection</iscomment>
 		<isinclude template="components/header/multicurrency"/>
 

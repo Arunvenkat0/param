@@ -22,20 +22,6 @@
 			overflow: visible;
 		}
 	}
-	#primary {
-		background: none;
-		border: 0 !important;
-		float: none;
-		margin: 0;
-		padding-left: 0 !important;
-		width: 100% !important;
-	}
-	#secondary {
-		border: 0;
-		float: none;
-		font-size: 1.1em;
-		width: 100% !important;
-	}
 	.col-1,
 	.col-2 {
 		float: none;
@@ -71,10 +57,6 @@
 	}
 	.mini-cart-content {
 		max-width: 220px;
-	}
-	.primary-content h1 {
-		font-size: 1.5rem;
-		margin: .625rem 0;
 	}
 	#quickviewbutton {
 		display: none !important;
@@ -335,15 +317,6 @@
 	.order-history-header button {
 		font-size: 1em;
 		padding: .25em;
-	}
-	.gift-certificate-purchase {
-		.content-asset, form {
-			float: none;
-			width: 90%;
-		}
-		.cert-amount .form-caption {
-			width: 80%;
-		}
 	}
 	.page-content-tab-navigaton button {
 		width: 100%;

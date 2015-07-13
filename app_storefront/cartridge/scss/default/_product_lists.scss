@@ -73,6 +73,8 @@
 	}
 	.option-add-to-cart {
 		margin-top: .5rem;
+		width: 18rem; //for IE
+		width: max-content;
 		label {
 			color: $night-rider;
 			float: left;

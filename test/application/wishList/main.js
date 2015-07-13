@@ -1,15 +1,12 @@
-'use strict'
+'use strict';
 
 import {assert} from 'chai';
 
 import client from '../webdriver/client';
 import * as wishListPage from '../webdriver/pageObjects/wishlist';
-import * as testData from '../webdriver/pageObjects/testData/main';
 import * as loginForm from '../webdriver/pageObjects/forms/login';
 
 describe('Wishlist', () => {
-	let customer;
-	let login = 'testuser1@demandware.com';
 	let socialLinks = {
 		facebook: {
 			selector: 'a[data-share=facebook]',
@@ -61,8 +58,8 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.facebook.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.facebook.baseUrl))
-					assert.ok(href.match(socialLinks.facebook.regex))
+					assert.isTrue(href.startsWith(socialLinks.facebook.baseUrl));
+					assert.ok(href.match(socialLinks.facebook.regex));
 				})
 		);
 
@@ -71,8 +68,8 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.twitter.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.twitter.baseUrl))
-					assert.ok(href.match(socialLinks.twitter.regex))
+					assert.isTrue(href.startsWith(socialLinks.twitter.baseUrl));
+					assert.ok(href.match(socialLinks.twitter.regex));
 				})
 		);
 
@@ -81,8 +78,8 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.googlePlus.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.googlePlus.baseUrl))
-					assert.ok(href.match(socialLinks.googlePlus.regex))
+					assert.isTrue(href.startsWith(socialLinks.googlePlus.baseUrl));
+					assert.ok(href.match(socialLinks.googlePlus.regex));
 				})
 		);
 
@@ -91,8 +88,8 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.pinterest.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.pinterest.baseUrl))
-					assert.ok(href.match(socialLinks.pinterest.regex))
+					assert.isTrue(href.startsWith(socialLinks.pinterest.baseUrl));
+					assert.ok(href.match(socialLinks.pinterest.regex));
 				})
 		);
 
@@ -101,8 +98,8 @@ describe('Wishlist', () => {
 				.then(doesExist => assert.isTrue(doesExist))
 				.then(() => client.getAttribute(socialLinks.emailLink.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.emailLink.baseUrl))
-					assert.ok(href.match(socialLinks.emailLink.regex))
+					assert.isTrue(href.startsWith(socialLinks.emailLink.baseUrl));
+					assert.ok(href.match(socialLinks.emailLink.regex));
 				})
 		);
 
@@ -118,8 +115,8 @@ describe('Wishlist', () => {
 				.then(visible => assert.isTrue(visible))
 				.then(() => client.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
 				.then(href => {
-					assert.isTrue(href.startsWith(socialLinks.shareLinkUrl.baseUrl))
-					assert.ok(href.match(socialLinks.shareLinkUrl.regex))
+					assert.isTrue(href.startsWith(socialLinks.shareLinkUrl.baseUrl));
+					assert.ok(href.match(socialLinks.shareLinkUrl.regex));
 				})
 		);
 	});

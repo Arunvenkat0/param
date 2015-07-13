@@ -15,6 +15,24 @@
 	&.pt_storefront {
 		width: 100%;
 	}
+	&.pt_categorylanding {
+		width: 100%;
+		.primary-content {
+			padding-bottom: 0;
+			@media screen and (min-width: 768px) {
+				width: 80%;
+			}
+		}
+		.refinements {
+			border-right: 0;
+			display: none;
+			width: 0;
+			@media screen and (min-width: 768px) {
+				display: block;
+				width: 20%;
+			}
+		}
+	}
 	&.menu-active {
 		left: 50%;
 	}
@@ -26,17 +44,20 @@
 }
 
 .primary-content {
-	border-left: 1px solid $gainsboro;
-	float: right;
-	margin-left: -1px;
-	padding: 0 0 20px;
-	position: relative;
-	width: 787px;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		border-left: 1px solid $gainsboro;
+		float: right;
+		margin-left: -1px;
+		padding: 0 0 20px;
+		position: relative;
+		width: 787px;
+	}
 	.primary-focus & {
 		border: 0 none;
 		float: left;
 		margin: 0;
-		width: 709px;
+		width: 76%;
 	}
 	.full-width & {
 		border: 0 none;
@@ -49,22 +70,34 @@
 }
 
 #secondary {
-	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
-	border-right: 1px solid $gainsboro;
-	float: left;
-	width: 172px;
-	position: relative;
-	nav {
-		padding-left: 10px;
-		padding-right: 10px;
-		a {
-			margin-left: 15px;
+	border: 0;
+	float: none;
+	font-size: 1.1em;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
+		border-right: 1px solid $gainsboro;
+		float: left;
+		width: 172px;
+		position: relative;
+		nav {
+			padding-left: 10px;
+			padding-right: 10px;
+			a {
+				margin-left: 15px;
+			}
+		}
+		.primary-focus & {
+			background: none;
+			border: none;
+			box-sizing: border-box;
+			float: left;
+			padding-left: .4rem;
+			width: 24%;
 		}
 	}
-	.primary-focus & {
-		background: none repeat scroll 0 0 transparent;
-		border: 0 none;
-		float: right;
-		width: 210px;
-	}
+}
+
+.secondary-content {
+	clear: both;
 }

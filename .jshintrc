@@ -20,6 +20,7 @@
 		"session": true,
 		"customer": true,
 		"dw": true,
-		"empty": true
+		"empty": true,
+		"PIPELET_ERROR": true
 	}
 }
