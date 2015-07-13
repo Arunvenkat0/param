@@ -3,7 +3,7 @@
 
 function clickThruAfter() {
 	var recommenderName = localStorage.getItem('cq.recommenderName');
-	var currentProductId = $('[itemprop="productID"]').html() || '';
+	var currentProductId = $('[itemprop="productID"]').data('masterid') || '';
 	if (!recommenderName) {return;}
 	var anchors;
 	if (localStorage.getItem('cq.anchors')) {
@@ -32,7 +32,7 @@ exports.init = function () {
 	$('body').on('click', '.product-tile[data-recommendername] a', function () {
 		// if currently on a product page, send its productId as the anchor
 		if (window.pageContext.type === 'product') {
-			localStorage.setItem('cq.anchors', $('[itemprop="productID"]').html() || '');
+			localStorage.setItem('cq.anchors', $('[itemprop="productID"]').data('masterid') || '');
 		}
 		var recommenderName = $(this).parents('.product-tile').data('recommendername');
 		localStorage.setItem('cq.recommenderName', recommenderName);

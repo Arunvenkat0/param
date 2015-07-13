@@ -117,7 +117,7 @@
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
 
 	<div class="product-number">
-		${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${ pdict.Product.ID }"/></span>
+		${Resource.msg('product.item','product',null)} <span itemprop="productID" data-masterid="${pdict.Product.ID}"><isprint value="${pdict.Product.ID}"/></span>
 	</div>
 
 	<isif condition="${isQuickView}">
@@ -181,7 +181,7 @@
 		<h2 class="visually-hidden">Product Actions</h2>
 		<isscript>
 			var Url = require('~/cartridge/scripts/util/Url');
-			pdict.url = Url.getCurrent(pdict);	
+			pdict.url = Url.getCurrent(pdict);
 			pdict.title = pdict.Product.name;
 		</isscript>
 		<isinclude template="components/socialsharing"/>
