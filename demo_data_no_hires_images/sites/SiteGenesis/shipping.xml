@@ -460,42 +460,6 @@
         <currency>USD</currency>
     </shipping-method>
 
-    <shipping-method method-id="1234" default="false">
-        <display-name xml:lang="x-default">Foreign</display-name>
-        <display-name xml:lang="fr-FR">Étranger</display-name>
-        <display-name xml:lang="it">Estero</display-name>
-        <display-name xml:lang="it-IT">Estero</display-name>
-        <display-name xml:lang="ja-JP">外国</display-name>
-        <display-name xml:lang="zh-CN">国外</display-name>
-        <description xml:lang="x-default">Foreign</description>
-        <description xml:lang="fr-FR">Étranger</description>
-        <description xml:lang="it">Estero</description>
-        <description xml:lang="it-IT">Estero</description>
-        <description xml:lang="ja-JP">外国</description>
-        <description xml:lang="zh-CN">国外</description>
-        <online-flag>true</online-flag>
-        <base-method>001</base-method>
-        <tax-class-id>exempt</tax-class-id>
-        <price-table>
-            <amount order-value="0">7.99</amount>
-            <amount order-value="14.99">8.99</amount>
-            <amount order-value="24.99">9.99</amount>
-            <amount order-value="29.99">11.99</amount>
-        </price-table>
-        <excluded-addresses>
-            <included-addresses>
-                <condition-group match-mode="any">
-                    <condition>
-                        <attribute-path>shipment.shippingAddress.countryCode</attribute-path>
-                        <operator>is-not-equal</operator>
-                        <string>CA</string>
-                    </condition>
-                </condition-group>
-            </included-addresses>
-        </excluded-addresses>
-        <currency>USD</currency>
-    </shipping-method>
-
     <shipping-method method-id="CNY001" default="true">
         <display-name xml:lang="x-default">Ground</display-name>
         <display-name xml:lang="fr-FR">Transport terrestre</display-name>

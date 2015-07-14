@@ -48,106 +48,6 @@
         </customer-groups>
     </campaign>
 
-    <global-promotion-settings>
-        <global-excluded-products>
-            <included-products>
-                <condition-group>
-                    <category-condition catalog-id="storefront-catalog-en">
-                        <category-id>electronic-games</category-id>
-                    </category-condition>
-                </condition-group>
-            </included-products>
-        </global-excluded-products>
-    </global-promotion-settings>
-
-    <promotion promotion-id="20off-gamewconsole">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% Off WII Game</name>
-        <name xml:lang="fr-FR">20 % de rabais sur un jeu WII </name>
-        <name xml:lang="it-IT">20% di sconto sui giochi WII</name>
-        <name xml:lang="ja-JP">WII ゲームが 20% 割引</name>
-        <name xml:lang="zh-CN">WII 游戏 8 折优惠</name>
-        <callout-msg xml:lang="x-default">Purchase a WII Console Save 20% off a WII Game</callout-msg>
-        <callout-msg xml:lang="fr-FR">Pour l'achat d'une console WII, économisez 20 % sur un jeu WII</callout-msg>
-        <callout-msg xml:lang="it-IT">Acquista una console WII e risparmia il 20% su un gioco WII</callout-msg>
-        <callout-msg xml:lang="ja-JP">WII ゲーム機の購入で WII ゲームが 20% 割引</callout-msg>
-        <callout-msg xml:lang="zh-CN">购买 WII 游戏机可享受 WII 游戏 8 折优惠</callout-msg>
-        <details xml:lang="x-default">Purchase a WII Console Save 20% off a WII Game, must by a WII console to be eligible for this promotion.</details>
-        <details xml:lang="fr-FR">Pour l'achat d'une console WII, économisez 20 % sur un jeu WII, offre valable uniquement pour l'achat d'une console WII.</details>
-        <details xml:lang="it-IT">Acquista una console WII e risparmia il 20% su un gioco WII, promozione valida solo con l'acquisto di una console WII.</details>
-        <details xml:lang="ja-JP">WII ゲーム機の購入で WII ゲームが 20% 割引になります (このプロモーションは WII ゲーム機をご購入いただいた場合にのみ適用されます)。</details>
-        <details xml:lang="zh-CN">购买 WII 游戏机可享受 WII 游戏 8 折优惠，必须购买 WII 游戏机方可享受此促销优惠。</details>
-        <product-promotion-rule>
-            <qualifying-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>nintendo-wii-console</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </qualifying-products>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>easports-madden-nfl-09-wii</product-id>
-                            <product-id>lucasarts-lego-indiana-jones-original-adventure-wii</product-id>
-                            <product-id>namco-we-ski-wii</product-id>
-                            <product-id>sega-mario-sonic-olympics-2008-wii</product-id>
-                            <product-id>sega-bass-fishing-wii</product-id>
-                            <product-id>midway-cruisn-wii</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <bogo>
-                <threshold>1</threshold>
-                <percentage>20.0</percentage>
-                <eligible-quantity>1</eligible-quantity>
-            </bogo>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="15off-gps">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">GPS 15% Off</name>
-        <name xml:lang="fr-FR">15 % de rabais sur les GPS</name>
-        <name xml:lang="it-IT">GPS scontati del 15%</name>
-        <name xml:lang="ja-JP">GPS が 15% 割引</name>
-        <name xml:lang="zh-CN">GPS 设备 85 折优惠</name>
-        <callout-msg xml:lang="x-default">15% Off GPS Unit With Coupon</callout-msg>
-        <callout-msg xml:lang="fr-FR">15 % de rabais sur les GPS avec bon de réduction</callout-msg>
-        <callout-msg xml:lang="it-IT">15% di sconto su sistemi GPS con coupon</callout-msg>
-        <callout-msg xml:lang="ja-JP">クーポンで GPS ユニットが 15% 割引</callout-msg>
-        <callout-msg xml:lang="zh-CN">含优惠券的 GPS 设备 85 折优惠</callout-msg>
-        <details xml:lang="x-default">15% Off GPS Unit With Coupon with a coupon.</details>
-        <details xml:lang="fr-FR">15 % de rabais sur les GPS avec bon de réduction</details>
-        <details xml:lang="it-IT">Coupon di sconto del 15% su sistemi GPS.</details>
-        <details xml:lang="ja-JP">クーポンで GPS ユニットが 15% 割引になります。</details>
-        <details xml:lang="zh-CN">含优惠券的 GPS 设备 85 折优惠。</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-gps-units</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>15.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
     <promotion promotion-id="Duplicate-Rank-Exclusivity-No">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
@@ -171,7 +71,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -180,7 +80,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-pants</category-id>
                         </category-condition>
                     </condition-group>
@@ -251,7 +151,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -260,7 +160,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-pants</category-id>
                         </category-condition>
                     </condition-group>
@@ -297,7 +197,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>newarrivals</category-id>
                             <category-id>mens</category-id>
                             <category-id>womens</category-id>
@@ -341,8 +241,8 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics</category-id>
+                        <category-condition catalog-id="storefront-catalog-non-en">
+                            <category-id>womens</category-id>
                         </category-condition>
                     </condition-group>
                 </included-products>
@@ -387,7 +287,10 @@
         <details xml:lang="zh-CN">超过 150 美元的订单可享免费陆路送货</details>
         <shipping-promotion-rule>
             <shipping-methods>
-                <method-id>001</method-id>
+                <method-id>CNY001</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>JPY001</method-id>
+                <method-id>GBP001</method-id>
             </shipping-methods>
             <discounts condition-type="shipment-total">
                 <discount>
@@ -429,7 +332,10 @@
                 </included-products>
             </qualifying-products>
             <shipping-methods>
-                <method-id>002</method-id>
+                <method-id>CNY002</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>JPY002</method-id>
+                <method-id>GBP002</method-id>
             </shipping-methods>
             <discounts condition-type="shipment-total">
                 <discount>
@@ -463,15 +369,17 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics</category-id>
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens</category-id>
                         </category-condition>
                     </condition-group>
                 </included-products>
             </qualifying-products>
             <shipping-methods>
-                <method-id>001</method-id>
+                <method-id>CNY001</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>JPY001</method-id>
+                <method-id>GBP001</method-id>
             </shipping-methods>
             <discounts condition-type="shipment-total">
                 <discount>
@@ -505,7 +413,7 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-suits</category-id>
                         </category-condition>
                     </condition-group>
@@ -540,7 +448,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-suits</category-id>
                         </category-condition>
                     </condition-group>
@@ -553,48 +461,6 @@
                     <amount>50.0</amount>
                 </discount>
             </discounts>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="BuyXgetY">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>no</exclusivity>
-        <name xml:lang="x-default">BuyXgetY</name>
-        <name xml:lang="fr-FR">AchetezXrecevezY</name>
-        <name xml:lang="it-IT">Acquista X Ricevi Y</name>
-        <name xml:lang="ja-JP">Xの購入でYをゲット</name>
-        <name xml:lang="zh-CN">购买X获得Y</name>
-        <callout-msg xml:lang="x-default">BuyXgetY</callout-msg>
-        <callout-msg xml:lang="fr-FR">AchetezXrecevezY</callout-msg>
-        <callout-msg xml:lang="it-IT">Acquista X Ricevi Y</callout-msg>
-        <callout-msg xml:lang="ja-JP">Xの購入でYをゲット</callout-msg>
-        <callout-msg xml:lang="zh-CN">购买X获得Y</callout-msg>
-        <details xml:lang="x-default">BuyXgetY</details>
-        <details xml:lang="fr-FR">AchetezXrecevezY</details>
-        <details xml:lang="it-IT">Acquista X Ricevi Y</details>
-        <details xml:lang="ja-JP">Xの購入でYをゲット</details>
-        <details xml:lang="zh-CN">购买X获得Y</details>
-        <product-promotion-rule>
-            <qualifying-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>nikon-d40-wlens</product-id>
-                            <product-id>canon-powershot-sd1100-is</product-id>
-                            <product-id>sony-cybershot-t77</product-id>
-                            <product-id>nikon-d60-wlens</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </qualifying-products>
-            <disable-global-excluded-products>true</disable-global-excluded-products>
-            <identical-products>true</identical-products>
-            <bogo>
-                <threshold>3</threshold>
-                <free/>
-                <eligible-quantity>2</eligible-quantity>
-            </bogo>
         </product-promotion-rule>
     </promotion>
 
@@ -621,7 +487,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-suits</category-id>
                         </category-condition>
                     </condition-group>
@@ -676,258 +542,6 @@
         </order-promotion-rule>
     </promotion>
 
-    <promotion promotion-id="freeshipping-tvs">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">Free Shipping on TVs</name>
-        <name xml:lang="fr-FR">Frais de port gratuits pour les téléviseurs</name>
-        <name xml:lang="it-IT">Spedizione gratuita sulle TV</name>
-        <name xml:lang="ja-JP">テレビが送料無料</name>
-        <name xml:lang="zh-CN">电视享受免费送货</name>
-        <callout-msg xml:lang="x-default">Free Shipping for all Televisions</callout-msg>
-        <callout-msg xml:lang="fr-FR">Frais de port gratuits pour tous les téléviseurs</callout-msg>
-        <callout-msg xml:lang="it-IT">Spedizione gratuita su tutti i televisori</callout-msg>
-        <callout-msg xml:lang="ja-JP">すべてのテレビが送料無料</callout-msg>
-        <callout-msg xml:lang="zh-CN">所有电视享受免费送货</callout-msg>
-        <details xml:lang="x-default">&lt;table border="0" cellpadding="0" cellspacing="5"&gt;&#13;
-    &lt;tbody&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;Free Shipping on Televisions!&lt;/b&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;For a limited time, receive free Standard ground shipping on all Televisions!&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&#13;
-            &lt;ul&gt;&#13;
-                &lt;li&gt;Offer only valid while supplies last.&lt;/li&gt;&#13;
-                &lt;li&gt;Offer only applies to Standard ground shipping.&lt;/li&gt;&#13;
-                &lt;li&gt;This promotional offer may be modified or terminated at any time without notice.&lt;/li&gt;&#13;
-            &lt;/ul&gt;&#13;
-            &lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;HOW IT WORKS&lt;/b&gt;&lt;br /&gt;&#13;
-            To participate, simply add any Television to your shopping cart and Free Standard Shipping will automatically be applied. NOTE: You must select the &amp;quot;Standard Shipping&amp;quot; option to receive the discount. Otherwise, the full-expedited shipping charge will be applied. Note that this offer is only valid for orders shipped within the continental U.S. This offer applies only to the individual items; other items in your cart that are not eligible will still incur a shipping charge.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;hr /&gt;&#13;
-            &lt;b&gt;TERMS AND CONDITIONS&lt;/b&gt;&lt;br /&gt;&#13;
-            Offer only valid on items marked with the FREE SHIPPING Savings Alert icon. Applies only for Standard shipping. Discount does not apply to taxes, gift-wrapping or similar charges. Entire order must be shipped to a single address. Cannot be combined with any other promotional offer nor is this offer valid on previous purchases. Only applies to orders to be shipped to a valid address in the United States, excluding Alaska and Hawaii. Not available for shipments to APO/FPO addresses or P.O. boxes. Customer responsible for all shipping costs for returned merchandise. Offer not valid on cancelled or out of stock merchandise.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-    &lt;/tbody&gt;&#13;
-&lt;/table&gt;&#13;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;</details>
-        <details xml:lang="fr-FR">&lt;table border="0" cellpadding="0" cellspacing="5"&gt;&#13;
-    &lt;tbody&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;Frais de port gratuits pour les téléviseurs !&lt;/b&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;Pour une période limitée, bénéficiez de la gratuité des frais de port standard pour tous les téléviseurs !&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&#13;
-            &lt;ul&gt;&#13;
-                &lt;li&gt;Offre valable dans la limite des stocks disponibles.&lt;/li&gt;&#13;
-                &lt;li&gt;Offre valable uniquement pour la livraison standard par transport terrestre.&lt;/li&gt;&#13;
-                &lt;li&gt;Cette offre promotionnelle peut être modifiée ou prendre fin à tout moment sans préavis.&lt;/li&gt;&#13;
-            &lt;/ul&gt;&#13;
-            &lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;COMMENT ÇA MARCHE&lt;/b&gt;&lt;br /&gt;&#13;
-            Pour participer, ajoutez simplement un téléviseur à votre panier d'achat et la gratuité des frais de port standard s'appliquera automatiquement. REMARQUE : Vous devez sélectionner l'option Frais de port standard pour bénéficier de la promotion. Dans le cas contraire, les frais de port express seront appliqués. Notez que cette offre est valable uniquement pour les commandes à destination des États-Unis (continent).  Cette offre s'applique uniquement à certains articles. Les autres articles de votre panier qui ne peuvent en bénéficier resteront soumis à des frais de port.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;hr /&gt;&#13;
-            &lt;b&gt;CONDITIONS GÉNÉRALES&lt;/b&gt;&lt;br /&gt;&#13;
-            Offre valable uniquement pour les articles marqués de l'icône d'alerte Frais de port gratuits. Offre valable uniquement pour les frais de port standard. Promotion non applicable aux taxes, emballages cadeaux et autres frais similaires. L'intégralité de la commande doit être livrée à une seule adresse. Offre non cumulable avec toute autre offre promotionnelle et non valable sur les achats antérieurs. Offre valable uniquement pour les commandes destinées à une adresse valide aux États-Unis, hors Alaska et Hawaii. Offre non disponible pour les livraisons aux adresses APO/FPO ou en boîtes postales. L'intégralité des frais de port, en cas de retour, est à la charge du client. Offre non valable pour les articles annulés ou en rupture de stock.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-    &lt;/tbody&gt;&#13;
-&lt;/table&gt;&#13;
-&lt;p&gt; &lt;/p&gt;</details>
-        <details xml:lang="it-IT">&lt;table border="0" cellpadding="0" cellspacing="5"&gt;&#13;
-    &lt;tbody&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;Spedizione gratuita sui televisori!&lt;/b&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;Per un periodo limitato, la spedizione standard via terrà è gratuita su tutti i televisori!&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&#13;
-            &lt;ul&gt;&#13;
-                &lt;li&gt;Offerta valida fino ad esaurimento scorte.&lt;/li&gt;&#13;
-                &lt;li&gt;Offerta valida solo per la spedizione standard via terra.&lt;/li&gt;&#13;
-                &lt;li&gt;Questa offerta promozionale può essere modificata o sospesa in qualsiasi momento senza preavviso.&lt;/li&gt;&#13;
-            &lt;/ul&gt;&#13;
-            &lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;MODALITÀ DI APPLICAZIONE&lt;/b&gt;&lt;br /&gt;&#13;
-            Per partecipare basta aggiungere un televisore al carrello e la spedizione standard gratuita verrà applicata automaticamente. NOTA: Per ricevere lo sconto è necessario selezionare l'opzione "spedizione standard". In caso contrario vengono addebitate le spese di spedizione a costo intero. Si noti che questa offerta è valida solo per gli ordini spediti negli stati USA contigui. Questa offerta si applica a livello di singoli prodotti; agli articoli nel carrello non soggetti alla promozione verranno assegnate le relative spese di spedizione.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;hr /&gt;&#13;
-            &lt;b&gt;TERMINI E CONDIZIONI&lt;/b&gt;&lt;br /&gt;&#13;
-            Offerta valida solo per gli articoli contrassegnati dall'icona Offerta risparmio SPEDIZIONE GRATUITA. Si applica solo alla spedizione standard. Lo sconto non si applica agli importi di imposte, confezioni regalo o spese simili. L'intero ordine deve essere spedito a un unico indirizzo. L'offerta non può essere combinata con altre offerte promozionali né essere applicata ad acquisti precedenti. Si applica solo agli ordini spediti a un indirizzo valido negli Stati Uniti, ad eccezione di Alaska e Hawaii. Non disponibile per le spedizioni a indirizzi militari APO/FPO o caselle postali. In caso di reso le spese di spedizione sono a carico del cliente. Offerta non valida su merce annullata o esaurita.&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-    &lt;/tbody&gt;&#13;
-&lt;/table&gt;&#13;
-&lt;p&gt; &lt;/p&gt;</details>
-        <details xml:lang="ja-JP">&lt;table border="0" cellpadding="0" cellspacing="5"&gt;&#13;
-    &lt;tbody&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;テレビが送料無料!&lt;/b&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;期間限定で、すべてのテレビの通常配送料が無料!&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&#13;
-            &lt;ul&gt;&#13;
-                &lt;li&gt;在庫がなくなり次第プロモーションは終了します。&lt;/li&gt;&#13;
-                &lt;li&gt;プロモーションは通常配送料のみが対象となります。&lt;/li&gt;&#13;
-                &lt;li&gt;このプロモーションは、予告なく変更または終了することがあります。&lt;/li&gt;&#13;
-            &lt;/ul&gt;&#13;
-            &lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;プロモーションを利用するには&lt;/b&gt;&lt;br /&gt;&#13;
-            このプロモーションでは、お好きなテレビを買い物カゴに入れるだけで、無料通常配送が自動的に適用されます。注: 割引をご利用いただくには、"通常配送" オプションを選択してください。"通常配送" を選択しないと、お急ぎ配送料が全額課金されます。このプロモーションは、ご注文の配送先が米国本土の場合にかぎります。このプロモーションは個別の商品にのみ適用され、買い物カゴの中にある他の商品には適用されず、配送料金がかかります。&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;hr /&gt;&#13;
-            &lt;b&gt;利用条件&lt;/b&gt;&lt;br /&gt;&#13;
-            本プロモーションは、無料配送アラートアイコンの付いている商品のみが対象になります。通常配送にのみ適用されます。割引は、税金、ギフトラッピング、その他類似の料金には適用されません。注文に含まれるすべての商品の配送先が 1 カ所でなければなりません。他のプロモーションと組み合わせることはできません。また、本プロモーションを以前のご注文に適用することはできません。アラスカ州、ハワイ州を除く米国内の有効な住所が配送先として指定されているご注文にのみ適用されます。APO/FPO の住所、および私書箱への配送にはご利用いただけません。返品する場合の配送料は、お客様のご負担になります。キャンセルされた商品や在庫切れの商品は本プロモーションの対象になりません。&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-    &lt;/tbody&gt;&#13;
-&lt;/table&gt;&#13;
-&lt;p&gt; &lt;/p&gt;</details>
-        <details xml:lang="zh-CN">&lt;table border="0" cellpadding="0" cellspacing="5"&gt;&#13;
-    &lt;tbody&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;电视享受免费送货！&lt;/b&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;有限期间，所有电视可享受免费标准陆路送货！&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&#13;
-            &lt;ul&gt;&#13;
-                &lt;li&gt;优惠售完为止。&lt;/li&gt;&#13;
-                &lt;li&gt;促销仅限标准陆路送货。&lt;/li&gt;&#13;
-                &lt;li&gt;该促销在事先未通知的情况下可能随时被更改或终止。&lt;/li&gt;&#13;
-            &lt;/ul&gt;&#13;
-            &lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;b&gt;如何运作&lt;/b&gt;&lt;br /&gt;&#13;
-            要参与，只需将任何电视添加到购物车中，免费标准送货即自动被采纳。注:您必须选择“标准送货”选项才能获得折扣。否则，将采纳全额快递运费。注意，这项优惠只针对美国大陆境内的订单。这项优惠仅针对单个商品；对购物车中其它不符合条件的商品仍会收取运费。&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-        &lt;tr&gt;&#13;
-            &lt;td&gt;&lt;hr /&gt;&#13;
-            &lt;b&gt;条款与条件&lt;/b&gt;&lt;br /&gt;&#13;
-            只对有“免费送货优惠提示”图标的商品提供优惠。只针对标准陆路送货。折扣不适用于税务、礼品包装或类似收费。订单所有商品必须被送到同一个地址。不得与其它促销优惠合用，也对之前的购买无效。只适用于运送到美国有效地址的订单，不包括阿拉斯加和夏威夷。不可送货到 APO/FPO 地址或 P.O. 邮箱。客户负责所有退货运费。优惠不适用于取消或脱销的商品订购。&lt;/td&gt;&#13;
-        &lt;/tr&gt;&#13;
-    &lt;/tbody&gt;&#13;
-&lt;/table&gt;&#13;
-&lt;p&gt; &lt;/p&gt;</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-televisions</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <shipping-methods>
-                <method-id>004</method-id>
-                <method-id>001</method-id>
-            </shipping-methods>
-            <simple-discount>
-                <free-shipping/>
-            </simple-discount>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="15off-nano">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">15% Off iPod Nano</name>
-        <name xml:lang="fr-FR">15 % de rabais sur l'iPod Nano</name>
-        <name xml:lang="it-IT">15% di sconto su iPod Nano</name>
-        <name xml:lang="ja-JP">iPod Nano が 15% 割引</name>
-        <name xml:lang="zh-CN">iPod Nano 85 折优惠</name>
-        <callout-msg xml:lang="x-default">Save 15% Off iPod Nano</callout-msg>
-        <callout-msg xml:lang="fr-FR">Économisez 15 % sur l'iPod Nano</callout-msg>
-        <callout-msg xml:lang="it-IT">Risparmia il 15% sull'acquisto di un iPod Nano</callout-msg>
-        <callout-msg xml:lang="ja-JP">iPod Nano が 15% 割引に</callout-msg>
-        <callout-msg xml:lang="zh-CN">iPod Nano 85 折优惠</callout-msg>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>apple-ipod-nano</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>15.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="15off-samsunglcd">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">15% Off Samsung LCD Televisions</name>
-        <name xml:lang="fr-FR">15 % de rabais sur les téléviseurs LCD Samsung</name>
-        <name xml:lang="it-IT">15% di sconto su televisori LCD Samsung</name>
-        <name xml:lang="ja-JP">Samsung LCD テレビが 15% 割引</name>
-        <name xml:lang="zh-CN">三星 LCD 电视 85 折优惠</name>
-        <callout-msg xml:lang="x-default">Additional 15% Off Samsung LCD Televisions</callout-msg>
-        <callout-msg xml:lang="fr-FR">15 % de rabais supplémentaires sur les téléviseurs LCD Samsung</callout-msg>
-        <callout-msg xml:lang="it-IT">Ulteriore 15% di sconto su televisori LCD Samsung</callout-msg>
-        <callout-msg xml:lang="ja-JP">Samsung LCD テレビがさらに 15% 割引</callout-msg>
-        <callout-msg xml:lang="zh-CN">三星 LCD 电视享受额外 85 折优惠</callout-msg>
-        <details xml:lang="x-default">Additional 15% Off Samsung LCD Televisions, Limit 1 per order.</details>
-        <details xml:lang="fr-FR">15 % de rabais supplémentaires sur les téléviseurs LCD Samsung, offre limitée à un article par commande.</details>
-        <details xml:lang="it-IT">Ulteriore 15% di sconto su televisori LCD Samsung, con limite di 1 per ordine.</details>
-        <details xml:lang="ja-JP">Samsung LCD テレビがさらに 15% 割引になります (1 回のご注文で 1 台のみ)。</details>
-        <details xml:lang="zh-CN">三星 LCD 电视享受额外 85 折优惠，每个订单限 1 次优惠</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-televisions-flat-screen</category-id>
-                        </category-condition>
-                        <brand-condition operator="is equal">
-                            <brand>Samsung</brand>
-                        </brand-condition>
-                        <attribute-condition operator="equals" attribute-id="tvType">
-                            <attribute-value>0020</attribute-value>
-                        </attribute-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>15.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
     <promotion promotion-id="$50offShippingAmountAbove150">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>true</searchable-flag>
@@ -951,15 +565,21 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-televisions-flat-screen</category-id>
+                        <category-condition catalog-id="storefront-catalog-non-en">
+                            <category-id>womens</category-id>
                         </category-condition>
                     </condition-group>
                 </included-products>
             </qualifying-products>
             <shipping-methods>
-                <method-id>001</method-id>
-                <method-id>002</method-id>
+                <method-id>CNY001</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>JPY001</method-id>
+                <method-id>GBP001</method-id>
+                <method-id>CNY002</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>JPY002</method-id>
+                <method-id>GBP002</method-id>
             </shipping-methods>
             <discounts condition-type="shipment-total">
                 <discount>
@@ -993,7 +613,7 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-dress-shirts</category-id>
                         </category-condition>
                     </condition-group>
@@ -1029,8 +649,8 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-televisions</category-id>
+                        <category-condition catalog-id="storefront-catalog-non-en">
+                            <category-id>womens</category-id>
                         </category-condition>
                     </condition-group>
                 </included-products>
@@ -1038,74 +658,6 @@
             <simple-discount>
                 <percentage>40.0</percentage>
             </simple-discount>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="BuyXandYgetZ">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>no</exclusivity>
-        <name xml:lang="x-default">Buy5for50</name>
-        <name xml:lang="fr-FR">Achetez5pour50</name>
-        <name xml:lang="it-IT">Acquista 5 per prezzo totale € 50</name>
-        <name xml:lang="ja-JP">5個購入で5,000円</name>
-        <name xml:lang="zh-CN">购买5个花50</name>
-        <callout-msg xml:lang="x-default">BuyXandYgetZ</callout-msg>
-        <callout-msg xml:lang="fr-FR">AchetezXetYrecevezZ</callout-msg>
-        <callout-msg xml:lang="it-IT">Acquista X e Y Ricevi Z</callout-msg>
-        <callout-msg xml:lang="ja-JP">XとYの購入でZをゲット</callout-msg>
-        <callout-msg xml:lang="zh-CN">购买X和Y获得Z</callout-msg>
-        <details xml:lang="x-default">BuyXandYgetZ</details>
-        <details xml:lang="fr-FR">AchetezXetYrecevezZ</details>
-        <details xml:lang="it-IT">Acquista X e Y Ricevi Z</details>
-        <details xml:lang="ja-JP">XとYの購入でZをゲット</details>
-        <details xml:lang="zh-CN">购买X和Y获得Z</details>
-        <product-promotion-rule>
-            <qualifying-products-combination>
-                <product-constraints>
-                    <product-constraint>
-                        <quantity>2</quantity>
-                        <product-specification>
-                            <included-products>
-                                <condition-group>
-                                    <product-id-condition operator="is equal">
-                                        <product-id>vizio-vw46lf</product-id>
-                                        <product-id>vizio-vp504f</product-id>
-                                        <product-id>vizio-vp503</product-id>
-                                        <product-id>vizio-vp422</product-id>
-                                        <product-id>vizio-vo37l</product-id>
-                                        <product-id>vizio-vo32lf</product-id>
-                                    </product-id-condition>
-                                </condition-group>
-                            </included-products>
-                        </product-specification>
-                    </product-constraint>
-                </product-constraints>
-            </qualifying-products-combination>
-            <discounted-products-combination>
-                <product-constraints>
-                    <product-constraint>
-                        <quantity>1</quantity>
-                        <product-specification>
-                            <included-products>
-                                <condition-group>
-                                    <product-id-condition operator="is equal">
-                                        <product-id>vizio-gv47lf</product-id>
-                                        <product-id>vizio-sv420xvt</product-id>
-                                        <product-id>vizio-vo22lf</product-id>
-                                    </product-id-condition>
-                                </condition-group>
-                            </included-products>
-                        </product-specification>
-                    </product-constraint>
-                </product-constraints>
-            </discounted-products-combination>
-            <disable-global-excluded-products>true</disable-global-excluded-products>
-            <bogo>
-                <threshold>1</threshold>
-                <fixed-price>50.0</fixed-price>
-                <eligible-quantity>1</eligible-quantity>
-            </bogo>
         </product-promotion-rule>
     </promotion>
 
@@ -1132,7 +684,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -1141,7 +693,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-pants</category-id>
                         </category-condition>
                     </condition-group>
@@ -1155,87 +707,6 @@
                 </discount>
             </discounts>
         </order-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="Buy5for50">
-        <enabled-flag>true</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>no</exclusivity>
-        <name xml:lang="x-default">Buy5for50</name>
-        <name xml:lang="fr-FR">Achetez5pour50</name>
-        <name xml:lang="it-IT">Acquista 5 per prezzo totale € 50</name>
-        <name xml:lang="ja-JP">5個購入で5,000円</name>
-        <name xml:lang="zh-CN">购买5个花50</name>
-        <callout-msg xml:lang="x-default">Buy5for50</callout-msg>
-        <callout-msg xml:lang="fr-FR">Achetez5pour50</callout-msg>
-        <callout-msg xml:lang="it-IT">Acquista 5 per prezzo totale € 50</callout-msg>
-        <callout-msg xml:lang="ja-JP">5個購入で5,000円</callout-msg>
-        <callout-msg xml:lang="zh-CN">购买5个花50</callout-msg>
-        <details xml:lang="x-default">Buy5for50</details>
-        <details xml:lang="fr-FR">Achetez5pour50</details>
-        <details xml:lang="it-IT">Acquista 5 per prezzo totale € 50</details>
-        <details xml:lang="ja-JP">5個購入で5,000円</details>
-        <details xml:lang="zh-CN">购买5个花50</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>nikon-d60-wlens</product-id>
-                            <product-id>sony-cybershot-t77</product-id>
-                            <product-id>nikon-d40-wlens</product-id>
-                            <product-id>canon-powershot-sd1100-is</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <total-discounts>
-                <discount>
-                    <total-fixed-price>50.0</total-fixed-price>
-                    <eligible-quantity>5</eligible-quantity>
-                </discount>
-            </total-discounts>
-        </product-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="buy3dsgames-75">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">3 Nintendo DS Games For $75</name>
-        <name xml:lang="fr-FR">3 jeux Nintendo DS pour 75 euros</name>
-        <name xml:lang="it-IT">3 giochi Nintendo DS per € 75</name>
-        <name xml:lang="ja-JP">任天堂 DS ゲームが 3 個で 7,500 円</name>
-        <name xml:lang="zh-CN">3 款 Nintendo DS 游戏售价 75 美元</name>
-        <callout-msg xml:lang="x-default">Buy Any 3 Nintendo DS Games For $75</callout-msg>
-        <callout-msg xml:lang="fr-FR">Achetez 3 jeux Nintendo DS pour 75 euros</callout-msg>
-        <callout-msg xml:lang="it-IT">Compra 3 giochi Nintendo DS per € 75</callout-msg>
-        <callout-msg xml:lang="ja-JP">任天堂 DS ゲームがどれでも 3 個で 7,500 円</callout-msg>
-        <callout-msg xml:lang="zh-CN">花 75 美元购买任何 3 款 Nintendo DS 游戏</callout-msg>
-        <details xml:lang="x-default">Buy Any 3 Nintendo DS Games For $75, you must be registered to qualify for this promotion</details>
-        <details xml:lang="fr-FR">Achetez 3 jeux Nintendo DS pour 75 euros, offre réservée aux personnes inscrites</details>
-        <details xml:lang="it-IT">Compra 3 giochi Nintendo DS per € 75, promozione valida solo per utenti registrati</details>
-        <details xml:lang="ja-JP">任天堂 DS ゲームがどれでも 3 個で 7,500 円になります (このプロモーションは、登録ユーザーのみが対象になります)。</details>
-        <details xml:lang="zh-CN">花 75 美元购买任何 3 款 Nintendo DS 游戏，您必须注册账户才能享受该促销优惠</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>ubi-soft-quick-yoga-training-nintendods</product-id>
-                            <product-id>nintendo-big-brain-academy-nintendods</product-id>
-                            <product-id>nintendo-mario-kart-nintendods</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <total-discounts>
-                <discount>
-                    <total-fixed-price>75.0</total-fixed-price>
-                    <eligible-quantity>3</eligible-quantity>
-                </discount>
-            </total-discounts>
-        </product-promotion-rule>
     </promotion>
 
     <promotion promotion-id="ChoiceOfBonusProductOnOrderOfAmountAbove100">
@@ -1261,7 +732,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-jewelry</category-id>
                         </category-condition>
                     </condition-group>
@@ -1270,7 +741,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-jewelry-necklaces</category-id>
                         </category-condition>
                     </condition-group>
@@ -1345,7 +816,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -1354,7 +825,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-pants</category-id>
                         </category-condition>
                     </condition-group>
@@ -1393,7 +864,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -1402,7 +873,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-clothing-jackets</category-id>
                             <category-id>womens-clothing-feeling-red</category-id>
                             <category-id>womens-clothing-bottoms</category-id>
@@ -1486,7 +957,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-accessories</category-id>
                         </category-condition>
                     </condition-group>
@@ -1504,11 +975,11 @@
         </order-promotion-rule>
     </promotion>
 
-    <promotion promotion-id="25USD-off-dresses">
+    <promotion promotion-id="25GBP-off-dresses">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
         <exclusivity>no</exclusivity>
-        <currency>USD</currency>
+        <currency>GBP</currency>
         <name xml:lang="x-default">$25 off all Dresses</name>
         <name xml:lang="fr-FR">25 euros de rabais sur toutes les robes</name>
         <name xml:lang="it-IT">Sconto di € 25 su tutti i vestiti</name>
@@ -1528,7 +999,7 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-clothing-dresses</category-id>
                         </category-condition>
                     </condition-group>
@@ -1579,42 +1050,6 @@
         </product-promotion-rule>
     </promotion>
 
-    <promotion promotion-id="20off-tvs">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">20% Off select TVs</name>
-        <name xml:lang="fr-FR">20 % de rabais sur une sélection de téléviseurs</name>
-        <name xml:lang="it-IT">20% di sconto su TV selezionate</name>
-        <name xml:lang="ja-JP">一部のテレビが 20% 割引</name>
-        <name xml:lang="zh-CN">部分电视享受 8 折优惠</name>
-        <callout-msg xml:lang="x-default">20% Off select TVs</callout-msg>
-        <callout-msg xml:lang="fr-FR">20 % de rabais sur une sélection de téléviseurs</callout-msg>
-        <callout-msg xml:lang="it-IT">20% di sconto su TV selezionate</callout-msg>
-        <callout-msg xml:lang="ja-JP">一部のテレビが 20% 割引</callout-msg>
-        <callout-msg xml:lang="zh-CN">部分电视享受 8 折优惠</callout-msg>
-        <details xml:lang="x-default">20% Off TVs, select models only for this promotion. Limit 1 television per order</details>
-        <details xml:lang="fr-FR">20 % de rabais sur les téléviseurs, offre réservée à une sélection de modèles uniquement. Offre limitée à 1 téléviseur par commande</details>
-        <details xml:lang="it-IT">20% di sconto su TV, promozione valida solo su modelli selezionati. Limite di 1 televisore per ordine</details>
-        <details xml:lang="ja-JP">一部のテレビが 20% 割引になります (このプロモーションは一部のモデルのみが対象です)。1 回のご注文でテレビ 1 台のみ</details>
-        <details xml:lang="zh-CN">电视享受 8 折优惠，此促销优惠仅限部分型号。每个订单限购 1 台电视</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>electronics-televisions</category-id>
-                        </category-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <percentage>20.0</percentage>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
-    </promotion>
-
     <promotion promotion-id="5%offWithoutQualifyingProducts">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>false</searchable-flag>
@@ -1638,7 +1073,7 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-accessories-gloves</category-id>
                         </category-condition>
                     </condition-group>
@@ -1675,7 +1110,7 @@
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-clothing-dresses</category-id>
                         </category-condition>
                     </condition-group>
@@ -1710,7 +1145,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-clothing-tops</category-id>
                         </category-condition>
                     </condition-group>
@@ -1750,7 +1185,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens</category-id>
                         </category-condition>
                     </condition-group>
@@ -1789,15 +1224,21 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-accessories-shoes</category-id>
                         </category-condition>
                     </condition-group>
                 </included-products>
             </qualifying-products>
             <shipping-methods>
-                <method-id>002</method-id>
-                <method-id>003</method-id>
+                <method-id>CNY003</method-id>
+                <method-id>EUR003</method-id>
+                <method-id>JPY003</method-id>
+                <method-id>GBP003</method-id>
+                <method-id>CNY002</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>JPY002</method-id>
+                <method-id>GBP002</method-id>
             </shipping-methods>
             <prohibit-nonqualifying-products>false</prohibit-nonqualifying-products>
             <discounts condition-type="product-quantity">
@@ -1807,42 +1248,6 @@
                 </discount>
             </discounts>
         </shipping-promotion-rule>
-    </promotion>
-
-    <promotion promotion-id="ps3bundle-50off">
-        <enabled-flag>false</enabled-flag>
-        <searchable-flag>false</searchable-flag>
-        <exclusivity>class</exclusivity>
-        <name xml:lang="x-default">Playstation 3 Bundle $50 off</name>
-        <name xml:lang="fr-FR">50 euros de rabais sur le coffret Playstation 3</name>
-        <name xml:lang="it-IT">€ 50 di sconto su bundle PlayStation 3</name>
-        <name xml:lang="ja-JP">Playstation 3 バンドルが 5,000 円割引</name>
-        <name xml:lang="zh-CN">游戏机 3 套装优惠 50 美元</name>
-        <callout-msg xml:lang="x-default">Save $50 on Playstation 3 Bundle</callout-msg>
-        <callout-msg xml:lang="fr-FR">Économisez 50 euros sur le coffret Playstation 3</callout-msg>
-        <callout-msg xml:lang="it-IT">Risparmia € 50 sull'acquisto di un bundle PlayStation 3</callout-msg>
-        <callout-msg xml:lang="ja-JP">Playstation 3 バンドルが 5,000 円割引に</callout-msg>
-        <callout-msg xml:lang="zh-CN">游戏机 3 套装节省 50 美元</callout-msg>
-        <details xml:lang="x-default">Save $50 on Playstation 3 Bundle, limited to 1 per order.</details>
-        <details xml:lang="fr-FR">Économisez 50 euros sur le coffret Playstation 3, offre limitée à 1 coffret par commande.</details>
-        <details xml:lang="it-IT">Risparmia € 50 sull'acquisto di un bundle PlayStation 3, offerta limitata a 1 per ordine.</details>
-        <details xml:lang="ja-JP">Playstation 3 バンドルが 5,000 割引になります (ご注文ごとに 1 回のみ)。</details>
-        <details xml:lang="zh-CN">游戏机 3 套装节省 50 美元，每个订单限 1 套</details>
-        <product-promotion-rule>
-            <discounted-products>
-                <included-products>
-                    <condition-group>
-                        <product-id-condition operator="is equal">
-                            <product-id>sony-ps3-bundle</product-id>
-                        </product-id-condition>
-                    </condition-group>
-                </included-products>
-            </discounted-products>
-            <simple-discount>
-                <amount>50.0</amount>
-            </simple-discount>
-            <max-applications>1</max-applications>
-        </product-promotion-rule>
     </promotion>
 
     <promotion promotion-id="10off-InStyle">
@@ -1863,7 +1268,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>womens-accessories-shoes</category-id>
                         </category-condition>
                     </condition-group>
@@ -1949,7 +1354,7 @@
             <qualifying-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing</category-id>
                         </category-condition>
                     </condition-group>
@@ -1958,7 +1363,7 @@
             <excluded-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
+                        <category-condition catalog-id="storefront-catalog-non-en">
                             <category-id>mens-clothing-pants</category-id>
                         </category-condition>
                     </condition-group>
@@ -1973,15 +1378,6 @@
             </discounts>
         </order-promotion-rule>
     </promotion>
-
-    <promotion-campaign-assignment promotion-id="15off-gps" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <coupons/>
-        </qualifiers>
-        <coupons>
-            <coupon coupon-id="15OFFGPS"/>
-        </coupons>
-    </promotion-campaign-assignment>
 
     <promotion-campaign-assignment promotion-id="Duplicate-Rank-Exclusivity-No" campaign-id="Automation">
         <qualifiers match-mode="any">
@@ -2056,14 +1452,6 @@
         </qualifiers>
     </promotion-campaign-assignment>
 
-    <promotion-campaign-assignment promotion-id="BuyXgetY" campaign-id="Automation">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
     <promotion-campaign-assignment promotion-id="ExclusivityClass1" campaign-id="Automation">
         <qualifiers match-mode="any">
             <customer-groups/>
@@ -2077,24 +1465,6 @@
             <customer-groups/>
             <source-codes/>
             <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="freeshipping-tvs" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="15off-nano" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="15off-samsunglcd" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <customer-groups/>
         </qualifiers>
     </promotion-campaign-assignment>
 
@@ -2123,23 +1493,7 @@
         </qualifiers>
     </promotion-campaign-assignment>
 
-    <promotion-campaign-assignment promotion-id="BuyXandYgetZ" campaign-id="Automation">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
     <promotion-campaign-assignment promotion-id="DuplicateExclusivityNo-Low" campaign-id="Automation">
-        <qualifiers match-mode="any">
-            <customer-groups/>
-            <source-codes/>
-            <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="Buy5for50" campaign-id="Automation">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>
@@ -2187,7 +1541,7 @@
         </qualifiers>
     </promotion-campaign-assignment>
 
-    <promotion-campaign-assignment promotion-id="25USD-off-dresses" campaign-id="multi-currency demo">
+    <promotion-campaign-assignment promotion-id="25GBP-off-dresses" campaign-id="multi-currency demo">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>
@@ -2200,12 +1554,6 @@
             <customer-groups/>
             <source-codes/>
             <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="20off-tvs" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <customer-groups/>
         </qualifiers>
     </promotion-campaign-assignment>
 
@@ -2246,12 +1594,6 @@
             <customer-groups/>
             <source-codes/>
             <coupons/>
-        </qualifiers>
-    </promotion-campaign-assignment>
-
-    <promotion-campaign-assignment promotion-id="ps3bundle-50off" campaign-id="electronics-promotions">
-        <qualifiers match-mode="any">
-            <customer-groups/>
         </qualifiers>
     </promotion-campaign-assignment>
 

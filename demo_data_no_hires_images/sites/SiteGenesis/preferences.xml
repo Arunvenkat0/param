@@ -59,11 +59,7 @@
     <custom-preferences>
         <all-instances/>
         <development/>
-        <staging>
-            <preference preference-id="buildNotificationEmailList"></preference>
-            <preference preference-id="disableResponsiveDesign">false</preference>
-            <preference preference-id="slideshoweffect">growX</preference>
-        </staging>
+        <staging/>
         <production/>
     </custom-preferences>
 </preferences>
