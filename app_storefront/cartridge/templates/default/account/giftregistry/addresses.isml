@@ -41,7 +41,7 @@
 							</label>
 	
 							<select name="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}" id="${pdict.CurrentForms.giftregistry.eventaddress.addressBeforeList.htmlName}" class="input-select">
-								<option value="" selected="selected">Select</option>
+								<option value="" selected="selected">${Resource.msg('resource.select','forms',null)}</option>
 								<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
 									<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
 								<iselse/>
@@ -93,7 +93,7 @@
 							</label>
 
 							<select name="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterList.htmlName}" id="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterList.htmlName}" class="input-select">
-								<option value="" selected="selected">Select</option>
+								<option value="" selected="selected">${Resource.msg('resource.select','forms',null)}</option>
 								<isif condition="${pdict.CurrentCustomer.profile.addressBook.addresses.size() == 0}">
 									<option value="${Resource.msg('global.nosavedaddress','locale',null)}">${Resource.msg('global.nosavedaddress','locale',null)}</option>
 								<iselse/>
