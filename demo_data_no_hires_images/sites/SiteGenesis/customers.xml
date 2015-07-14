@@ -47,7 +47,7 @@
                 <city>Woburn</city>
                 <postal-code>01801</postal-code>
                 <state-code>MA</state-code>
-                <country-code>US</country-code>
+		<country-code>us</country-code>
                 <phone>781-555-1212</phone>
             </address>
             <address address-id="Work" preferred="false">
@@ -66,7 +66,7 @@
                 <city>Burlington</city>
                 <postal-code>01803</postal-code>
                 <state-code>MA</state-code>
-                <country-code>US</country-code>
+		<country-code>us</country-code>
                 <phone>781-555-1212</phone>
             </address>
         </addresses>
@@ -149,7 +149,7 @@
                 <city>San Francisco</city>
                 <postal-code>94110</postal-code>
                 <state-code>CA</state-code>
-                <country-code>US</country-code>
+		<country-code>us</country-code>
                 <phone>415-555-1212</phone>
             </address>
         </addresses>
