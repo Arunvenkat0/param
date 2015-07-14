@@ -139,6 +139,8 @@ The following options are supported on the command line:
 - `reporter`: (default: `spec`) see [all available options](http://mochajs.org/#reporters).
 - `timeout`: (default: `10000`)
 - `suite`: (default: `all`)
+- `client`: (default: `phantomjs`) browser environment to run UI tests in
+- `url`: URL of storefront site to run UI tests against
 
 ### Test user accounts
 

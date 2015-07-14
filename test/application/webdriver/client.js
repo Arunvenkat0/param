@@ -3,13 +3,9 @@
 import config from './config';
 import webdriverio from 'webdriverio';
 
-import minimist from 'minimist';
-
-let opts = minimist(process.argv.slice(2));
-
 let client = webdriverio.remote({
 	desiredCapabilities: {
-		browserName: opts.browser || config.client || 'phantomjs'
+		browserName: config.client
 	},
 	logLevel: 'silent'
 });
