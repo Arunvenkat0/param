@@ -5,29 +5,21 @@
 
 	The "Standard Price" for a product is the price contained in the "list
 	pricebook". Since the Demandware system does not currently have concept
-	of pricebook types, the list pricebook ID is determined based on a site
-	preference "listPriceDefault".  Fall back to "list-price" if preference
+	of pricebook types, the list pricebook ID is determined by whether the pricebook
+	has a parent pricebook.  Fall back to "list-price" if preference
 	is not set.  Price will be equal to NOT_AVAILABLE if there is no such
 	price book or if the price book defines no price for the product
 </iscomment>
 <isif condition="${!empty(PriceModel)}">
-	<isif condition="${(!PriceModel.getPrice().available) || (!dw.system.Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode()))}">
-		<iscomment>
-			There is currently no way to check if the list pricebook is actually
-			assigned to the site.  Therefore, we do a sanity check:  If the
-			product has no price according to standard price lookup rules,
-			then we know the list price book is not assigned to the site.
-			(The converse is not true so this check is not perfect.)
-
-			Todo:  Improve this logic.
-
-			The check after the '||' above is to only consider standard prices for cases where the site and
-			the session currencies are the same. This is because currently the "listPriceDefault" property
-			can not be set per currency
-		</iscomment>
+	<isif condition="${(!PriceModel.getPrice().available)}">
 		<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
 	<iselseif condition="${('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)}">
-		<isset name="StandardPrice" value="${PriceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault)}" scope="page"/>
+		<isscript>
+			var currentPriceBook = PriceModel.priceInfo.priceBook;
+			var standardPriceBookID = currentPriceBook.parentPriceBook ? currentPriceBook.parentPriceBook.ID : currentPriceBook.ID;
+			pdict.StandardPrice = PriceModel.getPriceBookPrice(standardPriceBookID);
+		</isscript>
+		<isset name="StandardPrice" value="${pdict.StandardPrice}" scope="page"/>
 	<iselse/>
 		<isset name="StandardPrice" value="${PriceModel.getPriceBookPrice('list-prices')}" scope="page"/>
 	</isif>
