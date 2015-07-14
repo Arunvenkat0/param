@@ -13,15 +13,17 @@
 <isif condition="${!empty(PriceModel)}">
 	<isif condition="${(!PriceModel.getPrice().available)}">
 		<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
-	<iselseif condition="${('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)}">
+	<iselse/>
 		<isscript>
-			var currentPriceBook = PriceModel.priceInfo.priceBook;
-			var standardPriceBookID = currentPriceBook.parentPriceBook ? currentPriceBook.parentPriceBook.ID : currentPriceBook.ID;
-			pdict.StandardPrice = PriceModel.getPriceBookPrice(standardPriceBookID);
+			var priceBook = PriceModel.priceInfo.priceBook;
+
+			do {
+				priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook; 
+			} while (priceBook.parentPriceBook);
+
+			pdict.StandardPrice = PriceModel.getPriceBookPrice(priceBook.ID);
 		</isscript>
 		<isset name="StandardPrice" value="${pdict.StandardPrice}" scope="page"/>
-	<iselse/>
-		<isset name="StandardPrice" value="${PriceModel.getPriceBookPrice('list-prices')}" scope="page"/>
 	</isif>
 	<isif condition="${!StandardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(StandardPrice.getCurrencyCode())}">
 		<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
