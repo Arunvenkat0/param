@@ -18,7 +18,7 @@ function clickThruAfter() {
 				cookieId: CQuotient.getCQCookieId(),
 				userId: CQuotient.getCQUserId(),
 				recommenderName: recommenderName,
-				anchors: anchors,
+				anchors: anchors || '',
 				products: {
 					id: currentProductId
 				}

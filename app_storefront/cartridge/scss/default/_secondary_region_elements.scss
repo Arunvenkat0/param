@@ -70,7 +70,7 @@
 	border-top: 1px solid $gainsboro;
 	font-size: 1.1em;
 	letter-spacing: 0.125em;
-	margin: 0;
+	margin: 0 0 .65em;
 	padding: 1.15em .75em .75em;
 	text-transform: uppercase;
 	.ie7 & {
@@ -79,6 +79,7 @@
 }
 
 .refinement {
+	padding-bottom: .65em;
 	h3 {
 		i {
 			color: $rain-forest
@@ -87,7 +88,7 @@
 	ul {
 		list-style: none outside none;
 		margin: 0;
-		padding: .65em .55em .4em;
+		padding: 0 .55em 0;
 	}
 	li {
 		padding: .5em;
@@ -129,9 +130,8 @@
 		}
 	}
 	.clear-refinement {
-		position: absolute;
-		right: 0.7em;
-		top: 1.1em;
+		font-weight: bold;
+   		padding: 0 1.05em 0.4em;
 	}
 	.refinement-link {
 		border: 0 none;

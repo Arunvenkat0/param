@@ -74,7 +74,7 @@
 
 					<isif condition="${pdict.ContentSearchResult.isRefinedByAttribute(RefinementDefinition.attributeID)}">
 						<div class="clear-refinement">
-							(<a title="${Resource.msg('searchrefinebar.clearselection','search',null)}" href="${pdict.ContentSearchResult.urlRelaxAttribute('Search-ShowContent',RefinementDefinition.attributeID)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>)
+							<a title="${Resource.msg('searchrefinebar.clearselection','search',null)}" href="${pdict.ContentSearchResult.urlRelaxAttribute('Search-ShowContent',RefinementDefinition.attributeID)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 						</div>
 					</isif>
 
