@@ -11,15 +11,14 @@ function clickThruAfter() {
 		localStorage.removeItem('cq.anchors');
 	}
 	localStorage.removeItem('cq.recommenderName');
-	// do not send to CQ if anchors is not set, i.e. not coming from a Product page
-	if (window.CQuotient && anchors) {
+	if (window.CQuotient) {
 		CQuotient.activities.push({
 			activityType: 'clickReco',
 			parameters: {
 				cookieId: CQuotient.getCQCookieId(),
 				userId: CQuotient.getCQUserId(),
 				recommenderName: recommenderName,
-				anchors: anchors,
+				anchors: anchors || '',
 				products: {
 					id: currentProductId
 				}
