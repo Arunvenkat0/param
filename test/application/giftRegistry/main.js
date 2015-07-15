@@ -1,7 +1,7 @@
 'use strict';
 
 import {assert} from 'chai';
-
+import config from '../webdriver/config';
 import client from '../webdriver/client';
 import * as giftRegistryPage from '../webdriver/pageObjects/giftRegistry';
 import * as testData from '../webdriver/pageObjects/testData/main';
@@ -9,11 +9,9 @@ import * as loginForm from '../webdriver/pageObjects/forms/login';
 
 
 describe('Gift Registry', () => {
-	let customer;
 	let login = 'testuser1@demandware.com';
 	let eventFormData = new Map();
 	let eventFormShippingData = new Map();
-	let address;
 
 	let socialLinks = {
 		facebook: {
@@ -43,11 +41,11 @@ describe('Gift Registry', () => {
 			regex: /.*\&.*body=.+/
 		},
 		shareLinkIcon: {
-			selector: giftRegistryPage.CSS_SHARE_LINK
+			selector: giftRegistryPage.SHARE_LINK
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content a',
-			baseUrl: giftRegistryPage.configUrl,
+			baseUrl: config.url,
 			regex: /.*\?.*ID=.+/
 		}
 	};
@@ -55,61 +53,59 @@ describe('Gift Registry', () => {
 	before(() => client.init()
 		.then(() => giftRegistryPage.navigateTo())
 		.then(() => loginForm.loginAsDefaultCustomer())
-		.then(() => giftRegistryPage.pressBtnNewRegistry())
+		.then(() => client.click(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => testData.getCustomerByLogin(login))
+		.then(customer => {
+			let address = customer.getPreferredAddress();
+
+			eventFormData.set('type', 'Wedding');
+			eventFormData.set('name', 'blah');
+			eventFormData.set('date', '03/28/08');
+			eventFormData.set('eventaddress_country', address.countryCode);
+			eventFormData.set('eventaddress_states_state', address.stateCode);
+			eventFormData.set('town', address.city);
+			eventFormData.set('participant_role', 'Groom');
+			eventFormData.set('participant_firstName', customer.firstName);
+			eventFormData.set('participant_lastName', customer.lastName);
+			eventFormData.set('participant_email', customer.email);
+
+			eventFormShippingData.set('addressid', 'test address');
+			eventFormShippingData.set('firstname', customer.firstName);
+			eventFormShippingData.set('lastname', customer.lastName);
+			eventFormShippingData.set('address1', address.address1);
+			eventFormShippingData.set('city', address.city);
+			eventFormShippingData.set('states_state', address.stateCode);
+			eventFormShippingData.set('postal', address.postalCode);
+			eventFormShippingData.set('country', address.countryCode);
+			eventFormShippingData.set('phone', address.phone);
+		})
 	);
-
-	before(() => {
-		return testData.getCustomerByLogin(login)
-			.then(cust => {
-				customer = cust;
-
-				address = customer.getPreferredAddress();
-
-				eventFormData.set('type', 'Wedding');
-				eventFormData.set('name', 'balh');
-				eventFormData.set('date', '03/28/08');
-				eventFormData.set('eventaddress_country', address.countryCode);
-				eventFormData.set('eventaddress_states_state', address.stateCode);
-				eventFormData.set('town', address.city);
-				eventFormData.set('participant_role', 'Groom');
-				eventFormData.set('participant_firstName', customer.firstName);
-				eventFormData.set('participant_lastName', customer.lastName);
-				eventFormData.set('participant_email', customer.email);
-
-				eventFormShippingData.set('addressid', 'test address');
-				eventFormShippingData.set('firstname', customer.firstName);
-				eventFormShippingData.set('lastname', customer.lastName);
-				eventFormShippingData.set('address1', address.address1);
-				eventFormShippingData.set('city', address.city);
-				eventFormShippingData.set('states_state', address.stateCode);
-				eventFormShippingData.set('postal', address.postalCode);
-				eventFormShippingData.set('country', address.countryCode);
-				eventFormShippingData.set('phone', address.phone);
-			});
-	});
 
 	after(() => client.end());
 
 	it('should fill out the event form', () =>
 		giftRegistryPage.fillOutEventForm(eventFormData)
-			.then(() => client.isEnabled('[name$="giftregistry_event_confirm"]'))
+			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should fill out the event shipping form', () =>
-		giftRegistryPage.pressBtnContinueEventForm()
+		client.click(giftRegistryPage.BTN_EVENT_CONTINUE)
 			.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
-			.then(() => giftRegistryPage.pressBtnUsePreEventShippingAddress())
-			.then(() => client.isEnabled('[name$="giftregistry_eventaddress_confirm"]'))
+			.then(() => client.click(giftRegistryPage.USE_PRE_EVENT))
+			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
-	it('should display the event information', () =>
-		giftRegistryPage.pressBtnContinueEventAddressForm()
-			.then(() => client.waitForExist('form[name$="giftregistry_enevt_confirm"]'))
-			.then(() => giftRegistryPage.pressBtnContinueEventForm())
-			.then(() => giftRegistryPage.pressBtnMakeRegistryPublic())
-			.then(() => client.isVisible('[class$="share-options"]'))
+	it('should submit the event', () =>
+		client.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
+			.then(() => client.click(giftRegistryPage.BTN_EVENT_CONTINUE))
+			.then(() => client.getText('.page-content-tab-wrapper h2'))
+			.then(eventTitle => assert.equal(eventTitle, 'BLAH - 3/28/08'))
+	);
+	it('should make the gift registry public', () =>
+			client.click(giftRegistryPage.BTN_SET_PUBLIC)
+			.then(() => client.isVisible(giftRegistryPage.SHARE_OPTIONS))
 			.then(visible => assert.isTrue(visible))
 	);
 
@@ -169,7 +165,7 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a URL when chain icon clicked', () =>
-		client.click(giftRegistryPage.CSS_SHARE_LINK)
+		client.click(giftRegistryPage.SHARE_LINK)
 			.then(() => client.waitForVisible(socialLinks.shareLinkUrl.selector))
 			.then(() => client.isVisible(socialLinks.shareLinkUrl.selector))
 			.then(visible => assert.isTrue(visible))
