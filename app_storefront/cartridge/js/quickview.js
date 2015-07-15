@@ -101,7 +101,7 @@ var quickview = {
 			url: url,
 			options: {
 				width: 920,
-				title: Resources.QUICK_VIEW_POPUP, 
+				title: Resources.QUICK_VIEW_POPUP,
 				open: function () {
 					this.setup(url);
 					if (typeof options.callback === 'function') { options.callback(); }
