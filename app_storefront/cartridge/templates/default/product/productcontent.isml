@@ -64,7 +64,6 @@
 	<isinclude template="product/components/group"/>
 
 	<isset name="showTieredPrice" value="${false}" scope="page"/>
-	<isinclude template="product/components/promotions"/>
 
 	<iscomment>
 		variations

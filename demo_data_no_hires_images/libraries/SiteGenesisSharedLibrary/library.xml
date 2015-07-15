@@ -1494,47 +1494,6 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         </folder-links>
     </content>
 
-    <content content-id="as-seen-in-vogue">
-        <display-name xml:lang="x-default">Vogue</display-name>
-        <display-name xml:lang="fr-FR">Vogue</display-name>
-        <display-name xml:lang="it-IT">Vogue</display-name>
-        <display-name xml:lang="ja-JP">Vogue</display-name>
-        <display-name xml:lang="zh-CN">Vogue</display-name>
-        <description xml:lang="x-default">As seen in Vogue Kanye West Wearing Men's Outlier Rugged Chukka</description>
-        <description xml:lang="fr-FR">Vu dans Vogue, avec les bottines Outlier Rugged Chukka pour hommes portées par Kanye West.</description>
-        <description xml:lang="it-IT">Visto sulla rivista Vogue con Kanye West che indossa scarpe da uomo Outlier Rugged Chukka</description>
-        <description xml:lang="ja-JP">Vogue マガジンでカニエ・ウェストが着用しているメンズのアウトライナーラグブーツ</description>
-        <description xml:lang="zh-CN">如同 Vogue Kanye West 中所示，穿着男式坚固板鞋。</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>true</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;map name="vogue" id="vogue"&gt;&#13;
-  &lt;area shape="rect" coords="710,710,960,944" href="$url('Product-Show','pid','VM_mnsoutrug')$" alt="Men's Outlier Rugged Chukka" /&gt;&#13;
-&lt;/map&gt;&#13;
-&lt;p&gt;&lt;img width="978" height="978" alt="" usemap="#vogue"src="images/asSeenIn/vogue.jpg?$staticlink$" /&gt;&amp;nbsp;&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;map name="vogue" id="vogue"&gt;&#13;
-  &lt;area shape="rect" coords="710,710,960,944" href="$url('Product-Show','pid','VM_mnsoutrug')$" alt="Men's Outlier Rugged Chukka" /&gt;&#13;
-&lt;/map&gt;&#13;
-&lt;p&gt;&lt;img width="978" height="978" alt="" usemap="#vogue" src="images/asSeenIn/vogue.jpg?$staticlink$" /&gt; &lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;map name="vogue" id="vogue"&gt;&#13;
-  &lt;area shape="rect" coords="710,710,960,944" href="$url('Product-Show','pid','VM_mnsoutrug')$" alt="Men's Outlier Rugged Chukka" /&gt;&#13;
-&lt;/map&gt;&#13;
-&lt;p&gt;&lt;img width="978" height="978" alt="" usemap="#vogue" src="images/asSeenIn/vogue.jpg?$staticlink$" /&gt; &lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;map name="vogue" id="vogue"&gt;&#13;
-  &lt;area shape="rect" coords="710,710,960,944" href="$url('Product-Show','pid','VM_mnsoutrug')$" alt="Men's Outlier Rugged Chukka" /&gt;&#13;
-&lt;/map&gt;&#13;
-&lt;p&gt;&lt;img width="978" height="978" alt="" usemap="#vogue" src="images/asSeenIn/vogue.jpg?$staticlink$" /&gt; &lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;map name="vogue" id="vogue"&gt;&#13;
-  &lt;area shape="rect" coords="710,710,960,944" href="$url('Product-Show','pid','VM_mnsoutrug')$" alt="Men's Outlier Rugged Chukka" /&gt;&#13;
-&lt;/map&gt;&#13;
-&lt;p&gt;&lt;img width="978" height="978" alt="" usemap="#vogue" src="images/asSeenIn/vogue.jpg?$staticlink$" /&gt; &lt;/p&gt;</custom-attribute>
-        </custom-attributes>
-        <folder-links>
-            <classification-link folder-id="as-seen-in"/>
-        </folder-links>
-    </content>
-
     <content content-id="bml-tc">
         <display-name xml:lang="x-default">BML Terms &amp; Conditions</display-name>
         <display-name xml:lang="fr-FR">Conditions générales de Bill Me Later</display-name>

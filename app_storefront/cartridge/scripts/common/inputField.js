@@ -121,7 +121,10 @@ module.exports = function (pdict) {
 				var option = pdict.formfield.options[optionKey];
 				// avoid empty option tags, because this causes an XHTML warning
 				var label = Resource.msg(option.label, 'forms', null);
-				var value = option.value || '';
+				var value = '';
+				if (option.value) {
+					value = Resource.msg(option.value, 'forms', null) || option.value;
+				}
 				var displayValue = label;
 				var selected = option.selected ? 'selected="selected"' : '';
 
