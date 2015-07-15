@@ -31,6 +31,7 @@ describe('Input Field', function () {
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: ''
 		});
 	});
@@ -53,6 +54,7 @@ describe('Input Field', function () {
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small">contentasset</div></a></div>'
 		});
 	});
@@ -75,6 +77,7 @@ describe('Input Field', function () {
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small"></div></a></div>'
 		});
 	});
@@ -89,10 +92,11 @@ describe('Input Field', function () {
 			type: 'checkbox'
 		});
 		assert.deepEqual(field, {
-			rowClass: '',
+			rowClass: ' label-inline form-indent',
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<input class="input-checkbox " type="checkbox"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: true,
 			help: ''
 		});
 	});
@@ -111,6 +115,7 @@ describe('Input Field', function () {
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<input class=" " type="hidden"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: ''
 		});
 	});
@@ -129,6 +134,7 @@ describe('Input Field', function () {
 			label: '<label for="testfield"><span>Test</span></label>',
 			input: '<textarea class="input-textarea " id="testfield" name="testfield" ></textarea>',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: ''
 		});
 	});
@@ -158,6 +164,7 @@ describe('Input Field', function () {
 			input: '<input class="input-radio " type="radio" id="testfield" name="testfield" value="one" />One\
 <input class="input-radio " type="radio" id="testfield" name="testfield" value="two" />Two',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: ''
 		});
 	});
@@ -189,6 +196,7 @@ describe('Input Field', function () {
 <option class="select-option" label="Two" value="two" >Two</option>\
 </select>',
 			caption: '<div class="form-caption"></div>',
+			labelAfter: false,
 			help: ''
 		});
 	});

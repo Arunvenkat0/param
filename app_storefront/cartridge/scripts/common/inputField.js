@@ -52,7 +52,8 @@ module.exports = function (pdict) {
 	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue) || '';
 	var help = '';
 	var fieldClass = '';
-	var element, name, id, rowClass, caption, labelAfter;
+	var labelAfter = false;
+	var element, name, id, rowClass, caption;
 
 	// default type is 'text' for 'input' element
 	if (type === 'input') {
