@@ -95,8 +95,8 @@ function ResourceHelper() {}
 			CONTINUE						: Resource.msg('global.continue', 'locale', null),
 			SEE_MORE						: Resource.msg('storelist.lightbox.seemore', 'storepickup', null),
 			SEE_LESS						: Resource.msg('storelist.lightbox.seeless', 'storepickup', null),
-			QUICK_VIEW						: Resource.msg('product.quickview', 'product', null)
-
+			QUICK_VIEW						: Resource.msg('product.quickview', 'product', null),
+			QUICK_VIEW_POPUP				: Resource.msg('product.quickview.popup', 'product', null)
 		};
 
 		// additional resources
