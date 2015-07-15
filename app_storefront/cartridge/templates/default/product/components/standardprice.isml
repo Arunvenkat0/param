@@ -1,31 +1,34 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscomment>
+<isscript>
+/*
 	Sets a variable "StandardPrice" in the dictionary based on passed PriceModel.
 	This is used to show a crossed-out price on product detail pages.
 
 	The "Standard Price" for a product is the price contained in the "list
 	pricebook". Since the Demandware system does not currently have concept
-	of pricebook types, the list pricebook ID is determined by whether the pricebook
-	has a parent pricebook.  Fall back to "list-price" if preference
-	is not set.  Price will be equal to NOT_AVAILABLE if there is no such
-	price book or if the price book defines no price for the product
-</iscomment>
-<isif condition="${!empty(PriceModel)}">
-	<isif condition="${(!PriceModel.getPrice().available)}">
-		<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
-	<iselse/>
-		<isscript>
-			var priceBook = PriceModel.priceInfo.priceBook;
+	of pricebook types, the list pricebook determined the top-level pricebook,
+	which is a pricebook that does not have a parentPriceBook.  Price will be 
+	equal to NOT_AVAILABLE if there is no such price book or if the price book
+	defines no price for the product.
+*/
 
-			do {
-				priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook; 
-			} while (priceBook.parentPriceBook);
+var StandardPrice = dw.value.Money.NOT_AVAILABLE;
 
-			pdict.StandardPrice = PriceModel.getPriceBookPrice(priceBook.ID);
-		</isscript>
-		<isset name="StandardPrice" value="${pdict.StandardPrice}" scope="page"/>
-	</isif>
-	<isif condition="${!StandardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(StandardPrice.getCurrencyCode())}">
-		<isset name="StandardPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
-	</isif>
-</isif>
+if (!empty(PriceModel)) {
+	if (!PriceModel.getPrice().available) {
+		StandardPrice = dw.value.Money.NOT_AVAILABLE;
+	} else {
+		var priceBook = PriceModel.priceInfo.priceBook;
+
+		while (priceBook.parentPriceBook) {
+			priceBook = priceBook.parentPriceBook ? priceBook.parentPriceBook : priceBook; 
+		}
+
+		StandardPrice = PriceModel.getPriceBookPrice(priceBook.ID);
+	}
+}
+
+if (!StandardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(StandardPrice.getCurrencyCode())) {
+	var StandardPrice = dw.value.Money.NOT_AVAILABLE;
+}
+</isscript>
