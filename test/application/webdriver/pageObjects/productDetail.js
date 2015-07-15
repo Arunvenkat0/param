@@ -3,34 +3,11 @@
 import client from '../client';
 import config from '../config';
 
-export const BTN_ADD_TO_CART = '#add-to-cart';
-export const INPUT_QUANTITY = '#Quantity';
+const BTN_ADD_TO_CART = '#add-to-cart';
 
-export function navigateTo (path) {
-	return client.url(config.url + path);
-}
-
-export function selectColorByIndex (idx) {
-	return client.click('.swatches.color li:nth-child(' + idx + ') a')
-		.pause(500);
-}
-
-export function selectSizeByIndex (idx) {
-	return client.click('.swatches.size li:nth-child(' + idx + ') a')
-		.pause(500);
-}
-
-export function selectWidthByIndex (idx) {
-	return client.click('.swatches.width li:nth-child(' + idx + ') a')
-		.pause(500);
-}
-
-export function setQuantity (value) {
-	return client.setValue(INPUT_QUANTITY, value);
-}
-
-export function pressBtnAddToCart () {
-	return client.click(BTN_ADD_TO_CART);
+function selectAttributeByIndex (attributeName, index) {
+	return client.click('.swatches.' + attributeName + ' li:nth-child(' + index + ') a')
+		.waitForText('.swatches.' + attributeName + ' .selected-value', 4000);
 }
 
 /**
@@ -44,21 +21,31 @@ export function pressBtnAddToCart () {
  *     this represents the index value for the size options
  */
 export function addProductVariationToCart (product) {
-	navigateTo(product.get('resourcePath'));
-
-	// The order of these two conditionals is important, as the selection
-	// of the Color value drives the available Size options (if available).
-	if (product.has('colorIndex')) {
-		selectColorByIndex(product.get('colorIndex'));
-	}
-	if (product.has('sizeIndex')) {
-		selectSizeByIndex(product.get('sizeIndex'));
-	}
-	if (product.has('widthIndex')) {
-		selectWidthByIndex(product.get('widthIndex'));
-	}
-
-	pressBtnAddToCart();
-
-	return client;
+	return client.url(config.url + product.get('resourcePath'))
+		// The order of setting the attributes is important, as the selection
+		// of the Color value enables Size options if available.
+		.then(() => {
+			if (product.has('colorIndex')) {
+				return selectAttributeByIndex('color', product.get('colorIndex'));
+			} else {
+				return Promise.resolve();
+			}
+		})
+		.then(() => {
+			if (product.has('sizeIndex')) {
+				return selectAttributeByIndex('size', product.get('sizeIndex'));
+			} else {
+				return Promise.resolve();
+			}
+		})
+		.then(() => {
+			if (product.has('widthIndex')) {
+				return selectAttributeByIndex('width', product.get('widthIndex'));
+			} else {
+				return Promise.resolve();
+			}
+		})
+		.then(() => client.waitForEnabled(BTN_ADD_TO_CART, 2000)
+			.click(BTN_ADD_TO_CART)
+			.waitForVisible('.mini-cart-content'));
 }
