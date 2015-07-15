@@ -68,7 +68,7 @@
 		<iscomment>Add address to Address Book</iscomment>
 		<isif condition="${pdict.CurrentCustomer.authenticated}"> <isinputfield
 			formfield="${pdict.CurrentForms.multishipping.editAddress.addToAddressBook}"
-			type="checkbox" rowclass="form-indent label-inline" /> </isif>
+			type="checkbox"/> </isif>
 
 		<div class="form-row form-row-button">
 			<button type="submit" name="${pdict.CurrentForms.multishipping.editAddress.save.htmlName}" value="${Resource.msg('global.save','locale',null)}">${Resource.msg('global.save','locale',null)}</button>
