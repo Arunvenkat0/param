@@ -5,8 +5,8 @@
 	Parameter:
 	p_address	 	: the address object to display
 </iscomment>
- 
-<div class="details">
+
+<div class="address">
 	<div><isprint value="${pdict.p_address.firstName}"/> <isprint value="${pdict.p_address.lastName}"/></div>
 	<div><isprint value="${pdict.p_address.address1}"/></div>
 	<isif condition="${!empty(pdict.p_address.address2)}">

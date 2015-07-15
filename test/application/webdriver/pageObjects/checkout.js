@@ -23,8 +23,8 @@ export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 
 const basePath = '/checkout';
 
-export function navigateTo (path = basePath) {
-	return client.url(config.url + path);
+export function navigateTo () {
+	return client.url(config.url + basePath);
 }
 
 export function pressBtnCheckoutAsGuest () {
@@ -32,56 +32,57 @@ export function pressBtnCheckoutAsGuest () {
 }
 
 export function fillOutShippingForm (shippingData) {
-	var fieldTypeMap = new Map();
+	let fieldTypes = new Map();
+	let fieldsPromise = [];
 
-	fieldTypeMap.set('firstName', 'input');
-	fieldTypeMap.set('lastName', 'input');
-	fieldTypeMap.set('address1', 'input');
-	fieldTypeMap.set('address2', 'input');
-	fieldTypeMap.set('country', 'selectByValue');
-	fieldTypeMap.set('states_state', 'selectByValue');
-	fieldTypeMap.set('city', 'input');
-	fieldTypeMap.set('postal', 'input');
-	fieldTypeMap.set('phone', 'input');
+	fieldTypes.set('firstName', 'input');
+	fieldTypes.set('lastName', 'input');
+	fieldTypes.set('address1', 'input');
+	fieldTypes.set('address2', 'input');
+	fieldTypes.set('country', 'selectByValue');
+	fieldTypes.set('states_state', 'selectByValue');
+	fieldTypes.set('city', 'input');
+	fieldTypes.set('postal', 'input');
+	fieldTypes.set('phone', 'input');
 
 	for (var [key, value] of shippingData) {
-		var selector = '[name*="shippingAddress_addressFields_' + key + '"]';
-		formHelpers.populateField(selector, value, fieldTypeMap.get(key));
+		let selector = '[name*="shippingAddress_addressFields_' + key + '"]';
+		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
 	}
-
-	return client;
+	return Promise.all(fieldsPromise);
 }
 
 export function fillOutBillingForm (billingFields) {
-	var fieldMap = new Map();
+	let fieldTypes = new Map();
+	let fieldsPromise = [];
 
-	fieldMap.set('emailAddress', {
+	fieldTypes.set('emailAddress', {
 		type: 'input',
 		fieldPrefix: 'billing_billingAddress_email_'
 	});
-	fieldMap.set('creditCard_owner', {
+	fieldTypes.set('creditCard_owner', {
 		type: 'input',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
-	fieldMap.set('creditCard_number', {
+	fieldTypes.set('creditCard_number', {
 		type: 'input',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
-	fieldMap.set('creditCard_year', {
+	fieldTypes.set('creditCard_year', {
 		type: 'selectByIndex',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
-	fieldMap.set('creditCard_cvn', {
+	fieldTypes.set('creditCard_cvn', {
 		type: 'input',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
 
 	for (var [key, value] of billingFields) {
-		var fieldType = fieldMap.get(key).type;
-		var selector = '[name*="' + fieldMap.get(key).fieldPrefix + key + '"]';
-		formHelpers.populateField(selector, value, fieldType);
+		var fieldType = fieldTypes.get(key).type;
+		var selector = '[name*="' + key + '"]';
+		fieldsPromise.push(formHelpers.populateField(selector, value, fieldType));
 	}
-	return client.pause(200);
+	return Promise.all(fieldsPromise);
 }
 
 export function checkUseAsBillingAddress () {
