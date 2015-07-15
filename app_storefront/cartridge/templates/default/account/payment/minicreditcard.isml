@@ -22,5 +22,5 @@
 	<isprint value="${ccOwner}"/><br />
 	<isprint value="${ccType}"/><br />
 	<isprint value="${ccNumber}"/><br />
-	<isif condition="${pdict.show_expiration}">${Resource.msg('account.payment.minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>.<isprint value="${ccYear}" formatter="0000"/></isif>
+	<isif condition="${pdict.show_expiration}">${Resource.msg('account.payment.minicardcard.expires','account',null)}<isprint value="${ccMonth}" formatter="00"/>${Resource.msg('global.date.separator','locale',null)}<isprint value="${ccYear}" formatter="0000"/></isif>
 </isif>
