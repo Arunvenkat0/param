@@ -100,7 +100,7 @@ describe('Gift Registry', () => {
 	it('should submit the event', () =>
 		client.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
 			.then(() => client.click(giftRegistryPage.BTN_EVENT_CONTINUE))
-			.then(() => client.getText('.page-content-tab-wrapper h2'))
+			.then(() => client.getText(giftRegistryPage.REGISTRY_HEADING))
 			.then(eventTitle => assert.equal(eventTitle, 'BLAH - 3/28/08'))
 	);
 	it('should make the gift registry public', () =>

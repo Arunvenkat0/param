@@ -11,6 +11,7 @@ export const BTN_EVENT_ADDRESS_CONTINUE = '[name$="giftregistry_eventaddress_con
 export const BTN_SET_PUBLIC = '[name$="giftregistry_setPublic"]';
 export const SHARE_OPTIONS = '[class$="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name$="giftregistry_create"]';
+export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
 
 const basePath = '/giftregistry';
 
