@@ -400,7 +400,7 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>7.0</position>
-        <template>rendering/category/categorylanding</template>
+        <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women and Mens New Arrivals in Clothing, Jewelry, Accessories &amp; More</page-title>
             <page-title xml:lang="fr-FR">Nouveautés femme et homme : vêtements, bijoux, accessoires, et plus encore</page-title>
@@ -473,7 +473,6 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-success.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
@@ -514,7 +513,7 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>10.0</position>
-        <template>rendering/category/categorylanding</template>
+        <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour femmes.</page-title>
@@ -537,9 +536,13 @@
             <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$httpsUrl('GiftCert-Purchase')$"&gt;&lt;img width="433" height="80" src="images/WomensMenuBottomBanner.jpg?$staticlink$" alt="Womans Catalog" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-womens.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+            <blocked-refinement-definition type="price"/>
+            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
+            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
@@ -575,7 +578,7 @@
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="sizeChartID">womens-clothing</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-clothing.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-womens-clothing.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
@@ -2503,6 +2506,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-womens-jewelry.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
@@ -2626,7 +2630,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/womens-accessories.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-womens-accessories.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="values" attribute-id="size" system="false">
@@ -2974,7 +2978,7 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>11.0</position>
-        <template>rendering/category/categorylanding</template>
+        <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
             <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour homme</page-title>
@@ -2997,9 +3001,13 @@
             <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img width="195" height="195" src="images/MenuBanner-Mens.jpg?$staticlink$" alt="Mens Items" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Vertical</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-mens.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
+            <blocked-refinement-definition type="price"/>
+            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
@@ -3063,7 +3071,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/mens-clothing-suits.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-suits.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="price" bucket-type="thresholds">
@@ -3204,7 +3212,7 @@
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="sizeChartID">mens-clothing</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/mens-clothing-jackets.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-jackets.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="outerwearType" system="false">
@@ -3401,7 +3409,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/mens-clothing-dressshirts.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-dressshirts.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
@@ -3444,6 +3452,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-shorts.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="size" system="false">
@@ -3568,7 +3577,7 @@
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="sizeChartID">mens-clothing</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/mens-clothing-pants.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-pants.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="bottomType" system="false">
@@ -3740,6 +3749,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-accessories.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
