@@ -104,13 +104,13 @@
             <test-segment segment-id="Test Segment B">
                 <allocation-percent>40</allocation-percent>
                 <experiences>
-                    <slot-configuration slot-id="cat-landing-slotbanner" slot-context="category" slot-context-id="womens" slot-configuration-id="womens-success"/>
+                    <slot-configuration slot-id="cat-landing-slotbanner" slot-context="category" slot-context-id="womens" slot-configuration-id="womens"/>
                 </experiences>
             </test-segment>
             <test-segment segment-id="Test Segment A">
                 <allocation-percent>40</allocation-percent>
                 <experiences>
-                    <slot-configuration slot-id="cat-landing-slotbanner" slot-context="category" slot-context-id="womens" slot-configuration-id="womens-greatstyles"/>
+                    <slot-configuration slot-id="cat-landing-slotbanner" slot-context="category" slot-context-id="womens" slot-configuration-id="womens-abtest"/>
                 </experiences>
             </test-segment>
         </test-segments>

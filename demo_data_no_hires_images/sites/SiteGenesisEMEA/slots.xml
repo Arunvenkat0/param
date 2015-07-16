@@ -119,29 +119,6 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-bottom-center" context="global" configuration-id="New Slot Configuration - 2012-02-07 15:52:46" assigned-to-site="false">
-        <description>test of this</description>
-        <template>slots/product/product_1x2.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">Hey look at this</callout-msg>
-        <callout-msg xml:lang="fr-FR">Jetez un coup d'œil !</callout-msg>
-        <callout-msg xml:lang="it-IT">Ciao, guarda qui</callout-msg>
-        <callout-msg xml:lang="ja-JP">こちらをご覧になりませんか</callout-msg>
-        <callout-msg xml:lang="zh-CN">嘿，看看这个</callout-msg>
-        <content>
-            <products>
-                <product product-id="008884304016"/>
-                <product product-id="008884304023"/>
-                <product product-id="008884304030"/>
-                <product product-id="008884304047"/>
-                <product product-id="008884304054"/>
-                <product product-id="008884304061"/>
-                <product product-id="008884304085"/>
-                <product product-id="008884304078"/>
-            </products>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="folder-main-slot" context="folder" context-id="about-us" configuration-id="New Slot Configuration - 2014-12-31 11:14:21" default="true" assigned-to-site="false">
         <description>default slot for about us page</description>
         <template>slots/html/htmlslotcontainer.isml</template>
@@ -605,19 +582,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="electronics" configuration-id="electronics-lcdtv-playstation-ipod-gps" default="true" assigned-to-site="true">
-        <template>slots/product/product_1x4.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <products>
-                <product product-id="mitsubishi-l65-a90"/>
-                <product product-id="sony-ps3-bundle"/>
-                <product product-id="apple-ipod-touch"/>
-                <product product-id="tomtom-one-130"/>
-            </products>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-feeling-red" configuration-id="feeling-red" default="true" assigned-to-site="true">
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>
@@ -713,12 +677,22 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="home-main" context="global" configuration-id="homepage-flash" assigned-to-site="true">
-        <description>HomepageFlash</description>
-        <template>slots/html/homepageflash.isml</template>
-        <enabled-flag>false</enabled-flag>
+    <slot-configuration slot-id="home-bottom-right" context="global" configuration-id="this-weeks-deals" default="true" assigned-to-site="true">
+        <description>Product Carousel of This Weeks Deals</description>
+        <template>slots/product/homerightcarousel.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
+        <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
+        <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">推荐商品</callout-msg>
         <content>
-            <html/>
+            <products>
+                <product product-id="25591535"/>
+                <product product-id="25686395"/>
+                <product product-id="54736828"/>
+                <product product-id="25590891"/>
+            </products>
         </content>
     </slot-configuration>
 
@@ -730,6 +704,17 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             <content-assets>
                 <content-asset content-id="home-cycle"/>
             </content-assets>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="mens" configuration-id="mens" assigned-to-site="true">
+        <description>Default banner for mens category landing page</description>
+        <template>slots/category/catlanding-banner.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <categories>
+                <category category-id="mens"/>
+            </categories>
         </content>
     </slot-configuration>
 
@@ -791,16 +776,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <categories>
                 <category category-id="mens-accessories-ties"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="mens" configuration-id="mens-apparel" assigned-to-site="true">
-        <template>slots/category/catlandingslotbanner.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-clothing-jackets"/>
             </categories>
         </content>
     </slot-configuration>
@@ -923,13 +898,17 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="mens" configuration-id="mens-footwear-top-accessories" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="mens" configuration-id="mens-subcategories" assigned-to-site="true">
+        <description>Default slot to link to sub-categories under men's</description>
+        <template>slots/category/category-tile.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="mens-footwear-boots"/>
-                <category category-id="mens-clothing-tops"/>
+                <category category-id="mens-clothing-suits"/>
+                <category category-id="mens-clothing-jackets"/>
+                <category category-id="mens-clothing-shorts"/>
+                <category category-id="mens-clothing-dress-shirts"/>
+                <category category-id="mens-clothing-pants"/>
                 <category category-id="mens-accessories"/>
             </categories>
         </content>
@@ -941,22 +920,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <categories>
                 <category category-id="mens-clothing-outerwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="mens" configuration-id="mens-suits-shirts-pants" default="true" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-footwear-boots"/>
-                <category category-id="mens-clothing-tops"/>
-                <category category-id="mens-clothing-suits"/>
-                <category category-id="mens-clothing-dress-shirts"/>
-                <category category-id="mens-clothing-pants"/>
-                <category category-id="mens-clothing-jackets"/>
-                <category category-id="mens-clothing-shorts"/>
             </categories>
         </content>
     </slot-configuration>
@@ -1059,22 +1022,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womans-shoes-sweaters-accessories" assigned-to-site="true">
-        <template>slots/category/categorylandingslotbottom.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-accessories-shoes"/>
-                <category category-id="womens-clothing-tops"/>
-                <category category-id="womens-accessories"/>
-                <category category-id="womens-outfits"/>
-                <category category-id="womens-clothing-dresses"/>
-                <category category-id="womens-clothing-bottoms"/>
-                <category category-id="womens-clothing-jackets"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-scarves" configuration-id="womens-accessories-scarves" default="true" assigned-to-site="true">
         <template>slots/category/categorysubbanners.isml</template>
         <enabled-flag>true</enabled-flag>
@@ -1096,14 +1043,25 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-apparel" default="true" assigned-to-site="true">
-        <description>Banner promoting women's clothing promotions</description>
-        <template>slots/category/catlandingslotbanner.isml</template>
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens" default="true" assigned-to-site="true">
+        <description>Default banner for womens category landing page</description>
+        <template>slots/category/catlanding-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="womens-clothing"/>
+                <category category-id="womens"/>
             </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-abtest" assigned-to-site="false">
+        <description>AB Test slot for womens-landing slot</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;img alt="Image for Womens Category" src="images/slot/landing/cat-landing-slotbanner-womens-abtest.jpg?$staticlink$" title="" /&gt;</body>
+            </html>
         </content>
     </slot-configuration>
 
@@ -1134,21 +1092,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             <categories>
                 <category category-id="womens-footwear"/>
             </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-greatstyles" assigned-to-site="true">
-        <description>Great Styles banner</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;img alt="Check Out these Great Styles" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;img alt="Découvrez ces styles uniques" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;img alt="Guarda queste tendenze" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;img alt="こちらの素敵なスタイルをチェック" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;img alt="查看这些大型样式" width="754" height="527" src="images/slot/landing/womens-greatstyles.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-            </html>
         </content>
     </slot-configuration>
 
@@ -1196,31 +1139,29 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-shoes-sweaters-accessories" default="true" assigned-to-site="true">
-        <description>Links to women's categories</description>
-        <template>slots/category/categorylandingslotbottom.isml</template>
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-subcategories" default="true" assigned-to-site="true">
+        <description>Default slot to link to sub-categories under women's</description>
+        <template>slots/category/category-tile.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="womens-footwear-shoes"/>
-                <category category-id="womens-clothing-tops"/>
+                <category category-id="womens-clothing"/>
+                <category category-id="womens-jewelry"/>
                 <category category-id="womens-accessories"/>
             </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="womens" configuration-id="womens-success" assigned-to-site="true">
-        <description>Large banner promoting the season's new styles</description>
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>false</enabled-flag>
+    <slot-configuration slot-id="cat-landing-slotbottom2" context="category" context-id="womens" configuration-id="WomensSubCatProducts" default="true" assigned-to-site="false">
+        <description>Products from sub categories of womens</description>
+        <template>slots/product/cat_product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
         <content>
-            <html>
-                <body xml:lang="x-default">&lt;img alt="Dress for Success"  src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-                <body xml:lang="fr-FR">&lt;img alt="Choisissez les vêtements de la réussite" src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-                <body xml:lang="it-IT">&lt;img alt="Lo stile del successo" src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-                <body xml:lang="ja-JP">&lt;img alt="キャリア用アウトフィット" src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-                <body xml:lang="zh-CN">&lt;img alt="成功礼服" src="images/slot/landing/womens-success.jpg?$staticlink$" /&gt;</body>
-            </html>
+            <products>
+                <product product-id="25591494"/>
+                <product product-id="013742002836"/>
+                <product product-id="799927757387"/>
+            </products>
         </content>
     </slot-configuration>
 
