@@ -39,17 +39,7 @@
 
 			<p>
 				${Resource.msg('giftregistryresults.emptymessage','account',null)}
-				"
-
-			<isif condition="${pdict.CurrentForms.productlists.search.registrantFirstName.value != null}">
-				<isprint value="${pdict.CurrentForms.productlists.search.registrantFirstName.value}"/>
-			</isif>
-							
-			<isif condition="${pdict.CurrentForms.productlists.search.registrantLastName.value != null}">
-				<isprint value="${pdict.CurrentForms.productlists.search.registrantLastName.value}"/>
-			</isif>
-			
-				"
+				${Resource.msgf('global.user.name', 'locale', null, pdict.CurrentForms.productlists.search.registrantFirstName.value, pdict.CurrentForms.productlists.search.registrantLastName.value)}
 				${Resource.msg('giftregistryresults.emptymessage2','account',null)}
 			</p>
 
