@@ -27,7 +27,9 @@
 		<li class="on-order">${StringUtils.format(Resource.msg('global.quantitypreorder','locale',null),levels.preorder.value)}</li>
 	</isif>
 	<isif condition="${inStockDate != null}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.inStockDate','locale',null), inStockDate)}</li>
+		<li class="on-order">
+			${StringUtils.format(Resource.msg('global.inStockDate','locale',null), StringUtils.formatCalendar(new dw.util.Calendar(product.availabilityModel.inventoryRecord.inStockDate), pdict.CurrentRequest.locale, dw.util.Calendar.LONG_DATE_PATTERN))}
+		</li>
 	</isif>
 </isif>
 
@@ -40,7 +42,9 @@
 		<li class="on-order">${StringUtils.format(Resource.msg('global.quantitybackorder','locale',null),levels.backorder.value)}</li>
 	</isif>
 	<isif condition="${inStockDate != null}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.inStockDate','locale',null), inStockDate)}</li>
+		<li class="on-order">
+			${StringUtils.format(Resource.msg('global.inStockDate','locale',null), StringUtils.formatCalendar(new dw.util.Calendar(product.availabilityModel.inventoryRecord.inStockDate), pdict.CurrentRequest.locale, dw.util.Calendar.LONG_DATE_PATTERN))}
+		</li>
 	</isif>
 </isif>
 
