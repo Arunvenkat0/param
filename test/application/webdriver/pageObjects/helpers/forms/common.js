@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../../client';
+import client from '../../../client';
 
 /**
  * Fills in a form field

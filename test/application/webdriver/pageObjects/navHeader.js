@@ -1,7 +1,7 @@
 'use strict';
 
 import client from '../client';
-import * as formLogin from './forms/login';
+import * as formLogin from './helpers/forms/login';
 
 export const userInfoIcon = '.user-info i';
 export const linkLogin = '.user-links a[href*="account"]';

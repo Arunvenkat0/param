@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as formHelpers from './forms/helpers';
+import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';

@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as common from './common'
+import * as common from './helpers/common'
 import * as productQuickView from './productQuickView';
 
 export const CSS_CART_EMPTY = '.cart-empty';

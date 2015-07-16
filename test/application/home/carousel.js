@@ -4,7 +4,7 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 
 import * as homePage from '../webdriver/pageObjects/home';
-import * as common from '../webdriver/pageObjects/common';
+import * as common from '../webdriver/pageObjects/helpers/common';
 
 describe('Homepage General #C84584', () => {
 	before(() => client.init());

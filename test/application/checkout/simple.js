@@ -8,8 +8,8 @@ import * as cartPage from '../webdriver/pageObjects/cart';
 import * as homePage from '../webdriver/pageObjects/home';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 import * as testData from '../webdriver/pageObjects/testData/main';
-import * as formLogin from '../webdriver/pageObjects/forms/login';
-import * as formHelpers from '../webdriver/pageObjects/forms/helpers';
+import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
+import * as formHelpers from '../webdriver/pageObjects/helpers/forms/common';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
 
 describe('Checkout', () => {
