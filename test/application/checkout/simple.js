@@ -163,8 +163,9 @@ describe('Checkout', () => {
 		it('should show Shipping Address edits', () => {
 			let address2 = 'Suite 100';
 			return client.click(checkoutPage.LINK_EDIT_SHIPPING_ADDR)
-				.then(() => formHelpers.populateField('input[id*="address2"]', address2, 'input'))
+				.then(() => formHelpers.populateField('input[id*=address2]', address2, 'input'))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.waitForVisible('.step-3.active', 5000))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.getText(checkoutPage.MINI_SHIPPING_ADDR_DETAILS))
@@ -174,9 +175,11 @@ describe('Checkout', () => {
 		it('should show Billing Address edits', () => {
 			let address2 = 'Apt. 1234';
 			return client.click(checkoutPage.LINK_EDIT_BILLING_ADDR)
-				.then(() => formHelpers.populateField('input[id*="address2"]', address2, 'input'))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
+				.then(() => formHelpers.populateField('input[id*=address2]', address2, 'input'))
+				.then(() => client.waitForValue('[id*=address2]', 5000))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForVisible('.step-3.active', 5000))
 				.then(() => client.getText(checkoutPage.MINI_BILLING_ADDR_DETAILS))
 				.then(billingAddr => assert.isAbove(billingAddr.indexOf(address2), -1));
 		});
