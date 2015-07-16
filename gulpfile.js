@@ -87,7 +87,7 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 
 gulp.task('jshint', function () {
-	return gulp.src('./app_storefront/cartridge/js/**/*.js')
+	return gulp.src('./app_storefront_core/cartridge/js/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
 });
