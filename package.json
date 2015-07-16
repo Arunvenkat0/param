@@ -61,7 +61,7 @@
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
     "watchify": "^3.2.3",
-    "webdriverio": "^2.4.5",
+    "webdriverio": "^3.1.0",
     "xml2js": "^0.4.9",
     "xtend": "^4.0.0"
   },

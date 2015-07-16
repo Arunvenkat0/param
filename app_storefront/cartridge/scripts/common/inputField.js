@@ -52,6 +52,7 @@ module.exports = function (pdict) {
 	var value = StringUtils.stringToHtml(pdict.formfield.htmlValue) || '';
 	var help = '';
 	var fieldClass = '';
+	var labelAfter = false;
 	var element, name, id, rowClass, caption;
 
 	// default type is 'text' for 'input' element
@@ -144,6 +145,8 @@ module.exports = function (pdict) {
 			var checked = '';
 			var inputClass = 'input-text';
 			if (type === 'checkbox') {
+				rowClass += ' label-inline form-indent';
+				labelAfter = true;
 				inputClass = 'input-checkbox';
 				if (pdict.formfield.checked) {
 					checked = 'checked="checked"';
@@ -218,6 +221,7 @@ module.exports = function (pdict) {
 		label: label,
 		input: input,
 		caption: caption,
-		help: help
+		help: help,
+		labelAfter: labelAfter
 	};
 };

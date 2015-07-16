@@ -72,11 +72,11 @@
 
 					<iscomment>Add address to Address Book</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated}">
-						<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox" rowclass="form-indent label-inline"/>
+						<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox"/>
 					</isif>
 
 					<iscomment>Use address for Billing Address</iscomment>
-					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox" rowclass="form-indent label-inline"/>
+					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox"/>
 
 					<iscomment>Is this a gift</iscomment>
 					<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.isGift}" type="radio"/>

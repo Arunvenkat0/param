@@ -13,25 +13,17 @@ import * as formHelpers from '../webdriver/pageObjects/forms/helpers';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
 
 describe('Checkout', () => {
-	let resourcePath;
-	let customer;
 	let login = 'testuser1@demandware.com';
-	let address;
-	let productVariationMaster;
 	let shippingFormData = new Map();
 	let billingFormData = new Map();
 	let successfulCheckoutTitle = 'Thank you for your order.';
 
-	before(() => client.init());
-
-	after(() => client.end());
-
 	before(() => {
-		return testData.getCustomerByLogin(login)
-			.then(cust => {
-				customer = cust;
+		return client.init()
+			.then(() => testData.getCustomerByLogin(login))
+			.then(customer => {
 
-				address = customer.getPreferredAddress();
+				let address = customer.getPreferredAddress();
 
 				shippingFormData.set('firstName', customer.firstName);
 				shippingFormData.set('lastName', customer.lastName);
@@ -50,13 +42,13 @@ describe('Checkout', () => {
 			});
 	});
 
+	after(() => client.end());
+
 	function addProductVariationMasterToCart () {
 		return testData.getProductVariationMaster()
-			.then(variationMaster => productVariationMaster = variationMaster)
-			.then(() => resourcePath = productVariationMaster.getUrlResourcePath())
-			.then(() => {
+			.then(productVariationMaster => {
 				let product = new Map();
-				product.set('resourcePath', resourcePath);
+				product.set('resourcePath', productVariationMaster.getUrlResourcePath());
 				product.set('colorIndex', 1);
 				product.set('sizeIndex', 2);
 				product.set('widthIndex', 1);
@@ -66,8 +58,9 @@ describe('Checkout', () => {
 	}
 
 	describe('Checkout as Guest', () => {
-		before(() => addProductVariationMasterToCart());
-		before(() => checkoutPage.navigateTo());
+		before(() => addProductVariationMasterToCart()
+			.then(() => checkoutPage.navigateTo())
+		);
 
 		it('should allow checkout as guest', () =>
 			checkoutPage.pressBtnCheckoutAsGuest()
@@ -78,6 +71,10 @@ describe('Checkout', () => {
 		// Fill in Shipping Form
 		it('should allow saving of Shipping form when required fields filled', () =>
 			checkoutPage.fillOutShippingForm(shippingFormData)
+				// for some reason, this pause is the only way to
+				// have the use as billing address checkbox selected
+				// consider removing it if it's no longer needed
+				.then(() => client.pause(500))
 				.then(() => checkoutPage.checkUseAsBillingAddress())
 				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(savable => assert.ok(savable))
@@ -92,6 +89,7 @@ describe('Checkout', () => {
 		// Fill in Billing Form
 		it('should allow saving of Billing Form when required fields filled', () =>
 			checkoutPage.fillOutBillingForm(billingFormData)
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(enabled => assert.ok(enabled))
 			);
@@ -115,18 +113,21 @@ describe('Checkout', () => {
 	});
 
 	describe('Checkout as Returning Customer', () => {
-		before(() => addProductVariationMasterToCart());
-		before(() => checkoutPage.navigateTo());
-		before(() => formLogin.loginAsDefaultCustomer());
+		before(() => addProductVariationMasterToCart()
+			.then(() => checkoutPage.navigateTo())
+			.then(() => formLogin.loginAsDefaultCustomer())
+		);
 
 		after(() => navHeader.logout());
 
 		it('should allow check out as a returning customer', () => {
 			return checkoutPage.fillOutShippingForm(shippingFormData)
 				.then(() => checkoutPage.checkUseAsBillingAddress())
-				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE)
+					.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
-				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
+					.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.click(checkoutPage.BTN_PLACE_ORDER))
 				.then(() => checkoutPage.getLabelOrderConfirmation())
 				.then(title => assert.equal(title, successfulCheckoutTitle));
@@ -134,24 +135,24 @@ describe('Checkout', () => {
 	});
 
 	describe('Form Editing', () => {
-		before(() => homePage.navigateTo());
-		before(() => navHeader.login());
-		before(() => cartPage.emptyCart());
-		before(() => addProductVariationMasterToCart());
-		before(() => checkoutPage.navigateTo());
-		before(() => checkoutPage.fillOutShippingForm(shippingFormData));
-		before(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE));
-		before(() => checkoutPage.fillOutBillingForm(billingFormData));
-		before(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE));
+		before(() => homePage.navigateTo()
+			.then(() => navHeader.login())
+			.then(() => cartPage.emptyCart())
+			.then(() => addProductVariationMasterToCart())
+			.then(() => checkoutPage.navigateTo())
+			.then(() => checkoutPage.fillOutShippingForm(shippingFormData))
+			.then(() => checkoutPage.checkUseAsBillingAddress())
+			.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+			.then(() => checkoutPage.fillOutBillingForm(billingFormData))
+			.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+		);
 
 		after(() => navHeader.logout());
 
 		it('should allow editing of the Order Summary form', () => {
 			let updatedSubtotal;
-
 			return client.click(checkoutPage.LINK_EDIT_ORDER_SUMMARY)
 				.then(() => cartPage.updateQuantityByRow(1, 3))
-				.then(() => client.click(cartPage.BTN_UPDATE_CART))
 				.then(() => cartPage.getOrderSubTotal())
 				.then(subtotal => updatedSubtotal = subtotal)
 				.then(() => client.click(cartPage.BTN_CHECKOUT))
@@ -183,7 +184,7 @@ describe('Checkout', () => {
 		it('should show Payment Method edits', () => {
 			let paymentMethodLabel = 'Pay Pal';
 			return client.click(checkoutPage.LINK_EDIT_PMT_METHOD)
-				.then(client.click(checkoutPage.RADIO_BTN_PAYPAL))
+				.then(() => client.click(checkoutPage.RADIO_BTN_PAYPAL))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.getText(checkoutPage.MINI_PMT_METHOD_DETAILS))
 				.then(pmtMethod => assert.isAbove(pmtMethod.indexOf(paymentMethodLabel), -1));
