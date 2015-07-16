@@ -120,7 +120,7 @@
 										<div class="form-row option-date-added">
 											<label>${Resource.msg('wishlist.dateadded','account',null)}</label>
 											<div class="field-wrapper">
-												<div class="value"><isprint value="${item.object.creationDate}" formatter="MMMMM dd, yyyy"/></div>
+												<div class="value"><isprint value="${StringUtils.formatCalendar(new dw.util.Calendar(item.object.creationDate), pdict.CurrentRequest.locale, dw.util.Calendar.LONG_DATE_PATTERN)}"/></div>
 											</div>
 										</div>
 

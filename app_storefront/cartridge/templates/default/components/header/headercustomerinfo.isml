@@ -16,7 +16,7 @@
 			}];
 		// User has session and is validated
 		} else if (customer.registered) {
-			title = customer.profile.firstName + ' ' + customer.profile.lastName;
+			title = Resource.msgf('global.user.name', 'locale', null, customer.profile.firstName, customer.profile.lastName);
 			links = [{
 				href: URLUtils.https('Account-Show'),
 				title: Resource.msg('global.accountlink', 'locale', null)
@@ -48,7 +48,7 @@
 	</isscript>
 
 	<li class="user-info">
-		<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${Resource.msgf('global.user.label', 'locale', null, title)}">
+		<a class="user-account" href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.user', 'locale', null) + ': ' + title}">
 			<i class="fa fa-user"></i>
 			<span>${title}</span>
 		</a>
