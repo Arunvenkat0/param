@@ -2,6 +2,8 @@
 
 import client from '../client';
 import config from '../config';
+import * as common from './common'
+import * as productQuickView from './productQuickView';
 
 export const CSS_CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
@@ -9,6 +11,7 @@ export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
+export const ITEM_DETAILS = '.item-details';
 
 const basePath = '/cart';
 
@@ -60,15 +63,22 @@ export function getPriceByRow (rowNum) {
 	return client.getText(_createCssNthCartRow(rowNum) + ' .item-total .price-total');
 }
 
+function getItemEditLinkByRow (rowNum) {
+	return [_createCssNthCartRow(rowNum), ITEM_DETAILS, '.item-edit-details a'].join(' ');
+}
+
 export function updateSizeByRow (rowNum, sizeIndex) {
 	return client
-		.click(_createCssNthCartRow(rowNum) + ' .item-details .item-edit-details a')
-		.waitForExist('.ui-dialog')
-		.click('.ui-dialog .product-variations .swatches.size li:nth-child(' + sizeIndex + ') a')
-		.pause(500)
+		.click(getItemEditLinkByRow(rowNum))
+		.waitForVisible(productQuickView.CONTAINER)
+		.click(productQuickView.getCssSizeLinkByIdx(sizeIndex))
+		.waitUntil(() =>
+			common.checkElementEquals(
+				productQuickView.SIZE_SELECTED_VALUE,
+				productQuickView.getSizeTextByIdx(sizeIndex))
+		)
 		.click('.ui-dialog #add-to-cart')
-		// wait for the page to reload, which completes after about 1500 ms
-		.pause(1500)
+		.waitForVisible(productQuickView.CONTAINER, 5000, true)
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 }
 

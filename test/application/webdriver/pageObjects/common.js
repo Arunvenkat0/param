@@ -12,3 +12,8 @@ export function getPageTitle() {
 			.then(title => resolve(title.split('|')[0].trim()));
 	});
 }
+
+export function checkElementEquals (selector, value) {
+	return client.getText(selector)
+		.then(text => text === value);
+}
