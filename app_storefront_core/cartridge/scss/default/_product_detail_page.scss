@@ -270,15 +270,19 @@
 		}
 	}
 	.product-price {
+		float: left;
 		font-size: 2em;
 		margin: 0;
+		padding-top: .3rem;
 		padding-bottom: .5em;
 		text-align: right;
 	}
 	button {
+		float: right;
 		height: 50px;
 		white-space: nowrap;
-		width: 50%;
+		width: 55%; //for IE
+		width: max-content;
 		@media screen and (min-width: 768px) {
 			height: 37px;
 		}
