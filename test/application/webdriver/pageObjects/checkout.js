@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as formHelpers from './forms/helpers';
+import * as formHelpers from './helpers/forms/common';
 
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';

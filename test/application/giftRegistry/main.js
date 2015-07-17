@@ -5,7 +5,7 @@ import config from '../webdriver/config';
 import client from '../webdriver/client';
 import * as giftRegistryPage from '../webdriver/pageObjects/giftRegistry';
 import * as testData from '../webdriver/pageObjects/testData/main';
-import * as loginForm from '../webdriver/pageObjects/forms/login';
+import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
 
 
 describe('Gift Registry', () => {

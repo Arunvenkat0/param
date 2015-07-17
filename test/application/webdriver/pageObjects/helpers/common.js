@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../../client';
 // using Q to be compliant with webdriver.
 // should switch to native Promise if it is used in webdriver v3
 // https://github.com/webdriverio/webdriverio/issues/498
@@ -11,4 +11,9 @@ export function getPageTitle() {
 		client.getTitle()
 			.then(title => resolve(title.split('|')[0].trim()));
 	});
+}
+
+export function checkElementEquals (selector, value) {
+	return client.getText(selector)
+		.then(text => text === value);
 }

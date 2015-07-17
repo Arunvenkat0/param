@@ -1,7 +1,7 @@
 'use strict';
 
-import client from '../../../webdriver/client';
-import * as testData from '../testData/main';
+import client from '../../../../webdriver/client';
+import * as testData from '../../testData/main';
 
 export const BTN_LOGIN = 'button[name*="_login_login"]';
 export const INPUT_EMAIL = '.username input';

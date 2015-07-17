@@ -4,7 +4,7 @@ import {assert} from 'chai';
 
 import client from '../webdriver/client';
 import * as wishListPage from '../webdriver/pageObjects/wishlist';
-import * as loginForm from '../webdriver/pageObjects/forms/login';
+import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
 
 describe('Wishlist', () => {
 	let socialLinks = {
