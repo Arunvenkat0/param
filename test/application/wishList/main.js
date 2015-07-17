@@ -137,13 +137,13 @@ describe('Wishlist', () => {
 		giftCertFieldMap.set('message','Congratulations!');
 		giftCertFieldMap.set('amount','250');
 
-		before(() => accountPage.navigateTo());
-		before(() => loginForm.loginAsDefaultCustomer());
-		before(() => cartPage.emptyCart());
-		before(() => wishListPage.navigateTo());
+		before(() => accountPage.navigateTo()
+			.then(() => loginForm.loginAsDefaultCustomer())
+			.then(() => cartPage.emptyCart())
+			.then(() => wishListPage.navigateTo()));
 
-		after(() => cartPage.emptyCart());
-		after(() => navHeader.logout());
+		after(() => cartPage.emptyCart()
+			.then(() => navHeader.logout()));
 
 		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () =>
 			client.isExisting(giftCertItemSelector)
