@@ -4,7 +4,9 @@
 	padding: .83em;
 	.content-asset {
 		@media (min-width: 768px) {
+			box-sizing: border-box;
 			float: left;
+			padding-right: 1rem;
 			width: 50%;
 		}
 		img {
@@ -19,9 +21,6 @@
 		@media (min-width: 768px) {
 			float: left;
 			width: 50%;
-		}
-		.input-text, .input-textarea {
-			width: 90%;
 		}
 		.cert-amount {
 			clear: none;
