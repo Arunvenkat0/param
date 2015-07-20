@@ -7,6 +7,10 @@
 	var countriesGrouped = Countries.getCountriesGroupedBy('continent');
 	var continents = Object.keys(countriesGrouped);
 	var allowedLocales = dw.system.Site.getCurrent().getAllowedLocales();
+	// set currency of the current locale if there's a mismatch
+	if (session.currency.currencyCode !== currentCountry.currencyCode) {
+		session.setCurrency(dw.util.Currency.getCurrency(currentCountry.currencyCode));
+	}
 </isscript>
 <isif condition="${Number(Countries.getCountries().length) > 1}">
 	<div class="country-selector">

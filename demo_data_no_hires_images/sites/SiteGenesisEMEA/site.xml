@@ -3,7 +3,7 @@
     <name>SiteGenesisEMEA</name>
     <currency>GBP</currency>
     <taxation>gross</taxation>
-    <custom-cartridges>app_storefront_core:app_storefront_core</custom-cartridges>
+    <custom-cartridges>app_storefront_core:sitegenesis_storefront_core</custom-cartridges>
     <storefront-status>online</storefront-status>
 </site>
 
