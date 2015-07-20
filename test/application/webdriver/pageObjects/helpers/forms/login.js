@@ -7,7 +7,7 @@ export const BTN_LOGIN = 'button[name*="_login_login"]';
 export const INPUT_EMAIL = '.username input';
 export const INPUT_PASSWORD = '.password input';
 
-const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
+export const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
 
 /**
  * Fill in login form
