@@ -131,11 +131,11 @@ describe('Wishlist', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
 		var giftCertFieldMap = new Map();
-		giftCertFieldMap.set('recipient','Joe Smith');
-		giftCertFieldMap.set('recipientEmail','jsmith@someBogusEmailDomain.tv');
-		giftCertFieldMap.set('confirmRecipientEmail','jsmith@someBogusEmailDomain.tv');
-		giftCertFieldMap.set('message','Congratulations!');
-		giftCertFieldMap.set('amount','250');
+		giftCertFieldMap.set('recipient', 'Joe Smith');
+		giftCertFieldMap.set('recipientEmail', 'jsmith@someBogusEmailDomain.tv');
+		giftCertFieldMap.set('confirmRecipientEmail', 'jsmith@someBogusEmailDomain.tv');
+		giftCertFieldMap.set('message', 'Congratulations!');
+		giftCertFieldMap.set('amount', '250');
 
 		before(() => accountPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
@@ -171,7 +171,7 @@ describe('Wishlist', () => {
 				});
 		});
 
-		it('should display the correct number of items in cart page',() =>
+		it('should display the correct number of items in cart page', () =>
 			giftCertPurchasePage.fillOutGiftCertPurchaseForm(giftCertFieldMap)
 				.then(() => giftCertPurchasePage.pressBtnAddToCart())
 				.then(() => cartPage.navigateTo())

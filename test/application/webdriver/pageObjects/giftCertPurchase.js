@@ -37,12 +37,12 @@ export function fillOutGiftCertPurchaseForm (giftCertPurchaseFields) {
 		type: 'input',
 		fieldSuffix: 'giftcert_purchase_confirmRecipientEmail'
 	});
-	fieldMap.set('message',{
+	fieldMap.set('message', {
 		type: 'input',
 		fieldSuffix: 'purchase_message'
 	});
 
-	fieldMap.set('amount',{
+	fieldMap.set('amount', {
 		type: 'input',
 		fieldSuffix: 'purchase_amount'
 	});
