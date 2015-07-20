@@ -8091,8 +8091,6 @@
 
     <category-assignment category-id="sale-womens-clothing" product-id="25688507"/>
 
-    <category-assignment category-id="sale-womens-clothing" product-id="25754137"/>
-
     <category-assignment category-id="sale-womens-clothing" product-id="25762759"/>
 
     <category-assignment category-id="sale-womens-dresses" product-id="25589408"/>
@@ -9152,10 +9150,6 @@
     </category-assignment>
 
     <category-assignment category-id="womens-clothing-jackets" product-id="25697499">
-        <primary-flag>true</primary-flag>
-    </category-assignment>
-
-    <category-assignment category-id="womens-clothing-jackets" product-id="25754137">
         <primary-flag>true</primary-flag>
     </category-assignment>
 
