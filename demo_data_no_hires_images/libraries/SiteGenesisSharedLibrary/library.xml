@@ -5789,16 +5789,16 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="margin: 5px; font-weight: bold;"&gt;&lt;img class="imgright" height="150" width="110" src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN Number" /&gt;What is a Card Verification Number (CVN)?&lt;/p&gt;&#13;
-&lt;p style="margin: 5px;"&gt;For Discover, MasterCard and Visa, enter last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p style="margin: 5px; font-weight: bold;"&gt;&lt;img class="imgright" height="150" width="110" src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numéro de vérification de la carte" /&gt;Qu'est-ce que le numéro de vérification de la carte ?&lt;/p&gt;&#13;
-&lt;p style="margin: 5px;"&gt;Pour les cartes Discover, MasterCard et Visa, saisissez les trois derniers chiffres de la zone de signature. Pour les cartes American Express, saisissez les quatre chiffres en petits caractères situés au recto de la carte.&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p style="margin: 5px; font-weight: bold;"&gt;&lt;img class="imgright" height="150" width="110" src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numero CV2" /&gt;Cos'è il numero di sicurezza della carta di credito (CV2)?&lt;/p&gt;&#13;
-&lt;p style="margin: 5px;"&gt;Per le carte Discover, MasterCard e Visa, inserisci le ultime tre cifre del numero presente sulla striscia della firma. Per le carte American Express, inserisci le quattro cifre indicate in carattere piccolo sul lato anteriore della carta.&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p style="margin: 5px; font-weight: bold;"&gt;&lt;img class="imgright" height="150" width="110" src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN 番号" /&gt;カード検証番号 (CVN) とは何ですか?&lt;/p&gt;&#13;
-&lt;p style="margin: 5px;"&gt;Discover、MasterCard、Visa の場合は、カード裏面の署名ストリップ上の最後の 3 桁の数字を入力してください。American Express の場合は、カード表側に小さな字で印刷されている 4 桁の数字を入力してください。&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;p style="margin: 5px; font-weight: bold;"&gt;&lt;img class="imgright" height="150" width="110" src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN 编号" /&gt;信用卡验证编号 (CVN) 是什么？&lt;/p&gt;&#13;
-&lt;p style="margin: 5px;"&gt;对于 Discover、MasterCard 和 Visa，请输入签名条上的最后三位数字。对于 American Express，请输入卡正面小字印刷中的四位数字。&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN Number" /&gt;&lt;p&gt;What is a Card Verification Number (CVN)?&lt;/p&gt;&#13;
+&lt;p&gt;For Discover, MasterCard and Visa, enter last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numéro de vérification de la carte" /&gt;&lt;p&gt;Qu'est-ce que le numéro de vérification de la carte ?&lt;/p&gt;&#13;
+&lt;p&gt;Pour les cartes Discover, MasterCard et Visa, saisissez les trois derniers chiffres de la zone de signature. Pour les cartes American Express, saisissez les quatre chiffres en petits caractères situés au recto de la carte.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numero CV2" /&gt;&lt;p&gt;Cos'è il numero di sicurezza della carta di credito (CV2)?&lt;/p&gt;&#13;
+&lt;p&gt;Per le carte Discover, MasterCard e Visa, inserisci le ultime tre cifre del numero presente sulla striscia della firma. Per le carte American Express, inserisci le quattro cifre indicate in carattere piccolo sul lato anteriore della carta.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN 番号" /&gt;&lt;p&gt;カード検証番号 (CVN) とは何ですか?&lt;/p&gt;&#13;
+&lt;p&gt;Discover、MasterCard、Visa の場合は、カード裏面の署名ストリップ上の最後の 3 桁の数字を入力してください。American Express の場合は、カード表側に小さな字で印刷されている 4 桁の数字を入力してください。&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN 编号" /&gt;&lt;p&gt;信用卡验证编号 (CVN) 是什么？&lt;/p&gt;&#13;
+&lt;p&gt;对于 Discover、MasterCard 和 Visa，请输入签名条上的最后三位数字。对于 American Express，请输入卡正面小字印刷中的四位数字。&lt;/p&gt;&lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
@@ -7420,7 +7420,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;/div&gt;&#13;
                 &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Le compagnon idéal"/&gt;&#13;
             &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;       
+        &lt;/li&gt;&#13;
         &lt;li class="slide slide3"&gt;&#13;
             &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
                 &lt;div class="banner-message"&gt;&#13;
