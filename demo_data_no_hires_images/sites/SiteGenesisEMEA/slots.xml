@@ -981,6 +981,60 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             </html>
         </content>
     </slot-configuration>
+    
+    <slot-configuration slot-id="cat-landing-slotbottom2" context="category" context-id="newarrivals" configuration-id="newarrivals-mens-products" assigned-to-site="true">
+        <description>New Arrival Products for Mens</description>
+        <template>slots/product/product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Mens New Arrivals</callout-msg>
+        <content>
+            <products>
+                <product product-id="25604524"/>
+                <product product-id="25686514"/>
+                <product product-id="25686571"/>
+            </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="newarrivals" configuration-id="newarrivals-subcategories" assigned-to-site="true">
+        <description>Default slot to link to sub-categories under new arrivals</description>
+        <template>slots/category/category-tile.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <categories>
+                <category category-id="newarrivals-womens"/>
+                <category category-id="newarrivals-mens"/>
+                <category category-id="newarrivals-electronics"/>
+            </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-womens" configuration-id="newarrivals-women" default="true" assigned-to-site="true">
+        <template>slots/category/categorysubbanners.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <categories>
+                <category category-id="newarrivals-womens"/>
+            </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="newarrivals" configuration-id="newarrivals-womens-products" assigned-to-site="true">
+        <description>New Arrival Products for Womens</description>
+        <template>slots/product/product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Womens New Arrivals</callout-msg>
+        <content>
+            <products>
+                <product product-id="701644259280"/>
+                <product product-id="25697151"/>
+                <product product-id="25696513"/>
+                <product product-id="25695436"/>
+                <product product-id="25697561"/>
+                <product product-id="25695217"/>
+            </products>
+        </content>
+    </slot-configuration>
 
     <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-womens" configuration-id="newarrivals-women" default="true" assigned-to-site="true">
         <template>slots/category/categorysubbanners.isml</template>

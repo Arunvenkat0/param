@@ -424,30 +424,10 @@
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
-            <refinement-definition type="attribute" bucket-type="values" attribute-id="isNew" system="false">
-                <display-name xml:lang="x-default">New Arrival</display-name>
-                <display-name xml:lang="fr-FR">Nouveautés</display-name>
-                <display-name xml:lang="it-IT">Nuovo arrivo</display-name>
-                <display-name xml:lang="ja-JP">新作</display-name>
-                <display-name xml:lang="zh-CN">新品</display-name>
-                <value-set>refinement-category</value-set>
-                <sort-mode>value-name</sort-mode>
-                <sort-direction>ascending</sort-direction>
-                <unbucketed-values-mode>show-values</unbucketed-values-mode>
-                <cutoff-threshold>5</cutoff-threshold>
-            </refinement-definition>
-            <refinement-definition type="attribute" bucket-type="none" attribute-id="sheets" system="false">
-                <display-name xml:lang="x-default">bySheets</display-name>
-                <display-name xml:lang="fr-FR">par fiche</display-name>
-                <display-name xml:lang="it-IT">per Foglio</display-name>
-                <display-name xml:lang="ja-JP">シート別</display-name>
-                <display-name xml:lang="zh-CN">bySheets</display-name>
-                <value-set>search-result</value-set>
-                <sort-mode>value-name</sort-mode>
-                <sort-direction>ascending</sort-direction>
-                <cutoff-threshold>5</cutoff-threshold>
-            </refinement-definition>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
+            <blocked-refinement-definition type="price"/>
+            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
@@ -521,6 +501,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-electronics.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
